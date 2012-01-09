@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.hierarchy;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
-import junit.framework.Test;
 
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.IHandler;
@@ -20,11 +19,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -32,6 +32,7 @@ import com.google.inject.Injector;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class ShowHierarchyTest extends AbstractEditorTest {
 
 	private static final String LANGUAGE_NAME = "org.eclipse.xtext.xtend2.Xtend2";
@@ -44,38 +45,34 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(ShowHierarchyTest.class);
-	}
-	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
 		closeWelcomePage();
 		closeEditors();
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 	}
 	
-	public void testOpenTypeHierarchyOnXtendClass() throws Exception {
+	@Test public void testOpenTypeHierarchyOnXtendClass() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Fo|o { def bar(String a)}");
 		assertEquals("Foo", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
 	
-	public void testOpenTypeHierarchyOnTypeReference() throws Exception {
+	@Test public void testOpenTypeHierarchyOnTypeReference() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(Str|ing a)}");
 		assertEquals("String", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
 	
-	public void testOpenTypeHierarchyOnFunction() throws Exception {
+	@Test public void testOpenTypeHierarchyOnFunction() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def b|ar(String a)}");
 		assertEquals("bar", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
 	
-	public void testOpenTypeHierarchyOnCollectionsLiterals() throws Exception {
+	@Test public void testOpenTypeHierarchyOnCollectionsLiterals() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(String a) { newArr|ayList() }");
 		assertEquals("newArrayList", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}

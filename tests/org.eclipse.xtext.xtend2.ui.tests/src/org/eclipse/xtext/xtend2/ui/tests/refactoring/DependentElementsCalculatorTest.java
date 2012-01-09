@@ -11,8 +11,6 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
-import junit.framework.Test;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
@@ -22,6 +20,7 @@ import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -30,10 +29,6 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("restriction")
 public class DependentElementsCalculatorTest extends AbstractXtend2UITestCase {
-	
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(DependentElementsCalculatorTest.class);
-	}
 	
 	@Inject 
 	private IDependentElementsCalculator dependentElementsCalculator;
@@ -44,7 +39,7 @@ public class DependentElementsCalculatorTest extends AbstractXtend2UITestCase {
 	@Inject 
 	private WorkbenchTestHelper testHelper;
 	
-	public void testDependentElements() throws Exception {
+	@Test public void testDependentElements() throws Exception {
 		XtendFile file = testHelper.xtendFile("Foo", "class Foo { def Foo foo() {new Foo()} }");
 		XtendClass fooClass = file.getXtendClass();
 		List<URI> dependentElementURIs = newArrayList(dependentElementsCalculator.getDependentElementURIs(fooClass, null));

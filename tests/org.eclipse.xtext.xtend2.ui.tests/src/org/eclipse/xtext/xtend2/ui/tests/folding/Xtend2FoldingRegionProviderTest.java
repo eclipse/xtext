@@ -9,8 +9,6 @@ package org.eclipse.xtext.xtend2.ui.tests.folding;
 
 import java.util.Collection;
 
-import junit.framework.Test;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
@@ -18,6 +16,7 @@ import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -32,18 +31,14 @@ public class Xtend2FoldingRegionProviderTest extends AbstractXtend2UITestCase {
 	@Inject
 	private IFoldingRegionProvider foldingRegionProvider;
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(Xtend2FoldingRegionProviderTest.class);
-	}
-
-	public void testNoFoldingIfOnlyOneImport() throws Exception {
+	@Test public void testNoFoldingIfOnlyOneImport() throws Exception {
 		String content = "package test\nimport java.util.List\nclass Bar{}";
 		IFile iFile = testHelper.createFile("test/Bar",content);
 		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
 		assertTrue(foldingRegions.isEmpty());
 	}
 	
-	public void testFoldingOfMoreThanOneImports() throws Exception {
+	@Test public void testFoldingOfMoreThanOneImports() throws Exception {
 		String content = "package test\nimport java.util.List\nimport java.util.Set\nclass Bar{}";
 		IFile iFile = testHelper.createFile("test/Bar",content);
 		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
@@ -58,8 +53,9 @@ public class Xtend2FoldingRegionProviderTest extends AbstractXtend2UITestCase {
 		IXtextDocument document = editor.getDocument();
 		return document;
 	}
+	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
 	}

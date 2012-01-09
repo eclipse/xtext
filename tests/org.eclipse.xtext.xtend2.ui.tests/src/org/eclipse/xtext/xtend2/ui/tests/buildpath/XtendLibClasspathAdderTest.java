@@ -16,20 +16,22 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JavaProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtend2.ui.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 
 	@Inject
@@ -42,12 +44,11 @@ public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 	private PluginProjectFactory pluginProjectFactory;
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
-		super.tearDown();
 	}
 
-	public void testAddToJavaProject() throws Exception {
+	@Test public void testAddToJavaProject() throws Exception {
 		javaProjectFactory.setProjectName("test");
 		javaProjectFactory.addFolders(Collections.singletonList("src"));
 		javaProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, XtextProjectHelper.BUILDER_ID);
@@ -64,7 +65,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 		assertNoErrorMarker(file);
 	}
 
-	public void testAddToPlugin() throws Exception {
+	@Test public void testAddToPlugin() throws Exception {
 		pluginProjectFactory.setProjectName("test");
 		pluginProjectFactory.addFolders(Collections.singletonList("src"));
 		pluginProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
@@ -83,7 +84,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtend2UITestCase {
 		assertNoErrorMarker(file);
 	}
 
-	public void testAddToBrokenPlugin() throws Exception {
+	@Test public void testAddToBrokenPlugin() throws Exception {
 		pluginProjectFactory.setProjectName("test");
 		pluginProjectFactory.addFolders(Collections.singletonList("src"));
 		pluginProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",

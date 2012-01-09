@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
@@ -16,10 +14,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  */
 public class AutoEditInRichStringTest extends AutoEditTest {
 
-	public static Test suite() {
-		return suite(AutoEditInRichStringTest.class);
-	}
-	
 	private static String PREFIX = "class Foo {\n\tfoo() '''zonk«\n";
 	
 	private static String SUFFIX = "\n»bar'''\n}";
@@ -29,6 +23,7 @@ public class AutoEditInRichStringTest extends AutoEditTest {
 		return super.openEditor(PREFIX + string + SUFFIX);
 	}
 	
+	@SuppressWarnings("restriction")
 	@Override
 	protected void assertState(String string, XtextEditor editor) {
 		super.assertState(PREFIX + string + SUFFIX, editor);

@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineTreeProvider;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -38,13 +39,13 @@ public abstract class AbstractOutlineTests extends AbstractXtend2UITestCase {
 	private OutlineFilterAndSorter.IComparator comparator;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		getSorter().setComparator(comparator);
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		workbenchTestHelper.tearDown();
 	}
@@ -53,58 +54,58 @@ public abstract class AbstractOutlineTests extends AbstractXtend2UITestCase {
 		return treeProvider;
 	}
 
-	public void testSimpleClass() throws Exception {
+	@Test public void testSimpleClass() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo {}");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(0);
 	}
 
-	public void testPackage() throws Exception {
+	@Test public void testPackage() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("package test class Foo {}");
 		assertBuilder.numChildren(2).child(0, "test").numChildren(0);
 		assertBuilder.child(1, "Foo").numChildren(0);
 	}
 	
-	public void testTypeParameter() throws Exception {
+	@Test public void testTypeParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo <T extends Object> {}");
 		assertBuilder.numChildren(1).child(0, "Foo<T>").numChildren(0);
 	}
 	
-	public void testField() throws Exception {
+	@Test public void testField() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { String bar }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "bar : String").numChildren(0);
 	}
 	
-	public void testConstructor() throws Exception  {
+	@Test public void testConstructor() throws Exception  {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { new(int foo) {} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "new(int)").numChildren(0);
 	}
 
-	public void testSimpleMethod() throws Exception {
+	@Test public void testSimpleMethod() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
-	public void testMethodWithParameter() throws Exception {
+	@Test public void testMethodWithParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def foo(int bar) {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int) : Object").numChildren(0);
 	}
 	
-	public void testMethodWithParameters() throws Exception {
+	@Test public void testMethodWithParameters() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def foo(int bar, java.lang.Object x) {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int, Object) : Object").numChildren(0);
 	}
 	
-	public void testMethodWithReturnType() throws Exception {
+	@Test public void testMethodWithReturnType() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def java.lang.Object foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
-	public void testMethodWithTypeParameter() throws Exception {
+	@Test public void testMethodWithTypeParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def <T> foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
-	public void testDispatchMethod() throws Exception {
+	@Test public void testDispatchMethod() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def dispatch foo(Object x) {''} def dispatch foo(String y) {''} }");
 		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(Object) : String").numChildren(2);
 		dispatcher.child(0, "foo(Object) : String").numChildren(0);

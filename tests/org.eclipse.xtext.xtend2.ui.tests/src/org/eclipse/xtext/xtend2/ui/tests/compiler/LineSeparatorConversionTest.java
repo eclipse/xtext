@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.compiler;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import junit.framework.Test;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -17,28 +16,26 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class LineSeparatorConversionTest extends AbstractXtend2UITestCase {
-	
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(LineSeparatorConversionTest.class);
-	}
 	
 	@Inject
 	private WorkbenchTestHelper workbenchTestHelper;
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		workbenchTestHelper.tearDown();
 		super.tearDown();
 	}
 	
-	public void testLineSeparator() throws Exception {
+	@Test public void testLineSeparator() throws Exception {
 		IProject project = workbenchTestHelper.getProject();
 		ScopedPreferenceStore projectPreferenceStore = new ScopedPreferenceStore(new ProjectScope(project), Platform.PI_RUNTIME);
 		projectPreferenceStore.setValue(Platform.PREF_LINE_SEPARATOR, "\n\n");

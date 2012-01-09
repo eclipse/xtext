@@ -7,32 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-
-import junit.framework.Test;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class Bug364966Test extends AbstractXtendContentAssistBugTest {
 
-	public void testFieldInitializer_01() throws Exception {
+	@Test public void testFieldInitializer_01() throws Exception {
 		newBuilder().append("String s = newArrayLis").assertText("newArrayList()");
 	}
 	
-	public void testFieldInitializer_02() throws Exception {
+	@Test public void testFieldInitializer_02() throws Exception {
 		newBuilder().append("static String s = newArrayLis").assertText("newArrayList()");
 	}
 	
-	public void testFieldInitializer_03() throws Exception {
+	@Test public void testFieldInitializer_03() throws Exception {
 		newBuilder().append("String doNotPropose static String something static String anotherThing = somethin").assertText("something");
 	}
 	
-	public void testFieldInitializer_04() throws Exception {
+	@Test public void testFieldInitializer_04() throws Exception {
 		newBuilder().append("String something String anotherThing = somethin").assertText("something");
 	}
 	
-	public void testFieldInitializer_05() throws Exception {
+	@Test public void testFieldInitializer_05() throws Exception {
 		newBuilder().append("static String something String anotherThing = somethin").assertText("something");
 	}
 	
@@ -42,7 +42,4 @@ public class Bug364966Test extends AbstractXtendContentAssistBugTest {
 		return result.appendNl("class Foo { ");
 	}
 	
-	public static Test suite() {
-		return createSuite(Bug364966Test.class);
-	}
 }

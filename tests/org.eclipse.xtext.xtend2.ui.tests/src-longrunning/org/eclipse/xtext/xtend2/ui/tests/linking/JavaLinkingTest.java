@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.linking;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import junit.framework.Test;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -26,12 +25,14 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class JavaLinkingTest extends AbstractXtend2UITestCase {
 
 	@Inject
@@ -43,17 +44,13 @@ public class JavaLinkingTest extends AbstractXtend2UITestCase {
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
 	
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(JavaLinkingTest.class);
-	}
-	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
 	}
 	
-	public void testNavigateToXtendClass() throws Exception {
+	@Test public void testNavigateToXtendClass() throws Exception {
 		IFile xtendFile = testHelper.createFile(
 				"test/XtendClass", 
 				"package test\nclass XtendClass {}");
@@ -79,7 +76,7 @@ public class JavaLinkingTest extends AbstractXtend2UITestCase {
 		assertEquals("platform:/resource" + xtendFile.getFullPath(), xtendResource.getURI().toString());
 	}
 	
-	public void testNavigateToXtendClassArray() throws Exception {
+	@Test public void testNavigateToXtendClassArray() throws Exception {
 		IFile xtendFile = testHelper.createFile(
 				"test/XtendClass", 
 				"package test\nclass XtendClass {}");
@@ -109,7 +106,7 @@ public class JavaLinkingTest extends AbstractXtend2UITestCase {
 		assertEquals("platform:/resource" + xtendFile.getFullPath(), xtendResource.getURI().toString());
 	}
 	
-	public void testGetXtendClassDirectly() throws Exception {
+	@Test public void testGetXtendClassDirectly() throws Exception {
 		IFile xtendFile = testHelper.createFile(
 				"test/XtendClass", 
 				"package test\nclass XtendClass {}");
@@ -126,7 +123,7 @@ public class JavaLinkingTest extends AbstractXtend2UITestCase {
 		assertEquals("platform:/resource" + xtendFile.getFullPath(), xtendResource.getURI().toString());
 	}
 	
-	public void testGetXtendClassAsArray() throws Exception {
+	@Test public void testGetXtendClassAsArray() throws Exception {
 		IFile xtendFile = testHelper.createFile(
 				"test/XtendClass", 
 				"package test\nclass XtendClass {}");

@@ -11,8 +11,6 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
-import junit.framework.Test;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -24,6 +22,7 @@ import org.eclipse.xtext.xtend2.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -33,10 +32,6 @@ import com.google.inject.Provider;
  */
 public class ReplacingAppendableTest extends AbstractXtend2UITestCase {
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(ReplacingAppendableTest.class);
-	}
-	
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 
@@ -55,27 +50,27 @@ public class ReplacingAppendableTest extends AbstractXtend2UITestCase {
 	@Inject 
 	private WorkbenchTestHelper testHelper;
 	
-	public void testImports_0() throws Exception {
+	@Test public void testImports_0() throws Exception {
 		final XtextDocument document = insertField("package test class Foo {|}", "foo", List.class);
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {List<?> foo}", document.get());
 	}
 
-	public void testImports_1() throws Exception {
+	@Test public void testImports_1() throws Exception {
 		final XtextDocument document = insertField("package test import java.util.List class Foo {|}", "foo", List.class);
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {List<?> foo}", document.get());
 	}
 
-	public void testVarName_0() throws Exception {
+	@Test public void testVarName_0() throws Exception {
 		final XtextDocument document = insertField("package test import java.util.List class Foo {String foo |}", "foo", List.class);
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {String foo List<?> foo_1}", document.get());
 	}
 
-	public void testVarName_1() throws Exception {
+	@Test public void testVarName_1() throws Exception {
 		final XtextDocument document = insertField("package test import java.util.List class Foo {String foo_1 def bar(String foo) {|}}", "foo", List.class);
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {String foo_1 def bar(String foo) {List<?> foo_2}}", document.get());
 	}
 
-	public void testVarName_2() throws Exception {
+	@Test public void testVarName_2() throws Exception {
 		final XtextDocument document = insertField("package test import java.util.List class Foo {def bar(String foo) {} def baz() {|}}", "foo", List.class);
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {def bar(String foo) {} def baz() {List<?> foo}}", document.get());
 	}

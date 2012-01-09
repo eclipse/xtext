@@ -11,6 +11,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,14 +22,14 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 	private ITokenScanner scanner;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		document = get(XtextDocument.class);
 		scanner = get(ITokenScanner.class);
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		document = null;
 		scanner = null;
 		super.tearDown();
@@ -39,7 +40,7 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		scanner.setRange(document, 0, input.length());
 	}
 	
-	public void testRichStringLiteral() {
+	@Test public void testRichStringLiteral() {
 		initializeScanner("'''foobar'''");
 		assertNotSame(Token.EOF, scanner.nextToken());
 		assertEquals(0, scanner.getTokenOffset());
@@ -47,7 +48,7 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testRichStringStart() {
+	@Test public void testRichStringStart() {
 		initializeScanner("'''foobar«");
 		assertNotSame(Token.EOF, scanner.nextToken());
 		assertEquals(0, scanner.getTokenOffset());
@@ -58,7 +59,7 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testRichStringEnd() {
+	@Test public void testRichStringEnd() {
 		initializeScanner("»foobar'''");
 		assertNotSame(Token.EOF, scanner.nextToken());
 		assertEquals(0, scanner.getTokenOffset());
@@ -69,7 +70,7 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testRichStringBetween_01() {
+	@Test public void testRichStringBetween_01() {
 		initializeScanner("»«");
 		assertNotSame(Token.EOF, scanner.nextToken());
 		assertEquals(0, scanner.getTokenOffset());
@@ -77,7 +78,7 @@ public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
 		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
-	public void testRichStringBetween_02() {
+	@Test public void testRichStringBetween_02() {
 		initializeScanner("»foobar«");
 		assertNotSame(Token.EOF, scanner.nextToken());
 		assertEquals(0, scanner.getTokenOffset());

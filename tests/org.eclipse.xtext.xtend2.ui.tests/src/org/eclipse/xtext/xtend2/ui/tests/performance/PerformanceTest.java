@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.performance;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-import junit.framework.Test;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -23,6 +21,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -31,17 +30,14 @@ import com.google.inject.Inject;
  */
 public class PerformanceTest extends AbstractXtend2UITestCase {
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(PerformanceTest.class);
-	}
-
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;
 	
 	@Inject
 	private XtendFileGenerator fileGenerator;
 	
-	public void testBuildProject() throws Exception {
+	@SuppressWarnings("restriction")
+	@Test public void testBuildProject() throws Exception {
 		final long warmUp = measureReferenceTime();
 		assertTrue(warmUp > 0);
 		final long reference1 = measureReferenceTime();
@@ -57,10 +53,11 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 					}
 					GeneratorConfig config = new GeneratorConfig();
 					config.packageName = "generated";
-					config.noTypeInference = true;
+					config.noTypeInference = false;
 					for (int i = 0;i < num; i++) {
 						config.className = "MyGeneratedType"+i;
-						workbenchTestHelper.createFile(config.packageName+"/"+config.className+".xtend", fileGenerator.getContents(config).toString());
+						String content = fileGenerator.getContents(config).toString();
+						workbenchTestHelper.createFile(config.packageName+"/"+config.className+".xtend", content);
 					}
 				} catch (Exception e) {
 					throw new RuntimeException(e);
@@ -78,16 +75,16 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 		final long reference3 = measureReferenceTime();
 		// take the average reference duration times 100 and add 5% buffer
 		// and assume that approx 15 secs are ok (IO etc)
-//		final long reference = Math.max(avg(reference1, reference2, reference3) * 105 , 15000);
+		final long reference = Math.max(avg(reference1, reference2, reference3) * 105 , 15000);
 		//TODO log the numbers somewhere, such that we can see how the execution time evolves over time.
-//		assertFasterThen(reference, min);
+		assertFasterThen(reference, min);
 	}
 
 	protected void assertFasterThen(long expected, long min) {
 		// TODO remove sysouts as soon as we know that the expected time was calculated from a reasonable metric
 		System.out.println("Expected execution faster then "+expected+"ms.");
 		System.out.println("min was "+min + "ms.");
-		assertTrue("Expected execution faster then "+expected+"ms. but was "+min+"ms",  expected > min );
+//		assertTrue("Expected execution faster then "+expected+"ms. but was "+min+"ms",  expected > min );
 	}
 	
 	protected long min(long ...ls) {
@@ -106,6 +103,7 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 		return sum / ls.length;
 	}
 	
+	@SuppressWarnings("restriction")
 	protected long measureCleanBuild() throws CoreException {
 		long before = System.currentTimeMillis();
 		cleanBuild();
@@ -118,7 +116,7 @@ public class PerformanceTest extends AbstractXtend2UITestCase {
 		int counter = 0;
 		int max = 100000000;
 		for(int i = 0; i < max; i++) {
-			// the compiler will hopefully not eliminite the loop ;-)
+			// the compiler will hopefully not eliminate the loop ;-)
 			counter = counter + 1 - i;
 			counter = counter + i;
 		}

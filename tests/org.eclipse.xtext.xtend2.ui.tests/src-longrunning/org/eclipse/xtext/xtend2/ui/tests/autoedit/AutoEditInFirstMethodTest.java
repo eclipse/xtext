@@ -38,7 +38,7 @@
 //	 * FIXME: The test should pass as defined in the base class 
 //	 */
 //	@Override
-//	public void testCurlyBracesBlockInRichString_1() throws Exception {
+//	@Test public void testCurlyBracesBlockInRichString_1() throws Exception {
 //		XtextEditor editor = openEditor("'''|'''");
 //		pressKey(editor, '{');
 //		assertState("'''{|'''", editor);
@@ -52,7 +52,7 @@
 //	 * FIXME: The test should pass as defined in the base class 
 //	 */
 //	@Override
-//	public void testCurlyBracesBlockInRichString_4() throws Exception {
+//	@Test public void testCurlyBracesBlockInRichString_4() throws Exception {
 //		XtextEditor editor = openEditor("'''foo {|'''");
 //		pressKey(editor, '\n');
 //		assertState("'''foo {\n\t|'''", editor);
@@ -62,7 +62,7 @@
 //	 * FIXME: The test should pass as defined in the base class 
 //	 */
 //	@Override
-//	public void testCurlyBracesBlockInRichString_17() throws Exception {
+//	@Test public void testCurlyBracesBlockInRichString_17() throws Exception {
 //		XtextEditor editor = openEditor("'''{\n|'''");
 //		pressKey(editor, '\n');
 //		assertState("'''{\n\n|'''", editor);

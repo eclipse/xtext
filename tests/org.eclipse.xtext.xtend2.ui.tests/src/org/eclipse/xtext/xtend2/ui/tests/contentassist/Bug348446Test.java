@@ -7,22 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-
-import junit.framework.Test;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 
-	public void testGetPackage() throws Exception {
+	@Test public void testGetPackage() throws Exception {
 		newBuilder().append("typeof(String).pack").assertText();
 		newBuilder().append("typeof(String).^pack").assertText();
 		newBuilder().append("typeof(String).getpack").assertText("getPackage()");
 	}
 	
-	public void testGetClass() throws Exception {
+	@Test public void testGetClass() throws Exception {
 		newBuilder().append("typeof(String).clas").assertText("classLoader", "classes");
 		newBuilder().append("typeof(String).^clas").assertText();
 		newBuilder().append("typeof(String).getclas").assertText("classLoader", "classes");
@@ -34,7 +34,4 @@ public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 		return result.appendNl("class Foo { def Object foo() {");
 	}
 	
-	public static Test suite() {
-		return createSuite(Bug348446Test.class);
-	}
 }

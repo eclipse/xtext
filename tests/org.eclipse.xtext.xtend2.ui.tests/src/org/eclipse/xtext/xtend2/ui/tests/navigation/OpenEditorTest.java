@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.navigation;
 
-import junit.framework.Test;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -23,26 +21,24 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class OpenEditorTest extends AbstractXtend2UITestCase {
-
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(OpenEditorTest.class);
-	}
 
 	@Inject
 	private WorkbenchTestHelper workbenchTestHelper;
@@ -65,7 +61,7 @@ public class OpenEditorTest extends AbstractXtend2UITestCase {
 	private IJavaProject javaProject;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		workbenchTestHelper.createFile("test/Bar.java", "package test; public class Bar { public int bar; }");
 		workbenchTestHelper.createFile("test/Foo.xtend", "package test class Foo extends Bar { public int foo }");
@@ -74,12 +70,12 @@ public class OpenEditorTest extends AbstractXtend2UITestCase {
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		workbenchTestHelper.tearDown();
 	}
 
-	public void testOpenEditors() throws Exception {
+	@Test public void testOpenEditors() throws Exception {
 		IType bar = javaProject.findType("test.Bar");
 		IEditorPart barEditor = globalURIEditorOpener.open(null, bar, true);
 		assertEquals(JavaUI.ID_CU_EDITOR, barEditor.getEditorSite().getId());
@@ -98,7 +94,7 @@ public class OpenEditorTest extends AbstractXtend2UITestCase {
 		assertEquals("org.eclipse.xtext.xtend2.Xtend2", fooXtendEditor.getEditorSite().getId());
 	}
 
-	public void testOpenFromOutline() throws Exception {
+	@Test public void testOpenFromOutline() throws Exception {
 		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("test.Baz.xtend",
 				"package test class Baz extends Foo { int baz }");
 		ModeAwareOutlineTreeProvider tp = (ModeAwareOutlineTreeProvider) treeProvider;

@@ -7,19 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class AutoEditInCodeBlockTest extends AutoEditTest {
 	
-	public static Test suite() {
-		return suite(AutoEditInCodeBlockTest.class);
-	}
-
 	private static String PREFIX = "class Foo {\n\tfoo() ";
 	
 	private static String SUFFIX = "\n}";
@@ -36,7 +32,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	
 	
 	@Override
-	public void testIndentationEdit_2() throws Exception {
+	@Test public void testIndentationEdit_2() throws Exception {
 		// indentation from prefix
 		XtextEditor editor = openEditor("  |");
 		pressKey(editor, '\n');
@@ -44,7 +40,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 	
 	@Override
-	public void testCurlyBracesBlockInRichString_1() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_1() throws Exception {
 		// added indentation from prefix
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '{');
@@ -56,7 +52,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_2() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_2() throws Exception {
 		// added indentation from prefix
 		XtextEditor editor = openEditor("'''{|\n\t}'''");
 		pressKey(editor, '\n');
@@ -64,98 +60,98 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 	
 	@Override
-	public void testCurlyBracesBlockInRichString_4() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_4() throws Exception {
 		XtextEditor editor = openEditor("'''foo {|'''");
 		pressKey(editor, '\n');
 		assertState("'''foo {\n\t\t|\n\t}'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_5() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_5() throws Exception {
 		XtextEditor editor = openEditor("'''{|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t\t|\n\t}'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_6() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_6() throws Exception {
 		XtextEditor editor = openEditor("'''{| }'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t\t|\n\t}'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_7() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_7() throws Exception {
 		XtextEditor editor = openEditor("'''{ |foo }'''");
 		pressKey(editor, '\n');
 		assertState("'''{ \n\t\t|foo\n\t}'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_8() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_8() throws Exception {
 		XtextEditor editor = openEditor("'''{ foo| }'''");
 		pressKey(editor, '\n');
 		assertState("'''{ foo\n\t| }'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_9() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_9() throws Exception {
 		XtextEditor editor = openEditor("'''\"{\" foo| }'''");
 		pressKey(editor, '\n');
 		assertState("'''\"{\" foo\n\t| }'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_10() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_10() throws Exception {
 		XtextEditor editor = openEditor("'''/*{*/ foo|'''");
 		pressKey(editor, '\n');
 		assertState("'''/*{*/ foo\n\t|'''", editor);
 	}
 	
 	@Override
-	public void testCurlyBracesBlockInRichString_11() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_11() throws Exception {
 		XtextEditor editor = openEditor("'''{|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t\t|\n\t}'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_12() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_12() throws Exception {
 		XtextEditor editor = openEditor("'''{foo|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{foo\n\t|}'''", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlockInRichString_13() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_13() throws Exception {
 		XtextEditor editor = openEditor("'''{foo|bar}'''");
 		pressKey(editor, '\n');
 		assertState("'''{foo\n\t|bar}'''", editor);
 	}
 	
 	@Override
-	public void testCurlyBracesBlockInRichString_18() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_18() throws Exception {
 		XtextEditor editor = openEditor("'''{{foo}|{bar}}'''");
 		pressKey(editor, '\n');
 		assertState("'''{{foo}\n\t|{bar}}'''", editor);
 	}
 	
 	@Override
-	public void testRichStringLiteral_02() throws Exception {
+	@Test public void testRichStringLiteral_02() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '\n');
 		assertState("'''\n\t|'''", editor);
 	}
 	
 	@Override
-	public void testRichStringLiteral_03() throws Exception {
+	@Test public void testRichStringLiteral_03() throws Exception {
 		XtextEditor editor = openEditor("  '''|'''");
 		pressKey(editor, '\n');
 		assertState("  '''\n\t|'''", editor);
 	}
 	
 	@Override
-	public void testCurlyBracesBlock_1() throws Exception {
+	@Test public void testCurlyBracesBlock_1() throws Exception {
 		XtextEditor editor = openEditor("|");
 		pressKey(editor, '{');
 		assertState("{|}", editor);
@@ -166,110 +162,110 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testCurlyBracesBlock_2() throws Exception {
+	@Test public void testCurlyBracesBlock_2() throws Exception {
 		XtextEditor editor = openEditor("{|\n\t}");
 		pressKey(editor, '\n');
 		assertState("{\n\t\t|\n\t}", editor);
 	}
 	
 	@Override
-	public void testCurlyBracesBlock_4() throws Exception {
+	@Test public void testCurlyBracesBlock_4() throws Exception {
 		XtextEditor editor = openEditor("foo {|");
 		pressKey(editor, '\n');
 		assertState("foo {\n\t\t|\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_5() throws Exception {
+	@Test public void testCurlyBracesBlock_5() throws Exception {
 		XtextEditor editor = openEditor("{|}");
 		pressKey(editor, '\n');
 		assertState("{\n\t\t|\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_6() throws Exception {
+	@Test public void testCurlyBracesBlock_6() throws Exception {
 		XtextEditor editor = openEditor("{| }");
 		pressKey(editor, '\n');
 		assertState("{\n\t\t|\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_7() throws Exception {
+	@Test public void testCurlyBracesBlock_7() throws Exception {
 		XtextEditor editor = openEditor("{ |foo }");
 		pressKey(editor, '\n');
 		assertState("{ \n\t\t|foo\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_8() throws Exception {
+	@Test public void testCurlyBracesBlock_8() throws Exception {
 		XtextEditor editor = openEditor("{ foo| }");
 		pressKey(editor, '\n');
 		assertState("{ foo\n\t\t|\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_9() throws Exception {
+	@Test public void testCurlyBracesBlock_9() throws Exception {
 		XtextEditor editor = openEditor("'{' foo| }");
 		pressKey(editor, '\n');
 		assertState("'{' foo\n\t| }", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_10() throws Exception {
+	@Test public void testCurlyBracesBlock_10() throws Exception {
 		XtextEditor editor = openEditor("/*{*/ foo|");
 		pressKey(editor, '\n');
 		assertState("/*{*/ foo\n\t|", editor);
 	}
 	
 	@Override
-	public void testCurlyBracesBlock_11() throws Exception {
+	@Test public void testCurlyBracesBlock_11() throws Exception {
 		XtextEditor editor = openEditor("{|}");
 		pressKey(editor, '\n');
 		assertState("{\n\t\t|\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_12() throws Exception {
+	@Test public void testCurlyBracesBlock_12() throws Exception {
 		XtextEditor editor = openEditor("{foo|}");
 		pressKey(editor, '\n');
 		assertState("{foo\n\t\t|\n\t}", editor);
 	}
 
 	@Override
-	public void testCurlyBracesBlock_13() throws Exception {
+	@Test public void testCurlyBracesBlock_13() throws Exception {
 		XtextEditor editor = openEditor("{foo|bar}");
 		pressKey(editor, '\n');
 		assertState("{foo\n\t\t|bar\n\t}", editor);
 	}
 	
 	@Override
-	public void testCurlyBracesBlock_17() throws Exception {
+	@Test public void testCurlyBracesBlock_17() throws Exception {
 		XtextEditor editor = openEditor("{\n|");
 		pressKey(editor, '\n');
 		assertState("{\n\n|\n}", editor); 
 	}
 
 	@Override
-	public void testCurlyBracesBlock_18() throws Exception {
+	@Test public void testCurlyBracesBlock_18() throws Exception {
 		XtextEditor editor = openEditor("{{foo}|{bar}}");
 		pressKey(editor, '\n');
 		assertState("{{foo}\n\t\t|{bar}\n\t}", editor);
 	}
 	
-	public void testCurlyBracesBlock_19() throws Exception {
+	@Test public void testCurlyBracesBlock_19() throws Exception {
 		XtextEditor editor = openEditor("{\n\t|");
 		pressKey(editor, '\n');
 		assertState("{\n\t\n\t|\n\t}", editor); 
 	}
 	
-	public void testCurlyBracesBlock_20() throws Exception {
+	@Test public void testCurlyBracesBlock_20() throws Exception {
 		XtextEditor editor = openEditor("{|\n}");
 		pressKey(editor, '\n');
 		assertState("{\n\t\t|\n}", editor);
 	}
 	
 	@Override
-	public void testMLComments_01() throws Exception {
+	@Test public void testMLComments_01() throws Exception {
 		XtextEditor editor = openEditor("|");
 		pressKey(editor, '/');
 		pressKey(editor, '*');
@@ -287,7 +283,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testMLComments_02() throws Exception {
+	@Test public void testMLComments_02() throws Exception {
 		XtextEditor editor = openEditor("   |");
 		pressKey(editor, '/');
 		pressKey(editor, '*');
@@ -305,7 +301,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 	
 	@Override
-	public void testMLComments_07() throws Exception {
+	@Test public void testMLComments_07() throws Exception {
 		XtextEditor editor = openEditor("/* */|");
 
 		pressKey(editor, '\n');
@@ -313,7 +309,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testMLComments_08() throws Exception {
+	@Test public void testMLComments_08() throws Exception {
 		XtextEditor editor = openEditor("  /* foo | */");
 
 		pressKey(editor, '\n');
@@ -321,7 +317,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testMLComments_09() throws Exception {
+	@Test public void testMLComments_09() throws Exception {
 		XtextEditor editor = openEditor("/* foo |*/");
 
 		pressKey(editor, '\n');
@@ -329,7 +325,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testMLComments_10() throws Exception {
+	@Test public void testMLComments_10() throws Exception {
 		XtextEditor editor = openEditor("   /* foo |*/");
 
 		pressKey(editor, '\n');
@@ -337,7 +333,7 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 	
 	@Override
-	public void testMLComments_12() throws Exception {
+	@Test public void testMLComments_12() throws Exception {
 		XtextEditor editor = openEditor("foo /*| */");
 
 		pressKey(editor, '\n');
@@ -345,84 +341,84 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 
 	@Override
-	public void testMLComments_13() throws Exception {
+	@Test public void testMLComments_13() throws Exception {
 		XtextEditor editor = openEditor("/* foo| */");
 		pressKey(editor, '\n');
 		assertState("/* foo\n\t * |\n\t */", editor);
 	}
 
 	@Override
-	public void testMLComments_14() throws Exception {
+	@Test public void testMLComments_14() throws Exception {
 		XtextEditor editor = openEditor("/* foo|*/");
 		pressKey(editor, '\n');
 		assertState("/* foo\n\t * |*/", editor);
 	}
 
 	@Override
-	public void testMLComments_15() throws Exception {
+	@Test public void testMLComments_15() throws Exception {
 		XtextEditor editor = openEditor("  /* foo| */");
 		pressKey(editor, '\n');
 		assertState("  /* foo\n\t * |\n\t */", editor);
 	}
 
 	@Override
-	public void testMLComments_16() throws Exception {
+	@Test public void testMLComments_16() throws Exception {
 		XtextEditor editor = openEditor("  /* foo|*/");
 		pressKey(editor, '\n');
 		assertState("  /* foo\n\t * |*/", editor);
 	}
 	
 	@Override
-	public void testBug335634_01() throws Exception {
+	@Test public void testBug335634_01() throws Exception {
 		XtextEditor editor = openEditor("// /*|\ntest");
 		pressKey(editor, '\n');
 		assertState("// /*\n\t|\ntest", editor);
 	}
 	
 	@Override
-	public void testSingleLineComment_01() throws Exception {
+	@Test public void testSingleLineComment_01() throws Exception {
 		XtextEditor editor = openEditor("  // test|test");
 		pressKey(editor, '\n');
 		assertState("  // test\n\t|test", editor);
 	}
 	
 	@Override
-	public void testSingleLineComment_02() throws Exception {
+	@Test public void testSingleLineComment_02() throws Exception {
 		XtextEditor editor = openEditor("  // test|test\n");
 		pressKey(editor, '\n');
 		assertState("  // test\n\t|test\n", editor);
 	}
 	
 	@Override
-	public void testSingleLineComment_03() throws Exception {
+	@Test public void testSingleLineComment_03() throws Exception {
 		XtextEditor editor = openEditor("  // test|");
 		pressKey(editor, '\n');
 		assertState("  // test\n\t|", editor);
 	}
 	
 	@Override
-	public void testSingleLineComment_04() throws Exception {
+	@Test public void testSingleLineComment_04() throws Exception {
 		XtextEditor editor = openEditor("  // test|\n");
 		pressKey(editor, '\n');
 		assertState("  // test\n\t|\n", editor);
 	}
 	
 	@Override
-	public void testBug338423_01() throws Exception {
+	@Test public void testBug338423_01() throws Exception {
 		XtextEditor editor = openEditor("[{|}]");
 		pressKey(editor, '\n');
 		assertState("[{\n\t\t|\n\t}]", editor);
 	}
 	
 	@Override
-	public void testBug338423_02() throws Exception {
+	@Test public void testBug338423_02() throws Exception {
 		XtextEditor editor = openEditor("[{}|]");
 		pressKey(editor, '\n');
 		assertState("[{}\n\t\t|\n\t]", editor);
 	}
 	
 	@Override
-	public void testBug358555() throws Exception {
+	@Test public void testBug358555() throws Exception {
 		XtextEditor editor = openEditor("/* | /**/");
 		pressKey(editor, '\n');
 		assertState("/* \n\t * | /**/", editor);

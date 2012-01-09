@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.refactoring;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -19,6 +17,7 @@ import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendConstructor;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -27,10 +26,6 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("restriction")
 public class RenameStrategyTest extends AbstractXtend2UITestCase {
-
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(RenameStrategyTest.class);
-	}
 
 	@Inject
 	private IRenameStrategy.Provider renameStrategyProvider;
@@ -41,7 +36,7 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 	@Inject
 	private WorkbenchTestHelper testHelper;
 
-	public void testInferredClassRenamed() throws Exception {
+	@Test public void testInferredClassRenamed() throws Exception {
 		XtendClass fooClass = testHelper.xtendFile("Foo", "class Foo { }").getXtendClass();
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooClass, null);
 		renameStrategy.applyDeclarationChange("Bar", fooClass.eResource().getResourceSet());
@@ -58,7 +53,7 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 		assertEquals("Foo", inferredConstructor.getSimpleName());
 	}
 
-	public void testInferredMethodRenamed() throws Exception {
+	@Test public void testInferredMethodRenamed() throws Exception {
 		XtendFunction fooMethod = (XtendFunction) testHelper.xtendFile("Foo", "class Foo { def Foo foo() {this} }")
 				.getXtendClass().getMembers().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);
@@ -72,7 +67,7 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 		assertEquals("foo", inferredOperation.getSimpleName());
 	}
 
-	public void testXtendConstructorIgnored() throws Exception {
+	@Test public void testXtendConstructorIgnored() throws Exception {
 		XtendConstructor constructor = (XtendConstructor) testHelper.xtendFile("Foo", "class Foo { new() {} }")
 				.getXtendClass().getMembers().get(0);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(constructor, null);
