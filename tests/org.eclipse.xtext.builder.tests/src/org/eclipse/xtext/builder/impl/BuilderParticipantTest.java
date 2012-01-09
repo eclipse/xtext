@@ -8,8 +8,8 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,16 +38,18 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class BuilderParticipantTest extends AbstractBuilderTest {
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		final Injector injector = getInjector();
 		IXtextBuilderParticipant instance = injector
@@ -68,12 +70,12 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 		participant = null;
 	}
 
-	public void testCleanUpDerivedResources() throws Exception {
+	@Test public void testCleanUpDerivedResources() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -98,7 +100,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		preferenceStoreAccess.getWritablePreferenceStore().setValue(getDefaultOutputDirectoryKey(), "./src-gen");
 	}
 
-	public void testDefaultConfiguration() throws Exception {
+	@Test public void testDefaultConfiguration() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -125,7 +127,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertFalse(generatedFile.exists());
 	}
 	
-	public void testClean() throws Exception {
+	@Test public void testClean() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -142,7 +144,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertFalse(generatedFile.exists());
 	}
 	
-	public void testNoCleanUpNoDerived() throws Exception {
+	@Test public void testNoCleanUpNoDerived() throws Exception {
 		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
 			@Override
 			public Set<OutputConfiguration> getOutputConfigurations() {
@@ -186,7 +188,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertTrue(generatedFile.exists());
 	}
 	
-	public void testDisabled() throws Exception {
+	@Test public void testDisabled() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		participant.getBuilderPreferenceAccess().setAutoBuildEnabled(project, false);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
@@ -202,7 +204,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertTrue(generatedFile.exists());
 	}
 
-	public void testNoOutputFolderCreation() throws Exception {
+	@Test public void testNoOutputFolderCreation() throws Exception {
 		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
 			@Override
 			public Set<OutputConfiguration> getOutputConfigurations() {

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static junit.framework.Assert.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.Set;
@@ -84,6 +84,7 @@ public class BuilderUtil {
 		return forIterable.size();
 	}
 
+	@SuppressWarnings("restriction")
 	public static void assertNumberOfMarkers(IFile file, int numberOfMarkers) throws CoreException {
 		IMarker[] markers = file.findMarkers(EValidator.MARKER, true, 1);
 		assertEquals(printMarker(markers),numberOfMarkers,markers.length);

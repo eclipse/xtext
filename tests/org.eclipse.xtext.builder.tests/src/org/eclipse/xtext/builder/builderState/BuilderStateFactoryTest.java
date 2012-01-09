@@ -9,36 +9,36 @@ package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.naming.QualifiedName;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class BuilderStateFactoryTest extends TestCase {
+public class BuilderStateFactoryTest extends Assert {
 
 	private BuilderStateFactory factory;
 	private EDataType dataType;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		factory = BuilderStateFactory.eINSTANCE;
 		dataType = BuilderStatePackage.Literals.QUALIFIED_NAME;
 	}
 	
-	public void testEmptyQualifiedName() {
+	@Test public void testEmptyQualifiedName() {
 		QualifiedName empty = QualifiedName.EMPTY;
 		String converted = factory.convertToString(dataType, empty);
 		assertNotNull(converted);
 	}
 	
-	public void testEmptyStringToQualifiedName() {
+	@Test public void testEmptyStringToQualifiedName() {
 		QualifiedName qn = (QualifiedName) factory.createFromString(dataType, "");
 		assertEquals(QualifiedName.EMPTY, qn);
 	}
 	
-	public void testNullToQualifiedName() {
+	@Test public void testNullToQualifiedName() {
 		QualifiedName qn = (QualifiedName) factory.createFromString(dataType, null);
 		assertEquals(QualifiedName.EMPTY, qn);
 	}

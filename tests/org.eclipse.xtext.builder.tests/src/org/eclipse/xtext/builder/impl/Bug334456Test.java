@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.util.Collections;
 
@@ -20,15 +20,17 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
+import org.junit.Test;
 
 import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class Bug334456Test extends AbstractBuilderTest {
 
-	public void testNoCopiedResourceDescription() throws Exception {
+	@Test public void testNoCopiedResourceDescription() throws Exception {
 		createPluginProject("foo");
 		waitForAutoBuild();
 		IResourceDescriptions descriptions = BuilderUtil.getBuilderState();
@@ -40,7 +42,7 @@ public class Bug334456Test extends AbstractBuilderTest {
 		}
 	}
 	
-	public void testSameResourceCountForTwoProjects() throws Exception {
+	@Test public void testSameResourceCountForTwoProjects() throws Exception {
 		IProject fooProject = createPluginProject("foo");
 		waitForAutoBuild();
 		IResourceDescriptions descriptions = BuilderUtil.getBuilderState();

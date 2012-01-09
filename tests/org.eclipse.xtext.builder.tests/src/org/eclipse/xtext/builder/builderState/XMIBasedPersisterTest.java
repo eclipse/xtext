@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 public class XMIBasedPersisterTest extends AbstractEMFBasedPersisterTest {
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		persister.setFactory(new XMIResourceFactoryImpl());
 	}

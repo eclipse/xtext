@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.util.NoSuchElementException;
 
@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -40,12 +41,12 @@ public class ResourceDescriptionUpdaterTest extends AbstractParticipatingBuilder
 	private static final String REFERENCED_FILE_NAME = "source";
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		startLogging();
 	}
 	
-	public void testIndependentProjects() throws Exception {
+	@Test public void testIndependentProjects() throws Exception {
 		IFolder folder = createProject(PROJECT1);
 		addFile(folder, REFERENCED_FILE_NAME, "namespace bar { object B }");
 		addFile(folder, REFERENCING_FILE_NAME, "namespace foo { object A references bar.B}");
@@ -77,18 +78,21 @@ public class ResourceDescriptionUpdaterTest extends AbstractParticipatingBuilder
 		}
 	}
 
+	@SuppressWarnings("restriction")
 	private void addFile(IFolder folder, String fileName, String content) throws CoreException {
 		IFile file = folder.getFile(fileName + F_EXT);
 		file.create(new StringInputStream(content), true, monitor());
 		waitForAutoBuild();
 	}
 
+	@SuppressWarnings("restriction")
 	private void changeFile(IFolder folder, String fileName, String content) throws CoreException {
 		IFile file = folder.getFile(fileName + F_EXT);
 		file.setContents(new StringInputStream(content), IResource.FORCE, monitor());
 		waitForAutoBuild();
 	}
 
+	@SuppressWarnings("restriction")
 	private IFolder createProject(String projectName) throws CoreException, JavaModelException {
 		IJavaProject project = createJavaProject(projectName);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);

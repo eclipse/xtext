@@ -33,9 +33,9 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 	public final static String ATTR_GENERATOR = "generator"; 
 	
 	public static class GeneratorIdProvider {
-		@Inject
+		@Inject(optional = true)
 		@Named(Constants.LANGUAGE_NAME)
-		private String languageName;
+		private String languageName = "no-language";
 		
 		public String getGeneratorIdentifier() {
 			return languageName;

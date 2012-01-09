@@ -8,8 +8,8 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -33,16 +33,18 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("restriction")
 public class IntegrationTest extends AbstractBuilderTest {
 
 	private IJavaProject foo_project;
@@ -50,7 +52,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 	private IFile foo_file;
 	private IFile bar_file;
 
-	public void testValidSimpleModel() throws Exception {
+	@Test public void testValidSimpleModel() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo" + F_EXT, "object Foo ");
 		waitForAutoBuild();
@@ -63,14 +65,14 @@ public class IntegrationTest extends AbstractBuilderTest {
 		return project;
 	}
 
-	public void testSimpleModelWithSyntaxError() throws Exception {
+	@Test public void testSimpleModelWithSyntaxError() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/foo" + F_EXT, "objekt Foo ");
 		waitForAutoBuild();
 		assertEquals(1, countMarkers(file));
 	}
 
-	public void testTwoFilesInSameProject() throws Exception {
+	@Test public void testTwoFilesInSameProject() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file1 = createFile("foo/src/foo" + F_EXT, "object Foo ");
 		IFile file2 = createFile("foo/src/bar" + F_EXT, "object Bar references Foo");
@@ -85,7 +87,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 	// TODO (since 2.0) the expectation would be markers on the declarations, rather than on the reference. 
 	// FIXME as soon as we have duplicate name validation on containers.
 	//
-	//	public void testTwoFilesInSameProjectCopyAndDelete() throws Exception {
+	//	@Test public void testTwoFilesInSameProjectCopyAndDelete() throws Exception {
 	//		createJavaProjectWithRootSrc("foo");
 	//		IFile file1 = createFile("foo/src/foo"+F_EXT, "object Foo ");
 	//		IFile file2 = createFile("foo/src/bar"+F_EXT, "object Bar references Foo");
@@ -105,7 +107,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 	//		assertEquals(2, countResourcesInIndex());
 	//	}
 
-	public void testTwoFilesInSameProjectRemoveNature() throws Exception {
+	@Test public void testTwoFilesInSameProjectRemoveNature() throws Exception {
 		IJavaProject project = createJavaProjectWithRootSrc("foo");
 		createFile("foo/src/foo" + F_EXT, "object Foo ");
 		createFile("foo/src/bar" + F_EXT, "object Bar references Foo");
@@ -116,7 +118,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countResourcesInIndex());
 	}
 
-	public void testTwoFilesInSameProjectRemoveNatureNotSrc() throws Exception {
+	@Test public void testTwoFilesInSameProjectRemoveNatureNotSrc() throws Exception {
 		IJavaProject project = createJavaProjectWithRootSrc("foo");
 		createFile("foo/foo" + F_EXT, "object Foo ");
 		createFile("foo/bar" + F_EXT, "object Bar references Foo");
@@ -127,7 +129,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countResourcesInIndex());
 	}
 
-	public void testTwoFilesInSameProjectNotInSrc() throws Exception {
+	@Test public void testTwoFilesInSameProjectNotInSrc() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file1 = createFile("foo/foo" + F_EXT, "object Foo ");
 		IFile file2 = createFile("foo/bar" + F_EXT, "object Bar references Foo");
@@ -139,7 +141,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(file2), 0, countMarkers(file2));
 	}
 
-	public void testTwoFilesInSameProjectReferencedFileNotInSrc() throws Exception {
+	@Test public void testTwoFilesInSameProjectReferencedFileNotInSrc() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file1 = createFile("foo/foo" + F_EXT, "object Foo ");
 		IFile file2 = createFile("foo/src/bar" + F_EXT, "object Bar references Foo");
@@ -151,7 +153,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(file2), 1, countMarkers(file2));
 	}
 
-	public void testTwoFilesInSameProjectReferingFileNotInSrc() throws Exception {
+	@Test public void testTwoFilesInSameProjectReferingFileNotInSrc() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		IFile file1 = createFile("foo/src/foo" + F_EXT, "object Foo ");
 		IFile file2 = createFile("foo/bar" + F_EXT, "object Bar references Foo");
@@ -176,7 +178,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		return buff.toString();
 	}
 
-	public void testTwoFilesInSameProjectWithLinkingError() throws Exception {
+	@Test public void testTwoFilesInSameProjectWithLinkingError() throws Exception {
 		createJavaProjectWithRootSrc("foo");
 		createFile("foo/src/foo" + F_EXT, "object Foo ");
 		IFile file = createFile("foo/src/bar" + F_EXT, "object Bar references Fuu");
@@ -184,18 +186,18 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countMarkers(file));
 	}
 
-	public void testTwoFilesInTwoReferencedProjects() throws Exception {
+	@Test public void testTwoFilesInTwoReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 	}
 
-	public void testTwoFilesInTwoReferencedProjectsRemoveNature() throws Exception {
+	@Test public void testTwoFilesInTwoReferencedProjectsRemoveNature() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
 		waitForAutoBuild();
 		assertEquals(1, countMarkers(bar_file));
 	}
 
-	public void testTwoFilesInTwoReferencedProjectsAddNature() throws Exception {
+	@Test public void testTwoFilesInTwoReferencedProjectsAddNature() throws Exception {
 		foo_project = createJavaProjectWithRootSrc("foo");
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
 		bar_project = createJavaProjectWithRootSrc("bar");
@@ -226,7 +228,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(bar_file));
 	}
 
-	public void testTwoFilesInTwoInversedReferencedProjects() throws Exception {
+	@Test public void testTwoFilesInTwoInversedReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeProjectReference(bar_project, foo_project);
 		waitForAutoBuild();
@@ -236,7 +238,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countMarkers(bar_file));
 	}
 
-	public void testTwoFilesInTwoNonReferencedProjects() throws Exception {
+	@Test public void testTwoFilesInTwoNonReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeProjectReference(bar_project, foo_project);
 
@@ -245,7 +247,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countMarkers(bar_file));
 	}
 
-	public void testChangeReferenceOfProjects() throws Exception {
+	@Test public void testChangeReferenceOfProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 
 		removeProjectReference(bar_project, foo_project);
@@ -259,7 +261,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(bar_file));
 	}
 
-	public void testOpenAndCloseReferencedProjects() throws Exception {
+	@Test public void testOpenAndCloseReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		// close project
 		foo_project.getProject().close(monitor());
@@ -270,7 +272,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
 
-	public void testChangeReferencedFile() throws Exception {
+	@Test public void testChangeReferencedFile() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 
 		// change referenced file
@@ -284,7 +286,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(bar_file));
 	}
 
-	public void testDeleteReferencedFile() throws Exception {
+	@Test public void testDeleteReferencedFile() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 
 		// delete referenced file
@@ -299,7 +301,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(bar_file));
 	}
 
-	public void testUpdateOfReferencedFile() throws Exception {
+	@Test public void testUpdateOfReferencedFile() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -336,7 +338,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertNumberOfMarkers(fileB, 0);
 	}
 
-	public void testDeleteFile() throws Exception {
+	@Test public void testDeleteFile() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -354,7 +356,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countResourcesInIndex());
 	}
 
-	public void testCleanBuild() throws Exception {
+	@Test public void testCleanBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
@@ -377,7 +379,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertNotNull(getEvents().get(1).getDeltas().get(0).getNew());
 	}
 
-	public void testCleanIsNotTransitive() throws Exception {
+	@Test public void testCleanIsNotTransitive() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		waitForAutoBuild();
 		assertTrue(indexContainsElement(foo_file.getFullPath().toString(), "Foo"));
@@ -390,7 +392,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertTrue(indexContainsElement(bar_file.getFullPath().toString(), "Bar"));
 	}
 
-	public void testCleanRemovesMarkers() throws Exception {
+	@Test public void testCleanRemovesMarkers() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IFile file = createFile("foo/src/bar" + F_EXT, "object Bar references Foo");
 		waitForAutoBuild();
@@ -401,7 +403,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(file), 1, countMarkers(file));
 	}
 
-	public void testFileInJar() throws Exception {
+	@Test public void testFileInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFile file = project.getProject().getFile("foo.jar");
@@ -412,7 +414,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countResourcesInIndex());
 	}
 
-	public void testTwoJars() throws Exception {
+	@Test public void testTwoJars() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFile file = project.getProject().getFile("foo.jar");
@@ -429,7 +431,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(3, countResourcesInIndex());
 	}
 
-	public void testReexportedSource() throws Exception {
+	@Test public void testReexportedSource() throws Exception {
 		IJavaProject foo = createJavaProject("foo");
 		IJavaProject bar = createJavaProject("bar");
 		IJavaProject baz = createJavaProject("baz");
@@ -457,7 +459,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(BuilderTestLanguagePackage.Literals.ELEMENT__REFERENCES, next.getEReference());
 	}
 
-	public void testFullBuild() throws Exception {
+	@Test public void testFullBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IProject someProject = createProject("bar");
@@ -479,7 +481,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		return file.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length;
 	}
 
-	public void testEvents() throws Exception {
+	@Test public void testEvents() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IProject someProject = createProject("bar");
@@ -496,7 +498,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		someProject.delete(true, monitor());
 	}
 
-	public void testIgnoreFilesInOutputFolder() throws Exception {
+	@Test public void testIgnoreFilesInOutputFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		createFile("foo/src/foo" + F_EXT, "object Foo ");
 		createFile("foo/bar" + F_EXT, "object Bar references Foo");
@@ -518,7 +520,8 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertTrue(serviceProvider.canHandle(fromRootURI));
 	}
 
-	public void testModelWithSyntaxErrorInDerivedSrcFolder() throws Exception {
+	@SuppressWarnings("deprecation")
+	@Test public void testModelWithSyntaxErrorInDerivedSrcFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IProject project = javaProject.getProject();
 		IFolder sourceFolder = project.getFolder("src");
@@ -533,7 +536,8 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(file));
 	}
 
-	public void testModelWithSyntaxErrorInDerivedFolder() throws Exception {
+	@SuppressWarnings("deprecation")
+	@Test public void testModelWithSyntaxErrorInDerivedFolder() throws Exception {
 		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
 		IProject project = javaProject.getProject();
 		IFolder folder = project.getFolder("non-src");
@@ -549,7 +553,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(file));
 	}
 
-	public void testOpenAndCloseReferencedProjectsTogether_01() throws Exception {
+	@Test public void testOpenAndCloseReferencedProjectsTogether_01() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		waitForAutoBuild();
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
@@ -576,7 +580,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 	}
 
-	public void testOpenAndCloseReferencedProjectsTogether_02() throws Exception {
+	@Test public void testOpenAndCloseReferencedProjectsTogether_02() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		waitForAutoBuild();
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
@@ -591,7 +595,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 	}
 
-	public void testBug342875() throws Exception {
+	@Test public void testBug342875() throws Exception {
 
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
