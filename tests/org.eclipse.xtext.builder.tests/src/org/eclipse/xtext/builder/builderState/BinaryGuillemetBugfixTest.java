@@ -12,15 +12,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
-
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class BinaryGuillemetBugfixTest extends TestCase {
+public class BinaryGuillemetBugfixTest extends Assert {
 
-	public void testEncodeGuillemet() throws IOException {
+	@Test public void testEncodeGuillemet() throws IOException {
 		String s = "«";
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		new BinaryResourceImpl.EObjectOutputStream(out, null).writeString(s);

@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.builder.tests.ui.contentassist;
 
-import org.eclipse.xtext.builder.tests.ui.contentassist.AbstractBuilderTestLanguageProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

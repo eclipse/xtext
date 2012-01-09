@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -22,6 +20,8 @@ import org.eclipse.xtext.ecore.EcoreRuntimeModule;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.generic.GenericResourceDescriptionManager;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -29,9 +29,9 @@ import com.google.inject.Injector;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class GenericResourceDescriptionManagerTest extends TestCase {
+public class GenericResourceDescriptionManagerTest extends Assert {
 
-	public void testCreateDeltaAndIsAffected() {
+	@Test public void testCreateDeltaAndIsAffected() {
 		GenericResourceDescriptionManager manager = getEmfResourceDescriptionsManager();
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName("Test");
