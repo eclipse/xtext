@@ -282,9 +282,6 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
-			if (project.isOpen()) {
-				project.close(null);
-			}
 			project.delete(true, true, null);
 		}
 	}
