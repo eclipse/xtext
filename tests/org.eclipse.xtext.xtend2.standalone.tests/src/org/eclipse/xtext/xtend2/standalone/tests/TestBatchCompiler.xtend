@@ -8,7 +8,7 @@ import org.eclipse.xtext.xtend2.compiler.batch.Xtend2BatchCompiler
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
-import static junit.framework.Assert.*
+import static org.junit.Assert.*
 import org.junit.Test
 import org.junit.Before
 import org.junit.After
