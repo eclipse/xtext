@@ -35,7 +35,7 @@ public class OriginalJavaElementOpener implements IJavaElementEditorOpener {
 	@Inject
 	private IDerivedResourceMarkers derivedResourceMarkers;
 	
-	public static class EditorHandle implements IJavaElementEditorOpener.IOpenableEditor {
+	public static class EditorHandle implements IJavaElementEditorOpener.IOpenableEditor, IRevealable {
 
 		private final IDerivedMemberAwareEditorOpener opener;
 		private final URI sourceResourceURI;
@@ -70,7 +70,7 @@ public class OriginalJavaElementOpener implements IJavaElementEditorOpener {
 	 * @param activate
 	 * @return
 	 */
-	private IJavaElementEditorOpener.IOpenableEditor tryCreateHandle(
+	private EditorHandle tryCreateHandle(
 			IJavaElement element, boolean activate) {
 		if (element instanceof IMember) {
 			try {
@@ -101,14 +101,14 @@ public class OriginalJavaElementOpener implements IJavaElementEditorOpener {
 		return null;
 	}
 
-	public IJavaElementEditorOpener.IOpenableEditor revealInEditor(IEditorPart part, IJavaElement element) {
+	public IRevealable revealInEditor(IEditorPart part, IJavaElement element) {
 		if (part instanceof XtextEditor) {
 			return tryCreateHandle(element, true);
 		}
 		return null;
 	}
 	
-	public IOpenableEditor revealInEditor(IEditorPart part, int offset,
+	public IRevealable revealInEditor(IEditorPart part, int offset,
 			int length) {
 		// TODO implement as soon as trace information is available.
 		return null;
