@@ -15,18 +15,19 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 
 public class CalculatorTest extends AbstractXtextTests {
     
     @Override
-    protected void setUp() throws Exception {
+	public void setUp() throws Exception {
         super.setUp();
         with(new ArithmeticsStandaloneSetup());
     }
     
-    public void testSimple() throws Exception {
+    @Test public void testSimple() throws Exception {
         check(6,"1 + 2 + 3");
         check(0,"1 + 2 - 3");
         check(5,"1 * 2 + 3");
@@ -36,7 +37,7 @@ public class CalculatorTest extends AbstractXtextTests {
     
     protected void check(double expected,String expression) throws Exception {
         double result = evaluate(getStatement(expression)).doubleValue();
-        assertEquals(expected, result);
+        assertEquals(expected, result, 0.0001);
     }
 
     protected Statement getStatement(String string) throws Exception {
