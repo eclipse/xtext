@@ -7,13 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.hyperlinking;
 
-import junit.framework.Test;
-
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -22,17 +21,13 @@ import com.google.inject.Inject;
  */
 public class HyperlinkingTest extends AbstractXtend2UITestCase {
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(HyperlinkingTest.class);
-	}
-	
 	@Inject
 	private IHyperlinkHelper hyperlinkHelper;
 
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	
-	public void testDispatchMethod() throws Exception {
+	@Test public void testDispatchMethod() throws Exception {
 		String modelAsString = "class Foo {\n"
 				+ "  def bar() { foo(new Object()) }\n"
 				+ "  def dispatch foo(Object o) { null }\n"
@@ -47,7 +42,7 @@ public class HyperlinkingTest extends AbstractXtend2UITestCase {
 		assertEquals("foo(Object) : Object", hyperlinks[2].getHyperlinkText());
 	}
 	
-	public void testPlainMethod() throws Exception {
+	@Test public void testPlainMethod() throws Exception {
 		String modelAsString = "class Foo {\n"
 				+ "  def bar() { foo() }\n"
 				+ "  def foo() { null }\n"
@@ -58,7 +53,7 @@ public class HyperlinkingTest extends AbstractXtend2UITestCase {
 		assertEquals("foo() : Object", hyperlinks[0].getHyperlinkText());
 	}
 	
-	public void testConstructor() throws Exception {
+	@Test public void testConstructor() throws Exception {
 		String modelAsString =
 			"class Foo {\n"
 				+ "  def bar() { new Foo() }\n"
@@ -69,7 +64,7 @@ public class HyperlinkingTest extends AbstractXtend2UITestCase {
 		assertEquals("Foo", hyperlinks[0].getHyperlinkText());
 	}
 
-	public void testSuperClass() throws Exception {
+	@Test public void testSuperClass() throws Exception {
 		String modelAsString =
 			"class Foo extends Object {\n"
 				+ "}";

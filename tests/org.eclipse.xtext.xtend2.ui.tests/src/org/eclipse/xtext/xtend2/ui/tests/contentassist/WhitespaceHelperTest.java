@@ -11,6 +11,7 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.xtend2.ui.contentassist.WhitespaceHelper;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -23,7 +24,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 	@Inject
 	private Provider<WhitespaceHelper> whitespaceHelperProvider;
 
-	public void testOff() throws Exception {
+	@Test public void testOff() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx|yyy", 1, false, "xxx*yy");
 		assertEquals(3, w.getTotalOffset());
 		assertEquals(1, w.getTotalLength());
@@ -31,7 +32,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertNull(w.getSuffix());
 	}
 
-	public void testInsertLines_0() throws Exception {
+	@Test public void testInsertLines_0() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx|yyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(3, w.getTotalOffset());
 		assertEquals(0, w.getTotalLength());
@@ -39,7 +40,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n\n", w.getSuffix());
 	}
 
-	public void testInsertLines_1() throws Exception {
+	@Test public void testInsertLines_1() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx\n|yyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(4, w.getTotalOffset());
 		assertEquals(0, w.getTotalLength());
@@ -47,7 +48,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n\n", w.getSuffix());
 	}
 
-	public void testInsertLines_2() throws Exception {
+	@Test public void testInsertLines_2() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx\n\n|yyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(4, w.getTotalOffset());
 		assertEquals(1, w.getTotalLength());
@@ -55,7 +56,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n\n", w.getSuffix());
 	}
 
-	public void testInsertLines_3() throws Exception {
+	@Test public void testInsertLines_3() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx|\nyyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(3, w.getTotalOffset());
 		assertEquals(0, w.getTotalLength());
@@ -63,7 +64,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n", w.getSuffix());
 	}
 
-	public void testInsertLines_4() throws Exception {
+	@Test public void testInsertLines_4() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx|\n\nyyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(3, w.getTotalOffset());
 		assertEquals(0, w.getTotalLength());
@@ -71,7 +72,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertNull(w.getSuffix());
 	}
 
-	public void testInsertLines_5() throws Exception {
+	@Test public void testInsertLines_5() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx | yyy", 0, true, "xxx \n\n*\n\nyyy");
 		assertEquals(4, w.getTotalOffset());
 		assertEquals(1, w.getTotalLength());
@@ -79,7 +80,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n\n", w.getSuffix());
 	}
 
-	public void testInsertLines_6() throws Exception {
+	@Test public void testInsertLines_6() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx\n|  yyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(4, w.getTotalOffset());
 		assertEquals(2, w.getTotalLength());
@@ -87,7 +88,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n\n", w.getSuffix());
 	}
 
-	public void testInsertLines_7() throws Exception {
+	@Test public void testInsertLines_7() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx\n\n  |yyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(4, w.getTotalOffset());
 		assertEquals(3, w.getTotalLength());
@@ -95,7 +96,7 @@ public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
 		assertEquals("\n\n", w.getSuffix());
 	}
 
-	public void testInsertLines_8() throws Exception {
+	@Test public void testInsertLines_8() throws Exception {
 		WhitespaceHelper w = getWhitespaceHelper("xxx|  \nyyy", 0, true, "xxx\n\n*\n\nyyy");
 		assertEquals(3, w.getTotalOffset());
 		assertEquals(2, w.getTotalLength());

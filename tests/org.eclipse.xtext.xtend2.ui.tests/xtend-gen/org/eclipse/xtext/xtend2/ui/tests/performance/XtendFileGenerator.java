@@ -2,13 +2,13 @@ package org.eclipse.xtext.xtend2.ui.tests.performance;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.ui.tests.performance.GeneratorConfig;
 
 @SuppressWarnings("all")
 public class XtendFileGenerator {

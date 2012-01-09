@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.refactoring;
 
-import junit.framework.Test;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -27,10 +25,10 @@ import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -38,6 +36,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -56,10 +55,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	@Inject
 	protected JvmModelRenameElementHandler renameElementHandler;
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(JavaRefactoringIntegrationTest.class);
-	}
-
 	@Inject
 	private WorkbenchTestHelper testHelper;
 
@@ -67,12 +62,12 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	private IWorkbench workbench;
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
 	}
 
-	public void testRenameReferenceToJava() throws Exception {
+	@Test public void testRenameReferenceToJava() throws Exception {
 		try {
 			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
 			String xtendModel = "class XtendClass extends JavaClass {}";
@@ -87,7 +82,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		}
 	}
 
-	public void testRenameOverriddenJavaMethod() throws Exception {
+	@Test public void testRenameOverriddenJavaMethod() throws Exception {
 		IFile javaInterface = testHelper.createFile("JavaInterface.java",
 				"public interface JavaInterface { void foo(); }");
 		IFile javaClass = testHelper.createFile("JavaClass.java",
@@ -105,7 +100,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		assertTrue(editor.getDocument().get().contains("foobar()"));
 	}
 
-	public void testRenameJavaClass() throws Exception {
+	@Test public void testRenameJavaClass() throws Exception {
 		try {
 			testHelper.createFile("JavaClass.java", "public class JavaClass { }");
 			String xtendModel = "class XtendClass extends JavaClass {  }";
@@ -124,7 +119,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		}
 	}
 
-	public void testRenameJavaEnum() throws Exception {
+	@Test public void testRenameJavaEnum() throws Exception {
 		try {
 			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
 			String xtendModel = "class XtendClass { JavaEnum fooBar }";
@@ -143,7 +138,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		}
 	}
 
-	public void testRenameJavaMethod() throws Exception {
+	@Test public void testRenameJavaMethod() throws Exception {
 		try {
 			testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
 			String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() }";
@@ -162,7 +157,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		}
 	}
 
-	public void testDontRenameOperator() throws Exception {
+	@Test public void testDontRenameOperator() throws Exception {
 		String xtendModel = "class XtendClass { def bar() { 1 + 2 }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);

@@ -8,13 +8,9 @@
 package org.eclipse.xtext.xtend2.ui.tests.autoedit;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.util.Collections;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -23,21 +19,33 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
+import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.autoedit.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 
-	public static Test suite() {
-		return suite(AutoEditTest.class);
+	private static IProject project;
+	
+	@BeforeClass
+	public static void setUpProject() throws Exception {
+		project = createPluginProject(TESTPROJECT_NAME);
+	}
+	
+	@AfterClass
+	public static void tearDownProject() throws Exception {
+		deleteProject(project);
 	}
 	
 	private static final String TESTPROJECT_NAME = "foo";
@@ -64,25 +72,8 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		return editor;
 	}
 	
-	public static Test suite(Class<? extends AutoEditTest> clazz) {
-		return new TestSetup(new TestSuite(clazz, clazz.getCanonicalName())) {
-			private IProject project;
-			
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = createPluginProject(TESTPROJECT_NAME);
-			}
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
-	}
-	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
 		if (!project.exists())
@@ -107,38 +98,35 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	
 	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
-			if (project.isOpen()) {
-				project.close(null);
-			}
 			project.delete(true, true, null);
 		}
 	}
 	
-	public void testCurlyBraceBlockAndRichStrings_0() throws Exception {
+	@Test public void testCurlyBraceBlockAndRichStrings_0() throws Exception {
 		XtextEditor editor = openEditor("\n{|\n'''«{null}»'''}");
 		pressKey(editor, '\n');
 		assertState("\n{\n\t|\n'''«{null}»'''}", editor);
 	}
 	
-	public void testIndentationEdit_1() throws Exception {
+	@Test public void testIndentationEdit_1() throws Exception {
 		XtextEditor editor = openEditor("  '|'");
 		pressKey(editor, '\n');
 		assertState("  '\n|'", editor);
 	}
 	
-	public void testIndentationEdit_2() throws Exception {
+	@Test public void testIndentationEdit_2() throws Exception {
 		XtextEditor editor = openEditor("  |");
 		pressKey(editor, '\n');
 		assertState("  \n  |", editor);
 	}
 	
-	public void testIndentationEdit_3() throws Exception {
+	@Test public void testIndentationEdit_3() throws Exception {
 		XtextEditor editor = openEditor("  '''\n  |\n'''");
 		pressKey(editor, '\n');
 		assertState("  '''\n  \n  |\n'''", editor);
 	}
 	
-	public void testCurlyBracesBlockInRichString_1() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_1() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '{');
 		assertState("'''{|'''", editor);
@@ -148,109 +136,109 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("'''{\n\t\n\t|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_2() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_2() throws Exception {
 		XtextEditor editor = openEditor("'''{|\n}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_3() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_3() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '}');
 		assertState("'''}|'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_4() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_4() throws Exception {
 		XtextEditor editor = openEditor("'''foo {|'''");
 		pressKey(editor, '\n');
 		assertState("'''foo {\n\t|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_5() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_5() throws Exception {
 		XtextEditor editor = openEditor("'''{|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_6() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_6() throws Exception {
 		XtextEditor editor = openEditor("'''{| }'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_7() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_7() throws Exception {
 		XtextEditor editor = openEditor("'''{ |foo }'''");
 		pressKey(editor, '\n');
 		assertState("'''{ \n\t|foo\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_8() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_8() throws Exception {
 		XtextEditor editor = openEditor("'''{ foo| }'''");
 		pressKey(editor, '\n');
 		assertState("'''{ foo\n| }'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_9() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_9() throws Exception {
 		XtextEditor editor = openEditor("'''\"{\" foo| }'''");
 		pressKey(editor, '\n');
 		assertState("'''\"{\" foo\n| }'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_10() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_10() throws Exception {
 		XtextEditor editor = openEditor("'''/*{*/ foo|'''");
 		pressKey(editor, '\n');
 		assertState("'''/*{*/ foo\n|'''", editor);
 	}
 	
-	public void testCurlyBracesBlockInRichString_11() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_11() throws Exception {
 		XtextEditor editor = openEditor("'''{|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\t|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_12() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_12() throws Exception {
 		XtextEditor editor = openEditor("'''{foo|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{foo\n|}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_13() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_13() throws Exception {
 		XtextEditor editor = openEditor("'''{foo|bar}'''");
 		pressKey(editor, '\n');
 		assertState("'''{foo\n|bar}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_14() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_14() throws Exception {
 		XtextEditor editor = openEditor("'''{\nfoo|bar}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\nfoo\n|bar}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_15() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_15() throws Exception {
 		XtextEditor editor = openEditor("'''{\nfoo}|{bar}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\nfoo}\n|{bar}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_16() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_16() throws Exception {
 		XtextEditor editor = openEditor("'''{\n|}'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\n|}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_17() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_17() throws Exception {
 		XtextEditor editor = openEditor("'''{\n|'''");
 		pressKey(editor, '\n');
 		assertState("'''{\n\n|\n}'''", editor);
 	}
 
-	public void testCurlyBracesBlockInRichString_18() throws Exception {
+	@Test public void testCurlyBracesBlockInRichString_18() throws Exception {
 		XtextEditor editor = openEditor("'''{{foo}|{bar}}'''");
 		pressKey(editor, '\n');
 		assertState("'''{{foo}\n|{bar}}'''", editor);
 	}
 	
-	public void testRichStringLiteral_01() throws Exception {
+	@Test public void testRichStringLiteral_01() throws Exception {
 		XtextEditor editor = openEditor("''|");
 		pressKey(editor, '\'');
 		assertState("'''|'''", editor);
@@ -262,43 +250,43 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("''''''|", editor);
 	}
 	
-	public void testRichStringLiteral_02() throws Exception {
+	@Test public void testRichStringLiteral_02() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '\n');
 		assertState("'''\n|'''", editor);
 	}
 	
-	public void testRichStringLiteral_03() throws Exception {
+	@Test public void testRichStringLiteral_03() throws Exception {
 		XtextEditor editor = openEditor("  '''|'''");
 		pressKey(editor, '\n');
 		assertState("  '''\n  |'''", editor);
 	}
 	
-	public void testRichStringLiteral_04() throws Exception {
+	@Test public void testRichStringLiteral_04() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '\"');
 		assertState("'''\"|\"'''", editor);
 	}
 	
-	public void testRichStringLiteral_05() throws Exception {
+	@Test public void testRichStringLiteral_05() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pressKey(editor, '«');
 		assertState("'''«|»'''", editor);
 	}
 	
-	public void testRichStringLiteral_06() throws Exception {
+	@Test public void testRichStringLiteral_06() throws Exception {
 		XtextEditor editor = openEditor("'''«foobar|»'''");
 		pressKey(editor, '»');
 		assertState("'''«foobar»|'''", editor);
 	}
 	
-	public void testRichStringLiteral_07() throws Exception {
+	@Test public void testRichStringLiteral_07() throws Exception {
 		XtextEditor editor = openEditor("'''«|»'''");
 		pressKey(editor, SWT.BS);
 		assertState("'''|'''", editor);
 	}
 	
-	public void testRichStringLiteral_08() throws Exception {
+	@Test public void testRichStringLiteral_08() throws Exception {
 		XtextEditor editor = openEditor("''' foobar |'''");
 		pressKey(editor, '\'');
 		assertState("''' foobar '|''", editor);
@@ -308,7 +296,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("''' foobar '''|", editor);
 	}
 	
-	public void testRichStringLiteral_09() throws Exception {
+	@Test public void testRichStringLiteral_09() throws Exception {
 		XtextEditor editor = openEditor("''' |«foobar» '''");
 		pressKey(editor, '«');
 		assertState("''' «|»«foobar» '''", editor);
@@ -318,7 +306,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("''' «a»|«foobar» '''", editor);
 	}
 	
-	public void testRichStringLiteral_10() throws Exception {
+	@Test public void testRichStringLiteral_10() throws Exception {
 		XtextEditor editor = openEditor("''' «foobar» |'''");
 		pressKey(editor, '\'');
 		assertState("''' «foobar» '|''", editor);
@@ -335,7 +323,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	}
 	
 	@Override
-	public void testSingleQuotedStringLiteral_3() throws Exception {
+	@Test public void testSingleQuotedStringLiteral_3() throws Exception {
 		XtextEditor editor = openEditor("|'");
 		pressKey(editor, '\'');
 		assertState("'|'", editor);
@@ -345,7 +333,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("'''|'''", editor);
 	}
 	
-	public void testBug342030_01() throws Exception {
+	@Test public void testBug342030_01() throws Exception {
 		XtextEditor editor = openEditor(
 				"genPlainText(Object this){\n" + 
 				"    '''|'''\n" + 
@@ -358,7 +346,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"", editor);
 	}
 	
-	public void testBug342030_02() throws Exception {
+	@Test public void testBug342030_02() throws Exception {
 		XtextEditor editor = openEditor(
 				"genPlainText(Object this){\n" + 
 				"    '''|'''\n" + 
@@ -371,7 +359,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"", editor);
 	}
 	
-	public void testBug342030_03() throws Exception {
+	@Test public void testBug342030_03() throws Exception {
 		XtextEditor editor = openEditor(
 				"genPlainText(Object this){\n" + 
 				"    '''|'''\n" + 
@@ -387,7 +375,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	// The following generic auto edit assumptions don't hold for xtend
 	// because of the rich string delimiter '''
 	@Override
-	public void testSingleQuotedStringLiteral_14() throws Exception {
+	@Test public void testSingleQuotedStringLiteral_14() throws Exception {
 		XtextEditor editor = openEditor("|'test'");
 		pressKey(editor, '\'');
 		assertState("'|''test'", editor);
@@ -398,7 +386,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	}
 	
 	@Override
-	public void testSingleQuotedStringLiteral_15() throws Exception {
+	@Test public void testSingleQuotedStringLiteral_15() throws Exception {
 //		XtextEditor editor = openEditor("'|''test'");
 //		pressKey(editor, '\'');
 //		assertState("''|'test'", editor);

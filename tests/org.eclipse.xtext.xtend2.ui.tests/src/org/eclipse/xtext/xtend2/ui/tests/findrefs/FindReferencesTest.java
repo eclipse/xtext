@@ -9,12 +9,10 @@ package org.eclipse.xtext.xtend2.ui.tests.findrefs;
 
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
 import java.util.Queue;
-
-import junit.framework.Test;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -34,6 +32,7 @@ import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -45,10 +44,6 @@ import com.google.inject.Provider;
 @SuppressWarnings("restriction")
 public class FindReferencesTest extends AbstractXtend2UITestCase {
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(FindReferencesTest.class);
-	}
-
 	@Inject
 	private WorkbenchTestHelper testHelper;
 
@@ -59,17 +54,12 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 	private Provider<CheckingReferenceQueryExecutor> executorProvider;
 
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
 	}
 
-	public void testFindReferencesToClass() throws Exception {
+	@Test public void testFindReferencesToClass() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
 		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar extends Foo {}").getXtendClass();
 		waitForAutoBuild();
@@ -80,7 +70,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
-	public void testFindReferencesThis() throws Exception {
+	@Test public void testFindReferencesThis() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} }").getXtendClass();
 		waitForAutoBuild();
 		JvmGenericType inferredType = associations.getInferredType(classFoo);
@@ -92,7 +82,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		checkFindReferences(inferredType, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
-	public void testFindReferencesToConstructor() throws Exception {
+	@Test public void testFindReferencesToConstructor() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
 		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def bar() {new Foo()} }").getXtendClass();
 		waitForAutoBuild();
@@ -105,7 +95,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
-	public void testFindReferencesFromReturnType() throws Exception {
+	@Test public void testFindReferencesFromReturnType() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
 		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def Foo bar() {null} }").getXtendClass();
 		waitForAutoBuild();
@@ -117,7 +107,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
-	public void testFindReferencesFromParameter() throws Exception {
+	@Test public void testFindReferencesFromParameter() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
 		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def bar(Foo x) {null} }").getXtendClass();
 		waitForAutoBuild();
@@ -130,7 +120,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
-	public void testFindReferencesToFunction() throws Exception {
+	@Test public void testFindReferencesToFunction() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { def foo() {this} def bar() {foo()} }")
 				.getXtendClass();
 		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { def baz(Foo this) {foo()} }").getXtendClass();

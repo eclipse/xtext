@@ -7,28 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.smoke;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-
-import junit.framework.Test;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xtend2.tests.smoke.AbstractSmokeTest;
-import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingCalculator;
-import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
-import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
-
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBugTest {
 
 	@Inject
@@ -25,28 +25,28 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	private String indent;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		indent = indentationInfo.getIndentString();
 	}
 	
-	public void testAbstractMethod() throws Exception {
+	@Test public void testAbstractMethod() throws Exception {
 		newBuilder().append("class Foo implements Comparable<String> { co").assertText(
 				getOverridingFunctionCode("compareTo(String o)"));
 	}
 
-	public void testNonAbstractMethod() throws Exception {
+	@Test public void testNonAbstractMethod() throws Exception {
 		newBuilder().append("class Foo implements Comparable<String> { cl").assertText(
 				"\n" + indent + "\n" + indent + "override protected clone() throws CloneNotSupportedException {\n" + 
 				indent + indent + "super.clone()\n" +
 				indent + "}");
 	}
 
-	public void testStaticMethod() throws Exception {
+	@Test public void testStaticMethod() throws Exception {
 		newBuilder().append("class Foo extends Thread { currentT").assertText("");
 	}
 
-	public void testNonStaticMethod() throws Exception {
+	@Test public void testNonStaticMethod() throws Exception {
 		newBuilder().append("class Foo extends Thread { getI").assertText(
 				"\n" + indent + "\n" + 
 				indent + "override getId() {\n" + 
@@ -54,7 +54,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 				indent + "}");
 	}
 	
-	public void testConstructor() throws Exception {
+	@Test public void testConstructor() throws Exception {
 		newBuilder().append("class Foo extends Exception { new").assertText(
 				"\n" + indent + "\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}",
 				"\n" + indent + "\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}",
@@ -67,10 +67,6 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	protected String getOverridingFunctionCode(String signature) {
 		return "\n" + indent + "\n" + indent + "override " + signature + " {\n" + indent
 				+ indent + MemberFromSuperImplementor.DEFAULT_BODY + "\n" + indent + "}";
-	}
-
-	public static Test suite() {
-		return createSuite(ImplementSuperMemberAssistTest.class);
 	}
 
 }

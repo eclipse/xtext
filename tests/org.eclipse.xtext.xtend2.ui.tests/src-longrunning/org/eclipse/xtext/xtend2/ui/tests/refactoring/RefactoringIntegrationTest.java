@@ -9,8 +9,6 @@ package org.eclipse.xtext.xtend2.ui.tests.refactoring;
 
 import java.lang.reflect.InvocationTargetException;
 
-import junit.framework.Test;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -22,14 +20,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -39,10 +38,6 @@ import com.google.inject.Provider;
  */
 @SuppressWarnings("restriction")
 public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
-
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(RefactoringIntegrationTest.class);
-	}
 
 	@Inject
 	private WorkbenchTestHelper testHelper;
@@ -57,28 +52,24 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	private IResourceSetProvider resourceSetProvider;
 
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		testHelper.setUp();
-	}
-	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
+		super.tearDown();
 	}
 
-	public void testRenameVariable() throws Exception {
+	@Test public void testRenameVariable() throws Exception {
 		performRenameTest("Foo", "class Foo { def foo() { val bar = 7; bar + 1 }}", "bar", "baz");
 	}
 
-	public void testRenameParamter() throws Exception {
+	@Test public void testRenameParamter() throws Exception {
 		performRenameTest("Foo", "class Foo { def foo(int bar) { bar + 1 }}", "bar", "baz");
 	}
 
-	public void testRefactorTypeParameter() throws Exception {
+	@Test public void testRefactorTypeParameter() throws Exception {
 		performRenameTest("Foo", "class Foo <T> { def T foo() null }", "T", "U");
 	}
 
-	public void testRenameSwitchVar() throws Exception {
+	@Test public void testRenameSwitchVar() throws Exception {
 		performRenameTest("Foo", "class Foo { " +
 				"def foo() {\n" +
 				"   val Object bar = ''\n" + 
@@ -90,12 +81,12 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 				"}", "bar", "baz");
 	}
 	
-	public void testRenameMethod() throws Exception {
+	@Test public void testRenameMethod() throws Exception {
 		performRenameTestWithReferringFile("Foo", "Foo", "class Foo { def Integer foo() { foo(); 1 }}", "Bar",
 				"class Baz { def baz(Foo arg) {arg.foo()} }", "foo", "bar");
 	}
 
-	public void testRenameClass() throws Exception {
+	@Test public void testRenameClass() throws Exception {
 		performRenameTestWithReferringFile("Foo", "Bar", "class Foo { def Foo foo() {this} }", "Baz", "class Baz { def Foo foo() {new Foo()} }", "Foo",
 				"Bar");
 	}

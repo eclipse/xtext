@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.outline;
 
-import java.util.List;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
-import junit.framework.Test;
+import java.util.List;
 
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -23,10 +23,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class QuickOutlineTests extends AbstractOutlineTests {
-
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(QuickOutlineTests.class);
-	}
 
 	@Inject
 	private QuickOutlineFilterAndSorter sorter;
@@ -39,12 +35,12 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		return sorter;
 	}
 
-	public void testNoImports() throws Exception {
+	@Test public void testNoImports() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("import java.lang.* class Foo {}");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(0);
 	}
 
-	public void testSorting() throws Exception {
+	@Test public void testSorting() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder(
 				"package test import java.lang.* class Foo {" + 
 				" def baz() {null}" + 
@@ -64,7 +60,8 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		foo.child(4, "baz() : Object").numChildren(0);
 	}
 
-	public void testFieldsFromSuper() throws Exception {
+	@SuppressWarnings("restriction")
+	@Test public void testFieldsFromSuper() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 
 				"package test; " + 
@@ -103,7 +100,8 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		// private field bar stays invisible
 	}
 	
-	public void testMethodsFromSuper() throws Exception {
+	@SuppressWarnings("restriction")
+	@Test public void testMethodsFromSuper() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 
 				"package test; " + 
@@ -142,7 +140,8 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		// private method bar() stays invisible
 	}
 	
-	public void testMixedDispatch_0() throws Exception {
+	@SuppressWarnings("restriction")
+	@Test public void testMixedDispatch_0() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 
 				"package test; " + 

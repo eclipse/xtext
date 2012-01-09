@@ -8,16 +8,12 @@
 package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -28,14 +24,19 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -43,96 +44,111 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest implements IJavaProjectProvider {
 	
+	private static IProject project;
+
+	@BeforeClass
+	public static void setUpProject() throws Exception {
+		project = createPluginProject(PROJECT_NAME);
+	}
+
+	@AfterClass
+	public static void tearDownProject() throws Exception {
+		WorkbenchTestHelper.deleteProject(project);
+		project = null;
+	}
+	
 	@Override
-	public void testForLoop_02() throws Exception {
-		//TODO fails
+	@Ignore
+	@Test public void testForLoop_02() throws Exception {
+		super.testForLoop_02();
 	}
 
 	// all these test cases declared a local variable 'this' which is not allowed in Xtend
 	@Override
-	public void testForLoop_06() throws Exception {
+	@Test public void testForLoop_06() throws Exception {
 		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics()));
 	}
 	
 	@Override
-	public void testForLoop_07() throws Exception {
+	@Test public void testForLoop_07() throws Exception {
 		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, getKeywordsAndStatics()));
 	}
 	
 	@Override
-	public void testAfterVariableDeclaration_05() throws Exception {
+	@Test public void testAfterVariableDeclaration_05() throws Exception {
 		newBuilder().appendNl("var x = '';").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), VARIABLE_DECL));
 	}
 	
 	@Override
-	public void testAfterVariableDeclaration_06() throws Exception {
+	@Test public void testAfterVariableDeclaration_06() throws Exception {
 		newBuilder().appendNl("var x = '';").appendNl("var y = '';").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), VARIABLE_DECL));
 	}
 	
 	@Override
-	public void testAfterVariableDeclaration_07() throws Exception {
+	@Test public void testAfterVariableDeclaration_07() throws Exception {
 		newBuilder().appendNl("var x = ''").assertText(expect(new String[] {"x"}, getKeywordsAndStatics(), CAST_INSTANCEOF, VARIABLE_DECL, STRING_OPERATORS));
 	}
 	
 	@Override
-	public void testAfterVariableDeclaration_08() throws Exception {
+	@Test public void testAfterVariableDeclaration_08() throws Exception {
 		newBuilder().appendNl("var x = ''").appendNl("var y = ''").assertTextAtCursorPosition("var y", expect(new String[] {"x"}, getKeywordsAndStatics(), CAST_INSTANCEOF, VARIABLE_DECL, STRING_OPERATORS));
 	}
 	
 	@Override
-	public void testAfterVariableDeclaration_10() throws Exception {
+	@Test public void testAfterVariableDeclaration_10() throws Exception {
 		newBuilder().appendNl("var x = ''").appendNl("var y = ").assertText(expect(new String[] {"x"}, getKeywordsAndStatics()));
 	}
 	
-	public void testRichString_01() throws Exception {
+	@Test public void testRichString_01() throws Exception {
 		newBuilder().append("'''foobar'''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''foobar''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''foobar'").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''foobar").assertTextAtCursorPosition("foobar", "«»");
 	}
 	
-	public void testRichString_02() throws Exception {
+	@Test public void testRichString_02() throws Exception {
 		newBuilder().append("'''foobar«null»'''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''foobar«null»''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''foobar«null»'").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''foobar«null»").assertTextAtCursorPosition("foobar", "«»");
 	}
 	
-	public void testRichString_03() throws Exception {
+	@Test public void testRichString_03() throws Exception {
 		newBuilder().append("'''«null»zonkfoobar'''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''«null»zonkfoobar''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''«null»zonkfoobar'").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''«null»zonkfoobar").assertTextAtCursorPosition("foobar", "«»");
 	}
 	
-	public void testRichString_04() throws Exception {
+	@Test public void testRichString_04() throws Exception {
 		newBuilder().append("'''«null»zonkfoobar«null»'''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''«null»zonkfoobar«null»''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''«null»zonkfoobar«null»'").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''«null»zonkfoobar«null»").assertTextAtCursorPosition("foobar", "«»");
 	}
 	
-	public void testRichString_05() throws Exception {
+	@Test public void testRichString_05() throws Exception {
 		newBuilder().append("'''\n««« comment \nfoobar'''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''\n««« comment \nfoobar''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''\n««« comment \nfoobar'").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''\n««« comment \nfoobar").assertTextAtCursorPosition("foobar", "«»");
 	}
 	
-	public void testRichString_06() throws Exception {
+	@Test public void testRichString_06() throws Exception {
 		newBuilder().append("'''\n««« comment \nfoobar«null»'''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''\n««« comment \nfoobar«null»''").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''\n««« comment \nfoobar«null»'").assertTextAtCursorPosition("foobar", "«»");
 		newBuilder().append("'''\n««« comment \nfoobar«null»").assertTextAtCursorPosition("foobar", "«»");
 	}
 	
-	public void testRichString_07() throws Exception {
+	@Test public void testRichString_07() throws Exception {
 		newBuilder().append("'''\n««« comment foobar'''").assertTextAtCursorPosition("foobar");
 	}
 	
-	public void testRichString_08() throws Exception {
+	@Test public void testRichString_08() throws Exception {
 		newBuilder().append("'''\n««« comment foobar«null»'''").assertTextAtCursorPosition("foobar");
 	}
 	
@@ -201,7 +217,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
 			deleteProject(demandCreateProject);
 		super.tearDown();
@@ -245,25 +261,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		XtextResource result = super.getResourceFor(stream);
 		initializeTypeProvider(result);
 		return result;
-	}
-	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(ContentAssistTest.class)) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = createPluginProject(PROJECT_NAME);
-				
-			}
-			
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
 	}
 	
 	public static IProject createPluginProject(String name) throws CoreException {

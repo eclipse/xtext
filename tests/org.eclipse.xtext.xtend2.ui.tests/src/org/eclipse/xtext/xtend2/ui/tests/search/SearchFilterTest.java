@@ -12,8 +12,6 @@ import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import java.util.Iterator;
 
-import junit.framework.Test;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -22,6 +20,7 @@ import org.eclipse.xtext.xtend2.ui.search.Xtend2SearchFilter;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Test;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -31,10 +30,6 @@ import com.google.inject.Inject;
  */
 public class SearchFilterTest extends AbstractXtend2UITestCase {
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(SearchFilterTest.class);
-	}
-	
 	@Inject
 	protected WorkbenchTestHelper testHelper;
 	
@@ -48,12 +43,12 @@ public class SearchFilterTest extends AbstractXtend2UITestCase {
 	protected IQualifiedNameConverter converter;
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
 	}
 	
-	public void testSimpleFile() throws Exception {
+	@Test public void testSimpleFile() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
 				"package test\n" +
 				"class Foo {\n" +
@@ -64,7 +59,7 @@ public class SearchFilterTest extends AbstractXtend2UITestCase {
 		assertFalse(iterator.hasNext());
 	}
 	
-	public void testDispatchMethod() throws Exception {
+	@Test public void testDispatchMethod() throws Exception {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
 				"package test\n" +
 				"class Foo {\n" +

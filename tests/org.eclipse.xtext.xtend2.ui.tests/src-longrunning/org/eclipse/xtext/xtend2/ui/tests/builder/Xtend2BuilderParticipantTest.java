@@ -7,19 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.builder;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-
-import junit.framework.Test;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -34,17 +33,14 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(Xtend2BuilderParticipantTest.class);
-	}
-	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
 	}
 	
-	public void testBuild() throws Exception {
+	@SuppressWarnings("restriction")
+	@Test public void testBuild() throws Exception {
 		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
 		sourceFile.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
 		assertTrue(sourceFile.exists());

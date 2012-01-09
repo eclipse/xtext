@@ -14,6 +14,7 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +24,7 @@ public class PartitionTest extends AbstractXtend2UITestCase {
 	private XtextDocument document;
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		document = get(XtextDocument.class);
 		IDocumentPartitioner partitioner = get(IDocumentPartitioner.class);
@@ -32,12 +33,12 @@ public class PartitionTest extends AbstractXtend2UITestCase {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		document = null;
 		super.tearDown();
 	}
 	
-	public void testInitialPartitioning() {
+	@Test public void testInitialPartitioning() {
 		String input = "class SomeType {\n" + 
 				"	def someOperation() '''\n" + 
 				"		Dear,\n" + 
@@ -66,7 +67,7 @@ public class PartitionTest extends AbstractXtend2UITestCase {
 		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, third.getType());
 	}
 	
-	public void testPartitioningAfterModify_01() throws BadLocationException {
+	@Test public void testPartitioningAfterModify_01() throws BadLocationException {
 		String input = "class SomeType {\n" + 
 				"	def someOperation() '''\n" + 
 				"		Dear,\n" + 
@@ -100,7 +101,7 @@ public class PartitionTest extends AbstractXtend2UITestCase {
 		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, forth.getType());
 	}
 	
-	public void testPartitioningAfterModify_02() throws BadLocationException {
+	@Test public void testPartitioningAfterModify_02() throws BadLocationException {
 		String input = "class SomeType {\n" + 
 				"	def someOperation() '''\n" + 
 				"		Dear,\n" + 

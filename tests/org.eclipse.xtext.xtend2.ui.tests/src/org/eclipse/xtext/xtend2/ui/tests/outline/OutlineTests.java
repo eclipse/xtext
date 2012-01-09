@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.outline;
 
-import junit.framework.Test;
-
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
-import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.junit.Test;
 
 import com.google.inject.Inject;
 
@@ -21,10 +19,6 @@ import com.google.inject.Inject;
  */
 public class OutlineTests extends AbstractOutlineTests {
 
-	public static Test suite() {
-		return WorkbenchTestHelper.suite(OutlineTests.class);
-	}
-
 	@Inject 
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	
@@ -32,15 +26,15 @@ public class OutlineTests extends AbstractOutlineTests {
 	private OutlineFilterAndSorter sorter;
 	
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		setSorting(false);
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	public void tearDown() throws Exception {
 		setSorting(false);
+		super.tearDown();
 	}
 	
 	@Override
@@ -48,20 +42,20 @@ public class OutlineTests extends AbstractOutlineTests {
 		return sorter;
 	}
 	
-	public void testImport() throws Exception {
+	@Test public void testImport() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("import java.lang.* class Foo {}");
 		assertBuilder.numChildren(2).child(0, "import declarations").numChildren(1).child(0, "java.lang.*").numChildren(0);
 		assertBuilder.child(1, "Foo").numChildren(0);
 	}
 	
-	public void testDispatchMethod_1() throws Exception {
+	@Test public void testDispatchMethod_1() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def dispatch foo(String x) {''} def dispatch foo(Object y) {''} }");
 		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(Object) : String").numChildren(2);
 		dispatcher.child(0, "foo(String) : String").numChildren(0);
 		dispatcher.child(1, "foo(Object) : String").numChildren(0);
 	}
 	
-	public void testDispatchMethod_2() throws Exception {
+	@Test public void testDispatchMethod_2() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo {" +
 				" def dispatch foo(String x) {''}" +
 				" def dispatch foo(Object y) {''}" +
@@ -73,7 +67,7 @@ public class OutlineTests extends AbstractOutlineTests {
 		foo.child(1, "bar(Object) : String").numChildren(2);
 	}
 	
-	public void testMixedMethods_Order() throws Exception {
+	@Test public void testMixedMethods_Order() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo {" +
 				" def baz() {null}" +
 				" def dispatch foo(String x) {''}" +
@@ -95,7 +89,7 @@ public class OutlineTests extends AbstractOutlineTests {
 		foo.child(6, "ss : String").numChildren(0);
 	} 
 	
-	public void testMixmethods_Sorting() throws Exception {
+	@Test public void testMixmethods_Sorting() throws Exception {
 		setSorting(true);
 		AssertBuilder assertBuilder = newAssertBuilder("package test import java.lang.* class Foo {" +
 				" def baz() {null}" +

@@ -7,23 +7,42 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests;
 
-import junit.framework.TestCase;
-
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 import com.google.inject.Injector;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractXtend2UITestCase extends TestCase {
+@SuppressWarnings("restriction")
+public abstract class AbstractXtend2UITestCase extends Assert {
 
 	private static Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+	}
+	
+	@BeforeClass
+	public static void setUpProject() throws Exception {
+		IResourcesSetupUtil.cleanWorkspace();
+		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
+	}
+
+	@AfterClass
+	public static void tearDownProject() throws Exception {
+		IResourcesSetupUtil.cleanWorkspace();
 	}
 
 	public Injector getInjector() {

@@ -15,12 +15,6 @@ import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Set;
 
-import junit.extensions.TestSetup;
-import junit.framework.Assert;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -42,17 +36,18 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.junit.Assert;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -96,22 +91,22 @@ public class WorkbenchTestHelper extends Assert {
 			try {
 				file.delete(true, null);
 			} catch (Exception exc) {
-				exc.printStackTrace();
+				throw new RuntimeException(exc);
 			}
 		}
 		getFiles().clear();
-		IFolder binFolder = getProject().getFolder("bin");
+		IFolder binFolder = getProject(false).getFolder("bin");
 		if (binFolder.exists()) {
 			for (IResource binMember : binFolder.members()) {
 				try {
 					binMember.delete(IResource.DEPTH_INFINITE, null);
 				} catch (Exception exc) {
-					exc.printStackTrace();
+					throw new RuntimeException(exc);
 				}
 			}
 		}
 		if (isLazyCreatedProject) {
-			getProject().delete(true, null);
+			deleteProject(getProject(false));
 			isLazyCreatedProject = false;
 		} 
 	}
@@ -121,8 +116,12 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public IProject getProject() {
+		return getProject(true);
+	}
+	
+	protected IProject getProject(boolean createOnDemand) {
 		IProject project = workspace.getRoot().getProject(TESTPROJECT_NAME);
-		if (!project.exists()) {
+		if (createOnDemand && !project.exists()) {
 			try {
 				isLazyCreatedProject = true;
 				project = createPluginProject(TESTPROJECT_NAME);
@@ -160,7 +159,7 @@ public class WorkbenchTestHelper extends Assert {
 
 	protected String getFullFileName(String fileName) {
 		String extension = (fileName.indexOf(".") != -1) ? "" : "." + getFileExtension();
-		String fullFileName = TESTPROJECT_NAME + "/src/" + fileName + extension;
+		String fullFileName = getProject().getName() + "/src/" + fileName + extension;
 		return fullFileName;
 	}
 	
@@ -207,24 +206,6 @@ public class WorkbenchTestHelper extends Assert {
 		}
 	}
 
-	public static Test suite(Class<? extends TestCase> clazz) {
-		return new TestSetup(new TestSuite(clazz, clazz.getCanonicalName())) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = createPluginProject(TESTPROJECT_NAME);
-			}
-
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
-	}
-
 	public static IProject createPluginProject(String name) throws CoreException {
 		Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
@@ -247,10 +228,7 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static void deleteProject(IProject project) throws CoreException {
-		if (project.exists()) {
-			if (project.isOpen()) {
-				project.close(null);
-			}
+		if (project != null && project.exists()) {
 			project.delete(true, true, null);
 		}
 	}
@@ -273,10 +251,6 @@ public class WorkbenchTestHelper extends Assert {
 
 	protected IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
 		return workbench.getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), editorId);
-	}
-
-	public void setUp() {
-		getProject();
 	}
 
 }

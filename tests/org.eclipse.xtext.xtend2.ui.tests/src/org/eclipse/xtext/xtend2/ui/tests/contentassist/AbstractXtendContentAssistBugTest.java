@@ -1,14 +1,10 @@
 package org.eclipse.xtext.xtend2.ui.tests.contentassist;
 
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -18,10 +14,10 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.junit.util.ResourceLoadHelper;
+import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 
@@ -31,6 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractXtendContentAssistBugTest extends AbstractXtend2UITestCase implements IJavaProjectProvider, ResourceLoadHelper {
 
 	private IProject demandCreateProject;
@@ -39,19 +36,18 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtend2UI
 	private WorkbenchTestHelper testHelper;
 	
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
 			deleteProject(demandCreateProject);
 		super.tearDown();
 	}
 	
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
-		String projectName = getProjectName();
-		IJavaProject javaProject = findJavaProject(projectName);
+		IJavaProject javaProject = findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
 		if (javaProject == null || !javaProject.exists()) {
 			try {
-				demandCreateProject = WorkbenchTestHelper.createPluginProject(projectName);
-				javaProject = findJavaProject(projectName);
+				demandCreateProject = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
+				javaProject = findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
 			} catch (CoreException e) {
 				fail("cannot create java project due to: " + e.getMessage() + " / " + e);
 			}
@@ -59,10 +55,6 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtend2UI
 		return javaProject;
 	}
 
-	protected String getProjectName() {
-		return getClass().getSimpleName() + "Project";
-	}
-	
 	public XtextResource getResourceFor(InputStream stream) {
 		try {
 			XtextResourceSet set = get(XtextResourceSet.class);
@@ -92,24 +84,6 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtend2UI
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return new ContentAssistProcessorTestBuilder(getInjector(), this);
-	}
-	
-	public static Test createSuite(final Class<? extends AbstractXtendContentAssistBugTest> clazz) {
-		return new TestSetup(new TestSuite(clazz)) {
-			private IProject project;
-
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = WorkbenchTestHelper.createPluginProject(clazz.getSimpleName() + "Project");
-			}
-			
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
 	}
 	
 }
