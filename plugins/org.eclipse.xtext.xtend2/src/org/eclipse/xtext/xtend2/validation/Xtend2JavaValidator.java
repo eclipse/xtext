@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -75,6 +76,7 @@ import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.compiler.JavaUtils;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -148,6 +150,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
 	private XAnnotationUtil annotationUtil;
+	
+	@Inject 
+	private JavaUtils javaUtils;
 	
 	@Inject 
 	private UIStrings uiStrings;
@@ -1130,4 +1135,24 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
         if(concreteSyntaxFeatureName.equals(XbaseScopeProvider.THIS.toString()))
             error("Left-hand side of an assignment must be an variable", XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, LEFT_HAND_SIDE_MUST_BE_VARIABLE);
     }
+	
+	@Check
+	public void checkJavaKeywordConflict(XtendField member) {
+		checkNoJavaKeyword(member, Xtend2Package.Literals.XTEND_FIELD__NAME);
+	}
+	@Check
+	public void checkJavaKeywordConflict(XtendFunction member) {
+		checkNoJavaKeyword(member, Xtend2Package.Literals.XTEND_FUNCTION__NAME);
+	}
+	@Check
+	public void checkJavaKeywordConflict(XtendClass member) {
+		checkNoJavaKeyword(member, Xtend2Package.Literals.XTEND_CLASS__NAME);
+	}
+	protected void checkNoJavaKeyword(EObject obj, EAttribute attribute) {
+		Object name = obj.eGet(attribute);
+		if (name != null) {
+			if (javaUtils.isJavaKeyword(name.toString()))
+				error("'"+name+"' is not a valid identifier.", obj, attribute, -1, INVALID_IDENTIFIER);
+		}
+	}
 }
