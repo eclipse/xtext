@@ -22,14 +22,15 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class GrammarTest extends AbstractXtextTests {
 
-	public void testExampleGrammar() throws Exception {
+	@Test public void testExampleGrammar() throws Exception {
 		with(Ecore2XtextTestStandaloneSetup.class);
 		Grammar grammar = getGrammarAccess().getGrammar();
 		EList<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();

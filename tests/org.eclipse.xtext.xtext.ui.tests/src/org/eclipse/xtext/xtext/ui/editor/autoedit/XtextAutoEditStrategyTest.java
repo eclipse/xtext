@@ -7,13 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
-import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.util.Collections;
-
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -21,17 +17,21 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
+import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.autoedit.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.google.inject.Injector;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTest {
 	private static final String SAMPLE_HEADER = "grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals\ngenerate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n";
 	private static final String TESTPROJECT_NAME = "autoedit";
@@ -45,6 +45,18 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 	@Override
 	protected String getEditorId() {
 		return "org.eclipse.xtext.Xtext";
+	}
+	
+	private static IProject project;
+	
+	@BeforeClass
+	public static void setUpProject() throws Exception {
+		project = createPluginProject(TESTPROJECT_NAME);
+	}
+	
+	@AfterClass
+	public static void tearDownProject() throws Exception {
+		deleteProject(project);
 	}
 
 	@Override
@@ -60,8 +72,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		return editor;
 	}
 
-	@Override
-	public void testParenthesis_9() throws Exception {
+	@Test public void testParenthesis___01() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting|: 'Hello' name=ID'!';");
 		pressKey(editor, '(');
 		assertState(SAMPLE_HEADER + "Greeting(|): 'Hello' name=ID'!';", editor);
@@ -69,8 +80,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		assertState(SAMPLE_HEADER + "Greeting|: 'Hello' name=ID'!';", editor);
 	}
 
-	@Override
-	public void testParenthesis_10() throws Exception {
+	@Test public void testParenthesis___02() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'|;");
 		pressKey(editor, '(');
 		assertState(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'(|);", editor);
@@ -78,7 +88,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		assertState(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'|;", editor);
 	}
 
-	public void testParenthesis_11() throws Exception {
+	@Test public void testParenthesis___03() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting:| 'Hello' name=ID'!';");
 		pressKey(editor, '(');
 		assertState(SAMPLE_HEADER + "Greeting:(|) 'Hello' name=ID'!';", editor);
@@ -86,7 +96,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		assertState(SAMPLE_HEADER + "Greeting:| 'Hello' name=ID'!';", editor);
 	}
 
-	public void testBug338838() throws Exception {
+	@Test public void testBug338838() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + 
 				"Statemachine:\n" + 
 				"    {Statemachine}\n" + 
@@ -100,7 +110,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				";", editor);
 	}
 	
-	public void testBug335634_04() throws Exception {
+	@Test public void testBug335634_04() throws Exception {
 		XtextEditor editor = openEditor(
 				"// ML_COMMENT PATTERN: '/ *' '/'* ( !('*' '/') !'*' '/' '*' !'/')* '*'+ '/'\n" + 
 				"//|");
@@ -110,7 +120,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				"//\n|", editor);
 	}
 	
-	public void testBug346032_00() throws Exception {
+	@Test public void testBug346032_00() throws Exception {
 		XtextEditor editor = openEditor(
 				"grammar foo\n" +
 				"generate foo 'foo' as foo" + 
@@ -122,7 +132,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 
-	public void testBug346032_01() throws Exception {
+	@Test public void testBug346032_01() throws Exception {
 		XtextEditor editor = openEditor(
 				"grammar foo\n" +
 				"generate foo 'foo' as foo" + 
@@ -134,7 +144,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 	
-	public void testBug346032_02() throws Exception {
+	@Test public void testBug346032_02() throws Exception {
 		XtextEditor editor = openEditor(
 				"grammar foo\n" +
 				"generate foo 'foo' as foo" + 
@@ -146,7 +156,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 	
-	public void testBug346032_03() throws Exception {
+	@Test public void testBug346032_03() throws Exception {
 		XtextEditor editor = openEditor(
 				"grammar foo\n" +
 				"generate foo 'foo' as foo" + 
@@ -158,7 +168,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 	
-	public void testBug346032_04() throws Exception {
+	@Test public void testBug346032_04() throws Exception {
 		XtextEditor editor = openEditor(
 				"grammar foo\n" +
 				"generate foo 'foo' as foo" + 
@@ -172,7 +182,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				editor);
 	}
 	
-	public void testBug346032_05() throws Exception {
+	@Test public void testBug346032_05() throws Exception {
 		XtextEditor editor = openEditor(
 				"grammar foo\n" +
 				"generate foo 'foo' as foo" + 
@@ -185,7 +195,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		autoEditTestProject = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
 		if (!autoEditTestProject.exists())
@@ -209,21 +219,4 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		return result;
 	}
 	
-	public static Test suite() {
-		return new TestSetup(new TestSuite(XtextAutoEditStrategyTest.class, XtextAutoEditStrategyTest.class.getCanonicalName())) {
-			private IProject project;
-			
-			@Override
-			protected void setUp() throws Exception {
-				super.setUp();
-				project = createPluginProject(TESTPROJECT_NAME);
-			}
-			@Override
-			protected void tearDown() throws Exception {
-				deleteProject(project);
-				super.tearDown();
-			}
-		};
-	}
-
 }
