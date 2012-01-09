@@ -3,7 +3,7 @@ package org.eclipse.xtext.junit4.parameterized;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.junit4.InjectWith;
