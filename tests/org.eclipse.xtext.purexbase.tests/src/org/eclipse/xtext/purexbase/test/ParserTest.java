@@ -1,6 +1,6 @@
 package org.eclipse.xtext.purexbase.test;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;

@@ -3,8 +3,8 @@
 */
 package org.eclipse.xtext.purexbase;
 
-import org.eclipse.xtext.junit.GlobalRegistries;
-import org.eclipse.xtext.junit.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.junit4.GlobalRegistries;
+import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
