@@ -82,7 +82,7 @@
 
 	<target name="publish.build">
 		<fail message="build.root property must be defined" unless="build.root" />
-		<property file="${publisher.properties.file.name}" />
+		<property file="${build.root}/${publisher.properties.file.name}" />
 		<property name="property.file.location" location="${build.root}/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
 
@@ -118,6 +118,8 @@
 			</syspropertyset>
 			<arg value="-data" />
 			<arg value="${publisher.workspace}" />
+			<arg value="-configuration" />
+			<arg value="${publisher.workspace}/configuration" />
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
 			<arg value="-buildfile" />
@@ -152,8 +154,8 @@
 				</not>
 			</condition>
 		</fail>
-		<property file="${publisher.properties.file.name}" />
 		<fail message="build.root property must be defined" unless="build.root" />
+		<property file="${build.root}/${publisher.properties.file.name}" />
 		<fail message="downloads.area property must be defined" unless="downloads.area" />
 
 		<!-- defaults -->
