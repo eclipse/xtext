@@ -76,7 +76,7 @@ import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.eclipse.xtext.xbase.compiler.JavaUtils;
+import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -152,7 +152,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	private XAnnotationUtil annotationUtil;
 	
 	@Inject 
-	private JavaUtils javaUtils;
+	private JavaKeywords javaUtils;
 	
 	@Inject 
 	private UIStrings uiStrings;
