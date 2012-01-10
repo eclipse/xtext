@@ -173,16 +173,14 @@
 	</target>
 
 	<target name="publish" unless="alreadyPromoted">
+
+		<echo>Remove old  nightly builds</echo>
+		<antcall target="-cleanup.nightly">
+			<param name="working_dir" value="${downloads.area}/downloads/drops/${version}/" />
+		</antcall>
+
 		<!-- will fail if already exists -->
 		<mkdir dir="${build.drop.directory}" />
-
-		<echo>Remove existing nightly builds</echo>
-		<delete verbose="true">
-			<fileset dir="${downloads.area}/downloads/drops/${version}/">
-				<type type="dir" />
-				<include name="N*" />
-			</fileset>
-		</delete>
 
 		<!-- copy zip packages -->
 		<copy todir="${build.drop.directory}">
@@ -242,6 +240,56 @@
 		<antcall target="-publish.build.repository" inheritall="true" />
 	</target>
 
+
+	<target name="-cleanup.nightly" if="working_dir">
+		<property name="delete_pattern" value="N*" />
+		<property name="keep_count" value="4" />
+		<echo>Keep ${keep_count} recent builds</echo>
+		<dirset id="all.children.dirset" dir="${working_dir}" includes="${delete_pattern}" />
+
+		<!-- add keep_count newest (sorted by name) folderst to delete.dirs.res_id resources collection -->
+		<difference id="delete.dirs.res_id">
+			<resources>
+				<dirset refid="all.children.dirset" />
+			</resources>
+			<resources>
+				<first count="${keep_count}">
+					<sort>
+						<dirset refid="all.children.dirset" />
+						<name />
+					</sort>
+				</first>
+			</resources>
+		</difference>
+
+		<!-- keep only last segment (flatten),
+		convert to comma separated string with trailing slash (regexpmapper)
+		 N201101012335/,N201101012336/-->
+		<pathconvert property="delete.dirs.path" pathsep="," refid="delete.dirs.res_id">
+			<chainedmapper>
+				<flattenmapper />
+				<regexpmapper from="^(.*)$$" to="\1/" />
+			</chainedmapper>
+		</pathconvert>
+
+		<condition property="hasFoldersToDelete" value="true">
+			<not>
+				<equals arg1="${delete.dirs.path}" arg2="" />
+			</not>
+		</condition>
+		<echo>Has folders to delete: ${hasFoldersToDelete}</echo>
+		<antcall target="-doDelete" inheritall="true" inheritrefs="true" />
+	</target>
+
+	<!-- recursive delete folders -->
+	<target name="-doDelete" if="hasFoldersToDelete">
+		<echo>Deleting: ${delete.dirs.path}</echo>
+		<delete includeemptydirs="true" verbose="true">
+			<fileset dir="${working_dir}" includes="${delete.dirs.path}" />
+		</delete>
+	</target>
+
+
 	<target name="-publish.build.repository" if="composite.repository.base">
 
 		<property name="composite.repository.directory" location="${downloads.area}/updates/${composite.repository.base}" />
@@ -252,7 +300,7 @@
 		 -->
 		<property name="build.repository.directory" location="${composite.repository.directory}" />
 
-		<deltree dir="${build.repository.directory}" />
+		<delete dir="${build.repository.directory}" />
 
 		<unzip dest="${build.repository.directory}">
 			<fileset dir="${packages.directory}">
