@@ -1004,9 +1004,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		if (containerCase.getTypeGuard() != null) {
 			XSwitchExpression containerSwitch = (XSwitchExpression) containerCase.eContainer();
 			XExpression switchExpression = containerSwitch.getSwitch();
-			if (call.getFeature() == containerSwitch
-					|| (switchExpression instanceof XFeatureCall && ((XFeatureCall) switchExpression).getFeature() == call
-							.getFeature()))
+			JvmIdentifiableElement calledFeature = getFeature(call);
+			if (calledFeature == containerSwitch
+					|| (switchExpression instanceof XFeatureCall && getFeature((XFeatureCall) switchExpression) == calledFeature))
 				return containerCase;
 		}
 		return findTypeGuardedXCasePartContainer(containerCase.eContainer(), call);
