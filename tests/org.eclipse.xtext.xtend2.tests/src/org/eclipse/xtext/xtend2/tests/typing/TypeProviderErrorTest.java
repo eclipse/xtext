@@ -169,6 +169,32 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		}
 	}
 	
+	@Test public void testNoException_08() throws Exception {
+		XtendFile file = file(
+				"import org.eclipse.emf.ecore.EReference\n" + 
+				"import org.eclipse.emf.ecore.EPackage\n" +
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"import org.eclipse.xtext.resource.EObjectDescription\n" +
+				"class Foo  {\n" + 
+				"	def doStuff(EObject context, EReference reference) {\n" + 
+				"		switch (context) {\n" + 
+				"			EPackage: {\n" + 
+				" 				val descriptions = (context as EPackage).EClassifiers.map(c|EObjectDescription::create(null, c))\n" + 
+				" 			}\n" + 
+				" 		}\n" + 
+				"		return null\n" + 
+				"	}" +
+				"}");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getCommonReturnType(expression, true);
+			}
+		}
+	}
+	
 	@Override
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		if (validate)
