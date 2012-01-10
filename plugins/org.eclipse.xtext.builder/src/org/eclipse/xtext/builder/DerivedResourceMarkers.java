@@ -44,7 +44,33 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 	
 	@Inject
 	private GeneratorIdProvider generatorIdProvider;
-
+	
+	public List<IMarker> findGeneratorMarkers(IContainer container) throws CoreException {
+		return findGeneratorMarkers(container, generatorIdProvider.getGeneratorIdentifier());
+	}
+	
+	public List<IMarker> findGeneratorMarkers(IContainer container, String generator) throws CoreException {
+		List<IMarker> result = newArrayList();
+		if (!container.exists())
+			return result;
+		IMarker[] markers = container.findMarkers(MARKER_ID, true, IResource.DEPTH_INFINITE);
+		for (IMarker marker : markers) {
+			if (generator.equals(marker.getAttribute(ATTR_GENERATOR)))
+				result.add(marker);
+		}
+		return result;
+	}
+	
+	public List<IFile> findDerivedResources(List<IMarker> generatorMarkers, String source) throws CoreException {
+		List<IFile> result = newArrayList();
+		for (IMarker marker : generatorMarkers) {
+			if (marker.exists() && (source == null || source.equals(marker.getAttribute(ATTR_SOURCE)))) {
+				result.add((IFile)marker.getResource());
+			}
+		}
+		return result;
+	}
+	
 	public List<IFile> findDerivedResources(IContainer container, String source) throws CoreException {
 		return findDerivedResources(container,generatorIdProvider.getGeneratorIdentifier(), source);
 	}

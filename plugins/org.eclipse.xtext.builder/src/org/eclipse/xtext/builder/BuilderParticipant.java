@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
@@ -100,7 +101,13 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (!isEnabled(context)) {
 			return;
 		}
-		final int numberOfDeltas = context.getDeltas().size();
+		
+        final List<IResourceDescription.Delta> deltas = getRelevantDeltas(context);
+        if (deltas.isEmpty()) {
+            return;
+        }
+
+		final int numberOfDeltas = deltas.size();
 		
 		// monitor handling
 		if (monitor.isCanceled())
@@ -121,8 +128,16 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
 		}
+		
+        Map<OutputConfiguration, List<IMarker>> generatorMarkers = newHashMap();
+        for (OutputConfiguration config : outputConfigurations.values()) {
+            if (config.isCleanUpDerivedResources()) {
+                generatorMarkers.put(config, derivedResourceMarkers.findGeneratorMarkers(builtProject.getFolder(config.getOutputDirectory())));
+            }
+        }
+		
 		for (int i = 0 ; i < numberOfDeltas ; i++) {
-			final IResourceDescription.Delta delta = context.getDeltas().get(i);
+			final IResourceDescription.Delta delta = deltas.get(i);
 			
 			// monitor handling
 			if (subMonitor.isCanceled())
@@ -134,7 +149,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
 				if (config.isCleanUpDerivedResources()) {
-					List<IFile> resources = derivedResourceMarkers.findDerivedResources(builtProject.getFolder(config.getOutputDirectory()), uri);
+                    List<IFile> resources = derivedResourceMarkers.findDerivedResources(generatorMarkers.get(config), uri);
 					derivedResources.addAll(resources);
 				}
 			}
@@ -185,6 +200,15 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		return builderPreferenceAccess.isAutoBuildEnabled(context.getBuiltProject());
 	}
 	
+    protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
+        List<IResourceDescription.Delta> result = newArrayList();
+        for (IResourceDescription.Delta delta : context.getDeltas()) {
+            if (resourceServiceProvider.canHandle(delta.getUri()))
+                result.add(delta);
+        }
+        return result;
+    }
+	
 	protected void refreshOutputFolders(IBuildContext ctx, Map<String, OutputConfiguration> outputConfigurations, IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, outputConfigurations.size());
 		for (OutputConfiguration config : outputConfigurations.values()) {
@@ -214,8 +238,6 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 	
 	protected void handleChangedContents(Delta delta, IBuildContext context, EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
-		if (!resourceServiceProvider.canHandle(delta.getUri()))
-			return;
 		// TODO: we will run out of memory here if the number of deltas is large enough
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
