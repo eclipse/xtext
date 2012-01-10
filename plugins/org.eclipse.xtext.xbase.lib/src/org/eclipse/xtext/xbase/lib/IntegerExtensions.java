@@ -18,20 +18,17 @@ import java.util.Iterator;
 public class IntegerExtensions {
 	
 	/**
-	 * The <code>upTo</code> operator yields an iterable of integral numbers from {@code a} up to {@code b} if {@code b}
-	 * is larger than {@code a} or otherwise from {@code a} down to {@code b}.
+	 * The <code>upTo</code> operator yields an iterable of integral numbers from and including {@code a} up to and including {@code b} if {@code b}
+	 * is larger than {@code a} or otherwise from {@code a} down to {@code b}. If {@code a} == {@code b} the iterable returns just one element.
 	 * 
 	 * @param a
-	 *            an integer. May not be <code>null</code>.
 	 * @param b
-	 *            a number. May not be <code>null</code>.
 	 * @return an iterable of integral numbers. Never <code>null</code>.
 	 */
-	public static Iterable<Integer> operator_upTo(final int a, int b) {
-		final int upTo = b + 1;
+	public static Iterable<Integer> operator_upTo(final int a, final int b) {
 		return new Iterable<Integer>() {
 			public Iterator<Integer> iterator() {
-				return new IntIterator(a, upTo);
+				return new IntIterator(a, b);
 			}
 		};
 	}
@@ -137,13 +134,13 @@ public class IntegerExtensions {
 		private boolean increases;
 
 		/**
-		 * Creates a new {@link IntIterator} from {@code start} to {@code upTo}. The iterator will iterator backwards if
+		 * Creates a new {@link IntIterator} from {@code start} to {@code upTo}. The iterator will iterate backwards if
 		 * upTo is smaller than the start index.
 		 * 
 		 * @param start
 		 *            the start value (inclusive).
 		 * @param upTo
-		 *            the end value (exclusive).
+		 *            the end value (inclusive).
 		 * 
 		 */
 		protected IntIterator(int start, int upTo) {
@@ -155,9 +152,9 @@ public class IntegerExtensions {
 
 		public boolean hasNext() {
 			if (increases)
-				return current < upTo;
+				return current <= upTo;
 			else
-				return current > upTo;
+				return current >= upTo;
 		}
 
 		public Integer next() {
