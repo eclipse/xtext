@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
+import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -11,8 +12,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class Xtend2CompilerTest extends AbstractXtend2TestCase {
@@ -1855,6 +1854,107 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private File baz;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNoDeclarationForFeatureCalls() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private static String FOO = \"Holla\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private String baz = FOO;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private static String FOO = \"Holla\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String baz = Foo.FOO;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testNoDeclarationForFeatureCalls_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private static String FOO = \"Holla\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private String foo = \"Holla\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void test(String x, String y, int integer) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Foo().test(foo, FOO, Integer::MAX_VALUE)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private static String FOO = \"Holla\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String foo = \"Holla\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void test(final String x, final String y, final int integer) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Foo _foo = new Foo();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

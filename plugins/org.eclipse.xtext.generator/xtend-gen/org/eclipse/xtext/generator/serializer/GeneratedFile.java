@@ -26,8 +26,7 @@ public class GeneratedFile {
   }
   
   public String getQualifiedName() {
-    Grammar _grammar = this.grammar;
-    String _qualifiedName = this.getQualifiedName(_grammar);
+    String _qualifiedName = this.getQualifiedName(this.grammar);
     return _qualifiedName;
   }
   

@@ -28,8 +28,7 @@ public class SemanticSequencer extends GeneratedFile {
     String _simpleName = this.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append(" extends ");
-    AbstractSemanticSequencer _sequencer = this.sequencer;
-    String _simpleName_1 = _sequencer.getSimpleName();
+    String _simpleName_1 = this.sequencer.getSimpleName();
     _builder.append(_simpleName_1, "");
     _builder.append(" {");
     _builder.newLineIfNotEmpty();

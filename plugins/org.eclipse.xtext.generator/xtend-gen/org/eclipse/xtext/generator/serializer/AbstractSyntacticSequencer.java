@@ -72,15 +72,13 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("protected ");
-      Grammar _grammar = this.grammar;
-      String _gaFQName = this.grammarAccess.gaFQName(_grammar);
+      String _gaFQName = this.grammarAccess.gaFQName(this.grammar);
       String _imported = file.imported(_gaFQName);
       _builder.append(_imported, "	");
       _builder.append(" grammarAccess;");
       _builder.newLineIfNotEmpty();
       {
-        SyntacticSequencerUtil _util = this.util;
-        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = _util.getAllAmbiguousTransitionsBySyntax();
+        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
         for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
           _builder.append("\t");
           _builder.append("protected ");
@@ -103,15 +101,13 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("grammarAccess = (");
-      Grammar _grammar_1 = this.grammar;
-      String _gaFQName_1 = this.grammarAccess.gaFQName(_grammar_1);
+      String _gaFQName_1 = this.grammarAccess.gaFQName(this.grammar);
       String _imported_2 = file.imported(_gaFQName_1);
       _builder.append(_imported_2, "		");
       _builder.append(") access;");
       _builder.newLineIfNotEmpty();
       {
-        SyntacticSequencerUtil _util_1 = this.util;
-        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_1 = _util_1.getAllAmbiguousTransitionsBySyntax();
+        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
         for(final Pair<String,AbstractElementAlias> group_1 : _allAmbiguousTransitionsBySyntax_1) {
           _builder.append("\t\t");
           _builder.append("match_");
@@ -153,8 +149,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        SyntacticSequencerUtil _util_2 = this.util;
-        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_2 = _util_2.getAllAmbiguousTransitionsBySyntax();
+        List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
         for(final Pair<String,AbstractElementAlias> group_2 : _allAmbiguousTransitionsBySyntax_2) {
           _builder.append("\t");
           _builder.append("/**");
@@ -206,8 +201,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   public List<AbstractRule> unassignedCalledTokenRules() {
     List<AbstractRule> _xblockexpression = null;
     {
-      Grammar _grammar = this.grammar;
-      List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar);
+      List<AbstractRule> _allRules = GrammarUtil.allRules(this.grammar);
       final Function1<AbstractRule,Boolean> _function = new Function1<AbstractRule,Boolean>() {
           public Boolean apply(final AbstractRule e) {
             boolean _isEObjectRule = GrammarUtil.isEObjectRule(e);
@@ -436,8 +430,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     int i = 0;
     _builder.newLineIfNotEmpty();
     {
-      SyntacticSequencerUtil _util = this.util;
-      List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = _util.getAllAmbiguousTransitionsBySyntax();
+      List<Pair<String,AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
       for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {

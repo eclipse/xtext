@@ -1,12 +1,10 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-
-import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class Case_5 {

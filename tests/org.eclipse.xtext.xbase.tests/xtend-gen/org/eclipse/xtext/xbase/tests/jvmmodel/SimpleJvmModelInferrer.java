@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -15,8 +16,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-
-import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class SimpleJvmModelInferrer implements IJvmModelInferrer {

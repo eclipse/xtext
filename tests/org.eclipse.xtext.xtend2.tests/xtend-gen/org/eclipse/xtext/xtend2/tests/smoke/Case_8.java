@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -12,8 +13,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-
-import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class Case_8 {

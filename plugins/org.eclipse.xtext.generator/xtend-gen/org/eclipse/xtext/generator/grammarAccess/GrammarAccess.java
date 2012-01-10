@@ -79,8 +79,7 @@ public class GrammarAccess {
    * @return the GrammarAccess' full qualified Java class name
    */
   public String gaFQName(final Grammar grammar) {
-    Naming _naming = this.naming;
-    String _grammarAccessFQName = GrammarAccessUtil.getGrammarAccessFQName(grammar, _naming);
+    String _grammarAccessFQName = GrammarAccessUtil.getGrammarAccessFQName(grammar, this.naming);
     return _grammarAccessFQName;
   }
   
@@ -91,9 +90,8 @@ public class GrammarAccess {
    * @return the GrammarAccess' simple class name
    */
   public String gaSimpleName(final Grammar grammar) {
-    Naming _naming = this.naming;
     String _gaFQName = this.gaFQName(grammar);
-    String _simpleName = _naming.toSimpleName(_gaFQName);
+    String _simpleName = this.naming.toSimpleName(_gaFQName);
     return _simpleName;
   }
   

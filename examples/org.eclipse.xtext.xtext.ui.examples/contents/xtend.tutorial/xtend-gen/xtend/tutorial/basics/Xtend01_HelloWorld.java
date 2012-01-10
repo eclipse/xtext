@@ -1,6 +1,5 @@
 package xtend.tutorial.basics;
 
-import java.io.PrintStream;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -37,9 +36,8 @@ public class Xtend01_HelloWorld extends TestCase {
    * Prints hello world to System.out.
    */
   public void sayHelloToSystemOut(final String to) {
-    PrintStream _out = System.out;
     String _sayHelloTo = this.sayHelloTo(to);
-    _out.println(_sayHelloTo);
+    System.out.println(_sayHelloTo);
   }
   
   /**

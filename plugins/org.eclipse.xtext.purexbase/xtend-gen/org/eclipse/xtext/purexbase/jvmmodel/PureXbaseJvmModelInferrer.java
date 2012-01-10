@@ -65,8 +65,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
               JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(e, java.lang.SuppressWarnings.class, "all");
               CollectionExtensions.<JvmAnnotationReference>operator_add(_annotations, _annotation);
               EList<JvmMember> _members = it.getMembers();
-              Class<Void> _TYPE = Void.TYPE;
-              JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, _TYPE);
+              JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
               final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                   public void apply(final JvmOperation it) {
                     {
@@ -161,8 +160,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   }
   
   public boolean containsReturn(final XExpression expr) {
-      IEarlyExitComputer _computer = this.computer;
-      Collection<ExitPoint> _exitPoints = _computer.getExitPoints(((XExpression) expr));
+      Collection<ExitPoint> _exitPoints = this.computer.getExitPoints(((XExpression) expr));
       final Collection<ExitPoint> exitPoints = _exitPoints;
       for (final ExitPoint point : exitPoints) {
         XExpression _expression = point.getExpression();
@@ -177,10 +175,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t", "\n");
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       appendable.increaseIndentation();
-      XbaseCompiler _compiler = this.compiler;
-      Class<Void> _TYPE = Void.TYPE;
-      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, _TYPE);
-      _compiler.compile(obj, appendable, _newTypeRef);
+      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
+      this.compiler.compile(obj, appendable, _newTypeRef);
       String _string = appendable.toString();
       return _string;
   }

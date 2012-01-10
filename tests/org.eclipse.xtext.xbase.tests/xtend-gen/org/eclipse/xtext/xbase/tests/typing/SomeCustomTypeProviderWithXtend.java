@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.tests.typing;
 
+import com.google.inject.Singleton;
 import java.util.Arrays;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -44,8 +44,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
-
-import com.google.inject.Singleton;
 
 @SuppressWarnings("all")
 @Singleton

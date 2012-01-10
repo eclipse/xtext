@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xtend2.tests.smoke;
 
 import java.util.ArrayList;
-
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;

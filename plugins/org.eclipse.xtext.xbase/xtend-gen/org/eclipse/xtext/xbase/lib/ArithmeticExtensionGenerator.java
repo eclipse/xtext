@@ -37,31 +37,14 @@ public class ArithmeticExtensionGenerator {
   
   private List<QualifiedName> comparators = new Function0<List<QualifiedName>>() {
     public List<QualifiedName> apply() {
-      QualifiedName _LESS_THAN = OperatorMapping.LESS_THAN;
-      QualifiedName _LESS_EQUALS_THAN = OperatorMapping.LESS_EQUALS_THAN;
-      QualifiedName _GREATER_THAN = OperatorMapping.GREATER_THAN;
-      QualifiedName _GREATER_EQUALS_THAN = OperatorMapping.GREATER_EQUALS_THAN;
-      QualifiedName _EQUALS = OperatorMapping.EQUALS;
-      QualifiedName _NOT_EQUALS = OperatorMapping.NOT_EQUALS;
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(_LESS_THAN, _LESS_EQUALS_THAN, _GREATER_THAN, _GREATER_EQUALS_THAN, _EQUALS, _NOT_EQUALS);
+      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
       return _newArrayList;
     }
   }.apply();
   
   private List<QualifiedName> operators = new Function0<List<QualifiedName>>() {
     public List<QualifiedName> apply() {
-      QualifiedName _PLUS = OperatorMapping.PLUS;
-      QualifiedName _MINUS = OperatorMapping.MINUS;
-      QualifiedName _MULTIPLY = OperatorMapping.MULTIPLY;
-      QualifiedName _DIVIDE = OperatorMapping.DIVIDE;
-      QualifiedName _MODULO = OperatorMapping.MODULO;
-      QualifiedName _LESS_THAN = OperatorMapping.LESS_THAN;
-      QualifiedName _LESS_EQUALS_THAN = OperatorMapping.LESS_EQUALS_THAN;
-      QualifiedName _GREATER_THAN = OperatorMapping.GREATER_THAN;
-      QualifiedName _GREATER_EQUALS_THAN = OperatorMapping.GREATER_EQUALS_THAN;
-      QualifiedName _EQUALS = OperatorMapping.EQUALS;
-      QualifiedName _NOT_EQUALS = OperatorMapping.NOT_EQUALS;
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(_PLUS, _MINUS, _MULTIPLY, _DIVIDE, _MODULO, _LESS_THAN, _LESS_EQUALS_THAN, _GREATER_THAN, _GREATER_EQUALS_THAN, _EQUALS, _NOT_EQUALS);
+      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.PLUS, OperatorMapping.MINUS, OperatorMapping.MULTIPLY, OperatorMapping.DIVIDE, OperatorMapping.MODULO, OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
       return _newArrayList;
     }
   }.apply();
@@ -75,8 +58,7 @@ public class ArithmeticExtensionGenerator {
         final String path = "../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/";
         File _file = new File(path);
         _file.mkdirs();
-        List<String> _types = this.types;
-        for (final String type : _types) {
+        for (final String type : this.types) {
           {
             String _className = this.className(type);
             String _operator_plus = StringExtensions.operator_plus(path, _className);
@@ -215,12 +197,10 @@ public class ArithmeticExtensionGenerator {
     _builder.append("*/");
     _builder.newLine();
     _builder.append("public static ");
-    QualifiedName _MINUS = OperatorMapping.MINUS;
-    String _returnType = this.returnType(type, _MINUS, type);
+    String _returnType = this.returnType(type, OperatorMapping.MINUS, type);
     _builder.append(_returnType, "");
     _builder.append(" ");
-    QualifiedName _MINUS_1 = OperatorMapping.MINUS;
-    QualifiedName _methodName = this._operatorMapping.getMethodName(_MINUS_1);
+    QualifiedName _methodName = this._operatorMapping.getMethodName(OperatorMapping.MINUS);
     _builder.append(_methodName, "");
     _builder.append("(");
     _builder.append(type, "");
@@ -233,8 +213,7 @@ public class ArithmeticExtensionGenerator {
     _builder.newLine();
     _builder.newLine();
     {
-      List<String> _types = this.types;
-      for(final String other : _types) {
+      for(final String other : this.types) {
         CharSequence _generateOperations = this.generateOperations(type, other);
         _builder.append(_generateOperations, "");
         _builder.newLineIfNotEmpty();
@@ -249,8 +228,7 @@ public class ArithmeticExtensionGenerator {
   public CharSequence generateOperations(final String op1, final String op2) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      List<QualifiedName> _operators = this.operators;
-      for(final QualifiedName operator : _operators) {
+      for(final QualifiedName operator : this.operators) {
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
@@ -353,8 +331,7 @@ public class ArithmeticExtensionGenerator {
     _builder.append("*/");
     _builder.newLine();
     _builder.append("public static double ");
-    QualifiedName _POWER = OperatorMapping.POWER;
-    QualifiedName _methodName_2 = this._operatorMapping.getMethodName(_POWER);
+    QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.POWER);
     _builder.append(_methodName_2, "");
     _builder.append("(");
     _builder.append(op1, "");
@@ -376,8 +353,7 @@ public class ArithmeticExtensionGenerator {
    */
   public String returnType(final String o1, final QualifiedName operator, final String o2) {
     String _xifexpression = null;
-    List<QualifiedName> _comparators = this.comparators;
-    boolean _contains = _comparators.contains(operator);
+    boolean _contains = this.comparators.contains(operator);
     if (_contains) {
       _xifexpression = "boolean";
     } else {

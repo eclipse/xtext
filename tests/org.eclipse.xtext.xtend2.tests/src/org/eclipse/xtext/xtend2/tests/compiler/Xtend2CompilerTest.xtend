@@ -931,6 +931,58 @@ class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			}
 		''')
 	}
+	
+	@Test
+	def testNoDeclarationForFeatureCalls() {
+		assertCompilesTo('''
+			package foo;
+			
+			public class Foo {
+				private static String FOO = "Holla";
+				
+				private String baz = FOO;
+			}
+		''', '''
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private static String FOO = "Holla";
+			  
+			  private String baz = Foo.FOO;
+			}
+		''')
+	}
+	
+	@Test
+	def testNoDeclarationForFeatureCalls_02() {
+		assertCompilesTo('''
+			package foo;
+			
+			public class Foo {
+				private static String FOO = "Holla";
+				private String foo = "Holla";
+				
+				def void test(String x, String y, int integer) {
+					new Foo().test(foo, FOO, Integer::MAX_VALUE)
+				}
+			}
+		''', '''
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private static String FOO = "Holla";
+			  
+			  private String foo = "Holla";
+			  
+			  public void test(final String x, final String y, final int integer) {
+			    Foo _foo = new Foo();
+			    _foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);
+			  }
+			}
+		''')
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
