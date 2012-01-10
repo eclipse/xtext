@@ -57,7 +57,7 @@ public abstract class AbstractXbaseCompiler {
 	private TypeReferenceSerializer referenceSerializer;
 	
 	@Inject
-	private JavaUtils javaUtils;
+	private JavaKeywords javaUtils;
 	
 	protected TypeReferences getTypeReferences() {
 		return typeReferences;
