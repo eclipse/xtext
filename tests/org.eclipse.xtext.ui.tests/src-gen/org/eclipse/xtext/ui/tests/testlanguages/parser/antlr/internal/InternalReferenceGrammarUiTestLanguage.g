@@ -469,9 +469,9 @@ ruleFarbe returns [EObject current=null]
        		setWithLastConsumed($current, "wert", lv_wert_0_3, null);
 	    }
 
-    |		lv_wert_0_4=	'GR\u00DCN' 
+    |		lv_wert_0_4=	'GR\u2039N' 
     {
-        newLeafNode(lv_wert_0_4, grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3());
+        newLeafNode(lv_wert_0_4, grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3());
     }
  
 	    {

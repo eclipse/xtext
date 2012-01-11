@@ -32,6 +32,7 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPack
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getDoc <em>Doc</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getContained <em>Contained</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getReferenced <em>Referenced</em>}</li>
@@ -42,6 +43,26 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPack
  */
 public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 {
+  /**
+   * The default value of the '{@link #getDoc() <em>Doc</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDoc()
+   * @generated
+   * @ordered
+   */
+  protected static final String DOC_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDoc() <em>Doc</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDoc()
+   * @generated
+   * @ordered
+   */
+  protected String doc = DOC_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -101,6 +122,29 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   protected EClass eStaticClass()
   {
     return QuickfixCrossrefPackage.Literals.ELEMENT;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getDoc()
+  {
+    return doc;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDoc(String newDoc)
+  {
+    String oldDoc = doc;
+    doc = newDoc;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, QuickfixCrossrefPackage.ELEMENT__DOC, oldDoc, doc));
   }
 
   /**
@@ -180,6 +224,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
+      case QuickfixCrossrefPackage.ELEMENT__DOC:
+        return getDoc();
       case QuickfixCrossrefPackage.ELEMENT__NAME:
         return getName();
       case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
@@ -201,6 +247,9 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
+      case QuickfixCrossrefPackage.ELEMENT__DOC:
+        setDoc((String)newValue);
+        return;
       case QuickfixCrossrefPackage.ELEMENT__NAME:
         setName((String)newValue);
         return;
@@ -226,6 +275,9 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
+      case QuickfixCrossrefPackage.ELEMENT__DOC:
+        setDoc(DOC_EDEFAULT);
+        return;
       case QuickfixCrossrefPackage.ELEMENT__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -249,6 +301,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
+      case QuickfixCrossrefPackage.ELEMENT__DOC:
+        return DOC_EDEFAULT == null ? doc != null : !DOC_EDEFAULT.equals(doc);
       case QuickfixCrossrefPackage.ELEMENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
@@ -270,7 +324,9 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (doc: ");
+    result.append(doc);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

@@ -137,7 +137,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElement_Name()
+  public EAttribute getElement_Doc()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -147,9 +147,19 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getElement_Name()
+  {
+    return (EAttribute)elementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getElement_Contained()
   {
-    return (EReference)elementEClass.getEStructuralFeatures().get(1);
+    return (EReference)elementEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -159,7 +169,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    */
   public EReference getElement_Referenced()
   {
-    return (EReference)elementEClass.getEStructuralFeatures().get(2);
+    return (EReference)elementEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -196,6 +206,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
     createEReference(mainEClass, MAIN__ELEMENTS);
 
     elementEClass = createEClass(ELEMENT);
+    createEAttribute(elementEClass, ELEMENT__DOC);
     createEAttribute(elementEClass, ELEMENT__NAME);
     createEReference(elementEClass, ELEMENT__CONTAINED);
     createEReference(elementEClass, ELEMENT__REFERENCED);
@@ -236,6 +247,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
     initEReference(getMain_Elements(), this.getElement(), null, "elements", null, 0, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getElement_Doc(), ecorePackage.getEString(), "doc", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getElement_Contained(), this.getElement(), null, "contained", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getElement_Referenced(), this.getElement(), null, "referenced", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

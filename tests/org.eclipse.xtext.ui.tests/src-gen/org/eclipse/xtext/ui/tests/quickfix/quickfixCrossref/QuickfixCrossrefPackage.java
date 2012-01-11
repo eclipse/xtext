@@ -98,13 +98,22 @@ public interface QuickfixCrossrefPackage extends EPackage
   int ELEMENT = 1;
 
   /**
+   * The feature id for the '<em><b>Doc</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT__DOC = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT__NAME = 0;
+  int ELEMENT__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Contained</b></em>' containment reference list.
@@ -113,7 +122,7 @@ public interface QuickfixCrossrefPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT__CONTAINED = 1;
+  int ELEMENT__CONTAINED = 2;
 
   /**
    * The feature id for the '<em><b>Referenced</b></em>' reference list.
@@ -122,7 +131,7 @@ public interface QuickfixCrossrefPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT__REFERENCED = 2;
+  int ELEMENT__REFERENCED = 3;
 
   /**
    * The number of structural features of the '<em>Element</em>' class.
@@ -131,7 +140,7 @@ public interface QuickfixCrossrefPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_FEATURE_COUNT = 3;
+  int ELEMENT_FEATURE_COUNT = 4;
 
 
   /**
@@ -164,6 +173,17 @@ public interface QuickfixCrossrefPackage extends EPackage
    * @generated
    */
   EClass getElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getDoc <em>Doc</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Doc</em>'.
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getDoc()
+   * @see #getElement()
+   * @generated
+   */
+  EAttribute getElement_Doc();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getName <em>Name</em>}'.
@@ -248,6 +268,14 @@ public interface QuickfixCrossrefPackage extends EPackage
      * @generated
      */
     EClass ELEMENT = eINSTANCE.getElement();
+
+    /**
+     * The meta object literal for the '<em><b>Doc</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ELEMENT__DOC = eINSTANCE.getElement_Doc();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

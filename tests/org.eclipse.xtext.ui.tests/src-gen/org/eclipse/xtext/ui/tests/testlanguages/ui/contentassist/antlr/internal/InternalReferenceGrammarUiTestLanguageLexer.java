@@ -117,10 +117,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:14:7: ( 'GR\\u00DCN' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:14:9: 'GR\\u00DCN'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:14:7: ( 'GR\\u2039N' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:14:9: 'GR\\u2039N'
             {
-            match("GR\u00DCN"); 
+            match("GR\u2039N"); 
 
 
             }
@@ -1049,7 +1049,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
         "\131\uffff";
     static final String DFA12_minS =
         "\1\0\1\117\1\114\1\105\1\145\1\160\4\uffff\1\162\1\141\1\uffff\1"+
-        "\101\2\uffff\2\0\1\52\2\uffff\1\124\1\uffff\1\101\1\114\1\u00dc"+
+        "\101\2\uffff\2\0\1\52\2\uffff\1\124\1\uffff\1\101\1\114\1\u2039"+
         "\1\171\1\156\1\151\4\uffff\1\167\1\155\6\uffff\1\60\1\125\1\102"+
         "\1\uffff\1\167\1\144\1\145\1\141\1\151\1\uffff\2\60\1\157\1\60\1"+
         "\154\1\143\1\154\2\uffff\1\162\1\uffff\1\160\1\150\1\151\1\144\1"+
@@ -1059,7 +1059,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
     static final String DFA12_maxS =
         "\1\uffff\1\117\1\114\1\122\1\151\1\160\4\uffff\1\162\1\141\1\uffff"+
         "\1\172\2\uffff\2\uffff\1\57\2\uffff\1\124\1\uffff\1\101\1\114\1"+
-        "\u00dc\1\171\1\156\1\151\4\uffff\1\167\1\155\6\uffff\1\172\1\125"+
+        "\u2039\1\171\1\156\1\151\4\uffff\1\167\1\155\6\uffff\1\172\1\125"+
         "\1\102\1\uffff\1\167\1\144\1\145\1\141\1\151\1\uffff\2\172\1\157"+
         "\1\172\1\154\1\143\1\154\2\uffff\1\162\1\uffff\1\172\1\150\1\151"+
         "\1\144\1\154\1\145\1\163\1\145\1\172\1\141\1\165\1\145\1\172\1\uffff"+

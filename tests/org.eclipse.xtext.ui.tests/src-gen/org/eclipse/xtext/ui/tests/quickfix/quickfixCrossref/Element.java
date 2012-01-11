@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getDoc <em>Doc</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getContained <em>Contained</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getReferenced <em>Referenced</em>}</li>
@@ -29,6 +30,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Element extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Doc</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Doc</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Doc</em>' attribute.
+   * @see #setDoc(String)
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage#getElement_Doc()
+   * @model
+   * @generated
+   */
+  String getDoc();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getDoc <em>Doc</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Doc</em>' attribute.
+   * @see #getDoc()
+   * @generated
+   */
+  void setDoc(String value);
+
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
