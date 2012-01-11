@@ -24,9 +24,13 @@ import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class EObjectAtOffsetHelper {
 
+	/**
+	 * @return the contained element next to the offset
+	 */
 	public EObject resolveElementAt(XtextResource resource, int offset) {
 		return internalResolveElementAt(resource, offset, true);
 	}
@@ -103,9 +107,11 @@ public class EObjectAtOffsetHelper {
 	}
 
 	protected EObject internalResolveElementAt(XtextResource resource, int offset, boolean containment) {
-		EObject crossRef = resolveCrossReferencedElementAt(resource, offset);
-		if (crossRef != null)
-			return crossRef;
+		if(!containment){
+			EObject crossRef = resolveCrossReferencedElementAt(resource, offset);
+			if (crossRef != null)
+				return crossRef;
+			}
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null && parseResult.getRootNode() != null) {
 			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
