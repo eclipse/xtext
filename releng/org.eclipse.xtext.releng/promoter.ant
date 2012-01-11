@@ -246,48 +246,42 @@
 	<target name="-cleanup.nightly" if="working_dir">
 		<property name="delete_pattern" value="N*" />
 		<property name="keep_count" value="4" />
-		<echo>Keep ${keep_count} recent builds</echo>
-		<dirset id="all.children.dirset" dir="${working_dir}" includes="${delete_pattern}" />
+		<echo>Keep ${keep_count} most recent builds</echo>
 
-		<!-- add keep_count newest (sorted by name) folderst to delete.dirs.res_id resources collection -->
-		<difference id="delete.dirs.res_id">
-			<resources>
-				<dirset refid="all.children.dirset" />
-			</resources>
-			<resources>
-				<first count="${keep_count}">
-					<sort>
-						<dirset refid="all.children.dirset" />
-						<name />
-					</sort>
-				</first>
-			</resources>
-		</difference>
-
+		<!-- add newest (sorted by name) folderst to keep.dirs.res_id resources collection -->
+		<resources id="keep.dirs.res_id">
+			<first count="${keep_count}">
+				<sort>
+					<dirset dir="${working_dir}" includes="${delete_pattern}" />
+					<name />
+				</sort>
+			</first>
+		</resources>
+		
 		<!-- keep only last segment (flatten),
-		convert to comma separated string with trailing slash (regexpmapper)
-		 N201101012335/,N201101012336/-->
-		<pathconvert property="delete.dirs.path" pathsep="," refid="delete.dirs.res_id">
+				convert to comma separated string with trailing slash (regexpmapper)
+				 N201101012335/,N201101012336/-->
+		<pathconvert property="keep.dirs.paths" pathsep="," refid="keep.dirs.res_id">
 			<chainedmapper>
 				<flattenmapper />
 				<regexpmapper from="^(.*)$$" to="\1/" />
 			</chainedmapper>
 		</pathconvert>
+		<echo>Excluded from cleanup: ${keep.dirs.paths}</echo>
 
-		<condition property="hasFoldersToDelete" value="true">
+		<condition property="hasFoldersToKeep" value="true">
 			<not>
-				<equals arg1="${delete.dirs.path}" arg2="" />
+				<equals arg1="${keep.dirs.paths}" arg2="" />
 			</not>
 		</condition>
-		<echo>Has folders to delete: ${hasFoldersToDelete}</echo>
 		<antcall target="-doDelete" inheritall="true" inheritrefs="true" />
 	</target>
 
 	<!-- recursive delete folders -->
-	<target name="-doDelete" if="hasFoldersToDelete">
-		<echo>Deleting: ${delete.dirs.path}</echo>
-		<delete includeemptydirs="true" verbose="true">
-			<fileset dir="${working_dir}" includes="${delete.dirs.path}" />
+	<target name="-doDelete" if="hasFoldersToKeep">
+		<echo>Deleting all ${delete_pattern} but: ${keep.dirs.paths}</echo>
+		<delete includeemptydirs="true">
+			<fileset dir="${working_dir}" includes="${delete_pattern}/" excludes="${keep.dirs.paths}" />
 		</delete>
 	</target>
 
