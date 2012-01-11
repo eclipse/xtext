@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
