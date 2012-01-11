@@ -9,6 +9,7 @@ package org.eclipse.xtext.junit4.ui;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -90,6 +91,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		assertState("(foobar)|", editor);
 	}
 	
+	@Ignore
 	@Test public void testParenthesis_9() throws Exception {
 		XtextEditor editor = openEditor("|'')");
 		pressKey(editor, '(');
