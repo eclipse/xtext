@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.bug287988Test.BaseAttribute;
 import org.eclipse.xtext.linking.bug287988Test.Model;
-import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Test;
 
 /**
