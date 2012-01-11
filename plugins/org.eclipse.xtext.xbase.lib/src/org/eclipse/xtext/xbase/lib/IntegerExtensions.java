@@ -21,8 +21,8 @@ public class IntegerExtensions {
 	 * The <code>upTo</code> operator yields an iterable of integral numbers from and including {@code a} up to and including {@code b} if {@code b}
 	 * is larger than {@code a} or otherwise from {@code a} down to {@code b}. If {@code a} == {@code b} the iterable returns just one element.
 	 * 
-	 * @param a
-	 * @param b
+	 * @param a the first value that the iterable will offer.
+	 * @param b the last value that the iterable will offer.
 	 * @return an iterable of integral numbers. Never <code>null</code>.
 	 */
 	public static Iterable<Integer> operator_upTo(final int a, final int b) {
