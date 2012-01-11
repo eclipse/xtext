@@ -174,8 +174,6 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		for (int i = index; i < index + substring.length(); ++i) {
 			EObject foundElement = eObjectAtOffsetHelper.resolveElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
-			foundElement = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i);
-			assertNotSame(expectedElement, foundElement);
 		}
 	}
 
@@ -184,8 +182,6 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		int index = model.indexOf(substring);
 		for (int i = index; i < index + substring.length(); ++i) {
 			EObject foundElement = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i);
-			assertEquals(expectedElement, foundElement);
-			foundElement = eObjectAtOffsetHelper.resolveElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
 		}
 	}
