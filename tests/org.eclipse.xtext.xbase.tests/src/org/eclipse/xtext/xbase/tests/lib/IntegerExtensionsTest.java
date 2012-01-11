@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IntegerExtensions {
+public class IntegerExtensionsTest {
 	
 	@Test
 	public void testOperator_upTo_01() throws Exception {
