@@ -25,6 +25,7 @@ import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
@@ -34,6 +35,8 @@ import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistAssistant;
+import org.eclipse.xtext.ui.editor.reconciler.IReconcilingStrategyFactory;
+import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 
 import com.google.inject.Inject;
@@ -79,6 +82,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject
 	private Provider<ITextHover> textHoverProvider;
+
+	@Inject
+	private IReconcilingStrategyFactory reconcilingStrategyFactory;
 	
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
@@ -109,6 +115,11 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
 		IReconciler reconciler = reconcilerProvider.get();
+        if (reconciler instanceof XtextReconciler) {
+        	XtextReconciler xtextReconciler = (XtextReconciler) reconciler;
+        	IReconcilingStrategy reconcilingStrategy = reconcilingStrategyFactory.create(sourceViewer);
+        	xtextReconciler.setReconcilingStrategy(reconcilingStrategy);
+        }
 		return reconciler;
 	}
 

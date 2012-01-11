@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.quickfix;
 
+import static java.util.Arrays.*;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -24,13 +26,16 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension2;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
+import org.eclipse.ui.texteditor.spelling.SpellingAnnotation;
+import org.eclipse.ui.texteditor.spelling.SpellingProblem;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
-import com.google.common.collect.Sets;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements
@@ -63,6 +68,11 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 						issueUtil.getCode(markerAnnotation)));
 			return markerAnnotation.isQuickFixable();
 		}
+
+		if (annotation instanceof SpellingAnnotation) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -81,43 +91,60 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		final IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
 		List<ICompletionProposal> result = Lists.newArrayList();
 		try {
-			final int offset = invocationContext.getOffset();
-			Set<Annotation> applicableAnnotations = getApplicableAnnotations(xtextDocument, annotationModel, offset);
-			for(Annotation annotation : applicableAnnotations) {
-				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
-				if (issue != null) {
-					Iterable<IssueResolution> resolutions = getResolutions(issue, xtextDocument);
-					if (resolutions.iterator().hasNext()) {
-						Position pos = annotationModel.getPosition(annotation);
-						for (IssueResolution resolution : resolutions)
-							result.add(create(pos, resolution));
-					}
-				}
-			}
-			boolean select = true;
-			if (invocationContext instanceof QuickAssistInvocationContext) {
-				select = !((QuickAssistInvocationContext) invocationContext).isSuppressSelection();
-			}
-			if (select) {
-				Iterator<Annotation> iterator = applicableAnnotations.iterator();
-				if (!result.isEmpty()) {
-					while(iterator.hasNext()){
-						Position pos = annotationModel.getPosition(iterator.next());
-						if (pos != null) {
-							sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
-							sourceViewer.revealRange(pos.getOffset(), pos.getLength());
-							break;
-						}
-					}
-				}
-			}
+			Set<Annotation> applicableAnnotations = getApplicableAnnotations(xtextDocument, annotationModel, invocationContext.getOffset());
+			result = createQuickfixes(invocationContext, applicableAnnotations);
+            selectAndRevealQuickfix(invocationContext, applicableAnnotations, result);
 		} catch (BadLocationException e) {
 			errorMessage = e.getMessage();
 		}
 		sortQuickfixes(result);
 		return result.toArray(new ICompletionProposal[result.size()]);
 	}
-	
+
+	protected List<ICompletionProposal> createQuickfixes(IQuickAssistInvocationContext invocationContext, Set<Annotation> applicableAnnotations) {
+    	List<ICompletionProposal> result = Lists.newArrayList();
+    	ISourceViewer sourceViewer = invocationContext.getSourceViewer();
+		IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
+		IXtextDocument xtextDocument = XtextDocumentUtil.get(sourceViewer);
+    	for(Annotation annotation : applicableAnnotations) {
+			if (annotation instanceof SpellingAnnotation) {
+				SpellingProblem spellingProblem = ((SpellingAnnotation) annotation).getSpellingProblem();
+				result.addAll(asList(spellingProblem.getProposals()));
+			} else {
+				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
+				if (issue != null) {
+					Iterable<IssueResolution> resolutions = getResolutions(issue, xtextDocument);
+					if (resolutions.iterator().hasNext()) {
+						Position pos = annotationModel.getPosition(annotation);
+						for (IssueResolution resolution : resolutions) {
+							result.add(create(pos, resolution));
+						}
+					}
+				}
+			}
+		}
+    	return result;
+    }
+
+	protected void selectAndRevealQuickfix(IQuickAssistInvocationContext invocationContext, Set<Annotation> applicableAnnotations, List<ICompletionProposal> completionProposals) {
+        if (completionProposals.isEmpty()) {
+        	return;
+        }
+		if (invocationContext instanceof QuickAssistInvocationContext && !((QuickAssistInvocationContext) invocationContext).isSuppressSelection()) {
+			ISourceViewer sourceViewer = invocationContext.getSourceViewer();
+			IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
+			Iterator<Annotation> iterator = applicableAnnotations.iterator();
+			while(iterator.hasNext()){
+				Position pos = annotationModel.getPosition(iterator.next());
+				if (pos != null) {
+					sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
+					sourceViewer.revealRange(pos.getOffset(), pos.getLength());
+					break;
+				}
+			}
+		}
+	}
+
 	protected ICompletionProposal create(Position posisition, IssueResolution resolution) {
 		return new QuickAssistCompletionProposal(posisition, resolution, getImage(resolution));
 	}
