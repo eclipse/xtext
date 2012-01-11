@@ -90,6 +90,6 @@ public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 	}
 
 	protected boolean isSpellingEnabled() {
-		return EditorsUI.getPreferenceStore().getBoolean(SpellingService.PREFERENCE_SPELLING_ENABLED);
+		return spellingProblemCollector != null && EditorsUI.getPreferenceStore().getBoolean(SpellingService.PREFERENCE_SPELLING_ENABLED);
 	}
 }
