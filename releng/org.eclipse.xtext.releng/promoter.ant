@@ -250,12 +250,12 @@
 
 		<!-- add newest (sorted by name) folderst to keep.dirs.res_id resources collection -->
 		<resources id="keep.dirs.res_id">
-			<first count="${keep_count}">
+			<last count="${keep_count}">
 				<sort>
 					<dirset dir="${working_dir}" includes="${delete_pattern}" />
 					<name />
 				</sort>
-			</first>
+			</last>
 		</resources>
 		
 		<!-- keep only last segment (flatten),
