@@ -80,6 +80,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage"
+            name="XtextGrammarUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.ui.keyword_XtextGrammarUiTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.ui.keyword_XtextGrammarUiTestLanguage"
@@ -221,6 +234,19 @@
             id="org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.linking.ui.keyword_ImportUriUiTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.linking.ui.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage"
+            name="ImportUriUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.linking.ui.keyword_ImportUriUiTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -368,6 +394,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage"
+            name="TwoContextsTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_TwoContextsTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_TwoContextsTestLanguage"
@@ -509,6 +548,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug286935TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage"
+            name="Bug286935TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug286935TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -656,6 +708,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage"
+            name="Bug287941TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug287941TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug287941TestLanguage"
@@ -797,6 +862,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug288734TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage"
+            name="Bug288734TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug288734TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -944,6 +1022,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage"
+            name="Bug288760TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug288760TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug288760TestLanguage"
@@ -1085,6 +1176,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug289187TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage"
+            name="Bug289187TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug289187TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -1232,6 +1336,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage"
+            name="Bug291022TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug291022TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug291022TestLanguage"
@@ -1373,6 +1490,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug303200TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug303200TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage"
+            name="Bug303200TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug303200TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -1520,6 +1650,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug304681TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage"
+            name="Bug304681TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug304681TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug304681TestLanguage"
@@ -1661,6 +1804,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug307519TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug307519TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage"
+            name="Bug307519TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug307519TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -1808,6 +1964,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug309949TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage"
+            name="Bug309949TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug309949TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug309949TestLanguage"
@@ -1949,6 +2118,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug332217TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug332217TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage"
+            name="Bug332217TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug332217TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -2096,6 +2278,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage"
+            name="Bug348427TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348427TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348427TestLanguage"
@@ -2237,6 +2432,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348199TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348199TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage"
+            name="Bug348199TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug348199TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -2384,6 +2592,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug360834TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage"
+            name="Bug360834TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug360834TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug360834TestLanguage"
@@ -2525,6 +2746,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug347012TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage"
+            name="Bug347012TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_Bug347012TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -2672,6 +2906,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.BacktrackingContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage"
+            name="BacktrackingContentAssistTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_BacktrackingContentAssistTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_BacktrackingContentAssistTestLanguage"
@@ -2813,6 +3060,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ContentAssistContextTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage"
+            name="ContentAssistContextTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ContentAssistContextTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -2960,6 +3220,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage"
+            name="ContentAssistCustomizingTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ContentAssistCustomizingTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_ContentAssistCustomizingTestLanguage"
@@ -3101,6 +3374,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_CrossReferenceProposalTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage"
+            name="CrossReferenceProposalTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_CrossReferenceProposalTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -3248,6 +3534,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage"
+            name="DatatypeRuleTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_DatatypeRuleTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_DatatypeRuleTestLanguage"
@@ -3389,6 +3688,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_LookAheadContentAssistTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage"
+            name="LookAheadContentAssistTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_LookAheadContentAssistTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -3536,6 +3848,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage"
+            name="DomainModelTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_DomainModelTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_DomainModelTestLanguage"
@@ -3677,6 +4002,19 @@
             id="org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_UnorderedGroupsTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage"
+            name="UnorderedGroupsTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.contentassist.ui.keyword_UnorderedGroupsTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -3824,6 +4162,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.outline.ui.OutlineTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage"
+            name="OutlineTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.outline.ui.keyword_OutlineTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.outline.ui.keyword_OutlineTestLanguage"
@@ -3965,6 +4316,19 @@
             id="org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.parser.keywords.ui.keyword_KeywordsUiTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage"
+            name="KeywordsUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.parser.keywords.ui.keyword_KeywordsUiTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -4112,6 +4476,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage"
+            name="ContentAssistTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.testlanguages.ui.keyword_ContentAssistTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.testlanguages.ui.keyword_ContentAssistTestLanguage"
@@ -4253,6 +4630,19 @@
             id="org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.testlanguages.ui.keyword_ReferenceGrammarUiTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage"
+            name="ReferenceGrammarUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.testlanguages.ui.keyword_ReferenceGrammarUiTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -4400,6 +4790,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage"
+            name="EncodingUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingUiTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingUiTestLanguage"
@@ -4541,6 +4944,19 @@
             id="org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.enumrules.ui.keyword_EnumRulesUiTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.enumrules.ui.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage"
+            name="EnumRulesUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.enumrules.ui.keyword_EnumRulesUiTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -4686,6 +5102,19 @@
             id="org.eclipse.xtext.ui.tests.TestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.ui.keyword_TestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.ui.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.TestLanguage"
+            name="TestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.ui.keyword_TestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -4835,6 +5264,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.ui.FoldingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.FoldingTestLanguage"
+            name="FoldingTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.ui.keyword_FoldingTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.ui.keyword_FoldingTestLanguage"
@@ -4981,6 +5423,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage"
+            name="BmTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"
@@ -5124,6 +5579,19 @@
             id="org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.quickfix.ui.keyword_QuickfixCrossrefTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage"
+            name="QuickfixCrossrefTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.quickfix.ui.keyword_QuickfixCrossrefTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -5280,6 +5748,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"
+            name="RefactoringTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_RefactoringTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_RefactoringTestLanguage"
@@ -5372,6 +5853,15 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"
+	        class="org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_RefactoringTestLanguage"/>
+	    </page>
+	</extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -5448,6 +5938,19 @@
             id="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_ReferringTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage"
+            name="ReferringTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_ReferringTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
     <extension
@@ -5543,5 +6046,14 @@
          </command>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage"
+	        class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_ReferringTestLanguage"/>
+	    </page>
+	</extension>
 
 </plugin>
