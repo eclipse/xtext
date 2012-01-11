@@ -46,9 +46,9 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		String modelAsString = "foo foo0 bar bar0 foo0 bar bar1 foo0";
 		XtextResource resource = getResourceFromString(modelAsString);
 		Model model = (Model) resource.getContents().get(0);
-		checkContainedElementAt(resource, modelAsString, "foo foo0 ", model.getFoos().get(0));
-		checkContainedElementAt(resource, modelAsString, "bar bar0 ", model.getBars().get(0));
-		checkContainedElementAt(resource, modelAsString, "bar bar1 ", model.getBars().get(1));
+		checkContainedOrReferencedElementAt(resource, modelAsString, "foo foo0 ", model.getFoos().get(0));
+		checkContainedOrReferencedElementAt(resource, modelAsString, "bar bar0 ", model.getBars().get(0));
+		checkContainedOrReferencedElementAt(resource, modelAsString, "bar bar1 ", model.getBars().get(1));
 	}
 
 	@Test public void testCrossRefs_01() throws Exception {
@@ -107,20 +107,20 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		String modelAsString = "bar bar0 foo0 foobar foo1 foo foo0 foo foo1";
 		XtextResource resource = getResourceFromString(modelAsString);
 		Model model = (Model) resource.getContents().get(0);
-		checkContainedElementAt(resource, modelAsString, "foobar ", model.getBars().get(0));
+		checkContainedOrReferencedElementAt(resource, modelAsString, "foobar ", model.getBars().get(0));
 		checkCrossReferencedElementAt(resource, modelAsString, "foo0 ", model.getFoos().get(0));
 		checkCrossReferencedElementAt(resource, modelAsString, "foo1 ", model.getFoos().get(1));
-		checkContainedElementAt(resource, modelAsString, "bar bar0 ", ((FooBar) model.getBars().get(0)).getBar());
+		checkContainedOrReferencedElementAt(resource, modelAsString, "bar bar0 ", ((FooBar) model.getBars().get(0)).getBar());
 	}
 	
 	@Test public void testAction_02() throws Exception {
 		String modelAsString = "zonk 1 bar bar0 foo0 foobar foo1 foo foo0 foo foo1";
 		XtextResource resource = getResourceFromString(modelAsString);
 		Model model = (Model) resource.getContents().get(0);
-		checkContainedElementAt(resource, modelAsString, "foobar ", model.getBars().get(0));
+		checkContainedOrReferencedElementAt(resource, modelAsString, "foobar ", model.getBars().get(0));
 		checkCrossReferencedElementAt(resource, modelAsString, "foo0 ", model.getFoos().get(0));
 		checkCrossReferencedElementAt(resource, modelAsString, "foo1 ", model.getFoos().get(1));
-		checkContainedElementAt(resource, modelAsString, "bar bar0 ", ((FooBar) model.getBars().get(0)).getBar());
+		checkContainedOrReferencedElementAt(resource, modelAsString, "bar bar0 ", ((FooBar) model.getBars().get(0)).getBar());
 	}
 	
 	@Test public void testFindCrossReferencedElementAt() throws Exception {
@@ -169,19 +169,22 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		assertNull(eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length()+1, 9)));
 	}
 
-	private void checkContainedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {
+	private void checkContainedOrReferencedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {
 		int index = model.indexOf(substring);
 		for (int i = index; i < index + substring.length(); ++i) {
 			EObject foundElement = eObjectAtOffsetHelper.resolveElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
+			foundElement = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i);
+			assertNotSame(expectedElement, foundElement);
 		}
 	}
 
-	private void checkCrossReferencedElementAt(XtextResource resource, String model, String substring,
-			EObject expectedElement) {
+	private void checkCrossReferencedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {
 		int index = model.indexOf(substring);
 		for (int i = index; i < index + substring.length(); ++i) {
 			EObject foundElement = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i);
+			assertEquals(expectedElement, foundElement);
+			foundElement = eObjectAtOffsetHelper.resolveElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
 		}
 	}
