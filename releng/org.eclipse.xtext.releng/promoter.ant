@@ -208,6 +208,9 @@
 			<matches string="${saved.build.id}" pattern="[S|R](d)*" />
 		</condition>
 
+		<!-- strip the micro version and anything following it -->
+		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
+
 		<antcall target="-publish.javadoc" inheritall="true" />
 
 		<fileset id="drop.resources" dir="${build.drop.directory}">
@@ -222,8 +225,6 @@
 			<reference refid="drop.resources" torefid="change.group.owner.resources" />
 		</antcall>
 
-		<!-- strip the micro version and anything following it -->
-		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
 
 		<!-- setup composite.repository.base appropriate to the build type -->
 		<condition property="composite.repository.base" value="nightly/head">
@@ -257,7 +258,7 @@
 				</sort>
 			</last>
 		</resources>
-		
+
 		<!-- keep only last segment (flatten),
 				convert to comma separated string with trailing slash (regexpmapper)
 				 N201101012335/,N201101012336/-->
@@ -328,7 +329,7 @@
 	<target name="-publish.javadoc" if="build.stable">
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
-		<unzip dest="${downloads.area}/javadoc/${version}" overwrite="true">
+		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true">
 			<fileset dir="${javadoc.directory}">
 				<filename name="javadoc.zip" />
 			</fileset>
