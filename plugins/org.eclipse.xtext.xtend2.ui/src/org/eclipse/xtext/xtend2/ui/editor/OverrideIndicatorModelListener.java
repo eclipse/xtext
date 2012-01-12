@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.ui.editor;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -92,6 +93,8 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 				.readOnly(new IUnitOfWork<Map<Annotation, Position>, XtextResource>() {
 
 					public Map<Annotation, Position> exec(XtextResource xtextResource) {
+						if (xtextResource == null)
+							return Collections.emptyMap();
 						return createOverrideIndicatorAnnotationMap(xtextResource);
 					}
 
