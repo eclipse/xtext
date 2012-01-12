@@ -31,6 +31,10 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20110907174232/repository"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.itemis.com/updates/releases/2.0.0"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/tools/gef/updates/releases"/>
 </location>
