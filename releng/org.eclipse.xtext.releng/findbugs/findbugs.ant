@@ -9,7 +9,8 @@
 	<property name="effort" value="min" />
 
 	<target name="findbugs">
-		<findbugs home="${findbugs.home}" output="xml" outputFile="findbugs.xml" jvmargs="-Xmx1024m" effort="${effort}" timeout="1800000">
+		<findbugs home="${findbugs.home}" output="xml:withMessages" outputFile="findbugs.xml" jvmargs="-Xmx1024m"
+					effort="${effort}" timeout="1800000" excludefilter="excludeFilter.xml">
 			<sourcePath>
 				<fileset dir="${srcLocation}" id="src">
 					<include name="*.source*" />
