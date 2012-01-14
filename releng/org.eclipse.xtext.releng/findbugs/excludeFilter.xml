@@ -2,6 +2,9 @@
 	<Match>
 		<Class name="~.*\.antlr\.internal.*" />
 	</Match>
+	<Match>
+		<Class name="~.*Lexer" />
+	</Match>
 	
 	<!-- Some Examples:
 	<Match>
