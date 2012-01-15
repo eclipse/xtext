@@ -3,7 +3,7 @@
 		<Class name="~.*\.antlr\.internal.*" />
 	</Match>
 	<Match>
-		<Class name="~.*Lexer" />
+		<Class name="~.*Lexer(\$.*)?" />
 	</Match>
 	
 	<!-- Some Examples:
