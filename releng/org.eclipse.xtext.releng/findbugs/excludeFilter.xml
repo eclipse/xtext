@@ -5,7 +5,9 @@
 	<Match>
 		<Class name="~.*Lexer(\$.*)?" />
 	</Match>
-	
+	<Match>
+		<Class name="~testdata\..*" />
+	</Match>
 	<!-- Some Examples:
 	<Match>
 		<Class name="com.foobar.ClassNotToBeAnalyzed" />

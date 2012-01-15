@@ -6,11 +6,12 @@
 	<property name="jarsLocation" value="/Users/dhuebner/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
 	<property name="srcLocation" value="${jarsLocation}" />
 	<property name="auxCpLocation" value="${jarsLocation}" />
-	<property name="effort" value="min" />
+	<property name="effort" value="default" /><!-- min,default,max-->
+	<property name="fbJvmArgs" value="-Xmx1024m" />
 
 	<target name="findbugs">
 		<findbugs home="${findbugs.home}" output="xml:withMessages" outputFile="findbugs.xml"
-			jvmargs="-Xmx1024m" effort="${effort}" timeout="1800000"
+			jvmargs="${fbJvmArgs}" effort="${effort}" timeout="1800000"
 			excludefilter="${ant.file}/../excludeFilter.xml">
 			
 			<sourcePath>
