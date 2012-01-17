@@ -18,8 +18,7 @@ public class PostProcessor {
   protected Pattern getCodePattern() {
     Pattern _xblockexpression = null;
     {
-      Pattern __codePattern = this._codePattern;
-      boolean _operator_equals = ObjectExtensions.operator_equals(__codePattern, null);
+      boolean _operator_equals = ObjectExtensions.operator_equals(this._codePattern, null);
       if (_operator_equals) {
         String _markCodeBegin = this._htmlExtensions.markCodeBegin();
         String _quote = Pattern.quote(_markCodeBegin);
@@ -27,14 +26,11 @@ public class PostProcessor {
         String _markCodeEnd = this._htmlExtensions.markCodeEnd();
         String _quote_1 = Pattern.quote(_markCodeEnd);
         String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _quote_1);
-        int _MULTILINE = Pattern.MULTILINE;
-        int _DOTALL = Pattern.DOTALL;
-        int _operator_plus_2 = IntegerExtensions.operator_plus(_MULTILINE, _DOTALL);
+        int _operator_plus_2 = IntegerExtensions.operator_plus(Pattern.MULTILINE, Pattern.DOTALL);
         Pattern _compile = Pattern.compile(_operator_plus_1, _operator_plus_2);
         this._codePattern = _compile;
       }
-      Pattern __codePattern_1 = this._codePattern;
-      _xblockexpression = (__codePattern_1);
+      _xblockexpression = (this._codePattern);
     }
     return _xblockexpression;
   }

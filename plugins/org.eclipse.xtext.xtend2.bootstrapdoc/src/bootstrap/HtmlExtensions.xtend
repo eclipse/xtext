@@ -39,10 +39,10 @@ class HtmlExtensions {
 	
 	
 	def dispatch CharSequence toHtml(TextOrMarkup it) {
-		contents.toHtml
+		it.contents.toHtml
 	} 
 	
-	def dispatch toHtml(List<EObject> it) {
+	def dispatch CharSequence toHtml(List<EObject> it) {
 		map[toHtml].join
 	}
 	
@@ -83,7 +83,7 @@ class HtmlExtensions {
 		""
 	}
 	
-	def dispatch toHtml(CodeRef it) {
+	def dispatch CharSequence toHtml(CodeRef it) {
 		println("TODO CodeRef to: " + element.identifier)
 		if(altText!=null) 
 			altText.toHtml
