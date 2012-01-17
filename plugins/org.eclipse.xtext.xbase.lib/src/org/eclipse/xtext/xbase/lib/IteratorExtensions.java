@@ -456,7 +456,7 @@ public class IteratorExtensions {
 	 * @return <code>true</code> if the two iterators contain equal elements in the same order.
 	 */
 	public static final boolean elementsEqual(Iterator<?> iterator, Iterator<?> other) {
-		return Iterators.elementsEqual(other, other);
+		return Iterators.elementsEqual(iterator, other);
 	}
 	
 	/**
