@@ -123,9 +123,8 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 					break;
 				}
 			}
-			if (referenceNode == null)
-				referenceNode = new ReferenceSearchViewTreeNode(resourceNode, referenceDescription,
-						referenceDescription);
+			if (referenceNode == null && resourceNode != null)
+				new ReferenceSearchViewTreeNode(resourceNode, referenceDescription, referenceDescription);
 		}
 	}
 
