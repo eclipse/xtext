@@ -218,10 +218,6 @@ public class ParameterizedXtextRunner extends ParentRunner<ResourceRunner> {
 			parameterSets.add(runner);
 		}
 
-		public void acceptTestClass(Class<?> t) {
-			Assert.assertEquals(clazz, t);
-		}
-
 		protected void collectParameters() {
 			IParameterProvider parameterProvider = injectorProvider.getInjector().getInstance(IParameterProvider.class);
 			parameterProvider.collectParameters(clazz.getJavaClass(), resource, this);
