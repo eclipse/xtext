@@ -141,4 +141,31 @@ public class AttributedPosition extends Position {
 	public TextAttribute getHighlighting() {
 		return attribute;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((attribute == null) ? 0 : attribute.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AttributedPosition other = (AttributedPosition) obj;
+		if (attribute == null) {
+			if (other.attribute != null)
+				return false;
+		} else if (!attribute.equals(other.attribute))
+			return false;
+		return true;
+	}
+	
+	
 }
