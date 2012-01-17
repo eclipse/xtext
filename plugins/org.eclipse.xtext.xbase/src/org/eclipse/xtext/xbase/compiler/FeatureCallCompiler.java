@@ -94,7 +94,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								featureCalltoJavaExpression(expr, b);
 							}
 						};
-						declareSyntheticVariable(expr, b, later);
+						declareFreshLocalVariable(expr, b, later);
 					} else {
 						b.newLine();
 						featureCalltoJavaExpression(expr, b);
