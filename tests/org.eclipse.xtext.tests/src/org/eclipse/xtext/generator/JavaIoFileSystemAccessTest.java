@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.io.File;
+import java.io.FileInputStream;
 
 import org.eclipse.emf.common.util.URI;
-
+import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,26 +23,72 @@ import org.junit.Test;
  */
 public class JavaIoFileSystemAccessTest extends Assert {
 
-	@Test public void testDirsAreCreated() throws Exception {
+	@Test
+	public void testDirsAreCreated() throws Exception {
+		File dir = null;
+		File file = null;
+		try {
+			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
+					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider.Runtime());
+			File tmpDir = configureFileSystemAccess(fileSystemAccess);
+			fileSystemAccess.generateFile("tmp/X", "XX");
+			dir = new File(tmpDir, "tmp");
+			assertTrue(dir.exists());
+			assertTrue(dir.isDirectory());
+			file = new File(dir, "X");
+			assertTrue(file.exists());
+			assertTrue(file.isFile());
+		} finally {
+			try {
+				if (file != null)
+					file.delete();
+			} finally {
+				if (dir != null)
+					dir.delete();
+			}
+		}
+	}
+
+	protected File configureFileSystemAccess(JavaIoFileSystemAccess fileSystemAccess) {
 		String tempDir = System.getProperties().getProperty("java.io.tmpdir") + File.separator;
 		File tmpDir = new File(tempDir);
-		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
 		fileSystemAccess.setOutputPath(tempDir);
-		fileSystemAccess.generateFile("tmp/X", "XX");
-		File dir = new File(tmpDir, "tmp");
-		assertTrue(dir.exists());
-		assertTrue(dir.isDirectory());
-		File file = new File(dir, "X");
-		assertTrue(file.exists());
-		assertTrue(file.isFile());
-		file.delete();
-		dir.delete();
+		return tmpDir;
 	}
-	
-	@Test public void testURI() throws Exception {
+
+	@Test
+	public void testURI() throws Exception {
 		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
 		fileSystemAccess.setOutputPath("testOutput", "/testDir");
 		URI uri = fileSystemAccess.getURI("testFile", "testOutput");
 		assertEquals("file:/testDir/testFile", uri.toString());
+	}
+
+	@Test
+	public void testEncoding() throws Exception {
+		File file = null;
+		try {
+			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
+					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider() {
+						public String getEncoding(URI uri) {
+							return "ISO-8859-1";
+						}
+					});
+			File tmpDir = configureFileSystemAccess(fileSystemAccess);
+			String contents = "gürkenbröd";
+			fileSystemAccess.generateFile("test.txt", contents);
+			file = new File(tmpDir, "test.txt");
+			assertTrue(file.exists());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			byte[] buffer = new byte[512];
+			int read = fileInputStream.read(buffer);
+			String utfString = new String(buffer, 0, read, "UTF-8");
+			assertFalse(equal(contents, utfString));
+			String isoString = new String(buffer, 0, read, "ISO-8859-1");
+			assertEquals(contents, isoString);
+		} finally {
+			if (file != null)
+				file.delete();
+		}
 	}
 }
