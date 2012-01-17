@@ -911,6 +911,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("bar", "switch x : 'foo' { String : switch x { String : 'bar' default : 'other' } default : 'foo'}");
 	}
 	
+	@Test public void testSwitchExpression_16() throws Exception {
+		assertEvaluatesTo("bar", "switch 'foo'.toCharArray { char[]: 'bar' default: 'foo' }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}

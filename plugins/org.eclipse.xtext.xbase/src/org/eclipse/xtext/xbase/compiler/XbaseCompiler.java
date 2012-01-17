@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -318,7 +317,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 		};
 		if (isReferenced) {
-			declareSyntheticVariable(expr, b, later);
+			declareFreshLocalVariable(expr, b, later);
 		} else {
 			b.newLine();
 			later.exec();
@@ -468,7 +467,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.increaseIndentation();
 				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall)expr.getSwitch()).getFeature() : expr;
 				b.openPseudoScope();
-				final String proposedName = "_"+Strings.toFirstLower(casePart.getTypeGuard().getType().getSimpleName());
+				final String proposedName = getFavoriteVariableName(casePart.getTypeGuard().getType());
 				final String castedVariableName = b.declareSyntheticVariable(switchOver, proposedName);
 				b.newLine().append("final ");
 				serialize(casePart.getTypeGuard(), expr, b);

@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -324,6 +325,12 @@ public abstract class AbstractXbaseCompiler {
 		if (ex instanceof JvmFormalParameter) {
 			return ((JvmFormalParameter) ex).getName();
 		}
+		if(ex instanceof JvmArrayType) {
+			return getFavoriteVariableName(((JvmArrayType) ex).getComponentType());
+		}
+		if(ex instanceof JvmType) {
+			return "_" + Strings.toFirstLower(((JvmType) ex).getSimpleName());
+		}
 		if (ex instanceof JvmIdentifiableElement) {
 			return ((JvmIdentifiableElement) ex).getSimpleName();
 		}
@@ -355,7 +362,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected void declareSyntheticVariable(final XExpression expr, final IAppendable b) {
-		declareSyntheticVariable(expr, b, new Later() {
+		declareFreshLocalVariable(expr, b, new Later() {
 			@Override
 			public void exec() {
 				b.append(getDefaultValueLiteral(expr));
@@ -375,10 +382,7 @@ public abstract class AbstractXbaseCompiler {
 		return "null";
 	}
 
-	/**
-	 * TODO rename this method to 'declareFreshLocalVariable' after 2.1.x
-	 */
-	protected void declareSyntheticVariable(XExpression expr, IAppendable b, Later expression) {
+	protected void declareFreshLocalVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {
