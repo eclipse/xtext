@@ -8,10 +8,15 @@
 package org.eclipse.xtext.generator;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -19,16 +24,44 @@ import org.eclipse.emf.common.util.URI;
  */
 public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 
+	@Inject
+	private IEncodingProvider encodingProvider;
+	
+	@Inject
+	private IResourceServiceProvider.Registry registry;
+	
+	public JavaIoFileSystemAccess() {
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public JavaIoFileSystemAccess(IResourceServiceProvider.Registry registry, IEncodingProvider encodingProvider) {
+		this.registry = registry;
+		this.encodingProvider = encodingProvider;
+	}
+	
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
 		File file = getFile(fileName, outputConfigName);
 		try {
 			createFolder(file.getParentFile());
-			FileWriter writer = new FileWriter(file);
+			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), getEncoding(getURI(fileName, outputConfigName)));
 			writer.append(postProcess(fileName, outputConfigName, contents));
 			writer.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String getEncoding(URI fileURI) {
+		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(fileURI);
+		if(resourceServiceProvider != null) 
+			return resourceServiceProvider.getEncodingProvider().getEncoding(fileURI);
+		else 
+			return encodingProvider.getEncoding(fileURI);
 	}
 
 	/**
