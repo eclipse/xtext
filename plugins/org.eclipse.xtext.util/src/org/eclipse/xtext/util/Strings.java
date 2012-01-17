@@ -34,8 +34,7 @@ public class Strings {
 	}
 
 	public static String notNull(Object o) {
-		String string = String.valueOf(o);
-		return string == null ? "null" : string;
+		return String.valueOf(o);
 	}
 
 	public static String emptyIfNull(String s) {
@@ -300,7 +299,7 @@ public class Strings {
 		return result;
 	}
 
-	public static char SEPARATOR = ':';
+	public static final char SEPARATOR = ':';
 
 	/**
 	 * @param strings array of strings, may not be <code>null</code> and may not contain any <code>null</code> values.

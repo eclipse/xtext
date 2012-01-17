@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -196,7 +195,7 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 	}
 
 	protected Iterable<E> orderedIterable(Iterable<E> elements) {
-		return direction == Direction.L2R ? elements : Iterables.reverse(toList(elements));
+		return direction == Direction.L2R ? elements : Lists.reverse(toList(elements));
 	}
 
 	protected List<E> orderedList(Iterable<E> elements) {

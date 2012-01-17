@@ -28,7 +28,7 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 	}
 
 	private final class ElementIterator implements Iterator<ELEMENT> {
-		protected Element<ELEMENT> ele;
+		private Element<ELEMENT> ele;
 
 		public ElementIterator(Element<ELEMENT> ele) {
 			super();
