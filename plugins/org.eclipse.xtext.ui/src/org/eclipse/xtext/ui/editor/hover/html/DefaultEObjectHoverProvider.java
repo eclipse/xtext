@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hover.html;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -108,11 +110,16 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	}
 
 	protected String getFirstLine(EObject o) {
-		return o.eClass().getName()+ " <b>"+getLabel(o)+"</b>";
+		String label = getLabel(o);
+		return o.eClass().getName()+ ((label != null) ? " <b>"+label+"</b>" : "");
 	}
 	
 	protected String getLabel (EObject o) {
-		return HTMLPrinter.convertToHTMLContent(getLabelProvider().getText(o));
+		String text = getLabelProvider().getText(o);
+		if(!isEmpty(text))
+			return HTMLPrinter.convertToHTMLContent(text);
+		else
+			return null;
 	}
 	
 	protected ILabelProvider getLabelProvider () {
