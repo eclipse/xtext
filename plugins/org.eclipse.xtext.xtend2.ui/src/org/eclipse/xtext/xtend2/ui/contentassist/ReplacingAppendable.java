@@ -72,7 +72,7 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 			try {
 				XtendFile xtendFile = EcoreUtil2.getContainerOfType(context, XtendFile.class);
 				if (xtendFile != null) {
-					ImportManager importManager = new ImportManager(true);
+					ImportManager importManager = new ImportManager(true, '$');
 					for (XtendImport xImport : xtendFile.getImports()) {
 						if (xImport.getImportedType() != null) {
 							importManager.addImportFor(xImport.getImportedType());
