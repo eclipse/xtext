@@ -15,6 +15,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class OccurrenceComputer extends JvmModelOccurrenceComputer {
 
 	@Override
