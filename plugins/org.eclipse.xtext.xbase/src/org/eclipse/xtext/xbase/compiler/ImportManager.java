@@ -33,19 +33,31 @@ public class ImportManager {
 	private Map<String, String> imports = newHashMap();
 
 	private boolean organizeImports;
+	
 
 	private String thisTypeSimpleName;
 	private String thisTypeQualifiedName;
 
+	private final char innerTypeSeparator;
+
+	public ImportManager(boolean organizeImports, char innerTypeSeparator) {
+		this(organizeImports, null, innerTypeSeparator);
+	}
+
 	public ImportManager(boolean organizeImports) {
 		this(organizeImports, null);
 	}
-
+	
 	public ImportManager(boolean organizeImports, JvmDeclaredType thisType) {
+		this(organizeImports, thisType, '.');
+	}
+	
+	public ImportManager(boolean organizeImports, JvmDeclaredType thisType, char innerTypeSeparator) {
 		this.organizeImports = organizeImports;
+		this.innerTypeSeparator = innerTypeSeparator;
 		if (thisType != null) {
 			thisTypeSimpleName = thisType.getSimpleName();
-			thisTypeQualifiedName = thisType.getQualifiedName('.');
+			thisTypeQualifiedName = thisType.getQualifiedName(innerTypeSeparator);
 			thisCollidesWithJavaLang = CodeGenUtil.isJavaLangType(thisTypeSimpleName);
 		}
 	}
@@ -62,12 +74,12 @@ public class ImportManager {
 
 	public void appendType(final JvmType type, StringBuilder builder) {
 		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
-			builder.append(type.getQualifiedName('.'));
+			builder.append(type.getQualifiedName(innerTypeSeparator));
 		} else if (type instanceof JvmArrayType) {
 			appendType(((JvmArrayType) type).getComponentType(), builder);
 			builder.append("[]");
 		} else {
-			final String qualifiedName = type.getQualifiedName('.');
+			final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
 			final String simpleName = type.getSimpleName();
 			if (allowsSimpleName(qualifiedName, simpleName)) {
 				builder.append(simpleName);
@@ -101,7 +113,7 @@ public class ImportManager {
 	}
 
 	public boolean addImportFor(JvmType type) {
-		final String qualifiedName = type.getQualifiedName('.');
+		final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
 		final String simpleName = type.getSimpleName();
 		if (!allowsSimpleName(qualifiedName, simpleName) && !needsQualifiedName(qualifiedName, simpleName)
 				&& !imports.containsKey(simpleName)) {

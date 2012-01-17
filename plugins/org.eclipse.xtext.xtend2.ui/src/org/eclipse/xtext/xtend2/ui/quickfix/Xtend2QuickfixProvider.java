@@ -29,12 +29,14 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -58,6 +60,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xtend2.formatting.MemberFromSuperImplementor;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.ui.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtext.xtend2.ui.contentassist.ReplacingAppendable;
@@ -105,6 +108,12 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	private XtendLibClasspathAdder xtendLibAdder;
 	
+	@Inject
+	private IXtend2JvmAssociations associations;
+	
+	@Inject 
+	private VisibilityService visibilityService;
+	
 	/**
 	 * Filter quickfixes for types and constructors.
 	 */
@@ -130,8 +139,10 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 					if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(reference.getEReferenceType()))
 						useJavaSearch = true;
 					if (useJavaSearch) {
+						XtendClass xtendClass = EcoreUtil2.getContainerOfType(target, XtendClass.class);
+						JvmDeclaredType jvmType = xtendClass != null ? associations.getInferredType(xtendClass) : null;
 						IJavaSearchScope javaSearchScope = getJavaSearchScope(target);
-						createImportProposals(issue, issueString, javaSearchScope, issueResolutionAcceptor);
+						createImportProposals(jvmType, issue, issueString, javaSearchScope, issueResolutionAcceptor);
 						scope = getImportedTypesScope(target, issueString, scope, javaSearchScope);
 					}
 					List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
@@ -293,7 +304,7 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 		return fqNameAsString;
 	}
 
-	protected void createImportProposals(final Issue issue, String typeSimpleName, IJavaSearchScope searchScope,
+	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeSimpleName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
 		SearchEngine searchEngine = new SearchEngine();
 		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
@@ -303,15 +314,34 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 							char[][] enclosingTypeNames, String path) {
 						final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 								simpleTypeName);
-						String label = "Import '" + new String(simpleTypeName) + "' (" + new String(packageName) + ")";
-						acceptor.accept(issue, label, label, "fix_indent.gif", new ISemanticModification() {
-							public void apply(EObject element, IModificationContext context) throws Exception {
-								ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
-										element, 0, 0);
-								appendable.append(typeReferences.findDeclaredType(qualifiedTypeName, element));
-								appendable.insertNewImports();
+						JvmType importType = typeReferences.findDeclaredType(qualifiedTypeName, contextType);
+						if(importType instanceof JvmDeclaredType
+								&& (contextType == null || visibilityService.isVisible((JvmDeclaredType)importType, contextType))) {
+							StringBuilder label = new StringBuilder("Import '");
+							label.append(new String(simpleTypeName));
+							label.append("' (");
+							label.append(new String(packageName));
+							if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
+								boolean isFirst = true;
+								for(char[] enclosingTypeName: enclosingTypeNames) {
+									if(isFirst) 
+										label.append(".");
+									else 
+										label.append("$");
+									isFirst = false;
+									label.append(new String(enclosingTypeName));
+								}
 							}
-						});
+							label.append(")");
+							acceptor.accept(issue, label.toString(), label.toString(), "fix_indent.gif", new ISemanticModification() {
+								public void apply(EObject element, IModificationContext context) throws Exception {
+									ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
+											element, 0, 0);
+									appendable.append(typeReferences.findDeclaredType(qualifiedTypeName, element));
+									appendable.insertNewImports();
+								}
+							});
+						}
 					}
 				}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
 	}
