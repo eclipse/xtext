@@ -31,7 +31,7 @@
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
 <unit id="javax.inject" version="0.0.0"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20110907174232/repository"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/I20120109153617/repository"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
