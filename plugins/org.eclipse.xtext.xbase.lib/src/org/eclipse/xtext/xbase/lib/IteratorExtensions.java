@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
@@ -341,6 +342,27 @@ public class IteratorExtensions {
 			throw new NullPointerException("procedure");
 		while(iterator.hasNext()) {
 			procedure.apply(iterator.next());
+		}
+	}
+	
+	/**
+	 * Applies {@code procedure} for each element of the given iterator.
+	 * The procedure takes the element and a loop counter. If the counter would overflow, {@link Integer#MAX_VALUE}
+	 * is returned for all subsequent elements. The first element is at index zero.
+	 * 
+	 * @param iterator
+	 *            the iterator. May not be <code>null</code>.
+	 * @param procedure
+	 *            the procedure. May not be <code>null</code>.
+	 */
+	public static final <T> void forEach(Iterator<T> iterator, Procedure2<? super T, ? super Integer> procedure) {
+		if (procedure == null)
+			throw new NullPointerException("procedure");
+		int i = 0;
+		while(iterator.hasNext()) {
+			procedure.apply(iterator.next(), i);
+			if (i != Integer.MAX_VALUE)
+				i++;
 		}
 	}
 

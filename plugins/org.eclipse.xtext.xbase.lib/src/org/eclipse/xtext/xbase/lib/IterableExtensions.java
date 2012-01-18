@@ -20,6 +20,7 @@ import java.util.SortedSet;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
@@ -382,6 +383,28 @@ public class IterableExtensions {
 			throw new NullPointerException("procedure");
 		for (T t : iterable) {
 			procedure.apply(t);
+		}
+	}
+	
+	/**
+	 * Applies {@code procedure} for each element of the given iterable.
+	 * The procedure takes the element and a loop counter. If the counter would overflow, {@link Integer#MAX_VALUE}
+	 * is returned for all subsequent elements. The first element is at index zero.
+	 * 
+	 * @param iterable
+	 *            the iterable. May not be <code>null</code>.
+	 * @param procedure
+	 *            the procedure. May not be <code>null</code>.
+	 * @since 2.3
+	 */
+	public static final <T> void forEach(Iterable<T> iterable, Procedure2<? super T, ? super Integer> procedure) {
+		if (procedure == null)
+			throw new NullPointerException("procedure");
+		int i = 0;
+		for (T t : iterable) {
+			procedure.apply(t, i);
+			if (i != Integer.MAX_VALUE)
+				i++;
 		}
 	}
 
