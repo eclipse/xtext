@@ -22,7 +22,7 @@ public class TextViewerShiftAction extends TextViewerAction implements IReadOnly
 	/** The text operation code */
 	private int fOperationCode = -1;
 	/** The text operation target */
-	private ITextOperationTarget fOperationTarget;
+	private ITextOperationTarget fOperationTarget = null;
 
 	/**
 	 * Creates and initializes the action for the given text viewer and operation code. The action configures its visual
@@ -42,7 +42,8 @@ public class TextViewerShiftAction extends TextViewerAction implements IReadOnly
 	 * @see TextViewerAction#TextViewerAction(ResourceBundle, String, ITextViewer)
 	 */
 	public TextViewerShiftAction(ResourceBundle bundle, String prefix, ITextViewer viewer, int operationCode) {
-		super(bundle, prefix, viewer);
+		super(bundle, prefix);
+		setViewer(viewer);
 		fOperationCode = operationCode;
 		update();
 	}

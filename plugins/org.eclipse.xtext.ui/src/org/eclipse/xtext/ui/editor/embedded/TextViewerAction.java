@@ -47,9 +47,16 @@ public abstract class TextViewerAction extends ResourceAction implements IUpdate
 	 * @see ResourceAction#ResourceAction(ResourceBundle, String)
 	 */
 	protected TextViewerAction(ResourceBundle bundle, String prefix, ITextViewer viewer) {
-		super(bundle, prefix);
+		this(bundle, prefix);
 		setViewer(viewer);
 		update();
+	}
+
+	/**
+	 * Make sure the Viewer in set after calling this constructor and before calling {@link #update()}
+	 */
+	protected TextViewerAction(ResourceBundle bundle, String prefix) {
+		super(bundle, prefix);
 	}
 
 	/**
