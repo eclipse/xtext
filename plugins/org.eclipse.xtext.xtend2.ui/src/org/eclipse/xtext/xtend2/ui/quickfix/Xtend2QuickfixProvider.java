@@ -316,7 +316,7 @@ public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
 								simpleTypeName);
 						JvmType importType = typeReferences.findDeclaredType(qualifiedTypeName, contextType);
 						if(importType instanceof JvmDeclaredType
-								&& (contextType == null || visibilityService.isVisible((JvmDeclaredType)importType, contextType))) {
+								&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
 							StringBuilder label = new StringBuilder("Import '");
 							label.append(new String(simpleTypeName));
 							label.append("' (");
