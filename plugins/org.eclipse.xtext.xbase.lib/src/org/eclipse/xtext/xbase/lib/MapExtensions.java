@@ -12,6 +12,7 @@ import java.util.Map;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
 import com.google.common.base.Predicate;
@@ -37,6 +38,27 @@ public class MapExtensions {
 			throw new NullPointerException("procedure");
 		for (Map.Entry<K, V> entry : map.entrySet()) {
 			procedure.apply(entry.getKey(), entry.getValue());
+		}
+	}
+	
+	/**
+	 * Applies the given {@code procedure} for each {@link java.util.Map.Entry key value pair} of the given {@code map}. 
+	 * The procedure takes the key, the value and a loop counter. If the counter would overflow, {@link Integer#MAX_VALUE}
+	 * is returned for all subsequent pairs. The first pair is at index zero.
+	 * 
+	 * @param map
+	 *            the map. May not be <code>null</code>.
+	 * @param procedure
+	 *            the procedure. May not be <code>null</code>.
+	 */
+	public static final <K, V> void forEach(Map<K, V> map, Procedure3<? super K, ? super V, ? super Integer> procedure) {
+		if (procedure == null)
+			throw new NullPointerException("procedure");
+		int i = 0;
+		for (Map.Entry<K, V> entry : map.entrySet()) {
+			procedure.apply(entry.getKey(), entry.getValue(), i);
+			if (i != Integer.MAX_VALUE)
+				i++;
 		}
 	}
 	

@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 
@@ -73,6 +74,11 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 	@Override
 	protected Integer head(Iterable<Integer> input) {
 		return IterableExtensions.head(input);
+	}
+	
+	@Override
+	protected void forEach(Iterable<Integer> input, Procedure2<Integer, Integer> proc) {
+		IterableExtensions.forEach(input, proc);
 	}
 	
 	@Test public void testJoinWithNull() {
