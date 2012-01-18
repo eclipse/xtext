@@ -74,7 +74,6 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 	 * The default context is the context where getDefault and setDefault
 	 * methods will search. This context is also used in the search.
 	 */
-	@SuppressWarnings("deprecation")
 	private IScopeContext defaultContext = new DefaultScope();
 
 	/**
@@ -227,16 +226,15 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 		if (obj instanceof String) {
 			return defaults.get(key, STRING_DEFAULT_DEFAULT);
 		} else if (obj instanceof Integer) {
-			return new Integer(defaults.getInt(key, INT_DEFAULT_DEFAULT));
+			return Integer.valueOf(defaults.getInt(key, INT_DEFAULT_DEFAULT));
 		} else if (obj instanceof Double) {
-			return new Double(defaults.getDouble(key, DOUBLE_DEFAULT_DEFAULT));
+			return Double.valueOf(defaults.getDouble(key, DOUBLE_DEFAULT_DEFAULT));
 		} else if (obj instanceof Float) {
-			return new Float(defaults.getFloat(key, FLOAT_DEFAULT_DEFAULT));
+			return Float.valueOf(defaults.getFloat(key, FLOAT_DEFAULT_DEFAULT));
 		} else if (obj instanceof Long) {
-			return new Long(defaults.getLong(key, LONG_DEFAULT_DEFAULT));
+			return Long.valueOf(defaults.getLong(key, LONG_DEFAULT_DEFAULT));
 		} else if (obj instanceof Boolean) {
-			return defaults.getBoolean(key, BOOLEAN_DEFAULT_DEFAULT) ? Boolean.TRUE
-					: Boolean.FALSE;
+			return defaults.getBoolean(key, BOOLEAN_DEFAULT_DEFAULT) ? Boolean.TRUE : Boolean.FALSE;
 		} else {
 			return null;
 		}
