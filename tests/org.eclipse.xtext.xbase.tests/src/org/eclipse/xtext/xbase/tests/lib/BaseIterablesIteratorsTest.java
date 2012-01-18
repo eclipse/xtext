@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.lib;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -347,6 +348,77 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testHead_NPE() {
 		try {
 			head(null);
+			fail("expeced NPE");
+		} catch(NullPointerException npe) {
+			// expected
+		}
+	}
+	
+	protected abstract void forEach(IterableOrIterator input, Procedures.Procedure2<Integer, Integer> proc);
+	
+	static class ForEachLoopCounter implements Procedures.Procedure2<Integer, Integer> {
+
+		private int expectedIndex = 0;
+		private final Integer[] values;
+		
+		ForEachLoopCounter(Integer... values) {
+			this.values = values;
+		}
+		
+		public void apply(Integer value, Integer index) {
+			assertEquals(expectedIndex, index.intValue());
+			assertEquals(values[expectedIndex], value);
+			expectedIndex++;
+		}
+		
+	}
+	
+	@Test public void testForEachWithIndex_empty() {
+		for(IterableOrIterator testMe: testData()) {
+			ForEachLoopCounter counter = new ForEachLoopCounter();
+			forEach(testMe, counter);
+			assertEquals(0, counter.expectedIndex);
+		}
+	}
+	
+	@Test public void testForEachWithIndex_empty_noProcedure() {
+		for(IterableOrIterator testMe: testData()) {
+			try {
+				forEach(testMe, null);
+				fail("expeced NPE");
+			} catch(NullPointerException e) {
+				// expected
+			}
+		}
+	}
+	
+	@Test public void testForEachWithIndex_oneEntry() {
+		for(IterableOrIterator testMe: testData(first)) {
+			ForEachLoopCounter counter = new ForEachLoopCounter(first);
+			forEach(testMe, counter);
+			assertEquals(1, counter.expectedIndex);
+		}
+	}
+	
+	@Test public void testForEachWithIndex_entryIsNull() {
+		for(IterableOrIterator testMe: testData((Integer)null)) {
+			ForEachLoopCounter counter = new ForEachLoopCounter((Integer)null);
+			forEach(testMe, counter);
+			assertEquals(1, counter.expectedIndex);
+		}
+	}
+	
+	@Test public void testForEachWithIndex_moreEntries() {
+		for(IterableOrIterator testMe: testData(first, second, forth)) {
+			ForEachLoopCounter counter = new ForEachLoopCounter(first, second, forth);
+			forEach(testMe, counter);
+			assertEquals(3, counter.expectedIndex);
+		}
+	}
+	
+	@Test public void testForEachWithIndex_NPE() {
+		try {
+			forEach(null, new ForEachLoopCounter());
 			fail("expeced NPE");
 		} catch(NullPointerException npe) {
 			// expected
