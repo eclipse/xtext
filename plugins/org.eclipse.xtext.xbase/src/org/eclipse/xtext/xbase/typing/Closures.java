@@ -212,6 +212,8 @@ public class Closures {
 		String simpleClassName = (procedure ? "Procedure" : "Function") + Math.min(6, parameterCount);
 		final Class<?> loadFunctionClass = loadFunctionClass(simpleClassName, procedure);
 		JvmType declaredType = typeRefs.findDeclaredType(loadFunctionClass, context);
+		if (declaredType == null)
+			return null;
 		result.setType(declaredType);
 		return result;
 	}

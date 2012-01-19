@@ -147,11 +147,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(" else {");
 			b.increaseIndentation();
-			b.newLine().append("throw ");
-			b.append(getTypeReferences().findDeclaredType(Exceptions.class, expr));
-			b.append(".sneakyThrow(");
-			b.append(variable);
-			b.append(");");
+			final JvmType sneakyThrowType = getTypeReferences().findDeclaredType(Exceptions.class, expr);
+			if (sneakyThrowType == null) {
+				b.append("COMPILE ERROR : '"+Exceptions.class.getCanonicalName()+"' could not be found on the classpath!");
+			} else {
+				b.newLine().append("throw ");
+				b.append(sneakyThrowType);
+				b.append(".sneakyThrow(");
+				b.append(variable);
+				b.append(");");
+			}
 			b.decreaseIndentation();
 			b.newLine().append("}");
 			b.decreaseIndentation();
@@ -346,14 +351,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaExpression(expr.getExpression(), b);
 			b.append(";");
 			if (needsSneakyThrow) {
-				String name = b.declareSyntheticVariable(new Object(), "_e");
-				b.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
-				b.newLine().append("throw ");
-				b.append(getTypeReferences().findDeclaredType(Exceptions.class, expr));
-				b.append(".sneakyThrow(");
-				b.append(name);
-				b.append(");");
-				b.decreaseIndentation().newLine().append("}");
+				generateCheckedExceptionHandling(expr, b);
+//				String name = b.declareSyntheticVariable(new Object(), "_e");
+//				b.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
+//				b.newLine().append("throw ");
+//				b.append(getTypeReferences().findDeclaredType(Exceptions.class, expr));
+//				b.append(".sneakyThrow(");
+//				b.append(name);
+//				b.append(");");
+//				b.decreaseIndentation().newLine().append("}");
 			}
 		} else {
 			b.newLine().append("return;");

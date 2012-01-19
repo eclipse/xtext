@@ -422,10 +422,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			
 		JvmDeclaredType contextType = getContextType(call);
 		IAcceptor<IJvmFeatureDescriptionProvider> acceptorWithoutContext = featureScopeDescriptions.curry(null, call);
-		IAcceptor<IJvmFeatureDescriptionProvider> acceptorWithContext = featureScopeDescriptions.curry(typeReferences.createTypeRef(contextType), call);
 		addStaticFeatureDescriptionProviders(resource, contextType, acceptorWithoutContext);
-		
-		addFeatureDescriptionProviders(contextType, null, null, null, getImplicitStaticFeaturePriority(), true, acceptorWithContext);
+		if (contextType != null) {
+			IAcceptor<IJvmFeatureDescriptionProvider> acceptorWithContext = featureScopeDescriptions.curry(typeReferences.createTypeRef(contextType), call);
+			addFeatureDescriptionProviders(contextType, null, null, null, getImplicitStaticFeaturePriority(), true, acceptorWithContext);
+		}
 
 		IScope result = featureScopeDescriptions.createScope(parent);
 		return result;

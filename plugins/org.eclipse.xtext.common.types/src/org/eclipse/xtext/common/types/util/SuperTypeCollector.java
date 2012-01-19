@@ -282,7 +282,8 @@ public class SuperTypeCollector {
 				}
 				if (!boundProcessed) {
 					JvmType objectType = references.findDeclaredType(Object.class, object);
-					doSwitch(references.createTypeRef(objectType));
+					if (objectType != null)
+						doSwitch(references.createTypeRef(objectType));
 				}
 			}
 			return Boolean.TRUE;
