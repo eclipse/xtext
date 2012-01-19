@@ -6,12 +6,13 @@
 	 <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="xtext,xtext2"
-            id="org.eclipse.xtext.Xtext"
-            name="%Xtext_Editor">
+              class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="xtext,xtext2"
+              icon="icons/editor.gif"
+              id="org.eclipse.xtext.Xtext"
+              name="%Xtext_Editor">
         </editor>
     </extension>
     <extension
@@ -161,7 +162,7 @@
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
 			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-			icon="icons/editor.gif"
+			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			name="%Xtext_Project"
 			project="true">
@@ -172,7 +173,7 @@
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
 			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
-			icon="icons/editor.gif"
+			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			name="%Xtext_Project_From_Ecore"
 			project="true">
