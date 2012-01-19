@@ -41,7 +41,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	public NewXtextProjectWizard(IProjectCreator projectCreator) {
 		super(projectCreator);
 		setWindowTitle(Messages.NewXtextProjectWizard_WindowTitle);
-		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/newxprj_wiz.png")); //$NON-NLS-1$
+		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/newxprj_wiz.gif")); //$NON-NLS-1$
 	}
 
 	@Override
