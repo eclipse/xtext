@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.editor.preferences;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.eclipse.core.commands.common.EventManager;
 import org.eclipse.core.runtime.Assert;
@@ -9,9 +8,9 @@ import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.NodeChangeEvent;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -335,7 +334,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 		if (scopes == null) {
 			return;
 		}
-		this.searchContexts = Arrays.copyOf(scopes, scopes.length);
+		this.searchContexts = scopes.clone();
 
 		// Assert that the default was not included (we automatically add it to
 		// the end)
