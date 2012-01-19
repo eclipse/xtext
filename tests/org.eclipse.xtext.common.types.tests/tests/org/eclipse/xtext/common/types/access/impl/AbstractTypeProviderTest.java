@@ -2107,11 +2107,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = AbstractMethods.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(2, size(type.getDeclaredOperations()));
-		Iterator<JvmOperation> declaredOperations = type.getDeclaredOperations().iterator();
-		JvmOperation abstractMethod = declaredOperations.next();
-		assertTrue(abstractMethod.isAbstract());
-		JvmOperation concreteMethod = declaredOperations.next();
-		assertFalse(concreteMethod.isAbstract());
+		for (JvmOperation op : type.getDeclaredOperations()) {
+			if (op.getSimpleName().startsWith("abstract")) {
+				assertTrue(op.isAbstract());
+			} else {
+				assertFalse(op.isAbstract());
+			}
+		}
 	}
 	
 	@Test public void testDefaultIntAnnotationValue_01() throws Exception {
