@@ -1,5 +1,6 @@
 package org.eclipse.xtext.ui.editor.preferences;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.eclipse.core.commands.common.EventManager;
 import org.eclipse.core.runtime.Assert;
@@ -331,10 +332,10 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 	 */
 	@SuppressWarnings("restriction")
 	public void setSearchContexts(IScopeContext[] scopes) {
-		this.searchContexts = scopes;
 		if (scopes == null) {
 			return;
 		}
+		this.searchContexts = Arrays.copyOf(scopes, scopes.length);
 
 		// Assert that the default was not included (we automatically add it to
 		// the end)
@@ -754,7 +755,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 				getStorePreferences().putInt(name, value);
 			}
 			dirty = true;
-			firePropertyChangeEvent(name, new Integer(oldValue), new Integer(
+			firePropertyChangeEvent(name, Integer.valueOf(oldValue), Integer.valueOf(
 					value));
 		} finally {
 			silentRunning = false;// Restart listening to preferences
