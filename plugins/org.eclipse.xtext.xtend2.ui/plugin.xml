@@ -12,6 +12,7 @@
               extensions="xtend"
               icon="icons/xtend_file.png"
               id="org.eclipse.xtext.xtend2.Xtend2"
+              matchingStrategy="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
               name="Xtend Editor">
         </editor>
     </extension>

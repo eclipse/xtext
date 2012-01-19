@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <fragment>
+<!--
 	<extension
 		point="org.eclipse.jdt.ui.javaElementOpeners">
 		<editorOpener
@@ -8,4 +9,12 @@
 			id="xtext.common.types.originalElementOpener">
 		</editorOpener>
 	</extension>
+-->
+ <extension
+       point="org.eclipse.ui.ide.editorAssociationOverride">
+    <editorAssociationOverride
+          class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.shared.jdt38.OriginalEditorSelector"
+          id="xtext.common.types.originalEditorSelector">
+    </editorAssociationOverride>
+ </extension>
 </fragment>

@@ -13,11 +13,11 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+«DEFINE generate(List[String] modelFileExtensions, boolean withXbase) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(List[String] modelFileExtensions, boolean withXbase) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
+«DEFINE addToPluginXmlUi(List[String] modelFileExtensions, boolean withXbase) FOR Grammar»
     <extension
             point="org.eclipse.ui.editors">
         <editor
@@ -26,6 +26,9 @@
             default="true"
             extensions="«modelFileExtensions.toString(",")»"
             id="«name»"
+«IF withXbase-»
+            matchingStrategy="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
+«ENDIF-»
             name="«name.toSimpleName()» Editor">
         </editor>
     </extension>
@@ -150,5 +153,5 @@
     </extension>   
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(List[String] modelFileExtensions, boolean withXbase) FOR Grammar»«ENDDEFINE»
 
