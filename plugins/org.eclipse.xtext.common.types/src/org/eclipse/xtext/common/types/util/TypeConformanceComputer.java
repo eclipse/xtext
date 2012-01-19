@@ -13,7 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
@@ -254,6 +253,8 @@ public class TypeConformanceComputer {
 			return referencesWithSameDistance.get(0);
 		} else if (referencesWithSameDistance.size() > 1) {
 			JvmMultiTypeReference result = typeReferences.createMultiTypeReference(referencesWithSameDistance.get(0).getType());
+			if (result == null)
+				return result;
 			for(JvmTypeReference reference: referencesWithSameDistance) {
 				result.getReferences().add(EcoreUtil2.cloneIfContained(reference));
 			}
@@ -434,7 +435,7 @@ public class TypeConformanceComputer {
 			JvmParameterizedTypeReference result = factory.createJvmParameterizedTypeReference();
 			result.setType(rawType);
 			for(JvmTypeReference parameterSuperType: parameterSuperTypes) {
-				result.getArguments().add((JvmTypeReference) EcoreUtil.copy(parameterSuperType));
+				result.getArguments().add(EcoreUtil2.clone(parameterSuperType));
 			}
 			return result;
 		} else if (rawType instanceof JvmArrayType) {
@@ -563,7 +564,7 @@ public class TypeConformanceComputer {
 		JvmWildcardTypeReference wildcardTypeReference = factory.createJvmWildcardTypeReference();
 		if (superType != null) {
 			JvmUpperBound upperBound = factory.createJvmUpperBound();
-			upperBound.setTypeReference((JvmTypeReference) EcoreUtil.copy(superType));
+			upperBound.setTypeReference(EcoreUtil2.clone(superType));
 			wildcardTypeReference.getConstraints().add(upperBound);
 		}
 		return wildcardTypeReference;

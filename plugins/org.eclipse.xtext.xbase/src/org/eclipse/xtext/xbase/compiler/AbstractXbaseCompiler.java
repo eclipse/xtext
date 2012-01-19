@@ -148,14 +148,7 @@ public abstract class AbstractXbaseCompiler {
 						appendable.append(";");
 				}
 				if (needsSneakyThrow) {
-					String name = appendable.declareSyntheticVariable(new Object(), "_e");
-					appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
-					appendable.newLine().append("throw ");
-					appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
-					appendable.append(".sneakyThrow(");
-					appendable.append(name);
-					appendable.append(");");
-					appendable.decreaseIndentation().newLine().append("}");
+					generateCheckedExceptionHandling(obj, appendable);
 				}
 				appendable.decreaseIndentation().newLine().append("}");
 				appendable.decreaseIndentation().newLine().append("}.apply()");
@@ -166,6 +159,22 @@ public abstract class AbstractXbaseCompiler {
 			internalToJavaExpression(obj, appendable);
 		}
 		return appendable;
+	}
+
+	protected void generateCheckedExceptionHandling(XExpression obj, IAppendable appendable) {
+		String name = appendable.declareSyntheticVariable(new Object(), "_e");
+		appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
+		final JvmType findDeclaredType = typeReferences.findDeclaredType(Exceptions.class, obj);
+		if (findDeclaredType == null) {
+			appendable.append("COMPILE ERROR : '"+Exceptions.class.getCanonicalName()+"' could not be found on the classpath!");
+		} else {
+			appendable.newLine().append("throw ");
+			appendable.append(findDeclaredType);
+			appendable.append(".sneakyThrow(");
+			appendable.append(name);
+			appendable.append(");");
+		}
+		appendable.decreaseIndentation().newLine().append("}");
 	}
 	
 	protected boolean canCompileToJavaExpression(XExpression expression, IAppendable appendable) {
@@ -194,14 +203,7 @@ public abstract class AbstractXbaseCompiler {
 				appendable.append(";");
 		}
 		if (needsSneakyThrow) {
-			String name = appendable.declareSyntheticVariable(new Object(), "_e");
-			appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
-			appendable.newLine().append("throw ");
-			appendable.append(typeReferences.findDeclaredType(Exceptions.class, obj));
-			appendable.append(".sneakyThrow(");
-			appendable.append(name);
-			appendable.append(");");
-			appendable.decreaseIndentation().newLine().append("}");
+			generateCheckedExceptionHandling(obj, appendable);
 		}
 		return appendable;
 	}

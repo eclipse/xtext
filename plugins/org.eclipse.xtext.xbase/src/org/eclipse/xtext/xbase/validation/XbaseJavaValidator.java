@@ -495,6 +495,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				return;
 
 			JvmType iterable = typeRefs.findDeclaredType(Iterable.class, obj);
+			if (iterable == null) {
+				error("foreach needs '"+Iterable.class.getCanonicalName()+"' on the classpath.", obj, null, -1, MISSING_TYPE);
+				return;
+			}
 			JvmTypeReference argument = typeRefs.wildCard();
 			JvmTypeReference expected = obj.getDeclaredParam().getParameterType();
 			if (expected != null) {
