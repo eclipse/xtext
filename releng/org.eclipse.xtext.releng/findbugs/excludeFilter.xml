@@ -8,6 +8,17 @@
 	<Match>
 		<Class name="~testdata\..*" />
 	</Match>
+
+	<!-- "==" compare is desired - See https://bugs.eclipse.org/bugs/show_bug.cgi?id=225331 -->
+	<Match>
+		<Class
+			name="org.eclipse.xtext.ui.editor.preferences.FixedScopedPreferenceStore" />
+		<Method name="setToDefault" />
+		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
+	</Match>
+	
+	
+	
 	<!-- Some Examples:
 	<Match>
 		<Class name="com.foobar.ClassNotToBeAnalyzed" />
