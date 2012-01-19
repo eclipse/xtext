@@ -26,6 +26,6 @@ public class PrimitivesTest extends Assert {
 	}
 	
 	@Test public void testAllPrimitiveTypes() {
-		assertEquals(9, Primitives.ALL_PRIMITIVE_TYPES.length);
+		assertEquals(9, Primitives.ALL_PRIMITIVE_TYPES.size());
 	}
 }
