@@ -72,7 +72,7 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 					return;
 			} else {
 				JvmType componentType = ((JvmArrayType)expectedType.getType()).getComponentType();
-				if (conformanceComputer.isConformant(typeReferences.createTypeRef(componentType), actualType))
+				if (componentType != null && conformanceComputer.isConformant(typeReferences.createTypeRef(componentType), actualType))
 					return;
 			}
 		}

@@ -504,7 +504,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (expected != null) {
 				argument = typeRefs.wildCardExtends(EcoreUtil2.cloneIfContained(expected));
 			}
-			JvmParameterizedTypeReference expectedType = typeRefs.createTypeRef(iterable, argument);
+			JvmTypeReference expectedType = typeRefs.createTypeRef(iterable, argument);
 			if (!conformanceComputer.isConformant(expectedType, actualType))
 				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
 						+ canonicalName(actualType), obj.getForExpression(), null,

@@ -11,7 +11,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -125,7 +124,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 						addFeatureDescriptionProvidersForAssignment(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
 					}
 				}
-				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
+				JvmTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 				featureProvider.setContext(typeRef);
 				featureProvider.setExpectNoParameters(isThis);
@@ -188,7 +187,7 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, isStatic, acceptor);
 					}
 				}
-				JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
+				JvmTypeReference typeRef = typeReferences.createTypeRef(inferredJvmType);
 				ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 				featureProvider.setContext(typeRef);
 				featureProvider.setExpectNoParameters(isThis);

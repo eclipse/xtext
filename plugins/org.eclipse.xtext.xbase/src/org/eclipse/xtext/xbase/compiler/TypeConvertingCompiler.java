@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
@@ -151,7 +150,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
 		}
 		JvmDeclaredType declaringType = operation.getDeclaringType();
-		final JvmParameterizedTypeReference typeReferenceWithPlaceHolder = getTypeReferences().createTypeRef(declaringType);
+		final JvmTypeReference typeReferenceWithPlaceHolder = getTypeReferences().createTypeRef(declaringType);
 		ITypeArgumentContext typeArgumentContext = contextProvider.getTypeArgumentContext(
 				new TypeArgumentContextProvider.AbstractRequest() {
 					@Override

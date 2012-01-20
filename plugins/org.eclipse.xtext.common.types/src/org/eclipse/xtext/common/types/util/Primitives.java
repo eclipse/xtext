@@ -80,7 +80,10 @@ public class Primitives {
 		if (primitive == null || !isPrimitive(primitive)) {
 			return primitive;
 		}
-		return typeReferences.createTypeRef(getWrapperType((JvmPrimitiveType) primitive.getType()));
+		final JvmType wrapperType = getWrapperType((JvmPrimitiveType) primitive.getType());
+		if (wrapperType == null)
+			return primitive;
+		return typeReferences.createTypeRef(wrapperType);
 	}
 	
 	public JvmType getWrapperType(JvmPrimitiveType primitive) {

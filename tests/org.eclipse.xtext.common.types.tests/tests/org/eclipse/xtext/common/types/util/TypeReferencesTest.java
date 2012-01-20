@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
 import org.junit.Assert;
@@ -48,14 +48,14 @@ public class TypeReferencesTest extends Assert {
 	
 	@Test public void testIsEqualOrSubtypeOf_00() throws Exception {
 		JvmType objectType = typeProvider.findTypeByName(Object.class.getName());
-		JvmParameterizedTypeReference reference = typeRefs.createTypeRef(objectType);
+		JvmTypeReference reference = typeRefs.createTypeRef(objectType);
 		assertTrue(typeRefs.isInstanceOf(reference, Object.class));
 		assertFalse(typeRefs.isInstanceOf(reference, List.class));
 	}
 	
 	@Test public void testIsEqualOrSubtypeOf_01() throws Exception {
 		JvmType objectType = typeProvider.findTypeByName(String.class.getName());
-		JvmParameterizedTypeReference reference = typeRefs.createTypeRef(objectType);
+		JvmTypeReference reference = typeRefs.createTypeRef(objectType);
 		assertTrue(typeRefs.isInstanceOf(reference, Object.class));
 		assertTrue(typeRefs.isInstanceOf(reference, Comparable.class));
 		assertTrue(typeRefs.isInstanceOf(reference, Serializable.class));

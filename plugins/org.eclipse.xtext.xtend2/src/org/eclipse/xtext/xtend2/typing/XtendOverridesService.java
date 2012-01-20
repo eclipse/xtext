@@ -14,12 +14,11 @@ import java.util.Set;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -56,7 +55,7 @@ public class XtendOverridesService {
 	}
 
 	public JvmOperation findOverriddenOperation(JvmOperation operation) {
-		final JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(operation.getDeclaringType());
+		final JvmTypeReference typeRef = typeReferences.createTypeRef(operation.getDeclaringType());
 		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(
 				new TypeArgumentContextProvider.ReceiverRequest(typeRef));
 		for (JvmOperation superOperation : allSuperOperations(operation.getDeclaringType())) {

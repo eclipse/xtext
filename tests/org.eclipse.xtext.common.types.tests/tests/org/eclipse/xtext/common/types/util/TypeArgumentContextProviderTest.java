@@ -595,6 +595,8 @@ public class TypeArgumentContextProviderTest extends Assert {
 	}
 	
 	protected JvmTypeReference createTypeRef(JvmType type, JvmTypeReference... argumentTypes) {
+		if (type == null)
+			throw new NullPointerException("type");
 		if (type instanceof JvmTypeParameter) {
 			if (((JvmTypeParameter) type).getConstraints().isEmpty()) {
 				JvmUpperBound upperBound = factory.createJvmUpperBound();
