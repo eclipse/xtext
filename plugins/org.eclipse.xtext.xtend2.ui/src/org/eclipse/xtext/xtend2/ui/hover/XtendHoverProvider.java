@@ -160,8 +160,7 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 					forwardAction.update();
 					if (newInput != null && newInput instanceof XtendInformationControlInput) {
 						openDeclarationAction.setEnabled(true);
-						if (newInput instanceof XtendInformationControlInput
-								&& ((XtextBrowserInformationControlInput) newInput).getInputElement() != null) {
+						if (((XtextBrowserInformationControlInput) newInput).getInputElement() != null) {
 							showInJavadocViewAction.setEnabled(true);
 						}
 					}
@@ -232,7 +231,7 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 		return super.hasHover(o) || o instanceof XtendParameter || o instanceof XAbstractFeatureCall;
 	}
 	
-	private final class ShowInJavadocViewAction extends Action {
+	private static final class ShowInJavadocViewAction extends Action {
 		private final IXtextBrowserInformationControl fInfoControl;
 
 		public ShowInJavadocViewAction(IXtextBrowserInformationControl infoControl) {

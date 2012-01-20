@@ -117,7 +117,7 @@ public class XtendHoverSerializer {
 		return stringBuilder.toString();
 	}
 
-	private final class XtendHoverXbaseSwitch extends XbaseSwitch<String> {
+	private static final class XtendHoverXbaseSwitch extends XbaseSwitch<String> {
 		@Override
 		public String caseXAbstractFeatureCall(XAbstractFeatureCall object) {
 			ICompositeNode node = NodeModelUtils.getNode(object);
