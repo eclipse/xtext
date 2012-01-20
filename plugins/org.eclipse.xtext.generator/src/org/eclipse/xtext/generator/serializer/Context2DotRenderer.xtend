@@ -33,7 +33,7 @@ class Context2DotRenderer {
 	}	
 	
 	def String getFileName(Pair<EObject, EClass> ctx, String name) {
-		val fn = grammar.name.toSimpleName + "_" + ctx.value.name + "_" + ctx.key.contextName + "_" + name;
+		val fn = grammar.name.toSimpleName + "_" + ctx.value?.name + "_" + ctx.key.contextName + "_" + name;
 		grammar.basePackageRuntime.asPath + "/serializer/" + fn + ".dot" 
 	}
 }

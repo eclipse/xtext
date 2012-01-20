@@ -77,7 +77,7 @@ public class Context2DotRenderer {
       String _simpleName = this.naming.toSimpleName(_name);
       String _operator_plus = StringExtensions.operator_plus(_simpleName, "_");
       EClass _value = ctx.getValue();
-      String _name_1 = _value.getName();
+      String _name_1 = _value==null?(String)null:_value.getName();
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_1);
       String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
       EObject _key = ctx.getKey();
