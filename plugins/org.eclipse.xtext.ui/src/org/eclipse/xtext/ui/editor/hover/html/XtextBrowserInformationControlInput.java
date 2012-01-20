@@ -66,7 +66,7 @@ public class XtextBrowserInformationControlInput extends BrowserInformationContr
 
 	@Override
 	public Object getInputElement() {
-		return fElement == null ? fHtml : fElement;
+		return fElement;
 	}
 
 	@Override
