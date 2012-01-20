@@ -29,6 +29,7 @@ import org.junit.Test
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.xtend2.ui.tests.hover.XtendUnsugaredHoverTest.*
 import static org.junit.Assert.*
+import org.junit.After
 
 class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	 
@@ -43,6 +44,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	
 	private static String FILEEXTENSION = ".xtend"
 	private static String FILEPATH = WorkbenchTestHelper::TESTPROJECT_NAME + "/src/testpackage/Foo" + FILEEXTENSION
+	
 
 	@BeforeClass
 	def static void createExtensionClass() throws Exception {
@@ -87,7 +89,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(it, 42)",triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42)",triple.second.unsugaredExpression)
 	}
 	
 	@Test
@@ -105,7 +107,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(it, 42)",triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42)",triple.second.unsugaredExpression)
 	}
 	
 		@Test
@@ -124,7 +126,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,1,0)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(it, 42 + a)",triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42 + a)",triple.second.unsugaredExpression)
 	}
 
 	@Test
@@ -142,7 +144,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(it, 40 + 2)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 40 + 2)", triple.second.unsugaredExpression)
 	}
 	
 	
@@ -162,7 +164,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,25)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
 	}
 	
 	@Test
@@ -174,14 +176,14 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 			extension Extension
 			
 			def baz(Integer it){
-				this._extension.bar(new ArrayList<String>(), 42)
+				bar(new ArrayList<String>(), 42)
 			}
 			
 		}
 		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,17)
+		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
 	}
 	
 	@Test
@@ -193,59 +195,20 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 			extension Extension
 			
 			def baz(Integer it){
-				this._extension.bar(new ArrayList<String>(), 42)
-			}
-			
-		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,17)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
-	}
-	
-	@Test
-	def void testUnsuagaredVersionForXtendFunction_8() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
-		package testpackage
-		import java.util.ArrayList
-		class Foo {
-			extension Extension
-			
-			def baz(Integer it){
-				this._extension.barCharSequence(42, «"'''"»   Test   Test
+				barCharSequence(42, «"'''"»   Test   Test
 		Test«"'''"»)
 			}
 			
 		}
 		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,17)
+		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals('''this._extension.barCharSequence(42, «"'''"»   Test   Test
+		assertEquals('''_extension.barCharSequence(42, «"'''"»   Test   Test
 Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	}
 	
-	
 	@Test
-	def void testUnsuagaredVersionForXtendFunction_9() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
-		package testpackage
-		import java.util.ArrayList
-		class Foo {
-			extension Extension
-			
-			def baz(Integer it){
-				_extension.bar(new ArrayList<String>(), 42)
-			}
-			
-		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,12)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
-	}
-	
-	@Test
-	def void testUnsuagaredVersionForXtendFunction_10() throws Exception {
+	def void testUnsuagaredVersionForXtendFunction_8() throws Exception {
 		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
@@ -260,12 +223,69 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,4)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extension.bar(it, 42)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42)", triple.second.unsugaredExpression)
 	}
 	
+	@Test
+	def void testUnsuagaredVersionForXtendFunction_9() throws Exception {
+		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		package testpackage
+		import java.util.ArrayList
+		class Foo {
+			extension Extension
+			
+			def baz(String it){
+				substring(0)
+			}
+			
+		}
+		'''.toString))
+		val triple = computeAstAndInvokeHover(editor,0,0)
+		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
+		assertEquals("it.substring(0)", triple.second.unsugaredExpression)
+	}
 	
 	@Test
-	def void testUnsuagaredVersionForJava() throws Exception {
+	def void testUnsuagaredVersionForXtendFunction_10() throws Exception {
+		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		package testpackage
+		import java.util.ArrayList
+		class Foo {
+			extension Extension
+			
+			def baz(){
+				val it = "42"
+				substring(0)
+			}
+			
+		}
+		'''.toString))
+		val triple = computeAstAndInvokeHover(editor,1,0)
+		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
+		assertEquals("it.substring(0)", triple.second.unsugaredExpression)
+	}
+	
+	@Test
+	def void testUnsuagaredVersionForXtendFunction_11() throws Exception {
+		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		package testpackage
+		import java.util.ArrayList
+		class Foo {
+			extension Extension
+			
+			def baz(){
+				new ArrayList<String>().head
+			}
+			
+		}
+		'''.toString))
+		val triple = computeAstAndInvokeHover(editor,0,25)
+		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
+		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.unsugaredExpression)
+	}
+	
+	@Test
+	def void testUnsuagaredVersionForJavaWiothJavaDoc() throws Exception {
 		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
@@ -285,7 +305,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		val javaDocHoverInput = javaDocHoverWrapper.getHoverInfo2(null, triple.third) as JavadocBrowserInformationControlInput
 		assertEquals(triple.second.html, javaDocHoverInput.html)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation)), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("this._extensionJava.bar(it, 40 + 2)", triple.second.unsugaredExpression)
+		assertEquals("_extensionJava.bar(it, 40 + 2)", triple.second.unsugaredExpression)
 	}
 	
 	def computeAstAndInvokeHover(XtextEditor editor, int indexOfExpressionToHover, int addOffset){
