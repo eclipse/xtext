@@ -13,47 +13,60 @@ import org.osgi.framework.BundleContext;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
 public class AbstractActivator extends AbstractUIPlugin {
-
-	private Map<String,Injector> injectors = new HashMap<String,Injector>();
+	
+	private static final Logger logger = Logger.getLogger(AbstractActivator.class);
+	
+	private Cache<String, Injector> injectors = CacheBuilder.newBuilder().build(new CacheLoader<String, Injector>() {
+		@Override
+		public Injector load(String language) throws Exception {
+			Module runtimeModule = getRuntimeModule(language);
+			Module sharedStateModule = getSharedStateModule();
+			Module uiModule = getUiModule(language);
+			Module mergedModule = override(override(runtimeModule).with(sharedStateModule)).with(uiModule);
+			return createInjector(mergedModule);
+		}
+	});
+	
 	private static AbstractActivator INSTANCE;
-
+	
+	public static final String ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_CONTENTASSISTTESTLANGUAGE = "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE = "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE1 = "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1";
+	public static final String ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE2 = "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2";
+	
 	public Injector getInjector(String languageName) {
-		return injectors.get(languageName);
+		try {
+			return injectors.get(languageName);
+		} catch(ExecutionException e) {
+			logger.error("Failed to create injector for " + languageName);
+			logger.error(e.getMessage(), e);
+			throw new RuntimeException("Failed to create injector for " + languageName, e);
+		}
 	}
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		try {
-			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage");
-			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage");
-			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1");
-			registerInjectorFor("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2");
-			
-		} catch (Exception e) {
-			Logger.getLogger(getClass()).error(e.getMessage(), e);
-			throw e;
-		}
-	}
-	
-	protected void registerInjectorFor(String language) throws Exception {
-		injectors.put(language, createInjector(
-		  override(override(getRuntimeModule(language)).with(getSharedStateModule())).with(getUiModule(language))));
 	}
 	
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		injectors.clear();
+		injectors.invalidateAll();
+		injectors.cleanUp();
 		INSTANCE = null;
 		super.stop(context);
 	}
@@ -63,41 +76,41 @@ public class AbstractActivator extends AbstractUIPlugin {
 	}
 	
 	protected Module getRuntimeModule(String grammar) {
-		if ("org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguageRuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_CONTENTASSISTTESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguageRuntimeModule();
 		}
-		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageRuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageRuntimeModule();
 		}
-		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1RuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE1.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1RuntimeModule();
 		}
-		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2RuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE2.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2RuntimeModule();
 		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
-		if ("org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule(this);
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_CONTENTASSISTTESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule(this);
 		}
-		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageUiModule(this);
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguageUiModule(this);
 		}
-		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage1".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1UiModule(this);
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE1.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage1UiModule(this);
 		}
-		if ("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2".equals(grammar)) {
-		  return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2UiModule(this);
+		if (ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE2.equals(grammar)) {
+			return new org.eclipse.xtext.common.types.xtext.ui.ui.RefactoringTestLanguage2UiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
-		return new org.eclipse.xtext.ui.shared.SharedStateModule();
+		return new SharedStateModule();
 	}
 	
 }
