@@ -342,8 +342,7 @@ public class XtendInformationControl extends AbstractInformationControl implemen
 			return null;
 
 		GC gc = new GC(fSashForm);
-		Font font = fSymbolicFontName == null ? JFaceResources.getDialogFont() : JFaceResources
-				.getFont(fSymbolicFontName);
+		Font font = JFaceResources.getFont(fSymbolicFontName);
 		gc.setFont(font);
 		int width = gc.getFontMetrics().getAverageCharWidth();
 		int height = gc.getFontMetrics().getHeight();
