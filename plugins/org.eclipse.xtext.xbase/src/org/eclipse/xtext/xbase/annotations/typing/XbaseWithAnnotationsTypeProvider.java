@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -99,7 +100,11 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XAnnotation annotation, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().createTypeRef(annotation.getAnnotationType());
+		final JvmAnnotationType annotationType = annotation.getAnnotationType();
+		if (annotationType == null) {
+			return null;
+		}
+		return getTypeReferences().createTypeRef(annotationType);
 	}
 	
 	protected JvmTypeReference _type(XAnnotationElementValueBinaryOperation annotation, JvmTypeReference rawExpectation, boolean rawType) {

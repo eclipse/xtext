@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -80,10 +81,10 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 				assertTrue(delegate.isConformant(left, left, false));
 				assertTrue(delegate.isConformant(right, right, true));
 				assertTrue(delegate.isConformant(right, right, false));
-				assertTrue(delegate.isConformant(left, (JvmTypeReference) EcoreUtil.copy(left), true));
-				assertTrue(delegate.isConformant(left, (JvmTypeReference) EcoreUtil.copy(left), false));
-				assertTrue(delegate.isConformant(right, (JvmTypeReference) EcoreUtil.copy(right), true));
-				assertTrue(delegate.isConformant(right, (JvmTypeReference) EcoreUtil.copy(right), false));
+				assertTrue(delegate.isConformant(left, EcoreUtil2.clone(left), true));
+				assertTrue(delegate.isConformant(left, EcoreUtil2.clone(left), false));
+				assertTrue(delegate.isConformant(right, EcoreUtil2.clone(right), true));
+				assertTrue(delegate.isConformant(right, EcoreUtil2.clone(right), false));
 				return delegate.isConformant(left, right, ignoreGenerics);
 			}
 			

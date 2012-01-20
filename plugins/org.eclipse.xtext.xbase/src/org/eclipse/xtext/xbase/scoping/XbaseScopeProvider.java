@@ -29,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
@@ -338,7 +337,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			if (featureCall.getDeclaringType() != null) {
-				JvmParameterizedTypeReference typeReference = typeReferences.createTypeRef(featureCall.getDeclaringType());
+				JvmTypeReference typeReference = typeReferences.createTypeRef(featureCall.getDeclaringType());
 				JvmFeatureScopeAcceptor featureScopeDescriptions = new JvmFeatureScopeAcceptor();
 				IAcceptor<IJvmFeatureDescriptionProvider> curried = featureScopeDescriptions.curry(typeReference, featureCall);
 				addFeatureDescriptionProviders(getContextType(featureCall), null, null, null, getDefaultPriority(), true, curried);
