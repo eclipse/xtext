@@ -109,7 +109,12 @@ public class XtextSourceViewer extends ProjectionViewer {
 			TextEvent e= new TextEvent(cmd.start, length, text, cmd.preservedText, event, redraws()) {};
 			for (int i= 0; i < textListeners.size(); i++) {
 				ITextListener l= textListeners.get(i);
-				l.textChanged(e);
+				try {
+					l.textChanged(e);
+				} catch (NullPointerException exception) {
+					// in 3.8 this throws NPEs (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369244)
+					log.info(e);
+				}
 			}
 		}
 	}
