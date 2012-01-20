@@ -45,33 +45,36 @@ public class XtendHoverSerializer {
 			StringBuilder stringBuilder = new StringBuilder();
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) object;
 			JvmIdentifiableElement feature = featureCall.getFeature();
-
-			if (featureCall instanceof XMemberFeatureCall) {
-				if (((JvmOperation) feature).isStatic()) {
-					stringBuilder.append(((JvmOperation) feature).getDeclaringType().getSimpleName());
-					stringBuilder.append(STATICDELIMITER);
-				}
-			} 
-			if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
-				XExpression receiver = featureCallToJavaMapping.getActualReceiver(featureCall);
-				if (receiver instanceof XMemberFeatureCall) {
-					stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName());
-					stringBuilder.append(DELIMITER);
-				} else {
-					if (receiver instanceof XAbstractFeatureCall) {
-						JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
-						if (receiverFeature.getSimpleName().equals(IT)) {
-							stringBuilder.append(IT);
-							stringBuilder.append(DELIMITER);
-						}
-
+			if (feature != null && !feature.eIsProxy()) {
+				if (featureCall instanceof XMemberFeatureCall) {
+					if (((JvmOperation) feature).isStatic()) {
+						stringBuilder.append(((JvmOperation) feature).getDeclaringType().getSimpleName());
+						stringBuilder.append(STATICDELIMITER);
+						stringBuilder.append(feature.getSimpleName());
+						stringBuilder.append(computeArguments(featureCall));
+						return stringBuilder.toString();
 					}
 				}
-			}
-			stringBuilder.append(feature.getSimpleName());
-			stringBuilder.append(computeArguments(featureCall));
-			return stringBuilder.toString();
+				if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
+					XExpression receiver = featureCallToJavaMapping.getActualReceiver(featureCall);
+					if (receiver instanceof XMemberFeatureCall) {
+						stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName());
+						stringBuilder.append(DELIMITER);
+					} else {
+						if (receiver instanceof XAbstractFeatureCall) {
+							JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
+							if (receiverFeature.getSimpleName().equals(IT)) {
+								stringBuilder.append(IT);
+								stringBuilder.append(DELIMITER);
+							}
 
+						}
+					}
+					stringBuilder.append(feature.getSimpleName());
+					stringBuilder.append(computeArguments(featureCall));
+					return stringBuilder.toString();
+				}
+			}
 		}
 		return "";
 	}
