@@ -5,6 +5,7 @@
   <rm:property key="xpand_mwe.download" value="${eclipse.download}"/>
   <rm:property key="xpand.p2.repository" value="${xpand_mwe.download}/modeling/m2t/xpand/updates/nightly"/>
   <rm:property key="mwe.p2.repository" value="${xpand_mwe.download}/modeling/emft/mwe/updates/nightly"/>
+  
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
   <rm:locator pattern="^org\.eclipse\.emf\.(?:mwe2\.runtime|mwe2\.lib|mwe)(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.(?:emf|xsd)(?:\..+)?$" searchPathRef="emf"/>
