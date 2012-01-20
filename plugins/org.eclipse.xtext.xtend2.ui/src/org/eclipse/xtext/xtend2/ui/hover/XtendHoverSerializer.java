@@ -90,14 +90,17 @@ public class XtendHoverSerializer {
 			implicitFirstArgument = featureCall.getImplicitFirstArgument();
 			arguments = featureCallToJavaMapping.getActualArguments(featureCall);
 		}
+		boolean needsSeperator = false;
 		XbaseSwitch<String> xbaseSwitch = new XtendHoverXbaseSwitch();
 		if (implicitFirstArgument != null) {
 			String doSwitch = xbaseSwitch.doSwitch(implicitFirstArgument).trim();
-			if (doSwitch != null)
+			if (doSwitch != null){
 				stringBuilder.append(doSwitch);
+				needsSeperator = true;
+			}
 		}
 		if (arguments.size() > 0) {
-			if (implicitFirstArgument != null  && arguments.size() > 1)
+			if (needsSeperator)
 				stringBuilder.append(SEPERATOR);
 			XExpression first = arguments.get(0);
 			if (first == implicitFirstArgument && arguments.size() > 1) {

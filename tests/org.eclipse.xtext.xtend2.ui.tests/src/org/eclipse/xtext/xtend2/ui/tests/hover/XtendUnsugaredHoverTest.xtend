@@ -279,7 +279,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 			
 		}
 		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,25)
+		val triple = computeAstAndInvokeHover(editor,0,27)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.unsugaredExpression)
 	}
