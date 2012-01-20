@@ -114,6 +114,8 @@ public class DispatchingSupport {
 
 	protected void collectDispatchMethods(final JvmGenericType type,
 			Multimap<Pair<String, Integer>, JvmOperation> result) {
+		if (type == null)
+			return;
 		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(typeRefs.createTypeRef(type)),
 				JvmOperation.class);
 		for (JvmOperation operation : features) {

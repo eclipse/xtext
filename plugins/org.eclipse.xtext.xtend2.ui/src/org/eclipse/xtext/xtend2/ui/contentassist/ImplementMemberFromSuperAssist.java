@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.ui.contentassist;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
@@ -87,6 +88,8 @@ public class ImplementMemberFromSuperAssist {
 
 	protected Iterable<JvmExecutable> getImplementationCandidates(XtendClass clazz) {
 		final JvmGenericType inferredType = associations.getInferredType(clazz);
+		if (inferredType == null)
+			return emptySet();
 		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
 				.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 					@Override

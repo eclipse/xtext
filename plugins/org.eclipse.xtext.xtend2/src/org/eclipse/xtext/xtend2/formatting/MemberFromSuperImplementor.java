@@ -68,6 +68,8 @@ public class MemberFromSuperImplementor {
 		appendable.openScope();
 		boolean isOperation = executableFromSuper instanceof JvmOperation;
 		final JvmGenericType overridingType = associations.getInferredType(overrider);
+		if (overridingType == null)
+			return;
 		final ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
 				.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 					@Override
