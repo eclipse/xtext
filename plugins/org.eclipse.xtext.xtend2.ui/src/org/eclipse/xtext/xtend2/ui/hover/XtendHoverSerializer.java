@@ -97,7 +97,7 @@ public class XtendHoverSerializer {
 				stringBuilder.append(doSwitch);
 		}
 		if (arguments.size() > 0) {
-			if (implicitFirstArgument != null)
+			if (implicitFirstArgument != null  && arguments.size() > 1)
 				stringBuilder.append(SEPERATOR);
 			XExpression first = arguments.get(0);
 			if (first == implicitFirstArgument && arguments.size() > 1) {
