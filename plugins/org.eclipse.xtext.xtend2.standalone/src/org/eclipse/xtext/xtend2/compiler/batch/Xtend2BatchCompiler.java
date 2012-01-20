@@ -290,12 +290,17 @@ public class Xtend2BatchCompiler {
 		if (!isEmpty(classPath)) {
 			commandLine.add("-cp " + concat(File.pathSeparator, getClassPathEntries()));
 		}
-		commandLine.add("-d " + classDirectory.toString());
+		commandLine.add("-d \"" + classDirectory.toString()+"\"");
 		commandLine.add("-" + getComplianceLevel());
 		commandLine.add("-proceedOnError");
 		List<String> sourceDirectories = newArrayList(getSourcePathDirectories());
 		sourceDirectories.add(tmpSourceDirectory.toString());
-		commandLine.add(concat(" ", sourceDirectories));
+		commandLine.add(concat(" ", transform(sourceDirectories, new Function<String, String>() {
+
+			public String apply(String path) {
+				return "\"" + path + "\"";
+			}
+		})));
 		if (log.isDebugEnabled()) {
 			log.debug("invoke batch compiler with '" + concat(" ", commandLine) + "'");
 		}

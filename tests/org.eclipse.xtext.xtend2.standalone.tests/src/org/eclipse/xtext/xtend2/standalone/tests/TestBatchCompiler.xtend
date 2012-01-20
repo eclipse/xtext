@@ -16,13 +16,16 @@ import org.junit.After
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendInjectorProvider))
 class TestBatchCompiler {
-	
+
 	@Inject
 	Xtend2BatchCompiler batchCompiler
-	
+
+    static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
     static String OUTPUT_DIRECTORY = "./test-result"
-    static String TEMP_DIRECTORY = "./test-temp-dir"
     static String XTEND_SRC_DIRECTORY = "./testdata"
+    static String XTEND_SRC_DIRECTORY_WITH_SPACES = "./test data"
+    static String TEMP_DIRECTORY = "./test-temp-dir"
+    static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
 	@Before
 	def void onSetup () {
@@ -31,15 +34,30 @@ class TestBatchCompiler {
         batchCompiler.deleteTempDirectory = true
         new File(OUTPUT_DIRECTORY).mkdir
         cleanFolder(new File(OUTPUT_DIRECTORY), null, true, false)
+        new File(OUTPUT_DIRECTORY_WITH_SPACES).mkdir
+        cleanFolder(new File(OUTPUT_DIRECTORY_WITH_SPACES), null, true, false)
 	}
 
 	@After
 	def void onTearDown() {
        cleanFolder(new File(OUTPUT_DIRECTORY), null, true, true)
+       cleanFolder(new File(OUTPUT_DIRECTORY_WITH_SPACES), null, true, true)
        if (new File(TEMP_DIRECTORY).exists) {
-        cleanFolder(new File(TEMP_DIRECTORY), null, true, true)
+           cleanFolder(new File(TEMP_DIRECTORY), null, true, true)
+       }
+       if (new File(TEMP_DIRECTORY_WITH_SPACES).exists) {
+           cleanFolder(new File(TEMP_DIRECTORY_WITH_SPACES), null, true, true)
        }
 	}
+
+    @Test
+    def void bug368551() {
+        batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
+    	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY_WITH_SPACES
+        batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
+        batchCompiler.compile
+        assertEquals(2, new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)
+    }
 
 	@Test
 	def void testCompileTestData() {
