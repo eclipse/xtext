@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
@@ -62,6 +63,7 @@ import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.hover.XtendAnnotationHover;
+import org.eclipse.xtext.xtend2.ui.hover.XtendDispatchingEObjectTextHover;
 import org.eclipse.xtext.xtend2.ui.hover.XtendHoverProvider;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
@@ -231,6 +233,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends IRenameStrategy> bindIRenameStrategy() {
 		return Xtend2RenameStrategy.class;
+	}
+	@Override
+	public Class<? extends IEObjectHover> bindIEObjectHover() {
+		return XtendDispatchingEObjectTextHover.class;
 	}
 
 	@Override
