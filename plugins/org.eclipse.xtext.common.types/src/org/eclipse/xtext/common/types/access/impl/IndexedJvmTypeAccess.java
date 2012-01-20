@@ -44,27 +44,11 @@ public class IndexedJvmTypeAccess {
 	
 	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet) {
 		if (resourceSet != null) {
-			IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(resourceSet);
-			if (descriptions != null) {
-				URI withoutFragment = javaObjectURI.trimFragment();
-				String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
-				String[] fqnSegments = fqn.split("\\.");
-				QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
-				Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
-				Iterator<IEObjectDescription> iterator = candidates.iterator();
-				if (iterator.hasNext()) {
-					IEObjectDescription description = iterator.next();
-					EObject typeProxy = description.getEObjectOrProxy();
-					if (typeProxy.eIsProxy()) {
-						typeProxy = EcoreUtil.resolve(typeProxy, resourceSet);
-					}
-					if (!typeProxy.eIsProxy() && typeProxy instanceof JvmType) {
-						EObject result = resolveJavaObject((JvmType)typeProxy, javaObjectURI.fragment());
-						if (result != null)
-							return result;
-					}
-				}
-			}
+			URI withoutFragment = javaObjectURI.trimFragment();
+			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
+			String[] fqnSegments = fqn.split("\\.");
+			QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
+			return getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet);
 		}
 		return null;
 	}
