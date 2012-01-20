@@ -33,8 +33,8 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@InjectWith(RefactoringTestLanguageInjectorProvider.class)
 @RunWith(XtextRunner.class)
+@InjectWith(RefactoringTestLanguageInjectorProvider.class)
 public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 
 	@Inject
@@ -45,11 +45,6 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	
 	private ClasspathTypeProvider typeProvider;
 	
-	@BeforeClass
-	public static void init() {
-		RefactoringTestLanguageStandaloneSetup.doSetup();
-	}
-
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
