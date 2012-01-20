@@ -98,5 +98,6 @@ public class XtextUIMessages extends NLS {
 	public static String XtextBrowserInformationControlInput_OpenDeclaration;
 	public static String AnnotationWithQuickFixesHover_message_singleQuickFix;
 	public static String AnnotationWithQuickFixesHover_message_multipleQuickFix;
+	public static String XtextBrowserInformationControlInput_ShowInJavaDocView;
 
 }
