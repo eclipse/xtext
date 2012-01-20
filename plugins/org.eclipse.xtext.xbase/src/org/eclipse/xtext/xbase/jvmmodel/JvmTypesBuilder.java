@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.jvmmodel;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 
+import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -511,6 +513,14 @@ public class JvmTypesBuilder {
 	
 	protected void addCompilationStrategy(JvmMember member,
 			Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+		// remove old adapters
+		Iterator<Adapter> iterator = member.eAdapters().iterator();
+		while (iterator.hasNext()) {
+			if (iterator.next() instanceof CompilationStrategyAdapter) {
+				iterator.remove();
+			}
+		}
+		
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
 		adapter.setCompilationStrategy(strategy);
 		member.eAdapters().add(adapter);
