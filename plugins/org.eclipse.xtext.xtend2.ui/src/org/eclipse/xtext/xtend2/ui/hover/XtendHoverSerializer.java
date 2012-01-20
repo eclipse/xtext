@@ -10,7 +10,9 @@ package org.eclipse.xtext.xtend2.ui.hover;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -31,28 +33,47 @@ import com.google.inject.Inject;
  */
 public class XtendHoverSerializer {
 
+	private static final String STATICDELIMITER = "::";
+	private static final String IT = "it";
+	private static final String SEPERATOR = ", ";
+	private static final String DELIMITER = ".";
 	@Inject
 	public FeatureCallToJavaMapping featureCallToJavaMapping;
 
 	public String computeUnsugaredExpression(EObject object) {
 		if (object instanceof XAbstractFeatureCall) {
+			StringBuilder stringBuilder = new StringBuilder();
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) object;
-			if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
+			JvmIdentifiableElement feature = featureCall.getFeature();
 
-				StringBuilder stringBuilder = new StringBuilder("this.");
+			if (featureCall instanceof XMemberFeatureCall) {
+				if (((JvmOperation) feature).isStatic()) {
+					stringBuilder.append(((JvmOperation) feature).getDeclaringType().getSimpleName());
+					stringBuilder.append(STATICDELIMITER);
+				}
+			} 
+			if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
 				XExpression receiver = featureCallToJavaMapping.getActualReceiver(featureCall);
 				if (receiver instanceof XMemberFeatureCall) {
 					stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName());
-					stringBuilder.append(".");
+					stringBuilder.append(DELIMITER);
+				} else {
+					if (receiver instanceof XAbstractFeatureCall) {
+						JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
+						if (receiverFeature.getSimpleName().equals(IT)) {
+							stringBuilder.append(IT);
+							stringBuilder.append(DELIMITER);
+						}
+
+					}
 				}
-				JvmIdentifiableElement feature = featureCall.getFeature();
-				stringBuilder.append(feature.getSimpleName());
-				stringBuilder.append(computeArguments(featureCall));
-				return stringBuilder.toString();
-			} else
-				return NodeModelUtils.getNode(object).getText().trim();
-		} else
-			return "";
+			}
+			stringBuilder.append(feature.getSimpleName());
+			stringBuilder.append(computeArguments(featureCall));
+			return stringBuilder.toString();
+
+		}
+		return "";
 	}
 
 	public String computeArguments(XAbstractFeatureCall featureCall) {
@@ -73,8 +94,8 @@ public class XtendHoverSerializer {
 				stringBuilder.append(doSwitch);
 		}
 		if (arguments.size() > 0) {
-			if(implicitFirstArgument != null)
-				stringBuilder.append(", ");
+			if (implicitFirstArgument != null)
+				stringBuilder.append(SEPERATOR);
 			XExpression first = arguments.get(0);
 			if (first == implicitFirstArgument && arguments.size() > 1) {
 				first = arguments.get(1);
@@ -108,12 +129,12 @@ public class XtendHoverSerializer {
 			return NodeModelUtils.getNode(object).getText();
 		}
 	}
-	
+
 	public Pair<String, String> computePreAndSuffix(EObject element) {
 		ICompositeNode node = NodeModelUtils.getNode(element);
 		if (node != null) {
 			String model = ((XtextResource) element.eResource()).getParseResult().getRootNode().getText();
-			return Tuples.create(model.substring(0, node.getTotalOffset())+ "\n",
+			return Tuples.create(model.substring(0, node.getTotalOffset()) + "\n",
 					"\n" + model.substring(node.getTotalEndOffset()));
 		} else {
 			return Tuples.create("", "");
