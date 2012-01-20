@@ -12,33 +12,52 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
+import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageStandaloneSetup;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@InjectWith(RefactoringTestLanguageInjectorProvider.class)
+@RunWith(XtextRunner.class)
 public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 
+	@Inject
 	private ResourceSet resourceSet;
+
+	@Inject
+	private IndexedJvmTypeAccess indexedJvmTypeAccess;
+	
 	private ClasspathTypeProvider typeProvider;
+	
+	@BeforeClass
+	public static void init() {
+		RefactoringTestLanguageStandaloneSetup.doSetup();
+	}
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		resourceSet = new ResourceSetImpl();
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, null);
+		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
 	}
 	
 	@After
 	public void tearDown() throws Exception {
-		resourceSet = null;
 		typeProvider = null;
 	}
 	
@@ -149,6 +168,54 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		getAndResolveAllFragments(resource);
 		recomputeAndCheckIdentifiers(resource);
 	}
+	
+	@Test
+	public void testJvmTypeSimple() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("SimpleName");
+		expected.setPackageName("package.name");
+		resource.getContents().add(expected);
+		JvmType actual = getTypeProvider().findTypeByName("package.name.SimpleName");
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testJvmTypeNoPackage() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("SimpleName");
+		resource.getContents().add(expected);
+		JvmType actual = getTypeProvider().findTypeByName("SimpleName");
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testJvmTypeNestedClass() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType container = TypesFactory.eINSTANCE.createJvmGenericType();
+		container.setSimpleName("SimpleName");
+		container.setPackageName("package.name");
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("Child");
+		container.getMembers().add(expected);
+		resource.getContents().add(container);
+		JvmType actual = getTypeProvider().findTypeByName("package.name.SimpleName$Child");
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testJvmTypeArray() {
+		Resource resource = resourceSet.createResource(URI.createURI("foo.typesRefactoring"));
+		JvmGenericType expected = TypesFactory.eINSTANCE.createJvmGenericType();
+		expected.setSimpleName("SimpleName");
+		expected.setPackageName("package.name");
+		resource.getContents().add(expected);
+		JvmType actual = getTypeProvider().findTypeByName("package.name.SimpleName[]");
+		assertTrue(actual instanceof JvmArrayType);
+		assertEquals(expected, ((JvmArrayType) actual).getComponentType());
+	}
+	
 //TODO - this one fails on the server	
 //	@Test public void testFindTypeByName_$ImmutableList() {
 //		String typeName = "com.google.inject.internal.util.$ImmutableList";

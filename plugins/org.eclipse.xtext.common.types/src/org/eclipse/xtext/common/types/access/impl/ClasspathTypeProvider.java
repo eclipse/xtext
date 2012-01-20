@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -64,10 +65,10 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 
 	@Override
 	public JvmType findTypeByName(String name) {
+		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		try {
 			Class<?> clazz = classFinder.forName(name);
 			URI resourceURI = uriHelper.createResourceURI(clazz);
-			IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 			if (indexedJvmTypeAccess != null) {
 				URI proxyURI = resourceURI.appendFragment(uriHelper.getFragment(clazz));
 				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
@@ -76,8 +77,17 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			}
 			TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
 			return findTypeByClass(clazz, result);
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
+			if (indexedJvmTypeAccess != null) {
+				int index = name.indexOf('$');
+				if (index < 0)
+					index = name.indexOf('[');
+				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
+				QualifiedName qualifiedName = QualifiedName.create(qualifiedNameString.split("\\."));
+				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
+				if (candidate instanceof JvmType)
+					return (JvmType) candidate;
+			}
 			return null;
 		}
 	}

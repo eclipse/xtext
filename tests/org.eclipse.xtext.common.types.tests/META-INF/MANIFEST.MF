@@ -55,4 +55,5 @@ Export-Package: org.eclipse.xtext.common.types,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.common.types.tests.Activator
 Import-Package: org.apache.log4j,
- org.junit;version="4.5.0"
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0"
