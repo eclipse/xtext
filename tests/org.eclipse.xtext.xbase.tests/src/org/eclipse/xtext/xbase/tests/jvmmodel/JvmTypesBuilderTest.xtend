@@ -138,4 +138,12 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals("MyEnum", anno.simpleName)
 		assertEquals("Foo", anno.documentation)
 	}
+	
+	@Test
+	def void testSetBody() {
+		val op = TypesFactory::eINSTANCE.createJvmOperation
+		op.body = ['''foo''']
+		op.body = ['''bar''']
+		assertEquals(1, op.eAdapters.size)
+	}
 }

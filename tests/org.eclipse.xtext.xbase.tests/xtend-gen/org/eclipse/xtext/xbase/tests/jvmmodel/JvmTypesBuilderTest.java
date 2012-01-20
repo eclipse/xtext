@@ -2,12 +2,15 @@ package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -18,10 +21,12 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -297,5 +302,30 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testSetBody() {
+      JvmOperation _createJvmOperation = TypesFactory.eINSTANCE.createJvmOperation();
+      final JvmOperation op = _createJvmOperation;
+      final Function1<ImportManager,CharSequence> _function = new Function1<ImportManager,CharSequence>() {
+          public CharSequence apply(final ImportManager it) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("foo");
+            return _builder;
+          }
+        };
+      this._jvmTypesBuilder.setBody(op, _function);
+      final Function1<ImportManager,CharSequence> _function_1 = new Function1<ImportManager,CharSequence>() {
+          public CharSequence apply(final ImportManager it) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("bar");
+            return _builder;
+          }
+        };
+      this._jvmTypesBuilder.setBody(op, _function_1);
+      EList<Adapter> _eAdapters = op.eAdapters();
+      int _size = _eAdapters.size();
+      Assert.assertEquals(1, _size);
   }
 }
