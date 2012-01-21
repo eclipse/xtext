@@ -48,6 +48,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -623,7 +624,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
-      Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 25);
+      Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 27);
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
@@ -637,6 +638,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       Assert.assertEquals("IterableExtensions::head(new ArrayList<String>())", _unsugaredExpression);
   }
   
+  @Ignore
   @Test
   public void testUnsuagaredVersionForJavaWiothJavaDoc() throws Exception {
       StringConcatenation _builder = new StringConcatenation();

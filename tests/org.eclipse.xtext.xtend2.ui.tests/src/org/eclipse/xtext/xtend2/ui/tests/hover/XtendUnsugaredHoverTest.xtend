@@ -30,6 +30,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.xtend2.ui.tests.hover.XtendUnsugaredHoverTest.*
 import static org.junit.Assert.*
 import org.junit.After
+import org.junit.Ignore
 
 class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	 
@@ -283,7 +284,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.unsugaredExpression)
 	}
-	
+	@Ignore
 	@Test
 	def void testUnsuagaredVersionForJavaWiothJavaDoc() throws Exception {
 		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
