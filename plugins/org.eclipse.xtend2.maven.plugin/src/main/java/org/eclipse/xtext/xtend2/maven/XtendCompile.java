@@ -5,7 +5,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.eclipse.xtext.util.Strings.concat;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +13,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.xtend2.compiler.batch.Xtend2BatchCompiler;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -45,11 +45,12 @@ public class XtendCompile extends AbstractXtend2CompilerMojo {
 		compileSources(xtend2BatchCompiler);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void compileSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
-		String sourceDirectory = project.getBuild().getSourceDirectory();
+		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		String classPath = concat(File.pathSeparator, getClassPath());
 		project.addCompileSourceRoot(outputDirectory);
-		compile(xtend2BatchCompiler, classPath, Collections.singletonList(sourceDirectory), outputDirectory);
+		compile(xtend2BatchCompiler, classPath, compileSourceRoots, outputDirectory);
 	}
 
 

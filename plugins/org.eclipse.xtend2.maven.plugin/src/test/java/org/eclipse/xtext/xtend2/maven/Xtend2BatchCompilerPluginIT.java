@@ -13,6 +13,11 @@ import org.junit.Test;
 public class Xtend2BatchCompilerPluginIT {
 
 	@Test
+	public void projectWithMultipleSourceDirectories() throws Exception {
+		verifyErrorFreeLog("/it/multisources");
+	}
+
+	@Test
 	public void simpleProject() throws Exception {
 		verifyErrorFreeLog("/it/simple");
 	}
@@ -32,12 +37,6 @@ public class Xtend2BatchCompilerPluginIT {
 		verifyErrorFreeLog("/it/aggregation");
 	}
 
-//	@Test
-//	public void continueOnErrorsFromJdtCompiler() throws Exception {
-//		Verifier verifier = newVerifier("/it/jdtcerrors");
-//		verifier.executeGoal("verify");
-//	}
-
 	@Test
 	public void haltOnXtendValidationErrors() throws Exception {
 		Verifier verifier = newVerifier("/it/xtenderrors");
@@ -49,14 +48,14 @@ public class Xtend2BatchCompilerPluginIT {
 			verifier.verifyTextInLog("BUILD FAILURE");
 		}
 	}
-//TODO temporarily deactivated
-//	@Test
-//	public void continueOnXtendWarnings() throws Exception {
-//		Verifier verifier = newVerifier("/it/xtendwarnings");
-//		verifier.executeGoal("verify");
-//		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
-//		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
-//	}
+
+	@Test
+	public void continueOnXtendWarnings() throws Exception {
+		Verifier verifier = newVerifier("/it/xtendwarnings");
+		verifier.executeGoal("verify");
+		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
+		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
+	}
 
 	private void verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
 		verifyErrorFreeLog(pathToTestProject, "verify");

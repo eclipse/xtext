@@ -76,11 +76,17 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 							+ "' does not exists.");
 			return;
 		}
+		getLog().debug ("Set temp directory: " + getTempDirectory());
 		xtend2BatchCompiler.setTempDirectory(getTempDirectory());
+		getLog().debug ("Set DeleteTempDirectory: " + false);
 		xtend2BatchCompiler.setDeleteTempDirectory(false);
+		getLog().debug ("Set classpath: " + classPath);
 		xtend2BatchCompiler.setClassPath(classPath);
+		getLog().debug ("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
 		xtend2BatchCompiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
+		getLog().debug ("Set output path: " + outputPath);
 		xtend2BatchCompiler.setOutputPath(outputPath);
+		getLog().debug ("Set encoding: " + encoding);
 		xtend2BatchCompiler.setFileEncoding(encoding);
 		if (!xtend2BatchCompiler.compile()) {
 			throw new MojoExecutionException("Error compiling xtend sources in '"
