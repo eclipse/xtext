@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
-import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.LanguageInfo;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,19 +22,19 @@ import com.google.inject.name.Named;
 @Singleton
 public class XtextEditorInfo {
 
-	private String languageName;
-
+	protected final LanguageInfo languageInfo;
+	
 	@Inject
-	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String name) {
-		this.languageName = name;
-	}
-
-	public String getLanguageName() {
-		return languageName;
+	public XtextEditorInfo(LanguageInfo languageInfo) {
+		this.languageInfo = languageInfo;
 	}
 	
 	public String getEditorId() {
-		return getLanguageName();
+		return languageInfo.getLanguageName();
+	}
+	
+	public LanguageInfo getLanguageInfo() {
+		return languageInfo;
 	}
 	
 }

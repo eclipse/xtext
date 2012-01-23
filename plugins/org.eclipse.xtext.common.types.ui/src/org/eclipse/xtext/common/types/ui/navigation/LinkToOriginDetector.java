@@ -10,10 +10,8 @@ package org.eclipse.xtext.common.types.ui.navigation;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
@@ -25,7 +23,9 @@ import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -33,7 +33,7 @@ import com.google.inject.Provider;
 
 /**
  * Navigates to the original source element if the selected Java type was generated
- * from an Xbase language (e.g. {@link DerivedResourceMarkers} are available).
+ * from an Xbase language (e.g. {@link ITraceInformation} is available).
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -43,7 +43,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	private Provider<LinkToOrigin> hyperlinkProvider;
 	
 	@Inject
-	private IDerivedResourceMarkers derivedResourceMarkers;
+	private ITraceInformation traceInformation;
 	
 	@SuppressWarnings("restriction")
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
@@ -72,24 +72,21 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 						IMember selectedMember = (IMember) javaElement;
 						IResource resource = selectedMember.getResource();
 						if (resource instanceof IFile) {
-							IMarker[] markers = derivedResourceMarkers.findDerivedResourceMarkers((IFile) resource);
-							if (!canShowMultipleHyperlinks && markers.length > 1)
+							Iterable<ILocationInResource> sourceInformation = traceInformation.getAllSourceInformation(resource, null, new TextRegion(selectedWord.getOffset(), selectedWord.getLength()));
+							List<ILocationInResource> sourceInformationAsList = Lists.newArrayList(sourceInformation);
+							if (!canShowMultipleHyperlinks && sourceInformationAsList.size() > 1)
 								return null;
-							List<IHyperlink> result = Lists.newArrayListWithCapacity(markers.length);
-							for(IMarker marker: markers) {
-								String source = derivedResourceMarkers.getSource(marker);
-								if (source != null) {
-									try {
-										URI uri = URI.createURI(source);
-										LinkToOrigin hyperlink = hyperlinkProvider.get();
-										hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
-										hyperlink.setURI(uri);
-										hyperlink.setHyperlinkText("Go to " + uri.lastSegment());
-										hyperlink.setTypeLabel("Navigate to source artifact");
-										hyperlink.setMember(selectedMember);
-										result.add(hyperlink);
-									} catch(IllegalArgumentException e) { /* invalid URI - ignore */ }
-								}
+							List<IHyperlink> result = Lists.newArrayListWithCapacity(sourceInformationAsList.size());
+							for(ILocationInResource source: sourceInformationAsList) {
+								try {
+									LinkToOrigin hyperlink = hyperlinkProvider.get();
+									hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
+									hyperlink.setURI(source.getResourceURI());
+									hyperlink.setHyperlinkText("Go to " + source.getResourceURI().lastSegment());
+									hyperlink.setTypeLabel("Navigate to source artifact");
+									hyperlink.setMember(selectedMember);
+									result.add(hyperlink);
+								} catch(IllegalArgumentException e) { /* invalid URI - ignore */ }
 							}
 							if (result.isEmpty())
 								return null;

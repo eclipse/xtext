@@ -16,6 +16,8 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 
@@ -33,7 +35,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
 	@Inject
-	private IDerivedResourceMarkers derivedResourceMarkers;
+	private ITraceInformation traceInformation;
 	
 	@Inject
 	private IWorkbench workbench;
@@ -74,24 +76,17 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			if (resource.getPersistentProperty(IDE.EDITOR_KEY) != null)
 				return null;
 			// TODO stay in same editor if local navigation
-			if (resource instanceof IFile) {
-				IMarker[] markers = derivedResourceMarkers.findDerivedResourceMarkers((IFile) resource);
-				if (markers.length != 1)
-					return null;
-				IMarker marker = markers[0];
-				String source = derivedResourceMarkers.getSource(marker);
-				if (source != null) {
-					URI sourceResourceURI = URI.createURI(source).trimFragment();
-					IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry
-							.getResourceServiceProvider(sourceResourceURI);
-					if (serviceProvider != null) {
-						XtextEditorInfo editorInfo = serviceProvider.get(XtextEditorInfo.class);
-						if (editorInfo != null) {
-							IEditorRegistry editorRegistry = workbench.getEditorRegistry();
-							IEditorDescriptor result = editorRegistry.findEditor(editorInfo.getEditorId());
-							// null is ok
-							return result;
-						}
+			ILocationInResource sourceInformation = traceInformation.getSingleSourceInformation(resource, null, null);
+			if (sourceInformation != null) {
+				IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry
+						.getResourceServiceProvider(sourceInformation.getResourceURI());
+				if (serviceProvider != null) {
+					XtextEditorInfo editorInfo = serviceProvider.get(XtextEditorInfo.class);
+					if (editorInfo != null) {
+						IEditorRegistry editorRegistry = workbench.getEditorRegistry();
+						IEditorDescriptor result = editorRegistry.findEditor(editorInfo.getEditorId());
+						// null is ok
+						return result;
 					}
 				}
 			}
