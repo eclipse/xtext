@@ -17,6 +17,7 @@ import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
+import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
 import com.google.inject.Inject;
 
@@ -35,6 +36,9 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 	@Inject
 	private XtextEditorInfo editorInfo;
 	
+	@Inject
+	private StacktraceBasedEditorDecider decisions;
+	
 	public boolean matches(IEditorReference editorRef, IEditorInput newInput) {
 		try {
 			if (!editorInfo.getEditorId().equals(editorRef.getId())) {
@@ -44,6 +48,8 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			if (newInput.equals(currentInput)) {
 				return true;
 			}
+			if (decisions.decideAccordingToCaller() == Decision.FORCE_JAVA)
+				return false;
 			IResource newResource = ResourceUtil.getResource(newInput);
 			IResource currentResource = ResourceUtil.getResource(currentInput);
 			Iterable<ILocationInResource> allLocations = traceInformation.getAllSourceInformation(newResource, null /* all languages */, null /* no range */);
