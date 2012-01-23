@@ -105,6 +105,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				}
 			} catch (JavaModelException e) {
 				return null;
+			} catch (NullPointerException e) { // JDT throws NPEs see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369391
+				return null;
 			}
 		}
 	}
