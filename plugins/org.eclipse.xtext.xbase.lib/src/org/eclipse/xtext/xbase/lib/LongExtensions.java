@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.lib;
  * This is an extension library for {@link Long} numbers.
  * 
  * @author Jan Koehnlein - Code generator
+ * @since 2.3
  */
 public class LongExtensions {
 	
@@ -112,6 +113,7 @@ public class LongExtensions {
 	 * 
 	 * @param a  a long.
 	 * @return   <code>-a</code>
+	 * @since 2.3
 	 */
 	public static long operator_minus(long a) {
 		return -a;
@@ -123,6 +125,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static double operator_plus(long a, double b) {
 		return a + b;
@@ -134,6 +137,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static double operator_minus(long a, double b) {
 		return a - b;
@@ -145,6 +149,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static double operator_multiply(long a, double b) {
 		return a * b;
@@ -156,6 +161,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static double operator_divide(long a, double b) {
 		return a / b;
@@ -167,6 +173,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static double operator_modulo(long a, double b) {
 		return a % b;
@@ -178,6 +185,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, double b) {
 		return a < b;
@@ -189,6 +197,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, double b) {
 		return a <= b;
@@ -200,6 +209,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, double b) {
 		return a > b;
@@ -211,6 +221,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, double b) {
 		return a >= b;
@@ -222,6 +233,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, double b) {
 		return a == b;
@@ -233,6 +245,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, double b) {
 		return a != b;
@@ -244,6 +257,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a double.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, double b) {
 		return Math.pow(a, b);
@@ -255,6 +269,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static float operator_plus(long a, float b) {
 		return a + b;
@@ -266,6 +281,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static float operator_minus(long a, float b) {
 		return a - b;
@@ -277,6 +293,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static float operator_multiply(long a, float b) {
 		return a * b;
@@ -288,6 +305,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static float operator_divide(long a, float b) {
 		return a / b;
@@ -299,6 +317,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static float operator_modulo(long a, float b) {
 		return a % b;
@@ -310,6 +329,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, float b) {
 		return a < b;
@@ -321,6 +341,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, float b) {
 		return a <= b;
@@ -332,6 +353,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, float b) {
 		return a > b;
@@ -343,6 +365,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, float b) {
 		return a >= b;
@@ -354,6 +377,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, float b) {
 		return a == b;
@@ -365,6 +389,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, float b) {
 		return a != b;
@@ -376,6 +401,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a float.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, float b) {
 		return Math.pow(a, b);
@@ -387,6 +413,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static long operator_plus(long a, long b) {
 		return a + b;
@@ -398,6 +425,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static long operator_minus(long a, long b) {
 		return a - b;
@@ -409,6 +437,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static long operator_multiply(long a, long b) {
 		return a * b;
@@ -420,6 +449,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static long operator_divide(long a, long b) {
 		return a / b;
@@ -431,6 +461,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static long operator_modulo(long a, long b) {
 		return a % b;
@@ -442,6 +473,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, long b) {
 		return a < b;
@@ -453,6 +485,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, long b) {
 		return a <= b;
@@ -464,6 +497,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, long b) {
 		return a > b;
@@ -475,6 +509,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, long b) {
 		return a >= b;
@@ -486,6 +521,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, long b) {
 		return a == b;
@@ -497,6 +533,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, long b) {
 		return a != b;
@@ -508,6 +545,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a long.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, long b) {
 		return Math.pow(a, b);
@@ -519,6 +557,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static long operator_plus(long a, int b) {
 		return a + b;
@@ -530,6 +569,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static long operator_minus(long a, int b) {
 		return a - b;
@@ -541,6 +581,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static long operator_multiply(long a, int b) {
 		return a * b;
@@ -552,6 +593,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static long operator_divide(long a, int b) {
 		return a / b;
@@ -563,6 +605,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static long operator_modulo(long a, int b) {
 		return a % b;
@@ -574,6 +617,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, int b) {
 		return a < b;
@@ -585,6 +629,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, int b) {
 		return a <= b;
@@ -596,6 +641,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, int b) {
 		return a > b;
@@ -607,6 +653,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, int b) {
 		return a >= b;
@@ -618,6 +665,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, int b) {
 		return a == b;
@@ -629,6 +677,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, int b) {
 		return a != b;
@@ -640,6 +689,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  an integer.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, int b) {
 		return Math.pow(a, b);
@@ -651,6 +701,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static long operator_plus(long a, char b) {
 		return a + b;
@@ -662,6 +713,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static long operator_minus(long a, char b) {
 		return a - b;
@@ -673,6 +725,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static long operator_multiply(long a, char b) {
 		return a * b;
@@ -684,6 +737,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static long operator_divide(long a, char b) {
 		return a / b;
@@ -695,6 +749,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static long operator_modulo(long a, char b) {
 		return a % b;
@@ -706,6 +761,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, char b) {
 		return a < b;
@@ -717,6 +773,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, char b) {
 		return a <= b;
@@ -728,6 +785,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, char b) {
 		return a > b;
@@ -739,6 +797,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, char b) {
 		return a >= b;
@@ -750,6 +809,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, char b) {
 		return a == b;
@@ -761,6 +821,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, char b) {
 		return a != b;
@@ -772,6 +833,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a character.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, char b) {
 		return Math.pow(a, b);
@@ -783,6 +845,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static long operator_plus(long a, short b) {
 		return a + b;
@@ -794,6 +857,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static long operator_minus(long a, short b) {
 		return a - b;
@@ -805,6 +869,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static long operator_multiply(long a, short b) {
 		return a * b;
@@ -816,6 +881,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static long operator_divide(long a, short b) {
 		return a / b;
@@ -827,6 +893,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static long operator_modulo(long a, short b) {
 		return a % b;
@@ -838,6 +905,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, short b) {
 		return a < b;
@@ -849,6 +917,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, short b) {
 		return a <= b;
@@ -860,6 +929,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, short b) {
 		return a > b;
@@ -871,6 +941,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, short b) {
 		return a >= b;
@@ -882,6 +953,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, short b) {
 		return a == b;
@@ -893,6 +965,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, short b) {
 		return a != b;
@@ -904,6 +977,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a short.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, short b) {
 		return Math.pow(a, b);
@@ -915,6 +989,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a+b</code>
+	 * @since 2.3
 	 */
 	public static long operator_plus(long a, byte b) {
 		return a + b;
@@ -926,6 +1001,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a-b</code>
+	 * @since 2.3
 	 */
 	public static long operator_minus(long a, byte b) {
 		return a - b;
@@ -937,6 +1013,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a*b</code>
+	 * @since 2.3
 	 */
 	public static long operator_multiply(long a, byte b) {
 		return a * b;
@@ -948,6 +1025,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a/b</code>
+	 * @since 2.3
 	 */
 	public static long operator_divide(long a, byte b) {
 		return a / b;
@@ -959,6 +1037,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a%b</code>
+	 * @since 2.3
 	 */
 	public static long operator_modulo(long a, byte b) {
 		return a % b;
@@ -970,6 +1049,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a&lt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessThan(long a, byte b) {
 		return a < b;
@@ -981,6 +1061,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a&lt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_lessEqualsThan(long a, byte b) {
 		return a <= b;
@@ -992,6 +1073,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a&gt;b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterThan(long a, byte b) {
 		return a > b;
@@ -1003,6 +1085,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a&gt;=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_greaterEqualsThan(long a, byte b) {
 		return a >= b;
@@ -1014,6 +1097,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a==b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_equals(long a, byte b) {
 		return a == b;
@@ -1025,6 +1109,7 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>a!=b</code>
+	 * @since 2.3
 	 */
 	public static boolean operator_notEquals(long a, byte b) {
 		return a != b;
@@ -1036,12 +1121,15 @@ public class LongExtensions {
 	 * @param a  a long.
 	 * @param b  a byte.
 	 * @return   <code>Math.pow(a, b)</code>
+	 * @since 2.3
 	 */
 	public static double operator_power(long a, byte b) {
 		return Math.pow(a, b);
 	}
 	
 	// END generated code
+
+
 
 
 

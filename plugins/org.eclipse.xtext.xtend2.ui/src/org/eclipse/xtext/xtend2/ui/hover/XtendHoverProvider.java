@@ -125,6 +125,9 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 		return hoverControlCreator;
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public final class XtendPresenterControlCreator extends PresenterControlCreator {
 
 		@Override
@@ -172,6 +175,9 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 		}
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public final class XtendHoverControlCreator extends HoverControlCreator {
 
 		private final IInformationControlCreator fInformationPresenterControlCreator;

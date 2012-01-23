@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @since 2.3
  */
 public class CompositeReconcilingStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension {
 	private Logger log = Logger.getLogger(CompositeReconcilingStrategy.class);

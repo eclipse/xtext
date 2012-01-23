@@ -27,7 +27,10 @@ public class DefaultCompositeHover extends AbstractCompositeHover  {
 
 	@Inject 
 	protected AnnotationWithQuickFixesHover annotationHover;
-	
+
+	/**
+	 * @noreference This field is not intended to be referenced by clients.
+	 */
 	@Inject
 	protected IEObjectHover htmlHover;
 	

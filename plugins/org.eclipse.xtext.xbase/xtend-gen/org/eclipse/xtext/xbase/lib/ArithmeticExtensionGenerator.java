@@ -28,6 +28,8 @@ public class ArithmeticExtensionGenerator {
     _instance.generate();
   }
   
+  private String since = "2.3";
+  
   private List<String> types = new Function0<List<String>>() {
     public List<String> apply() {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("double", "float", "long", "int", "char", "short", "byte");
@@ -151,6 +153,10 @@ public class ArithmeticExtensionGenerator {
     _builder.append("* @author Jan Koehnlein - Code generator");
     _builder.newLine();
     _builder.append(" ");
+    _builder.append("* @since ");
+    _builder.append(this.since, " ");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
     _builder.append("public class ");
@@ -193,6 +199,10 @@ public class ArithmeticExtensionGenerator {
     _builder.append(" ");
     _builder.append("* @return   <code>-a</code>");
     _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* @since ");
+    _builder.append(this.since, " ");
+    _builder.newLineIfNotEmpty();
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
@@ -272,6 +282,10 @@ public class ArithmeticExtensionGenerator {
         _builder.append("b</code>");
         _builder.newLineIfNotEmpty();
         _builder.append(" ");
+        _builder.append("* @since ");
+        _builder.append(this.since, " ");
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
         _builder.append("*/");
         _builder.newLine();
         _builder.append("public static ");
@@ -327,6 +341,10 @@ public class ArithmeticExtensionGenerator {
     _builder.append(" ");
     _builder.append("* @return   <code>Math.pow(a, b)</code>");
     _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* @since ");
+    _builder.append(this.since, " ");
+    _builder.newLineIfNotEmpty();
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();

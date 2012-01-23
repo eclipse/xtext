@@ -57,9 +57,12 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 		return null;
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public static class JavadocHoverWrapper extends JavadocHover {
 
-		IJavaElement currentElement;
+		private IJavaElement currentElement;
 		
 		public void setJavaElement (IJavaElement element) {
 			currentElement = element;

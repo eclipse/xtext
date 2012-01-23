@@ -53,14 +53,21 @@ public class SharedStateModule extends AbstractGenericModule {
 		return Access.getIURIEditorOpener();
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public Class<? extends IDerivedResourceMarkers> bindDerivedResourceMarkers() {
 		return DerivedResourceMarkers.class;
 	}
 	
 	/**
+	 * @since 2.3
+	 */
 	public Class<? extends ITraceInformation> bindTraceInformation() {
 		return MarkerBasedTraceInformation.class;
 	}
+	
+	/**
 	 * @since 2.1
 	 */
 	public Provider<IJdtHelper> provideJdtHelper() {

@@ -22,6 +22,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @since 2.3
  */
 @ImplementedBy(IReconcilingStrategyFactory.Default.class)
 public interface IReconcilingStrategyFactory {

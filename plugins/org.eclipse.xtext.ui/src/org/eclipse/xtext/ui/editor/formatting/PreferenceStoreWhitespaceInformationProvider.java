@@ -25,6 +25,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.3
  */
 public class PreferenceStoreWhitespaceInformationProvider implements IWhitespaceInformationProvider {
 

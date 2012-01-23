@@ -21,6 +21,13 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.formatting,
  org.eclipse.xtext.formatting.impl,
  org.eclipse.xtext.generator,
+ org.eclipse.xtext.generator.trace;
+  x-friends:="org.eclipse.xtext.builder,
+   org.eclipse.xtext.xtend2.ui,
+   org.eclipse.xtext.xbase.ui,
+   org.eclipse.xtext.common.types.ui,
+   org.eclipse.xtext.common.types.shared,
+   org.eclipse.xtext.ui.shared",
  org.eclipse.xtext.grammaranalysis;
   x-friends:="org.eclipse.xtext.tests,
    org.eclipse.xtext.generator,

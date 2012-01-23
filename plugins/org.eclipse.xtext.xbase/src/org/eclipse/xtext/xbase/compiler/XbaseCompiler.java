@@ -54,7 +54,8 @@ import com.google.inject.Inject;
  */
 public class XbaseCompiler extends FeatureCallCompiler {
 	
-	@Inject IEarlyExitComputer earlyExitComputer;
+	@Inject 
+	private IEarlyExitComputer earlyExitComputer;
 	
 	protected void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
 		if (expr.getExpressions().isEmpty())

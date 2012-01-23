@@ -136,6 +136,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return PreferenceStoreIndentationInformation.class;
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public Class<? extends IWhitespaceInformationProvider> bindIWhitespaceInformationProvider() {
 		return PreferenceStoreWhitespaceInformationProvider.class;
 	}
