@@ -26,8 +26,12 @@ public interface IDerivedResourceMarkers {
 
 	IMarker findDerivedResourceMarker(IFile file, String source) throws CoreException;
 
+	/**
+	 * Find all source marker for the given generated file.
+	 * @return the generator markers or an empty array if none.
+	 */
 	IMarker[] findDerivedResourceMarkers(IFile file) throws CoreException;
 
 	List<IFile> findDerivedResources(IContainer container, String source) throws CoreException;
-
+	
 }
