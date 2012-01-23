@@ -124,9 +124,8 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 			}
 		} catch(CoreException e) {
 			logger.error(e.getMessage(), e);
-			return null;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 }

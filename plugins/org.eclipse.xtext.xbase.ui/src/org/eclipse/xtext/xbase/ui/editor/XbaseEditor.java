@@ -121,6 +121,7 @@ public class XbaseEditor extends XtextEditor {
 			if (JavaCore.isJavaLikeFileName(resource.getName())) {
 				markNextSelectionAsJavaOffset(resource);
 			}
+			return;
 		} catch(CoreException e) { 
 			// ignore
 		}
