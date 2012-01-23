@@ -17,7 +17,8 @@ Export-Package: org.eclipse.xtext.builder,
  org.eclipse.xtext.builder.internal;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared",
  org.eclipse.xtext.builder.nature;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared,org.eclipse.xtext.xtend2.ui",
  org.eclipse.xtext.builder.preferences;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared,org.eclipse.xtext.xtend2.ui",
- org.eclipse.xtext.builder.resourceloader;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared"
+ org.eclipse.xtext.builder.resourceloader;x-friends:="org.eclipse.xtext.builder.tests,org.eclipse.xtext.ui.shared",
+ org.eclipse.xtext.builder.trace;x-friends:="org.eclipse.xtext.ui.shared"
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.xtext.util;bundle-version="2.0.0",
  org.eclipse.emf.ecore;visibility:=reexport,
