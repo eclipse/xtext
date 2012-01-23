@@ -40,7 +40,7 @@ public abstract class AbstractSuperTypeCollectorTest extends Assert {
 	protected abstract IJvmTypeProvider getTypeProvider();
 	
 	protected SuperTypeCollector getCollector() {
-		return new SuperTypeCollector(TypesFactory.eINSTANCE);
+		return new SuperTypeCollector();
 	}
 	
 	@Test public void testObject() {

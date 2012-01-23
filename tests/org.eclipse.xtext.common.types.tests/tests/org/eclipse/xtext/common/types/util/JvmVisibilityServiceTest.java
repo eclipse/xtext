@@ -72,7 +72,7 @@ public class JvmVisibilityServiceTest extends Assert {
 		});
 
 		provider = new VisibilityService();
-		provider.setSuperTypeCollector(new SuperTypeCollector(TypesFactory.eINSTANCE));
+		provider.setSuperTypeCollector(new SuperTypeCollector());
 		provider.setTypesFactory(TypesFactory.eINSTANCE);
 	}
 
