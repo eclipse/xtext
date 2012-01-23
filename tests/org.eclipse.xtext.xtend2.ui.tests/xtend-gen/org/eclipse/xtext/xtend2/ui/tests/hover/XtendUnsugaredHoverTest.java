@@ -46,9 +46,9 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -66,16 +66,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
   
   private static String FILEPATH = new Function0<String>() {
     public String apply() {
-      String _operator_plus = StringExtensions.operator_plus(WorkbenchTestHelper.TESTPROJECT_NAME, "/src/testpackage/Foo");
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, XtendUnsugaredHoverTest.FILEEXTENSION);
-      return _operator_plus_1;
+      String _operator_plus = StringExtensions.operator_plus("testpackage/Foo", XtendUnsugaredHoverTest.FILEEXTENSION);
+      return _operator_plus;
     }
   }.apply();
   
-  @BeforeClass
-  public static void createExtensionClass() throws Exception {
-      String _operator_plus = StringExtensions.operator_plus(WorkbenchTestHelper.TESTPROJECT_NAME, "/src/testpackage/Extension");
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, XtendUnsugaredHoverTest.FILEEXTENSION);
+  @Before
+  public void createExtensionClass() throws Exception {
+      String _operator_plus = StringExtensions.operator_plus("testpackage/Extension", XtendUnsugaredHoverTest.FILEEXTENSION);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -100,8 +98,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.newLine();
       _builder.newLine();
       String _string = _builder.toString();
-      IResourcesSetupUtil.createFile(_operator_plus_1, _string);
-      String _operator_plus_2 = StringExtensions.operator_plus(WorkbenchTestHelper.TESTPROJECT_NAME, "/src/testpackage/ExtensionJava.java");
+      this.testHelper.createFile(_operator_plus, _string);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package testpackage;");
       _builder_1.newLine();
@@ -119,7 +116,16 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder_1.newLine();
       _builder_1.newLine();
       String _string_1 = _builder_1.toString();
-      IResourcesSetupUtil.createFile(_operator_plus_2, _string_1);
+      this.testHelper.createFile("testpackage/ExtensionJava.java", _string_1);
+  }
+  
+  @After
+  public void cleanup() {
+    try {
+      this.testHelper.tearDown();
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -148,7 +154,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -192,7 +198,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -239,7 +245,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 1, 0);
@@ -283,7 +289,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -329,7 +335,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 25);
@@ -375,7 +381,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -427,7 +433,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -482,7 +488,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 4);
@@ -528,7 +534,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -576,7 +582,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 1, 0);
@@ -621,7 +627,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 27);
@@ -638,7 +644,6 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       Assert.assertEquals("IterableExtensions::head(new ArrayList<String>())", _unsugaredExpression);
   }
   
-  @Ignore
   @Test
   public void testUnsuagaredVersionForJavaWiothJavaDoc() throws Exception {
       StringConcatenation _builder = new StringConcatenation();
@@ -665,7 +670,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      IFile _createFile = IResourcesSetupUtil.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+      IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
       XtextEditor _openEditor = this.testHelper.openEditor(_createFile);
       final XtextEditor editor = _openEditor;
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _computeAstAndInvokeHover = this.computeAstAndInvokeHover(editor, 0, 0);
@@ -737,8 +742,10 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
   public Resource loadResource() {
     try {
       {
-        String _operator_plus = StringExtensions.operator_plus("platform:/resource/", XtendUnsugaredHoverTest.FILEPATH);
-        URI _createURI = URI.createURI(_operator_plus);
+        String _operator_plus = StringExtensions.operator_plus("platform:/resource/", WorkbenchTestHelper.TESTPROJECT_NAME);
+        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "/src/");
+        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, XtendUnsugaredHoverTest.FILEPATH);
+        URI _createURI = URI.createURI(_operator_plus_2);
         final URI uri = _createURI;
         Injector _injector = this.getInjector();
         IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(org.eclipse.xtext.ui.resource.IResourceSetProvider.class);

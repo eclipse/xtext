@@ -23,14 +23,14 @@ import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper
 import org.eclipse.xtext.xtend2.xtend2.XtendFile
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction
-import org.junit.BeforeClass
+import org.junit.After
+import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.xtend2.ui.tests.hover.XtendUnsugaredHoverTest.*
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
-import org.junit.After
-import org.junit.Ignore
 
 class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	 
@@ -44,12 +44,12 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	private IJavaElementFinder javaElementFinder
 	
 	private static String FILEEXTENSION = ".xtend"
-	private static String FILEPATH = WorkbenchTestHelper::TESTPROJECT_NAME + "/src/testpackage/Foo" + FILEEXTENSION
+	private static String FILEPATH = "testpackage/Foo" + FILEEXTENSION
 	
 
-	@BeforeClass
-	def static void createExtensionClass() throws Exception {
-		createFile(WorkbenchTestHelper::TESTPROJECT_NAME + "/src/testpackage/Extension" + FILEEXTENSION, '''
+	@Before
+	def void createExtensionClass() throws Exception {
+		testHelper.createFile("testpackage/Extension" + FILEEXTENSION, '''
 			package testpackage
 			import java.util.List
 			class Extension {
@@ -63,7 +63,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 			'''.toString
 		);
 		
-		createFile(WorkbenchTestHelper::TESTPROJECT_NAME + "/src/testpackage/ExtensionJava.java", '''
+		testHelper.createFile("testpackage/ExtensionJava.java", '''
 			package testpackage;
 			public class ExtensionJava {
 				public void bar(Integer p1, Integer p2){
@@ -74,10 +74,15 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 			'''.toString
 		);
 	}
+	
+	@After
+	def void cleanup(){
+		testHelper.tearDown
+	}
 
 	@Test
 	def void testUnsuagaredVersionForXtendFunction() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -95,7 +100,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_2() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -113,7 +118,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	
 		@Test
 	def void testUnsuagaredVersionForXtendFunction_3() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -132,7 +137,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_4() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -151,7 +156,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_5() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -170,7 +175,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_6() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -189,7 +194,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_7() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -210,7 +215,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_8() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -229,7 +234,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_9() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -248,7 +253,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_10() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -268,7 +273,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_11() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -284,10 +289,10 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.unsugaredExpression)
 	}
-	@Ignore
+
 	@Test
 	def void testUnsuagaredVersionForJavaWiothJavaDoc() throws Exception {
-		val editor = testHelper.openEditor(createFile(FILEPATH, ''' 
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension ExtensionJava
@@ -324,7 +329,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	}
 
 	def loadResource(){
-		val uri = URI::createURI("platform:/resource/" + FILEPATH);
+		val uri = URI::createURI("platform:/resource/"+WorkbenchTestHelper::TESTPROJECT_NAME + "/src/" + FILEPATH);
 		var resource = injector.getInstance(typeof(IResourceSetProvider)).get(getProject()).createResource(uri)
 		resource.load(null)
 		return resource
