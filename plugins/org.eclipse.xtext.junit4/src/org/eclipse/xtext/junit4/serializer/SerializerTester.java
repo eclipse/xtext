@@ -120,6 +120,9 @@ public class SerializerTester {
 		assertEqualWithEmfFormatter(semanticObject, parsed);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	protected void assertEqualWithEmfFormatter(EObject semanticObject, EObject parsed) {
 		String expected = EmfFormatter.objToStr(semanticObject);
 		String actual = EmfFormatter.objToStr(parsed);
