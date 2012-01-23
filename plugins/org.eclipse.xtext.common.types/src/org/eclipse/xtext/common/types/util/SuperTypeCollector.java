@@ -45,17 +45,11 @@ public class SuperTypeCollector {
 		boolean accept(JvmTypeReference superType, int distance);
 	}
 	
-	@Inject
-	private TypesFactory factory;
+	@Inject(optional=true)
+	private TypesFactory factory = TypesFactory.eINSTANCE;
 	
 	@Inject
 	private TypeReferences typeReferences;
-	
-	public SuperTypeCollector() {}
-
-	public SuperTypeCollector(TypesFactory factory) {
-		this.factory = factory;
-	}
 	
 	protected JvmTypeReference newRef(JvmType type) {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
