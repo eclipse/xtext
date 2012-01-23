@@ -43,7 +43,6 @@ import com.google.inject.Inject;
  */
 public class TypeReferences {
 
-	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(TypeReferences.class);
 
 	@Inject
