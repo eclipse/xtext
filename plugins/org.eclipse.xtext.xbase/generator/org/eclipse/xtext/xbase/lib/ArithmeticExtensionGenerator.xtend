@@ -19,6 +19,8 @@ class ArithmeticExtensionGenerator {
 			.generate()
 	}
 	
+	String since = "2.3"
+	
 	List<String> types = newArrayList("double", "float", "long", "int", "char", "short", "byte")
 	
 	List<QualifiedName> comparators = newArrayList(LESS_THAN, LESS_EQUALS_THAN, 
@@ -67,6 +69,7 @@ class ArithmeticExtensionGenerator {
 		 * This is an extension library for {@link «type.wrapperType»} numbers.
 		 * 
 		 * @author Jan Koehnlein - Code generator
+		 * @since «since»
 		 */
 		public class «type.className» {
 			«type.generateAllOperations»
@@ -80,6 +83,7 @@ class ArithmeticExtensionGenerator {
 		 * 
 		 * @param a  «type.article» «type.wrapperType.toFirstLower».
 		 * @return   <code>-a</code>
+		 * @since «since»
 		 */
 		public static «returnType(type, MINUS, type)» «MINUS.methodName»(«type» a) {
 			return -a;
@@ -99,6 +103,7 @@ class ArithmeticExtensionGenerator {
 			 * @param a  «op1.article» «op1.wrapperType.toFirstLower».
 			 * @param b  «op2.article» «op2.wrapperType.toFirstLower».
 			 * @return   <code>a«operator.toHtml»b</code>
+			 * @since «since»
 			 */
 			public static «returnType(op1, operator, op2)» «operator.methodName»(«op1» a, «op2» b) {
 				return a «operator» b;
@@ -111,6 +116,7 @@ class ArithmeticExtensionGenerator {
 		 * @param a  «op1.article» «op1.wrapperType.toFirstLower».
 		 * @param b  «op2.article» «op2.wrapperType.toFirstLower».
 		 * @return   <code>Math.pow(a, b)</code>
+		 * @since «since»
 		 */
 		public static double «POWER.methodName»(«op1» a, «op2» b) {
 			return Math.pow(a, b);
