@@ -129,10 +129,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				return;
 		}
 		
-        Map<OutputConfiguration, List<IMarker>> generatorMarkers = newHashMap();
+        Map<OutputConfiguration, IMarker[]> generatorMarkers = newHashMap();
         for (OutputConfiguration config : outputConfigurations.values()) {
             if (config.isCleanUpDerivedResources()) {
-                generatorMarkers.put(config, derivedResourceMarkers.findGeneratorMarkers(builtProject.getFolder(config.getOutputDirectory())));
+                generatorMarkers.put(config, derivedResourceMarkers.findDerivedResourceMarkers(builtProject.getFolder(config.getOutputDirectory())));
             }
         }
 		
@@ -149,8 +149,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
 				if (config.isCleanUpDerivedResources()) {
-                    List<IFile> resources = derivedResourceMarkers.findDerivedResources(generatorMarkers.get(config), uri);
-					derivedResources.addAll(resources);
+					IMarker[] markers = generatorMarkers.get(config);
+					for (IMarker marker : markers) {
+						String source = derivedResourceMarkers.getSource(marker);
+						if (source != null && source.equals(uri))
+							derivedResources.add((IFile) marker.getResource());
+					}
 				}
 			}
 			access.setPostProcessor(new EclipseResourceFileSystemAccess2.IFileCallback() {
@@ -200,6 +204,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		return builderPreferenceAccess.isAutoBuildEnabled(context.getBuiltProject());
 	}
 	
+    /**
+	 * @since 2.3
+	 */
     protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
         List<IResourceDescription.Delta> result = newArrayList();
         for (IResourceDescription.Delta delta : context.getDeltas()) {

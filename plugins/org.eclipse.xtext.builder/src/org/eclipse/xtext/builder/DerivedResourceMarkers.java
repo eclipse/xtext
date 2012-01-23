@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
@@ -18,7 +19,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.util.Exceptions;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -45,10 +49,16 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 	@Inject
 	private GeneratorIdProvider generatorIdProvider;
 	
+	/**
+	 * @since 2.3
+	 */
 	public List<IMarker> findGeneratorMarkers(IContainer container) throws CoreException {
 		return findGeneratorMarkers(container, generatorIdProvider.getGeneratorIdentifier());
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public List<IMarker> findGeneratorMarkers(IContainer container, String generator) throws CoreException {
 		List<IMarker> result = newArrayList();
 		if (!container.exists())
@@ -61,6 +71,9 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 		return result;
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public List<IFile> findDerivedResources(List<IMarker> generatorMarkers, String source) throws CoreException {
 		List<IFile> result = newArrayList();
 		for (IMarker marker : generatorMarkers) {
@@ -90,8 +103,36 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 		return result;
 	}
 	
+	@Deprecated
 	public IMarker[] findDerivedResourceMarkers(IFile file) throws CoreException {
-		return file.findMarkers(MARKER_ID, true, IResource.DEPTH_ZERO);
+		return findDerivedResourceMarkers((IResource)file);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public IMarker[] findDerivedResourceMarkers(IResource file) throws CoreException {
+		if (!file.isAccessible())
+			return new IMarker[0];
+		return file.findMarkers(MARKER_ID, true, IResource.DEPTH_INFINITE);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public Iterable<IMarker> findDerivedResourceMarkers(IResource file, final String generatorId) throws CoreException {
+		return Iterables.filter(Arrays.asList(findDerivedResourceMarkers(file)), new Predicate<IMarker>() {
+			public boolean apply(IMarker input) {
+				try {
+					if (generatorId != null && generatorId.equals(input.getAttribute(ATTR_GENERATOR))) {
+						return true;
+					}
+				} catch (CoreException e) {
+					return Exceptions.throwUncheckedException(e);
+				}
+				return false;
+			}
+		});
 	}
 	
 	public IMarker findDerivedResourceMarker(IFile file, String source) throws CoreException {
