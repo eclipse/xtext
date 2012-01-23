@@ -29,11 +29,13 @@ import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
+@Singleton
 public class SuperTypeCollector {
 
 	public interface SuperTypeAcceptor {

@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -50,6 +51,7 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 
 	XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor);
 	
+	@Singleton
 	static class Impl extends JvmModelAssociator implements IXtend2JvmAssociations {
 
 		public JvmGenericType getInferredType(XtendClass xtendClass) {

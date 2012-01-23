@@ -25,6 +25,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * A cache implementation that stores its values in the scope of a resource.
@@ -35,6 +36,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Singleton
 public class OnChangeEvictingCache implements IResourceScopeCache {
 	
 	private static final Logger log = Logger.getLogger(OnChangeEvictingCache.class);

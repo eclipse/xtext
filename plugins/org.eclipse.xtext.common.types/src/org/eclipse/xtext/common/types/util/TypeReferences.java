@@ -37,10 +37,12 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class TypeReferences {
 
 	private final static Logger log = Logger.getLogger(TypeReferences.class);

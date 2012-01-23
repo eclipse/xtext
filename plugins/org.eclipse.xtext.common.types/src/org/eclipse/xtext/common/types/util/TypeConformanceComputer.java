@@ -44,11 +44,13 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Singleton
 public class TypeConformanceComputer {
 
 	protected AbstractConformanceVisitor<JvmTypeReference> leftDispatcher = createStrategySelector();

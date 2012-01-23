@@ -19,11 +19,13 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
+@Singleton
 public class VisibilityService {
 
 	@Inject

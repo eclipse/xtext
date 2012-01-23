@@ -19,10 +19,12 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class XConstructorProvider extends AbstractFeaturesForTypeProvider {
 
 	public boolean isExtensionProvider() {
