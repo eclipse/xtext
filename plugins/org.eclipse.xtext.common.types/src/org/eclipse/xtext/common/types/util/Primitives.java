@@ -11,8 +11,6 @@ import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -21,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
 import com.google.inject.Inject;
 
@@ -31,14 +28,7 @@ import com.google.inject.Inject;
 public class Primitives {
 	
 	@Inject
-	private IJvmTypeProvider.Factory typeProviderFactory;
-	
-	@Inject
 	private TypeReferences typeReferences;
-	
-	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
-		this.typeProviderFactory = typeProviderFactory;
-	}
 	
 	public static enum Primitive {
 		Byte,Short,Char,Int,Long,Float,Double,Void, Boolean
@@ -112,12 +102,7 @@ public class Primitives {
 	}
 
 	protected JvmType getType(Class<?> class1, Notifier context) {
-		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
-		if (resourceSet==null)
-			// context may be null if the editor was closed too early
-			return null;
-		IJvmTypeProvider provider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		return provider.findTypeByName(class1.getCanonicalName());
+		return typeReferences.findDeclaredType(class1, context);
 	}
 	
 	public boolean isPrimitive(JvmTypeReference type) {
