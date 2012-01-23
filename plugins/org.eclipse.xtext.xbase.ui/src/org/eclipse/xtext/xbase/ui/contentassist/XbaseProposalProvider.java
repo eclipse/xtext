@@ -6,11 +6,13 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -62,6 +65,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -483,6 +487,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(final String ruleName,
 			final ContentAssistContext contentAssistContext) {
 		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
+			
+			private Map<QualifiedName, ParameterData> simpleNameToParameterList = Maps.newHashMap();
+			
 			@Override
 			public ICompletionProposal apply(final IEObjectDescription candidate) {
 				IEObjectDescription myCandidate = candidate;
@@ -556,6 +563,19 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							casted.setAutoInsertable(false);
 							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
 						}
+						if (objectOrProxy instanceof JvmExecutable) {
+							JvmExecutable executable = (JvmExecutable) objectOrProxy;
+							StyledString parameterList = new StyledString();
+							appendParameters(parameterList, executable, insignificantParameters);
+							ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
+							if (parameterData == null) {
+								parameterData = new ParameterData();
+								simpleNameToParameterList.put(myCandidate.getName(), parameterData);
+							}
+							parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
+							IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), casted.getReplacementOffset() + proposal.length() - 1);
+							casted.setContextInformation(contextInformation);
+						}
 					}
 					getPriorityHelper().adjustCrossReferencePriority(result, myContentAssistContext.getPrefix());
 					return result;
@@ -601,13 +621,19 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters) {
-		boolean first = true;
 		List<JvmFormalParameter> declaredParameters = executable.getParameters();
-		for(JvmFormalParameter parameter: declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size())) {
-			if (!first)
+		List<JvmFormalParameter> relevantParameters = declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size());
+		for(int i = 0; i < relevantParameters.size(); i++) {
+			JvmFormalParameter parameter = relevantParameters.get(i);
+			if (i != 0)
 				result.append(", ");
-			first = false;
-			result.append(parameter.getParameterType().getSimpleName());
+			if (i == relevantParameters.size() - 1 && executable.isVarArgs() && parameter.getParameterType() instanceof JvmGenericArrayTypeReference) {
+				JvmGenericArrayTypeReference parameterType = (JvmGenericArrayTypeReference) parameter.getParameterType();
+				result.append(parameterType.getComponentType().getSimpleName());
+				result.append("...");
+			} else {
+				result.append(parameter.getParameterType().getSimpleName());
+			}
 			result.append(' ');
 			result.append(notNull(parameter.getName()));
 		}
