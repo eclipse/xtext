@@ -18,6 +18,7 @@ import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension3;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
@@ -46,7 +47,15 @@ import com.google.inject.Provider;
  * @author Michael Clay
  * @author Christoph Kulla - Added support for hovers
  */
-public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension3, ICompletionProposalExtension4, ICompletionProposalExtension5, ICompletionProposalExtension6 {
+public class ConfigurableCompletionProposal implements 
+		Comparable<ConfigurableCompletionProposal>, 
+		ICompletionProposal,
+		ICompletionProposalExtension,
+		ICompletionProposalExtension2, 
+		ICompletionProposalExtension3, 
+		ICompletionProposalExtension4, 
+		ICompletionProposalExtension5, 
+		ICompletionProposalExtension6 {
 
 	private static final Logger log = Logger.getLogger(ConfigurableCompletionProposal.class);
 	
@@ -135,7 +144,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			// ignore
 		}
 	}
-
+	
 	/*
 	 * @see ICompletionProposal#getSelection(IDocument)
 	 */
@@ -211,6 +220,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	private boolean linkedMode;
 	private ITextViewer viewer;
 	private char[] exitChars;
+	private char[] triggerChars;
 	private PrefixMatcher matcher;
 	private int replaceContextLength;
 	private int priority;
@@ -311,6 +321,44 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 			setReplacementLength(getReplaceContextLength());
 		}
 		apply(viewer.getDocument());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void apply(IDocument document, char trigger, int offset) {
+		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
+		apply(viewer.getDocument());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public boolean isValidFor(IDocument document, int offset) {
+		return validate(document, offset, null);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public int getContextInformationPosition() {
+		if (getContextInformation() == null)
+			return -1;
+		return getReplacementOffset() + getCursorPosition();
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public char[] getTriggerCharacters() {
+		return triggerChars;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setTriggerCharacters(char[] triggerChars) {
+		this.triggerChars = triggerChars;
 	}
 	
 	private Point rememberedSelection;
