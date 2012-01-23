@@ -832,10 +832,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "(null as Object)?.toString()?.toString()");
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	@Test public void testNullSafeFieldAccess_0() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "new testdata.FieldAccess().stringField.toUpperCase");
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	@Test public void testNullSafeFieldAccess_1() throws Exception {
 		assertEvaluatesTo(null, "new testdata.FieldAccess()?.stringField?.toUpperCase");
 	}
@@ -911,6 +917,9 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("bar", "switch x : 'foo' { String : switch x { String : 'bar' default : 'other' } default : 'foo'}");
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	@Test public void testSwitchExpression_16() throws Exception {
 		assertEvaluatesTo("bar", "switch 'foo'.toCharArray { char[]: 'bar' default: 'foo' }");
 	}
@@ -1039,11 +1048,17 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.FALSE, "null instanceof Boolean");
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	@Test public void testInstanceOf_05() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "[|'foo'] instanceof com.google.common.base.Supplier");
 		assertEvaluatesTo(Boolean.TRUE, "[|'foo'] instanceof org.eclipse.xtext.xbase.lib.Functions$Function0");
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	@Test public void testInstanceOf_06() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "newArrayList('foo','bar') as Object instanceof Object[]");
 		assertEvaluatesTo(Boolean.TRUE, "newArrayList('foo','bar') as String[] instanceof Object[]");
@@ -1213,6 +1228,9 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	@Test public void testClosureConversion_01() throws Exception {
 		assertEvaluatesTo(newArrayList("bar","foo"), 
 				"{" +

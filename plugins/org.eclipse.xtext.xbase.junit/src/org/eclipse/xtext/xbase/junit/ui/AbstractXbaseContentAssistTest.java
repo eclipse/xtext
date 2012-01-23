@@ -39,11 +39,17 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 
 	protected String fileExtension;
 
+	/**
+	 * @since 2.3
+	 */
 	@Before
 	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	@After
 	public void tearDown() throws Exception {
 		if (doCleanWorkspace())
@@ -442,6 +448,9 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return new ContentAssistProcessorTestBuilder(getInjector(), this);
 	}

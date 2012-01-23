@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @since 2.3
  */
 @SuppressWarnings("restriction")
 public class XtextBrowserInformationControl extends BrowserInformationControl implements

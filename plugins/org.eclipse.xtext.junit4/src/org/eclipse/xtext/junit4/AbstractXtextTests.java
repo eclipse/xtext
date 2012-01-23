@@ -53,6 +53,7 @@ import com.google.inject.name.Names;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.3
  */
 public abstract class AbstractXtextTests extends Assert implements ResourceLoadHelper {
 

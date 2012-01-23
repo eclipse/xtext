@@ -254,6 +254,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	/**
 	 * Action that opens the current hover input element.
+	 * @since 2.3
 	 */
 	protected class OpenDeclarationAction extends Action {
 		private final IXtextBrowserInformationControl fInfoControl;
@@ -285,6 +286,17 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		return o.eResource().getURI().appendFragment(o.eResource().getURIFragment(o));
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected void addLinkListener(final BrowserInformationControl control) {
+		addLinkListener(new XtextBrowserInformationControlAdapter(control));
+	}
+	
+	/**
+	 * @since 2.3
+	 */
 	protected void addLinkListener(final IXtextBrowserInformationControl control) {
 		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
 
@@ -352,6 +364,9 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			}
 		}
 		
+		/**
+		 * @since 2.3
+		 */
 		protected void configureControl(final IXtextBrowserInformationControl control, ToolBarManager tbm, String font){
 				final BackAction backAction = new BackAction(control);
 				backAction.setEnabled(false);

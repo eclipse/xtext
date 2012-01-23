@@ -101,6 +101,9 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		return result.toArray(new ICompletionProposal[result.size()]);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	protected List<ICompletionProposal> createQuickfixes(IQuickAssistInvocationContext invocationContext, Set<Annotation> applicableAnnotations) {
     	List<ICompletionProposal> result = Lists.newArrayList();
     	ISourceViewer sourceViewer = invocationContext.getSourceViewer();
@@ -126,6 +129,9 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
     	return result;
     }
 
+	/**
+	 * @since 2.3
+	 */
 	protected void selectAndRevealQuickfix(IQuickAssistInvocationContext invocationContext, Set<Annotation> applicableAnnotations, List<ICompletionProposal> completionProposals) {
         if (completionProposals.isEmpty()) {
         	return;

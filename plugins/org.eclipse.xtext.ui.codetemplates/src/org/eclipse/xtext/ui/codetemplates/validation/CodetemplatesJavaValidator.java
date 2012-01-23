@@ -18,6 +18,9 @@ public class CodetemplatesJavaValidator extends AbstractCodetemplatesJavaValidat
 		return false;
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	@Check
 	public void checkParameterListIsNotEmpty(Variable variable) {
 		if (variable.isExpectingParameters()) {

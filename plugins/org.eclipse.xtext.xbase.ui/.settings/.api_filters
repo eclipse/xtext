@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.xbase.ui" version="2">
+    <resource path="src/org/eclipse/xtext/xbase/ui/hierarchy/AbstractTypeHierarchyHandler.java" type="org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler">
+        <filter id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler"/>
+                <message_argument value="org.eclipse.xtext.xbase.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hierarchy/OpenTypeHierarchyHandler.java" type="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler">
+        <filter id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"/>
+                <message_argument value="org.eclipse.xtext.xbase.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hierarchy/QuickTypeHierarchyHandler.java" type="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler">
+        <filter id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"/>
+                <message_argument value="org.eclipse.xtext.xbase.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
