@@ -27,10 +27,12 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class SynonymTypesProvider {
 	
 	@Inject

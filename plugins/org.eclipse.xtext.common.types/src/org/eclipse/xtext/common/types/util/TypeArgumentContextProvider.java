@@ -46,10 +46,12 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class TypeArgumentContextProvider {
 
 	@Inject

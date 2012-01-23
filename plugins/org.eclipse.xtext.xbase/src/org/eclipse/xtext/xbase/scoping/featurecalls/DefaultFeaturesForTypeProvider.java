@@ -20,11 +20,13 @@ import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Singleton
 public class DefaultFeaturesForTypeProvider extends AbstractFeaturesForTypeProvider {
 
 	@Inject

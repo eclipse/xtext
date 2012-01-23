@@ -21,11 +21,13 @@ import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Support for linking assumptions
  */
+@Singleton
 public class FeatureCallToJavaMapping {
 	
 	@Inject

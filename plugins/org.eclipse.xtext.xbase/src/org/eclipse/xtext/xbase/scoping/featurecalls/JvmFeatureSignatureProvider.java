@@ -17,9 +17,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class JvmFeatureSignatureProvider {
 	
 	protected static class Switch extends TypesSwitch<String> {

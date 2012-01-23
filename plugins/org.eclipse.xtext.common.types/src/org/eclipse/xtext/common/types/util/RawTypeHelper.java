@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /*
  * This class should not rely on field injection since it is intended to be used
@@ -41,6 +42,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class RawTypeHelper implements IRawTypeHelper {
 
 	private final RawTypeImplementation typeImplementation;
