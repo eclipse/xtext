@@ -16,6 +16,8 @@ import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
+import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider;
+import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -35,6 +37,9 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	
 	@Inject
 	private IWorkbench workbench;
+	
+	@Inject
+	private StacktraceBasedEditorDecider decisions;
 	
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput,
 			IContentType contentType, IEditorDescriptor[] editorDescriptors) {
@@ -69,9 +74,14 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			IResource resource = ResourceUtil.getResource(editorInput);
 			if (resource == null)
 				return null;
-			if (resource.getPersistentProperty(IDE.EDITOR_KEY) != null)
+			String favoriteEditor = resource.getPersistentProperty(IDE.EDITOR_KEY);
+			if (favoriteEditor != null)
 				return null;
 			// TODO stay in same editor if local navigation
+			Decision decision = decisions.decideAccordingToCaller();
+			if (decision == Decision.FORCE_JAVA) {
+				return null;
+			}
 			ILocationInResource sourceInformation = traceInformation.getSingleSourceInformation(resource, null, null);
 			if (sourceInformation != null) {
 				IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry
