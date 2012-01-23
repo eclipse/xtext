@@ -13,6 +13,7 @@ import org.eclipse.xtext.xtend2.ui.editor.OverrideIndicatorAnnotation;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @since 2.3
  */
 public class XtendAnnotationHover extends ProblemAnnotationHover {
 

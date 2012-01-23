@@ -30,6 +30,7 @@ import com.google.inject.Inject;
 /**
  * 
  * @author Holger Schill - Initial contribution and API
+ * @since 2.3
  */
 public class XtendHoverSerializer {
 
@@ -38,7 +39,7 @@ public class XtendHoverSerializer {
 	private static final String SEPERATOR = ", ";
 	private static final String DELIMITER = ".";
 	@Inject
-	public FeatureCallToJavaMapping featureCallToJavaMapping;
+	private FeatureCallToJavaMapping featureCallToJavaMapping;
 
 	public String computeUnsugaredExpression(EObject object) {
 		if (object instanceof XAbstractFeatureCall) {

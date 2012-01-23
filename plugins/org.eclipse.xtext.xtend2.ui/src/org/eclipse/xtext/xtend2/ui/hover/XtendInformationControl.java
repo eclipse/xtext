@@ -64,6 +64,7 @@ import org.eclipse.xtext.validation.Issue;
  * @author Holger Schill - Initial contribution and API most of the code is copied from
  * @link{org.eclipse.jface.internal.text.html.BrowserInformationControl due to visibility problems. The methods and
  *                                                                      fields that are modified are marked
+ * @since 2.3
  */
 @SuppressWarnings("restriction")
 public class XtendInformationControl extends AbstractInformationControl implements IInformationControlExtension2,
