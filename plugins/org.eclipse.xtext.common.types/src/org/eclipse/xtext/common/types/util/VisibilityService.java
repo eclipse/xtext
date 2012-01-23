@@ -48,7 +48,11 @@ public class VisibilityService {
 		if (contextType == null) {
 			return false;
 		} else if (jvmMember.getVisibility() == JvmVisibility.DEFAULT) {
-			return equal(jvmMember.getDeclaringType().getPackageName(), contextType.getPackageName());
+			if (jvmMember instanceof JvmDeclaredType) {
+				return equal(((JvmDeclaredType) jvmMember).getPackageName(), contextType.getPackageName());
+			} else {
+				return equal(jvmMember.getDeclaringType().getPackageName(), contextType.getPackageName());
+			}
 		} else if (contextType.equals(jvmMember.getDeclaringType())) {
 			return true;
 		} else {
