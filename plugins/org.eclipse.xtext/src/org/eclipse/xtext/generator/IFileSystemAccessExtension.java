@@ -15,7 +15,7 @@ public interface IFileSystemAccessExtension {
 
 	/**
 	 * @param fileName using '/' as file separator
-	 * @param the name of the output configuration
+	 * @param outputConfigurationName the name of the output configuration
 	 * @since 2.1
 	 */
 	public void deleteFile(String fileName, String outputConfigurationName);

@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 /**
  * Creates classpath URIs for files in the workspace.
  * 
- * See {@link ClasspathUriResolver} for details.
+ * See {@link IClasspathUriResolver} for details.
  * 
  * @author Jan Koehnlein
  */

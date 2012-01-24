@@ -60,7 +60,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	}
 
 	/**
-	 * For testing. Uses a {@link IResourceScopeCache.NullImpl}.
+	 * For testing. Uses a {@link org.eclipse.xtext.util.IResourceScopeCache.NullImpl}.
 	 */
 	public DefaultResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
 		this(resource, strategy, new IResourceScopeCache.NullImpl());

@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -36,10 +37,10 @@ public class LazyURIEncoder {
 	 * encodes the given three parameters into a string, so that they can be
 	 * retrieved from a resource using {@link #decode(Resource, String)}
 	 * 
-	 * @param obj
-	 * @param ref
-	 * @param node
-	 * @return
+	 * @param obj the feature holder
+	 * @param ref the cross reference
+	 * @param node the node that provided the value for the reference
+	 * @return a portable string that may be used as a {@link URI#fragment() fragment}
 	 */
 	public String encode(EObject obj, EReference ref, INode node) {
 		StringBuilder fragment = new StringBuilder(20).append(XTEXT_LINK).append(SEP);
@@ -72,9 +73,10 @@ public class LazyURIEncoder {
 	/**
 	 * decodes the uriFragment
 	 * 
-	 * @param res
-	 * @param uriFragment
-	 * @return
+	 * @param res the resource that contains the feature holder
+	 * @param uriFragment the fragment that should be decoded
+	 * @return the decoded information
+	 * @see LazyURIEncoder#encode(EObject, EReference, INode)
 	 */
 	public Triple<EObject, EReference, INode> decode(Resource res, String uriFragment) {
 		List<String> split = Strings.split(uriFragment, SEP);

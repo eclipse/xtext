@@ -31,8 +31,8 @@ public interface IGlobalScopeProvider {
 	 * {@link org.eclipse.xtext.resource.IContainer.Manager}).
 	 *
 	 * @param context the resource from which the global scope is looked at.
-	 * @param the reference for which to construct a global scope.
-	 * @param a filter used to filter down the elements contained in each scope. Scopes will only contain elements for which the filter returned <code>true</code>.
+	 * @param reference the reference for which to construct a global scope.
+	 * @param filter a filter used to filter down the elements contained in each scope. Scopes will only contain elements for which the filter returned <code>true</code>.
 	 * @return {@link IScope} representing the inner most {@link IScope} for the
 	 *         passed context and reference. Note for implementors: The result may not be <code>null</code>.
 	 *         Return <code>IScope.NULLSCOPE</code> instead.

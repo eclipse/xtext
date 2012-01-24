@@ -18,6 +18,8 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 
@@ -31,7 +33,7 @@ import com.google.common.collect.Sets;
  * A Reader used to read EMF resources from a set of pathes.
  * A path can point to a folder or an archive (zips and jars are supported).
  * Those pathes are recursively scanned and all resources for which an {@link IResourceServiceProvider} is
- * registered in the {@link IResourceServiceProvider.Registry} will be available.
+ * registered in the {@link org.eclipse.xtext.resource.IResourceServiceProvider.Registry} will be available.
  * </p>
  * 
  * <p>

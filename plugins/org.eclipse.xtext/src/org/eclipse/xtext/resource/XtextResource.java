@@ -27,6 +27,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -60,13 +61,13 @@ public class XtextResource extends ResourceImpl {
 	public static final String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
 
 	/**
-	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
+	 * @deprecated use {@link SaveOptions#addTo(Map)} instead.
 	 */
 	@Deprecated
 	public static final String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
 
 	/**
-	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
+	 * @deprecated use {@link SaveOptions#addTo(Map)} instead.
 	 */
 	@Deprecated
 	public static final String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
@@ -314,12 +315,12 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	/**
-	 * Creates {@link Diagnostic diagnostics} from {@link SyntaxError syntax errors} in {@link ParseResult}.
+	 * Creates {@link org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostics} from {@link SyntaxErrorMessage syntax errors} in {@link IParseResult}.
 	 * No diagnostics will be created if {@link #isValidationDisabled() validation is disabled} for this
 	 * resource.
 	 * 
 	 * @param parseResult the parse result that provides the syntax errors.
-	 * @return list of {@link Diagnostic}. Never <code>null</code>.
+	 * @return list of {@link org.eclipse.emf.ecore.resource.Resource.Diagnostic}. Never <code>null</code>.
 	 */
 	private List<Diagnostic> createDiagnostics(IParseResult parseResult) {
 		if (validationDisabled)

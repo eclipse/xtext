@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * An {@link IResourceDescription.Manager} for non-Xtext resources. 
+ * An {@link org.eclipse.xtext.resource.IResourceDescription.Manager} for non-Xtext resources. 
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */

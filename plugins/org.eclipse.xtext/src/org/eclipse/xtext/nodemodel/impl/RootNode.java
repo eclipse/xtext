@@ -143,7 +143,6 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 	 * This implementation was heavily adapted from <code>org.eclipse.jface.text.DefaultLineTracker</code>.
 	 * @param text the text whose line-breaks should be computed. May not be <code>null</code>.
 	 * @return the array of line-break offsets in the given text. May be empty but is never <code>null</code>.
-	 * @see org.eclipse.jface.text.DefaultLineTracker
 	 * @since 2.0
 	 */
 	protected int[] computeLineBreaks(String text) {
