@@ -196,8 +196,9 @@
 		</checksum>
 
 		<!-- copy testresults -->
+		<echo>TODO copy test reports from the corresponding Xtext-test build</echo>
 		<mkdir dir="${build.drop.directory}/testresults" />
-		<copy todir="${build.drop.directory}/testresults">
+		<copy failonerror="false" todir="${build.drop.directory}/testresults">
 			<fileset dir="${testresults.directory}">
 				<filename name="**/*.xml" />
 			</fileset>
