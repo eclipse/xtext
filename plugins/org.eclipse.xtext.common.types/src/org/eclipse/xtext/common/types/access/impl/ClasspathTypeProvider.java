@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -83,7 +86,8 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 				if (index < 0)
 					index = name.indexOf('[');
 				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-				QualifiedName qualifiedName = QualifiedName.create(qualifiedNameString.split("\\."));
+				List<String> nameSegments = Strings.split(qualifiedNameString, '.');
+				QualifiedName qualifiedName = QualifiedName.create(nameSegments.toArray(new String[nameSegments.size()]));
 				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
 				if (candidate instanceof JvmType)
 					return (JvmType) candidate;

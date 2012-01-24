@@ -7,13 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.conversion;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -46,7 +45,7 @@ public class XbaseQualifiedNameValueConverter extends QualifiedNameValueConverte
 				}
 			}
 		} else {
-			for (String segment : string.split(Pattern.quote(getStringNamespaceDelimiter()))) {
+			for (String segment : Strings.split(string, getStringNamespaceDelimiter())) {
 				if (!isFirst)
 					buffer.append(getValueNamespaceDelimiter());
 				isFirst = false;

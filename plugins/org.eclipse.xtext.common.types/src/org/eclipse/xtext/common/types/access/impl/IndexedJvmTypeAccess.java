@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -46,8 +48,8 @@ public class IndexedJvmTypeAccess {
 		if (resourceSet != null) {
 			URI withoutFragment = javaObjectURI.trimFragment();
 			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
-			String[] fqnSegments = fqn.split("\\.");
-			QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
+			List<String> fqnSegments = Strings.split(fqn, '.');
+			QualifiedName qualifiedName = QualifiedName.create(fqnSegments.toArray(new String[fqnSegments.size()]));
 			return getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet);
 		}
 		return null;
