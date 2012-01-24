@@ -7,6 +7,7 @@ import -Declipse.download="http://download.eclipse.org" "${releng.project.locati
 resolve "${releng.project.location}/releng/xtext.cquery"
 
 build
+#junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
 
 perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
 perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#setup.promoter"
