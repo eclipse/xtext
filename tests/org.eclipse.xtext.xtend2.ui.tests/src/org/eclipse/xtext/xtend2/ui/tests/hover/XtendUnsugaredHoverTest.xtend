@@ -289,6 +289,24 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.unsugaredExpression)
 	}
+	
+	@Test
+	def void testUnsuagaredVersionForXtendFunction_12() throws Exception {
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		package testpackage
+		class Foo {
+			extension Extension
+			
+			def fooBarBaz(String it){
+				fooBarBaz
+			}
+			
+		}
+		'''.toString))
+		val triple = computeAstAndInvokeHover(editor,0,0)
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals("fooBarBaz(it)", triple.second.unsugaredExpression)
+	}
 
 	@Test
 	def void testUnsuagaredVersionForJavaWiothJavaDoc() throws Exception {
