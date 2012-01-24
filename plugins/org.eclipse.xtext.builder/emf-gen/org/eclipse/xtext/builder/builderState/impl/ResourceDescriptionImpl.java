@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -145,7 +144,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	@SuppressWarnings("serial")
 	public EList<IEObjectDescription> getExportedObjects() {
 		if (exportedObjects == null) {
-			exportedObjects = new EObjectContainmentWithInverseEList<IEObjectDescription>(IEObjectDescription.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR) {
+			exportedObjects = new EObjectContainmentEList<IEObjectDescription>(IEObjectDescription.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS)  {
 				@Override
 				protected void didChange() {
 					if (lookUp != null)

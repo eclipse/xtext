@@ -144,22 +144,13 @@ public interface BuilderStatePackage extends EPackage {
 	int EOBJECT_DESCRIPTION__ECLASS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Resource Descriptor</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR = 2;
-
-	/**
 	 * The feature id for the '<em><b>User Data</b></em>' map.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__USER_DATA = 3;
+	int EOBJECT_DESCRIPTION__USER_DATA = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -168,7 +159,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__NAME = 4;
+	int EOBJECT_DESCRIPTION__NAME = 3;
 
 	/**
 	 * The number of structural features of the '<em>EObject Description</em>' class.
@@ -177,7 +168,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION_FEATURE_COUNT = 5;
+	int EOBJECT_DESCRIPTION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.builderState.impl.UserDataEntryImpl <em>User Data Entry</em>}' class.
@@ -410,17 +401,6 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEObjectDescription_EClass();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.resource.IEObjectDescription#getResourceDescriptor <em>Resource Descriptor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Resource Descriptor</em>'.
-	 * @see org.eclipse.xtext.resource.IEObjectDescription#getResourceDescriptor()
-	 * @see #getEObjectDescription()
-	 * @generated
-	 */
-	EReference getEObjectDescription_ResourceDescriptor();
 
 	/**
 	 * Returns the meta object for the map '{@link org.eclipse.xtext.resource.IEObjectDescription#getUserData <em>User Data</em>}'.
@@ -662,14 +642,6 @@ public interface BuilderStatePackage extends EPackage {
 		 * @generated
 		 */
 		EReference EOBJECT_DESCRIPTION__ECLASS = eINSTANCE.getEObjectDescription_EClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Resource Descriptor</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR = eINSTANCE.getEObjectDescription_ResourceDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>User Data</b></em>' map feature.

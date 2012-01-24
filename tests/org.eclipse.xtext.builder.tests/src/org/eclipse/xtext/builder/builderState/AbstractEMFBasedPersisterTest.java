@@ -123,7 +123,7 @@ public class AbstractEMFBasedPersisterTest extends Assert {
 	public IReferenceDescription createReferenceDescription(int idx) {
 		ReferenceDescriptionImpl result = (ReferenceDescriptionImpl) BuilderStateFactory.eINSTANCE.createReferenceDescription();
 		result.setIndexInList(idx);
-		result.setReference(BuilderStatePackage.eINSTANCE.getEObjectDescription_ResourceDescriptor());
+		result.setReference(BuilderStatePackage.eINSTANCE.getEObjectDescription_EClass());
 		result.setSourceEObjectUri(URI.createFileURI(idx + "source.uri"));
 		result.setSourceEObjectUri(URI.createFileURI(idx + "target.uri"));
 		return result;

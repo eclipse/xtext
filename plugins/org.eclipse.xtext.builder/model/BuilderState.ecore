@@ -18,7 +18,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" lowerBound="1" eType="#//EURI"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exportedObjects" upperBound="-1"
-        eType="#//EObjectDescription" containment="true" eOpposite="#//EObjectDescription/resourceDescriptor"/>
+        eType="#//EObjectDescription" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenceDescriptions"
         upperBound="-1" eType="#//ReferenceDescription" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNames" upperBound="-1"
@@ -36,8 +36,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceDescriptor" eType="#//ResourceDescription"
-        eOpposite="#//ResourceDescription/exportedObjects"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="userData" upperBound="-1"
         eType="#//UserDataEntry" unsettable="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//QualifiedName"/>

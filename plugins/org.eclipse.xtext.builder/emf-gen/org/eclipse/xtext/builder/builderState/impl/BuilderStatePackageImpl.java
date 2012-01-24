@@ -200,7 +200,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * @generated
 	 */
 	public EAttribute getEObjectDescription_Name() {
-		return (EAttribute)eObjectDescriptionEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)eObjectDescriptionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -226,17 +226,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEObjectDescription_ResourceDescriptor() {
-		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEObjectDescription_UserData() {
-		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(3);
+		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -384,7 +375,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		eObjectDescriptionEClass = createEClass(EOBJECT_DESCRIPTION);
 		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__FRAGMENT);
 		createEReference(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__ECLASS);
-		createEReference(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR);
 		createEReference(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__USER_DATA);
 		createEAttribute(eObjectDescriptionEClass, EOBJECT_DESCRIPTION__NAME);
 
@@ -437,7 +427,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		// Initialize classes and features; add operations and parameters
 		initEClass(resourceDescriptionEClass, IResourceDescription.class, "ResourceDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResourceDescription_URI(), this.getEURI(), "URI", null, 1, 1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), this.getEObjectDescription_ResourceDescriptor(), "exportedObjects", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResourceDescription_ExportedObjects(), this.getEObjectDescription(), null, "exportedObjects", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResourceDescription_ReferenceDescriptions(), this.getReferenceDescription(), null, "referenceDescriptions", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceDescription_ImportedNames(), this.getQualifiedName(), "importedNames", null, 0, -1, IResourceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -457,7 +447,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		initEClass(eObjectDescriptionEClass, IEObjectDescription.class, "EObjectDescription", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEObjectDescription_Fragment(), ecorePackage.getEString(), "fragment", null, 1, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEObjectDescription_EClass(), ecorePackage.getEClass(), null, "eClass", null, 1, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEObjectDescription_ResourceDescriptor(), this.getResourceDescription(), this.getResourceDescription_ExportedObjects(), "resourceDescriptor", null, 0, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEObjectDescription_UserData(), this.getUserDataEntry(), null, "userData", null, 0, -1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEObjectDescription_Name(), this.getQualifiedName(), "name", null, 0, 1, IEObjectDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
