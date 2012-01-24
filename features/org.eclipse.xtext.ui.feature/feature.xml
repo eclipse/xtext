@@ -25,7 +25,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <requires>
       <import feature="org.eclipse.xtext.runtime" version="2.3.0" match="equivalent"/>
    </requires>
-
+   
+ 
    <plugin
          id="org.eclipse.xtext.ui"
          download-size="0"
@@ -39,14 +40,22 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.shared"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
+         
+  <plugin
+         id="org.eclipse.xtext.common.types.shared.jdt38"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+         
    <plugin
          id="org.eclipse.xtext.ui.shared"
          download-size="0"
@@ -67,12 +76,12 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ui.codetemplates.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
 </feature>
