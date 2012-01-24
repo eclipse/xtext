@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import java.util.NoSuchElementException;
+
 import org.eclipse.emf.common.util.TreeIterator;
 
 /**

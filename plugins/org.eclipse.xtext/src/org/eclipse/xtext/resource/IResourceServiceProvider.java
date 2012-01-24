@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;

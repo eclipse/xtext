@@ -27,10 +27,12 @@ import com.google.common.base.Function;
 import com.google.common.collect.Sets;
 
 /**
+ * Please refer to the
+ * <a href="http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference">documentation</a>
+ * for details.
+ * 
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
- *
- * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
  */
 public class Xtext2EcoreInterpretationContext {
 

@@ -53,7 +53,7 @@ public interface IQualifiedNameConverter {
 		}
 
 		/**
-		 * Splits the given string into segments and returns them as a {@link} QualifiedName.
+		 * Splits the given string into segments and returns them as a {@link QualifiedName}.
 		 * 
 		 * @exception IllegalArgumentException
 		 *                if the input is empty or null.

@@ -364,7 +364,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
+	 * @deprecated the package should not be accessed statically.
 	 * @generated
 	 */
 	@Deprecated

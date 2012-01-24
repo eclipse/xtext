@@ -24,7 +24,7 @@ import com.google.inject.Inject;
  * to validate for duplicated exported objects.
  * </p>
  * <p>
- * It validates <b>only</b> the objects, that will be publicly available via an {@link IExportedEObjectsProvider}. Local
+ * It validates <b>only</b> the objects, that will be publicly available via an {@link IResourceDescription}. Local
  * variables and similar objects have to be validated on their own. The {@link INamesAreUniqueValidationHelper} provides
  * a convenient way to apply this kind of constraints.
  * </p>

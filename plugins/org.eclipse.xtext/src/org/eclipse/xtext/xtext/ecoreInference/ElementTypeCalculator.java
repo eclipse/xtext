@@ -35,9 +35,6 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	private final EClassifierInfos classifierInfos;
 
-	/**
-	 * @param classifierInfos
-	 */
 	ElementTypeCalculator(EClassifierInfos classifierInfos) {
 		this.classifierInfos = classifierInfos;
 	}

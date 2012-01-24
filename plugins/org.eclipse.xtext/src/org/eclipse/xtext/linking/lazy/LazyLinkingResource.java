@@ -90,8 +90,7 @@ public class LazyLinkingResource extends XtextResource {
 	 * resolves any lazy cross references in this resource, adding Issues for unresolvable elements to this resource.
 	 * This resource might still contain resolvable proxies after this method has been called.
 	 * 
-	 * @param a
-	 *            {@link CancelIndicator} can be used to stop the resolution.
+	 * @param mon a {@link CancelIndicator} can be used to stop the resolution.
 	 */
 	public void resolveLazyCrossReferences(final CancelIndicator mon) {
 		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;

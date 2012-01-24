@@ -85,9 +85,7 @@ public class EObjectAtOffsetHelper {
 	}
 
 	/**
-	 * 
-	 * @param a
-	 *            node (possibly null)
+	 * @param node a node (possibly null)
 	 * @return if the given node is part of a cross reference this method returns the node pointing to the
 	 *         {@link CrossReference} <code>null</code> if the passed node was a null reference or if the passed node is
 	 *         not part of a cross reference.
