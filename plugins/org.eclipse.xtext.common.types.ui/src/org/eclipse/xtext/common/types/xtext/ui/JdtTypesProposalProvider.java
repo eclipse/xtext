@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.xtext.ui;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -50,7 +51,9 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
+import org.eclipse.xtext.util.Strings;
 
+import com.google.common.base.CharMatcher;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -178,18 +181,19 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			ContentAssistContext context, EReference typeReference, final Filter filter, 
 			final IValueConverter<String> valueConverter, final ICompletionProposalAcceptor acceptor) throws JavaModelException {
 		String prefix = context.getPrefix();
-		String[] split = prefix.split("\\.");
+		List<String> split = Strings.split(prefix, '.');
 		char[] typeName = null;
 		char[] packageName = null;
-		if (prefix.length() > 0 && split.length > 0) {
-			if (Character.isUpperCase(split[split.length - 1].charAt(0))) {
-				typeName = split[split.length - 1].toCharArray();
-				if (split.length > 1)
-					packageName = ("*" + prefix.substring(0, prefix.length() - (typeName.length + 1)).replaceAll("\\.", "*.") + "*").toCharArray();
+		if (prefix.length() > 0 && !split.isEmpty()) {
+			CharMatcher dotMatcher = CharMatcher.is('.');
+			if (Character.isUpperCase(split.get(split.size() - 1).charAt(0))) {
+				typeName = split.get(split.size() - 1).toCharArray();
+				if (split.size() > 1)
+					packageName = ("*" + dotMatcher.replaceFrom(prefix.substring(0, prefix.length() - (typeName.length + 1)), "*.") + "*").toCharArray();
 			} else {
 				if (prefix.endsWith("."))
 					prefix = prefix.substring(0, prefix.length() - 1);
-				packageName = ("*" + prefix.replaceAll("\\.", "*.") + "*").toCharArray();
+				packageName = ("*" + dotMatcher.replaceFrom(prefix, "*.") + "*").toCharArray();
 			}
 		}
 		IScope typeScope = null;

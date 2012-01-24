@@ -271,20 +271,35 @@ public class Strings {
 	/**
 	 * Copied from {@link java.util.Properties}
 	 */
+	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+			'F' };
+
+	/**
+	 * Copied from {@link java.util.Properties}
+	 */
 	public static char toHex(int nibble) {
 		return hexDigit[(nibble & 0xF)];
 	}
 
 	/**
-	 * Copied from {@link java.util.Properties}
-	 */
-	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
-			'F' };
-
-	/**
+	 * Splits a string around matches of the given delimiter string.
+	 * <p>
+	 * This method works as if by invoking the {@link com.google.common.base.Splitter#split(CharSequence) split} method
+	 * on a Splitter created using {@link com.google.common.base.Splitter#on(String)} for {@code delimiter}. In contrast
+	 * this method returns an up-front filled List instead of a lazily populated Iterable, which makes it perform better
+	 * when all elements need to be accessed.
+	 * <p>
+	 * For delimiters of length 1 it is preferred to use {@link #split(String, char)} instead.
+	 * 
 	 * @param value
+	 *            the string to split
 	 * @param delimiter
-	 * @return
+	 *            the delimiting string (e.g. "::")
+	 * 
+	 * @return the list of strings computed by splitting the string around matches of the given delimiter
+	 * 
+	 * @throws NullPointerException
+	 *             If the {@code value} or {@code delimiter} is {@code null}
 	 */
 	public static List<String> split(String value, String delimiter) {
 		List<String> result = new ArrayList<String>();
@@ -293,6 +308,38 @@ public class Strings {
 		while (index != -1) {
 			result.add(value.substring(lastIndex, index));
 			lastIndex = index + delimiter.length();
+			index = value.indexOf(delimiter, lastIndex);
+		}
+		result.add(value.substring(lastIndex));
+		return result;
+	}
+
+	/**
+	 * Splits a string around matches of the given delimiter character.
+	 * <p>
+	 * This method works as if by invoking the {@link com.google.common.base.Splitter#split(CharSequence) split} method
+	 * on a Splitter created using {@link com.google.common.base.Splitter#on(char)} for {@code delimiter}. In contrast
+	 * this method returns an up-front filled List instead of a lazily populated Iterable, which makes it perform better
+	 * when all elements need to be accessed.
+	 * 
+	 * @param value
+	 *            the string to split
+	 * @param delimiter
+	 *            the delimiting character (e.g. '.')
+	 * 
+	 * @return the list of strings computed by splitting the string around matches of the given delimiter
+	 * 
+	 * @throws NullPointerException
+	 *             If the {@code value} is {@code null}
+	 * @since 2.3
+	 */
+	public static List<String> split(String value, char delimiter) {
+		List<String> result = new ArrayList<String>();
+		int lastIndex = 0;
+		int index = value.indexOf(delimiter, lastIndex);
+		while (index != -1) {
+			result.add(value.substring(lastIndex, index));
+			lastIndex = index + 1;
 			index = value.indexOf(delimiter, lastIndex);
 		}
 		result.add(value.substring(lastIndex));

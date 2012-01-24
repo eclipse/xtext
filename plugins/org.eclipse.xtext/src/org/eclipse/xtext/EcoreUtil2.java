@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.MapMaker;
 
@@ -512,7 +513,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		}
 	}
 
-	private final static String delim = "«";
+	private final static char delim = '«';
 
 	/**
 	 * creates an external form of the given EReference. Use
@@ -546,8 +547,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static EReference getEReferenceFromExternalForm(EPackage.Registry registry, String externalForm) {
 		if (externalForm == null)
 			return null;
-		String[] split = externalForm.split(delim);
-		if (split.length != 3) {
+		List<String> split = Strings.split(externalForm, delim);
+		if (split.size() != 3) {
 			URI uri = URI.createURI(externalForm);
 			URI packURI = uri.trimFragment();
 			EPackage ePackage = registry.getEPackage(packURI.toString());
@@ -556,13 +557,13 @@ public class EcoreUtil2 extends EcoreUtil {
 			EReference result = (EReference) ePackage.eResource().getEObject(uri.fragment());
 			return result;
 		}
-		EPackage ePackage = registry.getEPackage(split[0]);
+		EPackage ePackage = registry.getEPackage(split.get(0));
 		if (ePackage == null)
 			return null;
-		EClass clazz = (EClass) ePackage.getEClassifier(split[1]);
+		EClass clazz = (EClass) ePackage.getEClassifier(split.get(1));
 		if (clazz == null)
 			return null;
-		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split[2]));
+		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split.get(2)));
 	}
 
 	public static boolean hasSameURI(EObject o0, EObject o1) {
