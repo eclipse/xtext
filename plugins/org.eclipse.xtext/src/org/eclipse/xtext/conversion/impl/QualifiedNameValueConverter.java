@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -16,6 +14,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -65,7 +64,7 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	public String toString(String value) {
 		StringBuilder buffer = new StringBuilder();
 		boolean isFirst = true;
-		for (String segment : value.split(Pattern.quote(getValueNamespaceDelimiter()))) {
+		for (String segment : Strings.split(value, getValueNamespaceDelimiter())) {
 			if (!isFirst)
 				buffer.append(getStringNamespaceDelimiter());
 			isFirst = false;
@@ -95,7 +94,7 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 				}
 			}
 		} else {
-			for (String segment : string.split(Pattern.quote(getStringNamespaceDelimiter()))) {
+			for (String segment : Strings.split(string, getStringNamespaceDelimiter())) {
 				if (!isFirst)
 					buffer.append(getValueNamespaceDelimiter());
 				isFirst = false;

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
@@ -76,27 +77,27 @@ public class LazyURIEncoder {
 	 * @return
 	 */
 	public Triple<EObject, EReference, INode> decode(Resource res, String uriFragment) {
-		String[] split = uriFragment.split(SEP);
-		EObject source = resolveShortFragment(res, split[1]);
-		EReference ref = fromShortExternalForm(source.eClass(), split[2]);
+		List<String> split = Strings.split(uriFragment, SEP);
+		EObject source = resolveShortFragment(res, split.get(1));
+		EReference ref = fromShortExternalForm(source.eClass(), split.get(2));
 		INode compositeNode = NodeModelUtils.getNode(source);
 		if (compositeNode==null)
 			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
-		INode textNode = getNode(compositeNode, split[3]);
+		INode textNode = getNode(compositeNode, split.get(3));
 		return Tuples.create(source, ref, textNode);
 	}
 	
 	public EObject resolveShortFragment(Resource res, String shortFragment) {
-		String[] split = shortFragment.split("\\.");
-		int contentsIdx = Integer.parseInt(split[0]);
+		List<String> split = Strings.split(shortFragment, '.');
+		int contentsIdx = Integer.parseInt(split.get(0));
 		EObject result = res.getContents().get(contentsIdx);
 		int splitIdx = 1;
-		while(splitIdx < split.length) {
-			int featureId = Integer.parseInt(split[splitIdx++]);
+		while(splitIdx < split.size()) {
+			int featureId = Integer.parseInt(split.get(splitIdx++));
 			EReference reference = (EReference) result.eClass().getEStructuralFeature(featureId);
 			if (reference.isMany()) {
 				List<?> list = (List<?>) result.eGet(reference);
-				int listIdx = Integer.parseInt(split[splitIdx++]);
+				int listIdx = Integer.parseInt(split.get(splitIdx++));
 				result = (EObject) list.get(listIdx);
 			} else {
 				result = (EObject) result.eGet(reference);
@@ -147,7 +148,7 @@ public class LazyURIEncoder {
 	 * ONLY public to be testable
 	 */
 	public INode getNode(final INode node, String path) {
-		final String[] split = path.split("/");
+		final List<String> split = Strings.split(path, '/');
 		INode result = node;
 		for (String string : split) {
 			String trimmed = string.trim();

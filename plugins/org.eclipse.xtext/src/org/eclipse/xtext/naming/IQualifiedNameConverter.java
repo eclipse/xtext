@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
-import java.util.regex.Pattern;
+import java.util.List;
 
 import org.eclipse.xtext.util.Strings;
 
@@ -65,8 +65,9 @@ public interface IQualifiedNameConverter {
 				throw new IllegalArgumentException("Qualified name cannot be empty");
 			if (Strings.isEmpty(getDelimiter()))
 				return QualifiedName.create(qualifiedNameAsString);
-			String[] segments = qualifiedNameAsString.split(Pattern.quote(getDelimiter()));
-			return QualifiedName.create(segments);
+			List<String> segs = getDelimiter().length() == 1 ? Strings.split(qualifiedNameAsString, getDelimiter()
+					.charAt(0)) : Strings.split(qualifiedNameAsString, getDelimiter());
+		    return QualifiedName.create(segs.toArray(new String[segs.size()]));
 		}
 
 		public String getDelimiter() {
