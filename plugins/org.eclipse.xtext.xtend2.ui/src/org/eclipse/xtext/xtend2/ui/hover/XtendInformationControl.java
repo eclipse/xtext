@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.internal.text.html.HTML2TextReader;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
@@ -232,7 +233,11 @@ public class XtendInformationControl extends AbstractInformationControl implemen
 		String unsugaredExpression = "";
 		if (fInput != null) {
 			unsugaredExpression = fInput.getUnsugaredExpression();
-			resourceProvider.setContext(((XtextResourceSet) fInput.getElement().eResource().getResourceSet()).getClasspathURIContext());
+			EObject element = fInput.getElement();
+			if(element != null && element.eResource() != null && element.eResource().getResourceSet() != null)
+				resourceProvider.setContext(((XtextResourceSet) element.eResource().getResourceSet()).getClasspathURIContext());
+			else
+				return;
 			embeddedEditorAccess.updateModel("", "a", "");
 			embeddedEditorAccess.updateModel(fInput.getPrefix() , unsugaredExpression ,fInput.getSuffix());
 			//FIXME : Remove this one when https://bugs.eclipse.org/bugs/show_bug.cgi?id=368800 is solved
