@@ -84,26 +84,28 @@ public class XtendHoverSerializer {
 		StringBuilder stringBuilder = new StringBuilder("(");
 		XExpression implicitFirstArgument = null;
 		List<XExpression> arguments = Lists.newArrayList();
+		boolean needsSeperator = false;
 		if (featureCall instanceof XMemberFeatureCall) {
 			arguments = ((XMemberFeatureCall) featureCall).getMemberCallArguments();
 			implicitFirstArgument = ((XMemberFeatureCall) featureCall).getMemberCallTarget();
+			needsSeperator = implicitFirstArgument != null && arguments.size() > 0;
 		} else {
 			implicitFirstArgument = featureCall.getImplicitFirstArgument();
 			arguments = featureCallToJavaMapping.getActualArguments(featureCall);
+			needsSeperator = implicitFirstArgument != null && arguments.size() > 1;
 		}
-		boolean needsSeperator = false;
+		
 		XbaseSwitch<String> xbaseSwitch = new XtendHoverXbaseSwitch();
 		if (implicitFirstArgument != null) {
 			String doSwitch = xbaseSwitch.doSwitch(implicitFirstArgument).trim();
-			if (doSwitch != null){
+			if (doSwitch != null)
 				stringBuilder.append(doSwitch);
-				needsSeperator = true;
-			}
 		}
 		if (arguments.size() > 0) {
-			if (needsSeperator)
-				stringBuilder.append(SEPERATOR);
 			XExpression first = arguments.get(0);
+			if(needsSeperator)
+				stringBuilder.append(SEPERATOR);
+			
 			if (first == implicitFirstArgument && arguments.size() > 1) {
 				first = arguments.get(1);
 			}
