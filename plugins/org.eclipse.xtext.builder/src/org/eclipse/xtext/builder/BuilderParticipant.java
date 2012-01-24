@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.IGenerator;
@@ -61,6 +62,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	
 	@Inject
 	private IDerivedResourceMarkers derivedResourceMarkers;
+	
+ 	@Inject
+ 	private GeneratorIdProvider generatorIdProvider;
 	
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
@@ -129,10 +133,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				return;
 		}
 		
-        Map<OutputConfiguration, IMarker[]> generatorMarkers = newHashMap();
+        Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = newHashMap();
         for (OutputConfiguration config : outputConfigurations.values()) {
             if (config.isCleanUpDerivedResources()) {
-                generatorMarkers.put(config, derivedResourceMarkers.findDerivedResourceMarkers(builtProject.getFolder(config.getOutputDirectory())));
+                final IFolder outputFolder = builtProject.getFolder(config.getOutputDirectory());
+				final Iterable<IMarker> markers = derivedResourceMarkers.findDerivedResourceMarkers(outputFolder, generatorIdProvider.getGeneratorIdentifier());
+				generatorMarkers.put(config, markers);
             }
         }
 		
@@ -149,7 +155,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
 				if (config.isCleanUpDerivedResources()) {
-					IMarker[] markers = generatorMarkers.get(config);
+					Iterable<IMarker> markers = generatorMarkers.get(config);
 					for (IMarker marker : markers) {
 						String source = derivedResourceMarkers.getSource(marker);
 						if (source != null && source.equals(uri))
