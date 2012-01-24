@@ -22,7 +22,7 @@ import org.eclipse.xtext.scoping.IScope;
  * This implementation assumes, that the keys of the {@link Map} correspond to the keys of the contained {@link org.eclipse.xtext.resource.EObjectDescription}.
  * Additionally it assumes, that those keys are equal to <code>description.getName().toLowerCase()</code>.
  * 
- * When looking up elements using {@link ISelector.SelectByName} this implementation looks up the the elements from the map, hence are much 
+ * When looking up elements using {@link #getElements(QualifiedName)} this implementation looks up the the elements from the map, hence are much 
  * more efficient for many {@link IEObjectDescription}s.  
  * 
  * @author Sven Efftinge - Initial contribution and API
