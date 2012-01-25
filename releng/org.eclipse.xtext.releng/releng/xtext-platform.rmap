@@ -3,7 +3,7 @@
   <rm:property key="checkout.location" value="${workspace.root}/"/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
   <rm:property key="xpand_mwe.download" value="${eclipse.download}"/>
-  <rm:property key="xpand.p2.repository" value="${xpand_mwe.download}/modeling/m2t/xpand/updates/nightly"/>
+  <rm:property key="xpand.p2.repository" value="${eclipse.download}/modeling/m2t/xpand/updates/releases"/>
   <rm:property key="mwe.p2.repository" value="${xpand_mwe.download}/modeling/emft/mwe/updates/nightly"/>
   
   <rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng"/>
@@ -56,7 +56,7 @@
   </rm:searchPath>
   <rm:searchPath name="orbit">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
-      <rm:uri format="{0}/tools/orbit/downloads/drops/I20120109153617/repository">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/S20120123151124/repository">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
