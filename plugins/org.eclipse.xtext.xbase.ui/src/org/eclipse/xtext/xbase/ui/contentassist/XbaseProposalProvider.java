@@ -567,14 +567,17 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							JvmExecutable executable = (JvmExecutable) objectOrProxy;
 							StyledString parameterList = new StyledString();
 							appendParameters(parameterList, executable, insignificantParameters);
-							ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
-							if (parameterData == null) {
-								parameterData = new ParameterData();
-								simpleNameToParameterList.put(myCandidate.getName(), parameterData);
+							// TODO how should we display overloaded methods were one variant does not take arguments?
+							if (parameterList.length() > 0) {
+								ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
+								if (parameterData == null) {
+									parameterData = new ParameterData();
+									simpleNameToParameterList.put(myCandidate.getName(), parameterData);
+								}
+								parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
+								IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), casted.getReplacementOffset() + proposal.length() - 1);
+								casted.setContextInformation(contextInformation);
 							}
-							parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
-							IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), casted.getReplacementOffset() + proposal.length() - 1);
-							casted.setContextInformation(contextInformation);
 						}
 					}
 					getPriorityHelper().adjustCrossReferencePriority(result, myContentAssistContext.getPrefix());
