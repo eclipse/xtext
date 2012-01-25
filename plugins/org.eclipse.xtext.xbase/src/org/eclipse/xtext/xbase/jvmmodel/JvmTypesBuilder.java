@@ -69,7 +69,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import com.google.inject.Inject;
 
 /**
- * A set of factory and builder functions, used to create an instance of the Jvm model ({@link TypesPackage}).
+ * A set of factory and builder functions, used to create instances of ({@link TypesPackage}).
+ * 
+ * It's meant to be used from an implementation of {@link IJvmModelInferrer}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -86,7 +88,9 @@ public class JvmTypesBuilder {
 
 	/**
 	 * Sets the given {@link JvmExecutable} as the logical container for the given {@link XExpression}.
-	 * This defines the context and s´the scope for the given expression.
+	 * This defines the context and the scope for the given expression. Also it defines how the given JvmExecutable can be executed.
+	 * For instance {@link org.eclipse.xtext.xbase.compiler.JvmModelGenerator} automatically translates any given {@link XExpression} 
+	 * into corresponding Java source code as the body of the given {@link JvmExecutable}. 
 	 * 
 	 * @param logicalContainer
 	 *            the {@link JvmExecutable} the expression is associated with. Must not be <code>null</code>.
@@ -109,6 +113,10 @@ public class JvmTypesBuilder {
 		addCompilationStrategy(executable, strategy);
 	}
 	
+	/**
+	 * Retrieves the attached documentation for the given source element.
+	 * By default this implementation provides the text of a multi line comment preceding the definition of the given source element.
+	 */
 	public String getDocumentation(EObject source) {
 		if (source == null)
 			return null;
@@ -123,6 +131,7 @@ public class JvmTypesBuilder {
 
 	/**
 	 * Attaches the given documentation to the given jvmElement.
+	 * 
 	 */
 	public void setDocumentation(JvmIdentifiableElement jvmElement, String documentation) {
 		if (documentation == null)
@@ -304,6 +313,9 @@ public class JvmTypesBuilder {
 		return toField(sourceElement, name, typeRef, null);
 	}
 	
+	/**
+	 * Same as {@link #toField(EObject, String, JvmTypeReference)} but with an initializer passed as the last argument.
+	 */
 	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef, Procedure1<JvmField> initializer) {
 		JvmField result = TypesFactory.eINSTANCE.createJvmField();
 		result.setSimpleName(nullSaveName(name));

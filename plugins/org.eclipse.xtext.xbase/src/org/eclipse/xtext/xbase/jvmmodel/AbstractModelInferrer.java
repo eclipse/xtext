@@ -13,6 +13,10 @@ import org.eclipse.xtext.util.IAcceptor;
 
 /**
  * A base dispatch class to be subclassed by Xtend.
+ * It allows subclasses to use Xtend's dispatch methods in order to avoid explicit tree navigation and 
+ * instanceof checking.
+ * 
+ * see also {@link IJvmModelInferrer}
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
