@@ -30,7 +30,7 @@
       </repositories>
     </contributions>
     <contributions label="Orbit">
-      <repositories location="http://download.eclipse.org/tools/orbit/downloads/drops/I20120109153617/repository">
+      <repositories location="http://download.eclipse.org/tools/orbit/downloads/drops/S20120123151124/repository">
         <bundles name="org.easymock"/>
       </repositories>
     </contributions>
