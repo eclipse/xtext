@@ -74,6 +74,17 @@ public class FilterUriContainer extends AbstractContainer {
 	}
 
 	@Override
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		Iterable<IEObjectDescription> unfiltered = delegate.getExportedObjectsByType(type);
+		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				URI resourceURI = input.getEObjectURI().trimFragment();
+				return !resourceURI.equals(filterMe);
+			}
+		});
+	}
+
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (uri.equals(filterMe))
 			return null;

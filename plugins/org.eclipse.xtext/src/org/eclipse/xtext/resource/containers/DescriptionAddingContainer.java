@@ -68,6 +68,13 @@ public class DescriptionAddingContainer extends AbstractContainer {
 	}
 
 	@Override
+	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		Iterable<IEObjectDescription> added = description.getExportedObjectsByType(type);
+		Iterable<IEObjectDescription> delegated = delegate.getExportedObjectsByType(type);
+		return Iterables.concat(added, delegated);
+	}
+
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (description.getURI().equals(uri))
 			return description;
