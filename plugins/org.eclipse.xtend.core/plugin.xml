@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/xtext/Xtend2"
+            class="org.eclipse.xtend.core.xtend.Xtend2Package"
+            genModel="model/Xtend2.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/xtext/Xtend2/RichString"
+            class="org.eclipse.xtend.core.richstring.ProcessedRichStringPackage"
+            genModel="model/Xtend2.genmodel"/>
+   </extension>
+</plugin>
