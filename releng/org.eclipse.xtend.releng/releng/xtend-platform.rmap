@@ -58,7 +58,7 @@
 	<rm:searchPath name="emf">
 		<rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false"
 			mutable="false">
-			<rm:uri format="{0}/modeling/emf/updates">
+			<rm:uri format="{0}/emf/emf/updates/2.8-I-builds">
 				<bc:propertyRef key="eclipse.download" />
 			</rm:uri>
 		</rm:provider>
@@ -82,7 +82,7 @@
 	<rm:searchPath name="platform">
 		<rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false"
 			mutable="false">
-			<rm:uri format="{0}/eclipse/updates/3.5">
+			<rm:uri format="{0}/eclipse/updates/3.8milestones">
 				<bc:propertyRef key="eclipse.download" />
 			</rm:uri>
 		</rm:provider>
