@@ -3,7 +3,7 @@
 	<rm:property key="source.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/modeling" />
 	<rm:locator pattern="org.eclipse.xtend.releng" searchPathRef="releng" />
 	<rm:locator pattern="org.eclipse.xtend.examples" searchPathRef="xtend.examples" />
-	<rm:locator pattern="^org\.eclipse\.xtend(?:\..+).\tests(?:\..+)?$" searchPathRef="xtend.tests" />
+	<rm:locator pattern="^org\.eclipse\.xtend(?:\..+)\.tests$" searchPathRef="xtend.tests" />
 	<rm:locator pattern="^org\.eclipse\.xtend(?:\..+)?$" searchPathRef="xtend" />
 	<rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
 	<rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />

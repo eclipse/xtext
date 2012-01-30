@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 	<cs:dependencies>
-		<!--<cs:dependency name="org.eclipse.xtend.tests" componentType="eclipse.feature" />-->
+		<cs:dependency name="org.eclipse.xtend.tests" componentType="eclipse.feature" />
 	</cs:dependencies>
 
 	<cs:actions>
