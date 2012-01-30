@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -30,7 +30,7 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ReplacingAppendableTest extends AbstractXtend2UITestCase {
+public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;

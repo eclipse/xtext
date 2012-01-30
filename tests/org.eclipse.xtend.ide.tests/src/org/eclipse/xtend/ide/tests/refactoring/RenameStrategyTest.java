@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -25,13 +25,13 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class RenameStrategyTest extends AbstractXtend2UITestCase {
+public class RenameStrategyTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private IRenameStrategy.Provider renameStrategyProvider;
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 
 	@Inject
 	private WorkbenchTestHelper testHelper;

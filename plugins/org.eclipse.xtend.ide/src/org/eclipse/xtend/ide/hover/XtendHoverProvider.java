@@ -29,7 +29,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -54,7 +54,7 @@ import com.google.inject.Inject;
 public class XtendHoverProvider extends XbaseHoverProvider {
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 	@Inject
 	private ILabelProvider labelProvider;
 	@Inject

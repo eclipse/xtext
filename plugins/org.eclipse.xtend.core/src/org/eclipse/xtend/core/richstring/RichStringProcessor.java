@@ -10,26 +10,13 @@ package org.eclipse.xtend.core.richstring;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.richstring.ElseIfCondition;
-import org.eclipse.xtend.core.richstring.ElseStart;
-import org.eclipse.xtend.core.richstring.EndIf;
-import org.eclipse.xtend.core.richstring.ForLoopEnd;
-import org.eclipse.xtend.core.richstring.ForLoopStart;
-import org.eclipse.xtend.core.richstring.IfConditionStart;
-import org.eclipse.xtend.core.richstring.Line;
-import org.eclipse.xtend.core.richstring.LineBreak;
-import org.eclipse.xtend.core.richstring.LinePart;
-import org.eclipse.xtend.core.richstring.Literal;
-import org.eclipse.xtend.core.richstring.PrintedExpression;
-import org.eclipse.xtend.core.richstring.ProcessedRichString;
-import org.eclipse.xtend.core.richstring.ProcessedRichStringFactory;
 import org.eclipse.xtend.core.richstring.util.ProcessedRichStringSwitch;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.util.Xtend2Switch;
+import org.eclipse.xtend.core.xtend.util.XtendSwitch;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -47,7 +34,7 @@ public class RichStringProcessor {
 		implementation.doSwitch(processedRichString);
 	}
 	
-	public static class ProcessedRichStringBuilder extends Xtend2Switch<Boolean> {
+	public static class ProcessedRichStringBuilder extends XtendSwitch<Boolean> {
 
 		@Inject
 		private ProcessedRichStringFactory factory = ProcessedRichStringFactory.eINSTANCE;
@@ -145,7 +132,7 @@ public class RichStringProcessor {
 		@Override
 		public Boolean defaultCase(EObject object) {
 			if (object instanceof XExpression) {
-				// caseXExpression does not work since object.ePackage != Xtend2Switch.modelPackage
+				// caseXExpression does not work since object.ePackage != XtendSwitch.modelPackage
 				PrintedExpression printedExpression = factory.createPrintedExpression();
 				printedExpression.setExpression((XExpression) object);
 				addToCurrentLine(printedExpression);

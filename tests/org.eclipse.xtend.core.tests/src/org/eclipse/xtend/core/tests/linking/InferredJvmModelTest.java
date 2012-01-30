@@ -12,8 +12,8 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -42,10 +42,10 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
-public class InferredJvmModelTest extends AbstractXtend2TestCase {
+public class InferredJvmModelTest extends AbstractXtendTestCase {
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 	
 	@Test public void testXtendField_00() throws Exception {
 		XtendFile xtendFile = file("class Foo { @Inject String string }");

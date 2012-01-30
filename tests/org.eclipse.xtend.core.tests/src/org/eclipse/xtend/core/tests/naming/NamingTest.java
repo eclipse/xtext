@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.naming;
 
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -22,13 +22,13 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class NamingTest extends AbstractXtend2TestCase {
+public class NamingTest extends AbstractXtendTestCase {
 
 	@Inject
 	protected IQualifiedNameProvider nameProvider;
 
 	@Inject
-	protected IXtend2JvmAssociations associations;
+	protected IXtendJvmAssociations associations;
 	
 	@Inject
 	protected XbaseQualifiedNameValueConverter converter;

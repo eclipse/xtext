@@ -13,11 +13,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.junit.Test;
@@ -28,13 +28,13 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class DependentElementsCalculatorTest extends AbstractXtend2UITestCase {
+public class DependentElementsCalculatorTest extends AbstractXtendUITestCase {
 	
 	@Inject 
 	private IDependentElementsCalculator dependentElementsCalculator;
 	
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 	
 	@Inject 
 	private WorkbenchTestHelper testHelper;

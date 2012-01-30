@@ -11,18 +11,18 @@ import java.util.List;
 
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.util.Xtend2Switch;
+import org.eclipse.xtend.core.xtend.util.XtendSwitch;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * Computes the initial indentation of a rich string according to
- * the semantics in the Xtend2 language specification. That is, especially
+ * the semantics in the Xtend language specification. That is, especially
  * the first and the last line have to be ignored if they only consist whitespace.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
+public class InitialTemplateIndentationComputer extends XtendSwitch<String> {
 	
 	private final String initial;
 

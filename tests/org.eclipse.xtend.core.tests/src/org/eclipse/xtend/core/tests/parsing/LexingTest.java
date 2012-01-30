@@ -7,7 +7,7 @@ import java.util.List;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Token;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -17,7 +17,7 @@ import org.junit.Test;
 import com.google.inject.Inject;
 
 @SuppressWarnings("unchecked")
-public class LexingTest extends AbstractXtend2TestCase {
+public class LexingTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private Lexer lexer;

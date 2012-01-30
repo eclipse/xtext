@@ -17,10 +17,10 @@ import java.util.Queue;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -42,13 +42,13 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class FindReferencesTest extends AbstractXtend2UITestCase {
+public class FindReferencesTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private WorkbenchTestHelper testHelper;
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 
 	@Inject
 	private Provider<CheckingReferenceQueryExecutor> executorProvider;

@@ -20,10 +20,9 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -115,7 +114,7 @@ public class OrganizeImports {
 		if (xtendFile == null)
 			return null;
 		List<INode> packDecl = NodeModelUtils
-				.findNodesForFeature(xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE);
+				.findNodesForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
 		int offset = 0;
 		if (packDecl.size() >= 1)
 			offset = packDecl.get(0).getOffset() + packDecl.get(0).getLength();

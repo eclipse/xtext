@@ -23,7 +23,7 @@ import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.eclipse.xtend.ide.internal.Xtend2Activator;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,7 +52,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 
 	@Override
 	protected String getEditorId() {
-		return "org.eclipse.xtend.core.Xtend2";
+		return "org.eclipse.xtend.core.Xtend";
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	}
 	
 	protected static IProject createPluginProject(String name) throws CoreException {
-		Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtend.core.Xtend2");
+		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));

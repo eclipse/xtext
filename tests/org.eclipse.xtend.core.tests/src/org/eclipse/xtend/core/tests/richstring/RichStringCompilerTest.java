@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		AbstractXtend2TestCase.getInjector().injectMembers(this);
+		AbstractXtendTestCase.getInjector().injectMembers(this);
 		testHelper.setUp();
 	}
 

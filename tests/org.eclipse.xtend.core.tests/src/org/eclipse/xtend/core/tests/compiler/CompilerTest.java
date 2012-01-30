@@ -26,10 +26,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtend.core.compiler.Xtend2Compiler;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.compiler.XtendCompiler;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -59,7 +59,7 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class CompilerTest extends AbstractXtend2TestCase {
+public class CompilerTest extends AbstractXtendTestCase {
 	
 	@Test public void testBug367763() throws Exception {
 		String code = 
@@ -1813,8 +1813,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				" def dispatch doIt(org.eclipse.emf.ecore.EReference x) { typeof(org.eclipse.emf.ecore.EReference) }\n" + 
 				" def dispatch doIt(org.eclipse.emf.ecore.EAttribute x) { typeof(org.eclipse.emf.ecore.EAttribute) }\n" + 
 				" def dispatch doIt(org.eclipse.emf.ecore.ETypedElement x) { typeof(org.eclipse.emf.ecore.ETypedElement) ";
-		invokeAndExpect(EReference.class, definition,Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF);
-		invokeAndExpect(EAttribute.class, definition,Xtend2Package.Literals.XTEND_FILE__PACKAGE);
+		invokeAndExpect(EReference.class, definition,XtendPackage.Literals.RICH_STRING_ELSE_IF__IF);
+		invokeAndExpect(EAttribute.class, definition,XtendPackage.Literals.XTEND_FILE__PACKAGE);
 		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());
 	}
 	
@@ -2532,13 +2532,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	protected ValidationTestHelper validationHelper;
 	
 	@Inject
-	protected Xtend2Compiler compiler;
+	protected XtendCompiler compiler;
 
 	@Inject
 	protected JvmModelGenerator generator;
 	
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 	
 	@Override
 	public void setUp() throws Exception {
@@ -2548,7 +2548,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
 		javaCompiler.addClassPathOfClass(XbasePackage.class);
-		javaCompiler.addClassPathOfClass(Xtend2Package.class);
+		javaCompiler.addClassPathOfClass(XtendPackage.class);
 		javaCompiler.addClassPathOfClass(Inject.class);
 		javaCompiler.addClassPathOfClass(Properties1.class);
 		javaCompiler.addClassPathOfClass(Function.class);

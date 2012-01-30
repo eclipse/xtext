@@ -8,10 +8,10 @@
 package org.eclipse.xtend.core.tests.validation;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
-import static org.eclipse.xtend.core.xtend.Xtend2Package.Literals.*;
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class OverrideValidationTest extends AbstractXtend2TestCase {
+public class OverrideValidationTest extends AbstractXtendTestCase {
 
 	@Inject
 	private ValidationTestHelper helper;

@@ -9,11 +9,11 @@ package org.eclipse.xtend.core.tests.validation;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.Xtend2RuntimeModule;
-import org.eclipse.xtend.core.Xtend2StandaloneSetup;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.XtendRuntimeModule;
+import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
@@ -44,13 +44,13 @@ public class ClasspathBasedValidationTest extends Assert {
 	public void setUp() throws Exception {
 		memento = GlobalRegistries.makeCopyOfGlobalState();
 		GlobalRegistries.clearGlobalRegistries();
-		injector = new Xtend2StandaloneSetup() {
+		injector = new XtendStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new Xtend2RuntimeModule() {
+				return Guice.createInjector(new XtendRuntimeModule() {
 					@Override
 					public ClassLoader bindClassLoaderToInstance() {
-						return AbstractXtend2TestCase.class.getClassLoader();
+						return AbstractXtendTestCase.class.getClassLoader();
 					}
 
 				});
@@ -74,7 +74,7 @@ public class ClasspathBasedValidationTest extends Assert {
 		XtendFile xtendFile = loadExampleXtendFile();
 			xtendFile.getXtendClass().setName("Bar");
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_PACKAGE);
-		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_CLASS, IssueCodes.WRONG_FILE);
+		helper.assertError(xtendFile, XtendPackage.Literals.XTEND_CLASS, IssueCodes.WRONG_FILE);
 	}
 		
 	@Test public void testFileNamingConventions_2() throws Exception {
@@ -83,14 +83,14 @@ public class ClasspathBasedValidationTest extends Assert {
 		URI resourceURI = resource.getURI();
 		URI invalidPackageURI = resourceURI.trimSegments(1).appendSegment("invalid").appendSegment(resourceURI.lastSegment());
 		resource.setURI(invalidPackageURI);
-		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
+		helper.assertError(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_FILE);
 	}
 	
 	@Test public void testFileNamingConventions_3() throws Exception {
 		XtendFile xtendFile = loadExampleXtendFile();
 		xtendFile.setPackage(null);
-		helper.assertError(xtendFile, Xtend2Package.Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
+		helper.assertError(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
 		helper.assertNoError(xtendFile, IssueCodes.WRONG_FILE);
 	}
 	

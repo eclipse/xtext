@@ -23,7 +23,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler;
-import org.eclipse.xtend.ide.internal.Xtend2Activator;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -35,9 +35,9 @@ import com.google.inject.Injector;
 @SuppressWarnings("restriction")
 public class ShowHierarchyTest extends AbstractEditorTest {
 
-	private static final String LANGUAGE_NAME = "org.eclipse.xtend.core.Xtend2";
+	private static final String LANGUAGE_NAME = "org.eclipse.xtend.core.Xtend";
 	private static final String COMMAND_ID = "org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy";
-	private static Injector injector = Xtend2Activator.getInstance().getInjector(LANGUAGE_NAME);
+	private static Injector injector = XtendActivator.getInstance().getInjector(LANGUAGE_NAME);
 	
 	@Inject
 	private IWorkspace workspace;

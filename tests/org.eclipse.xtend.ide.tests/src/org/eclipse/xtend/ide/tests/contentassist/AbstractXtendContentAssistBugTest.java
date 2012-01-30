@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractXtendContentAssistBugTest extends AbstractXtend2UITestCase implements IJavaProjectProvider, ResourceLoadHelper {
+public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUITestCase implements IJavaProjectProvider, ResourceLoadHelper {
 
 	private IProject demandCreateProject;
 	

@@ -9,13 +9,13 @@ package org.eclipse.xtend.ide.tests.outline;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
-import org.eclipse.xtend.ide.outline.Xtend2OutlineTreeProvider;
+import org.eclipse.xtend.ide.outline.XtendOutlineTreeProvider;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -24,10 +24,10 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractOutlineTests extends AbstractXtend2UITestCase {
+public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 
 	@Inject
-	private Xtend2OutlineTreeProvider treeProvider;
+	private XtendOutlineTreeProvider treeProvider;
 
 	@Inject
 	private Provider<XtextDocument> documentProvider;
@@ -50,7 +50,7 @@ public abstract class AbstractOutlineTests extends AbstractXtend2UITestCase {
 		workbenchTestHelper.tearDown();
 	}
 	
-	protected Xtend2OutlineTreeProvider getTreeProvider() {
+	protected XtendOutlineTreeProvider getTreeProvider() {
 		return treeProvider;
 	}
 

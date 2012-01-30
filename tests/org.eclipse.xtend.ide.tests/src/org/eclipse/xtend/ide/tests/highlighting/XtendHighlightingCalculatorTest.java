@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class XtendHighlightingCalculatorTest extends AbstractXtend2UITestCase implements IHighlightedPositionAcceptor {
+public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase implements IHighlightedPositionAcceptor {
 
 	public static final String DEFAULT_CLASS_DEF = "class Foo";
 	

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.compiler.Xtend2Compiler;
+import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -45,7 +45,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Inject
-	private Xtend2Compiler compiler;
+	private XtendCompiler compiler;
 	
 	private CreateExtensionInfo createExtensionInfo;
 

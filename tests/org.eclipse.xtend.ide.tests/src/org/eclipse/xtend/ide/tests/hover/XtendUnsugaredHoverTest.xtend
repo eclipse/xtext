@@ -16,10 +16,10 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover
 import org.eclipse.xtend.ide.hover.XtendInformationControlInput
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
@@ -31,13 +31,13 @@ import static org.eclipse.xtend.ide.tests.hover.XtendUnsugaredHoverTest.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
-class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
+class XtendUnsugaredHoverTest extends org.eclipse.xtend.ide.tests.AbstractXtendUITestCase {
 	 
 	@Inject
 	private WorkbenchTestHelper testHelper
 	
 	@Inject
-	extension IXtend2JvmAssociations
+	extension org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 	
 	@Inject
 	private IJavaElementFinder javaElementFinder
@@ -93,7 +93,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(it, 42)",triple.second.unsugaredExpression)
 	}
 	
@@ -111,7 +111,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(it, 42)",triple.second.unsugaredExpression)
 	}
 	
@@ -130,7 +130,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,1,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(it, 42 + a)",triple.second.unsugaredExpression)
 	}
 
@@ -148,7 +148,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(it, 40 + 2)", triple.second.unsugaredExpression)
 	}
 	
@@ -168,7 +168,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,25)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
 	}
 	
@@ -187,7 +187,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
 	}
 	
@@ -207,7 +207,7 @@ class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals('''_extension.barCharSequence(42, «"'''"»   Test   Test
 Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 	}
@@ -227,7 +227,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,4)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extension.bar(it, 42)", triple.second.unsugaredExpression)
 	}
 	
@@ -303,7 +303,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		}
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).xtendFunction), EcoreUtil2::getURI(triple.second.element))
+		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation).getXtendFunction), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("fooBarBaz(it)", triple.second.unsugaredExpression)
 	}
 
@@ -347,7 +347,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 
 	def loadResource(){
 		val uri = URI::createURI("platform:/resource/"+WorkbenchTestHelper::TESTPROJECT_NAME + "/src/" + FILEPATH);
-		var resource = injector.getInstance(typeof(IResourceSetProvider)).get(getProject()).createResource(uri)
+		var resource = getInjector.getInstance(typeof(IResourceSetProvider)).get(getProject()).createResource(uri)
 		resource.load(null)
 		return resource
 	}

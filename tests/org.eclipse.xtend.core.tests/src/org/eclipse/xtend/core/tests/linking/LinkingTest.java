@@ -15,8 +15,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -58,10 +58,10 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-public class LinkingTest extends AbstractXtend2TestCase {
+public class LinkingTest extends AbstractXtendTestCase {
 	
 	@Inject
-	private IXtend2JvmAssociations associator;
+	private IXtendJvmAssociations associator;
 	
 	@Test public void testDeclaredConstructor_01() throws Exception {
 		XtendClass clazz = clazz(

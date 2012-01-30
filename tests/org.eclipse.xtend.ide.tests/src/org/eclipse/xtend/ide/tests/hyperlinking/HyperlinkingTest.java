@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.tests.hyperlinking;
 
 import org.eclipse.jface.text.hyperlink.IHyperlink;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class HyperlinkingTest extends AbstractXtend2UITestCase {
+public class HyperlinkingTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private IHyperlinkHelper hyperlinkHelper;

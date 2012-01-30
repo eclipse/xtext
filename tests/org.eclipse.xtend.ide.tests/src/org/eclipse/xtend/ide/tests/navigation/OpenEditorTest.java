@@ -20,7 +20,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class OpenEditorTest extends AbstractXtend2UITestCase {
+public class OpenEditorTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private WorkbenchTestHelper workbenchTestHelper;
@@ -91,7 +91,7 @@ public class OpenEditorTest extends AbstractXtend2UITestCase {
 		String source = derivedResourceMarkers.getSource(markers[0]);
 		assertNotNull(source);
 		IEditorPart fooXtendEditor = globalURIEditorOpener.open(URI.createURI(source), foo, true);
-		assertEquals("org.eclipse.xtend.core.Xtend2", fooXtendEditor.getEditorSite().getId());
+		assertEquals("org.eclipse.xtend.core.Xtend", fooXtendEditor.getEditorSite().getId());
 	}
 
 	@Test public void testOpenFromOutline() throws Exception {
@@ -106,11 +106,11 @@ public class OpenEditorTest extends AbstractXtend2UITestCase {
 		IOutlineNode baz = bazNode.getChildren().get(0);
 		assertEquals("baz : int", baz.getText().toString());
 		outlineNodeElementOpener.open(baz, bazXtendEditor.getInternalSourceViewer());
-		assertActiveEditor("org.eclipse.xtend.core.Xtend2", "baz");
+		assertActiveEditor("org.eclipse.xtend.core.Xtend", "baz");
 		IOutlineNode foo = bazNode.getChildren().get(2);
 		assertEquals("foo : int - test.Foo", foo.getText().toString());
 		outlineNodeElementOpener.open(foo, bazXtendEditor.getInternalSourceViewer());
-		assertActiveEditor("org.eclipse.xtend.core.Xtend2", "foo");
+		assertActiveEditor("org.eclipse.xtend.core.Xtend", "foo");
 		IOutlineNode bar = bazNode.getChildren().get(4);
 		assertEquals("bar : int - test.Bar", bar.getText().toString());
 		outlineNodeElementOpener.open(bar, bazXtendEditor.getInternalSourceViewer());

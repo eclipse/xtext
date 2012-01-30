@@ -46,7 +46,7 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtend.ide.internal.Xtend2Activator;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.Assert;
 
 import com.google.inject.Inject;
@@ -207,7 +207,7 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static IProject createPluginProject(String name) throws CoreException {
-		Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtend.core.Xtend2");
+		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));

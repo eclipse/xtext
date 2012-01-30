@@ -7,8 +7,8 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.Xtend2StandaloneSetup;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -30,7 +30,7 @@ public class TestCaseCompiler {
 
 	public TestCaseCompiler() {
 		try {
-			injector = new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
+			injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public class TestCaseCompiler {
 		final File file = new File(to);
 		createFolders(file);
 		FileWriter writer = new FileWriter(file);
-		IXtend2JvmAssociations associations = injector.getInstance(IXtend2JvmAssociations.class);
+		IXtendJvmAssociations associations = injector.getInstance(IXtendJvmAssociations.class);
 		JvmModelGenerator generator = injector.getInstance(JvmModelGenerator.class);
 		XtendFile xtendFile = (XtendFile)res.getContents().get(0);
 		JvmGenericType inferredType = associations.getInferredType(xtendFile.getXtendClass());

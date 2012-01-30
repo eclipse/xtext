@@ -32,7 +32,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
-import org.eclipse.xtend.ide.internal.Xtend2Activator;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -213,7 +213,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	
 	@Override
 	protected Injector getInjector() {
-		return Xtend2Activator.getInstance().getInjector("org.eclipse.xtend.core.Xtend2");
+		return XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 	}
 	
 	@Override
@@ -264,7 +264,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	}
 	
 	public static IProject createPluginProject(String name) throws CoreException {
-		Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtend.core.Xtend2");
+		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));

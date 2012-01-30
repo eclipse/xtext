@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.dispatch.DispatchingSupport;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DispatchingSupportTest extends AbstractXtend2TestCase {
+public class DispatchingSupportTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private DispatchingSupport dispatchingSupport;

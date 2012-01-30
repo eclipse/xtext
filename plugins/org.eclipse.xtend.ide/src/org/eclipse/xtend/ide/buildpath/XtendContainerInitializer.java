@@ -30,7 +30,7 @@ import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtend.ide.internal.Xtend2Activator;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.Version;
 
@@ -81,7 +81,7 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 					JavaCore.setClasspathContainer(containerPath, new IJavaProject[] { project },
 							new IClasspathContainer[] { containerSuggestion }, null);
 				} catch (CoreException ex) {
-					return new Status(IStatus.ERROR, Xtend2Activator.getInstance().getBundle().getSymbolicName(), 0,
+					return new Status(IStatus.ERROR, XtendActivator.getInstance().getBundle().getSymbolicName(), 0,
 							"Classpath container update failed", ex); //$NON-NLS-1$
 				}
 				return Status.OK_STATUS;
@@ -141,7 +141,7 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 		 * http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/
 		 */
 		private String calculateJavadocURL() {
-			Version xtend2version = Xtend2Activator.getInstance().getBundle().getVersion();
+			Version xtend2version = XtendActivator.getInstance().getBundle().getVersion();
 			StringBuilder builder = new StringBuilder("http://download.eclipse.org/modeling/tmf/xtext/javadoc/");
 			builder.append(xtend2version.getMajor()).append(".");
 			builder.append(xtend2version.getMinor()).append(".");

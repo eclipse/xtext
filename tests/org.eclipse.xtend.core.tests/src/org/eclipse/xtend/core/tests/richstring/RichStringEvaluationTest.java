@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -266,7 +266,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 	}
 
 	protected XtendFile file(String string, boolean validate) throws Exception {
-		XtextResourceSet set = AbstractXtend2TestCase.getInjector().getInstance(XtextResourceSet.class);
+		XtextResourceSet set = AbstractXtendTestCase.getInjector().getInstance(XtextResourceSet.class);
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);

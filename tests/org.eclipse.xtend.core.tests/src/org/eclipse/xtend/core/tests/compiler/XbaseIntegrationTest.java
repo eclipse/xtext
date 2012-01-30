@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import java.io.IOException;
 
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		AbstractXtend2TestCase.getInjector().injectMembers(this);
+		AbstractXtendTestCase.getInjector().injectMembers(this);
 		testHelper.setUp();
 	}
 	

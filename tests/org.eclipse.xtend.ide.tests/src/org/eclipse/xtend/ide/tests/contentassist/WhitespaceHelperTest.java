@@ -9,7 +9,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.contentassist.WhitespaceHelper;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class WhitespaceHelperTest extends AbstractXtend2UITestCase {
+public class WhitespaceHelperTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private Provider<WhitespaceHelper> whitespaceHelperProvider;

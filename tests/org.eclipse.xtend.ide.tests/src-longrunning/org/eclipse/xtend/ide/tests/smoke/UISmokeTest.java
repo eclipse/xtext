@@ -29,7 +29,7 @@ public abstract class UISmokeTest extends AbstractSmokeTest {
 //	
 //	@Override
 //	public Injector doGetInjector() {
-//		return Xtend2Activator.getInstance().getInjector("org.eclipse.xtend.core.Xtend2");
+//		return XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 //	}
 //	
 //	@Override

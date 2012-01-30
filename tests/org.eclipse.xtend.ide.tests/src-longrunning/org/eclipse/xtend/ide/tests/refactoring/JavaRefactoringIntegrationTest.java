@@ -25,7 +25,7 @@ import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.texteditor.IDocumentProviderExtension;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -44,7 +44,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class JavaRefactoringIntegrationTest extends AbstractXtend2UITestCase {
+public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	@Inject
 	protected EObjectAtOffsetHelper eObjectAtOffsetHelper;

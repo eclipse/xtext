@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtend2 UI Tests
+Bundle-Name: Xtend UI Tests
 Bundle-SymbolicName: org.eclipse.xtend.ide.tests
 Bundle-Version: 2.3.0.qualifier
 Bundle-Vendor: Eclipse Modeling

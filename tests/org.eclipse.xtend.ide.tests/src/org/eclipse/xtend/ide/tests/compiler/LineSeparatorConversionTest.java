@@ -14,7 +14,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class LineSeparatorConversionTest extends AbstractXtend2UITestCase {
+public class LineSeparatorConversionTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	private WorkbenchTestHelper workbenchTestHelper;
