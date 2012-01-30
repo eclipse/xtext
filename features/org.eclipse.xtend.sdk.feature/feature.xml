@@ -23,95 +23,60 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.ui" version="2.3.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.ui" version="2.3.0"/>
    </requires>
 
    <plugin
-         id="org.eclipse.xtext.xtend2"
+         id="org.eclipse.xtend.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xtend2.lib"
+         id="org.eclipse.xtend.core.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xtend2.lib.source"
+         id="org.eclipse.xtend.ide"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtend2.lib"
+         id="org.eclipse.xtend.ide.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtend2.lib.source"
+         id="org.eclipse.xtend.standalone"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xtend2.source"
+         id="org.eclipse.xtend.standalone.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xtend2.ui"
+         id="org.eclipse.xtend.examples"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xbase.lib.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.ui.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.standalone"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.standalone.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.ui.examples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend2.doc"
+         id="org.eclipse.xtend.doc"
          download-size="0"
          install-size="0"
          version="0.0.0"
