@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.xtend.core.richstring.ElseIfCondition;
 import org.eclipse.xtend.core.richstring.IfConditionStart;
 import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
-import org.eclipse.xtend.core.xtend.RichStringElseIf;
 
+import org.eclipse.xtend.core.xtend.RichStringElseIf;
 
 /**
  * <!-- begin-user-doc -->

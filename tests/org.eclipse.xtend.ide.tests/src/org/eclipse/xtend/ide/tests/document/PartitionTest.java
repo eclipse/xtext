@@ -11,7 +11,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.ITypedRegion;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PartitionTest extends AbstractXtend2UITestCase {
+public class PartitionTest extends AbstractXtendUITestCase {
 
 	private XtextDocument document;
 

@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringIf()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringIf()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface RichStringIf extends XExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>If</em>' containment reference.
 	 * @see #setIf(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringIf_If()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringIf_If()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface RichStringIf extends XExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Then</em>' containment reference.
 	 * @see #setThen(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringIf_Then()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringIf_Then()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -92,7 +92,7 @@ public interface RichStringIf extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Else Ifs</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringIf_ElseIfs()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringIf_ElseIfs()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -108,7 +108,7 @@ public interface RichStringIf extends XExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Else</em>' containment reference.
 	 * @see #setElse(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringIf_Else()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringIf_Else()
 	 * @model containment="true"
 	 * @generated
 	 */

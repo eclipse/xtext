@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -37,7 +37,7 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
+public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private WorkbenchTestHelper testHelper;

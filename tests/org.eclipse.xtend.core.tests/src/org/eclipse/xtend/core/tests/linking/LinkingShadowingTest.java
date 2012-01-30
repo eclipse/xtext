@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.tests.linking;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LinkingShadowingTest extends AbstractXtend2TestCase {
+public class LinkingShadowingTest extends AbstractXtendTestCase {
 
 	@Inject
 	private ValidationTestHelper validator;

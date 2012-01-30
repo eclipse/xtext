@@ -17,14 +17,14 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover;
 import org.eclipse.xtend.ide.hover.XtendInformationControlInput;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -52,12 +52,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
+public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper testHelper;
   
   @Inject
-  private IXtend2JvmAssociations _iXtend2JvmAssociations;
+  private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private IJavaElementFinder javaElementFinder;
@@ -161,7 +161,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -205,7 +205,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -252,7 +252,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -296,7 +296,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -342,7 +342,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -388,7 +388,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -440,7 +440,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -495,7 +495,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();
@@ -677,7 +677,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtend2UITestCase {
       final Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> triple = _computeAstAndInvokeHover;
       XAbstractFeatureCall _first = triple.getFirst();
       JvmIdentifiableElement _feature = _first.getFeature();
-      XtendFunction _xtendFunction = this._iXtend2JvmAssociations.getXtendFunction(((JvmOperation) _feature));
+      XtendFunction _xtendFunction = this._iXtendJvmAssociations.getXtendFunction(((JvmOperation) _feature));
       URI _uRI = EcoreUtil.getURI(_xtendFunction);
       XtendInformationControlInput _second = triple.getSecond();
       EObject _element = _second.getElement();

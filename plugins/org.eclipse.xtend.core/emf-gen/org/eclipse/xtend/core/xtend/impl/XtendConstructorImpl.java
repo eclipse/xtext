@@ -20,20 +20,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtend.core.xtend2.impl.XtendMemberImplCustom;
+
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Constructor</b></em>'.
+ * An implementation of the model object '<em><b>Constructor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -158,7 +157,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_CONSTRUCTOR;
+		return XtendPackage.Literals.XTEND_CONSTRUCTOR;
 	}
 
 	/**
@@ -181,7 +180,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CONSTRUCTOR__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CONSTRUCTOR__NAME, oldName, name));
 	}
 
 	/**
@@ -205,7 +204,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 		expression = newExpression;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -222,14 +221,14 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 		{
 			NotificationChain msgs = null;
 			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION, null, msgs);
 			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -241,7 +240,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		if (parameters == null)
 		{
-			parameters = new EObjectContainmentEList<XtendParameter>(XtendParameter.class, this, Xtend2Package.XTEND_CONSTRUCTOR__PARAMETERS);
+			parameters = new EObjectContainmentEList<XtendParameter>(XtendParameter.class, this, XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -255,7 +254,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_CONSTRUCTOR__TYPE_PARAMETERS);
+			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS);
 		}
 		return typeParameters;
 	}
@@ -282,7 +281,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 		boolean oldVisibilityESet = visibilityESet;
 		visibilityESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CONSTRUCTOR__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
 	}
 
 	/**
@@ -297,7 +296,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 		visibility = VISIBILITY_EDEFAULT;
 		visibilityESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, Xtend2Package.XTEND_CONSTRUCTOR__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
 	}
 
 	/**
@@ -319,7 +318,7 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		if (exceptions == null)
 		{
-			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CONSTRUCTOR__EXCEPTIONS);
+			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS);
 		}
 		return exceptions;
 	}
@@ -334,13 +333,13 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				return basicSetExpression(null, msgs);
-			case Xtend2Package.XTEND_CONSTRUCTOR__PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXCEPTIONS:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -356,17 +355,17 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CONSTRUCTOR__NAME:
+			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
 				return getName();
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				return getExpression();
-			case Xtend2Package.XTEND_CONSTRUCTOR__PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
 				return getParameters();
-			case Xtend2Package.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case Xtend2Package.XTEND_CONSTRUCTOR__VISIBILITY:
+			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
 				return getVisibility();
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXCEPTIONS:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				return getExceptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -383,24 +382,24 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CONSTRUCTOR__NAME:
+			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
 				setName((String)newValue);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				setExpression((XExpression)newValue);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends XtendParameter>)newValue);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__VISIBILITY:
+			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
 				setVisibility((JvmVisibility)newValue);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXCEPTIONS:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				getExceptions().clear();
 				getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
@@ -418,22 +417,22 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CONSTRUCTOR__NAME:
+			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				setExpression((XExpression)null);
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
 				getParameters().clear();
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__VISIBILITY:
+			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
 				unsetVisibility();
 				return;
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXCEPTIONS:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				getExceptions().clear();
 				return;
 		}
@@ -450,17 +449,17 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CONSTRUCTOR__NAME:
+			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXPRESSION:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				return expression != null;
-			case Xtend2Package.XTEND_CONSTRUCTOR__PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case Xtend2Package.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case Xtend2Package.XTEND_CONSTRUCTOR__VISIBILITY:
+			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
 				return isSetVisibility();
-			case Xtend2Package.XTEND_CONSTRUCTOR__EXCEPTIONS:
+			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				return exceptions != null && !exceptions.isEmpty();
 		}
 		return super.eIsSet(featureID);

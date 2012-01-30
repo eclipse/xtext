@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Class Super Call Referable</b></em>'.
+ * A representation of the model object '<em><b>Class Super Call Referable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClassSuperCallReferable()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClassSuperCallReferable()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface XtendClassSuperCallReferable extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Xtend Class</em>' container reference.
 	 * @see #setXtendClass(XtendClass)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClassSuperCallReferable_XtendClass()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClassSuperCallReferable_XtendClass()
 	 * @see org.eclipse.xtend.core.xtend.XtendClass#getSuperCallReferable
 	 * @model opposite="superCallReferable"
 	 * @generated

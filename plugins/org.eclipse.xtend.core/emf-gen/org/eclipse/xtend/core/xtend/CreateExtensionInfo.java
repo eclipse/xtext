@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getCreateExtensionInfo()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getCreateExtensionInfo()
  * @model
  * @generated
  */
@@ -38,7 +38,7 @@ public interface CreateExtensionInfo extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Create Expression</em>' containment reference.
 	 * @see #setCreateExpression(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getCreateExtensionInfo_CreateExpression()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getCreateExtensionInfo_CreateExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -65,7 +65,7 @@ public interface CreateExtensionInfo extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getCreateExtensionInfo_Name()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getCreateExtensionInfo_Name()
 	 * @model default="it"
 	 * @generated
 	 */

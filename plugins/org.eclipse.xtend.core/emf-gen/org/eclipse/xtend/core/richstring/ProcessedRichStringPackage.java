@@ -41,7 +41,7 @@ public interface ProcessedRichStringPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/xtext/Xtend2/RichString";
+	String eNS_URI = "http://www.eclipse.org/xtend/RichString";
 
 	/**
 	 * The package namespace name.

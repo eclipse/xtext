@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests;
 
 import java.util.List;
 
-import org.eclipse.xtend.core.xtend.Xtend2Factory;
+import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -22,10 +22,10 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ModelExtensionsTest extends AbstractXtend2TestCase {
+public class ModelExtensionsTest extends AbstractXtendTestCase {
 	
 	@Inject
-	protected Xtend2Factory factory;
+	protected XtendFactory factory;
 	
 	@Test public void testXtendClass() throws Exception {
 		XtendFile file = file("package foo class Bar extends Object implements java.io.Serializable {}");

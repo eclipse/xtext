@@ -8,8 +8,8 @@
 package org.eclipse.xtend.core.tests.linking;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class EObjectLocationTests extends AbstractXtend2TestCase {
+public class EObjectLocationTests extends AbstractXtendTestCase {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
@@ -35,7 +35,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	private ILocationInFileProvider locationInFileProvider;
 	
 	@Inject 
-	private IXtend2JvmAssociations xtend2jvmAssociations;
+	private IXtendJvmAssociations xtend2jvmAssociations;
 	
 	@Test public void testResolveElement() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() { hashCode(); this }}";

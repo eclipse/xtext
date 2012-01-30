@@ -25,8 +25,8 @@ import org.eclipse.xtend.core.richstring.ElseStart;
 import org.eclipse.xtend.core.richstring.EndIf;
 import org.eclipse.xtend.core.richstring.IfConditionStart;
 import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
-import org.eclipse.xtend.core.xtend.RichStringIf;
 
+import org.eclipse.xtend.core.xtend.RichStringIf;
 
 /**
  * <!-- begin-user-doc -->

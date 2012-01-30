@@ -8,18 +8,18 @@
 package org.eclipse.xtend.ide.tests.search;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtend.core.xtend.Xtend2Package.Literals.*;
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtend.ide.search.Xtend2SearchFilter;
+import org.eclipse.xtend.ide.search.XtendSearchFilter;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class SearchFilterTest extends AbstractXtend2UITestCase {
+public class SearchFilterTest extends AbstractXtendUITestCase {
 
 	@Inject
 	protected WorkbenchTestHelper testHelper;
@@ -37,7 +37,7 @@ public class SearchFilterTest extends AbstractXtend2UITestCase {
 	protected IResourceDescription.Manager resourceDescriptionManager;
 	
 	@Inject
-	protected Xtend2SearchFilter searchFilter;
+	protected XtendSearchFilter searchFilter;
 	
 	@Inject
 	protected IQualifiedNameConverter converter;

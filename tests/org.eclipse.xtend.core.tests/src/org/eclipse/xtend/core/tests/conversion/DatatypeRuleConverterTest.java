@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.conversion;
 
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DatatypeRuleConverterTest extends AbstractXtend2TestCase {
+public class DatatypeRuleConverterTest extends AbstractXtendTestCase {
 
 	@Test public void testValidID() {
 		doTestConverter("create", "create", "ValidID");

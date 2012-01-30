@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.parsing;
 
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
@@ -32,9 +32,9 @@ import org.junit.Test;
 
 import com.google.inject.Inject;
 
-public class ParserTest extends AbstractXtend2TestCase {
+public class ParserTest extends AbstractXtendTestCase {
 	
-	@Inject private IXtend2JvmAssociations associations; 
+	@Inject private IXtendJvmAssociations associations; 
 	
 	@Test public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(

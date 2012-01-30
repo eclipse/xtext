@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -15,7 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractRichStringTest extends AbstractXtend2TestCase {
+public abstract class AbstractRichStringTest extends AbstractXtendTestCase {
 
 	protected String getPrefix() {
 		return "class Foo { def foo() ";

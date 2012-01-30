@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Constructor</b></em>'.
+ * A representation of the model object '<em><b>Constructor</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -30,7 +30,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor()
  * @model
  * @generated
  */
@@ -46,7 +46,7 @@ public interface XtendConstructor extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor_Name()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Name()
 	 * @model
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public interface XtendConstructor extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor_Expression()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -98,7 +98,7 @@ public interface XtendConstructor extends XtendMember
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor_Parameters()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Parameters()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -114,7 +114,7 @@ public interface XtendConstructor extends XtendMember
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor_TypeParameters()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_TypeParameters()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -135,7 +135,7 @@ public interface XtendConstructor extends XtendMember
 	 * @see #isSetVisibility()
 	 * @see #unsetVisibility()
 	 * @see #setVisibility(JvmVisibility)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor_Visibility()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Visibility()
 	 * @model default="PUBLIC" unsettable="true"
 	 * @generated
 	 */
@@ -187,7 +187,7 @@ public interface XtendConstructor extends XtendMember
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exceptions</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendConstructor_Exceptions()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Exceptions()
 	 * @model containment="true"
 	 * @generated
 	 */

@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichString()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichString()
  * @model
  * @generated
  */

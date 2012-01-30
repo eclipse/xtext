@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Annotation Target</b></em>'.
+ * A representation of the model object '<em><b>Annotation Target</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendAnnotationTarget()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendAnnotationTarget()
  * @model abstract="true"
  * @generated
  */
@@ -39,7 +39,7 @@ public interface XtendAnnotationTarget extends EObject
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotations</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendAnnotationTarget_Annotations()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendAnnotationTarget_Annotations()
 	 * @model containment="true"
 	 * @generated
 	 */

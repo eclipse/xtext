@@ -21,14 +21,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendImport;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend File</b></em>'.
+ * An implementation of the model object '<em><b>File</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -101,7 +101,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_FILE;
+		return XtendPackage.Literals.XTEND_FILE;
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		if (imports == null)
 		{
-			imports = new EObjectContainmentEList<XtendImport>(XtendImport.class, this, Xtend2Package.XTEND_FILE__IMPORTS);
+			imports = new EObjectContainmentEList<XtendImport>(XtendImport.class, this, XtendPackage.XTEND_FILE__IMPORTS);
 		}
 		return imports;
 	}
@@ -139,7 +139,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		xtendClass = newXtendClass;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FILE__XTEND_CLASS, oldXtendClass, newXtendClass);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FILE__XTEND_CLASS, oldXtendClass, newXtendClass);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -156,14 +156,14 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		{
 			NotificationChain msgs = null;
 			if (xtendClass != null)
-				msgs = ((InternalEObject)xtendClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FILE__XTEND_CLASS, null, msgs);
+				msgs = ((InternalEObject)xtendClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FILE__XTEND_CLASS, null, msgs);
 			if (newXtendClass != null)
-				msgs = ((InternalEObject)newXtendClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FILE__XTEND_CLASS, null, msgs);
+				msgs = ((InternalEObject)newXtendClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FILE__XTEND_CLASS, null, msgs);
 			msgs = basicSetXtendClass(newXtendClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FILE__XTEND_CLASS, newXtendClass, newXtendClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FILE__XTEND_CLASS, newXtendClass, newXtendClass));
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 		String oldPackage = package_;
 		package_ = newPackage;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FILE__PACKAGE, oldPackage, package_));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FILE__PACKAGE, oldPackage, package_));
 	}
 
 	/**
@@ -199,9 +199,9 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FILE__IMPORTS:
+			case XtendPackage.XTEND_FILE__IMPORTS:
 				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+			case XtendPackage.XTEND_FILE__XTEND_CLASS:
 				return basicSetXtendClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,11 +217,11 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FILE__IMPORTS:
+			case XtendPackage.XTEND_FILE__IMPORTS:
 				return getImports();
-			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+			case XtendPackage.XTEND_FILE__XTEND_CLASS:
 				return getXtendClass();
-			case Xtend2Package.XTEND_FILE__PACKAGE:
+			case XtendPackage.XTEND_FILE__PACKAGE:
 				return getPackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -238,14 +238,14 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FILE__IMPORTS:
+			case XtendPackage.XTEND_FILE__IMPORTS:
 				getImports().clear();
 				getImports().addAll((Collection<? extends XtendImport>)newValue);
 				return;
-			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+			case XtendPackage.XTEND_FILE__XTEND_CLASS:
 				setXtendClass((XtendClass)newValue);
 				return;
-			case Xtend2Package.XTEND_FILE__PACKAGE:
+			case XtendPackage.XTEND_FILE__PACKAGE:
 				setPackage((String)newValue);
 				return;
 		}
@@ -262,13 +262,13 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FILE__IMPORTS:
+			case XtendPackage.XTEND_FILE__IMPORTS:
 				getImports().clear();
 				return;
-			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+			case XtendPackage.XTEND_FILE__XTEND_CLASS:
 				setXtendClass((XtendClass)null);
 				return;
-			case Xtend2Package.XTEND_FILE__PACKAGE:
+			case XtendPackage.XTEND_FILE__PACKAGE:
 				setPackage(PACKAGE_EDEFAULT);
 				return;
 		}
@@ -285,11 +285,11 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FILE__IMPORTS:
+			case XtendPackage.XTEND_FILE__IMPORTS:
 				return imports != null && !imports.isEmpty();
-			case Xtend2Package.XTEND_FILE__XTEND_CLASS:
+			case XtendPackage.XTEND_FILE__XTEND_CLASS:
 				return xtendClass != null;
-			case Xtend2Package.XTEND_FILE__PACKAGE:
+			case XtendPackage.XTEND_FILE__PACKAGE:
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 		}
 		return super.eIsSet(featureID);

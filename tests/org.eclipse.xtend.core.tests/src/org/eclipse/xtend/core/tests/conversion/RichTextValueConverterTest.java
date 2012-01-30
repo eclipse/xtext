@@ -13,14 +13,14 @@ import org.eclipse.xtend.core.conversion.RichTextEndValueConverter;
 import org.eclipse.xtend.core.conversion.RichTextInBetweenValueConverter;
 import org.eclipse.xtend.core.conversion.RichTextStartValueConverter;
 import org.eclipse.xtend.core.conversion.RichTextValueConverter;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichTextValueConverterTest extends AbstractXtend2TestCase {
+public class RichTextValueConverterTest extends AbstractXtendTestCase {
 
 	@Test public void testRichText() {
 		String text = "''' foobar '''";

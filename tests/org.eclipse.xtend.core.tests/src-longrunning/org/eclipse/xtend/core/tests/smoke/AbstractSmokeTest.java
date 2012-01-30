@@ -18,7 +18,7 @@ import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -39,7 +39,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractSmokeTest extends AbstractXtend2TestCase {
+public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 
 	private static final Logger logger = Logger.getLogger(AbstractSmokeTest.class);
 	

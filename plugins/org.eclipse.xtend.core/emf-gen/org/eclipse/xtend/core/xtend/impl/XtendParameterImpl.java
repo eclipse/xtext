@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -82,7 +82,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_PARAMETER;
+		return XtendPackage.Literals.XTEND_PARAMETER;
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_PARAMETER__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_PARAMETER__NAME, oldName, name));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 		parameterType = newParameterType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE, oldParameterType, newParameterType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE, oldParameterType, newParameterType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -146,14 +146,14 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 		{
 			NotificationChain msgs = null;
 			if (parameterType != null)
-				msgs = ((InternalEObject)parameterType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE, null, msgs);
+				msgs = ((InternalEObject)parameterType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE, null, msgs);
 			if (newParameterType != null)
-				msgs = ((InternalEObject)newParameterType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE, null, msgs);
+				msgs = ((InternalEObject)newParameterType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE, null, msgs);
 			msgs = basicSetParameterType(newParameterType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE, newParameterType, newParameterType));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE, newParameterType, newParameterType));
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE:
+			case XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE:
 				return basicSetParameterType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -182,9 +182,9 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_PARAMETER__NAME:
+			case XtendPackage.XTEND_PARAMETER__NAME:
 				return getName();
-			case Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE:
+			case XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE:
 				return getParameterType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -200,10 +200,10 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_PARAMETER__NAME:
+			case XtendPackage.XTEND_PARAMETER__NAME:
 				setName((String)newValue);
 				return;
-			case Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE:
+			case XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE:
 				setParameterType((JvmTypeReference)newValue);
 				return;
 		}
@@ -220,10 +220,10 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_PARAMETER__NAME:
+			case XtendPackage.XTEND_PARAMETER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE:
+			case XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE:
 				setParameterType((JvmTypeReference)null);
 				return;
 		}
@@ -240,9 +240,9 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_PARAMETER__NAME:
+			case XtendPackage.XTEND_PARAMETER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Xtend2Package.XTEND_PARAMETER__PARAMETER_TYPE:
+			case XtendPackage.XTEND_PARAMETER__PARAMETER_TYPE:
 				return parameterType != null;
 		}
 		return super.eIsSet(featureID);

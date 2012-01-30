@@ -13,18 +13,17 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendField;
-import org.eclipse.xtend.core.xtend2.impl.XtendMemberImplCustom;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Field</b></em>'.
+ * An implementation of the model object '<em><b>Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -169,7 +168,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_FIELD;
+		return XtendPackage.Literals.XTEND_FIELD;
 	}
 
 	/**
@@ -192,7 +191,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__NAME, oldName, name));
 	}
 
 	/**
@@ -216,7 +215,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		type = newType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__TYPE, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -233,14 +232,14 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		{
 			NotificationChain msgs = null;
 			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__TYPE, null, msgs);
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FIELD__TYPE, null, msgs);
 			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__TYPE, null, msgs);
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FIELD__TYPE, null, msgs);
 			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__TYPE, newType, newType));
 	}
 
 	/**
@@ -263,7 +262,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		boolean oldExtension = extension;
 		extension = newExtension;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__EXTENSION, oldExtension, extension));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__EXTENSION, oldExtension, extension));
 	}
 
 	/**
@@ -288,7 +287,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		boolean oldVisibilityESet = visibilityESet;
 		visibilityESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
 	}
 
 	/**
@@ -303,7 +302,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		visibility = VISIBILITY_EDEFAULT;
 		visibilityESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, Xtend2Package.XTEND_FIELD__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, XtendPackage.XTEND_FIELD__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
 	}
 
 	/**
@@ -336,7 +335,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__STATIC, oldStatic, static_));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__STATIC, oldStatic, static_));
 	}
 
 	/**
@@ -360,7 +359,7 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		initialValue = newInitialValue;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__INITIAL_VALUE, oldInitialValue, newInitialValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__INITIAL_VALUE, oldInitialValue, newInitialValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -377,14 +376,14 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		{
 			NotificationChain msgs = null;
 			if (initialValue != null)
-				msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__INITIAL_VALUE, null, msgs);
+				msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FIELD__INITIAL_VALUE, null, msgs);
 			if (newInitialValue != null)
-				msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__INITIAL_VALUE, null, msgs);
+				msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FIELD__INITIAL_VALUE, null, msgs);
 			msgs = basicSetInitialValue(newInitialValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__INITIAL_VALUE, newInitialValue, newInitialValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__INITIAL_VALUE, newInitialValue, newInitialValue));
 	}
 
 	/**
@@ -397,9 +396,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FIELD__TYPE:
+			case XtendPackage.XTEND_FIELD__TYPE:
 				return basicSetType(null, msgs);
-			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+			case XtendPackage.XTEND_FIELD__INITIAL_VALUE:
 				return basicSetInitialValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -415,17 +414,17 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FIELD__NAME:
+			case XtendPackage.XTEND_FIELD__NAME:
 				return getName();
-			case Xtend2Package.XTEND_FIELD__TYPE:
+			case XtendPackage.XTEND_FIELD__TYPE:
 				return getType();
-			case Xtend2Package.XTEND_FIELD__EXTENSION:
+			case XtendPackage.XTEND_FIELD__EXTENSION:
 				return isExtension();
-			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+			case XtendPackage.XTEND_FIELD__VISIBILITY:
 				return getVisibility();
-			case Xtend2Package.XTEND_FIELD__STATIC:
+			case XtendPackage.XTEND_FIELD__STATIC:
 				return isStatic();
-			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+			case XtendPackage.XTEND_FIELD__INITIAL_VALUE:
 				return getInitialValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -441,22 +440,22 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FIELD__NAME:
+			case XtendPackage.XTEND_FIELD__NAME:
 				setName((String)newValue);
 				return;
-			case Xtend2Package.XTEND_FIELD__TYPE:
+			case XtendPackage.XTEND_FIELD__TYPE:
 				setType((JvmTypeReference)newValue);
 				return;
-			case Xtend2Package.XTEND_FIELD__EXTENSION:
+			case XtendPackage.XTEND_FIELD__EXTENSION:
 				setExtension((Boolean)newValue);
 				return;
-			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+			case XtendPackage.XTEND_FIELD__VISIBILITY:
 				setVisibility((JvmVisibility)newValue);
 				return;
-			case Xtend2Package.XTEND_FIELD__STATIC:
+			case XtendPackage.XTEND_FIELD__STATIC:
 				setStatic((Boolean)newValue);
 				return;
-			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+			case XtendPackage.XTEND_FIELD__INITIAL_VALUE:
 				setInitialValue((XExpression)newValue);
 				return;
 		}
@@ -473,22 +472,22 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FIELD__NAME:
+			case XtendPackage.XTEND_FIELD__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FIELD__TYPE:
+			case XtendPackage.XTEND_FIELD__TYPE:
 				setType((JvmTypeReference)null);
 				return;
-			case Xtend2Package.XTEND_FIELD__EXTENSION:
+			case XtendPackage.XTEND_FIELD__EXTENSION:
 				setExtension(EXTENSION_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+			case XtendPackage.XTEND_FIELD__VISIBILITY:
 				unsetVisibility();
 				return;
-			case Xtend2Package.XTEND_FIELD__STATIC:
+			case XtendPackage.XTEND_FIELD__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+			case XtendPackage.XTEND_FIELD__INITIAL_VALUE:
 				setInitialValue((XExpression)null);
 				return;
 		}
@@ -505,17 +504,17 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FIELD__NAME:
+			case XtendPackage.XTEND_FIELD__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Xtend2Package.XTEND_FIELD__TYPE:
+			case XtendPackage.XTEND_FIELD__TYPE:
 				return type != null;
-			case Xtend2Package.XTEND_FIELD__EXTENSION:
+			case XtendPackage.XTEND_FIELD__EXTENSION:
 				return extension != EXTENSION_EDEFAULT;
-			case Xtend2Package.XTEND_FIELD__VISIBILITY:
+			case XtendPackage.XTEND_FIELD__VISIBILITY:
 				return isSetVisibility();
-			case Xtend2Package.XTEND_FIELD__STATIC:
+			case XtendPackage.XTEND_FIELD__STATIC:
 				return static_ != STATIC_EDEFAULT;
-			case Xtend2Package.XTEND_FIELD__INITIAL_VALUE:
+			case XtendPackage.XTEND_FIELD__INITIAL_VALUE:
 				return initialValue != null;
 		}
 		return super.eIsSet(featureID);

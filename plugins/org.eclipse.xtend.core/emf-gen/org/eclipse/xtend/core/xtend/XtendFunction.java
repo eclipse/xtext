@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Function</b></em>'.
+ * A representation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction()
  * @model
  * @generated
  */
@@ -51,7 +51,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Name()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Name()
 	 * @model
 	 * @generated
 	 */
@@ -77,7 +77,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Expression()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -103,7 +103,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_ReturnType()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_ReturnType()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -129,7 +129,7 @@ public interface XtendFunction extends XtendMember
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Parameters()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Parameters()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -145,7 +145,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Override</em>' attribute.
 	 * @see #setOverride(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Override()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Override()
 	 * @model
 	 * @generated
 	 */
@@ -171,7 +171,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dispatch</em>' attribute.
 	 * @see #setDispatch(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Dispatch()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Dispatch()
 	 * @model
 	 * @generated
 	 */
@@ -197,7 +197,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Create Extension Info</em>' containment reference.
 	 * @see #setCreateExtensionInfo(CreateExtensionInfo)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_CreateExtensionInfo()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_CreateExtensionInfo()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -223,7 +223,7 @@ public interface XtendFunction extends XtendMember
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_TypeParameters()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_TypeParameters()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -244,7 +244,7 @@ public interface XtendFunction extends XtendMember
 	 * @see #isSetVisibility()
 	 * @see #unsetVisibility()
 	 * @see #setVisibility(JvmVisibility)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Visibility()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Visibility()
 	 * @model default="PUBLIC" unsettable="true"
 	 * @generated
 	 */
@@ -296,7 +296,7 @@ public interface XtendFunction extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Static()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Static()
 	 * @model
 	 * @generated
 	 */
@@ -322,7 +322,7 @@ public interface XtendFunction extends XtendMember
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exceptions</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFunction_Exceptions()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Exceptions()
 	 * @model containment="true"
 	 * @generated
 	 */

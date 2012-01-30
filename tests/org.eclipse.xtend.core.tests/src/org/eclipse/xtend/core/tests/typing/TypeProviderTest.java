@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.typing;
 
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeProviderTest extends AbstractXtend2TestCase {
+public class TypeProviderTest extends AbstractXtendTestCase {
 
 	@Inject
 	private ITypeProvider typeProvider;

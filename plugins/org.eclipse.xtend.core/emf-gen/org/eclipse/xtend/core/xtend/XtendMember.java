@@ -8,7 +8,7 @@ package org.eclipse.xtend.core.xtend;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Member</b></em>'.
+ * A representation of the model object '<em><b>Member</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -18,7 +18,7 @@ package org.eclipse.xtend.core.xtend;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendMember()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendMember()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface XtendMember extends XtendAnnotationTarget
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotation Info</em>' containment reference.
 	 * @see #setAnnotationInfo(XtendAnnotationTarget)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendMember_AnnotationInfo()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendMember_AnnotationInfo()
 	 * @model containment="true"
 	 * @generated
 	 */

@@ -23,10 +23,10 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.validation.TypeErasedSignature;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.ide.labeling.Xtend2Images;
+import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -57,7 +57,7 @@ public class ImplementMemberFromSuperAssist {
 	private TypeErasedSignature.Provider signatureProvider;
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 
 	@Inject
 	private FeatureOverridesService featureOverridesService;
@@ -72,7 +72,7 @@ public class ImplementMemberFromSuperAssist {
 	private VisibilityService visibilityService;
 
 	@Inject
-	private Xtend2Images images;
+	private XtendImages images;
 
 	@Inject
 	private MemberFromSuperImplementor implementor;

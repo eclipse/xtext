@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Class</b></em>'.
+ * A representation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass()
  * @model
  * @generated
  */
@@ -44,7 +44,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_Name()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Name()
 	 * @model
 	 * @generated
 	 */
@@ -70,7 +70,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extends</em>' containment reference.
 	 * @see #setExtends(JvmTypeReference)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_Extends()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Extends()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -96,7 +96,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implements</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_Implements()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Implements()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -112,7 +112,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Types</em>' reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_SuperTypes()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_SuperTypes()
 	 * @model transient="true" derived="true"
 	 * @generated
 	 */
@@ -128,7 +128,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Members</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_Members()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Members()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -145,7 +145,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Call Referable</em>' containment reference.
 	 * @see #setSuperCallReferable(XtendClassSuperCallReferable)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_SuperCallReferable()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_SuperCallReferable()
 	 * @see org.eclipse.xtend.core.xtend.XtendClassSuperCallReferable#getXtendClass
 	 * @model opposite="xtendClass" containment="true" required="true" transient="true"
 	 * @generated
@@ -172,7 +172,7 @@ public interface XtendClass extends XtendAnnotationTarget
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendClass_TypeParameters()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_TypeParameters()
 	 * @model containment="true"
 	 * @generated
 	 */

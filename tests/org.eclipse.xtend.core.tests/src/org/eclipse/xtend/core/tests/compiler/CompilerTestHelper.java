@@ -13,8 +13,8 @@ import java.lang.reflect.Method;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -50,7 +50,7 @@ public class CompilerTestHelper {
 	private JvmModelGenerator generator;
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 	
 	public void setUp() {
 		javaCompiler.clearClassPath();
@@ -64,7 +64,7 @@ public class CompilerTestHelper {
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
 		javaCompiler.addClassPathOfClass(XbasePackage.class);
-		javaCompiler.addClassPathOfClass(Xtend2Package.class);
+		javaCompiler.addClassPathOfClass(XtendPackage.class);
 		javaCompiler.addClassPathOfClass(Check.class);
 	}
 	

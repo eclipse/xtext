@@ -33,7 +33,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	{
 		try
 		{
-			ProcessedRichStringFactory theProcessedRichStringFactory = (ProcessedRichStringFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/Xtend2/RichString"); 
+			ProcessedRichStringFactory theProcessedRichStringFactory = (ProcessedRichStringFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtend/RichString"); 
 			if (theProcessedRichStringFactory != null)
 			{
 				return theProcessedRichStringFactory;

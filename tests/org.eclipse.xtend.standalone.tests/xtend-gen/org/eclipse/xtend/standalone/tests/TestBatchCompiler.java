@@ -3,7 +3,7 @@ package org.eclipse.xtend.standalone.tests;
 import com.google.inject.Inject;
 import java.io.File;
 import java.util.List;
-import org.eclipse.xtend.core.compiler.batch.Xtend2BatchCompiler;
+import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.standalone.tests.XtendInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendInjectorProvider.class)
 public class TestBatchCompiler {
   @Inject
-  private Xtend2BatchCompiler batchCompiler;
+  private XtendBatchCompiler batchCompiler;
   
   private static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result";
   

@@ -19,14 +19,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Annotation Target</b></em>'.
+ * An implementation of the model object '<em><b>Annotation Target</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -67,7 +67,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_ANNOTATION_TARGET;
+		return XtendPackage.Literals.XTEND_ANNOTATION_TARGET;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	{
 		if (annotations == null)
 		{
-			annotations = new EObjectContainmentEList<XAnnotation>(XAnnotation.class, this, Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<XAnnotation>(XAnnotation.class, this, XtendPackage.XTEND_ANNOTATION_TARGET__ANNOTATIONS);
 		}
 		return annotations;
 	}
@@ -94,7 +94,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
+			case XtendPackage.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -110,7 +110,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
+			case XtendPackage.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
 				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -127,7 +127,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
+			case XtendPackage.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends XAnnotation>)newValue);
 				return;
@@ -145,7 +145,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
+			case XtendPackage.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
 		}
@@ -162,7 +162,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
+			case XtendPackage.XTEND_ANNOTATION_TARGET__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringElseIf()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringElseIf()
  * @model
  * @generated
  */
@@ -38,7 +38,7 @@ public interface RichStringElseIf extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>If</em>' containment reference.
 	 * @see #setIf(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringElseIf_If()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringElseIf_If()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -64,7 +64,7 @@ public interface RichStringElseIf extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Then</em>' containment reference.
 	 * @see #setThen(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringElseIf_Then()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringElseIf_Then()
 	 * @model containment="true"
 	 * @generated
 	 */

@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.tests.validation;
 import org.eclipse.xtend.core.tests.richstring.AbstractRichStringTest;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.RichString;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.junit.Test;
 
@@ -58,7 +58,7 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				+ "  \tindentedLine\n"
 				+ "  '''";
 		RichString richString = richString(input);
-		validationTestHelper.assertWarning(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
+		validationTestHelper.assertWarning(richString, XtendPackage.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
 	}
 	
 	@Test public void testRichStringValidation_05() throws Exception {
@@ -67,7 +67,7 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				+ "\t\tindentedLine\n"
 				+ "  last line'''";
 		RichString richString = richString(input);
-		validationTestHelper.assertWarning(richString, Xtend2Package.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
+		validationTestHelper.assertWarning(richString, XtendPackage.Literals.RICH_STRING_LITERAL, IssueCodes.INCONSISTENT_INDENTATION, "inconsistent", "indentation");
 	}
 	
 	@Test public void testRichStringValidation_06() throws Exception {

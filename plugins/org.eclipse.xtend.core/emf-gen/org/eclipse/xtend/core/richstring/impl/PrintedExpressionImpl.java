@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtend.core.richstring.PrintedExpression;
 import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
-import org.eclipse.xtext.xbase.XExpression;
 
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->

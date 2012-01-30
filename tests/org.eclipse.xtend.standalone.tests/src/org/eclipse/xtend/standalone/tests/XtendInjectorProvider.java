@@ -1,6 +1,6 @@
 package org.eclipse.xtend.standalone.tests;
 
-import org.eclipse.xtend.core.Xtend2StandaloneSetup;
+import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
@@ -18,7 +18,7 @@ public class XtendInjectorProvider implements IInjectorProvider, IRegistryConfig
 	
 	public Injector getInjector() {
 		if (injector == null) {
-			this.injector = new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
+			this.injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
 		}
 		return injector;
 	}
@@ -30,7 +30,7 @@ public class XtendInjectorProvider implements IInjectorProvider, IRegistryConfig
 	public void setupRegistry() {
 		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector != null)
-			new Xtend2StandaloneSetup().register(injector);
+			new XtendStandaloneSetup().register(injector);
 	}
 	
 }

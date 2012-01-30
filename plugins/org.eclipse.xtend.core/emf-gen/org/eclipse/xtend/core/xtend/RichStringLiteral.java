@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XStringLiteral;
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringLiteral()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringLiteral()
  * @model
  * @generated
  */

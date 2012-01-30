@@ -27,21 +27,21 @@ Require-Bundle: org.eclipse.xtend.core;bundle-version="2.0.0";visibility:=reexpo
  org.eclipse.xtext.ui.codetemplates.ui
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-Activator: org.eclipse.xtend.ide.internal.Xtend2Activator
+Bundle-Activator: org.eclipse.xtend.ide.internal.XtendActivator
 Export-Package: org.eclipse.xtend.ide;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.autoedit;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
- org.eclipse.xtend.ide.buildpath,
+ org.eclipse.xtend.ide.buildpath;x-internal:=true,
  org.eclipse.xtend.ide.contentassist;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.contentassist.antlr;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.contentassist.antlr.internal;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.edit;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.editor;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.highlighting;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
- org.eclipse.xtend.ide.hover,
- org.eclipse.xtend.ide.hyperlinking,
+ org.eclipse.xtend.ide.hover;x-internal:=true,
+ org.eclipse.xtend.ide.hyperlinking;x-internal:=true,
  org.eclipse.xtend.ide.internal;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.labeling;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
- org.eclipse.xtend.ide.launching,
+ org.eclipse.xtend.ide.launching;x-internal:=true,
  org.eclipse.xtend.ide.outline;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.quickfix;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.refactoring;x-friends:="org.eclipse.xtend.core.tests,org.eclipse.xtend.ide.tests",

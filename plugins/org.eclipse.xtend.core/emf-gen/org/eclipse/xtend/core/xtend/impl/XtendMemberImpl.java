@@ -13,13 +13,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Member</b></em>'.
+ * An implementation of the model object '<em><b>Member</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -60,7 +60,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_MEMBER;
+		return XtendPackage.Literals.XTEND_MEMBER;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 		annotationInfo = newAnnotationInfo;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_MEMBER__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -101,14 +101,14 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 		{
 			NotificationChain msgs = null;
 			if (annotationInfo != null)
-				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, null, msgs);
+				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_MEMBER__ANNOTATION_INFO, null, msgs);
 			if (newAnnotationInfo != null)
-				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, null, msgs);
+				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_MEMBER__ANNOTATION_INFO, null, msgs);
 			msgs = basicSetAnnotationInfo(newAnnotationInfo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_MEMBER__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -137,7 +137,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				return getAnnotationInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -153,7 +153,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				setAnnotationInfo((XtendAnnotationTarget)newValue);
 				return;
 		}
@@ -170,7 +170,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				setAnnotationInfo((XtendAnnotationTarget)null);
 				return;
 		}
@@ -187,7 +187,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				return annotationInfo != null;
 		}
 		return super.eIsSet(featureID);

@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringForLoop()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringForLoop()
  * @model
  * @generated
  */
@@ -38,7 +38,7 @@ public interface RichStringForLoop extends XForLoopExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Separator</em>' containment reference.
 	 * @see #setSeparator(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringForLoop_Separator()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringForLoop_Separator()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -64,7 +64,7 @@ public interface RichStringForLoop extends XForLoopExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Before</em>' containment reference.
 	 * @see #setBefore(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringForLoop_Before()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringForLoop_Before()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -90,7 +90,7 @@ public interface RichStringForLoop extends XForLoopExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>After</em>' containment reference.
 	 * @see #setAfter(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getRichStringForLoop_After()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringForLoop_After()
 	 * @model containment="true"
 	 * @generated
 	 */

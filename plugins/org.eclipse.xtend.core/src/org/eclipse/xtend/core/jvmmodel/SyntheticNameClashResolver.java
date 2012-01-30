@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 public class SyntheticNameClashResolver {
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 
 	public void resolveNameClashes(JvmGenericType type) {
 		Multimap<String, JvmIdentifiableElement> classScope = HashMultimap.create();
@@ -92,8 +92,8 @@ public class SyntheticNameClashResolver {
 		}
 		EObject source = associations.getPrimarySourceElement(element);
 		return (isCreateExtension(source) && (simpleName
-				.startsWith(Xtend2JvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || simpleName
-				.startsWith(Xtend2JvmModelInferrer.CREATE_INITIALIZER_PREFIX)))
+				.startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || simpleName
+				.startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)))
 				|| isAnonymousExtensionField(source);
 	}
 

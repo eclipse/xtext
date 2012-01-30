@@ -8,9 +8,9 @@ package org.eclipse.xtend.core.xtend.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
-import org.eclipse.xtext.xbase.impl.XStringLiteralImpl;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
+import org.eclipse.xtext.xbase.impl.XStringLiteralImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class RichStringLiteralImpl extends XStringLiteralImpl implements RichStr
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.RICH_STRING_LITERAL;
+		return XtendPackage.Literals.RICH_STRING_LITERAL;
 	}
 
 } //RichStringLiteralImpl

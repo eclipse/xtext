@@ -12,7 +12,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Field</b></em>'.
+ * A representation of the model object '<em><b>Field</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField()
  * @model
  * @generated
  */
@@ -43,7 +43,7 @@ public interface XtendField extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField_Name()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_Name()
 	 * @model
 	 * @generated
 	 */
@@ -69,7 +69,7 @@ public interface XtendField extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(JvmTypeReference)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField_Type()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_Type()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -95,7 +95,7 @@ public interface XtendField extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension</em>' attribute.
 	 * @see #setExtension(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField_Extension()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_Extension()
 	 * @model
 	 * @generated
 	 */
@@ -126,7 +126,7 @@ public interface XtendField extends XtendMember
 	 * @see #isSetVisibility()
 	 * @see #unsetVisibility()
 	 * @see #setVisibility(JvmVisibility)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField_Visibility()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_Visibility()
 	 * @model default="PRIVATE" unsettable="true"
 	 * @generated
 	 */
@@ -178,7 +178,7 @@ public interface XtendField extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField_Static()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_Static()
 	 * @model
 	 * @generated
 	 */
@@ -204,7 +204,7 @@ public interface XtendField extends XtendMember
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initial Value</em>' containment reference.
 	 * @see #setInitialValue(XExpression)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendField_InitialValue()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_InitialValue()
 	 * @model containment="true"
 	 * @generated
 	 */

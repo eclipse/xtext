@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import java.io.File
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtend.core.compiler.batch.Xtend2BatchCompiler
+import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
@@ -18,7 +18,7 @@ import org.junit.After
 class TestBatchCompiler {
 
 	@Inject
-	Xtend2BatchCompiler batchCompiler
+	org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler batchCompiler
 
     static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
     static String OUTPUT_DIRECTORY = "./test-result"
@@ -70,9 +70,9 @@ class TestBatchCompiler {
         batchCompiler.deleteTempDirectory = false
         batchCompiler.tempDirectory = TEMP_DIRECTORY
         assertTrue(batchCompiler.compile)
-        assertEquals(2, new File(batchCompiler.tempDirectory).list.size)
+        assertEquals(2, new File(batchCompiler.getTempDirectory).list.size)
         assertTrue(batchCompiler.compile)
-        assertEquals(4, new File(batchCompiler.tempDirectory).list.size)
+        assertEquals(4, new File(batchCompiler.getTempDirectory).list.size)
 	}
 
 	@Test

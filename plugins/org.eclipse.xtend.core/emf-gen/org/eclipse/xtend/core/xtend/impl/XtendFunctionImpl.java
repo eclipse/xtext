@@ -21,20 +21,19 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtend.core.xtend2.impl.XtendMemberImplCustom;
+
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Function</b></em>'.
+ * An implementation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -244,7 +243,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_FUNCTION;
+		return XtendPackage.Literals.XTEND_FUNCTION;
 	}
 
 	/**
@@ -267,7 +266,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__NAME, oldName, name));
 	}
 
 	/**
@@ -291,7 +290,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		expression = newExpression;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -308,14 +307,14 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		{
 			NotificationChain msgs = null;
 			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FUNCTION__EXPRESSION, null, msgs);
 			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FUNCTION__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -339,7 +338,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		returnType = newReturnType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__RETURN_TYPE, oldReturnType, newReturnType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__RETURN_TYPE, oldReturnType, newReturnType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -356,14 +355,14 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		{
 			NotificationChain msgs = null;
 			if (returnType != null)
-				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__RETURN_TYPE, null, msgs);
+				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FUNCTION__RETURN_TYPE, null, msgs);
 			if (newReturnType != null)
-				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__RETURN_TYPE, null, msgs);
+				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FUNCTION__RETURN_TYPE, null, msgs);
 			msgs = basicSetReturnType(newReturnType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__RETURN_TYPE, newReturnType, newReturnType));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__RETURN_TYPE, newReturnType, newReturnType));
 	}
 
 	/**
@@ -375,7 +374,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		if (parameters == null)
 		{
-			parameters = new EObjectContainmentEList<XtendParameter>(XtendParameter.class, this, Xtend2Package.XTEND_FUNCTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<XtendParameter>(XtendParameter.class, this, XtendPackage.XTEND_FUNCTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -400,7 +399,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		boolean oldOverride = override;
 		override = newOverride;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__OVERRIDE, oldOverride, override));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__OVERRIDE, oldOverride, override));
 	}
 
 	/**
@@ -423,7 +422,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		boolean oldDispatch = dispatch;
 		dispatch = newDispatch;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__DISPATCH, oldDispatch, dispatch));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__DISPATCH, oldDispatch, dispatch));
 	}
 
 	/**
@@ -447,7 +446,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		createExtensionInfo = newCreateExtensionInfo;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, oldCreateExtensionInfo, newCreateExtensionInfo);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO, oldCreateExtensionInfo, newCreateExtensionInfo);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -464,14 +463,14 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		{
 			NotificationChain msgs = null;
 			if (createExtensionInfo != null)
-				msgs = ((InternalEObject)createExtensionInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, null, msgs);
+				msgs = ((InternalEObject)createExtensionInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO, null, msgs);
 			if (newCreateExtensionInfo != null)
-				msgs = ((InternalEObject)newCreateExtensionInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, null, msgs);
+				msgs = ((InternalEObject)newCreateExtensionInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO, null, msgs);
 			msgs = basicSetCreateExtensionInfo(newCreateExtensionInfo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, newCreateExtensionInfo, newCreateExtensionInfo));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO, newCreateExtensionInfo, newCreateExtensionInfo));
 	}
 
 	/**
@@ -483,7 +482,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS);
+			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS);
 		}
 		return typeParameters;
 	}
@@ -510,7 +509,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		boolean oldVisibilityESet = visibilityESet;
 		visibilityESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
 	}
 
 	/**
@@ -525,7 +524,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		visibility = VISIBILITY_EDEFAULT;
 		visibilityESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, Xtend2Package.XTEND_FUNCTION__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, XtendPackage.XTEND_FUNCTION__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
 	}
 
 	/**
@@ -558,7 +557,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		boolean oldStatic = static_;
 		static_ = newStatic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__STATIC, oldStatic, static_));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__STATIC, oldStatic, static_));
 	}
 
 	/**
@@ -570,7 +569,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		if (exceptions == null)
 		{
-			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_FUNCTION__EXCEPTIONS);
+			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XtendPackage.XTEND_FUNCTION__EXCEPTIONS);
 		}
 		return exceptions;
 	}
@@ -585,17 +584,17 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
+			case XtendPackage.XTEND_FUNCTION__EXPRESSION:
 				return basicSetExpression(null, msgs);
-			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
+			case XtendPackage.XTEND_FUNCTION__RETURN_TYPE:
 				return basicSetReturnType(null, msgs);
-			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return basicSetCreateExtensionInfo(null, msgs);
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -611,27 +610,27 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__NAME:
+			case XtendPackage.XTEND_FUNCTION__NAME:
 				return getName();
-			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
+			case XtendPackage.XTEND_FUNCTION__EXPRESSION:
 				return getExpression();
-			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
+			case XtendPackage.XTEND_FUNCTION__RETURN_TYPE:
 				return getReturnType();
-			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				return getParameters();
-			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
 				return isOverride();
-			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
+			case XtendPackage.XTEND_FUNCTION__DISPATCH:
 				return isDispatch();
-			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return getCreateExtensionInfo();
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
 				return getVisibility();
-			case Xtend2Package.XTEND_FUNCTION__STATIC:
+			case XtendPackage.XTEND_FUNCTION__STATIC:
 				return isStatic();
-			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				return getExceptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -648,39 +647,39 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__NAME:
+			case XtendPackage.XTEND_FUNCTION__NAME:
 				setName((String)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
+			case XtendPackage.XTEND_FUNCTION__EXPRESSION:
 				setExpression((XExpression)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
+			case XtendPackage.XTEND_FUNCTION__RETURN_TYPE:
 				setReturnType((JvmTypeReference)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends XtendParameter>)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
 				setOverride((Boolean)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
+			case XtendPackage.XTEND_FUNCTION__DISPATCH:
 				setDispatch((Boolean)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				setCreateExtensionInfo((CreateExtensionInfo)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
 				setVisibility((JvmVisibility)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__STATIC:
+			case XtendPackage.XTEND_FUNCTION__STATIC:
 				setStatic((Boolean)newValue);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				getExceptions().clear();
 				getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
@@ -698,37 +697,37 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__NAME:
+			case XtendPackage.XTEND_FUNCTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
+			case XtendPackage.XTEND_FUNCTION__EXPRESSION:
 				setExpression((XExpression)null);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
+			case XtendPackage.XTEND_FUNCTION__RETURN_TYPE:
 				setReturnType((JvmTypeReference)null);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				getParameters().clear();
 				return;
-			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
 				setOverride(OVERRIDE_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
+			case XtendPackage.XTEND_FUNCTION__DISPATCH:
 				setDispatch(DISPATCH_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				setCreateExtensionInfo((CreateExtensionInfo)null);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
-			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
 				unsetVisibility();
 				return;
-			case Xtend2Package.XTEND_FUNCTION__STATIC:
+			case XtendPackage.XTEND_FUNCTION__STATIC:
 				setStatic(STATIC_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				getExceptions().clear();
 				return;
 		}
@@ -745,27 +744,27 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_FUNCTION__NAME:
+			case XtendPackage.XTEND_FUNCTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
+			case XtendPackage.XTEND_FUNCTION__EXPRESSION:
 				return expression != null;
-			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
+			case XtendPackage.XTEND_FUNCTION__RETURN_TYPE:
 				return returnType != null;
-			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
+			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
 				return override != OVERRIDE_EDEFAULT;
-			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
+			case XtendPackage.XTEND_FUNCTION__DISPATCH:
 				return dispatch != DISPATCH_EDEFAULT;
-			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return createExtensionInfo != null;
-			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case Xtend2Package.XTEND_FUNCTION__VISIBILITY:
+			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
 				return isSetVisibility();
-			case Xtend2Package.XTEND_FUNCTION__STATIC:
+			case XtendPackage.XTEND_FUNCTION__STATIC:
 				return static_ != STATIC_EDEFAULT;
-			case Xtend2Package.XTEND_FUNCTION__EXCEPTIONS:
+			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				return exceptions != null && !exceptions.isEmpty();
 		}
 		return super.eIsSet(featureID);

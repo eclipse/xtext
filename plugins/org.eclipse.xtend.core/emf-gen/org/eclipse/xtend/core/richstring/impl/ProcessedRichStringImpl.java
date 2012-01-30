@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtend.core.richstring.Line;
 import org.eclipse.xtend.core.richstring.ProcessedRichString;
 import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
-import org.eclipse.xtend.core.xtend.RichString;
 
+import org.eclipse.xtend.core.xtend.RichString;
 
 /**
  * <!-- begin-user-doc -->

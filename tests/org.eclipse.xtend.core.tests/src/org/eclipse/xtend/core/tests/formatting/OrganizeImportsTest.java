@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.tests.formatting;
 
 import org.eclipse.xtend.core.formatting.OrganizeImports;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class OrganizeImportsTest extends AbstractXtend2TestCase {
+public class OrganizeImportsTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private OrganizeImports organizeImports;

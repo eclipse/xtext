@@ -19,10 +19,10 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
-import org.eclipse.xtend.core.services.Xtend2GrammarAccess;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -67,7 +67,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	private Keyword createKeyword;
 
 	@Inject
-	protected void setXtendGrammarAccess(Xtend2GrammarAccess grammarAccess) {
+	protected void setXtendGrammarAccess(XtendGrammarAccess grammarAccess) {
 		this.createKeyword = grammarAccess.getValidIDAccess().getCreateKeyword_1();
 	}
 
@@ -78,12 +78,12 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		highlightDeprectedXtendAnnotationTarget(acceptor, xtendClass);
 		if (xtendClass != null) {
 			for (XtendMember member : xtendClass.getMembers()) {
-				if (member.eClass() == Xtend2Package.Literals.XTEND_FUNCTION) {
+				if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();
 					highlightRichStrings(rootExpression, acceptor);
 				}
-				if(member.eClass() == Xtend2Package.Literals.XTEND_FIELD){
+				if(member.eClass() == XtendPackage.Literals.XTEND_FIELD){
 					XtendField field = (XtendField) member;
 					highlightXtendField(field,acceptor);
 				}
@@ -99,7 +99,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		super.highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject);
 		// Highlight referenced JvmTypes only as deprecated when the eContainer of the referencer is a XtendClass
 		// only reference to JvmTypes in extends or implements should be marked as it is in Java.
-		if(referencer.eContainer() != null && referencer.eContainer().eClass() == Xtend2Package.Literals.XTEND_CLASS)
+		if(referencer.eContainer() != null && referencer.eContainer().eClass() == XtendPackage.Literals.XTEND_CLASS)
 			if(resolvedReferencedObject instanceof JvmAnnotationTarget){
 				if(DeprecationUtil.isDeprecated((JvmAnnotationTarget) resolvedReferencedObject))
 					highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
@@ -148,7 +148,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	protected void highlightXtendField(XtendField field, IHighlightedPositionAcceptor acceptor) {
 		if(field.getName() != null && field.getName().length() > 0){
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(field, Xtend2Package.Literals.XTEND_FIELD__NAME);
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(field, XtendPackage.Literals.XTEND_FIELD__NAME);
 			if(nodes.size() > 0){
 				INode node = nodes.get(0);
 				highlightNode(node, XbaseHighlightingConfiguration.FIELD, acceptor);

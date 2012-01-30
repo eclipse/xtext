@@ -9,7 +9,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Parameter</b></em>'.
+ * A representation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendParameter()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendParameter()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface XtendParameter extends XtendAnnotationTarget
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendParameter_Name()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendParameter_Name()
 	 * @model
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface XtendParameter extends XtendAnnotationTarget
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Type</em>' containment reference.
 	 * @see #setParameterType(JvmTypeReference)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendParameter_ParameterType()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendParameter_ParameterType()
 	 * @model containment="true"
 	 * @generated
 	 */

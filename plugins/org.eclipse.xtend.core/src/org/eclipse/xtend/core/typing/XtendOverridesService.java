@@ -11,7 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.Set;
 
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 public class XtendOverridesService {
 	
 	@Inject
-	private IXtend2JvmAssociations xtend2jvmAssociations;
+	private IXtendJvmAssociations xtend2jvmAssociations;
 
 	@Inject
 	private FeatureOverridesService featureOverridesService;

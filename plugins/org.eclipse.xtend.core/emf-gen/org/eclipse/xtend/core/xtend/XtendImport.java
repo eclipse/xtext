@@ -11,7 +11,7 @@ import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend Import</b></em>'.
+ * A representation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -24,7 +24,7 @@ import org.eclipse.xtext.common.types.JvmType;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendImport()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendImport()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface XtendImport extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Namespace</em>' attribute.
 	 * @see #setImportedNamespace(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendImport_ImportedNamespace()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendImport_ImportedNamespace()
 	 * @model
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface XtendImport extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendImport_Static()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendImport_Static()
 	 * @model
 	 * @generated
 	 */
@@ -92,7 +92,7 @@ public interface XtendImport extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension</em>' attribute.
 	 * @see #setExtension(boolean)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendImport_Extension()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendImport_Extension()
 	 * @model
 	 * @generated
 	 */
@@ -118,7 +118,7 @@ public interface XtendImport extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Type</em>' reference.
 	 * @see #setImportedType(JvmType)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendImport_ImportedType()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendImport_ImportedType()
 	 * @model
 	 * @generated
 	 */

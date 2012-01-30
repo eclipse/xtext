@@ -6,44 +6,44 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="xtend"
               icon="icons/xtend_file.png"
-              id="org.eclipse.xtend.core.Xtend2"
-              matchingStrategy="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
+              id="org.eclipse.xtend.core.Xtend"
+              matchingStrategy="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
               name="Xtend Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+                    definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xtend.core.Xtend2.validate">
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtend.core.Xtend.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+                    definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xtend.core.Xtend2.Editor.opened">
+        <definition id="org.eclipse.xtend.core.Xtend.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xtend.core.Xtend2" 
+                        value="org.eclipse.xtend.core.Xtend" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -52,40 +52,40 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtend.core.Xtend2"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtend.core.Xtend"
             name="Xtend">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
         </page>
         <page
-            category="org.eclipse.xtend.core.Xtend2"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtend.core.Xtend2.coloring"
+            category="org.eclipse.xtend.core.Xtend"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtend.core.Xtend.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
         </page>
         <page
-            category="org.eclipse.xtend.core.Xtend2"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtend.core.Xtend2.templates"
+            category="org.eclipse.xtend.core.Xtend"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtend.core.Xtend.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
         </page>
         <page
-            category="org.eclipse.xtend.core.Xtend2"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-            id="org.eclipse.xtend.core.Xtend2.refactoring"
+            category="org.eclipse.xtend.core.Xtend"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+            id="org.eclipse.xtend.core.Xtend.refactoring"
             name="Refactoring">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtend.core.Xtend2"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtend.core.Xtend"
             name="Xtend">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -95,14 +95,14 @@
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.xtend.ide.keyword_Xtend2"
-            label="Xtend2"/>
+            id="org.eclipse.xtend.ide.keyword_Xtend"
+            label="Xtend"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.xtend.core.Xtend2.validate"
+            id="org.eclipse.xtend.core.Xtend.validate"
             name="Validate">
       </command>
     </extension>
@@ -115,7 +115,7 @@
                  tooltip="Organize Imports">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+                    definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -125,7 +125,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+                	<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -133,11 +133,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+                    definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -148,13 +148,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtend">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="xtend">
         </resourceServiceProvider>
     </extension>
@@ -164,7 +164,7 @@
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
 
@@ -172,11 +172,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -196,38 +196,38 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened"/>
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 
   <extension point="org.eclipse.compare.contentViewers">
-    <viewer id="org.eclipse.xtend.core.Xtend2.compare.contentViewers"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+    <viewer id="org.eclipse.xtend.core.Xtend.compare.contentViewers"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="xtend">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
-    <viewer id="org.eclipse.xtend.core.Xtend2.compare.contentMergeViewers"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="xtend" label="Xtend2 Compare">
+    <viewer id="org.eclipse.xtend.core.Xtend.compare.contentMergeViewers"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xtend" label="Xtend Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
-    <provider id="org.eclipse.xtend.core.Xtend2.editors.documentProviders"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+    <provider id="org.eclipse.xtend.core.Xtend.editors.documentProviders"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
             extensions="xtend">
     </provider>
   </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -239,7 +239,7 @@
                style="push">
             <visibleWhen checkEnabled="false">
                <reference
-                     definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+                     definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
                </reference>
             </visibleWhen>
          </command>
@@ -250,20 +250,20 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchyHandler"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 		<handler 
-			class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchyHandler"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -275,7 +275,7 @@
 				style="push"
 				tooltip="Open Type Hierarchy">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened"/>
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -285,7 +285,7 @@
 				style="push"
 				tooltip="Quick Type Hierarchy">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened"/>
+					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -296,27 +296,27 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
    	<extension
             point="org.eclipse.ui.preferencePages">
         <page
-            category="org.eclipse.xtend.core.Xtend2"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xtend.core.Xtend2.compiler.preferencePage"
+            category="org.eclipse.xtend.core.Xtend"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtend.core.Xtend.compiler.preferencePage"
             name="Compiler">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            category="org.eclipse.xtend.core.Xtend2"
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xtend.core.Xtend2.compiler.propertyPage"
+            category="org.eclipse.xtend.core.Xtend"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtend.core.Xtend.compiler.propertyPage"
             name="Compiler">
-            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend2"/>
+            <keywordReference id="org.eclipse.xtend.ide.keyword_Xtend"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -326,7 +326,7 @@
    <extension
          point="org.eclipse.xtext.ui.searchFilter">
       <filter
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.search.Xtend2SearchFilter">
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.search.XtendSearchFilter">
       </filter>
    </extension>
    
@@ -556,7 +556,7 @@
             commandId="org.eclipse.xtend.ide.insertLeftGuillemet">
             <activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
       </handler>
@@ -565,16 +565,16 @@
             commandId="org.eclipse.xtend.ide.insertRightGuillemet">
            	<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
       </handler>
       <handler
-            class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.edit.OrganizeImportsHandler"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.edit.OrganizeImportsHandler"
             commandId="org.eclipse.xtext.xbase.ui.organizeImports">
            	<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtend.core.Xtend2.Editor.opened">
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
 				</reference>
 			</activeWhen>
       </handler>
@@ -584,13 +584,13 @@
 		point="org.eclipse.ui.actionSetPartAssociations">
 		<actionSetPartAssociation
 			targetID="org.eclipse.jdt.ui.JavaActionSet">
-			<part id="org.eclipse.xtend.core.Xtend2">
+			<part id="org.eclipse.xtend.core.Xtend">
        		</part>
 		</actionSetPartAssociation>
 	</extension>
    <extension
          id="org.eclipse.xtend.ide.wizard"
-         name="newXtend2Class"
+         name="newXtendClass"
          point="org.eclipse.ui.newWizards">
       <category
             id="org.eclipse.xtend.ide.wizards"
@@ -599,11 +599,11 @@
       <wizard
             category="org.eclipse.xtend.ide.wizards"
             icon="icons/Xtend-Icon-16.png"
-            id="org.eclipse.xtend.ide.wizards.NewXtend2ClassWizard"
+            id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard"
             name="%NewXtendClass.label">
-            <class class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory">
+            <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
 				<parameter name="javatype" value="true" />
-				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtend2ClassWizard" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendClassWizard" />
 			</class>
 			<description>
             	%NewXtendClass.description
@@ -615,41 +615,41 @@
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
          <newWizardShortcut
-               id="org.eclipse.xtend.ide.wizards.NewXtend2ClassWizard">
+               id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
          </newWizardShortcut>
       </perspectiveExtension>
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
          <newWizardShortcut
-               id="org.eclipse.xtend.ide.wizards.NewXtend2ClassWizard">
+               id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
          </newWizardShortcut>
       </perspectiveExtension>
       <perspectiveExtension
             targetID="org.eclipse.pde.ui.PDEPerspective">
          <newWizardShortcut
-               id="org.eclipse.xtend.ide.wizards.NewXtend2ClassWizard">
+               id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
    
    <extension point="org.eclipse.core.runtime.adapters">
      <factory 
-        class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IFileEditorInput">
         <adapter type="org.eclipse.xtend.ide.launching.JavaElementDelegate"/>
      </factory>
      <factory 
-        class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IEditorPart">
         <adapter type="org.eclipse.xtend.ide.launching.JavaElementDelegate"/>
      </factory>
      <factory 
-        class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory" 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory" 
         adaptableType="org.eclipse.core.resources.IResource">
         <adapter type="org.eclipse.xtend.ide.launching.JavaElementDelegate"/>
      </factory>
      <factory 
-        class="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.xtend.ide.launching.JavaElementDelegate">
         <adapter type="org.eclipse.jdt.core.IJavaElement"/>
      </factory>
@@ -805,7 +805,7 @@
           annotationType="org.eclipse.xtext.ui.overrideIndicator"
           label="%OverrideIndicator.label"
           icon="$nl$/icons/full/ovr16/over_co.gif"
-          annotationImageProvider="org.eclipse.xtend.ide.Xtend2ExecutableExtensionFactory:org.eclipse.xtend.ide.editor.OverrideIndicatorImageProvider"
+          annotationImageProvider="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.editor.OverrideIndicatorImageProvider"
           textPreferenceKey="overrideIndicator"
           textPreferenceValue="false"
           highlightPreferenceKey="overrideIndicatorHighlighting"

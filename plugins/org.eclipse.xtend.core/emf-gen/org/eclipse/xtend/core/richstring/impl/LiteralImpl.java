@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtend.core.richstring.Literal;
 import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
-import org.eclipse.xtend.core.xtend.RichStringLiteral;
 
+import org.eclipse.xtend.core.xtend.RichStringLiteral;
 
 /**
  * <!-- begin-user-doc -->

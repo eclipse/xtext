@@ -22,11 +22,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringIf;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+
 import org.eclipse.xtext.xbase.XExpression;
 
 import org.eclipse.xtext.xbase.impl.XExpressionImpl;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -104,7 +104,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.RICH_STRING_IF;
+		return XtendPackage.Literals.RICH_STRING_IF;
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 		if_ = newIf;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_IF__IF, oldIf, newIf);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_IF__IF, oldIf, newIf);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -145,14 +145,14 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 		{
 			NotificationChain msgs = null;
 			if (if_ != null)
-				msgs = ((InternalEObject)if_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_IF__IF, null, msgs);
+				msgs = ((InternalEObject)if_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_IF__IF, null, msgs);
 			if (newIf != null)
-				msgs = ((InternalEObject)newIf).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_IF__IF, null, msgs);
+				msgs = ((InternalEObject)newIf).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_IF__IF, null, msgs);
 			msgs = basicSetIf(newIf, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_IF__IF, newIf, newIf));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_IF__IF, newIf, newIf));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 		then = newThen;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_IF__THEN, oldThen, newThen);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_IF__THEN, oldThen, newThen);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -193,14 +193,14 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 		{
 			NotificationChain msgs = null;
 			if (then != null)
-				msgs = ((InternalEObject)then).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_IF__THEN, null, msgs);
+				msgs = ((InternalEObject)then).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_IF__THEN, null, msgs);
 			if (newThen != null)
-				msgs = ((InternalEObject)newThen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_IF__THEN, null, msgs);
+				msgs = ((InternalEObject)newThen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_IF__THEN, null, msgs);
 			msgs = basicSetThen(newThen, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_IF__THEN, newThen, newThen));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_IF__THEN, newThen, newThen));
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	{
 		if (elseIfs == null)
 		{
-			elseIfs = new EObjectContainmentEList<RichStringElseIf>(RichStringElseIf.class, this, Xtend2Package.RICH_STRING_IF__ELSE_IFS);
+			elseIfs = new EObjectContainmentEList<RichStringElseIf>(RichStringElseIf.class, this, XtendPackage.RICH_STRING_IF__ELSE_IFS);
 		}
 		return elseIfs;
 	}
@@ -238,7 +238,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 		else_ = newElse;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_IF__ELSE, oldElse, newElse);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_IF__ELSE, oldElse, newElse);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -255,14 +255,14 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 		{
 			NotificationChain msgs = null;
 			if (else_ != null)
-				msgs = ((InternalEObject)else_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_IF__ELSE, null, msgs);
+				msgs = ((InternalEObject)else_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_IF__ELSE, null, msgs);
 			if (newElse != null)
-				msgs = ((InternalEObject)newElse).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_IF__ELSE, null, msgs);
+				msgs = ((InternalEObject)newElse).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_IF__ELSE, null, msgs);
 			msgs = basicSetElse(newElse, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_IF__ELSE, newElse, newElse));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_IF__ELSE, newElse, newElse));
 	}
 
 	/**
@@ -275,13 +275,13 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_IF__IF:
+			case XtendPackage.RICH_STRING_IF__IF:
 				return basicSetIf(null, msgs);
-			case Xtend2Package.RICH_STRING_IF__THEN:
+			case XtendPackage.RICH_STRING_IF__THEN:
 				return basicSetThen(null, msgs);
-			case Xtend2Package.RICH_STRING_IF__ELSE_IFS:
+			case XtendPackage.RICH_STRING_IF__ELSE_IFS:
 				return ((InternalEList<?>)getElseIfs()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.RICH_STRING_IF__ELSE:
+			case XtendPackage.RICH_STRING_IF__ELSE:
 				return basicSetElse(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -297,13 +297,13 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_IF__IF:
+			case XtendPackage.RICH_STRING_IF__IF:
 				return getIf();
-			case Xtend2Package.RICH_STRING_IF__THEN:
+			case XtendPackage.RICH_STRING_IF__THEN:
 				return getThen();
-			case Xtend2Package.RICH_STRING_IF__ELSE_IFS:
+			case XtendPackage.RICH_STRING_IF__ELSE_IFS:
 				return getElseIfs();
-			case Xtend2Package.RICH_STRING_IF__ELSE:
+			case XtendPackage.RICH_STRING_IF__ELSE:
 				return getElse();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -320,17 +320,17 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_IF__IF:
+			case XtendPackage.RICH_STRING_IF__IF:
 				setIf((XExpression)newValue);
 				return;
-			case Xtend2Package.RICH_STRING_IF__THEN:
+			case XtendPackage.RICH_STRING_IF__THEN:
 				setThen((XExpression)newValue);
 				return;
-			case Xtend2Package.RICH_STRING_IF__ELSE_IFS:
+			case XtendPackage.RICH_STRING_IF__ELSE_IFS:
 				getElseIfs().clear();
 				getElseIfs().addAll((Collection<? extends RichStringElseIf>)newValue);
 				return;
-			case Xtend2Package.RICH_STRING_IF__ELSE:
+			case XtendPackage.RICH_STRING_IF__ELSE:
 				setElse((XExpression)newValue);
 				return;
 		}
@@ -347,16 +347,16 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_IF__IF:
+			case XtendPackage.RICH_STRING_IF__IF:
 				setIf((XExpression)null);
 				return;
-			case Xtend2Package.RICH_STRING_IF__THEN:
+			case XtendPackage.RICH_STRING_IF__THEN:
 				setThen((XExpression)null);
 				return;
-			case Xtend2Package.RICH_STRING_IF__ELSE_IFS:
+			case XtendPackage.RICH_STRING_IF__ELSE_IFS:
 				getElseIfs().clear();
 				return;
-			case Xtend2Package.RICH_STRING_IF__ELSE:
+			case XtendPackage.RICH_STRING_IF__ELSE:
 				setElse((XExpression)null);
 				return;
 		}
@@ -373,13 +373,13 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_IF__IF:
+			case XtendPackage.RICH_STRING_IF__IF:
 				return if_ != null;
-			case Xtend2Package.RICH_STRING_IF__THEN:
+			case XtendPackage.RICH_STRING_IF__THEN:
 				return then != null;
-			case Xtend2Package.RICH_STRING_IF__ELSE_IFS:
+			case XtendPackage.RICH_STRING_IF__ELSE_IFS:
 				return elseIfs != null && !elseIfs.isEmpty();
-			case Xtend2Package.RICH_STRING_IF__ELSE:
+			case XtendPackage.RICH_STRING_IF__ELSE:
 				return else_ != null;
 		}
 		return super.eIsSet(featureID);

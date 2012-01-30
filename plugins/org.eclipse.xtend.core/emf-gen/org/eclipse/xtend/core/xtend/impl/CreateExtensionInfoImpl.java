@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
-import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -83,7 +83,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.CREATE_EXTENSION_INFO;
+		return XtendPackage.Literals.CREATE_EXTENSION_INFO;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 		createExpression = newCreateExpression;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, oldCreateExpression, newCreateExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, oldCreateExpression, newCreateExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -124,14 +124,14 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 		{
 			NotificationChain msgs = null;
 			if (createExpression != null)
-				msgs = ((InternalEObject)createExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)createExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, null, msgs);
 			if (newCreateExpression != null)
-				msgs = ((InternalEObject)newCreateExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newCreateExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, null, msgs);
 			msgs = basicSetCreateExpression(newCreateExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, newCreateExpression, newCreateExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, newCreateExpression, newCreateExpression));
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.CREATE_EXTENSION_INFO__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.CREATE_EXTENSION_INFO__NAME, oldName, name));
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
+			case XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
 				return basicSetCreateExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -183,9 +183,9 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
+			case XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
 				return getCreateExpression();
-			case Xtend2Package.CREATE_EXTENSION_INFO__NAME:
+			case XtendPackage.CREATE_EXTENSION_INFO__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -201,10 +201,10 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
+			case XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
 				setCreateExpression((XExpression)newValue);
 				return;
-			case Xtend2Package.CREATE_EXTENSION_INFO__NAME:
+			case XtendPackage.CREATE_EXTENSION_INFO__NAME:
 				setName((String)newValue);
 				return;
 		}
@@ -221,10 +221,10 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
+			case XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
 				setCreateExpression((XExpression)null);
 				return;
-			case Xtend2Package.CREATE_EXTENSION_INFO__NAME:
+			case XtendPackage.CREATE_EXTENSION_INFO__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -241,9 +241,9 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
+			case XtendPackage.CREATE_EXTENSION_INFO__CREATE_EXPRESSION:
 				return createExpression != null;
-			case Xtend2Package.CREATE_EXTENSION_INFO__NAME:
+			case XtendPackage.CREATE_EXTENSION_INFO__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

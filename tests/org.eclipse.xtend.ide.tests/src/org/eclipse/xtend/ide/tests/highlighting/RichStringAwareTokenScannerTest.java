@@ -9,14 +9,14 @@ package org.eclipse.xtend.ide.tests.highlighting;
 
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtend.ide.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichStringAwareTokenScannerTest extends AbstractXtend2UITestCase {
+public class RichStringAwareTokenScannerTest extends AbstractXtendUITestCase {
 
 	private XtextDocument document;
 	private ITokenScanner scanner;

@@ -13,9 +13,9 @@ import java.lang.reflect.Method;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -41,7 +41,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
+public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	
 	@Test public void testSimpleAnnotationOnType() throws Exception {
 		final String text = "@com.google.inject.Singleton() class Foo {}";
@@ -141,7 +141,7 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 	private ValidationTestHelper validationHelper;
 	
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 	
 	@Inject
 	private JvmModelGenerator generator;
@@ -155,7 +155,7 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
 		javaCompiler.addClassPathOfClass(XbasePackage.class);
-		javaCompiler.addClassPathOfClass(Xtend2Package.class);
+		javaCompiler.addClassPathOfClass(XtendPackage.class);
 		javaCompiler.addClassPathOfClass(Inject.class);
 		javaCompiler.addClassPathOfClass(Properties1.class);
 		javaCompiler.addClassPathOfClass(Function.class);

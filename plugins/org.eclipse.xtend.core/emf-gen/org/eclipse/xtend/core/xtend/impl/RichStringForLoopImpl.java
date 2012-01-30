@@ -14,11 +14,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+
 import org.eclipse.xtext.xbase.XExpression;
 
 import org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -85,7 +85,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.RICH_STRING_FOR_LOOP;
+		return XtendPackage.Literals.RICH_STRING_FOR_LOOP;
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 		separator = newSeparator;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR, oldSeparator, newSeparator);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR, oldSeparator, newSeparator);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -126,14 +126,14 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 		{
 			NotificationChain msgs = null;
 			if (separator != null)
-				msgs = ((InternalEObject)separator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR, null, msgs);
+				msgs = ((InternalEObject)separator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR, null, msgs);
 			if (newSeparator != null)
-				msgs = ((InternalEObject)newSeparator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR, null, msgs);
+				msgs = ((InternalEObject)newSeparator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR, null, msgs);
 			msgs = basicSetSeparator(newSeparator, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR, newSeparator, newSeparator));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR, newSeparator, newSeparator));
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 		before = newBefore;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE, oldBefore, newBefore);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_FOR_LOOP__BEFORE, oldBefore, newBefore);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -174,14 +174,14 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 		{
 			NotificationChain msgs = null;
 			if (before != null)
-				msgs = ((InternalEObject)before).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE, null, msgs);
+				msgs = ((InternalEObject)before).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_FOR_LOOP__BEFORE, null, msgs);
 			if (newBefore != null)
-				msgs = ((InternalEObject)newBefore).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE, null, msgs);
+				msgs = ((InternalEObject)newBefore).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_FOR_LOOP__BEFORE, null, msgs);
 			msgs = basicSetBefore(newBefore, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE, newBefore, newBefore));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_FOR_LOOP__BEFORE, newBefore, newBefore));
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 		after = newAfter;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_FOR_LOOP__AFTER, oldAfter, newAfter);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_FOR_LOOP__AFTER, oldAfter, newAfter);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -222,14 +222,14 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 		{
 			NotificationChain msgs = null;
 			if (after != null)
-				msgs = ((InternalEObject)after).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_FOR_LOOP__AFTER, null, msgs);
+				msgs = ((InternalEObject)after).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_FOR_LOOP__AFTER, null, msgs);
 			if (newAfter != null)
-				msgs = ((InternalEObject)newAfter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.RICH_STRING_FOR_LOOP__AFTER, null, msgs);
+				msgs = ((InternalEObject)newAfter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.RICH_STRING_FOR_LOOP__AFTER, null, msgs);
 			msgs = basicSetAfter(newAfter, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.RICH_STRING_FOR_LOOP__AFTER, newAfter, newAfter));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.RICH_STRING_FOR_LOOP__AFTER, newAfter, newAfter));
 	}
 
 	/**
@@ -242,11 +242,11 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR:
+			case XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR:
 				return basicSetSeparator(null, msgs);
-			case Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE:
+			case XtendPackage.RICH_STRING_FOR_LOOP__BEFORE:
 				return basicSetBefore(null, msgs);
-			case Xtend2Package.RICH_STRING_FOR_LOOP__AFTER:
+			case XtendPackage.RICH_STRING_FOR_LOOP__AFTER:
 				return basicSetAfter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -262,11 +262,11 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR:
+			case XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR:
 				return getSeparator();
-			case Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE:
+			case XtendPackage.RICH_STRING_FOR_LOOP__BEFORE:
 				return getBefore();
-			case Xtend2Package.RICH_STRING_FOR_LOOP__AFTER:
+			case XtendPackage.RICH_STRING_FOR_LOOP__AFTER:
 				return getAfter();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -282,13 +282,13 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR:
+			case XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR:
 				setSeparator((XExpression)newValue);
 				return;
-			case Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE:
+			case XtendPackage.RICH_STRING_FOR_LOOP__BEFORE:
 				setBefore((XExpression)newValue);
 				return;
-			case Xtend2Package.RICH_STRING_FOR_LOOP__AFTER:
+			case XtendPackage.RICH_STRING_FOR_LOOP__AFTER:
 				setAfter((XExpression)newValue);
 				return;
 		}
@@ -305,13 +305,13 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR:
+			case XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR:
 				setSeparator((XExpression)null);
 				return;
-			case Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE:
+			case XtendPackage.RICH_STRING_FOR_LOOP__BEFORE:
 				setBefore((XExpression)null);
 				return;
-			case Xtend2Package.RICH_STRING_FOR_LOOP__AFTER:
+			case XtendPackage.RICH_STRING_FOR_LOOP__AFTER:
 				setAfter((XExpression)null);
 				return;
 		}
@@ -328,11 +328,11 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.RICH_STRING_FOR_LOOP__SEPARATOR:
+			case XtendPackage.RICH_STRING_FOR_LOOP__SEPARATOR:
 				return separator != null;
-			case Xtend2Package.RICH_STRING_FOR_LOOP__BEFORE:
+			case XtendPackage.RICH_STRING_FOR_LOOP__BEFORE:
 				return before != null;
-			case Xtend2Package.RICH_STRING_FOR_LOOP__AFTER:
+			case XtendPackage.RICH_STRING_FOR_LOOP__AFTER:
 				return after != null;
 		}
 		return super.eIsSet(featureID);

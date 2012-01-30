@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Xtend File</b></em>'.
+ * A representation of the model object '<em><b>File</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFile()
+ * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile()
  * @model
  * @generated
  */
@@ -39,7 +39,7 @@ public interface XtendFile extends EObject
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFile_Imports()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_Imports()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -55,7 +55,7 @@ public interface XtendFile extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Xtend Class</em>' containment reference.
 	 * @see #setXtendClass(XtendClass)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFile_XtendClass()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_XtendClass()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -81,7 +81,7 @@ public interface XtendFile extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Package</em>' attribute.
 	 * @see #setPackage(String)
-	 * @see org.eclipse.xtend.core.xtend.Xtend2Package#getXtendFile_Package()
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_Package()
 	 * @model
 	 * @generated
 	 */

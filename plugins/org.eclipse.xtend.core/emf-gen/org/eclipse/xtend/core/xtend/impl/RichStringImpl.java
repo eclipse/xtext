@@ -8,9 +8,9 @@ package org.eclipse.xtend.core.xtend.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.xtend.core.xtend.RichString;
-import org.eclipse.xtend.core.xtend.Xtend2Package;
-import org.eclipse.xtext.xbase.impl.XBlockExpressionImpl;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
+import org.eclipse.xtext.xbase.impl.XBlockExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class RichStringImpl extends XBlockExpressionImpl implements RichString
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.RICH_STRING;
+		return XtendPackage.Literals.RICH_STRING;
 	}
 
 } //RichStringImpl

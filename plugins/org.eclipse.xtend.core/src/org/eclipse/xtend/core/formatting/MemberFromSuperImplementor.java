@@ -11,7 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -51,7 +51,7 @@ public class MemberFromSuperImplementor {
 	private TypeReferences typeReferences;
 
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IXtendJvmAssociations associations;
 
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
 			IAppendable appendable) {

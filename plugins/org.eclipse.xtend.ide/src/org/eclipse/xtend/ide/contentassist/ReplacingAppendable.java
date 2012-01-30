@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextUtilities;
-import org.eclipse.xtend.core.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -58,7 +58,7 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		private IQualifiedNameConverter converter;
 
 		@Inject
-		private IXtend2JvmAssociations associations;
+		private IXtendJvmAssociations associations;
 
 		@Inject
 		private Provider<WhitespaceHelper> whitespaceHelperProvider;

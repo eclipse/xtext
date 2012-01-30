@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.resource;
 
-import static org.eclipse.xtend.core.xtend.Xtend2Package.Literals.*;
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.resource.DescriptionFlags;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class IndexingTest extends AbstractXtend2TestCase {
+public class IndexingTest extends AbstractXtendTestCase {
 
 	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;

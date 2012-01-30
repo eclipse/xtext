@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.xtend.core.richstring.ForLoopEnd;
 import org.eclipse.xtend.core.richstring.ForLoopStart;
 import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
-import org.eclipse.xtend.core.xtend.RichStringForLoop;
 
+import org.eclipse.xtend.core.xtend.RichStringForLoop;
 
 /**
  * <!-- begin-user-doc -->

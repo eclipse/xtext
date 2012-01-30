@@ -11,7 +11,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.texteditor.IAnnotationImageProvider;
-import org.eclipse.xtend.ide.labeling.Xtend2Images;
+import org.eclipse.xtend.ide.labeling.XtendImages;
 
 import com.google.inject.Inject;
 
@@ -19,12 +19,12 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  */
 public class OverrideIndicatorImageProvider implements IAnnotationImageProvider {
-	private static final String OVERRIDE_IMG_DESC_ID = "Xtend2Images.DESC_OBJ_OVERRIDES"; //$NON-NLS-1$
-	private static final String IMPLEMENTS_IMG_DESC_ID = "Xtend2Images.DESC_OBJ_IMPLEMENTS"; //$NON-NLS-1$
-	private Xtend2Images xtend2Images;
+	private static final String OVERRIDE_IMG_DESC_ID = "XtendImages.DESC_OBJ_OVERRIDES"; //$NON-NLS-1$
+	private static final String IMPLEMENTS_IMG_DESC_ID = "XtendImages.DESC_OBJ_IMPLEMENTS"; //$NON-NLS-1$
+	private XtendImages xtend2Images;
 
 	@Inject
-	public void setXtend2Images(Xtend2Images xtend2Images) {
+	public void setXtendImages(XtendImages xtend2Images) {
 		this.xtend2Images = xtend2Images;
 	}
 

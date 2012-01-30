@@ -16,13 +16,13 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendClassSuperCallReferable;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Class Super Call Referable</b></em>'.
+ * An implementation of the model object '<em><b>Class Super Call Referable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -53,7 +53,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_CLASS_SUPER_CALL_REFERABLE;
+		return XtendPackage.Literals.XTEND_CLASS_SUPER_CALL_REFERABLE;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	 */
 	public XtendClass getXtendClass()
 	{
-		if (eContainerFeatureID() != Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS) return null;
+		if (eContainerFeatureID() != XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS) return null;
 		return (XtendClass)eContainer();
 	}
 
@@ -74,7 +74,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	 */
 	public NotificationChain basicSetXtendClass(XtendClass newXtendClass, NotificationChain msgs)
 	{
-		msgs = eBasicSetContainer((InternalEObject)newXtendClass, Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newXtendClass, XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, msgs);
 		return msgs;
 	}
 
@@ -85,7 +85,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	 */
 	public void setXtendClass(XtendClass newXtendClass)
 	{
-		if (newXtendClass != eInternalContainer() || (eContainerFeatureID() != Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS && newXtendClass != null))
+		if (newXtendClass != eInternalContainer() || (eContainerFeatureID() != XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS && newXtendClass != null))
 		{
 			if (EcoreUtil.isAncestor(this, newXtendClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -93,12 +93,12 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newXtendClass != null)
-				msgs = ((InternalEObject)newXtendClass).eInverseAdd(this, Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, XtendClass.class, msgs);
+				msgs = ((InternalEObject)newXtendClass).eInverseAdd(this, XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE, XtendClass.class, msgs);
 			msgs = basicSetXtendClass(newXtendClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, newXtendClass, newXtendClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, newXtendClass, newXtendClass));
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetXtendClass((XtendClass)otherEnd, msgs);
@@ -129,7 +129,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
 				return basicSetXtendClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -145,8 +145,8 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (eContainerFeatureID())
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
-				return eInternalContainer().eInverseRemove(this, Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, XtendClass.class, msgs);
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+				return eInternalContainer().eInverseRemove(this, XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE, XtendClass.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -161,7 +161,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
 				return getXtendClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -177,7 +177,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
 				setXtendClass((XtendClass)newValue);
 				return;
 		}
@@ -194,7 +194,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
 				setXtendClass((XtendClass)null);
 				return;
 		}
@@ -211,7 +211,7 @@ public class XtendClassSuperCallReferableImpl extends MinimalEObjectImpl.Contain
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
+			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS:
 				return getXtendClass() != null;
 		}
 		return super.eIsSet(featureID);

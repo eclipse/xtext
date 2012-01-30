@@ -11,7 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
-import org.eclipse.xtend.core.tests.AbstractXtend2TestCase;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class SuperMemberImplementorTest extends AbstractXtend2TestCase {
+public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 
 	private XtendClass xtendClass;
 

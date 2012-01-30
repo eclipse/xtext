@@ -21,17 +21,17 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtend.core.xtend.Xtend2Package;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendClassSuperCallReferable;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Xtend Class</b></em>'.
+ * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -148,7 +148,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.XTEND_CLASS;
+		return XtendPackage.Literals.XTEND_CLASS;
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__NAME, oldName, name));
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		extends_ = newExtends;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__EXTENDS, oldExtends, newExtends);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__EXTENDS, oldExtends, newExtends);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -212,14 +212,14 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		{
 			NotificationChain msgs = null;
 			if (extends_ != null)
-				msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__EXTENDS, null, msgs);
+				msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_CLASS__EXTENDS, null, msgs);
 			if (newExtends != null)
-				msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__EXTENDS, null, msgs);
+				msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_CLASS__EXTENDS, null, msgs);
 			msgs = basicSetExtends(newExtends, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__EXTENDS, newExtends, newExtends));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__EXTENDS, newExtends, newExtends));
 	}
 
 	/**
@@ -231,7 +231,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		if (implements_ == null)
 		{
-			implements_ = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__IMPLEMENTS);
+			implements_ = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XtendPackage.XTEND_CLASS__IMPLEMENTS);
 		}
 		return implements_;
 	}
@@ -245,7 +245,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		if (superTypes == null)
 		{
-			superTypes = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, Xtend2Package.XTEND_CLASS__SUPER_TYPES);
+			superTypes = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, XtendPackage.XTEND_CLASS__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -259,7 +259,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		if (members == null)
 		{
-			members = new EObjectContainmentEList<XtendMember>(XtendMember.class, this, Xtend2Package.XTEND_CLASS__MEMBERS);
+			members = new EObjectContainmentEList<XtendMember>(XtendMember.class, this, XtendPackage.XTEND_CLASS__MEMBERS);
 		}
 		return members;
 	}
@@ -285,7 +285,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		superCallReferable = newSuperCallReferable;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, oldSuperCallReferable, newSuperCallReferable);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE, oldSuperCallReferable, newSuperCallReferable);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -302,14 +302,14 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		{
 			NotificationChain msgs = null;
 			if (superCallReferable != null)
-				msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, XtendClassSuperCallReferable.class, msgs);
+				msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, XtendClassSuperCallReferable.class, msgs);
 			if (newSuperCallReferable != null)
-				msgs = ((InternalEObject)newSuperCallReferable).eInverseAdd(this, Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, XtendClassSuperCallReferable.class, msgs);
+				msgs = ((InternalEObject)newSuperCallReferable).eInverseAdd(this, XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, XtendClassSuperCallReferable.class, msgs);
 			msgs = basicSetSuperCallReferable(newSuperCallReferable, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, newSuperCallReferable, newSuperCallReferable));
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE, newSuperCallReferable, newSuperCallReferable));
 	}
 
 	/**
@@ -321,7 +321,7 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS);
+			typeParameters = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, XtendPackage.XTEND_CLASS__TYPE_PARAMETERS);
 		}
 		return typeParameters;
 	}
@@ -360,9 +360,9 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+			case XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				if (superCallReferable != null)
-					msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, null, msgs);
+					msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE, null, msgs);
 				return basicSetSuperCallReferable((XtendClassSuperCallReferable)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -378,15 +378,15 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__EXTENDS:
+			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return basicSetExtends(null, msgs);
-			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return ((InternalEList<?>)getImplements()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_CLASS__MEMBERS:
+			case XtendPackage.XTEND_CLASS__MEMBERS:
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
-			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+			case XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				return basicSetSuperCallReferable(null, msgs);
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -402,19 +402,19 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__NAME:
+			case XtendPackage.XTEND_CLASS__NAME:
 				return getName();
-			case Xtend2Package.XTEND_CLASS__EXTENDS:
+			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return getExtends();
-			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return getImplements();
-			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
+			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
 				return getSuperTypes();
-			case Xtend2Package.XTEND_CLASS__MEMBERS:
+			case XtendPackage.XTEND_CLASS__MEMBERS:
 				return getMembers();
-			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+			case XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				return getSuperCallReferable();
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				return getTypeParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -431,28 +431,28 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__NAME:
+			case XtendPackage.XTEND_CLASS__NAME:
 				setName((String)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__EXTENDS:
+			case XtendPackage.XTEND_CLASS__EXTENDS:
 				setExtends((JvmTypeReference)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				getImplements().clear();
 				getImplements().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
+			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
 				getSuperTypes().clear();
 				getSuperTypes().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__MEMBERS:
+			case XtendPackage.XTEND_CLASS__MEMBERS:
 				getMembers().clear();
 				getMembers().addAll((Collection<? extends XtendMember>)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+			case XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				setSuperCallReferable((XtendClassSuperCallReferable)newValue);
 				return;
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
@@ -470,25 +470,25 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__NAME:
+			case XtendPackage.XTEND_CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_CLASS__EXTENDS:
+			case XtendPackage.XTEND_CLASS__EXTENDS:
 				setExtends((JvmTypeReference)null);
 				return;
-			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				getImplements().clear();
 				return;
-			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
+			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
 				getSuperTypes().clear();
 				return;
-			case Xtend2Package.XTEND_CLASS__MEMBERS:
+			case XtendPackage.XTEND_CLASS__MEMBERS:
 				getMembers().clear();
 				return;
-			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+			case XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				setSuperCallReferable((XtendClassSuperCallReferable)null);
 				return;
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
 		}
@@ -505,19 +505,19 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_CLASS__NAME:
+			case XtendPackage.XTEND_CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case Xtend2Package.XTEND_CLASS__EXTENDS:
+			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return extends_ != null;
-			case Xtend2Package.XTEND_CLASS__IMPLEMENTS:
+			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return implements_ != null && !implements_.isEmpty();
-			case Xtend2Package.XTEND_CLASS__SUPER_TYPES:
+			case XtendPackage.XTEND_CLASS__SUPER_TYPES:
 				return superTypes != null && !superTypes.isEmpty();
-			case Xtend2Package.XTEND_CLASS__MEMBERS:
+			case XtendPackage.XTEND_CLASS__MEMBERS:
 				return members != null && !members.isEmpty();
-			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+			case XtendPackage.XTEND_CLASS__SUPER_CALL_REFERABLE:
 				return superCallReferable != null;
-			case Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS:
+			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
