@@ -32,27 +32,31 @@
     </genClasses>
     <genClasses ecoreClass="BuilderState.ecore#//EObjectDescription">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//EObjectDescription/fragment"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderState.ecore#//EObjectDescription/eClass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//EObjectDescription/userData"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//EObjectDescription/name"/>
-      <genOperations ecoreOperation="BuilderState.ecore#//EObjectDescription/getEObjectURI"/>
-      <genOperations ecoreOperation="BuilderState.ecore#//EObjectDescription/getEObjectOrProxy"/>
-      <genOperations ecoreOperation="BuilderState.ecore#//EObjectDescription/getUserData">
-        <genParameters ecoreParameter="BuilderState.ecore#//EObjectDescription/getUserData/name"/>
-      </genOperations>
-      <genOperations ecoreOperation="BuilderState.ecore#//EObjectDescription/getUserDataKeys"/>
-      <genOperations ecoreOperation="BuilderState.ecore#//EObjectDescription/getQualifiedName"/>
     </genClasses>
     <genClasses ecoreClass="BuilderState.ecore#//UserDataEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//UserDataEntry/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//UserDataEntry/value"/>
     </genClasses>
     <genClasses ecoreClass="BuilderState.ecore#//ReferenceDescription">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ReferenceDescription/sourceEObjectUri"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ReferenceDescription/targetEObjectUri"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ReferenceDescription/indexInList"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ReferenceDescription/externalFormOfEReference"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ReferenceDescription/containerEObjectURI"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BuilderState.ecore#//IEObjectDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderState.ecore#//IEObjectDescription/eClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IEObjectDescription/name"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getEObjectURI"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getEObjectOrProxy"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getUserData">
+        <genParameters ecoreParameter="BuilderState.ecore#//IEObjectDescription/getUserData/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getUserDataKeys"/>
+      <genOperations ecoreOperation="BuilderState.ecore#//IEObjectDescription/getQualifiedName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BuilderState.ecore#//IReferenceDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/sourceEObjectUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/targetEObjectUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/indexInList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//IReferenceDescription/containerEObjectURI"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

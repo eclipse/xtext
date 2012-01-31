@@ -84,14 +84,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     /**
      * Actually do the build.
      *
-     * @param resourceSet
-     *            The resource set
-     * @param toBeUpdated
-     *            The URIs of all the resources that have physically changed
-     * @param toBeRemoved
-     *            The URIs of all the resources that have been physically deleted
-     * @param newMap
-     *            A map collecting the new resource descriptions as they are to be persisted. (The new index after the build.)
+     * @param buildData
+     *            the data that should be considered for the update
+     * @param newData
+     *            the new resource descriptions as they are to be persisted (the new index after the build).
      *            Initially contains the old resource descriptions.
      * @param monitor
      *            The progress monitor
@@ -280,17 +276,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     /**
      * Create new resource descriptions for a set of resources given by their URIs.
      *
-     * @param resourceSet
-     *            The resource set
+     * @param buildData
+     *            The underlying data for the write operation.
      * @param oldState
      *            The old index
      * @param newState
      *            The new index
-     * @param toBeUpdated
-     *            URIs of all resources physically changed (initial delta)
      * @param monitor
      *            The progress monitor used for user feedback
-     * @return A list of all the URIs of toBeUpdated that could be indeed loaded and for which new description were written.
      */
     protected void writeNewResourceDescriptions(
             BuildData buildData,
@@ -409,16 +402,16 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      * Put all resources that depend on some changes onto the queue of resources to be processed.
      * Updates notInDelta by removing all URIs put into the queue.
      *
-     * @param notInDelta
-     *            URIs of unchanged and unaffected resources
+     * @param allRemainingURIs
+     *            URIs that were not considered by prior operations.
      * @param oldState
      *            State before the build
      * @param newState
      *            The current state
      * @param deltas
      *            The changes
-     * @param queue
-     *            The queue of resources yet to be built
+     * @param buildData
+     *            the underlying data for this build run.
      * @param monitor
      *            The progress monitor used for user feedback
      */
