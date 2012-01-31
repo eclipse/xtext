@@ -9,13 +9,12 @@ package org.eclipse.xtend.core.validation;
 
 import static org.eclipse.xtext.util.Strings.*;
 
-import org.eclipse.emf.codegen.ecore.genmodel.impl.Literals;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;

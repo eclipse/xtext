@@ -49,7 +49,7 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	private static final int STATIC_EXTENSION_PRIORITY_OFFSET = 220;
 	
 	@Inject
-	private IXtendJvmAssociations xtend2jvmAssociations;
+	private IXtendJvmAssociations xtendjvmAssociations;
 
 	@Inject
 	private Provider<StaticallyImportedFeaturesProvider> staticallyImportedFeaturesProvider;
@@ -98,7 +98,7 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		
 		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
 		// extensions for this
-		JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType(xtendClass);
+		JvmGenericType inferredJvmType = xtendjvmAssociations.getInferredType(xtendClass);
 		if (inferredJvmType != null) {
 			boolean isThis = false;
 			if (implicitReceiver instanceof XFeatureCall) {
@@ -160,7 +160,7 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		
 		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
 		// extensions for this
-		JvmGenericType inferredJvmType = xtend2jvmAssociations.getInferredType(xtendClass);
+		JvmGenericType inferredJvmType = xtendjvmAssociations.getInferredType(xtendClass);
 		if (inferredJvmType != null) {
 			boolean isThis = false;
 			if (implicitReceiver instanceof XFeatureCall) {
@@ -206,7 +206,7 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	}
 	
 	protected JvmIdentifiableElement findImplicitReceiverFor(XtendField XtendField) {
-		Set<EObject> elements = xtend2jvmAssociations.getJvmElements(XtendField);
+		Set<EObject> elements = xtendjvmAssociations.getJvmElements(XtendField);
 		if (!elements.isEmpty()) {
 			final JvmIdentifiableElement field = (JvmIdentifiableElement) elements.iterator().next();
 			return field;
@@ -229,7 +229,7 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			return null;
 		XtendClass containerClass = EcoreUtil2.getContainerOfType(call, XtendClass.class);
 		if (containerClass != null && containerClass.getName() != null)
-			return xtend2jvmAssociations.getInferredType(containerClass);
+			return xtendjvmAssociations.getInferredType(containerClass);
 		else
 			return super.getContextType(call);
 	}

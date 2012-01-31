@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Label;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XtendContainerWizardPage extends NewElementWizardPage implements IClasspathContainerPage {
 
 	private IClasspathEntry containerEntry;

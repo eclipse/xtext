@@ -26,7 +26,6 @@ import com.google.inject.name.Named;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XtendRenameElementProcessor extends RenameElementProcessor {
 
 	@Inject

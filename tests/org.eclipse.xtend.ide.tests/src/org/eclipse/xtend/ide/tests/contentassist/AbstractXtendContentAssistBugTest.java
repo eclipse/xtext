@@ -27,7 +27,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUITestCase implements IJavaProjectProvider, ResourceLoadHelper {
 
 	private IProject demandCreateProject;

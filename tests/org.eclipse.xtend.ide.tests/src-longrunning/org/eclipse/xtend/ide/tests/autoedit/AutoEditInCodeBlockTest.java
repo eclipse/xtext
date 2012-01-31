@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class AutoEditInCodeBlockTest extends AutoEditTest {
 	
 	private static String PREFIX = "class Foo {\n\tfoo() ";

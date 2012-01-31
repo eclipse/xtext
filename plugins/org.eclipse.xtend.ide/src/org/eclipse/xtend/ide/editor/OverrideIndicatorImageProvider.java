@@ -21,11 +21,11 @@ import com.google.inject.Inject;
 public class OverrideIndicatorImageProvider implements IAnnotationImageProvider {
 	private static final String OVERRIDE_IMG_DESC_ID = "XtendImages.DESC_OBJ_OVERRIDES"; //$NON-NLS-1$
 	private static final String IMPLEMENTS_IMG_DESC_ID = "XtendImages.DESC_OBJ_IMPLEMENTS"; //$NON-NLS-1$
-	private XtendImages xtend2Images;
+	private XtendImages xtendImages;
 
 	@Inject
 	public void setXtendImages(XtendImages xtend2Images) {
-		this.xtend2Images = xtend2Images;
+		this.xtendImages = xtend2Images;
 	}
 
 	public Image getManagedImage(Annotation annotation) {
@@ -43,9 +43,9 @@ public class OverrideIndicatorImageProvider implements IAnnotationImageProvider 
 	public ImageDescriptor getImageDescriptor(String imageDescritporId) {
 		ImageDescriptor imageDescriptor = null;
 		if (IMPLEMENTS_IMG_DESC_ID.equals(imageDescritporId)) {
-			imageDescriptor = xtend2Images.forImplementsAnnotation();
+			imageDescriptor = xtendImages.forImplementsAnnotation();
 		} else if (OVERRIDE_IMG_DESC_ID.equals(imageDescritporId)) {
-			imageDescriptor = xtend2Images.forOverridesAnnotation();
+			imageDescriptor = xtendImages.forOverridesAnnotation();
 		}
 		return imageDescriptor;
 	}

@@ -57,7 +57,6 @@ import com.google.inject.name.Named;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 @Singleton
 public class WorkbenchTestHelper extends Assert {
 	

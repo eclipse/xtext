@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class OpenEditorTest extends AbstractXtendUITestCase {
 
 	@Inject
@@ -86,7 +86,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 
 		IResource resource = foo.getResource();
 		assertTrue(resource instanceof IFile);
-		IMarker[] markers = derivedResourceMarkers.findDerivedResourceMarkers((IFile) resource);
+		IMarker[] markers = derivedResourceMarkers.findDerivedResourceMarkers(resource);
 		assertEquals(1, markers.length);
 		String source = derivedResourceMarkers.getSource(markers[0]);
 		assertNotNull(source);

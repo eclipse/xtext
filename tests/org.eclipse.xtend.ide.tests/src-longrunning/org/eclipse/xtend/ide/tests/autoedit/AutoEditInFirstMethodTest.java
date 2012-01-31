@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class AutoEditInFirstMethodTest extends AutoEditTest {
 
 	private static String PREFIX = "class Foo {\n\tfoo()\n";

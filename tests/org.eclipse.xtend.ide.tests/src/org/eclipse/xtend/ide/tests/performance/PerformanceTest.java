@@ -36,7 +36,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	@Inject
 	private XtendFileGenerator fileGenerator;
 	
-	@SuppressWarnings("restriction")
+	
 	@Test public void testBuildProject() throws Exception {
 		final long warmUp = measureReferenceTime();
 		assertTrue(warmUp > 0);
@@ -103,7 +103,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 		return sum / ls.length;
 	}
 	
-	@SuppressWarnings("restriction")
+	
 	protected long measureCleanBuild() throws CoreException {
 		long before = System.currentTimeMillis();
 		cleanBuild();

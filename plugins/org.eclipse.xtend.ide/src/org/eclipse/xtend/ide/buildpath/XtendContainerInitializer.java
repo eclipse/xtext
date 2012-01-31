@@ -141,11 +141,11 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 		 * http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/
 		 */
 		private String calculateJavadocURL() {
-			Version xtend2version = XtendActivator.getInstance().getBundle().getVersion();
+			Version xtendVersion = XtendActivator.getInstance().getBundle().getVersion();
 			StringBuilder builder = new StringBuilder("http://download.eclipse.org/modeling/tmf/xtext/javadoc/");
-			builder.append(xtend2version.getMajor()).append(".");
-			builder.append(xtend2version.getMinor()).append(".");
-			builder.append(xtend2version.getMicro()).append("/");
+			builder.append(xtendVersion.getMajor()).append(".");
+			builder.append(xtendVersion.getMinor()).append(".");
+			builder.append(xtendVersion.getMicro()).append("/");
 			return builder.toString();
 		}
 

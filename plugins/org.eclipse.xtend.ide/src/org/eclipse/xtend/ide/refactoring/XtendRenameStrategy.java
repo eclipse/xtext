@@ -20,7 +20,6 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStra
 /**
  * Encapsulates the model changes of a rename refactoring.
  */
-@SuppressWarnings("restriction")
 public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 
 	@Override

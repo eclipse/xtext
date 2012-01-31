@@ -20,7 +20,6 @@ import com.google.inject.Injector;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractXtendUITestCase extends Assert {
 
 	private static Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");

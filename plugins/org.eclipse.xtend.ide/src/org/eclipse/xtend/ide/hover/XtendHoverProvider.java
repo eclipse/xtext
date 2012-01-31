@@ -50,7 +50,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-@SuppressWarnings("restriction")
 public class XtendHoverProvider extends XbaseHoverProvider {
 
 	@Inject

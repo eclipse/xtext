@@ -49,6 +49,7 @@ public class Case_3 {
       int y = 2;
       int _xblockexpression_1 = (int) 0;
       {
+        Integer.valueOf(x).toString();
         int x2 = y;
         final int y2 = 1;
         int _operator_plus = IntegerExtensions.operator_plus(x2, y2);

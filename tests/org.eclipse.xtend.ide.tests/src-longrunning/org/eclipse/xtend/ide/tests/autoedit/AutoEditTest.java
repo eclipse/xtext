@@ -33,7 +33,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 
 	private static IProject project;
