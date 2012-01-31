@@ -16,11 +16,10 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtend.ide.contentassist.AbstractXtendProposalProvider;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
@@ -149,7 +148,8 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeClass_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+		if (model instanceof XtendClass)
+			overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
 		super.completeClass_Members(model, assignment, context, acceptor);
 	}
 
