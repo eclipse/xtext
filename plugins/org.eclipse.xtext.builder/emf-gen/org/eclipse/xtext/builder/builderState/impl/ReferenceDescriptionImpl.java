@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
-import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.builder.builderState.ReferenceDescription;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Reference Description</b></em>'. <!--
@@ -26,18 +26,18 @@ import org.eclipse.xtext.resource.IReferenceDescription;
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getSourceEObjectUri <em>Source EObject Uri</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getTargetEObjectUri <em>Target EObject Uri</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getIndexInList <em>Index In List</em>}</li>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getExternalFormOfEReference <em>External Form Of EReference</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getContainerEObjectURI <em>Container EObject URI</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getExternalFormOfEReference <em>External Form Of EReference</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ReferenceDescriptionImpl extends Container implements IReferenceDescription {
+public class ReferenceDescriptionImpl extends Container implements ReferenceDescription {
 	/**
-	 * The default value of the '{@link #getSourceEObjectUri() <em>Source EObject Uri</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getSourceEObjectUri() <em>Source EObject Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSourceEObjectUri()
 	 * @generated
 	 * @ordered
@@ -45,9 +45,9 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	protected static final URI SOURCE_EOBJECT_URI_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSourceEObjectUri() <em>Source EObject Uri</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSourceEObjectUri() <em>Source EObject Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getSourceEObjectUri()
 	 * @generated
 	 * @ordered
@@ -55,9 +55,9 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	protected URI sourceEObjectUri = SOURCE_EOBJECT_URI_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getTargetEObjectUri() <em>Target EObject Uri</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getTargetEObjectUri() <em>Target EObject Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTargetEObjectUri()
 	 * @generated
 	 * @ordered
@@ -65,9 +65,9 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	protected static final URI TARGET_EOBJECT_URI_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTargetEObjectUri() <em>Target EObject Uri</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTargetEObjectUri() <em>Target EObject Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTargetEObjectUri()
 	 * @generated
 	 * @ordered
@@ -95,26 +95,6 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	protected int indexInList = INDEX_IN_LIST_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getExternalFormOfEReference() <em>External Form Of EReference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExternalFormOfEReference()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getExternalFormOfEReference() <em>External Form Of EReference</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExternalFormOfEReference()
-	 * @generated
-	 * @ordered
-	 */
-	protected String externalFormOfEReference = EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getContainerEObjectURI() <em>Container EObject URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,6 +115,26 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	protected URI containerEObjectURI = CONTAINER_EOBJECT_URI_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getExternalFormOfEReference() <em>External Form Of EReference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExternalFormOfEReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExternalFormOfEReference() <em>External Form Of EReference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExternalFormOfEReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected String externalFormOfEReference = EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -152,7 +152,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public URI getSourceEObjectUri() {
@@ -160,7 +161,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setSourceEObjectUri(URI newSourceEObjectUri) {
@@ -171,7 +173,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public URI getTargetEObjectUri() {
@@ -179,7 +182,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setTargetEObjectUri(URI newTargetEObjectUri) {
@@ -190,7 +194,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public int getIndexInList() {
@@ -198,7 +203,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setIndexInList(int newIndexInList) {
@@ -206,6 +212,27 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 		indexInList = newIndexInList;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.REFERENCE_DESCRIPTION__INDEX_IN_LIST, oldIndexInList, indexInList));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URI getContainerEObjectURI() {
+		return containerEObjectURI;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainerEObjectURI(URI newContainerEObjectURI) {
+		URI oldContainerEObjectURI = containerEObjectURI;
+		containerEObjectURI = newContainerEObjectURI;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI, oldContainerEObjectURI, containerEObjectURI));
 	}
 
 	/**
@@ -233,27 +260,6 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public URI getContainerEObjectURI() {
-		return containerEObjectURI;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContainerEObjectURI(URI newContainerEObjectURI) {
-		URI oldContainerEObjectURI = containerEObjectURI;
-		containerEObjectURI = newContainerEObjectURI;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI, oldContainerEObjectURI, containerEObjectURI));
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -266,10 +272,10 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 				return getTargetEObjectUri();
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__INDEX_IN_LIST:
 				return getIndexInList();
-			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
-				return getExternalFormOfEReference();
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI:
 				return getContainerEObjectURI();
+			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
+				return getExternalFormOfEReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -290,11 +296,11 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__INDEX_IN_LIST:
 				setIndexInList((Integer)newValue);
 				return;
-			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
-				setExternalFormOfEReference((String)newValue);
-				return;
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI:
 				setContainerEObjectURI((URI)newValue);
+				return;
+			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
+				setExternalFormOfEReference((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -316,11 +322,11 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__INDEX_IN_LIST:
 				setIndexInList(INDEX_IN_LIST_EDEFAULT);
 				return;
-			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
-				setExternalFormOfEReference(EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT);
-				return;
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI:
 				setContainerEObjectURI(CONTAINER_EOBJECT_URI_EDEFAULT);
+				return;
+			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
+				setExternalFormOfEReference(EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -363,10 +369,10 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 		result.append(targetEObjectUri);
 		result.append(", indexInList: ");
 		result.append(indexInList);
-		result.append(", externalFormOfEReference: ");
-		result.append(externalFormOfEReference);
 		result.append(", containerEObjectURI: ");
 		result.append(containerEObjectURI);
+		result.append(", externalFormOfEReference: ");
+		result.append(externalFormOfEReference);
 		result.append(')');
 		return result.toString();
 	}

@@ -12,6 +12,8 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.EObjectDescription;
+import org.eclipse.xtext.builder.builderState.ReferenceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -90,9 +92,23 @@ public class BuilderStateSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case BuilderStatePackage.EOBJECT_DESCRIPTION: {
+				EObjectDescription eObjectDescription = (EObjectDescription)theEObject;
+				T result = caseEObjectDescription(eObjectDescription);
+				if (result == null) result = caseIEObjectDescription(eObjectDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BuilderStatePackage.USER_DATA_ENTRY: {
 				@SuppressWarnings("unchecked") Map.Entry<String, String> userDataEntry = (Map.Entry<String, String>)theEObject;
 				T result = caseUserDataEntry(userDataEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BuilderStatePackage.REFERENCE_DESCRIPTION: {
+				ReferenceDescription referenceDescription = (ReferenceDescription)theEObject;
+				T result = caseReferenceDescription(referenceDescription);
+				if (result == null) result = caseIReferenceDescription(referenceDescription);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -126,7 +142,7 @@ public class BuilderStateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEObjectDescription(IEObjectDescription object) {
+	public T caseEObjectDescription(EObjectDescription object) {
 		return null;
 	}
 
@@ -156,7 +172,37 @@ public class BuilderStateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseReferenceDescription(IReferenceDescription object) {
+	public T caseReferenceDescription(ReferenceDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IE Object Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IE Object Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIEObjectDescription(IEObjectDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IReference Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IReference Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIReferenceDescription(IReferenceDescription object) {
 		return null;
 	}
 

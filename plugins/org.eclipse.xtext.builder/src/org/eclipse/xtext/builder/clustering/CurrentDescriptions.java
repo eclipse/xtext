@@ -37,10 +37,8 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 * 
 	 * @param resourceSet
 	 *            The resource set
-	 * @param oldState
-	 *            The old index
-	 * @param initiallyDeleted
-	 *            URIs of resources physically deleted
+	 * @param newData
+	 *            the new index state.
 	 */
 	public CurrentDescriptions(ResourceSet resourceSet, ResourceDescriptionsData newData) {
 		this.newData = newData;

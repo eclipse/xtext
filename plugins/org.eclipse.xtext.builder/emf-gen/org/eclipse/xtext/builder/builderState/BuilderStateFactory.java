@@ -7,8 +7,6 @@
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
@@ -44,7 +42,7 @@ public interface BuilderStateFactory extends EFactory {
 	 * @return a new object of class '<em>EObject Description</em>'.
 	 * @generated
 	 */
-	IEObjectDescription createEObjectDescription();
+	EObjectDescription createEObjectDescription();
 
 	/**
 	 * Returns a new object of class '<em>Reference Description</em>'.
@@ -53,7 +51,7 @@ public interface BuilderStateFactory extends EFactory {
 	 * @return a new object of class '<em>Reference Description</em>'.
 	 * @generated
 	 */
-	IReferenceDescription createReferenceDescription();
+	ReferenceDescription createReferenceDescription();
 
 	/**
 	 * Returns the package supported by this factory.

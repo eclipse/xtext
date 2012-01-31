@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.builder.builderState.EObjectDescription;
+import org.eclipse.xtext.builder.builderState.ReferenceDescription;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 
@@ -68,9 +68,9 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case BuilderStatePackage.RESOURCE_DESCRIPTION: return (EObject)createResourceDescription();
-			case BuilderStatePackage.EOBJECT_DESCRIPTION: return (EObject)createEObjectDescription();
+			case BuilderStatePackage.EOBJECT_DESCRIPTION: return createEObjectDescription();
 			case BuilderStatePackage.USER_DATA_ENTRY: return (EObject)createUserDataEntry();
-			case BuilderStatePackage.REFERENCE_DESCRIPTION: return (EObject)createReferenceDescription();
+			case BuilderStatePackage.REFERENCE_DESCRIPTION: return createReferenceDescription();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,7 +129,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IEObjectDescription createEObjectDescription() {
+	public EObjectDescription createEObjectDescription() {
 		EObjectDescriptionImpl eObjectDescription = new EObjectDescriptionImpl();
 		return eObjectDescription;
 	}
@@ -149,7 +149,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IReferenceDescription createReferenceDescription() {
+	public ReferenceDescription createReferenceDescription() {
 		ReferenceDescriptionImpl referenceDescription = new ReferenceDescriptionImpl();
 		return referenceDescription;
 	}
@@ -226,7 +226,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
+	 * @deprecated the package should not be accessed statically.
 	 * @generated
 	 */
 	@Deprecated

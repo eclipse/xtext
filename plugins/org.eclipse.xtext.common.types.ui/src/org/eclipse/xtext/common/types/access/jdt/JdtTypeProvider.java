@@ -39,6 +39,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	
 	/**
 	 * @since 2.1
+	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
 	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		super(resourceSet, indexedJvmTypeAccess);
@@ -111,12 +112,20 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 	
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public JvmType findTypeBySignature(String signature, TypeResource resource) {
 		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = typeUriHelper.getFragment(signature);
 		return (JvmType) resource.getEObject(fragment);
 	}
 
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	@Override
 	protected IMirror createMirrorForFQN(String name) {
 		try {
