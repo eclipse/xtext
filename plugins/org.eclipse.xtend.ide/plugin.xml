@@ -829,4 +829,39 @@
        </specification>
    </extension>
 
+   <extension point="org.eclipse.ui.views">
+      <category
+          name="%viewCategoryName" id="org.eclipse.xtend.ui"/>
+      <view
+          name="%XtendSourceView"
+          icon="$nl$/icons/xtend_file.png"
+          category="org.eclipse.xtend.ui"
+          class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.views.DeclarationView"
+          id="org.eclipse.xtend.ui.DeclarationView">
+      </view>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.themes">
+        <themeElementCategory label="%xtendPresentation.label" id="org.eclipse.xtend.ui.presentation"/>
+        <fontDefinition
+            label="%xtendEditorFontDefiniton.label"
+            defaultsTo="org.eclipse.jface.textfont"
+            categoryId="org.eclipse.xtend.ui.presentation"
+            id="org.eclipse.xtend.ui.editors.textfont">
+         <description>
+            %xtendEditorFontDefintion.description
+         </description>
+        </fontDefinition>
+        <colorDefinition
+            label="%DeclarationViewBackgroundColor.label"
+            categoryId="org.eclipse.xtend.ui.presentation"
+            value="COLOR_INFO_BACKGROUND"
+            id="org.eclipse.xtend.ui.DeclarationView.backgroundColor">
+         <description>
+            %DeclarationViewBackgroundColor.description
+         </description>
+      </colorDefinition>
+   </extension>
+
 </plugin>
