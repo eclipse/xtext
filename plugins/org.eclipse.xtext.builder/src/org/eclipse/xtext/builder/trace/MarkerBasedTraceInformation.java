@@ -22,6 +22,8 @@ import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceToSource;
+import org.eclipse.xtext.generator.trace.ITraceToTarget;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
@@ -126,6 +128,66 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 			logger.error(e.getMessage(), e);
 		}
 		return Collections.emptyList();
+	}
+
+	public ITraceToSource getTraceToSource(final IStorage derivedResource) {
+		return new ITraceToSource() {
+			
+			public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
+				if (derivedResource instanceof IResource)
+					return getSingleSourceInformation((IResource) derivedResource, null, region);
+				return null;
+			}
+			
+			public ILocationInResource getBestAssociatedLocation(ITextRegion region, LanguageInfo language) {
+				if (derivedResource instanceof IResource)
+					return getSingleSourceInformation((IResource) derivedResource, language, region);
+				return null;
+			}
+			
+			public Iterable<ILocationInResource> getAllLocations() {
+				if (derivedResource instanceof IResource)
+					return getAllSourceInformation((IResource) derivedResource, null, null);
+				return Collections.emptyList();
+			}
+			
+			public Iterable<ILocationInResource> getAllLocations(LanguageInfo language) {
+				if (derivedResource instanceof IResource)
+					return getAllSourceInformation((IResource) derivedResource, language, null);
+				return Collections.emptyList();
+			}
+			
+			public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region) {
+				if (derivedResource instanceof IResource)
+					return getAllSourceInformation((IResource) derivedResource, null, region);
+				return Collections.emptyList();
+			}
+			
+			public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region, LanguageInfo language) {
+				if (derivedResource instanceof IResource)
+					return getAllSourceInformation((IResource) derivedResource, language, region);
+				return Collections.emptyList();
+			}
+			
+			public IStorage getDerivedResource() {
+				return derivedResource;
+			}
+			
+			public Iterable<ITraceToTarget> getAllSources() {
+				logger.info("MarkerBasedTraceInformation does not support trace to target");
+				return Collections.emptyList();
+			}
+			
+			public Iterable<ITraceToTarget> getAllSources(LanguageInfo language) {
+				logger.info("MarkerBasedTraceInformation does not support trace to target");
+				return Collections.emptyList();
+			}
+		};
+	}
+
+	public ITraceToTarget getTraceToTarget(IStorage sourceResource) {
+		logger.info("MarkerBasedTraceInformation does not support trace to target");
+		return null;
 	}
 
 }
