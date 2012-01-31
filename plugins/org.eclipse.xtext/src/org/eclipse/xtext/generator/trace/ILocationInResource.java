@@ -24,18 +24,20 @@ import org.eclipse.xtext.util.ITextRegion;
 public interface ILocationInResource {
 	
 	/**
-	 * @return the language that this resource belongs to.
+	 * @return the language that this resource belongs to. May be <code>null</code>.
 	 */
 	LanguageInfo getLanguage();
 	
 	/**
-	 * @return the EMF resource URI for this location.
+	 * @return the EMF resource URI for this location. May be <code>null</code> if the 
+	 * resource is not an EMF resource.
 	 */
 	URI getResourceURI();
 	
 	/**
 	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
-	 * for this location. May be <code>null</code> if the resource itself is empty.
+	 * for this location. May be <code>null</code> if the resource itself is empty or if this
+	 * resource is not an EMF resource.
 	 */
 	URI getEObjectURI();
 	
