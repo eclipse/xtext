@@ -24,6 +24,14 @@ public class Naming {
 	private String uiBasePackage;
 	private String pathTestProject;
 	private String activatorName;
+	private String grammarId;
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setGrammarId(String grammarId) {
+		this.grammarId = grammarId;
+	}
 
 	public void setUiBasePackage(String uiBasePackage) {
 		this.uiBasePackage = uiBasePackage;
@@ -98,6 +106,8 @@ public class Naming {
 	}
 
 	public String basePackageUi(Grammar g) {
+		if ((grammarId==null || grammarId.equals(g.getName())) && !Strings.isEmpty(uiBasePackage))
+			return this.uiBasePackage;
 		return getNamespace(g) + ".ui";
 	}
 	
