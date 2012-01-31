@@ -33,7 +33,7 @@ public class MapExtensions {
 	 * @param procedure
 	 *            the procedure. May not be <code>null</code>.
 	 */
-	public static final <K, V> void forEach(Map<K, V> map, Procedure2<? super K, ? super V> procedure) {
+	public static <K, V> void forEach(Map<K, V> map, Procedure2<? super K, ? super V> procedure) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		for (Map.Entry<K, V> entry : map.entrySet()) {
@@ -51,7 +51,7 @@ public class MapExtensions {
 	 * @param procedure
 	 *            the procedure. May not be <code>null</code>.
 	 */
-	public static final <K, V> void forEach(Map<K, V> map, Procedure3<? super K, ? super V, ? super Integer> procedure) {
+	public static <K, V> void forEach(Map<K, V> map, Procedure3<? super K, ? super V, ? super Integer> procedure) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		int i = 0;

@@ -279,7 +279,7 @@ public class IteratorExtensions {
 	 *            the predicate. May not be <code>null</code>.
 	 * @return an iterator that contains only the elements that fulfill the predicate. Never <code>null</code>.
 	 */
-	public static final <T> Iterator<T> filter(Iterator<T> unfiltered, Function1<? super T, Boolean> predicate) {
+	public static <T> Iterator<T> filter(Iterator<T> unfiltered, Function1<? super T, Boolean> predicate) {
 		return Iterators.filter(unfiltered, new BooleanFunctionDelegate<T>(predicate));
 	}
 
@@ -296,7 +296,7 @@ public class IteratorExtensions {
 	 * @return an unmodifiable iterator containing all elements of the original iterator that were of the requested
 	 *         type. Never <code>null</code>.
 	 */
-	public static final <T> Iterator<T> filter(Iterator<?> unfiltered, Class<T> type) {
+	public static <T> Iterator<T> filter(Iterator<?> unfiltered, Class<T> type) {
 		return Iterators.filter(unfiltered, type);
 	}
 	
@@ -308,7 +308,7 @@ public class IteratorExtensions {
 	 * @return an unmodifiable iterator containing all elements of the original iterator without any <code>null</code>
 	 *         references. Never <code>null</code>.
 	 */
-	public static final <T> Iterator<T> filterNull(Iterator<T> unfiltered) {
+	public static <T> Iterator<T> filterNull(Iterator<T> unfiltered) {
 		return Iterators.filter(unfiltered, Predicates.notNull());
 	}
 
@@ -325,7 +325,7 @@ public class IteratorExtensions {
 	 *            the transformation. May not be <code>null</code>.
 	 * @return an iterator that provides the result of the transformation. Never <code>null</code>.
 	 */
-	public static final <T, R> Iterator<R> map(Iterator<T> original, Function1<? super T, ? extends R> transformation) {
+	public static <T, R> Iterator<R> map(Iterator<T> original, Function1<? super T, ? extends R> transformation) {
 		return Iterators.transform(original, new FunctionDelegate<T, R>(transformation));
 	}
 
@@ -337,7 +337,7 @@ public class IteratorExtensions {
 	 * @param procedure
 	 *            the procedure. May not be <code>null</code>.
 	 */
-	public static final <T> void forEach(Iterator<T> iterator, Procedure1<? super T> procedure) {
+	public static <T> void forEach(Iterator<T> iterator, Procedure1<? super T> procedure) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		while(iterator.hasNext()) {
@@ -355,7 +355,7 @@ public class IteratorExtensions {
 	 * @param procedure
 	 *            the procedure. May not be <code>null</code>.
 	 */
-	public static final <T> void forEach(Iterator<T> iterator, Procedure2<? super T, ? super Integer> procedure) {
+	public static <T> void forEach(Iterator<T> iterator, Procedure2<? super T, ? super Integer> procedure) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		int i = 0;
@@ -375,7 +375,7 @@ public class IteratorExtensions {
 	 * @return the string representation of the iterator's elements. Never <code>null</code>.
 	 * @see #join(Iterator, CharSequence, Function1)
 	 */
-	public static final String join(Iterator<?> iterator) {
+	public static String join(Iterator<?> iterator) {
 		return join(iterator, "");
 	}
 
@@ -391,7 +391,7 @@ public class IteratorExtensions {
 	 * @return the string representation of the iterator's elements. Never <code>null</code>.
 	 * @see #join(Iterator, CharSequence, Function1)
 	 */
-	public static final String join(Iterator<?> iterator, CharSequence separator) {
+	public static String join(Iterator<?> iterator, CharSequence separator) {
 		return Joiner.on(separator.toString()).useForNull("null").join(toIterable(iterator));
 	}
 
@@ -410,7 +410,7 @@ public class IteratorExtensions {
 	 *            <code>null</code>.
 	 * @return the string representation of the iterator's elements. Never <code>null</code>.
 	 */
-	public static final <T> String join(Iterator<T> iterator, CharSequence separator,
+	public static <T> String join(Iterator<T> iterator, CharSequence separator,
 			Functions.Function1<? super T, ? extends CharSequence> function) {
 		if (separator == null)
 			throw new NullPointerException("separator");
@@ -446,7 +446,7 @@ public class IteratorExtensions {
 	 *            <code>null</code>.
 	 * @return the string representation of the iterator's elements. Never <code>null</code>.
 	 */
-	public static final <T> String join(Iterator<T> iterator, CharSequence before, CharSequence separator, CharSequence after,
+	public static <T> String join(Iterator<T> iterator, CharSequence before, CharSequence separator, CharSequence after,
 			Functions.Function1<? super T, ? extends CharSequence> function) {
 		if (function == null)
 			throw new NullPointerException("function");
@@ -477,7 +477,7 @@ public class IteratorExtensions {
 	 *            an iterator. May not be <code>null</code>.
 	 * @return <code>true</code> if the two iterators contain equal elements in the same order.
 	 */
-	public static final boolean elementsEqual(Iterator<?> iterator, Iterator<?> other) {
+	public static boolean elementsEqual(Iterator<?> iterator, Iterator<?> other) {
 		return Iterators.elementsEqual(iterator, other);
 	}
 	
@@ -492,7 +492,7 @@ public class IteratorExtensions {
 	 *            an iterable. May not be <code>null</code>.
 	 * @return <code>true</code> if the two iterators contain equal elements in the same order.
 	 */
-	public static final boolean elementsEqual(Iterator<?> iterator, Iterable<?> iterable) {
+	public static boolean elementsEqual(Iterator<?> iterator, Iterable<?> iterable) {
 		return Iterators.elementsEqual(iterator, iterable.iterator());
 	}
 
@@ -503,7 +503,7 @@ public class IteratorExtensions {
 	 *            the to-be-queried iterator. May be <code>null</code>.
 	 * @return {@code true} if the iterator is <code>null</code> or contains no elements
 	 */
-	public static final boolean isNullOrEmpty(Iterator<?> iterator) {
+	public static boolean isNullOrEmpty(Iterator<?> iterator) {
 		return iterator == null || isEmpty(iterator);
 	}
 
@@ -515,7 +515,7 @@ public class IteratorExtensions {
 	 * @return {@code true} if the iterator contains no elements
 	 * @see #isNullOrEmpty(Iterator)
 	 */
-	public static final boolean isEmpty(Iterator<?> iterator) {
+	public static boolean isEmpty(Iterator<?> iterator) {
 		return !iterator.hasNext();
 	}
 
@@ -527,7 +527,7 @@ public class IteratorExtensions {
 	 *            the iterator. May not be <code>null</code>.
 	 * @return the number of elements in {@code iterator}.
 	 */
-	public static final int size(Iterator<?> iterator) {
+	public static int size(Iterator<?> iterator) {
 		return Iterators.size(iterator);
 	}
 
