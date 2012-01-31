@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @since 2.3
  */
 public class ReadOnlySourceViewerConfiguration extends XtextSourceViewerConfiguration {
 

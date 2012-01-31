@@ -60,6 +60,7 @@ import com.google.inject.name.Named;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @since 2.3
  */
 public class DeclarationView extends ViewPart implements ISelectionListener, IPropertyChangeListener {
 	@Inject
