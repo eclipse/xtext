@@ -13,7 +13,7 @@ import org.eclipse.osgi.util.NLS;
  * @author huebner - Initial contribution and API
  */
 public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "org.eclipse.xtend.core.ui.buildpath.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.xtend.ide.buildpath.messages"; //$NON-NLS-1$
 	public static String XtendClasspathContainer_Description;
 	public static String XtendContainerWizardPage_AboutContainer;
 	public static String XtendContainerWizardPage_Desc;

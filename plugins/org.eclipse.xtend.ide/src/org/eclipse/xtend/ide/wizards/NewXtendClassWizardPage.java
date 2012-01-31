@@ -39,7 +39,6 @@ import com.google.inject.Inject;
 /**
  * @author Robert von Massow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class NewXtendClassWizardPage extends NewTypeWizardPage {
 
 	private IResource fResource;

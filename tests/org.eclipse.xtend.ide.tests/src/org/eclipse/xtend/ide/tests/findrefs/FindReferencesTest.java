@@ -41,7 +41,7 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class FindReferencesTest extends AbstractXtendUITestCase {
 
 	@Inject

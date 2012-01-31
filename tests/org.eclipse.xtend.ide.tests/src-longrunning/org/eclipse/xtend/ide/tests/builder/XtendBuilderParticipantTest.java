@@ -39,7 +39,7 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		super.tearDown();
 	}
 	
-	@SuppressWarnings("restriction")
+	
 	@Test public void testBuild() throws Exception {
 		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
 		sourceFile.getProject().setDefaultCharset(getNonDefaultEncoding(), null);

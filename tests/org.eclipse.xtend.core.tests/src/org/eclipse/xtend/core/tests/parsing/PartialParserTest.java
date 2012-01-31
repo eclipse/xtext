@@ -296,7 +296,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				"	}\n" + 
 				"	 \n" + 
 				"	dispatch transform(E";
-		doTestUpdateAtOffset(model, 329, 0, "P", "Case_6.xtend");
+		doTestUpdateAtOffset(model, 327, 0, "P", "Case_6.xtend");
 	}
 	
 	@Test public void testEqualModels_03() throws Exception {
@@ -357,7 +357,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				"		}\n" + 
 				"	}\n" + 
 				"}";
-		assertEquals(229, model.indexOf("typeof(Case_3") + "typeof(Case_3".length());
+		assertEquals(227, model.indexOf("typeof(Case_3") + "typeof(Case_3".length());
 		XtextResource resource = doTestUpdateAtOffset(model, 229, 1, " ", "Case_3.xtend");
 		compareWithNewResource(resource, model, 229, 1, ")", "Case_3.xtend");
 		validateWithoutException(resource);
@@ -385,8 +385,8 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				"	def dispatch transform(EStructuralFeature entity) {\n" + 
 				"		val inferredType = null\n" + 
 				"		newArrayList";
-		XtextResource resource = doTestUpdateAtOffset(model, 526, 0, "(i", "Case_6.xtend");
-		compareWithNewResource(resource, model + "(", 527, 1, "i", "Case_6.xtend");
+		XtextResource resource = doTestUpdateAtOffset(model, 524, 0, "(i", "Case_6.xtend");
+		compareWithNewResource(resource, model + "(", 525, 1, "i", "Case_6.xtend");
 		validateWithoutException(resource);
 	}
 	

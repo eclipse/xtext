@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 public class XtendOverridesService {
 	
 	@Inject
-	private IXtendJvmAssociations xtend2jvmAssociations;
+	private IXtendJvmAssociations xtendjvmAssociations;
 
 	@Inject
 	private FeatureOverridesService featureOverridesService;
@@ -48,7 +48,7 @@ public class XtendOverridesService {
 	private SuperTypeCollector superTypeCollector;
 	
 	public JvmOperation findOverriddenOperation(XtendFunction function) {
-		JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
+		JvmOperation inferredOperation = xtendjvmAssociations.getDirectlyInferredOperation(function);
 		if (inferredOperation == null)
 			return null;
 		return findOverriddenOperation(inferredOperation);

@@ -32,7 +32,7 @@ import com.google.inject.Injector;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class ShowHierarchyTest extends AbstractEditorTest {
 
 	private static final String LANGUAGE_NAME = "org.eclipse.xtend.core.Xtend";

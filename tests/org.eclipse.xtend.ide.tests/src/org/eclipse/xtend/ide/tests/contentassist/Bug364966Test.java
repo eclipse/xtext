@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+
 public class Bug364966Test extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testFieldInitializer_01() throws Exception {

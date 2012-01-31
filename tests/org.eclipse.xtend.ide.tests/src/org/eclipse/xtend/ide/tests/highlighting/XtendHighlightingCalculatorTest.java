@@ -111,7 +111,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 		return file(string).getXtendClass();
 	}
 
-	@SuppressWarnings("restriction")
+	
 	protected XtendFile file(String string) throws Exception {
 		createFile(testHelper.getProject().getName() + "/src/test/TestClassDeprecated.java",TEST_HELP_CLASS_STRING);
 		waitForAutoBuild();

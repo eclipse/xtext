@@ -37,7 +37,7 @@ import com.google.inject.Inject;
  */
 public class OverrideIndicatorRulerAction extends ResourceAction implements IActionContributor, IUpdate {
 	private static final String RESOURCE_KEY_PREFIX = "XtendSelectAnnotationRulerAction.OpenSuperImplementation.";//$NON-NLS-1$
-	private static final String BUNDLE_NAME = "org.eclipse.xtend.core.ui.editor.messages";//$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.xtend.ide.editor.messages";//$NON-NLS-1$
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	private GlobalURIEditorOpener uriEditorOpener;
 	private IJavaElementFinder javaElementFinder;

@@ -79,7 +79,6 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used within the IDE.
  */
-@SuppressWarnings("restriction")
 public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public XtendUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -90,7 +89,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 			binder.bindConstant().annotatedWith(Names.named(AbstractEditStrategy.DEBUG)).to(true);
 		}
 		// matches ID of org.eclipse.ui.contexts extension registered in plugin.xml
-		binder.bindConstant().annotatedWith(Names.named(XtextEditor.KEY_BINDING_SCOPE)).to("org.eclipse.xtend.core.ui.XtendEditorScope");
+		binder.bindConstant().annotatedWith(Names.named(XtextEditor.KEY_BINDING_SCOPE)).to("org.eclipse.xtend.ide.XtendEditorScope");
 	}
 	
 	public void configureOverrideIndicatorSupport(Binder binder) {

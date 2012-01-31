@@ -31,13 +31,13 @@ import static org.eclipse.xtend.ide.tests.hover.XtendUnsugaredHoverTest.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
-class XtendUnsugaredHoverTest extends org.eclipse.xtend.ide.tests.AbstractXtendUITestCase {
+class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
 	@Inject
 	private WorkbenchTestHelper testHelper
 	
 	@Inject
-	extension org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+	extension IXtendJvmAssociations
 	
 	@Inject
 	private IJavaElementFinder javaElementFinder

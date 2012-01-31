@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Registers the value converters for Xtend2, in particular the
+ * Registers the value converters for Xtend, in particular the
  * converters for rich strings and qualified names with wildcards.
  * @author Sebastian Zarnekow - Initial contribution and API
  */

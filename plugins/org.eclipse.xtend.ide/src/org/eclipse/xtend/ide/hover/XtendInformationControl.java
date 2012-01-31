@@ -67,7 +67,6 @@ import org.eclipse.xtext.validation.Issue;
  *                                                                      fields that are modified are marked
  * @since 2.3
  */
-@SuppressWarnings("restriction")
 public class XtendInformationControl extends AbstractInformationControl implements IInformationControlExtension2,
 		IDelayedInputChangeProvider, IXtextBrowserInformationControl {
 

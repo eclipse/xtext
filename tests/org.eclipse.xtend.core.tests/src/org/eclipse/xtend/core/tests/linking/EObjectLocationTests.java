@@ -35,7 +35,7 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 	private ILocationInFileProvider locationInFileProvider;
 	
 	@Inject 
-	private IXtendJvmAssociations xtend2jvmAssociations;
+	private IXtendJvmAssociations xtendjvmAssociations;
 	
 	@Test public void testResolveElement() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() { hashCode(); this }}";
@@ -65,24 +65,24 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 	@Test public void testFullLocationInFile() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() {this }}";
 		XtendClass clazz = clazz(model);
-		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
+		JvmGenericType inferredType = xtendjvmAssociations.getInferredType(clazz);
 		assertEquals(locationInFileProvider.getFullTextRegion(clazz), locationInFileProvider.getFullTextRegion(inferredType));
-		JvmConstructor inferredConstructor = xtend2jvmAssociations.getInferredConstructor(clazz);
+		JvmConstructor inferredConstructor = xtendjvmAssociations.getInferredConstructor(clazz);
 		assertEquals(locationInFileProvider.getFullTextRegion(clazz), locationInFileProvider.getFullTextRegion(inferredConstructor));
 		XtendFunction xtendFunction = (XtendFunction) clazz.getMembers().get(0);
-		JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(xtendFunction);
+		JvmOperation inferredOperation = xtendjvmAssociations.getDirectlyInferredOperation(xtendFunction);
 		assertEquals(locationInFileProvider.getFullTextRegion(xtendFunction), locationInFileProvider.getFullTextRegion(inferredOperation));
 	}
 
 	@Test public void testSignificantLocationInFile() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() {this} }";
 		XtendClass clazz = clazz(model);
-		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
+		JvmGenericType inferredType = xtendjvmAssociations.getInferredType(clazz);
 		assertEquals(locationInFileProvider.getSignificantTextRegion(clazz), locationInFileProvider.getSignificantTextRegion(inferredType));
-		JvmConstructor inferredConstructor = xtend2jvmAssociations.getInferredConstructor(clazz);
+		JvmConstructor inferredConstructor = xtendjvmAssociations.getInferredConstructor(clazz);
 		assertEquals(locationInFileProvider.getSignificantTextRegion(clazz), locationInFileProvider.getSignificantTextRegion(inferredConstructor));
 		XtendFunction xtendFunction = (XtendFunction) clazz.getMembers().get(0);
-		JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(xtendFunction);
+		JvmOperation inferredOperation = xtendjvmAssociations.getDirectlyInferredOperation(xtendFunction);
 		assertEquals(locationInFileProvider.getSignificantTextRegion(xtendFunction), locationInFileProvider.getSignificantTextRegion(inferredOperation));
 	}
 }

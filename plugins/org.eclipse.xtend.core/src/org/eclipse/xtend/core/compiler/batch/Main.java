@@ -23,7 +23,7 @@ public class Main {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		Injector injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
-		XtendBatchCompiler xtend2BatchCompiler = injector.getInstance(XtendBatchCompiler.class);
+		XtendBatchCompiler xtendBatchCompiler = injector.getInstance(XtendBatchCompiler.class);
 		if ((args == null) || (args.length == 0)) {
 			printUsage();
 			return;
@@ -32,18 +32,18 @@ public class Main {
 		while (arguments.hasNext()) {
 			String argument = arguments.next();
 			if ("-d".equals(argument.trim())) {
-				xtend2BatchCompiler.setOutputPath(arguments.next().trim());
+				xtendBatchCompiler.setOutputPath(arguments.next().trim());
 			} else if ("-classpath".equals(argument.trim()) || "-cp".equals(argument.trim())) {
-				xtend2BatchCompiler.setClassPath(arguments.next().trim());
+				xtendBatchCompiler.setClassPath(arguments.next().trim());
 			} else if ("-tempdir".equals(argument.trim()) || "-td".equals(argument.trim())) {
-				xtend2BatchCompiler.setTempDirectory(arguments.next().trim());
+				xtendBatchCompiler.setTempDirectory(arguments.next().trim());
 			} else if ("-encoding".equals(argument.trim())) {
-				xtend2BatchCompiler.setFileEncoding(arguments.next().trim());
+				xtendBatchCompiler.setFileEncoding(arguments.next().trim());
 			} else {
-				xtend2BatchCompiler.setSourcePath(argument);
+				xtendBatchCompiler.setSourcePath(argument);
 			}
 		}
-		xtend2BatchCompiler.compile();
+		xtendBatchCompiler.compile();
 	}
 	
 	private static void printUsage() {

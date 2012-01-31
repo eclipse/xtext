@@ -24,7 +24,6 @@ import com.google.inject.Inject;
 /**
  * @author Robert von Massow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class NewXtendClassWizard extends NewElementWizard {
 
 	public static final String TITLE = "Xtend Class"; //$NON-NLS-1$

@@ -90,13 +90,13 @@ public class XtendBatchCompiler {
 	@Inject
 	protected Provider<ResourceSetBasedResourceDescriptions> resourceSetDescriptionsProvider;
 	@Inject
-	protected JvmModelGenerator generator;
+	private JvmModelGenerator generator;
 	@Inject
-	protected IXtendJvmAssociations xtend2JvmAssociations;
+	private IXtendJvmAssociations xtendJvmAssociations;
 	@Inject
-	protected IQualifiedNameProvider qualifiedNameProvider;
+	private IQualifiedNameProvider qualifiedNameProvider;
 	@Inject
-	protected IndexedJvmTypeAccess indexedJvmTypeAccess;
+	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -387,7 +387,7 @@ public class XtendBatchCompiler {
 		}
 		for (IEObjectDescription eObjectDescription : exportedObjectsByType) {
 			XtendClass xtendClass = (XtendClass) eObjectDescription.getEObjectOrProxy();
-			JvmGenericType jvmGenericType = xtend2JvmAssociations.getInferredType(xtendClass);
+			JvmGenericType jvmGenericType = xtendJvmAssociations.getInferredType(xtendClass);
 			CharSequence generatedType = generator.generateType(jvmGenericType);
 			if (log.isDebugEnabled()) {
 				log.debug("write '" + outputPath + File.separator + getJavaFileName(xtendClass) + "'");
@@ -403,15 +403,15 @@ public class XtendBatchCompiler {
 		return resourceDescriptions;
 	}
 
-	protected String getJavaFileName(XtendClass xtendClass) {
+	private String getJavaFileName(XtendClass xtendClass) {
 		return Strings.concat("/", getFullyQualifiedName(xtendClass).getSegments()) + ".java";
 	}
 
-	protected QualifiedName getFullyQualifiedName(XtendClass xtendClass) {
+	private QualifiedName getFullyQualifiedName(XtendClass xtendClass) {
 		return qualifiedNameProvider.getFullyQualifiedName(xtendClass);
 	}
 
-	protected XtendClass getXtendClass(Resource resource) {
+	private XtendClass getXtendClass(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
 		if (parseResult.getRootASTElement() instanceof XtendFile) {

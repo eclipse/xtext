@@ -11,7 +11,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	
-	@Inject extension org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations 
+	@Inject extension IXtendJvmAssociations 
 	
 	@Test
 	def testJavaLangReflectImport() { 

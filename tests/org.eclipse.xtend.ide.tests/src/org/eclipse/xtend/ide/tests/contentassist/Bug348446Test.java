@@ -13,7 +13,6 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testGetPackage() throws Exception {

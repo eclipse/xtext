@@ -60,7 +60,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		foo.child(4, "baz() : Object").numChildren(0);
 	}
 
-	@SuppressWarnings("restriction")
+	
 	@Test public void testFieldsFromSuper() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 
@@ -100,7 +100,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		// private field bar stays invisible
 	}
 	
-	@SuppressWarnings("restriction")
+	
 	@Test public void testMethodsFromSuper() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 
@@ -140,7 +140,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		// private method bar() stays invisible
 	}
 	
-	@SuppressWarnings("restriction")
+	
 	@Test public void testMixedDispatch_0() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 

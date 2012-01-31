@@ -11,10 +11,12 @@ class Case_3 {
 		    for (x : 1..100) closure.apply(x)
 		}
 	}
+	
 	def testOverriddenLocalVariable() {
 	  val x = 3
 	  var y = 2
 	  {
+	  	x.toString // just to get rid of the unused warning
 	    var x2 = y
 	    val y2 = 1
 	    x2+y2

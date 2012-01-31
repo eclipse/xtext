@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class OccurrenceComputer extends JvmModelOccurrenceComputer {
 
 	@Override

@@ -54,7 +54,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Inject
 	private ImplementMemberFromSuperAssist overrideAssist;
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void completeImport_ImportedType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -103,7 +102,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
 		if (contentAssistContext.getPrefix().startsWith("_"))
@@ -118,7 +116,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		};
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void completeClass_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -137,7 +134,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 				}, acceptor);
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void completeClass_Implements(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -182,7 +178,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		}
 	}
 	
-	@SuppressWarnings("restriction")
 	@Override
 	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
