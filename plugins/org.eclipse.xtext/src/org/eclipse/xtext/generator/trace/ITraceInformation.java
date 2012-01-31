@@ -8,11 +8,12 @@
 package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
- * Provides read access to the available trace information for generated resources.
+ * Provides read access to the available trace information for generated resources or input resources.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noimplement This interface is not intended to be implemented by clients.
@@ -37,5 +38,21 @@ public interface ITraceInformation {
 	 * @return all the associated source data. Never <code>null</code>. An empty iterable if no source data is available.
 	 */
 	Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, LanguageInfo languageInfo, ITextRegion range);
+	
+	/**
+	 * Returns the trace information to the sources that were used as input for the given derived resource.
+	 * May return <code>null</code> if no such data is available for the given storage.
+	 * @param derivedResource the resource whose source trace is requested. May not be <code>null</code>.
+	 * @return the trace to the source or <code>null</code>.
+	 */
+	ITraceToSource getTraceToSource(IStorage derivedResource);
+	
+	/**
+	 * Returns the trace information to the targets that were generated from the given source.
+	 * May return <code>null</code> if no such data is available for the given storage.
+	 * @param sourceResource the resource whose target trace is requested. May not be <code>null</code>.
+	 * @return the trace to the generation targets or <code>null</code>.
+	 */
+	ITraceToTarget getTraceToTarget(IStorage sourceResource);
 	
 }
