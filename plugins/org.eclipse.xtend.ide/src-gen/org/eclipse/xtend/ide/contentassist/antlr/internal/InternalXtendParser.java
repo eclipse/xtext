@@ -68670,7 +68670,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:10546:2: ( rule__XAssignment__Group_1_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:10546:2: rule__XAssignment__Group_1_1__0
         {
-        pushFollow(FOLLOW_rule__XAssignment__Group_1_1__0_in_synpred131_InternalXtend1588);
+        pushFollow(FOLLOW_rule__XAssignment__Group_1_1__0_in_synpred131_InternalXtend21588);
         rule__XAssignment__Group_1_1__0();
 
         state._fsp--;
@@ -68685,7 +68685,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:10761:2: ( rule__XOrExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:10761:2: rule__XOrExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XOrExpression__Group_1__0_in_synpred132_InternalXtend2011);
+        pushFollow(FOLLOW_rule__XOrExpression__Group_1__0_in_synpred132_InternalXtend22011);
         rule__XOrExpression__Group_1__0();
 
         state._fsp--;
@@ -68700,7 +68700,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:10976:2: ( rule__XAndExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:10976:2: rule__XAndExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XAndExpression__Group_1__0_in_synpred133_InternalXtend2434);
+        pushFollow(FOLLOW_rule__XAndExpression__Group_1__0_in_synpred133_InternalXtend22434);
         rule__XAndExpression__Group_1__0();
 
         state._fsp--;
@@ -68715,7 +68715,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11191:2: ( rule__XEqualityExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11191:2: rule__XEqualityExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XEqualityExpression__Group_1__0_in_synpred134_InternalXtend2857);
+        pushFollow(FOLLOW_rule__XEqualityExpression__Group_1__0_in_synpred134_InternalXtend22857);
         rule__XEqualityExpression__Group_1__0();
 
         state._fsp--;
@@ -68730,7 +68730,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11406:2: ( rule__XRelationalExpression__Alternatives_1 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11406:2: rule__XRelationalExpression__Alternatives_1
         {
-        pushFollow(FOLLOW_rule__XRelationalExpression__Alternatives_1_in_synpred135_InternalXtend3280);
+        pushFollow(FOLLOW_rule__XRelationalExpression__Alternatives_1_in_synpred135_InternalXtend23280);
         rule__XRelationalExpression__Alternatives_1();
 
         state._fsp--;
@@ -68745,7 +68745,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11777:2: ( rule__XOtherOperatorExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11777:2: rule__XOtherOperatorExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XOtherOperatorExpression__Group_1__0_in_synpred136_InternalXtend4007);
+        pushFollow(FOLLOW_rule__XOtherOperatorExpression__Group_1__0_in_synpred136_InternalXtend24007);
         rule__XOtherOperatorExpression__Group_1__0();
 
         state._fsp--;
@@ -68760,7 +68760,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11992:2: ( rule__XAdditiveExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:11992:2: rule__XAdditiveExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XAdditiveExpression__Group_1__0_in_synpred137_InternalXtend4430);
+        pushFollow(FOLLOW_rule__XAdditiveExpression__Group_1__0_in_synpred137_InternalXtend24430);
         rule__XAdditiveExpression__Group_1__0();
 
         state._fsp--;
@@ -68775,7 +68775,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:12207:2: ( rule__XMultiplicativeExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:12207:2: rule__XMultiplicativeExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XMultiplicativeExpression__Group_1__0_in_synpred138_InternalXtend4853);
+        pushFollow(FOLLOW_rule__XMultiplicativeExpression__Group_1__0_in_synpred138_InternalXtend24853);
         rule__XMultiplicativeExpression__Group_1__0();
 
         state._fsp--;
@@ -68790,7 +68790,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:12516:2: ( rule__XCastedExpression__Group_1__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:12516:2: rule__XCastedExpression__Group_1__0
         {
-        pushFollow(FOLLOW_rule__XCastedExpression__Group_1__0_in_synpred139_InternalXtend5460);
+        pushFollow(FOLLOW_rule__XCastedExpression__Group_1__0_in_synpred139_InternalXtend25460);
         rule__XCastedExpression__Group_1__0();
 
         state._fsp--;
@@ -68805,7 +68805,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:12733:2: ( rule__XMemberFeatureCall__Alternatives_1 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:12733:2: rule__XMemberFeatureCall__Alternatives_1
         {
-        pushFollow(FOLLOW_rule__XMemberFeatureCall__Alternatives_1_in_synpred140_InternalXtend5885);
+        pushFollow(FOLLOW_rule__XMemberFeatureCall__Alternatives_1_in_synpred140_InternalXtend25885);
         rule__XMemberFeatureCall__Alternatives_1();
 
         state._fsp--;
@@ -68820,7 +68820,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:13071:2: ( rule__XMemberFeatureCall__Group_1_1_3__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:13071:2: rule__XMemberFeatureCall__Group_1_1_3__0
         {
-        pushFollow(FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0_in_synpred142_InternalXtend6558);
+        pushFollow(FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0_in_synpred142_InternalXtend26558);
         rule__XMemberFeatureCall__Group_1_1_3__0();
 
         state._fsp--;
@@ -68835,7 +68835,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:13099:2: ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:13099:2: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4
         {
-        pushFollow(FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4_in_synpred143_InternalXtend6616);
+        pushFollow(FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4_in_synpred143_InternalXtend26616);
         rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4();
 
         state._fsp--;
@@ -68850,7 +68850,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:13701:2: ( rule__XClosure__Group_2__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:13701:2: rule__XClosure__Group_2__0
         {
-        pushFollow(FOLLOW_rule__XClosure__Group_2__0_in_synpred147_InternalXtend7795);
+        pushFollow(FOLLOW_rule__XClosure__Group_2__0_in_synpred147_InternalXtend27795);
         rule__XClosure__Group_2__0();
 
         state._fsp--;
@@ -68865,7 +68865,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:14726:2: ( rule__XIfExpression__Group_6__0 )
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:14726:2: rule__XIfExpression__Group_6__0
         {
-        pushFollow(FOLLOW_rule__XIfExpression__Group_6__0_in_synpred154_InternalXtend9820);
+        pushFollow(FOLLOW_rule__XIfExpression__Group_6__0_in_synpred154_InternalXtend29820);
         rule__XIfExpression__Group_6__0();
 
         state._fsp--;
@@ -73651,20 +73651,20 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_4_1_0_in_synpred65_InternalXtend7520 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_5_0_in_synpred67_InternalXtend7623 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAnnotation__Group_3__0_in_synpred125_InternalXtend19486 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__0_in_synpred131_InternalXtend1588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XOrExpression__Group_1__0_in_synpred132_InternalXtend2011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAndExpression__Group_1__0_in_synpred133_InternalXtend2434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__0_in_synpred134_InternalXtend2857 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XRelationalExpression__Alternatives_1_in_synpred135_InternalXtend3280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__0_in_synpred136_InternalXtend4007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__0_in_synpred137_InternalXtend4430 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__0_in_synpred138_InternalXtend4853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCastedExpression__Group_1__0_in_synpred139_InternalXtend5460 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Alternatives_1_in_synpred140_InternalXtend5885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0_in_synpred142_InternalXtend6558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4_in_synpred143_InternalXtend6616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XClosure__Group_2__0_in_synpred147_InternalXtend7795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XIfExpression__Group_6__0_in_synpred154_InternalXtend9820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XAssignment__Group_1_1__0_in_synpred131_InternalXtend21588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XOrExpression__Group_1__0_in_synpred132_InternalXtend22011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XAndExpression__Group_1__0_in_synpred133_InternalXtend22434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XEqualityExpression__Group_1__0_in_synpred134_InternalXtend22857 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XRelationalExpression__Alternatives_1_in_synpred135_InternalXtend23280 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XOtherOperatorExpression__Group_1__0_in_synpred136_InternalXtend24007 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__0_in_synpred137_InternalXtend24430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__0_in_synpred138_InternalXtend24853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCastedExpression__Group_1__0_in_synpred139_InternalXtend25460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Alternatives_1_in_synpred140_InternalXtend25885 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_1_3__0_in_synpred142_InternalXtend26558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4_in_synpred143_InternalXtend26616 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XClosure__Group_2__0_in_synpred147_InternalXtend27795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XIfExpression__Group_6__0_in_synpred154_InternalXtend29820 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_4__0_in_synpred166_InternalXtend34011 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_5_in_synpred167_InternalXtend34069 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_7_in_synpred173_InternalXtend35494 = new BitSet(new long[]{0x0000000000000002L});
