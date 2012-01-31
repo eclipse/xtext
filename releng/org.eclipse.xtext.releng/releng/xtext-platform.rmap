@@ -23,6 +23,8 @@
   <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
+  <rm:locator pattern="org.eclipse.jdt.annotation" searchPathRef="jdt.annotation"/>
+  
   <rm:locator searchPathRef="platform"/>
   
   <rm:searchPath name="local.releng">
@@ -71,6 +73,13 @@
   <rm:searchPath name="gef">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:uri format="{0}/tools/gef/updates/releases">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="jdt.annotation">
+    <rm:provider componentTypes="osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:uri format="{0}/eclipse/updates/3.8milestones">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>

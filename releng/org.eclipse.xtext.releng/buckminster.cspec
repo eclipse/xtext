@@ -23,6 +23,8 @@
 		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
 		<cs:dependency name="org.junit" componentType="osgi.bundle"  versionDesignator="[3.8.0,4.0.0)" />
 
+		<cs:dependency name="org.eclipse.jdt.annotation" componentType="osgi.bundle"  versionDesignator="1.0.0" />
+
 		<!-- Friends of Xtext -->
 		<cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.emf.mwe.core" componentType="osgi.bundle" />
