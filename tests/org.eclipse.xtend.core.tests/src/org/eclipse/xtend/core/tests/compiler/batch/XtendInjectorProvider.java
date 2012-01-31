@@ -1,4 +1,4 @@
-package org.eclipse.xtend.standalone.tests;
+package org.eclipse.xtend.core.tests.compiler.batch;
 
 import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtext.junit4.GlobalRegistries;

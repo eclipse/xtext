@@ -1,4 +1,4 @@
-package org.eclipse.xtend.standalone.tests
+package org.eclipse.xtend.core.tests.compiler.batch
 
 import com.google.inject.Inject
 import java.io.File
@@ -18,12 +18,11 @@ import org.junit.After
 class TestBatchCompiler {
 
 	@Inject
-	org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler batchCompiler
+	XtendBatchCompiler batchCompiler
 
     static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
     static String OUTPUT_DIRECTORY = "./test-result"
-    static String XTEND_SRC_DIRECTORY = "./testdata"
-    static String XTEND_SRC_DIRECTORY_WITH_SPACES = "./test data"
+    static String XTEND_SRC_DIRECTORY = "./test data"
     static String TEMP_DIRECTORY = "./test-temp-dir"
     static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
@@ -53,7 +52,7 @@ class TestBatchCompiler {
     @Test
     def void bug368551() {
         batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
-    	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY_WITH_SPACES
+    	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
         batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
         batchCompiler.compile
         assertEquals(2, new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)

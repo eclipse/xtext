@@ -1,10 +1,10 @@
-package org.eclipse.xtend.standalone.tests;
+package org.eclipse.xtend.core.tests.compiler.batch;
 
 import com.google.inject.Inject;
 import java.io.File;
 import java.util.List;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.standalone.tests.XtendInjectorProvider;
+import org.eclipse.xtend.core.tests.compiler.batch.XtendInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Files;
@@ -28,9 +28,7 @@ public class TestBatchCompiler {
   
   private static String OUTPUT_DIRECTORY = "./test-result";
   
-  private static String XTEND_SRC_DIRECTORY = "./testdata";
-  
-  private static String XTEND_SRC_DIRECTORY_WITH_SPACES = "./test data";
+  private static String XTEND_SRC_DIRECTORY = "./test data";
   
   private static String TEMP_DIRECTORY = "./test-temp-dir";
   
@@ -86,7 +84,7 @@ public class TestBatchCompiler {
   @Test
   public void bug368551() {
       this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
-      this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY_WITH_SPACES);
+      this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
       this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
       this.batchCompiler.compile();
       String _operator_plus = StringExtensions.operator_plus(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES, "/test");
