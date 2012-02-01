@@ -219,7 +219,7 @@ public class StringConcatenation implements CharSequence {
 	}
 
 	/**
-	 * Add a newline to this sequence according to the configured {@link #lineDelimiter}.
+	 * Add a newline to this sequence according to the configured lineDelimiter.
 	 */
 	public void newLine() {
 		segments.add(lineDelimiter);
@@ -227,7 +227,7 @@ public class StringConcatenation implements CharSequence {
 	}
 
 	/**
-	 * Add a newline to this sequence according to the configured {@link #lineDelimiter} if the last line contains
+	 * Add a newline to this sequence according to the configured lineDelimiter if the last line contains
 	 * something besides whitespace.
 	 */
 	public void newLineIfNotEmpty() {
