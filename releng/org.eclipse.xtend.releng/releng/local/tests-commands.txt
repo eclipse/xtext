@@ -1,4 +1,4 @@
-importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtend.releng/releng/local/tests-Galileo-local.target
+importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtend.releng/releng/local/tests-${eclipse.target.platform}-local.target
 
 resolve "${checkout.location}/releng/org.eclipse.xtend.releng/releng/tests/xtend-test.mspec"
 
