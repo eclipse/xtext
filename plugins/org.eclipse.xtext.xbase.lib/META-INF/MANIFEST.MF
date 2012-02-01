@@ -5,7 +5,8 @@ Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.xbase.lib
 Bundle-Version: 2.3.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.xbase.lib,
+Export-Package: org.eclipse.xtend2.lib,
+ org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.xbase.lib.internal;x-internal:=true
 Require-Bundle: com.google.guava;visibility:=reexport
 Bundle-Vendor: %providerName
