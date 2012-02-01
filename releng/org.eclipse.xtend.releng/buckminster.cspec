@@ -12,9 +12,9 @@
 		<cs:dependency name="org.eclipse.pde.ui" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.core.runtime" componentType="osgi.bundle" versionDesignator="[3.5.0,4.0.0)" />
+		<cs:dependency name="org.eclipse.core.runtime" componentType="osgi.bundle" versionDesignator="[3.5.0,3.6.0)" />
 		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
-		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature" versionDesignator="[3.5.0,4.0.0)" />
+		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature" versionDesignator="[3.5.0,3.6.0)" />
 		
 		<!-- xtext -->
 		<cs:dependency name="org.eclipse.xtext.ui" componentType="eclipse.feature" />
