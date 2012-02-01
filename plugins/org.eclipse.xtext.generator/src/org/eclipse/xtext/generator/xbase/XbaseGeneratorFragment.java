@@ -202,7 +202,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
 			return new String[0];
-		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtend2.lib" };
+		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xbase.lib" };
 	}
 
 	@Override

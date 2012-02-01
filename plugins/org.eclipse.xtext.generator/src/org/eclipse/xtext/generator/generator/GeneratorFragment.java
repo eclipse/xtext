@@ -85,8 +85,7 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		if (isGenerateStub(grammar))
 			return new String[] {
-					"org.eclipse.xtext.xbase.lib",
-					"org.eclipse.xtend2.lib"
+					"org.eclipse.xtext.xbase.lib"
 			};
 		return Strings.EMPTY_ARRAY;
 	}
