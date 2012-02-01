@@ -73,12 +73,15 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	private void asyncUpdateAnnotationModel() {
-		Display display = getDisplay();
 		Runnable runnable = new Runnable() {
 			public void run() {
 				updateAnnotationModel();
 			}
 		};
+		Display display = getDisplay();
+		if (display == null) {
+			return;
+		}
 		display.asyncExec(runnable);
 	}
 
@@ -145,7 +148,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		}
 		XtendFile xtendFile = (XtendFile) eObject;
 		Map<Annotation, Position> annotationToPosition = Maps.newHashMap();
-		for (XtendFunction xtendFunction : filter(xtendFile.getXtendClass().getMembers(), XtendFunction.class)) {
+		for (XtendFunction xtendFunction : getXtendFunctions(xtendFile)) {
 			JvmOperation jvmOperation = xtendOverridesService.findOverriddenOperation(xtendFunction);
 			if (xtendFunction.isOverride() && jvmOperation != null) {
 				ICompositeNode compositeNode = NodeModelUtils.getNode(xtendFunction);
@@ -157,6 +160,13 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 			}
 		}
 		return annotationToPosition;
+	}
+
+	private Iterable<XtendFunction> getXtendFunctions(XtendFile xtendFile) {
+		if (xtendFile.getXtendClass() == null || xtendFile.getXtendClass().getMembers() == null) {
+			return Collections.emptyList();
+		}
+		return filter(xtendFile.getXtendClass().getMembers(), XtendFunction.class);
 	}
 
 	protected boolean isOverwriteIndicator(JvmOperation jvmOperation) {
