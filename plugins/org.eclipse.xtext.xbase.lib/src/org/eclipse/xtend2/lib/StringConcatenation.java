@@ -38,6 +38,7 @@ import java.util.List;
  * </p>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.3
  */
 public class StringConcatenation implements CharSequence {
 
