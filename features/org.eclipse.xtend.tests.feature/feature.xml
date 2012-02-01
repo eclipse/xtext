@@ -32,7 +32,6 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.xtext" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.junit" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend2.lib" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.ui" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="javax.inject"/>
       <import plugin="org.apache.log4j"/>
@@ -46,15 +45,12 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.xtext.ui" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.ui" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.common.types.ui" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend2.lib" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.core.tests" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.builder" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.search" version="3.5.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.core.manipulation" version="1.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="2.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend2.lib" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.junit4" version="2.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend.standalone" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.core" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.core.tests" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.util" version="2.3.0" match="greaterOrEqual"/>
@@ -82,13 +78,6 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.xtend.ide.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtend.standalone.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"

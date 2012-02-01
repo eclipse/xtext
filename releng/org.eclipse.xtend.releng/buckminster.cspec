@@ -21,7 +21,6 @@
 		<cs:dependency name="org.eclipse.xtext.ui.junit" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.xtext.junit" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.xtext.xbase.junit" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.xtend2.lib" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.xtext.junit4" componentType="osgi.bundle" />
 		
 		<!-- Maven -->
