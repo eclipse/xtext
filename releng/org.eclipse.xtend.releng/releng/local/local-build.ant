@@ -13,18 +13,19 @@
             Executes buckminster build on local machine
     </description>
 
-	<!-- Where to build -->
-	<property name="build.root" location="/Users/dhuebner/hudsonbuild/xtend-head/buildroot" />
+	<!-- Where to build. This folder will be cleaned up, so dont point to   -->
+	<property name="build.root" location="${user.home}/hudsonbuild/xtend-head/buildroot" />
 
 	<!-- Buckminster headless 3.7 to use. See http://www.eclipse.org/buckminster/downloads.html -->
-	<property name="buckminster.home" location="/Users/dhuebner/Entwicklung/buckminster" />
+	<property name="buckminster.home" location="${user.home}/Entwicklung/buckminster" />
 
 	<!-- Local Xtext git repository -->
-	<property name="checkout.location" value="/Users/dhuebner/git/org.eclipse.xtend/" />
+	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtend/" />
 	<property name="releng.project.location" value="${checkout.location}/releng/org.eclipse.xtend.releng" />
 
 	<!-- Against which platform to build (Galileo,Indigo)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Galileo" />
+	<property name="commands.file" value="${releng.project.location}/releng/local/tests-commands.txt" />
 
 	<!-- ================================= 
           target: Runs 
@@ -43,12 +44,12 @@
 			<arg value="-Dbuild.root=${build.root}" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-Dreleng.project.location=${releng.project.location}" />
-			<arg value="-DECLIPSE.TARGET.ALIAS=${ECLIPSE.TARGET.ALIAS}" />
+			<arg value="-Declipse.target.platform=${ECLIPSE.TARGET.ALIAS}" />
 			<arg line="-data ${build.root}/buckminster.workspace" />
 			<arg line="-configuration ${build.root}/configuration" />
 			<arg line="--displaystacktrace" />
 			<arg line="--loglevel INFO" />
-			<arg line="-S '${releng.project.location}/releng/local/commands.txt'" />
+			<arg line="-S '${commands.file}'" />
 			<arg line="-vmargs -Xmx1g" />
 		</exec>
 	</target>
@@ -59,6 +60,7 @@
 	<target name="cleanup">
 		<delete failonerror="false" includeemptydirs="true" verbose="true">
 			<fileset dir="${build.root}" defaultexcludes="false">
+				<exclude name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
 				<exclude name="**/target.platform/" />
 			</fileset>
 		</delete>
@@ -68,7 +70,13 @@
 	          Use this target if any TP dependencies are changed                    
 	         - - - - - - - - - - - - - - - - - -->
 	<target name="reset.target-platform">
-		<delete dir="${build.root}" includeemptydirs="true" verbose="true" includes="**/target.platform/" />
+		<delete  includeemptydirs="true" verbose="true">
+			<fileset dir="${build.root}" defaultexcludes="false">
+				<include name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
+				<include name="**/target.platform/" />
+			</fileset>
+		</delete>
+
 	</target>
 
 </project>

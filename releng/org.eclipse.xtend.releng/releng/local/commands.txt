@@ -7,7 +7,7 @@ import -Declipse.download="http://download.eclipse.org" "${releng.project.locati
 resolve "${releng.project.location}/releng/xtend.cquery"
 
 build
-junit --launch "org.eclipse.xtend.core.tests/org.eclipse.xtend.core.tests.launch" --flatXML --output "${build.root}/xtend.test.results/org.eclipse.xtend.core.tests.xml"
+#junit --launch "org.eclipse.xtend.core.tests/org.eclipse.xtend.core.tests.launch" --flatXML --output "${build.root}/xtend.test.results/org.eclipse.xtend.core.tests.xml"
 
 perform --properties "${releng.project.location}/releng/xtend-build.properties" "org.eclipse.xtend.build#build"
 perform --properties "${releng.project.location}/releng/xtend-build.properties" "org.eclipse.xtend.releng#setup.promoter"
