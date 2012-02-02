@@ -39,7 +39,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.Test;
 

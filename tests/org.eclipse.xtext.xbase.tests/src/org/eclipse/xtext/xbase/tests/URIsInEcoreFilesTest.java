@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Test;
@@ -91,21 +92,6 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 		doTestResource("org.eclipse.xtext.xbase/model/Xbase.genmodel", "xbase", "xtype", "xAnnotations");
 	}
 	
-	@Test public void testXtend() {
-		doTestResource("org.eclipse.xtend.core/model/Xtend.ecore", "xtend");
-	}
-	
-	@Test public void testXtendGenModel() {
-		doTestResource("org.eclipse.xtend.core/model/Xtend.genmodel", "xtend");
-	}
-	
-	@Test public void testRichStrings() {
-		doTestResource("org.eclipse.xtend.core/model/RichStrings.ecore", "richstring");
-	}
-	
-	@Test public void testRichStringsGenModel() {
-		doTestResource("org.eclipse.xtend.core/model/RichStrings.genmodel", "richstring");
-	}
 	
 	@Test public void testCommonTypes() {
 		doTestResource("org.eclipse.xtext.common.types/model/JavaVMTypes.ecore", "types");

@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.tests.typing;
 import java.util.Iterator;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.junit.Test;
