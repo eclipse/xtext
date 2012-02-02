@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Version numbers are set incremented during the build" id="927989779">
+            <message_arguments>
+                <message_argument value="2.3.0"/>
+                <message_argument value="org.eclipse.xtext.xbase"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/xbase/ui/hierarchy/AbstractTypeHierarchyHandler.java" type="org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler">
         <filter id="305365105">
             <message_arguments>
