@@ -1,3 +1,5 @@
+package org.eclipse.xtext.xbase.compiler;
+
 /*******************************************************************************
  * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -5,10 +7,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.compiler;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -36,8 +41,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 import com.google.inject.Inject;
 import com.google.inject.internal.MoreTypes;
-
-import static com.google.common.collect.Lists.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -95,7 +98,8 @@ public class OnTheFlyJavaCompiler {
 
 	}
 
-	public static class EclipseRuntimeDependentJavaCompiler extends OnTheFlyJavaCompiler {
+	public static class EclipseRuntimeDependentJavaCompiler extends
+			OnTheFlyJavaCompiler {
 		@Override
 		protected URL resolveBundleResourceURL(URL url) throws IOException {
 			return FileLocator.resolve(url);
@@ -113,7 +117,8 @@ public class OnTheFlyJavaCompiler {
 
 		@Override
 		public void cleanup() {
-			//DO nothing. the original implmentaion closes zips and sets the references to null
+			// DO nothing. the original implmentaion closes zips and sets the
+			// references to null
 		}
 
 		@Override
@@ -122,7 +127,8 @@ public class OnTheFlyJavaCompiler {
 		}
 
 		@Override
-		public NameEnvironmentAnswer findType(char[] typeName, char[][] packageName) {
+		public NameEnvironmentAnswer findType(char[] typeName,
+				char[][] packageName) {
 			return delegate.findType(typeName, packageName);
 		}
 
@@ -132,7 +138,8 @@ public class OnTheFlyJavaCompiler {
 		}
 
 		@Override
-		public NameEnvironmentAnswer findType(char[][] compoundName, boolean asBinaryOnly) {
+		public NameEnvironmentAnswer findType(char[][] compoundName,
+				boolean asBinaryOnly) {
 			return delegate.findType(compoundName, asBinaryOnly);
 		}
 
@@ -163,16 +170,19 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	/**
-	 * HACK - reuse the classpath, since it is super expensive to reopen and scan the zips.
+	 * HACK - reuse the classpath, since it is super expensive to reopen and
+	 * scan the zips.
 	 * 
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	static class PatchedMain extends Main {
 
 		@SuppressWarnings("rawtypes")
-		public PatchedMain(PrintWriter outWriter, PrintWriter errWriter, boolean systemExitWhenFinished,
-				Map customDefaultOptions, CompilationProgress compilationProgress) {
-			super(outWriter, errWriter, systemExitWhenFinished, customDefaultOptions, compilationProgress);
+		public PatchedMain(PrintWriter outWriter, PrintWriter errWriter,
+				boolean systemExitWhenFinished, Map customDefaultOptions,
+				CompilationProgress compilationProgress) {
+			super(outWriter, errWriter, systemExitWhenFinished,
+					customDefaultOptions, compilationProgress);
 		}
 
 		@Override
@@ -199,7 +209,8 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	public void addClassPathOfClass(Class<?> clazz) {
-		final String classNameAsPath = "/" + clazz.getCanonicalName().replace('.', '/');
+		final String classNameAsPath = "/"
+				+ clazz.getCanonicalName().replace('.', '/');
 		String resourceName = classNameAsPath + ".class";
 		URL url = clazz.getResource(resourceName);
 		if (url == null)
@@ -214,8 +225,8 @@ public class OnTheFlyJavaCompiler {
 		}
 		if (url.getProtocol().startsWith("jar")) {
 			try {
-				pathToFolderOrJar = new URL(url.getPath().substring(0, url.getPath().indexOf('!'))).toURI()
-						.getRawPath();
+				pathToFolderOrJar = new URL(url.getPath().substring(0,
+						url.getPath().indexOf('!'))).toURI().getRawPath();
 			} catch (Exception e) {
 				throw new WrappedException(e);
 			}
@@ -226,7 +237,8 @@ public class OnTheFlyJavaCompiler {
 			} catch (URISyntaxException e) {
 				throw new WrappedException(e);
 			}
-			pathToFolderOrJar = resolvedRawPath.substring(0, resolvedRawPath.indexOf(classNameAsPath));
+			pathToFolderOrJar = resolvedRawPath.substring(0,
+					resolvedRawPath.indexOf(classNameAsPath));
 		}
 		this.classpath.add(pathToFolderOrJar);
 	}
@@ -239,23 +251,24 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected boolean compile(String arguments) {
-		//		return BatchCompiler.compile(sb.toString(), new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
-		//				new OutputStreamWriter(errorStream)), null);
+		// return BatchCompiler.compile(sb.toString(), new PrintWriter(new
+		// OutputStreamWriter(System.out)), new PrintWriter(
+		// new OutputStreamWriter(errorStream)), null);
 		return getMain().compile(Main.tokenize(arguments));
 	}
 
 	public Class<?> compileToClass(String classname, String code) {
-		String tempDir = System.getProperty("java.io.tmpdir");
-		if (tempDir == null)
-			tempDir = "./";
-		tempDir += File.separator;
-		final String classNameAsPath = classname.replace('.', File.separatorChar);
-		final File srcFile = new File(tempDir + classNameAsPath + ".java");
+		File tempDir = createTempDir();
+		final String classNameAsPath = classname.replace('.',
+				File.separatorChar);
+		final File srcFile = new File(tempDir, classNameAsPath + ".java");
+
 		createFolderStructure(srcFile.getParentFile());
-		final File targetFile = new File(tempDir + classNameAsPath + ".class");
+		final File targetFile = new File(tempDir, classNameAsPath + ".class");
 		if (targetFile.exists())
 			targetFile.delete();
 		try {
+			srcFile.createNewFile();
 			Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
 			errorStream.setDelegate(new ByteArrayOutputStream());
 			StringBuilder sb = new StringBuilder(getComplianceLevelArg());
@@ -267,9 +280,11 @@ public class OnTheFlyJavaCompiler {
 			sb.append('\"');
 			boolean compile = compile(sb.toString());
 			if (!compile)
-				throw new IllegalArgumentException("Couldn't compile : " + errorStream.toString() + "\n" + code);
-			final URL url = new File(tempDir).toURI().toURL();
-			URLClassLoader loader = new URLClassLoader(new URL[] { url }, parentClassLoader);
+				throw new IllegalArgumentException("Couldn't compile : "
+						+ errorStream.toString() + "\n" + code);
+			final URL url = tempDir.toURI().toURL();
+			URLClassLoader loader = new URLClassLoader(new URL[] { url },
+					parentClassLoader);
 			Class<?> class1 = loader.loadClass(classname);
 			return class1;
 		} catch (RuntimeException e) {
@@ -277,8 +292,34 @@ public class OnTheFlyJavaCompiler {
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		} finally {
-			if (srcFile.exists())
-				srcFile.delete();
+			cleanUpTmpFolder(tempDir);
+		}
+	}
+
+	private File createTempDir() {
+		File rootTempDir = null;
+		String defTmpPath = System.getProperty("java.io.tmpdir");
+		if (defTmpPath != null) {
+			rootTempDir = new File(defTmpPath);
+		} else {
+			// use current directory, should be writable
+			rootTempDir = new File("./");
+		}
+		// VM unique temp dir
+		File tempDir = new File(rootTempDir, "otfjc"
+				+ OnTheFlyJavaCompiler.class.hashCode());
+		return tempDir;
+	}
+
+	private void cleanUpTmpFolder(File tempDir) {
+		try {
+			Files.cleanFolder(tempDir, new FileFilter() {
+				public boolean accept(File pathname) {
+					return !pathname.getName().endsWith(".class");
+				}
+			}, true, true);
+		} catch (FileNotFoundException e) {
+			// ignore
 		}
 	}
 
@@ -288,10 +329,13 @@ public class OnTheFlyJavaCompiler {
 		parent.mkdirs();
 	}
 
-	protected Pair<String, String> createFullCode(String statementCode, Type returnType, Pair<Type, String>... params) {
+	protected Pair<String, String> createFullCode(String statementCode,
+			Type returnType, Pair<Type, String>... params) {
 		String className = "_$GeneratedClass";
-		StringBuilder sb = new StringBuilder("public class ").append(className).append(" implements ")
-				.append("org.eclipse.xtext.xbase.lib.Functions.Function").append(params.length).append("<");
+		StringBuilder sb = new StringBuilder("public class ").append(className)
+				.append(" implements ")
+				.append("org.eclipse.xtext.xbase.lib.Functions.Function")
+				.append(params.length).append("<");
 		for (Pair<Type, String> type : params) {
 			sb.append(toString(type.getFirst())).append(",");
 		}
@@ -302,7 +346,8 @@ public class OnTheFlyJavaCompiler {
 
 		for (int i = 0; i < params.length; i++) {
 			Pair<Type, String> pair = params[i];
-			sb.append(toString(pair.getFirst())).append(" ").append(pair.getSecond());
+			sb.append(toString(pair.getFirst())).append(" ")
+					.append(pair.getSecond());
 			if (i + 1 < params.length)
 				sb.append(",");
 		}
@@ -313,20 +358,25 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <RT> Functions.Function0<RT> createFunction(String expression, Class<RT> returnType) {
+	public <RT> Functions.Function0<RT> createFunction(String expression,
+			Class<RT> returnType) {
 		return (Function0<RT>) internalCreateFunction(expression, returnType);
 	}
 
 	@SuppressWarnings("unchecked")
-	public <RT, T> Functions.Function1<T, RT> createFunction(String body, Class<RT> returnType, Class<T> paramType) {
-		return (Functions.Function1<T, RT>) internalCreateFunction(body, returnType, Tuples.pair((Type) paramType, "p"));
+	public <RT, T> Functions.Function1<T, RT> createFunction(String body,
+			Class<RT> returnType, Class<T> paramType) {
+		return (Functions.Function1<T, RT>) internalCreateFunction(body,
+				returnType, Tuples.pair((Type) paramType, "p"));
 	}
 
 	@SuppressWarnings("unchecked")
-	public <RT, T1, T2> Functions.Function2<T1, T2, RT> createFunction(String body, Class<RT> returnType,
-			Class<T1> paramType1, Class<T2> paramType2) {
-		return (Functions.Function2<T1, T2, RT>) internalCreateFunction(body, returnType,
-				Tuples.pair((Type) paramType2, "p1"), Tuples.pair((Type) paramType2, "p2"));
+	public <RT, T1, T2> Functions.Function2<T1, T2, RT> createFunction(
+			String body, Class<RT> returnType, Class<T1> paramType1,
+			Class<T2> paramType2) {
+		return (Functions.Function2<T1, T2, RT>) internalCreateFunction(body,
+				returnType, Tuples.pair((Type) paramType2, "p1"),
+				Tuples.pair((Type) paramType2, "p2"));
 	}
 
 	public String getClasspathArgs() {
@@ -345,13 +395,16 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected Main getMain() {
-		return new PatchedMain(new PrintWriter(new OutputStreamWriter(System.out)), new PrintWriter(
-				new OutputStreamWriter(errorStream)), false /* systemExit */, null /* options */, null);
+		return new PatchedMain(new PrintWriter(new OutputStreamWriter(
+				System.out)), new PrintWriter(new OutputStreamWriter(
+				errorStream)), false /* systemExit */, null /* options */, null);
 	}
 
-	protected Object internalCreateFunction(String code, Type returnType, Pair<Type, String>... params) {
+	protected Object internalCreateFunction(String code, Type returnType,
+			Pair<Type, String>... params) {
 		Pair<String, String> fullCode = createFullCode(code, returnType, params);
-		Class<?> class1 = compileToClass(fullCode.getFirst(), fullCode.getSecond());
+		Class<?> class1 = compileToClass(fullCode.getFirst(),
+				fullCode.getSecond());
 		try {
 			return class1.newInstance();
 		} catch (RuntimeException e) {
