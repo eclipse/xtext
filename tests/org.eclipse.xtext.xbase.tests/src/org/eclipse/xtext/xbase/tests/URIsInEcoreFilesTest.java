@@ -91,20 +91,20 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 		doTestResource("org.eclipse.xtext.xbase/model/Xbase.genmodel", "xbase", "xtype", "xAnnotations");
 	}
 	
-	@Test public void testXtend2() {
-		doTestResource("org.eclipse.xtext.xtend2/model/Xtend2.ecore", "xtend2");
+	@Test public void testXtend() {
+		doTestResource("org.eclipse.xtend.core/model/Xtend.ecore", "xtend");
 	}
 	
-	@Test public void testXtend2GenModel() {
-		doTestResource("org.eclipse.xtext.xtend2/model/Xtend2.genmodel", "xtend2");
+	@Test public void testXtendGenModel() {
+		doTestResource("org.eclipse.xtend.core/model/Xtend.genmodel", "xtend");
 	}
 	
 	@Test public void testRichStrings() {
-		doTestResource("org.eclipse.xtext.xtend2/model/RichStrings.ecore", "richstring");
+		doTestResource("org.eclipse.xtend.core/model/RichStrings.ecore", "richstring");
 	}
 	
 	@Test public void testRichStringsGenModel() {
-		doTestResource("org.eclipse.xtext.xtend2/model/RichStrings.genmodel", "richstring");
+		doTestResource("org.eclipse.xtend.core/model/RichStrings.genmodel", "richstring");
 	}
 	
 	@Test public void testCommonTypes() {
