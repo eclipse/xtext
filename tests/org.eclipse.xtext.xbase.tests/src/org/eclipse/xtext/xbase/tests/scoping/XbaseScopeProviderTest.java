@@ -19,10 +19,10 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;

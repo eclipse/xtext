@@ -7,7 +7,7 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase
 
 import static org.junit.Assert.*
 import org.junit.Test

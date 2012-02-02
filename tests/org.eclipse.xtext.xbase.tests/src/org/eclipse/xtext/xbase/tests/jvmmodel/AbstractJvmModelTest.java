@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

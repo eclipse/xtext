@@ -14,8 +14,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.After;
 import org.junit.Before;
 
