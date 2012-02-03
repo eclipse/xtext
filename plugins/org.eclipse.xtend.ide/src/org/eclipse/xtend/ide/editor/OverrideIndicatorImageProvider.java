@@ -24,8 +24,8 @@ public class OverrideIndicatorImageProvider implements IAnnotationImageProvider 
 	private XtendImages xtendImages;
 
 	@Inject
-	public void setXtendImages(XtendImages xtend2Images) {
-		this.xtendImages = xtend2Images;
+	public void setXtendImages(XtendImages xtendImages) {
+		this.xtendImages = xtendImages;
 	}
 
 	public Image getManagedImage(Annotation annotation) {

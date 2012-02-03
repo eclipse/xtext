@@ -77,7 +77,7 @@ public class XtendImages {
 	}
 
 	public Image forFile() {
-		return imageHelper.getImage("xtend2.gif");
+		return imageHelper.getImage("xtend.gif");
 	}
 
 	protected Image getJdtImage(ImageDescriptor descriptor) {
