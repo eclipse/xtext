@@ -29,9 +29,6 @@
 		<javadoc destdir="${output}" use="false" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" Verbose="no" windowtitle="${projectName} Documentation">
 			<fileset dir="${sourcesLocation}" defaultexcludes="true">
 				<include name="**/org.eclipse.*/**/*.java" />
-				<exclude name="**/org.eclipse.xtend2.standalone.maven/**" />
-				<exclude name="**/org.eclipse.xtend2.maven.plugin/**" />
-				<exclude name="**/org.eclipse.xtext.xtend2.bootstrapdoc/**" />
 				<exclude name="**/testdata/**" />
 				<exclude name="**/packrat/**" />
 				<exclude name="**/antlr/internal/**" />
