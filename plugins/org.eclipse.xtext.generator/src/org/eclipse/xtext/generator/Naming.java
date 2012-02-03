@@ -106,7 +106,8 @@ public class Naming {
 	}
 
 	public String basePackageUi(Grammar g) {
-		if ((grammarId==null || grammarId.equals(g.getName())) && !Strings.isEmpty(uiBasePackage))
+		// for backward compatibility reasons, the uiBasePackage is only used, if also the grammarId has been explicitly set.
+		if (!Strings.isEmpty(uiBasePackage) && (grammarId!=null && grammarId.equals(g.getName())))
 			return this.uiBasePackage;
 		return getNamespace(g) + ".ui";
 	}
