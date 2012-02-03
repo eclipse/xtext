@@ -5,12 +5,12 @@ Bundle-SymbolicName: org.eclipse.xtend.core.tests
 Bundle-Version: 2.3.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtend.core;bundle-version="2.0.0",
- org.eclipse.xtext.junit4;bundle-version="2.0.0",
- org.eclipse.xtext;bundle-version="2.3.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.3.0",
- org.eclipse.xtext.xbase.junit;bundle-version="2.0.0",
- org.eclipse.xtext.xbase.ui;bundle-version="2.0.0",
+Require-Bundle: org.eclipse.xtend.core,
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xbase.junit,
+ org.eclipse.xtext.xbase.ui,
  org.hamcrest.core;bundle-version="1.1.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.5.0"
 Import-Package: javax.inject;version="1.0.0",
