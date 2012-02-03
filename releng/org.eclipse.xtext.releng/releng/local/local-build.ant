@@ -47,7 +47,7 @@
 			<arg line="-data ${build.root}/buckminster.workspace" />
 			<arg line="-configuration ${build.root}/configuration" />
 			<arg line="--displaystacktrace" />
-			<arg line="--loglevel DEBUG" />
+			<arg line="--loglevel INFO" />
 			<arg line="-S '${releng.project.location}/releng/local/commands.txt'" />
 			<arg line="-vmargs -Xmx1g" />
 		</exec>
