@@ -23,9 +23,11 @@
 	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtend/" />
 	<property name="releng.project.location" value="${checkout.location}/releng/org.eclipse.xtend.releng" />
 
+	<!-- What to do -->
+	<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />
+
 	<!-- Against which platform to build (Galileo,Juno)-->
-	<property name="ECLIPSE.TARGET.ALIAS" value="Juno" />
-	<property name="commands.file" value="${releng.project.location}/releng/local/tests-commands.txt" />
+	<property name="ECLIPSE.TARGET.ALIAS" value="Galileo" />
 
 	<!-- ================================= 
           target: Runs 

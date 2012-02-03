@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.eclipse.xtend2</groupId>
+	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>simpletest</artifactId>
 	<version>IT-SNAPSHOT</version>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.eclipse.xtend2</groupId>
+				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
 				<version>IT-SNAPSHOT</version>
 				<executions>
