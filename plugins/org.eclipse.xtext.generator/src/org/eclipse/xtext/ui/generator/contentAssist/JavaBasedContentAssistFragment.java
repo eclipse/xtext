@@ -81,6 +81,9 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 		super.generate(grammar, ctx);
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public static String getClassName(EObject eObject) {
 		return eObject.eClass().getName();
 	}
