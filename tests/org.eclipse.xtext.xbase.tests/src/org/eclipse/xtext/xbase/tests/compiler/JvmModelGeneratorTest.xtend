@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDepen
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions
-import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 
 import static org.junit.Assert.*
 import org.junit.Test

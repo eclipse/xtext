@@ -15,7 +15,9 @@ Require-Bundle: org.eclipse.xtext.xbase,
  org.eclipse.emf.codegen.ecore;bundle-version="2.5.0",
  org.hamcrest.core;bundle-version="1.1.0"
 Bundle-Vendor: Eclipse Modeling
-Export-Package: org.eclipse.xtext.xbase.tests,
+Export-Package: foo;x-friends:="org.eclipse.xtext.xbase.tests",
+ foo.bar;x-friends:="org.eclipse.xtext.xbase.tests",
+ org.eclipse.xtext.xbase.tests,
  org.eclipse.xtext.xbase.tests.interpreter
 Import-Package: javax.inject;version="1.0.0",
  org.junit;version="4.5.0"
