@@ -46,7 +46,22 @@ public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && us
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
 	public void complete«fqnFeatureName»(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-«EXPAND assignmentTerminal("assignment.getTerminal()") FOR assignment.terminal-»
+	«LET containingParserRule(assignment).containedAssignments().select(a|a.feature==assignment.feature).terminal AS terminals-»
+	«IF terminals.eClassName().toSet().size>1-»
+	«LET {} AS processedTerminals-»
+		«FOREACH terminals AS terminal-»
+		«IF !processedTerminals.contains(terminal.eClassName())-»
+			«processedTerminals.add(terminal.eClassName())->""-»
+		if (assignment.getTerminal() instanceof «terminal.eClassName()») {
+«EXPAND assignmentTerminal("\t\t\t","assignment.getTerminal()") FOR terminal-»
+		}
+		«ENDIF-»
+		«ENDFOREACH-»
+	«ENDLET-»
+	«ELSE-»
+«EXPAND assignmentTerminal("\t\t","assignment.getTerminal()") FOR assignment.terminal-»
+	«ENDIF-»
+	«ENDLET-»
 	}
 				«ENDIF-»
 			«ENDLET-»
@@ -83,21 +98,21 @@ public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvi
 «ENDDEFINE»
 
 
-«DEFINE assignmentTerminal(String accessor) FOR AbstractElement-»
-		// subclasses may override
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR AbstractElement-»
+«indentation»// subclasses may override
 «ENDDEFINE»
 
-«DEFINE assignmentTerminal(String accessor) FOR CrossReference-»
-		lookupCrossReference(((CrossReference)«accessor»), context, acceptor);
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR CrossReference-»
+«indentation»lookupCrossReference(((CrossReference)«accessor»), context, acceptor);
 «ENDDEFINE»
 
-«DEFINE assignmentTerminal(String accessor) FOR RuleCall-»
-		completeRuleCall(((RuleCall)«accessor»), context, acceptor);
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR RuleCall-»
+«indentation»completeRuleCall(((RuleCall)«accessor»), context, acceptor);
 «ENDDEFINE»
 
-«DEFINE assignmentTerminal(String accessor) FOR Alternatives-»
+«DEFINE assignmentTerminal(String indentation,String accessor) FOR Alternatives-»
 «FOREACH elements AS group ITERATOR iter-»
-«EXPAND assignmentTerminal("((Alternatives)" + accessor + ").getElements().get(" + iter.counter0 + ")") FOR group-» 
+«EXPAND assignmentTerminal(indentation,"((Alternatives)" + accessor + ").getElements().get(" + iter.counter0 + ")") FOR group-» 
 «ENDFOREACH-»
 «ENDDEFINE»
 

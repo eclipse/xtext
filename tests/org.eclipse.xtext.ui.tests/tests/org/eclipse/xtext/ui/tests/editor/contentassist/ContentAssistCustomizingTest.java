@@ -201,13 +201,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 	}
 	
 	@Test public void testEmptyModel_01() throws Exception {
-		newBuilder().assertCount(0);
+		newBuilder().assertCount(1);
 		assertEquals(1, complete_Model);
 		assertEquals(1, complete_Type);
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
@@ -218,17 +218,17 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 		
-		assertTrue(keywords.isEmpty());
+		assertEquals(keywords.toString(), 1, keywords.size());
 	}
 	
 	@Test public void testEmptyModel_02() throws Exception {
-		newBuilder().append("/* comment */").assertCount(0);
+		newBuilder().append("/* comment */").assertCount(1);
 		assertEquals(1, complete_Model);
 		assertEquals(1, complete_Type);
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
@@ -239,7 +239,7 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 		
-		assertTrue(keywords.isEmpty());
+		assertEquals(keywords.toString(), 1, keywords.size());
 	}
 	
 	@Test public void testFirstEntityName_01() throws Exception {
@@ -249,13 +249,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 2, keywords.size());
+		assertEquals(keywords.toString(), 3, keywords.size());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		
@@ -272,13 +272,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 2, keywords.size());
+		assertEquals(keywords.toString(), 3, keywords.size());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		
@@ -353,21 +353,22 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 	}
 	
 	@Test public void testSecondEntityName_01() throws Exception {
-		newBuilder().append("name;").assertText(";");
+		newBuilder().append("name;").assertText(";","FQN");
 		assertEquals(1, complete_Type);
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_Model);
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 2, keywords.size());
+		assertEquals(keywords.toString(), 3, keywords.size());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
+		assertTrue(keywords.contains("FQN"));
 		
 		assertEquals(parserRules.toString(), 2, parserRules.size());
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
@@ -375,19 +376,20 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 	}
 	
 	@Test public void testSecondEntityName_02() throws Exception {
-		newBuilder().append("name; /* comment */").assertCount(0);
+		newBuilder().append("name; /* comment */").assertCount(1);
 		assertEquals(1, complete_Type);
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_Model);
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);	
 		
-		assertTrue(keywords.toString(), keywords.isEmpty());
+		assertEquals(1, keywords.size());
+		assertTrue(keywords.contains("FQN"));
 		
 		assertEquals(parserRules.toString(), 2, parserRules.size());
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
@@ -401,13 +403,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(1, complete_FQN);
 		
 		assertEquals(1, completeModel_Types);
-		assertEquals(1, completeType_Name);
+		assertEquals(2, completeType_Name);
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(0, keywords.size());
+		assertEquals(1, keywords.size());
 		
 		assertEquals(parserRules.toString(), 3, parserRules.size());
 		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));

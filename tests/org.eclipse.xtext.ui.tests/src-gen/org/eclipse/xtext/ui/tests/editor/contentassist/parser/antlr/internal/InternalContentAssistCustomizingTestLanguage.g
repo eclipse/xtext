@@ -116,10 +116,10 @@ ruleType returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0_0()); 
 	    }
 		lv_name_0_0=ruleFQN		{
 	        if ($current==null) {
@@ -134,31 +134,47 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_1='extends' 
+)
+    |(
+(
+		lv_name_1_0=	'FQN' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getTypeAccess().getExtendsKeyword_1_0());
+        newLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameFQNKeyword_0_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getTypeRule());
+	        }
+       		setWithLastConsumed($current, "name", lv_name_1_0, "FQN");
+	    }
+
+)
+))(	otherlv_2='extends' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_1_0());
     }
 (
 (
 		{ 
 	        newCompositeNode(grammarAccess.getTypeAccess().getSuperTypeTypeRefParserRuleCall_1_1_0()); 
 	    }
-		lv_superType_2_0=ruleTypeRef		{
+		lv_superType_3_0=ruleTypeRef		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
        		set(
        			$current, 
        			"superType",
-        		lv_superType_2_0, 
+        		lv_superType_3_0, 
         		"TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?	otherlv_3=';' 
+))?	otherlv_4=';' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getSemicolonKeyword_2());
+    	newLeafNode(otherlv_4, grammarAccess.getTypeAccess().getSemicolonKeyword_2());
     }
 )
 ;

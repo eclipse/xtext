@@ -36,8 +36,11 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameFQNParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final RuleCall cNameFQNParserRuleCall_0_0_0 = (RuleCall)cNameAssignment_0_0.eContents().get(0);
+		private final Assignment cNameAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final Keyword cNameFQNKeyword_0_1_0 = (Keyword)cNameAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cExtendsKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -45,17 +48,26 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Type:
-		//	name=FQN ("extends" superType=TypeRef)? ";";
+		//	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//name=FQN ("extends" superType=TypeRef)? ";"
+		//(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";"
 		public Group getGroup() { return cGroup; }
 
+		//name=FQN | name="FQN"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//name=FQN
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		public Assignment getNameAssignment_0_0() { return cNameAssignment_0_0; }
 
 		//FQN
-		public RuleCall getNameFQNParserRuleCall_0_0() { return cNameFQNParserRuleCall_0_0; }
+		public RuleCall getNameFQNParserRuleCall_0_0_0() { return cNameFQNParserRuleCall_0_0_0; }
+
+		//name="FQN"
+		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
+
+		//"FQN"
+		public Keyword getNameFQNKeyword_0_1_0() { return cNameFQNKeyword_0_1_0; }
 
 		//("extends" superType=TypeRef)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -159,7 +171,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//Type:
-	//	name=FQN ("extends" superType=TypeRef)? ";";
+	//	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}

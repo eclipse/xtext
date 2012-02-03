@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -78,5 +79,9 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
+	}
+	
+	public static String getClassName(EObject eObject) {
+		return eObject.eClass().getName();
 	}
 }

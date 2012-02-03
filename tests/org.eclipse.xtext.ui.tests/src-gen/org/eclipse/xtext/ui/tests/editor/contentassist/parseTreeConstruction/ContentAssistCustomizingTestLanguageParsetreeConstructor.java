@@ -99,11 +99,11 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- * 	name=FQN ("extends" superType=TypeRef)? ";";
+ * 	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
  *
  **/
 
-// name=FQN ("extends" superType=TypeRef)? ";"
+// (name=FQN | name="FQN") ("extends" superType=TypeRef)? ";"
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -132,16 +132,39 @@ protected class Type_Group extends GroupToken {
 
 }
 
-// name=FQN
-protected class Type_NameAssignment_0 extends AssignmentToken  {
+// name=FQN | name="FQN"
+protected class Type_Alternatives_0 extends AlternativesToken {
+
+	public Type_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public Type_NameAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTypeAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Type_NameAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Type_NameAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// name=FQN
+protected class Type_NameAssignment_0_0 extends AssignmentToken  {
+	
+	public Type_NameAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTypeAccess().getNameAssignment_0();
+		return grammarAccess.getTypeAccess().getNameAssignment_0_0();
 	}
 
     @Override
@@ -155,15 +178,49 @@ protected class Type_NameAssignment_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0();
+			element = grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+// name="FQN"
+protected class Type_NameAssignment_0_1 extends AssignmentToken  {
+	
+	public Type_NameAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getNameAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTypeAccess().getNameFQNKeyword_0_1_0(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getTypeAccess().getNameFQNKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 // ("extends" superType=TypeRef)?
 protected class Type_Group_1 extends GroupToken {
@@ -202,7 +259,7 @@ protected class Type_ExtendsKeyword_1_0 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Type_NameAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Type_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -272,7 +329,7 @@ protected class Type_SemicolonKeyword_2 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Type_Group_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Type_NameAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new Type_Alternatives_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
