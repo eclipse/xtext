@@ -41,6 +41,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -86,6 +87,7 @@ public class SmokeTest extends AbstractSmokeTest {
 		}
 	}
 
+	@Ignore("See https://bugs.eclipse.org/bugs/show_bug.cgi?id=370426")
 	@Test public void testResourceUpdateSkipCharacterInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource(string.substring(1));
