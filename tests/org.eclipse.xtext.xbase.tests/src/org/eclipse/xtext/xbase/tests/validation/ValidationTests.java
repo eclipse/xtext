@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Test;
 
 import com.google.inject.Inject;

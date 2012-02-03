@@ -9,8 +9,8 @@ package org.eclipse.xtext.xbase.tests.serializer;
 
 import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Before;
 
 import com.google.inject.Guice;

@@ -14,7 +14,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Test;
 
 /**
