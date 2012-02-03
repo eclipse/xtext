@@ -195,13 +195,13 @@
 			<fileset dir="${build.drop.directory}" />
 		</checksum>
 
-		<!-- copy testresults -->
+		<!-- copy testresults 
 		<mkdir dir="${build.drop.directory}/testresults" />
 		<copy failonerror="false" todir="${build.drop.directory}/testresults">
 			<fileset dir="${testresults.directory}">
 				<filename name="**/*.xml" />
 			</fileset>
-		</copy>
+		</copy>-->
 
 		<!-- if the build id starts with S or R build.stable property will be set -->
 		<condition property="build.stable" value="true">
