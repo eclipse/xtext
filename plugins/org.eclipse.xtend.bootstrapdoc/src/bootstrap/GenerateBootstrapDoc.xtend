@@ -50,7 +50,7 @@ class GenerateBootstrapDoc {
 		val rs = provider.get
 		// TODO: use classpath rather than relative path
 		val uris = new PathTraverser().resolvePathes(
-			Collections::singletonList("../org.eclipse.xtext.xtend2.doc/xdoc"), 
+			Collections::singletonList("../org.eclipse.xtend.doc.xdoc/xdoc"), 
 			[fileExtension == "xdoc"]
 		).values
 		for(uri: uris) {
