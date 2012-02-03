@@ -21,35 +21,41 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.junit.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
+public class URIsInEcoreFilesXtendTest extends Assert {
 
 	private ResourceSet resourceSet;
 
-	@Override
+	@Before
 	public void setUp() throws Exception {
-		super.setUp();
-		resourceSet = get(XtextResourceSet.class);
+		resourceSet = new XtextResourceSet();
 		resourceSet.getLoadOptions().put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware() {
-			
+
 			@Override
 			public URI resolve(URI uri) {
 				assertPortableURI(uri);
 				return super.resolve(uri);
 			}
-			
+
+			private void assertPortableURI(URI uri) {
+				if (uri.isRelative()) {
+					String path = uri.path();
+					assertFalse(uri.toString() + " is not portable", path.startsWith(".."));
+				}
+			}
 		});
 	}
-	
+
 	protected void doTestResource(String platformPath, String... packageNames) {
 		Resource resource = resourceSet.getResource(URI.createPlatformPluginURI(platformPath, false), true);
 		assertNotNull(resource);
@@ -68,37 +74,32 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 			});
 			List<String> packageNamesList = Arrays.asList(packageNames);
 			Collections.sort(packageNamesList);
-			for(int i = 0; i < packageNamesList.size(); i++) {
+			for (int i = 0; i < packageNamesList.size(); i++) {
 				assertEquals(packageNamesList.get(i), packages.get(i).getEcorePackage().getName());
 			}
 		} else {
 			fail("Unexpected root element type: " + obj.eClass().getName());
 		}
 	}
-	
-	
-	@Test public void testXtend() {
+
+	@Test
+	public void testXtend() {
 		doTestResource("org.eclipse.xtend.core/model/Xtend.ecore", "xtend");
 	}
-	
-	@Test public void testXtendGenModel() {
+
+	@Test
+	public void testXtendGenModel() {
 		doTestResource("org.eclipse.xtend.core/model/Xtend.genmodel", "xtend");
 	}
-	
-	@Test public void testRichStrings() {
+
+	@Test
+	public void testRichStrings() {
 		doTestResource("org.eclipse.xtend.core/model/RichStrings.ecore", "richstring");
 	}
-	
-	@Test public void testRichStringsGenModel() {
+
+	@Test
+	public void testRichStringsGenModel() {
 		doTestResource("org.eclipse.xtend.core/model/RichStrings.genmodel", "richstring");
 	}
-	
-	
-	protected void assertPortableURI(URI uri) {
-		if (uri.isRelative()) {
-			String path = uri.path();
-			assertFalse(uri.toString() + " is not portable", path.startsWith(".."));
-		}
-	}
-	
+
 }
