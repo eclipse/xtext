@@ -5,6 +5,8 @@
 	padding: 1em;
 	background-color: #F0F0F0;
 	color: #000000 !important;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 12px;
 }
 
 .inlinecode{
