@@ -50,7 +50,7 @@ ol[
 		First of all, you'll have to filter the contents of the resource down to the defined entities. Therefore
 		we need to iterate a resource with all it's deeply nested elements.
 		
-		Xtend ships with a utility that simplifies this greatly. The class codeRef[org.eclipse.xtext.xtend2.lib.ResourceExtensions]
+		Xtend ships with a utility that simplifies this greatly. The class ResourceExtensions  %%FIXME codeRef[org.eclipse.xtext.xtend2.lib.ResourceExtensions]
 		provides the useful function code[Java][allContentsIterable()] which we want to import as a static
 		extension.
 		
