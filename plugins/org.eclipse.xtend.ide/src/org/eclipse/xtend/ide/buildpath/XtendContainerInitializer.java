@@ -134,15 +134,14 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
 		/**
 		 * Builds the Javadoc online URL.<br>
-		 * For example javadoc for version 2.1.1 looks like this:<br>
-		 * http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.1.1/
+		 * For example javadoc for version 2.3.0 looks like this:<br>
+		 * http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/
 		 */
 		private String calculateJavadocURL() {
 			Version xtendVersion = XtendActivator.getInstance().getBundle().getVersion();
 			StringBuilder builder = new StringBuilder("http://download.eclipse.org/modeling/tmf/xtext/javadoc/");
 			builder.append(xtendVersion.getMajor()).append(".");
-			builder.append(xtendVersion.getMinor()).append(".");
-			builder.append(xtendVersion.getMicro()).append("/");
+			builder.append(xtendVersion.getMinor()).append("/");
 			return builder.toString();
 		}
 
