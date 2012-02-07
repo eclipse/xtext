@@ -13,6 +13,8 @@ import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.compiler.TracingAppendable
+import org.eclipse.xtext.resource.ILocationInFileProvider
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -28,6 +30,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension JvmTypesBuilder
 	@Inject IEarlyExitComputer computer
 	@Inject XbaseCompiler compiler
+	@Inject ILocationInFileProvider locationProvider
 
    	def dispatch void infer(Model m, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
    		val e  = m.block
@@ -78,8 +81,9 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 	
 	def compile(XBlockExpression obj, ImportManager mnr) {
 		val appendable = new StringBuilderBasedAppendable(mnr, "\t", "\n")
+		val tracing = new TracingAppendable(appendable, locationProvider)
 		appendable.increaseIndentation
-		compiler.compile(obj, appendable, obj.newTypeRef(Void::TYPE))
+		compiler.compile(obj, tracing, obj.newTypeRef(Void::TYPE))
 		return appendable.toString
 	}
 	

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.generator.trace;
 
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +37,7 @@ public interface ITraceRegion {
 
 	URI getToPath();
 
-	List<TraceRegion> getNestedRegions();
+	List<ITraceRegion> getNestedRegions();
 
 	ITraceRegion getParent();
 

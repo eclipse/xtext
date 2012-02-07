@@ -15,11 +15,13 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer.ExitPoint;
@@ -52,6 +54,9 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   private XbaseCompiler compiler;
+  
+  @Inject
+  private ILocationInFileProvider locationProvider;
   
   protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
       XBlockExpression _block = m.getBlock();
@@ -175,9 +180,11 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   public String compile(final XBlockExpression obj, final ImportManager mnr) {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t", "\n");
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
+      TracingAppendable _tracingAppendable = new TracingAppendable(appendable, this.locationProvider);
+      final TracingAppendable tracing = _tracingAppendable;
       appendable.increaseIndentation();
       JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
-      this.compiler.compile(obj, appendable, _newTypeRef);
+      this.compiler.compile(obj, tracing, _newTypeRef);
       String _string = appendable.toString();
       return _string;
   }

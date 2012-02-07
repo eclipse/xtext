@@ -36,11 +36,14 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.compiler.ITracingAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -71,6 +74,9 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private TypeReferenceSerializer typeRefSerializer;
+  
+  @Inject
+  private ILocationInFileProvider locationProvider;
   
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
@@ -607,8 +613,8 @@ public class JvmModelGenerator implements IGenerator {
         boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
         if (_operator_notEquals_1) {
           {
-            StringBuilderBasedAppendable _createAppendable = this.createAppendable(it, importManager);
-            final StringBuilderBasedAppendable appendable = _createAppendable;
+            ITracingAppendable _createAppendable = this.createAppendable(it, importManager);
+            final ITracingAppendable appendable = _createAppendable;
             JvmTypeReference _type = it.getType();
             this.compiler.compileAsJavaExpression(expression, appendable, _type);
             String _string = appendable.toString();
@@ -719,8 +725,8 @@ public class JvmModelGenerator implements IGenerator {
         boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
         if (_operator_notEquals_1) {
           {
-            StringBuilderBasedAppendable _createAppendable = this.createAppendable(op, importManager);
-            final StringBuilderBasedAppendable appendable = _createAppendable;
+            ITracingAppendable _createAppendable = this.createAppendable(op, importManager);
+            final ITracingAppendable appendable = _createAppendable;
             EList<JvmFormalParameter> _parameters = op.getParameters();
             for (final JvmFormalParameter p : _parameters) {
               String _simpleName = p.getSimpleName();
@@ -1004,8 +1010,8 @@ public class JvmModelGenerator implements IGenerator {
   protected CharSequence _toJavaLiteral(final JvmCustomAnnotationValue it, final ImportManager importManager) {
     String _xblockexpression = null;
     {
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(it, importManager);
-      final StringBuilderBasedAppendable appendable = _createAppendable;
+      ITracingAppendable _createAppendable = this.createAppendable(it, importManager);
+      final ITracingAppendable appendable = _createAppendable;
       EList<Object> _values = it.getValues();
       int _size = _values.size();
       final int __valOfSwitchOver = _size;
@@ -1086,8 +1092,8 @@ public class JvmModelGenerator implements IGenerator {
   public String serialize(final JvmTypeReference it, final ImportManager importManager) {
     String _xblockexpression = null;
     {
-      StringBuilderBasedAppendable _createAppendable = this.createAppendable(it, importManager);
-      final StringBuilderBasedAppendable appendable = _createAppendable;
+      ITracingAppendable _createAppendable = this.createAppendable(it, importManager);
+      final ITracingAppendable appendable = _createAppendable;
       EObject _eContainer = it.eContainer();
       this.typeRefSerializer.serialize(it, _eContainer, appendable);
       String _string = appendable.toString();
@@ -1096,8 +1102,8 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  public StringBuilderBasedAppendable createAppendable(final EObject context, final ImportManager importManager) {
-    StringBuilderBasedAppendable _xblockexpression = null;
+  public ITracingAppendable createAppendable(final EObject context, final ImportManager importManager) {
+    TracingAppendable _xblockexpression = null;
     {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
@@ -1118,7 +1124,8 @@ public class JvmModelGenerator implements IGenerator {
           }
         }
       }
-      _xblockexpression = (appendable);
+      TracingAppendable _tracingAppendable = new TracingAppendable(appendable, this.locationProvider);
+      _xblockexpression = (_tracingAppendable);
     }
     return _xblockexpression;
   }

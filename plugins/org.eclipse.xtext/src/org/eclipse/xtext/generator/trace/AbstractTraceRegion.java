@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.generator.trace;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -22,43 +22,7 @@ import com.google.common.collect.Iterators;
  */
 public abstract class AbstractTraceRegion implements ITraceRegion {
 
-	private final int fromOffset;
-	private final int fromLength;
-	private final int toOffset;
-	private final int toLength;
-
-	public AbstractTraceRegion(int fromOffset, int fromLength, int toOffset, int toLength) {
-		if (fromOffset < 0)
-			throw new IllegalArgumentException("fromOffset " + fromOffset + " is < 0");
-		if (fromLength < 0)
-			throw new IllegalArgumentException("fromLength " + fromLength + " is < 0");
-		if (toOffset < 0)
-			throw new IllegalArgumentException("toOffset " + toOffset + " is < 0");
-		if (toLength < 0)
-			throw new IllegalArgumentException("toLength " + toLength + " is < 0");
-		this.fromOffset = fromOffset;
-		this.fromLength = fromLength;
-		this.toOffset = toOffset;
-		this.toLength = toLength;
-	}
-
-	public int getFromLength() {
-		return fromLength;
-	}
-
-	public int getFromOffset() {
-		return fromOffset;
-	}
-
-	public int getToLength() {
-		return toLength;
-	}
-
-	public int getToOffset() {
-		return toOffset;
-	}
-	
-	public List<TraceRegion> getNestedRegions() {
+	public List<ITraceRegion> getNestedRegions() {
 		return Collections.emptyList();
 	}
 	
@@ -98,13 +62,13 @@ public abstract class AbstractTraceRegion implements ITraceRegion {
 		if (!(obj instanceof ITraceRegion))
 			return false;
 		ITraceRegion other = (ITraceRegion) obj;
-		if (fromLength != other.getFromLength())
+		if (getFromLength() != other.getFromLength())
 			return false;
-		if (fromOffset != other.getFromOffset())
+		if (getFromOffset() != other.getFromOffset())
 			return false;
-		if (toOffset != other.getToOffset())
+		if (getToOffset() != other.getToOffset())
 			return false;
-		if (toLength != other.getToLength())
+		if (getToLength() != other.getToLength())
 			return false;
 		if (other.getParent() == null) {
 			if (getParent() != null)
@@ -117,8 +81,8 @@ public abstract class AbstractTraceRegion implements ITraceRegion {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [fromOffset=" + fromOffset + ", fromLength=" + fromLength + ", toOffset="
-				+ toOffset + ", toLength=" + toLength + ", parent=" + getParent() + "]";
+		return getClass().getSimpleName() + " [fromOffset=" + getFromOffset() + ", fromLength=" + getFromLength() + ", toOffset="
+				+ getToOffset() + ", toLength=" + getToLength() + ", parent=" + getParent() + "]";
 	}
 	
 	

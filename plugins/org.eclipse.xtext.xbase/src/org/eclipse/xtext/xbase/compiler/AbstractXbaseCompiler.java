@@ -95,17 +95,14 @@ public abstract class AbstractXbaseCompiler {
 		return primitives;
 	}
 
-	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_toJavaExpression", 2, 2, this);
-
 	private PolymorphicDispatcher<Void> toJavaStatementDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaStatement", 3, 3, this);
 
-	public IAppendable compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedReturnType) {
+	public ITracingAppendable compile(XExpression obj, ITracingAppendable appendable, JvmTypeReference expectedReturnType) {
 		return compile(obj, appendable, expectedReturnType, null);
 	}
 	
-	public IAppendable compileAsJavaExpression(XExpression obj, IAppendable appendable, JvmTypeReference expectedType) {
+	public ITracingAppendable compileAsJavaExpression(XExpression obj, ITracingAppendable appendable, JvmTypeReference expectedType) {
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
@@ -161,7 +158,7 @@ public abstract class AbstractXbaseCompiler {
 		return appendable;
 	}
 
-	protected void generateCheckedExceptionHandling(XExpression obj, IAppendable appendable) {
+	protected void generateCheckedExceptionHandling(XExpression obj, ITracingAppendable appendable) {
 		String name = appendable.declareSyntheticVariable(new Object(), "_e");
 		appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
 		final JvmType findDeclaredType = typeReferences.findDeclaredType(Exceptions.class, obj);
@@ -177,12 +174,12 @@ public abstract class AbstractXbaseCompiler {
 		appendable.decreaseIndentation().newLine().append("}");
 	}
 	
-	protected boolean canCompileToJavaExpression(XExpression expression, IAppendable appendable) {
+	protected boolean canCompileToJavaExpression(XExpression expression, ITracingAppendable appendable) {
 		// TODO improve this decision, e.g. static methods with expression-args are ok
 		return !isVariableDeclarationRequired(expression, appendable);
 	}
 	
-	public IAppendable compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
+	public ITracingAppendable compile(XExpression obj, ITracingAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
 		if (declaredExceptions == null)
 			declaredExceptions = newHashSet();
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
@@ -217,7 +214,7 @@ public abstract class AbstractXbaseCompiler {
 	/**
 	 * this one trims the outer block
 	 */
-	public IAppendable compile(XBlockExpression expr, IAppendable b, JvmTypeReference expectedReturnType) {
+	public ITracingAppendable compile(XBlockExpression expr, ITracingAppendable b, JvmTypeReference expectedReturnType) {
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(expr);
 		final boolean earlyExit = exitComputer.isEarlyExit(expr);
@@ -239,7 +236,7 @@ public abstract class AbstractXbaseCompiler {
 		return b;
 	}
 	
-	protected abstract void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
+	protected abstract void internalToConvertedExpression(final XExpression obj, final ITracingAppendable appendable,
 			JvmTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
@@ -247,48 +244,52 @@ public abstract class AbstractXbaseCompiler {
 		return typeReferences.is(type, Void.TYPE);
 	}
 
-	protected void internalToJavaStatement(XExpression obj, IAppendable builder, boolean isReferenced) {
+	protected void internalToJavaStatement(XExpression obj, ITracingAppendable builder, boolean isReferenced) {
 		toJavaStatementDispatcher.invoke(obj, builder, isReferenced);
 	}
 	
-	public void toJavaExpression(final XExpression obj, final IAppendable appendable) {
+	public void toJavaExpression(final XExpression obj, final ITracingAppendable appendable) {
 		internalToJavaExpression(obj, appendable);
 	}
 	
-	public void toJavaStatement(final XExpression obj, final IAppendable appendable, boolean isReferenced) {
+	public void toJavaStatement(final XExpression obj, final ITracingAppendable appendable, boolean isReferenced) {
 		internalToJavaStatement(obj, appendable, isReferenced);
 	}
 
-	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
-		toJavaExprDispatcher.invoke(obj, appendable);
+	protected void internalToJavaExpression(final XExpression obj, final ITracingAppendable appendable) {
+		if (obj == null) {
+			_toJavaExpression((Void) null, appendable);
+		} else {
+			_toJavaExpression(obj, appendable);
+		}
 	}
 
-	public void _toJavaStatement(XExpression func, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XExpression func, ITracingAppendable b, boolean isReferenced) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
-	public void _toJavaExpression(XExpression func, IAppendable b) {
+	public void _toJavaExpression(XExpression func, ITracingAppendable b) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
-	public void _toJavaStatement(Void func, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(Void func, ITracingAppendable b, boolean isReferenced) {
 		throw new NullPointerException();
 	}
 
-	public void _toJavaExpression(Void func, IAppendable b) {
+	public void _toJavaExpression(Void func, ITracingAppendable b) {
 		throw new NullPointerException();
 	}
 
-	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable) {
+	protected void serialize(final JvmTypeReference type, EObject context, ITracingAppendable appendable) {
 		serialize(type, context, appendable, false, true);
 	}
-	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
+	protected void serialize(final JvmTypeReference type, EObject context, ITracingAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
 		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, false, true);
 	}
 	
-	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
+	protected void serialize(final JvmTypeReference type, EObject context, ITracingAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
 		referenceSerializer.serialize(type, context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 	}
 	
@@ -304,7 +305,7 @@ public abstract class AbstractXbaseCompiler {
 		return referenceSerializer.resolveMultiType(typeRef);
 	}
 	
-	protected String getVarName(Object ex, IAppendable appendable) {
+	protected String getVarName(Object ex, ITracingAppendable appendable) {
 		String name = appendable.getName(ex);
 		return name;
 	}
@@ -363,7 +364,7 @@ public abstract class AbstractXbaseCompiler {
 		return javaUtils.isJavaKeyword(name) ? "_"+name : name;
 	}
 	
-	protected void declareSyntheticVariable(final XExpression expr, final IAppendable b) {
+	protected void declareSyntheticVariable(final XExpression expr, final ITracingAppendable b) {
 		declareFreshLocalVariable(expr, b, new Later() {
 			@Override
 			public void exec() {
@@ -384,7 +385,7 @@ public abstract class AbstractXbaseCompiler {
 		return "null";
 	}
 
-	protected void declareFreshLocalVariable(XExpression expr, IAppendable b, Later expression) {
+	protected void declareFreshLocalVariable(XExpression expr, ITracingAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {
@@ -405,7 +406,7 @@ public abstract class AbstractXbaseCompiler {
 	 * whether an expression needs to be declared in a statement
 	 * If an expression has side effects this method must return true for it.
 	 */
-	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITracingAppendable b) {
 		return true;
 	}
 	

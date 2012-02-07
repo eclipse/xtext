@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToSource;
 import org.eclipse.xtext.generator.trace.ITraceToTarget;
 import org.eclipse.xtext.util.ITextRegion;

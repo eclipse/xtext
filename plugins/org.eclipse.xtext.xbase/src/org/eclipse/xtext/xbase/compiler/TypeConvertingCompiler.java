@@ -50,13 +50,13 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	 */
 
 	@Override
-	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
+	protected void internalToJavaExpression(final XExpression obj, final ITracingAppendable appendable) {
 		JvmTypeReference expectedType = getTypeProvider().getExpectedType(obj);
 		internalToConvertedExpression(obj, appendable, expectedType);
 	}
 	
 	@Override
-	protected void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
+	protected void internalToConvertedExpression(final XExpression obj, final ITracingAppendable appendable,
 			JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
 			JvmTypeReference actualType = getTypeProvider().getType(obj);
@@ -78,7 +78,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
-			final IAppendable appendable, XExpression context, final Later expression) {
+			final ITracingAppendable appendable, XExpression context, final Later expression) {
 		if(getPrimitives().isPrimitive(left) && !getPrimitives().isPrimitive(right)) {
 			convertWrapperToPrimitive(right, getPrimitives().asPrimitiveIfWrapperType(right), context, appendable, expression);
 		} else if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
@@ -118,7 +118,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	protected void convertMultiType(JvmTypeReference expectation, JvmMultiTypeReference multiType, XExpression context,
-			IAppendable b, Later expression) {
+			ITracingAppendable b, Later expression) {
 		JvmTypeReference castTo = null;
 		for(JvmTypeReference candidate: multiType.getReferences()) {
 			if (getTypeConformanceComputer().isConformant(expectation, candidate, true)) {
@@ -138,7 +138,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 	protected void convertFunctionType(final JvmTypeReference expectedType, final JvmTypeReference functionType,
-			final IAppendable appendable, final Later expression, XExpression context) {
+			final ITracingAppendable appendable, final Later expression, XExpression context) {
 //		JvmTypeReference resolvedLeft = closures.getResolvedExpectedType(expectedType, functionType);
 		if (expectedType == null || expectedType.getIdentifier().equals(Object.class.getName())
 				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())) {
@@ -211,7 +211,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	protected void convertListToArray(
 			final JvmTypeReference arrayTypeReference, 
-			final IAppendable appendable,
+			final ITracingAppendable appendable,
 			XExpression context,
 			final Later expression) {
 		appendable.append("((");
@@ -227,7 +227,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append(".class))");
 	}
 
-	protected void convertArrayToList(final JvmTypeReference left, final IAppendable appendable, XExpression context,
+	protected void convertArrayToList(final JvmTypeReference left, final ITracingAppendable appendable, XExpression context,
 			final Later expression) {
 		appendable.append("((");
 		serialize(left, context, appendable);
@@ -243,7 +243,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			final JvmTypeReference primitive, 
 			final JvmTypeReference wrapper, 
 			XExpression context, 
-			final IAppendable appendable,
+			final ITracingAppendable appendable,
 			final Later expression) {
 		serialize(wrapper, null, appendable);
 		appendable.append(".");
@@ -256,7 +256,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			final JvmTypeReference wrapper, 
 			final JvmTypeReference primitive, 
 			XExpression context, 
-			final IAppendable appendable,
+			final ITracingAppendable appendable,
 			final Later expression) {
 		appendable.append("(");
 		expression.exec();
