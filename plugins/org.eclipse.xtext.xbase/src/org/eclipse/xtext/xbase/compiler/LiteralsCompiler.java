@@ -21,16 +21,16 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
  */
 public class LiteralsCompiler extends TypeConvertingCompiler {
 
-	public void _toJavaExpression(XStringLiteral expr, IAppendable b) {
+	public void _toJavaExpression(XStringLiteral expr, ITracingAppendable b) {
 		String javaString = Strings.convertToJavaString(expr.getValue());
 		b.append("\"").append(javaString).append("\"");
 	}
 	
-	public void _toJavaStatement(XStringLiteral expr, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XStringLiteral expr, ITracingAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	protected void generateComment(XExpression expr, IAppendable b, boolean isReferenced) {
+	protected void generateComment(XExpression expr, ITracingAppendable b, boolean isReferenced) {
 		if (!isReferenced) {
 			b.append("/*");
 			internalToJavaExpression(expr, b);
@@ -38,40 +38,40 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		}
 	}
 
-	public void _toJavaExpression(XIntLiteral expr, IAppendable b) {
+	public void _toJavaExpression(XIntLiteral expr, ITracingAppendable b) {
 		b.append(Integer.toString(expr.getValue()));
 	}
 	
-	public void _toJavaStatement(XIntLiteral expr, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XIntLiteral expr, ITracingAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	public void _toJavaExpression(XNullLiteral expr, IAppendable b) {
+	public void _toJavaExpression(XNullLiteral expr, ITracingAppendable b) {
 		b.append("null");
 	}
 	
-	public void _toJavaStatement(XNullLiteral expr, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XNullLiteral expr, ITracingAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	public void _toJavaExpression(XBooleanLiteral expr, IAppendable b) {
+	public void _toJavaExpression(XBooleanLiteral expr, ITracingAppendable b) {
 		b.append(Boolean.toString(expr.isIsTrue()));
 	}
 	
-	public void _toJavaStatement(XBooleanLiteral expr, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XBooleanLiteral expr, ITracingAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	public void _toJavaExpression(XTypeLiteral expr, IAppendable b) {
+	public void _toJavaExpression(XTypeLiteral expr, ITracingAppendable b) {
 		b.append(expr.getType().getQualifiedName('.')).append(".class");
 	}
 	
-	public void _toJavaStatement(XTypeLiteral expr, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XTypeLiteral expr, ITracingAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITracingAppendable b) {
 		if (expr instanceof XBooleanLiteral
 			|| expr instanceof XStringLiteral
 			|| expr instanceof XIntLiteral

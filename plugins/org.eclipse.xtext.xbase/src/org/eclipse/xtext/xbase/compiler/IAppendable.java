@@ -11,12 +11,11 @@ import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmType;
 
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface IAppendable {
-
+	
 	IAppendable append(String string);
 
 	IAppendable append(JvmType type);
@@ -51,5 +50,7 @@ public interface IAppendable {
 	Object getObject(String name);
 
 	void closeScope();
+	
+	int length();
 
 }

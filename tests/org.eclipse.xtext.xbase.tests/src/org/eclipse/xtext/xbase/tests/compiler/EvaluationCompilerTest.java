@@ -11,12 +11,14 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -67,6 +69,9 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	@Inject
 	private IResourceScopeCache cache;
+	
+	@Inject
+	private ILocationInFileProvider locationProvider;
 
 	@Before
 	public void setUp() throws Exception {
@@ -126,7 +131,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);
-			compiler.compile(model, appandable, typeReferences.getTypeForName(Object.class, model));
+			compiler.compile(model, new TracingAppendable(appandable, locationProvider), typeReferences.getTypeForName(Object.class, model));
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);
 		} finally {

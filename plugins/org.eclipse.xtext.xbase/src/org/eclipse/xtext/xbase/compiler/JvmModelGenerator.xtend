@@ -31,6 +31,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtext.resource.ILocationInFileProvider
 
 /**
  * A generator implementation that processes the 
@@ -43,6 +44,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject extension TypeReferences 
 	@Inject XbaseCompiler compiler
 	@Inject TypeReferenceSerializer typeRefSerializer
+	@Inject ILocationInFileProvider locationProvider
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -297,7 +299,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.toString
 	}
 	
-	def createAppendable(EObject context, ImportManager importManager) {
+	def ITracingAppendable createAppendable(EObject context, ImportManager importManager) {
 		val appendable = new StringBuilderBasedAppendable(importManager)
 		val type = context.containerType
 		if(type != null) {
@@ -306,7 +308,7 @@ class JvmModelGenerator implements IGenerator {
 			if (superType != null)
 				appendable.declareVariable(superType.type, "super")
 		}
-		appendable
+		new TracingAppendable(appendable, locationProvider)
 	}
 	
 	def JvmGenericType containerType(EObject context) {

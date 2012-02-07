@@ -50,6 +50,10 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	public String toString() {
 		return builder.toString();
 	}
+	
+	public int length() {
+		return builder.length();
+	}
 
 	public IAppendable increaseIndentation() {
 		indentationlevel++;
