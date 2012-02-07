@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
+import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

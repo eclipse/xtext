@@ -12,6 +12,10 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITraceRegion;
+import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -110,7 +114,7 @@ public class TraceRegionTest extends Assert {
 	@Test
 	public void testLeafIterator_OneChild_LeftGap() {
 		final TraceRegion parent = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
-		ITraceRegion first = new AbstractTraceRegion(0, 1, 2, 3) {
+		ITraceRegion first = new AbstractStatefulTraceRegion(0, 1, 2, 3) {
 			public ITraceRegion getParent() {
 				return parent;
 			}
@@ -124,7 +128,7 @@ public class TraceRegionTest extends Assert {
 	public void testLeafIterator_OneChild_RightGap() {
 		final TraceRegion parent = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
 		ITraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
-		ITraceRegion second = new AbstractTraceRegion(1, 1, 2, 3) {
+		ITraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3) {
 			public ITraceRegion getParent() {
 				return parent;
 			}
@@ -136,7 +140,7 @@ public class TraceRegionTest extends Assert {
 	@Test
 	public void testLeafIterator_OneGrandChild_LeftGap() {
 		final TraceRegion root = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
-		ITraceRegion first = new AbstractTraceRegion(0, 1, 2, 3) {
+		ITraceRegion first = new AbstractStatefulTraceRegion(0, 1, 2, 3) {
 			public ITraceRegion getParent() {
 				return root;
 			}
@@ -152,7 +156,7 @@ public class TraceRegionTest extends Assert {
 		final TraceRegion root = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion parent = new TraceRegion(0, 1, 3, 4, root, null, null);
 		TraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
-		ITraceRegion second = new AbstractTraceRegion(1, 1, 2, 3) {
+		ITraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3) {
 			public ITraceRegion getParent() {
 				return root;
 			}
@@ -186,7 +190,7 @@ public class TraceRegionTest extends Assert {
 	public void testLeafIterator_TwoChildren_WithGaps() {
 		final TraceRegion parent = new TraceRegion(0, 3, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion first = new TraceRegion(0, 1, 2, 3, parent, null, null);
-		ITraceRegion second = new AbstractTraceRegion(1, 1, 2, 3) {
+		ITraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3) {
 			public ITraceRegion getParent() {
 				return parent;
 			}

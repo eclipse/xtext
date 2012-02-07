@@ -17,9 +17,13 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.ITraceRegion;
+import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -54,7 +58,7 @@ public abstract class AbstractTrace implements ITrace {
 	 */
 	protected abstract ITraceRegion getRootTraceRegion();
 	
-	public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
+	public ILocationInResource getBestAssociatedLocation(@NonNull ITextRegion region) {
 		ITraceRegion left = findLeafAtLeftOffset(region.getOffset());
 		ITraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
 		return mergeRegions(left, right);
@@ -108,7 +112,7 @@ public abstract class AbstractTrace implements ITrace {
 			return null;
 		}
 		outer: while(candidate != null) {
-			List<TraceRegion> children = candidate.getNestedRegions();
+			List<ITraceRegion> children = candidate.getNestedRegions();
 			if (children.isEmpty()) {
 				return candidate;
 			}

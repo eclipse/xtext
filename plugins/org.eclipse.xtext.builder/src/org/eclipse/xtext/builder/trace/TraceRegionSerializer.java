@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.ITraceRegion;
+import org.eclipse.xtext.generator.trace.TraceRegion;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

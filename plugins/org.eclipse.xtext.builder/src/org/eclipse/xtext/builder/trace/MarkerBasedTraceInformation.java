@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -133,7 +134,7 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 	public ITraceToSource getTraceToSource(final IStorage derivedResource) {
 		return new ITraceToSource() {
 			
-			public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
+			public ILocationInResource getBestAssociatedLocation(@NonNull ITextRegion region) {
 				if (derivedResource instanceof IResource)
 					return getSingleSourceInformation((IResource) derivedResource, null, region);
 				return null;
