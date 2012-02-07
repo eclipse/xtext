@@ -6,7 +6,6 @@ Bundle-Version: 2.3.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
- org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
@@ -20,7 +19,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=reexport
 Import-Package: org.apache.commons.logging,
- org.apache.log4j,
+ org.apache.log4j;version="1.2.15",
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.purexbase,
