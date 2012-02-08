@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextUtilities;
@@ -149,6 +150,7 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 	}
 	
 	@Override
+	@NonNull
 	public String toString() {
 		return getCode();
 	}
@@ -157,6 +159,7 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 		return whitespaceHelper.getTotalOffset();
 	}
 
+	@NonNull
 	public String getCode() {
 		StringBuilder b = new StringBuilder();
 		if (whitespaceHelper.getPrefix() != null)

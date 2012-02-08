@@ -21,17 +21,16 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
 
-public class CacheMethodCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
+public class CacheMethodCompileStrategy implements Procedures.Procedure1<TracingAppendable> {
 	@Inject
 	private TypeReferences typeReferences;
 
@@ -59,9 +58,7 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		this.cacheField = cacheField; 
 	}
 
-	public CharSequence apply(ImportManager importManager) {
-		final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(importManager, "  ", "\n");
-
+	public void apply(TracingAppendable appendable) {
 		JvmOperation cacheMethod = (JvmOperation) logicalContainerProvider
 				.getLogicalContainer(createExtensionInfo.getCreateExpression());
 		JvmDeclaredType containerType = cacheMethod.getDeclaringType();
@@ -134,7 +131,6 @@ public class CacheMethodCompileStrategy implements Functions.Function1<ImportMan
 		// return the result
 		appendable.newLine().append("return ");
 		appendable.append(resultVarName).append(";");
-		return appendable.toString();
 	}
 
 	protected String getVarName(JvmIdentifiableElement ex) {

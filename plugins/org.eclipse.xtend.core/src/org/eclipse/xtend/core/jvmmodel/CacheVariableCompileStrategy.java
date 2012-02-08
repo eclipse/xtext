@@ -7,17 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.jvmmodel;
 
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 
-public class CacheVariableCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
+public class CacheVariableCompileStrategy implements Procedures.Procedure1<TracingAppendable> {
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -25,17 +24,15 @@ public class CacheVariableCompileStrategy implements Functions.Function1<ImportM
 	@Inject
 	private TypeReferenceSerializer typeReferenceSerializer;
 
-	private JvmGenericType container;
+	private XtendFunction context;
 
-	public CharSequence apply(ImportManager p) {
-		StringBuilderBasedAppendable builder = new StringBuilderBasedAppendable(p);
-		typeReferenceSerializer.serialize(typeReferences.getTypeForName(CollectionLiterals.class, container),
-				container, builder);
+	public void apply(TracingAppendable builder) {
+		typeReferenceSerializer.serialize(typeReferences.getTypeForName(CollectionLiterals.class, context),
+				context, builder);
 		builder.append(".newHashMap()");
-		return builder.toString();
 	}
 
-	public void init(JvmGenericType container) {
-		this.container = container;
+	public void init(XtendFunction context) {
+		this.context = context;
 	}
 }
