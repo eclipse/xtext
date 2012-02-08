@@ -7,13 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.emf.common.util.URI;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,58 +17,32 @@ import com.google.common.collect.Lists;
 public class TraceRegion extends AbstractStatefulTraceRegion {
 
 	protected final URI toPath;
-	protected final ITraceRegion parent;
-	protected List<ITraceRegion> nestedRegions;
 	protected final String toProjectName;
 	
-	public TraceRegion(int fromOffset, int fromLength, int toOffset, int toLength, ITraceRegion parent, URI toPath, String toProjectName) {
-		super(fromOffset, fromLength, toOffset, toLength);
-		this.parent = parent;
+	public TraceRegion(int fromOffset, int fromLength, int toOffset, int toLength, AbstractTraceRegion parent, URI toPath, String toProjectName) {
+		super(fromOffset, fromLength, toOffset, toLength, parent);
 		this.toPath = toPath;
-		this.toProjectName = toProjectName;
-		if (parent instanceof TraceRegion) {
-			TraceRegion castedParent = (TraceRegion) parent;
-			if (castedParent.nestedRegions == null) {
-				castedParent.nestedRegions = Lists.newArrayListWithCapacity(4);
-			}
-			castedParent.nestedRegions.add(this);
-		} else {
+		if (parent == null) {
+			this.toProjectName = toProjectName == null ? "<unknown>" : toProjectName;
 			if (toPath == null) {
 				throw new IllegalArgumentException("toPath may not be null");
 			}
-			if (toProjectName == null) {
-				throw new IllegalArgumentException("toProjectName may not be null");
-			}
-		}
+ 		} else {
+ 			this.toProjectName = toProjectName;
+ 		}
 	}
 
 	@Override
-	public Iterator<ITraceRegion> leafIterator() {
-		if (nestedRegions == null)
-			return Collections.<ITraceRegion>singleton(this).iterator();
-		return new LeafIterator(this);
-	}
-	
-	@Override
 	public URI getToPath() {
+		AbstractTraceRegion parent = getParent();
 		if (toPath == null && parent != null)
 			return parent.getToPath();
 		return toPath;
 	}
 	
 	@Override
-	public List<ITraceRegion> getNestedRegions() {
-		if (nestedRegions != null)
-			return Collections.unmodifiableList(nestedRegions);
-		return Collections.emptyList();
-	}
-	
-	public ITraceRegion getParent() {
-		return parent;
-	}
-	
-	@Override
 	public String getToProjectName() {
+		AbstractTraceRegion parent = getParent();
 		if (toProjectName == null && parent != null)
 			return parent.getToProjectName();
 		return toProjectName;
