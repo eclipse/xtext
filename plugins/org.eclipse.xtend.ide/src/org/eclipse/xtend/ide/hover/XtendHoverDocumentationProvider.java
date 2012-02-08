@@ -28,8 +28,7 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 	private XtendOverridesService overridesService;
 	
 	@Override
-	protected String handleSuperMethodReferences(EObject context) {
-		StringBuffer buffer = new StringBuffer();
+	protected void handleSuperMethodReferences(EObject context) {
 		if (context instanceof XtendFunction) {
 			XtendFunction function = (XtendFunction) context;
 			if (function.isOverride()) {
@@ -42,6 +41,5 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 				buffer.append("</div>"); //$NON-NLS-1$
 			}
 		}
-		return buffer.toString();
 	}
 }
