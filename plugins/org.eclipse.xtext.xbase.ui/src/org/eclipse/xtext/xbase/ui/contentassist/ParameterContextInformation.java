@@ -155,7 +155,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return true;
 	}
 	
-	private int[] computeCommaPositions(String code) {
+	protected int[] computeCommaPositions(String code) {
 		final int length= code.length();
 	    int pos= 0;
 		List<Integer> positions= new ArrayList<Integer>();
@@ -189,7 +189,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 	    return fields;
     }
 
-	private int advance(String code, final int length, int pos, char left, char right) {
+	protected int advance(String code, final int length, int pos, char left, char right) {
 		int remaining = 1;
 		pos++;
 		while(pos < length && pos != -1 && remaining > 0) {
@@ -204,7 +204,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 	}
 	
 	// see JavaParameterListValidator
-	private int getCharCount(IDocument document, final int start, final int end, String increments, String decrements, boolean considerNesting) throws BadLocationException {
+	protected int getCharCount(IDocument document, final int start, final int end, String increments, String decrements, boolean considerNesting) throws BadLocationException {
 
 		Assert.isTrue((increments.length() != 0 || decrements.length() != 0) && !increments.equals(decrements));
 
@@ -347,7 +347,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return charCount;
 	}
 	
-	private int getCommentEnd(IDocument d, int pos, int end) throws BadLocationException {
+	protected int getCommentEnd(IDocument d, int pos, int end) throws BadLocationException {
 		while (pos < end) {
 			char curr= d.getChar(pos);
 			pos++;
@@ -360,7 +360,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return end;
 	}
 	
-	private int getStringEnd(IDocument d, int pos, int end, char ch) throws BadLocationException {
+	protected int getStringEnd(IDocument d, int pos, int end, char ch) throws BadLocationException {
 		while (pos < end) {
 			char curr= d.getChar(pos);
 			pos++;
@@ -374,7 +374,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return end;
 	}
 
-	private boolean checkGenericsHeuristic(IDocument document, int end, int bound) {
+	protected boolean checkGenericsHeuristic(IDocument document, int end, int bound) {
 		JavaHeuristicScanner scanner = new JavaHeuristicScanner(document);
 		return scanner.looksLikeClassInstanceCreationBackward(end, bound);
 	}
