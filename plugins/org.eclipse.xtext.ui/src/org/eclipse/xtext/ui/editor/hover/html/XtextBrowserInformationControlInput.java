@@ -55,6 +55,11 @@ public class XtextBrowserInformationControlInput extends BrowserInformationContr
 		fLabelProvider = labelProvider;
 	}
 
+	@Override
+	public int getLeadingImageWidth() {
+		return 16;
+	}
+	
 	public EObject getElement() {
 		return fElement;
 	}

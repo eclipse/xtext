@@ -39,10 +39,10 @@ import com.google.inject.Inject;
 public class XbaseDeclarativeHoverSignatureProvider {
 
 	@Inject
-	private HoverUiStrings hoverUiStrings;
+	protected HoverUiStrings hoverUiStrings;
 
 	@Inject
-	private UIStrings uiStrings;
+	protected UIStrings uiStrings;
 
 	public String getHoverText(EObject object) {
 		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_hoverText", 1, 1,
@@ -54,7 +54,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return "<b>" + polymorphicDispatcher.invoke(object) + "</b>";
 	}
 
-	public String _hoverText(JvmGenericType clazz) {
+	protected String _hoverText(JvmGenericType clazz) {
 		String imageTag = getImageTag(JavaElementImageProvider.getTypeImageDescriptor(false, false,
 				toFlags(clazz.getVisibility()), false));
 		return imageTag + getSignature(clazz);
@@ -65,7 +65,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return clazz.getPackageName() + "." + clazz.getSimpleName();
 	}
 
-	public String _hoverText(JvmOperation operation) {
+	protected String _hoverText(JvmOperation operation) {
 		if (operation != null) {
 			ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
 					toFlags(operation.getVisibility()));
@@ -79,7 +79,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
-	private String getSignature(JvmOperation jvmOperation) {
+	protected String getSignature(JvmOperation jvmOperation) {
 		String returnTypeString = "void";
 		JvmTypeReference returnType = jvmOperation.getReturnType();
 		if (returnType != null) {
@@ -92,11 +92,11 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return returnTypeString + " " + jvmOperation.getSimpleName() + hoverUiStrings.parameters(jvmOperation);
 	}
 
-	private String getSimpleSignature(JvmOperation jvmOperation) {
+	protected String getSimpleSignature(JvmOperation jvmOperation) {
 		return jvmOperation.getSimpleName() + uiStrings.parameters(jvmOperation);
 	}
 
-	public String _hoverText(JvmField field) {
+	protected String _hoverText(JvmField field) {
 			ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false,
 					toFlags(field.getVisibility()));
 			String imageTag = "";
@@ -108,7 +108,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			return imageTag + getSignature(field);
 	}
 
-	private String getSignature(JvmField jvmField) {
+	protected String getSignature(JvmField jvmField) {
 		JvmTypeReference type = jvmField.getType();
 		if (type != null) {
 			return type.getSimpleName() + " " + jvmField.getQualifiedName();
@@ -116,7 +116,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
-	public String _hoverText(JvmConstructor constructor) {
+	protected String _hoverText(JvmConstructor constructor) {
 			ImageDescriptor imageDescriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
 					toFlags(constructor.getVisibility()));
 			String imageTag = getImageTag(getDecoratedJdtImageDescriptor(imageDescriptor,
@@ -124,21 +124,21 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			return imageTag + getSignature(constructor);
 	}
 
-	private String getSignature(JvmConstructor contructor) {
+	protected String getSignature(JvmConstructor contructor) {
 		return contructor.getQualifiedName() + " " + hoverUiStrings.parameters(contructor);
 	}
 
-	private String getSimpleSignature(JvmConstructor contructor) {
+	protected String getSimpleSignature(JvmConstructor contructor) {
 		return contructor.getQualifiedName() + " " + uiStrings.parameters(contructor);
 	}
 
-	public String _hoverText(JvmFormalParameter parameter) {
+	protected String _hoverText(JvmFormalParameter parameter) {
 		ImageDescriptor descriptor = JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE;
 		String imageTag = getImageTag(descriptor);
 		return imageTag + " " + getSignature(parameter);
 	}
 
-	private String getSignature(JvmFormalParameter parameter) {
+	protected String getSignature(JvmFormalParameter parameter) {
 		JvmTypeReference parameterType = parameter.getParameterType();
 		if (parameterType != null) {
 			EObject container = parameter.eContainer();
@@ -148,7 +148,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
-	private String getSignature(EObject container) {
+	protected String getSignature(EObject container) {
 		if (container instanceof JvmOperation) {
 				return getSimpleSignature((JvmOperation) container);
 		} else if (container instanceof JvmConstructor) {
@@ -157,7 +157,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
-	private String getImageTag(ImageDescriptor imageDescriptor) {
+	protected String getImageTag(ImageDescriptor imageDescriptor) {
 		URL url = getURL(imageDescriptor);
 		if (url != null)
 			return "<image src='" + url.toExternalForm() + "'/>";
