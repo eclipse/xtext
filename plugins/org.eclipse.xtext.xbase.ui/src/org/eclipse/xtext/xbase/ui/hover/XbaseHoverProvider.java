@@ -30,7 +30,6 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	
-	
 	@Inject
 	private ITypeProvider typeProvider;
 	

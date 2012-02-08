@@ -59,35 +59,24 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("unchecked")
 public class XbaseHoverDocumentationProvider {
-
-	private static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
-	private static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$
-
-	private static final String BlOCK_TAG_ENTRY_START = "<dd>"; //$NON-NLS-1$
-	private static final String BlOCK_TAG_ENTRY_END = "</dd>"; //$NON-NLS-1$
-
-	private static final String PARAM_NAME_START = "<b>"; //$NON-NLS-1$
-	private static final String PARAM_NAME_END = "</b> "; //$NON-NLS-1$
-
-	private String rawJavaDoc = "";
-
-	private EObject context = null;
-
+	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
+	protected static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$
+	protected static final String BlOCK_TAG_ENTRY_START = "<dd>"; //$NON-NLS-1$
+	protected static final String BlOCK_TAG_ENTRY_END = "</dd>"; //$NON-NLS-1$
+	protected static final String PARAM_NAME_START = "<b>"; //$NON-NLS-1$
+	protected static final String PARAM_NAME_END = "</b> "; //$NON-NLS-1$
+	protected String rawJavaDoc = "";
+	protected EObject context = null;
 	@Inject
-	private IScopeProvider scopeProvider;
-
+	protected IScopeProvider scopeProvider;
 	@Inject
-	private IQualifiedNameConverter qualifiedNameConverter;
-
+	protected IQualifiedNameConverter qualifiedNameConverter;
 	@Inject
-	private IWorkspace workspace;
-
+	protected IWorkspace workspace;
 	@Inject
-	private IEObjectDocumentationProvider documentationProvider;
-
-	private StringBuffer buffer;
-
-	private int fLiteralContent;
+	protected IEObjectDocumentationProvider documentationProvider;
+	protected StringBuffer buffer;
+	protected int fLiteralContent;
 
 	public String getDocumentation(EObject object) {
 		context = object;
@@ -114,7 +103,6 @@ public class XbaseHoverDocumentationProvider {
 			String tagName = tag.getTagName();
 			if (tagName == null) {
 				start = tag;
-
 			} else if (TagElement.TAG_PARAM.equals(tagName)) {
 				parameters.add(tag);
 			} else if (TagElement.TAG_RETURN.equals(tagName)) {
@@ -149,7 +137,7 @@ public class XbaseHoverDocumentationProvider {
 
 		if (hasParameters || hasReturnTag || hasExceptions || versions.size() > 0 || authors.size() > 0
 				|| since.size() > 0 || sees.size() > 0 || rest.size() > 0 || (buffer.length() > 0)) {
-			buffer.append(handleSuperMethodReferences(object));
+			handleSuperMethodReferences(object);
 			buffer.append(BLOCK_TAG_START);
 			handleParameters(object, parameters);
 			handleReturnTag(returnTag);
@@ -161,14 +149,16 @@ public class XbaseHoverDocumentationProvider {
 			handleBlockTags(rest);
 			buffer.append(BLOCK_TAG_END);
 		} else if (buffer.length() > 0) {
-			buffer.append(handleSuperMethodReferences(object));
+			handleSuperMethodReferences(object);
 		}
 		String result = buffer.toString();
 		buffer = null;
+		rawJavaDoc = null;
+		context = null;
 		return result;
 	}
 
-	private void getDocumentationWithPrefix(EObject object) {
+	protected void getDocumentationWithPrefix(EObject object) {
 		String startTag = "/**";
 		String endTag = "*/";
 		String lineBreak = "\n";
@@ -190,8 +180,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	protected String handleSuperMethodReferences(EObject context) {
-		return "";
+	protected void handleSuperMethodReferences(EObject context) {
 		// Not handled for Xbase
 	}
 
@@ -202,7 +191,7 @@ public class XbaseHoverDocumentationProvider {
 		return methodInType;
 	}
 
-	private String createSimpleMemberLink(EObject type) {
+	protected String createSimpleMemberLink(EObject type) {
 		String label = "";
 		if (type instanceof JvmDeclaredType)
 			label = ((JvmDeclaredType) type).getSimpleName();
@@ -216,7 +205,7 @@ public class XbaseHoverDocumentationProvider {
 		return createLinkWithLabel(EcoreUtil.getURI(type), label);
 	}
 
-	private String createLinkWithLabel(org.eclipse.emf.common.util.URI uri, String label) {
+	protected String createLinkWithLabel(org.eclipse.emf.common.util.URI uri, String label) {
 		StringBuffer buf = new StringBuffer();
 		String emfURI = uri.toString();
 		String uriForLink = null;
@@ -233,19 +222,19 @@ public class XbaseHoverDocumentationProvider {
 		return buf.toString();
 	}
 
-	private boolean handleValueTag(TagElement node) {
+	protected boolean handleValueTag(TagElement node) {
 		//TODO: implement me!
 		return false;
 	}
 
-	private boolean handleInheritDoc(TagElement node) {
+	protected boolean handleInheritDoc(TagElement node) {
 		if (!TagElement.TAG_INHERITDOC.equals(node.getTagName()))
 			return false;
 		//TODO: implement me!
 		return true;
 	}
 
-	private boolean handleDocRoot(TagElement node) {
+	protected boolean handleDocRoot(TagElement node) {
 		if (!TagElement.TAG_DOCROOT.equals(node.getTagName()))
 			return false;
 		org.eclipse.emf.common.util.URI uri = EcoreUtil.getURI(context);
@@ -261,7 +250,7 @@ public class XbaseHoverDocumentationProvider {
 		return true;
 	}
 
-	private void handleLink(List<? extends ASTNode> fragments) {
+	protected void handleLink(List<? extends ASTNode> fragments) {
 		if (fragments.size() > 0) {
 			org.eclipse.emf.common.util.URI elementURI = null;
 			String firstFragment = fragments.get(0).toString();
@@ -334,7 +323,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleBlockTags(List<TagElement> tags) {
+	protected void handleBlockTags(List<TagElement> tags) {
 		for (Iterator<TagElement> iter = tags.iterator(); iter.hasNext();) {
 			TagElement tag = iter.next();
 			handleBlockTagTitle(tag.getTagName());
@@ -344,7 +333,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleBlockTags(String title, List<TagElement> tags) {
+	protected void handleBlockTags(String title, List<TagElement> tags) {
 		if (tags.isEmpty())
 			return;
 		handleBlockTagTitle(title);
@@ -360,11 +349,11 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleSeeTag(TagElement tag) {
+	protected void handleSeeTag(TagElement tag) {
 		handleLink(tag.fragments());
 	}
 
-	private void handleExceptionTags(List<TagElement> tags) {
+	protected void handleExceptionTags(List<TagElement> tags) {
 		if (tags.size() == 0)
 			return;
 		handleBlockTagTitle("Throws:");
@@ -376,7 +365,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleThrowsTag(TagElement tag) {
+	protected void handleThrowsTag(TagElement tag) {
 		List<? extends ASTNode> fragments = tag.fragments();
 		int size = fragments.size();
 		if (size > 0) {
@@ -388,7 +377,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleDeprecatedTag(TagElement tag) {
+	protected void handleDeprecatedTag(TagElement tag) {
 		buffer.append("<p><b>"); //$NON-NLS-1$
 		//TODO: Messages out of properties like in JDT?
 		buffer.append("Deprecarted.");
@@ -397,11 +386,11 @@ public class XbaseHoverDocumentationProvider {
 		buffer.append("</i></p>"); //$NON-NLS-1$
 	}
 
-	private void handleContentElements(List<? extends ASTNode> nodes) {
+	protected void handleContentElements(List<? extends ASTNode> nodes) {
 		handleContentElements(nodes, false);
 	}
 
-	private void handleContentElements(List<? extends ASTNode> nodes, boolean skipLeadingWhitespace) {
+	protected void handleContentElements(List<? extends ASTNode> nodes, boolean skipLeadingWhitespace) {
 		ASTNode previousNode = null;
 		for (Iterator<? extends ASTNode> iter = nodes.iterator(); iter.hasNext();) {
 			ASTNode child = iter.next();
@@ -437,7 +426,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleInlineTagElement(TagElement node) {
+	protected void handleInlineTagElement(TagElement node) {
 		String name = node.getTagName();
 		if (TagElement.TAG_VALUE.equals(name) && handleValueTag(node))
 			return;
@@ -470,7 +459,7 @@ public class XbaseHoverDocumentationProvider {
 
 	}
 
-	private void handleText(String text) {
+	protected void handleText(String text) {
 		if (fLiteralContent == 0) {
 			buffer.append(text);
 		} else {
@@ -478,7 +467,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private static void appendEscaped(StringBuffer buf, String text) {
+	protected void appendEscaped(StringBuffer buf, String text) {
 		int nextToCopy = 0;
 		int length = text.length();
 		for (int i = 0; i < length; i++) {
@@ -509,13 +498,13 @@ public class XbaseHoverDocumentationProvider {
 			buf.append(text.substring(nextToCopy));
 	}
 
-	private String removeDocLineIntros(String textWithStars) {
+	protected String removeDocLineIntros(String textWithStars) {
 		String lineBreakGroup = "(\\r\\n?|\\n)"; //$NON-NLS-1$
 		String noBreakSpace = "[^\r\n&&\\s]"; //$NON-NLS-1$
 		return textWithStars.replaceAll(lineBreakGroup + noBreakSpace + "*\\*" /*+ noBreakSpace + '?'*/, "$1"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-	private void handleParameters(EObject object, List<TagElement> parameters) {
+	protected void handleParameters(EObject object, List<TagElement> parameters) {
 		if (parameters.size() == 0)
 			return;
 		handleBlockTagTitle("Parameters:");
@@ -527,7 +516,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleParamTag(TagElement tag) {
+	protected void handleParamTag(TagElement tag) {
 		List<? extends ASTNode> fragments = tag.fragments();
 		int i = 0;
 		int size = fragments.size();
@@ -566,7 +555,7 @@ public class XbaseHoverDocumentationProvider {
 		}
 	}
 
-	private void handleReturnTag(TagElement tag) {
+	protected void handleReturnTag(TagElement tag) {
 		if (tag == null)
 			return;
 		handleBlockTagTitle("Returns:");
@@ -575,7 +564,7 @@ public class XbaseHoverDocumentationProvider {
 		buffer.append(BlOCK_TAG_ENTRY_END);
 	}
 
-	private void handleBlockTagTitle(String title) {
+	protected void handleBlockTagTitle(String title) {
 		buffer.append("<dt>"); //$NON-NLS-1$
 		buffer.append(title);
 		buffer.append("</dt>"); //$NON-NLS-1$
