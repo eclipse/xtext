@@ -24,6 +24,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.common.base.Predicate;
@@ -54,6 +56,15 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Inject
 	private ImplementMemberFromSuperAssist overrideAssist;
 
+	@Override
+	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
+		// no keyword completions without prefix
+		if (Strings.isEmpty(contentAssistContext.getPrefix()))
+			return;
+		super.completeKeyword(keyword, contentAssistContext, acceptor);
+	}
+	
 	@Override
 	public void completeImport_ImportedType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
