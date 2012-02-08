@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.hover;
 
+import java.net.URL;
+
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
@@ -18,6 +22,7 @@ import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.internal.text.html.BrowserInformationControl;
+import org.eclipse.jface.internal.text.html.BrowserInformationControlInput;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
@@ -26,6 +31,7 @@ import org.eclipse.jface.text.IInputChangedListener;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.EditorsUI;
@@ -34,12 +40,16 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider.JavadocHoverWrapper;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
+import org.eclipse.xtext.ui.editor.hover.html.OpenBrowserUtil;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
+import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider;
@@ -64,23 +74,28 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 	private IURIEditorOpener uriEditorOpener;
 	@Inject
 	private XtendHoverSerializer xtendHoverSerializer;
+	@Inject
+	private XtendDeclarativeHoverSignatureProvider hoverSignatureProvider;
+	@Inject
+	private XtendHoverDocumentationProvider documentationProvider;
+	@Inject
+	private XtextElementLinks elementLinks;
+	
 	
 	private IInformationControlCreator hoverControlCreator;
 	private IInformationControlCreator presenterControlCreator;
 	private JavadocHoverWrapper javadocHover = new JavadocHoverWrapper();
 
 	@Override
-	protected String getFirstLineLabel(EObject object) {
-		EObject currentObject = getObjectToView(object);
-		String label = super.getFirstLineLabel(currentObject);
-		if (label != null) {
-			int colon = label.indexOf(':');
-			if (colon >= 0)
-				label = label.substring(0, colon - 1);
-		}
-		return label;
+	protected String getFirstLine(EObject o) {
+		return hoverSignatureProvider.getHoverText(o);
 	}
-
+	
+	@Override
+	protected String getDocumentation(EObject o) {
+		return documentationProvider.getDocumentation(o);
+	}
+	
 	@Override
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
 			XtextBrowserInformationControlInput previous) {
@@ -222,16 +237,6 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 	}
 
 	@Override
-	protected String getFirstLine(EObject o) {
-		return super.getFirstLine(getObjectToView(o));
-	}
-
-	@Override
-	protected String getLabel(EObject o) {
-		return super.getLabel(getObjectToView(o));
-	}
-
-	@Override
 	protected boolean hasHover(EObject o) {
 		return super.hasHover(o) || o instanceof XtendParameter || o instanceof XAbstractFeatureCall;
 	}
@@ -292,5 +297,79 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 			}
 		}
 	}
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	protected void addLinkListener(final IXtextBrowserInformationControl control) {
+		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
 
+			public void handleXtextdocViewLink(URI linkTarget) {
+				// TODO: enable when XtextDoc view available
+				//				control.notifyDelayedInputChange(null);
+				//				control.setVisible(false);
+				//				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
+				//				try {
+				//					JavadocView view= (JavadocView) JavaPlugin.getActivePage().showView(JavaUI.ID_JAVADOC_VIEW);
+				//					view.setInput(linkTarget);
+				//				} catch (PartInitException e) {
+				//					JavaPlugin.log(e);
+				//				}
+			}
+
+			public void handleInlineXtextdocLink(URI linkTarget) {
+				XtextBrowserInformationControlInput hoverInfo = getHoverInfo(getTarget(linkTarget), null,
+						(XtextBrowserInformationControlInput) control.getInput());
+				if (control.hasDelayedInputChangeListener())
+					control.notifyDelayedInputChange(hoverInfo);
+				else
+					control.setInput(hoverInfo);
+			}
+
+			public void handleDeclarationLink(URI linkTarget) {
+				control.notifyDelayedInputChange(null);
+				control.dispose();
+				if(linkTarget.scheme().equals(URIHelperConstants.PROTOCOL)){
+					BrowserInformationControlInput uncastedInput = control.getInput();
+					if(uncastedInput != null){
+						XtendInformationControlInput input = (XtendInformationControlInput) uncastedInput;
+						EObject element = input.getElement();
+						if(element != null){
+							EObject jvmObject = element.eResource().getResourceSet().getEObject(linkTarget, true);
+							if(jvmObject != null){
+								IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) jvmObject);
+								try {
+									JavaUI.openInEditor(javaElement);
+								} catch (PartInitException e) {
+									//TODO: Handle Exception
+								} catch (JavaModelException e) {
+									//TODO: Handle Exception
+								}
+							}
+						}
+					}
+				}
+				if (uriEditorOpener != null)
+					uriEditorOpener.open(linkTarget, true);
+			}
+
+			public boolean handleExternalLink(URL url, Display display) {
+				control.notifyDelayedInputChange(null);
+				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
+
+				// open external links in real browser:
+				OpenBrowserUtil.openExternal(url, display);
+				return true;
+			}
+
+			public void handleTextSet() {
+			}
+
+			EObject getTarget(URI uri) {
+				ResourceSet rs = ((XtextBrowserInformationControlInput) control.getInput()).getElement().eResource()
+						.getResourceSet();
+				return rs.getEObject(uri, true);
+			}
+		}));
+	}
 }

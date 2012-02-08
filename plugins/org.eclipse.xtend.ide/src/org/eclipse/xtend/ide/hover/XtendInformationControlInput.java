@@ -39,6 +39,11 @@ public class XtendInformationControlInput extends XtextBrowserInformationControl
 		this.suffix = suffix;
 		this.javaElement = javaElement;
 	}
+	
+	@Override
+	public int getLeadingImageWidth() {
+		return 16;
+	}
 
 	public String getPrefix(){
 		return prefix;
