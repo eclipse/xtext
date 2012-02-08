@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.hover;
 
 import java.net.URL;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -54,6 +55,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -96,15 +98,21 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 		EObject objectToView = getObjectToView(element);
 		Pair<String, String> prefixAndSuffixPair = xtendHoverSerializer.computePreAndSuffix(element);
 		String unsugaredExpression = xtendHoverSerializer.computeUnsugaredExpression(element);
+		
 		if (objectToView instanceof JvmIdentifiableElement) {
-			IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
-			if (javaElement != null) {
-				javadocHover.setJavaElement(javaElement);
-				JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
-						.getHoverInfo2(null, hoverRegion);
-				return new XtendInformationControlInput(previous, objectToView, javaElement, hoverInfo2.getHtml(),
-						labelProvider, prefixAndSuffixPair.getFirst(), unsugaredExpression,
-						prefixAndSuffixPair.getSecond());
+			Set<EObject> sourceElements = associations.getSourceElements(objectToView);
+			if(sourceElements.size() > 0)
+				objectToView = Lists.newArrayList(sourceElements).get(0);
+			else {
+				IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
+				if (javaElement != null) {
+					javadocHover.setJavaElement(javaElement);
+					JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
+							.getHoverInfo2(null, hoverRegion);
+					return new XtendInformationControlInput(previous, objectToView, javaElement, hoverInfo2.getHtml(),
+							labelProvider, prefixAndSuffixPair.getFirst(), unsugaredExpression,
+							prefixAndSuffixPair.getSecond());
+				}
 			}
 		}
 		String html = getHoverInfoAsHtml(objectToView);
