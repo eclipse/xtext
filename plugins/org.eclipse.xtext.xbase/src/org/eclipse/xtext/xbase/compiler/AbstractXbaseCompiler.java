@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -95,14 +94,13 @@ public abstract class AbstractXbaseCompiler {
 		return primitives;
 	}
 
-	private PolymorphicDispatcher<Void> toJavaStatementDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"_toJavaStatement", 3, 3, this);
-
 	public ITracingAppendable compile(XExpression obj, ITracingAppendable appendable, JvmTypeReference expectedReturnType) {
 		return compile(obj, appendable, expectedReturnType, null);
 	}
 	
 	public ITracingAppendable compileAsJavaExpression(XExpression obj, ITracingAppendable appendable, JvmTypeReference expectedType) {
+		appendable = appendable.trace(obj);
+		
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
@@ -180,6 +178,8 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	public ITracingAppendable compile(XExpression obj, ITracingAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
+		appendable = appendable.trace(obj);
+		
 		if (declaredExceptions == null)
 			declaredExceptions = newHashSet();
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
@@ -223,9 +223,9 @@ public abstract class AbstractXbaseCompiler {
 		for (int i = 0; i < expressions.size(); i++) {
 			XExpression ex = expressions.get(i);
 			if (i < expressions.size() - 1) {
-				internalToJavaStatement(ex, b, false);
+				internalToJavaStatement(ex, b.trace(ex), false);
 			} else {
-				internalToJavaStatement(ex, b, isImplicitReturn);
+				internalToJavaStatement(ex, b.trace(ex), isImplicitReturn);
 				if (isImplicitReturn) {
 					b.newLine().append("return (");
 					internalToConvertedExpression(ex, b, null);
@@ -244,16 +244,24 @@ public abstract class AbstractXbaseCompiler {
 		return typeReferences.is(type, Void.TYPE);
 	}
 
-	protected void internalToJavaStatement(XExpression obj, ITracingAppendable builder, boolean isReferenced) {
-		toJavaStatementDispatcher.invoke(obj, builder, isReferenced);
+	protected final void internalToJavaStatement(XExpression obj, ITracingAppendable builder, boolean isReferenced) {
+		doInternalToJavaStatement(obj, builder.trace(obj), isReferenced);
+	}
+
+	protected void doInternalToJavaStatement(XExpression obj, ITracingAppendable builder, boolean isReferenced) {
+		if (obj == null) {
+			_toJavaStatement((Void) null, builder, isReferenced);
+		} else {
+			_toJavaStatement(obj, builder, isReferenced);
+		}
 	}
 	
 	public void toJavaExpression(final XExpression obj, final ITracingAppendable appendable) {
-		internalToJavaExpression(obj, appendable);
+		internalToJavaExpression(obj, appendable.trace(obj));
 	}
 	
 	public void toJavaStatement(final XExpression obj, final ITracingAppendable appendable, boolean isReferenced) {
-		internalToJavaStatement(obj, appendable, isReferenced);
+		internalToJavaStatement(obj, appendable.trace(obj), isReferenced);
 	}
 
 	protected void internalToJavaExpression(final XExpression obj, final ITracingAppendable appendable) {
@@ -364,11 +372,10 @@ public abstract class AbstractXbaseCompiler {
 		return javaUtils.isJavaKeyword(name) ? "_"+name : name;
 	}
 	
-	protected void declareSyntheticVariable(final XExpression expr, final ITracingAppendable b) {
+	protected void declareSyntheticVariable(final XExpression expr, ITracingAppendable b) {
 		declareFreshLocalVariable(expr, b, new Later() {
-			@Override
-			public void exec() {
-				b.append(getDefaultValueLiteral(expr));
+			public void exec(ITracingAppendable appendable) {
+				appendable.append(getDefaultValueLiteral(expr));
 			}
 		});
 	}
@@ -398,7 +405,7 @@ public abstract class AbstractXbaseCompiler {
 		b.newLine();
 		serialize(type,expr,b);
 		b.append(" ").append(varName).append(" = ");
-		expression.exec();
+		expression.exec(b);
 		b.append(";");
 	}
 

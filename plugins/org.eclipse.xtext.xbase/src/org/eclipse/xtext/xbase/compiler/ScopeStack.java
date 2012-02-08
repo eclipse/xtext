@@ -16,6 +16,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -31,6 +35,7 @@ public class ScopeStack {
 		scopes.pop();
 	}
 	
+	@Nullable
 	public Object get(String name) {
 		if (name == null)
 			throw new NullPointerException("name");
@@ -48,6 +53,7 @@ public class ScopeStack {
 		return null;
 	}
 	
+	@Nullable
 	public String getName(Object referenced) {
 		if (referenced == null)
 			throw new NullPointerException("referenced");
@@ -71,7 +77,8 @@ public class ScopeStack {
 	 * It takes parent scopes into account and only reuses names of synthetic variables from parent scopes.
 	 * Pseudo scopes are treated as if they were part of their parent scope.
 	 */
-	public String declareVariable(Object key, String proposedName, boolean synthetic) {
+	@NonNull
+	public String declareVariable(@NonNull Object key, @NonNull String proposedName, boolean synthetic) {
 		if (scopes.isEmpty())
 			throw new IllegalArgumentException("No scope has been opened yet.");
 		Scope currentScope = scopes.peek();
@@ -94,8 +101,8 @@ public class ScopeStack {
 		return newName;
 	}
 	
-	
-	protected String findNewName(Set<String> names, String proposedName) {
+	@NonNull 
+	protected String findNewName(@NonNull Set<String> names, @NonNull String proposedName) {
 		if (names.contains(proposedName)) {
 			for (int i = 1; i < Integer.MAX_VALUE; i++) {
 				String newProposal = proposedName + "_" + i;
@@ -106,6 +113,7 @@ public class ScopeStack {
 		return proposedName;
 	}
 
+	@NonNullByDefault
 	static class Scope {
 		public Scope(boolean pseudoScope) {
 			this.pseudoScope = pseudoScope;
@@ -132,6 +140,7 @@ public class ScopeStack {
 			return variables.values();
 		}
 		
+		@Nullable
 		public Variable get(String name) {
 			return variables.get(name);
 		}
@@ -142,6 +151,7 @@ public class ScopeStack {
 		}
 	}
 	
+	@NonNullByDefault
 	final static class Variable {
 		Variable(String name2, boolean synthetic2, Object referenced) {
 			this.name = name2;

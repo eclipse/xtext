@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -20,6 +22,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class CharSequenceTraceWrapper {
 
 	@Inject
@@ -37,7 +40,7 @@ public class CharSequenceTraceWrapper {
 		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.segment(2), originOffset, originLength);
 	}
 	
-	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, String originProject, int originOffset, int originLength) {
+	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, @Nullable String originProject, int originOffset, int originLength) {
 		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originProject, originOffset, originLength);
 	}
 	
@@ -49,7 +52,7 @@ public class CharSequenceTraceWrapper {
 		private final int originOffset;
 		private final int originLength;
 
-		public CharSequenceBasedTraceRegionProvider(CharSequence delegate, URI originURI, String originProject,
+		public CharSequenceBasedTraceRegionProvider(CharSequence delegate, URI originURI, @Nullable String originProject,
 				int originOffset, int originLength) {
 			this.delegate = delegate;
 			this.originURI = originURI;
@@ -75,22 +78,13 @@ public class CharSequenceTraceWrapper {
 			return delegate.toString();
 		}
 
-		public List<ITraceRegion> getTraceRegions(final int relativeOffset) {
-			ITraceRegion result = new TraceRegion(relativeOffset, delegate.length(), originOffset, originLength, null, originURI, originProject) {
-				
+		public List<AbstractTraceRegion> getTraceRegions(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
+			AbstractTraceRegion result = new TraceRegion(relativeOffset, delegate.length(), originOffset, originLength, parent, originURI, originProject) {
 				{
 					// initialize children
-					getNestedRegions();
-				}
-				
-				@Override
-				public List<ITraceRegion> getNestedRegions() {
-					if (nestedRegions == null) {
-						if (delegate instanceof ITraceRegionProvider) {
-							nestedRegions = ((ITraceRegionProvider) delegate).getTraceRegions(relativeOffset);
-						}
+					if (delegate instanceof ITraceRegionProvider) {
+						((ITraceRegionProvider) delegate).getTraceRegions(relativeOffset, this);
 					}
-					return super.getNestedRegions();
 				}
 			};
 			return Collections.singletonList(result);

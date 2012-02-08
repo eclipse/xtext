@@ -9,11 +9,13 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface ITraceRegionProvider {
 
-	List<ITraceRegion> getTraceRegions(int relativeOffset);
+	@NonNull List<AbstractTraceRegion> getTraceRegions(int relativeOffset, AbstractTraceRegion parent);
 	
 }

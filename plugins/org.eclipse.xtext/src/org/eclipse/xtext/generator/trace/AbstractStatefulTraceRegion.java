@@ -17,7 +17,8 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 	private final int toOffset;
 	private final int toLength;
 
-	public AbstractStatefulTraceRegion(int fromOffset, int fromLength, int toOffset, int toLength) {
+	protected AbstractStatefulTraceRegion(int fromOffset, int fromLength, int toOffset, int toLength, AbstractTraceRegion parent) {
+		super(parent);
 		if (fromOffset < 0)
 			throw new IllegalArgumentException("fromOffset " + fromOffset + " is < 0");
 		if (fromLength < 0)
@@ -32,18 +33,22 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 		this.toLength = toLength;
 	}
 
+	@Override
 	public int getFromLength() {
 		return fromLength;
 	}
 
+	@Override
 	public int getFromOffset() {
 		return fromOffset;
 	}
 
+	@Override
 	public int getToLength() {
 		return toLength;
 	}
 
+	@Override
 	public int getToOffset() {
 		return toOffset;
 	}

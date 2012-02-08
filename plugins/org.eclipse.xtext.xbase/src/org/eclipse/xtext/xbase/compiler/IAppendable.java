@@ -9,11 +9,13 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public interface IAppendable {
 	
 	IAppendable append(String string);
@@ -47,10 +49,17 @@ public interface IAppendable {
 
 	String getName(Object key);
 	
+	boolean hasName(Object key);
+	
 	Object getObject(String name);
+	
+	boolean hasObject(String name);
 
 	void closeScope();
 	
 	int length();
+	
+	@Override
+	String toString();
 
 }

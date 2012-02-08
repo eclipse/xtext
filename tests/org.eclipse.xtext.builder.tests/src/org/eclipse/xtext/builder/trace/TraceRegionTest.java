@@ -14,7 +14,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ITraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -73,15 +73,15 @@ public class TraceRegionTest extends Assert {
 		new TraceRegion(0, 0, 0, 0, null, null, "project");
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorInvalidArgs_06() {
-		new TraceRegion(0, 0, 0, 0, null, URI.createURI("uri"), null);
+	public void testConstructor_NoProject() {
+		TraceRegion region = new TraceRegion(0, 0, 0, 0, null, URI.createURI("uri"), null);
+		assertEquals("<unknown>", region.getToProjectName());
 	}
 	
 	@Test
 	public void testLeafIterator_NoChildren() {
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
-		Iterator<ITraceRegion> iter = region.leafIterator();
+		Iterator<AbstractTraceRegion> iter = region.leafIterator();
 		assertTrue(Iterators.elementsEqual(Collections.singleton(region).iterator(), iter));
 	}
 	
@@ -89,7 +89,7 @@ public class TraceRegionTest extends Assert {
 	public void testLeafIterator_OneChild() {
 		TraceRegion parent = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, parent, null, null);
-		Iterator<ITraceRegion> iter = parent.leafIterator();
+		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertTrue(Iterators.elementsEqual(Collections.singleton(region).iterator(), iter));
 	}
 	
@@ -98,7 +98,7 @@ public class TraceRegionTest extends Assert {
 		TraceRegion root = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion parent = new TraceRegion(0, 1, 2, 3, root, null, null);
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, parent, null, null);
-		Iterator<ITraceRegion> iter = root.leafIterator();
+		Iterator<AbstractTraceRegion> iter = root.leafIterator();
 		assertTrue(Iterators.elementsEqual(Collections.singleton(region).iterator(), iter));
 	}
 	
@@ -107,47 +107,35 @@ public class TraceRegionTest extends Assert {
 		TraceRegion parent = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion first = new TraceRegion(0, 1, 2, 3, parent, null, null);
 		TraceRegion second = new TraceRegion(1, 1, 3, 4, parent, null, null);
-		Iterator<ITraceRegion> iter = parent.leafIterator();
+		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
 	@Test
 	public void testLeafIterator_OneChild_LeftGap() {
 		final TraceRegion parent = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
-		ITraceRegion first = new AbstractStatefulTraceRegion(0, 1, 2, 3) {
-			public ITraceRegion getParent() {
-				return parent;
-			}
-		};
+		AbstractTraceRegion first = new AbstractStatefulTraceRegion(0, 1, 2, 3, parent) {};
 		TraceRegion second = new TraceRegion(1, 1, 3, 4, parent, null, null);
-		Iterator<ITraceRegion> iter = parent.leafIterator();
+		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
 	@Test
 	public void testLeafIterator_OneChild_RightGap() {
 		final TraceRegion parent = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
-		ITraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
-		ITraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3) {
-			public ITraceRegion getParent() {
-				return parent;
-			}
-		};
-		Iterator<ITraceRegion> iter = parent.leafIterator();
+		AbstractTraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
+		AbstractTraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3, parent) {};
+		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
 	@Test
 	public void testLeafIterator_OneGrandChild_LeftGap() {
 		final TraceRegion root = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
-		ITraceRegion first = new AbstractStatefulTraceRegion(0, 1, 2, 3) {
-			public ITraceRegion getParent() {
-				return root;
-			}
-		};
+		AbstractTraceRegion first = new AbstractStatefulTraceRegion(0, 1, 2, 3, root) {};
 		TraceRegion parent = new TraceRegion(1, 1, 3, 4, root, null, null);
 		TraceRegion second = new TraceRegion(1, 1, 3, 4, parent, null, null);
-		Iterator<ITraceRegion> iter = root.leafIterator();
+		Iterator<AbstractTraceRegion> iter = root.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
@@ -156,12 +144,8 @@ public class TraceRegionTest extends Assert {
 		final TraceRegion root = new TraceRegion(0, 2, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion parent = new TraceRegion(0, 1, 3, 4, root, null, null);
 		TraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
-		ITraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3) {
-			public ITraceRegion getParent() {
-				return root;
-			}
-		};
-		Iterator<ITraceRegion> iter = root.leafIterator();
+		AbstractTraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3, root) {};
+		Iterator<AbstractTraceRegion> iter = root.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
@@ -171,7 +155,7 @@ public class TraceRegionTest extends Assert {
 		TraceRegion parent = new TraceRegion(0, 2, 2, 3, root, null, null);
 		TraceRegion first = new TraceRegion(0, 1, 2, 3, parent, null, null);
 		TraceRegion second = new TraceRegion(1, 1, 3, 4, parent, null, null);
-		Iterator<ITraceRegion> iter = root.leafIterator();
+		Iterator<AbstractTraceRegion> iter = root.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
@@ -182,7 +166,7 @@ public class TraceRegionTest extends Assert {
 		TraceRegion first = new TraceRegion(0, 1, 2, 3, firstParent, null, null);
 		TraceRegion secondParent = new TraceRegion(1, 1, 3, 4, root, null, null);
 		TraceRegion second = new TraceRegion(1, 1, 3, 4, secondParent, null, null);
-		Iterator<ITraceRegion> iter = root.leafIterator();
+		Iterator<AbstractTraceRegion> iter = root.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second).iterator(), iter));
 	}
 	
@@ -190,14 +174,38 @@ public class TraceRegionTest extends Assert {
 	public void testLeafIterator_TwoChildren_WithGaps() {
 		final TraceRegion parent = new TraceRegion(0, 3, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion first = new TraceRegion(0, 1, 2, 3, parent, null, null);
-		ITraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3) {
-			public ITraceRegion getParent() {
-				return parent;
-			}
-		};
+		AbstractTraceRegion second = new AbstractStatefulTraceRegion(1, 1, 2, 3, parent) {};
 		AbstractTraceRegion third = new TraceRegion(2, 1, 3, 4, parent, null, null);
-		Iterator<ITraceRegion> iter = parent.leafIterator();
+		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertTrue(Iterators.elementsEqual(Arrays.asList(first, second, third).iterator(), iter));
 	}
+
+	@Test
+	public void testAnnotate_01() {
+		TraceRegion region = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
+		assertEquals("<2:3[a]", region.getAnnotateString("a"));
+	}
 	
+	@Test
+	public void testAnnotate_02() {
+		TraceRegion region = new TraceRegion(1, 1, 2, 3, null, URI.createURI("uri"), "project");
+		assertEquals("a<2:3[b]c", region.getAnnotateString("abc"));
+	}
+	
+	@Test
+	public void testAnnotate_03() {
+		TraceRegion parent = new TraceRegion(0, 4, 1, 2, null, URI.createURI("uri"), "project");
+		TraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
+		TraceRegion second = new TraceRegion(2, 1, 5, 6, parent, null, null);
+		TraceRegion third = new TraceRegion(3, 1, 7, 8, parent, null, null);
+		assertEquals("<1:2[<3:4[a]b<5:6[c]<7:8[d]]e", parent.getAnnotateString("abcde"));
+	}
+	
+	@Test
+	public void testAnnotate_04() {
+		TraceRegion root = new TraceRegion(0, 4, 1, 2, null, URI.createURI("uri"), "project");
+		TraceRegion parent = new TraceRegion(1, 2, 3, 4, root, null, null);
+		TraceRegion child = new TraceRegion(2, 1, 5, 6, parent, null, null);
+		assertEquals("<1:2[a<3:4[b<5:6[c]]d]e", root.getAnnotateString("abcde"));
+	}
 }
