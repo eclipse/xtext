@@ -57,7 +57,7 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "restriction" })
 public class XbaseHoverDocumentationProvider {
 	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
 	protected static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$

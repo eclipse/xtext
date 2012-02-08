@@ -41,6 +41,9 @@ public class JavaElementFinder implements IJavaElementFinder {
 	public IJavaElement findElementFor(JvmIdentifiableElement element) {
 		if (element == null || element.eResource() == null)
 			return null;
+		//TODO: Remove me
+		System.out.println("org.eclipse.xtext.common.types.util.jdt.JavaElementFinder.findElementFor(JvmIdentifiableElement) Project no null? " + projectProvider.getJavaProject(element.eResource().getResourceSet()) != null);
+		System.out.println("org.eclipse.xtext.common.types.util.jdt.JavaElementFinder.findElementFor(JvmIdentifiableElement) Project does exist? " + projectProvider.getJavaProject(element.eResource().getResourceSet()).exists());
 		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()));
 		IJavaElement result = implementation.doSwitch(element);
 		return result;
