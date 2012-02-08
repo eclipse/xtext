@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -26,7 +27,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class TracingAppendable extends AbstractTraceRegion implements ITracingAppendable {
+public class TracingAppendable extends AbstractTraceRegion implements IAppendable, ITraceRegionProvider {
 
 	protected static class ShiftedRegion extends AbstractTraceRegion {
 		private final int relativeOffset;
@@ -80,7 +81,7 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 	private final IAppendable delegate;
 	private int targetLength = -1;
 	private Exception targetLengthCloser;
-	private final int targetOffset;
+	private int targetOffset;
 	private TracingAppendable child;
 	private URI sourceURI;
 	private String sourceProject;
@@ -94,7 +95,7 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 		this.targetOffset = delegate.length();
 	}
 	
-	public TracingAppendable(IAppendable delegate, ILocationInFileProvider locationProvider, TracingAppendable parent) {
+	protected TracingAppendable(IAppendable delegate, ILocationInFileProvider locationProvider, TracingAppendable parent) {
 		super(parent);
 		this.delegate = delegate;
 		this.locationProvider = locationProvider;
@@ -118,26 +119,45 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 		setTraceData(sourceURI, null, offset, length);
 	}
 	
+	public TracingAppendable append(TracingAppendable other) {
+		if (other.getParent() != null) {
+			throw new IllegalStateException("other.parent was expected to be null but was: " + other.getParent());
+		}
+		closeRecentChild();
+		other.setParent(this);
+		child = other;
+		other.shiftTraceBy(length());
+		delegate.append(other.toString());
+		return this;
+	}
+	
+	protected void shiftTraceBy(int offset) {
+		targetOffset += offset;
+		for(AbstractTraceRegion nested: getNestedRegions()) {
+			((TracingAppendable)nested).shiftTraceBy(offset);
+		}
+	}
+
 	public List<AbstractTraceRegion> getTraceRegions(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
 		AbstractTraceRegion result = new ShiftedRegion(relativeOffset, this, parent);
 		return Collections.singletonList(result);
 	}
 	
-	public ITracingAppendable trace(EObject object) {
+	public TracingAppendable trace(EObject object) {
 		closeRecentChild();
 		TracingAppendable result = new TracingAppendable(delegate, locationProvider, object, this);
 		child = result;
 		return result;
 	}
 	
-	public ITracingAppendable trace(URI sourceURI, int offset, int length) {
+	public TracingAppendable trace(URI sourceURI, int offset, int length) {
 		closeRecentChild();
 		TracingAppendable result = new TracingAppendable(delegate, locationProvider, sourceURI, offset, length, this);
 		child = result;
 		return result;
 	}
 	
-	public ITracingAppendable trace(URI sourceURI, @Nullable String sourceProject, int offset, int length) {
+	public TracingAppendable trace(URI sourceURI, @Nullable String sourceProject, int offset, int length) {
 		closeRecentChild();
 		TracingAppendable result = new TracingAppendable(delegate, locationProvider, sourceURI, sourceProject, offset, length, this);
 		child = result;
@@ -293,4 +313,13 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 	public int length() {
 		return delegate.length();
 	}
+	
+	public char charAt(int index) {
+		return delegate.charAt(index);
+	}
+	
+	public CharSequence subSequence(int start, int end) {
+		return delegate.subSequence(start, end);
+	}
+	
 }

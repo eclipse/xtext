@@ -6,15 +6,12 @@ import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XReturnExpression
-import org.eclipse.xtext.xbase.compiler.ImportManager
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
+import org.eclipse.xtext.xbase.compiler.TracingAppendable
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.compiler.TracingAppendable
-import org.eclipse.xtext.resource.ILocationInFileProvider
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -30,7 +27,6 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension JvmTypesBuilder
 	@Inject IEarlyExitComputer computer
 	@Inject XbaseCompiler compiler
-	@Inject ILocationInFileProvider locationProvider
 
    	def dispatch void infer(Model m, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
    		val e  = m.block
@@ -40,26 +36,27 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    				^static = true
    				parameters += e.toParameter("args", e.newTypeRef(typeof(String)).addArrayTypeDimension)
    				if (!e.containsReturn) {
-   					setBody ['''
-						try {«e.compile(it)»
-						} catch (Throwable t) {}
-   					''']
+   					setBody [
+   						append("try {").increaseIndentation.newLine
+   						e.compile(trace(e))
+   						decreaseIndentation.newLine.append("} catch (Throwable t) {}")
+   					]
    				} else {
-   					setBody ['''
+   					setBody [append('''
 						try {
 							xbaseExpression();
 						} catch (Throwable t) {}
-   					''']
+   					'''.toString)]
    				}
    			]
    			if ( e.containsReturn ) {
    				members += e.toMethod("xbaseExpression", e.newTypeRef(typeof(Object))) [
    				^static = true
-				setBody ['''
-					if (Boolean.TRUE) {«e.compile(it)»
-					}
-					return null;
-				''']
+				setBody [
+					append("if (Boolean.TRUE) ").increaseIndentation
+					e.compile(trace(e))
+					decreaseIndentation.newLine.append("return null;")
+				]
    			]
    			}
    		]
@@ -79,12 +76,10 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 		return false
 	}
 	
-	def compile(XBlockExpression obj, ImportManager mnr) {
-		val appendable = new StringBuilderBasedAppendable(mnr, "\t", "\n")
-		val tracing = new TracingAppendable(appendable, locationProvider)
+	def void compile(XBlockExpression obj, TracingAppendable appendable) {
 		appendable.increaseIndentation
-		compiler.compile(obj, tracing, obj.newTypeRef(Void::TYPE))
-		return appendable.toString
+		compiler.compile(obj, appendable, obj.newTypeRef(Void::TYPE))
+		appendable.decreaseIndentation
 	}
 	
 }

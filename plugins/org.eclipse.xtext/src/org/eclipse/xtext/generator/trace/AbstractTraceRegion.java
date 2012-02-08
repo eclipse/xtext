@@ -29,6 +29,10 @@ public abstract class AbstractTraceRegion {
 	private List<AbstractTraceRegion> nestedRegions;
 
 	protected AbstractTraceRegion(@Nullable AbstractTraceRegion parent) {
+		setParent(parent);
+	}
+
+	protected void setParent(@Nullable AbstractTraceRegion parent) {
 		this.parent = parent;
 		if (parent != null)
 			setAsChildIn(parent);

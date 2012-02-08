@@ -16,7 +16,7 @@ import org.eclipse.xtext.common.types.JvmType;
  * @author Sven Efftinge - Initial contribution and API
  */
 @NonNullByDefault
-public interface IAppendable {
+public interface IAppendable extends CharSequence {
 	
 	IAppendable append(String string);
 

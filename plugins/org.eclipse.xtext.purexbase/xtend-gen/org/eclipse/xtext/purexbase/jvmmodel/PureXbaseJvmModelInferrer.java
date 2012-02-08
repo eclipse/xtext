@@ -19,8 +19,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingIn
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -85,22 +83,24 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                       boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
                       boolean _operator_not = BooleanExtensions.operator_not(_containsReturn);
                       if (_operator_not) {
-                        final Function1<ImportManager,CharSequence> _function = new Function1<ImportManager,CharSequence>() {
-                            public CharSequence apply(final ImportManager it) {
-                              StringConcatenation _builder = new StringConcatenation();
-                              _builder.append("try {");
-                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it);
-                              _builder.append(_compile, "");
-                              _builder.newLineIfNotEmpty();
-                              _builder.append("} catch (Throwable t) {}");
-                              _builder.newLine();
-                              return _builder;
+                        final Procedure1<TracingAppendable> _function = new Procedure1<TracingAppendable>() {
+                            public void apply(final TracingAppendable it) {
+                              {
+                                IAppendable _append = it.append("try {");
+                                IAppendable _increaseIndentation = _append.increaseIndentation();
+                                _increaseIndentation.newLine();
+                                TracingAppendable _trace = it.trace(e);
+                                PureXbaseJvmModelInferrer.this.compile(e, _trace);
+                                IAppendable _decreaseIndentation = it.decreaseIndentation();
+                                IAppendable _newLine = _decreaseIndentation.newLine();
+                                _newLine.append("} catch (Throwable t) {}");
+                              }
                             }
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
                       } else {
-                        final Function1<ImportManager,CharSequence> _function_1 = new Function1<ImportManager,CharSequence>() {
-                            public CharSequence apply(final ImportManager it) {
+                        final Procedure1<TracingAppendable> _function_1 = new Procedure1<TracingAppendable>() {
+                            public void apply(final TracingAppendable it) {
                               StringConcatenation _builder = new StringConcatenation();
                               _builder.append("try {");
                               _builder.newLine();
@@ -109,7 +109,8 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                               _builder.newLine();
                               _builder.append("} catch (Throwable t) {}");
                               _builder.newLine();
-                              return _builder;
+                              String _string = _builder.toString();
+                              it.append(_string);
                             }
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function_1);
@@ -127,18 +128,17 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                     public void apply(final JvmOperation it) {
                       {
                         it.setStatic(true);
-                        final Function1<ImportManager,CharSequence> _function = new Function1<ImportManager,CharSequence>() {
-                            public CharSequence apply(final ImportManager it) {
-                              StringConcatenation _builder = new StringConcatenation();
-                              _builder.append("if (Boolean.TRUE) {");
-                              String _compile = PureXbaseJvmModelInferrer.this.compile(e, it);
-                              _builder.append(_compile, "");
-                              _builder.newLineIfNotEmpty();
-                              _builder.append("}");
-                              _builder.newLine();
-                              _builder.append("return null;");
-                              _builder.newLine();
-                              return _builder;
+                        final Procedure1<TracingAppendable> _function = new Procedure1<TracingAppendable>() {
+                            public void apply(final TracingAppendable it) {
+                              {
+                                IAppendable _append = it.append("if (Boolean.TRUE) ");
+                                _append.increaseIndentation();
+                                TracingAppendable _trace = it.trace(e);
+                                PureXbaseJvmModelInferrer.this.compile(e, _trace);
+                                IAppendable _decreaseIndentation = it.decreaseIndentation();
+                                IAppendable _newLine = _decreaseIndentation.newLine();
+                                _newLine.append("return null;");
+                              }
                             }
                           };
                         PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
@@ -177,16 +177,11 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       return false;
   }
   
-  public String compile(final XBlockExpression obj, final ImportManager mnr) {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(mnr, "\t", "\n");
-      final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
-      TracingAppendable _tracingAppendable = new TracingAppendable(appendable, this.locationProvider);
-      final TracingAppendable tracing = _tracingAppendable;
+  public void compile(final XBlockExpression obj, final TracingAppendable appendable) {
       appendable.increaseIndentation();
       JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
-      this.compiler.compile(obj, tracing, _newTypeRef);
-      String _string = appendable.toString();
-      return _string;
+      this.compiler.compile(obj, appendable, _newTypeRef);
+      appendable.decreaseIndentation();
   }
   
   public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {

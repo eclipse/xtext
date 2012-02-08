@@ -8,8 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.xtext.xbase.lib.Functions;
-
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,14 +20,13 @@ public class CompilationStrategyAdapter extends AdapterImpl {
 		return type == CompilationStrategyAdapter.class;
 	}
 	
-	private Functions.Function1<ImportManager, ? extends CharSequence> compilationStrategy;
+	private Procedures.Procedure1<TracingAppendable> compilationStrategy;
 	
-	public Functions.Function1<ImportManager, ? extends CharSequence> getCompilationStrategy() {
+	public Procedures.Procedure1<TracingAppendable> getCompilationStrategy() {
 		return compilationStrategy;
 	}
 	
-	public void setCompilationStrategy(
-			Functions.Function1<ImportManager, ? extends CharSequence> compilationStrategy) {
+	public void setCompilationStrategy(Procedures.Procedure1<TracingAppendable> compilationStrategy) {
 		this.compilationStrategy = compilationStrategy;
 	}
 }
