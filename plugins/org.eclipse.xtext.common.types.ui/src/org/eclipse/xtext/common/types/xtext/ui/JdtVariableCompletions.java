@@ -116,16 +116,20 @@ public class JdtVariableCompletions {
 	protected String getFirstTypeArgumentSimpleName(String typeName) {
 		final int idxOfFirstBracket = typeName.indexOf(leftTypeArgParen());
 		if (idxOfFirstBracket != -1) {
-			int index = typeName.indexOf(rightTypeArgParen(), idxOfFirstBracket+1);
-			int idx1 = typeName.indexOf(typeArgSeparator(), idxOfFirstBracket+1);
+			final int afterFirstBracket = idxOfFirstBracket+1;
+			int index = typeName.indexOf(rightTypeArgParen(), afterFirstBracket);
+			if (index == -1)
+				return null;
+			int idx1 = typeName.indexOf(typeArgSeparator(), afterFirstBracket);
 			if (idx1 != -1 && idx1 < index) {
 				index = idx1;
 			}
-			int idx2 = typeName.indexOf(leftTypeArgParen(), idxOfFirstBracket+1);
+			int idx2 = typeName.indexOf(leftTypeArgParen(), afterFirstBracket);
 			if (idx2 != -1 && idx2 < index) {
 				index = idx2;
 			}
-			String firstInnerType = getSimpleName(typeName.substring(idxOfFirstBracket+1, index));
+			final String substring = typeName.substring(afterFirstBracket, index);
+			String firstInnerType = getSimpleName(substring);
 			return firstInnerType;
 		}
 		return null;
