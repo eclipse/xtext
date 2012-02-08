@@ -50,15 +50,16 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	
 	@Override
 	protected String getFirstLine(EObject o) {
-		if (o instanceof JvmIdentifiableElement) {
-			JvmTypeReference type = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) o);
-			return getFirstLine(type, o);
-		}
 		List<EObject> jvmElements = Lists.newArrayList(associations.getJvmElements(o));
 		if(jvmElements.size() > 0){
 		EObject jvmElement = jvmElements.get(0);
 			return hoverSignatureProvider.getHoverText(jvmElement);
 		}
+		if (o instanceof JvmIdentifiableElement) {
+			JvmTypeReference type = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) o);
+			return getFirstLine(type, o);
+		}
+		
 		return super.getFirstLine(o);
 	}
 
