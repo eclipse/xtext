@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
@@ -54,10 +54,10 @@ public class XtendCompiler extends XbaseCompiler {
 
 		private final LinkedList<RichStringIf> ifStack;
 		private final LinkedList<RichStringForLoop> forStack;
-		private final IAppendable appendable;
+		private final TracingAppendable appendable;
 		private final String variableName;
 
-		public RichStringPrepareCompiler(IAppendable appendable, String variableName) {
+		public RichStringPrepareCompiler(TracingAppendable appendable, String variableName) {
 			this.ifStack = Lists.newLinkedList();
 			this.forStack = Lists.newLinkedList();
 			this.appendable = appendable;
@@ -166,8 +166,8 @@ public class XtendCompiler extends XbaseCompiler {
 			if (!super.forLoopHasNext(before, separator, indentation))
 				return false;
 			RichStringForLoop forLoop = forStack.getLast();
-			String varName = getVarName(forLoop, appendable);
-			if (varName != null) {
+			if (appendable.hasName(forLoop)) {
+				String varName = getVarName(forLoop, appendable);
 				appendable.newLine();
 				appendable.append("if (!");
 				appendable.append(varName);
@@ -242,8 +242,16 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 
 	}
+	
+	@Override
+	public void doInternalToJavaStatement(XExpression obj, TracingAppendable appendable, boolean isReferenced) {
+		if (obj instanceof RichString)
+			_toJavaStatement((RichString)obj, appendable, isReferenced);
+		else
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+	}
 
-	public void _toJavaStatement(RichString richString, IAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(RichString richString, TracingAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
 		String variableName = b.declareSyntheticVariable(Tuples.pair(richString, "result"), "_builder");
@@ -258,7 +266,15 @@ public class XtendCompiler extends XbaseCompiler {
 		richStringProcessor.process(richString, compiler, indentationHandler.get());
 	}
 
-	public void _toJavaExpression(RichString richString, IAppendable b) {
+	@Override
+	public void internalToConvertedExpression(XExpression obj, TracingAppendable appendable) {
+		if (obj instanceof RichString)
+			_toJavaExpression((RichString) obj, appendable);
+		else
+			super.internalToConvertedExpression(obj, appendable);
+	}
+	
+	public void _toJavaExpression(RichString richString, TracingAppendable b) {
 		b.append(getVarName(Tuples.pair(richString, "result"), b));
 	}
 

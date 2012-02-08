@@ -22,15 +22,14 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.Later;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 
-public class DispatchMethodCompileStrategy implements Functions.Function1<ImportManager, CharSequence> {
+public class DispatchMethodCompileStrategy implements Procedures.Procedure1<TracingAppendable> {
 	
 	@Inject
 	private TypeReferences typeReferences;
@@ -43,7 +42,7 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 
 	@Inject
 	private TypeReferenceSerializer typeReferenceSerializer;
-
+	
 	private List<JvmOperation> sortedDispatchOperations;
 
 	private JvmOperation dispatchOperation;
@@ -53,8 +52,7 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 		this.sortedDispatchOperations = sortedDispatchOperations;
 	}
 
-	public CharSequence apply(ImportManager importManager) {
-		final StringBuilderBasedAppendable a = new StringBuilderBasedAppendable(importManager, "  ", "\n");
+	public void apply(TracingAppendable a) {
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
 		boolean[] allCasesSameType = new boolean[parameterCount];
@@ -80,20 +78,18 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 				final String name = getVarName(dispatchParam, a);
 				if (typeReferences.is(caseParamType, Void.class)) {
 					laters.add(new Later() {
-						@Override
-						public void exec() {
-							a.append(name).append(" == null");
+						public void exec(TracingAppendable appendable) {
+							appendable.append(name).append(" == null");
 						}
 					});
 				} else if (!allCasesSameType[i]) {
 					laters.add(new Later() {
-						@Override
-						public void exec() {
+						public void exec(TracingAppendable appendable) {
 							if (typeConformanceComputer.isConformant(caseParamType, dispatchParamType, true) && !primitives.isPrimitive(dispatchParamType)) {
-								a.append(name).append(" != null");
+								appendable.append(name).append(" != null");
 							} else {
-								a.append(name).append(" instanceof ");
-								a.append(primitives.asWrapperTypeIfPrimitive(caseParamType).getType());
+								appendable.append(name).append(" instanceof ");
+								appendable.append(primitives.asWrapperTypeIfPrimitive(caseParamType).getType());
 							}
 						}
 					});
@@ -111,7 +107,7 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 				a.increaseIndentation().increaseIndentation();
 				Iterator<Later> iterator = laters.iterator();
 				while (iterator.hasNext()) {
-					iterator.next().exec();
+					iterator.next().exec(a);
 					if (iterator.hasNext()) {
 						a.newLine().append(" && ");
 					}
@@ -157,7 +153,6 @@ public class DispatchMethodCompileStrategy implements Functions.Function1<Import
 			a.decreaseIndentation();
 			a.decreaseIndentation().newLine().append("}");
 		}
-		return a.toString();
 	}
 
 	protected void generateActualDispatchCall(JvmOperation dispatchOperation, JvmOperation actualOperationToCall,

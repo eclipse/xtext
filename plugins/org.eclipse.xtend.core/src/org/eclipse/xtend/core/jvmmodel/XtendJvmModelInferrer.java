@@ -303,7 +303,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			
 			JvmField cacheVar = jvmTypesBuilder.toField(source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), hashMap);
 			cacheVar.setFinal(true);
-			jvmTypesBuilder.setInitializer(cacheVar, compileStrategies.forCacheVariable(container));
+			jvmTypesBuilder.setInitializer(cacheVar, compileStrategies.forCacheVariable(source));
 			container.getMembers().add(cacheVar);
 			
 			JvmOperation initializer = typesFactory.createJvmOperation();

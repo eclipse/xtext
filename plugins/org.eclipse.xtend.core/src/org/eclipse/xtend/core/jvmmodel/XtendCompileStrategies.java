@@ -10,24 +10,24 @@ package org.eclipse.xtend.core.jvmmodel;
 import java.util.List;
 
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendCompileStrategies {
 
 	@Inject
 	private Provider<DispatchMethodCompileStrategy> dispatchMethodProvider;
 
-	public Functions.Function1<ImportManager, CharSequence> forDispatcher(JvmOperation dispatchOperation,
+	public Procedures.Procedure1<TracingAppendable> forDispatcher(JvmOperation dispatchOperation,
 			List<JvmOperation> sortedDispatchOperations) {
 		DispatchMethodCompileStrategy strategy = dispatchMethodProvider.get();
 		strategy.initialize(dispatchOperation, sortedDispatchOperations);
@@ -37,7 +37,7 @@ public class XtendCompileStrategies {
 	@Inject
 	private Provider<CacheMethodCompileStrategy> cacheMathodProvider;
 
-	public Functions.Function1<ImportManager, CharSequence> forCacheMethod(CreateExtensionInfo createExtensionInfo,
+	public Procedures.Procedure1<TracingAppendable> forCacheMethod(CreateExtensionInfo createExtensionInfo,
 			JvmField cacheField, JvmOperation initializerMethod) {
 		CacheMethodCompileStrategy strategy = cacheMathodProvider.get();
 		strategy.init(createExtensionInfo, cacheField, initializerMethod);
@@ -47,9 +47,9 @@ public class XtendCompileStrategies {
 	@Inject
 	private Provider<CacheVariableCompileStrategy> cacheVarProvider;
 
-	public Functions.Function1<ImportManager, CharSequence> forCacheVariable(JvmGenericType container) {
+	public Procedures.Procedure1<TracingAppendable> forCacheVariable(XtendFunction function) {
 		CacheVariableCompileStrategy strategy = cacheVarProvider.get();
-		strategy.init(container);
+		strategy.init(function);
 		return strategy;
 	}
 }

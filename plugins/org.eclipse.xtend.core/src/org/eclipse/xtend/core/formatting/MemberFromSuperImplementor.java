@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.Keyword;
@@ -114,7 +115,7 @@ public class MemberFromSuperImplementor {
 		boolean isFirst = true;
 		if (!isEmpty(overridden.getTypeParameters())) {
 			appendable.append("<");
-			for (JvmTypeParameter typeParameter : overridden.getTypeParameters()) {
+			for (@NonNull JvmTypeParameter typeParameter : overridden.getTypeParameters()) {
 				if (!isFirst)
 					appendable.append(", ");
 				isFirst = false;
