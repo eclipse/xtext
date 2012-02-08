@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XbaseRenameStrategy extends DefaultRenameStrategy {
 	@Override
 	protected EAttribute getNameAttribute(EObject targetElement) {

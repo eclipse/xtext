@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jdt.internal.ui.text.JavaHeuristicScanner;
 import org.eclipse.jface.preference.JFacePreferences;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
@@ -373,10 +374,8 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return end;
 	}
 
-	@SuppressWarnings("restriction")
 	private boolean checkGenericsHeuristic(IDocument document, int end, int bound) {
-		org.eclipse.jdt.internal.ui.text.JavaHeuristicScanner scanner = new org.eclipse.jdt.internal.ui.text.JavaHeuristicScanner(
-				document);
+		JavaHeuristicScanner scanner = new JavaHeuristicScanner(document);
 		return scanner.looksLikeClassInstanceCreationBackward(end, bound);
 	}
 }

@@ -15,7 +15,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class OpenTypeHierarchyHandler extends AbstractTypeHierarchyHandler {
 
 	@Override
