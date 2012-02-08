@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.hover;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -15,23 +17,47 @@ import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
+@SuppressWarnings("restriction")
 public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
+	
 	
 	@Inject
 	private ITypeProvider typeProvider;
+	
+	@Inject
+	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
+	
+	@Inject
+	private IJvmModelAssociations associations;
+	
+	@Inject
+	private XbaseHoverDocumentationProvider documentationProvider;
+	
+	@Override
+	protected String getDocumentation(EObject o) {
+		return documentationProvider.getDocumentation(o);
+	}
 	
 	@Override
 	protected String getFirstLine(EObject o) {
 		if (o instanceof JvmIdentifiableElement) {
 			JvmTypeReference type = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) o);
 			return getFirstLine(type, o);
+		}
+		List<EObject> jvmElements = Lists.newArrayList(associations.getJvmElements(o));
+		if(jvmElements.size() > 0){
+		EObject jvmElement = jvmElements.get(0);
+			return hoverSignatureProvider.getHoverText(jvmElement);
 		}
 		return super.getFirstLine(o);
 	}
