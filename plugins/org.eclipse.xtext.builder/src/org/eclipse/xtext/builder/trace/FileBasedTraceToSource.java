@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToSource;
 import org.eclipse.xtext.generator.trace.ITraceToTarget;
 import org.eclipse.xtext.util.ITextRegion;
@@ -36,25 +36,25 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 
 	private static final Logger log = Logger.getLogger(FileBasedTraceToSource.class);
 	
-	protected class TraceRegionsByLanguage implements Iterable<ITraceRegion> {
-		private final Iterable<ITraceRegion> allTraceRegions;
+	protected class TraceRegionsByLanguage implements Iterable<AbstractTraceRegion> {
+		private final Iterable<AbstractTraceRegion> allTraceRegions;
 		private final LanguageInfo language;
 
-		protected TraceRegionsByLanguage(Iterable<ITraceRegion> allTraceRegions, LanguageInfo language) {
+		protected TraceRegionsByLanguage(Iterable<AbstractTraceRegion> allTraceRegions, LanguageInfo language) {
 			this.allTraceRegions = allTraceRegions;
 			this.language = language;
 		}
 
-		public Iterator<ITraceRegion> iterator() {
-			Iterator<ITraceRegion> result = allTraceRegions.iterator();
-			Iterator<ITraceRegion> languageSpecific = Iterators.transform(result, new Function<ITraceRegion, ITraceRegion>() {
-				public ITraceRegion apply(ITraceRegion input) {
+		public Iterator<AbstractTraceRegion> iterator() {
+			Iterator<AbstractTraceRegion> result = allTraceRegions.iterator();
+			Iterator<AbstractTraceRegion> languageSpecific = Iterators.transform(result, new Function<AbstractTraceRegion, AbstractTraceRegion>() {
+				public AbstractTraceRegion apply(AbstractTraceRegion input) {
 					return findParentByLanguage(input, language);
 				}
 			});
-			Iterator<ITraceRegion> withoutDuplicates = Iterators.filter(languageSpecific, new Predicate<ITraceRegion>() {
-				private ITraceRegion previous = null;
-				public boolean apply(ITraceRegion input) {
+			Iterator<AbstractTraceRegion> withoutDuplicates = Iterators.filter(languageSpecific, new Predicate<AbstractTraceRegion>() {
+				private AbstractTraceRegion previous = null;
+				public boolean apply(AbstractTraceRegion input) {
 					if (input == null || input.equals(previous))
 						return false;
 					previous = input;
@@ -83,20 +83,20 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 	}
 
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region, LanguageInfo language) {
-		ITraceRegion left = findLeafAtLeftOffset(region.getOffset());
+		AbstractTraceRegion left = findLeafAtLeftOffset(region.getOffset());
 		left = findParentByLanguage(left, language);
-		ITraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
+		AbstractTraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
 		right = findParentByLanguage(left, language);
 		return mergeRegions(left, right);
 	}
 	
-	protected boolean isLanguage(ITraceRegion region, LanguageInfo info) {
+	protected boolean isLanguage(AbstractTraceRegion region, LanguageInfo info) {
 		if (info.equals(findLanguage(region.getToPath())))
 			return true;
 		return false;
 	}
 	
-	protected ITraceRegion findParentByLanguage(ITraceRegion region, LanguageInfo info) {
+	protected AbstractTraceRegion findParentByLanguage(AbstractTraceRegion region, LanguageInfo info) {
 		while(region != null && !isLanguage(region, info)) {
 			region = region.getParent();
 		}
@@ -104,19 +104,19 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 	}
 
 	public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region, LanguageInfo language) {
-		final Iterable<ITraceRegion> allTraceRegions = getAllTraceRegions(region);
-		Iterable<ITraceRegion> filteredByLangauge = new TraceRegionsByLanguage(allTraceRegions, language);
+		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions(region);
+		Iterable<AbstractTraceRegion> filteredByLangauge = new TraceRegionsByLanguage(allTraceRegions, language);
 		return toLocations(filteredByLangauge);
 	}
 
 	public Iterable<ILocationInResource> getAllLocations(LanguageInfo language) {
-		final Iterable<ITraceRegion> allTraceRegions = getAllTraceRegions();
-		Iterable<ITraceRegion> filteredByLangauge = new TraceRegionsByLanguage(allTraceRegions, language);
+		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
+		Iterable<AbstractTraceRegion> filteredByLangauge = new TraceRegionsByLanguage(allTraceRegions, language);
 		return toLocations(filteredByLangauge);
 	}
 
 	@Override
-	protected ITraceRegion getRootTraceRegion() {
+	protected AbstractTraceRegion getRootTraceRegion() {
 		IStorage resource = getDerivedResource();
 		if (resource instanceof IResource) {
 			IPath tracePath = resource.getFullPath().removeFileExtension().addFileExtension(FileBasedTraceInformation.TRACE_FILE_EXTENSION);

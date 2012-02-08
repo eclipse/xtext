@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.generator.trace.ITraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 
 /**
@@ -26,7 +26,7 @@ public class TraceRegionSerializer {
 
 	private static final int VERSION_1_0 = 1;
 	
-	public void writeTraceRegionTo(ITraceRegion region, OutputStream stream) throws IOException {
+	public void writeTraceRegionTo(AbstractTraceRegion region, OutputStream stream) throws IOException {
 		if (region != null && region.getParent() != null)
 			throw new IllegalArgumentException("region must be the root");
 		DataOutputStream dataStream = new DataOutputStream(new BufferedOutputStream(stream));
@@ -47,9 +47,9 @@ public class TraceRegionSerializer {
 		}
 	}
 	
-	protected void writeChildrenTo(ITraceRegion parent, DataOutputStream dataStream) throws IOException {
+	protected void writeChildrenTo(AbstractTraceRegion parent, DataOutputStream dataStream) throws IOException {
 		dataStream.writeInt(parent.getNestedRegions().size());
-		for(ITraceRegion child: parent.getNestedRegions()) {
+		for(AbstractTraceRegion child: parent.getNestedRegions()) {
 			dataStream.writeInt(child.getFromOffset());
 			dataStream.writeInt(child.getFromLength());
 			dataStream.writeInt(child.getToOffset());
@@ -72,7 +72,7 @@ public class TraceRegionSerializer {
 		}
 	}
 
-	public ITraceRegion readTraceRegionFrom(InputStream contents) throws IOException {
+	public AbstractTraceRegion readTraceRegionFrom(InputStream contents) throws IOException {
 		DataInputStream dataStream = new DataInputStream(new BufferedInputStream(contents));
 		int version = dataStream.readInt(); // no version specific code yet, only one version shipped
 		boolean isNull = !dataStream.readBoolean();

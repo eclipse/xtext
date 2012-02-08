@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -56,15 +56,15 @@ public abstract class AbstractTrace implements ITrace {
 	 * resource that this {@link ITrace} is associated with. 
 	 * @return the root trace region. May be <code>null</code> if no trace data is available.
 	 */
-	protected abstract ITraceRegion getRootTraceRegion();
+	protected abstract AbstractTraceRegion getRootTraceRegion();
 	
 	public ILocationInResource getBestAssociatedLocation(@NonNull ITextRegion region) {
-		ITraceRegion left = findLeafAtLeftOffset(region.getOffset());
-		ITraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
+		AbstractTraceRegion left = findLeafAtLeftOffset(region.getOffset());
+		AbstractTraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
 		return mergeRegions(left, right);
 	}
 
-	protected ILocationInResource mergeRegions(ITraceRegion left, ITraceRegion right) {
+	protected ILocationInResource mergeRegions(AbstractTraceRegion left, AbstractTraceRegion right) {
 		if (left == null) {
 			if (right != null)
 				return createLocationInResourceFor(right);
@@ -84,7 +84,7 @@ public abstract class AbstractTrace implements ITrace {
 	 * @param traceRegion the start of the location
 	 * @return the location in resource. Never <code>null</code>.
 	 */
-	protected ILocationInResource createLocationInResourceFor(ITraceRegion traceRegion) {
+	protected ILocationInResource createLocationInResourceFor(AbstractTraceRegion traceRegion) {
 		return createLocationInResourceFor(traceRegion, traceRegion);
 	}
 	
@@ -95,28 +95,28 @@ public abstract class AbstractTrace implements ITrace {
 	 * @param right the end of the location
 	 * @return the location in resource. Never <code>null</code>.
 	 */
-	protected ILocationInResource createLocationInResourceFor(ITraceRegion left, ITraceRegion right) {
+	protected ILocationInResource createLocationInResourceFor(AbstractTraceRegion left, AbstractTraceRegion right) {
 		int offset = left.getToOffset();
 		int length = right.getToLength() + right.getToOffset() - offset;
 		return new OffsetBasedLocationInResource(offset, length, left.getToPath(), left.getToProjectName(), this);
 	}
 
-	public ITraceRegion findLeafAtRightOffset(int offset) {
+	public AbstractTraceRegion findLeafAtRightOffset(int offset) {
 		return findLeafNodeAt(offset, false);
 	}
 
-	protected ITraceRegion findLeafNodeAt(int offset, boolean left) {
-		ITraceRegion candidate = getRootTraceRegion();
+	protected AbstractTraceRegion findLeafNodeAt(int offset, boolean left) {
+		AbstractTraceRegion candidate = getRootTraceRegion();
 		if (candidate == null || !encloses(candidate, offset, left)) {
 			// we have an inconsistent state - no candidate matches
 			return null;
 		}
 		outer: while(candidate != null) {
-			List<ITraceRegion> children = candidate.getNestedRegions();
+			List<? extends AbstractTraceRegion> children = candidate.getNestedRegions();
 			if (children.isEmpty()) {
 				return candidate;
 			}
-			for(ITraceRegion child: children) {
+			for(AbstractTraceRegion child: children) {
 				if (encloses(child, offset, left)) {
 					candidate = child;
 					continue outer;
@@ -130,7 +130,7 @@ public abstract class AbstractTrace implements ITrace {
 		return null;
 	}
 
-	public ITraceRegion findLeafAtLeftOffset(int offset) {
+	public AbstractTraceRegion findLeafAtLeftOffset(int offset) {
 		return findLeafNodeAt(offset, true);
 	}
 	
@@ -141,7 +141,7 @@ public abstract class AbstractTrace implements ITrace {
 	 * @param includeRegionEnd whether a region is enclosing the offset if it ends at that location.
 	 * @return <code>true</true> if the given region encloses the offset.
 	 */
-	public boolean encloses(ITraceRegion region, int offset, boolean includeRegionEnd) {
+	public boolean encloses(AbstractTraceRegion region, int offset, boolean includeRegionEnd) {
 		if (offset < 0)
 			// TODO should this be return false;?
 			throw new IllegalArgumentException("offset may not be negative");
@@ -170,37 +170,37 @@ public abstract class AbstractTrace implements ITrace {
 	}
 
 	public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region) {
-		Iterable<ITraceRegion> allTraceRegions = getAllTraceRegions(region);
+		Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions(region);
 		return toLocations(allTraceRegions);
 	}
 	
-	protected Iterable<ILocationInResource> toLocations(Iterable<ITraceRegion> allTraceRegions) {
-		return Iterables.transform(allTraceRegions, new Function<ITraceRegion, ILocationInResource>() {
-			public ILocationInResource apply(ITraceRegion input) {
+	protected Iterable<ILocationInResource> toLocations(Iterable<AbstractTraceRegion> allTraceRegions) {
+		return Iterables.transform(allTraceRegions, new Function<AbstractTraceRegion, ILocationInResource>() {
+			public ILocationInResource apply(AbstractTraceRegion input) {
 				return createLocationInResourceFor(input);
 			}
 		});
 	}
 
-	protected Iterable<ITraceRegion> getAllTraceRegions(ITextRegion region) {
-		final ITraceRegion left = findLeafAtLeftOffset(region.getOffset());
-		final ITraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
+	protected Iterable<AbstractTraceRegion> getAllTraceRegions(ITextRegion region) {
+		final AbstractTraceRegion left = findLeafAtLeftOffset(region.getOffset());
+		final AbstractTraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
 		if (left == null || right == null) {
 			return Collections.emptyList();
 		}
-		return new Iterable<ITraceRegion>() {
+		return new Iterable<AbstractTraceRegion>() {
 
-			public Iterator<ITraceRegion> iterator() {
-				ITraceRegion root = getRootTraceRegion();
+			public Iterator<AbstractTraceRegion> iterator() {
+				AbstractTraceRegion root = getRootTraceRegion();
 				if (root == null)
 					return Iterators.emptyIterator();
-				final Iterator<ITraceRegion> allLeafs = root.leafIterator();
-				Iterator<ITraceRegion> result = new AbstractIterator<ITraceRegion>() {
+				final Iterator<AbstractTraceRegion> allLeafs = root.leafIterator();
+				Iterator<AbstractTraceRegion> result = new AbstractIterator<AbstractTraceRegion>() {
 					
-					ITraceRegion first;
+					AbstractTraceRegion first;
 					{
 						while(allLeafs.hasNext()) {
-							ITraceRegion next = allLeafs.next();
+							AbstractTraceRegion next = allLeafs.next();
 							if (next.getFromOffset() == left.getFromOffset()) {
 								this.first = next;
 								break;
@@ -209,15 +209,15 @@ public abstract class AbstractTrace implements ITrace {
 					}
 					
 					@Override
-					protected ITraceRegion computeNext() {
+					protected AbstractTraceRegion computeNext() {
 						if (first != null) {
-							ITraceRegion result = first;
+							AbstractTraceRegion result = first;
 							first = null;
 							return result;
 						}
 						if (!allLeafs.hasNext())
 							return endOfData();
-						ITraceRegion candidate = allLeafs.next();
+						AbstractTraceRegion candidate = allLeafs.next();
 						if (candidate.getFromOffset() >= right.getFromOffset() + right.getFromLength()) {
 							return endOfData();
 						}
@@ -231,17 +231,17 @@ public abstract class AbstractTrace implements ITrace {
 	}
 
 	public Iterable<ILocationInResource> getAllLocations() {
-		Iterable<ITraceRegion> allTraceRegions = getAllTraceRegions();
+		Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
 		return toLocations(allTraceRegions);		
 	}
 	
-	protected Iterable<ITraceRegion> getAllTraceRegions() {
-		return new Iterable<ITraceRegion>() {
-			public Iterator<ITraceRegion> iterator() {
-				ITraceRegion root = getRootTraceRegion();
+	protected Iterable<AbstractTraceRegion> getAllTraceRegions() {
+		return new Iterable<AbstractTraceRegion>() {
+			public Iterator<AbstractTraceRegion> iterator() {
+				AbstractTraceRegion root = getRootTraceRegion();
 				if (root == null)
 					return Iterators.emptyIterator();
-				final Iterator<ITraceRegion> result = root.leafIterator();
+				final Iterator<AbstractTraceRegion> result = root.leafIterator();
 				return result;
 			}
 		};
