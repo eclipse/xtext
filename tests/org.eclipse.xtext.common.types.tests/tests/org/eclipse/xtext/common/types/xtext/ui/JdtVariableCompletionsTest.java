@@ -73,6 +73,9 @@ public class JdtVariableCompletionsTest extends Assert {
 		assertEquals("String", completions.getFirstTypeArgumentSimpleName("java.util.List<java.lang.String>"));
 		assertEquals("Foo", completions.getFirstTypeArgumentSimpleName("Map<Foo,Bar>"));
 		assertEquals("Foo", completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo<?>,Bar>"));
+		assertNull(completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo"));
+		assertNull(completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo<"));
+		assertEquals("Foo",completions.getFirstTypeArgumentSimpleName("Map<my.foo.Foo<>"));
 		assertNull(completions.getFirstTypeArgumentSimpleName("§52F$%%"));
 	}
 	
