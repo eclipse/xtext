@@ -8,16 +8,14 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ITraceRegion;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
-import org.eclipse.xtext.generator.trace.LeafIterator;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -27,50 +25,52 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
-public class TracingAppendable extends AbstractTraceRegion implements ITracingAppendable, ITraceRegionProvider {
+@NonNullByDefault
+public class TracingAppendable extends AbstractTraceRegion implements ITracingAppendable {
 
 	protected static class ShiftedRegion extends AbstractTraceRegion {
 		private final int relativeOffset;
-		private final ITraceRegion original;
-
-		protected ShiftedRegion(int relativeOffset, ITraceRegion original) {
+		private final AbstractTraceRegion original;
+		
+		protected ShiftedRegion(final int relativeOffset, AbstractTraceRegion original, @Nullable AbstractTraceRegion parent) {
+			super(parent);
 			this.relativeOffset = relativeOffset;
 			this.original = original;
+			List<AbstractTraceRegion> nested = Lists.transform(original.getNestedRegions(), new Function<AbstractTraceRegion, AbstractTraceRegion>() {
+				public AbstractTraceRegion apply(@Nullable AbstractTraceRegion input) {
+					if (input == null)
+						throw new IllegalArgumentException("input may not be null");
+					return new ShiftedRegion(relativeOffset, input, ShiftedRegion.this);
+				}
+			});
+			getWritableNestedRegions().addAll(nested);
 		}
 
+		@Override
 		public int getToOffset() {
 			return original.getToOffset();
 		}
 
+		@Override
 		public int getToLength() {
 			return original.getToLength();
 		}
-
-		public ITraceRegion getParent() {
-			return original.getParent();
-		}
 		@Override
+		@Nullable
 		public URI getToPath() {
 			return original.getToPath();
 		}
 		@Override
+		@Nullable
 		public String getToProjectName() {
 			return original.getToProjectName();
 		}
 		@Override
-		public List<ITraceRegion> getNestedRegions() {
-			List<ITraceRegion> result = Lists.transform(super.getNestedRegions(), new Function<ITraceRegion, ITraceRegion>() {
-				public ITraceRegion apply(ITraceRegion input) {
-					return new ShiftedRegion(relativeOffset, original);
-				}
-			});
-			return result;
-		}
 		public int getFromOffset() {
 			return original.getFromOffset() + relativeOffset;
 		}
 
+		@Override
 		public int getFromLength() {
 			return original.getFromLength();
 		}
@@ -79,120 +79,107 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 	private final ILocationInFileProvider locationProvider;
 	private final IAppendable delegate;
 	private int targetLength = -1;
+	private Exception targetLengthCloser;
 	private final int targetOffset;
 	private TracingAppendable child;
-	private TracingAppendable parent;
-	private List<TracingAppendable> children;
 	private URI sourceURI;
 	private String sourceProject;
 	private int sourceOffset;
 	private int sourceLength;
 	
 	public TracingAppendable(IAppendable delegate, ILocationInFileProvider locationProvider) {
+		super(null);
 		this.delegate = delegate;
 		this.locationProvider = locationProvider;
 		this.targetOffset = delegate.length();
 	}
 	
-	public TracingAppendable(IAppendable delegate, ILocationInFileProvider helper, EObject object) {
+	public TracingAppendable(IAppendable delegate, ILocationInFileProvider locationProvider, TracingAppendable parent) {
+		super(parent);
+		this.delegate = delegate;
+		this.locationProvider = locationProvider;
+		this.targetOffset = delegate.length();
+	}
+	
+	protected TracingAppendable(IAppendable delegate, ILocationInFileProvider helper, EObject object, TracingAppendable parent) {
 		this(delegate, helper);
 		ITextRegion textRegion = helper.getSignificantTextRegion(object);
 		URI uri = object.eResource().getURI();
 		setTraceData(uri, null, textRegion.getOffset(), textRegion.getLength());
 	}
 	
-	public TracingAppendable(IAppendable delegate, ILocationInFileProvider helper, URI sourceURI, String sourceProject, int offset, int length) {
+	protected TracingAppendable(IAppendable delegate, ILocationInFileProvider helper, URI sourceURI, @Nullable String sourceProject, int offset, int length, TracingAppendable parent) {
 		this(delegate, helper);
 		setTraceData(sourceURI, sourceProject, offset, length);
 	}
 	
-	public TracingAppendable(IAppendable delegate, ILocationInFileProvider helper, URI sourceURI, int offset, int length) {
+	protected TracingAppendable(IAppendable delegate, ILocationInFileProvider helper, URI sourceURI, int offset, int length, TracingAppendable parent) {
 		this(delegate, helper);
 		setTraceData(sourceURI, null, offset, length);
 	}
 	
-	public List<ITraceRegion> getTraceRegions(final int relativeOffset) {
-		ITraceRegion result = new ShiftedRegion(relativeOffset, this);
+	public List<AbstractTraceRegion> getTraceRegions(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
+		AbstractTraceRegion result = new ShiftedRegion(relativeOffset, this, parent);
 		return Collections.singletonList(result);
 	}
 	
 	public ITracingAppendable trace(EObject object) {
-		TracingAppendable result = new TracingAppendable(delegate, locationProvider, object);
-		result.setParent(this);
+		closeRecentChild();
+		TracingAppendable result = new TracingAppendable(delegate, locationProvider, object, this);
+		child = result;
 		return result;
 	}
 	
 	public ITracingAppendable trace(URI sourceURI, int offset, int length) {
-		TracingAppendable result = new TracingAppendable(delegate, locationProvider, sourceURI, offset, length);
-		result.setParent(this);
+		closeRecentChild();
+		TracingAppendable result = new TracingAppendable(delegate, locationProvider, sourceURI, offset, length, this);
+		child = result;
 		return result;
 	}
 	
-	public ITracingAppendable trace(URI sourceURI, String sourceProject, int offset, int length) {
-		TracingAppendable result = new TracingAppendable(delegate, locationProvider, sourceURI, sourceProject, offset, length);
-		result.setParent(this);
+	public ITracingAppendable trace(URI sourceURI, @Nullable String sourceProject, int offset, int length) {
+		closeRecentChild();
+		TracingAppendable result = new TracingAppendable(delegate, locationProvider, sourceURI, sourceProject, offset, length, this);
+		child = result;
 		return result;
 	}
 	
-	public List<ITraceRegion> getTraceRegions(int relativeOffset, ITraceRegion parent) {
-		if (relativeOffset == 0)
-			return null;
-		return null;
-	}
-	
-	protected void setParent(TracingAppendable parent) {
-		parent.closeChildren();
-		if (parent.children == null) {
-			parent.children = Lists.newArrayList();
-		}
-		parent.children.add(this);
-		parent.child = this;
-		this.parent = parent;
-	}
-
-	protected void setTraceData(URI sourceURI, String sourceProject, int sourceOffset, int sourceLength) {
+	protected void setTraceData(URI sourceURI, @Nullable String sourceProject, int sourceOffset, int sourceLength) {
 		this.sourceURI = sourceURI;
 		if (sourceProject != null) {
 			this.sourceProject = sourceProject;
 		} else {
 			if (!sourceURI.isPlatformResource()) {
 				// TODO see CharSequenceTraceWrapper, duplicate code
-				throw new IllegalArgumentException("Expected platform resource uri");
+				sourceProject = "<unknown>";
+			} else {
+				sourceProject = sourceURI.segment(2);
 			}
-			sourceProject = sourceURI.segment(2);
 		}
 		this.sourceOffset = sourceOffset;
 		this.sourceLength = sourceLength;
 	}
 
+	@Override
 	public int getFromLength() {
 		if (targetLength != -1)
 			return targetLength;
 		return delegate.length() - getFromOffset();
 	}
 	
+	@Override
 	public int getFromOffset() {
 		return targetOffset;
 	}
 	
+	@Override
 	public int getToLength() {
 		return sourceLength;
 	}
 	
+	@Override
 	public int getToOffset() {
 		return sourceOffset;
-	}
-	
-	public ITraceRegion getParent() {
-		return parent;
-	}
-	
-	@Override
-	public List<ITraceRegion> getNestedRegions() {
-		if (children == null) {
-			return Collections.emptyList();
-		}
-		return Collections.<ITraceRegion>unmodifiableList(children);
 	}
 	
 	@Override
@@ -205,55 +192,55 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 		return sourceProject;
 	}
 	
-	@Override
-	public Iterator<ITraceRegion> leafIterator() {
-		if (children == null)
-			return Collections.<ITraceRegion>singleton(this).iterator();
-		return new LeafIterator(this);
-	}
-	
 	protected void closeTraceRegion() {
 		if (targetLength != -1)
 			return;
-		closeChildren();
+		closeRecentChild();
 		targetLength = length() - targetOffset;
+		targetLengthCloser = new Exception();
+		targetLengthCloser.fillInStackTrace();
 	}
 
-	protected void closeChildren() {
+	protected void closeRecentChild() {
 		if (targetLength != -1) {
-			throw new IllegalStateException();
+			throw new IllegalStateException(targetLengthCloser);
 		}
 		if (child != null) {
 			child.closeTraceRegion();
+			List<AbstractTraceRegion> children = getWritableNestedRegions();
+			if (child.targetLength == 0 && !children.isEmpty()) {
+				if (children.get(children.size() - 1) == child)
+					children.remove(children.size() - 1);
+			}
 		}
 	}
 	
 	public IAppendable append(String string) {
-		closeChildren();
+		closeRecentChild();
 		delegate.append(string);
 		return this;
 	}
 
 	public IAppendable append(JvmType type) {
-		closeChildren();
+		closeRecentChild();
 		delegate.append(type);
 		return this;
 	}
 
 	public IAppendable newLine() {
-		closeChildren();
+		closeRecentChild();
 		delegate.newLine();
 		return this;
 	}
 
 	public IAppendable increaseIndentation() {
-		closeChildren();
+		closeRecentChild();
 		delegate.increaseIndentation();
 		return this;
 	}
 
 	public IAppendable decreaseIndentation() {
-		closeChildren();
+		closeRecentChild();
 		delegate.decreaseIndentation();
 		return this;
 	}
@@ -281,9 +268,17 @@ public class TracingAppendable extends AbstractTraceRegion implements ITracingAp
 	public String getName(Object key) {
 		return delegate.getName(key);
 	}
+	
+	public boolean hasName(Object key) {
+		return delegate.hasName(key);
+	}
 
 	public Object getObject(String name) {
 		return delegate.getObject(name);
+	}
+	
+	public boolean hasObject(String name) {
+		return delegate.hasObject(name);
 	}
 
 	public void closeScope() {

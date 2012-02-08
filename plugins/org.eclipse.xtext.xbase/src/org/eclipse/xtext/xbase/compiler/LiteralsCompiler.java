@@ -21,6 +21,40 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
  */
 public class LiteralsCompiler extends TypeConvertingCompiler {
 
+	@Override
+	protected void internalToConvertedExpression(XExpression obj, ITracingAppendable appendable) {
+		if (obj instanceof XStringLiteral) {
+			_toJavaExpression((XStringLiteral) obj, appendable);
+		} else if (obj instanceof XIntLiteral) {
+			_toJavaExpression((XIntLiteral) obj, appendable);
+		} else if (obj instanceof XNullLiteral) {
+			_toJavaExpression((XNullLiteral) obj, appendable);
+		} else if (obj instanceof XBooleanLiteral) {
+			_toJavaExpression((XBooleanLiteral) obj, appendable);
+		} else if (obj instanceof XTypeLiteral) {
+			_toJavaExpression((XTypeLiteral) obj, appendable);
+		} else {
+			super.internalToConvertedExpression(obj, appendable);
+		}
+	}
+	
+	@Override
+	protected void doInternalToJavaStatement(XExpression obj, ITracingAppendable appendable, boolean isReferenced) {
+		if (obj instanceof XStringLiteral) {
+			_toJavaStatement((XStringLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XIntLiteral) {
+			_toJavaStatement((XIntLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XNullLiteral) {
+			_toJavaStatement((XNullLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XBooleanLiteral) {
+			_toJavaStatement((XBooleanLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XTypeLiteral) {
+			_toJavaStatement((XTypeLiteral) obj, appendable, isReferenced);
+		} else {
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+		}
+	}
+	
 	public void _toJavaExpression(XStringLiteral expr, ITracingAppendable b) {
 		String javaString = Strings.convertToJavaString(expr.getValue());
 		b.append("\"").append(javaString).append("\"");

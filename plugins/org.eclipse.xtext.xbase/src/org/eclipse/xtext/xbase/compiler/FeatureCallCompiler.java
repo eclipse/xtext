@@ -70,8 +70,28 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
 	private ILogicalContainerProvider contextProvider;
+	
+	@Override
+	protected void internalToConvertedExpression(XExpression obj, ITracingAppendable appendable) {
+		if (obj instanceof XAbstractFeatureCall) {
+			_toJavaExpression((XAbstractFeatureCall) obj, appendable);
+		} else {
+			super.internalToConvertedExpression(obj, appendable);
+		}
+	}
+	
+	@Override
+	protected void doInternalToJavaStatement(XExpression obj, ITracingAppendable appendable, boolean isReferenced) {
+		if (obj instanceof XFeatureCall) {
+			_toJavaStatement((XFeatureCall) obj, appendable, isReferenced);
+		} else if (obj instanceof XAbstractFeatureCall) {
+			_toJavaStatement((XAbstractFeatureCall) obj, appendable, isReferenced);
+		} else { 
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+		}
+	}
 
-	protected void _toJavaStatement(final XAbstractFeatureCall expr, final ITracingAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITracingAppendable b, boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
@@ -89,9 +109,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				} else {
 					if (isReferenced && !isPrimitiveVoid(expr)) {
 						Later later = new Later() {
-							@Override
-							public void exec() {
-								featureCalltoJavaExpression(expr, b);
+							public void exec(ITracingAppendable appendable) {
+								featureCalltoJavaExpression(expr, appendable);
 							}
 						};
 						declareFreshLocalVariable(expr, b, later);
@@ -154,7 +173,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (feature instanceof JvmField || feature instanceof JvmFormalParameter) {
 				return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe();
 			}
-			return b.getName(feature) == null;
+			return !b.hasName(feature);
 		}
 		return super.isVariableDeclarationRequired(expr, b);
 	}
@@ -219,7 +238,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 					b.append(call.getFeature().getSimpleName());
 				} else {
-					if (b.getName(call.getFeature()) == null) {
+					if (!b.hasName(call.getFeature())) {
 						String variableName = getFavoriteVariableName(call.getFeature());
 						if (log.isInfoEnabled())
 							log.info("The variable '" + variableName + "' has not been declared.");

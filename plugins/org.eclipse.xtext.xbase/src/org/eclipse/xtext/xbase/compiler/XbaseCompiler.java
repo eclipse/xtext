@@ -57,6 +57,76 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject 
 	private IEarlyExitComputer earlyExitComputer;
 	
+	@Override
+	protected void internalToConvertedExpression(XExpression obj, ITracingAppendable appendable) {
+		if (obj instanceof XBlockExpression) {
+			_toJavaExpression((XBlockExpression) obj, appendable);
+		} else if (obj instanceof XCastedExpression) {
+			_toJavaExpression((XCastedExpression) obj, appendable);
+		} else if (obj instanceof XClosure) {
+			_toJavaExpression((XClosure) obj, appendable);
+		} else if (obj instanceof XConstructorCall) {
+			_toJavaExpression((XConstructorCall) obj, appendable);
+		} else if (obj instanceof XDoWhileExpression) {
+			_toJavaExpression((XDoWhileExpression) obj, appendable);
+		} else if (obj instanceof XForLoopExpression) {
+			_toJavaExpression((XForLoopExpression) obj, appendable);
+		} else if (obj instanceof XIfExpression) {
+			_toJavaExpression((XIfExpression) obj, appendable);
+		} else if (obj instanceof XInstanceOfExpression) {
+			_toJavaExpression((XInstanceOfExpression) obj, appendable);
+		} else if (obj instanceof XReturnExpression) {
+			_toJavaExpression((XReturnExpression) obj, appendable);
+		} else if (obj instanceof XSwitchExpression) {
+			_toJavaExpression((XSwitchExpression) obj, appendable);
+		} else if (obj instanceof XThrowExpression) {
+			_toJavaExpression((XThrowExpression) obj, appendable);
+		} else if (obj instanceof XTryCatchFinallyExpression) {
+			_toJavaExpression((XTryCatchFinallyExpression) obj, appendable);
+		} else if (obj instanceof XVariableDeclaration) {
+			_toJavaExpression((XVariableDeclaration) obj, appendable);
+		} else if (obj instanceof XWhileExpression) {
+			_toJavaExpression((XWhileExpression) obj, appendable);
+		} else {
+			super.internalToConvertedExpression(obj, appendable);
+		}
+	}
+	
+	@Override
+	protected void doInternalToJavaStatement(XExpression obj, ITracingAppendable appendable, boolean isReferenced) {
+		if (obj instanceof XBlockExpression) {
+			_toJavaStatement((XBlockExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XCastedExpression) {
+			_toJavaStatement((XCastedExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XClosure) {
+			_toJavaStatement((XClosure) obj, appendable, isReferenced);
+		} else if (obj instanceof XConstructorCall) {
+			_toJavaStatement((XConstructorCall) obj, appendable, isReferenced);
+		} else if (obj instanceof XDoWhileExpression) {
+			_toJavaStatement((XDoWhileExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XForLoopExpression) {
+			_toJavaStatement((XForLoopExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XIfExpression) {
+			_toJavaStatement((XIfExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XInstanceOfExpression) {
+			_toJavaStatement((XInstanceOfExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XReturnExpression) {
+			_toJavaStatement((XReturnExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XSwitchExpression) {
+			_toJavaStatement((XSwitchExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XThrowExpression) {
+			_toJavaStatement((XThrowExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XTryCatchFinallyExpression) {
+			_toJavaStatement((XTryCatchFinallyExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XVariableDeclaration) {
+			_toJavaStatement((XVariableDeclaration) obj, appendable, isReferenced);
+		} else if (obj instanceof XWhileExpression) {
+			_toJavaStatement((XWhileExpression) obj, appendable, isReferenced);
+		} else {
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+		}
+	}
+	
 	protected void _toJavaStatement(XBlockExpression expr, ITracingAppendable b, boolean isReferenced) {
 		if (expr.getExpressions().isEmpty())
 			return;
@@ -306,27 +376,26 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().newLine().append("}");
 	}
 
-	protected void _toJavaStatement(final XConstructorCall expr, final ITracingAppendable b, final boolean isReferenced) {
+	protected void _toJavaStatement(final XConstructorCall expr, ITracingAppendable b, final boolean isReferenced) {
 		for (XExpression arg : expr.getArguments()) {
 			internalToJavaStatement(arg, b, true);
 		}
 		
 		Later later = new Later() {
-			@Override
-			public void exec() {
-				b.append("new ");
+			public void exec(ITracingAppendable appendable) {
+				appendable.append("new ");
 				JvmTypeReference producedType = getTypeProvider().getType(expr);
-				serialize(producedType, expr, b, false, false, true, false);
-				b.append("(");
-				appendArguments(expr.getArguments(), expr.getConstructor(), expr, b, false);
-				b.append(")");
+				serialize(producedType, expr, appendable, false, false, true, false);
+				appendable.append("(");
+				appendArguments(expr.getArguments(), expr.getConstructor(), expr, appendable, false);
+				appendable.append(")");
 			}
 		};
 		if (isReferenced) {
 			declareFreshLocalVariable(expr, b, later);
 		} else {
 			b.newLine();
-			later.exec();
+			later.exec(b);
 			b.append(";");
 		}
 	}
@@ -437,7 +506,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		// declare local var for the switch expression
 		String variableName = null;
 		if(expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
-			variableName = b.getName(((XFeatureCall) expr.getSwitch()).getFeature());
+			JvmIdentifiableElement feature = ((XFeatureCall) expr.getSwitch()).getFeature();
+			if (b.hasName(feature))
+				variableName = b.getName(feature);
 		} 
 		if(variableName == null) {
 			String name = getNameProvider().getSimpleName(expr);
@@ -472,7 +543,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(casePart.getTypeGuard().getType());
 				b.append(") {");
 				b.increaseIndentation();
-				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall)expr.getSwitch()).getFeature() : expr;
+				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall) expr.getSwitch()).getFeature() : expr;
 				b.openPseudoScope();
 				final String proposedName = getFavoriteVariableName(casePart.getTypeGuard().getType());
 				final String castedVariableName = b.declareSyntheticVariable(switchOver, proposedName);
@@ -589,14 +660,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(") {");
 			b.increaseIndentation();
-			Object element = b.getObject("this");
-			if (element instanceof JvmType) {
-				final String proposedName = ((JvmType) element).getSimpleName()+".this";
-				if (b.getObject(proposedName) == null) {
-					b.declareSyntheticVariable(element, proposedName);
-					Object superElement = b.getObject("super");
-					if (superElement instanceof JvmType) {
-						b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+			if (b.hasObject("this")) {
+				Object element = b.getObject("this");
+				if (element instanceof JvmType) {
+					final String proposedName = ((JvmType) element).getSimpleName()+".this";
+					if (!b.hasObject(proposedName)) {
+						b.declareSyntheticVariable(element, proposedName);
+						if (b.hasObject("super")) {
+							Object superElement = b.getObject("super");
+							if (superElement instanceof JvmType) {
+								b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+							}
+						}
 					}
 				}
 			}
