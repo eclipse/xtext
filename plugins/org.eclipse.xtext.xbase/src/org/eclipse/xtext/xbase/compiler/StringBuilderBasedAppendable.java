@@ -148,4 +148,12 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	protected String getLineSeparator() {
 		return lineSeparator;
 	}
+	
+	public char charAt(int index) {
+		return builder.charAt(index);
+	}
+	
+	public CharSequence subSequence(int start, int end) {
+		return builder.subSequence(start, end);
+	}
 }

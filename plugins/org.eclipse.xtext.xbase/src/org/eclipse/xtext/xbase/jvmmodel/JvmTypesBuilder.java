@@ -63,7 +63,9 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.inject.Inject;
@@ -107,9 +109,9 @@ public class JvmTypesBuilder {
 	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
 	 * implement the {@link JvmExecutable} when it is translated to Java source code.
 	 * @param executable the operation or constructor to add the method body to.
-	 * @param strategy the compilation strategy. Must return zero or more Java statements.
+	 * @param strategy the compilation strategy.
 	 */
-	public void setBody(JvmExecutable executable, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+	public void setBody(JvmExecutable executable, Procedures.Procedure1<TracingAppendable> strategy) {
 		addCompilationStrategy(executable, strategy);
 	}
 	
@@ -401,15 +403,18 @@ public class JvmTypesBuilder {
 	 * }
 	 * </code>
 	 */
-	public JvmOperation toGetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
+	public JvmOperation toGetter(final EObject sourceElement, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setSimpleName("get" + nullSaveName(Strings.toFirstUpper(name)));
 		result.setReturnType(cloneWithProxies(typeRef));
 		if (name != null) {
-			setBody(result, new Functions.Function1<ImportManager, CharSequence>() {
-				public CharSequence apply(ImportManager p) {
-					return "return this." + name + ";";
+			setBody(result, new Procedures.Procedure1<TracingAppendable>() {
+				public void apply(TracingAppendable p) {
+					p = p.trace(sourceElement);
+					p.append("return this.");
+					p.append(name);
+					p.append(";");
 				}
 			});
 		}
@@ -426,15 +431,20 @@ public class JvmTypesBuilder {
 	 * }
 	 * </code>
 	 */
-	public JvmOperation toSetter(EObject sourceElement, final String name, JvmTypeReference typeRef) {
+	public JvmOperation toSetter(final EObject sourceElement, final String name, JvmTypeReference typeRef) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setSimpleName("set" + nullSaveName(Strings.toFirstUpper(name)));
 		result.getParameters().add(toParameter(sourceElement, nullSaveName(name), cloneWithProxies(typeRef)));
 		if (name != null) {
-			setBody(result, new Functions.Function1<ImportManager, CharSequence>() {
-				public CharSequence apply(ImportManager p) {
-					return "this." + name + " = " + name + ";";
+			setBody(result, new Procedures.Procedure1<TracingAppendable>() {
+				public void apply(TracingAppendable p) {
+					p = p.trace(sourceElement);
+					p.append("this.");
+					p.append(name);
+					p.append(" = ");
+					p.append(name);
+					p.append(";");
 				}
 			});
 		}
@@ -537,9 +547,9 @@ public class JvmTypesBuilder {
 	 * Attaches the given compile strategy to the given {@link JvmField} such that the compiler knows how to
 	 * initialize the {@link JvmField} when it is translated to Java source code.
 	 * @param field the field to add the initializer to.
-	 * @param strategy the compilation strategy. Must return just one valid Java expression.
+	 * @param strategy the compilation strategy.
 	 */
-	public void setInitializer(JvmField field, Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+	public void setInitializer(JvmField field, Procedures.Procedure1<TracingAppendable> strategy) {
 		addCompilationStrategy(field, strategy);
 	}
 	
@@ -559,7 +569,7 @@ public class JvmTypesBuilder {
 	}
 	
 	protected void addCompilationStrategy(JvmMember member,
-			Functions.Function1<ImportManager, ? extends CharSequence> strategy) {
+			Procedures.Procedure1<TracingAppendable> strategy) {
 		// remove old adapters
 		Iterator<Adapter> iterator = member.eAdapters().iterator();
 		while (iterator.hasNext()) {

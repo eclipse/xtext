@@ -11,5 +11,5 @@ package org.eclipse.xtext.xbase.compiler;
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface Later {
-	void exec(ITracingAppendable appendable);
+	void exec(TracingAppendable appendable);
 }

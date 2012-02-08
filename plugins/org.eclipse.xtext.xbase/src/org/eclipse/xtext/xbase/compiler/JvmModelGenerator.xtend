@@ -1,37 +1,48 @@
 package org.eclipse.xtext.xbase.compiler
 
 import com.google.inject.Inject
-import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
+import org.eclipse.xtext.common.types.JvmAnnotationTarget
 import org.eclipse.xtext.common.types.JvmAnnotationValue
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
+import org.eclipse.xtext.common.types.JvmByteAnnotationValue
+import org.eclipse.xtext.common.types.JvmCharAnnotationValue
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFloatAnnotationValue
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue
+import org.eclipse.xtext.common.types.JvmLongAnnotationValue
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue
-import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
 import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
-import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.common.types.JvmVoid
 
 /**
  * A generator implementation that processes the 
@@ -50,7 +61,7 @@ class JvmModelGenerator implements IGenerator {
 		for (obj : input.contents) {
 			obj.internalDoGenerate(fsa)
 		}
-	} 
+	}
 	
 	def dispatch void internalDoGenerate(EObject obj, IFileSystemAccess fsa) {}
 	
@@ -58,42 +69,78 @@ class JvmModelGenerator implements IGenerator {
 		fsa.generateFile(type.qualifiedName.replace('.','/')+".java", type.generateType)
 	}
 	
-	def generateType(JvmGenericType type) {
+	def CharSequence generateType(JvmGenericType type) {
 		val importManager = new ImportManager(true, type)
-		val typeBody = generateBody(type, importManager)
-		'''
-			«IF type.packageName != null»package «type.packageName»;
-			
-			«ENDIF»
-			«FOR i: importManager.imports AFTER "\n"»
-				import «i»;
-			«ENDFOR»
-			«typeBody»
-		'''
+		val bodyAppendable = createAppendable(type, importManager)
+		generateBody(type, bodyAppendable)
+		val importAppendable = createAppendable(type, importManager)
+		if (type.packageName != null) {
+			importAppendable.append("package ").append(type.packageName).append(";");
+			importAppendable.newLine.newLine
+		}
+		for(i: importManager.imports) {
+			importAppendable.append("import ").append(i).append(";").newLine
+		}
+		if (!importManager.imports.empty)
+			importAppendable.newLine
+		importAppendable.append(bodyAppendable)
+		return importAppendable
 	}
 	
-	def generateBody(JvmGenericType it, ImportManager importManager) '''
-		«it.generateJavaDoc»
-		«it.annotations.generateAnnotations(importManager)»
-		«it.generateModifier»«IF it.interface»interface«ELSE»class«ENDIF» «it.simpleName»«generateTypeParameterDeclaration(it.typeParameters, importManager)» «it.generateExtendsClause(importManager)»{
-		  «FOR memberCode : it.members.map(m|m.generateMember(importManager)).filter(c|c!=null) SEPARATOR '\n'»
-		    «memberCode»
-		  «ENDFOR»
+	def generateBody(JvmGenericType it, TracingAppendable appendable) {
+		generateJavaDoc(appendable)
+		generateAnnotations(appendable, true)
+		generateModifier(appendable)
+		if (interface) {
+			appendable.append("interface ")
+		} else {
+			appendable.append("class ")
 		}
-	'''
+		appendable.append(simpleName)
+		generateTypeParameterDeclaration(appendable)
+		appendable.append(" ")
+		generateExtendsClause(appendable)
+		appendable.append("{")
+		val b = Wrapper::wrap(true)
+		members.forEach [ b.set(generateMember(appendable.trace(it), b.get())) ]
+		appendable.newLine.append("}").newLine
+	}
 	
-	def dispatch generateModifier(JvmGenericType it) '''
-		«visibility.javaName»«IF abstract»abstract «ENDIF»«IF final»final «ENDIF»«IF ^static»static «ENDIF»'''
+	def dispatch generateModifier(JvmGenericType it, TracingAppendable appendable) {
+		appendable.append(visibility.javaName)
+		if (isAbstract)
+			appendable.append("abstract ")
+		if (isStatic)
+			appendable.append("static ")
+		if (isFinal)
+			appendable.append("final ")
+	}
 	
-	def dispatch generateModifier(JvmField it) '''
-		«visibility.javaName»«IF final»final «ENDIF»«IF ^static»static «ENDIF»'''
+	def dispatch generateModifier(JvmField it, TracingAppendable appendable) {
+		appendable.append(visibility.javaName)
+		if (isFinal)
+			appendable.append("final ")
+		if (isStatic)
+			appendable.append("static ")
+	}
 		
-	def dispatch generateModifier(JvmOperation it) '''
-		«visibility.javaName»«IF abstract»abstract «ENDIF»«IF final»final «ENDIF»«IF ^static»static «ENDIF»'''
+	def dispatch generateModifier(JvmOperation it, TracingAppendable appendable) {
+		appendable.append(visibility.javaName)
+		if (isAbstract)
+			appendable.append("abstract ")
+		if (isStatic)
+			appendable.append("static ")
+		if (isFinal)
+			appendable.append("final ")
+	}
 	
-	def dispatch generateModifier(JvmConstructor it) '''
-		«visibility.javaName»'''
+	def dispatch generateModifier(JvmConstructor it, TracingAppendable appendable) {
+		appendable.append(visibility.javaName)
+	}
 	
+	/**
+	 * Returns the visibility modifier and a space as suffix if not empty
+	 */
 	def javaName(JvmVisibility visibility) {
 		if (visibility != null)
 			return switch visibility {
@@ -106,122 +153,226 @@ class JvmModelGenerator implements IGenerator {
 			return ''
 	}
 		
-	def generateExtendsClause(JvmGenericType it, ImportManager importManager) {
+	def void generateExtendsClause(JvmGenericType it, TracingAppendable appendable) {
 		if (superTypes.empty)
-			return null
+			return;
+		val (Iterable<JvmTypeReference>, String)=>void commaDelimited = [ it, prefix | {
+			if (empty)
+				return;
+			appendable.append(prefix).append(" ")
+			head.serialize(appendable)
+			tail.forEach[
+				appendable.append(", ")
+				serialize(appendable)
+			]
+			appendable.append(" ")
+		}]
 		if (it.interface) {
-			"extends "+superTypes.map( t | t.serialize(importManager)).join(", ")+" "
+			commaDelimited.apply(superTypes, "extends")
 		} else {
 			val withoutObject = superTypes.filter( typeRef | typeRef.identifier != "java.lang.Object")
 			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).interface).head
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
-			var result = ""
 			if (superClazz != null) {
-				result = "extends " + superClazz.serialize(importManager)+" "
+				appendable.append("extends ")
+				superClazz.serialize(appendable)
+				appendable.append(" ")
 			} 
 			if (!superInterfaces.empty) {
-				result = result + "implements " + superInterfaces.map( t | t.serialize(importManager)).join(", ") + " "
+				commaDelimited.apply(superInterfaces, "implements")
 			}
-			return result
 		}
 	}
 	
-	def dispatch CharSequence generateMember(JvmMember it, ImportManager importManager) {
+	def dispatch boolean generateMember(JvmMember it, TracingAppendable appendable, boolean first) {
 		throw new UnsupportedOperationException("generateMember not implemented for elements of type "+it)
 	}
 	
-	def dispatch generateMember(JvmField it, ImportManager importManager) '''
-		«it.generateJavaDoc»
-		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
-		«it.generateModifier»«type.serialize(importManager)» «simpleName»«it.generateInitialization(importManager)»;
-	'''
-	
-	def dispatch generateMember(JvmOperation it, ImportManager importManager) '''
-		«it.generateJavaDoc»
-		«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
-		«it.generateModifier»«generateTypeParameterDeclaration(it.typeParameters, importManager)»«if (returnType == null) 'void' else returnType.serialize(importManager)» «simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)»«IF abstract»;«ELSE» {
-		  «it.generateBody(importManager)»
-		}
-		«ENDIF»
-	'''
-	
-	def dispatch generateMember(JvmConstructor it, ImportManager importManager) {
-		if(!parameters.empty || associatedExpression != null || compilationStrategy != null || declaringType.members.filter(typeof(JvmConstructor)).size != 1) '''
-			«it.generateJavaDoc»
-			«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)»«ENDIF»
-			«it.generateModifier»«simpleName»(«it.parameters.map( p | p.generateParameter(importManager)).join(", ")»)«generateThrowsClause(it, importManager)» {
-			  «it.generateBody(importManager)»
-			}
-		''' else null
+	def dispatch boolean generateMember(JvmField it, TracingAppendable appendable, boolean first) {
+		appendable.increaseIndentation.newLine
+		if (!first)
+			appendable.newLine
+		generateJavaDoc(appendable)
+		generateAnnotations(appendable, true)
+		generateModifier(appendable)
+		type.serialize(appendable)
+		appendable.append(" ")
+		appendable.append(simpleName)
+		generateInitialization(appendable)
+		appendable.append(";")
+		appendable.decreaseIndentation
+		return false
 	}
 	
-	def CharSequence generateInitialization(JvmField it, ImportManager importManager) {
-		if (compilationStrategy != null) 
-			" = " + compilationStrategy.apply(importManager)
-		else {
+	def dispatch boolean generateMember(JvmOperation it, TracingAppendable appendable, boolean first) {
+		appendable.increaseIndentation.newLine
+		if (!first)
+			appendable.newLine
+		generateJavaDoc(appendable)
+		generateAnnotations(appendable, true)
+		generateModifier(appendable)
+		generateTypeParameterDeclaration(appendable)
+		if (returnType == null) {
+			appendable.append("void")
+		} else {
+			returnType.serialize(appendable)
+		}
+		appendable.append(" ")
+		appendable.append(simpleName)
+		appendable.append("(")
+		generateParameters(appendable)
+		appendable.append(")")
+		generateThrowsClause(appendable)
+		if (isAbstract) {
+			appendable.append(";")
+		} else {
+			appendable.append(" ")
+			generateBody(appendable)
+		}
+		appendable.decreaseIndentation
+		return false
+	}
+	
+	def dispatch boolean generateMember(JvmConstructor it, TracingAppendable appendable, boolean first) {
+		if(!parameters.empty || associatedExpression != null || compilationStrategy != null || declaringType.members.filter(typeof(JvmConstructor)).size != 1) {
+			appendable.increaseIndentation.newLine
+			if (!first)
+				appendable.newLine
+			generateJavaDoc(appendable)
+			generateAnnotations(appendable, true)
+			generateModifier(appendable)
+			generateTypeParameterDeclaration(appendable)
+			appendable.append(simpleName)
+			appendable.append("(")
+			generateParameters(appendable)
+			appendable.append(")")
+			generateThrowsClause(appendable)
+			appendable.append(" ")
+			generateBody(appendable)
+			appendable.decreaseIndentation
+			return false
+		}
+		return first
+	}
+	
+	def void generateInitialization(JvmField it, TracingAppendable appendable) {
+		if (compilationStrategy != null) {
+			appendable.append(" = ")
+			appendable.increaseIndentation
+			compilationStrategy.apply(appendable)
+			appendable.decreaseIndentation
+		} else {
 			val expression = associatedExpression
 			if (expression != null) {
-				val appendable = createAppendable(importManager)
+				appendable.append(" = ")
 				compiler.compileAsJavaExpression(expression, appendable, type)
-				return " = " + appendable.toString
 			} else {
 				""
 			}
 		}
 	}
 	
-	def generateTypeParameterDeclaration(List<JvmTypeParameter> typeParameters, ImportManager importManager) {
-		typeParameters.join('<', ', ', '>', [it.generateTypeParameterDeclaration(importManager)])
+	def void generateTypeParameterDeclaration(JvmTypeParameterDeclarator it, TracingAppendable appendable) {
+		if (!typeParameters.isEmpty) {
+			appendable.append("<")
+			typeParameters.head.generateTypeParameterDeclaration(appendable)
+			typeParameters.tail.forEach[
+				appendable.append(", ")
+				generateTypeParameterDeclaration(appendable)
+			]
+			appendable.append(">")
+		}
 	}
 	
-	def generateTypeParameterDeclaration(JvmTypeParameter it, ImportManager importManager) {
-		'''«importManager.serialize(it)»«it.generateTypeParameterConstraints(importManager)»'''
+	def void generateTypeParameterDeclaration(JvmTypeParameter it, TracingAppendable appendable) {
+		appendable.append(name)
+		generateTypeParameterConstraints(appendable)
 	}
 	
-	def generateTypeParameterConstraints(JvmTypeParameter it, ImportManager importManager) {
-		constraints.filter(typeof(JvmUpperBound)).join(' extends ', ' & ', '', [typeReference.serialize(importManager)])
+	def void generateTypeParameterConstraints(JvmTypeParameter it, TracingAppendable appendable) {
+		val upperBounds = constraints.filter(typeof(JvmUpperBound))
+		if (!upperBounds.empty) {
+			appendable.append(" extends ")
+			upperBounds.head.typeReference.serialize(appendable)
+			upperBounds.tail.forEach[
+				appendable.append(" & ")
+				typeReference.serialize(appendable)
+			]
+		}
 	}
 	
-	def generateThrowsClause(JvmExecutable it, ImportManager importManager) {
-		exceptions.map([type]).toSet.join(' throws ', ', ', '', [serialize(importManager)])
+	def void generateThrowsClause(JvmExecutable it, TracingAppendable appendable) {
+		val allExceptions = exceptions.map([type]).toSet
+		if (!allExceptions.empty) {
+			appendable.append(" throws ")
+			appendable.append(allExceptions.head)
+			allExceptions.tail.forEach[ exception | {
+				appendable.append(", ")
+				appendable.append(exception)
+			}]
+		}
 	}
 	
-	def generateParameter(JvmFormalParameter it, ImportManager importManager) {
-		'''«IF !annotations.empty»«it.annotations.generateAnnotations(importManager)» «ENDIF»final «parameterType.serialize(importManager)» «simpleName»'''
+	def void generateParameters(JvmExecutable it, TracingAppendable appendable) {
+		if (!parameters.isEmpty) {
+			parameters.head.generateParameter(appendable)
+			parameters.tail.forEach[
+				appendable.append(", ")
+				generateParameter(appendable)
+			]
+		}
+	}
+	
+	def void generateParameter(JvmFormalParameter it, TracingAppendable appendable) {
+		generateAnnotations(appendable, false)
+		appendable.append("final ")
+		parameterType.serialize(appendable)
+		appendable.append(" ")
+		appendable.append(simpleName)
 	}
 		
-	def CharSequence generateBody(JvmExecutable op, ImportManager importManager) {
+	def void generateBody(JvmExecutable op, TracingAppendable appendable) {
 		if (op.compilationStrategy != null) {
-			return op.compilationStrategy.apply(importManager)			
+			appendable.openScope
+			appendable.increaseIndentation.append("{").newLine
+			op.compilationStrategy.apply(appendable)
+			appendable.decreaseIndentation.newLine.append("}")
+			appendable.closeScope			
 		} else {
 			val expression = op.getAssociatedExpression
 			if (expression != null) {
-				val appendable = createAppendable(op, importManager)
+				appendable.openScope
 				for(p: op.parameters) 
 					appendable.declareVariable(p, p.simpleName)
 				val returnType = switch(op) { 
 					JvmOperation: op.returnType
 					JvmConstructor: Void::TYPE.getTypeForName(op) 
 					default: null
-				};
-				compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
-				return removeSurroundingCurlies(appendable.toString)
+				}
+				if (expression instanceof XBlockExpression && (expression as XBlockExpression).expressions.size != 1 && returnType instanceof JvmVoid) {
+					val block = expression as XBlockExpression
+					if (block.expressions.isEmpty()) {
+						appendable.append("{}")		
+					} else {
+						compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
+					}
+				} else {
+					appendable.append("{").increaseIndentation
+					compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
+					appendable.decreaseIndentation.newLine.append("}")
+				}
+				appendable.closeScope
 			} else if(op instanceof JvmOperation) {
-				return '''throw new UnsupportedOperationException("«op.simpleName» is not implemented");'''
+				appendable.increaseIndentation.append("{").newLine
+				appendable.append('throw new UnsupportedOperationException("')
+				appendable.append(op.simpleName)
+				appendable.append('is not implemented");')
+				appendable.decreaseIndentation.newLine.append("}")
 			}
 		}
 	}
 	
-	def String removeSurroundingCurlies(String code) {
-		val result = code.trim
-		if (result.startsWith("{\n") && result.endsWith("}"))
-			return result.substring(2, result.length -1)
-		if (result.startsWith("{") && result.endsWith("}"))
-			return result.substring(1, result.length -1)
-		return result
-	}
-	
-	def generateJavaDoc(EObject it) {
+	def void generateJavaDoc(EObject it, TracingAppendable appendable) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
 			val doc = '''/**''' as StringConcatenation;
@@ -230,53 +381,199 @@ class JvmModelGenerator implements IGenerator {
 			doc.append(adapter.documentation, " * ")
 			doc.newLine
 			doc.append(" */")
-			doc.newLine
-			return doc
+			appendable.append(doc.toString).newLine
 		}
-		else null
 	} 
 	
-	def generateAnnotations(List<JvmAnnotationReference> annotations, ImportManager importManager) {
-		if (annotations.empty)
-			return null
-		'''
-		«FOR a : annotations»
-			@«importManager.serialize(a.annotation)»«a.values.join('(', ', ', ')', [toJava(importManager)])»
-		«ENDFOR»
-		'''
+	def void generateAnnotations(JvmAnnotationTarget it, TracingAppendable appendable, boolean withLineBreak) {
+		if (!annotations.empty) {
+			annotations.head.generateAnnotation(appendable)
+			annotations.tail.forEach[
+				if (withLineBreak) {
+					appendable.newLine
+				} else {
+					appendable.append(" ")
+				}
+				generateAnnotation(appendable)
+			]
+			if (withLineBreak) {
+				appendable.newLine
+			} else {
+				appendable.append(" ")
+			}
+		}
+	}
+	
+	def void generateAnnotation(JvmAnnotationReference it, TracingAppendable appendable) {
+		appendable.append("@")
+		appendable.append(annotation)
+		if (!values.empty) {
+			appendable.append("(")
+			values.head.toJava(appendable)
+			values.tail.forEach[
+				appendable.append(", ")
+				toJava(appendable)
+			]
+			appendable.append(")")
+		}
 	}
 	 
-	def toJava(JvmAnnotationValue it, ImportManager importManager) 
-		'''«IF operation != null»«operation.simpleName» = «ENDIF»«it.toJavaLiteral(importManager)»'''
+	def void toJava(JvmAnnotationValue it, TracingAppendable appendable) {
+		if (operation != null) {
+			appendable.append(operation.simpleName)
+			appendable.append(" = ")
+		} 
+		toJavaLiteral(appendable)
+	}
 		
-	def dispatch toJavaLiteral(JvmAnnotationAnnotationValue it, ImportManager importManager) 
-		'''«it.annotations.generateAnnotations(importManager)»'''
+	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue it, TracingAppendable appendable) {
+		if (values.size != 1) {
+			appendable.append("{ ")
+			generateAnnotations(appendable, false)
+			appendable.append("} ")
+		} else {
+			generateAnnotations(appendable, false)
+		}
+	}
 		
-	def dispatch toJavaLiteral(JvmShortAnnotationValue it, ImportManager importManager) 
-		'''«IF values.size==1»«values.head»«ELSE»{«values.join(',')»}«ENDIF»'''
-		
-	def dispatch toJavaLiteral(JvmStringAnnotationValue it, ImportManager importManager) 
-		'''«IF values.size==1»"«values.head»"«ELSE»{«values.map(s | '"'+s+'"').join(',')»}«ENDIF»'''
-		
-	def dispatch toJavaLiteral(JvmTypeAnnotationValue it, ImportManager importManager) 
-		'''«IF values.size==1»«values.head.serialize(importManager)».class«ELSE»{«values.map(t | t.serialize(importManager) + ".class").join(',')»}«ENDIF»'''
-		
-	def dispatch toJavaLiteral(JvmBooleanAnnotationValue it, ImportManager importManager) 
-		'''«IF values.size==1»«values.head»«ELSE»{«values.join(',')»}«ENDIF»'''
+	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [toString]))
+		}
+	}
 	
-	def dispatch toJavaLiteral(JvmCustomAnnotationValue it, ImportManager importManager) {
-		val appendable = createAppendable(it, importManager)
+	def dispatch void toJavaLiteral(JvmIntAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [toString]))
+		}
+	}
+	
+	def dispatch void toJavaLiteral(JvmLongAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [toString]))
+		}
+	}
+	
+	def dispatch void toJavaLiteral(JvmByteAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [toString]))
+		}
+	}
+	
+	def dispatch void toJavaLiteral(JvmDoubleAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [
+				switch(it) {
+					case Double::isNaN(it) : "Double.NaN"
+					case Double::POSITIVE_INFINITY : "Double.POSITIVE_INFINITY" 
+					case Double::NEGATIVE_INFINITY : "Double.NEGATIVE_INFINITY"
+					default: toString + "d" 
+				}
+			]))
+		}
+	}
+	
+	def dispatch void toJavaLiteral(JvmFloatAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [
+				switch(it) {
+					case Float::isNaN(it) : "Float.NaN"
+					case Float::POSITIVE_INFINITY : "Float.POSITIVE_INFINITY" 
+					case Float::NEGATIVE_INFINITY : "Float.NEGATIVE_INFINITY"
+					default: toString + "f" 
+				}
+			]))
+		}
+	}
+	
+	def dispatch void toJavaLiteral(JvmCharAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append("'" + Strings::convertToJavaString(values.head.toString, true) + "'")			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", ["'" + Strings::convertToJavaString(it.toString, true) + "'"]))
+		}
+	}
+		
+	def dispatch void toJavaLiteral(JvmStringAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append('"' + Strings::convertToJavaString(values.head, true) + '"')			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", ['"' + Strings::convertToJavaString(it, true) + '"']))
+		}
+	}
+		
+	def dispatch void toJavaLiteral(JvmTypeAnnotationValue it, TracingAppendable appendable) {
+		if (values.size != 1) {
+			appendable.append("{ ")
+			if (!values.isEmpty()) {
+				appendable.append(values.head.type)
+				appendable.append(".class")
+				values.tail.forEach[
+					appendable.append(", ")
+					appendable.append(type)
+					appendable.append(".class")
+				]
+			}
+			appendable.append(" }")
+		} else {
+			appendable.append(values.head.type)
+			appendable.append(".class")
+		}
+	} 
+	
+	def dispatch void toJavaLiteral(JvmEnumAnnotationValue it, TracingAppendable appendable) {
+		if (values.size != 1) {
+			appendable.append("{ ")
+			if (!values.isEmpty()) {
+				appendable.append(values.head.declaringType)
+				appendable.append(".")
+				appendable.append(values.head.simpleName)
+				values.tail.forEach[
+					appendable.append(", ")
+					appendable.append(declaringType)
+					appendable.append(".")
+					appendable.append(simpleName)
+				]
+			}
+			appendable.append(" }")
+		} else {
+			appendable.append(values.head.declaringType)
+			appendable.append(".")
+			appendable.append(values.head.simpleName)
+		}
+	} 
+		
+	def dispatch void toJavaLiteral(JvmBooleanAnnotationValue it, TracingAppendable appendable) {
+		if (values.size == 1) {
+			appendable.append(values.head.toString)			
+		} else {
+			appendable.append(values.join("{ ", ", ", " }", [toString]))
+		}
+	} 
+	
+	def dispatch void toJavaLiteral(JvmCustomAnnotationValue it, TracingAppendable appendable) {
 		switch (values.size) {
 			case 0: appendable.append("{}")
 			case 1: compiler.toJavaExpression(values.head as XExpression, appendable)
 			default: {
-				appendable.append('{')
+				appendable.append('{ ')
 				compiler.toJavaExpression(values.head as XExpression, appendable)
-				values.tail.filter(typeof(XExpression)).forEach [ appendable.append(",") compiler.toJavaExpression(it, appendable) ]
-				appendable.append('}')
+				values.tail.filter(typeof(XExpression)).forEach [ appendable.append(", ") compiler.toJavaExpression(it, appendable) ]
+				appendable.append(' }')
 			}
 		}			
-		appendable.toString
 	}
 	
 	def compilationStrategy(JvmIdentifiableElement it) {
@@ -287,19 +584,12 @@ class JvmModelGenerator implements IGenerator {
 			null
 	}
 	
-	def String serialize(JvmType it, ImportManager importManager) {
-		val builder = new StringBuilder()
-		importManager.appendType(it, builder)
-		builder.toString
-	}
-	
-	def String serialize(JvmTypeReference it, ImportManager importManager) {
-		val appendable = createAppendable(it, importManager)
+	def String serialize(JvmTypeReference it, TracingAppendable appendable) {
 		typeRefSerializer.serialize(it, it.eContainer, appendable)
 		appendable.toString
 	}
 	
-	def ITracingAppendable createAppendable(EObject context, ImportManager importManager) {
+	def TracingAppendable createAppendable(EObject context, ImportManager importManager) {
 		val appendable = new StringBuilderBasedAppendable(importManager)
 		val type = context.containerType
 		if(type != null) {
@@ -308,7 +598,7 @@ class JvmModelGenerator implements IGenerator {
 			if (superType != null)
 				appendable.declareVariable(superType.type, "super")
 		}
-		new TracingAppendable(appendable, locationProvider)
+		return new TracingAppendable(appendable, locationProvider)
 	}
 	
 	def JvmGenericType containerType(EObject context) {
@@ -318,4 +608,5 @@ class JvmModelGenerator implements IGenerator {
 			context as JvmGenericType
 		else containerType(context.eContainer)
 	}
+	
 }

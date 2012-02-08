@@ -72,7 +72,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	private ILogicalContainerProvider contextProvider;
 	
 	@Override
-	protected void internalToConvertedExpression(XExpression obj, ITracingAppendable appendable) {
+	protected void internalToConvertedExpression(XExpression obj, TracingAppendable appendable) {
 		if (obj instanceof XAbstractFeatureCall) {
 			_toJavaExpression((XAbstractFeatureCall) obj, appendable);
 		} else {
@@ -81,7 +81,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	@Override
-	protected void doInternalToJavaStatement(XExpression obj, ITracingAppendable appendable, boolean isReferenced) {
+	protected void doInternalToJavaStatement(XExpression obj, TracingAppendable appendable, boolean isReferenced) {
 		if (obj instanceof XFeatureCall) {
 			_toJavaStatement((XFeatureCall) obj, appendable, isReferenced);
 		} else if (obj instanceof XAbstractFeatureCall) {
@@ -91,7 +91,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITracingAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(final XAbstractFeatureCall expr, TracingAppendable b, boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
@@ -109,7 +109,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				} else {
 					if (isReferenced && !isPrimitiveVoid(expr)) {
 						Later later = new Later() {
-							public void exec(ITracingAppendable appendable) {
+							public void exec(TracingAppendable appendable) {
 								featureCalltoJavaExpression(expr, appendable);
 							}
 						};
@@ -124,7 +124,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void _toJavaStatement(final XFeatureCall expr, final ITracingAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(final XFeatureCall expr, final TracingAppendable b, boolean isReferenced) {
 		if (expr.getFeature() instanceof JvmConstructor) {
 			b.newLine();
 			featureCalltoJavaExpression(expr, b, true);
@@ -134,7 +134,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation, final ITracingAppendable b) {
+	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation, final TracingAppendable b) {
 		XExpression leftOperand = ((XBinaryOperation) binaryOperation).getLeftOperand();
 		declareSyntheticVariable(binaryOperation, b);
 		prepareExpression(leftOperand, b);
@@ -165,7 +165,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, ITracingAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, TracingAppendable b) {
 		if (expr instanceof XAssignment)
 			return true;
 		if (expr instanceof XAbstractFeatureCall) {
@@ -178,7 +178,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return super.isVariableDeclarationRequired(expr, b);
 	}
 
-	protected void prepareSpreadingMemberFeatureCall(XMemberFeatureCall expr, ITracingAppendable b) {
+	protected void prepareSpreadingMemberFeatureCall(XMemberFeatureCall expr, TracingAppendable b) {
 		throw new UnsupportedOperationException("spread operator not yet supported");
 		//		prepareAllArguments(expr, b);
 		//		declareLocalVariable(expr, b, Lists.class.getCanonicalName() + ".newArrayList()");
@@ -193,7 +193,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		//		b.append(";");
 	}
 
-	protected void prepareExpression(XExpression arg, ITracingAppendable b) {
+	protected void prepareExpression(XExpression arg, TracingAppendable b) {
 		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall) arg).getFeature() instanceof JvmField)
 				&& !isVariableDeclarationRequired(arg, b)) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
@@ -217,7 +217,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isSpreading();
 	}
 
-	protected void _toJavaExpression(XAbstractFeatureCall call, ITracingAppendable b) {
+	protected void _toJavaExpression(XAbstractFeatureCall call, TracingAppendable b) {
 		if (isPrimitiveVoid(call)) {
 			b.append("null");
 		} else if (isSpreadingMemberFeatureCall(call)) {
@@ -253,11 +253,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITracingAppendable b) {
+	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, TracingAppendable b) {
 		featureCalltoJavaExpression(call, b, false);
 	}
 
-	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITracingAppendable b,
+	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, TracingAppendable b,
 			boolean unpreparedArguments) {
 		if (call instanceof XAssignment) {
 			xAssignmentToJavaExpression((XAssignment) call, b);
@@ -377,7 +377,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		appendFeatureCall(call, b, unpreparedArguments);
 	}
 
-	protected boolean appendReceiver(XAbstractFeatureCall call, ITracingAppendable b) {
+	protected boolean appendReceiver(XAbstractFeatureCall call, TracingAppendable b) {
 		if (call instanceof XMemberFeatureCall) {
 			XMemberFeatureCall expr = ((XMemberFeatureCall) call);
 			if (expr.isNullSafe()) {
@@ -403,7 +403,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void appendNullValue(JvmTypeReference type, EObject context, ITracingAppendable b) {
+	protected void appendNullValue(JvmTypeReference type, EObject context, TracingAppendable b) {
 		if (!primitives.isPrimitive(type)) {
 			b.append("(");
 			serialize(type, context, b);
@@ -456,7 +456,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return false;
 	}
 
-	protected void xAssignmentToJavaExpression(XAssignment expr, ITracingAppendable b) {
+	protected void xAssignmentToJavaExpression(XAssignment expr, TracingAppendable b) {
 		final JvmIdentifiableElement feature = expr.getFeature();
 		if (feature instanceof JvmOperation) {
 			boolean appendReceiver = appendReceiver(expr, b);
@@ -478,7 +478,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void appendFeatureCall(XAbstractFeatureCall call, ITracingAppendable b, boolean forceArgumentsAsExpression) {
+	protected void appendFeatureCall(XAbstractFeatureCall call, TracingAppendable b, boolean forceArgumentsAsExpression) {
 		JvmIdentifiableElement feature = call.getFeature();
 		String name;
 		if (feature instanceof JvmConstructor) {
@@ -512,7 +512,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void appendArguments(List<? extends XExpression> arguments, JvmExecutable executable,
-			XExpression context, ITracingAppendable b, boolean forceArgumentsAsExpression) {
+			XExpression context, TracingAppendable b, boolean forceArgumentsAsExpression) {
 		if (arguments == null)
 			return;
 		for (int i = 0; i < arguments.size(); i++) {

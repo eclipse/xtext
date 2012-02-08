@@ -11,7 +11,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.ITracingAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -159,7 +159,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		IAppendable appandable = new StringBuilderBasedAppendable();
-		ITracingAppendable tracing = new TracingAppendable(appandable, locationProvider);
+		TracingAppendable tracing = new TracingAppendable(appandable, locationProvider);
 		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
 		compiler.compile(model,tracing, returnType);
 		assertEquals(expectedJavaCode, tracing.toString());
