@@ -9,28 +9,30 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import com.google.inject.Injector;
 
 public class XtendInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
-	protected GlobalStateMemento globalStateMemento;
+	
+	protected GlobalStateMemento stateBeforeInjectorCreation;
+	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
 	static {
 		GlobalRegistries.initializeDefaults();
 	}
-	
+
 	public Injector getInjector() {
 		if (injector == null) {
+			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 			this.injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
+			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
 		return injector;
 	}
-	
+
 	public void restoreRegistry() {
-		globalStateMemento.restoreGlobalState();
+		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
-	public void setupRegistry() {
-		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
-		if (injector != null)
-			new XtendStandaloneSetup().register(injector);
+	public void setupRegistry()	{
+		getInjector();
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
-	
 }
