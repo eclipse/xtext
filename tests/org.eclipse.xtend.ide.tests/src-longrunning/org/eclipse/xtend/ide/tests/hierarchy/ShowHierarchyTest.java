@@ -24,6 +24,7 @@ import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler;
 import org.eclipse.xtend.ide.internal.XtendActivator;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -56,22 +57,22 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 	public void tearDown() throws Exception {
 		testHelper.tearDown();
 	}
-	
+	@Ignore
 	@Test public void testOpenTypeHierarchyOnXtendClass() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Fo|o { def bar(String a)}");
 		assertEquals("Foo", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
-	
+	@Ignore
 	@Test public void testOpenTypeHierarchyOnTypeReference() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(Str|ing a)}");
 		assertEquals("String", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
-	
+	@Ignore
 	@Test public void testOpenTypeHierarchyOnFunction() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def b|ar(String a)}");
 		assertEquals("bar", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
-	
+	@Ignore
 	@Test public void testOpenTypeHierarchyOnCollectionsLiterals() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(String a) { newArr|ayList() }");
 		assertEquals("newArrayList", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
