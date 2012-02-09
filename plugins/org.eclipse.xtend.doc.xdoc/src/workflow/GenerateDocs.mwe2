@@ -2,7 +2,7 @@ module GenerateSpec
 
 import org.eclipse.emf.mwe.utils.*
 
-var targetDir = "manual"
+var targetDir = "../../website/documentation"
 var modelPath = "xdoc"
 
 Workflow {
