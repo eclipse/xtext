@@ -11,6 +11,7 @@
             default="true"
             extensions="xbase"
             id="org.eclipse.xtext.purexbase.PureXbase"
+            matchingStrategy="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="PureXbase Editor">
         </editor>
     </extension>
