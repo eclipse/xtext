@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -18,9 +17,10 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -34,22 +34,24 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private IQualifiedNameProvider _iQualifiedNameProvider;
   
-  protected void _infer(final Entity e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(e);
+  protected void _infer(final Entity entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
+    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
+    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           {
-            String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(e);
+            String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
             DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-            JvmParameterizedTypeReference _superType = e.getSuperType();
+            JvmParameterizedTypeReference _superType = entity.getSuperType();
             boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superType, null);
             if (_operator_notEquals) {
               EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-              JvmParameterizedTypeReference _superType_1 = e.getSuperType();
+              JvmParameterizedTypeReference _superType_1 = entity.getSuperType();
               JvmTypeReference _cloneWithProxies = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_superType_1);
               CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
             }
-            EList<Feature> _features = e.getFeatures();
+            EList<Feature> _features = entity.getFeatures();
             for (final Feature f : _features) {
               boolean matched = false;
               if (!matched) {
@@ -108,18 +110,17 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           }
         }
       };
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _fullyQualifiedName, _function);
-    acceptor.accept(_class);
+    _accept.initializeLater(_function);
   }
   
-  public void infer(final EObject e, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
-    if (e instanceof Entity) {
-      _infer((Entity)e, acceptor, prelinkingPhase);
-    } else if (e != null) {
-      _infer(e, acceptor, prelinkingPhase);
+  public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
+    if (entity instanceof Entity) {
+      _infer((Entity)entity, acceptor, prelinkingPhase);
+    } else if (entity != null) {
+      _infer(entity, acceptor, prelinkingPhase);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(e, acceptor, prelinkingPhase).toString());
+        Arrays.<Object>asList(entity, acceptor, prelinkingPhase).toString());
     }
   }
 }

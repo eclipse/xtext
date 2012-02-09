@@ -150,6 +150,35 @@ public class JvmTypesBuilder {
 	 *            the sourceElement the resulting element is associated with.
 	 * @param qualifiedName
 	 *            the qualifiedName of the resulting class.
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java class of the given name.
+	 */
+	public JvmGenericType toClass(EObject sourceElement, QualifiedName name) {
+		return toClass(sourceElement, name!=null?name.toString():null, null);
+	}
+	/**
+	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualifiedName of the resulting class.
+	 * 
+	 * @return a {@link JvmGenericType} representing a Java class of the given name.
+	 */
+	public JvmGenericType toClass(EObject sourceElement, String name) {
+		return toClass(sourceElement, name, null);
+	}
+	
+	/**
+	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param qualifiedName
+	 *            the qualifiedName of the resulting class.
 	 * @param initializer
 	 *            the initializer to apply on the created class element
 	 * 
@@ -176,6 +205,7 @@ public class JvmTypesBuilder {
 		final JvmGenericType result = createJvmGenericType(sourceElement, name);
 		if (result == null)
 			return null;
+		associate(sourceElement, result);
 		if(initializer != null) 
 			initializer.apply(result);
 
@@ -189,7 +219,7 @@ public class JvmTypesBuilder {
 		if (isEmpty(result.getDeclaredConstructors())) {
 			result.getMembers().add(toConstructor(sourceElement, result.getSimpleName(), null));
 		}
-		return associate(sourceElement, result);
+		return result;
 	}
 	
 	/**
@@ -210,10 +240,11 @@ public class JvmTypesBuilder {
 		if (result == null)
 			return null;
 		result.setInterface(true);
+		associate(sourceElement, result);
 		if(initializer != null) 
 			initializer.apply(result);
 
-		return associate(sourceElement, result);
+		return result;
 	}
 	
 	/**
@@ -239,10 +270,11 @@ public class JvmTypesBuilder {
 		annotationType.setSimpleName(fullName.getSecond());
 		if (fullName.getFirst() != null)
 			annotationType.setPackageName(fullName.getFirst());
+		associate(sourceElement, annotationType);
 		if(initializer != null) 
 			initializer.apply(annotationType);
 
-		return associate(sourceElement, annotationType);
+		return annotationType;
 	}
 	
 	/**
@@ -268,10 +300,11 @@ public class JvmTypesBuilder {
 		result.setSimpleName(fullName.getSecond());
 		if (fullName.getFirst() != null)
 			result.setPackageName(fullName.getFirst());
+		associate(sourceElement, result);
 		if(initializer != null) 
 			initializer.apply(result);
 
-		return associate(sourceElement, result);
+		return result;
 	}
 
 	protected JvmGenericType createJvmGenericType(EObject sourceElement, String name) {
@@ -352,9 +385,10 @@ public class JvmTypesBuilder {
 		result.setSimpleName(nullSaveName(name));
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(cloneWithProxies(returnType));
-		if (init != null && name != null)
+		associate(sourceElement, result);
+		if (init != null)
 			init.apply(result);
-		return associate(sourceElement, result);
+		return result;
 	}
 
 	/**
@@ -426,9 +460,10 @@ public class JvmTypesBuilder {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		constructor.setSimpleName(nullSaveName(simpleName));
 		constructor.setVisibility(JvmVisibility.PUBLIC);
-		if (init != null && simpleName != null)
+		associate(sourceElement, constructor);
+		if (init != null)
 			init.apply(constructor);
-		return associate(sourceElement, constructor);
+		return constructor;
 	}
 
 	/**

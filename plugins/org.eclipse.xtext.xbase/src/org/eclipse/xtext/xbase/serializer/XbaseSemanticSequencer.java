@@ -46,7 +46,6 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XRelationalExpression
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
-@SuppressWarnings("restriction")
 public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	
 	public static final String OPERATOR_NOT_SUPPORTED = "operation not supported";

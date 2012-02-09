@@ -117,12 +117,12 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		}
 	}
 
-	public void installDerivedState(boolean isPrelinkingPhase) {
+	public void installDerivedState(boolean preIndexingPhase) {
 		if (!fullyInitialized && !isInitializing) {
 			try {
 				isInitializing = true;
 				if (derivedStateComputer != null)
-					derivedStateComputer.installDerivedState(this, isPrelinkingPhase);
+					derivedStateComputer.installDerivedState(this, preIndexingPhase);
 				fullyInitialized = true;
 			} finally {
 				isInitializing = false;

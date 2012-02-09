@@ -9,14 +9,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
@@ -26,6 +24,8 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer.ExitPoint;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -53,11 +53,13 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private XbaseCompiler compiler;
   
-  protected void _infer(final Model m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
+  protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
       XBlockExpression _block = m.getBlock();
       final XBlockExpression e = _block;
       Resource _eResource = e.eResource();
       String _name = this.name(_eResource);
+      JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
+      IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             {
@@ -144,8 +146,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
             }
           }
         };
-      JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name, _function);
-      acceptor.accept(_class);
+      _accept.initializeLater(_function);
   }
   
   public String name(final Resource res) {
@@ -181,7 +182,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       return _string;
   }
   
-  public void infer(final EObject m, final IAcceptor<JvmDeclaredType> acceptor, final boolean prelinkingPhase) {
+  public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (m instanceof Model) {
       _infer((Model)m, acceptor, prelinkingPhase);
     } else if (m != null) {

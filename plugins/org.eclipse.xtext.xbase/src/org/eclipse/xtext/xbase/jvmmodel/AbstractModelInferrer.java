@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.util.IAcceptor;
 
 /**
  * A base dispatch class to be subclassed by Xtend.
@@ -22,13 +20,13 @@ import org.eclipse.xtext.util.IAcceptor;
  */
 public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	
-	public void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
-		_infer(e, acceptor, prelinkingPhase);
+	public void infer(EObject e, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+		_infer(e, acceptor, preIndexingPhase);
 	}
 	
-	public void _infer(EObject e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
+	public void _infer(EObject e, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		for (EObject child : e.eContents()) {
-			infer(child, acceptor, prelinkingPhase);
+			infer(child, acceptor, preIndexingPhase);
 		}
 	}
 }

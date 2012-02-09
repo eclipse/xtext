@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 
-@SuppressWarnings("restriction")
 public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 	
 	boolean semicolonBeforeNextExpressionRequired = false;

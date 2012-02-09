@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.ImplementedBy;
 
@@ -67,18 +65,19 @@ public interface IJvmModelInferrer {
 	 *            - the root element from the parse result
 	 * @param acceptor
 	 *            - an acceptor awaiting derived root {@link JvmDeclaredType}s
-	 * @param prelinkingPhase
-	 *            - whether the call is done in a pre-linking phase. During this phase clients may not do linking which
-	 *            relies on indexed information, because the index might not be fully computed yet.
+	 * @param preIndexingPhase
+	 *            - whether the call is done in before indexing. During this phase clients may not rely on any global indexing information 
+	 *            and only need to to provide the information needed by the language's {@link org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy}.
+	 *            IF not implemented differently this is just the {@link JvmDeclaredType}s with their qualified name, but no members and no other data.
 	 */
-	void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase);
+	void infer(EObject e, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase);
 
 	/**
 	 * A null-implementation.
 	 */
 	public static class NullImpl implements IJvmModelInferrer {
 
-		public void infer(EObject e, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
+		public void infer(EObject e, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		}
 
 	}

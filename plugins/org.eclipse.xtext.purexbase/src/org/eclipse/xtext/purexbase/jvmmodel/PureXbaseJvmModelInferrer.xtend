@@ -2,9 +2,7 @@ package org.eclipse.xtext.purexbase.jvmmodel
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.purexbase.pureXbase.Model
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XReturnExpression
@@ -13,6 +11,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 /**
@@ -30,9 +29,9 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 	@Inject IEarlyExitComputer computer
 	@Inject XbaseCompiler compiler
 
-   	def dispatch void infer(Model m, IAcceptor<JvmDeclaredType> acceptor, boolean prelinkingPhase) {
+   	def dispatch void infer(Model m, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
    		val e  = m.block
-   		acceptor.accept(e.toClass(e.eResource.name) [
+   		acceptor.accept(e.toClass(e.eResource.name)).initializeLater [
    			annotations += e.toAnnotation(typeof(SuppressWarnings), "all")
    			members += e.toMethod("main", e.newTypeRef(Void::TYPE)) [
    				^static = true
@@ -60,7 +59,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 				''']
    			]
    			}
-   		])
+   		]
    	}
    	
    	def name(Resource res) {

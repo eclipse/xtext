@@ -29,8 +29,9 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -57,6 +58,10 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	
 	@Inject
 	private IJvmModelInferrer inferrer;
+	
+	public void setInferrer(IJvmModelInferrer inferrer) {
+		this.inferrer = inferrer;
+	}
 	
 	protected static class Adapter extends AdapterImpl {
 		public ListMultimap<EObject, EObject> sourceToTargetMap = LinkedListMultimap.create();
@@ -196,16 +201,17 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
-	public void installDerivedState(final DerivedStateAwareResource resource, boolean isPreLinkingPhase) {
+	public void installDerivedState(final DerivedStateAwareResource resource, boolean preIndexingPhase) {
 		if (resource.getContents().isEmpty())
 			return;
 		EObject eObject = resource.getContents().get(0);
-		inferrer.infer(eObject, new IAcceptor<JvmDeclaredType>() {
-			public void accept(JvmDeclaredType t) {
-				if(t != null)
-					resource.getContents().add(t);
+		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
+		inferrer.infer(eObject, acceptor, preIndexingPhase);
+		if (!preIndexingPhase) {
+			for (Pair<JvmDeclaredType, Procedure1<JvmDeclaredType>> initializer: acceptor.later) {
+				initializer.getValue().apply(initializer.getKey());
 			}
-		}, isPreLinkingPhase);
+		}
 	}
 
 	public void discardDerivedState(DerivedStateAwareResource resource) {
@@ -223,6 +229,30 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		resourcesContentsList.removeAll(derived);
 		sourceToTargetMap(resource).clear();
 		getLogicalContainerMapping(resource).clear();
+	}
+	
+	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor, IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmDeclaredType> {
+		public List<Pair<JvmDeclaredType,Procedure1<JvmDeclaredType>>> later = newArrayList();
+		private JvmDeclaredType lastAccepted = null;
+		private DerivedStateAwareResource resource;
+
+		public JvmDeclaredTypeAcceptor(DerivedStateAwareResource resource) {
+			this.resource = resource;
+		}
+
+		@SuppressWarnings("unchecked")
+		public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
+			lastAccepted = type;
+			resource.getContents().add(type);
+			return (IPostIndexingInitializing<T>) this;
+		}
+		
+		public void initializeLater(Procedure1<JvmDeclaredType> lateInitialization) {
+			if (lateInitialization != null) {
+				later.add(new Pair<JvmDeclaredType, Procedure1<JvmDeclaredType>>(lastAccepted, lateInitialization));
+			}
+		}
+		
 	}
 }
 
