@@ -142,6 +142,7 @@
             default="true"
             extensions="___xbase"
             id="org.eclipse.xtext.xbase.Xbase"
+            matchingStrategy="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="Xbase Editor">
         </editor>
     </extension>
@@ -299,6 +300,7 @@
             default="true"
             extensions="___xbasewithannotations"
             id="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations"
+            matchingStrategy="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="XbaseWithAnnotations Editor">
         </editor>
     </extension>

@@ -23,6 +23,11 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.XtextEditor> bindXtextEditor() {
+		return org.eclipse.xtext.xbase.ui.editor.XbaseEditor.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper> bindIProposalConflictHelper() {
 		return org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper.class;

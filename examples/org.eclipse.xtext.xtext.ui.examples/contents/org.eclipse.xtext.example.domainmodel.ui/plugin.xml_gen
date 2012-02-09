@@ -11,6 +11,7 @@
             default="true"
             extensions="dmodel"
             id="org.eclipse.xtext.example.domainmodel.Domainmodel"
+            matchingStrategy="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="Domainmodel Editor">
         </editor>
     </extension>
