@@ -10,7 +10,10 @@ package org.eclipse.xtend.ide.tests.hierarchy;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.Collections;
+
 import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
@@ -57,22 +60,22 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 	public void tearDown() throws Exception {
 		testHelper.tearDown();
 	}
-	@Ignore
+
 	@Test public void testOpenTypeHierarchyOnXtendClass() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Fo|o { def bar(String a)}");
 		assertEquals("Foo", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
-	@Ignore
+
 	@Test public void testOpenTypeHierarchyOnTypeReference() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(Str|ing a)}");
 		assertEquals("String", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
-	@Ignore
+
 	@Test public void testOpenTypeHierarchyOnFunction() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def b|ar(String a)}");
 		assertEquals("bar", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
-	@Ignore
+
 	@Test public void testOpenTypeHierarchyOnCollectionsLiterals() throws Exception {
 		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(String a) { newArr|ayList() }");
 		assertEquals("newArrayList", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
@@ -104,7 +107,9 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 		getInjector().injectMembers(testingHandler);
 		IHandler originalHandler = command.getHandler();
 		command.setHandler(testingHandler);
-		handlerService.executeCommand(COMMAND_ID, null);
+		final ExecutionEvent event = new ExecutionEvent(command,
+				Collections.EMPTY_MAP, null, handlerService.getCurrentState());
+		command.executeWithChecks(event);
 		command.setHandler(originalHandler);
 		return testingHandler;
 	}
