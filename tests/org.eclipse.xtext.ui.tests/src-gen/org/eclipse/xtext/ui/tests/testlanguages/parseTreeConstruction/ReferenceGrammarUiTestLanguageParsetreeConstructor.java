@@ -1127,9 +1127,9 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 			element = grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2();
 			return obj;
 		}
-		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3(), value, null)) {
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), value, null)) {
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3();
+			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
 			return obj;
 		}
 		return null;
