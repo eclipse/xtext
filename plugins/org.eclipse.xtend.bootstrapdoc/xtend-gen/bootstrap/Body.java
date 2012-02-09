@@ -55,7 +55,7 @@ public class Body {
     _builder.newLine();
     _builder.append("\t\t\t");
     TextOrMarkup _title = chapter.getTitle();
-    Object _html = this._htmlExtensions.toHtml(_title);
+    CharSequence _html = this._htmlExtensions.toHtml(_title);
     _builder.append(_html, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -106,7 +106,7 @@ public class Body {
     _builder.newLineIfNotEmpty();
     _builder.append("<h2>");
     TextOrMarkup _title = section.getTitle();
-    Object _html = this._htmlExtensions.toHtml(_title);
+    CharSequence _html = this._htmlExtensions.toHtml(_title);
     _builder.append(_html, "");
     _builder.append("</h2>");
     _builder.newLineIfNotEmpty();
@@ -140,7 +140,7 @@ public class Body {
     _builder.append(hLevel, "");
     _builder.append(">");
     TextOrMarkup _title = section.getTitle();
-    Object _html = this._htmlExtensions.toHtml(_title);
+    CharSequence _html = this._htmlExtensions.toHtml(_title);
     _builder.append(_html, "");
     _builder.append("</h");
     _builder.append(hLevel, "");

@@ -40,7 +40,9 @@ class GenerateBootstrapDoc {
 	
 	def void generate() {
 		val document = loadDocument
-		val writer = new FileWriter(new File("bootstrap/index.html"))
+		val file = new File("../../website/documentation/index.html")
+		file.parentFile.mkdirs
+		val writer = new FileWriter(file)
 		writer.append(main(document))
 		writer.close
 		println("Done.")
@@ -70,7 +72,7 @@ class GenerateBootstrapDoc {
 	
 	def main(Document document) {
 		'''
-			«mainSite.header»
+			«mainSite.header('../')»
 				«document.menu»
 				«document.body»
 			«mainSite.footer»

@@ -71,8 +71,11 @@ public class GenerateBootstrapDoc {
       {
         Document _loadDocument = this.loadDocument();
         final Document document = _loadDocument;
-        File _file = new File("bootstrap/index.html");
-        FileWriter _fileWriter = new FileWriter(_file);
+        File _file = new File("../../website/documentation/index.html");
+        final File file = _file;
+        File _parentFile = file.getParentFile();
+        _parentFile.mkdirs();
+        FileWriter _fileWriter = new FileWriter(file);
         final FileWriter writer = _fileWriter;
         String _main = this.main(document);
         writer.append(_main);
@@ -88,7 +91,7 @@ public class GenerateBootstrapDoc {
       ResourceSet _get = this.provider.get();
       final ResourceSet rs = _get;
       PathTraverser _pathTraverser = new PathTraverser();
-      List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtext.xtend2.doc/xdoc");
+      List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtend.doc.xdoc/xdoc");
       final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
           public Boolean apply(final URI it) {
             String _fileExtension = it.fileExtension();
@@ -139,7 +142,7 @@ public class GenerateBootstrapDoc {
   
   public String main(final Document document) {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _header = this.mainSite.header();
+    CharSequence _header = this.mainSite.header("../");
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

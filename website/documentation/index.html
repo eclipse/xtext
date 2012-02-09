@@ -13,7 +13,7 @@
     <![endif]-->
 
 <!-- Le styles -->
-<!-- <link href="bootstrap.css" rel="stylesheet"> -->
+<!-- <link href="../bootstrap.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
 <style type="text/css">
 body {
@@ -28,12 +28,12 @@ div#maincontainer>section {
 	padding-top: 90px;
 }
 </style>
-<link href="google-code-prettify/prettify.css" type="text/css"
+<link href="../google-code-prettify/prettify.css" type="text/css"
 	rel="stylesheet" />
-<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
-<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="../google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="../google-code-prettify/lang-xtend.js"></script>
+<script type="text/javascript" src="../jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../bootstrap-dropdown.js"></script>
 
 <script type="text/javascript">
 	var _gaq = _gaq || [];
@@ -134,7 +134,7 @@ div#maincontainer>section {
 				<div class="span12 offset2">
 					<p>
 					Xtend is a statically-typed programming language which is tightly integrated with and runs on the Java Virtual Machine. 
-					It has its roots in the Java programming language but improves on many concepts:   <ol>
+					It has its roots in the Java programming language but improves on many concepts:   <ul>
 						<li><strong>Extension methods</strong> - enhance closed types with new functionality</li>
 						<li><strong>Multiple dispatch</strong> a.k.a. polymorphic method invocation</li>
 						<li><strong>Closures</strong> - concise syntax for anonymous function literals</li>
@@ -147,7 +147,7 @@ div#maincontainer>section {
 						<li><strong>Full support for Java Generics</strong> - including all conformance and conversion rules</li>
 						<li><strong>Translates to Java</strong> not bytecode - understand what is going on and use your code for platforms 
 						    such as Android or GWT</li>
-					</ol>
+					</ul>
 					It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
 					Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
 					Java can call Xtend methods, too, in a completely transparent way. And of course, Xtend provides a modern 
@@ -162,7 +162,7 @@ div#maincontainer>section {
 					is a client integrated into Eclipse. You&apos;ll find it in the Help-menu.
 					</p>
 					<!-- subsection -->
-					<section id="Section20">
+					<section id="Section2_0">
 					<h3>Hello World</h3>
 					<p>
 					Let us start with a simple "Hello World" example. In Xtend, that reads as
@@ -310,11 +310,11 @@ class MyClass {
 					<section id="packageDecl">
 					<h2>Package Declaration</h2>
 					<p>
-					Package declarations are mostly like in Java. There are two the small differences: 
-					<ol>
+					Package declarations are mostly like in Java. There are two small differences: 
+					<ul>
 						<li>An identifier can be escaped with a <code class="prettyprint lang-xtend">^</code> character in case it conflicts with a keyword.</li>
 						<li>There is no terminating semicolon.</li>
-					</ol>
+					</ul>
 					</p><pre class="prettyprint lang-xtend">
 package com.acme</pre><p>
 					</p>
@@ -418,7 +418,7 @@ def static createInstance() {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-					<section id="Section21">
+					<section id="Section2_1">
 					<h3>Overriding Methods</h3>
 					<p>
 					Methods can override other methods from the super class or implemented interface methods using the
@@ -569,7 +569,7 @@ public String printType(final Number x) {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-					<section id="Section32">
+					<section id="Section3_2">
 					<h4>Dispatch Methods and Inheritance</h4>
 					<p>
 					Any visible Java methods from super types conforming to the compiled form of a dispatch method are
@@ -612,7 +612,7 @@ public String label(final Object it) {
 					</p>
 					</section>
 					<!-- subsection -->
-					<section id="Section33">
+					<section id="Section3_3">
 					<h4>Static Dispatch Methods</h4>
 					<p>
 					Even static dispatch methods are allowed. The same rules apply, but you cannot mix static and non-static
@@ -630,10 +630,10 @@ public String label(final Object it) {
 					Annotations are available on classes, fields, methods and parameters. Here is an example:</p><pre class="prettyprint lang-xtend">
 @TypeAnnotation(typeof(String))
 class MyClass {
-  @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)}
+  @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)})
   String myField
   
-  @MethodAnnotation(children = {@MyAnno(true), @MyAnno}
+  @MethodAnnotation(children = {@MyAnno(true), @MyAnno})
   def String myMethod(@ParameterAnnotation String param) {
     //...
   }
@@ -654,7 +654,7 @@ class MyClass {
 					concatenated than nested. They also allow to add methods in a specific context only. 
 					</p>
 					<!-- subsection -->
-					<section id="Section24">
+					<section id="Section2_4">
 					<h3>Local Extension Methods</h3>
 					<p>
 					All methods of the current Xtend class are automatically available in extension syntax. For example
@@ -973,7 +973,7 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					precedence and associativity. 
 					</p>
 					<!-- subsection -->
-					<section id="Section25">
+					<section id="Section2_5">
 					<h3>Short-Circuit Boolean Operators</h3>
 					<p>
 					If the operators <code class="prettyprint lang-xtend">||</code> and <code class="prettyprint lang-xtend">&&</code> are used in a context where the left hand operand is of 
@@ -988,7 +988,7 @@ x+y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					</p>
 					</section>
 					<!-- subsection -->
-					<section id="Section26">
+					<section id="Section2_6">
 					<h3>Examples</h3>
 					<p>
 					</p><pre class="prettyprint lang-xtend">
@@ -1047,7 +1047,7 @@ myObj.setMyProperty("foo")</pre><p>
 					closure.
 					</p>
 					<!-- subsection -->
-					<section id="Section27">
+					<section id="Section2_7">
 					<h3>Typing</h3>
 					<p>
 					The return type of a variable declaration expression is always <code class="prettyprint lang-xtend">void</code>. 
@@ -1176,22 +1176,22 @@ newArrayList("Foo", "Bar").find(String e | e=="Bar")</pre><p>
 					<p>
 					An Xtend closure is a Java object of one of the <strong>Function</strong> interfaces shipped with the runtime library of Xtend. There is an interface 
 					for each number of parameters (current maximum is six parameters). The names of the interfaces are 
-					<ol>
+					<ul>
 						<li><strong>Function0&lt;ReturnType&gt;</strong> for zero parameters, </li>
 						<li><strong>Function1&lt;Param1Type, ReturnType&gt;</strong> for one parameters, </li>
 						<li><strong>Function2&lt;Param1Type, Param2Type, ReturnType&gt;</strong> for two parameters, </li>
 						<li>... </li>
 						<li><strong>Function6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType&gt;</strong> for six parameters, </li>
-					</ol>
+					</ul>
 					
 					or
-					<ol>
+					<ul>
 						<li><strong>Procedure0</strong> for zero parameters, </li>
 						<li><strong>Procedure1&lt;Param1Type&gt;</strong> for one parameters, </li>
 						<li><strong>Procedure2&lt;Param1Type, Param2Type&gt;</strong> for two parameters, </li>
 						<li>... </li>
 						<li><strong>Procedure6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type&gt;</strong> for six parameters, </li>
-					</ol>
+					</ul>
 					
 					if the return type is <code class="prettyprint lang-java">void</code>.In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
 					are automatically coerced to expected types if those types declare only one method (methods from <code class="prettyprint lang-xtend">java.lang.Object</code>
@@ -1314,7 +1314,7 @@ switch myString {
 }</pre><p>
 					</p>
 					<!-- subsection -->
-					<section id="Section28">
+					<section id="Section2_8">
 					<h3>Type guards</h3>
 					<p>
 					In addition to the case guards one can add a so called <strong>Type Guard</strong> which is syntactically just a

@@ -2,7 +2,7 @@ package bootstrap
 
 class MainSite {
 	
-	def header() '''
+	def header(String bootstrapPath) '''
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -18,7 +18,7 @@ class MainSite {
 		    <![endif]-->
 		
 		<!-- Le styles -->
-		<!-- <link href="bootstrap.css" rel="stylesheet"> -->
+		<!-- <link href="«bootstrapPath»bootstrap.css" rel="stylesheet"> -->
 		<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
 		<style type="text/css">
 		body {
@@ -33,12 +33,12 @@ class MainSite {
 			padding-top: 90px;
 		}
 		</style>
-		<link href="google-code-prettify/prettify.css" type="text/css"
+		<link href="«bootstrapPath»google-code-prettify/prettify.css" type="text/css"
 			rel="stylesheet" />
-		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-		<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
-		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="bootstrap-dropdown.js"></script>
+		<script type="text/javascript" src="«bootstrapPath»google-code-prettify/prettify.js"></script>
+		<script type="text/javascript" src="«bootstrapPath»google-code-prettify/lang-xtend.js"></script>
+		<script type="text/javascript" src="«bootstrapPath»jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="«bootstrapPath»bootstrap-dropdown.js"></script>
 		
 		<script type="text/javascript">
 			var _gaq = _gaq || [];

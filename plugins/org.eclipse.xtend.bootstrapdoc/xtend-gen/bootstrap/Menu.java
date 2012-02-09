@@ -48,7 +48,7 @@ public class Menu {
             _builder.append(_href, "				");
             _builder.append("\">");
             TextOrMarkup _title = s.getTitle();
-            Object _html = this._htmlExtensions.toHtml(_title);
+            CharSequence _html = this._htmlExtensions.toHtml(_title);
             _builder.append(_html, "				");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
@@ -63,7 +63,7 @@ public class Menu {
             _builder.append(_href_1, "					");
             _builder.append("\" class=\"dropdown-toggle\">");
             TextOrMarkup _title_1 = s.getTitle();
-            Object _html_1 = this._htmlExtensions.toHtml(_title_1);
+            CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
             _builder.append(_html_1, "					");
             _builder.append("</a>");
             _builder.newLineIfNotEmpty();
@@ -81,7 +81,7 @@ public class Menu {
                 _builder.append(_href_2, "						");
                 _builder.append("\">");
                 TextOrMarkup _title_2 = subSection.getTitle();
-                Object _html_2 = this._htmlExtensions.toHtml(_title_2);
+                CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
                 _builder.append(_html_2, "						");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();

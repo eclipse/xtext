@@ -4,7 +4,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class MainSite {
-  public CharSequence header() {
+  public CharSequence header(final String bootstrapPath) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!DOCTYPE html>");
     _builder.newLine();
@@ -37,8 +37,10 @@ public class MainSite {
     _builder.newLine();
     _builder.append("<!-- Le styles -->");
     _builder.newLine();
-    _builder.append("<!-- <link href=\"bootstrap.css\" rel=\"stylesheet\"> -->");
-    _builder.newLine();
+    _builder.append("<!-- <link href=\"");
+    _builder.append(bootstrapPath, "");
+    _builder.append("bootstrap.css\" rel=\"stylesheet\"> -->");
+    _builder.newLineIfNotEmpty();
     _builder.append("<link rel=\"stylesheet\" href=\"http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css\">");
     _builder.newLine();
     _builder.append("<style type=\"text/css\">");
@@ -68,19 +70,29 @@ public class MainSite {
     _builder.newLine();
     _builder.append("</style>");
     _builder.newLine();
-    _builder.append("<link href=\"google-code-prettify/prettify.css\" type=\"text/css\"");
-    _builder.newLine();
+    _builder.append("<link href=\"");
+    _builder.append(bootstrapPath, "");
+    _builder.append("google-code-prettify/prettify.css\" type=\"text/css\"");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("rel=\"stylesheet\" />");
     _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/prettify.js\"></script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-xtend.js\"></script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"jquery-1.7.1.min.js\"></script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"bootstrap-dropdown.js\"></script>");
-    _builder.newLine();
+    _builder.append("<script type=\"text/javascript\" src=\"");
+    _builder.append(bootstrapPath, "");
+    _builder.append("google-code-prettify/prettify.js\"></script>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<script type=\"text/javascript\" src=\"");
+    _builder.append(bootstrapPath, "");
+    _builder.append("google-code-prettify/lang-xtend.js\"></script>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<script type=\"text/javascript\" src=\"");
+    _builder.append(bootstrapPath, "");
+    _builder.append("jquery-1.7.1.min.js\"></script>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<script type=\"text/javascript\" src=\"");
+    _builder.append(bootstrapPath, "");
+    _builder.append("bootstrap-dropdown.js\"></script>");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
