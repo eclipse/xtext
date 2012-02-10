@@ -48,10 +48,13 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_hoverText", 1, 1,
 				Collections.singletonList(this), new ErrorHandler<String>() {
 					public String handle(Object[] params, Throwable throwable) {
-						return "";
+						return null;
 					}
 				});
-		return "<b>" + polymorphicDispatcher.invoke(object) + "</b>";
+		String result = polymorphicDispatcher.invoke(object);
+		if(result == null)
+			return null;
+		return "<b>" + result + "</b>";
 	}
 
 	protected String _hoverText(JvmGenericType clazz) {

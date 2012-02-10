@@ -60,6 +60,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -104,7 +105,6 @@ public class XbaseHoverDocumentationProvider {
 		Javadoc javadoc = getJavaDoc();
 		if (javadoc == null)
 			return "";
-
 		TagElement deprecatedTag = null;
 		TagElement start = null;
 		List<TagElement> parameters = new ArrayList<TagElement>();
@@ -186,8 +186,8 @@ public class XbaseHoverDocumentationProvider {
 				IScope scope = scopeProvider.getScope(context, reference);
 				for (JvmAnnotationReference annotationReference : annotations) {
 					buffer.append("@");
-					buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationReference.getAnnotation()), annotationReference.getAnnotation()
-							.getSimpleName()));
+					buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationReference.getAnnotation()),
+							annotationReference.getAnnotation().getSimpleName()));
 					if (annotationReference.getValues().size() > 0) {
 						buffer.append("(");
 						for (JvmAnnotationValue value : annotationReference.getValues()) {
@@ -208,6 +208,16 @@ public class XbaseHoverDocumentationProvider {
 		String startTag = "/**";
 		String endTag = "*/";
 		String documentation = documentationProvider.getDocumentation(object);
+		if (documentation == null) {
+			DocumentationAdapter adapter = (DocumentationAdapter) EcoreUtil.getAdapter(object.eAdapters(),
+					DocumentationAdapter.class);
+			if (adapter != null)
+				documentation = adapter.getDocumentation();
+			EObject primarySourceElement = associations.getPrimarySourceElement(object);
+			if (primarySourceElement != null)
+				documentation = documentationProvider.getDocumentation(primarySourceElement);
+		}
+
 		if (documentation != null && documentation.length() > 0) {
 			BufferedReader reader = new BufferedReader(new StringReader(documentation));
 			StringBuilder builder = new StringBuilder(startTag + LINEBREAK);
