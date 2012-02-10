@@ -235,11 +235,6 @@ public abstract class AbstractPureXbaseRuntimeModule extends DefaultRuntimeModul
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.resource.EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
-		return org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider.class;
 	}

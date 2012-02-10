@@ -136,8 +136,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
-				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
-						"org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper")
 				.addTypeToType(IGlobalScopeProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider");
 			if(generateXtendInferrer) {
