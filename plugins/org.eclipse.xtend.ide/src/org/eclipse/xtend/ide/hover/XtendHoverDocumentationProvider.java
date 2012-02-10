@@ -7,11 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.hover;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 
 import com.google.inject.Inject;
@@ -26,6 +37,28 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 
 	@Inject
 	private XtendOverridesService overridesService;
+	
+	@Override
+	protected void addAnnotations(EObject object) {
+		if(object instanceof XtendAnnotationTarget){
+			for(XAnnotation annotation : ((XtendAnnotationTarget) object).getAnnotations()){
+				JvmAnnotationType annotationType = annotation.getAnnotationType();
+				buffer.append("@");
+				buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
+				EList<XAnnotationElementValuePair> elementValuePairs = annotation.getElementValuePairs();
+				if(elementValuePairs.size() > 0){
+					buffer.append("(");
+					List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(annotation, XAnnotationsPackage.eINSTANCE.getXAnnotation_ElementValuePairs());
+					if(findNodesForFeature.size() > 0)
+						buffer.append(findNodesForFeature.get(0).getText());
+					buffer.append(")");
+				}
+				buffer.append("<br>");
+			}
+		} else {
+			super.addAnnotations(object);
+		}
+	}
 	
 	@Override
 	protected void handleSuperMethodReferences(EObject context) {
