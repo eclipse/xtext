@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -36,6 +37,11 @@ import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.internal.ui.javaeditor.ASTProvider;
 import org.eclipse.jdt.ui.JavaElementLabels;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -43,6 +49,9 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -51,7 +60,10 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -74,14 +86,21 @@ public class XbaseHoverDocumentationProvider {
 	@Inject
 	protected IWorkspace workspace;
 	@Inject
+	protected IJvmModelAssociations associations;
+	@Inject
 	protected IEObjectDocumentationProvider documentationProvider;
+	@Inject
+	protected JvmModelGenerator jvmModelGenerator;
+
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
+	private static final String LINEBREAK = "\n";;
 
 	public String getDocumentation(EObject object) {
+		buffer = new StringBuffer();
 		context = object;
+		addAnnotations(object);
 		getDocumentationWithPrefix(object);
-
 		Javadoc javadoc = getJavaDoc();
 		if (javadoc == null)
 			return "";
@@ -125,7 +144,6 @@ public class XbaseHoverDocumentationProvider {
 				rest.add(tag);
 			}
 		}
-		buffer = new StringBuffer();
 		fLiteralContent = 0;
 		boolean hasParameters = parameters.size() > 0;
 		boolean hasReturnTag = returnTag != null;
@@ -158,23 +176,50 @@ public class XbaseHoverDocumentationProvider {
 		return result;
 	}
 
+	protected void addAnnotations(EObject object) {
+		Set<EObject> jvmElements = associations.getJvmElements(object);
+		if (jvmElements.size() > 0) {
+			EObject associatedElement = Lists.newArrayList(jvmElements).get(0);
+			if (associatedElement instanceof JvmAnnotationTarget) {
+				EList<JvmAnnotationReference> annotations = ((JvmAnnotationTarget) associatedElement).getAnnotations();
+				HoverReference reference = new HoverReference(TypesPackage.Literals.JVM_TYPE);
+				IScope scope = scopeProvider.getScope(context, reference);
+				for (JvmAnnotationReference annotationReference : annotations) {
+					buffer.append("@");
+					buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationReference.getAnnotation()), annotationReference.getAnnotation()
+							.getSimpleName()));
+					if (annotationReference.getValues().size() > 0) {
+						buffer.append("(");
+						for (JvmAnnotationValue value : annotationReference.getValues()) {
+							CharSequence java = jvmModelGenerator.toJava(value, null);
+							buffer.append(java);
+						}
+						buffer.append(")");
+					}
+					buffer.append("<br>");
+
+				}
+			}
+		}
+
+	}
+
 	protected void getDocumentationWithPrefix(EObject object) {
 		String startTag = "/**";
 		String endTag = "*/";
-		String lineBreak = "\n";
 		String documentation = documentationProvider.getDocumentation(object);
 		if (documentation != null && documentation.length() > 0) {
 			BufferedReader reader = new BufferedReader(new StringReader(documentation));
-			StringBuilder builder = new StringBuilder(startTag + lineBreak);
+			StringBuilder builder = new StringBuilder(startTag + LINEBREAK);
 			try {
 				String line = "";
 				while ((line = reader.readLine()) != null) {
 					if (line.length() > 0)
-						builder.append(line + lineBreak);
+						builder.append(line + LINEBREAK);
 				}
 				builder.append(endTag);
 			} catch (IOException e) {
-				
+
 			}
 			rawJavaDoc = builder.toString();
 		}
@@ -230,7 +275,18 @@ public class XbaseHoverDocumentationProvider {
 	protected boolean handleInheritDoc(TagElement node) {
 		if (!TagElement.TAG_INHERITDOC.equals(node.getTagName()))
 			return false;
-		//TODO: implement me!
+		TagElement blockTag = (TagElement) node.getParent();
+		String blockTagName = blockTag.getTagName();
+
+		if (blockTagName == null) {
+			// Inherited
+		} else if (TagElement.TAG_PARAM.equals(blockTagName)) {
+
+		} else if (TagElement.TAG_RETURN.equals(blockTagName)) {
+
+		} else if (TagElement.TAG_THROWS.equals(blockTagName) || TagElement.TAG_EXCEPTION.equals(blockTagName)) {
+
+		}
 		return true;
 	}
 
@@ -250,7 +306,7 @@ public class XbaseHoverDocumentationProvider {
 		return true;
 	}
 
-	protected void handleLink(List<? extends ASTNode> fragments) {
+	protected void handleLink(List<?> fragments) {
 		if (fragments.size() > 0) {
 			org.eclipse.emf.common.util.URI elementURI = null;
 			String firstFragment = fragments.get(0).toString();
@@ -311,7 +367,7 @@ public class XbaseHoverDocumentationProvider {
 					elementURI = singleElement.getEObjectURI();
 			}
 			String label = "";
-			Iterator<? extends ASTNode> iterator = fragments.iterator();
+			Iterator<? extends Object> iterator = fragments.iterator();
 			while (iterator.hasNext()) {
 				label += iterator.next(); //$NON-NLS-1$
 			}
