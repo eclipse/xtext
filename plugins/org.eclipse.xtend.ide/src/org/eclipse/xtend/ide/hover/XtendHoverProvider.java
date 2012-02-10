@@ -52,7 +52,7 @@ import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInpu
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
+import org.eclipse.xtext.xbase.ui.hover.DefaultDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider;
 
 import com.google.common.collect.Lists;
