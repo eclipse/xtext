@@ -37,7 +37,6 @@ public class XtendDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 			if (feature instanceof JvmOperation)
 				if (original != null)
 					return Tuples.create(object, original.getSecond());
-
 		}
 		return original;
 	}
