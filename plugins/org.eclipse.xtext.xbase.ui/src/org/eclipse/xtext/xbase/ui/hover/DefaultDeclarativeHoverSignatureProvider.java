@@ -36,7 +36,7 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XbaseDeclarativeHoverSignatureProvider {
+public class DefaultDeclarativeHoverSignatureProvider {
 
 	@Inject
 	protected HoverUiStrings hoverUiStrings;

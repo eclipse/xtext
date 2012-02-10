@@ -37,7 +37,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	private ITypeProvider typeProvider;
 	
 	@Inject
-	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
+	private DefaultDeclarativeHoverSignatureProvider hoverSignatureProvider;
 	
 	@Inject
 	private IJvmModelAssociations associations;
