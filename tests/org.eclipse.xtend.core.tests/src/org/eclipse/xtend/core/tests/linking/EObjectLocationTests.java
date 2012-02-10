@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -34,6 +35,9 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 	
+	@Inject
+	private IXtendJvmAssociations associations;
+	
 	@Inject 
 	private IXtendJvmAssociations xtendjvmAssociations;
 	
@@ -45,8 +49,8 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 		assertTrue(fooDeclaration instanceof XtendClass);
 		assertEquals(file.getXtendClass(), fooDeclaration);
 		EObject fooReference = eObjectAtOffsetHelper.resolveElementAt(resource, model.lastIndexOf("Foo"));
-		assertTrue(fooReference instanceof XtendClass);
-		assertEquals(file.getXtendClass(), fooReference);
+		assertTrue(fooReference instanceof JvmGenericType);
+		assertEquals(file.getXtendClass(), associations.getPrimarySourceElement(fooReference));
 		EObject hashCodeReference = eObjectAtOffsetHelper.resolveElementAt(resource, model.indexOf("hashCode"));
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}
@@ -56,8 +60,8 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 		XtendFile file = file(model);
 		XtextResource resource = (XtextResource) file.eResource();
 		EObject fooReference = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.lastIndexOf("Foo"));
-		assertTrue(fooReference instanceof XtendClass);
-		assertEquals(file.getXtendClass(), fooReference);
+		assertTrue(fooReference instanceof JvmGenericType);
+		assertEquals(file.getXtendClass(), associations.getPrimarySourceElement(fooReference));
 		EObject hashCodeReference = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("hashCode"));
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}

@@ -76,7 +76,6 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 	private IURIEditorOpener uriEditorOpener;
 	@Inject
 	private XtendHoverSerializer xtendHoverSerializer;
-
 	@Inject
 	private XtendHoverDocumentationProvider documentationProvider;
 	@Inject
@@ -101,9 +100,7 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 		
 		if (objectToView instanceof JvmIdentifiableElement) {
 			Set<EObject> sourceElements = associations.getSourceElements(objectToView);
-			if(sourceElements.size() > 0)
-				objectToView = Lists.newArrayList(sourceElements).get(0);
-			else {
+			if(sourceElements.isEmpty()){
 				IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
 				if (javaElement != null) {
 					javadocHover.setJavaElement(javaElement);
@@ -227,14 +224,7 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 
 	private EObject getObjectToView(EObject object) {
 		if (object instanceof XAbstractFeatureCall) {
-			EObject feature = ((XAbstractFeatureCall) object).getFeature();
-			if (feature instanceof JvmOperation) {
-				XtendFunction xtendFunction = associations.getXtendFunction((JvmOperation) feature);
-				if (xtendFunction != null)
-					return xtendFunction;
-				else
-					return feature;
-			}
+			return ((XAbstractFeatureCall) object).getFeature();
 		}
 		return object;
 	}

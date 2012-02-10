@@ -11,15 +11,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendClassSuperCallReferable;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XtendEObjectAtOffsetHelper extends JvmEObjectAtOffsetHelper {
+public class XtendEObjectAtOffsetHelper extends EObjectAtOffsetHelper {
 	
 	@Inject
 	private TypeReferences typeReferences;
