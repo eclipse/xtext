@@ -43,8 +43,11 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.builder.trace.MarkerBasedTraceInformation;
 import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -265,5 +268,8 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
 		return TemplateProposalProvider.class;
 	}
-	
+
+	public Class<? extends ITraceInformation> bindTraceInformation() {
+		return FileBasedTraceInformation.class;
+	}
 }
