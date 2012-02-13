@@ -150,7 +150,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
+	 * @param name
 	 *            the qualifiedName of the resulting class.
 	 * 
 	 * @return a {@link JvmGenericType} representing a Java class of the given name.
@@ -179,7 +179,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
+	 * @param name
 	 *            the qualifiedName of the resulting class.
 	 * @param initializer
 	 *            the initializer to apply on the created class element
@@ -196,7 +196,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
+	 * @param name
 	 *            the qualifiedName of the resulting class.
 	 * @param initializer
 	 *            the initializer to apply on the created class element
@@ -230,7 +230,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
+	 * @param name
 	 *            the qualifiedName of the resulting class.
 	 * @param initializer
 	 *            the initializer to apply on the created interface declaration.
@@ -255,7 +255,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
+	 * @param name
 	 *            the qualifiedName of the resulting class.
 	 * @param initializer
 	 *            the initializer to apply on the created annotation
@@ -285,12 +285,12 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the sourceElement the resulting element is associated with.
-	 * @param qualifiedName
+	 * @param name
 	 *            the qualifiedName of the resulting class.
 	 * @param initializer
 	 *            the initializer to apply on the created enumeration type
 	 * 
-	 * @return a {@link result} representing a Java class of the given name.
+	 * @return a result representing a Java enum type with the given name.
 	 */
 	public JvmEnumerationType toEnumerationType(EObject sourceElement, String name, Procedure1<JvmEnumerationType> initializer) {
 		if (sourceElement == null)
@@ -509,7 +509,7 @@ public class JvmTypesBuilder {
 	 * 
 	 * @param sourceElement
 	 *            the source element to associate the created element with.
-	 * @param annotationTypeNAme
+	 * @param annotationTypeName
 	 *            the type name of the created annotation.
 	 * @param value
 	 *            the value of the single
@@ -557,7 +557,7 @@ public class JvmTypesBuilder {
 	 * Sets the given {@link JvmField} as the logical container for the given {@link XExpression}.
 	 * This defines the context and the scope for the given expression.
 	 * 
-	 * @param logicalContainer
+	 * @param field
 	 *            the {@link JvmField} that is initialized by the expression. Must not be <code>null</code>.
 	 * @param expr
 	 *            the initialization expression. Can be <code>null</code> in which case this function does nothing.

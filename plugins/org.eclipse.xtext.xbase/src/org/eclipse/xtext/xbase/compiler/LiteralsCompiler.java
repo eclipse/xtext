@@ -80,6 +80,9 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		generateComment(expr, b, isReferenced);
 	}
 
+	/**
+	 * @param expr the expression. Used by the dispatch strategy.
+	 */
 	public void _toJavaExpression(XNullLiteral expr, TracingAppendable b) {
 		b.append("null");
 	}

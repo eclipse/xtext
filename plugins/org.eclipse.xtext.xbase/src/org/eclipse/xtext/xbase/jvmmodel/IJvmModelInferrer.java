@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 import com.google.inject.ImplementedBy;
 
@@ -30,7 +31,7 @@ import com.google.inject.ImplementedBy;
  * Implementers should use the {@link JvmTypesBuilder} API to create a model of Jvm elements in a convenient way. 
  * </p>
  * <p>
- * Implementors have to traverse the given source object in {@link #inferJvmModel(EObject)} and decide which types to
+ * Implementors have to traverse the given source object in {@link #infer(EObject, IJvmDeclaredTypeAcceptor, boolean) infer(..)} and decide which types to
  * create according to the state of the model.
  * </p>
  * 
@@ -62,11 +63,11 @@ public interface IJvmModelInferrer {
 	 * </p>
 	 * 
 	 * @param e
-	 *            - the root element from the parse result
+	 *            the root element from the parse result
 	 * @param acceptor
-	 *            - an acceptor awaiting derived root {@link JvmDeclaredType}s
+	 *            an acceptor awaiting derived root {@link JvmDeclaredType}s
 	 * @param preIndexingPhase
-	 *            - whether the call is done in before indexing. During this phase clients may not rely on any global indexing information 
+	 *            whether the call is done in before indexing. During this phase clients may not rely on any global indexing information 
 	 *            and only need to to provide the information needed by the language's {@link org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy}.
 	 *            IF not implemented differently this is just the {@link JvmDeclaredType}s with their qualified name, but no members and no other data.
 	 */
