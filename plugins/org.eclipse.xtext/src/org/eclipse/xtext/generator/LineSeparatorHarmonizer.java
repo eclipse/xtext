@@ -25,8 +25,12 @@ public class LineSeparatorHarmonizer implements IFilePostProcessor {
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
 
-	public String postProcess(URI fileURI, CharSequence content) {
+	public CharSequence postProcess(URI fileURI, CharSequence content) {
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(fileURI).getLineSeparator();
+		return replaceLineSeparators(content, lineSeparator);
+	}
+
+	protected String replaceLineSeparators(CharSequence content, String newLineSeparator) {
 		CharArrayWriter writer = new CharArrayWriter(content.length());
 		boolean isLookahead = false;
 		char ignoreNext = '\u0000';
@@ -39,12 +43,12 @@ public class LineSeparatorHarmonizer implements IFilePostProcessor {
 			}
 			switch (c) {
 				case '\n':
-					writer.append(lineSeparator);
+					writer.append(newLineSeparator);
 					isLookahead = true;
 					ignoreNext = '\r';
 					break;
 				case '\r':
-					writer.append(lineSeparator);
+					writer.append(newLineSeparator);
 					isLookahead = true;
 					ignoreNext = '\n';
 					break;
@@ -52,6 +56,10 @@ public class LineSeparatorHarmonizer implements IFilePostProcessor {
 					writer.append(c);
 			}
 		}
-		return new String(writer.toCharArray());
+		return writer.toString();
+	}
+	
+	protected IWhitespaceInformationProvider getWhitespaceInformationProvider() {
+		return whitespaceInformationProvider;
 	}
 }
