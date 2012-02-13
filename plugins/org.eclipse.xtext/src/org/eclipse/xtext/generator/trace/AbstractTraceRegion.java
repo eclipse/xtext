@@ -31,6 +31,17 @@ public abstract class AbstractTraceRegion {
 	protected AbstractTraceRegion(@Nullable AbstractTraceRegion parent) {
 		setParent(parent);
 	}
+	
+	protected boolean isConsistentWithParent() {
+		AbstractTraceRegion parent = getParent();
+		if (parent == null)
+			return true;
+		if (parent.getFromOffset() > getFromOffset())
+			return false;
+		if (parent.getFromOffset() + parent.getFromLength() < getFromOffset() + getFromLength())
+			return false;
+		return true;
+	}
 
 	protected void setParent(@Nullable AbstractTraceRegion parent) {
 		this.parent = parent;
@@ -101,7 +112,7 @@ public abstract class AbstractTraceRegion {
 		return null;
 	}
 	
-	public String getAnnotateString(String input) {
+	public String getAnnotatedString(String input) {
 		StringBuilder result = new StringBuilder(input.length() * 3);
 		int nextOffset = doAnnotateTrace(input, result, 0);
 		if (nextOffset < input.length()) {

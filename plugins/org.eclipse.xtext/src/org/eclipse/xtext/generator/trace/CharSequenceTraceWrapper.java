@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -37,7 +34,7 @@ public class CharSequenceTraceWrapper {
 		if (!originResourceURI.isPlatformResource()) {
 			throw new IllegalArgumentException("URI has to be a platform resource uri but was: " + originResourceURI+ ". Use #wrapWithTraceData(CharSequence, URI, String, int, int) instead.");
 		}
-		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.segment(2), originOffset, originLength);
+		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.segment(1), originOffset, originLength);
 	}
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, @Nullable String originProject, int originOffset, int originLength) {
@@ -78,16 +75,18 @@ public class CharSequenceTraceWrapper {
 			return delegate.toString();
 		}
 
-		public List<AbstractTraceRegion> getTraceRegions(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
+		public AbstractTraceRegion getTraceRegion(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
 			AbstractTraceRegion result = new TraceRegion(relativeOffset, delegate.length(), originOffset, originLength, parent, originURI, originProject) {
 				{
 					// initialize children
 					if (delegate instanceof ITraceRegionProvider) {
-						((ITraceRegionProvider) delegate).getTraceRegions(relativeOffset, this);
+						((ITraceRegionProvider) delegate).getTraceRegion(relativeOffset, this);
 					}
 				}
 			};
-			return Collections.singletonList(result);
+			if (parent != null)
+				return parent;
+			return result;
 		}
 
 	}
