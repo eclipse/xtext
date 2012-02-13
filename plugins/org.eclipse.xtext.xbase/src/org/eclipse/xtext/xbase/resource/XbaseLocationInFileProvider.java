@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.resource;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -24,6 +25,18 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 			 return getLocationOfAttribute(element, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, -1, true);
 		}
 		return super.getSignificantTextRegion(element);
+	}
+	
+	@Override
+	protected boolean useKeyword(Keyword keyword, EObject context) {
+//		String value = keyword.getValue();
+//		for(int i = 0; i < value.length(); i++) {
+//			char c = value.charAt(i);
+//			if (Character.isJavaIdentifierPart(c)) {
+//				return true;
+//			}
+//		}
+		return false;
 	}
 
 }

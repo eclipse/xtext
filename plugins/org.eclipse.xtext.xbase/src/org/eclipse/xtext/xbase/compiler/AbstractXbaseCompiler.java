@@ -95,11 +95,12 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	public TracingAppendable compile(XExpression obj, TracingAppendable appendable, JvmTypeReference expectedReturnType) {
-		return compile(obj, appendable, expectedReturnType, null);
+		compile(obj, appendable, expectedReturnType, null);
+		return appendable;
 	}
 	
-	public TracingAppendable compileAsJavaExpression(XExpression obj, TracingAppendable appendable, JvmTypeReference expectedType) {
-		appendable = appendable.trace(obj);
+	public TracingAppendable compileAsJavaExpression(XExpression obj, TracingAppendable parentAppendable, JvmTypeReference expectedType) {
+		TracingAppendable appendable = parentAppendable.trace(obj);
 		
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
@@ -153,7 +154,7 @@ public abstract class AbstractXbaseCompiler {
 		} else {
 			internalToJavaExpression(obj, appendable);
 		}
-		return appendable;
+		return parentAppendable;
 	}
 
 	protected void generateCheckedExceptionHandling(XExpression obj, TracingAppendable appendable) {
@@ -177,8 +178,8 @@ public abstract class AbstractXbaseCompiler {
 		return !isVariableDeclarationRequired(expression, appendable);
 	}
 	
-	public TracingAppendable compile(XExpression obj, TracingAppendable appendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
-		appendable = appendable.trace(obj);
+	public TracingAppendable compile(XExpression obj, TracingAppendable parentAppendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
+		TracingAppendable appendable = parentAppendable.trace(obj);
 		
 		if (declaredExceptions == null)
 			declaredExceptions = newHashSet();
@@ -202,7 +203,7 @@ public abstract class AbstractXbaseCompiler {
 		if (needsSneakyThrow) {
 			generateCheckedExceptionHandling(obj, appendable);
 		}
-		return appendable;
+		return parentAppendable;
 	}
 
 	protected boolean needsSneakyThrow(XExpression obj, Collection<JvmTypeReference> declaredExceptions) {
