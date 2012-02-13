@@ -37,11 +37,9 @@ import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.internal.ui.javaeditor.ASTProvider;
 import org.eclipse.jdt.ui.JavaElementLabels;
-import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -49,19 +47,19 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
-import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.collect.Lists;
@@ -70,7 +68,6 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-@SuppressWarnings({ "unchecked", "restriction" })
 public class XbaseHoverDocumentationProvider {
 	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
 	protected static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$
@@ -92,10 +89,12 @@ public class XbaseHoverDocumentationProvider {
 	protected IEObjectDocumentationProvider documentationProvider;
 	@Inject
 	protected JvmModelGenerator jvmModelGenerator;
+	@Inject
+	protected ILocationInFileProvider locationProvider;
 
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
-	private static final String LINEBREAK = "\n";;
+	private static final String LINEBREAK = "\n";
 
 	public String getDocumentation(EObject object) {
 		buffer = new StringBuffer();
@@ -116,6 +115,7 @@ public class XbaseHoverDocumentationProvider {
 		List<TagElement> since = new ArrayList<TagElement>();
 		List<TagElement> rest = new ArrayList<TagElement>();
 
+		@SuppressWarnings("unchecked")
 		List<TagElement> tags = javadoc.tags();
 		for (Iterator<TagElement> iter = tags.iterator(); iter.hasNext();) {
 			TagElement tag = iter.next();
@@ -150,8 +150,11 @@ public class XbaseHoverDocumentationProvider {
 		boolean hasExceptions = exceptions.size() > 0;
 		if (deprecatedTag != null)
 			handleDeprecatedTag(deprecatedTag);
-		if (start != null)
-			handleContentElements(start.fragments());
+		if (start != null) {
+			@SuppressWarnings("unchecked")
+			List<ASTNode> fragments = start.fragments();
+			handleContentElements(fragments);
+		}
 
 		if (hasParameters || hasReturnTag || hasExceptions || versions.size() > 0 || authors.size() > 0
 				|| since.size() > 0 || sees.size() > 0 || rest.size() > 0 || (buffer.length() > 0)) {
@@ -182,8 +185,6 @@ public class XbaseHoverDocumentationProvider {
 			EObject associatedElement = Lists.newArrayList(jvmElements).get(0);
 			if (associatedElement instanceof JvmAnnotationTarget) {
 				EList<JvmAnnotationReference> annotations = ((JvmAnnotationTarget) associatedElement).getAnnotations();
-				HoverReference reference = new HoverReference(TypesPackage.Literals.JVM_TYPE);
-				IScope scope = scopeProvider.getScope(context, reference);
 				for (JvmAnnotationReference annotationReference : annotations) {
 					buffer.append("@");
 					buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationReference.getAnnotation()),
@@ -191,7 +192,10 @@ public class XbaseHoverDocumentationProvider {
 					if (annotationReference.getValues().size() > 0) {
 						buffer.append("(");
 						for (JvmAnnotationValue value : annotationReference.getValues()) {
-							CharSequence java = jvmModelGenerator.toJava(value, null);
+							StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
+							TracingAppendable tracing = new TracingAppendable(appendable, locationProvider);
+							jvmModelGenerator.toJava(value, tracing);
+							String java = tracing.toString();
 							buffer.append(java);
 						}
 						buffer.append(")");
@@ -394,7 +398,9 @@ public class XbaseHoverDocumentationProvider {
 			TagElement tag = iter.next();
 			handleBlockTagTitle(tag.getTagName());
 			buffer.append(BlOCK_TAG_ENTRY_START);
-			handleContentElements(tag.fragments());
+			@SuppressWarnings("unchecked")
+			List<ASTNode> fragments = tag.fragments();
+			handleContentElements(fragments);
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
 	}
@@ -409,7 +415,9 @@ public class XbaseHoverDocumentationProvider {
 			if (TagElement.TAG_SEE.equals(tag.getTagName())) {
 				handleSeeTag(tag);
 			} else {
-				handleContentElements(tag.fragments());
+				@SuppressWarnings("unchecked")
+				List<ASTNode> fragments = tag.fragments();
+				handleContentElements(fragments);
 			}
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
@@ -432,6 +440,7 @@ public class XbaseHoverDocumentationProvider {
 	}
 
 	protected void handleThrowsTag(TagElement tag) {
+		@SuppressWarnings("unchecked")
 		List<? extends ASTNode> fragments = tag.fragments();
 		int size = fragments.size();
 		if (size > 0) {
@@ -446,9 +455,11 @@ public class XbaseHoverDocumentationProvider {
 	protected void handleDeprecatedTag(TagElement tag) {
 		buffer.append("<p><b>"); //$NON-NLS-1$
 		//TODO: Messages out of properties like in JDT?
-		buffer.append("Deprecarted.");
+		buffer.append("Deprecated.");
 		buffer.append("</b> <i>"); //$NON-NLS-1$
-		handleContentElements(tag.fragments());
+		@SuppressWarnings("unchecked")
+		List<ASTNode> fragments = tag.fragments();
+		handleContentElements(fragments);
 		buffer.append("</i></p>"); //$NON-NLS-1$
 	}
 
@@ -506,8 +517,11 @@ public class XbaseHoverDocumentationProvider {
 			buffer.append("<code>"); //$NON-NLS-1$
 		if (isLink || isLinkplain)
 			handleLink(node.fragments());
-		else if (isCode || isLiteral)
-			handleContentElements(node.fragments(), true);
+		else if (isCode || isLiteral) {
+			@SuppressWarnings("unchecked")
+			List<ASTNode> fragments = node.fragments();
+			handleContentElements(fragments, true);
+		}
 		else if (handleInheritDoc(node)) {
 			// handled
 		} else if (handleDocRoot(node)) {
@@ -583,6 +597,7 @@ public class XbaseHoverDocumentationProvider {
 	}
 
 	protected void handleParamTag(TagElement tag) {
+		@SuppressWarnings("unchecked")
 		List<? extends ASTNode> fragments = tag.fragments();
 		int i = 0;
 		int size = fragments.size();
@@ -626,7 +641,9 @@ public class XbaseHoverDocumentationProvider {
 			return;
 		handleBlockTagTitle("Returns:");
 		buffer.append(BlOCK_TAG_ENTRY_START);
-		handleContentElements(tag.fragments());
+		@SuppressWarnings("unchecked")
+		List<ASTNode> fragments = tag.fragments();
+		handleContentElements(fragments);
 		buffer.append(BlOCK_TAG_ENTRY_END);
 	}
 
@@ -641,6 +658,7 @@ public class XbaseHoverDocumentationProvider {
 		IJavaProject javaProject = (IJavaProject) ((XtextResourceSet) context.eResource().getResourceSet())
 				.getClasspathURIContext();
 		parser.setProject(javaProject);
+		@SuppressWarnings("unchecked")
 		Map<String, String> options = javaProject.getOptions(true);
 		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED); // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=212207
 		parser.setCompilerOptions(options);
@@ -649,6 +667,7 @@ public class XbaseHoverDocumentationProvider {
 		CompilationUnit root = (CompilationUnit) parser.createAST(null);
 		if (root == null)
 			return null;
+		@SuppressWarnings("unchecked")
 		List<AbstractTypeDeclaration> types = root.types();
 		if (types.size() != 1)
 			return null;
