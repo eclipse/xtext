@@ -45,7 +45,6 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	@Inject
 	private ITraceInformation traceInformation;
 	
-	@SuppressWarnings("restriction")
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 		try {
 			// very pessimistic guards - most things should never happen
