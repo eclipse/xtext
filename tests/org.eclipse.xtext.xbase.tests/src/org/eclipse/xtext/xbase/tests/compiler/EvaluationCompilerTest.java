@@ -15,11 +15,9 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -127,18 +125,18 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	protected String compileToJavaCode(String xtendCode) {
 		XExpression model = null;
-		IAppendable appandable = new StringBuilderBasedAppendable();
+		TreeAppendable appendable = new TreeAppendable(locationProvider);
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);
-			compiler.compile(model, new TracingAppendable(appandable, locationProvider), typeReferences.getTypeForName(Object.class, model));
+			compiler.compile(model, appendable, typeReferences.getTypeForName(Object.class, model));
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);
 		} finally {
 			if (model != null)
 				cache.clear(model.eResource());
 		}
-		return appandable.toString();
+		return appendable.getContent();
 	}
 
 	protected XExpression expression(String string, boolean resolve) throws Exception {

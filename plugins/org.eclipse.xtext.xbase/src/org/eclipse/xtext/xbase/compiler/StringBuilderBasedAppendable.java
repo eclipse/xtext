@@ -53,6 +53,10 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		return builder.toString();
 	}
 	
+	public String getContent() {
+		return toString();
+	}
+	
 	public int length() {
 		return builder.length();
 	}

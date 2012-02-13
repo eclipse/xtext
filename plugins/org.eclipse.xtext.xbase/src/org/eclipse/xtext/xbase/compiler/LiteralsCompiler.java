@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,7 +23,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	@Override
-	protected void internalToConvertedExpression(XExpression obj, TracingAppendable appendable) {
+	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XStringLiteral) {
 			_toJavaExpression((XStringLiteral) obj, appendable);
 		} else if (obj instanceof XIntLiteral) {
@@ -39,7 +40,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 	
 	@Override
-	protected void doInternalToJavaStatement(XExpression obj, TracingAppendable appendable, boolean isReferenced) {
+	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		if (obj instanceof XStringLiteral) {
 			_toJavaStatement((XStringLiteral) obj, appendable, isReferenced);
 		} else if (obj instanceof XIntLiteral) {
@@ -55,16 +56,16 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		}
 	}
 	
-	public void _toJavaExpression(XStringLiteral expr, TracingAppendable b) {
+	public void _toJavaExpression(XStringLiteral expr, ITreeAppendable b) {
 		String javaString = Strings.convertToJavaString(expr.getValue());
 		b.append("\"").append(javaString).append("\"");
 	}
 	
-	public void _toJavaStatement(XStringLiteral expr, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	protected void generateComment(XExpression expr, TracingAppendable b, boolean isReferenced) {
+	protected void generateComment(XExpression expr, ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced) {
 			b.append("/*");
 			internalToJavaExpression(expr, b);
@@ -72,43 +73,43 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		}
 	}
 
-	public void _toJavaExpression(XIntLiteral expr, TracingAppendable b) {
+	public void _toJavaExpression(XIntLiteral expr, ITreeAppendable b) {
 		b.append(Integer.toString(expr.getValue()));
 	}
 	
-	public void _toJavaStatement(XIntLiteral expr, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XIntLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
 	/**
 	 * @param expr the expression. Used by the dispatch strategy.
 	 */
-	public void _toJavaExpression(XNullLiteral expr, TracingAppendable b) {
+	public void _toJavaExpression(XNullLiteral expr, ITreeAppendable b) {
 		b.append("null");
 	}
 	
-	public void _toJavaStatement(XNullLiteral expr, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XNullLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	public void _toJavaExpression(XBooleanLiteral expr, TracingAppendable b) {
+	public void _toJavaExpression(XBooleanLiteral expr, ITreeAppendable b) {
 		b.append(Boolean.toString(expr.isIsTrue()));
 	}
 	
-	public void _toJavaStatement(XBooleanLiteral expr, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XBooleanLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
-	public void _toJavaExpression(XTypeLiteral expr, TracingAppendable b) {
+	public void _toJavaExpression(XTypeLiteral expr, ITreeAppendable b) {
 		b.append(expr.getType().getQualifiedName('.')).append(".class");
 	}
 	
-	public void _toJavaStatement(XTypeLiteral expr, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XTypeLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr, TracingAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XBooleanLiteral
 			|| expr instanceof XStringLiteral
 			|| expr instanceof XIntLiteral

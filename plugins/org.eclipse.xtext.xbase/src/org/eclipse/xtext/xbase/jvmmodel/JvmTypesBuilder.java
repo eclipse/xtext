@@ -62,9 +62,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
-import org.eclipse.xtext.xbase.compiler.ImportManager;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
-import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -111,7 +109,7 @@ public class JvmTypesBuilder {
 	 * @param executable the operation or constructor to add the method body to.
 	 * @param strategy the compilation strategy.
 	 */
-	public void setBody(JvmExecutable executable, Procedures.Procedure1<TracingAppendable> strategy) {
+	public void setBody(JvmExecutable executable, Procedures.Procedure1<ITreeAppendable> strategy) {
 		addCompilationStrategy(executable, strategy);
 	}
 	
@@ -409,8 +407,8 @@ public class JvmTypesBuilder {
 		result.setSimpleName("get" + nullSaveName(Strings.toFirstUpper(name)));
 		result.setReturnType(cloneWithProxies(typeRef));
 		if (name != null) {
-			setBody(result, new Procedures.Procedure1<TracingAppendable>() {
-				public void apply(TracingAppendable p) {
+			setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
+				public void apply(ITreeAppendable p) {
 					p = p.trace(sourceElement);
 					p.append("return this.");
 					p.append(name);
@@ -437,8 +435,8 @@ public class JvmTypesBuilder {
 		result.setSimpleName("set" + nullSaveName(Strings.toFirstUpper(name)));
 		result.getParameters().add(toParameter(sourceElement, nullSaveName(name), cloneWithProxies(typeRef)));
 		if (name != null) {
-			setBody(result, new Procedures.Procedure1<TracingAppendable>() {
-				public void apply(TracingAppendable p) {
+			setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
+				public void apply(ITreeAppendable p) {
 					p = p.trace(sourceElement);
 					p.append("this.");
 					p.append(name);
@@ -549,7 +547,7 @@ public class JvmTypesBuilder {
 	 * @param field the field to add the initializer to.
 	 * @param strategy the compilation strategy.
 	 */
-	public void setInitializer(JvmField field, Procedures.Procedure1<TracingAppendable> strategy) {
+	public void setInitializer(JvmField field, Procedures.Procedure1<ITreeAppendable> strategy) {
 		addCompilationStrategy(field, strategy);
 	}
 	
@@ -569,7 +567,7 @@ public class JvmTypesBuilder {
 	}
 	
 	protected void addCompilationStrategy(JvmMember member,
-			Procedures.Procedure1<TracingAppendable> strategy) {
+			Procedures.Procedure1<ITreeAppendable> strategy) {
 		// remove old adapters
 		Iterator<Adapter> iterator = member.eAdapters().iterator();
 		while (iterator.hasNext()) {
