@@ -138,9 +138,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @deprecated
+	 * @deprecated the package should not be accessed statically.
 	 * @generated
 	 */
 	@Deprecated

@@ -496,7 +496,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (feature instanceof JvmExecutable) {
 			b.append("(");
 			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
-			appendArguments(arguments, (JvmExecutable) feature, call, b, forceArgumentsAsExpression);
+			appendArguments(arguments, b, forceArgumentsAsExpression);
 			b.append(")");
 		}
 	}
@@ -511,8 +511,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return typeArg;
 	}
 
-	protected void appendArguments(List<? extends XExpression> arguments, JvmExecutable executable,
-			XExpression context, TracingAppendable b, boolean forceArgumentsAsExpression) {
+	protected void appendArguments(List<? extends XExpression> arguments, TracingAppendable b, boolean forceArgumentsAsExpression) {
 		if (arguments == null)
 			return;
 		for (int i = 0; i < arguments.size(); i++) {

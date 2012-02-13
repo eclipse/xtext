@@ -355,7 +355,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	
 	/**
 	 * @param declaringType the type that declares the feature
-	 * @param receiver the instance that will receive the message.
+	 * @param implicitReceiver the instance that will receive the message.
 	 * @param expression the expression that is closest to the to-be-created scope. Usually the feature call.
 	 */
 	protected IScope createFeatureScopeForTypeRef(

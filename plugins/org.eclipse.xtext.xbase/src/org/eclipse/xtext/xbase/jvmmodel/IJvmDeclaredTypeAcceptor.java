@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
 /**
  * The acceptor is part of the {@link IJvmModelInferrer} API.
- * It's passed into {@link #infer(EObject, IAcceptor, boolean)} to accept created {@link JvmDeclaredType} which will be added
- * to the passed {@link EObject}'s {@link org.eclipse.emf.ecore.resource.Resource}.
+ * It's passed into {@link IJvmModelInferrer#infer(EObject, IJvmDeclaredTypeAcceptor, boolean) infer(..)} to accept 
+ * created {@link JvmDeclaredType}. They will be added
+ * to the {@link EObject}'s {@link org.eclipse.emf.ecore.resource.Resource} of the {@link EObject}.
  * 
  * @author Sven Efftinge - initial API
  */

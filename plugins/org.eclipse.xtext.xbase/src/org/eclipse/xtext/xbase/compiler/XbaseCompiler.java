@@ -387,7 +387,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				JvmTypeReference producedType = getTypeProvider().getType(expr);
 				serialize(producedType, expr, appendable, false, false, true, false);
 				appendable.append("(");
-				appendArguments(expr.getArguments(), expr.getConstructor(), expr, appendable, false);
+				appendArguments(expr.getArguments(), appendable, false);
 				appendable.append(")");
 			}
 		};

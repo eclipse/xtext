@@ -77,7 +77,7 @@ public interface IJvmFeatureScopeProvider {
 	 * {@link JvmFeatureDescription}s marked as invalid {@link JvmFeatureDescription#isValid()}, will be sorted last (even after sugar). This ensures that
 	 * it is shadowed by valid elements and can be filtered out if not needed.
 	 * </p>
-	 * @param typeReference the type whose features should be provided.
+	 * @param featureScopeDescriptions the description of the feature scopes whose contents should be provided.
 	 */
 	public JvmFeatureScope createFeatureScope(
 			IScope parent, 
