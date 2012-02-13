@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.builder/emf-gen" modelPluginID="org.eclipse.xtext.builder"
+    modelName="Trace" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" runtimeVersion="2.5">
+  <genPackages prefix="Trace" basePackage="org.eclipse.xtext.builder" disposableProviderFactory="true"
+      ecorePackage="Trace.ecore#/">
+    <genDataTypes ecoreDataType="Trace.ecore#//URI"/>
+    <genClasses ecoreClass="Trace.ecore#//DebugTraceRegion">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/fromOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/fromLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toProject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toPath"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/nestedRegions"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/fromEndOffset"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toEndOffset"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
