@@ -7,11 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.hover;
 
-import java.util.List;
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -19,18 +15,15 @@ import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
-import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-@SuppressWarnings("restriction")
 public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	
 	@Inject
