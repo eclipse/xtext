@@ -75,17 +75,8 @@ public class CharSequenceTraceWrapper {
 			return delegate.toString();
 		}
 
-		public AbstractTraceRegion getTraceRegion(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
-			AbstractTraceRegion result = new TraceRegion(relativeOffset, delegate.length(), originOffset, originLength, parent, originURI, originProject) {
-				{
-					// initialize children
-					if (delegate instanceof ITraceRegionProvider) {
-						((ITraceRegionProvider) delegate).getTraceRegion(relativeOffset, this);
-					}
-				}
-			};
-			if (parent != null)
-				return parent;
+		public AbstractTraceRegion getTraceRegion() {
+			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), originOffset, originLength, null, originURI, originProject);
 			return result;
 		}
 

@@ -25,16 +25,14 @@ import org.eclipse.xtext.util.ITextRegion;
 @NonNullByDefault
 public class TracingAppendable extends AbstractTraceRegion implements IAppendable, ITraceRegionProvider {
 
-	protected static class ShiftedRegion extends AbstractTraceRegion {
-		private final int relativeOffset;
+	protected static class AppendableAsRegion extends AbstractTraceRegion {
 		private final AbstractTraceRegion original;
 		
-		protected ShiftedRegion(final int relativeOffset, AbstractTraceRegion original, @Nullable AbstractTraceRegion parent) {
+		protected AppendableAsRegion(AbstractTraceRegion original, @Nullable AbstractTraceRegion parent) {
 			super(parent);
-			this.relativeOffset = relativeOffset;
 			this.original = original;
 			for(AbstractTraceRegion originalChild: original.getNestedRegions()) {
-				ShiftedRegion child = new ShiftedRegion(relativeOffset, originalChild, ShiftedRegion.this);
+				AppendableAsRegion child = new AppendableAsRegion(originalChild, AppendableAsRegion.this);
 				if (!child.isConsistentWithParent()) {
 					throw new IllegalArgumentException("Produced region is inconsisten with parent, this: " + this + ", parent: " + parent);
 				}
@@ -62,7 +60,7 @@ public class TracingAppendable extends AbstractTraceRegion implements IAppendabl
 		}
 		@Override
 		public int getFromOffset() {
-			return original.getFromOffset() + relativeOffset;
+			return original.getFromOffset();
 		}
 
 		@Override
@@ -142,10 +140,8 @@ public class TracingAppendable extends AbstractTraceRegion implements IAppendabl
 		}
 	}
 
-	public AbstractTraceRegion getTraceRegion(final int relativeOffset, @Nullable AbstractTraceRegion parent) {
-		AbstractTraceRegion result = new ShiftedRegion(relativeOffset, this, parent);
-		if (parent != null)
-			return parent;
+	public AbstractTraceRegion getTraceRegion() {
+		AbstractTraceRegion result = new AppendableAsRegion(this, null);
 		return result;
 	}
 	

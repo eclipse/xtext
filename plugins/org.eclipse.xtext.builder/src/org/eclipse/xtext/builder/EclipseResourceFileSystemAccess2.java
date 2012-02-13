@@ -221,7 +221,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	 */
 	protected void updateTraceInformation(IFile traceFile, CharSequence contents, boolean derived) throws CoreException, IOException {
 		if (contents instanceof ITraceRegionProvider) {
-			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion(0, null);
+			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
 			class AccessibleOutputStream extends ByteArrayOutputStream {
 				byte[] internalBuffer() {
 					return buf;
