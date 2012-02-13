@@ -16,6 +16,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -32,6 +35,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSource {
 
 	private static final Logger log = Logger.getLogger(FileBasedTraceToSource.class);
@@ -47,14 +51,15 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 
 		public Iterator<AbstractTraceRegion> iterator() {
 			Iterator<AbstractTraceRegion> result = allTraceRegions.iterator();
-			Iterator<AbstractTraceRegion> languageSpecific = Iterators.transform(result, new Function<AbstractTraceRegion, AbstractTraceRegion>() {
-				public AbstractTraceRegion apply(AbstractTraceRegion input) {
+			Iterator<AbstractTraceRegion> languageSpecificWithDuplicates = Iterators.transform(result, new Function<AbstractTraceRegion, AbstractTraceRegion>() {
+				@Nullable
+				public AbstractTraceRegion apply(@Nullable AbstractTraceRegion input) {
 					return findParentByLanguage(input, language);
 				}
 			});
-			Iterator<AbstractTraceRegion> withoutDuplicates = Iterators.filter(languageSpecific, new Predicate<AbstractTraceRegion>() {
+			Iterator<AbstractTraceRegion> withoutDuplicates = Iterators.filter(languageSpecificWithDuplicates, new Predicate<AbstractTraceRegion>() {
 				private AbstractTraceRegion previous = null;
-				public boolean apply(AbstractTraceRegion input) {
+				public boolean apply(@Nullable AbstractTraceRegion input) {
 					if (input == null || input.equals(previous))
 						return false;
 					previous = input;
@@ -82,6 +87,7 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 		throw new UnsupportedOperationException();
 	}
 
+	@Nullable
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region, LanguageInfo language) {
 		AbstractTraceRegion left = findLeafAtLeftOffset(region.getOffset());
 		left = findParentByLanguage(left, language);
@@ -96,7 +102,8 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 		return false;
 	}
 	
-	protected AbstractTraceRegion findParentByLanguage(AbstractTraceRegion region, LanguageInfo info) {
+	@Nullable
+	protected AbstractTraceRegion findParentByLanguage(@Nullable AbstractTraceRegion region, LanguageInfo info) {
 		while(region != null && !isLanguage(region, info)) {
 			region = region.getParent();
 		}
@@ -116,11 +123,12 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 	}
 
 	@Override
+	@Nullable
 	protected AbstractTraceRegion getRootTraceRegion() {
 		IStorage resource = getDerivedResource();
 		if (resource instanceof IResource) {
-			IPath tracePath = resource.getFullPath().removeFileExtension().addFileExtension(FileBasedTraceInformation.TRACE_FILE_EXTENSION);
-			IResource traceStorage = ((IResource) resource).getProject().findMember(tracePath);
+			IPath tracePath = resource.getFullPath().addFileExtension(FileBasedTraceInformation.TRACE_FILE_EXTENSION);
+			IResource traceStorage = ((IResource) resource).getParent().getFile(new Path(tracePath.lastSegment()));
 			if (traceStorage instanceof IStorage && traceStorage.exists()) {
 				InputStream contents = null;
 				try {

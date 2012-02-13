@@ -17,7 +17,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -39,6 +39,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class AbstractTrace implements ITrace {
 
 	@Inject
@@ -56,15 +57,18 @@ public abstract class AbstractTrace implements ITrace {
 	 * resource that this {@link ITrace} is associated with. 
 	 * @return the root trace region. May be <code>null</code> if no trace data is available.
 	 */
+	@Nullable
 	protected abstract AbstractTraceRegion getRootTraceRegion();
 	
-	public ILocationInResource getBestAssociatedLocation(@NonNull ITextRegion region) {
+	@Nullable
+	public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
 		AbstractTraceRegion left = findLeafAtLeftOffset(region.getOffset());
 		AbstractTraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
 		return mergeRegions(left, right);
 	}
 
-	protected ILocationInResource mergeRegions(AbstractTraceRegion left, AbstractTraceRegion right) {
+	@Nullable
+	protected ILocationInResource mergeRegions(@Nullable AbstractTraceRegion left, @Nullable AbstractTraceRegion right) {
 		if (left == null) {
 			if (right != null)
 				return createLocationInResourceFor(right);
@@ -72,8 +76,12 @@ public abstract class AbstractTrace implements ITrace {
 		}
 		if (right == null || left.equals(right)) {
 			return createLocationInResourceFor(left);
-		} else if (left.getToPath().equals(right.getToPath())) {
-			return createLocationInResourceFor(left, right);	
+		} else {
+			URI leftToPath = left.getToPath();
+			URI rightToPath = right.getToPath();
+			if (leftToPath != null && leftToPath.equals(rightToPath) || leftToPath == rightToPath) {
+				return createLocationInResourceFor(left, right);
+			}
 		} 
 		// TODO the remaining cases have yet to be implemented
 		throw new IllegalStateException("TODO the remaining cases have yet to be implemented");
@@ -101,10 +109,12 @@ public abstract class AbstractTrace implements ITrace {
 		return new OffsetBasedLocationInResource(offset, length, left.getToPath(), left.getToProjectName(), this);
 	}
 
+	@Nullable
 	public AbstractTraceRegion findLeafAtRightOffset(int offset) {
 		return findLeafNodeAt(offset, false);
 	}
 
+	@Nullable
 	protected AbstractTraceRegion findLeafNodeAt(int offset, boolean left) {
 		AbstractTraceRegion candidate = getRootTraceRegion();
 		if (candidate == null || !encloses(candidate, offset, left)) {
@@ -130,6 +140,7 @@ public abstract class AbstractTrace implements ITrace {
 		return null;
 	}
 
+	@Nullable
 	public AbstractTraceRegion findLeafAtLeftOffset(int offset) {
 		return findLeafNodeAt(offset, true);
 	}
@@ -176,7 +187,9 @@ public abstract class AbstractTrace implements ITrace {
 	
 	protected Iterable<ILocationInResource> toLocations(Iterable<AbstractTraceRegion> allTraceRegions) {
 		return Iterables.transform(allTraceRegions, new Function<AbstractTraceRegion, ILocationInResource>() {
-			public ILocationInResource apply(AbstractTraceRegion input) {
+			public ILocationInResource apply(@Nullable AbstractTraceRegion input) {
+				if (input == null)
+					throw new IllegalArgumentException("input may not be null.");
 				return createLocationInResourceFor(input);
 			}
 		});
@@ -247,6 +260,7 @@ public abstract class AbstractTrace implements ITrace {
 		};
 	}
 
+	@Nullable
 	protected Resource getResource(URI toPath, IProject project) {
 		IResourceSetProvider resourceSetProvider = getService(toPath, IResourceSetProvider.class);
 		if (resourceSetProvider != null) {
@@ -277,15 +291,15 @@ public abstract class AbstractTrace implements ITrace {
 		return result;
 	}
 	
-	protected LanguageInfo findLanguage(URI toPath) {
-		IResourceServiceProvider serviceProvider = resourceServiceRegistry.getResourceServiceProvider(toPath);
-		if (serviceProvider != null) {
-			return serviceProvider.get(LanguageInfo.class);
-		}
-		return null;
+	@Nullable
+	protected LanguageInfo findLanguage(@Nullable URI toPath) {
+		return getService(toPath, LanguageInfo.class);
 	}
 	
-	protected <T> T getService(URI toPath, Class<T> type) {
+	@Nullable
+	protected <T> T getService(@Nullable URI toPath, Class<T> type) {
+		if (toPath == null)
+			return null;
 		IResourceServiceProvider serviceProvider = resourceServiceRegistry.getResourceServiceProvider(toPath);
 		if (serviceProvider != null) {
 			return serviceProvider.get(type);

@@ -8,7 +8,10 @@
 package org.eclipse.xtext.builder;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.eclipse.core.resources.IContainer;
@@ -17,13 +20,20 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.builder.trace.TraceRegionSerializer;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,6 +58,16 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	private IProgressMonitor monitor;
 	
 	private IFileCallback callBack;
+	
+	@Inject
+	private TraceRegionSerializer traceSerializer;
+	
+	/**
+	 * @since 2.3
+	 */
+	protected IFileCallback getCallBack() {
+		return callBack;
+	}
 	
 	public void setProject(IProject project) {
 		this.project = project;
@@ -85,7 +105,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		}
 		
 		IFile file = getFile(fileName, outputName);
-		String contentsAsString = postProcess(fileName, outputName, contents).toString(); 
+		IFile traceFile = getTraceFile(file);
+		CharSequence postProcessedContent = postProcess(fileName, outputName, contents);
+		String contentsAsString = postProcessedContent.toString(); 
 		if (file.exists()) {
 			if (outputConfig.isOverrideExistingResources()) {
 				try {
@@ -96,10 +118,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						newContent.reset();
 						file.setContents(newContent, true, true, monitor);
 						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
-							file.setDerived(outputConfig.isSetDerivedProperty());
+							setDerived(file, outputConfig.isSetDerivedProperty());
 						}
 					}
+					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 				} catch (CoreException e) {
+					throw new RuntimeException(e);
+				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
 				callBack.afterFileUpdate(file);
@@ -109,13 +134,24 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 				ensureParentExists(file);
 				file.create(getInputStream(contentsAsString, file.getCharset(true)), true, monitor);
 				if (outputConfig.isSetDerivedProperty()) {
-					file.setDerived(true);
+					setDerived(file, true);
 				}
+				updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 			} catch (CoreException e) {
+				throw new RuntimeException(e);
+			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 			callBack.afterFileCreation(file);
 		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	@SuppressWarnings("deprecation")
+	protected void setDerived(IFile file, boolean derived) throws CoreException {
+		file.setDerived(derived);
 	}
 
 	protected void createFolder(IFolder folder) throws CoreException {
@@ -176,13 +212,61 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		}
 		return contentChanged;
 	}
+	
+
+	/**
+	 * @throws CoreException if something unexpected happens during resource access
+	 * @throws IOException if serialization of the trace data fails 
+	 * @since 2.3
+	 */
+	protected void updateTraceInformation(IFile traceFile, CharSequence contents, boolean derived) throws CoreException, IOException {
+		if (contents instanceof ITraceRegionProvider) {
+			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion(0, null);
+			class AccessibleOutputStream extends ByteArrayOutputStream {
+				byte[] internalBuffer() {
+					return buf;
+				}
+				int internalLength() {
+					return count;
+				}
+			}
+			AccessibleOutputStream data = new AccessibleOutputStream();
+			traceSerializer.writeTraceRegionTo(traceRegion, data);
+			// avoid copying the byte array
+			InputStream input = new ByteArrayInputStream(data.internalBuffer(), 0, data.internalLength());
+			if (traceFile.exists()) {
+				traceFile.setContents(input, false, true, monitor);
+			} else {
+				traceFile.create(input, true, monitor);
+			}
+			setDerived(traceFile, derived);
+			return;
+		}
+		if (traceFile.exists()) {
+			traceFile.delete(IResource.KEEP_HISTORY, monitor);
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected IFile getTraceFile(IFile file) {
+		IPath tracePath = file.getFullPath().addFileExtension(FileBasedTraceInformation.TRACE_FILE_EXTENSION);
+		IResource traceFile = file.getParent().getFile(new Path(tracePath.lastSegment()));
+		return (IFile) traceFile;
+	}
 
 	@Override
 	public void deleteFile(String fileName, String outputName) {
 		try {
 			IFile file = getFile(fileName, outputName);
-			if (callBack.beforeFileDeletion(file) && file.exists())
-				file.delete(IResource.KEEP_HISTORY,	monitor); 
+			if (getCallBack().beforeFileDeletion(file) && file.exists()) {
+				IFile traceFile = getTraceFile(file);
+				file.delete(IResource.KEEP_HISTORY, monitor);
+				if (traceFile.exists()) {
+					traceFile.delete(IResource.KEEP_HISTORY, monitor);
+				}
+			}
 		} catch (CoreException e) {
 			throw new RuntimeException(e);
 		}

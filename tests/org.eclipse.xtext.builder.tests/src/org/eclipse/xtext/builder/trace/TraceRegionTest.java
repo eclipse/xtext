@@ -183,13 +183,13 @@ public class TraceRegionTest extends Assert {
 	@Test
 	public void testAnnotate_01() {
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
-		assertEquals("<2:3[a]", region.getAnnotateString("a"));
+		assertEquals("<2:3[a]", region.getAnnotatedString("a"));
 	}
 	
 	@Test
 	public void testAnnotate_02() {
 		TraceRegion region = new TraceRegion(1, 1, 2, 3, null, URI.createURI("uri"), "project");
-		assertEquals("a<2:3[b]c", region.getAnnotateString("abc"));
+		assertEquals("a<2:3[b]c", region.getAnnotatedString("abc"));
 	}
 	
 	@Test
@@ -198,7 +198,7 @@ public class TraceRegionTest extends Assert {
 		TraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
 		TraceRegion second = new TraceRegion(2, 1, 5, 6, parent, null, null);
 		TraceRegion third = new TraceRegion(3, 1, 7, 8, parent, null, null);
-		assertEquals("<1:2[<3:4[a]b<5:6[c]<7:8[d]]e", parent.getAnnotateString("abcde"));
+		assertEquals("<1:2[<3:4[a]b<5:6[c]<7:8[d]]e", parent.getAnnotatedString("abcde"));
 	}
 	
 	@Test
@@ -206,6 +206,6 @@ public class TraceRegionTest extends Assert {
 		TraceRegion root = new TraceRegion(0, 4, 1, 2, null, URI.createURI("uri"), "project");
 		TraceRegion parent = new TraceRegion(1, 2, 3, 4, root, null, null);
 		TraceRegion child = new TraceRegion(2, 1, 5, 6, parent, null, null);
-		assertEquals("<1:2[a<3:4[b<5:6[c]]d]e", root.getAnnotateString("abcde"));
+		assertEquals("<1:2[a<3:4[b<5:6[c]]d]e", root.getAnnotatedString("abcde"));
 	}
 }
