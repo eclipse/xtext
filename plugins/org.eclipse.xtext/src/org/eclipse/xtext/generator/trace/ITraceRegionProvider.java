@@ -8,19 +8,16 @@
 package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
- * A trace region provider can be used to add nested trace regions to a given
- * parent or produce a completely new {@link AbstractTraceRegion}.
+ * A trace region provider can be used to obtain a new {@link AbstractTraceRegion}.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface ITraceRegionProvider {
 
 	/**
-	 * Returns the given parent after new children have been added or a completely 
-	 * new trace region if no parent was provided.
+	 * Returns the a trace region.
 	 */
-	@NonNull AbstractTraceRegion getTraceRegion(int relativeOffset, @Nullable AbstractTraceRegion parent);
+	@NonNull AbstractTraceRegion getTraceRegion();
 	
 }
