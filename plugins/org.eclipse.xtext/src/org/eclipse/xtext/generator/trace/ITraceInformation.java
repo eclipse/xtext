@@ -9,6 +9,8 @@ package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -20,15 +22,18 @@ import org.eclipse.xtext.util.ITextRegion;
  * @noextend This interface is not intended to be extended by clients.
  * @since 2.3
  */
+@NonNullByDefault
 public interface ITraceInformation {
 	
 	/**
 	 * Return the source information for the given derived resource if exactly one source information is present.
 	 * @param derivedResource the generated file. May not be <code>null</code>.
+	 * @param languageInfo the expected language information. <code>null</code> if all languages should be considered.
 	 * @param range the offset information. May be <code>null</code>.
 	 * @return the only available source information or <code>null</code> if more than one or no data is available.
 	 */
-	ILocationInResource getSingleSourceInformation(IResource derivedResource, LanguageInfo languageInfo, ITextRegion range);
+	@Nullable
+	ILocationInResource getSingleSourceInformation(IResource derivedResource, @Nullable LanguageInfo languageInfo, @Nullable ITextRegion range);
 	
 	/**
 	 * Return all the source information for the given derived resource.
@@ -37,7 +42,7 @@ public interface ITraceInformation {
 	 * @param range the offset information. May be <code>null</code>.
 	 * @return all the associated source data. Never <code>null</code>. An empty iterable if no source data is available.
 	 */
-	Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, LanguageInfo languageInfo, ITextRegion range);
+	Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, @Nullable LanguageInfo languageInfo, @Nullable ITextRegion range);
 	
 	/**
 	 * Returns the trace information to the sources that were used as input for the given derived resource.
@@ -45,7 +50,7 @@ public interface ITraceInformation {
 	 * @param derivedResource the resource whose source trace is requested. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	ITraceToSource getTraceToSource(IStorage derivedResource);
+	@Nullable ITraceToSource getTraceToSource(IStorage derivedResource);
 	
 	/**
 	 * Returns the trace information to the targets that were generated from the given source.
@@ -53,6 +58,6 @@ public interface ITraceInformation {
 	 * @param sourceResource the resource whose target trace is requested. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	ITraceToTarget getTraceToTarget(IStorage sourceResource);
+	@Nullable ITraceToTarget getTraceToTarget(IStorage sourceResource);
 	
 }

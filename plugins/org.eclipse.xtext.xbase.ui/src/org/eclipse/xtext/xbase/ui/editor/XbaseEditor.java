@@ -32,11 +32,13 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceToSource;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -137,25 +139,30 @@ public class XbaseEditor extends XtextEditor {
 	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
 		if (expectJavaSelection) {
 			// TODO: use trace information for that purpose as soon as it's available
-			final ITextRegion[] fixedSelection = new ITextRegion[] { ITextRegion.EMPTY_REGION }; 
-			final ITextRegion[] fixedReveal = new ITextRegion[] { ITextRegion.EMPTY_REGION }; 
-			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-				@Override
-				public void process(XtextResource resource) throws Exception {
-					if (resource != null) {
-						IJavaElement root = JavaCore.create(javaResource);
-						if (root != null) {
-							ICompilationUnit compilationUnit = (ICompilationUnit) root.getAncestor(IJavaElement.COMPILATION_UNIT);
-							if (compilationUnit != null) {
-								fixedSelection[0] = mergeSelectionOfDerivedMembers(resource, compilationUnit, selectionStart, selectionLength);
-								fixedReveal[0] = mergeSelectionOfDerivedMembers(resource, compilationUnit, revealStart, revealLength);
-							}		
-						}
-					}
-				}
-			});
+//			final ITextRegion[] fixedSelection = new ITextRegion[] { ITextRegion.EMPTY_REGION }; 
+//			final ITextRegion[] fixedReveal = new ITextRegion[] { ITextRegion.EMPTY_REGION }; 
+//			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+//				@Override
+//				public void process(XtextResource resource) throws Exception {
+//					if (resource != null) {
+//						IJavaElement root = JavaCore.create(javaResource);
+//						if (root != null) {
+//							ICompilationUnit compilationUnit = (ICompilationUnit) root.getAncestor(IJavaElement.COMPILATION_UNIT);
+//							if (compilationUnit != null) {
+//								fixedSelection[0] = mergeSelectionOfDerivedMembers(resource, compilationUnit, selectionStart, selectionLength);
+//								fixedReveal[0] = mergeSelectionOfDerivedMembers(resource, compilationUnit, revealStart, revealLength);
+//							}		
+//						}
+//					}
+//				}
+//			});
+			ITraceToSource traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
+			ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
+			ILocationInResource bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
+			ITextRegion fixedSelection = bestSelection.getRange();
+			ITextRegion fixedReveal = bestReveal.getRange();
 			expectJavaSelection = false;
-			super.selectAndReveal(fixedSelection[0].getOffset(), fixedSelection[0].getLength(), fixedReveal[0].getOffset(), fixedReveal[0].getLength());
+			super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
 		} else {
 			super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);
 		}

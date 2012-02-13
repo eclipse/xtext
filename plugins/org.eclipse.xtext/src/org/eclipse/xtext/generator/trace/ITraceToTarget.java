@@ -10,6 +10,8 @@ package org.eclipse.xtext.generator.trace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -22,6 +24,7 @@ import org.eclipse.xtext.util.ITextRegion;
  * @noimplement This interface is not intended to be implemented by clients.
  * @noextend This interface is not intended to be extended by clients.
  */
+@NonNullByDefault
 public interface ITraceToTarget extends ITrace {
 
 	/**
@@ -59,7 +62,7 @@ public interface ITraceToTarget extends ITrace {
 	 * @param targetResource the expected target resource. May not be <code>null</code>.
 	 * @return the source trace for the given storage or <code>null</code> if none.
 	 */
-	ITraceToSource getTarget(IStorage targetResource);
+	@Nullable ITraceToSource getTarget(IStorage targetResource);
 
 	/**
 	 * Returns the best {@link ILocationInResource location} that matches the given
@@ -77,7 +80,7 @@ public interface ITraceToTarget extends ITrace {
 	 * @param targetResource the expected target resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	ILocationInResource getBestAssociatedLocation(ITextRegion sourceRegion, IStorage targetResource);
+	@Nullable ILocationInResource getBestAssociatedLocation(ITextRegion sourceRegion, IStorage targetResource);
 	
 	/**
 	 * Returns all individual {@link ILocationInResource locations} that match the given {@code sourceRegion}

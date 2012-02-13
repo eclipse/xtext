@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
@@ -18,6 +19,7 @@ import org.eclipse.xtext.util.ITextRegion;
  * @noimplement This interface is not intended to be implemented by clients.
  * @noextend This interface is not intended to be extended by clients.
  */
+@NonNullByDefault
 public interface ITrace {
 
 	/**
@@ -41,7 +43,7 @@ public interface ITrace {
 	 * @param region the region in the current resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	ILocationInResource getBestAssociatedLocation(@NonNull ITextRegion region);
+	@Nullable ILocationInResource getBestAssociatedLocation(ITextRegion region);
 	
 	/**
 	 * Returns all {@link ILocationInResource locations} that match the given {@code region}.

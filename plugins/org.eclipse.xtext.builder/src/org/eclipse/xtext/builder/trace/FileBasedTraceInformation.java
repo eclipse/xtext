@@ -7,8 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
+import java.util.Collections;
+import java.util.Iterator;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
@@ -24,6 +29,7 @@ import com.google.inject.Provider;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
+@NonNullByDefault
 public class FileBasedTraceInformation implements ITraceInformation {
 
 	public static final String TRACE_FILE_EXTENSION = "_trace";
@@ -31,18 +37,24 @@ public class FileBasedTraceInformation implements ITraceInformation {
 	@Inject
 	private Provider<FileBasedTraceToSource> traceToSourceProvider;
 	
-	public ILocationInResource getSingleSourceInformation(IResource derivedResource, LanguageInfo languageInfo,
-			ITextRegion range) {
+	@Nullable 
+	public ILocationInResource getSingleSourceInformation(IResource derivedResource, @Nullable LanguageInfo languageInfo,
+			@Nullable ITextRegion range) {
 		if (derivedResource instanceof IStorage) {
 			ITraceToSource traceToSource = getTraceToSource((IStorage) derivedResource);
 			if (traceToSource != null) {
 				if (range == null) {
+					Iterator<ILocationInResource> allLocations = traceToSource.getAllLocations().iterator();
+					if (allLocations.hasNext()) {
+						ILocationInResource location = allLocations.next();
+						return location;
+					}
 					return null;
 				} else {
 					if (languageInfo == null) {
-						return traceToSource.getBestAssociatedLocation(range, languageInfo);
-					} else {
 						return traceToSource.getBestAssociatedLocation(range);
+					} else {
+						return traceToSource.getBestAssociatedLocation(range, languageInfo);
 					}
 				}				
 			}
@@ -50,8 +62,8 @@ public class FileBasedTraceInformation implements ITraceInformation {
 		return null;
 	}
 
-	public Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, LanguageInfo languageInfo,
-			ITextRegion range) {
+	public Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, @Nullable LanguageInfo languageInfo,
+			@Nullable ITextRegion range) {
 		if (derivedResource instanceof IStorage) {
 			ITraceToSource traceToSource = getTraceToSource((IStorage) derivedResource);
 			if (traceToSource != null) {
@@ -70,15 +82,17 @@ public class FileBasedTraceInformation implements ITraceInformation {
 				}				
 			}
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
+	@Nullable
 	public ITraceToSource getTraceToSource(IStorage derivedResource) {
 		FileBasedTraceToSource result = traceToSourceProvider.get();
 		result.setResource(derivedResource);
 		return result;
 	}
 
+	@Nullable
 	public ITraceToTarget getTraceToTarget(IStorage sourceResource) {
 		return null;
 	}

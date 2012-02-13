@@ -31,8 +31,11 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 		this.fromLength = fromLength;
 		this.toOffset = toOffset;
 		this.toLength = toLength;
+		if (!isConsistentWithParent()) {
+			throw new IllegalArgumentException("Produced region is inconsisten with parent, this: " + this + ", parent: " + parent);
+		}
 	}
-
+	
 	@Override
 	public int getFromLength() {
 		return fromLength;

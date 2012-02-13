@@ -598,7 +598,7 @@ class JvmModelGenerator implements IGenerator {
 			if (superType != null)
 				appendable.declareVariable(superType.type, "super")
 		}
-		return new TracingAppendable(appendable, locationProvider)
+		return new TracingAppendable(appendable, locationProvider, context)
 	}
 	
 	def JvmGenericType containerType(EObject context) {

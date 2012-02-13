@@ -8,6 +8,8 @@
 package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -18,6 +20,7 @@ import org.eclipse.xtext.util.ITextRegion;
  * @noimplement This interface is not intended to be implemented by clients.
  * @noextend This interface is not intended to be extended by clients.
  */
+@NonNullByDefault
 public interface ITraceToSource extends ITrace {
 
 	/**
@@ -55,7 +58,7 @@ public interface ITraceToSource extends ITrace {
 	 * @param language the language that is expected to produce the output. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	ILocationInResource getBestAssociatedLocation(ITextRegion region, LanguageInfo language);
+	@Nullable ILocationInResource getBestAssociatedLocation(ITextRegion region, LanguageInfo language);
 	
 	/**
 	 * Returns all {@link ILocationInResource locations} that match the given {@code region}

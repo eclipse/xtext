@@ -18,7 +18,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -38,6 +39,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class MarkerBasedTraceInformation implements ITraceInformation {
 
 	private static final Logger logger = Logger.getLogger(MarkerBasedTraceInformation.class);
@@ -51,7 +53,8 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 	@Inject
 	private Provider<LocationInResource> locationProvider;
 	
-	public ILocationInResource getSingleSourceInformation(IResource derivedResource, LanguageInfo languageInfo, ITextRegion range) {
+	@Nullable
+	public ILocationInResource getSingleSourceInformation(IResource derivedResource, @Nullable LanguageInfo languageInfo, @Nullable ITextRegion range) {
 		try {
 			if (derivedResource instanceof IFile) {
 				// TODO consider the range if there are more markers than 1
@@ -94,7 +97,7 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 		return null;
 	}
 
-	public Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, final LanguageInfo languageInfo, ITextRegion range) {
+	public Iterable<ILocationInResource> getAllSourceInformation(IResource derivedResource, final @Nullable LanguageInfo languageInfo, @Nullable ITextRegion range) {
 		try {
 			if (derivedResource instanceof IFile) {
 				// TODO consider the range
@@ -103,13 +106,18 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 				if (markers.length == 0)
 					return Collections.emptyList();
 				Iterable<Iterable<ILocationInResource>> allLocations = Iterables.transform(Arrays.asList(markers), new Function<IMarker, Iterable<ILocationInResource>>() {
-					public Iterable<ILocationInResource> apply(IMarker marker) {
+					public Iterable<ILocationInResource> apply(@Nullable IMarker marker) {
+						if (marker == null)
+							throw new IllegalArgumentException("marker may not be null");
 						String source = derivedResourceMarkers.getSource(marker);
 						if (source != null) {
 							final URI sourceResourceURI = URI.createURI(source);
 							Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(sourceResourceURI);
 							return Iterables.transform(storages, new Function<Pair<IStorage, IProject>, ILocationInResource>() {
-								public ILocationInResource apply(Pair<IStorage, IProject> input) {
+								@Nullable
+								public ILocationInResource apply(@Nullable Pair<IStorage, IProject> input) {
+									if (input == null)
+										throw new IllegalArgumentException("input may not be null");
 									LocationInResource result = locationProvider.get();
 									result.init(sourceResourceURI, input.getFirst(), input.getSecond());
 									if (languageInfo == null || languageInfo.equals(result.getLanguage())) {
@@ -134,12 +142,14 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 	public ITraceToSource getTraceToSource(final IStorage derivedResource) {
 		return new ITraceToSource() {
 			
-			public ILocationInResource getBestAssociatedLocation(@NonNull ITextRegion region) {
+			@Nullable
+			public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
 				if (derivedResource instanceof IResource)
 					return getSingleSourceInformation((IResource) derivedResource, null, region);
 				return null;
 			}
 			
+			@Nullable
 			public ILocationInResource getBestAssociatedLocation(ITextRegion region, LanguageInfo language) {
 				if (derivedResource instanceof IResource)
 					return getSingleSourceInformation((IResource) derivedResource, language, region);
@@ -185,7 +195,8 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 			}
 		};
 	}
-
+	
+	@Nullable
 	public ITraceToTarget getTraceToTarget(IStorage sourceResource) {
 		logger.info("MarkerBasedTraceInformation does not support trace to target");
 		return null;

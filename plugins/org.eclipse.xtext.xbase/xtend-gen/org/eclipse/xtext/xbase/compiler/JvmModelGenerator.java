@@ -1351,7 +1351,7 @@ public class JvmModelGenerator implements IGenerator {
           }
         }
       }
-      TracingAppendable _tracingAppendable = new TracingAppendable(appendable, this.locationProvider);
+      TracingAppendable _tracingAppendable = new TracingAppendable(appendable, this.locationProvider, context);
       return _tracingAppendable;
   }
   
