@@ -78,21 +78,18 @@ public class ResourceDescriptionUpdaterTest extends AbstractParticipatingBuilder
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	private void addFile(IFolder folder, String fileName, String content) throws CoreException {
 		IFile file = folder.getFile(fileName + F_EXT);
 		file.create(new StringInputStream(content), true, monitor());
 		waitForAutoBuild();
 	}
 
-	@SuppressWarnings("restriction")
 	private void changeFile(IFolder folder, String fileName, String content) throws CoreException {
 		IFile file = folder.getFile(fileName + F_EXT);
 		file.setContents(new StringInputStream(content), IResource.FORCE, monitor());
 		waitForAutoBuild();
 	}
 
-	@SuppressWarnings("restriction")
 	private IFolder createProject(String projectName) throws CoreException, JavaModelException {
 		IJavaProject project = createJavaProject(projectName);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);

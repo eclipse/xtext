@@ -29,7 +29,6 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@SuppressWarnings("restriction")
 public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 
 	private IProject foo_project;

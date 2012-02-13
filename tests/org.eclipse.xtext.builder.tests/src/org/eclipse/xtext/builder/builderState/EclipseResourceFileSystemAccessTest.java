@@ -25,7 +25,7 @@ import org.junit.Test;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings({ "deprecation", "restriction" })
+@SuppressWarnings("deprecation")
 public class EclipseResourceFileSystemAccessTest extends Assert {
 
 	@After

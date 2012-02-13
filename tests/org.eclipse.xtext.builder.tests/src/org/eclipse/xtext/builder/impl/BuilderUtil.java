@@ -84,7 +84,6 @@ public class BuilderUtil {
 		return forIterable.size();
 	}
 
-	@SuppressWarnings("restriction")
 	public static void assertNumberOfMarkers(IFile file, int numberOfMarkers) throws CoreException {
 		IMarker[] markers = file.findMarkers(EValidator.MARKER, true, 1);
 		assertEquals(printMarker(markers),numberOfMarkers,markers.length);

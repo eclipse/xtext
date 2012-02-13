@@ -14,7 +14,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,7 +40,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testConstructorWithParent() {
-		TraceRegion parent = new TraceRegion(0, 0, 0, 0, null, URI.createURI("uri"), "project");
+		TraceRegion parent = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, parent, null, null);
 		assertEquals(URI.createURI("uri"), region.getToPath());
 		assertEquals("project", region.getToProjectName());
@@ -195,9 +194,9 @@ public class TraceRegionTest extends Assert {
 	@Test
 	public void testAnnotate_03() {
 		TraceRegion parent = new TraceRegion(0, 4, 1, 2, null, URI.createURI("uri"), "project");
-		TraceRegion first = new TraceRegion(0, 1, 3, 4, parent, null, null);
-		TraceRegion second = new TraceRegion(2, 1, 5, 6, parent, null, null);
-		TraceRegion third = new TraceRegion(3, 1, 7, 8, parent, null, null);
+		new TraceRegion(0, 1, 3, 4, parent, null, null);
+		new TraceRegion(2, 1, 5, 6, parent, null, null);
+		new TraceRegion(3, 1, 7, 8, parent, null, null);
 		assertEquals("<1:2[<3:4[a]b<5:6[c]<7:8[d]]e", parent.getAnnotatedString("abcde"));
 	}
 	
@@ -205,7 +204,7 @@ public class TraceRegionTest extends Assert {
 	public void testAnnotate_04() {
 		TraceRegion root = new TraceRegion(0, 4, 1, 2, null, URI.createURI("uri"), "project");
 		TraceRegion parent = new TraceRegion(1, 2, 3, 4, root, null, null);
-		TraceRegion child = new TraceRegion(2, 1, 5, 6, parent, null, null);
+		new TraceRegion(2, 1, 5, 6, parent, null, null);
 		assertEquals("<1:2[a<3:4[b<5:6[c]]d]e", root.getAnnotatedString("abcde"));
 	}
 }

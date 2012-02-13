@@ -29,7 +29,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTest {
 
 	private Collection<IBuildContext> contexts;
