@@ -10,6 +10,8 @@ package org.eclipse.xtext.generator.trace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -26,33 +28,33 @@ public interface ILocationInResource {
 	/**
 	 * @return the language that this resource belongs to. May be <code>null</code>.
 	 */
-	LanguageInfo getLanguage();
+	@Nullable LanguageInfo getLanguage();
 	
 	/**
 	 * @return the EMF resource URI for this location. May be <code>null</code> if the 
 	 * resource is not an EMF resource.
 	 */
-	URI getResourceURI();
+	@Nullable URI getResourceURI();
 	
 	/**
 	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
 	 * for this location. May be <code>null</code> if the resource itself is empty or if this
 	 * resource is not an EMF resource.
 	 */
-	URI getEObjectURI();
+	@Nullable URI getEObjectURI();
 	
 	/**
 	 * @return the storage handle for this location. Never <code>null</code>.
 	 */
-	IStorage getStorage();
+	@NonNull IStorage getStorage();
 	
 	/**
 	 * @return the project for this location. Never <code>null</code>.
 	 */
-	IProject getProject();
+	@NonNull IProject getProject();
 	
 	/**
 	 * @return the range in the resource. May be <code>null</code>.
 	 */
-	ITextRegion getRange();
+	@Nullable ITextRegion getRange();
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.trace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -56,16 +57,17 @@ public class LocationInResource implements ILocationInResource {
 		return null;
 	}
 
+	@NonNull
 	public IStorage getStorage() {
 		return resource;
 	}
-
+	
+	@NonNull
 	public IProject getProject() {
 		return project;
 	}
 
 	public ITextRegion getRange() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
