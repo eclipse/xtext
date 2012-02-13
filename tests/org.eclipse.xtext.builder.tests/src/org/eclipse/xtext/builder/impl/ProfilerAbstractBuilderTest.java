@@ -36,7 +36,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public abstract class ProfilerAbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	private static final String F_EXT = ".buildertestlanguage";
 	private volatile List<Event> events = Lists.newArrayList();

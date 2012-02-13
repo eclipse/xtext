@@ -27,7 +27,6 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	public final String F_EXT = ".buildertestlanguage";
 	private volatile List<Event> events = Lists.newArrayList();

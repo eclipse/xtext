@@ -44,7 +44,6 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@SuppressWarnings("restriction")
 public class IntegrationTest extends AbstractBuilderTest {
 
 	private IJavaProject foo_project;

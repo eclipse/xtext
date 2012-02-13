@@ -45,7 +45,6 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	private static final String FILE_EXT = ".buildertestlanguage";
 	private Injector builderInjector;

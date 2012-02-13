@@ -45,7 +45,6 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class BuilderParticipantTest extends AbstractBuilderTest {
 	
 	@Override

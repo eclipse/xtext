@@ -32,7 +32,6 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 	}
 
 	/** see https://bugs.eclipse.org/bugs/show_bug.cgi?id=325814 */
-	@SuppressWarnings("restriction")
 	@Test public void testCancellationTriggersFullBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);

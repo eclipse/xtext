@@ -27,7 +27,6 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class Bug334456Test extends AbstractBuilderTest {
 
 	@Test public void testNoCopiedResourceDescription() throws Exception {

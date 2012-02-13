@@ -36,7 +36,6 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class Bug349445Test extends Assert implements PersistedStateProvider, IMarkerUpdater, IResourceServiceProvider.Registry {
 
 	private IBuilderState testMe;
