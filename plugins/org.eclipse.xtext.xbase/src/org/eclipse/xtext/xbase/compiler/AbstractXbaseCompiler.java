@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -94,13 +95,13 @@ public abstract class AbstractXbaseCompiler {
 		return primitives;
 	}
 
-	public TracingAppendable compile(XExpression obj, TracingAppendable appendable, JvmTypeReference expectedReturnType) {
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType) {
 		compile(obj, appendable, expectedReturnType, null);
 		return appendable;
 	}
 	
-	public TracingAppendable compileAsJavaExpression(XExpression obj, TracingAppendable parentAppendable, JvmTypeReference expectedType) {
-		TracingAppendable appendable = parentAppendable.trace(obj);
+	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedType) {
+		ITreeAppendable appendable = parentAppendable.trace(obj);
 		
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
@@ -157,7 +158,7 @@ public abstract class AbstractXbaseCompiler {
 		return parentAppendable;
 	}
 
-	protected void generateCheckedExceptionHandling(XExpression obj, TracingAppendable appendable) {
+	protected void generateCheckedExceptionHandling(XExpression obj, ITreeAppendable appendable) {
 		String name = appendable.declareSyntheticVariable(new Object(), "_e");
 		appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
 		final JvmType findDeclaredType = typeReferences.findDeclaredType(Exceptions.class, obj);
@@ -173,13 +174,13 @@ public abstract class AbstractXbaseCompiler {
 		appendable.decreaseIndentation().newLine().append("}");
 	}
 	
-	protected boolean canCompileToJavaExpression(XExpression expression, TracingAppendable appendable) {
+	protected boolean canCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		// TODO improve this decision, e.g. static methods with expression-args are ok
 		return !isVariableDeclarationRequired(expression, appendable);
 	}
 	
-	public TracingAppendable compile(XExpression obj, TracingAppendable parentAppendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
-		TracingAppendable appendable = parentAppendable.trace(obj);
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
+		ITreeAppendable appendable = parentAppendable.trace(obj);
 		
 		if (declaredExceptions == null)
 			declaredExceptions = newHashSet();
@@ -215,7 +216,7 @@ public abstract class AbstractXbaseCompiler {
 	/**
 	 * this one trims the outer block
 	 */
-	public TracingAppendable compile(XBlockExpression expr, TracingAppendable b, JvmTypeReference expectedReturnType) {
+	public ITreeAppendable compile(XBlockExpression expr, ITreeAppendable b, JvmTypeReference expectedReturnType) {
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(expr);
 		final boolean earlyExit = exitComputer.isEarlyExit(expr);
@@ -237,7 +238,7 @@ public abstract class AbstractXbaseCompiler {
 		return b;
 	}
 	
-	protected abstract void internalToConvertedExpression(final XExpression obj, final TracingAppendable appendable,
+	protected abstract void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable,
 			JvmTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
@@ -245,11 +246,11 @@ public abstract class AbstractXbaseCompiler {
 		return typeReferences.is(type, Void.TYPE);
 	}
 
-	protected final void internalToJavaStatement(XExpression obj, TracingAppendable builder, boolean isReferenced) {
+	protected final void internalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {
 		doInternalToJavaStatement(obj, builder.trace(obj), isReferenced);
 	}
 
-	protected void doInternalToJavaStatement(XExpression obj, TracingAppendable builder, boolean isReferenced) {
+	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {
 		if (obj == null) {
 			_toJavaStatement((Void) null, builder, isReferenced);
 		} else {
@@ -257,15 +258,15 @@ public abstract class AbstractXbaseCompiler {
 		}
 	}
 	
-	public void toJavaExpression(final XExpression obj, final TracingAppendable appendable) {
+	public void toJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
 		internalToJavaExpression(obj, appendable.trace(obj));
 	}
 	
-	public void toJavaStatement(final XExpression obj, final TracingAppendable appendable, boolean isReferenced) {
+	public void toJavaStatement(final XExpression obj, final ITreeAppendable appendable, boolean isReferenced) {
 		internalToJavaStatement(obj, appendable.trace(obj), isReferenced);
 	}
 
-	protected void internalToJavaExpression(final XExpression obj, final TracingAppendable appendable) {
+	protected void internalToJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
 		if (obj == null) {
 			_toJavaExpression((Void) null, appendable);
 		} else {
@@ -273,32 +274,32 @@ public abstract class AbstractXbaseCompiler {
 		}
 	}
 
-	public void _toJavaStatement(XExpression func, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XExpression func, ITreeAppendable b, boolean isReferenced) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
-	public void _toJavaExpression(XExpression func, TracingAppendable b) {
+	public void _toJavaExpression(XExpression func, ITreeAppendable b) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
-	public void _toJavaStatement(Void func, TracingAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(Void func, ITreeAppendable b, boolean isReferenced) {
 		throw new NullPointerException();
 	}
 
-	public void _toJavaExpression(Void func, TracingAppendable b) {
+	public void _toJavaExpression(Void func, ITreeAppendable b) {
 		throw new NullPointerException();
 	}
 
-	protected void serialize(final JvmTypeReference type, EObject context, TracingAppendable appendable) {
+	protected void serialize(final JvmTypeReference type, EObject context, ITreeAppendable appendable) {
 		serialize(type, context, appendable, false, true);
 	}
-	protected void serialize(final JvmTypeReference type, EObject context, TracingAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
+	protected void serialize(final JvmTypeReference type, EObject context, ITreeAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
 		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, false, true);
 	}
 	
-	protected void serialize(final JvmTypeReference type, EObject context, TracingAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
+	protected void serialize(final JvmTypeReference type, EObject context, ITreeAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
 		referenceSerializer.serialize(type, context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 	}
 	
@@ -314,7 +315,7 @@ public abstract class AbstractXbaseCompiler {
 		return referenceSerializer.resolveMultiType(typeRef);
 	}
 	
-	protected String getVarName(Object ex, TracingAppendable appendable) {
+	protected String getVarName(Object ex, ITreeAppendable appendable) {
 		String name = appendable.getName(ex);
 		return name;
 	}
@@ -373,9 +374,9 @@ public abstract class AbstractXbaseCompiler {
 		return javaUtils.isJavaKeyword(name) ? "_"+name : name;
 	}
 	
-	protected void declareSyntheticVariable(final XExpression expr, TracingAppendable b) {
+	protected void declareSyntheticVariable(final XExpression expr, ITreeAppendable b) {
 		declareFreshLocalVariable(expr, b, new Later() {
-			public void exec(TracingAppendable appendable) {
+			public void exec(ITreeAppendable appendable) {
 				appendable.append(getDefaultValueLiteral(expr));
 			}
 		});
@@ -393,7 +394,7 @@ public abstract class AbstractXbaseCompiler {
 		return "null";
 	}
 
-	protected void declareFreshLocalVariable(XExpression expr, TracingAppendable b, Later expression) {
+	protected void declareFreshLocalVariable(XExpression expr, ITreeAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {
@@ -414,7 +415,7 @@ public abstract class AbstractXbaseCompiler {
 	 * whether an expression needs to be declared in a statement
 	 * If an expression has side effects this method must return true for it.
 	 */
-	protected boolean isVariableDeclarationRequired(XExpression expr, TracingAppendable b) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		return true;
 	}
 	

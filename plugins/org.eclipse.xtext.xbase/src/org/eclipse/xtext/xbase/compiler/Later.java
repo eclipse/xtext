@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface Later {
-	void exec(TracingAppendable appendable);
+	void exec(ITreeAppendable appendable);
 }

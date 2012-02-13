@@ -375,7 +375,7 @@ public class OnTheFlyJavaCompiler {
 			String body, Class<RT> returnType, Class<T1> paramType1,
 			Class<T2> paramType2) {
 		return (Functions.Function2<T1, T2, RT>) internalCreateFunction(body,
-				returnType, Tuples.pair((Type) paramType2, "p1"),
+				returnType, Tuples.pair((Type) paramType1, "p1"),
 				Tuples.pair((Type) paramType2, "p2"));
 	}
 

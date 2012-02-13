@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -307,15 +307,15 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testSetBody() {
       JvmOperation _createJvmOperation = TypesFactory.eINSTANCE.createJvmOperation();
       final JvmOperation op = _createJvmOperation;
-      final Procedure1<TracingAppendable> _function = new Procedure1<TracingAppendable>() {
-          public void apply(final TracingAppendable it) {
+      final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+          public void apply(final ITreeAppendable it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("foo");
           }
         };
       this._jvmTypesBuilder.setBody(op, _function);
-      final Procedure1<TracingAppendable> _function_1 = new Procedure1<TracingAppendable>() {
-          public void apply(final TracingAppendable it) {
+      final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
+          public void apply(final ITreeAppendable it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("bar");
           }

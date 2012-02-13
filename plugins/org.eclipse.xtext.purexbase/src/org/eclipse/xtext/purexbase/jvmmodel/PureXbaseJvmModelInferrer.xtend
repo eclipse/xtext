@@ -6,8 +6,8 @@ import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XReturnExpression
-import org.eclipse.xtext.xbase.compiler.TracingAppendable
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
@@ -76,7 +76,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 		return false
 	}
 	
-	def void compile(XBlockExpression obj, TracingAppendable appendable) {
+	def void compile(XBlockExpression obj, ITreeAppendable appendable) {
 		appendable.increaseIndentation
 		compiler.compile(obj, appendable, obj.newTypeRef(Void::TYPE))
 		appendable.decreaseIndentation

@@ -58,8 +58,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.collect.Lists;
@@ -192,10 +191,9 @@ public class XbaseHoverDocumentationProvider {
 					if (annotationReference.getValues().size() > 0) {
 						buffer.append("(");
 						for (JvmAnnotationValue value : annotationReference.getValues()) {
-							StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-							TracingAppendable tracing = new TracingAppendable(appendable, locationProvider);
-							jvmModelGenerator.toJava(value, tracing);
-							String java = tracing.toString();
+							TreeAppendable appendable = new TreeAppendable(locationProvider);
+							jvmModelGenerator.toJava(value, appendable);
+							String java = appendable.toString();
 							buffer.append(java);
 						}
 						buffer.append(")");
