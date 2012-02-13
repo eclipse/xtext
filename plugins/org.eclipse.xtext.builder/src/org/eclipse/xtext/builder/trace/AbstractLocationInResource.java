@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -41,6 +42,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	protected abstract int getOffset();
 	protected abstract int getLength();
 	
+	@NonNull
 	public IStorage getStorage() {
 		IStorage result = trace.findStorage(getResourceURI(), getProject());
 		return result;
@@ -51,6 +53,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		return result;
 	}
 	
+	@NonNull
 	public IProject getProject() {
 		return trace.findProject(getProjectName());
 	}

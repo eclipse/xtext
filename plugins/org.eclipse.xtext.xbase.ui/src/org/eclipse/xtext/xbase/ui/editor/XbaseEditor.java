@@ -14,32 +14,20 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.LanguageInfo;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.generator.trace.ITraceToSource;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
@@ -138,49 +126,31 @@ public class XbaseEditor extends XtextEditor {
 	@Override
 	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
 		if (expectJavaSelection) {
-			// TODO: use trace information for that purpose as soon as it's available
-//			final ITextRegion[] fixedSelection = new ITextRegion[] { ITextRegion.EMPTY_REGION }; 
-//			final ITextRegion[] fixedReveal = new ITextRegion[] { ITextRegion.EMPTY_REGION }; 
-//			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-//				@Override
-//				public void process(XtextResource resource) throws Exception {
-//					if (resource != null) {
-//						IJavaElement root = JavaCore.create(javaResource);
-//						if (root != null) {
-//							ICompilationUnit compilationUnit = (ICompilationUnit) root.getAncestor(IJavaElement.COMPILATION_UNIT);
-//							if (compilationUnit != null) {
-//								fixedSelection[0] = mergeSelectionOfDerivedMembers(resource, compilationUnit, selectionStart, selectionLength);
-//								fixedReveal[0] = mergeSelectionOfDerivedMembers(resource, compilationUnit, revealStart, revealLength);
-//							}		
-//						}
-//					}
-//				}
-//			});
 			ITraceToSource traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
-			ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
-			ILocationInResource bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
-			ITextRegion fixedSelection = bestSelection.getRange();
-			ITextRegion fixedReveal = bestReveal.getRange();
-			expectJavaSelection = false;
-			super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
-		} else {
-			super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);
+			if (traceToSource != null) {
+				ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
+				if (bestSelection != null) {
+					ILocationInResource bestReveal = bestSelection;
+					if (selectionStart != revealStart || selectionLength != revealLength) {
+						bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
+						if (bestReveal == null) {
+							bestReveal = bestSelection;
+						}
+					}
+					ITextRegion fixedSelection = bestSelection.getRange();
+					if (fixedSelection != null) {
+						ITextRegion fixedReveal = bestReveal.getRange();
+						if (fixedReveal == null) {
+							fixedReveal = fixedSelection;
+						}
+						expectJavaSelection = false;
+						super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
+						return;
+					}
+				}
+			}
 		}
-	}
-	
-	private ITextRegion mergeSelectionOfDerivedMembers(XtextResource resource,
-			ICompilationUnit compilationUnit, int offset, int length) throws CoreException {
-		ITextRegion result = ITextRegion.EMPTY_REGION;
-		// TODO improve by using trace information
-		IJavaElement[] selectedElements = compilationUnit.codeSelect(offset, length);
-		for(IJavaElement javaElement: selectedElements) {
-			result = mergeSelectionOfDerivedMember(resource, javaElement, result);
-		}
-		if (selectedElements.length == 0) {
-			IJavaElement elementAtOffset = compilationUnit.getElementAt(offset);
-			result = mergeSelectionOfDerivedMember(resource, elementAtOffset, result);
-		}
-		return result;
+		super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);
 	}
 	
 	@Override
@@ -192,27 +162,6 @@ public class XbaseEditor extends XtextEditor {
 		 * always relative the our own objects and not relative the the derived java files.
 		 */
 		super.reveal(offset, length);
-	}
-
-	private ITextRegion mergeSelectionOfDerivedMember(XtextResource resource, IJavaElement javaElement,
-			ITextRegion current) {
-		if (javaElement instanceof IMember) {
-			IMember member = (IMember) javaElement;
-			URI memberURI = new TypeURIHelper().getFullURI(member);
-			String identifier = memberURI.fragment();
-			TreeIterator<EObject> contents = EcoreUtil.<EObject>getAllContents(resource, true);
-			while(contents.hasNext()) {
-				EObject content = contents.next();
-				if (content instanceof JvmMember) {
-					String identifierFromResource = ((JvmIdentifiableElement) content).getIdentifier();
-					if (identifier.equals(identifierFromResource)) {
-						EObject sourceElement = associations.getPrimarySourceElement(content);
-						return current.merge(locationProvider.getSignificantTextRegion(sourceElement));
-					}
-				}
-			}
-		}
-		return current;
 	}
 
 }
