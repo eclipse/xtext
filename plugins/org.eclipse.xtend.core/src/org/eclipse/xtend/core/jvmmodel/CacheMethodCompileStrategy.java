@@ -21,8 +21,8 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
 
-public class CacheMethodCompileStrategy implements Procedures.Procedure1<TracingAppendable> {
+public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
 	@Inject
 	private TypeReferences typeReferences;
 
@@ -58,7 +58,7 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<Tracing
 		this.cacheField = cacheField; 
 	}
 
-	public void apply(TracingAppendable appendable) {
+	public void apply(ITreeAppendable appendable) {
 		JvmOperation cacheMethod = (JvmOperation) logicalContainerProvider
 				.getLogicalContainer(createExtensionInfo.getCreateExpression());
 		JvmDeclaredType containerType = cacheMethod.getDeclaringType();

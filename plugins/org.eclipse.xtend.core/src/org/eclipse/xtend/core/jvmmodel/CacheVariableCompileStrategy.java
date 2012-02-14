@@ -9,14 +9,14 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 
-public class CacheVariableCompileStrategy implements Procedures.Procedure1<TracingAppendable> {
+public class CacheVariableCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -26,7 +26,7 @@ public class CacheVariableCompileStrategy implements Procedures.Procedure1<Traci
 
 	private XtendFunction context;
 
-	public void apply(TracingAppendable builder) {
+	public void apply(ITreeAppendable builder) {
 		typeReferenceSerializer.serialize(typeReferences.getTypeForName(CollectionLiterals.class, context),
 				context, builder);
 		builder.append(".newHashMap()");
