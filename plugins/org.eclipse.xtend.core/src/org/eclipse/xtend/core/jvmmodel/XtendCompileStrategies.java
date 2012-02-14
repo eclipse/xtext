@@ -13,7 +13,7 @@ import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
@@ -27,7 +27,7 @@ public class XtendCompileStrategies {
 	@Inject
 	private Provider<DispatchMethodCompileStrategy> dispatchMethodProvider;
 
-	public Procedures.Procedure1<TracingAppendable> forDispatcher(JvmOperation dispatchOperation,
+	public Procedures.Procedure1<ITreeAppendable> forDispatcher(JvmOperation dispatchOperation,
 			List<JvmOperation> sortedDispatchOperations) {
 		DispatchMethodCompileStrategy strategy = dispatchMethodProvider.get();
 		strategy.initialize(dispatchOperation, sortedDispatchOperations);
@@ -37,7 +37,7 @@ public class XtendCompileStrategies {
 	@Inject
 	private Provider<CacheMethodCompileStrategy> cacheMathodProvider;
 
-	public Procedures.Procedure1<TracingAppendable> forCacheMethod(CreateExtensionInfo createExtensionInfo,
+	public Procedures.Procedure1<ITreeAppendable> forCacheMethod(CreateExtensionInfo createExtensionInfo,
 			JvmField cacheField, JvmOperation initializerMethod) {
 		CacheMethodCompileStrategy strategy = cacheMathodProvider.get();
 		strategy.init(createExtensionInfo, cacheField, initializerMethod);
@@ -47,7 +47,7 @@ public class XtendCompileStrategies {
 	@Inject
 	private Provider<CacheVariableCompileStrategy> cacheVarProvider;
 
-	public Procedures.Procedure1<TracingAppendable> forCacheVariable(XtendFunction function) {
+	public Procedures.Procedure1<ITreeAppendable> forCacheVariable(XtendFunction function) {
 		CacheVariableCompileStrategy strategy = cacheVarProvider.get();
 		strategy.init(function);
 		return strategy;

@@ -23,13 +23,13 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.Later;
-import org.eclipse.xtext.xbase.compiler.TracingAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 
-public class DispatchMethodCompileStrategy implements Procedures.Procedure1<TracingAppendable> {
+public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
 	
 	@Inject
 	private TypeReferences typeReferences;
@@ -52,7 +52,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<Trac
 		this.sortedDispatchOperations = sortedDispatchOperations;
 	}
 
-	public void apply(TracingAppendable a) {
+	public void apply(ITreeAppendable a) {
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
 		boolean[] allCasesSameType = new boolean[parameterCount];
@@ -78,13 +78,13 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<Trac
 				final String name = getVarName(dispatchParam, a);
 				if (typeReferences.is(caseParamType, Void.class)) {
 					laters.add(new Later() {
-						public void exec(TracingAppendable appendable) {
+						public void exec(ITreeAppendable appendable) {
 							appendable.append(name).append(" == null");
 						}
 					});
 				} else if (!allCasesSameType[i]) {
 					laters.add(new Later() {
-						public void exec(TracingAppendable appendable) {
+						public void exec(ITreeAppendable appendable) {
 							if (typeConformanceComputer.isConformant(caseParamType, dispatchParamType, true) && !primitives.isPrimitive(dispatchParamType)) {
 								appendable.append(name).append(" != null");
 							} else {
