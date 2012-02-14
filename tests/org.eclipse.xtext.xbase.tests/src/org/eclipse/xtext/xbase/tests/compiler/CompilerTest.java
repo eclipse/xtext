@@ -11,7 +11,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Test;
@@ -155,7 +156,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
 		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		TreeAppendable tracing = new TreeAppendable(locationProvider);
+		ITreeAppendable tracing = new FakeTreeAppendable();
 		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
 		compiler.compile(model, tracing, returnType);
 		assertEquals(expectedJavaCode, tracing.getContent());

@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.compiler.ScopeStack;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class SharedAppendableState {
 
