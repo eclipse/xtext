@@ -17,7 +17,6 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -55,9 +54,6 @@ import org.junit.Test;
 public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper testHelper;
-  
-  @Inject
-  private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private IJavaElementFinder javaElementFinder;

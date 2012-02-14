@@ -5,6 +5,12 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover
+import org.eclipse.xtend.ide.hover.XtendInformationControlInput
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
@@ -16,13 +22,6 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover
-import org.eclipse.xtend.ide.hover.XtendInformationControlInput
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.core.xtend.XtendFunction
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -35,9 +34,6 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
 	@Inject
 	private WorkbenchTestHelper testHelper
-	
-	@Inject
-	extension IXtendJvmAssociations
 	
 	@Inject
 	private IJavaElementFinder javaElementFinder
