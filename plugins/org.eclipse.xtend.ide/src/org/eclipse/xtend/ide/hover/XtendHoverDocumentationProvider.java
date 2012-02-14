@@ -8,16 +8,22 @@
 package org.eclipse.xtend.ide.hover;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -74,5 +80,37 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 				buffer.append("</div>"); //$NON-NLS-1$
 			}
 		}
+	}
+	
+	@Override
+	protected List<String> initParameterNames() {
+		List<String> result = super.initParameterNames();
+		if(context instanceof XtendFunction){
+			for(XtendParameter param : ((XtendFunction) context).getParameters()){
+				result.add(param.getName());
+			}
+		}
+		if(context instanceof XtendConstructor){
+			for(XtendParameter param : ((XtendConstructor) context).getParameters()){
+				result.add(param.getName());
+			}
+		}
+		return result;
+	}
+
+	@Override
+	protected Map<String,URI> initExceptionNamesToURI() {
+		Map<String,URI> result = super.initExceptionNamesToURI();
+		if(context instanceof XtendFunction){
+			for(JvmTypeReference exception : ((XtendFunction) context).getExceptions()){
+				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
+			}
+		}
+		if(context instanceof XtendConstructor){
+			for(JvmTypeReference exception : ((XtendConstructor) context).getExceptions()){
+				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
+			}
+		}
+		return result;
 	}
 }
