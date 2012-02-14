@@ -21,11 +21,11 @@
    <feature id="org.eclipse.xtext.xbase" version="0.0.0">
       <category name="xtext"/>
    </feature>
-   <feature id="org.eclipse.xtext.xtend2.sdk" version="0.0.0">
-      <category name="xtend2"/>
+   <feature id="org.eclipse.xtend.sdk" version="0.0.0">
+      <category name="xtend"/>
    </feature>
-   <feature id="org.eclipse.xtext.xtend2.m2e" version="0.0.0">
-      <category name="xtend2"/>
+   <feature id="org.eclipse.xtend.m2e" version="0.0.0">
+      <category name="xtend"/>
    </feature>
    <category-def name="xtext" label="Xtext${package.qualifier}">
       <description>
@@ -35,7 +35,7 @@
         interpreters as well as full blown Eclipse-based IDE integration. 
       </description>
    </category-def>
-   <category-def name="xtend2" label="Xtend2${package.qualifier}">
+   <category-def name="xtend" label="Xtend${package.qualifier}">
       <description>
         A programming language for Java developers. 
       </description>
