@@ -102,10 +102,8 @@ public class XbaseHoverDocumentationProvider {
 		buffer = new StringBuffer();
 		context = object;
 		fLiteralContent = 0;
-
 		List<String> parameterNames = initParameterNames();
 		Map<String,org.eclipse.emf.common.util.URI> exceptionNamesToURI = initExceptionNamesToURI();
-
 		addAnnotations(object);
 		getDocumentationWithPrefix(object);
 		Javadoc javadoc = getJavaDoc();
@@ -173,9 +171,6 @@ public class XbaseHoverDocumentationProvider {
 				rest.add(tag);
 			}
 		}
-		CharSequence[] parameterDescriptions = new CharSequence[parameterNames.size()];
-
-		CharSequence[] exceptionDescriptions = new CharSequence[exceptionNamesToURI.size()];
 
 		boolean hasParameters = parameters.size() > 0;
 		boolean hasReturnTag = returnTag != null;
@@ -190,12 +185,12 @@ public class XbaseHoverDocumentationProvider {
 
 		if (hasParameters || hasReturnTag || hasExceptions || versions.size() > 0 || authors.size() > 0
 				|| since.size() > 0 || sees.size() > 0 || rest.size() > 0 || (buffer.length() > 0)
-				&& (parameterDescriptions.length > 0 || exceptionDescriptions.length > 0)) {
+				&& (parameterNames.size() > 0 || exceptionNamesToURI.size() > 0)) {
 			handleSuperMethodReferences(object);
 			buffer.append(BLOCK_TAG_START);
-			handleParameters(object, parameters,parameterNames, parameterDescriptions);
+			handleParameters(object, parameters,parameterNames);
 			handleReturnTag(returnTag);
-			handleExceptionTags(exceptions, exceptionNamesToURI, exceptionDescriptions);
+			handleExceptionTags(exceptions, exceptionNamesToURI);
 			handleBlockTags("Since:", since);
 			handleBlockTags("Version:", versions);
 			handleBlockTags("Author:", authors);
@@ -334,25 +329,16 @@ public class XbaseHoverDocumentationProvider {
 	}
 
 	protected boolean handleValueTag(TagElement node) {
-		//TODO: implement me!
-		return false;
+		// Not handled explicit for Xbase for now
+		handleText(node.toString());
+		return true;
 	}
 
 	protected boolean handleInheritDoc(TagElement node) {
 		if (!TagElement.TAG_INHERITDOC.equals(node.getTagName()))
 			return false;
-		TagElement blockTag = (TagElement) node.getParent();
-		String blockTagName = blockTag.getTagName();
-
-		if (blockTagName == null) {
-			// Inherited
-		} else if (TagElement.TAG_PARAM.equals(blockTagName)) {
-
-		} else if (TagElement.TAG_RETURN.equals(blockTagName)) {
-
-		} else if (TagElement.TAG_THROWS.equals(blockTagName) || TagElement.TAG_EXCEPTION.equals(blockTagName)) {
-
-		}
+		// Not handled explicit for Xbase for now
+		handleText(node.toString());
 		return true;
 	}
 
@@ -433,10 +419,15 @@ public class XbaseHoverDocumentationProvider {
 					elementURI = singleElement.getEObjectURI();
 			}
 			String label = "";
-			Iterator<? extends Object> iterator = fragments.iterator();
-			while (iterator.hasNext()) {
-				label += iterator.next(); //$NON-NLS-1$
-			}
+			if(fragments.size() > 1){
+				for(int i = 1 ; i < fragments.size() ; i++){
+					String portentialLabel = fragments.get(i).toString();
+					if(portentialLabel.trim().length() > 0)
+					label += portentialLabel;
+				}
+			} 
+			if(label.length() == 0)
+				label = firstFragment;
 			if (elementURI == null)
 				buffer.append(label);
 			else {
@@ -479,7 +470,7 @@ public class XbaseHoverDocumentationProvider {
 		handleLink(tag.fragments());
 	}
 
-	protected void handleExceptionTags(List<TagElement> tags, Map<String, org.eclipse.emf.common.util.URI> exceptionNamesToURI, CharSequence[] exceptionDescriptions) {
+	protected void handleExceptionTags(List<TagElement> tags, Map<String, org.eclipse.emf.common.util.URI> exceptionNamesToURI) {
 		if (tags.size() == 0 && containsOnlyNull(exceptionNamesToURI.values()))
 			return;
 		handleBlockTagTitle("Throws:");
@@ -489,16 +480,11 @@ public class XbaseHoverDocumentationProvider {
 			handleThrowsTag(tag);
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
-		for (int i= 0; i < exceptionDescriptions.length; i++) {
-			CharSequence description= exceptionDescriptions[i];
+		for (int i= 0; i < exceptionNamesToURI.size(); i++) {
 			String name= Lists.newArrayList(exceptionNamesToURI.keySet()).get(i);
-			if (name != null) {
+			if (name != null && exceptionNamesToURI.get(name) != null) {
 				buffer.append(BlOCK_TAG_ENTRY_START);
 				buffer.append(createLinkWithLabel(exceptionNamesToURI.get(name), name));
-				if (description != null) {
-					buffer.append(JavaElementLabels.CONCAT_STRING);
-					buffer.append(description);
-				}
 				buffer.append(BlOCK_TAG_ENTRY_END);
 			}
 		}
@@ -657,8 +643,8 @@ public class XbaseHoverDocumentationProvider {
 		return textWithStars.replaceAll(lineBreakGroup + noBreakSpace + "*\\*" /*+ noBreakSpace + '?'*/, "$1"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-	protected void handleParameters(EObject object, List<TagElement> parameters, List<String> parameterNames, CharSequence[] parameterDescriptions) {
-		if (parameters.size() == 0)
+	protected void handleParameters(EObject object, List<TagElement> parameters, List<String> parameterNames) {
+		if (parameters.size() == 0 && containsOnlyNull(parameterNames))
 			return;
 		handleBlockTagTitle("Parameters:");
 		for (Iterator<TagElement> iter = parameters.iterator(); iter.hasNext();) {
@@ -668,16 +654,13 @@ public class XbaseHoverDocumentationProvider {
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
 		
-		for (int i= 0; i < parameterDescriptions.length; i++) {
-			CharSequence description= parameterDescriptions[i];
+		for (int i= 0; i < parameterNames.size(); i++) {
 			String name= parameterNames.get(i);
 			if (name != null) {
 				buffer.append(BlOCK_TAG_ENTRY_START);
 				buffer.append(PARAM_NAME_START);
 				buffer.append(name);
 				buffer.append(PARAM_NAME_END);
-				if (description != null)
-					buffer.append(description);
 				buffer.append(BlOCK_TAG_ENTRY_END);
 			}
 		}
