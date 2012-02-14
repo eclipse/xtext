@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.ui.hover;
 
 import java.net.URL;
 import java.util.Collections;
+import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
@@ -20,6 +22,7 @@ import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -91,7 +94,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 				returnTypeString = returnType.getSimpleName();
 			}
 		}
-		return returnTypeString + " " + jvmOperation.getSimpleName() + hoverUiStrings.parameters(jvmOperation);
+		return returnTypeString + " " + jvmOperation.getSimpleName() + hoverUiStrings.parameters(jvmOperation) + getThrowsDeclaration(jvmOperation);
 	}
 
 	protected String getSimpleSignature(JvmOperation jvmOperation) {
@@ -127,7 +130,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 	}
 
 	protected String getSignature(JvmConstructor contructor) {
-		return contructor.getQualifiedName() + " " + hoverUiStrings.parameters(contructor);
+		return contructor.getQualifiedName() + " " + hoverUiStrings.parameters(contructor) + getThrowsDeclaration(contructor);
 	}
 
 	protected String getSimpleSignature(JvmConstructor contructor) {
@@ -148,6 +151,22 @@ public class DefaultDeclarativeHoverSignatureProvider {
 					+ getSignature(container);
 		}
 		return "";
+	}
+	
+	protected String getThrowsDeclaration(JvmExecutable executable){
+		String result = "";
+		EList<JvmTypeReference> exceptions = executable.getExceptions();
+		if(exceptions.size() > 0){
+			result += " throws ";
+			Iterator<JvmTypeReference> iterator = exceptions.iterator();
+			while(iterator.hasNext()){
+				JvmTypeReference next = iterator.next();
+				result += next.getSimpleName();
+				if(iterator.hasNext())
+					result += ", ";
+			}
+		}
+		return result;
 	}
 
 	protected String getSignature(EObject container) {

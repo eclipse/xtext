@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +33,11 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.Javadoc;
+import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
+import org.eclipse.jdt.internal.corext.dom.ASTNodes;
 import org.eclipse.jdt.internal.ui.javaeditor.ASTProvider;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -47,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -62,6 +66,7 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -98,6 +103,11 @@ public class XbaseHoverDocumentationProvider {
 	public String getDocumentation(EObject object) {
 		buffer = new StringBuffer();
 		context = object;
+		fLiteralContent = 0;
+
+		List<String> parameterNames = initParameterNames();
+		Map<String,org.eclipse.emf.common.util.URI> exceptionNamesToURI = initExceptionNamesToURI();
+
 		addAnnotations(object);
 		getDocumentationWithPrefix(object);
 		Javadoc javadoc = getJavaDoc();
@@ -113,7 +123,6 @@ public class XbaseHoverDocumentationProvider {
 		List<TagElement> sees = new ArrayList<TagElement>();
 		List<TagElement> since = new ArrayList<TagElement>();
 		List<TagElement> rest = new ArrayList<TagElement>();
-
 		@SuppressWarnings("unchecked")
 		List<TagElement> tags = javadoc.tags();
 		for (Iterator<TagElement> iter = tags.iterator(); iter.hasNext();) {
@@ -123,11 +132,34 @@ public class XbaseHoverDocumentationProvider {
 				start = tag;
 			} else if (TagElement.TAG_PARAM.equals(tagName)) {
 				parameters.add(tag);
+				@SuppressWarnings("unchecked")
+				List<? extends ASTNode> fragments = tag.fragments();
+				if (fragments.size() > 0) {
+					Object first = fragments.get(0);
+					if (first instanceof SimpleName) {
+						String name = ((SimpleName) first).getIdentifier();
+						int paramIndex = parameterNames.indexOf(name);
+						if (paramIndex != -1) {
+							parameterNames.set(paramIndex, null);
+						}
+					}
+				}
 			} else if (TagElement.TAG_RETURN.equals(tagName)) {
 				if (returnTag == null)
 					returnTag = tag; // the Javadoc tool only shows the first return tag
 			} else if (TagElement.TAG_EXCEPTION.equals(tagName) || TagElement.TAG_THROWS.equals(tagName)) {
 				exceptions.add(tag);
+				@SuppressWarnings("unchecked")
+				List<? extends ASTNode> fragments= tag.fragments();
+				if (fragments.size() > 0) {
+					Object first= fragments.get(0);
+					if (first instanceof Name) {
+						String name= ASTNodes.getSimpleNameIdentifier((Name) first);
+						if (exceptionNamesToURI.containsKey(name) ) {
+							exceptionNamesToURI.put(name,null);
+						}
+					}
+				}
 			} else if (TagElement.TAG_SINCE.equals(tagName)) {
 				since.add(tag);
 			} else if (TagElement.TAG_VERSION.equals(tagName)) {
@@ -143,7 +175,10 @@ public class XbaseHoverDocumentationProvider {
 				rest.add(tag);
 			}
 		}
-		fLiteralContent = 0;
+		CharSequence[] parameterDescriptions = new CharSequence[parameterNames.size()];
+
+		CharSequence[] exceptionDescriptions = new CharSequence[exceptionNamesToURI.size()];
+
 		boolean hasParameters = parameters.size() > 0;
 		boolean hasReturnTag = returnTag != null;
 		boolean hasExceptions = exceptions.size() > 0;
@@ -156,12 +191,13 @@ public class XbaseHoverDocumentationProvider {
 		}
 
 		if (hasParameters || hasReturnTag || hasExceptions || versions.size() > 0 || authors.size() > 0
-				|| since.size() > 0 || sees.size() > 0 || rest.size() > 0 || (buffer.length() > 0)) {
+				|| since.size() > 0 || sees.size() > 0 || rest.size() > 0 || (buffer.length() > 0)
+				&& (parameterDescriptions.length > 0 || exceptionDescriptions.length > 0)) {
 			handleSuperMethodReferences(object);
 			buffer.append(BLOCK_TAG_START);
-			handleParameters(object, parameters);
+			handleParameters(object, parameters,parameterNames, parameterDescriptions);
 			handleReturnTag(returnTag);
-			handleExceptionTags(exceptions);
+			handleExceptionTags(exceptions, exceptionNamesToURI, exceptionDescriptions);
 			handleBlockTags("Since:", since);
 			handleBlockTags("Version:", versions);
 			handleBlockTags("Author:", authors);
@@ -175,6 +211,26 @@ public class XbaseHoverDocumentationProvider {
 		buffer = null;
 		rawJavaDoc = null;
 		context = null;
+		return result;
+	}
+
+	protected List<String> initParameterNames() {
+		List<String> result = Lists.newArrayList();
+		if (context instanceof JvmExecutable) {
+			for (JvmFormalParameter param : ((JvmExecutable) context).getParameters()) {
+				result.add(param.getName());
+			}
+		}
+		return result;
+	}
+
+	protected Map<String,org.eclipse.emf.common.util.URI> initExceptionNamesToURI() {
+		Map<String,org.eclipse.emf.common.util.URI> result = Maps.newHashMap();
+		if (context instanceof JvmExecutable) {
+			for (JvmTypeReference exception : ((JvmExecutable) context).getExceptions()) {
+				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
+			}
+		}
 		return result;
 	}
 
@@ -425,8 +481,8 @@ public class XbaseHoverDocumentationProvider {
 		handleLink(tag.fragments());
 	}
 
-	protected void handleExceptionTags(List<TagElement> tags) {
-		if (tags.size() == 0)
+	protected void handleExceptionTags(List<TagElement> tags, Map<String, org.eclipse.emf.common.util.URI> exceptionNamesToURI, CharSequence[] exceptionDescriptions) {
+		if (tags.size() == 0 && containsOnlyNull(exceptionNamesToURI.values()))
 			return;
 		handleBlockTagTitle("Throws:");
 		for (Iterator<TagElement> iter = tags.iterator(); iter.hasNext();) {
@@ -435,6 +491,27 @@ public class XbaseHoverDocumentationProvider {
 			handleThrowsTag(tag);
 			buffer.append(BlOCK_TAG_ENTRY_END);
 		}
+		for (int i= 0; i < exceptionDescriptions.length; i++) {
+			CharSequence description= exceptionDescriptions[i];
+			String name= Lists.newArrayList(exceptionNamesToURI.keySet()).get(i);
+			if (name != null) {
+				buffer.append(BlOCK_TAG_ENTRY_START);
+				buffer.append(createLinkWithLabel(exceptionNamesToURI.get(name), name));
+				if (description != null) {
+					buffer.append(JavaElementLabels.CONCAT_STRING);
+					buffer.append(description);
+				}
+				buffer.append(BlOCK_TAG_ENTRY_END);
+			}
+		}
+	}
+	
+	private boolean containsOnlyNull(Collection<?> list) {
+		for (Iterator<?> iter= list.iterator(); iter.hasNext(); ) {
+			if (iter.next() != null)
+				return false;
+		}
+		return true;
 	}
 
 	protected void handleThrowsTag(TagElement tag) {
@@ -582,7 +659,7 @@ public class XbaseHoverDocumentationProvider {
 		return textWithStars.replaceAll(lineBreakGroup + noBreakSpace + "*\\*" /*+ noBreakSpace + '?'*/, "$1"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
-	protected void handleParameters(EObject object, List<TagElement> parameters) {
+	protected void handleParameters(EObject object, List<TagElement> parameters, List<String> parameterNames, CharSequence[] parameterDescriptions) {
 		if (parameters.size() == 0)
 			return;
 		handleBlockTagTitle("Parameters:");
@@ -591,6 +668,20 @@ public class XbaseHoverDocumentationProvider {
 			buffer.append(BlOCK_TAG_ENTRY_START);
 			handleParamTag(tag);
 			buffer.append(BlOCK_TAG_ENTRY_END);
+		}
+		
+		for (int i= 0; i < parameterDescriptions.length; i++) {
+			CharSequence description= parameterDescriptions[i];
+			String name= parameterNames.get(i);
+			if (name != null) {
+				buffer.append(BlOCK_TAG_ENTRY_START);
+				buffer.append(PARAM_NAME_START);
+				buffer.append(name);
+				buffer.append(PARAM_NAME_END);
+				if (description != null)
+					buffer.append(description);
+				buffer.append(BlOCK_TAG_ENTRY_END);
+			}
 		}
 	}
 
