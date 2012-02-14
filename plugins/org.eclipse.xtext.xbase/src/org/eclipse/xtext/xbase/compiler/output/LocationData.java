@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.util.ITextRegion;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class LocationData {
 
 	private URI sourceURI;
@@ -29,6 +31,9 @@ public class LocationData {
 		setData(uri, null, textRegion.getOffset(), textRegion.getLength());
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	protected void setData(URI sourceURI, @Nullable String sourceProject, int sourceOffset, int sourceLength) {
 		this.sourceURI = sourceURI;
 		if (sourceProject != null) {

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler.output;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
@@ -62,7 +63,8 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		 * @param string the visited {@link String}
 		 * @return the original string or a new one.
 		 */
-		protected String visit(String string) {
+		@SuppressWarnings("null") // this is necessary due to a bug in JDT nullness stuff
+		protected String visit(@NonNull String string) {
 			return string;
 		}
 	}
@@ -111,10 +113,18 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return locationData;
 	}
 	
+	/**
+	 * Access the children of the {@link TreeAppendable}. The list contains either {@link String strings}
+	 * or other {@link TreeAppendable TreeAppendables}. The list may be empty.
+	 * @return the children of this appendable.
+	 */
 	public List<? extends Object> getChildren() {
 		return children;
 	}
 
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public void accept(@Nullable String text) {
 		children.add(text);
 	}
@@ -123,6 +133,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		if (closed)
 			return;
 		closeLastChild();
+		closed = true;
 	}
 
 	protected void closeLastChild() {
