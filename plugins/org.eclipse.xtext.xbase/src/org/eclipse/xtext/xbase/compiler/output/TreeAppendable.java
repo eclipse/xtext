@@ -70,7 +70,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	private List<Object> children;
 	private final SharedAppendableState state;
 	private final ILocationInFileProvider locationProvider;
-	final LocationData locationData;
+	private final LocationData locationData;
 	private boolean closed = false;
 
 	public TreeAppendable(ImportManager importManager, ILocationInFileProvider locationProvider, EObject source,
