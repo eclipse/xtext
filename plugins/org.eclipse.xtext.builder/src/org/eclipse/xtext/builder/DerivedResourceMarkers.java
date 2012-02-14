@@ -23,6 +23,7 @@ import org.eclipse.xtext.util.Exceptions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -121,18 +122,22 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 	 * @since 2.3
 	 */
 	public Iterable<IMarker> findDerivedResourceMarkers(IResource file, final String generatorId) throws CoreException {
-		return Iterables.filter(Arrays.asList(findDerivedResourceMarkers(file)), new Predicate<IMarker>() {
+		Iterable<IMarker> filtered = Iterables.filter(Arrays.asList(findDerivedResourceMarkers(file)), new Predicate<IMarker>() {
 			public boolean apply(IMarker input) {
-				try {
-					if (generatorId != null && generatorId.equals(input.getAttribute(ATTR_GENERATOR))) {
-						return true;
+				if (input.exists()) {
+					try {
+						if (generatorId != null && generatorId.equals(input.getAttribute(ATTR_GENERATOR))) {
+							return true;
+						}
+					} catch (CoreException e) {
+						return Exceptions.throwUncheckedException(e);
 					}
-				} catch (CoreException e) {
-					return Exceptions.throwUncheckedException(e);
 				}
 				return false;
 			}
 		});
+		// filter only once
+		return Lists.newArrayList(filtered);
 	}
 	
 	public IMarker findDerivedResourceMarker(IFile file, String source) throws CoreException {
