@@ -274,20 +274,36 @@ public abstract class AbstractXbaseCompiler {
 		}
 	}
 
+	/**
+	 * @param b the appendable, unused, but necessary for dispatching purpose
+	 * @param isReferenced unused, but necessary for dispatching purpose
+	 */
 	public void _toJavaStatement(XExpression func, ITreeAppendable b, boolean isReferenced) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
+	/**
+	 * @param b the appendable, unused, but necessary for dispatching purpose
+	 */
 	public void _toJavaExpression(XExpression func, ITreeAppendable b) {
 		throw new UnsupportedOperationException("Coudn't find a compilation strategy for expressions of type "
 				+ func.getClass().getCanonicalName());
 	}
 
+	/**
+	 * @param func the type of <code>null</code>, unused, but necessary for dispatching purpose
+	 * @param b the appendable, unused, but necessary for dispatching purpose
+	 * @param isReferenced unused, but necessary for dispatching purpose
+	 */
 	public void _toJavaStatement(Void func, ITreeAppendable b, boolean isReferenced) {
 		throw new NullPointerException();
 	}
 
+	/**
+	 * @param func the type of <code>null</code>, unused, but necessary for dispatching purpose
+	 * @param b the appendable, unused, but necessary for dispatching purpose
+	 */
 	public void _toJavaExpression(Void func, ITreeAppendable b) {
 		throw new NullPointerException();
 	}
@@ -414,6 +430,8 @@ public abstract class AbstractXbaseCompiler {
 	/**
 	 * whether an expression needs to be declared in a statement
 	 * If an expression has side effects this method must return true for it.
+	 * @param expr the checked expression
+	 * @param b the appendable which represents the current compiler state
 	 */
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		return true;
