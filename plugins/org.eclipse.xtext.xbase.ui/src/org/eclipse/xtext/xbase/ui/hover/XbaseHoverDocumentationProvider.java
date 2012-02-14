@@ -55,14 +55,14 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.common.collect.Lists;
@@ -93,8 +93,6 @@ public class XbaseHoverDocumentationProvider {
 	protected IEObjectDocumentationProvider documentationProvider;
 	@Inject
 	protected JvmModelGenerator jvmModelGenerator;
-	@Inject
-	protected ILocationInFileProvider locationProvider;
 
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
@@ -247,9 +245,9 @@ public class XbaseHoverDocumentationProvider {
 					if (annotationReference.getValues().size() > 0) {
 						buffer.append("(");
 						for (JvmAnnotationValue value : annotationReference.getValues()) {
-							TreeAppendable appendable = new TreeAppendable(locationProvider);
+							ITreeAppendable appendable = new FakeTreeAppendable();
 							jvmModelGenerator.toJava(value, appendable);
-							String java = appendable.toString();
+							String java = appendable.getContent();
 							buffer.append(java);
 						}
 						buffer.append(")");
