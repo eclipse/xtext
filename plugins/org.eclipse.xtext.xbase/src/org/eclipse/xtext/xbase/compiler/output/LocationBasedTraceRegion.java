@@ -22,7 +22,7 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 	public LocationBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset) {
 		super(parent);
 		this.offset = offset;
-		this.location = delegate.locationData;
+		this.location = delegate.getLocationData();
 		int length = 0;
 		for (Object child : delegate.getChildren()) {
 			if (child instanceof String) {
