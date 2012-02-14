@@ -43,11 +43,8 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-<repository location="file:/shared/jobs/Xtext-nightly-HEAD/lastSuccessful/archive/xtext.p2.repository"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
-<repository location="file:/shared/jobs/xtend-head/lastSuccessful/archive/xtend.p2.repository"/>
+<repository location="file:/shared/jobs/Xtext-nightly-HEAD/lastSuccessful/archive/xtext.p2.repository"/>
 </location>
 </locations>
 </target>
