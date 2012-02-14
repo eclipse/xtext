@@ -9,10 +9,13 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 
 /**
+ * A specialized appendable that can be used to trace the source location
+ * for the written output.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
@@ -21,5 +24,15 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	ITreeAppendable trace(EObject object);
 	
 	ITreeAppendable append(ITreeAppendable other);
+	
+	ITreeAppendable append(JvmType type);
+	
+	ITreeAppendable append(String string);
+	
+	ITreeAppendable decreaseIndentation();
+	
+	ITreeAppendable increaseIndentation();
+	
+	ITreeAppendable newLine();
 	
 }

@@ -13,6 +13,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 
 /**
+ * Specializes the {@link LineSeparatorHarmonizer} and is aware of {@link TreeAppendable} thus
+ * it can harmonize the line breaks and still maintain the trace information.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TraceAwarePostProcessor extends LineSeparatorHarmonizer {

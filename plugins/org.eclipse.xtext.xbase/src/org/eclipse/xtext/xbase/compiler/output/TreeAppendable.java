@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -17,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 
 import com.google.common.collect.Lists;
@@ -28,183 +26,51 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence {
 
+	/**
+	 * A {@link org.eclipse.xtext.xbase.compiler.output.TreeAppendable.Visitor visitor} can be used
+	 * to manipulate an existing {@link TreeAppendable} or to create a completely new one recursively.
+	 * Implementors may override {@link #visit(String)} and {@link #visit(TreeAppendable)}
+	 */
 	public abstract static class Visitor {
+		/**
+		 * Manipulate the given appendable or return a new one.
+		 * @param original the visited {@link TreeAppendable}
+		 * @return the original appendable or a new one.
+		 */
 		protected TreeAppendable visit(TreeAppendable original) {
 			visitChildren(original);
 			return original;
 		}
 
-		protected void visitChildren(TreeAppendable appendable) {
-			for (int i = 0; i < appendable.children.size(); i++) {
-				Object o = appendable.children.get(i);
+		/**
+		 * Traverses the children of the given appendable and manipulates it in-place.
+		 * @param parent the appendable whose children should be visited.
+		 */
+		protected void visitChildren(TreeAppendable parent) {
+			for (int i = 0; i < parent.children.size(); i++) {
+				Object o = parent.children.get(i);
 				if (o instanceof String) {
-					appendable.children.set(i, visit((String) o));
+					parent.children.set(i, visit((String) o));
 				} else {
-					appendable.children.set(i, visit((TreeAppendable) o));
+					parent.children.set(i, visit((TreeAppendable) o));
 				}
 			}
 		}
 
-		protected List<Object> getChildren(TreeAppendable appendable) {
-			return appendable.children;
-		}
-
+		/**
+		 * Manipulate the given string and return the result.
+		 * @param string the visited {@link String}
+		 * @return the original string or a new one.
+		 */
 		protected String visit(String string) {
 			return string;
 		}
 	}
 
-	protected static class LocationBasedTraceRegion extends AbstractTraceRegion {
-		private final LocationData location;
-		private final int offset;
-		private final int length;
-
-		protected LocationBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset) {
-			super(parent);
-			this.offset = offset;
-			this.location = delegate.locationData;
-			int length = 0;
-			for (Object child : delegate.children) {
-				if (child instanceof String) {
-					length += ((String) child).length();
-				} else {
-					TreeAppendable castedChild = (TreeAppendable) child;
-					if (!castedChild.children.isEmpty()) {
-						LocationBasedTraceRegion childRegion = new LocationBasedTraceRegion(this, castedChild, offset
-								+ length);
-						length += childRegion.getFromLength();
-					}
-				}
-			}
-			this.length = length;
-		}
-
-		@Override
-		public int getFromLength() {
-			return length;
-		}
-
-		@Override
-		public int getFromOffset() {
-			return offset;
-		}
-
-		@Override
-		public int getToLength() {
-			return location.sourceLength;
-		}
-
-		@Override
-		public int getToOffset() {
-			return location.sourceOffset;
-		}
-
-		@Override
-		@Nullable
-		public URI getToPath() {
-			URI result = location.sourceURI;
-			if (result == null)
-				return super.getToPath();
-			return result;
-		}
-
-		@Override
-		@Nullable
-		public String getToProjectName() {
-			String result = location.sourceProject;
-			if (result == null)
-				return super.getToProjectName();
-			return result;
-		}
-	}
-
-	public static class LocationData {
-
-		private URI sourceURI;
-		private String sourceProject;
-		private int sourceOffset;
-		private int sourceLength;
-
-		public LocationData(ILocationInFileProvider locationProvider, EObject source) {
-			ITextRegion textRegion = locationProvider.getSignificantTextRegion(source);
-			URI uri = source.eResource().getURI();
-			setData(uri, null, textRegion.getOffset(), textRegion.getLength());
-		}
-
-		protected void setData(URI sourceURI, @Nullable String sourceProject, int sourceOffset, int sourceLength) {
-			this.sourceURI = sourceURI;
-			if (sourceProject != null) {
-				this.sourceProject = sourceProject;
-			} else {
-				if (!sourceURI.isPlatformResource()) {
-					this.sourceProject = "<unknown>";
-				} else {
-					this.sourceProject = sourceURI.segment(1);
-				}
-			}
-			this.sourceOffset = sourceOffset;
-			this.sourceLength = sourceLength;
-		}
-
-		public int getSourceLength() {
-			return sourceLength;
-		}
-
-		public int getSourceOffset() {
-			return sourceOffset;
-		}
-
-		public String getSourceProject() {
-			return sourceProject;
-		}
-
-		public URI getSourceURI() {
-			return sourceURI;
-		}
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + sourceLength;
-			result = prime * result + sourceOffset;
-			result = prime * result + ((sourceProject == null) ? 0 : sourceProject.hashCode());
-			result = prime * result + ((sourceURI == null) ? 0 : sourceURI.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(@Nullable Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			LocationData other = (LocationData) obj;
-			if (sourceLength != other.sourceLength)
-				return false;
-			if (sourceOffset != other.sourceOffset)
-				return false;
-			if (sourceProject == null) {
-				if (other.sourceProject != null)
-					return false;
-			} else if (!sourceProject.equals(other.sourceProject))
-				return false;
-			if (sourceURI == null) {
-				if (other.sourceURI != null)
-					return false;
-			} else if (!sourceURI.equals(other.sourceURI))
-				return false;
-			return true;
-		}
-
-	}
-
 	private List<Object> children;
 	private final SharedAppendableState state;
 	private final ILocationInFileProvider locationProvider;
-	private final LocationData locationData;
+	final LocationData locationData;
 	private boolean closed = false;
 
 	public TreeAppendable(ImportManager importManager, ILocationInFileProvider locationProvider, EObject source,
@@ -222,13 +88,6 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		this.locationProvider = locationProvider;
 		this.children = Lists.newArrayList();
 		this.locationData = sourceLocation;
-	}
-
-	/**
-	 * @noreference This constructor is not intended to be referenced by clients.
-	 */
-	public TreeAppendable(ILocationInFileProvider locationProvider) {
-		this(new SharedAppendableState("  ", "\n", new ImportManager(false)), locationProvider, (LocationData) null);
 	}
 
 	public TreeAppendable trace(EObject object) {
@@ -250,6 +109,10 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 
 	public LocationData getLocationData() {
 		return locationData;
+	}
+	
+	public List<? extends Object> getChildren() {
+		return children;
 	}
 
 	public void accept(@Nullable String text) {

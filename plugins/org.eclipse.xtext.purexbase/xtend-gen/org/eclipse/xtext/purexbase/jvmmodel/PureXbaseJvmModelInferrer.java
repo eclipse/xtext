@@ -18,7 +18,6 @@ import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
@@ -82,13 +81,13 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                         final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
                             public void apply(final ITreeAppendable it) {
                               {
-                                IAppendable _append = it.append("try {");
-                                IAppendable _increaseIndentation = _append.increaseIndentation();
+                                ITreeAppendable _append = it.append("try {");
+                                ITreeAppendable _increaseIndentation = _append.increaseIndentation();
                                 _increaseIndentation.newLine();
                                 ITreeAppendable _trace = it.trace(e);
                                 PureXbaseJvmModelInferrer.this.compile(e, _trace);
-                                IAppendable _decreaseIndentation = it.decreaseIndentation();
-                                IAppendable _newLine = _decreaseIndentation.newLine();
+                                ITreeAppendable _decreaseIndentation = it.decreaseIndentation();
+                                ITreeAppendable _newLine = _decreaseIndentation.newLine();
                                 _newLine.append("} catch (Throwable t) {}");
                               }
                             }
@@ -127,12 +126,12 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                         final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
                             public void apply(final ITreeAppendable it) {
                               {
-                                IAppendable _append = it.append("if (Boolean.TRUE) ");
+                                ITreeAppendable _append = it.append("if (Boolean.TRUE) ");
                                 _append.increaseIndentation();
                                 ITreeAppendable _trace = it.trace(e);
                                 PureXbaseJvmModelInferrer.this.compile(e, _trace);
-                                IAppendable _decreaseIndentation = it.decreaseIndentation();
-                                IAppendable _newLine = _decreaseIndentation.newLine();
+                                ITreeAppendable _decreaseIndentation = it.decreaseIndentation();
+                                ITreeAppendable _newLine = _decreaseIndentation.newLine();
                                 _newLine.append("return null;");
                               }
                             }

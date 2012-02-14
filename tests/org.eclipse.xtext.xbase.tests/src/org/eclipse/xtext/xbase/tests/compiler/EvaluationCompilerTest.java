@@ -11,13 +11,13 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -68,9 +68,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	@Inject
 	private IResourceScopeCache cache;
 	
-	@Inject
-	private ILocationInFileProvider locationProvider;
-
 	@Before
 	public void setUp() throws Exception {
 		injector.injectMembers(this);
@@ -125,7 +122,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	protected String compileToJavaCode(String xtendCode) {
 		XExpression model = null;
-		TreeAppendable appendable = new TreeAppendable(locationProvider);
+		ITreeAppendable appendable = new FakeTreeAppendable();
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);
