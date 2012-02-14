@@ -28,6 +28,9 @@ public abstract class AbstractTraceRegion {
 	private AbstractTraceRegion parent;
 	private List<AbstractTraceRegion> nestedRegions;
 
+	/**
+	 * Creates a new trace region and adds it to the parent if a parent was given.
+	 */
 	protected AbstractTraceRegion(@Nullable AbstractTraceRegion parent) {
 		setParent(parent);
 	}
@@ -43,6 +46,12 @@ public abstract class AbstractTraceRegion {
 		return true;
 	}
 
+	/**
+	 * Sets the parent (if any) and maintains the {@link #getWritableNestedRegions() nested regions}
+	 * of the parent.
+	 * @see #setAsChildIn(AbstractTraceRegion)
+	 * @param parent the parent or <code>null</code> if none.
+	 */
 	protected void setParent(@Nullable AbstractTraceRegion parent) {
 		this.parent = parent;
 		if (parent != null)
