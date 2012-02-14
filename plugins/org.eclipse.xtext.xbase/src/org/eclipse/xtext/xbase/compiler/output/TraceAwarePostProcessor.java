@@ -8,8 +8,7 @@
 package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 
 /**
@@ -17,6 +16,7 @@ import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
  * it can harmonize the line breaks and still maintain the trace information.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class TraceAwarePostProcessor extends LineSeparatorHarmonizer {
 
 	@Override
@@ -25,7 +25,7 @@ public class TraceAwarePostProcessor extends LineSeparatorHarmonizer {
 			final String lineSeparator = getWhitespaceInformationProvider().getLineSeparatorInformation(fileURI).getLineSeparator();
 			return ((TreeAppendable) content).acceptVisitor(new TreeAppendable.Visitor() {
 				@Override
-				protected @NonNull String visit(@Nullable String string) {
+				protected String visit(String string) {
 					return replaceLineSeparators(string, lineSeparator);
 				}
 			});

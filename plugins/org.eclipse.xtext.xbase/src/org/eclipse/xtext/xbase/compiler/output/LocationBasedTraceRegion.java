@@ -8,12 +8,14 @@
 package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class LocationBasedTraceRegion extends AbstractTraceRegion {
 	private final LocationData location;
 	private final int offset;
@@ -29,7 +31,7 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 				length += ((String) child).length();
 			} else {
 				TreeAppendable castedChild = (TreeAppendable) child;
-				if (!castedChild.getChildren().isEmpty()) {
+				if (hasVisibleChildren(castedChild)) {
 					LocationBasedTraceRegion childRegion = new LocationBasedTraceRegion(this, castedChild, offset
 							+ length);
 					length += childRegion.getFromLength();
@@ -37,6 +39,16 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 			}
 		}
 		this.length = length;
+	}
+
+	protected boolean hasVisibleChildren(TreeAppendable castedChild) {
+		for(Object o: castedChild.getChildren()) {
+			if (o instanceof String)
+				return true;
+			if (hasVisibleChildren((TreeAppendable) o))
+				return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -63,8 +75,6 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 	@Nullable
 	public URI getToPath() {
 		URI result = location.getSourceURI();
-		if (result == null)
-			return super.getToPath();
 		return result;
 	}
 
@@ -72,8 +82,6 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 	@Nullable
 	public String getToProjectName() {
 		String result = location.getSourceProject();
-		if (result == null)
-			return super.getToProjectName();
 		return result;
 	}
 }
