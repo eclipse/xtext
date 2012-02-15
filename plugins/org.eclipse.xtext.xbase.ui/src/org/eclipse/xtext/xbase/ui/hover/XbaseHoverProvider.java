@@ -45,7 +45,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	
 	@Override
 	protected String getFirstLine(EObject o) {
-		String hoverText = hoverSignatureProvider.getHoverText(o);
+		String hoverText = hoverSignatureProvider.getHoverSignature(o);
 		if(hoverText != null) {
 			return hoverText;
 		}
