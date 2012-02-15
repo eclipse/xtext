@@ -78,10 +78,10 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertEquals("", appendable.getContent());
 		AbstractTraceRegion traceRegion = appendable.getTraceRegion();
 		assertNotNull(traceRegion);
-		assertEquals(47, traceRegion.getToOffset());
-		assertEquals(11, traceRegion.getToLength());
-		assertEquals(resource.getURI(), traceRegion.getToPath());
-		assertEquals("test", traceRegion.getToProjectName());
+		assertEquals(47, traceRegion.getAssociatedOffset());
+		assertEquals(11, traceRegion.getAssociatedLength());
+		assertEquals(resource.getURI(), traceRegion.getAssociatedPath());
+		assertEquals("test", traceRegion.getAssociatedProjectName());
 		assertTrue(traceRegion.getNestedRegions().isEmpty());
 	}
 	
@@ -97,17 +97,17 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertEquals("initialfirstsecond", appendable.getContent());
 		AbstractTraceRegion traceRegion = appendable.getTraceRegion();
 		assertNotNull(traceRegion);
-		assertEquals(47, traceRegion.getToOffset());
-		assertEquals(11, traceRegion.getToLength());
-		assertEquals(0, traceRegion.getFromOffset());
-		assertEquals("initialfirstsecond".length(), traceRegion.getFromLength());
+		assertEquals(47, traceRegion.getAssociatedOffset());
+		assertEquals(11, traceRegion.getAssociatedLength());
+		assertEquals(0, traceRegion.getMyOffset());
+		assertEquals("initialfirstsecond".length(), traceRegion.getMyLength());
 		List<AbstractTraceRegion> nestedRegions = traceRegion.getNestedRegions();
 		assertEquals(1, nestedRegions.size());
 		AbstractTraceRegion child = nestedRegions.get(0);
-		assertEquals(8, child.getToOffset());
-		assertEquals(15, child.getToLength());
-		assertEquals("initialfirst".length(), child.getFromOffset());
-		assertEquals("second".length(), child.getFromLength());
+		assertEquals(8, child.getAssociatedOffset());
+		assertEquals(15, child.getAssociatedLength());
+		assertEquals("initialfirst".length(), child.getMyOffset());
+		assertEquals("second".length(), child.getMyLength());
 	}
 	
 	@Test
@@ -140,10 +140,10 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertEquals(1, child.getNestedRegions().size());
 		AbstractTraceRegion grandChild = child.getNestedRegions().get(0);
 		assertTrue(grandChild.getNestedRegions().isEmpty());
-		assertEquals(0, grandChild.getFromOffset());
-		assertEquals(4, grandChild.getFromLength());
-		assertEquals(123, grandChild.getToOffset());
-		assertEquals(321, grandChild.getToLength());
+		assertEquals(0, grandChild.getMyOffset());
+		assertEquals(4, grandChild.getMyLength());
+		assertEquals(123, grandChild.getAssociatedOffset());
+		assertEquals(321, grandChild.getAssociatedLength());
 	}
 	
 	@Test

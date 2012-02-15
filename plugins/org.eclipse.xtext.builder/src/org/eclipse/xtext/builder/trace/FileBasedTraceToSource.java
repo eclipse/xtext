@@ -97,7 +97,7 @@ public class FileBasedTraceToSource extends AbstractTrace implements ITraceToSou
 	}
 	
 	protected boolean isLanguage(AbstractTraceRegion region, LanguageInfo info) {
-		if (info.equals(findLanguage(region.getToPath())))
+		if (info.equals(findLanguage(region.getAssociatedPath())))
 			return true;
 		return false;
 	}

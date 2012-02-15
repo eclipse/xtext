@@ -42,30 +42,30 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 		public AbstractTraceRegion toRegion(final DebugTraceRegion t) {
 			return new AbstractTraceRegion(null) {
 				@Override
-				public int getToOffset() {
+				public int getAssociatedOffset() {
 					return t.getToOffset();
 				}
 				
 				@Override
-				public int getToLength() {
+				public int getAssociatedLength() {
 					return t.getToLength();
 				}
 				
 				@Override
-				public int getFromOffset() {
+				public int getMyOffset() {
 					return t.getFromOffset();
 				}
 				
 				@Override
-				public int getFromLength() {
+				public int getMyLength() {
 					return t.getFromLength();
 				}
 				@Override
-				public URI getToPath() {
+				public URI getAssociatedPath() {
 					return t.getToPath();
 				}
 				@Override
-				public String getToProjectName() {
+				public String getAssociatedProjectName() {
 					return t.getToProject();
 				}
 			};

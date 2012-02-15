@@ -34,7 +34,7 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 				if (hasVisibleChildren(castedChild)) {
 					LocationBasedTraceRegion childRegion = new LocationBasedTraceRegion(this, castedChild, offset
 							+ length);
-					length += childRegion.getFromLength();
+					length += childRegion.getMyLength();
 				}
 			}
 		}
@@ -52,35 +52,35 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 	}
 
 	@Override
-	public int getFromLength() {
+	public int getMyLength() {
 		return length;
 	}
 
 	@Override
-	public int getFromOffset() {
+	public int getMyOffset() {
 		return offset;
 	}
 
 	@Override
-	public int getToLength() {
+	public int getAssociatedLength() {
 		return location.getSourceLength();
 	}
 
 	@Override
-	public int getToOffset() {
+	public int getAssociatedOffset() {
 		return location.getSourceOffset();
 	}
 
 	@Override
 	@Nullable
-	public URI getToPath() {
+	public URI getAssociatedPath() {
 		URI result = location.getSourceURI();
 		return result;
 	}
 
 	@Override
 	@Nullable
-	public String getToProjectName() {
+	public String getAssociatedProjectName() {
 		String result = location.getSourceProject();
 		return result;
 	}
