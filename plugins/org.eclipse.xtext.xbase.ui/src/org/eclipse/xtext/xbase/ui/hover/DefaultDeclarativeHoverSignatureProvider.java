@@ -46,8 +46,8 @@ public class DefaultDeclarativeHoverSignatureProvider {
 	@Inject
 	protected UIStrings uiStrings;
 
-	public String getHoverText(EObject object) {
-		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_hoverText", 1, 1,
+	public String getHoverSignature(EObject object) {
+		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_hoverSignature", 1, 1,
 				Collections.singletonList(this), new ErrorHandler<String>() {
 					public String handle(Object[] params, Throwable throwable) {
 						return null;
@@ -59,7 +59,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return "<b>" + result + "</b>";
 	}
 
-	protected String _hoverText(JvmGenericType clazz) {
+	protected String _hoverSignature(JvmGenericType clazz) {
 		String imageTag = getImageTag(JavaElementImageProvider.getTypeImageDescriptor(false, false,
 				toFlags(clazz.getVisibility()), false));
 		return imageTag + getSignature(clazz);
@@ -70,7 +70,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return clazz.getPackageName() + "." + clazz.getSimpleName();
 	}
 
-	protected String _hoverText(JvmOperation operation) {
+	protected String _hoverSignature(JvmOperation operation) {
 		if (operation != null) {
 			ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
 					toFlags(operation.getVisibility()));
@@ -101,7 +101,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return jvmOperation.getSimpleName() + uiStrings.parameters(jvmOperation);
 	}
 
-	protected String _hoverText(JvmField field) {
+	protected String _hoverSignature(JvmField field) {
 			ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false,
 					toFlags(field.getVisibility()));
 			String imageTag = "";
@@ -121,7 +121,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
-	protected String _hoverText(JvmConstructor constructor) {
+	protected String _hoverSignature(JvmConstructor constructor) {
 			ImageDescriptor imageDescriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
 					toFlags(constructor.getVisibility()));
 			String imageTag = getImageTag(getDecoratedJdtImageDescriptor(imageDescriptor,
@@ -137,7 +137,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return contructor.getQualifiedName() + " " + uiStrings.parameters(contructor);
 	}
 
-	protected String _hoverText(JvmFormalParameter parameter) {
+	protected String _hoverSignature(JvmFormalParameter parameter) {
 		ImageDescriptor descriptor = JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE;
 		String imageTag = getImageTag(descriptor);
 		return imageTag + " " + getSignature(parameter);
