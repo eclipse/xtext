@@ -95,6 +95,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 
 	@Override
 	protected boolean hasHover(EObject o) {
+		if(o instanceof XSwitchExpression)
+			return false;
 		return o instanceof JvmIdentifiableElement || super.hasHover(o);
 	}
 	
