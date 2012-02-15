@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 
 /**
@@ -18,6 +19,18 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
  */
 @NonNullByDefault
 public class FakeTreeAppendable extends StringBuilderBasedAppendable implements ITreeAppendable {
+
+	public FakeTreeAppendable() {
+		super();
+	}
+
+	public FakeTreeAppendable(ImportManager typeSerializer, String indentation, String lineSeparator) {
+		super(typeSerializer, indentation, lineSeparator);
+	}
+
+	public FakeTreeAppendable(ImportManager typeSerializer) {
+		super(typeSerializer);
+	}
 
 	@Override
 	public ITreeAppendable append(JvmType type) {
