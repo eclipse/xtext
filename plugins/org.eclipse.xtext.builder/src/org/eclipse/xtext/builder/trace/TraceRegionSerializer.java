@@ -71,15 +71,15 @@ public class TraceRegionSerializer {
 			dataStream.writeBoolean(region != null);
 			if (region == null)
 				return;
-			dataStream.writeInt(region.getFromOffset());
-			dataStream.writeInt(region.getFromLength());
-			dataStream.writeInt(region.getToOffset());
-			dataStream.writeInt(region.getToLength());
-			URI toPath = region.getToPath();
+			dataStream.writeInt(region.getMyOffset());
+			dataStream.writeInt(region.getMyLength());
+			dataStream.writeInt(region.getAssociatedOffset());
+			dataStream.writeInt(region.getAssociatedLength());
+			URI toPath = region.getAssociatedPath();
 			dataStream.writeBoolean(toPath != null);
 			if (toPath != null)
 				dataStream.writeUTF(toPath.toString());
-			String toProjectName = region.getToProjectName();
+			String toProjectName = region.getAssociatedProjectName();
 			dataStream.writeBoolean(toProjectName != null);
 			if (toProjectName != null)
 				dataStream.writeUTF(toProjectName);
@@ -95,19 +95,19 @@ public class TraceRegionSerializer {
 		AbstractTraceRegion parent = strategy.toRegion(genericParent);
 		for(Type genericChild: nestedRegions) {
 			AbstractTraceRegion child = strategy.toRegion(genericChild);
-			dataStream.writeInt(child.getFromOffset());
-			dataStream.writeInt(child.getFromLength());
-			dataStream.writeInt(child.getToOffset());
-			dataStream.writeInt(child.getToLength());
-			URI toPath = child.getToPath();
-			if (toPath != null && !toPath.equals(parent.getToPath())) {
+			dataStream.writeInt(child.getMyOffset());
+			dataStream.writeInt(child.getMyLength());
+			dataStream.writeInt(child.getAssociatedOffset());
+			dataStream.writeInt(child.getAssociatedLength());
+			URI toPath = child.getAssociatedPath();
+			if (toPath != null && !toPath.equals(parent.getAssociatedPath())) {
 				dataStream.writeBoolean(true);
 				dataStream.writeUTF(toPath.toString());
 			} else {
 				dataStream.writeBoolean(false);
 			}
-			String toProjectName = child.getToProjectName();
-			if (toProjectName != null && !toProjectName.equals(parent.getToProjectName())) {
+			String toProjectName = child.getAssociatedProjectName();
+			if (toProjectName != null && !toProjectName.equals(parent.getAssociatedProjectName())) {
 				dataStream.writeBoolean(true);
 				dataStream.writeUTF(toProjectName);
 			} else {

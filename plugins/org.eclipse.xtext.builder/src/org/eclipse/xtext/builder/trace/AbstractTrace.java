@@ -52,8 +52,8 @@ public abstract class AbstractTrace implements ITrace {
 	private IWorkspaceRoot workspaceRoot;
 	
 	/**
-	 * Returns the root trace region where {@link TraceRegion#getFromOffset()} and
-	 * {@link TraceRegion#getFromLength()} return the information for the
+	 * Returns the root trace region where {@link TraceRegion#getMyOffset()} and
+	 * {@link TraceRegion#getMyLength()} return the information for the
 	 * resource that this {@link ITrace} is associated with. 
 	 * @return the root trace region. May be <code>null</code> if no trace data is available.
 	 */
@@ -77,8 +77,8 @@ public abstract class AbstractTrace implements ITrace {
 		if (right == null || left.equals(right)) {
 			return createLocationInResourceFor(left);
 		} else {
-			URI leftToPath = left.getToPath();
-			URI rightToPath = right.getToPath();
+			URI leftToPath = left.getAssociatedPath();
+			URI rightToPath = right.getAssociatedPath();
 			if (leftToPath != null && leftToPath.equals(rightToPath) || leftToPath == rightToPath) {
 				return createLocationInResourceFor(left, right);
 			}
@@ -104,9 +104,9 @@ public abstract class AbstractTrace implements ITrace {
 	 * @return the location in resource. Never <code>null</code>.
 	 */
 	protected ILocationInResource createLocationInResourceFor(AbstractTraceRegion left, AbstractTraceRegion right) {
-		int offset = left.getToOffset();
-		int length = right.getToLength() + right.getToOffset() - offset;
-		return new OffsetBasedLocationInResource(offset, length, left.getToPath(), left.getToProjectName(), this);
+		int offset = left.getAssociatedOffset();
+		int length = right.getAssociatedLength() + right.getAssociatedOffset() - offset;
+		return new OffsetBasedLocationInResource(offset, length, left.getAssociatedPath(), left.getAssociatedProjectName(), this);
 	}
 
 	@Nullable
@@ -131,7 +131,7 @@ public abstract class AbstractTrace implements ITrace {
 					candidate = child;
 					continue outer;
 				} else {
-					if (child.getFromOffset() > offset)
+					if (child.getMyOffset() > offset)
 						return candidate;
 				}
 			}
@@ -156,8 +156,8 @@ public abstract class AbstractTrace implements ITrace {
 		if (offset < 0)
 			// TODO should this be return false;?
 			throw new IllegalArgumentException("offset may not be negative");
-		int relativeOffset = offset - region.getFromOffset();
-		boolean result = relativeOffset >= 0 && (includeRegionEnd ? relativeOffset <= region.getFromLength() : relativeOffset < region.getFromLength());
+		int relativeOffset = offset - region.getMyOffset();
+		boolean result = relativeOffset >= 0 && (includeRegionEnd ? relativeOffset <= region.getMyLength() : relativeOffset < region.getMyLength());
 		return result;
 	}
 	
@@ -214,7 +214,7 @@ public abstract class AbstractTrace implements ITrace {
 					{
 						while(allLeafs.hasNext()) {
 							AbstractTraceRegion next = allLeafs.next();
-							if (next.getFromOffset() == left.getFromOffset()) {
+							if (next.getMyOffset() == left.getMyOffset()) {
 								this.first = next;
 								break;
 							}
@@ -231,7 +231,7 @@ public abstract class AbstractTrace implements ITrace {
 						if (!allLeafs.hasNext())
 							return endOfData();
 						AbstractTraceRegion candidate = allLeafs.next();
-						if (candidate.getFromOffset() >= right.getFromOffset() + right.getFromLength()) {
+						if (candidate.getMyOffset() >= right.getMyOffset() + right.getMyLength()) {
 							return endOfData();
 						}
 						return candidate;

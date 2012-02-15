@@ -28,12 +28,12 @@ public class TraceRegionTest extends Assert {
 	@Test
 	public void testConstructor() {
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
-		assertEquals(0, region.getFromOffset());
-		assertEquals(1, region.getFromLength());
-		assertEquals(2, region.getToOffset());
-		assertEquals(3, region.getToLength());
-		assertEquals(URI.createURI("uri"), region.getToPath());
-		assertEquals("project", region.getToProjectName());
+		assertEquals(0, region.getMyOffset());
+		assertEquals(1, region.getMyLength());
+		assertEquals(2, region.getAssociatedOffset());
+		assertEquals(3, region.getAssociatedLength());
+		assertEquals(URI.createURI("uri"), region.getAssociatedPath());
+		assertEquals("project", region.getAssociatedProjectName());
 		assertNull(region.getParent());
 		assertTrue(region.getNestedRegions().isEmpty());
 	}
@@ -42,8 +42,8 @@ public class TraceRegionTest extends Assert {
 	public void testConstructorWithParent() {
 		TraceRegion parent = new TraceRegion(0, 1, 2, 3, null, URI.createURI("uri"), "project");
 		TraceRegion region = new TraceRegion(0, 1, 2, 3, parent, null, null);
-		assertEquals(URI.createURI("uri"), region.getToPath());
-		assertEquals("project", region.getToProjectName());
+		assertEquals(URI.createURI("uri"), region.getAssociatedPath());
+		assertEquals("project", region.getAssociatedProjectName());
 		assertEquals(parent, region.getParent());
 	}
 	
@@ -74,7 +74,7 @@ public class TraceRegionTest extends Assert {
 	
 	public void testConstructor_NoProject() {
 		TraceRegion region = new TraceRegion(0, 0, 0, 0, null, URI.createURI("uri"), null);
-		assertEquals("<unknown>", region.getToProjectName());
+		assertEquals("<unknown>", region.getAssociatedProjectName());
 	}
 	
 	@Test
