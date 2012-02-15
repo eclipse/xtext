@@ -17,8 +17,6 @@ import static org.junit.Assert.*
 
 class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 	
-	private static String FILEEXTENSION = ".xtend"
-	
 	@Inject
 	private ParseHelper<XtendFile> parseHelper;
 	
@@ -60,8 +58,10 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 			/**
 			* SimpleJavaDoc
 			* @see Collections
+			* @see java.util.List
 			* @author FooBar
 			* @since 2.3
+			* @deprecated
 			*/
 			def bar(String a, String b){
 			}
@@ -69,7 +69,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		''',resourceSet)
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
-		assertEquals('''SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections">Collections</a></dd></dl>'''.toString, docu)
+		assertEquals('''<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections">Collections</a></dd><dd><a href="eclipse-xtext-open:java:/Objects/java.util.List%23java.util.List">java.util.List</a></dd></dl>'''.toString, docu)
 	}
 	
 	@Test
@@ -135,6 +135,27 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val docu = documentationProvider.getDocumentation(member)
 		assertEquals('''SimpleJavaDoc
 <code><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
+	}
+	
+	@Test
+	def testJavaDocWithBrokenLink(){
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		
+		class Foo {
+			
+			/**
+			* SimpleJavaDoc
+			* {@link Collections}
+			*/
+			def bar(String a, String b){
+			}
+		}
+		''',resourceSet)
+		val member = xtendFile.xtendClass.members.get(0)
+		val docu = documentationProvider.getDocumentation(member)
+		assertEquals('''SimpleJavaDoc
+<code>Collections</code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
 	}
 	
 	@Test

@@ -26,8 +26,6 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
-  private static String FILEEXTENSION = ".xtend";
-  
   @Inject
   private ParseHelper<XtendFile> parseHelper;
   
@@ -108,10 +106,16 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
         _builder.append("* @see Collections");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("* @see java.util.List");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("* @author FooBar");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("* @since 2.3");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("* @deprecated");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("*/");
@@ -134,7 +138,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
         String _documentation = this.documentationProvider.getDocumentation(member);
         final String docu = _documentation;
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections\">Collections</a></dd></dl>");
+        _builder_1.append("<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections\">Collections</a></dd><dd><a href=\"eclipse-xtext-open:java:/Objects/java.util.List%23java.util.List\">java.util.List</a></dd></dl>");
         String _string = _builder_1.toString();
         Assert.assertEquals(_string, docu);
       }
@@ -292,6 +296,59 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
         _builder_1.append("SimpleJavaDoc");
         _builder_1.newLine();
         _builder_1.append("<code><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+        String _string = _builder_1.toString();
+        Assert.assertEquals(_string, docu);
+      }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJavaDocWithBrokenLink() {
+    try {
+      {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("package testpackage");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("class Foo {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("* SimpleJavaDoc");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("* {@link Collections}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("*/");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("def bar(String a, String b){");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        ResourceSet _resourceSet = this.getResourceSet();
+        XtendFile _parse = this.parseHelper.parse(_builder, _resourceSet);
+        final XtendFile xtendFile = _parse;
+        XtendClass _xtendClass = xtendFile.getXtendClass();
+        EList<XtendMember> _members = _xtendClass.getMembers();
+        XtendMember _get = _members.get(0);
+        final XtendMember member = _get;
+        String _documentation = this.documentationProvider.getDocumentation(member);
+        final String docu = _documentation;
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("SimpleJavaDoc");
+        _builder_1.newLine();
+        _builder_1.append("<code>Collections</code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
         String _string = _builder_1.toString();
         Assert.assertEquals(_string, docu);
       }

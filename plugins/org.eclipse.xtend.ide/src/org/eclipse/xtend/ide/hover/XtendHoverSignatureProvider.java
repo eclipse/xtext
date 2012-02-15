@@ -16,7 +16,7 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.ui.hover.DefaultDeclarativeHoverSignatureProvider;
 
 import com.google.common.collect.Lists;
@@ -30,27 +30,28 @@ public class XtendHoverSignatureProvider extends DefaultDeclarativeHoverSignatur
 	@Inject
 	protected IXtendJvmAssociations associations;
 	
-	protected String _hoverText(XtendClass clazz) {
-		return getHoverText(associations.getInferredType(clazz));
+	
+	protected String _hoverSignature(XtendClass clazz) {
+		return _hoverSignature(associations.getInferredType(clazz));
 	}
 	
-	protected String _hoverText(XtendFunction function) {
-		return getHoverText(associations.getDirectlyInferredOperation(function));
+	protected String _hoverSignature(XtendFunction function) {
+		return _hoverSignature(associations.getDirectlyInferredOperation(function));
 	}
 		
-	protected String _hoverText(XtendField field){
-		return getHoverText(associations.getJvmField(field));
+	protected String _hoverSignature(XtendField field){
+		return _hoverSignature(associations.getJvmField(field));
 	}
 	
-	protected String _hoverText(XtendParameter parameter){
+	protected String _hoverSignature(XtendParameter parameter){
 		Set<EObject> jvmElements = associations.getJvmElements(parameter);
 		if(jvmElements.size() > 0){
-			return getHoverText(Lists.newArrayList(jvmElements).get(0));
+			return _hoverSignature((JvmFormalParameter)Lists.newArrayList(jvmElements).get(0));
 		}
 		return null;
 	}
-	protected String _hoverText(XtendConstructor constructor){
-		return getHoverText(associations.getInferredConstructor(constructor));
+	protected String _hoverSignature(XtendConstructor constructor){
+		return _hoverSignature(associations.getInferredConstructor(constructor));
 	}
 	
 }
