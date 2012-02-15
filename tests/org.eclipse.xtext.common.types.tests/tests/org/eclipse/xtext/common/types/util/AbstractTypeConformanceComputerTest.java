@@ -12,6 +12,7 @@ import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -903,6 +905,15 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 				"java.lang.Comparable<? extends java.lang.Object>",
 				ref(String.class),
 				ref(int.class));
+	}
+	
+	@Test
+	@Ignore
+	public void testCommonSuperType_36() throws Exception {
+		assertCommonSuperType(
+				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",
+				ref(LinkedList.class, ref(String.class)),
+				ref(ArrayList.class, ref(String.class)));
 	}
 	
 	@Test public void testBug343100_01() throws Exception {
