@@ -26,9 +26,9 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 	 * A trace region that will not be added to the child list of the given parent.
 	 */
 	protected static class TemporaryTraceRegion extends AbstractStatefulTraceRegion {
-		protected TemporaryTraceRegion(int fromOffset, int fromLength, int toOffset, int toLength,
+		protected TemporaryTraceRegion(int myOffset, int myLength, int associatedOffset, int associatedLength,
 				AbstractTraceRegion parent) {
-			super(fromOffset, fromLength, toOffset, toLength, parent);
+			super(myOffset, myLength, associatedOffset, associatedLength, parent);
 		}
 
 		@Override
@@ -43,22 +43,22 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 
 	public LeafIterator(AbstractTraceRegion root) {
 		current = root;
-		expectedOffset = root.getFromOffset();
+		expectedOffset = root.getMyOffset();
 	}
 	
 	@Override
 	protected AbstractTraceRegion computeNext() {
-		if (current.getFromOffset() == expectedOffset) {
+		if (current.getMyOffset() == expectedOffset) {
 			return firstLeafOfCurrent();
 		} else {
 			if (current.getNestedRegions().isEmpty()) 
 				current = current.getParent();
 			int idx = traversalIndizes.removeLast();
 			while(idx == current.getNestedRegions().size() - 1) {
-				if (expectedOffset != current.getFromOffset() + current.getFromLength()) {
+				if (expectedOffset != current.getMyOffset() + current.getMyLength()) {
 					traversalIndizes.add(idx);
-					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, current.getFromOffset() + current.getFromLength() - expectedOffset, current.getToOffset(), current.getToLength(), current);
-					expectedOffset = current.getFromOffset() + current.getFromLength();
+					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, current.getMyOffset() + current.getMyLength() - expectedOffset, current.getAssociatedOffset(), current.getAssociatedLength(), current);
+					expectedOffset = current.getMyOffset() + current.getMyLength();
 					return result;
 				}
 				if (traversalIndizes.isEmpty())
@@ -68,15 +68,15 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 			}
 			if (idx < current.getNestedRegions().size() - 1) {
 				AbstractTraceRegion next = current.getNestedRegions().get(idx + 1);
-				if (next.getFromOffset() == expectedOffset) {
+				if (next.getMyOffset() == expectedOffset) {
 					current = next;
 					traversalIndizes.add(idx + 1);
 					return firstLeafOfCurrent();
 				} else {
 					final AbstractTraceRegion parent = current;
-					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, next.getFromOffset() - expectedOffset, current.getToOffset(), current.getToLength(), parent);
+					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, next.getMyOffset() - expectedOffset, current.getAssociatedOffset(), current.getAssociatedLength(), parent);
 					traversalIndizes.add(idx);
-					expectedOffset = next.getFromOffset();
+					expectedOffset = next.getMyOffset();
 					return result;
 				}
 			}
@@ -87,16 +87,16 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 	protected AbstractTraceRegion firstLeafOfCurrent() {
 		while(!current.getNestedRegions().isEmpty()) {
 			AbstractTraceRegion next = current.getNestedRegions().get(0);
-			if (next.getFromOffset() != current.getFromOffset()) {
-				AbstractTraceRegion result = new TemporaryTraceRegion(current.getFromOffset(), next.getFromOffset() - current.getFromOffset(), current.getToOffset(), current.getToLength(), current);
+			if (next.getMyOffset() != current.getMyOffset()) {
+				AbstractTraceRegion result = new TemporaryTraceRegion(current.getMyOffset(), next.getMyOffset() - current.getMyOffset(), current.getAssociatedOffset(), current.getAssociatedLength(), current);
 				traversalIndizes.add(-1);
-				expectedOffset = next.getFromOffset();
+				expectedOffset = next.getMyOffset();
 				return result;
 			}
 			traversalIndizes.add(0);
 			current = next;
 		}
-		expectedOffset = current.getFromOffset() + current.getFromLength();
+		expectedOffset = current.getMyOffset() + current.getMyLength();
 		return current;
 	}
 }

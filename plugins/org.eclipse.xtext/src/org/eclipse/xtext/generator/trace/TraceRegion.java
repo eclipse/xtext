@@ -16,36 +16,36 @@ import org.eclipse.emf.common.util.URI;
  */
 public class TraceRegion extends AbstractStatefulTraceRegion {
 
-	protected final URI toPath;
-	protected final String toProjectName;
+	protected final URI associatedPath;
+	protected final String associatedProjectName;
 	
-	public TraceRegion(int fromOffset, int fromLength, int toOffset, int toLength, AbstractTraceRegion parent, URI toPath, String toProjectName) {
-		super(fromOffset, fromLength, toOffset, toLength, parent);
-		this.toPath = toPath;
+	public TraceRegion(int myOffset, int myLength, int associatedOffset, int associatedLength, AbstractTraceRegion parent, URI associatedPath, String associatedProjectName) {
+		super(myOffset, myLength, associatedOffset, associatedLength, parent);
+		this.associatedPath = associatedPath;
 		if (parent == null) {
-			this.toProjectName = toProjectName == null ? "<unknown>" : toProjectName;
-			if (toPath == null) {
-				throw new IllegalArgumentException("toPath may not be null");
+			this.associatedProjectName = associatedProjectName == null ? "<unknown>" : associatedProjectName;
+			if (associatedPath == null) {
+				throw new IllegalArgumentException("associatedPath may not be null");
 			}
  		} else {
- 			this.toProjectName = toProjectName;
+ 			this.associatedProjectName = associatedProjectName;
  		}
 	}
 
 	@Override
-	public URI getToPath() {
+	public URI getAssociatedPath() {
 		AbstractTraceRegion parent = getParent();
-		if (toPath == null && parent != null)
-			return parent.getToPath();
-		return toPath;
+		if (associatedPath == null && parent != null)
+			return parent.getAssociatedPath();
+		return associatedPath;
 	}
 	
 	@Override
-	public String getToProjectName() {
+	public String getAssociatedProjectName() {
 		AbstractTraceRegion parent = getParent();
-		if (toProjectName == null && parent != null)
-			return parent.getToProjectName();
-		return toProjectName;
+		if (associatedProjectName == null && parent != null)
+			return parent.getAssociatedProjectName();
+		return associatedProjectName;
 	}
 	
 }

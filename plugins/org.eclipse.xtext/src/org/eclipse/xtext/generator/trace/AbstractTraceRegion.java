@@ -39,9 +39,9 @@ public abstract class AbstractTraceRegion {
 		AbstractTraceRegion parent = getParent();
 		if (parent == null)
 			return true;
-		if (parent.getFromOffset() > getFromOffset())
+		if (parent.getMyOffset() > getMyOffset())
 			return false;
-		if (parent.getFromOffset() + parent.getFromLength() < getFromOffset() + getFromLength())
+		if (parent.getMyOffset() + parent.getMyLength() < getMyOffset() + getMyLength())
 			return false;
 		return true;
 	}
@@ -92,13 +92,13 @@ public abstract class AbstractTraceRegion {
 		return new LeafIterator(this);
 	}
 	
-	public abstract int getFromLength();
+	public abstract int getMyLength();
 
-	public abstract int getFromOffset();
+	public abstract int getMyOffset();
 
-	public abstract int getToLength();
+	public abstract int getAssociatedLength();
 
-	public abstract int getToOffset();
+	public abstract int getAssociatedOffset();
 	
 	@Nullable
 	public AbstractTraceRegion getParent() {
@@ -106,18 +106,18 @@ public abstract class AbstractTraceRegion {
 	}
 	
 	@Nullable
-	public URI getToPath() {
+	public URI getAssociatedPath() {
 		AbstractTraceRegion parent = getParent();
 		if (parent != null)
-			return parent.getToPath();
+			return parent.getAssociatedPath();
 		return null;
 	}
 	
 	@Nullable
-	public String getToProjectName() {
+	public String getAssociatedProjectName() {
 		AbstractTraceRegion parent = getParent();
 		if (parent != null)
-			return parent.getToProjectName();
+			return parent.getAssociatedProjectName();
 		return null;
 	}
 	
@@ -131,17 +131,17 @@ public abstract class AbstractTraceRegion {
 	}
 	
 	private int doAnnotateTrace(String input, StringBuilder result, int nextOffset) {
-		if (nextOffset < getFromOffset()) {
-			result.append(input.substring(nextOffset, getFromOffset()));
-			nextOffset = getFromOffset();
+		if (nextOffset < getMyOffset()) {
+			result.append(input.substring(nextOffset, getMyOffset()));
+			nextOffset = getMyOffset();
 		}
-		result.append('<').append(getToOffset()).append(':').append(getToLength()).append("[");
+		result.append('<').append(getAssociatedOffset()).append(':').append(getAssociatedLength()).append("[");
 		for(AbstractTraceRegion nested: getNestedRegions()) {
 			nextOffset = nested.doAnnotateTrace(input, result, nextOffset);
 		}
-		if (nextOffset < getFromOffset() + getFromLength()) {
-			result.append(input.substring(nextOffset, getFromOffset() + getFromLength()));
-			nextOffset = getFromOffset() + getFromLength();
+		if (nextOffset < getMyOffset() + getMyLength()) {
+			result.append(input.substring(nextOffset, getMyOffset() + getMyLength()));
+			nextOffset = getMyOffset() + getMyLength();
 		}
 		result.append(']');
 		return nextOffset;
@@ -150,10 +150,10 @@ public abstract class AbstractTraceRegion {
 	/**
 	 * Returns the hash code value for this region.  The hash code
 	 * of a trace region <code>r</code> is defined to be: <pre>
-	 *       r.getFromOffset() 
-	 *     ^ r.getFromLength()
-	 *     ^ r.getToOffset()
-	 *     ^ r.getToLength()
+	 *       r.getMyOffset() 
+	 *     ^ r.getMyLength()
+	 *     ^ r.getAssociatedOffset()
+	 *     ^ r.getAssociatedLength()
 	 *     ^ (r.getParent() == null ? 0 : r.getParent().hashCode())
      * </pre>
 	 * This ensures that <tt>r1.equals(r2)</tt> implies that
@@ -169,10 +169,10 @@ public abstract class AbstractTraceRegion {
 	@Override
 	public int hashCode() {
 		AbstractTraceRegion parent = getParent();
-		return getFromOffset() 
-		     ^ getFromLength()
-		     ^ getToOffset()
-		     ^ getToLength()
+		return getMyOffset() 
+		     ^ getMyLength()
+		     ^ getAssociatedOffset()
+		     ^ getAssociatedLength()
 		     ^ (parent == null ? 0 : parent.hashCode());
 	}
 
@@ -182,10 +182,10 @@ public abstract class AbstractTraceRegion {
 	 * and <code>r2</code> are considered to be equal if
 	 * 
 	 * <pre>
-	 *     (r1.getFromOffset() == r2.getFromOffset())
-	 *  && (r1.getFromLength() == r2.getFromLength())
-	 *  && (r1.getToOffset() == r2.getToOffset())
-	 *  && (r1.getToLength() == r2.getToLength())
+	 *     (r1.getMyOffset() == r2.getMyOffset())
+	 *  && (r1.getMyLength() == r2.getMyLength())
+	 *  && (r1.getAssociatedOffset() == r2.getAssociatedOffset())
+	 *  && (r1.getAssociatedLength() == r2.getAssociatedLength())
 	 *  && (r1.getParent()==null ?
 	 *      r2.getParent()==null : r1.getParent().equals(r2.getParent()))
 	 * </pre>
@@ -206,13 +206,13 @@ public abstract class AbstractTraceRegion {
 		if (!(obj instanceof AbstractTraceRegion))
 			return false;
 		AbstractTraceRegion other = (AbstractTraceRegion) obj;
-		if (getFromLength() != other.getFromLength())
+		if (getMyLength() != other.getMyLength())
 			return false;
-		if (getFromOffset() != other.getFromOffset())
+		if (getMyOffset() != other.getMyOffset())
 			return false;
-		if (getToOffset() != other.getToOffset())
+		if (getAssociatedOffset() != other.getAssociatedOffset())
 			return false;
-		if (getToLength() != other.getToLength())
+		if (getAssociatedLength() != other.getAssociatedLength())
 			return false;
 		AbstractTraceRegion otherParent = other.getParent();
 		AbstractTraceRegion parent = getParent();
@@ -230,8 +230,8 @@ public abstract class AbstractTraceRegion {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [fromOffset=" + getFromOffset() + ", fromLength=" + getFromLength() + ", toOffset="
-				+ getToOffset() + ", toLength=" + getToLength() + ", nestedRegions=" + getNestedRegions() + "]";
+		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + ", associatedOffset="
+				+ getAssociatedOffset() + ", associatedLength=" + getAssociatedLength() + ", nestedRegions=" + getNestedRegions() + "]";
 	}
 	
 	
