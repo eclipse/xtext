@@ -33,13 +33,13 @@ public interface ICompletionProposalComparator extends Comparator<ICompletionPro
 			return o1.getDisplayString().compareTo(o2.getDisplayString());
 		}
 
-		  /**
-		   * Returns relevance of given proposal.
-		   * 
-		   * @param proposal
-		   *          proposal
-		   * @return relevance (higher value indicates higher relevance)
-		   */
+		/**
+		 * Returns relevance of given proposal.
+		 * 
+		 * @param proposal either a {@link ConfigurableCompletionProposal} or a {@link TemplateProposal}
+		 * @return relevance (higher value indicates higher relevance) or <code>null</code>
+		 * @since 2.3
+		 */
 		protected Integer getRelevance(ICompletionProposal proposal) {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				return ((ConfigurableCompletionProposal) proposal).getPriority();
