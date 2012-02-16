@@ -28,11 +28,11 @@ public interface ITrace {
 	 * <ul>
 	 * <li>
 	 * 		If the region spans multiple locations where the first and the last location belong
-	 * 		to the same resources, the merged location is returned.
+	 * 		to the same resource, the merged location is returned.
 	 * </li>
 	 * <li>
 	 * 		If the region spans multiple locations that belong to different resources, the longest
-	 *      prefix location for a single resources is returned.
+	 *      prefix location for a single resource is returned.
 	 * </li>
 	 * <li>
 	 * 		If the region spans multiple overlapping locations that belong to different resources,

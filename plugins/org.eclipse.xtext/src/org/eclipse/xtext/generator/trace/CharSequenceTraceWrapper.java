@@ -76,7 +76,8 @@ public class CharSequenceTraceWrapper {
 		}
 
 		public AbstractTraceRegion getTraceRegion() {
-			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), originOffset, originLength, null, originURI, originProject);
+			ILocationData locationData = new LocationData(originOffset, originLength, originURI, originProject);
+			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), locationData, null);
 			return result;
 		}
 

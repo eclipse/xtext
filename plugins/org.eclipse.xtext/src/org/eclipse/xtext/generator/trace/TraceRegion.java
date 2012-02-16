@@ -7,45 +7,76 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+
+import com.google.common.collect.ImmutableList;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
+@NonNullByDefault
 public class TraceRegion extends AbstractStatefulTraceRegion {
 
-	protected final URI associatedPath;
-	protected final String associatedProjectName;
+	public TraceRegion(int myOffset, int myLength, int associatedOffset, int associatedLength, 
+			@Nullable AbstractTraceRegion parent, @Nullable URI associatedPath, @Nullable String associatedProject) {
+		this(myOffset, myLength, new LocationData(associatedOffset, associatedLength, associatedPath, associatedProject), parent);
+	}
 	
-	public TraceRegion(int myOffset, int myLength, int associatedOffset, int associatedLength, AbstractTraceRegion parent, URI associatedPath, String associatedProjectName) {
-		super(myOffset, myLength, associatedOffset, associatedLength, parent);
-		this.associatedPath = associatedPath;
+	public TraceRegion(int myOffset, int myLength, ILocationData locationData, @Nullable AbstractTraceRegion parent) {
+		super(myOffset, myLength, locationData, parent);
 		if (parent == null) {
-			this.associatedProjectName = associatedProjectName == null ? "<unknown>" : associatedProjectName;
-			if (associatedPath == null) {
+			if (locationData.getLocation() == null) {
 				throw new IllegalArgumentException("associatedPath may not be null");
 			}
+			if (locationData.getProjectName() == null) {
+				throw new IllegalArgumentException("associatedProjectName may not be null");
+			}
  		} else {
- 			this.associatedProjectName = associatedProjectName;
+ 			if (parent.getAssociatedPath() == null && locationData.getLocation() == null) {
+ 				throw new IllegalArgumentException("associatedPath may not be null");
+ 			}
+ 			if (parent.getAssociatedProjectName() == null && locationData.getProjectName() == null) {
+				throw new IllegalArgumentException("associatedProjectName may not be null");
+			}
+ 		}
+	}
+	
+	public TraceRegion(int myOffset, int myLength, List<ILocationData> allLocationData, @Nullable AbstractTraceRegion parent) {
+		super(myOffset, myLength, ImmutableList.copyOf(allLocationData), parent);
+		if (parent == null) {
+			for(ILocationData locationData: allLocationData) {
+				if (locationData.getLocation() == null) {
+					throw new IllegalArgumentException("associatedPath may not be null");
+				}
+				if (locationData.getProjectName() == null) {
+					throw new IllegalArgumentException("associatedProjectName may not be null");
+				}
+			}
+ 		} else {
+ 			boolean nullSeen = false;
+ 			boolean notNullSeen = false;
+ 			for(ILocationData locationData: allLocationData) {
+ 				if (locationData.getLocation() == null) {
+ 					nullSeen = true;
+ 				} else {
+ 					notNullSeen = true;
+ 				}
+ 				if (nullSeen && notNullSeen) {
+ 					throw new IllegalArgumentException("list of locations is inconsistent");
+ 				}
+ 			}
+ 			if (parent.getAssociatedPath() == null) {
+ 				if (nullSeen) {
+ 					throw new IllegalArgumentException("list of locations is inconsistent with parent");
+ 				}
+ 			}
  		}
 	}
 
-	@Override
-	public URI getAssociatedPath() {
-		AbstractTraceRegion parent = getParent();
-		if (associatedPath == null && parent != null)
-			return parent.getAssociatedPath();
-		return associatedPath;
-	}
-	
-	@Override
-	public String getAssociatedProjectName() {
-		AbstractTraceRegion parent = getParent();
-		if (associatedProjectName == null && parent != null)
-			return parent.getAssociatedProjectName();
-		return associatedProjectName;
-	}
-	
 }
