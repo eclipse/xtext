@@ -38,6 +38,21 @@ public class StacktraceBasedEditorDecider {
 		return Decision.FAVOR_XBASE;
 	}
 	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	public boolean isCalledFromFindReferences() {
+		StackTraceElement[] trace = new Exception().getStackTrace();
+		for(StackTraceElement element: trace) {
+//			if (isOpenTypeAction(element))
+//				return Decision.FORCE_XBASE;
+			if (isFindReferences(element))
+				return true;
+		}
+		return false;
+	}
+	
 	// It is currently not possible to supersede an open editor
 	// thus if a Java editor for Foo.java is open and the user wants to
 	// open Foo.xtend, the Open Type dialog will always reveal Foo.java since
@@ -46,6 +61,14 @@ public class StacktraceBasedEditorDecider {
 //	protected boolean isOpenTypeAction(StackTraceElement element) {
 //		return "org.eclipse.jdt.internal.ui.actions.OpenTypeAction".equals(element.getClassName());
 //	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected boolean isFindReferences(StackTraceElement element) {
+		return "org.eclipse.jdt.internal.ui.search.JavaSearchEditorOpener".equals(element.getClassName()) && "openElement".equals(element.getMethodName());
+	}
 	
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
