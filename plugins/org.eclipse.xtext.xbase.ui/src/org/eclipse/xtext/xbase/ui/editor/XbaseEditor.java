@@ -57,10 +57,13 @@ public class XbaseEditor extends XtextEditor {
 	
 	@Inject
 	private LanguageInfo languageInfo;
+	
+	@Inject
+	private StacktraceBasedEditorDecider calleeAnalyzer;
 
 	private IResource javaResource = null;
 	
-	private boolean expectJavaSelection = false;
+	private int expectJavaSelection = 0;
 	
 	@Override
 	public void saveState(IMemento memento) {
@@ -119,13 +122,15 @@ public class XbaseEditor extends XtextEditor {
 	}
 
 	public void markNextSelectionAsJavaOffset(IResource javaResource) {
-		this.expectJavaSelection = true;
+		this.expectJavaSelection++;
+		if (calleeAnalyzer.isCalledFromFindReferences())
+			this.expectJavaSelection++;
 		this.javaResource = javaResource;
 	}
 	
 	@Override
 	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
-		if (expectJavaSelection) {
+		if (expectJavaSelection > 0) {
 			ITraceToSource traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
 			if (traceToSource != null) {
 				ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
@@ -143,7 +148,7 @@ public class XbaseEditor extends XtextEditor {
 						if (fixedReveal == null) {
 							fixedReveal = fixedSelection;
 						}
-						expectJavaSelection = false;
+						expectJavaSelection--;
 						super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
 						return;
 					}
