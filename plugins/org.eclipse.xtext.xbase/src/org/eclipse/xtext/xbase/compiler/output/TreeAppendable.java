@@ -7,19 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler.output;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -72,7 +79,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	private List<Object> children;
 	private final SharedAppendableState state;
 	private final ILocationInFileProvider locationProvider;
-	private final LocationData locationData;
+	private final Set<ILocationData> locationData;
 	private boolean closed = false;
 
 	public TreeAppendable(ImportManager importManager, ILocationInFileProvider locationProvider, EObject source,
@@ -81,22 +88,24 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ILocationInFileProvider locationProvider, EObject source) {
-		this(state, locationProvider, new LocationData(locationProvider, source));
+		this(state, locationProvider, Collections.singleton(createLocationData(locationProvider, source)));
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ILocationInFileProvider locationProvider,
-			@Nullable LocationData sourceLocation) {
+			Set<ILocationData> sourceLocations) {
 		this.state = state;
 		this.locationProvider = locationProvider;
 		this.children = Lists.newArrayList();
-		this.locationData = sourceLocation;
+		this.locationData = sourceLocations;
 	}
 
 	public TreeAppendable trace(EObject object) {
-		if (locationData == null)
-			return this;
 		// TODO use locationProvider from service registry
-		LocationData newData = new LocationData(locationProvider, object);
+		Set<ILocationData> newData = Collections.singleton(createLocationData(locationProvider, object));
+		return trace(newData);
+	}
+
+	protected TreeAppendable trace(Set<ILocationData> newData) {
 		if (newData.equals(locationData)) {
 			return this;
 		}
@@ -105,11 +114,35 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return result;
 	}
 
+	protected static ILocationData createLocationData(ILocationInFileProvider locationProvider, EObject object) {
+		ITextRegion textRegion = locationProvider.getSignificantTextRegion(object);
+		URI uri = object.eResource().getURI();
+//		setData(uri, null, textRegion.getOffset(), textRegion.getLength());
+		String projectName = null;
+		if (uri.isPlatformResource()) {
+			projectName = uri.segment(1);
+		}
+		ILocationData newData = new LocationData(textRegion.getOffset(), textRegion.getLength(), uri, projectName);
+		return newData;
+	}
+	
+	public ITreeAppendable trace(List<EObject> objects) {
+		if (objects.isEmpty())
+			throw new IllegalArgumentException("List of objects may not be empty");
+		if (objects.size() == 1)
+			return trace(objects.get(0));
+		Set<ILocationData> newData = Sets.newHashSetWithExpectedSize(objects.size());
+		for(EObject object: objects) {
+			newData.add(createLocationData(locationProvider, object));
+		}
+		return trace(newData);
+	}
+
 	public TreeAppendable acceptVisitor(TreeAppendable.Visitor visitor) {
 		return visitor.visit(this);
 	}
 
-	public LocationData getLocationData() {
+	public Set<ILocationData> getLocationData() {
 		return locationData;
 	}
 	
@@ -272,7 +305,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		if (locationData == null) {
 			throw new IllegalStateException("tree appendabel was used without tracing");
 		}
-		return new LocationBasedTraceRegion(null, this, 0);
+		return new AppendableBasedTraceRegion(null, this, 0);
 	}
 
 	protected void appendIndented(String text) {

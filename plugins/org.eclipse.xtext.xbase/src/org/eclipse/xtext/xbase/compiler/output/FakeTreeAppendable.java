@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler.output;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
@@ -70,6 +72,10 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 		return this;
 	}
 
+	public ITreeAppendable trace(List<EObject> objects) {
+		return this;
+	}
+	
 	public ITreeAppendable append(ITreeAppendable other) {
 		throw new UnsupportedOperationException("FakeTreeAppendable cannot append another ITreeAppendable");
 	}
