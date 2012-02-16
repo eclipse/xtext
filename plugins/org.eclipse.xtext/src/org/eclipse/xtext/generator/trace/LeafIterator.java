@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.trace;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 
@@ -26,9 +27,9 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 	 * A trace region that will not be added to the child list of the given parent.
 	 */
 	protected static class TemporaryTraceRegion extends AbstractStatefulTraceRegion {
-		protected TemporaryTraceRegion(int myOffset, int myLength, int associatedOffset, int associatedLength,
+		protected TemporaryTraceRegion(int myOffset, int myLength, List<ILocationData> locations,
 				AbstractTraceRegion parent) {
-			super(myOffset, myLength, associatedOffset, associatedLength, parent);
+			super(myOffset, myLength, locations, parent);
 		}
 
 		@Override
@@ -57,7 +58,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 			while(idx == current.getNestedRegions().size() - 1) {
 				if (expectedOffset != current.getMyOffset() + current.getMyLength()) {
 					traversalIndizes.add(idx);
-					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, current.getMyOffset() + current.getMyLength() - expectedOffset, current.getAssociatedOffset(), current.getAssociatedLength(), current);
+					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, current.getMyOffset() + current.getMyLength() - expectedOffset, current.getAssociatedLocations(), current);
 					expectedOffset = current.getMyOffset() + current.getMyLength();
 					return result;
 				}
@@ -74,7 +75,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 					return firstLeafOfCurrent();
 				} else {
 					final AbstractTraceRegion parent = current;
-					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, next.getMyOffset() - expectedOffset, current.getAssociatedOffset(), current.getAssociatedLength(), parent);
+					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, next.getMyOffset() - expectedOffset, current.getAssociatedLocations(), parent);
 					traversalIndizes.add(idx);
 					expectedOffset = next.getMyOffset();
 					return result;
@@ -88,7 +89,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 		while(!current.getNestedRegions().isEmpty()) {
 			AbstractTraceRegion next = current.getNestedRegions().get(0);
 			if (next.getMyOffset() != current.getMyOffset()) {
-				AbstractTraceRegion result = new TemporaryTraceRegion(current.getMyOffset(), next.getMyOffset() - current.getMyOffset(), current.getAssociatedOffset(), current.getAssociatedLength(), current);
+				AbstractTraceRegion result = new TemporaryTraceRegion(current.getMyOffset(), next.getMyOffset() - current.getMyOffset(), current.getAssociatedLocations(), current);
 				traversalIndizes.add(-1);
 				expectedOffset = next.getMyOffset();
 				return result;

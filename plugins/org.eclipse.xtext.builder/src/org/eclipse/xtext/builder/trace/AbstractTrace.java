@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.TraceRegion;
@@ -29,11 +30,11 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.TextRegion;
 
-import com.google.common.base.Function;
 import com.google.common.collect.AbstractIterator;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -70,17 +71,27 @@ public abstract class AbstractTrace implements ITrace {
 	@Nullable
 	protected ILocationInResource mergeRegions(@Nullable AbstractTraceRegion left, @Nullable AbstractTraceRegion right) {
 		if (left == null) {
-			if (right != null)
-				return createLocationInResourceFor(right);
+			if (right != null) {
+				ILocationData locationData = right.getMergedLocationData();
+				if (locationData != null)
+					return createLocationInResourceFor(locationData, right);
+			}
 			return null;
 		}
 		if (right == null || left.equals(right)) {
-			return createLocationInResourceFor(left);
+			ILocationData locationData = left.getMergedLocationData();
+			if (locationData != null)
+				return createLocationInResourceFor(locationData, left);
+			return null;
 		} else {
 			URI leftToPath = left.getAssociatedPath();
 			URI rightToPath = right.getAssociatedPath();
 			if (leftToPath != null && leftToPath.equals(rightToPath) || leftToPath == rightToPath) {
-				return createLocationInResourceFor(left, right);
+				ILocationData firstLocation = left.getMergedLocationData();
+				ILocationData secondLocation = left.getMergedLocationData();
+				if (firstLocation != null && secondLocation != null)
+					return createLocationInResourceFor(firstLocation, secondLocation, left);
+				return null;
 			}
 		} 
 		// TODO the remaining cases have yet to be implemented
@@ -88,25 +99,32 @@ public abstract class AbstractTrace implements ITrace {
 	}
 
 	/**
-	 * Creates a new location for a target resource that matches the given {@code traceRegion}.
-	 * @param traceRegion the start of the location
+	 * Creates a new location for a target resource that matches the given {@code location}.
+	 * @param location the location
 	 * @return the location in resource. Never <code>null</code>.
 	 */
-	protected ILocationInResource createLocationInResourceFor(AbstractTraceRegion traceRegion) {
-		return createLocationInResourceFor(traceRegion, traceRegion);
+	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
+		return createLocationInResourceFor(location, location, traceRegion);
 	}
 	
 	/**
 	 * Creates a new location for a target resource where the location spans more than one trace region.
 	 * The given left and right region have to point to the very same resource and project.
-	 * @param left the start of the location
-	 * @param right the end of the location
+	 * @param firstData the first available location data
+	 * @param second the second available location data
 	 * @return the location in resource. Never <code>null</code>.
 	 */
-	protected ILocationInResource createLocationInResourceFor(AbstractTraceRegion left, AbstractTraceRegion right) {
-		int offset = left.getAssociatedOffset();
-		int length = right.getAssociatedLength() + right.getAssociatedOffset() - offset;
-		return new OffsetBasedLocationInResource(offset, length, left.getAssociatedPath(), left.getAssociatedProjectName(), this);
+	protected ILocationInResource createLocationInResourceFor(ILocationData firstData, ILocationData second, AbstractTraceRegion traceRegion) {
+		ITextRegion firstRegion = new TextRegion(firstData.getOffset(), firstData.getLength());
+		ITextRegion secondRegion = new TextRegion(second.getOffset(), second.getLength());
+		ITextRegion merge = firstRegion.merge(secondRegion);
+		URI path = firstData.getLocation();
+		if (path == null)
+			path = traceRegion.getAssociatedPath();
+		String projectName = firstData.getProjectName();
+		if (projectName == null)
+			projectName = traceRegion.getAssociatedProjectName();
+		return new OffsetBasedLocationInResource(merge.getOffset(), merge.getLength(), path, projectName, this);
 	}
 
 	@Nullable
@@ -186,13 +204,13 @@ public abstract class AbstractTrace implements ITrace {
 	}
 	
 	protected Iterable<ILocationInResource> toLocations(Iterable<AbstractTraceRegion> allTraceRegions) {
-		return Iterables.transform(allTraceRegions, new Function<AbstractTraceRegion, ILocationInResource>() {
-			public ILocationInResource apply(@Nullable AbstractTraceRegion input) {
-				if (input == null)
-					throw new IllegalArgumentException("input may not be null.");
-				return createLocationInResourceFor(input);
+		List<ILocationInResource> result = Lists.newArrayList();
+		for(AbstractTraceRegion region: allTraceRegions) {
+			for(ILocationData locationData: region.getAssociatedLocations()) {
+				result.add(createLocationInResourceFor(locationData, region));
 			}
-		});
+		}
+		return result;
 	}
 
 	protected Iterable<AbstractTraceRegion> getAllTraceRegions(ITextRegion region) {

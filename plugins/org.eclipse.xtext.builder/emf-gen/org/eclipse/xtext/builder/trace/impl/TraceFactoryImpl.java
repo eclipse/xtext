@@ -60,6 +60,7 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case TracePackage.DEBUG_TRACE_REGION: return createDebugTraceRegion();
+			case TracePackage.DEBUG_LOCATION_DATA: return createDebugLocationData();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +104,16 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	public DebugTraceRegion createDebugTraceRegion() {
 		DebugTraceRegionImpl debugTraceRegion = new DebugTraceRegionImpl();
 		return debugTraceRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DebugLocationData createDebugLocationData() {
+		DebugLocationDataImpl debugLocationData = new DebugLocationDataImpl();
+		return debugLocationData;
 	}
 
 	/**

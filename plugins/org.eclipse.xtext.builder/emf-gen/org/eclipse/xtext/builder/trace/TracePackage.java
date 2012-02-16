@@ -76,58 +76,22 @@ public interface TracePackage extends EPackage {
 	int DEBUG_TRACE_REGION__LABEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>From Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>My Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__FROM_OFFSET = 1;
+	int DEBUG_TRACE_REGION__MY_OFFSET = 1;
 
 	/**
-	 * The feature id for the '<em><b>From Length</b></em>' attribute.
+	 * The feature id for the '<em><b>My Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__FROM_LENGTH = 2;
-
-	/**
-	 * The feature id for the '<em><b>To Offset</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEBUG_TRACE_REGION__TO_OFFSET = 3;
-
-	/**
-	 * The feature id for the '<em><b>To Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEBUG_TRACE_REGION__TO_LENGTH = 4;
-
-	/**
-	 * The feature id for the '<em><b>To Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEBUG_TRACE_REGION__TO_PROJECT = 5;
-
-	/**
-	 * The feature id for the '<em><b>To Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEBUG_TRACE_REGION__TO_PATH = 6;
+	int DEBUG_TRACE_REGION__MY_LENGTH = 2;
 
 	/**
 	 * The feature id for the '<em><b>Nested Regions</b></em>' containment reference list.
@@ -136,25 +100,25 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__NESTED_REGIONS = 7;
+	int DEBUG_TRACE_REGION__NESTED_REGIONS = 3;
 
 	/**
-	 * The feature id for the '<em><b>From End Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>My End Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__FROM_END_OFFSET = 8;
+	int DEBUG_TRACE_REGION__MY_END_OFFSET = 4;
 
 	/**
-	 * The feature id for the '<em><b>To End Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Associations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__TO_END_OFFSET = 9;
+	int DEBUG_TRACE_REGION__ASSOCIATIONS = 5;
 
 	/**
 	 * The number of structural features of the '<em>Debug Trace Region</em>' class.
@@ -163,7 +127,80 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION_FEATURE_COUNT = 10;
+	int DEBUG_TRACE_REGION_FEATURE_COUNT = 6;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl <em>Debug Location Data</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl
+	 * @see org.eclipse.xtext.builder.trace.impl.TracePackageImpl#getDebugLocationData()
+	 * @generated
+	 */
+	int DEBUG_LOCATION_DATA = 1;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__LABEL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__OFFSET = 1;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__LENGTH = 2;
+
+	/**
+	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__PROJECT_NAME = 3;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__PATH = 4;
+
+	/**
+	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__END_OFFSET = 5;
+
+	/**
+	 * The number of structural features of the '<em>Debug Location Data</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -173,7 +210,7 @@ public interface TracePackage extends EPackage {
 	 * @see org.eclipse.xtext.builder.trace.impl.TracePackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 1;
+	int URI = 2;
 
 
 	/**
@@ -187,72 +224,6 @@ public interface TracePackage extends EPackage {
 	EClass getDebugTraceRegion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getFromOffset <em>From Offset</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>From Offset</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getFromOffset()
-	 * @see #getDebugTraceRegion()
-	 * @generated
-	 */
-	EAttribute getDebugTraceRegion_FromOffset();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getFromLength <em>From Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>From Length</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getFromLength()
-	 * @see #getDebugTraceRegion()
-	 * @generated
-	 */
-	EAttribute getDebugTraceRegion_FromLength();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getToOffset <em>To Offset</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To Offset</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getToOffset()
-	 * @see #getDebugTraceRegion()
-	 * @generated
-	 */
-	EAttribute getDebugTraceRegion_ToOffset();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getToLength <em>To Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To Length</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getToLength()
-	 * @see #getDebugTraceRegion()
-	 * @generated
-	 */
-	EAttribute getDebugTraceRegion_ToLength();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getToProject <em>To Project</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To Project</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getToProject()
-	 * @see #getDebugTraceRegion()
-	 * @generated
-	 */
-	EAttribute getDebugTraceRegion_ToProject();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getToPath <em>To Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To Path</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getToPath()
-	 * @see #getDebugTraceRegion()
-	 * @generated
-	 */
-	EAttribute getDebugTraceRegion_ToPath();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getNestedRegions <em>Nested Regions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -262,6 +233,104 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDebugTraceRegion_NestedRegions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndOffset <em>My End Offset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My End Offset</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndOffset()
+	 * @see #getDebugTraceRegion()
+	 * @generated
+	 */
+	EAttribute getDebugTraceRegion_MyEndOffset();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getAssociations <em>Associations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Associations</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getAssociations()
+	 * @see #getDebugTraceRegion()
+	 * @generated
+	 */
+	EReference getDebugTraceRegion_Associations();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.builder.trace.DebugLocationData <em>Debug Location Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Debug Location Data</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData
+	 * @generated
+	 */
+	EClass getDebugLocationData();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLabel <em>Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Label</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getLabel()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_Label();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getOffset <em>Offset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Offset</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getOffset()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_Offset();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLength <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Length</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getLength()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_Length();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getProjectName <em>Project Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Project Name</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getProjectName()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_ProjectName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getPath()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_Path();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getEndOffset <em>End Offset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>End Offset</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getEndOffset()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_EndOffset();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getLabel <em>Label</em>}'.
@@ -275,26 +344,26 @@ public interface TracePackage extends EPackage {
 	EAttribute getDebugTraceRegion_Label();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getFromEndOffset <em>From End Offset</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyOffset <em>My Offset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>From End Offset</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getFromEndOffset()
+	 * @return the meta object for the attribute '<em>My Offset</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyOffset()
 	 * @see #getDebugTraceRegion()
 	 * @generated
 	 */
-	EAttribute getDebugTraceRegion_FromEndOffset();
+	EAttribute getDebugTraceRegion_MyOffset();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getToEndOffset <em>To End Offset</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLength <em>My Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To End Offset</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getToEndOffset()
+	 * @return the meta object for the attribute '<em>My Length</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLength()
 	 * @see #getDebugTraceRegion()
 	 * @generated
 	 */
-	EAttribute getDebugTraceRegion_ToEndOffset();
+	EAttribute getDebugTraceRegion_MyLength();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -340,60 +409,86 @@ public interface TracePackage extends EPackage {
 		EClass DEBUG_TRACE_REGION = eINSTANCE.getDebugTraceRegion();
 
 		/**
-		 * The meta object literal for the '<em><b>From Offset</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_TRACE_REGION__FROM_OFFSET = eINSTANCE.getDebugTraceRegion_FromOffset();
-
-		/**
-		 * The meta object literal for the '<em><b>From Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_TRACE_REGION__FROM_LENGTH = eINSTANCE.getDebugTraceRegion_FromLength();
-
-		/**
-		 * The meta object literal for the '<em><b>To Offset</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_TRACE_REGION__TO_OFFSET = eINSTANCE.getDebugTraceRegion_ToOffset();
-
-		/**
-		 * The meta object literal for the '<em><b>To Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_TRACE_REGION__TO_LENGTH = eINSTANCE.getDebugTraceRegion_ToLength();
-
-		/**
-		 * The meta object literal for the '<em><b>To Project</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_TRACE_REGION__TO_PROJECT = eINSTANCE.getDebugTraceRegion_ToProject();
-
-		/**
-		 * The meta object literal for the '<em><b>To Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_TRACE_REGION__TO_PATH = eINSTANCE.getDebugTraceRegion_ToPath();
-
-		/**
 		 * The meta object literal for the '<em><b>Nested Regions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference DEBUG_TRACE_REGION__NESTED_REGIONS = eINSTANCE.getDebugTraceRegion_NestedRegions();
+
+		/**
+		 * The meta object literal for the '<em><b>My End Offset</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_TRACE_REGION__MY_END_OFFSET = eINSTANCE.getDebugTraceRegion_MyEndOffset();
+
+		/**
+		 * The meta object literal for the '<em><b>Associations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEBUG_TRACE_REGION__ASSOCIATIONS = eINSTANCE.getDebugTraceRegion_Associations();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl <em>Debug Location Data</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl
+		 * @see org.eclipse.xtext.builder.trace.impl.TracePackageImpl#getDebugLocationData()
+		 * @generated
+		 */
+		EClass DEBUG_LOCATION_DATA = eINSTANCE.getDebugLocationData();
+
+		/**
+		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__LABEL = eINSTANCE.getDebugLocationData_Label();
+
+		/**
+		 * The meta object literal for the '<em><b>Offset</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__OFFSET = eINSTANCE.getDebugLocationData_Offset();
+
+		/**
+		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__LENGTH = eINSTANCE.getDebugLocationData_Length();
+
+		/**
+		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__PROJECT_NAME = eINSTANCE.getDebugLocationData_ProjectName();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__PATH = eINSTANCE.getDebugLocationData_Path();
+
+		/**
+		 * The meta object literal for the '<em><b>End Offset</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__END_OFFSET = eINSTANCE.getDebugLocationData_EndOffset();
 
 		/**
 		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
@@ -404,20 +499,20 @@ public interface TracePackage extends EPackage {
 		EAttribute DEBUG_TRACE_REGION__LABEL = eINSTANCE.getDebugTraceRegion_Label();
 
 		/**
-		 * The meta object literal for the '<em><b>From End Offset</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>My Offset</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DEBUG_TRACE_REGION__FROM_END_OFFSET = eINSTANCE.getDebugTraceRegion_FromEndOffset();
+		EAttribute DEBUG_TRACE_REGION__MY_OFFSET = eINSTANCE.getDebugTraceRegion_MyOffset();
 
 		/**
-		 * The meta object literal for the '<em><b>To End Offset</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>My Length</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DEBUG_TRACE_REGION__TO_END_OFFSET = eINSTANCE.getDebugTraceRegion_ToEndOffset();
+		EAttribute DEBUG_TRACE_REGION__MY_LENGTH = eINSTANCE.getDebugTraceRegion_MyLength();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

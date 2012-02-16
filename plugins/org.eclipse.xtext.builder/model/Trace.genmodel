@@ -8,15 +8,19 @@
     <genDataTypes ecoreDataType="Trace.ecore#//URI"/>
     <genClasses ecoreClass="Trace.ecore#//DebugTraceRegion">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/label"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/fromOffset"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/fromLength"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toOffset"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toLength"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toProject"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myLength"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/nestedRegions"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/fromEndOffset"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/toEndOffset"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myEndOffset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/associations"/>
+    </genClasses>
+    <genClasses ecoreClass="Trace.ecore#//DebugLocationData">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/offset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/projectName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/path"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/endOffset"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

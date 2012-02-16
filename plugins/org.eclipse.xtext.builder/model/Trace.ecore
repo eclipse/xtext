@@ -5,26 +5,31 @@
   <eClassifiers xsi:type="ecore:EClass" name="DebugTraceRegion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromOffset" unique="false"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="myOffset" unique="false"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromLength" unique="false"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="myLength" unique="false"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toOffset" unique="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toLength" unique="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toProject" unique="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toPath" unique="false"
-        eType="#//URI"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedRegions" upperBound="-1"
         eType="#//DebugTraceRegion" containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromEndOffset" unique="false"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="myEndOffset" unique="false"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toEndOffset" unique="false"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//DebugLocationData" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DebugLocationData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endOffset" unique="false"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
 </ecore:EPackage>

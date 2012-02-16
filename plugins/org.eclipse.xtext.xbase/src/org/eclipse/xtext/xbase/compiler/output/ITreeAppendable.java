@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler.output;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
@@ -22,6 +24,11 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 
 	ITreeAppendable trace(EObject object);
+	
+	/**
+	 * @param objects the list of objects that contribute output. May not be empty.
+	 */
+	ITreeAppendable trace(List<EObject> objects);
 	
 	ITreeAppendable append(ITreeAppendable other);
 	

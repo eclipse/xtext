@@ -7,24 +7,53 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler.output;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.LocationData;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class LocationBasedTraceRegion extends AbstractTraceRegion {
-	private final LocationData location;
+public class AppendableBasedTraceRegion extends AbstractTraceRegion {
+	private final List<ILocationData> locations;
 	private final int offset;
 	private final int length;
 
-	public LocationBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset) {
+	public AppendableBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset) {
 		super(parent);
 		this.offset = offset;
-		this.location = delegate.getLocationData();
+		if (parent == null) {
+			this.locations = Lists.newArrayList(delegate.getLocationData());
+		} else {
+			URI parentPath = parent.getAssociatedPath();
+			if (parentPath == null) {
+				this.locations = Lists.newArrayList(delegate.getLocationData());
+			} else {
+				boolean matches = true;
+				for(ILocationData locationData: delegate.getLocationData()) {
+					if (!parentPath.equals(locationData.getLocation())) {
+						matches = false;
+						break;
+					}
+				}
+				if (matches) {
+					this.locations = Lists.newArrayList();
+					for(ILocationData locationData: delegate.getLocationData()) {
+						this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), null, null));
+					}
+				} else {
+					this.locations = Lists.newArrayList(delegate.getLocationData());
+				}
+			}
+		}
 		int length = 0;
 		for (Object child : delegate.getChildren()) {
 			if (child instanceof String) {
@@ -32,7 +61,7 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 			} else {
 				TreeAppendable castedChild = (TreeAppendable) child;
 				if (hasVisibleChildren(castedChild)) {
-					LocationBasedTraceRegion childRegion = new LocationBasedTraceRegion(this, castedChild, offset
+					AppendableBasedTraceRegion childRegion = new AppendableBasedTraceRegion(this, castedChild, offset
 							+ length);
 					length += childRegion.getMyLength();
 				}
@@ -62,26 +91,8 @@ public class LocationBasedTraceRegion extends AbstractTraceRegion {
 	}
 
 	@Override
-	public int getAssociatedLength() {
-		return location.getSourceLength();
+	public List<ILocationData> getAssociatedLocations() {
+		return locations;
 	}
-
-	@Override
-	public int getAssociatedOffset() {
-		return location.getSourceOffset();
-	}
-
-	@Override
-	@Nullable
-	public URI getAssociatedPath() {
-		URI result = location.getSourceURI();
-		return result;
-	}
-
-	@Override
-	@Nullable
-	public String getAssociatedProjectName() {
-		String result = location.getSourceProject();
-		return result;
-	}
+	
 }

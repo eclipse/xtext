@@ -31,6 +31,15 @@ public interface TraceFactory extends EFactory {
 	DebugTraceRegion createDebugTraceRegion();
 
 	/**
+	 * Returns a new object of class '<em>Debug Location Data</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Debug Location Data</em>'.
+	 * @generated
+	 */
+	DebugLocationData createDebugLocationData();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

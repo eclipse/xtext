@@ -14,6 +14,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.Lists;
 
@@ -96,29 +98,75 @@ public abstract class AbstractTraceRegion {
 
 	public abstract int getMyOffset();
 
-	public abstract int getAssociatedLength();
-
-	public abstract int getAssociatedOffset();
+	public abstract List<ILocationData> getAssociatedLocations();
 	
+	/**
+	 * Returns the merged location of all associated locations if
+	 * they belong to the same resource. Otherwise <code>null</code> is returned.
+	 */
 	@Nullable
-	public AbstractTraceRegion getParent() {
-		return parent;
+	public ILocationData getMergedLocationData() {
+		List<ILocationData> allData = getAssociatedLocations();
+		if (allData.size() == 1) {
+			return allData.get(0);
+		}
+		boolean allNull = true;
+		URI path = null;
+		String projectName = null;
+		ITextRegion region = ITextRegion.EMPTY_REGION;
+		for(ILocationData data: allData) {
+			if (path != null) {
+				if (!path.equals(data.getLocation())) {
+					return null;
+				}
+			} else {
+				if (data.getLocation() == null) {
+					if (!allNull)
+						throw new IllegalStateException("Iff multiple associated locations are present, the path has to be set");
+				} else {
+					allNull = false;
+					path = data.getLocation();
+					projectName = data.getProjectName();
+				}
+			}
+			region = region.merge(new TextRegion(data.getOffset(), data.getLength()));
+		}
+		return new LocationData(region.getOffset(), region.getLength(), path, projectName);
 	}
 	
 	@Nullable
 	public URI getAssociatedPath() {
-		AbstractTraceRegion parent = getParent();
-		if (parent != null)
+		ILocationData data = getMergedLocationData();
+		if (data != null) {
+			URI result = data.getLocation();
+			if (result != null) {
+				return result;
+			}
+		}
+		if (parent != null && getAssociatedLocations().size() == 1) {
 			return parent.getAssociatedPath();
+		}
 		return null;
 	}
 	
 	@Nullable
 	public String getAssociatedProjectName() {
-		AbstractTraceRegion parent = getParent();
-		if (parent != null)
+		ILocationData data = getMergedLocationData();
+		if (data != null) {
+			String result = data.getProjectName();
+			if (result != null) {
+				return result;
+			}
+		}
+		if (parent != null && getAssociatedLocations().size() == 1) {
 			return parent.getAssociatedProjectName();
+		}
 		return null;
+	}
+	
+	@Nullable
+	public AbstractTraceRegion getParent() {
+		return parent;
 	}
 	
 	public String getAnnotatedString(String input) {
@@ -135,7 +183,15 @@ public abstract class AbstractTraceRegion {
 			result.append(input.substring(nextOffset, getMyOffset()));
 			nextOffset = getMyOffset();
 		}
-		result.append('<').append(getAssociatedOffset()).append(':').append(getAssociatedLength()).append("[");
+		result.append('<');
+		List<ILocationData> associatedLocations = getAssociatedLocations();
+		for(int i = 0; i < associatedLocations.size(); i++) {
+			if (i != 0)
+				result.append("/");
+			ILocationData associatedLocation = associatedLocations.get(i);
+			result.append(associatedLocation.getOffset()).append(':').append(associatedLocation.getLength());
+		}
+		result.append("[");
 		for(AbstractTraceRegion nested: getNestedRegions()) {
 			nextOffset = nested.doAnnotateTrace(input, result, nextOffset);
 		}
@@ -171,8 +227,7 @@ public abstract class AbstractTraceRegion {
 		AbstractTraceRegion parent = getParent();
 		return getMyOffset() 
 		     ^ getMyLength()
-		     ^ getAssociatedOffset()
-		     ^ getAssociatedLength()
+		     ^ getAssociatedLocations().hashCode()
 		     ^ (parent == null ? 0 : parent.hashCode());
 	}
 
@@ -210,9 +265,7 @@ public abstract class AbstractTraceRegion {
 			return false;
 		if (getMyOffset() != other.getMyOffset())
 			return false;
-		if (getAssociatedOffset() != other.getAssociatedOffset())
-			return false;
-		if (getAssociatedLength() != other.getAssociatedLength())
+		if (!getAssociatedLocations().equals(other.getAssociatedLocations()))
 			return false;
 		AbstractTraceRegion otherParent = other.getParent();
 		AbstractTraceRegion parent = getParent();
@@ -230,8 +283,8 @@ public abstract class AbstractTraceRegion {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + ", associatedOffset="
-				+ getAssociatedOffset() + ", associatedLength=" + getAssociatedLength() + ", nestedRegions=" + getNestedRegions() + "]";
+		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + ", associations="
+				+ getAssociatedLocations() + ", nestedRegions=" + getNestedRegions() + "]";
 	}
 	
 	

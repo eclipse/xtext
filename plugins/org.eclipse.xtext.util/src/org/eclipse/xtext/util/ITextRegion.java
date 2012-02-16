@@ -8,6 +8,7 @@
 package org.eclipse.xtext.util;
 
 /**
+ * Represents a range in a stream of characters.
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface ITextRegion {
