@@ -17,62 +17,43 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.builder.trace.TraceRegionSerializer.Callback;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TraceResourceFactory extends ResourceFactoryImpl {
 	
-	protected class Strategy implements TraceRegionSerializer.Strategy<DebugTraceRegion> {
-		public DebugTraceRegion createResult(int fromOffset, int fromLength, int toOffset, int toLength,
-				DebugTraceRegion parent, URI toPath, String toProject) {
+	protected class Strategy implements TraceRegionSerializer.Strategy<DebugTraceRegion, DebugLocationData> {
+
+		public DebugLocationData createLocation(int offset, int length, URI path, String projectName) {
+			DebugLocationData result = TraceFactory.eINSTANCE.createDebugLocationData();
+			result.setOffset(offset);
+			result.setLength(length);
+			result.setPath(path);
+			result.setProjectName(projectName);
+			return result;
+		}
+
+		public DebugTraceRegion createResult(int offset, int length, List<DebugLocationData> associations,
+				DebugTraceRegion parent) {
 			DebugTraceRegion result = TraceFactory.eINSTANCE.createDebugTraceRegion();
-			result.setFromOffset(fromOffset);
-			result.setFromLength(fromLength);
-			result.setToOffset(toOffset);
-			result.setToLength(toLength);
-			result.setToPath(toPath);
-			result.setToProject(toProject);
+			result.setMyOffset(offset);
+			result.setMyLength(length);
+			result.getAssociations().addAll(associations);
 			if (parent != null)
 				parent.getNestedRegions().add(result);
 			return result;
 		}
 
-		public AbstractTraceRegion toRegion(final DebugTraceRegion t) {
-			return new AbstractTraceRegion(null) {
-				@Override
-				public int getAssociatedOffset() {
-					return t.getToOffset();
-				}
-				
-				@Override
-				public int getAssociatedLength() {
-					return t.getToLength();
-				}
-				
-				@Override
-				public int getMyOffset() {
-					return t.getFromOffset();
-				}
-				
-				@Override
-				public int getMyLength() {
-					return t.getFromLength();
-				}
-				@Override
-				public URI getAssociatedPath() {
-					return t.getToPath();
-				}
-				@Override
-				public String getAssociatedProjectName() {
-					return t.getToProject();
-				}
-			};
+		public void writeRegion(DebugTraceRegion region, Callback<DebugTraceRegion, DebugLocationData> callback)
+				throws IOException {
+			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getAssociations(), region.getNestedRegions());
 		}
 
-		public List<DebugTraceRegion> getChildren(DebugTraceRegion t) {
-			return t.getNestedRegions();
+		public void writeLocation(DebugLocationData location, Callback<DebugTraceRegion, DebugLocationData> callback)
+				throws IOException {
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getPath(), location.getProjectName());
 		}
 	}
 

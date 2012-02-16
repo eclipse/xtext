@@ -18,7 +18,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.generator.trace.TraceRegion;
+
+import com.google.common.collect.Lists;
 
 /**
  * @noextend This interface is not intended to be extended by clients.
@@ -31,31 +35,44 @@ public class TraceRegionSerializer {
 	 * @noextend This interface is not intended to be extended by clients.
 	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
-	protected interface Strategy<Type> {
-		Type createResult(int fromOffset, int fromLength, int toOffset, int toLength, Type parent,
-				URI toPath, String toProject);
-		AbstractTraceRegion toRegion(Type t);
-		List<Type> getChildren(Type t);
+	protected interface Strategy<Region, Location> {
+		Location createLocation(int offset, int length, URI path, String projectName);
+		Region createResult(int offset, int length, List<Location> associations, Region parent);
+		void writeRegion(Region region, Callback<Region, Location> callback) throws IOException;
+		void writeLocation(Location location, Callback<Region, Location> callback) throws IOException;
+	}
+	
+	protected interface Callback<Region, Location> {
+		void doWriteRegion(int offset, int length, List<Location> locations, List<Region> children) throws IOException;
+		void doWriteLocation(int offset, int length, URI path, String projectName) throws IOException;
 	}
 	
 	/**
 	 * @noextend This class is not intended to be subclassed by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
-	protected class IdentityStrategy implements Strategy<AbstractTraceRegion> {
-		public AbstractTraceRegion createResult(int fromOffset, int fromLength, int toOffset,
-				int toLength, AbstractTraceRegion parent, URI toPath, String toProject) {
-			return new TraceRegion(fromOffset, fromLength, toOffset, toLength, parent, toPath, toProject);
+	protected class IdentityStrategy implements Strategy<AbstractTraceRegion, ILocationData> {
+
+		public ILocationData createLocation(int offset, int length, URI path, String projectName) {
+			return new LocationData(offset, length, path, projectName);
 		}
-		public List<AbstractTraceRegion> getChildren(AbstractTraceRegion t) {
-			return t.getNestedRegions();
+
+		public AbstractTraceRegion createResult(int offset, int length, List<ILocationData> associations,
+				AbstractTraceRegion parent) {
+			return new TraceRegion(offset, length, associations, parent);
 		}
-		public AbstractTraceRegion toRegion(AbstractTraceRegion t) {
-			return t;
+
+		public void writeRegion(AbstractTraceRegion region, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
+			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getAssociatedLocations(), region.getNestedRegions());
 		}
+
+		public void writeLocation(ILocationData location, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLocation(), location.getProjectName());
+		}
+		
 	}
 	
-	private static final int VERSION_1_0 = 1;
+	private static final int VERSION_2 = 2;
 	
 	public void writeTraceRegionTo(AbstractTraceRegion region, OutputStream stream) throws IOException {
 		if (region != null && region.getParent() != null)
@@ -63,57 +80,46 @@ public class TraceRegionSerializer {
 		doWriteTo(new IdentityStrategy(), region, stream);
 	}
 
-	protected <Type> void doWriteTo(Strategy<Type> strategy, Type t, OutputStream stream) throws IOException {
-		AbstractTraceRegion region = strategy.toRegion(t);
-		DataOutputStream dataStream = new DataOutputStream(new BufferedOutputStream(stream));
+	protected <Region, Location> void doWriteTo(final Strategy<Region, Location> strategy, Region region, OutputStream stream) throws IOException {
+		final DataOutputStream dataStream = new DataOutputStream(new BufferedOutputStream(stream));
 		try {
-			dataStream.writeInt(VERSION_1_0);
+			dataStream.writeInt(VERSION_2);
 			dataStream.writeBoolean(region != null);
 			if (region == null)
 				return;
-			dataStream.writeInt(region.getMyOffset());
-			dataStream.writeInt(region.getMyLength());
-			dataStream.writeInt(region.getAssociatedOffset());
-			dataStream.writeInt(region.getAssociatedLength());
-			URI toPath = region.getAssociatedPath();
-			dataStream.writeBoolean(toPath != null);
-			if (toPath != null)
-				dataStream.writeUTF(toPath.toString());
-			String toProjectName = region.getAssociatedProjectName();
-			dataStream.writeBoolean(toProjectName != null);
-			if (toProjectName != null)
-				dataStream.writeUTF(toProjectName);
-			writeChildrenTo(strategy, t, dataStream);
+			strategy.writeRegion(region, new Callback<Region, Location>() {
+				public void doWriteRegion(int offset, int length, List<Location> locations, List<Region> children) throws IOException {
+					dataStream.writeInt(offset);
+					dataStream.writeInt(length);
+					dataStream.writeInt(locations.size());
+					for(Location loc: locations) {
+						strategy.writeLocation(loc, this);
+					}
+					dataStream.writeInt(children.size());
+					for(Region child: children) {
+						strategy.writeRegion(child, this);
+					}
+				}
+
+				public void doWriteLocation(int offset, int length, URI path, String projectName) throws IOException {
+					dataStream.writeInt(offset);
+					dataStream.writeInt(length);
+					if (path != null) {
+						dataStream.writeBoolean(true);
+						dataStream.writeUTF(path.toString());
+					} else {
+						dataStream.writeBoolean(false);
+					}
+					if (projectName != null) {
+						dataStream.writeBoolean(true);
+						dataStream.writeUTF(projectName);
+					} else {
+						dataStream.writeBoolean(false);
+					}
+				}
+			});
 		} finally {
 			dataStream.flush();
-		}
-	}
-	
-	protected <Type> void writeChildrenTo(Strategy<Type> strategy, Type genericParent, DataOutputStream dataStream) throws IOException {
-		List<Type> nestedRegions = strategy.getChildren(genericParent);
-		dataStream.writeInt(nestedRegions.size());
-		AbstractTraceRegion parent = strategy.toRegion(genericParent);
-		for(Type genericChild: nestedRegions) {
-			AbstractTraceRegion child = strategy.toRegion(genericChild);
-			dataStream.writeInt(child.getMyOffset());
-			dataStream.writeInt(child.getMyLength());
-			dataStream.writeInt(child.getAssociatedOffset());
-			dataStream.writeInt(child.getAssociatedLength());
-			URI toPath = child.getAssociatedPath();
-			if (toPath != null && !toPath.equals(parent.getAssociatedPath())) {
-				dataStream.writeBoolean(true);
-				dataStream.writeUTF(toPath.toString());
-			} else {
-				dataStream.writeBoolean(false);
-			}
-			String toProjectName = child.getAssociatedProjectName();
-			if (toProjectName != null && !toProjectName.equals(parent.getAssociatedProjectName())) {
-				dataStream.writeBoolean(true);
-				dataStream.writeUTF(toProjectName);
-			} else {
-				dataStream.writeBoolean(false);
-			}
-			writeChildrenTo(strategy, genericChild, dataStream);
 		}
 	}
 	
@@ -121,45 +127,44 @@ public class TraceRegionSerializer {
 		return doReadFrom(contents, new IdentityStrategy());
 	}
 
-	protected <Result> Result doReadFrom(InputStream contents, Strategy<Result> reader) throws IOException {
+	protected <Region, Location> Region doReadFrom(InputStream contents, Strategy<Region, Location> reader) throws IOException {
 		DataInputStream dataStream = new DataInputStream(new BufferedInputStream(contents));
-		int version = dataStream.readInt(); // no version specific code yet, only one version shipped
+		int version = dataStream.readInt();
+		if (version != VERSION_2)
+			return null;
 		boolean isNull = !dataStream.readBoolean();
 		if (isNull)
 			return null;
-		int fromOffset = dataStream.readInt();
-		int fromLength = dataStream.readInt();
-		int toOffset = dataStream.readInt();
-		int toLength = dataStream.readInt();
-		URI toPath = null;
-		if (dataStream.readBoolean())
-			toPath = URI.createURI(dataStream.readUTF());
-		String toProject = null;
-		if (dataStream.readBoolean())
-			toProject = dataStream.readUTF();
-		Result result = reader.createResult(fromOffset, fromLength, toOffset, toLength, null, toPath, toProject);
-		readChildren(result, reader, dataStream, version);
+		return doReadFrom(dataStream, reader, null);
+	}
+
+	protected <Location, Region> Region doReadFrom(DataInputStream dataStream, Strategy<Region, Location> reader, Region parent)
+			throws IOException {
+		int offset = dataStream.readInt();
+		int length = dataStream.readInt();
+		int locationSize = dataStream.readInt();
+		List<Location> allLocations = Lists.newArrayListWithCapacity(locationSize);
+		while(locationSize != 0) {
+			int locationOffset = dataStream.readInt();
+			int locationLength = dataStream.readInt();
+			URI path = null;
+			if (dataStream.readBoolean())
+				path = URI.createURI(dataStream.readUTF());
+			String project = null;
+			if (dataStream.readBoolean())
+				project = dataStream.readUTF();
+			allLocations.add(reader.createLocation(locationOffset, locationLength, path, project));
+			locationSize--;
+		}
+		Region result = reader.createResult(offset, length, allLocations, parent);
+		int childrenSize = dataStream.readInt();
+		while(childrenSize != 0) {
+			doReadFrom(dataStream, reader, result);
+			childrenSize--;
+		}
 		return result;
 	}
 
-	protected <Result> void readChildren(Result parent, Strategy<Result> reader, DataInputStream dataStream, int version) throws IOException {
-		int childCount = dataStream.readInt();
-		for(int i = 0; i < childCount; i++) {
-			int fromOffset = dataStream.readInt();
-			int fromLength = dataStream.readInt();
-			int toOffset = dataStream.readInt();
-			int toLength = dataStream.readInt();
-			URI toPath = null;
-			if (dataStream.readBoolean()) {
-				toPath = URI.createURI(dataStream.readUTF());
-			}
-			String toProject = null;
-			if (dataStream.readBoolean()) {
-				 toProject = dataStream.readUTF();
-			}
-			Result child = reader.createResult(fromOffset, fromLength, toOffset, toLength, parent, toPath, toProject);
-			readChildren(child, reader, dataStream, version);
-		}
-	}
+	
 	
 }
