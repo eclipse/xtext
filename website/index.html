@@ -92,7 +92,7 @@ div#maincontainer>section {
 		              <ul class="dropdown-menu">
 		                <li><a href="#extensionmethods">Extension Methods</a></li>
 						<li><a href="#multipledispatch">Multiple Dispatch</a></li>
-						<li><a href="#closures">Closures</a></li>
+						<li><a href="#closures">Lambda Expression</a></li>
 						<li><a href="#switchexpression">Switch Expression</a></li>
 						<li><a href="#templateexpression">Template Expressions</a></li>
 						<li><a href="#dslsupport">DSL support</a></li>
@@ -189,7 +189,7 @@ div#maincontainer>section {
 					<ul>
 						<li><a href="#extensionmethods">extension methods</a>
 						<li><a href="#multipledispatch">multiple dispatch</a>
-						<li><a href="#closures">closures</a>
+						<li><a href="#closures">lambda expressions</a>
 						<li><a href="#switchexpression">powerful switch
 								expression</a>
 						<li><a href="#templateexpression">template expressions</a>
@@ -559,7 +559,7 @@ def List&lt;String&gt; getTheListOfNames() {
 }
 </pre>
 							</li>
-							<li>Closures <pre class="prettyprint lang-xtend">getTheListOfNames().map( name | "Mr. "+name )
+							<li>Lambda expressions <pre class="prettyprint lang-xtend">getTheListOfNames().map( name | "Mr. "+name )
 getTheListOfNames().map( String name | "Mr. "+name )
 </pre>
 							</li>
@@ -828,13 +828,13 @@ def dispatch label(Rectangle r) {
 								<div class="row">
 					<div class="span-two-third">
 						<h2>
-							Closures <small>finally!</small>
+							Lambda Expressions <small>also known as function literals</small>
 						</h2>
 					</div>
 				</div>
 				<div class="row">
 					<div class="span8">
-						<p>Closures are the single most demanded feature for Java. To
+						<p>Lambda expressions are the single most demanded feature for Java. To
 							collect all the names from persons in a list in in Java, you
 							would typically write:</p>
 						<pre class="prettyprint">
@@ -847,26 +847,25 @@ for (String name : persons) {
 						<p>
 							In Xtend you can just use the <strong>map</strong> extension
 							method, which is available on every instance of <strong>java.lang.Iterable</strong>
-							and pass it a closure :
+							and pass it a function :
 						</p>
-						<pre class="prettyprint lang-xtend">persons.map( p | p.name )</pre>
+						<pre class="prettyprint lang-xtend">persons.map[name]</pre>
 
-						<p>Although closures have a Java compatible type, Xtend
+						<p>Although lambdas have a Java compatible type and convert automatically to
+						   so called <a href="http://www.javacodegeeks.com/2012/02/whats-cooking-in-java-8-project-lambda.html" target="_blank">functional interfaces</a>, Xtend
 							provides a nicer notation for function types. The following
-							example defines a closure which would be useful to filter a list
-							of persons by a specific name.</p>
-						<pre class="prettyprint lang-xtend">val (Person) =&gt; Boolean predicate = 
-  [ person | "Hans" == person.name ]</pre>
+							example declares a local variable initialized using a lambda expression:</p>
+						<pre class="prettyprint lang-xtend">val (Person) =&gt; Boolean predicate = [ "Hans" == name ]</pre>
 						You usually don&apos;t have to write the types for functions that
 						often, but would write instead:
-						<pre class="prettyprint lang-xtend">val predicate = [ Person person | "Hans" == person.name ]</pre>
-						Such a function can be passed to the extension method <strong>Iterable.filter((T)
+						<pre class="prettyprint lang-xtend">val predicate = [ Person it | "Hans" == name ]</pre>
+						Such a function could for instance then be passed to the <a href="#extensionmethods">extension method</a> <strong>Iterable.filter((T)
 							=&gt; Boolean)</strong>:
 						<pre class="prettyprint lang-xtend">persons.filter(predicate)</pre>
 					</div>
 					<div class="span8">
 						<p>
-							Closures are helpful in many different scenarios. For instance,
+							Lambda expressions are helpful in many different scenarios. For instance,
 							in combination with <a href="#extensionmethods">extension
 								methods</a> they allow to define nice builder APIs:
 						</p>
