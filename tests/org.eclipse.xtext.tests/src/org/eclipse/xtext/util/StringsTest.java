@@ -20,34 +20,163 @@ import org.junit.Test;
  */
 public class StringsTest extends Assert {
 
-	@Test public void testSplit() throws Exception {
+	@Test public void testSplitByString_1() throws Exception {
 		List<String> split = Strings.split("foo.bar", ".");
 		assertEquals(2, split.size());
 		assertEquals("foo", split.get(0));
 		assertEquals("bar", split.get(1));
+		List<String> stringSplit = Arrays.asList("foo.bar".split("\\."));
+		assertEquals(split, stringSplit);
 	}
 
-	@Test public void testSplit2() throws Exception {
+	@Test public void testSplitByString_2() throws Exception {
 		List<String> split = Strings.split("foobar", ".");
 		assertEquals(1, split.size());
 		assertEquals("foobar", split.get(0));
+		List<String> stringSplit = Arrays.asList("foobar".split("\\."));
+		assertEquals(split, stringSplit);
 	}
 
-	@Test public void testSplit3() throws Exception {
-
+	@Test public void testSplitByString_3() throws Exception {
 		List<String> split = Strings.split("foobar", "oo");
 		assertEquals(2, split.size());
 		assertEquals("f", split.get(0));
 		assertEquals("bar", split.get(1));
-
+		List<String> stringSplit = Arrays.asList("foobar".split("oo"));
+		assertEquals(split, stringSplit);
 	}
 
-	@Test public void testSplit4() throws Exception {
+	@Test public void testSplitByString_4() throws Exception {
 		List<String> split = Strings.split("foobar", "o");
 		assertEquals(3, split.size());
 		assertEquals("f", split.get(0));
 		assertEquals("", split.get(1));
 		assertEquals("bar", split.get(2));
+		List<String> stringSplit = Arrays.asList("foobar".split("o"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByString_5() throws Exception {
+		List<String> split = Strings.split("abc::Zonk::", "::");
+		assertEquals(2, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals("Zonk", split.get(1));
+		List<String> stringSplit = Arrays.asList("abc::Zonk::".split("::"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByString_6() throws Exception {
+		List<String> split = Strings.split("abc:::Zonk::", "::");
+		assertEquals(2, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals(":Zonk", split.get(1));
+		List<String> stringSplit = Arrays.asList("abc:::Zonk::".split("::"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByString_7() throws Exception {
+		List<String> split = Strings.split("abc::::Zonk::", "::");
+		assertEquals(3, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals("", split.get(1));
+		assertEquals("Zonk", split.get(2));
+		List<String> stringSplit = Arrays.asList("abc::::Zonk::".split("::"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByString_8() throws Exception {
+		List<String> split = Strings.split("abc::Zonk::::", "::");
+		assertEquals(2, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals("Zonk", split.get(1));
+		List<String> stringSplit = Arrays.asList("abc::Zonk::::".split("::"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByString_9() throws Exception {
+		List<String> split = Strings.split("::abc::Zonk", "::");
+		assertEquals(3, split.size());
+		assertEquals("", split.get(0));
+		assertEquals("abc", split.get(1));
+		assertEquals("Zonk", split.get(2));
+		List<String> stringSplit = Arrays.asList("::abc::Zonk".split("::"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByChar_1() throws Exception {
+		List<String> split = Strings.split("foo.bar", '.');
+		assertEquals(2, split.size());
+		assertEquals("foo", split.get(0));
+		assertEquals("bar", split.get(1));
+		List<String> stringSplit = Arrays.asList("foo.bar".split("\\."));
+		assertEquals(split, stringSplit);
+	}
+
+	@Test public void testSplitByChar_2() throws Exception {
+		List<String> split = Strings.split("foobar", '.');
+		assertEquals(1, split.size());
+		assertEquals("foobar", split.get(0));
+		List<String> stringSplit = Arrays.asList("foobar".split("\\."));
+		assertEquals(split, stringSplit);
+	}
+
+	@Test public void testSplitByChar_3() throws Exception {
+		List<String> split = Strings.split("foobar", 'o');
+		assertEquals(3, split.size());
+		assertEquals("f", split.get(0));
+		assertEquals("", split.get(1));
+		assertEquals("bar", split.get(2));
+		List<String> stringSplit = Arrays.asList("foobar".split("o"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByChar_4() throws Exception {
+		List<String> split = Strings.split("abc:Zonk:", ':');
+		assertEquals(2, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals("Zonk", split.get(1));
+		List<String> stringSplit = Arrays.asList("abc:Zonk:".split(":"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByChar_5() throws Exception {
+		List<String> split = Strings.split("abc::Zonk:", ':');
+		assertEquals(3, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals("", split.get(1));
+		assertEquals("Zonk", split.get(2));
+		List<String> stringSplit = Arrays.asList("abc::Zonk:".split(":"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByChar_6() throws Exception {
+		List<String> split = Strings.split("abc:Zonk::", ':');
+		assertEquals(2, split.size());
+		assertEquals("abc", split.get(0));
+		assertEquals("Zonk", split.get(1));
+		List<String> stringSplit = Arrays.asList("abc:Zonk::".split(":"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByChar_7() throws Exception {
+		List<String> split = Strings.split(":abc:Zonk", ':');
+		assertEquals(3, split.size());
+		assertEquals("", split.get(0));
+		assertEquals("abc", split.get(1));
+		assertEquals("Zonk", split.get(2));
+		List<String> stringSplit = Arrays.asList(":abc:Zonk".split(":"));
+		assertEquals(split, stringSplit);
+	}
+	
+	@Test public void testSplitByChar_8() throws Exception {
+		List<String> split = Strings.split("::abc:Zonk", ':');
+		assertEquals(4, split.size());
+		assertEquals("", split.get(0));
+		assertEquals("", split.get(1));
+		assertEquals("abc", split.get(2));
+		assertEquals("Zonk", split.get(3));
+		List<String> stringSplit = Arrays.asList("::abc:Zonk".split(":"));
+		assertEquals(split, stringSplit);
 	}
 	
 	@Test public void testPackUnpack() throws Exception {
