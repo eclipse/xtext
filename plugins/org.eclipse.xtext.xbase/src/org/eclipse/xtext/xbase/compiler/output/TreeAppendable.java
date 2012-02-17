@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +26,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -126,12 +128,13 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return newData;
 	}
 	
-	public ITreeAppendable trace(List<EObject> objects) {
-		if (objects.isEmpty())
+	public ITreeAppendable trace(Iterable<? extends EObject> objects) {
+		if (Iterables.isEmpty(objects))
 			throw new IllegalArgumentException("List of objects may not be empty");
-		if (objects.size() == 1)
-			return trace(objects.get(0));
-		Set<ILocationData> newData = Sets.newHashSetWithExpectedSize(objects.size());
+		int size = Iterables.size(objects);
+		if (size == 1)
+			return trace(objects.iterator().next());
+		Set<ILocationData> newData = new LinkedHashSet<ILocationData>(size);
 		for(EObject object: objects) {
 			newData.add(createLocationData(locationProvider, object));
 		}

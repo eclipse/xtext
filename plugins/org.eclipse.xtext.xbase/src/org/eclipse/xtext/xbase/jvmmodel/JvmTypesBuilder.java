@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -371,7 +372,7 @@ public class JvmTypesBuilder {
 	 * @see IJvmModelAssociations
 	 */
 	public <T extends JvmIdentifiableElement> T associate(EObject sourceElement, T target) {
-		associator.associatePrimary(sourceElement, target);
+		associator.associate(sourceElement, target);
 		return target;
 	}
 
@@ -472,6 +473,23 @@ public class JvmTypesBuilder {
 		if (init != null)
 			init.apply(constructor);
 		return constructor;
+	}
+	
+	public JvmOperation addToStringMethod(final EObject sourceElement, final JvmDeclaredType declaredType) {
+		JvmOperation result = toMethod(sourceElement, "toString", newTypeRef(sourceElement, String.class), null);
+		setBody(result, new Procedure1<ITreeAppendable>() {
+			public void apply(ITreeAppendable p) {
+				String name = declaredType.getSimpleName();
+				p = p.trace(sourceElement);
+				p.append("StringBuilder result = new StringBuilder(\"\\n"+name+" {\");\n");
+				for (JvmField jvmField : filter(declaredType.getAllFeatures(), JvmField.class)) {
+					ITreeAppendable innerP = p.trace(jvmField);
+					innerP.append("result.append(\"\\n  "+jvmField.getSimpleName()+" = \").append(String.valueOf("+jvmField.getSimpleName()+").replace(\"\\n\",\"\\n  \"));\n");
+				}
+				p.append("result.append(\"\\n}\");\nreturn result.toString();\n");
+			}
+		});
+		return result;
 	}
 
 	/**
@@ -612,6 +630,19 @@ public class JvmTypesBuilder {
 	 */
 	public JvmTypeReference newTypeRef(EObject ctx, String typeName, JvmTypeReference... typeArgs) {
 		return references.getTypeForName(typeName, ctx, typeArgs);
+	}
+	
+	/**
+	 * Creates a new {@link JvmTypeReference} pointing to the given class and containing the given type arguments.
+	 * 
+	 * @param type
+	 *            the type the reference shall point to.
+	 * @param typeArgs
+	 *            type arguments
+	 * @return the newly created {@link JvmTypeReference}
+	 */
+	public JvmTypeReference newTypeRef(JvmDeclaredType type, JvmTypeReference... typeArgs) {
+		return references.createTypeRef(type, typeArgs);
 	}
 
 	/**
