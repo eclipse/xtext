@@ -111,12 +111,16 @@ public abstract class AbstractXbaseCompiler {
 		if (needsToBeWrapped) {
 			appendable.openScope();
 			try {
-				Object thisElement = appendable.getObject("this");
-				if (thisElement instanceof JvmType) {
-					appendable.declareVariable(thisElement, ((JvmType) thisElement).getSimpleName()+".this");
-					Object superElement = appendable.getObject("super");
-					if (superElement instanceof JvmType) {
-						appendable.declareVariable(superElement, ((JvmType) thisElement).getSimpleName()+".super");
+				if (appendable.hasObject("this")) {
+					Object thisElement = appendable.getObject("this");
+					if (thisElement instanceof JvmType) {
+						appendable.declareVariable(thisElement, ((JvmType) thisElement).getSimpleName()+".this");
+						if (appendable.hasObject("super")) {
+							Object superElement = appendable.getObject("super");
+							if (superElement instanceof JvmType) {
+								appendable.declareVariable(superElement, ((JvmType) thisElement).getSimpleName()+".super");
+							}
+						}
 					}
 				}
 				appendable.append("new ");

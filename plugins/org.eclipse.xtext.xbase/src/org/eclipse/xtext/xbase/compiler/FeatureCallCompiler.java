@@ -12,6 +12,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -30,6 +32,14 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -37,6 +47,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
@@ -179,6 +190,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return super.isVariableDeclarationRequired(expr, b);
 	}
 
+	/**
+	 * @param expr only for dispatching purpose
+	 * @param b only for dispatching purpose
+	 * @throws UnsupportedOperationException in any case 
+	 */
 	protected void prepareSpreadingMemberFeatureCall(XMemberFeatureCall expr, ITreeAppendable b) {
 		throw new UnsupportedOperationException("spread operator not yet supported");
 		//		prepareAllArguments(expr, b);
@@ -268,13 +284,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (hasReceiver) {
 			b.append(".");
 			if (!call.getTypeArguments().isEmpty()) {
+				ILocationData locationData = getLocationWithTypeArguments(call);
+				if (locationData != null)
+					b = b.trace(locationData);
 				b.append("<");
 				for (int i = 0; i < call.getTypeArguments().size(); i++) {
 					if (i != 0) {
 						b.append(", ");
 					}
 					JvmTypeReference typeArgument = call.getTypeArguments().get(i);
-					serialize(typeArgument, call, b);
+					ITreeAppendable typeArgumentAppendable = b.trace(typeArgument);
+					serialize(typeArgument, call, typeArgumentAppendable);
 				}
 				b.append(">");
 			} else if (call.getFeature() instanceof JvmExecutable) {
@@ -376,6 +396,57 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		}
 		appendFeatureCall(call, b, unpreparedArguments);
+	}
+
+	protected ILocationData getLocationWithTypeArguments(XAbstractFeatureCall call) {
+		final ICompositeNode startNode = NodeModelUtils.getNode(call);
+		List<INode> resultNodes = Lists.newArrayList();
+		if (call instanceof XFeatureCall) {
+			if (((XFeatureCall) call).getDeclaringType() != null) {
+				boolean crossRefSeen = false;
+				for (INode child : startNode.getChildren()) {
+					if (crossRefSeen) {
+						resultNodes.add(child);
+					} else {
+						EObject grammarElement = child.getGrammarElement();
+						if (grammarElement instanceof CrossReference) {
+							crossRefSeen = true;
+						}
+					} 
+				}
+			} else {
+				for (INode child : startNode.getChildren()) {
+					resultNodes.add(child);
+				}
+			}
+		} else if (call instanceof XMemberFeatureCall) {
+			boolean keywordSeen = false;
+			for (INode child : startNode.getChildren()) {
+				if (keywordSeen) {
+					resultNodes.add(child);
+				} else {
+					EObject grammarElement = child.getGrammarElement();
+					if (grammarElement instanceof Keyword) {
+						keywordSeen = true;
+					}
+				} 
+			}
+		}
+		ITextRegion result = ITextRegion.EMPTY_REGION;
+		for (INode node : resultNodes) {
+			if (!isHidden(node)) {
+				int length = node.getLength();
+				if (length != 0)
+					result = result.merge(new TextRegion(node.getOffset(), length));
+			}
+		}
+		if (result.getLength() == 0)
+			return null;
+		return new LocationData(result.getOffset(), result.getLength(), null, null);
+	}
+	
+	protected boolean isHidden(INode node) {
+		return node instanceof ILeafNode && ((ILeafNode) node).isHidden();
 	}
 
 	protected boolean appendReceiver(XAbstractFeatureCall call, ITreeAppendable b) {
@@ -493,7 +564,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else {
 			name = featureNameProvider.getSimpleName(feature);
 		}
-		b.append(name);
+		b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(name);
 		if (feature instanceof JvmExecutable) {
 			b.append("(");
 			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);

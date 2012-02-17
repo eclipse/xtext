@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 
@@ -69,8 +71,16 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	public ITreeAppendable trace(EObject object) {
 		return this;
 	}
+	
+	public ITreeAppendable trace(ILocationData location) {
+		return this;
+	}
 
 	public ITreeAppendable trace(Iterable<? extends EObject> objects) {
+		return this;
+	}
+	
+	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
 		return this;
 	}
 	

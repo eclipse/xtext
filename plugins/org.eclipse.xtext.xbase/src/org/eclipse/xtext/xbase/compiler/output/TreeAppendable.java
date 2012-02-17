@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -115,16 +115,14 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		children.add(result);
 		return result;
 	}
+	
+	public ITreeAppendable trace(ILocationData location) {
+		return trace(Collections.singleton(location));
+	}
 
 	protected static ILocationData createLocationData(ILocationInFileProvider locationProvider, EObject object) {
 		ITextRegion textRegion = locationProvider.getSignificantTextRegion(object);
-		URI uri = object.eResource().getURI();
-//		setData(uri, null, textRegion.getOffset(), textRegion.getLength());
-		String projectName = null;
-		if (uri.isPlatformResource()) {
-			projectName = uri.segment(1);
-		}
-		ILocationData newData = new LocationData(textRegion.getOffset(), textRegion.getLength(), uri, projectName);
+		ILocationData newData = createLocationData(object, textRegion);
 		return newData;
 	}
 	
@@ -139,6 +137,22 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			newData.add(createLocationData(locationProvider, object));
 		}
 		return trace(newData);
+	}
+	
+	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
+		ITextRegion textRegion = locationProvider.getSignificantTextRegion(object, feature, indexInList);
+		ILocationData newData = createLocationData(object, textRegion);
+		return trace(Collections.singleton(newData));
+	}
+
+	protected static ILocationData createLocationData(EObject object, ITextRegion textRegion) {
+		URI uri = object.eResource().getURI();
+		String projectName = null;
+		if (uri.isPlatformResource()) {
+			projectName = uri.segment(1);
+		}
+		ILocationData newData = new LocationData(textRegion.getOffset(), textRegion.getLength(), uri, projectName);
+		return newData;
 	}
 
 	public TreeAppendable acceptVisitor(TreeAppendable.Visitor visitor) {
