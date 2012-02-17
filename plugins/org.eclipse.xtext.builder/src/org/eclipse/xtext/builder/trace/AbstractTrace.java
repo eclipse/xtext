@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.trace;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
@@ -30,11 +31,11 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -87,10 +88,23 @@ public abstract class AbstractTrace implements ITrace {
 			URI leftToPath = left.getAssociatedPath();
 			URI rightToPath = right.getAssociatedPath();
 			if (leftToPath != null && leftToPath.equals(rightToPath) || leftToPath == rightToPath) {
-				ILocationData firstLocation = left.getMergedLocationData();
-				ILocationData secondLocation = left.getMergedLocationData();
-				if (firstLocation != null && secondLocation != null)
-					return createLocationInResourceFor(firstLocation, secondLocation, left);
+				Set<AbstractTraceRegion> parents = Sets.newHashSet();
+				AbstractTraceRegion candidate = left;
+				while(candidate != null) {
+					URI candidatePath = candidate.getAssociatedPath();
+					if (leftToPath != null && leftToPath.equals(candidatePath) || leftToPath == candidatePath) 
+						parents.add(candidate);
+					candidate = candidate.getParent();
+				}
+				AbstractTraceRegion potentialMatch = right;
+				while(potentialMatch != null && !parents.contains(potentialMatch)) {
+					potentialMatch = potentialMatch.getParent();
+				}
+				if (potentialMatch != null) {
+					ILocationData location = potentialMatch.getMergedLocationData();
+					if (location != null)
+						return createLocationInResourceFor(location, left);
+				}
 				return null;
 			}
 		} 
@@ -104,32 +118,18 @@ public abstract class AbstractTrace implements ITrace {
 	 * @return the location in resource. Never <code>null</code>.
 	 */
 	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
-		return createLocationInResourceFor(location, location, traceRegion);
-	}
-	
-	/**
-	 * Creates a new location for a target resource where the location spans more than one trace region.
-	 * The given left and right region have to point to the very same resource and project.
-	 * @param firstData the first available location data
-	 * @param second the second available location data
-	 * @return the location in resource. Never <code>null</code>.
-	 */
-	protected ILocationInResource createLocationInResourceFor(ILocationData firstData, ILocationData second, AbstractTraceRegion traceRegion) {
-		ITextRegion firstRegion = new TextRegion(firstData.getOffset(), firstData.getLength());
-		ITextRegion secondRegion = new TextRegion(second.getOffset(), second.getLength());
-		ITextRegion merge = firstRegion.merge(secondRegion);
-		URI path = firstData.getLocation();
+		URI path = location.getLocation();
 		if (path == null)
 			path = traceRegion.getAssociatedPath();
-		String projectName = firstData.getProjectName();
+		String projectName = location.getProjectName();
 		if (projectName == null)
 			projectName = traceRegion.getAssociatedProjectName();
-		return new OffsetBasedLocationInResource(merge.getOffset(), merge.getLength(), path, projectName, this);
+		return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), path, projectName, this);
 	}
-
+	
 	@Nullable
 	public AbstractTraceRegion findLeafAtRightOffset(int offset) {
-		return findLeafNodeAt(offset, false);
+		return findLeafNodeAt(offset, true);
 	}
 
 	@Nullable
@@ -160,7 +160,7 @@ public abstract class AbstractTrace implements ITrace {
 
 	@Nullable
 	public AbstractTraceRegion findLeafAtLeftOffset(int offset) {
-		return findLeafNodeAt(offset, true);
+		return findLeafNodeAt(offset, false);
 	}
 	
 	/**

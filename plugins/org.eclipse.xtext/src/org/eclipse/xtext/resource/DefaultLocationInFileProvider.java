@@ -169,8 +169,11 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		// if we've got more than one ID elements, we want to select them all
 		ITextRegion result = ITextRegion.EMPTY_REGION;
 		for (INode node : nodes) {
-			if (!isHidden(node))
-				result = result.merge(new TextRegion(node.getOffset(), node.getLength()));
+			if (!isHidden(node)) {
+				int length = node.getLength();
+				if (length != 0)
+					result = result.merge(new TextRegion(node.getOffset(), length));
+			}
 		}
 		return result;
 	}

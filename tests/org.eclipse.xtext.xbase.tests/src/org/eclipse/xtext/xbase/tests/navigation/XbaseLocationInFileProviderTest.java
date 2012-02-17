@@ -12,6 +12,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.After;
@@ -38,6 +40,75 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	@Override
 	protected XExpression expression(String string) throws Exception {
 		return super.expression(string, false);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected <Result extends XExpression> Result castedExpression(String string) throws Exception {
+		return (Result) expression(string);
+	}
+	
+	@Test public void testFeatureCall_01() throws Exception {
+		String text = "newArrayList('a')";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text, significant);
+	}
+	
+	@Test public void testFeatureCall_02() throws Exception {
+		String text = "<String>newArrayList('a')";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('>') + 1), significant);
+	}
+	
+	@Test public void testFeatureCall_03() throws Exception {
+		String text = "String::valueOf('a')";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('v')), significant);
+	}
+	
+	@Test public void testFeatureCall_04() throws Exception {
+		String text = "String::<Invalid>valueOf('a')";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('>') + 1), significant);
+	}
+	
+	@Test public void testMemberFeatureCall_01() throws Exception {
+		String text = "'a'.toString";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('.') + 1) , significant);
+	}
+	
+	@Test public void testMemberFeatureCall_02() throws Exception {
+		String text = "'a'?.toString";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('.') + 1) , significant);
+	}
+	
+	@Test public void testMemberFeatureCall_03() throws Exception {
+		String text = "'a'*.toString";
+		XMemberFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('.') + 1) , significant);
+	}
+	
+	@Test public void testQualifiedAssignment_01() throws Exception {
+		String text = "'a'.doesNotExist = 'b'";
+		XAssignment assignment = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(assignment);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals(text.substring(text.indexOf('.') + 1) , significant);
 	}
 	
 	@Test public void testAssignment_rhs_01() throws Exception {

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
@@ -26,9 +25,6 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider typeProvider;
-	
-	@Inject
-	private ILocationInFileProvider locationProvider;
 	
 	@Test public void testSimple() throws Exception {
 		assertCompilesTo("\nint _length = \"foo\".length();\n" + 

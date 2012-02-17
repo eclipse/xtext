@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 
@@ -28,6 +30,10 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	 */
 	ITreeAppendable trace(Iterable<? extends EObject> objects);
 	
+	ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList);
+	
+	ITreeAppendable trace(ILocationData location);
+	
 	ITreeAppendable append(ITreeAppendable other);
 	
 	ITreeAppendable append(JvmType type);
@@ -39,5 +45,7 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	ITreeAppendable increaseIndentation();
 	
 	ITreeAppendable newLine();
+
+	
 	
 }
