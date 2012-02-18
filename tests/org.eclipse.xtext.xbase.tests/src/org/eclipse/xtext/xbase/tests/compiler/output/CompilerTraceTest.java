@@ -124,6 +124,14 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"#newArrayList('a')#");
 	}
 	
+	@Test
+	public void testFeatureCall_08() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _newArrayList = CollectionLiterals.<String>ne#wArrayList(#);\n" + 
+				"return _newArrayList;", 
+				"<String>#newArrayList()#");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	protected void assertTrace(final String javaCodeWithMarker, String xbaseCodeWithMarker) throws Exception {

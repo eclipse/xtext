@@ -297,6 +297,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					serialize(typeArgument, call, typeArgumentAppendable);
 				}
 				b.append(">");
+				if (locationData != null) {
+					b = b.trace(call);
+				}
 			} else if (call.getFeature() instanceof JvmExecutable) {
 				final JvmExecutable executable = (JvmExecutable) call.getFeature();
 				if (!executable.getTypeParameters().isEmpty()) {
