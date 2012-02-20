@@ -1,4 +1,6 @@
 setpref targetPlatformPath="${build.root}/target.platform"
+setpref org.eclipse.buckminster.core.maxParallelResolutions=1
+setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
 
 importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
 addbaseline -A "api-baseline"
