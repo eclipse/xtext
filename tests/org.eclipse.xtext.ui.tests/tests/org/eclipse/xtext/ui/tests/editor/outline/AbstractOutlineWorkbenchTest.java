@@ -75,7 +75,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		try {
 			outlinePage.waitForUpdate(EXPECTED_TIMEOUT);
 		} catch (TimeoutException e) {
-			// timeout is OK here
+			System.out.println("Expected timeout exceeded: "+EXPECTED_TIMEOUT);// timeout is OK here
 		}
 		assertSelected(treeViewer);
 		assertExpanded(treeViewer);
