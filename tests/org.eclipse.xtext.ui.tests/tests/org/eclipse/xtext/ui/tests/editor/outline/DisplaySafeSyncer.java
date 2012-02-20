@@ -32,17 +32,20 @@ public class DisplaySafeSyncer {
 		while (waitTime < timeout) {
 			if (latch.await(10, TimeUnit.MILLISECONDS)) {
 				latch = null;
+				System.out.println("Waited " + waitTime + "ms. Timeout was " + timeout + " ms.");
 				return;
 			}
 			waitTime += 10;
 			if (Display.getCurrent() != null)
 				Display.getCurrent().readAndDispatch();
 		}
-		throw new TimeoutException("Timeout in Syncer");
+		throw new TimeoutException("Timeout in Syncer (timeout " + timeout + " ms)");
 	}
 
 	public void signal() {
 		if (latch != null)
 			latch.countDown();
+		else
+			System.out.println("WARN: Latch was null in DisplaySafeSyncer.signal()");
 	}
 }
