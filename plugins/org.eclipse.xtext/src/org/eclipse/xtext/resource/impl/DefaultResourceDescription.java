@@ -140,7 +140,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	protected Map<EObject, IEObjectDescription> createEObject2ExportedEObjectsMap(
 			Iterable<IEObjectDescription> exportedObjects) {
-		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newHashMap();
+		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newIdentityHashMap();
 		for (IEObjectDescription eObjectDescription : exportedObjects) {
 			uri2exportedEObjects.put(eObjectDescription.getEObjectOrProxy(), eObjectDescription);
 		}
