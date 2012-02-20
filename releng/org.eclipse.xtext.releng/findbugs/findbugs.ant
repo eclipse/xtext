@@ -21,7 +21,6 @@
 			</sourcePath>
 			<fileset dir="${jarsLocation}" id="clazz">
 				<include name="org.eclipse.xtext.*.jar" />
-				<include name="org.eclipse.xtend2.*.jar" />
 				<exclude name="*.source*" />
 				<exclude name="*.doc.*" />
 			</fileset>
