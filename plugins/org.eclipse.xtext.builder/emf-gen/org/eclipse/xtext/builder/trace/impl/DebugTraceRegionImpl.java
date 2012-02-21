@@ -32,6 +32,8 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyOffset <em>My Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyLength <em>My Length</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyLineNumber <em>My Line Number</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyEndLineNumber <em>My End Line Number</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getNestedRegions <em>Nested Regions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyEndOffset <em>My End Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getAssociations <em>Associations</em>}</li>
@@ -90,6 +92,46 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected int myLength = MY_LENGTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMyLineNumber() <em>My Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMyLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MY_LINE_NUMBER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMyLineNumber() <em>My Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMyLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected int myLineNumber = MY_LINE_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMyEndLineNumber() <em>My End Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMyEndLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MY_END_LINE_NUMBER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMyEndLineNumber() <em>My End Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMyEndLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected int myEndLineNumber = MY_END_LINE_NUMBER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getNestedRegions() <em>Nested Regions</em>}' containment reference list.
@@ -229,6 +271,48 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getMyLineNumber() {
+		return myLineNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMyLineNumber(int newMyLineNumber) {
+		int oldMyLineNumber = myLineNumber;
+		myLineNumber = newMyLineNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracePackage.DEBUG_TRACE_REGION__MY_LINE_NUMBER, oldMyLineNumber, myLineNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getMyEndLineNumber() {
+		return myEndLineNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMyEndLineNumber(int newMyEndLineNumber) {
+		int oldMyEndLineNumber = myEndLineNumber;
+		myEndLineNumber = newMyEndLineNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracePackage.DEBUG_TRACE_REGION__MY_END_LINE_NUMBER, oldMyEndLineNumber, myEndLineNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -254,6 +338,10 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 				return getMyOffset();
 			case TracePackage.DEBUG_TRACE_REGION__MY_LENGTH:
 				return getMyLength();
+			case TracePackage.DEBUG_TRACE_REGION__MY_LINE_NUMBER:
+				return getMyLineNumber();
+			case TracePackage.DEBUG_TRACE_REGION__MY_END_LINE_NUMBER:
+				return getMyEndLineNumber();
 			case TracePackage.DEBUG_TRACE_REGION__NESTED_REGIONS:
 				return getNestedRegions();
 			case TracePackage.DEBUG_TRACE_REGION__MY_END_OFFSET:
@@ -278,6 +366,12 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 				return;
 			case TracePackage.DEBUG_TRACE_REGION__MY_LENGTH:
 				setMyLength((Integer)newValue);
+				return;
+			case TracePackage.DEBUG_TRACE_REGION__MY_LINE_NUMBER:
+				setMyLineNumber((Integer)newValue);
+				return;
+			case TracePackage.DEBUG_TRACE_REGION__MY_END_LINE_NUMBER:
+				setMyEndLineNumber((Integer)newValue);
 				return;
 			case TracePackage.DEBUG_TRACE_REGION__NESTED_REGIONS:
 				getNestedRegions().clear();
@@ -305,6 +399,12 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 			case TracePackage.DEBUG_TRACE_REGION__MY_LENGTH:
 				setMyLength(MY_LENGTH_EDEFAULT);
 				return;
+			case TracePackage.DEBUG_TRACE_REGION__MY_LINE_NUMBER:
+				setMyLineNumber(MY_LINE_NUMBER_EDEFAULT);
+				return;
+			case TracePackage.DEBUG_TRACE_REGION__MY_END_LINE_NUMBER:
+				setMyEndLineNumber(MY_END_LINE_NUMBER_EDEFAULT);
+				return;
 			case TracePackage.DEBUG_TRACE_REGION__NESTED_REGIONS:
 				getNestedRegions().clear();
 				return;
@@ -329,6 +429,10 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 				return myOffset != MY_OFFSET_EDEFAULT;
 			case TracePackage.DEBUG_TRACE_REGION__MY_LENGTH:
 				return myLength != MY_LENGTH_EDEFAULT;
+			case TracePackage.DEBUG_TRACE_REGION__MY_LINE_NUMBER:
+				return myLineNumber != MY_LINE_NUMBER_EDEFAULT;
+			case TracePackage.DEBUG_TRACE_REGION__MY_END_LINE_NUMBER:
+				return myEndLineNumber != MY_END_LINE_NUMBER_EDEFAULT;
 			case TracePackage.DEBUG_TRACE_REGION__NESTED_REGIONS:
 				return nestedRegions != null && !nestedRegions.isEmpty();
 			case TracePackage.DEBUG_TRACE_REGION__MY_END_OFFSET:
@@ -353,6 +457,10 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 		result.append(myOffset);
 		result.append(", myLength: ");
 		result.append(myLength);
+		result.append(", myLineNumber: ");
+		result.append(myLineNumber);
+		result.append(", myEndLineNumber: ");
+		result.append(myEndLineNumber);
 		result.append(')');
 		return result.toString();
 	}

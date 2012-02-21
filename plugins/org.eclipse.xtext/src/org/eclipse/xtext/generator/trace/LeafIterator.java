@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
@@ -27,9 +28,9 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 	 * A trace region that will not be added to the child list of the given parent.
 	 */
 	protected static class TemporaryTraceRegion extends AbstractStatefulTraceRegion {
-		protected TemporaryTraceRegion(int myOffset, int myLength, List<ILocationData> locations,
+		protected TemporaryTraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, List<ILocationData> locations,
 				AbstractTraceRegion parent) {
-			super(myOffset, myLength, locations, parent);
+			super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), locations, parent);
 		}
 
 		@Override
@@ -40,11 +41,13 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 
 	private AbstractTraceRegion current;
 	private int expectedOffset;
+	private int expectedLine;
 	private LinkedList<Integer> traversalIndizes = Lists.newLinkedList();
 
 	public LeafIterator(AbstractTraceRegion root) {
 		current = root;
 		expectedOffset = root.getMyOffset();
+		expectedLine = root.getMyLineNumber();
 	}
 	
 	@Override
@@ -58,8 +61,12 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 			while(idx == current.getNestedRegions().size() - 1) {
 				if (expectedOffset != current.getMyOffset() + current.getMyLength()) {
 					traversalIndizes.add(idx);
-					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, current.getMyOffset() + current.getMyLength() - expectedOffset, current.getAssociatedLocations(), current);
+					AbstractTraceRegion result = new TemporaryTraceRegion(
+							expectedOffset, current.getMyOffset() + current.getMyLength() - expectedOffset,
+							expectedLine, current.getMyEndLineNumber(),
+							current.getAssociatedLocations(), current);
 					expectedOffset = current.getMyOffset() + current.getMyLength();
+					expectedLine = current.getMyEndLineNumber();
 					return result;
 				}
 				if (traversalIndizes.isEmpty())
@@ -75,9 +82,13 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 					return firstLeafOfCurrent();
 				} else {
 					final AbstractTraceRegion parent = current;
-					AbstractTraceRegion result = new TemporaryTraceRegion(expectedOffset, next.getMyOffset() - expectedOffset, current.getAssociatedLocations(), parent);
+					AbstractTraceRegion result = new TemporaryTraceRegion(
+							expectedOffset, next.getMyOffset() - expectedOffset,
+							expectedLine, next.getMyLineNumber(),
+							current.getAssociatedLocations(), parent);
 					traversalIndizes.add(idx);
 					expectedOffset = next.getMyOffset();
+					expectedLine = next.getMyLineNumber();
 					return result;
 				}
 			}
@@ -89,15 +100,20 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 		while(!current.getNestedRegions().isEmpty()) {
 			AbstractTraceRegion next = current.getNestedRegions().get(0);
 			if (next.getMyOffset() != current.getMyOffset()) {
-				AbstractTraceRegion result = new TemporaryTraceRegion(current.getMyOffset(), next.getMyOffset() - current.getMyOffset(), current.getAssociatedLocations(), current);
+				AbstractTraceRegion result = new TemporaryTraceRegion(
+						current.getMyOffset(), next.getMyOffset() - current.getMyOffset(),
+						current.getMyLineNumber(), next.getMyLineNumber(),
+						current.getAssociatedLocations(), current);
 				traversalIndizes.add(-1);
 				expectedOffset = next.getMyOffset();
+				expectedLine = next.getMyLineNumber();
 				return result;
 			}
 			traversalIndizes.add(0);
 			current = next;
 		}
 		expectedOffset = current.getMyOffset() + current.getMyLength();
+		expectedLine = current.getMyEndLineNumber();
 		return current;
 	}
 }

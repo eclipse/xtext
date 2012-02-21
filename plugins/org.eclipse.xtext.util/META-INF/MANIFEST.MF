@@ -13,5 +13,6 @@ Export-Package: org.eclipse.xtext.util,
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.3.2",
  com.google.guava;resolution:=optional;visibility:=reexport,
  com.google.inject;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
- javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport
+ javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport,
+ org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"

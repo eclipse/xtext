@@ -17,7 +17,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.builder.trace.TraceRegionSerializer.Callback;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer.Callback;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,20 +27,24 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 	
 	protected class Strategy implements TraceRegionSerializer.Strategy<DebugTraceRegion, DebugLocationData> {
 
-		public DebugLocationData createLocation(int offset, int length, URI path, String projectName) {
+		public DebugLocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path, String projectName) {
 			DebugLocationData result = TraceFactory.eINSTANCE.createDebugLocationData();
 			result.setOffset(offset);
 			result.setLength(length);
+			result.setLineNumber(lineNumber);
+			result.setEndLineNumber(endLineNumber);
 			result.setPath(path);
 			result.setProjectName(projectName);
 			return result;
 		}
 
-		public DebugTraceRegion createResult(int offset, int length, List<DebugLocationData> associations,
+		public DebugTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, List<DebugLocationData> associations,
 				DebugTraceRegion parent) {
 			DebugTraceRegion result = TraceFactory.eINSTANCE.createDebugTraceRegion();
 			result.setMyOffset(offset);
 			result.setMyLength(length);
+			result.setMyLineNumber(lineNumber);
+			result.setMyEndLineNumber(endLineNumber);
 			result.getAssociations().addAll(associations);
 			if (parent != null)
 				parent.getNestedRegions().add(result);
@@ -48,12 +53,12 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 
 		public void writeRegion(DebugTraceRegion region, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
-			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getAssociations(), region.getNestedRegions());
+			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.getAssociations(), region.getNestedRegions());
 		}
 
 		public void writeLocation(DebugLocationData location, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
-			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getPath(), location.getProjectName());
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath(), location.getProjectName());
 		}
 	}
 

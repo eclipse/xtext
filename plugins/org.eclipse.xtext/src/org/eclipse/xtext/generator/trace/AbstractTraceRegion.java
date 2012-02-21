@@ -14,8 +14,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.Lists;
 
@@ -44,6 +44,10 @@ public abstract class AbstractTraceRegion {
 		if (parent.getMyOffset() > getMyOffset())
 			return false;
 		if (parent.getMyOffset() + parent.getMyLength() < getMyOffset() + getMyLength())
+			return false;
+		if (parent.getMyLineNumber() > getMyLineNumber())
+			return false;
+		if (parent.getMyEndLineNumber() < getMyEndLineNumber())
 			return false;
 		return true;
 	}
@@ -97,7 +101,11 @@ public abstract class AbstractTraceRegion {
 	public abstract int getMyLength();
 
 	public abstract int getMyOffset();
-
+	
+	public abstract int getMyLineNumber();
+	
+	public abstract int getMyEndLineNumber();
+	
 	public abstract List<ILocationData> getAssociatedLocations();
 	
 	/**
@@ -113,7 +121,7 @@ public abstract class AbstractTraceRegion {
 		boolean allNull = true;
 		URI path = null;
 		String projectName = null;
-		ITextRegion region = ITextRegion.EMPTY_REGION;
+		ITextRegionWithLineInformation region = ITextRegionWithLineInformation.EMPTY_REGION;
 		for(ILocationData data: allData) {
 			if (path != null) {
 				if (!path.equals(data.getLocation())) {
@@ -129,9 +137,9 @@ public abstract class AbstractTraceRegion {
 					projectName = data.getProjectName();
 				}
 			}
-			region = region.merge(new TextRegion(data.getOffset(), data.getLength()));
+			region = region.merge(new TextRegionWithLineInformation(data.getOffset(), data.getLength(), data.getLineNumber(), data.getEndLineNumber()));
 		}
-		return new LocationData(region.getOffset(), region.getLength(), path, projectName);
+		return new LocationData(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path, projectName);
 	}
 	
 	@Nullable

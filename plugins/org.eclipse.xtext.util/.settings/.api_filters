@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.util" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Guice changed" id="923795461">
+            <message_arguments>
+                <message_argument value="2.3.0"/>
+                <message_argument value="2.2.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/util/Strings.java" type="org.eclipse.xtext.util.Strings">
         <filter comment="Fix: added final to public static constant in Strings" id="388100214">
             <message_arguments>

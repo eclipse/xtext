@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLength <em>Length</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLineNumber <em>Line Number</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getEndLineNumber <em>End Line Number</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getEndOffset <em>End Offset</em>}</li>
@@ -94,6 +96,58 @@ public interface DebugLocationData extends EObject {
 	 * @generated
 	 */
 	void setLength(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Line Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Line Number</em>' attribute.
+	 * @see #setLineNumber(int)
+	 * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugLocationData_LineNumber()
+	 * @model unique="false"
+	 * @generated
+	 */
+	int getLineNumber();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLineNumber <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Line Number</em>' attribute.
+	 * @see #getLineNumber()
+	 * @generated
+	 */
+	void setLineNumber(int value);
+
+	/**
+	 * Returns the value of the '<em><b>End Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>End Line Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>End Line Number</em>' attribute.
+	 * @see #setEndLineNumber(int)
+	 * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugLocationData_EndLineNumber()
+	 * @model unique="false"
+	 * @generated
+	 */
+	int getEndLineNumber();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getEndLineNumber <em>End Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>End Line Number</em>' attribute.
+	 * @see #getEndLineNumber()
+	 * @generated
+	 */
+	void setEndLineNumber(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Project Name</b></em>' attribute.

@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyOffset <em>My Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLength <em>My Length</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLineNumber <em>My Line Number</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndLineNumber <em>My End Line Number</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getNestedRegions <em>Nested Regions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndOffset <em>My End Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getAssociations <em>Associations</em>}</li>
@@ -141,5 +143,57 @@ public interface DebugTraceRegion extends EObject {
 	 * @generated
 	 */
 	void setMyLength(int value);
+
+	/**
+	 * Returns the value of the '<em><b>My Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>My Line Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>My Line Number</em>' attribute.
+	 * @see #setMyLineNumber(int)
+	 * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugTraceRegion_MyLineNumber()
+	 * @model unique="false"
+	 * @generated
+	 */
+	int getMyLineNumber();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLineNumber <em>My Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>My Line Number</em>' attribute.
+	 * @see #getMyLineNumber()
+	 * @generated
+	 */
+	void setMyLineNumber(int value);
+
+	/**
+	 * Returns the value of the '<em><b>My End Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>My End Line Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>My End Line Number</em>' attribute.
+	 * @see #setMyEndLineNumber(int)
+	 * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugTraceRegion_MyEndLineNumber()
+	 * @model unique="false"
+	 * @generated
+	 */
+	int getMyEndLineNumber();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndLineNumber <em>My End Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>My End Line Number</em>' attribute.
+	 * @see #getMyEndLineNumber()
+	 * @generated
+	 */
+	void setMyEndLineNumber(int value);
 
 } // DebugTraceRegion

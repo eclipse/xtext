@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,34 +20,16 @@ import org.eclipse.jdt.annotation.Nullable;
 @NonNullByDefault
 public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 
-	private final int myOffset;
-	private final int myLength;
+	private final ITextRegionWithLineInformation myRegion;
 	private final List<ILocationData> associatedLocations;
 
-	protected AbstractStatefulTraceRegion(int myOffset, int myLength, ILocationData associatedLocation, @Nullable AbstractTraceRegion parent) {
-		super(parent);
-		if (myOffset < 0)
-			throw new IllegalArgumentException("myOffset " + myOffset + " is < 0");
-		if (myLength < 0)
-			throw new IllegalArgumentException("myLength " + myLength + " is < 0");
-		this.myOffset = myOffset;
-		this.myLength = myLength;
-		this.associatedLocations = Collections.singletonList(associatedLocation);
-		if (!isConsistentWithParent()) {
-			throw new IllegalArgumentException("Produced region is inconsisten with parent, this: " + this + ", parent: " + parent);
-		}
+	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, ILocationData associatedLocation, @Nullable AbstractTraceRegion parent) {
+		this(myRegion, Collections.singletonList(associatedLocation), parent);
 	}
 	
-	protected AbstractStatefulTraceRegion(int myOffset, int myLength, List<ILocationData> associatedLocations, @Nullable AbstractTraceRegion parent) {
+	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, List<ILocationData> associatedLocations, @Nullable AbstractTraceRegion parent) {
 		super(parent);
-		if (myOffset < 0)
-			throw new IllegalArgumentException("myOffset " + myOffset + " is < 0");
-		if (myLength < 0)
-			throw new IllegalArgumentException("myLength " + myLength + " is < 0");
-		if (associatedLocations.isEmpty())
-			throw new IllegalArgumentException("associatedLocations may not be empty");
-		this.myOffset = myOffset;
-		this.myLength = myLength;
+		this.myRegion = myRegion;
 		this.associatedLocations = associatedLocations;
 		if (!isConsistentWithParent()) {
 			throw new IllegalArgumentException("Produced region is inconsisten with parent, this: " + this + ", parent: " + parent);
@@ -55,12 +38,26 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 	
 	@Override
 	public int getMyLength() {
-		return myLength;
+		return myRegion.getLength();
 	}
 
 	@Override
 	public int getMyOffset() {
-		return myOffset;
+		return myRegion.getOffset();
+	}
+	
+	@Override
+	public int getMyEndLineNumber() {
+		return myRegion.getEndLineNumber();
+	}
+	
+	@Override
+	public int getMyLineNumber() {
+		return myRegion.getLineNumber();
+	}
+	
+	protected ITextRegionWithLineInformation getMyRegion() {
+		return myRegion;
 	}
 
 	@Override

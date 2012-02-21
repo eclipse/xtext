@@ -24,6 +24,8 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getLength <em>Length</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getLineNumber <em>Line Number</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getEndLineNumber <em>End Line Number</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getProjectName <em>Project Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getEndOffset <em>End Offset</em>}</li>
@@ -82,6 +84,46 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected int length = LENGTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLineNumber() <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LINE_NUMBER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getLineNumber() <em>Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected int lineNumber = LINE_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEndLineNumber() <em>End Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEndLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int END_LINE_NUMBER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getEndLineNumber() <em>End Line Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEndLineNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected int endLineNumber = END_LINE_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getProjectName() <em>Project Name</em>}' attribute.
@@ -208,6 +250,48 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getLineNumber() {
+		return lineNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLineNumber(int newLineNumber) {
+		int oldLineNumber = lineNumber;
+		lineNumber = newLineNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracePackage.DEBUG_LOCATION_DATA__LINE_NUMBER, oldLineNumber, lineNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getEndLineNumber() {
+		return endLineNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEndLineNumber(int newEndLineNumber) {
+		int oldEndLineNumber = endLineNumber;
+		endLineNumber = newEndLineNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracePackage.DEBUG_LOCATION_DATA__END_LINE_NUMBER, oldEndLineNumber, endLineNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getProjectName() {
 		return projectName;
 	}
@@ -268,6 +352,10 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 				return getOffset();
 			case TracePackage.DEBUG_LOCATION_DATA__LENGTH:
 				return getLength();
+			case TracePackage.DEBUG_LOCATION_DATA__LINE_NUMBER:
+				return getLineNumber();
+			case TracePackage.DEBUG_LOCATION_DATA__END_LINE_NUMBER:
+				return getEndLineNumber();
 			case TracePackage.DEBUG_LOCATION_DATA__PROJECT_NAME:
 				return getProjectName();
 			case TracePackage.DEBUG_LOCATION_DATA__PATH:
@@ -291,6 +379,12 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 				return;
 			case TracePackage.DEBUG_LOCATION_DATA__LENGTH:
 				setLength((Integer)newValue);
+				return;
+			case TracePackage.DEBUG_LOCATION_DATA__LINE_NUMBER:
+				setLineNumber((Integer)newValue);
+				return;
+			case TracePackage.DEBUG_LOCATION_DATA__END_LINE_NUMBER:
+				setEndLineNumber((Integer)newValue);
 				return;
 			case TracePackage.DEBUG_LOCATION_DATA__PROJECT_NAME:
 				setProjectName((String)newValue);
@@ -316,6 +410,12 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 			case TracePackage.DEBUG_LOCATION_DATA__LENGTH:
 				setLength(LENGTH_EDEFAULT);
 				return;
+			case TracePackage.DEBUG_LOCATION_DATA__LINE_NUMBER:
+				setLineNumber(LINE_NUMBER_EDEFAULT);
+				return;
+			case TracePackage.DEBUG_LOCATION_DATA__END_LINE_NUMBER:
+				setEndLineNumber(END_LINE_NUMBER_EDEFAULT);
+				return;
 			case TracePackage.DEBUG_LOCATION_DATA__PROJECT_NAME:
 				setProjectName(PROJECT_NAME_EDEFAULT);
 				return;
@@ -340,6 +440,10 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 				return offset != OFFSET_EDEFAULT;
 			case TracePackage.DEBUG_LOCATION_DATA__LENGTH:
 				return length != LENGTH_EDEFAULT;
+			case TracePackage.DEBUG_LOCATION_DATA__LINE_NUMBER:
+				return lineNumber != LINE_NUMBER_EDEFAULT;
+			case TracePackage.DEBUG_LOCATION_DATA__END_LINE_NUMBER:
+				return endLineNumber != END_LINE_NUMBER_EDEFAULT;
 			case TracePackage.DEBUG_LOCATION_DATA__PROJECT_NAME:
 				return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
 			case TracePackage.DEBUG_LOCATION_DATA__PATH:
@@ -364,6 +468,10 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 		result.append(offset);
 		result.append(", length: ");
 		result.append(length);
+		result.append(", lineNumber: ");
+		result.append(lineNumber);
+		result.append(", endLineNumber: ");
+		result.append(endLineNumber);
 		result.append(", projectName: ");
 		result.append(projectName);
 		result.append(", path: ");

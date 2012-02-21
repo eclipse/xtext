@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.ImmutableList;
 
@@ -23,13 +24,15 @@ import com.google.common.collect.ImmutableList;
 @NonNullByDefault
 public class TraceRegion extends AbstractStatefulTraceRegion {
 
-	public TraceRegion(int myOffset, int myLength, int associatedOffset, int associatedLength, 
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, 
+			int associatedOffset, int associatedLength, int associatedLineNumber, int associatedEndLineNumber, 
 			@Nullable AbstractTraceRegion parent, @Nullable URI associatedPath, @Nullable String associatedProject) {
-		this(myOffset, myLength, new LocationData(associatedOffset, associatedLength, associatedPath, associatedProject), parent);
+		this(myOffset, myLength, myLineNumber, myEndLineNumber, 
+				new LocationData(associatedOffset, associatedLength, associatedLineNumber, associatedEndLineNumber, associatedPath, associatedProject), parent);
 	}
 	
-	public TraceRegion(int myOffset, int myLength, ILocationData locationData, @Nullable AbstractTraceRegion parent) {
-		super(myOffset, myLength, locationData, parent);
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, ILocationData locationData, @Nullable AbstractTraceRegion parent) {
+		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), locationData, parent);
 		if (parent == null) {
 			if (locationData.getLocation() == null) {
 				throw new IllegalArgumentException("associatedPath may not be null");
@@ -47,8 +50,8 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
  		}
 	}
 	
-	public TraceRegion(int myOffset, int myLength, List<ILocationData> allLocationData, @Nullable AbstractTraceRegion parent) {
-		super(myOffset, myLength, ImmutableList.copyOf(allLocationData), parent);
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, List<ILocationData> allLocationData, @Nullable AbstractTraceRegion parent) {
+		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), ImmutableList.copyOf(allLocationData), parent);
 		if (parent == null) {
 			for(ILocationData locationData: allLocationData) {
 				if (locationData.getLocation() == null) {

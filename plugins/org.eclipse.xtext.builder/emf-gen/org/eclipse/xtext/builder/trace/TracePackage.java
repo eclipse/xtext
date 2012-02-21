@@ -94,13 +94,31 @@ public interface TracePackage extends EPackage {
 	int DEBUG_TRACE_REGION__MY_LENGTH = 2;
 
 	/**
+	 * The feature id for the '<em><b>My Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_REGION__MY_LINE_NUMBER = 3;
+
+	/**
+	 * The feature id for the '<em><b>My End Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_REGION__MY_END_LINE_NUMBER = 4;
+
+	/**
 	 * The feature id for the '<em><b>Nested Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__NESTED_REGIONS = 3;
+	int DEBUG_TRACE_REGION__NESTED_REGIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>My End Offset</b></em>' attribute.
@@ -109,7 +127,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__MY_END_OFFSET = 4;
+	int DEBUG_TRACE_REGION__MY_END_OFFSET = 6;
 
 	/**
 	 * The feature id for the '<em><b>Associations</b></em>' containment reference list.
@@ -118,7 +136,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION__ASSOCIATIONS = 5;
+	int DEBUG_TRACE_REGION__ASSOCIATIONS = 7;
 
 	/**
 	 * The number of structural features of the '<em>Debug Trace Region</em>' class.
@@ -127,7 +145,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION_FEATURE_COUNT = 6;
+	int DEBUG_TRACE_REGION_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl <em>Debug Location Data</em>}' class.
@@ -167,13 +185,31 @@ public interface TracePackage extends EPackage {
 	int DEBUG_LOCATION_DATA__LENGTH = 2;
 
 	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__LINE_NUMBER = 3;
+
+	/**
+	 * The feature id for the '<em><b>End Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_LOCATION_DATA__END_LINE_NUMBER = 4;
+
+	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA__PROJECT_NAME = 3;
+	int DEBUG_LOCATION_DATA__PROJECT_NAME = 5;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -182,7 +218,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA__PATH = 4;
+	int DEBUG_LOCATION_DATA__PATH = 6;
 
 	/**
 	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
@@ -191,7 +227,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA__END_OFFSET = 5;
+	int DEBUG_LOCATION_DATA__END_OFFSET = 7;
 
 	/**
 	 * The number of structural features of the '<em>Debug Location Data</em>' class.
@@ -200,7 +236,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA_FEATURE_COUNT = 6;
+	int DEBUG_LOCATION_DATA_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -300,6 +336,28 @@ public interface TracePackage extends EPackage {
 	EAttribute getDebugLocationData_Length();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLineNumber <em>Line Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Line Number</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getLineNumber()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_LineNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getEndLineNumber <em>End Line Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>End Line Number</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getEndLineNumber()
+	 * @see #getDebugLocationData()
+	 * @generated
+	 */
+	EAttribute getDebugLocationData_EndLineNumber();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getProjectName <em>Project Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -364,6 +422,28 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDebugTraceRegion_MyLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLineNumber <em>My Line Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My Line Number</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyLineNumber()
+	 * @see #getDebugTraceRegion()
+	 * @generated
+	 */
+	EAttribute getDebugTraceRegion_MyLineNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndLineNumber <em>My End Line Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>My End Line Number</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndLineNumber()
+	 * @see #getDebugTraceRegion()
+	 * @generated
+	 */
+	EAttribute getDebugTraceRegion_MyEndLineNumber();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -467,6 +547,22 @@ public interface TracePackage extends EPackage {
 		EAttribute DEBUG_LOCATION_DATA__LENGTH = eINSTANCE.getDebugLocationData_Length();
 
 		/**
+		 * The meta object literal for the '<em><b>Line Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__LINE_NUMBER = eINSTANCE.getDebugLocationData_LineNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>End Line Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_LOCATION_DATA__END_LINE_NUMBER = eINSTANCE.getDebugLocationData_EndLineNumber();
+
+		/**
 		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -513,6 +609,22 @@ public interface TracePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEBUG_TRACE_REGION__MY_LENGTH = eINSTANCE.getDebugTraceRegion_MyLength();
+
+		/**
+		 * The meta object literal for the '<em><b>My Line Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_TRACE_REGION__MY_LINE_NUMBER = eINSTANCE.getDebugTraceRegion_MyLineNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>My End Line Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_TRACE_REGION__MY_END_LINE_NUMBER = eINSTANCE.getDebugTraceRegion_MyEndLineNumber();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.
