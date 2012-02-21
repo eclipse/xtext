@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -26,19 +27,19 @@ public class CharSequenceTraceWrapper {
 	private ILocationInFileProvider locationInFileProvider;
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, EObject origin) {
-		ITextRegion location = locationInFileProvider.getSignificantTextRegion(origin);
-		return wrapWithTraceData(sequence, origin.eResource().getURI(), location.getOffset(), location.getLength());
+		ITextRegionWithLineInformation location = (ITextRegionWithLineInformation) locationInFileProvider.getSignificantTextRegion(origin);
+		return wrapWithTraceData(sequence, origin.eResource().getURI(), location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber());
 	}
 	
-	public CharSequence wrapWithTraceData(CharSequence sequence, URI originResourceURI, int originOffset, int originLength) {
+	public CharSequence wrapWithTraceData(CharSequence sequence, URI originResourceURI, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
 		if (!originResourceURI.isPlatformResource()) {
 			throw new IllegalArgumentException("URI has to be a platform resource uri but was: " + originResourceURI+ ". Use #wrapWithTraceData(CharSequence, URI, String, int, int) instead.");
 		}
-		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.segment(1), originOffset, originLength);
+		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.segment(1), originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	
-	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, @Nullable String originProject, int originOffset, int originLength) {
-		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originProject, originOffset, originLength);
+	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, @Nullable String originProject, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
+		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originProject, originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	
 	protected static class CharSequenceBasedTraceRegionProvider implements ITraceRegionProvider, CharSequence {
@@ -48,14 +49,18 @@ public class CharSequenceTraceWrapper {
 		private final String originProject;
 		private final int originOffset;
 		private final int originLength;
+		private final int originLineNumber;
+		private final int originEndLineNumber;
 
 		public CharSequenceBasedTraceRegionProvider(CharSequence delegate, URI originURI, @Nullable String originProject,
-				int originOffset, int originLength) {
+				int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
 			this.delegate = delegate;
 			this.originURI = originURI;
 			this.originProject = originProject;
 			this.originOffset = originOffset;
 			this.originLength = originLength;
+			this.originLineNumber = originLineNumber;
+			this.originEndLineNumber = originEndLineNumber;
 		}
 
 		public int length() {
@@ -76,8 +81,8 @@ public class CharSequenceTraceWrapper {
 		}
 
 		public AbstractTraceRegion getTraceRegion() {
-			ILocationData locationData = new LocationData(originOffset, originLength, originURI, originProject);
-			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), locationData, null);
+			ILocationData locationData = new LocationData(originOffset, originLength, originLineNumber, originEndLineNumber, originURI, originProject);
+			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), 0, Strings.countLineBreaks(delegate), locationData, null);
 			return result;
 		}
 

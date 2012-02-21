@@ -9,22 +9,13 @@ package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
-/*
- * Implementation note:
- * We do not extend ITextRegion since that one offers #merge.
- * If ILocationData was mergable with ITextRegion, one or the
- * other would have to either dicard information or create an
- * unwanted dependency. Otherwise the result of #merge would 
- * depend on the order which is not desired.
- */
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ILocationData {
+public interface ILocationData extends ITextRegionWithLineInformation {
 
-	int getOffset();
-	int getLength();
 	@Nullable URI getLocation();
 	@Nullable String getProjectName();
 	

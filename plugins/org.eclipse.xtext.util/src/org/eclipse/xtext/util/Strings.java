@@ -429,6 +429,33 @@ public class Strings {
 	
 	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
+	/**
+	 * Counts the number of line breaks. Assumes {@code '\r'}, {@code '\n'} or {@code '\r\n'} to be valid line breaks.
+	 * @since 2.3
+	 */
+	public static int countLineBreaks(CharSequence text) {
+		int result = 0;
+		char ch;
+		int length= text.length();
+		for (int i= 0; i < length; i++) {
+			ch= text.charAt(i);
+			if (ch == '\r') {
+				result++;
+				if (i + 1 < length) {
+					if (text.charAt(i + 1) == '\n') {
+						i++;
+					}
+				}
+			} else if (ch == '\n') {
+				result++;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Counts the number of lines where {@link #separator} is assumed to be a valid line break.
+	 */
 	public static int countLines(String text) {
 		return countLines(text, separator);
 	}
