@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 
@@ -26,10 +27,13 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	private final List<ILocationData> locations;
 	private final int offset;
 	private final int length;
+	private final int lineNumber;
+	private final int endLineNumber;
 
-	public AppendableBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset) {
+	public AppendableBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset, int lineNumber) {
 		super(parent);
 		this.offset = offset;
+		this.lineNumber = lineNumber;
 		if (parent == null) {
 			this.locations = Lists.newArrayList(delegate.getLocationData());
 		} else {
@@ -47,7 +51,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 				if (matches) {
 					this.locations = Lists.newArrayList();
 					for(ILocationData locationData: delegate.getLocationData()) {
-						this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), null, null));
+						this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), locationData.getLineNumber(), locationData.getEndLineNumber(), null, null));
 					}
 				} else {
 					this.locations = Lists.newArrayList(delegate.getLocationData());
@@ -55,21 +59,26 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 			}
 		}
 		int length = 0;
+		int line = lineNumber;
 		for (Object child : delegate.getChildren()) {
 			if (child instanceof String) {
-				length += ((String) child).length();
+				String s = (String) child;
+				length += s.length();
+				line += Strings.countLineBreaks(s);
 			} else {
 				TreeAppendable castedChild = (TreeAppendable) child;
 				if (hasVisibleChildren(castedChild)) {
-					AppendableBasedTraceRegion childRegion = new AppendableBasedTraceRegion(this, castedChild, offset
-							+ length);
+					AppendableBasedTraceRegion childRegion = new AppendableBasedTraceRegion(
+							this, castedChild, offset + length, line);
 					length += childRegion.getMyLength();
+					line = childRegion.getMyEndLineNumber();
 				}
 			}
 		}
 		this.length = length;
+		this.endLineNumber = line;
 	}
-
+	
 	protected boolean hasVisibleChildren(TreeAppendable castedChild) {
 		for(Object o: castedChild.getChildren()) {
 			if (o instanceof String)
@@ -88,6 +97,16 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	@Override
 	public int getMyOffset() {
 		return offset;
+	}
+	
+	@Override
+	public int getMyLineNumber() {
+		return lineNumber;
+	}
+	
+	@Override
+	public int getMyEndLineNumber() {
+		return endLineNumber;
 	}
 
 	@Override
