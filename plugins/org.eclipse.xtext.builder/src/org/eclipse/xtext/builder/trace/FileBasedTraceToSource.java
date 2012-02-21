@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToSource;
 import org.eclipse.xtext.generator.trace.ITraceToTarget;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.base.Function;

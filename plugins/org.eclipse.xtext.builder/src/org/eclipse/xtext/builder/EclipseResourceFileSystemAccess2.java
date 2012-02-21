@@ -26,11 +26,11 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
-import org.eclipse.xtext.builder.trace.TraceRegionSerializer;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
