@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,14 +34,14 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, ILocationData locationData, @Nullable AbstractTraceRegion parent) {
 		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), locationData, parent);
 		if (parent == null) {
-			if (locationData.getLocation() == null) {
+			if (locationData.getPath() == null) {
 				throw new IllegalArgumentException("associatedPath may not be null");
 			}
 			if (locationData.getProjectName() == null) {
 				throw new IllegalArgumentException("associatedProjectName may not be null");
 			}
  		} else {
- 			if (parent.getAssociatedPath() == null && locationData.getLocation() == null) {
+ 			if (parent.getAssociatedPath() == null && locationData.getPath() == null) {
  				throw new IllegalArgumentException("associatedPath may not be null");
  			}
  			if (parent.getAssociatedProjectName() == null && locationData.getProjectName() == null) {
@@ -51,10 +51,10 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 	}
 	
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, List<ILocationData> allLocationData, @Nullable AbstractTraceRegion parent) {
-		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), ImmutableList.copyOf(allLocationData), parent);
+		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), Lists.newArrayList(allLocationData), parent);
 		if (parent == null) {
 			for(ILocationData locationData: allLocationData) {
-				if (locationData.getLocation() == null) {
+				if (locationData.getPath() == null) {
 					throw new IllegalArgumentException("associatedPath may not be null");
 				}
 				if (locationData.getProjectName() == null) {
@@ -65,7 +65,7 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
  			boolean nullSeen = false;
  			boolean notNullSeen = false;
  			for(ILocationData locationData: allLocationData) {
- 				if (locationData.getLocation() == null) {
+ 				if (locationData.getPath() == null) {
  					nullSeen = true;
  				} else {
  					notNullSeen = true;

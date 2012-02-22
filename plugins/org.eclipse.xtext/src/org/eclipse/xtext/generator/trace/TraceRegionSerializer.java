@@ -63,7 +63,7 @@ public class TraceRegionSerializer {
 		}
 
 		public void writeLocation(ILocationData location, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
-			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getLocation(), location.getProjectName());
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath(), location.getProjectName());
 		}
 		
 	}

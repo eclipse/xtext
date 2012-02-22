@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.trace;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
@@ -34,8 +35,8 @@ public class TraceRegionTest extends Assert {
 		TraceRegion region = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, URI.createURI("uri"), "project");
 		assertEquals(0, region.getMyOffset());
 		assertEquals(1, region.getMyLength());
-		assertEquals(2, region.getMergedLocationData().getOffset());
-		assertEquals(3, region.getMergedLocationData().getLength());
+		assertEquals(2, region.getMergedAssociatedLocation().getOffset());
+		assertEquals(3, region.getMergedAssociatedLocation().getLength());
 		assertEquals(URI.createURI("uri"), region.getAssociatedPath());
 		assertEquals("project", region.getAssociatedProjectName());
 		assertNull(region.getParent());
@@ -222,5 +223,170 @@ public class TraceRegionTest extends Assert {
 		TraceRegion parent = new TraceRegion(1, 2, 0, 0, 3, 4, 0, 0, root, null, null);
 		new TraceRegion(2, 1, 0, 0, 5, 6, 0, 0, parent, null, null);
 		assertEquals("<1:2[a<3:4[b<5:6[c]]d]e", root.getAnnotatedString("abcde"));
+	}
+	
+	@Test
+	public void testInvertFor_01() {
+		URI path = URI.createURI("a");
+		TraceRegion root = new TraceRegion(1, 2, 3, 4, 5, 6, 7, 8, null, path, "projectA");
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"), "projectB");
+		assertEquals(1, invertedList.size());
+		AbstractTraceRegion inverted = invertedList.get(0);
+		assertEquals(5, inverted.getMyOffset());
+		assertEquals(6, inverted.getMyLength());
+		assertEquals(7, inverted.getMyLineNumber());
+		assertEquals(8, inverted.getMyEndLineNumber());
+		ILocationData associatedLocation = inverted.getMergedAssociatedLocation();
+		assertEquals(1, associatedLocation.getOffset());
+		assertEquals(2, associatedLocation.getLength());
+		assertEquals(3, associatedLocation.getLineNumber());
+		assertEquals(4, associatedLocation.getEndLineNumber());
+	}
+	
+	@Test
+	public void testInvertFor_02() {
+		URI path = URI.createURI("a");
+		TraceRegion root = new TraceRegion(0, 2, 0, 2, 4, 2, 4, 6, null, path, "projectA");
+		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 1, 4, 5, root, null, null);
+		TraceRegion second = new TraceRegion(1, 1, 1, 2, 5, 1, 5, 6, root, null, null);
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"), "projectB");
+		assertEquals(1, invertedList.size());
+		AbstractTraceRegion inverted = invertedList.get(0);
+		assertEquals(2, inverted.getNestedRegions().size());
+		assertEquals(4, inverted.getMyOffset());
+		assertEquals(2, inverted.getMyLength());
+		assertEquals(4, inverted.getMyLineNumber());
+		assertEquals(6, inverted.getMyEndLineNumber());
+		ILocationData associatedLocation = inverted.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(2, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion firstChild = inverted.getNestedRegions().get(0);
+		assertEquals(0, firstChild.getNestedRegions().size());
+		assertEquals(4, firstChild.getMyOffset());
+		assertEquals(1, firstChild.getMyLength());
+		assertEquals(4, firstChild.getMyLineNumber());
+		assertEquals(5, firstChild.getMyEndLineNumber());
+		associatedLocation = firstChild.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(1, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion secondChild = inverted.getNestedRegions().get(1);
+		assertEquals(0, secondChild.getNestedRegions().size());
+		assertEquals(5, secondChild.getMyOffset());
+		assertEquals(1, secondChild.getMyLength());
+		assertEquals(5, secondChild.getMyLineNumber());
+		assertEquals(6, secondChild.getMyEndLineNumber());
+		associatedLocation = secondChild.getMergedAssociatedLocation();
+		assertEquals(1, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(1, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
+	}
+	
+	@Test
+	public void testInvertFor_03() {
+		URI path = URI.createURI("a");
+		TraceRegion root = new TraceRegion(0, 2, 0, 2, 4, 3, 4, 6, null, path, "projectA");
+		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 1, 4, 5, root, null, null);
+		TraceRegion second = new TraceRegion(1, 1, 1, 2, 6, 1, 5, 6, root, null, null);
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"), "projectB");
+		assertEquals(1, invertedList.size());
+		AbstractTraceRegion inverted = invertedList.get(0);
+		assertEquals(2, inverted.getNestedRegions().size());
+		assertEquals(4, inverted.getMyOffset());
+		assertEquals(3, inverted.getMyLength());
+		assertEquals(4, inverted.getMyLineNumber());
+		assertEquals(6, inverted.getMyEndLineNumber());
+		ILocationData associatedLocation = inverted.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(2, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion firstChild = inverted.getNestedRegions().get(0);
+		assertEquals(0, firstChild.getNestedRegions().size());
+		assertEquals(4, firstChild.getMyOffset());
+		assertEquals(1, firstChild.getMyLength());
+		assertEquals(4, firstChild.getMyLineNumber());
+		assertEquals(5, firstChild.getMyEndLineNumber());
+		associatedLocation = firstChild.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(1, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion secondChild = inverted.getNestedRegions().get(1);
+		assertEquals(0, secondChild.getNestedRegions().size());
+		assertEquals(6, secondChild.getMyOffset());
+		assertEquals(1, secondChild.getMyLength());
+		assertEquals(5, secondChild.getMyLineNumber());
+		assertEquals(6, secondChild.getMyEndLineNumber());
+		associatedLocation = secondChild.getMergedAssociatedLocation();
+		assertEquals(1, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(1, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
+	}
+	
+	@Test
+	public void testInvertFor_04() {
+		URI path = URI.createURI("a");
+		TraceRegion root = new TraceRegion(0, 2, 0, 2, 4, 3, 4, 6, null, path, "projectA");
+		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 2, 4, 5, root, null, null);
+		TraceRegion second = new TraceRegion(1, 1, 1, 2, 5, 2, 5, 6, root, null, null);
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"), "projectB");
+		assertEquals(1, invertedList.size());
+		AbstractTraceRegion inverted = invertedList.get(0);
+		assertEquals(2, inverted.getNestedRegions().size());
+		assertEquals(4, inverted.getMyOffset());
+		assertEquals(3, inverted.getMyLength());
+		assertEquals(4, inverted.getMyLineNumber());
+		assertEquals(6, inverted.getMyEndLineNumber());
+		ILocationData associatedLocation = inverted.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(2, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion firstChild = inverted.getNestedRegions().get(0);
+		assertEquals(1, firstChild.getNestedRegions().size());
+		assertEquals(4, firstChild.getMyOffset());
+		assertEquals(2, firstChild.getMyLength());
+		assertEquals(4, firstChild.getMyLineNumber());
+		assertEquals(5, firstChild.getMyEndLineNumber());
+		associatedLocation = firstChild.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(1, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion grandChild = firstChild.getNestedRegions().get(0);
+		assertEquals(0, grandChild.getNestedRegions().size());
+		assertEquals(5, grandChild.getMyOffset());
+		assertEquals(1, grandChild.getMyLength());
+		assertEquals(5, grandChild.getMyLineNumber());
+		assertEquals(5, grandChild.getMyEndLineNumber());
+		associatedLocation = grandChild.getMergedAssociatedLocation();
+		assertEquals(1, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(1, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion secondChild = inverted.getNestedRegions().get(1);
+		assertEquals(0, secondChild.getNestedRegions().size());
+		assertEquals(6, secondChild.getMyOffset());
+		assertEquals(1, secondChild.getMyLength());
+		assertEquals(5, secondChild.getMyLineNumber());
+		assertEquals(6, secondChild.getMyEndLineNumber());
+		associatedLocation = secondChild.getMergedAssociatedLocation();
+		assertEquals(1, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(1, associatedLocation.getLineNumber());
+		assertEquals(2, associatedLocation.getEndLineNumber());
 	}
 }
