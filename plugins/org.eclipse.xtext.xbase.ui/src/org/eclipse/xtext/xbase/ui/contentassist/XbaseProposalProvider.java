@@ -227,21 +227,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	@Override
-	protected boolean doCreateIntProposals() {
-		return false;
-	}
-	
-	@Override
-	protected boolean doCreateIdProposals() {
-		return false;
-	}
-	
-	@Override
-	protected boolean doCreateStringProposals() {
-		return false;
-	}
-	
-	@Override
 	public XbaseScopeProvider getScopeProvider() {
 		return (XbaseScopeProvider) super.getScopeProvider();
 	}

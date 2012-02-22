@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Collections.emptyList;
-
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,11 +22,125 @@ import testdata.OuterClass;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Collections.emptyList;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
 public abstract class AbstractXbaseEvaluationTest extends Assert {
+
+	@Test public void testIntLiteral_0() throws Exception {
+		assertEvaluatesTo(1, "1");
+	}
+
+	@Test public void testIntLiteral_1() throws Exception {
+		assertEvaluatesTo(017, "017");
+	}
+	
+	@Test public void testIntLiteral_2() throws Exception {
+		assertEvaluatesTo(0x17, "0x17");
+	}
+	
+	@Test public void testLongLiteral_0() throws Exception {
+		assertEvaluatesTo(1l, "1l");
+	}
+
+	@Test public void testLongLiteral_1() throws Exception {
+		assertEvaluatesTo(017l, "017l");
+	}
+	
+	@Test public void testLongLiteral_2() throws Exception {
+		assertEvaluatesTo(0x17l, "0x17L");
+	}
+	
+	@Test public void testFloatLiteral_0() throws Exception {
+		assertEvaluatesTo(1f, "1f");
+	}
+
+	@Test public void testFloatLiteral_1() throws Exception {
+		assertEvaluatesTo(017f, "017f");
+	}
+	
+	@Test public void testFloatLiteral_2() throws Exception {
+		assertEvaluatesTo(1.0f, "1.0f");
+	}
+	
+	@Test public void testFloatLiteral_3() throws Exception {
+		assertEvaluatesTo(1.0e-10f, "1.0e-10f");
+	}
+	
+	@Test public void testFloatLiteral_4() throws Exception {
+		assertEvaluatesTo(1.0e+10f, "1.0e+10f");
+	}
+	
+	@Test public void testFloatLiteral_5() throws Exception {
+		assertEvaluatesTo(1.0E10f, "1.0E10f");
+	}
+	
+	@Test public void testDoubleLiteral_0() throws Exception {
+		assertEvaluatesTo(1d, "1d");
+	}
+
+	@Test public void testDoubleLiteral_1() throws Exception {
+		assertEvaluatesTo(017d, "017d");
+	}
+	
+	@Test public void testDoubleLiteral_2() throws Exception {
+		assertEvaluatesTo(1.0, "1.0");
+	}
+	
+	@Test public void testDoubleLiteral_3() throws Exception {
+		assertEvaluatesTo(1.0e-10, "1.0e-10");
+	}
+	
+	@Test public void testDoubleLiteral_4() throws Exception {
+		assertEvaluatesTo(1.0E+10, "1.0E+10");
+	}
+	
+	@Test public void testDoubleLiteral_5() throws Exception {
+		assertEvaluatesTo(1.0E10, "1.0E10");
+	}
+
+	@Test public void testDoubleLiteral_6() throws Exception {
+		assertEvaluatesTo(1.0d, "1.0d");
+	}
+	
+	@Test public void testDoubleLiteral_7() throws Exception {
+		assertEvaluatesTo(1.0e-10d, "1.0e-10d");
+	}
+	
+	@Test public void testDoubleLiteral_8() throws Exception {
+		assertEvaluatesTo(1.0E+10d, "1.0E+10d");
+	}
+	
+	@Test public void testDoubleLiteral_9() throws Exception {
+		assertEvaluatesTo(1.0E10d, "1.0E10d");
+	}
+
+	@Test public void testBigInteger_0() throws Exception {
+		assertEvaluatesTo(new BigInteger("1"), "{ val java.math.BigInteger x = 1b  x}");
+	}
+
+	@Test public void testBigInteger_1() throws Exception {
+		assertEvaluatesTo(new BigInteger("12345678901234567890123456789012345678901234567890"), 
+				"{ val java.math.BigInteger x = 12345678901234567890123456789012345678901234567890B  x}");
+	}
+
+	@Test public void testBigDecimal_0() throws Exception {
+		assertEvaluatesTo(new BigDecimal("1.0"), "{ val java.math.BigDecimal x = 1.0b  x}");
+	}
+
+	@Test public void testBigDecimal_1() throws Exception {
+		assertEvaluatesTo(new BigDecimal("1.0e500"), 
+				"{ val java.math.BigDecimal x = 1.0e500B  x}");
+	}
+
+	@Test public void testBigDecimal_2() throws Exception {
+		assertEvaluatesTo(new BigDecimal("123456789012345678901234567890.123456789012345678901234567890"), 
+				"{ val java.math.BigDecimal x = 123456789012345678901234567890.123456789012345678901234567890b  x}");
+	}
 
 	@Test public void testImplicitOneArgClosure() throws Exception {
 		assertEvaluatesTo("foo","[it].apply('foo')");
