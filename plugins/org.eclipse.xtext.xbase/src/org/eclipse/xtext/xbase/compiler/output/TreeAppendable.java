@@ -335,7 +335,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 
 	public AbstractTraceRegion getTraceRegion() {
 		if (locationData == null) {
-			throw new IllegalStateException("tree appendabel was used without tracing");
+			throw new IllegalStateException("tree appendable was used without tracing");
 		}
 		return new AppendableBasedTraceRegion(null, this, 0, 0);
 	}

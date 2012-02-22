@@ -84,8 +84,8 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertEquals("", appendable.getContent());
 		AbstractTraceRegion traceRegion = appendable.getTraceRegion();
 		assertNotNull(traceRegion);
-		assertEquals(47, traceRegion.getMergedLocationData().getOffset());
-		assertEquals(11, traceRegion.getMergedLocationData().getLength());
+		assertEquals(47, traceRegion.getMergedAssociatedLocation().getOffset());
+		assertEquals(11, traceRegion.getMergedAssociatedLocation().getLength());
 		assertEquals(resource.getURI(), traceRegion.getAssociatedPath());
 		assertEquals("test", traceRegion.getAssociatedProjectName());
 		assertTrue(traceRegion.getNestedRegions().isEmpty());
@@ -103,15 +103,15 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertEquals("initialfirstsecond", appendable.getContent());
 		AbstractTraceRegion traceRegion = appendable.getTraceRegion();
 		assertNotNull(traceRegion);
-		assertEquals(47, traceRegion.getMergedLocationData().getOffset());
-		assertEquals(11, traceRegion.getMergedLocationData().getLength());
+		assertEquals(47, traceRegion.getMergedAssociatedLocation().getOffset());
+		assertEquals(11, traceRegion.getMergedAssociatedLocation().getLength());
 		assertEquals(0, traceRegion.getMyOffset());
 		assertEquals("initialfirstsecond".length(), traceRegion.getMyLength());
 		List<AbstractTraceRegion> nestedRegions = traceRegion.getNestedRegions();
 		assertEquals(1, nestedRegions.size());
 		AbstractTraceRegion child = nestedRegions.get(0);
-		assertEquals(8, child.getMergedLocationData().getOffset());
-		assertEquals(15, child.getMergedLocationData().getLength());
+		assertEquals(8, child.getMergedAssociatedLocation().getOffset());
+		assertEquals(15, child.getMergedAssociatedLocation().getLength());
 		assertEquals("initialfirst".length(), child.getMyOffset());
 		assertEquals("second".length(), child.getMyLength());
 	}
@@ -148,8 +148,8 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertTrue(grandChild.getNestedRegions().isEmpty());
 		assertEquals(0, grandChild.getMyOffset());
 		assertEquals(4, grandChild.getMyLength());
-		assertEquals(123, grandChild.getMergedLocationData().getOffset());
-		assertEquals(321, grandChild.getMergedLocationData().getLength());
+		assertEquals(123, grandChild.getMergedAssociatedLocation().getOffset());
+		assertEquals(321, grandChild.getMergedAssociatedLocation().getLength());
 	}
 	
 	@Test
@@ -182,6 +182,35 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	}
 	
 	@Test
+	public void testTracesAreTrimmed() {
+		ITextRegionWithLineInformation root = new TextRegionWithLineInformation(47, 11, 12, 137);
+		ITextRegionWithLineInformation child = new TextRegionWithLineInformation(8, 15, 12, 137);
+		expectedRegions = Arrays.asList(root, child).iterator();
+		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
+		appendable.append("  some value  ");
+		appendable.trace(content).newLine().append("  more value  ").newLine();
+		appendable.append("  trailing value  ");
+		String content = appendable.getContent();
+		assertEquals(
+				"  some value  \n" +
+				"  more value  \n" +
+				"  trailing value  ", content);
+		AbstractTraceRegion rootTraceRegion = appendable.getTraceRegion();
+		assertEquals(0, rootTraceRegion.getMyOffset());
+		assertEquals(content.length(), rootTraceRegion.getMyLength());
+		assertEquals(0, rootTraceRegion.getMyLineNumber());
+		assertEquals(2, rootTraceRegion.getMyEndLineNumber());
+		assertEquals(1, rootTraceRegion.getNestedRegions().size());
+		
+		AbstractTraceRegion childTraceRegion = rootTraceRegion.getNestedRegions().get(0);
+		assertEquals(content.indexOf("more value"), childTraceRegion.getMyOffset());
+		assertEquals("more value".length(), childTraceRegion.getMyLength());
+		assertEquals(1, childTraceRegion.getMyLineNumber());
+		assertEquals(1, childTraceRegion.getMyEndLineNumber());
+		assertEquals(0, childTraceRegion.getNestedRegions().size());
+	}
+	
+	@Test
 	public void testLineNumbers() {
 		expectedRegions = new AbstractIterator<ITextRegionWithLineInformation>() {
 			int start = 0;
@@ -193,7 +222,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		appendable.append("start line").increaseIndentation();
 		appendable.newLine().trace(content).append("1");
-		appendable.newLine().trace(content).append("2");
+		appendable.trace(content).newLine().append("2");
 		appendable.newLine().trace(content).append("3\n4");
 		appendable.decreaseIndentation().newLine().append("last line");
 		assertEquals(
