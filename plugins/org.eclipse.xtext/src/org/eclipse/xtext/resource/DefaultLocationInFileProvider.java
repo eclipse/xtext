@@ -172,7 +172,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 			if (!isHidden(node)) {
 				int length = node.getLength();
 				if (length != 0)
-					result = result.merge(new TextRegionWithLineInformation(node.getOffset(), length, node.getStartLine(), node.getEndLine()));
+					result = result.merge(new TextRegionWithLineInformation(node.getOffset(), length, node.getStartLine() - 1, node.getEndLine() - 1));
 			}
 		}
 		return result;

@@ -16,8 +16,16 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 @NonNullByDefault
 public interface ITextRegionWithLineInformation extends ITextRegion {
 
+	/**
+	 * The zero-based line number where the region starts.
+	 * @return the start line (zero based)
+	 */
 	int getLineNumber();
 	
+	/**
+	 * The zero-based line number where the region ends.
+	 * @return the end line (zero based)
+	 */
 	int getEndLineNumber();
 	
 	ITextRegionWithLineInformation merge(ITextRegionWithLineInformation other);
