@@ -31,8 +31,9 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          id="org.eclipse.xtend.sdk"
          version="0.0.0"/>
 
-   <requires>
-      <import feature="org.eclipse.xtext.xtend2.sdk" version="2.3.0.qualifier"/>
-   </requires>
+   <includes
+         id="org.eclipse.xtend.m2e"
+         version="0.0.0"
+         optional="true"/>
 
 </feature>

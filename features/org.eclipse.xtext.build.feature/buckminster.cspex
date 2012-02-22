@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0"
-	xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
+<cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 
 	<cs:dependencies>
-		<!-- <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" 
-			/> 
-		  <cs:dependency name="org.eclipse.xtext.tests"
-			componentType="eclipse.feature" />  -->
-	 <cs:dependency name="org.eclipse.xtext.compatibility.galileo"
-			componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtext.compatibility.galileo" componentType="osgi.bundle" />
 	</cs:dependencies>
 
 
@@ -78,8 +72,7 @@
 			<cs:properties>
 				<cs:property key="content.ius"
 					value="org.eclipse.xtext.examples.feature.group,org.eclipse.xtext.examples.source.feature.group" />
-				<cs:property key="prerequisite.ius"
-					value="org.eclipse.xtext.runtime.feature.group,org.eclipse.xtext.ui.feature.group" />
+				<cs:property key="prerequisite.ius" value="org.eclipse.xtext.runtime.feature.group,org.eclipse.xtext.ui.feature.group" />
 				<cs:property key="package.name" value="tmf-xtext-examples" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -95,8 +88,7 @@
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius"
-					value="org.eclipse.xtext.runtime.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtext.runtime.feature.group" />
 				<cs:property key="package.name" value="tmf-xtext-runtime" />
 			</cs:properties>
 			<cs:prerequisites>
