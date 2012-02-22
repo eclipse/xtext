@@ -551,4 +551,15 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression("12345678901234567890123456789012345678901234567890l");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
 	}
+	
+	@Test public void testNumberLiteral_7() throws Exception {
+		XExpression expression = expression("1e-20");
+		helper.assertNoIssues(expression);
+	}
+	
+	@Test public void testNumberLiteral_8() throws Exception {
+		XExpression expression = expression("1e+20f");
+		helper.assertNoIssues(expression);
+	}
+
 }
