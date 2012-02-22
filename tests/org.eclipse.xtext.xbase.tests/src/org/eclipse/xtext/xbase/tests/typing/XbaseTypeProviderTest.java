@@ -241,8 +241,18 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType(BigDecimal.class.getName(), "1.0E+10b");
 	}
 
+	@Test public void testNumberLiteral_22() throws Exception {
+		assertResolvedType(BigDecimal.class.getName(), "1E+10b");
+	}
 
-	
+	@Test public void testNumberLiteral_23() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1E-10");
+	}
+
+	@Test public void testNumberLiteral_24() throws Exception {
+		assertResolvedType(Float.TYPE.getName(), "1E10f");
+	}
+
 	@Test public void testCastExpression() throws Exception {
 		assertResolvedType(String.class.getName(), "null as String");
 		assertResolvedType(Boolean.class.getName(), "null as Boolean");
