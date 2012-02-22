@@ -34,13 +34,10 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		super(parent);
 		this.offset = offset;
 		this.lineNumber = lineNumber;
-		if (parent == null) {
-			this.locations = Lists.newArrayList(delegate.getLocationData());
-		} else {
+		boolean useLocationsFromDelegate = true;
+		if (parent != null) {
 			URI parentPath = parent.getAssociatedPath();
-			if (parentPath == null) {
-				this.locations = Lists.newArrayList(delegate.getLocationData());
-			} else {
+			if (parentPath != null) {
 				boolean matches = true;
 				for(ILocationData locationData: delegate.getLocationData()) {
 					if (!parentPath.equals(locationData.getLocation())) {
@@ -48,14 +45,15 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 						break;
 					}
 				}
-				if (matches) {
-					this.locations = Lists.newArrayList();
-					for(ILocationData locationData: delegate.getLocationData()) {
-						this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), locationData.getLineNumber(), locationData.getEndLineNumber(), null, null));
-					}
-				} else {
-					this.locations = Lists.newArrayList(delegate.getLocationData());
-				}
+				useLocationsFromDelegate = !matches;
+			}
+		}
+		if (useLocationsFromDelegate) {
+			this.locations = Lists.newArrayList(delegate.getLocationData());
+		} else {
+			this.locations = Lists.newArrayList();
+			for(ILocationData locationData: delegate.getLocationData()) {
+				this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), locationData.getLineNumber(), locationData.getEndLineNumber(), null, null));
 			}
 		}
 		int length = 0;
