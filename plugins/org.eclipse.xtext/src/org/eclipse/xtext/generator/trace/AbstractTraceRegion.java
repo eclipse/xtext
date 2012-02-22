@@ -49,6 +49,13 @@ public abstract class AbstractTraceRegion {
 			return false;
 		if (parent.getMyEndLineNumber() < getMyEndLineNumber())
 			return false;
+		List<AbstractTraceRegion> siblings = parent.getNestedRegions();
+		if (siblings.size() >= 2 && siblings.get(siblings.size() - 1) == this) {
+			AbstractTraceRegion prev = siblings.get(siblings.size() - 2);
+			if (prev.getMyEndLineNumber() > getMyLineNumber()) {
+				return false;
+			}
+		}
 		return true;
 	}
 
