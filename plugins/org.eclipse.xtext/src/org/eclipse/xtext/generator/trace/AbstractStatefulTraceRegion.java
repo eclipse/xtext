@@ -14,6 +14,8 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -24,7 +26,7 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 	private final List<ILocationData> associatedLocations;
 
 	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, ILocationData associatedLocation, @Nullable AbstractTraceRegion parent) {
-		this(myRegion, Collections.singletonList(associatedLocation), parent);
+		this(myRegion, Lists.newArrayList(associatedLocation), parent);
 	}
 	
 	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, List<ILocationData> associatedLocations, @Nullable AbstractTraceRegion parent) {
@@ -63,6 +65,10 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 	@Override
 	public List<ILocationData> getAssociatedLocations() {
 		return Collections.unmodifiableList(associatedLocations);
+	}
+	
+	protected List<ILocationData> getWritableAssociatedLocations() {
+		return associatedLocations;
 	}
 	
 }

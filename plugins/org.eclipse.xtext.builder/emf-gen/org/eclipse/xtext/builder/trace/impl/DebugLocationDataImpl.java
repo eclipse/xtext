@@ -200,7 +200,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated NOT
 	 */
 	public String getLabel() {
-		return String.format("[%d - %d]", getOffset(), getLength());
+		return String.format("[%d - %d]", getOffset(), getEndOffset());
 	}
 
 	/**
@@ -335,7 +335,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated NOT
 	 */
 	public int getEndOffset() {
-		return getOffset() + getLength() - 1;
+		return getOffset() + getLength();
 	}
 
 	/**

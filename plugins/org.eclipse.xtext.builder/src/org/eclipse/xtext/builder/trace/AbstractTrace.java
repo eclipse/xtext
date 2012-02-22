@@ -73,14 +73,14 @@ public abstract class AbstractTrace implements ITrace {
 	protected ILocationInResource mergeRegions(@Nullable AbstractTraceRegion left, @Nullable AbstractTraceRegion right) {
 		if (left == null) {
 			if (right != null) {
-				ILocationData locationData = right.getMergedLocationData();
+				ILocationData locationData = right.getMergedAssociatedLocation();
 				if (locationData != null)
 					return createLocationInResourceFor(locationData, right);
 			}
 			return null;
 		}
 		if (right == null || left.equals(right)) {
-			ILocationData locationData = left.getMergedLocationData();
+			ILocationData locationData = left.getMergedAssociatedLocation();
 			if (locationData != null)
 				return createLocationInResourceFor(locationData, left);
 			return null;
@@ -101,7 +101,7 @@ public abstract class AbstractTrace implements ITrace {
 					potentialMatch = potentialMatch.getParent();
 				}
 				if (potentialMatch != null) {
-					ILocationData location = potentialMatch.getMergedLocationData();
+					ILocationData location = potentialMatch.getMergedAssociatedLocation();
 					if (location != null)
 						return createLocationInResourceFor(location, left);
 				}
@@ -118,7 +118,7 @@ public abstract class AbstractTrace implements ITrace {
 	 * @return the location in resource. Never <code>null</code>.
 	 */
 	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
-		URI path = location.getLocation();
+		URI path = location.getPath();
 		if (path == null)
 			path = traceRegion.getAssociatedPath();
 		String projectName = location.getProjectName();

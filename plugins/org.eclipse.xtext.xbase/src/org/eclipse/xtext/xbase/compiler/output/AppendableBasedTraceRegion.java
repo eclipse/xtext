@@ -25,10 +25,10 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	private final List<ILocationData> locations;
-	private final int offset;
-	private final int length;
-	private final int lineNumber;
-	private final int endLineNumber;
+	private int offset;
+	private int length;
+	private int lineNumber;
+	private int endLineNumber;
 
 	public AppendableBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset, int lineNumber) {
 		super(parent);
@@ -40,7 +40,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 			if (parentPath != null) {
 				boolean matches = true;
 				for(ILocationData locationData: delegate.getLocationData()) {
-					if (!parentPath.equals(locationData.getLocation())) {
+					if (!parentPath.equals(locationData.getPath())) {
 						matches = false;
 						break;
 					}
@@ -75,8 +75,57 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		}
 		this.length = length;
 		this.endLineNumber = line;
+		if (parent == null) {
+			compressTrace(delegate.getContent());
+		}
 	}
 	
+	protected void compressTrace(String completeContent) {
+		leftCompressTrace(completeContent);
+		rightCompressTrace(completeContent);
+	}
+
+	protected void leftCompressTrace(String completeContent) {
+		List<AbstractTraceRegion> allNested = getWritableNestedRegions();
+		int i = 0;
+		while (i < allNested.size()) {
+			AppendableBasedTraceRegion nested = (AppendableBasedTraceRegion) allNested.get(i);
+			int offset = nested.getMyOffset();
+			int diff = 0;
+			while(completeContent.charAt(offset + diff) <= ' ' && diff < nested.length) {
+				diff++;
+			}
+			if (diff == nested.length) {
+				allNested.remove(i);
+			} else {
+				nested.lineNumber += Strings.countLineBreaks(completeContent.substring(offset, offset + diff));
+				nested.offset += diff;
+				nested.length -= diff;
+				nested.leftCompressTrace(completeContent);
+				i++;
+			}
+		}
+	}
+	
+	protected void rightCompressTrace(String completeContent) {
+		List<AbstractTraceRegion> allNested = getWritableNestedRegions();
+		int i = 0;
+		while (i < allNested.size()) {
+			AppendableBasedTraceRegion nested = (AppendableBasedTraceRegion) allNested.get(i);
+			int endOffset = nested.getMyOffset() + nested.getMyLength() - 1;
+			int diff = 0;
+			while(completeContent.charAt(endOffset - diff) <= ' ' && diff < nested.length) {
+				diff++;
+			}
+			if (diff != 0) {
+				nested.endLineNumber -= Strings.countLineBreaks(completeContent.substring(endOffset - diff + 1, endOffset + 1));
+				nested.length -= diff;
+				nested.rightCompressTrace(completeContent);
+			}
+			i++;
+		}
+	}
+
 	protected boolean hasVisibleChildren(TreeAppendable castedChild) {
 		for(Object o: castedChild.getChildren()) {
 			if (o instanceof String)

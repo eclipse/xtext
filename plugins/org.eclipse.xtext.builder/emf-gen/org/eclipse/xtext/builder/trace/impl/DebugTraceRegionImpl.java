@@ -200,7 +200,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * @generated NOT
 	 */
 	public int getMyEndOffset() {
-		return getMyOffset() + getMyLength() - 1;
+		return getMyOffset() + getMyLength();
 	}
 
 	/**
@@ -221,7 +221,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * @generated NOT
 	 */
 	public String getLabel() {
-		return String.format("[%d - %d]", getMyOffset(), getMyLength());
+		return String.format("[%d - %d]", getMyOffset(), getMyEndOffset());
 	}
 
 	/**
