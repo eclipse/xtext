@@ -228,7 +228,7 @@ ruleXAnnotationElementValue :
 	ruleXAnnotationValueArray |
 	ruleXStringLiteral |
 	ruleXBooleanLiteral |
-	ruleXIntLiteral |
+	ruleXNumberLiteral |
 	ruleXTypeLiteral |
 	ruleXAnnotationValueFieldReference |
 	'(' ruleXAnnotationElementValueStringConcatenation ')'
@@ -465,7 +465,7 @@ ruleXPrimaryExpression :
 ruleXLiteral :
 	ruleXClosure |
 	ruleXBooleanLiteral |
-	ruleXIntLiteral |
+	ruleXNumberLiteral |
 	ruleXNullLiteral |
 	ruleXStringLiteral |
 	ruleXTypeLiteral
@@ -671,9 +671,9 @@ ruleXNullLiteral :
 	'null'
 ;
 
-// Rule XIntLiteral
-ruleXIntLiteral :
-	RULE_INT
+// Rule XNumberLiteral
+ruleXNumberLiteral :
+	ruleNumber
 ;
 
 // Rule XTypeLiteral
@@ -721,6 +721,14 @@ ruleQualifiedName :
 		'.'
 		) => '.' ) ruleValidID
 	)*
+;
+
+// Rule Number
+ruleNumber :
+	RULE_HEX |
+	RULE_DECIMAL (
+		'.' RULE_DECIMAL
+	)?
 ;
 
 // Rule JvmTypeReference
@@ -870,6 +878,41 @@ fragment RULE_IN_RICH_STRING :
 	)
 ;
 
+RULE_HEX :
+	(
+		'0x' |
+		'0X'
+	) (
+		'0' .. '9' |
+		'a' .. 'f' |
+		'A' .. 'F'
+	)+ (
+		'l' |
+		'L'
+	)?
+;
+
+RULE_DECIMAL :
+	'0' .. '9'+ (
+		(
+			'e' |
+			'E'
+		) (
+			'+' |
+			'-'
+		)? '0' .. '9'+
+	)? (
+		'l' |
+		'L' |
+		'd' |
+		'D' |
+		'f' |
+		'F' |
+		'b' |
+		'B'
+	)?
+;
+
 RULE_ID :
 	'^'? (
 		'a' .. 'z' |
@@ -883,10 +926,6 @@ RULE_ID :
 		'_' |
 		'0' .. '9'
 	)*
-;
-
-RULE_INT :
-	'0' .. '9'+
 ;
 
 RULE_STRING :

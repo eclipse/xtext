@@ -1903,7 +1903,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAnnotationElementValue returns xbase::XExpression:
-	//	XAnnotation | XAnnotationValueArray | XStringLiteral | XBooleanLiteral | XIntLiteral | XTypeLiteral |
+	//	XAnnotation | XAnnotationValueArray | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
 	//	XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueElements getXAnnotationElementValueAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationElementValueAccess();
@@ -2181,7 +2181,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XLiteral returns XExpression:
-	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+	//	XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 	public XbaseGrammarAccess.XLiteralElements getXLiteralAccess() {
 		return gaXbaseWithAnnotations.getXLiteralAccess();
 	}
@@ -2413,14 +2413,14 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXNullLiteralAccess().getRule();
 	}
 
-	//XIntLiteral returns XExpression:
-	//	{XIntLiteral} value=INT;
-	public XbaseGrammarAccess.XIntLiteralElements getXIntLiteralAccess() {
-		return gaXbaseWithAnnotations.getXIntLiteralAccess();
+	//XNumberLiteral returns XExpression:
+	//	{XNumberLiteral} value=Number;
+	public XbaseGrammarAccess.XNumberLiteralElements getXNumberLiteralAccess() {
+		return gaXbaseWithAnnotations.getXNumberLiteralAccess();
 	}
 	
-	public ParserRule getXIntLiteralRule() {
-		return getXIntLiteralAccess().getRule();
+	public ParserRule getXNumberLiteralRule() {
+		return getXNumberLiteralAccess().getRule();
 	}
 
 	//XTypeLiteral returns XExpression:
@@ -2483,6 +2483,28 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getQualifiedNameRule() {
 		return getQualifiedNameAccess().getRule();
 	}
+
+	//Number hidden():
+	//	HEX | DECIMAL ("." DECIMAL)?;
+	public XbaseGrammarAccess.NumberElements getNumberAccess() {
+		return gaXbaseWithAnnotations.getNumberAccess();
+	}
+	
+	public ParserRule getNumberRule() {
+		return getNumberAccess().getRule();
+	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+ ("l" | "L")?;
+	public TerminalRule getHEXRule() {
+		return gaXbaseWithAnnotations.getHEXRule();
+	} 
+
+	//terminal DECIMAL:
+	//	"0".."9"+ (("e" | "E") ("+" | "-")? "0".."9"+)? ("l" | "L" | "d" | "D" | "f" | "F" | "b" | "B")?;
+	public TerminalRule getDECIMALRule() {
+		return gaXbaseWithAnnotations.getDECIMALRule();
+	} 
 
 	//JvmTypeReference:
 	//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
@@ -2579,12 +2601,6 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//	"^"? ("a".."z" | "A".."Z" | "$" | "_") ("a".."z" | "A".."Z" | "$" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaXbaseWithAnnotations.getIDRule();
-	} 
-
-	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
-	public TerminalRule getINTRule() {
-		return gaXbaseWithAnnotations.getINTRule();
 	} 
 
 	//terminal STRING:

@@ -2060,25 +2060,25 @@ finally {
 
 
 
-// Entry rule entryRuleXIntLiteral
-entryRuleXIntLiteral 
+// Entry rule entryRuleXNumberLiteral
+entryRuleXNumberLiteral 
 :
-{ before(grammarAccess.getXIntLiteralRule()); }
-	 ruleXIntLiteral
-{ after(grammarAccess.getXIntLiteralRule()); } 
+{ before(grammarAccess.getXNumberLiteralRule()); }
+	 ruleXNumberLiteral
+{ after(grammarAccess.getXNumberLiteralRule()); } 
 	 EOF 
 ;
 
-// Rule XIntLiteral
-ruleXIntLiteral
+// Rule XNumberLiteral
+ruleXNumberLiteral
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getXIntLiteralAccess().getGroup()); }
-(rule__XIntLiteral__Group__0)
-{ after(grammarAccess.getXIntLiteralAccess().getGroup()); }
+{ before(grammarAccess.getXNumberLiteralAccess().getGroup()); }
+(rule__XNumberLiteral__Group__0)
+{ after(grammarAccess.getXNumberLiteralAccess().getGroup()); }
 )
 
 ;
@@ -2252,6 +2252,42 @@ ruleQualifiedName
 ;
 finally {
 	restoreStackSize(stackSize);
+}
+
+
+
+// Entry rule entryRuleNumber
+entryRuleNumber 
+@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+:
+{ before(grammarAccess.getNumberRule()); }
+	 ruleNumber
+{ after(grammarAccess.getNumberRule()); } 
+	 EOF 
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Rule Number
+ruleNumber
+    @init {
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getNumberAccess().getAlternatives()); }
+(rule__Number__Alternatives)
+{ after(grammarAccess.getNumberAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+	myHiddenTokenState.restore();
 }
 
 
@@ -2878,9 +2914,9 @@ rule__XAnnotationElementValue__Alternatives
 )
 
     |(
-{ before(grammarAccess.getXAnnotationElementValueAccess().getXIntLiteralParserRuleCall_4()); }
-	ruleXIntLiteral
-{ after(grammarAccess.getXAnnotationElementValueAccess().getXIntLiteralParserRuleCall_4()); }
+{ before(grammarAccess.getXAnnotationElementValueAccess().getXNumberLiteralParserRuleCall_4()); }
+	ruleXNumberLiteral
+{ after(grammarAccess.getXAnnotationElementValueAccess().getXNumberLiteralParserRuleCall_4()); }
 )
 
     |(
@@ -3348,9 +3384,9 @@ rule__XLiteral__Alternatives
 )
 
     |(
-{ before(grammarAccess.getXLiteralAccess().getXIntLiteralParserRuleCall_2()); }
-	ruleXIntLiteral
-{ after(grammarAccess.getXLiteralAccess().getXIntLiteralParserRuleCall_2()); }
+{ before(grammarAccess.getXLiteralAccess().getXNumberLiteralParserRuleCall_2()); }
+	ruleXNumberLiteral
+{ after(grammarAccess.getXLiteralAccess().getXNumberLiteralParserRuleCall_2()); }
 )
 
     |(
@@ -3551,6 +3587,28 @@ rule__XTryCatchFinallyExpression__Alternatives_3
 { before(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3_1()); }
 (rule__XTryCatchFinallyExpression__Group_3_1__0)
 { after(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Number__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getNumberAccess().getHEXTerminalRuleCall_0()); }
+	RULE_HEX
+{ after(grammarAccess.getNumberAccess().getHEXTerminalRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getNumberAccess().getGroup_1()); }
+(rule__Number__Group_1__0)
+{ after(grammarAccess.getNumberAccess().getGroup_1()); }
 )
 
 ;
@@ -18073,29 +18131,29 @@ finally {
 
 
 
-rule__XIntLiteral__Group__0
+rule__XNumberLiteral__Group__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__XIntLiteral__Group__0__Impl
-	rule__XIntLiteral__Group__1
+	rule__XNumberLiteral__Group__0__Impl
+	rule__XNumberLiteral__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XIntLiteral__Group__0__Impl
+rule__XNumberLiteral__Group__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXIntLiteralAccess().getXIntLiteralAction_0()); }
+{ before(grammarAccess.getXNumberLiteralAccess().getXNumberLiteralAction_0()); }
 (
 
 )
-{ after(grammarAccess.getXIntLiteralAccess().getXIntLiteralAction_0()); }
+{ after(grammarAccess.getXNumberLiteralAccess().getXNumberLiteralAction_0()); }
 )
 
 ;
@@ -18104,26 +18162,26 @@ finally {
 }
 
 
-rule__XIntLiteral__Group__1
+rule__XNumberLiteral__Group__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__XIntLiteral__Group__1__Impl
+	rule__XNumberLiteral__Group__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XIntLiteral__Group__1__Impl
+rule__XNumberLiteral__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXIntLiteralAccess().getValueAssignment_1()); }
-(rule__XIntLiteral__ValueAssignment_1)
-{ after(grammarAccess.getXIntLiteralAccess().getValueAssignment_1()); }
+{ before(grammarAccess.getXNumberLiteralAccess().getValueAssignment_1()); }
+(rule__XNumberLiteral__ValueAssignment_1)
+{ after(grammarAccess.getXNumberLiteralAccess().getValueAssignment_1()); }
 )
 
 ;
@@ -19083,6 +19141,130 @@ rule__QualifiedName__Group_1__1__Impl
 { before(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_1_1()); }
 	ruleValidID
 { after(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__Number__Group_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Number__Group_1__0__Impl
+	rule__Number__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Number__Group_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getNumberAccess().getDECIMALTerminalRuleCall_1_0()); }
+	RULE_DECIMAL
+{ after(grammarAccess.getNumberAccess().getDECIMALTerminalRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__Number__Group_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Number__Group_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Number__Group_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getNumberAccess().getGroup_1_1()); }
+(rule__Number__Group_1_1__0)?
+{ after(grammarAccess.getNumberAccess().getGroup_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__Number__Group_1_1__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Number__Group_1_1__0__Impl
+	rule__Number__Group_1_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Number__Group_1_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0()); }
+
+	'.' 
+
+{ after(grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__Number__Group_1_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Number__Group_1_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Number__Group_1_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getNumberAccess().getDECIMALTerminalRuleCall_1_1_1()); }
+	RULE_DECIMAL
+{ after(grammarAccess.getNumberAccess().getDECIMALTerminalRuleCall_1_1_1()); }
 )
 
 ;
@@ -23244,14 +23426,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XIntLiteral__ValueAssignment_1
+rule__XNumberLiteral__ValueAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); }
-	RULE_INT{ after(grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getXNumberLiteralAccess().getValueNumberParserRuleCall_1_0()); }
+	ruleNumber{ after(grammarAccess.getXNumberLiteralAccess().getValueNumberParserRuleCall_1_0()); }
 )
 
 ;
@@ -23642,9 +23824,11 @@ RULE_COMMENT_RICH_TEXT_END : '\u00AB\u00AB' ~(('\n'|'\r'))* ('\r'? '\n' RULE_IN_
 
 fragment RULE_IN_RICH_STRING : ('\'\'' ~(('\u00AB'|'\''))|'\'' ~(('\u00AB'|'\''))|~(('\u00AB'|'\'')));
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'$'|'_') ('a'..'z'|'A'..'Z'|'$'|'_'|'0'..'9')*;
+RULE_HEX : ('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F')+ ('l'|'L')?;
 
-RULE_INT : ('0'..'9')+;
+RULE_DECIMAL : ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? ('l'|'L'|'d'|'D'|'f'|'F'|'b'|'B')?;
+
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'$'|'_') ('a'..'z'|'A'..'Z'|'$'|'_'|'0'..'9')*;
 
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
