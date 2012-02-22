@@ -40,7 +40,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testFieldInitializerType_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = 1 }");
-		helper.assertError(clazz, XINT_LITERAL, INCOMPATIBLE_RETURN_TYPE);
+		helper.assertError(clazz, XNUMBER_LITERAL, INCOMPATIBLE_RETURN_TYPE);
 	}
 	
 	@Test public void testFieldInitializerType_02() throws Exception {
@@ -50,7 +50,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testFieldInitializerType_03() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = return 1 }");
-		helper.assertError(clazz, XINT_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, XNUMBER_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	@Test public void testFieldInitializerType_04() throws Exception {
@@ -357,7 +357,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testReturnTypeCompatibility_01() throws Exception {
 		XtendFunction function = function("def String foo(int bar) { return 42 }");
-		helper.assertError(function, XINT_LITERAL, INCOMPATIBLE_TYPES, "String", "int");
+		helper.assertError(function, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "String", "int");
 	}
 
 	@Test public void testReturnTypeCompatibility_02() throws Exception {
@@ -659,7 +659,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		assertNoConformanceError("'''«IF Boolean::FALSE»«ENDIF»'''");
 		assertNoConformanceError("'''«IF true»«ENDIF»'''");
 		assertNoConformanceError("'''«IF 1 == 1»«ENDIF»'''");
-		assertConformanceError("'''«IF 1»«ENDIF»'''", XINT_LITERAL, "int",
+		assertConformanceError("'''«IF 1»«ENDIF»'''", XNUMBER_LITERAL, "int",
 				"boolean", "java.lang.Boolean");
 	}
 	
