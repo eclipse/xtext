@@ -1,13 +1,5 @@
-setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
+setpref targetPlatformPath="${build.root}/target.platform"
 
-import -Declipse.download="file:/home/data/httpd/download.eclipse.org" "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-test.mspec"
+import -Declipse.download="http://download.eclipse.org" "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
 
-junit --launch "org.eclipse.xtext.xtext.ui.graph.tests/org.eclipse.xtext.xtext.ui.graph.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtext.ui.graph.tests.xml"
-junit --launch "org.eclipse.xtext.tests/org.eclipse.xtext.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.tests.xml"
-junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
-junit --launch "org.eclipse.xtext.xbase.tests/org.eclipse.xtext.xbase.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xbase.tests.xml"
-junit --launch "org.eclipse.xtext.xbase.ui.tests/org.eclipse.xtext.xbase.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xbase.ui.tests.xml"
-junit --launch "org.eclipse.xtext.ui.tests/org.eclipse.xtext.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.ui.tests.xml"
-junit --launch "org.eclipse.xtext.builder.tests/org.eclipse.xtext.builder.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.builder.tests.xml"
-junit --launch "org.eclipse.xtext.xtend2.tests/org.eclipse.xtext.xtend2.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtend2.tests.xml"
-junit --launch "org.eclipse.xtext.xtend2.ui.tests/org.eclipse.xtext.xtend2.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtend2.ui.tests.xml"
+junit --launch "org.eclipse.xtext.xtext.ui.graph.tests/org.eclipse.xtext.xtext.ui.graph.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.xtext.ui.graph.tests.xml"
