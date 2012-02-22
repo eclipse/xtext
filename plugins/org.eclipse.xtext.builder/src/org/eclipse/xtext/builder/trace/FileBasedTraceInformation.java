@@ -44,7 +44,7 @@ public class FileBasedTraceInformation implements ITraceInformation {
 			ITraceToSource traceToSource = getTraceToSource((IStorage) derivedResource);
 			if (traceToSource != null) {
 				if (range == null) {
-					Iterator<ILocationInResource> allLocations = traceToSource.getAllLocations().iterator();
+					Iterator<ILocationInResource> allLocations = traceToSource.getAllAssociatedLocations().iterator();
 					if (allLocations.hasNext()) {
 						ILocationInResource location = allLocations.next();
 						return location;
@@ -71,7 +71,7 @@ public class FileBasedTraceInformation implements ITraceInformation {
 					if (languageInfo != null) {
 						return traceToSource.getAllLocations(languageInfo);
 					} else {
-						return traceToSource.getAllLocations();
+						return traceToSource.getAllAssociatedLocations();
 					}
 				} else {
 					if (languageInfo == null) {

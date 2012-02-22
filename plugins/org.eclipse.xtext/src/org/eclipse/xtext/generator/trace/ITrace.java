@@ -23,7 +23,7 @@ import org.eclipse.xtext.util.ITextRegion;
 public interface ITrace {
 
 	/**
-	 * Returns the best {@link ILocationInResource location} that matches the given {@code region}.
+	 * Returns the best associated {@link ILocationInResource location} that matches the given {@code region}.
 	 * If the region does not match a single location, the following strategy applies:
 	 * <ul>
 	 * <li>
@@ -46,16 +46,16 @@ public interface ITrace {
 	@Nullable ILocationInResource getBestAssociatedLocation(ITextRegion region);
 	
 	/**
-	 * Returns all {@link ILocationInResource locations} that match the given {@code region}.
+	 * Returns all associated {@link ILocationInResource locations} that match the given {@code region}.
 	 * @param region the region in the current resource. May not be <code>null</code>.
 	 * @return all associated locations. Never <code>null</code>. 
 	 */
 	Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region);
 	
 	/**
-	 * Returns all known {@link ILocationInResource locations}.
-	 * @return all locations. Never <code>null</code>. 
+	 * Returns all known associated {@link ILocationInResource locations}.
+	 * @return all associated locations. Never <code>null</code>. 
 	 */
-	Iterable<ILocationInResource> getAllLocations();
+	Iterable<ILocationInResource> getAllAssociatedLocations();
 	
 }
