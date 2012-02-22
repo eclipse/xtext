@@ -64,9 +64,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -83,6 +83,7 @@ import org.eclipse.xtext.xbase.typing.Closures;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
+import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
@@ -133,6 +134,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private Closures closures;
 	
+	@Inject
+	private NumberLiterals numberLiterals;
+	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
@@ -178,8 +182,17 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expr instanceof XCastedExpression) {
 			return isSideEffectFree(((XCastedExpression) expr).getTarget());
 		}
-		return expr instanceof XStringLiteral || expr instanceof XTypeLiteral || expr instanceof XIntLiteral
+		return expr instanceof XStringLiteral || expr instanceof XTypeLiteral || expr instanceof XNumberLiteral
 				|| expr instanceof XNullLiteral || expr instanceof XBooleanLiteral || expr instanceof XClosure;
+	}
+	
+	@Check
+	protected void checkNumberFormat(XNumberLiteral literal) {
+		try {
+			numberLiterals.numberValue(literal, numberLiterals.getJavaType(literal));
+		} catch (Exception e) {
+			error("Invalid number format: " + e.getMessage(), Literals.XNUMBER_LITERAL__VALUE, INVALID_NUMBER_FORMAT);
+		}
 	}
 	
 	@Check

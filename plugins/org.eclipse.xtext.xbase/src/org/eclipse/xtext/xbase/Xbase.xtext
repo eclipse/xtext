@@ -118,7 +118,7 @@ XPrimaryExpression returns XExpression:
 XLiteral returns XExpression:
 	XClosure |
 	XBooleanLiteral |
-	XIntLiteral |
+	XNumberLiteral |
 	XNullLiteral |
 	XStringLiteral |
 	XTypeLiteral
@@ -236,8 +236,8 @@ XBooleanLiteral returns XExpression :
 XNullLiteral returns XExpression :
 	{XNullLiteral} 'null';
 
-XIntLiteral returns XExpression :
-	{XIntLiteral} value=INT;
+XNumberLiteral returns XExpression :
+	{XNumberLiteral} value=Number;
 
 XStringLiteral returns XExpression:
 	{XStringLiteral} value=STRING;
@@ -268,3 +268,15 @@ XCatchClause :
 
 QualifiedName:
   ValidID (=>'.' ValidID)*;
+
+Number hidden():
+	HEX | DECIMAL ('.' DECIMAL)?;
+
+terminal HEX:
+	('0x'|'0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+ ('l'|'L')?;
+	 
+terminal DECIMAL:
+	'0'..'9'+ (('e'|'E') ('+'|'-')? '0'..'9'+)? ('l'|'L'|'d'|'D'|'f'|'F'|'b'|'B')?;
+	
+	
+

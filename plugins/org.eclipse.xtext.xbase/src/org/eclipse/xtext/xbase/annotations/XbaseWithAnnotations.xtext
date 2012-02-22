@@ -35,7 +35,7 @@ XAnnotationElementValue returns xbase::XExpression :
 	XAnnotationValueArray |
 	XStringLiteral |
 	XBooleanLiteral |
-	XIntLiteral |
+	XNumberLiteral |
 	XTypeLiteral |
 	XAnnotationValueFieldReference |
 	'(' XAnnotationElementValueStringConcatenation ')'

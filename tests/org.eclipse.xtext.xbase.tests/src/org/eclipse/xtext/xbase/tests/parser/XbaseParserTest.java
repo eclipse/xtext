@@ -28,8 +28,8 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -83,8 +83,8 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	@Test public void testAddition_1() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("3 + 4");
-		assertEquals(3, ((XIntLiteral) operation.getExplicitArguments().get(0)).getValue());
-		assertEquals(4, ((XIntLiteral) operation.getExplicitArguments().get(1)).getValue());
+		assertEquals("3", ((XNumberLiteral) operation.getExplicitArguments().get(0)).getValue());
+		assertEquals("4", ((XNumberLiteral) operation.getExplicitArguments().get(1)).getValue());
 	}
 
 	@Test public void testAddition_2() throws Exception {
@@ -235,7 +235,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'.bar(4)");
 		assertNotNull(call);
 		assertEquals(2, call.getExplicitArguments().size());
-		assertEquals(4, ((XIntLiteral) call.getExplicitArguments().get(1)).getValue());
+		assertEquals("4", ((XNumberLiteral) call.getExplicitArguments().get(1)).getValue());
 		assertTrue(call.getExplicitArguments().get(0) instanceof XStringLiteral);
 	}
 
@@ -245,7 +245,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("bar",call.getConcreteSyntaxFeatureName());
 		assertEquals(3, call.getExplicitArguments().size());
 		for (int i = 0; i < 3; i++)
-			assertEquals(i, ((XIntLiteral) call.getExplicitArguments().get(i)).getValue());
+			assertEquals(""+ i, ((XNumberLiteral) call.getExplicitArguments().get(i)).getValue());
 	}
 	
 	@Test public void testFeatureCall_5() throws Exception {
@@ -255,7 +255,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("bar",call.getConcreteSyntaxFeatureName());
 		call = (XFeatureCall) call.getExplicitArguments().get(0);
 		assertEquals("baz",call.getConcreteSyntaxFeatureName());
-		assertTrue(call.getExplicitArguments().get(0) instanceof XIntLiteral);
+		assertTrue(call.getExplicitArguments().get(0) instanceof XNumberLiteral);
 	}
 	
 	@Test public void testStaticFeatureCall_0() throws Exception {
@@ -339,7 +339,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	@Test public void testIfWithAdd_2() throws Exception {
 		XBinaryOperation bo = (XBinaryOperation) expression("1 + (if (foo) bar) + 2");
 		assertTrue(bo.getExplicitArguments().get(0) instanceof XBinaryOperation);
-		assertTrue(bo.getExplicitArguments().get(1) instanceof XIntLiteral);
+		assertTrue(bo.getExplicitArguments().get(1) instanceof XNumberLiteral);
 	}
 
 	@Test public void testSwitch_0() throws Exception {
@@ -359,11 +359,11 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(se.getSwitch() instanceof XFeatureCall);
 
 		XCasePart case1 = se.getCases().get(0);
-		assertEquals(1, ((XIntLiteral) case1.getCase()).getValue());
+		assertEquals("1", ((XNumberLiteral) case1.getCase()).getValue());
 		assertTrue(case1.getThen() instanceof XStringLiteral);
 
 		XCasePart case2 = se.getCases().get(1);
-		assertEquals(2, ((XIntLiteral) case2.getCase()).getValue());
+		assertEquals("2", ((XNumberLiteral) case2.getCase()).getValue());
 		assertTrue(case2.getThen() instanceof XStringLiteral);
 	}
 	
@@ -484,7 +484,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertNotNull(cc.getConstructor());
 		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(1, cc.getArguments().size());
-		assertEquals(1, ((XIntLiteral) cc.getArguments().get(0)).getValue());
+		assertEquals("1", ((XNumberLiteral) cc.getArguments().get(0)).getValue());
 	}
 
 	@Test public void testConstructorCall_2() throws Exception {
@@ -492,7 +492,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertNotNull(cc.getConstructor());
 		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(1, cc.getArguments().size());
-		assertEquals(13, ((XIntLiteral) cc.getArguments().get(0)).getValue());
+		assertEquals("13", ((XNumberLiteral) cc.getArguments().get(0)).getValue());
 	}
 	
 	@Test public void testForLoopExpression() throws Exception {
@@ -602,7 +602,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(2, block.getExpressions().size());
 		assertTrue(block.getExpressions().get(0) instanceof XReturnExpression);
 		XReturnExpression returnExpression = (XReturnExpression) block.getExpressions().get(0);
-		assertTrue(returnExpression.getExpression() instanceof XIntLiteral);
+		assertTrue(returnExpression.getExpression() instanceof XNumberLiteral);
 	}
 	
 	@Test public void testReturnExpressionInBlock_2() throws Exception {

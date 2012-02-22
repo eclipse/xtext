@@ -9,14 +9,17 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -34,7 +37,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -53,7 +55,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -66,6 +68,7 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typing.NumberLiterals;
 
 import com.google.inject.Inject;
 
@@ -86,6 +89,9 @@ public class JvmTypesBuilder {
 
 	@Inject
 	private IEObjectDocumentationProvider documentationProvider;
+	
+	@Inject
+	private NumberLiterals numberLiterals;
 
 	/**
 	 * Sets the given {@link JvmExecutable} as the logical container for the given {@link XExpression}.
@@ -768,14 +774,20 @@ public class JvmTypesBuilder {
 						annotationValue.getValues().add(reference);
 					}
 				});
-				translators.put(XbasePackage.Literals.XINT_LITERAL, new AnnotationValueTranslator() {
+				translators.put(XbasePackage.Literals.XNUMBER_LITERAL, new AnnotationValueTranslator() {
 					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+						String primitiveType = numberLiterals.getJavaType((XNumberLiteral) expr).getName();
+						EClass eClass = (EClass) TypesPackage.eINSTANCE.getEClassifier("Jvm" + toFirstUpper(primitiveType) + "AnnotationValue");
+						return (JvmAnnotationValue) TypesFactory.eINSTANCE.create(eClass);
 					}
 
+					@SuppressWarnings("unchecked")
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						JvmIntAnnotationValue annotationValue = (JvmIntAnnotationValue) value;
-						annotationValue.getValues().add(((XIntLiteral) expr).getValue());
+						EStructuralFeature valueFeature = value.eClass().getEStructuralFeature("value");
+						List<? super Number> values = (List<? super Number>) value.eGet(valueFeature);
+						XNumberLiteral literal = (XNumberLiteral) expr;
+						Number number = numberLiterals.numberValue(literal, numberLiterals.getJavaType(literal));
+						values.add(number);
 					}
 				});
 				translators.put(XbasePackage.Literals.XFEATURE_CALL, new AnnotationValueTranslator() {
