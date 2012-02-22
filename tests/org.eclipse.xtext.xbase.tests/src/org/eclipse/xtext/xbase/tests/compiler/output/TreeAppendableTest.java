@@ -19,10 +19,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.junit.After;
@@ -30,28 +32,32 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.AbstractIterator;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("null")
+@NonNullByDefault
 public class TreeAppendableTest extends Assert implements ILocationInFileProvider {
 
-	private Iterator<ITextRegion> expectedRegions;
+	private Iterator<ITextRegionWithLineInformation> expectedRegions;
 	private EClass content;
 	private Resource resource;
 
-	public ITextRegion getSignificantTextRegion(EObject obj) {
+	public ITextRegionWithLineInformation getSignificantTextRegion(@Nullable EObject obj) {
 		return expectedRegions.next();
 	}
 
-	public ITextRegion getSignificantTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
+	public ITextRegionWithLineInformation getSignificantTextRegion(@Nullable EObject owner, @Nullable EStructuralFeature feature, int indexInList) {
 		throw new UnsupportedOperationException();
 	}
 
-	public ITextRegion getFullTextRegion(EObject obj) {
+	public ITextRegionWithLineInformation getFullTextRegion(@Nullable EObject obj) {
 		throw new UnsupportedOperationException();
 	}
 
-	public ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
+	public ITextRegionWithLineInformation getFullTextRegion(@Nullable EObject owner, @Nullable EStructuralFeature feature, int indexInList) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -73,7 +79,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	
 	@Test
 	public void testEmpty() {
-		expectedRegions = Collections.<ITextRegion>singleton(new TextRegion(47, 11)).iterator();
+		expectedRegions = Collections.<ITextRegionWithLineInformation>singleton(new TextRegionWithLineInformation(47, 11, 12, 137)).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		assertEquals("", appendable.getContent());
 		AbstractTraceRegion traceRegion = appendable.getTraceRegion();
@@ -87,8 +93,8 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	
 	@Test
 	public void testNoRedundantRegions() {
-		ITextRegion redundant = new TextRegion(47, 11);
-		ITextRegion second = new TextRegion(8, 15);
+		ITextRegionWithLineInformation redundant = new TextRegionWithLineInformation(47, 11, 12, 137);
+		ITextRegionWithLineInformation second = new TextRegionWithLineInformation(8, 15, 12, 137);
 		expectedRegions = Arrays.asList(redundant, redundant, second).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		appendable.append("initial");
@@ -112,9 +118,9 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	
 	@Test
 	public void testNoEmptyLeafs() {
-		ITextRegion root = new TextRegion(47, 11);
-		ITextRegion emptyChild = new TextRegion(8, 15);
-		ITextRegion emptyGrandChild = new TextRegion(123, 321);
+		ITextRegionWithLineInformation root = new TextRegionWithLineInformation(47, 11, 12, 137);
+		ITextRegionWithLineInformation emptyChild = new TextRegionWithLineInformation(8, 15, 12, 137);
+		ITextRegionWithLineInformation emptyGrandChild = new TextRegionWithLineInformation(123, 321, 12, 137);
 		expectedRegions = Arrays.asList(root, emptyChild, emptyGrandChild).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		appendable.append("initial");
@@ -127,9 +133,9 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	
 	@Test
 	public void testIntermediatesMayBeEmpty() {
-		ITextRegion root = new TextRegion(47, 11);
-		ITextRegion emptyChild = new TextRegion(8, 15);
-		ITextRegion emptyGrandChild = new TextRegion(123, 321);
+		ITextRegionWithLineInformation root = new TextRegionWithLineInformation(47, 11, 12, 137);
+		ITextRegionWithLineInformation emptyChild = new TextRegionWithLineInformation(8, 15, 12, 137);
+		ITextRegionWithLineInformation emptyGrandChild = new TextRegionWithLineInformation(123, 321, 12, 137);
 		expectedRegions = Arrays.asList(root, emptyChild, emptyGrandChild).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		appendable.trace(content).trace(content).append("text");
@@ -148,8 +154,8 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	
 	@Test
 	public void testInsertionIsProhibited() {
-		ITextRegion root = new TextRegion(47, 11);
-		ITextRegion child = new TextRegion(8, 15);
+		ITextRegionWithLineInformation root = new TextRegionWithLineInformation(47, 11, 12, 137);
+		ITextRegionWithLineInformation child = new TextRegionWithLineInformation(8, 15, 12, 137);
 		expectedRegions = Arrays.asList(root, child).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		TreeAppendable traced = appendable.trace(content);
@@ -164,9 +170,9 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	}
 	
 	@Test
-	public void tesUnsafeInsertionIsOk() {
-		ITextRegion root = new TextRegion(47, 11);
-		ITextRegion child = new TextRegion(8, 15);
+	public void testUnsafeInsertionIsOk() {
+		ITextRegionWithLineInformation root = new TextRegionWithLineInformation(47, 11, 12, 137);
+		ITextRegionWithLineInformation child = new TextRegionWithLineInformation(8, 15, 12, 137);
 		expectedRegions = Arrays.asList(root, child).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
 		TreeAppendable traced = appendable.trace(content);
@@ -176,8 +182,45 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	}
 	
 	@Test
+	public void testLineNumbers() {
+		expectedRegions = new AbstractIterator<ITextRegionWithLineInformation>() {
+			int start = 0;
+			@Override
+			protected ITextRegionWithLineInformation computeNext() {
+				return new TextRegionWithLineInformation(start++, 1, 1, 1);
+			}
+		};
+		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "  ", "\n");
+		appendable.append("start line").increaseIndentation();
+		appendable.newLine().trace(content).append("1");
+		appendable.newLine().trace(content).append("2");
+		appendable.newLine().trace(content).append("3\n4");
+		appendable.decreaseIndentation().newLine().append("last line");
+		assertEquals(
+				"start line\n" +
+				"  1\n" +
+				"  2\n" +
+				"  3\n" +
+				"  4\n" +
+				"last line", appendable.getContent());
+		AbstractTraceRegion rootTraceRegion = appendable.getTraceRegion();
+		assertEquals(0, rootTraceRegion.getMyLineNumber());
+		assertEquals(5, rootTraceRegion.getMyEndLineNumber());
+		AbstractTraceRegion firstChild = rootTraceRegion.getNestedRegions().get(0);
+		assertEquals(1, firstChild.getMyLineNumber());
+		assertEquals(1, firstChild.getMyEndLineNumber());
+		AbstractTraceRegion secondChild = rootTraceRegion.getNestedRegions().get(1);
+		assertEquals(2, secondChild.getMyLineNumber());
+		assertEquals(2, secondChild.getMyEndLineNumber());
+		AbstractTraceRegion thirdChild = rootTraceRegion.getNestedRegions().get(2);
+		assertEquals(3, thirdChild.getMyLineNumber());
+		assertEquals(4, thirdChild.getMyEndLineNumber());
+		expectedRegions = null;
+	}
+	
+	@Test
 	public void testNewlineIndents() {
-		expectedRegions = Collections.<ITextRegion>singleton(ITextRegion.EMPTY_REGION).iterator();
+		expectedRegions = Collections.<ITextRegionWithLineInformation>singleton(ITextRegionWithLineInformation.EMPTY_REGION).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "aa", "bb");
 		assertEquals("bb", appendable.newLine().getContent());
 		appendable.increaseIndentation();
@@ -188,7 +231,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 
 	@Test
 	public void testAppendedTextIsIndented() {
-		expectedRegions = Collections.<ITextRegion>singleton(ITextRegion.EMPTY_REGION).iterator();
+		expectedRegions = Collections.<ITextRegionWithLineInformation>singleton(ITextRegionWithLineInformation.EMPTY_REGION).iterator();
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(false), this, content, "aa", "bb");
 		appendable.increaseIndentation();
 		appendable.append("my \n text \r more \r\n end");
