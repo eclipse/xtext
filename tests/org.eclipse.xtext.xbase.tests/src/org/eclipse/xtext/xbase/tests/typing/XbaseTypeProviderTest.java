@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -150,10 +153,96 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType(String.class.getName(), "\"foo\"");
 	}
 
-	@Test public void testIntLiteral() throws Exception {
+	@Test public void testNumberLiteral_0() throws Exception {
 		assertResolvedType(Integer.TYPE.getName(), "3");
 	}
 
+	@Test public void testNumberLiteral_1() throws Exception {
+		assertResolvedType(Integer.TYPE.getName(), "0x42");
+	}
+
+	@Test public void testNumberLiteral_2() throws Exception {
+		assertResolvedType(Long.TYPE.getName(), "1L");
+	}
+
+	@Test public void testNumberLiteral_3() throws Exception {
+		assertResolvedType(Long.TYPE.getName(), "0x42l");
+	}
+
+	@Test public void testNumberLiteral_4() throws Exception {
+		assertResolvedType(Float.TYPE.getName(), "1f");
+	}
+
+	@Test public void testNumberLiteral_5() throws Exception {
+		assertResolvedType(Float.TYPE.getName(), "1.0f");
+	}
+
+	@Test public void testNumberLiteral_6() throws Exception {
+		assertResolvedType(Float.TYPE.getName(), "1.0E10f");
+	}
+
+	@Test public void testNumberLiteral_7() throws Exception {
+		assertResolvedType(Float.TYPE.getName(), "1.0e-10f");
+	}
+
+	@Test public void testNumberLiteral_8() throws Exception {
+		assertResolvedType(Float.TYPE.getName(), "1.0E+10f");
+	}
+
+	@Test public void testNumberLiteral_9() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0");
+	}
+
+	@Test public void testNumberLiteral_10() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0E10");
+	}
+
+	@Test public void testNumberLiteral_11() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0e-10");
+	}
+
+	@Test public void testNumberLiteral_12() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0E+10");
+	}
+
+	@Test public void testNumberLiteral_13() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0d");
+	}
+
+	@Test public void testNumberLiteral_14() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0E10d");
+	}
+
+	@Test public void testNumberLiteral_15() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0e-10d");
+	}
+
+	@Test public void testNumberLiteral_16() throws Exception {
+		assertResolvedType(Double.TYPE.getName(), "1.0E+10d");
+	}
+
+	@Test public void testNumberLiteral_17() throws Exception {
+		assertResolvedType(BigInteger.class.getName(), "1234567890123456789012345678901234567890b");
+	}
+
+	@Test public void testNumberLiteral_18() throws Exception {
+		assertResolvedType(BigDecimal.class.getName(), "1.0b");
+	}
+
+	@Test public void testNumberLiteral_19() throws Exception {
+		assertResolvedType(BigDecimal.class.getName(), "1.0E10b");
+	}
+
+	@Test public void testNumberLiteral_20() throws Exception {
+		assertResolvedType(BigDecimal.class.getName(), "1.0e-10b");
+	}
+
+	@Test public void testNumberLiteral_21() throws Exception {
+		assertResolvedType(BigDecimal.class.getName(), "1.0E+10b");
+	}
+
+
+	
 	@Test public void testCastExpression() throws Exception {
 		assertResolvedType(String.class.getName(), "null as String");
 		assertResolvedType(Boolean.class.getName(), "null as Boolean");

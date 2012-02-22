@@ -1126,16 +1126,16 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cXClosureParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cXBooleanLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cXIntLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cXNumberLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cXNullLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cXStringLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cXTypeLiteralParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//XLiteral returns XExpression:
-		//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+		//	XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral
+		//XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XClosure
@@ -1144,8 +1144,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XBooleanLiteral
 		public RuleCall getXBooleanLiteralParserRuleCall_1() { return cXBooleanLiteralParserRuleCall_1; }
 
-		//XIntLiteral
-		public RuleCall getXIntLiteralParserRuleCall_2() { return cXIntLiteralParserRuleCall_2; }
+		//XNumberLiteral
+		public RuleCall getXNumberLiteralParserRuleCall_2() { return cXNumberLiteralParserRuleCall_2; }
 
 		//XNullLiteral
 		public RuleCall getXNullLiteralParserRuleCall_3() { return cXNullLiteralParserRuleCall_3; }
@@ -2280,28 +2280,28 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getNullKeyword_1() { return cNullKeyword_1; }
 	}
 
-	public class XIntLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XIntLiteral");
+	public class XNumberLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XNumberLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cXIntLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cXNumberLiteralAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueNumberParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
-		//XIntLiteral returns XExpression:
-		//	{XIntLiteral} value=INT;
+		//XNumberLiteral returns XExpression:
+		//	{XNumberLiteral} value=Number;
 		public ParserRule getRule() { return rule; }
 
-		//{XIntLiteral} value=INT
+		//{XNumberLiteral} value=Number
 		public Group getGroup() { return cGroup; }
 
-		//{XIntLiteral}
-		public Action getXIntLiteralAction_0() { return cXIntLiteralAction_0; }
+		//{XNumberLiteral}
+		public Action getXNumberLiteralAction_0() { return cXNumberLiteralAction_0; }
 
-		//value=INT
+		//value=Number
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//INT
-		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
+		//Number
+		public RuleCall getValueNumberParserRuleCall_1_0() { return cValueNumberParserRuleCall_1_0; }
 	}
 
 	public class XStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -2569,6 +2569,42 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getValidIDParserRuleCall_1_1() { return cValidIDParserRuleCall_1_1; }
 	}
+
+	public class NumberElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Number");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cHEXTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cDECIMALTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final RuleCall cDECIMALTerminalRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
+		
+		//Number hidden():
+		//	HEX | DECIMAL ("." DECIMAL)?;
+		public ParserRule getRule() { return rule; }
+
+		//HEX | DECIMAL ("." DECIMAL)?
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//HEX
+		public RuleCall getHEXTerminalRuleCall_0() { return cHEXTerminalRuleCall_0; }
+
+		//DECIMAL ("." DECIMAL)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//DECIMAL
+		public RuleCall getDECIMALTerminalRuleCall_1_0() { return cDECIMALTerminalRuleCall_1_0; }
+
+		//("." DECIMAL)?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_1_0() { return cFullStopKeyword_1_1_0; }
+
+		//DECIMAL
+		public RuleCall getDECIMALTerminalRuleCall_1_1_1() { return cDECIMALTerminalRuleCall_1_1_1; }
+	}
 	
 	
 	private XExpressionElements pXExpression;
@@ -2616,7 +2652,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private XConstructorCallElements pXConstructorCall;
 	private XBooleanLiteralElements pXBooleanLiteral;
 	private XNullLiteralElements pXNullLiteral;
-	private XIntLiteralElements pXIntLiteral;
+	private XNumberLiteralElements pXNumberLiteral;
 	private XStringLiteralElements pXStringLiteral;
 	private XTypeLiteralElements pXTypeLiteral;
 	private XThrowExpressionElements pXThrowExpression;
@@ -2624,6 +2660,9 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private XTryCatchFinallyExpressionElements pXTryCatchFinallyExpression;
 	private XCatchClauseElements pXCatchClause;
 	private QualifiedNameElements pQualifiedName;
+	private NumberElements pNumber;
+	private TerminalRule tHEX;
+	private TerminalRule tDECIMAL;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -2893,7 +2932,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XLiteral returns XExpression:
-	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+	//	XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 	public XLiteralElements getXLiteralAccess() {
 		return (pXLiteral != null) ? pXLiteral : (pXLiteral = new XLiteralElements());
 	}
@@ -3125,14 +3164,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getXNullLiteralAccess().getRule();
 	}
 
-	//XIntLiteral returns XExpression:
-	//	{XIntLiteral} value=INT;
-	public XIntLiteralElements getXIntLiteralAccess() {
-		return (pXIntLiteral != null) ? pXIntLiteral : (pXIntLiteral = new XIntLiteralElements());
+	//XNumberLiteral returns XExpression:
+	//	{XNumberLiteral} value=Number;
+	public XNumberLiteralElements getXNumberLiteralAccess() {
+		return (pXNumberLiteral != null) ? pXNumberLiteral : (pXNumberLiteral = new XNumberLiteralElements());
 	}
 	
-	public ParserRule getXIntLiteralRule() {
-		return getXIntLiteralAccess().getRule();
+	public ParserRule getXNumberLiteralRule() {
+		return getXNumberLiteralAccess().getRule();
 	}
 
 	//XStringLiteral returns XExpression:
@@ -3205,6 +3244,28 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getQualifiedNameRule() {
 		return getQualifiedNameAccess().getRule();
 	}
+
+	//Number hidden():
+	//	HEX | DECIMAL ("." DECIMAL)?;
+	public NumberElements getNumberAccess() {
+		return (pNumber != null) ? pNumber : (pNumber = new NumberElements());
+	}
+	
+	public ParserRule getNumberRule() {
+		return getNumberAccess().getRule();
+	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+ ("l" | "L")?;
+	public TerminalRule getHEXRule() {
+		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
+	} 
+
+	//terminal DECIMAL:
+	//	"0".."9"+ (("e" | "E") ("+" | "-")? "0".."9"+)? ("l" | "L" | "d" | "D" | "f" | "F" | "b" | "B")?;
+	public TerminalRule getDECIMALRule() {
+		return (tDECIMAL != null) ? tDECIMAL : (tDECIMAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DECIMAL"));
+	} 
 
 	//JvmTypeReference:
 	//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} "[" "]")* | XFunctionTypeRef;
@@ -3311,12 +3372,6 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	"^"? ("a".."z" | "A".."Z" | "$" | "_") ("a".."z" | "A".."Z" | "$" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaXtype.getIDRule();
-	} 
-
-	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
-	public TerminalRule getINTRule() {
-		return gaXtype.getINTRule();
 	} 
 
 	//terminal STRING:

@@ -46,7 +46,7 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	}
 	@Test public void testTypeConformance_06() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = 42)", false);
-		validator.assertError(annotation, XbasePackage.Literals.XINT_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String[]", "int");
+		validator.assertError(annotation, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String[]", "int");
 	}
 	@Test public void testTypeConformance_07() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2({typeof(String)})", false);

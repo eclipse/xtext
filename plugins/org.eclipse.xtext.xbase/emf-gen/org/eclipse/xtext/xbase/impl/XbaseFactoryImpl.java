@@ -77,7 +77,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XCONSTRUCTOR_CALL: return createXConstructorCall();
 			case XbasePackage.XBOOLEAN_LITERAL: return createXBooleanLiteral();
 			case XbasePackage.XNULL_LITERAL: return createXNullLiteral();
-			case XbasePackage.XINT_LITERAL: return createXIntLiteral();
+			case XbasePackage.XNUMBER_LITERAL: return createXNumberLiteral();
 			case XbasePackage.XSTRING_LITERAL: return createXStringLiteral();
 			case XbasePackage.XCLOSURE: return createXClosure();
 			case XbasePackage.XCASTED_EXPRESSION: return createXCastedExpression();
@@ -213,10 +213,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XIntLiteral createXIntLiteral()
+	public XNumberLiteral createXNumberLiteral()
 	{
-		XIntLiteralImpl xIntLiteral = new XIntLiteralImpl();
-		return xIntLiteral;
+		XNumberLiteralImpl xNumberLiteral = new XNumberLiteralImpl();
+		return xNumberLiteral;
 	}
 
 	/**

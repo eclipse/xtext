@@ -11,23 +11,23 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>XInt Literal</b></em>'.
+ * An implementation of the model object '<em><b>XNumber Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XNumberLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
+public class XNumberLiteralImpl extends XExpressionImpl implements XNumberLiteral
 {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -37,7 +37,7 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int VALUE_EDEFAULT = 0;
+	protected static final String VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -47,14 +47,14 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	 * @generated
 	 * @ordered
 	 */
-	protected int value = VALUE_EDEFAULT;
+	protected String value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected XIntLiteralImpl()
+	protected XNumberLiteralImpl()
 	{
 		super();
 	}
@@ -67,7 +67,7 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	@Override
 	protected EClass eStaticClass()
 	{
-		return XbasePackage.Literals.XINT_LITERAL;
+		return XbasePackage.Literals.XNUMBER_LITERAL;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getValue()
+	public String getValue()
 	{
 		return value;
 	}
@@ -85,12 +85,12 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(int newValue)
+	public void setValue(String newValue)
 	{
-		int oldValue = value;
+		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XINT_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XNUMBER_LITERAL__VALUE, oldValue, value));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XINT_LITERAL__VALUE:
+			case XbasePackage.XNUMBER_LITERAL__VALUE:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,8 +119,8 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XINT_LITERAL__VALUE:
-				setValue((Integer)newValue);
+			case XbasePackage.XNUMBER_LITERAL__VALUE:
+				setValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +136,7 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XINT_LITERAL__VALUE:
+			case XbasePackage.XNUMBER_LITERAL__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -153,8 +153,8 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XINT_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+			case XbasePackage.XNUMBER_LITERAL__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -176,4 +176,4 @@ public class XIntLiteralImpl extends XExpressionImpl implements XIntLiteral
 		return result.toString();
 	}
 
-} //XIntLiteralImpl
+} //XNumberLiteralImpl

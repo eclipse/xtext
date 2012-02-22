@@ -29,9 +29,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -106,10 +106,10 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _type((XIfExpression)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XInstanceOfExpression) {
       return _type((XInstanceOfExpression)binaryOperation, rawExpectation, rawType);
-    } else if (binaryOperation instanceof XIntLiteral) {
-      return _type((XIntLiteral)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XNullLiteral) {
       return _type((XNullLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XNumberLiteral) {
+      return _type((XNumberLiteral)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XReturnExpression) {
       return _type((XReturnExpression)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XStringLiteral) {

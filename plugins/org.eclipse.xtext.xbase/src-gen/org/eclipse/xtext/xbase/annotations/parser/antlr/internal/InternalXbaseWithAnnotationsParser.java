@@ -22,11 +22,11 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@'", "'('", "','", "')'", "'='", "'+'", "'{'", "'}'", "'+='", "'||'", "'&&'", "'=='", "'!='", "'instanceof'", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'as'", "'.'", "'?.'", "'*.'", "'['", "'|'", "']'", "';'", "'if'", "'else'", "'switch'", "':'", "'default'", "'case'", "'for'", "'while'", "'do'", "'var'", "'val'", "'super'", "'::'", "'new'", "'false'", "'true'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'extends'", "'&'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_HEX", "RULE_DECIMAL", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@'", "'('", "','", "')'", "'='", "'+'", "'{'", "'}'", "'+='", "'||'", "'&&'", "'=='", "'!='", "'instanceof'", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'as'", "'.'", "'?.'", "'*.'", "'['", "'|'", "']'", "';'", "'if'", "'else'", "'switch'", "':'", "'default'", "'case'", "'for'", "'while'", "'do'", "'var'", "'val'", "'super'", "'::'", "'new'", "'false'", "'true'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'extends'", "'&'"
     };
     public static final int T__68=68;
     public static final int T__69=69;
-    public static final int RULE_ID=6;
+    public static final int RULE_ID=7;
     public static final int T__66=66;
     public static final int T__67=67;
     public static final int T__64=64;
@@ -41,7 +41,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_ANY_OTHER=11;
     public static final int T__21=21;
     public static final int T__20=20;
     public static final int T__61=61;
@@ -51,9 +51,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final int T__56=56;
     public static final int T__19=19;
     public static final int T__57=57;
+    public static final int RULE_HEX=5;
     public static final int T__58=58;
-    public static final int T__51=51;
     public static final int T__16=16;
+    public static final int T__51=51;
     public static final int T__52=52;
     public static final int T__15=15;
     public static final int T__53=53;
@@ -61,11 +62,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final int T__54=54;
     public static final int T__17=17;
     public static final int T__12=12;
-    public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
     public static final int T__59=59;
-    public static final int RULE_INT=4;
+    public static final int RULE_DECIMAL=6;
     public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;
@@ -77,14 +77,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final int T__45=45;
     public static final int T__48=48;
     public static final int T__49=49;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_ML_COMMENT=8;
     public static final int T__30=30;
     public static final int T__31=31;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=4;
     public static final int T__32=32;
     public static final int T__71=71;
     public static final int T__33=33;
+    public static final int T__72=72;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__70=70;
@@ -92,7 +93,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int RULE_WS=9;
+    public static final int RULE_WS=10;
 
     // delegates
     // delegators
@@ -210,7 +211,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,11,FOLLOW_11_in_ruleXAnnotation131); if (state.failed) return current;
+            otherlv_1=(Token)match(input,12,FOLLOW_12_in_ruleXAnnotation131); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXAnnotationAccess().getCommercialAtKeyword_1());
@@ -254,7 +255,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==12) && (synpred1_InternalXbaseWithAnnotations())) {
+            if ( (LA3_0==13) && (synpred1_InternalXbaseWithAnnotations())) {
                 alt3=1;
             }
             switch (alt3) {
@@ -264,7 +265,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:105:3: ( ( '(' )=>otherlv_3= '(' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:105:4: ( '(' )=>otherlv_3= '('
                     {
-                    otherlv_3=(Token)match(input,12,FOLLOW_12_in_ruleXAnnotation175); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,13,FOLLOW_13_in_ruleXAnnotation175); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0());
@@ -280,14 +281,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     if ( (LA2_0==RULE_ID) ) {
                         int LA2_1 = input.LA(2);
 
-                        if ( (LA2_1==14||LA2_1==57) ) {
+                        if ( (LA2_1==15||LA2_1==58) ) {
                             alt2=2;
                         }
-                        else if ( (LA2_1==15) ) {
+                        else if ( (LA2_1==16) ) {
                             alt2=1;
                         }
                     }
-                    else if ( ((LA2_0>=RULE_INT && LA2_0<=RULE_STRING)||(LA2_0>=11 && LA2_0<=12)||LA2_0==17||LA2_0==56||(LA2_0>=59 && LA2_0<=60)||LA2_0==62) ) {
+                    else if ( ((LA2_0>=RULE_STRING && LA2_0<=RULE_DECIMAL)||(LA2_0>=12 && LA2_0<=13)||LA2_0==18||LA2_0==57||(LA2_0>=60 && LA2_0<=61)||LA2_0==63) ) {
                         alt2=2;
                     }
                     switch (alt2) {
@@ -338,7 +339,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                                 int alt1=2;
                                 int LA1_0 = input.LA(1);
 
-                                if ( (LA1_0==13) ) {
+                                if ( (LA1_0==14) ) {
                                     alt1=1;
                                 }
 
@@ -347,7 +348,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	case 1 :
                             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:128:4: otherlv_5= ',' ( (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
                             	    {
-                            	    otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleXAnnotation212); if (state.failed) return current;
+                            	    otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleXAnnotation212); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_5, grammarAccess.getXAnnotationAccess().getCommaKeyword_3_1_0_1_0());
@@ -447,7 +448,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    otherlv_8=(Token)match(input,14,FOLLOW_14_in_ruleXAnnotation277); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,15,FOLLOW_15_in_ruleXAnnotation277); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2());
@@ -573,7 +574,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,15,FOLLOW_15_in_ruleXAnnotationElementValuePair385); if (state.failed) return current;
+            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleXAnnotationElementValuePair385); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXAnnotationElementValuePairAccess().getEqualsSignKeyword_1());
@@ -718,7 +719,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==16) ) {
+                if ( (LA4_0==17) ) {
                     alt4=1;
                 }
 
@@ -746,7 +747,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:268:1: (lv_operator_2_0= '+' )
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:269:3: lv_operator_2_0= '+'
             	    {
-            	    lv_operator_2_0=(Token)match(input,16,FOLLOW_16_in_ruleXAnnotationElementValueStringConcatenation526); if (state.failed) return current;
+            	    lv_operator_2_0=(Token)match(input,17,FOLLOW_17_in_ruleXAnnotationElementValueStringConcatenation526); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              newLeafNode(lv_operator_2_0, grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorPlusSignKeyword_1_1_0());
@@ -873,7 +874,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotationElementValue"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:317:1: ruleXAnnotationElementValue returns [EObject current=null] : (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XIntLiteral_4= ruleXIntLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:317:1: ruleXAnnotationElementValue returns [EObject current=null] : (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XNumberLiteral_4= ruleXNumberLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) ) ;
     public final EObject ruleXAnnotationElementValue() throws RecognitionException {
         EObject current = null;
 
@@ -887,7 +888,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         EObject this_XBooleanLiteral_3 = null;
 
-        EObject this_XIntLiteral_4 = null;
+        EObject this_XNumberLiteral_4 = null;
 
         EObject this_XTypeLiteral_5 = null;
 
@@ -899,18 +900,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:320:28: ( (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XIntLiteral_4= ruleXIntLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:321:1: (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XIntLiteral_4= ruleXIntLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:320:28: ( (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XNumberLiteral_4= ruleXNumberLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:321:1: (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XNumberLiteral_4= ruleXNumberLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:321:1: (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XIntLiteral_4= ruleXIntLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:321:1: (this_XAnnotation_0= ruleXAnnotation | this_XAnnotationValueArray_1= ruleXAnnotationValueArray | this_XStringLiteral_2= ruleXStringLiteral | this_XBooleanLiteral_3= ruleXBooleanLiteral | this_XNumberLiteral_4= ruleXNumberLiteral | this_XTypeLiteral_5= ruleXTypeLiteral | this_XAnnotationValueFieldReference_6= ruleXAnnotationValueFieldReference | (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' ) )
             int alt5=8;
             switch ( input.LA(1) ) {
-            case 11:
+            case 12:
                 {
                 alt5=1;
                 }
                 break;
-            case 17:
+            case 18:
                 {
                 alt5=2;
                 }
@@ -920,29 +921,30 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 alt5=3;
                 }
                 break;
-            case 59:
             case 60:
+            case 61:
                 {
                 alt5=4;
                 }
                 break;
-            case RULE_INT:
+            case RULE_HEX:
+            case RULE_DECIMAL:
                 {
                 alt5=5;
                 }
                 break;
-            case 62:
+            case 63:
                 {
                 alt5=6;
                 }
                 break;
             case RULE_ID:
-            case 56:
+            case 57:
                 {
                 alt5=7;
                 }
                 break;
-            case 12:
+            case 13:
                 {
                 alt5=8;
                 }
@@ -1045,21 +1047,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:362:5: this_XIntLiteral_4= ruleXIntLiteral
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:362:5: this_XNumberLiteral_4= ruleXNumberLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXIntLiteralParserRuleCall_4()); 
+                              newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXNumberLiteralParserRuleCall_4()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleXIntLiteral_in_ruleXAnnotationElementValue763);
-                    this_XIntLiteral_4=ruleXIntLiteral();
+                    pushFollow(FOLLOW_ruleXNumberLiteral_in_ruleXAnnotationElementValue763);
+                    this_XNumberLiteral_4=ruleXNumberLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_XIntLiteral_4; 
+                              current = this_XNumberLiteral_4; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -1116,7 +1118,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:391:6: (otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:391:8: otherlv_7= '(' this_XAnnotationElementValueStringConcatenation_8= ruleXAnnotationElementValueStringConcatenation otherlv_9= ')'
                     {
-                    otherlv_7=(Token)match(input,12,FOLLOW_12_in_ruleXAnnotationElementValue835); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,13,FOLLOW_13_in_ruleXAnnotationElementValue835); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
@@ -1138,7 +1140,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                               afterParserOrEnumRuleCall();
                           
                     }
-                    otherlv_9=(Token)match(input,14,FOLLOW_14_in_ruleXAnnotationElementValue868); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,15,FOLLOW_15_in_ruleXAnnotationElementValue868); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getXAnnotationElementValueAccess().getRightParenthesisKeyword_7_2());
@@ -1246,7 +1248,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA6_0==RULE_ID) ) {
                 int LA6_1 = input.LA(2);
 
-                if ( (LA6_1==57) ) {
+                if ( (LA6_1==58) ) {
                     alt6=1;
                 }
             }
@@ -1419,7 +1421,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_17_in_ruleXAnnotationValueArray1088); if (state.failed) return current;
+            otherlv_1=(Token)match(input,18,FOLLOW_18_in_ruleXAnnotationValueArray1088); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXAnnotationValueArrayAccess().getLeftCurlyBracketKeyword_1());
@@ -1466,7 +1468,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt7=2;
                 int LA7_0 = input.LA(1);
 
-                if ( (LA7_0==13) ) {
+                if ( (LA7_0==14) ) {
                     alt7=1;
                 }
 
@@ -1475,7 +1477,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	case 1 :
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:514:4: otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) )
             	    {
-            	    otherlv_3=(Token)match(input,13,FOLLOW_13_in_ruleXAnnotationValueArray1122); if (state.failed) return current;
+            	    otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleXAnnotationValueArray1122); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_3, grammarAccess.getXAnnotationValueArrayAccess().getCommaKeyword_3_0());
@@ -1525,7 +1527,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,18,FOLLOW_18_in_ruleXAnnotationValueArray1157); if (state.failed) return current;
+            otherlv_5=(Token)match(input,19,FOLLOW_19_in_ruleXAnnotationValueArray1157); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getXAnnotationValueArrayAccess().getRightCurlyBracketKeyword_4());
@@ -1707,10 +1709,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA9_0==RULE_ID) ) {
                 int LA9_1 = input.LA(2);
 
-                if ( (LA9_1==EOF||(LA9_1>=RULE_INT && LA9_1<=RULE_ID)||(LA9_1>=12 && LA9_1<=14)||(LA9_1>=16 && LA9_1<=41)||(LA9_1>=43 && LA9_1<=68)) ) {
+                if ( (LA9_1==EOF||(LA9_1>=RULE_STRING && LA9_1<=RULE_ID)||(LA9_1>=13 && LA9_1<=15)||(LA9_1>=17 && LA9_1<=42)||(LA9_1>=44 && LA9_1<=69)) ) {
                     alt9=2;
                 }
-                else if ( (LA9_1==15) ) {
+                else if ( (LA9_1==16) ) {
                     alt9=1;
                 }
                 else {
@@ -1721,7 +1723,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     throw nvae;
                 }
             }
-            else if ( ((LA9_0>=RULE_INT && LA9_0<=RULE_STRING)||LA9_0==12||(LA9_0>=16 && LA9_0<=17)||LA9_0==28||LA9_0==31||LA9_0==36||LA9_0==41||LA9_0==45||LA9_0==47||(LA9_0>=51 && LA9_0<=53)||LA9_0==56||(LA9_0>=58 && LA9_0<=65)) ) {
+            else if ( ((LA9_0>=RULE_STRING && LA9_0<=RULE_DECIMAL)||LA9_0==13||(LA9_0>=17 && LA9_0<=18)||LA9_0==29||LA9_0==32||LA9_0==37||LA9_0==42||LA9_0==46||LA9_0==48||(LA9_0>=52 && LA9_0<=54)||LA9_0==57||(LA9_0>=59 && LA9_0<=66)) ) {
                 alt9=2;
             }
             else {
@@ -1867,7 +1869,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
-                    if ( (LA8_0==19) ) {
+                    if ( (LA8_0==20) ) {
                         int LA8_1 = input.LA(2);
 
                         if ( (synpred2_InternalXbaseWithAnnotations()) ) {
@@ -2059,7 +2061,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:712:28: (kw= '=' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:714:2: kw= '='
             {
-            kw=(Token)match(input,15,FOLLOW_15_in_ruleOpSingleAssign1581); if (state.failed) return current;
+            kw=(Token)match(input,16,FOLLOW_16_in_ruleOpSingleAssign1581); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
@@ -2138,7 +2140,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:739:28: (kw= '+=' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:741:2: kw= '+='
             {
-            kw=(Token)match(input,19,FOLLOW_19_in_ruleOpMultiAssign1669); if (state.failed) return current;
+            kw=(Token)match(input,20,FOLLOW_20_in_ruleOpMultiAssign1669); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
@@ -2245,7 +2247,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt10=2;
                 int LA10_0 = input.LA(1);
 
-                if ( (LA10_0==20) ) {
+                if ( (LA10_0==21) ) {
                     int LA10_2 = input.LA(2);
 
                     if ( (synpred3_InternalXbaseWithAnnotations()) ) {
@@ -2438,7 +2440,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:840:28: (kw= '||' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:842:2: kw= '||'
             {
-            kw=(Token)match(input,20,FOLLOW_20_in_ruleOpOr1928); if (state.failed) return current;
+            kw=(Token)match(input,21,FOLLOW_21_in_ruleOpOr1928); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
@@ -2545,7 +2547,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( (LA11_0==21) ) {
+                if ( (LA11_0==22) ) {
                     int LA11_2 = input.LA(2);
 
                     if ( (synpred4_InternalXbaseWithAnnotations()) ) {
@@ -2738,7 +2740,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:941:28: (kw= '&&' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:943:2: kw= '&&'
             {
-            kw=(Token)match(input,21,FOLLOW_21_in_ruleOpAnd2187); if (state.failed) return current;
+            kw=(Token)match(input,22,FOLLOW_22_in_ruleOpAnd2187); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       current.merge(kw);
@@ -2845,7 +2847,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==22) ) {
+                if ( (LA12_0==23) ) {
                     int LA12_2 = input.LA(2);
 
                     if ( (synpred5_InternalXbaseWithAnnotations()) ) {
@@ -2854,7 +2856,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
                 }
-                else if ( (LA12_0==23) ) {
+                else if ( (LA12_0==24) ) {
                     int LA12_3 = input.LA(2);
 
                     if ( (synpred5_InternalXbaseWithAnnotations()) ) {
@@ -3051,10 +3053,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==22) ) {
+            if ( (LA13_0==23) ) {
                 alt13=1;
             }
-            else if ( (LA13_0==23) ) {
+            else if ( (LA13_0==24) ) {
                 alt13=2;
             }
             else {
@@ -3068,7 +3070,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1044:2: kw= '=='
                     {
-                    kw=(Token)match(input,22,FOLLOW_22_in_ruleOpEquality2447); if (state.failed) return current;
+                    kw=(Token)match(input,23,FOLLOW_23_in_ruleOpEquality2447); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3081,7 +3083,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1051:2: kw= '!='
                     {
-                    kw=(Token)match(input,23,FOLLOW_23_in_ruleOpEquality2466); if (state.failed) return current;
+                    kw=(Token)match(input,24,FOLLOW_24_in_ruleOpEquality2466); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3196,7 +3198,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             do {
                 int alt14=3;
                 switch ( input.LA(1) ) {
-                case 24:
+                case 25:
                     {
                     int LA14_2 = input.LA(2);
 
@@ -3207,7 +3209,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 25:
+                case 26:
                     {
                     int LA14_3 = input.LA(2);
 
@@ -3218,7 +3220,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 26:
+                case 27:
                     {
                     int LA14_4 = input.LA(2);
 
@@ -3229,7 +3231,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 27:
+                case 28:
                     {
                     int LA14_5 = input.LA(2);
 
@@ -3240,7 +3242,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 28:
+                case 29:
                     {
                     int LA14_6 = input.LA(2);
 
@@ -3280,7 +3282,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    otherlv_2=(Token)match(input,24,FOLLOW_24_in_ruleXRelationalExpression2599); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,25,FOLLOW_25_in_ruleXRelationalExpression2599); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getXRelationalExpressionAccess().getInstanceofKeyword_1_0_0_0_1());
@@ -3523,22 +3525,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1182:1: (kw= '>=' | kw= '<=' | kw= '>' | kw= '<' )
             int alt15=4;
             switch ( input.LA(1) ) {
-            case 25:
+            case 26:
                 {
                 alt15=1;
                 }
                 break;
-            case 26:
+            case 27:
                 {
                 alt15=2;
                 }
                 break;
-            case 27:
+            case 28:
                 {
                 alt15=3;
                 }
                 break;
-            case 28:
+            case 29:
                 {
                 alt15=4;
                 }
@@ -3555,7 +3557,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1183:2: kw= '>='
                     {
-                    kw=(Token)match(input,25,FOLLOW_25_in_ruleOpCompare2795); if (state.failed) return current;
+                    kw=(Token)match(input,26,FOLLOW_26_in_ruleOpCompare2795); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3568,7 +3570,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1190:2: kw= '<='
                     {
-                    kw=(Token)match(input,26,FOLLOW_26_in_ruleOpCompare2814); if (state.failed) return current;
+                    kw=(Token)match(input,27,FOLLOW_27_in_ruleOpCompare2814); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3581,7 +3583,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 3 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1197:2: kw= '>'
                     {
-                    kw=(Token)match(input,27,FOLLOW_27_in_ruleOpCompare2833); if (state.failed) return current;
+                    kw=(Token)match(input,28,FOLLOW_28_in_ruleOpCompare2833); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3594,7 +3596,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 4 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1204:2: kw= '<'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleOpCompare2852); if (state.failed) return current;
+                    kw=(Token)match(input,29,FOLLOW_29_in_ruleOpCompare2852); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3707,7 +3709,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt16=2;
                 int LA16_0 = input.LA(1);
 
-                if ( (LA16_0==29) ) {
+                if ( (LA16_0==30) ) {
                     int LA16_2 = input.LA(2);
 
                     if ( (synpred8_InternalXbaseWithAnnotations()) ) {
@@ -3716,7 +3718,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
                 }
-                else if ( (LA16_0==30) ) {
+                else if ( (LA16_0==31) ) {
                     int LA16_3 = input.LA(2);
 
                     if ( (synpred8_InternalXbaseWithAnnotations()) ) {
@@ -3913,10 +3915,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==29) ) {
+            if ( (LA17_0==30) ) {
                 alt17=1;
             }
-            else if ( (LA17_0==30) ) {
+            else if ( (LA17_0==31) ) {
                 alt17=2;
             }
             else {
@@ -3930,7 +3932,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1305:2: kw= '->'
                     {
-                    kw=(Token)match(input,29,FOLLOW_29_in_ruleOpOther3113); if (state.failed) return current;
+                    kw=(Token)match(input,30,FOLLOW_30_in_ruleOpOther3113); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -3943,7 +3945,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1312:2: kw= '..'
                     {
-                    kw=(Token)match(input,30,FOLLOW_30_in_ruleOpOther3132); if (state.failed) return current;
+                    kw=(Token)match(input,31,FOLLOW_31_in_ruleOpOther3132); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4056,7 +4058,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt18=2;
                 int LA18_0 = input.LA(1);
 
-                if ( (LA18_0==16) ) {
+                if ( (LA18_0==17) ) {
                     int LA18_2 = input.LA(2);
 
                     if ( (synpred9_InternalXbaseWithAnnotations()) ) {
@@ -4065,7 +4067,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
                 }
-                else if ( (LA18_0==31) ) {
+                else if ( (LA18_0==32) ) {
                     int LA18_3 = input.LA(2);
 
                     if ( (synpred9_InternalXbaseWithAnnotations()) ) {
@@ -4262,10 +4264,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt19=2;
             int LA19_0 = input.LA(1);
 
-            if ( (LA19_0==16) ) {
+            if ( (LA19_0==17) ) {
                 alt19=1;
             }
-            else if ( (LA19_0==31) ) {
+            else if ( (LA19_0==32) ) {
                 alt19=2;
             }
             else {
@@ -4279,7 +4281,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1413:2: kw= '+'
                     {
-                    kw=(Token)match(input,16,FOLLOW_16_in_ruleOpAdd3393); if (state.failed) return current;
+                    kw=(Token)match(input,17,FOLLOW_17_in_ruleOpAdd3393); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4292,7 +4294,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1420:2: kw= '-'
                     {
-                    kw=(Token)match(input,31,FOLLOW_31_in_ruleOpAdd3412); if (state.failed) return current;
+                    kw=(Token)match(input,32,FOLLOW_32_in_ruleOpAdd3412); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4404,7 +4406,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             do {
                 int alt20=2;
                 switch ( input.LA(1) ) {
-                case 32:
+                case 33:
                     {
                     int LA20_2 = input.LA(2);
 
@@ -4415,7 +4417,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 33:
+                case 34:
                     {
                     int LA20_3 = input.LA(2);
 
@@ -4426,7 +4428,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 34:
+                case 35:
                     {
                     int LA20_4 = input.LA(2);
 
@@ -4437,7 +4439,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 35:
+                case 36:
                     {
                     int LA20_5 = input.LA(2);
 
@@ -4636,22 +4638,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1520:1: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             int alt21=4;
             switch ( input.LA(1) ) {
-            case 32:
+            case 33:
                 {
                 alt21=1;
                 }
                 break;
-            case 33:
+            case 34:
                 {
                 alt21=2;
                 }
                 break;
-            case 34:
+            case 35:
                 {
                 alt21=3;
                 }
                 break;
-            case 35:
+            case 36:
                 {
                 alt21=4;
                 }
@@ -4668,7 +4670,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1521:2: kw= '*'
                     {
-                    kw=(Token)match(input,32,FOLLOW_32_in_ruleOpMulti3673); if (state.failed) return current;
+                    kw=(Token)match(input,33,FOLLOW_33_in_ruleOpMulti3673); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4681,7 +4683,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1528:2: kw= '**'
                     {
-                    kw=(Token)match(input,33,FOLLOW_33_in_ruleOpMulti3692); if (state.failed) return current;
+                    kw=(Token)match(input,34,FOLLOW_34_in_ruleOpMulti3692); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4694,7 +4696,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 3 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1535:2: kw= '/'
                     {
-                    kw=(Token)match(input,34,FOLLOW_34_in_ruleOpMulti3711); if (state.failed) return current;
+                    kw=(Token)match(input,35,FOLLOW_35_in_ruleOpMulti3711); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4707,7 +4709,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 4 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1542:2: kw= '%'
                     {
-                    kw=(Token)match(input,35,FOLLOW_35_in_ruleOpMulti3730); if (state.failed) return current;
+                    kw=(Token)match(input,36,FOLLOW_36_in_ruleOpMulti3730); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -4799,10 +4801,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( (LA22_0==16||LA22_0==31||LA22_0==36) ) {
+            if ( (LA22_0==17||LA22_0==32||LA22_0==37) ) {
                 alt22=1;
             }
-            else if ( ((LA22_0>=RULE_INT && LA22_0<=RULE_ID)||LA22_0==12||LA22_0==17||LA22_0==28||LA22_0==41||LA22_0==45||LA22_0==47||(LA22_0>=51 && LA22_0<=53)||LA22_0==56||(LA22_0>=58 && LA22_0<=65)) ) {
+            else if ( ((LA22_0>=RULE_STRING && LA22_0<=RULE_ID)||LA22_0==13||LA22_0==18||LA22_0==29||LA22_0==42||LA22_0==46||LA22_0==48||(LA22_0>=52 && LA22_0<=54)||LA22_0==57||(LA22_0>=59 && LA22_0<=66)) ) {
                 alt22=2;
             }
             else {
@@ -5007,17 +5009,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1638:1: (kw= '!' | kw= '-' | kw= '+' )
             int alt23=3;
             switch ( input.LA(1) ) {
-            case 36:
+            case 37:
                 {
                 alt23=1;
                 }
                 break;
-            case 31:
+            case 32:
                 {
                 alt23=2;
                 }
                 break;
-            case 16:
+            case 17:
                 {
                 alt23=3;
                 }
@@ -5034,7 +5036,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1639:2: kw= '!'
                     {
-                    kw=(Token)match(input,36,FOLLOW_36_in_ruleOpUnary3973); if (state.failed) return current;
+                    kw=(Token)match(input,37,FOLLOW_37_in_ruleOpUnary3973); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5047,7 +5049,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1646:2: kw= '-'
                     {
-                    kw=(Token)match(input,31,FOLLOW_31_in_ruleOpUnary3992); if (state.failed) return current;
+                    kw=(Token)match(input,32,FOLLOW_32_in_ruleOpUnary3992); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5060,7 +5062,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 3 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1653:2: kw= '+'
                     {
-                    kw=(Token)match(input,16,FOLLOW_16_in_ruleOpUnary4011); if (state.failed) return current;
+                    kw=(Token)match(input,17,FOLLOW_17_in_ruleOpUnary4011); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5174,7 +5176,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( (LA24_0==37) ) {
+                if ( (LA24_0==38) ) {
                     int LA24_2 = input.LA(2);
 
                     if ( (synpred11_InternalXbaseWithAnnotations()) ) {
@@ -5208,7 +5210,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    otherlv_2=(Token)match(input,37,FOLLOW_37_in_ruleXCastedExpression4143); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,38,FOLLOW_38_in_ruleXCastedExpression4143); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getXCastedExpressionAccess().getAsKeyword_1_0_0_1());
@@ -5388,7 +5390,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             do {
                 int alt32=3;
                 switch ( input.LA(1) ) {
-                case 38:
+                case 39:
                     {
                     int LA32_2 = input.LA(2);
 
@@ -5402,7 +5404,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 39:
+                case 40:
                     {
                     int LA32_3 = input.LA(2);
 
@@ -5413,7 +5415,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
                     break;
-                case 40:
+                case 41:
                     {
                     int LA32_4 = input.LA(2);
 
@@ -5453,7 +5455,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    otherlv_2=(Token)match(input,38,FOLLOW_38_in_ruleXMemberFeatureCall4310); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,39,FOLLOW_39_in_ruleXMemberFeatureCall4310); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getXMemberFeatureCallAccess().getFullStopKeyword_1_0_0_0_1());
@@ -5583,17 +5585,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1828:2: (otherlv_7= '.' | ( (lv_nullSafe_8_0= '?.' ) ) | ( (lv_spreading_9_0= '*.' ) ) )
             	    int alt25=3;
             	    switch ( input.LA(1) ) {
-            	    case 38:
+            	    case 39:
             	        {
             	        alt25=1;
             	        }
             	        break;
-            	    case 39:
+            	    case 40:
             	        {
             	        alt25=2;
             	        }
             	        break;
-            	    case 40:
+            	    case 41:
             	        {
             	        alt25=3;
             	        }
@@ -5610,7 +5612,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	        case 1 :
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1828:4: otherlv_7= '.'
             	            {
-            	            otherlv_7=(Token)match(input,38,FOLLOW_38_in_ruleXMemberFeatureCall4457); if (state.failed) return current;
+            	            otherlv_7=(Token)match(input,39,FOLLOW_39_in_ruleXMemberFeatureCall4457); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_7, grammarAccess.getXMemberFeatureCallAccess().getFullStopKeyword_1_1_0_0_1_0());
@@ -5628,7 +5630,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1834:1: (lv_nullSafe_8_0= '?.' )
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1835:3: lv_nullSafe_8_0= '?.'
             	            {
-            	            lv_nullSafe_8_0=(Token)match(input,39,FOLLOW_39_in_ruleXMemberFeatureCall4481); if (state.failed) return current;
+            	            lv_nullSafe_8_0=(Token)match(input,40,FOLLOW_40_in_ruleXMemberFeatureCall4481); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      newLeafNode(lv_nullSafe_8_0, grammarAccess.getXMemberFeatureCallAccess().getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0());
@@ -5660,7 +5662,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1850:1: (lv_spreading_9_0= '*.' )
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1851:3: lv_spreading_9_0= '*.'
             	            {
-            	            lv_spreading_9_0=(Token)match(input,40,FOLLOW_40_in_ruleXMemberFeatureCall4518); if (state.failed) return current;
+            	            lv_spreading_9_0=(Token)match(input,41,FOLLOW_41_in_ruleXMemberFeatureCall4518); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      newLeafNode(lv_spreading_9_0, grammarAccess.getXMemberFeatureCallAccess().getSpreadingAsteriskFullStopKeyword_1_1_0_0_1_2_0());
@@ -5696,14 +5698,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    int alt27=2;
             	    int LA27_0 = input.LA(1);
 
-            	    if ( (LA27_0==28) ) {
+            	    if ( (LA27_0==29) ) {
             	        alt27=1;
             	    }
             	    switch (alt27) {
             	        case 1 :
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1864:7: otherlv_10= '<' ( (lv_typeArguments_11_0= ruleJvmArgumentTypeReference ) ) (otherlv_12= ',' ( (lv_typeArguments_13_0= ruleJvmArgumentTypeReference ) ) )* otherlv_14= '>'
             	            {
-            	            otherlv_10=(Token)match(input,28,FOLLOW_28_in_ruleXMemberFeatureCall4547); if (state.failed) return current;
+            	            otherlv_10=(Token)match(input,29,FOLLOW_29_in_ruleXMemberFeatureCall4547); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_10, grammarAccess.getXMemberFeatureCallAccess().getLessThanSignKeyword_1_1_1_0());
@@ -5750,7 +5752,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	                int alt26=2;
             	                int LA26_0 = input.LA(1);
 
-            	                if ( (LA26_0==13) ) {
+            	                if ( (LA26_0==14) ) {
             	                    alt26=1;
             	                }
 
@@ -5759,7 +5761,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            	case 1 :
             	            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1886:4: otherlv_12= ',' ( (lv_typeArguments_13_0= ruleJvmArgumentTypeReference ) )
             	            	    {
-            	            	    otherlv_12=(Token)match(input,13,FOLLOW_13_in_ruleXMemberFeatureCall4581); if (state.failed) return current;
+            	            	    otherlv_12=(Token)match(input,14,FOLLOW_14_in_ruleXMemberFeatureCall4581); if (state.failed) return current;
             	            	    if ( state.backtracking==0 ) {
 
             	            	          	newLeafNode(otherlv_12, grammarAccess.getXMemberFeatureCallAccess().getCommaKeyword_1_1_1_2_0());
@@ -5809,7 +5811,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	                }
             	            } while (true);
 
-            	            otherlv_14=(Token)match(input,27,FOLLOW_27_in_ruleXMemberFeatureCall4616); if (state.failed) return current;
+            	            otherlv_14=(Token)match(input,28,FOLLOW_28_in_ruleXMemberFeatureCall4616); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_14, grammarAccess.getXMemberFeatureCallAccess().getGreaterThanSignKeyword_1_1_1_3());
@@ -5868,7 +5870,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1934:1: (lv_explicitOperationCall_16_0= '(' )
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1935:3: lv_explicitOperationCall_16_0= '('
             	            {
-            	            lv_explicitOperationCall_16_0=(Token)match(input,12,FOLLOW_12_in_ruleXMemberFeatureCall4675); if (state.failed) return current;
+            	            lv_explicitOperationCall_16_0=(Token)match(input,13,FOLLOW_13_in_ruleXMemberFeatureCall4675); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      newLeafNode(lv_explicitOperationCall_16_0, grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0());
@@ -5980,7 +5982,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	                        int alt28=2;
             	                        int LA28_0 = input.LA(1);
 
-            	                        if ( (LA28_0==13) ) {
+            	                        if ( (LA28_0==14) ) {
             	                            alt28=1;
             	                        }
 
@@ -5989,7 +5991,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	                    	case 1 :
             	                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2001:4: otherlv_19= ',' ( (lv_memberCallArguments_20_0= ruleXExpression ) )
             	                    	    {
-            	                    	    otherlv_19=(Token)match(input,13,FOLLOW_13_in_ruleXMemberFeatureCall4801); if (state.failed) return current;
+            	                    	    otherlv_19=(Token)match(input,14,FOLLOW_14_in_ruleXMemberFeatureCall4801); if (state.failed) return current;
             	                    	    if ( state.backtracking==0 ) {
 
             	                    	          	newLeafNode(otherlv_19, grammarAccess.getXMemberFeatureCallAccess().getCommaKeyword_1_1_3_1_1_1_0());
@@ -6048,7 +6050,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	            }
 
-            	            otherlv_21=(Token)match(input,14,FOLLOW_14_in_ruleXMemberFeatureCall4839); if (state.failed) return current;
+            	            otherlv_21=(Token)match(input,15,FOLLOW_15_in_ruleXMemberFeatureCall4839); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_21, grammarAccess.getXMemberFeatureCallAccess().getRightParenthesisKeyword_1_1_3_2());
@@ -6217,75 +6219,76 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2070:1: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | this_XFeatureCall_3= ruleXFeatureCall | this_XLiteral_4= ruleXLiteral | this_XIfExpression_5= ruleXIfExpression | this_XForLoopExpression_6= ruleXForLoopExpression | this_XWhileExpression_7= ruleXWhileExpression | this_XDoWhileExpression_8= ruleXDoWhileExpression | this_XThrowExpression_9= ruleXThrowExpression | this_XReturnExpression_10= ruleXReturnExpression | this_XTryCatchFinallyExpression_11= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_12= ruleXParenthesizedExpression )
             int alt33=13;
             switch ( input.LA(1) ) {
-            case 58:
+            case 59:
                 {
                 alt33=1;
                 }
                 break;
-            case 17:
+            case 18:
                 {
                 alt33=2;
                 }
                 break;
-            case 47:
+            case 48:
                 {
                 alt33=3;
                 }
                 break;
             case RULE_ID:
-            case 28:
-            case 56:
+            case 29:
+            case 57:
                 {
                 alt33=4;
                 }
                 break;
-            case RULE_INT:
             case RULE_STRING:
-            case 41:
-            case 59:
+            case RULE_HEX:
+            case RULE_DECIMAL:
+            case 42:
             case 60:
             case 61:
             case 62:
+            case 63:
                 {
                 alt33=5;
                 }
                 break;
-            case 45:
+            case 46:
                 {
                 alt33=6;
                 }
                 break;
-            case 51:
+            case 52:
                 {
                 alt33=7;
                 }
                 break;
-            case 52:
+            case 53:
                 {
                 alt33=8;
                 }
                 break;
-            case 53:
+            case 54:
                 {
                 alt33=9;
                 }
                 break;
-            case 63:
+            case 64:
                 {
                 alt33=10;
                 }
                 break;
-            case 64:
+            case 65:
                 {
                 alt33=11;
                 }
                 break;
-            case 65:
+            case 66:
                 {
                 alt33=12;
                 }
                 break;
-            case 12:
+            case 13:
                 {
                 alt33=13;
                 }
@@ -6648,7 +6651,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXLiteral"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2216:1: ruleXLiteral returns [EObject current=null] : (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XIntLiteral_2= ruleXIntLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2216:1: ruleXLiteral returns [EObject current=null] : (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XNumberLiteral_2= ruleXNumberLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral ) ;
     public final EObject ruleXLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -6656,7 +6659,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         EObject this_XBooleanLiteral_1 = null;
 
-        EObject this_XIntLiteral_2 = null;
+        EObject this_XNumberLiteral_2 = null;
 
         EObject this_XNullLiteral_3 = null;
 
@@ -6668,29 +6671,30 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2219:28: ( (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XIntLiteral_2= ruleXIntLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2220:1: (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XIntLiteral_2= ruleXIntLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2219:28: ( (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XNumberLiteral_2= ruleXNumberLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2220:1: (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XNumberLiteral_2= ruleXNumberLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2220:1: (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XIntLiteral_2= ruleXIntLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2220:1: (this_XClosure_0= ruleXClosure | this_XBooleanLiteral_1= ruleXBooleanLiteral | this_XNumberLiteral_2= ruleXNumberLiteral | this_XNullLiteral_3= ruleXNullLiteral | this_XStringLiteral_4= ruleXStringLiteral | this_XTypeLiteral_5= ruleXTypeLiteral )
             int alt34=6;
             switch ( input.LA(1) ) {
-            case 41:
+            case 42:
                 {
                 alt34=1;
                 }
                 break;
-            case 59:
             case 60:
+            case 61:
                 {
                 alt34=2;
                 }
                 break;
-            case RULE_INT:
+            case RULE_HEX:
+            case RULE_DECIMAL:
                 {
                 alt34=3;
                 }
                 break;
-            case 61:
+            case 62:
                 {
                 alt34=4;
                 }
@@ -6700,7 +6704,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 alt34=5;
                 }
                 break;
-            case 62:
+            case 63:
                 {
                 alt34=6;
                 }
@@ -6759,21 +6763,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2241:5: this_XIntLiteral_2= ruleXIntLiteral
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2241:5: this_XNumberLiteral_2= ruleXNumberLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getXLiteralAccess().getXIntLiteralParserRuleCall_2()); 
+                              newCompositeNode(grammarAccess.getXLiteralAccess().getXNumberLiteralParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleXIntLiteral_in_ruleXLiteral5439);
-                    this_XIntLiteral_2=ruleXIntLiteral();
+                    pushFollow(FOLLOW_ruleXNumberLiteral_in_ruleXLiteral5439);
+                    this_XNumberLiteral_2=ruleXNumberLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_XIntLiteral_2; 
+                              current = this_XNumberLiteral_2; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -6946,7 +6950,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,41,FOLLOW_41_in_ruleXClosure5611); if (state.failed) return current;
+            otherlv_1=(Token)match(input,42,FOLLOW_42_in_ruleXClosure5611); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXClosureAccess().getLeftSquareBracketKeyword_1());
@@ -6966,7 +6970,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     int alt36=2;
                     int LA36_0 = input.LA(1);
 
-                    if ( (LA36_0==RULE_ID||LA36_0==12||LA36_0==68) ) {
+                    if ( (LA36_0==RULE_ID||LA36_0==13||LA36_0==69) ) {
                         alt36=1;
                     }
                     switch (alt36) {
@@ -7014,7 +7018,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                                 int alt35=2;
                                 int LA35_0 = input.LA(1);
 
-                                if ( (LA35_0==13) ) {
+                                if ( (LA35_0==14) ) {
                                     alt35=1;
                                 }
 
@@ -7023,7 +7027,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	case 1 :
                             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2343:4: otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
                             	    {
-                            	    otherlv_3=(Token)match(input,13,FOLLOW_13_in_ruleXClosure5695); if (state.failed) return current;
+                            	    otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleXClosure5695); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_3, grammarAccess.getXClosureAccess().getCommaKeyword_2_0_0_1_0());
@@ -7085,7 +7089,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2366:1: (lv_explicitSyntax_5_0= '|' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2367:3: lv_explicitSyntax_5_0= '|'
                     {
-                    lv_explicitSyntax_5_0=(Token)match(input,42,FOLLOW_42_in_ruleXClosure5738); if (state.failed) return current;
+                    lv_explicitSyntax_5_0=(Token)match(input,43,FOLLOW_43_in_ruleXClosure5738); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_explicitSyntax_5_0, grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_2_0_1_0());
@@ -7149,7 +7153,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_7=(Token)match(input,43,FOLLOW_43_in_ruleXClosure5787); if (state.failed) return current;
+            otherlv_7=(Token)match(input,44,FOLLOW_44_in_ruleXClosure5787); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_7, grammarAccess.getXClosureAccess().getRightSquareBracketKeyword_4());
@@ -7254,7 +7258,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt39=2;
                 int LA39_0 = input.LA(1);
 
-                if ( ((LA39_0>=RULE_INT && LA39_0<=RULE_ID)||LA39_0==12||(LA39_0>=16 && LA39_0<=17)||LA39_0==28||LA39_0==31||LA39_0==36||LA39_0==41||LA39_0==45||LA39_0==47||(LA39_0>=51 && LA39_0<=56)||(LA39_0>=58 && LA39_0<=65)) ) {
+                if ( ((LA39_0>=RULE_STRING && LA39_0<=RULE_ID)||LA39_0==13||(LA39_0>=17 && LA39_0<=18)||LA39_0==29||LA39_0==32||LA39_0==37||LA39_0==42||LA39_0==46||LA39_0==48||(LA39_0>=52 && LA39_0<=57)||(LA39_0>=59 && LA39_0<=66)) ) {
                     alt39=1;
                 }
 
@@ -7302,14 +7306,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    int alt38=2;
             	    int LA38_0 = input.LA(1);
 
-            	    if ( (LA38_0==44) ) {
+            	    if ( (LA38_0==45) ) {
             	        alt38=1;
             	    }
             	    switch (alt38) {
             	        case 1 :
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2447:4: otherlv_2= ';'
             	            {
-            	            otherlv_2=(Token)match(input,44,FOLLOW_44_in_ruleXExpressionInClosure5902); if (state.failed) return current;
+            	            otherlv_2=(Token)match(input,45,FOLLOW_45_in_ruleXExpressionInClosure5902); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_2, grammarAccess.getXExpressionInClosureAccess().getSemicolonKeyword_1_1());
@@ -7438,7 +7442,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt41=2;
             int LA41_0 = input.LA(1);
 
-            if ( (LA41_0==RULE_ID||LA41_0==12||LA41_0==68) ) {
+            if ( (LA41_0==RULE_ID||LA41_0==13||LA41_0==69) ) {
                 alt41=1;
             }
             switch (alt41) {
@@ -7486,7 +7490,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int alt40=2;
                         int LA40_0 = input.LA(1);
 
-                        if ( (LA40_0==13) ) {
+                        if ( (LA40_0==14) ) {
                             alt40=1;
                         }
 
@@ -7495,7 +7499,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	case 1 :
                     	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2512:4: otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
                     	    {
-                    	    otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleXShortClosure6073); if (state.failed) return current;
+                    	    otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleXShortClosure6073); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_2, grammarAccess.getXShortClosureAccess().getCommaKeyword_0_0_1_1_0());
@@ -7557,7 +7561,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2535:1: (lv_explicitSyntax_4_0= '|' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2536:3: lv_explicitSyntax_4_0= '|'
             {
-            lv_explicitSyntax_4_0=(Token)match(input,42,FOLLOW_42_in_ruleXShortClosure6116); if (state.failed) return current;
+            lv_explicitSyntax_4_0=(Token)match(input,43,FOLLOW_43_in_ruleXShortClosure6116); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_explicitSyntax_4_0, grammarAccess.getXShortClosureAccess().getExplicitSyntaxVerticalLineKeyword_0_0_2_0());
@@ -7699,7 +7703,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2588:1: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2588:3: otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleXParenthesizedExpression6235); if (state.failed) return current;
+            otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleXParenthesizedExpression6235); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getXParenthesizedExpressionAccess().getLeftParenthesisKeyword_0());
@@ -7721,7 +7725,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       afterParserOrEnumRuleCall();
                   
             }
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleXParenthesizedExpression6268); if (state.failed) return current;
+            otherlv_2=(Token)match(input,15,FOLLOW_15_in_ruleXParenthesizedExpression6268); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getXParenthesizedExpressionAccess().getRightParenthesisKeyword_2());
@@ -7827,13 +7831,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,45,FOLLOW_45_in_ruleXIfExpression6360); if (state.failed) return current;
+            otherlv_1=(Token)match(input,46,FOLLOW_46_in_ruleXIfExpression6360); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXIfExpressionAccess().getIfKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleXIfExpression6372); if (state.failed) return current;
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleXIfExpression6372); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getXIfExpressionAccess().getLeftParenthesisKeyword_2());
@@ -7874,7 +7878,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleXIfExpression6405); if (state.failed) return current;
+            otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleXIfExpression6405); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getXIfExpressionAccess().getRightParenthesisKeyword_4());
@@ -7919,7 +7923,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt42=2;
             int LA42_0 = input.LA(1);
 
-            if ( (LA42_0==46) ) {
+            if ( (LA42_0==47) ) {
                 int LA42_1 = input.LA(2);
 
                 if ( (synpred19_InternalXbaseWithAnnotations()) ) {
@@ -7933,7 +7937,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2680:3: ( ( 'else' )=>otherlv_6= 'else' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2680:4: ( 'else' )=>otherlv_6= 'else'
                     {
-                    otherlv_6=(Token)match(input,46,FOLLOW_46_in_ruleXIfExpression6447); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,47,FOLLOW_47_in_ruleXIfExpression6447); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getXIfExpressionAccess().getElseKeyword_6_0());
@@ -8087,7 +8091,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,47,FOLLOW_47_in_ruleXSwitchExpression6563); if (state.failed) return current;
+            otherlv_1=(Token)match(input,48,FOLLOW_48_in_ruleXSwitchExpression6563); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXSwitchExpressionAccess().getSwitchKeyword_1());
@@ -8100,7 +8104,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA43_0==RULE_ID) ) {
                 int LA43_1 = input.LA(2);
 
-                if ( (LA43_1==48) && (synpred20_InternalXbaseWithAnnotations())) {
+                if ( (LA43_1==49) && (synpred20_InternalXbaseWithAnnotations())) {
                     alt43=1;
                 }
             }
@@ -8146,7 +8150,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    otherlv_3=(Token)match(input,48,FOLLOW_48_in_ruleXSwitchExpression6616); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,49,FOLLOW_49_in_ruleXSwitchExpression6616); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_0_1());
@@ -8196,7 +8200,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_5=(Token)match(input,17,FOLLOW_17_in_ruleXSwitchExpression6652); if (state.failed) return current;
+            otherlv_5=(Token)match(input,18,FOLLOW_18_in_ruleXSwitchExpression6652); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getXSwitchExpressionAccess().getLeftCurlyBracketKeyword_4());
@@ -8209,7 +8213,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt44=2;
                 int LA44_0 = input.LA(1);
 
-                if ( (LA44_0==RULE_ID||LA44_0==12||LA44_0==48||LA44_0==50||LA44_0==68) ) {
+                if ( (LA44_0==RULE_ID||LA44_0==13||LA44_0==49||LA44_0==51||LA44_0==69) ) {
                     alt44=1;
                 }
 
@@ -8265,20 +8269,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt45=2;
             int LA45_0 = input.LA(1);
 
-            if ( (LA45_0==49) ) {
+            if ( (LA45_0==50) ) {
                 alt45=1;
             }
             switch (alt45) {
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2801:5: otherlv_7= 'default' otherlv_8= ':' ( (lv_default_9_0= ruleXExpression ) )
                     {
-                    otherlv_7=(Token)match(input,49,FOLLOW_49_in_ruleXSwitchExpression6687); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,50,FOLLOW_50_in_ruleXSwitchExpression6687); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getXSwitchExpressionAccess().getDefaultKeyword_6_0());
                           
                     }
-                    otherlv_8=(Token)match(input,48,FOLLOW_48_in_ruleXSwitchExpression6699); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,49,FOLLOW_49_in_ruleXSwitchExpression6699); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getXSwitchExpressionAccess().getColonKeyword_6_1());
@@ -8325,7 +8329,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_10=(Token)match(input,18,FOLLOW_18_in_ruleXSwitchExpression6734); if (state.failed) return current;
+            otherlv_10=(Token)match(input,19,FOLLOW_19_in_ruleXSwitchExpression6734); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_10, grammarAccess.getXSwitchExpressionAccess().getRightCurlyBracketKeyword_7());
@@ -8420,7 +8424,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt46=2;
             int LA46_0 = input.LA(1);
 
-            if ( (LA46_0==RULE_ID||LA46_0==12||LA46_0==68) ) {
+            if ( (LA46_0==RULE_ID||LA46_0==13||LA46_0==69) ) {
                 alt46=1;
             }
             switch (alt46) {
@@ -8466,14 +8470,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt47=2;
             int LA47_0 = input.LA(1);
 
-            if ( (LA47_0==50) ) {
+            if ( (LA47_0==51) ) {
                 alt47=1;
             }
             switch (alt47) {
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2870:5: otherlv_1= 'case' ( (lv_case_2_0= ruleXExpression ) )
                     {
-                    otherlv_1=(Token)match(input,50,FOLLOW_50_in_ruleXCasePart6840); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleXCasePart6840); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getXCasePartAccess().getCaseKeyword_1_0());
@@ -8520,7 +8524,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_3=(Token)match(input,48,FOLLOW_48_in_ruleXCasePart6875); if (state.failed) return current;
+            otherlv_3=(Token)match(input,49,FOLLOW_49_in_ruleXCasePart6875); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getXCasePartAccess().getColonKeyword_2());
@@ -8661,13 +8665,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleXForLoopExpression6988); if (state.failed) return current;
+            otherlv_1=(Token)match(input,52,FOLLOW_52_in_ruleXForLoopExpression6988); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXForLoopExpressionAccess().getForKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleXForLoopExpression7000); if (state.failed) return current;
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleXForLoopExpression7000); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getXForLoopExpressionAccess().getLeftParenthesisKeyword_2());
@@ -8708,7 +8712,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_4=(Token)match(input,48,FOLLOW_48_in_ruleXForLoopExpression7033); if (state.failed) return current;
+            otherlv_4=(Token)match(input,49,FOLLOW_49_in_ruleXForLoopExpression7033); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getXForLoopExpressionAccess().getColonKeyword_4());
@@ -8749,7 +8753,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_6=(Token)match(input,14,FOLLOW_14_in_ruleXForLoopExpression7066); if (state.failed) return current;
+            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleXForLoopExpression7066); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_6());
@@ -8887,13 +8891,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,52,FOLLOW_52_in_ruleXWhileExpression7179); if (state.failed) return current;
+            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleXWhileExpression7179); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXWhileExpressionAccess().getWhileKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleXWhileExpression7191); if (state.failed) return current;
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleXWhileExpression7191); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getXWhileExpressionAccess().getLeftParenthesisKeyword_2());
@@ -8934,7 +8938,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleXWhileExpression7224); if (state.failed) return current;
+            otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleXWhileExpression7224); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getXWhileExpressionAccess().getRightParenthesisKeyword_4());
@@ -9073,7 +9077,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleXDoWhileExpression7337); if (state.failed) return current;
+            otherlv_1=(Token)match(input,54,FOLLOW_54_in_ruleXDoWhileExpression7337); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXDoWhileExpressionAccess().getDoKeyword_1());
@@ -9114,13 +9118,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_3=(Token)match(input,52,FOLLOW_52_in_ruleXDoWhileExpression7370); if (state.failed) return current;
+            otherlv_3=(Token)match(input,53,FOLLOW_53_in_ruleXDoWhileExpression7370); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getXDoWhileExpressionAccess().getWhileKeyword_3());
                   
             }
-            otherlv_4=(Token)match(input,12,FOLLOW_12_in_ruleXDoWhileExpression7382); if (state.failed) return current;
+            otherlv_4=(Token)match(input,13,FOLLOW_13_in_ruleXDoWhileExpression7382); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getXDoWhileExpressionAccess().getLeftParenthesisKeyword_4());
@@ -9161,7 +9165,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_6=(Token)match(input,14,FOLLOW_14_in_ruleXDoWhileExpression7415); if (state.failed) return current;
+            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleXDoWhileExpression7415); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getXDoWhileExpressionAccess().getRightParenthesisKeyword_6());
@@ -9262,7 +9266,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_17_in_ruleXBlockExpression7507); if (state.failed) return current;
+            otherlv_1=(Token)match(input,18,FOLLOW_18_in_ruleXBlockExpression7507); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1());
@@ -9274,7 +9278,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt49=2;
                 int LA49_0 = input.LA(1);
 
-                if ( ((LA49_0>=RULE_INT && LA49_0<=RULE_ID)||LA49_0==12||(LA49_0>=16 && LA49_0<=17)||LA49_0==28||LA49_0==31||LA49_0==36||LA49_0==41||LA49_0==45||LA49_0==47||(LA49_0>=51 && LA49_0<=56)||(LA49_0>=58 && LA49_0<=65)) ) {
+                if ( ((LA49_0>=RULE_STRING && LA49_0<=RULE_ID)||LA49_0==13||(LA49_0>=17 && LA49_0<=18)||LA49_0==29||LA49_0==32||LA49_0==37||LA49_0==42||LA49_0==46||LA49_0==48||(LA49_0>=52 && LA49_0<=57)||(LA49_0>=59 && LA49_0<=66)) ) {
                     alt49=1;
                 }
 
@@ -9322,14 +9326,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    int alt48=2;
             	    int LA48_0 = input.LA(1);
 
-            	    if ( (LA48_0==44) ) {
+            	    if ( (LA48_0==45) ) {
             	        alt48=1;
             	    }
             	    switch (alt48) {
             	        case 1 :
             	            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3214:4: otherlv_3= ';'
             	            {
-            	            otherlv_3=(Token)match(input,44,FOLLOW_44_in_ruleXBlockExpression7542); if (state.failed) return current;
+            	            otherlv_3=(Token)match(input,45,FOLLOW_45_in_ruleXBlockExpression7542); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                  	newLeafNode(otherlv_3, grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1());
@@ -9350,7 +9354,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,18,FOLLOW_18_in_ruleXBlockExpression7558); if (state.failed) return current;
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleXBlockExpression7558); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_3());
@@ -9438,10 +9442,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt50=2;
             int LA50_0 = input.LA(1);
 
-            if ( ((LA50_0>=54 && LA50_0<=55)) ) {
+            if ( ((LA50_0>=55 && LA50_0<=56)) ) {
                 alt50=1;
             }
-            else if ( ((LA50_0>=RULE_INT && LA50_0<=RULE_ID)||LA50_0==12||(LA50_0>=16 && LA50_0<=17)||LA50_0==28||LA50_0==31||LA50_0==36||LA50_0==41||LA50_0==45||LA50_0==47||(LA50_0>=51 && LA50_0<=53)||LA50_0==56||(LA50_0>=58 && LA50_0<=65)) ) {
+            else if ( ((LA50_0>=RULE_STRING && LA50_0<=RULE_ID)||LA50_0==13||(LA50_0>=17 && LA50_0<=18)||LA50_0==29||LA50_0==32||LA50_0==37||LA50_0==42||LA50_0==46||LA50_0==48||(LA50_0>=52 && LA50_0<=54)||LA50_0==57||(LA50_0>=59 && LA50_0<=66)) ) {
                 alt50=2;
             }
             else {
@@ -9601,10 +9605,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt51=2;
             int LA51_0 = input.LA(1);
 
-            if ( (LA51_0==54) ) {
+            if ( (LA51_0==55) ) {
                 alt51=1;
             }
-            else if ( (LA51_0==55) ) {
+            else if ( (LA51_0==56) ) {
                 alt51=2;
             }
             else {
@@ -9624,7 +9628,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3290:1: (lv_writeable_1_0= 'var' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3291:3: lv_writeable_1_0= 'var'
                     {
-                    lv_writeable_1_0=(Token)match(input,54,FOLLOW_54_in_ruleXVariableDeclaration7776); if (state.failed) return current;
+                    lv_writeable_1_0=(Token)match(input,55,FOLLOW_55_in_ruleXVariableDeclaration7776); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_writeable_1_0, grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_1_0_0());
@@ -9650,7 +9654,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3305:7: otherlv_2= 'val'
                     {
-                    otherlv_2=(Token)match(input,55,FOLLOW_55_in_ruleXVariableDeclaration7807); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,56,FOLLOW_56_in_ruleXVariableDeclaration7807); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getXVariableDeclarationAccess().getValKeyword_1_1());
@@ -9683,10 +9687,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     throw nvae;
                 }
             }
-            else if ( (LA52_0==12) && (synpred21_InternalXbaseWithAnnotations())) {
+            else if ( (LA52_0==13) && (synpred21_InternalXbaseWithAnnotations())) {
                 alt52=1;
             }
-            else if ( (LA52_0==68) && (synpred21_InternalXbaseWithAnnotations())) {
+            else if ( (LA52_0==69) && (synpred21_InternalXbaseWithAnnotations())) {
                 alt52=1;
             }
             else {
@@ -9833,14 +9837,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt53=2;
             int LA53_0 = input.LA(1);
 
-            if ( (LA53_0==15) ) {
+            if ( (LA53_0==16) ) {
                 alt53=1;
             }
             switch (alt53) {
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3372:5: otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) )
                     {
-                    otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleXVariableDeclaration7919); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,16,FOLLOW_16_in_ruleXVariableDeclaration7919); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3_0());
@@ -9975,11 +9979,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA54_0==RULE_ID) ) {
                 int LA54_1 = input.LA(2);
 
-                if ( (LA54_1==RULE_ID||LA54_1==28||LA54_1==38||LA54_1==41) ) {
+                if ( (LA54_1==RULE_ID||LA54_1==29||LA54_1==39||LA54_1==42) ) {
                     alt54=1;
                 }
             }
-            else if ( (LA54_0==12||LA54_0==68) ) {
+            else if ( (LA54_0==13||LA54_0==69) ) {
                 alt54=1;
             }
             switch (alt54) {
@@ -10322,7 +10326,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA55_0==RULE_ID) ) {
                 int LA55_1 = input.LA(2);
 
-                if ( (LA55_1==57) ) {
+                if ( (LA55_1==58) ) {
                     alt55=1;
                 }
             }
@@ -10368,14 +10372,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt57=2;
             int LA57_0 = input.LA(1);
 
-            if ( (LA57_0==28) ) {
+            if ( (LA57_0==29) ) {
                 alt57=1;
             }
             switch (alt57) {
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3550:5: otherlv_2= '<' ( (lv_typeArguments_3_0= ruleJvmArgumentTypeReference ) ) (otherlv_4= ',' ( (lv_typeArguments_5_0= ruleJvmArgumentTypeReference ) ) )* otherlv_6= '>'
                     {
-                    otherlv_2=(Token)match(input,28,FOLLOW_28_in_ruleXFeatureCall8286); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,29,FOLLOW_29_in_ruleXFeatureCall8286); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getXFeatureCallAccess().getLessThanSignKeyword_2_0());
@@ -10422,7 +10426,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int alt56=2;
                         int LA56_0 = input.LA(1);
 
-                        if ( (LA56_0==13) ) {
+                        if ( (LA56_0==14) ) {
                             alt56=1;
                         }
 
@@ -10431,7 +10435,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	case 1 :
                     	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3572:4: otherlv_4= ',' ( (lv_typeArguments_5_0= ruleJvmArgumentTypeReference ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,13,FOLLOW_13_in_ruleXFeatureCall8320); if (state.failed) return current;
+                    	    otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleXFeatureCall8320); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_4, grammarAccess.getXFeatureCallAccess().getCommaKeyword_2_2_0());
@@ -10481,7 +10485,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,27,FOLLOW_27_in_ruleXFeatureCall8355); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,28,FOLLOW_28_in_ruleXFeatureCall8355); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getXFeatureCallAccess().getGreaterThanSignKeyword_2_3());
@@ -10540,7 +10544,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3620:1: (lv_explicitOperationCall_8_0= '(' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3621:3: lv_explicitOperationCall_8_0= '('
                     {
-                    lv_explicitOperationCall_8_0=(Token)match(input,12,FOLLOW_12_in_ruleXFeatureCall8414); if (state.failed) return current;
+                    lv_explicitOperationCall_8_0=(Token)match(input,13,FOLLOW_13_in_ruleXFeatureCall8414); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_explicitOperationCall_8_0, grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_4_0_0());
@@ -10652,7 +10656,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                                 int alt58=2;
                                 int LA58_0 = input.LA(1);
 
-                                if ( (LA58_0==13) ) {
+                                if ( (LA58_0==14) ) {
                                     alt58=1;
                                 }
 
@@ -10661,7 +10665,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	case 1 :
                             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3687:4: otherlv_11= ',' ( (lv_featureCallArguments_12_0= ruleXExpression ) )
                             	    {
-                            	    otherlv_11=(Token)match(input,13,FOLLOW_13_in_ruleXFeatureCall8540); if (state.failed) return current;
+                            	    otherlv_11=(Token)match(input,14,FOLLOW_14_in_ruleXFeatureCall8540); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_11, grammarAccess.getXFeatureCallAccess().getCommaKeyword_4_1_1_1_0());
@@ -10720,7 +10724,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    otherlv_13=(Token)match(input,14,FOLLOW_14_in_ruleXFeatureCall8578); if (state.failed) return current;
+                    otherlv_13=(Token)match(input,15,FOLLOW_15_in_ruleXFeatureCall8578); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_13, grammarAccess.getXFeatureCallAccess().getRightParenthesisKeyword_4_2());
@@ -10858,7 +10862,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( (LA62_0==RULE_ID) ) {
                 alt62=1;
             }
-            else if ( (LA62_0==56) ) {
+            else if ( (LA62_0==57) ) {
                 alt62=2;
             }
             else {
@@ -10898,7 +10902,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 2 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3769:2: kw= 'super'
                     {
-                    kw=(Token)match(input,56,FOLLOW_56_in_ruleIdOrSuper8731); if (state.failed) return current;
+                    kw=(Token)match(input,57,FOLLOW_57_in_ruleIdOrSuper8731); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -10995,7 +10999,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 if ( (LA63_0==RULE_ID) ) {
                     int LA63_1 = input.LA(2);
 
-                    if ( (LA63_1==57) ) {
+                    if ( (LA63_1==58) ) {
                         alt63=1;
                     }
 
@@ -11027,7 +11031,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	              afterParserOrEnumRuleCall();
             	          
             	    }
-            	    kw=(Token)match(input,57,FOLLOW_57_in_ruleStaticQualifier8848); if (state.failed) return current;
+            	    kw=(Token)match(input,58,FOLLOW_58_in_ruleStaticQualifier8848); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              current.merge(kw);
@@ -11154,7 +11158,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,58,FOLLOW_58_in_ruleXConstructorCall8945); if (state.failed) return current;
+            otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleXConstructorCall8945); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXConstructorCallAccess().getNewKeyword_1());
@@ -11198,14 +11202,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt65=2;
             int LA65_0 = input.LA(1);
 
-            if ( (LA65_0==28) ) {
+            if ( (LA65_0==29) ) {
                 alt65=1;
             }
             switch (alt65) {
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3858:4: otherlv_3= '<' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>'
                     {
-                    otherlv_3=(Token)match(input,28,FOLLOW_28_in_ruleXConstructorCall8981); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,29,FOLLOW_29_in_ruleXConstructorCall8981); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getXConstructorCallAccess().getLessThanSignKeyword_3_0());
@@ -11252,7 +11256,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int alt64=2;
                         int LA64_0 = input.LA(1);
 
-                        if ( (LA64_0==13) ) {
+                        if ( (LA64_0==14) ) {
                             alt64=1;
                         }
 
@@ -11261,7 +11265,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	case 1 :
                     	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3880:4: otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
                     	    {
-                    	    otherlv_5=(Token)match(input,13,FOLLOW_13_in_ruleXConstructorCall9015); if (state.failed) return current;
+                    	    otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleXConstructorCall9015); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_5, grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_2_0());
@@ -11311,7 +11315,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         }
                     } while (true);
 
-                    otherlv_7=(Token)match(input,27,FOLLOW_27_in_ruleXConstructorCall9050); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,28,FOLLOW_28_in_ruleXConstructorCall9050); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getXConstructorCallAccess().getGreaterThanSignKeyword_3_3());
@@ -11323,7 +11327,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_8=(Token)match(input,12,FOLLOW_12_in_ruleXConstructorCall9064); if (state.failed) return current;
+            otherlv_8=(Token)match(input,13,FOLLOW_13_in_ruleXConstructorCall9064); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_8, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4());
@@ -11421,7 +11425,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int alt66=2;
                         int LA66_0 = input.LA(1);
 
-                        if ( (LA66_0==13) ) {
+                        if ( (LA66_0==14) ) {
                             alt66=1;
                         }
 
@@ -11430,7 +11434,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	case 1 :
                     	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3963:4: otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) )
                     	    {
-                    	    otherlv_11=(Token)match(input,13,FOLLOW_13_in_ruleXConstructorCall9177); if (state.failed) return current;
+                    	    otherlv_11=(Token)match(input,14,FOLLOW_14_in_ruleXConstructorCall9177); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_11, grammarAccess.getXConstructorCallAccess().getCommaKeyword_5_1_1_0());
@@ -11489,7 +11493,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_13=(Token)match(input,14,FOLLOW_14_in_ruleXConstructorCall9215); if (state.failed) return current;
+            otherlv_13=(Token)match(input,15,FOLLOW_15_in_ruleXConstructorCall9215); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_13, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_6());
@@ -11633,10 +11637,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt69=2;
             int LA69_0 = input.LA(1);
 
-            if ( (LA69_0==59) ) {
+            if ( (LA69_0==60) ) {
                 alt69=1;
             }
-            else if ( (LA69_0==60) ) {
+            else if ( (LA69_0==61) ) {
                 alt69=2;
             }
             else {
@@ -11650,7 +11654,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 case 1 :
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4038:4: otherlv_1= 'false'
                     {
-                    otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleXBooleanLiteral9340); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,60,FOLLOW_60_in_ruleXBooleanLiteral9340); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getXBooleanLiteralAccess().getFalseKeyword_1_0());
@@ -11668,7 +11672,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4044:1: (lv_isTrue_2_0= 'true' )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4045:3: lv_isTrue_2_0= 'true'
                     {
-                    lv_isTrue_2_0=(Token)match(input,60,FOLLOW_60_in_ruleXBooleanLiteral9364); if (state.failed) return current;
+                    lv_isTrue_2_0=(Token)match(input,61,FOLLOW_61_in_ruleXBooleanLiteral9364); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isTrue_2_0, grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0());
@@ -11785,7 +11789,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,61,FOLLOW_61_in_ruleXNullLiteral9470); if (state.failed) return current;
+            otherlv_1=(Token)match(input,62,FOLLOW_62_in_ruleXNullLiteral9470); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXNullLiteralAccess().getNullKeyword_1());
@@ -11813,30 +11817,30 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     // $ANTLR end "ruleXNullLiteral"
 
 
-    // $ANTLR start "entryRuleXIntLiteral"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4097:1: entryRuleXIntLiteral returns [EObject current=null] : iv_ruleXIntLiteral= ruleXIntLiteral EOF ;
-    public final EObject entryRuleXIntLiteral() throws RecognitionException {
+    // $ANTLR start "entryRuleXNumberLiteral"
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4097:1: entryRuleXNumberLiteral returns [EObject current=null] : iv_ruleXNumberLiteral= ruleXNumberLiteral EOF ;
+    public final EObject entryRuleXNumberLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleXIntLiteral = null;
+        EObject iv_ruleXNumberLiteral = null;
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4098:2: (iv_ruleXIntLiteral= ruleXIntLiteral EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4099:2: iv_ruleXIntLiteral= ruleXIntLiteral EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4098:2: (iv_ruleXNumberLiteral= ruleXNumberLiteral EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4099:2: iv_ruleXNumberLiteral= ruleXNumberLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getXIntLiteralRule()); 
+               newCompositeNode(grammarAccess.getXNumberLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleXIntLiteral_in_entryRuleXIntLiteral9506);
-            iv_ruleXIntLiteral=ruleXIntLiteral();
+            pushFollow(FOLLOW_ruleXNumberLiteral_in_entryRuleXNumberLiteral9506);
+            iv_ruleXNumberLiteral=ruleXNumberLiteral();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleXIntLiteral; 
+               current =iv_ruleXNumberLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXIntLiteral9516); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXNumberLiteral9516); if (state.failed) return current;
 
             }
 
@@ -11850,24 +11854,25 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         return current;
     }
-    // $ANTLR end "entryRuleXIntLiteral"
+    // $ANTLR end "entryRuleXNumberLiteral"
 
 
-    // $ANTLR start "ruleXIntLiteral"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4106:1: ruleXIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_INT ) ) ) ;
-    public final EObject ruleXIntLiteral() throws RecognitionException {
+    // $ANTLR start "ruleXNumberLiteral"
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4106:1: ruleXNumberLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleNumber ) ) ) ;
+    public final EObject ruleXNumberLiteral() throws RecognitionException {
         EObject current = null;
 
-        Token lv_value_1_0=null;
+        AntlrDatatypeRuleToken lv_value_1_0 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4109:28: ( ( () ( (lv_value_1_0= RULE_INT ) ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:1: ( () ( (lv_value_1_0= RULE_INT ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4109:28: ( ( () ( (lv_value_1_0= ruleNumber ) ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:1: ( () ( (lv_value_1_0= ruleNumber ) ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:1: ( () ( (lv_value_1_0= RULE_INT ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:2: () ( (lv_value_1_0= RULE_INT ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:1: ( () ( (lv_value_1_0= ruleNumber ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:2: () ( (lv_value_1_0= ruleNumber ) )
             {
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4110:2: ()
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4111:5: 
@@ -11875,35 +11880,40 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getXIntLiteralAccess().getXIntLiteralAction_0(),
+                          grammarAccess.getXNumberLiteralAccess().getXNumberLiteralAction_0(),
                           current);
                   
             }
 
             }
 
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4116:2: ( (lv_value_1_0= RULE_INT ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4117:1: (lv_value_1_0= RULE_INT )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4116:2: ( (lv_value_1_0= ruleNumber ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4117:1: (lv_value_1_0= ruleNumber )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4117:1: (lv_value_1_0= RULE_INT )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4118:3: lv_value_1_0= RULE_INT
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4117:1: (lv_value_1_0= ruleNumber )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4118:3: lv_value_1_0= ruleNumber
             {
-            lv_value_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleXIntLiteral9567); if (state.failed) return current;
             if ( state.backtracking==0 ) {
-
-              			newLeafNode(lv_value_1_0, grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); 
-              		
+               
+              	        newCompositeNode(grammarAccess.getXNumberLiteralAccess().getValueNumberParserRuleCall_1_0()); 
+              	    
             }
+            pushFollow(FOLLOW_ruleNumber_in_ruleXNumberLiteral9571);
+            lv_value_1_0=ruleNumber();
+
+            state._fsp--;
+            if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               	        if (current==null) {
-              	            current = createModelElement(grammarAccess.getXIntLiteralRule());
+              	            current = createModelElementForParent(grammarAccess.getXNumberLiteralRule());
               	        }
-                     		setWithLastConsumed(
+                     		set(
                      			current, 
                      			"value",
                       		lv_value_1_0, 
-                      		"INT");
+                      		"Number");
+              	        afterParserOrEnumRuleCall();
               	    
             }
 
@@ -11931,7 +11941,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         return current;
     }
-    // $ANTLR end "ruleXIntLiteral"
+    // $ANTLR end "ruleXNumberLiteral"
 
 
     // $ANTLR start "entryRuleXStringLiteral"
@@ -11949,7 +11959,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXStringLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral9608);
+            pushFollow(FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral9607);
             iv_ruleXStringLiteral=ruleXStringLiteral();
 
             state._fsp--;
@@ -11957,7 +11967,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXStringLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXStringLiteral9618); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXStringLiteral9617); if (state.failed) return current;
 
             }
 
@@ -12009,7 +12019,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4162:1: (lv_value_1_0= RULE_STRING )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4163:3: lv_value_1_0= RULE_STRING
             {
-            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleXStringLiteral9669); if (state.failed) return current;
+            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleXStringLiteral9668); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(lv_value_1_0, grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
@@ -12070,7 +12080,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTypeLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral9710);
+            pushFollow(FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral9709);
             iv_ruleXTypeLiteral=ruleXTypeLiteral();
 
             state._fsp--;
@@ -12078,7 +12088,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXTypeLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXTypeLiteral9720); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXTypeLiteral9719); if (state.failed) return current;
 
             }
 
@@ -12126,13 +12136,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,62,FOLLOW_62_in_ruleXTypeLiteral9766); if (state.failed) return current;
+            otherlv_1=(Token)match(input,63,FOLLOW_63_in_ruleXTypeLiteral9765); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXTypeLiteralAccess().getTypeofKeyword_1());
                   
             }
-            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleXTypeLiteral9778); if (state.failed) return current;
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleXTypeLiteral9777); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getXTypeLiteralAccess().getLeftParenthesisKeyword_2());
@@ -12156,7 +12166,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               	        newCompositeNode(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_3_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral9801);
+            pushFollow(FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral9800);
             ruleQualifiedName();
 
             state._fsp--;
@@ -12172,7 +12182,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleXTypeLiteral9813); if (state.failed) return current;
+            otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleXTypeLiteral9812); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getXTypeLiteralAccess().getRightParenthesisKeyword_4());
@@ -12215,7 +12225,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXThrowExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression9849);
+            pushFollow(FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression9848);
             iv_ruleXThrowExpression=ruleXThrowExpression();
 
             state._fsp--;
@@ -12223,7 +12233,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXThrowExpression; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXThrowExpression9859); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXThrowExpression9858); if (state.failed) return current;
 
             }
 
@@ -12271,7 +12281,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,63,FOLLOW_63_in_ruleXThrowExpression9905); if (state.failed) return current;
+            otherlv_1=(Token)match(input,64,FOLLOW_64_in_ruleXThrowExpression9904); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXThrowExpressionAccess().getThrowKeyword_1());
@@ -12288,7 +12298,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               	        newCompositeNode(grammarAccess.getXThrowExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleXExpression_in_ruleXThrowExpression9926);
+            pushFollow(FOLLOW_ruleXExpression_in_ruleXThrowExpression9925);
             lv_expression_2_0=ruleXExpression();
 
             state._fsp--;
@@ -12349,7 +12359,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXReturnExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression9962);
+            pushFollow(FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression9961);
             iv_ruleXReturnExpression=ruleXReturnExpression();
 
             state._fsp--;
@@ -12357,7 +12367,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXReturnExpression; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXReturnExpression9972); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXReturnExpression9971); if (state.failed) return current;
 
             }
 
@@ -12405,7 +12415,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,64,FOLLOW_64_in_ruleXReturnExpression10018); if (state.failed) return current;
+            otherlv_1=(Token)match(input,65,FOLLOW_65_in_ruleXReturnExpression10017); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXReturnExpressionAccess().getReturnKeyword_1());
@@ -12426,7 +12436,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       	        newCompositeNode(grammarAccess.getXReturnExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleXExpression_in_ruleXReturnExpression10049);
+                    pushFollow(FOLLOW_ruleXExpression_in_ruleXReturnExpression10048);
                     lv_expression_2_0=ruleXExpression();
 
                     state._fsp--;
@@ -12490,7 +12500,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10086);
+            pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10085);
             iv_ruleXTryCatchFinallyExpression=ruleXTryCatchFinallyExpression();
 
             state._fsp--;
@@ -12498,7 +12508,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXTryCatchFinallyExpression; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10096); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10095); if (state.failed) return current;
 
             }
 
@@ -12554,7 +12564,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,65,FOLLOW_65_in_ruleXTryCatchFinallyExpression10142); if (state.failed) return current;
+            otherlv_1=(Token)match(input,66,FOLLOW_66_in_ruleXTryCatchFinallyExpression10141); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_1());
@@ -12571,7 +12581,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10163);
+            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10162);
             lv_expression_2_0=ruleXExpression();
 
             state._fsp--;
@@ -12599,10 +12609,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             int alt73=2;
             int LA73_0 = input.LA(1);
 
-            if ( (LA73_0==67) ) {
+            if ( (LA73_0==68) ) {
                 alt73=1;
             }
-            else if ( (LA73_0==66) ) {
+            else if ( (LA73_0==67) ) {
                 alt73=2;
             }
             else {
@@ -12626,7 +12636,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int alt71=2;
                         int LA71_0 = input.LA(1);
 
-                        if ( (LA71_0==67) ) {
+                        if ( (LA71_0==68) ) {
                             int LA71_2 = input.LA(2);
 
                             if ( (synpred28_InternalXbaseWithAnnotations()) ) {
@@ -12649,7 +12659,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_3_0_0_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10193);
+                    	    pushFollow(FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10192);
                     	    lv_catchClauses_3_0=ruleXCatchClause();
 
                     	    state._fsp--;
@@ -12688,7 +12698,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     int alt72=2;
                     int LA72_0 = input.LA(1);
 
-                    if ( (LA72_0==66) ) {
+                    if ( (LA72_0==67) ) {
                         int LA72_1 = input.LA(2);
 
                         if ( (synpred29_InternalXbaseWithAnnotations()) ) {
@@ -12702,7 +12712,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4403:4: ( ( 'finally' )=>otherlv_4= 'finally' )
                             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4403:5: ( 'finally' )=>otherlv_4= 'finally'
                             {
-                            otherlv_4=(Token)match(input,66,FOLLOW_66_in_ruleXTryCatchFinallyExpression10215); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,67,FOLLOW_67_in_ruleXTryCatchFinallyExpression10214); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_0_1_0());
@@ -12722,7 +12732,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                               	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_0_1_1_0()); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10237);
+                            pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10236);
                             lv_finallyExpression_5_0=ruleXExpression();
 
                             state._fsp--;
@@ -12764,7 +12774,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4427:6: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
                     // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4427:8: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
                     {
-                    otherlv_6=(Token)match(input,66,FOLLOW_66_in_ruleXTryCatchFinallyExpression10259); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,67,FOLLOW_67_in_ruleXTryCatchFinallyExpression10258); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_1_0());
@@ -12781,7 +12791,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       	        newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_1_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10280);
+                    pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10279);
                     lv_finallyExpression_7_0=ruleXExpression();
 
                     state._fsp--;
@@ -12851,7 +12861,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCatchClauseRule()); 
             }
-            pushFollow(FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10318);
+            pushFollow(FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10317);
             iv_ruleXCatchClause=ruleXCatchClause();
 
             state._fsp--;
@@ -12859,7 +12869,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXCatchClause; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXCatchClause10328); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXCatchClause10327); if (state.failed) return current;
 
             }
 
@@ -12901,7 +12911,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4470:2: ( ( 'catch' )=>otherlv_0= 'catch' )
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4470:3: ( 'catch' )=>otherlv_0= 'catch'
             {
-            otherlv_0=(Token)match(input,67,FOLLOW_67_in_ruleXCatchClause10373); if (state.failed) return current;
+            otherlv_0=(Token)match(input,68,FOLLOW_68_in_ruleXCatchClause10372); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getXCatchClauseAccess().getCatchKeyword_0());
@@ -12910,7 +12920,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,12,FOLLOW_12_in_ruleXCatchClause10386); if (state.failed) return current;
+            otherlv_1=(Token)match(input,13,FOLLOW_13_in_ruleXCatchClause10385); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1());
@@ -12927,7 +12937,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               	        newCompositeNode(grammarAccess.getXCatchClauseAccess().getDeclaredParamFullJvmFormalParameterParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause10407);
+            pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause10406);
             lv_declaredParam_2_0=ruleFullJvmFormalParameter();
 
             state._fsp--;
@@ -12951,7 +12961,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleXCatchClause10419); if (state.failed) return current;
+            otherlv_3=(Token)match(input,15,FOLLOW_15_in_ruleXCatchClause10418); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3());
@@ -12968,7 +12978,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               	        newCompositeNode(grammarAccess.getXCatchClauseAccess().getExpressionXExpressionParserRuleCall_4_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleXExpression_in_ruleXCatchClause10440);
+            pushFollow(FOLLOW_ruleXExpression_in_ruleXCatchClause10439);
             lv_expression_4_0=ruleXExpression();
 
             state._fsp--;
@@ -13029,7 +13039,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName10477);
+            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName10476);
             iv_ruleQualifiedName=ruleQualifiedName();
 
             state._fsp--;
@@ -13037,7 +13047,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleQualifiedName.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName10488); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName10487); if (state.failed) return current;
 
             }
 
@@ -13079,7 +13089,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_0()); 
                   
             }
-            pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName10535);
+            pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName10534);
             this_ValidID_0=ruleValidID();
 
             state._fsp--;
@@ -13100,7 +13110,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 int alt74=2;
                 int LA74_0 = input.LA(1);
 
-                if ( (LA74_0==38) ) {
+                if ( (LA74_0==39) ) {
                     int LA74_2 = input.LA(2);
 
                     if ( (LA74_2==RULE_ID) ) {
@@ -13124,7 +13134,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4551:2: ( ( '.' )=>kw= '.' )
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4551:3: ( '.' )=>kw= '.'
             	    {
-            	    kw=(Token)match(input,38,FOLLOW_38_in_ruleQualifiedName10563); if (state.failed) return current;
+            	    kw=(Token)match(input,39,FOLLOW_39_in_ruleQualifiedName10562); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              current.merge(kw);
@@ -13139,7 +13149,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	              newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_1_1()); 
             	          
             	    }
-            	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName10586);
+            	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName10585);
             	    this_ValidID_2=ruleValidID();
 
             	    state._fsp--;
@@ -13185,8 +13195,193 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     // $ANTLR end "ruleQualifiedName"
 
 
+    // $ANTLR start "entryRuleNumber"
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4578:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
+    public final String entryRuleNumber() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleNumber = null;
+
+
+         
+        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+        	
+        try {
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4582:2: (iv_ruleNumber= ruleNumber EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4583:2: iv_ruleNumber= ruleNumber EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getNumberRule()); 
+            }
+            pushFollow(FOLLOW_ruleNumber_in_entryRuleNumber10639);
+            iv_ruleNumber=ruleNumber();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleNumber.getText(); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumber10650); if (state.failed) return current;
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+
+            	myHiddenTokenState.restore();
+
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleNumber"
+
+
+    // $ANTLR start "ruleNumber"
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4593:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | (this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )? ) ) ;
+    public final AntlrDatatypeRuleToken ruleNumber() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token this_HEX_0=null;
+        Token this_DECIMAL_1=null;
+        Token kw=null;
+        Token this_DECIMAL_3=null;
+
+         enterRule(); 
+        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+            
+        try {
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4597:28: ( (this_HEX_0= RULE_HEX | (this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )? ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4598:1: (this_HEX_0= RULE_HEX | (this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )? ) )
+            {
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4598:1: (this_HEX_0= RULE_HEX | (this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )? ) )
+            int alt76=2;
+            int LA76_0 = input.LA(1);
+
+            if ( (LA76_0==RULE_HEX) ) {
+                alt76=1;
+            }
+            else if ( (LA76_0==RULE_DECIMAL) ) {
+                alt76=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 76, 0, input);
+
+                throw nvae;
+            }
+            switch (alt76) {
+                case 1 :
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4598:6: this_HEX_0= RULE_HEX
+                    {
+                    this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleNumber10694); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      		current.merge(this_HEX_0);
+                          
+                    }
+                    if ( state.backtracking==0 ) {
+                       
+                          newLeafNode(this_HEX_0, grammarAccess.getNumberAccess().getHEXTerminalRuleCall_0()); 
+                          
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4606:6: (this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )? )
+                    {
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4606:6: (this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )? )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4606:11: this_DECIMAL_1= RULE_DECIMAL (kw= '.' this_DECIMAL_3= RULE_DECIMAL )?
+                    {
+                    this_DECIMAL_1=(Token)match(input,RULE_DECIMAL,FOLLOW_RULE_DECIMAL_in_ruleNumber10721); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      		current.merge(this_DECIMAL_1);
+                          
+                    }
+                    if ( state.backtracking==0 ) {
+                       
+                          newLeafNode(this_DECIMAL_1, grammarAccess.getNumberAccess().getDECIMALTerminalRuleCall_1_0()); 
+                          
+                    }
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4613:1: (kw= '.' this_DECIMAL_3= RULE_DECIMAL )?
+                    int alt75=2;
+                    int LA75_0 = input.LA(1);
+
+                    if ( (LA75_0==39) ) {
+                        int LA75_1 = input.LA(2);
+
+                        if ( (LA75_1==RULE_DECIMAL) ) {
+                            alt75=1;
+                        }
+                    }
+                    switch (alt75) {
+                        case 1 :
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4614:2: kw= '.' this_DECIMAL_3= RULE_DECIMAL
+                            {
+                            kw=(Token)match(input,39,FOLLOW_39_in_ruleNumber10740); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                                      current.merge(kw);
+                                      newLeafNode(kw, grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0()); 
+                                  
+                            }
+                            this_DECIMAL_3=(Token)match(input,RULE_DECIMAL,FOLLOW_RULE_DECIMAL_in_ruleNumber10755); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              		current.merge(this_DECIMAL_3);
+                                  
+                            }
+                            if ( state.backtracking==0 ) {
+                               
+                                  newLeafNode(this_DECIMAL_3, grammarAccess.getNumberAccess().getDECIMALTerminalRuleCall_1_1_1()); 
+                                  
+                            }
+
+                            }
+                            break;
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+
+            	myHiddenTokenState.restore();
+
+        }
+        return current;
+    }
+    // $ANTLR end "ruleNumber"
+
+
     // $ANTLR start "entryRuleJvmTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4578:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4637:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
     public final EObject entryRuleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -13194,13 +13389,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4579:2: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4580:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4638:2: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4639:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference10633);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference10807);
             iv_ruleJvmTypeReference=ruleJvmTypeReference();
 
             state._fsp--;
@@ -13208,7 +13403,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeReference10643); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeReference10817); if (state.failed) return current;
 
             }
 
@@ -13226,7 +13421,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4587:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4646:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef ) ;
     public final EObject ruleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -13240,39 +13435,39 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4590:28: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4591:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4649:28: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4650:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4591:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef )
-            int alt76=2;
-            int LA76_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4650:1: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* ) | this_XFunctionTypeRef_4= ruleXFunctionTypeRef )
+            int alt78=2;
+            int LA78_0 = input.LA(1);
 
-            if ( (LA76_0==RULE_ID) ) {
-                alt76=1;
+            if ( (LA78_0==RULE_ID) ) {
+                alt78=1;
             }
-            else if ( (LA76_0==12||LA76_0==68) ) {
-                alt76=2;
+            else if ( (LA78_0==13||LA78_0==69) ) {
+                alt78=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 76, 0, input);
+                    new NoViableAltException("", 78, 0, input);
 
                 throw nvae;
             }
-            switch (alt76) {
+            switch (alt78) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4591:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4650:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4591:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4592:5: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )*
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4650:2: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )* )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4651:5: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )*
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0_0()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference10691);
+                    pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference10865);
                     this_JvmParameterizedTypeReference_0=ruleJvmParameterizedTypeReference();
 
                     state._fsp--;
@@ -13283,20 +13478,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                               afterParserOrEnumRuleCall();
                           
                     }
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:1: ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )*
-                    loop75:
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:1: ( ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' ) )*
+                    loop77:
                     do {
-                        int alt75=2;
-                        int LA75_0 = input.LA(1);
+                        int alt77=2;
+                        int LA77_0 = input.LA(1);
 
-                        if ( (LA75_0==41) ) {
-                            int LA75_2 = input.LA(2);
+                        if ( (LA77_0==42) ) {
+                            int LA77_2 = input.LA(2);
 
-                            if ( (LA75_2==43) ) {
-                                int LA75_3 = input.LA(3);
+                            if ( (LA77_2==44) ) {
+                                int LA77_3 = input.LA(3);
 
                                 if ( (synpred32_InternalXbaseWithAnnotations()) ) {
-                                    alt75=1;
+                                    alt77=1;
                                 }
 
 
@@ -13306,15 +13501,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         }
 
 
-                        switch (alt75) {
+                        switch (alt77) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:2: ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:2: ( ( () '[' ']' ) )=> ( () otherlv_2= '[' otherlv_3= ']' )
                     	    {
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4603:5: ( () otherlv_2= '[' otherlv_3= ']' )
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4603:6: () otherlv_2= '[' otherlv_3= ']'
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4662:5: ( () otherlv_2= '[' otherlv_3= ']' )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4662:6: () otherlv_2= '[' otherlv_3= ']'
                     	    {
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4603:6: ()
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4604:5: 
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4662:6: ()
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4663:5: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -13326,13 +13521,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     	    }
 
-                    	    otherlv_2=(Token)match(input,41,FOLLOW_41_in_ruleJvmTypeReference10729); if (state.failed) return current;
+                    	    otherlv_2=(Token)match(input,42,FOLLOW_42_in_ruleJvmTypeReference10903); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_2, grammarAccess.getJvmTypeReferenceAccess().getLeftSquareBracketKeyword_0_1_0_1());
                     	          
                     	    }
-                    	    otherlv_3=(Token)match(input,43,FOLLOW_43_in_ruleJvmTypeReference10741); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,44,FOLLOW_44_in_ruleJvmTypeReference10915); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getJvmTypeReferenceAccess().getRightSquareBracketKeyword_0_1_0_2());
@@ -13346,7 +13541,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	    break;
 
                     	default :
-                    	    break loop75;
+                    	    break loop77;
                         }
                     } while (true);
 
@@ -13357,14 +13552,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4619:5: this_XFunctionTypeRef_4= ruleXFunctionTypeRef
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4678:5: this_XFunctionTypeRef_4= ruleXFunctionTypeRef
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getXFunctionTypeRefParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference10773);
+                    pushFollow(FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference10947);
                     this_XFunctionTypeRef_4=ruleXFunctionTypeRef();
 
                     state._fsp--;
@@ -13401,7 +13596,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXFunctionTypeRef"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4635:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4694:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
     public final EObject entryRuleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -13409,13 +13604,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4636:2: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4637:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4695:2: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4696:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFunctionTypeRefRule()); 
             }
-            pushFollow(FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef10808);
+            pushFollow(FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef10982);
             iv_ruleXFunctionTypeRef=ruleXFunctionTypeRef();
 
             state._fsp--;
@@ -13423,7 +13618,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleXFunctionTypeRef; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXFunctionTypeRef10818); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleXFunctionTypeRef10992); if (state.failed) return current;
 
             }
 
@@ -13441,7 +13636,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXFunctionTypeRef"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4644:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4703:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -13459,52 +13654,52 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4647:28: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4648:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4706:28: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4707:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4648:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4648:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4707:1: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4707:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4648:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
-            int alt79=2;
-            int LA79_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4707:2: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
+            int alt81=2;
+            int LA81_0 = input.LA(1);
 
-            if ( (LA79_0==12) ) {
-                alt79=1;
+            if ( (LA81_0==13) ) {
+                alt81=1;
             }
-            switch (alt79) {
+            switch (alt81) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4648:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4707:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
                     {
-                    otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleXFunctionTypeRef10856); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleXFunctionTypeRef11030); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_0, grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0());
                           
                     }
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4652:1: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
-                    int alt78=2;
-                    int LA78_0 = input.LA(1);
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4711:1: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
+                    int alt80=2;
+                    int LA80_0 = input.LA(1);
 
-                    if ( (LA78_0==RULE_ID||LA78_0==12||LA78_0==68) ) {
-                        alt78=1;
+                    if ( (LA80_0==RULE_ID||LA80_0==13||LA80_0==69) ) {
+                        alt80=1;
                     }
-                    switch (alt78) {
+                    switch (alt80) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4652:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4711:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             {
-                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4652:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
-                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4653:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4711:2: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4712:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
                             {
-                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4653:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
-                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4654:3: lv_paramTypes_1_0= ruleJvmTypeReference
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4712:1: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4713:3: lv_paramTypes_1_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0()); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef10878);
+                            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11052);
                             lv_paramTypes_1_0=ruleJvmTypeReference();
 
                             state._fsp--;
@@ -13528,39 +13723,39 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4670:2: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
-                            loop77:
+                            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4729:2: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            loop79:
                             do {
-                                int alt77=2;
-                                int LA77_0 = input.LA(1);
+                                int alt79=2;
+                                int LA79_0 = input.LA(1);
 
-                                if ( (LA77_0==13) ) {
-                                    alt77=1;
+                                if ( (LA79_0==14) ) {
+                                    alt79=1;
                                 }
 
 
-                                switch (alt77) {
+                                switch (alt79) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4670:4: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4729:4: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
                             	    {
-                            	    otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleXFunctionTypeRef10891); if (state.failed) return current;
+                            	    otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleXFunctionTypeRef11065); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_2, grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_1_1_0());
                             	          
                             	    }
-                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4674:1: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
-                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4675:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4733:1: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4734:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
                             	    {
-                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4675:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
-                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4676:3: lv_paramTypes_3_0= ruleJvmTypeReference
+                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4734:1: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4735:3: lv_paramTypes_3_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
                             	      	        newCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef10912);
+                            	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11086);
                             	    lv_paramTypes_3_0=ruleJvmTypeReference();
 
                             	    state._fsp--;
@@ -13589,7 +13784,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	    break;
 
                             	default :
-                            	    break loop77;
+                            	    break loop79;
                                 }
                             } while (true);
 
@@ -13599,7 +13794,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleXFunctionTypeRef10928); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleXFunctionTypeRef11102); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_2());
@@ -13611,24 +13806,24 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_5=(Token)match(input,68,FOLLOW_68_in_ruleXFunctionTypeRef10942); if (state.failed) return current;
+            otherlv_5=(Token)match(input,69,FOLLOW_69_in_ruleXFunctionTypeRef11116); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4700:1: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4701:1: (lv_returnType_6_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4759:1: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4760:1: (lv_returnType_6_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4701:1: (lv_returnType_6_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4702:3: lv_returnType_6_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4760:1: (lv_returnType_6_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4761:3: lv_returnType_6_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef10963);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11137);
             lv_returnType_6_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -13675,7 +13870,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmParameterizedTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4726:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4785:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
     public final EObject entryRuleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -13683,13 +13878,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4727:2: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4728:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4786:2: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4787:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference10999);
+            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference11173);
             iv_ruleJvmParameterizedTypeReference=ruleJvmParameterizedTypeReference();
 
             state._fsp--;
@@ -13697,7 +13892,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmParameterizedTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11009); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11183); if (state.failed) return current;
 
             }
 
@@ -13715,7 +13910,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmParameterizedTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4735:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4794:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) ;
     public final EObject ruleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -13730,17 +13925,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4738:28: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4739:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4797:28: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4798:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4739:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4739:2: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4798:1: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4798:2: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4739:2: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4740:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4798:2: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4799:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4740:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4741:3: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4799:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4800:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -13754,7 +13949,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_0_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11057);
+            pushFollow(FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11231);
             ruleQualifiedName();
 
             state._fsp--;
@@ -13770,17 +13965,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4754:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
-            int alt81=2;
-            alt81 = dfa81.predict(input);
-            switch (alt81) {
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            int alt83=2;
+            alt83 = dfa83.predict(input);
+            switch (alt83) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4754:3: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:3: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4754:3: ( ( '<' )=>otherlv_1= '<' )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4754:4: ( '<' )=>otherlv_1= '<'
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:3: ( ( '<' )=>otherlv_1= '<' )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:4: ( '<' )=>otherlv_1= '<'
                     {
-                    otherlv_1=(Token)match(input,28,FOLLOW_28_in_ruleJvmParameterizedTypeReference11078); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,29,FOLLOW_29_in_ruleJvmParameterizedTypeReference11252); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0());
@@ -13789,18 +13984,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4759:2: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4760:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4818:2: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4819:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4760:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4761:3: lv_arguments_2_0= ruleJvmArgumentTypeReference
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4819:1: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4820:3: lv_arguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11100);
+                    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11274);
                     lv_arguments_2_0=ruleJvmArgumentTypeReference();
 
                     state._fsp--;
@@ -13824,39 +14019,39 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4777:2: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
-                    loop80:
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4836:2: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
+                    loop82:
                     do {
-                        int alt80=2;
-                        int LA80_0 = input.LA(1);
+                        int alt82=2;
+                        int LA82_0 = input.LA(1);
 
-                        if ( (LA80_0==13) ) {
-                            alt80=1;
+                        if ( (LA82_0==14) ) {
+                            alt82=1;
                         }
 
 
-                        switch (alt80) {
+                        switch (alt82) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4777:4: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4836:4: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,13,FOLLOW_13_in_ruleJvmParameterizedTypeReference11113); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleJvmParameterizedTypeReference11287); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4781:1: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4782:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4840:1: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4841:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4782:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4783:3: lv_arguments_4_0= ruleJvmArgumentTypeReference
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4841:1: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4842:3: lv_arguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11134);
+                    	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11308);
                     	    lv_arguments_4_0=ruleJvmArgumentTypeReference();
 
                     	    state._fsp--;
@@ -13885,11 +14080,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	    break;
 
                     	default :
-                    	    break loop80;
+                    	    break loop82;
                         }
                     } while (true);
 
-                    otherlv_5=(Token)match(input,27,FOLLOW_27_in_ruleJvmParameterizedTypeReference11148); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,28,FOLLOW_28_in_ruleJvmParameterizedTypeReference11322); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3());
@@ -13924,7 +14119,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmArgumentTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4811:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4870:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
     public final EObject entryRuleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -13932,13 +14127,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4812:2: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4871:2: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4872:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference11186);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference11360);
             iv_ruleJvmArgumentTypeReference=ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -13946,7 +14141,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmArgumentTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference11196); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference11370); if (state.failed) return current;
 
             }
 
@@ -13964,7 +14159,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmArgumentTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4820:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4879:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
     public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -13976,36 +14171,36 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4823:28: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4824:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4882:28: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4883:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4824:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
-            int alt82=2;
-            int LA82_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4883:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            int alt84=2;
+            int LA84_0 = input.LA(1);
 
-            if ( (LA82_0==RULE_ID||LA82_0==12||LA82_0==68) ) {
-                alt82=1;
+            if ( (LA84_0==RULE_ID||LA84_0==13||LA84_0==69) ) {
+                alt84=1;
             }
-            else if ( (LA82_0==69) ) {
-                alt82=2;
+            else if ( (LA84_0==70) ) {
+                alt84=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 82, 0, input);
+                    new NoViableAltException("", 84, 0, input);
 
                 throw nvae;
             }
-            switch (alt82) {
+            switch (alt84) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4825:5: this_JvmTypeReference_0= ruleJvmTypeReference
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4884:5: this_JvmTypeReference_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference11243);
+                    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference11417);
                     this_JvmTypeReference_0=ruleJvmTypeReference();
 
                     state._fsp--;
@@ -14020,14 +14215,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4835:5: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4894:5: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
                               newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference11270);
+                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference11444);
                     this_JvmWildcardTypeReference_1=ruleJvmWildcardTypeReference();
 
                     state._fsp--;
@@ -14064,7 +14259,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmWildcardTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4851:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4910:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
     public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14072,13 +14267,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4852:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4853:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4911:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4912:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference11305);
+            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference11479);
             iv_ruleJvmWildcardTypeReference=ruleJvmWildcardTypeReference();
 
             state._fsp--;
@@ -14086,7 +14281,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmWildcardTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference11315); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference11489); if (state.failed) return current;
 
             }
 
@@ -14104,7 +14299,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmWildcardTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4860:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4919:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) ;
     public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14117,14 +14312,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4863:28: ( ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4864:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4922:28: ( ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4923:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4864:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4864:2: () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4923:1: ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4923:2: () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4864:2: ()
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4865:5: 
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4923:2: ()
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4924:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14136,38 +14331,38 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            otherlv_1=(Token)match(input,69,FOLLOW_69_in_ruleJvmWildcardTypeReference11361); if (state.failed) return current;
+            otherlv_1=(Token)match(input,70,FOLLOW_70_in_ruleJvmWildcardTypeReference11535); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4874:1: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
-            int alt83=3;
-            int LA83_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4933:1: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
+            int alt85=3;
+            int LA85_0 = input.LA(1);
 
-            if ( (LA83_0==70) ) {
-                alt83=1;
+            if ( (LA85_0==71) ) {
+                alt85=1;
             }
-            else if ( (LA83_0==56) ) {
-                alt83=2;
+            else if ( (LA85_0==57) ) {
+                alt85=2;
             }
-            switch (alt83) {
+            switch (alt85) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4874:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4933:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4874:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4875:1: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4933:2: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4934:1: (lv_constraints_2_0= ruleJvmUpperBound )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4875:1: (lv_constraints_2_0= ruleJvmUpperBound )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4876:3: lv_constraints_2_0= ruleJvmUpperBound
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4934:1: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4935:3: lv_constraints_2_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference11383);
+                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference11557);
                     lv_constraints_2_0=ruleJvmUpperBound();
 
                     state._fsp--;
@@ -14195,20 +14390,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4893:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4952:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4893:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4894:1: (lv_constraints_3_0= ruleJvmLowerBound )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4952:6: ( (lv_constraints_3_0= ruleJvmLowerBound ) )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4953:1: (lv_constraints_3_0= ruleJvmLowerBound )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4894:1: (lv_constraints_3_0= ruleJvmLowerBound )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4895:3: lv_constraints_3_0= ruleJvmLowerBound
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4953:1: (lv_constraints_3_0= ruleJvmLowerBound )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4954:3: lv_constraints_3_0= ruleJvmLowerBound
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference11410);
+                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference11584);
                     lv_constraints_3_0=ruleJvmLowerBound();
 
                     state._fsp--;
@@ -14261,7 +14456,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4919:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4978:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
     public final EObject entryRuleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -14269,13 +14464,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4920:2: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4921:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4979:2: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4980:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound11448);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound11622);
             iv_ruleJvmUpperBound=ruleJvmUpperBound();
 
             state._fsp--;
@@ -14283,7 +14478,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmUpperBound; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound11458); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound11632); if (state.failed) return current;
 
             }
 
@@ -14301,7 +14496,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmUpperBound"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4928:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4987:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -14312,30 +14507,30 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4931:28: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4932:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4990:28: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4991:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4932:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4932:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4991:1: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4991:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,70,FOLLOW_70_in_ruleJvmUpperBound11495); if (state.failed) return current;
+            otherlv_0=(Token)match(input,71,FOLLOW_71_in_ruleJvmUpperBound11669); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4936:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4937:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4995:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4996:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4937:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4938:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4996:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4997:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound11516);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound11690);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -14382,7 +14577,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmUpperBoundAnded"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4962:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5021:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
     public final EObject entryRuleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -14390,13 +14585,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4963:2: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4964:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5022:2: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5023:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundAndedRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded11552);
+            pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded11726);
             iv_ruleJvmUpperBoundAnded=ruleJvmUpperBoundAnded();
 
             state._fsp--;
@@ -14404,7 +14599,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmUpperBoundAnded; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded11562); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded11736); if (state.failed) return current;
 
             }
 
@@ -14422,7 +14617,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmUpperBoundAnded"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4971:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5030:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -14433,30 +14628,30 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4974:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4975:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5033:28: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5034:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4975:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4975:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5034:1: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5034:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,71,FOLLOW_71_in_ruleJvmUpperBoundAnded11599); if (state.failed) return current;
+            otherlv_0=(Token)match(input,72,FOLLOW_72_in_ruleJvmUpperBoundAnded11773); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4979:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4980:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5038:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5039:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4980:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4981:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5039:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5040:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded11620);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded11794);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -14503,7 +14698,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmLowerBound"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5005:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5064:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
     public final EObject entryRuleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -14511,13 +14706,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5006:2: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5007:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5065:2: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5066:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound11656);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound11830);
             iv_ruleJvmLowerBound=ruleJvmLowerBound();
 
             state._fsp--;
@@ -14525,7 +14720,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleJvmLowerBound; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound11666); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound11840); if (state.failed) return current;
 
             }
 
@@ -14543,7 +14738,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmLowerBound"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5014:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5073:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -14554,30 +14749,30 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5017:28: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5018:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5076:28: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5077:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5018:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5018:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5077:1: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5077:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
-            otherlv_0=(Token)match(input,56,FOLLOW_56_in_ruleJvmLowerBound11703); if (state.failed) return current;
+            otherlv_0=(Token)match(input,57,FOLLOW_57_in_ruleJvmLowerBound11877); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0());
                   
             }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5022:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5023:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5081:1: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5082:1: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5023:1: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5024:3: lv_typeReference_1_0= ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5082:1: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5083:3: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound11724);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound11898);
             lv_typeReference_1_0=ruleJvmTypeReference();
 
             state._fsp--;
@@ -14624,7 +14819,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleValidID"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5050:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5109:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
     public final String entryRuleValidID() throws RecognitionException {
         String current = null;
 
@@ -14632,13 +14827,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5051:2: (iv_ruleValidID= ruleValidID EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5052:2: iv_ruleValidID= ruleValidID EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5110:2: (iv_ruleValidID= ruleValidID EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5111:2: iv_ruleValidID= ruleValidID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getValidIDRule()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_entryRuleValidID11763);
+            pushFollow(FOLLOW_ruleValidID_in_entryRuleValidID11937);
             iv_ruleValidID=ruleValidID();
 
             state._fsp--;
@@ -14646,7 +14841,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
                current =iv_ruleValidID.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleValidID11774); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleValidID11948); if (state.failed) return current;
 
             }
 
@@ -14664,7 +14859,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleValidID"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5059:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5118:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleValidID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -14673,10 +14868,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5062:28: (this_ID_0= RULE_ID )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5063:5: this_ID_0= RULE_ID
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5121:28: (this_ID_0= RULE_ID )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:5122:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleValidID11813); if (state.failed) return current;
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleValidID11987); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_ID_0);
@@ -14710,7 +14905,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:105:4: ( '(' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:105:6: '('
         {
-        match(input,12,FOLLOW_12_in_synpred1_InternalXbaseWithAnnotations167); if (state.failed) return ;
+        match(input,13,FOLLOW_13_in_synpred1_InternalXbaseWithAnnotations167); if (state.failed) return ;
 
         }
     }
@@ -14881,7 +15076,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         {
         }
 
-        match(input,24,FOLLOW_24_in_synpred6_InternalXbaseWithAnnotations2580); if (state.failed) return ;
+        match(input,25,FOLLOW_25_in_synpred6_InternalXbaseWithAnnotations2580); if (state.failed) return ;
 
         }
 
@@ -15055,7 +15250,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         {
         }
 
-        match(input,37,FOLLOW_37_in_synpred11_InternalXbaseWithAnnotations4124); if (state.failed) return ;
+        match(input,38,FOLLOW_38_in_synpred11_InternalXbaseWithAnnotations4124); if (state.failed) return ;
 
         }
 
@@ -15077,7 +15272,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         {
         }
 
-        match(input,38,FOLLOW_38_in_synpred12_InternalXbaseWithAnnotations4278); if (state.failed) return ;
+        match(input,39,FOLLOW_39_in_synpred12_InternalXbaseWithAnnotations4278); if (state.failed) return ;
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1750:1: ( ( ruleValidID ) )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1751:1: ( ruleValidID )
         {
@@ -15122,36 +15317,36 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
 
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1807:2: ( '.' | ( ( '?.' ) ) | ( ( '*.' ) ) )
-        int alt84=3;
+        int alt86=3;
         switch ( input.LA(1) ) {
-        case 38:
-            {
-            alt84=1;
-            }
-            break;
         case 39:
             {
-            alt84=2;
+            alt86=1;
             }
             break;
         case 40:
             {
-            alt84=3;
+            alt86=2;
+            }
+            break;
+        case 41:
+            {
+            alt86=3;
             }
             break;
         default:
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 84, 0, input);
+                new NoViableAltException("", 86, 0, input);
 
             throw nvae;
         }
 
-        switch (alt84) {
+        switch (alt86) {
             case 1 :
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1807:4: '.'
                 {
-                match(input,38,FOLLOW_38_in_synpred13_InternalXbaseWithAnnotations4396); if (state.failed) return ;
+                match(input,39,FOLLOW_39_in_synpred13_InternalXbaseWithAnnotations4396); if (state.failed) return ;
 
                 }
                 break;
@@ -15164,7 +15359,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1810:1: ( '?.' )
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1811:2: '?.'
                 {
-                match(input,39,FOLLOW_39_in_synpred13_InternalXbaseWithAnnotations4410); if (state.failed) return ;
+                match(input,40,FOLLOW_40_in_synpred13_InternalXbaseWithAnnotations4410); if (state.failed) return ;
 
                 }
 
@@ -15183,7 +15378,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1817:1: ( '*.' )
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1818:2: '*.'
                 {
-                match(input,40,FOLLOW_40_in_synpred13_InternalXbaseWithAnnotations4430); if (state.failed) return ;
+                match(input,41,FOLLOW_41_in_synpred13_InternalXbaseWithAnnotations4430); if (state.failed) return ;
 
                 }
 
@@ -15212,7 +15407,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1928:1: ( '(' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1929:2: '('
         {
-        match(input,12,FOLLOW_12_in_synpred14_InternalXbaseWithAnnotations4657); if (state.failed) return ;
+        match(input,13,FOLLOW_13_in_synpred14_InternalXbaseWithAnnotations4657); if (state.failed) return ;
 
         }
 
@@ -15235,13 +15430,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
 
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1949:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt86=2;
-        int LA86_0 = input.LA(1);
+        int alt88=2;
+        int LA88_0 = input.LA(1);
 
-        if ( (LA86_0==RULE_ID||LA86_0==12||LA86_0==68) ) {
-            alt86=1;
+        if ( (LA88_0==RULE_ID||LA88_0==13||LA88_0==69) ) {
+            alt88=1;
         }
-        switch (alt86) {
+        switch (alt88) {
             case 1 :
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1949:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -15263,21 +15458,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
 
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1953:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop85:
+                loop87:
                 do {
-                    int alt85=2;
-                    int LA85_0 = input.LA(1);
+                    int alt87=2;
+                    int LA87_0 = input.LA(1);
 
-                    if ( (LA85_0==13) ) {
-                        alt85=1;
+                    if ( (LA87_0==14) ) {
+                        alt87=1;
                     }
 
 
-                    switch (alt85) {
+                    switch (alt87) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1953:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
-                	    match(input,13,FOLLOW_13_in_synpred15_InternalXbaseWithAnnotations4716); if (state.failed) return ;
+                	    match(input,14,FOLLOW_14_in_synpred15_InternalXbaseWithAnnotations4716); if (state.failed) return ;
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1954:1: ( ( ruleJvmFormalParameter ) )
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1955:1: ( ruleJvmFormalParameter )
                 	    {
@@ -15300,7 +15495,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 	    break;
 
                 	default :
-                	    break loop85;
+                	    break loop87;
                     }
                 } while (true);
 
@@ -15316,7 +15511,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1959:1: ( '|' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:1960:2: '|'
         {
-        match(input,42,FOLLOW_42_in_synpred15_InternalXbaseWithAnnotations4737); if (state.failed) return ;
+        match(input,43,FOLLOW_43_in_synpred15_InternalXbaseWithAnnotations4737); if (state.failed) return ;
 
         }
 
@@ -15361,13 +15556,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2310:4: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2310:4: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt88=2;
-        int LA88_0 = input.LA(1);
+        int alt90=2;
+        int LA90_0 = input.LA(1);
 
-        if ( (LA88_0==RULE_ID||LA88_0==12||LA88_0==68) ) {
-            alt88=1;
+        if ( (LA90_0==RULE_ID||LA90_0==13||LA90_0==69) ) {
+            alt90=1;
         }
-        switch (alt88) {
+        switch (alt90) {
             case 1 :
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2310:5: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -15389,21 +15584,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
 
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2314:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop87:
+                loop89:
                 do {
-                    int alt87=2;
-                    int LA87_0 = input.LA(1);
+                    int alt89=2;
+                    int LA89_0 = input.LA(1);
 
-                    if ( (LA87_0==13) ) {
-                        alt87=1;
+                    if ( (LA89_0==14) ) {
+                        alt89=1;
                     }
 
 
-                    switch (alt87) {
+                    switch (alt89) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2314:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
-                	    match(input,13,FOLLOW_13_in_synpred17_InternalXbaseWithAnnotations5635); if (state.failed) return ;
+                	    match(input,14,FOLLOW_14_in_synpred17_InternalXbaseWithAnnotations5635); if (state.failed) return ;
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2315:1: ( ( ruleJvmFormalParameter ) )
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2316:1: ( ruleJvmFormalParameter )
                 	    {
@@ -15426,7 +15621,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 	    break;
 
                 	default :
-                	    break loop87;
+                	    break loop89;
                     }
                 } while (true);
 
@@ -15442,7 +15637,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2320:1: ( '|' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2321:2: '|'
         {
-        match(input,42,FOLLOW_42_in_synpred17_InternalXbaseWithAnnotations5656); if (state.failed) return ;
+        match(input,43,FOLLOW_43_in_synpred17_InternalXbaseWithAnnotations5656); if (state.failed) return ;
 
         }
 
@@ -15462,7 +15657,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2680:4: ( 'else' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:2680:6: 'else'
         {
-        match(input,46,FOLLOW_46_in_synpred19_InternalXbaseWithAnnotations6439); if (state.failed) return ;
+        match(input,47,FOLLOW_47_in_synpred19_InternalXbaseWithAnnotations6439); if (state.failed) return ;
 
         }
     }
@@ -15493,7 +15688,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        match(input,48,FOLLOW_48_in_synpred20_InternalXbaseWithAnnotations6585); if (state.failed) return ;
+        match(input,49,FOLLOW_49_in_synpred20_InternalXbaseWithAnnotations6585); if (state.failed) return ;
 
         }
 
@@ -15560,7 +15755,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3614:1: ( '(' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3615:2: '('
         {
-        match(input,12,FOLLOW_12_in_synpred22_InternalXbaseWithAnnotations8396); if (state.failed) return ;
+        match(input,13,FOLLOW_13_in_synpred22_InternalXbaseWithAnnotations8396); if (state.failed) return ;
 
         }
 
@@ -15583,13 +15778,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
 
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3635:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt92=2;
-        int LA92_0 = input.LA(1);
+        int alt94=2;
+        int LA94_0 = input.LA(1);
 
-        if ( (LA92_0==RULE_ID||LA92_0==12||LA92_0==68) ) {
-            alt92=1;
+        if ( (LA94_0==RULE_ID||LA94_0==13||LA94_0==69) ) {
+            alt94=1;
         }
-        switch (alt92) {
+        switch (alt94) {
             case 1 :
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3635:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -15611,21 +15806,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
 
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3639:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop91:
+                loop93:
                 do {
-                    int alt91=2;
-                    int LA91_0 = input.LA(1);
+                    int alt93=2;
+                    int LA93_0 = input.LA(1);
 
-                    if ( (LA91_0==13) ) {
-                        alt91=1;
+                    if ( (LA93_0==14) ) {
+                        alt93=1;
                     }
 
 
-                    switch (alt91) {
+                    switch (alt93) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3639:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
-                	    match(input,13,FOLLOW_13_in_synpred23_InternalXbaseWithAnnotations8455); if (state.failed) return ;
+                	    match(input,14,FOLLOW_14_in_synpred23_InternalXbaseWithAnnotations8455); if (state.failed) return ;
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3640:1: ( ( ruleJvmFormalParameter ) )
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3641:1: ( ruleJvmFormalParameter )
                 	    {
@@ -15648,7 +15843,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 	    break;
 
                 	default :
-                	    break loop91;
+                	    break loop93;
                     }
                 } while (true);
 
@@ -15664,7 +15859,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3645:1: ( '|' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3646:2: '|'
         {
-        match(input,42,FOLLOW_42_in_synpred23_InternalXbaseWithAnnotations8476); if (state.failed) return ;
+        match(input,43,FOLLOW_43_in_synpred23_InternalXbaseWithAnnotations8476); if (state.failed) return ;
 
         }
 
@@ -15714,13 +15909,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
 
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3911:2: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
-        int alt94=2;
-        int LA94_0 = input.LA(1);
+        int alt96=2;
+        int LA96_0 = input.LA(1);
 
-        if ( (LA94_0==RULE_ID||LA94_0==12||LA94_0==68) ) {
-            alt94=1;
+        if ( (LA96_0==RULE_ID||LA96_0==13||LA96_0==69) ) {
+            alt96=1;
         }
-        switch (alt94) {
+        switch (alt96) {
             case 1 :
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3911:3: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
@@ -15742,21 +15937,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
 
                 // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3915:2: ( ',' ( ( ruleJvmFormalParameter ) ) )*
-                loop93:
+                loop95:
                 do {
-                    int alt93=2;
-                    int LA93_0 = input.LA(1);
+                    int alt95=2;
+                    int LA95_0 = input.LA(1);
 
-                    if ( (LA93_0==13) ) {
-                        alt93=1;
+                    if ( (LA95_0==14) ) {
+                        alt95=1;
                     }
 
 
-                    switch (alt93) {
+                    switch (alt95) {
                 	case 1 :
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3915:4: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
-                	    match(input,13,FOLLOW_13_in_synpred25_InternalXbaseWithAnnotations9092); if (state.failed) return ;
+                	    match(input,14,FOLLOW_14_in_synpred25_InternalXbaseWithAnnotations9092); if (state.failed) return ;
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3916:1: ( ( ruleJvmFormalParameter ) )
                 	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3917:1: ( ruleJvmFormalParameter )
                 	    {
@@ -15779,7 +15974,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 	    break;
 
                 	default :
-                	    break loop93;
+                	    break loop95;
                     }
                 } while (true);
 
@@ -15795,7 +15990,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3921:1: ( '|' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:3922:2: '|'
         {
-        match(input,42,FOLLOW_42_in_synpred25_InternalXbaseWithAnnotations9113); if (state.failed) return ;
+        match(input,43,FOLLOW_43_in_synpred25_InternalXbaseWithAnnotations9113); if (state.failed) return ;
 
         }
 
@@ -15839,7 +16034,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4314:1: ( ruleXExpression )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4315:1: ruleXExpression
         {
-        pushFollow(FOLLOW_ruleXExpression_in_synpred27_InternalXbaseWithAnnotations10032);
+        pushFollow(FOLLOW_ruleXExpression_in_synpred27_InternalXbaseWithAnnotations10031);
         ruleXExpression();
 
         state._fsp--;
@@ -15857,7 +16052,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4384:5: ( 'catch' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4384:7: 'catch'
         {
-        match(input,67,FOLLOW_67_in_synpred28_InternalXbaseWithAnnotations10177); if (state.failed) return ;
+        match(input,68,FOLLOW_68_in_synpred28_InternalXbaseWithAnnotations10176); if (state.failed) return ;
 
         }
     }
@@ -15868,7 +16063,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4403:5: ( 'finally' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4403:7: 'finally'
         {
-        match(input,66,FOLLOW_66_in_synpred29_InternalXbaseWithAnnotations10207); if (state.failed) return ;
+        match(input,67,FOLLOW_67_in_synpred29_InternalXbaseWithAnnotations10206); if (state.failed) return ;
 
         }
     }
@@ -15879,7 +16074,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4551:3: ( '.' )
         // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4552:2: '.'
         {
-        match(input,38,FOLLOW_38_in_synpred31_InternalXbaseWithAnnotations10554); if (state.failed) return ;
+        match(input,39,FOLLOW_39_in_synpred31_InternalXbaseWithAnnotations10553); if (state.failed) return ;
 
         }
     }
@@ -15887,19 +16082,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred32_InternalXbaseWithAnnotations
     public final void synpred32_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:2: ( ( () '[' ']' ) )
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:3: ( () '[' ']' )
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:2: ( ( () '[' ']' ) )
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:3: ( () '[' ']' )
         {
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:3: ( () '[' ']' )
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:4: () '[' ']'
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:3: ( () '[' ']' )
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:4: () '[' ']'
         {
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4600:4: ()
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4601:1: 
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4659:4: ()
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4660:1: 
         {
         }
 
-        match(input,41,FOLLOW_41_in_synpred32_InternalXbaseWithAnnotations10706); if (state.failed) return ;
-        match(input,43,FOLLOW_43_in_synpred32_InternalXbaseWithAnnotations10710); if (state.failed) return ;
+        match(input,42,FOLLOW_42_in_synpred32_InternalXbaseWithAnnotations10880); if (state.failed) return ;
+        match(input,44,FOLLOW_44_in_synpred32_InternalXbaseWithAnnotations10884); if (state.failed) return ;
 
         }
 
@@ -15910,10 +16105,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred33_InternalXbaseWithAnnotations
     public final void synpred33_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4754:4: ( '<' )
-        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4754:6: '<'
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:4: ( '<' )
+        // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:4813:6: '<'
         {
-        match(input,28,FOLLOW_28_in_synpred33_InternalXbaseWithAnnotations11070); if (state.failed) return ;
+        match(input,29,FOLLOW_29_in_synpred33_InternalXbaseWithAnnotations11244); if (state.failed) return ;
 
         }
     }
@@ -16367,22 +16562,23 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     protected DFA67 dfa67 = new DFA67(this);
     protected DFA68 dfa68 = new DFA68(this);
     protected DFA70 dfa70 = new DFA70(this);
-    protected DFA81 dfa81 = new DFA81(this);
+    protected DFA83 dfa83 = new DFA83(this);
     static final String DFA30_eotS =
-        "\74\uffff";
+        "\75\uffff";
     static final String DFA30_eofS =
-        "\1\2\73\uffff";
+        "\1\2\74\uffff";
     static final String DFA30_minS =
-        "\1\4\1\0\72\uffff";
+        "\1\4\1\0\73\uffff";
     static final String DFA30_maxS =
-        "\1\104\1\0\72\uffff";
+        "\1\105\1\0\73\uffff";
     static final String DFA30_acceptS =
-        "\2\uffff\1\2\70\uffff\1\1";
+        "\2\uffff\1\2\71\uffff\1\1";
     static final String DFA30_specialS =
-        "\1\uffff\1\0\72\uffff}>";
+        "\1\uffff\1\0\73\uffff}>";
     static final String[] DFA30_transitionS = {
-            "\3\2\5\uffff\1\1\2\2\1\uffff\32\2\1\uffff\16\2\1\uffff\13\2",
+            "\4\2\5\uffff\1\1\2\2\1\uffff\32\2\1\uffff\16\2\1\uffff\13\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -16486,7 +16682,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index30_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred14_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred14_InternalXbaseWithAnnotations()) ) {s = 60;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -16503,23 +16699,24 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA29_eotS =
-        "\34\uffff";
+        "\35\uffff";
     static final String DFA29_eofS =
-        "\34\uffff";
+        "\35\uffff";
     static final String DFA29_minS =
-        "\1\4\2\0\31\uffff";
+        "\1\4\2\0\32\uffff";
     static final String DFA29_maxS =
-        "\1\104\2\0\31\uffff";
+        "\1\105\2\0\32\uffff";
     static final String DFA29_acceptS =
-        "\3\uffff\2\1\1\2\25\uffff\1\3";
+        "\3\uffff\2\1\1\2\26\uffff\1\3";
     static final String DFA29_specialS =
-        "\1\0\1\1\1\2\31\uffff}>";
+        "\1\0\1\1\1\2\32\uffff}>";
     static final String[] DFA29_transitionS = {
-            "\2\5\1\1\5\uffff\1\2\1\uffff\1\33\1\uffff\2\5\12\uffff\1\5\2"+
+            "\3\5\1\1\5\uffff\1\2\1\uffff\1\34\1\uffff\2\5\12\uffff\1\5\2"+
             "\uffff\1\5\4\uffff\1\5\4\uffff\1\5\1\4\2\uffff\1\5\1\uffff\1"+
             "\5\3\uffff\3\5\2\uffff\1\5\1\uffff\10\5\2\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -16592,15 +16789,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         s = -1;
                         if ( (LA29_0==RULE_ID) ) {s = 1;}
 
-                        else if ( (LA29_0==12) ) {s = 2;}
+                        else if ( (LA29_0==13) ) {s = 2;}
 
-                        else if ( (LA29_0==68) && (synpred15_InternalXbaseWithAnnotations())) {s = 3;}
+                        else if ( (LA29_0==69) && (synpred15_InternalXbaseWithAnnotations())) {s = 3;}
 
-                        else if ( (LA29_0==42) && (synpred15_InternalXbaseWithAnnotations())) {s = 4;}
+                        else if ( (LA29_0==43) && (synpred15_InternalXbaseWithAnnotations())) {s = 4;}
 
-                        else if ( ((LA29_0>=RULE_INT && LA29_0<=RULE_STRING)||(LA29_0>=16 && LA29_0<=17)||LA29_0==28||LA29_0==31||LA29_0==36||LA29_0==41||LA29_0==45||LA29_0==47||(LA29_0>=51 && LA29_0<=53)||LA29_0==56||(LA29_0>=58 && LA29_0<=65)) ) {s = 5;}
+                        else if ( ((LA29_0>=RULE_STRING && LA29_0<=RULE_DECIMAL)||(LA29_0>=17 && LA29_0<=18)||LA29_0==29||LA29_0==32||LA29_0==37||LA29_0==42||LA29_0==46||LA29_0==48||(LA29_0>=52 && LA29_0<=54)||LA29_0==57||(LA29_0>=59 && LA29_0<=66)) ) {s = 5;}
 
-                        else if ( (LA29_0==14) ) {s = 27;}
+                        else if ( (LA29_0==15) ) {s = 28;}
 
                          
                         input.seek(index29_0);
@@ -16645,20 +16842,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA31_eotS =
-        "\74\uffff";
+        "\75\uffff";
     static final String DFA31_eofS =
-        "\1\2\73\uffff";
+        "\1\2\74\uffff";
     static final String DFA31_minS =
-        "\1\4\1\0\72\uffff";
+        "\1\4\1\0\73\uffff";
     static final String DFA31_maxS =
-        "\1\104\1\0\72\uffff";
+        "\1\105\1\0\73\uffff";
     static final String DFA31_acceptS =
-        "\2\uffff\1\2\70\uffff\1\1";
+        "\2\uffff\1\2\71\uffff\1\1";
     static final String DFA31_specialS =
-        "\1\uffff\1\0\72\uffff}>";
+        "\1\uffff\1\0\73\uffff}>";
     static final String[] DFA31_transitionS = {
-            "\3\2\5\uffff\3\2\1\uffff\31\2\1\1\1\uffff\16\2\1\uffff\13\2",
+            "\4\2\5\uffff\3\2\1\uffff\31\2\1\1\1\uffff\16\2\1\uffff\13\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -16762,7 +16960,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index31_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred16_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred16_InternalXbaseWithAnnotations()) ) {s = 60;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -16779,23 +16977,24 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA37_eotS =
-        "\36\uffff";
+        "\37\uffff";
     static final String DFA37_eofS =
-        "\36\uffff";
+        "\37\uffff";
     static final String DFA37_minS =
-        "\1\4\2\0\33\uffff";
+        "\1\4\2\0\34\uffff";
     static final String DFA37_maxS =
-        "\1\104\2\0\33\uffff";
+        "\1\105\2\0\34\uffff";
     static final String DFA37_acceptS =
-        "\3\uffff\2\1\1\2\30\uffff";
+        "\3\uffff\2\1\1\2\31\uffff";
     static final String DFA37_specialS =
-        "\1\0\1\1\1\2\33\uffff}>";
+        "\1\0\1\1\1\2\34\uffff}>";
     static final String[] DFA37_transitionS = {
-            "\2\5\1\1\5\uffff\1\2\3\uffff\2\5\12\uffff\1\5\2\uffff\1\5\4"+
+            "\3\5\1\1\5\uffff\1\2\3\uffff\2\5\12\uffff\1\5\2\uffff\1\5\4"+
             "\uffff\1\5\4\uffff\1\5\1\4\1\5\1\uffff\1\5\1\uffff\1\5\3\uffff"+
             "\6\5\1\uffff\10\5\2\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -16870,13 +17069,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         s = -1;
                         if ( (LA37_0==RULE_ID) ) {s = 1;}
 
-                        else if ( (LA37_0==12) ) {s = 2;}
+                        else if ( (LA37_0==13) ) {s = 2;}
 
-                        else if ( (LA37_0==68) && (synpred17_InternalXbaseWithAnnotations())) {s = 3;}
+                        else if ( (LA37_0==69) && (synpred17_InternalXbaseWithAnnotations())) {s = 3;}
 
-                        else if ( (LA37_0==42) && (synpred17_InternalXbaseWithAnnotations())) {s = 4;}
+                        else if ( (LA37_0==43) && (synpred17_InternalXbaseWithAnnotations())) {s = 4;}
 
-                        else if ( ((LA37_0>=RULE_INT && LA37_0<=RULE_STRING)||(LA37_0>=16 && LA37_0<=17)||LA37_0==28||LA37_0==31||LA37_0==36||LA37_0==41||LA37_0==43||LA37_0==45||LA37_0==47||(LA37_0>=51 && LA37_0<=56)||(LA37_0>=58 && LA37_0<=65)) ) {s = 5;}
+                        else if ( ((LA37_0>=RULE_STRING && LA37_0<=RULE_DECIMAL)||(LA37_0>=17 && LA37_0<=18)||LA37_0==29||LA37_0==32||LA37_0==37||LA37_0==42||LA37_0==44||LA37_0==46||LA37_0==48||(LA37_0>=52 && LA37_0<=57)||(LA37_0>=59 && LA37_0<=66)) ) {s = 5;}
 
                          
                         input.seek(index37_0);
@@ -16921,20 +17120,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA60_eotS =
-        "\74\uffff";
+        "\75\uffff";
     static final String DFA60_eofS =
-        "\1\2\73\uffff";
+        "\1\2\74\uffff";
     static final String DFA60_minS =
-        "\1\4\1\0\72\uffff";
+        "\1\4\1\0\73\uffff";
     static final String DFA60_maxS =
-        "\1\104\1\0\72\uffff";
+        "\1\105\1\0\73\uffff";
     static final String DFA60_acceptS =
-        "\2\uffff\1\2\70\uffff\1\1";
+        "\2\uffff\1\2\71\uffff\1\1";
     static final String DFA60_specialS =
-        "\1\uffff\1\0\72\uffff}>";
+        "\1\uffff\1\0\73\uffff}>";
     static final String[] DFA60_transitionS = {
-            "\3\2\5\uffff\1\1\2\2\1\uffff\32\2\1\uffff\16\2\1\uffff\13\2",
+            "\4\2\5\uffff\1\1\2\2\1\uffff\32\2\1\uffff\16\2\1\uffff\13\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -17038,7 +17238,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index60_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred22_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred22_InternalXbaseWithAnnotations()) ) {s = 60;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -17055,23 +17255,24 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA59_eotS =
-        "\34\uffff";
+        "\35\uffff";
     static final String DFA59_eofS =
-        "\34\uffff";
+        "\35\uffff";
     static final String DFA59_minS =
-        "\1\4\2\0\31\uffff";
+        "\1\4\2\0\32\uffff";
     static final String DFA59_maxS =
-        "\1\104\2\0\31\uffff";
+        "\1\105\2\0\32\uffff";
     static final String DFA59_acceptS =
-        "\3\uffff\2\1\1\2\25\uffff\1\3";
+        "\3\uffff\2\1\1\2\26\uffff\1\3";
     static final String DFA59_specialS =
-        "\1\0\1\1\1\2\31\uffff}>";
+        "\1\0\1\1\1\2\32\uffff}>";
     static final String[] DFA59_transitionS = {
-            "\2\5\1\1\5\uffff\1\2\1\uffff\1\33\1\uffff\2\5\12\uffff\1\5\2"+
+            "\3\5\1\1\5\uffff\1\2\1\uffff\1\34\1\uffff\2\5\12\uffff\1\5\2"+
             "\uffff\1\5\4\uffff\1\5\4\uffff\1\5\1\4\2\uffff\1\5\1\uffff\1"+
             "\5\3\uffff\3\5\2\uffff\1\5\1\uffff\10\5\2\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -17144,15 +17345,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         s = -1;
                         if ( (LA59_0==RULE_ID) ) {s = 1;}
 
-                        else if ( (LA59_0==12) ) {s = 2;}
+                        else if ( (LA59_0==13) ) {s = 2;}
 
-                        else if ( (LA59_0==68) && (synpred23_InternalXbaseWithAnnotations())) {s = 3;}
+                        else if ( (LA59_0==69) && (synpred23_InternalXbaseWithAnnotations())) {s = 3;}
 
-                        else if ( (LA59_0==42) && (synpred23_InternalXbaseWithAnnotations())) {s = 4;}
+                        else if ( (LA59_0==43) && (synpred23_InternalXbaseWithAnnotations())) {s = 4;}
 
-                        else if ( ((LA59_0>=RULE_INT && LA59_0<=RULE_STRING)||(LA59_0>=16 && LA59_0<=17)||LA59_0==28||LA59_0==31||LA59_0==36||LA59_0==41||LA59_0==45||LA59_0==47||(LA59_0>=51 && LA59_0<=53)||LA59_0==56||(LA59_0>=58 && LA59_0<=65)) ) {s = 5;}
+                        else if ( ((LA59_0>=RULE_STRING && LA59_0<=RULE_DECIMAL)||(LA59_0>=17 && LA59_0<=18)||LA59_0==29||LA59_0==32||LA59_0==37||LA59_0==42||LA59_0==46||LA59_0==48||(LA59_0>=52 && LA59_0<=54)||LA59_0==57||(LA59_0>=59 && LA59_0<=66)) ) {s = 5;}
 
-                        else if ( (LA59_0==14) ) {s = 27;}
+                        else if ( (LA59_0==15) ) {s = 28;}
 
                          
                         input.seek(index59_0);
@@ -17197,20 +17398,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA61_eotS =
-        "\74\uffff";
+        "\75\uffff";
     static final String DFA61_eofS =
-        "\1\2\73\uffff";
+        "\1\2\74\uffff";
     static final String DFA61_minS =
-        "\1\4\1\0\72\uffff";
+        "\1\4\1\0\73\uffff";
     static final String DFA61_maxS =
-        "\1\104\1\0\72\uffff";
+        "\1\105\1\0\73\uffff";
     static final String DFA61_acceptS =
-        "\2\uffff\1\2\70\uffff\1\1";
+        "\2\uffff\1\2\71\uffff\1\1";
     static final String DFA61_specialS =
-        "\1\uffff\1\0\72\uffff}>";
+        "\1\uffff\1\0\73\uffff}>";
     static final String[] DFA61_transitionS = {
-            "\3\2\5\uffff\3\2\1\uffff\31\2\1\1\1\uffff\16\2\1\uffff\13\2",
+            "\4\2\5\uffff\3\2\1\uffff\31\2\1\1\1\uffff\16\2\1\uffff\13\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -17314,7 +17516,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index61_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred24_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred24_InternalXbaseWithAnnotations()) ) {s = 60;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -17331,23 +17533,24 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA67_eotS =
-        "\34\uffff";
+        "\35\uffff";
     static final String DFA67_eofS =
-        "\34\uffff";
+        "\35\uffff";
     static final String DFA67_minS =
-        "\1\4\2\0\31\uffff";
+        "\1\4\2\0\32\uffff";
     static final String DFA67_maxS =
-        "\1\104\2\0\31\uffff";
+        "\1\105\2\0\32\uffff";
     static final String DFA67_acceptS =
-        "\3\uffff\2\1\1\2\25\uffff\1\3";
+        "\3\uffff\2\1\1\2\26\uffff\1\3";
     static final String DFA67_specialS =
-        "\1\0\1\1\1\2\31\uffff}>";
+        "\1\0\1\1\1\2\32\uffff}>";
     static final String[] DFA67_transitionS = {
-            "\2\5\1\1\5\uffff\1\2\1\uffff\1\33\1\uffff\2\5\12\uffff\1\5\2"+
+            "\3\5\1\1\5\uffff\1\2\1\uffff\1\34\1\uffff\2\5\12\uffff\1\5\2"+
             "\uffff\1\5\4\uffff\1\5\4\uffff\1\5\1\4\2\uffff\1\5\1\uffff\1"+
             "\5\3\uffff\3\5\2\uffff\1\5\1\uffff\10\5\2\uffff\1\3",
             "\1\uffff",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -17420,15 +17623,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         s = -1;
                         if ( (LA67_0==RULE_ID) ) {s = 1;}
 
-                        else if ( (LA67_0==12) ) {s = 2;}
+                        else if ( (LA67_0==13) ) {s = 2;}
 
-                        else if ( (LA67_0==68) && (synpred25_InternalXbaseWithAnnotations())) {s = 3;}
+                        else if ( (LA67_0==69) && (synpred25_InternalXbaseWithAnnotations())) {s = 3;}
 
-                        else if ( (LA67_0==42) && (synpred25_InternalXbaseWithAnnotations())) {s = 4;}
+                        else if ( (LA67_0==43) && (synpred25_InternalXbaseWithAnnotations())) {s = 4;}
 
-                        else if ( ((LA67_0>=RULE_INT && LA67_0<=RULE_STRING)||(LA67_0>=16 && LA67_0<=17)||LA67_0==28||LA67_0==31||LA67_0==36||LA67_0==41||LA67_0==45||LA67_0==47||(LA67_0>=51 && LA67_0<=53)||LA67_0==56||(LA67_0>=58 && LA67_0<=65)) ) {s = 5;}
+                        else if ( ((LA67_0>=RULE_STRING && LA67_0<=RULE_DECIMAL)||(LA67_0>=17 && LA67_0<=18)||LA67_0==29||LA67_0==32||LA67_0==37||LA67_0==42||LA67_0==46||LA67_0==48||(LA67_0>=52 && LA67_0<=54)||LA67_0==57||(LA67_0>=59 && LA67_0<=66)) ) {s = 5;}
 
-                        else if ( (LA67_0==14) ) {s = 27;}
+                        else if ( (LA67_0==15) ) {s = 28;}
 
                          
                         input.seek(index67_0);
@@ -17473,20 +17676,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA68_eotS =
-        "\74\uffff";
+        "\75\uffff";
     static final String DFA68_eofS =
-        "\1\2\73\uffff";
+        "\1\2\74\uffff";
     static final String DFA68_minS =
-        "\1\4\1\0\72\uffff";
+        "\1\4\1\0\73\uffff";
     static final String DFA68_maxS =
-        "\1\104\1\0\72\uffff";
+        "\1\105\1\0\73\uffff";
     static final String DFA68_acceptS =
-        "\2\uffff\1\2\70\uffff\1\1";
+        "\2\uffff\1\2\71\uffff\1\1";
     static final String DFA68_specialS =
-        "\1\uffff\1\0\72\uffff}>";
+        "\1\uffff\1\0\73\uffff}>";
     static final String[] DFA68_transitionS = {
-            "\3\2\5\uffff\3\2\1\uffff\31\2\1\1\1\uffff\16\2\1\uffff\13\2",
+            "\4\2\5\uffff\3\2\1\uffff\31\2\1\1\1\uffff\16\2\1\uffff\13\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -17590,7 +17794,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index68_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred26_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred26_InternalXbaseWithAnnotations()) ) {s = 60;}
 
                         else if ( (true) ) {s = 2;}
 
@@ -17607,23 +17811,25 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
     }
     static final String DFA70_eotS =
-        "\74\uffff";
+        "\75\uffff";
     static final String DFA70_eofS =
-        "\1\31\73\uffff";
+        "\1\32\74\uffff";
     static final String DFA70_minS =
-        "\1\4\30\0\43\uffff";
+        "\1\4\31\0\43\uffff";
     static final String DFA70_maxS =
-        "\1\104\30\0\43\uffff";
+        "\1\105\31\0\43\uffff";
     static final String DFA70_acceptS =
-        "\31\uffff\1\2\41\uffff\1\1";
+        "\32\uffff\1\2\41\uffff\1\1";
     static final String DFA70_specialS =
         "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-        "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\43\uffff}>";
+        "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\43"+
+        "\uffff}>";
     static final String[] DFA70_transitionS = {
-            "\1\15\1\17\1\1\5\uffff\1\30\2\31\1\uffff\1\4\1\6\12\31\1\10"+
-            "\2\31\1\3\4\31\1\2\4\31\1\12\1\uffff\2\31\1\21\1\31\1\7\3\31"+
-            "\1\22\1\23\1\24\2\31\1\11\1\uffff\1\5\1\13\1\14\1\16\1\20\1"+
-            "\25\1\26\1\27\3\31",
+            "\1\20\1\15\1\16\1\1\5\uffff\1\31\2\32\1\uffff\1\4\1\6\12\32"+
+            "\1\10\2\32\1\3\4\32\1\2\4\32\1\12\1\uffff\2\32\1\22\1\32\1\7"+
+            "\3\32\1\23\1\24\1\25\2\32\1\11\1\uffff\1\5\1\13\1\14\1\17\1"+
+            "\21\1\26\1\27\1\30\3\32",
+            "\1\uffff",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
@@ -17728,9 +17934,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_1);
@@ -17743,9 +17949,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_2 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_2);
@@ -17758,9 +17964,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_3 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_3);
@@ -17773,9 +17979,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_4 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_4);
@@ -17788,9 +17994,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_5 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_5);
@@ -17803,9 +18009,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_6 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_6);
@@ -17818,9 +18024,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_7 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_7);
@@ -17833,9 +18039,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_8 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_8);
@@ -17848,9 +18054,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_9 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_9);
@@ -17863,9 +18069,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_10 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_10);
@@ -17878,9 +18084,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_11 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_11);
@@ -17893,9 +18099,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_12 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_12);
@@ -17908,9 +18114,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_13 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_13);
@@ -17923,9 +18129,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_14 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_14);
@@ -17938,9 +18144,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_15 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_15);
@@ -17953,9 +18159,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_16 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_16);
@@ -17968,9 +18174,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_17 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_17);
@@ -17983,9 +18189,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_18 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_18);
@@ -17998,9 +18204,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_19 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_19);
@@ -18013,9 +18219,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_20 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_20);
@@ -18028,9 +18234,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_21 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_21);
@@ -18043,9 +18249,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_22 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_22);
@@ -18058,9 +18264,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_23 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_23);
@@ -18073,12 +18279,27 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         int index70_24 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
 
-                        else if ( (true) ) {s = 25;}
+                        else if ( (true) ) {s = 26;}
 
                          
                         input.seek(index70_24);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 24 : 
+                        int LA70_25 = input.LA(1);
+
+                         
+                        int index70_25 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred27_InternalXbaseWithAnnotations()) ) {s = 60;}
+
+                        else if ( (true) ) {s = 26;}
+
+                         
+                        input.seek(index70_25);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -18089,22 +18310,23 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             throw nvae;
         }
     }
-    static final String DFA81_eotS =
-        "\74\uffff";
-    static final String DFA81_eofS =
-        "\1\2\73\uffff";
-    static final String DFA81_minS =
-        "\1\4\1\0\72\uffff";
-    static final String DFA81_maxS =
-        "\1\104\1\0\72\uffff";
-    static final String DFA81_acceptS =
-        "\2\uffff\1\2\70\uffff\1\1";
-    static final String DFA81_specialS =
-        "\1\uffff\1\0\72\uffff}>";
-    static final String[] DFA81_transitionS = {
-            "\3\2\5\uffff\3\2\1\uffff\14\2\1\1\15\2\1\uffff\16\2\1\uffff"+
+    static final String DFA83_eotS =
+        "\75\uffff";
+    static final String DFA83_eofS =
+        "\1\2\74\uffff";
+    static final String DFA83_minS =
+        "\1\4\1\0\73\uffff";
+    static final String DFA83_maxS =
+        "\1\105\1\0\73\uffff";
+    static final String DFA83_acceptS =
+        "\2\uffff\1\2\71\uffff\1\1";
+    static final String DFA83_specialS =
+        "\1\uffff\1\0\73\uffff}>";
+    static final String[] DFA83_transitionS = {
+            "\4\2\5\uffff\3\2\1\uffff\14\2\1\1\15\2\1\uffff\16\2\1\uffff"+
             "\13\2",
             "\1\uffff",
+            "",
             "",
             "",
             "",
@@ -18165,61 +18387,61 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             ""
     };
 
-    static final short[] DFA81_eot = DFA.unpackEncodedString(DFA81_eotS);
-    static final short[] DFA81_eof = DFA.unpackEncodedString(DFA81_eofS);
-    static final char[] DFA81_min = DFA.unpackEncodedStringToUnsignedChars(DFA81_minS);
-    static final char[] DFA81_max = DFA.unpackEncodedStringToUnsignedChars(DFA81_maxS);
-    static final short[] DFA81_accept = DFA.unpackEncodedString(DFA81_acceptS);
-    static final short[] DFA81_special = DFA.unpackEncodedString(DFA81_specialS);
-    static final short[][] DFA81_transition;
+    static final short[] DFA83_eot = DFA.unpackEncodedString(DFA83_eotS);
+    static final short[] DFA83_eof = DFA.unpackEncodedString(DFA83_eofS);
+    static final char[] DFA83_min = DFA.unpackEncodedStringToUnsignedChars(DFA83_minS);
+    static final char[] DFA83_max = DFA.unpackEncodedStringToUnsignedChars(DFA83_maxS);
+    static final short[] DFA83_accept = DFA.unpackEncodedString(DFA83_acceptS);
+    static final short[] DFA83_special = DFA.unpackEncodedString(DFA83_specialS);
+    static final short[][] DFA83_transition;
 
     static {
-        int numStates = DFA81_transitionS.length;
-        DFA81_transition = new short[numStates][];
+        int numStates = DFA83_transitionS.length;
+        DFA83_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA81_transition[i] = DFA.unpackEncodedString(DFA81_transitionS[i]);
+            DFA83_transition[i] = DFA.unpackEncodedString(DFA83_transitionS[i]);
         }
     }
 
-    class DFA81 extends DFA {
+    class DFA83 extends DFA {
 
-        public DFA81(BaseRecognizer recognizer) {
+        public DFA83(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 81;
-            this.eot = DFA81_eot;
-            this.eof = DFA81_eof;
-            this.min = DFA81_min;
-            this.max = DFA81_max;
-            this.accept = DFA81_accept;
-            this.special = DFA81_special;
-            this.transition = DFA81_transition;
+            this.decisionNumber = 83;
+            this.eot = DFA83_eot;
+            this.eof = DFA83_eof;
+            this.min = DFA83_min;
+            this.max = DFA83_max;
+            this.accept = DFA83_accept;
+            this.special = DFA83_special;
+            this.transition = DFA83_transition;
         }
         public String getDescription() {
-            return "4754:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?";
+            return "4813:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA81_1 = input.LA(1);
+                        int LA83_1 = input.LA(1);
 
                          
-                        int index81_1 = input.index();
+                        int index83_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred33_InternalXbaseWithAnnotations()) ) {s = 59;}
+                        if ( (synpred33_InternalXbaseWithAnnotations()) ) {s = 60;}
 
                         else if ( (true) ) {s = 2;}
 
                          
-                        input.seek(index81_1);
+                        input.seek(index83_1);
                         if ( s>=0 ) return s;
                         break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 81, _s, input);
+                new NoViableAltException(getDescription(), 83, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -18228,169 +18450,169 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     public static final BitSet FOLLOW_ruleXAnnotation_in_entryRuleXAnnotation75 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotation85 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleXAnnotation131 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXAnnotation154 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_12_in_ruleXAnnotation175 = new BitSet(new long[]{0x5900000000025870L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation199 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_ruleXAnnotation212 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation233 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotation263 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXAnnotation277 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleXAnnotation131 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXAnnotation154 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_ruleXAnnotation175 = new BitSet(new long[]{0xB20000000004B0F0L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation199 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_ruleXAnnotation212 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation233 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotation263 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXAnnotation277 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_entryRuleXAnnotationElementValuePair315 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationElementValuePair325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXAnnotationElementValuePair373 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleXAnnotationElementValuePair385 = new BitSet(new long[]{0x5900000000021870L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXAnnotationElementValuePair373 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleXAnnotationElementValuePair385 = new BitSet(new long[]{0xB2000000000430F0L});
     public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValuePair406 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_entryRuleXAnnotationElementValueStringConcatenation442 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationElementValueStringConcatenation452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation499 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleXAnnotationElementValueStringConcatenation526 = new BitSet(new long[]{0x5900000000021870L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation560 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation499 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_17_in_ruleXAnnotationElementValueStringConcatenation526 = new BitSet(new long[]{0xB2000000000430F0L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation560 = new BitSet(new long[]{0x0000000000020002L});
     public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_entryRuleXAnnotationElementValue598 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationElementValue608 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotation_in_ruleXAnnotationElementValue655 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotationValueArray_in_ruleXAnnotationElementValue682 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXStringLiteral_in_ruleXAnnotationElementValue709 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXBooleanLiteral_in_ruleXAnnotationElementValue736 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXIntLiteral_in_ruleXAnnotationElementValue763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXNumberLiteral_in_ruleXAnnotationElementValue763 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXTypeLiteral_in_ruleXAnnotationElementValue790 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotationValueFieldReference_in_ruleXAnnotationElementValue817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleXAnnotationElementValue835 = new BitSet(new long[]{0x5900000000021870L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_ruleXAnnotationElementValue857 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXAnnotationElementValue868 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleXAnnotationElementValue835 = new BitSet(new long[]{0xB2000000000430F0L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_ruleXAnnotationElementValue857 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXAnnotationElementValue868 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotationValueFieldReference_in_entryRuleXAnnotationValueFieldReference905 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationValueFieldReference915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStaticQualifier_in_ruleXAnnotationValueFieldReference972 = new BitSet(new long[]{0x0100000000000040L});
+    public static final BitSet FOLLOW_ruleStaticQualifier_in_ruleXAnnotationValueFieldReference972 = new BitSet(new long[]{0x0200000000000080L});
     public static final BitSet FOLLOW_ruleIdOrSuper_in_ruleXAnnotationValueFieldReference996 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAnnotationValueArray_in_entryRuleXAnnotationValueArray1032 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationValueArray1042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleXAnnotationValueArray1088 = new BitSet(new long[]{0x5900000000021870L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray1109 = new BitSet(new long[]{0x0000000000042000L});
-    public static final BitSet FOLLOW_13_in_ruleXAnnotationValueArray1122 = new BitSet(new long[]{0x5900000000021870L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray1143 = new BitSet(new long[]{0x0000000000042000L});
-    public static final BitSet FOLLOW_18_in_ruleXAnnotationValueArray1157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleXAnnotationValueArray1088 = new BitSet(new long[]{0xB2000000000430F0L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray1109 = new BitSet(new long[]{0x0000000000084000L});
+    public static final BitSet FOLLOW_14_in_ruleXAnnotationValueArray1122 = new BitSet(new long[]{0xB2000000000430F0L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray1143 = new BitSet(new long[]{0x0000000000084000L});
+    public static final BitSet FOLLOW_19_in_ruleXAnnotationValueArray1157 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_entryRuleXExpression1193 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXExpression1203 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAssignment_in_ruleXExpression1249 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAssignment_in_entryRuleXAssignment1283 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAssignment1293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXAssignment1351 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_ruleOpSingleAssign_in_ruleXAssignment1367 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXAssignment1351 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_ruleOpSingleAssign_in_ruleXAssignment1367 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXAssignment_in_ruleXAssignment1387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXOrExpression_in_ruleXAssignment1417 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_ruleOpMultiAssign_in_ruleXAssignment1470 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleXOrExpression_in_ruleXAssignment1417 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_ruleOpMultiAssign_in_ruleXAssignment1470 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXAssignment_in_ruleXAssignment1493 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpSingleAssign_in_entryRuleOpSingleAssign1533 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpSingleAssign1544 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleOpSingleAssign1581 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleOpSingleAssign1581 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpMultiAssign_in_entryRuleOpMultiAssign1621 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpMultiAssign1632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleOpMultiAssign1669 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleOpMultiAssign1669 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXOrExpression_in_entryRuleXOrExpression1708 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXOrExpression1718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAndExpression_in_ruleXOrExpression1765 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_ruleOpOr_in_ruleXOrExpression1818 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXAndExpression_in_ruleXOrExpression1841 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_ruleXAndExpression_in_ruleXOrExpression1765 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_ruleOpOr_in_ruleXOrExpression1818 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXAndExpression_in_ruleXOrExpression1841 = new BitSet(new long[]{0x0000000000200002L});
     public static final BitSet FOLLOW_ruleOpOr_in_entryRuleOpOr1880 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpOr1891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleOpOr1928 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleOpOr1928 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAndExpression_in_entryRuleXAndExpression1967 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAndExpression1977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression2024 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_ruleOpAnd_in_ruleXAndExpression2077 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression2100 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression2024 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_ruleOpAnd_in_ruleXAndExpression2077 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression2100 = new BitSet(new long[]{0x0000000000400002L});
     public static final BitSet FOLLOW_ruleOpAnd_in_entryRuleOpAnd2139 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpAnd2150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleOpAnd2187 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleOpAnd2187 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXEqualityExpression_in_entryRuleXEqualityExpression2226 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXEqualityExpression2236 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression2283 = new BitSet(new long[]{0x0000000000C00002L});
-    public static final BitSet FOLLOW_ruleOpEquality_in_ruleXEqualityExpression2336 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression2359 = new BitSet(new long[]{0x0000000000C00002L});
+    public static final BitSet FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression2283 = new BitSet(new long[]{0x0000000001800002L});
+    public static final BitSet FOLLOW_ruleOpEquality_in_ruleXEqualityExpression2336 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression2359 = new BitSet(new long[]{0x0000000001800002L});
     public static final BitSet FOLLOW_ruleOpEquality_in_entryRuleOpEquality2398 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpEquality2409 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleOpEquality2447 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleOpEquality2466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleOpEquality2447 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_ruleOpEquality2466 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXRelationalExpression_in_entryRuleXRelationalExpression2506 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXRelationalExpression2516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression2563 = new BitSet(new long[]{0x000000001F000002L});
-    public static final BitSet FOLLOW_24_in_ruleXRelationalExpression2599 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXRelationalExpression2622 = new BitSet(new long[]{0x000000001F000002L});
-    public static final BitSet FOLLOW_ruleOpCompare_in_ruleXRelationalExpression2683 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression2706 = new BitSet(new long[]{0x000000001F000002L});
+    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression2563 = new BitSet(new long[]{0x000000003E000002L});
+    public static final BitSet FOLLOW_25_in_ruleXRelationalExpression2599 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXRelationalExpression2622 = new BitSet(new long[]{0x000000003E000002L});
+    public static final BitSet FOLLOW_ruleOpCompare_in_ruleXRelationalExpression2683 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression2706 = new BitSet(new long[]{0x000000003E000002L});
     public static final BitSet FOLLOW_ruleOpCompare_in_entryRuleOpCompare2746 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpCompare2757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_ruleOpCompare2795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleOpCompare2814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleOpCompare2833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleOpCompare2852 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleOpCompare2795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_ruleOpCompare2814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleOpCompare2833 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_ruleOpCompare2852 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_entryRuleXOtherOperatorExpression2892 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXOtherOperatorExpression2902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression2949 = new BitSet(new long[]{0x0000000060000002L});
-    public static final BitSet FOLLOW_ruleOpOther_in_ruleXOtherOperatorExpression3002 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression3025 = new BitSet(new long[]{0x0000000060000002L});
+    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression2949 = new BitSet(new long[]{0x00000000C0000002L});
+    public static final BitSet FOLLOW_ruleOpOther_in_ruleXOtherOperatorExpression3002 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression3025 = new BitSet(new long[]{0x00000000C0000002L});
     public static final BitSet FOLLOW_ruleOpOther_in_entryRuleOpOther3064 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpOther3075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_ruleOpOther3113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_ruleOpOther3132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleOpOther3113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleOpOther3132 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAdditiveExpression_in_entryRuleXAdditiveExpression3172 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXAdditiveExpression3182 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression3229 = new BitSet(new long[]{0x0000000080010002L});
-    public static final BitSet FOLLOW_ruleOpAdd_in_ruleXAdditiveExpression3282 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression3305 = new BitSet(new long[]{0x0000000080010002L});
+    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression3229 = new BitSet(new long[]{0x0000000100020002L});
+    public static final BitSet FOLLOW_ruleOpAdd_in_ruleXAdditiveExpression3282 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression3305 = new BitSet(new long[]{0x0000000100020002L});
     public static final BitSet FOLLOW_ruleOpAdd_in_entryRuleOpAdd3344 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpAdd3355 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleOpAdd3393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleOpAdd3412 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleOpAdd3393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleOpAdd3412 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_entryRuleXMultiplicativeExpression3452 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXMultiplicativeExpression3462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression3509 = new BitSet(new long[]{0x0000000F00000002L});
-    public static final BitSet FOLLOW_ruleOpMulti_in_ruleXMultiplicativeExpression3562 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression3585 = new BitSet(new long[]{0x0000000F00000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression3509 = new BitSet(new long[]{0x0000001E00000002L});
+    public static final BitSet FOLLOW_ruleOpMulti_in_ruleXMultiplicativeExpression3562 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression3585 = new BitSet(new long[]{0x0000001E00000002L});
     public static final BitSet FOLLOW_ruleOpMulti_in_entryRuleOpMulti3624 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpMulti3635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_ruleOpMulti3673 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_ruleOpMulti3692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleOpMulti3711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_ruleOpMulti3730 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleOpMulti3673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleOpMulti3692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_ruleOpMulti3711 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_ruleOpMulti3730 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXUnaryOperation_in_entryRuleXUnaryOperation3770 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXUnaryOperation3780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpUnary_in_ruleXUnaryOperation3838 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleOpUnary_in_ruleXUnaryOperation3838 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation3859 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation3888 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpUnary_in_entryRuleOpUnary3924 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOpUnary3935 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_ruleOpUnary3973 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleOpUnary3992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleOpUnary4011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_ruleOpUnary3973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleOpUnary3992 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleOpUnary4011 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXCastedExpression_in_entryRuleXCastedExpression4051 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXCastedExpression4061 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_ruleXCastedExpression4108 = new BitSet(new long[]{0x0000002000000002L});
-    public static final BitSet FOLLOW_37_in_ruleXCastedExpression4143 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXCastedExpression4166 = new BitSet(new long[]{0x0000002000000002L});
+    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_ruleXCastedExpression4108 = new BitSet(new long[]{0x0000004000000002L});
+    public static final BitSet FOLLOW_38_in_ruleXCastedExpression4143 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXCastedExpression4166 = new BitSet(new long[]{0x0000004000000002L});
     public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_entryRuleXMemberFeatureCall4204 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXMemberFeatureCall4214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXPrimaryExpression_in_ruleXMemberFeatureCall4261 = new BitSet(new long[]{0x000001C000000002L});
-    public static final BitSet FOLLOW_38_in_ruleXMemberFeatureCall4310 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXMemberFeatureCall4333 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_ruleOpSingleAssign_in_ruleXMemberFeatureCall4349 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_ruleXMemberFeatureCall4371 = new BitSet(new long[]{0x000001C000000002L});
-    public static final BitSet FOLLOW_38_in_ruleXMemberFeatureCall4457 = new BitSet(new long[]{0x0000000010000040L});
-    public static final BitSet FOLLOW_39_in_ruleXMemberFeatureCall4481 = new BitSet(new long[]{0x0000000010000040L});
-    public static final BitSet FOLLOW_40_in_ruleXMemberFeatureCall4518 = new BitSet(new long[]{0x0000000010000040L});
-    public static final BitSet FOLLOW_28_in_ruleXMemberFeatureCall4547 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall4568 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_13_in_ruleXMemberFeatureCall4581 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall4602 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_27_in_ruleXMemberFeatureCall4616 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXMemberFeatureCall4641 = new BitSet(new long[]{0x000003C000001002L});
-    public static final BitSet FOLLOW_12_in_ruleXMemberFeatureCall4675 = new BitSet(new long[]{0xFD38A61090035070L,0x0000000000000013L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXMemberFeatureCall4760 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall4788 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_ruleXMemberFeatureCall4801 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall4822 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_14_in_ruleXMemberFeatureCall4839 = new BitSet(new long[]{0x000003C000000002L});
-    public static final BitSet FOLLOW_ruleXClosure_in_ruleXMemberFeatureCall4872 = new BitSet(new long[]{0x000001C000000002L});
+    public static final BitSet FOLLOW_ruleXPrimaryExpression_in_ruleXMemberFeatureCall4261 = new BitSet(new long[]{0x0000038000000002L});
+    public static final BitSet FOLLOW_39_in_ruleXMemberFeatureCall4310 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXMemberFeatureCall4333 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_ruleOpSingleAssign_in_ruleXMemberFeatureCall4349 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_ruleXMemberFeatureCall4371 = new BitSet(new long[]{0x0000038000000002L});
+    public static final BitSet FOLLOW_39_in_ruleXMemberFeatureCall4457 = new BitSet(new long[]{0x0000000020000080L});
+    public static final BitSet FOLLOW_40_in_ruleXMemberFeatureCall4481 = new BitSet(new long[]{0x0000000020000080L});
+    public static final BitSet FOLLOW_41_in_ruleXMemberFeatureCall4518 = new BitSet(new long[]{0x0000000020000080L});
+    public static final BitSet FOLLOW_29_in_ruleXMemberFeatureCall4547 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall4568 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_14_in_ruleXMemberFeatureCall4581 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall4602 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_28_in_ruleXMemberFeatureCall4616 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXMemberFeatureCall4641 = new BitSet(new long[]{0x0000078000002002L});
+    public static final BitSet FOLLOW_13_in_ruleXMemberFeatureCall4675 = new BitSet(new long[]{0xFA714C212006A0F0L,0x0000000000000027L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXMemberFeatureCall4760 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall4788 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_ruleXMemberFeatureCall4801 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall4822 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_15_in_ruleXMemberFeatureCall4839 = new BitSet(new long[]{0x0000078000000002L});
+    public static final BitSet FOLLOW_ruleXClosure_in_ruleXMemberFeatureCall4872 = new BitSet(new long[]{0x0000038000000002L});
     public static final BitSet FOLLOW_ruleXPrimaryExpression_in_entryRuleXPrimaryExpression4912 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXPrimaryExpression4922 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXConstructorCall_in_ruleXPrimaryExpression4969 = new BitSet(new long[]{0x0000000000000002L});
@@ -18410,298 +18632,304 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final BitSet FOLLOW_EOF_in_entryRuleXLiteral5338 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_ruleXLiteral5385 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXBooleanLiteral_in_ruleXLiteral5412 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXIntLiteral_in_ruleXLiteral5439 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXNumberLiteral_in_ruleXLiteral5439 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXNullLiteral_in_ruleXLiteral5466 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXStringLiteral_in_ruleXLiteral5493 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXTypeLiteral_in_ruleXLiteral5520 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_entryRuleXClosure5555 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXClosure5565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_ruleXClosure5611 = new BitSet(new long[]{0xFDF8AE1090031070L,0x0000000000000013L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXClosure5682 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_13_in_ruleXClosure5695 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXClosure5716 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_42_in_ruleXClosure5738 = new BitSet(new long[]{0xFDF8AA1090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpressionInClosure_in_ruleXClosure5775 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_43_in_ruleXClosure5787 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_ruleXClosure5611 = new BitSet(new long[]{0xFBF15C21200620F0L,0x0000000000000027L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXClosure5682 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_14_in_ruleXClosure5695 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXClosure5716 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_43_in_ruleXClosure5738 = new BitSet(new long[]{0xFBF15421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpressionInClosure_in_ruleXClosure5775 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_ruleXClosure5787 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpressionInClosure_in_entryRuleXExpressionInClosure5823 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXExpressionInClosure5833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleXExpressionInClosure5889 = new BitSet(new long[]{0xFDF8B21090031072L,0x0000000000000003L});
-    public static final BitSet FOLLOW_44_in_ruleXExpressionInClosure5902 = new BitSet(new long[]{0xFDF8A21090031072L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleXExpressionInClosure5889 = new BitSet(new long[]{0xFBF16421200620F2L,0x0000000000000007L});
+    public static final BitSet FOLLOW_45_in_ruleXExpressionInClosure5902 = new BitSet(new long[]{0xFBF14421200620F2L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXShortClosure_in_entryRuleXShortClosure5942 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXShortClosure5952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure6060 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_13_in_ruleXShortClosure6073 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure6094 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_42_in_ruleXShortClosure6116 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure6060 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_14_in_ruleXShortClosure6073 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure6094 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_43_in_ruleXShortClosure6116 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXShortClosure6152 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXParenthesizedExpression_in_entryRuleXParenthesizedExpression6188 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXParenthesizedExpression6198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleXParenthesizedExpression6235 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXParenthesizedExpression6257 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXParenthesizedExpression6268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleXParenthesizedExpression6235 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXParenthesizedExpression6257 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXParenthesizedExpression6268 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXIfExpression_in_entryRuleXIfExpression6304 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXIfExpression6314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_ruleXIfExpression6360 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXIfExpression6372 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression6393 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXIfExpression6405 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression6426 = new BitSet(new long[]{0x0000400000000002L});
-    public static final BitSet FOLLOW_46_in_ruleXIfExpression6447 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_46_in_ruleXIfExpression6360 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXIfExpression6372 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression6393 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXIfExpression6405 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression6426 = new BitSet(new long[]{0x0000800000000002L});
+    public static final BitSet FOLLOW_47_in_ruleXIfExpression6447 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression6469 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXSwitchExpression_in_entryRuleXSwitchExpression6507 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXSwitchExpression6517 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_ruleXSwitchExpression6563 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXSwitchExpression6604 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_ruleXSwitchExpression6616 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression6640 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleXSwitchExpression6652 = new BitSet(new long[]{0x0005000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleXCasePart_in_ruleXSwitchExpression6673 = new BitSet(new long[]{0x0007000000041040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_49_in_ruleXSwitchExpression6687 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_ruleXSwitchExpression6699 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression6720 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleXSwitchExpression6734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleXSwitchExpression6563 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXSwitchExpression6604 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_49_in_ruleXSwitchExpression6616 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression6640 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleXSwitchExpression6652 = new BitSet(new long[]{0x000A000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleXCasePart_in_ruleXSwitchExpression6673 = new BitSet(new long[]{0x000E000000082080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_50_in_ruleXSwitchExpression6687 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_49_in_ruleXSwitchExpression6699 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression6720 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleXSwitchExpression6734 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXCasePart_in_entryRuleXCasePart6770 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXCasePart6780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXCasePart6826 = new BitSet(new long[]{0x0005000000000000L});
-    public static final BitSet FOLLOW_50_in_ruleXCasePart6840 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXCasePart6861 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_ruleXCasePart6875 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXCasePart6826 = new BitSet(new long[]{0x000A000000000000L});
+    public static final BitSet FOLLOW_51_in_ruleXCasePart6840 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXCasePart6861 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_49_in_ruleXCasePart6875 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXCasePart6896 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXForLoopExpression_in_entryRuleXForLoopExpression6932 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXForLoopExpression6942 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_ruleXForLoopExpression6988 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXForLoopExpression7000 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXForLoopExpression7021 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_ruleXForLoopExpression7033 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXForLoopExpression7054 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXForLoopExpression7066 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_52_in_ruleXForLoopExpression6988 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXForLoopExpression7000 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXForLoopExpression7021 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_49_in_ruleXForLoopExpression7033 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXForLoopExpression7054 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXForLoopExpression7066 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXForLoopExpression7087 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXWhileExpression_in_entryRuleXWhileExpression7123 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXWhileExpression7133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleXWhileExpression7179 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXWhileExpression7191 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXWhileExpression7212 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXWhileExpression7224 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_53_in_ruleXWhileExpression7179 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXWhileExpression7191 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXWhileExpression7212 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXWhileExpression7224 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXWhileExpression7245 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXDoWhileExpression_in_entryRuleXDoWhileExpression7281 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXDoWhileExpression7291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleXDoWhileExpression7337 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXDoWhileExpression7358 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_52_in_ruleXDoWhileExpression7370 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXDoWhileExpression7382 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXDoWhileExpression7403 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXDoWhileExpression7415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleXDoWhileExpression7337 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXDoWhileExpression7358 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_53_in_ruleXDoWhileExpression7370 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXDoWhileExpression7382 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXDoWhileExpression7403 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXDoWhileExpression7415 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXBlockExpression_in_entryRuleXBlockExpression7451 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXBlockExpression7461 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleXBlockExpression7507 = new BitSet(new long[]{0xFDF8A21090071070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleXBlockExpression7529 = new BitSet(new long[]{0xFDF8B21090071070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_44_in_ruleXBlockExpression7542 = new BitSet(new long[]{0xFDF8A21090071070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_18_in_ruleXBlockExpression7558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleXBlockExpression7507 = new BitSet(new long[]{0xFBF14421200E20F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleXBlockExpression7529 = new BitSet(new long[]{0xFBF16421200E20F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_45_in_ruleXBlockExpression7542 = new BitSet(new long[]{0xFBF14421200E20F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_19_in_ruleXBlockExpression7558 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_entryRuleXExpressionInsideBlock7594 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXExpressionInsideBlock7604 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXVariableDeclaration_in_ruleXExpressionInsideBlock7651 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXExpressionInsideBlock7678 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXVariableDeclaration_in_entryRuleXVariableDeclaration7713 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXVariableDeclaration7723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleXVariableDeclaration7776 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_55_in_ruleXVariableDeclaration7807 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXVariableDeclaration7855 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXVariableDeclaration7876 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleXVariableDeclaration7905 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_15_in_ruleXVariableDeclaration7919 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
+    public static final BitSet FOLLOW_55_in_ruleXVariableDeclaration7776 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_56_in_ruleXVariableDeclaration7807 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXVariableDeclaration7855 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXVariableDeclaration7876 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleXVariableDeclaration7905 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_ruleXVariableDeclaration7919 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXVariableDeclaration7940 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmFormalParameter_in_entryRuleJvmFormalParameter7978 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmFormalParameter7988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmFormalParameter8034 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmFormalParameter8034 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_ruleValidID_in_ruleJvmFormalParameter8056 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_entryRuleFullJvmFormalParameter8092 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFullJvmFormalParameter8102 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleFullJvmFormalParameter8148 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleFullJvmFormalParameter8148 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_ruleValidID_in_ruleFullJvmFormalParameter8169 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXFeatureCall_in_entryRuleXFeatureCall8205 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXFeatureCall8215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStaticQualifier_in_ruleXFeatureCall8272 = new BitSet(new long[]{0x0100000010000040L});
-    public static final BitSet FOLLOW_28_in_ruleXFeatureCall8286 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall8307 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_13_in_ruleXFeatureCall8320 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall8341 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_27_in_ruleXFeatureCall8355 = new BitSet(new long[]{0x0100000000000040L});
-    public static final BitSet FOLLOW_ruleIdOrSuper_in_ruleXFeatureCall8380 = new BitSet(new long[]{0x0000020000001002L});
-    public static final BitSet FOLLOW_12_in_ruleXFeatureCall8414 = new BitSet(new long[]{0xFD38A61090035070L,0x0000000000000013L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXFeatureCall8499 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXFeatureCall8527 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_ruleXFeatureCall8540 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXFeatureCall8561 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_14_in_ruleXFeatureCall8578 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_ruleStaticQualifier_in_ruleXFeatureCall8272 = new BitSet(new long[]{0x0200000020000080L});
+    public static final BitSet FOLLOW_29_in_ruleXFeatureCall8286 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall8307 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_14_in_ruleXFeatureCall8320 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall8341 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_28_in_ruleXFeatureCall8355 = new BitSet(new long[]{0x0200000000000080L});
+    public static final BitSet FOLLOW_ruleIdOrSuper_in_ruleXFeatureCall8380 = new BitSet(new long[]{0x0000040000002002L});
+    public static final BitSet FOLLOW_13_in_ruleXFeatureCall8414 = new BitSet(new long[]{0xFA714C212006A0F0L,0x0000000000000027L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXFeatureCall8499 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXFeatureCall8527 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_ruleXFeatureCall8540 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXFeatureCall8561 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_15_in_ruleXFeatureCall8578 = new BitSet(new long[]{0x0000040000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_ruleXFeatureCall8611 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleIdOrSuper_in_entryRuleIdOrSuper8649 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleIdOrSuper8660 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_ruleIdOrSuper8707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleIdOrSuper8731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_ruleIdOrSuper8731 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStaticQualifier_in_entryRuleStaticQualifier8772 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStaticQualifier8783 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleStaticQualifier8830 = new BitSet(new long[]{0x0200000000000000L});
-    public static final BitSet FOLLOW_57_in_ruleStaticQualifier8848 = new BitSet(new long[]{0x0000000000000042L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleStaticQualifier8830 = new BitSet(new long[]{0x0400000000000000L});
+    public static final BitSet FOLLOW_58_in_ruleStaticQualifier8848 = new BitSet(new long[]{0x0000000000000082L});
     public static final BitSet FOLLOW_ruleXConstructorCall_in_entryRuleXConstructorCall8889 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXConstructorCall8899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_58_in_ruleXConstructorCall8945 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXConstructorCall8968 = new BitSet(new long[]{0x0000000010001000L});
-    public static final BitSet FOLLOW_28_in_ruleXConstructorCall8981 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall9002 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_13_in_ruleXConstructorCall9015 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall9036 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_27_in_ruleXConstructorCall9050 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXConstructorCall9064 = new BitSet(new long[]{0xFD38A61090035070L,0x0000000000000013L});
-    public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXConstructorCall9136 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXConstructorCall9164 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_ruleXConstructorCall9177 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXConstructorCall9198 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_14_in_ruleXConstructorCall9215 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_59_in_ruleXConstructorCall8945 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXConstructorCall8968 = new BitSet(new long[]{0x0000000020002000L});
+    public static final BitSet FOLLOW_29_in_ruleXConstructorCall8981 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall9002 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_14_in_ruleXConstructorCall9015 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall9036 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_28_in_ruleXConstructorCall9050 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXConstructorCall9064 = new BitSet(new long[]{0xFA714C212006A0F0L,0x0000000000000027L});
+    public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXConstructorCall9136 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXConstructorCall9164 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_ruleXConstructorCall9177 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXConstructorCall9198 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_15_in_ruleXConstructorCall9215 = new BitSet(new long[]{0x0000040000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_ruleXConstructorCall9246 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXBooleanLiteral_in_entryRuleXBooleanLiteral9283 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXBooleanLiteral9293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_ruleXBooleanLiteral9340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_ruleXBooleanLiteral9364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_ruleXBooleanLiteral9340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_61_in_ruleXBooleanLiteral9364 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXNullLiteral_in_entryRuleXNullLiteral9414 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXNullLiteral9424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_ruleXNullLiteral9470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXIntLiteral_in_entryRuleXIntLiteral9506 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXIntLiteral9516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleXIntLiteral9567 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral9608 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXStringLiteral9618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleXStringLiteral9669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral9710 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXTypeLiteral9720 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_ruleXTypeLiteral9766 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXTypeLiteral9778 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral9801 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXTypeLiteral9813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression9849 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXThrowExpression9859 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_ruleXThrowExpression9905 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXThrowExpression9926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression9962 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXReturnExpression9972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_ruleXReturnExpression10018 = new BitSet(new long[]{0xFD38A21090031072L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXReturnExpression10049 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10086 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10096 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_ruleXTryCatchFinallyExpression10142 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10163 = new BitSet(new long[]{0x0000000000000000L,0x000000000000000CL});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10193 = new BitSet(new long[]{0x0000000000000002L,0x000000000000000CL});
-    public static final BitSet FOLLOW_66_in_ruleXTryCatchFinallyExpression10215 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleXTryCatchFinallyExpression10259 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10318 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXCatchClause10328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_67_in_ruleXCatchClause10373 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleXCatchClause10386 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause10407 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleXCatchClause10419 = new BitSet(new long[]{0xFD38A21090031070L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleXExpression_in_ruleXCatchClause10440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName10477 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName10488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName10535 = new BitSet(new long[]{0x0000004000000002L});
-    public static final BitSet FOLLOW_38_in_ruleQualifiedName10563 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName10586 = new BitSet(new long[]{0x0000004000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference10633 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeReference10643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference10691 = new BitSet(new long[]{0x0000020000000002L});
-    public static final BitSet FOLLOW_41_in_ruleJvmTypeReference10729 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_43_in_ruleJvmTypeReference10741 = new BitSet(new long[]{0x0000020000000002L});
-    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference10773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef10808 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXFunctionTypeRef10818 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleXFunctionTypeRef10856 = new BitSet(new long[]{0x0000000000005040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef10878 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_ruleXFunctionTypeRef10891 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef10912 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_14_in_ruleXFunctionTypeRef10928 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_68_in_ruleXFunctionTypeRef10942 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef10963 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference10999 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11057 = new BitSet(new long[]{0x0000000010000002L});
-    public static final BitSet FOLLOW_28_in_ruleJvmParameterizedTypeReference11078 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11100 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_13_in_ruleJvmParameterizedTypeReference11113 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11134 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_27_in_ruleJvmParameterizedTypeReference11148 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference11186 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference11196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference11243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference11270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference11305 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference11315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_69_in_ruleJvmWildcardTypeReference11361 = new BitSet(new long[]{0x0100000000000002L,0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference11383 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference11410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound11448 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound11458 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_70_in_ruleJvmUpperBound11495 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound11516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded11552 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded11562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_71_in_ruleJvmUpperBoundAnded11599 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded11620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound11656 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound11666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleJvmLowerBound11703 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound11724 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID11763 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleValidID11774 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleValidID11813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_synpred1_InternalXbaseWithAnnotations167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_ruleXNullLiteral9470 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXNumberLiteral_in_entryRuleXNumberLiteral9506 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXNumberLiteral9516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumber_in_ruleXNumberLiteral9571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral9607 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXStringLiteral9617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleXStringLiteral9668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral9709 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXTypeLiteral9719 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_ruleXTypeLiteral9765 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXTypeLiteral9777 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral9800 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXTypeLiteral9812 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression9848 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXThrowExpression9858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_64_in_ruleXThrowExpression9904 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXThrowExpression9925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression9961 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXReturnExpression9971 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_65_in_ruleXReturnExpression10017 = new BitSet(new long[]{0xFA714421200620F2L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXReturnExpression10048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression10085 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression10095 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_66_in_ruleXTryCatchFinallyExpression10141 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10162 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000018L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression10192 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
+    public static final BitSet FOLLOW_67_in_ruleXTryCatchFinallyExpression10214 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10236 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_67_in_ruleXTryCatchFinallyExpression10258 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression10279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause10317 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXCatchClause10327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_ruleXCatchClause10372 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleXCatchClause10385 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause10406 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleXCatchClause10418 = new BitSet(new long[]{0xFA714421200620F0L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleXExpression_in_ruleXCatchClause10439 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName10476 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName10487 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName10534 = new BitSet(new long[]{0x0000008000000002L});
+    public static final BitSet FOLLOW_39_in_ruleQualifiedName10562 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName10585 = new BitSet(new long[]{0x0000008000000002L});
+    public static final BitSet FOLLOW_ruleNumber_in_entryRuleNumber10639 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumber10650 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_HEX_in_ruleNumber10694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber10721 = new BitSet(new long[]{0x0000008000000002L});
+    public static final BitSet FOLLOW_39_in_ruleNumber10740 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber10755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference10807 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeReference10817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference10865 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_42_in_ruleJvmTypeReference10903 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_ruleJvmTypeReference10915 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference10947 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef10982 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleXFunctionTypeRef10992 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleXFunctionTypeRef11030 = new BitSet(new long[]{0x000000000000A080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11052 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_ruleXFunctionTypeRef11065 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11086 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_15_in_ruleXFunctionTypeRef11102 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_69_in_ruleXFunctionTypeRef11116 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef11137 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference11173 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference11183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference11231 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_29_in_ruleJvmParameterizedTypeReference11252 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11274 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_14_in_ruleJvmParameterizedTypeReference11287 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000060L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference11308 = new BitSet(new long[]{0x0000000010004000L});
+    public static final BitSet FOLLOW_28_in_ruleJvmParameterizedTypeReference11322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference11360 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference11370 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference11417 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference11444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference11479 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference11489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_70_in_ruleJvmWildcardTypeReference11535 = new BitSet(new long[]{0x0200000000000002L,0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference11557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference11584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound11622 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound11632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_71_in_ruleJvmUpperBound11669 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound11690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded11726 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded11736 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_72_in_ruleJvmUpperBoundAnded11773 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded11794 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound11830 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound11840 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_ruleJvmLowerBound11877 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound11898 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID11937 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleValidID11948 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleValidID11987 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_synpred1_InternalXbaseWithAnnotations167 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpMultiAssign_in_synpred2_InternalXbaseWithAnnotations1438 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpOr_in_synpred3_InternalXbaseWithAnnotations1786 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpAnd_in_synpred4_InternalXbaseWithAnnotations2045 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpEquality_in_synpred5_InternalXbaseWithAnnotations2304 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_synpred6_InternalXbaseWithAnnotations2580 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_synpred6_InternalXbaseWithAnnotations2580 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpCompare_in_synpred7_InternalXbaseWithAnnotations2651 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpOther_in_synpred8_InternalXbaseWithAnnotations2970 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpAdd_in_synpred9_InternalXbaseWithAnnotations3250 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpMulti_in_synpred10_InternalXbaseWithAnnotations3530 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_synpred11_InternalXbaseWithAnnotations4124 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_synpred12_InternalXbaseWithAnnotations4278 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_ruleValidID_in_synpred12_InternalXbaseWithAnnotations4287 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_38_in_synpred11_InternalXbaseWithAnnotations4124 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_synpred12_InternalXbaseWithAnnotations4278 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_ruleValidID_in_synpred12_InternalXbaseWithAnnotations4287 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_ruleOpSingleAssign_in_synpred12_InternalXbaseWithAnnotations4293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_synpred13_InternalXbaseWithAnnotations4396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_synpred13_InternalXbaseWithAnnotations4410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_synpred13_InternalXbaseWithAnnotations4430 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_synpred14_InternalXbaseWithAnnotations4657 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred15_InternalXbaseWithAnnotations4709 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_13_in_synpred15_InternalXbaseWithAnnotations4716 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred15_InternalXbaseWithAnnotations4723 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_42_in_synpred15_InternalXbaseWithAnnotations4737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_synpred13_InternalXbaseWithAnnotations4396 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_synpred13_InternalXbaseWithAnnotations4410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_synpred13_InternalXbaseWithAnnotations4430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_synpred14_InternalXbaseWithAnnotations4657 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred15_InternalXbaseWithAnnotations4709 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_14_in_synpred15_InternalXbaseWithAnnotations4716 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred15_InternalXbaseWithAnnotations4723 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_43_in_synpred15_InternalXbaseWithAnnotations4737 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_synpred16_InternalXbaseWithAnnotations4855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred17_InternalXbaseWithAnnotations5628 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_13_in_synpred17_InternalXbaseWithAnnotations5635 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred17_InternalXbaseWithAnnotations5642 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_42_in_synpred17_InternalXbaseWithAnnotations5656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_synpred19_InternalXbaseWithAnnotations6439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_synpred20_InternalXbaseWithAnnotations6579 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_48_in_synpred20_InternalXbaseWithAnnotations6585 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_synpred21_InternalXbaseWithAnnotations7825 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred17_InternalXbaseWithAnnotations5628 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_14_in_synpred17_InternalXbaseWithAnnotations5635 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred17_InternalXbaseWithAnnotations5642 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_43_in_synpred17_InternalXbaseWithAnnotations5656 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_synpred19_InternalXbaseWithAnnotations6439 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValidID_in_synpred20_InternalXbaseWithAnnotations6579 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_49_in_synpred20_InternalXbaseWithAnnotations6585 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_synpred21_InternalXbaseWithAnnotations7825 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_ruleValidID_in_synpred21_InternalXbaseWithAnnotations7834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_synpred22_InternalXbaseWithAnnotations8396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred23_InternalXbaseWithAnnotations8448 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_13_in_synpred23_InternalXbaseWithAnnotations8455 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred23_InternalXbaseWithAnnotations8462 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_42_in_synpred23_InternalXbaseWithAnnotations8476 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_synpred22_InternalXbaseWithAnnotations8396 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred23_InternalXbaseWithAnnotations8448 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_14_in_synpred23_InternalXbaseWithAnnotations8455 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred23_InternalXbaseWithAnnotations8462 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_43_in_synpred23_InternalXbaseWithAnnotations8476 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_synpred24_InternalXbaseWithAnnotations8594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred25_InternalXbaseWithAnnotations9085 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_13_in_synpred25_InternalXbaseWithAnnotations9092 = new BitSet(new long[]{0x0000000000001040L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred25_InternalXbaseWithAnnotations9099 = new BitSet(new long[]{0x0000040000002000L});
-    public static final BitSet FOLLOW_42_in_synpred25_InternalXbaseWithAnnotations9113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred25_InternalXbaseWithAnnotations9085 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_14_in_synpred25_InternalXbaseWithAnnotations9092 = new BitSet(new long[]{0x0000000000002080L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred25_InternalXbaseWithAnnotations9099 = new BitSet(new long[]{0x0000080000004000L});
+    public static final BitSet FOLLOW_43_in_synpred25_InternalXbaseWithAnnotations9113 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_synpred26_InternalXbaseWithAnnotations9229 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_synpred27_InternalXbaseWithAnnotations10032 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_67_in_synpred28_InternalXbaseWithAnnotations10177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_synpred29_InternalXbaseWithAnnotations10207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_synpred31_InternalXbaseWithAnnotations10554 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_synpred32_InternalXbaseWithAnnotations10706 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_43_in_synpred32_InternalXbaseWithAnnotations10710 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_synpred33_InternalXbaseWithAnnotations11070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_synpred27_InternalXbaseWithAnnotations10031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_synpred28_InternalXbaseWithAnnotations10176 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_67_in_synpred29_InternalXbaseWithAnnotations10206 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_synpred31_InternalXbaseWithAnnotations10553 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_synpred32_InternalXbaseWithAnnotations10880 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_synpred32_InternalXbaseWithAnnotations10884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_synpred33_InternalXbaseWithAnnotations11244 = new BitSet(new long[]{0x0000000000000002L});
 
 }

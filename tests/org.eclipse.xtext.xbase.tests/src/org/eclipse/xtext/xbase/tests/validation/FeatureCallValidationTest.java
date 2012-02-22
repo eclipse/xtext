@@ -33,7 +33,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	@Test public void testConstructorCall_1() throws Exception {
 		XExpression expression = expression("new testdata.Constructors(1)");
-		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	@Test public void testConstructorCall_2() throws Exception {
@@ -155,7 +155,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testOperationFeatureCall_6() throws Exception {
 		XExpression expression = expression("(null as Comparable<? extends Object>).compareTo(1)");
-		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES, "null", "int");
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "null", "int");
 	}
 	
 	@Test public void testOperationFeatureCall_7() throws Exception {
@@ -228,7 +228,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	 */
 	@Test public void testBug_350934_01() throws Exception {
 		XExpression expression = expression("'3'>3");
-		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	/**
@@ -244,7 +244,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	 */
 	@Test public void testBug_350934_03() throws Exception {
 		XExpression expression = expression("true>=0"); 
-		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	@Test public void testListExtensionsMap_01() throws Exception {

@@ -11,6 +11,8 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -43,9 +45,9 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -63,9 +65,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -100,6 +102,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 
 	@Inject
 	private SuperTypeCollector collector;
+	
+	@Inject
+	private NumberLiterals numberLiterals;
 
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
@@ -166,8 +171,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			return _type((XIfExpression)expression, rawExpectation, rawType);
 		} else if (expression instanceof XInstanceOfExpression) {
 			return _type((XInstanceOfExpression)expression, rawExpectation, rawType);
-		} else if (expression instanceof XIntLiteral) {
-			return _type((XIntLiteral)expression, rawExpectation, rawType);
+		} else if (expression instanceof XNumberLiteral) {
+			return _type((XNumberLiteral)expression, rawExpectation, rawType);
 		} else if (expression instanceof XNullLiteral) {
 			return _type((XNullLiteral)expression, rawExpectation, rawType);
 		} else if (expression instanceof XReturnExpression) {
@@ -852,8 +857,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 		return result;
 	}
 
-	protected JvmTypeReference _type(XIntLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
-		return getTypeReferences().getTypeForName(Integer.TYPE, object);
+	protected JvmTypeReference _type(XNumberLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
+		return getTypeReferences().getTypeForName(numberLiterals.getJavaType(object), object);
 	}
 
 	protected JvmTypeReference _type(XStringLiteral object, JvmTypeReference rawExpectation, boolean rawType) {

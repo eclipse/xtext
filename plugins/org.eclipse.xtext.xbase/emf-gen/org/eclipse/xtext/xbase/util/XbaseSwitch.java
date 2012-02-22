@@ -196,11 +196,11 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XbasePackage.XINT_LITERAL:
+			case XbasePackage.XNUMBER_LITERAL:
 			{
-				XIntLiteral xIntLiteral = (XIntLiteral)theEObject;
-				T result = caseXIntLiteral(xIntLiteral);
-				if (result == null) result = caseXExpression(xIntLiteral);
+				XNumberLiteral xNumberLiteral = (XNumberLiteral)theEObject;
+				T result = caseXNumberLiteral(xNumberLiteral);
+				if (result == null) result = caseXExpression(xNumberLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -533,17 +533,17 @@ public class XbaseSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XInt Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XNumber Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XInt Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XNumber Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseXIntLiteral(XIntLiteral object)
+	public T caseXNumberLiteral(XNumberLiteral object)
 	{
 		return null;
 	}

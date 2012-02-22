@@ -85,7 +85,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	@Test public void testSideEffectFreeExpressionInBlock_03() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' 42 x }");
-		helper.assertError(expr, XINT_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+		helper.assertError(expr, XNUMBER_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
 	}
 	
 	@Test public void testSideEffectFreeExpressionInBlock_04() throws Exception {
@@ -522,4 +522,33 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoIssues(expressionA);
 	}
 	
+	@Test public void testNumberLiteral_0() throws Exception {
+		XExpression expression = expression("1e10.2e10");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
+
+	@Test public void testNumberLiteral_1() throws Exception {
+		XExpression expression = expression("1l.2b");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
+
+	@Test public void testNumberLiteral_3() throws Exception {
+		XExpression expression = expression("1e20d.2b");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
+
+	@Test public void testNumberLiteral_4() throws Exception {
+		XExpression expression = expression("1.0e20b");
+		helper.assertNoIssues(expression);
+	}
+
+	@Test public void testNumberLiteral_5() throws Exception {
+		XExpression expression = expression("12345678901234567890123456789012345678901234567890b");
+		helper.assertNoIssues(expression);
+	}
+
+	@Test public void testNumberLiteral_6() throws Exception {
+		XExpression expression = expression("12345678901234567890123456789012345678901234567890l");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
 }

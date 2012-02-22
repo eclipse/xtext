@@ -30,7 +30,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
 	@Test public void testIfPredicate() throws Exception {
 		assertNoConformanceError("if (true) 'foo'");
-		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "int",
+		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XNUMBER_LITERAL, "int",
 				"boolean");
 		assertConformanceError("if (null) 'foo'", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
 		assertConformanceError("if ({}) 'foo'", XbasePackage.Literals.XBLOCK_EXPRESSION, "null", "boolean");
@@ -39,7 +39,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	
 	@Test public void testWhilePredicate() throws Exception {
 		assertNoConformanceError("while (true) 'foo'");
-		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "int",
+		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XNUMBER_LITERAL, "int",
 				"boolean");
 		assertNoConformanceError("do 'foo' while (true)");
 		assertConformanceError("do 'foo' while ('bar')", XbasePackage.Literals.XSTRING_LITERAL, "java.lang.String",
@@ -123,7 +123,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	@Test public void testThrowsExpression() throws Exception {
 		assertNoConformanceError("throw new java.lang.Exception()");
 		assertNoConformanceError("throw new java.lang.IllegalArgumentException()");
-		assertConformanceError("throw 42", XbasePackage.Literals.XINT_LITERAL, "int",
+		assertConformanceError("throw 42", XbasePackage.Literals.XNUMBER_LITERAL, "int",
 				"java.lang.Throwable");
 	}
 

@@ -713,14 +713,14 @@ public interface XbasePackage extends EPackage
 	int XNULL_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl <em>XInt Literal</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XNumberLiteralImpl <em>XNumber Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XIntLiteralImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
+	 * @see org.eclipse.xtext.xbase.impl.XNumberLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNumberLiteral()
 	 * @generated
 	 */
-	int XINT_LITERAL = 12;
+	int XNUMBER_LITERAL = 12;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -729,16 +729,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XINT_LITERAL__VALUE = XEXPRESSION_FEATURE_COUNT + 0;
+	int XNUMBER_LITERAL__VALUE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>XInt Literal</em>' class.
+	 * The number of structural features of the '<em>XNumber Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XINT_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+	int XNUMBER_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XStringLiteralImpl <em>XString Literal</em>}' class.
@@ -1992,25 +1992,25 @@ public interface XbasePackage extends EPackage
 	EClass getXNullLiteral();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XIntLiteral <em>XInt Literal</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XNumberLiteral <em>XNumber Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XInt Literal</em>'.
-	 * @see org.eclipse.xtext.xbase.XIntLiteral
+	 * @return the meta object for class '<em>XNumber Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XNumberLiteral
 	 * @generated
 	 */
-	EClass getXIntLiteral();
+	EClass getXNumberLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XIntLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XNumberLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipse.xtext.xbase.XIntLiteral#getValue()
-	 * @see #getXIntLiteral()
+	 * @see org.eclipse.xtext.xbase.XNumberLiteral#getValue()
+	 * @see #getXNumberLiteral()
 	 * @generated
 	 */
-	EAttribute getXIntLiteral_Value();
+	EAttribute getXNumberLiteral_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XStringLiteral <em>XString Literal</em>}'.
@@ -2893,14 +2893,14 @@ public interface XbasePackage extends EPackage
 		EClass XNULL_LITERAL = eINSTANCE.getXNullLiteral();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl <em>XInt Literal</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XNumberLiteralImpl <em>XNumber Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.XIntLiteralImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
+		 * @see org.eclipse.xtext.xbase.impl.XNumberLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNumberLiteral()
 		 * @generated
 		 */
-		EClass XINT_LITERAL = eINSTANCE.getXIntLiteral();
+		EClass XNUMBER_LITERAL = eINSTANCE.getXNumberLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -2908,7 +2908,7 @@ public interface XbasePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XINT_LITERAL__VALUE = eINSTANCE.getXIntLiteral_Value();
+		EAttribute XNUMBER_LITERAL__VALUE = eINSTANCE.getXNumberLiteral_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XStringLiteralImpl <em>XString Literal</em>}' class.

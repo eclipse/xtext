@@ -17,6 +17,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,9 +57,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -77,6 +79,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Function;
@@ -150,6 +153,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	private XExpressionHelper expressionHelper;
+	
+	@Inject
+	private NumberLiterals numberLiterals;
 	
 	private ClassFinder classFinder;
 
@@ -229,8 +235,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return literal.getValue();
 	}
 
-	protected Object _evaluateIntLiteral(XIntLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
-		return literal.getValue();
+	protected Object _evaluateNumberLiteral(XNumberLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+		return numberLiterals.numberValue(literal, numberLiterals.getJavaType(literal));
 	}
 
 	protected Object _evaluateBooleanLiteral(XBooleanLiteral literal, IEvaluationContext context, CancelIndicator indicator) {

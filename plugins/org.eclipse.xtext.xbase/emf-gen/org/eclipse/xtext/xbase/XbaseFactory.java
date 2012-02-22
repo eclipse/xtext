@@ -116,13 +116,13 @@ public interface XbaseFactory extends EFactory
 	XNullLiteral createXNullLiteral();
 
 	/**
-	 * Returns a new object of class '<em>XInt Literal</em>'.
+	 * Returns a new object of class '<em>XNumber Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XInt Literal</em>'.
+	 * @return a new object of class '<em>XNumber Literal</em>'.
 	 * @generated
 	 */
-	XIntLiteral createXIntLiteral();
+	XNumberLiteral createXNumberLiteral();
 
 	/**
 	 * Returns a new object of class '<em>XString Literal</em>'.

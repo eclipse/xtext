@@ -40,7 +40,7 @@ public class XExpressionHelper {
 		switch(expr.eClass().getClassifierID()) {
 			case XCLOSURE:
 			case XBOOLEAN_LITERAL:
-			case XINT_LITERAL:
+			case XNUMBER_LITERAL:
 			case XNULL_LITERAL:
 			case XSTRING_LITERAL:
 			case XTYPE_LITERAL:

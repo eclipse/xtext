@@ -7,27 +7,41 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.typing.NumberLiterals;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class LiteralsCompiler extends TypeConvertingCompiler {
 
+	@Inject
+	private TypeReferenceSerializer referenceSerializer;	
+
+	@Inject
+	private NumberLiterals numberLiterals;
+	
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XStringLiteral) {
 			_toJavaExpression((XStringLiteral) obj, appendable);
-		} else if (obj instanceof XIntLiteral) {
-			_toJavaExpression((XIntLiteral) obj, appendable);
+		} else if (obj instanceof XNumberLiteral) {
+			_toJavaExpression((XNumberLiteral) obj, appendable);
 		} else if (obj instanceof XNullLiteral) {
 			_toJavaExpression((XNullLiteral) obj, appendable);
 		} else if (obj instanceof XBooleanLiteral) {
@@ -43,8 +57,8 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		if (obj instanceof XStringLiteral) {
 			_toJavaStatement((XStringLiteral) obj, appendable, isReferenced);
-		} else if (obj instanceof XIntLiteral) {
-			_toJavaStatement((XIntLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XNumberLiteral) {
+			_toJavaStatement((XNumberLiteral) obj, appendable, isReferenced);
 		} else if (obj instanceof XNullLiteral) {
 			_toJavaStatement((XNullLiteral) obj, appendable, isReferenced);
 		} else if (obj instanceof XBooleanLiteral) {
@@ -73,11 +87,22 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		}
 	}
 
-	public void _toJavaExpression(XIntLiteral expr, ITreeAppendable b) {
-		b.append(Integer.toString(expr.getValue()));
+	public void _toJavaExpression(XNumberLiteral expr, ITreeAppendable b) {
+		JvmTypeReference type = getTypeProvider().getType(expr);
+		if(getTypeReferences().is(type, BigInteger.class)) {
+			b.append("new ").append(type.getType()).append("(\"")
+				.append(numberLiterals.getDigits(expr)).append("\", ")
+				.append("" + numberLiterals.getBase(expr))
+				.append(")");
+		} else if(getTypeReferences().is(type, BigDecimal.class)) {			
+			b.append("new ").append(type.getType()).append("(\"")
+				.append(numberLiterals.getDigits(expr)).append("\")");
+		} else {
+			b.append(expr.getValue());
+		}
 	}
 	
-	public void _toJavaStatement(XIntLiteral expr, ITreeAppendable b, boolean isReferenced) {
+	public void _toJavaStatement(XNumberLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
 	}
 
@@ -112,11 +137,15 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XBooleanLiteral
 			|| expr instanceof XStringLiteral
-			|| expr instanceof XIntLiteral
 			|| expr instanceof XTypeLiteral
 			|| expr instanceof XClosure
 			|| expr instanceof XNullLiteral)
 			return false;
+		if(expr instanceof XNumberLiteral) {
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			return getTypeReferences().is(expectedType, BigInteger.class) ||
+					getTypeReferences().is(expectedType, BigDecimal.class);
+		}
 		return super.isVariableDeclarationRequired(expr,b);
 	}
 }

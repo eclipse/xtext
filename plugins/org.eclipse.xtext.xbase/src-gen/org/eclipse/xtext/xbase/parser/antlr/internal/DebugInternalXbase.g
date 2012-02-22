@@ -222,7 +222,7 @@ ruleXPrimaryExpression :
 ruleXLiteral :
 	ruleXClosure |
 	ruleXBooleanLiteral |
-	ruleXIntLiteral |
+	ruleXNumberLiteral |
 	ruleXNullLiteral |
 	ruleXStringLiteral |
 	ruleXTypeLiteral
@@ -428,9 +428,9 @@ ruleXNullLiteral :
 	'null'
 ;
 
-// Rule XIntLiteral
-ruleXIntLiteral :
-	RULE_INT
+// Rule XNumberLiteral
+ruleXNumberLiteral :
+	ruleNumber
 ;
 
 // Rule XStringLiteral
@@ -483,6 +483,14 @@ ruleQualifiedName :
 		'.'
 		) => '.' ) ruleValidID
 	)*
+;
+
+// Rule Number
+ruleNumber :
+	RULE_HEX |
+	RULE_DECIMAL (
+		'.' RULE_DECIMAL
+	)?
 ;
 
 // Rule JvmTypeReference
@@ -551,6 +559,41 @@ ruleValidID :
 	RULE_ID
 ;
 
+RULE_HEX :
+	(
+		'0x' |
+		'0X'
+	) (
+		'0' .. '9' |
+		'a' .. 'f' |
+		'A' .. 'F'
+	)+ (
+		'l' |
+		'L'
+	)?
+;
+
+RULE_DECIMAL :
+	'0' .. '9'+ (
+		(
+			'e' |
+			'E'
+		) (
+			'+' |
+			'-'
+		)? '0' .. '9'+
+	)? (
+		'l' |
+		'L' |
+		'd' |
+		'D' |
+		'f' |
+		'F' |
+		'b' |
+		'B'
+	)?
+;
+
 RULE_ID :
 	'^'? (
 		'a' .. 'z' |
@@ -564,10 +607,6 @@ RULE_ID :
 		'_' |
 		'0' .. '9'
 	)*
-;
-
-RULE_INT :
-	'0' .. '9'+
 ;
 
 RULE_STRING :
