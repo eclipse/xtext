@@ -261,7 +261,7 @@ public abstract class AbstractTrace implements ITrace {
 		};
 	}
 
-	public Iterable<ILocationInResource> getAllLocations() {
+	public Iterable<ILocationInResource> getAllAssociatedLocations() {
 		Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
 		return toLocations(allTraceRegions);		
 	}

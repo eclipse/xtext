@@ -156,7 +156,7 @@ public class MarkerBasedTraceInformation implements ITraceInformation {
 				return null;
 			}
 			
-			public Iterable<ILocationInResource> getAllLocations() {
+			public Iterable<ILocationInResource> getAllAssociatedLocations() {
 				if (derivedResource instanceof IResource)
 					return getAllSourceInformation((IResource) derivedResource, null, null);
 				return Collections.emptyList();
