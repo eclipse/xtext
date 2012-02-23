@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,7 +27,19 @@ public class BaseTraceTest {
 		testMe = new AbstractTrace() {
 			
 			@Override
-			protected TraceRegion getRootTraceRegion() {
+			protected TraceRegion doGetRootTraceRegion() {
+				throw new UnsupportedOperationException();
+			}
+			
+			@Override
+			@NonNull
+			public IProject getLocalProject() {
+				throw new UnsupportedOperationException();
+			}
+			
+			@Override
+			@NonNull
+			public IStorage getLocalStorage() {
 				throw new UnsupportedOperationException();
 			}
 		};

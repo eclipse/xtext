@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.editor;
 
+import java.util.Iterator;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
@@ -21,8 +23,8 @@ import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
-import org.eclipse.xtext.generator.trace.ITraceToSource;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
@@ -99,8 +101,20 @@ public class XbaseEditor extends XtextEditor {
 	protected void doSetInput(IEditorInput input) throws CoreException {
 		try {
 			// TODO set javaResource to null if input is Xbase file that does not match the Java case (needs reversed trace data)
-			IResource resource = ResourceUtil.getResource(input);
-			ILocationInResource sourceInformation = traceInformation.getSingleSourceInformation(resource, languageInfo, null);
+			IFile resource = ResourceUtil.getFile(input);
+			ITrace trace = traceInformation.getTraceToSource(resource);
+			if (trace == null) {
+				super.doSetInput(input);
+				return;
+			}
+			Iterator<ILocationInResource> allLocations = trace.getAllAssociatedLocations().iterator();
+			ILocationInResource sourceInformation = null;
+			while(allLocations.hasNext() && sourceInformation == null) {
+				ILocationInResource candidate = allLocations.next();
+				if (languageInfo.equals(candidate.getLanguage())) {
+					sourceInformation = candidate;
+				}
+			}
 			if (sourceInformation == null) {
 				super.doSetInput(input);
 				return;
@@ -131,7 +145,7 @@ public class XbaseEditor extends XtextEditor {
 	@Override
 	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
 		if (expectJavaSelection > 0) {
-			ITraceToSource traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
+			ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
 			if (traceToSource != null) {
 				ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
 				if (bestSelection != null) {
@@ -142,9 +156,9 @@ public class XbaseEditor extends XtextEditor {
 							bestReveal = bestSelection;
 						}
 					}
-					ITextRegion fixedSelection = bestSelection.getRange();
+					ITextRegion fixedSelection = bestSelection.getTextRegion();
 					if (fixedSelection != null) {
-						ITextRegion fixedReveal = bestReveal.getRange();
+						ITextRegion fixedReveal = bestReveal.getTextRegion();
 						if (fixedReveal == null) {
 							fixedReveal = fixedSelection;
 						}

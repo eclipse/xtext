@@ -11,7 +11,9 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
@@ -24,6 +26,7 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.util.TextRegion;
 
@@ -71,20 +74,27 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 						IMember selectedMember = (IMember) javaElement;
 						IResource resource = selectedMember.getResource();
 						if (resource instanceof IFile) {
-							Iterable<ILocationInResource> sourceInformation = traceInformation.getAllSourceInformation(resource, null, new TextRegion(selectedWord.getOffset(), selectedWord.getLength()));
+							ITrace traceToSource = traceInformation.getTraceToSource((IStorage) resource);
+							if (traceToSource == null) {
+								return null;
+							}
+							Iterable<ILocationInResource> sourceInformation = traceToSource.getAllAssociatedLocations(new TextRegion(selectedWord.getOffset(), selectedWord.getLength()));
 							List<ILocationInResource> sourceInformationAsList = Lists.newArrayList(sourceInformation);
 							if (!canShowMultipleHyperlinks && sourceInformationAsList.size() > 1)
 								return null;
 							List<IHyperlink> result = Lists.newArrayListWithCapacity(sourceInformationAsList.size());
 							for(ILocationInResource source: sourceInformationAsList) {
 								try {
-									LinkToOrigin hyperlink = hyperlinkProvider.get();
-									hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
-									hyperlink.setURI(source.getResourceURI());
-									hyperlink.setHyperlinkText("Go to " + source.getResourceURI().lastSegment());
-									hyperlink.setTypeLabel("Navigate to source artifact");
-									hyperlink.setMember(selectedMember);
-									result.add(hyperlink);
+									URI resourceURI = source.getResourceURI();
+									if (resourceURI != null) {
+										LinkToOrigin hyperlink = hyperlinkProvider.get();
+										hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
+										hyperlink.setURI(resourceURI);
+										hyperlink.setHyperlinkText("Go to " + resourceURI.lastSegment());
+										hyperlink.setTypeLabel("Navigate to source artifact");
+										hyperlink.setMember(selectedMember);
+										result.add(hyperlink);
+									}
 								} catch(IllegalArgumentException e) { /* invalid URI - ignore */ }
 							}
 							if (result.isEmpty())
