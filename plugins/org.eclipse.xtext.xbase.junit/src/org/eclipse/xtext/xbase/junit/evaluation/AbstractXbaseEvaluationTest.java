@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.junit.evaluation;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -41,6 +42,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testIntLiteral_2() throws Exception {
 		assertEvaluatesTo(0x17, "0x17");
+	}
+	
+	@Test public void testIntLiteral_2a() throws Exception {
+		assertEvaluatesTo(0x17, "0X17");
 	}
 	
 	@Test public void testIntLiteral_3() throws Exception {
@@ -2066,23 +2071,30 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 
 	@Test public void testBigIntegerBitOperations() throws Exception {
 		assertEvaluatesTo(new BigInteger("1").or(new BigInteger("2")).and(new BigInteger("3")).not(), 
-				"new java.math.BigInteger('1').or(new java.math.BigInteger('2')).and(new java.math.BigInteger('3')).not()"); 
+				"1BI.or(2BI).and(3BI).not()"); 
 	}
 
 	@Test public void testBigIntegerArithmetics() throws Exception {
 		BigInteger x = new BigInteger("2");
 		assertEvaluatesTo(x.negate().add(x.multiply(x).divide(x).mod(x)), 
-				"{ val x=new java.math.BigInteger('2'); -x+x*x/x%x}"); 
+				"{ val x=2BI; -x+x*x/x%x }"); 
 	}
 
 	@Test public void testDoubleArithmetics() throws Exception {
-		assertEvaluatesTo(-(2.+2.*2./2.), "{ val x = Double::parseDouble('2'); -(x+x*x/x) }"); 
+		assertEvaluatesTo(-(2.+2.*2./2.), "-(2d+2d*2d/2d)"); 
 	}
 	
 	@Test public void testBigDecimalArithmetics() throws Exception {
 		BigDecimal x = new BigDecimal("2");
 		assertEvaluatesTo(x.negate().add(x.multiply(x).divide(x)), 
-				"{ val x=new java.math.BigDecimal('2'); -x+x*x/x }"); 
+				"-2bd+2bd*2bd/2bd"); 
+	}
+	
+	@Test public void testBigDecimalDivide() throws Exception {
+		BigDecimal x = new BigDecimal("1");
+		BigDecimal y = new BigDecimal("3");
+		assertEvaluatesTo(x.divide(y, MathContext.DECIMAL128), 
+				"1BD/3BD"); 
 	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
