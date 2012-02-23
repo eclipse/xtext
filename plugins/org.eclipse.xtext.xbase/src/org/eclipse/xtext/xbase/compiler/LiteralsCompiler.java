@@ -98,7 +98,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 			b.append("new ").append(type.getType()).append("(\"")
 				.append(numberLiterals.getDigits(expr)).append("\")");
 		} else {
-			b.append(expr.getValue());
+			b.append(numberLiterals.toJavaLiteral(expr));
 		}
 	}
 	

@@ -10,6 +10,9 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -528,27 +531,27 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testNumberLiteral_1() throws Exception {
-		XExpression expression = expression("1l.2b");
+		XExpression expression = expression("1l.2bd");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
 	}
 
 	@Test public void testNumberLiteral_3() throws Exception {
-		XExpression expression = expression("1e20d.2b");
+		XExpression expression = expression("1e20d.2bd");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
 	}
 
 	@Test public void testNumberLiteral_4() throws Exception {
-		XExpression expression = expression("1.0e20b");
+		XExpression expression = expression("1.0e20bd");
 		helper.assertNoIssues(expression);
 	}
 
 	@Test public void testNumberLiteral_5() throws Exception {
-		XExpression expression = expression("12345678901234567890123456789012345678901234567890b");
+		XExpression expression = expression("1234567890_1234567890_1234567890_1234567890_1234567890BI");
 		helper.assertNoIssues(expression);
 	}
 
 	@Test public void testNumberLiteral_6() throws Exception {
-		XExpression expression = expression("12345678901234567890123456789012345678901234567890l");
+		XExpression expression = expression("12345678901234567890123456789012345678901234567890L");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
 	}
 	
@@ -562,4 +565,34 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoIssues(expression);
 	}
 
+	@Test public void testNumberLiteral_9() throws Exception {
+		XExpression expression = expression("0xffffffff");
+		helper.assertNoIssues(expression);
+	}
+
+	@Test public void testNumberLiteral_10() throws Exception {
+		XExpression expression = expression(Integer.toString(Integer.MAX_VALUE));
+		helper.assertNoIssues(expression);
+	}
+
+	@Test public void testNumberLiteral_11() throws Exception {
+		XExpression expression = expression(Long.toString(((long) Integer.MAX_VALUE) + 1));
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
+
+	@Test public void testNumberLiteral_12() throws Exception {
+		XExpression expression = expression("0xffffffffffffffff#l");
+		helper.assertNoIssues(expression);
+	}
+
+	@Test public void testNumberLiteral_13() throws Exception {
+		XExpression expression = expression(Long.toString(Long.MAX_VALUE) + "L");
+		helper.assertNoIssues(expression);
+	}
+
+	@Test public void testNumberLiteral_14() throws Exception {
+		XExpression expression = expression(new BigInteger(Long.toString(Long.MAX_VALUE))
+			.add(new BigInteger("1")).toString(10) + "L");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
 }
