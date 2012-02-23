@@ -1,8 +1,10 @@
 package org.eclipse.xtext.common.types.shared.jdt38;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.ui.IEditorDescriptor;
@@ -13,6 +15,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
@@ -71,7 +74,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	
 	public IEditorDescriptor findXbaseEditor(IEditorInput editorInput) {
 		try {
-			IResource resource = ResourceUtil.getResource(editorInput);
+			IFile resource = ResourceUtil.getFile(editorInput);
 			if (resource == null)
 				return null;
 			String favoriteEditor = resource.getPersistentProperty(IDE.EDITOR_KEY);
@@ -82,17 +85,21 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			if (decision == Decision.FORCE_JAVA) {
 				return null;
 			}
-			ILocationInResource sourceInformation = traceInformation.getSingleSourceInformation(resource, null, null);
-			if (sourceInformation != null) {
-				IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry
-						.getResourceServiceProvider(sourceInformation.getResourceURI());
-				if (serviceProvider != null) {
-					XtextEditorInfo editorInfo = serviceProvider.get(XtextEditorInfo.class);
-					if (editorInfo != null) {
-						IEditorRegistry editorRegistry = workbench.getEditorRegistry();
-						IEditorDescriptor result = editorRegistry.findEditor(editorInfo.getEditorId());
-						// null is ok
-						return result;
+			ITrace traceToSource = traceInformation.getTraceToSource(resource);
+			if (traceToSource != null) {
+				Iterator<ILocationInResource> sourceInformationIterator = traceToSource.getAllAssociatedLocations().iterator();
+				if (sourceInformationIterator.hasNext()) {
+					ILocationInResource sourceInformation = sourceInformationIterator.next();
+					IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry
+							.getResourceServiceProvider(sourceInformation.getResourceURI());
+					if (serviceProvider != null) {
+						XtextEditorInfo editorInfo = serviceProvider.get(XtextEditorInfo.class);
+						if (editorInfo != null) {
+							IEditorRegistry editorRegistry = workbench.getEditorRegistry();
+							IEditorDescriptor result = editorRegistry.findEditor(editorInfo.getEditorId());
+							// null is ok
+							return result;
+						}
 					}
 				}
 			}

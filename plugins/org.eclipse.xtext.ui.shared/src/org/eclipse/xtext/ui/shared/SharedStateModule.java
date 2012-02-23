@@ -13,7 +13,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.trace.MarkerBasedTraceInformation;
+import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -64,7 +64,7 @@ public class SharedStateModule extends AbstractGenericModule {
 	 * @since 2.3
 	 */
 	public Class<? extends ITraceInformation> bindTraceInformation() {
-		return MarkerBasedTraceInformation.class;
+		return FileBasedTraceInformation.class;
 	}
 	
 	/**

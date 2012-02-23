@@ -18,12 +18,17 @@ public class OffsetBasedLocationInResource extends AbstractLocationInResource {
 	private final String projectName;
 	private final int offset;
 	private final int length;
+	private final int lineNumber;
+	private final int endLineNumber;
 	
-	public OffsetBasedLocationInResource(int offset, int length, URI resourceURI,
-			String projectName, AbstractTrace trace) {
+	public OffsetBasedLocationInResource(
+			int offset, int length, int lineNumber, int endLineNumber, 
+			URI resourceURI, String projectName, AbstractTrace trace) {
 		super(trace);
 		this.offset = offset;
 		this.length = length;
+		this.lineNumber = lineNumber;
+		this.endLineNumber = endLineNumber;
 		this.resourceURI = resourceURI;
 		this.projectName = projectName;
 	}
@@ -46,6 +51,16 @@ public class OffsetBasedLocationInResource extends AbstractLocationInResource {
 	@Override
 	protected int getLength() {
 		return length;
+	}
+	
+	@Override
+	protected int getLineNumber() {
+		return lineNumber;
+	}
+	
+	@Override
+	protected int getEndLineNumber() {
+		return endLineNumber;
 	}
 
 }

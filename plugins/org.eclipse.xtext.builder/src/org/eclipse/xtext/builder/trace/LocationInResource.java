@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 import com.google.inject.Inject;
 
@@ -67,7 +67,7 @@ public class LocationInResource implements ILocationInResource {
 		return project;
 	}
 
-	public ITextRegion getRange() {
+	public ITextRegionWithLineInformation getTextRegion() {
 		return null;
 	}
 
