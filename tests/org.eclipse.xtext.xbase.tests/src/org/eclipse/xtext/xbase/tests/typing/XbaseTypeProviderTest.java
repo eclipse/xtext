@@ -166,7 +166,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testNumberLiteral_3() throws Exception {
-		assertResolvedType(Long.TYPE.getName(), "0x42l");
+		assertResolvedType(Long.TYPE.getName(), "0x42#l");
 	}
 
 	@Test public void testNumberLiteral_4() throws Exception {
@@ -222,29 +222,33 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testNumberLiteral_17() throws Exception {
-		assertResolvedType(BigInteger.class.getName(), "1234567890123456789012345678901234567890b");
+		assertResolvedType(BigInteger.class.getName(), "1234567890123456789012345678901234567890bi");
+	}
+
+	@Test public void testNumberLiteral_17a() throws Exception {
+		assertResolvedType(BigInteger.class.getName(), "0x1234567890123456789012345678901234567890#bi");
 	}
 
 	@Test public void testNumberLiteral_18() throws Exception {
-		assertResolvedType(BigDecimal.class.getName(), "1.0b");
+		assertResolvedType(BigDecimal.class.getName(), "1.0bD");
 	}
 
 	@Test public void testNumberLiteral_19() throws Exception {
-		assertResolvedType(BigDecimal.class.getName(), "1.0E10b");
+		assertResolvedType(BigDecimal.class.getName(), "1.0E10Bd");
 	}
 
 	@Test public void testNumberLiteral_20() throws Exception {
-		assertResolvedType(BigDecimal.class.getName(), "1.0e-10b");
+		assertResolvedType(BigDecimal.class.getName(), "1.0e-10bd");
 	}
 
 	@Test public void testNumberLiteral_21() throws Exception {
-		assertResolvedType(BigDecimal.class.getName(), "1.0E+10b");
+		assertResolvedType(BigDecimal.class.getName(), "1.0E+10BD");
 	}
 
 	@Test public void testNumberLiteral_22() throws Exception {
-		assertResolvedType(BigDecimal.class.getName(), "1E+10b");
+		assertResolvedType(BigDecimal.class.getName(), "1E+10BD");
 	}
-
+	
 	@Test public void testNumberLiteral_23() throws Exception {
 		assertResolvedType(Double.TYPE.getName(), "1E-10");
 	}

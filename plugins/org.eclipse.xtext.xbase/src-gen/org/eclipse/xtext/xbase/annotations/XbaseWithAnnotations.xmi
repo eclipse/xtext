@@ -1420,10 +1420,26 @@
             <left value="A"/>
             <right value="F"/>
           </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
         </elements>
-        <elements xsi:type="xtext:Alternatives" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="l"/>
-          <elements xsi:type="xtext:Keyword" value="L"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="#"/>
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="B"/>
+              </elements>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="i"/>
+                <elements xsi:type="xtext:Keyword" value="I"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="l"/>
+              <elements xsi:type="xtext:Keyword" value="L"/>
+            </elements>
+          </elements>
         </elements>
       </alternatives>
     </rules>
@@ -1432,9 +1448,16 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:CharacterRange" cardinality="+">
+        <elements xsi:type="xtext:CharacterRange">
           <left value="0"/>
           <right value="9"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="0"/>
+            <right value="9"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Alternatives">
@@ -1445,20 +1468,39 @@
             <elements xsi:type="xtext:Keyword" value="+"/>
             <elements xsi:type="xtext:Keyword" value="-"/>
           </elements>
-          <elements xsi:type="xtext:CharacterRange" cardinality="+">
+          <elements xsi:type="xtext:CharacterRange">
             <left value="0"/>
             <right value="9"/>
           </elements>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:CharacterRange">
+              <left value="0"/>
+              <right value="9"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="_"/>
+          </elements>
         </elements>
         <elements xsi:type="xtext:Alternatives" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="l"/>
-          <elements xsi:type="xtext:Keyword" value="L"/>
-          <elements xsi:type="xtext:Keyword" value="d"/>
-          <elements xsi:type="xtext:Keyword" value="D"/>
-          <elements xsi:type="xtext:Keyword" value="f"/>
-          <elements xsi:type="xtext:Keyword" value="F"/>
-          <elements xsi:type="xtext:Keyword" value="b"/>
-          <elements xsi:type="xtext:Keyword" value="B"/>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="b"/>
+              <elements xsi:type="xtext:Keyword" value="B"/>
+            </elements>
+            <elements xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="i"/>
+              <elements xsi:type="xtext:Keyword" value="I"/>
+              <elements xsi:type="xtext:Keyword" value="d"/>
+              <elements xsi:type="xtext:Keyword" value="D"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="l"/>
+            <elements xsi:type="xtext:Keyword" value="L"/>
+            <elements xsi:type="xtext:Keyword" value="d"/>
+            <elements xsi:type="xtext:Keyword" value="D"/>
+            <elements xsi:type="xtext:Keyword" value="f"/>
+            <elements xsi:type="xtext:Keyword" value="F"/>
+          </elements>
         </elements>
       </alternatives>
     </rules>

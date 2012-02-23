@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -35,36 +37,65 @@ public class NumberLiterals {
 			return 10;
 	}
 
-	protected char getLastChar(XNumberLiteral literal) {
-		return Character.toLowerCase(literal.getValue().charAt(literal.getValue().length() - 1));
-	}
-
-	public String getDigits(XNumberLiteral literal) {
-		String value = literal.getValue();
-		int length = value.length();
-		char lastChar = getLastChar(literal);
-		switch (getBase(literal)) {
-			case 8:
-				if (lastChar == 'l')
-					return value.substring(1, length - 1);
-				else
-					return value.substring(1, length);
-			case 10:
-				if (lastChar == 'l' || lastChar == 'd' || lastChar == 'f' || lastChar == 'b')
-					return value.substring(0, length - 1);
-				else
-					return value;
+	protected String getTypeQualifier(XNumberLiteral literal) {
+		String lowerCase = literal.getValue().toLowerCase();
+		switch(getBase(literal)) {
 			case 16:
-				if (lastChar == 'l')
-					return value.substring(2, length - 1);
-				else
-					return value.substring(2, length);
+				int index = lowerCase.indexOf('#');
+				if(index != -1) 
+					return lowerCase.substring(index + 1);
+				else 
+					return "";
+			case 10:
+			case 8:
+				if(lowerCase.endsWith("bi") || lowerCase.endsWith("bd"))
+					return lowerCase.substring(lowerCase.length()-2);
+				char lastChar = lowerCase.charAt(literal.getValue().length()-1);
+				switch(lastChar) {
+					case 'l':
+					case 'd':
+					case 'f':
+						return Character.toString(lastChar);
+					default: 
+						return "";
+				}
 			default:
 				throw new IllegalArgumentException("Invalid number literal base " + getBase(literal));
 		}
 	}
 
-	public boolean isFloatingPoint(XNumberLiteral literal) {
+	public String toJavaLiteral(XNumberLiteral literal) {
+		if(getJavaType(literal).isPrimitive())
+			return literal.getValue().replace("_", "").replace("#", "");
+		else 
+			return null;
+	}
+	
+	public String getDigits(XNumberLiteral literal) {
+		return getXbaseDigits(literal).replace("_", "");
+	}
+	
+	protected String getXbaseDigits(XNumberLiteral literal) {
+		String value = literal.getValue();
+		int length = value.length();
+		String typeQualifier = getTypeQualifier(literal);
+		switch (getBase(literal)) {
+			case 8:
+				return value.substring(1, length - typeQualifier.length());
+			case 10:
+				return value.substring(0, length - typeQualifier.length());
+			case 16:
+				if(equal("", typeQualifier)) 
+					return value.substring(2, length - typeQualifier.length());
+				else 
+					return value.substring(2, length - typeQualifier.length()-1);
+			default:
+				throw new IllegalArgumentException("Invalid number literal base " + getBase(literal));
+		}
+	}
+	
+
+	protected boolean isFloatingPoint(XNumberLiteral literal) {
 		if (literal.getValue().indexOf('.') != -1) {
 			return true;
 		}
@@ -74,49 +105,58 @@ public class NumberLiterals {
 			case 16:
 				return false;
 			case 10:
-				char lastChar = getLastChar(literal);
-				return lowerCaseValue.indexOf('e') != -1 || lastChar == 'd' || lastChar == 'f';
+				if(lowerCaseValue.indexOf('e') != -1)
+					return true;
+				char lastChar = lowerCaseValue.charAt(literal.getValue().length()-1);
+				return lastChar == 'd' || lastChar == 'f';
 			default:
 				throw new IllegalArgumentException("Invalid number literal base " + getBase(literal));
 		}
 	}
 	
-	protected Class<? extends Number> getExplicitJavaType(XNumberLiteral literal, char lastChar) {
-		if(getBase(literal)==16) {
-			if(lastChar == 'l') 
-				return Long.TYPE; 
-		} else {
-			switch(lastChar) {
-				case 'd': return Double.TYPE;
-				case 'f': return Float.TYPE;
-				case 'l': return Long.TYPE;
-			}
-		}
-		return null;
+	protected Class<? extends Number> getExplicitJavaType(XNumberLiteral literal) {
+		String typeQualifier = getTypeQualifier(literal);
+		if(equal("", typeQualifier))
+			return null;
+		else if (equal("f", typeQualifier))
+			return Float.TYPE;
+		else if (equal("l", typeQualifier))
+			return Long.TYPE;
+		else if (equal("d", typeQualifier))
+			return Double.TYPE;
+		else if (equal("bi", typeQualifier))
+			return BigInteger.class;
+		else if (equal("bd", typeQualifier))
+			return BigDecimal.class;
+		else
+			throw new IllegalArgumentException("Invalid type qualifier " + typeQualifier);
 	}
 	
 	public Class<? extends Number> getJavaType(XNumberLiteral literal) {
-		char lastChar = getLastChar(literal);
- 		Class<? extends Number> explicitType = getExplicitJavaType(literal, lastChar);
-		if(explicitType != null)
-			return explicitType;
-		else {
-			if(lastChar == 'b')
-				return (isFloatingPoint(literal)) ? BigDecimal.class : BigInteger.class;
-			else 
-				return (isFloatingPoint(literal)) ? Double.TYPE : Integer.TYPE;
-		}
+ 		Class<? extends Number> explicitType = getExplicitJavaType(literal);
+		return (explicitType == null) 
+			? (isFloatingPoint(literal)) ? Double.TYPE : Integer.TYPE
+			: explicitType;
 	}
 
 	public Number numberValue(XNumberLiteral literal, Class<? extends Number> numberType) {
-		if(numberType == Float.TYPE || numberType == Float.class)
-			return Float.parseFloat(getDigits(literal));
+		if(numberType == Integer.TYPE || numberType == Integer.class) {
+			BigInteger asBigInt = toBigInteger(literal);
+			BigInteger shiftRight = asBigInt.shiftRight(32);
+			if(shiftRight.getLowestSetBit() != -1 || asBigInt.testBit(31) && getBase(literal) == 10) 
+				throw new NumberFormatException("Integer literal is out of range: " + literal.getValue());
+			return asBigInt.intValue();
+		}
 		else if(numberType == Double.TYPE || numberType == Double.class)
 			return Double.parseDouble(getDigits(literal));
-		else if(numberType == Long.TYPE || numberType == Long.class)
-			return Long.parseLong(getDigits(literal), getBase(literal));
-		else if(numberType == Integer.TYPE || numberType == Integer.class)
-			return Integer.parseInt(getDigits(literal), getBase(literal));
+		else if(numberType == Long.TYPE || numberType == Long.class) {
+			BigInteger asBigInt = toBigInteger(literal);
+			BigInteger shiftRight = asBigInt.shiftRight(64);
+			if(shiftRight.getLowestSetBit() != -1 || asBigInt.testBit(63) && getBase(literal) == 10) 
+				throw new NumberFormatException("Long literal is out of range: " + literal.getValue());
+			return asBigInt.longValue();
+		} else if(numberType == Float.TYPE || numberType == Float.class)
+			return Float.parseFloat(getDigits(literal));
 		else if(numberType == BigInteger.class)
 			return toBigInteger(literal);
 		else if(numberType == BigDecimal.class)
