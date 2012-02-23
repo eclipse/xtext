@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
-import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
  * Describes the location in a given file or storage. 
@@ -56,5 +56,5 @@ public interface ILocationInResource {
 	/**
 	 * @return the range in the resource. May be <code>null</code>.
 	 */
-	@Nullable ITextRegion getRange();
+	@Nullable ITextRegionWithLineInformation getTextRegion();
 }
