@@ -2495,13 +2495,14 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal HEX:
-	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+ ("l" | "L")?;
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F" | "_")+ ("#" (("b" | "B") ("i" | "I") | ("l" | "L")))?;
 	public TerminalRule getHEXRule() {
 		return gaXbaseWithAnnotations.getHEXRule();
 	} 
 
 	//terminal DECIMAL:
-	//	"0".."9"+ (("e" | "E") ("+" | "-")? "0".."9"+)? ("l" | "L" | "d" | "D" | "f" | "F" | "b" | "B")?;
+	//	"0".."9" ("0".."9" | "_")* (("e" | "E") ("+" | "-")? "0".."9" ("0".."9" | "_")*)? (("b" | "B") ("i" | "I" | "d" | "D")
+	//	| ("l" | "L" | "d" | "D" | "f" | "F"))?;
 	public TerminalRule getDECIMALRule() {
 		return gaXbaseWithAnnotations.getDECIMALRule();
 	} 

@@ -2836,8 +2836,8 @@ public class InternalXtendLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ ( 'l' | 'L' )? )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ ( 'l' | 'L' )?
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:12: ( '0x' | '0X' )
             int alt29=2;
@@ -2885,14 +2885,14 @@ public class InternalXtendLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt30=0;
             loop30:
             do {
                 int alt30=2;
                 int LA30_0 = input.LA(1);
 
-                if ( ((LA30_0>='0' && LA30_0<='9')||(LA30_0>='A' && LA30_0<='F')||(LA30_0>='a' && LA30_0<='f')) ) {
+                if ( ((LA30_0>='0' && LA30_0<='9')||(LA30_0>='A' && LA30_0<='F')||LA30_0=='_'||(LA30_0>='a' && LA30_0<='f')) ) {
                     alt30=1;
                 }
 
@@ -2901,7 +2901,7 @@ public class InternalXtendLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f') ) {
+            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='f') ) {
             	        input.consume();
 
             	    }
@@ -2923,25 +2923,76 @@ public class InternalXtendLexer extends Lexer {
                 cnt30++;
             } while (true);
 
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:54: ( 'l' | 'L' )?
-            int alt31=2;
-            int LA31_0 = input.LA(1);
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            int alt32=2;
+            int LA32_0 = input.LA(1);
 
-            if ( (LA31_0=='L'||LA31_0=='l') ) {
-                alt31=1;
+            if ( (LA32_0=='#') ) {
+                alt32=1;
             }
-            switch (alt31) {
+            switch (alt32) {
                 case 1 :
-                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
-                    if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
-                        input.consume();
+                    match('#'); 
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    int alt31=2;
+                    int LA31_0 = input.LA(1);
 
+                    if ( (LA31_0=='B'||LA31_0=='b') ) {
+                        alt31=1;
+                    }
+                    else if ( (LA31_0=='L'||LA31_0=='l') ) {
+                        alt31=2;
                     }
                     else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        recover(mse);
-                        throw mse;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 31, 0, input);
+
+                        throw nvae;
+                    }
+                    switch (alt31) {
+                        case 1 :
+                            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            {
+                            if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
+                                input.consume();
+
+                            }
+                            else {
+                                MismatchedSetException mse = new MismatchedSetException(null,input);
+                                recover(mse);
+                                throw mse;}
+
+                            if ( input.LA(1)=='I'||input.LA(1)=='i' ) {
+                                input.consume();
+
+                            }
+                            else {
+                                MismatchedSetException mse = new MismatchedSetException(null,input);
+                                recover(mse);
+                                throw mse;}
+
+
+                            }
+                            break;
+                        case 2 :
+                            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23827:84: ( 'l' | 'L' )
+                            {
+                            if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
+                                input.consume();
+
+                            }
+                            else {
+                                MismatchedSetException mse = new MismatchedSetException(null,input);
+                                recover(mse);
+                                throw mse;}
+
+
+                            }
+                            break;
+
+                    }
 
 
                     }
@@ -2965,49 +3016,53 @@ public class InternalXtendLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:14: ( ( '0' .. '9' )+ ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )? ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' | 'b' | 'B' )? )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:16: ( '0' .. '9' )+ ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )? ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' | 'b' | 'B' )?
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:14: ( '0' .. '9' ( '0' .. '9' | '_' )* ( ( 'e' | 'E' ) ( '+' | '-' )? '0' .. '9' ( '0' .. '9' | '_' )* )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:16: '0' .. '9' ( '0' .. '9' | '_' )* ( ( 'e' | 'E' ) ( '+' | '-' )? '0' .. '9' ( '0' .. '9' | '_' )* )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:16: ( '0' .. '9' )+
-            int cnt32=0;
-            loop32:
+            matchRange('0','9'); 
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:25: ( '0' .. '9' | '_' )*
+            loop33:
             do {
-                int alt32=2;
-                int LA32_0 = input.LA(1);
+                int alt33=2;
+                int LA33_0 = input.LA(1);
 
-                if ( ((LA32_0>='0' && LA32_0<='9')) ) {
-                    alt32=1;
+                if ( ((LA33_0>='0' && LA33_0<='9')||LA33_0=='_') ) {
+                    alt33=1;
                 }
 
 
-                switch (alt32) {
+                switch (alt33) {
             	case 1 :
-            	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:17: '0' .. '9'
+            	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
             	    {
-            	    matchRange('0','9'); 
+            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||input.LA(1)=='_' ) {
+            	        input.consume();
+
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
+
 
             	    }
             	    break;
 
             	default :
-            	    if ( cnt32 >= 1 ) break loop32;
-                        EarlyExitException eee =
-                            new EarlyExitException(32, input);
-                        throw eee;
+            	    break loop33;
                 }
-                cnt32++;
             } while (true);
 
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:28: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
-            int alt35=2;
-            int LA35_0 = input.LA(1);
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:41: ( ( 'e' | 'E' ) ( '+' | '-' )? '0' .. '9' ( '0' .. '9' | '_' )* )?
+            int alt36=2;
+            int LA36_0 = input.LA(1);
 
-            if ( (LA35_0=='E'||LA35_0=='e') ) {
-                alt35=1;
+            if ( (LA36_0=='E'||LA36_0=='e') ) {
+                alt36=1;
             }
-            switch (alt35) {
+            switch (alt36) {
                 case 1 :
-                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:29: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:42: ( 'e' | 'E' ) ( '+' | '-' )? '0' .. '9' ( '0' .. '9' | '_' )*
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -3018,14 +3073,14 @@ public class InternalXtendLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:39: ( '+' | '-' )?
-                    int alt33=2;
-                    int LA33_0 = input.LA(1);
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:52: ( '+' | '-' )?
+                    int alt34=2;
+                    int LA34_0 = input.LA(1);
 
-                    if ( (LA33_0=='+'||LA33_0=='-') ) {
-                        alt33=1;
+                    if ( (LA34_0=='+'||LA34_0=='-') ) {
+                        alt34=1;
                     }
-                    switch (alt33) {
+                    switch (alt34) {
                         case 1 :
                             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
                             {
@@ -3044,34 +3099,38 @@ public class InternalXtendLexer extends Lexer {
 
                     }
 
-                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:50: ( '0' .. '9' )+
-                    int cnt34=0;
-                    loop34:
+                    matchRange('0','9'); 
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:72: ( '0' .. '9' | '_' )*
+                    loop35:
                     do {
-                        int alt34=2;
-                        int LA34_0 = input.LA(1);
+                        int alt35=2;
+                        int LA35_0 = input.LA(1);
 
-                        if ( ((LA34_0>='0' && LA34_0<='9')) ) {
-                            alt34=1;
+                        if ( ((LA35_0>='0' && LA35_0<='9')||LA35_0=='_') ) {
+                            alt35=1;
                         }
 
 
-                        switch (alt34) {
+                        switch (alt35) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:51: '0' .. '9'
+                    	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
                     	    {
-                    	    matchRange('0','9'); 
+                    	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||input.LA(1)=='_' ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
+
 
                     	    }
                     	    break;
 
                     	default :
-                    	    if ( cnt34 >= 1 ) break loop34;
-                                EarlyExitException eee =
-                                    new EarlyExitException(34, input);
-                                throw eee;
+                    	    break loop35;
                         }
-                        cnt34++;
                     } while (true);
 
 
@@ -3080,18 +3139,45 @@ public class InternalXtendLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:64: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' | 'b' | 'B' )?
-            int alt36=2;
-            int LA36_0 = input.LA(1);
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:90: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            int alt37=3;
+            int LA37_0 = input.LA(1);
 
-            if ( (LA36_0=='B'||LA36_0=='D'||LA36_0=='F'||LA36_0=='L'||LA36_0=='b'||LA36_0=='d'||LA36_0=='f'||LA36_0=='l') ) {
-                alt36=1;
+            if ( (LA37_0=='B'||LA37_0=='b') ) {
+                alt37=1;
             }
-            switch (alt36) {
+            else if ( (LA37_0=='D'||LA37_0=='F'||LA37_0=='L'||LA37_0=='d'||LA37_0=='f'||LA37_0=='l') ) {
+                alt37=2;
+            }
+            switch (alt37) {
                 case 1 :
-                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:91: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
-                    if ( input.LA(1)=='B'||input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='b'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
+                    if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
+                        input.consume();
+
+                    }
+                    else {
+                        MismatchedSetException mse = new MismatchedSetException(null,input);
+                        recover(mse);
+                        throw mse;}
+
+                    if ( input.LA(1)=='D'||input.LA(1)=='I'||input.LA(1)=='d'||input.LA(1)=='i' ) {
+                        input.consume();
+
+                    }
+                    else {
+                        MismatchedSetException mse = new MismatchedSetException(null,input);
+                        recover(mse);
+                        throw mse;}
+
+
+                    }
+                    break;
+                case 2 :
+                    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23829:119: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    {
+                    if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
 
                     }
@@ -3126,13 +3212,13 @@ public class InternalXtendLexer extends Lexer {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23831:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23831:11: ( '^' )?
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA37_0=='^') ) {
-                alt37=1;
+            if ( (LA38_0=='^') ) {
+                alt38=1;
             }
-            switch (alt37) {
+            switch (alt38) {
                 case 1 :
                     // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23831:11: '^'
                     {
@@ -3153,17 +3239,17 @@ public class InternalXtendLexer extends Lexer {
                 throw mse;}
 
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23831:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
-            loop38:
+            loop39:
             do {
-                int alt38=2;
-                int LA38_0 = input.LA(1);
+                int alt39=2;
+                int LA39_0 = input.LA(1);
 
-                if ( (LA38_0=='$'||(LA38_0>='0' && LA38_0<='9')||(LA38_0>='A' && LA38_0<='Z')||LA38_0=='_'||(LA38_0>='a' && LA38_0<='z')) ) {
-                    alt38=1;
+                if ( (LA39_0=='$'||(LA39_0>='0' && LA39_0<='9')||(LA39_0>='A' && LA39_0<='Z')||LA39_0=='_'||(LA39_0>='a' && LA39_0<='z')) ) {
+                    alt39=1;
                 }
 
 
-                switch (alt38) {
+                switch (alt39) {
             	case 1 :
             	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
             	    {
@@ -3181,7 +3267,7 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop38;
+            	    break loop39;
                 }
             } while (true);
 
@@ -3205,41 +3291,41 @@ public class InternalXtendLexer extends Lexer {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA41_0=='\"') ) {
-                alt41=1;
+            if ( (LA42_0=='\"') ) {
+                alt42=1;
             }
-            else if ( (LA41_0=='\'') ) {
-                alt41=2;
+            else if ( (LA42_0=='\'') ) {
+                alt42=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 41, 0, input);
+                    new NoViableAltException("", 42, 0, input);
 
                 throw nvae;
             }
-            switch (alt41) {
+            switch (alt42) {
                 case 1 :
                     // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
                     // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
-                    loop39:
+                    loop40:
                     do {
-                        int alt39=3;
-                        int LA39_0 = input.LA(1);
+                        int alt40=3;
+                        int LA40_0 = input.LA(1);
 
-                        if ( (LA39_0=='\\') ) {
-                            alt39=1;
+                        if ( (LA40_0=='\\') ) {
+                            alt40=1;
                         }
-                        else if ( ((LA39_0>='\u0000' && LA39_0<='!')||(LA39_0>='#' && LA39_0<='[')||(LA39_0>=']' && LA39_0<='\uFFFF')) ) {
-                            alt39=2;
+                        else if ( ((LA40_0>='\u0000' && LA40_0<='!')||(LA40_0>='#' && LA40_0<='[')||(LA40_0>=']' && LA40_0<='\uFFFF')) ) {
+                            alt40=2;
                         }
 
 
-                        switch (alt39) {
+                        switch (alt40) {
                     	case 1 :
                     	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
@@ -3273,7 +3359,7 @@ public class InternalXtendLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop39;
+                    	    break loop40;
                         }
                     } while (true);
 
@@ -3286,20 +3372,20 @@ public class InternalXtendLexer extends Lexer {
                     {
                     match('\''); 
                     // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop40:
+                    loop41:
                     do {
-                        int alt40=3;
-                        int LA40_0 = input.LA(1);
+                        int alt41=3;
+                        int LA41_0 = input.LA(1);
 
-                        if ( (LA40_0=='\\') ) {
-                            alt40=1;
+                        if ( (LA41_0=='\\') ) {
+                            alt41=1;
                         }
-                        else if ( ((LA40_0>='\u0000' && LA40_0<='&')||(LA40_0>='(' && LA40_0<='[')||(LA40_0>=']' && LA40_0<='\uFFFF')) ) {
-                            alt40=2;
+                        else if ( ((LA41_0>='\u0000' && LA41_0<='&')||(LA41_0>='(' && LA41_0<='[')||(LA41_0>=']' && LA41_0<='\uFFFF')) ) {
+                            alt41=2;
                         }
 
 
-                        switch (alt40) {
+                        switch (alt41) {
                     	case 1 :
                     	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23833:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
@@ -3333,7 +3419,7 @@ public class InternalXtendLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop40;
+                    	    break loop41;
                         }
                     } while (true);
 
@@ -3366,29 +3452,29 @@ public class InternalXtendLexer extends Lexer {
             match("/*"); 
 
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23835:24: ( options {greedy=false; } : . )*
-            loop42:
+            loop43:
             do {
-                int alt42=2;
-                int LA42_0 = input.LA(1);
+                int alt43=2;
+                int LA43_0 = input.LA(1);
 
-                if ( (LA42_0=='*') ) {
-                    int LA42_1 = input.LA(2);
+                if ( (LA43_0=='*') ) {
+                    int LA43_1 = input.LA(2);
 
-                    if ( (LA42_1=='/') ) {
-                        alt42=2;
+                    if ( (LA43_1=='/') ) {
+                        alt43=2;
                     }
-                    else if ( ((LA42_1>='\u0000' && LA42_1<='.')||(LA42_1>='0' && LA42_1<='\uFFFF')) ) {
-                        alt42=1;
+                    else if ( ((LA43_1>='\u0000' && LA43_1<='.')||(LA43_1>='0' && LA43_1<='\uFFFF')) ) {
+                        alt43=1;
                     }
 
 
                 }
-                else if ( ((LA42_0>='\u0000' && LA42_0<=')')||(LA42_0>='+' && LA42_0<='\uFFFF')) ) {
-                    alt42=1;
+                else if ( ((LA43_0>='\u0000' && LA43_0<=')')||(LA43_0>='+' && LA43_0<='\uFFFF')) ) {
+                    alt43=1;
                 }
 
 
-                switch (alt42) {
+                switch (alt43) {
             	case 1 :
             	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23835:52: .
             	    {
@@ -3398,7 +3484,7 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop42;
+            	    break loop43;
                 }
             } while (true);
 
@@ -3426,17 +3512,17 @@ public class InternalXtendLexer extends Lexer {
             match("//"); 
 
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23837:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop43:
+            loop44:
             do {
-                int alt43=2;
-                int LA43_0 = input.LA(1);
+                int alt44=2;
+                int LA44_0 = input.LA(1);
 
-                if ( ((LA43_0>='\u0000' && LA43_0<='\t')||(LA43_0>='\u000B' && LA43_0<='\f')||(LA43_0>='\u000E' && LA43_0<='\uFFFF')) ) {
-                    alt43=1;
+                if ( ((LA44_0>='\u0000' && LA44_0<='\t')||(LA44_0>='\u000B' && LA44_0<='\f')||(LA44_0>='\u000E' && LA44_0<='\uFFFF')) ) {
+                    alt44=1;
                 }
 
 
-                switch (alt43) {
+                switch (alt44) {
             	case 1 :
             	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23837:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -3454,29 +3540,29 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop43;
+            	    break loop44;
                 }
             } while (true);
 
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23837:40: ( ( '\\r' )? '\\n' )?
-            int alt45=2;
-            int LA45_0 = input.LA(1);
+            int alt46=2;
+            int LA46_0 = input.LA(1);
 
-            if ( (LA45_0=='\n'||LA45_0=='\r') ) {
-                alt45=1;
+            if ( (LA46_0=='\n'||LA46_0=='\r') ) {
+                alt46=1;
             }
-            switch (alt45) {
+            switch (alt46) {
                 case 1 :
                     // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23837:41: ( '\\r' )? '\\n'
                     {
                     // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23837:41: ( '\\r' )?
-                    int alt44=2;
-                    int LA44_0 = input.LA(1);
+                    int alt45=2;
+                    int LA45_0 = input.LA(1);
 
-                    if ( (LA44_0=='\r') ) {
-                        alt44=1;
+                    if ( (LA45_0=='\r') ) {
+                        alt45=1;
                     }
-                    switch (alt44) {
+                    switch (alt45) {
                         case 1 :
                             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23837:41: '\\r'
                             {
@@ -3514,18 +3600,18 @@ public class InternalXtendLexer extends Lexer {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23839:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:23839:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt46=0;
-            loop46:
+            int cnt47=0;
+            loop47:
             do {
-                int alt46=2;
-                int LA46_0 = input.LA(1);
+                int alt47=2;
+                int LA47_0 = input.LA(1);
 
-                if ( ((LA46_0>='\t' && LA46_0<='\n')||LA46_0=='\r'||LA46_0==' ') ) {
-                    alt46=1;
+                if ( ((LA47_0>='\t' && LA47_0<='\n')||LA47_0=='\r'||LA47_0==' ') ) {
+                    alt47=1;
                 }
 
 
-                switch (alt46) {
+                switch (alt47) {
             	case 1 :
             	    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:
             	    {
@@ -3543,12 +3629,12 @@ public class InternalXtendLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt46 >= 1 ) break loop46;
+            	    if ( cnt47 >= 1 ) break loop47;
                         EarlyExitException eee =
-                            new EarlyExitException(46, input);
+                            new EarlyExitException(47, input);
                         throw eee;
                 }
-                cnt46++;
+                cnt47++;
             } while (true);
 
 
@@ -3584,9 +3670,9 @@ public class InternalXtendLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:1:8: ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt47=98;
-        alt47 = dfa47.predict(input);
-        switch (alt47) {
+        int alt48=98;
+        alt48 = dfa48.predict(input);
+        switch (alt48) {
             case 1 :
                 // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:1:10: T__19
                 {
@@ -4279,8 +4365,8 @@ public class InternalXtendLexer extends Lexer {
     }
 
 
-    protected DFA47 dfa47 = new DFA47(this);
-    static final String DFA47_eotS =
+    protected DFA48 dfa48 = new DFA48(this);
+    static final String DFA48_eotS =
         "\1\uffff\1\70\1\72\1\74\1\76\2\102\1\107\1\111\1\113\1\115\1\117"+
         "\1\122\1\125\1\uffff\4\102\1\uffff\1\102\3\uffff\1\102\2\uffff\2"+
         "\102\1\162\6\102\1\uffff\1\102\2\uffff\2\102\1\u0081\1\102\1\65"+
@@ -4303,9 +4389,9 @@ public class InternalXtendLexer extends Lexer {
         "\1\102\5\uffff\1\102\1\uffff\1\102\1\uffff\1\u0157\1\uffff\1\102"+
         "\2\uffff\2\102\1\uffff\2\102\1\u015d\1\uffff\1\u015e\2\102\1\u0161"+
         "\1\u0162\2\uffff\1\u0163\1\u0164\4\uffff";
-    static final String DFA47_eofS =
+    static final String DFA48_eofS =
         "\u0165\uffff";
-    static final String DFA47_minS =
+    static final String DFA48_minS =
         "\1\0\2\75\1\174\1\46\1\145\1\141\3\75\1\76\1\56\2\52\1\uffff\1\141"+
         "\1\164\2\141\1\uffff\1\146\3\uffff\1\154\2\uffff\1\150\1\145\1\72"+
         "\1\117\1\114\2\105\2\106\1\uffff\1\163\2\uffff\1\150\1\145\1\56"+
@@ -4332,7 +4418,7 @@ public class InternalXtendLexer extends Lexer {
         "\1\117\1\uffff\1\145\1\uffff\1\44\1\uffff\1\144\2\uffff\1\164\1"+
         "\157\1\uffff\1\156\1\122\1\44\1\uffff\1\44\1\163\1\146\2\44\2\uffff"+
         "\2\44\4\uffff";
-    static final String DFA47_maxS =
+    static final String DFA48_maxS =
         "\1\uffff\1\76\1\75\1\174\1\46\1\157\1\162\3\75\1\76\2\56\1\57\1"+
         "\uffff\1\141\1\167\1\157\1\165\1\uffff\1\156\3\uffff\1\170\2\uffff"+
         "\1\171\1\165\1\72\1\117\1\116\2\105\2\106\1\uffff\1\163\2\uffff"+
@@ -4360,7 +4446,7 @@ public class InternalXtendLexer extends Lexer {
         "\5\uffff\1\117\1\uffff\1\145\1\uffff\1\172\1\uffff\1\144\2\uffff"+
         "\1\164\1\157\1\uffff\1\156\1\122\1\172\1\uffff\1\172\1\163\1\146"+
         "\2\172\2\uffff\2\172\4\uffff";
-    static final String DFA47_acceptS =
+    static final String DFA48_acceptS =
         "\16\uffff\1\24\4\uffff\1\36\1\uffff\1\41\1\42\1\43\1\uffff\1\46"+
         "\1\47\11\uffff\1\64\1\uffff\1\67\1\70\10\uffff\1\134\1\uffff\1\135"+
         "\1\uffff\1\141\1\142\1\7\1\111\1\1\1\2\1\17\1\3\1\122\1\4\1\113"+
@@ -4377,12 +4463,12 @@ public class InternalXtendLexer extends Lexer {
         "\1\32\3\uffff\1\37\4\uffff\1\50\1\103\1\54\1\63\1\55\1\uffff\1\105"+
         "\1\uffff\1\74\1\uffff\1\107\1\uffff\1\34\1\35\2\uffff\1\44\3\uffff"+
         "\1\117\5\uffff\1\116\1\33\2\uffff\1\115\1\56\1\45\1\65";
-    static final String DFA47_specialS =
-        "\1\5\53\uffff\1\10\1\25\5\uffff\1\15\121\uffff\1\6\1\23\2\uffff"+
-        "\1\4\54\uffff\1\20\1\16\1\24\1\21\1\uffff\1\0\51\uffff\1\2\1\22"+
-        "\2\uffff\1\26\1\1\1\11\43\uffff\1\3\1\12\1\17\1\13\37\uffff\1\14"+
-        "\1\7\61\uffff}>";
-    static final String[] DFA47_transitionS = {
+    static final String DFA48_specialS =
+        "\1\0\53\uffff\1\2\1\15\5\uffff\1\24\121\uffff\1\10\1\22\2\uffff"+
+        "\1\4\54\uffff\1\11\1\3\1\23\1\1\1\uffff\1\26\51\uffff\1\5\1\17\2"+
+        "\uffff\1\25\1\6\1\14\43\uffff\1\7\1\16\1\21\1\13\37\uffff\1\20\1"+
+        "\12\61\uffff}>";
+    static final String[] DFA48_transitionS = {
             "\11\65\2\64\2\65\1\64\22\65\1\64\1\7\1\63\1\65\1\62\1\16\1\4"+
             "\1\54\1\32\1\31\1\14\1\2\1\27\1\12\1\13\1\15\1\57\11\60\1\35"+
             "\1\23\1\11\1\1\1\10\1\52\1\44\1\42\1\40\2\62\1\37\1\36\2\62"+
@@ -4795,34 +4881,34 @@ public class InternalXtendLexer extends Lexer {
             ""
     };
 
-    static final short[] DFA47_eot = DFA.unpackEncodedString(DFA47_eotS);
-    static final short[] DFA47_eof = DFA.unpackEncodedString(DFA47_eofS);
-    static final char[] DFA47_min = DFA.unpackEncodedStringToUnsignedChars(DFA47_minS);
-    static final char[] DFA47_max = DFA.unpackEncodedStringToUnsignedChars(DFA47_maxS);
-    static final short[] DFA47_accept = DFA.unpackEncodedString(DFA47_acceptS);
-    static final short[] DFA47_special = DFA.unpackEncodedString(DFA47_specialS);
-    static final short[][] DFA47_transition;
+    static final short[] DFA48_eot = DFA.unpackEncodedString(DFA48_eotS);
+    static final short[] DFA48_eof = DFA.unpackEncodedString(DFA48_eofS);
+    static final char[] DFA48_min = DFA.unpackEncodedStringToUnsignedChars(DFA48_minS);
+    static final char[] DFA48_max = DFA.unpackEncodedStringToUnsignedChars(DFA48_maxS);
+    static final short[] DFA48_accept = DFA.unpackEncodedString(DFA48_acceptS);
+    static final short[] DFA48_special = DFA.unpackEncodedString(DFA48_specialS);
+    static final short[][] DFA48_transition;
 
     static {
-        int numStates = DFA47_transitionS.length;
-        DFA47_transition = new short[numStates][];
+        int numStates = DFA48_transitionS.length;
+        DFA48_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA47_transition[i] = DFA.unpackEncodedString(DFA47_transitionS[i]);
+            DFA48_transition[i] = DFA.unpackEncodedString(DFA48_transitionS[i]);
         }
     }
 
-    class DFA47 extends DFA {
+    class DFA48 extends DFA {
 
-        public DFA47(BaseRecognizer recognizer) {
+        public DFA48(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 47;
-            this.eot = DFA47_eot;
-            this.eof = DFA47_eof;
-            this.min = DFA47_min;
-            this.max = DFA47_max;
-            this.accept = DFA47_accept;
-            this.special = DFA47_special;
-            this.transition = DFA47_transition;
+            this.decisionNumber = 48;
+            this.eot = DFA48_eot;
+            this.eof = DFA48_eof;
+            this.min = DFA48_min;
+            this.max = DFA48_max;
+            this.accept = DFA48_accept;
+            this.special = DFA48_special;
+            this.transition = DFA48_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
@@ -4832,416 +4918,416 @@ public class InternalXtendLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA47_187 = input.LA(1);
+                        int LA48_0 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_187=='\'') ) {s = 234;}
+                        if ( (LA48_0=='=') ) {s = 1;}
 
-                        else if ( ((LA47_187>='\u0000' && LA47_187<='&')||(LA47_187>='(' && LA47_187<='\u00AA')||(LA47_187>='\u00AC' && LA47_187<='\uFFFF')) ) {s = 235;}
+                        else if ( (LA48_0=='+') ) {s = 2;}
 
-                        else if ( (LA47_187=='\u00AB') ) {s = 188;}
+                        else if ( (LA48_0=='|') ) {s = 3;}
 
-                        else s = 236;
+                        else if ( (LA48_0=='&') ) {s = 4;}
+
+                        else if ( (LA48_0=='d') ) {s = 5;}
+
+                        else if ( (LA48_0=='c') ) {s = 6;}
+
+                        else if ( (LA48_0=='!') ) {s = 7;}
+
+                        else if ( (LA48_0=='>') ) {s = 8;}
+
+                        else if ( (LA48_0=='<') ) {s = 9;}
+
+                        else if ( (LA48_0=='-') ) {s = 10;}
+
+                        else if ( (LA48_0=='.') ) {s = 11;}
+
+                        else if ( (LA48_0=='*') ) {s = 12;}
+
+                        else if ( (LA48_0=='/') ) {s = 13;}
+
+                        else if ( (LA48_0=='%') ) {s = 14;}
+
+                        else if ( (LA48_0=='v') ) {s = 15;}
+
+                        else if ( (LA48_0=='s') ) {s = 16;}
+
+                        else if ( (LA48_0=='f') ) {s = 17;}
+
+                        else if ( (LA48_0=='p') ) {s = 18;}
+
+                        else if ( (LA48_0==';') ) {s = 19;}
+
+                        else if ( (LA48_0=='i') ) {s = 20;}
+
+                        else if ( (LA48_0=='{') ) {s = 21;}
+
+                        else if ( (LA48_0=='}') ) {s = 22;}
+
+                        else if ( (LA48_0==',') ) {s = 23;}
+
+                        else if ( (LA48_0=='e') ) {s = 24;}
+
+                        else if ( (LA48_0==')') ) {s = 25;}
+
+                        else if ( (LA48_0=='(') ) {s = 26;}
+
+                        else if ( (LA48_0=='t') ) {s = 27;}
+
+                        else if ( (LA48_0=='n') ) {s = 28;}
+
+                        else if ( (LA48_0==':') ) {s = 29;}
+
+                        else if ( (LA48_0=='F') ) {s = 30;}
+
+                        else if ( (LA48_0=='E') ) {s = 31;}
+
+                        else if ( (LA48_0=='B') ) {s = 32;}
+
+                        else if ( (LA48_0=='S') ) {s = 33;}
+
+                        else if ( (LA48_0=='A') ) {s = 34;}
+
+                        else if ( (LA48_0=='I') ) {s = 35;}
+
+                        else if ( (LA48_0=='@') ) {s = 36;}
+
+                        else if ( (LA48_0=='a') ) {s = 37;}
+
+                        else if ( (LA48_0=='[') ) {s = 38;}
+
+                        else if ( (LA48_0==']') ) {s = 39;}
+
+                        else if ( (LA48_0=='w') ) {s = 40;}
+
+                        else if ( (LA48_0=='r') ) {s = 41;}
+
+                        else if ( (LA48_0=='?') ) {s = 42;}
+
+                        else if ( (LA48_0=='o') ) {s = 43;}
+
+                        else if ( (LA48_0=='\'') ) {s = 44;}
+
+                        else if ( (LA48_0=='\u00BB') ) {s = 45;}
+
+                        else if ( (LA48_0=='\u00AB') ) {s = 46;}
+
+                        else if ( (LA48_0=='0') ) {s = 47;}
+
+                        else if ( ((LA48_0>='1' && LA48_0<='9')) ) {s = 48;}
+
+                        else if ( (LA48_0=='^') ) {s = 49;}
+
+                        else if ( (LA48_0=='$'||(LA48_0>='C' && LA48_0<='D')||(LA48_0>='G' && LA48_0<='H')||(LA48_0>='J' && LA48_0<='R')||(LA48_0>='T' && LA48_0<='Z')||LA48_0=='_'||LA48_0=='b'||(LA48_0>='g' && LA48_0<='h')||(LA48_0>='j' && LA48_0<='m')||LA48_0=='q'||LA48_0=='u'||(LA48_0>='x' && LA48_0<='z')) ) {s = 50;}
+
+                        else if ( (LA48_0=='\"') ) {s = 51;}
+
+                        else if ( ((LA48_0>='\t' && LA48_0<='\n')||LA48_0=='\r'||LA48_0==' ') ) {s = 52;}
+
+                        else if ( ((LA48_0>='\u0000' && LA48_0<='\b')||(LA48_0>='\u000B' && LA48_0<='\f')||(LA48_0>='\u000E' && LA48_0<='\u001F')||LA48_0=='#'||LA48_0=='\\'||LA48_0=='`'||(LA48_0>='~' && LA48_0<='\u00AA')||(LA48_0>='\u00AC' && LA48_0<='\u00BA')||(LA48_0>='\u00BC' && LA48_0<='\uFFFF')) ) {s = 53;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA47_234 = input.LA(1);
+                        int LA48_185 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_234=='\'') ) {s = 273;}
+                        if ( (LA48_185=='\r') ) {s = 186;}
 
-                        else if ( ((LA47_234>='\u0000' && LA47_234<='&')||(LA47_234>='(' && LA47_234<='\u00AA')||(LA47_234>='\u00AC' && LA47_234<='\uFFFF')) ) {s = 274;}
+                        else if ( (LA48_185=='\n') ) {s = 187;}
 
-                        else if ( (LA47_234=='\u00AB') ) {s = 188;}
+                        else if ( ((LA48_185>='\u0000' && LA48_185<='\t')||(LA48_185>='\u000B' && LA48_185<='\f')||(LA48_185>='\u000E' && LA48_185<='\uFFFF')) ) {s = 185;}
 
-                        else s = 236;
+                        else s = 188;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA47_229 = input.LA(1);
+                        int LA48_44 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_229=='\'') ) {s = 271;}
+                        if ( (LA48_44=='\'') ) {s = 131;}
 
-                        else if ( ((LA47_229>='\u0000' && LA47_229<='&')||(LA47_229>='(' && LA47_229<='\u00AA')||(LA47_229>='\u00AC' && LA47_229<='\uFFFF')) ) {s = 272;}
+                        else if ( ((LA48_44>='\u0000' && LA48_44<='&')||(LA48_44>='(' && LA48_44<='\uFFFF')) ) {s = 132;}
 
-                        else if ( (LA47_229=='\u00AB') ) {s = 232;}
-
-                        else s = 231;
+                        else s = 53;
 
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA47_271 = input.LA(1);
+                        int LA48_183 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA47_271>='\u0000' && LA47_271<='&')||(LA47_271>='(' && LA47_271<='\u00AA')||(LA47_271>='\u00AC' && LA47_271<='\uFFFF')) ) {s = 306;}
+                        if ( ((LA48_183>='\u0000' && LA48_183<='&')||(LA48_183>='(' && LA48_183<='\u00AA')||(LA48_183>='\u00AC' && LA48_183<='\uFFFF')) ) {s = 233;}
 
-                        else if ( (LA47_271=='\u00AB') ) {s = 232;}
+                        else if ( (LA48_183=='\u00AB') ) {s = 135;}
 
-                        else s = 231;
+                        else s = 136;
 
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA47_137 = input.LA(1);
+                        int LA48_137 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA47_137>='\u0000' && LA47_137<='\t')||(LA47_137>='\u000B' && LA47_137<='\f')||(LA47_137>='\u000E' && LA47_137<='\uFFFF')) ) {s = 185;}
+                        if ( ((LA48_137>='\u0000' && LA48_137<='\t')||(LA48_137>='\u000B' && LA48_137<='\f')||(LA48_137>='\u000E' && LA48_137<='\uFFFF')) ) {s = 185;}
 
-                        else if ( (LA47_137=='\r') ) {s = 186;}
+                        else if ( (LA48_137=='\r') ) {s = 186;}
 
-                        else if ( (LA47_137=='\n') ) {s = 187;}
+                        else if ( (LA48_137=='\n') ) {s = 187;}
 
                         else s = 188;
 
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA47_0 = input.LA(1);
+                        int LA48_229 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_0=='=') ) {s = 1;}
+                        if ( (LA48_229=='\'') ) {s = 271;}
 
-                        else if ( (LA47_0=='+') ) {s = 2;}
+                        else if ( ((LA48_229>='\u0000' && LA48_229<='&')||(LA48_229>='(' && LA48_229<='\u00AA')||(LA48_229>='\u00AC' && LA48_229<='\uFFFF')) ) {s = 272;}
 
-                        else if ( (LA47_0=='|') ) {s = 3;}
-
-                        else if ( (LA47_0=='&') ) {s = 4;}
-
-                        else if ( (LA47_0=='d') ) {s = 5;}
-
-                        else if ( (LA47_0=='c') ) {s = 6;}
-
-                        else if ( (LA47_0=='!') ) {s = 7;}
-
-                        else if ( (LA47_0=='>') ) {s = 8;}
-
-                        else if ( (LA47_0=='<') ) {s = 9;}
-
-                        else if ( (LA47_0=='-') ) {s = 10;}
-
-                        else if ( (LA47_0=='.') ) {s = 11;}
-
-                        else if ( (LA47_0=='*') ) {s = 12;}
-
-                        else if ( (LA47_0=='/') ) {s = 13;}
-
-                        else if ( (LA47_0=='%') ) {s = 14;}
-
-                        else if ( (LA47_0=='v') ) {s = 15;}
-
-                        else if ( (LA47_0=='s') ) {s = 16;}
-
-                        else if ( (LA47_0=='f') ) {s = 17;}
-
-                        else if ( (LA47_0=='p') ) {s = 18;}
-
-                        else if ( (LA47_0==';') ) {s = 19;}
-
-                        else if ( (LA47_0=='i') ) {s = 20;}
-
-                        else if ( (LA47_0=='{') ) {s = 21;}
-
-                        else if ( (LA47_0=='}') ) {s = 22;}
-
-                        else if ( (LA47_0==',') ) {s = 23;}
-
-                        else if ( (LA47_0=='e') ) {s = 24;}
-
-                        else if ( (LA47_0==')') ) {s = 25;}
-
-                        else if ( (LA47_0=='(') ) {s = 26;}
-
-                        else if ( (LA47_0=='t') ) {s = 27;}
-
-                        else if ( (LA47_0=='n') ) {s = 28;}
-
-                        else if ( (LA47_0==':') ) {s = 29;}
-
-                        else if ( (LA47_0=='F') ) {s = 30;}
-
-                        else if ( (LA47_0=='E') ) {s = 31;}
-
-                        else if ( (LA47_0=='B') ) {s = 32;}
-
-                        else if ( (LA47_0=='S') ) {s = 33;}
-
-                        else if ( (LA47_0=='A') ) {s = 34;}
-
-                        else if ( (LA47_0=='I') ) {s = 35;}
-
-                        else if ( (LA47_0=='@') ) {s = 36;}
-
-                        else if ( (LA47_0=='a') ) {s = 37;}
-
-                        else if ( (LA47_0=='[') ) {s = 38;}
-
-                        else if ( (LA47_0==']') ) {s = 39;}
-
-                        else if ( (LA47_0=='w') ) {s = 40;}
-
-                        else if ( (LA47_0=='r') ) {s = 41;}
-
-                        else if ( (LA47_0=='?') ) {s = 42;}
-
-                        else if ( (LA47_0=='o') ) {s = 43;}
-
-                        else if ( (LA47_0=='\'') ) {s = 44;}
-
-                        else if ( (LA47_0=='\u00BB') ) {s = 45;}
-
-                        else if ( (LA47_0=='\u00AB') ) {s = 46;}
-
-                        else if ( (LA47_0=='0') ) {s = 47;}
-
-                        else if ( ((LA47_0>='1' && LA47_0<='9')) ) {s = 48;}
-
-                        else if ( (LA47_0=='^') ) {s = 49;}
-
-                        else if ( (LA47_0=='$'||(LA47_0>='C' && LA47_0<='D')||(LA47_0>='G' && LA47_0<='H')||(LA47_0>='J' && LA47_0<='R')||(LA47_0>='T' && LA47_0<='Z')||LA47_0=='_'||LA47_0=='b'||(LA47_0>='g' && LA47_0<='h')||(LA47_0>='j' && LA47_0<='m')||LA47_0=='q'||LA47_0=='u'||(LA47_0>='x' && LA47_0<='z')) ) {s = 50;}
-
-                        else if ( (LA47_0=='\"') ) {s = 51;}
-
-                        else if ( ((LA47_0>='\t' && LA47_0<='\n')||LA47_0=='\r'||LA47_0==' ') ) {s = 52;}
-
-                        else if ( ((LA47_0>='\u0000' && LA47_0<='\b')||(LA47_0>='\u000B' && LA47_0<='\f')||(LA47_0>='\u000E' && LA47_0<='\u001F')||LA47_0=='#'||LA47_0=='\\'||LA47_0=='`'||(LA47_0>='~' && LA47_0<='\u00AA')||(LA47_0>='\u00AC' && LA47_0<='\u00BA')||(LA47_0>='\u00BC' && LA47_0<='\uFFFF')) ) {s = 53;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA47_133 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_133=='\'') ) {s = 183;}
-
-                        else if ( ((LA47_133>='\u0000' && LA47_133<='&')||(LA47_133>='(' && LA47_133<='\u00AA')||(LA47_133>='\u00AC' && LA47_133<='\uFFFF')) ) {s = 184;}
-
-                        else if ( (LA47_133=='\u00AB') ) {s = 135;}
-
-                        else s = 136;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
-                        int LA47_307 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_307=='\'') ) {s = 234;}
-
-                        else if ( ((LA47_307>='\u0000' && LA47_307<='&')||(LA47_307>='(' && LA47_307<='\u00AA')||(LA47_307>='\u00AC' && LA47_307<='\uFFFF')) ) {s = 235;}
-
-                        else if ( (LA47_307=='\u00AB') ) {s = 188;}
-
-                        else s = 236;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 8 : 
-                        int LA47_44 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_44=='\'') ) {s = 131;}
-
-                        else if ( ((LA47_44>='\u0000' && LA47_44<='&')||(LA47_44>='(' && LA47_44<='\uFFFF')) ) {s = 132;}
-
-                        else s = 53;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
-                        int LA47_235 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_235=='\'') ) {s = 234;}
-
-                        else if ( ((LA47_235>='\u0000' && LA47_235<='&')||(LA47_235>='(' && LA47_235<='\u00AA')||(LA47_235>='\u00AC' && LA47_235<='\uFFFF')) ) {s = 235;}
-
-                        else if ( (LA47_235=='\u00AB') ) {s = 188;}
-
-                        else s = 236;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 10 : 
-                        int LA47_272 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA47_272=='\'') ) {s = 229;}
-
-                        else if ( (LA47_272=='\u00AB') ) {s = 232;}
-
-                        else if ( ((LA47_272>='\u0000' && LA47_272<='&')||(LA47_272>='(' && LA47_272<='\u00AA')||(LA47_272>='\u00AC' && LA47_272<='\uFFFF')) ) {s = 230;}
+                        else if ( (LA48_229=='\u00AB') ) {s = 232;}
 
                         else s = 231;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 11 : 
-                        int LA47_274 = input.LA(1);
+                    case 6 : 
+                        int LA48_234 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_274=='\'') ) {s = 234;}
+                        if ( (LA48_234=='\'') ) {s = 273;}
 
-                        else if ( ((LA47_274>='\u0000' && LA47_274<='&')||(LA47_274>='(' && LA47_274<='\u00AA')||(LA47_274>='\u00AC' && LA47_274<='\uFFFF')) ) {s = 235;}
+                        else if ( ((LA48_234>='\u0000' && LA48_234<='&')||(LA48_234>='(' && LA48_234<='\u00AA')||(LA48_234>='\u00AC' && LA48_234<='\uFFFF')) ) {s = 274;}
 
-                        else if ( (LA47_274=='\u00AB') ) {s = 188;}
+                        else if ( (LA48_234=='\u00AB') ) {s = 188;}
+
+                        else s = 236;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA48_271 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA48_271>='\u0000' && LA48_271<='&')||(LA48_271>='(' && LA48_271<='\u00AA')||(LA48_271>='\u00AC' && LA48_271<='\uFFFF')) ) {s = 306;}
+
+                        else if ( (LA48_271=='\u00AB') ) {s = 232;}
+
+                        else s = 231;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA48_133 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_133=='\'') ) {s = 183;}
+
+                        else if ( ((LA48_133>='\u0000' && LA48_133<='&')||(LA48_133>='(' && LA48_133<='\u00AA')||(LA48_133>='\u00AC' && LA48_133<='\uFFFF')) ) {s = 184;}
+
+                        else if ( (LA48_133=='\u00AB') ) {s = 135;}
+
+                        else s = 136;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 9 : 
+                        int LA48_182 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_182=='\'') ) {s = 229;}
+
+                        else if ( ((LA48_182>='\u0000' && LA48_182<='&')||(LA48_182>='(' && LA48_182<='\u00AA')||(LA48_182>='\u00AC' && LA48_182<='\uFFFF')) ) {s = 230;}
+
+                        else if ( (LA48_182=='\u00AB') ) {s = 232;}
+
+                        else s = 231;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
+                        int LA48_307 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_307=='\'') ) {s = 234;}
+
+                        else if ( (LA48_307=='\u00AB') ) {s = 188;}
+
+                        else if ( ((LA48_307>='\u0000' && LA48_307<='&')||(LA48_307>='(' && LA48_307<='\u00AA')||(LA48_307>='\u00AC' && LA48_307<='\uFFFF')) ) {s = 235;}
+
+                        else s = 236;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 11 : 
+                        int LA48_274 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_274=='\'') ) {s = 234;}
+
+                        else if ( (LA48_274=='\u00AB') ) {s = 188;}
+
+                        else if ( ((LA48_274>='\u0000' && LA48_274<='&')||(LA48_274>='(' && LA48_274<='\u00AA')||(LA48_274>='\u00AC' && LA48_274<='\uFFFF')) ) {s = 235;}
 
                         else s = 236;
 
                         if ( s>=0 ) return s;
                         break;
                     case 12 : 
-                        int LA47_306 = input.LA(1);
+                        int LA48_235 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_306=='\'') ) {s = 229;}
+                        if ( (LA48_235=='\'') ) {s = 234;}
 
-                        else if ( (LA47_306=='\u00AB') ) {s = 232;}
+                        else if ( (LA48_235=='\u00AB') ) {s = 188;}
 
-                        else if ( ((LA47_306>='\u0000' && LA47_306<='&')||(LA47_306>='(' && LA47_306<='\u00AA')||(LA47_306>='\u00AC' && LA47_306<='\uFFFF')) ) {s = 230;}
-
-                        else s = 231;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 13 : 
-                        int LA47_51 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA47_51>='\u0000' && LA47_51<='\uFFFF')) ) {s = 132;}
-
-                        else s = 53;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 14 : 
-                        int LA47_183 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA47_183>='\u0000' && LA47_183<='&')||(LA47_183>='(' && LA47_183<='\u00AA')||(LA47_183>='\u00AC' && LA47_183<='\uFFFF')) ) {s = 233;}
-
-                        else if ( (LA47_183=='\u00AB') ) {s = 135;}
-
-                        else s = 136;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 15 : 
-                        int LA47_273 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA47_273>='\u0000' && LA47_273<='&')||(LA47_273>='(' && LA47_273<='\u00AA')||(LA47_273>='\u00AC' && LA47_273<='\uFFFF')) ) {s = 307;}
-
-                        else if ( (LA47_273=='\u00AB') ) {s = 188;}
+                        else if ( ((LA48_235>='\u0000' && LA48_235<='&')||(LA48_235>='(' && LA48_235<='\u00AA')||(LA48_235>='\u00AC' && LA48_235<='\uFFFF')) ) {s = 235;}
 
                         else s = 236;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 16 : 
-                        int LA47_182 = input.LA(1);
+                    case 13 : 
+                        int LA48_45 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_182=='\'') ) {s = 229;}
+                        if ( (LA48_45=='\'') ) {s = 133;}
 
-                        else if ( ((LA47_182>='\u0000' && LA47_182<='&')||(LA47_182>='(' && LA47_182<='\u00AA')||(LA47_182>='\u00AC' && LA47_182<='\uFFFF')) ) {s = 230;}
+                        else if ( ((LA48_45>='\u0000' && LA48_45<='&')||(LA48_45>='(' && LA48_45<='\u00AA')||(LA48_45>='\u00AC' && LA48_45<='\uFFFF')) ) {s = 134;}
 
-                        else if ( (LA47_182=='\u00AB') ) {s = 232;}
+                        else if ( (LA48_45=='\u00AB') ) {s = 135;}
+
+                        else s = 136;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 14 : 
+                        int LA48_272 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_272=='\'') ) {s = 229;}
+
+                        else if ( (LA48_272=='\u00AB') ) {s = 232;}
+
+                        else if ( ((LA48_272>='\u0000' && LA48_272<='&')||(LA48_272>='(' && LA48_272<='\u00AA')||(LA48_272>='\u00AC' && LA48_272<='\uFFFF')) ) {s = 230;}
+
+                        else s = 231;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 15 : 
+                        int LA48_230 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_230=='\'') ) {s = 229;}
+
+                        else if ( ((LA48_230>='\u0000' && LA48_230<='&')||(LA48_230>='(' && LA48_230<='\u00AA')||(LA48_230>='\u00AC' && LA48_230<='\uFFFF')) ) {s = 230;}
+
+                        else if ( (LA48_230=='\u00AB') ) {s = 232;}
+
+                        else s = 231;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 16 : 
+                        int LA48_306 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA48_306=='\'') ) {s = 229;}
+
+                        else if ( (LA48_306=='\u00AB') ) {s = 232;}
+
+                        else if ( ((LA48_306>='\u0000' && LA48_306<='&')||(LA48_306>='(' && LA48_306<='\u00AA')||(LA48_306>='\u00AC' && LA48_306<='\uFFFF')) ) {s = 230;}
 
                         else s = 231;
 
                         if ( s>=0 ) return s;
                         break;
                     case 17 : 
-                        int LA47_185 = input.LA(1);
+                        int LA48_273 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_185=='\r') ) {s = 186;}
+                        if ( ((LA48_273>='\u0000' && LA48_273<='&')||(LA48_273>='(' && LA48_273<='\u00AA')||(LA48_273>='\u00AC' && LA48_273<='\uFFFF')) ) {s = 307;}
 
-                        else if ( (LA47_185=='\n') ) {s = 187;}
+                        else if ( (LA48_273=='\u00AB') ) {s = 188;}
 
-                        else if ( ((LA47_185>='\u0000' && LA47_185<='\t')||(LA47_185>='\u000B' && LA47_185<='\f')||(LA47_185>='\u000E' && LA47_185<='\uFFFF')) ) {s = 185;}
-
-                        else s = 188;
+                        else s = 236;
 
                         if ( s>=0 ) return s;
                         break;
                     case 18 : 
-                        int LA47_230 = input.LA(1);
+                        int LA48_134 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_230=='\'') ) {s = 229;}
+                        if ( (LA48_134=='\'') ) {s = 133;}
 
-                        else if ( (LA47_230=='\u00AB') ) {s = 232;}
+                        else if ( (LA48_134=='\u00AB') ) {s = 135;}
 
-                        else if ( ((LA47_230>='\u0000' && LA47_230<='&')||(LA47_230>='(' && LA47_230<='\u00AA')||(LA47_230>='\u00AC' && LA47_230<='\uFFFF')) ) {s = 230;}
+                        else if ( ((LA48_134>='\u0000' && LA48_134<='&')||(LA48_134>='(' && LA48_134<='\u00AA')||(LA48_134>='\u00AC' && LA48_134<='\uFFFF')) ) {s = 134;}
 
-                        else s = 231;
+                        else s = 136;
 
                         if ( s>=0 ) return s;
                         break;
                     case 19 : 
-                        int LA47_134 = input.LA(1);
+                        int LA48_184 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_134=='\'') ) {s = 133;}
+                        if ( (LA48_184=='\'') ) {s = 133;}
 
-                        else if ( (LA47_134=='\u00AB') ) {s = 135;}
+                        else if ( ((LA48_184>='\u0000' && LA48_184<='&')||(LA48_184>='(' && LA48_184<='\u00AA')||(LA48_184>='\u00AC' && LA48_184<='\uFFFF')) ) {s = 134;}
 
-                        else if ( ((LA47_134>='\u0000' && LA47_134<='&')||(LA47_134>='(' && LA47_134<='\u00AA')||(LA47_134>='\u00AC' && LA47_134<='\uFFFF')) ) {s = 134;}
+                        else if ( (LA48_184=='\u00AB') ) {s = 135;}
 
                         else s = 136;
 
                         if ( s>=0 ) return s;
                         break;
                     case 20 : 
-                        int LA47_184 = input.LA(1);
+                        int LA48_51 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_184=='\'') ) {s = 133;}
+                        if ( ((LA48_51>='\u0000' && LA48_51<='\uFFFF')) ) {s = 132;}
 
-                        else if ( (LA47_184=='\u00AB') ) {s = 135;}
-
-                        else if ( ((LA47_184>='\u0000' && LA47_184<='&')||(LA47_184>='(' && LA47_184<='\u00AA')||(LA47_184>='\u00AC' && LA47_184<='\uFFFF')) ) {s = 134;}
-
-                        else s = 136;
+                        else s = 53;
 
                         if ( s>=0 ) return s;
                         break;
                     case 21 : 
-                        int LA47_45 = input.LA(1);
+                        int LA48_233 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_45=='\'') ) {s = 133;}
+                        if ( (LA48_233=='\'') ) {s = 133;}
 
-                        else if ( ((LA47_45>='\u0000' && LA47_45<='&')||(LA47_45>='(' && LA47_45<='\u00AA')||(LA47_45>='\u00AC' && LA47_45<='\uFFFF')) ) {s = 134;}
+                        else if ( ((LA48_233>='\u0000' && LA48_233<='&')||(LA48_233>='(' && LA48_233<='\u00AA')||(LA48_233>='\u00AC' && LA48_233<='\uFFFF')) ) {s = 134;}
 
-                        else if ( (LA47_45=='\u00AB') ) {s = 135;}
+                        else if ( (LA48_233=='\u00AB') ) {s = 135;}
 
                         else s = 136;
 
                         if ( s>=0 ) return s;
                         break;
                     case 22 : 
-                        int LA47_233 = input.LA(1);
+                        int LA48_187 = input.LA(1);
 
                         s = -1;
-                        if ( (LA47_233=='\'') ) {s = 133;}
+                        if ( (LA48_187=='\'') ) {s = 234;}
 
-                        else if ( (LA47_233=='\u00AB') ) {s = 135;}
+                        else if ( ((LA48_187>='\u0000' && LA48_187<='&')||(LA48_187>='(' && LA48_187<='\u00AA')||(LA48_187>='\u00AC' && LA48_187<='\uFFFF')) ) {s = 235;}
 
-                        else if ( ((LA47_233>='\u0000' && LA47_233<='&')||(LA47_233>='(' && LA47_233<='\u00AA')||(LA47_233>='\u00AC' && LA47_233<='\uFFFF')) ) {s = 134;}
+                        else if ( (LA48_187=='\u00AB') ) {s = 188;}
 
-                        else s = 136;
+                        else s = 236;
 
                         if ( s>=0 ) return s;
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 47, _s, input);
+                new NoViableAltException(getDescription(), 48, _s, input);
             error(nvae);
             throw nvae;
         }
