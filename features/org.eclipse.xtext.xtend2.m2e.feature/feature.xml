@@ -20,5 +20,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <license url="http://www.eclipse.org/legal/epl-v10.html">
       %license
    </license>
+   <requires>
+      <import feature="org.eclipse.xtend.m2e" version="2.3.0" match="greaterOrEqual"/>
+   </requires>
 
 </feature>
