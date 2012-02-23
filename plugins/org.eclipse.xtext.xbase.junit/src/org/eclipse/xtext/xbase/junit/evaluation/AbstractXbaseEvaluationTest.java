@@ -43,6 +43,22 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(0x17, "0x17");
 	}
 	
+	@Test public void testIntLiteral_3() throws Exception {
+		assertEvaluatesTo(077, "077");
+	}
+	
+	@Test public void testIntLiteral_4() throws Exception {
+		assertEvaluatesTo(123456789, "123_456_789");
+	}
+	
+	@Test public void testIntLiteral_5() throws Exception {
+		assertEvaluatesTo(0xffffeeee, "0xffff_eeee");
+	}
+	
+	@Test public void testIntLiteral_6() throws Exception {
+		assertEvaluatesTo(07777666655, "07777_6666_55");
+	}
+
 	@Test public void testLongLiteral_0() throws Exception {
 		assertEvaluatesTo(1l, "1l");
 	}
@@ -52,7 +68,23 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testLongLiteral_2() throws Exception {
-		assertEvaluatesTo(0x17l, "0x17L");
+		assertEvaluatesTo(0x17l, "0x17#L");
+	}
+	
+	@Test public void testLongLiteral_3() throws Exception {
+		assertEvaluatesTo(077l, "077L");
+	}
+	
+	@Test public void testLongLiteral_4() throws Exception {
+		assertEvaluatesTo(123456789123456789L, "123_456_789_123_456_789L");
+	}
+	
+	@Test public void testLongLiteral_5() throws Exception {
+		assertEvaluatesTo(0xffffeeeeddddccccl, "0xffff_eeee_dddd_cccc#L");
+	}
+	
+	@Test public void testLongLiteral_6() throws Exception {
+		assertEvaluatesTo(077776666555544443333l, "07777_6666_5555_4444_3333L");
 	}
 	
 	@Test public void testFloatLiteral_0() throws Exception {
@@ -60,7 +92,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 
 	@Test public void testFloatLiteral_1() throws Exception {
-		assertEvaluatesTo(017f, "017f");
+		assertEvaluatesTo(17f, "017f");
 	}
 	
 	@Test public void testFloatLiteral_2() throws Exception {
@@ -88,7 +120,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 
 	@Test public void testDoubleLiteral_1() throws Exception {
-		assertEvaluatesTo(017d, "017d");
+		assertEvaluatesTo(17d, "017d");
 	}
 	
 	@Test public void testDoubleLiteral_2() throws Exception {
@@ -131,33 +163,46 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(1e10d, "1e10d");
 	}
 
+	@Test public void testDoubleLiteral_12() throws Exception {
+		assertEvaluatesTo(1.123456789e10d, "1.123_456_789e1_0d");
+	}
+
+	@Test public void testDoubleLiteral_13() throws Exception {
+		assertEvaluatesTo(123456789d, "123_456_789d");
+	}
 
 	@Test public void testBigInteger_0() throws Exception {
-		assertEvaluatesTo(new BigInteger("1"), "{ val java.math.BigInteger x = 1b  x}");
+		assertEvaluatesTo(new BigInteger("1"), "1bi");
 	}
 
 	@Test public void testBigInteger_1() throws Exception {
 		assertEvaluatesTo(new BigInteger("12345678901234567890123456789012345678901234567890"), 
-				"{ val java.math.BigInteger x = 12345678901234567890123456789012345678901234567890B  x}");
+				"1234567890_12345678901234567890_1234567890_1234567890_Bi");
+	}
+
+	@Test public void testBigInteger_2() throws Exception {
+		assertEvaluatesTo(new BigInteger("77", 8), "077bI");
+	}
+
+	@Test public void testBigInteger_3() throws Exception {
+		assertEvaluatesTo(new BigInteger("77", 16), "0x77#bI");
 	}
 
 	@Test public void testBigDecimal_0() throws Exception {
-		assertEvaluatesTo(new BigDecimal("1.0"), "{ val java.math.BigDecimal x = 1.0b  x}");
+		assertEvaluatesTo(new BigDecimal("1.0"), "1.0bd");
 	}
 
 	@Test public void testBigDecimal_1() throws Exception {
-		assertEvaluatesTo(new BigDecimal("1.0e500"), 
-				"{ val java.math.BigDecimal x = 1.0e500B  x}");
+		assertEvaluatesTo(new BigDecimal("1.0e500"), "1.0e500Bd");
 	}
 
 	@Test public void testBigDecimal_2() throws Exception {
 		assertEvaluatesTo(new BigDecimal("123456789012345678901234567890.123456789012345678901234567890"), 
-				"{ val java.math.BigDecimal x = 123456789012345678901234567890.123456789012345678901234567890b  x}");
+				"1234567890_1234567890_1234567890.1234567890_1234567890_1234567890bD");
 	}
 
 	@Test public void testBigDecimal_3() throws Exception {
-		assertEvaluatesTo(new BigDecimal("1e500"), 
-				"{ val java.math.BigDecimal x = 1e500B  x}");
+		assertEvaluatesTo(new BigDecimal("1e500"), "1e500BD");
 	}
 
 	@Test public void testImplicitOneArgClosure() throws Exception {
