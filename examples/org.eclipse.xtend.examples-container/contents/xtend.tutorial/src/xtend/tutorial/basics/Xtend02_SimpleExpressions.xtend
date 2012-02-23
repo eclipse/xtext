@@ -16,8 +16,16 @@ class Xtend02_SimpleExpressions {
 		true || false
 	}
 	
-	def intLiteral() {
-		42 + 21
+	def intLiteral() {	
+		14 + 0x0e + 016
+	}
+	
+	def doubleLiteral() {
+		14d + 0.14e2 + 1.4 * 10d
+	}
+	
+	def bigIntegerLiteral() {
+		123_456_789_123_456_789_123_456_789BI	
 	}
 	
 	def nullLiteral() {
