@@ -8,7 +8,7 @@
      dhuebner                                                                
      ====================================================================== -->
 
-<project name="Local build" default="default">
+<project name="Local build" default="run.headless.buckminster">
 	<description>
             Executes buckminster build on local machine
     </description>
@@ -23,8 +23,8 @@
 	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtext/" />
 	<property name="xtend.checkout.location" value="${user.home}/git/org.eclipse.xtend/" />
 	<property name="releng.project.location" value="${checkout.location}/releng/org.eclipse.xtext.releng" />
-	<!--<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />-->
-	<property name="commands.file" value="${releng.project.location}/releng/tests/Xtext-test-buckminster-commands.txt" />
+	<!--<property name="commands.file" value="${releng.project.location}/releng/tests/Xtext-test-buckminster-commands.txt" />-->
+	<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />
 
 	<!-- Against which platform to build (Galileo,Indigo)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Galileo" />
@@ -40,7 +40,7 @@
           -data '\${build.root}/buckminster.workspace' 
           -S '${user.home}/git/org.eclipse.xcore.releng/org.eclipse.emf.xcore.releng/commands.txt'            
          ================================= -->
-	<target name="default" depends="cleanup" description="description">
+	<target name="run.headless.buckminster" depends="cleanup" description="description">
 		<exec executable="${buckminster.home}/buckminster">
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
