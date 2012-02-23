@@ -58,7 +58,7 @@
 		<topic href="contents/30-expressions.html#Xtend_Expressions_Literals" label="Literals" >
 			<topic href="contents/30-expressions.html#stringLiterals" label="String Literals" >
 			</topic>
-			<topic href="contents/30-expressions.html#integerLiterals" label="Integer Literals" >
+			<topic href="contents/30-expressions.html#numberLiterals" label="Number Literals" >
 			</topic>
 			<topic href="contents/30-expressions.html#booleanLiteral" label="Boolean Literals" >
 			</topic>

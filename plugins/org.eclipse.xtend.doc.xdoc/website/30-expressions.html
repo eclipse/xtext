@@ -115,7 +115,7 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="30-expressions.php#stringLiterals.php" >String Literals</a></li>
-			    <li><a href="30-expressions.php#integerLiterals.php" >Integer Literals</a></li>
+			    <li><a href="30-expressions.php#numberLiterals.php" >Number Literals</a></li>
 			    <li><a href="30-expressions.php#booleanLiteral.php" >Boolean Literals</a></li>
 			    <li><a href="30-expressions.php#nullLiteral.php" >Null Literal</a></li>
 			    <li><a href="30-expressions.php#typeLiteral.php" >Type Literals</a></li>
@@ -149,18 +149,48 @@
 				</div>
 			</div>
 			</p>
-			<a name="integerLiterals" ></a>
-			<h2>Integer Literals</h2>
+			<a name="numberLiterals" ></a>
+			<h2>Number Literals</h2>
 			<p>
-			An integer literal creates an <span class="inlinecode"><span class="keyword">int</span></span>. There is no signed integer. If you put a minus 
-			operator in front of an integer literal it is taken as a <span class="inlinecode">UnaryOperator</span> with one argument 
-			(the positive integer literal).
+			Xtend supports the same number literals as Java with a few differences.   
+			First, there are no signed number literals. If you put a minus operator in front of an number 
+			literal it is taken as a <span class="inlinecode">UnaryOperator</span> with one argument (the positive number 
+			literal). Second, as in Java 7, you can separate digits using <span class="inlinecode">_</span> for better readability
+			of large numbers.
+			 
+			An integer literal creates an <span class="inlinecode"><span class="keyword">int</span></span>, a <span class="inlinecode"><span class="keyword">long</span></span> (suffix <span class="inlinecode">L</span>) or a
+			<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigInteger.html" title="java.math.BigInteger">BigInteger</abbr></a> (suffix <span class="inlinecode">BI</span>).
+			</p>
+			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						42<br/>
-						234254<br/>
-						-1&nbsp;<span class="comment">//&nbsp;an&nbsp;expression&nbsp;consisting&nbsp;of&nbsp;the&nbsp;unary&nbsp;-&nbsp;operator&nbsp;and&nbsp;an&nbsp;integer&nbsp;literal</span>
+						1_234_567_890&nbsp;<br/>
+						0xbeef&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;hexadecimal<br/>
+						</span>052&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;octal<br/>
+						</span>-1&nbsp;<span class="comment">//&nbsp;an&nbsp;expression&nbsp;consisting&nbsp;of&nbsp;the&nbsp;unary&nbsp;-&nbsp;operator&nbsp;and&nbsp;an&nbsp;integer&nbsp;literal&nbsp;&nbsp;<br/>
+						</span>42L<br/>
+						0xbeef#L&nbsp;<span class="comment">//&nbsp;hexadecimal,&nbsp;mind&nbsp;the&nbsp;&apos;#&apos;<br/>
+						</span>052L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;octal<br/>
+						</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger</span>
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			An floating-point literal creates an <span class="inlinecode"><span class="keyword">double</span></span> (suffix <span class="inlinecode">D</span> or none), a <span class="inlinecode"><span class="keyword">float</span></span> 
+			(suffix <span class="inlinecode">F</span>) or a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigDecimal.html" title="java.math.BigDecimal">BigDecimal</abbr></a> (suffix <span class="inlinecode">BD</span>). If you use a <span class="inlinecode">.</span> you have to 
+			specify both, the integer and the fractional part of the mantissa. Ther are only decimal floating-point 
+			literals.  
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						42d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;double<br/>
+						</span>0.42e2&nbsp;&nbsp;<span class="comment">//&nbsp;implicit&nbsp;double<br/>
+						</span>0.42e2f&nbsp;<span class="comment">//&nbsp;float<br/>
+						</span>4.2f&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;float<br/>
+						</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal</span>
 					</p>
 				</div>
 			</div>
