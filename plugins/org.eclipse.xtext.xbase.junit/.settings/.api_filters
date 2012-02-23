@@ -112,6 +112,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/xbase/junit/evaluation/AbstractXbaseEvaluationTest.java" type="org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest">
+        <filter id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/xbase/junit/ui/AbstractXbaseContentAssistInBlockTest.java" type="org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest">
         <filter id="305365105">
             <message_arguments>
