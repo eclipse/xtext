@@ -29,28 +29,29 @@ public class NumberLiterals {
 	private ITypeProvider typeProvider;
 
 	public int getBase(XNumberLiteral literal) {
-		if (literal.getValue().startsWith("0x"))
+		String valueAsLowerCase = literal.getValue().toLowerCase();
+		if (valueAsLowerCase.startsWith("0x"))
 			return 16;
-		else if (literal.getValue().startsWith("0") && literal.getValue().length() > 1 && literal.getValue().indexOf('.') == -1)
+		else if (valueAsLowerCase.startsWith("0") && valueAsLowerCase.length() > 1 && valueAsLowerCase.indexOf('.') == -1)
 			return 8;
 		else
 			return 10;
 	}
 
 	protected String getTypeQualifier(XNumberLiteral literal) {
-		String lowerCase = literal.getValue().toLowerCase();
+		String valueAsLowerCase = literal.getValue().toLowerCase();
 		switch(getBase(literal)) {
 			case 16:
-				int index = lowerCase.indexOf('#');
+				int index = valueAsLowerCase.indexOf('#');
 				if(index != -1) 
-					return lowerCase.substring(index + 1);
+					return valueAsLowerCase.substring(index + 1);
 				else 
 					return "";
 			case 10:
 			case 8:
-				if(lowerCase.endsWith("bi") || lowerCase.endsWith("bd"))
-					return lowerCase.substring(lowerCase.length()-2);
-				char lastChar = lowerCase.charAt(literal.getValue().length()-1);
+				if(valueAsLowerCase.endsWith("bi") || valueAsLowerCase.endsWith("bd"))
+					return valueAsLowerCase.substring(valueAsLowerCase.length()-2);
+				char lastChar = valueAsLowerCase.charAt(literal.getValue().length()-1);
 				switch(lastChar) {
 					case 'l':
 					case 'd':
