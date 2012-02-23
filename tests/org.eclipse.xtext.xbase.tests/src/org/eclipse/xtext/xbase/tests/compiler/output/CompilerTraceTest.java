@@ -10,6 +10,9 @@ package org.eclipse.xtext.xbase.tests.compiler.output;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -41,8 +44,20 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		}
 		
 		@Override
-		protected AbstractTraceRegion getRootTraceRegion() {
+		protected AbstractTraceRegion doGetRootTraceRegion() {
 			return root;
+		}
+		
+		@Override
+		@NonNull
+		public IProject getLocalProject() {
+			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		@NonNull
+		public IStorage getLocalStorage() {
+			throw new UnsupportedOperationException();
 		}
 		
 	}
@@ -150,6 +165,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
+	@SuppressWarnings("null")
 	protected void assertTrace(final String javaCodeWithMarker, String xbaseCodeWithMarker) throws Exception {
 		xbaseCodeWithMarker = " " + xbaseCodeWithMarker + " ";
 		Matcher xbaseMatcher = p.matcher(xbaseCodeWithMarker);
@@ -167,6 +183,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		assertEquals(actualExpectation, compiledJavaCode);
 		ITrace trace = new SimpleTrace(appendable.getTraceRegion());
 		ILocationInResource location = trace.getBestAssociatedLocation(new TextRegion(javaMatcher.group(1).length(), javaMatcher.group(2).length()));
-		assertEquals(new TextRegion(xbaseMatcher.group(1).length(), xbaseMatcher.group(2).length()), location.getRange());
+		assertEquals(new TextRegion(xbaseMatcher.group(1).length(), xbaseMatcher.group(2).length()), location.getTextRegion());
 	}
 }
