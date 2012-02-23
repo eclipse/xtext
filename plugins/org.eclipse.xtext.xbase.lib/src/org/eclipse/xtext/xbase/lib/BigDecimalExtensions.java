@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.lib;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * This is an extension library for {@link BigDecimal big decimal numbers}.
@@ -96,11 +97,11 @@ public class BigDecimalExtensions {
 	 *            a BigDecimal. May not be <code>null</code>.
 	 * @param b
 	 *            a BigDecimal. May not be <code>null</code>.
-	 * @return <code>a.divide(b)</code>
+	 * @return <code>a.divide(b, MathContext.DECIMAL128)</code>
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
 	public static BigDecimal operator_divide(BigDecimal a, BigDecimal b) {
-		return a.divide(b);
+		return a.divide(b, MathContext.DECIMAL128);
 	}
 }
