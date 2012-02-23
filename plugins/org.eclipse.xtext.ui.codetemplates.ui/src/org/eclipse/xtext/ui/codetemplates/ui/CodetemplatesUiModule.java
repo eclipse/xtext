@@ -5,6 +5,7 @@ package org.eclipse.xtext.ui.codetemplates.ui;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -72,6 +73,10 @@ public class CodetemplatesUiModule extends org.eclipse.xtext.ui.codetemplates.ui
 	@Override
 	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
 		return RepeatedContentAssistProcessor.class;
+	}
+	
+	public Class<? extends ITraceInformation> bindITraceInformation() {
+		return ITraceInformation.Null.class;
 	}
 
 	@Override

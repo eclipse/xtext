@@ -5,6 +5,7 @@ package org.eclipse.xtext.ui.codetemplates.ui;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -96,6 +97,10 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 	@Override
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		return SimpleResourceSetProvider.class;
+	}
+	
+	public Class<? extends ITraceInformation> bindITraceInformation() {
+		return ITraceInformation.Null.class;
 	}
 
 	@Override

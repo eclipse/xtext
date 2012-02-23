@@ -37,5 +37,18 @@ public interface ITraceInformation {
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
 	@Nullable ITrace getTraceToTarget(IStorage sourceResource);
-	
+
+	class Null implements ITraceInformation {
+
+		@Nullable 
+		public ITrace getTraceToSource(IStorage derivedResource) {
+			return null;
+		}
+
+		@Nullable 
+		public ITrace getTraceToTarget(IStorage sourceResource) {
+			return null;
+		}
+		
+	}
 }
