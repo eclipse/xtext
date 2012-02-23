@@ -63,21 +63,40 @@ ul[
 	item[code["Escapes : \" "]]
 ]
 
-section3:Xbase_Syntax_IntegerLiteral[Integer Literals]
+section3:Xbase_Syntax_NumberLiteral[Number Literals]
 
-Integer literals consist of one or more digits. 
-Only decimal literals are supported and they always result in a value of type code[java.lang.Integer] 
-(it might result in native type code[int] when translated to Java, see ref:xbaseLanguageRef_Types[Types]).
-The compiler makes sure that only numbers between 0 and e[Integer.MAX] (0x7fffffff) are used.
+Xbase supports the same number literals as Java with a few differences.   
+First, there are no signed number literals. If you put a minus operator in front of an number 
+literal it is taken as a code[UnaryOperator] with one argument (the positive number 
+literal). Second, as in Java 7, you can separate digits using code[_] for better readability
+of large numbers.
+ 
+An integer literal creates an code[Xtend][int], a code[Xtend][long] (suffix code[L]) or a
+codeRef[java.math.BigInteger] (suffix code[BI]).
 
-There is no negative integer literal, instead the expression code[-23] is parsed as the prefix operator code[-] applied to an integer literal.
+code[Xtend][
+  42
+  1_234_567_890 
+  0xbeef    // hexadecimal
+  052       // octal
+  -1 // an expression consisting of the unary - operator and an integer literal  
+  42L
+  0xbeef#L // hexadecimal, mind the '#'
+  052L     // octal
+  0xbeef_beef_beef_beef_beef#BI // BigInteger
+]
 
-section4[Syntax]
+An floating-point literal creates an code[Xtend][double] (suffix code[D] or none), a code[Xtend][float] 
+(suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] you have to 
+specify both, the integer and the fractional part of the mantissa. Ther are only decimal floating-point 
+literals.  
 
-code[Xtext][
-terminal INT returns ecore::EInt: 
-	('0'..'9')+
-;
+code[Xtend][
+  42d     // double
+  0.42e2  // implicit double
+  0.42e2f // float
+  4.2f    // float
+  0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
 ]
 
 section3:Xbase_Syntax_Comments[Comments]

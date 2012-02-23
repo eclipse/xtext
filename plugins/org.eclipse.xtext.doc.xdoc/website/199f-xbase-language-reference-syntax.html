@@ -278,29 +278,50 @@
 		  <li><span class="inlinecode"><span class="string">"Escapes&nbsp;:&nbsp;\"&nbsp;"</span></span></li>
 		</ul>
 		</p>
-		<a name="Xbase_Syntax_IntegerLiteral" ></a>
-		<h3>Integer Literals</h3>
+		<a name="Xbase_Syntax_NumberLiteral" ></a>
+		<h3>Number Literals</h3>
 		<p>
-		Integer literals consist of one or more digits. 
-		Only decimal literals are supported and they always result in a value of type <span class="inlinecode">java.lang.Integer</span> 
-		(it might result in native type <span class="inlinecode">int</span> when translated to Java, see <a href="199g-xbase-language-reference-types.php" title="Go to &quot;Types&quot;">Types</a>).
-		The compiler makes sure that only numbers between 0 and <em>Integer.MAX</em> (0x7fffffff) are used.
+		Xbase supports the same number literals as Java with a few differences.   
+		First, there are no signed number literals. If you put a minus operator in front of an number 
+		literal it is taken as a <span class="inlinecode">UnaryOperator</span> with one argument (the positive number 
+		literal). Second, as in Java 7, you can separate digits using <span class="inlinecode">_</span> for better readability
+		of large numbers.
+		 
+		An integer literal creates an <span class="inlinecode">int</span>, a <span class="inlinecode">long</span> (suffix <span class="inlinecode">L</span>) or a
+		<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigInteger.html" title="java.math.BigInteger">BigInteger</abbr></a> (suffix <span class="inlinecode">BI</span>).
 		</p>
-		<p>
-		There is no negative integer literal, instead the expression <span class="inlinecode">-23</span> is parsed as the prefix operator <span class="inlinecode">-</span> applied to an integer literal.
-		</p>
-		<a name="Xbase_Syntax_IntegerLiteral_3" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
 		<p>
 		<div class="literallayout">
 			<div class="incode">
 				<p class="code">
-					<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+<br/>
-					;
+					42<br/>
+					1_234_567_890&nbsp;<br/>
+					0xbeef&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;hexadecimal<br/>
+					</span>052&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;octal<br/>
+					</span>-1&nbsp;<span class="comment">//&nbsp;an&nbsp;expression&nbsp;consisting&nbsp;of&nbsp;the&nbsp;unary&nbsp;-&nbsp;operator&nbsp;and&nbsp;an&nbsp;integer&nbsp;literal&nbsp;&nbsp;<br/>
+					</span>42L<br/>
+					0xbeef#L&nbsp;<span class="comment">//&nbsp;hexadecimal,&nbsp;mind&nbsp;the&nbsp;&apos;#&apos;<br/>
+					</span>052L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;octal<br/>
+					</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger</span>
+				</p>
+			</div>
+		</div>
+		</p>
+		<p>
+		An floating-point literal creates an <span class="inlinecode">double</span> (suffix <span class="inlinecode">D</span> or none), a <span class="inlinecode">float</span> 
+		(suffix <span class="inlinecode">F</span>) or a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigDecimal.html" title="java.math.BigDecimal">BigDecimal</abbr></a> (suffix <span class="inlinecode">BD</span>). If you use a <span class="inlinecode">.</span> you have to 
+		specify both, the integer and the fractional part of the mantissa. Ther are only decimal floating-point 
+		literals.  
+		</p>
+		<p>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					42d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;double<br/>
+					</span>0.42e2&nbsp;&nbsp;<span class="comment">//&nbsp;implicit&nbsp;double<br/>
+					</span>0.42e2f&nbsp;<span class="comment">//&nbsp;float<br/>
+					</span>4.2f&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;float<br/>
+					</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal</span>
 				</p>
 			</div>
 		</div>

@@ -10,8 +10,10 @@ null
 // String Literal
 'Hello World'
 
-// Integer Literal
+// Number Literals are mostly like in Java
+// (consult the documentation for more details)
 42
+0.42e2
 
 // Boolean Literal
 true
@@ -24,3 +26,8 @@ typeof(String)
 newArrayList(3,5,7)
 newHashSet('foo','bar','baz')
 newHashMap( 1->'one', 2->'two', 3->'three' )
+
+// Into the bargain, there are number literals for 
+// java.math.BigInteger and java.math.BigDecimal
+0xbeef_beef_beef_beef_beef#BI
+0.123_456_789_123_456_789_123_456_789_123_456_789e4242BD

@@ -362,9 +362,7 @@
 						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral_5" label="Examples" >
 						</topic>
 					</topic>
-					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_IntegerLiteral" label="Integer Literals" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_IntegerLiteral_3" label="Syntax" >
-						</topic>
+					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_NumberLiteral" label="Number Literals" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Comments" label="Comments" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Comments_2" label="Syntax" >

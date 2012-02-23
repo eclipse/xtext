@@ -20,6 +20,10 @@ class Xtend02_SimpleExpressions {
 		42 + 21
 	}
 	
+	def doubleLiteral() {
+		42d + 21.1e17
+	}
+	
 	def nullLiteral() {
 		null
 	}

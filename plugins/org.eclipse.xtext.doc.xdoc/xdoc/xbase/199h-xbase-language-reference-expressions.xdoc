@@ -25,7 +25,7 @@ ul[
 
 section4:Xbase_Expressions_IntegerLiterals[Integer Literals]
 
-An integer literal as defined in ref:Xbase_Syntax_IntegerLiteral creates an code[int].
+An integer literal as defined in ref:Xbase_Syntax_NumberLiteral creates an code[int].
 There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
 with one argument (the positive int literal).
 
