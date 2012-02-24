@@ -18,6 +18,7 @@ Export-Package: org.eclipse.xtext.builder,
  org.eclipse.xtext.builder.nature;x-internal:=true,
  org.eclipse.xtext.builder.preferences;x-internal:=true,
  org.eclipse.xtext.builder.resourceloader;x-internal:=true,
+ org.eclipse.xtext.builder.smap;x-internal:=true,
  org.eclipse.xtext.builder.trace;x-internal:=true,
  org.eclipse.xtext.builder.trace.impl;x-internal:=true,
  org.eclipse.xtext.builder.trace.util;x-internal:=true
@@ -39,7 +40,11 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.jdt.ui;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.3.0",
- org.eclipse.emf.ecore.editor;resolution:=optional
+ org.eclipse.emf.ecore.editor;resolution:=optional,
+ org.eclipse.xtext.smap;bundle-version="2.3.0";resolution:=optional,
+ org.eclipse.debug.core;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.debug.ui;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.jdt.debug;bundle-version="3.5.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator

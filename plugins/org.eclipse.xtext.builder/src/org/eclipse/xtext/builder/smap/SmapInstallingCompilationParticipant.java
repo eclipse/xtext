@@ -1,4 +1,4 @@
-package org.eclipse.xtext.common.types.ui.smap;
+package org.eclipse.xtext.builder.smap;
 
 import static com.google.common.collect.Maps.*;
 

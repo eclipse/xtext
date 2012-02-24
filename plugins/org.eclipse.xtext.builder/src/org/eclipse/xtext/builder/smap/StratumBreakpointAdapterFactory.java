@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.ui.smap;
+package org.eclipse.xtext.builder.smap;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;

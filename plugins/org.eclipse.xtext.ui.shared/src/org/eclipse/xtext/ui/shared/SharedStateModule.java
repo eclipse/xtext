@@ -54,20 +54,6 @@ public class SharedStateModule extends AbstractGenericModule {
 	}
 	
 	/**
-	 * @since 2.3
-	 */
-	public Class<? extends IDerivedResourceMarkers> bindDerivedResourceMarkers() {
-		return DerivedResourceMarkers.class;
-	}
-	
-	/**
-	 * @since 2.3
-	 */
-	public Class<? extends ITraceInformation> bindTraceInformation() {
-		return FileBasedTraceInformation.class;
-	}
-	
-	/**
 	 * @since 2.1
 	 */
 	public Provider<IJdtHelper> provideJdtHelper() {
