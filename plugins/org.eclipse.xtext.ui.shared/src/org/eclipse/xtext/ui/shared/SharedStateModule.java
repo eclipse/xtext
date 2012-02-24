@@ -86,7 +86,7 @@ public class SharedStateModule extends AbstractGenericModule {
 		if (PlatformUI.isWorkbenchRunning()) {
 			binder.bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 				public IWorkbench get() {
-					return PlatformUI.getWorkbench();
+					return (PlatformUI.isWorkbenchRunning()) ? PlatformUI.getWorkbench() : null;
 				}
 			});
 		}
