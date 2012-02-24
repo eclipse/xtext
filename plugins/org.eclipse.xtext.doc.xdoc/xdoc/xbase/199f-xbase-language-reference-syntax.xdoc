@@ -65,32 +65,30 @@ ul[
 
 section3:Xbase_Syntax_NumberLiteral[Number Literals]
 
-Xbase supports the same number literals as Java with a few differences.   
+Xbase supports roughly the same number literals as Java with a few differences.   
 First, there are no signed number literals. If you put a minus operator in front of an number 
 literal it is taken as a code[UnaryOperator] with one argument (the positive number 
 literal). Second, as in Java 7, you can separate digits using code[_] for better readability
 of large numbers.
  
 An integer literal creates an code[Xtend][int], a code[Xtend][long] (suffix code[L]) or a
-codeRef[java.math.BigInteger] (suffix code[BI]).
+codeRef[java.math.BigInteger] (suffix code[BI]). There are no octal numbers
 
 code[Xtend][
   42
   1_234_567_890 
   0xbeef    // hexadecimal
-  052       // octal
-  -1 // an expression consisting of the unary - operator and an integer literal  
+  077       // decimal 77 (*NOT* octal)
+  -1  // an expression consisting of the unary - operator and an integer literal  
   42L
   0xbeef#L // hexadecimal, mind the '#'
-  052L     // octal
   0xbeef_beef_beef_beef_beef#BI // BigInteger
 ]
 
 An floating-point literal creates an code[Xtend][double] (suffix code[D] or none), a code[Xtend][float] 
 (suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] you have to 
-specify both, the integer and the fractional part of the mantissa. Ther are only decimal floating-point 
+specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point 
 literals.  
-
 code[Xtend][
   42d     // double
   0.42e2  // implicit double
