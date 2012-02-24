@@ -117,7 +117,7 @@ public class JvmTypesBuilder {
 	 * @param strategy the compilation strategy.
 	 */
 	public void setBody(JvmExecutable executable, Procedures.Procedure1<ITreeAppendable> strategy) {
-		addCompilationStrategy(executable, strategy);
+		setCompilationStrategy(executable, strategy);
 	}
 	
 	/**
@@ -572,7 +572,7 @@ public class JvmTypesBuilder {
 	 * @param strategy the compilation strategy.
 	 */
 	public void setInitializer(JvmField field, Procedures.Procedure1<ITreeAppendable> strategy) {
-		addCompilationStrategy(field, strategy);
+		setCompilationStrategy(field, strategy);
 	}
 	
 	/**
@@ -590,7 +590,7 @@ public class JvmTypesBuilder {
 		associator.associateLogicalContainer(expr, field);
 	}
 	
-	protected void addCompilationStrategy(JvmMember member,
+	protected void setCompilationStrategy(JvmMember member,
 			Procedures.Procedure1<ITreeAppendable> strategy) {
 		// remove old adapters
 		Iterator<Adapter> iterator = member.eAdapters().iterator();
