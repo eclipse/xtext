@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmType;
 @NonNullByDefault
 public interface IAppendable {
 	
-	IAppendable append(String string);
+	IAppendable append(CharSequence string);
 
 	IAppendable append(JvmType type);
 

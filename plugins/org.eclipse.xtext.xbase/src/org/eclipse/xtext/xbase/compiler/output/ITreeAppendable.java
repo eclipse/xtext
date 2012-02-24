@@ -34,11 +34,9 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	
 	ITreeAppendable trace(ILocationData location);
 	
-	ITreeAppendable append(ITreeAppendable other);
-	
 	ITreeAppendable append(JvmType type);
 	
-	ITreeAppendable append(String string);
+	ITreeAppendable append(CharSequence content);
 	
 	ITreeAppendable decreaseIndentation();
 	
