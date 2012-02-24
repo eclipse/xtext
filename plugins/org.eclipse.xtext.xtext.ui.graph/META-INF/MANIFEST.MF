@@ -23,4 +23,4 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
  org.eclipse.draw2d;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.xtext.ui.graph.bundle.Activator
-Import-Package: com.google.common.collect;version="1.0.0"
+Import-Package: com.google.common.collect

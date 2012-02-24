@@ -9,7 +9,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.help,
  org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.emf.ecore;bundle-version="2.5.0";resolution:=optional,
- org.apache.log4j;bundle-version="1.2.15";resolution:=optional,
  org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.xtext.ui;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.xtext.generator;bundle-version="2.0.0";resolution:=optional,
@@ -26,3 +25,4 @@ Require-Bundle: org.eclipse.help,
  org.eclipse.ui.ide;bundle-version="3.5.2";resolution:=optional,
  org.eclipse.core.filesystem;bundle-version="1.2.1";resolution:=optional,
  org.junit4;bundle-version="4.5.0";resolution:=optional
+Import-Package: org.apache.log4j
