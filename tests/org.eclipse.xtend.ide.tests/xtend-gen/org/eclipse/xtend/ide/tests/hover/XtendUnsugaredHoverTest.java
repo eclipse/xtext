@@ -69,6 +69,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   
   @Before
   public void createExtensionClass() throws Exception {
+    {
       String _operator_plus = StringExtensions.operator_plus("testpackage/Extension", XtendUnsugaredHoverTest.FILEEXTENSION);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
@@ -113,6 +114,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       String _string_1 = _builder_1.toString();
       this.testHelper.createFile("testpackage/ExtensionJava.java", _string_1);
+    }
   }
   
   @After
@@ -126,6 +128,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   
   @Test
   public void testUnsuagaredVersionForXtendFunction() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -165,10 +168,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(it, 42)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_2() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -208,10 +213,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(it, 42)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_3() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -254,10 +261,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(it, 42 + a)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_4() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -297,10 +306,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(it, 40 + 2)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_5() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -342,10 +353,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(new ArrayList<String>(), 42)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_6() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -387,10 +400,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(new ArrayList<String>(), 42)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_7() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -447,10 +462,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals(_string_1, _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_8() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -492,10 +509,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("_extension.bar(it, 42)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_9() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -537,10 +556,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("it.substring(0)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_10() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -585,10 +606,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("it.substring(0)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_11() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -630,10 +653,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("IterableExtensions::head(new ArrayList<String>())", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForXtendFunction_12() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -673,10 +698,12 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_1 = triple.getSecond();
       String _unsugaredExpression = _second_1.getUnsugaredExpression();
       Assert.assertEquals("fooBarBaz(it)", _unsugaredExpression);
+    }
   }
   
   @Test
   public void testUnsuagaredVersionForJavaWithJavaDoc() throws Exception {
+    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
@@ -733,9 +760,11 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       XtendInformationControlInput _second_3 = triple.getSecond();
       String _unsugaredExpression = _second_3.getUnsugaredExpression();
       Assert.assertEquals("_extensionJava.bar(it, 40 + 2)", _unsugaredExpression);
+    }
   }
   
   public Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> computeAstAndInvokeHover(final XtextEditor editor, final int indexOfExpressionToHover, final int addOffset) {
+    {
       IResourcesSetupUtil.waitForAutoBuild();
       Resource _loadResource = this.loadResource();
       final Resource resource = _loadResource;
@@ -761,6 +790,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
       Object _hoverInfo2 = hover.getHoverInfo2(_internalSourceViewer_1, region);
       Triple<XAbstractFeatureCall,XtendInformationControlInput,IRegion> _create = Tuples.<XAbstractFeatureCall, XtendInformationControlInput, IRegion>create(featureCall, ((XtendInformationControlInput) _hoverInfo2), region);
       return _create;
+    }
   }
   
   public IProject getProject() {

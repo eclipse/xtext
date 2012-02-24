@@ -41,11 +41,13 @@ import org.eclipse.xtext.xdoc.xdoc.Document;
 @SuppressWarnings("all")
 public class GenerateBootstrapDoc {
   public static void main(final String[] args) {
+    {
       XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
       Injector _createInjectorAndDoEMFRegistration = _xdocStandaloneSetup.createInjectorAndDoEMFRegistration();
       final Injector injector = _createInjectorAndDoEMFRegistration;
       GenerateBootstrapDoc _instance = injector.<GenerateBootstrapDoc>getInstance(bootstrap.GenerateBootstrapDoc.class);
       _instance.generate();
+    }
   }
   
   @Inject
@@ -88,6 +90,7 @@ public class GenerateBootstrapDoc {
   }
   
   public Document loadDocument() {
+    {
       ResourceSet _get = this.provider.get();
       final ResourceSet rs = _get;
       PathTraverser _pathTraverser = new PathTraverser();
@@ -138,6 +141,7 @@ public class GenerateBootstrapDoc {
       Iterator<Document> _filter = IteratorExtensions.<Document>filter(_allContents, org.eclipse.xtext.xdoc.xdoc.Document.class);
       Document _head = IteratorExtensions.<Document>head(_filter);
       return _head;
+    }
   }
   
   public String main(final Document document) {

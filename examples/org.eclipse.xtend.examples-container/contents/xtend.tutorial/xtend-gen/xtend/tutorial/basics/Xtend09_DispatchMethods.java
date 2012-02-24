@@ -51,6 +51,7 @@ public class Xtend09_DispatchMethods extends TestCase {
   }
   
   public void testDispatchMethods() {
+    {
       Rectangle _rectangle = new Rectangle(3, 4);
       Circle _circle = new Circle(3);
       Rectangle _rectangle_1 = new Rectangle(5, 5);
@@ -60,6 +61,7 @@ public class Xtend09_DispatchMethods extends TestCase {
         CharSequence _label = this.toLabel(shape);
         InputOutput.<CharSequence>println(_label);
       }
+    }
   }
   
   public CharSequence toLabel(final Shape circle) {

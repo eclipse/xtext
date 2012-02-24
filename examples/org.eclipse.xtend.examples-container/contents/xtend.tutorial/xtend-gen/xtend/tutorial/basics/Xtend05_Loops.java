@@ -13,6 +13,7 @@ public class Xtend05_Loops {
    * inference is supported.
    */
   public void forLoop(final List<String> strings) {
+    {
       for (final String s : strings) {
         String _operator_plus = StringExtensions.operator_plus("Hi ", s);
         InputOutput.<String>println(_operator_plus);
@@ -21,6 +22,7 @@ public class Xtend05_Loops {
         String _operator_plus_1 = StringExtensions.operator_plus("Hi ", s_1);
         InputOutput.<String>println(_operator_plus_1);
       }
+    }
   }
   
   /**
@@ -28,6 +30,7 @@ public class Xtend05_Loops {
    * it is an expression of type 'void'.
    */
   public void whileLoop(final List<String> strings) {
+    {
       Iterator<String> _iterator = strings.iterator();
       final Iterator<String> iter = _iterator;
       boolean _hasNext = iter.hasNext();
@@ -39,5 +42,6 @@ public class Xtend05_Loops {
         boolean _hasNext_1 = iter.hasNext();
         _while = _hasNext_1;
       }
+    }
   }
 }

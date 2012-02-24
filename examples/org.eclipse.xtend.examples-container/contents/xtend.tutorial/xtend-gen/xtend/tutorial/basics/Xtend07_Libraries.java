@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class Xtend07_Libraries extends TestCase {
   public void testCollectionLiterals() {
+    {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
       InputOutput.<ArrayList<String>>println(_newArrayList);
       Pair<Integer,String> _operator_mappedTo = ObjectExtensions.<Integer, String>operator_mappedTo(Integer.valueOf(2), "two");
@@ -29,6 +30,7 @@ public class Xtend07_Libraries extends TestCase {
       InputOutput.<HashMap<Integer,String>>println(_newHashMap);
       HashSet<Integer> _newHashSet = CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(3), Integer.valueOf(3));
       InputOutput.<HashSet<Integer>>println(_newHashSet);
+    }
   }
   
   public void testStringUtilities() {

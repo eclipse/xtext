@@ -22,6 +22,7 @@ import xtend.tutorial.util.NetNode;
 @SuppressWarnings("all")
 public class Xtend10_CreateFunctions extends TestCase {
   public void testCreateFunctions() {
+    {
       NetNode _netNode = new NetNode();
       final NetNode nodeA = _netNode;
       nodeA.setName("A");
@@ -54,6 +55,7 @@ public class Xtend10_CreateFunctions extends TestCase {
       Iterable<NetNode> _tail = IterableExtensions.<NetNode>tail(_references_1);
       NetNode _head_1 = IterableExtensions.<NetNode>head(_tail);
       Assert.assertSame(_head_1, copyOfNodeB);
+    }
   }
   
   /**
@@ -77,6 +79,7 @@ public class Xtend10_CreateFunctions extends TestCase {
   private final HashMap<ArrayList<?>,NetNode> _createCache_copyNet = CollectionLiterals.newHashMap();
   
   private void _init_copyNet(final NetNode result, final NetNode toCopy) {
+    {
       String _name = toCopy.getName();
       result.setName(_name);
       Iterable<NetNode> _references = toCopy.getReferences();
@@ -88,5 +91,6 @@ public class Xtend10_CreateFunctions extends TestCase {
         };
       Iterable<NetNode> _map = IterableExtensions.<NetNode, NetNode>map(_references, _function);
       result.setReferences(_map);
+    }
   }
 }

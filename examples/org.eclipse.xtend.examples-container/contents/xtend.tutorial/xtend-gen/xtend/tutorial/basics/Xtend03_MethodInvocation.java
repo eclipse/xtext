@@ -44,6 +44,7 @@ public class Xtend03_MethodInvocation {
    * more readable property-syntax.
    */
   public String propertAccess(final Person person) {
+    {
       person.setForename("Joe");
       person.setName("Developer");
       String _forename = person.getForename();
@@ -51,6 +52,7 @@ public class Xtend03_MethodInvocation {
       String _name = person.getName();
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
       return _operator_plus_1;
+    }
   }
   
   /**

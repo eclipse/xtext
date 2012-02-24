@@ -41,6 +41,7 @@ public class Xtend06_Closures {
    *   (typeParam1 ,... typeParamN) => returnType
    */
   public ArrayList<Object> personsToString(final List<Person> persons, final Function1<? super Person,? extends String> toString) {
+    {
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
       final ArrayList<Object> result = _newArrayList;
       for (final Person p : persons) {
@@ -48,6 +49,7 @@ public class Xtend06_Closures {
         CollectionExtensions.<String>operator_add(result, _apply);
       }
       return result;
+    }
   }
   
   /**

@@ -25,7 +25,7 @@ class Xtend02_SimpleExpressions {
 	}
 	
 	def bigIntegerLiteral() {
-		123_456_789_123_456_789_123_456_789BI	
+		123_456_789_123_456_789_123_456_789BI
 	}
 	
 	def nullLiteral() {

@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class Case_3 {
   public void testReturnExpression_06() {
+    {
       final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
           public Integer apply(final Integer i) {
             return i;
@@ -20,6 +21,7 @@ public class Case_3 {
       for (final Integer x : _operator_upTo) {
         closure.apply(x);
       }
+    }
   }
   
   public Object testReturnExpression_07() {
