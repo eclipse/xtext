@@ -72,6 +72,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                           StringConcatenation _builder = new StringConcatenation();
                           _builder.append("initializer.apply(this);");
                           _builder.newLine();
+                          it.append(_builder);
                         }
                       };
                     DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);

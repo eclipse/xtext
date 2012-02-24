@@ -26,9 +26,9 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 			val procedure = entity.newTypeRef(typeof(Procedure1), it.newTypeRef())
 			members += entity.toConstructor(entity.name) [
 				parameters += entity.toParameter("initializer", procedure)
-				body = ['''
+				body = [it.append('''
 					initializer.apply(this);
-				''']
+				''')]
 			]
 			val fields = <JvmField>newArrayList()
 			for ( f : entity.features ) {

@@ -48,11 +48,12 @@
    <extension
          point="org.eclipse.jdt.core.compilationParticipant">
       <compilationParticipant
-            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.smap.SmapInstallingCompilationParticipant"
+            class="org.eclipse.xtext.common.types.shared.SharedCommonTypesExecutableExtensionFactory:org.eclipse.xtext.common.types.ui.smap.SmapInstallingCompilationParticipant"
             createsProblems="false"
             id="org.eclipse.xtext.common.types.shared.smapCompilationParticipant"
             modifiesEnvironment="false"
             requiredSourceLevel="1.4">
       </compilationParticipant>
    </extension>
+   
 </plugin>

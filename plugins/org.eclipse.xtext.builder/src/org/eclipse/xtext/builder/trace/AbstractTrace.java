@@ -290,7 +290,11 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 	
 	public URI getLocalURI() {
-		return storage2uriMapper.getUri(getLocalStorage());
+		final URI uri = storage2uriMapper.getUri(getLocalStorage());
+		if (uri != null) {
+			return uri;
+		}
+		return URI.createURI(getLocalStorage().getFullPath().toPortableString());
 	}
 	
 	public abstract IProject getLocalProject();
