@@ -37,7 +37,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
    				parameters += e.toParameter("args", e.newTypeRef(typeof(String)).addArrayTypeDimension)
    				if (!e.containsReturn) {
    					setBody [
-   						append("try {").increaseIndentation.newLine
+   						append("try {").increaseIndentation
    						e.compile(trace(e))
    						decreaseIndentation.newLine.append("} catch (Throwable t) {}")
    					]

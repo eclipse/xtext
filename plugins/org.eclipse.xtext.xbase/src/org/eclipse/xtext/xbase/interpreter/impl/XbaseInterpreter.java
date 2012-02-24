@@ -17,8 +17,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
 
@@ -222,6 +220,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 
+	/**
+	 * @param literal unused in this context but required for dispatching 
+	 * @param context unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _evaluateNullLiteral(XNullLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return null;
 	}
@@ -231,18 +234,34 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		throw new ReturnValue(returnValue);
 	}
 
+	/**
+	 * @param context unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _evaluateStringLiteral(XStringLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return literal.getValue();
 	}
 
+	/**
+	 * @param context unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _evaluateNumberLiteral(XNumberLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return numberLiterals.numberValue(literal, numberLiterals.getJavaType(literal));
 	}
 
+	/**
+	 * @param context unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _evaluateBooleanLiteral(XBooleanLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		return literal.isIsTrue();
 	}
 
+	/**
+	 * @param context unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _evaluateTypeLiteral(XTypeLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		if (literal.getType() == null || literal.getType().eIsProxy()) {
 			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(literal,
@@ -419,10 +438,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return a == b || (a != null && a.equals(b));
 	}
 
+	/**
+	 * @param expression may be used by inheritors 
+	 */
 	protected Object throwNullPointerException(XExpression expression, String message) {
 		throw new EvaluationException(new NullPointerException(message));
 	}
 
+	/**
+	 * @param expression may be used by inheritors 
+	 */
 	protected Object throwClassCastException(XExpression expression, Object result, Class<?> expectedType) {
 		throw new EvaluationException(new ClassCastException("Expected: " + expectedType.getCanonicalName()
 				+ " but got: " + result.getClass().getCanonicalName()));
@@ -634,6 +659,10 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
 	}
 
+	/**
+	 * @param featureCall unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _featureCallJvmIdentifyableElement(JvmIdentifiableElement identifiable, XFeatureCall featureCall, Object receiver,
 			IEvaluationContext context, CancelIndicator indicator) {
 		if (receiver != null)
@@ -643,6 +672,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 
+	/**
+	 * @param featureCall unused in this context but required for dispatching
+	 * @param context unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _featureCallField(JvmField jvmField, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context, CancelIndicator indicator) {
 		return featureCallField(jvmField, receiver);
 	}
@@ -811,6 +845,10 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return assignmentDispatcher.invoke(feature, assignment, value, context, indicator);
 	}
 
+	/**
+	 * @param assignment unused in this context but required for dispatching
+	 * @param indicator unused in this context but required for dispatching
+	 */
 	protected Object _assignValueToDeclaredVariable(XVariableDeclaration variable, XAssignment assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		context.assignValue(QualifiedName.create(variable.getName()), value);

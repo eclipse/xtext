@@ -68,26 +68,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaExpression((XClosure) obj, appendable);
 		} else if (obj instanceof XConstructorCall) {
 			_toJavaExpression((XConstructorCall) obj, appendable);
-		} else if (obj instanceof XDoWhileExpression) {
-			_toJavaExpression((XDoWhileExpression) obj, appendable);
-		} else if (obj instanceof XForLoopExpression) {
-			_toJavaExpression((XForLoopExpression) obj, appendable);
 		} else if (obj instanceof XIfExpression) {
 			_toJavaExpression((XIfExpression) obj, appendable);
 		} else if (obj instanceof XInstanceOfExpression) {
 			_toJavaExpression((XInstanceOfExpression) obj, appendable);
-		} else if (obj instanceof XReturnExpression) {
-			_toJavaExpression((XReturnExpression) obj, appendable);
 		} else if (obj instanceof XSwitchExpression) {
 			_toJavaExpression((XSwitchExpression) obj, appendable);
-		} else if (obj instanceof XThrowExpression) {
-			_toJavaExpression((XThrowExpression) obj, appendable);
 		} else if (obj instanceof XTryCatchFinallyExpression) {
 			_toJavaExpression((XTryCatchFinallyExpression) obj, appendable);
-		} else if (obj instanceof XVariableDeclaration) {
-			_toJavaExpression((XVariableDeclaration) obj, appendable);
-		} else if (obj instanceof XWhileExpression) {
-			_toJavaExpression((XWhileExpression) obj, appendable);
 		} else {
 			super.internalToConvertedExpression(obj, appendable);
 		}
@@ -246,15 +234,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getVarName(expr, b));
 	}
 
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XThrowExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
 		b.newLine().append("throw ");
 		internalToJavaExpression(expr.getExpression(), b);
 		b.append(";");
-	}
-
-	protected void _toJavaExpression(XThrowExpression expr, ITreeAppendable b) {
-		b.append("null");
 	}
 
 	protected void _toJavaExpression(XInstanceOfExpression expr, ITreeAppendable b) {
@@ -265,14 +252,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(")");
 	}
 
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XInstanceOfExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
 	}
 
-	protected void _toJavaExpression(XVariableDeclaration expr, ITreeAppendable b) {
-		b.append("null");
-	}
-
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XVariableDeclaration varDeclaration, ITreeAppendable b, boolean isReferenced) {
 		if (varDeclaration.getRight() != null) {
 			internalToJavaStatement(varDeclaration.getRight(), b, true);
@@ -311,10 +300,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(";");
 	}
 
-	protected void _toJavaExpression(XWhileExpression expr, ITreeAppendable b) {
-		b.append("null");
-	}
-
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getPredicate(), b, true);
 		final String varName = b.declareSyntheticVariable(expr, "_while");
@@ -337,10 +325,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().newLine().append("}");
 	}
 
-	protected void _toJavaExpression(XDoWhileExpression expr, ITreeAppendable b) {
-		b.append("null");
-	}
-
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature  
+	 */
 	protected void _toJavaStatement(XDoWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
 		String variable = b.declareSyntheticVariable(expr, "_dowhile");
 		b.newLine().append("boolean ").append(variable).append(" = false;");
@@ -358,10 +345,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(");");
 	}
 
-	protected void _toJavaExpression(XForLoopExpression expr, ITreeAppendable b) {
-		b.append("null");
-	}
-
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.newLine().append("for (final ");
@@ -406,6 +392,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(varName);
 	}
 	
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XReturnExpression expr, ITreeAppendable b, boolean isReferenced) {
 		if (expr.getExpression()!=null) {
 			JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(expr);
@@ -437,12 +426,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	protected void _toJavaExpression(XReturnExpression expr, ITreeAppendable b) {
-		b.append("null");
-	}
-
 	protected void _toJavaExpression(XCastedExpression expr, ITreeAppendable b) {
-		
 		b.append("((");
 		serialize(expr.getType(), expr, b);
 		b.append(") ");

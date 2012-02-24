@@ -28,6 +28,9 @@ public abstract class AbstractClosureInvocationHandler implements InvocationHand
 		return doInvoke(method, args);
 	}
 
+	/**
+	 * @param proxy the proxy instance. May be used by inheritors.
+	 */
 	protected String proxyToString(Object proxy) {
 		return toString();
 	}

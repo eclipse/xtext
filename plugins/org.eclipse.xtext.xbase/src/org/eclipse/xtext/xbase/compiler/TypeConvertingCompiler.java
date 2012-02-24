@@ -247,6 +247,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append("))");
 	}
 
+	/**
+	 * @param primitive unused in this context but useful for inheritors 
+	 * @param context unused in this context but useful for inheritors
+	 */
 	protected void convertPrimitiveToWrapper(
 			final JvmTypeReference primitive, 
 			final JvmTypeReference wrapper, 
@@ -260,6 +264,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append(")");
 	}
 
+	/**
+	 * @param wrapper unused in this context but useful for inheritors 
+	 * @param context unused in this context but useful for inheritors
+	 */
 	protected void convertWrapperToPrimitive(
 			final JvmTypeReference wrapper, 
 			final JvmTypeReference primitive, 
