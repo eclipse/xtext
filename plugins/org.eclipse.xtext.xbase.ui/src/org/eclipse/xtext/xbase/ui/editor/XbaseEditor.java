@@ -145,28 +145,31 @@ public class XbaseEditor extends XtextEditor {
 	@Override
 	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
 		if (expectJavaSelection > 0) {
-			ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
-			if (traceToSource != null) {
-				ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
-				if (bestSelection != null) {
-					ILocationInResource bestReveal = bestSelection;
-					if (selectionStart != revealStart || selectionLength != revealLength) {
-						bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
-						if (bestReveal == null) {
-							bestReveal = bestSelection;
+			try {
+				ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
+				if (traceToSource != null) {
+					ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
+					if (bestSelection != null) {
+						ILocationInResource bestReveal = bestSelection;
+						if (selectionStart != revealStart || selectionLength != revealLength) {
+							bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
+							if (bestReveal == null) {
+								bestReveal = bestSelection;
+							}
 						}
-					}
-					ITextRegion fixedSelection = bestSelection.getTextRegion();
-					if (fixedSelection != null) {
-						ITextRegion fixedReveal = bestReveal.getTextRegion();
-						if (fixedReveal == null) {
-							fixedReveal = fixedSelection;
+						ITextRegion fixedSelection = bestSelection.getTextRegion();
+						if (fixedSelection != null) {
+							ITextRegion fixedReveal = bestReveal.getTextRegion();
+							if (fixedReveal == null) {
+								fixedReveal = fixedSelection;
+							}
+							super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
+							return;
 						}
-						expectJavaSelection--;
-						super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
-						return;
 					}
 				}
+			} finally {
+				expectJavaSelection--;
 			}
 		}
 		super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);

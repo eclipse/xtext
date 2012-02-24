@@ -9,6 +9,7 @@
 package org.eclipse.xtext.util;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -129,6 +130,28 @@ public class Files {
 		}
 	}
 
+	
+	/**
+	 * @since 2.3
+	 */
+	public static byte[] readStreamIntoByteArray(InputStream inputStream) {
+		try {
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+	
+			int nRead;
+			byte[] data = new byte[16384];
+	
+				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+				  buffer.write(data, 0, nRead);
+				}
+	
+			buffer.flush();
+	
+			return buffer.toByteArray();
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
 	public static String readStreamIntoString(InputStream inputStream) {
 		if (inputStream==null)
 			throw new NullPointerException("inputStream");
