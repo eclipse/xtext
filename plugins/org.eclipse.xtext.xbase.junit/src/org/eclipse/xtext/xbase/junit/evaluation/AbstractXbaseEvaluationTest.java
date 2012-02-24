@@ -210,6 +210,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(new BigDecimal("1e500"), "1e500BD");
 	}
 
+	@Test public void testBug372408() throws Exception {
+		assertEvaluatesTo(new BigInteger("0"), "0BI");
+		assertEvaluatesTo(0l, "0l");
+	}
+	
 	@Test public void testImplicitOneArgClosure() throws Exception {
 		assertEvaluatesTo("foo","[it].apply('foo')");
 	}
