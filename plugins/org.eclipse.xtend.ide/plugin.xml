@@ -831,13 +831,20 @@
 
    <extension point="org.eclipse.ui.views">
       <category
-          name="%viewCategoryName" id="org.eclipse.xtend.ui"/>
+          name="%viewCategoryName" id="org.eclipse.xtend.ide"/>
       <view
           name="%XtendSourceView"
           icon="$nl$/icons/xtend_file.png"
-          category="org.eclipse.xtend.ui"
+          category="org.eclipse.xtend.ide"
           class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.views.DeclarationView"
           id="org.eclipse.xtend.ui.DeclarationView">
+      </view>
+      <view
+            category="org.eclipse.xtend.ide"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.view.DerivedSourceView"
+            icon="icons/sample.gif"
+            id="org.eclipse.xtend.ide.view.DerivedSourceView"
+            name="Generated Java View">
       </view>
    </extension>
 
@@ -863,5 +870,5 @@
          </description>
       </colorDefinition>
    </extension>
-
+   
 </plugin>
