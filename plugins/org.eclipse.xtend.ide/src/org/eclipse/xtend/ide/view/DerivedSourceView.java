@@ -70,13 +70,13 @@ public class DerivedSourceView extends ViewPart implements ISelectionListener {
 		try {
 			Control control = fViewer.getControl();
 			if (control instanceof StyledText) {
-				ITrace source = traceInformation.getTraceToTarget((IStorage)editor.getResource());
-				if (source == null) {
+				ITrace generatedFile = traceInformation.getTraceToTarget((IStorage)editor.getResource());
+				if (generatedFile == null) {
 					setInput(null);
 					return;
 				}
 				ITextSelection textSelection = (ITextSelection) selection;
-				ILocationInResource location = source.getBestAssociatedLocation(new TextRegion(textSelection.getOffset(), textSelection.getLength()));
+				ILocationInResource location = generatedFile.getBestAssociatedLocation(new TextRegion(textSelection.getOffset(), textSelection.getLength()));
 				if (location != null) {
 					final ITextRegionWithLineInformation region = location.getTextRegion();
 					if (region != null)
@@ -91,10 +91,15 @@ public class DerivedSourceView extends ViewPart implements ISelectionListener {
 	protected void highlightRange(IStorage iStorage, int myOffset, int myLength) {
 		if (currentlyShown == null || !currentlyShown.equals(iStorage)) {
 			setInput(iStorage);
+		} else {
+			fViewer.setDocument(fViewer.getDocument());
 		}
 		StyledText text = fViewer.getTextWidget();
-		text.setStyleRange(new StyleRange(myOffset, myLength, null, Display.getDefault().getSystemColor(SWT.COLOR_GRAY)));
-		text.redrawRange(myOffset, myLength, true);
+		if (text.getText().length() >= myOffset + myLength) {
+			text.setStyleRange(new StyleRange(myOffset, myLength, null, Display.getDefault().getSystemColor(SWT.COLOR_GRAY)));
+			text.redrawRange(myOffset, myLength, true);
+			fViewer.revealRange(myOffset, myLength);
+		}
 	}
 
 
