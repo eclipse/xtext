@@ -13,12 +13,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -26,13 +30,17 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -61,6 +69,14 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	
 	@Inject
 	private TraceRegionSerializer traceSerializer;
+	
+	@Inject
+	private TraceMarkers traceMarkers;
+	
+	@Inject
+	private IWorkspace workspace;
+	
+	private Multimap<URI, IPath> sourceTraces;
 	
 	/**
 	 * @since 2.3
@@ -145,7 +161,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 			callBack.afterFileCreation(file);
 		}
 	}
-
+	
 	/**
 	 * @since 2.3
 	 */
@@ -222,6 +238,20 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	protected void updateTraceInformation(IFile traceFile, CharSequence contents, boolean derived) throws CoreException, IOException {
 		if (contents instanceof ITraceRegionProvider) {
 			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+			if (sourceTraces == null) {
+				sourceTraces = HashMultimap.create();
+			}
+			IPath tracePath = traceFile.getFullPath();
+			Iterator<AbstractTraceRegion> iterator = traceRegion.treeIterator();
+			while(iterator.hasNext()) {
+				AbstractTraceRegion region = iterator.next();
+				for(ILocationData location: region.getAssociatedLocations()) {
+					URI path = location.getPath();
+					if (path != null) {
+						sourceTraces.put(path, tracePath);
+					}
+				}
+			}
 			class AccessibleOutputStream extends ByteArrayOutputStream {
 				byte[] internalBuffer() {
 					return buf;
@@ -245,6 +275,39 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		if (traceFile.exists()) {
 			traceFile.delete(IResource.KEEP_HISTORY, monitor);
 		}
+	}
+	
+	/**
+	 * Can be used to announce that a builder participant is done with this file system access and
+	 * all potentially recorded trace information should be persisted. Uses the default generator name.
+	 * @since 2.3
+	 * @see TraceMarkers#DEFAULT_GENERATOR_NAME
+	 */
+	public void flushSourceTraces() throws CoreException {
+		flushSourceTraces(TraceMarkers.DEFAULT_GENERATOR_NAME);
+	}
+	
+	/**
+	 * Can be used to announce that a builder participant is done with this file system access and
+	 * all potentially recorded trace information should be persisted.
+	 * @param generatorName the name of the generator. 
+	 * @since 2.3
+	 */
+	public void flushSourceTraces(String generatorName) throws CoreException {
+		if (sourceTraces != null) {
+			Set<URI> keys = sourceTraces.keySet();
+			for(URI uri: keys) {
+				if (uri.isPlatformResource()) {
+					Collection<IPath> paths = sourceTraces.get(uri);
+					IFile sourceFile = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));
+					if (sourceFile.exists()) {
+						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
+						traceMarkers.installMarker(sourceFile, generatorName, tracePathArray);
+					}
+				}
+			}
+		}
+		sourceTraces = null;
 	}
 
 	/**
@@ -286,4 +349,5 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		IFile file = getFile(fileName, outputConfiguration);
 		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 	}
+
 }
