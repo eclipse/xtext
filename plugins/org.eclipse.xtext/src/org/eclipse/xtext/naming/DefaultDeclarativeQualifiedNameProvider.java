@@ -23,7 +23,7 @@ import com.google.inject.Provider;
 
 /**
  * computes the fully qualified name of an EObject by first invoking a method <br/>
- * <code>String qualifiedName(MyType ele)</code><br/>
+ * <code>QulifiedName qualifiedName(MyType ele)</code><br/>
  * reflectively.
  * 
  * And if no such method is found looks up a property 'name' and invokes the value and appends it to the
@@ -75,6 +75,16 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 				return qualifiedNameFromConverter;
 			}
 		});
+	}
+	
+	
+
+	/**
+	 * Default for qualifiedName dispatcher. Write a method with this signature but custom Type for dispatching other types.
+	 * @since 2.3
+	 */
+	protected QualifiedName qualifiedName(Object ele){
+		return null;
 	}
 
 	protected IQualifiedNameConverter getConverter() {
