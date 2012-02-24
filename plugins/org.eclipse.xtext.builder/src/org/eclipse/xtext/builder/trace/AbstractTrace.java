@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -83,7 +83,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	private IStorage2UriMapper storage2uriMapper;
 	
 	@Inject
-	private IWorkspaceRoot workspaceRoot;
+	private IWorkspace workspace;
 	
 	private AbstractTraceRegion rootTraceRegion;
 	
@@ -399,7 +399,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 	
 	protected IProject findProject(String projectName) {
-		IProject result = workspaceRoot.getProject(projectName);
+		IProject result = workspace.getRoot().getProject(projectName);
 		return result;
 	}
 	
