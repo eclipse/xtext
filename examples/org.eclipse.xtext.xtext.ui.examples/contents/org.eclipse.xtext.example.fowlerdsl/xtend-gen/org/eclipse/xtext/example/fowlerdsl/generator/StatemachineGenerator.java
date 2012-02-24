@@ -30,12 +30,14 @@ public class StatemachineGenerator implements IGenerator {
   }
   
   public String className(final Resource res) {
+    {
       URI _uRI = res.getURI();
       String _lastSegment = _uRI.lastSegment();
       String name = _lastSegment;
       int _indexOf = name.indexOf(".");
       String _substring = name.substring(0, _indexOf);
       return _substring;
+    }
   }
   
   public CharSequence toJavaCode(final Statemachine sm) {
