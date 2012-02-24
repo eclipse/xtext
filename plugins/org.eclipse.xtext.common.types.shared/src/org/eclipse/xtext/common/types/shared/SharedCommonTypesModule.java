@@ -4,6 +4,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
+import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetProvider;
@@ -11,6 +12,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRename
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.JvmIdentifiableQualifiedNameProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -50,6 +52,7 @@ public class SharedCommonTypesModule implements Module {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(CurrentDescriptions.ResourceSetAware.class);
 		
 		binder.bind(IWorkspaceRoot.class).toInstance(ResourcesPlugin.getWorkspace().getRoot());
+		binder.bind(ITraceInformation.class).to(FileBasedTraceInformation.class);
 	}
 
 }
