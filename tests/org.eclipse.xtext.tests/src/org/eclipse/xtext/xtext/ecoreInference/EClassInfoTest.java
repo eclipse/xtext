@@ -10,6 +10,8 @@ package org.eclipse.xtext.xtext.ecoreInference;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 import org.junit.Assert;
@@ -37,6 +39,23 @@ public class EClassInfoTest extends Assert {
 		assertEquals(false,objectUnderTest.containsCompatibleFeature("eStructuralFeatures", true, true, pack.getEAnnotation(), new StringBuilder()));
 	}
 	
+	
+	public void testChangeable(){
+		EcorePackage pack = EcorePackage.eINSTANCE;
+		EClass eClass = pack.getEClass();
+		EClassInfo objectUnderTest = new EClassifierInfo.EClassInfo(eClass, false, Collections.<String>emptySet(), null);
+		EcoreFactory fac = EcoreFactory.eINSTANCE;
+		EReference reference = fac.createEReference();
+		reference.setName("newReference");
+		reference.setEType(eClass);
+		reference.setChangeable(true);
+		reference.setContainment(true);
+		eClass.getEStructuralFeatures().add(reference);
+		assertEquals(true,objectUnderTest.containsCompatibleFeature("newReference", false, true, eClass, new StringBuilder()));
+		reference.setChangeable(false);
+		assertEquals(false,objectUnderTest.containsCompatibleFeature("newReference", false, true, eClass, new StringBuilder()));
+	}
+		
 	@Test public void testContainsCompatibleFeature_02() throws Exception {
 		EcorePackage pack = EcorePackage.eINSTANCE;
 		EClass attribute = pack.getEAttribute();
