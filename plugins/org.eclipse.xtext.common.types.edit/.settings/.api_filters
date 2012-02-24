@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.common.types.edit" version="2">
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmAnnotationAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmAnnotationAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmAnnotationReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmAnnotationReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationTargetItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationTargetItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmAnnotationTargetItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmAnnotationTargetItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmAnnotationTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmAnnotationTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnyTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmAnyTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmAnyTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmAnyTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmArrayTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmArrayTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmArrayTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmArrayTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmBooleanAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmBooleanAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmBooleanAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmBooleanAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmByteAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmByteAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmByteAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmByteAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmCharAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmCharAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmCharAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmCharAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmComponentTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmComponentTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmComponentTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmComponentTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmCompoundTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmCompoundTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmCompoundTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmCompoundTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmConstraintOwnerItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmConstraintOwnerItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmConstraintOwnerItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmConstraintOwnerItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmConstructorItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmConstructorItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmConstructorItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmConstructorItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmCustomAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmCustomAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmCustomAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmCustomAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmDeclaredTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmDeclaredTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmDeclaredTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmDeclaredTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmDelegateTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmDelegateTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmDelegateTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmDelegateTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmDoubleAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmDoubleAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmDoubleAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmDoubleAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmEnumAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmEnumAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmEnumAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmEnumAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmEnumerationLiteralItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmEnumerationLiteralItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmEnumerationLiteralItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmEnumerationLiteralItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmEnumerationTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmEnumerationTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmEnumerationTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmEnumerationTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmExecutableItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmExecutableItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmExecutableItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmExecutableItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFeatureItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFeatureItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmFeatureItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmFeatureItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFieldItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFieldItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmFieldItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmFieldItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFloatAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFloatAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmFloatAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmFloatAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFormalParameterItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmFormalParameterItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmFormalParameterItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmFormalParameterItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmGenericArrayTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmGenericArrayTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmGenericArrayTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmGenericArrayTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmGenericTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmGenericTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmGenericTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmGenericTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmIdentifiableElementItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmIdentifiableElementItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmIdentifiableElementItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmIdentifiableElementItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmIntAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmIntAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmIntAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmIntAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmLongAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmLongAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmLongAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmLongAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmLowerBoundItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmLowerBoundItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmLowerBoundItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmLowerBoundItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmMemberItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmMemberItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmMemberItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmMemberItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmMultiTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmMultiTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmMultiTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmMultiTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmOperationItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmOperationItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmOperationItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmOperationItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmParameterizedTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmParameterizedTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmParameterizedTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmParameterizedTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmPrimitiveTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmPrimitiveTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmPrimitiveTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmPrimitiveTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmShortAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmShortAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmShortAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmShortAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmSpecializedTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmSpecializedTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmSpecializedTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmSpecializedTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmStringAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmStringAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmStringAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmStringAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmSynonymTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmSynonymTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmSynonymTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmSynonymTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeAnnotationValueItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeAnnotationValueItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmTypeAnnotationValueItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmTypeAnnotationValueItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeConstraintItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeConstraintItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmTypeConstraintItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmTypeConstraintItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmTypeItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmTypeItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeParameterDeclaratorItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeParameterDeclaratorItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmTypeParameterDeclaratorItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmTypeParameterDeclaratorItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeParameterItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeParameterItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmTypeParameterItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmTypeParameterItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmUnknownTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmUnknownTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmUnknownTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmUnknownTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmUpperBoundItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmUpperBoundItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmUpperBoundItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmUpperBoundItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmVoidItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmVoidItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmVoidItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmVoidItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmWildcardTypeReferenceItemProvider.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmWildcardTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmWildcardTypeReferenceItemProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.JvmWildcardTypeReferenceItemProvider"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/TypesEditPlugin.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/TypesEditPlugin.java" type="org.eclipse.xtext.common.types.provider.TypesEditPlugin">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.TypesEditPlugin"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/TypesItemProviderAdapterFactory.java">
+        <filter id="0"/>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/TypesItemProviderAdapterFactory.java" type="org.eclipse.xtext.common.types.provider.TypesItemProviderAdapterFactory">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.provider.TypesItemProviderAdapterFactory"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
