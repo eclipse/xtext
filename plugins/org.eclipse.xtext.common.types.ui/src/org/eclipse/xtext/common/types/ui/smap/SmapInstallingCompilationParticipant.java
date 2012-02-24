@@ -1,7 +1,10 @@
-package org.eclipse.xtext.common.types.smap;
+package org.eclipse.xtext.common.types.ui.smap;
+
+import static com.google.common.collect.Maps.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -12,10 +15,12 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.BuildContext;
 import org.eclipse.jdt.core.compiler.CompilationParticipant;
 import org.eclipse.jdt.internal.core.Region;
+import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.smap.SDEInstaller;
 import org.eclipse.xtext.smap.SmapGenerator;
 import org.eclipse.xtext.smap.SmapStratum;
@@ -27,6 +32,8 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 
 	@Inject
 	private ITraceInformation traceInformation;
+	@Inject
+	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
 	@Override
 	public boolean isActive(IJavaProject project) {
@@ -57,10 +64,12 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 					continue;
 				SmapGenerator generator = new SmapGenerator();
 				generator.setOutputFileName(information.getLocalURI().lastSegment());
-				SmapStratum stratum = new SmapStratum("Original");
-				createSmapInfo(rootTraceRegion, stratum, -1);
+				Map<String,SmapStratum> strata = newHashMap(); 
+				createSmapInfo(rootTraceRegion, strata, -1);
 
-				generator.addStratum(stratum, true);
+				for (SmapStratum stratum : strata.values()) {
+					generator.addStratum(stratum, true);
+				}
 				String smap = generator.getString();
 				System.out.println(smap);
 				
@@ -85,12 +94,12 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 	}
 
 	
-	public void createSmapInfo(AbstractTraceRegion targetRegion, SmapStratum stratum, int mappedLine) {
+	public void createSmapInfo(AbstractTraceRegion targetRegion, Map<String,SmapStratum> strata, int mappedLine) {
 		if (mappedLine == targetRegion.getMyLineNumber()) {
 			if (mappedLine == targetRegion.getMyEndLineNumber())
 				return; //SKIP
 			for (AbstractTraceRegion nested: targetRegion.getNestedRegions()) {
-				createSmapInfo(nested, stratum, mappedLine);
+				createSmapInfo(nested, strata, mappedLine);
 			}
 		}
 		ILocationData location = targetRegion.getMergedAssociatedLocation();
@@ -98,13 +107,20 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 			final URI path = targetRegion.getAssociatedPath();
 			if (path != null) {
 				final String fileName = path.trimFragment().lastSegment();
+				SmapStratum stratum = strata.get(fileName);
+				if (stratum == null) {
+					IResourceServiceProvider provider = serviceProviderRegistry.getResourceServiceProvider(path.trimFragment());
+					String name = provider.get(LanguageInfo.class).getShortName();
+					stratum = new SmapStratum(name);
+					strata.put(fileName, stratum);
+				}
 				stratum.addFile(fileName, getPath(path));
 				stratum.addLineData(location.getLineNumber()+1, fileName, 1, targetRegion.getMyLineNumber()+1, 1);
 			}
 		}
 		if (targetRegion.getMyLineNumber() != targetRegion.getMyEndLineNumber()) {
 			for (AbstractTraceRegion nested: targetRegion.getNestedRegions()) {
-				createSmapInfo(nested, stratum, targetRegion.getMyLineNumber());
+				createSmapInfo(nested, strata, targetRegion.getMyLineNumber());
 			}
 		}
 	}
