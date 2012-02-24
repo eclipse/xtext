@@ -18,8 +18,8 @@ import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.typing.XtendTypeProvider;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
-import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -106,7 +106,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendScopeProvider.class;
 	}
 
-	public Class<? extends LineSeparatorHarmonizer> bindPostProcessor() {
+	public Class<? extends IFilePostProcessor> bindPostProcessor() {
 		return TraceAwarePostProcessor.class;
 	}
 }
