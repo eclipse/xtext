@@ -36,20 +36,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(1, "1");
 	}
 
-	@Test public void testIntLiteral_1() throws Exception {
-		assertEvaluatesTo(017, "017");
-	}
-	
 	@Test public void testIntLiteral_2() throws Exception {
 		assertEvaluatesTo(0x17, "0x17");
 	}
 	
 	@Test public void testIntLiteral_2a() throws Exception {
 		assertEvaluatesTo(0x17, "0X17");
-	}
-	
-	@Test public void testIntLiteral_3() throws Exception {
-		assertEvaluatesTo(077, "077");
 	}
 	
 	@Test public void testIntLiteral_4() throws Exception {
@@ -60,24 +52,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(0xffffeeee, "0xffff_eeee");
 	}
 	
-	@Test public void testIntLiteral_6() throws Exception {
-		assertEvaluatesTo(07777666655, "07777_6666_55");
-	}
-
 	@Test public void testLongLiteral_0() throws Exception {
 		assertEvaluatesTo(1l, "1l");
 	}
 
-	@Test public void testLongLiteral_1() throws Exception {
-		assertEvaluatesTo(017l, "017l");
-	}
-	
 	@Test public void testLongLiteral_2() throws Exception {
 		assertEvaluatesTo(0x17l, "0x17#L");
-	}
-	
-	@Test public void testLongLiteral_3() throws Exception {
-		assertEvaluatesTo(077l, "077L");
 	}
 	
 	@Test public void testLongLiteral_4() throws Exception {
@@ -86,10 +66,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testLongLiteral_5() throws Exception {
 		assertEvaluatesTo(0xffffeeeeddddccccl, "0xffff_eeee_dddd_cccc#L");
-	}
-	
-	@Test public void testLongLiteral_6() throws Exception {
-		assertEvaluatesTo(077776666555544443333l, "07777_6666_5555_4444_3333L");
 	}
 	
 	@Test public void testFloatLiteral_0() throws Exception {
@@ -124,10 +100,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(1d, "1d");
 	}
 
-	@Test public void testDoubleLiteral_1() throws Exception {
-		assertEvaluatesTo(17d, "017d");
-	}
-	
 	@Test public void testDoubleLiteral_2() throws Exception {
 		assertEvaluatesTo(1.0, "1.0");
 	}
@@ -183,10 +155,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testBigInteger_1() throws Exception {
 		assertEvaluatesTo(new BigInteger("12345678901234567890123456789012345678901234567890"), 
 				"1234567890_12345678901234567890_1234567890_1234567890_Bi");
-	}
-
-	@Test public void testBigInteger_2() throws Exception {
-		assertEvaluatesTo(new BigInteger("77", 8), "077bI");
 	}
 
 	@Test public void testBigInteger_3() throws Exception {
