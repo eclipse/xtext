@@ -57,5 +57,14 @@
       <attribute name="source"/>
       <attribute name="generator"/>
    </extension>
+   <extension
+         id="traceFilePath"
+         name="Trace File Path"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.marker"/>
+      <persistent value="true"/> 
+      <attribute name="path"/>
+      <attribute name="generatorName"/>
+   </extension>
    
 </plugin>

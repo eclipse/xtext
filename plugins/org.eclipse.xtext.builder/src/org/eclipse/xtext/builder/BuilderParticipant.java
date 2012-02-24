@@ -193,6 +193,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (delta.getNew() != null) {
 				handleChangedContents(delta, context, access);
 			}
+			access.flushSourceTraces();
 			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
 			for (IFile iFile : derivedResources) {
 				IMarker marker = derivedResourceMarkers.findDerivedResourceMarker(iFile, uri);

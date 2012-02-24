@@ -74,7 +74,7 @@ public abstract class AbstractTraceRegion {
 	 * @see #setAsChildIn(AbstractTraceRegion)
 	 * @param parent the parent or <code>null</code> if none.
 	 */
-	protected void setParent(@Nullable AbstractTraceRegion parent) {
+	public void setParent(@Nullable AbstractTraceRegion parent) {
 		this.parent = parent;
 		if (parent != null)
 			setAsChildIn(parent);
@@ -199,7 +199,7 @@ public abstract class AbstractTraceRegion {
 
 	/**
 	 * Produces trees from a sorted list of locations. If the locations overlap, they'll be splitted
-	 * automatically to fulfil the contract of invariant of trace regions. 
+	 * automatically to fulfill the contract of invariant of trace regions. 
 	 */
 	protected List<AbstractTraceRegion> toInvertedTraceRegions(
 			List<Pair<ILocationData, AbstractTraceRegion>> locations, URI myPath, String myProjectName) {
@@ -213,7 +213,10 @@ public abstract class AbstractTraceRegion {
 			if (current != null) {
 				// equal region - add mapped location
 				if (current.getMyOffset() == nextLocation.getOffset() && current.getMyLength() == nextLocation.getLength()) {
-					current.getWritableAssociatedLocations().add(createLocationData(nextRegion, myPath, myProjectName));
+					List<ILocationData> writableLocations = current.getWritableAssociatedLocations();
+					ILocationData newData = createLocationData(nextRegion, myPath, myProjectName);
+					if (!writableLocations.contains(newData))
+						writableLocations.add(newData);
 				} else {
 					// walk upwards if necessary
 					while(current != null && currentEndOffset <= nextLocation.getOffset()) {
