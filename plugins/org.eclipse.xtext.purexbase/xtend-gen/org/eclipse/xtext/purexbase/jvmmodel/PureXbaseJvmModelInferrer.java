@@ -52,6 +52,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   private XbaseCompiler compiler;
   
   protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
+    {
       XBlockExpression _block = m.getBlock();
       final XBlockExpression e = _block;
       Resource _eResource = e.eResource();
@@ -147,9 +148,11 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
           }
         };
       _accept.initializeLater(_function);
+    }
   }
   
   public String name(final Resource res) {
+    {
       URI _uRI = res.getURI();
       String _lastSegment = _uRI.lastSegment();
       final String s = _lastSegment;
@@ -158,9 +161,11 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
       int _operator_minus = IntegerExtensions.operator_minus(_length, _length_1);
       String _substring = s.substring(0, _operator_minus);
       return _substring;
+    }
   }
   
   public boolean containsReturn(final XExpression expr) {
+    {
       Collection<ExitPoint> _exitPoints = this.computer.getExitPoints(((XExpression) expr));
       final Collection<ExitPoint> exitPoints = _exitPoints;
       for (final ExitPoint point : exitPoints) {
@@ -170,13 +175,16 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
         }
       }
       return false;
+    }
   }
   
   public void compile(final XBlockExpression obj, final ITreeAppendable appendable) {
+    {
       appendable.increaseIndentation();
       JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
       this.compiler.compile(obj, appendable, _newTypeRef);
       appendable.decreaseIndentation();
+    }
   }
   
   public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {

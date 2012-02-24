@@ -1024,7 +1024,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Number hidden():
-	//	HEX | DECIMAL ("." DECIMAL)?;
+	//	HEX | (INT | DECIMAL) ("." (INT | DECIMAL))?;
 	public XbaseGrammarAccess.NumberElements getNumberAccess() {
 		return gaXbase.getNumberAccess();
 	}
@@ -1039,9 +1039,14 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		return gaXbase.getHEXRule();
 	} 
 
+	//terminal INT returns ecore::EInt:
+	//	"0".."9" ("0".."9" | "_")*;
+	public TerminalRule getINTRule() {
+		return gaXbase.getINTRule();
+	} 
+
 	//terminal DECIMAL:
-	//	"0".."9" ("0".."9" | "_")* (("e" | "E") ("+" | "-")? "0".."9" ("0".."9" | "_")*)? (("b" | "B") ("i" | "I" | "d" | "D")
-	//	| ("l" | "L" | "d" | "D" | "f" | "F"))?;
+	//	INT (("e" | "E") ("+" | "-")? INT)? (("b" | "B") ("i" | "I" | "d" | "D") | ("l" | "L" | "d" | "D" | "f" | "F"))?;
 	public TerminalRule getDECIMALRule() {
 		return gaXbase.getDECIMALRule();
 	} 
