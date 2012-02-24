@@ -28,8 +28,8 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		return this;
 	}
 
-	public IAppendable append(String string) {
-		String replaced = string.replace(lineSeparator, getIndentationString());
+	public IAppendable append(CharSequence string) {
+		String replaced = string.toString().replace(lineSeparator, getIndentationString());
 		builder.append(replaced);
 		return this;
 	}

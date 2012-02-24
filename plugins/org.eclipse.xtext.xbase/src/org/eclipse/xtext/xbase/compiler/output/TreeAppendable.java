@@ -219,7 +219,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return this;
 	}
 	
-	public ITreeAppendable append(ITreeAppendable other) {
+	protected ITreeAppendable appendTreeAppendable(ITreeAppendable other) {
 		closeLastChild();
 		if (other instanceof TreeAppendable) {
 			((TreeAppendable) other).markClosed();
@@ -231,9 +231,12 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return this;
 	}
 
-	public TreeAppendable append(String string) {
+	public ITreeAppendable append(CharSequence content) {
+		if (content instanceof ITreeAppendable) {
+			return appendTreeAppendable((ITreeAppendable)content);
+		}
 		closeLastChild();
-		appendIndented(string);
+		appendIndented(content.toString());
 		return this;
 	}
 

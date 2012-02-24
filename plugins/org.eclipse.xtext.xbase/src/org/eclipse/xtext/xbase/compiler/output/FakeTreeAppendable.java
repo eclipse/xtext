@@ -41,7 +41,7 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	}
 	
 	@Override
-	public ITreeAppendable append(String string) {
+	public ITreeAppendable append(CharSequence string) {
 		super.append(string);
 		return this;
 	}
@@ -82,10 +82,6 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	
 	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
 		return this;
-	}
-	
-	public ITreeAppendable append(ITreeAppendable other) {
-		throw new UnsupportedOperationException("FakeTreeAppendable cannot append another ITreeAppendable");
 	}
 	
 }
