@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Common Types Edit
+Bundle-SymbolicName: org.eclipse.xtext.common.types.edit;singleton:=true
+Bundle-Version: 2.3.0.qualifier
+Bundle-Vendor: Eclispe Modeling
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.xtext.common.types.provider
+Bundle-Activator: org.eclipse.xtext.common.types.provider.TypesEditPlugin$Implementation
+Require-Bundle: org.eclipse.xtext.common.types;bundle-version="2.3.0",
+ org.eclipse.emf.edit;bundle-version="2.5.0",
+ org.eclipse.core.runtime;bundle-version="3.5.0"
