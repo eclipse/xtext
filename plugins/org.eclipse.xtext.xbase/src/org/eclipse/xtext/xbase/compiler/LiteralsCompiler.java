@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.compiler;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -81,9 +80,9 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	protected void generateComment(XExpression expr, ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced) {
-			b.append("/*");
+			b.newLine().append("/* ");
 			internalToJavaExpression(expr, b);
-			b.append("*/;");
+			b.append(" */;");
 		}
 	}
 

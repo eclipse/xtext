@@ -105,6 +105,10 @@ public class FeatureCallToJavaMapping {
 		return newArrayList(explicitArguments.subList(1, explicitArguments.size()));
 	}
 	
+	/**
+	 * @param featureCall may be used by inheritors  
+	 * @param implicitReceiver may be used by inheritors
+	 */
 	public boolean isTargetsMemberSyntaxCall(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
 		return !isStaticJavaFeature(feature);
 	}

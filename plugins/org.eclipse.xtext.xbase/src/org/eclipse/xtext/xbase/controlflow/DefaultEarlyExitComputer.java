@@ -55,6 +55,9 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		return dispatcher.invoke(expression);
 	}
 	
+	/**
+	 * @param expression unused in this context but required in dispatch signature 
+	 */
 	protected Collection<ExitPoint> _exitPoints(XExpression expression) {
 		return Collections.emptyList();
 	}
