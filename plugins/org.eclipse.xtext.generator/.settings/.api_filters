@@ -7,6 +7,12 @@
                 <message_argument value="2.1.0"/>
             </message_arguments>
         </filter>
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.3.0"/>
+                <message_argument value="2.2.1"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.xtend2.lib.EObjectExtensions">
         <filter id="305422471">
