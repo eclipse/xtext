@@ -15,9 +15,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.util;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.interpreter,
@@ -31,4 +29,5 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.scoping,
  org.eclipse.xtext.example.arithmetics.formatting,
  org.eclipse.xtext.example.arithmetics.serializer
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging

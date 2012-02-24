@@ -169,8 +169,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		List<String> requiredBundles = Lists.newArrayList(
 				"org.eclipse.xtext;bundle-version=\"2.1.0\";visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.xbase;bundle-version=\"2.1.0\";resolution:=optional;visibility:=reexport", //$NON-NLS-1$
-				"org.apache.log4j;bundle-version=\"1.2.15\";visibility:=reexport", //$NON-NLS-1$
-				"org.apache.commons.logging;bundle-version=\"1.0.4\";resolution:=optional;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
