@@ -2575,35 +2575,51 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cHEXTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final RuleCall cDECIMALTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_0 = (Alternatives)cGroup_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_0_0 = (RuleCall)cAlternatives_1_0.eContents().get(0);
+		private final RuleCall cDECIMALTerminalRuleCall_1_0_1 = (RuleCall)cAlternatives_1_0.eContents().get(1);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cFullStopKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final RuleCall cDECIMALTerminalRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
+		private final Alternatives cAlternatives_1_1_1 = (Alternatives)cGroup_1_1.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_1_1_1_0 = (RuleCall)cAlternatives_1_1_1.eContents().get(0);
+		private final RuleCall cDECIMALTerminalRuleCall_1_1_1_1 = (RuleCall)cAlternatives_1_1_1.eContents().get(1);
 		
 		//Number hidden():
-		//	HEX | DECIMAL ("." DECIMAL)?;
+		//	HEX | (INT | DECIMAL) ("." (INT | DECIMAL))?;
 		public ParserRule getRule() { return rule; }
 
-		//HEX | DECIMAL ("." DECIMAL)?
+		//HEX | (INT | DECIMAL) ("." (INT | DECIMAL))?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//HEX
 		public RuleCall getHEXTerminalRuleCall_0() { return cHEXTerminalRuleCall_0; }
 
-		//DECIMAL ("." DECIMAL)?
+		//(INT | DECIMAL) ("." (INT | DECIMAL))?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//DECIMAL
-		public RuleCall getDECIMALTerminalRuleCall_1_0() { return cDECIMALTerminalRuleCall_1_0; }
+		//INT | DECIMAL
+		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
-		//("." DECIMAL)?
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_0_0() { return cINTTerminalRuleCall_1_0_0; }
+
+		//DECIMAL
+		public RuleCall getDECIMALTerminalRuleCall_1_0_1() { return cDECIMALTerminalRuleCall_1_0_1; }
+
+		//("." (INT | DECIMAL))?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"."
 		public Keyword getFullStopKeyword_1_1_0() { return cFullStopKeyword_1_1_0; }
 
+		//INT | DECIMAL
+		public Alternatives getAlternatives_1_1_1() { return cAlternatives_1_1_1; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_1_1_0() { return cINTTerminalRuleCall_1_1_1_0; }
+
 		//DECIMAL
-		public RuleCall getDECIMALTerminalRuleCall_1_1_1() { return cDECIMALTerminalRuleCall_1_1_1; }
+		public RuleCall getDECIMALTerminalRuleCall_1_1_1_1() { return cDECIMALTerminalRuleCall_1_1_1_1; }
 	}
 	
 	
@@ -2662,6 +2678,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private QualifiedNameElements pQualifiedName;
 	private NumberElements pNumber;
 	private TerminalRule tHEX;
+	private TerminalRule tINT;
 	private TerminalRule tDECIMAL;
 	
 	private final GrammarProvider grammarProvider;
@@ -3246,7 +3263,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Number hidden():
-	//	HEX | DECIMAL ("." DECIMAL)?;
+	//	HEX | (INT | DECIMAL) ("." (INT | DECIMAL))?;
 	public NumberElements getNumberAccess() {
 		return (pNumber != null) ? pNumber : (pNumber = new NumberElements());
 	}
@@ -3261,9 +3278,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
 	} 
 
+	//terminal INT returns ecore::EInt:
+	//	"0".."9" ("0".."9" | "_")*;
+	public TerminalRule getINTRule() {
+		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+	} 
+
 	//terminal DECIMAL:
-	//	"0".."9" ("0".."9" | "_")* (("e" | "E") ("+" | "-")? "0".."9" ("0".."9" | "_")*)? (("b" | "B") ("i" | "I" | "d" | "D")
-	//	| ("l" | "L" | "d" | "D" | "f" | "F"))?;
+	//	INT (("e" | "E") ("+" | "-")? INT)? (("b" | "B") ("i" | "I" | "d" | "D") | ("l" | "L" | "d" | "D" | "f" | "F"))?;
 	public TerminalRule getDECIMALRule() {
 		return (tDECIMAL != null) ? tDECIMAL : (tDECIMAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DECIMAL"));
 	} 

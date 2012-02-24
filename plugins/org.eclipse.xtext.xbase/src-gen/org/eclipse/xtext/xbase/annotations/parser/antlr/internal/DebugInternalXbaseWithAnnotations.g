@@ -538,8 +538,14 @@ ruleQualifiedName :
 // Rule Number
 ruleNumber :
 	RULE_HEX |
-	RULE_DECIMAL (
-		'.' RULE_DECIMAL
+	(
+		RULE_INT |
+		RULE_DECIMAL
+	) (
+		'.' (
+			RULE_INT |
+			RULE_DECIMAL
+		)
 	)?
 ;
 
@@ -635,21 +641,22 @@ RULE_HEX :
 	)?
 ;
 
-RULE_DECIMAL :
+RULE_INT :
 	'0' .. '9' (
 		'0' .. '9' |
 		'_'
-	)* (
+	)*
+;
+
+RULE_DECIMAL :
+	RULE_INT (
 		(
 			'e' |
 			'E'
 		) (
 			'+' |
 			'-'
-		)? '0' .. '9' (
-			'0' .. '9' |
-			'_'
-		)*
+		)? RULE_INT
 	)? (
 		(
 			'b' |

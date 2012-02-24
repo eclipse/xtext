@@ -10,9 +10,11 @@ package org.eclipse.xtext.xbase.conversion;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.impl.INTValueConverter;
 import org.eclipse.xtext.conversion.impl.KeywordAlternativeConverter;
 import org.eclipse.xtext.conversion.impl.KeywordBasedValueConverter;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
+import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -114,4 +116,19 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		return keywordBasedConverterProvider.get();
 	}
 	
+	@Inject
+	private IntUnderscoreValueConverter intUnderscoreValueConverter;
+	
+	@Override
+	@ValueConverter(rule = "INT")
+	public IValueConverter<Integer> INT() {
+		return intUnderscoreValueConverter;
+	}
+	
+	public static class IntUnderscoreValueConverter extends INTValueConverter {
+		@Override
+		public Integer toValue(String string, INode node) {
+			return super.toValue(string.replace("_", ""), node);
+		}
+	}
 }
