@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
@@ -22,6 +23,9 @@ import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
+import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -61,6 +65,9 @@ public class SharedModule extends AbstractModule {
 
 		bind(IncrementalProjectBuilder.class).to(XtextBuilder.class);
 		bind(IStorage2UriMapper.class).to(Storage2UriMapperImpl.class).in(Scopes.SINGLETON);
+		
+		bind(IDerivedResourceMarkers.class).to(DerivedResourceMarkers.class);
+		bind(ITraceInformation.class).to(FileBasedTraceInformation.class);
 
 		bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 			public IWorkbench get() {

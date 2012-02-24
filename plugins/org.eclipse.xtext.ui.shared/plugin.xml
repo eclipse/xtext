@@ -126,4 +126,14 @@
           searchResultClass="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult">
     	</viewPage>
  	</extension>
+ 	<extension
+         point="org.eclipse.jdt.core.compilationParticipant">
+      <compilationParticipant
+            class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.builder.smap.SmapInstallingCompilationParticipant"
+            createsProblems="false"
+            id="org.eclipse.xtext.common.types.shared.smapCompilationParticipant"
+            modifiesEnvironment="false"
+            requiredSourceLevel="1.4">
+      </compilationParticipant>
+   </extension>
 </plugin>
