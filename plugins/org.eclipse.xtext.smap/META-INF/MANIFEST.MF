@@ -4,5 +4,5 @@ Bundle-Name: JSR-45 Smap installer
 Bundle-SymbolicName: org.eclipse.xtext.smap
 Bundle-Version: 2.3.0.qualifier
 Bundle-Vendor: Eclipse Modeling
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.smap;x-internal:=true
