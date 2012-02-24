@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.3.0";visibility:=reexport,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase.lib;bundle-version="2.3.0"
 Import-Package: org.apache.log4j,
