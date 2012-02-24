@@ -31,6 +31,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl;
+import org.eclipse.emf.codegen.merge.java.JControlModel;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -137,7 +138,16 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	protected void doGenerate(GenModel genModel) {
-		Generator generator = new Generator();
+		Generator generator = new Generator() {
+			@Override
+			public JControlModel getJControlModel() {
+				if (jControlModel == null) {
+				      jControlModel = new JControlModel();
+				      jControlModel.initialize(null, options.mergeRulesURI);
+				}
+				return jControlModel;
+			}
+		};
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new CvsIdFilteringGeneratorAdapterFactoryDescriptor());
 		generator.setInput(genModel);
