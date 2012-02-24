@@ -40,6 +40,13 @@ public class LanguageInfo {
 	public String getLanguageName() {
 		return languageName;
 	}
+	
+	public String getShortName() {
+		int lastIndex = languageName.lastIndexOf('.');
+		if (lastIndex == -1)
+			return getLanguageName();
+		return getLanguageName().substring(lastIndex+1);
+	}
 
 	@Override
 	public int hashCode() {
