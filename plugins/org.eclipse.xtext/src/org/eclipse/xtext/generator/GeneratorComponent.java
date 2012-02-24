@@ -142,7 +142,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 	}
 	
 	/**
-	 * @since 2.1
+	 * @since 2.3
 	 */
 	protected Map<String, OutputConfiguration> getOutputConfigurations() {
 		IOutputConfigurationProvider outputConfigurationProvider = injector
