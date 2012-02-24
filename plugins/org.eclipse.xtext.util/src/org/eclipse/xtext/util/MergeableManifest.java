@@ -180,6 +180,7 @@ public class MergeableManifest extends Manifest {
 		// hack: reconstruct linebreaks
 		addRequiredBundles(Collections.<String>emptySet());
 		addExportedPackages(Collections.<String>emptySet());
+		addImportedPackages(Collections.<String>emptySet());
 		modified = false;
 	}
 
