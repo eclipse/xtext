@@ -11,28 +11,22 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.regex.Pattern;
 
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XNumberLiteral;
-
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class NumberLiterals {
 
-	@Inject
-	private TypeReferences typeReferences;
-
-	@Inject
-	private ITypeProvider typeProvider;
+	private static final Pattern OCTAL_PATTERN = Pattern.compile("0(\\d|_)+(l|bi)?");
 
 	public int getBase(XNumberLiteral literal) {
 		String valueAsLowerCase = literal.getValue().toLowerCase();
 		if (valueAsLowerCase.startsWith("0x"))
 			return 16;
-		else if (valueAsLowerCase.startsWith("0") && valueAsLowerCase.length() > 1 && valueAsLowerCase.indexOf('.') == -1)
+		else if (OCTAL_PATTERN.matcher(valueAsLowerCase).matches())
 			return 8;
 		else
 			return 10;
