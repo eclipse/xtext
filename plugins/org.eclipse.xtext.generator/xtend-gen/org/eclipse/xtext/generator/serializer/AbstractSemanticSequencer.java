@@ -167,7 +167,6 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public HashSet<Grammar> getGrammars(final IConstraintElement ele) {
-    {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
       final HashSet<Grammar> result = _newHashSet;
       boolean _operator_and = false;
@@ -208,7 +207,6 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         }
       }
       return result;
-    }
   }
   
   public boolean uses(final Grammar g1, final Grammar g2) {

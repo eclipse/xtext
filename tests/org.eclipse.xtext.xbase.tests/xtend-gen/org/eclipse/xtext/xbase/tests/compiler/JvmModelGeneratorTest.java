@@ -224,7 +224,6 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   }
   
   public Class<?> compile(final Resource res, final JvmDeclaredType type) {
-    {
       res.eSetDeliver(false);
       EList<EObject> _contents = res.getContents();
       CollectionExtensions.<JvmDeclaredType>operator_add(_contents, type);
@@ -247,6 +246,5 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       EObject _head = IterableExtensions.<EObject>head(_contents_1);
       this.helper.assertNoErrors(_head);
       return compiledClass;
-    }
   }
 }

@@ -85,7 +85,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
-    {
       BindFactory _bindFactory = new BindFactory();
       final BindFactory bf = _bindFactory;
       SerializerFragmentState _state = this.state();
@@ -113,11 +112,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       bf.addTypeToType(_name_4, _name_5);
       Set<Binding> _bindings = bf.getBindings();
       return _bindings;
-    }
   }
   
   public void generate(final Xtend2ExecutionContext ctx) {
-    {
       SerializerFragmentState _state = this.state();
       boolean _operator_not = BooleanExtensions.operator_not(_state.srcGenOnly);
       if (_operator_not) {
@@ -150,7 +147,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
           }
         }
       }
-    }
   }
   
   public List<String> getExportedPackagesRtList(final Grammar grammar) {

@@ -305,7 +305,6 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   
   @Test
   public void testSetBody() {
-    {
       JvmOperation _createJvmOperation = TypesFactory.eINSTANCE.createJvmOperation();
       final JvmOperation op = _createJvmOperation;
       final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
@@ -325,6 +324,5 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<Adapter> _eAdapters = op.eAdapters();
       int _size = _eAdapters.size();
       Assert.assertEquals(1, _size);
-    }
   }
 }

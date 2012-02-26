@@ -28,7 +28,6 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   
   @Test
   public void testInference() {
-    {
       JvmModelAssociator _jvmModelAssociator = new JvmModelAssociator();
       final JvmModelAssociator assoc = _jvmModelAssociator;
       final Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean> _function = new Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean>() {
@@ -92,6 +91,5 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
       EObject _get_1 = _contents_4.get(1);
       boolean _isAbstract_1 = ((JvmDeclaredType) _get_1).isAbstract();
       Assert.assertTrue(_isAbstract_1);
-    }
   }
 }
