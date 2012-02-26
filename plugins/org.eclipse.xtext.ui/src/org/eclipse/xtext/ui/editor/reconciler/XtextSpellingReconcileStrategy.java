@@ -11,13 +11,11 @@ import static com.google.common.collect.ObjectArrays.*;
 import static org.eclipse.jface.text.IDocumentExtension3.*;
 import static org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper.*;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.EditorsUI;
@@ -49,11 +47,6 @@ public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 	public void setDocument(IDocument document) {
 		super.setDocument(document);
 		spellingProblemCollector = createSpellingProblemCollector();
-		reconcile(new Region(0, getDocument().getLength()));
-	}
-
-	protected IProgressMonitor getProgressMonitor() {
-		return progressMonitor;
 	}
 
 	@Override
