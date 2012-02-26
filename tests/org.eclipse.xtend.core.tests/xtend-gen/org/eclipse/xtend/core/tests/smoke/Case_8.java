@@ -46,7 +46,6 @@ public class Case_8 {
   
   @Inject
   public void explicitName() {
-    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("com.acme.SimpleElement as FooBar {}");
       _builder.newLine();
@@ -55,6 +54,5 @@ public class Case_8 {
       QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(element);
       String _string = _fullyQualifiedName.toString();
       Assert.assertEquals("FooBar", _string);
-    }
   }
 }

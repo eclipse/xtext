@@ -83,7 +83,6 @@ public class TestBatchCompiler {
   
   @Test
   public void bug368551() {
-    {
       this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
       this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
       this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
@@ -93,24 +92,20 @@ public class TestBatchCompiler {
       String[] _list = _file.list();
       int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
       Assert.assertEquals(2, _size);
-    }
   }
   
   @Test
   public void testCompileTestData() {
-    {
       this.batchCompiler.compile();
       String _operator_plus = StringExtensions.operator_plus(TestBatchCompiler.OUTPUT_DIRECTORY, "/test");
       File _file = new File(_operator_plus);
       String[] _list = _file.list();
       int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
       Assert.assertEquals(2, _size);
-    }
   }
   
   @Test
   public void tempDirectory() {
-    {
       this.batchCompiler.setDeleteTempDirectory(false);
       this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY);
       boolean _compile = this.batchCompiler.compile();
@@ -127,12 +122,10 @@ public class TestBatchCompiler {
       String[] _list_1 = _file_1.list();
       int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
       Assert.assertEquals(4, _size_1);
-    }
   }
   
   @Test
   public void deleteTempDirectory() {
-    {
       this.batchCompiler.setDeleteTempDirectory(true);
       this.batchCompiler.setTempDirectory(TestBatchCompiler.TEMP_DIRECTORY);
       boolean _compile = this.batchCompiler.compile();
@@ -141,6 +134,5 @@ public class TestBatchCompiler {
       String[] _list = _file.list();
       int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
       Assert.assertEquals(0, _size);
-    }
   }
 }
