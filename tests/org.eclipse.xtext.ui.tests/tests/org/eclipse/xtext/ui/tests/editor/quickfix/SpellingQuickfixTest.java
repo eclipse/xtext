@@ -17,11 +17,11 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
 import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
-import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.eclipse.jface.text.source.SourceViewer;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
+import org.eclipse.xtext.ui.editor.XtextSourceViewer;
+import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -40,12 +40,14 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 
 	private XtextEditor xtextEditor;
 
+	@SuppressWarnings("restriction")
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
@@ -84,11 +86,10 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 	}
 
 	protected ICompletionProposal[] computeQuickAssistProposals(int offset) {
-		SourceViewer sourceViewer = getSourceViewer();
-		XtextSourceViewerConfiguration sourceViewerConfiguration = xtextEditor.getXtextSourceViewerConfiguration();
-		IReconciler reconciler = sourceViewerConfiguration.getReconciler(sourceViewer);
-		IReconcilingStrategy reconcilingStrategy = reconciler.getReconcilingStrategy("");
-		reconcilingStrategy.setDocument(sourceViewer.getDocument());
+		XtextSourceViewer sourceViewer = getSourceViewer();
+		XtextReconciler reconciler = (XtextReconciler) sourceViewer.getAdapter(IReconciler.class);
+		IReconcilingStrategyExtension reconcilingStrategyExtension = (IReconcilingStrategyExtension) reconciler.getReconcilingStrategy("");
+		reconcilingStrategyExtension.initialReconcile();
 		QuickAssistAssistant quickAssistAssistant = (QuickAssistAssistant) sourceViewer.getQuickAssistAssistant();
 		IQuickAssistProcessor quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor();
 		ICompletionProposal[] quickAssistProposals = quickAssistProcessor
@@ -100,8 +101,8 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 		return getSourceViewer().getDocument();
 	}
 
-	protected SourceViewer getSourceViewer() {
-		SourceViewer sourceViewer = (SourceViewer) xtextEditor.getInternalSourceViewer();
+	protected XtextSourceViewer getSourceViewer() {
+		XtextSourceViewer sourceViewer = (XtextSourceViewer) xtextEditor.getInternalSourceViewer();
 		return sourceViewer;
 	}
 

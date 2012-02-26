@@ -21,8 +21,11 @@ import org.eclipse.jface.text.contentassist.ICompletionListener;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ContentAssistantFacade;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.ISourceViewerExtension4;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
@@ -56,6 +59,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	private final Object pendingReplaceRegionLock;
 	private int delay;
 	private IReconcilingStrategy strategy;
+	private boolean initalProcessDone;
 
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
 
@@ -148,6 +152,9 @@ public class XtextReconciler extends Job implements IReconciler {
 				} else {
 					facade.addCompletionListener(documentListener);
 				}
+				if (strategy instanceof ISourceViewerAware) {
+					((ISourceViewerAware)strategy).setSourceViewer((ISourceViewer) textViewer);
+				}
 			}
 			isInstalled = true;
 		}
@@ -181,6 +188,11 @@ public class XtextReconciler extends Job implements IReconciler {
 			((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			strategy.setDocument(document);
+			if (!initalProcessDone && strategy instanceof IReconcilingStrategyExtension) {
+				initalProcessDone = true;
+				IReconcilingStrategyExtension reconcilingStrategyExtension = (IReconcilingStrategyExtension) strategy;
+				reconcilingStrategyExtension.initialReconcile();
+			}
 		}
 	}
 
@@ -236,6 +248,9 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (document != null) {
 			final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
 			if (replaceRegionToBeProcessed != null) {
+				if (strategy instanceof IReconcilingStrategyExtension) {
+					((IReconcilingStrategyExtension) strategy).setProgressMonitor(monitor);
+				}
 				strategy.reconcile(replaceRegionToBeProcessed);
 			}
 		}

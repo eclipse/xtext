@@ -9,10 +9,14 @@
 package org.eclipse.xtext.ui.editor.reconciler;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 /**
@@ -20,17 +24,21 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  */
-public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
+public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension, ISourceViewerAware {
 
 	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
 	
 	private XtextDocument document;
+	private XtextSpellingReconcileStrategy spellingReconcileStrategy;
 
 	public void reconcile(final IRegion region) {
 		if (log.isTraceEnabled()) {
 			log.trace("reconcile region: " + region, new Exception());
 		}
 		document.internalModify(new XtextReconcilerUnitOfWork(region, document));
+		if (spellingReconcileStrategy != null) {
+			spellingReconcileStrategy.reconcile(region);
+		}
 	}
 
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
@@ -42,6 +50,34 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 			throw new IllegalArgumentException("Document must be an "  + XtextDocument.class.getSimpleName());
 		}
 		this.document = (XtextDocument) document;
+		if (spellingReconcileStrategy != null) {
+			spellingReconcileStrategy.setDocument(document);
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void setSourceViewer(ISourceViewer sourceViewer) {
+		spellingReconcileStrategy = new XtextSpellingReconcileStrategy(sourceViewer);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void setProgressMonitor(IProgressMonitor monitor) {
+		if (spellingReconcileStrategy != null) {
+			spellingReconcileStrategy.setProgressMonitor(monitor);
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void initialReconcile() {
+		if (spellingReconcileStrategy != null) {
+			spellingReconcileStrategy.initialReconcile();
+		}
 	}
 
 }
