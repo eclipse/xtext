@@ -19,6 +19,8 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
+import com.google.inject.Inject;
+
 /**
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
@@ -30,6 +32,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	
 	private XtextDocument document;
 	
+	@Inject
 	private XtextSpellingReconcileStrategy.Factory spellingReconcileStrategyFactory;
 	
 	private XtextSpellingReconcileStrategy spellingReconcileStrategy;
