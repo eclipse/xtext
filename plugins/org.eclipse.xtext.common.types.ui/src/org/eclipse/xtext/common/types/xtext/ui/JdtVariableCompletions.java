@@ -34,7 +34,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-@SuppressWarnings("restriction")
 public class JdtVariableCompletions {
 	
 	public interface CompletionDataAcceptor {

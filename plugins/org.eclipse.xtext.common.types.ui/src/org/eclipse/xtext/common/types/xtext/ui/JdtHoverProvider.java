@@ -26,7 +26,6 @@ import com.google.inject.Inject;
  * @author Christoph Kulla - Initial contribution and API
  * @author Sven Efftinge
  */
-@SuppressWarnings("restriction")
 public class JdtHoverProvider implements IEObjectHoverProvider {
 
 	@Inject

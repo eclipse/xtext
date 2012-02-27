@@ -31,6 +31,12 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.internal.compiler.env.IBinaryType;
+import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
+import org.eclipse.jdt.internal.core.BinaryType;
+import org.eclipse.jdt.internal.core.JavaElement;
+import org.eclipse.jdt.internal.core.SourceMapper;
+import org.eclipse.jdt.internal.core.SourceMethod;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -141,7 +147,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			for (IAnnotationBinding annotation : annotated.getAnnotations()) {
 				createAnnotationReference(result, annotation);
 			}
-		} catch(@SuppressWarnings("restriction") org.eclipse.jdt.internal.compiler.problem.AbortCompilation aborted) {
+		} catch(AbortCompilation aborted) {
 			log.info("Couldn't resolve annotations of "+annotated, aborted);
 		}
 	}
@@ -567,7 +573,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			IAnnotationBinding[] parameterAnnotations = null;
 			try {
 				parameterAnnotations = method.getParameterAnnotations(i);
-			} catch(@SuppressWarnings("restriction") org.eclipse.jdt.internal.compiler.problem.AbortCompilation aborted) {
+			} catch(AbortCompilation aborted) {
 				parameterAnnotations = null;
 			}
 			result.getParameters().add(createFormalParameter(parameterTypes[i], parameterName, parameterAnnotations));
@@ -577,7 +583,6 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected String[] fastGetParameterNames(IMethod javaMethod) {
 		String[] parameterNames = null;
 		if (javaMethod != null) {
@@ -586,13 +591,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			if (numberOfParameters != 0) {
 				if (javaMethod.exists()) {
 					try {
-						if (javaMethod instanceof org.eclipse.jdt.internal.core.SourceMethod) {
+						if (javaMethod instanceof SourceMethod) {
 							parameterNames = javaMethod.getParameterNames();
 							return parameterNames;
 						}
-						if (javaMethod instanceof org.eclipse.jdt.internal.core.JavaElement) {
-							org.eclipse.jdt.internal.core.JavaElement casted = (org.eclipse.jdt.internal.core.JavaElement) javaMethod;
-							org.eclipse.jdt.internal.core.SourceMapper mapper = casted.getSourceMapper();
+						if (javaMethod instanceof JavaElement) {
+							JavaElement casted = (JavaElement) javaMethod;
+							SourceMapper mapper = casted.getSourceMapper();
 							if (mapper != null) {
 								char[][] parameterNamesAsChars = mapper.getMethodParameterNames(javaMethod);
 								if (parameterNamesAsChars != null) {
@@ -600,7 +605,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 									return parameterNames;
 								}
 								IType type = (IType) javaMethod.getParent();
-								org.eclipse.jdt.internal.compiler.env.IBinaryType info = (org.eclipse.jdt.internal.compiler.env.IBinaryType) ((org.eclipse.jdt.internal.core.BinaryType) javaMethod
+								IBinaryType info = (IBinaryType) ((BinaryType) javaMethod
 										.getDeclaringType()).getElementInfo();
 								char[] source = mapper.findSource(type, info);
 								if (source != null) {

@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JdtRefactoringContext extends IRenameElementContext.Impl {
 
 	private List<IJavaElement> javaElements;
