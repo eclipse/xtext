@@ -125,8 +125,51 @@ public class RebuildDependentResourcesTest extends Assert {
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
+	public void testBrokenJavaReference_03() throws Exception {
+		IFile file = createFile("src/foo"+extension, "default WillBeDeleted");
+		IFile javaFile = createFile("src/WillBeDeleted.java", "class WillBeDeleted {}");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		javaFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
+	public void testBrokenJavaReference_04() throws Exception {
+		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
+		IFile javaFile = createFile("src/pack/WillBeDeleted.java", "package pack; class WillBeDeleted {}");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		javaFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
+	public void testBrokenJavaReference_05() throws Exception {
+		IFile genFile = createFile("src/foo"+extension, "generate WillBeDeleted");
+		waitForAutoBuild();
+		IFile file = createFile("src/bar"+extension, "default WillBeDeleted");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		genFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
+	public void testBrokenJavaReference_06() throws Exception {
+		IFile genFile = createFile("src/foo"+extension, "generate pack.WillBeDeleted");
+		waitForAutoBuild();
+		IFile file = createFile("src/bar"+extension, "default pack.WillBeDeleted");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		genFile.setContents(new StringInputStream(""), true, true,	monitor());
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 2, countMarkers(file));
+	}
+	
 	private IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
 		IJavaProject project = createJavaProject(string);
+		addSourceFolder(project, "src-gen");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
 	}
