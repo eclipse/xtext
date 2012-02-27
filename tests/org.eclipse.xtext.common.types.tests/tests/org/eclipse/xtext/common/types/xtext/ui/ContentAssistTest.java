@@ -25,7 +25,6 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 
 	@Override
