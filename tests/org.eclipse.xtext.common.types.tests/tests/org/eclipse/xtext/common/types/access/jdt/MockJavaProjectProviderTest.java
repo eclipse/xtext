@@ -10,12 +10,17 @@ package org.eclipse.xtext.common.types.access.jdt;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MockJavaProjectProviderTest extends Assert {
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Test public void testClasspathResolved() throws CoreException {
 		IJavaProject javaProject = new MockJavaProjectProvider().getJavaProject(null);

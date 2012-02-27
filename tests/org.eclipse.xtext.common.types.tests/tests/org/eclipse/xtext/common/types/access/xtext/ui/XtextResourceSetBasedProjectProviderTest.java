@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -25,6 +26,10 @@ public class XtextResourceSetBasedProjectProviderTest extends Assert {
 	private XtextResourceSet resourceSet;
 	private MockJavaProjectProvider mockProjectProvider;
 	private XtextResourceSetBasedProjectProvider projectProvider;
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Before
 	public void setUp() throws Exception {

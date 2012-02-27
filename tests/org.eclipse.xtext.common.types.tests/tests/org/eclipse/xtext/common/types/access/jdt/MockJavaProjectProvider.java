@@ -45,7 +45,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 	private static IJavaProject javaProject;
@@ -65,6 +64,8 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	}
 
 	public static void setUp() throws Exception {
+		if(javaProject != null)
+			return;
 		javaProject = createJavaProject("projectWithoutSources",
 				new String[] {
 						JavaCore.NATURE_ID,

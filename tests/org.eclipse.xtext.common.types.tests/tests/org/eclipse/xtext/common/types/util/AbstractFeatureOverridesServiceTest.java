@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.GenericSuperClass;
 import org.eclipse.xtext.common.types.testSetups.SubClass;
 import org.eclipse.xtext.common.types.testSetups.SubOfGenericClass;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.common.types.testSetups.SuperClass;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
@@ -43,6 +45,10 @@ public abstract class AbstractFeatureOverridesServiceTest extends Assert {
     private JvmTypeReferences typeRefs;
 	@Inject
     private FeatureOverridesService service;
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Before
     public void setUp() throws Exception {

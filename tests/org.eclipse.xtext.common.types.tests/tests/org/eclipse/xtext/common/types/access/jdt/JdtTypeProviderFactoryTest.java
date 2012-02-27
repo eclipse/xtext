@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -23,6 +24,10 @@ public class JdtTypeProviderFactoryTest extends Assert {
 
 	private MockJavaProjectProvider projectProvider;
 	private JdtTypeProviderFactory factory;
+
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Before
 	public void setUp() throws Exception {

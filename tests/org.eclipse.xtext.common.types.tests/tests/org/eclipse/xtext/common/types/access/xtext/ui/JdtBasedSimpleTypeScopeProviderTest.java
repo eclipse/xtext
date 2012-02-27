@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -39,6 +40,10 @@ public class JdtBasedSimpleTypeScopeProviderTest extends Assert {
 	private ResourceImpl resource;
 	private JvmField field;
 	private ResourceImpl emptyResource;
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Before
 	public void setUp() throws Exception {
