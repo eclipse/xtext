@@ -9,6 +9,9 @@ package org.eclipse.xtext.xbase.lib;
 
 import java.math.BigInteger;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+import org.eclipse.xtext.xbase.lib.internal.InlineContext;
+
 /**
  * This is an extension library for {@link BigInteger big integral numbers}.
  * 
@@ -25,6 +28,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} is <code>null</code>.
 	 */
+	@Inline(value="$1.negate()", when=InlineContext.ALWAYS)
 	public static BigInteger operator_minus(BigInteger a) {
 		return a.negate();
 	}
@@ -40,6 +44,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.add($2)", when=InlineContext.ALWAYS)
 	public static BigInteger operator_plus(BigInteger a, BigInteger b) {
 		return a.add(b);
 	}
@@ -55,6 +60,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.subtract($2)", when=InlineContext.ALWAYS)
 	public static BigInteger operator_minus(BigInteger a, BigInteger b) {
 		return a.subtract(b);
 	}
@@ -70,6 +76,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} <code>null</code>.
 	 */
+	@Inline(value="$1.pow($2)", when=InlineContext.ALWAYS)
 	public static BigInteger operator_power(BigInteger a, int exponent) {
 		return a.pow(exponent);
 	}
@@ -85,6 +92,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.multiply($2)", when=InlineContext.ALWAYS)
 	public static BigInteger operator_multiply(BigInteger a, BigInteger b) {
 		return a.multiply(b);
 	}
@@ -100,6 +108,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.divide($2)", when=InlineContext.ALWAYS)
 	public static BigInteger operator_divide(BigInteger a, BigInteger b) {
 		return a.divide(b);
 	}
@@ -115,6 +124,7 @@ public class BigIntegerExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.mod($2)", when=InlineContext.ALWAYS)
 	public static BigInteger operator_modulo(BigInteger a, BigInteger b) {
 		return a.mod(b);
 	}

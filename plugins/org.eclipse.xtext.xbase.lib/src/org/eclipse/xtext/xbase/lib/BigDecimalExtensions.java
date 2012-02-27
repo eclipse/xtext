@@ -10,6 +10,9 @@ package org.eclipse.xtext.xbase.lib;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+import org.eclipse.xtext.xbase.lib.internal.InlineContext;
+
 /**
  * This is an extension library for {@link BigDecimal big decimal numbers}.
  * 
@@ -26,6 +29,7 @@ public class BigDecimalExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} is <code>null</code>.
 	 */
+	@Inline(value="$1.negate()", when=InlineContext.ALWAYS)
 	public static BigDecimal operator_minus(BigDecimal a) {
 		return a.negate();
 	}
@@ -41,6 +45,7 @@ public class BigDecimalExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.add($2)", when=InlineContext.ALWAYS)
 	public static BigDecimal operator_plus(BigDecimal a, BigDecimal b) {
 		return a.add(b);
 	}
@@ -56,6 +61,7 @@ public class BigDecimalExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.subtract($2)", when=InlineContext.ALWAYS)
 	public static BigDecimal operator_minus(BigDecimal a, BigDecimal b) {
 		return a.subtract(b);
 	}
@@ -71,6 +77,7 @@ public class BigDecimalExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} is <code>null</code>.
 	 */
+	@Inline(value="$1.pow($2)", when=InlineContext.ALWAYS)
 	public static BigDecimal operator_power(BigDecimal a, int exponent) {
 		return a.pow(exponent);
 	}
@@ -86,6 +93,7 @@ public class BigDecimalExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.multiply($2)", when=InlineContext.ALWAYS)
 	public static BigDecimal operator_multiply(BigDecimal a, BigDecimal b) {
 		return a.multiply(b);
 	}
@@ -101,6 +109,7 @@ public class BigDecimalExtensions {
 	 * @throws NullPointerException
 	 *             if {@code a} or {@code b} is <code>null</code>.
 	 */
+	@Inline(value="$1.divide($2, $3.DECIMAL128)", imported=MathContext.class, when=InlineContext.ALWAYS)
 	public static BigDecimal operator_divide(BigDecimal a, BigDecimal b) {
 		return a.divide(b, MathContext.DECIMAL128);
 	}

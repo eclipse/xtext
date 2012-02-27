@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+
 /**
  * This is an extension library for {@link String strings}.
  * 
@@ -23,6 +25,7 @@ public class StringExtensions {
 	 *            another string.
 	 * @return <code>a + b</code>
 	 */
+	@Inline("($1 + $2)")
 	public static String operator_plus(String a, Object b) {
 		return a + b;
 	}

@@ -16,6 +16,9 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+import org.eclipse.xtext.xbase.lib.internal.InlineContext;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -42,6 +45,7 @@ public class CollectionExtensions {
 	 * @return <code>true</code> if the collection changed due to this operation.
 	 * @see Collection#add(Object)
 	 */
+	@Inline(value="$1.add($2)", when=InlineContext.ALWAYS)
 	public static <E> boolean operator_add(Collection<? super E> collection, E value) {
 		return collection.add(value);
 	}
@@ -58,6 +62,7 @@ public class CollectionExtensions {
 	 * @return <code>true</code> if the collection changed due to this operation.
 	 * @see #addAll(Collection, Iterable)
 	 */
+	@Inline(value="$3.$4addAll($1, $2)", imported=Iterables.class, when=InlineContext.ALWAYS)
 	public static <E> boolean operator_add(Collection<E> collection, Iterable<? extends E> newElements) {
 		return addAll(collection, newElements);
 	}
@@ -70,6 +75,7 @@ public class CollectionExtensions {
 	 * @return an unmodifiable view of the specified list.
 	 * @see Collections#unmodifiableList(List)
 	 */
+	@Inline(value="$2.$3unmodifiableList($1)", imported=Collections.class, when=InlineContext.ALWAYS)
 	public static <T> List<T> unmodifiableView(List<? extends T> list) {
 		return Collections.unmodifiableList(list);
 	}
@@ -82,6 +88,7 @@ public class CollectionExtensions {
 	 * @return an unmodifiable view of the specified collection.
 	 * @see Collections#unmodifiableCollection(Collection)
 	 */
+	@Inline(value="$2.$3unmodifiableCollection($1)", imported=Collections.class, when=InlineContext.ALWAYS)
 	public static <T> Collection<T> unmodifiableView(Collection<? extends T> collection) {
 		return Collections.unmodifiableCollection(collection);
 	}
@@ -94,6 +101,7 @@ public class CollectionExtensions {
 	 * @return an unmodifiable view of the specified set.
 	 * @see Collections#unmodifiableSet(Set)
 	 */
+	@Inline(value="$2.$3unmodifiableSet($1)", imported=Collections.class, when=InlineContext.ALWAYS)
 	public static <T> Set<T> unmodifiableView(Set<? extends T> set) {
 		return Collections.unmodifiableSet(set);
 	}
@@ -106,6 +114,7 @@ public class CollectionExtensions {
 	 * @return an unmodifiable view of the specified sorted set.
 	 * @see Collections#unmodifiableSortedSet(SortedSet)
 	 */
+	@Inline(value="$2.$3unmodifiableSortedSet($1)", imported=Collections.class, when=InlineContext.ALWAYS)
 	public static <T> SortedSet<T> unmodifiableView(SortedSet<T> set) {
 		return Collections.unmodifiableSortedSet(set);
 	}
@@ -118,6 +127,7 @@ public class CollectionExtensions {
 	 * @return an unmodifiable view of the specified map.
 	 * @see Collections#unmodifiableMap(Map)
 	 */
+	@Inline(value="$2.$3unmodifiableMap($1)", imported=Collections.class, when=InlineContext.ALWAYS)
 	public static <K, V> Map<K, V> unmodifiableView(Map<? extends K, ? extends V> map) {
 		return Collections.unmodifiableMap(map);
 	}
@@ -130,6 +140,7 @@ public class CollectionExtensions {
 	 * @return an unmodifiable view of the specified sorted map.
 	 * @see Collections#unmodifiableSortedMap(SortedMap)
 	 */
+	@Inline(value="$2.$3unmodifiableSortedMap($1)", imported=Collections.class, when=InlineContext.ALWAYS)
 	public static <K, V> SortedMap<K, V> unmodifiableView(SortedMap<K, ? extends V> map) {
 		return Collections.unmodifiableSortedMap(map);
 	}
@@ -141,6 +152,7 @@ public class CollectionExtensions {
 	 *            the list for which an immutable copy should be created. May not be <code>null</code>.
 	 * @return an immutable copy of the specified list.
 	 */
+	@Inline(value="$2.$3copyOf($1)", imported=ImmutableList.class, when=InlineContext.ALWAYS)
 	public static <T> List<T> immutableCopy(List<? extends T> list) {
 		return ImmutableList.copyOf(list);
 	}
@@ -152,6 +164,7 @@ public class CollectionExtensions {
 	 *            the set for which an immutable copy should be created. May not be <code>null</code>.
 	 * @return an immutable copy of the specified set.
 	 */
+	@Inline(value="$2.$3copyOf($1)", imported=ImmutableSet.class, when=InlineContext.ALWAYS)
 	public static <T> Set<T> immutableCopy(Set<? extends T> set) {
 		return ImmutableSet.copyOf(set);
 	}
@@ -163,6 +176,7 @@ public class CollectionExtensions {
 	 *            the sorted set for which an immutable copy should be created. May not be <code>null</code>.
 	 * @return an immutable copy of the specified sorted set.
 	 */
+	@Inline(value="$2.$3copyOfSorted($1)", imported=ImmutableSortedSet.class, when=InlineContext.ALWAYS)
 	public static <T> SortedSet<T> immutableCopy(SortedSet<T> set) {
 		return ImmutableSortedSet.copyOfSorted(set);
 	}
@@ -174,6 +188,7 @@ public class CollectionExtensions {
 	 *            the map for which an immutable copy should be created. May not be <code>null</code>.
 	 * @return an immutable copy of the specified map.
 	 */
+	@Inline(value="$2.$3copyOf($1)", imported=ImmutableMap.class, when=InlineContext.ALWAYS)
 	public static <K, V> Map<K, V> immutableCopy(Map<? extends K, ? extends V> map) {
 		return ImmutableMap.copyOf(map);
 	}
@@ -185,6 +200,7 @@ public class CollectionExtensions {
 	 *            the sorted map for which an immutable copy should be created. May not be <code>null</code>.
 	 * @return an immutable copy of the specified sorted map.
 	 */
+	@Inline(value="$2.$3copyOfSorted($1)", imported=ImmutableSortedMap.class, when=InlineContext.ALWAYS)
 	public static <K, V> SortedMap<K, V> immutableCopy(SortedMap<K, ? extends V> map) {
 		return ImmutableSortedMap.copyOfSorted(map);
 	}
@@ -213,6 +229,7 @@ public class CollectionExtensions {
 	 *            <code>null</code> entries if the {@code collection} allows that.
 	 * @return <code>true</code> if the collection changed as a result of the call
 	 */
+	@Inline(value="$3.$4addAll($1, $2)", imported=Iterables.class, when=InlineContext.ALWAYS)
 	public static <T> boolean addAll(Collection<T> collection, Iterable<? extends T> elements) {
 		return Iterables.addAll(collection, elements);
 	}
