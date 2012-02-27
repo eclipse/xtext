@@ -42,6 +42,9 @@ Workflow {
 			fragment = @CommonTestLanguagesFragments {
 				file.extensions = "typesAssistTest"
 			}
+            fragment = generator.GeneratorFragment {
+            	generatorStub = false
+            }
 		}
 		language = {
 			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage.xtext"
