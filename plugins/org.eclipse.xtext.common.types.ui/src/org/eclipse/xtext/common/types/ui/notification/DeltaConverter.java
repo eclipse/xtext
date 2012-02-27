@@ -216,6 +216,9 @@ public class DeltaConverter {
 		return result;
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	protected IType getPrimaryTypeFrom(ICompilationUnit cu)
 	{
 		try {
@@ -237,6 +240,9 @@ public class DeltaConverter {
 		return null;
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	protected String getExpectedPrimaryTypeNameFor(ICompilationUnit cu) {
 		String fileName = cu.getElementName();
 		String typeName = fileName.substring(0, fileName.lastIndexOf('.'));
