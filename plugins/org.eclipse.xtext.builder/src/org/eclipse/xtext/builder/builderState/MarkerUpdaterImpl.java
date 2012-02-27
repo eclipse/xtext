@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.validation.IResourceUIValidatorExtension;
+import org.eclipse.xtext.ui.validation.MarkerEraser;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.CheckMode;
 
@@ -26,58 +27,81 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
+ * {@link IMarkerUpdater} that handles {@link CheckMode#NORMAL_AND_FAST} marker for all changed resources.<br>
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @author Dennis Huebner
  */
 public class MarkerUpdaterImpl implements IMarkerUpdater {
+
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 	@Inject
 	private IStorage2UriMapper mapper;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
 			IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources,
 				resourceDescriptionDeltas.size());
 		subMonitor.subTask(Messages.MarkerUpdaterImpl_ValidateResources);
+
 		for (Delta delta : resourceDescriptionDeltas) {
-			if (subMonitor.isCanceled())
+			if (subMonitor.isCanceled()) {
 				throw new OperationCanceledException();
-			SubMonitor child = subMonitor.newChild(1);
-			if (delta.getNew() != null) {
-				URI uri = delta.getNew().getURI();
-				Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(uri);
-				child.setWorkRemaining(3);
-				for (Pair<IStorage, IProject> pair : storages) {
-					child.setWorkRemaining(3);
-					if (pair.getFirst() instanceof IFile) {
-						IResourceUIValidatorExtension resourceUIValidatorExtension = getResourceUIValidatorExtension(uri);
-						resourceUIValidatorExtension.updateValidationMarkers((IFile) pair.getFirst(),
-								resourceSet.getResource(uri, true), CheckMode.NORMAL_AND_FAST, child.newChild(2));
+			}
+			processDelta(delta, resourceSet, subMonitor.newChild(1));
+
+		}
+	}
+
+	private void processDelta(Delta delta, ResourceSet resourceSet, SubMonitor childMonitor) {
+		URI uri = delta.getUri();
+		IResourceUIValidatorExtension validatorExtension = getResourceUIValidatorExtension(uri);
+
+		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri)) {
+			if (pair.getFirst() instanceof IFile) {
+				IFile iFile = (IFile) pair.getFirst();
+				CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
+				if (validatorExtension != null) {
+					if (delta.getNew() != null) {
+						validatorExtension.updateValidationMarkers(iFile, resourceSet.getResource(uri, true),
+								normalAndFastMode, childMonitor);
 					} else {
-						child.worked(1);
+						validatorExtension.deleteValidationMarkers(iFile, normalAndFastMode, childMonitor);
 					}
+				} else {
+					// Clean up orphaned marker (no IResourceUIValidatorExtension registered)
+					fallBackDeleteMarker(iFile, normalAndFastMode, childMonitor);
 				}
-			} else {
-				Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(delta.getOld().getURI());
-				for (Pair<IStorage, IProject> pair : storages) {
-					if (pair.getFirst() instanceof IFile) {
-						IResourceUIValidatorExtension resourceUIValidatorExtension = getResourceUIValidatorExtension(delta
-								.getOld().getURI());
-						resourceUIValidatorExtension.deleteValidationMarkers((IFile) pair.getFirst(),
-								CheckMode.NORMAL_AND_FAST, child);
-					}
-				}
-				subMonitor.worked(1);
 			}
 		}
 	}
 
+	private void fallBackDeleteMarker(IFile iFile, CheckMode checkMode, IProgressMonitor monitor) {
+		MarkerEraser markerEraser = new MarkerEraser();
+		markerEraser.deleteValidationMarkers(iFile, checkMode, monitor);
+	}
+
+	/**
+	 * Searches for a {@link IResourceUIValidatorExtension} implementation in
+	 * {@link org.eclipse.xtext.resource.IResourceServiceProvider.Registry}<br>
+	 * 
+	 * @return {@link IResourceUIValidatorExtension} for the given {@link URI} or <code>null</code> if not found.
+	 * @see org.eclipse.xtext.resource.IResourceServiceProvider.Registry#getResourceServiceProvider(URI)
+	 * @see IResourceServiceProvider#get(Class)
+	 */
 	protected IResourceUIValidatorExtension getResourceUIValidatorExtension(URI uri) {
 		IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-		IResourceUIValidatorExtension resourceUIValidatorExtension = provider.get(IResourceUIValidatorExtension.class);
-		return resourceUIValidatorExtension;
+		IResourceUIValidatorExtension uiValidatorExtension = null;
+		if (provider != null) {
+			uiValidatorExtension = provider.get(IResourceUIValidatorExtension.class);
+		}
+		return uiValidatorExtension;
 	}
 
 }
