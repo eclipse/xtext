@@ -73,7 +73,7 @@ public class ScopeStack {
 	}
 	
 	/**
-	 * provides and registeres a fresh variable in the current scope.
+	 * provides and registers a fresh variable in the current scope.
 	 * It takes parent scopes into account and only reuses names of synthetic variables from parent scopes.
 	 * Pseudo scopes are treated as if they were part of their parent scope.
 	 */

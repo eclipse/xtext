@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -125,7 +126,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		if (isReferenced)
 			declareSyntheticVariable(expr, b);
-		b.newLine().append("{").increaseIndentation();
+		boolean needsBraces = isReferenced || !bracesAreAddedByOuterStructure(expr);
+		if (needsBraces) {
+			b.newLine().append("{").increaseIndentation();
+			b.openPseudoScope();
+		}
 		final EList<XExpression> expressions = expr.getExpressions();
 		for (int i = 0; i < expressions.size(); i++) {
 			XExpression ex = expressions.get(i);
@@ -140,7 +145,23 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 		}
-		b.decreaseIndentation().newLine().append("}");
+		if (needsBraces) {
+			b.closeScope();
+			b.decreaseIndentation().newLine().append("}");
+		}
+	}
+	
+	protected boolean bracesAreAddedByOuterStructure(XBlockExpression block) {
+		EObject container = block.eContainer();
+		if (container instanceof XTryCatchFinallyExpression 
+				|| container instanceof XIfExpression
+				|| container instanceof XClosure) {
+			return true;
+		}
+		if (!(container instanceof XExpression)) {
+			return true;
+		}
+		return false;
 	}
 
 	protected void _toJavaExpression(XBlockExpression expr, ITreeAppendable b) {

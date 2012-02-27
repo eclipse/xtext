@@ -74,15 +74,30 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 		b.append("\"").append(javaString).append("\"");
 	}
 	
-	public void _toJavaStatement(XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
-		generateComment(expr, b, isReferenced);
+	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		generateComment(new Later() {
+			public void exec(ITreeAppendable appendable) {
+				String javaString = Strings.convertToJavaString(expr.getValue());
+				// we have to escape closing comments in string literals
+				javaString = javaString.replace("*/", "* /");
+				appendable.append("\"").append(javaString).append("\"");
+			}
+		}, b, isReferenced);
 	}
 
-	protected void generateComment(XExpression expr, ITreeAppendable b, boolean isReferenced) {
+	protected void generateComment(final XExpression expr, ITreeAppendable b, boolean isReferenced) {
+		generateComment(new Later() {
+			public void exec(ITreeAppendable appendable) {
+				internalToJavaExpression(expr, appendable);
+			}
+		}, b, isReferenced);
+	}
+	
+	protected void generateComment(Later expr, ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced) {
 			b.newLine().append("/* ");
-			internalToJavaExpression(expr, b);
-			b.append(" */;");
+			expr.exec(b);
+			b.append(" */");
 		}
 	}
 

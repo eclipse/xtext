@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
@@ -26,6 +27,9 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Inject
+	private TypeReferences typeReferences;
+	
 	@Test public void testSimple() throws Exception {
 		assertCompilesTo("\nint _length = \"foo\".length();\n" + 
 				"return _length;", "'foo'.length");
@@ -36,6 +40,107 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"\ntestdata.Properties1 _properties1 = new testdata.Properties1();" + 
 				"\nreturn _properties1.prop1;", 
 				"new testdata.Properties1().prop1");
+	}
+
+	@Test public void testNull() throws Exception {
+		assertCompilesToStatement(
+				"\n/* null */", 
+				"null");
+	}
+	
+	@Test public void testStringLiteralInComment() throws Exception {
+		assertCompilesToStatement(
+				"\n/* \"* /\" */", 
+				"'*/'");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_01() throws Exception {
+		assertCompilesToStatement(
+				"\n" +
+				"try {\n" +
+				"  new Object();\n" +
+				"  new Object();\n" +
+				"} finally {\n" +
+				"  new Object();\n" +
+				"  new Object();\n" +
+				"}", 
+				"try { new Object() new Object() } finally { new Object() new Object() }");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_02() throws Exception {
+		assertCompilesToStatement(
+				"\n" +
+				"if (true) {\n" +
+				"  new Object();\n" +
+				"  new Object();\n" +
+				"} else {\n" +
+				"  new Object();\n" +
+				"  new Object();\n" +
+				"}", 
+				"if (true) { new Object() new Object() } else { new Object() new Object() }");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_03() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Integer> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Integer>() {\n" + 
+				"    public void apply(final Integer i) {\n" + 
+				"      new Object();\n" + 
+				"      new Object();\n" + 
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.Procedures.Procedure1<? super Integer> fun = _function;", 
+				"{ var (int)=>void fun = [ int i | new Object() new Object() ] }");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_04() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"Object _object = new Object();\n" +
+				"Object it = _object;\n" +
+				"it.notify();",
+				"{ var it = new Object() notify }");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_05() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"{\n" +
+				"  Object _object = new Object();\n" +
+				"  Object it = _object;\n" +
+				"  it.notify();\n" +
+				"}\n" +
+				"{\n" +
+				"  Object _object = new Object();\n" +
+				"  Object it = _object;\n" +
+				"  it.notify();\n" +
+				"}",
+				"{ { var it = new Object() notify } { var it = new Object() notify } }");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_06() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"Object _object = new Object();\n" + 
+				"Object it = _object;\n" + 
+				"{\n" + 
+				"  Object _object_1 = new Object();\n" + 
+				"  Object it_1 = _object_1;\n" + 
+				"  it_1.notify();\n" + 
+				"}\n" + 
+				"it.notify();",
+				"{ var it = new Object() { var it = new Object() it.notify() } notify }");
+	}
+	
+	@Test public void testBlockHasNoSuperfluousBraces_07() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"Object _object = new Object();\n" + 
+				"Object it = _object;\n" + 
+				"Object _object_1 = new Object();\n" + 
+				"_object_1.notify();\n" + 
+				"it.notify();",
+				"{ var it = new Object() { new Object().notify() } notify }");
 	}
 	
 //TODO	
@@ -115,6 +220,32 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"x}");
 	}
 	
+	@Test public void testNullSafeFeatureCall_01() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"Object _object = new Object();\n" +
+				"if (_object!=null) _object.notify();",
+				"new Object()?.notify");
+	}
+	
+	@Test public void testNullSafeFeatureCall_02() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"Object _object = new Object();\n" +
+				"String _string = _object.toString();\n" +
+				"if (_string!=null) _string.notify();",
+				"new Object().toString?.notify");
+	}
+	
+	@Test public void testNullSafeFeatureCall_03() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"Object _object = new Object();\n" +
+				"String _string = _object==null?(String)null:_object.toString();\n" +
+				"if (_string!=null) _string.notify();",
+				"new Object()?.toString?.notify");
+	}
+	
 	@Test public void testSwitchTypeGuards() throws Exception {
 		assertCompilesTo(
 				"\n" +
@@ -155,6 +286,14 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		ITreeAppendable tracing = new FakeTreeAppendable();
 		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
 		compiler.compile(model, tracing, returnType);
+		assertEquals(expectedJavaCode, tracing.getContent());
+	}
+	
+	protected void assertCompilesToStatement(final String expectedJavaCode, final String xbaseCode) throws Exception {
+		XExpression model = expression(xbaseCode,true);
+		XbaseCompiler compiler = get(XbaseCompiler.class);
+		ITreeAppendable tracing = new FakeTreeAppendable();
+		compiler.compile(model, tracing, typeReferences.getTypeForName(Void.TYPE, model));
 		assertEquals(expectedJavaCode, tracing.getContent());
 	}
 }
