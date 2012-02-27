@@ -30,15 +30,13 @@ public class JvmModelTest extends AbstractJvmModelTest {
   @Test
   public void testSimple() {
     try {
-      {
-        XExpression _expression = this.expression("return s.toUpperCase", false);
-        final XExpression expression = _expression;
-        Resource _eResource = expression.eResource();
-        EList<EObject> _contents = _eResource.getContents();
-        int _size = _contents.size();
-        Assert.assertEquals(2, _size);
-        this.helper.assertNoErrors(expression);
-      }
+      XExpression _expression = this.expression("return s.toUpperCase", false);
+      final XExpression expression = _expression;
+      Resource _eResource = expression.eResource();
+      EList<EObject> _contents = _eResource.getContents();
+      int _size = _contents.size();
+      Assert.assertEquals(2, _size);
+      this.helper.assertNoErrors(expression);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -47,24 +45,22 @@ public class JvmModelTest extends AbstractJvmModelTest {
   @Test
   public void testResourceDescriptionsAreCorrect() {
     try {
-      {
-        Resource _newResource = this.newResource("return s.toUpperCase");
-        final Resource resource = _newResource;
-        Field _declaredField = org.eclipse.xtext.resource.DerivedStateAwareResource.class.getDeclaredField("fullyInitialized");
-        final Field field = _declaredField;
-        field.setAccessible(true);
-        Object _get = field.get(resource);
-        Assert.assertFalse((((Boolean) _get)).booleanValue());
-        IResourceDescription _resourceDescription = this.manager.getResourceDescription(resource);
-        final IResourceDescription desc = _resourceDescription;
-        Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
-        ArrayList<Iterable<IEObjectDescription>> _newArrayList = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(_exportedObjects);
-        final ArrayList<Iterable<IEObjectDescription>> list = _newArrayList;
-        int _size = list.size();
-        Assert.assertEquals(1, _size);
-        Object _get_1 = field.get(resource);
-        Assert.assertFalse((((Boolean) _get_1)).booleanValue());
-      }
+      Resource _newResource = this.newResource("return s.toUpperCase");
+      final Resource resource = _newResource;
+      Field _declaredField = org.eclipse.xtext.resource.DerivedStateAwareResource.class.getDeclaredField("fullyInitialized");
+      final Field field = _declaredField;
+      field.setAccessible(true);
+      Object _get = field.get(resource);
+      Assert.assertFalse((((Boolean) _get)).booleanValue());
+      IResourceDescription _resourceDescription = this.manager.getResourceDescription(resource);
+      final IResourceDescription desc = _resourceDescription;
+      Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
+      ArrayList<Iterable<IEObjectDescription>> _newArrayList = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(_exportedObjects);
+      final ArrayList<Iterable<IEObjectDescription>> list = _newArrayList;
+      int _size = list.size();
+      Assert.assertEquals(1, _size);
+      Object _get_1 = field.get(resource);
+      Assert.assertFalse((((Boolean) _get_1)).booleanValue());
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -73,11 +69,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
   @Test
   public void testReturnTypeConformance() {
     try {
-      {
-        XExpression _expression = this.expression("return");
-        final XExpression expression = _expression;
-        this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
-      }
+      XExpression _expression = this.expression("return");
+      final XExpression expression = _expression;
+      this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

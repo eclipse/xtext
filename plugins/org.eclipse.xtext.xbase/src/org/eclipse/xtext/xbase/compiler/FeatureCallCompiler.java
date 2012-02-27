@@ -103,7 +103,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
@@ -122,13 +122,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					if (isReferenced && !isPrimitiveVoid(expr)) {
 						Later later = new Later() {
 							public void exec(ITreeAppendable appendable) {
-								featureCalltoJavaExpression(expr, appendable);
+								featureCalltoJavaExpression(expr, appendable, isReferenced);
 							}
 						};
 						declareFreshLocalVariable(expr, b, later);
 					} else {
 						b.newLine();
-						featureCalltoJavaExpression(expr, b);
+						featureCalltoJavaExpression(expr, b, isReferenced);
 						b.append(";");
 					}
 				}
@@ -139,7 +139,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void _toJavaStatement(final XFeatureCall expr, final ITreeAppendable b, boolean isReferenced) {
 		if (expr.getFeature() instanceof JvmConstructor) {
 			b.newLine();
-			featureCalltoJavaExpression(expr, b, true);
+			featureCalltoJavaExpression(expr, b, true, isReferenced);
 			b.append(";");
 		} else {
 			_toJavaStatement((XAbstractFeatureCall) expr, b, isReferenced);
@@ -171,7 +171,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 
 		b.newLine().append(b.getName(binaryOperation)).append(" = ");
-		featureCalltoJavaExpression(binaryOperation, b);
+		featureCalltoJavaExpression(binaryOperation, b, true);
 		b.append(";");
 		b.decreaseIndentation().newLine().append("}");
 	}
@@ -270,17 +270,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b) {
-		featureCalltoJavaExpression(call, b, false);
+	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b, boolean referenced) {
+		featureCalltoJavaExpression(call, b, false, referenced);
 	}
 
 	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b,
-			boolean unpreparedArguments) {
+			boolean unpreparedArguments, boolean referenced) {
 		if (call instanceof XAssignment) {
-			xAssignmentToJavaExpression((XAssignment) call, b);
+			xAssignmentToJavaExpression((XAssignment) call, b, referenced);
 			return;
 		}
-		boolean hasReceiver = appendReceiver(call, b);
+		boolean hasReceiver = appendReceiver(call, b, referenced);
 		if (hasReceiver) {
 			b.append(".");
 			if (!call.getTypeArguments().isEmpty()) {
@@ -452,15 +452,21 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return node instanceof ILeafNode && ((ILeafNode) node).isHidden();
 	}
 
-	protected boolean appendReceiver(XAbstractFeatureCall call, ITreeAppendable b) {
+	protected boolean appendReceiver(XAbstractFeatureCall call, ITreeAppendable b, boolean referenced) {
 		if (call instanceof XMemberFeatureCall) {
 			XMemberFeatureCall expr = ((XMemberFeatureCall) call);
 			if (expr.isNullSafe()) {
-				internalToJavaExpression(expr.getMemberCallTarget(), b);
-				b.append("==null?");
-				JvmTypeReference type = getTypeProvider().getType(call);
-				appendNullValue(type, call, b);
-				b.append(":");
+				if (referenced) {
+					internalToJavaExpression(expr.getMemberCallTarget(), b);
+					b.append("==null?");
+					JvmTypeReference type = getTypeProvider().getType(call);
+					appendNullValue(type, call, b);
+					b.append(":");
+				} else {
+					b.append("if (");
+					internalToJavaExpression(expr.getMemberCallTarget(), b);
+					b.append("!=null) ");
+				}
 			} else if (expr.isSpreading()) {
 				throw new UnsupportedOperationException();
 			}
@@ -531,16 +537,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return false;
 	}
 
-	protected void xAssignmentToJavaExpression(XAssignment expr, ITreeAppendable b) {
+	protected void xAssignmentToJavaExpression(XAssignment expr, ITreeAppendable b, boolean referenced) {
 		final JvmIdentifiableElement feature = expr.getFeature();
 		if (feature instanceof JvmOperation) {
-			boolean appendReceiver = appendReceiver(expr, b);
+			boolean appendReceiver = appendReceiver(expr, b, referenced);
 			if (appendReceiver)
 				b.append(".");
 			appendFeatureCall(expr, b, false);
 		} else {
 			if (feature instanceof JvmField) {
-				boolean appendReceiver = appendReceiver(expr, b);
+				boolean appendReceiver = appendReceiver(expr, b, referenced);
 				if (appendReceiver)
 					b.append(".");
 				appendFeatureCall(expr, b, false);

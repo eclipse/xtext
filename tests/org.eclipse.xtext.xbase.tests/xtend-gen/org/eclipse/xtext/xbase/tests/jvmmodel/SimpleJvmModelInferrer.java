@@ -34,13 +34,11 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
           JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
               public void apply(final JvmOperation it) {
-                {
-                  EList<JvmFormalParameter> _parameters = it.getParameters();
-                  JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
-                  JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
-                  CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                  SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));
-                }
+                EList<JvmFormalParameter> _parameters = it.getParameters();
+                JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
+                JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
+                CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));
               }
             };
           JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function);
