@@ -1,8 +1,6 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput
 import org.eclipse.xtend.core.xtend.XtendFile
@@ -337,13 +335,10 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		return Tuples::create(featureCall, hover.getHoverInfo2(editor.internalSourceViewer, region) as XtendInformationControlInput, region)
 	}
 	
-	def IProject getProject(){
-		return ResourcesPlugin::getWorkspace().getRoot().getProject(WorkbenchTestHelper::TESTPROJECT_NAME);
-	}
 
 	def loadResource(){
 		val uri = URI::createURI("platform:/resource/"+WorkbenchTestHelper::TESTPROJECT_NAME + "/src/" + FILEPATH);
-		var resource = getInjector.getInstance(typeof(IResourceSetProvider)).get(getProject()).createResource(uri)
+		var resource = getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project).createResource(uri)
 		resource.load(null)
 		return resource
 	}
