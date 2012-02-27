@@ -341,8 +341,6 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.StringExtensions;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -361,10 +359,10 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("String _string_1 = Bar.super.toString();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("String _operator_plus = StringExtensions.operator_plus(_string, _string_1);");
+    _builder_1.append("String _plus = (_string + _string_1);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return _operator_plus;");
+    _builder_1.append("return _plus;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1329,10 +1327,10 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("boolean _xifexpression = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _operator_equals = ObjectExtensions.operator_equals(\"foo\", p);");
+    _builder_1.append("boolean _equals = ObjectExtensions.equals(\"foo\", p);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_operator_equals) {");
+    _builder_1.append("if (_equals) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return true;");
@@ -1341,10 +1339,10 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("boolean _equals = super.equals(p);");
+    _builder_1.append("boolean _equals_1 = super.equals(p);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xifexpression = _equals;");
+    _builder_1.append("_xifexpression = _equals_1;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1961,21 +1959,66 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testStringExtensionInlined_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String returnString(String x, String y) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x + \'\' + y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String returnString(final String x, final String y) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus = (x + \"\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus_1 = (_plus + y);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _plus_1;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
-      {
-        String _string = input.toString();
-        XtendFile _file = this.file(_string, true);
-        final XtendFile file = _file;
-        XtendClass _xtendClass = file.getXtendClass();
-        JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(_xtendClass);
-        final JvmGenericType inferredType = _inferredType;
-        CharSequence _generateType = this.generator.generateType(inferredType);
-        final CharSequence javaCode = _generateType;
-        String _string_1 = expected.toString();
-        String _string_2 = javaCode.toString();
-        Assert.assertEquals(_string_1, _string_2);
-      }
+      String _string = input.toString();
+      XtendFile _file = this.file(_string, true);
+      final XtendFile file = _file;
+      XtendClass _xtendClass = file.getXtendClass();
+      JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(_xtendClass);
+      final JvmGenericType inferredType = _inferredType;
+      CharSequence _generateType = this.generator.generateType(inferredType);
+      final CharSequence javaCode = _generateType;
+      String _string_1 = expected.toString();
+      String _string_2 = javaCode.toString();
+      Assert.assertEquals(_string_1, _string_2);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -189,7 +189,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			package foo;
 
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-			import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 			@SuppressWarnings("all")
 			public class Bar {
@@ -197,8 +196,8 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    public String apply() {
 			      String _string = Bar.this.toString();
 			      String _string_1 = Bar.super.toString();
-			      String _operator_plus = StringExtensions.operator_plus(_string, _string_1);
-			      return _operator_plus;
+			      String _plus = (_string + _string_1);
+			      return _plus;
 			    }
 			  }.apply();
 			}
@@ -686,12 +685,12 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			public class Y {
 			  public boolean equals(final Object p) {
 			    boolean _xifexpression = false;
-			    boolean _operator_equals = ObjectExtensions.operator_equals("foo", p);
-			    if (_operator_equals) {
+			    boolean _equals = ObjectExtensions.equals("foo", p);
+			    if (_equals) {
 			      return true;
 			    } else {
-			      boolean _equals = super.equals(p);
-			      _xifexpression = _equals;
+			      boolean _equals_1 = super.equals(p);
+			      _xifexpression = _equals_1;
 			    }
 			    return _xifexpression;
 			  }
@@ -979,6 +978,30 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  public void test(final String x, final String y, final int integer) {
 			    Foo _foo = new Foo();
 			    _foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testStringExtensionInlined_01() {
+		assertCompilesTo('''
+			package foo;
+			
+			public class Foo {
+				def String returnString(String x, String y) {
+					x + '' + y
+				}
+			}
+		''', '''
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String returnString(final String x, final String y) {
+			    String _plus = (x + "");
+			    String _plus_1 = (_plus + y);
+			    return _plus_1;
 			  }
 			}
 		''')
