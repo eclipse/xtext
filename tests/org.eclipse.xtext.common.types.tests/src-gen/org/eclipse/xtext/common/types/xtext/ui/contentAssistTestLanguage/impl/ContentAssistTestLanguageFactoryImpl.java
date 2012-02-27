@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl;
 
@@ -69,6 +70,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
     {
       case ContentAssistTestLanguagePackage.MODEL: return createModel();
       case ContentAssistTestLanguagePackage.REFERENCE_HOLDER: return createReferenceHolder();
+      case ContentAssistTestLanguagePackage.GENERATE_DIRECTIVE: return createGenerateDirective();
       case ContentAssistTestLanguagePackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -95,6 +97,17 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     ReferenceHolderImpl referenceHolder = new ReferenceHolderImpl();
     return referenceHolder;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GenerateDirective createGenerateDirective()
+  {
+    GenerateDirectiveImpl generateDirective = new GenerateDirectiveImpl();
+    return generateDirective;
   }
 
   /**

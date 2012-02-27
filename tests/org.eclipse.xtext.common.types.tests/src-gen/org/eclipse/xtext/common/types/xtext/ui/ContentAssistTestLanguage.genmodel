@@ -11,12 +11,16 @@
       disposableProviderFactory="true" ecorePackage="ContentAssistTestLanguage.ecore#/">
     <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//Model/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//Model/generateDirective"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//Model/referenceHolder"/>
     </genClasses>
     <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//ReferenceHolder">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//ReferenceHolder/defaultReference"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//ReferenceHolder/customizedReference"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistTestLanguage.ecore#//ReferenceHolder/subtypeReference"/>
+    </genClasses>
+    <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//GenerateDirective">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistTestLanguage.ecore#//GenerateDirective/typeName"/>
     </genClasses>
     <genClasses ecoreClass="ContentAssistTestLanguage.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistTestLanguage.ecore#//Import/importedNamespace"/>

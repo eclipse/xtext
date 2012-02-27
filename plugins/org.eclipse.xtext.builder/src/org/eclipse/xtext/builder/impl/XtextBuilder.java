@@ -159,6 +159,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (participant != null) {
 			participant.build(new BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
+			getProject().getWorkspace().checkpoint(false);
 		} else {
 			progress.worked(1);
 		}

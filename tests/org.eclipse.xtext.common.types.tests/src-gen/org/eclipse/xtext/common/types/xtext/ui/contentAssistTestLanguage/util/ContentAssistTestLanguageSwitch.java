@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.util;
 
@@ -109,6 +110,13 @@ public class ContentAssistTestLanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ContentAssistTestLanguagePackage.GENERATE_DIRECTIVE:
+      {
+        GenerateDirective generateDirective = (GenerateDirective)theEObject;
+        T result = caseGenerateDirective(generateDirective);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ContentAssistTestLanguagePackage.IMPORT:
       {
         Import import_ = (Import)theEObject;
@@ -148,6 +156,22 @@ public class ContentAssistTestLanguageSwitch<T>
    * @generated
    */
   public T caseReferenceHolder(ReferenceHolder object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Generate Directive</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Generate Directive</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGenerateDirective(GenerateDirective object)
   {
     return null;
   }

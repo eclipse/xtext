@@ -21,12 +21,13 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalContentAssistTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'custom'", "'subtype'", "'import'", "'.*'", "'.'", "'$'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'custom'", "'subtype'", "'generate'", "'import'", "'.*'", "'$'", "'.'"
     };
     public static final int RULE_ID=4;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
+    public static final int T__18=18;
     public static final int T__17=17;
     public static final int T__12=12;
     public static final int T__11=11;
@@ -114,23 +115,25 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_referenceHolder_1_0= ruleReferenceHolder ) ) ) ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_imports_0_0 = null;
 
-        EObject lv_referenceHolder_1_0 = null;
+        EObject lv_generateDirective_1_0 = null;
+
+        EObject lv_referenceHolder_2_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:79:28: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_referenceHolder_1_0= ruleReferenceHolder ) ) ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_referenceHolder_1_0= ruleReferenceHolder ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:79:28: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? )
             {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_referenceHolder_1_0= ruleReferenceHolder ) ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )* ( (lv_referenceHolder_1_0= ruleReferenceHolder ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )? )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )* ( (lv_generateDirective_1_0= ruleGenerateDirective ) )? ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )?
             {
             // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
@@ -138,7 +141,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==14) ) {
+                if ( (LA1_0==15) ) {
                     alt1=1;
                 }
 
@@ -181,34 +184,87 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:98:3: ( (lv_referenceHolder_1_0= ruleReferenceHolder ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:99:1: (lv_referenceHolder_1_0= ruleReferenceHolder )
-            {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:99:1: (lv_referenceHolder_1_0= ruleReferenceHolder )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:100:3: lv_referenceHolder_1_0= ruleReferenceHolder
-            {
-             
-            	        newCompositeNode(grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_1_0()); 
-            	    
-            pushFollow(FollowSets000.FOLLOW_ruleReferenceHolder_in_ruleModel153);
-            lv_referenceHolder_1_0=ruleReferenceHolder();
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:98:3: ( (lv_generateDirective_1_0= ruleGenerateDirective ) )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA2_0==14) ) {
+                alt2=1;
+            }
+            switch (alt2) {
+                case 1 :
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:99:1: (lv_generateDirective_1_0= ruleGenerateDirective )
+                    {
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:99:1: (lv_generateDirective_1_0= ruleGenerateDirective )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:100:3: lv_generateDirective_1_0= ruleGenerateDirective
+                    {
+                     
+                    	        newCompositeNode(grammarAccess.getModelAccess().getGenerateDirectiveGenerateDirectiveParserRuleCall_1_0()); 
+                    	    
+                    pushFollow(FollowSets000.FOLLOW_ruleGenerateDirective_in_ruleModel153);
+                    lv_generateDirective_1_0=ruleGenerateDirective();
+
+                    state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"referenceHolder",
-                    		lv_referenceHolder_1_0, 
-                    		"ReferenceHolder");
-            	        afterParserOrEnumRuleCall();
-            	    
+                    	        if (current==null) {
+                    	            current = createModelElementForParent(grammarAccess.getModelRule());
+                    	        }
+                           		set(
+                           			current, 
+                           			"generateDirective",
+                            		lv_generateDirective_1_0, 
+                            		"GenerateDirective");
+                    	        afterParserOrEnumRuleCall();
+                    	    
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:116:3: ( (lv_referenceHolder_2_0= ruleReferenceHolder ) )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( ((LA3_0>=11 && LA3_0<=13)) ) {
+                alt3=1;
+            }
+            switch (alt3) {
+                case 1 :
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:117:1: (lv_referenceHolder_2_0= ruleReferenceHolder )
+                    {
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:117:1: (lv_referenceHolder_2_0= ruleReferenceHolder )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:118:3: lv_referenceHolder_2_0= ruleReferenceHolder
+                    {
+                     
+                    	        newCompositeNode(grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_2_0()); 
+                    	    
+                    pushFollow(FollowSets000.FOLLOW_ruleReferenceHolder_in_ruleModel175);
+                    lv_referenceHolder_2_0=ruleReferenceHolder();
+
+                    state._fsp--;
+
+
+                    	        if (current==null) {
+                    	            current = createModelElementForParent(grammarAccess.getModelRule());
+                    	        }
+                           		set(
+                           			current, 
+                           			"referenceHolder",
+                            		lv_referenceHolder_2_0, 
+                            		"ReferenceHolder");
+                    	        afterParserOrEnumRuleCall();
+                    	    
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -233,7 +289,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleReferenceHolder"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:124:1: entryRuleReferenceHolder returns [EObject current=null] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:142:1: entryRuleReferenceHolder returns [EObject current=null] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
     public final EObject entryRuleReferenceHolder() throws RecognitionException {
         EObject current = null;
 
@@ -241,17 +297,17 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:125:2: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:126:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:143:2: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:144:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
             {
              newCompositeNode(grammarAccess.getReferenceHolderRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleReferenceHolder_in_entryRuleReferenceHolder189);
+            pushFollow(FollowSets000.FOLLOW_ruleReferenceHolder_in_entryRuleReferenceHolder212);
             iv_ruleReferenceHolder=ruleReferenceHolder();
 
             state._fsp--;
 
              current =iv_ruleReferenceHolder; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferenceHolder199); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferenceHolder222); 
 
             }
 
@@ -269,7 +325,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleReferenceHolder"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:133:1: ruleReferenceHolder returns [EObject current=null] : ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:151:1: ruleReferenceHolder returns [EObject current=null] : ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) ;
     public final EObject ruleReferenceHolder() throws RecognitionException {
         EObject current = null;
 
@@ -280,50 +336,50 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:136:28: ( ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:137:1: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:154:28: ( ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:155:1: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
             {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:137:1: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
-            int alt2=3;
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:155:1: ( (otherlv_0= 'default' ( ( ruleFQN ) ) ) | (otherlv_2= 'custom' ( ( ruleFQN ) ) ) | (otherlv_4= 'subtype' ( ( ruleFQN ) ) ) )
+            int alt4=3;
             switch ( input.LA(1) ) {
             case 11:
                 {
-                alt2=1;
+                alt4=1;
                 }
                 break;
             case 12:
                 {
-                alt2=2;
+                alt4=2;
                 }
                 break;
             case 13:
                 {
-                alt2=3;
+                alt4=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 2, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt2) {
+            switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:137:2: (otherlv_0= 'default' ( ( ruleFQN ) ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:155:2: (otherlv_0= 'default' ( ( ruleFQN ) ) )
                     {
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:137:2: (otherlv_0= 'default' ( ( ruleFQN ) ) )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:137:4: otherlv_0= 'default' ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:155:2: (otherlv_0= 'default' ( ( ruleFQN ) ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:155:4: otherlv_0= 'default' ( ( ruleFQN ) )
                     {
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleReferenceHolder237); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleReferenceHolder260); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getReferenceHolderAccess().getDefaultKeyword_0_0());
                         
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:141:1: ( ( ruleFQN ) )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:142:1: ( ruleFQN )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:159:1: ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:160:1: ( ruleFQN )
                     {
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:142:1: ( ruleFQN )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:143:3: ruleFQN
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:160:1: ( ruleFQN )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:161:3: ruleFQN
                     {
 
                     			if (current==null) {
@@ -333,7 +389,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                      
                     	        newCompositeNode(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeCrossReference_0_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReferenceHolder260);
+                    pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReferenceHolder283);
                     ruleFQN();
 
                     state._fsp--;
@@ -354,20 +410,20 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:157:6: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:175:6: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
                     {
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:157:6: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:157:8: otherlv_2= 'custom' ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:175:6: (otherlv_2= 'custom' ( ( ruleFQN ) ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:175:8: otherlv_2= 'custom' ( ( ruleFQN ) )
                     {
-                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleReferenceHolder280); 
+                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleReferenceHolder303); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getReferenceHolderAccess().getCustomKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:161:1: ( ( ruleFQN ) )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:162:1: ( ruleFQN )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:179:1: ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:180:1: ( ruleFQN )
                     {
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:162:1: ( ruleFQN )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:163:3: ruleFQN
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:180:1: ( ruleFQN )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:181:3: ruleFQN
                     {
 
                     			if (current==null) {
@@ -377,7 +433,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                      
                     	        newCompositeNode(grammarAccess.getReferenceHolderAccess().getCustomizedReferenceJvmTypeCrossReference_1_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReferenceHolder303);
+                    pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReferenceHolder326);
                     ruleFQN();
 
                     state._fsp--;
@@ -398,20 +454,20 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:177:6: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:195:6: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
                     {
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:177:6: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:177:8: otherlv_4= 'subtype' ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:195:6: (otherlv_4= 'subtype' ( ( ruleFQN ) ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:195:8: otherlv_4= 'subtype' ( ( ruleFQN ) )
                     {
-                    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleReferenceHolder323); 
+                    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleReferenceHolder346); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getReferenceHolderAccess().getSubtypeKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:181:1: ( ( ruleFQN ) )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:182:1: ( ruleFQN )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:199:1: ( ( ruleFQN ) )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:200:1: ( ruleFQN )
                     {
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:182:1: ( ruleFQN )
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:183:3: ruleFQN
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:200:1: ( ruleFQN )
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:201:3: ruleFQN
                     {
 
                     			if (current==null) {
@@ -421,7 +477,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                      
                     	        newCompositeNode(grammarAccess.getReferenceHolderAccess().getSubtypeReferenceJvmTypeCrossReference_2_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReferenceHolder346);
+                    pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReferenceHolder369);
                     ruleFQN();
 
                     state._fsp--;
@@ -461,8 +517,117 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
     // $ANTLR end "ruleReferenceHolder"
 
 
+    // $ANTLR start "entryRuleGenerateDirective"
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:222:1: entryRuleGenerateDirective returns [EObject current=null] : iv_ruleGenerateDirective= ruleGenerateDirective EOF ;
+    public final EObject entryRuleGenerateDirective() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleGenerateDirective = null;
+
+
+        try {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:223:2: (iv_ruleGenerateDirective= ruleGenerateDirective EOF )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:224:2: iv_ruleGenerateDirective= ruleGenerateDirective EOF
+            {
+             newCompositeNode(grammarAccess.getGenerateDirectiveRule()); 
+            pushFollow(FollowSets000.FOLLOW_ruleGenerateDirective_in_entryRuleGenerateDirective406);
+            iv_ruleGenerateDirective=ruleGenerateDirective();
+
+            state._fsp--;
+
+             current =iv_ruleGenerateDirective; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGenerateDirective416); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleGenerateDirective"
+
+
+    // $ANTLR start "ruleGenerateDirective"
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:231:1: ruleGenerateDirective returns [EObject current=null] : (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) ) ;
+    public final EObject ruleGenerateDirective() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        AntlrDatatypeRuleToken lv_typeName_1_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:234:28: ( (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:235:1: (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) )
+            {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:235:1: (otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:235:3: otherlv_0= 'generate' ( (lv_typeName_1_0= ruleQN ) )
+            {
+            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleGenerateDirective453); 
+
+                	newLeafNode(otherlv_0, grammarAccess.getGenerateDirectiveAccess().getGenerateKeyword_0());
+                
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:239:1: ( (lv_typeName_1_0= ruleQN ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:240:1: (lv_typeName_1_0= ruleQN )
+            {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:240:1: (lv_typeName_1_0= ruleQN )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:241:3: lv_typeName_1_0= ruleQN
+            {
+             
+            	        newCompositeNode(grammarAccess.getGenerateDirectiveAccess().getTypeNameQNParserRuleCall_1_0()); 
+            	    
+            pushFollow(FollowSets000.FOLLOW_ruleQN_in_ruleGenerateDirective474);
+            lv_typeName_1_0=ruleQN();
+
+            state._fsp--;
+
+
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getGenerateDirectiveRule());
+            	        }
+                   		set(
+                   			current, 
+                   			"typeName",
+                    		lv_typeName_1_0, 
+                    		"QN");
+            	        afterParserOrEnumRuleCall();
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleGenerateDirective"
+
+
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:204:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:265:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -470,17 +635,17 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:205:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:206:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:266:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:267:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport383);
+            pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport510);
             iv_ruleImport=ruleImport();
 
             state._fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleImport393); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleImport520); 
 
             }
 
@@ -498,7 +663,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:213:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:274:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -509,26 +674,26 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:216:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:217:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:277:28: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:278:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
             {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:217:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:217:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:278:1: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:278:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
             {
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleImport430); 
+            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleImport557); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:221:1: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:222:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:282:1: ( (lv_importedNamespace_1_0= ruleImportedFQN ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:283:1: (lv_importedNamespace_1_0= ruleImportedFQN )
             {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:222:1: (lv_importedNamespace_1_0= ruleImportedFQN )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:223:3: lv_importedNamespace_1_0= ruleImportedFQN
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:283:1: (lv_importedNamespace_1_0= ruleImportedFQN )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:284:3: lv_importedNamespace_1_0= ruleImportedFQN
             {
              
             	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleImportedFQN_in_ruleImport451);
+            pushFollow(FollowSets000.FOLLOW_ruleImportedFQN_in_ruleImport578);
             lv_importedNamespace_1_0=ruleImportedFQN();
 
             state._fsp--;
@@ -571,7 +736,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleImportedFQN"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:247:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:308:1: entryRuleImportedFQN returns [String current=null] : iv_ruleImportedFQN= ruleImportedFQN EOF ;
     public final String entryRuleImportedFQN() throws RecognitionException {
         String current = null;
 
@@ -579,17 +744,17 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:248:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:249:2: iv_ruleImportedFQN= ruleImportedFQN EOF
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:309:2: (iv_ruleImportedFQN= ruleImportedFQN EOF )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:310:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN488);
+            pushFollow(FollowSets000.FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN615);
             iv_ruleImportedFQN=ruleImportedFQN();
 
             state._fsp--;
 
              current =iv_ruleImportedFQN.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleImportedFQN499); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleImportedFQN626); 
 
             }
 
@@ -607,7 +772,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleImportedFQN"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:256:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:317:1: ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '.*' )? ) ;
     public final AntlrDatatypeRuleToken ruleImportedFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -618,16 +783,16 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:259:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:260:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:320:28: ( (this_FQN_0= ruleFQN (kw= '.*' )? ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:321:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
             {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:260:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:261:5: this_FQN_0= ruleFQN (kw= '.*' )?
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:321:1: (this_FQN_0= ruleFQN (kw= '.*' )? )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:322:5: this_FQN_0= ruleFQN (kw= '.*' )?
             {
              
                     newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
                 
-            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleImportedFQN546);
+            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleImportedFQN673);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
@@ -638,18 +803,18 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
              
                     afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:271:1: (kw= '.*' )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:332:1: (kw= '.*' )?
+            int alt5=2;
+            int LA5_0 = input.LA(1);
 
-            if ( (LA3_0==15) ) {
-                alt3=1;
+            if ( (LA5_0==16) ) {
+                alt5=1;
             }
-            switch (alt3) {
+            switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:272:2: kw= '.*'
+                    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:333:2: kw= '.*'
                     {
-                    kw=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleImportedFQN565); 
+                    kw=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleImportedFQN692); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
@@ -681,7 +846,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:285:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:346:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -689,17 +854,17 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:286:2: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:287:2: iv_ruleFQN= ruleFQN EOF
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:347:2: (iv_ruleFQN= ruleFQN EOF )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:348:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_entryRuleFQN608);
+            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_entryRuleFQN735);
             iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFQN619); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFQN746); 
 
             }
 
@@ -717,52 +882,59 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:294:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:355:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
-        Token this_ID_0=null;
         Token kw=null;
         Token this_ID_2=null;
-        Token this_ID_4=null;
+        AntlrDatatypeRuleToken this_QN_0 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:297:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:298:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:358:28: ( (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:359:1: (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:298:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:298:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:359:1: (this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:360:5: this_QN_0= ruleQN (kw= '$' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFQN659); 
+             
+                    newCompositeNode(grammarAccess.getFQNAccess().getQNParserRuleCall_0()); 
+                
+            pushFollow(FollowSets000.FOLLOW_ruleQN_in_ruleFQN793);
+            this_QN_0=ruleQN();
 
-            		current.merge(this_ID_0);
+            state._fsp--;
+
+
+            		current.merge(this_QN_0);
                 
              
-                newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+                    afterParserOrEnumRuleCall();
                 
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:305:1: (kw= '.' this_ID_2= RULE_ID )*
-            loop4:
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:370:1: (kw= '$' this_ID_2= RULE_ID )*
+            loop6:
             do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( (LA4_0==16) ) {
-                    alt4=1;
+                if ( (LA6_0==17) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:306:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:371:2: kw= '$' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleFQN678); 
+            	    kw=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleFQN812); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+            	            newLeafNode(kw, grammarAccess.getFQNAccess().getDollarSignKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFQN693); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFQN827); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -774,43 +946,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             	    break;
 
             	default :
-            	    break loop4;
-                }
-            } while (true);
-
-            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:318:3: (kw= '$' this_ID_4= RULE_ID )*
-            loop5:
-            do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
-
-                if ( (LA5_0==17) ) {
-                    alt5=1;
-                }
-
-
-                switch (alt5) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:319:2: kw= '$' this_ID_4= RULE_ID
-            	    {
-            	    kw=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleFQN714); 
-
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getFQNAccess().getDollarSignKeyword_2_0()); 
-            	        
-            	    this_ID_4=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFQN729); 
-
-            	    		current.merge(this_ID_4);
-            	        
-            	     
-            	        newLeafNode(this_ID_4, grammarAccess.getFQNAccess().getIDTerminalRuleCall_2_1()); 
-            	        
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop5;
+            	    break loop6;
                 }
             } while (true);
 
@@ -833,6 +969,123 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
     }
     // $ANTLR end "ruleFQN"
 
+
+    // $ANTLR start "entryRuleQN"
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:391:1: entryRuleQN returns [String current=null] : iv_ruleQN= ruleQN EOF ;
+    public final String entryRuleQN() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleQN = null;
+
+
+        try {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:392:2: (iv_ruleQN= ruleQN EOF )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:393:2: iv_ruleQN= ruleQN EOF
+            {
+             newCompositeNode(grammarAccess.getQNRule()); 
+            pushFollow(FollowSets000.FOLLOW_ruleQN_in_entryRuleQN875);
+            iv_ruleQN=ruleQN();
+
+            state._fsp--;
+
+             current =iv_ruleQN.getText(); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQN886); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleQN"
+
+
+    // $ANTLR start "ruleQN"
+    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:400:1: ruleQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    public final AntlrDatatypeRuleToken ruleQN() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token this_ID_0=null;
+        Token kw=null;
+        Token this_ID_2=null;
+
+         enterRule(); 
+            
+        try {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:403:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:404:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            {
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:404:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:404:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            {
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQN926); 
+
+            		current.merge(this_ID_0);
+                
+             
+                newLeafNode(this_ID_0, grammarAccess.getQNAccess().getIDTerminalRuleCall_0()); 
+                
+            // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:411:1: (kw= '.' this_ID_2= RULE_ID )*
+            loop7:
+            do {
+                int alt7=2;
+                int LA7_0 = input.LA(1);
+
+                if ( (LA7_0==18) ) {
+                    alt7=1;
+                }
+
+
+                switch (alt7) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.common.types.tests/src-gen/org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.g:412:2: kw= '.' this_ID_2= RULE_ID
+            	    {
+            	    kw=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleQN945); 
+
+            	            current.merge(kw);
+            	            newLeafNode(kw, grammarAccess.getQNAccess().getFullStopKeyword_1_0()); 
+            	        
+            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQN960); 
+
+            	    		current.merge(this_ID_2);
+            	        
+            	     
+            	        newLeafNode(this_ID_2, grammarAccess.getQNAccess().getIDTerminalRuleCall_1_1()); 
+            	        
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop7;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+             leaveRule(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleQN"
+
     // Delegated rules
 
 
@@ -842,31 +1095,39 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleImport_in_ruleModel131 = new BitSet(new long[]{0x0000000000007800L});
-        public static final BitSet FOLLOW_ruleReferenceHolder_in_ruleModel153 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReferenceHolder_in_entryRuleReferenceHolder189 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleReferenceHolder199 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleReferenceHolder237 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleFQN_in_ruleReferenceHolder260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleReferenceHolder280 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleFQN_in_ruleReferenceHolder303 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleReferenceHolder323 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleFQN_in_ruleReferenceHolder346 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleImport_in_entryRuleImport383 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleImport393 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleImport430 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport451 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN488 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN499 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN546 = new BitSet(new long[]{0x0000000000008002L});
-        public static final BitSet FOLLOW_15_in_ruleImportedFQN565 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN608 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFQN619 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFQN659 = new BitSet(new long[]{0x0000000000030002L});
-        public static final BitSet FOLLOW_16_in_ruleFQN678 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFQN693 = new BitSet(new long[]{0x0000000000030002L});
-        public static final BitSet FOLLOW_17_in_ruleFQN714 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFQN729 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_ruleImport_in_ruleModel131 = new BitSet(new long[]{0x000000000000F802L});
+        public static final BitSet FOLLOW_ruleGenerateDirective_in_ruleModel153 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_ruleReferenceHolder_in_ruleModel175 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleReferenceHolder_in_entryRuleReferenceHolder212 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleReferenceHolder222 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleReferenceHolder260 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleFQN_in_ruleReferenceHolder283 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleReferenceHolder303 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleFQN_in_ruleReferenceHolder326 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleReferenceHolder346 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleFQN_in_ruleReferenceHolder369 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGenerateDirective_in_entryRuleGenerateDirective406 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGenerateDirective416 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleGenerateDirective453 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleQN_in_ruleGenerateDirective474 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleImport_in_entryRuleImport510 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleImport520 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleImport557 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport578 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN615 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN626 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN673 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_16_in_ruleImportedFQN692 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN735 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFQN746 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQN_in_ruleFQN793 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleFQN812 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFQN827 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_ruleQN_in_entryRuleQN875 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleQN886 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleQN926 = new BitSet(new long[]{0x0000000000040002L});
+        public static final BitSet FOLLOW_18_in_ruleQN945 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleQN960 = new BitSet(new long[]{0x0000000000040002L});
     }
 
 

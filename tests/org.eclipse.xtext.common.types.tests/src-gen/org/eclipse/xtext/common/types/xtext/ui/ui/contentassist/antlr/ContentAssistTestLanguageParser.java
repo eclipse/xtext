@@ -42,16 +42,20 @@ public class ContentAssistTestLanguageParser extends AbstractContentAssistParser
 					put(grammarAccess.getReferenceHolderAccess().getGroup_0(), "rule__ReferenceHolder__Group_0__0");
 					put(grammarAccess.getReferenceHolderAccess().getGroup_1(), "rule__ReferenceHolder__Group_1__0");
 					put(grammarAccess.getReferenceHolderAccess().getGroup_2(), "rule__ReferenceHolder__Group_2__0");
+					put(grammarAccess.getGenerateDirectiveAccess().getGroup(), "rule__GenerateDirective__Group__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
-					put(grammarAccess.getFQNAccess().getGroup_2(), "rule__FQN__Group_2__0");
+					put(grammarAccess.getQNAccess().getGroup(), "rule__QN__Group__0");
+					put(grammarAccess.getQNAccess().getGroup_1(), "rule__QN__Group_1__0");
 					put(grammarAccess.getModelAccess().getImportsAssignment_0(), "rule__Model__ImportsAssignment_0");
-					put(grammarAccess.getModelAccess().getReferenceHolderAssignment_1(), "rule__Model__ReferenceHolderAssignment_1");
+					put(grammarAccess.getModelAccess().getGenerateDirectiveAssignment_1(), "rule__Model__GenerateDirectiveAssignment_1");
+					put(grammarAccess.getModelAccess().getReferenceHolderAssignment_2(), "rule__Model__ReferenceHolderAssignment_2");
 					put(grammarAccess.getReferenceHolderAccess().getDefaultReferenceAssignment_0_1(), "rule__ReferenceHolder__DefaultReferenceAssignment_0_1");
 					put(grammarAccess.getReferenceHolderAccess().getCustomizedReferenceAssignment_1_1(), "rule__ReferenceHolder__CustomizedReferenceAssignment_1_1");
 					put(grammarAccess.getReferenceHolderAccess().getSubtypeReferenceAssignment_2_1(), "rule__ReferenceHolder__SubtypeReferenceAssignment_2_1");
+					put(grammarAccess.getGenerateDirectiveAccess().getTypeNameAssignment_1(), "rule__GenerateDirective__TypeNameAssignment_1");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 				}
 			};

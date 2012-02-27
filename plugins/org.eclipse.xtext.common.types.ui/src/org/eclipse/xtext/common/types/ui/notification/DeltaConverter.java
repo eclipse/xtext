@@ -63,7 +63,7 @@ public class DeltaConverter {
 	}
 
 	protected void convertCompilationUnit(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
-		if ((delta.getFlags() & IJavaElementDelta.F_CHILDREN) != 0) {
+		if ((delta.getFlags() & IJavaElementDelta.F_CHILDREN) != 0) { // fine-grained delta
 			IJavaElementDelta[] children = delta.getAffectedChildren();
 			for(IJavaElementDelta child: children) {
 				IJavaElement childElement = child.getElement();
@@ -86,28 +86,30 @@ public class DeltaConverter {
 					result.add(resourceDelta);
 				}
 			}
-		} else if ((delta.getFlags() & (
-					IJavaElementDelta.F_PRIMARY_RESOURCE 
-				  | IJavaElementDelta.F_MOVED_FROM 
-				  | IJavaElementDelta.F_MOVED_TO)) != 0
-				  || delta.getKind() == IJavaElementDelta.ADDED && delta.getFlags() == 0) {
+		} else if ((delta.getFlags() & (IJavaElementDelta.F_FINE_GRAINED | IJavaElementDelta.F_PRIMARY_WORKING_COPY)) == 0) { // course-grained delta
+			// TODO secondary types are currently not considered
 			ICompilationUnit cu = (ICompilationUnit) delta.getElement();
-			try {
-				for(IType type: cu.getTypes()) {
-					URI uri = getURIFor(type);
-					List<IEObjectDescription> exported = getExportedEObjects(type);
-					IResourceDescription oldDescription = null;
-					TypeResourceDescription newDescription = null;
-					newDescription = new TypeResourceDescription(uri, exported);
-					List<IEObjectDescription> additionallyExportedEObjects = getAdditionallyExportedEObjects(type, delta);
-					oldDescription = new LayeredTypeResourceDescription(newDescription, additionallyExportedEObjects);
-					IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
-					result.add(resourceDelta);
-				}
-			} catch(JavaModelException e) {
-				if (logger.isDebugEnabled())
-					logger.debug(e, e);
+			String expectedPrimaryTypeName = getExpectedPrimaryTypeNameFor(cu);
+			IType primaryType = getPrimaryTypeFrom(cu);
+			if (primaryType != null) {
+				URI uri = getURIFor(primaryType);
+				List<IEObjectDescription> exported = getExportedEObjects(primaryType);
+				TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
+				TypeResourceDescription oldDescription = null;
+				if (primaryType.getFullyQualifiedName().equals(expectedPrimaryTypeName)) {
+					oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
+						new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
+ 				}
+				IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
+				result.add(resourceDelta);
 			}
+			if (primaryType == null || !primaryType.getFullyQualifiedName().equals(expectedPrimaryTypeName)) {
+				URI uri = uriHelper.createResourceURIForFQN(expectedPrimaryTypeName);
+				TypeResourceDescription oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
+						new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
+				IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, null);
+				result.add(resourceDelta);
+ 			}
 		}
 	}
 	
@@ -212,6 +214,37 @@ public class DeltaConverter {
 	protected URI getURIFor(IType type) {
 		URI result = uriHelper.createResourceURIForFQN(type.getFullyQualifiedName());
 		return result;
+	}
+	
+	protected IType getPrimaryTypeFrom(ICompilationUnit cu)
+	{
+		try {
+			if (cu.exists()) {
+				IType primaryType = cu.findPrimaryType();
+				if (primaryType != null)
+					return primaryType;
+				
+				// if no exact match is found, return the first public type in CU (if any)
+				for(IType type: cu.getTypes()) {
+					if (Flags.isPublic(type.getFlags()))
+						return type;
+				}
+			}
+		} catch(JavaModelException e) {
+			if (logger.isDebugEnabled())
+				logger.debug(e, e);
+		}
+		return null;
+	}
+	
+	protected String getExpectedPrimaryTypeNameFor(ICompilationUnit cu) {
+		String fileName = cu.getElementName();
+		String typeName = fileName.substring(0, fileName.lastIndexOf('.'));
+		IPackageFragment pkg = (IPackageFragment)cu.getParent();
+		if (!pkg.isDefaultPackage()) {
+			typeName = pkg.getElementName() + '.' + typeName;
+		}
+		return typeName;
 	}
 
 }
