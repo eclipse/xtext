@@ -36,7 +36,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class RebuildDependentResourcesTest extends Assert {
 	
 	private static final String extension = ".typesAssistTest";

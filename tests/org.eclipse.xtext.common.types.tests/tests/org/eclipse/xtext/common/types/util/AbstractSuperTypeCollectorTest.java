@@ -21,9 +21,10 @@ import java.util.Set;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -43,6 +44,10 @@ public abstract class AbstractSuperTypeCollectorTest extends Assert {
 		return new SuperTypeCollector();
 	}
 	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
+
 	@Test public void testObject() {
 		Collection<String> collected = getCollector().collectSuperTypeNames(getType(Object.class));
 		assertNotNull(collected);

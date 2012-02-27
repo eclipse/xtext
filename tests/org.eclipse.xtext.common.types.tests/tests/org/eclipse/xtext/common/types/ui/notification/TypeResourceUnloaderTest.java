@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
@@ -56,6 +57,10 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 
 	private String originalContent;
 
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
+	
 	@Before
 	public void setUp() throws Exception {
 		eventBroker = AbstractActivator.getInstance().getInjector(DUMMY_LANG_NAME).getInstance(IStateChangeEventBroker.class);

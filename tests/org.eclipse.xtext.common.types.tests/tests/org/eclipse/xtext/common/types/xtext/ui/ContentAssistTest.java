@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiMod
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.Version;
 
@@ -27,6 +28,10 @@ import com.google.inject.Injector;
  */
 public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
+	
 	@Override
 	public ISetup doGetSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
