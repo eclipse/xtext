@@ -1,6 +1,7 @@
 AbstractMethods.java.txt
 AnnotatedClassWithStringDefault.java.txt
 AnnotatedInterfaceWithStringDefault.java.txt
+Bug334943Client.java.txt
 Bug347739.java.txt
 Bug347739OneTypeParam.java.txt
 Bug347739ThreeTypeParams.java.txt

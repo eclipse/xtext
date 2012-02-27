@@ -8,4 +8,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtBasedTypeFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory"/>
+                <message_argument value="createAnnotationValue(IMemberValuePairBinding, JvmAnnotationValue)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory"/>
+                <message_argument value="createArrayAnnotationValue(IMemberValuePairBinding, JvmAnnotationValue)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
