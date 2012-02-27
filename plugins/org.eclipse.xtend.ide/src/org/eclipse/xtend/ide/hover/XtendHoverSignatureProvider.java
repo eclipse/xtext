@@ -29,29 +29,53 @@ public class XtendHoverSignatureProvider extends DefaultDeclarativeHoverSignatur
 
 	@Inject
 	protected IXtendJvmAssociations associations;
-	
-	
-	protected String _hoverSignature(XtendClass clazz) {
-		return _hoverSignature(associations.getInferredType(clazz));
+
+	protected String _signature(XtendClass clazz) {
+		return _signature(associations.getInferredType(clazz));
+	}
+
+	protected String _imageTag(XtendClass clazz) {
+		return _imageTag(associations.getInferredType(clazz));
+	}
+
+	protected String _signature(XtendFunction function) {
+		return _signature(associations.getDirectlyInferredOperation(function));
+	}
+
+	protected String _imageTag(XtendFunction function) {
+		return _imageTag(associations.getDirectlyInferredOperation(function));
+	}
+
+	protected String _signature(XtendField field) {
+		return _signature(associations.getJvmField(field));
+	}
+
+	protected String _imageTag(XtendField field) {
+		return _imageTag(associations.getJvmField(field));
+	}
+
+	protected String _signature(XtendParameter parameter) {
+		return _signature(getFormalParameter(parameter));
+	}
+
+	protected String _imageTag(XtendParameter parameter) {
+		return _imageTag(getFormalParameter(parameter));
+	}
+
+	protected String _signature(XtendConstructor constructor) {
+		return _signature(associations.getInferredConstructor(constructor));
 	}
 	
-	protected String _hoverSignature(XtendFunction function) {
-		return _hoverSignature(associations.getDirectlyInferredOperation(function));
-	}
-		
-	protected String _hoverSignature(XtendField field){
-		return _hoverSignature(associations.getJvmField(field));
+	protected String _imageTag(XtendConstructor constructor) {
+		return _imageTag(associations.getInferredConstructor(constructor));
 	}
 	
-	protected String _hoverSignature(XtendParameter parameter){
+	private JvmFormalParameter getFormalParameter(XtendParameter parameter) {
 		Set<EObject> jvmElements = associations.getJvmElements(parameter);
-		if(jvmElements.size() > 0){
-			return _hoverSignature((JvmFormalParameter)Lists.newArrayList(jvmElements).get(0));
-		}
-		return null;
+		if (jvmElements.size() > 0) {
+			return (JvmFormalParameter) Lists.newArrayList(jvmElements).get(0);
+		} else
+			return null;
 	}
-	protected String _hoverSignature(XtendConstructor constructor){
-		return _hoverSignature(associations.getInferredConstructor(constructor));
-	}
-	
+
 }

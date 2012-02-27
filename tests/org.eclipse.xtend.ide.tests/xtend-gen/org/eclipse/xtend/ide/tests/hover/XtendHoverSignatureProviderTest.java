@@ -54,18 +54,9 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
         final XtendFile xtendFile = _parse;
         XtendClass _xtendClass = xtendFile.getXtendClass();
         final XtendClass clazz = _xtendClass;
-        String _hoverSignature = this.signatureProvider.getHoverSignature(clazz);
-        final String signature = _hoverSignature;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<b><image src=");
-        String _string = _builder_1.toString();
-        boolean _startsWith = signature.startsWith(_string);
-        Assert.assertTrue(_startsWith);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/0.png\'/>testPackage.Foo</b>");
-        String _string_1 = _builder_2.toString();
-        boolean _endsWith = signature.endsWith(_string_1);
-        Assert.assertTrue(_endsWith);
+        String _signature = this.signatureProvider.getSignature(clazz);
+        final String signature = _signature;
+        Assert.assertEquals("<b>testPackage.Foo</b>", signature);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -100,30 +91,12 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
         EList<XtendMember> _members_1 = clazz.getMembers();
         XtendMember _get_1 = _members_1.get(1);
         final XtendMember xtendFunction2 = _get_1;
-        String _hoverSignature = this.signatureProvider.getHoverSignature(xtendFunction1);
-        final String signature1 = _hoverSignature;
-        String _hoverSignature_1 = this.signatureProvider.getHoverSignature(xtendFunction2);
-        final String signature2 = _hoverSignature_1;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<b><image src=");
-        String _string = _builder_1.toString();
-        boolean _startsWith = signature1.startsWith(_string);
-        Assert.assertTrue(_startsWith);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/1.png\'/> Object bar(String a) throws NullPointerException</b>");
-        String _string_1 = _builder_2.toString();
-        boolean _endsWith = signature1.endsWith(_string_1);
-        Assert.assertTrue(_endsWith);
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("<b><image src=");
-        String _string_2 = _builder_3.toString();
-        boolean _startsWith_1 = signature2.startsWith(_string_2);
-        Assert.assertTrue(_startsWith_1);
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/1.png\'/> void bar(String a, int b) throws NullPointerException, RuntimeException</b>");
-        String _string_3 = _builder_4.toString();
-        boolean _endsWith_1 = signature2.endsWith(_string_3);
-        Assert.assertTrue(_endsWith_1);
+        String _signature = this.signatureProvider.getSignature(xtendFunction1);
+        final String signature1 = _signature;
+        String _signature_1 = this.signatureProvider.getSignature(xtendFunction2);
+        final String signature2 = _signature_1;
+        Assert.assertEquals("<b>Object bar(String a) throws NullPointerException</b>", signature1);
+        Assert.assertEquals("<b>void bar(String a, int b) throws NullPointerException, RuntimeException</b>", signature2);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -155,18 +128,9 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
         EList<XtendParameter> _parameters = xtendFunction.getParameters();
         XtendParameter _get_1 = _parameters.get(0);
         final XtendParameter xtendParameter = _get_1;
-        String _hoverSignature = this.signatureProvider.getHoverSignature(xtendParameter);
-        final String signature = _hoverSignature;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<b><image src=");
-        String _string = _builder_1.toString();
-        boolean _startsWith = signature.startsWith(_string);
-        Assert.assertTrue(_startsWith);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/2.png\'/> String a - bar(String)</b>");
-        String _string_1 = _builder_2.toString();
-        boolean _endsWith = signature.endsWith(_string_1);
-        Assert.assertTrue(_endsWith);
+        String _signature = this.signatureProvider.getSignature(xtendParameter);
+        final String signature = _signature;
+        Assert.assertEquals("<b>String a - bar(String)</b>", signature);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -209,18 +173,9 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
         EList<XtendMember> _members = clazz.getMembers();
         XtendMember _get = _members.get(0);
         final XtendField xtendField = ((XtendField) _get);
-        String _hoverSignature = this.signatureProvider.getHoverSignature(xtendField);
-        final String signature = _hoverSignature;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<b><image src=");
-        String _string = _builder_1.toString();
-        boolean _startsWith = signature.startsWith(_string);
-        Assert.assertTrue(_startsWith);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/3.png\'/>Collections testPackage.Foo.collections</b>");
-        String _string_1 = _builder_2.toString();
-        boolean _endsWith = signature.endsWith(_string_1);
-        Assert.assertTrue(_endsWith);
+        String _signature = this.signatureProvider.getSignature(xtendField);
+        final String signature = _signature;
+        Assert.assertEquals("<b>Collections testPackage.Foo.collections</b>", signature);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -249,18 +204,9 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
         EList<XtendMember> _members = clazz.getMembers();
         XtendMember _get = _members.get(0);
         final XtendMember xtendConstructor = _get;
-        String _hoverSignature = this.signatureProvider.getHoverSignature(xtendConstructor);
-        final String signature = _hoverSignature;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<b><image src=");
-        String _string = _builder_1.toString();
-        boolean _startsWith = signature.startsWith(_string);
-        Assert.assertTrue(_startsWith);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/4.png\'/>testPackage.Foo (String a, int b)</b>");
-        String _string_1 = _builder_2.toString();
-        boolean _endsWith = signature.endsWith(_string_1);
-        Assert.assertTrue(_endsWith);
+        String _signature = this.signatureProvider.getSignature(xtendConstructor);
+        final String signature = _signature;
+        Assert.assertEquals("<b>testPackage.Foo (String a, int b)</b>", signature);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -300,19 +246,9 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
         XExpression _get_1 = _expressions.get(0);
         final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
         JvmConstructor _constructor = constructorCall.getConstructor();
-        String _hoverSignature = this.signatureProvider.getHoverSignature(_constructor);
-        final String signature = _hoverSignature;
-        System.out.println(signature);
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<b><image src=");
-        String _string = _builder_1.toString();
-        boolean _startsWith = signature.startsWith(_string);
-        Assert.assertTrue(_startsWith);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append(".metadata/.plugins/org.eclipse.jdt.ui/jdt-images/4.png\'/>testPackage.Foo ()</b>");
-        String _string_1 = _builder_2.toString();
-        boolean _endsWith = signature.endsWith(_string_1);
-        Assert.assertTrue(_endsWith);
+        String _signature = this.signatureProvider.getSignature(_constructor);
+        final String signature = _signature;
+        Assert.assertEquals("<b>testPackage.Foo ()</b>", signature);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
