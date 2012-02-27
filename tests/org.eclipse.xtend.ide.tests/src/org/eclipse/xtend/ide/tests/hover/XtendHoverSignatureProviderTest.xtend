@@ -34,9 +34,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		}
 		''', resourceSet)
 		val clazz = xtendFile.xtendClass
-		val signature = signatureProvider.getHoverSignature(clazz)
-		assertTrue(signature.startsWith('''<b><image src='''.toString))
-		assertTrue(signature.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/0.png'/>testPackage.Foo</b>'''.toString))
+		val signature = signatureProvider.getSignature(clazz)
+		assertEquals("<b>testPackage.Foo</b>",signature)
 	}
 	
 	@Test
@@ -51,12 +50,10 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val clazz = xtendFile.xtendClass
 		val xtendFunction1 = clazz.members.get(0)
 		val xtendFunction2 = clazz.members.get(1)
-		val signature1 = signatureProvider.getHoverSignature(xtendFunction1)
-		val signature2 = signatureProvider.getHoverSignature(xtendFunction2)
-		assertTrue(signature1.startsWith('''<b><image src='''.toString))
-		assertTrue(signature1.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/1.png'/> Object bar(String a) throws NullPointerException</b>'''.toString))
-		assertTrue(signature2.startsWith('''<b><image src='''.toString))
-		assertTrue(signature2.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/1.png'/> void bar(String a, int b) throws NullPointerException, RuntimeException</b>'''.toString))
+		val signature1 = signatureProvider.getSignature(xtendFunction1)
+		val signature2 = signatureProvider.getSignature(xtendFunction2)
+		assertEquals("<b>Object bar(String a) throws NullPointerException</b>",signature1)
+		assertEquals("<b>void bar(String a, int b) throws NullPointerException, RuntimeException</b>",signature2)
 	}
 	
 	@Test
@@ -70,9 +67,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val clazz = xtendFile.xtendClass
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val xtendParameter = xtendFunction.parameters.get(0)
-		val signature = signatureProvider.getHoverSignature(xtendParameter)
-		assertTrue(signature.startsWith('''<b><image src='''.toString))
-		assertTrue(signature.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/2.png'/> String a - bar(String)</b>'''.toString))
+		val signature = signatureProvider.getSignature(xtendParameter)
+		assertEquals("<b>String a - bar(String)</b>",signature)
 	}
 	
 	@Test
@@ -92,9 +88,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		''', resourceSet)
 		val clazz = xtendFile.xtendClass
 		val xtendField = clazz.members.get(0) as XtendField
-		val signature = signatureProvider.getHoverSignature(xtendField)
-		assertTrue(signature.startsWith('''<b><image src='''.toString))
-		assertTrue(signature.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/3.png'/>Collections testPackage.Foo.collections</b>'''.toString))
+		val signature = signatureProvider.getSignature(xtendField)
+		assertEquals("<b>Collections testPackage.Foo.collections</b>",signature)
 	}
 	
 	@Test
@@ -107,9 +102,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		''', resourceSet)
 		val clazz = xtendFile.xtendClass
 		val xtendConstructor = clazz.members.get(0)
-		val signature = signatureProvider.getHoverSignature(xtendConstructor)
-		assertTrue(signature.startsWith('''<b><image src='''.toString))
-		assertTrue(signature.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/4.png'/>testPackage.Foo (String a, int b)</b>'''.toString))
+		val signature = signatureProvider.getSignature(xtendConstructor)
+		assertEquals("<b>testPackage.Foo (String a, int b)</b>",signature)
 	}
 	
 	@Test
@@ -125,10 +119,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val clazz = xtendFile.xtendClass
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
-		val signature = signatureProvider.getHoverSignature(constructorCall.constructor)
-		System::out.println(signature)
-		assertTrue(signature.startsWith('''<b><image src='''.toString))
-		assertTrue(signature.endsWith('''.metadata/.plugins/org.eclipse.jdt.ui/jdt-images/4.png'/>testPackage.Foo ()</b>'''.toString))
+		val signature = signatureProvider.getSignature(constructorCall.constructor)
+		assertEquals("<b>testPackage.Foo ()</b>",signature)
 	}
 	
 	def getResourceSet(){
