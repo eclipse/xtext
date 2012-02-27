@@ -45,9 +45,10 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	
 	@Override
 	protected String getFirstLine(EObject o) {
-		String hoverText = hoverSignatureProvider.getHoverSignature(o);
-		if(hoverText != null) {
-			return hoverText;
+		String imageTag = hoverSignatureProvider.getImageTag(o);
+		String hoverText = hoverSignatureProvider.getSignature(o);
+		if(imageTag != null && hoverText != null) {
+			return imageTag + " " + hoverText;
 		}
 		if (o instanceof JvmIdentifiableElement) {
 			JvmTypeReference type = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) o);

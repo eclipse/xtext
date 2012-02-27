@@ -46,8 +46,21 @@ public class DefaultDeclarativeHoverSignatureProvider {
 	@Inject
 	protected UIStrings uiStrings;
 
-	public String getHoverSignature(EObject object) {
-		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_hoverSignature", 1, 1,
+	public String getSignature(EObject object) {
+		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_signature", 1, 1,
+				Collections.singletonList(this), new ErrorHandler<String>() {
+					public String handle(Object[] params, Throwable throwable) {
+						return null;
+					}
+				});
+		String result = polymorphicDispatcher.invoke(object);
+		if(result == null)
+			return null;
+		return "<b>" + result + "</b>";
+	}
+	
+	public String getImageTag(EObject object) {
+		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_imageTag", 1, 1,
 				Collections.singletonList(this), new ErrorHandler<String>() {
 					public String handle(Object[] params, Throwable throwable) {
 						return null;
@@ -59,32 +72,16 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return "<b>" + result + "</b>";
 	}
 
-	protected String _hoverSignature(JvmGenericType clazz) {
-		String imageTag = getImageTag(JavaElementImageProvider.getTypeImageDescriptor(false, false,
-				toFlags(clazz.getVisibility()), false));
-		return imageTag + getSignature(clazz);
-
-	}
-
-	private String getSignature(JvmGenericType clazz) {
+	protected String _signature(JvmGenericType clazz) {
 		return clazz.getPackageName() + "." + clazz.getSimpleName();
 	}
-
-	protected String _hoverSignature(JvmOperation operation) {
-		if (operation != null) {
-			ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
-					toFlags(operation.getVisibility()));
-			String imageTag = "";
-			if (operation.isStatic()) {
-				imageTag = getImageTag(getDecoratedJdtImageDescriptor(descriptor, JavaElementImageDescriptor.STATIC));
-			} else
-				imageTag = getImageTag(descriptor);
-			return imageTag + " " + getSignature(operation);
-		}
-		return "";
+	
+	protected String _imageTag(JvmGenericType clazz){
+		return getImageTagLink(JavaElementImageProvider.getTypeImageDescriptor(false, false,
+				toFlags(clazz.getVisibility()), false));
 	}
 
-	protected String getSignature(JvmOperation jvmOperation) {
+	protected String _signature(JvmOperation jvmOperation) {
 		String returnTypeString = "void";
 		JvmTypeReference returnType = jvmOperation.getReturnType();
 		if (returnType != null) {
@@ -97,23 +94,18 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return returnTypeString + " " + jvmOperation.getSimpleName() + hoverUiStrings.parameters(jvmOperation) + getThrowsDeclaration(jvmOperation);
 	}
 
-	protected String getSimpleSignature(JvmOperation jvmOperation) {
-		return jvmOperation.getSimpleName() + uiStrings.parameters(jvmOperation);
+	protected String _imageTag(JvmOperation operation) {
+		ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
+				toFlags(operation.getVisibility()));
+		String imageTag = "";
+		if (operation.isStatic()) {
+			imageTag = getImageTagLink(getDecoratedJdtImageDescriptor(descriptor, JavaElementImageDescriptor.STATIC));
+		} else
+			imageTag = getImageTagLink(descriptor);
+		return imageTag;
 	}
 
-	protected String _hoverSignature(JvmField field) {
-			ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false,
-					toFlags(field.getVisibility()));
-			String imageTag = "";
-			if (field.isStatic()) {
-				imageTag = getImageTag(getDecoratedJdtImageDescriptor(descriptor, JavaElementImageDescriptor.STATIC));
-			} else
-				imageTag = getImageTag(descriptor);
-
-			return imageTag + getSignature(field);
-	}
-
-	protected String getSignature(JvmField jvmField) {
+	protected String _signature(JvmField jvmField) {
 		JvmTypeReference type = jvmField.getType();
 		if (type != null) {
 			return type.getSimpleName() + " " + jvmField.getQualifiedName();
@@ -121,36 +113,42 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return "";
 	}
 
-	protected String _hoverSignature(JvmConstructor constructor) {
-			ImageDescriptor imageDescriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
-					toFlags(constructor.getVisibility()));
-			String imageTag = getImageTag(getDecoratedJdtImageDescriptor(imageDescriptor,
-					JavaElementImageDescriptor.CONSTRUCTOR));
-			return imageTag + getSignature(constructor);
+	protected String _imageTag(JvmField field) {
+		ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false,
+				toFlags(field.getVisibility()));
+		String imageTag = "";
+		if (field.isStatic()) {
+			imageTag = getImageTagLink(getDecoratedJdtImageDescriptor(descriptor, JavaElementImageDescriptor.STATIC));
+		} else
+			imageTag = getImageTagLink(descriptor);
+		return imageTag;
 	}
 
-	protected String getSignature(JvmConstructor contructor) {
+	protected String _signature(JvmConstructor contructor) {
 		return contructor.getQualifiedName() + " " + hoverUiStrings.parameters(contructor) + getThrowsDeclaration(contructor);
 	}
 
-	protected String getSimpleSignature(JvmConstructor contructor) {
-		return contructor.getQualifiedName() + " " + uiStrings.parameters(contructor);
+	protected String _imageTag(JvmConstructor constructor) {
+		ImageDescriptor imageDescriptor = JavaElementImageProvider.getMethodImageDescriptor(false,
+				toFlags(constructor.getVisibility()));
+		return getImageTagLink(getDecoratedJdtImageDescriptor(imageDescriptor,
+				JavaElementImageDescriptor.CONSTRUCTOR));
 	}
 
-	protected String _hoverSignature(JvmFormalParameter parameter) {
-		ImageDescriptor descriptor = JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE;
-		String imageTag = getImageTag(descriptor);
-		return imageTag + " " + getSignature(parameter);
-	}
-
-	protected String getSignature(JvmFormalParameter parameter) {
+	protected String _signature(JvmFormalParameter parameter) {
 		JvmTypeReference parameterType = parameter.getParameterType();
 		if (parameterType != null) {
 			EObject container = parameter.eContainer();
 			return parameterType.getSimpleName() + " " + parameter.getName() + JavaElementLabels.CONCAT_STRING
-					+ getSignature(container);
+					+ getSimpleSignature(container);
 		}
 		return "";
+	}
+
+	protected String _imageTag(JvmFormalParameter parameter) {
+		ImageDescriptor descriptor = JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE;
+		String imageTag = getImageTagLink(descriptor);
+		return imageTag;
 	}
 	
 	protected String getThrowsDeclaration(JvmExecutable executable){
@@ -169,7 +167,7 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		return result;
 	}
 
-	protected String getSignature(EObject container) {
+	protected String getSimpleSignature(EObject container) {
 		if (container instanceof JvmOperation) {
 				return getSimpleSignature((JvmOperation) container);
 		} else if (container instanceof JvmConstructor) {
@@ -177,8 +175,16 @@ public class DefaultDeclarativeHoverSignatureProvider {
 		}
 		return "";
 	}
+	
+	protected String getSimpleSignature(JvmConstructor contructor) {
+		return contructor.getQualifiedName() + " " + uiStrings.parameters(contructor);
+	}
+	
+	protected String getSimpleSignature(JvmOperation jvmOperation) {
+		return jvmOperation.getSimpleName() + uiStrings.parameters(jvmOperation);
+	}
 
-	protected String getImageTag(ImageDescriptor imageDescriptor) {
+	protected String getImageTagLink(ImageDescriptor imageDescriptor) {
 		URL url = getURL(imageDescriptor);
 		if (url != null)
 			return "<image src='" + url.toExternalForm() + "'/>";
