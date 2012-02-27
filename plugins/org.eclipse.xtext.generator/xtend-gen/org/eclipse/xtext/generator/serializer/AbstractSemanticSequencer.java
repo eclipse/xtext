@@ -1,6 +1,8 @@
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -26,20 +28,26 @@ import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaEMFFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class AbstractSemanticSequencer extends GeneratedFile {
@@ -85,8 +93,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
         public Boolean apply(final IConstraint e) {
           EClass _type = e.getType();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
-          return Boolean.valueOf(_operator_notEquals);
+          boolean _notEquals = !ObjectExtensions.equals(_type, null);
+          return Boolean.valueOf(_notEquals);
         }
       };
     Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_grammarConstraints, _function);
@@ -114,16 +122,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     Iterable<EClass> _map = IterableExtensions.<IConstraint, EClass>map(_grammarConstraints, _function);
     final Function1<EClass,Boolean> _function_1 = new Function1<EClass,Boolean>() {
         public Boolean apply(final EClass e) {
-          boolean _operator_and = false;
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(e, null);
-          if (!_operator_notEquals) {
-            _operator_and = false;
+          boolean _and = false;
+          boolean _notEquals = !ObjectExtensions.equals(e, null);
+          if (!_notEquals) {
+            _and = false;
           } else {
             EPackage _ePackage = e.getEPackage();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_ePackage, pkg);
-            _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+            boolean _equals = ObjectExtensions.equals(_ePackage, pkg);
+            _and = (_notEquals && _equals);
           }
-          return Boolean.valueOf(_operator_and);
+          return Boolean.valueOf(_and);
         }
       };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
@@ -167,72 +175,72 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public HashSet<Grammar> getGrammars(final IConstraintElement ele) {
-      HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
-      final HashSet<Grammar> result = _newHashSet;
-      boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(ele, null);
-      if (!_operator_notEquals) {
-        _operator_and = false;
-      } else {
-        AbstractElement _grammarElement = ele.getGrammarElement();
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_grammarElement, null);
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+    HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
+    final HashSet<Grammar> result = _newHashSet;
+    boolean _and = false;
+    boolean _notEquals = !ObjectExtensions.equals(ele, null);
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      AbstractElement _grammarElement = ele.getGrammarElement();
+      boolean _notEquals_1 = !ObjectExtensions.equals(_grammarElement, null);
+      _and = (_notEquals && _notEquals_1);
+    }
+    if (_and) {
+      AbstractElement _grammarElement_1 = ele.getGrammarElement();
+      Grammar _grammar = GrammarUtil.getGrammar(_grammarElement_1);
+      result.add(_grammar);
+    }
+    boolean _and_1 = false;
+    boolean _notEquals_2 = !ObjectExtensions.equals(ele, null);
+    if (!_notEquals_2) {
+      _and_1 = false;
+    } else {
+      List<IConstraintElement> _children = ele.getChildren();
+      boolean _notEquals_3 = !ObjectExtensions.equals(_children, null);
+      _and_1 = (_notEquals_2 && _notEquals_3);
+    }
+    if (_and_1) {
+      List<IConstraintElement> _children_1 = ele.getChildren();
+      final Function1<IConstraintElement,HashSet<Grammar>> _function = new Function1<IConstraintElement,HashSet<Grammar>>() {
+          public HashSet<Grammar> apply(final IConstraintElement c) {
+            HashSet<Grammar> _grammars = AbstractSemanticSequencer.this.getGrammars(c);
+            return _grammars;
+          }
+        };
+      List<HashSet<Grammar>> _map = ListExtensions.<IConstraintElement, HashSet<Grammar>>map(_children_1, _function);
+      Iterable<Grammar> _flatten = Iterables.<Grammar>concat(_map);
+      for (final Grammar g : _flatten) {
+        result.add(g);
       }
-      if (_operator_and) {
-        AbstractElement _grammarElement_1 = ele.getGrammarElement();
-        Grammar _grammar = GrammarUtil.getGrammar(_grammarElement_1);
-        result.add(_grammar);
-      }
-      boolean _operator_and_1 = false;
-      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(ele, null);
-      if (!_operator_notEquals_2) {
-        _operator_and_1 = false;
-      } else {
-        List<IConstraintElement> _children = ele.getChildren();
-        boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_children, null);
-        _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals_2, _operator_notEquals_3);
-      }
-      if (_operator_and_1) {
-        List<IConstraintElement> _children_1 = ele.getChildren();
-        final Function1<IConstraintElement,HashSet<Grammar>> _function = new Function1<IConstraintElement,HashSet<Grammar>>() {
-            public HashSet<Grammar> apply(final IConstraintElement c) {
-              HashSet<Grammar> _grammars = AbstractSemanticSequencer.this.getGrammars(c);
-              return _grammars;
-            }
-          };
-        List<HashSet<Grammar>> _map = ListExtensions.<IConstraintElement, HashSet<Grammar>>map(_children_1, _function);
-        Iterable<Grammar> _flatten = IterableExtensions.<Grammar>flatten(_map);
-        for (final Grammar g : _flatten) {
-          result.add(g);
-        }
-      }
-      return result;
+    }
+    return result;
   }
   
   public boolean uses(final Grammar g1, final Grammar g2) {
-    boolean _operator_and = false;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(g1, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
+    boolean _and = false;
+    boolean _notEquals = !ObjectExtensions.equals(g1, null);
+    if (!_notEquals) {
+      _and = false;
     } else {
       EList<Grammar> _usedGrammars = g1.getUsedGrammars();
       final Function1<Grammar,Boolean> _function = new Function1<Grammar,Boolean>() {
           public Boolean apply(final Grammar e) {
-            boolean _operator_or = false;
-            boolean _operator_equals = ObjectExtensions.operator_equals(e, g2);
-            if (_operator_equals) {
-              _operator_or = true;
+            boolean _or = false;
+            boolean _equals = ObjectExtensions.equals(e, g2);
+            if (_equals) {
+              _or = true;
             } else {
               boolean _uses = AbstractSemanticSequencer.this.uses(e, g2);
-              _operator_or = BooleanExtensions.operator_or(_operator_equals, _uses);
+              _or = (_equals || _uses);
             }
-            return Boolean.valueOf(_operator_or);
+            return Boolean.valueOf(_or);
           }
         };
       boolean _exists = IterableExtensions.<Grammar>exists(_usedGrammars, _function);
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _exists);
+      _and = (_notEquals && _exists);
     }
-    return _operator_and;
+    return _and;
   }
   
   public Grammar getMostConcreteGrammar(final IConstraint constraint) {
@@ -265,15 +273,15 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     Iterable<Grammar> _map = IterableExtensions.<IConstraint, Grammar>map(_accessedConstraints, _function);
     final Function1<Grammar,Boolean> _function_1 = new Function1<Grammar,Boolean>() {
         public Boolean apply(final Grammar g) {
-          boolean _operator_and = false;
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(g, null);
-          if (!_operator_notEquals) {
-            _operator_and = false;
+          boolean _and = false;
+          boolean _notEquals = !ObjectExtensions.equals(g, null);
+          if (!_notEquals) {
+            _and = false;
           } else {
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(g, AbstractSemanticSequencer.this.grammar);
-            _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+            boolean _notEquals_1 = !ObjectExtensions.equals(g, AbstractSemanticSequencer.this.grammar);
+            _and = (_notEquals && _notEquals_1);
           }
-          return Boolean.valueOf(_operator_and);
+          return Boolean.valueOf(_and);
         }
       };
     boolean _exists = IterableExtensions.<Grammar>exists(_map, _function_1);
@@ -288,16 +296,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       String _packageName = this.getPackageName();
       JavaEMFFile _javaEMFFile = new JavaEMFFile(_resourceSet, _packageName);
       final JavaEMFFile file = _javaEMFFile;
-      file.imported(org.eclipse.emf.ecore.EObject.class);
-      file.imported(org.eclipse.xtext.serializer.sequencer.GenericSequencer.class);
-      file.imported(org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class);
-      file.imported(org.eclipse.xtext.serializer.sequencer.ITransientValueService.class);
-      file.imported(org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor.class);
-      file.imported(org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider.class);
-      file.imported(org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor.class);
+      file.imported(EObject.class);
+      file.imported(GenericSequencer.class);
+      file.imported(ISemanticSequencer.class);
+      file.imported(ITransientValueService.class);
+      file.imported(ISemanticSequenceAcceptor.class);
+      file.imported(ISemanticSequencerDiagnosticProvider.class);
+      file.imported(Acceptor.class);
       file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer.class);
-      file.imported(com.google.inject.Inject.class);
-      file.imported(com.google.inject.Provider.class);
+      file.imported(Inject.class);
+      file.imported(Provider.class);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("@SuppressWarnings(\"restriction\")");
       _builder.newLine();
@@ -423,8 +431,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
           public Boolean apply(final IConstraint e) {
             EClass _type = e.getType();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
-            return Boolean.valueOf(_operator_notEquals);
+            boolean _notEquals = !ObjectExtensions.equals(_type, null);
+            return Boolean.valueOf(_notEquals);
           }
         };
       Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function);
@@ -459,10 +467,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       for(final EPackage pkg : _accessedPackages) {
         _builder.append("\t");
         {
-          int _operator_plus = IntegerExtensions.operator_plus(pkgi, 1);
-          int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(_pkgi, 1);
-          if (_operator_greaterThan) {
+          int _plus = (pkgi + 1);
+          int _pkgi = pkgi = _plus;
+          boolean _greaterThan = (_pkgi > 1);
+          if (_greaterThan) {
             _builder.append("else ");
           }
         }
@@ -502,10 +510,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 {
-                  int _operator_plus_1 = IntegerExtensions.operator_plus(ctxi, 1);
-                  int _ctxi = ctxi = _operator_plus_1;
-                  boolean _operator_greaterThan_1 = IntegerExtensions.operator_greaterThan(_ctxi, 1);
-                  if (_operator_greaterThan_1) {
+                  int _plus_1 = (ctxi + 1);
+                  int _ctxi = ctxi = _plus_1;
+                  boolean _greaterThan_1 = (_ctxi > 1);
+                  if (_greaterThan_1) {
                     _builder.append("else ");
                   }
                 }
@@ -591,13 +599,13 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("*     ");
     String _xifexpression = null;
     IConstraintElement _body = c.getBody();
-    boolean _operator_equals = ObjectExtensions.operator_equals(_body, null);
-    if (_operator_equals) {
+    boolean _equals = ObjectExtensions.equals(_body, null);
+    if (_equals) {
       EClass _type = c.getType();
       String _name = _type.getName();
-      String _operator_plus = StringExtensions.operator_plus("{", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "}");
-      _xifexpression = _operator_plus_1;
+      String _plus = ("{" + _name);
+      String _plus_1 = (_plus + "}");
+      _xifexpression = _plus_1;
     } else {
       IConstraintElement _body_1 = c.getBody();
       String _string = _body_1.toString();
@@ -627,8 +635,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet(this.grammar, null);
       Grammar _mostConcreteGrammar = this.getMostConcreteGrammar(c);
       boolean _contains = _newHashSet.contains(_mostConcreteGrammar);
-      boolean _operator_not = BooleanExtensions.operator_not(_contains);
-      if (_operator_not) {
+      boolean _not = (!_contains);
+      if (_not) {
         _builder.append("\t");
         _builder.append("superSequencer.createSequence(context, ");
         _builder.append(cast, "	");
@@ -644,8 +652,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             IFeatureInfo[] _features = c.getFeatures();
             final Function1<IFeatureInfo,Boolean> _function = new Function1<IFeatureInfo,Boolean>() {
                 public Boolean apply(final IFeatureInfo e) {
-                  boolean _operator_notEquals = ObjectExtensions.operator_notEquals(e, null);
-                  return Boolean.valueOf(_operator_notEquals);
+                  boolean _notEquals = !ObjectExtensions.equals(e, null);
+                  return Boolean.valueOf(_notEquals);
                 }
               };
             Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
@@ -659,7 +667,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               String _importedGenTypeLiteral = file.importedGenTypeLiteral(_feature);
               _builder.append(_importedGenTypeLiteral, "		");
               _builder.append(") == ");
-              String _imported = file.imported(org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient.class);
+              String _imported = file.imported(ValueTransient.class);
               _builder.append(_imported, "		");
               _builder.append(".YES)");
               _builder.newLineIfNotEmpty();
@@ -680,14 +688,14 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("}");
           _builder.newLine();
           _builder.append("\t");
-          String _imported_1 = file.imported(org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider.class);
+          String _imported_1 = file.imported(INodesForEObjectProvider.class);
           _builder.append(_imported_1, "	");
           _builder.append(" nodes = createNodeProvider(");
           _builder.append(cast, "	");
           _builder.append("semanticObject);");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          String _imported_2 = file.imported(org.eclipse.xtext.serializer.acceptor.SequenceFeeder.class);
+          String _imported_2 = file.imported(SequenceFeeder.class);
           _builder.append(_imported_2, "	");
           _builder.append(" feeder = createSequencerFeeder(");
           _builder.append(cast, "	");
@@ -697,8 +705,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             Iterable<IFeatureInfo> _xifexpression_1 = null;
             IConstraintElement _body_2 = c.getBody();
             IFeatureInfo _featureInfo = _body_2.getFeatureInfo();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_featureInfo, null);
-            if (_operator_notEquals) {
+            boolean _notEquals = !ObjectExtensions.equals(_featureInfo, null);
+            if (_notEquals) {
               IConstraintElement _body_3 = c.getBody();
               IFeatureInfo _featureInfo_1 = _body_3.getFeatureInfo();
               ArrayList<IFeatureInfo> _newArrayList = CollectionLiterals.<IFeatureInfo>newArrayList(_featureInfo_1);
@@ -709,8 +717,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               final Function1<IConstraintElement,Boolean> _function_1 = new Function1<IConstraintElement,Boolean>() {
                   public Boolean apply(final IConstraintElement e) {
                     IFeatureInfo _featureInfo = e.getFeatureInfo();
-                    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_featureInfo, null);
-                    return Boolean.valueOf(_operator_notEquals);
+                    boolean _notEquals = !ObjectExtensions.equals(_featureInfo, null);
+                    return Boolean.valueOf(_notEquals);
                   }
                 };
               Iterable<IConstraintElement> _filter_1 = IterableExtensions.<IConstraintElement>filter(_children, _function_1);

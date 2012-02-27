@@ -1,8 +1,11 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 import java.lang.reflect.Method;
+import java.util.AbstractList;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -21,12 +24,12 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -56,10 +59,10 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       this.javaCompiler.clearClassPath();
       Class<? extends Object> _class = this.getClass();
       this.javaCompiler.addClassPathOfClass(_class);
-      this.javaCompiler.addClassPathOfClass(org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest.class);
-      this.javaCompiler.addClassPathOfClass(org.eclipse.xtext.xbase.lib.Functions.class);
-      this.javaCompiler.addClassPathOfClass(com.google.inject.Provider.class);
-      this.javaCompiler.addClassPathOfClass(com.google.common.base.Supplier.class);
+      this.javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
+      this.javaCompiler.addClassPathOfClass(Functions.class);
+      this.javaCompiler.addClassPathOfClass(Provider.class);
+      this.javaCompiler.addClassPathOfClass(Supplier.class);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -73,18 +76,18 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             EList<JvmMember> _members = it.getMembers();
-            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
             final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
                 public void apply(final JvmOperation it) {
                   EList<JvmFormalParameter> _parameters = it.getParameters();
-                  JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(java.lang.String.class, expression);
+                  JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
                   JvmFormalParameter _parameter = JvmModelGeneratorTest.this.builder.toParameter(expression, "s", _typeForName);
-                  CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                  _parameters.add(_parameter);
                   JvmModelGeneratorTest.this.builder.setBody(it, expression);
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
-            CollectionExtensions.<JvmOperation>operator_add(_members, _method);
+            _members.add(_method);
           }
         };
       JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -94,7 +97,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Class<?> compiledClass = _compile;
       Object _newInstance = compiledClass.newInstance();
       final Object instance = _newInstance;
-      Method _method = compiledClass.getMethod("doStuff", java.lang.String.class);
+      Method _method = compiledClass.getMethod("doStuff", String.class);
       Object _invoke = _method.invoke(instance, "foo");
       Assert.assertEquals("FOO", _invoke);
     } catch (Exception _e) {
@@ -111,8 +114,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.lang.Iterable.class, java.lang.String.class);
-            CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);
+            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, Iterable.class, String.class);
+            _superTypes.add(_typeRef);
           }
         };
       JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -120,7 +123,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Resource _eResource = expression.eResource();
       Class<?> _compile = this.compile(_eResource, clazz);
       final Class<?> compiled = _compile;
-      boolean _isAssignableFrom = java.lang.Iterable.class.isAssignableFrom(compiled);
+      boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -136,8 +139,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.util.AbstractList.class, java.lang.String.class);
-            CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _typeRef);
+            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, AbstractList.class, String.class);
+            _superTypes.add(_typeRef);
           }
         };
       JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -145,9 +148,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Resource _eResource = expression.eResource();
       Class<?> _compile = this.compile(_eResource, clazz);
       final Class<?> compiled = _compile;
-      boolean _isAssignableFrom = java.lang.Iterable.class.isAssignableFrom(compiled);
+      boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom);
-      boolean _isAssignableFrom_1 = java.util.AbstractList.class.isAssignableFrom(compiled);
+      boolean _isAssignableFrom_1 = AbstractList.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -162,17 +165,17 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             EList<JvmMember> _members = it.getMembers();
-            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, java.lang.String.class);
+            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, String.class);
             JvmField _field = JvmModelGeneratorTest.this.builder.toField(expression, "x", _typeRef);
-            CollectionExtensions.<JvmField>operator_add(_members, _field);
+            _members.add(_field);
             EList<JvmMember> _members_1 = it.getMembers();
-            JvmTypeReference _typeRef_1 = JvmModelGeneratorTest.this.typeRef(expression, java.lang.String.class);
+            JvmTypeReference _typeRef_1 = JvmModelGeneratorTest.this.typeRef(expression, String.class);
             JvmOperation _getter = JvmModelGeneratorTest.this.builder.toGetter(expression, "x", _typeRef_1);
-            CollectionExtensions.<JvmOperation>operator_add(_members_1, _getter);
+            _members_1.add(_getter);
             EList<JvmMember> _members_2 = it.getMembers();
-            JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, java.lang.String.class);
+            JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, String.class);
             JvmOperation _setter = JvmModelGeneratorTest.this.builder.toSetter(expression, "x", _typeRef_2);
-            CollectionExtensions.<JvmOperation>operator_add(_members_2, _setter);
+            _members_2.add(_setter);
           }
         };
       JvmGenericType _class = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -184,7 +187,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Object inst = _newInstance;
       Method _method = compiled.getMethod("getX");
       final Method getter = _method;
-      Method _method_1 = compiled.getMethod("setX", java.lang.String.class);
+      Method _method_1 = compiled.getMethod("setX", String.class);
       final Method setter = _method_1;
       setter.invoke(inst, "FOO");
       Object _invoke = getter.invoke(inst);
@@ -208,7 +211,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   public Class<?> compile(final Resource res, final JvmDeclaredType type) {
     res.eSetDeliver(false);
     EList<EObject> _contents = res.getContents();
-    CollectionExtensions.<JvmDeclaredType>operator_add(_contents, type);
+    _contents.add(type);
     res.eSetDeliver(true);
     InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
     final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
@@ -216,9 +219,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     Map<String,CharSequence> _files = fsa.getFiles();
     String _identifier = type.getIdentifier();
     String _replace = _identifier.replace(".", "/");
-    String _operator_plus = StringExtensions.operator_plus(IFileSystemAccess.DEFAULT_OUTPUT, _replace);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".java");
-    CharSequence _get = _files.get(_operator_plus_1);
+    String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
+    String _plus_1 = (_plus + ".java");
+    CharSequence _get = _files.get(_plus_1);
     String _string = _get.toString();
     final String code = _string;
     String _identifier_1 = type.getIdentifier();

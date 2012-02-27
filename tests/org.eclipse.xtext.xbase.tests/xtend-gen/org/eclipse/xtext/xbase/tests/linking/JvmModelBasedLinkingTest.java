@@ -16,7 +16,6 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -52,16 +51,16 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                   EList<JvmFormalParameter> _parameters = it.getParameters();
                   JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                   JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
-                  CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                  _parameters.add(_parameter);
                   JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                 }
               };
             JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType, _function);
-            CollectionExtensions.<JvmOperation>operator_add(_members, _method);
+            _members.add(_method);
           }
         };
       JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
+      _contents.add(_class);
       this._validationTestHelper.assertNoErrors(expr);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -82,7 +81,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             EList<JvmMember> _members = it.getMembers();
             JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
             JvmField _field = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toField(expr, "x", _stringType);
-            CollectionExtensions.<JvmField>operator_add(_members, _field);
+            _members.add(_field);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
             final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -90,16 +89,16 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                   EList<JvmFormalParameter> _parameters = it.getParameters();
                   JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                   JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "x", _stringType);
-                  CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                  _parameters.add(_parameter);
                   JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                 }
               };
             JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType_1, _function);
-            CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);
+            _members_1.add(_method);
           }
         };
       JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
+      _contents.add(_class);
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmFormalParameter));
@@ -122,7 +121,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             EList<JvmMember> _members = it.getMembers();
             JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
             JvmField _field = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toField(expr, "x", _stringType);
-            CollectionExtensions.<JvmField>operator_add(_members, _field);
+            _members.add(_field);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
             final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -130,16 +129,16 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                   EList<JvmFormalParameter> _parameters = it.getParameters();
                   JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
                   JvmFormalParameter _parameter = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toParameter(expr, "y", _stringType);
-                  CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                  _parameters.add(_parameter);
                   JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
                 }
               };
             JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "doStuff", _stringType_1, _function);
-            CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);
+            _members_1.add(_method);
           }
         };
       JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
+      _contents.add(_class);
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmField));
@@ -162,7 +161,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
             EList<JvmMember> _members = it.getMembers();
             JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
             JvmField _field = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toField(expr, "x", _stringType);
-            CollectionExtensions.<JvmField>operator_add(_members, _field);
+            _members.add(_field);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
             final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -171,11 +170,11 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelBasedLinkingTest.this._jvmTypesBuilder.toMethod(expr, "getX", _stringType_1, _function);
-            CollectionExtensions.<JvmOperation>operator_add(_members_1, _method);
+            _members_1.add(_method);
           }
         };
       JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
-      CollectionExtensions.<JvmGenericType>operator_add(_contents, _class);
+      _contents.add(_class);
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmField));
@@ -185,7 +184,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   }
   
   public JvmTypeReference stringType(final EObject ctx) {
-    JvmTypeReference _typeForName = this.refs.getTypeForName(java.lang.String.class, ctx);
+    JvmTypeReference _typeForName = this.refs.getTypeForName(String.class, ctx);
     return _typeForName;
   }
 }

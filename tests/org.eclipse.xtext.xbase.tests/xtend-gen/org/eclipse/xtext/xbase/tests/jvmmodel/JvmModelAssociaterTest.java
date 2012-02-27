@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingIn
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
@@ -69,7 +68,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
     final DerivedStateAwareResource resource = _derivedStateAwareResource;
     EList<EObject> _contents = resource.getContents();
     EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
-    CollectionExtensions.<EClass>operator_add(_contents, _createEClass);
+    _contents.add(_createEClass);
     assoc.installDerivedState(resource, true);
     EList<EObject> _contents_1 = resource.getContents();
     EObject _get = _contents_1.get(1);
@@ -79,7 +78,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
     _contents_2.clear();
     EList<EObject> _contents_3 = resource.getContents();
     EClass _createEClass_1 = EcoreFactory.eINSTANCE.createEClass();
-    CollectionExtensions.<EClass>operator_add(_contents_3, _createEClass_1);
+    _contents_3.add(_createEClass_1);
     assoc.installDerivedState(resource, false);
     EList<EObject> _contents_4 = resource.getContents();
     EObject _get_1 = _contents_4.get(1);

@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -49,7 +48,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final XExpression e = _expression;
       XAnnotation _createXAnnotation = f.createXAnnotation();
       final XAnnotation anno = _createXAnnotation;
-      JvmType _findDeclaredType = this.references.findDeclaredType(com.google.inject.Inject.class, e);
+      JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       JvmGenericType _createJvmGenericType = typesFactory.createJvmGenericType();
       final JvmGenericType type = _createJvmGenericType;
@@ -74,7 +73,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final XExpression e = _expression;
       XAnnotation _createXAnnotation = f.createXAnnotation();
       final XAnnotation anno = _createXAnnotation;
-      JvmType _findDeclaredType = this.references.findDeclaredType(com.google.inject.Inject.class, e);
+      JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       anno.setValue(e);
       JvmGenericType _createJvmGenericType = typesFactory.createJvmGenericType();
@@ -107,12 +106,12 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final XExpression context = _expression;
       XAnnotation _createXAnnotation = f.createXAnnotation();
       final XAnnotation anno = _createXAnnotation;
-      JvmType _findDeclaredType = this.references.findDeclaredType(com.google.inject.Inject.class, context);
+      JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, context);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       XAnnotationElementValuePair _createXAnnotationElementValuePair = f.createXAnnotationElementValuePair();
       final XAnnotationElementValuePair pair = _createXAnnotationElementValuePair;
       EList<XAnnotationElementValuePair> _elementValuePairs = anno.getElementValuePairs();
-      CollectionExtensions.<XAnnotationElementValuePair>operator_add(_elementValuePairs, pair);
+      _elementValuePairs.add(pair);
       JvmGenericType _createJvmGenericType = typesFactory.createJvmGenericType();
       final JvmGenericType type = _createJvmGenericType;
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
@@ -143,15 +142,15 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final XExpression e2 = _expression_1;
       XAnnotation _createXAnnotation = f.createXAnnotation();
       final XAnnotation anno = _createXAnnotation;
-      JvmType _findDeclaredType = this.references.findDeclaredType(com.google.inject.Inject.class, e);
+      JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       XAnnotationValueArray _createXAnnotationValueArray = f.createXAnnotationValueArray();
       final XAnnotationValueArray array = _createXAnnotationValueArray;
       anno.setValue(array);
       EList<XExpression> _values = array.getValues();
-      CollectionExtensions.<XExpression>operator_add(_values, e);
+      _values.add(e);
       EList<XExpression> _values_1 = array.getValues();
-      CollectionExtensions.<XExpression>operator_add(_values_1, e2);
+      _values_1.add(e2);
       JvmGenericType _createJvmGenericType = typesFactory.createJvmGenericType();
       final JvmGenericType type = _createJvmGenericType;
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
@@ -189,7 +188,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final XExpression context = _expression;
       XAnnotation _createXAnnotation = f.createXAnnotation();
       final XAnnotation anno = _createXAnnotation;
-      JvmType _findDeclaredType = this.references.findDeclaredType(com.google.inject.Inject.class, context);
+      JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, context);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       XAnnotationValueArray _createXAnnotationValueArray = f.createXAnnotationValueArray();
       final XAnnotationValueArray array = _createXAnnotationValueArray;
@@ -244,8 +243,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-            JvmTypeReference _newTypeRef = JvmTypesBuilderTest.this._jvmTypesBuilder.newTypeRef(e, java.lang.Iterable.class);
-            CollectionExtensions.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+            JvmTypeReference _newTypeRef = JvmTypesBuilderTest.this._jvmTypesBuilder.newTypeRef(e, Iterable.class);
+            _superTypes.add(_newTypeRef);
           }
         };
       JvmGenericType _interface = this._jvmTypesBuilder.toInterface(e, "foo.bar.MyAnnotation", _function);

@@ -22,20 +22,20 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class StatemachineGenerator implements IGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     String _className = this.className(resource);
-    String _operator_plus = StringExtensions.operator_plus(_className, ".java");
+    String _plus = (_className + ".java");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     CharSequence _javaCode = this.toJavaCode(((Statemachine) _head));
-    fsa.generateFile(_operator_plus, _javaCode);
+    fsa.generateFile(_plus, _javaCode);
   }
   
   public String className(final Resource res) {
-      URI _uRI = res.getURI();
-      String _lastSegment = _uRI.lastSegment();
-      String name = _lastSegment;
-      int _indexOf = name.indexOf(".");
-      String _substring = name.substring(0, _indexOf);
-      return _substring;
+    URI _uRI = res.getURI();
+    String _lastSegment = _uRI.lastSegment();
+    String name = _lastSegment;
+    int _indexOf = name.indexOf(".");
+    String _substring = name.substring(0, _indexOf);
+    return _substring;
   }
   
   public CharSequence toJavaCode(final Statemachine sm) {

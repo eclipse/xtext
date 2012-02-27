@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -24,7 +23,7 @@ public class ArithmeticExtensionGenerator {
   public static void main(final String[] args) {
     XbaseStandaloneSetup _xbaseStandaloneSetup = new XbaseStandaloneSetup();
     Injector _createInjectorAndDoEMFRegistration = _xbaseStandaloneSetup.createInjectorAndDoEMFRegistration();
-    ArithmeticExtensionGenerator _instance = _createInjectorAndDoEMFRegistration.<ArithmeticExtensionGenerator>getInstance(org.eclipse.xtext.xbase.lib.ArithmeticExtensionGenerator.class);
+    ArithmeticExtensionGenerator _instance = _createInjectorAndDoEMFRegistration.<ArithmeticExtensionGenerator>getInstance(ArithmeticExtensionGenerator.class);
     _instance.generate();
   }
   
@@ -56,56 +55,54 @@ public class ArithmeticExtensionGenerator {
   
   public void generate() {
     try {
-      {
-        final String path = "../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/";
-        File _file = new File(path);
-        _file.mkdirs();
-        for (final String type : this.types) {
-          {
-            String _className = this.className(type);
-            String _operator_plus = StringExtensions.operator_plus(path, _className);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".java");
-            File _file_1 = new File(_operator_plus_1);
-            final File file = _file_1;
-            CharSequence _xifexpression = null;
-            boolean _exists = file.exists();
-            if (_exists) {
-              CharSequence _xblockexpression = null;
-              {
-                String _absolutePath = file.getAbsolutePath();
-                String _readFileIntoString = Files.readFileIntoString(_absolutePath);
-                final String content = _readFileIntoString;
-                StringConcatenation _builder = new StringConcatenation();
-                String _startMarker = this.startMarker();
-                int _indexOf = content.indexOf(_startMarker);
-                String _substring = content.substring(0, _indexOf);
-                _builder.append(_substring, "");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                CharSequence _generateAllOperations = this.generateAllOperations(type);
-                _builder.append(_generateAllOperations, "	");
-                _builder.newLineIfNotEmpty();
-                String _endMarker = this.endMarker();
-                int _indexOf_1 = content.indexOf(_endMarker);
-                String _endMarker_1 = this.endMarker();
-                int _length = _endMarker_1.length();
-                int _operator_plus_2 = IntegerExtensions.operator_plus(_indexOf_1, _length);
-                String _substring_1 = content.substring(_operator_plus_2);
-                _builder.append(_substring_1, "");
-                _builder.newLineIfNotEmpty();
-                _xblockexpression = (_builder);
-              }
-              _xifexpression = _xblockexpression;
-            } else {
-              CharSequence _generate = this.generate(type);
-              _xifexpression = _generate;
+      final String path = "../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/";
+      File _file = new File(path);
+      _file.mkdirs();
+      for (final String type : this.types) {
+        {
+          String _className = this.className(type);
+          String _plus = (path + _className);
+          String _plus_1 = (_plus + ".java");
+          File _file_1 = new File(_plus_1);
+          final File file = _file_1;
+          CharSequence _xifexpression = null;
+          boolean _exists = file.exists();
+          if (_exists) {
+            CharSequence _xblockexpression = null;
+            {
+              String _absolutePath = file.getAbsolutePath();
+              String _readFileIntoString = Files.readFileIntoString(_absolutePath);
+              final String content = _readFileIntoString;
+              StringConcatenation _builder = new StringConcatenation();
+              String _startMarker = this.startMarker();
+              int _indexOf = content.indexOf(_startMarker);
+              String _substring = content.substring(0, _indexOf);
+              _builder.append(_substring, "");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              CharSequence _generateAllOperations = this.generateAllOperations(type);
+              _builder.append(_generateAllOperations, "	");
+              _builder.newLineIfNotEmpty();
+              String _endMarker = this.endMarker();
+              int _indexOf_1 = content.indexOf(_endMarker);
+              String _endMarker_1 = this.endMarker();
+              int _length = _endMarker_1.length();
+              int _plus_2 = (_indexOf_1 + _length);
+              String _substring_1 = content.substring(_plus_2);
+              _builder.append(_substring_1, "");
+              _builder.newLineIfNotEmpty();
+              _xblockexpression = (_builder);
             }
-            final CharSequence newContent = _xifexpression;
-            FileWriter _fileWriter = new FileWriter(file);
-            final FileWriter writer = _fileWriter;
-            writer.append(newContent);
-            writer.close();
+            _xifexpression = _xblockexpression;
+          } else {
+            CharSequence _generate = this.generate(type);
+            _xifexpression = _generate;
           }
+          final CharSequence newContent = _xifexpression;
+          FileWriter _fileWriter = new FileWriter(file);
+          final FileWriter writer = _fileWriter;
+          writer.append(newContent);
+          writer.close();
         }
       }
     } catch (Exception _e) {
@@ -206,6 +203,8 @@ public class ArithmeticExtensionGenerator {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
+    _builder.append("@Inline(\"(-$1)\")");
+    _builder.newLine();
     _builder.append("public static ");
     String _returnType = this.returnType(type, OperatorMapping.MINUS, type);
     _builder.append(_returnType, "");
@@ -288,6 +287,10 @@ public class ArithmeticExtensionGenerator {
         _builder.append(" ");
         _builder.append("*/");
         _builder.newLine();
+        _builder.append("@Inline(\"($1 ");
+        _builder.append(operator, "");
+        _builder.append(" $2)\")");
+        _builder.newLineIfNotEmpty();
         _builder.append("public static ");
         String _returnType = this.returnType(op1, operator, op2);
         _builder.append(_returnType, "");
@@ -347,6 +350,8 @@ public class ArithmeticExtensionGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append(" ");
     _builder.append("*/");
+    _builder.newLine();
+    _builder.append("@Inline(value=\"$3.pow($1, $2)\", imported=Math.class, when=InlineContext.ALWAYS)");
     _builder.newLine();
     _builder.append("public static double ");
     QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.POWER);
@@ -473,8 +478,8 @@ public class ArithmeticExtensionGenerator {
   
   public String className(final String it) {
     String _wrapperType = this.wrapperType(it);
-    String _operator_plus = StringExtensions.operator_plus(_wrapperType, "Extensions");
-    return _operator_plus;
+    String _plus = (_wrapperType + "Extensions");
+    return _plus;
   }
   
   public String toHtml(final QualifiedName it) {

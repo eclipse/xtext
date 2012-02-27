@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -47,7 +48,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
     try {
       Resource _newResource = this.newResource("return s.toUpperCase");
       final Resource resource = _newResource;
-      Field _declaredField = org.eclipse.xtext.resource.DerivedStateAwareResource.class.getDeclaredField("fullyInitialized");
+      Field _declaredField = DerivedStateAwareResource.class.getDeclaredField("fullyInitialized");
       final Field field = _declaredField;
       field.setAccessible(true);
       Object _get = field.get(resource);

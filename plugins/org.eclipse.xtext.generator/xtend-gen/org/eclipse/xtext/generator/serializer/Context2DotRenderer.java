@@ -1,5 +1,6 @@
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
@@ -13,9 +14,7 @@ import org.eclipse.xtext.util.GraphvizDotBuilder;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Context2DotRenderer {
@@ -35,8 +34,8 @@ public class Context2DotRenderer {
     Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(ctx);
     final Function1<EClass,Pair<EObject,EClass>> _function = new Function1<EClass,Pair<EObject,EClass>>() {
         public Pair<EObject,EClass> apply(final EClass t) {
-          Pair<EObject,EClass> _operator_mappedTo = ObjectExtensions.<EObject, EClass>operator_mappedTo(ctx, t);
-          return _operator_mappedTo;
+          Pair<EObject,EClass> _mappedTo = Pair.<EObject, EClass>of(ctx, t);
+          return _mappedTo;
         }
       };
     Iterable<Pair<EObject,EClass>> _map = IterableExtensions.<EClass, Pair<EObject,EClass>>map(_typesForContext, _function);
@@ -52,7 +51,7 @@ public class Context2DotRenderer {
         }
       };
     List<Iterable<Pair<EObject,EClass>>> _map = ListExtensions.<EObject, Iterable<Pair<EObject,EClass>>>map(_allContexts, _function);
-    Iterable<Pair<EObject,EClass>> _flatten = IterableExtensions.<Pair<EObject,EClass>>flatten(_map);
+    Iterable<Pair<EObject,EClass>> _flatten = Iterables.<Pair<EObject,EClass>>concat(_map);
     return _flatten;
   }
   
@@ -62,8 +61,8 @@ public class Context2DotRenderer {
         public Pair<String,String> apply(final Pair<EObject,EClass> c) {
           String _fileName = Context2DotRenderer.this.getFileName(c, name);
           String _draw = builder.draw(c);
-          Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_fileName, _draw);
-          return _operator_mappedTo;
+          Pair<String,String> _mappedTo = Pair.<String, String>of(_fileName, _draw);
+          return _mappedTo;
         }
       };
     Iterable<Pair<String,String>> _map = IterableExtensions.<Pair<EObject,EClass>, Pair<String,String>>map(_contexts, _function);
@@ -75,23 +74,23 @@ public class Context2DotRenderer {
     {
       String _name = this.grammar.getName();
       String _simpleName = this.naming.toSimpleName(_name);
-      String _operator_plus = StringExtensions.operator_plus(_simpleName, "_");
+      String _plus = (_simpleName + "_");
       EClass _value = ctx.getValue();
       String _name_1 = _value==null?(String)null:_value.getName();
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_1);
-      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
+      String _plus_1 = (_plus + _name_1);
+      String _plus_2 = (_plus_1 + "_");
       EObject _key = ctx.getKey();
       String _contextName = this.nameFunction.getContextName(_key);
-      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _contextName);
-      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_");
-      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, name);
-      final String fn = _operator_plus_5;
+      String _plus_3 = (_plus_2 + _contextName);
+      String _plus_4 = (_plus_3 + "_");
+      String _plus_5 = (_plus_4 + name);
+      final String fn = _plus_5;
       String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
       String _asPath = this.naming.asPath(_basePackageRuntime);
-      String _operator_plus_6 = StringExtensions.operator_plus(_asPath, "/serializer/");
-      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, fn);
-      String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ".dot");
-      _xblockexpression = (_operator_plus_8);
+      String _plus_6 = (_asPath + "/serializer/");
+      String _plus_7 = (_plus_6 + fn);
+      String _plus_8 = (_plus_7 + ".dot");
+      _xblockexpression = (_plus_8);
     }
     return _xblockexpression;
   }

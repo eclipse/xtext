@@ -10,9 +10,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
+ * This API can be used by other templates to generate code
+ * that has hard references to grammar rules/elements
  * @author Moritz Eysholdt
  */
 @SuppressWarnings("all")
@@ -29,10 +30,10 @@ public class GrammarAccess {
   public String gaFullAccessor(final AbstractElement ele) {
     Grammar _grammar = GrammarUtil.getGrammar(ele);
     String _gaSimpleName = this.gaSimpleName(_grammar);
-    String _operator_plus = StringExtensions.operator_plus(_gaSimpleName, ".INSTANCE.");
+    String _plus = (_gaSimpleName + ".INSTANCE.");
     String _gaRuleElementAccessor = this.gaRuleElementAccessor(ele);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _gaRuleElementAccessor);
-    return _operator_plus_1;
+    String _plus_1 = (_plus + _gaRuleElementAccessor);
+    return _plus_1;
   }
   
   /**
@@ -102,9 +103,9 @@ public class GrammarAccess {
    */
   public String gaRuleAccessMethodName(final AbstractRule rule) {
     String _gaRuleIdentifyer = this.gaRuleIdentifyer(rule);
-    String _operator_plus = StringExtensions.operator_plus("get", _gaRuleIdentifyer);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "Rule");
-    return _operator_plus_1;
+    String _plus = ("get" + _gaRuleIdentifyer);
+    String _plus_1 = (_plus + "Rule");
+    return _plus_1;
   }
   
   /**
@@ -114,9 +115,9 @@ public class GrammarAccess {
    */
   public String gaRuleElementsMethodName(final AbstractRule rule) {
     String _gaRuleIdentifyer = this.gaRuleIdentifyer(rule);
-    String _operator_plus = StringExtensions.operator_plus("get", _gaRuleIdentifyer);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "Access");
-    return _operator_plus_1;
+    String _plus = ("get" + _gaRuleIdentifyer);
+    String _plus_1 = (_plus + "Access");
+    return _plus_1;
   }
   
   /**
@@ -126,8 +127,8 @@ public class GrammarAccess {
    */
   public String gaElementAccessMethodeName(final AbstractElement element) {
     String _gaElementIdentifyer = this.gaElementIdentifyer(element);
-    String _operator_plus = StringExtensions.operator_plus("get", _gaElementIdentifyer);
-    return _operator_plus;
+    String _plus = ("get" + _gaElementIdentifyer);
+    return _plus;
   }
   
   /**
@@ -138,8 +139,8 @@ public class GrammarAccess {
    */
   public String gaRuleAccesorClassName(final AbstractRule rule) {
     String _gaRuleIdentifyer = this.gaRuleIdentifyer(rule);
-    String _operator_plus = StringExtensions.operator_plus(_gaRuleIdentifyer, "Elements");
-    return _operator_plus;
+    String _plus = (_gaRuleIdentifyer + "Elements");
+    return _plus;
   }
   
   /**
@@ -149,8 +150,8 @@ public class GrammarAccess {
    */
   public String gaRuleAccessor(final AbstractRule rule) {
     String _gaRuleAccessMethodName = this.gaRuleAccessMethodName(rule);
-    String _operator_plus = StringExtensions.operator_plus(_gaRuleAccessMethodName, "()");
-    return _operator_plus;
+    String _plus = (_gaRuleAccessMethodName + "()");
+    return _plus;
   }
   
   /**
@@ -160,8 +161,8 @@ public class GrammarAccess {
    */
   public String gaElementsAccessor(final AbstractRule rule) {
     String _gaRuleElementsMethodName = this.gaRuleElementsMethodName(rule);
-    String _operator_plus = StringExtensions.operator_plus(_gaRuleElementsMethodName, "()");
-    return _operator_plus;
+    String _plus = (_gaRuleElementsMethodName + "()");
+    return _plus;
   }
   
   /**
@@ -173,8 +174,8 @@ public class GrammarAccess {
    */
   public String gaElementAccessor(final AbstractElement ele) {
     String _gaElementAccessMethodeName = this.gaElementAccessMethodeName(ele);
-    String _operator_plus = StringExtensions.operator_plus(_gaElementAccessMethodeName, "()");
-    return _operator_plus;
+    String _plus = (_gaElementAccessMethodeName + "()");
+    return _plus;
   }
   
   /**
@@ -187,10 +188,10 @@ public class GrammarAccess {
   public String gaRuleElementAccessor(final AbstractElement ele) {
     AbstractRule _containingRule = GrammarUtil.containingRule(ele);
     String _gaElementsAccessor = this.gaElementsAccessor(_containingRule);
-    String _operator_plus = StringExtensions.operator_plus(_gaElementsAccessor, ".");
+    String _plus = (_gaElementsAccessor + ".");
     String _gaElementAccessor = this.gaElementAccessor(ele);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _gaElementAccessor);
-    return _operator_plus_1;
+    String _plus_1 = (_plus + _gaElementAccessor);
+    return _plus_1;
   }
   
   /**
@@ -208,8 +209,8 @@ public class GrammarAccess {
         final AbstractElement _abstractElement = (AbstractElement)cnt;
         matched=true;
         String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
-        String _operator_plus = StringExtensions.operator_plus(_gaRuleElementAccessor, ".getType()");
-        _switchResult = _operator_plus;
+        String _plus = (_gaRuleElementAccessor + ".getType()");
+        _switchResult = _plus;
       }
     }
     if (!matched) {
@@ -217,17 +218,17 @@ public class GrammarAccess {
         final AbstractRule _abstractRule = (AbstractRule)cnt;
         matched=true;
         String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
-        String _operator_plus = StringExtensions.operator_plus(_gaRuleAccessor, ".getType()");
-        _switchResult = _operator_plus;
+        String _plus = (_gaRuleAccessor + ".getType()");
+        _switchResult = _plus;
       }
     }
     if (!matched) {
       EObject _eContainer_1 = ele.eContainer();
       EClass _eClass = _eContainer_1.eClass();
       String _name = _eClass.getName();
-      String _operator_plus = StringExtensions.operator_plus("<error: unknown type ", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ">");
-      _switchResult = _operator_plus_1;
+      String _plus = ("<error: unknown type " + _name);
+      String _plus_1 = (_plus + ">");
+      _switchResult = _plus_1;
     }
     return _switchResult;
   }
@@ -259,9 +260,9 @@ public class GrammarAccess {
     if (!matched) {
       EClass _eClass = ele.eClass();
       String _name = _eClass.getName();
-      String _operator_plus = StringExtensions.operator_plus("<error: unknown type ", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ">");
-      _switchResult = _operator_plus_1;
+      String _plus = ("<error: unknown type " + _name);
+      String _plus_1 = (_plus + ">");
+      _switchResult = _plus_1;
     }
     return _switchResult;
   }

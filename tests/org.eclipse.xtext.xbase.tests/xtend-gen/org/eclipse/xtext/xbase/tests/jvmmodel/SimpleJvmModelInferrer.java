@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -31,18 +30,18 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
-          JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
+          JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
               public void apply(final JvmOperation it) {
                 EList<JvmFormalParameter> _parameters = it.getParameters();
-                JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(java.lang.String.class, e);
+                JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);
                 JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
-                CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                _parameters.add(_parameter);
                 SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));
               }
             };
           JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function);
-          CollectionExtensions.<JvmOperation>operator_add(_members, _method);
+          _members.add(_method);
         }
       };
     _accept.initializeLater(_function);

@@ -26,9 +26,6 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -52,139 +49,120 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   private XbaseCompiler compiler;
   
   protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
-    {
-      XBlockExpression _block = m.getBlock();
-      final XBlockExpression e = _block;
-      Resource _eResource = e.eResource();
-      String _name = this.name(_eResource);
-      JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
-      IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
-      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-          public void apply(final JvmGenericType it) {
-            {
-              EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-              JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(e, java.lang.SuppressWarnings.class, "all");
-              CollectionExtensions.<JvmAnnotationReference>operator_add(_annotations, _annotation);
-              EList<JvmMember> _members = it.getMembers();
-              JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
-              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                  public void apply(final JvmOperation it) {
-                    {
-                      it.setStatic(true);
-                      EList<JvmFormalParameter> _parameters = it.getParameters();
-                      JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.String.class);
-                      JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef);
-                      JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "args", _addArrayTypeDimension);
-                      CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                      boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
-                      boolean _operator_not = BooleanExtensions.operator_not(_containsReturn);
-                      if (_operator_not) {
-                        final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-                            public void apply(final ITreeAppendable it) {
-                              {
-                                ITreeAppendable _append = it.append("try {");
-                                ITreeAppendable _increaseIndentation = _append.increaseIndentation();
-                                _increaseIndentation.newLine();
-                                ITreeAppendable _trace = it.trace(e);
-                                PureXbaseJvmModelInferrer.this.compile(e, _trace);
-                                ITreeAppendable _decreaseIndentation = it.decreaseIndentation();
-                                ITreeAppendable _newLine = _decreaseIndentation.newLine();
-                                _newLine.append("} catch (Throwable t) {}");
-                              }
-                            }
-                          };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
-                      } else {
-                        final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
-                            public void apply(final ITreeAppendable it) {
-                              StringConcatenation _builder = new StringConcatenation();
-                              _builder.append("try {");
-                              _builder.newLine();
-                              _builder.append("\t");
-                              _builder.append("xbaseExpression();");
-                              _builder.newLine();
-                              _builder.append("} catch (Throwable t) {}");
-                              _builder.newLine();
-                              String _string = _builder.toString();
-                              it.append(_string);
-                            }
-                          };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function_1);
+    XBlockExpression _block = m.getBlock();
+    final XBlockExpression e = _block;
+    Resource _eResource = e.eResource();
+    String _name = this.name(_eResource);
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
+    IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(_class);
+    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+          JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(e, SuppressWarnings.class, "all");
+          _annotations.add(_annotation);
+          EList<JvmMember> _members = it.getMembers();
+          JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
+          final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+              public void apply(final JvmOperation it) {
+                it.setStatic(true);
+                EList<JvmFormalParameter> _parameters = it.getParameters();
+                JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, String.class);
+                JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef);
+                JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "args", _addArrayTypeDimension);
+                _parameters.add(_parameter);
+                boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
+                boolean _not = (!_containsReturn);
+                if (_not) {
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        ITreeAppendable _append = it.append("try {");
+                        _append.increaseIndentation();
+                        ITreeAppendable _trace = it.trace(e);
+                        PureXbaseJvmModelInferrer.this.compile(e, _trace);
+                        ITreeAppendable _decreaseIndentation = it.decreaseIndentation();
+                        ITreeAppendable _newLine = _decreaseIndentation.newLine();
+                        _newLine.append("} catch (Throwable t) {}");
                       }
-                    }
-                  }
-                };
-              JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "main", _newTypeRef, _function);
-              CollectionExtensions.<JvmOperation>operator_add(_members, _method);
-              boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
-              if (_containsReturn) {
-                EList<JvmMember> _members_1 = it.getMembers();
-                JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, java.lang.Object.class);
-                final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
-                    public void apply(final JvmOperation it) {
-                      {
-                        it.setStatic(true);
-                        final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
-                            public void apply(final ITreeAppendable it) {
-                              {
-                                ITreeAppendable _append = it.append("if (Boolean.TRUE) ");
-                                _append.increaseIndentation();
-                                ITreeAppendable _trace = it.trace(e);
-                                PureXbaseJvmModelInferrer.this.compile(e, _trace);
-                                ITreeAppendable _decreaseIndentation = it.decreaseIndentation();
-                                ITreeAppendable _newLine = _decreaseIndentation.newLine();
-                                _newLine.append("return null;");
-                              }
-                            }
-                          };
-                        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+                    };
+                  PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+                } else {
+                  final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        StringConcatenation _builder = new StringConcatenation();
+                        _builder.append("try {");
+                        _builder.newLine();
+                        _builder.append("\t");
+                        _builder.append("xbaseExpression();");
+                        _builder.newLine();
+                        _builder.append("} catch (Throwable t) {}");
+                        _builder.newLine();
+                        String _string = _builder.toString();
+                        it.append(_string);
                       }
-                    }
-                  };
-                JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "xbaseExpression", _newTypeRef_1, _function_1);
-                CollectionExtensions.<JvmOperation>operator_add(_members_1, _method_1);
+                    };
+                  PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function_1);
+                }
               }
-            }
+            };
+          JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "main", _newTypeRef, _function);
+          _members.add(_method);
+          boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
+          if (_containsReturn) {
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmTypeReference _newTypeRef_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Object.class);
+            final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setStatic(true);
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        ITreeAppendable _append = it.append("if (Boolean.TRUE) ");
+                        _append.increaseIndentation();
+                        ITreeAppendable _trace = it.trace(e);
+                        PureXbaseJvmModelInferrer.this.compile(e, _trace);
+                        ITreeAppendable _decreaseIndentation = it.decreaseIndentation();
+                        ITreeAppendable _newLine = _decreaseIndentation.newLine();
+                        _newLine.append("return null;");
+                      }
+                    };
+                  PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _function);
+                }
+              };
+            JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "xbaseExpression", _newTypeRef_1, _function_1);
+            _members_1.add(_method_1);
           }
-        };
-      _accept.initializeLater(_function);
-    }
+        }
+      };
+    _accept.initializeLater(_function);
   }
   
   public String name(final Resource res) {
-    {
-      URI _uRI = res.getURI();
-      String _lastSegment = _uRI.lastSegment();
-      final String s = _lastSegment;
-      int _length = s.length();
-      int _length_1 = ".xbase".length();
-      int _operator_minus = IntegerExtensions.operator_minus(_length, _length_1);
-      String _substring = s.substring(0, _operator_minus);
-      return _substring;
-    }
+    URI _uRI = res.getURI();
+    String _lastSegment = _uRI.lastSegment();
+    final String s = _lastSegment;
+    int _length = s.length();
+    int _length_1 = ".xbase".length();
+    int _minus = (_length - _length_1);
+    String _substring = s.substring(0, _minus);
+    return _substring;
   }
   
   public boolean containsReturn(final XExpression expr) {
-    {
-      Collection<ExitPoint> _exitPoints = this.computer.getExitPoints(((XExpression) expr));
-      final Collection<ExitPoint> exitPoints = _exitPoints;
-      for (final ExitPoint point : exitPoints) {
-        XExpression _expression = point.getExpression();
-        if ((_expression instanceof XReturnExpression)) {
-          return true;
-        }
+    Collection<ExitPoint> _exitPoints = this.computer.getExitPoints(((XExpression) expr));
+    final Collection<ExitPoint> exitPoints = _exitPoints;
+    for (final ExitPoint point : exitPoints) {
+      XExpression _expression = point.getExpression();
+      if ((_expression instanceof XReturnExpression)) {
+        return true;
       }
-      return false;
     }
+    return false;
   }
   
   public void compile(final XBlockExpression obj, final ITreeAppendable appendable) {
-    {
-      appendable.increaseIndentation();
-      JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
-      this.compiler.compile(obj, appendable, _newTypeRef);
-      appendable.decreaseIndentation();
-    }
+    appendable.increaseIndentation();
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(obj, Void.TYPE);
+    this.compiler.compile(obj, appendable, _newTypeRef);
+    appendable.decreaseIndentation();
   }
   
   public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {

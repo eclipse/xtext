@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class GeneratedFile {
@@ -16,13 +15,13 @@ public class GeneratedFile {
   
   public String getName(final Grammar grammar, final String prefix, final String component) {
     String _basePackageRuntime = this.naming.basePackageRuntime(grammar);
-    String _operator_plus = StringExtensions.operator_plus(_basePackageRuntime, ".serializer.");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, prefix);
+    String _plus = (_basePackageRuntime + ".serializer.");
+    String _plus_1 = (_plus + prefix);
     String _name = grammar.getName();
     String _simpleName = this.naming.toSimpleName(_name);
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _simpleName);
-    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, component);
-    return _operator_plus_3;
+    String _plus_2 = (_plus_1 + _simpleName);
+    String _plus_3 = (_plus_2 + component);
+    return _plus_3;
   }
   
   public String getQualifiedName() {
@@ -55,10 +54,10 @@ public class GeneratedFile {
   public String getFileName() {
     String _qualifiedName = this.getQualifiedName();
     String _asPath = this.naming.asPath(_qualifiedName);
-    String _operator_plus = StringExtensions.operator_plus(_asPath, ".");
+    String _plus = (_asPath + ".");
     String _fileExtension = this.getFileExtension();
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _fileExtension);
-    return _operator_plus_1;
+    String _plus_1 = (_plus + _fileExtension);
+    return _plus_1;
   }
   
   public String getFileExtension() {

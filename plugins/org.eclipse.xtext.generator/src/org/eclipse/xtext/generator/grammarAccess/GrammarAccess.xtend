@@ -10,12 +10,9 @@ import org.eclipse.xtext.generator.Naming
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
-// ******************************************************************************
-// ***  this API can be used by other templates to generate code             ****
-// ***  that has hard references to grammar rules/elements                   ****
-// ******************************************************************************
-
 /**
+ * This API can be used by other templates to generate code
+ * that has hard references to grammar rules/elements 
  * @author Moritz Eysholdt
  */
 class GrammarAccess {

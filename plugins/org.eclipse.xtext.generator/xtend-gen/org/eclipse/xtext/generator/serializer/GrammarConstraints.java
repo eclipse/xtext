@@ -120,8 +120,8 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.newLineIfNotEmpty();
         {
           IConstraintElement _body = constraint_1.getBody();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_body, null);
-          if (_operator_equals) {
+          boolean _equals = ObjectExtensions.equals(_body, null);
+          if (_equals) {
             _builder.append("\t");
             _builder.append("{");
             EClass _type_1 = constraint_1.getType();
