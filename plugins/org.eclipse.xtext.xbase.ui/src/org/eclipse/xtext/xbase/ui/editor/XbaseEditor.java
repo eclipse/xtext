@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.editor;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
@@ -43,6 +44,8 @@ import com.google.inject.Inject;
  */
 public class XbaseEditor extends XtextEditor {
 
+	private final static Logger log = Logger.getLogger(XbaseEditor.class);
+	
 	protected static final String TAG_ASSOCIATED_JAVA_RESOURCE= "javaResourcePath"; //$NON-NLS-1$
 	
 	@Inject
@@ -136,6 +139,10 @@ public class XbaseEditor extends XtextEditor {
 	}
 
 	public void markNextSelectionAsJavaOffset(IResource javaResource) {
+		if (expectJavaSelection > 0) {
+			log.warn("Two many select-and-reveal calls from Java expected. Setting back to zero.", new IllegalStateException());
+			this.expectJavaSelection = 0;
+		}
 		this.expectJavaSelection++;
 		if (calleeAnalyzer.isCalledFromFindReferences())
 			this.expectJavaSelection++;
