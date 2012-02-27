@@ -62,7 +62,6 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein - introduced QualifiedName
  * @author Christoph Kulla - added support for hovers
  */
-@SuppressWarnings("restriction")
 public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 
 	@Inject

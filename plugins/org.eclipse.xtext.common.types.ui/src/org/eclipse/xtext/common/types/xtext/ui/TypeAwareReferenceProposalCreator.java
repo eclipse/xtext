@@ -25,7 +25,6 @@ import com.google.common.base.Function;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator {
 
 	@Override

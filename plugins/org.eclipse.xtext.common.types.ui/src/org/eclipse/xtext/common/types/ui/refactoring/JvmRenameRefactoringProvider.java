@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvider {
 
 	@Override
