@@ -5,7 +5,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Case_0 {
@@ -15,20 +14,20 @@ public class Case_0 {
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
       ArrayList<Object> list = _newArrayList;
       int _size = list.size();
-      int _operator_minus = IntegerExtensions.operator_minus(_size, 1);
-      Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(0, _operator_minus);
-      for (final Integer i : _operator_upTo) {
+      int _minus = (_size - 1);
+      Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);
+      for (final Integer i : _upTo) {
         String _string = i.toString();
-        String _operator_plus = StringExtensions.operator_plus(_string, " ");
+        String _plus = (_string + " ");
         Object _get = list.get((i).intValue());
-        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _get);
-        InputOutput.<String>println(_operator_plus_1);
+        String _plus_1 = (_plus + _get);
+        InputOutput.<String>println(_plus_1);
       }
       String _xifexpression = null;
       boolean _isUpper = this.isUpper(a);
       if (_isUpper) {
-        String _operator_plus_2 = StringExtensions.operator_plus(b, "holla");
-        String _another = this.another(a, _operator_plus_2);
+        String _plus_2 = (b + "holla");
+        String _another = this.another(a, _plus_2);
         _xifexpression = _another;
       } else {
         String _xblockexpression_1 = null;
@@ -36,8 +35,8 @@ public class Case_0 {
           String x = a;
           char[] _charArray = b.toCharArray();
           for (final char y : _charArray) {
-            String _operator_plus_3 = StringExtensions.operator_plus(x, Character.valueOf(y));
-            x = _operator_plus_3;
+            String _plus_3 = (x + Character.valueOf(y));
+            x = _plus_3;
           }
           _xblockexpression_1 = (x);
         }
@@ -50,12 +49,12 @@ public class Case_0 {
   
   public boolean isUpper(final String s) {
     String _upperCase = s.toUpperCase();
-    boolean _operator_equals = ObjectExtensions.operator_equals(_upperCase, s);
-    return _operator_equals;
+    boolean _equals = ObjectExtensions.equals(_upperCase, s);
+    return _equals;
   }
   
   public String another(final String x, final String y) {
-    String _operator_plus = StringExtensions.operator_plus(y, x);
-    return _operator_plus;
+    String _plus = (y + x);
+    return _plus;
   }
 }

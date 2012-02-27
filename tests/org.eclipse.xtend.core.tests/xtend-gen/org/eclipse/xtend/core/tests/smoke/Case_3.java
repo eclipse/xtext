@@ -10,33 +10,31 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class Case_3 {
   public void testReturnExpression_06() {
+    final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
+        public Integer apply(final Integer i) {
+          return i;
+        }
+      };
+    final Function1<? super Integer,? extends Integer> closure = _function;
+    Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 100);
+    for (final Integer x : _upTo) {
+      closure.apply(x);
+    }
+  }
+  
+  public Object testReturnExpression_07() {
+    Object _xifexpression = null;
+    boolean _notEquals = !ObjectExtensions.equals(Case_3.class, null);
+    if (_notEquals) {
       final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
           public Integer apply(final Integer i) {
             return i;
           }
         };
       final Function1<? super Integer,? extends Integer> closure = _function;
-      Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(1, 100);
-      for (final Integer x : _operator_upTo) {
+      Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 100);
+      for (final Integer x : _upTo) {
         closure.apply(x);
-      }
-  }
-  
-  public Object testReturnExpression_07() {
-    Object _xifexpression = null;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(org.eclipse.xtend.core.tests.smoke.Case_3.class, null);
-    if (_operator_notEquals) {
-      {
-        final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
-            public Integer apply(final Integer i) {
-              return i;
-            }
-          };
-        final Function1<? super Integer,? extends Integer> closure = _function;
-        Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(1, 100);
-        for (final Integer x : _operator_upTo) {
-          closure.apply(x);
-        }
       }
     }
     return _xifexpression;
@@ -52,8 +50,8 @@ public class Case_3 {
         Integer.valueOf(x).toString();
         int x2 = y;
         final int y2 = 1;
-        int _operator_plus = IntegerExtensions.operator_plus(x2, y2);
-        _xblockexpression_1 = (_operator_plus);
+        int _plus = (x2 + y2);
+        _xblockexpression_1 = (_plus);
       }
       _xblockexpression = (_xblockexpression_1);
     }
