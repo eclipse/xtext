@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+
 /**
  * This is an extension library for {@link Comparable comparables}.
  * 
@@ -23,6 +25,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) < 0</code>
 	 */
+	@Inline("($1.compareTo($2) < 0)")
 	public static <C> boolean operator_lessThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) < 0;
 	}
@@ -36,6 +39,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) > 0</code>
 	 */
+	@Inline("($1.compareTo($2) > 0)")
 	public static <C> boolean operator_greaterThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) > 0;
 	}
@@ -49,6 +53,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) <= 0</code>
 	 */
+	@Inline("($1.compareTo($2) <= 0)")
 	public static <C> boolean operator_lessEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) <= 0;
 	}
@@ -62,6 +67,7 @@ public class ComparableExtensions {
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) >= 0</code>
 	 */
+	@Inline("($1.compareTo($2) >= 0)")
 	public static <C> boolean operator_greaterEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) >= 0;
 	}

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+import org.eclipse.xtext.xbase.lib.internal.InlineContext;
+
 /**
  * This is an extension library for {@link Long} numbers.
  * 
@@ -24,6 +27,7 @@ public class LongExtensions {
 	 *            a long
 	 * @return <code>a|b</code>
 	 */
+	@Inline("($1 | $2)")
 	public static long bitwiseOr(long a, long b) {
 		return a | b;
 	}
@@ -37,6 +41,7 @@ public class LongExtensions {
 	 *            a long.
 	 * @return <code>a^b</code>
 	 */
+	@Inline("($1 ^ $2)")
 	public static long bitwiseXor(long a, long b) {
 		return a ^ b;
 	}
@@ -50,6 +55,7 @@ public class LongExtensions {
 	 *            a long.
 	 * @return <code>a&b</code>
 	 */
+	@Inline("($1 & $2)")
 	public static long bitwiseAnd(long a, long b) {
 		return a & b;
 	}
@@ -61,6 +67,7 @@ public class LongExtensions {
 	 *            a long.
 	 * @return the bitwise complement of <code>a</code>.
 	 */
+	@Inline("(~$1)")
 	public static long bitwiseNot(long a) {
 		return ~a;
 	}
@@ -75,6 +82,7 @@ public class LongExtensions {
 	 *            the number of times to shift.
 	 * @return <code>a&lt;&lt;distance</code>
 	 */
+	@Inline("($1 << $2)")
 	public static long shiftLeft(long a, int distance) {
 		return a << distance;
 	}
@@ -89,6 +97,7 @@ public class LongExtensions {
 	 *            the number of times to shift.
 	 * @return <code>a&gt;&gt;distance</code>
 	 */
+	@Inline("($1 >> $2)")
 	public static long shiftRight(long a, int distance) {
 		return a >> distance;
 	}
@@ -103,6 +112,7 @@ public class LongExtensions {
 	 *            the number of times to shift.
 	 * @return <code>a&gt;&gt;&gt;distance</code>
 	 */
+	@Inline("($1 >>> $2)")
 	public static long shiftRightUnsigned(long a, int distance) {
 		return a >>> distance;
 	}
@@ -115,6 +125,7 @@ public class LongExtensions {
 	 * @return   <code>-a</code>
 	 * @since 2.3
 	 */
+	@Inline("(-$1)")
 	public static long operator_minus(long a) {
 		return -a;
 	}
@@ -127,6 +138,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static double operator_plus(long a, double b) {
 		return a + b;
 	}
@@ -139,6 +151,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static double operator_minus(long a, double b) {
 		return a - b;
 	}
@@ -151,6 +164,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static double operator_multiply(long a, double b) {
 		return a * b;
 	}
@@ -163,6 +177,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static double operator_divide(long a, double b) {
 		return a / b;
 	}
@@ -175,6 +190,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static double operator_modulo(long a, double b) {
 		return a % b;
 	}
@@ -187,6 +203,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, double b) {
 		return a < b;
 	}
@@ -199,6 +216,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, double b) {
 		return a <= b;
 	}
@@ -211,6 +229,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, double b) {
 		return a > b;
 	}
@@ -223,6 +242,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, double b) {
 		return a >= b;
 	}
@@ -235,6 +255,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, double b) {
 		return a == b;
 	}
@@ -247,6 +268,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, double b) {
 		return a != b;
 	}
@@ -259,6 +281,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, double b) {
 		return Math.pow(a, b);
 	}
@@ -271,6 +294,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static float operator_plus(long a, float b) {
 		return a + b;
 	}
@@ -283,6 +307,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static float operator_minus(long a, float b) {
 		return a - b;
 	}
@@ -295,6 +320,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static float operator_multiply(long a, float b) {
 		return a * b;
 	}
@@ -307,6 +333,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static float operator_divide(long a, float b) {
 		return a / b;
 	}
@@ -319,6 +346,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static float operator_modulo(long a, float b) {
 		return a % b;
 	}
@@ -331,6 +359,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, float b) {
 		return a < b;
 	}
@@ -343,6 +372,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, float b) {
 		return a <= b;
 	}
@@ -355,6 +385,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, float b) {
 		return a > b;
 	}
@@ -367,6 +398,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, float b) {
 		return a >= b;
 	}
@@ -379,6 +411,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, float b) {
 		return a == b;
 	}
@@ -391,6 +424,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, float b) {
 		return a != b;
 	}
@@ -403,6 +437,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, float b) {
 		return Math.pow(a, b);
 	}
@@ -415,6 +450,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static long operator_plus(long a, long b) {
 		return a + b;
 	}
@@ -427,6 +463,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static long operator_minus(long a, long b) {
 		return a - b;
 	}
@@ -439,6 +476,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static long operator_multiply(long a, long b) {
 		return a * b;
 	}
@@ -451,6 +489,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static long operator_divide(long a, long b) {
 		return a / b;
 	}
@@ -463,6 +502,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static long operator_modulo(long a, long b) {
 		return a % b;
 	}
@@ -475,6 +515,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, long b) {
 		return a < b;
 	}
@@ -487,6 +528,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, long b) {
 		return a <= b;
 	}
@@ -499,6 +541,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, long b) {
 		return a > b;
 	}
@@ -511,6 +554,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, long b) {
 		return a >= b;
 	}
@@ -523,6 +567,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, long b) {
 		return a == b;
 	}
@@ -535,6 +580,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, long b) {
 		return a != b;
 	}
@@ -547,6 +593,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, long b) {
 		return Math.pow(a, b);
 	}
@@ -559,6 +606,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static long operator_plus(long a, int b) {
 		return a + b;
 	}
@@ -571,6 +619,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static long operator_minus(long a, int b) {
 		return a - b;
 	}
@@ -583,6 +632,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static long operator_multiply(long a, int b) {
 		return a * b;
 	}
@@ -595,6 +645,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static long operator_divide(long a, int b) {
 		return a / b;
 	}
@@ -607,6 +658,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static long operator_modulo(long a, int b) {
 		return a % b;
 	}
@@ -619,6 +671,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, int b) {
 		return a < b;
 	}
@@ -631,6 +684,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, int b) {
 		return a <= b;
 	}
@@ -643,6 +697,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, int b) {
 		return a > b;
 	}
@@ -655,6 +710,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, int b) {
 		return a >= b;
 	}
@@ -667,6 +723,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, int b) {
 		return a == b;
 	}
@@ -679,6 +736,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, int b) {
 		return a != b;
 	}
@@ -691,6 +749,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, int b) {
 		return Math.pow(a, b);
 	}
@@ -703,6 +762,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static long operator_plus(long a, char b) {
 		return a + b;
 	}
@@ -715,6 +775,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static long operator_minus(long a, char b) {
 		return a - b;
 	}
@@ -727,6 +788,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static long operator_multiply(long a, char b) {
 		return a * b;
 	}
@@ -739,6 +801,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static long operator_divide(long a, char b) {
 		return a / b;
 	}
@@ -751,6 +814,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static long operator_modulo(long a, char b) {
 		return a % b;
 	}
@@ -763,6 +827,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, char b) {
 		return a < b;
 	}
@@ -775,6 +840,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, char b) {
 		return a <= b;
 	}
@@ -787,6 +853,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, char b) {
 		return a > b;
 	}
@@ -799,6 +866,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, char b) {
 		return a >= b;
 	}
@@ -811,6 +879,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, char b) {
 		return a == b;
 	}
@@ -823,6 +892,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, char b) {
 		return a != b;
 	}
@@ -835,6 +905,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, char b) {
 		return Math.pow(a, b);
 	}
@@ -847,6 +918,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static long operator_plus(long a, short b) {
 		return a + b;
 	}
@@ -859,6 +931,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static long operator_minus(long a, short b) {
 		return a - b;
 	}
@@ -871,6 +944,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static long operator_multiply(long a, short b) {
 		return a * b;
 	}
@@ -883,6 +957,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static long operator_divide(long a, short b) {
 		return a / b;
 	}
@@ -895,6 +970,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static long operator_modulo(long a, short b) {
 		return a % b;
 	}
@@ -907,6 +983,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, short b) {
 		return a < b;
 	}
@@ -919,6 +996,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, short b) {
 		return a <= b;
 	}
@@ -931,6 +1009,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, short b) {
 		return a > b;
 	}
@@ -943,6 +1022,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, short b) {
 		return a >= b;
 	}
@@ -955,6 +1035,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, short b) {
 		return a == b;
 	}
@@ -967,6 +1048,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, short b) {
 		return a != b;
 	}
@@ -979,6 +1061,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, short b) {
 		return Math.pow(a, b);
 	}
@@ -991,6 +1074,7 @@ public class LongExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 + $2)")
 	public static long operator_plus(long a, byte b) {
 		return a + b;
 	}
@@ -1003,6 +1087,7 @@ public class LongExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 - $2)")
 	public static long operator_minus(long a, byte b) {
 		return a - b;
 	}
@@ -1015,6 +1100,7 @@ public class LongExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 * $2)")
 	public static long operator_multiply(long a, byte b) {
 		return a * b;
 	}
@@ -1027,6 +1113,7 @@ public class LongExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 / $2)")
 	public static long operator_divide(long a, byte b) {
 		return a / b;
 	}
@@ -1039,6 +1126,7 @@ public class LongExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 % $2)")
 	public static long operator_modulo(long a, byte b) {
 		return a % b;
 	}
@@ -1051,6 +1139,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(long a, byte b) {
 		return a < b;
 	}
@@ -1063,6 +1152,7 @@ public class LongExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(long a, byte b) {
 		return a <= b;
 	}
@@ -1075,6 +1165,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(long a, byte b) {
 		return a > b;
 	}
@@ -1087,6 +1178,7 @@ public class LongExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(long a, byte b) {
 		return a >= b;
 	}
@@ -1099,6 +1191,7 @@ public class LongExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(long a, byte b) {
 		return a == b;
 	}
@@ -1111,6 +1204,7 @@ public class LongExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(long a, byte b) {
 		return a != b;
 	}
@@ -1123,11 +1217,14 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
 	public static double operator_power(long a, byte b) {
 		return Math.pow(a, b);
 	}
 	
 	// END generated code
+
+
 
 
 

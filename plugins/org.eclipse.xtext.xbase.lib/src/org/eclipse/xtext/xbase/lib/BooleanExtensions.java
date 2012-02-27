@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+
 /**
  * This is an extension library for {@link Boolean booleans}.
  * 
@@ -23,6 +25,7 @@ public class BooleanExtensions {
 	 *            another boolean value.
 	 * @return <code>a && b</code>
 	 */
+	@Inline("($1 && $2)")
 	public static boolean operator_and(boolean a, boolean b) {
 		return a && b;
 	}
@@ -36,6 +39,7 @@ public class BooleanExtensions {
 	 *            another boolean value.
 	 * @return <code>a || b</code>
 	 */
+	@Inline("($1 || $2)")
 	public static boolean operator_or(boolean a, boolean b) {
 		return a || b;
 	}
@@ -47,6 +51,7 @@ public class BooleanExtensions {
 	 *            a boolean value.
 	 * @return <code>!b</code>
 	 */
+	@Inline("(!$1)")
 	public static boolean operator_not(boolean b) {
 		return !b;
 	}
@@ -60,6 +65,7 @@ public class BooleanExtensions {
 	 *            an boolean.
 	 * @return <code>a==b</code>
 	 */
+	@Inline("($1 == $2)")
 	public static boolean operator_equals(boolean a, boolean b) {
 		return a == b;
 	}
@@ -73,6 +79,7 @@ public class BooleanExtensions {
 	 *            an boolean.
 	 * @return <code>a!=b</code>
 	 */
+	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(boolean a, boolean b) {
 		return a != b;
 	}
@@ -86,6 +93,7 @@ public class BooleanExtensions {
 	 *            another boolean value.
 	 * @return <code>a ^ b</code>
 	 */
+	@Inline("($1 ^ $2)")
 	public static boolean xor(boolean a, boolean b) {
 		return a ^ b;
 	}

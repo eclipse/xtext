@@ -21,6 +21,21 @@ public final class Pair<K, V> {
 
 	private final K k;
 	private final V v;
+	
+	/**
+	 * Creates a new instance with the given key and value.
+	 * May be used instead of the constructor for convenience reasons.
+	 * 
+	 * @param k
+	 *            the key. May be <code>null</code>.
+	 * @param v
+	 *            the value. May be <code>null</code>.
+	 * @return a newly created pair. Never <code>null</code>.
+	 * @since 2.3
+	 */
+	public static <K, V> Pair<K, V> of(K k, V v) {
+		return new Pair<K, V>(k, v);
+	}
 
 	/**
 	 * Creates a new instance with the given key and value.

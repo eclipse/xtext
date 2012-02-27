@@ -18,6 +18,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
@@ -67,6 +69,7 @@ public class IteratorExtensions {
 	 *            the second iterator. May not be <code>null</code>.
 	 * @return a combined iterator. Never <code>null</code>.
 	 */
+	@Inline(value="$3.$4concat($1, $2)", imported=Iterators.class, when=InlineContext.ALWAYS)
 	public static <T> Iterator<T> operator_plus(Iterator<? extends T> a, Iterator<? extends T> b) {
 		return Iterators.concat(a, b);
 	}
@@ -296,6 +299,7 @@ public class IteratorExtensions {
 	 * @return an unmodifiable iterator containing all elements of the original iterator that were of the requested
 	 *         type. Never <code>null</code>.
 	 */
+	@Inline(value="$3.$4filter($1, $2)", imported=Iterators.class, when=InlineContext.ALWAYS)
 	public static <T> Iterator<T> filter(Iterator<?> unfiltered, Class<T> type) {
 		return Iterators.filter(unfiltered, type);
 	}

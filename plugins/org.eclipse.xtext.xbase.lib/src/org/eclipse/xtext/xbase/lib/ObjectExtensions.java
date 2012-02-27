@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import org.eclipse.xtext.xbase.lib.internal.Inline;
+import org.eclipse.xtext.xbase.lib.internal.InlineContext;
+
 /**
  * This is an extension library for all {@link Object objects}.
  */
@@ -22,8 +25,9 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are not equal.
 	 */
+	@Inline(value="!$3.equals($1, $2)", imported=ObjectExtensions.class, when=InlineContext.ALWAYS)
 	public static boolean operator_notEquals(Object a, Object b) {
-		return !operator_equals(a, b);
+		return !equals(a, b);
 	}
 
 	/**
@@ -36,7 +40,23 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
+	@Inline(value="$3.equals($1, $2)", imported=ObjectExtensions.class, when=InlineContext.ALWAYS)
 	public static boolean operator_equals(Object a, Object b) {
+		return equals(a, b);
+	}
+
+	/**
+	 * The <code>equals</code> operator. This is the equivalent to a null-safe invocation of
+	 * {@link Object#equals(Object)}.
+	 * 
+	 * @param a
+	 *            an object.
+	 * @param b
+	 *            another object.
+	 * @return <code>true</code> if {@code a} and {@code b} are equal.
+	 * @since 2.3
+	 */
+	public static boolean equals(Object a, Object b) {
 		if (a == b)
 			return true;
 		if (a == null)
@@ -55,6 +75,7 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return Java's <code>a == b</code>
 	 */
+	@Inline("$1 == $2")
 	public static boolean identityEquals(Object a, Object b) {
 		return a == b;
 	}
@@ -69,8 +90,9 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return a {@link Pair}. Never <code>null</code>.
 	 */
+	@Inline(value="$3.$4of($1, $2)", imported=Pair.class, when=InlineContext.ALWAYS)
 	public static <A, B> Pair<A, B> operator_mappedTo(A a, B b) {
-		return new Pair<A, B>(a, b);
+		return Pair.of(a, b);
 	}
 
 }
