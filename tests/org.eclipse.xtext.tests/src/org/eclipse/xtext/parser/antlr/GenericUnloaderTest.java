@@ -34,8 +34,10 @@ public class GenericUnloaderTest extends Assert {
 			e.printStackTrace();
 			fail("Unload does not cope with contentAdpaters");
 		}
+		// isEmtpy() does not work in EMF 3.5
+		assertEquals(0, root.eAdapters().size());
 	}
-
+	
 	protected EPackage createExample() {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource resource = new XMIResourceImpl(URI.createURI("test"));
@@ -46,7 +48,5 @@ public class GenericUnloaderTest extends Assert {
 		root.getEClassifiers().add(child);
 		return root;
 	}
-	
-	
 	
 }
