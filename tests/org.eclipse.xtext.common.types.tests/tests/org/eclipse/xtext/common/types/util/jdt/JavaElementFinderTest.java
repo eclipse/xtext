@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -33,6 +34,10 @@ public class JavaElementFinderTest extends Assert {
 	private JdtTypeProvider typeProvider;
 	private MockJavaProjectProvider projectProvider;
 	private JavaElementFinder elementFinder;
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Before
 	public void setUp() throws Exception {

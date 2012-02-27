@@ -36,10 +36,12 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
+import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -67,6 +69,10 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	private XMLResourceImpl syntheticResource;
+
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 
 	@Before
 	public void setUp() throws Exception {
