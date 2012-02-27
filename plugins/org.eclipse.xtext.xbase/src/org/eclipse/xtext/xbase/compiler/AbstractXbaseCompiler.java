@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
@@ -377,9 +378,11 @@ public abstract class AbstractXbaseCompiler {
 			if (indexOf != -1) {
 				name = name.substring(indexOf + 1);
 			}
-			if (name.startsWith("get") && name.length() > 3)
+			if (name.startsWith(OperatorMapping.OP_PREFIX))
+				name = Strings.toFirstLower(name.substring(OperatorMapping.OP_PREFIX.length()));
+			else if (name.startsWith("get") && name.length() > 3)
 				name = Strings.toFirstLower(name.substring(3));
-			if (name.startsWith("to") && name.length() > 2)
+			else if (name.startsWith("to") && name.length() > 2)
 				name = Strings.toFirstLower(name.substring(2));
 			return "_"+name;
 		}

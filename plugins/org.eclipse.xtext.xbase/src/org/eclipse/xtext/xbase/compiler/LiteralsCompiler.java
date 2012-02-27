@@ -140,7 +140,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XTypeLiteral expr, ITreeAppendable b) {
-		b.append(expr.getType().getQualifiedName('.')).append(".class");
+		b.append(expr.getType()).append(".class");
 	}
 	
 	public void _toJavaStatement(XTypeLiteral expr, ITreeAppendable b, boolean isReferenced) {

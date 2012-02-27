@@ -244,8 +244,15 @@ public class TypeReferences {
 	public boolean is(final JvmTypeReference reference, final Class<?> clazz) {
 		if (isNullOrProxy(reference))
 			return false;
-		final boolean equals = clazz.getCanonicalName().equals(reference.getType().getIdentifier());
-		return equals;
+		boolean result = is(reference.getType(), clazz);
+		return result;
+	}
+	
+	public boolean is(final JvmType type, final Class<?> clazz) {
+		if (type == null)
+			return false;
+		boolean result = clazz.getCanonicalName().equals(type.getIdentifier());
+		return result;
 	}
 
 	public boolean isNullOrProxy(final JvmTypeReference reference) {

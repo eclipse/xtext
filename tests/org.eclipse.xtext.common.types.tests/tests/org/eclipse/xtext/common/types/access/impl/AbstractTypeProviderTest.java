@@ -67,9 +67,11 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
+import org.eclipse.xtext.common.types.testSetups.Bug334943Client;
 import org.eclipse.xtext.common.types.testSetups.Bug347739;
 import org.eclipse.xtext.common.types.testSetups.Bug347739OneTypeParam;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParams;
@@ -93,6 +95,8 @@ import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -111,6 +115,10 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
+	
 	@Before
 	public void setUp() throws Exception {
 		EValidator.Registry registry = new EValidatorRegistryImpl(EValidator.Registry.INSTANCE);
@@ -2204,6 +2212,24 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmAnnotationValue nestedAnnotationValue2 = reference2.getValues().get(0);
 		assertTrue(nestedAnnotationValue2 instanceof JvmStringAnnotationValue);
 		assertEquals("MyString", ((JvmStringAnnotationValue) nestedAnnotationValue2).getValues().get(0));
+	}
+	
+	@Test
+	@Ignore("JDT Bug 334943 - No default value for annotation binding")
+	public void testDefaultAnnotationAnnotationValueByReference() throws Exception {
+		String typeName = Bug334943Client.class.getName();
+		JvmDeclaredType client = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = Iterables.get(client.getDeclaredOperations(), 0);
+		List<JvmAnnotationReference> annotations = operation.getAnnotations();
+		assertEquals(1, annotations.size());
+		JvmAnnotationReference annotation = annotations.get(0);
+		for(JvmAnnotationValue value: annotation.getValues()) {
+			if ("enumValue".equals(value.getValueName())) {
+				JvmEnumAnnotationValue enumValue = (JvmEnumAnnotationValue) value;
+				assertEquals(1, enumValue.getValues().size());
+				assertEquals("FirstValue", enumValue.getValues().get(0).getSimpleName());
+			}
+		}
 	}
 	
 	@Test public void testDefaultStringAnnotationValue_01() throws Exception {
