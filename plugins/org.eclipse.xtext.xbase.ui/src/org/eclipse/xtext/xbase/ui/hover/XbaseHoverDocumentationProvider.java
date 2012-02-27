@@ -317,7 +317,7 @@ public class XbaseHoverDocumentationProvider {
 		String uriForLink = null;
 		buf.append("<a href=\"");
 		try {
-			uriForLink = new URI(XtextElementLinks.OPEN_LINK_SCHEME, emfURI, null).toASCIIString();
+			uriForLink = new URI(XtextElementLinks.XTEXTDOC_SCHEME, emfURI, null).toASCIIString();
 		} catch (URISyntaxException e) {
 			return "";
 		}
