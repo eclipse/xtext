@@ -24,21 +24,24 @@ import org.eclipse.ui.texteditor.spelling.SpellingContext;
 import org.eclipse.ui.texteditor.spelling.SpellingReconcileStrategy;
 import org.eclipse.ui.texteditor.spelling.SpellingService;
 
-import com.google.inject.Inject;
-
 /**
  * @author Michael Clay - Initial contribution and API
  * @since 2.3
  */
 public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 
+	public static class Factory {
+		public XtextSpellingReconcileStrategy create(ISourceViewer sourceViewer) {
+			return new XtextSpellingReconcileStrategy(sourceViewer);
+		}
+	}
+	
 	private ISpellingProblemCollector spellingProblemCollector;
 	private SpellingService spellingService = EditorsUI.getSpellingService();
 	private SpellingContext spellingContext = new SpellingContext();
 	private NullProgressMonitor progressMonitor = new NullProgressMonitor();
 
-	@Inject
-	public XtextSpellingReconcileStrategy(ISourceViewer viewer) {
+	protected XtextSpellingReconcileStrategy(ISourceViewer viewer) {
 		super(viewer, EditorsUI.getSpellingService());
 		spellingContext.setContentType(getContentType());
 	}
@@ -86,4 +89,5 @@ public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 	protected boolean isSpellingEnabled() {
 		return spellingProblemCollector != null && EditorsUI.getPreferenceStore().getBoolean(SpellingService.PREFERENCE_SPELLING_ENABLED);
 	}
+
 }

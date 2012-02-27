@@ -29,6 +29,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
 	
 	private XtextDocument document;
+	
+	private XtextSpellingReconcileStrategy.Factory spellingReconcileStrategyFactory;
+	
 	private XtextSpellingReconcileStrategy spellingReconcileStrategy;
 
 	public void reconcile(final IRegion region) {
@@ -59,9 +62,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.3
 	 */
 	public void setSourceViewer(ISourceViewer sourceViewer) {
-		spellingReconcileStrategy = new XtextSpellingReconcileStrategy(sourceViewer);
+		spellingReconcileStrategy = spellingReconcileStrategyFactory.create(sourceViewer);
 	}
-
+	
 	/**
 	 * @since 2.3
 	 */
