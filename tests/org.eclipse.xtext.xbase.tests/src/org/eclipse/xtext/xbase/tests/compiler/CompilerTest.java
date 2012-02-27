@@ -246,9 +246,34 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"new Object()?.toString?.notify");
 	}
 	
+	@Test public void testInline_01() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"String _plus = (\"a\" + \"b\");\n" + 
+				"String _string = _plus.toString();\n" + 
+				"return _string;",
+				"('a'+'b').toString");
+	}
+	
+	@Test public void testInline_02() throws Exception {
+		assertCompilesTo(
+				"\n" + 
+				"boolean _xifexpression = false;\n" + 
+				"boolean _not = (!true);\n" + 
+				"if (_not) {\n" + 
+				"  boolean _equals = (true == false);\n" + 
+				"  _xifexpression = _equals;\n" + 
+				"} else {\n" + 
+				"  boolean _notEquals = (true != false);\n" + 
+				"  _xifexpression = _notEquals;\n" + 
+				"}\n" + 
+				"return _xifexpression;",
+				"if(!true) true==false else true!=false");
+	}
+	
 	@Test public void testSwitchTypeGuards() throws Exception {
 		assertCompilesTo(
-				"\n" +
+				"\n" + 
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
 				"boolean matched = false;\n" + 
@@ -257,8 +282,8 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"    final String _string = (String)x;\n" + 
 				"    matched=true;\n" + 
 				"    String _substring = _string.substring(3);\n" + 
-				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_substring, _string);\n" + 
-				"    _switchResult = _operator_plus;\n" + 
+				"    String _plus = (_substring + _string);\n" + 
+				"    _switchResult = _plus;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!matched) {\n" + 
@@ -266,10 +291,10 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"    final Comparable _comparable = (Comparable)x;\n" + 
 				"    matched=true;\n" + 
 				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
-				"    String _operator_plus = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(\"\", Integer.valueOf(_compareTo));\n" + 
+				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
 				"    String _string = ((Comparable)_comparable).toString();\n" + 
-				"    String _operator_plus_1 = org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus(_operator_plus, _string);\n" + 
-				"    _switchResult = _operator_plus_1;\n" + 
+				"    String _plus_1 = (_plus + _string);\n" + 
+				"    _switchResult = _plus_1;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;"

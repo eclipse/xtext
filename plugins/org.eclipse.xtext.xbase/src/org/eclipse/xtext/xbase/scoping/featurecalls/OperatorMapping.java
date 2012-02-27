@@ -46,7 +46,7 @@ public class OperatorMapping {
 		initializeMapping();
 	}
 	
-	private final static String OP_PREFIX="operator_";
+	public final static String OP_PREFIX="operator_";
 	
 	protected void initializeMapping() {
 		map.put(PLUS, create(OP_PREFIX+"plus"));

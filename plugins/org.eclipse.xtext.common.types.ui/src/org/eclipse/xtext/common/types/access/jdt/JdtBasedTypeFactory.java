@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.jdt;
 import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -61,6 +62,7 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -148,28 +150,53 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		result.getAnnotations().add(annotationReference);
 		annotationReference.setAnnotation(createAnnotationProxy(annotation.getAnnotationType()));
-		IMemberValuePairBinding[] allMemberValuePairs = annotation.getAllMemberValuePairs();
-		for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
-			ITypeBinding originalTypeBinding = memberValuePair.getMethodBinding().getReturnType();
-			ITypeBinding typeBinding = originalTypeBinding;
-			if (typeBinding.isArray()) {
-				typeBinding = typeBinding.getComponentType();
+		try {
+			IMemberValuePairBinding[] allMemberValuePairs = annotation.getAllMemberValuePairs();
+			for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
+				IMethodBinding methodBinding = memberValuePair.getMethodBinding();
+				createAnnotationValue(annotationReference, annotation, memberValuePair.getValue(), methodBinding);
 			}
-			if (typeBinding.isParameterizedType())
-				typeBinding = typeBinding.getErasure();
-			JvmAnnotationValue annotationValue = originalTypeBinding.isArray() ? 
-					createArrayAnnotationValue(memberValuePair, createAnnotationValue(typeBinding)) : 
-					createAnnotationValue(memberValuePair, createAnnotationValue(typeBinding));
-			annotationReference.getValues().add(annotationValue);
-			annotationValue.setOperation(createMethodProxy(annotation.getAnnotationType(), memberValuePair.getName()));
+		} catch(NullPointerException npe) {
+			log.debug("NPE in IAnnotationBinding#getAllMemberValuePairs ?", npe);
+			IMemberValuePairBinding[] declaredMemberValuePairs = annotation.getDeclaredMemberValuePairs();
+			Set<IMethodBinding> seenMethodBindings = Sets.newHashSet();
+			for (IMemberValuePairBinding memberValuePair : declaredMemberValuePairs) {
+				IMethodBinding methodBinding = memberValuePair.getMethodBinding();
+				seenMethodBindings.add(methodBinding);
+				createAnnotationValue(annotationReference, annotation, memberValuePair.getValue(), methodBinding);
+			}
+			ITypeBinding annotationType = annotation.getAnnotationType();
+			IMethodBinding[] allAnnotationMethods = annotationType.getDeclaredMethods();
+			for(IMethodBinding methodBinding: allAnnotationMethods) {
+				if (seenMethodBindings.add(methodBinding)) {
+					try {
+						createAnnotationValue(annotationReference, annotation, methodBinding.getDefaultValue(), methodBinding);
+					} catch(NullPointerException nestedNPE) {
+						log.debug("NPE in IMethodBinding#getDefaultValue ?", npe);
+					}
+				}
+			}
 		}
 		return annotationReference;
 	}
 
-	public JvmAnnotationValue createArrayAnnotationValue(IMemberValuePairBinding memberValuePair,
-			JvmAnnotationValue result) {
-		Object value = memberValuePair.getValue();
-		return createArrayAnnotationValue(value, result);
+	/**
+	 * @since 2.3
+	 */
+	protected void createAnnotationValue(JvmAnnotationReference annotationReference, IAnnotationBinding annotation,
+			Object value, IMethodBinding methodBinding) {
+		ITypeBinding originalTypeBinding = methodBinding.getReturnType();
+		ITypeBinding typeBinding = originalTypeBinding;
+		if (typeBinding.isArray()) {
+			typeBinding = typeBinding.getComponentType();
+		}
+		if (typeBinding.isParameterizedType())
+			typeBinding = typeBinding.getErasure();
+		JvmAnnotationValue annotationValue = originalTypeBinding.isArray() ? 
+				createArrayAnnotationValue(value, createAnnotationValue(typeBinding)) : 
+				createAnnotationValue(value, createAnnotationValue(typeBinding));
+		annotationReference.getValues().add(annotationValue);
+		annotationValue.setOperation(createMethodProxy(annotation.getAnnotationType(), methodBinding.getName()));
 	}
 
 	private JvmAnnotationValue createArrayAnnotationValue(Object value, JvmAnnotationValue result) {
@@ -232,11 +259,6 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		URI uri = uriHelper.getFullURIForClass(fqn);
 		proxy.eSetProxyURI(uri);
 		return (org.eclipse.xtext.common.types.JvmType) proxy;
-	}
-
-	public JvmAnnotationValue createAnnotationValue(IMemberValuePairBinding memberValuePair, JvmAnnotationValue result) {
-		Object value = memberValuePair.getValue();
-		return createAnnotationValue(value, result);
 	}
 
 	private JvmAnnotationValue createAnnotationValue(Object value, JvmAnnotationValue result) {
