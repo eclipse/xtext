@@ -32,12 +32,18 @@ public class StacktraceBasedEditorDecider {
 		for(StackTraceElement element: trace) {
 //			if (isOpenTypeAction(element))
 //				return Decision.FORCE_XBASE;
+			if (isSourceLookup(element))
+				return Decision.FORCE_JAVA;
 			if (isPackageExplorerOrNavigator(element))
 				return Decision.FORCE_JAVA;
 		}
 		return Decision.FAVOR_XBASE;
 	}
 	
+	protected boolean isSourceLookup(StackTraceElement element) {
+		return "org.eclipse.debug.internal.ui.sourcelookup.SourceLookupFacility".equals(element.getClassName());
+	}
+
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
