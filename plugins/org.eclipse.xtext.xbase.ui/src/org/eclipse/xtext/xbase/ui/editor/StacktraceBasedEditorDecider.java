@@ -40,6 +40,11 @@ public class StacktraceBasedEditorDecider {
 		return Decision.FAVOR_XBASE;
 	}
 	
+	/**
+	 * Happens when one select a stack element in the debugger. Since wie use JSR-45 we don't want to modify JDT's behavior.
+	 * 
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
 	protected boolean isSourceLookup(StackTraceElement element) {
 		return "org.eclipse.debug.internal.ui.sourcelookup.SourceLookupFacility".equals(element.getClassName());
 	}
