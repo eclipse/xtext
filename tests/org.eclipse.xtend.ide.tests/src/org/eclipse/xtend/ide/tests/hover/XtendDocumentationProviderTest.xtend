@@ -69,7 +69,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		''',resourceSet)
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
-		assertEquals('''<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections">Collections</a></dd><dd><a href="eclipse-xtext-open:java:/Objects/java.util.List%23java.util.List">java.util.List</a></dd></dl>'''.toString, docu)
+		assertEquals('''<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href="eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections">Collections</a></dd><dd><a href="eclipse-xtext-doc:java:/Objects/java.util.List%23java.util.List">java.util.List</a></dd></dl>'''.toString, docu)
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		''',resourceSet)
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
-		assertEquals('''SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Throws:</dt><dd><a href="eclipse-xtext-open:java:/Objects/java.lang.NullPointerException%23java.lang.NullPointerException">NullPointerException</a> -  not so good</dd><dd><a href="eclipse-xtext-open:java:/Objects/java.lang.RuntimeException%23java.lang.RuntimeException">RuntimeException</a></dd></dl>'''.toString,docu)
+		assertEquals('''SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Throws:</dt><dd><a href="eclipse-xtext-doc:java:/Objects/java.lang.NullPointerException%23java.lang.NullPointerException">NullPointerException</a> -  not so good</dd><dd><a href="eclipse-xtext-doc:java:/Objects/java.lang.RuntimeException%23java.lang.RuntimeException">RuntimeException</a></dd></dl>'''.toString,docu)
 	
 	}
 	
@@ -113,7 +113,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
 		assertEquals('''SimpleJavaDoc
-<code><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections">java.util.Collections</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
+<code><a href="eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections">java.util.Collections</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
 	}
 	
 	@Test
@@ -134,7 +134,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
 		assertEquals('''SimpleJavaDoc
-<code><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
+<code><a href="eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
 	}
 	
 	@Test
@@ -176,7 +176,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
 		assertEquals('''SimpleJavaDoc
-<code><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)">java.util.Collections#sort(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
+<code><a href="eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)">java.util.Collections#sort(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
 	}
 	
 	@Test
@@ -197,7 +197,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
 		assertEquals('''SimpleJavaDoc
-<code><a href="eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
+<code><a href="eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString,docu)
 	}
 	
 	@Test
@@ -222,7 +222,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val member = xtendFile.xtendClass.members.get(0)
 		val docu = documentationProvider.getDocumentation(member)
 		assertEquals('''SimpleJavaDoc
-<code><a href="eclipse-xtext-open:__synthetic0.xtend%23/1/@members.2">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
+<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
 	}
 	
 	@Test
@@ -249,7 +249,7 @@ class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
 		val call = (function.expression as XBlockExpression).expressions.get(0) as XAbstractFeatureCall
 		val docu = documentationProvider.getDocumentation(call.feature)
 		assertEquals('''SimpleJavaDoc
-<code><a href="eclipse-xtext-open:__synthetic0.xtend%23/1/@members.2">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
+<code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
 	}
 	
 	def getResourceSet(){
