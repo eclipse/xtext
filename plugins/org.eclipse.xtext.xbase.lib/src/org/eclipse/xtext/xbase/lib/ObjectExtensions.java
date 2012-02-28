@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.lib;
 import org.eclipse.xtext.xbase.lib.internal.Inline;
 import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
+import com.google.common.base.Objects;
+
 /**
  * This is an extension library for all {@link Object objects}.
  */
@@ -25,9 +27,9 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are not equal.
 	 */
-	@Inline(value="!$3.equals($1, $2)", imported=ObjectExtensions.class, when=InlineContext.ALWAYS)
+	@Inline(value="(!$3.equal($1, $2))", imported=Objects.class)
 	public static boolean operator_notEquals(Object a, Object b) {
-		return !equals(a, b);
+		return !Objects.equal(a, b);
 	}
 
 	/**
@@ -40,30 +42,11 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
-	@Inline(value="$3.equals($1, $2)", imported=ObjectExtensions.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.equal($1, $2)", imported=Objects.class, when=InlineContext.ALWAYS)
 	public static boolean operator_equals(Object a, Object b) {
-		return equals(a, b);
+		return Objects.equal(a, b);
 	}
 
-	/**
-	 * The <code>equals</code> operator. This is the equivalent to a null-safe invocation of
-	 * {@link Object#equals(Object)}.
-	 * 
-	 * @param a
-	 *            an object.
-	 * @param b
-	 *            another object.
-	 * @return <code>true</code> if {@code a} and {@code b} are equal.
-	 * @since 2.3
-	 */
-	public static boolean equals(Object a, Object b) {
-		if (a == b)
-			return true;
-		if (a == null)
-			return false;
-		return a.equals(b);
-	}
-	
 	/**
 	 * Returns <code>true</code> if {@code a} and {@code b} are identical (the same instance)
 	 * or both <code>null</code>. This is the equivalent to Java's <code>==</code>
