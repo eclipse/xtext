@@ -25,9 +25,9 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAdditiveExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAndExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAssignmentElements;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XConstructorCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XEqualityExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XFeatureCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
@@ -231,12 +232,16 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		return true;
 	}
 	
-	protected boolean isBuilderSyntax(XAbstractFeatureCall featureCall, EReference reference, boolean explicitOperationCall, INodesForEObjectProvider nodes) {
-		List<?> values = (List<?>) featureCall.eGet(reference);
+	protected boolean isBuilderSyntax(EObject expression, EReference reference, boolean explicitOperationCall, INodesForEObjectProvider nodes) {
+		List<?> values = (List<?>) expression.eGet(reference);
 		if (values.size() < 1)
 			return false;
 		if (values.size() == 1 && !explicitOperationCall)
 			return true;
+		return isBuilderSyntax(values, reference, nodes);
+	}
+
+	protected boolean isBuilderSyntax(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
 		INode node = nodes.getNodeForMultiValue(reference, values.size() - 1, 0, values.get(values.size() - 1));
 		if (node != null) {
 			if (node.getGrammarElement() instanceof RuleCall)
@@ -324,6 +329,63 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 						int lastIdx = arguments.size() - 1;
 						acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0(), arguments.get(lastIdx), lastIdx);
 					}
+				}
+			}
+		}
+		acceptor.finish();
+	}
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         constructor=[JvmConstructor|QualifiedName] 
+	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
+	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))? 
+	 *         arguments+=XClosure?
+	 *     )
+	 */
+	@Override
+	protected void sequence_XConstructorCall(EObject context, XConstructorCall constructorCall) {
+		INodesForEObjectProvider nodes = createNodeProvider(constructorCall);
+		SequenceFeeder acceptor = createSequencerFeeder(constructorCall, nodes);
+		XConstructorCallElements constructorCallElements = grammarAccess.getXConstructorCallAccess();
+
+		// constructor=[types::JvmConstructor|QualifiedName]
+		acceptor.accept(constructorCallElements.getConstructorJvmConstructorQualifiedNameParserRuleCall_2_0_1(), constructorCall.getConstructor());
+
+		// '<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>'
+		List<JvmTypeReference> typeArguments = constructorCall.getTypeArguments();
+		if (!typeArguments.isEmpty()) {
+			acceptor.accept(constructorCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0(), typeArguments.get(0), 0);
+			for (int i = 1; i < typeArguments.size(); i++)
+				acceptor.accept(constructorCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0(), typeArguments.get(i), i);
+		}
+
+		/*
+		 *  (=>'(' 
+		 *    (
+		 *        arguments+=XShortClosure
+		 *      | arguments+=XExpression (',' arguments+=XExpression)*
+		 *    )? 
+		 *  ')')?
+		 *  =>arguments+=XClosure? 
+		 */
+		List<XExpression> arguments = constructorCall.getArguments();
+		if (!arguments.isEmpty()) {
+			if (isXShortClosure(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
+			} else {
+				int diff = 0;
+				if (arguments.size() == 1 && isBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+					diff = 1;
+				}
+				if (arguments.size() - diff > 0)
+					acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_0_0(), arguments.get(0), 0);
+				for (int i = 1; i < arguments.size(); i++)
+					acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), arguments.get(i), i);
+				if (diff != 0) {
+					int lastIdx = arguments.size() - 1;
+					acceptor.accept(constructorCallElements.getArgumentsXClosureParserRuleCall_5_0(), arguments.get(lastIdx), lastIdx);
 				}
 			}
 		}
