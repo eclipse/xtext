@@ -35,8 +35,11 @@ public class JvmModelTest extends AbstractJvmModelTest {
       final XExpression expression = _expression;
       Resource _eResource = expression.eResource();
       EList<EObject> _contents = _eResource.getContents();
-      int _size = _contents.size();
-      Assert.assertEquals(2, _size);
+      String _string = _contents.toString();
+      Resource _eResource_1 = expression.eResource();
+      EList<EObject> _contents_1 = _eResource_1.getContents();
+      int _size = _contents_1.size();
+      Assert.assertEquals(_string, 2, _size);
       this.helper.assertNoErrors(expression);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -1,19 +1,28 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
@@ -25,10 +34,23 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
   
+  @Inject
+  private JvmModelAssociator assoc;
+  
+  @Inject
+  private XtextResourceSet resourceSet;
+  
+  @Inject
+  private DerivedStateAwareResource resource;
+  
+  public Injector getInjector() {
+    XbaseStandaloneSetup _xbaseStandaloneSetup = new XbaseStandaloneSetup();
+    Injector _createInjector = _xbaseStandaloneSetup.createInjector();
+    return _createInjector;
+  }
+  
   @Test
   public void testInference() {
-    JvmModelAssociator _jvmModelAssociator = new JvmModelAssociator();
-    final JvmModelAssociator assoc = _jvmModelAssociator;
     final Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean> _function = new Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean>() {
         public void apply(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final Boolean preIndexing) {
           JvmGenericType _class = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
@@ -59,30 +81,44 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
           _accept_1.initializeLater(_function_1);
         }
       };
-    assoc.setInferrer(new IJvmModelInferrer() {
+    this.assoc.setInferrer(new IJvmModelInferrer() {
         public void infer(EObject e,IJvmDeclaredTypeAcceptor acceptor,boolean preIndexingPhase) {
           _function.apply(e,acceptor,preIndexingPhase);
         }
     });
-    DerivedStateAwareResource _derivedStateAwareResource = new DerivedStateAwareResource();
-    final DerivedStateAwareResource resource = _derivedStateAwareResource;
-    EList<EObject> _contents = resource.getContents();
+    this.resource.setDerivedStateComputer(null);
+    URI _createURI = URI.createURI("foo.txt");
+    this.resource.setURI(_createURI);
+    Class<? extends Object> _class = this.getClass();
+    this.resourceSet.setClasspathURIContext(_class);
+    EList<Resource> _resources = this.resourceSet.getResources();
+    _resources.add(this.resource);
+    EList<EObject> _contents = this.resource.getContents();
     EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
     _contents.add(_createEClass);
-    assoc.installDerivedState(resource, true);
-    EList<EObject> _contents_1 = resource.getContents();
+    this.assoc.installDerivedState(this.resource, true);
+    EList<EObject> _contents_1 = this.resource.getContents();
     EObject _get = _contents_1.get(1);
     boolean _isAbstract = ((JvmDeclaredType) _get).isAbstract();
     Assert.assertFalse(_isAbstract);
-    EList<EObject> _contents_2 = resource.getContents();
+    EList<EObject> _contents_2 = this.resource.getContents();
     _contents_2.clear();
-    EList<EObject> _contents_3 = resource.getContents();
+    EList<EObject> _contents_3 = this.resource.getContents();
     EClass _createEClass_1 = EcoreFactory.eINSTANCE.createEClass();
     _contents_3.add(_createEClass_1);
-    assoc.installDerivedState(resource, false);
-    EList<EObject> _contents_4 = resource.getContents();
+    this.assoc.installDerivedState(this.resource, false);
+    EList<EObject> _contents_4 = this.resource.getContents();
     EObject _get_1 = _contents_4.get(1);
-    boolean _isAbstract_1 = ((JvmDeclaredType) _get_1).isAbstract();
+    final JvmGenericType type = ((JvmGenericType) _get_1);
+    boolean _isAbstract_1 = type.isAbstract();
     Assert.assertTrue(_isAbstract_1);
+    EList<JvmMember> _members = type.getMembers();
+    Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
+    int _size = IterableExtensions.size(_filter);
+    Assert.assertEquals(1, _size);
+    EList<JvmTypeReference> _superTypes = type.getSuperTypes();
+    JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes);
+    String _qualifiedName = _head==null?(String)null:_head.getQualifiedName();
+    Assert.assertEquals("java.lang.Object", _qualifiedName);
   }
 }

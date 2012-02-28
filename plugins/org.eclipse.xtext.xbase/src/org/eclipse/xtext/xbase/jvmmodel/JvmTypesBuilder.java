@@ -216,16 +216,6 @@ public class JvmTypesBuilder {
 		if(initializer != null) 
 			initializer.apply(result);
 
-		// if no super type add Object
-		if (result.getSuperTypes().isEmpty()) {
-			JvmTypeReference objectType = references.getTypeForName(Object.class, sourceElement);
-			if (objectType != null)
-				result.getSuperTypes().add(objectType);
-		}
-		// if no constructors have been added, add a default constructor
-		if (isEmpty(result.getDeclaredConstructors())) {
-			result.getMembers().add(toConstructor(sourceElement, result.getSimpleName(), null));
-		}
 		return result;
 	}
 	

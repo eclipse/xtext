@@ -59,6 +59,13 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	@Inject
 	private IJvmModelInferrer inferrer;
 	
+	@Inject 
+	private JvmModelCompleter completer;
+	
+	public void setCompleter(JvmModelCompleter completer) {
+		this.completer = completer;
+	}
+	
 	public void setInferrer(IJvmModelInferrer inferrer) {
 		this.inferrer = inferrer;
 	}
@@ -210,6 +217,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (!preIndexingPhase) {
 			for (Pair<JvmDeclaredType, Procedure1<JvmDeclaredType>> initializer: acceptor.later) {
 				initializer.getValue().apply(initializer.getKey());
+				completer.complete(initializer.getKey());
 			}
 		}
 	}

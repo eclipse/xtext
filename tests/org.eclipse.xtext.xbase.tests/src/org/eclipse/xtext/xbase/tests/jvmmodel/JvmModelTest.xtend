@@ -18,7 +18,7 @@ class JvmModelTest extends AbstractJvmModelTest {
 	@Test
 	def void testSimple() {
 		val expression = expression("return s.toUpperCase", false);
-		assertEquals(2, expression.eResource.contents.size)
+		assertEquals(expression.eResource.contents.toString, 2, expression.eResource.contents.size)
 		helper.assertNoErrors(expression)
 	}
 	
