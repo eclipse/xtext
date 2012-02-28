@@ -732,12 +732,18 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 			if (previous != null) {
 				gapOffset = previous.getOffset() + previous.getLength();
 				gap.setOffset(gapOffset);
-				gap.setLength(fDocument.getLength() - gapOffset);
-				if ((includeZeroLengthPartitions && overlapsOrTouches(gap, offset, length))
-						|| (gap.getLength() > 0 && gap.overlapsWith(offset, length))) {
-					start = Math.max(offset, gapOffset);
-					end = Math.min(endOffset, fDocument.getLength());
-					list.add(new TypedRegion(start, end - start, IDocument.DEFAULT_CONTENT_TYPE));
+				int gapLength = fDocument.getLength() - gapOffset;
+				if(gapLength < 0) {
+					clearPositionCache();
+					return new TypedRegion[0];
+				} else {
+					gap.setLength(gapLength);
+					if ((includeZeroLengthPartitions && overlapsOrTouches(gap, offset, length))
+							|| (gap.getLength() > 0 && gap.overlapsWith(offset, length))) {
+						start = Math.max(offset, gapOffset);
+						end = Math.min(endOffset, fDocument.getLength());
+						list.add(new TypedRegion(start, end - start, IDocument.DEFAULT_CONTENT_TYPE));
+					}
 				}
 			}
 
