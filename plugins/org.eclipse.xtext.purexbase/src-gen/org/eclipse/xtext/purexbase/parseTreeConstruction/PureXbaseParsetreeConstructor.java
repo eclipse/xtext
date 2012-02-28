@@ -10296,14 +10296,14 @@ protected class XFeatureCall_FeatureCallArgumentsAssignment_5 extends Assignment
  *
  * XConstructorCall returns XExpression:
  * 	{XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<"
- * 	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? "("
- * 	(arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")" => arguments+=XClosure?;
+ * 	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? ("("
+ * 	(arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")? => arguments+=XClosure?;
  *
  **/
 
 // {XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<" typeArguments+=JvmArgumentTypeReference
-// ("," typeArguments+=JvmArgumentTypeReference)* ">")? "(" (arguments+=XShortClosure | arguments+=XExpression (","
-// arguments+=XExpression)*)? ")" => arguments+=XClosure?
+// ("," typeArguments+=JvmArgumentTypeReference)* ">")? ("(" (arguments+=XShortClosure | arguments+=XExpression (","
+// arguments+=XExpression)*)? ")")? => arguments+=XClosure?
 protected class XConstructorCall_Group extends GroupToken {
 	
 	public XConstructorCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10318,8 +10318,10 @@ protected class XConstructorCall_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XConstructorCall_ArgumentsAssignment_7(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XConstructorCall_RightParenthesisKeyword_6(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XConstructorCall_ArgumentsAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XConstructorCall_Group_4(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new XConstructorCall_Group_3(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new XConstructorCall_ConstructorAssignment_2(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -10418,7 +10420,7 @@ protected class XConstructorCall_ConstructorAssignment_2 extends AssignmentToken
 
 }
 
-// ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+// (=> "<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
 protected class XConstructorCall_Group_3 extends GroupToken {
 	
 	public XConstructorCall_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10440,7 +10442,7 @@ protected class XConstructorCall_Group_3 extends GroupToken {
 
 }
 
-// "<"
+// => "<"
 protected class XConstructorCall_LessThanSignKeyword_3_0 extends KeywordToken  {
 	
 	public XConstructorCall_LessThanSignKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10624,16 +10626,38 @@ protected class XConstructorCall_GreaterThanSignKeyword_3_3 extends KeywordToken
 }
 
 
-// "("
-protected class XConstructorCall_LeftParenthesisKeyword_4 extends KeywordToken  {
+// (=> "(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
+protected class XConstructorCall_Group_4 extends GroupToken {
 	
-	public XConstructorCall_LeftParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXConstructorCallAccess().getGroup_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XConstructorCall_RightParenthesisKeyword_4_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// => "("
+protected class XConstructorCall_LeftParenthesisKeyword_4_0 extends KeywordToken  {
+	
+	public XConstructorCall_LeftParenthesisKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4();
+		return grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0();
 	}
 
     @Override
@@ -10648,22 +10672,22 @@ protected class XConstructorCall_LeftParenthesisKeyword_4 extends KeywordToken  
 }
 
 // (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)?
-protected class XConstructorCall_Alternatives_5 extends AlternativesToken {
+protected class XConstructorCall_Alternatives_4_1 extends AlternativesToken {
 
-	public XConstructorCall_Alternatives_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_Alternatives_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getAlternatives_5();
+		return grammarAccess.getXConstructorCallAccess().getAlternatives_4_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XConstructorCall_ArgumentsAssignment_5_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XConstructorCall_Group_5_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XConstructorCall_ArgumentsAssignment_4_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XConstructorCall_Group_4_1_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -10671,15 +10695,15 @@ protected class XConstructorCall_Alternatives_5 extends AlternativesToken {
 }
 
 // arguments+=XShortClosure
-protected class XConstructorCall_ArgumentsAssignment_5_0 extends AssignmentToken  {
+protected class XConstructorCall_ArgumentsAssignment_4_1_0 extends AssignmentToken  {
 	
-	public XConstructorCall_ArgumentsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_ArgumentsAssignment_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5_0();
+		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_0();
 	}
 
     @Override
@@ -10698,7 +10722,7 @@ protected class XConstructorCall_ArgumentsAssignment_5_0 extends AssignmentToken
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXShortClosureRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_5_0_0(); 
+				element = grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_4_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10710,29 +10734,29 @@ protected class XConstructorCall_ArgumentsAssignment_5_0 extends AssignmentToken
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XConstructorCall_LeftParenthesisKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XConstructorCall_LeftParenthesisKeyword_4_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // arguments+=XExpression ("," arguments+=XExpression)*
-protected class XConstructorCall_Group_5_1 extends GroupToken {
+protected class XConstructorCall_Group_4_1_1 extends GroupToken {
 	
-	public XConstructorCall_Group_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_Group_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getGroup_5_1();
+		return grammarAccess.getXConstructorCallAccess().getGroup_4_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XConstructorCall_Group_5_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XConstructorCall_ArgumentsAssignment_5_1_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XConstructorCall_Group_4_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XConstructorCall_ArgumentsAssignment_4_1_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -10740,15 +10764,15 @@ protected class XConstructorCall_Group_5_1 extends GroupToken {
 }
 
 // arguments+=XExpression
-protected class XConstructorCall_ArgumentsAssignment_5_1_0 extends AssignmentToken  {
+protected class XConstructorCall_ArgumentsAssignment_4_1_1_0 extends AssignmentToken  {
 	
-	public XConstructorCall_ArgumentsAssignment_5_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_ArgumentsAssignment_4_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5_1_0();
+		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1_0();
 	}
 
     @Override
@@ -10767,7 +10791,7 @@ protected class XConstructorCall_ArgumentsAssignment_5_1_0 extends AssignmentTok
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_5_1_0_0(); 
+				element = grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10779,28 +10803,28 @@ protected class XConstructorCall_ArgumentsAssignment_5_1_0 extends AssignmentTok
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XConstructorCall_LeftParenthesisKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XConstructorCall_LeftParenthesisKeyword_4_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ("," arguments+=XExpression)*
-protected class XConstructorCall_Group_5_1_1 extends GroupToken {
+protected class XConstructorCall_Group_4_1_1_1 extends GroupToken {
 	
-	public XConstructorCall_Group_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_Group_4_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getGroup_5_1_1();
+		return grammarAccess.getXConstructorCallAccess().getGroup_4_1_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XConstructorCall_ArgumentsAssignment_5_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XConstructorCall_ArgumentsAssignment_4_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -10808,22 +10832,22 @@ protected class XConstructorCall_Group_5_1_1 extends GroupToken {
 }
 
 // ","
-protected class XConstructorCall_CommaKeyword_5_1_1_0 extends KeywordToken  {
+protected class XConstructorCall_CommaKeyword_4_1_1_1_0 extends KeywordToken  {
 	
-	public XConstructorCall_CommaKeyword_5_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_CommaKeyword_4_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getCommaKeyword_5_1_1_0();
+		return grammarAccess.getXConstructorCallAccess().getCommaKeyword_4_1_1_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XConstructorCall_Group_5_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XConstructorCall_ArgumentsAssignment_5_1_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XConstructorCall_Group_4_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XConstructorCall_ArgumentsAssignment_4_1_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -10831,15 +10855,15 @@ protected class XConstructorCall_CommaKeyword_5_1_1_0 extends KeywordToken  {
 }
 
 // arguments+=XExpression
-protected class XConstructorCall_ArgumentsAssignment_5_1_1_1 extends AssignmentToken  {
+protected class XConstructorCall_ArgumentsAssignment_4_1_1_1_1 extends AssignmentToken  {
 	
-	public XConstructorCall_ArgumentsAssignment_5_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_ArgumentsAssignment_4_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5_1_1_1();
+		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1_1_1();
 	}
 
     @Override
@@ -10858,7 +10882,7 @@ protected class XConstructorCall_ArgumentsAssignment_5_1_1_1 extends AssignmentT
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_5_1_1_1_0(); 
+				element = grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10870,7 +10894,7 @@ protected class XConstructorCall_ArgumentsAssignment_5_1_1_1 extends AssignmentT
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XConstructorCall_CommaKeyword_5_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XConstructorCall_CommaKeyword_4_1_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -10880,38 +10904,38 @@ protected class XConstructorCall_ArgumentsAssignment_5_1_1_1 extends AssignmentT
 
 
 // ")"
-protected class XConstructorCall_RightParenthesisKeyword_6 extends KeywordToken  {
+protected class XConstructorCall_RightParenthesisKeyword_4_2 extends KeywordToken  {
 	
-	public XConstructorCall_RightParenthesisKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_RightParenthesisKeyword_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_6();
+		return grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XConstructorCall_Alternatives_5(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XConstructorCall_LeftParenthesisKeyword_4(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XConstructorCall_Alternatives_4_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
+
 // => arguments+=XClosure?
-protected class XConstructorCall_ArgumentsAssignment_7 extends AssignmentToken  {
+protected class XConstructorCall_ArgumentsAssignment_5 extends AssignmentToken  {
 	
-	public XConstructorCall_ArgumentsAssignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XConstructorCall_ArgumentsAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_7();
+		return grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5();
 	}
 
     @Override
@@ -10930,7 +10954,7 @@ protected class XConstructorCall_ArgumentsAssignment_7 extends AssignmentToken  
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXClosureRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_7_0(); 
+				element = grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10942,7 +10966,9 @@ protected class XConstructorCall_ArgumentsAssignment_7 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XConstructorCall_RightParenthesisKeyword_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XConstructorCall_Group_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new XConstructorCall_Group_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new XConstructorCall_ConstructorAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

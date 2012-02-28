@@ -183,9 +183,9 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 		c.setNoSpace().around(ele.getLessThanSignKeyword_3_0());
 		c.setNoSpace().before(ele.getCommaKeyword_3_2_0());
 		c.setNoSpace().around(ele.getGreaterThanSignKeyword_3_3());
-		c.setNoSpace().around(ele.getLeftParenthesisKeyword_4());
-		c.setNoSpace().before(ele.getCommaKeyword_5_1_1_0());
-		c.setNoSpace().before(ele.getRightParenthesisKeyword_6());
+		c.setNoSpace().around(ele.getLeftParenthesisKeyword_4_0());
+		c.setNoSpace().before(ele.getCommaKeyword_4_1_1_1_0());
+		c.setNoSpace().before(ele.getRightParenthesisKeyword_4_2());
 	}
 
 	public void configureXTypeLiteral(FormattingConfig c, XTypeLiteralElements ele) {

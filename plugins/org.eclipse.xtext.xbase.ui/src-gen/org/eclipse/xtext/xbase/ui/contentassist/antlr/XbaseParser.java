@@ -56,7 +56,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_2(), "rule__XVariableDeclaration__Alternatives_2");
 					put(grammarAccess.getXFeatureCallAccess().getAlternatives_4_1(), "rule__XFeatureCall__Alternatives_4_1");
 					put(grammarAccess.getIdOrSuperAccess().getAlternatives(), "rule__IdOrSuper__Alternatives");
-					put(grammarAccess.getXConstructorCallAccess().getAlternatives_5(), "rule__XConstructorCall__Alternatives_5");
+					put(grammarAccess.getXConstructorCallAccess().getAlternatives_4_1(), "rule__XConstructorCall__Alternatives_4_1");
 					put(grammarAccess.getXBooleanLiteralAccess().getAlternatives_1(), "rule__XBooleanLiteral__Alternatives_1");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_3(), "rule__XTryCatchFinallyExpression__Alternatives_3");
 					put(grammarAccess.getNumberAccess().getAlternatives(), "rule__Number__Alternatives");
@@ -161,8 +161,9 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXConstructorCallAccess().getGroup(), "rule__XConstructorCall__Group__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup_3(), "rule__XConstructorCall__Group_3__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup_3_2(), "rule__XConstructorCall__Group_3_2__0");
-					put(grammarAccess.getXConstructorCallAccess().getGroup_5_1(), "rule__XConstructorCall__Group_5_1__0");
-					put(grammarAccess.getXConstructorCallAccess().getGroup_5_1_1(), "rule__XConstructorCall__Group_5_1_1__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_4(), "rule__XConstructorCall__Group_4__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_4_1_1(), "rule__XConstructorCall__Group_4_1_1__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_4_1_1_1(), "rule__XConstructorCall__Group_4_1_1_1__0");
 					put(grammarAccess.getXBooleanLiteralAccess().getGroup(), "rule__XBooleanLiteral__Group__0");
 					put(grammarAccess.getXNullLiteralAccess().getGroup(), "rule__XNullLiteral__Group__0");
 					put(grammarAccess.getXNumberLiteralAccess().getGroup(), "rule__XNumberLiteral__Group__0");
@@ -277,10 +278,10 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXConstructorCallAccess().getConstructorAssignment_2(), "rule__XConstructorCall__ConstructorAssignment_2");
 					put(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_3_1(), "rule__XConstructorCall__TypeArgumentsAssignment_3_1");
 					put(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_3_2_1(), "rule__XConstructorCall__TypeArgumentsAssignment_3_2_1");
-					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5_0(), "rule__XConstructorCall__ArgumentsAssignment_5_0");
-					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5_1_0(), "rule__XConstructorCall__ArgumentsAssignment_5_1_0");
-					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5_1_1_1(), "rule__XConstructorCall__ArgumentsAssignment_5_1_1_1");
-					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_7(), "rule__XConstructorCall__ArgumentsAssignment_7");
+					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_0(), "rule__XConstructorCall__ArgumentsAssignment_4_1_0");
+					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1_0(), "rule__XConstructorCall__ArgumentsAssignment_4_1_1_0");
+					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1_1_1(), "rule__XConstructorCall__ArgumentsAssignment_4_1_1_1_1");
+					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_5(), "rule__XConstructorCall__ArgumentsAssignment_5");
 					put(grammarAccess.getXBooleanLiteralAccess().getIsTrueAssignment_1_1(), "rule__XBooleanLiteral__IsTrueAssignment_1_1");
 					put(grammarAccess.getXNumberLiteralAccess().getValueAssignment_1(), "rule__XNumberLiteral__ValueAssignment_1");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment_1(), "rule__XStringLiteral__ValueAssignment_1");

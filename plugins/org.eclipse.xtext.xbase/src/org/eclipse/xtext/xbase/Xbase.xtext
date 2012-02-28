@@ -221,13 +221,13 @@ StaticQualifier:
 XConstructorCall returns XExpression:
 	{XConstructorCall}
 	'new' constructor=[types::JvmConstructor|QualifiedName] 
-	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	'(' 
+	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	(=>'(' 
 		(
 		    arguments+=XShortClosure
 		  |	arguments+=XExpression (',' arguments+=XExpression)*
 		)? 
-	')'
+	')')?
 	=>arguments+=XClosure?;
 
 XBooleanLiteral returns XExpression :
