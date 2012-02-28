@@ -6,11 +6,14 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 import java.lang.reflect.Method;
 import java.util.AbstractList;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -192,6 +196,43 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       setter.invoke(inst, "FOO");
       Object _invoke = getter.invoke(inst);
       Assert.assertEquals("FOO", _invoke);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEnumeration() {
+    try {
+      XExpression _expression = this.expression("null", false);
+      final XExpression expression = _expression;
+      final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
+          public void apply(final JvmEnumerationType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAR");
+            _members.add(_enumerationLiteral);
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAZ");
+            _members_1.add(_enumerationLiteral_1);
+          }
+        };
+      JvmEnumerationType _enumerationType = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
+      final JvmEnumerationType enumeration = _enumerationType;
+      Resource _eResource = expression.eResource();
+      Class<?> _compile = this.compile(_eResource, enumeration);
+      final Class<?> compiled = _compile;
+      Method _method = compiled.getMethod("values");
+      final Method valuesMethod = _method;
+      Object _invoke = valuesMethod.invoke(null);
+      final Object[] values = ((Object[]) _invoke);
+      final Object[] _typeConverted_values = (Object[])values;
+      Object _get = ((List<Object>)Conversions.doWrapArray(_typeConverted_values)).get(0);
+      String _string = _get.toString();
+      Assert.assertEquals("BAR", _string);
+      final Object[] _typeConverted_values_1 = (Object[])values;
+      Object _get_1 = ((List<Object>)Conversions.doWrapArray(_typeConverted_values_1)).get(1);
+      String _string_1 = _get_1.toString();
+      Assert.assertEquals("BAZ", _string_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

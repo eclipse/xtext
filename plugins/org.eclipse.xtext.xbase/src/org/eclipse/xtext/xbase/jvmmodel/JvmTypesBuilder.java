@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -93,6 +94,9 @@ public class JvmTypesBuilder {
 	@Inject
 	private NumberLiterals numberLiterals;
 
+	@Inject
+	private TypesFactory typesFactory;
+	
 	/**
 	 * Sets the given {@link JvmExecutable} as the logical container for the given {@link XExpression}.
 	 * This defines the context and the scope for the given expression. Also it defines how the given JvmExecutable can be executed.
@@ -263,7 +267,7 @@ public class JvmTypesBuilder {
 		if (name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
-		JvmAnnotationType annotationType = TypesFactory.eINSTANCE.createJvmAnnotationType();
+		JvmAnnotationType annotationType = typesFactory.createJvmAnnotationType();
 		annotationType.setSimpleName(fullName.getSecond());
 		if (fullName.getFirst() != null)
 			annotationType.setPackageName(fullName.getFirst());
@@ -293,8 +297,9 @@ public class JvmTypesBuilder {
 		if (name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
-		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
+		JvmEnumerationType result = typesFactory.createJvmEnumerationType();
 		result.setSimpleName(fullName.getSecond());
+		result.setVisibility(JvmVisibility.PUBLIC);
 		if (fullName.getFirst() != null)
 			result.setPackageName(fullName.getFirst());
 		associate(sourceElement, result);
@@ -303,14 +308,41 @@ public class JvmTypesBuilder {
 
 		return result;
 	}
-
+	
+	/**
+	 * Creates a public enumeration literal, associated to the given sourceElement.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the simple name of the resulting enumeration literal.
+	 * 
+	 * @return a result representing a Java enumeration literal with the given name.
+	 */
+	public JvmEnumerationLiteral toEnumerationLiteral(EObject sourceElement, String name) {
+		return toEnumerationLiteral(sourceElement, name, null);
+	}
+	
+	/**
+	 * Same as {@link #toEnumerationLiteral(EObject, String)} but with an initializer passed as the last argument.
+	 */
+	public JvmEnumerationLiteral toEnumerationLiteral(EObject sourceElement, String name, Procedure1<JvmEnumerationLiteral> initializer) {
+		JvmEnumerationLiteral result = typesFactory.createJvmEnumerationLiteral();
+		result.setSimpleName(nullSafeName(name));
+		result.setVisibility(JvmVisibility.PUBLIC);
+		associate(sourceElement, result);
+		if(initializer != null) 
+			initializer.apply(result);
+		return result;
+	}
+	
 	protected JvmGenericType createJvmGenericType(EObject sourceElement, String name) {
 		if (sourceElement == null)
 			return null;
 		if (name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
-		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
+		final JvmGenericType result = typesFactory.createJvmGenericType();
 		result.setSimpleName(fullName.getSecond());
 		if (fullName.getFirst() != null)
 			result.setPackageName(fullName.getFirst());
@@ -334,7 +366,7 @@ public class JvmTypesBuilder {
 	 * Creates a private field with the given name and the given type associated to the given sourceElement.
 	 * 
 	 * @param sourceElement the sourceElement the resulting element is associated with.
-	 * @param name the simple name of the resulting class.
+	 * @param name the simple name of the resulting field.
 	 * @param typeRef the type of the field
 	 * 
 	 * @return a {@link JvmField} representing a Java field with the given simple name and type.
@@ -347,8 +379,8 @@ public class JvmTypesBuilder {
 	 * Same as {@link #toField(EObject, String, JvmTypeReference)} but with an initializer passed as the last argument.
 	 */
 	public JvmField toField(EObject sourceElement, String name, JvmTypeReference typeRef, Procedure1<JvmField> initializer) {
-		JvmField result = TypesFactory.eINSTANCE.createJvmField();
-		result.setSimpleName(nullSaveName(name));
+		JvmField result = typesFactory.createJvmField();
+		result.setSimpleName(nullSafeName(name));
 		result.setVisibility(JvmVisibility.PRIVATE);
 		result.setType(cloneWithProxies(typeRef));
 		if (initializer != null && name != null)
@@ -356,7 +388,7 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, result);
 	}
 
-	protected String nullSaveName(String name) {
+	protected String nullSafeName(String name) {
 		return name != null ? name : "<unknown>";
 	}
 
@@ -378,8 +410,8 @@ public class JvmTypesBuilder {
 	 */
 	public JvmOperation toMethod(EObject sourceElement, String name, JvmTypeReference returnType,
 			Procedure1<JvmOperation> init) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		result.setSimpleName(nullSaveName(name));
+		JvmOperation result = typesFactory.createJvmOperation();
+		result.setSimpleName(nullSafeName(name));
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(cloneWithProxies(returnType));
 		associate(sourceElement, result);
@@ -399,9 +431,9 @@ public class JvmTypesBuilder {
 	 * </code>
 	 */
 	public JvmOperation toGetter(final EObject sourceElement, final String name, JvmTypeReference typeRef) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
+		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("get" + nullSaveName(Strings.toFirstUpper(name)));
+		result.setSimpleName("get" + nullSafeName(Strings.toFirstUpper(name)));
 		result.setReturnType(cloneWithProxies(typeRef));
 		if (name != null) {
 			setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
@@ -427,10 +459,10 @@ public class JvmTypesBuilder {
 	 * </code>
 	 */
 	public JvmOperation toSetter(final EObject sourceElement, final String name, JvmTypeReference typeRef) {
-		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
+		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("set" + nullSaveName(Strings.toFirstUpper(name)));
-		result.getParameters().add(toParameter(sourceElement, nullSaveName(name), cloneWithProxies(typeRef)));
+		result.setSimpleName("set" + nullSafeName(Strings.toFirstUpper(name)));
+		result.getParameters().add(toParameter(sourceElement, nullSafeName(name), cloneWithProxies(typeRef)));
 		if (name != null) {
 			setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
 				public void apply(ITreeAppendable p) {
@@ -451,8 +483,8 @@ public class JvmTypesBuilder {
 	 * element.
 	 */
 	public JvmFormalParameter toParameter(EObject sourceElement, String name, JvmTypeReference typeRef) {
-		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
-		result.setName(nullSaveName(name));
+		JvmFormalParameter result = typesFactory.createJvmFormalParameter();
+		result.setName(nullSafeName(name));
 		result.setParameterType(cloneWithProxies(typeRef));
 		return associate(sourceElement, result);
 	}
@@ -462,8 +494,8 @@ public class JvmTypesBuilder {
 	 * the constructor will have an empty body and no arguments, hence the Java default constructor.
 	 */
 	public JvmConstructor toConstructor(EObject sourceElement, String simpleName, Procedure1<JvmConstructor> init) {
-		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
-		constructor.setSimpleName(nullSaveName(simpleName));
+		JvmConstructor constructor = typesFactory.createJvmConstructor();
+		constructor.setSimpleName(nullSafeName(simpleName));
 		constructor.setVisibility(JvmVisibility.PUBLIC);
 		associate(sourceElement, constructor);
 		if (init != null)
@@ -527,7 +559,7 @@ public class JvmTypesBuilder {
 	 *            the value of the single
 	 */
 	public JvmAnnotationReference toAnnotation(EObject sourceElement, String annotationTypeName, Object value) {
-		JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+		JvmAnnotationReference result = typesFactory.createJvmAnnotationReference();
 		JvmType jvmType = references.findDeclaredType(annotationTypeName, sourceElement);
 		if (!(jvmType instanceof JvmAnnotationType)) {
 			throw new IllegalArgumentException("The given class " + annotationTypeName + " is not an annotation type.");
@@ -535,7 +567,7 @@ public class JvmTypesBuilder {
 		result.setAnnotation((JvmAnnotationType) jvmType);
 		if (value != null) {
 			if (value instanceof String) {
-				JvmStringAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+				JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
 				annotationValue.getValues().add((String) value);
 				result.getValues().add(annotationValue);
 			}
@@ -663,7 +695,7 @@ public class JvmTypesBuilder {
 	}
 
 	protected JvmAnnotationReference getJvmAnnotationReference(XAnnotation anno) {
-		JvmAnnotationReference reference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+		JvmAnnotationReference reference = typesFactory.createJvmAnnotationReference();
 		final JvmAnnotationType annotation = (JvmAnnotationType) anno.eGet(
 				XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
 		reference.setAnnotation(annotation);
@@ -718,7 +750,7 @@ public class JvmTypesBuilder {
 			if (translators.isEmpty()) {
 				translators.put(XAnnotationsPackage.Literals.XANNOTATION, new AnnotationValueTranslator() {
 					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+						return typesFactory.createJvmAnnotationAnnotationValue();
 					}
 
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
@@ -729,7 +761,7 @@ public class JvmTypesBuilder {
 				});
 				translators.put(XbasePackage.Literals.XSTRING_LITERAL, new AnnotationValueTranslator() {
 					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+						return typesFactory.createJvmStringAnnotationValue();
 					}
 
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
@@ -740,7 +772,7 @@ public class JvmTypesBuilder {
 				});
 				translators.put(XbasePackage.Literals.XBOOLEAN_LITERAL, new AnnotationValueTranslator() {
 					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+						return typesFactory.createJvmBooleanAnnotationValue();
 					}
 
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
@@ -751,14 +783,14 @@ public class JvmTypesBuilder {
 				});
 				translators.put(XbasePackage.Literals.XTYPE_LITERAL, new AnnotationValueTranslator() {
 					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+						return typesFactory.createJvmTypeAnnotationValue();
 					}
 
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
 						JvmTypeAnnotationValue annotationValue = (JvmTypeAnnotationValue) value;
 						final XTypeLiteral literal = (XTypeLiteral) expr;
 						JvmType proxy = (JvmType) literal.eGet(XbasePackage.Literals.XTYPE_LITERAL__TYPE, false);
-						JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE
+						JvmParameterizedTypeReference reference = typesFactory
 								.createJvmParameterizedTypeReference();
 						reference.setType(proxy);
 						annotationValue.getValues().add(reference);
@@ -768,7 +800,7 @@ public class JvmTypesBuilder {
 					public JvmAnnotationValue createValue(XExpression expr) {
 						String primitiveType = numberLiterals.getJavaType((XNumberLiteral) expr).getName();
 						EClass eClass = (EClass) TypesPackage.eINSTANCE.getEClassifier("Jvm" + toFirstUpper(primitiveType) + "AnnotationValue");
-						return (JvmAnnotationValue) TypesFactory.eINSTANCE.create(eClass);
+						return (JvmAnnotationValue) typesFactory.create(eClass);
 					}
 
 					@SuppressWarnings("unchecked")
@@ -782,7 +814,7 @@ public class JvmTypesBuilder {
 				});
 				translators.put(XbasePackage.Literals.XFEATURE_CALL, new AnnotationValueTranslator() {
 					public JvmAnnotationValue createValue(XExpression expr) {
-						return TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
+						return typesFactory.createJvmCustomAnnotationValue();
 					}
 
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {

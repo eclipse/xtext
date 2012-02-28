@@ -14,6 +14,8 @@ import org.junit.Test
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
+	@Inject TypesFactory typesFactory
+	
 	@Inject TypeReferences references
 	
 	@Inject extension JvmTypesBuilder
@@ -21,7 +23,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testEmptyAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
-		val typesFactory = TypesFactory::eINSTANCE
 		val e = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
@@ -35,7 +36,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testStringAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
-		val typesFactory = TypesFactory::eINSTANCE
 		val e = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
@@ -51,7 +51,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testStringAnnotationWithNullExpression() {
 		val f = XAnnotationsFactory::eINSTANCE
-		val typesFactory = TypesFactory::eINSTANCE
 		val context = expression("'Foo'");
 		
 		val anno = f.createXAnnotation;
@@ -68,7 +67,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testStringArrayAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
-		val typesFactory = TypesFactory::eINSTANCE
 		val e = expression("'Foo'");
 		val e2 = expression("'Bar'");
 		
@@ -90,7 +88,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testStringArrayAnnotationWithNullExpression() {
 		val f = XAnnotationsFactory::eINSTANCE
-		val typesFactory = TypesFactory::eINSTANCE
 		val context = expression('"foo"')
 		
 		val anno = f.createXAnnotation
@@ -131,17 +128,20 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testEnumCreation() {
 		val e = expression("'foo'")
-		val anno = e.toEnumerationType("MyEnum") [
+		val myEnum = e.toEnumerationType("MyEnum") [
 			documentation = "Foo"
+			members += toEnumerationLiteral(e, "LITERAL0")
+			members += toEnumerationLiteral(e, "LITERAL1")
 		]
-		assertNull(anno.packageName)
-		assertEquals("MyEnum", anno.simpleName)
-		assertEquals("Foo", anno.documentation)
+		assertNull(myEnum.packageName)
+		assertEquals("MyEnum", myEnum.simpleName)
+		assertEquals("Foo", myEnum.documentation)
+		assertArrayEquals(newArrayList("LITERAL0", "LITERAL1"), myEnum.literals.map[simpleName]);
 	}
 	
 	@Test
 	def void testSetBody() {
-		val op = TypesFactory::eINSTANCE.createJvmOperation
+		val op = typesFactory.createJvmOperation
 		op.body = ['''foo''']
 		op.body = ['''bar''']
 		assertEquals(1, op.eAdapters.size)
