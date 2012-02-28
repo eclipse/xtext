@@ -122,7 +122,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 	</extension>
 	<extension
          point="org.eclipse.core.runtime.adapters">
-      <factory class="«executableExtensionFactory()»:org.eclipse.xtext.common.types.smap.StratumBreakpointAdapterFactory"
+      <factory class="«executableExtensionFactory()»:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
          adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
          <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
       </factory> 
