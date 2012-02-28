@@ -29,7 +29,6 @@ import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
-import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
