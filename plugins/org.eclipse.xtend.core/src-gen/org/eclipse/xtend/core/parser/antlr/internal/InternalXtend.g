@@ -6208,11 +6208,12 @@ ruleXConstructorCall returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_3='<' 
+)(((	'<' 
+)=>	otherlv_3='<' 
     {
     	newLeafNode(otherlv_3, grammarAccess.getXConstructorCallAccess().getLessThanSignKeyword_3_0());
     }
-(
+)(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0()); 
@@ -6256,11 +6257,12 @@ ruleXConstructorCall returns [EObject current=null]
     {
     	newLeafNode(otherlv_7, grammarAccess.getXConstructorCallAccess().getGreaterThanSignKeyword_3_3());
     }
-)?	otherlv_8='(' 
+)?(((	'(' 
+)=>	otherlv_8='(' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4());
+    	newLeafNode(otherlv_8, grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0());
     }
-(((((
+)(((((
 )((
 (
 ruleJvmFormalParameter
@@ -6279,7 +6281,7 @@ ruleJvmFormalParameter
 )))=>
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_5_0_0()); 
+	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXShortClosureParserRuleCall_4_1_0_0()); 
 	    }
 		lv_arguments_9_0=ruleXShortClosure		{
 	        if ($current==null) {
@@ -6298,7 +6300,7 @@ ruleJvmFormalParameter
     |((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_5_1_0_0()); 
+	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_0_0()); 
 	    }
 		lv_arguments_10_0=ruleXExpression		{
 	        if ($current==null) {
@@ -6315,12 +6317,12 @@ ruleJvmFormalParameter
 )
 )(	otherlv_11=',' 
     {
-    	newLeafNode(otherlv_11, grammarAccess.getXConstructorCallAccess().getCommaKeyword_5_1_1_0());
+    	newLeafNode(otherlv_11, grammarAccess.getXConstructorCallAccess().getCommaKeyword_4_1_1_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_5_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0()); 
 	    }
 		lv_arguments_12_0=ruleXExpression		{
 	        if ($current==null) {
@@ -6337,16 +6339,16 @@ ruleJvmFormalParameter
 )
 ))*))?	otherlv_13=')' 
     {
-    	newLeafNode(otherlv_13, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_6());
+    	newLeafNode(otherlv_13, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4_2());
     }
-((
+)?((
 (
 ruleXClosure
 )
 )=>
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()); 
 	    }
 		lv_arguments_14_0=ruleXClosure		{
 	        if ($current==null) {

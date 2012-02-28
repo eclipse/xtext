@@ -641,21 +641,27 @@ ruleStaticQualifier :
 // Rule XConstructorCall
 ruleXConstructorCall :
 	'new' ruleQualifiedName (
-		'<' ruleJvmArgumentTypeReference (
+		( (
+		'<'
+		) => '<' ) ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'
-	)? '(' (
+	)? (
 		( (
-		(
-			ruleJvmFormalParameter (
-				',' ruleJvmFormalParameter
+		'('
+		) => '(' ) (
+			( (
+			(
+				ruleJvmFormalParameter (
+					',' ruleJvmFormalParameter
+				)*
+			)? '|'
+			) => ruleXShortClosure ) |
+			ruleXExpression (
+				',' ruleXExpression
 			)*
-		)? '|'
-		) => ruleXShortClosure ) |
-		ruleXExpression (
-			',' ruleXExpression
-		)*
-	)? ')' ( (
+		)? ')'
+	)? ( (
 	ruleXClosure
 	) => ruleXClosure )?
 ;
