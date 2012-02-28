@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.util;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -43,6 +44,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multiset.Entry;
 import com.google.common.collect.Sets;
+import com.google.common.primitives.Booleans;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -237,18 +239,35 @@ public class TypeConformanceComputer {
 		// try to find a matching parameterized type for the raw types in ascending order
 		List<JvmTypeReference> referencesWithSameDistance = Lists.newArrayListWithExpectedSize(2);
 		int wasDistance = -1;
-		for(Entry<JvmType> rawTypeCandidate: candidates) {
+		boolean classSeen = false;
+		outer: for(Entry<JvmType> rawTypeCandidate: candidates) {
+			JvmType rawType = rawTypeCandidate.getElement();
+			JvmTypeReference result = null;
 			if (wasDistance == -1) {
 				wasDistance = rawTypeCandidate.getCount();
 			} else {
 				if (wasDistance != rawTypeCandidate.getCount()) {
-					break;
+					if (classSeen)
+						break;
+					result = getTypeParametersForSupertype(all, rawType, types);
+					for(JvmTypeReference alreadyCollected: referencesWithSameDistance) {
+						if (isConformant(result, alreadyCollected, true)) {
+							classSeen = classSeen || isClass(rawType);
+							continue outer;
+						}
+					}
+					wasDistance = rawTypeCandidate.getCount(); 
 				}
 			}
-			JvmType rawType = rawTypeCandidate.getElement();
-			JvmTypeReference result = getTypeParametersForSupertype(all, rawType, types);
+			if (result == null)
+				result = getTypeParametersForSupertype(all, rawType, types);
 			if (result != null) {
-				referencesWithSameDistance.add(result);
+				boolean isClass = isClass(rawType);
+				classSeen = classSeen || isClass;
+				if (isClass)
+					referencesWithSameDistance.add(0, result);
+				else
+					referencesWithSameDistance.add(result);
 			}
 		}
 		if (referencesWithSameDistance.size() == 1) {
@@ -263,6 +282,12 @@ public class TypeConformanceComputer {
 			return result;
 		}
 		return null;
+	}
+
+	protected boolean isClass(JvmType type) {
+		if (type instanceof JvmArrayType)
+			return isClass(((JvmArrayType) type).getComponentType());
+		return type instanceof JvmGenericType && !((JvmGenericType) type).isInterface();
 	}
 
 	protected JvmType findContext(JvmTypeReference firstType) {
@@ -468,6 +493,9 @@ public class TypeConformanceComputer {
 					componentType, 
 					Lists.transform(initiallyRequested, getComponentType));
 			if (componentTypeReference != null) {
+				if (componentTypeReference.eContainer() instanceof JvmGenericArrayTypeReference) {
+					return (JvmTypeReference) componentTypeReference.eContainer();
+				}
 				JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
 				result.setComponentType(componentTypeReference);
 				return result;
@@ -477,8 +505,14 @@ public class TypeConformanceComputer {
 	}
 
 	protected JvmTypeReference getFirstForRawType(Multimap<JvmType, JvmTypeReference> all, JvmType rawType) {
-		JvmTypeReference result = all.get(rawType).iterator().next();
-		return result;
+		Iterator<JvmTypeReference> iterator = all.get(rawType).iterator();
+		while(iterator.hasNext()) {
+			JvmTypeReference result = iterator.next();
+			if (result instanceof JvmParameterizedTypeReference || result instanceof JvmGenericArrayTypeReference) {
+				return result;
+			}
+		}
+		throw new IllegalStateException(all.toString() + " does not contain a useful type reference for rawtype " + rawType.getQualifiedName());
 	}
 
 	protected void initializeDistance(final JvmTypeReference firstType, Multimap<JvmType, JvmTypeReference> all,
@@ -527,14 +561,9 @@ public class TypeConformanceComputer {
 					return compare(((JvmArrayType) element1).getComponentType(), ((JvmArrayType) element2).getComponentType());
 				}
 				if (element1 instanceof JvmGenericType && element2 instanceof JvmGenericType) {
-					if (((JvmGenericType) element1).isInterface()) {
-						if (!((JvmGenericType) element2).isInterface()) {
-							return 1;
-						}
-					} else {
-						if (((JvmGenericType) element2).isInterface()) {
-							return -1;
-						}
+					int result = Booleans.compare(((JvmGenericType) element1).isInterface(), ((JvmGenericType) element2).isInterface());
+					if (result != 0) {
+						return result;
 					}
 				}
 				return element1.getIdentifier().compareTo(element2.getIdentifier());
