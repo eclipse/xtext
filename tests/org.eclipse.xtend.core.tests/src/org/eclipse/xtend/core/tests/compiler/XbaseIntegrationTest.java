@@ -40,9 +40,26 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 				"{ newArrayList('foo').forEach( s | throw new java.io.IOException() ) return null }");
 	}
 	
-	@Test public void testTryCatch_06() throws Exception {
+	@Test public void testClosure_21() throws Exception {
+		assertEvaluatesWithException(IOException.class, 
+				"{val ()=>void proc = [| throw new java.io.IOException] proc.apply return null}");
+	}
+	
+	@Test public void testClosure_22() throws Exception {
+		assertEvaluatesWithException(IOException.class, 
+				"{ newArrayList('foo').forEach( s | throw new java.io.IOException ) return null }");
+	}
+	
+	@Test public void testTryCatch_07() throws Exception {
 		assertEvaluatesTo("", 
 				"try new String() " +
+				"  catch(java.io.IOException e) 'foo'" +
+				"  catch(Exception e) 'bar'");
+	}
+	
+	@Test public void testTryCatch_08() throws Exception {
+		assertEvaluatesTo("", 
+				"try new String " +
 				"  catch(java.io.IOException e) 'foo'" +
 				"  catch(Exception e) 'bar'");
 	}
