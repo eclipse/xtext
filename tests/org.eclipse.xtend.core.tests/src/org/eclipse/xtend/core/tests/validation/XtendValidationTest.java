@@ -827,8 +827,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testUnusedDispatchFunction() throws Exception {
-		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(Integer a) }");
-		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method", "foo(Comparable<?>","never", "used");
+		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(NullPointerException a) }");
+		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method", "foo(Serializable","never", "used");
 	}
 	
 	@Test public void testUsedDispatchFunction() throws Exception {
