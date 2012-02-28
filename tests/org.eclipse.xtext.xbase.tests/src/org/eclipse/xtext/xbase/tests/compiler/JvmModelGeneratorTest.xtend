@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 
 import static org.junit.Assert.*
 import org.junit.Test
+import java.util.List
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -96,6 +97,21 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		assertEquals("FOO", getter.invoke(inst))
 	}
 		
+	@Test
+	def void testEnumeration() {
+		val expression = expression("null", false);
+		val enumeration = expression.toEnumerationType("my.test.Foo") [
+			members += expression.toEnumerationLiteral("BAR")
+			members += expression.toEnumerationLiteral("BAZ")
+		]
+		val compiled = compile(expression.eResource, enumeration)
+		
+		val valuesMethod = compiled.getMethod("values")
+		val values = valuesMethod.invoke(null) as Object[]
+		assertEquals("BAR", values.get(0).toString())
+		assertEquals("BAZ", values.get(1).toString())
+	}
+	
 	def JvmTypeReference typeRef(EObject ctx, Class<?> clazz) {
 		return references.getTypeForName(clazz, ctx)
 	}
