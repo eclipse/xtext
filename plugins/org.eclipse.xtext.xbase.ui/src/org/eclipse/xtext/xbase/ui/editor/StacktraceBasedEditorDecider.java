@@ -34,12 +34,18 @@ public class StacktraceBasedEditorDecider {
 //				return Decision.FORCE_XBASE;
 			if (isSourceLookup(element))
 				return Decision.FORCE_JAVA;
+			if (isNavigationHistory(element))
+				return Decision.FORCE_JAVA;
 			if (isPackageExplorerOrNavigator(element))
 				return Decision.FORCE_JAVA;
 		}
 		return Decision.FAVOR_XBASE;
 	}
 	
+	protected boolean isNavigationHistory(StackTraceElement element) {
+		return "org.eclipse.ui.internal.NavigationHistory".equals(element.getClassName());
+	}
+
 	/**
 	 * Happens when one select a stack element in the debugger. Since wie use JSR-45 we don't want to modify JDT's behavior.
 	 * 
