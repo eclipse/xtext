@@ -1,5 +1,6 @@
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +13,6 @@ import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class GrammarConstraints extends GeneratedFile {
@@ -120,7 +120,7 @@ public class GrammarConstraints extends GeneratedFile {
         _builder.newLineIfNotEmpty();
         {
           IConstraintElement _body = constraint_1.getBody();
-          boolean _equals = ObjectExtensions.equals(_body, null);
+          boolean _equals = Objects.equal(_body, null);
           if (_equals) {
             _builder.append("\t");
             _builder.append("{");
