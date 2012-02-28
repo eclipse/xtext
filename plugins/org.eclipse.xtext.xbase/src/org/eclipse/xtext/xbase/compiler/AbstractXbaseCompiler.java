@@ -14,7 +14,9 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -180,8 +182,18 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected boolean canCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
-		// TODO improve this decision, e.g. static methods with expression-args are ok
-		return !isVariableDeclarationRequired(expression, appendable);
+		if (isVariableDeclarationRequired(expression, appendable)) {
+			return false;
+		}
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
+		while (iterator.hasNext()) {
+			EObject next = iterator.next();
+			if (next instanceof XExpression) {
+				if (isVariableDeclarationRequired((XExpression)next, appendable))
+					return false;
+			}
+		}
+		return true;
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {

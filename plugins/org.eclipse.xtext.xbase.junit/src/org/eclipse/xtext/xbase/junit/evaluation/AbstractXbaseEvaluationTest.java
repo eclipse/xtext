@@ -455,13 +455,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testReturnExpression_07() throws Exception {
-		assertEvaluatesTo(null, "return if (true) while(false) 'foo'+'bar'");
-		assertEvaluatesTo(null, "return if (false) while(false) 'foo'+'bar'");
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length");
+		assertEvaluatesTo(null, "return if (false) while(false) ('foo'+'bar').length");
 	}
 	
 	@Test public void testReturnExpression_08() throws Exception {
-		assertEvaluatesTo(null, "return if (true) while(false) 'foo'+'bar' else 'zonk'");
-		assertEvaluatesTo("zonk", "return if (false) while(false) 'foo'+'bar' else 'zonk'");
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else 'zonk'");
+		assertEvaluatesTo("zonk", "return if (false) while(false) ('foo'+'bar').length else 'zonk'");
 	}
 
 	@Test public void testUnaryOperator_00() throws Exception {
@@ -704,6 +704,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testVariableDeclaration_10() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "{var boolean b b = true b}");
+	}
+	
+	@Test public void testVariableDeclaration_11() throws Exception {
+		assertEvaluatesTo("FOO", "{var b = 'foo'.toUpperCase b}");
 	}
 	
 	@Test public void testFeatureCall_01() throws Exception {
@@ -2123,7 +2127,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("result", 
 				"{\n" +
 				"  for(s: new testdata.ArrayClient().toStringArray('a', 'b').filter(e|e!=null))" +
-				"    s\n" +
+				"    s.toUpperCase\n" +
 				"  'result'" +
 				"}");
 	}

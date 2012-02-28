@@ -38,7 +38,7 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Override
-	protected XExpression expression(String string) throws Exception {
+	protected XExpression expression(CharSequence string) throws Exception {
 		return super.expression(string, false);
 	}
 	

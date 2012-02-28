@@ -79,7 +79,7 @@ public abstract class AbstractXbaseTestCase extends Assert {
 		return getInjector().getInstance(clazz);
 	}
 
-	protected XExpression expression(String string) throws Exception {
+	protected XExpression expression(CharSequence string) throws Exception {
 		return expression(string, false);
 	}
 
@@ -88,17 +88,17 @@ public abstract class AbstractXbaseTestCase extends Assert {
 	@Inject
 	private ValidationTestHelper validationHelper;
 
-	protected XExpression expression(String string, boolean resolve) throws Exception {
+	protected XExpression expression(CharSequence string, boolean resolve) throws Exception {
 		XExpression parse = parseHelper.parse(string);
 		if (resolve)
 			validationHelper.assertNoErrors(parse);
 		return parse;
 	}
 
-	protected Resource newResource(String input) throws IOException {
+	protected Resource newResource(CharSequence input) throws IOException {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
-		resource.load(new StringInputStream(input), null);
+		resource.load(new StringInputStream(input.toString()), null);
 		return resource;
 	}
 
