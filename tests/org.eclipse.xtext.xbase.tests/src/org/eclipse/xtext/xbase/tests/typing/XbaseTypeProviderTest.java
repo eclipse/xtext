@@ -114,7 +114,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
 		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 		assertEquals("java.lang.StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
-		assertEquals("java.io.Serializable", toString(typeProvider.getType(expression)));
+		assertEquals("java.io.Serializable & java.lang.CharSequence", toString(typeProvider.getType(expression)));
 	}
 	
 	@Test public void testTypeGuardedCase_1() throws Exception {
@@ -293,8 +293,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testFeatureCall_04() throws Exception {
-		// TODO: to be discussed: jdt expects java.util.List<? extends Object> 
-		assertResolvedType("java.util.List<java.lang.Comparable<? extends java.lang.Object>>", "new testdata.ClassWithVarArgs().toList('', 1)");
+		assertResolvedType("java.util.List<java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
 	}
 	
 	@Test public void testFeatureCall_05() throws Exception {

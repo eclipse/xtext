@@ -36,13 +36,10 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -69,10 +66,6 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	private XMLResourceImpl syntheticResource;
-
-	@BeforeClass public static void createMockJavaProject() throws Exception {
-		MockJavaProjectProvider.setUp();
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -651,9 +644,9 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	
 	@Test public void testCommonSuperType_0() throws Exception {
 		assertCommonSuperType(
-				Serializable.class,
-				String.class,
-				StringBuilder.class);
+				"java.io.Serializable & java.lang.CharSequence",
+				ref(String.class),
+				ref(StringBuilder.class));
 	}
 	
 
@@ -698,9 +691,9 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	
 	@Test public void testCommonSuperType_6() throws Exception {
 		assertCommonSuperType(
-				Serializable.class,
-				StringBuilder.class,
-				String.class);
+				"java.io.Serializable & java.lang.CharSequence", // like testCommonSuperType_6 but different order
+				ref(StringBuilder.class),
+				ref(String.class));
 	}
 	
 	@Test public void testCommonSuperType_7() throws Exception {
@@ -733,7 +726,7 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	
 	@Test public void testCommonSuperType_11() throws Exception {
 		assertCommonSuperType(
-				"java.lang.Comparable<? extends java.lang.Object>",
+				"java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable",
 				ref(String.class),
 				ref(Integer.class));
 	}
@@ -908,13 +901,12 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	
 	@Test public void testCommonSuperType_35() throws Exception {
 		assertCommonSuperType(
-				"java.lang.Comparable<? extends java.lang.Object>",
+				"java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable",
 				ref(String.class),
 				ref(int.class));
 	}
 	
 	@Test
-	@Ignore
 	public void testCommonSuperType_36() throws Exception {
 		assertCommonSuperType(
 				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",

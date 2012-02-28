@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
+import org.junit.Test;
 
 import com.google.inject.Module;
 
@@ -20,5 +21,25 @@ public class ClasspathConformanceComputerTest extends AbstractTypeConformanceCom
 	protected Module getModule() {
 		return new ClasspathBasedModule();
 	}
+	
+	@Test
+	public void testRedundantInheritance() throws Exception {
+		assertCommonSuperType(
+				String.format("%s & %s & %s", Root.class.getName(), InterfaceB.class.getName(), InterfaceA.class.getName()),
+				ref(ChildA.class),
+				ref(ChildB.class));
+	}
 
+	static class Root implements InterfaceC {}
+	static class ParentA extends Root implements InterfaceA {}
+	static class ParentB extends Root implements InterfaceA {}
+	@SuppressWarnings("unused")
+	static class ChildA extends ParentA implements InterfaceB, InterfaceC {}
+	@SuppressWarnings("unused")
+	static class ChildB extends ParentB implements InterfaceB, InterfaceC {}
+	
+	static interface InterfaceA {}
+	static interface InterfaceB {}
+	static interface InterfaceC {}
+	
 }
