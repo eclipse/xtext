@@ -236,7 +236,7 @@ public class TypeReferences {
 			final JvmType result = typeProvider.findTypeByName(typeName);
 			return result;
 		} catch (RuntimeException e) {
-			log.info("Couldn't find JvmType for name '" + typeName + "' in context " + context);
+			log.info("Couldn't find JvmType for name '" + typeName + "' in context " + context, e);
 			return null;
 		}
 	}
