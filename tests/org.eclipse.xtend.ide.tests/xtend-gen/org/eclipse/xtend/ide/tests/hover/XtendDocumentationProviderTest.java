@@ -135,7 +135,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       String _documentation = this.documentationProvider.getDocumentation(member);
       final String docu = _documentation;
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections\">Collections</a></dd><dd><a href=\"eclipse-xtext-open:java:/Objects/java.util.List%23java.util.List\">java.util.List</a></dd></dl>");
+      _builder_1.append("<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\">Collections</a></dd><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.util.List%23java.util.List\">java.util.List</a></dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -184,7 +184,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       String _documentation = this.documentationProvider.getDocumentation(member);
       final String docu = _documentation;
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Throws:</dt><dd><a href=\"eclipse-xtext-open:java:/Objects/java.lang.NullPointerException%23java.lang.NullPointerException\">NullPointerException</a> -  not so good</dd><dd><a href=\"eclipse-xtext-open:java:/Objects/java.lang.RuntimeException%23java.lang.RuntimeException\">RuntimeException</a></dd></dl>");
+      _builder_1.append("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Throws:</dt><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.lang.NullPointerException%23java.lang.NullPointerException\">NullPointerException</a> -  not so good</dd><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.lang.RuntimeException%23java.lang.RuntimeException\">RuntimeException</a></dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -235,7 +235,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
       _builder_1.newLine();
-      _builder_1.append("<code><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections\">java.util.Collections</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\">java.util.Collections</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -286,7 +286,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
       _builder_1.newLine();
-      _builder_1.append("<code><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -388,7 +388,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
       _builder_1.newLine();
-      _builder_1.append("<code><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)\">java.util.Collections#sort(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)\">java.util.Collections#sort(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -439,7 +439,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
       _builder_1.newLine();
-      _builder_1.append("<code><a href=\"eclipse-xtext-open:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -498,7 +498,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
       _builder_1.newLine();
-      _builder_1.append("<code><a href=\"eclipse-xtext-open:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
@@ -565,7 +565,7 @@ public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("SimpleJavaDoc");
       _builder_1.newLine();
-      _builder_1.append("<code><a href=\"eclipse-xtext-open:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
+      _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
     } catch (Exception _e) {
