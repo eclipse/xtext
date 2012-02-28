@@ -7,7 +7,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 public class Xbase11_TypeCoercion {
   public static void main(final String[] args) {
     try {
-      
         "string".length();
         int _length = "string".length();
         final Integer i = Integer.valueOf(_length);

@@ -4,7 +4,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 public class Xbase09_Exceptions {
   public static void main(final String[] args) {
     try {
-      
         try {
           ((Object) null).toString();
         } catch (final Throwable _t) {
@@ -16,7 +15,8 @@ public class Xbase09_Exceptions {
             throw Exceptions.sneakyThrow(_t);
           }
         } finally {
-        }/*null*/;
+        }
+        /* null */
     } catch (Throwable t) {}
   }
 }

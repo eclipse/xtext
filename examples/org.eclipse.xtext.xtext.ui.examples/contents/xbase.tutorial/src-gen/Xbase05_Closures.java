@@ -2,18 +2,16 @@ import java.util.ArrayList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Xbase05_Closures {
   public static void main(final String[] args) {
     try {
-      
         final String x = "Hello ";
         final Function1<String,String> _function = new Function1<String,String>() {
             public String apply(final String e) {
-              String _operator_plus = StringExtensions.operator_plus(x, e);
-              return _operator_plus;
+              String _plus = (x + e);
+              return _plus;
             }
           };
         final Function1<String,String> f = _function;

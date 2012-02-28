@@ -4,7 +4,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class Xbase03_VariableDeclarations {
   public static void main(final String[] args) {
     try {
-      
         final String x = "A final value";
         String y = "A non-final variable";
         y = "can be modified";
