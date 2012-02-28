@@ -1,10 +1,10 @@
 package org.eclipse.xtend.core.tests.smoke;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class Case_0 {
@@ -49,7 +49,7 @@ public class Case_0 {
   
   public boolean isUpper(final String s) {
     String _upperCase = s.toUpperCase();
-    boolean _equals = ObjectExtensions.equals(_upperCase, s);
+    boolean _equals = Objects.equal(_upperCase, s);
     return _equals;
   }
   

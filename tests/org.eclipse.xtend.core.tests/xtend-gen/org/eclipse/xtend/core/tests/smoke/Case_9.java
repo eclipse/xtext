@@ -1,17 +1,17 @@
 package org.eclipse.xtend.core.tests.smoke;
 
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class Case_9 {
   protected CharSequence _generateTypeRef(final ENamedElement c) {
     CharSequence _xifexpression = null;
     EObject _eContainer = c.eContainer();
-    boolean _notEquals = !ObjectExtensions.equals(_eContainer, null);
+    boolean _notEquals = (!Objects.equal(_eContainer, null));
     if (_notEquals) {
       EObject _eContainer_1 = c.eContainer();
       CharSequence _generateTypeRef = this.generateTypeRef(_eContainer_1);

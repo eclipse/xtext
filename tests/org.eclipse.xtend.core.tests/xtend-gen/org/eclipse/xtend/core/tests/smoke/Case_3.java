@@ -1,11 +1,11 @@
 package org.eclipse.xtend.core.tests.smoke;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class Case_3 {
@@ -24,7 +24,7 @@ public class Case_3 {
   
   public Object testReturnExpression_07() {
     Object _xifexpression = null;
-    boolean _notEquals = !ObjectExtensions.equals(Case_3.class, null);
+    boolean _notEquals = (!Objects.equal(Case_3.class, null));
     if (_notEquals) {
       final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
           public Integer apply(final Integer i) {
