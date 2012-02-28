@@ -7,28 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Test;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompilerTest extends AbstractXbaseTestCase {
-	
-	@Inject
-	private ITypeProvider typeProvider;
-	
-	@Inject
-	private TypeReferences typeReferences;
+public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testSimple() throws Exception {
 		assertCompilesTo("\nint _length = \"foo\".length();\n" + 
@@ -211,8 +195,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"\n" + 
 				"java.util.ArrayList<String> _xblockexpression = null;\n" + 
 				"{\n" + 
-				"  java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\");\n" + 
-				"  final java.util.ArrayList<String> x = _newArrayList;\n" + 
+				"  final java.util.ArrayList<String> x = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\");\n" + 
 				"  _xblockexpression = (x);\n" + 
 				"}\n" + 
 				"return _xblockexpression;",
@@ -305,20 +288,5 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"}");
 	}
 	
-	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
-		XExpression model = expression(xbaseCode,true);
-		XbaseCompiler compiler = get(XbaseCompiler.class);
-		ITreeAppendable tracing = new FakeTreeAppendable();
-		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
-		compiler.compile(model, tracing, returnType);
-		assertEquals(expectedJavaCode, tracing.getContent());
-	}
 	
-	protected void assertCompilesToStatement(final String expectedJavaCode, final String xbaseCode) throws Exception {
-		XExpression model = expression(xbaseCode,true);
-		XbaseCompiler compiler = get(XbaseCompiler.class);
-		ITreeAppendable tracing = new FakeTreeAppendable();
-		compiler.compile(model, tracing, typeReferences.getTypeForName(Void.TYPE, model));
-		assertEquals(expectedJavaCode, tracing.getContent());
-	}
 }

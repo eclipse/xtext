@@ -395,7 +395,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				JvmTypeReference producedType = getTypeProvider().getType(expr);
 				serialize(producedType, expr, appendable, false, false, true, false);
 				appendable.append("(");
-				appendArguments(expr.getArguments(), appendable, false);
+				appendArguments(expr.getArguments(), appendable);
 				appendable.append(")");
 			}
 		};
@@ -433,14 +433,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(";");
 			if (needsSneakyThrow) {
 				generateCheckedExceptionHandling(expr, b);
-//				String name = b.declareSyntheticVariable(new Object(), "_e");
-//				b.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
-//				b.newLine().append("throw ");
-//				b.append(getTypeReferences().findDeclaredType(Exceptions.class, expr));
-//				b.append(".sneakyThrow(");
-//				b.append(name);
-//				b.append(");");
-//				b.decreaseIndentation().newLine().append("}");
 			}
 		} else {
 			b.newLine().append("return;");
@@ -692,6 +684,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected void _toJavaExpression(final XClosure call, final ITreeAppendable b) {
 		b.append(getVarName(call, b));
+	}
+	
+	@Override
+	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		final EObject container = expr.eContainer();
+		if ((container instanceof XVariableDeclaration)
+			|| (container instanceof XReturnExpression) 
+			|| (container instanceof XThrowExpression)){
+			return false;
+		}
+		return super.isVariableDeclarationRequired(expr, b);
 	}
 	
 }
