@@ -18,9 +18,11 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 
 public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
@@ -77,6 +79,46 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 			acceptUnassignedKeyword(kw, kw.getValue(), node);
 		} else
 			acceptNodes(transition, nodes);
+	}
+
+	/**
+	 * XConstructorCall returns XExpression:
+	 *    {XConstructorCall}
+	 *    'new' constructor=[types::JvmConstructor|QualifiedName] 
+	 *    (=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	 *    (=>'(' 
+	 *      (
+	 *          arguments+=XShortClosure
+	 *        | arguments+=XExpression (',' arguments+=XExpression)*
+	 *      )? 
+	 *    ')')?
+	 *    =>arguments+=XClosure?;
+	 */
+	@Override
+	protected void emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(
+			EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		if (semanticObject instanceof XConstructorCall) {
+			Keyword kw = grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0();
+			if (nodes != null) {
+				for(INode node: nodes) {
+					if (kw.equals(node.getGrammarElement())) {
+						acceptUnassignedKeyword(kw, kw.getValue(), (ILeafNode) node);
+						return;
+					}
+				}
+			}
+			XConstructorCall constructorCall = (XConstructorCall) semanticObject;
+			if (constructorCall.eContainer() instanceof XMemberFeatureCall) {
+				XMemberFeatureCall container = (XMemberFeatureCall) constructorCall.eContainer();
+				if (container.getMemberCallTarget() == constructorCall && !container.isNullSafe() && !container.isSpreading()) {
+					if (constructorCall.getArguments().isEmpty() && constructorCall.getTypeArguments().isEmpty()) {
+						acceptUnassignedKeyword(kw, kw.getValue(), null);
+						return;		
+					}
+				}
+			}
+		}
+		super.emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(semanticObject, transition,	nodes);
 	}
 	
 }
