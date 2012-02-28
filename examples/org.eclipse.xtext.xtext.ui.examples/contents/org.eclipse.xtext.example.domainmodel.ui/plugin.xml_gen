@@ -293,7 +293,7 @@
 	</extension>
 	<extension
          point="org.eclipse.core.runtime.adapters">
-      <factory class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
+      <factory class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.common.types.smap.StratumBreakpointAdapterFactory"
          adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">
          <adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
       </factory> 
