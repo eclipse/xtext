@@ -169,7 +169,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			public class Bar {
 			  private String s = new Function0<String>() {
 			    public String apply() {
-			      ArrayList _newArrayList = CollectionLiterals.<Object>newArrayList();
+			      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
 			      String _string = _newArrayList.toString();
 			      return _string;
 			    }
@@ -1002,6 +1002,54 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    String _plus = (x + "");
 			    String _plus_1 = (_plus + y);
 			    return _plus_1;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testNoVarForReturnExpression() {
+		assertCompilesTo('''
+			package foo;
+			
+			public class Foo {
+				def String returnString(String x, String y) {
+					return x + '' + y
+				}
+			}
+		''', '''
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String returnString(final String x, final String y) {
+			    String _plus = (x + "");
+			    return (_plus + y);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testNoVarForRightHandSideOfVarDecl() {
+		assertCompilesTo('''
+			package foo;
+			
+			public class Foo {
+				def String returnString(String x, String y) {
+					val z = x + '' + y
+					return z
+				}
+			}
+		''', '''
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String returnString(final String x, final String y) {
+			    String _plus = (x + "");
+			    final String z = (_plus + y);
+			    return z;
 			  }
 			}
 		''')

@@ -410,9 +410,9 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def create(Object x) { \n" + 
 				"    if(true) {\n" + 
 				"      if(true)\n" + 
-				"        'foo'+'bar'\n" + 
+				"        ('foo'+'bar').length\n" + 
 				"      for(c : 'foo'.toCharArray)\n" + 
-				"        'do'+'sideeffect'\n" + 
+				"        ('do'+'sideeffect').length\n" + 
 				"    }\n" + 
 				"  }\n" +
 				"}\n";
@@ -530,7 +530,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
 				"    val int i = t.<MyParam>head.apply + 1\n" +
 				"    if (i == 0)\n" +
-				"      t.<MyParam>head.apply + 1\n" + 
+				"      println(t.<MyParam>head.apply + 1)\n" + 
 				"    t.head.apply + 1\n" + 
 				"  }\n" +
 				"}\n";
@@ -875,7 +875,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"      h.properties.forEach(p|{\n" + 
 				"        p.prop1=p.prop1.toFirstLower()\n" + 
 				"      })\n" + 
-				"      h\n" + 
 				"    }\n" + 
 				"  }\n" +
 				"}";
@@ -890,7 +889,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"    h.properties.forEach(p|{\n" + 
 				"      p.prop1=p.prop1.toFirstLower()\n" + 
 				"    })\n" + 
-				"    h\n" + 
 				"  }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
