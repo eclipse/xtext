@@ -190,7 +190,10 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 				acceptor.accept(featureCallElements.getExplicitOperationCallLeftParenthesisKeyword_4_0_0());
 			List<XExpression> arguments = featureCall.getFeatureCallArguments();
 			if (!arguments.isEmpty()) {
-				if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
+				if (featureCall.isExplicitOperationCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
+					acceptor.accept(featureCallElements.getFeatureCallArgumentsXClosureParserRuleCall_5_0(), arguments.get(1), 1);
+				} else if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
 					acceptor.accept(featureCallElements.getFeatureCallArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
 				} else {
 					int diff = 0;
@@ -218,6 +221,12 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		List<?> values = (List<?>) semanticObject.eGet(reference);
 		if (values.size() != 1 || !(values.get(0) instanceof XClosure))
 			return false;
+		return isXShortClosure(values, reference, nodes);
+	}
+
+	protected boolean isXShortClosure(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
+		if (values.isEmpty() || values.size() > 2)
+			return false;
 		XClosure closure = (XClosure) values.get(0);
 		if (!closure.isExplicitSyntax())
 			return false;
@@ -242,14 +251,27 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	}
 
 	protected boolean isBuilderSyntax(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
-		INode node = nodes.getNodeForMultiValue(reference, values.size() - 1, 0, values.get(values.size() - 1));
+		if (values.isEmpty())
+			return false;
+		int lastIndex = values.size() - 1;
+		Object lastValue = values.get(lastIndex);
+		if (!(lastValue instanceof XClosure))
+			return false;
+		INode node = nodes.getNodeForMultiValue(reference, lastIndex, lastIndex, values.get(lastIndex));
 		if (node != null) {
 			if (node.getGrammarElement() instanceof RuleCall)
 				return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXClosureRule();
 			if (node.getGrammarElement() instanceof Action) 
 				return node.getGrammarElement() == grammarAccess.getXClosureAccess().getXClosureAction_0();
+			return false;
 		}
-		return false;
+		return true;
+	}
+	
+	protected boolean isXShortClosureAndBuilderSyntax(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
+		if (values.size() != 2)
+			return false;
+		return isXShortClosure(values, reference, nodes) && isBuilderSyntax(values, reference, nodes);
 	}
 	
 	
@@ -312,7 +334,10 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 				acceptor.accept(memberFeatureCallElements.getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0());
 			List<XExpression> arguments = featureCall.getMemberCallArguments();
 			if (!arguments.isEmpty()) {
-				if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS, nodes)) {
+				if (featureCall.isExplicitOperationCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, nodes)) {
+					acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0(), arguments.get(0), 0);
+					acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0(), arguments.get(1), 1);
+				} else if (featureCall.isExplicitOperationCall() && isXShortClosure(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS, nodes)) {
 					acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0(), arguments.get(0), 0);
 				} else {
 					int diff = 0;
@@ -322,7 +347,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 					if (featureCall.isExplicitOperationCall()) {
 						if (arguments.size() - diff > 0)
 							acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0(), arguments.get(0), 0);
-						for (int i = 1; i < arguments.size(); i++)
+						for (int i = 1; i < arguments.size() - diff; i++)
 							acceptor.accept(memberFeatureCallElements.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0(), arguments.get(i), i);
 					}
 					if (diff != 0) {
@@ -372,16 +397,19 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		 */
 		List<XExpression> arguments = constructorCall.getArguments();
 		if (!arguments.isEmpty()) {
-			if (isXShortClosure(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+			if (isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
+				acceptor.accept(constructorCallElements.getArgumentsXClosureParserRuleCall_5_0(), arguments.get(1), 1);
+			} else if (isXShortClosure(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
 				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
 			} else {
 				int diff = 0;
-				if (arguments.size() == 1 && isBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+				if (isBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
 					diff = 1;
 				}
 				if (arguments.size() - diff > 0)
 					acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_0_0(), arguments.get(0), 0);
-				for (int i = 1; i < arguments.size(); i++)
+				for (int i = 1; i < arguments.size() - diff; i++)
 					acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), arguments.get(i), i);
 				if (diff != 0) {
 					int lastIdx = arguments.size() - 1;

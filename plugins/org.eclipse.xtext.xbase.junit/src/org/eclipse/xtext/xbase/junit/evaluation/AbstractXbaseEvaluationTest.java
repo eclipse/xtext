@@ -241,7 +241,8 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testShortCircuitBooleanExpression_03() throws Exception {
-		String expr = "{ val i = newArrayList(false,true).iterator" +
+		String expr = 
+				"{ val i = newArrayList(false,true).iterator" +
 				"  if (i.next && i.next)" +
 				"    throw new NullPointerException()" +
 				"  else" +
@@ -251,9 +252,30 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testShortCircuitBooleanExpression_04() throws Exception {
-		String expr = "{ val i = newArrayList(true,false).iterator" +
+		String expr = 
+				"{ val i = newArrayList(true,false).iterator" +
 				"  if (i.next || i.next)" +
 				"     i.next" +
+				"}";
+		assertEvaluatesTo(false, expr);
+	}
+	
+	@Test public void testShortCircuitBooleanExpression_05() throws Exception {
+		String expr = 
+				"{ " +
+				"  val i = newArrayList(true, true, true).iterator" +
+				"  if (i.next && i.next && i.next)" +
+				"     i.hasNext" +
+				"}";
+		assertEvaluatesTo(false, expr);
+	}
+	
+	@Test public void testShortCircuitBooleanExpression_06() throws Exception {
+		String expr = 
+				"{ " +
+				"  val i = newArrayList(false, true).iterator" +
+				"  if (i.next && i.next || i.next)" +
+				"     i.hasNext" +
 				"}";
 		assertEvaluatesTo(false, expr);
 	}
@@ -750,6 +772,41 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testConstructorCall_04() throws Exception {
 		assertEvaluatesTo("", "new java.lang.String");
+	}
+	
+	@Test public void testConstructorCall_05() throws Exception {
+		assertEvaluatesTo("twoArgs:12", 
+				"new testdata.ClosureClient2(|'1') [|'2'].value");
+	}
+	
+	@Test public void testConstructorCall_06() throws Exception {
+		assertEvaluatesTo("varArgs:1", 
+				"new testdata.ClosureClient2(|'1').value");
+	}
+	
+	@Test public void testConstructorCall_07() throws Exception {
+		assertEvaluatesTo("varArgs:1", 
+				"new testdata.ClosureClient2 [|'1'].value");
+	}
+	
+	@Test public void testConstructorCall_08() throws Exception {
+		assertEvaluatesTo("varArgs:", 
+				"(new testdata.ClosureClient2).value");
+	}
+	
+	@Test public void testConstructorCall_09() throws Exception {
+		assertEvaluatesTo("varArgs:", 
+				"{new testdata.ClosureClient2}.value");
+	}
+	
+	@Test public void testConstructorCall_10() throws Exception {
+		assertEvaluatesTo("varArgs:123", 
+				"new testdata.ClosureClient2([|'1'],[|'2']) [|'3'].value");
+	}
+	
+	@Test public void testConstructorCall_11() throws Exception {
+		assertEvaluatesTo("varArgs:", 
+				"(((((new testdata.ClosureClient2))).value))");
 	}
 	
 	@Test public void testAssignment_01() throws Exception {
@@ -1463,6 +1520,86 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  val procedure = client.asProcedure(|result.add('literal'))" +
 				"  client.useRunnable(procedure)" +
 				"  result" +
+				"}");
+	}
+	
+	@Test public void testClosure_19() throws Exception {
+		assertEvaluatesTo("twoArgs:12", 
+				"{" +
+				"  val client = new testdata.ClosureClient()" +
+				"  client.concatStrings(|'1') [|'2']" +
+				"}");
+	}
+	
+	@Test public void testClosure_20() throws Exception {
+		assertEvaluatesTo("varArgs:1", 
+				"{" +
+				"  val client = new testdata.ClosureClient()" +
+				"  client.concatStrings(|'1')" +
+				"}");
+	}
+	
+	@Test public void testClosure_21() throws Exception {
+		assertEvaluatesTo("varArgs:1", 
+				"{" +
+				"  val client = new testdata.ClosureClient()" +
+				"  client.concatStrings [|'1']" +
+				"}");
+	}
+	
+	@Test public void testClosure_22() throws Exception {
+		assertEvaluatesTo("varArgs:", 
+				"{" +
+				"  val client = new testdata.ClosureClient()" +
+				"  client.concatStrings" +
+				"}");
+	}
+	
+	@Test public void testClosure_23() throws Exception {
+		assertEvaluatesTo("varArgs:123", 
+				"{" +
+				"  val client = new testdata.ClosureClient()" +
+				"  client.concatStrings([|'1'],[|'2']) [|'3']" +
+				"}");
+	}
+	
+	@Test public void testClosure_24() throws Exception {
+		assertEvaluatesTo("twoArgs:12", 
+				"{" +
+				"  val it = new testdata.ClosureClient()" +
+				"  concatStrings(|'1') [|'2']" +
+				"}");
+	}
+	
+	@Test public void testClosure_25() throws Exception {
+		assertEvaluatesTo("varArgs:1", 
+				"{" +
+				"  val it = new testdata.ClosureClient()" +
+				"  concatStrings(|'1')" +
+				"}");
+	}
+	
+	@Test public void testClosure_26() throws Exception {
+		assertEvaluatesTo("varArgs:1", 
+				"{" +
+				"  val it = new testdata.ClosureClient()" +
+				"  concatStrings [|'1']" +
+				"}");
+	}
+	
+	@Test public void testClosure_27() throws Exception {
+		assertEvaluatesTo("varArgs:", 
+				"{" +
+				"  val it = new testdata.ClosureClient()" +
+				"  concatStrings" +
+				"}");
+	}
+	
+	@Test public void testClosure_28() throws Exception {
+		assertEvaluatesTo("varArgs:123", 
+				"{" +
+				"  val it = new testdata.ClosureClient()" +
+				"  concatStrings([|'1'],[|'2']) [|'3']" +
 				"}");
 	}
 	
