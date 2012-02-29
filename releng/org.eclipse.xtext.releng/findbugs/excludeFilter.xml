@@ -1,4 +1,5 @@
 <FindBugsFilter>
+	<!-- antlr generated -->
 	<Match>
 		<Class name="~.*\.antlr\.internal.*" />
 	</Match>
@@ -17,12 +18,15 @@
 		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
 	</Match>
 	
+	<!-- Deprecated -->
 	<Match>
 		<Class name="~org\.eclipse\.xtext\.generator\.MergeableManifes.*" />
 	</Match>
 	<Match>
 		<Class name="org.eclipse.xtext.generator.ecore2xtext.FormatterFragment" />
 	</Match>
+	
+	<!-- Xtend generated: guava Objects.equal(x,null) should be a valid construct -->
 	<Match>
 		<Package name="org.eclipse.xtext.generator.serializer" />
 		<Bug pattern="EC_NULL_ARG" />
@@ -32,6 +36,11 @@
 		<Bug pattern="EC_NULL_ARG" />
 	</Match>
 	
+	<!-- API base line, can't workaround -->
+	<Match>
+		<Class name="org.eclipse.xtext.util.ITextRegion" />
+		<Bug pattern="IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION" />
+	</Match>
 	
 	
 	<!-- Some Examples:
