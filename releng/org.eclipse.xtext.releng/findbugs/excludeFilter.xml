@@ -17,6 +17,21 @@
 		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
 	</Match>
 	
+	<Match>
+		<Class name="~org\.eclipse\.xtext\.generator\.MergeableManifes.*" />
+	</Match>
+	<Match>
+		<Class name="org.eclipse.xtext.generator.ecore2xtext.FormatterFragment" />
+	</Match>
+	<Match>
+		<Package name="org.eclipse.xtext.generator.serializer" />
+		<Bug pattern="EC_NULL_ARG" />
+	</Match>
+	<Match>
+		<Package name="org.eclipse.xtext.xbase.compiler" />
+		<Bug pattern="EC_NULL_ARG" />
+	</Match>
+	
 	
 	
 	<!-- Some Examples:
