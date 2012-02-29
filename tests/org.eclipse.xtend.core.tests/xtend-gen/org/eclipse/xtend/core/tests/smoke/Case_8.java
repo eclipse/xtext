@@ -49,8 +49,7 @@ public class Case_8 {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("com.acme.SimpleElement as FooBar {}");
     _builder.newLine();
-    EObject _parseAcme = this.parseAcme(_builder);
-    final EObject element = _parseAcme;
+    final EObject element = this.parseAcme(_builder);
     QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(element);
     String _string = _fullyQualifiedName.toString();
     Assert.assertEquals("FooBar", _string);

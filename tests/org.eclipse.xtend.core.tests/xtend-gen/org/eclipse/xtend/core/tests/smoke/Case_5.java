@@ -19,8 +19,7 @@ public class Case_5 {
       int _indexOf = this.s.indexOf(i);
       boolean _equals = (_indexOf == 0);
       if (_equals) {
-        boolean _contains = this.myList.contains(Integer.valueOf(i));
-        return _contains;
+        return this.myList.contains(Integer.valueOf(i));
       }
       Arrays.<Integer>asList(Integer.valueOf(i));
       Collections.<Integer>singletonList(Integer.valueOf(i));

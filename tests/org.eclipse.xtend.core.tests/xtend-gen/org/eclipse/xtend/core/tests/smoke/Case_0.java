@@ -11,8 +11,7 @@ public class Case_0 {
   public String foo(final String a, final String b) {
     String _xblockexpression = null;
     {
-      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-      ArrayList<Object> list = _newArrayList;
+      ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
       int _size = list.size();
       int _minus = (_size - 1);
       Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);

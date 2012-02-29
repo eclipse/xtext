@@ -16,7 +16,6 @@ public class TestClass1 {
   }
   
   public Integer testFunction4() {
-    int _multiply = (6 * 7);
-    return Integer.valueOf(_multiply);
+    return Integer.valueOf((6 * 7));
   }
 }

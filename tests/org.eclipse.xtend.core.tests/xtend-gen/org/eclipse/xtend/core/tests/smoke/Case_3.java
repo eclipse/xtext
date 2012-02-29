@@ -62,8 +62,7 @@ public class Case_3 {
     List<Character> _xblockexpression = null;
     {
       char[] _charArray = "abc".toCharArray();
-      List<Character> _list = IterableExtensions.<Character>toList(((Iterable<Character>) ((Iterable<Character>)Conversions.doWrapArray(_charArray))));
-      List<Character> x = _list;
+      List<Character> x = IterableExtensions.<Character>toList(((Iterable<Character>) ((Iterable<Character>)Conversions.doWrapArray(_charArray))));
       _xblockexpression = (x);
     }
     return _xblockexpression;
