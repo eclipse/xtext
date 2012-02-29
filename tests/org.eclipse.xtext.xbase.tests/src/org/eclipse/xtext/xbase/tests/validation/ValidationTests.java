@@ -75,24 +75,32 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
 	}
 	
-	@Test public void testSideEffectFreeExpressionInBlock_01() throws Exception {
+	@Test public void testNonStatementExpressionInBlock_01() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x 42 }");
-		helper.assertError(expr, XFEATURE_CALL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+		helper.assertError(expr, XFEATURE_CALL, INVALID_INNER_EXPRESSION);
 	}
 	
-	@Test public void testSideEffectFreeExpressionInBlock_02() throws Exception {
+	@Test public void testNonStatementExpressionInBlock_02() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' 'bar' 42 }");
-		helper.assertError(expr, XSTRING_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+		helper.assertError(expr, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
 	}
 	
-	@Test public void testSideEffectFreeExpressionInBlock_03() throws Exception {
+	@Test public void testNonStatementExpressionInBlock_03() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' 42 x }");
-		helper.assertError(expr, XNUMBER_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+		helper.assertError(expr, XNUMBER_LITERAL, INVALID_INNER_EXPRESSION);
 	}
 	
-	@Test public void testSideEffectFreeExpressionInBlock_04() throws Exception {
+	@Test public void testNonStatementExpressionInBlock_04() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x as String 42 }");
-		helper.assertError(expr, XCASTED_EXPRESSION, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+		helper.assertError(expr, XCASTED_EXPRESSION, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_01() throws Exception {
+		XExpression expr = expression("for (x : newArrayList('x','y')) { 42 }");
+		helper.assertError(expr, XBLOCK_EXPRESSION, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_02() throws Exception {
+		XExpression expr = expression("while (23 > 45) 42");
+		helper.assertError(expr, XNUMBER_LITERAL, INVALID_INNER_EXPRESSION);
 	}
 	
 	@Test public void testLocalVarWithArguments() throws Exception {
@@ -195,12 +203,12 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testVoidInReturnExpression_02() throws Exception {
-		XExpression expression = expression("return if (true) while(false) 'foo'+'bar'");
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length");
 		helper.assertNoErrors(expression);
 	}
 	
 	@Test public void testVoidInReturnExpression_03() throws Exception {
-		XExpression expression = expression("return if (true) while(false) 'foo'+'bar' else 'zonk'");
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else 'zonk'");
 		helper.assertNoErrors(expression);
 	}
 	
@@ -293,6 +301,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Test public void testClosureInBlock() throws Exception {
 		checkInnerExpressionInBlock("[a|a]", XCLOSURE);
 	}
+	
+	@Test public void testBinaryOpInBlock() throws Exception {
+		checkInnerExpressionInBlock("1 + 3", XBINARY_OPERATION);
+	}
+	
+	@Test public void testLiteralInBlockInBlock() throws Exception {
+		checkInnerExpressionInBlock("{ {1} }", XBLOCK_EXPRESSION);
+	}
 
 	@Test public void testThrowsInBlock_01() throws Exception {
 		XExpression block = expression("{ throw new Exception() }");
@@ -313,13 +329,12 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression block = expression("{ if (true) throw new Exception() else throw new Exception() new Object()}");
 		helper.assertError(block, XbasePackage.Literals.XCONSTRUCTOR_CALL, UNREACHABLE_CODE, "unreachable", "expression");
 	}
-
+	
 	protected void checkInnerExpressionInBlock(String innerExpression, EClass innerExpressionClass) throws Exception {
 		XExpression validExpression = expression("{ " + innerExpression + " }");
 		helper.assertNoError(validExpression, INVALID_INNER_EXPRESSION);
 		XExpression invalidExpression = expression("{ " + innerExpression + " " + innerExpression + " }");
-		helper.assertError(invalidExpression, innerExpressionClass, INVALID_INNER_EXPRESSION, "block", "last",
-				"element");
+		helper.assertError(invalidExpression, innerExpressionClass, INVALID_INNER_EXPRESSION, "allowed", "context");
 	}
 	
 	@Test public void testInvalidEarlyExit_01() throws Exception {
