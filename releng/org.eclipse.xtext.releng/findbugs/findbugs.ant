@@ -12,7 +12,7 @@
 	<target name="findbugs">
 		<findbugs home="${findbugs.home}" output="xml:withMessages" outputFile="findbugs.xml"
 			jvmargs="${fbJvmArgs}" effort="${effort}" timeout="1800000"
-			excludefilter="${ant.file}/../excludeFilter.xml">
+			excludefilter="${ant.file}/../excludeFilter.xml" maxRank="15">
 			
 			<sourcePath>
 				<fileset dir="${srcLocation}" id="src">
