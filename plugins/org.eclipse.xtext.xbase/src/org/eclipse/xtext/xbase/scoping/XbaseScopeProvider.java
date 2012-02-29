@@ -510,7 +510,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 					parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
 				}
 			}
-			return parentScope = createLocalVarScopeForJvmOperation((JvmOperation)context, parentScope);
+			return createLocalVarScopeForJvmOperation((JvmOperation)context, parentScope);
 		}
 		if (context instanceof JvmConstructor) {
 			JvmConstructor constructor = (JvmConstructor) context;
@@ -518,7 +518,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				JvmDeclaredType declaredType = constructor.getDeclaringType();
 				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
 			}
-			return parentScope = createLocalVarScopeForJvmConstructor((JvmConstructor)context, parentScope);
+			return createLocalVarScopeForJvmConstructor((JvmConstructor)context, parentScope);
 		}
 		if (context instanceof JvmField) {
 			JvmField field = (JvmField) context;
