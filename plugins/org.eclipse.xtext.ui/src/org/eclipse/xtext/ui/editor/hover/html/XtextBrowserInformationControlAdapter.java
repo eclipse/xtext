@@ -22,7 +22,6 @@ import org.eclipse.swt.graphics.Point;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @since 2.3
  */
-@SuppressWarnings("restriction")
 public class XtextBrowserInformationControlAdapter implements IXtextBrowserInformationControl {
 	private final BrowserInformationControl control;
 

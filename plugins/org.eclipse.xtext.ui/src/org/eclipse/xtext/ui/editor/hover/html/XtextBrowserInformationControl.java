@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Shell;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @since 2.3
  */
-@SuppressWarnings("restriction")
 public class XtextBrowserInformationControl extends BrowserInformationControl implements
 		IXtextBrowserInformationControl {
 

@@ -64,10 +64,7 @@ public class TextViewerOperationAction extends TextViewerAction {
 	 * @see TextViewerAction#TextViewerAction(ResourceBundle, String, ITextViewer)
 	 */
 	public TextViewerOperationAction(ResourceBundle bundle, String prefix, ITextViewer viewer, int operationCode) {
-		super(bundle, prefix, viewer);
-		fOperationCode = operationCode;
-		fAllowUpdate = true;
-		update();
+		this(bundle, prefix, viewer, operationCode, false);
 	}
 
 	/**
@@ -92,7 +89,8 @@ public class TextViewerOperationAction extends TextViewerAction {
 	 */
 	public TextViewerOperationAction(ResourceBundle bundle, String prefix, ITextViewer viewer, int operationCode,
 			boolean runsOnReadOnly) {
-		super(bundle, prefix, viewer);
+		super(bundle, prefix);
+		setViewer(viewer);
 		fOperationCode = operationCode;
 		fRunsOnReadOnly = runsOnReadOnly;
 		fAllowUpdate = true;

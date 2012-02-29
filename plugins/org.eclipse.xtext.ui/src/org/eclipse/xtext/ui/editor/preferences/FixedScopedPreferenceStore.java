@@ -329,7 +329,6 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 	 *            a list of scope contexts to use when searching, or
 	 *            <code>null</code>
 	 */
-	@SuppressWarnings("restriction")
 	public void setSearchContexts(IScopeContext[] scopes) {
 		if (scopes == null) {
 			return;

@@ -351,10 +351,10 @@ public class EmbeddedEditorActions {
 		setAction(ITextEditorActionConstants.QUICK_ASSIST, action);
 	}
 	
-	protected void setAction(String actionID, IAction action) {
+	protected void setAction(String actionID, final IAction action) {
 		Assert.isNotNull(actionID);
 		if (action == null) {
-			action= allActions.remove(actionID);
+			allActions.remove(actionID);
 		} else {
 			if (action.getId() == null)
 				action.setId(actionID); // make sure the action ID has been set

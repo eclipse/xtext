@@ -18,7 +18,6 @@ import org.eclipse.swt.browser.LocationListener;
  * @noimplement This interface is not intended to be implemented by clients.
  * @since 2.3
  */
-@SuppressWarnings("restriction")
 public interface IXtextBrowserInformationControl extends IInformationControl {
 	
 	/**

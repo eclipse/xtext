@@ -53,7 +53,6 @@ public class CompareInputResourceProvider implements IResourceProvider {
 		return resource;
 	}
 
-	@SuppressWarnings("restriction")
 	protected IResource getResource(ITypedElement typedElement) {
 		IResource result = null;
 		if (typedElement instanceof IResourceProvider) {
