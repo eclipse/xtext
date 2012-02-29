@@ -175,8 +175,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public HashSet<Grammar> getGrammars(final IConstraintElement ele) {
-    HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
-    final HashSet<Grammar> result = _newHashSet;
+    final HashSet<Grammar> result = CollectionLiterals.<Grammar>newHashSet();
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(ele, null));
     if (!_notEquals) {
@@ -366,8 +365,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
           Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
           String _qualifiedName = this.sequencer.getQualifiedName(_head);
-          String _imported_1 = file.imported(_qualifiedName);
-          final String superGrammar = _imported_1;
+          final String superGrammar = file.imported(_qualifiedName);
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("@Inject");
@@ -628,8 +626,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     EClass _type_2 = c.getType();
-    String _eObjectCast = file.getEObjectCast(_type_2);
-    final String cast = _eObjectCast;
+    final String cast = file.getEObjectCast(_type_2);
     _builder.newLineIfNotEmpty();
     {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet(this.grammar, null);
@@ -734,8 +731,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             for(final IFeatureInfo f_1 : _xifexpression_1) {
               _builder.append("\t");
               IConstraintElement[] _assignments = f_1.getAssignments();
-              IConstraintElement _get = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
-              final IConstraintElement assignment = _get;
+              final IConstraintElement assignment = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("feeder.accept(grammarAccess.");

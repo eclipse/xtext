@@ -49,8 +49,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   private XbaseCompiler compiler;
   
   protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
-    XBlockExpression _block = m.getBlock();
-    final XBlockExpression e = _block;
+    final XBlockExpression e = m.getBlock();
     Resource _eResource = e.eResource();
     String _name = this.name(_eResource);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
@@ -137,18 +136,15 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   
   public String name(final Resource res) {
     URI _uRI = res.getURI();
-    String _lastSegment = _uRI.lastSegment();
-    final String s = _lastSegment;
+    final String s = _uRI.lastSegment();
     int _length = s.length();
     int _length_1 = ".xbase".length();
     int _minus = (_length - _length_1);
-    String _substring = s.substring(0, _minus);
-    return _substring;
+    return s.substring(0, _minus);
   }
   
   public boolean containsReturn(final XExpression expr) {
-    Collection<ExitPoint> _exitPoints = this.computer.getExitPoints(((XExpression) expr));
-    final Collection<ExitPoint> exitPoints = _exitPoints;
+    final Collection<ExitPoint> exitPoints = this.computer.getExitPoints(((XExpression) expr));
     for (final ExitPoint point : exitPoints) {
       XExpression _expression = point.getExpression();
       if ((_expression instanceof XReturnExpression)) {

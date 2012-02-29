@@ -52,14 +52,11 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testEmptyAnnotation() {
     try {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
-      XExpression _expression = this.expression("\'Foo\'");
-      final XExpression e = _expression;
-      XAnnotation _createXAnnotation = f.createXAnnotation();
-      final XAnnotation anno = _createXAnnotation;
+      final XExpression e = this.expression("\'Foo\'");
+      final XAnnotation anno = f.createXAnnotation();
       JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
-      JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
-      final JvmGenericType type = _createJvmGenericType;
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
       JvmAnnotationType _annotationType = anno.getAnnotationType();
@@ -76,15 +73,12 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testStringAnnotation() {
     try {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
-      XExpression _expression = this.expression("\'Foo\'");
-      final XExpression e = _expression;
-      XAnnotation _createXAnnotation = f.createXAnnotation();
-      final XAnnotation anno = _createXAnnotation;
+      final XExpression e = this.expression("\'Foo\'");
+      final XAnnotation anno = f.createXAnnotation();
       JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
       anno.setValue(e);
-      JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
-      final JvmGenericType type = _createJvmGenericType;
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
       JvmAnnotationType _annotationType = anno.getAnnotationType();
@@ -108,18 +102,14 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testStringAnnotationWithNullExpression() {
     try {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
-      XExpression _expression = this.expression("\'Foo\'");
-      final XExpression context = _expression;
-      XAnnotation _createXAnnotation = f.createXAnnotation();
-      final XAnnotation anno = _createXAnnotation;
+      final XExpression context = this.expression("\'Foo\'");
+      final XAnnotation anno = f.createXAnnotation();
       JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, context);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
-      XAnnotationElementValuePair _createXAnnotationElementValuePair = f.createXAnnotationElementValuePair();
-      final XAnnotationElementValuePair pair = _createXAnnotationElementValuePair;
+      final XAnnotationElementValuePair pair = f.createXAnnotationElementValuePair();
       EList<XAnnotationElementValuePair> _elementValuePairs = anno.getElementValuePairs();
       _elementValuePairs.add(pair);
-      JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
-      final JvmGenericType type = _createJvmGenericType;
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
       JvmAnnotationType _annotationType = anno.getAnnotationType();
@@ -141,23 +131,18 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testStringArrayAnnotation() {
     try {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
-      XExpression _expression = this.expression("\'Foo\'");
-      final XExpression e = _expression;
-      XExpression _expression_1 = this.expression("\'Bar\'");
-      final XExpression e2 = _expression_1;
-      XAnnotation _createXAnnotation = f.createXAnnotation();
-      final XAnnotation anno = _createXAnnotation;
+      final XExpression e = this.expression("\'Foo\'");
+      final XExpression e2 = this.expression("\'Bar\'");
+      final XAnnotation anno = f.createXAnnotation();
       JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, e);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
-      XAnnotationValueArray _createXAnnotationValueArray = f.createXAnnotationValueArray();
-      final XAnnotationValueArray array = _createXAnnotationValueArray;
+      final XAnnotationValueArray array = f.createXAnnotationValueArray();
       anno.setValue(array);
       EList<XExpression> _values = array.getValues();
       _values.add(e);
       EList<XExpression> _values_1 = array.getValues();
       _values_1.add(e2);
-      JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
-      final JvmGenericType type = _createJvmGenericType;
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
       JvmAnnotationType _annotationType = anno.getAnnotationType();
@@ -188,17 +173,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testStringArrayAnnotationWithNullExpression() {
     try {
       final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
-      XExpression _expression = this.expression("\"foo\"");
-      final XExpression context = _expression;
-      XAnnotation _createXAnnotation = f.createXAnnotation();
-      final XAnnotation anno = _createXAnnotation;
+      final XExpression context = this.expression("\"foo\"");
+      final XAnnotation anno = f.createXAnnotation();
       JvmType _findDeclaredType = this.references.findDeclaredType(Inject.class, context);
       anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
-      XAnnotationValueArray _createXAnnotationValueArray = f.createXAnnotationValueArray();
-      final XAnnotationValueArray array = _createXAnnotationValueArray;
+      final XAnnotationValueArray array = f.createXAnnotationValueArray();
       anno.setValue(array);
-      JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
-      final JvmGenericType type = _createJvmGenericType;
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
       JvmAnnotationType _annotationType = anno.getAnnotationType();
@@ -219,15 +200,13 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   @Test
   public void testAnnotationCreation() {
     try {
-      XExpression _expression = this.expression("\'foo\'");
-      final XExpression e = _expression;
+      final XExpression e = this.expression("\'foo\'");
       final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
           public void apply(final JvmAnnotationType it) {
             JvmTypesBuilderTest.this._jvmTypesBuilder.setDocumentation(it, "Foo");
           }
         };
-      JvmAnnotationType _annotationType = this._jvmTypesBuilder.toAnnotationType(e, "foo.bar.MyAnnotation", _function);
-      final JvmAnnotationType anno = _annotationType;
+      final JvmAnnotationType anno = this._jvmTypesBuilder.toAnnotationType(e, "foo.bar.MyAnnotation", _function);
       String _packageName = anno.getPackageName();
       Assert.assertEquals("foo.bar", _packageName);
       String _simpleName = anno.getSimpleName();
@@ -242,8 +221,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   @Test
   public void testInterfaceCreation() {
     try {
-      XExpression _expression = this.expression("\'foo\'");
-      final XExpression e = _expression;
+      final XExpression e = this.expression("\'foo\'");
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
@@ -251,8 +229,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
             _superTypes.add(_newTypeRef);
           }
         };
-      JvmGenericType _interface = this._jvmTypesBuilder.toInterface(e, "foo.bar.MyAnnotation", _function);
-      final JvmGenericType anno = _interface;
+      final JvmGenericType anno = this._jvmTypesBuilder.toInterface(e, "foo.bar.MyAnnotation", _function);
       boolean _isInterface = anno.isInterface();
       Assert.assertTrue(_isInterface);
       String _packageName = anno.getPackageName();
@@ -270,8 +247,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   @Test
   public void testEnumCreation() {
     try {
-      XExpression _expression = this.expression("\'foo\'");
-      final XExpression e = _expression;
+      final XExpression e = this.expression("\'foo\'");
       final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
           public void apply(final JvmEnumerationType it) {
             JvmTypesBuilderTest.this._jvmTypesBuilder.setDocumentation(it, "Foo");
@@ -283,8 +259,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
             _members_1.add(_enumerationLiteral_1);
           }
         };
-      JvmEnumerationType _enumerationType = this._jvmTypesBuilder.toEnumerationType(e, "MyEnum", _function);
-      final JvmEnumerationType myEnum = _enumerationType;
+      final JvmEnumerationType myEnum = this._jvmTypesBuilder.toEnumerationType(e, "MyEnum", _function);
       String _packageName = myEnum.getPackageName();
       Assert.assertNull(_packageName);
       String _simpleName = myEnum.getSimpleName();
@@ -308,8 +283,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   
   @Test
   public void testSetBody() {
-    JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
-    final JvmOperation op = _createJvmOperation;
+    final JvmOperation op = this.typesFactory.createJvmOperation();
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
         public void apply(final ITreeAppendable it) {
           StringConcatenation _builder = new StringConcatenation();

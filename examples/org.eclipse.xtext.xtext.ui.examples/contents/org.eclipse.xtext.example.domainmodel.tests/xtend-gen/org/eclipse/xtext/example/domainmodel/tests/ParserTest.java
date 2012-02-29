@@ -47,8 +47,7 @@ public class ParserTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      DomainModel _parse = this._parseHelper.parse(_builder);
-      final DomainModel model = _parse;
+      final DomainModel model = this._parseHelper.parse(_builder);
       EList<AbstractElement> _elements = model.getElements();
       AbstractElement _get = _elements.get(0);
       final PackageDeclaration pack = ((PackageDeclaration) _get);

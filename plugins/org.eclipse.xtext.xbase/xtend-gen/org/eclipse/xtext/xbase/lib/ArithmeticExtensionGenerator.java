@@ -71,8 +71,7 @@ public class ArithmeticExtensionGenerator {
             CharSequence _xblockexpression = null;
             {
               String _absolutePath = file.getAbsolutePath();
-              String _readFileIntoString = Files.readFileIntoString(_absolutePath);
-              final String content = _readFileIntoString;
+              final String content = Files.readFileIntoString(_absolutePath);
               StringConcatenation _builder = new StringConcatenation();
               String _startMarker = this.startMarker();
               int _indexOf = content.indexOf(_startMarker);
@@ -351,7 +350,7 @@ public class ArithmeticExtensionGenerator {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
-    _builder.append("@Inline(value=\"$3.pow($1, $2)\", imported=Math.class, when=InlineContext.ALWAYS)");
+    _builder.append("@Inline(value=\"$3.pow($1, $2)\", imported=Math.class, statementExpression=true)");
     _builder.newLine();
     _builder.append("public static double ");
     QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.POWER);
@@ -382,8 +381,7 @@ public class ArithmeticExtensionGenerator {
     } else {
       String _xblockexpression = null;
       {
-        HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet(o1, o2);
-        final HashSet<String> operands = _newHashSet;
+        final HashSet<String> operands = CollectionLiterals.<String>newHashSet(o1, o2);
         String _xifexpression_1 = null;
         boolean _contains_1 = operands.contains("double");
         if (_contains_1) {
@@ -414,7 +412,7 @@ public class ArithmeticExtensionGenerator {
   
   public String article(final String it) {
     String _switchResult = null;
-    String _lowerCase = it==null?(String)null:it.toLowerCase();
+    String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
     final String __valOfSwitchOver = _substring;
     boolean matched = false;

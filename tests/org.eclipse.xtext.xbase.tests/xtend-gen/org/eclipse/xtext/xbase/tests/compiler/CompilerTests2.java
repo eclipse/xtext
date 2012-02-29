@@ -76,7 +76,9 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder.append("foo::bar::SubOfClassWithStatics::MY_STATIC_METHOD");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("return foo.bar.SubOfClassWithStatics.MY_STATIC_METHOD();");
+    _builder_1.append("String _MY_STATIC_METHOD = foo.bar.SubOfClassWithStatics.MY_STATIC_METHOD();");
+    _builder_1.newLine();
+    _builder_1.append("return _MY_STATIC_METHOD;");
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }

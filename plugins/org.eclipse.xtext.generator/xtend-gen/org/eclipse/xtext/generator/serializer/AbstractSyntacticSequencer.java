@@ -212,8 +212,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
             return Boolean.valueOf(_isEObjectRule);
           }
         };
-      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-      final Iterable<AbstractRule> rules = _filter;
+      final Iterable<AbstractRule> rules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
       final Function1<AbstractRule,Iterable<RuleCall>> _function_1 = new Function1<AbstractRule,Iterable<RuleCall>>() {
           public Iterable<RuleCall> apply(final AbstractRule r) {
             List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
@@ -237,8 +236,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
-      Iterable<RuleCall> _flatten = Iterables.<RuleCall>concat(_map);
-      final Iterable<RuleCall> calls = _flatten;
+      final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
       final Function1<RuleCall,AbstractRule> _function_2 = new Function1<RuleCall,AbstractRule>() {
           public AbstractRule apply(final RuleCall e) {
             AbstractRule _rule = e.getRule();

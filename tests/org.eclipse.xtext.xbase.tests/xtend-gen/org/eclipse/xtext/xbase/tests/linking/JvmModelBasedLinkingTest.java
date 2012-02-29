@@ -36,10 +36,8 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   @Test
   public void testLinkToParameter() {
     try {
-      XExpression _expression = this.expression("x", false);
-      final XExpression expr = _expression;
-      Resource _eResource = expr.eResource();
-      final Resource resource = _eResource;
+      final XExpression expr = this.expression("x", false);
+      final Resource resource = expr.eResource();
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
@@ -72,8 +70,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
     try {
       XExpression _expression = this.expression("x", false);
       final XFeatureCall expr = ((XFeatureCall) _expression);
-      Resource _eResource = expr.eResource();
-      final Resource resource = _eResource;
+      final Resource resource = expr.eResource();
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
@@ -112,8 +109,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
     try {
       XExpression _expression = this.expression("x", false);
       final XFeatureCall expr = ((XFeatureCall) _expression);
-      Resource _eResource = expr.eResource();
-      final Resource resource = _eResource;
+      final Resource resource = expr.eResource();
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
@@ -152,8 +148,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
     try {
       XExpression _expression = this.expression("x", false);
       final XFeatureCall expr = ((XFeatureCall) _expression);
-      Resource _eResource = expr.eResource();
-      final Resource resource = _eResource;
+      final Resource resource = expr.eResource();
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {

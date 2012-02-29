@@ -83,14 +83,13 @@ public class Context2DotRenderer {
       String _contextName = this.nameFunction.getContextName(_key);
       String _plus_3 = (_plus_2 + _contextName);
       String _plus_4 = (_plus_3 + "_");
-      String _plus_5 = (_plus_4 + name);
-      final String fn = _plus_5;
+      final String fn = (_plus_4 + name);
       String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
       String _asPath = this.naming.asPath(_basePackageRuntime);
-      String _plus_6 = (_asPath + "/serializer/");
-      String _plus_7 = (_plus_6 + fn);
-      String _plus_8 = (_plus_7 + ".dot");
-      _xblockexpression = (_plus_8);
+      String _plus_5 = (_asPath + "/serializer/");
+      String _plus_6 = (_plus_5 + fn);
+      String _plus_7 = (_plus_6 + ".dot");
+      _xblockexpression = (_plus_7);
     }
     return _xblockexpression;
   }

@@ -53,10 +53,8 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   public void testInference() {
     final Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean> _function = new Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean>() {
         public void apply(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final Boolean preIndexing) {
-          JvmGenericType _class = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
-          final JvmGenericType firstType = _class;
-          JvmGenericType _class_1 = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
-          final JvmGenericType secondType = _class_1;
+          final JvmGenericType firstType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
+          final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
           Resource _eResource = secondType.eResource();
           Assert.assertNull(_eResource);
           IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);

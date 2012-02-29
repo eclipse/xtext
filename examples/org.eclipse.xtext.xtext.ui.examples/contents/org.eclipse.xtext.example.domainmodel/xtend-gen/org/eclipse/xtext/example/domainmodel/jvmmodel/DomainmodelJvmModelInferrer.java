@@ -55,8 +55,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
             _superTypes.add(_cloneWithProxies);
           }
           JvmTypeReference _newTypeRef = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(it);
-          JvmTypeReference _newTypeRef_1 = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(entity, Procedure1.class, _newTypeRef);
-          final JvmTypeReference procedure = _newTypeRef_1;
+          final JvmTypeReference procedure = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(entity, Procedure1.class, _newTypeRef);
           EList<JvmMember> _members = it.getMembers();
           String _name = entity.getName();
           final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
@@ -77,8 +76,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
             };
           JvmConstructor _constructor = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toConstructor(entity, _name, _function);
           _members.add(_constructor);
-          ArrayList<JvmField> _newArrayList = CollectionLiterals.<JvmField>newArrayList();
-          final ArrayList<JvmField> fields = _newArrayList;
+          final ArrayList<JvmField> fields = CollectionLiterals.<JvmField>newArrayList();
           EList<Feature> _features = entity.getFeatures();
           for (final Feature f : _features) {
             boolean matched = false;
@@ -88,8 +86,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 matched=true;
                 String _name_1 = _property.getName();
                 JvmTypeReference _type = _property.getType();
-                JvmField _field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(_property, _name_1, _type);
-                final JvmField field = _field;
+                final JvmField field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(_property, _name_1, _type);
                 fields.add(field);
                 EList<JvmMember> _members_1 = it.getMembers();
                 _members_1.add(field);

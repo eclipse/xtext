@@ -17,8 +17,7 @@ public class CheckExceptionValiationTest extends AbstractJvmModelTest {
   @Test
   public void testSimple() {
     try {
-      XExpression _expression = this.expression("throw new java.io.IOException()", false);
-      final XExpression expression = _expression;
+      final XExpression expression = this.expression("throw new java.io.IOException()", false);
       this.helper.assertError(expression, Literals.XTHROW_EXPRESSION, IssueCodes.UNHANDLED_EXCEPTION);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

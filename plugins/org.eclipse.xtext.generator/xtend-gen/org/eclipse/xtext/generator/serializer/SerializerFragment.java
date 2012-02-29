@@ -109,8 +109,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     String _name_4 = ISerializer.class.getName();
     String _name_5 = Serializer.class.getName();
     bf.addTypeToType(_name_4, _name_5);
-    Set<Binding> _bindings = bf.getBindings();
-    return _bindings;
+    return bf.getBindings();
   }
   
   public void generate(final Xtend2ExecutionContext ctx) {
@@ -146,7 +145,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
     String _packageName = this.semanticSequencer.getPackageName();
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_packageName);
-    return _newArrayList;
+    return CollectionLiterals.<String>newArrayList(_packageName);
   }
 }
