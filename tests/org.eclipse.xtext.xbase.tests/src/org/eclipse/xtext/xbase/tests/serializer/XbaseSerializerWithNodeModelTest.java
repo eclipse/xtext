@@ -12,6 +12,8 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -59,6 +61,17 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 	@Before
 	public void setUp() throws Exception {
 		injector.injectMembers(this);
+	}
+	
+	@Ignore @Test
+	@Override
+	public void testReturnExpression_07() throws Exception {
+		super.testReturnExpression_07();
+	}
+	@Ignore @Test
+	@Override
+	public void testReturnExpression_08() throws Exception {
+		super.testReturnExpression_08();
 	}
 
 }
