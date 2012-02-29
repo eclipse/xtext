@@ -110,7 +110,7 @@ public abstract class AbstractXbaseCompiler {
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, Collections.<JvmTypeReference>emptySet());
-		boolean needsToBeWrapped = earlyExit || needsSneakyThrow || isVariableDeclarationRequired(obj, appendable);
+		boolean needsToBeWrapped = earlyExit || needsSneakyThrow || !canCompileToJavaExpression(obj, appendable);
 		if (needsToBeWrapped) {
 			appendable.openScope();
 			try {
@@ -164,7 +164,7 @@ public abstract class AbstractXbaseCompiler {
 		}
 		return parentAppendable;
 	}
-
+	
 	protected void generateCheckedExceptionHandling(XExpression obj, ITreeAppendable appendable) {
 		String name = appendable.declareSyntheticVariable(new Object(), "_e");
 		appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
@@ -182,6 +182,8 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected boolean canCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
+		if (appendable.hasName(expression))
+			return true;
 		if (isVariableDeclarationRequired(expression, appendable)) {
 			return false;
 		}
@@ -189,7 +191,8 @@ public abstract class AbstractXbaseCompiler {
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (next instanceof XExpression) {
-				if (isVariableDeclarationRequired((XExpression)next, appendable))
+				XExpression expr2 = (XExpression) next;
+				if (!appendable.hasName(expr2) && isVariableDeclarationRequired(expr2, appendable))
 					return false;
 			}
 		}
