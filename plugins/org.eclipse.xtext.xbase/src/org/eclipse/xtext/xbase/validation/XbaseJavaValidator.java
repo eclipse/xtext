@@ -52,9 +52,9 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -65,13 +65,10 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
-import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -160,32 +157,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return typeConformanceCheckedReferences;
 	}
 
-	@Check
-	public void checkNoSideffectFreeExpressionsInBlockExpression(XBlockExpression blockExpression) {
-		for (int i = 0; i < blockExpression.getExpressions().size() - 1; i++) {
-			XExpression expr = blockExpression.getExpressions().get(i);
-			if (isSideEffectFree(expr)) {
-				error("The expression does not cause any side effects and therefore doesn't do anything in this context.",
-						expr, null, INSIGNIFICANT_INDEX, IssueCodes.SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
-			}
-		}
-	}
-
-	// TODO extract and put in separate class for general reuse (see also #checkIsValidConstructorArgument and AbstractXbaseCompiler#isVariableDeclarationRequired)
-	protected boolean isSideEffectFree(XExpression expr) {
-		if (expr instanceof XMemberFeatureCall) {
-			return ((XMemberFeatureCall) expr).getFeature() instanceof JvmField;
-		}
-		if (expr instanceof XFeatureCall) {
-			return !(((XFeatureCall) expr).getFeature() instanceof JvmExecutable);
-		}
-		if (expr instanceof XCastedExpression) {
-			return isSideEffectFree(((XCastedExpression) expr).getTarget());
-		}
-		return expr instanceof XStringLiteral || expr instanceof XTypeLiteral || expr instanceof XNumberLiteral
-				|| expr instanceof XNullLiteral || expr instanceof XBooleanLiteral || expr instanceof XClosure;
-	}
-	
 	@Check
 	protected void checkNumberFormat(XNumberLiteral literal) {
 		try {
@@ -579,15 +550,29 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, MISSING_TYPE);
 		}
 	}
-
+	
 	@Check
 	public void checkInnerExpressions(XBlockExpression block) {
 		for (int i = 0; i < block.getExpressions().size() - 1; ++i) {
 			XExpression expr = block.getExpressions().get(i);
-			if (expressionHelper.isLiteral(expr)) {
-				error("Literals can only appear as the last element of a block expression", expr, null,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INNER_EXPRESSION);
-			}
+			mustBeJavaStatementExpression(expr);
+		}
+	}
+	
+	@Check
+	public void checkForExpression(XForLoopExpression loop) {
+		mustBeJavaStatementExpression(loop.getEachExpression());
+	}
+	
+	@Check
+	public void checkWhileExpression(XAbstractWhileExpression loop) {
+		mustBeJavaStatementExpression(loop.getBody());
+	}
+
+	protected void mustBeJavaStatementExpression(XExpression expr) {
+		if (! expressionHelper.isJavaStatementExpression(expr)) {
+			error("This expression is not allowed in this context, since it doesn't cause any side effects.", expr, null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INNER_EXPRESSION);
 		}
 	}
 

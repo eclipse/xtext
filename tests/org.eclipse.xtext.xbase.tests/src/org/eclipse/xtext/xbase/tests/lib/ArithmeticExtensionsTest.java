@@ -39,12 +39,52 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testPrimitiveIntBindings() throws Exception {
-		XExpression expression = expression("{-1+2**3*4/5%6<9 10<=11 12>13 13>=14 15!=16 17==18}", true);
+		XExpression expression = expression("{-1+2**3*4/5%6<9}", true);
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveIntBindings_01() throws Exception {
+		XExpression expression = expression("{10<=11}", true);
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveIntBindings_02() throws Exception {
+		XExpression expression = expression("{12>13}", true);
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveIntBindings_03() throws Exception {
+		XExpression expression = expression("{13>=14}", true);
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveIntBindings_04() throws Exception {
+		XExpression expression = expression("{15!=16}", true);
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveIntBindings_05() throws Exception {
+		XExpression expression = expression("{17==18}", true);
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 
 	@Test public void testPrimitiveDoubleBindings() throws Exception {
-		XExpression expression = expression("{val double x=1; -x+x**x*x/x%x<x  x<=x x>x x>=x x!=x x==x}", true); 
+		XExpression expression = expression("{val double x=1; -x+x**x*x/x%x<x}", true); 
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveDoubleBindings_01() throws Exception {
+		XExpression expression = expression("{val double x=1; x<=x }", true); 
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveDoubleBindings_02() throws Exception {
+		XExpression expression = expression("{val double x=1; x>x}", true); 
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveDoubleBindings_03() throws Exception {
+		XExpression expression = expression("{val double x=1; x>=x}", true); 
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveDoubleBindings_04() throws Exception {
+		XExpression expression = expression("{val double x=1; x!=x}", true); 
+		assertOnlyPrimitveOperationsBound(expression);
+	}
+	@Test public void testPrimitiveDoubleBindings_05() throws Exception {
+		XExpression expression = expression("{val double x=1; x==x}", true); 
 		assertOnlyPrimitveOperationsBound(expression);
 	}
 	

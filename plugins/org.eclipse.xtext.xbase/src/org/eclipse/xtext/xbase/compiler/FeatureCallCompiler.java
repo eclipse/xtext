@@ -18,7 +18,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -55,13 +54,11 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.lib.internal.Inline;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -130,12 +127,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			if (!isReferenced) {
 				b.newLine();
-				if (!isStatementExpression(expr, b)) {
+				if (!expressionHelper.isJavaStatementExpression(expr)) {
 					b.append("/*");
 				}
 				featureCalltoJavaExpression(expr, b, false);
 				b.append(";");
-				if (!isStatementExpression(expr, b)) {
+				if (!expressionHelper.isJavaStatementExpression(expr)) {
 					b.append("*/");
 				}
 			} else if (isVariableDeclarationRequired(expr, b)) {
@@ -147,30 +144,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				declareFreshLocalVariable(expr, b, later);
 			}
 		}
-	}
-
-	protected boolean isStatementExpression(XAbstractFeatureCall expr, @SuppressWarnings("unused") ITreeAppendable b) {
-		if (expr instanceof XMemberFeatureCall)
-			return true;
-		if (expr instanceof XAssignment)
-			return true;
-		if (expr.getFeature() instanceof JvmFormalParameter)
-			return false;
-		if (expr.getFeature() instanceof JvmField)
-			return false;
-		if (expr.getFeature() instanceof XVariableDeclaration)
-			return false;
-		JvmAnnotationReference annotation = findInlineAnnotation(expr);
-		if (annotation != null) {
-			EList<JvmAnnotationValue> values = annotation.getValues();
-			for (JvmAnnotationValue value : values) {
-				if ("statementExpression".equals(value.getValueName())) {
-					JvmBooleanAnnotationValue booleanValue = (JvmBooleanAnnotationValue) value;
-					return booleanValue.getValues().get(0);
-				}
-			}
-		}
-		return true;
 	}
 
 	protected void _toJavaStatement(final XFeatureCall expr, final ITreeAppendable b, boolean isReferenced) {
@@ -477,7 +450,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		}
 		if (isStatic(call.getFeature())) {
-			if (isInlined(call)) {
+			if (expressionHelper.findInlineAnnotation(call) != null) {
 				return false;
 			}
 			b.append(((JvmFeature) call.getFeature()).getDeclaringType());
@@ -505,23 +478,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected boolean isInlined(XAbstractFeatureCall featureCall) {
-		JvmAnnotationReference inlineAnnotation = findInlineAnnotation(featureCall);
-		return inlineAnnotation != null;
-	}
+//	protected boolean isInlined(XAbstractFeatureCall featureCall) {
+//		JvmAnnotationReference inlineAnnotation = findInlineAnnotation(featureCall);
+//		return inlineAnnotation != null;
+//	}
 
-	protected JvmAnnotationReference findInlineAnnotation(XAbstractFeatureCall featureCall) {
-		JvmIdentifiableElement feature = featureCall.getFeature();
-		if (feature instanceof JvmOperation) {
-			List<JvmAnnotationReference> annotations = ((JvmOperation) feature).getAnnotations();
-			for (JvmAnnotationReference annotation : annotations) {
-				if (getTypeReferences().is(annotation.getAnnotation(), Inline.class)) {
-					return annotation;
-				}
-			}
-		}
-		return null;
-	}
+
 
 	protected String getDefaultLiteral(JvmPrimitiveType primitiveType) {
 		final String name = primitiveType.getIdentifier();
@@ -588,7 +550,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void appendFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
-		if (isInlined(call)) {
+		if (expressionHelper.isInlined(call)) {
 			appendInlineFeatureCall(call, b);
 			return;
 		}
@@ -615,7 +577,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void appendInlineFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
-		JvmAnnotationReference inlineAnnotation = findInlineAnnotation(call);
+		JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(call);
 		String formatString = null;
 		List<JvmTypeReference> importedTypes = Lists.newArrayListWithCapacity(2);
 		for(JvmAnnotationValue annotationValue: inlineAnnotation.getValues()) {
