@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib;
 
 import org.eclipse.xtext.xbase.lib.internal.Inline;
-import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
 import com.google.common.base.Objects;
 
@@ -42,7 +41,7 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
-	@Inline(value="$3.equal($1, $2)", imported=Objects.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.equal($1, $2)", imported=Objects.class, statementExpression=true)
 	public static boolean operator_equals(Object a, Object b) {
 		return Objects.equal(a, b);
 	}
@@ -73,7 +72,7 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return a {@link Pair}. Never <code>null</code>.
 	 */
-	@Inline(value="$3.$4of($1, $2)", imported=Pair.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.$4of($1, $2)", imported=Pair.class, statementExpression=true)
 	public static <A, B> Pair<A, B> operator_mappedTo(A a, B b) {
 		return Pair.of(a, b);
 	}

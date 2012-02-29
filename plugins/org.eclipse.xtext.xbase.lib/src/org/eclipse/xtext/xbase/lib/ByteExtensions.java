@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib;
 
 import org.eclipse.xtext.xbase.lib.internal.Inline;
-import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
 /**
  * This is an extension library for {@link Byte} numbers.
@@ -181,7 +180,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, double b) {
 		return Math.pow(a, b);
 	}
@@ -337,7 +336,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, float b) {
 		return Math.pow(a, b);
 	}
@@ -493,7 +492,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, long b) {
 		return Math.pow(a, b);
 	}
@@ -649,7 +648,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, int b) {
 		return Math.pow(a, b);
 	}
@@ -805,7 +804,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, char b) {
 		return Math.pow(a, b);
 	}
@@ -961,7 +960,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, short b) {
 		return Math.pow(a, b);
 	}
@@ -1117,7 +1116,7 @@ public class ByteExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(byte a, byte b) {
 		return Math.pow(a, b);
 	}

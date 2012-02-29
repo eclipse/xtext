@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib;
 
 import org.eclipse.xtext.xbase.lib.internal.Inline;
-import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
 /**
  * This is an extension library for {@link Double floating point numbers}, e.g. <code>double</code> or <code>Double</code>.
@@ -271,7 +270,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, double b) {
 		return Math.pow(a, b);
 	}
@@ -427,7 +426,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, float b) {
 		return Math.pow(a, b);
 	}
@@ -583,7 +582,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, long b) {
 		return Math.pow(a, b);
 	}
@@ -739,7 +738,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, int b) {
 		return Math.pow(a, b);
 	}
@@ -895,7 +894,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, char b) {
 		return Math.pow(a, b);
 	}
@@ -1051,7 +1050,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, short b) {
 		return Math.pow(a, b);
 	}
@@ -1207,7 +1206,7 @@ public class DoubleExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(double a, byte b) {
 		return Math.pow(a, b);
 	}

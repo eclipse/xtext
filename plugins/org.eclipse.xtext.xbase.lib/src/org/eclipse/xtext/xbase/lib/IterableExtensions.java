@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
-import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.Inline;
 
@@ -59,7 +58,7 @@ public class IterableExtensions {
 	 *            the second iterable. May not be <code>null</code>.
 	 * @return a combined iterable. Never <code>null</code>.
 	 */
-	@Inline(value="$3.$4concat($1, $2)", imported=Iterables.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.$4concat($1, $2)", imported=Iterables.class, statementExpression=true)
 	public static <T> Iterable<T> operator_plus(Iterable<? extends T> a, Iterable<? extends T> b) {
 		return Iterables.concat(a, b);
 	}
@@ -324,7 +323,7 @@ public class IterableExtensions {
 	 * @return an unmodifiable iterable containing all elements of the original iterable that were of the requested
 	 *         type. Never <code>null</code>.
 	 */
-	@Inline(value="$3.$4filter($1, $2)", imported=Iterables.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.$4filter($1, $2)", imported=Iterables.class, statementExpression=true)
 	public static <T> Iterable<T> filter(Iterable<?> unfiltered, Class<T> type) {
 		return Iterables.filter(unfiltered, type);
 	}
@@ -370,7 +369,7 @@ public class IterableExtensions {
 	 *            the to be flattened iterables. May not be <code>null</code>.
 	 * @return an iterable that provides the concatenated values of the input elements. Never <code>null</code>.
 	 */
-	@Inline(value="$2.$3concat($1)", imported=Iterables.class, when=InlineContext.ALWAYS)
+	@Inline(value="$2.$3concat($1)", imported=Iterables.class, statementExpression=true)
 	public static <T> Iterable<T> flatten(Iterable<? extends Iterable<? extends T>> inputs) {
 		return Iterables.concat(inputs);
 	}

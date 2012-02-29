@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.lib;
 import java.util.Iterator;
 
 import org.eclipse.xtext.xbase.lib.internal.Inline;
-import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
 /**
  * This is an extension library for {@link Integer integral numbers}, e.g. <code>int</code> or <code>Integer</code>.
@@ -30,7 +29,7 @@ public class IntegerExtensions {
 	 * @return an iterable of integral numbers. Never <code>null</code>.
 	 * @since 2.3
 	 */
-	@Inline(value="$3.upTo($1, $2)", imported=IntegerExtensions.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.upTo($1, $2)", imported=IntegerExtensions.class, statementExpression=true)
 	public static Iterable<Integer> operator_upTo(final int a, final int b) {
 		return upTo(a, b);
 	}
@@ -366,7 +365,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, double b) {
 		return Math.pow(a, b);
 	}
@@ -522,7 +521,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, float b) {
 		return Math.pow(a, b);
 	}
@@ -678,7 +677,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, long b) {
 		return Math.pow(a, b);
 	}
@@ -834,7 +833,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, int b) {
 		return Math.pow(a, b);
 	}
@@ -990,7 +989,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, char b) {
 		return Math.pow(a, b);
 	}
@@ -1146,7 +1145,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, short b) {
 		return Math.pow(a, b);
 	}
@@ -1302,7 +1301,7 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(int a, byte b) {
 		return Math.pow(a, b);
 	}

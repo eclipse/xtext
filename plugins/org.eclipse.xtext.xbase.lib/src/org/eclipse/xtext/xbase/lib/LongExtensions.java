@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib;
 
 import org.eclipse.xtext.xbase.lib.internal.Inline;
-import org.eclipse.xtext.xbase.lib.internal.InlineContext;
 
 /**
  * This is an extension library for {@link Long} numbers.
@@ -281,7 +280,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, double b) {
 		return Math.pow(a, b);
 	}
@@ -437,7 +436,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, float b) {
 		return Math.pow(a, b);
 	}
@@ -593,7 +592,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, long b) {
 		return Math.pow(a, b);
 	}
@@ -749,7 +748,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, int b) {
 		return Math.pow(a, b);
 	}
@@ -905,7 +904,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, char b) {
 		return Math.pow(a, b);
 	}
@@ -1061,7 +1060,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, short b) {
 		return Math.pow(a, b);
 	}
@@ -1217,7 +1216,7 @@ public class LongExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 	public static double operator_power(long a, byte b) {
 		return Math.pow(a, b);
 	}

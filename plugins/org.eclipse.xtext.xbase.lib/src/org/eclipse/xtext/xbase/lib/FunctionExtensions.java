@@ -7,7 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import org.eclipse.xtext.xbase.lib.Functions.*;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
+import org.eclipse.xtext.xbase.lib.Functions.Function3;
+import org.eclipse.xtext.xbase.lib.Functions.Function4;
+import org.eclipse.xtext.xbase.lib.Functions.Function5;
+import org.eclipse.xtext.xbase.lib.Functions.Function6;
 
 /**
  * This is an extension library for {@link Functions functions}, e.g. closures.

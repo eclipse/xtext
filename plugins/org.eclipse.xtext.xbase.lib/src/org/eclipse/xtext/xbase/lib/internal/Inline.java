@@ -13,34 +13,32 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Allows to describe how a certain static function should be inlined by the
- * Xbase compiler.
- *
+ * Allows to describe how a certain static function should be inlined by the Xbase compiler.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value={ ElementType.METHOD })
+@Target(value = { ElementType.METHOD })
 public @interface Inline {
-	
+
 	/**
-	 * The inline format string.
-	 * Placeholders like {@code $1, $2} etc can be used where
-	 * the {@code 1..n}parameters of the inlined method are used for {@code $1} to {@code $n}
-	 * and the {@link #imported()} types are used for subsequent indizes.
-	 * The last index {@code $n} can be used to insert the type parameters
-	 * of the original declaration.
+	 * The inline format string. Placeholders like {@code $1, $2} etc can be used where the {@code 1..n}parameters of
+	 * the inlined method are used for {@code $1} to {@code $n} and the {@link #imported()} types are used for
+	 * subsequent indizes. The last index {@code $n} can be used to insert the type parameters of the original
+	 * declaration.
 	 */
 	String value();
-	
+
 	/**
 	 * Types that should be imported to inline the operation.
 	 */
 	Class<?>[] imported() default {};
-	
+
 	/**
-	 * Allows to limit or widen the locations where a certain method invocation
-	 * should be inlined. Default is {@link InlineContext#EXPRESSION}.
+	 * whether the inlined expression is a statement expression (see <a
+	 * href="http://java.sun.com/docs/books/jls/third_edition/html/statements.html#14.8">14.8 - Statement Expressions in
+	 * Java Language Specification, Third Edition</a> )
 	 */
-	InlineContext when() default InlineContext.EXPRESSION;
-	
+	boolean statementExpression() default false;
+
 }
