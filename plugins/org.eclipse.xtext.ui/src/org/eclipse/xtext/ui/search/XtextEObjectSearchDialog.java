@@ -50,7 +50,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Knut Wannheden
  */
-@SuppressWarnings("restriction")
 public class XtextEObjectSearchDialog extends ListDialog {
 
 	protected Text searchControl;
