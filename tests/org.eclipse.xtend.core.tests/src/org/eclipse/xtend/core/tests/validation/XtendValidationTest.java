@@ -801,6 +801,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_DUPLICATE);
 	}
 	
+	@Test public void testImportCollision() throws Exception {
+		XtendClass clazz = clazz("import java.util.List import java.awt.List class X { private List sb def foo(){sb}}");
+		helper.assertError(clazz.eContainer(), XTEND_IMPORT, IMPORT_COLLISION);
+	}
+	
 	@Test public void testImportWildcard() throws Exception {
 		XtendClass clazz = clazz("import java.util.* import java.util.List class X { private List sb def foo(){sb}}");
 		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
