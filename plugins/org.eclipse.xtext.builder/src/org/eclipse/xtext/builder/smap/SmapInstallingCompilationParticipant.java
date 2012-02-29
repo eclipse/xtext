@@ -55,7 +55,6 @@ public class SmapInstallingCompilationParticipant extends CompilationParticipant
 				if (rootTraceRegion == null)
 					continue;
 				String smap = smapSupport.generateSmap(rootTraceRegion, information.getLocalURI().lastSegment());
-				System.out.println(smap);
 				
 				// install into bytecode
 				Region region = new Region();
