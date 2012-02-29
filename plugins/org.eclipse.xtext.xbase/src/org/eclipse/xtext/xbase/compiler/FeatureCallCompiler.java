@@ -18,6 +18,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -129,12 +130,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			if (!isReferenced) {
 				b.newLine();
-				if (!canOccureInStatementContext(expr, b)) {
+				if (!isStatementExpression(expr, b)) {
 					b.append("/*");
 				}
 				featureCalltoJavaExpression(expr, b, false);
 				b.append(";");
-				if (!canOccureInStatementContext(expr, b)) {
+				if (!isStatementExpression(expr, b)) {
 					b.append("*/");
 				}
 			} else if (isVariableDeclarationRequired(expr, b)) {
@@ -148,7 +149,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected boolean canOccureInStatementContext(XAbstractFeatureCall expr, @SuppressWarnings("unused") ITreeAppendable b) {
+	protected boolean isStatementExpression(XAbstractFeatureCall expr, @SuppressWarnings("unused") ITreeAppendable b) {
 		if (expr instanceof XMemberFeatureCall)
 			return true;
 		if (expr instanceof XAssignment)
@@ -159,6 +160,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return false;
 		if (expr.getFeature() instanceof XVariableDeclaration)
 			return false;
+		JvmAnnotationReference annotation = findInlineAnnotation(expr);
+		if (annotation != null) {
+			EList<JvmAnnotationValue> values = annotation.getValues();
+			for (JvmAnnotationValue value : values) {
+				if ("statementExpression".equals(value.getValueName())) {
+					JvmBooleanAnnotationValue booleanValue = (JvmBooleanAnnotationValue) value;
+					return booleanValue.getValues().get(0);
+				}
+			}
+		}
 		return true;
 	}
 
@@ -494,36 +505,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-
-
 	protected boolean isInlined(XAbstractFeatureCall featureCall) {
 		JvmAnnotationReference inlineAnnotation = findInlineAnnotation(featureCall);
-		if (inlineAnnotation != null) {
-			return true;
-//			List<JvmAnnotationValue> values = inlineAnnotation.getValues();
-//			for (JvmAnnotationValue value : values) {
-//				if ("when".equals(value.getValueName())) {
-//					JvmEnumAnnotationValue enumValue = (JvmEnumAnnotationValue) value;
-//					if (!enumValue.getValues().isEmpty()) {
-//						JvmEnumerationLiteral literal = enumValue.getValues().get(0);
-//						if (InlineContext.ALWAYS.name().equals(literal.getSimpleName())) {
-//							return true;
-//						}
-//						if (InlineContext.EXPRESSION.name().equals(literal.getSimpleName())) {
-//							return true;
-//						}
-//					} else {
-//						// bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=334943
-//						// we have to hardcode the default since it is not available in JDT representation source types
-//						// see also org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest.testDefaultAnnotationAnnotationValueByReference()
-//						if (referenced) {
-//							return true;
-//						}
-//					}
-//				}
-//			}
-		}
-		return false;
+		return inlineAnnotation != null;
 	}
 
 	protected JvmAnnotationReference findInlineAnnotation(XAbstractFeatureCall featureCall) {

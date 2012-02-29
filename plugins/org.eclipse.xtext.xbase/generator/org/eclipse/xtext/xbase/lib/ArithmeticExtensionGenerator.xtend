@@ -120,7 +120,7 @@ class ArithmeticExtensionGenerator {
 		 * @return   <code>Math.pow(a, b)</code>
 		 * @since «since»
 		 */
-		@Inline(value="$3.pow($1, $2)", imported=Math.class, when=InlineContext.ALWAYS)
+		@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
 		public static double «POWER.methodName»(«op1» a, «op2» b) {
 			return Math.pow(a, b);
 		}

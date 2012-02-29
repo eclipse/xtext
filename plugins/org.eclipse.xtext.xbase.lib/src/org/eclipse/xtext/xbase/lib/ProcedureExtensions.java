@@ -7,7 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import org.eclipse.xtext.xbase.lib.Procedures.*;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure4;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure5;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure6;
 
 /**
  * This is an extension library for {@link Procedures procedures}, e.g. side-effect only-closures.
