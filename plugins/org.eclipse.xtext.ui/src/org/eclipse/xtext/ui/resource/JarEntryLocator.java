@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker.TraversalState;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class JarEntryLocator {
 
 	private static final Logger log = Logger.getLogger(JarEntryLocator.class);

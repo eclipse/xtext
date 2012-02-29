@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 
-@SuppressWarnings("restriction")
 public class JdtClasspathUriResolver implements IClasspathUriResolver {
 
 	private IJavaElement javaElement;
