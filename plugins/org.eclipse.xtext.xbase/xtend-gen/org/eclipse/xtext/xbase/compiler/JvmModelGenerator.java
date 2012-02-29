@@ -803,6 +803,12 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _decreaseIndentation_2 = appendable.decreaseIndentation();
           ITreeAppendable _newLine_2 = _decreaseIndentation_2.newLine();
           _newLine_2.append("}");
+        } else {
+          if ((op instanceof JvmConstructor)) {
+            ITreeAppendable _append_3 = appendable.append("{");
+            ITreeAppendable _newLine_3 = _append_3.newLine();
+            _newLine_3.append("}");
+          }
         }
       }
     }
