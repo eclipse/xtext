@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Before;
-import org.junit.Test;
 
 import com.google.common.base.Supplier;
 import com.google.inject.Guice;
@@ -35,11 +34,6 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
-	
-	// checked exceptions not supported by this implementation
-	@Override
-	@Test public void testThrowExpression_01() {
-	}
 	
 	static Injector injector = new XbaseStandaloneSetup() {
 		@Override

@@ -404,6 +404,8 @@ class JvmModelGenerator implements IGenerator {
 				appendable.append(op.simpleName)
 				appendable.append('is not implemented");')
 				appendable.decreaseIndentation.newLine.append("}")
+			} else if (op instanceof JvmConstructor) {
+				appendable.append("{").newLine.append("}")
 			}
 		}
 	}
