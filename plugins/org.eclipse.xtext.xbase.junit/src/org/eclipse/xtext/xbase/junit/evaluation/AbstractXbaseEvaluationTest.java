@@ -914,7 +914,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 
 	@Test public void testForLoop_03() throws Exception {
-		assertEvaluatesWithException(ClassCastException.class, "{for(x: 'abc' as Object as java.util.List<Character>) null null}");
+		assertEvaluatesWithException(ClassCastException.class, "{for(x: 'abc' as Object as java.util.List<Character>) x.hashCode() null}");
 	}
 	
 	@Test public void testForLoop_04() throws Exception {
