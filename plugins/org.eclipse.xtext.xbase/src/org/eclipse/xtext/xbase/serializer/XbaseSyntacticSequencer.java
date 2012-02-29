@@ -16,6 +16,9 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynStateType;
+import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -46,7 +49,6 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 					acceptUnassignedKeyword(kw, kw.getValue(), null);
 			}
 		}
-
 		acceptNodes(transition, nodes);
 	}
 	
@@ -107,11 +109,27 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 					}
 				}
 			}
+			
 			XConstructorCall constructorCall = (XConstructorCall) semanticObject;
 			if (constructorCall.eContainer() instanceof XMemberFeatureCall) {
 				XMemberFeatureCall container = (XMemberFeatureCall) constructorCall.eContainer();
 				if (container.getMemberCallTarget() == constructorCall && !container.isNullSafe() && !container.isSpreading()) {
 					if (constructorCall.getArguments().isEmpty() && constructorCall.getTypeArguments().isEmpty()) {
+						if (nodes != null) {
+							ISynNavigable fromState = transition;
+							RuleCallStack stack = contexts.peek().getStack().clone();
+							List<ISynState> path = fromState.getShortestStackpruningPathTo(grammarAccess.getXParenthesizedExpressionAccess().getRightParenthesisKeyword_2(), stack);
+							if (path != null) {
+								for(ISynState synState: path) {
+									if (synState.getType() != SynStateType.UNASSIGNED_PARSER_RULE_EXIT) {
+										if (synState.getGrammarElement() == grammarAccess.getXParenthesizedExpressionAccess().getRightParenthesisKeyword_2()) {
+											super.emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(semanticObject, transition,	nodes);
+											return;
+										}		
+									}
+								}
+							}
+						}
 						acceptUnassignedKeyword(kw, kw.getValue(), null);
 						return;		
 					}
