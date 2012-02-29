@@ -4,16 +4,15 @@ import java.lang.reflect.Method;
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
-import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 import com.google.common.base.Supplier;
@@ -34,12 +33,6 @@ import com.google.inject.Provider;
 @InjectWith(InjectorProviderCustom.class)
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
-	@Override
-	@Ignore("checked exceptions are not supported by the domain model language")
-	public void testThrowExpression_01() throws Exception {
-		super.testThrowExpression_01();
-	}
-	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
@@ -59,6 +52,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		javaCompiler.addClassPathOfClass(Functions.class); // xbase.lib
 		javaCompiler.addClassPathOfClass(Provider.class);  // google guice
 		javaCompiler.addClassPathOfClass(Supplier.class);  // google collect
+		javaCompiler.addClassPathOfClass(javax.inject.Inject.class);  // javax inject
 	}
 
 	protected Object invokeXbaseExpression(String expression) throws Exception {

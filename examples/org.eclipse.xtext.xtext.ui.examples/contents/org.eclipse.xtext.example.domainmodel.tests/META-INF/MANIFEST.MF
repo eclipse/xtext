@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.ui.workbench;bundle-version="3.5.2";resolution:=optional,
  org.eclipse.xtext.common.types;bundle-version="2.0.0",
  org.eclipse.xtext.xbase.junit;bundle-version="2.0.0",
- org.eclipse.xtext.xbase;bundle-version="2.0.0"
+ org.eclipse.xtext.xbase;bundle-version="2.0.0",
+ org.hamcrest.core;bundle-version="1.1.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.junit;version="4.5.0",
