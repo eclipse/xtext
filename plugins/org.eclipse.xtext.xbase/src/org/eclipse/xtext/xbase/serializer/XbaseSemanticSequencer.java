@@ -225,7 +225,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	}
 
 	protected boolean isXShortClosure(List<?> values, EReference reference, INodesForEObjectProvider nodes) {
-		if (values.isEmpty() || values.size() > 2)
+		if (values.isEmpty() || values.size() > 2 || !(values.get(0) instanceof XClosure))
 			return false;
 		XClosure closure = (XClosure) values.get(0);
 		if (!closure.isExplicitSyntax())
