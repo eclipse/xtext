@@ -490,7 +490,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		// declare variable
 		b.openPseudoScope();
-		JvmTypeReference type = getTypeProvider().getType(expr);
+		JvmTypeReference type = getTypeForVariableDeclaration(expr);
 		String switchResultName = b.declareSyntheticVariable(Tuples.pair(expr,"result"), "_switchResult");
 		if (isReferenced) {
 			b.newLine();

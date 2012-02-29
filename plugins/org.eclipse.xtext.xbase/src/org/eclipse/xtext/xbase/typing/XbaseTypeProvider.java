@@ -781,6 +781,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgu
 			final JvmTypeReference unconverted = getType(object.getDefault(), rawExpectation, rawType);
 			if (unconverted != null)
 				returnTypes.add(unconverted);
+		} else {
+			returnTypes.add(getTypeReferences().createAnyTypeReference(object));
 		}
 		return getCommonType(returnTypes);
 	}

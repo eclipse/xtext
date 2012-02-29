@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
@@ -215,8 +216,8 @@ public class TypeConformanceComputer {
 //		}
 		// TODO handle all primitives
 		// TODO handle arrays
-		if (containsPrimitive(types)) {
-			List<JvmTypeReference> withoutPrimitives = replacePrimitives(types);
+		if (containsPrimitiveOrAnyReferences(types)) {
+			List<JvmTypeReference> withoutPrimitives = replacePrimitivesAndRemoveAnyReferences(types);
 			return getCommonSuperType(withoutPrimitives);
 		}
 		JvmTypeReference firstType = types.get(0);
@@ -297,17 +298,20 @@ public class TypeConformanceComputer {
 		return firstType.getType();
 	}
 
-	protected List<JvmTypeReference> replacePrimitives(List<JvmTypeReference> types) {
+	protected List<JvmTypeReference> replacePrimitivesAndRemoveAnyReferences(List<JvmTypeReference> types) {
 		List<JvmTypeReference> result = Lists.newArrayList();
 		for(JvmTypeReference type: types) {
-			result.add(primitives.asWrapperTypeIfPrimitive(type));
+			if (!(type instanceof JvmAnyTypeReference))
+				result.add(primitives.asWrapperTypeIfPrimitive(type));
 		}
 		return result;
 	}
 
-	protected boolean containsPrimitive(List<JvmTypeReference> types) {
+	protected boolean containsPrimitiveOrAnyReferences(List<JvmTypeReference> types) {
 		for(JvmTypeReference type: types) {
 			if (isPrimitiveType(type))
+				return true;
+			if (type instanceof JvmAnyTypeReference)
 				return true;
 		}
 		return false;

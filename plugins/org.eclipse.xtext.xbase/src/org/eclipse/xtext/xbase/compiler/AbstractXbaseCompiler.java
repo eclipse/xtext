@@ -433,13 +433,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void declareFreshLocalVariable(XExpression expr, ITreeAppendable b, Later expression) {
-		JvmTypeReference type = getTypeProvider().getType(expr);
-		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
-		if (type instanceof JvmAnyTypeReference) {
-			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
-			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
-				type = expectedType;
-		}
+		JvmTypeReference type = getTypeForVariableDeclaration(expr);
 		final String proposedName = makeJavaIdentifier(getFavoriteVariableName(expr));
 		final String varName = b.declareSyntheticVariable(expr, proposedName);
 		b.newLine();
@@ -447,6 +441,17 @@ public abstract class AbstractXbaseCompiler {
 		b.append(" ").append(varName).append(" = ");
 		expression.exec(b);
 		b.append(";");
+	}
+
+	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
+		JvmTypeReference type = getTypeProvider().getType(expr);
+		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
+		if (type instanceof JvmAnyTypeReference) {
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
+				type = expectedType;
+		}
+		return type;
 	}
 
 	/**
