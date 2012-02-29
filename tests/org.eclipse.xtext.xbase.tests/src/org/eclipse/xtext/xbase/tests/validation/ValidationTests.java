@@ -609,4 +609,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 			.add(new BigInteger("1")).toString(10) + "L");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
 	}
+	
+	@Test public void testBug_362271 () throws Exception {
+		XExpression expression = expression("switch null {\n" + 
+				"  case null : [Object it|it]\n" + 
+				"  case null : [Integer it|it]\n" + 
+				"}");
+		helper.assertNoErrors(expression);
+	}
+	
+	
 }
