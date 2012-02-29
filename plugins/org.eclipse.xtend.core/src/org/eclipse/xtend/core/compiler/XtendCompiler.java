@@ -21,7 +21,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -254,7 +253,7 @@ public class XtendCompiler extends XbaseCompiler {
 	public void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
-		String variableName = b.declareSyntheticVariable(Tuples.pair(richString, "result"), "_builder");
+		String variableName = b.declareSyntheticVariable(richString, "_builder");
 		b.newLine();
 		serialize(type, richString, b);
 		b.append(" ");
@@ -275,7 +274,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	public void _toJavaExpression(RichString richString, ITreeAppendable b) {
-		b.append(getVarName(Tuples.pair(richString, "result"), b));
+		b.append(getVarName(richString, b));
 	}
 
 }
