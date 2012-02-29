@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
@@ -32,12 +33,14 @@ public class ValidateActionHandler extends AbstractHandler {
 	private IResourceValidator resourceValidator;
 	@Inject 
 	private MarkerCreator markerCreator;
+	@Inject
+	private MarkerTypeProvider markerTypeProvider;
 	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
 			MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(xtextEditor.getResource(),
-					markerCreator);
+					markerCreator, markerTypeProvider);
 			IXtextDocument xtextDocument = xtextEditor.getDocument();
 			ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument, markerIssueProcessor,
 					CheckMode.ALL);
