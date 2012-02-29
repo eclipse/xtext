@@ -70,10 +70,14 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			this.stack = new RuleCallStack();
 		}
 
-		protected INode getLastNode() {
+		public INode getLastNode() {
 			return lastNode;
 		}
-
+		
+		public RuleCallStack getStack() {
+			return stack;
+		}
+		
 		protected void setLastNode(INode lastNode) {
 			this.lastNode = lastNode;
 		}
