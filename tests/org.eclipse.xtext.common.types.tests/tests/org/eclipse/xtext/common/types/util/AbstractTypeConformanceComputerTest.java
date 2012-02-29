@@ -913,12 +913,20 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 				ref(LinkedList.class, ref(String.class)),
 				ref(ArrayList.class, ref(String.class)));
 	}
+	@Test
+	public void testCommonSuperType_37() throws Exception {
+		assertCommonSuperType(
+				"java.util.AbstractList<java.lang.String> & java.io.Serializable & java.lang.Cloneable",
+				ref(LinkedList.class, ref(String.class)),
+				ref(ArrayList.class, ref(String.class)));
+	}
 	
 	@Test public void testBug343100_01() throws Exception {
 		assertCommonSuperType(
 				"java.lang.Class<? extends java.lang.Object>",
 				ref(Class.class, ref(Void.class)),
-				ref(Class.class, ref(String.class)));
+				ref(Class.class, ref(String.class)),
+				any());
 	}
 	
 	@Test public void testBug343100_02() throws Exception {
