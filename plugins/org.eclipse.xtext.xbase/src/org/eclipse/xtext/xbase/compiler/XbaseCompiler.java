@@ -489,6 +489,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		// declare variable
+		b.openPseudoScope();
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String switchResultName = b.declareSyntheticVariable(Tuples.pair(expr,"result"), "_switchResult");
 		if (isReferenced) {
@@ -607,10 +608,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.decreaseIndentation();
 			b.newLine().append("}");
 		}
+		b.closeScope();
+		// reset the reference
+		b.declareSyntheticVariable(expr, switchResultName);
 	}
 
 	protected void _toJavaExpression(XSwitchExpression expr, ITreeAppendable b) {
-		b.append(getVarName(Tuples.pair(expr,"result"), b));
+		b.append(getVarName(expr, b));
 	}
 
 	@Inject
@@ -688,6 +692,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		if (expr instanceof XCastedExpression) {
+			return false;
+		}
+		if (expr instanceof XInstanceOfExpression) {
+			return false;
+		}
 		final EObject container = expr.eContainer();
 		if ((container instanceof XVariableDeclaration)
 			|| (container instanceof XReturnExpression) 

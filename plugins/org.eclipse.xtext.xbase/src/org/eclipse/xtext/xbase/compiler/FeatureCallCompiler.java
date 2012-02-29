@@ -112,9 +112,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
-		boolean canCompileToExpression = canCompileToJavaExpression(expr, b);
-		if (canCompileToExpression && isReferenced)
-			return;
+//		boolean canCompileToExpression = canCompileToJavaExpression(expr, b);
+//		if (canCompileToExpression && isReferenced)
+//			return;
 		if (expressionHelper.isShortCircuiteBooleanOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
 		} else {
@@ -222,8 +222,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			JvmTypeReference type = getTypeProvider().getType(arg);
 			if (expectedType != null && !jvmConformance.isConformant(expectedType, type)) {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
-				String finalVariable = b.declareSyntheticVariable(Tuples.create("Convertable", arg), "_typeConverted_"
-						+ varName);
+				String finalVariable = b.declareSyntheticVariable(arg, "_converted_" + varName);
 				b.newLine().append("final ");
 				serialize(type, arg, b);
 				b.append(" ").append(finalVariable).append(" = ").append("(");

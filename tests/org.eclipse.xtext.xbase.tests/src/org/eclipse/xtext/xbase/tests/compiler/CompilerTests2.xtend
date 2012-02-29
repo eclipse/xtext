@@ -48,7 +48,8 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 			foo::bar::SubOfClassWithStatics::MY_STATIC_METHOD
 		'''.compilesTo('''
-			return foo.bar.SubOfClassWithStatics.MY_STATIC_METHOD();
+			String _MY_STATIC_METHOD = foo.bar.SubOfClassWithStatics.MY_STATIC_METHOD();
+			return _MY_STATIC_METHOD;
 		''')
 	}
 }
