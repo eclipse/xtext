@@ -453,6 +453,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (expressionHelper.findInlineAnnotation(call) != null) {
 				return false;
 			}
+			if (call instanceof XFeatureCall) {
+				XFeatureCall call2 = (XFeatureCall) call;
+				if (call2.getDeclaringType() != null) {
+					b.append(call2.getDeclaringType());
+					return true;
+				}
+			}
 			b.append(((JvmFeature) call.getFeature()).getDeclaringType());
 			return true;
 		}

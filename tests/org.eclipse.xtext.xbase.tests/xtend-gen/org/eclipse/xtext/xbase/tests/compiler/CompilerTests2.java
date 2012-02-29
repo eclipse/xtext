@@ -58,4 +58,26 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testBug367144() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("foo::bar::SubOfClassWithStatics::MY_STATIC_FIELD");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("return foo.bar.SubOfClassWithStatics.MY_STATIC_FIELD;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug367144_1() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("foo::bar::SubOfClassWithStatics::MY_STATIC_METHOD");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("return foo.bar.SubOfClassWithStatics.MY_STATIC_METHOD();");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
 }
