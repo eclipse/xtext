@@ -24,11 +24,10 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 			if (entity.superType != null)
 				superTypes += entity.superType.cloneWithProxies
 			val procedure = entity.newTypeRef(typeof(Procedure1), it.newTypeRef())
+			members += entity.toConstructor(entity.name) []
 			members += entity.toConstructor(entity.name) [
 				parameters += entity.toParameter("initializer", procedure)
-				body = [it.append('''
-					initializer.apply(this);
-				''')]
+				body = [it.append("initializer.apply(this);")]
 			]
 			val fields = <JvmField>newArrayList()
 			for ( f : entity.features ) {
