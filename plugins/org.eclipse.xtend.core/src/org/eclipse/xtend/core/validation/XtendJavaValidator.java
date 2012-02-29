@@ -1006,11 +1006,17 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						if (!imp.isStatic()) {
 							JvmType currentType = importedType;
 							String currentSuffix = currentType.getSimpleName();
-							importedNames.put(currentSuffix, importedType);
+							JvmType collidingImport = importedNames.put(currentSuffix, importedType);
+							if(collidingImport != null)
+								error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+										+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
 							while (currentType.eContainer() instanceof JvmType) {
 								currentType = (JvmType) currentType.eContainer();
 								currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
-								importedNames.put(currentSuffix, importedType);
+								JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
+								if(collidingImport2 != null)
+									error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+											+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
 							}
 						}
 					}

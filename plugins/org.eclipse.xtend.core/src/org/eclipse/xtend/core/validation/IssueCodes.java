@@ -54,6 +54,7 @@ public final class IssueCodes {
 	public static final String IMPORT_WILDCARD_DEPRECATED = ISSUE_CODE_PREFIX + "import_wildcard_deprecated";
 	public static final String IMPORT_DUPLICATE = ISSUE_CODE_PREFIX + "import_duplicate";
 	public static final String IMPORT_UNUSED = ISSUE_CODE_PREFIX + "import_unsued";
+	public static final String IMPORT_COLLISION = ISSUE_CODE_PREFIX + "import_collision";
 	public static final String FIELD_LOCALLY_NEVER_READ = "field_locally_never_read";
 	public static final String FUNCTION_LOCALLY_NEVER_USED = "function_locally_never_used";
 	public static final String EXCEPTION_NOT_THROWABLE = "exception_not_throwable";
