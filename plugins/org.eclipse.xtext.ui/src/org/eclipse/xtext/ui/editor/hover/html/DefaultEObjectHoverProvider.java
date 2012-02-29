@@ -62,7 +62,6 @@ import com.ibm.icu.text.MessageFormat;
  * @author Christoph Kulla - Initial contribution and API
  * @author Sven Efftinge
  */
-@SuppressWarnings("restriction")
 public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	@Inject

@@ -344,6 +344,8 @@ public class MergeableManifest extends Manifest {
 
 		@Override
 		public boolean equals(Object obj) {
+			if(obj == null)
+				return false;
 			ParameterizedElement other = (ParameterizedElement) obj;
 			return name.equals(other.name);
 		}
