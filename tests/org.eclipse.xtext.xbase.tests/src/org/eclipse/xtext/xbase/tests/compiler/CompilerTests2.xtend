@@ -34,5 +34,21 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final String x = "foo".toUpperCase();
 		''')
-	}	
+	}
+		
+	@Test def void testBug367144() throws Exception {
+		'''
+			foo::bar::SubOfClassWithStatics::MY_STATIC_FIELD
+		'''.compilesTo('''
+			return foo.bar.SubOfClassWithStatics.MY_STATIC_FIELD;
+		''')
+	}
+	
+	@Test def void testBug367144_1() throws Exception {
+		'''
+			foo::bar::SubOfClassWithStatics::MY_STATIC_METHOD
+		'''.compilesTo('''
+			return foo.bar.SubOfClassWithStatics.MY_STATIC_METHOD();
+		''')
+	}
 }
