@@ -14,6 +14,38 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject extension IXtendJvmAssociations 
 	
 	@Test
+	def testBug372864() { 
+		assertCompilesTo('''
+			class Foo {
+				def protected String testSwitch(Object e) {
+				    switch e {
+				       String : return ""
+				       default: null
+				    }
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  protected String testSwitch(final Object e) {
+			    String _switchResult = null;
+			    boolean matched = false;
+			    if (!matched) {
+			      if (e instanceof String) {
+			        final String _string = (String)e;
+			        matched=true;
+			        return "";
+			      }
+			    }
+			    if (!matched) {
+			      _switchResult = null;
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	@Test
 	def testJavaLangReflectImport() { 
 		assertCompilesTo('''
 			package foo

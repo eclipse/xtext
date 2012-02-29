@@ -61,6 +61,38 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtendTestCase {
 	
+	@Test public void testBug372864() throws Exception {
+		String code = 
+				" def String testSwitch(Object e) {\n" + 
+				"        switch e {\n" + 
+				"           Object : return 'foo'\n" + 
+				"           default: null\n" + 
+				"        }\n" + 
+				"    }";
+		invokeAndExpect2("foo",code,"testSwitch", new Object());
+	}
+	
+	@Test public void testBug372864_1() throws Exception {
+		String code = 
+				" def String testSwitch(Object e) {\n" + 
+						"        switch e {\n" + 
+						"           Object : null\n" + 
+						"        }\n" + 
+						"    }";
+		invokeAndExpect2(null,code,"testSwitch", new Object());
+	}
+	
+	@Test public void testBug372864_2() throws Exception {
+		String code = 
+				" def String testSwitch(Object e) {\n" + 
+				"        switch e {\n" + 
+				"           Object : return null\n" + 
+				"        }\n" + 
+				"    }";
+		invokeAndExpect2(null,code,"testSwitch", new Object());
+	}
+	
+	
 	@Test public void testBug367763() throws Exception {
 		String code = 
 				"  def String foo(Number x) { throw new IllegalArgumentException() }\n" + 
