@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -37,6 +36,9 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 
 	@Inject
 	private MarkerCreator markerCreator;
+	
+	@Inject
+	private MarkerTypeProvider markerTypeProvider;
 
 	public void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) {
 		if (shouldProcess(file)) {
@@ -69,7 +71,7 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 
 	protected void createMarkers(IFile file, List<Issue> list, IProgressMonitor monitor) throws CoreException {
 		for (Issue issue : list) {
-			markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));
+			markerCreator.createMarker(issue, file, markerTypeProvider.getMarkerType(issue));
 		}
 	}
 

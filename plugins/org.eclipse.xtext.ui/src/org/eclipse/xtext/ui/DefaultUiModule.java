@@ -93,6 +93,8 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -334,6 +336,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
+		return LanguageAwareMarkerTypeProvider.class;
 	}
 
 }

@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.ui.MarkerTypes;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.ImmutableSet;
@@ -30,17 +31,31 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 
 	private MarkerCreator markerCreator;
 
+	private MarkerTypeProvider markerTypeProvider;
+
+	/**
+	 * @deprecated use {@link MarkerIssueProcessor#MarkerIssueProcessor(IResource, MarkerCreator, MarkerTypeProvider) instead.}
+	 */
+	@Deprecated
 	public MarkerIssueProcessor(IResource resource, MarkerCreator markerCreator) {
+		this(resource, markerCreator, new MarkerTypeProvider());
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public MarkerIssueProcessor(IResource resource, MarkerCreator markerCreator, MarkerTypeProvider markerTypeProvider) {
 		super();
 		this.resource = resource;
 		this.markerCreator = markerCreator;
+		this.markerTypeProvider = markerTypeProvider;
 	}
 
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		try {
 			new AddMarkersOperation(resource, issues, ImmutableSet.of(MarkerTypes.FAST_VALIDATION,
 					MarkerTypes.NORMAL_VALIDATION, MarkerTypes.EXPENSIVE_VALIDATION), true, // delete existing markers 
-					markerCreator).run(monitor);
+					markerCreator, markerTypeProvider).run(monitor);
 		} catch (InvocationTargetException e) {
 			log.error("Could not create marker.", e);
 		} catch (InterruptedException e) {
