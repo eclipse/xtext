@@ -32,6 +32,54 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	@Test
+	def testFoo() { 
+		assertCompilesTo('''
+			public class Foo  {
+			    def foo() {
+			        switch null {
+			            case null : [Object it|it]
+			            case null : [Integer it|it]
+			        }
+			    }    
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Object foo() {
+			    Object _switchResult = null;
+			    final Object __valOfSwitchOver = null;
+			    boolean matched = false;
+			    if (!matched) {
+			      if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {
+			        matched=true;
+			        final Function1<Object,Object> _function = new Function1<Object,Object>() {
+			            public Object apply(final Object it) {
+			              return it;
+			            }
+			          };
+			        _switchResult = _function;
+			      }
+			    }
+			    if (!matched) {
+			      if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {
+			        matched=true;
+			        final Function1<Integer,Integer> _function_1 = new Function1<Integer,Integer>() {
+			            public Integer apply(final Integer it) {
+			              return it;
+			            }
+			          };
+			        _switchResult = _function_1;
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
 	
 	@Test
 	def testTryCatch() { 
