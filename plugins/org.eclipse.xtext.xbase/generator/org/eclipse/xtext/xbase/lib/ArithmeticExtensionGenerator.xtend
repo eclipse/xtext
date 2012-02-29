@@ -147,7 +147,7 @@ class ArithmeticExtensionGenerator {
 	}
 	
 	def article(String it) {
-		switch(it?.toLowerCase.substring(0, 1)) {
+		switch(it.toLowerCase.substring(0, 1)) {
 			case 'a':
 				'an'
 			case 'e':
