@@ -30,21 +30,25 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		testHelper.setUp();
 	}
 	
+	@Override
 	@Test public void testClosure_19() throws Exception {
 		assertEvaluatesWithException(IOException.class, 
 				"{val ()=>void proc = [| throw new java.io.IOException()] proc.apply return null}");
 	}
 	
+	@Override
 	@Test public void testClosure_20() throws Exception {
 		assertEvaluatesWithException(IOException.class, 
 				"{ newArrayList('foo').forEach( s | throw new java.io.IOException() ) return null }");
 	}
 	
+	@Override
 	@Test public void testClosure_21() throws Exception {
 		assertEvaluatesWithException(IOException.class, 
 				"{val ()=>void proc = [| throw new java.io.IOException] proc.apply return null}");
 	}
 	
+	@Override
 	@Test public void testClosure_22() throws Exception {
 		assertEvaluatesWithException(IOException.class, 
 				"{ newArrayList('foo').forEach( s | throw new java.io.IOException ) return null }");
