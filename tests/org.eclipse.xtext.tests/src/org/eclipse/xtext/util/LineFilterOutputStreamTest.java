@@ -28,7 +28,7 @@ public class LineFilterOutputStreamTest extends Assert {
 	@Before
 	public void setUp() throws Exception {
 		result = new ByteArrayOutputStream(500);
-		filterStream = new LineFilterOutputStream(result, " * $Id" + "$");
+		filterStream = new LineFilterOutputStream(result, " * $Id" + "$", "\n");
 		input = "/**\n" +
 				" * <copyright>\n" +
 				" * </copyright>\n" +
