@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<groups>
+		<public name="source.bundle.only.jars" filter="(!(cbi.include.source=false))">
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.common.types.ui" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.common.types.shared" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui.shared" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui.ecore" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui.codetemplates" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui.codetemplates.ui" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.common.types.edit" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.common.types.shared.jdt38" />
+		</public>
+	</groups>
+	<alterActions>
+		<public name="source.manifest.with.localization">
+			<alterPrerequisites>
+				<attribute name="source.bundle.only.jars" alias="bundles"/>
+				<remove name="source.bundle.jars" />
+			</alterPrerequisites>
+		</public>
+	</alterActions>
+</cspecExtension>

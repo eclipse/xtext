@@ -41,6 +41,10 @@
 		<Class name="org.eclipse.xtext.util.ITextRegion" />
 		<Bug pattern="IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION" />
 	</Match>
+	<Match>
+		<Class name="~.*Activator" />
+		<Bug pattern="NM_SAME_SIMPLE_NAME_AS_SUPERCLASS"/>
+	</Match>
 	
 	
 	<!-- Some Examples:
