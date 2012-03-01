@@ -277,9 +277,11 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			if (lastNLIndex >= 0)
 				return (value.length() - lastNLIndex) - 1;
 			if (preserveSpaces && leadingWS != null) {
-				int lastNLIndexInLeadingWs = leadingWS.lastIndexOf('\n');
+				int lastNLIndexInLeadingWs = leadingWS.lastIndexOf(getLineSeparator());
 				if (lastNLIndexInLeadingWs >= 0)
-					return ((leadingWS.length() - lastNLIndexInLeadingWs) + value.length()) - 1;
+					// TODO Moritz: replaced -1 by -getLineSeparator.length()
+					// is that correct?
+					return ((leadingWS.length() - lastNLIndexInLeadingWs) + value.length()) - getLineSeparator().length();
 			}
 			return -1;
 		}
@@ -288,7 +290,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			if (leadingWS == null)
 				return -1;
 			int c = 0, i = -1;
-			while ((i = leadingWS.indexOf('\n', i + 1)) >= 0)
+			while ((i = leadingWS.indexOf(getLineSeparator(), i + getLineSeparator().length())) >= 0)
 				c++;
 			return c;
 		}
@@ -316,7 +318,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 				if (e instanceof SpaceLocator)
 					return false;
 			}
-			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, "\n") != null;
+			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, getLineSeparator()) != null;
 		}
 
 		@Override
@@ -345,14 +347,25 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected boolean preserveSpaces;
 
-	public FormattingConfigBasedStream(ITokenStream out, String indentation, FormattingConfig cfg,
+	public FormattingConfigBasedStream(ITokenStream out, String initialIndentation, FormattingConfig cfg,
 			IElementMatcher<ElementPattern> matcher, IHiddenTokenHelper hiddenTokenHelper, boolean preserveSpaces) {
 		super(out);
 		this.cfg = cfg;
 		this.matcher = matcher;
 		this.hiddenTokenHelper = hiddenTokenHelper;
 		this.preserveSpaces = preserveSpaces;
-		this.indentationPrefix = indentation == null ? "" : indentation;
+		this.indentationPrefix = initialIndentation == null ? "" : initialIndentation;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected String getLineSeparator() {
+		if (cfg instanceof FormattingConfig2) {
+			return ((FormattingConfig2) cfg).getLineSeparatorInfo().getLineSeparator();
+		} else {
+			return System.getProperty("line.separator");
+		}
 	}
 
 	protected void addLineEntry(EObject grammarElement, String value, boolean isHidden) throws IOException {
