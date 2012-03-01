@@ -45,19 +45,19 @@ public class Bug348199Test extends AbstractContentAssistProcessorTest {
 		newBuilder(1).assertText("july", "timeperiod_name", "otherelement");
 	}
 	@Test public void testAfterCurlyBrace_02() throws Exception {
-		newBuilder(2).assertText("july", "timeperiod_name", "otherelement");
+		newBuilder(2).assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterCurlyBrace_03() throws Exception {
 		newBuilder(3).assertText("july", "timeperiod_name", "otherelement");
 	}
-	@Test @Ignore public void testAfterCurlyBrace_04() throws Exception {
+	@Test public void testAfterCurlyBrace_04() throws Exception {
 		newBuilder(4).assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterCurlyBrace_05() throws Exception {
 		newBuilder(5).assertText("july", "timeperiod_name", "otherelement");
 	}
 	@Test public void testAfterCurlyBrace_06() throws Exception {
-		newBuilder(6).assertText("july", "timeperiod_name", "otherelement");
+		newBuilder(6).assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterCurlyBrace_07() throws Exception {
 		newBuilder(7).assertText("july", "timeperiod_name", "otherelement");
@@ -69,19 +69,19 @@ public class Bug348199Test extends AbstractContentAssistProcessorTest {
 	@Test public void testAfterJuly_01() throws Exception {
 		newBuilder(1).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement");
 	}
-	@Test @Ignore public void testAfterJuly_02() throws Exception {
+	@Test public void testAfterJuly_02() throws Exception {
 		newBuilder(2).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterJuly_03() throws Exception {
 		newBuilder(3).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement");
 	}
-	@Test @Ignore public void testAfterJuly_04() throws Exception {
+	@Test public void testAfterJuly_04() throws Exception {
 		newBuilder(4).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterJuly_05() throws Exception {
 		newBuilder(5).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement");
 	}
-	@Test @Ignore public void testAfterJuly_06() throws Exception {
+	@Test public void testAfterJuly_06() throws Exception {
 		newBuilder(6).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterJuly_07() throws Exception {
