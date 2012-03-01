@@ -151,13 +151,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected ContentAssistContext[] doCreateContexts(int offset) throws BadLocationException {
 			initializeFromViewerAndResource(offset);
 			
-			if (datatypeNode != lastCompleteNode) {
+			if (!datatypeNode.equals(lastCompleteNode)) {
 				handleLastCompleteNodeAsPartOfDatatypeNode();
 			}
 
 			// 2nd context: we assume, that the current token is incomplete and try to calculate
 			// any valid grammar element by removing the current token and using it as prefix
-			if (datatypeNode == lastCompleteNode && completionOffset != lastCompleteNode.getOffset()) {
+			if (datatypeNode.equals(lastCompleteNode) && completionOffset != lastCompleteNode.getOffset()) {
 				handleLastCompleteNodeIsAtEndOfDatatypeNode();
 			}
 
@@ -368,6 +368,18 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 										}
 									}
 								}
+							} else if (isAlternativeWithEmptyPath(abstractElement)) {
+								EObject container = abstractElement.eContainer();
+								if (container instanceof Group) {
+									Group group = (Group) container;
+									int idx = group.getElements().indexOf(abstractElement);
+									if (!currentState.contains(group) && idx != group.getElements().size() - 1) {
+										AbstractElement next = group.getElements().get(idx + 1);
+										if (!currentState.contains(next)) {
+											calculator.doSwitch(next);
+										}
+									}
+								}
 							}
 						}
 					}
@@ -389,6 +401,17 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				if (newElement.getLookAhead() != element.getLookAhead() || newElement.getGrammarElement() != element.getGrammarElement())
 					computeFollowElements(calculator, newElement, visited);
 			}
+		}
+
+		private boolean isAlternativeWithEmptyPath(AbstractElement abstractElement) {
+			if (abstractElement instanceof Alternatives) {
+				Alternatives alternatives = (Alternatives) abstractElement;
+				for(AbstractElement path: alternatives.getElements()) {
+					if (GrammarUtil.isOptionalCardinality(path))
+						return true;
+				}
+			}
+			return false;
 		}
 
 		public INode getContainingDatatypeRuleNode(INode node) {
