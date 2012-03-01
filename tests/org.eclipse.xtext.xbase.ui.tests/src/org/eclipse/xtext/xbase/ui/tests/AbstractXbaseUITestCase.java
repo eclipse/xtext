@@ -38,7 +38,6 @@ import com.google.inject.name.Named;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractXbaseUITestCase extends Assert implements ResourceLoadHelper {
 
 	@Inject

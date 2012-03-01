@@ -31,7 +31,6 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ContentAssistTest extends AbstractXbaseContentAssistTest implements IJavaProjectProvider  {
 
 	protected static final String PROJECT_NAME = "ContentAssistTestProject";
