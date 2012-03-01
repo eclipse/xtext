@@ -230,6 +230,70 @@ public class OrganizeImportsTest extends AbstractXtendTestCase {
 				"\nimport static extension java.util.Collections.*", section);
 	}
 	
+	@Test public void testImportedOperators_01() throws Exception {
+		String model = 
+				"import static extension test.StaticOperators.* \n" +
+				"class Foo {\n" +
+				"  def void test(String s) {\n" +
+				"    -s\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static extension test.StaticOperators.*", section);
+	}
+	
+	@Test public void testImportedOperators_02() throws Exception {
+		String model = 
+				"import static extension test.StaticOperators.* \n" +
+				"class Foo {\n" +
+				"  def void test(String s) {\n" +
+				"    s-s\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static extension test.StaticOperators.*", section);
+	}
+	
+	@Test public void testImportedOperators_03() throws Exception {
+		String model = 
+				"import static extension test.StaticOperators.* \n" +
+				"class Foo {\n" +
+				"  def void test(String s) {\n" +
+				"    s.assign = s\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static extension test.StaticOperators.*", section);
+	}
+	
+	@Test public void testImportedOperators_04() throws Exception {
+		String model = 
+				"import static extension test.StaticOperators.* \n" +
+				"class Foo {\n" +
+				"  def void test(String it) {\n" +
+				"    assign = it\n" +
+				"  }\n" +
+				"}\n";
+		XtendFile file = file(model,true);
+		String section = organizeImports.getOrganizedImportSection((XtextResource) file.eResource());
+		
+		assertEquals(
+				"\n" +
+				"\nimport static extension test.StaticOperators.*", section);
+	}
+	
 	@Test public void testGetOrganizedImportSectionWithImplicitExtensions() throws Exception {
 		String model = 
 						"class Foo {\n" +

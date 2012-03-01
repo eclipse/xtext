@@ -43,11 +43,15 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
@@ -168,8 +172,8 @@ public class OrganizeImports {
 				} else {
 					acceptor.acceptType(featureCall.getDeclaringType());
 				}
-			} else if (next instanceof XMemberFeatureCall) {
-				final XMemberFeatureCall featureCall = (XMemberFeatureCall) next;
+			} else if (next instanceof XMemberFeatureCall || next instanceof XBinaryOperation || next instanceof XUnaryOperation || next instanceof XAssignment) {
+				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) next;
 				final JvmIdentifiableElement member = featureCall.getFeature();
 				if (member instanceof JvmOperation) {
 					if (((JvmOperation) member).isStatic())
