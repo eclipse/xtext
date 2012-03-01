@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.SmapSupport;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -48,6 +50,8 @@ import com.google.inject.Inject;
  * @since 2.1
  */
 public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
+
+	private final static Logger log = Logger.getLogger(EclipseResourceFileSystemAccess2.class);
 	
 	/**
 	 * @noimplement This interface is not intended to be implemented by clients.
@@ -77,6 +81,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	private IWorkspace workspace;
 	
 	private Multimap<URI, IPath> sourceTraces;
+	
+	@Inject
+	private SmapSupport smapSupport;
 	
 	/**
 	 * @since 2.3
@@ -122,6 +129,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		
 		IFile file = getFile(fileName, outputName);
 		IFile traceFile = getTraceFile(file);
+		IFile smapFile = getSmapFile(file);
 		CharSequence postProcessedContent = postProcess(fileName, outputName, contents);
 		String contentsAsString = postProcessedContent.toString(); 
 		if (file.exists()) {
@@ -137,6 +145,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 							setDerived(file, outputConfig.isSetDerivedProperty());
 						}
 					}
+					if (smapFile != null)
+						updateSmapInformation(smapFile, postProcessedContent, file);
 					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
@@ -277,6 +287,39 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		}
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	protected IFile getSmapFile(IFile javaSourceFile) {
+		if (!javaSourceFile.getName().endsWith(".java"))
+			return null;
+		IContainer folder = javaSourceFile.getParent();
+		IFile file = folder.getFile(new Path(javaSourceFile.getName().replace(".java", ".smap")));
+		return file;
+	}
+
+	/**
+	 * @since 2.3
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected void updateSmapInformation(IFile smapFile, CharSequence postProcessedContent, IFile javaSource) {
+		if (!(postProcessedContent instanceof ITraceRegionProvider))
+			return;
+		AbstractTraceRegion traceRegion = ((ITraceRegionProvider)postProcessedContent).getTraceRegion();
+		String smap = smapSupport.generateSmap(traceRegion, javaSource.getName());
+		try {
+			final StringInputStream smapAsStream = new StringInputStream(smap);
+			if (!smapFile.exists()) {
+				smapFile.create(smapAsStream, true, monitor);
+			} else {
+				smapFile.setContents(smapAsStream, true, true, monitor);
+			}
+		} catch (CoreException e) {
+			log.error(e);
+		}
+	}
+
 	/**
 	 * Can be used to announce that a builder participant is done with this file system access and
 	 * all potentially recorded trace information should be persisted. Uses the default generator name.
