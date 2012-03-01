@@ -20,7 +20,7 @@ public class BaseFormatter extends AbstractFormatter {
 	
 	@Inject
 	protected IGrammarAccess grammar;
-
+	
 	protected TerminalRule getWSRule() {
 		// FIXME: make this configurable
 		return (TerminalRule) GrammarUtil.findRuleForName(grammar.getGrammar(),
