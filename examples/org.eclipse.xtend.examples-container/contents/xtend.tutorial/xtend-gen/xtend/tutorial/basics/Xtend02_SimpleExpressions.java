@@ -2,9 +2,6 @@ package xtend.tutorial.basics;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.DoubleExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 
 @SuppressWarnings("all")
 public class Xtend02_SimpleExpressions {
@@ -17,26 +14,26 @@ public class Xtend02_SimpleExpressions {
   }
   
   public boolean booleanLiteral() {
-    boolean _operator_or = false;
+    boolean _or = false;
     if (true) {
-      _operator_or = true;
+      _or = true;
     } else {
-      _operator_or = BooleanExtensions.operator_or(true, false);
+      _or = (true || false);
     }
-    return _operator_or;
+    return _or;
   }
   
   public int intLiteral() {
-    int _operator_plus = IntegerExtensions.operator_plus(14, 0x0e);
-    int _operator_plus_1 = IntegerExtensions.operator_plus(_operator_plus, 016);
-    return _operator_plus_1;
+    int _plus = (14 + 0x0e);
+    int _plus_1 = (_plus + 016);
+    return _plus_1;
   }
   
   public double doubleLiteral() {
-    double _operator_plus = DoubleExtensions.operator_plus(14d, 0.14e2);
-    double _operator_multiply = DoubleExtensions.operator_multiply(1.4, 10d);
-    double _operator_plus_1 = DoubleExtensions.operator_plus(_operator_plus, _operator_multiply);
-    return _operator_plus_1;
+    double _plus = (14d + 0.14e2);
+    double _multiply = (1.4 * 10d);
+    double _plus_1 = (_plus + _multiply);
+    return _plus_1;
   }
   
   public BigInteger bigIntegerLiteral() {
@@ -56,7 +53,7 @@ public class Xtend02_SimpleExpressions {
    * The equivalent to Java's String.class is typeof(String).
    */
   public Class<String> clazzLiteral() {
-    return java.lang.String.class;
+    return String.class;
   }
   
   /**
@@ -77,8 +74,7 @@ public class Xtend02_SimpleExpressions {
       final String myString = "Hello World";
       String _xblockexpression_1 = null;
       {
-        String _lowerCase = myString.toLowerCase();
-        final String myOther = _lowerCase;
+        final String myOther = myString.toLowerCase();
         _xblockexpression_1 = (myOther);
       }
       String modifiable = _xblockexpression_1;

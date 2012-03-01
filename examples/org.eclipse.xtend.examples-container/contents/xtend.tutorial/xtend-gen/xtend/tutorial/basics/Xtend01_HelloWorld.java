@@ -3,7 +3,6 @@ package xtend.tutorial.basics;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Xtend01_HelloWorld extends TestCase {
@@ -17,9 +16,8 @@ public class Xtend01_HelloWorld extends TestCase {
    * expression.
    */
   public String sayHelloTo(final String to) {
-    String _operator_plus = StringExtensions.operator_plus("Hello ", to);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "!");
-    return _operator_plus_1;
+    String _plus = ("Hello " + to);
+    return (_plus + "!");
   }
   
   /**
@@ -27,9 +25,9 @@ public class Xtend01_HelloWorld extends TestCase {
    * expression.
    */
   public String sayHelloTo2(final String to) {
-    String _operator_plus = StringExtensions.operator_plus("Hello ", to);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "!");
-    return _operator_plus_1;
+    String _plus = ("Hello " + to);
+    String _plus_1 = (_plus + "!");
+    return _plus_1;
   }
   
   /**

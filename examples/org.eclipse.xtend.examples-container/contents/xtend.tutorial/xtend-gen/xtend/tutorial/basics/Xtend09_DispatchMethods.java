@@ -6,7 +6,6 @@ import junit.framework.TestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import xtend.tutorial.util.Circle;
 import xtend.tutorial.util.Rectangle;
 import xtend.tutorial.util.Shape;
@@ -23,8 +22,8 @@ public class Xtend09_DispatchMethods extends TestCase {
    */
   protected CharSequence _toLabel(final Rectangle rectangle) {
     CharSequence _xifexpression = null;
-    boolean _operator_equals = IntegerExtensions.operator_equals(rectangle.height, rectangle.width);
-    if (_operator_equals) {
+    boolean _equals = (rectangle.height == rectangle.width);
+    if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("It\'s a square (x : ");
       _builder.append(rectangle.height, "");
@@ -51,16 +50,13 @@ public class Xtend09_DispatchMethods extends TestCase {
   }
   
   public void testDispatchMethods() {
-    {
-      Rectangle _rectangle = new Rectangle(3, 4);
-      Circle _circle = new Circle(3);
-      Rectangle _rectangle_1 = new Rectangle(5, 5);
-      ArrayList<Shape> _newArrayList = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
-      final ArrayList<Shape> list = _newArrayList;
-      for (final Shape shape : list) {
-        CharSequence _label = this.toLabel(shape);
-        InputOutput.<CharSequence>println(_label);
-      }
+    Rectangle _rectangle = new Rectangle(3, 4);
+    Circle _circle = new Circle(3);
+    Rectangle _rectangle_1 = new Rectangle(5, 5);
+    final ArrayList<Shape> list = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
+    for (final Shape shape : list) {
+      CharSequence _label = this.toLabel(shape);
+      InputOutput.<CharSequence>println(_label);
     }
   }
   

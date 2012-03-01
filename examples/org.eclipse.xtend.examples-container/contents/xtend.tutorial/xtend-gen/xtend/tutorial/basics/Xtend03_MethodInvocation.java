@@ -3,7 +3,6 @@ package xtend.tutorial.basics;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import xtend.tutorial.util.Amount;
 import xtend.tutorial.util.Person;
 
@@ -44,15 +43,12 @@ public class Xtend03_MethodInvocation {
    * more readable property-syntax.
    */
   public String propertAccess(final Person person) {
-    {
-      person.setForename("Joe");
-      person.setName("Developer");
-      String _forename = person.getForename();
-      String _operator_plus = StringExtensions.operator_plus(_forename, " ");
-      String _name = person.getName();
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
-      return _operator_plus_1;
-    }
+    person.setForename("Joe");
+    person.setName("Developer");
+    String _forename = person.getForename();
+    String _plus = (_forename + " ");
+    String _name = person.getName();
+    return (_plus + _name);
   }
   
   /**
@@ -66,9 +62,8 @@ public class Xtend03_MethodInvocation {
    * (Tip: Hover or use F3 over an operator to go to its declaration)
    */
   public Amount operatorOverloading(final Amount a, final Amount b) {
-    Amount _operator_plus = a.operator_plus(b);
-    Amount _operator_multiply = _operator_plus.operator_multiply(2);
-    return _operator_multiply;
+    Amount _plus = a.operator_plus(b);
+    return _plus.operator_multiply(2);
   }
   
   /**
@@ -83,8 +78,7 @@ public class Xtend03_MethodInvocation {
   }
   
   public String[] splitOnUnderscore(final String s) {
-    String[] _split = s.split("_");
-    return _split;
+    return s.split("_");
   }
   
   /**

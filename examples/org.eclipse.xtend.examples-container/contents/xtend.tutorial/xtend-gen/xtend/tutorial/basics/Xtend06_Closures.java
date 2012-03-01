@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import xtend.tutorial.util.Person;
 
 @SuppressWarnings("all")
@@ -22,10 +20,10 @@ public class Xtend06_Closures {
     final Function1<Person,String> _function = new Function1<Person,String>() {
         public String apply(final Person p) {
           String _name = p.getName();
-          String _operator_plus = StringExtensions.operator_plus(_name, ", ");
+          String _plus = (_name + ", ");
           String _forename = p.getForename();
-          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _forename);
-          return _operator_plus_1;
+          String _plus_1 = (_plus + _forename);
+          return _plus_1;
         }
       };
     ArrayList<Object> _personsToString = this.personsToString(persons, _function);
@@ -41,15 +39,12 @@ public class Xtend06_Closures {
    *   (typeParam1 ,... typeParamN) => returnType
    */
   public ArrayList<Object> personsToString(final List<Person> persons, final Function1<? super Person,? extends String> toString) {
-    {
-      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-      final ArrayList<Object> result = _newArrayList;
-      for (final Person p : persons) {
-        String _apply = toString.apply(p);
-        CollectionExtensions.<String>operator_add(result, _apply);
-      }
-      return result;
+    final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
+    for (final Person p : persons) {
+      String _apply = toString.apply(p);
+      result.add(_apply);
     }
+    return result;
   }
   
   /**
