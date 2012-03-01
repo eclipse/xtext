@@ -72,7 +72,7 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		if (outlet == null)
 			throw new IllegalArgumentException("A slot with name '" + outputConfigName + "' has not been configured.");
 		String pathName = toSystemFileName(outlet + "/" + fileName);
-		File file = new File(pathName);
+		File file = new File(pathName).getAbsoluteFile();
 		return file;
 	}
 

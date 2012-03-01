@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.mwe;
 
+import java.io.File;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -64,7 +65,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 	@Test public void testTransitiveReferences() throws Exception {
 		UriBasedReader reader = new UriBasedReader();
 		reader.addRegister(new ImportUriTestLanguageStandaloneSetup());
-		reader.addUri("file:" + pathTo("importUriSubfolder/Start.importuritestlanguage"));
+		reader.addUri("file:/" + pathTo("importUriSubfolder/Start.importuritestlanguage"));
 
 		SlotEntry slotEntry = new SlotEntry();
 		slotEntry.setType("Type");
@@ -188,7 +189,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 	}
 
 	public String pathTo(String string) throws Exception {
-		return new ReaderTest().pathTo(string);
+		return new ReaderTest().pathTo(string).replace(File.separator, "/");
 	}
 	
 }

@@ -329,8 +329,9 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 		if (url == null) {
 			fail("Could not read resource: '" + filePath + "'. Is your file system case sensitive?");
 		} else {
-			if(!new File(url.getPath()).getCanonicalPath().endsWith(filePath))
-				throw new RuntimeException(filePath + ":\n" +
+			String canonicalPath = new File(new File(url.getPath()).getCanonicalPath()).toURI().getPath();
+			if(!canonicalPath.endsWith(filePath))
+				throw new RuntimeException(filePath + " -> " + canonicalPath + ":\n" +
 						"The file does not exist exactly as it was named.\n" +
 						"The test is likely to cause trouble on the build server.\n" +
 						"Is your filesystem case insensitive? Please verify the spelling.");
