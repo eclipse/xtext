@@ -1,5 +1,4 @@
 import helper.Person;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Xbase02_PropertyAccess {
@@ -12,7 +11,7 @@ public class Xbase02_PropertyAccess {
         String _forename = person.getForename();
         String _plus = (_forename + " ");
         String _name = person.getName();
-        StringExtensions.operator_plus(_plus, _name);
+        /*(_plus + _name);*/
     } catch (Throwable t) {}
   }
 }

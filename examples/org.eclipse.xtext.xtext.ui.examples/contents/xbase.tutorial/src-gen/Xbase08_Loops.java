@@ -7,8 +7,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class Xbase08_Loops {
   public static void main(final String[] args) {
     try {
-        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-        final ArrayList<String> list = _newArrayList;
+        final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
         ArrayList<String> _arrayList = new ArrayList<String>();
         final ArrayList<String> result = _arrayList;
         List<String> _reverse = ListExtensions.<String>reverse(list);
@@ -16,6 +15,7 @@ public class Xbase08_Loops {
           String _upperCase = x.toUpperCase();
           result.add(_upperCase);
         }
+        /*result;*/
         int i = 0;
         int _size = list.size();
         boolean _lessThan = (i < _size);
@@ -32,6 +32,7 @@ public class Xbase08_Loops {
           boolean _lessThan_1 = (i < _size_1);
           _while = _lessThan_1;
         }
+        /*result;*/
     } catch (Throwable t) {}
   }
 }

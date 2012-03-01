@@ -16,8 +16,7 @@ public class Xbase05_Closures {
           };
         final Function1<String,String> f = _function;
         f.apply("World!");
-        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("a", "b", "c");
-        final ArrayList<String> list = _newArrayList;
+        final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
         final Function1<String,String> _function_1 = new Function1<String,String>() {
             public String apply(final String e) {
               String _upperCase = e.toUpperCase();

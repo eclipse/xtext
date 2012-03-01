@@ -12,8 +12,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 public class Xbase10_Switch {
   public static void main(final String[] args) {
     try {
-        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-        final ArrayList<String> list = _newArrayList;
+        final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
         String _head = IterableExtensions.<String>head(list);
         final String __valOfSwitchOver = _head;
         boolean matched = false;
@@ -35,8 +34,7 @@ public class Xbase10_Switch {
         Rectangle _rectangle = new Rectangle(5, 5);
         Circle _circle = new Circle(4);
         Rectangle _rectangle_1 = new Rectangle(6, 8);
-        ArrayList<Shape> _newArrayList_1 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
-        final ArrayList<Shape> list2 = _newArrayList_1;
+        final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
         final Function1<Shape,String> _function = new Function1<Shape,String>() {
             public String apply(final Shape shape) {
               String _switchResult = null;
