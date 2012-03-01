@@ -61,7 +61,9 @@ public class JavaIoFileSystemAccessTest extends Assert {
 		JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess();
 		fileSystemAccess.setOutputPath("testOutput", "/testDir");
 		URI uri = fileSystemAccess.getURI("testFile", "testOutput");
-		assertEquals("file:/testDir/testFile", uri.toString());
+		String expectedUri = new File(new File(File.separator + "testDir"), "testFile")
+			.toURI().toString();
+		assertEquals(expectedUri, uri.toString());
 	}
 
 	@Test
