@@ -7,28 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.views;
 
-import static org.eclipse.emf.ecore.util.EcoreUtil.*;
 import static org.eclipse.jface.resource.JFaceResources.*;
 import static org.eclipse.xtext.ui.util.DisplayRunHelper.*;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
@@ -45,15 +41,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
@@ -67,16 +56,15 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	@Inject
-	private ILabelProvider labelProvider;
-	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-
 	private int computeCount;
-	private URI currentViewInput;
 	private RGB backgroundColorRGB;
 	private Color backgroundColor;
 	private SourceViewer sourceViewer;
+	private IWorkbenchPartSelection workbenchPartSelection;
+
+	public IWorkbenchPartSelection getWorkbenchPartSelection() {
+		return workbenchPartSelection;
+	}
 
 	private IPartListener2 partListener = new IPartListener2() {
 		public void partVisible(IWorkbenchPartReference ref) {
@@ -97,7 +85,16 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 
 		public void partInputChanged(IWorkbenchPartReference ref) {
 			if (!ref.getId().equals(getSite().getId())) {
-				computeAndDoSetInput(ref.getPart(false));
+				IWorkbenchPart workbenchPart = ref.getPart(false);
+				ISelectionProvider provider = workbenchPart.getSite().getSelectionProvider();
+				if (provider == null) {
+					return;
+				}
+				ISelection selection = provider.getSelection();
+				if (selection == null || selection.isEmpty()) {
+					return;
+				}
+				computeAndSetInput(new DefaultWorkbenchPartSelection(ref.getPart(false), selection));
 			}
 		}
 
@@ -123,14 +120,6 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 
 	public String getLanguageName() {
 		return languageName;
-	}
-
-	public ILabelProvider getLabelProvider() {
-		return labelProvider;
-	}
-
-	public EObjectAtOffsetHelper getEObjectAtOffsetHelper() {
-		return eObjectAtOffsetHelper;
 	}
 
 	@Override
@@ -199,13 +188,7 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 	}
 
 	public void selectionChanged(IWorkbenchPart workbenchPart, ISelection selection) {
-		if (isValidSelection(workbenchPart, selection)) {
-			computeAndDoSetInput(workbenchPart);
-		}
-	}
-
-	protected boolean isValidSelection(IWorkbenchPart workbenchPart, ISelection selection) {
-		return true;
+		computeAndSetInput(new DefaultWorkbenchPartSelection(workbenchPart, selection));
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
@@ -227,49 +210,42 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 		getSite().getPage().removePostSelectionListener(this);
 	}
 
-	protected void computeAndDoSetInput(final IWorkbenchPart workbenchPart) {
-		if (workbenchPart.equals(this)) {
+	public void computeAndSetInput(final IWorkbenchPartSelection workbenchPartSelection) {
+		internalComputeAndSetInput(workbenchPartSelection);
+	}
+
+	protected void internalComputeAndSetInput(final IWorkbenchPartSelection workbenchPartSelection) {
+		if (!isValidSelection(workbenchPartSelection)) {
 			return;
 		}
+		this.workbenchPartSelection = workbenchPartSelection;
 		final int currentCount = ++computeCount;
-		final ISelection selection;
-		ISelectionProvider provider = workbenchPart.getSite().getSelectionProvider();
-		if (provider == null) {
-			return;
-		}
-		selection = provider.getSelection();
-		if (selection == null || selection.isEmpty()) {
-			return;
-		}
 		ThreadFactory threadFactory = Executors.defaultThreadFactory();
 		Thread thread = threadFactory.newThread(new Runnable() {
 			public void run() {
 				if (currentCount != computeCount) {
 					return;
 				}
-				final EObject eObject = findSelectedEObject(workbenchPart, selection);
-				if (!isIgnored(workbenchPart, selection, eObject)) {
-					final String description = computeDescription(workbenchPart, selection, eObject);
-					final String input = computeInput(workbenchPart, selection, eObject);
-					if (input == null) {
-						return;
-					}
-					Display display = getDisplay();
-					if (display == null) {
-						return;
-					}
-					runAsyncInDisplayThread(new Runnable() {
-						public void run() {
-							if (computeCount != currentCount || getViewSite().getShell().isDisposed()) {
-								return;
-							}
-							currentViewInput = getURI(eObject);
-							setInput(input, description);
-							selectAndReveal(workbenchPart, selection, eObject);
-						}
-
-					});
+				final String input = computeInput(workbenchPartSelection);
+				if (input == null) {
+					return;
 				}
+				Display display = getDisplay();
+				if (display == null) {
+					return;
+				}
+				runAsyncInDisplayThread(new Runnable() {
+					public void run() {
+						if (computeCount != currentCount || getViewSite().getShell().isDisposed()) {
+							return;
+						}
+						String description = computeDescription(workbenchPartSelection);
+						setContentDescription(description);
+						setInput(input);
+						selectAndReveal(workbenchPartSelection);
+					}
+
+				});
 			}
 		});
 		thread.setDaemon(true);
@@ -277,61 +253,26 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 		thread.start();
 	}
 
-	protected EObject findSelectedEObject(IWorkbenchPart workbenchPart, final ISelection selection) {
-		Object element = null;
-		if (workbenchPart instanceof XtextEditor && selection instanceof ITextSelection) {
-			XtextEditor xtextEditor = (XtextEditor) workbenchPart;
-			if (!getLanguageName().equalsIgnoreCase(xtextEditor.getLanguageName())) {
-				return null;
-			}
-			IXtextDocument xtextDocument = xtextEditor.getDocument();
-			element = xtextDocument.readOnly(new IUnitOfWork<EObject, XtextResource>() {
-				public EObject exec(XtextResource xtextResource) throws Exception {
-					ITextSelection textSelection = (ITextSelection) selection;
-					return eObjectAtOffsetHelper.resolveElementAt(xtextResource, textSelection.getOffset());
-				}
-			});
-		} else if (selection instanceof IStructuredSelection) {
-			element = getSingleElement(selection);
-		}
-		return mapSelectedEObject(element);
+	protected boolean isValidSelection(IWorkbenchPartSelection workbenchPartSelection) {
+		return !this.equals(workbenchPartSelection.getWorkbenchPart())
+				&& !workbenchPartSelection.equals(this.workbenchPartSelection)
+				&& workbenchPartSelection.getWorkbenchPart() instanceof XtextEditor
+				&& workbenchPartSelection.getSelection() instanceof ITextSelection
+				&& ((XtextEditor) workbenchPartSelection.getWorkbenchPart()).getLanguageName().equalsIgnoreCase(
+						languageName);
 	}
 
-	private EObject mapSelectedEObject(Object element) {
-		EObject result = null;
-		if (element instanceof IAdaptable) {
-			result = (EObject) ((IAdaptable) element).getAdapter(EObject.class);
-		} else if (element instanceof EObject) {
-			result = (EObject) element;
-		}
-		return result;
+	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
+		return null;
 	}
 
-	protected boolean isIgnored(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		return eObject != null && currentViewInput != null && currentViewInput.equals(getURI(eObject));
+	protected String computeDescription(IWorkbenchPartSelection workbenchPartSelection) {
+		return "";
 	}
 
-	protected String computeDescription(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		String description = labelProvider != null ? labelProvider.getText(eObject) : null;
-		return Strings.nullToEmpty(description);
-	}
-
-	protected String computeInput(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		String result = null;
-		ICompositeNode node = NodeModelUtils.getNode(eObject);
-		if (node != null && node.getRootNode() != null) {
-			INode rootNode = node.getRootNode();
-			int offset = node.getOffset();
-			int length = node.getLength();
-			result = new String(rootNode.getText().substring(offset, offset + length));
-		}
-		return result;
-	}
-
-	protected void setInput(String input, String description) {
-		setContentDescription(description);
+	protected void setInput(String input) {
 		IDocument document = createDocument(input);
-		getSourceViewer().setDocument(document);
+		getSourceViewer().setDocument(document, new AnnotationModel());
 	}
 
 	protected IDocument createDocument(String input) {
@@ -339,33 +280,19 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 		return document;
 	}
 
-	public void selectAndReveal(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		internalSelectAndReveal(workbenchPart, selection, eObject);
-	}
-
-	protected void internalSelectAndReveal(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		ITextRegion textRegion = computeSelectedTextRegion(workbenchPart, selection, eObject);
-		if (textRegion != null) {
+	protected void selectAndReveal(IWorkbenchPartSelection workbenchPartSelection) {
+		ITextRegion textSelection = computeSelectedText(workbenchPartSelection);
+		if (textSelection != null) {
 			StyledText text = getSourceViewer().getTextWidget();
-			if (text.getText().length() >= textRegion.getOffset() + textRegion.getLength()) {
-				getSourceViewer().setSelection(new TextSelection(textRegion.getOffset(), textRegion.getLength()), true);
+			if (text.getText().length() >= textSelection.getOffset() + textSelection.getLength()) {
+				getSourceViewer().setSelection(new TextSelection(textSelection.getOffset(), textSelection.getLength()),
+						true);
 			}
 		}
 	}
 
-	protected ITextRegion computeSelectedTextRegion(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
+	protected ITextRegion computeSelectedText(IWorkbenchPartSelection workbenchPartSelection) {
 		return null;
-	}
-
-	protected Object getSingleElement(ISelection s) {
-		if (!(s instanceof IStructuredSelection)) {
-			return null;
-		}
-		IStructuredSelection selection = (IStructuredSelection) s;
-		if (selection.size() != 1) {
-			return null;
-		}
-		return selection.getFirstElement();
 	}
 
 	protected Display getDisplay() {
@@ -410,6 +337,11 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 			backgroundColor = null;
 		}
 		sourceViewer = null;
+	}
+
+	protected IStorage getEditorResource(IWorkbenchPartSelection workbenchPartSelection) {
+		IWorkbenchPart workbenchPart = workbenchPartSelection.getWorkbenchPart();
+		return (IStorage) (workbenchPart instanceof XtextEditor ? ((XtextEditor) workbenchPart).getResource() : null);
 	}
 
 }
