@@ -44,6 +44,9 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 				return true;
 			}
 		}), IDocument.DEFAULT_CONTENT_TYPE);
+	}
+
+	protected MultiLineTerminalsEditStrategy createColonSemicolonStrategy() {
 		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";");
 		// the following is a cheap but working hack, which replaces any double colons '::' by whitespace '  ' temporarily.
 		configure.setDocumentUtil(new DocumentUtil() {
@@ -52,7 +55,13 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 				return string.replace("::", "  ");
 			}
 		});
-		acceptor.accept(configure, IDocument.DEFAULT_CONTENT_TYPE);
+		return configure;
+	}
+	
+	@Override
+	protected void configureCompoundBracesBlocks(IEditStrategyAcceptor acceptor) {
+		acceptor.accept(compoundMultiLineTerminals.newInstanceFor("{", "}").and("[", "]").and("(", ")")
+				.and(createColonSemicolonStrategy()), IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 	protected String getCurrentRuleUptoOffset(int offset, IDocument doc) throws BadLocationException {
