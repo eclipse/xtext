@@ -26,6 +26,10 @@ public class XtendImages {
 
 	@Inject
 	private IImageHelper imageHelper;
+	
+	public ImageDescriptor forFilter() {
+		return JavaPluginImages.DESC_ELCL_FILTER;
+	}
 
 	public ImageDescriptor forImplementsAnnotation() {
 		return JavaPluginImages.DESC_OBJ_IMPLEMENTS;
