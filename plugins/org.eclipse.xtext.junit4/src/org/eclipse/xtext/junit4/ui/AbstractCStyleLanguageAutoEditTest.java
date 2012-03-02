@@ -101,7 +101,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 	@Test public void testParenthesis_10() throws Exception {
 		XtextEditor editor = openEditor("(|'')");
 		pressKey(editor, '(');
-		assertState("((|)'')", editor);
+		assertState("((|'')", editor);
 	}
 
 	@Test public void testSingleQuotedStringLiteral_1() throws Exception {
