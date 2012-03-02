@@ -391,6 +391,11 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 				}
 			}
 
+			fScanner.setPartialRange(fDocument, actualReparseStart, fDocument.getLength() - actualReparseStart, contentType, 
+					actualReparseStart);
+			behindLastScannedPosition = actualReparseStart;
+			token = fScanner.nextToken();
+
 			fPositionUpdater.update(e);
 			for (int i = first; i < category.length; i++) {
 				Position p = category[i];
