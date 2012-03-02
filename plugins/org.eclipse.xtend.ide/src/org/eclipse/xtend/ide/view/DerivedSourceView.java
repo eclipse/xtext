@@ -7,33 +7,45 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.view;
 
+import static com.google.common.collect.Iterables.*;
+
+import java.util.Set;
+
 import org.eclipse.core.internal.utils.WrappedRuntimeException;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer;
 import org.eclipse.jdt.internal.ui.text.SimpleJavaSourceViewerConfiguration;
 import org.eclipse.jdt.ui.text.IJavaPartitions;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.text.source.IOverviewRuler;
+import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
+import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.views.AbstractSourceView;
+import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -41,25 +53,53 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class DerivedSourceView extends AbstractSourceView {
+	/** The width of the overview ruler. */
+	protected static final int OVERVIEW_RULER_WIDTH = 12;
 	@Inject
 	private ITraceInformation traceInformation;
+	@Inject
+	XtendImages xtendImages;
 	private JavaSourceViewer javaSourceViewer;
 	private SimpleJavaSourceViewerConfiguration javaSourceViewerConfiguration;
+	private IStorage selectedSource;
+	private Set<IStorage> derivedSources = Sets.newHashSet();
+
+	IStorage getSelectedSource() {
+		return selectedSource;
+	}
+
+	Set<IStorage> getDerivedSources() {
+		return derivedSources;
+	}
+
+	@Override
+	public void createPartControl(Composite parent) {
+		super.createPartControl(parent);
+		createActions();
+	}
+
+	private void createActions() {
+		IActionBars actionBars = getViewSite().getActionBars();
+		IToolBarManager toolBarManager = actionBars.getToolBarManager();
+		toolBarManager.add(new DerivedSourceDropDownAction(this));
+	}
 
 	@Override
 	protected SourceViewer createSourceViewer(Composite parent) {
 		IPreferenceStore store = JavaPlugin.getDefault().getCombinedPreferenceStore();
-		javaSourceViewer = new JavaSourceViewer(parent, null, null, false, SWT.V_SCROLL | SWT.H_SCROLL, store);
+		javaSourceViewer = new JavaSourceViewer(parent, null, createOverviewRuler(), true, SWT.V_SCROLL | SWT.H_SCROLL,
+				store);
 		javaSourceViewerConfiguration = new SimpleJavaSourceViewerConfiguration(JavaPlugin.getDefault()
-				.getJavaTextTools().getColorManager(), store, null, IJavaPartitions.JAVA_PARTITIONING, false);
+				.getJavaTextTools().getColorManager(), store, null, IJavaPartitions.JAVA_PARTITIONING, true);
 		javaSourceViewer.configure(javaSourceViewerConfiguration);
 		javaSourceViewer.setEditable(false);
 		return javaSourceViewer;
 	}
 
 	@Override
-	protected boolean isValidSelection(IWorkbenchPart workbenchPart, ISelection selection) {
-		return workbenchPart instanceof XtextEditor && selection instanceof TextSelection;
+	protected boolean isValidSelection(IWorkbenchPartSelection workbenchPartSelection) {
+		return super.isValidSelection(workbenchPartSelection)
+				&& traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection)) != null;
 	}
 
 	@Override
@@ -73,10 +113,30 @@ public class DerivedSourceView extends AbstractSourceView {
 	}
 
 	@Override
-	protected String computeInput(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		ILocationInResource location = getBestAssociatedLocation(workbenchPart, selection);
+	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
+		ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
+		if (workbenchPartSelection instanceof DerivedSourceSelection) {
+			DerivedSourceSelection derivedSourceSelection = (DerivedSourceSelection) workbenchPartSelection;
+			selectedSource = derivedSourceSelection.getStorage();
+		} else {
+			derivedSources = Sets.newHashSet();
+			TextRegion localRegion = mapTextRegion(workbenchPartSelection);
+			Iterable<IStorage> transform = transform(trace.getAllAssociatedLocations(localRegion),
+					new Function<ILocationInResource, IStorage>() {
+						public IStorage apply(ILocationInResource input) {
+							return input.getStorage();
+						}
+					});
+			addAll(derivedSources, transform);
+			ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
+			if (bestAssociatedLocation != null) {
+				selectedSource = bestAssociatedLocation.getStorage();
+			} else if (!derivedSources.isEmpty()) {
+				selectedSource = derivedSources.iterator().next();
+			}
+		}
 		try {
-			return null != location ? Files.readStreamIntoString(location.getStorage().getContents()) : null;
+			return null != selectedSource ? Files.readStreamIntoString(selectedSource.getContents()) : null;
 		} catch (CoreException e) {
 			throw new WrappedRuntimeException(e);
 		}
@@ -100,25 +160,43 @@ public class DerivedSourceView extends AbstractSourceView {
 	}
 
 	@Override
-	protected ITextRegion computeSelectedTextRegion(IWorkbenchPart workbenchPart, ISelection selection, EObject eObject) {
-		ITextRegion textRegion = null;
-		ILocationInResource locationInResource = getBestAssociatedLocation(workbenchPart, selection);
-		if (locationInResource != null) {
-			textRegion = locationInResource.getTextRegion();
+	protected ITextRegion computeSelectedText(IWorkbenchPartSelection workbenchPartSelection) {
+		ITextRegion result = null;
+		if (selectedSource != null) {
+			IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
+			TextRegion localRegion = mapTextRegion(workbenchPartSelection);
+			ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
+			// FIXME : NPE
+			//			ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion, selectedSource);
+			ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
+			if (bestAssociatedLocation != null) {
+				result = bestAssociatedLocation.getTextRegion();
+			}
+			// FIXME : NPE
+			//			for (ILocationInResource locationInResource : trace.getAllAssociatedLocations(localRegion, selectedSource)) {
+			for (ILocationInResource locationInResource : trace.getAllAssociatedLocations(localRegion)) {
+				ITextRegion textRegion = locationInResource.getTextRegion();
+				annotationModel.addAnnotation(new Annotation(false),
+						new Position(textRegion.getOffset(), textRegion.getLength()));
+			}
 		}
-		return textRegion;
+		return result;
 	}
 
-	private ILocationInResource getBestAssociatedLocation(IWorkbenchPart workbenchPart, ISelection selection) {
-		IStorage storage = (IStorage) ((XtextEditor) workbenchPart).getResource();
-		ITrace trace = traceInformation.getTraceToTarget(storage);
-		if (trace == null) {
-			return null;
-		}
-		ITextSelection textSelection = (ITextSelection) selection;
-		ILocationInResource location = trace.getBestAssociatedLocation(new TextRegion(textSelection.getOffset(),
-				textSelection.getLength()));
-		return location;
+	private TextRegion mapTextRegion(IWorkbenchPartSelection workbenchPartSelection) {
+		ITextSelection textSelection = (ITextSelection) workbenchPartSelection.getSelection();
+		TextRegion localRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
+		return localRegion;
+	}
+
+	private IOverviewRuler createOverviewRuler() {
+		DefaultMarkerAnnotationAccess annotationAccess = new DefaultMarkerAnnotationAccess();
+		IOverviewRuler ruler = new OverviewRuler(annotationAccess, OVERVIEW_RULER_WIDTH,
+				EditorsUI.getSharedTextColors());
+		ruler.addAnnotationType(Annotation.TYPE_UNKNOWN);
+		ruler.setAnnotationTypeLayer(Annotation.TYPE_UNKNOWN, 0);
+		ruler.setAnnotationTypeColor(Annotation.TYPE_UNKNOWN, getDisplay().getSystemColor(SWT.COLOR_BLUE));
+		return ruler;
 	}
 
 }
