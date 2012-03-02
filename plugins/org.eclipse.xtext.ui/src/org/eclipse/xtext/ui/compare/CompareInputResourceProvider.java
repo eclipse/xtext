@@ -93,7 +93,7 @@ public class CompareInputResourceProvider implements IResourceProvider {
 		String[] path = null;
 		if (typedElement instanceof IDiffContainer) {
 			IDiffContainer parent = ((IDiffContainer) typedElement).getParent();
-			if (parent != null) {
+			if (parent != null && !Strings.isEmpty(parent.getName())) {
 				path = getPath(parent, level + 1);
 			}
 		}
