@@ -219,6 +219,28 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				"\t(|'Hello' name=ID '!';", 
 				editor);
 	}
+	
+	@Test public void testBug346652_03() throws Exception {
+		XtextEditor editor = openEditor(
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase\n" +
+			    "\n" +
+			    "generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+			    "\n" +
+				"Model:\n" +
+				"    'package' name=QualifiedName '{'|" +
+				";");
+		pressKey(editor, '\n');
+		assertState(
+				"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase\n" +
+			    "\n" +
+			    "generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n" +
+			    "\n" +
+				"Model:\n" +
+				"    'package' name=QualifiedName '{'\n" +
+				"    |;",
+				editor);
+	}
+	
 
 	@Override
 	public void setUp() throws Exception {
