@@ -50,6 +50,10 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 			return null;
 		return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
 			public IRegion exec(XtextResource state) throws Exception {
+				// resource can be null e.g. read only zip/jar entry
+				if (state == null) {
+					return null;
+				}
 				Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
 				if (element != null) {
 					return element.getSecond();
@@ -68,6 +72,10 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 			return null;
 		return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
+				// resource can be null e.g. read only zip/jar entry
+				if (state == null) {
+					return null;
+				}
 				Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
 				if (element != null && element.getFirst() != null) {
 					return getHoverInfo(element.getFirst(), textViewer, hoverRegion);
