@@ -24,6 +24,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FormatterTest extends AbstractXtextTests {
@@ -58,30 +59,43 @@ public class FormatterTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(FormatterTestLanguageStandaloneSetup.class);
-		get(FormatterTestLineSeparatorInformation.class).setLineSeparator("\n");
+		get(FormatterTestLineSeparatorInformation.class).setLineSeparator(getLineSeparator());
 	}
-
-	// test formatting based on the ParseTreeConstructor
-	private void assertFormattedPTC(String expected, String model) throws Exception {
-		EObject m = getModel(model);
+	
+	protected void assertFormattedPTC(String expected, String model) throws Exception {
+		EObject m = getModel(convertLineBreaks(model));
 		String res = getSerializer().serialize(m, SaveOptions.newBuilder().format().getOptions());
-		assertEquals(expected, res);
+		assertEquals(revealLineBreaks(convertLineBreaks(expected)), revealLineBreaks(res));
 	}
 
-	private void assertPreserved(String model) throws Exception {
+	protected void assertPreserved(String model) throws Exception {
+		model = convertLineBreaks(model);
 		EObject m = getModel(model);
 		String res = getSerializer().serialize(m, SaveOptions.newBuilder().getOptions());
-		assertEquals(model, res);
+		assertEquals(revealLineBreaks(model), revealLineBreaks(res));
 	}
 
 	// test formatting based on the NodeModel
-	private void assertFormattedNM(String expected, String model, int offset, int lengt) throws Exception {
-		ICompositeNode node = NodeModelUtils.getNode(getModel(model)).getRootNode();
+	protected void assertFormattedNM(String expected, String model, int offset, int lengt) throws Exception {
+		EObject m = getModel(model);
+		ICompositeNode node = NodeModelUtils.getNode(m).getRootNode();
 		// System.out.println(EmfFormatter.objToStr(node));
 		IFormattedRegion r = getNodeModelFormatter().format(node, offset, lengt);
 		String actual = model.substring(0, r.getOffset()) + r.getFormattedText()
 				+ model.substring(r.getLength() + r.getOffset());
 		assertEquals(expected, actual);
+	}
+
+	protected String convertLineBreaks(String model) {
+		return model.replace("\n", getLineSeparator());
+	}
+	
+	protected String revealLineBreaks(String model) {
+		return model.replace("\n", "\\n\n").replace("\r", "\\r");
+	}
+	
+	protected String getLineSeparator() {
+		return "\n";
 	}
 
 	protected void serializeToTokenBuffer(String model, ITokenStream out) throws Exception {
@@ -99,7 +113,7 @@ public class FormatterTest extends AbstractXtextTests {
 		semantic.createSequence(context, semanticObject);
 	}
 
-	private void assertEqualTokenStreams(String modelString) throws Exception {
+	protected void assertEqualTokenStreams(String modelString) throws Exception {
 		// disabled for now since the new serializer appends/prepends whitespace 
 		// to serialized regions and the old one doesn't.
 		//		EObject model = getModel(modelString);
@@ -233,7 +247,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedNM(expected, model, 0, model.length());
 	}
 
-	@Test public void testLinewrapDatatypeRuleRef1() throws Exception {
+	@Ignore@Test public void testLinewrapDatatypeRuleRef1() throws Exception {
 		final String model = "test linewrap fqn ab  .cd .ef; fqnref ab. cd. ef;";
 		final String expected = "test linewrap\nfqn\nab.cd.ef;\nfqnref\nab.cd.ef;";
 		//		assertFormattedPTC(expected, model);
@@ -314,7 +328,8 @@ public class FormatterTest extends AbstractXtextTests {
 		assertPreserved(model);
 	}
 
-	@Test public void testLinewrapDefault() throws Exception {
+	@Test
+	public void testLinewrapDefault() throws Exception {
 		FormattertestlanguageFactory f = FormattertestlanguageFactory.eINSTANCE;
 		TestLinewrapMinMax m = f.createTestLinewrapMinMax();
 		Decl d = f.createDecl();
@@ -322,7 +337,7 @@ public class FormatterTest extends AbstractXtextTests {
 		d.getName().add("yyy");
 		m.getItems().add(d);
 		String actual = getSerializer().serialize(m, SaveOptions.newBuilder().format().getOptions());
-		final String expected = "test wrapminmax\n\n\nxxx yyy;";
+		final String expected = convertLineBreaks("test wrapminmax\n\n\nxxx yyy;");
 		assertEquals(expected, actual);
 	}
 

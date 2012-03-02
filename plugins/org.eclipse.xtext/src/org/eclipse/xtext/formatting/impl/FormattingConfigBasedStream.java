@@ -110,7 +110,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		protected void addSpacesToTotalLength(LineEntry lineEntry, boolean first) {
 			Pair<AbstractRule, String> spaces = getSpaces(lineEntry, first);
 			if (spaces != null) {
-				int lastIndexOfNL = spaces.getSecond().lastIndexOf('\n');
+				int lastIndexOfNL = spaces.getSecond().lastIndexOf(getLineSeparator());
 				if (lastIndexOfNL >= 0)
 					totalLength += spaces.getSecond().length() - lastIndexOfNL;
 				else
@@ -236,7 +236,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		protected String wrap(int lines, String indent) {
 			StringBuffer result = new StringBuffer(lines + indent.length());
 			for (int i = 0; i < lines; i++)
-				result.append("\n");
+				result.append(getLineSeparator());
 			// do not indent too deep as there would be no space left
 			// for semantic information
 			int indentLength = indent.length();
@@ -273,9 +273,9 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		}
 
 		protected int countCharactersInLastLine() {
-			int lastNLIndex = value.lastIndexOf('\n');
+			int lastNLIndex = value.lastIndexOf(getLineSeparator());
 			if (lastNLIndex >= 0)
-				return (value.length() - lastNLIndex) - 1;
+				return (value.length() - lastNLIndex) - getLineSeparator().length();
 			if (preserveSpaces && leadingWS != null) {
 				int lastNLIndexInLeadingWs = leadingWS.lastIndexOf(getLineSeparator());
 				if (lastNLIndexInLeadingWs >= 0)
@@ -290,7 +290,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			if (leadingWS == null)
 				return -1;
 			int c = 0, i = -1;
-			while ((i = leadingWS.indexOf(getLineSeparator(), i + getLineSeparator().length())) >= 0)
+			while ((i = leadingWS.indexOf(getLineSeparator(), i + 1)) >= 0)
 				c++;
 			return c;
 		}
