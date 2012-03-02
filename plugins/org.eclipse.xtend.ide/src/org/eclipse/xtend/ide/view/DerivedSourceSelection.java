@@ -8,8 +8,8 @@
 package org.eclipse.xtend.ide.view;
 
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
 import org.eclipse.xtext.ui.views.DefaultWorkbenchPartSelection;
+import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
 
 /**
  * @author Michael Clay - Initial contribution and API
