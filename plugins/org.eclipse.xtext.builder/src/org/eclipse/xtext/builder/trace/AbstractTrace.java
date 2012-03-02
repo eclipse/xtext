@@ -248,7 +248,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	
 	@Nullable
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region, IStorage storage) {
-		URI uri = storage2uriMapper.getUri(storage);
+		URI uri = getURIForStorage(storage);
 		AbstractTraceRegion left = findLeafAtLeftOffset(region.getOffset());
 		left = findParentByURI(left, uri);
 		AbstractTraceRegion right = findLeafAtRightOffset(region.getOffset() + region.getLength());
@@ -271,14 +271,14 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 
 	public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region, IStorage storage) {
-		URI uri = storage2uriMapper.getUri(storage);
+		URI uri = getURIForStorage(storage);
 		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions(region);
 		Iterable<AbstractTraceRegion> filteredByURI = new TraceRegionsByURI(allTraceRegions, uri);
 		return toLocations(filteredByURI);
 	}
 
 	public Iterable<ILocationInResource> getAllAssociatedLocations(IStorage storage) {
-		URI uri = storage2uriMapper.getUri(storage);
+		URI uri = getURIForStorage(storage);
 		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
 		Iterable<AbstractTraceRegion> filteredByURI = new TraceRegionsByURI(allTraceRegions, uri);
 		return toLocations(filteredByURI);
@@ -290,11 +290,16 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 	
 	public URI getLocalURI() {
-		final URI uri = storage2uriMapper.getUri(getLocalStorage());
+		IStorage localStorage = getLocalStorage();
+		return getURIForStorage(localStorage);
+	}
+
+	protected URI getURIForStorage(IStorage storage) {
+		final URI uri = storage2uriMapper.getUri(storage);
 		if (uri != null) {
 			return uri;
 		}
-		return URI.createURI(getLocalStorage().getFullPath().toPortableString());
+		return URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 	}
 	
 	public abstract IProject getLocalProject();
@@ -311,10 +316,10 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		return result;
 	}
 
-	protected Iterable<AbstractTraceRegion> getAllTraceRegions(ITextRegion localRegion) {
+	protected Iterable<AbstractTraceRegion> getAllTraceRegions(final ITextRegion localRegion) {
 		final AbstractTraceRegion left = findLeafAtLeftOffset(localRegion.getOffset());
-		final AbstractTraceRegion right = findLeafAtRightOffset(localRegion.getOffset() + localRegion.getLength());
-		if (left == null || right == null) {
+		final int end = localRegion.getOffset() + localRegion.getLength();
+		if (left == null) {
 			return Collections.emptyList();
 		}
 		return new Iterable<AbstractTraceRegion>() {
@@ -328,7 +333,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 					
 					AbstractTraceRegion first;
 					{
-						while(allLeafs.hasNext()) {
+						while(first == null && allLeafs.hasNext()) {
 							AbstractTraceRegion next = allLeafs.next();
 							if (next.getMyOffset() == left.getMyOffset()) {
 								this.first = next;
@@ -347,7 +352,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 						if (!allLeafs.hasNext())
 							return endOfData();
 						AbstractTraceRegion candidate = allLeafs.next();
-						if (candidate.getMyOffset() >= right.getMyOffset() + right.getMyLength()) {
+						if (candidate.getMyOffset() >= end) {
 							return endOfData();
 						}
 						return candidate;
