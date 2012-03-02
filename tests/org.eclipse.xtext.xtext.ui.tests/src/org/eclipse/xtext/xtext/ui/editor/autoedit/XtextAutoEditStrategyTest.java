@@ -207,6 +207,18 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				"\t)", 
 				editor);
 	}
+	
+	@Test public void testBug346652_02() throws Exception {
+		XtextEditor editor = openEditor(
+				SAMPLE_HEADER  +
+				"Greeting:\n" +
+				"\t|'Hello' name=ID '!';");
+		pressKey(editor, '(');
+		assertState(SAMPLE_HEADER  +
+				"Greeting:\n" +
+				"\t(|'Hello' name=ID '!';", 
+				editor);
+	}
 
 	@Override
 	public void setUp() throws Exception {
