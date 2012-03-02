@@ -193,6 +193,20 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 				"Bar returns foo::bar:|;", 
 				editor);
 	}
+	
+	@Test public void testBug346652_01() throws Exception {
+		XtextEditor editor = openEditor(
+				SAMPLE_HEADER  +
+				"Greeting:\n" +
+				"\t('Hello' name=ID '!'|");
+		pressKey(editor, '\n');
+		assertState(SAMPLE_HEADER  +
+				"Greeting:\n" +
+				"\t('Hello' name=ID '!'\n" +
+				"\t\t|\n" +
+				"\t)", 
+				editor);
+	}
 
 	@Override
 	public void setUp() throws Exception {
