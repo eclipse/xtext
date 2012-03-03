@@ -55,8 +55,16 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 			if (doc.getLength() <= offset)
 				return true;
 			char charAtOffset = doc.getChar(offset);
-			boolean result = !(Character.isJavaIdentifierPart(charAtOffset) 
-					|| charAtOffset == '\'' || charAtOffset == '\"');
+			boolean result = !(
+					Character.isJavaIdentifierStart(charAtOffset)
+					|| Character.isDigit(charAtOffset)
+					|| charAtOffset == '!'
+					|| charAtOffset == '-'
+					|| charAtOffset == '('
+					|| charAtOffset == '{'
+					|| charAtOffset == '['
+					|| charAtOffset == '\''
+					|| charAtOffset == '\"');
 			return result;
 		}
 	};
