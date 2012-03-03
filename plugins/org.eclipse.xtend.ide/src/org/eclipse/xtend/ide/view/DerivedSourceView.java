@@ -115,24 +115,26 @@ public class DerivedSourceView extends AbstractSourceView {
 	@Override
 	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
 		ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
-		if (workbenchPartSelection instanceof DerivedSourceSelection) {
-			DerivedSourceSelection derivedSourceSelection = (DerivedSourceSelection) workbenchPartSelection;
-			selectedSource = derivedSourceSelection.getStorage();
-		} else {
-			derivedSources = Sets.newHashSet();
-			TextRegion localRegion = mapTextRegion(workbenchPartSelection);
-			Iterable<IStorage> transform = transform(trace.getAllAssociatedLocations(localRegion),
-					new Function<ILocationInResource, IStorage>() {
-						public IStorage apply(ILocationInResource input) {
-							return input.getStorage();
-						}
-					});
-			addAll(derivedSources, transform);
-			ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
-			if (bestAssociatedLocation != null) {
-				selectedSource = bestAssociatedLocation.getStorage();
-			} else if (!derivedSources.isEmpty()) {
-				selectedSource = derivedSources.iterator().next();
+		if (trace != null) {
+			if (workbenchPartSelection instanceof DerivedSourceSelection) {
+				DerivedSourceSelection derivedSourceSelection = (DerivedSourceSelection) workbenchPartSelection;
+				selectedSource = derivedSourceSelection.getStorage();
+			} else {
+				derivedSources = Sets.newHashSet();
+				TextRegion localRegion = mapTextRegion(workbenchPartSelection);
+				Iterable<IStorage> transform = transform(trace.getAllAssociatedLocations(localRegion),
+						new Function<ILocationInResource, IStorage>() {
+							public IStorage apply(ILocationInResource input) {
+								return input.getStorage();
+							}
+						});
+				addAll(derivedSources, transform);
+				ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
+				if (bestAssociatedLocation != null) {
+					selectedSource = bestAssociatedLocation.getStorage();
+				} else if (!derivedSources.isEmpty()) {
+					selectedSource = derivedSources.iterator().next();
+				}
 			}
 		}
 		try {
@@ -161,23 +163,25 @@ public class DerivedSourceView extends AbstractSourceView {
 
 	@Override
 	protected ITextRegion computeSelectedText(IWorkbenchPartSelection workbenchPartSelection) {
-		ITextRegion result = null;
+		ITextRegion result = ITextRegion.EMPTY_REGION;
 		if (selectedSource != null) {
 			IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
 			TextRegion localRegion = mapTextRegion(workbenchPartSelection);
 			ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
-			// FIXME : NPE
-			//			ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion, selectedSource);
-			ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
-			if (bestAssociatedLocation != null) {
-				result = bestAssociatedLocation.getTextRegion();
-			}
-			// FIXME : NPE
-			//			for (ILocationInResource locationInResource : trace.getAllAssociatedLocations(localRegion, selectedSource)) {
-			for (ILocationInResource locationInResource : trace.getAllAssociatedLocations(localRegion)) {
-				ITextRegion textRegion = locationInResource.getTextRegion();
-				annotationModel.addAnnotation(new Annotation(false),
-						new Position(textRegion.getOffset(), textRegion.getLength()));
+			if (trace != null) {
+				ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion,
+						selectedSource);
+				if (bestAssociatedLocation != null && bestAssociatedLocation.getTextRegion() != null) {
+					result = bestAssociatedLocation.getTextRegion();
+				}
+				for (ILocationInResource locationInResource : trace.getAllAssociatedLocations(localRegion,
+						selectedSource)) {
+					ITextRegion textRegion = locationInResource.getTextRegion();
+					if (textRegion != null) {
+						annotationModel.addAnnotation(new Annotation(false), new Position(textRegion.getOffset(),
+								textRegion.getLength()));
+					}
+				}
 			}
 		}
 		return result;
