@@ -10,9 +10,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.documentation.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -24,7 +29,7 @@ import com.google.inject.name.Named;
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
-public class MultiLineCommentDocumentationProvider implements IEObjectDocumentationProvider {
+public class MultiLineCommentDocumentationProvider implements IEObjectDocumentationProvider, IEObjectDocumentationProviderExtension {
 
 	public final static String RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
 	public final static String START_TAG = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.startTag";
@@ -59,22 +64,37 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 	
 	protected String findComment(EObject o) {
 		String returnValue = null;
-		ICompositeNode node = NodeModelUtils.getNode(o);
+		List<INode> documentationNodes = getDocumentationNodes(o);
+		if (!documentationNodes.isEmpty()) {
+			return documentationNodes.get(0).getText();
+		}
+		return returnValue;
+	}
+	
+	/**
+	 * Returns the nearest multi line comment node that precedes the given object.
+	 * @since 2.3
+	 * @return a list with exactly one node or an empty list if the object is undocumented.
+	 */
+	@NonNull
+	public List<INode> getDocumentationNodes(@NonNull EObject object) {
+		ICompositeNode node = NodeModelUtils.getNode(object);
+		List<INode> result = Collections.emptyList();
 		if (node != null) {
 			// get the last multi line comment before a non hidden leaf node
-			for (INode abstractNode : node.getAsTreeIterable()) {
+			for (INode abstractNode : node.getLeafNodes()) {
 				if (abstractNode instanceof ILeafNode && !((ILeafNode) abstractNode).isHidden())
 					break;
 				if (abstractNode instanceof ILeafNode && abstractNode.getGrammarElement() instanceof TerminalRule
 						&& ruleName.equalsIgnoreCase(((TerminalRule) abstractNode.getGrammarElement()).getName())) {
 					String comment = ((ILeafNode) abstractNode).getText();
 					if (comment.matches("(?s)" + startTag + ".*")) {
-						returnValue = comment;
+						result = Collections.singletonList(abstractNode);
 					}
 				}
 			}
 		}
-		return returnValue;
+		return result;
 	}
 
 	public String getDocumentation(EObject o) {
