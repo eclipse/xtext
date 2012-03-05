@@ -33,6 +33,9 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 	
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, ILocationData locationData, @Nullable AbstractTraceRegion parent) {
 		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), locationData, parent);
+		if (myOffset == myLength && myOffset == 0) {
+			throw new IllegalArgumentException();
+		}
 		if (parent == null) {
 			if (locationData.getPath() == null) {
 				throw new IllegalArgumentException("associatedPath may not be null");

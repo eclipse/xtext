@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.inject.Inject;
@@ -62,17 +63,21 @@ public class TypeReferenceSerializer {
 	}
 	
 	public void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
+		IAppendable tracedAppendable = appendable;
+		if (appendable instanceof ITreeAppendable) {
+			tracedAppendable = ((ITreeAppendable) appendable).trace(type);
+		}
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
 			if (!withoutConstraints) {
-				appendable.append("?");
+				tracedAppendable.append("?");
 			}
 			if (!wildcard.getConstraints().isEmpty()) {
 				for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
 					if (constraint instanceof JvmLowerBound) {
 						if (!withoutConstraints)
-							appendable.append(" super ");
-						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
+							tracedAppendable.append(" super ");
+						serialize(constraint.getTypeReference(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 						return;
 					}
 				}
@@ -81,22 +86,22 @@ public class TypeReferenceSerializer {
 					if (constraint instanceof JvmUpperBound) {
 						if (first) {
 							if (!withoutConstraints)
-								appendable.append(" extends ");
+								tracedAppendable.append(" extends ");
 							first = false;
 						} else {
 							if (withoutConstraints)
 								throw new IllegalStateException("cannot have two upperbounds if type should be printed without constraints");
-							appendable.append(" & ");
+							tracedAppendable.append(" & ");
 						}
-						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
+						serialize(constraint.getTypeReference(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 					}
 				}
 			} else if (withoutConstraints) {
-				appendable.append("Object");
+				tracedAppendable.append("Object");
 			}
 		} else if (type instanceof JvmGenericArrayTypeReference) {
-			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, true);
-			appendable.append("[]");
+			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, true);
+			tracedAppendable.append("[]");
 		} else if (type instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;
 			if ((paramsToWildcard || paramsToObject) && parameterized.getType() instanceof JvmTypeParameter) {
@@ -105,32 +110,32 @@ public class TypeReferenceSerializer {
 					throw new IllegalArgumentException("argument may not be null if parameters have to be replaced by wildcards");
 				if (!isLocalTypeParameter(context, parameter)) {
 					if (paramsToWildcard)
-						appendable.append("?");
+						tracedAppendable.append("?");
 					else
-						appendable.append("Object");
+						tracedAppendable.append("Object");
 					return;
 				}
 			}
 			JvmType jvmType = allowPrimitives ? type.getType() : primitives.asWrapperTypeIfPrimitive(type).getType();
-			appendable.append(jvmType);
+			tracedAppendable.append(jvmType);
 			if (!parameterized.getArguments().isEmpty()) {
-				appendable.append("<");
+				tracedAppendable.append("<");
 				for(int i = 0; i < parameterized.getArguments().size(); i++) {
 					if (i != 0) {
-						appendable.append(",");
+						tracedAppendable.append(",");
 					}
-					serialize(parameterized.getArguments().get(i), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
+					serialize(parameterized.getArguments().get(i), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 				}
-				appendable.append(">");
+				tracedAppendable.append(">");
 			}
 		} else if (type instanceof JvmAnyTypeReference) {
-			appendable.append("Object");
+			tracedAppendable.append("Object");
 		} else if (type instanceof JvmMultiTypeReference) {
-			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+			serialize(resolveMultiType(type), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else if (type instanceof JvmDelegateTypeReference) {
-			serialize(((JvmDelegateTypeReference) type).getDelegate(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+			serialize(((JvmDelegateTypeReference) type).getDelegate(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else if (type instanceof JvmSpecializedTypeReference) {
-			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else {
 			throw new IllegalArgumentException(String.valueOf(type));
 		}

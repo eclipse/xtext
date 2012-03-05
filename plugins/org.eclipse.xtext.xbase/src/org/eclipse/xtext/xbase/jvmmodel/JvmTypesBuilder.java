@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -577,16 +576,50 @@ public class JvmTypesBuilder {
 
 	/**
 	 * Creates a clone of the given {@link JvmTypeReference} without resolving any proxies.
+	 * The clone will be associated with the original element by means of {@link JvmModelAssociator associations}.
 	 */
 	public JvmTypeReference cloneWithProxies(JvmTypeReference typeRef) {
 		if(typeRef == null)
 			return null;
-		if (typeRef instanceof JvmParameterizedTypeReference
+		if (typeRef instanceof JvmParameterizedTypeReference && !typeRef.eIsProxy()
 				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
 			throw new IllegalArgumentException("typeref#type was null");
-		return EcoreUtil2.cloneWithProxies(typeRef);
+		return cloneAndAssociate(typeRef);
 	}
 
+	/**
+	 * Creates a clone of the given {@link JvmIdentifiableElement} without resolving any proxies.
+	 * The clone will be associated with the original element by means of {@link JvmModelAssociator associations}.
+	 */
+	public <T extends JvmIdentifiableElement> T cloneWithProxies(T original) {
+		if(original == null)
+			return null;
+		return cloneAndAssociate(original);
+	}
+	
+	/**
+	 * Creates a deep copy of the given object and associates each copied instance with the
+	 * clone. Does not resolve any proxies.
+	 */
+	protected <T extends EObject> T cloneAndAssociate(T original) {
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(false) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected EObject createCopy(EObject eObject) {
+				EObject result = super.createCopy(eObject);
+				if (result != null && !eObject.eIsProxy()) {
+					associator.associatePrimary(eObject, result);
+				}
+				return result;
+			}
+		};
+		@SuppressWarnings("unchecked")
+		T copy = (T) copier.copy(original);
+		copier.copyReferences();
+		return copy;
+	}
+	
 	/**
 	 * Attaches the given compile strategy to the given {@link JvmField} such that the compiler knows how to
 	 * initialize the {@link JvmField} when it is translated to Java source code.
