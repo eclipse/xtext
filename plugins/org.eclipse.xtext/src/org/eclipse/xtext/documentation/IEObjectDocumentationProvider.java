@@ -17,6 +17,10 @@ import com.google.inject.ImplementedBy;
 
 /**
  * Returns a documentation string for an EObject.
+ * There exists an extension interface for the documentation provider:
+ * <ul>
+ * <li>{@link IEObjectDocumentationProviderExtension} allows to query the nodes that yield the documentation</li>
+ * </ul>
  * 
  * @author Christoph Kulla - Initial contribution and API
  */
