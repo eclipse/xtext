@@ -36,6 +36,5 @@ public class XtextStandaloneSetupGenerated implements ISetup {
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtext2", serviceProvider);
 		
 
-
 	}
 }
