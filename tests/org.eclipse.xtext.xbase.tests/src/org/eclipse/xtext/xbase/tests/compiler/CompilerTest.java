@@ -254,25 +254,59 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"if(!true) true==false else true!=false");
 	}
 	
+	@Test public void testSwitch_() throws Exception {
+		assertCompilesTo("String _xblockexpression = null;\n" + 
+				"{\n" + 
+				"  final Object o = \"foo\";\n" + 
+				"  boolean _matched = false;\n" + 
+				"  if (!_matched) {\n" + 
+				"    if (o instanceof String) {\n" + 
+				"      final String _string = (String)o;\n" + 
+				"      _matched=true;\n" + 
+				"      /* \"\" */\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  String _switchResult_1 = null;\n" + 
+				"  boolean _matched_1 = false;\n" + 
+				"  if (!_matched_1) {\n" + 
+				"    if (o instanceof String) {\n" + 
+				"      final String _string = (String)o;\n" + 
+				"      _matched_1=true;\n" + 
+				"      _switchResult_1 = \"\";\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  _xblockexpression = (_switchResult_1);\n" + 
+				"}\n" + 
+				"return _xblockexpression;",
+				"{" +
+				"  val Object o = 'foo'" +
+				"    switch(o) {\n" + 
+				"        String: \"\"\n" + 
+				"    }\n" + 
+				"    switch(o) {\n" + 
+				"        String: \"\"\n" + 
+				"    }" +
+				"}");
+	}
+	
 	@Test public void testSwitchTypeGuards() throws Exception {
 		assertCompilesTo(
-				"\n" + 
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
-				"boolean matched = false;\n" + 
-				"if (!matched) {\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
 				"  if (x instanceof String) {\n" + 
 				"    final String _string = (String)x;\n" + 
-				"    matched=true;\n" + 
+				"    _matched=true;\n" + 
 				"    String _substring = _string.substring(3);\n" + 
 				"    String _plus = (_substring + _string);\n" + 
 				"    _switchResult = _plus;\n" + 
 				"  }\n" + 
 				"}\n" + 
-				"if (!matched) {\n" + 
+				"if (!_matched) {\n" + 
 				"  if (x instanceof Comparable) {\n" + 
 				"    final Comparable _comparable = (Comparable)x;\n" + 
-				"    matched=true;\n" + 
+				"    _matched=true;\n" + 
 				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
 				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
 				"    String _string = ((Comparable)_comparable).toString();\n" + 
