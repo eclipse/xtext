@@ -489,9 +489,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		// declare variable
-		b.openPseudoScope();
 		JvmTypeReference type = getTypeForVariableDeclaration(expr);
-		String switchResultName = b.declareSyntheticVariable(Tuples.pair(expr,"result"), "_switchResult");
+		String switchResultName = b.declareSyntheticVariable(expr, "_switchResult");
 		if (isReferenced) {
 			b.newLine();
 			serialize(type, expr, b);
@@ -501,7 +500,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		
 		internalToJavaStatement(expr.getSwitch(), b, true);
+		
+		// declare the matched variable outside the pseudo scope
+		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "_matched");
 
+		// open a pseudo scope so we can re assign 'expr' to the switch over expression (switch is used as a JvmIdentifiable)
+		b.openPseudoScope();
+		
 		// declare local var for the switch expression
 		String variableName = null;
 		if(expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
@@ -529,7 +534,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		// declare 'boolean matched' to check whether a case has matched already
 		b.newLine().append("boolean ");
-		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "matched");
 		b.append(matchedVariable).append(" = false;");
 
 		for (XCasePart casePart : expr.getCases()) {
@@ -608,9 +612,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.decreaseIndentation();
 			b.newLine().append("}");
 		}
-		b.closeScope();
-		// reset the reference
-		b.declareSyntheticVariable(expr, switchResultName);
+		b.closeScope(); // close the pseudo scope
 	}
 
 	protected void _toJavaExpression(XSwitchExpression expr, ITreeAppendable b) {
