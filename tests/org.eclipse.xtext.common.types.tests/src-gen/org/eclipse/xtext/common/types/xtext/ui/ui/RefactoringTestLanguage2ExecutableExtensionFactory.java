@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.common.types.tests.AbstractActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class RefactoringTestLanguage2ExecutableExtensionFactory extends Abstract
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.common.types.tests.AbstractActivator.getInstance().getBundle();
+		return AbstractActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.common.types.tests.AbstractActivator.getInstance().getInjector("org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage2");
+		return AbstractActivator.getInstance().getInjector(AbstractActivator.ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE2);
 	}
 	
 }

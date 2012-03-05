@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class CodetemplatesExecutableExtensionFactory extends AbstractGuiceAwareE
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator.getInstance().getBundle();
+		return CodetemplatesActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator.getInstance().getInjector("org.eclipse.xtext.ui.codetemplates.Codetemplates");
+		return CodetemplatesActivator.getInstance().getInjector(CodetemplatesActivator.ORG_ECLIPSE_XTEXT_UI_CODETEMPLATES_CODETEMPLATES);
 	}
 	
 }

@@ -3,49 +3,38 @@
  */
 package org.eclipse.xtext.xtext.ui.tests;
 
-import static com.google.inject.util.Modules.override;
-import static com.google.inject.Guice.createInjector;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
-
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
 
+import com.google.common.collect.Maps;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
 public class Activator extends AbstractUIPlugin {
-
-	private Map<String,Injector> injectors = new HashMap<String,Injector>();
+	
+	public static final String ORG_ECLIPSE_XTEXT_XTEXT_UI_ECORE2XTEXT_ECORE2XTEXTTEST = "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest";
+	
+	private static final Logger logger = Logger.getLogger(Activator.class);
+	
 	private static Activator INSTANCE;
-
-	public Injector getInjector(String languageName) {
-		return injectors.get(languageName);
-	}
+	
+	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		try {
-			registerInjectorFor("org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest");
-			
-		} catch (Exception e) {
-			Logger.getLogger(getClass()).error(e.getMessage(), e);
-			throw e;
-		}
-	}
-	
-	protected void registerInjectorFor(String language) throws Exception {
-		injectors.put(language, createInjector(
-		  override(override(getRuntimeModule(language)).with(getSharedStateModule())).with(getUiModule(language))));
 	}
 	
 	@Override
@@ -59,24 +48,48 @@ public class Activator extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
+	public Injector getInjector(String language) {
+		synchronized (injectors) {
+			Injector injector = injectors.get(language);
+			if (injector == null) {
+				injectors.put(language, injector = createInjector(language));
+			}
+			return injector;
+		}
+	}
+	
+	protected Injector createInjector(String language) {
+		try {
+			Module runtimeModule = getRuntimeModule(language);
+			Module sharedStateModule = getSharedStateModule();
+			Module uiModule = getUiModule(language);
+			Module mergedModule = Modules2.mixin(runtimeModule, sharedStateModule, uiModule);
+			return Guice.createInjector(mergedModule);
+		} catch (Exception e) {
+			logger.error("Failed to create injector for " + language);
+			logger.error(e.getMessage(), e);
+			throw new RuntimeException("Failed to create injector for " + language, e);
+		}
+	}
+
 	protected Module getRuntimeModule(String grammar) {
-		if ("org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest".equals(grammar)) {
-		  return new org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestRuntimeModule();
+		if (ORG_ECLIPSE_XTEXT_XTEXT_UI_ECORE2XTEXT_ECORE2XTEXTTEST.equals(grammar)) {
+			return new org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestRuntimeModule();
 		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
-		if ("org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest".equals(grammar)) {
-		  return new org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestUiModule(this);
+		if (ORG_ECLIPSE_XTEXT_XTEXT_UI_ECORE2XTEXT_ECORE2XTEXTTEST.equals(grammar)) {
+			return new org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getSharedStateModule() {
-		return new org.eclipse.xtext.ui.shared.SharedStateModule();
+		return new SharedStateModule();
 	}
 	
 }

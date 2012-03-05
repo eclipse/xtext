@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class ArithmeticsExecutableExtensionFactory extends AbstractGuiceAwareExe
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator.getInstance().getBundle();
+		return ArithmeticsActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator.getInstance().getInjector("org.eclipse.xtext.example.arithmetics.Arithmetics");
+		return ArithmeticsActivator.getInstance().getInjector(ArithmeticsActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS);
 	}
 	
 }
