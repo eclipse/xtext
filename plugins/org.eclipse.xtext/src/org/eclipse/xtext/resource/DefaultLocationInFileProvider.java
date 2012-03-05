@@ -17,23 +17,32 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Implementation
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultLocationInFileProvider implements ILocationInFileProvider {
+public class DefaultLocationInFileProvider implements ILocationInFileProvider, ILocationInFileProviderExtension {
 
+	@Inject(optional = true)
+	private IHiddenTokenHelper hiddenTokenHelper;
+	
 	public ITextRegion getSignificantTextRegion(EObject obj) {
 		return getTextRegion(obj, true);
 	}
@@ -43,26 +52,63 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 	}
 
 	protected ITextRegion getTextRegion(EObject obj, boolean isSignificant) {
+		return doGetTextRegion(obj, isSignificant ? RegionDescription.SIGNIFICANT : RegionDescription.FULL);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@Nullable
+	public ITextRegion getTextRegion(@NonNull EObject object, @NonNull RegionDescription query) {
+		switch(query) {
+			// we delegate the implementation to the existing and potentially overridden methods
+			case SIGNIFICANT: return getSignificantTextRegion(object);
+			case FULL: return getFullTextRegion(object);
+			default:
+				return doGetTextRegion(object, query);
+		}
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected ITextRegion doGetTextRegion(EObject obj, @NonNull RegionDescription query) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
 		if (node == null) {
 			if (obj.eContainer() == null)
 				return ITextRegion.EMPTY_REGION;
-			return getTextRegion(obj.eContainer(), isSignificant);
+			return getTextRegion(obj.eContainer(), query);
 		}
 		List<INode> nodes = null;
-		if (isSignificant)
+		if (query == RegionDescription.SIGNIFICANT)
 			nodes = getLocationNodes(obj);
 		if (nodes == null || nodes.isEmpty())
 			nodes = Collections.<INode>singletonList(node);
-		return createRegion(nodes);
+		return createRegion(nodes, query);
 	}
-
+	
 	public ITextRegion getSignificantTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList) {
 		return getTextRegion(owner, feature, indexInList, true);
 	}
 
 	public ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
 		return getTextRegion(owner, feature, indexInList, false);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	@NonNullByDefault
+	@Nullable
+	public ITextRegion getTextRegion(EObject object, EStructuralFeature feature, int indexInList,
+			RegionDescription query) {
+		switch(query) {
+			// we delegate the implementation to the existing and potentially overridden methods
+			case SIGNIFICANT: return getSignificantTextRegion(object, feature, indexInList);
+			case FULL: return getFullTextRegion(object, feature, indexInList);
+			default:
+				return doGetTextRegion(object, feature, indexInList, query);
+		}
 	}
 
 	private ITextRegion getTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList,
@@ -84,9 +130,35 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
 		}.doSwitch(feature);
 	}
+	
+	private ITextRegion doGetTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList,
+			final RegionDescription query) {
+		if (feature == null)
+			return null;
+		if (feature instanceof EAttribute) {
+			return doGetLocationOfFeature(owner, feature, indexInList, query);
+		}
+		if (feature instanceof EReference) {
+			EReference reference = (EReference) feature;
+			if (reference.isContainment() || reference.isContainer()) {
+				return getLocationOfContainmentReference(owner, reference, indexInList, query);
+			} else {
+				return doGetLocationOfFeature(owner, reference, indexInList, query);
+			}
+		}
+		return null;
+	}
 
 	protected ITextRegion getLocationOfContainmentReference(final EObject owner, EReference feature,
 			final int indexInList, boolean isSignificant) {
+		return getLocationOfContainmentReference(owner, feature, indexInList, isSignificant ? RegionDescription.SIGNIFICANT : RegionDescription.FULL);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected ITextRegion getLocationOfContainmentReference(final EObject owner, EReference feature,
+			final int indexInList, RegionDescription query) {
 		Object referencedElement = null;
 		if(feature.isMany()) {
 			List<?> values = (List<?>) owner.eGet(feature);
@@ -98,7 +170,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		else {
 			referencedElement = owner.eGet(feature);
 		}
-		return getTextRegion((EObject) referencedElement, isSignificant);
+		return getTextRegion((EObject) referencedElement, query);
 	}
 
 	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList,
@@ -113,23 +185,34 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
 	protected ITextRegion doGetLocationOfFeature(EObject owner, EStructuralFeature feature, int indexInList,
 			boolean isSignificant) {
+		return doGetLocationOfFeature(owner, feature, indexInList, isSignificant ? RegionDescription.SIGNIFICANT : RegionDescription.FULL);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected ITextRegion doGetLocationOfFeature(EObject owner, EStructuralFeature feature, int indexInList,
+			RegionDescription query) {
 		if (!feature.isMany())
 			indexInList = 0;
 		if (indexInList >= 0) {
 			List<INode> findNodesForFeature = NodeModelUtils.findNodesForFeature(owner, feature);
 			if (indexInList < findNodesForFeature.size()) {
 				INode node = findNodesForFeature.get(indexInList);
-				return new TextRegionWithLineInformation(node.getOffset(), node.getLength(), node.getStartLine() - 1, node.getEndLine() - 1);
+				return createRegion(Collections.singletonList(node), query);
 			}
-			return getTextRegion(owner, isSignificant);
+			return getTextRegion(owner, query);
 		}
 		return null;
 	}
 
 	protected List<INode> getLocationNodes(EObject obj) {
 		final EStructuralFeature nameFeature = getIdentifierFeature(obj);
-		if (nameFeature != null)
-			return NodeModelUtils.findNodesForFeature(obj, nameFeature);
+		if (nameFeature != null) {
+			List<INode> result = NodeModelUtils.findNodesForFeature(obj, nameFeature);
+			if (!result.isEmpty())
+				return result;
+		}
 
 		List<INode> resultNodes = Lists.newArrayList();
 		final ICompositeNode startNode = NodeModelUtils.getNode(obj);
@@ -166,7 +249,6 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 	}
 
 	protected ITextRegion createRegion(final List<INode> nodes) {
-		// if we've got more than one ID elements, we want to select them all
 		ITextRegion result = ITextRegion.EMPTY_REGION;
 		for (INode node : nodes) {
 			if (!isHidden(node)) {
@@ -177,7 +259,48 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		}
 		return result;
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected ITextRegion createRegion(List<INode> nodes, RegionDescription query) {
+		if (query == RegionDescription.FULL || query == RegionDescription.SIGNIFICANT)
+			return createRegion(nodes);
+		ITextRegion result = ITextRegion.EMPTY_REGION;
+		for (INode node : nodes) {
+			for(INode leafNode: node.getLeafNodes()) {
+				if (!isHidden(leafNode, query)) {
+					int length = leafNode.getLength();
+					if (length != 0)
+						result = result.merge(new TextRegionWithLineInformation(leafNode.getOffset(), length, leafNode.getStartLine() - 1, leafNode.getEndLine() - 1));
+				}
+			}
+		}
+		return result;
+	}
 
+	/**
+	 * @since 2.3
+	 */
+	protected boolean isHidden(INode node, RegionDescription query) {
+		if (query == RegionDescription.INCLUDING_WHITESPACE) {
+			return false;
+		}
+		if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
+			if (query == RegionDescription.INCLUDING_COMMENTS) {
+				if (hiddenTokenHelper != null && node.getGrammarElement() instanceof AbstractRule) {
+					boolean result = hiddenTokenHelper.isWhitespace((AbstractRule) node.getGrammarElement());
+					return result;
+				}
+				boolean result = node.getText().trim().length() == 0;
+				return result;
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	protected boolean isHidden(INode node) {
 		return node instanceof ILeafNode && ((ILeafNode) node).isHidden();
 	}

@@ -44,7 +44,6 @@ public class DefaultHiddenTokenHelper extends AbstractHiddenTokenHelper {
 	}
 
 	@Inject
-	@SuppressWarnings("unused")
 	private void setGrammar(IGrammarAccess grammar) {
 		wsRule = GrammarUtil.findRuleForName(grammar.getGrammar(), "WS");
 	}
