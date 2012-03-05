@@ -48,6 +48,14 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
+import org.eclipse.xtext.util.ITextRegionWithLineInformation
+import org.eclipse.xtext.util.TextRegionWithLineInformation
+import org.eclipse.xtext.generator.trace.LocationData
+import org.eclipse.xtext.resource.ILocationInFileProviderExtension
+import org.eclipse.xtext.common.types.JvmType
 
 /**
  * A generator implementation that processes the 
@@ -61,6 +69,8 @@ class JvmModelGenerator implements IGenerator {
 	@Inject XbaseCompiler compiler
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject ILocationInFileProvider locationProvider
+	@Inject IEObjectDocumentationProvider documentationProvider
+	@Inject IJvmModelAssociations jvmModelAssociations
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -96,23 +106,44 @@ class JvmModelGenerator implements IGenerator {
 		return importAppendable
 	}
 	
+	def traceSignificant(ITreeAppendable appendable, EObject source) {
+		val it = locationProvider.getSignificantTextRegion(source) as ITextRegionWithLineInformation
+		if (it != null)
+			appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null, null))
+		else
+			appendable
+	}
+	
+	def traceWithComments(ITreeAppendable appendable, EObject source) {
+		val it = switch(locationProvider) {
+			ILocationInFileProviderExtension: locationProvider.getTextRegion(source, ILocationInFileProviderExtension$RegionDescription::INCLUDING_COMMENTS)
+			default: locationProvider.getFullTextRegion(source)
+		} as ITextRegionWithLineInformation
+		if (it != null)
+			appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null, null))
+		else
+			appendable
+	}
+	
 	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable) {
 		generateJavaDoc(appendable)
-		generateAnnotations(appendable, true)
-		generateModifier(appendable)
+		val childAppendable = appendable.trace(it)
+		generateAnnotations(childAppendable, true)
+		generateModifier(childAppendable)
 		if (interface) {
-			appendable.append("interface ")
+			childAppendable.append("interface ")
 		} else {
-			appendable.append("class ")
+			childAppendable.append("class ")
 		}
-		appendable.append(simpleName)
-		generateTypeParameterDeclaration(appendable)
-		appendable.append(" ")
-		generateExtendsClause(appendable)
-		appendable.append("{")
+		childAppendable.traceSignificant(it).append(simpleName)
+		generateTypeParameterDeclaration(childAppendable)
+		childAppendable.append(" ")
+		generateExtendsClause(childAppendable)
+		childAppendable.append("{")
 		val b = Wrapper::wrap(true)
-		members.forEach [ b.set(generateMember(appendable.trace(it), b.get())) ]
-		appendable.newLine.append("}").newLine
+		members.forEach [ b.set(generateMember(childAppendable.traceWithComments(it), b.get())) ]
+		childAppendable.newLine.append("}")
+		appendable.newLine
 	}
 	
 	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable) {
@@ -120,7 +151,7 @@ class JvmModelGenerator implements IGenerator {
 		generateAnnotations(appendable, true)
 		generateModifier(appendable)
 		appendable.append("enum ")
-		appendable.append(simpleName)
+		appendable.traceSignificant(it).append(simpleName)
 		appendable.append(" ")
 		generateExtendsClause(appendable)
 		appendable.append("{")
@@ -229,13 +260,14 @@ class JvmModelGenerator implements IGenerator {
 		if (!first)
 			appendable.newLine
 		generateJavaDoc(appendable)
-		generateAnnotations(appendable, true)
-		generateModifier(appendable)
-		type.serialize(appendable)
-		appendable.append(" ")
-		appendable.append(simpleName)
-		generateInitialization(appendable)
-		appendable.append(";")
+		val tracedAppendable = appendable.trace(it)
+		generateAnnotations(tracedAppendable, true)
+		generateModifier(tracedAppendable)
+		type.serialize(tracedAppendable)
+		tracedAppendable.append(" ")
+		tracedAppendable.traceSignificant(it).append(simpleName)
+		generateInitialization(tracedAppendable)
+		tracedAppendable.append(";")
 		appendable.decreaseIndentation
 		return false
 	}
@@ -245,25 +277,26 @@ class JvmModelGenerator implements IGenerator {
 		if (!first)
 			appendable.newLine
 		generateJavaDoc(appendable)
-		generateAnnotations(appendable, true)
-		generateModifier(appendable)
-		generateTypeParameterDeclaration(appendable)
+		val tracedAppendable = appendable.trace(it)
+		generateAnnotations(tracedAppendable, true)
+		generateModifier(tracedAppendable)
+		generateTypeParameterDeclaration(tracedAppendable)
 		if (returnType == null) {
-			appendable.append("void")
+			tracedAppendable.append("void")
 		} else {
-			returnType.serialize(appendable)
+			returnType.serialize(tracedAppendable)
 		}
-		appendable.append(" ")
-		appendable.append(simpleName)
-		appendable.append("(")
-		generateParameters(appendable)
-		appendable.append(")")
-		generateThrowsClause(appendable)
+		tracedAppendable.append(" ")
+		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.append("(")
+		generateParameters(tracedAppendable)
+		tracedAppendable.append(")")
+		generateThrowsClause(tracedAppendable)
 		if (isAbstract) {
-			appendable.append(";")
+			tracedAppendable.append(";")
 		} else {
-			appendable.append(" ")
-			generateExecutableBody(appendable)
+			tracedAppendable.append(" ")
+			generateExecutableBody(tracedAppendable)
 		}
 		appendable.decreaseIndentation
 		return false
@@ -275,16 +308,17 @@ class JvmModelGenerator implements IGenerator {
 			if (!first)
 				appendable.newLine
 			generateJavaDoc(appendable)
-			generateAnnotations(appendable, true)
-			generateModifier(appendable)
-			generateTypeParameterDeclaration(appendable)
-			appendable.append(simpleName)
-			appendable.append("(")
-			generateParameters(appendable)
-			appendable.append(")")
-			generateThrowsClause(appendable)
-			appendable.append(" ")
-			generateExecutableBody(appendable)
+			val tracedAppendable = appendable.trace(it)
+			generateAnnotations(tracedAppendable, true)
+			generateModifier(tracedAppendable)
+			generateTypeParameterDeclaration(tracedAppendable)
+			tracedAppendable.traceSignificant(it).append(simpleName)
+			tracedAppendable.append("(")
+			generateParameters(tracedAppendable)
+			tracedAppendable.append(")")
+			generateThrowsClause(tracedAppendable)
+			tracedAppendable.append(" ")
+			generateExecutableBody(tracedAppendable)
 			appendable.decreaseIndentation
 			return false
 		}
@@ -321,8 +355,9 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateTypeParameterDeclaration(JvmTypeParameter it, ITreeAppendable appendable) {
-		appendable.append(name)
-		generateTypeParameterConstraints(appendable)
+		val tracedAppendable = appendable.trace(it)
+		tracedAppendable.traceSignificant(it).append(name)
+		generateTypeParameterConstraints(tracedAppendable)
 	}
 	
 	def void generateTypeParameterConstraints(JvmTypeParameter it, ITreeAppendable appendable) {
@@ -338,14 +373,17 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateThrowsClause(JvmExecutable it, ITreeAppendable appendable) {
-		val allExceptions = exceptions.map([type]).toSet
-		if (!allExceptions.empty) {
+		val seenExceptions = <JvmType>newHashSet
+		if (!exceptions.empty) {
 			appendable.append(" throws ")
-			appendable.append(allExceptions.head)
-			allExceptions.tail.forEach[ exception | {
-				appendable.append(", ")
-				appendable.append(exception)
-			}]
+			seenExceptions.add(exceptions.head.type)
+			appendable.trace(exceptions.head).append(exceptions.head.type)
+			exceptions.tail.forEach[ exception |
+				if (seenExceptions.add(exception.type)) { 
+					appendable.append(", ")
+					appendable.trace(exception).append(exception.type)
+				}
+			]
 		}
 	}
 	
@@ -360,11 +398,12 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable) {
-		generateAnnotations(appendable, false)
-		appendable.append("final ")
-		parameterType.serialize(appendable)
-		appendable.append(" ")
-		appendable.append(simpleName)
+		val tracedAppendable = appendable.trace(it)
+		generateAnnotations(tracedAppendable, false)
+		tracedAppendable.append("final ")
+		parameterType.serialize(tracedAppendable)
+		tracedAppendable.append(" ")
+		tracedAppendable.traceSignificant(it).append(simpleName)
 	}
 		
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
@@ -413,12 +452,26 @@ class JvmModelGenerator implements IGenerator {
 	def void generateJavaDoc(EObject it, ITreeAppendable appendable) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
+			// TODO we should track the source of the documentation in the documentation adapter
 			val doc = '''/**''' as StringConcatenation;
 			doc.newLine
 			doc.append(" * ")
 			doc.append(adapter.documentation, " * ")
 			doc.newLine
 			doc.append(" */")
+			val sourceElements = jvmModelAssociations.getSourceElements(it)
+			if (sourceElements.size == 1 && documentationProvider instanceof IEObjectDocumentationProviderExtension) {
+				val documentationNodes = (documentationProvider as IEObjectDocumentationProviderExtension).getDocumentationNodes(sourceElements.head)
+				if (!documentationNodes.empty) {
+					var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
+					for(node: documentationNodes) {
+						documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
+					}
+					appendable.trace(new LocationData(documentationTrace, null, null)).append(doc.toString)
+					appendable.newLine
+					return
+				}
+			} 
 			appendable.append(doc.toString).newLine
 		}
 	} 

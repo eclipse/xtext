@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.ILocationInFileProviderExtension;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
@@ -95,7 +96,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ILocationInFileProvider locationProvider, EObject source) {
-		this(state, locationProvider, Collections.singleton(createLocationData(locationProvider, source)));
+		this(state, locationProvider, Collections.singleton(createLocationData(locationProvider, source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS)));
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ILocationInFileProvider locationProvider,
@@ -108,7 +109,10 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 
 	public TreeAppendable trace(EObject object) {
 		// TODO use locationProvider from service registry
-		Set<ILocationData> newData = Collections.singleton(createLocationData(locationProvider, object));
+		ILocationData locationData = createLocationData(locationProvider, object, ILocationInFileProviderExtension.RegionDescription.FULL);
+		if (locationData == null)
+			return this;
+		Set<ILocationData> newData = Collections.singleton(locationData);
 		return trace(newData);
 	}
 
@@ -125,12 +129,16 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return trace(Collections.singleton(location));
 	}
 
-	protected static ILocationData createLocationData(ILocationInFileProvider locationProvider, EObject object) {
-		ITextRegion textRegion = locationProvider.getSignificantTextRegion(object);
+	@Nullable
+	protected static ILocationData createLocationData(ILocationInFileProvider locationProvider, EObject object, ILocationInFileProviderExtension.RegionDescription query) {
+		ITextRegion textRegion = locationProvider instanceof ILocationInFileProviderExtension ? 
+				((ILocationInFileProviderExtension) locationProvider).getTextRegion(object, query) : locationProvider.getFullTextRegion(object);
 		if (!(textRegion instanceof ITextRegionWithLineInformation)) {
 			if (log.isDebugEnabled())
 				log.debug("location provider returned text region without line information. Synthesized dummy data.", new Exception());
-			textRegion = new TextRegionWithLineInformation(textRegion.getOffset(), textRegion.getLength(), 0, 0);
+			if (textRegion != null)
+				textRegion = new TextRegionWithLineInformation(textRegion.getOffset(), textRegion.getLength(), 0, 0);
+			return null;
 		} 
 		ILocationData newData = createLocationData(object, (ITextRegionWithLineInformation) textRegion);
 		return newData;
@@ -144,13 +152,17 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			return trace(objects.iterator().next());
 		Set<ILocationData> newData = new LinkedHashSet<ILocationData>(size);
 		for(EObject object: objects) {
-			newData.add(createLocationData(locationProvider, object));
+			ILocationData locationData = createLocationData(locationProvider, object, ILocationInFileProviderExtension.RegionDescription.FULL);
+			if (locationData != null)
+				newData.add(locationData);
 		}
+		if (newData.isEmpty())
+			return this;
 		return trace(newData);
 	}
 	
 	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
-		ITextRegion textRegion = locationProvider.getSignificantTextRegion(object, feature, indexInList);
+		ITextRegion textRegion = locationProvider.getFullTextRegion(object, feature, indexInList);
 		if (!(textRegion instanceof ITextRegionWithLineInformation)) {
 			if (log.isDebugEnabled())
 				log.debug("location provider returned text region without line information. Synthesized dummy data.", new Exception());
@@ -161,10 +173,13 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 
 	protected static ILocationData createLocationData(EObject object, ITextRegionWithLineInformation textRegion) {
-		URI uri = object.eResource().getURI();
+		URI uri = null;
 		String projectName = null;
-		if (uri.isPlatformResource()) {
-			projectName = uri.segment(1);
+		if (object.eResource() != null) {
+			uri = object.eResource().getURI();
+			if (uri.isPlatformResource()) {
+				projectName = uri.segment(1);
+			}
 		}
 		ILocationData newData = new LocationData(textRegion, uri, projectName);
 		return newData;

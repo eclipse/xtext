@@ -46,7 +46,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	private Resource resource;
 
 	public ITextRegionWithLineInformation getSignificantTextRegion(@Nullable EObject obj) {
-		return expectedRegions.next();
+		throw new UnsupportedOperationException();		
 	}
 
 	public ITextRegionWithLineInformation getSignificantTextRegion(@Nullable EObject owner, @Nullable EStructuralFeature feature, int indexInList) {
@@ -54,7 +54,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	}
 
 	public ITextRegionWithLineInformation getFullTextRegion(@Nullable EObject obj) {
-		throw new UnsupportedOperationException();
+		return expectedRegions.next();
 	}
 
 	public ITextRegionWithLineInformation getFullTextRegion(@Nullable EObject owner, @Nullable EStructuralFeature feature, int indexInList) {
