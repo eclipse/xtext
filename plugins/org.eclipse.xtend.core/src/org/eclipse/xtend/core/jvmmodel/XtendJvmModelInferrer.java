@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.EcoreUtil2.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -135,10 +134,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			if (typeRefToObject != null)
 				inferredJvmType.getSuperTypes().add(typeRefToObject);
 		} else {
-			inferredJvmType.getSuperTypes().add(cloneWithProxies(source.getExtends()));
+			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(source.getExtends()));
 		}
 		for (JvmTypeReference intf : source.getImplements()) {
-			inferredJvmType.getSuperTypes().add(cloneWithProxies(intf));
+			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
 		}
 		copyAndFixTypeParameters(source.getTypeParameters(), inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
@@ -158,7 +157,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	protected void copyAndFixTypeParameters(List<JvmTypeParameter> typeParameters, JvmTypeParameterDeclarator target) {
 		for (JvmTypeParameter typeParameter : typeParameters) {
-			final JvmTypeParameter clonedTypeParameter = cloneWithProxies(typeParameter);
+			final JvmTypeParameter clonedTypeParameter = jvmTypesBuilder.cloneWithProxies(typeParameter);
 			target.getTypeParameters().add(clonedTypeParameter);
 			boolean upperBoundSeen = false;
 			for(JvmTypeConstraint constraint: clonedTypeParameter.getConstraints()) {
@@ -223,7 +222,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					allStatic = false;
 			}
 			for(JvmTypeReference declaredException: jvmOperation.getExceptions()) 
-				result.getExceptions().add(cloneWithProxies(declaredException));
+				result.getExceptions().add(jvmTypesBuilder.cloneWithProxies(declaredException));
 		}
 		if (commonVisibility == null)
 			result.setVisibility(JvmVisibility.PUBLIC);
@@ -279,27 +278,27 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (XtendParameter parameter : source.getParameters()) {
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 			jvmParam.setName(parameter.getName());
-			jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
+			jvmParam.setParameterType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
 			operation.getParameters().add(jvmParam);
 			associator.associate(parameter, jvmParam);
 			jvmTypesBuilder.translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
 		}
 		JvmTypeReference returnType = null;
 		if (source.getReturnType() != null) {
-			returnType = cloneWithProxies(source.getReturnType());
+			returnType = jvmTypesBuilder.cloneWithProxies(source.getReturnType());
 		} else {
 			returnType = getTypeProxy(operation);
 		}
 		operation.setReturnType(returnType);
 		copyAndFixTypeParameters(source.getTypeParameters(), operation);
 		for(JvmTypeReference exception: source.getExceptions()) {
-			operation.getExceptions().add(cloneWithProxies(exception));
+			operation.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
 		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), operation);
 		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
 		if (createExtensionInfo != null) {
 			JvmTypeReference arrayList = typeReferences.getTypeForName(ArrayList.class, container, typeReferences.wildCard());
-			JvmTypeReference hashMap = typeReferences.getTypeForName(HashMap.class, container, arrayList, cloneWithProxies(returnType));
+			JvmTypeReference hashMap = typeReferences.getTypeForName(HashMap.class, container, arrayList, jvmTypesBuilder.cloneWithProxies(returnType));
 			
 			JvmField cacheVar = jvmTypesBuilder.toField(source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), hashMap);
 			cacheVar.setFinal(true);
@@ -312,7 +311,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			initializer.setVisibility(JvmVisibility.PRIVATE);
 			initializer.setReturnType(typeReferences.getTypeForName(Void.TYPE, source));
 			for(JvmTypeReference exception: source.getExceptions()) {
-				initializer.getExceptions().add(cloneWithProxies(exception));
+				initializer.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 			}
 
 			jvmTypesBuilder.setBody(operation, compileStrategies.forCacheMethod(createExtensionInfo, cacheVar, initializer));
@@ -328,7 +327,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			for (XtendParameter parameter : source.getParameters()) {
 				jvmParam = typesFactory.createJvmFormalParameter();
 				jvmParam.setName(parameter.getName());
-				jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
+				jvmParam.setParameterType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
 				initializer.getParameters().add(jvmParam);
 				associator.associate(parameter, jvmParam);
 			}
@@ -352,13 +351,13 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (XtendParameter parameter : source.getParameters()) {
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 			jvmParam.setName(parameter.getName());
-			jvmParam.setParameterType(cloneWithProxies(parameter.getParameterType()));
+			jvmParam.setParameterType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
 			constructor.getParameters().add(jvmParam);
 			associator.associate(parameter, jvmParam);
 		}
 		copyAndFixTypeParameters(source.getTypeParameters(), constructor);
 		for(JvmTypeReference exception: source.getExceptions()) {
-			constructor.getExceptions().add(cloneWithProxies(exception));
+			constructor.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
 		jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), constructor);
 		associator.associateLogicalContainer(source.getExpression(), constructor);
@@ -373,7 +372,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			associator.associatePrimary(source, field);
 			field.setVisibility(source.getVisibility());
 			field.setStatic(source.isStatic());
-			field.setType(cloneWithProxies(source.getType()));
+			field.setType(jvmTypesBuilder.cloneWithProxies(source.getType()));
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
