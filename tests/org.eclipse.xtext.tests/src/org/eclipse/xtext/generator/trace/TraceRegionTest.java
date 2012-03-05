@@ -389,4 +389,45 @@ public class TraceRegionTest extends Assert {
 		assertEquals(1, associatedLocation.getLineNumber());
 		assertEquals(2, associatedLocation.getEndLineNumber());
 	}
+	
+	@Test
+	public void testInvertFor_05() {
+		URI path = URI.createURI("a");
+		TraceRegion parent = new TraceRegion(0, 3, 0, 3, 4, 3, 4, 6, null, path, "projectA");
+		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 2, 4, 5, parent, null, null);
+		TraceRegion second = new TraceRegion(2, 1, 2, 3, 4, 2, 4, 5, parent, null, null);
+		List<AbstractTraceRegion> invertedList = parent.invertFor(path, URI.createURI("b"), "projectB");
+		assertEquals(1, invertedList.size());
+		AbstractTraceRegion inverted = invertedList.get(0);
+		assertEquals(1, inverted.getNestedRegions().size());
+		assertEquals(4, inverted.getMyOffset());
+		assertEquals(3, inverted.getMyLength());
+		assertEquals(4, inverted.getMyLineNumber());
+		assertEquals(6, inverted.getMyEndLineNumber());
+		ILocationData associatedLocation = inverted.getMergedAssociatedLocation();
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(3, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(3, associatedLocation.getEndLineNumber());
+		
+		AbstractTraceRegion invertedChild = inverted.getNestedRegions().get(0);
+		assertEquals(0, invertedChild.getNestedRegions().size());
+		assertEquals(4, invertedChild.getMyOffset());
+		assertEquals(2, invertedChild.getMyLength());
+		assertEquals(4, invertedChild.getMyLineNumber());
+		assertEquals(5, invertedChild.getMyEndLineNumber());
+		List<ILocationData> associatedLocations = invertedChild.getAssociatedLocations();
+		assertEquals(2, associatedLocations.size());
+		associatedLocation = associatedLocations.get(0);
+		assertEquals(0, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(0, associatedLocation.getLineNumber());
+		assertEquals(1, associatedLocation.getEndLineNumber());
+		
+		associatedLocation = associatedLocations.get(1);
+		assertEquals(2, associatedLocation.getOffset());
+		assertEquals(1, associatedLocation.getLength());
+		assertEquals(2, associatedLocation.getLineNumber());
+		assertEquals(3, associatedLocation.getEndLineNumber());
+	}
 }

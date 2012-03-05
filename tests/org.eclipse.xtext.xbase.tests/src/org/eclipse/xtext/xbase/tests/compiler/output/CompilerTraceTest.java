@@ -170,7 +170,10 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		xbaseCodeWithMarker = " " + xbaseCodeWithMarker + " ";
 		Matcher xbaseMatcher = p.matcher(xbaseCodeWithMarker);
 		assertTrue(xbaseMatcher.matches());
-		String actualCode = xbaseMatcher.group(1) + xbaseMatcher.group(2) + xbaseMatcher.group(3); 
+		String xbaseGroup1 = xbaseMatcher.group(1);
+		String xbaseGroup2 = xbaseMatcher.group(2);
+		String xbaseGroup3 = xbaseMatcher.group(3);
+		String actualCode = xbaseGroup1 + xbaseGroup2 + xbaseGroup3; 
 		XExpression model = expression(actualCode,true);
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(true), locationProvider, model, "  ", "\n");
 		XbaseCompiler compiler = get(XbaseCompiler.class);
@@ -179,10 +182,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		String compiledJavaCode = appendable.getContent();
 		Matcher javaMatcher = p.matcher(javaCodeWithMarker);
 		assertTrue(javaMatcher.matches());
-		String actualExpectation = javaMatcher.group(1) + javaMatcher.group(2) + javaMatcher.group(3);
+		String javaGroup1 = javaMatcher.group(1);
+		String javaGroup2 = javaMatcher.group(2);
+		String javaGroup3 = javaMatcher.group(3);
+		String actualExpectation = javaGroup1 + javaGroup2 + javaGroup3;
 		assertEquals(actualExpectation, compiledJavaCode);
 		ITrace trace = new SimpleTrace(appendable.getTraceRegion());
-		ILocationInResource location = trace.getBestAssociatedLocation(new TextRegion(javaMatcher.group(1).length(), javaMatcher.group(2).length()));
-		assertEquals(new TextRegion(xbaseMatcher.group(1).length(), xbaseMatcher.group(2).length()), location.getTextRegion());
+		ILocationInResource location = trace.getBestAssociatedLocation(new TextRegion(javaGroup1.length(), javaGroup2.length()));
+		assertEquals(new TextRegion(xbaseGroup1.length(), xbaseGroup2.length()), location.getTextRegion());
 	}
 }

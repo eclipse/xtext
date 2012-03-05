@@ -58,7 +58,8 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 		return myRegion.getLineNumber();
 	}
 	
-	protected ITextRegionWithLineInformation getMyRegion() {
+	@Override
+	public ITextRegionWithLineInformation getMyRegion() {
 		return myRegion;
 	}
 

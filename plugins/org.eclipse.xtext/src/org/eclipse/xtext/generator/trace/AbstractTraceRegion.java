@@ -206,7 +206,7 @@ public abstract class AbstractTraceRegion {
 		List<AbstractTraceRegion> result = Lists.newArrayListWithCapacity(2);
 		TraceRegion current = null;
 		int currentEndOffset = 0;
-		for(int i = 0; i < locations.size(); i++) { // avoid concurrent modification exceptions
+		outer: for(int i = 0; i < locations.size(); i++) { // avoid concurrent modification exceptions
 			Pair<ILocationData, AbstractTraceRegion> nextPair = locations.get(i);
 			ILocationData nextLocation = nextPair.getFirst();
 			AbstractTraceRegion nextRegion = nextPair.getSecond();
@@ -217,6 +217,7 @@ public abstract class AbstractTraceRegion {
 					ILocationData newData = createLocationData(nextRegion, myPath, myProjectName);
 					if (!writableLocations.contains(newData))
 						writableLocations.add(newData);
+					continue outer;
 				} else {
 					// walk upwards if necessary
 					while(current != null && currentEndOffset <= nextLocation.getOffset()) {
@@ -269,8 +270,8 @@ public abstract class AbstractTraceRegion {
 		return result;
 	}
 
-	public LocationData createLocationData(AbstractTraceRegion nextRegion, URI myPath, String myProjectName) {
-		return new LocationData(nextRegion.getMyOffset(), nextRegion.getMyLength(), nextRegion.getMyLineNumber(), nextRegion.getMyEndLineNumber(), myPath, myProjectName);
+	public LocationData createLocationData(AbstractTraceRegion region, URI myPath, String myProjectName) {
+		return new LocationData(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), myPath, myProjectName);
 	}
 	
 	/**
@@ -292,6 +293,10 @@ public abstract class AbstractTraceRegion {
 	public abstract int getMyLineNumber();
 	
 	public abstract int getMyEndLineNumber();
+	
+	public ITextRegionWithLineInformation getMyRegion() {
+		return new TextRegionWithLineInformation(getMyOffset(), getMyLength(), getMyLineNumber(), getMyEndLineNumber());
+	}
 	
 	public abstract List<ILocationData> getAssociatedLocations();
 	

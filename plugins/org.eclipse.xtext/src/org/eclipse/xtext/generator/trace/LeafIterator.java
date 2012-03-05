@@ -8,10 +8,8 @@
 package org.eclipse.xtext.generator.trace;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
@@ -23,21 +21,6 @@ import com.google.common.collect.Lists;
  */
 @NonNullByDefault
 public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
-
-	/**
-	 * A trace region that will not be added to the child list of the given parent.
-	 */
-	protected static class TemporaryTraceRegion extends AbstractStatefulTraceRegion {
-		protected TemporaryTraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, List<ILocationData> locations,
-				AbstractTraceRegion parent) {
-			super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), locations, parent);
-		}
-
-		@Override
-		protected void setAsChildIn(AbstractTraceRegion parent) {
-			// we don't want to add temporary regions to the parent's child list
-		}
-	}
 
 	private AbstractTraceRegion current;
 	private int expectedOffset;
