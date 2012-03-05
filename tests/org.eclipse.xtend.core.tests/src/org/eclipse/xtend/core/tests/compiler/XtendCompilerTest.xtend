@@ -29,15 +29,15 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			public class Foo {
 			  protected String testSwitch(final Object e) {
 			    String _switchResult = null;
-			    boolean matched = false;
-			    if (!matched) {
+			    boolean _matched = false;
+			    if (!_matched) {
 			      if (e instanceof String) {
 			        final String _string = (String)e;
-			        matched=true;
+			        _matched=true;
 			        return "";
 			      }
 			    }
-			    if (!matched) {
+			    if (!_matched) {
 			      _switchResult = null;
 			    }
 			    return _switchResult;
@@ -84,10 +84,10 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  public Object foo() {
 			    Object _switchResult = null;
 			    final Object __valOfSwitchOver = null;
-			    boolean matched = false;
-			    if (!matched) {
+			    boolean _matched = false;
+			    if (!_matched) {
 			      if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {
-			        matched=true;
+			        _matched=true;
 			        final Function1<Object,Object> _function = new Function1<Object,Object>() {
 			            public Object apply(final Object it) {
 			              return it;
@@ -96,9 +96,9 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			        _switchResult = _function;
 			      }
 			    }
-			    if (!matched) {
+			    if (!_matched) {
 			      if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {
-			        matched=true;
+			        _matched=true;
 			        final Function1<Integer,Integer> _function_1 = new Function1<Integer,Integer>() {
 			            public Integer apply(final Integer it) {
 			              return it;
