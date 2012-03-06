@@ -85,6 +85,17 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("\t");
     _builder.append("def bar(List<String list, Integer a)");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static String setZonk(String s, String s2) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s + s2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
@@ -701,6 +712,40 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     XbaseInformationControlInput _second_3 = triple.getSecond();
     String _unsugaredExpression = _second_3.getUnsugaredExpression();
     Assert.assertEquals("_extensionJava.bar(it, 40 + 2)", _unsugaredExpression);
+  }
+  
+  @Test
+  public void testBug373054() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package testpackage");
+    _builder.newLine();
+    _builder.append("import static extension testpackage.Extension.*");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar(){}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def baz(String it, String s){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("zonk = s + s + s");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    final XtextEditor editor = this.testHelper.openEditor(_createFile);
+    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
+    XbaseInformationControlInput _second = triple.getSecond();
+    String _unsugaredExpression = _second.getUnsugaredExpression();
+    Assert.assertEquals("setZonk(it, s + s + s)", _unsugaredExpression);
   }
   
   public Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> computeAstAndInvokeHover(final XtextEditor editor, final int indexOfExpressionToHover, final int addOffset) {

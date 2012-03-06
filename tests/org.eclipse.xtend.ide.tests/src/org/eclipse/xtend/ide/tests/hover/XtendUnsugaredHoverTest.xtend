@@ -51,6 +51,10 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 				def barCharSequence(Integer p1, CharSequence c)
 				
 				def bar(List<String list, Integer a)
+				
+				def static String setZonk(String s, String s2) {
+					s + s2
+				}
 			}
 			
 			'''.toString
@@ -323,6 +327,23 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 		assertEquals(triple.second.html, javaDocHoverInput.html)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation)), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extensionJava.bar(it, 40 + 2)", triple.second.getUnsugaredExpression)
+	}
+	
+	@Test
+	def testBug373054() throws Exception {
+		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		package testpackage
+		import static extension testpackage.Extension.*
+		class Foo {
+			def bar(){}
+			def baz(String it, String s){
+				zonk = s + s + s
+			}
+			
+		}
+		'''.toString))
+		val triple = computeAstAndInvokeHover(editor,0,0)
+		assertEquals("setZonk(it, s + s + s)", triple.second.getUnsugaredExpression)
 	}
 	
 	def computeAstAndInvokeHover(XtextEditor editor, int indexOfExpressionToHover, int addOffset){
