@@ -52,7 +52,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
       final XtendClass clazz = xtendFile.getXtendClass();
       final String signature = this.signatureProvider.getSignature(clazz);
-      Assert.assertEquals("<b>testPackage.Foo</b>", signature);
+      Assert.assertEquals("Foo", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -83,8 +83,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendMember xtendFunction2 = _members_1.get(1);
       final String signature1 = this.signatureProvider.getSignature(xtendFunction1);
       final String signature2 = this.signatureProvider.getSignature(xtendFunction2);
-      Assert.assertEquals("<b>Object bar(String a) throws NullPointerException</b>", signature1);
-      Assert.assertEquals("<b>void bar(String a, int b) throws NullPointerException, RuntimeException</b>", signature2);
+      Assert.assertEquals("Object bar(String a) throws NullPointerException", signature1);
+      Assert.assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException", signature2);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -112,7 +112,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       EList<XtendParameter> _parameters = xtendFunction.getParameters();
       final XtendParameter xtendParameter = _parameters.get(0);
       final String signature = this.signatureProvider.getSignature(xtendParameter);
-      Assert.assertEquals("<b>String a - bar(String)</b>", signature);
+      Assert.assertEquals("String a - bar(String)", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -152,7 +152,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       XtendMember _get = _members.get(0);
       final XtendField xtendField = ((XtendField) _get);
       final String signature = this.signatureProvider.getSignature(xtendField);
-      Assert.assertEquals("<b>Collections testPackage.Foo.collections</b>", signature);
+      Assert.assertEquals("Collections collections", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -177,7 +177,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       EList<XtendMember> _members = clazz.getMembers();
       final XtendMember xtendConstructor = _members.get(0);
       final String signature = this.signatureProvider.getSignature(xtendConstructor);
-      Assert.assertEquals("<b>testPackage.Foo (String a, int b)</b>", signature);
+      Assert.assertEquals("Foo (String a, int b)", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -214,7 +214,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
       JvmConstructor _constructor = constructorCall.getConstructor();
       final String signature = this.signatureProvider.getSignature(_constructor);
-      Assert.assertEquals("<b>testPackage.Foo ()</b>", signature);
+      Assert.assertEquals("Foo ()", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
