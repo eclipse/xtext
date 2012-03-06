@@ -179,17 +179,17 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				});
 		JvmTypeReference resolvedExpectedType = typeArgumentContext.resolve(typeReferenceWithPlaceHolder); 
 		appendable.append("new ");
-		serialize(resolvedExpectedType, null, appendable, true, false);
+		serialize(resolvedExpectedType, context, appendable, true, false);
 		appendable.append("() {");
 		appendable.increaseIndentation().increaseIndentation();
 		appendable.newLine().append("public ");
-		serialize(typeArgumentContext.resolve(operation.getReturnType()), null, appendable, true, false);
+		serialize(typeArgumentContext.resolve(operation.getReturnType()), context, appendable, true, false);
 		appendable.append(" ").append(operation.getSimpleName()).append("(");
 		EList<JvmFormalParameter> params = operation.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 			JvmFormalParameter p = iterator.next();
 			final String name = p.getName();
-			serialize(typeArgumentContext.resolve(p.getParameterType()), null, appendable, true, false);
+			serialize(typeArgumentContext.resolve(p.getParameterType()), context, appendable, true, false);
 			appendable.append(" ").append(name);
 			if (iterator.hasNext())
 				appendable.append(",");
