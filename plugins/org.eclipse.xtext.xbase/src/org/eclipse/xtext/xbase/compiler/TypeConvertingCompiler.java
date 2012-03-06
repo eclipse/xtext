@@ -249,7 +249,6 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	/**
 	 * @param primitive unused in this context but useful for inheritors 
-	 * @param context unused in this context but useful for inheritors
 	 */
 	protected void convertPrimitiveToWrapper(
 			final JvmTypeReference primitive, 
@@ -257,7 +256,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			XExpression context, 
 			final ITreeAppendable appendable,
 			final Later expression) {
-		serialize(wrapper, null, appendable);
+		serialize(wrapper, context, appendable);
 		appendable.append(".");
 		appendable.append("valueOf(");
 		expression.exec(appendable);
@@ -266,7 +265,6 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	/**
 	 * @param wrapper unused in this context but useful for inheritors 
-	 * @param context unused in this context but useful for inheritors
 	 */
 	protected void convertWrapperToPrimitive(
 			final JvmTypeReference wrapper, 
@@ -278,7 +276,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		expression.exec(appendable);
 		appendable.append(")");
 		appendable.append(".");
-		serialize(primitive, null, appendable);
+		serialize(primitive, context, appendable);
 		appendable.append("Value(");
 		appendable.append(")");
 	}

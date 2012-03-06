@@ -64,7 +64,7 @@ public class TypeReferenceSerializer {
 	
 	public void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
 		IAppendable tracedAppendable = appendable;
-		if (appendable instanceof ITreeAppendable) {
+		if (appendable instanceof ITreeAppendable && type.eResource() == context.eResource()) {
 			tracedAppendable = ((ITreeAppendable) appendable).trace(type);
 		}
 		if (type instanceof JvmWildcardTypeReference) {
