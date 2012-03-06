@@ -68,7 +68,7 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 		throw new UnsupportedOperationException("FakeTreeAppendable cannot provide trace information");
 	}
 
-	public ITreeAppendable trace(EObject object) {
+	public ITreeAppendable trace(EObject object, boolean useForDebugging) {
 		return this;
 	}
 	
@@ -83,5 +83,9 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
 		return this;
 	}
-	
+
+	public ITreeAppendable trace(EObject object) {
+		return this;
+	}
+
 }

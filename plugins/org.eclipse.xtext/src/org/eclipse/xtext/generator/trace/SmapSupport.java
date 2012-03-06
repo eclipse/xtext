@@ -45,7 +45,7 @@ public class SmapSupport {
 
 	public String generateSmap(AbstractTraceRegion rootTraceRegion, String outputFileName) {
 		final Set<LineMapping> lineData = newLinkedHashSet();
-		createSmapInfo(rootTraceRegion, lineData, -1);
+		createSmapInfo(rootTraceRegion, lineData);
 		List<LineMapping> lineInfo = normalizeLineInfo(lineData);
 
 		return toSmap(outputFileName, lineInfo);
@@ -89,43 +89,42 @@ public class SmapSupport {
 				&& current.sourceStartLine == mapping.sourceStartLine
 				&& current.source.equals(mapping.source)) {
 				
-				current.targetStartLine = mapping.targetStartLine;
+				current.targetStartLine = Math.min(current.targetStartLine, mapping.targetStartLine);
+				current.targetEndLine = Math.max(current.targetEndLine, mapping.targetEndLine);
 			} else {
-				int lastLine = mapping.targetEndLine;
 				if (current != null) {
-					lastLine = current.targetStartLine-1;
 					result.add(0,current);
 				}
-				if (lastLine < mapping.targetStartLine) {
-					lastLine = mapping.targetStartLine;
-				}
-				current = new LineMapping(mapping.sourceStartLine, mapping.targetStartLine, lastLine, mapping.source);
+				current = new LineMapping(mapping.sourceStartLine, mapping.targetStartLine, mapping.targetEndLine, mapping.source);
 			}
 		}
 		result.add(0, current);
 		return result;
 	}
 
-	public void createSmapInfo(AbstractTraceRegion targetRegion, Set<LineMapping> lineMappings, int mappedLine) {
-		if (mappedLine == targetRegion.getMyLineNumber()) {
-			if (mappedLine == targetRegion.getMyEndLineNumber())
-				return; //SKIP
-			for (AbstractTraceRegion nested: targetRegion.getNestedRegions()) {
-				createSmapInfo(nested, lineMappings, mappedLine);
+	public Set<Integer> createSmapInfo(AbstractTraceRegion targetRegion, Set<LineMapping> lineMappings) {
+		Set<Integer> mapped = newHashSet();
+		for (AbstractTraceRegion nested: targetRegion.getNestedRegions()) {
+			mapped.addAll(createSmapInfo(nested, lineMappings));
+		}
+		if (targetRegion.isUseForDebugging()) {
+			ILocationData location = targetRegion.getMergedAssociatedLocation();
+			if (location != null) {
+				final URI path = targetRegion.getAssociatedPath();
+				if (path != null) {
+					int myLineNumber = targetRegion.getMyLineNumber();
+					int myEndLineNumber = targetRegion.getMyEndLineNumber();
+					for (int i = myLineNumber ;i <= myEndLineNumber;i++) {
+						if (!mapped.contains(i)) {
+							final LineMapping e = new LineMapping(location.getLineNumber()+1, i, i, path);
+							lineMappings.add(e);
+							mapped.add(i);
+						}
+					}
+				}
 			}
 		}
-		ILocationData location = targetRegion.getMergedAssociatedLocation();
-		if (location != null) {
-			final URI path = targetRegion.getAssociatedPath();
-			if (path != null) {
-				lineMappings.add(new LineMapping(location.getLineNumber()+1, targetRegion.getMyLineNumber(), targetRegion.getMyEndLineNumber(), path));
-			}
-		}
-		if (targetRegion.getMyLineNumber() != targetRegion.getMyEndLineNumber()) {
-			for (AbstractTraceRegion nested: targetRegion.getNestedRegions()) {
-				createSmapInfo(nested, lineMappings, targetRegion.getMyLineNumber());
-			}
-		}
+		return mapped;
 	}
 
 	protected String getStratumName(final URI path) {

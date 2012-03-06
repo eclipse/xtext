@@ -29,11 +29,18 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	private int length;
 	private int lineNumber;
 	private int endLineNumber;
+	
+	private boolean useForDebugging;
+	
+	public boolean isUseForDebugging() {
+		return useForDebugging;
+	}
 
 	public AppendableBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset, int lineNumber) {
 		super(parent);
 		this.offset = offset;
 		this.lineNumber = lineNumber;
+		this.useForDebugging = delegate.isUseForDebugging();
 		boolean useLocationsFromDelegate = true;
 		if (parent != null) {
 			URI parentPath = parent.getAssociatedPath();
@@ -59,11 +66,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		int length = 0;
 		int line = lineNumber;
 		for (Object child : delegate.getChildren()) {
-			if (child instanceof String) {
-				String s = (String) child;
-				length += s.length();
-				line += Strings.countLineBreaks(s);
-			} else {
+			if (child instanceof TreeAppendable) {
 				TreeAppendable castedChild = (TreeAppendable) child;
 				if (hasVisibleChildren(castedChild)) {
 					AppendableBasedTraceRegion childRegion = new AppendableBasedTraceRegion(
@@ -71,6 +74,10 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 					length += childRegion.getMyLength();
 					line = childRegion.getMyEndLineNumber();
 				}
+			} else {
+				String s = child.toString();
+				length += s.length();
+				line += Strings.countLineBreaks(s);
 			}
 		}
 		this.length = length;

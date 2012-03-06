@@ -47,7 +47,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -112,9 +111,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
-//		boolean canCompileToExpression = canCompileToJavaExpression(expr, b);
-//		if (canCompileToExpression && isReferenced)
-//			return;
 		if (expressionHelper.isShortCircuiteBooleanOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
 		} else {
@@ -240,7 +236,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else {
 			final String referenceName = getReferenceName(call, b);
 			if (referenceName != null) {
-				b.append(referenceName);
+				b.trace(call, false).append(referenceName);
 			} else {
 				featureCalltoJavaExpression(call, b, true);
 			}
@@ -263,21 +259,19 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected ITreeAppendable appendTypeArguments(final XAbstractFeatureCall call, ITreeAppendable b) {
 		if (!call.getTypeArguments().isEmpty()) {
 			ILocationData locationData = getLocationWithTypeArguments(call);
+			ITreeAppendable typeArgumentsAppendable = b;
 			if (locationData != null)
-				b = b.trace(locationData);
-			b.append("<");
+				typeArgumentsAppendable = b.trace(locationData);
+			typeArgumentsAppendable.append("<");
 			for (int i = 0; i < call.getTypeArguments().size(); i++) {
 				if (i != 0) {
-					b.append(", ");
+					typeArgumentsAppendable.append(", ");
 				}
 				JvmTypeReference typeArgument = call.getTypeArguments().get(i);
-				ITreeAppendable typeArgumentAppendable = b.trace(typeArgument);
-				serialize(typeArgument, call, typeArgumentAppendable);
+				ITreeAppendable singleTypeArgumentAppendable = typeArgumentsAppendable.trace(typeArgument, false);
+				serialize(typeArgument, call, singleTypeArgumentAppendable);
 			}
-			b.append(">");
-			if (locationData != null) {
-				b = b.trace(call);
-			}
+			typeArgumentsAppendable.append(">");
 		} else if (call.getFeature() instanceof JvmExecutable) {
 			final JvmExecutable executable = (JvmExecutable) call.getFeature();
 			if (!executable.getTypeParameters().isEmpty()) {
@@ -582,6 +576,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
+	private Pattern pattern = Pattern.compile("\\$(\\$|[0-9]+)");
+	
 	protected void appendInlineFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
 		JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(call);
 		String formatString = null;
@@ -597,7 +593,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (formatString == null)
 			throw new IllegalStateException();
 		List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
-		Pattern pattern = Pattern.compile("\\$(\\$|[0-9]+)");
 		Matcher matcher = pattern.matcher(formatString);
 		int prevEnd = 0;
 		while(matcher.find()) {
@@ -616,14 +611,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					appendTypeArguments(call, b);
 				} else {
 					XExpression argument = arguments.get(index);
-					if (getReferenceName(argument, b) == null && isVariableDeclarationRequired(argument, b)) {
-						JvmTypeReference type = getTypeProvider().getExpectedType(argument);
-						if (type == null)
-							type = getTypeProvider().getType(argument);
-						compileAsJavaExpression(argument, b, type);
-					} else {
-						internalToJavaExpression(argument, b);
-					}
+					appendArgument(argument, b);
 				}
 			}
 			prevEnd = matcher.end();
@@ -631,6 +619,62 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (prevEnd != formatString.length()) {
 			b.append(formatString.substring(prevEnd));
 		}
+	}
+	
+	protected void appendArguments(List<? extends XExpression> arguments, ITreeAppendable b) {
+		if (arguments == null)
+			return;
+		for (int i = 0; i < arguments.size(); i++) {
+			XExpression argument = arguments.get(i);
+			appendArgument(argument, b);
+			if (i + 1 < arguments.size())
+				b.append(", ");
+		}
+	}
+	
+	protected void appendArgument(XExpression argument, ITreeAppendable b) {
+		final String referenceName = getReferenceName(argument, b);
+		/*
+		 * This is done to support better debugging experience.
+		 * Consider the following xbase expression:
+		 * 
+		 * foo(
+		 *   new String())
+		 *   
+		 *  The compiler could translate that to a single line, but then the two lines in the source would map
+		 *  to the same line in the Java code, so it's not possible to have two steps. 
+		 *  Therefore we add a newline in the Java if the user had one the expression defined in a new line.
+		 */
+		final boolean needsNewLine = referenceName == null && isDeclaredInNewLine(argument);
+		if (needsNewLine) {
+			b.newLine();
+			b.increaseIndentation();
+		}
+		if (referenceName == null && isVariableDeclarationRequired(argument, b)) {
+			JvmTypeReference type = getTypeProvider().getExpectedType(argument);
+			if (type == null)
+				type = getTypeProvider().getType(argument);
+			compileAsJavaExpression(argument, b, type);
+		} else {
+			internalToJavaExpression(argument, b);
+		}
+		if (needsNewLine) {
+			b.decreaseIndentation();
+		}
+	}
+	
+	protected boolean isDeclaredInNewLine(XExpression obj) {
+		ICompositeNode node = NodeModelUtils.getNode(obj);
+		if (node != null) {
+			int line = -1;
+			for(ILeafNode n : node.getLeafNodes()) {
+				if (n.isHidden() && line == -1)
+					line = n.getStartLine();
+				if (!n.isHidden() && line != -1)
+					return line != n.getStartLine();
+			}
+		}
+		return false;
 	}
 
 	protected JvmTypeReference getUpperBound(XAbstractFeatureCall call, final EList<JvmTypeConstraint> constraints) {
@@ -641,24 +685,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			typeArg = constraints.get(0).getTypeReference();
 		}
 		return typeArg;
-	}
-
-	protected void appendArguments(List<? extends XExpression> arguments, ITreeAppendable b) {
-		if (arguments == null)
-			return;
-		for (int i = 0; i < arguments.size(); i++) {
-			XExpression argument = arguments.get(i);
-			if (getReferenceName(argument, b) == null && isVariableDeclarationRequired(argument, b)) {
-				JvmTypeReference type = getTypeProvider().getExpectedType(argument);
-				if (type == null)
-					type = getTypeProvider().getType(argument);
-				compileAsJavaExpression(argument, b, type);
-			} else {
-				internalToJavaExpression(argument, b);
-			}
-			if (i + 1 < arguments.size())
-				b.append(", ");
-		}
 	}
 
 	protected ILogicalContainerProvider getLogicalContainerProvider() {

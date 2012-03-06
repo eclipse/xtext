@@ -118,6 +118,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b, boolean isReferenced) {
+		b = b.trace(expr, false);
 		if (expr.getExpressions().isEmpty())
 			return;
 		if (expr.getExpressions().size()==1) {
@@ -173,6 +174,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToConvertedExpression(expr.getExpressions().get(0), b, null);
 			return;
 		}
+		b = b.trace(expr, false);
 		b.append(getVarName(expr, b));
 	}
 
@@ -252,7 +254,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XTryCatchFinallyExpression expr, ITreeAppendable b) {
-		b.append(getVarName(expr, b));
+		b.trace(expr, false).append(getVarName(expr, b));
 	}
 
 	/**
@@ -410,7 +412,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaExpression(XConstructorCall expr, ITreeAppendable b) {
 		String varName = getVarName(expr, b);
-		b.append(varName);
+		b = b.trace(expr, false).append(varName);
 	}
 	
 	/**
@@ -484,7 +486,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XIfExpression expr, ITreeAppendable b) {
-		b.append(getVarName(expr, b));
+		b = b.trace(expr, false).append(getVarName(expr, b));
 	}
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
@@ -616,7 +618,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XSwitchExpression expr, ITreeAppendable b) {
-		b.append(getVarName(expr, b));
+		b.trace(expr, false).append(getVarName(expr, b));
 	}
 
 	@Inject
@@ -689,7 +691,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected void _toJavaExpression(final XClosure call, final ITreeAppendable b) {
-		b.append(getVarName(call, b));
+		b.trace(call, false).append(getVarName(call, b));
 	}
 	
 	@Override

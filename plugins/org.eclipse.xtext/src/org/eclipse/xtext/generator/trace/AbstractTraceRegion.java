@@ -402,6 +402,10 @@ public abstract class AbstractTraceRegion {
 		result.append(']');
 		return nextOffset;
 	}
+	
+	public boolean isUseForDebugging() {
+		return true;
+	}
 
 	/**
 	 * Returns the hash code value for this region.  The hash code
