@@ -5,7 +5,7 @@ package org.eclipse.xtext.purexbase.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 
 import com.google.inject.Inject;
 
@@ -14,7 +14,8 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class PureXbaseLabelProvider extends DefaultEObjectLabelProvider {
+@SuppressWarnings("restriction")
+public class PureXbaseLabelProvider extends XbaseLabelProvider {
 	
 	@Inject
 	public PureXbaseLabelProvider(AdapterFactoryLabelProvider delegate) {

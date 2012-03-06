@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.hover;
 
+import static org.eclipse.xtext.xbase.ui.hover.HoverLinkHelper.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
@@ -43,6 +44,7 @@ import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -93,6 +95,8 @@ public class XbaseHoverDocumentationProvider {
 	protected IEObjectDocumentationProvider documentationProvider;
 	@Inject
 	protected JvmModelGenerator jvmModelGenerator;
+	@Inject
+	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
 
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
@@ -103,7 +107,7 @@ public class XbaseHoverDocumentationProvider {
 		context = object;
 		fLiteralContent = 0;
 		List<String> parameterNames = initParameterNames();
-		Map<String,org.eclipse.emf.common.util.URI> exceptionNamesToURI = initExceptionNamesToURI();
+		Map<String,URI> exceptionNamesToURI = initExceptionNamesToURI();
 		addAnnotations(object);
 		getDocumentationWithPrefix(object);
 		Javadoc javadoc = getJavaDoc();
@@ -200,6 +204,8 @@ public class XbaseHoverDocumentationProvider {
 		} else if (buffer.length() > 0) {
 			handleSuperMethodReferences(object);
 		}
+		buffer.append(getOriginalDeclarationInformation(object));
+		buffer.append(getDerivedElementInformation(object));
 		String result = buffer.toString();
 		buffer = null;
 		rawJavaDoc = null;
@@ -217,8 +223,8 @@ public class XbaseHoverDocumentationProvider {
 		return result;
 	}
 
-	protected Map<String,org.eclipse.emf.common.util.URI> initExceptionNamesToURI() {
-		Map<String,org.eclipse.emf.common.util.URI> result = Maps.newHashMap();
+	protected Map<String,URI> initExceptionNamesToURI() {
+		Map<String,URI> result = Maps.newHashMap();
 		if (context instanceof JvmExecutable) {
 			for (JvmTypeReference exception : ((JvmExecutable) context).getExceptions()) {
 				result.put(exception.getSimpleName(), EcoreUtil.getURI(exception.getType()));
@@ -235,7 +241,7 @@ public class XbaseHoverDocumentationProvider {
 				EList<JvmAnnotationReference> annotations = ((JvmAnnotationTarget) associatedElement).getAnnotations();
 				for (JvmAnnotationReference annotationReference : annotations) {
 					buffer.append("@");
-					buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationReference.getAnnotation()),
+					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationReference.getAnnotation()),
 							annotationReference.getAnnotation().getSimpleName()));
 					if (annotationReference.getValues().size() > 0) {
 						buffer.append("(");
@@ -308,24 +314,7 @@ public class XbaseHoverDocumentationProvider {
 				label += "(...)";
 			}
 		}
-		return createLinkWithLabel(EcoreUtil.getURI(type), label);
-	}
-
-	protected String createLinkWithLabel(org.eclipse.emf.common.util.URI uri, String label) {
-		StringBuffer buf = new StringBuffer();
-		String emfURI = uri.toString();
-		String uriForLink = null;
-		buf.append("<a href=\"");
-		try {
-			uriForLink = new URI(XtextElementLinks.XTEXTDOC_SCHEME, emfURI, null).toASCIIString();
-		} catch (URISyntaxException e) {
-			return "";
-		}
-		buf.append(uriForLink);
-		buf.append("\">");
-		buf.append(label);
-		buf.append("</a>");
-		return buf.toString();
+		return createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(type), label);
 	}
 
 	protected boolean handleValueTag(TagElement node) {
@@ -345,7 +334,7 @@ public class XbaseHoverDocumentationProvider {
 	protected boolean handleDocRoot(TagElement node) {
 		if (!TagElement.TAG_DOCROOT.equals(node.getTagName()))
 			return false;
-		org.eclipse.emf.common.util.URI uri = EcoreUtil.getURI(context);
+		URI uri = EcoreUtil.getURI(context);
 		String projectName = uri.segment(1);
 		String sourceFolderName = uri.segment(2);
 		IProject project = workspace.getRoot().getProject(projectName);
@@ -360,7 +349,7 @@ public class XbaseHoverDocumentationProvider {
 
 	protected void handleLink(List<?> fragments) {
 		if (fragments.size() > 0) {
-			org.eclipse.emf.common.util.URI elementURI = null;
+			URI elementURI = null;
 			String firstFragment = fragments.get(0).toString();
 			int hashIndex = firstFragment.indexOf("#");
 			HoverReference reference = new HoverReference(TypesPackage.Literals.JVM_TYPE);
@@ -394,7 +383,7 @@ public class XbaseHoverDocumentationProvider {
 									if (parameters.size() == splitedParameter.length) {
 										valid = true;
 										for (int i = 0; (i < parameters.size() && valid); i++) {
-											org.eclipse.emf.common.util.URI parameterTypeURI = EcoreUtil
+											URI parameterTypeURI = EcoreUtil
 													.getURI(parameters.get(i).getParameterType().getType());
 											IEObjectDescription expectedParameter = scopeProvider.getScope(context,
 													reference).getSingleElement(
@@ -431,7 +420,7 @@ public class XbaseHoverDocumentationProvider {
 			if (elementURI == null)
 				buffer.append(label);
 			else {
-				buffer.append(createLinkWithLabel(elementURI, label));
+				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, elementURI, label));
 			}
 		}
 	}
@@ -470,7 +459,7 @@ public class XbaseHoverDocumentationProvider {
 		handleLink(tag.fragments());
 	}
 
-	protected void handleExceptionTags(List<TagElement> tags, Map<String, org.eclipse.emf.common.util.URI> exceptionNamesToURI) {
+	protected void handleExceptionTags(List<TagElement> tags, Map<String, URI> exceptionNamesToURI) {
 		if (tags.size() == 0 && containsOnlyNull(exceptionNamesToURI.values()))
 			return;
 		handleBlockTagTitle("Throws:");
@@ -484,7 +473,7 @@ public class XbaseHoverDocumentationProvider {
 			String name= Lists.newArrayList(exceptionNamesToURI.keySet()).get(i);
 			if (name != null && exceptionNamesToURI.get(name) != null) {
 				buffer.append(BlOCK_TAG_ENTRY_START);
-				buffer.append(createLinkWithLabel(exceptionNamesToURI.get(name), name));
+				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, exceptionNamesToURI.get(name), name));
 				buffer.append(BlOCK_TAG_ENTRY_END);
 			}
 		}
@@ -743,6 +732,39 @@ public class XbaseHoverDocumentationProvider {
 			return null;
 		AbstractTypeDeclaration type = types.get(0);
 		return type.getJavadoc();
+	}
+	
+	protected String getDerivedElementInformation(EObject o) {
+		StringBuffer buf = new StringBuffer();
+		Set<EObject> jvmElements = associations.getJvmElements(o);
+		if(jvmElements.size() > 0){
+			buf.append("<dt>Derived element:</dt>");
+			buf.append("<dd>");
+			for(EObject jvmElement : jvmElements){
+				if(!(jvmElement instanceof JvmConstructor && ((JvmConstructor) jvmElement).getParameters().size() == 0)){
+					buf.append(computeLinkToElement(jvmElement));	
+					buf.append("<br>");
+				}
+			}
+			buf.append("</dd>");
+		}
+		return buf.toString();
+	}
+	
+	protected String getOriginalDeclarationInformation(EObject o){
+		StringBuffer buf = new StringBuffer();
+		EObject sourceElement = associations.getPrimarySourceElement(o);
+		if(sourceElement != null){
+			buf.append("<dt>Original declaration:</dt>");
+			buf.append("<dd>" + computeLinkToElement(sourceElement) + "</dd>");	
+		} 
+		return buf.toString();
+	}
+	
+	private String computeLinkToElement(EObject jvmElement) {
+		String imageURL = hoverSignatureProvider.getImageTag(jvmElement);
+		String signature = hoverSignatureProvider.getDerivedOrSourceSignature(jvmElement);
+		return createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(jvmElement),imageURL +  signature);
 	}
 
 }
