@@ -282,17 +282,21 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 
 	protected void selectAndReveal(IWorkbenchPartSelection workbenchPartSelection) {
 		ITextRegion textSelection = computeSelectedText(workbenchPartSelection);
-		if (textSelection != null) {
-			StyledText text = getSourceViewer().getTextWidget();
-			if (text.getText().length() >= textSelection.getOffset() + textSelection.getLength()) {
-				getSourceViewer().setSelection(new TextSelection(textSelection.getOffset(), textSelection.getLength()),
-						true);
-			}
+		if (textSelection != null && !ITextRegion.EMPTY_REGION.equals(textSelection)) {
+			setSelection(textSelection, true);
+		}
+	}
+
+	protected void setSelection(ITextRegion textSelection, boolean reveal) {
+		StyledText text = getSourceViewer().getTextWidget();
+		if (text.getText().length() >= textSelection.getOffset() + textSelection.getLength()) {
+			getSourceViewer().setSelection(new TextSelection(textSelection.getOffset(), textSelection.getLength()),
+					reveal);
 		}
 	}
 
 	protected ITextRegion computeSelectedText(IWorkbenchPartSelection workbenchPartSelection) {
-		return null;
+		return ITextRegion.EMPTY_REGION;
 	}
 
 	protected Display getDisplay() {
