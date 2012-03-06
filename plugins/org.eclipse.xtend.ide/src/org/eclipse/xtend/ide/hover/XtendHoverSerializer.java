@@ -91,6 +91,9 @@ public class XtendHoverSerializer {
 		} else {
 			implicitFirstArgument = featureCall.getImplicitFirstArgument();
 			arguments = featureCallToJavaMapping.getActualArguments(featureCall);
+			if(arguments.size() > 0)
+				if(featureCall.getImplicitReceiver() == arguments.get(0))
+					implicitFirstArgument = arguments.get(0);
 			needsSeperator = implicitFirstArgument != null && arguments.size() > 1;
 		}
 		
