@@ -158,7 +158,7 @@ public class ImplementMemberFromSuperAssist {
 		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(simpleName, context, conflictHelper))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
-				getLabel(overridden), images.forFunction(overridden.getVisibility(), false));
+				getLabel(overridden), images.forOperation(overridden.getVisibility(), false));
 		Matcher matcher = bodyExpressionPattern.matcher(code);
 		if (matcher.find()) {
 			int bodyExpressionLength = matcher.end(1) - matcher.start(1);
