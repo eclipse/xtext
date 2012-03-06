@@ -112,7 +112,7 @@ public class XbaseHoverDocumentationProvider {
 		getDocumentationWithPrefix(object);
 		Javadoc javadoc = getJavaDoc();
 		if (javadoc == null)
-			return "";
+			return getDerivedOrSourceInformation(object);
 		TagElement deprecatedTag = null;
 		TagElement start = null;
 		List<TagElement> parameters = new ArrayList<TagElement>();
@@ -204,13 +204,16 @@ public class XbaseHoverDocumentationProvider {
 		} else if (buffer.length() > 0) {
 			handleSuperMethodReferences(object);
 		}
-		buffer.append(getOriginalDeclarationInformation(object));
-		buffer.append(getDerivedElementInformation(object));
+		buffer.append(getDerivedOrSourceInformation(object));
 		String result = buffer.toString();
 		buffer = null;
 		rawJavaDoc = null;
 		context = null;
 		return result;
+	}
+	
+	protected String getDerivedOrSourceInformation(EObject object){
+		return getOriginalDeclarationInformation(object) + getDerivedElementInformation(object);
 	}
 
 	protected List<String> initParameterNames() {
