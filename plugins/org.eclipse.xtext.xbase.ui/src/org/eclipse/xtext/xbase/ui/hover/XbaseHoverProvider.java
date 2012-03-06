@@ -76,7 +76,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	
 	@Override
 	protected String getDocumentation(EObject o) {
-		return documentationProvider.getDocumentation(o);
+		return documentationProvider.getDocumentation(o) + documentationProvider.getDerivedOrSourceInformation(o);
 	}
 
 	@Override
