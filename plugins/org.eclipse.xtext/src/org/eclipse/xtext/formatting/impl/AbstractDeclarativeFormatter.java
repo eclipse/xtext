@@ -69,8 +69,9 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 	 */
 	@Override
 	public ITokenStream createFormatterStream(EObject context, String indent, ITokenStream out, boolean preserveWhitespaces) {
-		if(context != null) 
+		if(context != null && context.eResource() != null && context.eResource().getURI() != null) {
 			contextResourceURI = EcoreUtil2.getNormalizedResourceURI(context);
+		}
 		return new FormattingConfigBasedStream(out, indent, getConfig(), createMatcher(), hiddenTokenHelper,
 				preserveWhitespaces);
 	}

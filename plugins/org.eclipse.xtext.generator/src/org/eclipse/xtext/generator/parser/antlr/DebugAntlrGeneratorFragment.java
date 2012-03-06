@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.Files.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
@@ -49,6 +50,7 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 			String content = readFileIntoString(absoluteGrammarFileName);
 			Injector injector = new SimpleAntlrStandaloneSetup().createInjectorAndDoEMFRegistration();
 			XtextResource resource = injector.getInstance(XtextResource.class);
+			resource.setURI(URI.createFileURI(absoluteGrammarFileName));
 			resource.load(new StringInputStream(content), null);
 			if (!resource.getErrors().isEmpty()) {
 				throw new RuntimeException(resource.getErrors().toString());
