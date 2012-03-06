@@ -108,6 +108,8 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 			String text = linkingHelper.getCrossRefNodeAsString(node, true);
 			QualifiedName qn = qualifiedNameConverter.toQualifiedName(text);
 			URI targetURI = EcoreUtil.getURI(target);
+			if (target.eResource() != null && target.eResource().getResourceSet() != null)
+				targetURI = target.eResource().getResourceSet().getURIConverter().normalize(targetURI);
 			for (IEObjectDescription desc : scope.getElements(qn))
 				if (desc.getEObjectURI().equals(targetURI))
 					return tokenUtil.serializeNode(node);
