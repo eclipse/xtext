@@ -28,6 +28,9 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -121,15 +124,19 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	}
 
 	protected String _signature(JvmFormalParameter parameter, boolean typeAtEnd) {
-		JvmTypeReference parameterType = parameter.getParameterType();
-		if (parameterType != null) {
-			EObject container = parameter.eContainer();
-			String signature = parameter.getName() + JavaElementLabels.CONCAT_STRING + getSimpleSignature(container);
+		EObject container = parameter.eContainer();
+		JvmTypeReference type = typeProvider.getTypeForIdentifiable(parameter);
+		if (type != null) {
+			String signature = parameter.getName();
+			String signatureOfFather = getSimpleSignature(container);
+			if(signatureOfFather != null){
+				signature += JavaElementLabels.CONCAT_STRING + signatureOfFather;
+			}
 			if (typeAtEnd)
-				return signature + " : " + parameterType.getSimpleName();
-			return parameterType.getSimpleName() + " " + signature;
+				return signature + " : " + type.getSimpleName();
+			return type.getSimpleName() + " " + signature;
 		}
-		return "";
+		return parameter.getName();
 	}
 
 	protected String getThrowsDeclaration(JvmExecutable executable) {
