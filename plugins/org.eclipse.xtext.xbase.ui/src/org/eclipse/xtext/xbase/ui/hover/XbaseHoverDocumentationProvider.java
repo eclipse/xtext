@@ -211,8 +211,11 @@ public class XbaseHoverDocumentationProvider {
 		return result;
 	}
 	
-	public String getDerivedOrSourceInformation(EObject object){
-		return getOriginalDeclarationInformation(object) + getDerivedElementInformation(object);
+	public String getDerivedOrOriginalDeclarationInformation(EObject object){
+		String derivedInformation = getDerivedElementInformation(object);
+		if(derivedInformation != null && derivedInformation.length() > 0)
+			return getDerivedElementInformation(object);
+		return getOriginalDeclarationInformation(object);
 	}
 
 	protected List<String> initParameterNames() {
@@ -755,11 +758,16 @@ public class XbaseHoverDocumentationProvider {
 	
 	protected String getOriginalDeclarationInformation(EObject o){
 		StringBuffer buf = new StringBuffer();
-		EObject sourceElement = associations.getPrimarySourceElement(o);
-		if(sourceElement != null){
+		Set<EObject> sourceElements = associations.getSourceElements(o);
+		if(sourceElements.size() > 0){
 			buf.append("<dt>Original declaration:</dt>");
-			buf.append("<dd>" + computeLinkToElement(sourceElement) + "</dd>");	
-		} 
+			buf.append("<dd>");
+			for(EObject sourceElement: sourceElements){
+				buf.append(computeLinkToElement(sourceElement));	
+				buf.append("<br>");
+			} 
+			buf.append("</dd>");
+		}
 		return buf.toString();
 	}
 	
