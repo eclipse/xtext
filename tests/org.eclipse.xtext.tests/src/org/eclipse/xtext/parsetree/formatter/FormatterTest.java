@@ -246,12 +246,12 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedNM(expected, model, 0, model.length());
 	}
 
-	@Ignore@Test public void testLinewrapDatatypeRuleRef1() throws Exception {
+	@Test public void testLinewrapDatatypeRuleRef1() throws Exception {
 		final String model = "test linewrap fqn ab  .cd .ef; fqnref ab. cd. ef;";
 		final String expected = "test linewrap\nfqn\nab.cd.ef;\nfqnref\nab.cd.ef;";
 		//		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
-		//		assertEqualTokenStreams(model);
+		assertEqualTokenStreams(model);
 	}
 
 	@Test public void testLinewrapDatatypeRuleRef2() throws Exception {
