@@ -8,11 +8,15 @@
 package org.eclipse.xtend.ide.view;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.ui.editors.text.EditorsUI.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.internal.utils.WrappedRuntimeException;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer;
@@ -32,12 +36,16 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.internal.editors.text.EditorsPlugin;
+import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
+import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
+import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.views.AbstractSourceView;
 import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
 import org.eclipse.xtext.util.Files;
@@ -45,6 +53,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -55,10 +64,18 @@ import com.google.inject.Inject;
 public class DerivedSourceView extends AbstractSourceView {
 	/** The width of the overview ruler. */
 	protected static final int OVERVIEW_RULER_WIDTH = 12;
+	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results";
 	@Inject
 	private ITraceInformation traceInformation;
 	@Inject
 	XtendImages xtendImages;
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
+	@Inject
+	private IWorkspaceRoot workspaceRoot;
+
+	private DefaultMarkerAnnotationAccess defaultMarkerAnnotationAccess = new DefaultMarkerAnnotationAccess();
+	private SourceViewerDecorationSupport sourceViewerDecorationSupport;
 	private JavaSourceViewer javaSourceViewer;
 	private SimpleJavaSourceViewerConfiguration javaSourceViewerConfiguration;
 	private IStorage selectedSource;
@@ -87,12 +104,23 @@ public class DerivedSourceView extends AbstractSourceView {
 	@Override
 	protected SourceViewer createSourceViewer(Composite parent) {
 		IPreferenceStore store = JavaPlugin.getDefault().getCombinedPreferenceStore();
-		javaSourceViewer = new JavaSourceViewer(parent, null, createOverviewRuler(), true, SWT.V_SCROLL | SWT.H_SCROLL,
-				store);
+		IOverviewRuler overviewRuler = new OverviewRuler(defaultMarkerAnnotationAccess, OVERVIEW_RULER_WIDTH,
+				getSharedTextColors());
+		javaSourceViewer = new JavaSourceViewer(parent, null, overviewRuler, true, SWT.V_SCROLL | SWT.H_SCROLL, store);
 		javaSourceViewerConfiguration = new SimpleJavaSourceViewerConfiguration(JavaPlugin.getDefault()
 				.getJavaTextTools().getColorManager(), store, null, IJavaPartitions.JAVA_PARTITIONING, true);
 		javaSourceViewer.configure(javaSourceViewerConfiguration);
 		javaSourceViewer.setEditable(false);
+		sourceViewerDecorationSupport = new SourceViewerDecorationSupport(javaSourceViewer, overviewRuler,
+				defaultMarkerAnnotationAccess, getSharedTextColors());
+		MarkerAnnotationPreferences markerAnnotationPreferences = EditorsPlugin.getDefault()
+				.getMarkerAnnotationPreferences();
+		@SuppressWarnings("unchecked")
+		List<AnnotationPreference> annotationPreferences = markerAnnotationPreferences.getAnnotationPreferences();
+		for (AnnotationPreference annotationPreference : annotationPreferences) {
+			sourceViewerDecorationSupport.setAnnotationPreference(annotationPreference);
+		}
+		sourceViewerDecorationSupport.install(preferenceStoreAccess.getPreferenceStore());
 		return javaSourceViewer;
 	}
 
@@ -137,11 +165,17 @@ public class DerivedSourceView extends AbstractSourceView {
 				}
 			}
 		}
-		try {
-			return null != selectedSource ? Files.readStreamIntoString(selectedSource.getContents()) : null;
-		} catch (CoreException e) {
-			throw new WrappedRuntimeException(e);
+		if (selectedSource != null) {
+			IFile file = workspaceRoot.getFile(selectedSource.getFullPath());
+			if (file != null && file.exists()) {
+				try {
+					return null != selectedSource ? Files.readStreamIntoString(selectedSource.getContents()) : null;
+				} catch (CoreException e) {
+					throw new WrappedRuntimeException(e);
+				}
+			}
 		}
+		return null;
 	}
 
 	@Override
@@ -154,6 +188,14 @@ public class DerivedSourceView extends AbstractSourceView {
 	}
 
 	@Override
+	public void dispose() {
+		super.dispose();
+		if (sourceViewerDecorationSupport != null) {
+			sourceViewerDecorationSupport.dispose();
+		}
+	}
+
+	@Override
 	protected IDocument createDocument(String input) {
 		IDocument document = super.createDocument(input);
 		JavaPlugin.getDefault().getJavaTextTools()
@@ -162,45 +204,36 @@ public class DerivedSourceView extends AbstractSourceView {
 	}
 
 	@Override
-	protected ITextRegion computeSelectedText(IWorkbenchPartSelection workbenchPartSelection) {
-		ITextRegion result = ITextRegion.EMPTY_REGION;
+	protected void selectAndReveal(IWorkbenchPartSelection workbenchPartSelection) {
 		if (selectedSource != null) {
 			IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
 			TextRegion localRegion = mapTextRegion(workbenchPartSelection);
 			ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
 			if (trace != null) {
-				ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion,
+				Iterable<ILocationInResource> allAssociatedLocations = trace.getAllAssociatedLocations(localRegion,
 						selectedSource);
-				if (bestAssociatedLocation != null && bestAssociatedLocation.getTextRegion() != null) {
-					result = bestAssociatedLocation.getTextRegion();
+				ILocationInResource firstLocationInResource = Iterables.getFirst(allAssociatedLocations, null);
+				if (firstLocationInResource != null) {
+					ITextRegion textRegion = firstLocationInResource.getTextRegion();
+					if (textRegion != null) {
+						getSourceViewer().revealRange(textRegion.getOffset(), textRegion.getLength());
+					}
 				}
-				for (ILocationInResource locationInResource : trace.getAllAssociatedLocations(localRegion,
-						selectedSource)) {
+				for (ILocationInResource locationInResource : allAssociatedLocations) {
 					ITextRegion textRegion = locationInResource.getTextRegion();
 					if (textRegion != null) {
-						annotationModel.addAnnotation(new Annotation(false), new Position(textRegion.getOffset(),
-								textRegion.getLength()));
+						annotationModel.addAnnotation(new Annotation(SEARCH_ANNOTATION_TYPE, true, null), new Position(
+								textRegion.getOffset(), textRegion.getLength()));
 					}
 				}
 			}
 		}
-		return result;
 	}
 
 	private TextRegion mapTextRegion(IWorkbenchPartSelection workbenchPartSelection) {
 		ITextSelection textSelection = (ITextSelection) workbenchPartSelection.getSelection();
 		TextRegion localRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
 		return localRegion;
-	}
-
-	private IOverviewRuler createOverviewRuler() {
-		DefaultMarkerAnnotationAccess annotationAccess = new DefaultMarkerAnnotationAccess();
-		IOverviewRuler ruler = new OverviewRuler(annotationAccess, OVERVIEW_RULER_WIDTH,
-				EditorsUI.getSharedTextColors());
-		ruler.addAnnotationType(Annotation.TYPE_UNKNOWN);
-		ruler.setAnnotationTypeLayer(Annotation.TYPE_UNKNOWN, 0);
-		ruler.setAnnotationTypeColor(Annotation.TYPE_UNKNOWN, getDisplay().getSystemColor(SWT.COLOR_BLUE));
-		return ruler;
 	}
 
 }
