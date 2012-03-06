@@ -13,6 +13,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -21,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 
 import com.google.inject.Inject;
 
@@ -30,7 +31,7 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class DomainmodelLabelProvider extends DefaultEObjectLabelProvider {
+public class DomainmodelLabelProvider extends XbaseLabelProvider {
 
 	@Inject
 	public DomainmodelLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -39,7 +40,7 @@ public class DomainmodelLabelProvider extends DefaultEObjectLabelProvider {
 
 	@Override
 	protected Object doGetImage(Object element) {
-		if (element instanceof EObject) {
+		if (element instanceof EObject && !(element instanceof JvmIdentifiableElement)) {
 			return ((EObject) element).eClass().getName() + ".gif";
 		}
 		return super.doGetImage(element);
