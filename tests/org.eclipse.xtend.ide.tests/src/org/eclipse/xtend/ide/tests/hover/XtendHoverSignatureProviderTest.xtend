@@ -35,7 +35,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		''', resourceSet)
 		val clazz = xtendFile.xtendClass
 		val signature = signatureProvider.getSignature(clazz)
-		assertEquals("<b>testPackage.Foo</b>",signature)
+		assertEquals("Foo",signature)
 	}
 	
 	@Test
@@ -52,8 +52,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction2 = clazz.members.get(1)
 		val signature1 = signatureProvider.getSignature(xtendFunction1)
 		val signature2 = signatureProvider.getSignature(xtendFunction2)
-		assertEquals("<b>Object bar(String a) throws NullPointerException</b>",signature1)
-		assertEquals("<b>void bar(String a, int b) throws NullPointerException, RuntimeException</b>",signature2)
+		assertEquals("Object bar(String a) throws NullPointerException",signature1)
+		assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException",signature2)
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val xtendParameter = xtendFunction.parameters.get(0)
 		val signature = signatureProvider.getSignature(xtendParameter)
-		assertEquals("<b>String a - bar(String)</b>",signature)
+		assertEquals("String a - bar(String)",signature)
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val clazz = xtendFile.xtendClass
 		val xtendField = clazz.members.get(0) as XtendField
 		val signature = signatureProvider.getSignature(xtendField)
-		assertEquals("<b>Collections testPackage.Foo.collections</b>",signature)
+		assertEquals("Collections collections",signature)
 	}
 	
 	@Test
@@ -103,7 +103,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val clazz = xtendFile.xtendClass
 		val xtendConstructor = clazz.members.get(0)
 		val signature = signatureProvider.getSignature(xtendConstructor)
-		assertEquals("<b>testPackage.Foo (String a, int b)</b>",signature)
+		assertEquals("Foo (String a, int b)",signature)
 	}
 	
 	@Test
@@ -120,7 +120,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
-		assertEquals("<b>testPackage.Foo ()</b>",signature)
+		assertEquals("Foo ()",signature)
 	}
 	
 	def getResourceSet(){
