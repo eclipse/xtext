@@ -27,8 +27,8 @@
 package «eObjectLabelProviderQualifiedName().toJavaPackage()»;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-
+«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;«ELSE»import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;«ENDIF» 
+ 
 import com.google.inject.Inject;
 
 /**
@@ -36,7 +36,7 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends DefaultEObjectLabelProvider {
+public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseLabelProvider«ELSE»DefaultEObjectLabelProvider«ENDIF» {
 
 	@Inject
 	public «eObjectLabelProviderQualifiedName().toSimpleName()»(AdapterFactoryLabelProvider delegate) {
@@ -65,14 +65,14 @@ public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends Defaul
 */
 package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
+«IF usesXbase()»import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;«ELSE»import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;«ENDIF»
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends DefaultDescriptionLabelProvider {
+public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «IF usesXbase()»XbaseDescriptionLabelProvider«ELSE»DefaultDescriptionLabelProvider«ENDIF» {
 
 /*
 	//Labels and icons can be computed like this:

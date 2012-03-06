@@ -23,6 +23,9 @@ private String eObjectLabelProviderQualifiedName(Grammar grammar, Naming n) :
 
 private String descriptionLabelProviderQualifiedName(Grammar grammar, Naming n) :
 	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getDescriptionLabelProviderQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+	 
+Boolean usesXbase(Grammar grammar) :
+	JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.doesUseXbase(org.eclipse.xtext.Grammar);
 	
 
 	
