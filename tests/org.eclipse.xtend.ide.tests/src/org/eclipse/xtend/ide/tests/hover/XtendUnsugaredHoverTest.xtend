@@ -6,7 +6,6 @@ import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationCont
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover
-import org.eclipse.xtend.ide.hover.XtendInformationControlInput
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.EcoreUtil2
@@ -27,6 +26,7 @@ import org.junit.Test
 import static org.eclipse.xtend.ide.tests.hover.XtendUnsugaredHoverTest.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput
 
 class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
@@ -88,7 +88,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42)",triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42)",triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -106,7 +106,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42)",triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42)",triple.second.getUnsugaredExpression)
 	}
 	
 		@Test
@@ -125,7 +125,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,1,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42 + a)",triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42 + a)",triple.second.getUnsugaredExpression)
 	}
 
 	@Test
@@ -143,7 +143,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 40 + 2)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 40 + 2)", triple.second.getUnsugaredExpression)
 	}
 	
 	
@@ -163,7 +163,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,25)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -182,7 +182,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -203,7 +203,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
 		assertEquals('''_extension.barCharSequence(42, «"'''"»   Test   Test
-Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
+Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -222,7 +222,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,4)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42)", triple.second.unsugaredExpression)
+		assertEquals("_extension.bar(it, 42)", triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -241,7 +241,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("it.substring(0)", triple.second.unsugaredExpression)
+		assertEquals("it.substring(0)", triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -261,7 +261,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,1,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("it.substring(0)", triple.second.unsugaredExpression)
+		assertEquals("it.substring(0)", triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -280,7 +280,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,27)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.unsugaredExpression)
+		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.getUnsugaredExpression)
 	}
 	
 	@Test
@@ -298,7 +298,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("fooBarBaz(it)", triple.second.unsugaredExpression)
+		assertEquals("fooBarBaz(it)", triple.second.getUnsugaredExpression)
 	}
 
 	@Test
@@ -316,13 +316,13 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		'''.toString))
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		val javaElement = javaElementFinder.findElementFor(triple.first.feature);
-		assertEquals(javaElement, triple.second.inputElement)
+		assertEquals(javaElement, triple.second.getInputElement)
 		val javaDocHoverWrapper = new JavadocHoverWrapper()
 		javaDocHoverWrapper.setJavaElement(javaElement)
 		val javaDocHoverInput = javaDocHoverWrapper.getHoverInfo2(null, triple.third) as JavadocBrowserInformationControlInput
 		assertEquals(triple.second.html, javaDocHoverInput.html)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation)), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extensionJava.bar(it, 40 + 2)", triple.second.unsugaredExpression)
+		assertEquals("_extensionJava.bar(it, 40 + 2)", triple.second.getUnsugaredExpression)
 	}
 	
 	def computeAstAndInvokeHover(XtextEditor editor, int indexOfExpressionToHover, int addOffset){
@@ -332,7 +332,7 @@ Test«"'''"»)'''.toString, triple.second.unsugaredExpression)
 		val featureCall = ((xtendFile.xtendClass.members.get(1) as XtendFunction).expression as XBlockExpression).expressions.get(indexOfExpressionToHover) as XAbstractFeatureCall
 		val hover = get(typeof(IEObjectHover)) as XtendDispatchingEObjectTextHover
 		val region = hover.getHoverRegion(editor.internalSourceViewer, NodeModelUtils::getNode(featureCall).offset + addOffset)
-		return Tuples::create(featureCall, hover.getHoverInfo2(editor.internalSourceViewer, region) as XtendInformationControlInput, region)
+		return Tuples::create(featureCall, hover.getHoverInfo2(editor.internalSourceViewer, region) as XbaseInformationControlInput, region)
 	}
 	
 

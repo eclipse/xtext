@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.hover;
 
+import static org.eclipse.xtext.xbase.ui.hover.HoverLinkHelper.*;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
@@ -49,7 +51,7 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 			for(XAnnotation annotation : ((XtendAnnotationTarget) object).getAnnotations()){
 				JvmAnnotationType annotationType = annotation.getAnnotationType();
 				buffer.append("@");
-				buffer.append(createLinkWithLabel(EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
+				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
 				EList<XAnnotationElementValuePair> elementValuePairs = annotation.getElementValuePairs();
 				if(elementValuePairs.size() > 0){
 					buffer.append("(");
@@ -111,5 +113,11 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 			}
 		}
 		return result;
+	}
+	
+	@Override
+	protected String getOriginalDeclarationInformation(EObject o) {
+		// Not for Xtend
+		return "";
 	}
 }

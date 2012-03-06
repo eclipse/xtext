@@ -38,13 +38,13 @@ public class XtendDescriptionLabelProvider extends DefaultDescriptionLabelProvid
 		else if (eClass == XTEND_CLASS || eClass == TypesPackage.Literals.JVM_GENERIC_TYPE)
 			return images.forClass(JvmVisibility.PUBLIC);
 		else if (eClass == XTEND_FUNCTION)
-			return images.forFunction(JvmVisibility.PUBLIC, isStatic);
+			return images.forOperation(JvmVisibility.PUBLIC, isStatic);
 		else if (eClass == XTEND_FIELD)
 			return images.forField(JvmVisibility.PUBLIC, isStatic, false);
 		else if (eClass == TypesPackage.Literals.JVM_OPERATION)
 			return (descriptionFlags.isDispatcherOperation(element)) 
 				? images.forDispatcherFunction(JvmVisibility.PUBLIC, isStatic) 
-				: images.forFunction(JvmVisibility.PUBLIC, isStatic);
+				: images.forOperation(JvmVisibility.PUBLIC, isStatic);
 		else
 			return super.image(element);
 	}

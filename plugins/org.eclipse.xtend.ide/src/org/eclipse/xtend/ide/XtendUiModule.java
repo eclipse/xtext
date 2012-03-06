@@ -33,6 +33,7 @@ import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.ide.hover.XtendAnnotationHover;
 import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover;
+import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
@@ -76,7 +77,8 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
-import org.eclipse.xtext.xbase.ui.hover.DefaultDeclarativeHoverSignatureProvider;
+import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
+import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
 
 import com.google.inject.Binder;
@@ -245,8 +247,12 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendDispatchingEObjectTextHover.class;
 	}
 	
-	public Class<? extends DefaultDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider(){
+	public Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider(){
 		return XtendHoverSignatureProvider.class;
+	}
+	
+	public Class<? extends XbaseHoverDocumentationProvider> bindXbaseHoverDocumentationProvider(){
+		return XtendHoverDocumentationProvider.class;
 	}
 
 	@Override
