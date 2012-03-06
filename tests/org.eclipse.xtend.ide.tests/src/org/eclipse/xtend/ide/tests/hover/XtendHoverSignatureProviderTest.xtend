@@ -15,6 +15,11 @@ import org.junit.Before
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XConstructorCall
+import org.eclipse.xtext.xbase.XForLoopExpression
+import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XFeatureCall
+import org.eclipse.xtext.xbase.XClosure
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -121,6 +126,63 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
 		assertEquals("Foo ()",signature)
+	}
+	@Test
+	def testSignatureForForLoopVariable(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		import java.util.List
+		class Foo {
+				def bar(List<String> list){
+					for(foo : list){
+					
+					}
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.xtendClass
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val param = ((xtendFunction.expression as XBlockExpression).expressions.get(0) as XForLoopExpression).declaredParam
+		val signature = signatureProvider.getSignature(param)
+		assertEquals("String foo", signature)
+	}
+	
+	@Test
+	def testSignatureForForXClosureVariable(){
+		val xtendFile = parseHelper.parse('''
+			package testPackage
+			class Foo {
+				def zonk(){
+					bar(s | s + "42")
+				}
+				def bar((String)=>String fun){
+					
+				}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.xtendClass
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val closure = ((xtendFunction.expression as XBlockExpression).expressions.get(0) as XFeatureCall).featureCallArguments.get(0) as XClosure
+		val param = closure.declaredFormalParameters.get(0)
+		val signature = signatureProvider.getSignature(param)
+		assertEquals("String s", signature)
+	}
+	
+	@Test
+	def testSignatureForXVariableDeclaration(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo {
+			def bar(List<String> list){
+				val a = "42"
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.xtendClass
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val variable = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XVariableDeclaration
+		val signature = signatureProvider.getSignature(variable)
+		assertEquals("String a", signature)
 	}
 	
 	def getResourceSet(){
