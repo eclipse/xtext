@@ -116,6 +116,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"<String>#newArrayList#()");
 	}
 	
+	@Ignore
 	@Test
 	public void testFeatureCall_05() throws Exception {
 		assertTrace( 

@@ -23,6 +23,15 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 @NonNullByDefault
 public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 
+	/**
+	 * @param object - the object this part should be associated with
+	 * @param useForDebugging - whether the part is relevant for debugging
+	 */
+	ITreeAppendable trace(EObject object, boolean useForDebugging);
+	
+	/**
+	 * same as trace(object, false) 
+	 */
 	ITreeAppendable trace(EObject object);
 	
 	/**
@@ -44,6 +53,4 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	
 	ITreeAppendable newLine();
 
-	
-	
 }

@@ -104,7 +104,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedType) {
-		ITreeAppendable appendable = parentAppendable.trace(obj);
+		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
@@ -200,7 +200,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
-		ITreeAppendable appendable = parentAppendable.trace(obj);
+		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		
 		if (declaredExceptions == null)
 			declaredExceptions = newHashSet();
@@ -245,9 +245,9 @@ public abstract class AbstractXbaseCompiler {
 		for (int i = 0; i < expressions.size(); i++) {
 			XExpression ex = expressions.get(i);
 			if (i < expressions.size() - 1) {
-				internalToJavaStatement(ex, b.trace(ex), false);
+				internalToJavaStatement(ex, b.trace(ex, true), false);
 			} else {
-				internalToJavaStatement(ex, b.trace(ex), isImplicitReturn);
+				internalToJavaStatement(ex, b.trace(ex, true), isImplicitReturn);
 				if (isImplicitReturn) {
 					b.newLine().append("return (");
 					internalToConvertedExpression(ex, b, null);
@@ -267,7 +267,8 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected final void internalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {
-		doInternalToJavaStatement(obj, builder.trace(obj), isReferenced);
+		final ITreeAppendable trace = builder.trace(obj, true);
+		doInternalToJavaStatement(obj, trace, isReferenced);
 	}
 
 	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {
@@ -279,11 +280,11 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	public void toJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
-		internalToJavaExpression(obj, appendable.trace(obj));
+		internalToJavaExpression(obj, appendable.trace(obj, true));
 	}
 	
 	public void toJavaStatement(final XExpression obj, final ITreeAppendable appendable, boolean isReferenced) {
-		internalToJavaStatement(obj, appendable.trace(obj), isReferenced);
+		internalToJavaStatement(obj, appendable.trace(obj, true), isReferenced);
 	}
 
 	protected void internalToJavaExpression(final XExpression obj, final ITreeAppendable appendable) {

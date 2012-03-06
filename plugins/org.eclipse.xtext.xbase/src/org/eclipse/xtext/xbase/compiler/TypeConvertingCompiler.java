@@ -54,18 +54,19 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	@Override
 	protected final void internalToJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
 		JvmTypeReference expectedType = getTypeProvider().getExpectedType(obj);
+		
 		internalToConvertedExpression(obj, appendable, expectedType);
 	}
-	
+
 	@Override
 	protected final void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
 			JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
 			JvmTypeReference actualType = getTypeProvider().getType(obj);
 			if (!EcoreUtil.equals(toBeConvertedTo, actualType)) {
-				doConversion(toBeConvertedTo, actualType, appendable.trace(obj), obj, new Later() {
+				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
 					public void exec(ITreeAppendable appendable) {
-						appendable = appendable.trace(obj);
+						appendable = appendable.trace(obj, true);
 						Pair<String, XExpression> key = Tuples.create("Convertable", obj);
 						if (appendable.hasName(key)) {
 							String finalVariable = appendable.getName(key);
@@ -78,9 +79,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				return;
 			}
 		}
-		internalToConvertedExpression(obj, appendable.trace(obj));
+		final ITreeAppendable trace = appendable.trace(obj, true);
+		internalToConvertedExpression(obj, trace);
 	}
-	
+
 	protected void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable) {
 		super.internalToJavaExpression(obj, appendable);
 	}

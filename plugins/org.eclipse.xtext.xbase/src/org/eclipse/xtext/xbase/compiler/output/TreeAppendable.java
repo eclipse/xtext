@@ -89,6 +89,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	private final ILocationInFileProvider locationProvider;
 	private final Set<ILocationData> locationData;
 	private boolean closed = false;
+	private boolean useForDebugging = false;
 
 	public TreeAppendable(ImportManager importManager, ILocationInFileProvider locationProvider, EObject source,
 			String indentation, String lineSeparator) {
@@ -96,37 +97,42 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ILocationInFileProvider locationProvider, EObject source) {
-		this(state, locationProvider, Collections.singleton(createLocationData(locationProvider, source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS)));
+		this(state, locationProvider, Collections.singleton(createLocationData(locationProvider, source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS)), false);
 	}
 
 	protected TreeAppendable(SharedAppendableState state, ILocationInFileProvider locationProvider,
-			Set<ILocationData> sourceLocations) {
+			Set<ILocationData> sourceLocations, boolean useForDebugging) {
 		this.state = state;
 		this.locationProvider = locationProvider;
 		this.children = Lists.newArrayList();
 		this.locationData = sourceLocations;
+		this.useForDebugging = useForDebugging;
 	}
 
 	public TreeAppendable trace(EObject object) {
+		return trace(object, false);
+	}
+	
+	public TreeAppendable trace(EObject object, boolean useForDebugging) {
 		// TODO use locationProvider from service registry
 		ILocationData locationData = createLocationData(locationProvider, object, ILocationInFileProviderExtension.RegionDescription.FULL);
 		if (locationData == null)
 			return this;
 		Set<ILocationData> newData = Collections.singleton(locationData);
-		return trace(newData);
+		return trace(newData, useForDebugging);
 	}
 
-	protected TreeAppendable trace(Set<ILocationData> newData) {
-		if (newData.equals(locationData)) {
+	protected TreeAppendable trace(Set<ILocationData> newData, boolean useForDebugging) {
+		if (this.useForDebugging == useForDebugging && newData.equals(locationData)) {
 			return this;
 		}
-		TreeAppendable result = new TreeAppendable(state, locationProvider, newData);
+		TreeAppendable result = new TreeAppendable(state, locationProvider, newData, useForDebugging);
 		children.add(result);
 		return result;
 	}
 	
 	public ITreeAppendable trace(ILocationData location) {
-		return trace(Collections.singleton(location));
+		return trace(Collections.singleton(location), false);
 	}
 
 	@Nullable
@@ -149,16 +155,16 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			throw new IllegalArgumentException("List of objects may not be empty");
 		int size = Iterables.size(objects);
 		if (size == 1)
-			return trace(objects.iterator().next());
+			return trace(objects.iterator().next(), false);
 		Set<ILocationData> newData = new LinkedHashSet<ILocationData>(size);
 		for(EObject object: objects) {
 			ILocationData locationData = createLocationData(locationProvider, object, ILocationInFileProviderExtension.RegionDescription.FULL);
 			if (locationData != null)
 				newData.add(locationData);
 		}
-		if (newData.isEmpty())
+		if (newData.isEmpty() && !isUseForDebugging())
 			return this;
-		return trace(newData);
+		return trace(newData, false);
 	}
 	
 	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
@@ -169,7 +175,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			textRegion = new TextRegionWithLineInformation(textRegion.getOffset(), textRegion.getLength(), 0, 0);
 		} 
 		ILocationData newData = createLocationData(object, (ITextRegionWithLineInformation) textRegion);
-		return trace(Collections.singleton(newData));
+		return trace(Collections.singleton(newData), false);
 	}
 
 	protected static ILocationData createLocationData(EObject object, ITextRegionWithLineInformation textRegion) {
@@ -387,6 +393,17 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			int lineLength = length - nextLineOffset;
 			children.add(text.substring(nextLineOffset, nextLineOffset + lineLength));
 		}
+	}
+
+	public boolean isUseForDebugging() {
+		if (useForDebugging) {
+			// HACK only count if it has 'direct' content not just sub trees.
+			for (Object c : children) {
+				if (!(c instanceof ITreeAppendable))
+					return true;
+			}
+		}
+		return false;
 	}
 
 }
