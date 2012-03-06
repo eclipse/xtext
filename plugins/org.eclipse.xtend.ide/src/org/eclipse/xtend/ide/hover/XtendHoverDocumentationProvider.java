@@ -114,10 +114,4 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 		}
 		return result;
 	}
-	
-	@Override
-	protected String getOriginalDeclarationInformation(EObject o) {
-		// Not for Xtend
-		return "";
-	}
 }
