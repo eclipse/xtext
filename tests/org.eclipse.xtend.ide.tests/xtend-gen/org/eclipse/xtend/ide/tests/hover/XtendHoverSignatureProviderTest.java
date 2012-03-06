@@ -16,11 +16,16 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.After;
 import org.junit.Assert;
@@ -215,6 +220,135 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       JvmConstructor _constructor = constructorCall.getConstructor();
       final String signature = this.signatureProvider.getSignature(_constructor);
       Assert.assertEquals("Foo ()", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForForLoopVariable() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("def bar(List<String> list){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("for(foo : list){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final JvmFormalParameter param = ((XForLoopExpression) _get_1).getDeclaredParam();
+      final String signature = this.signatureProvider.getSignature(param);
+      Assert.assertEquals("String foo", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForForXClosureVariable() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\t");
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("def zonk(){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("bar(s | s + \"42\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("def bar((String)=>String fun){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      EList<XExpression> _featureCallArguments = ((XFeatureCall) _get_1).getFeatureCallArguments();
+      XExpression _get_2 = _featureCallArguments.get(0);
+      final XClosure closure = ((XClosure) _get_2);
+      EList<JvmFormalParameter> _declaredFormalParameters = closure.getDeclaredFormalParameters();
+      final JvmFormalParameter param = _declaredFormalParameters.get(0);
+      final String signature = this.signatureProvider.getSignature(param);
+      Assert.assertEquals("String s", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForXVariableDeclaration() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(List<String> list){");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val a = \"42\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XVariableDeclaration variable = ((XVariableDeclaration) _get_1);
+      final String signature = this.signatureProvider.getSignature(variable);
+      Assert.assertEquals("String a", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
