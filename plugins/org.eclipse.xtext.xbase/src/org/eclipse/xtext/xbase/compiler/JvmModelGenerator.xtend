@@ -142,7 +142,12 @@ class JvmModelGenerator implements IGenerator {
 		generateExtendsClause(childAppendable)
 		childAppendable.append("{")
 		val b = Wrapper::wrap(true)
-		members.forEach [ b.set(generateMember(childAppendable.traceWithComments(it), b.get())) ]
+		members.forEach [ 
+			val memberAppendable = childAppendable.traceWithComments(it)
+			memberAppendable.openScope
+			b.set(generateMember(memberAppendable, b.get()))
+			memberAppendable.closeScope
+		]
 		childAppendable.newLine.append("}")
 		appendable.newLine
 	}
