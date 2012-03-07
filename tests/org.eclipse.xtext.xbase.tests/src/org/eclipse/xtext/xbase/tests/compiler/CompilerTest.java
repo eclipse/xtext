@@ -322,5 +322,23 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
+	@Test public void testNewLines_withinline() throws Exception {
+		assertCompilesTo(
+				"java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\");\n" + 
+				"boolean _add = _newArrayList.add(\n" + 
+				"  \"bar\");\n" + 
+				"return _add;", 
+				"newArrayList('foo') += \n'bar'");
+	}
+	
+	@Test public void testNewLines_withinline1() throws Exception {
+		assertCompilesTo(
+				"String _plus = (\"foo\" + \n" + 
+				"  \"bar\");\n" + 
+				"java.util.ArrayList<String> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(_plus);\n" + 
+				"return _newArrayList;", 
+				"newArrayList(\n'foo' + \n'bar')");
+	}
+	
 	
 }
