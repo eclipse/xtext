@@ -257,10 +257,12 @@ public class JvmModelGenerator implements IGenerator {
       EList<JvmMember> _members = it.getMembers();
       final Procedure1<JvmMember> _function = new Procedure1<JvmMember>() {
           public void apply(final JvmMember it) {
-            ITreeAppendable _traceWithComments = JvmModelGenerator.this.traceWithComments(childAppendable, it);
+            final ITreeAppendable memberAppendable = JvmModelGenerator.this.traceWithComments(childAppendable, it);
+            memberAppendable.openScope();
             Boolean _get = b.get();
-            boolean _generateMember = JvmModelGenerator.this.generateMember(it, _traceWithComments, (_get).booleanValue());
+            boolean _generateMember = JvmModelGenerator.this.generateMember(it, memberAppendable, (_get).booleanValue());
             b.set(Boolean.valueOf(_generateMember));
+            memberAppendable.closeScope();
           }
         };
       IterableExtensions.<JvmMember>forEach(_members, _function);
