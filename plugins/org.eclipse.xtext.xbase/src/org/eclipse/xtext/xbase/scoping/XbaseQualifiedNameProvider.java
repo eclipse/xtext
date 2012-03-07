@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.scoping;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -34,6 +36,8 @@ public class XbaseQualifiedNameProvider extends DefaultDeclarativeQualifiedNameP
 				return null;
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);
 		}
+		if(obj instanceof JvmFormalParameter || obj instanceof JvmTypeParameter)
+			return null;
 		return super.getFullyQualifiedName(obj);
 	}
 
