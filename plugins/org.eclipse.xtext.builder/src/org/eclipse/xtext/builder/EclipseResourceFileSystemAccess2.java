@@ -144,6 +144,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
 							setDerived(file, outputConfig.isSetDerivedProperty());
 						}
+					} else {
+						if (smapFile != null)
+							file.touch(monitor);
 					}
 					if (smapFile != null)
 						updateSmapInformation(smapFile, postProcessedContent, file);
