@@ -48,6 +48,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -90,6 +91,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
 	private ILogicalContainerProvider contextProvider;
+	
+	@Inject
+	private ILocationInFileProvider locationInFileProvider;
 
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
@@ -551,9 +555,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				return false;
 			}
 			if (call instanceof XFeatureCall) {
-				XFeatureCall call2 = (XFeatureCall) call;
-				if (call2.getDeclaringType() != null) {
-					b.append(call2.getDeclaringType());
+				XFeatureCall featureCall = (XFeatureCall) call;
+				if (featureCall.getDeclaringType() != null) {
+					ILocationData qualifierLocation = getStaticQualifierLocation(featureCall);
+					if (qualifierLocation != null) {
+						b.trace(qualifierLocation).append(featureCall.getDeclaringType());
+					} else {
+						b.append(featureCall.getDeclaringType());
+					}
 					return true;
 				}
 			}
@@ -567,6 +576,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else {
 			return false;
 		}
+	}
+	
+	@Nullable
+	protected ILocationData getStaticQualifierLocation(XFeatureCall call) {
+		ITextRegionWithLineInformation result = (ITextRegionWithLineInformation) locationInFileProvider.getSignificantTextRegion(call, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		if (result == null || result.getLength() == 0)
+			return null;
+		return new LocationData(result.getOffset(), result.getLength(), result.getLineNumber(),
+				result.getEndLineNumber(), null, null);
 	}
 	
 	protected void appendNullValue(JvmTypeReference type, EObject context, ITreeAppendable b) {

@@ -79,6 +79,38 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 		assertEquals(text.substring(text.indexOf('>') + 1), significant);
 	}
 	
+	@Test public void testStaticFeatureCall_01() throws Exception {
+		String text = "String::<Invalid>valueOf('a')";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("String", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_02() throws Exception {
+		String text = "java::util::Collection::emptyList";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getSignificantTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java::util::Collection", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_03() throws Exception {
+		String text = "String::<Invalid>valueOf('a')";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("String::", significant);
+	}
+	
+	@Test public void testStaticFeatureCall_04() throws Exception {
+		String text = "java::util::Collection::emptyList";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, 0);
+		String significant = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("java::util::Collection::", significant);
+	}
+	
 	@Test public void testMemberFeatureCall_01() throws Exception {
 		String text = "'a'.toString";
 		XMemberFeatureCall featureCall = castedExpression(text);

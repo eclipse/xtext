@@ -20,7 +20,7 @@ public class StaticQualifierValueConverter extends XbaseQualifiedNameValueConver
 	}
 	
 	@Override
-	protected String getStringNamespaceDelimiter() {
+	public String getStringNamespaceDelimiter() {
 		return "::";
 	}
 	
