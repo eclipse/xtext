@@ -340,5 +340,12 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"newArrayList(\n'foo' + \n'bar')");
 	}
 	
+	@Test public void testNewLines_forExtensionMethod() throws Exception {
+		assertCompilesTo(
+				"String _firstUpper = org.eclipse.xtext.xbase.lib.StringExtensions.toFirstUpper(\"foo\");\n" + 
+				"return _firstUpper;", 
+				"\n'foo'.toFirstUpper");
+	}
+	
 	
 }
