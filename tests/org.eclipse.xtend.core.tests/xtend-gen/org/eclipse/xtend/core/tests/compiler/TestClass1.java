@@ -11,8 +11,7 @@ public class TestClass1 {
   }
   
   public Integer testFunction3() {
-    int _plus = (
-    40 + 2);
+    int _plus = (40 + 2);
     return Integer.valueOf(_plus);
   }
   

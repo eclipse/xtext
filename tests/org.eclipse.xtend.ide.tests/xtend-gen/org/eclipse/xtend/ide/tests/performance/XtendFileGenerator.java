@@ -1067,8 +1067,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of(
-    "xtend/tutorial/util/Amount.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Amount.java", _builder);
     return _mappedTo;
   }
   
@@ -1099,8 +1098,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of(
-    "xtend/tutorial/util/Circle.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Circle.java", _builder);
     return _mappedTo;
   }
   
@@ -1168,8 +1166,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of(
-    "xtend/tutorial/util/NetNode.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/NetNode.java", _builder);
     return _mappedTo;
   }
   
@@ -1288,8 +1285,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of(
-    "xtend/tutorial/util/Person.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Person.java", _builder);
     return _mappedTo;
   }
   
@@ -1325,8 +1321,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of(
-    "xtend/tutorial/util/Rectangle.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Rectangle.java", _builder);
     return _mappedTo;
   }
   
@@ -1339,8 +1334,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of(
-    "xtend/tutorial/util/Shape.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Shape.java", _builder);
     return _mappedTo;
   }
 }
