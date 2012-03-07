@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -27,6 +28,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	@Inject

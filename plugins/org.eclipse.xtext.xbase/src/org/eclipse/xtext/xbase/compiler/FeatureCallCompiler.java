@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -67,10 +68,8 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public class FeatureCallCompiler extends LiteralsCompiler {
-
-	@SuppressWarnings("unused")
-	private final static Logger log = Logger.getLogger(FeatureCallCompiler.class);
 
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
@@ -186,6 +185,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	 * @returns the variable name under which the result of the expression is stored. Returns <code>null</code> if the
 	 *          expression hasn't been assigned to a local variable before.
 	 */
+	@Nullable
 	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
 		if (b.hasName(expr))
 			return b.getName(expr);
@@ -290,6 +290,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								return executable;
 							}
 
+							@Nullable
 							@Override
 							public JvmTypeParameterDeclarator getNearestDeclarator() {
 								EObject context = call;
@@ -310,6 +311,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								return result;
 							}
 
+							@Nullable
 							@Override
 							public JvmTypeReference getDeclaredType() {
 								if (executable instanceof JvmOperation)
@@ -317,6 +319,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								return null;
 							}
 
+							@Nullable
 							@Override
 							public JvmTypeReference getReceiverType() {
 								return receiverType;
@@ -349,6 +352,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 							containedUnresolved = true;
 						} else {
 							typeArgument = getPrimitives().asWrapperTypeIfPrimitive(typeArgument);
+							if (typeArgument == null)
+								throw new IllegalStateException("typeArgument may not be null");
 							typeArgument = resolveMultiType(typeArgument);
 							resolvedTypeArguments.add(typeArgument);
 						}
@@ -372,6 +377,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return b;
 	}
 
+	@Nullable
 	protected ILocationData getLocationWithTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
 		List<INode> resultNodes = Lists.newArrayList();
@@ -630,8 +636,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	protected void appendArguments(List<? extends XExpression> arguments, ITreeAppendable b, boolean shouldWrapLine) {
-		if (arguments == null)
-			return;
 		for (int i = 0; i < arguments.size(); i++) {
 			XExpression argument = arguments.get(i);
 			appendArgument(argument, b, shouldWrapLine || i > 0);

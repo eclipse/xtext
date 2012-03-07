@@ -32,6 +32,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	
 	private boolean useForDebugging;
 	
+	@Override
 	public boolean isUseForDebugging() {
 		return useForDebugging;
 	}

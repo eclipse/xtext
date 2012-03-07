@@ -16,6 +16,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -52,6 +54,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class AbstractXbaseCompiler {
 
 	@Inject
@@ -199,7 +202,7 @@ public abstract class AbstractXbaseCompiler {
 		return true;
 	}
 	
-	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedReturnType, Set<JvmTypeReference> declaredExceptions) {
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		
 		if (declaredExceptions == null)
@@ -259,7 +262,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected abstract void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable,
-			JvmTypeReference toBeConvertedTo);
+			@Nullable JvmTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
 		JvmTypeReference type = getTypeProvider().getType(xExpression);
@@ -272,11 +275,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {
-		if (obj == null) {
-			_toJavaStatement((Void) null, builder, isReferenced);
-		} else {
-			_toJavaStatement(obj, builder, isReferenced);
-		}
+		_toJavaStatement(obj, builder, isReferenced);
 	}
 	
 	public void toJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
@@ -288,11 +287,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void internalToJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
-		if (obj == null) {
-			_toJavaExpression((Void) null, appendable);
-		} else {
-			_toJavaExpression(obj, appendable);
-		}
+		_toJavaExpression(obj, appendable);
 	}
 
 	/**
@@ -312,26 +307,10 @@ public abstract class AbstractXbaseCompiler {
 				+ func.getClass().getCanonicalName());
 	}
 
-	/**
-	 * @param func the type of <code>null</code>, unused, but necessary for dispatching purpose
-	 * @param b the appendable, unused, but necessary for dispatching purpose
-	 * @param isReferenced unused, but necessary for dispatching purpose
-	 */
-	public void _toJavaStatement(Void func, ITreeAppendable b, boolean isReferenced) {
-		throw new NullPointerException();
-	}
-
-	/**
-	 * @param func the type of <code>null</code>, unused, but necessary for dispatching purpose
-	 * @param b the appendable, unused, but necessary for dispatching purpose
-	 */
-	public void _toJavaExpression(Void func, ITreeAppendable b) {
-		throw new NullPointerException();
-	}
-
 	protected void serialize(final JvmTypeReference type, EObject context, ITreeAppendable appendable) {
 		serialize(type, context, appendable, false, true);
 	}
+	
 	protected void serialize(final JvmTypeReference type, EObject context, ITreeAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
 		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, false, true);
 	}

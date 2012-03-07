@@ -11,6 +11,8 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -36,6 +38,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Inject
@@ -60,7 +63,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Override
 	protected final void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
-			JvmTypeReference toBeConvertedTo) {
+			@Nullable JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
 			JvmTypeReference actualType = getTypeProvider().getType(obj);
 			if (!EcoreUtil.equals(toBeConvertedTo, actualType)) {
@@ -119,8 +122,6 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 	
 	protected boolean identifierStartWith(JvmTypeReference typeReference, String prefix) {
-		if (typeReference == null || typeReference.getType() == null)
-			return false;
 		String identifier = typeReference.getType().getIdentifier();
 		if (identifier != null)
 			return identifier.startsWith(prefix);
@@ -150,7 +151,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void convertFunctionType(final JvmTypeReference expectedType, final JvmTypeReference functionType,
 			final ITreeAppendable appendable, final Later expression, XExpression context) {
 //		JvmTypeReference resolvedLeft = closures.getResolvedExpectedType(expectedType, functionType);
-		if (expectedType == null || expectedType.getIdentifier().equals(Object.class.getName())
+		if (expectedType.getIdentifier().equals(Object.class.getName())
 				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())) {
 			expression.exec(appendable);
 			return;
