@@ -5,12 +5,16 @@ import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.junit.Test
 
 import static org.junit.Assert.*
-import org.junit.Test
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -19,6 +23,10 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Inject TypeReferences references
 	
 	@Inject extension JvmTypesBuilder
+	
+	@Inject IJvmModelAssociations associations
+	
+	@Inject ILogicalContainerProvider containerProvider
 	
 	@Test
 	def void testEmptyAnnotation() {
@@ -145,5 +153,23 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		op.body = ['''foo''']
 		op.body = ['''bar''']
 		assertEquals(1, op.eAdapters.size)
+	}
+	
+	@Test
+	def void testSetBody_02() {
+		val expr = XbaseFactory::eINSTANCE.createXNullLiteral;
+		val res = new XtextResource()
+		res.languageName = 'org.eclipse.xtext.xbase.Xbase'
+		val op = typesFactory.createJvmOperation
+		res.contents += op
+		res.contents += expr
+		op.body = ['''bar''']
+		assertEquals(1, op.eAdapters.size)
+		op.body = expr
+		assertEquals(op, containerProvider.getLogicalContainer(expr))
+		assertEquals(0, op.eAdapters.size)
+		op.body = ['''bar''']
+		assertEquals(1, op.eAdapters.size)
+		assertNull(containerProvider.getLogicalContainer(expr))
 	}
 }

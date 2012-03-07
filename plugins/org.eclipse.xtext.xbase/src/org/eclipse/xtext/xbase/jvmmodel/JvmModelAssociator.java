@@ -11,8 +11,10 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -144,6 +146,19 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			throw new IllegalStateException("There is already a logical container for "+logicalChild);
 		}
 		mapping.put(logicalChild, element);
+	}
+	
+	public void removeLogicalChildAssociation(JvmIdentifiableElement container) {
+		if (container == null)
+			return;
+		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(container.eResource());
+		Iterator<Entry<EObject, JvmIdentifiableElement>> iterator = mapping.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Entry<EObject, JvmIdentifiableElement> next = iterator.next();
+			if (next.getValue() == container) {
+				iterator.remove();
+			}
+		}
 	}
 
 	protected ListMultimap<EObject, EObject> sourceToTargetMap(Resource res) {
