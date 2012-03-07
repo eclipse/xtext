@@ -309,11 +309,16 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		AbstractTraceRegion traceRegion = ((ITraceRegionProvider)postProcessedContent).getTraceRegion();
 		String smap = smapSupport.generateSmap(traceRegion, javaSource.getName());
 		try {
-			final StringInputStream smapAsStream = new StringInputStream(smap);
-			if (!smapFile.exists()) {
-				smapFile.create(smapAsStream, true, monitor);
+			if (smap == null) {
+				if (smapFile.exists())
+					smapFile.delete(true, null);
 			} else {
-				smapFile.setContents(smapAsStream, true, true, monitor);
+				final StringInputStream smapAsStream = new StringInputStream(smap);
+				if (!smapFile.exists()) {
+					smapFile.create(smapAsStream, true, monitor);
+				} else {
+					smapFile.setContents(smapAsStream, true, true, monitor);
+				}
 			}
 		} catch (CoreException e) {
 			log.error(e);

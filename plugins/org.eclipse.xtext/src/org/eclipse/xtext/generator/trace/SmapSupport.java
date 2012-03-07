@@ -24,6 +24,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.smap.SDEInstaller;
@@ -43,11 +44,14 @@ public class SmapSupport {
 	
 	@Inject private IResourceServiceProvider.Registry serviceProviderRegistry;
 
-	public String generateSmap(AbstractTraceRegion rootTraceRegion, String outputFileName) {
+	public @Nullable String generateSmap(AbstractTraceRegion rootTraceRegion, String outputFileName) {
 		final Set<LineMapping> lineData = newLinkedHashSet();
 		createSmapInfo(rootTraceRegion, lineData);
+		if (lineData.isEmpty())
+			return null;
 		List<LineMapping> lineInfo = normalizeLineInfo(lineData);
-
+		if (lineInfo.isEmpty())
+			return null;
 		return toSmap(outputFileName, lineInfo);
 	}
 
@@ -98,7 +102,8 @@ public class SmapSupport {
 				current = new LineMapping(mapping.sourceStartLine, mapping.targetStartLine, mapping.targetEndLine, mapping.source);
 			}
 		}
-		result.add(0, current);
+		if (current != null)
+			result.add(0, current);
 		return result;
 	}
 
