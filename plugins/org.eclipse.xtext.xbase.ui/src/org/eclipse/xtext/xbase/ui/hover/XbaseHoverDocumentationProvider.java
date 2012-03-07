@@ -25,6 +25,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
@@ -41,6 +42,7 @@ import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.internal.corext.dom.ASTNodes;
 import org.eclipse.jdt.internal.ui.javaeditor.ASTProvider;
 import org.eclipse.jdt.ui.JavaElementLabels;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -67,6 +69,8 @@ import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -741,15 +745,13 @@ public class XbaseHoverDocumentationProvider {
 	
 	protected String getDerivedElementInformation(EObject o) {
 		StringBuffer buf = new StringBuffer();
-		Set<EObject> jvmElements = associations.getJvmElements(o);
+		List<EObject> jvmElements = getFilteredDerivedElements(o, TypesPackage.Literals.JVM_MEMBER);
 		if(jvmElements.size() > 0){
 			buf.append("<dt>Derived element:</dt>");
 			buf.append("<dd>");
 			for(EObject jvmElement : jvmElements){
-				if(!(jvmElement instanceof JvmConstructor && ((JvmConstructor) jvmElement).getParameters().size() == 0)){
 					buf.append(computeLinkToElement(jvmElement));	
 					buf.append("<br>");
-				}
 			}
 			buf.append("</dd>");
 		}
@@ -758,7 +760,7 @@ public class XbaseHoverDocumentationProvider {
 	
 	protected String getOriginalDeclarationInformation(EObject o){
 		StringBuffer buf = new StringBuffer();
-		Set<EObject> sourceElements = associations.getSourceElements(o);
+		List<EObject> sourceElements = getFilteredSourceElements(o, null);
 		if(sourceElements.size() > 0){
 			buf.append("<dt>Original declaration:</dt>");
 			buf.append("<dd>");
@@ -769,6 +771,30 @@ public class XbaseHoverDocumentationProvider {
 			buf.append("</dd>");
 		}
 		return buf.toString();
+	}
+	
+	protected List<EObject> getFilteredDerivedElements(EObject o, final EClass type) {
+		List<EObject> jvmElements = Lists.newArrayList(Iterables.filter(associations.getJvmElements(o), new Predicate<EObject>() {
+			public boolean apply(EObject input) {
+				if(input instanceof JvmConstructor && ((JvmConstructor) input).getParameters().size() == 0)
+					return false;
+				if(type == null)
+					return true;
+				return EcoreUtil2.isAssignableFrom(type, input.eClass());
+			}
+		}));
+		return jvmElements;
+	}
+	
+	protected List<EObject> getFilteredSourceElements(EObject o, final EClass type){
+		List<EObject> sourceElements = Lists.newArrayList(Iterables.filter(associations.getSourceElements(o), new Predicate<EObject>() {
+			public boolean apply(EObject input) {
+				if(type == null)
+					return true;
+				return EcoreUtil2.isAssignableFrom(type, input.eClass());
+			}
+		}));
+		return sourceElements;
 	}
 	
 	private String computeLinkToElement(EObject jvmElement) {
