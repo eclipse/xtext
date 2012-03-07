@@ -22,12 +22,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.hierarchy.AbstractTypeHierarchyHandler;
-import org.eclipse.xtend.ide.internal.XtendActivator;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
