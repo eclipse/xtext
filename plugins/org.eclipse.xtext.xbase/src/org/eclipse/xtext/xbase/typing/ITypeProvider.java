@@ -7,11 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import java.util.List;
+
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -117,5 +124,15 @@ public interface ITypeProvider {
 	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
 	 */
 	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable);
+
+	public ITypeArgumentContext getTypeArgumentContext(
+			XAbstractFeatureCall featureCall,
+			List<XExpression> actualArguments,
+			Provider<JvmTypeReference> receiverTypeProvider,
+			JvmIdentifiableElement feature);
+
+	public ITypeArgumentContext getTypeArgumentContext(
+			XConstructorCall constructorCall, 
+			JvmConstructor constructor);
 
 }

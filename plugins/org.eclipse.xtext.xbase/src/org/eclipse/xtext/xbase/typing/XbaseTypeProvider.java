@@ -89,7 +89,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow
  */
 @Singleton
-public class XbaseTypeProvider extends AbstractTypeProvider implements ITypeArgumentContextHelper {
+public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private TypesFactory factory;
