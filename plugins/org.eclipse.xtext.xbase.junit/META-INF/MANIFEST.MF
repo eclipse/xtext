@@ -17,7 +17,9 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=r
 Export-Package: org.eclipse.xtext.xbase.compiler;x-internal:=true,
  org.eclipse.xtext.xbase.junit.evaluation;x-internal:=true,
  org.eclipse.xtext.xbase.junit.ui;x-internal:=true,
- testdata
+ testdata,
+ testdata.a,
+ testdata.b
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j;version="1.2.15",

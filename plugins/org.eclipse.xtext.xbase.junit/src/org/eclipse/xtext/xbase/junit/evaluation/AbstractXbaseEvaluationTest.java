@@ -809,6 +809,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"(((((new testdata.ClosureClient2))).value))");
 	}
 	
+	@Test public void testConstructorCall_12() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{ new testdata.a.SameSimpleName new testdata.b.SameSimpleName } instanceof testdata.b.SameSimpleName");
+	}
+	
+	@Test public void testConstructorCall_13() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{ var res = new testdata.a.SameSimpleName new testdata.b.SameSimpleName res } instanceof testdata.a.SameSimpleName");
+	}
+	
 	@Test public void testAssignment_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}
