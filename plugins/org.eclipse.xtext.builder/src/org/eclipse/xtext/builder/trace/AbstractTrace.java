@@ -266,7 +266,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		AbstractTraceRegion left = findTraceRegionAtLeftOffset(region.getOffset());
 		left = findParentByURI(left, uri);
 		AbstractTraceRegion right = findTraceRegionAtRightOffset(region.getOffset() + region.getLength());
-		right = findParentByURI(left, uri);
+		right = findParentByURI(right, uri);
 		return mergeRegions(left, right);
 	}
 	
