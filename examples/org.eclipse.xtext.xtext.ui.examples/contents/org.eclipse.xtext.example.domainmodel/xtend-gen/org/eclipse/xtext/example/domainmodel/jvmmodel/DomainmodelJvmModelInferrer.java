@@ -83,11 +83,11 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           final ArrayList<JvmField> fields = CollectionLiterals.<JvmField>newArrayList();
           EList<Feature> _features = entity.getFeatures();
           for (final Feature f : _features) {
-            boolean matched = false;
-            if (!matched) {
+            boolean _matched = false;
+            if (!_matched) {
               if (f instanceof Property) {
                 final Property _property = (Property)f;
-                matched=true;
+                _matched=true;
                 String _name_2 = _property.getName();
                 JvmTypeReference _type = _property.getType();
                 final JvmField field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(_property, _name_2, _type);
@@ -106,10 +106,10 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 _members_4.add(_setter);
               }
             }
-            if (!matched) {
+            if (!_matched) {
               if (f instanceof Operation) {
                 final Operation _operation = (Operation)f;
-                matched=true;
+                _matched=true;
                 EList<JvmMember> _members_2 = it.getMembers();
                 String _name_2 = _operation.getName();
                 JvmTypeReference _type = _operation.getType();
