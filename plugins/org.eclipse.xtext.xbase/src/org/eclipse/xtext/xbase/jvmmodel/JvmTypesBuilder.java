@@ -110,9 +110,21 @@ public class JvmTypesBuilder {
 	public void setBody(JvmExecutable logicalContainer, XExpression expr) {
 		if (expr == null)
 			return;
+		removeExistingBody(logicalContainer);
 		associator.associateLogicalContainer(expr, logicalContainer);
 	}
 	
+	protected void removeExistingBody(JvmMember member) {
+		// remove old adapters
+		Iterator<Adapter> iterator = member.eAdapters().iterator();
+		while (iterator.hasNext()) {
+			if (iterator.next() instanceof CompilationStrategyAdapter) {
+				iterator.remove();
+			}
+		}
+		associator.removeLogicalChildAssociation(member);
+	}
+
 	/**
 	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
 	 * implement the {@link JvmExecutable} when it is translated to Java source code.
@@ -120,6 +132,7 @@ public class JvmTypesBuilder {
 	 * @param strategy the compilation strategy.
 	 */
 	public void setBody(JvmExecutable executable, Procedures.Procedure1<ITreeAppendable> strategy) {
+		removeExistingBody(executable);
 		setCompilationStrategy(executable, strategy);
 	}
 	
@@ -627,6 +640,9 @@ public class JvmTypesBuilder {
 	 * @param strategy the compilation strategy.
 	 */
 	public void setInitializer(JvmField field, Procedures.Procedure1<ITreeAppendable> strategy) {
+		if (strategy == null || field == null)
+			return;
+		removeExistingBody(field);
 		setCompilationStrategy(field, strategy);
 	}
 	
@@ -642,19 +658,12 @@ public class JvmTypesBuilder {
 	public void setInitializer(JvmField field, XExpression expr) {
 		if (expr == null)
 			return;
+		removeExistingBody(field);
 		associator.associateLogicalContainer(expr, field);
 	}
 	
 	protected void setCompilationStrategy(JvmMember member,
 			Procedures.Procedure1<ITreeAppendable> strategy) {
-		// remove old adapters
-		Iterator<Adapter> iterator = member.eAdapters().iterator();
-		while (iterator.hasNext()) {
-			if (iterator.next() instanceof CompilationStrategyAdapter) {
-				iterator.remove();
-			}
-		}
-		
 		CompilationStrategyAdapter adapter = new CompilationStrategyAdapter();
 		adapter.setCompilationStrategy(strategy);
 		member.eAdapters().add(adapter);

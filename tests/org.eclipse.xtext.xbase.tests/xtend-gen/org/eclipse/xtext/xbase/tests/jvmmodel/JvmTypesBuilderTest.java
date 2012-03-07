@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -12,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
@@ -19,12 +21,17 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -47,6 +54,12 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
+  
+  @Inject
+  private IJvmModelAssociations associations;
+  
+  @Inject
+  private ILogicalContainerProvider containerProvider;
   
   @Test
   public void testEmptyAnnotation() {
@@ -301,5 +314,46 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     EList<Adapter> _eAdapters = op.eAdapters();
     int _size = _eAdapters.size();
     Assert.assertEquals(1, _size);
+  }
+  
+  @Test
+  public void testSetBody_02() {
+    final XNullLiteral expr = XbaseFactory.eINSTANCE.createXNullLiteral();
+    XtextResource _xtextResource = new XtextResource();
+    final XtextResource res = _xtextResource;
+    res.setLanguageName("org.eclipse.xtext.xbase.Xbase");
+    final JvmOperation op = this.typesFactory.createJvmOperation();
+    EList<EObject> _contents = res.getContents();
+    _contents.add(op);
+    EList<EObject> _contents_1 = res.getContents();
+    _contents_1.add(expr);
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("bar");
+        }
+      };
+    this._jvmTypesBuilder.setBody(op, _function);
+    EList<Adapter> _eAdapters = op.eAdapters();
+    int _size = _eAdapters.size();
+    Assert.assertEquals(1, _size);
+    this._jvmTypesBuilder.setBody(op, expr);
+    JvmIdentifiableElement _logicalContainer = this.containerProvider.getLogicalContainer(expr);
+    Assert.assertEquals(op, _logicalContainer);
+    EList<Adapter> _eAdapters_1 = op.eAdapters();
+    int _size_1 = _eAdapters_1.size();
+    Assert.assertEquals(0, _size_1);
+    final Procedure1<ITreeAppendable> _function_1 = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("bar");
+        }
+      };
+    this._jvmTypesBuilder.setBody(op, _function_1);
+    EList<Adapter> _eAdapters_2 = op.eAdapters();
+    int _size_2 = _eAdapters_2.size();
+    Assert.assertEquals(1, _size_2);
+    JvmIdentifiableElement _logicalContainer_1 = this.containerProvider.getLogicalContainer(expr);
+    Assert.assertNull(_logicalContainer_1);
   }
 }
