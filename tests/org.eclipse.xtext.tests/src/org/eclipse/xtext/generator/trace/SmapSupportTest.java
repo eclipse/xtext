@@ -48,35 +48,7 @@ public class SmapSupportTest {
 		
 		assertEquals(1, info.get(0).sourceStartLine);
 		assertEquals(1, info.get(0).targetStartLine);
-		assertEquals(4, info.get(0).targetEndLine);
-		
-		assertEquals(2, info.get(1).sourceStartLine);
-		assertEquals(5, info.get(1).targetStartLine);
-		assertEquals(5, info.get(1).targetEndLine);
-		
-		assertEquals(1, info.get(2).sourceStartLine);
-		assertEquals(6, info.get(2).targetStartLine);
-		assertEquals(6, info.get(2).targetEndLine);
-		
-		assertEquals(3, info.get(3).sourceStartLine);
-		assertEquals(7, info.get(3).targetStartLine);
-		assertEquals(8, info.get(3).targetEndLine);
-	}
-	
-	@Test
-	public void testNomalizeOverlaps() {
-		Set<LineMapping> mappings = newHashSet(
-				new LineMapping(1,1,8,source),
-				new LineMapping(2,5,8,source),
-				new LineMapping(1,6,6,source),
-				new LineMapping(3,7,8,source),
-				new LineMapping(3,8,8,source));
-		List<LineMapping> info = support.normalizeLineInfo(mappings);
-		assertEquals(info.toString(), 4, info.size());
-		
-		assertEquals(1, info.get(0).sourceStartLine);
-		assertEquals(1, info.get(0).targetStartLine);
-		assertEquals(4, info.get(0).targetEndLine);
+		assertEquals(1, info.get(0).targetEndLine);
 		
 		assertEquals(2, info.get(1).sourceStartLine);
 		assertEquals(5, info.get(1).targetStartLine);
