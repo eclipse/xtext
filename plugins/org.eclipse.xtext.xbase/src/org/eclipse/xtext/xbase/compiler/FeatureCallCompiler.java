@@ -611,7 +611,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					appendTypeArguments(call, b);
 				} else {
 					XExpression argument = arguments.get(index);
-					appendArgument(argument, b);
+					appendArgument(argument, b, index > 0);
 				}
 			}
 			prevEnd = matcher.end();
@@ -633,6 +633,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	protected void appendArgument(XExpression argument, ITreeAppendable b) {
+		appendArgument(argument, b, true);
+	}
+	
+	protected void appendArgument(XExpression argument, ITreeAppendable b, boolean doLineWrappingIfSourceWasWrapped) {
 		final String referenceName = getReferenceName(argument, b);
 		/*
 		 * This is done to support better debugging experience.
@@ -645,10 +649,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		 *  to the same line in the Java code, so it's not possible to have two steps. 
 		 *  Therefore we add a newline in the Java if the user had one the expression defined in a new line.
 		 */
-		final boolean needsNewLine = referenceName == null && isDeclaredInNewLine(argument);
+		final boolean needsNewLine = doLineWrappingIfSourceWasWrapped && referenceName == null && isDeclaredInNewLine(argument);
 		if (needsNewLine) {
-			b.newLine();
 			b.increaseIndentation();
+			b.newLine();
 		}
 		if (referenceName == null && isVariableDeclarationRequired(argument, b)) {
 			JvmTypeReference type = getTypeProvider().getExpectedType(argument);
