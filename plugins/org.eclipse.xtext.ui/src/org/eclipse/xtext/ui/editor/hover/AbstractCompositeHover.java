@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.editor.ISourceViewerAware;
  * the list of hovers.
  * 
  * @author Christoph Kulla - Initial contribution and API
+ * @author Holger Schill
  */
 public abstract class AbstractCompositeHover implements ITextHover, ITextHoverExtension, ITextHoverExtension2,
 		ISourceViewerAware {
@@ -55,23 +56,17 @@ public abstract class AbstractCompositeHover implements ITextHover, ITextHoverEx
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
 		if (getHovers() != null) {
 			for (ITextHover hover : getHovers()) {
 				IRegion region = hover.getHoverRegion(textViewer, offset);
 				if (region != null) {
-
-					Object hoverInfo = null;
-					if (hover instanceof ITextHoverExtension2)
-						hoverInfo = ((ITextHoverExtension2) hover).getHoverInfo2(textViewer, region);
-					else {
-						hoverInfo = hover.getHoverInfo(textViewer, region);
-					}
-					if (hoverInfo != null && !(hoverInfo instanceof String && ((String) hoverInfo).length() == 0)) {
-						currentHover = hover;
-						return region;
-					}
+					// We always take the first that answers with a region
+					// In org.eclipse.xtext.ui.editor.hover.DefaultCompositeHover.createHovers() the AnnotationWithQuickFixesHover 
+					// is always the first and answers with a region only when there is a problemmarker
+					// In all other cases an instance of org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover is the next in the order.
+					currentHover = hover;
+					return region;
 				}
 			}
 		}
