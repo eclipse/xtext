@@ -16,10 +16,12 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class JvmLocationInFileProvider extends XbaseLocationInFileProvider {
 
 	@Inject

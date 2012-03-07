@@ -179,6 +179,72 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"{ #<String>newArrayList()#; }");
 	}
 	
+	@Test
+	public void testStaticFeatureCall_01() throws Exception {
+		assertTrace( 
+				"\nreturn String.CASE_INS#EN#SITIVE_ORDER;", 
+				"String::#CASE_INSENSITIVE_ORDER#");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_02() throws Exception {
+		assertTrace( 
+				"\nreturn St#r#ing.CASE_INSENSITIVE_ORDER;", 
+				"#String#::CASE_INSENSITIVE_ORDER");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_03() throws Exception {
+		assertTrace( 
+				"\nreturn Str#ing.CASE_INSEN#SITIVE_ORDER;", 
+				"#String::CASE_INSENSITIVE_ORDER#");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<?> _emptyList = Collections.em#ptyL#ist();\n" + 
+				"return _emptyList;", 
+				"java::util::Collections::#emptyList#");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_05() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<Object> _emptyList = Co#lle#ctions.<Object>emptyList();\n" + 
+				"return _emptyList;", 
+				"#java::util::Collections#::<Object>emptyList");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_06() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<String> _singletonList = Collections.<S#tri#ng>singletonList(\"value\");\n" + 
+				"return _singletonList;", 
+				"java::util::Collections::<#String#>singletonList('value')");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_07() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<String> _singletonList = Co#llections.<Stri#ng>singletonList(\"value\");\n" + 
+				"return _singletonList;", 
+				"#java::util::Collections::<String>singletonList('value')#");
+	}
+	
+	@Test
+	public void testStaticFeatureCall_08() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"List<String> _singletonList = Collections.<Stri#ng>singletonList(\"va#lue\");\n" + 
+				"return _singletonList;", 
+				"java::util::Collections::#<String>singletonList('value')#");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	@SuppressWarnings("null")
