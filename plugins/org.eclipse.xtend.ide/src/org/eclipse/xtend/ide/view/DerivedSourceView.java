@@ -167,7 +167,7 @@ public class DerivedSourceView extends AbstractSourceView {
 		}
 		if (selectedSource != null) {
 			IFile file = workspaceRoot.getFile(selectedSource.getFullPath());
-			if (file != null && file.exists()) {
+			if (file != null && file.exists() && file.isSynchronized(1)) {
 				try {
 					return null != selectedSource ? Files.readStreamIntoString(selectedSource.getContents()) : null;
 				} catch (CoreException e) {
