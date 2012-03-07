@@ -15,7 +15,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -232,11 +234,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void _toJavaExpression(XAbstractFeatureCall call, ITreeAppendable b) {
 		if (isPrimitiveVoid(call)) {
-			b.append("null");
+			throw new IllegalArgumentException("feature yields 'void'");
 		} else {
 			final String referenceName = getReferenceName(call, b);
 			if (referenceName != null) {
-				b.trace(call, false).append(referenceName);
+				if (call instanceof XFeatureCall || call instanceof XMemberFeatureCall) {
+					b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(referenceName);
+				} else {
+					b.trace(call, false).append(referenceName);
+				}
 			} else {
 				featureCalltoJavaExpression(call, b, true);
 			}
@@ -245,7 +251,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b, boolean isExpressionContext) {
 		if (call instanceof XAssignment) {
-			xAssignmentToJavaExpression((XAssignment) call, b, isExpressionContext);
+			assignmentToJavaExpression((XAssignment) call, b, isExpressionContext);
 		} else {
 			boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
 			if (hasReceiver) {
@@ -258,10 +264,21 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected ITreeAppendable appendTypeArguments(final XAbstractFeatureCall call, ITreeAppendable b) {
 		if (!call.getTypeArguments().isEmpty()) {
-			ILocationData locationData = getLocationWithTypeArguments(call);
-			ITreeAppendable typeArgumentsAppendable = b;
-			if (locationData != null)
-				typeArgumentsAppendable = b.trace(locationData);
+			/*
+			 * We want to create the following trace regions
+			 *  receiver.  < type ,  arguments >   name ( 'param' )
+			 * |         || [    ]  [         ] ||[    ] [       ] |||
+			 * |         |[                     ][                 ]||
+			 * |         [                                          ]|
+			 * [                                                     ]
+			 */
+			ILocationData completeLocationData = getLocationWithTypeArguments(call);
+			ILocationData argumentsLocationData = null;
+			if (completeLocationData != null) {
+				argumentsLocationData = getLocationOfTypeArguments(call);
+			}
+			ITreeAppendable completeFeatureCallAppendable = completeLocationData != null ? b.trace(completeLocationData) : b;
+			ITreeAppendable typeArgumentsAppendable = argumentsLocationData != null ? completeFeatureCallAppendable.trace(argumentsLocationData) : completeFeatureCallAppendable;
 			typeArgumentsAppendable.append("<");
 			for (int i = 0; i < call.getTypeArguments().size(); i++) {
 				if (i != 0) {
@@ -272,6 +289,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				serialize(typeArgument, call, singleTypeArgumentAppendable);
 			}
 			typeArgumentsAppendable.append(">");
+			ILocationData featureAndArgumentLocation = null;
+			if (completeLocationData != null) {
+				if (argumentsLocationData != null) {
+					featureAndArgumentLocation = getLocationWithoutTypeArguments(call);
+				}
+			}
+			ITreeAppendable result = featureAndArgumentLocation != null ? completeFeatureCallAppendable.trace(featureAndArgumentLocation) : completeFeatureCallAppendable;
+			return result;
 		} else if (call.getFeature() instanceof JvmExecutable) {
 			final JvmExecutable executable = (JvmExecutable) call.getFeature();
 			if (!executable.getTypeParameters().isEmpty()) {
@@ -376,6 +401,30 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		return b;
 	}
+	
+	@Nullable
+	protected ILocationData getLocationWithoutTypeArguments(XAbstractFeatureCall call) {
+		final ICompositeNode startNode = NodeModelUtils.getNode(call);
+		List<INode> resultNodes = Lists.newArrayList();
+		if (call instanceof XFeatureCall || call instanceof XMemberFeatureCall) {
+			boolean featureReferenceSeen = false;
+			for (INode child : startNode.getChildren()) {
+				if (featureReferenceSeen) {
+					resultNodes.add(child);
+				} else {
+					EObject grammarElement = child.getGrammarElement();
+					if (grammarElement instanceof CrossReference) {
+						Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+						if (assignment != null && "feature".equals(assignment.getFeature())) {
+							featureReferenceSeen = true;
+							resultNodes.add(child);
+						}
+					}
+				}
+			}
+		}
+		return toLocationData(resultNodes);
+	}
 
 	@Nullable
 	protected ILocationData getLocationWithTypeArguments(XAbstractFeatureCall call) {
@@ -412,8 +461,57 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				}
 			}
 		}
+		return toLocationData(resultNodes);
+	}
+	
+	@Nullable
+	protected ILocationData getLocationOfTypeArguments(XAbstractFeatureCall call) {
+		final ICompositeNode startNode = NodeModelUtils.getNode(call);
+		List<INode> resultNodes = Lists.newArrayList();
+		if (call instanceof XFeatureCall) {
+			if (((XFeatureCall) call).getDeclaringType() != null) {
+				boolean typeRefSeen = false;
+				for (INode child : startNode.getChildren()) {
+					if (typeRefSeen) {
+						if (child.getGrammarElement() instanceof CrossReference)
+							break;
+						resultNodes.add(child);
+					} else {
+						EObject grammarElement = child.getGrammarElement();
+						if (grammarElement instanceof CrossReference) {
+							typeRefSeen = true;
+						}
+					}
+				}
+			} else {
+				for (INode child : startNode.getChildren()) {
+					if (child.getGrammarElement() instanceof CrossReference)
+						break;
+					resultNodes.add(child);
+				}
+			}
+		} else if (call instanceof XMemberFeatureCall) {
+			boolean keywordSeen = false;
+			for (INode child : startNode.getChildren()) {
+				if (keywordSeen) {
+					if (child.getGrammarElement() instanceof CrossReference)
+						break;
+					resultNodes.add(child);
+				} else {
+					EObject grammarElement = child.getGrammarElement();
+					if (grammarElement instanceof Keyword) {
+						keywordSeen = true;
+					}
+				}
+			}
+		}
+		return toLocationData(resultNodes);
+	}
+
+	@Nullable
+	protected ILocationData toLocationData(List<INode> nodes) {
 		ITextRegionWithLineInformation result = ITextRegionWithLineInformation.EMPTY_REGION;
-		for (INode node : resultNodes) {
+		for (INode node : nodes) {
 			if (!isHidden(node)) {
 				int length = node.getLength();
 				if (length != 0)
@@ -533,7 +631,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return false;
 	}
 
-	protected void xAssignmentToJavaExpression(XAssignment expr, ITreeAppendable b, boolean isExpressionContext) {
+	protected void assignmentToJavaExpression(XAssignment expr, ITreeAppendable b, boolean isExpressionContext) {
 		final JvmIdentifiableElement feature = expr.getFeature();
 		if (feature instanceof JvmOperation) {
 			boolean appendReceiver = appendReceiver(expr, b, isExpressionContext);

@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -116,7 +115,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"<String>#newArrayList#()");
 	}
 	
-	@Ignore
 	@Test
 	public void testFeatureCall_05() throws Exception {
 		assertTrace( 
@@ -142,7 +140,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO: To be discussed")
 	public void testFeatureCall_08() throws Exception {
 		assertTrace( 
 				"\nArrayList<String> _newArrayList = CollectionLiterals.<String>ne#wArrayList(#);\n" + 
@@ -151,7 +148,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO: To be discussed")
 	public void testFeatureCall_09() throws Exception {
 		assertTrace( 
 				"\nArrayList<String> _newArrayList = CollectionLiterals.<String>#newArrayList()#;\n" + 
@@ -160,12 +156,27 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO: To be discussed")
 	public void testFeatureCall_10() throws Exception {
 		assertTrace( 
 				"\nArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();\n" + 
 				"return _ne#wArray#List;", 
-				"{ <String>#newArrayList()#; }");
+				"{ <String>#newArrayList#(); }");
+	}
+	
+	@Test
+	public void testFeatureCall_11() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _newArrayList = CollectionLiterals.<Stri#ng>newAr#rayList();\n" + 
+				"return _newArrayList;", 
+				"{ #<String>newArrayList()#; }");
+	}
+	
+	@Test
+	public void testFeatureCall_12() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _newA#r#rayList = CollectionLiterals.<String>newArrayList();\n" + 
+				"return _newArrayList;", 
+				"{ #<String>newArrayList()#; }");
 	}
 	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
