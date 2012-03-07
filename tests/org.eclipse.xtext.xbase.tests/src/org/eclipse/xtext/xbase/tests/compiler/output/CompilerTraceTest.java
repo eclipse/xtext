@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -243,6 +244,79 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"List<String> _singletonList = Collections.<Stri#ng>singletonList(\"va#lue\");\n" + 
 				"return _singletonList;", 
 				"java::util::Collections::#<String>singletonList('value')#");
+	}
+	
+	@Test
+	public void testConstructorCall_01() throws Exception {
+		assertTrace( 
+				"\nString _string = new S#tri#ng();\n" +
+				"return _string;", 
+				"new #String#");
+	}
+	
+	@Test
+	public void testConstructorCall_02() throws Exception {
+		assertTrace( 
+				"\nString _string = n#e#w String();\n" +
+				"return _string;", 
+				"#new String#()");
+	}
+	
+	@Test
+	public void testConstructorCall_03() throws Exception {
+		assertTrace( 
+				"\nString _string = new Str#ing(\"Ar#gs\");\n" +
+				"return _string;", 
+				"#new String('Args')#");
+	}
+	
+	@Test
+	public void testConstructorCall_04() throws Exception {
+		assertTrace( 
+				"\nArrayList<?> _arrayList = new Array#List<#Object>();\n" +
+				"return _arrayList;", 
+				"new #java.util.ArrayList#");
+	}
+	
+	@Test
+	@Ignore("Constructor types loose track to the constructor call")
+	public void testConstructorCall_05() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _arrayList = new ArrayList<S#trin#g>(5);\n" +
+				"return _arrayList;", 
+				"new java.util.ArrayList<S#tri#ng>(5)");
+	}
+	
+	@Test
+	public void testConstructorCall_06() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _arrayList = new Arr#ayLi#st<String>(5);\n" +
+				"return _arrayList;", 
+				"new #java.util.ArrayList#<String>(5)");
+	}
+	
+	@Test
+	public void testConstructorCall_07() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _a#rra#yList = new ArrayList<String>();\n" +
+				"return _arrayList;", 
+				"#new java.util.ArrayList<String>#");
+	}
+	
+	@Test
+	public void testConstructorCall_08() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _a#rra#yList = new ArrayList<String>(5);\n" +
+				"return _arrayList;", 
+				"#new java.util.ArrayList<String>(5)#");
+	}
+	
+	@Test
+	public void testConstructorCall_09() throws Exception {
+		assertTrace( 
+				"\nArrayList<?> _arrayList = new Array#List<#Object>(5);\n" +
+				"return _arrayList;", 
+				"((new #java.util.ArrayList#(5)))");
 	}
 	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);

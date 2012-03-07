@@ -15,6 +15,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -25,7 +28,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -38,18 +46,21 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.Closures;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -396,13 +407,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		
 		Later later = new Later() {
-			public void exec(ITreeAppendable appendable) {
-				appendable.append("new ");
+			public void exec(ITreeAppendable constructorCallAppendable) {
+				ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
+				ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? constructorCallAppendable.trace(locationWithNewKeyword) : constructorCallAppendable;
+				appendableWithNewKeyword.append("new ");
 				JvmTypeReference producedType = getTypeProvider().getType(expr);
-				serialize(producedType, expr, appendable, false, false, true, false);
-				appendable.append("(");
-				appendArguments(expr.getArguments(), appendable);
-				appendable.append(")");
+				serialize(producedType, expr, appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0), false, false, true, false);
+				
+				constructorCallAppendable.append("(");
+				appendArguments(expr.getArguments(), constructorCallAppendable);
+				constructorCallAppendable.append(")");
 			}
 		};
 		if (isReferenced) {
@@ -412,6 +426,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			later.exec(b);
 			b.append(";");
 		}
+	}
+	
+	@Nullable
+	protected ILocationData getLocationWithNewKeyword(XConstructorCall call) {
+		final ICompositeNode startNode = NodeModelUtils.getNode(call);
+		List<INode> resultNodes = Lists.newArrayList();
+		for (INode child : startNode.getChildren()) {
+			if (child.getGrammarElement() instanceof Keyword && "(".equals(child.getText()))
+				break;
+			resultNodes.add(child);
+		}
+		return toLocationData(resultNodes);
 	}
 
 	protected void _toJavaExpression(XConstructorCall expr, ITreeAppendable b) {
