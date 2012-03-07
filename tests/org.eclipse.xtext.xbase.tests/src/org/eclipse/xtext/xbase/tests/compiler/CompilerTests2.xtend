@@ -52,4 +52,41 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return _MY_STATIC_METHOD;
 		''')
 	}
+	
+	@Test def void testBug371321_1() throws Exception {
+		'''
+			try {
+				'foo'.length
+			} catch (RuntimeException assert) {
+				assert.printStackTrace
+			}
+		'''.compilesTo('''
+			int _xtrycatchfinallyexpression = (int) 0;
+			try {
+			  int _length = "foo".length();
+			  _xtrycatchfinallyexpression = _length;
+			} catch (final Throwable _t) {
+			  if (_t instanceof RuntimeException) {
+			    final RuntimeException assert_ = (RuntimeException)_t;
+			    assert_.printStackTrace();
+			  } else {
+			    throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);
+			  }
+			}
+			return _xtrycatchfinallyexpression;
+		''')
+	}
+	
+	@Test def void testBug371321_2() throws Exception {
+		'''
+			for (assert : 'foo'.toCharArray) {
+				println(assert)
+			}
+		'''.compilesTo('''
+			char[] _charArray = "foo".toCharArray();
+			for (final char assert_ : _charArray) {
+			  org.eclipse.xtext.xbase.lib.InputOutput.<Character>println(Character.valueOf(assert_));
+			}
+		''')
+	}
 }

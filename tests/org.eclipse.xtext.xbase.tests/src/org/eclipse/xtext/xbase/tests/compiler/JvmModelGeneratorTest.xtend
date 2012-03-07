@@ -18,10 +18,9 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.junit.Test
 
 import static org.junit.Assert.*
-import org.junit.Test
-import java.util.List
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
