@@ -71,6 +71,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject ILocationInFileProvider locationProvider
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IJvmModelAssociations jvmModelAssociations
+	@Inject JavaKeywords keywords
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -403,7 +404,8 @@ class JvmModelGenerator implements IGenerator {
 		tracedAppendable.append("final ")
 		parameterType.serialize(tracedAppendable)
 		tracedAppendable.append(" ")
-		tracedAppendable.traceSignificant(it).append(simpleName)
+		val name = tracedAppendable.declareVariable(it, makeJavaIdentifier(simpleName))
+		tracedAppendable.traceSignificant(it).append(name)
 	}
 		
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
@@ -698,6 +700,14 @@ class JvmModelGenerator implements IGenerator {
 		else if(context instanceof JvmGenericType)
 			context as JvmGenericType
 		else containerType(context.eContainer)
+	}
+	
+	def protected String makeJavaIdentifier(String name) {
+		if (keywords.isJavaKeyword(name)) {
+			name+"_"
+		} else {
+			name
+		}
 	}
 	
 }

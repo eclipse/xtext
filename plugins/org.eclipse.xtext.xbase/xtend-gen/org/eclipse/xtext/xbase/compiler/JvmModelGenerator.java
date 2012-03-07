@@ -68,6 +68,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -109,6 +110,9 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private IJvmModelAssociations jvmModelAssociations;
+  
+  @Inject
+  private JavaKeywords keywords;
   
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
@@ -197,16 +201,16 @@ public class JvmModelGenerator implements IGenerator {
     {
       ITextRegion _switchResult = null;
       final ILocationInFileProvider locationProvider = this.locationProvider;
-      boolean matched = false;
-      if (!matched) {
+      boolean _matched = false;
+      if (!_matched) {
         if (locationProvider instanceof ILocationInFileProviderExtension) {
           final ILocationInFileProviderExtension _iLocationInFileProviderExtension = (ILocationInFileProviderExtension)locationProvider;
-          matched=true;
+          _matched=true;
           ITextRegion _textRegion = ((ILocationInFileProviderExtension)_iLocationInFileProviderExtension).getTextRegion(source, RegionDescription.INCLUDING_COMMENTS);
           _switchResult = _textRegion;
         }
       }
-      if (!matched) {
+      if (!_matched) {
         ITextRegion _fullTextRegion = this.locationProvider.getFullTextRegion(source);
         _switchResult = _fullTextRegion;
       }
@@ -402,28 +406,28 @@ public class JvmModelGenerator implements IGenerator {
     boolean _notEquals = (!Objects.equal(visibility, null));
     if (_notEquals) {
       String _switchResult = null;
-      boolean matched = false;
-      if (!matched) {
+      boolean _matched = false;
+      if (!_matched) {
         if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PRIVATE)) {
-          matched=true;
+          _matched=true;
           _switchResult = "private ";
         }
       }
-      if (!matched) {
+      if (!_matched) {
         if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PUBLIC)) {
-          matched=true;
+          _matched=true;
           _switchResult = "public ";
         }
       }
-      if (!matched) {
+      if (!_matched) {
         if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PROTECTED)) {
-          matched=true;
+          _matched=true;
           _switchResult = "protected ";
         }
       }
-      if (!matched) {
+      if (!_matched) {
         if (ObjectExtensions.operator_equals(visibility,JvmVisibility.DEFAULT)) {
-          matched=true;
+          _matched=true;
           _switchResult = "";
         }
       }
@@ -800,9 +804,11 @@ public class JvmModelGenerator implements IGenerator {
     JvmTypeReference _parameterType = it.getParameterType();
     this.serialize(_parameterType, tracedAppendable);
     tracedAppendable.append(" ");
-    ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
     String _simpleName = it.getSimpleName();
-    _traceSignificant.append(_simpleName);
+    String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+    final String name = tracedAppendable.declareVariable(it, _makeJavaIdentifier);
+    ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
+    _traceSignificant.append(name);
   }
   
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable) {
@@ -830,24 +836,24 @@ public class JvmModelGenerator implements IGenerator {
           appendable.declareVariable(p, _simpleName);
         }
         JvmTypeReference _switchResult = null;
-        boolean matched = false;
-        if (!matched) {
+        boolean _matched = false;
+        if (!_matched) {
           if (op instanceof JvmOperation) {
             final JvmOperation _jvmOperation = (JvmOperation)op;
-            matched=true;
+            _matched=true;
             JvmTypeReference _returnType = _jvmOperation.getReturnType();
             _switchResult = _returnType;
           }
         }
-        if (!matched) {
+        if (!_matched) {
           if (op instanceof JvmConstructor) {
             final JvmConstructor _jvmConstructor = (JvmConstructor)op;
-            matched=true;
+            _matched=true;
             JvmTypeReference _typeForName = this._typeReferences.getTypeForName(Void.TYPE, _jvmConstructor);
             _switchResult = _typeForName;
           }
         }
-        if (!matched) {
+        if (!_matched) {
           _switchResult = null;
         }
         final JvmTypeReference returnType = _switchResult;
@@ -1148,27 +1154,27 @@ public class JvmModelGenerator implements IGenerator {
       final Function1<Double,String> _function = new Function1<Double,String>() {
           public String apply(final Double it) {
             String _switchResult = null;
-            boolean matched = false;
-            if (!matched) {
+            boolean _matched = false;
+            if (!_matched) {
               boolean _isNaN = Double.isNaN((it).doubleValue());
               if (_isNaN) {
-                matched=true;
+                _matched=true;
                 _switchResult = "Double.NaN";
               }
             }
-            if (!matched) {
+            if (!_matched) {
               if (ObjectExtensions.operator_equals(it,Double.POSITIVE_INFINITY)) {
-                matched=true;
+                _matched=true;
                 _switchResult = "Double.POSITIVE_INFINITY";
               }
             }
-            if (!matched) {
+            if (!_matched) {
               if (ObjectExtensions.operator_equals(it,Double.NEGATIVE_INFINITY)) {
-                matched=true;
+                _matched=true;
                 _switchResult = "Double.NEGATIVE_INFINITY";
               }
             }
-            if (!matched) {
+            if (!_matched) {
               String _string = it.toString();
               String _plus = (_string + "d");
               _switchResult = _plus;
@@ -1195,27 +1201,27 @@ public class JvmModelGenerator implements IGenerator {
       final Function1<Float,String> _function = new Function1<Float,String>() {
           public String apply(final Float it) {
             String _switchResult = null;
-            boolean matched = false;
-            if (!matched) {
+            boolean _matched = false;
+            if (!_matched) {
               boolean _isNaN = Float.isNaN((it).floatValue());
               if (_isNaN) {
-                matched=true;
+                _matched=true;
                 _switchResult = "Float.NaN";
               }
             }
-            if (!matched) {
+            if (!_matched) {
               if (ObjectExtensions.operator_equals(it,Float.POSITIVE_INFINITY)) {
-                matched=true;
+                _matched=true;
                 _switchResult = "Float.POSITIVE_INFINITY";
               }
             }
-            if (!matched) {
+            if (!_matched) {
               if (ObjectExtensions.operator_equals(it,Float.NEGATIVE_INFINITY)) {
-                matched=true;
+                _matched=true;
                 _switchResult = "Float.NEGATIVE_INFINITY";
               }
             }
-            if (!matched) {
+            if (!_matched) {
               String _string = it.toString();
               String _plus = (_string + "f");
               _switchResult = _plus;
@@ -1392,22 +1398,22 @@ public class JvmModelGenerator implements IGenerator {
     EList<Object> _values = it.getValues();
     int _size = _values.size();
     final int __valOfSwitchOver = _size;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,0)) {
-        matched=true;
+        _matched=true;
         appendable.append("{}");
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,1)) {
-        matched=true;
+        _matched=true;
         EList<Object> _values_1 = it.getValues();
         Object _head = IterableExtensions.<Object>head(_values_1);
         this.compiler.toJavaExpression(((XExpression) _head), appendable);
       }
     }
-    if (!matched) {
+    if (!_matched) {
       {
         appendable.append("{ ");
         EList<Object> _values_2 = it.getValues();
@@ -1492,6 +1498,18 @@ public class JvmModelGenerator implements IGenerator {
         _xifexpression_1 = _containerType;
       }
       _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  protected String makeJavaIdentifier(final String name) {
+    String _xifexpression = null;
+    boolean _isJavaKeyword = this.keywords.isJavaKeyword(name);
+    if (_isJavaKeyword) {
+      String _plus = (name + "_");
+      _xifexpression = _plus;
+    } else {
+      _xifexpression = name;
     }
     return _xifexpression;
   }

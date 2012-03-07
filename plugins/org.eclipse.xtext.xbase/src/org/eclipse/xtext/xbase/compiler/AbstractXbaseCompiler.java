@@ -389,7 +389,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String makeJavaIdentifier(String name) {
-		return javaUtils.isJavaKeyword(name) ? "_"+name : name;
+		return javaUtils.isJavaKeyword(name) ? name+"_" : name;
 	}
 	
 	protected void declareSyntheticVariable(final XExpression expr, ITreeAppendable b) {
