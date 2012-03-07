@@ -141,10 +141,11 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 				((ILocationInFileProviderExtension) locationProvider).getTextRegion(object, query) : locationProvider.getFullTextRegion(object);
 		if (!(textRegion instanceof ITextRegionWithLineInformation)) {
 			if (log.isDebugEnabled())
-				log.debug("location provider returned text region without line information. Synthesized dummy data.", new Exception());
+				log.debug("location provider returned text region without line information.", new Exception());
 			if (textRegion != null)
 				textRegion = new TextRegionWithLineInformation(textRegion.getOffset(), textRegion.getLength(), 0, 0);
-			return null;
+			else
+				return null;
 		} 
 		ILocationData newData = createLocationData(object, (ITextRegionWithLineInformation) textRegion);
 		return newData;

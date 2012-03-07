@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -54,6 +55,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
@@ -412,7 +414,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaExpression(XConstructorCall expr, ITreeAppendable b) {
 		String varName = getVarName(expr, b);
-		b = b.trace(expr, false).append(varName);
+		b.trace(expr, false).append(varName);
 	}
 	
 	/**
@@ -486,7 +488,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XIfExpression expr, ITreeAppendable b) {
-		b = b.trace(expr, false).append(getVarName(expr, b));
+		b.trace(expr, false).append(getVarName(expr, b));
 	}
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {

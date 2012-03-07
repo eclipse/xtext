@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -23,6 +24,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public class JvmExceptions {
 	
 	@Inject
@@ -33,7 +35,7 @@ public class JvmExceptions {
 
 	public Iterable<JvmTypeReference> findUnhandledExceptions(EObject context,
 			Iterable<JvmTypeReference> thrownExceptions, Collection<JvmTypeReference> declaredExceptions) {
-		JvmTypeReference runtimeException = typeReferences.getTypeForName( RuntimeException.class, context);
+		JvmTypeReference runtimeException = typeReferences.getTypeForName(RuntimeException.class, context);
 		List<JvmTypeReference> allowedExceptions = newArrayListWithCapacity(declaredExceptions.size() + 1);
 		allowedExceptions.add(runtimeException);
 		allowedExceptions.addAll(declaredExceptions);

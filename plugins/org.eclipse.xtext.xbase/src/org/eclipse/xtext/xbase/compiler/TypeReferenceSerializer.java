@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -32,6 +33,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@NonNullByDefault
 public class TypeReferenceSerializer {
 	
 	@Inject
@@ -44,15 +46,17 @@ public class TypeReferenceSerializer {
 	private ILogicalContainerProvider contextProvider;
 	
 	public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
-		if (context == null)
-			return false;
 		if (context == parameter.getDeclarator()) 
 			return true;
 		JvmIdentifiableElement jvmElement = contextProvider.getLogicalContainer(context);
 		if (jvmElement != null) {
 			return isLocalTypeParameter(jvmElement, parameter);
 		}
-		return isLocalTypeParameter(context.eContainer(), parameter);
+		EObject container = context.eContainer();
+		if (container == null) {
+			return false;
+		}
+		return isLocalTypeParameter(container, parameter);
 	}
 	
 	public void serialize(final JvmTypeReference type, EObject context, IAppendable appendable) {
@@ -106,8 +110,6 @@ public class TypeReferenceSerializer {
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;
 			if ((paramsToWildcard || paramsToObject) && parameterized.getType() instanceof JvmTypeParameter) {
 				JvmTypeParameter parameter = (JvmTypeParameter) parameterized.getType();
-				if (context == null)
-					throw new IllegalArgumentException("argument may not be null if parameters have to be replaced by wildcards");
 				if (!isLocalTypeParameter(context, parameter)) {
 					if (paramsToWildcard)
 						tracedAppendable.append("?");
