@@ -18,6 +18,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
@@ -132,6 +133,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(IGenerator.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.JvmModelGenerator")
 				.addTypeToInstance("org.eclipse.xtext.xtype.XtypeFactory", "org.eclipse.xtext.xtype.XtypeFactory.eINSTANCE")
 				.addTypeToType(TypeArgumentContextProvider.class.getCanonicalName(), "org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider")
+				.addTypeToType(IStratumBreakpointSupport.class.getName(), "org.eclipse.xtext.xbase.debug.XbaseStratumBreakpointSupport")
 				.addTypeToType(LineSeparatorHarmonizer.class.getCanonicalName(), "org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor");
 		if (useInferredJvmModel) {
 			config = config
