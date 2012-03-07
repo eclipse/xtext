@@ -1134,6 +1134,54 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	@Test
+	def testJavaKeywordsUsed() {
+		assertCompilesTo('''
+			package foo;
+			
+			public class Foo {
+				def void someMethod(String assert) {
+					val synchronized = newArrayList('foo')
+					for (volatile : synchronized) {
+						switch final : volatile {
+							case final.length > 2 : synchronized.forEach(break | break + final)
+						}
+					}
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void someMethod(final String assert_) {
+			    final ArrayList<String> synchronized_ = CollectionLiterals.<String>newArrayList("foo");
+			    for (final String volatile_ : synchronized_) {
+			      final String final_ = volatile_;
+			      boolean _matched = false;
+			      if (!_matched) {
+			        int _length = final_.length();
+			        boolean _greaterThan = (_length > 2);
+			        if (_greaterThan) {
+			          _matched=true;
+			          final Procedure1<String> _function = new Procedure1<String>() {
+			              public void apply(final String break_) {
+			                /*(break_ + final_);*/
+			              }
+			            };
+			          IterableExtensions.<String>forEach(synchronized_, _function);
+			        }
+			      }
+			    }
+			  }
+			}
+		''')
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
