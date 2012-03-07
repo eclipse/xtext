@@ -8,11 +8,13 @@
 package org.eclipse.xtend.ide.hover;
 
 import static org.eclipse.xtext.xbase.ui.hover.HoverLinkHelper.*;
+
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -113,5 +116,21 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 			}
 		}
 		return result;
+	}
+	
+	@Override
+	protected List<EObject> getFilteredDerivedElements(EObject o, EClass type) {
+		List<EObject> filteredDerivedElements = super.getFilteredDerivedElements(o, type);
+		if(filteredDerivedElements.size() > 1)
+			return filteredDerivedElements;
+		return Lists.newArrayList();
+	}
+	
+	@Override
+	protected List<EObject> getFilteredSourceElements(EObject o, EClass type) {
+		List<EObject> filteredSourceElements = super.getFilteredSourceElements(o, type);
+		if(filteredSourceElements.size() > 1)
+			return filteredSourceElements;
+		return Lists.newArrayList();
 	}
 }
