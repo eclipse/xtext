@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.xbase.XStringLiteral;
  */
 public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 
+	@NonNullByDefault
 	public static class StringBuilderBasedAcceptor extends AbstractRichStringPartAcceptor {
 
 		private StringBuilder builder;
@@ -75,7 +78,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 		
 		@Override
-		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+		public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
 			if (!ignore())
 				currentLine.append(text);
 		}
@@ -161,7 +164,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptEndFor(XExpression after, CharSequence indentation) {
+		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
 			if (!ignore()) {
 				if (forLoopStack.pop() != null && after != null) {
 					acceptExpression(after, indentation);
@@ -169,7 +172,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			}
 		}
 		
-		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
 			if (!ignore()) {
 				if (forLoopStack.peek() != null) {
 					int remaining = forLoopStack.peek();

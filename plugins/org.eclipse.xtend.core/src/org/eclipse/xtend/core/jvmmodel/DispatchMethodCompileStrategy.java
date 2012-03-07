@@ -13,6 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 
+@NonNullByDefault
 public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
 	
 	@Inject
@@ -52,7 +55,9 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 		this.sortedDispatchOperations = sortedDispatchOperations;
 	}
 
-	public void apply(ITreeAppendable a) {
+	public void apply(@Nullable ITreeAppendable a) {
+		if (a == null)
+			throw new IllegalArgumentException("a is never null");
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
 		boolean[] allCasesSameType = new boolean[parameterCount];
