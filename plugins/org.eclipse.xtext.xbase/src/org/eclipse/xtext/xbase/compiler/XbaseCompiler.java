@@ -207,7 +207,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			while (iterator.hasNext()) {
 				XCatchClause catchClause = iterator.next();
 				JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
-				final String name = b.declareVariable(catchClause.getDeclaredParam(), catchClause.getDeclaredParam().getName());
+				final String declaredParamName = makeJavaIdentifier(catchClause.getDeclaredParam().getName());
+				final String name = b.declareVariable(catchClause.getDeclaredParam(), declaredParamName);
 				b.append("if (").append(variable).append(" instanceof ");
 				b.append(type.getType());
 				b.append(") ").append("{");
@@ -303,7 +304,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		serialize(type, varDeclaration, b);
 		b.append(" ");
-		b.append(b.declareVariable(varDeclaration, varDeclaration.getName()));
+		b.append(b.declareVariable(varDeclaration, makeJavaIdentifier(varDeclaration.getName())));
 		b.append(" = ");
 		if (varDeclaration.getRight() != null) {
 			internalToConvertedExpression(varDeclaration.getRight(), b, type);
@@ -379,7 +380,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
 		serialize(paramType,expr,b);
 		b.append(" ");
-		String varName = b.declareVariable(expr.getDeclaredParam(), expr.getDeclaredParam().getName());
+		final String name = makeJavaIdentifier(expr.getDeclaredParam().getName());
+		String varName = b.declareVariable(expr.getDeclaredParam(), name);
 		b.append(varName);
 		b.append(" : ");
 		internalToJavaExpression(expr.getForExpression(), b);
@@ -661,7 +663,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append("final ");
 				serialize(parameterType, closure, b, false, false, true, true);
 				b.append(" ");
-				String name = b.declareVariable(closureParam, closureParam.getName());
+				final String proposedParamName = makeJavaIdentifier(closureParam.getName());
+				String name = b.declareVariable(closureParam, proposedParamName);
 				b.append(name);
 				if (i != closureParams.size() - 1)
 					b.append(", ");
