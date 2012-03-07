@@ -75,7 +75,6 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XConstructorProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
-import org.eclipse.xtext.xbase.typing.ITypeArgumentContextHelper;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -136,9 +135,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	@Inject
 	private ITypeProvider typeProvider;
 
-	@Inject
-	private ITypeArgumentContextHelper typeArgumentContextHelper;
-	
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
 	
@@ -261,7 +257,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 								XConstructorCall constructorCall = null;
 								if (context instanceof XConstructorCall)
 									constructorCall = (XConstructorCall) context;
-								ITypeArgumentContext typeArgumentContext = typeArgumentContextHelper.getTypeArgumentContext(constructorCall, constructor);
+								ITypeArgumentContext typeArgumentContext = typeProvider.getTypeArgumentContext(constructorCall, constructor);
 								JvmFeatureDescription result = new JvmFeatureDescription(
 										from.getQualifiedName(), 
 										constructor,
@@ -789,7 +785,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 						featureCall, feature, 
 						from.getImplicitReceiver(),
 						from.getImplicitArgument());
-				ITypeArgumentContext result = typeArgumentContextHelper.getTypeArgumentContext(
+				ITypeArgumentContext result = typeProvider.getTypeArgumentContext(
 						featureCall,
 						arguments,
 						receiverType != null ? Providers.of(receiverType) : null, 
@@ -972,7 +968,4 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return featureCallToJavaMapping;
 	}
 	
-	protected ITypeArgumentContextHelper getTypeArgumentContextHelper() {
-		return typeArgumentContextHelper;
-	}
 }
