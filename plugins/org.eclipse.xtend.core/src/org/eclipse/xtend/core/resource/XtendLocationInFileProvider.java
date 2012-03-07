@@ -13,6 +13,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Specialization of the {@link JvmLocationInFileProvider} that configures Xtend specific 
@@ -20,6 +21,7 @@ import com.google.inject.Inject;
  * keyword 'new'.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class XtendLocationInFileProvider extends JvmLocationInFileProvider {
 
 	@Inject
