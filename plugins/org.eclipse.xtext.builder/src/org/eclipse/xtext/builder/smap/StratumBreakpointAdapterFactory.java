@@ -36,6 +36,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -76,27 +77,32 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 
-			IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
-			IBreakpoint[] breakpoints = manager.getBreakpoints();
-			for (IBreakpoint breakpoint : breakpoints) {
-				if (breakpoint instanceof IJavaStratumLineBreakpoint) {
-					final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
-					if (stratumBreakpoint.getLineNumber() == line) {
-						breakpoint.delete();
-						return;
-					}
-				}
+			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, line);
+			if (existingBreakpoint != null) {
+				existingBreakpoint.delete();
+				return;
 			}
+			
 			URI uri = uriMapper.getUri((IStorage)res);
 			final IResourceServiceProvider serviceProvider = providerRegistry.getResourceServiceProvider(uri);
 			if (serviceProvider == null)
 				return;
+			final IStratumBreakpointSupport breakpointSupport = serviceProvider.get(IStratumBreakpointSupport.class);
+			if (breakpointSupport == null)
+				return;
+			// check whether it's a sensible line for a breakpoint
+			boolean isBreakpointLocation = xtextEditor.getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>(){
+				public Boolean exec(XtextResource state) throws Exception {
+					return breakpointSupport.isValidLineForBreakPoint(state, line);
+				}
+			});
+			if (!isBreakpointLocation)
+				return;
+			
 			String types = xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>(){
 				public String exec(XtextResource state) throws Exception {
 					return getClassNamePattern(state);
 				}
-
-				
 			});
 			if (types == null)
 				return;
@@ -143,6 +149,21 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		} catch (BadLocationException e) {
 			log.info(e.getMessage(),e);
 		}
+	}
+
+	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, final int line) throws CoreException {
+		IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
+		IBreakpoint[] breakpoints = manager.getBreakpoints();
+		for (IBreakpoint breakpoint : breakpoints) {
+			if (breakpoint instanceof IJavaStratumLineBreakpoint 
+				&& breakpoint.getMarker().getResource().equals(res)) {
+				final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
+				if (stratumBreakpoint.getLineNumber() == line) {
+					return stratumBreakpoint;
+				}
+			}
+		}
+		return null;
 	}
 	
 	protected String getClassNamePattern(IResource res) {
