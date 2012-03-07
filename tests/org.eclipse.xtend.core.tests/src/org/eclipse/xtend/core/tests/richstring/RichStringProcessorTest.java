@@ -11,6 +11,8 @@ import java.util.Stack;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.IRichStringIndentationHandler;
 import org.eclipse.xtend.core.richstring.IRichStringPartAcceptor;
@@ -30,6 +32,7 @@ import org.junit.Test;
  */
 public class RichStringProcessorTest extends AbstractRichStringTest {
 	
+	@NonNullByDefault
 	protected static class StackChecker implements IRichStringIndentationHandler {
 
 		private int i = 0;
@@ -71,9 +74,10 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		
 	}
 	
+	@NonNullByDefault
 	public static class ForLoopSkipped extends AbstractRichStringPartAcceptor {
 
-		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
 			return false;
 		}
 		
@@ -84,6 +88,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		
 	}
 	
+	@NonNullByDefault
 	public static class FixedCountForLoops extends AbstractRichStringPartAcceptor {
 
 		private Stack<Integer> forLoopStack = new Stack<Integer>();
@@ -99,7 +104,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 			forLoopStack.push(count);
 		}
 		
-		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
 			Integer peek = forLoopStack.peek();
 			if (peek > 0) {
 				forLoopStack.pop();
@@ -110,7 +115,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		}
 		
 		@Override
-		public void acceptEndFor(XExpression after, CharSequence indentation) {
+		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
 			forLoopStack.pop();
 		}
 		

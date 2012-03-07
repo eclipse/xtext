@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.richstring;
 
 import java.util.LinkedList;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+
 import com.google.common.collect.Lists;
 
 /**
@@ -16,6 +18,7 @@ import com.google.common.collect.Lists;
  * inconsistent indentation.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class DefaultIndentationHandler implements IRichStringIndentationHandler {
 
 	protected static abstract class IndentationData {
@@ -81,8 +84,6 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 			indentationData.add(new TemplateIndentationData(indentation));
 		} else {
 			String currentIndentation = getTotalIndentation();
-			if (indentation == null)
-				indentation = "";
 			if (indentation.toString().startsWith(currentIndentation)) {
 				String trimmedIndentation = indentation.toString().substring(currentIndentation.length());
 				indentationData.add(new TemplateIndentationData(trimmedIndentation));
@@ -100,8 +101,6 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 			indentationData.add(new SemanticIndentationData(indentation));
 		} else {
 			String currentIndentation = getTotalIndentation();
-			if (indentation == null)
-				indentation = "";
 			if (indentation.toString().startsWith(currentIndentation)) {
 				String trimmedIndentation = indentation.toString().substring(currentIndentation.length());
 				indentationData.add(new SemanticIndentationData(trimmedIndentation));

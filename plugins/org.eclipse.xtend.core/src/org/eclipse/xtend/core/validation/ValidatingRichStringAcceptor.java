@@ -10,6 +10,8 @@ package org.eclipse.xtend.core.validation;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.IRichStringIndentationHandler;
 import org.eclipse.xtend.core.richstring.IRichStringPartAcceptor;
@@ -24,6 +26,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor.ForLoopOnce implements IRichStringIndentationHandler {
 
 	private final ValidationMessageAcceptor acceptor;
@@ -46,13 +49,13 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	}
 
 	@Override
-	public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+	public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
 		resetCurrentOffset(origin);
 		currentOffset += text.length();
 		wasCurrentOffset = -1;
 	}
 
-	protected void resetCurrentOffset(RichStringLiteral origin) {
+	protected void resetCurrentOffset(@Nullable RichStringLiteral origin) {
 		if (root == null)
 			root = origin;
 		if (origin != null && origin != recent) {
@@ -85,7 +88,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 	}
 
 	@Override
-	public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
+	public void acceptTemplateText(CharSequence text, @Nullable RichStringLiteral origin) {
 		resetCurrentOffset(origin);
 		currentOffset += text.length();
 		wasCurrentOffset = -1;

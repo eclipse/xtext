@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.richstring;
 
+
 import java.util.BitSet;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
@@ -19,12 +22,13 @@ import org.eclipse.xtext.xbase.XExpression;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public abstract class AbstractRichStringPartAcceptor implements IRichStringPartAcceptor {
 
-	public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+	public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
 	}
 
-	public void acceptTemplateText(CharSequence text, RichStringLiteral origin) {
+	public void acceptTemplateText(CharSequence text, @Nullable RichStringLiteral origin) {
 	}
 
 	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
@@ -48,7 +52,7 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 	public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 	}
 	
-	public void acceptEndFor(XExpression after, CharSequence indentation) {
+	public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
 	}
 
 	public void acceptExpression(XExpression expression, CharSequence indentation) {
@@ -57,18 +61,19 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 	public void announceNextLiteral(RichStringLiteral object) {
 	}
 
+	@NonNullByDefault // currently necessary here due to a bug in JDT
 	public static class ForLoopOnce extends AbstractRichStringPartAcceptor {
 
 		private BitSet forLoopStack = new BitSet();
 		private int forLoopStackPointer = -1;
 
 		@Override
-		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+		public void acceptForLoop(JvmFormalParameter parameter, @Nullable XExpression expression) {
 			forLoopStackPointer++;
 			forLoopStack.set(forLoopStackPointer);
 		}
 
-		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
 			if (forLoopStack.get(forLoopStackPointer)) {
 				forLoopStack.set(forLoopStackPointer, false);
 				return true;
@@ -77,9 +82,8 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 		}
 		
 		@Override
-		public void acceptEndFor(XExpression after, CharSequence indentation) {
+		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
 			forLoopStackPointer--;
 		}
 	}
-
 }

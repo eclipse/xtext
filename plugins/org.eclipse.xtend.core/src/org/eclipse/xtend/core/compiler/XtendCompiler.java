@@ -10,6 +10,8 @@ package org.eclipse.xtend.core.compiler;
 import java.util.LinkedList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -34,6 +36,7 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein
  * @author Sebastian Zarnekow
  */
+@NonNullByDefault
 public class XtendCompiler extends XbaseCompiler {
 
 	@Inject
@@ -79,7 +82,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 
 		@Override
-		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
+		public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
 			if (text.length() == 0)
 				return;
 			appendable.newLine();
@@ -134,8 +137,10 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 
 		@Override
-		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+		public void acceptForLoop(JvmFormalParameter parameter, @Nullable XExpression expression) {
 			super.acceptForLoop(parameter, expression);
+			if (expression == null)
+				throw new IllegalArgumentException("expression may not be null");
 			RichStringForLoop forLoop = (RichStringForLoop) expression.eContainer();
 			forStack.add(forLoop);
 			appendable.newLine().append("{").increaseIndentation();
@@ -161,7 +166,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		
 		@Override
-		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
 			if (!super.forLoopHasNext(before, separator, indentation))
 				return false;
 			RichStringForLoop forLoop = forStack.getLast();
@@ -181,7 +186,7 @@ public class XtendCompiler extends XbaseCompiler {
 				appendable.decreaseIndentation();
 				appendable.newLine();
 				appendable.append("}");
-				if (forLoop.getSeparator() != null) {
+				if (separator != null) {
 					appendable.append(" else {");
 					appendable.increaseIndentation();
 					writeExpression(separator, indentation, true);
@@ -194,7 +199,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		
 		@Override
-		public void acceptEndFor(XExpression after, CharSequence indentation) {
+		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
 			super.acceptEndFor(after, indentation);
 			appendable.decreaseIndentation();
 			appendable.newLine();
