@@ -411,4 +411,11 @@ public class XtextResource extends ResourceImpl {
 	public String getLanguageName() {
 		return languageName;
 	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
 }
