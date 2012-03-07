@@ -7,30 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.resource;
 
-import java.util.Map;
-
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.DispatchUtil;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 
-import com.google.common.collect.ImmutableSortedMap;
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
-
-	private static final Logger LOG = Logger.getLogger(XtendResourceDescriptionStrategy.class);
+public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionStrategy {
 
 	@Inject
 	private DispatchUtil dispatchUtil;
@@ -39,35 +30,21 @@ public class XtendResourceDescriptionStrategy extends DefaultResourceDescription
 	private DescriptionFlags descriptionFlags;
 	
 	@Override
-	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if (getQualifiedNameProvider() == null)
-			return false;
-		try {
-			QualifiedName qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
-			if (qualifiedName != null) {
-				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, createUserData(eObject)));
-			}
-		} catch (Exception exc) {
-			LOG.error(exc.getMessage());
-		}
-		return true;
-	}
-
-	protected Map<String, String> createUserData(EObject eObject) {
+	protected void createUserData(EObject eObject, ImmutableMap.Builder<String, String> userData) {
+		super.createUserData(eObject, userData);
 		if (eObject instanceof JvmOperation)
-			return createUserData(getFlags((JvmOperation) eObject));
-		if (eObject instanceof JvmField)
-			return createUserData(getFlags((JvmField) eObject));
-		if (eObject instanceof XtendFunction) 
-			return createUserData(getFlags((XtendFunction) eObject));
-		if (eObject instanceof XtendField) 
-			return createUserData(getFlags((XtendField) eObject));
-		
-		return null;
+			addFlags(getFlags((JvmOperation) eObject), userData);
+		else if (eObject instanceof JvmField)
+			addFlags(getFlags((JvmField) eObject), userData);
+		else if (eObject instanceof XtendFunction) 
+			addFlags(getFlags((XtendFunction) eObject), userData);
+		else if (eObject instanceof XtendField) 
+			addFlags(getFlags((XtendField) eObject), userData);
 	}
 
-	protected Map<String, String> createUserData(int flags) {
-		return flags != 0 ? ImmutableSortedMap.of(DescriptionFlags.KEY, Integer.toString(flags)) : null;
+	protected void addFlags(int flags, ImmutableMap.Builder<String, String> userData) {
+		if(flags != 0)
+			userData.put(DescriptionFlags.KEY, Integer.toString(flags));
 	}
 
 	protected int getFlags(JvmOperation operation) {
@@ -90,5 +67,4 @@ public class XtendResourceDescriptionStrategy extends DefaultResourceDescription
 	protected int getFlags(XtendFunction function) {
 		return (function.isStatic()) ? descriptionFlags.setStatic(0) : 0;
 	}
-	
 }

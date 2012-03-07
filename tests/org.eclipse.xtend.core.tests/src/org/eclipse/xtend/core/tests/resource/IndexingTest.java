@@ -16,9 +16,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.resource.DescriptionFlags;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtext.builder.clustering.CopiedResourceDescription;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -107,11 +109,102 @@ public class IndexingTest extends AbstractXtendTestCase {
 		assertTrue(flags.isStatic(iterator.next()));
 	}
 	
+	@Test public void testFieldSignatureChange() throws Exception {
+		assertSameResourceDescriptions(
+				"package test class Foo { String bar }",
+				"package test class Foo { String bar }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { String bar }",
+				"package test class Foo { int bar }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { String bar }",
+				"package test class Foo { String baz }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { String bar }",
+				"package test class Foo { public String bar }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { String bar }",
+				"package test class Foo { static String bar }");
+	}
+	
+	@Test public void testConstructorSignatureChange() throws Exception {
+		assertSameResourceDescriptions(
+				"package test class Foo { new() {} }",
+				"package test class Foo { new() {} }");
+		assertSameResourceDescriptions(
+				"package test class Foo { new() {} }",
+				"package test class Foo { new() { return } }");
+		assertSameResourceDescriptions(
+				"package test class Foo { new(String bar) {} }",
+				"package test class Foo { new(String baz) {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { new(String bar) {} }",
+				"package test class Foo { new(int bar) {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { new(String bar) {} }",
+				"package test class Foo { private new(String bar) {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { new(String bar) {} }",
+				"package test class Foo { new(String bar) throws Exception { throw new Exception() } }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { new <T> () {} }",
+				"package test class Foo { new() {} }");
+	}
+	
+	@Test public void testMethodSignatureChange() throws Exception {
+		assertSameResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def void foo() {} }");
+		assertSameResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def void foo() { retrun } }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def void bar() {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def String foo() { '' } }",
+				"package test class Foo { def CharSequence foo() { '' } }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def private void foo() {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def static void foo() {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def void foo(String x) {} }",
+				"package test class Foo { def void foo(int x) {} }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def void foo() throws Exception { throw new Exception() } }");
+		assertDifferentResourceDescriptions(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { def <T> void foo() {} }");
+	}
+	
 	protected Iterator<IEObjectDescription> getExportedObjects(String model) throws Exception {
-		XtendFile file = file(model);
-		IResourceDescription rd = resourceDescriptionManager.getResourceDescription(file.eResource());
+		IResourceDescription rd = getResourceDescription(model);
 		Iterable<IEObjectDescription> exportedObjects = rd.getExportedObjects();
 		return exportedObjects.iterator();
+	}
+
+	protected IResourceDescription getResourceDescription(String model) throws Exception {
+		XtendFile file = file(model);
+		IResourceDescription rd = resourceDescriptionManager.getResourceDescription(file.eResource());
+		return rd;
+	}
+	
+	protected IResourceDescription.Delta getResourceDescriptionDelta(String model0, String model1) throws Exception {
+		IResourceDescription resourceDescription0 = new CopiedResourceDescription(getResourceDescription(model0));
+		IResourceDescription resourceDescription1 = new CopiedResourceDescription(getResourceDescription(model1));
+		return new DefaultResourceDescriptionDelta(resourceDescription0, resourceDescription1);
+	}
+	
+	protected void assertSameResourceDescriptions(String model0, String model1) throws Exception {
+		assertFalse(getResourceDescriptionDelta(model0, model1).haveEObjectDescriptionsChanged());
+	}
+
+	protected void assertDifferentResourceDescriptions(String model0, String model1) throws Exception {
+		assertTrue(getResourceDescriptionDelta(model0, model1).haveEObjectDescriptionsChanged());
 	}
 	
 	protected IEObjectDescription expect(Iterator<IEObjectDescription> i, String name, EClass eClass) {

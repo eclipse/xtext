@@ -79,6 +79,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendQualifiedNameProvider.class;
 	}
 	
+	@Override
 	public Class <? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return XtendResourceDescriptionStrategy.class;
 	}

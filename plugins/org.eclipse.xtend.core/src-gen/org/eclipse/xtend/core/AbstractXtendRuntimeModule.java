@@ -250,6 +250,11 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider.class;
 	}
