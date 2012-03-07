@@ -11,6 +11,7 @@ import java.util.Stack;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
@@ -32,18 +33,17 @@ import org.junit.Test;
  */
 public class RichStringProcessorTest extends AbstractRichStringTest {
 	
-	@NonNullByDefault
 	protected static class StackChecker implements IRichStringIndentationHandler {
 
 		private int i = 0;
 		boolean wasCompletelyPopped = false;
 		
-		public void pushTemplateIndentation(CharSequence completeIndentation) {
+		public void pushTemplateIndentation(@NonNull CharSequence completeIndentation) {
 			i++;
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 		}
 
-		public void pushSemanticIndentation(CharSequence completeIndentation) {
+		public void pushSemanticIndentation(@NonNull CharSequence completeIndentation) {
 			i++;
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 		}
@@ -54,15 +54,17 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 			assertTrue("i>=0", i>=0);
 		}
 
-		public void accept(IRichStringPartAcceptor acceptor) {
+		public void accept(@NonNull IRichStringPartAcceptor acceptor) {
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 		}
 
+		@NonNull 
 		public CharSequence getTotalSemanticIndentation() {
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 			return "";
 		}
 
+		@NonNull 
 		public CharSequence getTotalIndentation() {
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 			return "";
@@ -74,10 +76,9 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		
 	}
 	
-	@NonNullByDefault
 	public static class ForLoopSkipped extends AbstractRichStringPartAcceptor {
 
-		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, @NonNull CharSequence indentation) {
 			return false;
 		}
 		
@@ -88,7 +89,6 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		
 	}
 	
-	@NonNullByDefault
 	public static class FixedCountForLoops extends AbstractRichStringPartAcceptor {
 
 		private Stack<Integer> forLoopStack = new Stack<Integer>();
@@ -100,11 +100,11 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		}
 		
 		@Override
-		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
+		public void acceptForLoop(@NonNull JvmFormalParameter parameter, @NonNull XExpression expression) {
 			forLoopStack.push(count);
 		}
 		
-		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, @NonNull CharSequence indentation) {
 			Integer peek = forLoopStack.peek();
 			if (peek > 0) {
 				forLoopStack.pop();
@@ -115,7 +115,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		}
 		
 		@Override
-		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
+		public void acceptEndFor(@Nullable XExpression after, @NonNull CharSequence indentation) {
 			forLoopStack.pop();
 		}
 		
