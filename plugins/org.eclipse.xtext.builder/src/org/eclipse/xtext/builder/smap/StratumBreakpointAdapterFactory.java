@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
@@ -114,16 +115,26 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final IWorkspace ws = marker.getResource().getWorkspace();
 			IResourceChangeListener listener = new IResourceChangeListener() {
 				public void resourceChanged(IResourceChangeEvent event) {
-					if (event.getResource() != null && event.getResource().equals(marker.getResource())) {
-						if (event.getType() == IResourceChangeEvent.PRE_DELETE) {
-							ws.removeResourceChangeListener(this);
-						} else if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
-							String classNamePattern = getClassNamePattern(event.getResource());
-							try {
-								breakpoint.getMarker().setAttribute("org.eclipse.jdt.debug.pattern", classNamePattern);
-							} catch (CoreException e) {
-								log.info(e.getMessage(), e);
-							}
+					if (!marker.exists())
+						ws.removeResourceChangeListener(this);
+					IResourceDelta delta = event.getDelta();
+					if (delta == null)
+						return;
+					final IResourceDelta findMember = event.getDelta().findMember(marker.getResource().getFullPath());
+					if (findMember == null)
+						return;
+					IResource res = findMember.getResource();
+					if (res == null || !res.exists())
+						return;
+					if (event.getType() == IResourceChangeEvent.PRE_DELETE) {
+						ws.removeResourceChangeListener(this);
+					} else if (event.getType() == IResourceChangeEvent.POST_CHANGE 
+							&& (findMember.getFlags() & IResourceDelta.CONTENT ) != 0) {
+						String classNamePattern = getClassNamePattern(event.getResource());
+						try {
+							breakpoint.getMarker().setAttribute("org.eclipse.jdt.debug.pattern", classNamePattern);
+						} catch (CoreException e) {
+							log.info(e.getMessage(), e);
 						}
 					}
 				}
