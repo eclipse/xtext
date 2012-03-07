@@ -230,8 +230,18 @@ public abstract class AbstractPureXbaseRuntimeModule extends DefaultRuntimeModul
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.debug.IStratumBreakpointSupport> bindIStratumBreakpointSupport() {
+		return org.eclipse.xtext.xbase.debug.XbaseStratumBreakpointSupport.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.generator.LineSeparatorHarmonizer> bindLineSeparatorHarmonizer() {
 		return org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
