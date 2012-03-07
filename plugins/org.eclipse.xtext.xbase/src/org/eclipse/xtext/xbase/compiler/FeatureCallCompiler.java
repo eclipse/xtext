@@ -571,7 +571,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (feature instanceof JvmExecutable) {
 			b.append("(");
 			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
-			appendArguments(arguments, b);
+			if (!arguments.isEmpty()) {
+				XExpression receiver = (call instanceof XMemberFeatureCall) ? ((XMemberFeatureCall)call).getMemberCallTarget() : null;
+				boolean shouldBreakFirstArgument = receiver == null || arguments.get(0) != receiver;
+				appendArguments(arguments, b, shouldBreakFirstArgument);
+			}
 			b.append(")");
 		}
 	}
@@ -622,11 +626,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	protected void appendArguments(List<? extends XExpression> arguments, ITreeAppendable b) {
+		appendArguments(arguments, b, true);
+	}
+	
+	protected void appendArguments(List<? extends XExpression> arguments, ITreeAppendable b, boolean shouldWrapLine) {
 		if (arguments == null)
 			return;
 		for (int i = 0; i < arguments.size(); i++) {
 			XExpression argument = arguments.get(i);
-			appendArgument(argument, b);
+			appendArgument(argument, b, shouldWrapLine || i > 0);
 			if (i + 1 < arguments.size())
 				b.append(", ");
 		}
