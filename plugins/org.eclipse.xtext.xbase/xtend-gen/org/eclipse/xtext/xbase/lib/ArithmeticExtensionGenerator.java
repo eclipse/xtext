@@ -38,14 +38,16 @@ public class ArithmeticExtensionGenerator {
   
   private List<QualifiedName> comparators = new Function0<List<QualifiedName>>() {
     public List<QualifiedName> apply() {
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
+      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, 
+        OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
       return _newArrayList;
     }
   }.apply();
   
   private List<QualifiedName> operators = new Function0<List<QualifiedName>>() {
     public List<QualifiedName> apply() {
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.PLUS, OperatorMapping.MINUS, OperatorMapping.MULTIPLY, OperatorMapping.DIVIDE, OperatorMapping.MODULO, OperatorMapping.LESS_THAN, OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
+      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(OperatorMapping.PLUS, OperatorMapping.MINUS, OperatorMapping.MULTIPLY, OperatorMapping.DIVIDE, OperatorMapping.MODULO, OperatorMapping.LESS_THAN, 
+        OperatorMapping.LESS_EQUALS_THAN, OperatorMapping.GREATER_THAN, OperatorMapping.GREATER_EQUALS_THAN, OperatorMapping.EQUALS, OperatorMapping.NOT_EQUALS);
       return _newArrayList;
     }
   }.apply();
@@ -415,38 +417,38 @@ public class ArithmeticExtensionGenerator {
     String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
     final String __valOfSwitchOver = _substring;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,"a")) {
-        matched=true;
+        _matched=true;
         _switchResult = "an";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,"e")) {
-        matched=true;
+        _matched=true;
         _switchResult = "an";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,"i")) {
-        matched=true;
+        _matched=true;
         _switchResult = "an";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,"o")) {
-        matched=true;
+        _matched=true;
         _switchResult = "an";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(__valOfSwitchOver,"u")) {
-        matched=true;
+        _matched=true;
         _switchResult = "an";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       _switchResult = "a";
     }
     return _switchResult;
@@ -454,20 +456,20 @@ public class ArithmeticExtensionGenerator {
   
   public String wrapperType(final String it) {
     String _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(it,"int")) {
-        matched=true;
+        _matched=true;
         _switchResult = "Integer";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ObjectExtensions.operator_equals(it,"char")) {
-        matched=true;
+        _matched=true;
         _switchResult = "Character";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       String _firstUpper = StringExtensions.toFirstUpper(it);
       _switchResult = _firstUpper;
     }

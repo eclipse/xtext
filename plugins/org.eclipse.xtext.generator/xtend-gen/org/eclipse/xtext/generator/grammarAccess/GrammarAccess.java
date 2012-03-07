@@ -203,26 +203,26 @@ public class GrammarAccess {
     String _switchResult = null;
     EObject _eContainer = ele.eContainer();
     final EObject cnt = _eContainer;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (cnt instanceof AbstractElement) {
         final AbstractElement _abstractElement = (AbstractElement)cnt;
-        matched=true;
+        _matched=true;
         String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
         String _plus = (_gaRuleElementAccessor + ".getType()");
         _switchResult = _plus;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (cnt instanceof AbstractRule) {
         final AbstractRule _abstractRule = (AbstractRule)cnt;
-        matched=true;
+        _matched=true;
         String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
         String _plus = (_gaRuleAccessor + ".getType()");
         _switchResult = _plus;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       EObject _eContainer_1 = ele.eContainer();
       EClass _eClass = _eContainer_1.eClass();
       String _name = _eClass.getName();
@@ -240,24 +240,24 @@ public class GrammarAccess {
    */
   public String gaAccessor(final EObject ele) {
     String _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (ele instanceof AbstractElement) {
         final AbstractElement _abstractElement = (AbstractElement)ele;
-        matched=true;
+        _matched=true;
         String _gaRuleElementAccessor = this.gaRuleElementAccessor(_abstractElement);
         _switchResult = _gaRuleElementAccessor;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ele instanceof AbstractRule) {
         final AbstractRule _abstractRule = (AbstractRule)ele;
-        matched=true;
+        _matched=true;
         String _gaRuleAccessor = this.gaRuleAccessor(_abstractRule);
         _switchResult = _gaRuleAccessor;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       EClass _eClass = ele.eClass();
       String _name = _eClass.getName();
       String _plus = ("<error: unknown type " + _name);

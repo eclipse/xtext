@@ -274,36 +274,36 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   
   public String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
     String _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       boolean _add = visited.add(ele);
       boolean _not = (!_add);
       if (_not) {
-        matched=true;
+        _matched=true;
         _switchResult = "";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(ele);
       if (_isOptionalCardinality) {
-        matched=true;
+        _matched=true;
         _switchResult = "";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ele instanceof Alternatives) {
         final Alternatives _alternatives = (Alternatives)ele;
-        matched=true;
+        _matched=true;
         EList<AbstractElement> _elements = _alternatives.getElements();
         AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
         String _defaultValue = this.defaultValue(_head, visited);
         _switchResult = _defaultValue;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ele instanceof Group) {
         final Group _group = (Group)ele;
-        matched=true;
+        _matched=true;
         EList<AbstractElement> _elements = _group.getElements();
         final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
             public String apply(final AbstractElement e) {
@@ -316,25 +316,25 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _switchResult = _join;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ele instanceof Keyword) {
         final Keyword _keyword = (Keyword)ele;
-        matched=true;
+        _matched=true;
         String _value = _keyword.getValue();
         _switchResult = _value;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (ele instanceof RuleCall) {
         final RuleCall _ruleCall = (RuleCall)ele;
-        matched=true;
+        _matched=true;
         AbstractRule _rule = _ruleCall.getRule();
         AbstractElement _alternatives = _rule.getAlternatives();
         String _defaultValue = this.defaultValue(_alternatives, visited);
         _switchResult = _defaultValue;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       _switchResult = "";
     }
     return _switchResult;
