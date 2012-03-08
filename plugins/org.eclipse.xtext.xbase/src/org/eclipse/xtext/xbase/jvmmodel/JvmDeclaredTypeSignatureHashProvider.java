@@ -130,8 +130,6 @@ public class JvmDeclaredTypeSignatureHashProvider {
 						appendSignature((JvmConstructor) member);
 					} else if (member instanceof JvmField) {
 						appendSignature((JvmField) member);
-					} else if (member instanceof JvmDeclaredType) {
-						appendSignature((JvmDeclaredType) member);
 					}
 					append("\n");
 				}
