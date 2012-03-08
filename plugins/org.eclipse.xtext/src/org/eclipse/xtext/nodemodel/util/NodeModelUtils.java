@@ -28,12 +28,19 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 
 import com.google.common.collect.Lists;
 
 /**
  * The NodeModelUtils are a collection of useful methods when dealing with the node model directly. They encapsulate the
  * default construction semantics of the node model as it is created by the parser.
+ * 
+ * This API is quite low level and internal functionality of the framework relies on the implemened contracts.
+ * Clients should rather use the language specific APIs that provide almost the same functionality, e.g.
+ * {@link ILocationInFileProvider} and {@link EObjectAtOffsetHelper} if they want to to access the region
+ * of a {@link EObject semantic object}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -104,6 +111,7 @@ public class NodeModelUtils {
 	/**
 	 * Returns the node that is directly associated with the given object by means of an EMF-Adapter.
 	 * 
+	 * @param object the semantic object whose direct node should be provided.
 	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
 	 */
@@ -178,9 +186,23 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
-	 * actions} and {@link RuleCall unassigned rule calls}.
+	 * <p>Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
+	 * actions} and {@link RuleCall unassigned rule calls}. The returned node will include unassigned surrounding leafs,
+	 * e.g. if you use something like {@code Parenthesized expressions} redundant parentheses will be part of the returned node.</p>
+	 * <p>Consider the following simple expression (a number literal): 
+	 * <pre>
+	 *   ((1))
+	 * </pre>
+	 * Assuming it was parsed from a grammar like this:
+	 * <pre>
+	 * Expression: Number | Parentheses;
+	 * Parentheses: '(' Expression ')';
+	 * Number: value=INT
+	 * </pre>
+	 * The actual node for the only semantic object that was produced from the input {@code ((1))} is the root node 
+	 * even though the minimal node would be the one with the text {@code 1}.
 	 * 
+	 * @param semanticObject the semantic object whose node should be provided.
 	 * @return the node that covers all assigned values of the given object.
 	 */
 	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
