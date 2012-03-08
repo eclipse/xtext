@@ -554,6 +554,87 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"(( #try {} catch(NullPointerException npe) {} catch(Exception exception) {}# ))");
 	}
 	
+	@Test
+	public void testBinaryOperator_01() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (1 #+# 1);\n" + 
+				"return _plus;", 
+				"#1 + 1#");
+	}
+	
+	@Test
+	public void testBinaryOperator_02() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (1 + 1);\n" + 
+				"return _pl#u#s;", 
+				"#1 + 1#");
+	}
+	
+	@Test
+	public void testBinaryOperator_03() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"i#nt _pl#us = (1 + 1);\n" + 
+				"return _plus;", 
+				"#1 + 1#");
+	}
+	
+	@Test
+	public void testBinaryOperator_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (#1# + 1);\n" + 
+				"return _plus;", 
+				"#1# + 1");
+	}
+	
+	@Test
+	public void testBinaryOperator_05() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (1## + 1);\n" + 
+				"return _plus;", 
+				"#1# + 1");
+	}
+	
+	@Test
+	public void testBinaryOperator_06() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (##1 + 1);\n" + 
+				"return _plus;", 
+				"#1# + 1");
+	}
+	
+	@Test
+	public void testBinaryOperator_07() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (1 + ##1);\n" + 
+				"return _plus;", 
+				"1 + #1#");
+	}
+	
+	@Test
+	public void testBinaryOperator_08() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (1 + 1##);\n" + 
+				"return _plus;", 
+				"1 + #1#");
+	}
+	
+	@Test
+	public void testBinaryOperator_09() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _plus = (1 + #1#);\n" + 
+				"return _plus;", 
+				"( (( 1 )) + (  #1#/*comment*/  ))");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	@SuppressWarnings("null")
