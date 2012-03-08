@@ -852,6 +852,56 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testMethodParameterTypeWithGenerics() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Zonk {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* my comment");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void method(Li#s#t<String> strings) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Zonk {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("* my comment");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void method(final #List#<String> strings) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.tracesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testMethodParameterFunctionType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Zonk {");

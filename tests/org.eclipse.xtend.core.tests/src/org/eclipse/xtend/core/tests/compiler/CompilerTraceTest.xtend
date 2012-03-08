@@ -433,6 +433,31 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def void testMethodParameterTypeWithGenerics() throws Exception {
+		'''
+			import java.util.List
+			
+			class Zonk {
+				/**
+				 * my comment
+				 */
+				def void method(Li#s#t<String> strings) {}
+			}
+		'''.tracesTo('''
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class Zonk {
+			  /**
+			   * my comment
+			   */
+			  public void method(final #List#<String> strings) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testMethodParameterFunctionType() throws Exception {
 		'''
 			class Zonk {
