@@ -3,7 +3,5 @@
     <cq:rootRequest name="org.eclipse.xtext.build" componentType="eclipse.feature"/>
     <cq:advisorNode namePattern="^org\.eclipse\.(?:xtext|xtend2)(?:\..*)?\.source$" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.eclipse\.(?:xtend)(?:\..*)?\.source$" skipComponent="true"/>
-   	<cq:advisorNode namePattern="^com\.google\.(?:guava|inject)(?:\..*)?\.source$" skipComponent="true"/>
-    <cq:advisorNode namePattern="^com\.google\.inject$" useTargetPlatform="false"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.releng$" useMaterialization="false" useWorkspace="false"/>
 </cq:componentQuery>
