@@ -422,6 +422,138 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"(( #for(loop: 1..2) (loop.toString)# ))");
 	}
 	
+	@Test
+	public void testTryCatch_01() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Object _xtrycatchfinallyexpression = null;\n" + 
+				"try {\n" + 
+				"  _xtrycatchfinallyexpression = null;\n" + 
+				"} catch (final Throwable _t) {\n" + 
+				"  if (_t instanceof NullPointerException) {\n" + 
+				"    final NullPointerException n#p#e = (NullPointerException)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else if (_t instanceof Exception) {\n" + 
+				"    final Exception exception = (Exception)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else {\n" + 
+				"    throw Exceptions.sneakyThrow(_t);\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _xtrycatchfinallyexpression;", 
+				"try {} catch(NullPointerException #npe#) {} catch(Exception exception) {}");
+	}
+	
+	@Test
+	public void testTryCatch_02() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Object _xtrycatchfinallyexpression = null;\n" + 
+				"try {\n" + 
+				"  _xtrycatchfinallyexpression = null;\n" + 
+				"} catch (final Throwable _t) {\n" + 
+				"  if (_t instanceof NullPointerException) {\n" + 
+				"    final NullPointerException npe = (NullPointerException)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else if (_t instanceof Exception) {\n" + 
+				"    final Exception ex#c#eption = (Exception)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else {\n" + 
+				"    throw Exceptions.sneakyThrow(_t);\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _xtrycatchfinallyexpression;", 
+				"try {} catch(NullPointerException npe) {} catch(Exception #exception#) {}");
+	}
+	
+	@Test
+	public void testTryCatch_03() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Object _xtrycatchfinallyexpression = null;\n" + 
+				"try {\n" + 
+				"  _xtrycatchfinallyexpression = null;\n" + 
+				"} catch (final Throwable _t) {\n" + 
+				"  if (_t instanceof N#ull#PointerException) {\n" + 
+				"    final NullPointerException npe = (NullPointerException)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else if (_t instanceof Exception) {\n" + 
+				"    final Exception exception = (Exception)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else {\n" + 
+				"    throw Exceptions.sneakyThrow(_t);\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _xtrycatchfinallyexpression;", 
+				"try {} catch(#NullPointerException# npe) {} catch(Exception exception) {}");
+	}
+	
+	@Test
+	public void testTryCatch_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Object _xtrycatchfinallyexpression = null;\n" + 
+				"try {\n" + 
+				"  _xtrycatchfinallyexpression = null;\n" + 
+				"} catch (final Throwable _t) {\n" + 
+				"  i#f# (_t instanceof NullPointerException) {\n" + 
+				"    final NullPointerException npe = (NullPointerException)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else if (_t instanceof Exception) {\n" + 
+				"    final Exception exception = (Exception)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else {\n" + 
+				"    throw Exceptions.sneakyThrow(_t);\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _xtrycatchfinallyexpression;", 
+				"try {} #catch(NullPointerException npe) {}# catch(Exception exception) {}");
+	}
+	
+	@Test
+	public void testTryCatch_05() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Object _xtrycatchfinallyexpression = null;\n" + 
+				"try {\n" + 
+				"  _xtrycatchfinallyexpression = null;\n" + 
+				"} catch (final Throwable _t) {\n" + 
+				"  if (_t instanceof NullPointerException) {\n" + 
+				"    fi#n#al NullPointerException npe = (NullPointerException)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else if (_t instanceof Exception) {\n" + 
+				"    final Exception exception = (Exception)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else {\n" + 
+				"    throw Exceptions.sneakyThrow(_t);\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _xtrycatchfinallyexpression;", 
+				"try {} catch(#NullPointerException npe#) {} catch(Exception exception) {}");
+	}
+	
+	@Test
+	public void testTryCatch_06() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Object _xtrycatchfinallyexpression = null;\n" + 
+				"try {\n" + 
+				"  _xtrycatchfinallyexpression = null;\n" + 
+				"} catch (final Throwable _t) {\n" + 
+				"  if (_t instanceof NullPointerException) {\n" + 
+				"    final NullPointerException npe = (NullPointerException)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else if (_t instanceof Exception) {\n" + 
+				"    final Exception exception = (Exception)_t;\n" + 
+				"    _xtrycatchfinallyexpression = null;\n" + 
+				"  } else {\n" + 
+				"    thr#o#w Exceptions.sneakyThrow(_t);\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _xtrycatchfinallyexpression;", 
+				"(( #try {} catch(NullPointerException npe) {} catch(Exception exception) {}# ))");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	@SuppressWarnings("null")

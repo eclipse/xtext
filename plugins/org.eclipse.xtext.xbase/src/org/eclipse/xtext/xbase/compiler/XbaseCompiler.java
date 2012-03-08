@@ -215,27 +215,31 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			Iterator<XCatchClause> iterator = catchClauses.iterator();
 			while (iterator.hasNext()) {
 				XCatchClause catchClause = iterator.next();
+				ITreeAppendable catchClauseAppendable = b.trace(catchClause);
 				JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 				final String declaredParamName = makeJavaIdentifier(catchClause.getDeclaredParam().getName());
-				final String name = b.declareVariable(catchClause.getDeclaredParam(), declaredParamName);
-				b.append("if (").append(variable).append(" instanceof ");
-				b.append(type.getType());
-				b.append(") ").append("{");
-				b.increaseIndentation();
-				b.newLine().append("final ");
-				serialize(type,expr,b);
-				b.append(" ").append(name).append(" = (");
-				serialize(type,expr,b);
-				b.append(")").append(variable).append(";");
+				final String name = catchClauseAppendable.declareVariable(catchClause.getDeclaredParam(), declaredParamName);
+				catchClauseAppendable.append("if (").append(variable).append(" instanceof ");
+				serialize(type, expr, catchClauseAppendable);
+				catchClauseAppendable.append(") ").append("{");
+				catchClauseAppendable.increaseIndentation();
+				ITreeAppendable parameterAppendable = catchClauseAppendable.trace(catchClause.getDeclaredParam());
+				parameterAppendable.newLine().append("final ");
+				serialize(type, expr, parameterAppendable);
+				parameterAppendable.append(" ");
+				parameterAppendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(name);
+				parameterAppendable.append(" = (");
+				serialize(type,expr,parameterAppendable);
+				parameterAppendable.append(")").append(variable).append(";");
 				final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
-				internalToJavaStatement(catchClause.getExpression(), b, canBeReferenced);
+				internalToJavaStatement(catchClause.getExpression(), catchClauseAppendable, canBeReferenced);
 				if (canBeReferenced) {
-					b.newLine().append(getVarName(expr, b)).append(" = ");
-					internalToConvertedExpression(catchClause.getExpression(), b, null);
-					b.append(";");
+					catchClauseAppendable.newLine().append(getVarName(expr, catchClauseAppendable)).append(" = ");
+					internalToConvertedExpression(catchClause.getExpression(), catchClauseAppendable, null);
+					catchClauseAppendable.append(";");
 				}
-				b.decreaseIndentation();
-				b.newLine().append("}");
+				catchClauseAppendable.decreaseIndentation();
+				catchClauseAppendable.newLine().append("}");
 				if (iterator.hasNext()) {
 					b.append(" else ");
 				}
