@@ -671,6 +671,305 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"10bi + #123e+52bi#");
 	}
 	
+	@Test
+	public void testSwitchExpression_01() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String _switchValue = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_m#a#tched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch('') { #case '': ''# case '': '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_02() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String _switchValue = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,#\"\"#)) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch('') { case #''#: '' case '': '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_03() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String _switchValue = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = #\"\"#;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch('') { case '': #''# case '': '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String _switchValue = #\"\"#;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch(#''#) { case '': '' case '': '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_05() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _swi#tc#hResult = null;\n" + 
+				"final String _switchValue = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"#switch '' { case '': '' case '': '' }#");
+	}
+	
+	@Test
+	public void testSwitchExpression_06() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String _switchValue = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  _switch#R#esult = \"\";\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch '' { case '': '' #default: ''# }");
+	}
+	
+	@Test
+	public void testSwitchExpression_11() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String it = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_#mat#ched) {\n" + 
+				"  int _length = it.length();\n" + 
+				"  boolean _equals = (_length == 0);\n" + 
+				"  if (_equals) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(it,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch it:'' { #case length==0: ''# case '': '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_12() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String #it# = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  int _length = it.length();\n" + 
+				"  boolean _equals = (_length == 0);\n" + 
+				"  if (_equals) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (Objects.equal(it,\"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch #it#:'' { case length==0: '' case '': '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_21() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final Object it = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (#!#_matched) {\n" + 
+				"  if (it instanceof String) {\n" + 
+				"    final String _string = (String)it;\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch it:null { #String : ''# }");
+	}
+	
+	@Test
+	public void testSwitchExpression_22() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final Object it = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (it instanceof St#ri#ng) {\n" + 
+				"    final String _string = (String)it;\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch it:null { #String# : '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_23() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final Object it = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (it instanceof String) {\n" + 
+				"    final St#r#ing _string = (String)it;\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch it:null { #String# : '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_24() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final Object it = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (it instanceof String) {\n" + 
+				"    final String _string = (S#tr#ing)it;\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch it:null { #String# : '' }");
+	}
+	
+	@Test
+	public void testSwitchExpression_31() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final Object it = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"i#f (!_matched) {\n" + 
+				"  if (it instanceof String) {\n" + 
+				"    final String _string = (String)it;\n" + 
+				"    if (Objects.equal(it,\"\")) {\n" + 
+				"      _matched=true;\n" + 
+				"      _switchResult = \"\";\n" + 
+				"    }\n" + 
+				"  }#\n" + 
+				"}\n" + 
+				"return _switchResult;", 
+				"switch it:null { #String case '': ''# }");
+	}
+	
+	@Test
+	public void testSwitchExpression_41() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _switchResult = null;\n" + 
+				"final String s = \"\";\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (s instanceof String) {\n" + 
+				"    final String _string = (String)s;\n" + 
+				"    int _length = _string.length();\n" + 
+				"    boolean _equals = (_length == 0);\n" + 
+				"    if (_equals) {\n" + 
+				"      _matched=true;\n" + 
+				"      _switchResult = \"\";\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"#}#\n" + 
+				"return _switchResult;", 
+				"switch s:'' { #String case s.length == 0: ''# }");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	@SuppressWarnings("null")
