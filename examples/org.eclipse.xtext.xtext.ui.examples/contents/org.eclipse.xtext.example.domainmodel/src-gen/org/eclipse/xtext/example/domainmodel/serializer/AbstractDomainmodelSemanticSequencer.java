@@ -1380,7 +1380,7 @@ public class AbstractDomainmodelSemanticSequencer extends AbstractSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ default=XExpression?)
+	 *     (((localVarName=ValidID? switch=XExpression) | (localVarName=ValidID switch=XExpression)) cases+=XCasePart+ default=XExpression?)
 	 */
 	protected void sequence_XSwitchExpression(EObject context, XSwitchExpression semanticObject) {
 		superSequencer.createSequence(context, semanticObject);
