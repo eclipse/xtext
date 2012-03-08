@@ -555,7 +555,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_01() throws Exception {
+	public void testBinaryExpression_01() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (1 #+# 1);\n" + 
@@ -564,7 +564,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_02() throws Exception {
+	public void testBinaryExpression_02() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (1 + 1);\n" + 
@@ -573,7 +573,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_03() throws Exception {
+	public void testBinaryExpression_03() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"i#nt _pl#us = (1 + 1);\n" + 
@@ -582,7 +582,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_04() throws Exception {
+	public void testBinaryExpression_04() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (#1# + 1);\n" + 
@@ -591,7 +591,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_05() throws Exception {
+	public void testBinaryExpression_05() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (1## + 1);\n" + 
@@ -600,7 +600,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_06() throws Exception {
+	public void testBinaryExpression_06() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (##1 + 1);\n" + 
@@ -609,7 +609,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_07() throws Exception {
+	public void testBinaryExpression_07() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (1 + ##1);\n" + 
@@ -618,7 +618,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_08() throws Exception {
+	public void testBinaryExpression_08() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (1 + 1##);\n" + 
@@ -627,12 +627,48 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	public void testBinaryOperator_09() throws Exception {
+	public void testBinaryExpression_09() throws Exception {
 		assertTrace( 
 				"\n" + 
 				"int _plus = (1 + #1#);\n" + 
 				"return _plus;", 
 				"( (( 1 )) + (  #1#/*comment*/  ))");
+	}
+	
+	@Test
+	public void testBinaryExpression_10() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"BigInteger _plus = #BigInteger.ONE#.add(BigInteger.valueOf(2L));\n" + 
+				"return _plus;", 
+				"#1bi# + 2bi");
+	}
+	
+	@Test
+	public void testBinaryExpression_11() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"BigInteger _plus = BigInteger.TEN.a#dd(new B#igInteger(\"12345678901234567890\"));\n" + 
+				"return _plus;", 
+				"#10bi + 12345678901234567890bi#");
+	}
+	
+	@Test
+	public void testBinaryExpression_12() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"BigInteger _plus = BigInteger.TEN.add(ne#w B#igInteger(\"99999999999999000000000\"));\n" + 
+				"return _plus;", 
+				"10bi + #99999999999999e+9bi#");
+	}
+	
+	@Test
+	public void testBinaryExpression_13() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"BigInteger _plus = BigInteger.TEN.add(ne#w B#igInteger(\"123\").multiply(BigInteger.TEN.pow(52)));\n" + 
+				"return _plus;", 
+				"10bi + #123e+52bi#");
 	}
 	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
