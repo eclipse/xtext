@@ -11,7 +11,6 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.regex.Pattern;
 
 import org.eclipse.xtext.xbase.XNumberLiteral;
 
@@ -148,16 +147,38 @@ public class NumberLiterals {
 			throw new IllegalArgumentException("Cannot convert number literal to type" + numberType.getCanonicalName());
 	}
 
-	protected BigInteger toBigInteger(XNumberLiteral literal) {
+	public BigInteger toBigInteger(XNumberLiteral literal) {
 		if (isFloatingPoint(literal))
 			return toBigDecimal(literal).toBigInteger();
 		else
 			return new BigInteger(getDigits(literal), getBase(literal));
 	}
+	
+	public String getExponent(String digits) {
+		int e = digits.indexOf('e');
+		if (e == -1) {
+			e = digits.indexOf('E');
+		}
+		if (e != -1) {
+			if (e != digits.length() - 1 && (digits.charAt(e + 1) == '+' || digits.charAt(e + 1) == '-')) {
+				e++;
+			}
+			if (e < digits.length() - 1) {
+				String exponent = digits.substring(e + 1);
+				return exponent;
+			}
+		}
+		return null;
+	}
 
-	protected BigDecimal toBigDecimal(XNumberLiteral literal) {
+	public BigDecimal toBigDecimal(XNumberLiteral literal) {
 		if (isFloatingPoint(literal)) {
-			return new BigDecimal(getDigits(literal));
+			String digits = getDigits(literal);
+			String exponent = getExponent(digits);
+			if (exponent != null && exponent.length() > 10) {
+				throw new NumberFormatException("Too many nonzero exponent digits.");
+			}
+			return new BigDecimal(digits);
 		} else {
 			int base = getBase(literal);
 			switch (base) {

@@ -150,7 +150,8 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' =>(localVarName=ValidID ':')? switch=XExpression '{'
+	'switch' (=>(localVarName=ValidID ':')? switch=XExpression
+		| =>('(' localVarName=ValidID ':') switch=XExpression ')') '{'
 	(cases+=XCasePart)+
 	('default' ':' default=XExpression )?
 	'}';

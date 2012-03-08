@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -399,11 +400,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"class");
 	}
 
-//	@Test public void testCast_0() throws Exception {
-//		XExpression expression = expression("'foo' as String");
-//		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
-//		helper.assertNoError(expression, INVALID_CAST);
-//	}
+	@Test @Ignore public void testCast_0() throws Exception {
+		XExpression expression = expression("'foo' as String");
+		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
+		helper.assertNoError(expression, INVALID_CAST);
+	}
 
 	@Test public void testCast_1() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
@@ -417,11 +418,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 	
-	//TODO fix me - see https://bugs.eclipse.org/bugs/show_bug.cgi?id=364931
+	@Ignore("FIXME see https://bugs.eclipse.org/bugs/show_bug.cgi?id=364931")
 	@Test public void testCast_3() throws Exception {
-//		XExpression expression = expression("new java.util.ArrayList<String>() as java.util.List<Object>");
-//		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
-//		helper.assertNoError(expression, OBSOLETE_CAST);
+		XExpression expression = expression("new java.util.ArrayList<String>() as java.util.List<Object>");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
+		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 
 	@Test public void testInstanceOf_0() throws Exception {
@@ -608,6 +609,44 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression(new BigInteger(Long.toString(Long.MAX_VALUE))
 			.add(new BigInteger("1")).toString(10) + "L");
 		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT);
+	}
+	
+	@Test public void testNumberLiteral_15() throws Exception {
+		XExpression expression = expression("1.0e12345678901bd");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT, "Too many nonzero exponent digits");
+	}
+	
+	@Test public void testNumberLiteral_16() throws Exception {
+		XExpression expression = expression("1.0e-12345678901bd");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT, "Too many nonzero exponent digits");
+	}
+	
+	@Test public void testNumberLiteral_17() throws Exception {
+		XExpression expression = expression("1.0e1234567890bd");
+		helper.assertNoIssues(expression);
+	}
+	
+	@Test public void testNumberLiteral_18() throws Exception {
+		XExpression expression = expression("1.0e-1234567890bd");
+		helper.assertNoIssues(expression);
+	}
+	
+	@Test public void testNumberLiteral_19() throws Exception {
+		XExpression expression = expression("10e12345678901bi");
+		helper.assertError(expression, XNUMBER_LITERAL, INVALID_NUMBER_FORMAT, "Too many nonzero exponent digits");
+	}
+	
+	@Test
+	public void testNumberLiteral_20() throws Exception {
+		XExpression expression = expression("10e12345bi");
+		helper.assertNoIssues(expression);
+	}
+	
+	@Test
+	@Ignore("OOM")
+	public void testNumberLiteral_21() throws Exception {
+		XExpression expression = expression("10e1234567890bi");
+		helper.assertNoIssues(expression);
 	}
 	
 	@Test public void testBug_362271 () throws Exception {
