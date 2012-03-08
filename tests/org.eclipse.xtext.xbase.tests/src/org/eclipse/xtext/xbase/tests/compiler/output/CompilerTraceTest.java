@@ -319,6 +319,14 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"((new #java.util.ArrayList#(5)))");
 	}
 	
+	@Test
+	public void testConstructorCall_10() throws Exception {
+		assertTrace( 
+				"\nArrayList<String> _a#rra#yList = new ArrayList<String>(5);\n" +
+				"return _arrayList;", 
+				"((#new java.util.ArrayList<String>(5)#))");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	@SuppressWarnings("null")
