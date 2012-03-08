@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 
 /**
@@ -48,6 +50,8 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 	public void setTypeReference(JvmTypeReference newTypeReference) {
 		if (newTypeReference instanceof JvmWildcardTypeReference)
 			throw new IllegalArgumentException("wildcard type references are not supported as constraint bounds");
+		if (newTypeReference.getType() instanceof JvmPrimitiveType || (newTypeReference.getType() instanceof JvmVoid && !newTypeReference.getType().eIsProxy()))
+			throw new IllegalArgumentException("primitive type references are not supported as constraint bounds");
 		super.setTypeReference(newTypeReference);
 	}
 	
