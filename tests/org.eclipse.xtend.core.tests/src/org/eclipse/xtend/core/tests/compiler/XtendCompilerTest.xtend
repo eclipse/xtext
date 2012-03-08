@@ -76,17 +76,17 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    }    
 			}
 		''', '''
+			import com.google.common.base.Objects;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
-			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 			
 			@SuppressWarnings("all")
 			public class Foo {
 			  public Object foo() {
 			    Object _switchResult = null;
-			    final Object __valOfSwitchOver = null;
+			    final Object _switchValue = null;
 			    boolean _matched = false;
 			    if (!_matched) {
-			      if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {
+			      if (Objects.equal(_switchValue,null)) {
 			        _matched=true;
 			        final Function1<Object,Object> _function = new Function1<Object,Object>() {
 			            public Object apply(final Object it) {
@@ -97,7 +97,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			      }
 			    }
 			    if (!_matched) {
-			      if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {
+			      if (Objects.equal(_switchValue,null)) {
 			        _matched=true;
 			        final Function1<Integer,Integer> _function_1 = new Function1<Integer,Integer>() {
 			            public Integer apply(final Integer it) {
