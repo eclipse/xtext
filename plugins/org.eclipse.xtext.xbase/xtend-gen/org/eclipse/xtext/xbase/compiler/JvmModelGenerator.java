@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
@@ -77,6 +78,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -785,26 +787,47 @@ public class JvmModelGenerator implements IGenerator {
     boolean _not = (!_isEmpty);
     if (_not) {
       EList<JvmFormalParameter> _parameters_1 = it.getParameters();
-      JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters_1);
-      this.generateParameter(_head, appendable);
-      EList<JvmFormalParameter> _parameters_2 = it.getParameters();
-      Iterable<JvmFormalParameter> _tail = IterableExtensions.<JvmFormalParameter>tail(_parameters_2);
-      final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
-          public void apply(final JvmFormalParameter it) {
-            appendable.append(", ");
-            JvmModelGenerator.this.generateParameter(it, appendable);
+      int _size = _parameters_1.size();
+      int _minus = (_size - 1);
+      Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);
+      for (final Integer i : _upTo) {
+        {
+          int _plus = ((i).intValue() + 1);
+          EList<JvmFormalParameter> _parameters_2 = it.getParameters();
+          int _size_1 = _parameters_2.size();
+          final boolean last = (_plus == _size_1);
+          EList<JvmFormalParameter> _parameters_3 = it.getParameters();
+          final JvmFormalParameter p = _parameters_3.get((i).intValue());
+          boolean _and = false;
+          if (!last) {
+            _and = false;
+          } else {
+            boolean _isVarArgs = it.isVarArgs();
+            _and = (last && _isVarArgs);
           }
-        };
-      IterableExtensions.<JvmFormalParameter>forEach(_tail, _function);
+          this.generateParameter(p, appendable, _and);
+          boolean _not_1 = (!last);
+          if (_not_1) {
+            appendable.append(", ");
+          }
+        }
+      }
     }
   }
   
-  public void generateParameter(final JvmFormalParameter it, final ITreeAppendable appendable) {
+  public void generateParameter(final JvmFormalParameter it, final ITreeAppendable appendable, final boolean vararg) {
     final ITreeAppendable tracedAppendable = appendable.trace(it);
     this.generateAnnotations(it, tracedAppendable, false);
     tracedAppendable.append("final ");
-    JvmTypeReference _parameterType = it.getParameterType();
-    this.serialize(_parameterType, tracedAppendable);
+    if (vararg) {
+      JvmTypeReference _parameterType = it.getParameterType();
+      JvmTypeReference _componentType = ((JvmGenericArrayTypeReference) _parameterType).getComponentType();
+      this.serialize(_componentType, tracedAppendable);
+      tracedAppendable.append("...");
+    } else {
+      JvmTypeReference _parameterType_1 = it.getParameterType();
+      this.serialize(_parameterType_1, tracedAppendable);
+    }
     tracedAppendable.append(" ");
     String _simpleName = it.getSimpleName();
     String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
