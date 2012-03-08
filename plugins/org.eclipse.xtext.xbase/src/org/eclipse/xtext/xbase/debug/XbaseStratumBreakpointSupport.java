@@ -12,6 +12,7 @@ import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -28,7 +29,7 @@ public class XbaseStratumBreakpointSupport implements IStratumBreakpointSupport 
 		for (INode n : node.getChildren()) {
 			if (n.getStartLine()<= line && n.getEndLine() >= line) {
 				EObject eObject = n.getSemanticElement();
-				if (eObject instanceof org.eclipse.xtext.xbase.XExpression && !(eObject.eClass() == XbasePackage.Literals.XBLOCK_EXPRESSION)) {
+				if (eObject instanceof XExpression && !(eObject.eClass() == XbasePackage.Literals.XBLOCK_EXPRESSION)) {
 					return true;
 				}
 				if (n instanceof ICompositeNode && isValidLineForBreakpoint((ICompositeNode) n, line)) {
