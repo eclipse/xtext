@@ -160,9 +160,9 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
+    _builder_1.append("import com.google.common.base.Objects;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -176,7 +176,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("Object _switchResult = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Object __valOfSwitchOver = null;");
+    _builder_1.append("final Object _switchValue = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("boolean _matched = false;");
@@ -185,7 +185,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {");
+    _builder_1.append("if (Objects.equal(_switchValue,null)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
@@ -218,7 +218,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if (ObjectExtensions.operator_equals(__valOfSwitchOver,null)) {");
+    _builder_1.append("if (Objects.equal(_switchValue,null)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_matched=true;");
