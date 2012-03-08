@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -55,9 +56,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.Closures;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -560,14 +561,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				name = makeJavaIdentifier(name);
 			} else {
 				// define synthetic name
-				name = "__valOfSwitchOver";
+				name = "_switchValue";
 			}
 			JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
 			b.newLine().append("final ");
 			serialize(typeReference, expr, b);
 			b.append(" ");
 			variableName = b.declareSyntheticVariable(expr, name);
-			b.append(variableName);
+			if (expr.getLocalVarName() != null)
+				b.trace(expr, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, 0).append(variableName);
+			else
+				b.append(variableName);
 			b.append(" = ");
 			internalToJavaExpression(expr.getSwitch(), b);
 			b.append(";");
@@ -575,84 +579,108 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		// declare 'boolean matched' to check whether a case has matched already
 		b.newLine().append("boolean ");
 		b.append(matchedVariable).append(" = false;");
-
 		for (XCasePart casePart : expr.getCases()) {
-			b.newLine().append("if (!").append(matchedVariable).append(") {");
-			b.increaseIndentation();
+			ITreeAppendable caseAppendable = b.trace(casePart, true);
+			caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
+			caseAppendable.increaseIndentation();
 			if (casePart.getTypeGuard() != null) {
-				b.newLine().append("if (");
-				b.append(variableName);
-				b.append(" instanceof ");
-				b.append(casePart.getTypeGuard().getType());
-				b.append(") {");
-				b.increaseIndentation();
+				ITreeAppendable typeGuardAppendable = caseAppendable.trace(casePart.getTypeGuard(), true);
+				typeGuardAppendable.newLine().append("if (");
+				typeGuardAppendable.append(variableName);
+				typeGuardAppendable.append(" instanceof ");
+				typeGuardAppendable.trace(casePart.getTypeGuard()).append(casePart.getTypeGuard().getType());
+				typeGuardAppendable.append(") {");
+				typeGuardAppendable.increaseIndentation();
 				JvmIdentifiableElement switchOver = expr.getSwitch() instanceof XFeatureCall ? ((XFeatureCall) expr.getSwitch()).getFeature() : expr;
-				b.openPseudoScope();
+				typeGuardAppendable.openPseudoScope();
 				final String proposedName = getFavoriteVariableName(casePart.getTypeGuard().getType());
-				final String castedVariableName = b.declareSyntheticVariable(switchOver, proposedName);
-				b.newLine().append("final ");
-				serialize(casePart.getTypeGuard(), expr, b);
-				b.append(" ");
-				b.append(castedVariableName);
-				b.append(" = (");
-				serialize(casePart.getTypeGuard(), expr, b);
-				b.append(")");
-				b.append(variableName);
-				b.append(";");
+				final String castedVariableName = typeGuardAppendable.declareSyntheticVariable(switchOver, proposedName);
+				typeGuardAppendable.newLine().append("final ");
+				serialize(casePart.getTypeGuard(), expr, typeGuardAppendable);
+				typeGuardAppendable.append(" ");
+				typeGuardAppendable.append(castedVariableName);
+				typeGuardAppendable.append(" = (");
+				serialize(casePart.getTypeGuard(), expr, typeGuardAppendable);
+				typeGuardAppendable.append(")");
+				typeGuardAppendable.append(variableName);
+				typeGuardAppendable.append(";");
 			}
 			if (casePart.getCase() != null) {
-				internalToJavaStatement(casePart.getCase(), b, true);
-				b.newLine().append("if (");
+				ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);
+				internalToJavaStatement(casePart.getCase(), conditionAppendable, true);
+				conditionAppendable.newLine().append("if (");
 				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
 				if (getTypeReferences().is(convertedType, Boolean.TYPE) || getTypeReferences().is(convertedType, Boolean.class)) {
-					internalToJavaExpression(casePart.getCase(), b);
+					internalToJavaExpression(casePart.getCase(), conditionAppendable);
 				} else {
-					JvmTypeReference typeRef = getTypeReferences().getTypeForName(ObjectExtensions.class, expr);
-					serialize(typeRef, casePart, b);
-					b.append(".operator_equals(").append(variableName).append(",");
-					internalToJavaExpression(casePart.getCase(), b);
-					b.append(")");
+					JvmTypeReference typeRef = getTypeReferences().getTypeForName(Objects.class, expr);
+					serialize(typeRef, casePart, conditionAppendable);
+					conditionAppendable.append(".equal(").append(variableName).append(",");
+					internalToJavaExpression(casePart.getCase(), conditionAppendable);
+					conditionAppendable.append(")");
 				}
-				b.append(") {");
-				b.increaseIndentation();
+				conditionAppendable.append(")");
+				caseAppendable.append(" {");
+				caseAppendable.increaseIndentation();
 			}
 			// set matched to true
-			b.newLine().append(matchedVariable).append("=true;");
+			caseAppendable.newLine().append(matchedVariable).append("=true;");
 
 			// execute then part
 			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(casePart.getThen());
-			internalToJavaStatement(casePart.getThen(), b, canBeReferenced);
+			internalToJavaStatement(casePart.getThen(), caseAppendable, canBeReferenced);
 			if (canBeReferenced) {
-				b.newLine().append(switchResultName).append(" = ");
-				internalToConvertedExpression(casePart.getThen(), b, null);
-				b.append(";");
+				caseAppendable.newLine().append(switchResultName).append(" = ");
+				internalToConvertedExpression(casePart.getThen(), caseAppendable, null);
+				caseAppendable.append(";");
 			}
 
 			// close surrounding if statements
 			if (casePart.getCase() != null) {
-				b.decreaseIndentation().newLine().append("}");
+				caseAppendable.decreaseIndentation().newLine().append("}");
 			}
 			if (casePart.getTypeGuard() != null) {
-				b.decreaseIndentation().newLine().append("}");
-				b.closeScope();
+				caseAppendable.decreaseIndentation().newLine().append("}");
+				caseAppendable.closeScope();
 			}
-			b.decreaseIndentation();
-			b.newLine().append("}");
+			caseAppendable.decreaseIndentation();
+			caseAppendable.newLine().append("}");
 		}
 		if (expr.getDefault()!=null) {
-			b.newLine().append("if (!").append(matchedVariable).append(") {");
-			b.increaseIndentation();
+			ILocationData location = getLocationOfDefault(expr);
+			ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
+			defaultAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
+			defaultAppendable.increaseIndentation();
 			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getDefault());
-			internalToJavaStatement(expr.getDefault(), b, canBeReferenced);
+			internalToJavaStatement(expr.getDefault(), defaultAppendable, canBeReferenced);
 			if (canBeReferenced) {
-				b.newLine().append(switchResultName).append(" = ");
-				internalToConvertedExpression(expr.getDefault(), b, null);
-				b.append(";");
+				defaultAppendable.newLine().append(switchResultName).append(" = ");
+				internalToConvertedExpression(expr.getDefault(), defaultAppendable, null);
+				defaultAppendable.append(";");
 			}
-			b.decreaseIndentation();
-			b.newLine().append("}");
+			defaultAppendable.decreaseIndentation();
+			defaultAppendable.newLine().append("}");
 		}
 		b.closeScope(); // close the pseudo scope
+	}
+	
+	@Nullable
+	protected ILocationData getLocationOfDefault(XSwitchExpression expression) {
+		final ICompositeNode startNode = NodeModelUtils.getNode(expression);
+		List<INode> resultNodes = Lists.newArrayList();
+		boolean defaultSeen = false;
+		for (INode child : startNode.getChildren()) {
+			if (defaultSeen) {
+				resultNodes.add(child);
+				if (GrammarUtil.containingAssignment(child.getGrammarElement()) != null) {
+					break;
+				}
+			} else if (child.getGrammarElement() instanceof Keyword && "default".equals(child.getText())) {
+				defaultSeen = true;
+				resultNodes.add(child);
+			}
+		}
+		return toLocationData(resultNodes);
 	}
 
 	protected void _toJavaExpression(XSwitchExpression expr, ITreeAppendable b) {
