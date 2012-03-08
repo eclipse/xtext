@@ -160,6 +160,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testBigInteger_3() throws Exception {
 		assertEvaluatesTo(new BigInteger("77", 16), "0x77#bI");
 	}
+	
+	@Test public void testBigInteger_4() throws Exception {
+		assertEvaluatesTo(new BigInteger("1000000"), "10e+5bI");
+	}
+	
+	@Test public void testBigInteger_5() throws Exception {
+		assertEvaluatesTo(new BigDecimal("10e+12345").toBigInteger(), "10e+12345bI");
+	}
 
 	@Test public void testBigDecimal_0() throws Exception {
 		assertEvaluatesTo(new BigDecimal("1.0"), "1.0bd");
