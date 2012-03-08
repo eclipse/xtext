@@ -280,17 +280,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(false, expr);
 	}
 	
-	@Test public void testForLoop() throws Exception {
-		String expr = 
-			    "{\n" + 
-				"   val list = newArrayList('foo','bar','baz')\n" + 
-				"   for (x : list.reverse) {\n" + 
-				"	  x.toUpperCase\n" + 
-				"   }\nnull" + 
-				"}";
-		assertEvaluatesTo(null, expr);
-	}
-	
 	@Test public void testReferenceInnerClasses() throws Exception {
 		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass$InnerClass::SINGLETON");
 	}
@@ -1003,6 +992,66 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				" var result = 'foo'" +
 				" for( e : list) result = result + e" +
 				" result" +
+				"}");
+	}
+	
+	@Test public void testForLoop_06() throws Exception {
+		String expr = 
+			    "{\n" + 
+				"   val list = newArrayList('foo','bar','baz')\n" + 
+				"   for (x : list.reverse) {\n" + 
+				"	  x.toUpperCase\n" + 
+				"   }\n" +
+				"   null" + 
+				"}";
+		assertEvaluatesTo(null, expr);
+	}
+	
+	@Test public void testForLoop_07() throws Exception {
+		String expr = 
+			    "{\n" + 
+				"   val list = newArrayList('foo','bar','baz')\n" + 
+				"   for (String x : list.reverse) {\n" + 
+				"	  x.toUpperCase\n" + 
+				"   }\n" +
+				"   null" + 
+				"}";
+		assertEvaluatesTo(null, expr);
+	}
+	
+	@Test public void testForLoop_08() throws Exception {
+		assertEvaluatesTo(new Character('c'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  for(char x: 'abc'.toCharArray) result = x\n" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testForLoop_09() throws Exception {
+		assertEvaluatesTo(new Character('a'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  for(char x: 'abc'.toCharArray) if (result == null) result = x\n" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testForLoop_10() throws Exception {
+		assertEvaluatesTo(new Character('c'), 
+				"{\n" +
+				"  var char result\n" +
+				"  for(Character x: 'abc'.toCharArray) result = x\n" +
+				"  result" +
+				"}");
+	}
+	
+	@Test public void testForLoop_11() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1+2+3+4+5+6+7+8+9+10), 
+				"{\n" +
+				"  var int result\n" +
+				"  for(int i: 1..10) result = result + i\n" +
+				"  result" +
 				"}");
 	}
 	
