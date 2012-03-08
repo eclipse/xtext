@@ -12,7 +12,7 @@
   <rm:locator pattern="^org\.eclipse\.(?:xpand|xtend)(?:\..+)?$" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false"/>
   <rm:locator pattern="^com\.google(?:\..+)?$" searchPathRef="orbit"/>
-  <rm:locator pattern="^javax\.inject$" searchPathRef="orbit"/>
+  <rm:locator pattern="^javax\.inject(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.aopalliance$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.easymock$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.antlr\.runtime(?:\..+)?$" searchPathRef="orbit"/>
