@@ -189,7 +189,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getVarName(expr, b));
 	}
 
-	protected void _toJavaStatement(XTryCatchFinallyExpression expr, ITreeAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(XTryCatchFinallyExpression expr, ITreeAppendable outerAppendable, boolean isReferenced) {
+		ITreeAppendable b = outerAppendable.trace(expr, false);
 		if (isReferenced && !isPrimitiveVoid(expr)) {
 			declareSyntheticVariable(expr, b);
 		}
@@ -223,16 +224,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				serialize(type, expr, catchClauseAppendable);
 				catchClauseAppendable.append(") ").append("{");
 				catchClauseAppendable.increaseIndentation();
-				ITreeAppendable parameterAppendable = catchClauseAppendable.trace(catchClause.getDeclaredParam());
+				ITreeAppendable withDebugging = catchClauseAppendable.trace(catchClause, true);
+				ITreeAppendable parameterAppendable = withDebugging.trace(catchClause.getDeclaredParam());
 				parameterAppendable.newLine().append("final ");
 				serialize(type, expr, parameterAppendable);
 				parameterAppendable.append(" ");
 				parameterAppendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(name);
-				parameterAppendable.append(" = (");
-				serialize(type,expr,parameterAppendable);
-				parameterAppendable.append(")").append(variable).append(";");
+				withDebugging.append(" = (");
+				serialize(type, expr, withDebugging);
+				withDebugging.append(")").append(variable).append(";");
 				final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
-				internalToJavaStatement(catchClause.getExpression(), catchClauseAppendable, canBeReferenced);
+				internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
 				if (canBeReferenced) {
 					catchClauseAppendable.newLine().append(getVarName(expr, catchClauseAppendable)).append(" = ");
 					internalToConvertedExpression(catchClause.getExpression(), catchClauseAppendable, null);

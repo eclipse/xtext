@@ -160,6 +160,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testBigInteger_3() throws Exception {
 		assertEvaluatesTo(new BigInteger("77", 16), "0x77#bI");
 	}
+	
+	@Test public void testBigInteger_4() throws Exception {
+		assertEvaluatesTo(new BigInteger("1000000"), "10e+5bI");
+	}
+	
+	@Test public void testBigInteger_5() throws Exception {
+		assertEvaluatesTo(new BigDecimal("10e+12345").toBigInteger(), "10e+12345bI");
+	}
 
 	@Test public void testBigDecimal_0() throws Exception {
 		assertEvaluatesTo(new BigDecimal("1.0"), "1.0bd");
@@ -1265,6 +1273,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testSwitchExpression_17() throws Exception {
 		assertEvaluatesTo("literal", "switch new Object { Object : 'literal' }");
+	}
+	
+	@Test public void testSwitchExpression_18() throws Exception {
+		assertEvaluatesTo("literal", "switch (x : new Object) { Object : 'literal' }");
+	}
+	
+	@Test public void testSwitchExpression_19() throws Exception {
+		assertEvaluatesTo("foo", "switch (x : 'foo' as Object) { String : x }");
 	}
 	
 	@Test public void testCastedExpression_01() throws Exception {

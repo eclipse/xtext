@@ -285,11 +285,18 @@ ruleXIfExpression :
 
 // Rule XSwitchExpression
 ruleXSwitchExpression :
-	'switch' ( (
-	ruleValidID ':'
-	) => (
+	'switch' (
+		( (
 		ruleValidID ':'
-	) )? ruleXExpression '{' ruleXCasePart+ (
+		) => (
+			ruleValidID ':'
+		) )? ruleXExpression |
+		( (
+		'(' ruleValidID ':'
+		) => (
+			'(' ruleValidID ':'
+		) ) ruleXExpression ')'
+	) '{' ruleXCasePart+ (
 		'default' ':' ruleXExpression
 	)? '}'
 ;
