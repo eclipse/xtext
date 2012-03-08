@@ -162,9 +162,9 @@ public class XbaseEditor extends XtextEditor {
 				if (traceToSource != null) {
 					int line = getLineIfLineSelection(selectionStart, selectionLength);
 					if (line != -1) {
-						int startOffSetOfContents = getStartOffSetOfContentsInJava(line);
-						if (startOffSetOfContents != -1) {
-							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffSetOfContents, 0));
+						int startOffsetOfContents = getStartOffsetOfContentsInJava(line);
+						if (startOffsetOfContents != -1) {
+							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
 							if (bestSelection != null) {
 								final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
 								if (textRegion != null) {
@@ -243,7 +243,7 @@ public class XbaseEditor extends XtextEditor {
 		return -1;
 	}
 	
-	protected int getStartOffSetOfContentsInJava(int line) {
+	protected int getStartOffsetOfContentsInJava(int line) {
 		if (javaResource instanceof IStorage) {
 			try {
 				String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
@@ -251,7 +251,7 @@ public class XbaseEditor extends XtextEditor {
 				IRegion lineInformation = document.getLineInformation(line);
 				String lineText = document.get(lineInformation.getOffset(), lineInformation.getLength());
 				String contents = lineText.trim();
-				if (contents.isEmpty()) {
+				if (contents.length() == 0) {
 					log.warn("selection points to an empty line!", new IllegalStateException());
 					return -1;
 				}
