@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -384,18 +385,22 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 */
 	protected void _toJavaStatement(XForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getForExpression(), b, true);
-		b.newLine().append("for (final ");
+		b.newLine();
+		ITreeAppendable loopAppendable = b.trace(expr);
+		loopAppendable.append("for (");
+		ITreeAppendable parameterAppendable = loopAppendable.trace(expr.getDeclaredParam());
+		parameterAppendable.append("final ");
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
-		serialize(paramType,expr,b);
-		b.append(" ");
+		serialize(paramType, expr, parameterAppendable);
+		parameterAppendable.append(" ");
 		final String name = makeJavaIdentifier(expr.getDeclaredParam().getName());
-		String varName = b.declareVariable(expr.getDeclaredParam(), name);
-		b.append(varName);
-		b.append(" : ");
-		internalToJavaExpression(expr.getForExpression(), b);
-		b.append(") {").increaseIndentation();
-		internalToJavaStatement(expr.getEachExpression(), b, false);
-		b.decreaseIndentation().newLine().append("}");
+		String varName = loopAppendable.declareVariable(expr.getDeclaredParam(), name);
+		parameterAppendable.trace(expr.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(varName);
+		loopAppendable.append(" : ");
+		internalToJavaExpression(expr.getForExpression(), loopAppendable);
+		loopAppendable.append(") {").increaseIndentation();
+		internalToJavaStatement(expr.getEachExpression(), loopAppendable, false);
+		loopAppendable.decreaseIndentation().newLine().append("}");
 	}
 
 	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
