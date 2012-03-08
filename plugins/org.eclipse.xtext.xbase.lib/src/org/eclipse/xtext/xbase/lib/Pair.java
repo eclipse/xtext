@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.base.Objects;
+
 /**
  * An immutable pair of {@link #getKey() key} and {@link #getValue() value}. A pair is considered to be
  * {@link #equals(Object) equal} to another pair if both the key and the value are equal.
@@ -76,7 +78,7 @@ public final class Pair<K, V> {
 		if (!(o instanceof Pair))
 			return false;
 		Pair<?, ?> e = (Pair<?, ?>) o;
-		return ObjectExtensions.operator_equals(k, e.getKey()) && ObjectExtensions.operator_equals(v, e.getValue());
+		return Objects.equal(k, e.getKey()) && Objects.equal(v, e.getValue());
 	}
 
 	@Override
