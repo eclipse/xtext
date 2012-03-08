@@ -23,8 +23,13 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
@@ -44,6 +49,9 @@ public class TypeReferenceSerializer {
 	
 	@Inject 
 	private ILogicalContainerProvider contextProvider;
+	
+	@Inject
+	private ILocationInFileProvider locationProvider;
 	
 	public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
 		if (context == parameter.getDeclarator()) 
@@ -68,8 +76,10 @@ public class TypeReferenceSerializer {
 	
 	public void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
 		IAppendable tracedAppendable = appendable;
+		boolean tracing = false;
 		if (appendable instanceof ITreeAppendable && type.eResource() == context.eResource()) {
 			tracedAppendable = ((ITreeAppendable) appendable).trace(type);
+			tracing = true;
 		}
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
@@ -119,7 +129,16 @@ public class TypeReferenceSerializer {
 				}
 			}
 			JvmType jvmType = allowPrimitives ? type.getType() : primitives.asWrapperTypeIfPrimitive(type).getType();
-			tracedAppendable.append(jvmType);
+			if (tracing) {
+				ITextRegion region = locationProvider.getFullTextRegion(type, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, 0);
+				if (region instanceof ITextRegionWithLineInformation) {
+					((ITreeAppendable) tracedAppendable).trace(new LocationData((ITextRegionWithLineInformation) region, null, null)).append(jvmType);
+				} else {
+					tracedAppendable.append(jvmType);
+				}
+			} else {
+				tracedAppendable.append(jvmType);
+			}
 			if (!parameterized.getArguments().isEmpty()) {
 				tracedAppendable.append("<");
 				for(int i = 0; i < parameterized.getArguments().size(); i++) {
