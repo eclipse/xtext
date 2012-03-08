@@ -292,11 +292,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			@SuppressWarnings("unchecked")
 			EList<XtendParameter> params = (EList<XtendParameter>) param.eContainer().eGet(param.eContainingFeature());
 			if (param != Iterables.getLast(params)) {
-				error("Only the last parameter of might be a var-arg parameter.", param, XTEND_PARAMETER__VAR_ARG, INVALID_USE_OF_VAR_ARG);
+				error("A var arg must be the last parameter.", param, XTEND_PARAMETER__VAR_ARG, INVALID_USE_OF_VAR_ARG);
 			}
 		}
 	}
-
+	
 	@Check
 	public void checkClassPath(XtendClass clazz) {
 		final JvmGenericType listType = (JvmGenericType) getTypeRefs().findDeclaredType(List.class.getName(), clazz);
@@ -458,7 +458,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		}
 	}
-
+	
 	protected String typeLabel(JvmExecutable executable) {
 		if (executable instanceof JvmOperation) 
 			return "method";
