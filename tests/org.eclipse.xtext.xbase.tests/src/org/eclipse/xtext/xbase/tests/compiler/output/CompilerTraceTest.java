@@ -327,6 +327,101 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"((#new java.util.ArrayList<String>(5)#))");
 	}
 	
+	@Test
+	public void testMemberFeatureCall_01() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _string = \"\".toString();\n" + 
+				"String _string_1 = _string.#toString#();\n" + 
+				"return _string_1;", 
+				"''.toString.#toString#()");
+	}
+
+	@Test
+	public void testMemberFeatureCall_02() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _string = \"\".toS#tr#ing();\n" + 
+				"String _string_1 = _string.toString();\n" + 
+				"return _string_1;", 
+				"''.#toString#().toString");
+	}
+	
+	@Test
+	public void testMemberFeatureCall_03() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _string = \"\".toString();\n" + 
+				"String _string_1 = _stri#ng.to#String();\n" + 
+				"return _string_1;", 
+				"#''.toString.toString#");
+	}
+	
+	@Test
+	public void testMemberFeatureCall_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"St#ri#ng _string = \"\".toString();\n" + 
+				"String _string_1 = _string.toString();\n" + 
+				"return _string_1;", 
+				"#''.toString()#.toString");
+	}
+	
+	@Test
+	public void testForLoop_01() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"for (final int lo#o#p : _upTo) {\n" + 
+				"  Integer.valueOf(loop).toString();\n" + 
+				"}", 
+				"for(int #loop#: 1..2) loop.toString");
+	}
+	
+	@Test
+	public void testForLoop_02() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"for (final i#n#t loop : _upTo) {\n" + 
+				"  Integer.valueOf(loop).toString();\n" + 
+				"}", 
+				"for(#int# loop: 1..2) loop.toString");
+	}
+	
+	@Test
+	public void testForLoop_03() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"for (fi#n#al int loop : _upTo) {\n" + 
+				"  Integer.valueOf(loop).toString();\n" + 
+				"}", 
+				"for(#int loop#: 1..2) loop.toString");
+	}
+	
+	@Test
+	public void testForLoop_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Itera#ble<In#teger> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"for (final Integer loop : _upTo) {\n" + 
+				"  loop.toString();\n" + 
+				"}", 
+				"for(loop: #1..2#) loop.toString");
+	}
+	
+	@Test
+	public void testForLoop_05() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"f#o#r (final Integer loop : _upTo) {\n" + 
+				"  loop.toString();\n" + 
+				"}", 
+				"(( #for(loop: 1..2) (loop.toString)# ))");
+	}
+	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
 	@SuppressWarnings("null")
