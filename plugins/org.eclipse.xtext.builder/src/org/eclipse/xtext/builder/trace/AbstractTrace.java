@@ -105,8 +105,13 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 
 	@Nullable
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
-		AbstractTraceRegion left = findTraceRegionAtLeftOffset(region.getOffset());
 		AbstractTraceRegion right = findTraceRegionAtRightOffset(region.getOffset() + region.getLength());
+		if (right != null && encloses(right, region.getOffset(), true)) {
+			if (right.getMyOffset() + right.getMyLength() == region.getOffset() + region.getLength())
+				return getMergedLocationInResource(right);
+		}
+		
+		AbstractTraceRegion left = findTraceRegionAtLeftOffset(region.getOffset());
 		return mergeRegions(left, right);
 	}
 
