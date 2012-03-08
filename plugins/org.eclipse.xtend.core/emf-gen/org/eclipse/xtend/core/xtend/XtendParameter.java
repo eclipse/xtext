@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#getParameterType <em>Parameter Type</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#isVarArg <em>Var Arg</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,31 @@ public interface XtendParameter extends XtendAnnotationTarget
 	 * @generated
 	 */
 	void setParameterType(JvmTypeReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Var Arg</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Var Arg</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Var Arg</em>' attribute.
+	 * @see #setVarArg(boolean)
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendParameter_VarArg()
+	 * @model
+	 * @generated
+	 */
+	boolean isVarArg();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendParameter#isVarArg <em>Var Arg</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Var Arg</em>' attribute.
+	 * @see #isVarArg()
+	 * @generated
+	 */
+	void setVarArg(boolean value);
 
 } // XtendParameter

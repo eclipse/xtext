@@ -1407,7 +1407,7 @@ public class AbstractXtendSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (annotations+=XAnnotation* parameterType=JvmTypeReference name=ValidID)
+	 *     (annotations+=XAnnotation* parameterType=JvmTypeReference varArg?='...'? name=ValidID)
 	 */
 	protected void sequence_Parameter(EObject context, XtendParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

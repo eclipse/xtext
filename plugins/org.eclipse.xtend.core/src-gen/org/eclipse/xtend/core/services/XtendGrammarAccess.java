@@ -963,14 +963,16 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAnnotationsXAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
 		private final Assignment cParameterTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cParameterTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cParameterTypeAssignment_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cVarArgAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cVarArgFullStopFullStopFullStopKeyword_2_0 = (Keyword)cVarArgAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameValidIDParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//Parameter returns XtendParameter:
-		//	annotations+=XAnnotation* parameterType=JvmTypeReference name=ValidID;
+		//	annotations+=XAnnotation* parameterType=JvmTypeReference varArg?="..."? name=ValidID;
 		public ParserRule getRule() { return rule; }
 
-		//annotations+=XAnnotation* parameterType=JvmTypeReference name=ValidID
+		//annotations+=XAnnotation* parameterType=JvmTypeReference varArg?="..."? name=ValidID
 		public Group getGroup() { return cGroup; }
 
 		//annotations+=XAnnotation*
@@ -985,11 +987,17 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//JvmTypeReference
 		public RuleCall getParameterTypeJvmTypeReferenceParserRuleCall_1_0() { return cParameterTypeJvmTypeReferenceParserRuleCall_1_0; }
 
+		//varArg?="..."?
+		public Assignment getVarArgAssignment_2() { return cVarArgAssignment_2; }
+
+		//"..."
+		public Keyword getVarArgFullStopFullStopFullStopKeyword_2_0() { return cVarArgFullStopFullStopFullStopKeyword_2_0; }
+
 		//name=ValidID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
+		public RuleCall getNameValidIDParserRuleCall_3_0() { return cNameValidIDParserRuleCall_3_0; }
 	}
 
 	public class XStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -1683,7 +1691,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Parameter returns XtendParameter:
-	//	annotations+=XAnnotation* parameterType=JvmTypeReference name=ValidID;
+	//	annotations+=XAnnotation* parameterType=JvmTypeReference varArg?="..."? name=ValidID;
 	public ParameterElements getParameterAccess() {
 		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
 	}

@@ -395,6 +395,9 @@
         <elements xsi:type="xtext:Assignment" feature="parameterType" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
         </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="varArg" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="..."/>
+        </elements>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         </elements>

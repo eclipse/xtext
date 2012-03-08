@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -293,6 +294,26 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testParameterTypeMayNotBeVoid() throws Exception {
 		XtendFunction function = function("def void foo(void myParam) { }");
 		helper.assertError(function, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
+	}
+	
+	@Test public void testVarArgMustBeLast_0() throws Exception {
+		XtendFunction function = function("def void foo(String... myParam, String x) { }");
+		helper.assertError(function, XtendPackage.Literals.XTEND_PARAMETER, INVALID_USE_OF_VAR_ARG);
+	}
+	
+	@Test public void testVarArgMustBeLast_1() throws Exception {
+		XtendConstructor constr = constructor("new(String... myParam, String x) { }");
+		helper.assertError(constr, XtendPackage.Literals.XTEND_PARAMETER, INVALID_USE_OF_VAR_ARG);
+	}
+	
+	@Test public void testVarArgMustBeLast_2() throws Exception {
+		XtendConstructor constr = constructor("new(String... myParam) { }");
+		helper.assertNoErrors(constr);
+	}
+	
+	@Test public void testVarArgMustBeLast_3() throws Exception {
+		XtendConstructor constr = constructor("new(int x, String... myParam) { }");
+		helper.assertNoErrors(constr);
 	}
 	
 	@Test public void testCreateMayNotReturnVoid() throws Exception {

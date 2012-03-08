@@ -679,6 +679,16 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXtendParameter_VarArg()
+	{
+		return (EAttribute)xtendParameterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRichString()
 	{
 		return richStringEClass;
@@ -997,6 +1007,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendParameterEClass = createEClass(XTEND_PARAMETER);
 		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__NAME);
 		createEReference(xtendParameterEClass, XTEND_PARAMETER__PARAMETER_TYPE);
+		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__VAR_ARG);
 
 		richStringEClass = createEClass(RICH_STRING);
 
@@ -1137,6 +1148,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEClass(xtendParameterEClass, XtendParameter.class, "XtendParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendParameter_ParameterType(), theTypesPackage.getJvmTypeReference(), null, "parameterType", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendParameter_VarArg(), ecorePackage.getEBoolean(), "varArg", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(richStringEClass, RichString.class, "RichString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

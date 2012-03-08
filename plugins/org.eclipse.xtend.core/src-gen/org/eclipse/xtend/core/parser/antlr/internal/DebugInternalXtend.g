@@ -115,7 +115,7 @@ ruleValidID :
 
 // Rule Parameter
 ruleParameter :
-	ruleXAnnotation* ruleJvmTypeReference ruleValidID
+	ruleXAnnotation* ruleJvmTypeReference '...'? ruleValidID
 ;
 
 // Rule XStringLiteral

@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDepen
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Test;
 
@@ -200,6 +201,21 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  new(int i) { this.i = i } " +
 				"  def static invokeMe() { j = 47 new Y().i }";
 		invokeAndExpectStatic(Integer.valueOf(94), code, "invokeMe");
+	}
+	@Test public void testDeclaredConstructorWithVarArgs() throws Exception {
+		String code = 
+				"int a " +
+				"int b " +
+				"new() { this(1,2) } " +
+				"new(int... i) { " +
+				"  this.a = i.get(0) " +
+				"  this.b = i.get(1) " +
+				"} " +
+						"  def static invokeMe() { " +
+						"    val x = new Y() " +
+						"    return x.a -> x.b" +
+						"}";
+		invokeAndExpectStatic(Pair.of(1, 2), code, "invokeMe");
 	}
 	
 	@Test public void testBug362236_01() throws Exception {
@@ -2694,6 +2710,15 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testStaticFieldDynamicCall() throws Exception {
 		invokeAndExpect2(42, "static int bar def foo() { bar = 42; bar }", "foo");
 	}
-
-
+	
+	@Test public void testVarArgs() throws Exception {
+		invokeAndExpect2("[FOO, BAR, BAZ]", 
+				"def String foo() {" +
+				"  foo('foo','bar','baz')" +
+				"}" +
+				"def String foo(String ... s) { " +
+				"  s.map[toUpperCase].toString" +
+				"}", "foo");
+	}
+	
 }
