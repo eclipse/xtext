@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -113,22 +112,18 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 
 	private ITextRegion getTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList,
 			final boolean isSignificant) {
-		return new EcoreSwitch<ITextRegion>() {
-			@Override
-			public ITextRegion caseEAttribute(EAttribute feature) {
-				return getLocationOfAttribute(owner, feature, indexInList, isSignificant);
+		if (feature instanceof EAttribute) {
+			return getLocationOfAttribute(owner, (EAttribute)feature, indexInList, isSignificant);
+		} else if (feature instanceof EReference) {
+			EReference reference = (EReference) feature;
+			if (reference.isContainment() || reference.isContainer()) {
+				return getLocationOfContainmentReference(owner, reference, indexInList, isSignificant);
+			} else {
+				return getLocationOfCrossReference(owner, reference, indexInList, isSignificant);
 			}
-
-			@Override
-			public ITextRegion caseEReference(EReference feature) {
-				if (feature.isContainment() || feature.isContainer()) {
-					return getLocationOfContainmentReference(owner, feature, indexInList, isSignificant);
-				} else {
-					return getLocationOfCrossReference(owner, feature, indexInList, isSignificant);
-				}
-			}
-
-		}.doSwitch(feature);
+		} else {
+			return null;
+		}
 	}
 	
 	private ITextRegion doGetTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList,
