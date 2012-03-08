@@ -400,11 +400,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"class");
 	}
 
-//	@Test public void testCast_0() throws Exception {
-//		XExpression expression = expression("'foo' as String");
-//		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
-//		helper.assertNoError(expression, INVALID_CAST);
-//	}
+	@Test @Ignore public void testCast_0() throws Exception {
+		XExpression expression = expression("'foo' as String");
+		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
+		helper.assertNoError(expression, INVALID_CAST);
+	}
 
 	@Test public void testCast_1() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
@@ -418,11 +418,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 	
-	//TODO fix me - see https://bugs.eclipse.org/bugs/show_bug.cgi?id=364931
+	@Ignore("FIXME see https://bugs.eclipse.org/bugs/show_bug.cgi?id=364931")
 	@Test public void testCast_3() throws Exception {
-//		XExpression expression = expression("new java.util.ArrayList<String>() as java.util.List<Object>");
-//		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
-//		helper.assertNoError(expression, OBSOLETE_CAST);
+		XExpression expression = expression("new java.util.ArrayList<String>() as java.util.List<Object>");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
+		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 
 	@Test public void testInstanceOf_0() throws Exception {
