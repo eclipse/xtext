@@ -486,7 +486,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmTypeReference argument = typeRefs.wildCard();
 			JvmTypeReference expected = obj.getDeclaredParam().getParameterType();
 			if (expected != null) {
-				argument = typeRefs.wildCardExtends(EcoreUtil2.cloneIfContained(expected));
+				if (typeRefs.is(expected, Void.TYPE)) {
+					// see #checkTypeReferenceIsNotVoid
+					return;
+				}
+				argument = typeRefs.wildCardExtends(EcoreUtil2.cloneIfContained(primitives.asWrapperTypeIfPrimitive(expected)));
 			}
 			JvmTypeReference expectedType = typeRefs.createTypeRef(iterable, argument);
 			if (!conformanceComputer.isConformant(expectedType, actualType))
