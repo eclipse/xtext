@@ -18,6 +18,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ide.ResourceUtil;
@@ -29,7 +32,9 @@ import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
+import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -155,23 +160,44 @@ public class XbaseEditor extends XtextEditor {
 			try {
 				ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
 				if (traceToSource != null) {
-					ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
-					if (bestSelection != null) {
-						ILocationInResource bestReveal = bestSelection;
-						if (selectionStart != revealStart || selectionLength != revealLength) {
-							bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
-							if (bestReveal == null) {
-								bestReveal = bestSelection;
+					int line = getLineIfLineSelection(selectionStart, selectionLength);
+					if (line != -1) {
+						int startOffSetOfContents = getStartOffSetOfContentsInJava(line);
+						if (startOffSetOfContents != -1) {
+							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffSetOfContents, 0));
+							if (bestSelection != null) {
+								final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
+								if (textRegion != null) {
+									int lineToSelect = textRegion.getLineNumber();
+									try {
+										IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
+										super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
+										return;
+									} catch (BadLocationException e) {
+										log.error(e);
+									}
+								}
 							}
 						}
-						ITextRegion fixedSelection = bestSelection.getTextRegion();
-						if (fixedSelection != null) {
-							ITextRegion fixedReveal = bestReveal.getTextRegion();
-							if (fixedReveal == null) {
-								fixedReveal = fixedSelection;
+					} else {
+						ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
+						if (bestSelection != null) {
+							ILocationInResource bestReveal = bestSelection;
+							if (selectionStart != revealStart || selectionLength != revealLength) {
+								bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
+								if (bestReveal == null) {
+									bestReveal = bestSelection;
+								}
 							}
-							super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
-							return;
+							ITextRegion fixedSelection = bestSelection.getTextRegion();
+							if (fixedSelection != null) {
+								ITextRegion fixedReveal = bestReveal.getTextRegion();
+								if (fixedReveal == null) {
+									fixedReveal = fixedSelection;
+								}
+								super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
+								return;
+							}
 						}
 					}
 				}
@@ -182,6 +208,62 @@ public class XbaseEditor extends XtextEditor {
 		super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);
 	}
 	
+	/**
+	 * checks whether the selection corresponds exactly to a line in either the xtext source
+	 * or the java source. In case of a match the line is interpreted as the java source line to be selected.
+	 * 
+	 * This is because {@link org.eclipse.jdt.internal.junit.ui.OpenEditorAtLineAction#reveal(ITextEditor)} uses the xtext editor
+	 * to compute the range for the java source line.
+	 * 
+	 * @return the line number in case of exact match, -1 otherwise
+	 */
+	protected int getLineIfLineSelection(int selectionStart, int selectionLength) {
+		// if called from junit selections might point to current editor's document
+		try {
+			int line = getDocument().getLineOfOffset(selectionStart);
+			IRegion information = getDocument().getLineInformation(line);
+			if (information.getOffset() == selectionStart && information.getLength()+1 == selectionLength) {
+				return line;
+			}
+		} catch (BadLocationException e) {} //ignore
+		// check whether java source
+		if (javaResource instanceof IStorage) {
+			try {
+				String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+				final Document document = new Document(string);
+				int line = document.getLineOfOffset(selectionStart);
+				final IRegion lineInformation = document.getLineInformation(line);
+				if (lineInformation.getOffset() == selectionStart && lineInformation.getLength() == selectionLength) {
+					return line;
+				}
+			} catch (Exception e) {
+				return -1;
+			}
+		}
+		return -1;
+	}
+	
+	protected int getStartOffSetOfContentsInJava(int line) {
+		if (javaResource instanceof IStorage) {
+			try {
+				String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+				final Document document = new Document(string);
+				IRegion lineInformation = document.getLineInformation(line);
+				String lineText = document.get(lineInformation.getOffset(), lineInformation.getLength());
+				String contents = lineText.trim();
+				if (contents.isEmpty()) {
+					log.warn("selection points to an empty line!", new IllegalStateException());
+					return -1;
+				}
+				int contentsStarts = lineText.indexOf(contents);
+				return lineInformation.getOffset() + contentsStarts;
+			} catch (Exception e) {
+				return -1;
+			}
+		}
+		return -1;
+	}
+
 	@Override
 	public void reveal(int offset, int length) {
 		/* 
