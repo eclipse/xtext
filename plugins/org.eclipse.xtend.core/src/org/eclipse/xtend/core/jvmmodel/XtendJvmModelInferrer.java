@@ -34,6 +34,7 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -276,12 +277,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		operation.setVisibility(visibility);
 		operation.setStatic(source.isStatic());
 		for (XtendParameter parameter : source.getParameters()) {
-			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
-			jvmParam.setName(parameter.getName());
-			jvmParam.setParameterType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
-			operation.getParameters().add(jvmParam);
-			associator.associate(parameter, jvmParam);
-			jvmTypesBuilder.translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
+			translateParameter(operation, parameter);
 		}
 		JvmTypeReference returnType = null;
 		if (source.getReturnType() != null) {
@@ -340,6 +336,21 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(source));
 	}
+
+	protected void translateParameter(JvmExecutable executable, XtendParameter parameter) {
+		JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
+		jvmParam.setName(parameter.getName());
+		if (parameter.isVarArg()) {
+			executable.setVarArgs(true);
+			JvmGenericArrayTypeReference arrayType = typeReferences.createArrayType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
+			jvmParam.setParameterType(arrayType);
+		} else {
+			jvmParam.setParameterType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
+		}
+		associator.associate(parameter, jvmParam);
+		jvmTypesBuilder.translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
+		executable.getParameters().add(jvmParam);
+	}
 	
 	protected void transform(XtendConstructor source, JvmGenericType container) {
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
@@ -349,11 +360,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		constructor.setSimpleName(container.getSimpleName());
 		constructor.setVisibility(visibility);
 		for (XtendParameter parameter : source.getParameters()) {
-			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
-			jvmParam.setName(parameter.getName());
-			jvmParam.setParameterType(jvmTypesBuilder.cloneWithProxies(parameter.getParameterType()));
-			constructor.getParameters().add(jvmParam);
-			associator.associate(parameter, jvmParam);
+			translateParameter(constructor, parameter);
 		}
 		copyAndFixTypeParameters(source.getTypeParameters(), constructor);
 		for(JvmTypeReference exception: source.getExceptions()) {
