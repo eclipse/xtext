@@ -20,6 +20,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -72,7 +74,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	 * @since 2.3
 	 */
 	protected ITextRegion doGetTextRegion(EObject obj, @NonNull RegionDescription query) {
-		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
+		ICompositeNode node = findNodeFor(obj);
 		if (node == null) {
 			if (obj.eContainer() == null)
 				return ITextRegion.EMPTY_REGION;
@@ -210,7 +212,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 		}
 
 		List<INode> resultNodes = Lists.newArrayList();
-		final ICompositeNode startNode = NodeModelUtils.getNode(obj);
+		final ICompositeNode startNode = findNodeFor(obj);
 		INode keywordNode = null;
 		// use LeafNodes instead of children?
 		for (INode child : startNode.getChildren()) {
@@ -298,5 +300,32 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	
 	protected boolean isHidden(INode node) {
 		return node instanceof ILeafNode && ((ILeafNode) node).isHidden();
+	}
+	
+
+	/**
+	 * Returns the smallest node that covers all assigned values of the given object. It handles the semantics of {@link Action
+	 * actions} and {@link RuleCall unassigned rule calls}.
+	 * 
+	 * @return the minimal node that covers all assigned values of the given object.
+	 * @since 2.3
+	 */
+	protected ICompositeNode findNodeFor(EObject semanticObject) {
+		ICompositeNode result = NodeModelUtils.getNode(semanticObject);
+		if (result != null) {
+			ICompositeNode node = result;
+			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
+				ICompositeNode parent = node.getParent();
+				if (node.hasSiblings()) {
+					for(INode sibling: parent.getChildren()) {
+						if (GrammarUtil.containingAssignment(sibling.getGrammarElement()) != null) {
+							result = parent;
+						}
+					}
+				}
+				node = parent;
+			}
+		}
+		return result;
 	}
 }

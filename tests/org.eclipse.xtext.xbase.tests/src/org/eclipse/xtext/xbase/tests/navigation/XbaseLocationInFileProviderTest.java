@@ -79,6 +79,14 @@ public class XbaseLocationInFileProviderTest extends AbstractXbaseTestCase {
 		assertEquals(text.substring(text.indexOf('>') + 1), significant);
 	}
 	
+	@Test public void testFeatureCall_05() throws Exception {
+		String text = "((newArrayList('a')))";
+		XFeatureCall featureCall = castedExpression(text);
+		ITextRegion region = locationInFileProvider.getFullTextRegion(featureCall);
+		String textRegion = text.substring(region.getOffset(), region.getOffset() + region.getLength());
+		assertEquals("newArrayList('a')", textRegion);
+	}
+	
 	@Test public void testStaticFeatureCall_01() throws Exception {
 		String text = "String::<Invalid>valueOf('a')";
 		XFeatureCall featureCall = castedExpression(text);

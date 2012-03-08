@@ -85,7 +85,7 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 	protected List<INode> getLocationNodes(EObject obj) {
 		if (obj instanceof XMemberFeatureCall || obj instanceof XAssignment || obj instanceof XFeatureCall) {
 			List<INode> resultNodes = Lists.newArrayList();
-			final ICompositeNode startNode = NodeModelUtils.getNode(obj);
+			final ICompositeNode startNode = findNodeFor(obj);
 			boolean crossRefConsumed = false;
 			for (INode child : startNode.getChildren()) {
 				if (crossRefConsumed) {
