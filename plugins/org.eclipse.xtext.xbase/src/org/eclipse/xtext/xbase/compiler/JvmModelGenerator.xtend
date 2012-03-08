@@ -56,6 +56,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 import org.eclipse.xtext.generator.trace.LocationData
 import org.eclipse.xtext.resource.ILocationInFileProviderExtension
 import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 
 /**
  * A generator implementation that processes the 
@@ -395,19 +396,26 @@ class JvmModelGenerator implements IGenerator {
 	
 	def void generateParameters(JvmExecutable it, ITreeAppendable appendable) {
 		if (!parameters.isEmpty) {
-			parameters.head.generateParameter(appendable)
-			parameters.tail.forEach[
-				appendable.append(", ")
-				generateParameter(appendable)
-			]
+			for (i : 0..parameters.size-1) {
+				val last = i+1 == parameters.size
+				val p = parameters.get(i)
+				p.generateParameter(appendable, last && it.varArgs)
+				if (!last)
+					appendable.append(", ")
+			}
 		}
 	}
 	
-	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable) {
+	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable, boolean vararg) {
 		val tracedAppendable = appendable.trace(it)
 		generateAnnotations(tracedAppendable, false)
 		tracedAppendable.append("final ")
-		parameterType.serialize(tracedAppendable)
+		if (vararg) {
+			(parameterType as JvmGenericArrayTypeReference).componentType.serialize(tracedAppendable)
+			tracedAppendable.append("...");
+		} else {
+			parameterType.serialize(tracedAppendable)
+		}
 		tracedAppendable.append(" ")
 		val name = tracedAppendable.declareVariable(it, makeJavaIdentifier(simpleName))
 		tracedAppendable.traceSignificant(it).append(name)
