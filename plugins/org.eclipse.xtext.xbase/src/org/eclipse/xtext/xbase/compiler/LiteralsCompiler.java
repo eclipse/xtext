@@ -106,13 +106,68 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	public void _toJavaExpression(XNumberLiteral expr, ITreeAppendable b) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		if(getTypeReferences().is(type, BigInteger.class)) {
-			b.append("new ").append(type.getType()).append("(\"")
-				.append(numberLiterals.getDigits(expr)).append("\", ")
-				.append("" + numberLiterals.getBase(expr))
-				.append(")");
-		} else if(getTypeReferences().is(type, BigDecimal.class)) {			
-			b.append("new ").append(type.getType()).append("(\"")
-				.append(numberLiterals.getDigits(expr)).append("\")");
+			BigInteger value = numberLiterals.toBigInteger(expr);
+			if (BigInteger.ZERO.equals(value)) {
+				b.append(type.getType()).append(".ZERO");
+			} else if (BigInteger.ONE.equals(value)) {
+				b.append(type.getType()).append(".ONE");
+			} else if (BigInteger.TEN.equals(value)) {
+				b.append(type.getType()).append(".TEN");
+			} else {
+				long longValue = value.longValue();
+				int base = numberLiterals.getBase(expr); 
+				if (base == 10 && BigInteger.valueOf(longValue).equals(value)) {
+					b.append(type.getType()).append(".valueOf(").append(Long.toString(longValue)).append("L)");
+				} else {
+					String digits = numberLiterals.getDigits(expr);
+					String exponent = numberLiterals.getExponent(digits);
+					if (exponent != null) {
+						if (exponent.length() == 1) {
+							exponent = null;
+							digits = value.toString(base);
+						} else {
+							int e = digits.indexOf('e');
+							if (e == -1) {
+								e = digits.indexOf('E');
+							}
+							digits = digits.substring(0, e);
+						}
+					}
+					b.append("new ").append(type.getType()).append("(\"")
+						.append(digits).append("\"");
+					if (base != 10) {
+						b.append(", ").append(Integer.toString(base));
+					}
+					b.append(")");
+					if (exponent != null) {
+						int exponentAsInt = Integer.parseInt(exponent, base);
+						String exponentAsString = null;
+						if (base == 16) {
+							exponentAsString = "0x" + Integer.toString(exponentAsInt, base);
+						} else {
+							exponentAsString = Integer.toString(exponentAsInt);
+						}
+						b.append(".multiply(").append(type.getType()).append(".TEN.pow(").append(exponentAsString).append("))");
+					}
+				}
+			}
+		} else if(getTypeReferences().is(type, BigDecimal.class)) {
+			BigDecimal value = numberLiterals.toBigDecimal(expr);
+			if (BigDecimal.ZERO.equals(value)) {
+				b.append(type.getType()).append(".ZERO");
+			} else if (BigDecimal.ONE.equals(value)) {
+				b.append(type.getType()).append(".ONE");
+			} else if (BigDecimal.TEN.equals(value)) {
+				b.append(type.getType()).append(".TEN");
+			} else {
+				long longValue = value.longValue();
+				if (numberLiterals.getBase(expr) == 10 && BigDecimal.valueOf(longValue).equals(value)) {
+					b.append(type.getType()).append(".valueOf(").append(Long.toString(longValue)).append("L)");
+				} else {
+					b.append("new ").append(type.getType()).append("(\"")
+						.append(numberLiterals.getDigits(expr)).append("\")");
+				}
+			}
 		} else {
 			b.append(numberLiterals.toJavaLiteral(expr));
 		}
@@ -153,15 +208,11 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XBooleanLiteral
 			|| expr instanceof XStringLiteral
+			|| expr instanceof XNumberLiteral
 			|| expr instanceof XTypeLiteral
 			|| expr instanceof XClosure
 			|| expr instanceof XNullLiteral)
 			return false;
-		if(expr instanceof XNumberLiteral) {
-			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
-			return getTypeReferences().is(expectedType, BigInteger.class) ||
-					getTypeReferences().is(expectedType, BigDecimal.class);
-		}
 		return super.isVariableDeclarationRequired(expr,b);
 	}
 }
