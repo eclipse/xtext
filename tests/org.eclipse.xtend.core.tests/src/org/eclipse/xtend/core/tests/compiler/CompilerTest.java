@@ -210,11 +210,11 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"new(int... i) { " +
 				"  this.a = i.get(0) " +
 				"  this.b = i.get(1) " +
-				"} " +
-						"  def static invokeMe() { " +
-						"    val x = new Y() " +
-						"    return x.a -> x.b" +
-						"}";
+				"}" +
+				"def static invokeMe() { " +
+				"  val x = new Y() " +
+				"  return x.a -> x.b" +
+				"}";
 		invokeAndExpectStatic(Pair.of(1, 2), code, "invokeMe");
 	}
 	
