@@ -1275,6 +1275,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("literal", "switch new Object { Object : 'literal' }");
 	}
 	
+	@Test public void testSwitchExpression_18() throws Exception {
+		assertEvaluatesTo("literal", "switch (x : new Object) { Object : 'literal' }");
+	}
+	
+	@Test public void testSwitchExpression_19() throws Exception {
+		assertEvaluatesTo("foo", "switch (x : 'foo' as Object) { String : x }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
