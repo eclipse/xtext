@@ -466,7 +466,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 					EObject semanticElement = NodeModelUtils.findActualSemanticObjectFor(node);
 					if (semanticElement != null) {
 						ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(semanticElement);
-						if (actualNode.getTotalOffset() < node.getTotalOffset() || actualNode.getTotalEndOffset() > node.getTotalEndOffset())
+						if (actualNode != null && (actualNode.getTotalOffset() < node.getTotalOffset() || actualNode.getTotalEndOffset() > node.getTotalEndOffset()))
 							process = false;
 					}
 					if (process) {

@@ -133,21 +133,23 @@ public class EObjectAtOffsetHelper {
 
 	protected EObject resolveCrossReferencedElement(INode node) {
 		EObject referenceOwner = NodeModelUtils.findActualSemanticObjectFor(node);
-		EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
-				referenceOwner.eClass());
-		if (!crossReference.isMany()) {
-			return (EObject) referenceOwner.eGet(crossReference);
-		} else {
-			List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
-			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(referenceOwner, crossReference);
-			int currentIndex = 0;
-			for (INode nodeForFeature : nodesForFeature) {
-				if (currentIndex >= listValue.size())
-					return null;
-				if (nodeForFeature.getTotalOffset() <= node.getTotalOffset()
-						&& nodeForFeature.getTotalEndOffset() >= node.getTotalEndOffset())
-					return (EObject) listValue.get(currentIndex);
-				currentIndex++;
+		if (referenceOwner != null) {
+			EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
+					referenceOwner.eClass());
+			if (!crossReference.isMany()) {
+				return (EObject) referenceOwner.eGet(crossReference);
+			} else {
+				List<?> listValue = (List<?>) referenceOwner.eGet(crossReference);
+				List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(referenceOwner, crossReference);
+				int currentIndex = 0;
+				for (INode nodeForFeature : nodesForFeature) {
+					if (currentIndex >= listValue.size())
+						return null;
+					if (nodeForFeature.getTotalOffset() <= node.getTotalOffset()
+							&& nodeForFeature.getTotalEndOffset() >= node.getTotalEndOffset())
+						return (EObject) listValue.get(currentIndex);
+					currentIndex++;
+				}
 			}
 		}
 		return null;

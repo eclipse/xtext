@@ -132,6 +132,9 @@ public class Serializer implements ISerializer {
 
 	public ReplaceRegion serializeReplacement(EObject obj, SaveOptions options) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
+		if (node == null) {
+			throw new IllegalStateException("Cannot replace an obj that has no associated node");
+		}
 		String text = serialize(obj);
 		return new ReplaceRegion(node.getTotalOffset(), node.getTotalLength(), text);
 	}
