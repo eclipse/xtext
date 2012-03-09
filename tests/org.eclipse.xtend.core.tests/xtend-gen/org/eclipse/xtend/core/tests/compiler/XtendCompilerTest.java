@@ -2419,6 +2419,52 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testExtensionField() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class NoNPE {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension String");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def useExtension() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("_string.toString");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class NoNPE {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String _string;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String useExtension() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _string = this._string.toString();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _string;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
