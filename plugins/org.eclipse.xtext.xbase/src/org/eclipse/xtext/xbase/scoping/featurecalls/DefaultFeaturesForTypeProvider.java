@@ -37,6 +37,12 @@ public class DefaultFeaturesForTypeProvider extends AbstractFeaturesForTypeProvi
 		return doGetFeaturesByName(name, declarator, hierarchy);
 	}
 	
+	/**
+	 * @param name the name of the requested feature. May be <code>null</code>.
+	 * @param declarator the feature declarator. Never <code>null</code>.
+	 * @param hierarchy the type hierarchy of {@code declarator}. May be explored by custom implementations for whatever purpose.
+	 * @return the matching features. Never <code>null</code>.
+	 */
 	protected Iterable<JvmFeature> doGetFeaturesByName(String name, JvmTypeReference declarator,
 			Iterable<JvmTypeReference> hierarchy) {
 		if (declarator == null)

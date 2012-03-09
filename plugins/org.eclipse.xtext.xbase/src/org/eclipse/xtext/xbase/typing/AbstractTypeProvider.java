@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
@@ -276,9 +277,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return param.getDeclarator() == declarator;
 	}
 	
-//	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
-//			"_type", 2, 2, this);
-
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		throw new IllegalArgumentException("Type computation is not implemented for " + expression);
 	}
@@ -362,13 +364,22 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return doGetType("getType", Tuples.create(expression, rawExpectation), rawType, getType);
 	}
 
+	/**
+	 * Allows to handle cyclic type resolution.
+	 * @param expression the expression that was asked reentrant for its type.
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference handleCyclicGetType(final XExpression expression, JvmTypeReference rawExpectation, boolean rawType) {
 		return null;
 	}
 
-//	private final PolymorphicDispatcher<JvmTypeReference> expectedTypeDispatcher = PolymorphicDispatcher
-//			.createForSingleTarget("_expectedType", 4, 4, this);
-
+	/**
+	 * @param container the container that owns the expression that may have a type expectation. 
+	 * @param reference the reference that can be used to obtain the expression with a type expectation.
+	 * @param index the index if {@code reference} is a {@link EStructuralFeature#isMany() multi value} feature.
+	 * @param rawType <code>true</code> if we are only interested in the type parameter.
+	 */
 	protected JvmTypeReference _expectedType(EObject container, EReference reference, int index, boolean rawType) {
 		return null;
 	}
@@ -406,6 +417,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return doGetType("getExpectedType", expression, rawType, getExpectedType);
 	}
 
+	/**
+	 * Allows to handle cyclic resolution of expected types.
+	 * @param expression the expression that was asked reentrant for its expected type.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference handleCycleGetExpectedType(XExpression expression, boolean rawType) {
 		return null;
 	}
@@ -425,9 +441,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return triple;
 	}
 
-//	private final PolymorphicDispatcher<JvmTypeReference> typeForIdentifiableDispatcher = PolymorphicDispatcher
-//			.createForSingleTarget("_typeForIdentifiable", 2, 2, this);
-
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the type parameter.
+	 */
 	protected JvmTypeReference _typeForIdentifiable(JvmIdentifiableElement identifiable, boolean rawType) {
 		throw new IllegalArgumentException("Type computation is not implemented for " + identifiable);
 	}
@@ -461,6 +477,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return doGetType("getTypeForIdentifiable", identifiableElement, rawType, getTypeForIdentifiable);
 	}
 
+	/**
+	 * Allows to handle cyclic resolution of types.
+	 * @param identifiableElement the element that was asked reentrant for its type.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference handleCycleGetTypeForIdentifiable(JvmIdentifiableElement identifiableElement, boolean rawType) {
 		return null;
 	}
@@ -528,9 +549,19 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		acceptor.thrown.addAll(child.thrown);
 	}
 	
+	/**
+	 * Computes early exits of {@code null}.
+	 * @param expr always {@code null}. 
+	 * @param a the collector of the early exit result.
+	 */
 	protected void _earlyExits(Void expr, EarlyExitAcceptor a) {
 	}
 	
+	/**
+	 * Computes early exits of type references.
+	 * @param ref the type reference. 
+	 * @param a the collector of the early exit result.
+	 */
 	protected void _earlyExits(JvmTypeReference ref, EarlyExitAcceptor a) {
 	}
 	

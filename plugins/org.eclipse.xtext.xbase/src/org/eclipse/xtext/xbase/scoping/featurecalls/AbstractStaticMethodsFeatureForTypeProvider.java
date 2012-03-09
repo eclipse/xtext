@@ -117,10 +117,8 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 		return result.asMap();
 	}
 	
-	protected Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(
-			Iterable<JvmTypeReference> hierarchy) {
-		throw new UnsupportedOperationException();
-	}
+	protected abstract Map<JvmTypeReference, Collection<String>> getVisibleTypesContainingStaticMethods(
+			Iterable<JvmTypeReference> hierarchy);
 
 	public void setResourceContext(Resource context) {
 		this.context = context;
