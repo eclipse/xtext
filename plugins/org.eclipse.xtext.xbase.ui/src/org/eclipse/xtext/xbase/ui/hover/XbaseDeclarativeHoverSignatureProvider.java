@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
@@ -92,7 +93,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 
 	protected String _signature(JvmOperation jvmOperation, boolean typeAtEnd) {
 		String returnTypeString = "void";
-		JvmTypeReference returnType = jvmOperation.getReturnType();
+		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(jvmOperation);
 		if (returnType != null) {
 			if (returnType instanceof JvmAnyTypeReference) {
 				returnTypeString = "Object";
@@ -103,9 +104,10 @@ public class XbaseDeclarativeHoverSignatureProvider {
 
 		String signature = jvmOperation.getSimpleName() + hoverUiStrings.parameters(jvmOperation)
 				+ getThrowsDeclaration(jvmOperation);
+		String typeParameter = uiStrings.typeParameters(jvmOperation.getTypeParameters());
 		if (typeAtEnd)
-			return signature + " : " + returnTypeString;
-		return returnTypeString + " " + signature;
+			return signature + " " + typeParameter + " : " + returnTypeString;
+		return typeParameter + " " + returnTypeString + " " + signature;
 	}
 
 	protected String _signature(JvmField jvmField, boolean typeAtEnd) {
