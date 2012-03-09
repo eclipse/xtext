@@ -152,11 +152,13 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 			JvmOperation jvmOperation = xtendOverridesService.findOverriddenOperation(xtendFunction);
 			if (xtendFunction.isOverride() && jvmOperation != null) {
 				ICompositeNode compositeNode = NodeModelUtils.getNode(xtendFunction);
-				boolean overwriteIndicator = isOverwriteIndicator(jvmOperation);
-				String text = (overwriteIndicator ? "overrides " : "implements ") + jvmOperation.getQualifiedName(); //$NON-NLS-1$ //$NON-NLS-2$
-				annotationToPosition.put(
-						new OverrideIndicatorAnnotation(overwriteIndicator, text, xtextResource
-								.getURIFragment(xtendFunction)), new Position(compositeNode.getOffset()));
+				if (compositeNode != null) {
+					boolean overwriteIndicator = isOverwriteIndicator(jvmOperation);
+					String text = (overwriteIndicator ? "overrides " : "implements ") + jvmOperation.getQualifiedName(); //$NON-NLS-1$ //$NON-NLS-2$
+					annotationToPosition.put(
+							new OverrideIndicatorAnnotation(overwriteIndicator, text, xtextResource
+									.getURIFragment(xtendFunction)), new Position(compositeNode.getOffset()));
+				}
 			}
 		}
 		return annotationToPosition;

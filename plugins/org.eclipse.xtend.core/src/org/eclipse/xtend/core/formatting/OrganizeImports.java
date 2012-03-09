@@ -125,6 +125,9 @@ public class OrganizeImports {
 		if (xtendFile.getXtendClass() == null)
 			return null;
 		ICompositeNode node = NodeModelUtils.getNode(xtendFile.getXtendClass());
+		if (node == null) {
+			throw new IllegalStateException("Cannot find node for clazz " + xtendFile.getClass().getName());
+		}
 		int length = node.getTotalOffset() - offset;
 		return new TextRegion(offset, length);
 	}

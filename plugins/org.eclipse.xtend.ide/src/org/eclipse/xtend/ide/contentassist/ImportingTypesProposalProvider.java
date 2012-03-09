@@ -130,11 +130,17 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 						offset = document.getLength();
 					} else {
 						ICompositeNode node = NodeModelUtils.getNode(clazz);
+						if (node == null) {
+							throw new IllegalStateException("node may not be null");
+						}
 						offset = node.getOffset();
 						endWithLineBreak = true;
 					}
 				} else {
 					ICompositeNode node = NodeModelUtils.getNode(file.getImports().get(file.getImports().size() - 1));
+					if (node == null) {
+						throw new IllegalStateException("node may not be null");
+					}
 					offset = node.getOffset() + node.getLength();
 				}
 				offset = Math.min(proposal.getReplacementOffset(), offset);
