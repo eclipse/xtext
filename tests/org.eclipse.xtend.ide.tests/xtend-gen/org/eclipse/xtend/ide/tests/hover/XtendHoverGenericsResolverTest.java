@@ -82,7 +82,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       final JvmIdentifiableElement feature = call.getFeature();
       final String originalSignature = this.signatureProvider.getSignature(feature);
       String _replaceGenerics = this.hoverGenericsResolver.replaceGenerics(call, originalSignature);
-      Assert.assertEquals("String something(Iterable<String> iterable)", _replaceGenerics);
+      Assert.assertEquals("<String> String something(Iterable<String> iterable)", _replaceGenerics);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -126,7 +126,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       final JvmIdentifiableElement feature = call.getFeature();
       final String originalSignature = this.signatureProvider.getSignature(feature);
       String _replaceGenerics = this.hoverGenericsResolver.replaceGenerics(call, originalSignature);
-      Assert.assertEquals("Foo something(Iterable<String> iterable, Foo type1, String type2)", _replaceGenerics);
+      Assert.assertEquals("<String, Foo> Foo something(Iterable<String> iterable, Foo type1, String type2)", _replaceGenerics);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -167,7 +167,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       final String prefix = "something <T>T<T>T this is html";
       final String suffix = " and at the END TOOOOOOOO";
       final String originalSignature = this.hoverGenericsResolver.getJavaSignature(javaElement);
-      String _replaceAll = originalSignature.replaceAll("T", "String");
+      String _replaceAll = originalSignature.replaceAll("\\bT\\b", "String");
       String _plus = (prefix + _replaceAll);
       String _plus_1 = (_plus + suffix);
       String _plus_2 = (prefix + originalSignature);
