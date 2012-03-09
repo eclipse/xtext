@@ -218,7 +218,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	}
 
 	protected boolean isRelevantAnnotationType(String type) {
-		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE);
+		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE) || type.equals(XtextEditor.INFO_ANNOTATION_TYPE);
 	}
 
 	public void modelChanged(IAnnotationModel model) {
