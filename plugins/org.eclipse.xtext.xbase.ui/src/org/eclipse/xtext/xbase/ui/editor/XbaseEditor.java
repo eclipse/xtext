@@ -142,12 +142,16 @@ public class XbaseEditor extends XtextEditor {
 		}
 		super.doSetInput(input);
 	}
+	
+	private Exception lastCall = null;
 
 	public void markNextSelectionAsJavaOffset(IResource javaResource) {
 		if (expectJavaSelection > 0) {
-			log.warn("Two many select-and-reveal calls from Java expected. Setting back to zero.", new IllegalStateException());
+			if (lastCall!= null)
+				log.warn("The editor is already awaiting a select and reveal call from : ", lastCall);
 			this.expectJavaSelection = 0;
 		}
+		lastCall = new Exception();
 		this.expectJavaSelection++;
 		if (calleeAnalyzer.isCalledFromFindReferences())
 			this.expectJavaSelection++;
