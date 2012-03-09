@@ -197,9 +197,11 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		JvmAnnotationType annotationType = annotation.getAnnotationType();
 		if (annotationType != null && !annotationType.eIsProxy()) {
 			ICompositeNode xannotationNode = NodeModelUtils.findActualNodeFor(annotation);
-			ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
-			if(firstLeafNode != null)
-				highlightNode(firstLeafNode, XbaseHighlightingConfiguration.ANNOTATION, acceptor);
+			if (xannotationNode != null) {
+				ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
+				if(firstLeafNode != null)
+					highlightNode(firstLeafNode, XbaseHighlightingConfiguration.ANNOTATION, acceptor);
+			}
 			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XbaseHighlightingConfiguration.ANNOTATION);
 		}
 	}

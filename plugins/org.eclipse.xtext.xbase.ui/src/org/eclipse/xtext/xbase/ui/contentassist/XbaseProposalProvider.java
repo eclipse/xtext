@@ -258,7 +258,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				if (context.getPreviousModel() == model) {
 					for(XExpression expression: block.getExpressions()) {
 						ICompositeNode node = NodeModelUtils.findActualNodeFor(expression);
-						if (node.getOffset() >= context.getOffset())
+						if (node != null && node.getOffset() >= context.getOffset())
 							break;
 						previousModel = expression;
 					}
@@ -274,18 +274,20 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		} 
 		if (model instanceof XForLoopExpression) {
 			ICompositeNode node = NodeModelUtils.getNode(model);
-			boolean eachExpression = false;
-			for(INode leaf: node.getLeafNodes()) {
-				if (leaf.getOffset() >= context.getOffset())
-					break;
-				if (leaf.getGrammarElement() == getXForLoopRightParenthesis()) {
-					eachExpression = true;
-					break;
+			if (node != null) {
+				boolean eachExpression = false;
+				for(INode leaf: node.getLeafNodes()) {
+					if (leaf.getOffset() >= context.getOffset())
+						break;
+					if (leaf.getGrammarElement() == getXForLoopRightParenthesis()) {
+						eachExpression = true;
+						break;
+					}
 				}
-			}
-			if (!eachExpression) {
-				createLocalVariableAndImplicitProposals(model, false, -1, context, acceptor);
-				return;
+				if (!eachExpression) {
+					createLocalVariableAndImplicitProposals(model, false, -1, context, acceptor);
+					return;
+				}
 			}
 		}
 		if (model instanceof XFeatureCall && ((XFeatureCall) model).getDeclaringType() != null) {
@@ -387,11 +389,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		}
 		if (model instanceof XAbstractFeatureCall) {
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(model);
-			int offset = node.getOffset();
-			int length = node.getLength();
-			if (offset + length >= contentAssistContext.getOffset()) {
-				super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
-				return;
+			if (node != null) {
+				int offset = node.getOffset();
+				int length = node.getLength();
+				if (offset + length >= contentAssistContext.getOffset()) {
+					super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+					return;
+				}
 			}
 		}
 		if (model != null && !(model instanceof XExpression)) {
@@ -450,10 +454,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				if (rightOperand == null)
 					return true;
 				ICompositeNode rightOperandNode = NodeModelUtils.findActualNodeFor(rightOperand);
-				if (rightOperandNode.getOffset() >= contentAssistContext.getOffset())
-					return true;
-				if (isParentOf(rightOperandNode, contentAssistContext.getLastCompleteNode()))
-					return true;
+				if (rightOperandNode != null) {
+					if (rightOperandNode.getOffset() >= contentAssistContext.getOffset())
+						return true;
+					if (isParentOf(rightOperandNode, contentAssistContext.getLastCompleteNode()))
+						return true;
+				}
 			}
 		}
 		return false;
