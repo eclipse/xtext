@@ -18,26 +18,25 @@ import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInpu
  */
 public class XbaseInformationControlInput extends XtextBrowserInformationControlInput {
 	
-	private String unsugaredExpression = "";
-	private String prefix;
-	private String suffix;
-	private IJavaElement javaElement;
-
-	public XbaseInformationControlInput(XtextBrowserInformationControlInput previous, EObject element, String html,
-			ILabelProvider labelProvider, String prefix, String unsugaredExpression, String suffix) {
-		super(previous, element, html, labelProvider);
-		this.prefix = prefix;
-		this.unsugaredExpression = unsugaredExpression;
-		this.suffix = suffix;
-	}
+	
+	protected IJavaElement javaElement;
+	protected ILabelProvider labelProvider;
+	protected String unsugaredExpression = "";
+	protected String prefix;
+	protected String suffix;
 	
 	public XbaseInformationControlInput(XtextBrowserInformationControlInput previous, EObject element, IJavaElement javaElement, String html,
-			ILabelProvider labelProvider, String prefix, String unsugaredExpression, String suffix) {
+			ILabelProvider labelProvider) {
 		super(previous, element, html, labelProvider);
+		this.javaElement = javaElement;
+	}
+	
+	public XbaseInformationControlInput(XtextBrowserInformationControlInput previous, XbaseInformationControlInput wrapped, String prefix, String unsugaredExpression, String suffix) {
+		super(previous, wrapped.getElement(), wrapped.getHtml(), wrapped.getLabelProvider());
+		this.javaElement = wrapped.getInputElement();
 		this.prefix = prefix;
 		this.unsugaredExpression = unsugaredExpression;
 		this.suffix = suffix;
-		this.javaElement = javaElement;
 	}
 	
 	@Override
@@ -45,6 +44,15 @@ public class XbaseInformationControlInput extends XtextBrowserInformationControl
 		return 16;
 	}
 
+	@Override
+	public IJavaElement getInputElement() {
+		return  javaElement;
+	}
+
+	public ILabelProvider getLabelProvider() {
+		return labelProvider;
+	}
+	
 	public String getPrefix(){
 		return prefix;
 	}
@@ -56,12 +64,4 @@ public class XbaseInformationControlInput extends XtextBrowserInformationControl
 	public String getSuffix(){
 		return suffix;
 	}
-
-	@Override
-	public IJavaElement getInputElement() {
-		return  javaElement;
-	}
-	
-	
-	
 }

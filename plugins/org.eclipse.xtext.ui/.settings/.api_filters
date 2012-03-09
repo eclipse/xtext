@@ -8,6 +8,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControlInput.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="BrowserInformationControlInput"/>
+                <message_argument value="XtextBrowserInformationControlInput"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/info/ResourceWorkingCopyFileEditorInput.java" type="org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput">
         <filter id="571473929">
             <message_arguments>

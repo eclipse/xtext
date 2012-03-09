@@ -77,6 +77,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @since 2.3
  */
 public class XbaseHoverDocumentationProvider {
 	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$

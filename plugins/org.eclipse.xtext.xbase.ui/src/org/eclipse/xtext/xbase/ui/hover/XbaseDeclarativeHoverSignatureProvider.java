@@ -17,6 +17,8 @@ import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -28,9 +30,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -39,6 +38,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @since 2.3
  */
 public class XbaseDeclarativeHoverSignatureProvider {
 
@@ -119,7 +119,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	}
 
 	protected String _signature(JvmConstructor contructor, boolean typeAtEnd) {
-		return contructor.getSimpleName() + " " + hoverUiStrings.parameters(contructor)
+		return typeProvider.getTypeForIdentifiable(contructor).getSimpleName() + hoverUiStrings.parameters(contructor)
 				+ getThrowsDeclaration(contructor);
 	}
 
@@ -172,8 +172,16 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return jvmOperation.getSimpleName() + uiStrings.parameters(jvmOperation);
 	}
 
-	public String getImageTag(EObject object) {
-		return getImageTagLink(ImageDescriptor.createFromImage(labelProvider.getImage(object)));
+	public String getImageTag(final EObject object) {
+		final String[] result = new String[1];
+		Display.getDefault().syncExec(new Runnable() {
+			
+			public void run() {
+				Image image = labelProvider.getImage(object);
+				result[0] = getImageTagLink(ImageDescriptor.createFromImage(image));
+			}
+		});
+		return result[0];
 	}
 
 	protected String getImageTagLink(ImageDescriptor imageDescriptor) {
@@ -190,5 +198,4 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	protected String getLabel(EObject object) {
 		return labelProvider.getText(object);
 	}
-
 }

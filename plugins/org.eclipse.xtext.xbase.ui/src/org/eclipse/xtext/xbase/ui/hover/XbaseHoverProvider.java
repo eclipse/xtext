@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.infoviews.JavadocView;
+import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
@@ -27,6 +28,8 @@ import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IInputChangedListener;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -36,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider.JavadocHoverWrapper;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
@@ -43,6 +47,7 @@ import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
 import org.eclipse.xtext.ui.editor.hover.html.OpenBrowserUtil;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -53,7 +58,6 @@ import com.google.inject.Inject;
  * @author Holger Schill
  */
 public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
-	
 
 	@Inject
 	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
@@ -71,19 +75,92 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	private XtextElementLinks elementLinks;
 	@Inject
 	private XbaseHoverConfiguration xbaseHoverConfiguration;
+	@Inject
+	private HoverGenericsResolver hoverGenericsResolver;
+	@Inject
+	private ILabelProvider labelProvider;
+
+	private JavadocHoverWrapper javadocHover = new JavadocHoverWrapper();
 	private IInformationControlCreator hoverControlCreator;
 	private IInformationControlCreator presenterControlCreator;
-	
-	@Override
-	protected String getDocumentation(EObject o) {
-		return documentationProvider.getDocumentation(o) + documentationProvider.getDerivedOrOriginalDeclarationInformation(o);
-	}
 
 	@Override
-	protected String getFirstLine(EObject o) {
+	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
+			XtextBrowserInformationControlInput previous) {
+		EObject objectToView = getObjectToView(element);
+		IJavaElement javaElement = null;
+		if (objectToView instanceof JvmIdentifiableElement) {
+			javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
+		}
+		String html = getHoverInfoAsHtml(element, objectToView, javaElement, hoverRegion);
+		if (html != null) {
+			StringBuffer buffer = new StringBuffer(html);
+			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+			HTMLPrinter.addPageEpilog(buffer);
+			html = buffer.toString();
+			return new XbaseInformationControlInput(previous, objectToView, javaElement, html, labelProvider);
+		}
+		return null;
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IJavaElement javaElement,
+			IRegion hoverRegion) {
+		if (objectToView instanceof JvmIdentifiableElement && associations.getSourceElements(objectToView).isEmpty()) {
+			// Let the java infrastructure do the job
+			if (javaElement != null) {
+				javadocHover.setJavaElement(javaElement);
+				JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
+						.getHoverInfo2(null, hoverRegion);
+				String html = hoverInfo2.getHtml();
+				if (call != null && call instanceof XAbstractFeatureCall)
+					return hoverGenericsResolver.resolveSignatureInHtml((XAbstractFeatureCall) call, javaElement, html);
+				else
+					return html;
+			}
+		}
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(computeSignature(call, objectToView));
+		String documentation = getDocumentation(objectToView);
+		if (documentation != null && documentation.length() > 0) {
+			buffer.append("<p>");
+			buffer.append(documentation);
+			buffer.append("</p>");
+		}
+		return buffer.toString();
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected EObject getObjectToView(EObject object) {
+		if (object instanceof XAbstractFeatureCall) {
+			return ((XAbstractFeatureCall) object).getFeature();
+		}
+		return object;
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	protected String getDocumentation(EObject o) {
+		return documentationProvider.getDocumentation(o)
+				+ documentationProvider.getDerivedOrOriginalDeclarationInformation(o);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String computeSignature(EObject call, EObject o) {
 		String imageTag = hoverSignatureProvider.getImageTag(o);
 		String signature = hoverSignatureProvider.getSignature(o);
-		if(imageTag != null && signature != null) {
+		if (call != null && call instanceof XAbstractFeatureCall)
+			signature = hoverGenericsResolver.replaceGenerics((XAbstractFeatureCall) call,
+					hoverSignatureProvider.getSignature(o));
+		if (imageTag != null && signature != null) {
 			return "<b>" + imageTag + HTMLPrinter.convertToHTMLContent(signature) + "</b>";
 		}
 		return "";
@@ -91,11 +168,11 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 
 	@Override
 	protected boolean hasHover(EObject o) {
-		if(o instanceof XSwitchExpression)
+		if (o instanceof XSwitchExpression)
 			return false;
-		return o instanceof JvmIdentifiableElement || super.hasHover(o);
+		return o instanceof JvmIdentifiableElement || o instanceof XAbstractFeatureCall || super.hasHover(o);
 	}
-	
+
 	/**
 	 * @since 2.3
 	 */
@@ -104,16 +181,6 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
 
 			public void handleXtextdocViewLink(URI linkTarget) {
-				// TODO: enable when XtextDoc view available
-				//				control.notifyDelayedInputChange(null);
-				//				control.setVisible(false);
-				//				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
-				//				try {
-				//					JavadocView view= (JavadocView) JavaPlugin.getActivePage().showView(JavaUI.ID_JAVADOC_VIEW);
-				//					view.setInput(linkTarget);
-				//				} catch (PartInitException e) {
-				//					JavaPlugin.log(e);
-				//				}
 			}
 
 			public void handleInlineXtextdocLink(URI linkTarget) {
@@ -172,7 +239,10 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 			}
 		}));
 	}
-	
+
+	/**
+	 * @since 2.3
+	 */
 	@Override
 	public IInformationControlCreator getInformationPresenterControlCreator() {
 		if (presenterControlCreator == null)
@@ -270,6 +340,9 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	private static final class ShowInJavadocViewAction extends Action {
 		private final IXtextBrowserInformationControl fInfoControl;
 
@@ -281,7 +354,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 
 		@Override
 		public void run() {
-			XtextBrowserInformationControlInput infoInput = (XtextBrowserInformationControlInput) fInfoControl.getInput();
+			XtextBrowserInformationControlInput infoInput = (XtextBrowserInformationControlInput) fInfoControl
+					.getInput();
 			fInfoControl.notifyDelayedInputChange(null);
 			fInfoControl.dispose();
 			try {
@@ -305,7 +379,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		@Override
 		public void run() {
 			if (fInfoControl.getInput() instanceof XtextBrowserInformationControlInput) {
-				XtextBrowserInformationControlInput infoInput = (XtextBrowserInformationControlInput) fInfoControl.getInput();
+				XtextBrowserInformationControlInput infoInput = (XtextBrowserInformationControlInput) fInfoControl
+						.getInput();
 				fInfoControl.notifyDelayedInputChange(null);
 				fInfoControl.dispose();
 				// IJavaElement
