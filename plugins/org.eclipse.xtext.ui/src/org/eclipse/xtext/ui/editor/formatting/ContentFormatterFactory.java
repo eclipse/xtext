@@ -16,6 +16,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
@@ -53,10 +54,11 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 		}
 
 		public ReplaceRegion exec(XtextResource state) throws Exception {
-			IFormattedRegion r = formatter.format(state.getParseResult()
-					.getRootNode(), region.getOffset(), region.getLength());
-			return new ReplaceRegion(r.getOffset(), r.getLength(), r
-					.getFormattedText());
+			IParseResult parseResult = state.getParseResult();
+			if (parseResult == null)
+				return null;
+			IFormattedRegion r = formatter.format(parseResult.getRootNode(), region.getOffset(), region.getLength());
+			return new ReplaceRegion(r.getOffset(), r.getLength(), r.getFormattedText());
 		}
 	}
 
