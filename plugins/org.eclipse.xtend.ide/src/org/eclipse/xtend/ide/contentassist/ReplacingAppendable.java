@@ -195,11 +195,18 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 			}
 			int offset;
 			if (xtendFile.getImports().isEmpty()) {
-				offset = NodeModelUtils.findActualNodeFor(xtendFile.getXtendClass()).getOffset();
+				ICompositeNode classNode = NodeModelUtils.findActualNodeFor(xtendFile.getXtendClass());
+				if (classNode == null) {
+					throw new IllegalStateException("classNode may not be null");
+				}
+				offset = classNode.getOffset();
 				importSection.append(getLineSeparator());
 			} else {
 				ICompositeNode lastImportNode = NodeModelUtils.findActualNodeFor(xtendFile.getImports().get(
 						xtendFile.getImports().size() - 1));
+				if (lastImportNode == null) {
+					throw new IllegalStateException("lastImportNode may not be null");
+				}
 				importSection.insert(0, getLineSeparator());
 				importSection.replace(importSection.length() - 1, importSection.length(), "");
 				offset = lastImportNode.getOffset() + lastImportNode.getLength();

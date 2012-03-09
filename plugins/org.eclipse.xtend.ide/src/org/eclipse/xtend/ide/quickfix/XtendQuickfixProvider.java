@@ -406,13 +406,15 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	protected void replaceKeyword(Keyword keyword, String replacement, EObject container, IXtextDocument document)
 			throws BadLocationException {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(container);
-		for (ILeafNode leafNode : node.getLeafNodes()) {
-			if (leafNode.getGrammarElement() == keyword) {
-				String actualReplacement = replacement;
-				if (!Character.isWhitespace(document.getChar(leafNode.getOffset() - 1))) {
-					actualReplacement = " " + replacement;
+		if (node != null) {
+			for (ILeafNode leafNode : node.getLeafNodes()) {
+				if (leafNode.getGrammarElement() == keyword) {
+					String actualReplacement = replacement;
+					if (!Character.isWhitespace(document.getChar(leafNode.getOffset() - 1))) {
+						actualReplacement = " " + replacement;
+					}
+					document.replace(leafNode.getOffset(), leafNode.getLength(), actualReplacement);
 				}
-				document.replace(leafNode.getOffset(), leafNode.getLength(), actualReplacement);
 			}
 		}
 	}
@@ -484,10 +486,14 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								int insertPosition;
 								if (xtendFunction.getExpression() == null) {
 									ICompositeNode functionNode = NodeModelUtils.findActualNodeFor(xtendFunction);
+									if (functionNode == null)
+										throw new IllegalStateException("functionNode may not be null");
 									insertPosition = functionNode.getOffset() + functionNode.getLength();
 								} else {
-									insertPosition = NodeModelUtils.findActualNodeFor(xtendFunction.getExpression())
-											.getOffset();
+									ICompositeNode expressionNode = NodeModelUtils.findActualNodeFor(xtendFunction.getExpression());
+									if (expressionNode == null)
+										throw new IllegalStateException("expressionNode may not be null");
+									insertPosition = expressionNode.getOffset();
 								}
 								ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
 										xtendFunction, insertPosition, 0);
@@ -525,10 +531,13 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								XExpression toBeSurrounded = findContainerExpressionInBlockExpression(childThrowingException);
 								IXtextDocument xtextDocument = context.getXtextDocument();
 								if (toBeSurrounded != null) {
-									ICompositeNode toBeSurroundedNode = NodeModelUtils
-											.findActualNodeFor(toBeSurrounded);
-									ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
-											childThrowingException, toBeSurroundedNode.getOffset(),
+									ICompositeNode toBeSurroundedNode = NodeModelUtils.findActualNodeFor(toBeSurrounded);
+									if (toBeSurroundedNode == null)
+										throw new IllegalStateException("toBeSurroundedNode may not be null");
+									ReplacingAppendable appendable = appendableFactory.get(
+											context.getXtextDocument(),
+											childThrowingException, 
+											toBeSurroundedNode.getOffset(),
 											toBeSurroundedNode.getLength());
 									appendable
 											.append("try {")

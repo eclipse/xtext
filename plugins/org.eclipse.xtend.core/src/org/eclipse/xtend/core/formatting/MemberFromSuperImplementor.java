@@ -154,6 +154,8 @@ public class MemberFromSuperImplementor {
 
 	public int getFunctionInsertOffset(XtendClass clazz) {
 		ICompositeNode clazzNode = NodeModelUtils.findActualNodeFor(clazz);
+		if (clazzNode == null)
+			throw new IllegalStateException("Cannot determine node for clazz " + clazz.getName());
 		int lastClosingBraceOffset = -1;
 		for (ILeafNode leafNode : clazzNode.getLeafNodes()) {
 			if (leafNode.getGrammarElement() instanceof Keyword

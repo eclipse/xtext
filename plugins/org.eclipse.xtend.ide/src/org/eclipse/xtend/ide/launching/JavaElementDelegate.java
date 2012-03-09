@@ -32,6 +32,7 @@ import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -96,9 +97,10 @@ public class JavaElementDelegate implements IAdaptable {
 	}
 
 	protected XtendFunction findFunction(XtextResource resource, int offset) {
-		if (resource.getParseResult() == null)
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult == null)
 			return null;
-		INode root = resource.getParseResult().getRootNode();
+		INode root = parseResult.getRootNode();
 		INode node = NodeModelUtils.findLeafNodeAtOffset(root, offset);
 		if (node == null)
 			return null;

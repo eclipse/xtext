@@ -18,6 +18,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
@@ -414,9 +415,12 @@ public class XtendBatchCompiler {
 	private XtendClass getXtendClass(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
-		if (parseResult.getRootASTElement() instanceof XtendFile) {
-			XtendFile xtendFile = (XtendFile) parseResult.getRootASTElement();
-			return xtendFile.getXtendClass();
+		if (parseResult != null) {
+			EObject model = parseResult.getRootASTElement();
+			if (model instanceof XtendFile) {
+				XtendFile xtendFile = (XtendFile) model;
+				return xtendFile.getXtendClass();
+			}
 		}
 		return null;
 	}

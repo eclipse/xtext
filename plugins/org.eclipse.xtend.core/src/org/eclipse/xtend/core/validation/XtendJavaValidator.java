@@ -1034,25 +1034,27 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		}
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(file.getXtendClass());
-		for (INode n : node.getAsTreeIterable()) {
-			if (n.getGrammarElement() instanceof CrossReference) {
-				EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
-				if (classifier instanceof EClass
-						&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
-								.isSuperTypeOf((EClass) classifier))) {
-					String simpleName = n.getText().trim();
-					// handle StaticQualifier Workaround (see Xbase grammar)
-					if (simpleName.endsWith("::"))
-						simpleName = simpleName.substring(0, simpleName.length() - 2);
-					if (importedNames.containsKey(simpleName)) {
-						JvmType type = importedNames.remove(simpleName);
-						imports.remove(type);
-					} else {
-						while (simpleName.contains("$")) {
-							simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-							if (importedNames.containsKey(simpleName)) {
-								imports.remove(importedNames.remove(simpleName));
-								break;
+		if (node != null) {
+			for (INode n : node.getAsTreeIterable()) {
+				if (n.getGrammarElement() instanceof CrossReference) {
+					EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
+					if (classifier instanceof EClass
+							&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
+									.isSuperTypeOf((EClass) classifier))) {
+						String simpleName = n.getText().trim();
+						// handle StaticQualifier Workaround (see Xbase grammar)
+						if (simpleName.endsWith("::"))
+							simpleName = simpleName.substring(0, simpleName.length() - 2);
+						if (importedNames.containsKey(simpleName)) {
+							JvmType type = importedNames.remove(simpleName);
+							imports.remove(type);
+						} else {
+							while (simpleName.contains("$")) {
+								simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
+								if (importedNames.containsKey(simpleName)) {
+									imports.remove(importedNames.remove(simpleName));
+									break;
+								}
 							}
 						}
 					}
