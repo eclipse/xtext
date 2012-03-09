@@ -173,7 +173,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration", 
 						"org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration")
 				.addTypeToType("org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider", 
-						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider");
+						"org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider")
+				.addTypeToType("org.eclipse.xtext.ui.editor.hover.IEObjectHover", 
+						"org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover");
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory
