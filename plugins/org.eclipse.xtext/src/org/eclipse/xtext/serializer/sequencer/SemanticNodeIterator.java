@@ -33,9 +33,9 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 	public SemanticNodeIterator(EObject obj) {
 		INode start = NodeModelUtils.findActualNodeFor(obj);
 		if (start != null) {
-			if (isEObjectNode(start))
-				start = ((ICompositeNode) start).getFirstChild();
 			this.next = findNext(start, false);
+			while (this.next != null && this.next.getThird() == obj)
+				this.next = findNext(this.next.getFirst(), false);
 		} else
 			this.next = null;
 	}
@@ -52,7 +52,7 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 				continue;
 			}
 			EObject ge = current.getGrammarElement();
-			if (isEObjectNode(current))
+			if (ge instanceof AbstractElement && isEObjectNode(current))
 				return Tuples.create(current, (AbstractElement) ge, getEObjectNodeEObject(current));
 			else if (GrammarUtil.isAssigned(ge) && !GrammarUtil.isEObjectRuleCall(ge)) {
 				if (ge instanceof CrossReference)

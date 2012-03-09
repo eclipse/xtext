@@ -68,49 +68,10 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 	public void testReturnExpression_07() throws Exception {
 		super.testReturnExpression_07();
 	}
+	
 	@Ignore @Test
 	@Override
 	public void testReturnExpression_08() throws Exception {
 		super.testReturnExpression_08();
-	}
-	//FIXME SE: these are failing since I introduced optional parenthesis in switch expressions.
-	@Ignore @Test
-	@Override
-	public void testSwitchExpression_04() throws Exception {
-		super.testSwitchExpression_04();
-	}
-	
-	@Ignore 
-	@Test
-	@Override
-	public void testSwitchExpression_08() throws Exception {
-		super.testSwitchExpression_04();
-	}
-	
-	@Ignore 
-	@Test
-	@Override
-	public void testSwitchExpression_15() throws Exception {
-		super.testSwitchExpression_04();
-	}
-	
-	@Ignore 
-	@Test
-	@Override
-	public void testBug349762_02() throws Exception {
-		super.testBug349762_02();
-	}
-
-	// sometimes these fail instead
-	@Override
-	@Ignore 
-	@Test public void testSwitchExpression_18() throws Exception {
-		super.testSwitchExpression_18();
-	}
-	
-	@Override
-	@Ignore 
-	@Test public void testSwitchExpression_19() throws Exception {
-		super.testSwitchExpression_19();
 	}
 }
