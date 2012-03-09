@@ -681,6 +681,42 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	public void testUnaryExpression_01() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _minus = (#-#1);\n" + 
+				"return _minus;", 
+				"#- 1#");
+	}
+	
+	@Test
+	public void testUnaryExpression_02() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _minus = (-#1#);\n" + 
+				"return _minus;", 
+				"-\n#1#");
+	}
+	
+	@Test
+	public void testUnaryExpression_03() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"int _minus = #(#-1);\n" + 
+				"return _minus;", 
+				"(( #- (1)#))");
+	}
+	
+	@Test
+	public void testUnaryExpression_04() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"Big#In#teger _minus = BigInteger.valueOf(1234L).negate();\n" + 
+				"return _minus;", 
+				"(( #- (1_234bi\n)#\n))");
+	}
+	
+	@Test
 	public void testSwitchExpression_01() throws Exception {
 		assertTrace( 
 				"\n" + 
