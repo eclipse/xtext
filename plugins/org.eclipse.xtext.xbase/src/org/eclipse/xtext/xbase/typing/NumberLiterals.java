@@ -20,8 +20,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral;
 public class NumberLiterals {
 
 	public int getBase(XNumberLiteral literal) {
-		String valueAsLowerCase = literal.getValue().toLowerCase();
-		if (valueAsLowerCase.startsWith("0x"))
+		if (isHex(literal))
 			return 16;
 		else
 			return 10;
@@ -154,7 +153,9 @@ public class NumberLiterals {
 			return new BigInteger(getDigits(literal), getBase(literal));
 	}
 	
-	public String getExponent(String digits) {
+	public String getExponent(XNumberLiteral literal, String digits) {
+		if (isHex(literal))
+			return null;
 		int e = digits.indexOf('e');
 		if (e == -1) {
 			e = digits.indexOf('E');
@@ -171,10 +172,19 @@ public class NumberLiterals {
 		return null;
 	}
 
+	protected boolean isHex(XNumberLiteral literal) {
+		String text = literal.getValue();
+		if (text.length() >= 2) {
+			char second = text.charAt(1);
+			return text.charAt(0) == '0' && (second == 'X' || second =='x');
+		}
+		return false;
+	}
+
 	public BigDecimal toBigDecimal(XNumberLiteral literal) {
 		if (isFloatingPoint(literal)) {
 			String digits = getDigits(literal);
-			String exponent = getExponent(digits);
+			String exponent = getExponent(literal, digits);
 			if (exponent != null && exponent.length() > 10) {
 				throw new NumberFormatException("Too many nonzero exponent digits.");
 			}
