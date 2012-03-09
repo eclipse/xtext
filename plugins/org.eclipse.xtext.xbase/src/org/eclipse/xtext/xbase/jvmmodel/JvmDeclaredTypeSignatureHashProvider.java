@@ -32,6 +32,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
@@ -42,6 +44,11 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
+ * Calculates the hash of the signature of a {@link JvmDeclaredType}.
+ * The signature spans everything that could change the linking of clients.
+ * The hash is stored in the {@link IEObjectDescription} of the type to allow fast calculation of 
+ * {@link org.eclipse.xtext.resource.IResourceDescription.Manager#isAffected(org.eclipse.xtext.resource.IResourceDescription.Delta, IResourceDescription)}.
+ *
  * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
@@ -116,20 +123,26 @@ public class JvmDeclaredTypeSignatureHashProvider {
 				append("class ").append(type.getIdentifier());
 				if (type instanceof JvmTypeParameterDeclarator)
 					appendTypeParameters((JvmTypeParameterDeclarator) type);
-				append("\n").appendSuperTypeSignatures(type).appendMemberSignatures(type);
+				append("\n").appendSuperTypeSignatures(type).appendMemberSignatures(type, false);
 			}
 			return this;
 		}
 
-		protected SignatureHashBuilder appendMemberSignatures(JvmDeclaredType type) {
-			for (JvmMember member : sortedMembers(type.getMembers())) {
+		protected SignatureHashBuilder appendMemberSignatures(JvmDeclaredType type, boolean innerTypesOnly) {
+			Iterable<? extends JvmMember> members = type.getMembers();
+			if(innerTypesOnly)
+				members = filter(members, JvmDeclaredType.class);
+			for (JvmMember member : sortedMembers(members)) {
 				if (member.getVisibility() != JvmVisibility.PRIVATE) {
-					if (member instanceof JvmOperation) {
+					if (member instanceof JvmOperation) 
 						appendSignature((JvmOperation) member);
-					} else if (member instanceof JvmConstructor) {
+					else if (member instanceof JvmConstructor) 
 						appendSignature((JvmConstructor) member);
-					} else if (member instanceof JvmField) {
+					else if (member instanceof JvmField) 
 						appendSignature((JvmField) member);
+					else if (member instanceof JvmDeclaredType) {
+						append(member.getQualifiedName());
+						appendMemberSignatures((JvmDeclaredType) member, true);
 					}
 					append("\n");
 				}
@@ -137,7 +150,7 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			return this;
 		}
 
-		protected SortedSet<JvmMember> sortedMembers(Iterable<JvmMember> elements) {
+		protected SortedSet<JvmMember> sortedMembers(Iterable<? extends JvmMember> elements) {
 			return ImmutableSortedSet.copyOf(new Comparator<JvmIdentifiableElement>() {
 				public int compare(JvmIdentifiableElement o1, JvmIdentifiableElement o2) {
 					return o1.getSimpleName().compareTo(o2.getSimpleName());
@@ -289,5 +302,4 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			}
 		}
 	}
-
 }
