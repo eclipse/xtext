@@ -59,7 +59,7 @@ public class EObjectAtOffsetHelper {
 	 */
 	public INode getCrossReferenceNode(XtextResource resource, ITextRegion region) {
 		IParseResult parseResult = resource.getParseResult();
-		if (parseResult != null && parseResult.getRootNode() != null) {
+		if (parseResult != null) {
 			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), region.getOffset());
 			INode crossRefNode = findCrossReferenceNode(leaf);
 			// if not a cross reference position and the cursor is at the beginning of a node try the previous one.
@@ -119,7 +119,7 @@ public class EObjectAtOffsetHelper {
 				return crossRef;
 		}
 		IParseResult parseResult = resource.getParseResult();
-		if (parseResult != null && parseResult.getRootNode() != null) {
+		if (parseResult != null) {
 			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
 			if (leaf != null && leaf.isHidden() && leaf.getOffset() == offset) {
 				leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);

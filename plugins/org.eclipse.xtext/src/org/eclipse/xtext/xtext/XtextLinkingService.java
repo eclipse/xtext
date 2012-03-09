@@ -104,7 +104,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 					EObject rootElement = null;
 					if (resource instanceof XtextResource) {
 						IParseResult parseResult = ((XtextResource) resource).getParseResult();
-						rootElement = parseResult.getRootASTElement();
+						if (parseResult != null)
+							rootElement = parseResult.getRootASTElement();
 					} else if (!resource.getContents().isEmpty()) {
 						rootElement = resource.getContents().get(0);
 					}

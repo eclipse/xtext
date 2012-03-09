@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
@@ -147,6 +148,7 @@ public class XtextResource extends ResourceImpl {
 		super();
 	}
 
+	@Nullable
 	public IParseResult getParseResult() {
 		return parseResult;
 	}
