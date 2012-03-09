@@ -1,25 +1,24 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
-import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.junit.Test
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
-import org.junit.After
-import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider
-import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendField
-import org.junit.Before
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XConstructorCall
+import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XFeatureCall
-import org.eclipse.xtext.xbase.XClosure
+import org.junit.After
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -108,7 +107,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val clazz = xtendFile.xtendClass
 		val xtendConstructor = clazz.members.get(0)
 		val signature = signatureProvider.getSignature(xtendConstructor)
-		assertEquals("Foo (String a, int b)",signature)
+		assertEquals("Foo(String a, int b)",signature)
 	}
 	
 	@Test
@@ -125,8 +124,26 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
-		assertEquals("Foo ()",signature)
+		assertEquals("Foo()",signature)
 	}
+	
+		@Test
+	def testSignatureForXtendDefaultConstructorWithGenerics(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<String> {
+			def bar(){
+			new Foo()
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.xtendClass
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
+		val signature = signatureProvider.getSignature(constructorCall.constructor)
+		assertEquals("Foo<String>()",signature)
+	}
+	
 	@Test
 	def testSignatureForForLoopVariable(){
 		val xtendFile = parseHelper.parse('''
@@ -188,9 +205,6 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	def getResourceSet(){
 		getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project)
 	}
-	
-	@Before
-	
 	
 	@After
 	def void cleanup(){

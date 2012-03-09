@@ -15,7 +15,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 
-class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
+class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	private ParseHelper<XtendFile> parseHelper
