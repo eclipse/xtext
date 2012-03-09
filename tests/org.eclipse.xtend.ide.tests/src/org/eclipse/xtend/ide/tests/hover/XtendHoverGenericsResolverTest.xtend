@@ -5,16 +5,17 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.ui.hover.HoverGenericsResolver
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider
 import org.junit.After
 import org.junit.Test
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
+
+import static org.junit.Assert.*
 
 class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 	@Inject
@@ -51,7 +52,7 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
 		val feature = call.getFeature()
 		val originalSignature = signatureProvider.getSignature(feature)
-		assertEquals("String something(Iterable<String> iterable)", hoverGenericsResolver.replaceGenerics(call,originalSignature))
+		assertEquals("<String> String something(Iterable<String> iterable)", hoverGenericsResolver.replaceGenerics(call,originalSignature))
 	}
 	
 	@Test
@@ -72,7 +73,7 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
 		val feature = call.getFeature()
 		val originalSignature = signatureProvider.getSignature(feature)
-		assertEquals("Foo something(Iterable<String> iterable, Foo type1, String type2)", hoverGenericsResolver.replaceGenerics(call,originalSignature))
+		assertEquals("<String, Foo> Foo something(Iterable<String> iterable, Foo type1, String type2)", hoverGenericsResolver.replaceGenerics(call,originalSignature))
 	}
 	
 	
@@ -95,7 +96,7 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 		val prefix = "something <T>T<T>T this is html"
 		val suffix = " and at the END TOOOOOOOO"
 		val originalSignature =  hoverGenericsResolver.getJavaSignature(javaElement)
-		assertEquals(prefix + originalSignature.replaceAll("T","String") + suffix, hoverGenericsResolver.resolveSignatureInHtml(call, javaElement, prefix + originalSignature + suffix))
+		assertEquals(prefix + originalSignature.replaceAll("\\bT\\b","String") + suffix, hoverGenericsResolver.resolveSignatureInHtml(call, javaElement, prefix + originalSignature + suffix))
 	}
 	
 	
