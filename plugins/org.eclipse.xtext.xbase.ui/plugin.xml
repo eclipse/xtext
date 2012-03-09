@@ -27,6 +27,11 @@
 			id="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy"
 			name="%QuickTypeHierarchyCommand_name">
 		</command>
+		<command
+			description="%OpenCallHierarchyCommand_description"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+			name="%OpenCallHierarchyCommand_name">
+		</command>
 	</extension>
 	<extension
 		point="org.eclipse.ui.bindings">
@@ -41,6 +46,12 @@
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
 			sequence="M1+T"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.QuickTypeHierarchy">
+		</key>
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="CTRL+ALT+H"
+			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 		</key>
 	</extension>
 </plugin>

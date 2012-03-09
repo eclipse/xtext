@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public abstract class AbstractTypeHierarchyHandler extends AbstractHandler {
+public abstract class AbstractHierarchyHandler extends AbstractHandler {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
