@@ -8,7 +8,6 @@
 package org.eclipse.xtext.parser.antlr;
 
 import static com.google.common.collect.Lists.*;
-import static java.util.Collections.*;
 
 import java.util.Iterator;
 import java.util.List;
