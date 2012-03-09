@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider.JavadocHoverWrapper;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
@@ -66,8 +67,6 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	@Inject
 	private IJvmModelAssociations associations;
 	@Inject
-	private XbaseHoverDocumentationProvider documentationProvider;
-	@Inject
 	private IJavaElementFinder javaElementFinder;
 	@Inject
 	private TypeURIHelper typeURIHelper;
@@ -81,6 +80,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	private HoverGenericsResolver hoverGenericsResolver;
 	@Inject
 	private ILabelProvider labelProvider;
+	@Inject 
+	private IGlobalServiceProvider serviceProvider;
 
 	private JavadocHoverWrapper javadocHover = new JavadocHoverWrapper();
 	private IInformationControlCreator hoverControlCreator;
@@ -150,8 +151,11 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 */
 	@Override
 	protected String getDocumentation(EObject o) {
-		return documentationProvider.getDocumentation(o)
+		XbaseHoverDocumentationProvider documentationProvider = serviceProvider.findService(o, XbaseHoverDocumentationProvider.class);
+		if(documentationProvider != null)
+			return documentationProvider.getDocumentation(o)
 				+ documentationProvider.getDerivedOrOriginalDeclarationInformation(o);
+		return "";
 	}
 
 	/**
