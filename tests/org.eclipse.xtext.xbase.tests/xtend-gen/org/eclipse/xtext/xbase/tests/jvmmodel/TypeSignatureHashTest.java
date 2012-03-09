@@ -1,16 +1,21 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.xbase.jvmmodel.JvmDeclaredTypeSignatureHashProvider;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,6 +32,9 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
   
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
+  
+  @Inject
+  private TypeReferences _typeReferences;
   
   @Test
   public void testSubType() {
@@ -51,7 +59,28 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     Assert.assertEquals(hash, _hash);
     bar.setSimpleName("Baz");
     String _hash_1 = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
-    boolean _equals = Objects.equal(hash, _hash_1);
-    Assert.assertFalse("Expected different hashes", _equals);
+    boolean _equal = Strings.equal(hash, _hash_1);
+    Assert.assertFalse("Expected different hashes", _equal);
+  }
+  
+  @Test
+  public void testUnsealedType() {
+    final EObject eObject = EcoreFactory.eINSTANCE.createEObject();
+    final JvmGenericType bar = this._jvmTypesBuilder.toClass(eObject, "Bar");
+    String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(bar);
+    boolean _equal = Strings.equal("Bar", _hash);
+    Assert.assertFalse(_equal);
+  }
+  
+  @Test
+  public void testSealedType() {
+    try {
+      final XExpression e = this.expression("null");
+      JvmType _findDeclaredType = this._typeReferences.findDeclaredType(String.class, e);
+      String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(((JvmDeclaredType) _findDeclaredType));
+      Assert.assertEquals("java.lang.String", _hash);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

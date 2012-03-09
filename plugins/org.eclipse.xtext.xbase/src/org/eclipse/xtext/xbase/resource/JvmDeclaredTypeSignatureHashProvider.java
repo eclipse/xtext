@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.jvmmodel;
+package org.eclipse.xtext.xbase.resource;
 
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -14,16 +14,14 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Comparator;
-import java.util.SortedSet;
 
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -31,14 +29,15 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.access.IMirror;
+import org.eclipse.xtext.common.types.access.IMirrorExtension;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableSortedSet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -65,13 +64,18 @@ public class JvmDeclaredTypeSignatureHashProvider {
 	private static final String HASH_CACHE_KEY = "SignatureHash";
 
 	public String getHash(final JvmDeclaredType type) {
+		if(type.eResource() instanceof TypeResource) {
+			IMirror mirror = ((TypeResource)type.eResource()).getMirror();
+			if(mirror instanceof IMirrorExtension && ((IMirrorExtension) mirror).isSealed())
+				return type.getIdentifier();
+		}
 		return cache.get(Tuples.create(HASH_CACHE_KEY, type), type.eResource(), new Provider<String>() {
 			public String get() {
 				return signatureBuilderProvider.get().appendSignature(type).hash();
 			}
 		});
 	}
-
+	
 	public static class SignatureHashBuilder {
 
 		@Inject
@@ -80,6 +84,9 @@ public class JvmDeclaredTypeSignatureHashProvider {
 		@Inject
 		private JvmDeclaredTypeSignatureHashProvider hashProvider;
 
+		@Inject
+		private AnnotationSignatureRelevanceUtil annotationRelevance;
+		
 		private MessageDigest digest;
 
 		private StringBuilder builder;
@@ -113,6 +120,7 @@ public class JvmDeclaredTypeSignatureHashProvider {
 
 		public SignatureHashBuilder appendSignature(JvmDeclaredType type) {
 			if (type.getVisibility() != JvmVisibility.PRIVATE) {
+				appendAnnotationReferences(type);
 				appendVisibility(type.getVisibility()).append(" ");
 				if (type.isAbstract())
 					append("abstract ");
@@ -132,8 +140,9 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			Iterable<? extends JvmMember> members = type.getMembers();
 			if(innerTypesOnly)
 				members = filter(members, JvmDeclaredType.class);
-			for (JvmMember member : sortedMembers(members)) {
+			for (JvmMember member : members) {
 				if (member.getVisibility() != JvmVisibility.PRIVATE) {
+					appendAnnotationReferences(member);
 					if (member instanceof JvmOperation) 
 						appendSignature((JvmOperation) member);
 					else if (member instanceof JvmConstructor) 
@@ -150,20 +159,16 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			return this;
 		}
 
-		protected SortedSet<JvmMember> sortedMembers(Iterable<? extends JvmMember> elements) {
-			return ImmutableSortedSet.copyOf(new Comparator<JvmIdentifiableElement>() {
-				public int compare(JvmIdentifiableElement o1, JvmIdentifiableElement o2) {
-					return o1.getSimpleName().compareTo(o2.getSimpleName());
-				}
-			}, filter(elements, new Predicate<JvmIdentifiableElement>() {
-				public boolean apply(JvmIdentifiableElement input) {
-					return !isEmpty(input.getSimpleName());
-				}
-			}));
+		protected void appendAnnotationReferences(JvmAnnotationTarget target) {
+			for(JvmAnnotationReference annotationReference: target.getAnnotations()) {
+				if(annotationRelevance.isRelevant(annotationReference)) 
+					append(hashProvider.getHash(annotationReference.getAnnotation()))
+						.append(" ");
+			}
 		}
 
 		protected SignatureHashBuilder appendSuperTypeSignatures(JvmDeclaredType type) {
-			for (JvmTypeReference superType : sortedTypes(superTypeCollector.collectSuperTypes(type))) {
+			for (JvmTypeReference superType : superTypeCollector.collectSuperTypes(type)) {
 				append("super ");
 				superType
 						.accept(new org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
@@ -177,19 +182,11 @@ public class JvmDeclaredTypeSignatureHashProvider {
 							}
 
 							@Override
-							public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
-								super.doVisitGenericArrayTypeReference(reference);
-								for (int i = 0; i < reference.getDimensions(); ++i)
-									append("[]");
-								return null;
-							}
-
-							@Override
 							public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-								super.doVisitParameterizedTypeReference(reference);
+								doVisitTypeReference(reference);
 								append("<");
-								for (JvmTypeReference ref : reference.getArguments()) {
-									visit(ref);
+								for (JvmTypeReference typeArgument : reference.getArguments()) {
+									append(typeArgument.getIdentifier());
 									append(",");
 								}
 								append(">");
@@ -200,19 +197,6 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			}
 			return this;
 		}
-
-		protected SortedSet<JvmTypeReference> sortedTypes(Iterable<JvmTypeReference> elements) {
-			return ImmutableSortedSet.copyOf(new Comparator<JvmTypeReference>() {
-				public int compare(JvmTypeReference o1, JvmTypeReference o2) {
-					return o1.getIdentifier().compareTo(o2.getIdentifier());
-				}
-			}, filter(elements, new Predicate<JvmTypeReference>() {
-				public boolean apply(JvmTypeReference input) {
-					return !isEmpty(input.getIdentifier());
-				}
-			}));
-		}
-
 
 		protected SignatureHashBuilder appendSignature(JvmOperation operation) {
 			appendVisibility(operation.getVisibility()).append(" ");
