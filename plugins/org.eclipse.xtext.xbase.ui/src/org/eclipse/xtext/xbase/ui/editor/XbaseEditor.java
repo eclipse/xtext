@@ -147,8 +147,10 @@ public class XbaseEditor extends XtextEditor {
 
 	public void markNextSelectionAsJavaOffset(IResource javaResource) {
 		if (expectJavaSelection > 0) {
-			if (lastCall!= null)
+			if (lastCall!= null) {
 				log.warn("The editor is already awaiting a select and reveal call from : ", lastCall);
+				log.warn("Now called from : ", new Exception());
+			}
 			this.expectJavaSelection = 0;
 		}
 		lastCall = new Exception();
