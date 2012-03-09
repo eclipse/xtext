@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -80,47 +81,60 @@ public class XtendHoverSerializer {
 	}
 
 	public String computeArguments(XAbstractFeatureCall featureCall) {
+
 		StringBuilder stringBuilder = new StringBuilder("(");
-		XExpression implicitFirstArgument = null;
-		List<XExpression> arguments = Lists.newArrayList();
-		boolean needsSeperator = false;
-		if (featureCall instanceof XMemberFeatureCall) {
-			arguments = ((XMemberFeatureCall) featureCall).getMemberCallArguments();
-			implicitFirstArgument = ((XMemberFeatureCall) featureCall).getMemberCallTarget();
-			needsSeperator = implicitFirstArgument != null && arguments.size() > 0;
-		} else {
-			implicitFirstArgument = featureCall.getImplicitFirstArgument();
-			arguments = featureCallToJavaMapping.getActualArguments(featureCall);
-			if(arguments.size() > 0)
-				if(featureCall.getImplicitReceiver() == arguments.get(0))
-					implicitFirstArgument = arguments.get(0);
-			needsSeperator = implicitFirstArgument != null && arguments.size() > 1;
-		}
-		
-		XbaseSwitch<String> xbaseSwitch = new XtendHoverXbaseSwitch();
-		if (implicitFirstArgument != null) {
-			String doSwitch = xbaseSwitch.doSwitch(implicitFirstArgument).trim();
-			if (doSwitch != null)
-				stringBuilder.append(doSwitch);
-		}
-		if (arguments.size() > 0) {
-			XExpression first = arguments.get(0);
-			if(needsSeperator)
-				stringBuilder.append(SEPERATOR);
-			
-			if (first == implicitFirstArgument && arguments.size() > 1) {
-				first = arguments.get(1);
+		if (featureCall != null) {
+			XExpression implicitFirstArgument = null;
+			List<XExpression> arguments = Lists.newArrayList();
+			boolean needsSeperator = false;
+			if (featureCall instanceof XMemberFeatureCall) {
+				arguments = ((XMemberFeatureCall) featureCall).getMemberCallArguments();
+				implicitFirstArgument = ((XMemberFeatureCall) featureCall).getMemberCallTarget();
+				needsSeperator = implicitFirstArgument != null && arguments.size() > 0;
+			} else {
+				implicitFirstArgument = featureCall.getImplicitFirstArgument();
+				arguments = featureCallToJavaMapping.getActualArguments(featureCall);
+				if (arguments.size() > 0)
+					if (featureCall.getImplicitReceiver() == arguments.get(0))
+						implicitFirstArgument = arguments.get(0);
+				needsSeperator = implicitFirstArgument != null && arguments.size() > 1;
 			}
-			XExpression last = arguments.get(arguments.size() - 1);
-			if (last != implicitFirstArgument) {
-				int startOffset = NodeModelUtils.getNode(first).getTotalOffset();
-				int endOffset = NodeModelUtils.getNode(last).getTotalEndOffset();
 
-				String model = ((XtextResource) featureCall.eResource()).getParseResult().getRootNode().getText();
-				stringBuilder.append(model.substring(startOffset, endOffset).trim());
+			XbaseSwitch<String> xbaseSwitch = new XtendHoverXbaseSwitch();
+			if (implicitFirstArgument != null) {
+				String doSwitch = xbaseSwitch.doSwitch(implicitFirstArgument).trim();
+				if (doSwitch != null)
+					stringBuilder.append(doSwitch);
+			}
+			if (arguments.size() > 0) {
+				XExpression first = arguments.get(0);
+				if (needsSeperator)
+					stringBuilder.append(SEPERATOR);
+
+				if (first == implicitFirstArgument && arguments.size() > 1) {
+					first = arguments.get(1);
+				}
+				XExpression last = arguments.get(arguments.size() - 1);
+				if (last != implicitFirstArgument) {
+					ICompositeNode startNode = NodeModelUtils.getNode(first);
+
+					ICompositeNode endNode = NodeModelUtils.getNode(last);
+					if (startNode != null && endNode != null) {
+						int startOffset = startNode.getTotalOffset();
+						int endOffset = endNode.getTotalEndOffset();
+
+						XtextResource resource = (XtextResource) featureCall.eResource();
+						if (resource != null) {
+							IParseResult parseResult = resource.getParseResult();
+							if (parseResult != null) {
+								String model = parseResult.getRootNode().getText();
+								stringBuilder.append(model.substring(startOffset, endOffset).trim());
+							}
+						}
+					}
+				}
 			}
 		}
-
 		stringBuilder.append(")");
 		return stringBuilder.toString();
 	}
@@ -137,19 +151,29 @@ public class XtendHoverSerializer {
 
 		@Override
 		public String caseXExpression(XExpression object) {
-			return NodeModelUtils.getNode(object).getText();
+			if (object != null) {
+				ICompositeNode node = NodeModelUtils.getNode(object);
+				if (node != null)
+					return node.getText();
+			}
+			return "";
 		}
 	}
 
 	public Pair<String, String> computePreAndSuffix(EObject element) {
 		ICompositeNode node = NodeModelUtils.getNode(element);
 		if (node != null) {
-			String model = ((XtextResource) element.eResource()).getParseResult().getRootNode().getText();
-			return Tuples.create(model.substring(0, node.getTotalOffset()) + "\n",
-					"\n" + model.substring(node.getTotalEndOffset()));
-		} else {
-			return Tuples.create("", "");
+			XtextResource resource = (XtextResource) element.eResource();
+			if (resource != null) {
+				IParseResult parseResult = resource.getParseResult();
+				if (parseResult != null) {
+					String model = parseResult.getRootNode().getText();
+					return Tuples.create(model.substring(0, node.getTotalOffset()) + "\n",
+							"\n" + model.substring(node.getTotalEndOffset()));
+				}
+			}
 		}
+		return Tuples.create("", "");
 
 	}
 }
