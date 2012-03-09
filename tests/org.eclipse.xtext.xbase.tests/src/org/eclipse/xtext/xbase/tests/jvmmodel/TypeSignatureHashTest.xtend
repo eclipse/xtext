@@ -9,12 +9,15 @@
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EcoreFactory
-import org.eclipse.xtext.xbase.jvmmodel.JvmDeclaredTypeSignatureHashProvider
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
 import static org.junit.Assert.*
+import static extension org.eclipse.xtext.util.Strings.*;
 
 /**
  * The remaining tests are in xtend.core.tests, as it is a lot easier to specify JvmModels in Xtend ;-)
@@ -27,6 +30,8 @@ class TypeSignatureHashTest extends AbstractXbaseTestCase {
 	
 	@Inject extension JvmTypesBuilder
 	
+	@Inject extension TypeReferences;
+	
 	@Test
 	def testSubType() {
 		val eObject = EcoreFactory::eINSTANCE.createEObject
@@ -38,6 +43,19 @@ class TypeSignatureHashTest extends AbstractXbaseTestCase {
 		bar.members += eObject.toConstructor() []
 		assertEquals(hash, foo.hash)
 		bar.simpleName = 'Baz'
-		assertFalse("Expected different hashes", hash == foo.hash)
+		assertFalse("Expected different hashes", hash.equal(foo.hash))
+	}
+	
+	@Test
+	def void testUnsealedType() {
+		val eObject = EcoreFactory::eINSTANCE.createEObject
+		val bar = eObject.toClass('Bar')
+		assertFalse('Bar'.equal(bar.hash))
+	}
+
+	@Test
+	def void testSealedType() {
+		val e = expression("null")
+		assertEquals('java.lang.String', (findDeclaredType(typeof(String), e) as JvmDeclaredType).hash)
 	}
 }

@@ -17,7 +17,6 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.jvmmodel.JvmDeclaredTypeSignatureHashProvider;
 
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.ImmutableMap;
