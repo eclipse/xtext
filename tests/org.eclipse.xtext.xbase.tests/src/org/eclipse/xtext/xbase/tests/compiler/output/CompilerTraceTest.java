@@ -368,6 +368,15 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	public void testMemberFeatureCall_05() throws Exception {
+		assertTrace( 
+				"\n" + 
+				"String _string = \"\".#toString()#;\n" + 
+				"return _string;", 
+				"''.#toString()#");
+	}
+	
+	@Test
 	public void testForLoop_01() throws Exception {
 		assertTrace( 
 				"\n" + 
