@@ -8,8 +8,6 @@ package org.eclipse.xtext.xbase.compiler;
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-import static com.google.common.collect.Lists.newArrayList;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
@@ -41,6 +39,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 import com.google.inject.Inject;
 import com.google.inject.internal.MoreTypes;
+
+import static com.google.common.collect.Lists.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -382,12 +382,26 @@ public class OnTheFlyJavaCompiler {
 	public String getClasspathArgs() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("-classpath ");
+		if (classpath.isEmpty()) {
+			initializeClassPath();
+		}
 		for (int i = 0; i < classpath.size(); i++) {
 			sb.append(classpath.get(i));
 			if (i + 1 < classpath.size())
 				sb.append(File.pathSeparator);
 		}
 		return sb.toString();
+	}
+
+	public void initializeClassPath() {
+		clearClassPath();
+		if (parentClassLoader instanceof URLClassLoader) {
+			URL[] urLs = ((URLClassLoader) parentClassLoader).getURLs();
+			for (URL url : urLs) {
+				final String urlAsString = url.getFile();
+				addClassPath(urlAsString);
+			}
+		}
 	}
 
 	protected String getComplianceLevelArg() {
