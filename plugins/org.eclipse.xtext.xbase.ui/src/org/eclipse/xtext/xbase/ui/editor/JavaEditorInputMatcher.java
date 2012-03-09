@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.ui.editor;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.jdt.internal.ui.javaeditor.EditorUtility;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorMatchingStrategy;
 import org.eclipse.ui.IEditorPart;
@@ -73,7 +74,8 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			if (thisIsTheOnlyOne) {
 				IEditorPart existingEditor = editorRef.getEditor(false);
 				if (existingEditor instanceof XbaseEditor) {
-					((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newResource);
+					if (isMarkNextSelectionAsJavaOffSet())
+						((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newResource);
 					return true;
 				}
 			}
@@ -81,6 +83,14 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			logger.error(e.getMessage(), e);
 		}
 		return false;
+	}
+
+	protected boolean isMarkNextSelectionAsJavaOffSet() {
+		for (StackTraceElement ste : new Exception().getStackTrace()) {
+			if (ste.getClassName().equals(EditorUtility.class.getName()) && ste.getMethodName().equals("isOpenInEditor"))
+				return false;
+		}
+		return true;
 	}
 
 }
