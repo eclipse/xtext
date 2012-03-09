@@ -9,6 +9,8 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -19,10 +21,13 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public interface IParseResult {
 
+	@Nullable
     EObject getRootASTElement();
 
+	@NonNull
     ICompositeNode getRootNode();
     
+    @NonNull
     Iterable<INode> getSyntaxErrors();
     
     boolean hasSyntaxErrors();

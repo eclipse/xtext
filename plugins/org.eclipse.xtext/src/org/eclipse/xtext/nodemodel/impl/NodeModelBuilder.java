@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -24,11 +26,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * A statefull (!) builder that provides call back methods for clients who
+ * A stateful (!) builder that provides call back methods for clients who
  * want to create a node model and maintain its invariants. 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
  */
+@NonNullByDefault
 public class NodeModelBuilder {
 
 	private EObject forcedGrammarElement;
@@ -84,7 +87,7 @@ public class NodeModelBuilder {
 		child.basicSetPreviousSibling(child);
 	}
 
-	protected void checkValidNewChild(AbstractNode child) {
+	protected void checkValidNewChild(@Nullable AbstractNode child) {
 		if (child == null)
 			throw new IllegalArgumentException("child may not be null");
 		if (child.basicGetNextSibling() != null || child.basicGetPreviousSibling() != null)
@@ -132,7 +135,7 @@ public class NodeModelBuilder {
 		return result;
 	}
 
-	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, SyntaxErrorMessage errorMessage,
+	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, @Nullable SyntaxErrorMessage errorMessage,
 			ICompositeNode parent) {
 		LeafNode result = null;
 		if (errorMessage != null) {

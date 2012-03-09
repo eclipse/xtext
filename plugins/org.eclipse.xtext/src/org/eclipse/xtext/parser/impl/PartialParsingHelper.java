@@ -66,7 +66,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 		if (parser == null)
 			throw new NullPointerException("parser may not be null");
-		if (previousParseResult == null || previousParseResult.getRootNode() == null) {
+		if (previousParseResult == null) {
 			throw new NullPointerException("previousParseResult and previousParseResult.rootNode may not be null");
 		}
 		ICompositeNode oldRootNode = previousParseResult.getRootNode();

@@ -33,6 +33,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
@@ -74,8 +75,10 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	private BitSet idLengthsToHighlight;
 
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null || resource.getParseResult() == null
-				|| resource.getParseResult().getRootASTElement() == null)
+		if (resource == null)
+			return;
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult == null || parseResult.getRootASTElement() == null)
 			return;
 		if (highlightedIdentifiers == null) {
 			highlightedIdentifiers = initializeHighlightedIdentifiers();
@@ -102,7 +105,10 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	 *            the acceptor. Is never <code>null</code>.
 	 */
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		ICompositeNode node = resource.getParseResult().getRootNode();
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult == null)
+			throw new IllegalStateException("resource#parseResult may not be null");
+		ICompositeNode node = parseResult.getRootNode();
 		highlightSpecialIdentifiers(acceptor, node);
 		searchAndHighlightElements(resource, acceptor);
 	}

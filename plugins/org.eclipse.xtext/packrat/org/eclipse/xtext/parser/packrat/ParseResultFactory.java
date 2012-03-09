@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.packrat.debug.DebugUtil;
 import org.eclipse.xtext.parser.packrat.debug.ParsedTokenPrinter;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
@@ -66,8 +65,9 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		} else {
 			token.accept(this);
 		}
+		throw new UnsupportedOperationException();
 //		this.input = null;
-		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), null, false);
+//		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), null, false);
 	}
 
 //	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {
