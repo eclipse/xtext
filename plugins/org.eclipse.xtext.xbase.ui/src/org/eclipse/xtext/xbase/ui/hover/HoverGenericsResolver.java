@@ -23,6 +23,9 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.hover.FeatureCallRequest.IFeatureCallRequestProvider;
 
 import com.google.common.collect.Lists;
@@ -38,49 +41,72 @@ public class HoverGenericsResolver {
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 	@Inject
 	private IFeatureCallRequestProvider featureCallRequestProvider;
+	@Inject
+	private ITypeProvider typeProvider;
 
-	public String resolveSignatureInHtml(XAbstractFeatureCall call, IJavaElement javaElement, String html) {
+	public String resolveSignatureInHtml(XExpression call, IJavaElement javaElement, String html) {
 		// Compute the signature to replace only here
 		String signature = getJavaSignature(javaElement);
 		String resolvedSignature = replaceGenerics(call, signature);
 		return html.replace(signature, resolvedSignature);
 	}
 
-	public String replaceGenerics(XAbstractFeatureCall featureCall, String input) {
+	public String replaceGenerics(XExpression call, String input) {
 		String output = input;
-		if (featureCall != null && featureCall.getFeature() instanceof JvmExecutable) {
-			final JvmExecutable executable = (JvmExecutable) featureCall.getFeature();
-			for (Pair<JvmTypeParameter, JvmTypeReference> pair : getBoundTypePairs(featureCall, executable)) {
-				JvmTypeParameter unresolvedType = pair.getFirst();
-				JvmTypeReference resolvedType = pair.getSecond();
-				if (unresolvedType != null && resolvedType != null) {
-					String toBeReplaced = unresolvedType.getSimpleName();
-					String with = resolvedType.getSimpleName();
-					output = output.replaceAll("\\b" + Pattern.quote(toBeReplaced) + "\\b", with);
-				}
+		if (call != null) {
+			JvmExecutable executable = null;
+			if (call instanceof XAbstractFeatureCall) {
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) call;
+				if (featureCall.getFeature() instanceof JvmExecutable)
+					executable = (JvmExecutable) featureCall.getFeature();
 			}
+			if (call instanceof XConstructorCall) {
+				XConstructorCall constructorCall = (XConstructorCall) call;
+				executable = constructorCall.getConstructor();
+			}
+			if (executable != null)
+				for (Pair<JvmTypeParameter, JvmTypeReference> pair : getBoundTypePairs(call, executable)) {
+					JvmTypeParameter unresolvedType = pair.getFirst();
+					JvmTypeReference resolvedType = pair.getSecond();
+					if (unresolvedType != null && resolvedType != null) {
+						String toBeReplaced = unresolvedType.getSimpleName();
+						String with = resolvedType.getSimpleName();
+						output = output.replaceAll("\\b" + Pattern.quote(toBeReplaced) + "\\b", with);
+					}
+				}
 
 		}
 		return output;
 	}
 
-	protected List<Pair<JvmTypeParameter, JvmTypeReference>> getBoundTypePairs(final XAbstractFeatureCall featureCall,
+	protected List<Pair<JvmTypeParameter, JvmTypeReference>> getBoundTypePairs(final XExpression call,
 			final JvmExecutable executable) {
-		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
-				.getTypeArgumentContext(featureCallRequestProvider.get(featureCall));
-		List<Pair<JvmTypeParameter, JvmTypeReference>> pairs = Lists.newArrayList();
-		for (JvmTypeParameter jvmTypeParameter : executable.getTypeParameters()) {
-			pairs.add(Tuples.create(jvmTypeParameter, typeArgumentContext.getBoundArgument(jvmTypeParameter)));
+		ITypeArgumentContext typeArgumentContext = null;
+		if (call instanceof XAbstractFeatureCall) {
+			typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(featureCallRequestProvider
+					.get((XAbstractFeatureCall) call));
+		} else if (call instanceof XConstructorCall) {
+			XConstructorCall constructorCall = (XConstructorCall) call;
+			typeArgumentContext = typeProvider
+					.getTypeArgumentContext(constructorCall, constructorCall.getConstructor());
 		}
-		JvmTypeParameterDeclarator nearestDeclarator = EcoreUtil2.getContainerOfType(executable, JvmTypeParameterDeclarator.class);
-		if(nearestDeclarator != null)
-			for(JvmTypeParameter jvmTypeParameter : nearestDeclarator.getTypeParameters()){
+		List<Pair<JvmTypeParameter, JvmTypeReference>> pairs = Lists.newArrayList();
+		if (typeArgumentContext != null) {
+
+			for (JvmTypeParameter jvmTypeParameter : executable.getTypeParameters()) {
 				pairs.add(Tuples.create(jvmTypeParameter, typeArgumentContext.getBoundArgument(jvmTypeParameter)));
 			}
+			JvmTypeParameterDeclarator nearestDeclarator = EcoreUtil2.getContainerOfType(executable.eContainer(),
+					JvmTypeParameterDeclarator.class);
+			if (nearestDeclarator != null)
+				for (JvmTypeParameter jvmTypeParameter : nearestDeclarator.getTypeParameters()) {
+					pairs.add(Tuples.create(jvmTypeParameter, typeArgumentContext.getBoundArgument(jvmTypeParameter)));
+				}
+		}
 		return pairs;
 	}
-	
-	public String getJavaSignature(IJavaElement javaElement){
+
+	public String getJavaSignature(IJavaElement javaElement) {
 		return JavaElementLinks.getElementLabel(javaElement, getHeaderFlags(javaElement));
 	}
 
