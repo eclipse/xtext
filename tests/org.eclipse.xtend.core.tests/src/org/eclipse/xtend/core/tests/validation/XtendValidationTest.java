@@ -842,6 +842,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
+	@Test public void testUnusedExtensionField() throws Exception {
+		XtendClass clazz = clazz("import com.google.inject.Inject class X { @Inject extension String }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "extension", "String", "not", "used", "in", "X");
+	}
+	
+	@Test public void testUnusedExtensionField_1() throws Exception {
+		XtendClass clazz = clazz("import com.google.inject.Inject class X { @Inject extension String x }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "extension", "X.x", "not", "used");
+	}
+	
 	@Test public void testUnusedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private foo(String a, Integer b) }");
 		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String, Integer)","never", "used");
