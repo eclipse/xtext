@@ -15,7 +15,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.xbase.jvmmodel.JvmDeclaredTypeSignatureHashProvider;
+import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -40,7 +40,7 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertSameSignature(
 				"package test class Foo {}", 
 				"package test class Foo extends Object {}");
-		assertSameSignature(
+		assertDifferentSignature(
 				"package test class Foo implements java.io.Serializable, Cloneable {}", 
 				"package test class Foo implements Cloneable, java.io.Serializable {}");
 		assertDifferentSignature(
@@ -49,6 +49,12 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertDifferentSignature(
 				"package test class Foo {}", 
 				"package test class Foo implements java.io.Serializable {}");
+		assertSameSignature(
+				"package test @SuppressWarnings('all') class Foo {}",
+				"package test class Foo {}");
+		assertDifferentSignature(
+				"package test class Foo {}",
+				"package test @Deprecated class Foo {}");
 	}
 
 	@Test
@@ -59,7 +65,7 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertSameSignature(
 				"package test class Foo { private String bar }",
 				"package test class Foo { private int bar }");
-		assertSameSignature(
+		assertDifferentSignature(
 				"package test class Foo { public String bar public String baz }",
 				"package test class Foo { public String baz public String bar }");
 		assertDifferentSignature(
@@ -71,6 +77,13 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertDifferentSignature(
 				"package test class Foo { public String bar }",
 				"package test class Foo { public static String bar }");
+		assertSameSignature(
+				"package test class Foo { @SuppressWarnings('all') public String foo }",
+				"package test class Foo { public String foo }");
+		assertDifferentSignature(
+				"package test class Foo { public String foo }",
+				"package test class Foo { @Deprecated public String foo }");
+
 	}
 
 	@Test
@@ -96,6 +109,12 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertDifferentSignature(
 				"package test class Foo { new <T> () {} }",
 				"package test class Foo { new() {} }");
+		assertSameSignature(
+				"package test class Foo { @SuppressWarnings('all') new() {} }",
+				"package test class Foo { new() {} }");
+		assertDifferentSignature(
+				"package test class Foo { new() {} }",
+				"package test class Foo { @Deprecated new() {} }");
 	}
 
 	@Test
@@ -127,6 +146,12 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertDifferentSignature(
 				"package test class Foo { def void foo() {} }",
 				"package test class Foo { def <T> void foo() {} }");
+		assertSameSignature(
+				"package test class Foo { @SuppressWarnings('all') def void foo() {} }",
+				"package test class Foo { def void foo() {} }");
+		assertDifferentSignature(
+				"package test class Foo { def void foo() {} }",
+				"package test class Foo { @Deprecated def foo() {} }");
 	}
 	
 	@Test
@@ -153,6 +178,11 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertFalse(equal(getTypeSignature(fooFile0), getTypeSignature(fooFile2)));
 	}
 
+	@Test
+	public void testTypeRecursion() throws Exception {
+		getSignature("package test class Foo implements Comparable<Foo> { def compareTo(Foo x) { 0 } }");
+	}
+	
 	protected void assertSameSignature(String model0, String model1) throws Exception {
 		assertEquals(getSignature(model0), getSignature(model1));
 	}
