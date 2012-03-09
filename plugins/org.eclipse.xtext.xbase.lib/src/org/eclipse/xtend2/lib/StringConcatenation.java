@@ -45,6 +45,7 @@ public class StringConcatenation implements CharSequence {
 	/**
 	 * The default line delimiter that is used by instances of {@link StringConcatenation}. It uses
 	 * <code>System.getProperty("line.separator")</code>.
+	 * @since 2.3
 	 */
 	public static final String DEFAULT_LINE_DELIMITER = System.getProperty("line.separator");
 
@@ -82,6 +83,7 @@ public class StringConcatenation implements CharSequence {
 	 *            the used delimiter.
 	 * @throws IllegalArgumentException
 	 *             if the lineDelimiter is <code>null</code> or the empty String.
+	 * @since 2.3
 	 */
 	public StringConcatenation(String lineDelimiter) {
 		if (lineDelimiter == null || lineDelimiter.length() == 0)
