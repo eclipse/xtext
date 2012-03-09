@@ -120,7 +120,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 					b.append(type.getType()).append(".valueOf(").append(Long.toString(longValue)).append("L)");
 				} else {
 					String digits = numberLiterals.getDigits(expr);
-					String exponent = numberLiterals.getExponent(digits);
+					String exponent = numberLiterals.getExponent(expr, digits);
 					if (exponent != null) {
 						if (exponent.length() == 1) {
 							exponent = null;

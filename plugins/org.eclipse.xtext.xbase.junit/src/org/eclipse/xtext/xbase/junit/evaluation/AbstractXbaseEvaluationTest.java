@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.ExceptionSubclass;
@@ -167,6 +168,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testBigInteger_5() throws Exception {
 		assertEvaluatesTo(new BigDecimal("10e+12345").toBigInteger(), "10e+12345bI");
+	}
+	
+	@Test public void testBigInteger_6() throws Exception {
+		assertEvaluatesTo(new BigInteger("beefbeefbeefbeefbeef", 16), "0xbeef_beef_beef_beef_beef#BI");
 	}
 
 	@Test public void testBigDecimal_0() throws Exception {
@@ -1193,16 +1198,17 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "new testdata.FieldAccess?.stringField?.toUpperCase");
 	}
 	
-//	TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
-//	@Test public void testSpreadOperator_01() throws Exception {
-//		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
-//		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
-//	}
-//	
-//	@Test public void testSpreadOperator_02() throws Exception {
-//		assertEvaluatesTo(Lists.newArrayList(
-//				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
-//	}
+	@Ignore("TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048")
+	@Test public void testSpreadOperator_01() throws Exception {
+		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
+		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
+	}
+	
+	@Ignore("TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048")
+	@Test public void testSpreadOperator_02() throws Exception {
+		assertEvaluatesTo(Lists.newArrayList(
+				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
+	}
 	
 	@Test public void testSwitchExpression_01() throws Exception {
 		assertEvaluatesTo(null, "switch 'x' { case false: 'literal' }");
