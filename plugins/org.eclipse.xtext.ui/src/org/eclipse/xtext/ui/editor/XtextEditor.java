@@ -112,6 +112,10 @@ import com.google.inject.name.Named;
 public class XtextEditor extends TextEditor {
 	public static final String ERROR_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.error";
 	public static final String WARNING_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.warning";
+	/**
+	 * @since 2.3
+	 */
+	public static final String INFO_ANNOTATION_TYPE = "org.eclipse.ui.workbench.texteditor.info";
 
 	/**
 	 * @since 2.2
