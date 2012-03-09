@@ -34,8 +34,8 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 		action.setDisabledImageDescriptor(ImageDescriptor.createFromImage(imageHelper
 				.getImage("full/dtool16/show_whitespace_chars.gif")));
 		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
-		if (toolBarManager.find(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS) == null)
-			toolBarManager.add(action);
+		toolBarManager.remove(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
+		toolBarManager.add(action);
 	}
 	
 	public void editorDisposed(XtextEditor editor) {
