@@ -62,12 +62,27 @@ public class StacktraceBasedEditorDecider {
 	public boolean isCalledFromFindReferences() {
 		StackTraceElement[] trace = new Exception().getStackTrace();
 		for(StackTraceElement element: trace) {
-//			if (isOpenTypeAction(element))
-//				return Decision.FORCE_XBASE;
 			if (isFindReferences(element))
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean isEditorUtilityIsOpenInEditor() {
+		StackTraceElement[] trace = new Exception().getStackTrace();
+		for(StackTraceElement element: trace) {
+			if (isEditorUtilityIsOpenInEditor(element))
+				return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected boolean isEditorUtilityIsOpenInEditor(StackTraceElement element) {
+		return "org.eclipse.jdt.internal.ui.javaeditor.EditorUtility".equals(element.getClassName()) && "isOpenInEditor".equals(element.getMethodName());
 	}
 	
 	// It is currently not possible to supersede an open editor
@@ -93,7 +108,9 @@ public class StacktraceBasedEditorDecider {
 	 */
 	protected boolean isPackageExplorerOrNavigator(StackTraceElement element) {
 		return "org.eclipse.jdt.internal.ui.packageview.PackageExplorerActionGroup".equals(element.getClassName()) && "handleOpen".equals(element.getMethodName()) 
-				||	"org.eclipse.ui.navigator.CommonViewer".equals(element.getClassName()) && "handleOpen".equals(element.getMethodName());
+				||	"org.eclipse.ui.navigator.CommonViewer".equals(element.getClassName()) && "handleOpen".equals(element.getMethodName())
+				||	"org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart".equals(element.getClassName()) && "linkToEditor".equals(element.getMethodName())
+				||	"org.eclipse.jdt.internal.ui.navigator.JavaFileLinkHelper".equals(element.getClassName()) && "activateEditor".equals(element.getMethodName());
 	}
 	
 }
