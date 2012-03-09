@@ -630,10 +630,22 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return parentScope;
 	}
 
+	/**
+	 * Allows to hook into the case guards to introduce new local variables with a specialized type.
+	 * Implemented as no-op by default.
+	 * @param context the case part.
+	 * @param parentScope the parent scope.
+	 */
 	protected IScope createLocalVarScopeForTypeGuardedCase(XCasePart context, IScope parentScope) {
 		return parentScope;
 	}
 
+	/**
+	 * Allows to hook into the local variable definition for catch clauses.
+	 * @param catchClause the catch clause.
+	 * @param indexOfContextExpressionInBlock the index of the context expression in its surrounding block.
+	 * @param parentScope the parent scope.
+	 */
 	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,
 			IScope parentScope) {
 		return createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
@@ -897,6 +909,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return implicitStaticFeatures.get();
 	}
 	
+	/**
+	 * @param resource the resource which may define implicitly available feature description providers.
+	 */
 	protected void addFeatureDescriptionProvidersForAssignment(
 			Resource resource,
 			JvmDeclaredType contextType, 

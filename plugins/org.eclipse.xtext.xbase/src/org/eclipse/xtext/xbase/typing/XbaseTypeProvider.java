@@ -11,8 +11,6 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -336,6 +334,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null;
 	}
 
+	/**
+	 * @param index the feature index 
+	 */
 	protected JvmTypeReference _expectedType(XClosure closure, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XCLOSURE__EXPRESSION) {
 			JvmTypeReference functionType = getExpectedType(closure, rawType);
@@ -525,6 +526,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null;
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XVariableDeclaration expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
 			final JvmTypeReference type = expr.getType();
@@ -581,6 +586,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null;
 	}
 
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference getExpectedVarArgType(JvmExecutable feature, ITypeArgumentContext typeArgumentContext,
 			boolean rawType, boolean forceComponentType) {
 		JvmFormalParameter lastParameter = feature.getParameters().get(feature.getParameters().size() - 1);
@@ -622,6 +630,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		throw new IllegalStateException("Unhandled reference " + reference);
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XIfExpression expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XIF_EXPRESSION__IF) {
 			return getTypeReferences().getTypeForName(Boolean.TYPE, expr);
@@ -629,12 +641,22 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getExpectedType(expr, rawType);
 	}
 
+	/**
+	 * @param expr the for loop expression whose expected child type shall be computed. May not be <code>null</code>.
+	 * @param reference the feature that describes the child whose type is expected
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XForLoopExpression expr, EReference reference, int index, boolean rawType) {
 		// Unless we can have multiple possible expected types (i.e. array and iterable), we shouldn't expect anything here
 		// The conformance test is done explicitly in the validator.
 		return null; // no expectations
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XAbstractWhileExpression expr, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) {
@@ -644,6 +666,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no other expectations
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XTryCatchFinallyExpression expr, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION) {
@@ -655,6 +681,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no other expectations
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XCatchClause expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XCATCH_CLAUSE__DECLARED_PARAM) {
 			return getTypeReferences().getTypeForName(Throwable.class, expr);
@@ -662,6 +692,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getExpectedType((XExpression) expr.eContainer(), rawType);
 	}
 
+	/**
+	 * @param expr the casted expression that is the container of the child whose expected type should be computed. May not be <code>null</code>.
+	 * @param reference the feature that describes the child whose type is expected
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
 		// SE: This was previously explicitly set to null :
 		// "return null; // no expectations!"
@@ -678,10 +714,19 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null;
 	}
 
+	/**
+	 * @param reference the feature that describes the child whose type is expected
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XThrowExpression expr, EReference reference, int index, boolean rawType) {
 		return getTypeReferences().getTypeForName(Throwable.class, expr);
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION) {
 			return getExpectedReturnType(expr, rawType);
@@ -689,6 +734,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no expectations!
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XSwitchExpression expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH) {
 			return null; // no expectations // TODO should we expect Object?
@@ -696,6 +745,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getExpectedType(expr, rawType);
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XCasePart expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XCASE_PART__TYPE_GUARD) {
 			return getTypeReferences().getTypeForName(Class.class, expr);
@@ -795,10 +848,17 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return result;
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XVariableDeclaration object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getPrimitiveVoid(object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 */
 	protected JvmTypeReference _type(final XConstructorCall constructorCall, JvmTypeReference rawExpectation, boolean rawType) {
 		final JvmConstructor constructor = getConstructor(constructorCall);
 		if (constructor == null || constructor.eIsProxy())
@@ -850,19 +910,35 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return context;
 	}
 	
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XBooleanLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(Boolean.TYPE, object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XNullLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
 		JvmAnyTypeReference result = getTypeReferences().createAnyTypeReference(object);
 		return result;
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XNumberLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(numberLiterals.getJavaType(object), object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XStringLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(String.class, object);
 //		if (object.getValue().length() != 1)
@@ -937,33 +1013,61 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return result;
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XCastedExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		return object.getType();
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XForLoopExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getPrimitiveVoid(object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XAbstractWhileExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getPrimitiveVoid(object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XTypeLiteral object, JvmTypeReference rawExpectation, boolean rawType) {
 		JvmParameterizedTypeReference typeRef = factory.createJvmParameterizedTypeReference();
 		typeRef.setType(object.getType());
 		return getTypeReferences().getTypeForName(Class.class, object, typeRef);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XInstanceOfExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		return getTypeReferences().getTypeForName(Boolean.TYPE, object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XThrowExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		final JvmTypeReference typeForName = getPrimitiveVoid(object);
 		return typeForName;
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XReturnExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		final JvmTypeReference typeForName = getPrimitiveVoid(object);
 		return typeForName;
@@ -973,6 +1077,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getTypeReferences().getTypeForName(Void.TYPE, object);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(XTryCatchFinallyExpression object, JvmTypeReference rawExpectation, boolean rawType) {
 		List<JvmTypeReference> returnTypes = newArrayList();
 		final JvmTypeReference getType = getType(object.getExpression(), rawType);
@@ -987,6 +1095,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return commonSuperType;
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(final XFeatureCall featureCall, JvmTypeReference rawExpectation, boolean rawType) {
 		XCasePart typeGuardedXCasePartContainer = findTypeGuardedXCasePartContainer(featureCall, featureCall);
 		JvmTypeReference plainType = _type((XAbstractFeatureCall) featureCall, rawExpectation, rawType);
@@ -1019,6 +1131,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return findTypeGuardedXCasePartContainer(containerCase.eContainer(), call);
 	}
 
+	/**
+	 * @param rawExpectation the expected raw type if set from the outside. May be <code>null</code>.
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _type(final XAbstractFeatureCall featureCall, JvmTypeReference rawExpectation,
 			boolean rawType) {
 		final JvmIdentifiableElement feature = getFeature(featureCall);
@@ -1110,6 +1226,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null;
 	}
 
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _typeForIdentifiable(XCasePart object, boolean rawType) {
 		if (object.getTypeGuard() != null) {
 			return object.getTypeGuard();
@@ -1208,6 +1327,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return super.handleCycleGetTypeForIdentifiable(identifiableElement, rawType);
 	}
 
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType thisOrSuper, boolean rawType) {
 		if (thisOrSuper.eIsProxy())
 			return null;
@@ -1221,6 +1343,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return reference;
 	}
 	
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _typeForIdentifiable(JvmConstructor constructor, boolean rawType) {
 		if (constructor.eIsProxy())
 			return null;
@@ -1235,20 +1360,34 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return reference;
 	}
 
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _typeForIdentifiable(JvmField field, boolean rawType) {
 		return field.getType();
 	}
 
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _typeForIdentifiable(JvmOperation operation, boolean rawType) {
 		return operation.getReturnType();
 	}
 	
+	/**
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _typeForIdentifiable(JvmType type, boolean rawType) {
 		if (type.eIsProxy())
 			return null;
 		return getTypeReferences().createTypeRef(type);
 	}
 
+	/**
+	 * Closures don't exit early and nested expressions have no impact on the container.
+	 * @param expr the closure. 
+	 * @param a the collector of the early exit result.
+	 */
 	protected void _earlyExits(XClosure expr, EarlyExitAcceptor a) {
 		// Don't go into closures
 	}

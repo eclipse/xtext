@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -247,10 +246,22 @@ public class FeatureCallChecker {
 		}
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param description the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(Object input, Object context, EReference ref, IValidatedEObjectDescription description) {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmConstructor input, XConstructorCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		List<XExpression> arguments = context.getArguments();
@@ -265,6 +276,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XBinaryOperation context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		final int irrelevantArguments = jvmFeatureDescription.getNumberOfIrrelevantArguments();
@@ -293,6 +310,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (!jvmFeatureDescription.isValidStaticState()) {
@@ -315,6 +338,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmField input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (input.isFinal())
@@ -329,6 +358,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmField input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (!context.getMemberCallArguments().isEmpty())
@@ -340,6 +375,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 	
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param description the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmIdentifiableElement input, XFeatureCall context, EReference ref,
 			LocalVarDescription description) {
 		if (context.isExplicitOperationCallOrBuilderSyntax())
@@ -347,6 +388,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmField input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (!jvmFeatureDescription.isValidStaticState()) {
@@ -361,6 +408,12 @@ public class FeatureCallChecker {
 		return null;
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param ref the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (!jvmFeatureDescription.isValidStaticState()) {
@@ -370,9 +423,15 @@ public class FeatureCallChecker {
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
 		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(),
-				jvmFeatureDescription, context.getMemberCallArguments());
+				jvmFeatureDescription);
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (!jvmFeatureDescription.isValidStaticState()) {
@@ -380,15 +439,26 @@ public class FeatureCallChecker {
 				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
 		}
 		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(),
-				jvmFeatureDescription, context.getFeatureCallArguments());
+				jvmFeatureDescription);
 	}
 	
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmConstructor input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
-		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription,
-				context.getFeatureCallArguments());
+		return checkJvmOperation(input, context, context.isExplicitOperationCallOrBuilderSyntax(), jvmFeatureDescription);
 	}
 
+	/**
+	 * @param input the input element (dispatch parameter). 
+	 * @param context the context element (dispatch parameter).
+	 * @param reference the reference that potentially points from {@code context} to {@code input} (dispatch parameter).
+	 * @param jvmFeatureDescription the description for the {@code input} (dispatch parameter).
+	 */
 	protected String _case(JvmOperation input, XUnaryOperation context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
 		if (input.getParameters().size() != 1)
@@ -405,7 +475,7 @@ public class FeatureCallChecker {
 	}
 
 	protected String checkJvmOperation(JvmExecutable executable, XAbstractFeatureCall featureCall,
-			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription, EList<XExpression> arguments) {
+			boolean isExplicitOperationCall, JvmFeatureDescription jvmFeatureDescription) {
 		List<XExpression> actualArguments = featureCall2JavaMapping.getActualArguments(
 				featureCall, 
 				executable,

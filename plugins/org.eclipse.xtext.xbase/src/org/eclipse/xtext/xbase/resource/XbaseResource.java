@@ -188,6 +188,16 @@ public class XbaseResource extends DerivedStateAwareResource {
 		return resolvedResult;
 	}
 	
+	/**
+	 * This one is currently implemented as a no-op.
+	 * 
+	 * Intentional implementation would return the resolved instance without changing the owner of the reference. Only single-valued references
+	 * are currently supported.
+	 * 
+	 * @param proxy the proxy which should be resolved with tracking.
+	 * @param owner the owner of the proxy.
+	 * @param reference the cross reference.
+	 */
 	protected JvmIdentifiableElement trackResolution(JvmIdentifiableElement proxy, XExpression owner, EReference reference) {
 		return (JvmIdentifiableElement) owner.eGet(reference);
 //		Tracker tracker = trackAssumptions();
