@@ -1084,8 +1084,18 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if(doCheckValidMemberName(field)) {
 			JvmField jvmField = associations.getJvmField(field);
 			if (jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())) {
-				String message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
+				String message;
+				if(field.isExtension()) {
+					if(field.getName() == null)
+						message = "The extension " + jvmField.getType().getIdentifier() 
+							+ " is not used in " + jvmField.getDeclaringType().getSimpleName();
+					else
+						message = "The extension " + jvmField.getDeclaringType().getSimpleName() + "."
+								+ jvmField.getSimpleName() + " is not used";
+				} else {
+					message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
 						+ jvmField.getSimpleName() + " is not used";
+				}
 				warning(message, XtendPackage.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
 			}
 		}
