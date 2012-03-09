@@ -48,4 +48,11 @@ public class PrimitiveMirror extends AbstractClassMirror {
 			typeResource.getContents().add(type);
 		}
 	}
+
+	/**
+	 * @since 2.3
+	 */
+	public boolean isSealed() {
+		return true;
+	}
 }
