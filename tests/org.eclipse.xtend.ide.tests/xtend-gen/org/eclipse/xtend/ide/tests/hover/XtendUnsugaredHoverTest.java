@@ -10,14 +10,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -25,7 +23,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider.JavadocHoverWrapper;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -39,6 +36,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
 import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput;
 import org.junit.After;
 import org.junit.Assert;
@@ -658,7 +656,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testUnsuagaredVersionForJavaWithJavaDoc() throws Exception {
+  public void testUnsuagaredVersionForJava() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package testpackage");
     _builder.newLine();
@@ -692,25 +690,15 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     XbaseInformationControlInput _second = triple.getSecond();
     IJavaElement _inputElement = _second.getInputElement();
     Assert.assertEquals(javaElement, _inputElement);
-    JavadocHoverWrapper _javadocHoverWrapper = new JavadocHoverWrapper();
-    final JavadocHoverWrapper javaDocHoverWrapper = _javadocHoverWrapper;
-    javaDocHoverWrapper.setJavaElement(javaElement);
-    IRegion _third = triple.getThird();
-    Object _hoverInfo2 = javaDocHoverWrapper.getHoverInfo2(null, _third);
-    final JavadocBrowserInformationControlInput javaDocHoverInput = ((JavadocBrowserInformationControlInput) _hoverInfo2);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _html = _second_1.getHtml();
-    String _html_1 = javaDocHoverInput.getHtml();
-    Assert.assertEquals(_html, _html_1);
     XAbstractFeatureCall _first_1 = triple.getFirst();
     JvmIdentifiableElement _feature_1 = _first_1.getFeature();
     URI _uRI = EcoreUtil2.getURI(((JvmOperation) _feature_1));
-    XbaseInformationControlInput _second_2 = triple.getSecond();
-    EObject _element = _second_2.getElement();
+    XbaseInformationControlInput _second_1 = triple.getSecond();
+    EObject _element = _second_1.getElement();
     URI _uRI_1 = EcoreUtil2.getURI(_element);
     Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_3 = triple.getSecond();
-    String _unsugaredExpression = _second_3.getUnsugaredExpression();
+    XbaseInformationControlInput _second_2 = triple.getSecond();
+    String _unsugaredExpression = _second_2.getUnsugaredExpression();
     Assert.assertEquals("_extensionJava.bar(it, 40 + 2)", _unsugaredExpression);
   }
   
@@ -762,7 +750,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     XExpression _get_2 = _expressions.get(indexOfExpressionToHover);
     final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _get_2);
     IEObjectHover _get_3 = this.<IEObjectHover>get(IEObjectHover.class);
-    final XtendDispatchingEObjectTextHover hover = ((XtendDispatchingEObjectTextHover) _get_3);
+    final XbaseDispatchingEObjectTextHover hover = ((XbaseDispatchingEObjectTextHover) _get_3);
     ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
     ICompositeNode _node = NodeModelUtils.getNode(featureCall);
     int _offset = _node.getOffset();

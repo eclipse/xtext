@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -182,7 +181,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       EList<XtendMember> _members = clazz.getMembers();
       final XtendMember xtendConstructor = _members.get(0);
       final String signature = this.signatureProvider.getSignature(xtendConstructor);
-      Assert.assertEquals("Foo (String a, int b)", signature);
+      Assert.assertEquals("Foo(String a, int b)", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -219,7 +218,44 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
       JvmConstructor _constructor = constructorCall.getConstructor();
       final String signature = this.signatureProvider.getSignature(_constructor);
-      Assert.assertEquals("Foo ()", signature);
+      Assert.assertEquals("Foo()", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForXtendDefaultConstructorWithGenerics() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new Foo()");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
+      JvmConstructor _constructor = constructorCall.getConstructor();
+      final String signature = this.signatureProvider.getSignature(_constructor);
+      Assert.assertEquals("Foo<String>()", signature);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -362,7 +398,6 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
     return _get;
   }
   
-  @Before
   @After
   public void cleanup() {
     try {

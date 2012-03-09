@@ -2,16 +2,13 @@ package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
-import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
-import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider$JavadocHoverWrapper
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover
@@ -19,6 +16,8 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover
+import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -26,7 +25,6 @@ import org.junit.Test
 import static org.eclipse.xtend.ide.tests.hover.XtendUnsugaredHoverTest.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput
 
 class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
@@ -306,7 +304,7 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 	}
 
 	@Test
-	def void testUnsuagaredVersionForJavaWithJavaDoc() throws Exception {
+	def void testUnsuagaredVersionForJava() throws Exception {
 		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
@@ -321,10 +319,6 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 		val triple = computeAstAndInvokeHover(editor,0,0)
 		val javaElement = javaElementFinder.findElementFor(triple.first.feature);
 		assertEquals(javaElement, triple.second.getInputElement)
-		val javaDocHoverWrapper = new JavadocHoverWrapper()
-		javaDocHoverWrapper.setJavaElement(javaElement)
-		val javaDocHoverInput = javaDocHoverWrapper.getHoverInfo2(null, triple.third) as JavadocBrowserInformationControlInput
-		assertEquals(triple.second.html, javaDocHoverInput.html)
 		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation)), EcoreUtil2::getURI(triple.second.element))
 		assertEquals("_extensionJava.bar(it, 40 + 2)", triple.second.getUnsugaredExpression)
 	}
@@ -351,7 +345,7 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 		val resource = loadResource
 		val xtendFile = resource.contents.get(0) as XtendFile
 		val featureCall = ((xtendFile.xtendClass.members.get(1) as XtendFunction).expression as XBlockExpression).expressions.get(indexOfExpressionToHover) as XAbstractFeatureCall
-		val hover = get(typeof(IEObjectHover)) as XtendDispatchingEObjectTextHover
+		val hover = get(typeof(IEObjectHover)) as XbaseDispatchingEObjectTextHover
 		val region = hover.getHoverRegion(editor.internalSourceViewer, NodeModelUtils::getNode(featureCall).offset + addOffset)
 		return Tuples::create(featureCall, hover.getHoverInfo2(editor.internalSourceViewer, region) as XbaseInformationControlInput, region)
 	}

@@ -25,7 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtendDocumentationProviderTest extends AbstractXtendUITestCase {
+public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
   @Inject
   private ParseHelper<XtendFile> parseHelper;
   

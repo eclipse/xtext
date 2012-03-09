@@ -7,23 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.hover;
 
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.internal.ui.text.java.hover.JavadocBrowserInformationControlInput;
-import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendParameter;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider.JavadocHoverWrapper;
-import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput;
 
@@ -36,63 +24,23 @@ import com.google.inject.Inject;
 public class XtendHoverProvider extends XbaseHoverProvider {
 
 	@Inject
-	private IXtendJvmAssociations associations;
-	@Inject
-	private ILabelProvider labelProvider;
-	@Inject
-	private IJavaElementFinder javaElementFinder;
-	@Inject
 	private XtendHoverSerializer xtendHoverSerializer;
-	@Inject
-	private XtendHoverDocumentationProvider documentationProvider;
-	@Inject
-	private IURIEditorOpener uriEditorOpener;
 
-	private JavadocHoverWrapper javadocHover = new JavadocHoverWrapper();
-	
 	@Override
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
 			XtextBrowserInformationControlInput previous) {
-		EObject objectToView = getObjectToView(element);
-		Pair<String, String> prefixAndSuffixPair = xtendHoverSerializer.computePreAndSuffix(element);
-		String unsugaredExpression = xtendHoverSerializer.computeUnsugaredExpression(element);
-		
-		if (objectToView instanceof JvmIdentifiableElement) {
-			Set<EObject> sourceElements = associations.getSourceElements(objectToView);
-			if(sourceElements.isEmpty()){
-				IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
-				if (javaElement != null) {
-					javadocHover.setJavaElement(javaElement);
-					JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
-							.getHoverInfo2(null, hoverRegion);
-					return new XbaseInformationControlInput(previous, objectToView, javaElement, hoverInfo2.getHtml(),
-							labelProvider, prefixAndSuffixPair.getFirst(), unsugaredExpression,
-							prefixAndSuffixPair.getSecond());
-				}
-			}
+		XtextBrowserInformationControlInput hoverInfo = super.getHoverInfo(element, hoverRegion, previous);
+		if(hoverInfo instanceof XbaseInformationControlInput){
+			XbaseInformationControlInput xbaseHoverInfo = (XbaseInformationControlInput) hoverInfo;
+			Pair<String, String> prefixAndSuffixPair = xtendHoverSerializer.computePreAndSuffix(element);
+			String unsugaredExpression = xtendHoverSerializer.computeUnsugaredExpression(element);
+			return new XbaseInformationControlInput(previous, xbaseHoverInfo, prefixAndSuffixPair.getFirst(), unsugaredExpression, prefixAndSuffixPair.getSecond());
 		}
-		String html = getHoverInfoAsHtml(objectToView);
-		if (html != null) {
-			StringBuffer buffer = new StringBuffer(html);
-			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
-			HTMLPrinter.addPageEpilog(buffer);
-			html = buffer.toString();
-			return new XbaseInformationControlInput(previous, objectToView, html, labelProvider,
-					prefixAndSuffixPair.getFirst(), unsugaredExpression, prefixAndSuffixPair.getSecond());
-		}
-
-		return null;
+		return hoverInfo;
 	}
 	
 	@Override
 	protected boolean hasHover(EObject o) {
-		return super.hasHover(o) || o instanceof XtendParameter || o instanceof XAbstractFeatureCall;
-	}
-	
-	private EObject getObjectToView(EObject object) {
-		if (object instanceof XAbstractFeatureCall) {
-			return ((XAbstractFeatureCall) object).getFeature();
-		}
-		return object;
+		return super.hasHover(o) || o instanceof XtendParameter;
 	}
 }
