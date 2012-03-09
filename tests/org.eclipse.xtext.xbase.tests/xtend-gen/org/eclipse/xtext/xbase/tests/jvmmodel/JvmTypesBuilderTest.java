@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -54,9 +53,6 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   
   @Inject
   private JvmTypesBuilder _jvmTypesBuilder;
-  
-  @Inject
-  private IJvmModelAssociations associations;
   
   @Inject
   private ILogicalContainerProvider containerProvider;

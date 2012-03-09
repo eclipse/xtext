@@ -8,7 +8,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
@@ -23,8 +22,6 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Inject TypeReferences references
 	
 	@Inject extension JvmTypesBuilder
-	
-	@Inject IJvmModelAssociations associations
 	
 	@Inject ILogicalContainerProvider containerProvider
 	
