@@ -133,14 +133,16 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 
 	private INode findContextNode(EObject semanticObject) {
 		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
-		BidiIterator<INode> nodes = node.getAsTreeIterable().iterator();
-		while (nodes.hasNext()) {
-			INode next = nodes.next();
-			if (next.getGrammarElement() instanceof RuleCall)
-				return next;
-			if (next.getGrammarElement() instanceof ParserRule
-					&& ((ParserRule) next.getGrammarElement()).getType().getClassifier() instanceof EClass)
-				return next;
+		if (node != null) {
+			BidiIterator<INode> nodes = node.getAsTreeIterable().iterator();
+			while (nodes.hasNext()) {
+				INode next = nodes.next();
+				if (next.getGrammarElement() instanceof RuleCall)
+					return next;
+				if (next.getGrammarElement() instanceof ParserRule
+						&& ((ParserRule) next.getGrammarElement()).getType().getClassifier() instanceof EClass)
+					return next;
+			}
 		}
 		throw new RuntimeException("no context found");
 	}

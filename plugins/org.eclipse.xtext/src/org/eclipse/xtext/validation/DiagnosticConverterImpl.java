@@ -119,10 +119,12 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			if (diagnostic instanceof RangeBasedDiagnostic) {
 				RangeBasedDiagnostic castedDiagnostic = (RangeBasedDiagnostic) diagnostic;
 				INode parserNode = NodeModelUtils.getNode(causer);
-				String completeText = parserNode.getRootNode().getText();
-				int startLine = Strings.countLines(completeText.substring(0, castedDiagnostic.getOffset())) + 1;
 				IssueLocation result = new IssueLocation();
-				result.lineNumber = startLine;
+				if (parserNode != null) {
+					String completeText = parserNode.getRootNode().getText();
+					int startLine = Strings.countLines(completeText.substring(0, castedDiagnostic.getOffset())) + 1;
+					result.lineNumber = startLine;
+				}
 				result.offset = castedDiagnostic.getOffset();
 				result.length = castedDiagnostic.getLength();
 				return result;
