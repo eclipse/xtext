@@ -46,7 +46,6 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -742,7 +741,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	protected void initStream(AbstractToken token, WsMergerStream out) {
 		AbstractElement rootMostElement = null;
 		if (!token.getTokensForSemanticChildren().isEmpty()) {
-			for (AbstractToken t : Iterables.reverse(token.getTokensForSemanticChildren()))
+			for (AbstractToken t : Lists.reverse(token.getTokensForSemanticChildren()))
 				if (t.getGrammarElement() != null) {
 					rootMostElement = t.getGrammarElement();
 					break;
