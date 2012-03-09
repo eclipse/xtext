@@ -13,8 +13,10 @@ import java.util.regex.Pattern;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementLinks;
 import org.eclipse.jdt.ui.JavaElementLabels;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -70,6 +72,11 @@ public class HoverGenericsResolver {
 		for (JvmTypeParameter jvmTypeParameter : executable.getTypeParameters()) {
 			pairs.add(Tuples.create(jvmTypeParameter, typeArgumentContext.getBoundArgument(jvmTypeParameter)));
 		}
+		JvmTypeParameterDeclarator nearestDeclarator = EcoreUtil2.getContainerOfType(executable, JvmTypeParameterDeclarator.class);
+		if(nearestDeclarator != null)
+			for(JvmTypeParameter jvmTypeParameter : nearestDeclarator.getTypeParameters()){
+				pairs.add(Tuples.create(jvmTypeParameter, typeArgumentContext.getBoundArgument(jvmTypeParameter)));
+			}
 		return pairs;
 	}
 	
