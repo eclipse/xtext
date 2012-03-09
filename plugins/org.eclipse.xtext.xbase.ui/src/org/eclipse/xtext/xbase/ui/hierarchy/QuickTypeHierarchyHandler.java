@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public class QuickTypeHierarchyHandler extends AbstractTypeHierarchyHandler {
+public class QuickTypeHierarchyHandler extends AbstractHierarchyHandler {
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
