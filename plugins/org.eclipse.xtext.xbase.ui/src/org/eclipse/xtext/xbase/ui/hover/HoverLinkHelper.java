@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @since 2.3
  */
 public class HoverLinkHelper {
 	

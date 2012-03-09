@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.validation.UIStrings;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @since 2.3
  */
 public class HoverUiStrings extends UIStrings {
 

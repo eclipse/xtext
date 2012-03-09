@@ -234,18 +234,20 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		if (fInput != null && fInput instanceof XbaseInformationControlInput) {
 			XbaseInformationControlInput castedInput = (XbaseInformationControlInput) fInput;
 			unsugaredExpression = castedInput.getUnsugaredExpression();
-			EObject element = fInput.getElement();
-			if(element != null && element.eResource() != null && element.eResource().getResourceSet() != null)
-				resourceProvider.setContext(((XtextResourceSet) element.eResource().getResourceSet()).getClasspathURIContext());
-			else
-				return;
-			embeddedEditorAccess.updateModel("", "a", "");
-			embeddedEditorAccess.updateModel(castedInput.getPrefix() , unsugaredExpression ,castedInput.getSuffix());
-			//FIXME : Remove this one when https://bugs.eclipse.org/bugs/show_bug.cgi?id=368800 is solved
-			xbaseHoverConfiguration.getHighlightingHelper().install(embeddedEditor.getConfiguration(),embeddedEditor.getViewer());
+			if(unsugaredExpression != null && unsugaredExpression.length() > 0){
+				EObject element = fInput.getElement();
+				if(element != null && element.eResource() != null && element.eResource().getResourceSet() != null)
+					resourceProvider.setContext(((XtextResourceSet) element.eResource().getResourceSet()).getClasspathURIContext());
+				else
+					return;
+				embeddedEditorAccess.updateModel("", "a", "");
+				embeddedEditorAccess.updateModel(castedInput.getPrefix() , unsugaredExpression ,castedInput.getSuffix());
+				//FIXME : Remove this one when https://bugs.eclipse.org/bugs/show_bug.cgi?id=368800 is solved
+				xbaseHoverConfiguration.getHighlightingHelper().install(embeddedEditor.getConfiguration(),embeddedEditor.getViewer());
+			}
 		}
 
-		if (unsugaredExpression.length() > 0)
+		if (unsugaredExpression != null && unsugaredExpression.length() > 0)
 			fSashForm.setWeights(new int[] { 7, 3 });
 		else
 			fSashForm.setWeights(new int[] { 10, 0 });
@@ -282,9 +284,12 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		height = height + bounds.height;
 
 		if(fInput instanceof XbaseInformationControlInput){
-			Rectangle detailBounds = computeBounds(sizeConstraints, trim, null, ((XbaseInformationControlInput)fInput).getUnsugaredExpression());
-			minWidth = Math.max(minWidth, detailBounds.width);
-			height += detailBounds.height + 30;
+			String unsugaredExpression = ((XbaseInformationControlInput)fInput).getUnsugaredExpression();
+			if(unsugaredExpression != null && unsugaredExpression.length() > 0){
+				Rectangle detailBounds = computeBounds(sizeConstraints, trim, null, unsugaredExpression);
+				minWidth = Math.max(minWidth, detailBounds.width);
+				height += detailBounds.height + 30;
+			}
 		}
 
 		// Add some air to accommodate for different browser renderings

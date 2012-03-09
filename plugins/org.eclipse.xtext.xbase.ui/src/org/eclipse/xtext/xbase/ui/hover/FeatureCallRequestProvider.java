@@ -7,22 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.hover;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EReferenceImpl;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.ui.hover.FeatureCallRequest.IFeatureCallRequestProvider;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
+ * 
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
-public class HoverReference extends EReferenceImpl {
-	EClass clazz = null;
-
-	public HoverReference(EClass clazz) {
-		this.clazz = clazz;
-	}
-
-	@Override
-	public EClass getEReferenceType() {
-		return clazz;
+public class FeatureCallRequestProvider implements IFeatureCallRequestProvider{
+	
+	@Inject
+	private Provider<FeatureCallRequest> featureCallRequestProvider;
+	public FeatureCallRequest get(XAbstractFeatureCall featureCall) {
+		FeatureCallRequest featureCallRequest = featureCallRequestProvider.get();
+		featureCallRequest.setFeatureCall(featureCall);
+		return featureCallRequest;
 	}
 }
