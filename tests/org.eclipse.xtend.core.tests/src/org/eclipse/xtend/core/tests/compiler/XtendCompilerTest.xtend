@@ -45,6 +45,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
 	@Test
 	def testJavaLangReflectImport() { 
 		assertCompilesTo('''
@@ -1181,6 +1182,29 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  }
 			}
 		''')
+	}
+	
+	@Test
+	def testExtensionField() { 
+		assertCompilesTo(
+			'''
+				class NoNPE {
+					extension String
+					def useExtension() {
+						_string.toString
+					}
+				}
+			''', '''
+				@SuppressWarnings("all")
+				public class NoNPE {
+				  private String _string;
+				  
+				  public String useExtension() {
+				    String _string = this._string.toString();
+				    return _string;
+				  }
+				}
+			''')
 	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
