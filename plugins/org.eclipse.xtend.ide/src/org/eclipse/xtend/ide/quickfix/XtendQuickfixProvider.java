@@ -446,7 +446,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData() != null && issue.getData().length > 0)
-			acceptor.accept(issue, "Implement abstract methods", "Implement abstract methods", "fix_indent.gif",
+			acceptor.accept(issue, "Add unimplemented methods", "Add unimplemented methods", "fix_indent.gif",
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
