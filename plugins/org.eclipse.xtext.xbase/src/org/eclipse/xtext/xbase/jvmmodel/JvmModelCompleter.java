@@ -46,6 +46,21 @@ public class JvmModelCompleter {
 			JvmDeclaredType declaredType = (JvmDeclaredType) element;
 			complete(declaredType.getMembers());
 		}
+		if(element instanceof JvmConstructor) {
+			completeJvmConstructor((JvmConstructor) element);
+		}
+	}
+	
+	public void completeJvmConstructor(JvmConstructor constructor) {
+		JvmDeclaredType declaringType = constructor.getDeclaringType();
+		if(declaringType != null) {
+			String simpleName = declaringType.getSimpleName();
+			if(simpleName != null) {
+				constructor.setSimpleName(simpleName);
+				return;
+			}
+		}
+		constructor.setSimpleName("unset");
 	}
 	
 	protected void completeJvmGenericType(JvmGenericType element) {

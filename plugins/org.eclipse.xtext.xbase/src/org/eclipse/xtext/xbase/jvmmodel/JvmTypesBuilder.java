@@ -505,9 +505,8 @@ public class JvmTypesBuilder {
 	 * Creates and returns a constructor with the given simple name associated to the given source element. By default
 	 * the constructor will have an empty body and no arguments, hence the Java default constructor.
 	 */
-	public JvmConstructor toConstructor(EObject sourceElement, String simpleName, Procedure1<JvmConstructor> init) {
+	public JvmConstructor toConstructor(EObject sourceElement, Procedure1<JvmConstructor> init) {
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
-		constructor.setSimpleName(nullSafeName(simpleName));
 		constructor.setVisibility(JvmVisibility.PUBLIC);
 		associate(sourceElement, constructor);
 		if (init != null)
