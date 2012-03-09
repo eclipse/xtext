@@ -48,6 +48,8 @@ import org.eclipse.xtext.ui.editor.hover.html.OpenBrowserUtil;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -115,8 +117,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 				JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
 						.getHoverInfo2(null, hoverRegion);
 				String html = hoverInfo2.getHtml();
-				if (call != null && call instanceof XAbstractFeatureCall)
-					return hoverGenericsResolver.resolveSignatureInHtml((XAbstractFeatureCall) call, javaElement, html);
+				if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
+					return hoverGenericsResolver.resolveSignatureInHtml((XExpression) call, javaElement, html);
 				else
 					return html;
 			}
@@ -138,7 +140,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected EObject getObjectToView(EObject object) {
 		if (object instanceof XAbstractFeatureCall) {
 			return ((XAbstractFeatureCall) object).getFeature();
-		}
+		} else if (object instanceof XConstructorCall)
+			return ((XConstructorCall) object).getConstructor();
 		return object;
 	}
 
@@ -157,8 +160,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected String computeSignature(EObject call, EObject o) {
 		String imageTag = hoverSignatureProvider.getImageTag(o);
 		String signature = hoverSignatureProvider.getSignature(o);
-		if (call != null && call instanceof XAbstractFeatureCall)
-			signature = hoverGenericsResolver.replaceGenerics((XAbstractFeatureCall) call,
+		if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
+			signature = hoverGenericsResolver.replaceGenerics((XExpression) call,
 					hoverSignatureProvider.getSignature(o));
 		if (imageTag != null && signature != null) {
 			return "<b>" + imageTag + HTMLPrinter.convertToHTMLContent(signature) + "</b>";
