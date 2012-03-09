@@ -266,7 +266,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected ITreeAppendable appendTypeArguments(final XAbstractFeatureCall call, ITreeAppendable b) {
+	protected ITreeAppendable appendTypeArguments(final XAbstractFeatureCall call, ITreeAppendable original) {
+		ILocationData completeLocationData = getLocationWithTypeArguments(call);
+		ITreeAppendable completeFeatureCallAppendable = completeLocationData != null ? original.trace(completeLocationData) : original;
 		if (!call.getTypeArguments().isEmpty()) {
 			/*
 			 * We want to create the following trace regions
@@ -276,12 +278,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			 * |         [                                          ]|
 			 * [                                                     ]
 			 */
-			ILocationData completeLocationData = getLocationWithTypeArguments(call);
 			ILocationData argumentsLocationData = null;
 			if (completeLocationData != null) {
 				argumentsLocationData = getLocationOfTypeArguments(call);
 			}
-			ITreeAppendable completeFeatureCallAppendable = completeLocationData != null ? b.trace(completeLocationData) : b;
 			ITreeAppendable typeArgumentsAppendable = argumentsLocationData != null ? completeFeatureCallAppendable.trace(argumentsLocationData) : completeFeatureCallAppendable;
 			typeArgumentsAppendable.append("<");
 			for (int i = 0; i < call.getTypeArguments().size(); i++) {
@@ -391,19 +391,19 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 				}
 				if (!containedUnresolved) {
-					b.append("<");
+					completeFeatureCallAppendable.append("<");
 					for (int i = 0; i < resolvedTypeArguments.size(); i++) {
 						if (i != 0) {
-							b.append(", ");
+							completeFeatureCallAppendable.append(", ");
 						}
 						JvmTypeReference typeArgument = resolvedTypeArguments.get(i);
-						serialize(typeArgument, call, b);
+						serialize(typeArgument, call, completeFeatureCallAppendable);
 					}
-					b.append(">");
+					completeFeatureCallAppendable.append(">");
 				}
 			}
 		}
-		return b;
+		return completeFeatureCallAppendable;
 	}
 	
 	@Nullable
