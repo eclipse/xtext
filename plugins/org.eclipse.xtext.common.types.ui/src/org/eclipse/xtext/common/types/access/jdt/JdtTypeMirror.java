@@ -89,4 +89,10 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 		// ignore
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	public boolean isSealed() {
+		return mirroredType.isReadOnly();
+	}
 }
