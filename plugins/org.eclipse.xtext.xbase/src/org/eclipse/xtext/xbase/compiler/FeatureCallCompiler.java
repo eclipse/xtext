@@ -409,107 +409,116 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	@Nullable
 	protected ILocationData getLocationWithoutTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
-		List<INode> resultNodes = Lists.newArrayList();
-		if (call instanceof XFeatureCall || call instanceof XMemberFeatureCall) {
-			boolean featureReferenceSeen = false;
-			for (INode child : startNode.getChildren()) {
-				if (featureReferenceSeen) {
-					resultNodes.add(child);
-				} else {
-					EObject grammarElement = child.getGrammarElement();
-					if (grammarElement instanceof CrossReference) {
-						Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-						if (assignment != null && "feature".equals(assignment.getFeature())) {
-							featureReferenceSeen = true;
-							resultNodes.add(child);
+		if (startNode != null) {
+			List<INode> resultNodes = Lists.newArrayList();
+			if (call instanceof XFeatureCall || call instanceof XMemberFeatureCall) {
+				boolean featureReferenceSeen = false;
+				for (INode child : startNode.getChildren()) {
+					if (featureReferenceSeen) {
+						resultNodes.add(child);
+					} else {
+						EObject grammarElement = child.getGrammarElement();
+						if (grammarElement instanceof CrossReference) {
+							Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+							if (assignment != null && "feature".equals(assignment.getFeature())) {
+								featureReferenceSeen = true;
+								resultNodes.add(child);
+							}
 						}
 					}
 				}
 			}
+			return toLocationData(resultNodes);
 		}
-		return toLocationData(resultNodes);
+		return null;
 	}
 
 	@Nullable
 	protected ILocationData getLocationWithTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
-		List<INode> resultNodes = Lists.newArrayList();
-		if (call instanceof XFeatureCall) {
-			if (((XFeatureCall) call).getDeclaringType() != null) {
-				boolean crossRefSeen = false;
+		if (startNode != null) {
+			List<INode> resultNodes = Lists.newArrayList();
+			if (call instanceof XFeatureCall) {
+				if (((XFeatureCall) call).getDeclaringType() != null) {
+					boolean crossRefSeen = false;
+					for (INode child : startNode.getChildren()) {
+						if (crossRefSeen) {
+							resultNodes.add(child);
+						} else {
+							EObject grammarElement = child.getGrammarElement();
+							if (grammarElement instanceof CrossReference) {
+								crossRefSeen = true;
+							}
+						}
+					}
+				} else {
+					for (INode child : startNode.getChildren()) {
+						resultNodes.add(child);
+					}
+				}
+			} else if (call instanceof XMemberFeatureCall) {
+				boolean keywordSeen = false;
 				for (INode child : startNode.getChildren()) {
-					if (crossRefSeen) {
+					if (keywordSeen) {
 						resultNodes.add(child);
 					} else {
 						EObject grammarElement = child.getGrammarElement();
-						if (grammarElement instanceof CrossReference) {
-							crossRefSeen = true;
+						if (grammarElement instanceof Keyword) {
+							keywordSeen = true;
 						}
 					}
 				}
-			} else {
-				for (INode child : startNode.getChildren()) {
-					resultNodes.add(child);
-				}
 			}
-		} else if (call instanceof XMemberFeatureCall) {
-			boolean keywordSeen = false;
-			for (INode child : startNode.getChildren()) {
-				if (keywordSeen) {
-					resultNodes.add(child);
-				} else {
-					EObject grammarElement = child.getGrammarElement();
-					if (grammarElement instanceof Keyword) {
-						keywordSeen = true;
-					}
-				}
-			}
+			return toLocationData(resultNodes);
 		}
-		return toLocationData(resultNodes);
+		return null;
 	}
 	
 	@Nullable
 	protected ILocationData getLocationOfTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
-		List<INode> resultNodes = Lists.newArrayList();
-		if (call instanceof XFeatureCall) {
-			if (((XFeatureCall) call).getDeclaringType() != null) {
-				boolean typeRefSeen = false;
+		if (startNode != null) {
+			List<INode> resultNodes = Lists.newArrayList();
+			if (call instanceof XFeatureCall) {
+				if (((XFeatureCall) call).getDeclaringType() != null) {
+					boolean typeRefSeen = false;
+					for (INode child : startNode.getChildren()) {
+						if (typeRefSeen) {
+							if (child.getGrammarElement() instanceof CrossReference)
+								break;
+							resultNodes.add(child);
+						} else {
+							EObject grammarElement = child.getGrammarElement();
+							if (grammarElement instanceof CrossReference) {
+								typeRefSeen = true;
+							}
+						}
+					}
+				} else {
+					for (INode child : startNode.getChildren()) {
+						if (child.getGrammarElement() instanceof CrossReference)
+							break;
+						resultNodes.add(child);
+					}
+				}
+			} else if (call instanceof XMemberFeatureCall) {
+				boolean keywordSeen = false;
 				for (INode child : startNode.getChildren()) {
-					if (typeRefSeen) {
+					if (keywordSeen) {
 						if (child.getGrammarElement() instanceof CrossReference)
 							break;
 						resultNodes.add(child);
 					} else {
 						EObject grammarElement = child.getGrammarElement();
-						if (grammarElement instanceof CrossReference) {
-							typeRefSeen = true;
+						if (grammarElement instanceof Keyword) {
+							keywordSeen = true;
 						}
 					}
 				}
-			} else {
-				for (INode child : startNode.getChildren()) {
-					if (child.getGrammarElement() instanceof CrossReference)
-						break;
-					resultNodes.add(child);
-				}
 			}
-		} else if (call instanceof XMemberFeatureCall) {
-			boolean keywordSeen = false;
-			for (INode child : startNode.getChildren()) {
-				if (keywordSeen) {
-					if (child.getGrammarElement() instanceof CrossReference)
-						break;
-					resultNodes.add(child);
-				} else {
-					EObject grammarElement = child.getGrammarElement();
-					if (grammarElement instanceof Keyword) {
-						keywordSeen = true;
-					}
-				}
-			}
+			return toLocationData(resultNodes);
 		}
-		return toLocationData(resultNodes);
+		return null;
 	}
 
 	@Nullable

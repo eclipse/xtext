@@ -440,13 +440,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Nullable
 	protected ILocationData getLocationWithNewKeyword(XConstructorCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
-		List<INode> resultNodes = Lists.newArrayList();
-		for (INode child : startNode.getChildren()) {
-			if (child.getGrammarElement() instanceof Keyword && "(".equals(child.getText()))
-				break;
-			resultNodes.add(child);
+		if (startNode != null) {
+			List<INode> resultNodes = Lists.newArrayList();
+			for (INode child : startNode.getChildren()) {
+				if (child.getGrammarElement() instanceof Keyword && "(".equals(child.getText()))
+					break;
+				resultNodes.add(child);
+			}
+			return toLocationData(resultNodes);
 		}
-		return toLocationData(resultNodes);
+		return null;
 	}
 
 	protected void _toJavaExpression(XConstructorCall expr, ITreeAppendable b) {
@@ -667,20 +670,23 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Nullable
 	protected ILocationData getLocationOfDefault(XSwitchExpression expression) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(expression);
-		List<INode> resultNodes = Lists.newArrayList();
-		boolean defaultSeen = false;
-		for (INode child : startNode.getChildren()) {
-			if (defaultSeen) {
-				resultNodes.add(child);
-				if (GrammarUtil.containingAssignment(child.getGrammarElement()) != null) {
-					break;
+		if (startNode != null) {
+			List<INode> resultNodes = Lists.newArrayList();
+			boolean defaultSeen = false;
+			for (INode child : startNode.getChildren()) {
+				if (defaultSeen) {
+					resultNodes.add(child);
+					if (GrammarUtil.containingAssignment(child.getGrammarElement()) != null) {
+						break;
+					}
+				} else if (child.getGrammarElement() instanceof Keyword && "default".equals(child.getText())) {
+					defaultSeen = true;
+					resultNodes.add(child);
 				}
-			} else if (child.getGrammarElement() instanceof Keyword && "default".equals(child.getText())) {
-				defaultSeen = true;
-				resultNodes.add(child);
 			}
+			return toLocationData(resultNodes);
 		}
-		return toLocationData(resultNodes);
+		return null;
 	}
 
 	protected void _toJavaExpression(XSwitchExpression expr, ITreeAppendable b) {
