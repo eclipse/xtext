@@ -104,9 +104,14 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		String signature = jvmOperation.getSimpleName() + hoverUiStrings.parameters(jvmOperation)
 				+ getThrowsDeclaration(jvmOperation);
 		String typeParameter = uiStrings.typeParameters(jvmOperation.getTypeParameters());
+		if(typeParameter != null && typeParameter.length() > 0){
+			if (typeAtEnd)
+				return signature + " " + typeParameter + " : " + returnTypeString;
+			return typeParameter + " " + returnTypeString + " " + signature;
+		}
 		if (typeAtEnd)
-			return signature + " " + typeParameter + " : " + returnTypeString;
-		return typeParameter + " " + returnTypeString + " " + signature;
+			return signature + " : " + returnTypeString;
+		return returnTypeString + " " + signature;
 	}
 
 	protected String _signature(JvmField jvmField, boolean typeAtEnd) {
