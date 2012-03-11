@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib.util;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -74,10 +73,16 @@ public class ReflectExtensions {
 				throw new NullPointerException("receiver");
 			
 			Class<? extends Object> clazz = receiver.getClass();
+			Method compatible = null;
 			for (Method candidate : clazz.getMethods()) {
-				if (isCompatible(candidate, methodName, args))
-					return candidate.invoke(receiver, args);
+				if (isCompatible(candidate, methodName, args) && candidate.equals(clazz.getMethod(candidate.getName(), candidate.getParameterTypes()))) {
+					if (compatible != null) 
+						throw new IllegalStateException("Ambiguous methods to invoke. Both "+compatible+" and  "+candidate+" would be compatible choices.");
+					compatible = candidate;
+				}
 			}
+			if (compatible != null)
+				return compatible.invoke(receiver, args);
 			// not found provoke method not found exception
 			Class<?>[] paramTypes = new Class<?>[args.length];
 			for (int i = 0; i< args.length ; i++) {
@@ -85,8 +90,6 @@ public class ReflectExtensions {
 			}
 			Method method = clazz.getMethod(methodName, paramTypes);
 			return method.invoke(receiver, args);
-		} catch (InvocationTargetException e) {
-			throw Exceptions.sneakyThrow(e.getTargetException());
 		} catch (Exception e) {
 			throw Exceptions.sneakyThrow(e);
 		}
