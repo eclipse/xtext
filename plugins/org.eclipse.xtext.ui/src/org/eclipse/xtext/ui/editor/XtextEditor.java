@@ -115,7 +115,7 @@ public class XtextEditor extends TextEditor {
 	/**
 	 * @since 2.3
 	 */
-	public static final String INFO_ANNOTATION_TYPE = "org.eclipse.ui.workbench.texteditor.info";
+	public static final String INFO_ANNOTATION_TYPE = "org.eclipse.xtext.ui.editor.info";
 
 	/**
 	 * @since 2.2
@@ -463,6 +463,7 @@ public class XtextEditor extends TextEditor {
 	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
 		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(),
 				getSharedColors());
+		projectionSupport.addSummarizableAnnotationType(INFO_ANNOTATION_TYPE);
 		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE);
 		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE);
 		projectionSupport.setAnnotationPainterDrawingStrategy(projectionAnnotationDrawingStrategy);

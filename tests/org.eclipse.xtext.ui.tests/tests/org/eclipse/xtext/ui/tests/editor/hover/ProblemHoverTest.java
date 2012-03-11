@@ -123,7 +123,8 @@ public class ProblemHoverTest extends AbstractEditorTest {
 		IResource resource = editor.getResource();
 		createCustomMarkerOnResource(resource, IMarker.SEVERITY_INFO);
 		String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 0);
-		assertNull(hoverInfo);
+		assertNotNull(hoverInfo);
+		assertEquals(CUSTOM_MARKER_TEST_MESSAGE, hoverInfo);
 	}
 	
 	@Test public void testBug357516_bookmark() throws Exception {
