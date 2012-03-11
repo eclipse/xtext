@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.lib.util;
 
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,8 +27,7 @@ public class ReflectExtensionsTest {
   public void testInvoke_02() {
     final String x = "foo";
     try {
-      Object _invoke = this.ext.invoke(x, "foo");
-      Assert.assertEquals(Integer.valueOf(3), _invoke);
+      this.ext.invoke(x, "foo");
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof NoSuchMethodException) {
@@ -42,12 +42,29 @@ public class ReflectExtensionsTest {
   public void testInvoke_03() {
     final String x = "foo";
     try {
-      Object _invoke = this.ext.invoke(x, "length", Integer.valueOf(24));
-      Assert.assertEquals(Integer.valueOf(3), _invoke);
+      this.ext.invoke(x, "length", Integer.valueOf(24));
       Assert.fail();
     } catch (final Throwable _t) {
       if (_t instanceof NoSuchMethodException) {
         final NoSuchMethodException e = (NoSuchMethodException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
+  @Test
+  public void testInvokeWithOverloadedMethods() {
+    StringBuilder _stringBuilder = new StringBuilder();
+    final StringBuilder x = _stringBuilder;
+    try {
+      this.ext.invoke(x, "append", "foo");
+      Assert.fail();
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalStateException) {
+        final IllegalStateException e = (IllegalStateException)_t;
+        String _message = e.getMessage();
+        InputOutput.<String>println(_message);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

@@ -18,7 +18,7 @@ class ReflectExtensionsTest {
 	def void testInvoke_02() {
 		val x = 'foo'
 		try {
-			Assert::assertEquals(3, x.invoke('foo'))
+			x.invoke('foo')
 			Assert::fail
 		} catch (NoSuchMethodException e) {
 			// expected
@@ -29,9 +29,21 @@ class ReflectExtensionsTest {
 	def void testInvoke_03() {
 		val x = 'foo'
 		try {
-			Assert::assertEquals(3, x.invoke('length', 24))
+			x.invoke('length', 24)
 			Assert::fail
 		} catch (NoSuchMethodException e) {
+			// expected
+		}
+	}
+	
+	@Test
+	def void testInvokeWithOverloadedMethods() {
+		val x = new StringBuilder
+		try {
+			x.invoke('append', "foo")
+			Assert::fail
+		} catch (IllegalStateException e) {
+			println(e.message)
 			// expected
 		}
 	}
