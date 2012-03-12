@@ -1,23 +1,11 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.ide.hover.XtendHoverSerializer
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.xtext.ui.editor.XtextEditor
-import org.eclipse.xtext.ui.editor.hover.IEObjectHover
-import org.eclipse.xtext.ui.resource.IResourceSetProvider
-import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover
-import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -32,7 +20,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	private WorkbenchTestHelper testHelper
 	
 	@Inject
-	private IJavaElementFinder javaElementFinder
+	private XtendHoverSerializer serializer
 	
 	private static String FILEEXTENSION = ".xtend"
 	private static String FILEPATH = "testpackage/Foo" + FILEEXTENSION
@@ -77,7 +65,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 
 	@Test
 	def void testUnsuagaredVersionForXtendFunction() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH,''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -87,15 +75,17 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42)",triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extension.bar(it, 42)",serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_2() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -105,15 +95,17 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42)",triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extension.bar(it, 42)",serializer.computeUnsugaredExpression(call))
 	}
 	
 		@Test
 	def void testUnsuagaredVersionForXtendFunction_3() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -124,15 +116,17 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,1,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42 + a)",triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(1)
+		assertEquals("_extension.bar(it, 42 + a)", serializer.computeUnsugaredExpression(call))
 	}
 
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_4() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH,  ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -142,16 +136,18 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 40 + 2)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extension.bar(it, 40 + 2)", serializer.computeUnsugaredExpression(call))
 	}
 	
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_5() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH,  ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -162,15 +158,17 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,25)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extension.bar(new ArrayList<String>(), 42)",  serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_6() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -181,15 +179,17 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(new ArrayList<String>(), 42)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extension.bar(new ArrayList<String>(), 42)", serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_7() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -201,16 +201,18 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
 		assertEquals('''_extension.barCharSequence(42, «"'''"»   Test   Test
-Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
+Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_8() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -221,15 +223,17 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,4)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extension.bar(it, 42)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extension.bar(it, 42)", serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_9() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -240,15 +244,17 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("it.substring(0)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("it.substring(0)", serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_10() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -260,15 +266,17 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,1,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("it.substring(0)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(1)
+		assertEquals("it.substring(0)",  serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_11() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import java.util.ArrayList
 		class Foo {
@@ -279,15 +287,17 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,27)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("IterableExtensions::head(new ArrayList<String>())", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("IterableExtensions::head(new ArrayList<String>())", serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def void testUnsuagaredVersionForXtendFunction_12() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension Extension
@@ -297,15 +307,17 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals(EcoreUtil2::getURI(triple.first.feature), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("fooBarBaz(it)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("fooBarBaz(it)", serializer.computeUnsugaredExpression(call))
 	}
 
 	@Test
 	def void testUnsuagaredVersionForJava() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		class Foo {
 			extension ExtensionJava
@@ -315,17 +327,17 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		val javaElement = javaElementFinder.findElementFor(triple.first.feature);
-		assertEquals(javaElement, triple.second.getInputElement)
-		assertEquals(EcoreUtil2::getURI((triple.first.feature as JvmOperation)), EcoreUtil2::getURI(triple.second.element))
-		assertEquals("_extensionJava.bar(it, 40 + 2)", triple.second.getUnsugaredExpression)
+		'''.toString)
+		waitForAutoBuild
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("_extensionJava.bar(it, 40 + 2)", serializer.computeUnsugaredExpression(call))
 	}
 	
 	@Test
 	def testBug373054() throws Exception {
-		val editor = testHelper.openEditor(testHelper.createFile(FILEPATH, ''' 
+		val xtendFile = testHelper.xtendFile(FILEPATH, ''' 
 		package testpackage
 		import static extension testpackage.Extension.*
 		class Foo {
@@ -335,26 +347,11 @@ Test«"'''"»)'''.toString, triple.second.getUnsugaredExpression)
 			}
 			
 		}
-		'''.toString))
-		val triple = computeAstAndInvokeHover(editor,0,0)
-		assertEquals("setZonk(it, s + s + s)", triple.second.getUnsugaredExpression)
-	}
-	
-	def computeAstAndInvokeHover(XtextEditor editor, int indexOfExpressionToHover, int addOffset){
+		'''.toString)
 		waitForAutoBuild
-		val resource = loadResource
-		val xtendFile = resource.contents.get(0) as XtendFile
-		val featureCall = ((xtendFile.xtendClass.members.get(1) as XtendFunction).expression as XBlockExpression).expressions.get(indexOfExpressionToHover) as XAbstractFeatureCall
-		val hover = get(typeof(IEObjectHover)) as XbaseDispatchingEObjectTextHover
-		val region = hover.getHoverRegion(editor.internalSourceViewer, NodeModelUtils::getNode(featureCall).offset + addOffset)
-		return Tuples::create(featureCall, hover.getHoverInfo2(editor.internalSourceViewer, region) as XbaseInformationControlInput, region)
-	}
-	
-
-	def loadResource(){
-		val uri = URI::createURI("platform:/resource/"+WorkbenchTestHelper::TESTPROJECT_NAME + "/src/" + FILEPATH);
-		var resource = getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project).createResource(uri)
-		resource.load(null)
-		return resource
+		val function = xtendFile.xtendClass.members.get(1) as XtendFunction
+		val block = function.expression as XBlockExpression
+		val call = block.expressions.get(0)
+		assertEquals("setZonk(it, s + s + s)", serializer.computeUnsugaredExpression(call))
 	}
 }
