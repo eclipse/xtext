@@ -43,7 +43,7 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
-          _members.add(bar);
+          TypeSignatureHashTest.this._jvmTypesBuilder.<JvmGenericType>operator_add(_members, bar);
         }
       };
     final JvmGenericType foo = this._jvmTypesBuilder.toClass(eObject, "Foo", _function);
@@ -54,7 +54,7 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
         }
       };
     JvmConstructor _constructor = this._jvmTypesBuilder.toConstructor(eObject, _function_1);
-    _members.add(_constructor);
+    this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
     String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
     Assert.assertEquals(hash, _hash);
     bar.setSimpleName("Baz");

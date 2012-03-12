@@ -58,7 +58,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
         public void apply(final JvmGenericType it) {
           EList<JvmAnnotationReference> _annotations = it.getAnnotations();
           JvmAnnotationReference _annotation = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toAnnotation(e, SuppressWarnings.class, "all");
-          _annotations.add(_annotation);
+          PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
           EList<JvmMember> _members = it.getMembers();
           JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, Void.TYPE);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -68,7 +68,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                 JvmTypeReference _newTypeRef = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.newTypeRef(e, String.class);
                 JvmTypeReference _addArrayTypeDimension = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_newTypeRef);
                 JvmFormalParameter _parameter = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "args", _addArrayTypeDimension);
-                _parameters.add(_parameter);
+                PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
                 boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
                 boolean _not = (!_containsReturn);
                 if (_not) {
@@ -104,7 +104,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
               }
             };
           JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "main", _newTypeRef, _function);
-          _members.add(_method);
+          PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
           boolean _containsReturn = PureXbaseJvmModelInferrer.this.containsReturn(e);
           if (_containsReturn) {
             EList<JvmMember> _members_1 = it.getMembers();
@@ -127,7 +127,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
                 }
               };
             JvmOperation _method_1 = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "xbaseExpression", _newTypeRef_1, _function_1);
-            _members_1.add(_method_1);
+            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _method_1);
           }
         }
       };

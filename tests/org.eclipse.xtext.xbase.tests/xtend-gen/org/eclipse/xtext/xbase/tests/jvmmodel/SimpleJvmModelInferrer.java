@@ -36,12 +36,12 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
                 EList<JvmFormalParameter> _parameters = it.getParameters();
                 JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);
                 JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
-                _parameters.add(_parameter);
+                SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
                 SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));
               }
             };
           JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function);
-          _members.add(_method);
+          SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
         }
       };
     _accept.initializeLater(_function);

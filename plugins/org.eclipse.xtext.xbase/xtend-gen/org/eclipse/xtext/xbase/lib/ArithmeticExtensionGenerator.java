@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.io.File;
@@ -14,7 +15,6 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
@@ -416,34 +416,34 @@ public class ArithmeticExtensionGenerator {
     String _switchResult = null;
     String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
-    final String __valOfSwitchOver = _substring;
+    final String _switchValue = _substring;
     boolean _matched = false;
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"a")) {
+      if (Objects.equal(_switchValue,"a")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"e")) {
+      if (Objects.equal(_switchValue,"e")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"i")) {
+      if (Objects.equal(_switchValue,"i")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"o")) {
+      if (Objects.equal(_switchValue,"o")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,"u")) {
+      if (Objects.equal(_switchValue,"u")) {
         _matched=true;
         _switchResult = "an";
       }
@@ -458,13 +458,13 @@ public class ArithmeticExtensionGenerator {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(it,"int")) {
+      if (Objects.equal(it,"int")) {
         _matched=true;
         _switchResult = "Integer";
       }
     }
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(it,"char")) {
+      if (Objects.equal(it,"char")) {
         _matched=true;
         _switchResult = "Character";
       }

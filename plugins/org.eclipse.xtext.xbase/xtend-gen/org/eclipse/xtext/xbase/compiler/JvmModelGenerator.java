@@ -78,7 +78,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -353,25 +352,25 @@ public class JvmModelGenerator implements IGenerator {
       String _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PRIVATE)) {
+        if (Objects.equal(visibility,JvmVisibility.PRIVATE)) {
           _matched=true;
           _switchResult = "private ";
         }
       }
       if (!_matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PUBLIC)) {
+        if (Objects.equal(visibility,JvmVisibility.PUBLIC)) {
           _matched=true;
           _switchResult = "public ";
         }
       }
       if (!_matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.PROTECTED)) {
+        if (Objects.equal(visibility,JvmVisibility.PROTECTED)) {
           _matched=true;
           _switchResult = "protected ";
         }
       }
       if (!_matched) {
-        if (ObjectExtensions.operator_equals(visibility,JvmVisibility.DEFAULT)) {
+        if (Objects.equal(visibility,JvmVisibility.DEFAULT)) {
           _matched=true;
           _switchResult = "";
         }
@@ -1129,13 +1128,13 @@ public class JvmModelGenerator implements IGenerator {
               }
             }
             if (!_matched) {
-              if (ObjectExtensions.operator_equals(it,Double.POSITIVE_INFINITY)) {
+              if (Objects.equal(it,Double.POSITIVE_INFINITY)) {
                 _matched=true;
                 _switchResult = "Double.POSITIVE_INFINITY";
               }
             }
             if (!_matched) {
-              if (ObjectExtensions.operator_equals(it,Double.NEGATIVE_INFINITY)) {
+              if (Objects.equal(it,Double.NEGATIVE_INFINITY)) {
                 _matched=true;
                 _switchResult = "Double.NEGATIVE_INFINITY";
               }
@@ -1176,13 +1175,13 @@ public class JvmModelGenerator implements IGenerator {
               }
             }
             if (!_matched) {
-              if (ObjectExtensions.operator_equals(it,Float.POSITIVE_INFINITY)) {
+              if (Objects.equal(it,Float.POSITIVE_INFINITY)) {
                 _matched=true;
                 _switchResult = "Float.POSITIVE_INFINITY";
               }
             }
             if (!_matched) {
-              if (ObjectExtensions.operator_equals(it,Float.NEGATIVE_INFINITY)) {
+              if (Objects.equal(it,Float.NEGATIVE_INFINITY)) {
                 _matched=true;
                 _switchResult = "Float.NEGATIVE_INFINITY";
               }
@@ -1363,16 +1362,16 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmCustomAnnotationValue it, final ITreeAppendable appendable) {
     EList<Object> _values = it.getValues();
     int _size = _values.size();
-    final int __valOfSwitchOver = _size;
+    final int _switchValue = _size;
     boolean _matched = false;
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,0)) {
+      if (Objects.equal(_switchValue,0)) {
         _matched=true;
         appendable.append("{}");
       }
     }
     if (!_matched) {
-      if (ObjectExtensions.operator_equals(__valOfSwitchOver,1)) {
+      if (Objects.equal(_switchValue,1)) {
         _matched=true;
         EList<Object> _values_1 = it.getValues();
         Object _head = IterableExtensions.<Object>head(_values_1);
