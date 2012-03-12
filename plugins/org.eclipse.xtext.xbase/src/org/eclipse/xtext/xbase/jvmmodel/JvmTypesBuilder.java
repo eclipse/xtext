@@ -68,8 +68,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
@@ -100,6 +98,27 @@ public class JvmTypesBuilder {
 
 	@Inject
 	private TypesFactory typesFactory;
+	
+	/**
+	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
+	 */
+	public <T> boolean operator_add(@Nullable EList<? super T> list, @Nullable T element) {
+		if(list != null && element != null)
+			return list.add(element);
+		else
+			return false;
+	}
+	
+	/**
+	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
+	 */
+	public <T> boolean operator_add(@Nullable EList<? super T> list, @Nullable Iterable<? extends T> elements) {
+		boolean result = false;
+		if(list != null && elements != null)
+			for(T element: elements) 
+				result |= operator_add(list, element);
+		return result;
+	}
 	
 	/**
 	 * Sets the given {@link JvmExecutable} as the logical container for the given {@link XExpression}.
