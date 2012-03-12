@@ -46,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -658,8 +659,11 @@ public class JvmTypesBuilder {
 		if(typeRef == null)
 			return null;
 		if (typeRef instanceof JvmParameterizedTypeReference && !typeRef.eIsProxy()
-				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE))
-			throw new IllegalArgumentException("typeref#type was null");
+				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)) {
+			JvmUnknownTypeReference unknownTypeReference = typesFactory.createJvmUnknownTypeReference();
+			unknownTypeReference.setException(new IllegalArgumentException("typeref#type was null"));
+			return unknownTypeReference;
+		}
 		return cloneAndAssociate(typeRef);
 	}
 
