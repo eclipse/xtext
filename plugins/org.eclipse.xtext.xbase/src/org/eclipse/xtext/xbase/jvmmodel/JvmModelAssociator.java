@@ -266,16 +266,16 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		@SuppressWarnings("unchecked")
 		public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
 			lastAccepted = type;
-			resource.getContents().add(type);
+			if(type != null)
+				resource.getContents().add(type);
 			return (IPostIndexingInitializing<T>) this;
 		}
 		
 		public void initializeLater(Procedure1<JvmDeclaredType> lateInitialization) {
-			if (lateInitialization != null) {
+			if (lateInitialization != null && lastAccepted != null) {
 				later.add(new Pair<JvmDeclaredType, Procedure1<JvmDeclaredType>>(lastAccepted, lateInitialization));
 			}
 		}
-		
 	}
 }
 
