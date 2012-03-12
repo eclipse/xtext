@@ -16,6 +16,13 @@ import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.emf.common.util.BasicEList
 import java.util.List
+import org.eclipse.xtext.util.Wrapper
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmEnumerationType
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -193,5 +200,55 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		val List<String> otherList = null 
 		list += otherList
 		assertTrue(list.empty)
+	}
+	
+	@Test
+	def void testInitializeSafely_0() {
+		genericTestInitializeSafely([EObject expr, String name, (JvmGenericType)=>void init 
+			| expr.toClass(name, init)
+		])
+	}
+	
+	@Test
+	def void testInitializeSafely_1() {
+		genericTestInitializeSafely([EObject expr, String name, (JvmConstructor)=>void init 
+			| expr.toConstructor(init)
+		])
+	}
+	
+	@Test
+	def void testInitializeSafely_2() {
+		genericTestInitializeSafely([EObject expr, String name, (JvmField)=>void init 
+			| expr.toField(name, null, init)
+		])
+	}
+	
+	@Test
+	def void testInitializeSafely_3() {
+		genericTestInitializeSafely([EObject expr, String name, (JvmOperation)=>void init 
+			| expr.toMethod(name, null, init)
+		])
+	}
+	
+	@Test
+	def void testInitializeSafely_4() {
+		genericTestInitializeSafely([EObject expr, String name, (JvmAnnotationType)=>void init 
+			| expr.toAnnotationType(name, init)
+		])
+	}
+	
+	@Test
+	def void testInitializeSafely_5() {
+		genericTestInitializeSafely([EObject expr, String name, (JvmEnumerationType)=>void init 
+			| expr.toEnumerationType(name, init)
+		])
+	}
+	
+	def protected <T> genericTestInitializeSafely((EObject, String, (T)=>void)=>EObject create) {
+		val expr = XbaseFactory::eINSTANCE.createXNullLiteral;
+		val Wrapper<Boolean> initialized = new Wrapper(false)
+		val element = create.apply(expr, "foo", [T it| initialized.set(true) throw new RuntimeException();]);
+		assertTrue(initialized.get())
+		assertNotNull(element);
 	}
 }

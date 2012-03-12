@@ -25,7 +25,7 @@ public interface IJvmDeclaredTypeAcceptor {
 	 * Accepts a {@link JvmDeclaredType} with no container, to be added to the contents list of a {@link org.eclipse.emf.ecore.resource.Resource}.
 	 * @return a {@link IPostIndexingInitializing} to provide a post-indexing initialization of the given type.
 	 */
-	<T extends JvmDeclaredType>IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<T> accept(T type);
+	<T extends JvmDeclaredType> IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<T> accept(T type);
 	
 	
 	interface IPostIndexingInitializing<T extends JvmDeclaredType> {
@@ -33,6 +33,6 @@ public interface IJvmDeclaredTypeAcceptor {
 		 * The passed procedure will be executed only if in post-indexing phase, and it is executed after all {@link JvmDeclaredType} are created
 		 * and attached to the {@link org.eclipse.emf.ecore.resource.Resource}.
 		 */
-		void initializeLater(Procedures.Procedure1<T> lateInitialization);
+		void initializeLater(Procedures.Procedure1<? super T> lateInitialization);
 	}
 }

@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -86,6 +87,8 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class JvmTypesBuilder {
 
+	private static final Logger LOG = Logger.getLogger(JvmTypesBuilder.class);
+	
 	@Inject
 	private IJvmModelAssociator associator;
 
@@ -153,6 +156,18 @@ public class JvmTypesBuilder {
 			associator.removeLogicalChildAssociation(member);
 		}
 	}
+	
+	@Nullable
+	protected <T extends EObject> T initializeSafely(@Nullable T targetElement, @Nullable Procedure1<? super T> initializer) {
+		if(targetElement != null && initializer != null) {
+			try {
+				initializer.apply(targetElement);
+			} catch (Exception e) {
+				LOG.error("Error initializing JvmElement", e);
+			}
+		}
+		return targetElement;
+	}
 
 	/**
 	 * Attaches the given compile strategy to the given {@link JvmExecutable} such that the compiler knows how to
@@ -195,7 +210,6 @@ public class JvmTypesBuilder {
 		documentationAdapter.setDocumentation(documentation);
 		jvmElement.eAdapters().add(documentationAdapter);
 	}
-
 
 	/**
 	 * Creates a public class declaration, associated to the given sourceElement. It sets the given name, which might be
@@ -244,7 +258,7 @@ public class JvmTypesBuilder {
 	 *            if sourceElement or name are <code>null</code>.
 	 */
 	@Nullable 
-	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable QualifiedName name, @Nullable Procedure1<JvmGenericType> initializer) {
+	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable QualifiedName name, @Nullable Procedure1<? super JvmGenericType> initializer) {
 		return toClass(sourceElement, name != null ? name.toString() : null, initializer);
 	}
 	
@@ -263,14 +277,12 @@ public class JvmTypesBuilder {
 	 *            if sourceElement or name are <code>null</code>.
 	 */
 	@Nullable 
-	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable String name, @Nullable Procedure1<JvmGenericType> initializer) {
+	public JvmGenericType toClass(@Nullable EObject sourceElement, @Nullable String name, @Nullable Procedure1<? super JvmGenericType> initializer) {
 		final JvmGenericType result = createJvmGenericType(sourceElement, name);
 		if (result == null)
 			return null;
 		associate(sourceElement, result);
-		if(initializer != null) 
-			initializer.apply(result);
-		return result;
+		return initializeSafely(result, initializer);
 	}
 	
 	/**
@@ -288,15 +300,13 @@ public class JvmTypesBuilder {
 	 *            if sourceElement or name are <code>null</code>.
 	 */
 	@Nullable 
-	public JvmGenericType toInterface(@Nullable EObject sourceElement, @Nullable String name, @Nullable Procedure1<JvmGenericType> initializer) {
+	public JvmGenericType toInterface(@Nullable EObject sourceElement, @Nullable String name, @Nullable Procedure1<? super JvmGenericType> initializer) {
 		final JvmGenericType result = createJvmGenericType(sourceElement, name);
 		if (result == null)
 			return null;
 		result.setInterface(true);
 		associate(sourceElement, result);
-		if(initializer != null) 
-			initializer.apply(result);
-		return result;
+		return initializeSafely(result, initializer);
 	}
 	
 	/**
@@ -315,7 +325,7 @@ public class JvmTypesBuilder {
 	 */
 	@Nullable 
 	public JvmAnnotationType toAnnotationType(@Nullable EObject sourceElement, @Nullable String name, 
-			@Nullable Procedure1<JvmAnnotationType> initializer) {
+			@Nullable Procedure1<? super JvmAnnotationType> initializer) {
 		if (sourceElement == null || name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
@@ -324,9 +334,7 @@ public class JvmTypesBuilder {
 		if (fullName.getFirst() != null)
 			annotationType.setPackageName(fullName.getFirst());
 		associate(sourceElement, annotationType);
-		if(initializer != null) 
-			initializer.apply(annotationType);
-		return annotationType;
+		return initializeSafely(annotationType, initializer);
 	}
 	
 	/**
@@ -345,7 +353,7 @@ public class JvmTypesBuilder {
 	 */
 	@Nullable 
 	public JvmEnumerationType toEnumerationType(@Nullable EObject sourceElement, @Nullable String name, 
-			@Nullable Procedure1<JvmEnumerationType> initializer) {
+			@Nullable Procedure1<? super JvmEnumerationType> initializer) {
 		if (sourceElement == null || name == null)
 			return null;
 		Pair<String, String> fullName = splitQualifiedName(name);
@@ -355,9 +363,7 @@ public class JvmTypesBuilder {
 		if (fullName.getFirst() != null)
 			result.setPackageName(fullName.getFirst());
 		associate(sourceElement, result);
-		if(initializer != null) 
-			initializer.apply(result);
-		return result;
+		return initializeSafely(result, initializer);
 	}
 	
 	/**
@@ -381,16 +387,14 @@ public class JvmTypesBuilder {
 	 */
 	@Nullable 
 	public JvmEnumerationLiteral toEnumerationLiteral(@Nullable EObject sourceElement, @Nullable String name, 
-			@Nullable Procedure1<JvmEnumerationLiteral> initializer) {
+			@Nullable Procedure1<? super JvmEnumerationLiteral> initializer) {
 		if (sourceElement == null || name == null)
 			return null;
 		JvmEnumerationLiteral result = typesFactory.createJvmEnumerationLiteral();
 		result.setSimpleName(name);
 		result.setVisibility(JvmVisibility.PUBLIC);
 		associate(sourceElement, result);
-		if(initializer != null) 
-			initializer.apply(result);
-		return result;
+		return initializeSafely(result, initializer);
 	}
 	
 	@Nullable 
@@ -437,16 +441,15 @@ public class JvmTypesBuilder {
 	 */
 	@Nullable	
 	public JvmField toField(@Nullable EObject sourceElement, @Nullable String name, @Nullable JvmTypeReference typeRef, 
-			@Nullable Procedure1<JvmField> initializer) {
+			@Nullable Procedure1<? super JvmField> initializer) {
 		if(sourceElement == null || name == null) 
 			return null;
 		JvmField result = typesFactory.createJvmField();
 		result.setSimpleName(name);
 		result.setVisibility(JvmVisibility.PRIVATE);
 		result.setType(cloneWithProxies(typeRef));
-		if (initializer != null)
-			initializer.apply(result);
-		return associate(sourceElement, result);
+		associate(sourceElement, result);
+		return initializeSafely(result, initializer);
 	}
 
 	/**
@@ -482,7 +485,7 @@ public class JvmTypesBuilder {
 	 */
 	@Nullable
 	public JvmOperation toMethod(@Nullable EObject sourceElement, @Nullable String name, @Nullable JvmTypeReference returnType,
-			@Nullable Procedure1<JvmOperation> initializer) {
+			@Nullable Procedure1<? super JvmOperation> initializer) {
 		if(sourceElement == null || name == null) 
 			return null;
 		JvmOperation result = typesFactory.createJvmOperation();
@@ -490,9 +493,7 @@ public class JvmTypesBuilder {
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(cloneWithProxies(returnType));
 		associate(sourceElement, result);
-		if (initializer != null)
-			initializer.apply(result);
-		return result;
+		return initializeSafely(result, initializer);
 	}
 
 	/**
@@ -591,15 +592,13 @@ public class JvmTypesBuilder {
 	 * @return a result representing a Java constructor with the given name, <code>null</code> if sourceElement is <code>null</code>.
 	 */
 	@Nullable 
-	public JvmConstructor toConstructor(@Nullable EObject sourceElement, @Nullable Procedure1<JvmConstructor> initializer) {
+	public JvmConstructor toConstructor(@Nullable EObject sourceElement, @Nullable Procedure1<? super JvmConstructor> initializer) {
 		if(sourceElement == null)
 			return null;
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
 		constructor.setVisibility(JvmVisibility.PUBLIC);
 		associate(sourceElement, constructor);
-		if (initializer != null)
-			initializer.apply(constructor);
-		return constructor;
+		return initializeSafely(constructor, initializer);
 	}
 	
 	/**
