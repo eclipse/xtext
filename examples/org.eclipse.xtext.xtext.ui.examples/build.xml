@@ -21,9 +21,21 @@
 			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,.antlr-generator*.jar"  />
 		</sequential>
 	</macrodef>
+	
+	<macrodef name="zip_tutorial">
+		<attribute name="name" default="default" />
+		<attribute name="target" default="${target_xtext}" />
+		<sequential>
+			<delete file="@{target}/@{name}.zip" />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}/initial"/>
+		</sequential>
+	</macrodef>
 
 	<target name="zip_all_examples">
-		<!-- run task "generate_self" to compose this list -->
+		<zip_tutorial name="org.eclipse.xtext.example.tutorial" />
+		<zip_tutorial name="org.eclipse.xtext.example.tutorial.tests" />
+		<zip_tutorial name="org.eclipse.xtext.example.tutorial.ui" />
+		<!-- run task "generate_self" to compose the list below -->
 		<zip_example name="org.eclipse.xtext.example.arithmetics" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.tests" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.ui" />
@@ -36,6 +48,7 @@
 	</target>
 
 	<target name="generate_self">
+		<echo message="Don't add the xtext.example.tutorial by accident"/>
 		<exec executable="bash">
 			<arg value="-c" />
 			<arg value="for i in `ls ${source}`; do echo &quot;&lt;zip_example name=\&quot;$i\&quot; /&gt;&quot;; done" />
