@@ -13,11 +13,8 @@ import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.contentassist.ITemplateAcceptor;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -30,13 +27,6 @@ public class TemplateProposalProvider extends DefaultTemplateProposalProvider {
 	public TemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry,
 			ContextTypeIdHelper helper) {
 		super(templateStore, registry, helper);
-	}
-	
-	@Override
-	public void createTemplates(ContentAssistContext context, ITemplateAcceptor acceptor) {
-		if (Strings.isEmpty(context.getPrefix()))
-			return;
-		super.createTemplates(context, acceptor);
 	}
 	
 	@Override

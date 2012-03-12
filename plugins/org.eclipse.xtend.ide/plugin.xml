@@ -945,7 +945,7 @@
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.view.DerivedSourceView"
             icon="icons/sample.gif"
             id="org.eclipse.xtend.ide.view.DerivedSourceView"
-            name="Generated Java View">
+            name="Generated Code">
       </view>
    </extension>
 
