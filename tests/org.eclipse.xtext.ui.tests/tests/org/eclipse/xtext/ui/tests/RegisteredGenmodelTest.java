@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -38,7 +39,7 @@ public class RegisteredGenmodelTest extends Assert {
 		registry = null;
 	}
 	
-	@Test public void testCanResolveGenmodelURIs() {
+	@Ignore @Test public void testCanResolveGenmodelURIs() {
 		String declaringPlugin = "org.eclipse.emf.ecore";
 		String pointId = "generated_package";
 		IExtensionPoint point = registry.getExtensionPoint(declaringPlugin + "." + pointId);
@@ -53,7 +54,7 @@ public class RegisteredGenmodelTest extends Assert {
 					URI uri = URI.createURI(uriAsString);
 					boolean exists = URIConverter.INSTANCE.exists(uri, Collections.emptyMap());
 					if (!exists) {
-//							fail(uriAsString + " does not exist");
+							fail(uriAsString + " does not exist");
 					}
 				}
 			}
