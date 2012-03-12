@@ -37,7 +37,7 @@ public class Xtend02_SimpleExpressions {
   }
   
   public BigInteger bigIntegerLiteral() {
-    return new BigInteger("123456789123456789123456789", 10);
+    return new BigInteger("123456789123456789123456789");
   }
   
   public Object nullLiteral() {

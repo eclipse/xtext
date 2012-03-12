@@ -5,7 +5,6 @@ import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Chapter;
 import org.eclipse.xtext.xdoc.xdoc.Document;
@@ -153,8 +152,8 @@ public class Body {
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
       for(final AbstractSection subSection : _sections) {
-        int _operator_plus = IntegerExtensions.operator_plus(hLevel, 1);
-        CharSequence _h3plus = this.h3plus(subSection, _operator_plus);
+        int _plus = (hLevel + 1);
+        CharSequence _h3plus = this.h3plus(subSection, _plus);
         _builder.append(_h3plus, "");
         _builder.newLineIfNotEmpty();
       }

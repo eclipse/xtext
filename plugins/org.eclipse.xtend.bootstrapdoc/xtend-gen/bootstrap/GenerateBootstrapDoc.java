@@ -4,7 +4,9 @@ import bootstrap.Body;
 import bootstrap.MainSite;
 import bootstrap.Menu;
 import bootstrap.PostProcessor;
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -21,8 +23,8 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.validation.CheckMode;
@@ -33,21 +35,16 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 
 @SuppressWarnings("all")
 public class GenerateBootstrapDoc {
   public static void main(final String[] args) {
-    {
-      XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
-      Injector _createInjectorAndDoEMFRegistration = _xdocStandaloneSetup.createInjectorAndDoEMFRegistration();
-      final Injector injector = _createInjectorAndDoEMFRegistration;
-      GenerateBootstrapDoc _instance = injector.<GenerateBootstrapDoc>getInstance(bootstrap.GenerateBootstrapDoc.class);
-      _instance.generate();
-    }
+    XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
+    final Injector injector = _xdocStandaloneSetup.createInjectorAndDoEMFRegistration();
+    GenerateBootstrapDoc _instance = injector.<GenerateBootstrapDoc>getInstance(GenerateBootstrapDoc.class);
+    _instance.generate();
   }
   
   @Inject
@@ -70,78 +67,69 @@ public class GenerateBootstrapDoc {
   
   public void generate() {
     try {
-      {
-        Document _loadDocument = this.loadDocument();
-        final Document document = _loadDocument;
-        File _file = new File("../../website/documentation/index.html");
-        final File file = _file;
-        File _parentFile = file.getParentFile();
-        _parentFile.mkdirs();
-        FileWriter _fileWriter = new FileWriter(file);
-        final FileWriter writer = _fileWriter;
-        String _main = this.main(document);
-        writer.append(_main);
-        writer.close();
-        InputOutput.<String>println("Done.");
-      }
+      final Document document = this.loadDocument();
+      File _file = new File("../../website/documentation/index.html");
+      final File file = _file;
+      File _parentFile = file.getParentFile();
+      _parentFile.mkdirs();
+      FileWriter _fileWriter = new FileWriter(file);
+      final FileWriter writer = _fileWriter;
+      String _main = this.main(document);
+      writer.append(_main);
+      writer.close();
+      InputOutput.<String>println("Done.");
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   public Document loadDocument() {
-    {
-      ResourceSet _get = this.provider.get();
-      final ResourceSet rs = _get;
-      PathTraverser _pathTraverser = new PathTraverser();
-      List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtend.doc.xdoc/xdoc");
-      final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
-          public Boolean apply(final URI it) {
-            String _fileExtension = it.fileExtension();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_fileExtension, "xdoc");
-            return _operator_equals;
-          }
-        };
-      Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(_singletonList, new Predicate<URI>() {
-          public boolean apply(URI input) {
-            return _function.apply(input);
-          }
-      });
-      Collection<URI> _values = _resolvePathes.values();
-      final Collection<URI> uris = _values;
-      for (final URI uri : uris) {
-        {
-          String _operator_plus = StringExtensions.operator_plus("Loading ", uri);
-          InputOutput.<String>println(_operator_plus);
-          rs.getResource(uri, true);
+    final ResourceSet rs = this.provider.get();
+    PathTraverser _pathTraverser = new PathTraverser();
+    List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtend.doc.xdoc/xdoc");
+    final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+        public Boolean apply(final URI it) {
+          String _fileExtension = it.fileExtension();
+          boolean _equals = Objects.equal(_fileExtension, "xdoc");
+          return _equals;
         }
-      }
-      EcoreUtil.resolveAll(rs);
-      EList<Resource> _resources = rs.getResources();
-      for (final Resource resource : _resources) {
-        {
-          List<Issue> _validate = this.validator.validate(resource, CheckMode.ALL, null);
-          final List<Issue> issues = _validate;
-          final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
-              public Boolean apply(final Issue i) {
-                Severity _severity = i.getSeverity();
-                boolean _operator_equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
-                return Boolean.valueOf(_operator_equals);
-              }
-            };
-          boolean _exists = IterableExtensions.<Issue>exists(issues, _function_1);
-          if (_exists) {
-            String _string = issues.toString();
-            IllegalStateException _illegalStateException = new IllegalStateException(_string);
-            throw _illegalStateException;
-          }
+      };
+    Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(_singletonList, new Predicate<URI>() {
+        public boolean apply(URI input) {
+          return _function.apply(input);
         }
+    });
+    final Collection<URI> uris = _resolvePathes.values();
+    for (final URI uri : uris) {
+      {
+        String _plus = ("Loading " + uri);
+        InputOutput.<String>println(_plus);
+        rs.getResource(uri, true);
       }
-      TreeIterator<Notifier> _allContents = rs.getAllContents();
-      Iterator<Document> _filter = IteratorExtensions.<Document>filter(_allContents, org.eclipse.xtext.xdoc.xdoc.Document.class);
-      Document _head = IteratorExtensions.<Document>head(_filter);
-      return _head;
     }
+    EcoreUtil2.resolveAll(rs);
+    EList<Resource> _resources = rs.getResources();
+    for (final Resource resource : _resources) {
+      {
+        final List<Issue> issues = this.validator.validate(resource, CheckMode.ALL, null);
+        final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
+            public Boolean apply(final Issue i) {
+              Severity _severity = i.getSeverity();
+              boolean _equals = Objects.equal(_severity, Severity.ERROR);
+              return Boolean.valueOf(_equals);
+            }
+          };
+        boolean _exists = IterableExtensions.<Issue>exists(issues, _function_1);
+        if (_exists) {
+          String _string = issues.toString();
+          IllegalStateException _illegalStateException = new IllegalStateException(_string);
+          throw _illegalStateException;
+        }
+      }
+    }
+    TreeIterator<Notifier> _allContents = rs.getAllContents();
+    Iterator<Document> _filter = Iterators.<Document>filter(_allContents, Document.class);
+    return IteratorExtensions.<Document>head(_filter);
   }
   
   public String main(final Document document) {

@@ -1,7 +1,6 @@
 package xtend.tutorial.basics;
 
 import com.google.common.base.Objects;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import xtend.tutorial.util.Circle;
 import xtend.tutorial.util.Rectangle;
 import xtend.tutorial.util.Shape;
@@ -60,30 +59,30 @@ public class Xtend04_ControlStructures {
    */
   public String switchExpression_01(final Shape shape) {
     String _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (shape instanceof Circle) {
         final Circle _circle = (Circle)shape;
-        matched=true;
+        _matched=true;
         String _plus = ("a circle : diameter=" + Integer.valueOf(_circle.diameter));
         _switchResult = _plus;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (shape instanceof Rectangle) {
         final Rectangle _rectangle = (Rectangle)shape;
         boolean _equals = (_rectangle.height == _rectangle.width);
         if (_equals) {
-          matched=true;
+          _matched=true;
           String _plus = ("a square : size=" + Integer.valueOf(_rectangle.width));
           _switchResult = _plus;
         }
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (shape instanceof Rectangle) {
         final Rectangle _rectangle = (Rectangle)shape;
-        matched=true;
+        _matched=true;
         String _plus = ("a rectangle : width=" + Integer.valueOf(_rectangle.width));
         String _plus_1 = (_plus + ", height=");
         String _plus_2 = (_plus_1 + Integer.valueOf(_rectangle.height));
@@ -99,20 +98,20 @@ public class Xtend04_ControlStructures {
    */
   public String switchExpression_02(final String value) {
     String _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(value,"foo")) {
-        matched=true;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(value,"foo")) {
+        _matched=true;
         _switchResult = "it\'s foo";
       }
     }
-    if (!matched) {
-      if (ObjectExtensions.operator_equals(value,"bar")) {
-        matched=true;
+    if (!_matched) {
+      if (Objects.equal(value,"bar")) {
+        _matched=true;
         _switchResult = "a bar";
       }
     }
-    if (!matched) {
+    if (!_matched) {
       _switchResult = "don\'t know";
     }
     return _switchResult;

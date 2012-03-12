@@ -4,7 +4,6 @@ import bootstrap.HtmlExtensions;
 import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Document;
@@ -40,8 +39,8 @@ public class Menu {
         {
           Iterable<? extends AbstractSection> _sections_1 = this._xdocExtensions.getSections(s);
           int _size = IterableExtensions.size(_sections_1);
-          boolean _operator_lessEqualsThan = IntegerExtensions.operator_lessEqualsThan(_size, 1);
-          if (_operator_lessEqualsThan) {
+          boolean _lessEqualsThan = (_size <= 1);
+          if (_lessEqualsThan) {
             _builder.append("\t\t\t\t");
             _builder.append("<li><a href=\"#");
             String _href = this._htmlExtensions.href(s);

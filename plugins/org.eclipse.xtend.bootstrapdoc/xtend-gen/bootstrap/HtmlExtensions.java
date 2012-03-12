@@ -1,5 +1,6 @@
 package bootstrap;
 
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -9,17 +10,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.xdoc.Anchor;
 import org.eclipse.xtext.xdoc.xdoc.Code;
 import org.eclipse.xtext.xdoc.xdoc.CodeBlock;
@@ -51,8 +48,8 @@ public class HtmlExtensions {
   public String href(final Identifiable it) {
     String _xifexpression = null;
     String _name = it.getName();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name, null);
-    if (_operator_notEquals) {
+    boolean _notEquals = (!Objects.equal(_name, null));
+    if (_notEquals) {
       String _name_1 = it.getName();
       _xifexpression = _name_1;
     } else {
@@ -66,10 +63,9 @@ public class HtmlExtensions {
         {
           EClass _eClass = it.eClass();
           String _name_2 = _eClass.getName();
-          String _operator_plus = StringExtensions.operator_plus(_name_2, "_");
+          String _plus = (_name_2 + "_");
           int _size = this.artificialHrefs.size();
-          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, Integer.valueOf(_size));
-          final String newHref = _operator_plus_1;
+          final String newHref = (_plus + Integer.valueOf(_size));
           this.artificialHrefs.put(it, newHref);
           _xblockexpression = (newHref);
         }
@@ -190,8 +186,8 @@ public class HtmlExtensions {
     String _xblockexpression = null;
     {
       String _text = it.getText();
-      String _operator_plus = StringExtensions.operator_plus("TODO: ", _text);
-      InputOutput.<String>println(_operator_plus);
+      String _plus = ("TODO: " + _text);
+      InputOutput.<String>println(_plus);
       _xblockexpression = ("");
     }
     return _xblockexpression;
@@ -202,21 +198,21 @@ public class HtmlExtensions {
     {
       JvmDeclaredType _element = it.getElement();
       String _identifier = _element.getIdentifier();
-      String _operator_plus = StringExtensions.operator_plus("TODO CodeRef to: ", _identifier);
-      InputOutput.<String>println(_operator_plus);
+      String _plus = ("TODO CodeRef to: " + _identifier);
+      InputOutput.<String>println(_plus);
       CharSequence _xifexpression = null;
       TextOrMarkup _altText = it.getAltText();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_altText, null);
-      if (_operator_notEquals) {
+      boolean _notEquals = (!Objects.equal(_altText, null));
+      if (_notEquals) {
         TextOrMarkup _altText_1 = it.getAltText();
         CharSequence _html = this.toHtml(_altText_1);
         _xifexpression = _html;
       } else {
         JvmDeclaredType _element_1 = it.getElement();
         String _identifier_1 = _element_1.getIdentifier();
-        String _operator_plus_1 = StringExtensions.operator_plus("<code class=\"prettyprint lang-java\">", _identifier_1);
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "</code>");
-        _xifexpression = _operator_plus_2;
+        String _plus_1 = ("<code class=\"prettyprint lang-java\">" + _identifier_1);
+        String _plus_2 = (_plus_1 + "</code>");
+        _xifexpression = _plus_2;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -290,8 +286,8 @@ public class HtmlExtensions {
     {
       EClass _eClass = it.eClass();
       String _name = _eClass.getName();
-      String _operator_plus = StringExtensions.operator_plus("Missing toHtml for ", _name);
-      InputOutput.<String>println(_operator_plus);
+      String _plus = ("Missing toHtml for " + _name);
+      InputOutput.<String>println(_plus);
       _xblockexpression = ("");
     }
     return _xblockexpression;
@@ -310,13 +306,12 @@ public class HtmlExtensions {
     {
       EList<EObject> _contents = it.getContents();
       CharSequence _html = this.toHtml(_contents);
-      String _string = _html.toString();
-      final String code = _string;
+      final String code = _html.toString();
       String _xifexpression = null;
       LangDef _language = it.getLanguage();
       String _name = _language==null?(String)null:_language.getName();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_name, null);
-      if (_operator_equals) {
+      boolean _equals = Objects.equal(_name, null);
+      if (_equals) {
         _xifexpression = "xtend";
       } else {
         LangDef _language_1 = it.getLanguage();
@@ -325,15 +320,15 @@ public class HtmlExtensions {
       }
       final String languageName = _xifexpression;
       CharSequence _xifexpression_1 = null;
-      boolean _operator_or = false;
+      boolean _or = false;
       boolean _contains = code.contains("\n");
       if (_contains) {
-        _operator_or = true;
+        _or = true;
       } else {
         boolean _contains_1 = code.contains("\r");
-        _operator_or = BooleanExtensions.operator_or(_contains, _contains_1);
+        _or = (_contains || _contains_1);
       }
-      if (_operator_or) {
+      if (_or) {
         StringConcatenation _builder = new StringConcatenation();
         {
           if (isParagraph) {
@@ -379,85 +374,84 @@ public class HtmlExtensions {
     String _xblockexpression = null;
     {
       int start = 0;
-      boolean _operator_and = false;
+      boolean _and = false;
       int _length = it.length();
-      int _operator_minus = IntegerExtensions.operator_minus(_length, 1);
-      boolean _operator_lessThan = IntegerExtensions.operator_lessThan(start, _operator_minus);
-      if (!_operator_lessThan) {
-        _operator_and = false;
+      int _minus = (_length - 1);
+      boolean _lessThan = (start < _minus);
+      if (!_lessThan) {
+        _and = false;
       } else {
-        boolean _operator_or = false;
+        boolean _or = false;
         String _substring = it.substring(start, 1);
-        boolean _operator_equals = ObjectExtensions.operator_equals(_substring, " ");
-        if (_operator_equals) {
-          _operator_or = true;
+        boolean _equals = Objects.equal(_substring, " ");
+        if (_equals) {
+          _or = true;
         } else {
           String _substring_1 = it.substring(start, 1);
-          boolean _operator_equals_1 = ObjectExtensions.operator_equals(_substring_1, "\t");
-          _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+          boolean _equals_1 = Objects.equal(_substring_1, "\t");
+          _or = (_equals || _equals_1);
         }
-        _operator_and = BooleanExtensions.operator_and(_operator_lessThan, _operator_or);
+        _and = (_lessThan && _or);
       }
-      boolean _while = _operator_and;
+      boolean _while = _and;
       while (_while) {
-        int _operator_plus = IntegerExtensions.operator_plus(start, 1);
-        start = _operator_plus;
-        boolean _operator_and_1 = false;
+        int _plus = (start + 1);
+        start = _plus;
+        boolean _and_1 = false;
         int _length_1 = it.length();
-        int _operator_minus_1 = IntegerExtensions.operator_minus(_length_1, 1);
-        boolean _operator_lessThan_1 = IntegerExtensions.operator_lessThan(start, _operator_minus_1);
-        if (!_operator_lessThan_1) {
-          _operator_and_1 = false;
+        int _minus_1 = (_length_1 - 1);
+        boolean _lessThan_1 = (start < _minus_1);
+        if (!_lessThan_1) {
+          _and_1 = false;
         } else {
-          boolean _operator_or_1 = false;
+          boolean _or_1 = false;
           String _substring_2 = it.substring(start, 1);
-          boolean _operator_equals_2 = ObjectExtensions.operator_equals(_substring_2, " ");
-          if (_operator_equals_2) {
-            _operator_or_1 = true;
+          boolean _equals_2 = Objects.equal(_substring_2, " ");
+          if (_equals_2) {
+            _or_1 = true;
           } else {
             String _substring_3 = it.substring(start, 1);
-            boolean _operator_equals_3 = ObjectExtensions.operator_equals(_substring_3, "\t");
-            _operator_or_1 = BooleanExtensions.operator_or(_operator_equals_2, _operator_equals_3);
+            boolean _equals_3 = Objects.equal(_substring_3, "\t");
+            _or_1 = (_equals_2 || _equals_3);
           }
-          _operator_and_1 = BooleanExtensions.operator_and(_operator_lessThan_1, _operator_or_1);
+          _and_1 = (_lessThan_1 && _or_1);
         }
-        _while = _operator_and_1;
+        _while = _and_1;
       }
       String _substring_2 = it.substring(start, 1);
-      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_substring_2, "\n");
-      if (_operator_equals_2) {
-        int _operator_plus = IntegerExtensions.operator_plus(start, 1);
-        start = _operator_plus;
+      boolean _equals_2 = Objects.equal(_substring_2, "\n");
+      if (_equals_2) {
+        int _plus = (start + 1);
+        start = _plus;
       }
       int _length_1 = it.length();
-      int _operator_minus_1 = IntegerExtensions.operator_minus(_length_1, 1);
-      int end = _operator_minus_1;
-      boolean _operator_and_1 = false;
-      boolean _operator_greaterThan = IntegerExtensions.operator_greaterThan(end, 0);
-      if (!_operator_greaterThan) {
-        _operator_and_1 = false;
+      int end = (_length_1 - 1);
+      boolean _and_1 = false;
+      boolean _greaterThan = (end > 0);
+      if (!_greaterThan) {
+        _and_1 = false;
       } else {
         char _charAt = it.charAt(end);
         boolean _isWhitespace = Character.isWhitespace(_charAt);
-        _operator_and_1 = BooleanExtensions.operator_and(_operator_greaterThan, _isWhitespace);
+        _and_1 = (_greaterThan && _isWhitespace);
       }
-      boolean _while_1 = _operator_and_1;
+      boolean _while_1 = _and_1;
       while (_while_1) {
-        int _operator_minus_2 = IntegerExtensions.operator_minus(end, 1);
-        end = _operator_minus_2;
-        boolean _operator_and_2 = false;
-        boolean _operator_greaterThan_1 = IntegerExtensions.operator_greaterThan(end, 0);
-        if (!_operator_greaterThan_1) {
-          _operator_and_2 = false;
+        int _minus_1 = (end - 1);
+        end = _minus_1;
+        boolean _and_2 = false;
+        boolean _greaterThan_1 = (end > 0);
+        if (!_greaterThan_1) {
+          _and_2 = false;
         } else {
           char _charAt_1 = it.charAt(end);
           boolean _isWhitespace_1 = Character.isWhitespace(_charAt_1);
-          _operator_and_2 = BooleanExtensions.operator_and(_operator_greaterThan_1, _isWhitespace_1);
+          _and_2 = (_greaterThan_1 && _isWhitespace_1);
         }
-        _while_1 = _operator_and_2;
+        _while_1 = _and_2;
       }
-      int _operator_plus_1 = IntegerExtensions.operator_plus(end, 1);
-      String _substring_3 = it.substring(start, _operator_plus_1);
+      int _plus_1 = (end + 1);
+      String _substring_3 = it.substring(start, _plus_1);
       _xblockexpression = (_substring_3);
     }
     return _xblockexpression;
@@ -491,20 +485,20 @@ public class HtmlExtensions {
   
   protected CharSequence internalToHtmlParagraph(final Object it) {
     CharSequence _switchResult = null;
-    boolean matched = false;
-    if (!matched) {
+    boolean _matched = false;
+    if (!_matched) {
       if (it instanceof TextOrMarkup) {
         final TextOrMarkup _textOrMarkup = (TextOrMarkup)it;
-        matched=true;
+        _matched=true;
         EList<EObject> _contents = _textOrMarkup.getContents();
         CharSequence _internalToHtmlParagraph = this.internalToHtmlParagraph(_contents);
         _switchResult = _internalToHtmlParagraph;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (it instanceof List) {
         final List<EObject> _list = (List<EObject>)it;
-        matched=true;
+        _matched=true;
         final Function1<EObject,CharSequence> _function = new Function1<EObject,CharSequence>() {
             public CharSequence apply(final EObject it) {
               CharSequence _internalToHtmlParagraph = HtmlExtensions.this.internalToHtmlParagraph(it);
@@ -516,25 +510,24 @@ public class HtmlExtensions {
         _switchResult = _join;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (it instanceof TextPart) {
         final TextPart _textPart = (TextPart)it;
-        matched=true;
+        _matched=true;
         String _xblockexpression = null;
         {
           String _text = _textPart.getText();
           String _quote = this.quote(_text);
-          String[] _split = _quote.split("^\\s*$");
-          final String[] paragraphs = _split;
-          final String[] _typeConverted_paragraphs = (String[])paragraphs;
+          final String[] paragraphs = _quote.split("^\\s*$");
+          final String[] _converted_paragraphs = (String[])paragraphs;
           final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
               public Boolean apply(final String it) {
                 boolean _isEmpty = it.isEmpty();
-                boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-                return Boolean.valueOf(_operator_not);
+                boolean _not = (!_isEmpty);
+                return Boolean.valueOf(_not);
               }
             };
-          Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_typeConverted_paragraphs)), _function);
+          Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_converted_paragraphs)), _function);
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("</p>");
           _builder.newLine();
@@ -546,15 +539,15 @@ public class HtmlExtensions {
         _switchResult = _xblockexpression;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       if (it instanceof CodeBlock) {
         final CodeBlock _codeBlock = (CodeBlock)it;
-        matched=true;
+        _matched=true;
         CharSequence _internalToHtml = this.internalToHtml(_codeBlock, true);
         _switchResult = _internalToHtml;
       }
     }
-    if (!matched) {
+    if (!_matched) {
       CharSequence _html = this.toHtml(it);
       _switchResult = _html;
     }
