@@ -24,8 +24,8 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 
 	/**
-	 * @param object - the object this part should be associated with
-	 * @param useForDebugging - whether the part is relevant for debugging
+	 * @param object the object this part should be associated with
+	 * @param useForDebugging whether the part is relevant for debugging
 	 */
 	ITreeAppendable trace(EObject object, boolean useForDebugging);
 	
@@ -42,6 +42,12 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList);
 	
 	ITreeAppendable trace(ILocationData location);
+	
+	/**
+	 * @param location the location that should be traced
+	 * @param useForDebugging whether the part is relevant for debugging
+	 */
+	ITreeAppendable trace(ILocationData location, boolean useForDebugging);
 	
 	ITreeAppendable append(JvmType type);
 	

@@ -75,6 +75,10 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	public ITreeAppendable trace(ILocationData location) {
 		return this;
 	}
+	
+	public ITreeAppendable trace(ILocationData location, boolean useForDebugging) {
+		return this;
+	}
 
 	public ITreeAppendable trace(Iterable<? extends EObject> objects) {
 		return this;

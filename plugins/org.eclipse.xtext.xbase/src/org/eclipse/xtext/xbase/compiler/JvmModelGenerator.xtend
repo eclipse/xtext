@@ -13,12 +13,16 @@ import org.eclipse.xtext.common.types.JvmByteAnnotationValue
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue
 import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue
@@ -27,36 +31,31 @@ import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.resource.ILocationInFileProvider
-import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.util.Wrapper
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
-import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.common.types.JvmVoid
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.common.types.JvmEnumerationType
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
-import org.eclipse.xtext.util.ITextRegionWithLineInformation
-import org.eclipse.xtext.util.TextRegionWithLineInformation
 import org.eclipse.xtext.generator.trace.LocationData
-import org.eclipse.xtext.resource.ILocationInFileProviderExtension
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
+import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.util.ITextRegionWithLineInformation
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.util.TextRegionWithLineInformation
+import org.eclipse.xtext.util.Wrapper
+import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 
 /**
  * A generator implementation that processes the 
@@ -67,6 +66,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
+	@Inject extension TreeAppendableUtil
 	@Inject XbaseCompiler compiler
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject ILocationInFileProvider locationProvider
@@ -106,25 +106,6 @@ class JvmModelGenerator implements IGenerator {
 			importAppendable.newLine
 		importAppendable.append(bodyAppendable)
 		return importAppendable
-	}
-	
-	def traceSignificant(ITreeAppendable appendable, EObject source) {
-		val it = locationProvider.getSignificantTextRegion(source) as ITextRegionWithLineInformation
-		if (it != null)
-			appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null, null))
-		else
-			appendable
-	}
-	
-	def traceWithComments(ITreeAppendable appendable, EObject source) {
-		val it = switch(locationProvider) {
-			ILocationInFileProviderExtension: locationProvider.getTextRegion(source, ILocationInFileProviderExtension$RegionDescription::INCLUDING_COMMENTS)
-			default: locationProvider.getFullTextRegion(source)
-		} as ITextRegionWithLineInformation
-		if (it != null)
-			appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null, null))
-		else
-			appendable
 	}
 	
 	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable) {
@@ -696,7 +677,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager) {
-		val appendable = new TreeAppendable(importManager, locationProvider, context, "  ", "\n")
+		val appendable = new TreeAppendable(importManager, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		val type = context.containerType
 		if(type != null) {
 			appendable.declareVariable(context.containerType, "this")

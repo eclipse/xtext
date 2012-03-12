@@ -57,9 +57,6 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.ILocationInFileProviderExtension;
-import org.eclipse.xtext.resource.ILocationInFileProviderExtension.RegionDescription;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
@@ -70,6 +67,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
+import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -97,6 +95,9 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private TypeReferences _typeReferences;
+  
+  @Inject
+  private TreeAppendableUtil _treeAppendableUtil;
   
   @Inject
   private XbaseCompiler compiler;
@@ -175,66 +176,6 @@ public class JvmModelGenerator implements IGenerator {
     return importAppendable;
   }
   
-  public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      ITextRegion _significantTextRegion = this.locationProvider.getSignificantTextRegion(source);
-      final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _significantTextRegion);
-      ITreeAppendable _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(it, null));
-      if (_notEquals) {
-        int _offset = it.getOffset();
-        int _length = it.getLength();
-        int _lineNumber = it.getLineNumber();
-        int _endLineNumber = it.getEndLineNumber();
-        LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null, null);
-        ITreeAppendable _trace = appendable.trace(_locationData);
-        _xifexpression = _trace;
-      } else {
-        _xifexpression = appendable;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
-  }
-  
-  public ITreeAppendable traceWithComments(final ITreeAppendable appendable, final EObject source) {
-    ITreeAppendable _xblockexpression = null;
-    {
-      ITextRegion _switchResult = null;
-      final ILocationInFileProvider locationProvider = this.locationProvider;
-      boolean _matched = false;
-      if (!_matched) {
-        if (locationProvider instanceof ILocationInFileProviderExtension) {
-          final ILocationInFileProviderExtension _iLocationInFileProviderExtension = (ILocationInFileProviderExtension)locationProvider;
-          _matched=true;
-          ITextRegion _textRegion = ((ILocationInFileProviderExtension)_iLocationInFileProviderExtension).getTextRegion(source, RegionDescription.INCLUDING_COMMENTS);
-          _switchResult = _textRegion;
-        }
-      }
-      if (!_matched) {
-        ITextRegion _fullTextRegion = this.locationProvider.getFullTextRegion(source);
-        _switchResult = _fullTextRegion;
-      }
-      final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _switchResult);
-      ITreeAppendable _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(it, null));
-      if (_notEquals) {
-        int _offset = it.getOffset();
-        int _length = it.getLength();
-        int _lineNumber = it.getLineNumber();
-        int _endLineNumber = it.getEndLineNumber();
-        LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null, null);
-        ITreeAppendable _trace = appendable.trace(_locationData);
-        _xifexpression = _trace;
-      } else {
-        _xifexpression = appendable;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
-  }
-  
   protected ITreeAppendable _generateBody(final JvmGenericType it, final ITreeAppendable appendable) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -248,7 +189,7 @@ public class JvmModelGenerator implements IGenerator {
       } else {
         childAppendable.append("class ");
       }
-      ITreeAppendable _traceSignificant = this.traceSignificant(childAppendable, it);
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
       this.generateTypeParameterDeclaration(it, childAppendable);
@@ -259,7 +200,7 @@ public class JvmModelGenerator implements IGenerator {
       EList<JvmMember> _members = it.getMembers();
       final Procedure1<JvmMember> _function = new Procedure1<JvmMember>() {
           public void apply(final JvmMember it) {
-            final ITreeAppendable memberAppendable = JvmModelGenerator.this.traceWithComments(childAppendable, it);
+            final ITreeAppendable memberAppendable = JvmModelGenerator.this._treeAppendableUtil.traceWithComments(childAppendable, it);
             memberAppendable.openScope();
             Boolean _get = b.get();
             boolean _generateMember = JvmModelGenerator.this.generateMember(it, memberAppendable, (_get).booleanValue());
@@ -283,7 +224,7 @@ public class JvmModelGenerator implements IGenerator {
       this.generateAnnotations(it, appendable, true);
       this.generateModifier(it, appendable);
       appendable.append("enum ");
-      ITreeAppendable _traceSignificant = this.traceSignificant(appendable, it);
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(appendable, it);
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
       appendable.append(" ");
@@ -565,7 +506,7 @@ public class JvmModelGenerator implements IGenerator {
     JvmTypeReference _type = it.getType();
     this.serialize(_type, tracedAppendable);
     tracedAppendable.append(" ");
-    ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
+    ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     String _simpleName = it.getSimpleName();
     _traceSignificant.append(_simpleName);
     this.generateInitialization(it, tracedAppendable);
@@ -595,7 +536,7 @@ public class JvmModelGenerator implements IGenerator {
       this.serialize(_returnType_1, tracedAppendable);
     }
     tracedAppendable.append(" ");
-    ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
+    ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     String _simpleName = it.getSimpleName();
     _traceSignificant.append(_simpleName);
     tracedAppendable.append("(");
@@ -656,7 +597,7 @@ public class JvmModelGenerator implements IGenerator {
       this.generateAnnotations(it, tracedAppendable, true);
       this.generateModifier(it, tracedAppendable);
       this.generateTypeParameterDeclaration(it, tracedAppendable);
-      ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
       tracedAppendable.append("(");
@@ -717,7 +658,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateTypeParameterDeclaration(final JvmTypeParameter it, final ITreeAppendable appendable) {
     final ITreeAppendable tracedAppendable = appendable.trace(it);
-    ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
+    ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     String _name = it.getName();
     _traceSignificant.append(_name);
     this.generateTypeParameterConstraints(it, tracedAppendable);
@@ -832,7 +773,7 @@ public class JvmModelGenerator implements IGenerator {
     String _simpleName = it.getSimpleName();
     String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
     final String name = tracedAppendable.declareVariable(it, _makeJavaIdentifier);
-    ITreeAppendable _traceSignificant = this.traceSignificant(tracedAppendable, it);
+    ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     _traceSignificant.append(name);
   }
   
@@ -1490,7 +1431,7 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager) {
-    TreeAppendable _treeAppendable = new TreeAppendable(importManager, this.locationProvider, context, "  ", "\n");
+    TreeAppendable _treeAppendable = new TreeAppendable(importManager, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
     final TreeAppendable appendable = _treeAppendable;
     final JvmGenericType type = this.containerType(context);
     boolean _notEquals = (!Objects.equal(type, null));
