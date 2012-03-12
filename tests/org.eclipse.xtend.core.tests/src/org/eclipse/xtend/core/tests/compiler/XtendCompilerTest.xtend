@@ -517,8 +517,10 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  public void foo(final Object s) {
 			    if (s instanceof String) {
 			      _foo((String)s);
+			      return;
 			    } else if (s != null) {
 			      _foo(s);
+			      return;
 			    } else {
 			      throw new IllegalArgumentException("Unhandled parameter types: " +
 			        Arrays.<Object>asList(s).toString());
@@ -557,12 +559,15 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    if (s instanceof String
 			         && other instanceof CharSequence) {
 			      _foo((String)s, (CharSequence)other);
+			      return;
 			    } else if (s instanceof String
 			         && other == null) {
 			      _foo((String)s, (Void)null);
+			      return;
 			    } else if (s != null
 			         && other != null) {
 			      _foo(s, other);
+			      return;
 			    } else {
 			      throw new IllegalArgumentException("Unhandled parameter types: " +
 			        Arrays.<Object>asList(s, other).toString());
@@ -601,12 +606,15 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    if (s instanceof String
 			         && other instanceof CharSequence) {
 			      _foo((String)s, (CharSequence)other);
+			      return;
 			    } else if (s instanceof String
 			         && other == null) {
 			      _foo((String)s, (Void)null);
+			      return;
 			    } else if (s != null
 			         && other != null) {
 			      _foo(s, other);
+			      return;
 			    } else {
 			      throw new IllegalArgumentException("Unhandled parameter types: " +
 			        Arrays.<Object>asList(s, other).toString());
@@ -640,8 +648,10 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  public void foo(final Object s, final boolean b, final String other) {
 			    if (s instanceof StringBuffer) {
 			      _foo((StringBuffer)s, b, other);
+			      return;
 			    } else if (s instanceof StringBuilder) {
 			      _foo((StringBuilder)s, b, other);
+			      return;
 			    } else {
 			      throw new IllegalArgumentException("Unhandled parameter types: " +
 			        Arrays.<Object>asList(s, b, other).toString());

@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.Later;
+import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -45,6 +46,9 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 
 	@Inject
 	private TypeReferenceSerializer typeReferenceSerializer;
+	
+	@Inject
+	private TreeAppendableUtil treeAppendableUtil;
 	
 	private List<JvmOperation> sortedDispatchOperations;
 
@@ -74,13 +78,14 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			}
 		}
 		for (JvmOperation operation : sortedDispatchOperations) {
+			ITreeAppendable operationAppendable = treeAppendableUtil.traceSignificant(a, operation, true);
 			final List<Later> laters = newArrayList();
 			for (int i = 0; i < parameterCount; i++) {
 				final JvmFormalParameter dispatchParam = dispatchOperation.getParameters().get(i);
 				final JvmTypeReference dispatchParamType = dispatchParam.getParameterType();
 				final JvmFormalParameter caseParam = operation.getParameters().get(i);
 				final JvmTypeReference caseParamType = caseParam.getParameterType();
-				final String name = getVarName(dispatchParam, a);
+				final String name = getVarName(dispatchParam, operationAppendable);
 				if (typeReferences.is(caseParamType, Void.class)) {
 					laters.add(new Later() {
 						public void exec(ITreeAppendable appendable) {
@@ -102,41 +107,43 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			}
 			// if it's not the first if append an 'else'
 			if (sortedDispatchOperations.get(0) != operation) {
-				a.append(" else ");
+				operationAppendable.append(" else ");
 			}
 			if (laters.isEmpty()) {
 				needsElse = false;
-				a.append("{").increaseIndentation();
+				operationAppendable.append("{").increaseIndentation();
 			} else {
-				a.append("if (");
-				a.increaseIndentation().increaseIndentation();
+				operationAppendable.append("if (");
+				operationAppendable.increaseIndentation().increaseIndentation();
 				Iterator<Later> iterator = laters.iterator();
 				while (iterator.hasNext()) {
-					iterator.next().exec(a);
+					iterator.next().exec(operationAppendable);
 					if (iterator.hasNext()) {
-						a.newLine().append(" && ");
+						operationAppendable.newLine().append(" && ");
 					}
 				}
-				a.decreaseIndentation().decreaseIndentation();
-				a.append(") {").increaseIndentation();
+				operationAppendable.decreaseIndentation().decreaseIndentation();
+				operationAppendable.append(") {").increaseIndentation();
 			}
-			a.newLine();
+			operationAppendable.newLine();
 			final boolean isCurrentVoid = typeReferences.is(operation.getReturnType(), Void.TYPE);
 			final boolean isDispatchVoid = typeReferences.is(dispatchOperation.getReturnType(), Void.TYPE);
 			if (isDispatchVoid) {
-				generateActualDispatchCall(dispatchOperation, operation, a);
-				a.append(";");
+				generateActualDispatchCall(dispatchOperation, operation, operationAppendable);
+				// we generate a redundant return statement here to get a better debugging experience
+				operationAppendable.append(";").newLine().append("return;");
 			} else {
 				if (isCurrentVoid) {
-					generateActualDispatchCall(dispatchOperation, operation, a);
-					a.append(";").newLine().append("return null");
+					generateActualDispatchCall(dispatchOperation, operation, operationAppendable);
+					operationAppendable.append(";").newLine().append("return null");
 				} else {
-					a.append("return ");
-					generateActualDispatchCall(dispatchOperation, operation, a);
+					operationAppendable.append("return ");
+					generateActualDispatchCall(dispatchOperation, operation, operationAppendable);
 				}
-				a.append(";");
+				operationAppendable.append(";");
 			}
-			a.decreaseIndentation().newLine().append("}");
+			operationAppendable.decreaseIndentation();
+			a.newLine().append("}");
 		}
 		if (needsElse) {
 			a.append(" else {").increaseIndentation();
@@ -161,7 +168,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	}
 
 	protected void generateActualDispatchCall(JvmOperation dispatchOperation, JvmOperation actualOperationToCall,
-			IAppendable a) {
+			ITreeAppendable a) {
 		a.append(actualOperationToCall.getSimpleName()).append("(");
 		Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
 		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {

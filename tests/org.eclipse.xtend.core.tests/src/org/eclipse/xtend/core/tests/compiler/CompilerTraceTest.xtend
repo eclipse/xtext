@@ -631,6 +631,108 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testDispatchMethodName_01() throws Exception {
+		'''
+			class Zonk {
+				def dispatch void #meth#od(String s) {}
+				def dispatch void method(Integer i) {}
+			}
+		'''.tracesTo('''
+			import java.util.Arrays;
+
+			@SuppressWarnings("all")
+			public class Zonk {
+			  protected void #_method#(final String s) {
+			  }
+			  
+			  protected void _method(final Integer i) {
+			  }
+			  
+			  public void method(final Object i) {
+			    if (i instanceof Integer) {
+			      _method((Integer)i);
+			      return;
+			    } else if (i instanceof String) {
+			      _method((String)i);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(i).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testDispatchMethodName_02() throws Exception {
+		'''
+			class Zonk {
+				def dispatch void #meth#od(String s) {}
+				def dispatch void method(Integer i) {}
+			}
+		'''.tracesTo('''
+			import java.util.Arrays;
+
+			@SuppressWarnings("all")
+			public class Zonk {
+			  protected void _method(final String s) {
+			  }
+			  
+			  protected void _method(final Integer i) {
+			  }
+			  
+			  public void #method#(final Object i) {
+			    if (i instanceof Integer) {
+			      _method((Integer)i);
+			      return;
+			    } else if (i instanceof String) {
+			      _method((String)i);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(i).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testDispatchMethodName_03() throws Exception {
+		'''
+			class Zonk {
+				def dispatch void #meth#od(String s) {}
+				def dispatch void method(Integer i) {}
+			}
+		'''.tracesTo('''
+			import java.util.Arrays;
+
+			@SuppressWarnings("all")
+			public class Zonk {
+			  protected void _method(final String s) {
+			  }
+			  
+			  protected void _method(final Integer i) {
+			  }
+			  
+			  public void method(final Object i) {
+			    if (i instanceof Integer) {
+			      _method((Integer)i);
+			      return;
+			    } #else if (i instanceof String) {
+			      _method((String)i);
+			      return;#
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(i).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
 	private Pattern p = Pattern::compile("([^#]*)#([^#]*)#([^#]*)", Pattern::DOTALL);
 	
 	def tracesTo(CharSequence xtend, CharSequence java) {
@@ -654,8 +756,14 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		val actualJavaExpectation = javaGroup1 + javaGroup2 + javaGroup3;
 		assertEquals(actualJavaExpectation, compiledCode.toString);
 		val trace = new SimpleTrace((compiledCode as ITraceRegionProvider).traceRegion.invertFor(file.eResource.URI, file.eResource.URI, "project").merge)
-		val location = trace.getBestAssociatedLocation(new TextRegion(xtendGroup1.length(), xtendGroup2.length()));
-		assertEquals(new TextRegion(javaGroup1.length(), javaGroup2.length()), location.getTextRegion());
+		val locations = trace.getAllAssociatedLocations(new TextRegion(xtendGroup1.length(), xtendGroup2.length()));
+		val expectedRegion = new TextRegion(javaGroup1.length(), javaGroup2.length())
+		assertFalse(locations.empty)
+		for(location: locations) {
+			if (location.textRegion == expectedRegion)
+				return
+		}
+		fail("locations did not match expectation: "+ locations + " / " + expectedRegion);
 	}
 	
 	def AbstractTraceRegion merge(List<AbstractTraceRegion> regions) {
