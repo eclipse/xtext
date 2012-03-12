@@ -33,6 +33,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IPath projectLocation;
 	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
+	private boolean createFeatureProject;
 	
 	public boolean isCreateEclipseRuntimeLaunchConfig() {
 		return createEclipseRuntimeLaunchConfig;
@@ -61,11 +62,18 @@ public class XtextProjectInfo implements IProjectInfo {
 	public boolean isCreateTestProject() {
 		return createTestProject;
 	}
-
 	public void setCreateTestProject(boolean createTestProject) {
 		this.createTestProject = createTestProject;
 	}
 
+	public boolean isCreateFeatureProject() {
+		return createFeatureProject;
+	}
+	
+	public void setCreateFeatureProject(boolean createFeatureProject) {
+		this.createFeatureProject = createFeatureProject;
+	}
+	
 	public String getFileExtension() {
 		return fileExtension;
 	}
@@ -96,6 +104,10 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public String getTestProjectName() {
 		return getProjectName() + ".tests"; //$NON-NLS-1$
+	}
+
+	public String getFeatureProjectName() {
+		return getProjectName() + ".sdk"; //$NON-NLS-1$;
 	}
 
 	public String getUiProjectName() {
@@ -172,5 +184,10 @@ public class XtextProjectInfo implements IProjectInfo {
 	public IPath getTestProjectLocation() {
 		return projectLocation.removeLastSegments(1).append(getTestProjectName());
 	}
+
+	public IPath getFeatureProjectLocation() {
+		return projectLocation.removeLastSegments(1).append(getTestProjectName());
+	}
+
 	
 }

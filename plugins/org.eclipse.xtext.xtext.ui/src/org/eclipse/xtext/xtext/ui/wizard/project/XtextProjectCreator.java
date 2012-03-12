@@ -33,6 +33,7 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.util.FeatureProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
@@ -78,6 +79,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	@Inject
 	private Provider<PluginProjectFactory> projectFactoryProvider;
+	@Inject
+	private Provider<FeatureProjectFactory> featureProjFactoryProvider;
 	
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
@@ -97,6 +100,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		if (getXtextProjectInfo().isCreateTestProject()) {
 			createTestProject(subMonitor.newChild(1));
 		}
+		if (getXtextProjectInfo().isCreateFeatureProject()) {
+			createFeatureProject(subMonitor.newChild(1));
+		}
 
 		IFile dslGrammarFile = project.getFile(new Path(getModelFolderName()
 				+ "/" + getXtextProjectInfo().getLanguageName().replace('.', '/') //$NON-NLS-1$
@@ -104,6 +110,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
 	}
+
+	
 
 	protected int getMonitorTicks() {
 		int ticks = 2;
@@ -115,7 +123,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected PluginProjectFactory createProjectFactory() {
 		return projectFactoryProvider.get();
 	}
-	
+
+	protected FeatureProjectFactory createFeatureFactory() {
+		return featureProjFactoryProvider.get();
+	}
+
 	@Override
 	protected String getCreateModelProjectMessage() {
 		return Messages.XtextProjectCreator_CreatingProjectsMessage2 + getXtextProjectInfo().getProjectName();
@@ -210,6 +222,23 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		PluginProjectFactory factory = createProjectFactory();
 		configureTestProjectBuilder(factory);
 		return createProject(factory, getTestProjectTemplateName(), monitor);
+	}
+	
+	protected IProject createFeatureProject(SubMonitor monitor) throws CoreException {
+		FeatureProjectFactory factory = createFeatureFactory();
+		configureFeatureProjectBuilder(factory);
+		return 	factory.createProject(monitor, null);
+	}
+	
+	protected void configureFeatureProjectBuilder(FeatureProjectFactory factory) {
+		factory.setProjectName(getXtextProjectInfo().getFeatureProjectName());
+		factory.setLocation(getXtextProjectInfo().getFeatureProjectLocation());
+		factory.setFeatureLabel(String.format(Messages.XtextProjectCreator_FeatureLabel, getXtextProjectInfo()
+				.getLanguageNameAbbreviation()));
+		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
+		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
+		factory.addBundle(getXtextProjectInfo().getProjectName());
+		factory.addBundle(getXtextProjectInfo().getUiProjectName());
 	}
 
 	protected void configureTestProjectBuilder(PluginProjectFactory factory) {

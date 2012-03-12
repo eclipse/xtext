@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -49,6 +50,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	private final IStructuredSelection selection;
 	private Text extensionsField;
 	private Combo generatorConfigurationField;
+	private Button createFeaturPeoject;
 	
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
@@ -230,6 +232,15 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			data.horizontalSpan = 1;
 			generatorConfigurationField.setLayoutData(data);
 			generatorConfigurationField.setFont(parent.getFont());
+
+			createFeaturPeoject = new Button(composite, SWT.CHECK);
+			createFeaturPeoject
+					.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
+			GridData createFeaturPeojectData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+			createFeaturPeojectData.horizontalSpan = 1;
+			createFeaturPeoject.setLayoutData(createFeaturPeojectData);
+			createFeaturPeoject.setSelection(true);
+
 		}
 	}
 
@@ -248,5 +259,9 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		if (generatorConfigurationField==null)
 			return WizardContribution.getFromRegistry().values().iterator().next().getName();
 		return generatorConfigurationField.getItems()[generatorConfigurationField.getSelectionIndex()];
+	}
+
+	public boolean isCreateFeatureProject() {
+		return createFeaturPeoject.getSelection();
 	}
 }
