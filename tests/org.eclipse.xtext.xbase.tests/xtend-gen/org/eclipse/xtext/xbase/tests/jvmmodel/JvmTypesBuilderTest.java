@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -351,5 +352,34 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     Assert.assertEquals(1, _size_2);
     JvmIdentifiableElement _logicalContainer_1 = this.containerProvider.getLogicalContainer(expr);
     Assert.assertNull(_logicalContainer_1);
+  }
+  
+  @Test
+  public void testAddNull() {
+    BasicEList<String> _basicEList = new BasicEList<String>();
+    final BasicEList<String> list = _basicEList;
+    this._jvmTypesBuilder.<String>operator_add(list, null);
+    boolean _isEmpty = list.isEmpty();
+    Assert.assertTrue(_isEmpty);
+  }
+  
+  @Test
+  public void testAddAllNull() {
+    BasicEList<String> _basicEList = new BasicEList<String>();
+    final BasicEList<String> list = _basicEList;
+    final List<String> otherList = CollectionLiterals.<String>newArrayList(null, null, null);
+    this._jvmTypesBuilder.<String>operator_add(list, otherList);
+    boolean _isEmpty = list.isEmpty();
+    Assert.assertTrue(_isEmpty);
+  }
+  
+  @Test
+  public void testAddAllNull_1() {
+    BasicEList<String> _basicEList = new BasicEList<String>();
+    final BasicEList<String> list = _basicEList;
+    final List<String> otherList = null;
+    this._jvmTypesBuilder.<String>operator_add(list, otherList);
+    boolean _isEmpty = list.isEmpty();
+    Assert.assertTrue(_isEmpty);
   }
 }
