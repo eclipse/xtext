@@ -22,19 +22,12 @@ import org.eclipse.swt.graphics.Image;
  */
 public class XtextTemplateProposal extends TemplateProposal implements ICompletionProposalExtension4 {
 
-	private TemplateContext context;
-	private Template template;
-
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image) {
 		super(template, context, region, image);
-		this.context = context;
-		this.template = template;
 	}
 	
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image, int relevance) {
 		super(template, context, region, image, relevance);
-		this.context = context;
-		this.template = template;
 	}
 	
 	public boolean isAutoInsertable() {
@@ -60,9 +53,11 @@ public class XtextTemplateProposal extends TemplateProposal implements ICompleti
 	@Override
 	public String getAdditionalProposalInfo() {
 		try {
-		    context.setReadOnly(true);
+		    TemplateContext context = getContext();
+			context.setReadOnly(true);
 			TemplateBuffer templateBuffer;
 			try {
+				Template template = getTemplate();
 				if (context instanceof XtextTemplateContext) {
 					templateBuffer= ((XtextTemplateContext)context).evaluateForDisplay(template);
 				} else {
