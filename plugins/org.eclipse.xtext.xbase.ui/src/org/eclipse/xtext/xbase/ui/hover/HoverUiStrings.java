@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.hover;
 
+import java.util.Iterator;
+
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
@@ -18,10 +21,12 @@ import org.eclipse.xtext.xbase.validation.UIStrings;
  */
 public class HoverUiStrings extends UIStrings {
 
-	protected String formalParametersToString(Iterable<? extends JvmFormalParameter> elements) {
+	protected String formalParametersToString(Iterable<? extends JvmFormalParameter> elements, boolean isVarArgs) {
 		StringBuilder buffer = new StringBuilder();
 		boolean needsSeparator = false;
-		for (JvmFormalParameter parameter : elements) {
+		Iterator<? extends JvmFormalParameter> iterator = elements.iterator();
+		while (iterator.hasNext()) {
+			JvmFormalParameter parameter = iterator.next();
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
@@ -29,8 +34,18 @@ public class HoverUiStrings extends UIStrings {
 			if(typeRef != null) {
 				if (typeRef instanceof JvmAnyTypeReference)
 					buffer.append("Object");
-				else
-					buffer.append(typeRef.getSimpleName());
+				else {
+					if (isVarArgs && !iterator.hasNext()) {
+						if (typeRef instanceof JvmGenericArrayTypeReference) {
+							buffer.append(((JvmGenericArrayTypeReference) typeRef).getComponentType().getSimpleName());
+						} else {
+							buffer.append(typeRef.getSimpleName());
+						}
+						buffer.append("...");
+					} else {
+						buffer.append(typeRef.getSimpleName());
+					}
+				}
 			} else 
 				buffer.append("[null]");
 			buffer.append(" " + parameter.getName());
@@ -39,7 +54,7 @@ public class HoverUiStrings extends UIStrings {
 	}
 	
 	@Override
-	protected String parameterTypes(Iterable<JvmFormalParameter> parameters) {
-		return formalParametersToString(parameters);
+	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, boolean isVarArgs) {
+		return formalParametersToString(parameters, isVarArgs);
 	}
 }
