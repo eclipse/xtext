@@ -11,8 +11,10 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XbaseFactory;
@@ -37,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function3;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -381,5 +385,88 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     this._jvmTypesBuilder.<String>operator_add(list, otherList);
     boolean _isEmpty = list.isEmpty();
     Assert.assertTrue(_isEmpty);
+  }
+  
+  @Test
+  public void testInitializeSafely_0() {
+    final Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType> _function = new Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType>() {
+        public JvmGenericType apply(final EObject expr, final String name, final Procedure1<? super JvmGenericType> init) {
+          JvmGenericType _class = JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(expr, name, init);
+          return _class;
+        }
+      };
+    this.<JvmGenericType>genericTestInitializeSafely(_function);
+  }
+  
+  @Test
+  public void testInitializeSafely_1() {
+    final Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor> _function = new Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor>() {
+        public JvmConstructor apply(final EObject expr, final String name, final Procedure1<? super JvmConstructor> init) {
+          JvmConstructor _constructor = JvmTypesBuilderTest.this._jvmTypesBuilder.toConstructor(expr, init);
+          return _constructor;
+        }
+      };
+    this.<JvmConstructor>genericTestInitializeSafely(_function);
+  }
+  
+  @Test
+  public void testInitializeSafely_2() {
+    final Function3<EObject,String,Procedure1<? super JvmField>,JvmField> _function = new Function3<EObject,String,Procedure1<? super JvmField>,JvmField>() {
+        public JvmField apply(final EObject expr, final String name, final Procedure1<? super JvmField> init) {
+          JvmField _field = JvmTypesBuilderTest.this._jvmTypesBuilder.toField(expr, name, null, init);
+          return _field;
+        }
+      };
+    this.<JvmField>genericTestInitializeSafely(_function);
+  }
+  
+  @Test
+  public void testInitializeSafely_3() {
+    final Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation> _function = new Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation>() {
+        public JvmOperation apply(final EObject expr, final String name, final Procedure1<? super JvmOperation> init) {
+          JvmOperation _method = JvmTypesBuilderTest.this._jvmTypesBuilder.toMethod(expr, name, null, init);
+          return _method;
+        }
+      };
+    this.<JvmOperation>genericTestInitializeSafely(_function);
+  }
+  
+  @Test
+  public void testInitializeSafely_4() {
+    final Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType> _function = new Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType>() {
+        public JvmAnnotationType apply(final EObject expr, final String name, final Procedure1<? super JvmAnnotationType> init) {
+          JvmAnnotationType _annotationType = JvmTypesBuilderTest.this._jvmTypesBuilder.toAnnotationType(expr, name, init);
+          return _annotationType;
+        }
+      };
+    this.<JvmAnnotationType>genericTestInitializeSafely(_function);
+  }
+  
+  @Test
+  public void testInitializeSafely_5() {
+    final Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType> _function = new Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType>() {
+        public JvmEnumerationType apply(final EObject expr, final String name, final Procedure1<? super JvmEnumerationType> init) {
+          JvmEnumerationType _enumerationType = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationType(expr, name, init);
+          return _enumerationType;
+        }
+      };
+    this.<JvmEnumerationType>genericTestInitializeSafely(_function);
+  }
+  
+  protected <T extends Object>void genericTestInitializeSafely(final Function3<? super EObject,? super String,? super Procedure1<? super T>,? extends EObject> create) {
+    final XNullLiteral expr = XbaseFactory.eINSTANCE.createXNullLiteral();
+    Wrapper<Boolean> _wrapper = new Wrapper<Boolean>(Boolean.valueOf(false));
+    final Wrapper<Boolean> initialized = _wrapper;
+    final Procedure1<T> _function = new Procedure1<T>() {
+        public void apply(final T it) {
+          initialized.set(Boolean.valueOf(true));
+          RuntimeException _runtimeException = new RuntimeException();
+          throw _runtimeException;
+        }
+      };
+    final EObject element = create.apply(expr, "foo", _function);
+    Boolean _get = initialized.get();
+    Assert.assertTrue((_get).booleanValue());
+    Assert.assertNotNull(element);
   }
 }

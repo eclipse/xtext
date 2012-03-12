@@ -230,7 +230,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
 		inferrer.infer(eObject, acceptor, preIndexingPhase);
 		if (!preIndexingPhase) {
-			for (Pair<JvmDeclaredType, Procedure1<JvmDeclaredType>> initializer: acceptor.later) {
+			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
 				initializer.getValue().apply(initializer.getKey());
 				completer.complete(initializer.getKey());
 			}
@@ -255,7 +255,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 	
 	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor, IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmDeclaredType> {
-		public List<Pair<JvmDeclaredType,Procedure1<JvmDeclaredType>>> later = newArrayList();
+		public List<Pair<JvmDeclaredType,Procedure1<? super JvmDeclaredType>>> later = newArrayList();
 		private JvmDeclaredType lastAccepted = null;
 		private DerivedStateAwareResource resource;
 
@@ -271,9 +271,9 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			return (IPostIndexingInitializing<T>) this;
 		}
 		
-		public void initializeLater(Procedure1<JvmDeclaredType> lateInitialization) {
+		public void initializeLater(Procedure1<? super JvmDeclaredType> lateInitialization) {
 			if (lateInitialization != null && lastAccepted != null) {
-				later.add(new Pair<JvmDeclaredType, Procedure1<JvmDeclaredType>>(lastAccepted, lateInitialization));
+				later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(lastAccepted, lateInitialization));
 			}
 		}
 	}
