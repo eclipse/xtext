@@ -14,6 +14,8 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.emf.common.util.BasicEList
+import java.util.List
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -168,5 +170,28 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		op.body = ['''bar''']
 		assertEquals(1, op.eAdapters.size)
 		assertNull(containerProvider.getLogicalContainer(expr))
+	}
+	
+	@Test
+	def void testAddNull() {
+		val list = new BasicEList<String>();
+		list += null
+		assertTrue(list.empty)
+	}
+
+	@Test
+	def void testAddAllNull() {
+		val list = new BasicEList<String>();
+		val List<String> otherList = newArrayList(null, null, null) 
+		list += otherList
+		assertTrue(list.empty)
+	}
+	
+	@Test
+	def void testAddAllNull_1() {
+		val list = new BasicEList<String>();
+		val List<String> otherList = null 
+		list += otherList
+		assertTrue(list.empty)
 	}
 }
