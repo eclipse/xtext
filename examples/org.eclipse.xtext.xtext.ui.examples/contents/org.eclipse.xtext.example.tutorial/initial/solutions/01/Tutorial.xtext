@@ -1,0 +1,54 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.example.tutorial.Tutorial with org.eclipse.xtext.xbase.Xbase
+
+generate tutorial "http://www.eclipse.org/xtext/example/tutorial/Tutorial"
+
+DomainModelTutorial:
+	(elements += AbstractElement)*
+;
+
+PackageDeclaration:
+	'package' name = QualifiedName '{'
+		( elements += AbstractElement )*
+	'}'
+;
+
+/**
+ * We got rid of the production rule 'Type' and allow to define only
+ * Entities in this language. Simple types are just taken from Java.
+ */
+AbstractElement:
+	PackageDeclaration | Entity | Import
+;
+
+Import:
+	'import' importedNamespace = QualifiedNameWithWildcard
+;
+
+QualifiedNameWithWildcard:
+	QualifiedName '.*'?
+;
+
+Entity:
+	'entity' name = ValidID
+	// The super type of an Entity may be any given Java type. We are no
+	// longer limited to Entities
+	('extends' superType=JvmTypeReference)? 
+	'{'
+		(features += Property)*
+	'}'
+;
+
+/**
+ * Properties refer to Java types and have a name. 
+ */
+Property:
+	name=ValidID ':' type=JvmTypeReference
+; 
+
