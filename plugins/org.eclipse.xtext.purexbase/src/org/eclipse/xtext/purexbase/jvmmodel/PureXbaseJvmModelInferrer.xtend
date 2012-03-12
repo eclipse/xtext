@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
+import org.eclipse.jdt.annotation.NonNull
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -28,7 +29,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 	@Inject IEarlyExitComputer computer
 	@Inject XbaseCompiler compiler
 
-   	def dispatch void infer(Model m, IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+   	def dispatch void infer(Model m, @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
    		val e  = m.block
    		acceptor.accept(e.toClass(e.eResource.name)).initializeLater [
    			annotations += e.toAnnotation(typeof(SuppressWarnings), "all")
