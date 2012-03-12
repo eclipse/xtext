@@ -51,7 +51,7 @@ public class UIStrings {
 	
 	public String parameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmExecutable) {
-			return "(" + parameterTypes(((JvmExecutable)element).getParameters()) + ")";
+			return "(" + parameterTypes(((JvmExecutable)element).getParameters(), ((JvmExecutable)element).isVarArgs()) + ")";
 		}
 		return "";
 	}
@@ -128,7 +128,7 @@ public class UIStrings {
 		}));
 	}
 
-	protected String parameterTypes(Iterable<JvmFormalParameter> parameters) {
+	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, @SuppressWarnings("unused") boolean isVarArgs) {
 		return referencesToString(transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
 			public JvmTypeReference apply(JvmFormalParameter from) {
 				return from.getParameterType();
