@@ -831,4 +831,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected ILogicalContainerProvider getLogicalContainerProvider() {
 		return contextProvider;
 	}
+	
+	protected ILocationInFileProvider getLocationInFileProvider() {
+		return locationInFileProvider;
+	}
 }
