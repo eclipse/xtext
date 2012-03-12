@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtend.core.jvmmodel.NuEObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 import com.google.inject.ImplementedBy;
