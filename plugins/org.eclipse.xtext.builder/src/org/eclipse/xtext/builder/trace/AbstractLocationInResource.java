@@ -70,25 +70,32 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 			Resource resource = trace.getResource(getResourceURI(), getProject());
 			if (resource instanceof XtextResource) {
 				IParseResult parseResult = ((XtextResource) resource).getParseResult();
-				ICompositeNode rootNode = parseResult.getRootNode();
-				int end = getOffset() + getLength();
-				INode node = NodeModelUtils.findLeafNodeAtOffset(rootNode, getOffset());
-				while (node != null) {
-					if (node.getTotalEndOffset() >= end) {
-						EObject object = NodeModelUtils.findActualSemanticObjectFor(node);
-						if (object != null) {
-							URI result = EcoreUtil.getURI(object);
-							eObjectURI = result;
-							triedToComputeURI = true;
-							return result;
+				if (parseResult != null) {
+					ICompositeNode rootNode = parseResult.getRootNode();
+					int end = getOffset() + getLength();
+					INode node = NodeModelUtils.findLeafNodeAtOffset(rootNode, getOffset());
+					while (node != null) {
+						if (node.getTotalEndOffset() >= end) {
+							EObject object = NodeModelUtils.findActualSemanticObjectFor(node);
+							if (object != null) {
+								URI result = EcoreUtil.getURI(object);
+								eObjectURI = result;
+								triedToComputeURI = true;
+								return result;
+							}
 						}
+						node = node.getParent();
 					}
-					node = node.getParent();
 				}
 			}
 			triedToComputeURI = true;
 		}
 		return eObjectURI;
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " @ " + getTextRegion();
 	}
 	
 }
