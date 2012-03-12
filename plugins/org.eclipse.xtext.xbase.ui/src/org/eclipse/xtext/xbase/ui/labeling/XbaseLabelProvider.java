@@ -38,6 +38,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Inject
 	public XbaseLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
