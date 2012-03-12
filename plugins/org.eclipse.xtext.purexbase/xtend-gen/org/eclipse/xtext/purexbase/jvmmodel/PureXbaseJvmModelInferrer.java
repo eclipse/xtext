@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -48,7 +49,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   private XbaseCompiler compiler;
   
-  protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
+  protected void _infer(final Model m, @NonNull final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     final XBlockExpression e = m.getBlock();
     Resource _eResource = e.eResource();
     String _name = this.name(_eResource);
