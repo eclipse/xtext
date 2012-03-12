@@ -1,43 +1,20 @@
 package org.eclipse.xtend.ide.tests.hover;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.ide.hover.XtendHoverSerializer;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
-import org.eclipse.xtext.xbase.ui.hover.XbaseInformationControlInput;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -49,7 +26,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   private WorkbenchTestHelper testHelper;
   
   @Inject
-  private IJavaElementFinder javaElementFinder;
+  private XtendHoverSerializer serializer;
   
   private static String FILEEXTENSION = ".xtend";
   
@@ -154,19 +131,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(it, 42)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(it, 42)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -195,19 +171,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(it, 42)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(it, 42)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -239,19 +214,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 1, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(it, 42 + a)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(1);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(it, 42 + a)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -280,19 +254,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(it, 40 + 2)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(it, 40 + 2)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -323,19 +296,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 25);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(new ArrayList<String>(), 42)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(new ArrayList<String>(), 42)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -366,19 +338,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(new ArrayList<String>(), 42)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(new ArrayList<String>(), 42)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -415,16 +386,16 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("_extension.barCharSequence(42, ");
     _builder_1.append("\'\'\'", "");
@@ -434,9 +405,8 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder_1.append("\'\'\'", "");
     _builder_1.append(")");
     String _string_1 = _builder_1.toString();
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals(_string_1, _unsugaredExpression);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals(_string_1, _computeUnsugaredExpression);
   }
   
   @Test
@@ -467,19 +437,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 4);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("_extension.bar(it, 42)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extension.bar(it, 42)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -510,19 +479,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("it.substring(0)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("it.substring(0)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -556,19 +524,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 1, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("it.substring(0)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(1);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("it.substring(0)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -599,19 +566,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 27);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("IterableExtensions::head(new ArrayList<String>())", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("IterableExtensions::head(new ArrayList<String>())", _computeUnsugaredExpression);
   }
   
   @Test
@@ -640,19 +606,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    URI _uRI = EcoreUtil2.getURI(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    EObject _element = _second.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    String _unsugaredExpression = _second_1.getUnsugaredExpression();
-    Assert.assertEquals("fooBarBaz(it)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("fooBarBaz(it)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -681,25 +646,18 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XAbstractFeatureCall _first = triple.getFirst();
-    JvmIdentifiableElement _feature = _first.getFeature();
-    final IJavaElement javaElement = this.javaElementFinder.findElementFor(_feature);
-    XbaseInformationControlInput _second = triple.getSecond();
-    IJavaElement _inputElement = _second.getInputElement();
-    Assert.assertEquals(javaElement, _inputElement);
-    XAbstractFeatureCall _first_1 = triple.getFirst();
-    JvmIdentifiableElement _feature_1 = _first_1.getFeature();
-    URI _uRI = EcoreUtil2.getURI(((JvmOperation) _feature_1));
-    XbaseInformationControlInput _second_1 = triple.getSecond();
-    EObject _element = _second_1.getElement();
-    URI _uRI_1 = EcoreUtil2.getURI(_element);
-    Assert.assertEquals(_uRI, _uRI_1);
-    XbaseInformationControlInput _second_2 = triple.getSecond();
-    String _unsugaredExpression = _second_2.getUnsugaredExpression();
-    Assert.assertEquals("_extensionJava.bar(it, 40 + 2)", _unsugaredExpression);
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
+    IResourcesSetupUtil.waitForAutoBuild();
+    XtendClass _xtendClass = xtendFile.getXtendClass();
+    EList<XtendMember> _members = _xtendClass.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("_extensionJava.bar(it, 40 + 2)", _computeUnsugaredExpression);
   }
   
   @Test
@@ -728,54 +686,17 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
-    IFile _createFile = this.testHelper.createFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    final XtextEditor editor = this.testHelper.openEditor(_createFile);
-    final Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> triple = this.computeAstAndInvokeHover(editor, 0, 0);
-    XbaseInformationControlInput _second = triple.getSecond();
-    String _unsugaredExpression = _second.getUnsugaredExpression();
-    Assert.assertEquals("setZonk(it, s + s + s)", _unsugaredExpression);
-  }
-  
-  public Triple<XAbstractFeatureCall,XbaseInformationControlInput,IRegion> computeAstAndInvokeHover(final XtextEditor editor, final int indexOfExpressionToHover, final int addOffset) {
+    final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
     IResourcesSetupUtil.waitForAutoBuild();
-    final Resource resource = this.loadResource();
-    EList<EObject> _contents = resource.getContents();
-    EObject _get = _contents.get(0);
-    final XtendFile xtendFile = ((XtendFile) _get);
     XtendClass _xtendClass = xtendFile.getXtendClass();
     EList<XtendMember> _members = _xtendClass.getMembers();
-    XtendMember _get_1 = _members.get(1);
-    XExpression _expression = ((XtendFunction) _get_1).getExpression();
-    EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
-    XExpression _get_2 = _expressions.get(indexOfExpressionToHover);
-    final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _get_2);
-    IEObjectHover _get_3 = this.<IEObjectHover>get(IEObjectHover.class);
-    final XbaseDispatchingEObjectTextHover hover = ((XbaseDispatchingEObjectTextHover) _get_3);
-    ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
-    ICompositeNode _node = NodeModelUtils.getNode(featureCall);
-    int _offset = _node.getOffset();
-    int _plus = (_offset + addOffset);
-    final IRegion region = hover.getHoverRegion(_internalSourceViewer, _plus);
-    ISourceViewer _internalSourceViewer_1 = editor.getInternalSourceViewer();
-    Object _hoverInfo2 = hover.getHoverInfo2(_internalSourceViewer_1, region);
-    return Tuples.<XAbstractFeatureCall, XbaseInformationControlInput, IRegion>create(featureCall, ((XbaseInformationControlInput) _hoverInfo2), region);
-  }
-  
-  public Resource loadResource() {
-    try {
-      String _plus = ("platform:/resource/" + WorkbenchTestHelper.TESTPROJECT_NAME);
-      String _plus_1 = (_plus + "/src/");
-      String _plus_2 = (_plus_1 + XtendUnsugaredHoverTest.FILEPATH);
-      final URI uri = URI.createURI(_plus_2);
-      Injector _injector = this.getInjector();
-      IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
-      IProject _project = this.testHelper.getProject();
-      ResourceSet _get = _instance.get(_project);
-      Resource resource = _get.createResource(uri);
-      resource.load(null);
-      return resource;
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    XtendMember _get = _members.get(1);
+    final XtendFunction function = ((XtendFunction) _get);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    final XExpression call = _expressions.get(0);
+    String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
+    Assert.assertEquals("setZonk(it, s + s + s)", _computeUnsugaredExpression);
   }
 }
