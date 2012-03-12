@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.resource;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
