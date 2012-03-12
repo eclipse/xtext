@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Ignore;
@@ -68,6 +69,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ILocationInFileProvider locationProvider;
+	
+	@Inject
+	private IJvmModelAssociations jvmModelAssociations;
 	
 	@Test 
 	public void testNullLiteral() throws Exception {
@@ -1027,7 +1031,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		String xbaseGroup3 = xbaseMatcher.group(3);
 		String actualCode = xbaseGroup1 + xbaseGroup2 + xbaseGroup3; 
 		XExpression model = expression(actualCode,true);
-		TreeAppendable appendable = new TreeAppendable(new ImportManager(true), locationProvider, model, "  ", "\n");
+		TreeAppendable appendable = new TreeAppendable(new ImportManager(true), locationProvider, jvmModelAssociations, model, "  ", "\n");
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
 		compiler.compile(model, appendable, returnType);
