@@ -49,6 +49,19 @@ class ReflectExtensionsTest {
 	}
 	
 	@Test
+	def void testInvokeWithNull() {
+		val x = [String x | x]
+		Assert::assertNull(x.invoke('apply', null))
+		Assert::assertEquals('foo', x.invoke('apply', 'foo'))
+	}
+	
+	@Test
+	def void testInvokeWithPrimitives() {
+		val x = 'foo'
+		Assert::assertEquals("o", x.invoke('substring', 1,2))
+	}
+	
+	@Test
 	def void testGet_01() {
 		val x = new ReflectExtensionsTest
 		Assert::assertNotNull(x.get('ext'))
@@ -81,4 +94,6 @@ class ReflectExtensionsTest {
 			// expected
 		}
 	}
+	
+
 }

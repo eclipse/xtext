@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.lib.util;
 
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.junit.Assert;
@@ -18,105 +19,166 @@ public class ReflectExtensionsTest {
   
   @Test
   public void testInvoke_01() {
-    final String x = "foo";
-    Object _invoke = this.ext.invoke(x, "length");
-    Assert.assertEquals(Integer.valueOf(3), _invoke);
+    try {
+      final String x = "foo";
+      Object _invoke = this.ext.invoke(x, "length");
+      Assert.assertEquals(Integer.valueOf(3), _invoke);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testInvoke_02() {
-    final String x = "foo";
     try {
-      this.ext.invoke(x, "foo");
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof NoSuchMethodException) {
-        final NoSuchMethodException e = (NoSuchMethodException)_t;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      final String x = "foo";
+      try {
+        this.ext.invoke(x, "foo");
+        Assert.fail();
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchMethodException) {
+          final NoSuchMethodException e = (NoSuchMethodException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Test
   public void testInvoke_03() {
-    final String x = "foo";
     try {
-      this.ext.invoke(x, "length", Integer.valueOf(24));
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof NoSuchMethodException) {
-        final NoSuchMethodException e = (NoSuchMethodException)_t;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      final String x = "foo";
+      try {
+        this.ext.invoke(x, "length", Integer.valueOf(24));
+        Assert.fail();
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchMethodException) {
+          final NoSuchMethodException e = (NoSuchMethodException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Test
   public void testInvokeWithOverloadedMethods() {
-    StringBuilder _stringBuilder = new StringBuilder();
-    final StringBuilder x = _stringBuilder;
     try {
-      this.ext.invoke(x, "append", "foo");
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof IllegalStateException) {
-        final IllegalStateException e = (IllegalStateException)_t;
-        String _message = e.getMessage();
-        InputOutput.<String>println(_message);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder x = _stringBuilder;
+      try {
+        this.ext.invoke(x, "append", "foo");
+        Assert.fail();
+      } catch (final Throwable _t) {
+        if (_t instanceof IllegalStateException) {
+          final IllegalStateException e = (IllegalStateException)_t;
+          String _message = e.getMessage();
+          InputOutput.<String>println(_message);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testInvokeWithNull() {
+    try {
+      final Function1<String,String> _function = new Function1<String,String>() {
+          public String apply(final String x) {
+            return x;
+          }
+        };
+      final Function1<String,String> x = _function;
+      Object _invoke = this.ext.invoke(x, "apply", null);
+      Assert.assertNull(_invoke);
+      Object _invoke_1 = this.ext.invoke(x, "apply", "foo");
+      Assert.assertEquals("foo", _invoke_1);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testInvokeWithPrimitives() {
+    try {
+      final String x = "foo";
+      Object _invoke = this.ext.invoke(x, "substring", Integer.valueOf(1), Integer.valueOf(2));
+      Assert.assertEquals("o", _invoke);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Test
   public void testGet_01() {
-    ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-    final ReflectExtensionsTest x = _reflectExtensionsTest;
-    Object _get = this.ext.<Object>get(x, "ext");
-    Assert.assertNotNull(_get);
+    try {
+      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
+      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      Object _get = this.ext.<Object>get(x, "ext");
+      Assert.assertNotNull(_get);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testGet_02() {
-    ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-    final ReflectExtensionsTest x = _reflectExtensionsTest;
     try {
-      Object _get = this.ext.<Object>get(x, "foo");
-      Assert.assertNotNull(_get);
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof NoSuchFieldException) {
-        final NoSuchFieldException e = (NoSuchFieldException)_t;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
+      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      try {
+        Object _get = this.ext.<Object>get(x, "foo");
+        Assert.assertNotNull(_get);
+        Assert.fail();
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchFieldException) {
+          final NoSuchFieldException e = (NoSuchFieldException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Test
   public void testSet_01() {
-    ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-    final ReflectExtensionsTest x = _reflectExtensionsTest;
-    this.ext.set(x, "ext", null);
-    Assert.assertNull(x.ext);
+    try {
+      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
+      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      this.ext.set(x, "ext", null);
+      Assert.assertNull(x.ext);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testSet_02() {
-    ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-    final ReflectExtensionsTest x = _reflectExtensionsTest;
     try {
-      this.ext.set(x, "foo", "bar");
-      Assert.fail();
-    } catch (final Throwable _t) {
-      if (_t instanceof NoSuchFieldException) {
-        final NoSuchFieldException e = (NoSuchFieldException)_t;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
+      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
+      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      try {
+        this.ext.set(x, "foo", "bar");
+        Assert.fail();
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchFieldException) {
+          final NoSuchFieldException e = (NoSuchFieldException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
 }

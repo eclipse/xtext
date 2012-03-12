@@ -8,9 +8,13 @@
 package org.eclipse.xtext.xbase.lib.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Extension methods to simplify reflective invocation of methods and fields.
@@ -18,81 +22,98 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.3
  */
+@NonNullByDefault
 public class ReflectExtensions {
 
 	/**
 	 * Sets the given value on an the receivers's accessible field with the given name.
-	 * @param receiver the receiver
-	 * @param fieldName the field's name
+	 * 
+	 * @param receiver the receiver, never <code>null</code>
+	 * @param fieldName the field's name, never <code>null</code>
 	 * @param value the value to set
+	 * 
+	 * @throws NoSuchFieldException see {@link Class#getField(String)}
+	 * @throws SecurityException see {@link Class#getField(String)}
+	 * @throws IllegalAccessException see {@link Field#set(Object, Object)}
+	 * @throws IllegalArgumentException see {@link Field#set(Object, Object)}
 	 */
-	public void set(Object receiver, String fieldName, Object value) {
-		try {
-			if (receiver == null)
-				throw new NullPointerException("receiver");
-			Class<? extends Object> clazz = receiver.getClass();
-			Field f = clazz.getField(fieldName);
-			f.set(receiver, value);
-		} catch (Exception e) {
-			throw Exceptions.sneakyThrow(e);
-		}
+	public void set(Object receiver, String fieldName, @Nullable Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Preconditions.checkNotNull(receiver,"receiver");
+		Preconditions.checkNotNull(fieldName,"fieldName");
+		Class<? extends Object> clazz = receiver.getClass();
+		Field f = clazz.getField(fieldName);
+		if (!f.isAccessible())
+			f.setAccessible(true);
+		f.set(receiver, value);
 	}
 	
 	/**
 	 * Retrieves the value of the given accessible field of the given receiver.
-	 * @param receiver the container of the field
-	 * @param fieldName the field's name
+	 * 
+	 * @param receiver the container of the field, not <code>null</code>
+	 * @param fieldName the field's name, not <code>null</code>
 	 * @return the value of the field
+	 * 
+	 * @throws NoSuchFieldException see {@link Class#getField(String)}
+	 * @throws SecurityException see {@link Class#getField(String)}
+	 * @throws IllegalAccessException see {@link Field#get(Object)}
+	 * @throws IllegalArgumentException see {@link Field#get(Object)}
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T get(Object receiver, String fieldName) {
-		try {
-			if (receiver == null)
-				throw new NullPointerException("receiver");
-			
-			Class<? extends Object> clazz = receiver.getClass();
-			Field f = clazz.getField(fieldName);
-			return (T) f.get(receiver);
-		} catch (Exception e) {
-			throw Exceptions.sneakyThrow(e);
-		}
+	@Nullable
+	public <T> T get(Object receiver, String fieldName) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		Preconditions.checkNotNull(receiver,"receiver");
+		Preconditions.checkNotNull(fieldName,"fieldName");
+		
+		Class<? extends Object> clazz = receiver.getClass();
+		Field f = clazz.getField(fieldName);
+		if (!f.isAccessible())
+			f.setAccessible(true);
+		return (T) f.get(receiver);
 	}
 	
 	/**
 	 * Invokes the first accessible method defined on the receiver'c class with the given name and
 	 * a parameter list compatible to the given arguments.
 	 * 
-	 * @param receiver the method call receiver
-	 * @param methodName the method name
+	 * @param receiver the method call receiver, not <code>null</code>
+	 * @param methodName the method name, not <code>null</code>
 	 * @param args the arguments for the method invocation
 	 * @return the result of the method invocation. <code>null</code> if the method was of type void.
+	 * 
+	 * @throws SecurityException see {@link Class#getMethod(String, Class...)}
+	 * @throws NoSuchMethodException see {@link Class#getMethod(String, Class...)}
+	 * @throws IllegalAccessException see {@link Method#invoke(Object, Object...)}
+	 * @throws IllegalArgumentException see {@link Method#invoke(Object, Object...)}
+	 * @throws InvocationTargetException see {@link Method#invoke(Object, Object...)}
 	 */
-	public Object invoke(Object receiver, String methodName, Object...args) {
-		try {
-			if (receiver == null)
-				throw new NullPointerException("receiver");
-			
-			Class<? extends Object> clazz = receiver.getClass();
-			Method compatible = null;
-			for (Method candidate : clazz.getMethods()) {
-				if (isCompatible(candidate, methodName, args) && candidate.equals(clazz.getMethod(candidate.getName(), candidate.getParameterTypes()))) {
-					if (compatible != null) 
-						throw new IllegalStateException("Ambiguous methods to invoke. Both "+compatible+" and  "+candidate+" would be compatible choices.");
-					compatible = candidate;
-				}
+	@Nullable
+	public Object invoke(Object receiver, String methodName, @Nullable Object...args) throws SecurityException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		Preconditions.checkNotNull(receiver,"receiver");
+		Preconditions.checkNotNull(methodName,"methodName");
+		final Object[] arguments = args==null ? new Object[]{null}:args;
+		
+		Class<? extends Object> clazz = receiver.getClass();
+		Method compatible = null;
+		for (Method candidate : clazz.getMethods()) {
+			if (candidate != null && !candidate.isBridge() && isCompatible(candidate, methodName, arguments) && candidate.equals(clazz.getMethod(candidate.getName(), candidate.getParameterTypes()))) {
+				if (compatible != null) 
+					throw new IllegalStateException("Ambiguous methods to invoke. Both "+compatible+" and  "+candidate+" would be compatible choices.");
+				compatible = candidate;
 			}
-			if (compatible != null)
-				return compatible.invoke(receiver, args);
-			// not found provoke method not found exception
-			Class<?>[] paramTypes = new Class<?>[args.length];
-			for (int i = 0; i< args.length ; i++) {
-				paramTypes[i] = args[i] == null ? Object.class : args[i].getClass();
-			}
-			Method method = clazz.getMethod(methodName, paramTypes);
-			return method.invoke(receiver, args);
-		} catch (Exception e) {
-			throw Exceptions.sneakyThrow(e);
 		}
+		if (compatible != null) {
+			if (!compatible.isAccessible())
+				compatible.setAccessible(true);
+			return compatible.invoke(receiver, arguments);
+		}
+		// not found provoke method not found exception
+		Class<?>[] paramTypes = new Class<?>[arguments.length];
+		for (int i = 0; i< arguments.length ; i++) {
+			paramTypes[i] = arguments[i] == null ? Object.class : arguments[i].getClass();
+		}
+		Method method = clazz.getMethod(methodName, paramTypes);
+		return method.invoke(receiver, arguments);
 	}
 	
 	private boolean isCompatible(Method candidate, String featureName, Object... args) {
@@ -102,10 +123,27 @@ public class ReflectExtensions {
 			return false;
 		for (int i = 0; i< candidate.getParameterTypes().length; i++) {
 			Object param = args[i];
-			if (param != null && !candidate.getParameterTypes()[i].isInstance(param))
+			Class<?> class1 = candidate.getParameterTypes()[i];
+			if (class1.isPrimitive())
+				class1 = wrapperTypeFor(class1);
+			if (param != null && !class1.isInstance(param))
 				return false;
 		}
 		return true;
 	}
+	
+	private Class<?> wrapperTypeFor(Class<?> primitive) {
+		Preconditions.checkNotNull(primitive);
+        if (primitive == Boolean.TYPE) return Boolean.class;
+        if (primitive == Byte.TYPE) return Byte.class;
+        if (primitive == Character.TYPE) return Character.class;
+        if (primitive == Short.TYPE) return Short.class;
+        if (primitive == Integer.TYPE) return Integer.class;
+        if (primitive == Long.TYPE) return Long.class;
+        if (primitive == Float.TYPE) return Float.class;
+        if (primitive == Double.TYPE) return Double.class;
+        if (primitive == Void.TYPE) return Void.class;
+        throw new IllegalArgumentException(primitive+ " is not a primitive");
+    }
 	
 }
