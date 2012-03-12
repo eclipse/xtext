@@ -7,17 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.smoke;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.smoke.AbstractSmokeTest;
+import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
+import org.eclipse.xtend.ide.internal.XtendActivator;
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("unused")
 public abstract class UISmokeTest extends AbstractSmokeTest {
 
-//	public static Test suite() {
-//		return WorkbenchTestHelper.suite(UISmokeTest.class);
-//	}
-//	
 //	@Inject
 //	private WorkbenchTestHelper testHelper;
 //	
@@ -26,6 +45,18 @@ public abstract class UISmokeTest extends AbstractSmokeTest {
 //	
 //	@Inject
 //	private IOutlineTreeProvider outlineTreeProvider;
+//
+//	private IProject project;
+//	
+//	@BeforeClass
+//	public void createProject() throws Exception {
+//		project = WorkbenchTestHelper.createPluginProject("test");
+//	}
+//	
+//	@AfterClass
+//	public void removeProject() throws Exception {
+//		WorkbenchTestHelper.deleteProject(project);
+//	}
 //	
 //	@Override
 //	public Injector doGetInjector() {
