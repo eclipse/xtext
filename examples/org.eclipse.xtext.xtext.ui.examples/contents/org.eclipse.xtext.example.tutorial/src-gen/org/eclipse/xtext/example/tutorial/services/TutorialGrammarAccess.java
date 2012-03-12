@@ -306,7 +306,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cTypeTypeCrossReference_2_0.eContents().get(1);
 		
 		/// **
-		// * Properties are basically a pair of a name and a reference to another type.
+		// * Properties are basically a pair of a name and a reference to a type.
 		// * / Property:
 		//	name=ValidID ":" type=[Type|QualifiedName];
 		public ParserRule getRule() { return rule; }
@@ -482,7 +482,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// **
-	// * Properties are basically a pair of a name and a reference to another type.
+	// * Properties are basically a pair of a name and a reference to a type.
 	// * / Property:
 	//	name=ValidID ":" type=[Type|QualifiedName];
 	public PropertyElements getPropertyAccess() {
