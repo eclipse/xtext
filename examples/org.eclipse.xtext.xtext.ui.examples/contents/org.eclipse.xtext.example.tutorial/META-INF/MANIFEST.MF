@@ -10,7 +10,25 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.0";visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.example.tutorial,
+ org.eclipse.xtext.example.tutorial.services,
+ org.eclipse.xtext.example.tutorial.tutorial,
+ org.eclipse.xtext.example.tutorial.tutorial.impl,
+ org.eclipse.xtext.example.tutorial.tutorial.util,
+ org.eclipse.xtext.example.tutorial.serializer,
+ org.eclipse.xtext.example.tutorial.parser.antlr,
+ org.eclipse.xtext.example.tutorial.parser.antlr.internal,
+ org.eclipse.xtext.example.tutorial.validation,
+ org.eclipse.xtext.example.tutorial.formatting,
+ org.eclipse.xtext.example.tutorial.jvmmodel
+

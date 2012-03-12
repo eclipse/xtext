@@ -8,7 +8,19 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.tutorial;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
- org.eclipse.ui.ide;bundle-version="3.5.0"
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.xbase.ui,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.example.tutorial.ui.contentassist,
+ org.eclipse.xtext.example.tutorial.ui.contentassist.antlr,
+ org.eclipse.xtext.example.tutorial.ui.internal
+Bundle-Activator: org.eclipse.xtext.example.tutorial.ui.internal.TutorialActivator
