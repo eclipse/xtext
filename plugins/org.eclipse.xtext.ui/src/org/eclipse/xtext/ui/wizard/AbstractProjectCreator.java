@@ -20,6 +20,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -41,6 +42,7 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 	@Named("file.extensions")
 	private String fileExtension;
 	
+	@NonNull
 	public IFile getResult() {
 		return result;
 	}
