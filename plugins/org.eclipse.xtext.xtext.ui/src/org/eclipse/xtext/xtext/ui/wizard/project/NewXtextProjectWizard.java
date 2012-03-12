@@ -55,6 +55,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = createProjectInfo();
 		projectInfo.setCreateTestProject(true);
+		projectInfo.setCreateFeatureProject(mainPage.isCreateFeatureProject());
 		projectInfo.setFileExtension(mainPage.getFileExtensions());
 		projectInfo.setLanguageName(mainPage.getLanguageName());
 		projectInfo.setProjectName(mainPage.getProjectName());
