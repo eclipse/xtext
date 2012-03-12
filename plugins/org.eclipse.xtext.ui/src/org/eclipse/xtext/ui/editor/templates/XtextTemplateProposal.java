@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.templates;
 
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
 import org.eclipse.jface.text.templates.Template;
+import org.eclipse.jface.text.templates.TemplateBuffer;
 import org.eclipse.jface.text.templates.TemplateContext;
+import org.eclipse.jface.text.templates.TemplateException;
 import org.eclipse.jface.text.templates.TemplateProposal;
 import org.eclipse.swt.graphics.Image;
 
@@ -19,12 +22,19 @@ import org.eclipse.swt.graphics.Image;
  */
 public class XtextTemplateProposal extends TemplateProposal implements ICompletionProposalExtension4 {
 
+	private TemplateContext context;
+	private Template template;
+
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image) {
 		super(template, context, region, image);
+		this.context = context;
+		this.template = template;
 	}
 	
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image, int relevance) {
 		super(template, context, region, image, relevance);
+		this.context = context;
+		this.template = template;
 	}
 	
 	public boolean isAutoInsertable() {
@@ -45,5 +55,25 @@ public class XtextTemplateProposal extends TemplateProposal implements ICompleti
 	@Override
 	public int hashCode() {
 		return getTemplate().hashCode();
+	}
+	
+	@Override
+	public String getAdditionalProposalInfo() {
+		try {
+		    context.setReadOnly(true);
+			TemplateBuffer templateBuffer;
+			try {
+				if (context instanceof XtextTemplateContext) {
+					templateBuffer= ((XtextTemplateContext)context).evaluateForDisplay(template);
+				} else {
+					templateBuffer= context.evaluate(template);
+				}
+			} catch (TemplateException e) {
+				return null;
+			}
+			return templateBuffer.getString();
+	    } catch (BadLocationException e) {
+			return null;
+		}
 	}
 }
