@@ -1,0 +1,105 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.example.tutorial.Tutorial with org.eclipse.xtext.xbase.Xbase
+
+generate tutorial "http://www.eclipse.org/xtext/example/tutorial/Tutorial"
+
+/**
+ * The first rule in an Xtext grammar serves as the entry point for the parser.
+ * The framework will derive a statically types model from the grammar definition thus
+ * all tutorial-files will yield an instanceof DomainModelTutorial
+ */
+DomainModelTutorial:
+	// an assignment with the += operator will create a list
+	(elements += AbstractElement)*
+;
+
+/**
+ * A package declaration may contain types, nested packages or package local imports.
+ * Those elements have the common super type AbstractElement.
+ */
+PackageDeclaration:
+	// keywords are written in "double" or 'single' quotes
+	'package' name = QualifiedName '{'
+		// the trailing quantifier * means zero or more (any number of occurrences is valid)
+		( elements += AbstractElement )*
+	'}'
+;
+
+/**
+ * This is an abstract rule that delegates to the three subtypes of AbstractElement:
+ * <ul>
+ *   <li>PackageDeclaration to parse a new package</li>
+ *   <li>Type which may either be an entity or a simple data type</li>
+ *   <li>Import an import clause which is applied for the current namespace</li>
+ * </ul>
+ */
+AbstractElement:
+	// The bar is used to denote alternatives for the parser
+	PackageDeclaration | Type | Import
+;
+
+/**
+ * This tutorial uses namespace imports. Xtext determines that from the assignment
+ * <em>importedNamespace</em>. They work like Java imports, so wildcard imports or
+ * single imports are valid.
+ */
+Import:
+	         // a simple assignment '=' is used to set the value on the produced object
+	'import' importedNamespace = QualifiedNameWithWildcard
+;
+
+/**
+ * This is a data type rule. It will not create a node in the produced model but 
+ * will be parsed as a plain string.
+ */
+QualifiedNameWithWildcard:
+	// the question mark <em>?</em> marks the keyword '.*' as optional.
+	QualifiedName '.*'?
+;
+
+/**
+ * This rule parses instances of Type which may either be DataTypes or Entities.
+ * The behavior is similar to the rule AbstractElement.
+ */	
+Type:
+	DataType | Entity
+;
+
+/**
+ * A DataType is a very simple representation of a type. The only property of a DataType
+ * is its name.
+ */
+DataType:
+	'datatype' name = ValidID
+;
+
+/**
+ * An entity yields a more complex structure. Entities may have a super type and they may
+ * define properties.
+ */
+Entity:
+	
+	'entity' name = ValidID
+	// the optional super type uses a so called cross reference. The squared
+	// brackets indicate that the super type itself refers to an instance of 
+	// entity that was defined somewhere else. A qualified name is used as the key
+	// to look that up.  
+	('extends' superType=[Entity | QualifiedName])? 
+	'{'
+		(features += Property)*
+	'}'
+;
+
+/**
+ * Properties are basically a pair of a name and a reference to a type.
+ */
+Property:
+	name=ValidID ':' type=[Type|QualifiedName]
+; 
+
