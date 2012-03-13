@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Eclipse Xtend</title>
+<meta name="description"
+	content="Eclipse Xtend is a statically-typed programming language running on the JVM.">
+<meta name="author" content="Sven Efftinge">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<!-- <link href="../bootstrap.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+<style type="text/css">
+body {
+	padding-top: 40px;
+}
+
+section {
+	padding-top: 40px;
+}
+
+div#maincontainer>section {
+	padding-top: 90px;
+}
+</style>
+<link href="../google-code-prettify/prettify.css" type="text/css"
+	rel="stylesheet" />
+<script type="text/javascript" src="../google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="../google-code-prettify/lang-xtend.js"></script>
+<script type="text/javascript" src="../jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../bootstrap-dropdown.js"></script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+	_gaq.push([ '_trackPageview' ]);
+
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	$('#topbar').dropdown();
+</script>
+
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="images/apple-touch-icon-114x114.png">
+</head>
+
+<body onload="prettyPrint()">
+	<div class="topbar" data-dropdown="dropdown">
+		<div class="fill">
+			<div class="container">
+				<a class="brand" href="http://xtend-lang.org">Xtend</a>
+				<ul class="nav">
+					<li class="dropdown">
+						<a href="#2.3BETA" class="dropdown-toggle">2.3 BETA Features</a>
+						<ul class="dropdown-menu">
+							<li><a href="#debugging">Debugging</a></li>
+							<li><a href="#jdtIntegration">JDT Integration</a></li>
+							<li><a href="#generatedCodeView">Generated Code View</a></li>
+							<li><a href="#hovers">Enhanced Hovers</a></li>
+							<li><a href="#openCallHierarchy">Call Hierarchy</a></li>
+							<li><a href="#openTypeHierarchy">Type Hierarchy</a></li>
+							<li><a href="#quickOutline">Quick Outline</a></li>
+							<li><a href="#compilerImprovements">Compiler Improvements</a></li>
+							<li><a href="#languageEnhancements">Language Enhancements</a></li>
+							<li><a href="#numberLiterals">Number Literals</a></li>
+							<li><a href="#varArgs">Variable Arguments (varargs)</a></li>
+						</ul>
+					</li>
+					<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="maincontainer" class="container">
+		<!-- chapter -->
+		<section id="2.3BETA">
+			<div class="page-header">
+				<h1>
+					Xtend 2.3 BETA <small>New & Noteworthy</small>
+				</h1>
+			</div>
+			<div class="row">
+				<div class="span12 offset2">
+					<p>
+					</p>
+					<!--  section -->
+					<section id="Debugging">
+					<h2>Debugging <small>with JSR-045</small></h2>
+<!-- 						<div class="row"> -->
+<!-- 							<div class="span4"> -->
+							<p>
+							Debugging through Xtend and Java is now fully supported. Setting breakpoints in Xtend works just as in Java 
+							and can even switch to the Java level whenever wished using a simple action.
+							</p><p>
+							Also all the cool features known from the Java debugger, like ‘Display’, ‘Inspect’, or ‘Exception Breakpoints’ 
+							are available.
+							</p>
+<!-- 							</div> -->
+<!-- 							<div class="span8"> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						<iframe src="http://player.vimeo.com/video/38425995?title=0&amp;byline=0&amp;portrait=0" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+					</section>
+					<!-- subsection -->
+					<section id="jdtIntegration">
+						<h2>Even Better JDT Integration <small>Forget about the differences</small></h2>
+						<p>
+						Not only the debugger but all of JDT’s navigation functionality now works seamlessly with Xtend. 
+						No matter if you click on a stack frame in an exception, a failing unit tests, some node in the call hierarchy or the type 
+						hierarchy: if the target element is implemented in Xtend, you’ll end up in the Xtend editor at the original source location.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="generatedCodeView">
+						<h2>Generated Code View <small>Feel the Trace</small></h2>
+						<p>
+						But what if you want to see the generated Java source? You can of course open the java file in an editor, but there’s now an even better tool : 
+						The <strong>Generated Code</strong> view. ￼In that view you see detailed information of which parts in the Java source were derived from which in the Xtend code, simply by marking the corresponding parts.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="hovers">
+						<h2>Improved Hovers <small>Everywhere!</small></h2>
+						<p>
+						Not only the debugger but all of JDT’s navigation functionality now works seamlessly with Xtend. 
+						No matter if you click on a stack frame in an exception, a failing unit tests, some node in the call hierarchy or the type 
+						hierarchy: if the target element is implemented in Xtend, you’ll end up in the Xtend editor at the original source location.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="openCallHierarchy">
+						<h2>Call-Hierarchy <small>Who is your client?</small></h2>
+						<p>
+							In Xtend the open call hierarchy action is now available, using the same shortcuts as in Java. It shows all calls to the 
+							selected method, field or constrcutor. No matter whether they are called from Xtend or Java.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="openTypeHierarchy">
+						<h2>Type-Hierarchy <small>Just like in Java</small></h2>
+						<p>
+							Also the Type Hierarchy view can be opened and populated from within an Xtend class. Just press ‘F4’ when your cursor sits 
+							on a type’s name. It shows the type hierarchy of the selected classes, no matter they are implemented in Java or Xtend.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="quickOutline">
+						<h2>Inherited members in quick outline <small>More Readability</small></h2>
+						<p>
+							When pressing CTRL+O in an Xtend editor the quick outline pops up, showing all the members of the currently edited class.
+							Pressing CTRL+O once more will add the members inherited from super classes as well. A search field lets you simply filter by 
+							name in order to navigate to any member quickly.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="compilerImprovements">
+						<h2>Compiler Improvements <small>More Readability</small></h2>
+						<p>
+							To make the generated Java code even more readable, the compiler can now inline certain operations. As a result the generated 
+							Java code is more idiomatic and therefore more readable. Also some superfluous statements have been removed.
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="languageEnhancements">
+						<h2>Several Language Enhancements <small>Streamlining</small></h2>
+						<p>
+							On the language level the next release has a couple of nice improvements and new features as well. Some of them are small but 
+							neat changes like, that it’s no longer mandatory to write an empty pair of parenthesis in constructor calls. Others deserve a 
+							list entry on their own:
+						</p>
+					</section>
+					<!-- subsection -->
+					<section id="numberLiterals">
+						<h2>Number Literals <small>Fearless arithemtics with big numbers</small></h2>
+						<p>
+							Xtend now has comprehensive support for number literals. This includes most of the things you can do in Java, and in addition it 
+							has first class support for BigDecimal and BigInteger (including overloaded arithmetic operators).
+						</p>
+						<pre class="prettyprint lang-xtend">
+new BigDecimal("6.1").subtract(
+       new BigDecimal("0.755").multiply(BigDecimal.valueOf(3L)))</pre>
+						<p>
+							In Xtend you can use literals and operators :
+						</p>
+						<pre class="prettyprint lang-xtend">
+6.1bd - 0.755bd * 3bd</pre>
+					</section>
+					<!-- subsection -->
+					<section id="varArgs">
+						<h2>Methods with variable argument lists <small>Varargs</small></h2>
+						<p>
+							Varargs can now be declared in Xtend methdos as well. The syntax and semantics 
+							are just like in Java. Also calling varargs works exactly as in Java.
+						</p>
+						<pre class="prettyprint lang-xtend">
+def String concat(String... strings) {
+	....
+}
+
+def void useConcat() {
+   concat('can', 'pass', 'any', 'number', 'of', 'strings')
+}
+</pre>
+					</section>
+					<!-- subsection -->
+<!-- 					<section id="cool-feature"> -->
+<!-- 						<h2>Cool Feature!</h2> -->
+<!-- 						<p> -->
+<!-- 							Foo bar  is really cool. -->
+<!-- 						</p> -->
+<!-- 						<pre class="prettyprint lang-xtend"> -->
+<!-- class HelloWorld { -->
+<!--   def static void main(String[] args) { -->
+<!--     println("Hello World") -->
+<!--   } -->
+<!-- }</pre><p> -->
+<!-- 					</section> -->
+				</div>
+			</div>
+		</section>
+	</div>
+	</body>
+</html>
