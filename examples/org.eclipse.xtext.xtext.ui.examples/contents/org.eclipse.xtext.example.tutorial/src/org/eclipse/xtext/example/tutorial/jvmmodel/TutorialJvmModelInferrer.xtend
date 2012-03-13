@@ -23,10 +23,10 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 	/**
 	 * Is called for each instance of the first argument's type contained in a resource.
 	 * 
-	 * @param element - the model to create one or more JvmDeclaredTypes from.
-	 * @param acceptor - each created JvmDeclaredType without a container should be passed to the acceptor in order get attached to the
+	 * @param element the model to create one or more JvmDeclaredTypes from.
+	 * @param acceptor each created JvmDeclaredType without a container should be passed to the acceptor in order get attached to the
 	 *                   current resource.
-	 * @param isPreLinkingPhase - whether the method is called in a pre-linking phase, i.e. when the global index isn't fully updated. You
+	 * @param isPreLinkingPhase whether the method is called in a pre-linking phase, i.e. when the global index isn't fully updated. You
 	 *        must not rely on linking using the index if isPrelinkingPhase is <code>true</code>
 	 */
    	def dispatch void infer(DomainModelTutorial element, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
