@@ -44,7 +44,7 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 		assertOutput("1, 2, 3, 4, 5, 6, 7, 8, 9, 10", "'''«var max = 10»«FOR i: 1..max SEPARATOR ', '»«i»«ENDFOR»'''");
 	}
 	
-	@Test public void testForLoop_26() throws Exception {
+	@Test public void testForLoop_27() throws Exception {
 		assertOutput(
 				"foo\n",
 				"'''«FOR a: newArrayList(new testdata.OuterClass$InnerClass())»\n" +
