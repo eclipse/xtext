@@ -11,11 +11,11 @@ generate tutorial "http://www.eclipse.org/xtext/example/tutorial/Tutorial"
 
 /**
  * The first rule in an Xtext grammar serves as the entry point for the parser.
- * The framework will derive a statically types model from the grammar definition thus
- * all tutorial-files will yield an instanceof DomainModelTutorial
+ * The framework will derive a static types model from the grammar definition thus
+ * all files will yield an instance of DomainModelTutorial.
  */
 DomainModelTutorial:
-	// an assignment with the += operator will create a list
+	// An assignment with the += operator will create a list.
 	(elements += AbstractElement)*
 ;
 
@@ -24,9 +24,9 @@ DomainModelTutorial:
  * Those elements have the common super type AbstractElement.
  */
 PackageDeclaration:
-	// keywords are written in "double" or 'single' quotes
+	// Keywords are written in "double" or 'single' quotes.
 	'package' name = QualifiedName '{'
-		// the trailing quantifier * means zero or more (any number of occurrences is valid)
+		// The trailing quantifier * means zero or more (any number of occurrences is valid).
 		( elements += AbstractElement )*
 	'}'
 ;
@@ -34,13 +34,13 @@ PackageDeclaration:
 /**
  * This is an abstract rule that delegates to the three subtypes of AbstractElement:
  * <ul>
- *   <li>PackageDeclaration to parse a new package</li>
- *   <li>Type which may either be an entity or a simple data type</li>
- *   <li>Import an import clause which is applied for the current namespace</li>
+ *   <li>PackageDeclaration to parse a new package,</li>
+ *   <li>Type which may either be an entity or a simple data type or</li>
+ *   <li>Import an import clause which is applied for the current namespace.</li>
  * </ul>
  */
 AbstractElement:
-	// The bar is used to denote alternatives for the parser
+	// The bar '|' denotes alternatives for the parser.
 	PackageDeclaration | Type | Import
 ;
 
@@ -50,7 +50,7 @@ AbstractElement:
  * single imports are valid.
  */
 Import:
-	         // a simple assignment '=' is used to set the value on the produced object
+	// A simple assignment '=' is used to set the value on the produced object.
 	'import' importedNamespace = QualifiedNameWithWildcard
 ;
 
@@ -85,7 +85,7 @@ DataType:
  */
 Entity:
 	'entity' name = ValidID
-	// the optional super type uses a so called cross reference. The squared
+	// The optional super type uses a so called cross reference. The squared
 	// brackets indicate that the super type itself refers to an instance of 
 	// entity that was defined somewhere else. A qualified name is used as the key
 	// to look that up.  
