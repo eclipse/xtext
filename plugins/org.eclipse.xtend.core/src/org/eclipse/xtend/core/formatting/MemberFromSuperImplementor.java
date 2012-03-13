@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -109,7 +110,7 @@ public class MemberFromSuperImplementor {
 		appendable.decreaseIndentation().newLine().append("}");
 		appendable.closeScope();
 	}
-
+	
 	protected void appendSignature(JvmExecutable overridden, EObject context,
 			final ITypeArgumentContext typeArgumentContext, IAppendable appendable, boolean isCall) {
 		boolean isFirst = true;
@@ -120,6 +121,21 @@ public class MemberFromSuperImplementor {
 					appendable.append(", ");
 				isFirst = false;
 				appendable.append(typeParameter);
+				if (!isCall) {
+					boolean firstConstraint = false;
+					for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
+						if (!typeReferences.is(constraint.getTypeReference(), Object.class)) {
+							if (firstConstraint) {
+								appendable.append(" extends ");
+								firstConstraint = false;
+							} else {
+								appendable.append(" & ");
+							}
+							JvmTypeReference constraintType = typeArgumentContext.resolve(constraint.getTypeReference());
+							typeReferenceSerializer.serialize(constraintType, context, appendable, false, false, false,	false);
+						}
+					}
+				}
 			}
 			appendable.append("> ");
 		}

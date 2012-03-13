@@ -162,26 +162,67 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
-	
-//	see  
-//	def testClosureSneakyThrow() {
-//		assertCompilesTo('''
-//		import java.io.File
-//		import java.io.IOException
-//		import java.util.Collections
-//		
-//		class Foo  {     
-//		   def bar() {               
-//		       try {       
-//		           newArrayList("file1.ext").map(f| new File(f).canonicalFile) 
-//		       } catch(IOException o) {  
-//		           Collections::<File>emptyList
-//		       } 
-//		   }
-//		}
-//		''','''
-//		''')
-//	}
+
+	@Test	
+	def testClosureSneakyThrow() {
+		assertCompilesTo('''
+			import java.io.File
+			import java.io.IOException
+			import java.util.Collections
+			
+			class Foo  {     
+			   def bar() {               
+			       try {       
+			           newArrayList("file1.ext").map(f| new File(f).canonicalFile) 
+			       } catch(IOException o) {  
+			           Collections::<File>emptyList
+			       } 
+			   }
+			}
+		''','''
+			import java.io.File;
+			import java.io.IOException;
+			import java.util.ArrayList;
+			import java.util.Collections;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.ListExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public List<File> bar() {
+			    List<File> _xtrycatchfinallyexpression = null;
+			    try {
+			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("file1.ext");
+			      final Function1<String,File> _function = new Function1<String,File>() {
+			          public File apply(final String f) {
+			            try {
+			              File _file = new File(f);
+			              File _canonicalFile = _file.getCanonicalFile();
+			              return _canonicalFile;
+			            } catch (Exception _e) {
+			              throw Exceptions.sneakyThrow(_e);
+			            }
+			          }
+			        };
+			      List<File> _map = ListExtensions.<String, File>map(_newArrayList, _function);
+			      _xtrycatchfinallyexpression = _map;
+			    } catch (final Throwable _t) {
+			      if (_t instanceof IOException) {
+			        final IOException o = (IOException)_t;
+			        List<File> _emptyList = Collections.<File>emptyList();
+			        _xtrycatchfinallyexpression = _emptyList;
+			      } else {
+			        throw Exceptions.sneakyThrow(_t);
+			      }
+			    }
+			    return _xtrycatchfinallyexpression;
+			  }
+			}
+		''')
+	}
 	
 	@Test
 	def testFieldInitialization_01() { 
@@ -1215,6 +1256,31 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				  }
 				}
 			''')
+	}
+	
+	@Test
+	def testReturnType() {
+		assertCompilesTo(
+			'''
+				import test.ReturnTypeUsesTypeParameter
+				class MyClass implements ReturnTypeUsesTypeParameter {
+				
+					override <LocalName extends CharSequence> accept(LocalName param) {
+						null
+					}
+				}
+			''', '''
+				import test.ReturnTypeUsesTypeParameter;
+				import test.ReturnTypeUsesTypeParameter.Inner;
+				
+				@SuppressWarnings("all")
+				public class MyClass implements ReturnTypeUsesTypeParameter {
+				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
+				    return null;
+				  }
+				}
+			''')
+		
 	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
