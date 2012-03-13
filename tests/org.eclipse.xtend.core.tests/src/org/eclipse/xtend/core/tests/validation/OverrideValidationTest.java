@@ -14,6 +14,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -199,15 +200,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 				"compareTo(Object)");
 	}
 
-//		@Test public void testClassMustBeAbstract_05() throws Exception {
-//			XtendClass xtendClass = clazz("class MyList<T> extends java.util.ArrayList<T> { }");
-//			helper.assertNoErrors(xtendClass);
-//		}
-//		
-//		@Test public void testClassMustBeAbstract_06() throws Exception {
-//			XtendClass xtendClass = clazz("class StringList extends java.util.ArrayList<StringList> { }");
-//			helper.assertNoErrors(xtendClass);
-//		}
+	@Test
+	@Ignore
+	public void testClassMustBeAbstract_05() throws Exception {
+		XtendClass xtendClass = clazz("class MyList<T> extends java.util.ArrayList<T> { }");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test
+	@Ignore
+	public void testClassMustBeAbstract_06() throws Exception {
+		XtendClass xtendClass = clazz("class StringList extends java.util.ArrayList<StringList> { }");
+		helper.assertNoErrors(xtendClass);
+	}
 
 	@Test public void testOverrideFinalClass() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends String { }");

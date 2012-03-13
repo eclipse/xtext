@@ -11,7 +11,11 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -192,66 +196,63 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		});
 	}
 	
-	// TODO return type should be List<? extends ENamedElement> if any .. 
-	// SZ: However, this test is currently disabled because 
-	// a) it fails
-	// b) the comment below looks suspicious to me
-//	@Test public void testDispatchFunction_03() throws Exception {
-//		XtendFile xtendFile = file(
-//				"class Dispatcher {\n" + 
-//				"	def dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
-//				"		model.ETypeParameters.map(e|doStuff(e))\n" + 
-//				"	}\n" + 
-//				"	def dispatch doStuff(org.eclipse.emf.ecore.EPackage packageDecl) {\n" + 
-//				"		packageDecl.EClassifiers.map(e|doStuff(e))\n" + 
-//				"	}\n" + 
-//				"	def dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n" + 
-//				"		newArrayList(feature)\n" + 
-//				"	}\n" + 
-//				"}", true /* TODO if set to false, test fails - see TODO below*/);
-//		
-//		JvmGenericType inferredType = getInferredType(xtendFile);
-//		
-//		// one main dispatch
-//		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
-//		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
-//			public boolean apply(JvmOperation input) {
-//				return input.getSimpleName().equals("doStuff")
-//					&& input.getParameters().get(0).getParameterType().getIdentifier()
-//					.equals(ENamedElement.class.getName());
-//			}
-//		});
-//		// TODO why does this assertion fail with validate==false? (see above TODO)
-//		assertEquals("java.util.List<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
-//
-//		// three internal case methods
-//		JvmOperation eClassParam = find(operations, new Predicate<JvmOperation>() {
-//			public boolean apply(JvmOperation input) {
-//				return input.getSimpleName().equals("_doStuff")
-//					&& input.getParameters().get(0).getParameterType().getIdentifier()
-//					.equals(EClass.class.getName());
-//			}
-//		});
-//		assertEquals("java.util.List<? extends java.lang.Object>", eClassParam.getReturnType().getIdentifier());
-//		
-//		JvmOperation ePackageParam = find(operations, new Predicate<JvmOperation>() {
-//			public boolean apply(JvmOperation input) {
-//				return input.getSimpleName().equals("_doStuff")
-//					&& input.getParameters().get(0).getParameterType().getIdentifier()
-//					.equals(EPackage.class.getName());
-//			}
-//		});
-//		assertEquals("java.util.List<? extends java.lang.Object>", ePackageParam.getReturnType().getIdentifier());
-//		
-//		JvmOperation eStructuralFeatureParam = find(operations, new Predicate<JvmOperation>() {
-//			public boolean apply(JvmOperation input) {
-//				return input.getSimpleName().equals("_doStuff")
-//				&& input.getParameters().get(0).getParameterType().getIdentifier()
-//				.equals(EStructuralFeature.class.getName());
-//			}
-//		});
-//		assertEquals("java.util.List<? extends java.lang.Object>", eStructuralFeatureParam.getReturnType().getIdentifier());
-//	}
+	@Test
+	public void testDispatchFunction_03() throws Exception {
+		XtendFile xtendFile = file(
+				"class Dispatcher {\n" + 
+				"	def dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|doStuff(e))\n" + 
+				"	}\n" + 
+				"	def dispatch doStuff(org.eclipse.emf.ecore.EPackage packageDecl) {\n" + 
+				"		packageDecl.EClassifiers.map(e|doStuff(e))\n" + 
+				"	}\n" + 
+				"	def dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n" + 
+				"		newArrayList(feature)\n" + 
+				"	}\n" + 
+				"}", true /* TODO if set to false, test fails - see TODO below*/);
+		
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		
+		// one main dispatch
+		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("doStuff")
+					&& input.getParameters().get(0).getParameterType().getIdentifier()
+					.equals(ENamedElement.class.getName());
+			}
+		});
+		// TODO why does this assertion fail with validate==false? (see above TODO)
+		assertEquals("java.util.List<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
+
+		// three internal case methods
+		JvmOperation eClassParam = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_doStuff")
+					&& input.getParameters().get(0).getParameterType().getIdentifier()
+					.equals(EClass.class.getName());
+			}
+		});
+		assertEquals("java.util.List<? extends java.lang.Object>", eClassParam.getReturnType().getIdentifier());
+		
+		JvmOperation ePackageParam = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_doStuff")
+					&& input.getParameters().get(0).getParameterType().getIdentifier()
+					.equals(EPackage.class.getName());
+			}
+		});
+		assertEquals("java.util.List<? extends java.lang.Object>", ePackageParam.getReturnType().getIdentifier());
+		
+		JvmOperation eStructuralFeatureParam = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_doStuff")
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
+				.equals(EStructuralFeature.class.getName());
+			}
+		});
+		assertEquals("java.util.List<? extends java.lang.Object>", eStructuralFeatureParam.getReturnType().getIdentifier());
+	}
 	
 	@Test public void testDispatchFunction_04() throws Exception {
 		XtendFile xtendFile = file("class Foo { def dispatch foo(Integer x) {x} def dispatch foo(Double x) {x}}");
@@ -716,16 +717,17 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals("_init_s", initializer1.getSimpleName());
 	}
 	
-//	@Test public void testInferredFunctionWithTypeParameter() throws Exception {
-//		XtendFile xtendFile = file("class Foo<S> { java.util.List<S> foo() {null} }");
-//		JvmGenericType inferredType = getInferredType(xtendFile);
-//		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
-//		assertEquals("java.util.List<S>", jvmOperation.getReturnType().getIdentifier());
-//		JvmTypeReference argument = ((JvmParameterizedTypeReference)jvmOperation.getReturnType()).getArguments().get(0);
-//		assertSame(inferredType, ((JvmTypeParameter)argument.getType()).getDeclarator());
-//		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
-//		assertEquals("java.util.List<S>", xtendFunction.getReturnType().getIdentifier());
-//	}
+	@Test
+	public void testInferredFunctionWithTypeParameter() throws Exception {
+		XtendFile xtendFile = file("class Foo<S> { def java.util.List<S> foo() {null} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.util.List<S>", jvmOperation.getReturnType().getIdentifier());
+		JvmTypeReference argument = ((JvmParameterizedTypeReference)jvmOperation.getReturnType()).getArguments().get(0);
+		assertSame(inferredType, ((JvmTypeParameter)argument.getType()).getDeclarator());
+		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
+		assertEquals("java.util.List<S>", xtendFunction.getReturnType().getIdentifier());
+	}
 
 	protected JvmGenericType getInferredType(XtendFile xtendFile) {
 		assertEquals(2, xtendFile.eResource().getContents().size());
