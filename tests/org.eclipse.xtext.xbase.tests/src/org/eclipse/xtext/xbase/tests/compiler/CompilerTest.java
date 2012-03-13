@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -127,14 +128,20 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"{ var it = new Object() { new Object().notify() } notify }");
 	}
 	
-//TODO	
-//	@Test public void testNoUnneccessaryConversionStatement() throws Exception {
-//		assertCompilesTo(
-//				
-//				No unneccessary conversion!
-//				
-//				"{ val x = new testdata.Properties1() x.toString()}");
-//	}
+	@Test
+	@Ignore("TODO")
+	public void testNoUnneccessaryConversionStatement() throws Exception {
+		assertCompilesTo(
+				"String _xblockexpression = null;\n" + 
+				"{\n" + 
+				"  testdata.Properties1 _properties1 = new testdata.Properties1();\n" + 
+				"  final testdata.Properties1 x = _properties1;\n" + // this one is not necessary 
+				"  String _string = x.toString();\n" + 
+				"  _xblockexpression = (_string);\n" + 
+				"}\n" + 
+				"return _xblockexpression;",
+				"{ val x = new testdata.Properties1() x.toString()}");
+	}
 	
 	@Test public void testBlock() throws Exception {
 		assertCompilesTo(
@@ -180,15 +187,17 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 						"s.length");
 	}
 	
-//	@Test public void testForEach_03() throws Exception {	
-//		assertCompilesTo(
-//				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
-//				"for (final String s : _arrayList) {\n" +
-//				"  s.length();\n" +
-//				"}"
-//				, "for (String s : new java.util.ArrayList())" +
-//						"s.length");
-//	}
+	@Test
+	@Ignore("TODO type inferrence in for-loops does not work properly")
+	public void testForEach_03() throws Exception {	
+		assertCompilesTo(
+				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
+				"for (final String s : _arrayList) {\n" +
+				"  s.length();\n" +
+				"}"
+				, "for (String s : new java.util.ArrayList())" +
+						"s.length");
+	}
 	
 	@Test public void testFeatureCall() throws Exception {
 		assertCompilesTo(

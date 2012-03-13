@@ -15,6 +15,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -83,16 +84,17 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				"CharSequence", "Integer");
 	}
 	
-//	TODO fix me
-//	@Test public void testCast_06() throws Exception {
-//		assertCastError("newArrayList(new Object()) as java.util.List<String>", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
-//				"ArrayList<Object>", "List<String>");
-//	}
+	@Test
+	@Ignore("TODO fix me")
+	public void testCast_06() throws Exception {
+		assertCastError("newArrayList(new Object()) as java.util.List<String>", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
+				"ArrayList<Object>", "List<String>");
+	}
 
-//	TODO fix me
-//	@Test public void testCast_07() throws Exception {
-//		assertNoConformanceError("42 as byte");
-//	}
+	@Test
+	public void testCast_07() throws Exception {
+		assertNoConformanceError("42 as byte");
+	}
 	
 	@Test public void testSwitch_TypeGuard_01() throws Exception {
 		String expression = "switch ('foo') { Integer : null }";

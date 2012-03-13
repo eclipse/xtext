@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -64,30 +66,33 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("(java.lang.String)=>boolean", "[java.lang.String x| true]");
 	}
 	
-//	TODO Fix these cases
-//	@Test public void testClosure_03() throws Exception {
-//		XBlockExpression block = (XBlockExpression) expression(
-//				"{\n" + 
-//				"  var java.util.List<? super String> list = null;\n" + 
-//				"  list.map(e|e)\n" +
-//				"}");
-//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
-//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-//		JvmTypeReference typeRef = typeProvider.getType(closure);
-//		assertEquals("(java.lang.Object)=>java.lang.Object", toString(typeRef));
-//	}
-//	
-//	@Test public void testClosure_04() throws Exception {
-//		XBlockExpression block = (XBlockExpression) expression(
-//				"{\n" + 
-//				"  var java.util.List<? super String> list = null;\n" + 
-//				"  list.map(e|e == null)\n" +
-//				"}");
-//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
-//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-//		JvmTypeReference typeRef = typeProvider.getType(closure);
-//		assertEquals("(java.lang.Object)=>boolean", toString(typeRef));
-//	}
+	@Test
+	@Ignore("TODO Fix these cases")
+	public void testClosure_03() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"  var java.util.List<? super String> list = null;\n" + 
+				"  list.map(e|e)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+		JvmTypeReference typeRef = typeProvider.getType(closure);
+		assertEquals("(java.lang.Object)=>java.lang.Object", toString(typeRef));
+	}
+	
+	@Test
+	@Ignore("TODO Fix these cases")
+	public void testClosure_04() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"  var java.util.List<? super String> list = null;\n" + 
+				"  list.map(e|e == null)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+		JvmTypeReference typeRef = typeProvider.getType(closure);
+		assertEquals("(java.lang.Object)=>boolean", toString(typeRef));
+	}
 	
 	@Test public void testTypeArgs() throws Exception {
 		assertResolvedType("boolean", "new java.util.ArrayList<String>() += 'foo'");
@@ -383,14 +388,18 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)");
 	}
-//	@Test public void testFeatureCall_15_c() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
-//	}
-//	@Test public void testFeatureCall_15_d() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
-//	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_c() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
+	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_d() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
+	}
 	
 	@Test public void testFeatureCall_15_e() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
@@ -400,30 +409,40 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())");
 	}
-//	@Test public void testFeatureCall_15_g() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
-//	}
-//	@Test public void testFeatureCall_15_h() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
-//	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_g() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
+	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_h() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
+	}
 	@Test public void testFeatureCall_15_i() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)");
 	}
-//	@Test public void testFeatureCall_15_j() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)");
-//	}
-//	@Test public void testFeatureCall_15_k() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
-//	}
-//	@Test public void testFeatureCall_15_l() throws Exception {
-//		assertResolvedType("java.util.List<java.lang.Integer>", 
-//				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
-//	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_j() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)");
+	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_k() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
+	}
+	@Test
+	@Ignore("Performance")
+	public void testFeatureCall_15_l() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", 
+				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
+	}
 	@Test public void testFeatureCall_15_m() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(String s|1).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)" +
