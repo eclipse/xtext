@@ -7,20 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
-import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
+import java.util.List;
+
+import org.eclipse.xtext.ui.util.ProjectFactory;
+import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-public class RelengProjectInfo extends DefaultProjectInfo {
+public class RelengProjectsCreator extends AbstractProjectCreator {
 
-	private String featureProjectName;
-
-	public void setFeatureProjectName(String featureProjectName) {
-		this.featureProjectName = featureProjectName;
+	@Override
+	protected ProjectFactory createProjectFactory() {
+		return new RelengProjectFactory();
 	}
 
-	public String getFeatureProjectName() {
-		return featureProjectName;
+	@Override
+	protected String getModelFolderName() {
+		return null;
 	}
+
+	@Override
+	protected List<String> getAllFolders() {
+		return null;
+	}
+
 }

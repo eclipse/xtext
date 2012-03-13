@@ -7,20 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
-import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
+import org.eclipse.osgi.util.NLS;
 
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author dhuebner - Initial contribution and API
  */
-public class RelengProjectInfo extends DefaultProjectInfo {
-
-	private String featureProjectName;
-
-	public void setFeatureProjectName(String featureProjectName) {
-		this.featureProjectName = featureProjectName;
+public class Messages extends NLS {
+	private static final String BUNDLE_NAME = "org.eclipse.xtext.xtext.ui.wizard.releng.messages"; //$NON-NLS-1$
+	public static String WizardNewRelengProjectCreationPage_pageDescr;
+	public static String WizardNewRelengProjectCreationPage_pageTitle;
+	static {
+		// initialize resource bundle
+		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 
-	public String getFeatureProjectName() {
-		return featureProjectName;
+	private Messages() {
 	}
 }
