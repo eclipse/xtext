@@ -52,7 +52,7 @@ import com.google.inject.name.Named;
  * @author Michael Clay - Initial contribution and API
  * @since 2.3
  */
-public abstract class AbstractSourceView extends ViewPart implements ISelectionListener, IPropertyChangeListener {
+public abstract class AbstractSourceView extends ViewPart implements IPartListener2, ISelectionListener, IPropertyChangeListener {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
@@ -65,54 +65,6 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 	public IWorkbenchPartSelection getWorkbenchPartSelection() {
 		return workbenchPartSelection;
 	}
-
-	private IPartListener2 partListener = new IPartListener2() {
-		public void partVisible(IWorkbenchPartReference ref) {
-			if (ref.getId().equals(getSite().getId())) {
-				IWorkbenchPart activePart = ref.getPage().getActivePart();
-				if (activePart != null) {
-					selectionChanged(activePart, ref.getPage().getSelection());
-				}
-				addPostSelectionListener();
-			}
-		}
-
-		public void partHidden(IWorkbenchPartReference ref) {
-			if (ref.getId().equals(getSite().getId())) {
-				removePostSelectionListener();
-			}
-		}
-
-		public void partInputChanged(IWorkbenchPartReference ref) {
-			if (!ref.getId().equals(getSite().getId())) {
-				IWorkbenchPart workbenchPart = ref.getPart(false);
-				ISelectionProvider provider = workbenchPart.getSite().getSelectionProvider();
-				if (provider == null) {
-					return;
-				}
-				ISelection selection = provider.getSelection();
-				if (selection == null || selection.isEmpty()) {
-					return;
-				}
-				computeAndSetInput(new DefaultWorkbenchPartSelection(ref.getPart(false), selection));
-			}
-		}
-
-		public void partActivated(IWorkbenchPartReference ref) {
-		}
-
-		public void partBroughtToTop(IWorkbenchPartReference ref) {
-		}
-
-		public void partClosed(IWorkbenchPartReference ref) {
-		}
-
-		public void partDeactivated(IWorkbenchPartReference ref) {
-		}
-
-		public void partOpened(IWorkbenchPartReference ref) {
-		}
-	};
 
 	protected SourceViewer getSourceViewer() {
 		return sourceViewer;
@@ -127,7 +79,7 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 		this.sourceViewer = createSourceViewer(parent);
 		inititalizeColors();
 		inititalizeFont();
-		getSite().getWorkbenchWindow().getPartService().addPartListener(partListener);
+		getSite().getWorkbenchWindow().getPartService().addPartListener(this);
 	}
 
 	protected abstract SourceViewer createSourceViewer(Composite parent);
@@ -201,6 +153,52 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 			setViewerFont();
 		}
 	}
+	
+	public void partVisible(IWorkbenchPartReference ref) {
+		if (ref.getId().equals(getSite().getId())) {
+			IWorkbenchPart activePart = ref.getPage().getActivePart();
+			if (activePart != null) {
+				selectionChanged(activePart, ref.getPage().getSelection());
+			}
+			addPostSelectionListener();
+		}
+	}
+
+	public void partHidden(IWorkbenchPartReference ref) {
+		if (ref.getId().equals(getSite().getId())) {
+			removePostSelectionListener();
+		}
+	}
+
+	public void partInputChanged(IWorkbenchPartReference ref) {
+		if (!ref.getId().equals(getSite().getId())) {
+			IWorkbenchPart workbenchPart = ref.getPart(false);
+			ISelectionProvider provider = workbenchPart.getSite().getSelectionProvider();
+			if (provider == null) {
+				return;
+			}
+			ISelection selection = provider.getSelection();
+			if (selection == null || selection.isEmpty()) {
+				return;
+			}
+			computeAndSetInput(new DefaultWorkbenchPartSelection(ref.getPart(false), selection));
+		}
+	}
+
+	public void partActivated(IWorkbenchPartReference ref) {
+	}
+
+	public void partBroughtToTop(IWorkbenchPartReference ref) {
+	}
+
+	public void partClosed(IWorkbenchPartReference ref) {
+	}
+
+	public void partDeactivated(IWorkbenchPartReference ref) {
+	}
+
+	public void partOpened(IWorkbenchPartReference ref) {
+	}
 
 	protected void addPostSelectionListener() {
 		getSite().getPage().addPostSelectionListener(this);
@@ -211,11 +209,18 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 	}
 
 	public void computeAndSetInput(final IWorkbenchPartSelection workbenchPartSelection) {
-		internalComputeAndSetInput(workbenchPartSelection);
+		computeAndSetInput(workbenchPartSelection, false);
+	}
+	
+	public void computeAndSetInput(final IWorkbenchPartSelection workbenchPartSelection, boolean forceSelection) {
+		if (!isValidSelection(workbenchPartSelection)) {
+			return;
+		}
+		internalComputeAndSetInput(workbenchPartSelection, forceSelection);
 	}
 
-	protected void internalComputeAndSetInput(final IWorkbenchPartSelection workbenchPartSelection) {
-		if (!isValidSelection(workbenchPartSelection)) {
+	protected void internalComputeAndSetInput(final IWorkbenchPartSelection workbenchPartSelection, boolean forceSelection) {
+		if (!forceSelection && isIgnored(workbenchPartSelection)) {
 			return;
 		}
 		this.workbenchPartSelection = workbenchPartSelection;
@@ -255,11 +260,14 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 
 	protected boolean isValidSelection(IWorkbenchPartSelection workbenchPartSelection) {
 		return !this.equals(workbenchPartSelection.getWorkbenchPart())
-				&& !workbenchPartSelection.equals(this.workbenchPartSelection)
 				&& workbenchPartSelection.getWorkbenchPart() instanceof XtextEditor
 				&& workbenchPartSelection.getSelection() instanceof ITextSelection
 				&& ((XtextEditor) workbenchPartSelection.getWorkbenchPart()).getLanguageName().equalsIgnoreCase(
 						languageName);
+	}
+	
+	protected boolean isIgnored(IWorkbenchPartSelection workbenchPartSelection) {
+		return workbenchPartSelection.equals(this.workbenchPartSelection);
 	}
 
 	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
@@ -272,7 +280,11 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 
 	protected void setInput(String input) {
 		IDocument document = createDocument(input);
-		getSourceViewer().setDocument(document, new AnnotationModel());
+		getSourceViewer().setDocument(document, createAnnotationModel());
+	}
+
+	protected AnnotationModel createAnnotationModel() {
+		return new AnnotationModel();
 	}
 
 	protected IDocument createDocument(String input) {
@@ -332,7 +344,7 @@ public abstract class AbstractSourceView extends ViewPart implements ISelectionL
 		super.dispose();
 		computeCount++;
 		removePostSelectionListener();
-		getSite().getWorkbenchWindow().getPartService().removePartListener(partListener);
+		getSite().getWorkbenchWindow().getPartService().removePartListener(this);
 		getColorRegistry().removeListener(this);
 		getFontRegistry().removeListener(this);
 		backgroundColorRGB = null;
