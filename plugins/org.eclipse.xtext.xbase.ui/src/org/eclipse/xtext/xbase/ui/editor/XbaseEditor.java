@@ -20,11 +20,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
@@ -74,6 +76,7 @@ public class XbaseEditor extends XtextEditor {
 	private IResource javaResource = null;
 	
 	private int expectJavaSelection = 0;
+	private boolean expectLineSelection = false;
 	private boolean wasIsOpenInEditor = false;
 	
 	@Override
@@ -170,58 +173,126 @@ public class XbaseEditor extends XtextEditor {
 		this.javaResource = javaResource;
 	}
 	
+	int reentrantCallFromSelf = 0;
+	
+	@Override
+	protected void safelySanityCheckState(IEditorInput input) {
+		try {
+			reentrantCallFromSelf++;
+			super.safelySanityCheckState(input);
+		} finally {
+			reentrantCallFromSelf--;
+		}
+	}
+	
+	@Override
+	public boolean isDirty() {
+		try {
+			reentrantCallFromSelf++;
+			return super.isDirty();
+		} finally {
+			reentrantCallFromSelf--;
+		}
+	}
+	
+	@Override
+	public IDocumentProvider getDocumentProvider() {
+		if (expectJavaSelection > 0 && reentrantCallFromSelf == 0) {
+			if (calleeAnalyzer.isLineBasedOpenEditorAction()) {
+				expectLineSelection = true;
+				return new DocumentProviderStub() {
+					@Override
+					public IDocument getDocument(Object element) {
+						try {
+							String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+							final Document document = new Document(string);
+							return document;
+						} catch(CoreException e) {
+							return XbaseEditor.super.getDocumentProvider().getDocument(element);
+						}
+					}
+					@Override
+					public void connect(Object element) throws CoreException {
+						// do nothing
+					}
+					@Override
+					public void disconnect(Object element) {
+						// do nothing
+					}
+				};
+			}
+		}
+		return super.getDocumentProvider();
+	}
+	
 	@Override
 	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
-		if (expectJavaSelection > 0) {
-			try {
-				ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
-				if (traceToSource != null) {
-					int line = getLineIfLineSelection(selectionStart, selectionLength);
-					if (line != -1) {
-						int startOffsetOfContents = getStartOffsetOfContentsInJava(line);
-						if (startOffsetOfContents != -1) {
-							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
-							if (bestSelection != null) {
-								final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
-								if (textRegion != null) {
-									int lineToSelect = textRegion.getLineNumber();
-									try {
-										IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
-										super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
-										return;
-									} catch (BadLocationException e) {
-										log.error(e);
+		try {
+			reentrantCallFromSelf++;
+			if (expectJavaSelection > 0) {
+				try {
+					ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
+					if (traceToSource != null) {
+						if (expectLineSelection && javaResource instanceof IStorage) {
+							try {
+								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+								Document javaDocument = new Document(string);
+								int line = getLineInJavaDocument(javaDocument, selectionStart, selectionLength);
+								if (line != -1) {
+									int startOffsetOfContents = getStartOffsetOfContentsInJava(javaDocument, line);
+									if (startOffsetOfContents != -1) {
+										ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
+										if (bestSelection != null) {
+											final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
+											if (textRegion != null) {
+												int lineToSelect = textRegion.getLineNumber();
+												try {
+													IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
+													super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
+													return;
+												} catch (BadLocationException e) {
+													log.error(e);
+												}
+											}
+										}
 									}
 								}
+							} catch(BadLocationException e) {
+								// do nothing
+							} catch(CoreException e) {
+								// do nothing
 							}
-						}
-					} else {
-						ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
-						if (bestSelection != null) {
-							ILocationInResource bestReveal = bestSelection;
-							if (selectionStart != revealStart || selectionLength != revealLength) {
-								bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
-								if (bestReveal == null) {
-									bestReveal = bestSelection;
+						} else {
+							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
+							if (bestSelection != null) {
+								ILocationInResource bestReveal = bestSelection;
+								if (selectionStart != revealStart || selectionLength != revealLength) {
+									bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
+									if (bestReveal == null) {
+										bestReveal = bestSelection;
+									}
 								}
-							}
-							ITextRegion fixedSelection = bestSelection.getTextRegion();
-							if (fixedSelection != null) {
-								ITextRegion fixedReveal = bestReveal.getTextRegion();
-								if (fixedReveal == null) {
-									fixedReveal = fixedSelection;
+								ITextRegion fixedSelection = bestSelection.getTextRegion();
+								if (fixedSelection != null) {
+									ITextRegion fixedReveal = bestReveal.getTextRegion();
+									if (fixedReveal == null) {
+										fixedReveal = fixedSelection;
+									}
+									super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
+									return;
 								}
-								super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
-								return;
 							}
 						}
 					}
+				} finally {
+					expectLineSelection = false;
+					expectJavaSelection--;
 				}
-			} finally {
-				expectJavaSelection--;
 			}
+			super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);
+		} finally {
+			reentrantCallFromSelf--;
 		}
-		super.selectAndReveal(selectionStart, selectionLength, revealStart, revealLength);
 	}
 	
 	/**
@@ -233,51 +304,30 @@ public class XbaseEditor extends XtextEditor {
 	 * 
 	 * @return the line number in case of exact match, -1 otherwise
 	 */
-	protected int getLineIfLineSelection(int selectionStart, int selectionLength) {
-		// if called from junit selections might point to current editor's document
-		try {
-			int line = getDocument().getLineOfOffset(selectionStart);
-			IRegion information = getDocument().getLineInformation(line);
-			if (information.getOffset() == selectionStart && information.getLength()+1 == selectionLength) {
-				return line;
-			}
-		} catch (BadLocationException e) {} //ignore
-		// check whether java source
-		if (javaResource instanceof IStorage) {
-			try {
-				String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
-				final Document document = new Document(string);
-				int line = document.getLineOfOffset(selectionStart);
-				final IRegion lineInformation = document.getLineInformation(line);
-				if (lineInformation.getOffset() == selectionStart && lineInformation.getLength() == selectionLength) {
-					return line;
-				}
-			} catch (Exception e) {
-				return -1;
-			}
+	protected int getLineInJavaDocument(Document document, int selectionStart, int selectionLength) throws BadLocationException {
+		int line = document.getLineOfOffset(selectionStart);
+		int length = document.getLineLength(line);
+		int lineOffset = document.getLineOffset(line);
+		if (lineOffset == selectionStart && length == selectionLength) {
+			return line;
+		}
+		IRegion region = document.getLineInformation(line);
+		if (region.getOffset() == selectionStart || region.getLength() == selectionLength) {
+			return line;
 		}
 		return -1;
 	}
 	
-	protected int getStartOffsetOfContentsInJava(int line) {
-		if (javaResource instanceof IStorage) {
-			try {
-				String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
-				final Document document = new Document(string);
-				IRegion lineInformation = document.getLineInformation(line);
-				String lineText = document.get(lineInformation.getOffset(), lineInformation.getLength());
-				String contents = lineText.trim();
-				if (contents.length() == 0) {
-					log.warn("selection points to an empty line!", new IllegalStateException());
-					return -1;
-				}
-				int contentsStarts = lineText.indexOf(contents);
-				return lineInformation.getOffset() + contentsStarts;
-			} catch (Exception e) {
-				return -1;
-			}
+	protected int getStartOffsetOfContentsInJava(Document document, int line) throws BadLocationException {
+		IRegion lineInformation = document.getLineInformation(line);
+		String lineText = document.get(lineInformation.getOffset(), lineInformation.getLength());
+		String contents = lineText.trim();
+		if (contents.length() == 0) {
+			log.warn("selection points to an empty line!", new IllegalStateException());
+			return -1;
 		}
-		return -1;
+		int contentsStarts = lineText.indexOf(contents);
+		return lineInformation.getOffset() + contentsStarts;
 	}
 
 	@Override

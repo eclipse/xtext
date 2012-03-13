@@ -45,6 +45,21 @@ public class StacktraceBasedEditorDecider {
 	protected boolean isNavigationHistory(StackTraceElement element) {
 		return "org.eclipse.ui.internal.NavigationHistory".equals(element.getClassName());
 	}
+	
+	protected boolean isLineBasedOpenEditorAction() {
+		StackTraceElement[] trace = new Exception().getStackTrace();
+		if (trace.length > 3) {
+			StackTraceElement element = trace[2];
+			boolean result =
+					("org.eclipse.jdt.internal.junit.ui.OpenTestAction".equals(element.getClassName()) || 
+					"org.eclipse.jdt.internal.junit.ui.OpenEditorAtLineAction".equals(element.getClassName())) && "reveal".equals(element.getMethodName());
+			if (result)
+				return result;
+			result = "org.eclipse.jdt.internal.debug.ui.console.JavaStackTraceHyperlink".equals(element.getClassName()) && "processSearchResult".equals(element.getMethodName());
+			return result;
+		}
+		return false;
+	}
 
 	/**
 	 * Happens when one select a stack element in the debugger. Since wie use JSR-45 we don't want to modify JDT's behavior.
