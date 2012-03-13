@@ -631,14 +631,18 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 				"  «ENDFOR»'''");
 	}
 	
-//	@Test public void testForLoop_26() throws Exception {
-//		assertOutput(
-////				"  begin [\n    a,\n    a,\n    a\n  ]",
-//				"  begin [\n  a\n  ,\n  a\n  ,\n  a\n  ]",
-//				"''' «FOR a: '123'.toCharArray SEPARATOR ',\n  \t'»\n" +
-//				"      a\n" +
-//				" «ENDFOR»'''");
-//	}
+	@Test 
+	public void testForLoop_26() throws Exception {
+		assertOutput(
+				" a,\n" +
+				"   \t\n" +
+				" a,\n" +
+				"   \t\n" +
+				" a\n", 
+				"''' «FOR a: '123'.toCharArray SEPARATOR ',\n  \t'»\n" +
+				"      a\n" +
+				" «ENDFOR»'''");
+	}
 	
 	@Test public void testBug342724_01() throws Exception {
 		assertOutput("test1\ntest3\n",

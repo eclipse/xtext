@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import test.ExtensionMethods;
@@ -1227,28 +1228,28 @@ public class CompilerTest extends AbstractXtendTestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
-	// TODO this one should be valid, too since we could infer the CharSequence from the
-	// expected type
-//	@Test public void testBug_352849_06_b() throws Exception {
-//		String code =
-//				"package x\n" +
-//				"import java.util.Collection\n" + 
-//				"import java.util.List\n" +
-//				"class Z {" +
-//				"  	def generate() {\n" + 
-//				"		val List<CharSequence> seq = null\n" + 
-//				"		val List<String> strings = null\n" + 
-//				"		val Collection<CharSequence> test = seq.addAll2(strings)\n" +
-//				"	}\n" + 
-//				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
-//				"	    collection.addAll(elements)\n" + 
-//				"	    null\n" + 
-//				"	}\n" +
-//				"}";
-//		String javaCode = compileToJavaCode(code);
-//		System.out.println(javaCode);
-//		javaCompiler.compileToClass("x.Z", javaCode);
-//	}
+	@Test
+	@Ignore("TODO this one should be valid, too since we could infer the CharSequence from the expected type")
+	public void testBug_352849_06_b() throws Exception {
+		String code =
+				"package x\n" +
+				"import java.util.Collection\n" + 
+				"import java.util.List\n" +
+				"class Z {" +
+				"  	def generate() {\n" + 
+				"		val List<CharSequence> seq = null\n" + 
+				"		val List<String> strings = null\n" + 
+				"		val Collection<CharSequence> test = seq.addAll2(strings)\n" +
+				"	}\n" + 
+				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" + 
+				"	    collection.addAll(elements)\n" + 
+				"	    null\n" + 
+				"	}\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		System.out.println(javaCode);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
 	
 	
 //	static class Z {
@@ -2091,28 +2092,33 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}", "castNull");
 	}
 	
-	// TODO these used to cause a stackoverflow
-	// currently they fail with dangling references which is a lot better but
-	// there's still room for improvements
-//	@Test public void testBug343096_01() throws Exception {
-//		invokeAndExpect2(
-//				null, // a plain compile should be sufficient
-//				"def <T> bug343096() {\n" + 
-//				"  [T t|switch t {\n" + 
-//				"    case t : bug343096\n" + 
-//				"  }]" + 
-//				"}", "bug343096");
-//	}
-//	
-//	@Test public void testBug343096_02() throws Exception {
-//		invokeAndExpect2(
-//				Functions.Function1.class.getCanonicalName(),
-//				"def <T> bug343096() {\n" + 
-//				"  [T t|switch t {\n" + 
-//				"    case t : bug343096\n" + 
-//				"  }].getClass.canonicalName" + 
-//				"}", "bug343096");
-//	}
+	@Test
+	@Ignore("TODO these used to cause a stackoverflow " + 
+			"currently they fail with dangling references which is a lot better but " +
+			"there's still room for improvements")
+	public void testBug343096_01() throws Exception {
+		invokeAndExpect2(
+				null, // a plain compile should be sufficient
+				"def <T> bug343096() {\n" + 
+				"  [T t|switch t {\n" + 
+				"    case t : bug343096\n" + 
+				"  }]" + 
+				"}", "bug343096");
+	}
+	
+	@Test
+	@Ignore("TODO these used to cause a stackoverflow " + 
+			"currently they fail with dangling references which is a lot better but " +
+			"there's still room for improvements")
+	public void testBug343096_02() throws Exception {
+		invokeAndExpect2(
+				Functions.Function1.class.getCanonicalName(),
+				"def <T> bug343096() {\n" + 
+				"  [T t|switch t {\n" + 
+				"    case t : bug343096\n" + 
+				"  }].getClass.canonicalName" + 
+				"}", "bug343096");
+	}
 	
 	@Test public void testBug345373_01() throws Exception {
 		invokeAndExpect3(
@@ -2212,26 +2218,27 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}", "forEachString");
 	}
 	
-	// TODO Fix this case - see also deactivated tests in XbaseIdentifiableTypeProviderTest and XbaseTypeProviderTest
-//	@Test public void testBug346763_07() throws Exception {
-////		class X {
-////			java.util.List<String> wildcardSuper() {
-////				java.util.List<String> v = new java.util.ArrayList<String>();
-////				v.add("a");
-////				java.util.List<? super String> v2 = v;
-////				Function1<Object,String> fun = null;
-////				return ListExtensions.map(v2, fun);
-////			}
-////		}
-//		invokeAndExpect2(
-//				Collections.singletonList("A"), 
-//				"def java.util.List<String> wildcardSuper() {\n" + 
-//				"  var java.util.List<String> v = new java.util.ArrayList();\n" + 
-//				"  v.add('a');\n" + 
-//				"  var java.util.List<? super String> v2 = v;\n" + 
-//				"  v2.map(e|e.toString.toUpperCase)\n" +
-//				"}", "wildcardSuper");
-//	}
+	@Test
+	@Ignore("TODO Fix this case - see also deactivated tests in XbaseIdentifiableTypeProviderTest and XbaseTypeProviderTest")
+	public void testBug346763_07() throws Exception {
+//		class X {
+//			java.util.List<String> wildcardSuper() {
+//				java.util.List<String> v = new java.util.ArrayList<String>();
+//				v.add("a");
+//				java.util.List<? super String> v2 = v;
+//				Function1<Object,String> fun = null;
+//				return ListExtensions.map(v2, fun);
+//			}
+//		}
+		invokeAndExpect2(
+				Collections.singletonList("A"), 
+				"def java.util.List<String> wildcardSuper() {\n" + 
+				"  var java.util.List<String> v = new java.util.ArrayList();\n" + 
+				"  v.add('a');\n" + 
+				"  var java.util.List<? super String> v2 = v;\n" + 
+				"  v2.map(e|e.toString.toUpperCase)\n" +
+				"}", "wildcardSuper");
+	}
 	
 	@Test public void testBug358118_NoNPE() throws Exception {
 		invokeAndExpect2(

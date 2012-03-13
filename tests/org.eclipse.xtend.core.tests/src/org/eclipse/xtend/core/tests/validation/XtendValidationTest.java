@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -646,13 +647,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"not", "visible");
 	}
 
-	//TODO fails since Object is explicitly extended.
-//	@Test public void testInaccessibleMethod2() throws Exception {
-//		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() o.clone() }}");
-//		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-//				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
-//				"not", "visible");
-//	}
+	@Test
+	@Ignore("fails since we do not look at the actual receiver when visibility rules are applied")
+	public void testInaccessibleMethod2() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() o.clone() }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				"not", "visible");
+	}
 
 	@Test public void testDuplicateParameter() throws Exception {
 		XtendFunction function = function("def foo(int x, int x) {null}");
@@ -761,15 +763,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED, "must", "not", "be", "static");
 	}
 	
-//	@Test public void testBug343096() throws Exception {
-//		XtendFunction function = function(
-//				"def <T> test() {\n" + 
-//				"  [T t|switch t {\n" + 
-//				"    case t:test\n" + 
-//				"  }]\n" + 
-//				"}");
-//		helper.assertNoErrors(function);
-//	}
+	@Test 
+	@Ignore
+	public void testBug343096() throws Exception {
+		XtendFunction function = function(
+				"def <T> test() {\n" + 
+				"  [T t|switch t {\n" + 
+				"    case t:test\n" + 
+				"  }]\n" + 
+				"}");
+		helper.assertNoErrors(function);
+	}
 
 	protected void assertConformanceError(String body, EClass objectType, String... messageParts)
 			throws Exception {
