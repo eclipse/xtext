@@ -196,9 +196,4 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		assertEquals(terminalGrammar, obj);
 	}
 
-//	@Test public void testGetOpenDeclarationAction() {
-//		OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, model.indexOf("common.Terminals"));
-//		checkHyperlink(action);
-//	}
-
 }

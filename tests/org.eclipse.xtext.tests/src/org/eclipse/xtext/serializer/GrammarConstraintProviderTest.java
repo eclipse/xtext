@@ -16,6 +16,7 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
@@ -339,15 +340,19 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	//	@Test public void testReturnsNullAlways() throws Exception {
-	//		String actual = getParserRule("Rule: val1=NullRule val2=ID; NullRule: 'kw1';");
-	//		StringBuilder expected = new StringBuilder();
-	//		assertEquals(expected.toString(), actual);
-	//	}
-	//
-	//	@Test public void testReturnsNullSometimes() throws Exception {
-	//		String actual = getParserRule("Rule: val1=NullRule val2=ID; NullRule: 'kw1' | 'kw2' {NullRule};");
-	//		StringBuilder expected = new StringBuilder();
-	//		assertEquals(expected.toString(), actual);
-	//	}
+	@Test
+	@Ignore
+	public void testReturnsNullAlways() throws Exception {
+		String actual = getParserRule("Rule: val1=NullRule val2=ID; NullRule: 'kw1';");
+		StringBuilder expected = new StringBuilder();
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	@Ignore
+	public void testReturnsNullSometimes() throws Exception {
+		String actual = getParserRule("Rule: val1=NullRule val2=ID; NullRule: 'kw1' | 'kw2' {NullRule};");
+		StringBuilder expected = new StringBuilder();
+		assertEquals(expected.toString(), actual);
+	}
 }

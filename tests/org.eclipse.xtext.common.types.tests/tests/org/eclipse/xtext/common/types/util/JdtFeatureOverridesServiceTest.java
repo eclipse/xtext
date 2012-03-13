@@ -28,16 +28,4 @@ public class JdtFeatureOverridesServiceTest extends AbstractFeatureOverridesServ
 		};
 	}
 
-	//TODO disabled since types are not visible on the Mock project
-//	@Override
-//	@Test public void testContainsFields() throws Exception {
-//	}
-//	
-//	@Override
-//	@Test public void testGenerics_00() throws Exception {
-//	}
-//	
-//	@Override
-//	@Test public void testGenerics_01() throws Exception {
-//	}
 }

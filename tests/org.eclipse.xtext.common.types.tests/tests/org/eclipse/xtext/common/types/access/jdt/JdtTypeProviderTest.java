@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -224,5 +226,19 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		}
 		return result;
 	}
+	
+	@Override
+	@Test
+	@Ignore("TODO This one fails due to a bug in JDT for binary types")
+	public void testFindTypeByName_$StartsWithDollar() {
+		super.testFindTypeByName_$StartsWithDollar();
+	}
 
+	// tests for the presence of the bug above
+	@Test
+	public void testFindTypeByName_$StartsWithDollar_02() {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.$StartsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNull(type);
+	}
 }

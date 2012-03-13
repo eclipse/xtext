@@ -29,6 +29,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -105,13 +106,14 @@ public class RefactoringTest extends AbstractEditorTest {
 		assertNull(renameSupport);
 	}
 
-	// TODO: disable warning dialog
-//	@Test public void testRenameJavaClass() throws Exception {
-//		setLanguageConfig(false, false);
-//		renameJavaClass();	
-//		assertJavaRefactored();
-//		assertXtextUnchanged();
-//	}
+	@Test
+	@Ignore("TODO: disable warning dialog")
+	public void testRenameJavaClass() throws Exception {
+		setLanguageConfig(false, false);
+		renameJavaClass();	
+		assertJavaRefactored();
+		assertXtextUnchanged();
+	}
 
 	@Test public void testRenameElement_1() throws Exception {
 		setLanguageConfig(true, false);
