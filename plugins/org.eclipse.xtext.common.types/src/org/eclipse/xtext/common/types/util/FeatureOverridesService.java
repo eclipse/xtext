@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +23,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -150,13 +154,46 @@ public class FeatureOverridesService {
             JvmFormalParameter overriddenParam = overridden.getParameters().get(i);
             JvmTypeReference overridingType = context.getLowerBound(overridingParam.getParameterType());
             JvmTypeReference overriddenType = context.getLowerBound(overriddenParam.getParameterType());
-            if (!EcoreUtil.equals(overridingType, overriddenType))
+            if (!EcoreUtil.equals(overridingType, overriddenType)) {
+            	JvmType plainOverridingType = overridingType.getType();
+            	JvmType plainOverriddenType = overriddenType.getType();
+            	if (plainOverridingType instanceof JvmTypeParameter && overriding == plainOverridingType.eContainer()) {
+            		if (plainOverriddenType instanceof JvmTypeParameter && overridden == plainOverriddenType.eContainer()) {
+            			JvmTypeParameter overridingTypeParameter = (JvmTypeParameter) plainOverridingType;
+            			JvmTypeParameter overriddenTypeParameter = (JvmTypeParameter) plainOverriddenType;
+            			return isSameConstraints(overridingTypeParameter, overriddenTypeParameter, context);
+            		}
+            	}
                 return false;
+            }
         }
         return true;
     }
 
-    protected boolean isInheritanceRelation(JvmMember overriding, JvmMember overridden) {
+    protected boolean isSameConstraints(JvmTypeParameter overridingTypeParameter,
+			JvmTypeParameter overriddenTypeParameter, ITypeArgumentContext context) {
+    	Set<JvmTypeConstraint> overriddenConstraints = Sets.newHashSet(overriddenTypeParameter.getConstraints());
+		for(JvmTypeConstraint overridingConstraint: overridingTypeParameter.getConstraints()) {
+			boolean matches = false;
+			Iterator<JvmTypeConstraint> iter = overriddenConstraints.iterator();
+			while(iter.hasNext() && !matches) {
+				JvmTypeConstraint overriddenConstraint = iter.next();
+				JvmTypeReference overridingType = context.getLowerBound(overridingConstraint.getTypeReference());
+	            JvmTypeReference overriddenType = context.getLowerBound(overriddenConstraint.getTypeReference());
+	            if (EcoreUtil.equals(overridingType, overriddenType)) {
+	            	matches = true;
+	            	iter.remove();
+	            }
+			}
+			if (!matches)
+				return false;
+		}
+		if (overriddenConstraints.isEmpty())
+			return true;
+		return false;
+	}
+
+	protected boolean isInheritanceRelation(JvmMember overriding, JvmMember overridden) {
         return superTypeCollector.isSuperType(overriding.getDeclaringType(), overridden.getDeclaringType());
     }
 }
