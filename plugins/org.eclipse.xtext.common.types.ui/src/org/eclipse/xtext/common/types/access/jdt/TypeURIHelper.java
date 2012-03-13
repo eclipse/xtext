@@ -404,9 +404,17 @@ public class TypeURIHelper implements URIHelperConstants {
 	protected void createResourceURIForClassImpl(String signature, StringBuilder uriBuilder) {
 		String topLevel = signature;
 		int idx = topLevel.indexOf('$');
-		if (idx != -1)
+		if (idx != -1) {
 			topLevel = topLevel.substring(0, idx) + ';';
-		uriBuilder.append(URIHelperConstants.OBJECTS).append(Signature.toString(topLevel));
+			if (topLevel.endsWith(".;") || topLevel.endsWith("$;")) {
+				topLevel = signature.substring(1, signature.length() - 1);
+			} else {
+				topLevel = Signature.toString(topLevel);
+			}
+		} else {
+			topLevel = Signature.toString(topLevel);
+		}
+		uriBuilder.append(URIHelperConstants.OBJECTS).append(topLevel);
 	}
 	
 	protected void createResourceURIForTypeVariable(ITypeBinding typeBinding, StringBuilder uriBuilder) {

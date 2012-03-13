@@ -10,25 +10,33 @@ package org.eclipse.xtext.generator;
 //import org.eclipse.xtext.generator.generatorTestLanguage.GeneratorTestLanguagePackage;
 //import org.eclipse.xtext.generator.generatorTestLanguage.Rule;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
+ * You'll have to regenerate the test languages with the org.eclipse.xtext.generator.GeneratorTestLanguage
+ * enabled in the workflow.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractLargeMetamodelTest extends AbstractXtextTests {
 
-//	@Override
-//	public void setUp() throws Exception {
-//		super.setUp();
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
 //		with(GeneratorTestLanguageStandaloneSetup.class);
-//	}
-//
-//	@Test public void testRuleClass() {
+	}
+
+	@Test
+	@Ignore("see class comment")
+	public void testRuleClass() {
 //		Class<Rule> ruleClass = Rule.class;
 //		assertNotNull(ruleClass);
-//	}
-//
-//	@Test public void testEPackage() {
+	}
+
+	@Test
+	@Ignore("see class comment")
+	public void testEPackage() {
 //		GeneratorTestLanguagePackage instance = GeneratorTestLanguagePackage.eINSTANCE;
 //		assertNotNull(instance);
-//	}
+	}
 }

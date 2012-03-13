@@ -209,28 +209,6 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		assertEquals(expected, ((JvmArrayType) actual).getComponentType());
 	}
 	
-//TODO - this one fails on the server	
-//	@Test public void testFindTypeByName_$ImmutableList() {
-//		String typeName = "com.google.inject.internal.util.$ImmutableList";
-//		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-//		assertNotNull(type);
-//		Iterable<String> innerTypes = transform(filter(type.getMembers(), JvmType.class), new Function<JvmType, String>() {
-//			public String apply(JvmType input) {
-//				return input.getSimpleName();
-//			}
-//		});
-//		assertTrue("Missing member type $Builder", contains(innerTypes, "Builder"));
-//		assertTrue("Missing member type $EmptyImmutableList", contains(innerTypes, "EmptyImmutableList"));
-//		assertTrue("Missing member type $RegularImmutableList", contains(innerTypes, "RegularImmutableList"));
-//		assertTrue("Missing member type $SerializedForm", contains(innerTypes, "SerializedForm"));
-//		assertEquals(4, size(innerTypes));
-//		diagnose(type);
-//		Resource resource = type.eResource();
-//		getAndResolveAllFragments(resource);
-//		recomputeAndCheckIdentifiers(resource);
-//
-//	}
-	
 	@Override
 	public ClasspathTypeProvider getTypeProvider() {
 		return typeProvider;

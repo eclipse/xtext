@@ -2404,4 +2404,23 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals("java.lang.Iterable", iterableSuperType.getIdentifier());
 		assertTrue(iterableSuperType.getArguments().isEmpty());
 	}
+	
+	@Test
+	public void testFindTypeByName_$StartsWithDollar() {
+//		Class<org.eclipse.xtext.common.types.testSetups.$StartsWithDollar> clazz = org.eclipse.xtext.common.types.testSetups.$StartsWithDollar.class;
+		String typeName = "org.eclipse.xtext.common.types.testSetups.$StartsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		Iterable<String> innerTypes = Iterables.transform(Iterables.filter(type.getMembers(), JvmType.class), new Function<JvmType, String>() {
+			public String apply(JvmType input) {
+				return input.getSimpleName();
+			}
+		});
+		assertTrue("Missing member type $Builder", Iterables.contains(innerTypes, "Builder"));
+		assertEquals(1, Iterables.size(innerTypes));
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+	}
 }

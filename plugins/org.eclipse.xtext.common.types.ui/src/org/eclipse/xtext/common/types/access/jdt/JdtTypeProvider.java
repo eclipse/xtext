@@ -132,8 +132,13 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			IType type = javaProject.findType(name);
 			if (type == null || !type.exists())
 				return null;
-			if(type.getTypeQualifiedName().startsWith("$"))
+			String elementName = type.getElementName();
+			if (!elementName.equals(type.getTypeQualifiedName())) {
+				// workaround for bug in jdt with binary type names that start with a $ dollar sign
+				// e.g. $ImmutableList
+				// it manifests itself in a way that allows to retrieve ITypes but one cannot obtain bindings for that type
 				return null;
+			}
 			return new JdtTypeMirror(type, typeFactory);
 		}
 		catch (JavaModelException e) {
