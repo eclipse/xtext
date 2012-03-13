@@ -205,7 +205,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	@Test public void testVoidInReturnExpression_02() throws Exception {
 		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length");
-		helper.assertNoErrors(expression);
+		helper.assertError(expression, XIF_EXPRESSION, INCOMPATIBLE_TYPES);
 	}
 	
 	@Test public void testVoidInReturnExpression_03() throws Exception {
@@ -216,6 +216,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Test public void testVoidInReturnExpression_04() throws Exception {
 		XExpression expression = expression("return if (true) while(false) 'foo'+'bar' else while(false) 'foo'+'bar'");
 		helper.assertError(expression, XIF_EXPRESSION, INCOMPATIBLE_TYPES);
+	}
+	
+	@Test public void testVoidInReturnExpression_05() throws Exception {
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else null");
+		helper.assertNoErrors(expression);
 	}
 	
 	@Test public void testReturnExpressionInClosure_01() throws Exception {

@@ -190,7 +190,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 			JvmFormalParameter p = iterator.next();
 			final String name = p.getName();
-			serialize(typeArgumentContext.resolve(p.getParameterType()), context, appendable, true, false);
+			serialize(typeArgumentContext.resolve(p.getParameterType()), context, appendable, false, false);
 			appendable.append(" ").append(name);
 			if (iterator.hasNext())
 				appendable.append(",");

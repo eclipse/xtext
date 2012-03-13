@@ -148,7 +148,7 @@ public abstract class AbstractXbaseCompiler {
 				if (!isPrimitiveVoidExpected && !earlyExit) {
 						appendable.newLine().append("return ");
 						if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
-							appendable.append("null");
+							appendDefaultLiteral(appendable, expectedType);
 						} else {
 							internalToJavaExpression(obj, appendable);
 						}
@@ -166,6 +166,22 @@ public abstract class AbstractXbaseCompiler {
 			internalToJavaExpression(obj, appendable);
 		}
 		return parentAppendable;
+	}
+	
+	protected void appendDefaultLiteral(ITreeAppendable b, @Nullable JvmTypeReference type) {
+		if (type != null && getPrimitives().isPrimitive(type)) {
+			Primitive primitiveKind = getPrimitives().primitiveKind((JvmPrimitiveType) type.getType());
+			switch (primitiveKind) {
+				case Boolean:
+					b.append("false");
+					break;
+				default:
+					b.append("0");
+					break;
+			}
+		} else {
+			b.append("null");
+		}
 	}
 	
 	protected void generateCheckedExceptionHandling(XExpression obj, ITreeAppendable appendable) {
@@ -218,7 +234,7 @@ public abstract class AbstractXbaseCompiler {
 		if (!isPrimitiveVoidExpected && !earlyExit) {
 				appendable.newLine().append("return ");
 				if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
-					appendable.append("null");
+					appendDefaultLiteral(appendable, expectedReturnType);
 				} else {
 					internalToJavaExpression(obj, appendable);
 				}

@@ -325,19 +325,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (varDeclaration.getRight() != null) {
 			internalToConvertedExpression(varDeclaration.getRight(), b, type);
 		} else {
-			if (getPrimitives().isPrimitive(type)) {
-				Primitive primitiveKind = getPrimitives().primitiveKind((JvmPrimitiveType) type.getType());
-				switch (primitiveKind) {
-					case Boolean:
-						b.append("false");
-						break;
-					default:
-						b.append("0");
-						break;
-				}
-			} else {
-				b.append("null");
-			}
+			appendDefaultLiteral(b, type);
 		}
 		b.append(";");
 	}

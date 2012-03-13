@@ -771,7 +771,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		final JvmTypeReference thenType = getType(object.getThen(), rawExpectation, rawType);
 		if (thenType != null)
 			returnTypes.add(thenType);
-		JvmTypeReference elseType = getTypeReferences().createAnyTypeReference(object);
+		JvmTypeReference elseType = null;
 		if (object.getElse()!=null) {
 			elseType = getType(object.getElse(), rawExpectation, rawType);
 		}
