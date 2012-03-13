@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -92,21 +93,24 @@ public class PdaUtilTest extends Assert {
 		assertEquals("[A, B, C, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "D"));
 	}
 
-	//	@Test public void testShortestStackemptyingSingleState() {
-	//		PDA pda = newPDA();
-	//		pda.state("A").start().stop();
-	//		assertEquals("[A]", util.shortestStackpruningPathTo(pda, newStack(), "A"));
-	//	}
+	@Test 
+	@Ignore
+	public void testShortestStackemptyingSingleState() {
+		StringPda pda = new StringPda("A", "A");
+		pda.state("A");
+		assertEquals("[A]", util.shortestStackpruningPathTo(pda, newStack(), "A"));
+	}
 
-	//	@Test public void testShortestStackemptyingPathLoops1() {
-	//		PDA pda = newPDA();
-	//		pda.state("A").start().followedBy("B");
-	//		pda.state("B").followedBy("C").pop("X");
-	//		pda.state("C").followedBy("D", "C").pop("Y");
-	//		pda.state("D").stop();
-	//		assertEquals("[A, B, C, D]", util.shortestStackpruningPathTo(pda, newStack(), "D"));
-	//		assertEquals("[A, B, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y"), "D"));
-	//		assertEquals("[A, B, C, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "D"));
-	//	}
+	@Test
+	@Ignore
+	public void testShortestStackemptyingPathLoops1() {
+		StringPda pda = new StringPda("A", "D");
+		pda.state("A").followedBy("B");
+		pda.state("B").followedBy("C").pop("X");
+		pda.state("C").followedBy("D", "C").pop("Y");
+		assertEquals("[A, B, C, D]", util.shortestStackpruningPathTo(pda, newStack(), "D"));
+		assertEquals("[A, B, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y"), "D"));
+		assertEquals("[A, B, C, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "D"));
+	}
 
 }

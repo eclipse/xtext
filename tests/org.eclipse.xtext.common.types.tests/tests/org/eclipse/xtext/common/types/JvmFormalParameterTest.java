@@ -27,20 +27,13 @@ public class JvmFormalParameterTest extends Assert {
 		assertNull(formalParameter.getIdentifier());
 	}
 	
-//	@Test public void testGetIdentifier_02() {
-//		formalParameter.setName("param");
-//		assertNull(formalParameter.getCanonicalName());
-//	}
-	
-//	@Test public void testGetIdentifier_03() {
-//		JvmTypeParameter typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
-//		typeParameter.setName("T");
-//		formalParameter.setName("param");
-//		JvmParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-//		typeReference.setType(typeParameter);
-//		formalParameter.setParameterType(typeReference);
-//		assertEquals("T", formalParameter.getCanonicalName());
-//	}
+	@Test
+	public void testGetIdentifier_02() {
+		formalParameter.setName("param");
+		assertEquals("param", formalParameter.getQualifiedName());
+		assertEquals("param", formalParameter.getSimpleName());
+		assertEquals("param", formalParameter.getIdentifier());
+	}
 	
 	@Test public void testToString_01() {
 		assertNotNull("toString() should not throw NPE and not return null", formalParameter.toString());

@@ -9,10 +9,13 @@ package org.eclipse.xtext.parser.unorderedGroups;
 
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
+import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
 import org.eclipse.xtext.validation.AbstractConcreteSyntaxValidationTest;
+import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -135,15 +138,17 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 		validate(toBeValidated).assertOK();
 	}
 
-// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454
-//	@Test public void testValidate_2_A_A_B() {
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getSecondAsList().add("b");
-//		validate(toBeValidated).assertAll(
-//				err(pack.getUnorderedSerialization_FirstAsList(), ERROR_LIST_TOO_MANY, null, 1, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"),
-//				err(pack.getUnorderedSerialization_SecondAsList(), ERROR_LIST_TOO_FEW, 2, null, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"));
-//	}
+	@Test
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454")
+	public void testValidate_2_A_A_B() {
+		UnorderedGroupsTestLanguagePackage pack = UnorderedGroupsTestLanguagePackage.eINSTANCE;
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getSecondAsList().add("b");
+		validate(toBeValidated).assertAll(
+				err(pack.getUnorderedSerialization_FirstAsList(), IConcreteSyntaxDiagnosticProvider.ERROR_LIST_TOO_MANY, null, 1, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"),
+				err(pack.getUnorderedSerialization_SecondAsList(), IConcreteSyntaxDiagnosticProvider.ERROR_LIST_TOO_FEW, 2, null, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"));
+	}
 
 	@Test public void testValidate_2_A_B_A_B() {
 		toBeValidated.getFirstAsList().add("a");

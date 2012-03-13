@@ -15,9 +15,11 @@ import java.util.Set;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -40,8 +42,10 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -95,29 +99,61 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-//	@Test public void testBug322875_01() throws Exception {
-//		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-//				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
-//				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
-//				"Bug322875 returns Bug322875: referencesETypeFromClasspathPackage=[xtext::Grammar];";
-//		XtextResource resource = getResourceFromStringAndExpect(testGrammar,1);
-//		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
-//		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-//		assertNotNull("diag", diag);
-//		assertEquals(diag.toString(), 1, diag.getChildren().size());
-//		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
-//	}
+	@Test
+	public void testBug322875_01() throws Exception {
+		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
+				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+				"Bug322875 returns Bug322875: referencesETypeFromClasspathPackage=[xtext::Grammar];";
+		XtextResource resource = getResourceFromStringAndExpect(testGrammar,1);
+		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertBug322875(resource);
+	}
+
+	protected void assertBug322875(XtextResource resource) {
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), 0, diag.getChildren().size());
+		assertEquals("diag.isOk", Diagnostic.OK, diag.getSeverity());
+		int xtextPackageCounter = 0;
+		int validationTestCounter = 0;
+		for(Resource packResource: resource.getResourceSet().getResources()) {
+			EObject object = packResource.getContents().get(0);
+			if (object instanceof EPackage) {
+				String nsURI = ((EPackage) object).getNsURI();
+				if (nsURI.equals("http://www.eclipse.org/2008/Xtext"))
+					xtextPackageCounter++;
+				if (nsURI.equals("http://XtextValidationBugs")) {
+					validationTestCounter++;
+				}
+			}
+		}
+		assertEquals(1, xtextPackageCounter);
+		assertEquals(1, validationTestCounter);
+	}
 	
-//	@Test public void testBug322875_02() throws Exception {
-//		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-//				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
-//				"Model returns EClass: name=ID;";
-//		XtextResource resource = getResourceFromString(testGrammar);
-//		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-//		assertNotNull("diag", diag);
-//		assertEquals(diag.toString(), 1, diag.getChildren().size());
-//		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
-//	}
+	@Test
+	public void testBug322875_01_b() throws Exception {
+		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+				" import 'classpath:/org/eclipse/xtext/xtext/XtextValidationTest.ecore'  " +
+				"Bug322875 returns Bug322875: referencesETypeFromClasspathPackage=[xtext::Grammar];";
+		XtextResource resource = getResourceFromStringAndExpect(testGrammar,1);
+		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertBug322875(resource);
+	}
+	
+	@Test
+	public void testBug322875_02() throws Exception {
+		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
+				"Model returns EClass: name=ID;";
+		XtextResource resource = getResourceFromString(testGrammar);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), 0, diag.getChildren().size());
+		assertEquals("diag.isOk", Diagnostic.OK, diag.getSeverity());
+	}
 	
 	@Test public void testBug322875_03() throws Exception {
 		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
@@ -129,24 +165,24 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(diag.toString(), 0, diag.getChildren().size());
 	}
 	
-//	@Test public void testBug322875_04() throws Exception {
-//		String testGrammarOk = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-//				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
-//				"Model returns EClass: name=ID;";
-//		String testGrammarWithError = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
-//		" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
-//		"Model returns EClass: name=ID;";
-//		XtextResource resourceOk = getResourceFromString(testGrammarOk);
-//		XtextResource resourceError = (XtextResource) resourceOk.getResourceSet().createResource(URI.createURI("unused.xtext"));
-//		resourceError.load(new StringInputStream(testGrammarWithError), null);
-//		Diagnostic diagOK = Diagnostician.INSTANCE.validate(resourceOk.getContents().get(0));
-//		assertNotNull("diag", diagOK);
-//		assertEquals(diagOK.toString(), 0, diagOK.getChildren().size());
-//		Diagnostic diagError = Diagnostician.INSTANCE.validate(resourceError.getContents().get(0));
-//		assertNotNull("diag", diagError);
-//		assertEquals(diagError.toString(), 1, diagError.getChildren().size());
-//		assertEquals("diag.isError", diagError.getSeverity(), Diagnostic.ERROR);
-//	}
+	@Test
+	public void testBug322875_04() throws Exception {
+		String testGrammarNsURI = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'http://www.eclipse.org/emf/2002/Ecore'  " +
+				"Model returns EClass: name=ID;";
+		String testGrammarPlatformPlugin = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
+				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
+				"Model returns EClass: name=ID;";
+		XtextResource resourceOk = getResourceFromString(testGrammarNsURI);
+		XtextResource resourceOk2 = (XtextResource) resourceOk.getResourceSet().createResource(URI.createURI("unused.xtext"));
+		resourceOk2.load(new StringInputStream(testGrammarPlatformPlugin), null);
+		Diagnostic diagOK = Diagnostician.INSTANCE.validate(resourceOk.getContents().get(0));
+		assertNotNull("diag", diagOK);
+		assertEquals(diagOK.toString(), 0, diagOK.getChildren().size());
+		diagOK = Diagnostician.INSTANCE.validate(resourceOk2.getContents().get(0));
+		assertNotNull("diag", diagOK);
+		assertEquals(diagOK.toString(), 0, diagOK.getChildren().size());
+	}
 	
 	@Test public void testBug_282852_01() throws Exception {
 		XtextResource resource = getResourceFromString(
@@ -491,20 +527,21 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	//TODO this one should yield a warning, because two different instances of a package might be referenced.
-//	@Test public void testBug_280413_03() throws Exception {
-//		XtextResource resource = getResourceFromString(
-//				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
-//				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
-//				"ParserRule returns xtext::ParserRule: name = ID;");
-//		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
-//		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
-//
-//		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-//		assertNotNull("diag", diag);
-//		assertEquals(diag.getSeverity(), Diagnostic.OK);
-//		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
-//	}
+	@Test
+	@Ignore("TODO this one should yield a warning, because two different instances of a package (ecore itself) might be referenced.")
+	public void testBug_280413_03() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
+				"ParserRule returns xtext::ParserRule: name = ID;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
 	
 	@Test public void testBug_281660() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
