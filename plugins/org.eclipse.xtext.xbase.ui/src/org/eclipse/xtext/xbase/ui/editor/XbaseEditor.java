@@ -296,13 +296,9 @@ public class XbaseEditor extends XtextEditor {
 	}
 	
 	/**
-	 * checks whether the selection corresponds exactly to a line in either the xtext source
-	 * or the java source. In case of a match the line is interpreted as the java source line to be selected.
-	 * 
-	 * This is because {@link org.eclipse.jdt.internal.junit.ui.OpenEditorAtLineAction#reveal(ITextEditor)} uses the xtext editor
-	 * to compute the range for the java source line.
-	 * 
-	 * @return the line number in case of exact match, -1 otherwise
+	 * Returns the line of the given selection. It is assumed that it covers an entire line in the
+	 * Java file.
+	 * @return the line in the Java file (zero based) or <code>-1</code> if the selection does not cover a complete line.
 	 */
 	protected int getLineInJavaDocument(Document document, int selectionStart, int selectionLength) throws BadLocationException {
 		int line = document.getLineOfOffset(selectionStart);
