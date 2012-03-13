@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
+import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
 
 import com.google.inject.Inject;
 
@@ -16,15 +18,27 @@ import com.google.inject.Inject;
  */
 public class NewRelengProjectWizard extends XtextNewProjectWizard {
 
-	private RelengProjectInfo projectInfo;
+	private WizardNewRelengProjectCreationPage mainPage;
 
 	@Inject
-	public NewRelengProjectWizard(RelengProjectCreator creator) {
+	public NewRelengProjectWizard(RelengProjectsCreator creator) {
 		super(creator);
+		setWindowTitle(Messages.NewRelengProjectWizard_WindowTitle);
+		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/newxprj_wiz.gif")); //$NON-NLS-1$
+	}
+
+	@Override
+	public void addPages() {
+		super.addPages();
+		mainPage = new WizardNewRelengProjectCreationPage("mainPage", this.selection); //$NON-NLS-1$
+		addPage(mainPage);
 	}
 
 	@Override
 	protected RelengProjectInfo getProjectInfo() {
+		RelengProjectInfo projectInfo = new RelengProjectInfo();
+		projectInfo.setProjectName(mainPage.getProjectName());
+		projectInfo.setFeatureProjectName(mainPage.getFeatureProjectName());
 		return projectInfo;
 	}
 

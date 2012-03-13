@@ -7,32 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
-import java.util.List;
-
 import org.eclipse.xtext.ui.util.ProjectFactory;
-import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
 
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author dhuebner - Initial contribution and API
  */
-public class RelengProjectCreator extends AbstractProjectCreator {
-
-	@Override
-	protected ProjectFactory createProjectFactory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getModelFolderName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected List<String> getAllFolders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class RelengProjectFactory extends ProjectFactory {
 
 }
