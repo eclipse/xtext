@@ -122,7 +122,7 @@ public class MemberFromSuperImplementor {
 				isFirst = false;
 				appendable.append(typeParameter);
 				if (!isCall) {
-					boolean firstConstraint = false;
+					boolean firstConstraint = true;
 					for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
 						if (!typeReferences.is(constraint.getTypeReference(), Object.class)) {
 							if (firstConstraint) {
