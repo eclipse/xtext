@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.typing;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -16,6 +17,8 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
@@ -25,6 +28,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -82,9 +86,35 @@ public class XtendOverridesService {
 	}
 	
 	public JvmTypeReference getOverriddenReturnType(XtendFunction func) {
-		JvmOperation operation = findOverriddenOperation(func);
+		final JvmOperation operation = findOverriddenOperation(func);
 		if (operation==null)
 			return null;
-		return operation.getReturnType();
+		final JvmTypeReference overriddenReturnType = operation.getReturnType();
+		final JvmOperation inferredOperation = xtendjvmAssociations.getDirectlyInferredOperation(func);
+		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
+			@Override
+			public JvmTypeParameterDeclarator getNearestDeclarator() {
+				return inferredOperation;
+			}
+			@Override
+			public JvmTypeReference getReceiverType() {
+				return typeReferences.createTypeRef(inferredOperation.getDeclaringType());
+			}
+			@Override
+			public JvmFeature getFeature() {
+				return operation;
+			}
+			@Override
+			public List<JvmTypeReference> getExplicitTypeArgument() {
+				List<JvmTypeParameter> parameters = inferredOperation.getTypeParameters();
+				List<JvmTypeReference> result = Lists.newArrayList();
+				for(JvmTypeParameter typeParameter: parameters) {
+					result.add(typeReferences.createTypeRef(typeParameter));
+				}
+				return result;
+			}
+		});
+		JvmTypeReference resolved = typeArgumentContext.resolve(overriddenReturnType);
+		return resolved;
 	}
 }

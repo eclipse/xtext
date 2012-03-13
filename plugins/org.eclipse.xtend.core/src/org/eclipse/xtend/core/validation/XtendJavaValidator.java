@@ -483,6 +483,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void doCheckOverriddenMethods(XtendClass xtendClass, final JvmGenericType inferredType,
 			final ITypeArgumentContext typeArgumentContext, Multimap<Object, JvmOperation> operationsPerErasure) {
 		List<JvmOperation> operationsMissingImplementation = null;
+		boolean doCheckAbstract = !inferredType.isAbstract();
+		if (doCheckAbstract) {
+			doCheckAbstract = false;
+			for (JvmTypeReference superType: inferredType.getSuperTypes()) {
+				JvmType type = superType.getType();
+				if (type instanceof JvmGenericType) {
+					if (((JvmGenericType) type).isAbstract() || ((JvmGenericType) type).isInterface()) {
+						doCheckAbstract = true;
+						break;
+					}
+				}
+			}
+		}
 		for (JvmOperation operation : filter(
 				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
 			if (operation.getDeclaringType() != inferredType) {
@@ -507,7 +520,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						}
 					}
 				}
-				if (operation.isAbstract() && !inferredType.isAbstract()) {
+				if (doCheckAbstract && operation.isAbstract()) {
 					boolean overridden = false;
 					if (operationsPerErasure.containsKey(signature)) {
 						for (JvmOperation myOperation : operationsPerErasure.get(signature)) {
