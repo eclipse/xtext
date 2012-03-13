@@ -479,8 +479,8 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testReturnExpression_07() throws Exception {
-		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length");
-		assertEvaluatesTo(null, "return if (false) while(false) ('foo'+'bar').length");
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else null");
+		assertEvaluatesTo(null, "return if (false) while(false) ('foo'+'bar').length else null");
 	}
 	
 	@Test public void testReturnExpression_08() throws Exception {
