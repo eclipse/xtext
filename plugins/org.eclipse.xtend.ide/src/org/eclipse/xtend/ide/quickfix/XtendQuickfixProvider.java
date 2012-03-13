@@ -577,7 +577,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			return findContainerExpressionInBlockExpression(container);
 	}
 	
-	@Fix(IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH)
+	@Fix(IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH)
 	public void putXtendOnClasspath(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add Xtend libs to classpath", "Add Xtend libs to classpath", "fix_indent.gif", new ISemanticModification() {
 			public void apply(EObject element, IModificationContext context) throws Exception {
