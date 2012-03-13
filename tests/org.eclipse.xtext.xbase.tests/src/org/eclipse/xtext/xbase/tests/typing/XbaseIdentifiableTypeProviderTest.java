@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -39,17 +44,29 @@ public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("java.util.List<java.lang.Integer>", typeRef.getIdentifier());
 	}
 	
-//	TODO Fix this case
-//	@Test public void testClosureParameter() throws Exception {
-//		XBlockExpression block = (XBlockExpression) expression(
-//				"{\n" + 
-//				"  var java.util.List<? super String> list = null;\n" + 
-//				"  list.map(e|e)\n" +
-//				"}");
-//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
-//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-//		JvmFormalParameter e = closure.getDeclaredFormalParameters().get(0);
-//		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(e);
-//		assertEquals("java.lang.Object", typeRef.getIdentifier());
-//	}
+	@Test
+	@Ignore("TODO Fix this case")
+	public void testClosureParameter() throws Exception {
+//		List<? super String> list = Lists.newArrayList();
+//		ListExtensions.map(list, new Functions.Function1<CharSequence, String>() {
+//			public String apply(CharSequence p) {
+//				return null;
+//			}
+//		});
+//		ListExtensions.map(list, new Functions.Function1<Object, String>() {
+//			public String apply(Object p) {
+//				return null;
+//			}
+//		});
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"  var java.util.List<? super String> list = null;\n" + 
+				"  list.map(e|e)\n" +
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+		JvmFormalParameter e = closure.getDeclaredFormalParameters().get(0);
+		JvmTypeReference typeRef = typeProvider.getTypeForIdentifiable(e);
+		assertEquals("java.lang.Object", typeRef.getIdentifier());
+	}
 }
