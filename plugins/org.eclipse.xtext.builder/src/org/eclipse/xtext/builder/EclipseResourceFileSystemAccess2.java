@@ -135,7 +135,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		if (file.exists()) {
 			if (outputConfig.isOverrideExistingResources()) {
 				try {
-					StringInputStream newContent = getInputStream(contentsAsString, file.getCharset(true));
+					StringInputStream newContent = getInputStream(contentsAsString, getEncoding(file));
 					if (hasContentsChanged(file, newContent)) {
 						// reset to offset zero allows to reuse internal byte[]
 						// no need to convert the string twice
@@ -161,7 +161,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		} else {
 			try {
 				ensureParentExists(file);
-				file.create(getInputStream(contentsAsString, file.getCharset(true)), true, monitor);
+				file.create(getInputStream(contentsAsString, getEncoding(file)), true, monitor);
 				if (outputConfig.isSetDerivedProperty()) {
 					setDerived(file, true);
 				}
@@ -173,6 +173,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 			}
 			callBack.afterFileCreation(file);
 		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected String getEncoding(IFile file) throws CoreException {
+		return file.getCharset(true);
 	}
 	
 	/**
