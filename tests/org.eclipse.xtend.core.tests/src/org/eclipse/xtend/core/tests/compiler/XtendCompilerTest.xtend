@@ -1282,6 +1282,43 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''')
 		
 	}
+	
+	@Test
+	def testReturnType_02() {
+		assertCompilesTo(
+			'''
+				import test.ReturnTypeUsesTypeParameter
+				class MyClass implements ReturnTypeUsesTypeParameter {
+				
+					override <LocalName extends CharSequence> accept(LocalName param) {
+						[ if (true) it?.apply(param) ] 
+					}
+				}
+			''', '''
+				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+				import test.ReturnTypeUsesTypeParameter;
+				import test.ReturnTypeUsesTypeParameter.Inner;
+				
+				@SuppressWarnings("all")
+				public class MyClass implements ReturnTypeUsesTypeParameter {
+				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
+				    final Procedure1<Procedure1<? super LocalName>> _function = new Procedure1<Procedure1<? super LocalName>>() {
+				        public void apply(final Procedure1<? super LocalName> it) {
+				          if (true) {
+				            if (it!=null) it.apply(param);
+				          }
+				        }
+				      };
+				    return new Inner<LocalName>() {
+				        public void useProcedure(Procedure1<? super LocalName> p0) {
+				          _function.apply(p0);
+				        }
+				    };
+				  }
+				}
+			''')
+		
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
