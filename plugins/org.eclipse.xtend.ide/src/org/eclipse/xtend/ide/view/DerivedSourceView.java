@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.view;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.jface.resource.JFaceResources.*;
 import static org.eclipse.ui.editors.text.EditorsUI.*;
 
 import java.util.List;
@@ -15,9 +16,16 @@ import java.util.Set;
 
 import org.eclipse.core.internal.utils.WrappedRuntimeException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer;
 import org.eclipse.jdt.internal.ui.text.SimpleJavaSourceViewerConfiguration;
@@ -28,25 +36,36 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.AnnotationModel;
+import org.eclipse.jface.text.source.AnnotationRulerColumn;
+import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IOverviewRuler;
+import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
+import org.eclipse.ui.progress.UIJob;
 import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
+import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.views.AbstractSourceView;
+import org.eclipse.xtext.ui.views.DefaultWorkbenchPartSelection;
 import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ITextRegion;
@@ -61,10 +80,12 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
-public class DerivedSourceView extends AbstractSourceView {
+public class DerivedSourceView extends AbstractSourceView implements IResourceChangeListener {
 	/** The width of the overview ruler. */
+	protected static final int VERTICAL_RULER_WIDTH = 12;
 	protected static final int OVERVIEW_RULER_WIDTH = 12;
 	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results";
+	private static final ISchedulingRule SEQUENCE_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	@Inject
 	private ITraceInformation traceInformation;
 	@Inject
@@ -72,14 +93,18 @@ public class DerivedSourceView extends AbstractSourceView {
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
-	private IWorkspaceRoot workspaceRoot;
+	private IWorkspace workspace;
 
 	private DefaultMarkerAnnotationAccess defaultMarkerAnnotationAccess = new DefaultMarkerAnnotationAccess();
+	Object object = EditorsPlugin.getDefault().getMarkerAnnotationPreferences();
 	private SourceViewerDecorationSupport sourceViewerDecorationSupport;
 	private JavaSourceViewer javaSourceViewer;
 	private SimpleJavaSourceViewerConfiguration javaSourceViewerConfiguration;
 	private IStorage selectedSource;
 	private Set<IStorage> derivedSources = Sets.newHashSet();
+	private RefreshJob refreshJob = new RefreshJob(SEQUENCE_RULE);
+	private MarkerAnnotationPreferences markerAnnotationPreferences = EditorsPlugin.getDefault()
+			.getMarkerAnnotationPreferences();
 
 	IStorage getSelectedSource() {
 		return selectedSource;
@@ -106,17 +131,35 @@ public class DerivedSourceView extends AbstractSourceView {
 		IPreferenceStore store = JavaPlugin.getDefault().getCombinedPreferenceStore();
 		IOverviewRuler overviewRuler = new OverviewRuler(defaultMarkerAnnotationAccess, OVERVIEW_RULER_WIDTH,
 				getSharedTextColors());
-		javaSourceViewer = new JavaSourceViewer(parent, null, overviewRuler, true, SWT.V_SCROLL | SWT.H_SCROLL, store);
+		AnnotationRulerColumn annotationRulerColumn = new AnnotationRulerColumn(VERTICAL_RULER_WIDTH,
+				defaultMarkerAnnotationAccess);
+		@SuppressWarnings("unchecked")
+		List<AnnotationPreference> annotationPreferences = markerAnnotationPreferences.getAnnotationPreferences();
+		for (AnnotationPreference annotationPreference : annotationPreferences) {
+			String key = annotationPreference.getVerticalRulerPreferenceKey();
+			boolean showAnnotation = true;
+			if (key != null && store.contains(key)) {
+				showAnnotation = store.getBoolean(key);
+			}
+			if (showAnnotation) {
+				annotationRulerColumn.addAnnotationType(annotationPreference.getAnnotationType());
+			}
+		}
+		annotationRulerColumn.addAnnotationType(Annotation.TYPE_UNKNOWN);
+		LineNumberRulerColumn lineNumberRuleColumn = new LineNumberRulerColumn();
+		lineNumberRuleColumn.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+		lineNumberRuleColumn.setFont(getFont(getViewerFontName()));
+		CompositeRuler compositeRuler = new CompositeRuler();
+		compositeRuler.addDecorator(0, annotationRulerColumn);
+		compositeRuler.addDecorator(1, lineNumberRuleColumn);
+		javaSourceViewer = new JavaSourceViewer(parent, compositeRuler, overviewRuler, true, SWT.V_SCROLL
+				| SWT.H_SCROLL, store);
 		javaSourceViewerConfiguration = new SimpleJavaSourceViewerConfiguration(JavaPlugin.getDefault()
 				.getJavaTextTools().getColorManager(), store, null, IJavaPartitions.JAVA_PARTITIONING, true);
 		javaSourceViewer.configure(javaSourceViewerConfiguration);
 		javaSourceViewer.setEditable(false);
 		sourceViewerDecorationSupport = new SourceViewerDecorationSupport(javaSourceViewer, overviewRuler,
 				defaultMarkerAnnotationAccess, getSharedTextColors());
-		MarkerAnnotationPreferences markerAnnotationPreferences = EditorsPlugin.getDefault()
-				.getMarkerAnnotationPreferences();
-		@SuppressWarnings("unchecked")
-		List<AnnotationPreference> annotationPreferences = markerAnnotationPreferences.getAnnotationPreferences();
 		for (AnnotationPreference annotationPreference : annotationPreferences) {
 			sourceViewerDecorationSupport.setAnnotationPreference(annotationPreference);
 		}
@@ -132,7 +175,7 @@ public class DerivedSourceView extends AbstractSourceView {
 
 	@Override
 	protected String getBackgroundColorKey() {
-		return "org.eclipse.jdt.ui.DeclarationView.backgroundColor"; //$NON-NLS-1$
+		return "org.eclipse.ui.editors.backgroundColor"; //$NON-NLS-1$
 	}
 
 	@Override
@@ -165,17 +208,19 @@ public class DerivedSourceView extends AbstractSourceView {
 				}
 			}
 		}
-		if (selectedSource != null) {
-			IFile file = workspaceRoot.getFile(selectedSource.getFullPath());
-			if (file != null && file.exists() && file.isSynchronized(1)) {
-				try {
-					return null != selectedSource ? Files.readStreamIntoString(selectedSource.getContents()) : null;
-				} catch (CoreException e) {
-					throw new WrappedRuntimeException(e);
-				}
+		IFile file = getSelectedFile();
+		if (file != null && file.exists() && file.isSynchronized(1)) {
+			try {
+				return Files.readStreamIntoString(file.getContents());
+			} catch (CoreException e) {
+				throw new WrappedRuntimeException(e);
 			}
 		}
 		return null;
+	}
+
+	protected IFile getSelectedFile() {
+		return selectedSource != null ? workspace.getRoot().getFile(selectedSource.getFullPath()) : null;
 	}
 
 	@Override
@@ -188,11 +233,50 @@ public class DerivedSourceView extends AbstractSourceView {
 	}
 
 	@Override
+	public void partVisible(IWorkbenchPartReference ref) {
+		super.partVisible(ref);
+		if (ref.getId().equals(getSite().getId())) {
+			workspace.addResourceChangeListener(this);
+		}
+	}
+
+	@Override
+	public void partHidden(IWorkbenchPartReference ref) {
+		super.partHidden(ref);
+		if (ref.getId().equals(getSite().getId())) {
+			workspace.removeResourceChangeListener(this);
+		}
+	}
+
+	public void resourceChanged(IResourceChangeEvent event) {
+		if (selectedSource == null || getWorkbenchPartSelection() == null) {
+			return;
+		}
+		IResourceDelta delta = event.getDelta();
+		if (delta != null) {
+			IResourceDelta child = delta.findMember(selectedSource.getFullPath());
+			if (child != null) {
+				refreshJob.reschedule();
+			}
+		}
+	}
+
+	@Override
 	public void dispose() {
 		super.dispose();
 		if (sourceViewerDecorationSupport != null) {
 			sourceViewerDecorationSupport.dispose();
 		}
+		workspace.removeResourceChangeListener(this);
+	}
+
+	@Override
+	protected String computeDescription(IWorkbenchPartSelection workbenchPartSelection) {
+		XtextEditor xtextEditor = (XtextEditor) workbenchPartSelection.getWorkbenchPart();
+		if (xtextEditor.isDirty()) {
+			return "The contents of the active editor have changed since the last save and therefore not reflected in the derived source.";
+		}
+		return super.computeDescription(workbenchPartSelection);
 	}
 
 	@Override
@@ -201,6 +285,12 @@ public class DerivedSourceView extends AbstractSourceView {
 		JavaPlugin.getDefault().getJavaTextTools()
 				.setupJavaDocumentPartitioner(document, IJavaPartitions.JAVA_PARTITIONING);
 		return document;
+	}
+
+	@Override
+	protected AnnotationModel createAnnotationModel() {
+		IFile file = getSelectedFile();
+		return file != null ? new ResourceMarkerAnnotationModel(file) : super.createAnnotationModel();
 	}
 
 	@Override
@@ -234,6 +324,26 @@ public class DerivedSourceView extends AbstractSourceView {
 		ITextSelection textSelection = (ITextSelection) workbenchPartSelection.getSelection();
 		TextRegion localRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
 		return localRegion;
+	}
+
+	protected class RefreshJob extends UIJob {
+
+		public RefreshJob(ISchedulingRule schedulingRule) {
+			super("Reload derived source");
+			setRule(schedulingRule);
+		}
+
+		@Override
+		public IStatus runInUIThread(final IProgressMonitor monitor) {
+			computeAndSetInput(new DefaultWorkbenchPartSelection(getSite().getPage().getActivePart(), getSite()
+					.getPage().getSelection()), true);
+			return Status.OK_STATUS;
+		}
+
+		protected void reschedule() {
+			cancel();
+			schedule();
+		}
 	}
 
 }
