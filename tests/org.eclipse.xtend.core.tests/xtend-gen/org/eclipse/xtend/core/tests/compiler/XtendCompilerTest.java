@@ -2686,6 +2686,84 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testReturnType_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import test.ReturnTypeUsesTypeParameter");
+    _builder.newLine();
+    _builder.append("class MyClass implements ReturnTypeUsesTypeParameter {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override <LocalName extends CharSequence> accept(LocalName param) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("[ if (true) it?.apply(param) ] ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.append("import test.ReturnTypeUsesTypeParameter;");
+    _builder_1.newLine();
+    _builder_1.append("import test.ReturnTypeUsesTypeParameter.Inner;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class MyClass implements ReturnTypeUsesTypeParameter {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Procedure1<Procedure1<? super LocalName>> _function = new Procedure1<Procedure1<? super LocalName>>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public void apply(final Procedure1<? super LocalName> it) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("if (true) {");
+    _builder_1.newLine();
+    _builder_1.append("            ");
+    _builder_1.append("if (it!=null) it.apply(param);");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return new Inner<LocalName>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public void useProcedure(Procedure1<? super LocalName> p0) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("_function.apply(p0);");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
