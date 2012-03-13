@@ -14,6 +14,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
 import org.eclipse.xtext.serializer.serializer.AbstractSequencerTestLanguageSemanticSequencer;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -79,24 +80,26 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), generatedActual.toString());
 	}
 
-	//	@Test public void testXtext() throws Exception {
-	//		with(XtextStandaloneSetup.class);
-	//		EObject model = getGrammarAccess().getGrammar();
-	//		//		System.out.println(EmfFormatter.objToStr(model));
-	//		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
-	//		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
-	//		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
-	//		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
-	//		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
-	//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-	//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
-	//		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
-	//		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
-	//		recSequencer.createSequence( /* semSequencer, */ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-	//		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
-	//		//		System.out.println(actual);
-	//		assertNotNull(actual);
-	//	}
+	@Test
+	@Ignore
+	public void testXtext() throws Exception {
+//		with(XtextStandaloneSetup.class);
+//		EObject model = getGrammarAccess().getGrammar();
+//		//		System.out.println(EmfFormatter.objToStr(model));
+//		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
+//		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
+//		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
+//		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
+//		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
+//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
+//		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
+//		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
+//		recSequencer.createSequence( /* semSequencer, */ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+//		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
+//		//		System.out.println(actual);
+//		assertNotNull(actual);
+	}
 
 	@Test public void testSimpleGroup() throws Exception {
 		testSequence("#1 a b");
@@ -250,19 +253,23 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		testSequence("#15 kw3");
 	}
 
-	// TODO: test multiple keywords
+	@Test
+	@Ignore("TODO: test multiple keywords")
+	public void testList3a() throws Exception {
+		testSequence("#8 a, b, c");
+	}
 
-	//	@Test public void testList3a() throws Exception {
-	//		testSequence("#8 a, b, c");
-	//	}
-	//
-	//	@Test public void testList3b() throws Exception {
-	//		testSequence("#8 a");
-	//	}
-	//
-	//	@Test public void testList3c() throws Exception {
-	//		testSequence("#8 kw3 a");
-	//	}
+	@Test
+	@Ignore("TODO: test multiple keywords")
+	public void testList3b() throws Exception {
+		testSequence("#8 a");
+	}
+
+	@Test
+	@Ignore("TODO: test multiple keywords")
+	public void testList3c() throws Exception {
+		testSequence("#8 kw3 a");
+	}
 
 	@Test public void testDependentAlternative1_a() throws Exception {
 		testSequence("#19 foo1");

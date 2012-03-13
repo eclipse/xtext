@@ -10,6 +10,7 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class HiddenTokensMergerTest extends AbstractXtextTests {
@@ -87,10 +88,12 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 		assertEquals("#5 a. b c.d e.f.g.i refs a./* ab */ b e.  /*ef*/f.g/*hi*/.i c./*cd*/  d", serialize(model));
 	}
 
-	//	@Test public void testRefList3() throws Exception {
-	//		RefList model = (RefList) getResourceFromStringAndExpect("#5 a.b refs x.y", 1).getContents().get(0);
-	//		assertEquals("#5 a. b c.d e.f.g.i refs a./* ab */ b e.  /*ef*/f.g/*hi*/.i c./*cd*/  d", serialize(model));
-	//	}
+	@Test
+	@Ignore
+	public void testRefList3() throws Exception {
+		RefList model = (RefList) getResourceFromStringAndExpect("#5 a.b refs x.y", 1).getContents().get(0);
+		assertEquals("#5 a. b c.d e.f.g.i refs a./* ab */ b e.  /*ef*/f.g/*hi*/.i c./*cd*/  d", serialize(model));
+	}
 
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
 	@Test public void testAppendToEnd() throws Exception {
