@@ -1096,7 +1096,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredFields(XtendField field){
 		if(doCheckValidMemberName(field)) {
 			JvmField jvmField = associations.getJvmField(field);
-			if (jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())) {
+			if (jvmField != null && jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())) {
 				String message;
 				if(field.isExtension()) {
 					if(field.getName() == null)
