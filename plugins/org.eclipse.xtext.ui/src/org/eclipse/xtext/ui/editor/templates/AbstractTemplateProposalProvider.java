@@ -17,6 +17,7 @@ import org.eclipse.jface.text.templates.TemplateProposal;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 
@@ -31,6 +32,9 @@ import com.google.inject.Inject;
 public abstract class AbstractTemplateProposalProvider implements ITemplateProposalProvider {
 
 	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private IProposalConflictHelper proposalConflictHelper;
 	
 	@Inject
 	public void setScopeProvider(IScopeProvider scopeProvider) {
@@ -86,7 +90,18 @@ public abstract class AbstractTemplateProposalProvider implements ITemplatePropo
 	}
 	
 	protected boolean validate(Template template, ContentAssistContext context) {
-		return context.getMatcher().isCandidateMatchingPrefix(template.getName(), context.getPrefix());
+		boolean result = context.getMatcher().isCandidateMatchingPrefix(template.getName(), context.getPrefix());
+		if (result) {
+			try {
+				String pattern = template.getPattern();
+				if (proposalConflictHelper.existsConflict(pattern, context)) {
+					result = false;
+				}
+			} catch(Exception e) {
+				result = false;
+			}
+		}
+		return result;
 	}
 	
 	protected boolean validate(Template template, TemplateContext context) {
