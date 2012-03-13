@@ -120,7 +120,8 @@ class JvmModelGenerator implements IGenerator {
 		}
 		childAppendable.traceSignificant(it).append(simpleName)
 		generateTypeParameterDeclaration(childAppendable)
-		childAppendable.append(" ")
+		if (typeParameters.empty)
+			childAppendable.append(" ")
 		generateExtendsClause(childAppendable)
 		childAppendable.append("{")
 		val b = Wrapper::wrap(true)
@@ -338,7 +339,7 @@ class JvmModelGenerator implements IGenerator {
 				appendable.append(", ")
 				generateTypeParameterDeclaration(appendable)
 			]
-			appendable.append(">")
+			appendable.append("> ")
 		}
 	}
 	
