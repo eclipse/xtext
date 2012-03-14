@@ -282,11 +282,11 @@ public class TypeArgumentContextProvider {
 			}
 		}.visit(primitives.asWrapperTypeIfPrimitive(receiverType));
 		if (rawType)
-			return new TypeArgumentContext(null, typeReferences, typesFactory, rawTypeHelper);
+			return new TypeArgumentContext(null, typeReferences, typesFactory, rawTypeHelper, primitives);
 		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
 		if (normalized.isEmpty())
 			return null;
-		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper, primitives);
 	}
 	
 	protected Map<JvmTypeParameter, JvmTypeReference> normalizedCopy(Multimap<JvmTypeParameter, ResolveInfo> map) {
@@ -519,7 +519,7 @@ public class TypeArgumentContextProvider {
 		}
 		if (result.isEmpty())
 			return null;
-		return new TypeArgumentContext(result, typeReferences, typesFactory, rawTypeHelper);
+		return new TypeArgumentContext(result, typeReferences, typesFactory, rawTypeHelper, primitives);
 	}
 
 	protected enum ResolveInfoKind {
@@ -580,7 +580,7 @@ public class TypeArgumentContextProvider {
 		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
 		if (normalized.isEmpty())
 			return null;
-		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper, primitives);
 	}
 
 	protected Multimap<JvmTypeParameter, ResolveInfo> createTemporaryMultimap() {
@@ -705,7 +705,7 @@ public class TypeArgumentContextProvider {
 		}
 		if (result.isEmpty())
 			return null;
-		return new TypeArgumentContext(result, typeReferences, typesFactory, rawTypeHelper);
+		return new TypeArgumentContext(result, typeReferences, typesFactory, rawTypeHelper, primitives);
 	}
 
 	protected ITypeArgumentContext getParameterContext(
@@ -745,7 +745,7 @@ public class TypeArgumentContextProvider {
 						if (((JvmGenericArrayTypeReference) lastArgumentType).getDimensions() == ((JvmGenericArrayTypeReference) varArgParameterType).getDimensions()) {
 							resolveAgainstActualType(varArgParameterType, lastArgumentType, result, true, paramCount);		
 							Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
-							return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+							return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper, primitives);
 						}
 					} 
 					resolveAgainstActualType(varArgComponentType, lastArgumentType, result, true, paramCount);
@@ -769,7 +769,7 @@ public class TypeArgumentContextProvider {
 		Map<JvmTypeParameter, JvmTypeReference> normalized = normalizedCopy(result);
 		if (normalized.isEmpty())
 			return null;
-		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper);
+		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper, primitives);
 	}
 
 	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,
@@ -821,7 +821,7 @@ public class TypeArgumentContextProvider {
 								TypeArgumentContext declaredContext = getReceiverContext(declaredReference);
 								if (declaredContext == null) {
 									declaredContext = new TypeArgumentContext(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), 
-											typeReferences, typesFactory, rawTypeHelper);
+											typeReferences, typesFactory, rawTypeHelper, primitives);
 								}
 								Collection<JvmTypeParameter> receiverBoundParameters = actualContext.getBoundParameters();
 								for(JvmTypeParameter receiverBound: receiverBoundParameters) {
