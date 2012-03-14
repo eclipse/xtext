@@ -1118,7 +1118,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
 		if(doCheckValidMemberName(function)) {
 			JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
-			if(jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
+			if(jvmOperation != null && jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
 				String message = "The method " + jvmOperation.getSimpleName() 
 						+  uiStrings.parameters(jvmOperation)  
 						+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
