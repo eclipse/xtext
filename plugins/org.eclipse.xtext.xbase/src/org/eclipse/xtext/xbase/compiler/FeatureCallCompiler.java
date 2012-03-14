@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -220,6 +221,23 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void prepareExpression(XExpression arg, ITreeAppendable b) {
 		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall) arg).getFeature() instanceof JvmField)
 				&& !isVariableDeclarationRequired(arg, b)) {
+			// we have to convert the given value in a later step and the
+			// conversion code may produce an anonymous class of the expected type
+			// where the implementation needs to reference the value of this expression
+			// thus we have to make sure that the value is stored in a final variable
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) arg;
+			// check for final modifier
+			if (featureCall.getFeature() instanceof XVariableDeclaration) {
+				XVariableDeclaration variableDeclaration = (XVariableDeclaration) featureCall.getFeature();
+				if (!variableDeclaration.isWriteable()) {
+					internalToJavaStatement(arg, b, true);
+					return;
+				}
+			} else if (featureCall.getFeature() instanceof JvmFormalParameter) {
+				// always final
+				internalToJavaStatement(arg, b, true);
+				return;
+			}
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 			JvmTypeReference type = getTypeProvider().getType(arg);
 			if (expectedType != null && !jvmConformance.isConformant(expectedType, type)) {

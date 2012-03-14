@@ -24,8 +24,6 @@ import org.eclipse.xtext.common.types.util.IRawTypeHelper;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -70,13 +68,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
 					public void exec(ITreeAppendable appendable) {
 						appendable = appendable.trace(obj, true);
-						Pair<String, XExpression> key = Tuples.create("Convertable", obj);
-						if (appendable.hasName(key)) {
-							String finalVariable = appendable.getName(key);
-							appendable.append(finalVariable);
-						} else {
-							internalToConvertedExpression(obj, appendable);
-						}
+						internalToConvertedExpression(obj, appendable);
 					}
 				});
 				return;
@@ -153,6 +145,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 //		JvmTypeReference resolvedLeft = closures.getResolvedExpectedType(expectedType, functionType);
 		if (expectedType.getIdentifier().equals(Object.class.getName())
 				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())) {
+			// same raw type but different type parameters
+			// at this point we know that we are compatible so we have to convince the Java compiler about that ;-)
+			if (!getTypeConformanceComputer().isConformant(expectedType, functionType)) {
+				// insert a cast
+				appendable.append("(");
+				serialize(expectedType, context, appendable);
+				appendable.append(")");
+			}
 			expression.exec(appendable);
 			return;
 		}
