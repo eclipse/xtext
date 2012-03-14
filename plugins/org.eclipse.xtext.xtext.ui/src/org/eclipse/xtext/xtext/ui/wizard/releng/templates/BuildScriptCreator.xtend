@@ -15,6 +15,7 @@ class BuildScriptCreator {
 	 * @param projectInfo Project configuration to use
 	 */
 	def CharSequence createScript(RelengProjectInfo projectInfo) {
+		
 		'''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<!--
@@ -30,7 +31,6 @@ class BuildScriptCreator {
 				commands.file		What to do?
 									Default: ${projects.location}/«projectInfo.projectName»/commands.txt
 		-->
-		
 		<project name="Buckminster Headless" default="default">
 			<property name="WORKSPACE" location="${ant.file}/../../" />
 			<property name="build.root" location="${WORKSPACE}/buildroot" />
@@ -47,7 +47,6 @@ class BuildScriptCreator {
 					<arg value="-Dbuckminster.temp.root=${build.root}/buckminster.temp" />
 					<arg value="-Dtarget.platform=${build.root}/${target.platform}" />
 					<arg line="-data ${build.root}/buckminster.workspace" />
-					<arg line="--displaystacktrace" />
 					<arg line="-configuration ${build.root}/configuration" />
 					<arg line="-S '${commands.file}'" />
 				</exec>

@@ -42,6 +42,7 @@ public class NewRelengProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setBuildFeatureName(mainPage.getMainFeatureProjectName());
 		projectInfo.setSiteFeatureName(mainPage.getSiteFeatureProjectName());
 		projectInfo.setBuckyLocation(mainPage.getBuckyLocation());
+		projectInfo.addTestLauncher(mainPage.getTestLaunchFile());
 		return projectInfo;
 	}
 

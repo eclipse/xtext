@@ -7,14 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.dialogs.ISelectionStatusValidator;
+import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.dialogs.SelectionDialog;
+import org.eclipse.ui.model.WorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.ui.views.navigator.ResourceComparator;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -52,4 +64,37 @@ public class DialogCatalog {
 		return dialog.open();
 	}
 
+	public static IFile openWorkspaceFileSelectionDialog(Shell shell, String patternString) {
+	ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(shell, new WorkbenchLabelProvider(),
+				new WorkbenchContentProvider());
+		dialog.setAllowMultiple(false);
+		dialog.setTitle("Select workspace resource");
+		dialog.setMessage("Select " + patternString + " file");
+		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+		dialog.setComparator(new ResourceComparator(ResourceComparator.NAME));
+		PatternFilter filter = new PatternFilter();
+		filter.setPattern(patternString);
+		dialog.addFilter(filter);
+		dialog.setValidator(new ISelectionStatusValidator() {
+
+			public IStatus validate(Object[] selection) {
+				if (selection.length == 1) {
+					IResource resource = (IResource) selection[0];
+					if (resource instanceof IFile) {
+						return new Status(IStatus.OK, Activator.PLUGIN_ID, "");
+					}
+				}
+				return new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Please select a file.");
+			}
+		});
+		dialog.create();
+		dialog.open();
+		Object result = dialog.getFirstResult();
+		if (result == null) {
+			return null;
+		}
+		IFile resource = (IFile) result;
+		return resource;
+
+	}
 }
