@@ -1684,6 +1684,15 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testClosure_29() throws Exception {
+		assertEvaluatesTo("done", 
+				"{" +
+				"  val (CharSequence)=>void proc = [s|]\n" +
+				"  val client = new testdata.ClosureClient\n" +
+				"  client.useProcedureForCharSequence(proc)" +
+				"}");
+	}
+	
 	/**
 	 * @since 2.3
 	 */
