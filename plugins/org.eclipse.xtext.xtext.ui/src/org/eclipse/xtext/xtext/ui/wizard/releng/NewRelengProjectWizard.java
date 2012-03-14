@@ -30,15 +30,18 @@ public class NewRelengProjectWizard extends XtextNewProjectWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		mainPage = new WizardNewRelengProjectCreationPage("mainPage", this.selection); //$NON-NLS-1$
+		mainPage = new WizardNewRelengProjectCreationPage("relengPage", this.selection); //$NON-NLS-1$
 		addPage(mainPage);
 	}
 
 	@Override
 	protected RelengProjectInfo getProjectInfo() {
 		RelengProjectInfo projectInfo = new RelengProjectInfo();
+		projectInfo.setNamespace(mainPage.getProjectNameSpace());
 		projectInfo.setProjectName(mainPage.getProjectName());
-		projectInfo.setFeatureProjectName(mainPage.getFeatureProjectName());
+		projectInfo.setBuildFeatureName(mainPage.getMainFeatureProjectName());
+		projectInfo.setSiteFeatureName(mainPage.getSiteFeatureProjectName());
+		projectInfo.setBuckyLocation(mainPage.getBuckyLocation());
 		return projectInfo;
 	}
 

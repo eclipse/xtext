@@ -116,6 +116,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected int getMonitorTicks() {
 		int ticks = 2;
 		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks+1 : ticks;
+		if (getXtextProjectInfo().isCreateFeatureProject()) {
+			ticks++;
+		}
 		return ticks;
 	}
 	

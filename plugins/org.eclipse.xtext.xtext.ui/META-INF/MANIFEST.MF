@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.xtext.builder,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.compare,
- org.eclipse.xtext.ui.codetemplates.ui
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -7,11 +7,42 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.ui.util.ProjectFactory;
+import org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuckminsterFilesCreator;
+import org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuildScriptCreator;
+import org.eclipse.xtext.xtext.ui.wizard.releng.templates.FileCreator;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 public class RelengProjectFactory extends ProjectFactory {
+	static final public String BUILD_FILE_NAME = "build.ant";
+	private RelengProjectInfo projectInfo;
 
+	@Override
+	protected void enhanceProject(final IProject project, final SubMonitor subMonitor, final Shell shell)
+			throws CoreException {
+		super.enhanceProject(project, subMonitor, shell);
+		FileCreator fileCreator = new FileCreator() {
+
+			public IFile createFile(String fileName, CharSequence chars) {
+				return RelengProjectFactory.this.createFile(fileName, project, chars.toString(), subMonitor);
+			}
+
+		};
+		BuckminsterFilesCreator buckyStuffCreator = new BuckminsterFilesCreator(fileCreator);
+		buckyStuffCreator.createBuckminsterFiles(projectInfo);
+		createFile(BUILD_FILE_NAME, project, new BuildScriptCreator().createScript(projectInfo).toString(), subMonitor);
+	}
+
+	public void setRelengProjectInfo(RelengProjectInfo projectInfo) {
+		this.projectInfo = projectInfo;
+		setProjectName(projectInfo.getProjectName());
+	}
 }
+
