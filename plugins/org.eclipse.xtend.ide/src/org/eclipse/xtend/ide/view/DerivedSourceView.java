@@ -58,6 +58,7 @@ import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.xtend.ide.labeling.XtendImages;
+import org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
@@ -84,7 +85,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	/** The width of the overview ruler. */
 	protected static final int VERTICAL_RULER_WIDTH = 12;
 	protected static final int OVERVIEW_RULER_WIDTH = 12;
-	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results";
+	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results"; //$NON-NLS-1$
 	private static final ISchedulingRule SEQUENCE_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	@Inject
 	private ITraceInformation traceInformation;
@@ -94,9 +95,10 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
 	private IWorkspace workspace;
+	@Inject
+	private GlobalDerivedMemberAwareURIEditorOpener uriEditorOpener;
 
 	private DefaultMarkerAnnotationAccess defaultMarkerAnnotationAccess = new DefaultMarkerAnnotationAccess();
-	Object object = EditorsPlugin.getDefault().getMarkerAnnotationPreferences();
 	private SourceViewerDecorationSupport sourceViewerDecorationSupport;
 	private JavaSourceViewer javaSourceViewer;
 	private SimpleJavaSourceViewerConfiguration javaSourceViewerConfiguration;
@@ -105,6 +107,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	private RefreshJob refreshJob = new RefreshJob(SEQUENCE_RULE);
 	private MarkerAnnotationPreferences markerAnnotationPreferences = EditorsPlugin.getDefault()
 			.getMarkerAnnotationPreferences();
+	private OpenEditorAction openEditorAction;
 
 	IStorage getSelectedSource() {
 		return selectedSource;
@@ -123,6 +126,9 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	private void createActions() {
 		IActionBars actionBars = getViewSite().getActionBars();
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
+		openEditorAction = new OpenEditorAction(this, uriEditorOpener);
+		openEditorAction.setEnabled(false);
+		toolBarManager.add(openEditorAction);
 		toolBarManager.add(new DerivedSourceDropDownAction(this));
 	}
 
@@ -185,6 +191,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 
 	@Override
 	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
+		openEditorAction.setEnabled(false);
 		ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
 		if (trace != null) {
 			if (workbenchPartSelection instanceof DerivedSourceSelection) {
@@ -210,6 +217,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		}
 		IFile file = getSelectedFile();
 		if (file != null && file.exists() && file.isSynchronized(1)) {
+			openEditorAction.setEnabled(true);
 			try {
 				return Files.readStreamIntoString(file.getContents());
 			} catch (CoreException e) {
@@ -274,7 +282,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	protected String computeDescription(IWorkbenchPartSelection workbenchPartSelection) {
 		XtextEditor xtextEditor = (XtextEditor) workbenchPartSelection.getWorkbenchPart();
 		if (xtextEditor.isDirty()) {
-			return "The contents of the active editor have changed since the last save and therefore not reflected in the derived source.";
+			return Messages.DerivedSourceView_EditorDirty;
 		}
 		return super.computeDescription(workbenchPartSelection);
 	}
@@ -329,7 +337,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	protected class RefreshJob extends UIJob {
 
 		public RefreshJob(ISchedulingRule schedulingRule) {
-			super("Reload derived source");
+			super(Messages.DerivedSourceView_RefreshJobTitle);
 			setRule(schedulingRule);
 		}
 
