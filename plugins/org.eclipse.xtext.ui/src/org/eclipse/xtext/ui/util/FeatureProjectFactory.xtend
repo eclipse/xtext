@@ -26,8 +26,8 @@ class FeatureProjectFactory extends ProjectFactory {
 	static String BUILD_PROPS_FILE_NAME = "build.properties";
 	
 	List containedBundles = new ArrayList()
+	List<IProjectFactoryContributor> contributors = new ArrayList()
 	List includedFeatures = new ArrayList()
-	Boolean createCategoryFile = false
 	String mainCategoryName
 	
 	String featureLabel
@@ -52,9 +52,19 @@ class FeatureProjectFactory extends ProjectFactory {
 		return this;
 	}
 	
+		
+	/**
+	 * Adds a new included feature entry
+	 */
+	def FeatureProjectFactory addContributor(IProjectFactoryContributor Contributor) {
+		contributors.add(Contributor);
+		return this;
+	}
 	
+	/**
+	 * @param mainCategoryName If not null or empty a category.xml will be created 
+	 */
 	def FeatureProjectFactory withCategoryFile(String mainCategoryName) {
-		createCategoryFile = true
 		this.mainCategoryName = mainCategoryName
 		return this;
 	}
@@ -64,8 +74,14 @@ class FeatureProjectFactory extends ProjectFactory {
 		super.enhanceProject(project, subMonitor, shell);
 		createManifest(project, subMonitor.newChild(1));
 		createBuildProperties(project, subMonitor.newChild(1));
-		if(createCategoryFile) {
+		if(!mainCategoryName.nullOrEmpty) {
 			createCategoryFile(project, mainCategoryName, subMonitor.newChild(1))
+		}
+		for (contributor: contributors) {
+			val IProjectFactoryContributor$IFileCreator fileWriter = [
+				content, name | content.writeToFile(name, project, subMonitor.newChild(1))
+			]
+			contributor.contributeFiles(project, fileWriter)
 		}
 	}
 

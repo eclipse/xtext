@@ -12,10 +12,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuckminsterFilesCreator;
 import org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuildScriptCreator;
-import org.eclipse.xtext.xtext.ui.wizard.releng.templates.FileCreator;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -28,9 +28,9 @@ public class RelengProjectFactory extends ProjectFactory {
 	protected void enhanceProject(final IProject project, final SubMonitor subMonitor, final Shell shell)
 			throws CoreException {
 		super.enhanceProject(project, subMonitor, shell);
-		FileCreator fileCreator = new FileCreator() {
+		IProjectFactoryContributor.IFileCreator fileCreator = new IProjectFactoryContributor.IFileCreator() {
 
-			public IFile createFile(String fileName, CharSequence chars) {
+			public IFile writeToFile(CharSequence chars, String fileName) {
 				return RelengProjectFactory.this.createFile(fileName, project, chars.toString(), subMonitor);
 			}
 
@@ -45,4 +45,3 @@ public class RelengProjectFactory extends ProjectFactory {
 		setProjectName(projectInfo.getProjectName());
 	}
 }
-

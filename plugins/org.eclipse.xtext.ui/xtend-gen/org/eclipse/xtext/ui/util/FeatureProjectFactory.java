@@ -9,8 +9,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -36,14 +39,19 @@ public class FeatureProjectFactory extends ProjectFactory {
     }
   }.apply();
   
+  private List<IProjectFactoryContributor> contributors = new Function0<List<IProjectFactoryContributor>>() {
+    public List<IProjectFactoryContributor> apply() {
+      ArrayList<IProjectFactoryContributor> _arrayList = new ArrayList<IProjectFactoryContributor>();
+      return _arrayList;
+    }
+  }.apply();
+  
   private List includedFeatures = new Function0<List>() {
     public List apply() {
       ArrayList<?> _arrayList = new ArrayList<Object>();
       return _arrayList;
     }
   }.apply();
-  
-  private Boolean createCategoryFile = Boolean.valueOf(false);
   
   private String mainCategoryName;
   
@@ -69,8 +77,18 @@ public class FeatureProjectFactory extends ProjectFactory {
     return this;
   }
   
+  /**
+   * Adds a new included feature entry
+   */
+  public FeatureProjectFactory addContributor(final IProjectFactoryContributor Contributor) {
+    this.contributors.add(Contributor);
+    return this;
+  }
+  
+  /**
+   * @param mainCategoryName If not null or empty a category.xml will be created
+   */
   public FeatureProjectFactory withCategoryFile(final String mainCategoryName) {
-    this.createCategoryFile = Boolean.valueOf(true);
     this.mainCategoryName = mainCategoryName;
     return this;
   }
@@ -82,9 +100,28 @@ public class FeatureProjectFactory extends ProjectFactory {
     this.createManifest(project, _newChild);
     SubMonitor _newChild_1 = subMonitor.newChild(1);
     this.createBuildProperties(project, _newChild_1);
-    if ((this.createCategoryFile).booleanValue()) {
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.mainCategoryName);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
       SubMonitor _newChild_2 = subMonitor.newChild(1);
       this.createCategoryFile(project, this.mainCategoryName, _newChild_2);
+    }
+    for (final IProjectFactoryContributor contributor : this.contributors) {
+      {
+        final Function2<CharSequence,String,IFile> _function = new Function2<CharSequence,String,IFile>() {
+            public IFile apply(final CharSequence content, final String name) {
+              SubMonitor _newChild = subMonitor.newChild(1);
+              IFile _writeToFile = FeatureProjectFactory.this.writeToFile(content, name, project, _newChild);
+              return _writeToFile;
+            }
+          };
+        final IFileCreator fileWriter = new IFileCreator() {
+            public IFile writeToFile(CharSequence chars,String fileName) {
+              return _function.apply(chars,fileName);
+            }
+        };
+        contributor.contributeFiles(project, fileWriter);
+      }
     }
   }
   

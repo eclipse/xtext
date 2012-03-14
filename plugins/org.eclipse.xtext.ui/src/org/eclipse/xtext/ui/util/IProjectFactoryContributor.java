@@ -5,10 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wizard.releng.templates;
+package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 
-public interface FileCreator {
-	IFile createFile(String fileName, CharSequence chars);
+/**
+ * @author dhuebner - Initial contribution and API
+ * @since 2.3
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
+ */
+public interface IProjectFactoryContributor {
+	void contributeFiles(IProject project, IFileCreator fileWriter);
+
+	public interface IFileCreator {
+		IFile writeToFile(CharSequence chars, String fileName);
+	}
 }

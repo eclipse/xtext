@@ -20,6 +20,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xtext.ui.util.FeatureProjectFactory;
 import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
+import org.eclipse.xtext.xtext.ui.wizard.releng.templates.SiteSpexCreator;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -74,6 +75,7 @@ public class RelengProjectsCreator extends AbstractProjectCreator {
 		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
 		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
 		factory.addFeature(getProjectInfo().getBuildFeatureName());
+		factory.addContributor(new SiteSpexCreator(getProjectInfo()));
 	}
 
 	@Override

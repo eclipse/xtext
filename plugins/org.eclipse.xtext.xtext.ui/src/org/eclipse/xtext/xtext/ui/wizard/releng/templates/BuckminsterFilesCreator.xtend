@@ -1,8 +1,11 @@
 package org.eclipse.xtext.xtext.ui.wizard.releng.templates
 
 import org.eclipse.core.resources.IFile
-import org.eclipse.xtext.xtext.ui.wizard.releng.templates.FileCreator
+import org.eclipse.core.runtime.Path
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo
+
+import static org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuckminsterFilesCreator.*
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -17,9 +20,9 @@ class BuckminsterFilesCreator {
 	static String PLATFORM_RMAP_NAME = PROJECT+"s-platform.rmap"
 	static String COMMANDS_FILE_NAME = "commands.txt"
 	
-	FileCreator fileCreator
+	IProjectFactoryContributor$IFileCreator fileCreator
 	
-	new(FileCreator fileCreator) {
+	new(IProjectFactoryContributor$IFileCreator fileCreator) {
 		this.fileCreator = fileCreator
 	}
 	
@@ -33,7 +36,7 @@ class BuckminsterFilesCreator {
 	}
 	
 	def private IFile writeToFile(CharSequence chrSeq, String fileName) {
-		return fileCreator.createFile(fileName,chrSeq);
+		return fileCreator.writeToFile(chrSeq,fileName);
 	}
 	
 	/**
@@ -50,7 +53,7 @@ class BuckminsterFilesCreator {
 		«ENDFOR»
 		build
 		«FOR testLauncher: projectInfo.testLaunchers»
-		junit -l "«testLauncher.fullPath»"  --flatXML --output "${WORKSPACE}/test.results/«testLauncher.name».xml"
+		junit -l "«new Path(testLauncher.project.name).append(testLauncher.projectRelativePath)»"  --flatXML --output "${WORKSPACE}/test.results/«testLauncher.name».xml"
 		«ENDFOR»
 		perform "«projectInfo.siteFeatureName»#site.p2"
 		'''.writeToFile(COMMANDS_FILE_NAME)

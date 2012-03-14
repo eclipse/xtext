@@ -2,11 +2,13 @@ package org.eclipse.xtext.xtext.ui.wizard.releng.templates;
 
 import java.util.List;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo;
-import org.eclipse.xtext.xtext.ui.wizard.releng.templates.FileCreator;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -48,9 +50,9 @@ public class BuckminsterFilesCreator {
   
   private static String COMMANDS_FILE_NAME = "commands.txt";
   
-  private FileCreator fileCreator;
+  private IFileCreator fileCreator;
   
-  public BuckminsterFilesCreator(final FileCreator fileCreator) {
+  public BuckminsterFilesCreator(final IFileCreator fileCreator) {
     this.fileCreator = fileCreator;
   }
   
@@ -69,7 +71,7 @@ public class BuckminsterFilesCreator {
   }
   
   private IFile writeToFile(final CharSequence chrSeq, final String fileName) {
-    return this.fileCreator.createFile(fileName, chrSeq);
+    return this.fileCreator.writeToFile(chrSeq, fileName);
   }
   
   /**
@@ -108,11 +110,15 @@ public class BuckminsterFilesCreator {
       List<IFile> _testLaunchers = projectInfo.getTestLaunchers();
       for(final IFile testLauncher : _testLaunchers) {
         _builder.append("junit -l \"");
-        IPath _fullPath = testLauncher.getFullPath();
-        _builder.append(_fullPath, "");
+        IProject _project = testLauncher.getProject();
+        String _name = _project.getName();
+        Path _path = new Path(_name);
+        IPath _projectRelativePath = testLauncher.getProjectRelativePath();
+        IPath _append = _path.append(_projectRelativePath);
+        _builder.append(_append, "");
         _builder.append("\"  --flatXML --output \"${WORKSPACE}/test.results/");
-        String _name = testLauncher.getName();
-        _builder.append(_name, "");
+        String _name_1 = testLauncher.getName();
+        _builder.append(_name_1, "");
         _builder.append(".xml\"");
         _builder.newLineIfNotEmpty();
       }

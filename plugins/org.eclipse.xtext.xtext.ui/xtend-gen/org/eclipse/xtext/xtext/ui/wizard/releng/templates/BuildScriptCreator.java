@@ -58,7 +58,6 @@ public class BuildScriptCreator {
     _builder.newLineIfNotEmpty();
     _builder.append("-->");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("<project name=\"Buckminster Headless\" default=\"default\">");
     _builder.newLine();
     _builder.append("\t");
@@ -119,9 +118,6 @@ public class BuildScriptCreator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<arg line=\"-data ${build.root}/buckminster.workspace\" />");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<arg line=\"--displaystacktrace\" />");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<arg line=\"-configuration ${build.root}/configuration\" />");
