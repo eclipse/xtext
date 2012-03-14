@@ -574,7 +574,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected void mustBeJavaStatementExpression(XExpression expr) {
-		if (! expressionHelper.isJavaStatementExpression(expr)) {
+		if (expr != null && !expressionHelper.isJavaStatementExpression(expr)) {
 			error("This expression is not allowed in this context, since it doesn't cause any side effects.", expr, null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INNER_EXPRESSION);
 		}
