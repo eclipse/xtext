@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
@@ -42,16 +43,19 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 	private final TypeReferences typeReferences;
 	private final TypesFactory typesFactory;
 	private final IRawTypeHelper rawTypeHelper;
+	private final Primitives primitives;
 
 	public TypeArgumentContext(
 			Map<JvmTypeParameter, JvmTypeReference> boundParameters, 
 			TypeReferences typeReferences,
 			TypesFactory typesFactory,
-			IRawTypeHelper rawTypeHelper) {
+			IRawTypeHelper rawTypeHelper,
+			Primitives primitives) {
 		this.boundParameters = boundParameters;
 		this.typeReferences = typeReferences;
 		this.typesFactory = typesFactory;
 		this.rawTypeHelper = rawTypeHelper;
+		this.primitives = primitives;
 	}
 	
 	public JvmTypeReference getBoundArgument(JvmTypeParameter parameter) {
@@ -156,7 +160,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 					result.getConstraints().addAll(((JvmWildcardTypeReference) bound).getConstraints());
 				} else {
 					JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
-					copiedConstraint.setTypeReference(bound);
+					copiedConstraint.setTypeReference(primitives.asWrapperTypeIfPrimitive(bound));
 					result.getConstraints().add(copiedConstraint);
 				}
 			}
@@ -278,9 +282,11 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 									}
 								}
 							} else {
-								JvmLowerBound copiedLowerBound = typesFactory.createJvmLowerBound();
-								copiedLowerBound.setTypeReference(bound);
-								newConstraints.add(copiedLowerBound);
+								if (!(bound.getType() instanceof JvmVoid && !bound.getType().eIsProxy())) {
+									JvmLowerBound copiedLowerBound = typesFactory.createJvmLowerBound();
+									copiedLowerBound.setTypeReference(primitives.asWrapperTypeIfPrimitive(bound));
+									newConstraints.add(copiedLowerBound);
+								}
 							}
 						}
 					}
@@ -303,9 +309,11 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 										newConstraints.addAll(((JvmWildcardTypeReference) bound).getConstraints());
 									}
 								} else {
-									JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
-									copiedConstraint.setTypeReference(bound);
-									newConstraints.add(copiedConstraint);
+									if (!(bound.getType() instanceof JvmVoid && !bound.getType().eIsProxy())) {
+										JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
+										copiedConstraint.setTypeReference(bound);
+										newConstraints.add(copiedConstraint);
+									}
 								}
 							}
 						}
