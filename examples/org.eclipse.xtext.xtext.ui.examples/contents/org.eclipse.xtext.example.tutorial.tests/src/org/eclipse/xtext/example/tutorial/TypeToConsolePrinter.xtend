@@ -1,28 +1,25 @@
 package org.eclipse.xtext.example.tutorial
 
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
-import org.eclipse.xtext.common.types.JvmDeclaredType
 import com.google.inject.Inject
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import com.google.inject.Provider
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup
+import org.eclipse.emf.ecore.EcorePackage$Literals
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.emf.ecore.EcorePackage
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 
 class TypeToConsolePrinter implements IJvmDeclaredTypeAcceptor {
 
 	@Inject extension JvmModelGenerator
 	@Inject TypesBuilderExercise exercise
-	@Inject Provider<XtextResourceSet> resourceSetProvider
+	@Inject XtextResourceSet resourceSet
 	
 	Resource workingResource
 
 	def private createEObjectInNewResource() {
-		val resourceSet = resourceSetProvider.get
-		resourceSet.classpathURIContext = getClass()
 		workingResource = resourceSet.createResource(URI::createURI('dummy.xmi'))
 		val result = EcoreUtil::create(EcorePackage$Literals::EOBJECT);
 		workingResource.contents += result

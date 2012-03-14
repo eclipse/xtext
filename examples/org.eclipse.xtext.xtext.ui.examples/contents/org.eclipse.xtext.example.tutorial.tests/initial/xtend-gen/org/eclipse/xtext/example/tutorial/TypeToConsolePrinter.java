@@ -3,7 +3,6 @@ package org.eclipse.xtext.example.tutorial;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -30,16 +29,13 @@ public class TypeToConsolePrinter implements IJvmDeclaredTypeAcceptor {
   private TypesBuilderExercise exercise;
   
   @Inject
-  private Provider<XtextResourceSet> resourceSetProvider;
+  private XtextResourceSet resourceSet;
   
   private Resource workingResource;
   
   private EObject createEObjectInNewResource() {
-    final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-    Class<? extends Object> _class = this.getClass();
-    resourceSet.setClasspathURIContext(_class);
     URI _createURI = URI.createURI("dummy.xmi");
-    Resource _createResource = resourceSet.createResource(_createURI);
+    Resource _createResource = this.resourceSet.createResource(_createURI);
     this.workingResource = _createResource;
     final EObject result = EcoreUtil.create(Literals.EOBJECT);
     EList<EObject> _contents = this.workingResource.getContents();
