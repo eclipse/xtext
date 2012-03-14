@@ -22,8 +22,14 @@ import org.eclipse.core.resources.IFile
 class FeatureProjectFactory extends ProjectFactory {
 	
 	static String MANIFEST_FILENAME = "feature.xml";
+	static String CATEGORY_FILE_NAME = "category.xml";
+	static String BUILD_PROPS_FILE_NAME = "build.properties";
 	
-	List<String> containedBundles = new ArrayList()
+	List containedBundles = new ArrayList()
+	List includedFeatures = new ArrayList()
+	Boolean createCategoryFile = false
+	String mainCategoryName
+	
 	String featureLabel
 	
 	def void setFeatureLabel(String label) {
@@ -38,18 +44,36 @@ class FeatureProjectFactory extends ProjectFactory {
 		return this;
 	}
 	
+	/**
+	 * Adds a new included feature entry
+	 */
+	def FeatureProjectFactory addFeature(String featureId) {
+		includedFeatures.add(featureId);
+		return this;
+	}
+	
+	
+	def FeatureProjectFactory withCategoryFile(String mainCategoryName) {
+		createCategoryFile = true
+		this.mainCategoryName = mainCategoryName
+		return this;
+	}
+	
 	@Override
 	override protected void enhanceProject(IProject project, SubMonitor subMonitor, Shell shell) throws CoreException {
 		super.enhanceProject(project, subMonitor, shell);
 		createManifest(project, subMonitor.newChild(1));
 		createBuildProperties(project, subMonitor.newChild(1));
+		if(createCategoryFile) {
+			createCategoryFile(project, mainCategoryName, subMonitor.newChild(1))
+		}
 	}
 
 	def private void createBuildProperties(IProject project, IProgressMonitor monitor) {
 		'''
 			bin.includes =«MANIFEST_FILENAME»
 		'''
-		.writeToFile("build.properties", project, monitor);
+		.writeToFile(BUILD_PROPS_FILE_NAME, project, monitor);
 	}
 
 	def private void createManifest(IProject project, IProgressMonitor monitor) {
@@ -58,6 +82,11 @@ class FeatureProjectFactory extends ProjectFactory {
 		<feature id="«projectName»"
 			label="«if(!featureLabel.nullOrEmpty) featureLabel else projectName + " Feature"»"
 			version="1.0.0.qualifier">
+			«FOR includedFeature: includedFeatures»
+			<includes
+				id="«includedFeature»"
+				version="0.0.0"/>
+        	«ENDFOR»
 			«FOR containedBundle: containedBundles»
 			<plugin
 					id="«containedBundle»"
@@ -69,6 +98,25 @@ class FeatureProjectFactory extends ProjectFactory {
 		</feature>
 		'''
 		.writeToFile(MANIFEST_FILENAME, project, monitor)
+	}
+	
+	def private void createCategoryFile(IProject project, String categoryName, IProgressMonitor monitor) {	
+		'''
+		<?xml version="1.0" encoding="UTF-8"?>
+		<site>
+			«FOR includedFeature: includedFeatures»
+			<feature id="«includedFeature»" version="0.0.0">
+				<category name="main"/>
+			</feature>
+			<feature id="«includedFeature».source" version="0.0.0">
+				<category name="main.source"/>
+			</feature>
+			«ENDFOR»
+		   <category-def name="main" label="«categoryName»"/>
+		   <category-def name="main.source" label="Source for «categoryName»"/>
+		</site>
+		'''
+		.writeToFile(CATEGORY_FILE_NAME, project, monitor);
 	}
 	
 	def private IFile writeToFile(CharSequence chrSeq, String fileName, IProject project, IProgressMonitor progrMonitor) {

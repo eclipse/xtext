@@ -42,6 +42,9 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 	@Named("file.extensions")
 	private String fileExtension;
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@NonNull
 	public IFile getResult() {
 		return result;
@@ -51,6 +54,9 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 		this.result = result;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setProjectInfo(IProjectInfo projectInfo) {
 		this.projectInfo = projectInfo;
 	}

@@ -14,10 +14,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -27,9 +25,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.SelectionDialog;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * The main page of the Releng project wizard.
@@ -49,6 +48,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 			setPageComplete(valid);
 		}
 	};
+	private Text buckyField;
 
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
@@ -80,18 +80,37 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		initializeDialogUnits(parent);
 		pageMain.setLayout(new GridLayout());
 
-		Composite featureControl = createFeatureSelectionControl(pageMain, calculateFeatureSelection(selection));
-		featureControl.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		String initialValue = calculateFeatureSelection(selection);
+		createFeatureSelectionControl(pageMain, initialValue).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		Composite projectControl = createProjectControl(pageMain,
-				calculateInitialProjectName(nullSafeFeatureProjectName()));
-		projectControl.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		String initialProjectName = calculateInitialProjectName(nullSafeFeatureProjectName());
+		createProjectControl(pageMain, initialProjectName).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		//		setDefaults(projectsuffix);
+		createBuckyControl(pageMain).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		//setDefaults(projectsuffix);
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(pageMain);
 		Dialog.applyDialogFont(getControl());
+	}
+
+	private Composite createBuckyControl(final Composite parent) {
+		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Buckminster inastallation:");
+		buckyField = selectionControl.getSecond();
+		//select  button
+		Button button = selectionControl.getThird();
+		button.setText("Browse...");
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String folder = DialogCatalog.openOSFolderSelectionDialog(parent.getShell());
+				if (folder != null) {
+					buckyField.setText(folder);
+				}
+			}
+		});
+		return selectionControl.getFirst();
 	}
 
 	private void setProjectName(String projectName) {
@@ -99,13 +118,18 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	}
 
 	private String calculateInitialProjectName(final String selectedFeatureProject) {
+		String nameSpace = cutLastSegment(selectedFeatureProject);
+		String projectsuffix = findNextValidProjectSuffix(nameSpace, "buckminster"); //$NON-NLS-1$ //$NON-NLS-2$
+		return nameSpace + "." + projectsuffix;
+	}
+
+	private String cutLastSegment(final String selectedFeatureProject) {
 		String nameSpace = selectedFeatureProject;
 		int lastIndexOfDot = nameSpace.lastIndexOf('.');
 		if (lastIndexOfDot > 0) {
 			nameSpace = nameSpace.substring(0, lastIndexOfDot);
 		}
-		String projectsuffix = findNextValidProjectSuffix(nameSpace, "buckminster"); //$NON-NLS-1$ //$NON-NLS-2$
-		return nameSpace + "." + projectsuffix;
+		return nameSpace;
 	}
 
 	private String calculateFeatureSelection(IStructuredSelection structSelection) {
@@ -121,38 +145,50 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	}
 
 	private Composite createFeatureSelectionControl(final Composite parent, final String initialValue) {
+		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Feature to build:");
+		// text field
+		featureProjectField = selectionControl.getSecond();
+		if (initialValue != null) {
+			featureProjectField.setText(initialValue);
+		}
+		//select  button
+		selectionControl.getThird().addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				DialogCatalog.openFeatureSelectionDialog(parent.getShell(), new IAcceptor<IProject>() {
+
+					public void accept(IProject project) {
+						if (project != null) {
+							featureProjectField.setText(project.getName());
+						}
+					}
+				});
+			}
+		});
+		featureProjectField.addListener(SWT.Modify, featureChangedListener);
+		return selectionControl.getFirst();
+	}
+
+	private Triple<Composite, Text, Button> createSelectionControl(final Composite parent, final String controlName) {
 		Composite composite = new Composite(parent, SWT.NULL);
 		GridLayout gridLayout = new GridLayout(3, false);
 		composite.setLayout(gridLayout);
 		// label
 		Label projectLabel = new Label(composite, SWT.NONE);
-		projectLabel.setText("Feature to build:");
+		projectLabel.setText(controlName);
 		projectLabel.setFont(parent.getFont());
 
 		// text field
-		featureProjectField = new Text(composite, SWT.BORDER);
+		Text text = new Text(composite, SWT.BORDER);
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
-		featureProjectField.setLayoutData(grData);
-		featureProjectField.setFont(parent.getFont());
-
-		if (initialValue != null) {
-			featureProjectField.setText(initialValue);
-		}
+		text.setLayoutData(grData);
+		text.setFont(parent.getFont());
 
 		//select  button
-		Button selectFeatureButton = new Button(composite, SWT.PUSH);
-		selectFeatureButton.setFont(parent.getFont());
-		selectFeatureButton.setText("Select");
-		selectFeatureButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				openFeatureSelectionDialog(parent.getShell(), featureProjectField.getText());
-			}
-
-		});
-
-		featureProjectField.addListener(SWT.Modify, featureChangedListener);
-		return composite;
+		Button button = new Button(composite, SWT.PUSH);
+		button.setFont(parent.getFont());
+		button.setText("Select");
+		return Tuples.create(composite, text, button);
 	}
 
 	private Composite createProjectControl(final Composite parent, final String initialValue) {
@@ -176,32 +212,8 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return composite;
 	}
 
-	protected final void openFeatureSelectionDialog(final Shell shell, final String initialSelection) {
-		BusyIndicator.showWhile(shell.getDisplay(), new Runnable() {
-			@SuppressWarnings("restriction")
-			public void run() {
-				org.eclipse.pde.internal.core.ifeature.IFeatureModel[] allModels = org.eclipse.pde.internal.core.PDECore
-						.getDefault().getFeatureModelManager().getWorkspaceModels();
-
-				SelectionDialog dialog = new org.eclipse.pde.internal.ui.dialogs.FeatureSelectionDialog(shell,
-						allModels, false);
-				if (dialog.open() == Window.OK) {
-					Object[] models = dialog.getResult();
-					if (models.length > 0) {
-						Object selectedElement = models[0];
-						if (selectedElement instanceof org.eclipse.pde.internal.core.feature.WorkspaceFeatureModel) {
-							IProject project = ((org.eclipse.pde.internal.core.feature.WorkspaceFeatureModel) selectedElement)
-									.getFile().getProject();
-							featureProjectField.setText(project.getName());
-						}
-					}
-				}
-			}
-		});
-	}
-
 	/**
-	 * Sets the defaults for the languageName and extensions.
+	 * Sets the defaults.
 	 */
 	protected void setDefaults(String projectSuffix) {
 		validatePage();
@@ -230,7 +242,19 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return relengProjectField.getText();
 	}
 
-	public String getFeatureProjectName() {
+	public String getMainFeatureProjectName() {
 		return nullSafeFeatureProjectName();
+	}
+
+	public String getProjectNameSpace() {
+		return cutLastSegment(getProjectName());
+	}
+
+	public String getSiteFeatureProjectName() {
+		return getProjectNameSpace() + ".site";
+	}
+
+	public String getBuckyLocation() {
+		return buckyField.getText();
 	}
 }
