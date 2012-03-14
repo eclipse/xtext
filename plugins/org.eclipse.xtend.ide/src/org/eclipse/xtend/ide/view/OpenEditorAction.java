@@ -7,26 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.view;
 
+import org.eclipse.core.internal.utils.WrappedRuntimeException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jface.action.Action;
-import org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.util.ITextRegion;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public class OpenEditorAction extends Action {
+	private static final String COMPILATION_UNIT_EDITOR_ID = "org.eclipse.jdt.ui.CompilationUnitEditor";
 	private DerivedSourceView derivedSourceView;
-	private GlobalDerivedMemberAwareURIEditorOpener uriEditorOpener;
+	private IFile inputFile;
+	private ITextRegion selectedRegion;
 
-	public OpenEditorAction(DerivedSourceView derivedSourceView, GlobalDerivedMemberAwareURIEditorOpener uriEditorOpener) {
+	void setInputFile(IFile selectedFile) {
+		if (selectedFile == null) {
+			setEnabled(false);
+		} else {
+			setEnabled(true);
+		}
+		this.inputFile = selectedFile;
+	}
+
+	void setSelectedRegion(ITextRegion textRegion) {
+		this.selectedRegion = textRegion;
+	}
+
+	public OpenEditorAction(DerivedSourceView derivedSourceView) {
 		Assert.isNotNull(derivedSourceView);
-		Assert.isNotNull(uriEditorOpener);
 		this.derivedSourceView = derivedSourceView;
-		this.uriEditorOpener = uriEditorOpener;
 		JavaPluginImages.setLocalImageDescriptors(this, "goto_input.gif"); //$NON-NLS-1$
 		setText(Messages.OpenEditorAction_Label);
 		setToolTipText(Messages.OpenEditorAction_ToolTip);
@@ -36,8 +54,20 @@ public class OpenEditorAction extends Action {
 
 	@Override
 	public void run() {
-		IFile file = derivedSourceView.getSelectedFile();
-		ICompilationUnit compilationUnit = (ICompilationUnit) JavaCore.create(file);
-		uriEditorOpener.open(null, compilationUnit.findPrimaryType(), false);
+		if (inputFile == null) {
+			return;
+		}
+		IWorkbenchPartSite workbenchPartSite = derivedSourceView.getSite();
+		IWorkbenchPage workbenchPage = workbenchPartSite.getPage();
+		try {
+			IEditorPart editorPart = workbenchPage.openEditor(new FileEditorInput(inputFile),
+					COMPILATION_UNIT_EDITOR_ID, true, IWorkbenchPage.MATCH_ID | IWorkbenchPage.MATCH_INPUT);
+			if (selectedRegion != null) {
+				((ITextEditor) editorPart).selectAndReveal(selectedRegion.getOffset(), selectedRegion.getLength());
+			}
+		} catch (PartInitException partInitException) {
+			throw new WrappedRuntimeException(partInitException);
+		}
+
 	}
 }

@@ -58,7 +58,6 @@ import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.xtend.ide.labeling.XtendImages;
-import org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
@@ -95,8 +94,6 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
 	private IWorkspace workspace;
-	@Inject
-	private GlobalDerivedMemberAwareURIEditorOpener uriEditorOpener;
 
 	private DefaultMarkerAnnotationAccess defaultMarkerAnnotationAccess = new DefaultMarkerAnnotationAccess();
 	private SourceViewerDecorationSupport sourceViewerDecorationSupport;
@@ -126,7 +123,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	private void createActions() {
 		IActionBars actionBars = getViewSite().getActionBars();
 		IToolBarManager toolBarManager = actionBars.getToolBarManager();
-		openEditorAction = new OpenEditorAction(this, uriEditorOpener);
+		openEditorAction = new OpenEditorAction(this);
 		openEditorAction.setEnabled(false);
 		toolBarManager.add(openEditorAction);
 		toolBarManager.add(new DerivedSourceDropDownAction(this));
@@ -191,7 +188,8 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 
 	@Override
 	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
-		openEditorAction.setEnabled(false);
+		openEditorAction.setInputFile(null);
+		openEditorAction.setSelectedRegion(null);
 		ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
 		if (trace != null) {
 			if (workbenchPartSelection instanceof DerivedSourceSelection) {
@@ -217,7 +215,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		}
 		IFile file = getSelectedFile();
 		if (file != null && file.exists() && file.isSynchronized(1)) {
-			openEditorAction.setEnabled(true);
+			openEditorAction.setInputFile(file);
 			try {
 				return Files.readStreamIntoString(file.getContents());
 			} catch (CoreException e) {
@@ -314,6 +312,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 				if (firstLocationInResource != null) {
 					ITextRegion textRegion = firstLocationInResource.getTextRegion();
 					if (textRegion != null) {
+						openEditorAction.setSelectedRegion(textRegion);
 						getSourceViewer().revealRange(textRegion.getOffset(), textRegion.getLength());
 					}
 				}
