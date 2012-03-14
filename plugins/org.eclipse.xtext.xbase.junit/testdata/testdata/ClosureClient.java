@@ -79,6 +79,14 @@ public class ClosureClient {
 		runnable.run();
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	public String useProcedureForCharSequence(Procedures.Procedure1<CharSequence> proc) {
+		proc.apply(null);
+		return "done";
+	}
+	
 	public Runnable asRunnable(final Procedures.Procedure0 procedure) {
 		return new Runnable() {
 			public void run() {
