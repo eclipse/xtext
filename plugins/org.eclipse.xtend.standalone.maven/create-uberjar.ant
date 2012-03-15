@@ -13,6 +13,7 @@
 
 	<property name="binJarTemp" value="binJarTemp" />
 	<property name="sourceJarTemp" value="sourceJarTemp" />
+	<property name="deploy.dir" value="${user.home}/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.standalone/${maven.version}/" />
 
 	<target name="run" depends="clean,createSourcesUberjar">
 
@@ -23,15 +24,15 @@
 		</loadfile>
 		<echo file="${output.folder}/org.eclipse.xtend.standalone-${maven.version}.pom">${modifiedPomXml}</echo>
 		<echo>Pom stored: ${output.folder}/org.eclipse.xtend.standalone-${maven.version}.pom</echo>
-		<antcall target="deploy.artifacts" inheritall="true" />
+		<echo>Run deploy.artifacts target to deploy!</echo>
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: deploy.artifacts                      
          - - - - - - - - - - - - - - - - - -->
-	<target name="deploy.artifacts" if="allow.deploy">
+	<target name="deploy.artifacts">
 		<!--<mkdir dir="/Users/huebner/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.standalone/${maven.version}/" />-->
-		<copy verbose="true" todir="/Users/dhuebner/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.standalone/${maven.version}/">
+		<copy verbose="true" overwrite="true" todir="${deploy.dir}">
 			<fileset dir="${output.folder}">
 				<include name="org.eclipse.xtend.standalone-${maven.version}.jar" />
 				<include name="org.eclipse.xtend.standalone-${maven.version}-sources.jar" />
@@ -95,6 +96,8 @@
 			<param name="contentDir" value="${binJarTemp}" />
 		</antcall>
 
+		<!-- EMF logs error if this property is not found -->
+		<echo file="${binJarTemp}/plugin.properties">_UI_DiagnosticRoot_diagnostic=_UI_DiagnosticRoot_diagnostic</echo>
 		<!-- Jar uber jar -->
 		<jar destfile="${output.folder}/org.eclipse.xtend.standalone-${maven.version}.jar" basedir="${binJarTemp}" />
 	</target>
