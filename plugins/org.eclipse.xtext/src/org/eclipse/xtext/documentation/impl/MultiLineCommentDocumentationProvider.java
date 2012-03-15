@@ -82,14 +82,14 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 		List<INode> result = Collections.emptyList();
 		if (node != null) {
 			// get the last multi line comment before a non hidden leaf node
-			for (INode abstractNode : node.getLeafNodes()) {
-				if (abstractNode instanceof ILeafNode && !((ILeafNode) abstractNode).isHidden())
+			for (ILeafNode leafNode : node.getLeafNodes()) {
+				if (!leafNode.isHidden())
 					break;
-				if (abstractNode instanceof ILeafNode && abstractNode.getGrammarElement() instanceof TerminalRule
-						&& ruleName.equalsIgnoreCase(((TerminalRule) abstractNode.getGrammarElement()).getName())) {
-					String comment = ((ILeafNode) abstractNode).getText();
+				if (leafNode.getGrammarElement() instanceof TerminalRule
+						&& ruleName.equalsIgnoreCase(((TerminalRule) leafNode.getGrammarElement()).getName())) {
+					String comment = leafNode.getText();
 					if (comment.matches("(?s)" + startTag + ".*")) {
-						result = Collections.singletonList(abstractNode);
+						result = Collections.<INode>singletonList(leafNode);
 					}
 				}
 			}
