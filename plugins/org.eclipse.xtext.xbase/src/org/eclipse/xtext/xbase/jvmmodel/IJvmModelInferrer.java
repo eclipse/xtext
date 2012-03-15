@@ -46,9 +46,9 @@ public interface IJvmModelInferrer {
 
 	/**
 	 * <p>
-	 * This method is called at two different times in a resource's life-cycle, reflected by whether {prelinkingPhase}
+	 * This method is called at two different times in a resource's life-cycle, reflected by whether {preIndexingPhase}
 	 * is set to <code>true</code> or <code>false</code>. When set to <code>true</code> everything is still in a
-	 * pre-linking phase, that means linking hasn't been done yet. In this phase you just need to create the Jvm-elements
+	 * pre-indexing phase, that means linking hasn't been done yet. In this phase you just need to create the Jvm-elements
 	 * which should be indexed (i.e. found globally). For regular Xbase expressions only the JvmTypes with the correct
 	 * qualified name are needed at this point.
 	 * </p>
@@ -56,7 +56,7 @@ public interface IJvmModelInferrer {
 	 * You must only infer Jvm elements which directly result from elements contained in the current resource!
 	 * </p>
 	 * <p>
-	 * When this method is called with prelinkingPhase set to <code>false</code>, you need to do the full inference
+	 * When this method is called with preIndexingPhase set to <code>false</code>, you need to do the full inference
 	 * including setting all links. But still you have to it in a particular order. First you need to create the
 	 * complete tree structure and make sure you have passed the created JvmTypes to the acceptor. Only pass top level
 	 * {@link org.eclipse.xtext.common.types.JvmType}s to the acceptor. Only if the tree structure is created and its
