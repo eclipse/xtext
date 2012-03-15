@@ -943,7 +943,7 @@
       <view
             category="org.eclipse.xtend.ide"
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.view.DerivedSourceView"
-            icon="icons/sample.gif"
+            icon="icons/generated_code_view.png"
             id="org.eclipse.xtend.ide.view.DerivedSourceView"
             name="Generated Code">
       </view>
