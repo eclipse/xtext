@@ -1,0 +1,56 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.example.tutorial.Tutorial with org.eclipse.xtext.xbase.Xbase
+
+generate tutorial "http://www.eclipse.org/xtext/example/tutorial/Tutorial"
+
+DomainModelTutorial:
+	(elements += AbstractElement)*
+;
+
+PackageDeclaration:
+	'package' name = QualifiedName '{'
+		( elements += AbstractElement )*
+	'}'
+;
+
+AbstractElement:
+	PackageDeclaration | Entity | Import
+;
+
+Import:
+	'import' importedNamespace = QualifiedNameWithWildcard
+;
+
+QualifiedNameWithWildcard:
+	QualifiedName '.*'?
+;
+
+Entity:
+	'entity' name = ValidID
+	('extends' superType=JvmTypeReference)? 
+	'{'
+		// call a new rule Feature instead of Property.
+		(features += Feature)*
+	'}'
+;
+
+// A Features is a Property or an Operation
+Feature:
+	Property | Operation
+;
+
+Property:
+	name=ValidID ':' type=JvmTypeReference
+; 
+
+// Operations have FullJvmParameters and use Xbase's XBlockExpression as their body
+Operation:
+	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
+		body=XBlockExpression
+;
