@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class JvmModelInferrerTest {
-	public static class MyOldIngferrer extends AbstractModelInferrer {
+	public static class MyOldInferrer extends AbstractModelInferrer {
 		public final List<EObject> other = newArrayList();
 		public void infer (EObject o, Object x, boolean s) {
 			if (o instanceof EClass)
@@ -35,7 +35,7 @@ public class JvmModelInferrerTest {
 	@Test
 	public void testCompatibility() throws Exception {
 		EClass clazz = EcorePackage.Literals.ECLASS;
-		MyOldIngferrer inferrer = new MyOldIngferrer();
+		MyOldInferrer inferrer = new MyOldInferrer();
 		inferrer.infer(clazz, new IJvmDeclaredTypeAcceptor() {
 			public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
 				return null;
