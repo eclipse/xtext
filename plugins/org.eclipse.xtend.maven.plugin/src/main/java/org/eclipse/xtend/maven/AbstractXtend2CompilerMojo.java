@@ -23,6 +23,8 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -54,18 +56,18 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		configureLog4j();
-		Xtend2BatchCompiler xtend2BatchCompiler = createXtend2BatchCompiler();
-		internalExecute(xtend2BatchCompiler);
+		XtendBatchCompiler xtendBatchCompiler = createXtendBatchCompiler();
+		internalExecute(xtendBatchCompiler);
 	}
 
-	protected abstract void internalExecute(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException;
+	protected abstract void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException;
 
-	protected Xtend2BatchCompiler createXtend2BatchCompiler() {
-		Injector injector = new Xtend2StandaloneSetup().createInjectorAndDoEMFRegistration();
-		return injector.getInstance(Xtend2BatchCompiler.class);
+	protected XtendBatchCompiler createXtendBatchCompiler() {
+		Injector injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
+		return injector.getInstance(XtendBatchCompiler.class);
 	}
 
-	protected void compile(Xtend2BatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
+	protected void compile(XtendBatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
 			String outputPath) throws MojoExecutionException {
 		Iterable<String> filtered = filter(sourceDirectories, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {

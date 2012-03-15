@@ -11,12 +11,13 @@ import java.util.Set;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
- * Goal which compiles Xtend2 sources.
+ * Goal which compiles Xtend sources.
  * 
  * @author Michael Clay - Initial contribution and API
  * @goal compile
@@ -40,12 +41,12 @@ public class XtendCompile extends AbstractXtend2CompilerMojo {
 	private String tempDirectory;
 
 	@Override
-	protected void internalExecute(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
+	protected void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		compileSources(xtend2BatchCompiler);
 	}
 
 	@SuppressWarnings("unchecked")
-	private void compileSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
+	private void compileSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		String classPath = concat(File.pathSeparator, getClassPath());
 		project.addCompileSourceRoot(outputDirectory);

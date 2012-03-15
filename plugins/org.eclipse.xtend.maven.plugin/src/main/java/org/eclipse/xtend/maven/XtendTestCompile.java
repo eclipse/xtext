@@ -11,6 +11,7 @@ import java.util.Set;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -40,12 +41,12 @@ public class XtendTestCompile extends AbstractXtend2CompilerMojo {
 	private String testTempDirectory;
 
 	@Override
-	protected void internalExecute(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
+	protected void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		compileTestSources(xtend2BatchCompiler);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void compileTestSources(Xtend2BatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
+	protected void compileTestSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> testCompileSourceRoots = Lists.newArrayList(project.getTestCompileSourceRoots());
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
 		project.addTestCompileSourceRoot(testOutputDirectory);

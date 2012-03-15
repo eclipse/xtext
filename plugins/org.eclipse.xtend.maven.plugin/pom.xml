@@ -4,7 +4,7 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>xtend-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>2.2.1</version>
+	<version>2.3.0</version>
 	<name>Xtend Maven Plugin</name>
 	<url>http://xtend-lang.org</url>
 	<dependencies>
@@ -59,8 +59,7 @@
 			<version>2.2.3</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched 
-			transitive dependencies -->
+		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched transitive dependencies -->
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr-runtime</artifactId>
@@ -95,17 +94,13 @@
 						<phase>pre-integration-test</phase>
 						<configuration>
 							<target unless="maven.test.skip">
-								<property name="src.jar"
-									value="${project.build.directory}/${project.build.finalName}.jar" />
+								<property name="src.jar" value="${project.build.directory}/${project.build.finalName}.jar" />
 								<property name="it.jar.name" value="${project.build.finalName}-it" />
-								<property name="it.jar.directory"
-									value="${project.build.directory}/${it.jar.name}" />
+								<property name="it.jar.directory" value="${project.build.directory}/${it.jar.name}" />
 								<unzip src="${src.jar}" dest="${it.jar.directory}" />
-								<replaceregexp file="${it.jar.directory}/META-INF/maven/plugin.xml"
-									match="&lt;version&gt;(.*)&lt;/version&gt;" replace="&lt;version&gt;IT-SNAPSHOT&lt;/version&gt;"
-									byline="false" />
-								<jar destfile="${project.build.directory}/${it.jar.name}.jar"
-									basedir="${it.jar.directory}" />
+								<replaceregexp file="${it.jar.directory}/META-INF/maven/plugin.xml" match="&lt;version&gt;(.*)&lt;/version&gt;"
+									replace="&lt;version&gt;IT-SNAPSHOT&lt;/version&gt;" byline="false" />
+								<jar destfile="${project.build.directory}/${it.jar.name}.jar" basedir="${it.jar.directory}" />
 							</target>
 						</configuration>
 						<goals>
@@ -151,16 +146,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- <distributionManagement>
-		<repository>
-			<id>xtend-releases</id>
-			<name>Eclipse xtend Releases</name>
-			<url>http://maven.eclipse.org/nexus/content/repositories/testing/</url>
-		</repository>
-		<snapshotRepository>
-			<id>xtend-snapshot</id>
-			<name>Eclipse xtend Snapshots</name>
-			<url>http://maven.eclipse.org/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement> -->
+	<!-- <distributionManagement> <repository> <id>xtend-releases</id> <name>Eclipse xtend Releases</name> <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url> 
+		</repository> <snapshotRepository> <id>xtend-snapshot</id> <name>Eclipse xtend Snapshots</name> <url>http://maven.eclipse.org/nexus/content/repositories/snapshots/</url> 
+		</snapshotRepository> </distributionManagement> -->
 </project>

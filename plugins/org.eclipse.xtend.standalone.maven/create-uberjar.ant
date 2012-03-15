@@ -71,13 +71,12 @@
 
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="binXtextJars">
-			<include name="org.eclipse.xtext_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.common.types_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.util_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.xbase_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.xbase.lib_2.2.1*.jar" />
-			<include name="org.eclipse.xtend.core_2.2.1*.jar" />
-			<include name="org.eclipse.xtend2.lib_2.2.1*.jar" />
+			<include name="org.eclipse.xtext_2.3*.jar" />
+			<include name="org.eclipse.xtext.common.types_2.3*.jar" />
+			<include name="org.eclipse.xtext.util_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib_2.3*.jar" />
+			<include name="org.eclipse.xtend.core_2.3*.jar" />
 		</fileset>
 
 
@@ -118,13 +117,12 @@
 
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="sourceXtextJars">
-			<include name="org.eclipse.xtext.source_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.common.types.source_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.util.source_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.xbase.source_2.2.1*.jar" />
-			<include name="org.eclipse.xtext.xbase.lib.source_2.2.1*.jar" />
-			<include name="org.eclipse.xtend.core.source_2.2.1*.jar" />
-			<include name="org.eclipse.xtend2.lib.source_2.2.1*.jar" />
+			<include name="org.eclipse.xtext.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.common.types.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.util.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib.source_2.3*.jar" />
+			<include name="org.eclipse.xtend.core.source_2.3*.jar" />
 		</fileset>
 
 		<unzip dest="${sourceJarTemp}" overwrite="true">
