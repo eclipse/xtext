@@ -22,17 +22,21 @@ public class AnnotationSignatureRelevanceUtil {
 	private Set<String> relevantAnnotations;
 
 	protected Set<String> getRelevantAnnotations() {
-		if(relevantAnnotations == null) 
+		if (relevantAnnotations == null)
 			relevantAnnotations = createRelevantAnnotations();
 		return relevantAnnotations;
 	}
 
 	protected HashSet<String> createRelevantAnnotations() {
-		return newHashSet("java.lang.Deprecated", "org.eclipse.jdt.annotation.Nullable", 
-			"org.eclipse.jdt.annotation.NonNull", "org.eclipse.jdt.annotation.NonNullByDefault");
+		return newHashSet("java.lang.Deprecated", "org.eclipse.jdt.annotation.Nullable",
+				"org.eclipse.jdt.annotation.NonNull", "org.eclipse.jdt.annotation.NonNullByDefault");
 	}
-	
+
 	protected boolean isRelevant(JvmAnnotationReference annotationReference) {
+		if (annotationReference == null 
+				|| annotationReference.getAnnotation() == null
+				|| annotationReference.getAnnotation().getIdentifier() == null)
+			return false;
 		return getRelevantAnnotations().contains(annotationReference.getAnnotation().getIdentifier());
 	}
 
