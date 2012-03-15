@@ -11,9 +11,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
 
 /**
@@ -22,7 +19,6 @@ import com.google.common.base.Preconditions;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.3
  */
-@NonNullByDefault
 public class ReflectExtensions {
 
 	/**
@@ -37,7 +33,7 @@ public class ReflectExtensions {
 	 * @throws IllegalAccessException see {@link Field#set(Object, Object)}
 	 * @throws IllegalArgumentException see {@link Field#set(Object, Object)}
 	 */
-	public void set(Object receiver, String fieldName, @Nullable Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void set(Object receiver, String fieldName, /* @Nullable */ Object value) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		Preconditions.checkNotNull(receiver,"receiver");
 		Preconditions.checkNotNull(fieldName,"fieldName");
 		Class<? extends Object> clazz = receiver.getClass();
@@ -60,7 +56,7 @@ public class ReflectExtensions {
 	 * @throws IllegalArgumentException see {@link Field#get(Object)}
 	 */
 	@SuppressWarnings("unchecked")
-	@Nullable
+	/*@Nullable*/
 	public <T> T get(Object receiver, String fieldName) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		Preconditions.checkNotNull(receiver,"receiver");
 		Preconditions.checkNotNull(fieldName,"fieldName");
@@ -87,8 +83,8 @@ public class ReflectExtensions {
 	 * @throws IllegalArgumentException see {@link Method#invoke(Object, Object...)}
 	 * @throws InvocationTargetException see {@link Method#invoke(Object, Object...)}
 	 */
-	@Nullable
-	public Object invoke(Object receiver, String methodName, @Nullable Object...args) throws SecurityException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+//	@Nullable
+	public Object invoke(Object receiver, String methodName, /*@Nullable*/ Object...args) throws SecurityException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Preconditions.checkNotNull(receiver,"receiver");
 		Preconditions.checkNotNull(methodName,"methodName");
 		final Object[] arguments = args==null ? new Object[]{null}:args;

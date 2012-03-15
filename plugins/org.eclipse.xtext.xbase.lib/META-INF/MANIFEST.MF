@@ -9,6 +9,5 @@ Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.xbase.lib.internal;x-internal:=true,
  org.eclipse.xtext.xbase.lib.util
-Require-Bundle: com.google.guava;visibility:=reexport,
- org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional
+Require-Bundle: com.google.guava;visibility:=reexport
 Bundle-Vendor: %providerName
