@@ -22,9 +22,9 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       %license
    </license>
 
-   <requires>
-      <import feature="org.eclipse.xtext.ui" version="2.3.0"/>
-   </requires>
+   <includes
+         id="org.eclipse.xtext.ui"
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.xtend.core"
