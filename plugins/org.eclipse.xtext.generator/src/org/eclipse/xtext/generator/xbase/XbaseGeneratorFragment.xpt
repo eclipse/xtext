@@ -74,7 +74,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 //   				for (greeting : element.greetings) {
 //   					members += greeting.toMethod("hello" + greeting.name, greeting.newTypeRef(typeof(String))) [
 //   						body = [
-//   							append("return \"Hello ").append(greeting.name).append("\";")
+//   							append('''return "Hello «S()»greeting.name«E()»";''')
 //   						]
 //   					]
 //   				}
