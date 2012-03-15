@@ -14,7 +14,7 @@
 
    <!-- ========= org.eclipse.xtext.example.xtend.tutorial ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
+		<wizard	id="org.eclipse.xtend.examples.NewXtendTutorial" 
 			name="%XtendTutorial_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"
@@ -24,7 +24,7 @@
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
+		<wizard	id="org.eclipse.xtend.examples.NewXtendTutorial" 
 			name="%XtendTutorial_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.xtend.wizards/org.eclipse.xtend.project.Examples"
@@ -34,8 +34,8 @@
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.eclipse.xtext.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.xtend.tutorial" contentURI="contents/xtend.tutorial.zip" description="A hands-on tutorial on Xtend."/>
+	  <example wizardID="org.eclipse.xtend.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="xtend-tutorial" contentURI="contents/xtend.tutorial.zip" description="A hands-on tutorial for Xtend."/>
 	  </example>
    </extension>
 </plugin>
