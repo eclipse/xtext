@@ -22,8 +22,7 @@ public class Case_3 {
     }
   }
   
-  public Object testReturnExpression_07() {
-    Object _xifexpression = null;
+  public void testReturnExpression_07() {
     boolean _notEquals = (!Objects.equal(Case_3.class, null));
     if (_notEquals) {
       final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
@@ -37,7 +36,6 @@ public class Case_3 {
         closure.apply(x);
       }
     }
-    return _xifexpression;
   }
   
   public int testOverriddenLocalVariable() {
