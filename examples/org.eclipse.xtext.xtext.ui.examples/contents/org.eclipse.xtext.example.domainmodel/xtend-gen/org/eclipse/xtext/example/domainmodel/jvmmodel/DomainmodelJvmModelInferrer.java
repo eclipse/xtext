@@ -143,10 +143,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (entity instanceof Entity) {
       _infer((Entity)entity, acceptor, prelinkingPhase);
-      return;
     } else if (entity != null) {
       _infer(entity, acceptor, prelinkingPhase);
-      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(entity, acceptor, prelinkingPhase).toString());
