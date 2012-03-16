@@ -26,10 +26,13 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 		acceptor.accept(source.toClass(source.fullyQualifiedName)).initializeLater [
 			documentation = source.documentation
 			for(feature: source.features)
+				// Features now can be Properties or Operations. 
+				// We use dynamic dispatch to make the distinction at runtime.
 				createFeature(feature)
 		]
 	}
 	
+	// Dispatch case method for a Property.
 	def dispatch createFeature(JvmDeclaredType it, Property source) {
 		val name = source.name
 		val typeRef = source.type
@@ -40,9 +43,15 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 		members += source.toSetter(name, typeRef)
 	}
 	
+	// Dispatch case method for an Operation.
 	def dispatch createFeature(JvmDeclaredType it, Operation source) {
 		members += source.toMethod(source.name, source.type) [
 			documentation = source.documentation
+			// We could have used a for-loop here. Here are some more features of Xtend
+			// - the operator_add (+=) can also take an Iterable as second parameter. In this case
+			//   it maps to Java's addAll().
+			// - the higher-order function map, applies a closure to all elements of an Iterable 
+			//   and returns the results as an Iterable.
 			parameters += source.params.map[toParameter(name, parameterType)]
 			body = source.body
 		]

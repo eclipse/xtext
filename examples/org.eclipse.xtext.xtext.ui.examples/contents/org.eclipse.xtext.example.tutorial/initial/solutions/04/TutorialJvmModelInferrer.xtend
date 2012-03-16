@@ -23,15 +23,24 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension IQualifiedNameProvider 
 	
 	def dispatch infer(Entity source, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
-		acceptor.accept(source.toClass(source.fullyQualifiedName)).initializeLater [
+		// The qualified name provider by default concatenates the names of all eContainers using 
+		// '.' as separator.
+		acceptor.accept(source.toClass(source.fullyQualifiedName))
+			.initializeLater [
 			documentation = source.documentation
+			// Iterate over all features of 'it'.
 			for(feature: source.features)
 				createProperty(feature, feature.name, feature.type)
 		]
 	}
 	
 	def createProperty(JvmDeclaredType it, EObject source, String name, JvmTypeReference typeRef) {
+		// The last parameter of the method 
+		//   JvmTypesBuilder.toField(JvmDeclaredType, String, JvmTypeRef, Procedure1<JvmField>) 
+		// is a closure for initializing the newly created element. 
 		members += source.toField(name, typeRef) [
+			// JvmTypesBuilder.getDocumentation(EObject) retrieves the documentation specified as 
+			// a comment preceding the element, similar to JavaDoc. 
 			documentation = source.documentation
 		]
 		members += source.toGetter(name, typeRef)
