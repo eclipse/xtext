@@ -44,6 +44,7 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 		members += source.toMethod(source.name, source.type) [
 			documentation = source.documentation
 			parameters += source.params.map[toParameter(name, parameterType)]
+			body = source.body
 		]
 	}
 	
