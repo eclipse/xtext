@@ -13,6 +13,12 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(TutorialInjectorProvider.class)
 public class TypesBuilderExercise {
+  /**
+   * The test helper allows to compile DSL code on the fly to Java.
+   * We want to use its utility function
+   * {@link CompilationTestHelper#assertCompilesTo(CharSequence, CharSequence) assertCompilesTo(..)}
+   * to test drive the {@link TutorialJvmModelInferrer model inferrer}.
+   */
   @Inject
   private CompilationTestHelper _compilationTestHelper;
   

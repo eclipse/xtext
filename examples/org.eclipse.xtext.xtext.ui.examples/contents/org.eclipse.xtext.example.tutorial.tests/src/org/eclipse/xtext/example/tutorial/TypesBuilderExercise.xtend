@@ -9,9 +9,14 @@ import org.junit.Test
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(TutorialInjectorProvider))
-
 class TypesBuilderExercise {
 	
+	/**
+	 * The test helper allows to compile DSL code on the fly to Java.
+	 * We want to use its utility function 
+	 * {@link CompilationTestHelper#assertCompilesTo(CharSequence, CharSequence) assertCompilesTo(..)}
+	 * to test drive the {@link TutorialJvmModelInferrer model inferrer}.
+	 */
 	@Inject extension CompilationTestHelper
 	
 	@Test
