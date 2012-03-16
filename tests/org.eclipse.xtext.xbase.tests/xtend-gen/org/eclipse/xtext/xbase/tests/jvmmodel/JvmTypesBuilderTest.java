@@ -453,7 +453,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     this.<JvmEnumerationType>genericTestInitializeSafely(_function);
   }
   
-  protected <T extends Object>void genericTestInitializeSafely(final Function3<? super EObject,? super String,? super Procedure1<? super T>,? extends EObject> create) {
+  protected <T extends Object> void genericTestInitializeSafely(final Function3<? super EObject,? super String,? super Procedure1<? super T>,? extends EObject> create) {
     final XNullLiteral expr = XbaseFactory.eINSTANCE.createXNullLiteral();
     Wrapper<Boolean> _wrapper = new Wrapper<Boolean>(Boolean.valueOf(false));
     final Wrapper<Boolean> initialized = _wrapper;
