@@ -5,7 +5,9 @@ Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.examples;singleton:=true
 Bundle-Version: 2.3.0.qualifier
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.emf.common.ui
+ org.eclipse.emf.common.ui,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: %providerName
