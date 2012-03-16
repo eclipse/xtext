@@ -40,7 +40,7 @@ class BuildScriptCreator {
 			<property name="target.platform" value="target.platform" />
 			
 			<target name="default" depends="cleanup" description="description">
-				<echo level="warning" message="Populating an empty target platform may took over 10 minutes."/>
+				<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes."/>
 				<exec executable="${buckminster.home}/buckminster">
 					<arg value="-Dprojects.location=${projects.location}" />
 					<arg value="-Dbuckminster.output.root=${build.root}/buckminster.output" />

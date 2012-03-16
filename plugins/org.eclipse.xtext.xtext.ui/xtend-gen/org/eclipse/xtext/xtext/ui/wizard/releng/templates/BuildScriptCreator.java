@@ -99,7 +99,7 @@ public class BuildScriptCreator {
     _builder.append("<target name=\"default\" depends=\"cleanup\" description=\"description\">");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<echo level=\"warning\" message=\"Populating an empty target platform may took over 10 minutes.\"/>");
+    _builder.append("<echo message=\"IMPORTANT: Populating an empty target platform may took over 10 minutes.\"/>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<exec executable=\"${buckminster.home}/buckminster\">");

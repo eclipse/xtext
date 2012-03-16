@@ -116,7 +116,7 @@ public class BuckminsterFilesCreator {
         IPath _projectRelativePath = testLauncher.getProjectRelativePath();
         IPath _append = _path.append(_projectRelativePath);
         _builder.append(_append, "");
-        _builder.append("\"  --flatXML --output \"${WORKSPACE}/test.results/");
+        _builder.append("\"  --flatXML --output \"${buckmister.output.root}/test.results/");
         String _name_1 = testLauncher.getName();
         _builder.append(_name_1, "");
         _builder.append(".xml\"");

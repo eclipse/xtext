@@ -53,7 +53,7 @@ class BuckminsterFilesCreator {
 		«ENDFOR»
 		build
 		«FOR testLauncher: projectInfo.testLaunchers»
-		junit -l "«new Path(testLauncher.project.name).append(testLauncher.projectRelativePath)»"  --flatXML --output "${WORKSPACE}/test.results/«testLauncher.name».xml"
+		junit -l "«new Path(testLauncher.project.name).append(testLauncher.projectRelativePath)»"  --flatXML --output "${buckmister.output.root}/test.results/«testLauncher.name».xml"
 		«ENDFOR»
 		perform "«projectInfo.siteFeatureName»#site.p2"
 		'''.writeToFile(COMMANDS_FILE_NAME)

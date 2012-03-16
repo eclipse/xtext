@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -23,8 +24,8 @@ public class RelengProjectInfo extends DefaultProjectInfo {
 	private String siteFeatureName;
 	private String projectNameSpace;
 	private String buckyLocation;
-	private List<String> preCompileLaunchers = new ArrayList<String>();
-	private List<IFile> testLaunchers = new ArrayList<IFile>();
+	private List<String> preCompileLaunchers = Lists.newArrayList();
+	private List<IFile> testLaunchers = Lists.newArrayList();
 	private String buildFeatureLabel;
 
 	public List<IFile> getTestLaunchers() {
@@ -32,6 +33,9 @@ public class RelengProjectInfo extends DefaultProjectInfo {
 	}
 
 	public void addTestLauncher(IFile iFile) {
+		if(iFile == null) {
+			throw new NullPointerException();
+		}
 		testLaunchers.add(iFile);
 	}
 
@@ -69,6 +73,9 @@ public class RelengProjectInfo extends DefaultProjectInfo {
 	}
 
 	public void addPreCompileLauncher(String wsRelativePath) {
+		if(wsRelativePath == null) {
+			throw new NullPointerException();
+		}
 		preCompileLaunchers.add(wsRelativePath);
 	}
 

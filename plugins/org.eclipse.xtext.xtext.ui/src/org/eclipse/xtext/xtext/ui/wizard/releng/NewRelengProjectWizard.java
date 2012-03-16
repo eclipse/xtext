@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
@@ -42,7 +43,10 @@ public class NewRelengProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setBuildFeatureName(mainPage.getMainFeatureProjectName());
 		projectInfo.setSiteFeatureName(mainPage.getSiteFeatureProjectName());
 		projectInfo.setBuckyLocation(mainPage.getBuckyLocation());
-		projectInfo.addTestLauncher(mainPage.getTestLaunchFile());
+		IFile launchFile = mainPage.getTestLaunchFile();
+		if (launchFile != null) {
+			projectInfo.addTestLauncher(launchFile);
+		}
 		return projectInfo;
 	}
 
