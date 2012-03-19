@@ -21,47 +21,20 @@ import com.google.common.collect.Lists;
 public class RelengProjectInfo extends DefaultProjectInfo {
 
 	private String buildFeatureName;
-	private String siteFeatureName;
 	private String projectNameSpace;
 	private String buckyLocation;
-	private List<String> preCompileLaunchers = Lists.newArrayList();
+	private String siteFeatureProjectName;
+
 	private List<IFile> testLaunchers = Lists.newArrayList();
-	private String buildFeatureLabel;
-
-	public List<IFile> getTestLaunchers() {
-		return testLaunchers;
-	}
-
-	public void addTestLauncher(IFile iFile) {
-		if(iFile == null) {
-			throw new NullPointerException();
-		}
-		testLaunchers.add(iFile);
-	}
-
-	public void setBuildFeatureName(String featureProjectName) {
-		this.buildFeatureName = featureProjectName;
-	}
+	private List<String> preCompileLaunchers = Lists.newArrayList();
 
 	public String getBuildFeatureName() {
 		return buildFeatureName;
 	}
 
-	public String getSiteFeatureName() {
-		return siteFeatureName;
-	}
-
-	public void setSiteFeatureName(String siteFeatureName) {
-		this.siteFeatureName = siteFeatureName;
-	}
-
-	public String getProjectNameSpace() {
-		return projectNameSpace;
-	}
-
-	public void setNamespace(String projectNameSpace) {
-		this.projectNameSpace = projectNameSpace;
-
+	public void setBuildFeatureName(String featureProjectName) {
+		this.buildFeatureName = featureProjectName;
+		this.projectNameSpace = calculateProjectNamespace(featureProjectName);
 	}
 
 	public String getBuckyLocation() {
@@ -72,27 +45,58 @@ public class RelengProjectInfo extends DefaultProjectInfo {
 		this.buckyLocation = buckyLocation;
 	}
 
-	public void addPreCompileLauncher(String wsRelativePath) {
-		if(wsRelativePath == null) {
+	public String getNameSpaceAbbreviation() {
+		String[] packageNames = getProjectNameSpace().split("\\."); //$NON-NLS-1$
+		return Strings.toFirstUpper(packageNames[packageNames.length - 1]);
+	}
+
+	public List<IFile> getTestLaunchers() {
+		return testLaunchers;
+	}
+
+	public void addTestLauncher(IFile iFile) {
+		if (iFile == null) {
 			throw new NullPointerException();
 		}
-		preCompileLaunchers.add(wsRelativePath);
+		testLaunchers.add(iFile);
 	}
 
 	public List<String> getPreCompileLaunchers() {
 		return preCompileLaunchers;
 	}
 
-	public void setBuildFeatureLabel(String buildFeatureLabel) {
-		this.buildFeatureLabel = buildFeatureLabel;
+	public void addPreCompileLauncher(String wsRelativePath) {
+		if (wsRelativePath == null) {
+			throw new NullPointerException();
+		}
+		preCompileLaunchers.add(wsRelativePath);
 	}
 
-	public String getBuildFeatureLabel() {
-		return buildFeatureLabel;
+	public String getProjectNameSpace() {
+		return projectNameSpace;
 	}
 
-	public String getNameSpaceAbbreviation() {
-		String[] packageNames = getProjectNameSpace().split("\\."); //$NON-NLS-1$
-		return Strings.toFirstUpper(packageNames[packageNames.length - 1]);
+	public String getSiteFeatureProjectName() {
+		return siteFeatureProjectName;
 	}
+
+	public void setSiteFeatureProjectName(String siteFeatureProjectName) {
+		this.siteFeatureProjectName = siteFeatureProjectName;
+	}
+
+	private String calculateProjectNamespace(String featureProjectName) {
+		return cutLastSegment(featureProjectName);
+	}
+
+	private String cutLastSegment(final String fqn) {
+		String nameSpace = fqn;
+		if (nameSpace != null) {
+			int lastIndexOfDot = nameSpace.lastIndexOf('.');
+			if (lastIndexOfDot > 0) {
+				nameSpace = nameSpace.substring(0, lastIndexOfDot);
+			}
+		}
+		return nameSpace;
+	}
+
 }

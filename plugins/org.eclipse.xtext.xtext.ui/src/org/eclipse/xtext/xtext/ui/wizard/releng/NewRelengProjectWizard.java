@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
@@ -18,8 +17,8 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class NewRelengProjectWizard extends XtextNewProjectWizard {
-
 	private WizardNewRelengProjectCreationPage mainPage;
+	private final RelengProjectInfo projectInfo = new RelengProjectInfo();
 
 	@Inject
 	public NewRelengProjectWizard(RelengProjectsCreator creator) {
@@ -31,22 +30,12 @@ public class NewRelengProjectWizard extends XtextNewProjectWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		mainPage = new WizardNewRelengProjectCreationPage("relengPage", this.selection); //$NON-NLS-1$
+		mainPage = new WizardNewRelengProjectCreationPage("relengPage", this.selection, projectInfo); //$NON-NLS-1$
 		addPage(mainPage);
 	}
 
 	@Override
 	protected RelengProjectInfo getProjectInfo() {
-		RelengProjectInfo projectInfo = new RelengProjectInfo();
-		projectInfo.setNamespace(mainPage.getProjectNameSpace());
-		projectInfo.setProjectName(mainPage.getProjectName());
-		projectInfo.setBuildFeatureName(mainPage.getMainFeatureProjectName());
-		projectInfo.setSiteFeatureName(mainPage.getSiteFeatureProjectName());
-		projectInfo.setBuckyLocation(mainPage.getBuckyLocation());
-		IFile launchFile = mainPage.getTestLaunchFile();
-		if (launchFile != null) {
-			projectInfo.addTestLauncher(launchFile);
-		}
 		return projectInfo;
 	}
 

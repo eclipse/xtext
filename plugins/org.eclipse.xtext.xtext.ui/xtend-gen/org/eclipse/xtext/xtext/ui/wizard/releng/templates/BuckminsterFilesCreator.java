@@ -124,8 +124,8 @@ public class BuckminsterFilesCreator {
       }
     }
     _builder.append("perform \"");
-    String _siteFeatureName = projectInfo.getSiteFeatureName();
-    _builder.append(_siteFeatureName, "");
+    String _siteFeatureProjectName = projectInfo.getSiteFeatureProjectName();
+    _builder.append(_siteFeatureProjectName, "");
     _builder.append("#site.p2\"");
     _builder.newLineIfNotEmpty();
     IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.COMMANDS_FILE_NAME);
@@ -177,8 +177,8 @@ public class BuckminsterFilesCreator {
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("<cq:rootRequest name=\"");
-    String _siteFeatureName = projectInfo.getSiteFeatureName();
-    _builder.append(_siteFeatureName, "    ");
+    String _siteFeatureProjectName = projectInfo.getSiteFeatureProjectName();
+    _builder.append(_siteFeatureProjectName, "    ");
     _builder.append("\" componentType=\"eclipse.feature\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("</cq:componentQuery>");

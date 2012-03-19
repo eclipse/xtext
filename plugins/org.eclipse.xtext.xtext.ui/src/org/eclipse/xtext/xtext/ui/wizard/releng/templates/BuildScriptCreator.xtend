@@ -31,7 +31,7 @@ class BuildScriptCreator {
 				commands.file		What to do?
 									Default: ${projects.location}/«projectInfo.projectName»/commands.txt
 		-->
-		<project name="Buckminster Headless" default="default">
+		<project name="Buckminster Headless" default="buckminster">
 			<property name="WORKSPACE" location="${ant.file}/../../" />
 			<property name="build.root" location="${WORKSPACE}/buildroot" />
 			<property name="buckminster.home" location="«if (!projectInfo.buckyLocation.nullOrEmpty) projectInfo.buckyLocation else "Add_buckminster_headless_location_here"»" />
@@ -39,7 +39,7 @@ class BuildScriptCreator {
 			<property name="commands.file" value="${projects.location}/«projectInfo.projectName»/commands.txt" />
 			<property name="target.platform" value="target.platform" />
 			
-			<target name="default" depends="cleanup" description="description">
+			<target name="buckminster" depends="cleanup" description="description">
 				<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes."/>
 				<exec executable="${buckminster.home}/buckminster">
 					<arg value="-Dprojects.location=${projects.location}" />
@@ -51,7 +51,7 @@ class BuildScriptCreator {
 					<arg line="-S '${commands.file}'" />
 				</exec>
 				<echo message=" "/>
-				<echo message="Updatesite output in: ${build.root}/buckminster.output/«projectInfo.siteFeatureName»_*-eclipse.feature/site.p2/"/>
+				<echo message="Updatesite output in: ${build.root}/buckminster.output/«projectInfo.siteFeatureProjectName»_*-eclipse.feature/site.p2/"/>
 			</target>
 		
 			<target name="cleanup">

@@ -55,7 +55,7 @@ class BuckminsterFilesCreator {
 		«FOR testLauncher: projectInfo.testLaunchers»
 		junit -l "«new Path(testLauncher.project.name).append(testLauncher.projectRelativePath)»"  --flatXML --output "${buckmister.output.root}/test.results/«testLauncher.name».xml"
 		«ENDFOR»
-		perform "«projectInfo.siteFeatureName»#site.p2"
+		perform "«projectInfo.siteFeatureProjectName»#site.p2"
 		'''.writeToFile(COMMANDS_FILE_NAME)
 	}
 	
@@ -83,7 +83,7 @@ class BuckminsterFilesCreator {
 		'''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="«PROJECT_RMAP_NAME»">
-		    <cq:rootRequest name="«projectInfo.siteFeatureName»" componentType="eclipse.feature"/>
+		    <cq:rootRequest name="«projectInfo.siteFeatureProjectName»" componentType="eclipse.feature"/>
 		</cq:componentQuery>
 		'''.writeToFile(PROJECT_CQUERY_NAME)
 	}

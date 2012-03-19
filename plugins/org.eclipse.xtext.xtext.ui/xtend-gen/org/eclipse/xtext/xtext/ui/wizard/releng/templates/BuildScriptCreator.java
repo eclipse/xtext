@@ -58,7 +58,7 @@ public class BuildScriptCreator {
     _builder.newLineIfNotEmpty();
     _builder.append("-->");
     _builder.newLine();
-    _builder.append("<project name=\"Buckminster Headless\" default=\"default\">");
+    _builder.append("<project name=\"Buckminster Headless\" default=\"buckminster\">");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<property name=\"WORKSPACE\" location=\"${ant.file}/../../\" />");
@@ -96,7 +96,7 @@ public class BuildScriptCreator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<target name=\"default\" depends=\"cleanup\" description=\"description\">");
+    _builder.append("<target name=\"buckminster\" depends=\"cleanup\" description=\"description\">");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<echo message=\"IMPORTANT: Populating an empty target platform may took over 10 minutes.\"/>");
@@ -133,8 +133,8 @@ public class BuildScriptCreator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<echo message=\"Updatesite output in: ${build.root}/buckminster.output/");
-    String _siteFeatureName = projectInfo.getSiteFeatureName();
-    _builder.append(_siteFeatureName, "		");
+    String _siteFeatureProjectName = projectInfo.getSiteFeatureProjectName();
+    _builder.append(_siteFeatureProjectName, "		");
     _builder.append("_*-eclipse.feature/site.p2/\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

@@ -10,10 +10,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.conversion.Converter;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
@@ -25,13 +35,13 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Strings;
 
 /**
  * The main page of the Releng project wizard.
@@ -44,19 +54,14 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	private Text featureProjectField;
 	private Text relengProjectField;
 
-	private Listener featureChangedListener = new Listener() {
-		public void handleEvent(Event e) {
-			featureProjectNameChanged();
-			boolean valid = validatePage();
-			setPageComplete(valid);
-		}
-	};
 	private Text buckyField;
 	private Text testsField;
 	private IFile testLauncherFile;
+	private final RelengProjectInfo projectInfo;
+	private Text siteProjectField;
 
 	/**
-	 * Constructs a new WizardNewXtextProjectCreationPage.
+	 * Constructs a new WizardNewRelengXtextProjectCreationPage.
 	 * 
 	 * @param pageName
 	 *            the name of the page
@@ -65,9 +70,11 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	 *            The current selection. If the current selection includes workingsets the workingsets field is
 	 *            initialized with the selection.
 	 */
-	public WizardNewRelengProjectCreationPage(String pageName, IStructuredSelection selection) {
+	public WizardNewRelengProjectCreationPage(String pageName, IStructuredSelection selection,
+			RelengProjectInfo projectInfo) {
 		super(pageName);
 		this.selection = selection;
+		this.projectInfo = projectInfo;
 		setTitle(Messages.WizardNewRelengProjectCreationPage_pageTitle);
 		setDescription(Messages.WizardNewRelengProjectCreationPage_pageDescr);
 	}
@@ -75,28 +82,56 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	public void createControl(final Composite parent) {
 		Composite pageMain = new Composite(parent, SWT.NONE);
 		initializeDialogUnits(parent);
-		pageMain.setLayout(new GridLayout());
+		pageMain.setLayout(new GridLayout(3, false));
 
-		createFeatureSelectionControl(pageMain).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		createProjectControl(pageMain).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		createBuckyControl(pageMain).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		createTestsControl(pageMain).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		createFeatureSelectionControl(pageMain);
+		createProjectControl(pageMain);
+		createSiteFeatureControl(pageMain);
+		createBuckyControl(pageMain);
+		createTestsControl(pageMain);
 
-		//setDefaults(projectsuffix);
+		//Bind stuff
+		DataBindingContext dbc = new DataBindingContext();
+		WizardPageSupport.create(this, dbc);
+
+		IObservableValue featureProjectName = PojoObservables.observeValue(projectInfo, "buildFeatureName");
+		dbc.bindValue(SWTObservables.observeText(featureProjectField, SWT.Modify), featureProjectName,
+				new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
+						.setBeforeSetValidator(new FeatureProjectValidator()), null);
+
+		IObservableValue projectNameObservable = PojoObservables.observeValue(projectInfo, "projectName");
+		dbc.bindValue(SWTObservables.observeText(relengProjectField, SWT.Modify), projectNameObservable);
+		dbc.bindValue(featureProjectName, projectNameObservable, new UpdateValueStrategy(
+				UpdateValueStrategy.POLICY_UPDATE).setConverter(new SuffixedNameComputedValue(projectInfo,
+				"buckminster")), null);
+
+		IObservableValue siteFeatureObservable = PojoObservables.observeValue(projectInfo, "siteFeatureProjectName");
+		dbc.bindValue(SWTObservables.observeText(siteProjectField, SWT.Modify), siteFeatureObservable);
+		dbc.bindValue(featureProjectName, siteFeatureObservable, new UpdateValueStrategy(
+				UpdateValueStrategy.POLICY_UPDATE).setConverter(new SuffixedNameComputedValue(projectInfo, "site")),
+				null);
+
+		dbc.bindValue(SWTObservables.observeText(buckyField, SWT.Modify),
+				PojoObservables.observeValue(projectInfo, "buckyLocation"));
+
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(pageMain);
 		Dialog.applyDialogFont(getControl());
+		initialValues(selection);
+	}
+
+	private void initialValues(final IStructuredSelection structSelection) {
+		String initialValue = calculateFeatureSelection(structSelection);
+		if (initialValue != null) {
+			featureProjectField.setText(initialValue);
+		}
 	}
 
 	private Composite createFeatureSelectionControl(final Composite parent) {
 		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Feature to build:");
 		// text field
 		featureProjectField = selectionControl.getSecond();
-		String initialValue = calculateFeatureSelection(selection);
-		if (initialValue != null) {
-			featureProjectField.setText(initialValue);
-		}
 		//select  button
 		selectionControl.getThird().addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -111,30 +146,39 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 				});
 			}
 		});
-		featureProjectField.addListener(SWT.Modify, featureChangedListener);
 		return selectionControl.getFirst();
 	}
 
 	private Composite createProjectControl(final Composite parent) {
-		Composite composite = new Composite(parent, SWT.NULL);
-		GridLayout gridLayout = new GridLayout(2, false);
-		composite.setLayout(gridLayout);
 		// label
-		Label projectLabel = new Label(composite, SWT.NONE);
+		Label projectLabel = new Label(parent, SWT.NONE);
 		projectLabel.setText("Project name:");
 		projectLabel.setFont(parent.getFont());
 
 		// text field
-		relengProjectField = new Text(composite, SWT.BORDER);
+		relengProjectField = new Text(parent, SWT.BORDER);
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
 		relengProjectField.setLayoutData(grData);
 		relengProjectField.setFont(parent.getFont());
+		relengProjectField.setEnabled(false);
+		new Label(parent, SWT.NONE);
+		return parent;
+	}
 
-		String initialValue = calculateInitialProjectName(nullSafeFeatureProjectName());
-		if (initialValue != null) {
-			relengProjectField.setText(initialValue);
-		}
-		return composite;
+	private Composite createSiteFeatureControl(final Composite parent) {
+		// label
+		Label projectLabel = new Label(parent, SWT.NONE);
+		projectLabel.setText("Site project name:");
+		projectLabel.setFont(parent.getFont());
+
+		// text field
+		siteProjectField = new Text(parent, SWT.BORDER);
+		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
+		siteProjectField.setLayoutData(grData);
+		siteProjectField.setFont(parent.getFont());
+		siteProjectField.setEnabled(false);
+		new Label(parent, SWT.NONE);
+		return parent;
 	}
 
 	private Composite createBuckyControl(final Composite parent) {
@@ -175,53 +219,23 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return controlTriplet.getFirst();
 	}
 
-	private Triple<Composite, Text, Button> createSelectionControl(final Composite parent, final String controlName) {
-		Composite composite = new Composite(parent, SWT.NULL);
-		GridLayout gridLayout = new GridLayout(3, false);
-		composite.setLayout(gridLayout);
+	private Triple<Composite, Text, Button> createSelectionControl(final Composite composite, final String controlName) {
 		// label
 		Label projectLabel = new Label(composite, SWT.NONE);
 		projectLabel.setText(controlName);
-		projectLabel.setFont(parent.getFont());
+		projectLabel.setFont(composite.getFont());
 
 		// text field
 		Text text = new Text(composite, SWT.BORDER);
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
 		text.setLayoutData(grData);
-		text.setFont(parent.getFont());
+		text.setFont(composite.getFont());
 
 		//select  button
 		Button button = new Button(composite, SWT.PUSH);
-		button.setFont(parent.getFont());
+		button.setFont(composite.getFont());
 		button.setText("Select");
 		return Tuples.create(composite, text, button);
-	}
-
-	protected final void featureProjectNameChanged() {
-		setProjectName(calculateInitialProjectName(nullSafeFeatureProjectName()));
-	}
-
-	private String nullSafeFeatureProjectName() {
-		return featureProjectField == null ? "" : featureProjectField.getText();
-	}
-
-	private void setProjectName(String projectName) {
-		relengProjectField.setText(projectName);
-	}
-
-	private String calculateInitialProjectName(final String selectedFeatureProject) {
-		String nameSpace = cutLastSegment(selectedFeatureProject);
-		String projectsuffix = findNextValidProjectSuffix(nameSpace, "buckminster"); //$NON-NLS-1$ //$NON-NLS-2$
-		return nameSpace + "." + projectsuffix;
-	}
-
-	private String cutLastSegment(final String selectedFeatureProject) {
-		String nameSpace = selectedFeatureProject;
-		int lastIndexOfDot = nameSpace.lastIndexOf('.');
-		if (lastIndexOfDot > 0) {
-			nameSpace = nameSpace.substring(0, lastIndexOfDot);
-		}
-		return nameSpace;
 	}
 
 	private String calculateFeatureSelection(IStructuredSelection structSelection) {
@@ -236,53 +250,61 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return initialSelection;
 	}
 
-	/**
-	 * Sets the defaults.
-	 */
-	protected void setDefaults(String projectSuffix) {
-		validatePage();
-	}
-
-	/**
-	 * TODO extract to util Find the next available (default) DSL name
-	 */
-	protected String findNextValidProjectSuffix(final String prefix, final String name) {
-		String candidate = name;
-		int suffix = 1;
-		while (ResourcesPlugin.getWorkspace().getRoot().getProject((prefix + "." + candidate).toLowerCase()).exists()) { //$NON-NLS-1$
-			candidate = name + suffix;
-			suffix++;
-		}
-		return candidate;
-	}
-
-	protected boolean validatePage() {
-		setErrorMessage(null);
-		setMessage(null);
-		return true;
-	}
-
-	public String getProjectName() {
-		return relengProjectField.getText();
-	}
-
-	public String getMainFeatureProjectName() {
-		return nullSafeFeatureProjectName();
-	}
-
-	public String getProjectNameSpace() {
-		return cutLastSegment(getProjectName());
-	}
-
-	public String getSiteFeatureProjectName() {
-		return getProjectNameSpace() + ".site";
-	}
-
-	public String getBuckyLocation() {
-		return buckyField.getText();
-	}
-
 	public IFile getTestLaunchFile() {
 		return testLauncherFile;
+	}
+
+	final static class SuffixedNameComputedValue extends Converter {
+		private final String suffix;
+		private final RelengProjectInfo projectInfo;
+
+		public SuffixedNameComputedValue(RelengProjectInfo projectInfo, String suffix) {
+			super(String.class, String.class);
+			this.projectInfo = projectInfo;
+			this.suffix = suffix;
+		}
+
+		public Object convert(Object fromObject) {
+			return calculateProjectName();
+		}
+
+		private String calculateProjectName() {
+			String nameSpace = projectInfo.getProjectNameSpace();
+			if (Strings.isNullOrEmpty(nameSpace))
+				return "";
+			String projectsuffix = findNextValidProjectSuffix(nameSpace, suffix); //$NON-NLS-1$ //$NON-NLS-2$
+			return nameSpace + "." + projectsuffix;
+		}
+
+		/**
+		 * TODO extract to util Find the next available (default) DSL name
+		 */
+		private String findNextValidProjectSuffix(final String prefix, final String name) {
+			String candidate = name;
+			int suffix = 1;
+			while (ResourcesPlugin.getWorkspace().getRoot()
+					.getProject((prefix + "." + candidate).toLowerCase()).exists()) { //$NON-NLS-1$
+				candidate = name + suffix;
+				suffix++;
+			}
+			return candidate;
+		}
+	}
+
+	class FeatureProjectValidator implements IValidator {
+
+		public IStatus validate(Object value) {
+			if (value == null) {
+				return ValidationStatus.error("Please select a feature project from your workspace.");
+			} else {
+				String featureProjectName = value.toString();
+				if (!PDEUtils.featureProjectExists(featureProjectName)) {
+					return ValidationStatus.error("Feature project with name '" + featureProjectName
+							+ "' does not exist in this workspace.");
+				}
+			}
+			return ValidationStatus.ok();
+		}
+
 	}
 }
