@@ -44,7 +44,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -172,14 +171,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 subProgress.setWorkRemaining(queue.size() + 2);
                 // TODO: How to properly do progress indication with an unknown amount of work? Somehow, the progress bar doesn't
                 // advance anymore after this...
-                final List<Delta> newDeltas = Lists.newArrayList();
+                int clusterIndex = 0;
                 final List<Delta> changedDeltas = Lists.newArrayList();
                 while (!queue.isEmpty()) {
                     if (subProgress.isCanceled()) {
                         loadOperation.cancel();
                         throw new OperationCanceledException();
                     }
-                    if (!clusteringPolicy.continueProcessing(resourceSet, null, newDeltas.size())) {
+                    if (!clusteringPolicy.continueProcessing(resourceSet, null, clusterIndex)) {
                         break;
                     }
 
@@ -241,11 +240,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         }
                     }
                     if (newDelta != null) {
-                        newDeltas.add(newDelta);
+                        allDeltas.add(newDelta);
+                    	clusterIndex++;
                         if (newDelta.haveEObjectDescriptionsChanged())
                             changedDeltas.add(newDelta);
                         // Make the new resource description known and update the map.
                         newState.register(newDelta);
+                        // Validate now.
+            			updateMarkers(newDelta, resourceSet, subProgress.newChild(1));
                     }
                     subProgress.worked(1);
                     index++;
@@ -260,9 +262,6 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     loadOperation.load(queue);
                 }
 
-                // Validate now.
-                updateMarkers(resourceSet, ImmutableList.<Delta>copyOf(newDeltas), subProgress.newChild(1));
-                allDeltas.addAll(newDeltas);
                 // Release memory
                 if (!queue.isEmpty())
                     clearResourceSet(resourceSet);

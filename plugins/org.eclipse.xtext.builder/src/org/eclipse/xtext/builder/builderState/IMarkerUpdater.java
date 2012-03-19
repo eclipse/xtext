@@ -9,9 +9,9 @@ package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.ui.validation.IResourceUIValidatorExtension;
 
-import com.google.common.collect.ImmutableList;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -20,11 +20,14 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(MarkerUpdaterImpl.class)
 public interface IMarkerUpdater {
 	/**
-	 * Updates the {@link org.eclipse.core.resources.IMarker} for all changed resources.
+	 * Deletes or updates the {@link org.eclipse.core.resources.IMarker markers} for the given resource delta by 
+	 * delegating to {@link IResourceUIValidatorExtension}.
+	 * 
+	 * @param resourceSet context resource set from which the updated resource may be obtained; may be {@code null}
+	 *        if the delta represents a resource deletion.
 	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
 	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
 	 *        reported and that the operation cannot be cancelled.
 	 */
-	public void updateMarker(ResourceSet resourceSet,
-			ImmutableList<IResourceDescription.Delta> resourceDescriptionDeltas, IProgressMonitor monitor);
+	public void updateMarkers(Delta delta, ResourceSet resourceSet, IProgressMonitor monitor);
 }
