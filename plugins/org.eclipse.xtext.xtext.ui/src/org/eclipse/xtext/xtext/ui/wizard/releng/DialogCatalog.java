@@ -36,8 +36,8 @@ public class DialogCatalog {
 
 	public static String openOSFolderSelectionDialog(Shell shell) {
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE | SWT.SHEET);
-		dialog.setMessage("TODO Message");
-		dialog.setText("TODO Text");
+		dialog.setMessage("Select Buckminster headless installation directory");
+		dialog.setText("Buckminster headless");
 		return dialog.open();
 	}
 
