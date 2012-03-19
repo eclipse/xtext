@@ -278,11 +278,15 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 
 	@Override
 	protected String computeDescription(IWorkbenchPartSelection workbenchPartSelection) {
+		if (selectedSource == null) {
+			return null;
+		}
 		XtextEditor xtextEditor = (XtextEditor) workbenchPartSelection.getWorkbenchPart();
 		if (xtextEditor.isDirty()) {
 			return Messages.DerivedSourceView_EditorDirty;
+		} else {
+			return selectedSource.getFullPath().toString();
 		}
-		return super.computeDescription(workbenchPartSelection);
 	}
 
 	@Override
