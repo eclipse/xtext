@@ -71,7 +71,7 @@ public class RelengProjectsCreator extends AbstractProjectCreator {
 	}
 
 	private void configureFeatureProjectBuilder(FeatureProjectFactory factory) {
-		factory.setProjectName(getProjectInfo().getSiteFeatureName());
+		factory.setProjectName(getProjectInfo().getSiteFeatureProjectName());
 		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
 		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
 		factory.addFeature(getProjectInfo().getBuildFeatureName());

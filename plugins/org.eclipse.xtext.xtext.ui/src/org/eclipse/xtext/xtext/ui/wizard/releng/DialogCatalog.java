@@ -13,15 +13,12 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 import org.eclipse.ui.dialogs.PatternFilter;
-import org.eclipse.ui.dialogs.SelectionDialog;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
@@ -29,32 +26,12 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 public class DialogCatalog {
 
 	public static final void openFeatureSelectionDialog(final Shell shell, final IAcceptor<IProject> acceptor) {
-		BusyIndicator.showWhile(shell.getDisplay(), new Runnable() {
-			@SuppressWarnings("restriction")
-			public void run() {
-				org.eclipse.pde.internal.core.ifeature.IFeatureModel[] allModels = org.eclipse.pde.internal.core.PDECore
-						.getDefault().getFeatureModelManager().getWorkspaceModels();
-
-				SelectionDialog dialog = new org.eclipse.pde.internal.ui.dialogs.FeatureSelectionDialog(shell,
-						allModels, false);
-				if (dialog.open() == Window.OK) {
-					Object[] models = dialog.getResult();
-					if (models.length > 0) {
-						Object selectedElement = models[0];
-						if (selectedElement instanceof org.eclipse.pde.internal.core.feature.WorkspaceFeatureModel) {
-							IProject project = ((org.eclipse.pde.internal.core.feature.WorkspaceFeatureModel) selectedElement)
-									.getFile().getProject();
-							acceptor.accept(project);
-						}
-					}
-				}
-			}
-		});
+		PDEUtils.selectFeature(shell, acceptor);
 	}
 
 	public static String openOSFolderSelectionDialog(Shell shell) {
@@ -65,7 +42,7 @@ public class DialogCatalog {
 	}
 
 	public static IFile openWorkspaceFileSelectionDialog(Shell shell, String patternString) {
-	ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(shell, new WorkbenchLabelProvider(),
+		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(shell, new WorkbenchLabelProvider(),
 				new WorkbenchContentProvider());
 		dialog.setAllowMultiple(false);
 		dialog.setTitle("Select workspace resource");
