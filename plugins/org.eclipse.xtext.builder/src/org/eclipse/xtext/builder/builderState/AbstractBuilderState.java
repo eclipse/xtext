@@ -137,8 +137,10 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
+		subMonitor.setWorkRemaining(event.getDeltas().size());
 		for(IResourceDescription.Delta delta : event.getDeltas()) {
-			updateMarkers(delta, null, subMonitor.newChild(1));
+			updateMarkers(delta, null, subMonitor);
+			subMonitor.worked(1);
 		}
 		// update the reference
 		setResourceDescriptionsData(newData);

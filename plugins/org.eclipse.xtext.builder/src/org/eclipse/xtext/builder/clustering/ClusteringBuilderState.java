@@ -168,9 +168,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
             int index = 1;
             while (!queue.isEmpty()) {
-                subProgress.setWorkRemaining(queue.size() + 2);
-                // TODO: How to properly do progress indication with an unknown amount of work? Somehow, the progress bar doesn't
-                // advance anymore after this...
+            	// heuristic: only 2/3 of ticks will be consumed; rest kept for affected resources
+                subProgress.setWorkRemaining(queue.size() * 3);
                 int clusterIndex = 0;
                 final List<Delta> changedDeltas = Lists.newArrayList();
                 while (!queue.isEmpty()) {
@@ -268,6 +267,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             }
         } finally {
             if(loadOperation != null) loadOperation.cancel();
+            progress.done();
         }
         return allDeltas;
     }
