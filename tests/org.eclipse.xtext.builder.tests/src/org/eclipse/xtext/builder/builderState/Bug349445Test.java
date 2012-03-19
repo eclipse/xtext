@@ -28,7 +28,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableList;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -100,7 +99,7 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 		assertEquals(1, loadCalled);
 	}
 	
-	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
+	public void updateMarkers(Delta resourceDescriptionDeltas, ResourceSet resourceSet,
 			IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}

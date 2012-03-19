@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.validation.MarkerEraser;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.CheckMode;
 
-import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
@@ -44,47 +43,42 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
-			IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources,
-				resourceDescriptionDeltas.size());
+	public void updateMarkers(Delta delta, ResourceSet resourceSet, IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources, 1);
 		subMonitor.subTask(Messages.MarkerUpdaterImpl_ValidateResources);
 
-		for (Delta delta : resourceDescriptionDeltas) {
-			if (subMonitor.isCanceled()) {
-				throw new OperationCanceledException();
-			}
-			processDelta(delta, resourceSet, subMonitor.newChild(1));
-
+		if (subMonitor.isCanceled()) {
+			throw new OperationCanceledException();
 		}
+		processDelta(delta, resourceSet, subMonitor.newChild(1));
 	}
 
 	private void processDelta(Delta delta, ResourceSet resourceSet, SubMonitor childMonitor) {
 		URI uri = delta.getUri();
 		IResourceUIValidatorExtension validatorExtension = getResourceUIValidatorExtension(uri);
+		CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
 
 		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri)) {
 			if (pair.getFirst() instanceof IFile) {
-				IFile iFile = (IFile) pair.getFirst();
-				CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
+				IFile file = (IFile) pair.getFirst();
 				if (validatorExtension != null) {
 					if (delta.getNew() != null) {
-						validatorExtension.updateValidationMarkers(iFile, resourceSet.getResource(uri, true),
+						validatorExtension.updateValidationMarkers(file, resourceSet.getResource(uri, true),
 								normalAndFastMode, childMonitor);
 					} else {
-						validatorExtension.deleteValidationMarkers(iFile, normalAndFastMode, childMonitor);
+						validatorExtension.deleteValidationMarkers(file, normalAndFastMode, childMonitor);
 					}
 				} else {
 					// Clean up orphaned marker (no IResourceUIValidatorExtension registered)
-					fallBackDeleteMarker(iFile, normalAndFastMode, childMonitor);
+					fallBackDeleteMarker(file, normalAndFastMode, childMonitor);
 				}
 			}
 		}
 	}
 
-	private void fallBackDeleteMarker(IFile iFile, CheckMode checkMode, IProgressMonitor monitor) {
+	private void fallBackDeleteMarker(IFile file, CheckMode checkMode, IProgressMonitor monitor) {
 		MarkerEraser markerEraser = new MarkerEraser();
-		markerEraser.deleteValidationMarkers(iFile, checkMode, monitor);
+		markerEraser.deleteValidationMarkers(file, checkMode, monitor);
 	}
 
 	/**
@@ -97,11 +91,10 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	 */
 	protected IResourceUIValidatorExtension getResourceUIValidatorExtension(URI uri) {
 		IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-		IResourceUIValidatorExtension uiValidatorExtension = null;
 		if (provider != null) {
-			uiValidatorExtension = provider.get(IResourceUIValidatorExtension.class);
+			return provider.get(IResourceUIValidatorExtension.class);
 		}
-		return uiValidatorExtension;
+		return null;
 	}
 
 }
