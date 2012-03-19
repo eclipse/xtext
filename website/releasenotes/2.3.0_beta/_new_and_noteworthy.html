@@ -1,0 +1,116 @@
+<html>
+<head>
+<style type="text/css" title="text/css" media="screen">
+td  {
+	border-top: 1px solid #D4D4DD;
+	text-align: left;
+	vertical-align: top;
+	font-weight: normal;
+	padding: 5pt;
+	padding-bottom: 40px;
+	width: 425px;
+}
+
+td.entry_cell {
+	font-weight: bold;
+	width: 30%
+}
+
+td.change {
+	font-style: italic;
+	color: red;
+}
+
+table {
+    border-top-style: none;
+ 	border-collapse: collapse;
+}
+
+h2 {
+	border-bottom: none;
+}
+
+img {
+	max-width: 425px;  
+}
+
+</style>
+
+</head>
+<body>
+<h1>Whats new in Xtext 2.3 BETA</h1>
+<small>See what was new in the <a href="../2.2.0/new_and_noteworthy.php">previous release</a></small>
+<p>Xtext 2.3 BETA offers a lot of new features and improvements. All in all, 
+<a href="https://bugs.eclipse.org/bugs/buglist.cgi?list_id=944371;resolution=FIXED;classification=Modeling;chfieldto=2012-03-20;query_format=advanced;chfieldfrom=2011-12-15;component=Xtext;product=TMF">over 120 bug reports and feature requests</a> 
+have been solved since Xtext 2.2. Please note that some the tickets may be related to <a href="http:/www.eclipse.org/xtend/">Eclipse Xtend</a>. Here is a summary of the most significant enhancements:</p>
+<table>
+	<tr>
+		<td class="entry_cell">Liberation of Xtend</td>
+		<td>
+		<p>
+			The programming language <a href="http://eclipse.org/xtend/">Xtend</a> moved to its own project under the 
+			umbrella of <a href="http://www.eclipse.org/projects/project.php?id=tools.xtend">eclipse.tools</a>.
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Debug Support</td>
+		<td>
+		<p>
+			For DSLs from which Java code is being generated, Xtext now supports debugging as defined in JSR-045. All you need to do is define a 
+			mapping between your DSL files and the generated Java code. Then, the Eclipse JDT debugger will be fully capable of debugging your 
+			DSLs. The power of breakpoints, "step into", "step over", "step out" becomes available in your DSL!  
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Generated Source View</td>
+		<td>
+		<p>
+			If you generate source code from your Xtext DSLs, it is now easy to implement a View for your workbench 
+			that provides a preview of the how the generated code would look like.
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Hover Improvements</td>
+		<td>
+		<p>
+			The new hover for Xbase based languages comes with a completely new HTML rendering for multiline comments
+			of element declarations. Nearly all documentation annotations known from JDT are usable now. Even 
+			generics are fully resolved when using generic typed methods.
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Xbase Compiler Improvements</td>
+		<td>
+		<p>
+			To make the generated Java code even more readable, 
+			the compiler can now inline certain operations. As a result the generated Java code is more idiomatic 
+			and therefore more readable. Also some superfluous statements have been removed.
+		</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="entry_cell">Xbase Number Literals</td>
+		<td>
+		<p>
+			Fearless arithmetics with big numbers: Xtend now has comprehensive support for number literals. 
+			This includes most of the things you can do in Java, and in addition it has first class support 
+			for BigDecimal and BigInteger (including overloaded arithmetic operators).
+		</p>
+		<pre>
+new BigDecimal("6.1").subtract(
+       new BigDecimal("0.755").multiply(BigDecimal.valueOf(3L)))</pre>
+		<p>
+			In Xtend you can use literals and operators :
+		</p>
+		<pre class="prettyprint lang-xtend">6.1bd - 0.755bd * 3bd</pre>
+		</td>
+	</tr>
+</table>
+
+
+</body>
+</html>
