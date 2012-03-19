@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
+import java.io.File;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.PojoObservables;
@@ -35,6 +37,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.util.IAcceptor;
@@ -87,8 +90,9 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		createFeatureSelectionControl(pageMain);
 		createProjectControl(pageMain);
 		createSiteFeatureControl(pageMain);
-		createBuckyControl(pageMain);
-		createTestsControl(pageMain);
+		Group buckyGroup = createBuckyGroup(pageMain);
+		createBuckyControl(buckyGroup);
+		createTestsControl(buckyGroup);
 
 		//Bind stuff
 		DataBindingContext dbc = new DataBindingContext();
@@ -111,14 +115,27 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 				UpdateValueStrategy.POLICY_UPDATE).setConverter(new SuffixedNameComputedValue(projectInfo, "site")),
 				null);
 
-		dbc.bindValue(SWTObservables.observeText(buckyField, SWT.Modify),
-				PojoObservables.observeValue(projectInfo, "buckyLocation"));
+		dbc.bindValue(SWTObservables.observeText(buckyField, SWT.Modify), PojoObservables.observeValue(projectInfo,
+				"buckyLocation"), new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
+				.setBeforeSetValidator(new BuckminsterLocationValidator()), null);
 
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(pageMain);
 		Dialog.applyDialogFont(getControl());
 		initialValues(selection);
+	}
+
+	private Group createBuckyGroup(Composite pageMain) {
+		Group buckyGroup = new Group(pageMain, SWT.NONE);
+		buckyGroup.setFont(pageMain.getFont());
+		buckyGroup.setText("Buckminster");
+		GridData layoutData = new GridData(SWT.FILL, SWT.TOP, true, false);
+		layoutData.verticalIndent = 10;
+		layoutData.horizontalSpan = 3;
+		buckyGroup.setLayoutData(layoutData);
+		buckyGroup.setLayout(new GridLayout(3, false));
+		return buckyGroup;
 	}
 
 	private void initialValues(final IStructuredSelection structSelection) {
@@ -152,7 +169,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	private Composite createProjectControl(final Composite parent) {
 		// label
 		Label projectLabel = new Label(parent, SWT.NONE);
-		projectLabel.setText("Project name:");
+		projectLabel.setText("Releng project:");
 		projectLabel.setFont(parent.getFont());
 
 		// text field
@@ -168,7 +185,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	private Composite createSiteFeatureControl(final Composite parent) {
 		// label
 		Label projectLabel = new Label(parent, SWT.NONE);
-		projectLabel.setText("Site project name:");
+		projectLabel.setText("Site project:");
 		projectLabel.setFont(parent.getFont());
 
 		// text field
@@ -182,8 +199,9 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	}
 
 	private Composite createBuckyControl(final Composite parent) {
-		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Buckminster:");
+		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Installation:");
 		buckyField = selectionControl.getSecond();
+		buckyField.setEditable(false);
 		//select  button
 		Button button = selectionControl.getThird();
 		button.setText("Browse...");
@@ -301,6 +319,33 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 				if (!PDEUtils.featureProjectExists(featureProjectName)) {
 					return ValidationStatus.error("Feature project with name '" + featureProjectName
 							+ "' does not exist in this workspace.");
+				}
+			}
+			return ValidationStatus.ok();
+		}
+
+	}
+
+	class BuckminsterLocationValidator implements IValidator {
+
+		public IStatus validate(Object value) {
+			if (value == null || value.toString().isEmpty()) {
+				return ValidationStatus.warning("Buckminster headless installation directory is not selected. "
+						+ "You can manuelly set the buckminster.home property in "
+						+ RelengProjectFactory.BUILD_FILE_NAME + " file later.");
+			} else {
+				File buckyHeadless = new File(value.toString());
+				File[] files = buckyHeadless.listFiles();
+				boolean buckminsterExecutableFound = false;
+				for (File file : files) {
+					if (file.isFile() && "buckminster".equals(file.getName())) {
+						buckminsterExecutableFound = true;
+						break;
+					}
+				}
+				if (!buckminsterExecutableFound) {
+					return ValidationStatus.warning("Selected directory '" + buckyHeadless
+							+ "' seems not to be a buckminster headless installation.");
 				}
 			}
 			return ValidationStatus.ok();
