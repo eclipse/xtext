@@ -38,7 +38,7 @@ img {
 
 </head>
 <body>
-<h1>Whats new in Xtext 2.3 BETA</h1>
+<h1>Whats new in Xtext 2.3 beta</h1>
 <small>See what was new in the <a href="../2.2.0/new_and_noteworthy.php">previous release</a></small>
 <p>Xtext 2.3 BETA offers a lot of new features and improvements. All in all, 
 <a href="https://bugs.eclipse.org/bugs/buglist.cgi?list_id=944371;resolution=FIXED;classification=Modeling;chfieldto=2012-03-20;query_format=advanced;chfieldfrom=2011-12-15;component=Xtext;product=TMF">over 120 bug reports and feature requests</a> 
@@ -57,12 +57,14 @@ have been solved since Xtext 2.2. Please note that some the tickets may be relat
 		<td class="entry_cell">Debug Support</td>
 		<td>
 		<p>
-			For DSLs from which Java code is being generated, Xtext now supports debugging as defined in JSR-045. All you need to do is define a 
-			mapping between your DSL files and the generated Java code. Then, the Eclipse JDT debugger will be fully capable of debugging your 
-			DSLs. The power of breakpoints, "step into", "step over", "step out" becomes available in your DSL!  
+			Xtext now supports debugging of DSLs if you generate Java code from your language. It uses Java's <em>Debugging Support for Other Languages</em> 
+			(JSR-045) to allow to set breakpoints in your language and step through the implementation. All you need to do is to provide the
+			mapping information between your DSL files and the generated Java code. This will happen automagically if you use the Xbase infrastructure 
+			for your language implementation.  
 		</p>
 		</td>	
 	</tr>
+<!-- Not yet in Xbase
 	<tr>
 		<td class="entry_cell">Generated Source View</td>
 		<td>
@@ -72,13 +74,42 @@ have been solved since Xtext 2.2. Please note that some the tickets may be relat
 		</p>
 		</td>	
 	</tr>
+-->
 	<tr>
 		<td class="entry_cell">Hover Improvements</td>
 		<td>
 		<p>
-			The new hover for Xbase based languages comes with a completely new HTML rendering for multiline comments
-			of element declarations. Nearly all documentation annotations known from JDT are usable now. Even 
-			generics are fully resolved when using generic typed methods.
+			The hover for Xbase languages new comes with a completely new HTML rendering for documentation comments.
+			It supports all Javadoc tags like @param, @link or @see and even provides the resolved type information for generified
+			types and methods. It is now easily possible to have a look at the inferred type of local variables and expressions.
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Highlighting of expressions</td>
+		<td>
+		<p>
+			Expressions that are built on top of the Xbase library now provide nice syntax coloring to indicate whether a feature call
+			refers to an imported extension function, static or instance methods or fields.
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Spell Checking</td>
+		<td>
+		<p>
+			Spell checking is now available for all languages by default. It checks the contents of string literals and
+			comments. You can even use quick fixes to correct spelling mistakes.
+		</p>
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Improved Problem Markers</td>
+		<td>
+		<p>
+			The problems view shows more information about the type of a warning or error. All languages now define their own
+			marker types thus they can act independently from each other and show more reliable indicators about
+			available quickfixes.
 		</p>
 		</td>	
 	</tr>
@@ -88,7 +119,7 @@ have been solved since Xtext 2.2. Please note that some the tickets may be relat
 		<p>
 			To make the generated Java code even more readable, 
 			the compiler can now inline certain operations. As a result the generated Java code is more idiomatic 
-			and therefore more readable. Also some superfluous statements have been removed.
+			and therefore easier to understand. Also some superfluous statements have been removed to make it more concise.
 		</p>
 		</td>
 	</tr>
@@ -96,7 +127,7 @@ have been solved since Xtext 2.2. Please note that some the tickets may be relat
 		<td class="entry_cell">Xbase Number Literals</td>
 		<td>
 		<p>
-			Fearless arithmetics with big numbers: Xtend now has comprehensive support for number literals. 
+			Fearless arithmetics with big numbers: Xbase now has comprehensive support for number literals. 
 			This includes most of the things you can do in Java, and in addition it has first class support 
 			for BigDecimal and BigInteger (including overloaded arithmetic operators).
 		</p>
@@ -104,7 +135,7 @@ have been solved since Xtext 2.2. Please note that some the tickets may be relat
 new BigDecimal("6.1").subtract(
        new BigDecimal("0.755").multiply(BigDecimal.valueOf(3L)))</pre>
 		<p>
-			In Xtend you can use literals and operators :
+			In Xbase you can use literals and operators :
 		</p>
 		<pre class="prettyprint lang-xtend">6.1bd - 0.755bd * 3bd</pre>
 		</td>
