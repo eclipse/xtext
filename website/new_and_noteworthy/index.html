@@ -81,7 +81,7 @@ div#maincontainer>section {
 				<a class="brand" href="http://xtend-lang.org">Xtend</a>
 				<ul class="nav">
 					<li class="dropdown">
-						<a href="#2.3BETA" class="dropdown-toggle">2.3 BETA Features</a>
+						<a href="#2.3BETA" class="dropdown-toggle">2.3 beta Features</a>
 						<ul class="dropdown-menu">
 							<li><a href="#debugging">Debugging</a></li>
 							<li><a href="#jdtIntegration">JDT Integration</a></li>
@@ -106,7 +106,7 @@ div#maincontainer>section {
 		<section id="2.3BETA">
 			<div class="page-header">
 				<h1>
-					Xtend 2.3 BETA <small>New & Noteworthy</small>
+					Xtend 2.3 beta <small>New & Noteworthy</small>
 				</h1>
 			</div>
 			<div class="row">
@@ -120,7 +120,7 @@ div#maincontainer>section {
 <!-- 							<div class="span4"> -->
 							<p>
 							Debugging through Xtend and Java is now fully supported. Setting breakpoints in Xtend works just as in Java 
-							and can even switch to the Java level whenever wished using a simple action.
+							and you can even switch to the Java level whenever wished by a context menu action.
 							</p><p>
 							Also all the cool features known from the Java debugger, like ‘Display’, ‘Inspect’, or ‘Exception Breakpoints’ 
 							are available.
@@ -137,35 +137,35 @@ div#maincontainer>section {
 					<section id="jdtIntegration">
 						<h2>Seamless JDT Integration <small>Forget about the differences</small></h2>
 						<p>
-						Not only the debugger but all of JDT’s navigation functionality now works seamlessly with Xtend. 
+						Not only the debugger but all of JDT's navigation functionality now works seamlessly with Xtend. 
 						No matter if you click on a stack frame in an exception, a failing unit tests, some node in the call hierarchy or the type 
-						hierarchy: if the target element is implemented in Xtend, you’ll end up in the Xtend editor at the original source location.
+						hierarchy: if the target element is implemented in Xtend, you'll end up in the Xtend editor at the original source location.
 						</p>
 					</section>
 					<!-- subsection -->
 					<section id="generatedCodeView">
 						<h2>Generated Code View <small>Feel the Trace</small></h2>
 						<p>
-						But what if you want to see the generated Java source? You can of course open the java file in an editor, but there’s now an even better tool : 
-						The <strong>Generated Code</strong> view. ￼In that view you see detailed information of which parts in the Java source were derived from which in the Xtend code, simply by marking the corresponding parts.
+						But what if you want to see the generated Java source? You can of course open the Java file in an editor, but there's now an even better tool : 
+						The <strong>Generated Code</strong> view. ￼In that view you see detailed information of which parts in the Java source were derived from which in the Xtend code, simply by marking the corresponding sections.
 						</p>
 					</section>
 					<!-- subsection -->
 					<section id="hovers">
 						<h2>Improved Hovers <small>Everywhere!</small></h2>
 						<p>
-							The new hover comes with a completely new HTML rendering for multiline comments
-							of element declarations. Nearly all documentation annotations known from JDT are usable now. Even 
-							generics are fully resolved when using generic typed methods.
-							Also, the hover showes an unsugared version of a sugared expressions.
+							The hover comes with a completely new HTML rendering for documentation comments.
+							It supports all Javadoc tags like @param, @link or @see and even provides the resolved type information for generified
+							types and methods. It is now easily possible to have a look at the inferred type of local variables and expressions.
+							Also, the hover shows an expanded version of a sugared expressions.
 						</p>
 					</section>
 					<!-- subsection -->
 					<section id="openCallHierarchy">
 						<h2>Call-Hierarchy <small>Who is your client?</small></h2>
 						<p>
-							In Xtend the open call hierarchy action is now available, using the same shortcuts as in Java. It shows all calls to the 
-							selected method, field or constrcutor. No matter whether they are called from Xtend or Java.
+							In Xtend the open call hierarchy action is now available using the same shortcuts as in Java. It shows all calls to the 
+							selected method, field or constructor, no matter whether they are called from Xtend or Java.
 						</p>
 					</section>
 					<!-- subsection -->
@@ -173,14 +173,15 @@ div#maincontainer>section {
 						<h2>Type-Hierarchy <small>Just like in Java</small></h2>
 						<p>
 							Also the Type Hierarchy view can be opened and populated from within an Xtend class. Just press ‘F4’ when your cursor sits 
-							on a type’s name. It shows the type hierarchy of the selected classes, no matter they are implemented in Java or Xtend.
+							on a type's name. It shows the type hierarchy of the selected classes. You implemented parts of the hierarchy in Java and
+							other in Xtend? Don't worry. They will work perfectly together.
 						</p>
 					</section>
 					<!-- subsection -->
 					<section id="quickOutline">
-						<h2>Inherited members in quick outline <small>More Readability</small></h2>
+						<h2>Inherited members in quick outline <small>It's at your fingertipps</small></h2>
 						<p>
-							When pressing CTRL+O in an Xtend editor the quick outline pops up, showing all the members of the currently edited class.
+							When pressing CTRL+O in an Xtend editor the quick outline pops up. It shows all the members of the currently edited class.
 							Pressing CTRL+O once more will add the members inherited from super classes as well. A search field lets you simply filter by 
 							name in order to navigate to any member quickly.
 						</p>
@@ -198,13 +199,13 @@ div#maincontainer>section {
 						<h2>Several Language Enhancements <small>Streamlining</small></h2>
 						<p>
 							On the language level the next release has a couple of nice improvements and new features as well. Some of them are small but 
-							neat changes like, that it’s no longer mandatory to write an empty pair of parenthesis in constructor calls. Others deserve a 
-							list entry on their own:
+							neat changes, e.g. it's no longer mandatory to write empty parentheses in constructor calls. Others deserve an 
+							entry on their own:
 						</p>
 					</section>
 					<!-- subsection -->
 					<section id="numberLiterals">
-						<h2>Number Literals <small>Fearless arithemtics with big numbers</small></h2>
+						<h2>Number Literals <small>Fearless arithmetics with big numbers</small></h2>
 						<p>
 							Xtend now has comprehensive support for number literals. This includes most of the things you can do in Java, and in addition it 
 							has first class support for BigDecimal and BigInteger (including overloaded arithmetic operators).
@@ -222,8 +223,8 @@ new BigDecimal("6.1").subtract(
 					<section id="varArgs">
 						<h2>Methods with variable argument lists <small>Varargs</small></h2>
 						<p>
-							Varargs can now be declared in Xtend methdos as well. The syntax and semantics 
-							are just like in Java. Also calling varargs works exactly as in Java.
+							Varargs can now be declared in Xtend methods as well. The syntax and semantics 
+							are just like in Java. Also calling varargs works as expected.
 						</p>
 						<pre class="prettyprint lang-xtend">
 def String concat(String... strings) {
