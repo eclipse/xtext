@@ -52,6 +52,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Pair;
@@ -103,6 +104,9 @@ public class JvmTypesBuilder {
 
 	@Inject
 	private TypesFactory typesFactory;
+	
+	@Inject
+	private VisibilityService visibilityService;
 	
 	/**
 	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
@@ -618,8 +622,10 @@ public class JvmTypesBuilder {
 					p = p.trace(sourceElement);
 					p.append("StringBuilder result = new StringBuilder(\"\\n"+name+" {\");\n");
 					for (JvmField jvmField : filter(declaredType.getAllFeatures(), JvmField.class)) {
-						ITreeAppendable innerP = p.trace(jvmField);
-						innerP.append("result.append(\"\\n  "+jvmField.getSimpleName()+" = \").append(String.valueOf("+jvmField.getSimpleName()+").replace(\"\\n\",\"\\n  \"));\n");
+						if(visibilityService.isVisible(jvmField, declaredType)) {
+							ITreeAppendable innerP = p.trace(jvmField);
+							innerP.append("result.append(\"\\n  "+jvmField.getSimpleName()+" = \").append(String.valueOf("+jvmField.getSimpleName()+").replace(\"\\n\",\"\\n  \"));\n");
+						}
 					}
 					p.append("result.append(\"\\n}\");\nreturn result.toString();\n");
 				}
