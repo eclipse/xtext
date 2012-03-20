@@ -12,10 +12,13 @@ package org.eclipse.xtext.xtext.ui.wizard.releng;
 
 import java.io.File;
 
+import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
+import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -23,11 +26,18 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
+import org.eclipse.jface.databinding.viewers.ViewerSupport;
+import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.internal.databinding.provisional.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -36,10 +46,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -54,14 +64,9 @@ import com.google.common.base.Strings;
 public class WizardNewRelengProjectCreationPage extends WizardPage {
 
 	private final IStructuredSelection selection;
-	private Text featureProjectField;
-	private Text relengProjectField;
-
-	private Text buckyField;
-	private Text testsField;
-	private IFile testLauncherFile;
 	private final RelengProjectInfo projectInfo;
-	private Text siteProjectField;
+
+	private Text featureProjectField;
 
 	/**
 	 * Constructs a new WizardNewRelengXtextProjectCreationPage.
@@ -87,38 +92,27 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		initializeDialogUnits(parent);
 		pageMain.setLayout(new GridLayout(3, false));
 
-		createFeatureSelectionControl(pageMain);
-		createProjectControl(pageMain);
-		createSiteFeatureControl(pageMain);
-		Group buckyGroup = createBuckyGroup(pageMain);
-		createBuckyControl(buckyGroup);
-		createTestsControl(buckyGroup);
+		featureProjectField = createFeatureSelectionControl(pageMain);
+		Group prjGroup = createTreeRowGroup(pageMain, "Projects to create", 10);
+		Text prjField = createProjectControl(prjGroup);
+		Text sitePrjField = createSiteFeatureControl(prjGroup);
+		Group buckyGroup = createTreeRowGroup(pageMain, "Buckminster", 0);
+		Text buckyField = createBuckyControl(buckyGroup);
+		ListViewer testsList = createTestsControl(buckyGroup);
 
-		//Bind stuff
+		//Binding stuff
 		DataBindingContext dbc = new DataBindingContext();
 		WizardPageSupport.create(this, dbc);
 
-		IObservableValue featureProjectName = PojoObservables.observeValue(projectInfo, "buildFeatureName");
-		dbc.bindValue(SWTObservables.observeText(featureProjectField, SWT.Modify), featureProjectName,
-				new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
-						.setBeforeSetValidator(new FeatureProjectValidator()), null);
+		IObservableValue featPrjObserv = PojoObservables.observeValue(projectInfo, "buildFeatureName");
+		bindFeatureProjectField(dbc, featPrjObserv);
+		bindProjectField(prjField, dbc, featPrjObserv);
+		bindSiteProjectField(sitePrjField, dbc, featPrjObserv);
+		bindBuckyLocationField(buckyField, dbc);
 
-		IObservableValue projectNameObservable = PojoObservables.observeValue(projectInfo, "projectName");
-		dbc.bindValue(SWTObservables.observeText(relengProjectField, SWT.Modify), projectNameObservable);
-		dbc.bindValue(featureProjectName, projectNameObservable, new UpdateValueStrategy(
-				UpdateValueStrategy.POLICY_UPDATE).setConverter(new SuffixedNameComputedValue(projectInfo,
-				"buckminster")), null);
-
-		IObservableValue siteFeatureObservable = PojoObservables.observeValue(projectInfo, "siteFeatureProjectName");
-		dbc.bindValue(SWTObservables.observeText(siteProjectField, SWT.Modify), siteFeatureObservable);
-		dbc.bindValue(featureProjectName, siteFeatureObservable, new UpdateValueStrategy(
-				UpdateValueStrategy.POLICY_UPDATE).setConverter(new SuffixedNameComputedValue(projectInfo, "site")),
-				null);
-
-		dbc.bindValue(SWTObservables.observeText(buckyField, SWT.Modify), PojoObservables.observeValue(projectInfo,
-				"buckyLocation"), new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
-				.setBeforeSetValidator(new BuckminsterLocationValidator()), null);
-
+		IObservableList observeList = new WritableList(projectInfo.getTestLaunchers(), IFile.class);
+		testsList.setInput(observeList);
+		dbc.bindList(SWTObservables.observeItems(testsList.getList()), observeList);
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(pageMain);
@@ -126,82 +120,83 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		initialValues(selection);
 	}
 
-	private Group createBuckyGroup(Composite pageMain) {
-		Group buckyGroup = new Group(pageMain, SWT.NONE);
-		buckyGroup.setFont(pageMain.getFont());
-		buckyGroup.setText("Buckminster");
+	private Group createTreeRowGroup(Composite pageMain, String name, int vertIdent) {
+		Group prjGroup = new Group(pageMain, SWT.NONE);
+		prjGroup.setFont(pageMain.getFont());
+		prjGroup.setText(name);
 		GridData layoutData = new GridData(SWT.FILL, SWT.TOP, true, false);
-		layoutData.verticalIndent = 10;
+		layoutData.verticalIndent = vertIdent;
 		layoutData.horizontalSpan = 3;
-		buckyGroup.setLayoutData(layoutData);
-		buckyGroup.setLayout(new GridLayout(3, false));
-		return buckyGroup;
+		prjGroup.setLayoutData(layoutData);
+		prjGroup.setLayout(new GridLayout(3, false));
+		return prjGroup;
 	}
 
-	private void initialValues(final IStructuredSelection structSelection) {
-		String initialValue = calculateFeatureSelection(structSelection);
-		if (initialValue != null) {
-			featureProjectField.setText(initialValue);
-		}
-	}
-
-	private Composite createFeatureSelectionControl(final Composite parent) {
-		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Feature to build:");
+	private Text createFeatureSelectionControl(final Composite parent) {
+		Triple<Label, Text, Button> selectionControl = createSelectionControl(parent, "Feature to build:");
 		// text field
-		featureProjectField = selectionControl.getSecond();
+		final Text featureProjectField = selectionControl.getSecond();
+		featureProjectField.setEditable(true);
 		//select  button
 		selectionControl.getThird().addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				DialogCatalog.openFeatureSelectionDialog(parent.getShell(), new IAcceptor<IProject>() {
+				IAcceptor<IProject> acceptor = new IAcceptor<IProject>() {
 
 					public void accept(IProject project) {
 						if (project != null) {
 							featureProjectField.setText(project.getName());
 						}
 					}
-				});
+				};
+				DialogCatalog.openFeatureSelectionDialog(parent.getShell(), acceptor);
 			}
 		});
-		return selectionControl.getFirst();
+		return featureProjectField;
 	}
 
-	private Composite createProjectControl(final Composite parent) {
+	private Text createProjectControl(final Composite parent) {
 		// label
 		Label projectLabel = new Label(parent, SWT.NONE);
 		projectLabel.setText("Releng project:");
 		projectLabel.setFont(parent.getFont());
 
 		// text field
-		relengProjectField = new Text(parent, SWT.BORDER);
+		Text relengProjectField = new Text(parent, SWT.BORDER);
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
+		grData.horizontalSpan = 2;
 		relengProjectField.setLayoutData(grData);
 		relengProjectField.setFont(parent.getFont());
 		relengProjectField.setEnabled(false);
-		new Label(parent, SWT.NONE);
-		return parent;
+		return relengProjectField;
 	}
 
-	private Composite createSiteFeatureControl(final Composite parent) {
+	private Text createSiteFeatureControl(final Composite parent) {
 		// label
 		Label projectLabel = new Label(parent, SWT.NONE);
 		projectLabel.setText("Site project:");
 		projectLabel.setFont(parent.getFont());
 
 		// text field
-		siteProjectField = new Text(parent, SWT.BORDER);
+		Text text = new Text(parent, SWT.BORDER);
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
-		siteProjectField.setLayoutData(grData);
-		siteProjectField.setFont(parent.getFont());
-		siteProjectField.setEnabled(false);
-		new Label(parent, SWT.NONE);
-		return parent;
+		grData.horizontalSpan = 2;
+		text.setLayoutData(grData);
+		text.setFont(parent.getFont());
+		text.setEnabled(false);
+		return text;
 	}
 
-	private Composite createBuckyControl(final Composite parent) {
-		Triple<Composite, Text, Button> selectionControl = createSelectionControl(parent, "Installation:");
-		buckyField = selectionControl.getSecond();
-		buckyField.setEditable(false);
+	private Text createBuckyControl(final Composite parent) {
+		Triple<Label, Text, Button> selectionControl = createSelectionControl(parent, "Installation:");
+		final Text buckyField = selectionControl.getSecond();
+		ControlDecoration dec = new ControlDecoration(buckyField, SWT.DOWN | SWT.LEFT, parent);
+		FieldDecoration infoIndication = FieldDecorationRegistry.getDefault().getFieldDecoration(
+				FieldDecorationRegistry.DEC_INFORMATION);
+		dec.setImage(infoIndication.getImage());
+		dec.setDescriptionText("You can also manuelly set the buckminster.home property in "
+				+ RelengProjectFactory.BUILD_FILE_NAME + " file later.");
+
 		//select  button
 		Button button = selectionControl.getThird();
 		button.setText("Browse...");
@@ -214,33 +209,40 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 				}
 			}
 		});
-		return selectionControl.getFirst();
+		return buckyField;
 	}
 
-	private Control createTestsControl(final Composite parent) {
-		Triple<Composite, Text, Button> controlTriplet = createSelectionControl(parent, "Tests to launch:");
-		testsField = controlTriplet.getSecond();
+	private ListViewer createTestsControl(final Composite parent) {
+		// label
+		Label projectLabel = new Label(parent, SWT.NONE);
+		GridData gridData = new GridData(SWT.NONE);
+		gridData.verticalAlignment = GridData.BEGINNING;
+		projectLabel.setLayoutData(gridData);
+		projectLabel.setText("Tests to launch:");
+		projectLabel.setFont(parent.getFont());
+
+		final ListViewer listViewer = new ListViewer(parent, SWT.NONE);
+		listViewer.setContentProvider(new ObservableListContentProvider());
+		listViewer.setLabelProvider(new WorkbenchLabelProvider());
+		listViewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
 		//select  button
-		Button button = controlTriplet.getThird();
+		Button button = new Button(parent, SWT.PUSH);
+		button.setFont(parent.getFont());
+		button.setText("Add");
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				testLauncherFile = DialogCatalog.openWorkspaceFileSelectionDialog(parent.getShell(), "*.launch");
-				String fieldValue = "";
-				if (testLauncherFile != null) {
-					fieldValue = new Path(testLauncherFile.getProject().getName()).append(
-							testLauncherFile.getProjectRelativePath()).toString();
-				}
-				testsField.setText(fieldValue);
+				IFile testLauncherFile = DialogCatalog.openWorkspaceFileSelectionDialog(parent.getShell(), "*.launch");
+				projectInfo.addTestLauncher(testLauncherFile);
 			}
 		});
-		return controlTriplet.getFirst();
+		return listViewer;
 	}
 
-	private Triple<Composite, Text, Button> createSelectionControl(final Composite composite, final String controlName) {
+	private Triple<Label, Text, Button> createSelectionControl(final Composite composite, final String controlLabel) {
 		// label
 		Label projectLabel = new Label(composite, SWT.NONE);
-		projectLabel.setText(controlName);
+		projectLabel.setText(controlLabel);
 		projectLabel.setFont(composite.getFont());
 
 		// text field
@@ -248,12 +250,43 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
 		text.setLayoutData(grData);
 		text.setFont(composite.getFont());
+		text.setEditable(false);
 
 		//select  button
 		Button button = new Button(composite, SWT.PUSH);
 		button.setFont(composite.getFont());
 		button.setText("Select");
-		return Tuples.create(composite, text, button);
+		return Tuples.create(projectLabel, text, button);
+	}
+
+	@SuppressWarnings("restriction")
+	private void bindBuckyLocationField(Text buckyField, DataBindingContext dbc) {
+		Binding binding = dbc.bindValue(SWTObservables.observeText(buckyField, SWT.Modify), PojoObservables
+				.observeValue(projectInfo, "buckyLocation"), new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
+				.setBeforeSetValidator(new BuckminsterLocationValidator()), null);
+		ControlDecorationSupport.create(binding, SWT.LEFT | SWT.TOP, buckyField.getParent());
+	}
+
+	private void bindSiteProjectField(Text sitePrjField, DataBindingContext dbc, IObservableValue featPrjObserv) {
+		IObservableValue siteFeatureObservable = PojoObservables.observeValue(projectInfo, "siteFeatureProjectName");
+		dbc.bindValue(SWTObservables.observeText(sitePrjField, SWT.Modify), siteFeatureObservable);
+		dbc.bindValue(featPrjObserv, siteFeatureObservable, new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
+				.setConverter(new SuffixedNameComputedValue(projectInfo, "site")), null);
+	}
+
+	private void bindProjectField(Text prjField, DataBindingContext dbc, IObservableValue featPrjObserv) {
+		IObservableValue prjObserv = PojoObservables.observeValue(projectInfo, "projectName");
+		dbc.bindValue(SWTObservables.observeText(prjField, SWT.Modify), prjObserv);
+		dbc.bindValue(featPrjObserv, prjObserv, new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
+				.setConverter(new SuffixedNameComputedValue(projectInfo, "buckminster")), null);
+	}
+
+	@SuppressWarnings("restriction")
+	private void bindFeatureProjectField(DataBindingContext dbc, IObservableValue featPrjObserv) {
+		Binding featBinding = dbc.bindValue(SWTObservables.observeText(featureProjectField, SWT.Modify), featPrjObserv,
+				new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
+						.setBeforeSetValidator(new FeatureProjectValidator()), null);
+		ControlDecorationSupport.create(featBinding, SWT.LEFT | SWT.TOP);
 	}
 
 	private String calculateFeatureSelection(IStructuredSelection structSelection) {
@@ -268,11 +301,14 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return initialSelection;
 	}
 
-	public IFile getTestLaunchFile() {
-		return testLauncherFile;
+	private void initialValues(final IStructuredSelection structSelection) {
+		String initialValue = calculateFeatureSelection(structSelection);
+		if (initialValue != null) {
+			featureProjectField.setText(initialValue);
+		}
 	}
 
-	final static class SuffixedNameComputedValue extends Converter {
+	final private static class SuffixedNameComputedValue extends Converter {
 		private final String suffix;
 		private final RelengProjectInfo projectInfo;
 
@@ -309,10 +345,10 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		}
 	}
 
-	class FeatureProjectValidator implements IValidator {
+	static private class FeatureProjectValidator implements IValidator {
 
 		public IStatus validate(Object value) {
-			if (value == null) {
+			if (value == null || value.toString().isEmpty()) {
 				return ValidationStatus.error("Please select a feature project from your workspace.");
 			} else {
 				String featureProjectName = value.toString();
@@ -323,16 +359,14 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 			}
 			return ValidationStatus.ok();
 		}
-
 	}
 
-	class BuckminsterLocationValidator implements IValidator {
+	static private class BuckminsterLocationValidator implements IValidator {
 
 		public IStatus validate(Object value) {
 			if (value == null || value.toString().isEmpty()) {
-				return ValidationStatus.warning("Buckminster headless installation directory is not selected. "
-						+ "You can manuelly set the buckminster.home property in "
-						+ RelengProjectFactory.BUILD_FILE_NAME + " file later.");
+				return ValidationStatus
+						.warning("Buckminster headless installation directory is not selected. How to install buckminster headless http://www.eclipse.org/buckminster/downloads.html");
 			} else {
 				File buckyHeadless = new File(value.toString());
 				File[] files = buckyHeadless.listFiles();
