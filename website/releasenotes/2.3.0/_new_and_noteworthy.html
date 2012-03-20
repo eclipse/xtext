@@ -1,5 +1,6 @@
 <html>
 <head>
+<title>Eclipse Xtext</title>
 <style type="text/css" title="text/css" media="screen">
 td  {
 	border-top: 1px solid #D4D4DD;
@@ -53,6 +54,9 @@ have been solved since Xtext 2.2. Here is a summary of the most significant enha
 			mapping information between your DSL files and the generated Java code. This will happen automatically if you use the Xbase infrastructure 
 			for your language implementation.  
 		</p>
+		<div align="center">
+			<iframe src="http://player.vimeo.com/video/38847856?title=0&amp;byline=0&amp;portrait=0" width="640" height="384" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		</div>
 		</td>	
 	</tr>
 <!-- Not yet in Xbase
@@ -73,6 +77,7 @@ have been solved since Xtext 2.2. Here is a summary of the most significant enha
 			The hover for Xbase languages now renders the fully resolved signature of the referenced Java method, constructor or field.
 			Also the JavaDoc is rendered correctly just like Eclipse JDT does it for Java.
 		</p>
+		<img src="images/hover.png" />
 		</td>	
 	</tr>
 	<tr>
@@ -82,7 +87,8 @@ have been solved since Xtext 2.2. Here is a summary of the most significant enha
 			Expressions that are built on top of the Xbase library now provide nice syntax coloring to indicate whether a feature call
 			refers to an imported extension function, static or instance methods or fields.
 		</p>
-		</td>	
+		<img src="images/semantic_coloring_small.png"/>	
+		</td>
 	</tr>
 	<tr>
 		<td class="entry_cell">Spell Checking</td>
@@ -91,6 +97,7 @@ have been solved since Xtext 2.2. Here is a summary of the most significant enha
 			Spell checking is now available for all languages by default. It checks the contents of string literals and
 			comments. You can even use quick fixes to correct spelling mistakes.
 		</p>
+		<img src="images/spelling.png" />
 		</td>	
 	</tr>
 	<tr>
@@ -101,6 +108,27 @@ have been solved since Xtext 2.2. Here is a summary of the most significant enha
 			marker types thus they can act independently from each other and show more reliable indicators about
 			available quickfixes.
 		</p>
+		<img src="images/markers.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Call Hierarchy View</td>
+		<td>
+		<p>
+			For languages that utilize Xbase and support the concept of method calls, Xtext does now integrate 
+			with the JDT's Call Hierarchy View.
+		</p>
+		<img src="images/call_hierarchy.png" />
+		</td>	
+	</tr>
+	<tr>
+		<td class="entry_cell">Type Hierarchy View</td>
+		<td>
+		<p>
+			For languages that utilize Xbase and support the concept of inheritance, Xtext does now integrate 
+			with the JDT's Type Hierarchy View.
+		</p>
+		<img src="images/type_hierarchy.png" />
 		</td>	
 	</tr>
 	<tr>
