@@ -76,7 +76,7 @@ Type:
  * is its name.
  */
 DataType:
-	'datatype' name = ValidID
+	'type' name = ValidID
 ;
 
 /**
