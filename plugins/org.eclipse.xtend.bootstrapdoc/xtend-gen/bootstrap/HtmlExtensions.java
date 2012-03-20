@@ -519,7 +519,6 @@ public class HtmlExtensions {
           String _text = _textPart.getText();
           String _quote = this.quote(_text);
           final String[] paragraphs = _quote.split("^\\s*$");
-          final String[] _converted_paragraphs = (String[])paragraphs;
           final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
               public Boolean apply(final String it) {
                 boolean _isEmpty = it.isEmpty();
@@ -527,7 +526,7 @@ public class HtmlExtensions {
                 return Boolean.valueOf(_not);
               }
             };
-          Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_converted_paragraphs)), _function);
+          Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(paragraphs)), _function);
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("</p>");
           _builder.newLine();

@@ -288,15 +288,13 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     final List<LineMapping> normalizedMappings = this.smapSupport.normalizeLineInfo(lineMappings);
     String _string = xtendCodeWithLineNumbers.toString();
     final String[] lines = _string.split("\n");
-    final String[] _converted_lines = (String[])lines;
-    int _size = ((List<String>)Conversions.doWrapArray(_converted_lines)).size();
+    int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
     int _minus = (_size - 1);
     Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);
     for (final Integer lineNumber : _upTo) {
       {
         final LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);
-        final String[] _converted_lines_1 = (String[])lines;
-        final String line = ((List<String>)Conversions.doWrapArray(_converted_lines_1)).get((lineNumber).intValue());
+        final String line = ((List<String>)Conversions.doWrapArray(lines)).get((lineNumber).intValue());
         boolean _notEquals = (!Objects.equal(mapping, null));
         if (_notEquals) {
           int _indexOf = line.indexOf("//");
