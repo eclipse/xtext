@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -26,7 +27,10 @@ import org.eclipse.xtext.validation.CheckMode;
 import com.google.inject.Inject;
 
 /**
- * {@link IMarkerUpdater} that handles {@link CheckMode#NORMAL_AND_FAST} marker for all changed resources.<br>
+ * {@link IMarkerUpdater} that handles {@link CheckMode#NORMAL_AND_FAST} marker for all changed resources.
+ * 
+ * The implementation delegates to the language specific {@link IResourceUIValidatorExtension validator} if
+ * available.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
@@ -43,7 +47,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateMarkers(Delta delta, ResourceSet resourceSet, IProgressMonitor monitor) {
+	public void updateMarkers(Delta delta, @Nullable ResourceSet resourceSet, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources, 1);
 		subMonitor.subTask(Messages.MarkerUpdaterImpl_ValidateResources);
 
@@ -53,7 +57,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		processDelta(delta, resourceSet, subMonitor.newChild(1));
 	}
 
-	private void processDelta(Delta delta, ResourceSet resourceSet, SubMonitor childMonitor) {
+	private void processDelta(Delta delta, @Nullable ResourceSet resourceSet, SubMonitor childMonitor) {
 		URI uri = delta.getUri();
 		IResourceUIValidatorExtension validatorExtension = getResourceUIValidatorExtension(uri);
 		CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
@@ -63,6 +67,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 				IFile file = (IFile) pair.getFirst();
 				if (validatorExtension != null) {
 					if (delta.getNew() != null) {
+						if (resourceSet == null)
+							throw new IllegalArgumentException("resourceSet may not be null for changed resources.");
 						validatorExtension.updateValidationMarkers(file, resourceSet.getResource(uri, true),
 								normalAndFastMode, childMonitor);
 					} else {
