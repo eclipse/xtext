@@ -7,4 +7,5 @@ Bundle-Vendor: Eclipse Tools Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.3.0",
  org.junit4,
- com.google.inject;bundle-version="2.0.0"
+ com.google.inject;bundle-version="2.0.0",
+ javax.inject;bundle-version="1.0.0"
