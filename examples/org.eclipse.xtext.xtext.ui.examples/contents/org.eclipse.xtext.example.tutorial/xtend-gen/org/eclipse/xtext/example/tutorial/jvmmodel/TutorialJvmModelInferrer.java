@@ -40,9 +40,11 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
     if (element instanceof DomainModelTutorial
          && acceptor instanceof IAcceptor) {
       _infer((DomainModelTutorial)element, (IAcceptor<JvmDeclaredType>)acceptor, isPrelinkingPhase);
+      return;
     } else if (element != null
          && acceptor instanceof IJvmDeclaredTypeAcceptor) {
       _infer(element, (IJvmDeclaredTypeAcceptor)acceptor, isPrelinkingPhase);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(element, acceptor, isPrelinkingPhase).toString());

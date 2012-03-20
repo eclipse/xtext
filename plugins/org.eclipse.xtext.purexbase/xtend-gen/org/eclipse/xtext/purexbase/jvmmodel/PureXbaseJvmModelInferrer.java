@@ -165,8 +165,10 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (m instanceof Model) {
       _infer((Model)m, acceptor, prelinkingPhase);
+      return;
     } else if (m != null) {
       _infer(m, acceptor, prelinkingPhase);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(m, acceptor, prelinkingPhase).toString());

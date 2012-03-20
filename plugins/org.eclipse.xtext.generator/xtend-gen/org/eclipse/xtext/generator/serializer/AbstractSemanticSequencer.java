@@ -71,7 +71,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _name;
   }
   
-  public <T extends ENamedElement>List<T> sort(final Iterable<T> iterable) {
+  public <T extends ENamedElement> List<T> sort(final Iterable<T> iterable) {
     final Function2<T,T,Integer> _function = new Function2<T,T,Integer>() {
         public Integer apply(final T p1, final T p2) {
           String _name = p1.getName();

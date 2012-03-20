@@ -1486,10 +1486,13 @@ public class JvmModelGenerator implements IGenerator {
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
     if (type instanceof JvmEnumerationType) {
       _internalDoGenerate((JvmEnumerationType)type, fsa);
+      return;
     } else if (type instanceof JvmGenericType) {
       _internalDoGenerate((JvmGenericType)type, fsa);
+      return;
     } else if (type != null) {
       _internalDoGenerate(type, fsa);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(type, fsa).toString());
@@ -1540,30 +1543,43 @@ public class JvmModelGenerator implements IGenerator {
   public void toJavaLiteral(final JvmAnnotationValue it, final ITreeAppendable appendable) {
     if (it instanceof JvmAnnotationAnnotationValue) {
       _toJavaLiteral((JvmAnnotationAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmBooleanAnnotationValue) {
       _toJavaLiteral((JvmBooleanAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmByteAnnotationValue) {
       _toJavaLiteral((JvmByteAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmCharAnnotationValue) {
       _toJavaLiteral((JvmCharAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmCustomAnnotationValue) {
       _toJavaLiteral((JvmCustomAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmDoubleAnnotationValue) {
       _toJavaLiteral((JvmDoubleAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmEnumAnnotationValue) {
       _toJavaLiteral((JvmEnumAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmFloatAnnotationValue) {
       _toJavaLiteral((JvmFloatAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmIntAnnotationValue) {
       _toJavaLiteral((JvmIntAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmLongAnnotationValue) {
       _toJavaLiteral((JvmLongAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmShortAnnotationValue) {
       _toJavaLiteral((JvmShortAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmStringAnnotationValue) {
       _toJavaLiteral((JvmStringAnnotationValue)it, appendable);
+      return;
     } else if (it instanceof JvmTypeAnnotationValue) {
       _toJavaLiteral((JvmTypeAnnotationValue)it, appendable);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, appendable).toString());
