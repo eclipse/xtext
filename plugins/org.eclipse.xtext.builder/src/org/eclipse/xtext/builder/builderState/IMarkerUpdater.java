@@ -7,27 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.eclipse.xtext.ui.validation.IResourceUIValidatorExtension;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * Strategy that creates, updates or deletes markers for {@link IResource resources} that were
+ * processed during a build.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @ImplementedBy(MarkerUpdaterImpl.class)
 public interface IMarkerUpdater {
 	/**
-	 * Deletes or updates the {@link org.eclipse.core.resources.IMarker markers} for the given resource delta by 
-	 * delegating to {@link IResourceUIValidatorExtension}.
+	 * Deletes or updates the {@link org.eclipse.core.resources.IMarker markers} for the given resource delta.
 	 * 
+	 * @param delta information about the changed resource. Never <code>null</code>.
 	 * @param resourceSet context resource set from which the updated resource may be obtained; may be {@code null}
 	 *        if the delta represents a resource deletion.
 	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
 	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
 	 *        reported and that the operation cannot be cancelled.
 	 */
-	public void updateMarkers(Delta delta, ResourceSet resourceSet, IProgressMonitor monitor);
+	public void updateMarkers(Delta delta, @Nullable ResourceSet resourceSet, IProgressMonitor monitor);
 }
