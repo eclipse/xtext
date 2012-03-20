@@ -18,7 +18,7 @@
 		<attribute name="target" default="${target_xtext}" />
 		<sequential>
 			<delete file="@{target}/@{name}.zip" />
-			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,.antlr-generator*.jar"  />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,**/*._trace,**/*.smap,.antlr-generator*.jar"  />
 		</sequential>
 	</macrodef>
 	
