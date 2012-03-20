@@ -38,28 +38,19 @@ img {
 
 </head>
 <body>
-<h1>Whats new in Xtext 2.3 beta</h1>
+<h1>What's new in Xtext 2.3 M6</h1>
 <small>See what was new in the <a href="../2.2.0/new_and_noteworthy.php">previous release</a></small>
-<p>Xtext 2.3 BETA offers a lot of new features and improvements. All in all, 
+<p>Xtext 2.3 M6 offers a lot of new features and improvements. All in all, 
 <a href="https://bugs.eclipse.org/bugs/buglist.cgi?list_id=944371;resolution=FIXED;classification=Modeling;chfieldto=2012-03-20;query_format=advanced;chfieldfrom=2011-12-15;component=Xtext;product=TMF">over 120 bug reports and feature requests</a> 
-have been solved since Xtext 2.2. Please note that some the tickets may be related to <a href="http:/www.eclipse.org/xtend/">Eclipse Xtend</a>. Here is a summary of the most significant enhancements:</p>
+have been solved since Xtext 2.2. Here is a summary of the most significant enhancements:</p>
 <table>
-	<tr>
-		<td class="entry_cell">Liberation of Xtend</td>
-		<td>
-		<p>
-			The programming language <a href="http://eclipse.org/xtend/">Xtend</a> moved to its own project under the 
-			umbrella of <a href="http://www.eclipse.org/projects/project.php?id=tools.xtend">eclipse.tools</a>.
-		</p>
-		</td>	
-	</tr>
 	<tr>
 		<td class="entry_cell">Debug Support</td>
 		<td>
 		<p>
-			Xtext now supports debugging of DSLs if you generate Java code from your language. It uses Java's <em>Debugging Support for Other Languages</em> 
-			(JSR-045) to allow to set breakpoints in your language and step through the implementation. All you need to do is to provide the
-			mapping information between your DSL files and the generated Java code. This will happen automagically if you use the Xbase infrastructure 
+			Xtext now supports debugging of DSLs if you generate Java code from your language. It uses Java's <a href="http://jcp.org/en/jsr/detail?id=45">Debugging Support for Other Languages 
+			(JSR-045)</a> to allow to set breakpoints in your language and step through the implementation. All you need to do is to provide the
+			mapping information between your DSL files and the generated Java code. This will happen automatically if you use the Xbase infrastructure 
 			for your language implementation.  
 		</p>
 		</td>	
@@ -79,14 +70,13 @@ have been solved since Xtext 2.2. Please note that some the tickets may be relat
 		<td class="entry_cell">Hover Improvements</td>
 		<td>
 		<p>
-			The hover for Xbase languages new comes with a completely new HTML rendering for documentation comments.
-			It supports all Javadoc tags like @param, @link or @see and even provides the resolved type information for generified
-			types and methods. It is now easily possible to have a look at the inferred type of local variables and expressions.
+			The hover for Xbase languages now renders the fully resolved signature of the referenced Java method, constructor or field.
+			Also the JavaDoc is rendered correctly just like Eclipse JDT does it for Java.
 		</p>
 		</td>	
 	</tr>
 	<tr>
-		<td class="entry_cell">Highlighting of expressions</td>
+		<td class="entry_cell">Semantic highlighting of expressions</td>
 		<td>
 		<p>
 			Expressions that are built on top of the Xbase library now provide nice syntax coloring to indicate whether a feature call
@@ -139,6 +129,16 @@ new BigDecimal("6.1").subtract(
 		</p>
 		<pre class="prettyprint lang-xtend">6.1bd - 0.755bd * 3bd</pre>
 		</td>
+	</tr>
+	<tr>
+		<td class="entry_cell">Xtend moved to Tools</td>
+		<td>
+		<p>
+			<a href="http://eclipse.org/xtend/">Xtend</a> has moved to its own project under the 
+			umbrella of <a href="http://www.eclipse.org/projects/project.php?id=tools.xtend">eclipse.tools</a>.
+			It now has it's own <a href="http://eclipse.org/xtend">new & noteworthy</a> document.
+		</p>
+		</td>	
 	</tr>
 </table>
 
