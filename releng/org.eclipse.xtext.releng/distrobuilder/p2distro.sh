@@ -132,6 +132,7 @@ target platforms will be downloaded from $ECLIPSE_DOWNLOAD"
    mkdir -p $DIR_TARGETPLATFORMS
    cd $DIR_TARGETPLATFORMS
     #FTP download
+    echo "$ECLIPSE_DOWNLOAD"
    ftp -n "$ECLIPSE_DOWNLOAD" <<ENDFTP
    bin
    prompt off
