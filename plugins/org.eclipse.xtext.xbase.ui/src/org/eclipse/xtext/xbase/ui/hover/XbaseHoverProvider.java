@@ -97,7 +97,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		if(objectToView.eIsProxy())
 			return null;
 		IJavaElement javaElement = null;
-		if (objectToView instanceof JvmIdentifiableElement) {
+		if (element != objectToView && objectToView instanceof JvmIdentifiableElement) {
 			javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
 		}
 		String html = getHoverInfoAsHtml(element, objectToView, javaElement, hoverRegion);
@@ -116,18 +116,16 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 */
 	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IJavaElement javaElement,
 			IRegion hoverRegion) {
-		if (objectToView instanceof JvmIdentifiableElement && associations.getSourceElements(objectToView).isEmpty()) {
+		if (javaElement != null && associations.getSourceElements(objectToView).isEmpty()) {
 			// Let the java infrastructure do the job
-			if (javaElement != null) {
-				javadocHover.setJavaElement(javaElement);
-				JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
-						.getHoverInfo2(null, hoverRegion);
-				String html = hoverInfo2.getHtml();
-				if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
-					return hoverGenericsResolver.resolveSignatureInHtml((XExpression) call, javaElement, html);
-				else
-					return html;
-			}
+			javadocHover.setJavaElement(javaElement);
+			JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
+					.getHoverInfo2(null, hoverRegion);
+			String html = hoverInfo2.getHtml();
+			if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
+				return hoverGenericsResolver.resolveSignatureInHtml((XExpression) call, javaElement, html);
+			else
+				return html;
 		}
 		StringBuffer buffer = new StringBuffer();
 		String oldSignature = getFirstLine(objectToView);
