@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.hover;
 
-import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -27,8 +26,7 @@ public class XbaseHoverConfiguration {
 	private HighlightingHelper highlightingHelper;
 	
 	@Inject
-	@Named(Constants.FILE_EXTENSIONS)
-	private String fileExtension;
+	private FileExtensionProvider fileExtensionProvider;
 
 	
 	public EmbeddedEditorFactory getEditorFactory() {
@@ -40,6 +38,6 @@ public class XbaseHoverConfiguration {
 	}
 
 	public String getFileExtension() {
-		return fileExtension;
+		return fileExtensionProvider.getPrimaryFileExtension();
 	}
 }
