@@ -181,7 +181,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 * @since 2.3
 	 * @param call - FeatureCall may be null
 	 */
-	public String computeSignature(EObject call, EObject o) {
+	protected String computeSignature(EObject call, EObject o) {
 		String imageTag = hoverSignatureProvider.getImageTag(o);
 		String signature = hoverSignatureProvider.getSignature(o);
 		if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
