@@ -158,17 +158,19 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		return "";
 	}
 
+	public static final String LEADING_PADDING = "<div style='position: relative; left: 16;'>";
+    public static final String TRAILING_PADDING = "</div><div style='visibility: hidden;'>xx</div>";
 	/**
 	 * @since 2.3
 	 */
-	protected String computeSignature(EObject call, EObject o) {
+	public String computeSignature(EObject call, EObject o) {
 		String imageTag = hoverSignatureProvider.getImageTag(o);
 		String signature = hoverSignatureProvider.getSignature(o);
 		if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
 			signature = hoverGenericsResolver.replaceGenerics((XExpression) call,
 					hoverSignatureProvider.getSignature(o));
 		if (imageTag != null && signature != null) {
-			return "<b>" + imageTag + HTMLPrinter.convertToHTMLContent(signature) + "</b>";
+			return imageTag + LEADING_PADDING +"<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;
 		}
 		return "";
 	}
