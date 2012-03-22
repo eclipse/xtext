@@ -536,7 +536,7 @@ public class ConfigurableCompletionProposal implements
 						eObject = (EObject) o;
 				}
 			}
-			if (eObject != null) {
+			if (eObject != null && !eObject.eIsProxy()) {
 				return hover.getHoverInfo(eObject, viewer, null);
 			}
 		}
