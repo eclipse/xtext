@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.common.types.edit;singleton:=true
 Bundle-Version: 2.3.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
