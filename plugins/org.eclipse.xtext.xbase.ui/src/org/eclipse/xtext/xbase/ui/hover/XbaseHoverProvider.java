@@ -47,7 +47,6 @@ import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
 import org.eclipse.xtext.ui.editor.hover.html.OpenBrowserUtil;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
-import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -73,7 +72,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	@Inject
 	protected IURIEditorOpener uriEditorOpener;
 	@Inject
-	protected XtextElementLinks elementLinks;
+	protected XbaseElementLinks elementLinks;
 	@Inject
 	protected XbaseHoverConfiguration xbaseHoverConfiguration;
 	@Inject
@@ -97,7 +96,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		if(objectToView.eIsProxy())
 			return null;
 		IJavaElement javaElement = null;
-		if (element != objectToView && objectToView instanceof JvmIdentifiableElement) {
+		if (objectToView != element && objectToView instanceof JvmIdentifiableElement) {
 			javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
 		}
 		String html = getHoverInfoAsHtml(element, objectToView, javaElement, hoverRegion);
@@ -118,10 +117,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 			IRegion hoverRegion) {
 		if (javaElement != null && associations.getSourceElements(objectToView).isEmpty()) {
 			// Let the java infrastructure do the job
-			javadocHover.setJavaElement(javaElement);
-			JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
-					.getHoverInfo2(null, hoverRegion);
-			String html = hoverInfo2.getHtml();
+			String html = getHtmlFromIJavaElement(javaElement);
 			if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
 				return hoverGenericsResolver.resolveSignatureInHtml((XExpression) call, javaElement, html);
 			else
@@ -203,7 +199,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 */
 	@Override
 	protected void addLinkListener(final IXtextBrowserInformationControl control) {
-		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
+		control.addLocationListener(elementLinks.createLocationListener(new XbaseElementLinks.IXbaseLinkHandler() {
 
 			public void handleXtextdocViewLink(URI linkTarget) {
 			}
@@ -261,7 +257,24 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 						.getResourceSet();
 				return rs.getEObject(uri, true);
 			}
+
+			public void handleInlineJavadocLink(IJavaElement target) {
+				String html = getHtmlFromIJavaElement(target);
+				XtextBrowserInformationControlInput hoverInfo = new XbaseInformationControlInput((XtextBrowserInformationControlInput) control.getInput(), null, target, html, labelProvider);
+				if (control.hasDelayedInputChangeListener())
+					control.notifyDelayedInputChange(hoverInfo);
+				else
+					control.setInput(hoverInfo);
+			}
 		}));
+	}
+	
+	protected String getHtmlFromIJavaElement(IJavaElement javaElement) {
+		javadocHover.setJavaElement(javaElement);
+		JavadocBrowserInformationControlInput hoverInfo2 = (JavadocBrowserInformationControlInput) javadocHover
+				.getHoverInfo2(null, null);
+		String html = hoverInfo2.getHtml();
+		return html;
 	}
 
 	/**
