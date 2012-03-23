@@ -5,7 +5,6 @@ If repositories folder does not exists it will use $REMOTE_REPOSITORIES to resol
 It compress new eclipse IDEs 
 It renames file names using DISTRO_SUFFIX and VERSION property, so i.e. eclipse-SDK-3.8-macosx-cocoa-x86_64.tar.gz became eclipse-SDK-3.8-Xtext-2.0.1-macosx-cocoa-x86_64.tar.gz
 
-
 How to build a juno based distro.
 
 In eclipse /org.eclipse.xtext.releng/distrobuilder:
