@@ -124,7 +124,9 @@ public class XtextElementLinks {
 	private org.eclipse.emf.common.util.URI createURI(EObject o) {
 		return o.eResource().getURI().appendFragment(o.eResource().getURIFragment(o));
 	}
-	
+	/**
+	 * @since 2.3
+	 */
 	protected class XtextLinkAdapter extends LocationAdapter {
 		protected ILinkHandler handler;
 
