@@ -421,7 +421,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 				fInfoControl.notifyDelayedInputChange(null);
 				fInfoControl.dispose();
 				// IJavaElement
-				if (infoInput.getInputElement() != null) {
+				if (infoInput.getInputElement() != null && infoInput.getInputElement() instanceof IJavaElement) {
 					try {
 						JavaUI.openInEditor((IJavaElement) infoInput.getInputElement());
 					} catch (PartInitException e) {
