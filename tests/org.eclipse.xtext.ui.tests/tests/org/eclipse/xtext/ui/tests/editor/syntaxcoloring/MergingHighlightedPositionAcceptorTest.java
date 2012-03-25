@@ -373,6 +373,45 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		checkPosition(positions.get(3), 27, 1, 1, "2", "3");
 	}
 	
+	@Test public void testMergePositions_Bug375272_01() {
+		acceptor.addPosition(0, 34, "1");
+		acceptor.addPosition(34, 4, "1");
+		acceptor.addPosition(6, 54, "1");
+		acceptor.addPosition(22, 52, "1");
+
+		acceptor.mergePositions();
+		List<LightweightPosition> positions = acceptor.getPositions();
+		assertEquals("positions.size: "+ positions, 6, positions.size());
+		checkPosition(positions.get(0), 0, 6, 0, "1");
+		checkPosition(positions.get(1), 6, 16, 2, "1");
+		checkPosition(positions.get(2), 22, 12, 3, "1");
+		checkPosition(positions.get(3), 34, 4, 3, "1");
+		checkPosition(positions.get(4), 38, 22, 3, "1");
+		checkPosition(positions.get(5), 60, 14, 3, "1");
+	}
+	
+	@Test public void testMergePositions_Bug375272_02() {
+		acceptor.addPosition(58, 51, "1");
+		acceptor.addPosition(110, 6, "1");
+		acceptor.addPosition(77, 52, "1");
+		acceptor.addPosition(93, 48, "1");
+		
+		acceptor.addPosition(105, 11, "2");
+		acceptor.addPosition(105, 11, "3");
+		
+		acceptor.mergePositions();
+		List<LightweightPosition> positions = acceptor.getPositions();
+		assertEquals("positions.size: "+ positions, 8, positions.size());
+		checkPosition(positions.get(0), 58, 19, 0, "1");
+		checkPosition(positions.get(1), 77, 16, 2, "1");
+		checkPosition(positions.get(2), 93, 12, 3, "1");
+		checkPosition(positions.get(3), 105, 4, 5, "1", "2", "3");
+		checkPosition(positions.get(4), 109, 1, 5, "1", "2", "3");
+		checkPosition(positions.get(5), 110, 6, 1, "1", "2", "3");
+		checkPosition(positions.get(6), 116, 13, 3, "1");
+		checkPosition(positions.get(7), 129, 12, 3, "1");
+	}
+	
 	private void checkPosition(LightweightPosition position, int offset, int length, int timestamp, String... ids) {
 		assertNotNull(position);
 		if (timestamp >= 0)
