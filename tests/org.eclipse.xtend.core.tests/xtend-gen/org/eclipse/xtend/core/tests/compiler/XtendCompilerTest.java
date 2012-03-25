@@ -2764,6 +2764,63 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testBug373482() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class X {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def method() ");
+    _builder.append("\'\'\'\u00AB", "	");
+    _builder.append("logSomething");
+    _builder.append("\u00BB\'\'\'", "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("def void logSomething() {println(\"zonk\")}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class X {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public CharSequence method() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.logSomething();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _builder;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void logSomething() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("InputOutput.<String>println(\"zonk\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();

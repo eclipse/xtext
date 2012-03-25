@@ -1319,6 +1319,34 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''')
 		
 	}
+	
+	@Test
+	def testBug373482() {
+		assertCompilesTo(
+			'''
+				class X {
+					def method() «"'''«"»logSomething«"»'''"»
+					def void logSomething() {println("zonk")}
+				}
+			''', '''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
+				
+				@SuppressWarnings("all")
+				public class X {
+				  public CharSequence method() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    this.logSomething();
+				    return _builder;
+				  }
+				  
+				  public void logSomething() {
+				    InputOutput.<String>println("zonk");
+				  }
+				}
+			''')
+		
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)

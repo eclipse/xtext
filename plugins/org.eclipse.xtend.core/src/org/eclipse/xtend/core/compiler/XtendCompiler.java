@@ -276,8 +276,9 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 
 		protected void writeExpression(XExpression expression, CharSequence indentation, boolean immediate) {
-			internalToJavaStatement(expression, appendable, true);
-			if (!getTypeReferences().is(getTypeProvider().getType(expression), Void.TYPE)) {
+			boolean referenced = !getTypeReferences().is(getTypeProvider().getType(expression), Void.TYPE);
+			internalToJavaStatement(expression, appendable, referenced);
+			if (referenced) {
 				ITreeAppendable tracingAppendable = appendable.trace(expression, true);
 				tracingAppendable.newLine();
 				tracingAppendable.append(variableName);
