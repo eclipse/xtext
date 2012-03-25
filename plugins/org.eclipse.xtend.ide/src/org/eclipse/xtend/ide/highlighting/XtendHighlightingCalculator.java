@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
@@ -77,22 +78,38 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		XtendClass xtendClass = file.getXtendClass();
-		highlightDeprectedXtendAnnotationTarget(acceptor, xtendClass);
 		if (xtendClass != null) {
+			highlightDeprectedXtendAnnotationTarget(acceptor, xtendClass);
+			highlightRichStringsInAnnotations(acceptor, xtendClass);
 			for (XtendMember member : xtendClass.getMembers()) {
 				if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
 					XExpression rootExpression = function.getExpression();
 					highlightRichStrings(rootExpression, acceptor);
+					CreateExtensionInfo createExtensionInfo = function.getCreateExtensionInfo();
+					if (createExtensionInfo != null) {
+						highlightRichStrings(createExtensionInfo.getCreateExpression(), acceptor);
+					}
 				}
 				if(member.eClass() == XtendPackage.Literals.XTEND_FIELD){
 					XtendField field = (XtendField) member;
 					highlightXtendField(field,acceptor);
+					XExpression initializer = field.getInitialValue();
+					highlightRichStrings(initializer, acceptor);
 				}
 				highlightDeprectedXtendAnnotationTarget(acceptor, member);
+				highlightRichStringsInAnnotations(acceptor, member);
 			}
 		}
 		super.doProvideHighlightingFor(resource, acceptor);
+	}
+
+	protected void highlightRichStringsInAnnotations(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target) {
+		if (target != null) {
+			for(XAnnotation annotation: target.getAnnotations()) {
+				highlightRichStrings(annotation, acceptor);
+			}
+		}
 	}
 
 	@Override
@@ -108,13 +125,13 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			}
 	}
 	
-	protected void highlightDeprectedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, EObject object){
-		if(object != null && object instanceof XtendAnnotationTarget)
-			for(XAnnotation annotation : ((XtendAnnotationTarget)object).getAnnotations()){
+	protected void highlightDeprectedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target){
+		if(target != null)
+			for(XAnnotation annotation : target.getAnnotations()){
 				JvmAnnotationType annotationType = annotation.getAnnotationType();
 				if(annotationType != null && !annotationType.eIsProxy() && DeprecationUtil.isDeprecated(annotationType)){
-					EStructuralFeature nameFeature = object.eClass().getEStructuralFeature("name");
-					highlightObjectAtFeature(acceptor, object, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+					EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
+					highlightObjectAtFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 				}
 			}
 	}
@@ -216,17 +233,29 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 						currentOffset += 3;
 					} else if (node.getText().startsWith("\u00AB\u00AB")) {
 						String nodeText = node.getText();
-						int length = Math.min(nodeText.indexOf('\n'), nodeText.indexOf('\r'));
+						int lineFeed = nodeText.indexOf('\n');
+						int length = lineFeed; 
+						int carriageReturn = nodeText.indexOf('\r');
+						if (carriageReturn != -1) {
+							if (length == -1) {
+								length = carriageReturn;
+							} else {
+								length = Math.min(carriageReturn, length);
+							}
+						}
 						int start = node.getTotalOffset();
 						if (length == -1) {
 							length = node.getTotalLength();
 						}
 						if (recentNode != null && recentNode.getTotalEndOffset() == start) {
-							acceptor.addPosition(start - 1, 1, DefaultHighlightingConfiguration.COMMENT_ID);
+							start = start - 1;
+							length = length + 1;
 						}
 						acceptor.addPosition(start, length, DefaultHighlightingConfiguration.COMMENT_ID);
 						highlightClosingQuotes(node);
 						currentOffset = start + length + 1;
+						if (lineFeed == carriageReturn + 1)
+							currentOffset++;
 					} else {
 						highlightClosingQuotes(node);
 						currentOffset += 1;
