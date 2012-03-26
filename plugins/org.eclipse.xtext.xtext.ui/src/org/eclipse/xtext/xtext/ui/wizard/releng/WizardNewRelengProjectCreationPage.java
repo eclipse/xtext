@@ -51,10 +51,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
-
-import com.google.common.base.Strings;
 
 //import org.eclipse.jface.internal.databinding.provisional.fieldassist.ControlDecorationSupport;
 
@@ -350,7 +349,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 
 		private String calculateProjectName() {
 			String nameSpace = projectInfo.getProjectNameSpace();
-			if (Strings.isNullOrEmpty(nameSpace))
+			if (Strings.isEmpty(nameSpace))
 				return "";
 			String projectsuffix = findNextValidProjectSuffix(nameSpace, suffix); //$NON-NLS-1$ //$NON-NLS-2$
 			return nameSpace + "." + projectsuffix;
@@ -374,7 +373,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	static private class FeatureProjectValidator implements IValidator {
 
 		public IStatus validate(Object value) {
-			if (value == null || value.toString().isEmpty()) {
+			if (value == null || Strings.isEmpty(value.toString())) {
 				return ValidationStatus.error("Please select a feature project from your workspace.");
 			} else {
 				String featureProjectName = value.toString();
@@ -390,7 +389,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	static private class BuckminsterLocationValidator implements IValidator {
 
 		public IStatus validate(Object value) {
-			if (value == null || value.toString().isEmpty()) {
+			if (value == null || Strings.isEmpty(value.toString())) {
 				return ValidationStatus
 						.warning("Buckminster headless installation directory is not selected. How to install buckminster headless http://www.eclipse.org/buckminster/downloads.html");
 			} else {
