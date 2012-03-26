@@ -11,8 +11,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -41,7 +46,8 @@ public class DialogCatalog {
 		return dialog.open();
 	}
 
-	public static IFile openWorkspaceFileSelectionDialog(Shell shell, String patternString) {
+	public static IFile openWorkspaceFileSelectionDialog(Shell shell, String patternString,
+			ViewerFilter additionalFilter) {
 		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(shell, new WorkbenchLabelProvider(),
 				new WorkbenchContentProvider());
 		dialog.setAllowMultiple(false);
@@ -52,6 +58,8 @@ public class DialogCatalog {
 		PatternFilter filter = new PatternFilter();
 		filter.setPattern(patternString);
 		dialog.addFilter(filter);
+		if (additionalFilter != null)
+			dialog.addFilter(additionalFilter);
 		dialog.setValidator(new ISelectionStatusValidator() {
 
 			public IStatus validate(Object[] selection) {
@@ -67,11 +75,34 @@ public class DialogCatalog {
 		dialog.create();
 		dialog.open();
 		Object result = dialog.getFirstResult();
-		if (result == null) {
+		if (!(result instanceof IFile)) {
 			return null;
 		}
 		IFile resource = (IFile) result;
 		return resource;
 
+	}
+
+	public static IFile openJunitLaunchSelectionDialog(Shell shell) {
+		ViewerFilter viewerFilter = new ViewerFilter() {
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				if (element instanceof IFile) {
+					IFile file = (IFile) element;
+					ILaunchConfiguration launchConfiguration = DebugPlugin.getDefault().getLaunchManager()
+							.getLaunchConfiguration(file);
+					try {
+						if ("JUnit".equals(launchConfiguration.getType().getName())) {
+							return true;
+						}
+					} catch (CoreException e) {
+						e.printStackTrace();
+					}
+					return false;
+				}
+				return true;
+			}
+		};
+		return openWorkspaceFileSelectionDialog(shell, "*.launch", viewerFilter);
 	}
 }

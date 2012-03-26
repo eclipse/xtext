@@ -11,6 +11,7 @@
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -28,14 +29,12 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.jface.databinding.viewers.ViewerSupport;
-import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
-import org.eclipse.jface.internal.databinding.provisional.fieldassist.ControlDecorationSupport;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.wizard.WizardPage;
@@ -44,6 +43,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
@@ -55,6 +55,8 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Strings;
+
+//import org.eclipse.jface.internal.databinding.provisional.fieldassist.ControlDecorationSupport;
 
 /**
  * The main page of the Releng project wizard.
@@ -112,7 +114,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 
 		IObservableList observeList = new WritableList(projectInfo.getTestLaunchers(), IFile.class);
 		testsList.setInput(observeList);
-		dbc.bindList(SWTObservables.observeItems(testsList.getList()), observeList);
+		testsList.setLabelProvider(new WorkbenchLabelProvider());
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(pageMain);
@@ -221,19 +223,43 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		projectLabel.setText("Tests to launch:");
 		projectLabel.setFont(parent.getFont());
 
-		final ListViewer listViewer = new ListViewer(parent, SWT.NONE);
+		final ListViewer listViewer = new ListViewer(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		listViewer.setContentProvider(new ObservableListContentProvider());
-		listViewer.setLabelProvider(new WorkbenchLabelProvider());
 		listViewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
+		Composite buttons = new Composite(parent, SWT.NONE);
+		buttons.setLayout(new RowLayout(SWT.VERTICAL));
 		//select  button
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(buttons, SWT.PUSH);
 		button.setFont(parent.getFont());
 		button.setText("Add");
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				IFile testLauncherFile = DialogCatalog.openWorkspaceFileSelectionDialog(parent.getShell(), "*.launch");
-				projectInfo.addTestLauncher(testLauncherFile);
+				IFile testLauncherFile = DialogCatalog.openJunitLaunchSelectionDialog(parent.getShell());
+				if (testLauncherFile != null) {
+					listViewer.add(testLauncherFile);
+					IObservableList input = (IObservableList) listViewer.getInput();
+					input.add(testLauncherFile);
+					listViewer.setInput(input);
+				}
+			}
+		});
+		//select  button
+		Button remove = new Button(buttons, SWT.PUSH);
+		remove.setFont(parent.getFont());
+		remove.setText("Remove");
+		remove.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ISelection iSelection = listViewer.getSelection();
+				if (!iSelection.isEmpty()) {
+					IObservableList input = (IObservableList) listViewer.getInput();
+					List<?> list = ((IStructuredSelection) iSelection).toList();
+					if (input.containsAll(list)) {
+						input.removeAll(list);
+					}
+					listViewer.setInput(input);
+				}
 			}
 		});
 		return listViewer;
@@ -264,7 +290,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		Binding binding = dbc.bindValue(SWTObservables.observeText(buckyField, SWT.Modify), PojoObservables
 				.observeValue(projectInfo, "buckyLocation"), new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
 				.setBeforeSetValidator(new BuckminsterLocationValidator()), null);
-		ControlDecorationSupport.create(binding, SWT.LEFT | SWT.TOP, buckyField.getParent());
+		//		ControlDecorationSupport.create(binding, SWT.LEFT | SWT.TOP, buckyField.getParent());
 	}
 
 	private void bindSiteProjectField(Text sitePrjField, DataBindingContext dbc, IObservableValue featPrjObserv) {
@@ -286,7 +312,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		Binding featBinding = dbc.bindValue(SWTObservables.observeText(featureProjectField, SWT.Modify), featPrjObserv,
 				new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE)
 						.setBeforeSetValidator(new FeatureProjectValidator()), null);
-		ControlDecorationSupport.create(featBinding, SWT.LEFT | SWT.TOP);
+		//		ControlDecorationSupport.create(featBinding, SWT.LEFT | SWT.TOP);
 	}
 
 	private String calculateFeatureSelection(IStructuredSelection structSelection) {
