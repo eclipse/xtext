@@ -66,7 +66,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				if (o2.getAssignedGrammarElement() == nodeModelEle)
 					return 1;
 			}
-			if (o1.getAssignedGrammarElement() == null && o1.getAssignedGrammarElement() == null)
+			if (o1.getAssignedGrammarElement() == null && o2.getAssignedGrammarElement() == null)
 				return 0;
 			if (o1.getAssignedGrammarElement() == null)
 				return 1;
