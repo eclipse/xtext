@@ -444,7 +444,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 				}
 			} catch (CharacterCodingException ex) {
 				String message= MessageFormat.format("Some characters cannot be mapped using \"{0}\" character encoding.\n" +
-						"Either change the encoding or remove the characters which are not supported by the \"{0}\" character encoding.", Charset.defaultCharset().name());
+						"Either change the encoding or remove the characters which are not supported by the \"{0}\" character encoding.", new Object[]{ Charset.defaultCharset().name() });
 				IStatus s= new Status(IStatus.ERROR, Activator.PLUGIN_ID, 1 /* EditorsUI.CHARSET_MAPPING_FAILED */, message, null);
 				throw new CoreException(s);
 			} catch (IOException e) {
