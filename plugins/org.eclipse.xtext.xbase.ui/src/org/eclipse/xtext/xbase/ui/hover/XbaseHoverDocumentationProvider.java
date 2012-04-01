@@ -726,7 +726,7 @@ public class XbaseHoverDocumentationProvider {
 		Object classpathURIContext = ((XtextResourceSet) context.eResource().getResourceSet()).getClasspathURIContext();
 		if (classpathURIContext instanceof IJavaProject) {
 			IJavaProject javaProject = (IJavaProject) classpathURIContext;
-			ASTParser parser = ASTParser.newParser(AST.JLS4);
+			ASTParser parser = ASTParser.newParser(AST.JLS3);
 			parser.setProject(javaProject);
 			@SuppressWarnings("unchecked")
 			Map<String, String> options = javaProject.getOptions(true);
