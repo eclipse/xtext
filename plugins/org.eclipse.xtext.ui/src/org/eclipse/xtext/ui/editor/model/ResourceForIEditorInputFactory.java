@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
+import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -53,11 +54,28 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 				Resource result = createResource(storage);
 				if (result != null)
 					return result;
+			} else if (editorInput instanceof IURIEditorInput) {
+				Resource result = createResource(((IURIEditorInput) editorInput).getURI());
+				if (result != null)
+					return result;
 			}
 		} catch (CoreException e) {
 			throw new WrappedException(e);
 		}
 		throw new IllegalArgumentException("Couldn't create EMF Resource for input " + editorInput);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected Resource createResource(java.net.URI uri) {
+		ResourceSet resourceSet = getResourceSet(null);
+		URI emfUri = URI.createURI(uri.toString());
+		configureResourceSet(resourceSet, emfUri);
+		XtextResource resource = (XtextResource) resourceFactory.createResource(emfUri);
+		resourceSet.getResources().add(resource);
+		resource.setValidationDisabled(true);
+		return resource;
 	}
 
 	protected Resource createResource(IStorage storage) throws CoreException {
