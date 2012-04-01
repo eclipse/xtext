@@ -121,7 +121,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = null;
-		if (element instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(element)) {
 			document= createEmptyDocument();
 			if (setDocumentContent(document, (IEditorInput) element, Charset.defaultCharset().name())) {
 				setupDocument(element, document);
@@ -139,7 +139,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	public boolean isDeleted(Object element) {
-		if (element instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(element)) {
 			final IURIEditorInput input = (IURIEditorInput) element;
 			boolean result = !input.exists();
 			return result;
@@ -161,7 +161,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding)
 			throws CoreException {
 		boolean result;
-		if (editorInput instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(editorInput)) {
 			java.net.URI uri= ((IURIEditorInput) editorInput).getURI();
 			try {
 				InputStream contentStream = null;
@@ -222,7 +222,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info;
-		if (element instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(element)) {
 			IDocument document= null;
 			IStatus status= null;
 			try {
@@ -349,7 +349,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	
 	@Override
 	public boolean isModifiable(Object element) {
-		if (element instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(element)) {
 			URIInfo info= (URIInfo) getElementInfo(element);
 			if (info != null) {
 				if (info.updateCache) {
@@ -367,7 +367,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	
 	@Override
 	public boolean isReadOnly(Object element) {
-		if (element instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(element)) {
 			URIInfo info= (URIInfo) getElementInfo(element);
 			if (info != null) {
 				if (info.updateCache) {
@@ -381,6 +381,13 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			}
 		}
 		return super.isReadOnly(element);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected boolean isWorkspaceExternalEditorInput(Object element) {
+		return element instanceof IURIEditorInput && !(element instanceof IFileEditorInput);
 	}
 	
 	/**
@@ -410,7 +417,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Override
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite)
 			throws CoreException {
-		if (element instanceof IURIEditorInput) {
+		if (isWorkspaceExternalEditorInput(element)) {
 			CharsetEncoder encoder= Charset.defaultCharset().newEncoder();
 			encoder.onMalformedInput(CodingErrorAction.REPLACE);
 			encoder.onUnmappableCharacter(CodingErrorAction.REPORT);
@@ -452,4 +459,15 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		super.doSaveDocument(monitor, element, document, overwrite);
 	}
 
+	@Override
+	protected void doUpdateStateCache(Object element) throws CoreException {
+		if (isWorkspaceExternalEditorInput(element)) {
+			URIInfo info= (URIInfo) getElementInfo(element);
+			if (info != null) {
+				info.updateCache= true;
+				return;
+			}
+		}
+		super.doUpdateStateCache(element);
+	}
 }
