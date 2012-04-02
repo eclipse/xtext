@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.internal.Inline;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
 import com.google.inject.Inject;
 
@@ -48,7 +48,7 @@ public class XExpressionHelper {
 	private ITypeProvider typeProvider;
 
 	@Inject
-	private XbaseTypeConformanceComputer conformanceComputer;
+	private TypeConformanceComputer conformanceComputer;
 
 	@Inject
 	private TypeReferences typeReferences;
