@@ -83,6 +83,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     XtextPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects

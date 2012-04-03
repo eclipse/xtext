@@ -35,6 +35,33 @@ public interface EcoreReferenceFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>My Named Element 01</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Named Element 01</em>'.
+   * @generated
+   */
+  MyNamedElement_01 createMyNamedElement_01();
+
+  /**
+   * Returns a new object of class '<em>My Named Element 02</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Named Element 02</em>'.
+   * @generated
+   */
+  MyNamedElement_02 createMyNamedElement_02();
+
+  /**
+   * Returns a new object of class '<em>My Named Element 03</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>My Named Element 03</em>'.
+   * @generated
+   */
+  MyNamedElement_03 createMyNamedElement_03();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

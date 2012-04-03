@@ -12,9 +12,18 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.EcorePerNsURIPackage;
+
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.EcorePerPlatformPluginPackage;
+
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.EcorePerPlatformResourcePackage;
+
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferenceFactory;
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage;
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.Model;
+import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_01;
+import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_02;
+import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_03;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +39,27 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * @generated
    */
   private EClass modelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myNamedElement_01EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myNamedElement_02EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myNamedElement_03EClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -80,7 +110,9 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
     isInited = true;
 
     // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
+    EcorePerNsURIPackage.eINSTANCE.eClass();
+    EcorePerPlatformPluginPackage.eINSTANCE.eClass();
+    EcorePerPlatformResourcePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theEcoreReferencePackage.createPackageContents();
@@ -122,6 +154,36 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getMyNamedElement_01()
+  {
+    return myNamedElement_01EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMyNamedElement_02()
+  {
+    return myNamedElement_02EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMyNamedElement_03()
+  {
+    return myNamedElement_03EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EcoreReferenceFactory getEcoreReferenceFactory()
   {
     return (EcoreReferenceFactory)getEFactoryInstance();
@@ -149,6 +211,12 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEReference(modelEClass, MODEL__EXTENDS);
+
+    myNamedElement_01EClass = createEClass(MY_NAMED_ELEMENT_01);
+
+    myNamedElement_02EClass = createEClass(MY_NAMED_ELEMENT_02);
+
+    myNamedElement_03EClass = createEClass(MY_NAMED_ELEMENT_03);
   }
 
   /**
@@ -177,16 +245,28 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
 
     // Obtain other dependent packages
     EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+    EcorePerNsURIPackage theEcorePerNsURIPackage = (EcorePerNsURIPackage)EPackage.Registry.INSTANCE.getEPackage(EcorePerNsURIPackage.eNS_URI);
+    EcorePerPlatformResourcePackage theEcorePerPlatformResourcePackage = (EcorePerPlatformResourcePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePerPlatformResourcePackage.eNS_URI);
+    EcorePerPlatformPluginPackage theEcorePerPlatformPluginPackage = (EcorePerPlatformPluginPackage)EPackage.Registry.INSTANCE.getEPackage(EcorePerPlatformPluginPackage.eNS_URI);
 
     // Create type parameters
 
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    myNamedElement_01EClass.getESuperTypes().add(theEcorePerNsURIPackage.getExtendsNsURIEObject());
+    myNamedElement_02EClass.getESuperTypes().add(theEcorePerPlatformResourcePackage.getExtendsResourceEObject());
+    myNamedElement_03EClass.getESuperTypes().add(theEcorePerPlatformPluginPackage.getExtendsPluginEObject());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getModel_Extends(), theEcorePackage.getEObject(), null, "extends", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(myNamedElement_01EClass, MyNamedElement_01.class, "MyNamedElement_01", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(myNamedElement_02EClass, MyNamedElement_02.class, "MyNamedElement_02", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(myNamedElement_03EClass, MyNamedElement_03.class, "MyNamedElement_03", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);
