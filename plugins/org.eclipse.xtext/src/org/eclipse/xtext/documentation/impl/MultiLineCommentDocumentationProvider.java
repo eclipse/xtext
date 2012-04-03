@@ -24,11 +24,13 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
  */
+@Singleton
 public class MultiLineCommentDocumentationProvider implements IEObjectDocumentationProvider, IEObjectDocumentationProviderExtension {
 
 	public final static String RULE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.ruleName";
@@ -38,29 +40,47 @@ public class MultiLineCommentDocumentationProvider implements IEObjectDocumentat
 	public final static String LINE_POSTFIX = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.linePostfix";
 	public final static String WHITESPACE = "org.eclipse.xtext.ui.editor.hover.MultiLineDocumentationProvider.whitespace";
 
+	/**
+	 * @since 2.3
+	 */
 	@Inject(optional = true)
 	@Named(RULE)
-	String ruleName = "ML_COMMENT";
+	protected String ruleName = "ML_COMMENT";
 
+	/**
+	 * @since 2.3
+	 */
 	@Inject(optional = true)
 	@Named(START_TAG)
-	String startTag = "/\\*\\*?"; // regular expression
+	protected String startTag = "/\\*\\*?"; // regular expression
 
+	/**
+	 * @since 2.3
+	 */
 	@Inject(optional = true)
 	@Named(END_TAG)
-	String endTag = "\\*/"; // regular expression
+	protected String endTag = "\\*/"; // regular expression
 
+	/**
+	 * @since 2.3
+	 */
 	@Inject(optional = true)
 	@Named(LINE_PREFIX)
-	String linePrefix = "\\** ?"; // regular expression
+	protected String linePrefix = "\\** ?"; // regular expression
 
+	/**
+	 * @since 2.3
+	 */
 	@Inject(optional = true)
 	@Named(LINE_POSTFIX)
-	String linePostfix = "\\**"; // regular expression
+	protected String linePostfix = "\\**"; // regular expression
 
+	/**
+	 * @since 2.3
+	 */
 	@Inject(optional = true)
 	@Named(WHITESPACE)
-	String whitespace = "( |\\t)*"; // regular expression
+	protected String whitespace = "( |\\t)*"; // regular expression
 	
 	protected String findComment(EObject o) {
 		String returnValue = null;
