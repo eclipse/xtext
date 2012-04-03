@@ -69,9 +69,9 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			if (o1.getAssignedGrammarElement() == null && o2.getAssignedGrammarElement() == null)
 				return 0;
 			if (o1.getAssignedGrammarElement() == null)
-				return 1;
-			if (o2.getAssignedGrammarElement() == null)
 				return -1;
+			if (o2.getAssignedGrammarElement() == null)
+				return 1;
 			boolean o1Opt = obj.isOptional(o1.getFeatureID());
 			boolean o2Opt = obj.isOptional(o2.getFeatureID());
 			if (o1Opt && o2Opt)
