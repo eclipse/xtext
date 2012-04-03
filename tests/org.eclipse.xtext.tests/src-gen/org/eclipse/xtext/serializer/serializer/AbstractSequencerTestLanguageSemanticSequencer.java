@@ -16,6 +16,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
@@ -92,6 +93,12 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 			case SequencertestPackage.ALTERNATIVE_MULTIPLICITIES:
 				if(context == grammarAccess.getAlternativeMultiplicitiesRule()) {
 					sequence_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.COMPLEX1:
+				if(context == grammarAccess.getComplex1Rule()) {
+					sequence_Complex1(context, (Complex1) semanticObject); 
 					return; 
 				}
 				else break;
@@ -316,6 +323,15 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	
 	/**
 	 * Constraint:
+	 *     (val1=ID? val2=ID? (val3+=ID | val4+=ID | val5+=ID | val6+=ID)*)
+	 */
+	protected void sequence_Complex1(EObject context, Complex1 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (val=ID | (val=ID flag?='kw1'))
 	 */
 	protected void sequence_DependentAlternative1(EObject context, DependentAlternative1 semanticObject) {
@@ -396,7 +412,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         x23=UnorderedAlternative | 
 	 *         x24=UnorderedGroup | 
 	 *         x25=UnorderedGroupOptional | 
-	 *         x26=UnorderedGroupBoolean
+	 *         x26=UnorderedGroupBoolean | 
+	 *         x27=Complex1
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {

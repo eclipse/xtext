@@ -350,6 +350,15 @@ public interface SequencertestFactory extends EFactory
   UnorderedGroupBoolean createUnorderedGroupBoolean();
 
   /**
+   * Returns a new object of class '<em>Complex1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Complex1</em>'.
+   * @generated
+   */
+  Complex1 createComplex1();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

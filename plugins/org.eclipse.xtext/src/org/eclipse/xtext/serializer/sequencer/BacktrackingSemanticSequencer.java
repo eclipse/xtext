@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -74,11 +75,15 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				return 1;
 			boolean o1Opt = obj.isOptional(o1.getFeatureID());
 			boolean o2Opt = obj.isOptional(o2.getFeatureID());
-			if (o1Opt && o2Opt)
-				return 0;
-			if (o1Opt)
+			if (o1Opt && !o2Opt)
 				return 1;
-			if (o2Opt)
+			if (o2Opt && !o1Opt)
+				return -1;
+			int o1Cnt = obj.getValueCount(o1.getFeatureID());
+			int o2Cnt = obj.getValueCount(o2.getFeatureID());
+			if (o1Cnt == 0 && o2Cnt > 0)
+				return 1;
+			if (o2Cnt == 0 && o1Cnt > 0)
 				return -1;
 			return 0;
 		}
@@ -283,6 +288,20 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			return result;
 		}
 
+		public boolean canEnter(ISemState state) {
+			for (int i = 0; i < nextIndex.length; i++)
+				if (i != state.getFeatureID()) {
+					int count = nextIndex[i];
+					if (count < obj.getValueCount(i)) {
+						if (count == 0 && obj.isOptional(i))
+							continue;
+						if (!state.getAllFollowerFeatures().get(i))
+							return false;
+					}
+				}
+			return true;
+		}
+
 		public int getIndex() {
 			return index;
 		}
@@ -349,6 +368,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 					consumed.add(feature.getName() + "(" + count + ")");
 			}
 			StringBuilder result = new StringBuilder();
+			result.append("State: " + state + "\n");
 			result.append("EObject: " + EmfFormatter.objPath(obj.getEObject()) + "\n");
 			result.append("Remaining Mandatory Values: " + Joiner.on(", ").join(mandatory) + "\n");
 			result.append("Remaining Optional Values: " + Joiner.on(", ").join(optional) + "\n");
@@ -399,6 +419,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {
 			public TraceItem handle(ISemState state, TraceItem previous) {
+				if (!previous.canEnter(state))
+					return null;
 				if (state.getFeature() != null) {
 					return previous.cloneAndConsume(state);
 				} else
