@@ -14,8 +14,12 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -24,6 +28,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.ICaseInsensitivityHelper;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -60,7 +65,13 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
-
+	
+	@Inject
+	private IValueConverterService valueConverter;
+	
+	@Inject
+	private ICaseInsensitivityHelper caseInsensitivityHelper;
+	
 	private CrossReference findCrossReference(EObject context, INode node) {
 		if (node == null || (node.hasDirectSemanticElement() && context.equals(node.getSemanticElement())))
 			return null;
@@ -90,7 +101,16 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				EReference reference = getUnresolvedEReference(issue, target);
 				if (reference == null)
 					return;
-
+				boolean caseInsensitive = caseInsensitivityHelper.isIgnoreCase(reference);
+				EObject crossReferenceTerminal = getCrossReference(issue, target);
+				String ruleName = null;
+				Keyword keyword = null;
+				if (crossReferenceTerminal instanceof RuleCall) {
+					RuleCall ruleCall = (RuleCall) crossReferenceTerminal;
+					ruleName = ruleCall.getRule().getName();
+				} else if (crossReferenceTerminal instanceof Keyword) {
+					keyword = (Keyword) crossReferenceTerminal;
+				}
 				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 				IScope scope = scopeProvider.getScope(target, reference);
 				List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
@@ -101,7 +121,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 					String referableElementQualifiedName = qualifiedNameConverter.toString(referableElement.getQualifiedName());
 					if (similarityMatcher.isSimilar(issueString, qualifiedNameConverter.toString(referableElement.getName()))) {
 						addedDescriptions++;
-						createResolution(issueString, referableElement);
+						createResolution(issueString, referableElement, ruleName, keyword, caseInsensitive);
 						qualifiedNames.add(referableElementQualifiedName);
 					} else {
 						if (qualifiedNames.add(referableElementQualifiedName))
@@ -113,14 +133,34 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				}
 				if (discardedDescriptions.size() + addedDescriptions <= 5) {
 					for(IEObjectDescription referableElement: discardedDescriptions) {
-						createResolution(issueString, referableElement);
+						createResolution(issueString, referableElement, ruleName, keyword, caseInsensitive);
 					}
 				}
 			}
 
-			public void createResolution(String issueString, IEObjectDescription solution) {
+			protected AbstractElement getCrossReference(final Issue issue, EObject target) {
+				final ICompositeNode node = NodeModelUtils.getNode(target);
+				if (node == null)
+					throw new IllegalStateException("Cannot happen since we found a reference");
+				ICompositeNode rootNode = node.getRootNode();
+				ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
+				CrossReference crossReference = findCrossReference(target, leaf);
+				return crossReference.getTerminal();
+			}
+
+			public void createResolution(String issueString, IEObjectDescription solution, String ruleName, Keyword keyword, boolean caseInsensitive) {
 				String replacement = qualifiedNameConverter.toString(solution.getName());
 				String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
+				if (keyword != null) {
+					if (caseInsensitive && !replacement.equalsIgnoreCase(keyword.getValue()))
+						return;
+					if (!caseInsensitive && !replacement.equals(keyword.getValue()))
+						return;
+				} else if (ruleName != null) {
+					replacement = valueConverter.toString(replacement, ruleName);
+				} else {
+					logger.error("either keyword or ruleName have to present", new IllegalStateException());
+				}
 				issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
 						issueString, replacement), new ReplaceModification(issue, replacement));
 			}
@@ -140,7 +180,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
 		CrossReference crossReference = findCrossReference(target, leaf);
 		if (crossReference != null) {
-			return  GrammarUtil.getReference(crossReference);
+			return  GrammarUtil.getReference(crossReference, target.eClass());
 		}
 		return null;
 	}

@@ -32,15 +32,10 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	private static final String PROJECT_NAME = "quickfixtest";
 	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
 	private static final String MODEL_WITH_LINKING_ERROR = "Foo { ref Bor }\n" + "Bar { }\n Bar1{} Bar2{} Bar3{} Bar4{} Bar5{}";
+	private static final String MODEL_WITH_LINKING_ERROR_361509 = "^ref { ref raf }\n";
 	
 	private XtextEditor xtextEditor;
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
-	}
-	
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
@@ -48,6 +43,7 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	}
 
 	@Test public void testQuickfixTurnaround() throws Exception {
+		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
 		IXtextDocument document = xtextEditor.getDocument();
 
 		List<Issue> issues = getIssues(document);
@@ -64,8 +60,29 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 		issues = getIssues(document);
 		assertTrue(issues.isEmpty());
 	}
+	
+	@Test public void testBug361509() throws Exception {
+		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR_361509);
+		IXtextDocument document = xtextEditor.getDocument();
+
+		List<Issue> issues = getIssues(document);
+		assertFalse(issues.isEmpty());
+		Issue issue = issues.get(0);
+		assertNotNull(issue);
+		IssueResolutionProvider quickfixProvider = getInjector().getInstance(IssueResolutionProvider.class);
+		List<IssueResolution> resolutions = quickfixProvider.getResolutions(issue);
+
+		assertEquals(1, resolutions.size());
+		IssueResolution resolution = resolutions.get(0);
+		assertEquals("Change to 'ref'", resolution.getLabel());
+		resolution.apply();
+		issues = getIssues(document);
+		assertTrue(issues.isEmpty());
+		assertEquals(MODEL_WITH_LINKING_ERROR_361509.replace("raf", "^ref"), document.get());
+	}
 
 	@Test public void testSemanticIssueResolution() throws Exception {
+		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
 		URI uriToProblem = xtextEditor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
 			public URI exec(XtextResource state) throws Exception {
 				Main main = (Main) state.getContents().get(0);
