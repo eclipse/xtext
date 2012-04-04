@@ -36,8 +36,11 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new MyEAttribute_Group(this, this, 2, inst);
 			case 3: return new EAttribute_Group(this, this, 3, inst);
 			case 4: return new ExtendsPluginEObject_Group(this, this, 4, inst);
-			case 5: return new ExtendsResourceEObject_Group(this, this, 5, inst);
-			case 6: return new EObject_Group(this, this, 6, inst);
+			case 5: return new Unused_01_Group(this, this, 5, inst);
+			case 6: return new Unused_02_Group(this, this, 6, inst);
+			case 7: return new Unused_03_Group(this, this, 7, inst);
+			case 8: return new ExtendsResourceEObject_Group(this, this, 8, inst);
+			case 9: return new EObject_Group(this, this, 9, inst);
 			default: return null;
 		}	
 	}	
@@ -2243,6 +2246,306 @@ protected class ExtendsPluginEObject_EObjectContainmentAssignment_3_9 extends As
 
 
 /************ end Rule ExtendsPluginEObject ****************/
+
+
+/************ begin Rule Unused_01 ****************
+ *
+ * Unused_01 returns ExtendsNsURIEObject:
+ * 	{MyNamedElement_01} name=ValidID;
+ *
+ **/
+
+// {MyNamedElement_01} name=ValidID
+protected class Unused_01_Group extends GroupToken {
+	
+	public Unused_01_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnused_01Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Unused_01_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getUnused_01Access().getMyNamedElement_01Action_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {MyNamedElement_01}
+protected class Unused_01_MyNamedElement_01Action_0 extends ActionToken  {
+
+	public Unused_01_MyNamedElement_01Action_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getUnused_01Access().getMyNamedElement_01Action_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// name=ValidID
+protected class Unused_01_NameAssignment_1 extends AssignmentToken  {
+	
+	public Unused_01_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnused_01Access().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Unused_01_MyNamedElement_01Action_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnused_01Access().getNameValidIDParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getUnused_01Access().getNameValidIDParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule Unused_01 ****************/
+
+
+/************ begin Rule Unused_02 ****************
+ *
+ * Unused_02 returns ExtendsResourceEObject:
+ * 	{MyNamedElement_02} name=ValidID;
+ *
+ **/
+
+// {MyNamedElement_02} name=ValidID
+protected class Unused_02_Group extends GroupToken {
+	
+	public Unused_02_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnused_02Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Unused_02_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getUnused_02Access().getMyNamedElement_02Action_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {MyNamedElement_02}
+protected class Unused_02_MyNamedElement_02Action_0 extends ActionToken  {
+
+	public Unused_02_MyNamedElement_02Action_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getUnused_02Access().getMyNamedElement_02Action_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// name=ValidID
+protected class Unused_02_NameAssignment_1 extends AssignmentToken  {
+	
+	public Unused_02_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnused_02Access().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Unused_02_MyNamedElement_02Action_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnused_02Access().getNameValidIDParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getUnused_02Access().getNameValidIDParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule Unused_02 ****************/
+
+
+/************ begin Rule Unused_03 ****************
+ *
+ * Unused_03 returns ExtendsPluginEObject:
+ * 	{MyNamedElement_03} name=ValidID;
+ *
+ **/
+
+// {MyNamedElement_03} name=ValidID
+protected class Unused_03_Group extends GroupToken {
+	
+	public Unused_03_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnused_03Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Unused_03_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getUnused_03Access().getMyNamedElement_03Action_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {MyNamedElement_03}
+protected class Unused_03_MyNamedElement_03Action_0 extends ActionToken  {
+
+	public Unused_03_MyNamedElement_03Action_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getUnused_03Access().getMyNamedElement_03Action_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// name=ValidID
+protected class Unused_03_NameAssignment_1 extends AssignmentToken  {
+	
+	public Unused_03_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnused_03Access().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Unused_03_MyNamedElement_03Action_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnused_03Access().getNameValidIDParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getUnused_03Access().getNameValidIDParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule Unused_03 ****************/
 
 
 /************ begin Rule ExtendsResourceEObject ****************

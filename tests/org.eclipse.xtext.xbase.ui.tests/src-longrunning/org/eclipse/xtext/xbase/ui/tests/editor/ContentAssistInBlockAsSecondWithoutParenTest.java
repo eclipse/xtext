@@ -13,7 +13,6 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ContentAssistInBlockAsSecondWithoutParenTest extends ContentAssistInBlockTest {
 
 	@Override

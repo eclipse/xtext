@@ -116,6 +116,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected int getMonitorTicks() {
 		int ticks = 2;
 		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks+1 : ticks;
+		if (getXtextProjectInfo().isCreateFeatureProject()) {
+			ticks++;
+		}
 		return ticks;
 	}
 	
@@ -247,7 +250,17 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.setProjectName(getXtextProjectInfo().getTestProjectName());
 		factory.addProjectNatures(getTestProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
+		factory.addImportedPackages(getTestProjectImportedPackages());
 		factory.setLocation(getXtextProjectInfo().getTestProjectLocation());
+	}
+
+	protected List<String> getTestProjectImportedPackages() {
+		return Lists.newArrayList("org.junit;version=\"4.5.0\"",
+				 "org.junit.runner;version=\"4.5.0\"",
+				 "org.junit.runner.manipulation;version=\"4.5.0\"",
+				 "org.junit.runner.notification;version=\"4.5.0\"",
+				 "org.junit.runners;version=\"4.5.0\"",
+				 "org.junit.runners.model;version=\"4.5.0\"");
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
@@ -256,7 +269,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				getXtextProjectInfo().getUiProjectName(),
 				"org.eclipse.core.runtime", //$NON-NLS-1$
 				"org.eclipse.xtext.junit4", //$NON-NLS-1$
-				"org.junit4", //$NON-NLS-1$
 				"org.eclipse.ui.workbench;resolution:=optional" //$NON-NLS-1$
 				); //$NON-NLS-1$
 		return requiredBundles;

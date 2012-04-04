@@ -13,6 +13,9 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.Eco
 import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject;
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage;
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.Model;
+import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_01;
+import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_02;
+import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_03;
 import org.eclipse.xtext.metamodelreferencing.tests.services.EcoreReferenceTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -97,6 +100,24 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 			case EcoreReferencePackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
 					sequence_Model(context, (Model) semanticObject); 
+					return; 
+				}
+				else break;
+			case EcoreReferencePackage.MY_NAMED_ELEMENT_01:
+				if(context == grammarAccess.getUnused_01Rule()) {
+					sequence_Unused_01(context, (MyNamedElement_01) semanticObject); 
+					return; 
+				}
+				else break;
+			case EcoreReferencePackage.MY_NAMED_ELEMENT_02:
+				if(context == grammarAccess.getUnused_02Rule()) {
+					sequence_Unused_02(context, (MyNamedElement_02) semanticObject); 
+					return; 
+				}
+				else break;
+			case EcoreReferencePackage.MY_NAMED_ELEMENT_03:
+				if(context == grammarAccess.getUnused_03Rule()) {
+					sequence_Unused_03(context, (MyNamedElement_03) semanticObject); 
 					return; 
 				}
 				else break;
@@ -222,5 +243,32 @@ public class AbstractEcoreReferenceTestLanguageSemanticSequencer extends Abstrac
 	 */
 	protected void sequence_MyEAttribute(EObject context, EAttribute semanticObject) {
 		genericSequencer.createSequence(context, (EObject)semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     name=ValidID
+	 */
+	protected void sequence_Unused_01(EObject context, MyNamedElement_01 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     name=ValidID
+	 */
+	protected void sequence_Unused_02(EObject context, MyNamedElement_02 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     name=ValidID
+	 */
+	protected void sequence_Unused_03(EObject context, MyNamedElement_03 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 }

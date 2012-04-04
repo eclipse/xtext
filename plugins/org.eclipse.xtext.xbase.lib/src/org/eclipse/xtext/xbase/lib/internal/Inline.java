@@ -22,9 +22,9 @@ import java.lang.annotation.Target;
 public @interface Inline {
 
 	/**
-	 * The inline format string. Placeholders like {@code $1, $2} etc can be used where the {@code 1..n}parameters of
+	 * The inline format string. Placeholders like {@code $1, $2} etc can be used where the {@code 1..n} parameters of
 	 * the inlined method are used for {@code $1} to {@code $n} and the {@link #imported()} types are used for
-	 * subsequent indizes. The last index {@code $n} can be used to insert the type parameters of the original
+	 * subsequent indices. The last index {@code $n} can be used to insert the type parameters of the original
 	 * declaration.
 	 */
 	String value();

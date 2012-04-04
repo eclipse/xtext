@@ -208,19 +208,9 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 							return false;
 						if (delta.getResource() != null && isIgnoredResource(delta.getResource()))
 							return false;
-						if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.REMOVED) {
-							if (delta.getResource() instanceof IStorage) {
-								if (getUri((IStorage) delta.getResource()) != null) {
-									clear.set(Boolean.TRUE);
-									return false;
-								}
-							}
-						}
-						if (delta.getKind() == IResourceDelta.CHANGED && delta.getResource() instanceof IProject) {
-							if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {
-								clear.set(Boolean.TRUE);
-								return false;
-							}
+						if (isAffectingContainerState(delta)) {
+							clear.set(Boolean.TRUE);
+							return false;
 						}
 						return true;
 					}
@@ -232,6 +222,24 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 				initialize();
 			}
 		}
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	protected boolean isAffectingContainerState(IResourceDelta delta) {
+		if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.REMOVED) {
+			if (delta.getResource() instanceof IStorage) {
+				if (getUri((IStorage) delta.getResource()) != null) {
+					return true;
+				}
+			}
+		} else if (delta.getKind() == IResourceDelta.CHANGED && delta.getResource() instanceof IProject) {
+			if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -40,7 +41,6 @@ import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.TagElement;
 import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.internal.corext.dom.ASTNodes;
-import org.eclipse.jdt.internal.ui.javaeditor.ASTProvider;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -723,25 +723,28 @@ public class XbaseHoverDocumentationProvider {
 	}
 
 	public Javadoc getJavaDoc() {
-		ASTParser parser = ASTParser.newParser(ASTProvider.SHARED_AST_LEVEL);
-		IJavaProject javaProject = (IJavaProject) ((XtextResourceSet) context.eResource().getResourceSet())
-				.getClasspathURIContext();
-		parser.setProject(javaProject);
-		@SuppressWarnings("unchecked")
-		Map<String, String> options = javaProject.getOptions(true);
-		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED); // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=212207
-		parser.setCompilerOptions(options);
-		String source = rawJavaDoc + "class C{}"; //$NON-NLS-1$
-		parser.setSource(source.toCharArray());
-		CompilationUnit root = (CompilationUnit) parser.createAST(null);
-		if (root == null)
-			return null;
-		@SuppressWarnings("unchecked")
-		List<AbstractTypeDeclaration> types = root.types();
-		if (types.size() != 1)
-			return null;
-		AbstractTypeDeclaration type = types.get(0);
-		return type.getJavadoc();
+		Object classpathURIContext = ((XtextResourceSet) context.eResource().getResourceSet()).getClasspathURIContext();
+		if (classpathURIContext instanceof IJavaProject) {
+			IJavaProject javaProject = (IJavaProject) classpathURIContext;
+			ASTParser parser = ASTParser.newParser(AST.JLS3);
+			parser.setProject(javaProject);
+			@SuppressWarnings("unchecked")
+			Map<String, String> options = javaProject.getOptions(true);
+			options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED); // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=212207
+			parser.setCompilerOptions(options);
+			String source = rawJavaDoc + "class C{}"; //$NON-NLS-1$
+			parser.setSource(source.toCharArray());
+			CompilationUnit root = (CompilationUnit) parser.createAST(null);
+			if (root == null)
+				return null;
+			@SuppressWarnings("unchecked")
+			List<AbstractTypeDeclaration> types = root.types();
+			if (types.size() != 1)
+				return null;
+			AbstractTypeDeclaration type = types.get(0);
+			return type.getJavadoc();
+		}
+		return null;
 	}
 	
 	protected String getDerivedElementInformation(EObject o) {

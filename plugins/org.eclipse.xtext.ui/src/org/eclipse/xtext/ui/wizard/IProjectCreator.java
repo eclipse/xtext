@@ -9,14 +9,37 @@
 package org.eclipse.xtext.ui.wizard;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 /**
+ * A project creator is used to create one or more projects.<br>
+ * First the corresponding {@link IProjectInfo} is set. After that the
+ * {@link #run(org.eclipse.core.runtime.IProgressMonitor)} method is called.<br>
+ * If the execution successes, the result returned by {@link #getResult()} method<br>
+ * will be selected and opened.
+ * 
  * @author Peter Friese - Initial contribution and API
+ * @author Dennis Huebner - Javadoc
+ * 
+ * @see XtextNewProjectWizard
  */
 public interface IProjectCreator extends IRunnableWithProgress {
-	
-	IFile getResult();
+
+	/**
+	 * Sets project creator configuration object.<br>
+	 * A {@link IProjectInfo}, normally created by {@link XtextNewProjectWizard} subclasses,<br>
+	 * is a kind of data holder for values which were collected<br>
+	 * from the corresponding Wizard pages.<br>
+	 * This data should be used to create a proper project<br>
+	 * @see IProjectInfo
+	 */
 	void setProjectInfo(IProjectInfo projectInfo);
+
+	/**
+	 * @return {@link IFile} that should be opened after the project creation was successfully done.
+	 */
+	@NonNull
+	IFile getResult();
 
 }

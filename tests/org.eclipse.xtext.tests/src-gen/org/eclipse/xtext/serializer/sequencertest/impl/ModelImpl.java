@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
@@ -67,6 +68,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX24 <em>X24</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX25 <em>X25</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX26 <em>X26</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX27 <em>X27</em>}</li>
  * </ul>
  * </p>
  *
@@ -303,6 +305,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected UnorderedGroupBoolean x26;
+
+  /**
+   * The cached value of the '{@link #getX27() <em>X27</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX27()
+   * @generated
+   * @ordered
+   */
+  protected Complex1 x27;
 
   /**
    * <!-- begin-user-doc -->
@@ -1434,6 +1446,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public Complex1 getX27()
+  {
+    return x27;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX27(Complex1 newX27, NotificationChain msgs)
+  {
+    Complex1 oldX27 = x27;
+    x27 = newX27;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X27, oldX27, newX27);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX27(Complex1 newX27)
+  {
+    if (newX27 != x27)
+    {
+      NotificationChain msgs = null;
+      if (x27 != null)
+        msgs = ((InternalEObject)x27).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X27, null, msgs);
+      if (newX27 != null)
+        msgs = ((InternalEObject)newX27).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X27, null, msgs);
+      msgs = basicSetX27(newX27, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X27, newX27, newX27));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1485,6 +1545,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX25(null, msgs);
       case SequencertestPackage.MODEL__X26:
         return basicSetX26(null, msgs);
+      case SequencertestPackage.MODEL__X27:
+        return basicSetX27(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1545,6 +1607,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX25();
       case SequencertestPackage.MODEL__X26:
         return getX26();
+      case SequencertestPackage.MODEL__X27:
+        return getX27();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1627,6 +1691,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SequencertestPackage.MODEL__X26:
         setX26((UnorderedGroupBoolean)newValue);
+        return;
+      case SequencertestPackage.MODEL__X27:
+        setX27((Complex1)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1711,6 +1778,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SequencertestPackage.MODEL__X26:
         setX26((UnorderedGroupBoolean)null);
         return;
+      case SequencertestPackage.MODEL__X27:
+        setX27((Complex1)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1771,6 +1841,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x25 != null;
       case SequencertestPackage.MODEL__X26:
         return x26 != null;
+      case SequencertestPackage.MODEL__X27:
+        return x27 != null;
     }
     return super.eIsSet(featureID);
   }

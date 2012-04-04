@@ -10,6 +10,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject;
+
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.ExtendsPluginEObject;
+
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject;
+
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.*;
 
 /**
@@ -102,6 +108,30 @@ public class EcoreReferenceSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EcoreReferencePackage.MY_NAMED_ELEMENT_01:
+      {
+        MyNamedElement_01 myNamedElement_01 = (MyNamedElement_01)theEObject;
+        T result = caseMyNamedElement_01(myNamedElement_01);
+        if (result == null) result = caseExtendsNsURIEObject(myNamedElement_01);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EcoreReferencePackage.MY_NAMED_ELEMENT_02:
+      {
+        MyNamedElement_02 myNamedElement_02 = (MyNamedElement_02)theEObject;
+        T result = caseMyNamedElement_02(myNamedElement_02);
+        if (result == null) result = caseExtendsResourceEObject(myNamedElement_02);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EcoreReferencePackage.MY_NAMED_ELEMENT_03:
+      {
+        MyNamedElement_03 myNamedElement_03 = (MyNamedElement_03)theEObject;
+        T result = caseMyNamedElement_03(myNamedElement_03);
+        if (result == null) result = caseExtendsPluginEObject(myNamedElement_03);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -118,6 +148,102 @@ public class EcoreReferenceSwitch<T>
    * @generated
    */
   public T caseModel(Model object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>My Named Element 01</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>My Named Element 01</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMyNamedElement_01(MyNamedElement_01 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>My Named Element 02</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>My Named Element 02</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMyNamedElement_02(MyNamedElement_02 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>My Named Element 03</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>My Named Element 03</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMyNamedElement_03(MyNamedElement_03 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Extends Ns URIE Object</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Extends Ns URIE Object</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExtendsNsURIEObject(ExtendsNsURIEObject object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Extends Resource EObject</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Extends Resource EObject</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExtendsResourceEObject(ExtendsResourceEObject object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Extends Plugin EObject</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Extends Plugin EObject</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExtendsPluginEObject(ExtendsPluginEObject object)
   {
     return null;
   }

@@ -12,6 +12,12 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject;
+
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.ExtendsPluginEObject;
+
+import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject;
+
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.*;
 
 /**
@@ -83,6 +89,36 @@ public class EcoreReferenceAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
+      public Adapter caseMyNamedElement_01(MyNamedElement_01 object)
+      {
+        return createMyNamedElement_01Adapter();
+      }
+      @Override
+      public Adapter caseMyNamedElement_02(MyNamedElement_02 object)
+      {
+        return createMyNamedElement_02Adapter();
+      }
+      @Override
+      public Adapter caseMyNamedElement_03(MyNamedElement_03 object)
+      {
+        return createMyNamedElement_03Adapter();
+      }
+      @Override
+      public Adapter caseExtendsNsURIEObject(ExtendsNsURIEObject object)
+      {
+        return createExtendsNsURIEObjectAdapter();
+      }
+      @Override
+      public Adapter caseExtendsResourceEObject(ExtendsResourceEObject object)
+      {
+        return createExtendsResourceEObjectAdapter();
+      }
+      @Override
+      public Adapter caseExtendsPluginEObject(ExtendsPluginEObject object)
+      {
+        return createExtendsPluginEObjectAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -115,6 +151,96 @@ public class EcoreReferenceAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_01 <em>My Named Element 01</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_01
+   * @generated
+   */
+  public Adapter createMyNamedElement_01Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_02 <em>My Named Element 02</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_02
+   * @generated
+   */
+  public Adapter createMyNamedElement_02Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_03 <em>My Named Element 03</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_03
+   * @generated
+   */
+  public Adapter createMyNamedElement_03Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject <em>Extends Ns URIE Object</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject
+   * @generated
+   */
+  public Adapter createExtendsNsURIEObjectAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject <em>Extends Resource EObject</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject
+   * @generated
+   */
+  public Adapter createExtendsResourceEObjectAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.ExtendsPluginEObject <em>Extends Plugin EObject</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.ExtendsPluginEObject
+   * @generated
+   */
+  public Adapter createExtendsPluginEObjectAdapter()
   {
     return null;
   }

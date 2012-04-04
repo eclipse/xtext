@@ -83,7 +83,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	private SashForm fSashForm;
 
 	/**
-	 * Xbase - modification Added XtendHoverConfiguration because we do not have DI here
+	 * Xbase - modification Added XbaseHoverConfiguration because we do not have DI here
 	 */
 	public XbaseInformationControl(Shell parent, String symbolicFontName, String statusFieldText,
 			XbaseHoverConfiguration xbaseHoverConfiguration) {
@@ -94,13 +94,13 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	}
 
 	/**
-	 * Xbase - modification Added XtendHoverConfiguration because we do not have DI here
+	 * Xbase - modification Added XbaseHoverConfiguration because we do not have DI here
 	 */
 	public XbaseInformationControl(Shell parent, String symbolicFontName, ToolBarManager toolBarManager,
-			XbaseHoverConfiguration xtendHoverConfiguration) {
+			XbaseHoverConfiguration xbaseHoverConfiguration) {
 		super(parent, toolBarManager);
 		fSymbolicFontName = symbolicFontName;
-		this.xbaseHoverConfiguration = xtendHoverConfiguration;
+		this.xbaseHoverConfiguration = xbaseHoverConfiguration;
 		create();
 	}
 
@@ -167,7 +167,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 				XtextResourceSet resourceSet = (XtextResourceSet) fInput.getElement().eResource().getResourceSet();
 				xtextResourceSet.setClasspathURIContext(resourceSet.getClasspathURIContext());
 			}
-			URI uri = URI.createURI(SYNTHETIC_SCHEME + ":/unsugaredExpression.xtend");
+			URI uri = URI.createURI(SYNTHETIC_SCHEME + ":/unsugaredExpression." + xbaseHoverConfiguration.getFileExtension());
 			XtextResource resource = (XtextResource) xtextResourceSet.createResource(uri);
 			xtextResourceSet.getResources().add(resource);
 			return resource;

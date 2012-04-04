@@ -72,6 +72,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX25UnorderedGroupOptionalParserRuleCall_24_0 = (RuleCall)cX25Assignment_24.eContents().get(0);
 		private final Assignment cX26Assignment_25 = (Assignment)cAlternatives.eContents().get(25);
 		private final RuleCall cX26UnorderedGroupBooleanParserRuleCall_25_0 = (RuleCall)cX26Assignment_25.eContents().get(0);
+		private final Assignment cX27Assignment_26 = (Assignment)cAlternatives.eContents().get(26);
+		private final RuleCall cX27Complex1ParserRuleCall_26_0 = (RuleCall)cX27Assignment_26.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
@@ -79,14 +81,14 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 		//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
-		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean;
+		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 		//x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
 		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
-		//x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean
+		//x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -244,6 +246,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//UnorderedGroupBoolean
 		public RuleCall getX26UnorderedGroupBooleanParserRuleCall_25_0() { return cX26UnorderedGroupBooleanParserRuleCall_25_0; }
+
+		//x27=Complex1
+		public Assignment getX27Assignment_26() { return cX27Assignment_26; }
+
+		//Complex1
+		public RuleCall getX27Complex1ParserRuleCall_26_0() { return cX27Complex1ParserRuleCall_26_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1789,6 +1797,127 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw3"
 		public Keyword getVal3Kw3Keyword_2_2_0() { return cVal3Kw3Keyword_2_2_0; }
 	}
+
+	public class Complex1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Complex1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cComplex1Action_1 = (Action)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cKw1Keyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cVal1Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_2_1_0 = (RuleCall)cVal1Assignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cKw2Keyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cVal2Assignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cVal2IDTerminalRuleCall_3_1_0 = (RuleCall)cVal2Assignment_3_1.eContents().get(0);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Group cGroup_4_0 = (Group)cAlternatives_4.eContents().get(0);
+		private final Keyword cKw3Keyword_4_0_0 = (Keyword)cGroup_4_0.eContents().get(0);
+		private final Assignment cVal3Assignment_4_0_1 = (Assignment)cGroup_4_0.eContents().get(1);
+		private final RuleCall cVal3IDTerminalRuleCall_4_0_1_0 = (RuleCall)cVal3Assignment_4_0_1.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cAlternatives_4.eContents().get(1);
+		private final Keyword cKw4Keyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cVal4Assignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cVal4IDTerminalRuleCall_4_1_1_0 = (RuleCall)cVal4Assignment_4_1_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cAlternatives_4.eContents().get(2);
+		private final Keyword cKw5Keyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cVal5Assignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cVal5IDTerminalRuleCall_4_2_1_0 = (RuleCall)cVal5Assignment_4_2_1.eContents().get(0);
+		private final Group cGroup_4_3 = (Group)cAlternatives_4.eContents().get(3);
+		private final Keyword cKw6Keyword_4_3_0 = (Keyword)cGroup_4_3.eContents().get(0);
+		private final Assignment cVal6Assignment_4_3_1 = (Assignment)cGroup_4_3.eContents().get(1);
+		private final RuleCall cVal6IDTerminalRuleCall_4_3_1_0 = (RuleCall)cVal6Assignment_4_3_1.eContents().get(0);
+		
+		//Complex1:
+		//	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
+		//	val6+=ID)*;
+		public ParserRule getRule() { return rule; }
+
+		//"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
+		public Group getGroup() { return cGroup; }
+
+		//"#27"
+		public Keyword getNumberSignDigitTwoDigitSevenKeyword_0() { return cNumberSignDigitTwoDigitSevenKeyword_0; }
+
+		//{Complex1}
+		public Action getComplex1Action_1() { return cComplex1Action_1; }
+
+		//("kw1" val1=ID)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_2_0() { return cKw1Keyword_2_0; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_2_1() { return cVal1Assignment_2_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_2_1_0() { return cVal1IDTerminalRuleCall_2_1_0; }
+
+		//("kw2" val2=ID)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_3_0() { return cKw2Keyword_3_0; }
+
+		//val2=ID
+		public Assignment getVal2Assignment_3_1() { return cVal2Assignment_3_1; }
+
+		//ID
+		public RuleCall getVal2IDTerminalRuleCall_3_1_0() { return cVal2IDTerminalRuleCall_3_1_0; }
+
+		//("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+
+		//"kw3" val3+=ID
+		public Group getGroup_4_0() { return cGroup_4_0; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_4_0_0() { return cKw3Keyword_4_0_0; }
+
+		//val3+=ID
+		public Assignment getVal3Assignment_4_0_1() { return cVal3Assignment_4_0_1; }
+
+		//ID
+		public RuleCall getVal3IDTerminalRuleCall_4_0_1_0() { return cVal3IDTerminalRuleCall_4_0_1_0; }
+
+		//"kw4" val4+=ID
+		public Group getGroup_4_1() { return cGroup_4_1; }
+
+		//"kw4"
+		public Keyword getKw4Keyword_4_1_0() { return cKw4Keyword_4_1_0; }
+
+		//val4+=ID
+		public Assignment getVal4Assignment_4_1_1() { return cVal4Assignment_4_1_1; }
+
+		//ID
+		public RuleCall getVal4IDTerminalRuleCall_4_1_1_0() { return cVal4IDTerminalRuleCall_4_1_1_0; }
+
+		//"kw5" val5+=ID
+		public Group getGroup_4_2() { return cGroup_4_2; }
+
+		//"kw5"
+		public Keyword getKw5Keyword_4_2_0() { return cKw5Keyword_4_2_0; }
+
+		//val5+=ID
+		public Assignment getVal5Assignment_4_2_1() { return cVal5Assignment_4_2_1; }
+
+		//ID
+		public RuleCall getVal5IDTerminalRuleCall_4_2_1_0() { return cVal5IDTerminalRuleCall_4_2_1_0; }
+
+		//"kw6" val6+=ID
+		public Group getGroup_4_3() { return cGroup_4_3; }
+
+		//"kw6"
+		public Keyword getKw6Keyword_4_3_0() { return cKw6Keyword_4_3_0; }
+
+		//val6+=ID
+		public Assignment getVal6Assignment_4_3_1() { return cVal6Assignment_4_3_1; }
+
+		//ID
+		public RuleCall getVal6IDTerminalRuleCall_4_3_1_0() { return cVal6IDTerminalRuleCall_4_3_1_0; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -1881,6 +2010,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private UnorderedGroupVal2Elements pUnorderedGroupVal2;
 	private UnorderedGroupOptionalElements pUnorderedGroupOptional;
 	private UnorderedGroupBooleanElements pUnorderedGroupBoolean;
+	private Complex1Elements pComplex1;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1909,7 +2039,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 	//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
-	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean;
+	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -2316,6 +2446,17 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getUnorderedGroupBooleanRule() {
 		return getUnorderedGroupBooleanAccess().getRule();
+	}
+
+	//Complex1:
+	//	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
+	//	val6+=ID)*;
+	public Complex1Elements getComplex1Access() {
+		return (pComplex1 != null) ? pComplex1 : (pComplex1 = new Complex1Elements());
+	}
+	
+	public ParserRule getComplex1Rule() {
+		return getComplex1Access().getRule();
 	}
 
 	//terminal ID:

@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
@@ -588,9 +589,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				appendParameters(result, (JvmExecutable)feature, insignificantParameters);
 				result.append(')');
 			}
-			if (operation.getReturnType() != null) {
+			JvmTypeReference returnType = operation.getReturnType();
+			if (returnType != null && returnType.getSimpleName() != null) {
 				result.append(" : ");
-				result.append(operation.getReturnType().getSimpleName());
+				result.append(returnType.getSimpleName());
 			}
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
 			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);

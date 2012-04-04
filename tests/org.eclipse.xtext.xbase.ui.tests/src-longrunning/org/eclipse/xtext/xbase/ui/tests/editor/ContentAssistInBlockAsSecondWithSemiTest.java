@@ -12,7 +12,6 @@ import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class ContentAssistInBlockAsSecondWithSemiTest extends ContentAssistInBlockTest {
 
 	@Override

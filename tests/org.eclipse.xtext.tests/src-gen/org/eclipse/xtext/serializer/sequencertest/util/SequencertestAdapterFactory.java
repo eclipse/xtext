@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
@@ -291,6 +292,11 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseUnorderedGroupBoolean(UnorderedGroupBoolean object)
       {
         return createUnorderedGroupBooleanAdapter();
+      }
+      @Override
+      public Adapter caseComplex1(Complex1 object)
+      {
+        return createComplex1Adapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -850,6 +856,21 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createUnorderedGroupBooleanAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.Complex1 <em>Complex1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1
+   * @generated
+   */
+  public Adapter createComplex1Adapter()
   {
     return null;
   }

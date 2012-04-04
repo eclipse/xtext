@@ -278,13 +278,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X26 = 22;
 
   /**
+   * The feature id for the '<em><b>X27</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X27 = 23;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 23;
+  int MODEL_FEATURE_COUNT = 24;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1564,6 +1573,79 @@ public interface SequencertestPackage extends EPackage
   int UNORDERED_GROUP_BOOLEAN_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl <em>Complex1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getComplex1()
+   * @generated
+   */
+  int COMPLEX1 = 36;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1__VAL3 = 2;
+
+  /**
+   * The feature id for the '<em><b>Val4</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1__VAL4 = 3;
+
+  /**
+   * The feature id for the '<em><b>Val5</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1__VAL5 = 4;
+
+  /**
+   * The feature id for the '<em><b>Val6</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1__VAL6 = 5;
+
+  /**
+   * The number of structural features of the '<em>Complex1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPLEX1_FEATURE_COUNT = 6;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1571,7 +1653,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 36;
+  int DEF_ENUM = 37;
 
 
   /**
@@ -1836,6 +1918,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X26();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX27 <em>X27</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X27</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX27()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X27();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -2936,6 +3029,82 @@ public interface SequencertestPackage extends EPackage
   EAttribute getUnorderedGroupBoolean_Val3();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.Complex1 <em>Complex1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Complex1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1
+   * @generated
+   */
+  EClass getComplex1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Complex1#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1#getVal1()
+   * @see #getComplex1()
+   * @generated
+   */
+  EAttribute getComplex1_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Complex1#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1#getVal2()
+   * @see #getComplex1()
+   * @generated
+   */
+  EAttribute getComplex1_Val2();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.Complex1#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1#getVal3()
+   * @see #getComplex1()
+   * @generated
+   */
+  EAttribute getComplex1_Val3();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.Complex1#getVal4 <em>Val4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val4</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1#getVal4()
+   * @see #getComplex1()
+   * @generated
+   */
+  EAttribute getComplex1_Val4();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.Complex1#getVal5 <em>Val5</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val5</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1#getVal5()
+   * @see #getComplex1()
+   * @generated
+   */
+  EAttribute getComplex1_Val5();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.serializer.sequencertest.Complex1#getVal6 <em>Val6</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val6</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Complex1#getVal6()
+   * @see #getComplex1()
+   * @generated
+   */
+  EAttribute getComplex1_Val6();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3161,6 +3330,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X26 = eINSTANCE.getModel_X26();
+
+    /**
+     * The meta object literal for the '<em><b>X27</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X27 = eINSTANCE.getModel_X27();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4055,6 +4232,64 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute UNORDERED_GROUP_BOOLEAN__VAL3 = eINSTANCE.getUnorderedGroupBoolean_Val3();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl <em>Complex1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getComplex1()
+     * @generated
+     */
+    EClass COMPLEX1 = eINSTANCE.getComplex1();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPLEX1__VAL1 = eINSTANCE.getComplex1_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPLEX1__VAL2 = eINSTANCE.getComplex1_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPLEX1__VAL3 = eINSTANCE.getComplex1_Val3();
+
+    /**
+     * The meta object literal for the '<em><b>Val4</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPLEX1__VAL4 = eINSTANCE.getComplex1_Val4();
+
+    /**
+     * The meta object literal for the '<em><b>Val5</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPLEX1__VAL5 = eINSTANCE.getComplex1_Val5();
+
+    /**
+     * The meta object literal for the '<em><b>Val6</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPLEX1__VAL6 = eINSTANCE.getComplex1_Val6();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

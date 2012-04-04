@@ -24,7 +24,7 @@
 		<cs:dependency name="org.eclipse.pde.ui" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.debug.ui" componentType="osgi.bundle" />
-		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature" />
+		<cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature" />
 		<cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.5.0" />
 		<cs:dependency name="org.junit" componentType="osgi.bundle"  versionDesignator="[3.8.0,4.0.0)" />
 

@@ -38,6 +38,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x24"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x25"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x26"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x27"/>
     </genClasses>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -173,6 +174,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupBoolean/val1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupBoolean/val2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//UnorderedGroupBoolean/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//Complex1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Complex1/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Complex1/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Complex1/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Complex1/val4"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Complex1/val5"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Complex1/val6"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
