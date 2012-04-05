@@ -71,7 +71,7 @@ org.example.domainmodel
 <em>Language name:</em>
 </td>
 <td>
-org.example.domainmodel.Domainmodel
+org.example.domainmodel.DomainModel
 </td>
 </tr>
 <tr>
@@ -139,16 +139,16 @@ The Eclipse editor and all the other workbench related functionality.
 <p>
 
 The wizard will automatically open the grammar file 
-<em>Domainmodel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
+<em>DomainModel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<span class="keyword">generate</span>&nbsp;domainModel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 <br/>
 Model:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
@@ -169,7 +169,7 @@ Let&apos;s now just replace that grammar definition with the one for our domain 
 <span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<span class="keyword">generate</span>&nbsp;domainModel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 <br/>
 Domainmodel&nbsp;:<br/>
 &nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
@@ -553,10 +553,10 @@ That&apos;s all for the grammar. It should now read as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<span class="keyword">generate</span>&nbsp;domainModel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 <br/>
 Domainmodel:<br/>
 &nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
