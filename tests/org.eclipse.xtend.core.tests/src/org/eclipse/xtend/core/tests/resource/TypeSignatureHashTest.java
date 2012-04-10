@@ -198,7 +198,7 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 	}
 
 	protected String getTypeSignature(XtendFile file) {
-		JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+		JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
 		return signatureBuilderProvider.get().appendSignature(inferredType).hash();
 	}
 }

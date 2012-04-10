@@ -17,8 +17,8 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
-import org.eclipse.jdt.core.IParent;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -29,6 +29,8 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -59,6 +61,9 @@ public class JavaElementDelegate implements IAdaptable {
 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
+	
+	@Inject
+	private IQualifiedNameProvider nameProvider;
 
 	public void initializeWith(IEditorPart editorInput) {
 		this.editor = editorInput;
@@ -80,13 +85,12 @@ public class JavaElementDelegate implements IAdaptable {
 					return getJavaElementForResource(file);
 				}
 			} else if (editor != null) {
-				IJavaElement javaFile = getJavaElementForEditor(editor);
-				if (javaFile != null) {
-					IJavaElement javaMethod = getJavaElementForXtextEditor(javaFile, editor);
-					if (javaMethod != null)
-						return javaMethod;
-					return javaFile;
-				}
+//				IJavaElement javaFile = getJavaElementForEditor(editor);
+//				if (javaFile != null) {
+				IJavaElement javaMethod = getJavaElementForXtextEditor(editor);
+				if (javaMethod != null)
+					return javaMethod;
+//					return javaFile;
 			} else if (resource != null) {
 				if (fileExtensionProvider.isValid(resource.getFileExtension())) {
 					return getJavaElementForResource(resource);
@@ -134,9 +138,21 @@ public class JavaElementDelegate implements IAdaptable {
 		return null;
 	}
 
-	protected IJavaElement getJavaElementForXtextEditor(IJavaElement javaFile, IEditorPart editor) {
+	protected IJavaElement getJavaElementForXtextEditor(IEditorPart editor) {
 		if (!(editor instanceof XtextEditor))
 			return null;
+		IJavaProject jp = null;
+		if (editor.getEditorInput() instanceof IFileEditorInput) {
+			IFile file = ((IFileEditorInput) editor.getEditorInput()).getFile();
+			if (!fileExtensionProvider.isValid(file.getFileExtension())) {
+				return null;
+			}
+			jp = JavaCore.create(file.getProject());
+			if (jp == null || !jp.exists() || !jp.isOpen())
+				return null;
+		} else {
+			return null;
+		}
 		XtextEditor xtextEditor = (XtextEditor) editor;
 		ISelection selection = xtextEditor.getSelectionProvider().getSelection();
 		if (!(selection instanceof ITextSelection))
@@ -149,16 +165,12 @@ public class JavaElementDelegate implements IAdaptable {
 		});
 		if (func == null || Strings.isEmpty(func.getName()))
 			return null;
-		if (!(javaFile instanceof IParent))
-			return null;
+		QualifiedName className = nameProvider.getFullyQualifiedName(func.eContainer());
 		try {
-			for (IJavaElement child : ((IParent) javaFile).getChildren())
-				if (child instanceof IType) {
-					IType type = (IType) child;
-					IMethod method = type.getMethod(func.getName(), new String[0]);
-					if (method != null)
-						return method;
-				}
+			IType type = jp.findType(className.toString());
+			IMethod method = type.getMethod(func.getName(), new String[0]);
+			if (method != null)
+				return method;
 		} catch (JavaModelException e) {
 			if (log.isDebugEnabled()) {
 				log.debug(e.getMessage(), e);

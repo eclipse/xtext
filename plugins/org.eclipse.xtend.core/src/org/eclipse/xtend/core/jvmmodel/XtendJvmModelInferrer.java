@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -106,18 +107,20 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		if (!(xtendFile instanceof XtendFile))
 			return;
 		final XtendFile xtendFile2 = (XtendFile) xtendFile;
-		final XtendClass xtendClass = xtendFile2.getXtendClass();
-		if (xtendClass == null || Strings.isEmpty(xtendClass.getName()))
-			return;
-		final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
-		inferredJvmType.setPackageName(xtendClass.getPackageName());
-		inferredJvmType.setSimpleName(xtendClass.getName());
-		associator.associatePrimary(xtendClass, inferredJvmType);
-		acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
-			public void apply(@Nullable JvmGenericType p) {
-				initialize(xtendClass, inferredJvmType);
-			}
-		});
+		final EList<XtendClass> classes = xtendFile2.getXtendClasses();
+		for (final XtendClass xtendClass : classes) {
+			if (Strings.isEmpty(xtendClass.getName()))
+				continue;
+			final JvmGenericType inferredJvmType = typesFactory.createJvmGenericType();
+			inferredJvmType.setPackageName(xtendClass.getPackageName());
+			inferredJvmType.setSimpleName(xtendClass.getName());
+			associator.associatePrimary(xtendClass, inferredJvmType);
+			acceptor.accept(inferredJvmType).initializeLater(new Procedure1<JvmGenericType>() {
+				public void apply(@Nullable JvmGenericType p) {
+					initialize(xtendClass, inferredJvmType);
+				}
+			});
+		}
 	}
 
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {

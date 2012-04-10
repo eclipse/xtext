@@ -46,8 +46,8 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 			def <T> T something(Iterable<T> iterable)
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
-		val function = clazz.members.get(0) as XtendFunction
+		val clazz = xtendFile.getXtendClasses
+		val function = clazz.head.members.get(0) as XtendFunction
 		val expression = function.expression as XBlockExpression
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
 		val feature = call.getFeature()
@@ -67,8 +67,8 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 			def <T,Y> Y something(Iterable<T> iterable, Y type1, T type2)
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
-		val function = clazz.members.get(0) as XtendFunction
+		val clazz = xtendFile.getXtendClasses
+		val function = clazz.head.members.get(0) as XtendFunction
 		val expression = function.expression as XBlockExpression
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
 		val feature = call.getFeature()
@@ -87,8 +87,8 @@ class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
-		val function = clazz.members.get(0) as XtendFunction
+		val clazz = xtendFile.getXtendClasses
+		val function = clazz.head.members.get(0) as XtendFunction
 		val expression = function.expression as XBlockExpression
 		val call = expression.expressions.get(0) as XAbstractFeatureCall
 		val feature = call.getFeature()

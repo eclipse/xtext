@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.validation;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
@@ -1009,6 +1010,17 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Check
+	public void checkClasses(XtendFile file) {
+		//TODO this check should not be file local, but instead check for any other sources which might declare a
+		// java type with the same name. Also this then belongs to Xbase and should be defined on JvmGenericTypes.
+		Set<String> names = newLinkedHashSet();
+		for (XtendClass clazz : file.getXtendClasses()) {	
+			if (!names.add(clazz.getName()))
+				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_CLASS__NAME, -1, IssueCodes.DUPLICATE_CLASS);
+		}
+	}
+	
+	@Check
 	public void checkImports(XtendFile file) {
 		final Map<JvmType, XtendImport> imports = newHashMap();
 		final Map<JvmType, XtendImport> staticImports = newHashMap();
@@ -1046,27 +1058,29 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
-		ICompositeNode node = NodeModelUtils.findActualNodeFor(file.getXtendClass());
-		if (node != null) {
-			for (INode n : node.getAsTreeIterable()) {
-				if (n.getGrammarElement() instanceof CrossReference) {
-					EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
-					if (classifier instanceof EClass
-							&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
-									.isSuperTypeOf((EClass) classifier))) {
-						String simpleName = n.getText().trim();
-						// handle StaticQualifier Workaround (see Xbase grammar)
-						if (simpleName.endsWith("::"))
-							simpleName = simpleName.substring(0, simpleName.length() - 2);
-						if (importedNames.containsKey(simpleName)) {
-							JvmType type = importedNames.remove(simpleName);
-							imports.remove(type);
-						} else {
-							while (simpleName.contains("$")) {
-								simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-								if (importedNames.containsKey(simpleName)) {
-									imports.remove(importedNames.remove(simpleName));
-									break;
+		for (final XtendClass xtendClass : file.getXtendClasses()) {
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendClass);
+			if (node != null) {
+				for (INode n : node.getAsTreeIterable()) {
+					if (n.getGrammarElement() instanceof CrossReference) {
+						EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
+						if (classifier instanceof EClass
+								&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
+										.isSuperTypeOf((EClass) classifier))) {
+							String simpleName = n.getText().trim();
+							// handle StaticQualifier Workaround (see Xbase grammar)
+							if (simpleName.endsWith("::"))
+								simpleName = simpleName.substring(0, simpleName.length() - 2);
+							if (importedNames.containsKey(simpleName)) {
+								JvmType type = importedNames.remove(simpleName);
+								imports.remove(type);
+							} else {
+								while (simpleName.contains("$")) {
+									simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
+									if (importedNames.containsKey(simpleName)) {
+										imports.remove(importedNames.remove(simpleName));
+										break;
+									}
 								}
 							}
 						}

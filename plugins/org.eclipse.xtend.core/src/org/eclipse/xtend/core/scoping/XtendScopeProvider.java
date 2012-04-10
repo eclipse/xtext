@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.EcoreUtil2;
@@ -95,11 +94,10 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				addFeatureDescriptionProvidersForAssignment(contextType, staticProvider, implicitReceiver, implicitArgument, priority + STATIC_EXTENSION_PRIORITY_OFFSET, true, acceptor);
 			}
 		}
-		
-		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
 		// extensions for this
-		JvmGenericType inferredJvmType = xtendjvmAssociations.getInferredType(xtendClass);
-		if (inferredJvmType != null) {
+		if (contextType instanceof JvmGenericType) { 
+			JvmGenericType inferredJvmType = (JvmGenericType) contextType;
+			XtendClass xtendClass = xtendjvmAssociations.getXtendClass(inferredJvmType);
 			boolean isThis = false;
 			if (implicitReceiver instanceof XFeatureCall) {
 				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;
@@ -158,10 +156,10 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			}
 		}
 		
-		final XtendClass xtendClass = ((XtendFile) resource.getContents().get(0)).getXtendClass();
 		// extensions for this
-		JvmGenericType inferredJvmType = xtendjvmAssociations.getInferredType(xtendClass);
-		if (inferredJvmType != null) {
+		if (contextType instanceof JvmGenericType) {
+			JvmGenericType inferredJvmType = (JvmGenericType) contextType;
+			final XtendClass xtendClass = this.xtendjvmAssociations.getXtendClass(inferredJvmType);
 			boolean isThis = false;
 			if (implicitReceiver instanceof XFeatureCall) {
 				isThis = ((XFeatureCall) implicitReceiver).getFeature() == inferredJvmType;

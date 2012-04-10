@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClass <em>Xtend Class</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClasses <em>Xtend Classes</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFile#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
@@ -46,30 +46,20 @@ public interface XtendFile extends EObject
 	EList<XtendImport> getImports();
 
 	/**
-	 * Returns the value of the '<em><b>Xtend Class</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Xtend Classes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Xtend Class</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Xtend Classes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Xtend Class</em>' containment reference.
-	 * @see #setXtendClass(XtendClass)
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_XtendClass()
+	 * @return the value of the '<em>Xtend Classes</em>' containment reference list.
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_XtendClasses()
 	 * @model containment="true"
 	 * @generated
 	 */
-	XtendClass getXtendClass();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClass <em>Xtend Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Xtend Class</em>' containment reference.
-	 * @see #getXtendClass()
-	 * @generated
-	 */
-	void setXtendClass(XtendClass value);
+	EList<XtendClass> getXtendClasses();
 
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' attribute.

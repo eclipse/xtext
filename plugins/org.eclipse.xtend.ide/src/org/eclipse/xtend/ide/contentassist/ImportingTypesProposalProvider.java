@@ -84,7 +84,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 			}
 			// we could create an import statement if there is no conflict
 			XtendFile file = (XtendFile) context.getContents().get(0);
-			XtendClass clazz = file.getXtendClass();
+			XtendClass clazz = file.getXtendClasses().isEmpty() ? null : file.getXtendClasses().get(0);
 			
 			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(typeName);			
 			if (qualifiedName.getSegmentCount() == 1) {

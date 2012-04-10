@@ -1209,7 +1209,7 @@ public class AbstractXtendSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (package=QualifiedName? imports+=Import* xtendClass=Class?)
+	 *     (package=QualifiedName? imports+=Import* xtendClasses+=Class*)
 	 */
 	protected void sequence_File(EObject context, XtendFile semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -22,8 +22,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -122,12 +122,17 @@ public class OrganizeImports {
 		int offset = 0;
 		if (packDecl.size() >= 1)
 			offset = packDecl.get(0).getOffset() + packDecl.get(0).getLength();
-		if (xtendFile.getXtendClass() == null)
+		if (xtendFile.getXtendClasses() == null)
 			return null;
-		ICompositeNode node = NodeModelUtils.getNode(xtendFile.getXtendClass());
-		if (node == null) {
-			throw new IllegalStateException("Cannot find node for clazz " + xtendFile.getClass().getName());
+		if (xtendFile.getXtendClasses().isEmpty()) {
+			ICompositeNode node = NodeModelUtils.getNode(xtendFile);
+			if (node == null)
+				throw new IllegalStateException("Cannot find node for clazz " + xtendFile.getClass().getName());
+			return new TextRegion(offset, node.getTotalEndOffset() - offset);
 		}
+		ICompositeNode node = NodeModelUtils.getNode(xtendFile.getXtendClasses().get(0));
+		if (node == null)
+			throw new IllegalStateException("Cannot find node for clazz " + xtendFile.getClass().getName());
 		int length = node.getTotalOffset() - offset;
 		return new TextRegion(offset, length);
 	}

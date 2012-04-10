@@ -37,7 +37,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		class Foo {
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val signature = signatureProvider.getSignature(clazz)
 		assertEquals("Foo",signature)
 	}
@@ -51,7 +51,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def void bar(String a, int b) throws NullPointerException, RuntimeException
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction1 = clazz.members.get(0)
 		val xtendFunction2 = clazz.members.get(1)
 		val signature1 = signatureProvider.getSignature(xtendFunction1)
@@ -68,7 +68,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def bar(String a) throws NullPointerException
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val xtendParameter = xtendFunction.parameters.get(0)
 		val signature = signatureProvider.getSignature(xtendParameter)
@@ -90,7 +90,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			def bar(String a) throws NullPointerException
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendField = clazz.members.get(0) as XtendField
 		val signature = signatureProvider.getSignature(xtendField)
 		assertEquals("Collections collections",signature)
@@ -104,7 +104,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			new(String a, int b){}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendConstructor = clazz.members.get(0)
 		val signature = signatureProvider.getSignature(xtendConstructor)
 		assertEquals("Foo(String a, int b)",signature)
@@ -120,7 +120,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
@@ -137,7 +137,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
@@ -157,7 +157,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val param = ((xtendFunction.expression as XBlockExpression).expressions.get(0) as XForLoopExpression).declaredParam
 		val signature = signatureProvider.getSignature(param)
@@ -177,7 +177,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 				}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val closure = ((xtendFunction.expression as XBlockExpression).expressions.get(0) as XFeatureCall).featureCallArguments.get(0) as XClosure
 		val param = closure.declaredFormalParameters.get(0)
@@ -195,7 +195,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 			}
 		}
 		''', resourceSet)
-		val clazz = xtendFile.xtendClass
+		val clazz = xtendFile.getXtendClasses.head
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val variable = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XVariableDeclaration
 		val signature = signatureProvider.getSignature(variable)

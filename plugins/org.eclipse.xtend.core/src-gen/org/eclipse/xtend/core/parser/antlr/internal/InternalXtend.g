@@ -125,22 +125,22 @@ ruleFile returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFileAccess().getXtendClassClassParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getFileAccess().getXtendClassesClassParserRuleCall_2_0()); 
 	    }
-		lv_xtendClass_4_0=ruleClass		{
+		lv_xtendClasses_4_0=ruleClass		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFileRule());
 	        }
-       		set(
+       		add(
        			$current, 
-       			"xtendClass",
-        		lv_xtendClass_4_0, 
+       			"xtendClasses",
+        		lv_xtendClasses_4_0, 
         		"Class");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?)
+)*)
 ;
 
 

@@ -51,7 +51,7 @@ public class TestCaseCompiler {
 		IXtendJvmAssociations associations = injector.getInstance(IXtendJvmAssociations.class);
 		JvmModelGenerator generator = injector.getInstance(JvmModelGenerator.class);
 		XtendFile xtendFile = (XtendFile)res.getContents().get(0);
-		JvmGenericType inferredType = associations.getInferredType(xtendFile.getXtendClass());
+		JvmGenericType inferredType = associations.getInferredType(xtendFile.getXtendClasses().get(0));
 		CharSequence javaCode = generator.generateType(inferredType);
 		writer.append(javaCode);
 		writer.close();

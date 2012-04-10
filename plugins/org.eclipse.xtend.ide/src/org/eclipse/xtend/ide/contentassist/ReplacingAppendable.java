@@ -195,7 +195,8 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 			}
 			int offset;
 			if (xtendFile.getImports().isEmpty()) {
-				ICompositeNode classNode = NodeModelUtils.findActualNodeFor(xtendFile.getXtendClass());
+				final XtendClass xtendClass = xtendFile.getXtendClasses().isEmpty() ? null : xtendFile.getXtendClasses().get(0);
+				ICompositeNode classNode = NodeModelUtils.findActualNodeFor(xtendClass);
 				if (classNode == null) {
 					throw new IllegalStateException("classNode may not be null");
 				}

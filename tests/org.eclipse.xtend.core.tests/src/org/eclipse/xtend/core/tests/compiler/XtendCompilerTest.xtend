@@ -1350,7 +1350,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
-		val inferredType = file.xtendClass.getInferredType
+		val inferredType = file.getXtendClasses.head.getInferredType
 		val javaCode = generator.generateType(inferredType);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
 	}

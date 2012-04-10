@@ -745,7 +745,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		
 		val actualXtendCode = xtendGroup1 + xtendGroup2 + xtendGroup3 
 		val file = file(actualXtendCode, true)
-		val inferredType = file.xtendClass.getInferredType
+		val inferredType = file.getXtendClasses.head.getInferredType
 		val compiledCode = generator.generateType(inferredType);
 		
 		val javaMatcher = p.matcher(java.toString);

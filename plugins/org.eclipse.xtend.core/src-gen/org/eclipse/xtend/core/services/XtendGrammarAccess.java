@@ -29,14 +29,14 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
 		private final Assignment cImportsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportsImportParserRuleCall_1_0 = (RuleCall)cImportsAssignment_1.eContents().get(0);
-		private final Assignment cXtendClassAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cXtendClassClassParserRuleCall_2_0 = (RuleCall)cXtendClassAssignment_2.eContents().get(0);
+		private final Assignment cXtendClassesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cXtendClassesClassParserRuleCall_2_0 = (RuleCall)cXtendClassesAssignment_2.eContents().get(0);
 		
 		//File returns XtendFile:
-		//	("package" package=QualifiedName ";"?)? imports+=Import* xtendClass=Class?;
+		//	("package" package=QualifiedName ";"?)? imports+=Import* xtendClasses+=Class*;
 		public ParserRule getRule() { return rule; }
 
-		//("package" package=QualifiedName ";"?)? imports+=Import* xtendClass=Class?
+		//("package" package=QualifiedName ";"?)? imports+=Import* xtendClasses+=Class*
 		public Group getGroup() { return cGroup; }
 
 		//("package" package=QualifiedName ";"?)?
@@ -60,11 +60,11 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//Import
 		public RuleCall getImportsImportParserRuleCall_1_0() { return cImportsImportParserRuleCall_1_0; }
 
-		//xtendClass=Class?
-		public Assignment getXtendClassAssignment_2() { return cXtendClassAssignment_2; }
+		//xtendClasses+=Class*
+		public Assignment getXtendClassesAssignment_2() { return cXtendClassesAssignment_2; }
 
 		//Class
-		public RuleCall getXtendClassClassParserRuleCall_2_0() { return cXtendClassClassParserRuleCall_2_0; }
+		public RuleCall getXtendClassesClassParserRuleCall_2_0() { return cXtendClassesClassParserRuleCall_2_0; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
@@ -1607,7 +1607,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//File returns XtendFile:
-	//	("package" package=QualifiedName ";"?)? imports+=Import* xtendClass=Class?;
+	//	("package" package=QualifiedName ";"?)? imports+=Import* xtendClasses+=Class*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}

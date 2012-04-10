@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,7 +55,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       final String signature = this.signatureProvider.getSignature(clazz);
       Assert.assertEquals("Foo", signature);
     } catch (Exception _e) {
@@ -80,7 +82,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       final XtendMember xtendFunction1 = _members.get(0);
       EList<XtendMember> _members_1 = clazz.getMembers();
@@ -109,7 +112,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendFunction xtendFunction = ((XtendFunction) _get);
@@ -151,7 +155,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendField xtendField = ((XtendField) _get);
@@ -177,7 +182,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       final XtendMember xtendConstructor = _members.get(0);
       final String signature = this.signatureProvider.getSignature(xtendConstructor);
@@ -208,7 +214,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendFunction xtendFunction = ((XtendFunction) _get);
@@ -245,7 +252,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendFunction xtendFunction = ((XtendFunction) _get);
@@ -289,7 +297,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendFunction xtendFunction = ((XtendFunction) _get);
@@ -335,7 +344,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendFunction xtendFunction = ((XtendFunction) _get);
@@ -375,7 +385,8 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       ResourceSet _resourceSet = this.getResourceSet();
       final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
-      final XtendClass clazz = xtendFile.getXtendClass();
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
       EList<XtendMember> _members = clazz.getMembers();
       XtendMember _get = _members.get(0);
       final XtendFunction xtendFunction = ((XtendFunction) _get);

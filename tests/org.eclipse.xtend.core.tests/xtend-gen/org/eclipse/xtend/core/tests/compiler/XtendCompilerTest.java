@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -9,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -2825,8 +2827,9 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     try {
       String _string = input.toString();
       final XtendFile file = this.file(_string, true);
-      XtendClass _xtendClass = file.getXtendClass();
-      final JvmGenericType inferredType = this._iXtendJvmAssociations.getInferredType(_xtendClass);
+      EList<XtendClass> _xtendClasses = file.getXtendClasses();
+      XtendClass _head = IterableExtensions.<XtendClass>head(_xtendClasses);
+      final JvmGenericType inferredType = this._iXtendJvmAssociations.getInferredType(_head);
       final CharSequence javaCode = this.generator.generateType(inferredType);
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();

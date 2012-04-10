@@ -3878,9 +3878,9 @@ rule__File__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getFileAccess().getXtendClassAssignment_2()); }
-(rule__File__XtendClassAssignment_2)?
-{ after(grammarAccess.getFileAccess().getXtendClassAssignment_2()); }
+{ before(grammarAccess.getFileAccess().getXtendClassesAssignment_2()); }
+(rule__File__XtendClassesAssignment_2)*
+{ after(grammarAccess.getFileAccess().getXtendClassesAssignment_2()); }
 )
 
 ;
@@ -20846,14 +20846,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__File__XtendClassAssignment_2
+rule__File__XtendClassesAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFileAccess().getXtendClassClassParserRuleCall_2_0()); }
-	ruleClass{ after(grammarAccess.getFileAccess().getXtendClassClassParserRuleCall_2_0()); }
+{ before(grammarAccess.getFileAccess().getXtendClassesClassParserRuleCall_2_0()); }
+	ruleClass{ after(grammarAccess.getFileAccess().getXtendClassesClassParserRuleCall_2_0()); }
 )
 
 ;

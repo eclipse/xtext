@@ -124,7 +124,7 @@ public class CompilerTestHelper {
 			final String text = "package foo class Test { def Object foo() throws Exception {" + xtendCode + "} }";
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
-			JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+			JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
 			CharSequence javaCode = generator.generateType(inferredType);
 			return javaCode.toString();
 		} catch (Exception e) {

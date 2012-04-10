@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -165,10 +166,11 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	private Iterable<XtendFunction> getXtendFunctions(XtendFile xtendFile) {
-		if (xtendFile.getXtendClass() == null || xtendFile.getXtendClass().getMembers() == null) {
+		final XtendClass xtendClass = xtendFile.getXtendClasses().isEmpty() ? null : xtendFile.getXtendClasses().get(0);
+		if (xtendClass == null || xtendClass.getMembers() == null) {
 			return Collections.emptyList();
 		}
-		return filter(xtendFile.getXtendClass().getMembers(), XtendFunction.class);
+		return filter(xtendClass.getMembers(), XtendFunction.class);
 	}
 
 	protected boolean isOverwriteIndicator(JvmOperation jvmOperation) {

@@ -81,13 +81,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_FILE__IMPORTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Xtend Class</b></em>' containment reference.
+	 * The feature id for the '<em><b>Xtend Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FILE__XTEND_CLASS = 1;
+	int XTEND_FILE__XTEND_CLASSES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' attribute.
@@ -1000,15 +1000,15 @@ public interface XtendPackage extends EPackage
 	EReference getXtendFile_Imports();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClass <em>Xtend Class</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFile#getXtendClasses <em>Xtend Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Xtend Class</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFile#getXtendClass()
+	 * @return the meta object for the containment reference list '<em>Xtend Classes</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendFile#getXtendClasses()
 	 * @see #getXtendFile()
 	 * @generated
 	 */
-	EReference getXtendFile_XtendClass();
+	EReference getXtendFile_XtendClasses();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFile#getPackage <em>Package</em>}'.
@@ -1774,12 +1774,12 @@ public interface XtendPackage extends EPackage
 		EReference XTEND_FILE__IMPORTS = eINSTANCE.getXtendFile_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Xtend Class</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Xtend Classes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XTEND_FILE__XTEND_CLASS = eINSTANCE.getXtendFile_XtendClass();
+		EReference XTEND_FILE__XTEND_CLASSES = eINSTANCE.getXtendFile_XtendClasses();
 
 		/**
 		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.

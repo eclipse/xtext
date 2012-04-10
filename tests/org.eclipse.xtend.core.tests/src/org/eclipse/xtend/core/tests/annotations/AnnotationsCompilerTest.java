@@ -125,7 +125,7 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	protected Class<?> compileToClass(final String text) throws Exception {
 		XtendFile file = parseHelper.parse(text);
 		validationHelper.assertNoErrors(file);
-		JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+		JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
 		CharSequence javaCode = generator.generateType(inferredType);
 		Class<?> class1 = javaCompiler.compileToClass("Foo", javaCode.toString());
 		return class1;

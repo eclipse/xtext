@@ -16,7 +16,7 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 File returns XtendFile : 
     ('package' package=QualifiedName ';'?)?
 	(imports+=Import)*
-	(xtendClass=Class)?
+	(xtendClasses+=Class)*
 ;
 
 Import returns XtendImport : 
