@@ -867,7 +867,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testUsedFunction() throws Exception {
-		XtendClass clazz = clazz("class X { def private foo() def bar(){foo}}");
+		XtendClass clazz = clazz("abstract class X { def private foo() def bar(){foo}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
@@ -877,8 +877,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testUsedDispatchFunction() throws Exception {
-		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(Integer a) def bar(){foo(42)}}");
+		XtendClass clazz = clazz("class X { def private dispatch foo(String a) {} def private dispatch foo(Integer a) {} def bar(){foo(42)}}");
 		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	@Test public void testAbstractDispatchFunction() throws Exception {
+		XtendClass clazz = clazz("class X { def dispatch String foo(String a) def dispatch String foo(Integer a) {return null} }");
+		helper.assertError(clazz, XTEND_FUNCTION, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT, "abstract");
 	}
 	
 	@Test public void testUsedMemberOfExtensionField() throws Exception {

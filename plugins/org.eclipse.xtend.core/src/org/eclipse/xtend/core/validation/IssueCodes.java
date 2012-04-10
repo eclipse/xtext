@@ -27,6 +27,7 @@ public final class IssueCodes {
 	public static final String DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC = "dispatch_functions_mixed_static_and_non_static";
 	public static final String DISPATCH_FUNCTIONS_STATIC_EXPECTED = "dispatch_functions_static_expected";
 	public static final String DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED = "dispatch_functions_non_static_expected";
+	public static final String DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT = "dispatch_functions_must_not_be_abstract";
 	public static final String SINGLE_DISPATCH_FUNCTION = ISSUE_CODE_PREFIX + "single_case_function";
 	public static final String DISPATCH_PLAIN_FUNCTION_NAME_CLASH = ISSUE_CODE_PREFIX + "dispatch_plain_function_name_clash";
 	public static final String WRONG_PACKAGE = ISSUE_CODE_PREFIX + "wrong_package";
