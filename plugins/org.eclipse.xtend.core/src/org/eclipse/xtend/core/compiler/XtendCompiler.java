@@ -188,7 +188,7 @@ public class XtendCompiler extends XbaseCompiler {
 			ITreeAppendable debugAppendable = appendable.trace(forLoop, true);
 			internalToJavaStatement(expression, debugAppendable, true);
 			String variableName = null;
-			if (forLoop.getAfter() != null || forLoop.getSeparator() != null || forLoop.getAfter() != null) {
+			if (forLoop.getBefore() != null || forLoop.getSeparator() != null || forLoop.getAfter() != null) {
 				variableName = debugAppendable.declareSyntheticVariable(forLoop, "_hasElements");
 				debugAppendable.newLine();
 				debugAppendable.append("boolean ");

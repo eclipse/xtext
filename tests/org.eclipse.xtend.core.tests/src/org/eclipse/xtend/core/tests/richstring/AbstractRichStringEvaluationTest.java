@@ -644,6 +644,22 @@ public abstract class AbstractRichStringEvaluationTest extends Assert {
 				" «ENDFOR»'''");
 	}
 	
+	@Test public void testBug_365632() throws Exception {
+		assertOutput("before\n", 
+				"'''\n"+
+				"  «FOR s : '1'.toCharArray BEFORE 'before'»\n" + 
+				"  «ENDFOR»\n" + 
+				"\n'''");
+	}
+	
+	@Test public void testBug_365632_02() throws Exception {
+		assertOutput("after\n", 
+				"'''\n"+
+						"  «FOR s : '1'.toCharArray AFTER 'after'»\n" + 
+						"  «ENDFOR»\n" + 
+				"\n'''");
+	}
+	
 	@Test public void testBug342724_01() throws Exception {
 		assertOutput("test1\ntest3\n",
 				"'''\n" + 
