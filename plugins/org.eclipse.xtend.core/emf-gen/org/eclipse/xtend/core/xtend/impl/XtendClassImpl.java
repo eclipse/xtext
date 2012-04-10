@@ -37,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -69,6 +70,26 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
@@ -172,6 +193,29 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract()
+	{
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract)
+	{
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__ABSTRACT, oldAbstract, abstract_));
 	}
 
 	/**
@@ -404,6 +448,8 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		{
 			case XtendPackage.XTEND_CLASS__NAME:
 				return getName();
+			case XtendPackage.XTEND_CLASS__ABSTRACT:
+				return isAbstract();
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return getExtends();
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
@@ -433,6 +479,9 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		{
 			case XtendPackage.XTEND_CLASS__NAME:
 				setName((String)newValue);
+				return;
+			case XtendPackage.XTEND_CLASS__ABSTRACT:
+				setAbstract((Boolean)newValue);
 				return;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				setExtends((JvmTypeReference)newValue);
@@ -473,6 +522,9 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 			case XtendPackage.XTEND_CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case XtendPackage.XTEND_CLASS__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				setExtends((JvmTypeReference)null);
 				return;
@@ -507,6 +559,8 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		{
 			case XtendPackage.XTEND_CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case XtendPackage.XTEND_CLASS__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return extends_ != null;
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
@@ -536,6 +590,8 @@ public class XtendClassImpl extends XtendAnnotationTargetImpl implements XtendCl
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", abstract: ");
+		result.append(abstract_);
 		result.append(')');
 		return result.toString();
 	}

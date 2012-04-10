@@ -219,13 +219,22 @@ public interface XtendPackage extends EPackage
 	int XTEND_CLASS__NAME = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__ABSTRACT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__EXTENDS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+	int XTEND_CLASS__EXTENDS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
@@ -234,7 +243,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__IMPLEMENTS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
+	int XTEND_CLASS__IMPLEMENTS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
@@ -243,7 +252,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__SUPER_TYPES = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 3;
+	int XTEND_CLASS__SUPER_TYPES = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -252,7 +261,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__MEMBERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+	int XTEND_CLASS__MEMBERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Super Call Referable</b></em>' containment reference.
@@ -261,7 +270,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__SUPER_CALL_REFERABLE = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 5;
+	int XTEND_CLASS__SUPER_CALL_REFERABLE = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -270,7 +279,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 6;
+	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -279,7 +288,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 7;
+	int XTEND_CLASS_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendClassSuperCallReferableImpl <em>Class Super Call Referable</em>}' class.
@@ -1097,6 +1106,17 @@ public interface XtendPackage extends EPackage
 	EAttribute getXtendClass_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendClass#isAbstract <em>Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendClass#isAbstract()
+	 * @see #getXtendClass()
+	 * @generated
+	 */
+	EAttribute getXtendClass_Abstract();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendClass#getExtends <em>Extends</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1848,6 +1868,14 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_CLASS__NAME = eINSTANCE.getXtendClass_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_CLASS__ABSTRACT = eINSTANCE.getXtendClass_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.

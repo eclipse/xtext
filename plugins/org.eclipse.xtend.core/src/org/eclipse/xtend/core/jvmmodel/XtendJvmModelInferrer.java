@@ -125,6 +125,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		inferredJvmType.setAbstract(source.isAbstract());
 		JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class,
 				source);
 		if (annotation != null) {
@@ -276,6 +277,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	protected void transform(XtendFunction source, JvmGenericType container) {
 		JvmOperation operation = typesFactory.createJvmOperation();
+		operation.setAbstract(source.getExpression()==null);
 		container.getMembers().add(operation);
 		associator.associatePrimary(source, operation);
 		String sourceName = source.getName();

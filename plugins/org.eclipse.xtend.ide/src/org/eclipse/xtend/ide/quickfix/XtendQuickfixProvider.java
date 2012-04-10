@@ -80,7 +80,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Quickfixes for misspelled types and constructors
  */
 public class XtendQuickfixProvider extends DefaultQuickfixProvider {
-
 	@Inject
 	private IJavaProjectProvider projectProvider;
 
@@ -445,7 +444,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
-		if (issue.getData() != null && issue.getData().length > 0)
+		if (issue.getData() != null && issue.getData().length > 0) {
 			acceptor.accept(issue, "Add unimplemented methods", "Add unimplemented methods", "fix_indent.gif",
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
@@ -469,6 +468,13 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 							appendable.commitChanges();
 						}
 					});
+		}
+		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
+				new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				internalDoAddAbstractKeyword(element, context);
+			}
+		});
 	}
 
 	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION)
@@ -586,4 +592,40 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 				xtendLibAdder.addLibsToClasspath(javaProject, new NullProgressMonitor());
 			}
 		});
-	}}
+	}
+	
+	@Fix(IssueCodes.MISSING_ABSTRACT)
+	public void makeClassAbstract(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
+				new ISemanticModification() {
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						internalDoAddAbstractKeyword(element, context);
+					}
+				});
+	}
+	
+	protected void internalDoAddAbstractKeyword(EObject element, IModificationContext context)
+			throws BadLocationException {
+		if (element instanceof XtendFunction) {
+			element = element.eContainer();
+		}
+		if (element instanceof XtendClass) {
+			XtendClass clazz = (XtendClass) element;
+			IXtextDocument document = context.getXtextDocument();
+			ICompositeNode clazzNode = NodeModelUtils.findActualNodeFor(clazz);
+			if (clazzNode == null)
+				throw new IllegalStateException("Cannot determine node for clazz " + clazz.getName());
+			int offset = -1;
+			for (ILeafNode leafNode : clazzNode.getLeafNodes()) {
+				if (leafNode.getText().equals("class")) {
+					offset = leafNode.getOffset();
+				}
+			}
+			ReplacingAppendable appendable = appendableFactory.get(document, clazz,
+					offset, 0);
+			appendable.append("abstract ");
+			appendable.commitChanges();
+		}
+	}
+	
+}

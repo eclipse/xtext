@@ -339,9 +339,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_Extends()
+	public EAttribute getXtendClass_Abstract()
 	{
-		return (EReference)xtendClassEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)xtendClassEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -349,7 +349,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_Implements()
+	public EReference getXtendClass_Extends()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(2);
 	}
@@ -359,7 +359,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_SuperTypes()
+	public EReference getXtendClass_Implements()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(3);
 	}
@@ -369,7 +369,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_Members()
+	public EReference getXtendClass_SuperTypes()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(4);
 	}
@@ -379,7 +379,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_SuperCallReferable()
+	public EReference getXtendClass_Members()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(5);
 	}
@@ -389,9 +389,19 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_TypeParameters()
+	public EReference getXtendClass_SuperCallReferable()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendClass_TypeParameters()
+	{
+		return (EReference)xtendClassEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -967,6 +977,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		xtendClassEClass = createEClass(XTEND_CLASS);
 		createEAttribute(xtendClassEClass, XTEND_CLASS__NAME);
+		createEAttribute(xtendClassEClass, XTEND_CLASS__ABSTRACT);
 		createEReference(xtendClassEClass, XTEND_CLASS__EXTENDS);
 		createEReference(xtendClassEClass, XTEND_CLASS__IMPLEMENTS);
 		createEReference(xtendClassEClass, XTEND_CLASS__SUPER_TYPES);
@@ -1104,6 +1115,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		initEClass(xtendClassEClass, XtendClass.class, "XtendClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendClass_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_Extends(), theTypesPackage.getJvmTypeReference(), null, "extends", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_Implements(), theTypesPackage.getJvmTypeReference(), null, "implements", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_SuperTypes(), theTypesPackage.getJvmTypeReference(), null, "superTypes", null, 0, -1, XtendClass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

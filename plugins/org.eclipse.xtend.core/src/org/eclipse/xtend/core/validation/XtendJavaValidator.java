@@ -759,6 +759,17 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkAbstract(XtendFunction function) {
+		if (function.getExpression() == null) {
+			XtendClass declarator = (XtendClass) function.eContainer();
+			if (!declarator.isAbstract()) {
+				error("The abstract method " + function.getName() + " in type " + declarator.getName() + " can only be defined by an abstract class.", 
+						XTEND_FUNCTION__NAME, 1, MISSING_ABSTRACT);
+			}
+		}
+	}
+	
+	@Check
 	public void checkParameterNames(XtendConstructor constructor) {
 		for (int i = 0; i < constructor.getParameters().size(); ++i) {
 			String leftParameterName = constructor.getParameters().get(i).getName();
