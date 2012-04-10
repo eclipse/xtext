@@ -54,10 +54,10 @@ public abstract class AbstractXtendTestCase extends Assert {
 				@SuppressWarnings("unused")
 				public ClasspathBasedChecks bindClassPathBasedChecks() {
 					return new ClasspathBasedChecks() {
-						@Override
-						public void checkFileNamingConventions(XtendFile xtendFile) {
-							// disabled
-						}
+//						@Override
+//						public void checkFileNamingConventions(XtendFile xtendFile) {
+//							// disabled
+//						}
 					};
 				}
 
@@ -85,7 +85,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 	}
 
 	protected XtendClass clazz(String string) throws Exception {
-		return file(string).getXtendClass();
+		return file(string).getXtendClasses().get(0);
 	}
 
 	protected XtendFile file(String string) throws Exception {

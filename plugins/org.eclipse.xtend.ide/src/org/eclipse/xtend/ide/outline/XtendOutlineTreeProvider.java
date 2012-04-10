@@ -83,9 +83,9 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		if (!xtendFile.getImports().isEmpty())
 			createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__IMPORTS,
 					images.forImportContainer(), "import declarations", false);
-		if (xtendFile.getXtendClass() != null) {
-			EObjectNode classNode = createEObjectNode(parentNode, xtendFile.getXtendClass());
-			createFeatureNodes(classNode, xtendFile.getXtendClass());
+		for (XtendClass xtendClass : xtendFile.getXtendClasses()) {
+			EObjectNode classNode = createEObjectNode(parentNode, xtendClass);
+			createFeatureNodes(classNode, xtendClass);
 		}
 	}
 

@@ -554,6 +554,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
+	@Test public void testClassUniqueNames() throws Exception {
+		XtendClass clazz = clazz("class Foo {} class Foo {}");
+		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_CLASS, "type", "already defined");
+	}
+	
 	@Test public void testInheritanceCycle() throws Exception {
 		Iterator<XtendFile> iter = files(false, 
 				 "package test class Foo extends Bar {}"

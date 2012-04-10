@@ -2707,7 +2707,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		try {
 			XtendFile file = parseHelper.parse(xtendCode);
 			validationHelper.assertNoErrors(file);
-			JvmGenericType inferredType = associations.getInferredType(file.getXtendClass());
+			JvmGenericType inferredType = associations.getInferredType(file.getXtendClasses().get(0));
 			CharSequence javaCode = generator.generateType(inferredType);
 			return javaCode.toString();
 		} catch (Exception exc) {

@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.compiler.batch;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static java.util.Arrays.*;
+import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.File;
@@ -264,20 +265,21 @@ public class XtendBatchCompiler {
 		JavaIoFileSystemAccess fileSystemAccess = javaIoFileSystemAccessProvider.get();
 		fileSystemAccess.setOutputPath(outputDirectory.toString());
 		for (Resource resource : resourceSet.getResources()) {
-			XtendClass xtendClass = getXtendClass(resource);
-			if (xtendClass == null) {
-				continue;
+			for (XtendClass xtendClass : getXtendClasses(resource)) {
+				if (xtendClass == null) {
+					continue;
+				}
+				StringBuilder classSignatureBuilder = new StringBuilder();
+				if (!Strings.isEmpty(xtendClass.getPackageName())) {
+					classSignatureBuilder.append("package " + xtendClass.getPackageName() + ";");
+					classSignatureBuilder.append("\n");
+				}
+				classSignatureBuilder.append("public class " + xtendClass.getName() + "{}");
+				if (log.isDebugEnabled()) {
+					log.debug("create java stub '" + getJavaFileName(xtendClass) + "'");
+				}
+				fileSystemAccess.generateFile(getJavaFileName(xtendClass), classSignatureBuilder.toString());
 			}
-			StringBuilder classSignatureBuilder = new StringBuilder();
-			if (!Strings.isEmpty(xtendClass.getPackageName())) {
-				classSignatureBuilder.append("package " + xtendClass.getPackageName() + ";");
-				classSignatureBuilder.append("\n");
-			}
-			classSignatureBuilder.append("public class " + xtendClass.getName() + "{}");
-			if (log.isDebugEnabled()) {
-				log.debug("create java stub '" + getJavaFileName(xtendClass) + "'");
-			}
-			fileSystemAccess.generateFile(getJavaFileName(xtendClass), classSignatureBuilder.toString());
 		}
 		return outputDirectory;
 	}
@@ -412,17 +414,17 @@ public class XtendBatchCompiler {
 		return qualifiedNameProvider.getFullyQualifiedName(xtendClass);
 	}
 
-	private XtendClass getXtendClass(Resource resource) {
+	private List<XtendClass> getXtendClasses(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
 		if (parseResult != null) {
 			EObject model = parseResult.getRootASTElement();
 			if (model instanceof XtendFile) {
 				XtendFile xtendFile = (XtendFile) model;
-				return xtendFile.getXtendClass();
+				return xtendFile.getXtendClasses();
 			}
 		}
-		return null;
+		return emptyList();
 	}
 
 	protected List<String> getClassPathEntries() {

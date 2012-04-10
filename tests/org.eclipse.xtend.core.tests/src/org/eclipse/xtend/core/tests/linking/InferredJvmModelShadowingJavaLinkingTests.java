@@ -89,7 +89,7 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtendTest
 		resource.load(new StringInputStream(content), null);
 		EObject root = resource.getContents().get(0);
 		assertTrue(root instanceof XtendFile);
-		return ((XtendFile) root).getXtendClass();
+		return ((XtendFile) root).getXtendClasses().get(0);
 	}
 	
 	protected boolean isJavaElement(EObject element) {

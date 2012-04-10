@@ -77,8 +77,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		XtendClass xtendClass = file.getXtendClass();
-		if (xtendClass != null) {
+		for (XtendClass xtendClass : file.getXtendClasses()) {
 			highlightDeprectedXtendAnnotationTarget(acceptor, xtendClass);
 			highlightRichStringsInAnnotations(acceptor, xtendClass);
 			for (XtendMember member : xtendClass.getMembers()) {

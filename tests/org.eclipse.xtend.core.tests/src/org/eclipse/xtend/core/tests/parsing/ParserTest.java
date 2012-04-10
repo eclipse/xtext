@@ -461,6 +461,20 @@ public class ParserTest extends AbstractXtendTestCase {
 		assertEquals(1, constructor.getParameters().size());
 		assertEquals(JvmVisibility.PROTECTED, constructor.getVisibility());
 	}
+
+	@Test public void testMultipleClasses_01() throws Exception {
+		XtendFile file = file(
+				"class A { def String a(String x) { new B().b(x) }} " +
+				"class B { def String b(String x) { new A().a(x) }}", true);
+		assertEquals(2, file.getXtendClasses().size());
+	}
+	
+	@Test public void testMultipleClasses_02() throws Exception {
+		XtendFile file = file(
+				"class A { def static String a(String x) { B::b(x) }} " +
+				"class B { def static String b(String x) { A::a(x) }}", true);
+		assertEquals(2, file.getXtendClasses().size());
+	}
 	
 	protected XtendImport importDeclaration(String importAsString) throws Exception {
 		XtendFile file = file(importAsString + "\nclass Foo{}");

@@ -34,7 +34,7 @@ public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		super.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 		IPath path = getPathToRename(getTargetElementOriginalURI(), resourceSet);
-		if (path != null)
+		if (path != null && path.lastSegment().equals(this.getOriginalName()+".xtend"))
 			updateAcceptor.accept(getTargetElementOriginalURI().trimFragment(), new RenameResourceChange(path, newName
 					+ "." + path.getFileExtension()));
 	}
