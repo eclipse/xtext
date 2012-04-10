@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -2743,6 +2744,18 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"def String foo(String ... s) { " +
 				"  s.map[toUpperCase].toString" +
 				"}", "foo");
+	}
+	
+	@Test public void testAbstractClasses_01() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo abstract class Bar {}");
+		assertTrue(Modifier.isAbstract(code.getModifiers()));
+	}
+	
+	@Test public void testAbstractClasses_02() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo abstract class Bar { def String foo() }");
+		assertTrue(Modifier.isAbstract(code.getModifiers()));
+		Method method = code.getDeclaredMethod("foo");
+		assertTrue(Modifier.isAbstract(method.getModifiers()));
 	}
 	
 }
