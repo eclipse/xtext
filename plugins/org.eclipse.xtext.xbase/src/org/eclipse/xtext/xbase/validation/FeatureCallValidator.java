@@ -57,8 +57,6 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else if (INVALID_ARGUMENT_TYPES.equals(issueCode) || INVALID_GENERIC_ARGUMENT_TYPES.equals(issueCode)) {
 			// Type conformance errors are checked in XbaseJavaValidator.
 			// We cannot rely on the types used during linking because, they might have been incomplete
-		} else if (ASSIGNMENT_TARGET_IS_NOT_WRITEABLE.equals(issueCode)) {
-			message = "Feature " + nameProvider.getSimpleName(featureCall.getFeature()) + " is not writeable.";
 		} else if (INSTANCE_ACCESS_TO_STATIC_MEMBER.equals(issueCode)) {
 			message = "Instance access to static member " + nameProvider.getSimpleName(featureCall.getFeature());
 		} else if (STATIC_ACCESS_TO_INSTANCE_MEMBER.equals(issueCode)) {
