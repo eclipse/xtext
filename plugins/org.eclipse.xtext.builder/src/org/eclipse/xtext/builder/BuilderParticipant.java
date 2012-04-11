@@ -271,7 +271,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(resource.getURI());
 			for (Pair<IStorage, IProject> pair : storages) {
 				if (pair.getFirst() instanceof IFile && pair.getSecond().equals(context.getBuiltProject())) {
-					return((IFile) pair.getFirst()).findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) != IMarker.SEVERITY_ERROR;
+					IFile file = (IFile) pair.getFirst();
+					return file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) != IMarker.SEVERITY_ERROR;
 				}
 			}
 			return false;
