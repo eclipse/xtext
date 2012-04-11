@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.validation;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -42,12 +43,14 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -85,6 +88,7 @@ import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -134,6 +138,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private NumberLiterals numberLiterals;
 	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
+
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
@@ -538,9 +545,84 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		else if (assignmentFeature instanceof JvmFormalParameter)
 			error("Assignment to final parameter", Literals.XASSIGNMENT__ASSIGNABLE,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
-		else if (assignmentFeature instanceof JvmField && ((JvmField) assignmentFeature).isFinal())
-			error("Assignment to final feature", Literals.XASSIGNMENT__ASSIGNABLE,
+		else if (assignmentFeature instanceof JvmField && ((JvmField) assignmentFeature).isFinal()) {
+			JvmField field = (JvmField) assignmentFeature;
+			JvmIdentifiableElement container = logicalContainerProvider.getNearestLogicalContainer(assignment);
+			
+			// don't issue an error if it's an assignment of a local final field within a constructor.
+			if (container != null && container instanceof JvmConstructor) {
+				JvmConstructor constructor = (JvmConstructor) container;
+				if (field.getDeclaringType() == constructor.getDeclaringType())
+					return;
+			}
+			error("Assignment to final field", Literals.XASSIGNMENT__ASSIGNABLE,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
+		}
+	}
+
+	/**
+	 * can be called by subclasses to have proper final field initialization checks.
+	 */
+	protected void checkFinalFieldInitialization(JvmGenericType type) {
+		final Set<JvmField> finalFields = newLinkedHashSet(filter(type.getDeclaredFields(), new Predicate<JvmField>() {
+			public boolean apply(JvmField input) {
+				return input.isFinal();
+			}
+		}));
+		final Set<JvmField> initializedFields = newLinkedHashSet(filter(finalFields, new Predicate<JvmField>() {
+			public boolean apply(JvmField input) {
+				return isInitialized(input);
+			}
+
+		}));
+		for (JvmConstructor constr : type.getDeclaredConstructors()) {
+			final Set<JvmField> localInitializedFields = newLinkedHashSet(initializedFields);
+			XExpression expression = logicalContainerProvider.getAssociatedExpression(constr);
+			if (expression != null) {
+				checkInitializationRec(expression, new IAcceptor<XAssignment>() {
+					public void accept(XAssignment t) {
+						if (!finalFields.contains(t.getFeature()))
+							return;
+						
+						JvmField field = (JvmField) t.getFeature();
+						if (!localInitializedFields.add(field)) {
+							error("The final field "+field.getSimpleName()+" may already have been assigned", t, null, FIELD_ALREADY_INITIALIZED );
+						}
+					}
+				});
+			}
+			for (JvmField field : finalFields) {
+				if (!localInitializedFields.contains(field)) {
+					reportUninitializedField(field);
+				}
+			}
+		}
+		if (isEmpty(type.getDeclaredConstructors())) {
+			finalFields.removeAll(initializedFields);
+			for (JvmField jvmField : finalFields) {
+				reportUninitializedField(jvmField);
+			}
+		}
+	}
+	
+	protected boolean isInitialized(JvmField input) {
+		return logicalContainerProvider.getAssociatedExpression(input) != null;
+	}
+	
+	protected void reportUninitializedField(@SuppressWarnings("unused") JvmField field) {
+	}
+
+	protected void checkInitializationRec(EObject expr, IAcceptor<XAssignment> assignmentAcceptor) {
+		if (expr instanceof XAssignment) {
+			assignmentAcceptor.accept((XAssignment) expr);
+		} else if (expr instanceof XClosure) {
+			// don't go into closures.
+			return;
+		} else {
+			for (EObject child : expr.eContents()) {
+				checkInitializationRec(child, assignmentAcceptor);
+			}
+		}
 	}
 
 	@Check

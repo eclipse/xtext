@@ -55,7 +55,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	@Test public void testAssignmentToFinalField() throws Exception {
 		XExpression expression = expression("new testdata.FieldAccess().finalField = 'foo'");
-		helper.assertError(expression, XASSIGNMENT, ASSIGNMENT_TARGET_IS_NOT_WRITEABLE);
+		helper.assertError(expression, XASSIGNMENT, ASSIGNMENT_TO_FINAL);
 	}
 
 	@Test public void testAssignmentToStaticField() throws Exception {

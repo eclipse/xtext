@@ -346,8 +346,6 @@ public class FeatureCallChecker {
 	 */
 	protected String _case(JvmField input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isFinal())
-			return ASSIGNMENT_TARGET_IS_NOT_WRITEABLE;
 		if (!jvmFeatureDescription.isValidStaticState()) {
 			if (input.isStatic())
 				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
