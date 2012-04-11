@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
@@ -146,7 +147,14 @@ public class SuperTypeCollector {
 			this.references = references;
 			this.level = 0;
 		}
-
+		
+		@Override
+		public Boolean doSwitch(EObject theEObject) {
+			if (theEObject == null)
+				return Boolean.FALSE;
+			return super.doSwitch(theEObject);
+		}
+		
 		@Override
 		public Boolean caseJvmTypeReference(JvmTypeReference object) {
 			if (!object.eIsProxy()) {
