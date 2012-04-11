@@ -234,7 +234,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	protected JvmType getRawType(JvmTypeReference reference) {
 		RawTypeReferenceImplementation strategy = new RawTypeReferenceImplementation(TypesFactory.eINSTANCE);
 		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
-		return result.getType();
+		return result == null ? null : result.getType();
 	}
 	
 }
