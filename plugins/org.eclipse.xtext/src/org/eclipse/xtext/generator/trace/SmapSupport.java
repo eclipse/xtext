@@ -68,9 +68,11 @@ public class SmapSupport {
 				generator.addStratum(stratum, true);
 			}
 			final String path = getPath(lm.source);
-			final String fileName = lm.source.lastSegment();
-			stratum.addFile(fileName, path);
-			stratum.addLineData(lm.sourceStartLine, fileName, 1, lm.targetStartLine+1, lm.targetEndLine - lm.targetStartLine + 1);
+			if (path != null) {
+				final String fileName = lm.source.lastSegment();
+				stratum.addFile(fileName, path);
+				stratum.addLineData(lm.sourceStartLine, fileName, 1, lm.targetStartLine+1, lm.targetEndLine - lm.targetStartLine + 1);
+			}
 		}
 		return generator.getString();
 	}
@@ -139,6 +141,8 @@ public class SmapSupport {
 	}
 
 	protected String getPath(URI path) {
+		if (!path.isPlatformResource())
+			return null;
 		String fullPath = path.trimFragment().toPlatformString(true);
 		final String substring = fullPath.substring(fullPath.substring(1).indexOf('/')+1);
 		return substring;
