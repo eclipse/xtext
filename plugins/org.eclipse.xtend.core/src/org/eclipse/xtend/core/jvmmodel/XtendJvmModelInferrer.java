@@ -397,14 +397,19 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	protected void transform(XtendField source, JvmGenericType container) {
-		if ((source.isExtension() || source.getName() != null) && source.getType() != null) {
+		if (source.isExtension() || source.getName() != null) {
 			JvmField field = typesFactory.createJvmField();
 			field.setSimpleName(computeFieldName(source, container));
 			container.getMembers().add(field);
 			associator.associatePrimary(source, field);
 			field.setVisibility(source.getVisibility());
 			field.setStatic(source.isStatic());
-			field.setType(jvmTypesBuilder.cloneWithProxies(source.getType()));
+			field.setFinal(source.isFinal());
+			if (source.getType() != null) {
+				field.setType(jvmTypesBuilder.cloneWithProxies(source.getType()));
+			} else if (source.getInitialValue() != null) {
+				field.setType(getTypeProxy(source.getInitialValue()));
+			}
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());

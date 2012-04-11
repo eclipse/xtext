@@ -1217,4 +1217,20 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				error("'"+name+"' is not a valid identifier.", obj, attribute, -1, INVALID_IDENTIFIER);
 		}
 	}
+	
+	@Check
+	public void checkFinalFieldInitialization(XtendClass clazz) {
+		JvmGenericType inferredType = associations.getInferredType(clazz);
+		super.checkFinalFieldInitialization(inferredType);
+	}
+	
+	@Override
+	protected void reportUninitializedField(JvmField field) {
+		EObject element = associations.getPrimarySourceElement(field);
+		if (element instanceof XtendField) {
+			XtendField xtendField = (XtendField) element;
+			error("The blank final field "+xtendField.getName()+" may not have been initialized.", xtendField, XTEND_FIELD__NAME, FIELD_NOT_INITIALIZED);
+		}
+	}
+	
 }

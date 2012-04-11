@@ -42,8 +42,8 @@ Member returns XtendMember:
 	(
 		{XtendField.annotationInfo = current}	
 			visibility=Visibility?   
-		 	(extension?='extension' type=JvmTypeReference name=ValidID?
-			| static?='static'? type=JvmTypeReference name=ValidID)
+		 	(extension?='extension' (final?='val' | 'var')? type=JvmTypeReference name=ValidID?
+			| static?='static'? (type=JvmTypeReference | (final?='val' | 'var') type=JvmTypeReference?) name=ValidID)
 			('=' initialValue=XExpression)? ';'?
 	|	{XtendFunction.annotationInfo = current}
 			('def' | override?='override') visibility=Visibility? static?='static'? (dispatch?='dispatch'?) 

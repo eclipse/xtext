@@ -106,6 +106,23 @@ public class ParserTest extends AbstractXtendTestCase {
 		assertEquals("java.util.List", field.getType().getIdentifier());
 	}
 	
+	@Test public void testXtendField_04() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+						"  @com.google.inject.Inject val foo = 'foo'" +
+						"  @com.google.inject.Inject var java.util.List myList" +
+				"}");
+		assertEquals(2, clazz.getMembers().size());
+		XtendField field = (XtendField) clazz.getMembers().get(0);
+		assertNull(field.getType());
+		assertEquals("foo",field.getName());
+		assertTrue( field.getInitialValue() instanceof XStringLiteral);
+		field = (XtendField) clazz.getMembers().get(1);
+		assertEquals("java.util.List",field.getType().getType().getIdentifier());
+		assertEquals("myList",field.getName());
+		assertEquals("java.util.List", field.getType().getIdentifier());
+	}
+	
 	@Test public void testFunction_0() throws Exception {
 		XtendFunction func = function("def foo() {foo}");
 		assertEquals("foo", func.getName());
