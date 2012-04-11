@@ -972,4 +972,29 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	XtendClass clazz = clazz("class Foo { def String test() }");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_ABSTRACT);
     }
+    
+    @Test public void testFinalFieldInit_01() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test }");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_02() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { test = 'foo'}}");
+    	helper.assertNoErrors(clazz);
+    }
+    
+    @Test public void testFinalFieldInit_03() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test = 'foo' }");
+    	helper.assertNoErrors(clazz);
+    }
+    
+    @Test public void testFinalFieldInit_04() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val test = 'bar' new() { test = 'foo' }}");
+    	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_05() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val test new() { test = 'foo' test = 'foo' }}");
+    	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
+    }
 }

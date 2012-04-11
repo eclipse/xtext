@@ -43,8 +43,17 @@ ruleClass :
 ruleMember :
 	ruleXAnnotation* (
 		ruleVisibility? (
-			'extension' ruleJvmTypeReference ruleValidID? |
-			'static'? ruleJvmTypeReference ruleValidID
+			'extension' (
+				'val' |
+				'var'
+			)? ruleJvmTypeReference ruleValidID? |
+			'static'? (
+				ruleJvmTypeReference |
+				(
+					'val' |
+					'var'
+				) ruleJvmTypeReference?
+			) ruleValidID
 		) (
 			'=' ruleXExpression
 		)? ';'? |

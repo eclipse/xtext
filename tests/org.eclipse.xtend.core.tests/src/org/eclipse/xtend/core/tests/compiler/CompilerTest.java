@@ -160,6 +160,36 @@ public class CompilerTest extends AbstractXtendTestCase {
 		invokeAndExpect2(Integer.valueOf(13), code, "getField");
 	}
 	
+	@Test public void testFieldInitialization_04() throws Exception {
+		String code =
+				"val other = 12\n" + 
+				"val field = other + 1\n" +
+				"def getField() {\n" + 
+				"  field" + 
+				"}";
+		invokeAndExpect2(Integer.valueOf(13), code, "getField");
+	}
+	
+	@Test public void testFieldInitialization_05() throws Exception {
+		String code =
+				"val String other\n" + 
+						"new() { other = 'foo' } \n" +
+						"def getField() {\n" + 
+						"  other" + 
+						"}";
+		invokeAndExpect2("foo", code, "getField");
+	}
+	
+	@Test public void testFieldInitialization_06() throws Exception {
+		String code =
+				"extension val String\n" + 
+				"new() { _string = 'foo' } \n" +
+				"def getField() {\n" + 
+				"  _string" + 
+				"}";
+		invokeAndExpect2("foo", code, "getField");
+	}
+	
 	@Test public void testDeclaredConstructor_01() throws Exception {
 		String code = "class Z { new() { this(1) } new(int a) { super() } }";
 		compileJavaCode("Z", code);

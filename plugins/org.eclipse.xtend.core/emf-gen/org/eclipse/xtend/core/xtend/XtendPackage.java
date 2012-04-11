@@ -529,13 +529,22 @@ public interface XtendPackage extends EPackage
 	int XTEND_FIELD__NAME = XTEND_MEMBER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FIELD__FINAL = XTEND_MEMBER_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__TYPE = XTEND_MEMBER_FEATURE_COUNT + 1;
+	int XTEND_FIELD__TYPE = XTEND_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' attribute.
@@ -544,7 +553,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__EXTENSION = XTEND_MEMBER_FEATURE_COUNT + 2;
+	int XTEND_FIELD__EXTENSION = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -553,7 +562,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 3;
+	int XTEND_FIELD__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -562,7 +571,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__STATIC = XTEND_MEMBER_FEATURE_COUNT + 4;
+	int XTEND_FIELD__STATIC = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
@@ -571,7 +580,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__INITIAL_VALUE = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_FIELD__INITIAL_VALUE = XTEND_MEMBER_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -580,7 +589,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl <em>Parameter</em>}' class.
@@ -1398,6 +1407,17 @@ public interface XtendPackage extends EPackage
 	EAttribute getXtendField_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendField#isFinal <em>Final</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Final</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendField#isFinal()
+	 * @see #getXtendField()
+	 * @generated
+	 */
+	EAttribute getXtendField_Final();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendField#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2094,6 +2114,14 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_FIELD__NAME = eINSTANCE.getXtendField_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_FIELD__FINAL = eINSTANCE.getXtendField_Final();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.

@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#getVisibility <em>Visibility</em>}</li>
@@ -58,6 +59,32 @@ public interface XtendField extends XtendMember
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Final</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Final</em>' attribute.
+	 * @see #setFinal(boolean)
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField_Final()
+	 * @model
+	 * @generated
+	 */
+	boolean isFinal();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendField#isFinal <em>Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Final</em>' attribute.
+	 * @see #isFinal()
+	 * @generated
+	 */
+	void setFinal(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.

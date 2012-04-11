@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#getVisibility <em>Visibility</em>}</li>
@@ -60,6 +61,26 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FINAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isFinal() <em>Final</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFinal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean final_ = FINAL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -192,6 +213,29 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isFinal()
+	{
+		return final_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFinal(boolean newFinal)
+	{
+		boolean oldFinal = final_;
+		final_ = newFinal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FIELD__FINAL, oldFinal, final_));
 	}
 
 	/**
@@ -416,6 +460,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		{
 			case XtendPackage.XTEND_FIELD__NAME:
 				return getName();
+			case XtendPackage.XTEND_FIELD__FINAL:
+				return isFinal();
 			case XtendPackage.XTEND_FIELD__TYPE:
 				return getType();
 			case XtendPackage.XTEND_FIELD__EXTENSION:
@@ -442,6 +488,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		{
 			case XtendPackage.XTEND_FIELD__NAME:
 				setName((String)newValue);
+				return;
+			case XtendPackage.XTEND_FIELD__FINAL:
+				setFinal((Boolean)newValue);
 				return;
 			case XtendPackage.XTEND_FIELD__TYPE:
 				setType((JvmTypeReference)newValue);
@@ -475,6 +524,9 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 			case XtendPackage.XTEND_FIELD__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case XtendPackage.XTEND_FIELD__FINAL:
+				setFinal(FINAL_EDEFAULT);
+				return;
 			case XtendPackage.XTEND_FIELD__TYPE:
 				setType((JvmTypeReference)null);
 				return;
@@ -506,6 +558,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		{
 			case XtendPackage.XTEND_FIELD__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case XtendPackage.XTEND_FIELD__FINAL:
+				return final_ != FINAL_EDEFAULT;
 			case XtendPackage.XTEND_FIELD__TYPE:
 				return type != null;
 			case XtendPackage.XTEND_FIELD__EXTENSION:
@@ -533,6 +587,8 @@ public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", final: ");
+		result.append(final_);
 		result.append(", extension: ");
 		result.append(extension);
 		result.append(", visibility: ");

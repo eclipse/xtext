@@ -609,9 +609,19 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXtendField_Final()
+	{
+		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getXtendField_Type()
 	{
-		return (EReference)xtendFieldEClass.getEStructuralFeatures().get(1);
+		return (EReference)xtendFieldEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -621,7 +631,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EAttribute getXtendField_Extension()
 	{
-		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -631,7 +641,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EAttribute getXtendField_Visibility()
 	{
-		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -641,7 +651,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EAttribute getXtendField_Static()
 	{
-		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -651,7 +661,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EReference getXtendField_InitialValue()
 	{
-		return (EReference)xtendFieldEClass.getEStructuralFeatures().get(5);
+		return (EReference)xtendFieldEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1009,6 +1019,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		xtendFieldEClass = createEClass(XTEND_FIELD);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__NAME);
+		createEAttribute(xtendFieldEClass, XTEND_FIELD__FINAL);
 		createEReference(xtendFieldEClass, XTEND_FIELD__TYPE);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__EXTENSION);
 		createEAttribute(xtendFieldEClass, XTEND_FIELD__VISIBILITY);
@@ -1151,6 +1162,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		initEClass(xtendFieldEClass, XtendField.class, "XtendField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendField_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendField_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendField_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendField_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendField_Visibility(), theTypesPackage.getJvmVisibility(), "visibility", "PRIVATE", 0, 1, XtendField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
