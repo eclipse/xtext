@@ -9,7 +9,9 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import java.io.Serializable;
 import java.util.AbstractList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Maps;
 
 /**
  * A stateful (!) builder that provides call back methods for clients who
@@ -54,11 +57,25 @@ public class NodeModelBuilder {
 			return array[index];
 		}
 
+		@Override public boolean equals(@Nullable Object o) {
+			if (this == o)
+				return true;
+			if (!(o instanceof EObjectArrayAsList)) {
+				return false;
+			}
+			EObjectArrayAsList other = (EObjectArrayAsList) o;
+			if (this.size() != other.size())
+				return false;
+			return Arrays.equals(array, other.array);
+		}
+		
 		private static final long serialVersionUID = 0;
 	}
 
 	private EObject forcedGrammarElement;
-	
+
+	private Map<EObjectArrayAsList, EObject[]> cachedFoldedGrammarElements = Maps.newHashMap();
+
 	private boolean compressRoot = true;
 	
 	public void addChild(ICompositeNode node, AbstractNode child) {
@@ -200,7 +217,12 @@ public class NodeModelBuilder {
 				} else {
 					list = new EObjectArrayAsList(myGrammarElement, (EObject[]) childGrammarElement);
 				}
-				casted.basicSetGrammarElement(list.array);
+				EObject[] newElements = cachedFoldedGrammarElements.get(list);
+				if (newElements == null) {
+					newElements = list.array;
+					cachedFoldedGrammarElements.put(list, newElements);
+				}
+				casted.basicSetGrammarElement(newElements);
 				replaceChildren(firstChild, casted);
 			}
 		}
