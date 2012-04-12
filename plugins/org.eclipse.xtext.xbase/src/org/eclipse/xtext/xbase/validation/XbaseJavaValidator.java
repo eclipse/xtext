@@ -50,7 +50,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -66,6 +65,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
@@ -579,17 +579,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			final Set<JvmField> localInitializedFields = newLinkedHashSet(initializedFields);
 			XExpression expression = logicalContainerProvider.getAssociatedExpression(constr);
 			if (expression != null) {
-				checkInitializationRec(expression, new IAcceptor<XAssignment>() {
-					public void accept(XAssignment t) {
-						if (!finalFields.contains(t.getFeature()))
-							return;
-						
-						JvmField field = (JvmField) t.getFeature();
-						if (!localInitializedFields.add(field)) {
-							error("The final field "+field.getSimpleName()+" may already have been assigned", t, null, FIELD_ALREADY_INITIALIZED );
-						}
-					}
-				});
+				checkInitializationRec(expression, finalFields, localInitializedFields, newLinkedHashSet(localInitializedFields));
 			}
 			for (JvmField field : finalFields) {
 				if (!localInitializedFields.contains(field)) {
@@ -612,18 +602,96 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected void reportUninitializedField(@SuppressWarnings("unused") JvmField field) {
 	}
 
-	protected void checkInitializationRec(EObject expr, IAcceptor<XAssignment> assignmentAcceptor) {
+	protected void reportFieldAlreadyInitialized(XAssignment assignment, JvmField field) {
+		error("The final field "+field.getSimpleName()+" may already have been assigned", assignment, null, FIELD_ALREADY_INITIALIZED );
+	}
+	
+	
+	protected void checkInitializationRec(EObject expr, Set<JvmField> fields, Set<JvmField> initializedForSure, Set<JvmField> initializedMaybe) {
 		if (expr instanceof XAssignment) {
-			assignmentAcceptor.accept((XAssignment) expr);
+			XAssignment assignment = (XAssignment) expr;
+			if (assignment.getAssignable() != null)
+				checkInitializationRec(assignment.getAssignable(), fields, initializedForSure, initializedMaybe);
+			if (fields.contains(assignment.getFeature())) {
+				JvmField field = (JvmField) assignment.getFeature();
+				if (fields.contains(field) && (initializedForSure.contains(field) || initializedMaybe.contains(field))) {
+					reportFieldAlreadyInitialized(assignment, field);
+				}
+				initializedForSure.add(field);
+				initializedMaybe.add(field);
+			}
+		} else if (expr instanceof XForLoopExpression) {
+			XForLoopExpression loopExpression = (XForLoopExpression) expr;
+			checkInitializationRec(loopExpression.getForExpression(), fields, initializedForSure, initializedMaybe);
+			checkInitializationRec(loopExpression.getEachExpression(), fields, initializedMaybe, newLinkedHashSet(fields));
+		} else if (expr instanceof XAbstractWhileExpression) {
+			XAbstractWhileExpression loopExpression = (XAbstractWhileExpression) expr;
+			checkInitializationRec(loopExpression.getPredicate(), fields, initializedForSure, newLinkedHashSet(fields));
+			checkInitializationRec(loopExpression.getBody(), fields, initializedMaybe, newLinkedHashSet(fields));
+		} else if (expr instanceof XTryCatchFinallyExpression) {
+			XTryCatchFinallyExpression tryExpr = (XTryCatchFinallyExpression) expr;
+			checkInitializationRec(tryExpr.getExpression(),fields,  initializedForSure, initializedMaybe);
+			checkInitializationRec(tryExpr.getFinallyExpression(), fields, initializedForSure, initializedMaybe);
+		} else if (expr instanceof XIfExpression) {
+			XIfExpression ifExpr = (XIfExpression) expr;
+			checkInitializationRec(ifExpr.getIf(), fields, initializedForSure, initializedMaybe);
+			
+			Set<JvmField> initializedThenForSure = newLinkedHashSet(initializedForSure);
+			Set<JvmField> initializedThenMaybe = newLinkedHashSet(initializedMaybe);
+			checkInitializationRec(ifExpr.getThen(), fields, initializedThenForSure, initializedThenMaybe);
+			
+			if (ifExpr.getElse() != null) {
+				Set<JvmField> initializedElseForSure = newLinkedHashSet(initializedForSure);
+				Set<JvmField> initializedElseMaybe = newLinkedHashSet(initializedMaybe);
+				checkInitializationRec(ifExpr.getElse(), fields, initializedElseForSure, initializedElseMaybe);
+				
+				initializedThenForSure.retainAll(initializedElseForSure);
+				initializedForSure.addAll(initializedThenForSure);
+				initializedMaybe.addAll(initializedThenMaybe);
+				initializedMaybe.addAll(initializedElseMaybe);
+			}
+		} else if (expr instanceof XSwitchExpression) {
+			XSwitchExpression switchExpr = (XSwitchExpression) expr;
+			checkInitializationRec(switchExpr.getSwitch(), fields, initializedForSure, initializedMaybe);
+			Set<JvmField> initializedAllCasesForSure = null;
+			Set<JvmField> initializedAllCasesMaybe = newLinkedHashSet(initializedMaybe);
+			for (XCasePart casepart : switchExpr.getCases()) {
+				if (casepart.getCase() != null) 
+					checkInitializationRec(casepart.getCase(), fields, initializedForSure, initializedMaybe);
+				Set<JvmField> initializedInCaseForSure = newLinkedHashSet(initializedForSure);
+				Set<JvmField> initializedInCaseMaybe = newLinkedHashSet(initializedMaybe);
+				checkInitializationRec(casepart.getThen(), fields, initializedInCaseForSure, initializedInCaseMaybe);
+				if (initializedAllCasesForSure == null)
+					initializedAllCasesForSure = initializedInCaseForSure;
+				else {
+					initializedAllCasesForSure.retainAll(initializedInCaseForSure);
+				}
+				initializedAllCasesMaybe.addAll(initializedInCaseMaybe);
+			}
+			if (switchExpr.getDefault() != null) {
+				Set<JvmField> initializedInCaseForSure = newLinkedHashSet(initializedForSure);
+				Set<JvmField> initializedInCaseMaybe = newLinkedHashSet(initializedMaybe);
+				checkInitializationRec(switchExpr.getDefault(), fields, initializedInCaseForSure, initializedInCaseMaybe);
+				if (initializedAllCasesForSure == null)
+					initializedAllCasesForSure = initializedInCaseForSure;
+				else {
+					initializedAllCasesForSure.retainAll(initializedInCaseForSure);
+				}
+				initializedAllCasesMaybe.addAll(initializedInCaseMaybe);
+				
+				initializedForSure.addAll(initializedAllCasesForSure);
+			}
+			initializedMaybe.addAll(initializedAllCasesMaybe);
 		} else if (expr instanceof XClosure) {
 			// don't go into closures.
 			return;
 		} else {
 			for (EObject child : expr.eContents()) {
-				checkInitializationRec(child, assignmentAcceptor);
+				checkInitializationRec(child, fields, initializedForSure, initializedMaybe);
 			}
 		}
 	}
+
 
 	@Check
 	public void checkVariableDeclaration(XVariableDeclaration declaration) {
