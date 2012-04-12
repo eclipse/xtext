@@ -67,7 +67,10 @@ public class AssertableDiagnostics {
 
 	}
 
-	protected static class Pred implements DiagnosticPredicate {
+	/**
+	 * @since 2.3
+	 */
+	public static class Pred implements DiagnosticPredicate {
 		protected String issueCode;
 		protected String msg;
 		protected Integer severity;
