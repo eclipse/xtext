@@ -66,6 +66,10 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 		return workbenchPartSelection;
 	}
 
+	protected void setWorkbenchPartSelection(IWorkbenchPartSelection workbenchPartSelection) {
+		this.workbenchPartSelection = workbenchPartSelection;
+	}
+
 	protected SourceViewer getSourceViewer() {
 		return sourceViewer;
 	}
