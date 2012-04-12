@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -119,7 +120,13 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
 		result.setType(rawType);
 		EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
-		JvmTypeReference objectReference = superTypesWithObject.get(0);
+		JvmTypeReference objectReference = null;
+		if (superTypesWithObject.isEmpty()) {
+			objectReference = typesFactory.createJvmUnknownTypeReference();
+			((JvmUnknownTypeReference)objectReference).setException(new IllegalStateException("The type "+rawType.getIdentifier()+" doesn't extend java.lang.Object."));
+		} else {
+			objectReference = superTypesWithObject.get(0);
+		}
 		for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
 			if (!(paramType instanceof JvmWildcardTypeReference)) {
 				JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
