@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.io.Serializable;
+import java.util.AbstractList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -22,8 +23,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * A stateful (!) builder that provides call back methods for clients who
@@ -34,9 +33,31 @@ import com.google.common.collect.Maps;
 @NonNullByDefault
 public class NodeModelBuilder {
 
+	private static class EObjectArrayAsList extends AbstractList<EObject> implements Serializable, RandomAccess {
+		final EObject[] array;
+
+		EObjectArrayAsList(@Nullable EObject first, EObject[] rest) {
+			array = new EObject[rest.length + 1];
+			array[0] = first;
+			System.arraycopy(rest, 0, array, 1, rest.length);
+		}
+
+		EObjectArrayAsList(@Nullable EObject first, EObject second) {
+			array = new EObject[] { first, second };
+		}
+
+		@Override public int size() {
+			return array.length;
+		}
+
+		@Override @Nullable public EObject get(int index) {
+			return array[index];
+		}
+
+		private static final long serialVersionUID = 0;
+	}
+
 	private EObject forcedGrammarElement;
-	
-	private Map<List<EObject>, EObject[]> cachedFoldedGrammarElements = Maps.newHashMap();
 	
 	private boolean compressRoot = true;
 	
@@ -173,18 +194,13 @@ public class NodeModelBuilder {
 				// it refers not to a syntax error or a semantic object
 				EObject myGrammarElement = casted.getGrammarElement();
 				Object childGrammarElement = firstChild.basicGetGrammarElement();
-				List<EObject> list = null;
+				EObjectArrayAsList list = null;
 				if (childGrammarElement instanceof EObject) {
-					list = Lists.newArrayList(myGrammarElement, (EObject) childGrammarElement);
+					list = new EObjectArrayAsList(myGrammarElement, (EObject) childGrammarElement);
 				} else {
-					list = Lists.asList(myGrammarElement, (EObject[]) childGrammarElement);
+					list = new EObjectArrayAsList(myGrammarElement, (EObject[]) childGrammarElement);
 				}
-				EObject[] newElements = cachedFoldedGrammarElements.get(list);
-				if (newElements == null) {
-					newElements = list.toArray(new EObject[list.size()]);
-					cachedFoldedGrammarElements.put(list, newElements);
-				}
-				casted.basicSetGrammarElement(newElements);
+				casted.basicSetGrammarElement(list.array);
 				replaceChildren(firstChild, casted);
 			}
 		}
