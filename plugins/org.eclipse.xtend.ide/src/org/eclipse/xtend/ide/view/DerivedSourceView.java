@@ -81,7 +81,7 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class DerivedSourceView extends AbstractSourceView implements IResourceChangeListener {
-	/** The width of the overview ruler. */
+	private static final String XTEND_EDITOR_ID = "org.eclipse.xtend.core.Xtend";
 	protected static final int VERTICAL_RULER_WIDTH = 12;
 	protected static final int OVERVIEW_RULER_WIDTH = 12;
 	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results"; //$NON-NLS-1$
@@ -171,6 +171,18 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	}
 
 	@Override
+	public void partDeactivated(IWorkbenchPartReference workbenchPartReference) {
+		if (XTEND_EDITOR_ID.equals(workbenchPartReference.getId())) {
+			selectedSource = null;
+			openEditorAction.setInputFile(null);
+			openEditorAction.setSelectedRegion(null);
+			setWorkbenchPartSelection(null);
+			setContentDescription("");
+			setInput("");
+		}
+	}
+	
+	@Override
 	protected boolean isValidSelection(IWorkbenchPartSelection workbenchPartSelection) {
 		return super.isValidSelection(workbenchPartSelection)
 				&& traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection)) != null;
@@ -178,14 +190,14 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 
 	@Override
 	protected String getBackgroundColorKey() {
-		return "org.eclipse.ui.editors.backgroundColor"; //$NON-NLS-1$
+		return getLanguageName() + "ui.DerivedSourceView.backgroundColor"; //$NON-NLS-1$
 	}
 
 	@Override
 	protected String getViewerFontName() {
-		return "org.eclipse.jdt.ui.editors.textfont"; //$NON-NLS-1$;
+		return getLanguageName() + ".ui.editors.textfont"; //$NON-NLS-1$
 	}
-
+	
 	@Override
 	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
 		openEditorAction.setInputFile(null);
