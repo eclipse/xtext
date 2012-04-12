@@ -38,6 +38,7 @@ public class NodeModelBuilder {
 
 	private static class EObjectArrayAsList extends AbstractList<EObject> implements Serializable, RandomAccess {
 		final EObject[] array;
+		private int hashCode = -1;
 
 		EObjectArrayAsList(@Nullable EObject first, EObject[] rest) {
 			array = new EObject[rest.length + 1];
@@ -57,16 +58,16 @@ public class NodeModelBuilder {
 			return array[index];
 		}
 
+		@Override public int hashCode() {
+			if (hashCode == -1)
+				hashCode = Arrays.hashCode(array);
+			return hashCode;
+		}
+
 		@Override public boolean equals(@Nullable Object o) {
 			if (this == o)
 				return true;
-			if (!(o instanceof EObjectArrayAsList)) {
-				return false;
-			}
-			EObjectArrayAsList other = (EObjectArrayAsList) o;
-			if (this.size() != other.size())
-				return false;
-			return Arrays.equals(array, other.array);
+			return o instanceof EObjectArrayAsList && Arrays.equals(array, ((EObjectArrayAsList) o).array);
 		}
 		
 		private static final long serialVersionUID = 0;
