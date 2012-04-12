@@ -61,17 +61,17 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 	}
 
 	@Test public void testOpenTypeHierarchyOnXtendClass() throws Exception {
-		XtextEditor xtextEditor = openEditor("package foo class Fo|o { def bar(String a)}");
+		XtextEditor xtextEditor = openEditor("package foo class Fo|o { def bar(String a) {} }");
 		assertEquals("Foo", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
 
 	@Test public void testOpenTypeHierarchyOnTypeReference() throws Exception {
-		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(Str|ing a)}");
+		XtextEditor xtextEditor = openEditor("package foo class Foo { def bar(Str|ing a) {} }");
 		assertEquals("String", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
 
 	@Test public void testOpenTypeHierarchyOnFunction() throws Exception {
-		XtextEditor xtextEditor = openEditor("package foo class Foo { def b|ar(String a)}");
+		XtextEditor xtextEditor = openEditor("package foo class Foo { def b|ar(String a) {} }");
 		assertEquals("bar", invokeTestingHandler(xtextEditor, COMMAND_ID).getResolvedTypeName());
 	}
 

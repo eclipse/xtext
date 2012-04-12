@@ -257,7 +257,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		if (!declaredConstructor) {
 			JvmConstructor constructor = typesFactory.createJvmConstructor();
 			target.getMembers().add(constructor);
-			associator.associatePrimary(source, constructor);
+			associator.associate(source, constructor);
 			constructor.setSimpleName(source.getName());
 			constructor.setVisibility(JvmVisibility.PUBLIC);
 		}
