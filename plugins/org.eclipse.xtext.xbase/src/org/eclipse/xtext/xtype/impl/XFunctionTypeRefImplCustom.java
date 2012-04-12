@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtype.impl;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -119,14 +120,6 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		TypesFactory typesFactory = TypesFactory.eINSTANCE;
 		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
 		result.setType(rawType);
-		EList<JvmTypeReference> superTypesWithObject = ((JvmDeclaredType) rawType).getSuperTypes();
-		JvmTypeReference objectReference = null;
-		if (superTypesWithObject.isEmpty()) {
-			objectReference = typesFactory.createJvmUnknownTypeReference();
-			((JvmUnknownTypeReference)objectReference).setException(new IllegalStateException("The type "+rawType.getIdentifier()+" doesn't extend java.lang.Object."));
-		} else {
-			objectReference = superTypesWithObject.get(0);
-		}
 		for(JvmTypeReference paramType: Lists.newArrayList(getParamTypes())) {
 			if (!(paramType instanceof JvmWildcardTypeReference)) {
 				JvmWildcardTypeReference paramWildcard = typesFactory.createJvmWildcardTypeReference();
@@ -140,9 +133,8 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 					lowerBound.setTypeReference(wrapped);
 				}
 				JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
-				JvmDelegateTypeReference objectDelegate = typesFactory.createJvmDelegateTypeReference();
-				objectDelegate.setDelegate(objectReference);
-				upperBound.setTypeReference(objectDelegate);
+				JvmTypeReference objectReference = getJavaLangObjectTypeRef(rawType, typesFactory);
+				upperBound.setTypeReference(objectReference);
 			
 				paramWildcard.getConstraints().add(upperBound);
 				paramWildcard.getConstraints().add(lowerBound);
@@ -176,6 +168,25 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 			}
 		}
 		return result;
+	}
+
+	private final static URI javaLangObjectURI = URI.createURI("java:/Objects/java.lang.Object#java.lang.Object");
+	
+	protected JvmTypeReference getJavaLangObjectTypeRef(JvmType rawType, TypesFactory typesFactory) {
+		ResourceSet rs = EcoreUtil2.getResourceSet(rawType);
+		JvmParameterizedTypeReference refToObject = typesFactory.createJvmParameterizedTypeReference();
+		if (rs != null) {
+			EObject javaLangObject = rs.getEObject(javaLangObjectURI, true);
+			if (javaLangObject instanceof JvmType) {
+				JvmType objectDeclaration = (JvmType) javaLangObject;
+				refToObject.setType(objectDeclaration);
+				return refToObject;
+			}
+		}
+		JvmGenericType proxy = typesFactory.createJvmGenericType();
+		((InternalEObject)proxy).eSetProxyURI(javaLangObjectURI);
+		refToObject.setType(proxy);
+		return refToObject;
 	}
 	
 	public JvmTypeReference wrapIfNecessary(JvmTypeReference reference) {
