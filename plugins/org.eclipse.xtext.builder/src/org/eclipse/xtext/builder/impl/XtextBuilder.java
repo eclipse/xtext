@@ -155,13 +155,17 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 		}
 		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData);
-		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
-		if (participant != null) {
-			participant.build(new BuildContext(this, resourceSet, deltas, type),
-					progress.newChild(1));
-			getProject().getWorkspace().checkpoint(false);
+		if (!buildData.isEmpty()) {
+			ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
+			if (participant != null) {
+				participant.build(new BuildContext(this, resourceSet, deltas, type),
+						progress.newChild(1));
+				getProject().getWorkspace().checkpoint(false);
+			} else {
+				progress.worked(1);
+			}
 		} else {
-			progress.worked(1);
+			progress.worked(2);
 		}
 		resourceSet.eSetDeliver(false);
 		resourceSet.getResources().clear();
