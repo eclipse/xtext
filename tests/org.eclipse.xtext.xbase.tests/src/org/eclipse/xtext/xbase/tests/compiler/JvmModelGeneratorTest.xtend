@@ -60,7 +60,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	def void testImplements() {
 		val expression = expression("null", false);
 		val clazz = expression.toClass("my.test.Foo") [
-			abstract = true
+			^abstract = true
 			superTypes += expression.typeRef(typeof(Iterable), typeof(String))
 		]
 		val compiled = compile(expression.eResource, clazz)
@@ -71,7 +71,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	def void testExtends() {
 		val expression = expression("null", false);
 		val clazz = expression.toClass("my.test.Foo") [
-			abstract = true
+			^abstract = true
 			superTypes += expression.typeRef(typeof(AbstractList), typeof(String))
 		]
 		val compiled = compile(expression.eResource, clazz)
