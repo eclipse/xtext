@@ -23,6 +23,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -76,6 +77,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	
 	@Inject
 	private TraceMarkers traceMarkers;
+	
+	@Inject
+	private FileBasedTraceInformation fileBasedTraceInformation;
 	
 	@Inject
 	private IWorkspace workspace;
@@ -372,24 +376,33 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	 * @since 2.3
 	 */
 	protected IFile getTraceFile(IFile file) {
-		IPath tracePath = file.getFullPath().addFileExtension(FileBasedTraceInformation.TRACE_FILE_EXTENSION);
-		IResource traceFile = file.getParent().getFile(new Path(tracePath.lastSegment()));
-		return (IFile) traceFile;
+		IStorage traceFile = fileBasedTraceInformation.getTraceFile(file);
+		if (traceFile instanceof IFile) {
+			return (IFile) traceFile;
+		}
+		return null;
 	}
 
 	@Override
 	public void deleteFile(String fileName, String outputName) {
 		try {
 			IFile file = getFile(fileName, outputName);
-			if (getCallBack().beforeFileDeletion(file) && file.exists()) {
-				IFile traceFile = getTraceFile(file);
-				file.delete(IResource.KEEP_HISTORY, monitor);
-				if (traceFile.exists()) {
-					traceFile.delete(IResource.KEEP_HISTORY, monitor);
-				}
-			}
+			deleteFile(file, monitor);
 		} catch (CoreException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void deleteFile(IFile file, IProgressMonitor monitor) throws CoreException {
+		if (getCallBack().beforeFileDeletion(file) && file.exists()) {
+			IFile traceFile = getTraceFile(file);
+			file.delete(IResource.KEEP_HISTORY, monitor);
+			if (traceFile.exists()) {
+				traceFile.delete(IResource.KEEP_HISTORY, monitor);
+			}
 		}
 	}
 	
