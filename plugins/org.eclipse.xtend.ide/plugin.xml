@@ -934,18 +934,11 @@
       <category
           name="%viewCategoryName" id="org.eclipse.xtend.ide"/>
       <view
-          name="%XtendSourceView"
-          icon="$nl$/icons/xtend_file.png"
-          category="org.eclipse.xtend.ide"
-          class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.ui.views.DeclarationView"
-          id="org.eclipse.xtend.ui.DeclarationView">
-      </view>
-      <view
             category="org.eclipse.xtend.ide"
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.view.DerivedSourceView"
             icon="icons/generated_code_view.png"
             id="org.eclipse.xtend.ide.view.DerivedSourceView"
-            name="Generated Code">
+            name="%DerivedSourceView">
       </view>
    </extension>
 
@@ -962,12 +955,12 @@
          </description>
         </fontDefinition>
         <colorDefinition
-            label="%DeclarationViewBackgroundColor.label"
+            label="%DerivedSourceViewBackgroundColor.label"
             categoryId="org.eclipse.xtend.ui.presentation"
             value="COLOR_INFO_BACKGROUND"
-            id="org.eclipse.xtend.ui.DeclarationView.backgroundColor">
+            id="org.eclipse.xtend.ui.DerivedSourceView.backgroundColor">
          <description>
-            %DeclarationViewBackgroundColor.description
+            %DerivedSourceViewBackgroundColor.description
          </description>
       </colorDefinition>
    </extension>
