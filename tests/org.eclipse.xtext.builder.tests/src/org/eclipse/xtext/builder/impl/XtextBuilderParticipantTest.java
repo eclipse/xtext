@@ -84,13 +84,13 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
 		assertSame(BuildType.CLEAN, getContext().getBuildType());
 		waitForAutoBuild();
-		assertEquals(2, getInvocationCount());
-		assertSame(BuildType.FULL, getContext().getBuildType());
+		assertEquals(1, getInvocationCount());
+		assertSame(BuildType.CLEAN, getContext().getBuildType());
 		validateContexts();
 		reset();
 		
 		project.getProject().build(IncrementalProjectBuilder.FULL_BUILD, monitor());
-		assertSame(BuildType.FULL, getContext().getBuildType());
+		assertEquals(0, getInvocationCount());
 		validateContexts();
 		reset();
 	}
