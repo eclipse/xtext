@@ -1219,6 +1219,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkNonInitializedFieldsHaveAType(XtendField field) {
+		if (field.getType() == null && field.getInitialValue() == null) {
+			error("The field "+field.getName()+" needs an explicit type since there is no initialization expression to infer the type from.", field, XTEND_FIELD__NAME, TOO_LITTLE_TYPE_INFORMATION);
+		}
+	}
+	
+	@Check
 	public void checkFinalFieldInitialization(XtendClass clazz) {
 		JvmGenericType inferredType = associations.getInferredType(clazz);
 		super.checkFinalFieldInitialization(inferredType);

@@ -989,12 +989,65 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     }
     
     @Test public void testFinalFieldInit_04() throws Exception {
-    	XtendClass clazz = clazz("class Foo { val test = 'bar' new() { test = 'foo' }}");
+    	XtendClass clazz = clazz("class Foo { val String test = 'bar' new() { test = 'foo' }}");
     	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
     }
     
     @Test public void testFinalFieldInit_05() throws Exception {
-    	XtendClass clazz = clazz("class Foo { val test new() { test = 'foo' test = 'foo' }}");
+    	XtendClass clazz = clazz("class Foo { val String test new() { test = 'foo' test = 'foo' }}");
     	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_06() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { for (x : newArrayList('x')) test = 'foo' }}");
+    	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_07() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { if ('foo' == 'bar') test = 'foo' }}");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_08() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { switch 'foo' { case 'bar' : test = 'foo' }}}");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_09() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { switch 'foo' { case 'bar' : test = 'foo' default : test = 'holla' }}}");
+    	helper.assertNoErrors(clazz);
+    }
+    
+    @Test public void testFinalFieldInit_10() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val test new() { while ('x'=='bar') test = 'foo' }}");
+    	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_11() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { for (x : {test = 'foo' test.toCharArray}) println(x) }}");
+    	helper.assertNoErrors(clazz);
+    }
+    
+    @Test public void testFinalFieldInit_12() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { while ({test = 'foo' test.length > 3}) println(x) }}");
+    	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
+    	helper.assertNoError(clazz.getMembers().get(0), FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFieldTypeInference_01() throws Exception {
+    	XtendClass clazz = clazz("class Foo { var test }");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, TOO_LITTLE_TYPE_INFORMATION);
+    }
+    
+    @Test public void testFieldTypeInference_02() throws Exception {
+    	XtendClass clazz = clazz("class Foo { var String test }");
+    	helper.assertNoErrors(clazz);
+    }
+    
+    @Test public void testFieldTypeInference_03() throws Exception {
+    	XtendClass clazz = clazz("class Foo { var test = 'foo'}");
+    	helper.assertNoErrors(clazz);
     }
 }
