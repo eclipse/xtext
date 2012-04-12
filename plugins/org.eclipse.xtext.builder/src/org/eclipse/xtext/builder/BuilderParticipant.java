@@ -195,12 +195,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			}
 			access.flushSourceTraces();
 			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
-			for (IFile iFile : derivedResources) {
+			for (IFile iFile : newLinkedHashSet(derivedResources)) {
 				IMarker marker = derivedResourceMarkers.findDerivedResourceMarker(iFile, uri);
 				if (marker != null)
 					marker.delete();
 				if (derivedResourceMarkers.findDerivedResourceMarkers(iFile).length == 0) {
-					iFile.delete(IResource.KEEP_HISTORY, deleteMonitor.newChild(1));
+					access.deleteFile(iFile, deleteMonitor);
 					context.needRebuild();
 				}
 			}
