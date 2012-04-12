@@ -307,6 +307,9 @@ public abstract class AbstractTraceRegion {
 	@Nullable
 	public ILocationData getMergedAssociatedLocation() {
 		List<ILocationData> allData = getAssociatedLocations();
+		if (allData.isEmpty()) {
+			return null;
+		}
 		if (allData.size() == 1) {
 			return allData.get(0);
 		}
