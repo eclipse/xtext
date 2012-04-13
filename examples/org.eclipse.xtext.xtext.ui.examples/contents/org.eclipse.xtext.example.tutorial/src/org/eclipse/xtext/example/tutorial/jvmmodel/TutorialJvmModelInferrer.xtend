@@ -1,47 +1,44 @@
 package org.eclipse.xtext.example.tutorial.jvmmodel
- 
+
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.example.tutorial.tutorial.Entity
+import org.eclipse.xtext.example.tutorial.tutorial.Property
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial
 
 /**
- * <p>Infers a JVM model from the source model.</p> 
- *
- * <p>The JVM model should contain all elements that would appear in the Java code 
- * which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     
+ * <p>Translates entities to Java classes.</p> 
  */
 class TutorialJvmModelInferrer extends AbstractModelInferrer {
 
-    /**
-     * convenience API to build and initialize JvmTypes and their members.
-     */
 	@Inject extension JvmTypesBuilder
+	
+	@Inject extension IQualifiedNameProvider 
+	
+	def dispatch infer(Entity entity, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+		// the acceptor can accept any number of Java classes.
+		// the full initialization of the inferred Java class is done in a second step.
+		acceptor.accept(entity.toClass(entity.fullyQualifiedName)).initializeLater [
+			// first we copy over the documentation
+			it.documentation = entity.documentation
+			// Iterate over all features and proper JavaBeans properties.
+			for(feature: entity.features)
+				it.addJavaBeansProperty(feature)
+		]
+	}
 
 	/**
-	 * Is called for each instance of the first argument's type contained in a resource.
-	 * 
-	 * @param element the model to create one or more JvmDeclaredTypes from.
-	 * @param acceptor each created JvmDeclaredType without a container should be passed to the acceptor in order get attached to the
-	 *                   current resource.
-	 * @param isPreLinkingPhase whether the method is called in a pre-linking phase, i.e. when the global index isn't fully updated. You
-	 *        must not rely on linking using the index if isPrelinkingPhase is <code>true</code>
-	 */
-   	def dispatch void infer(DomainModelTutorial element, IAcceptor<JvmDeclaredType> acceptor, boolean isPrelinkingPhase) {
-   		
-   		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		// An example based on the initial hello world example could look like this:
-   		
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings") [
-//   			for (greeting : element.greetings) {
-//   				members += greeting.toMethod(greeting.name, greeting.newTypeRef(typeof(String))) [
-//   					it.body ['''
-//   						return "Hello «greeting.name»";
-//   					''']
-//   				]
-//   			}
-//   		])
-   	}
+	 * Adds a field, a setter and a getter according to JavaBeans conventions for the given property. 
+	 */	
+	def addJavaBeansProperty(JvmDeclaredType javaClass, Property property) {
+		javaClass.members += property.toField(property.name, property.type) [
+			it.documentation = property.documentation
+		]
+		javaClass.members += property.toGetter(property.name, property.type)
+		javaClass.members += property.toSetter(property.name, property.type)
+	}
+	
 }
