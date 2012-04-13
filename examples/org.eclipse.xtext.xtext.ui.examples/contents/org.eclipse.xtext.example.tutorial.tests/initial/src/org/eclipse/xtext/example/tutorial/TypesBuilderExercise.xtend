@@ -8,10 +8,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 
 @RunWith(typeof(XtextRunner))
-// You need to provide the injector that instantiates and initializes
-// the test class and its dependencies
-
-//@InjectWith(typeof(TutorialInjectorProvider))
+@InjectWith(typeof(TutorialInjectorProvider))
 class TypesBuilderExercise {
 	
 	/**
@@ -25,17 +22,19 @@ class TypesBuilderExercise {
 	@Test
 	def void testMe() { 
 		'''
-			package tutorial {
+			package tutorial
+			
 			import java.util.Date
-				/**
-			 	 * A simple entity to describe a Person
-			 	 */
-				entity Person {
-					firstName: String
-					lastName: String
-					birthday: Date
-			  }
+			
+			/**
+			 * A simple entity to describe a Person
+			 */
+			entity Person {
+				firstName: String
+				lastName: String
+				birthday: Date
 			}
+			
 		'''.assertCompilesTo('''
 			package tutorial;
 			
