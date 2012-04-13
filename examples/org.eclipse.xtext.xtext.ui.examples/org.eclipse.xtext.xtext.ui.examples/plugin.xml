@@ -149,7 +149,7 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.xtext.examples.NewTutorialExampleWizard" pageImage="icons/genproject.gif">
 		 <fileToOpen location="org.eclipse.xtext.example.tutorial/src/org/eclipse/xtext/example/tutorial/Tutorial.xtext"/>
-		 <fileToOpen location="org.eclipse.xtext.example.tutorial/EclipseCon2012-tutorial.pdf"/>
+		 <fileToOpen location="org.eclipse.xtext.example.tutorial/Tutorial.pdf"/>
 		 <projectDescriptor name="org.eclipse.xtext.example.tutorial" contentURI="contents/org.eclipse.xtext.example.tutorial.zip" description="The tutorial description, a scaffolded grammar and solutions"/>
 		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.tests" contentURI="contents/org.eclipse.xtext.example.tutorial.tests.zip" description="A test suite and some utilities to test drive the APIs."/>
 		 <projectDescriptor name="org.eclipse.xtext.example.tutorial.ui" contentURI="contents/org.eclipse.xtext.example.tutorial.ui.zip" description="A smart editor for the language."/>
