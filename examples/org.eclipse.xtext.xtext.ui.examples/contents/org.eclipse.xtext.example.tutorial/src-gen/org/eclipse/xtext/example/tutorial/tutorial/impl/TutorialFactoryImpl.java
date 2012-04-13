@@ -67,12 +67,8 @@ public class TutorialFactoryImpl extends EFactoryImpl implements TutorialFactory
   {
     switch (eClass.getClassifierID())
     {
-      case TutorialPackage.DOMAIN_MODEL_TUTORIAL: return createDomainModelTutorial();
-      case TutorialPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
-      case TutorialPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case TutorialPackage.DOMAIN_MODEL_FILE: return createDomainModelFile();
       case TutorialPackage.IMPORT: return createImport();
-      case TutorialPackage.TYPE: return createType();
-      case TutorialPackage.DATA_TYPE: return createDataType();
       case TutorialPackage.ENTITY: return createEntity();
       case TutorialPackage.PROPERTY: return createProperty();
       default:
@@ -85,32 +81,10 @@ public class TutorialFactoryImpl extends EFactoryImpl implements TutorialFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public DomainModelTutorial createDomainModelTutorial()
+  public DomainModelFile createDomainModelFile()
   {
-    DomainModelTutorialImpl domainModelTutorial = new DomainModelTutorialImpl();
-    return domainModelTutorial;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PackageDeclaration createPackageDeclaration()
-  {
-    PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
-    return packageDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AbstractElement createAbstractElement()
-  {
-    AbstractElementImpl abstractElement = new AbstractElementImpl();
-    return abstractElement;
+    DomainModelFileImpl domainModelFile = new DomainModelFileImpl();
+    return domainModelFile;
   }
 
   /**
@@ -122,28 +96,6 @@ public class TutorialFactoryImpl extends EFactoryImpl implements TutorialFactory
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Type createType()
-  {
-    TypeImpl type = new TypeImpl();
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataType createDataType()
-  {
-    DataTypeImpl dataType = new DataTypeImpl();
-    return dataType;
   }
 
   /**

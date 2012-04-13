@@ -18,105 +18,58 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class DomainModelTutorialElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DomainModelTutorial");
-		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
-		
-		/// **
-		// * The first rule in an Xtext grammar serves as the entry point for the parser.
-		// * The framework will derive a statically types model from the grammar definition thus
-		// * all tutorial-files will yield an instanceof DomainModelTutorial
-		// * / // an assignment with the += operator will create a list
-		//DomainModelTutorial:
-		//	elements+=AbstractElement*;
-		public ParserRule getRule() { return rule; }
-
-		//elements+=AbstractElement*
-		public Assignment getElementsAssignment() { return cElementsAssignment; }
-
-		//AbstractElement
-		public RuleCall getElementsAbstractElementParserRuleCall_0() { return cElementsAbstractElementParserRuleCall_0; }
-	}
-
-	public class PackageDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDeclaration");
+	public class DomainModelFileElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DomainModelFile");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cElementsAbstractElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cPackageKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cNameQualifiedNameParserRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
+		private final Assignment cImportsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportsImportParserRuleCall_1_0 = (RuleCall)cImportsAssignment_1.eContents().get(0);
+		private final Assignment cEntitiesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cEntitiesEntityParserRuleCall_2_0 = (RuleCall)cEntitiesAssignment_2.eContents().get(0);
 		
 		/// **
-		// * A package declaration may contain types, nested packages or package local imports.
-		// * Those elements have the common super type AbstractElement.
-		// * / PackageDeclaration: // keywords are written in "double" or 'single' quotes
-		//	"package" name=QualifiedName "{" // the trailing quantifier * means zero or more (any number of occurrences is valid)
-		//	elements+=AbstractElement* "}";
+		// * Parsing always starts with the first rule in the grammar.
+		// * / DomainModelFile:
+		//	("package" name=QualifiedName)? // we start with an optional package declaration (? == optional)
+		//	// the import section is made up of zero or more import statements (* == 0..n) 
+		//	imports+=Import* // followed by any number of Entity declarations
+		//	entities+=Entity*;
 		public ParserRule getRule() { return rule; }
 
-		//// keywords are written in "double" or 'single' quotes
-		//"package" name=QualifiedName "{" // the trailing quantifier * means zero or more (any number of occurrences is valid)
-		//elements+=AbstractElement* "}"
+		//("package" name=QualifiedName)? // we start with an optional package declaration (? == optional)
+		//// the import section is made up of zero or more import statements (* == 0..n) 
+		//imports+=Import* // followed by any number of Entity declarations
+		//entities+=Entity*
 		public Group getGroup() { return cGroup; }
 
-		//// keywords are written in "double" or 'single' quotes
+		//("package" name=QualifiedName)?
+		public Group getGroup_0() { return cGroup_0; }
+
 		//"package"
-		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
+		public Keyword getPackageKeyword_0_0() { return cPackageKeyword_0_0; }
 
 		//name=QualifiedName
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
 
 		//QualifiedName
-		public RuleCall getNameQualifiedNameParserRuleCall_1_0() { return cNameQualifiedNameParserRuleCall_1_0; }
+		public RuleCall getNameQualifiedNameParserRuleCall_0_1_0() { return cNameQualifiedNameParserRuleCall_0_1_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
-		//elements+=AbstractElement*
-		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
-
-		//AbstractElement
-		public RuleCall getElementsAbstractElementParserRuleCall_3_0() { return cElementsAbstractElementParserRuleCall_3_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
-	}
-
-	public class AbstractElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractElement");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPackageDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cImportParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		/// **
-		// * This is an abstract rule that delegates to the three subtypes of AbstractElement:
-		// * <ul>
-		// *   <li>PackageDeclaration to parse a new package</li>
-		// *   <li>Type which may either be an entity or a simple data type</li>
-		// *   <li>Import an import clause which is applied for the current namespace</li>
-		// * </ul>
-		// * / AbstractElement: // The bar is used to denote alternatives for the parser
-		//	PackageDeclaration | Type | Import;
-		public ParserRule getRule() { return rule; }
-
-		//// The bar is used to denote alternatives for the parser
-		//PackageDeclaration | Type | Import
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//// The bar is used to denote alternatives for the parser
-		//PackageDeclaration
-		public RuleCall getPackageDeclarationParserRuleCall_0() { return cPackageDeclarationParserRuleCall_0; }
-
-		//Type
-		public RuleCall getTypeParserRuleCall_1() { return cTypeParserRuleCall_1; }
+		//// the import section is made up of zero or more import statements (* == 0..n) 
+		//imports+=Import*
+		public Assignment getImportsAssignment_1() { return cImportsAssignment_1; }
 
 		//Import
-		public RuleCall getImportParserRuleCall_2() { return cImportParserRuleCall_2; }
+		public RuleCall getImportsImportParserRuleCall_1_0() { return cImportsImportParserRuleCall_1_0; }
+
+		//// followed by any number of Entity declarations
+		//entities+=Entity*
+		public Assignment getEntitiesAssignment_2() { return cEntitiesAssignment_2; }
+
+		//Entity
+		public RuleCall getEntitiesEntityParserRuleCall_2_0() { return cEntitiesEntityParserRuleCall_2_0; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
@@ -124,104 +77,25 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
+		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		/// **
-		// * This tutorial uses namespace imports. Xtext determines that from the assignment
-		// * <em>importedNamespace</em>. They work like Java imports, so wildcard imports or
-		// * single imports are valid.
-		// * / Import: // a simple assignment '=' is used to set the value on the produced object
-		//	"import" importedNamespace=QualifiedNameWithWildcard;
+		// * The framework automatically treats properties with the name 'importedNamespace' as imports. 
+		// * / Import:
+		//	"import" importedNamespace=QualifiedName;
 		public ParserRule getRule() { return rule; }
 
-		//// a simple assignment '=' is used to set the value on the produced object
-		//"import" importedNamespace=QualifiedNameWithWildcard
+		//"import" importedNamespace=QualifiedName
 		public Group getGroup() { return cGroup; }
 
-		//// a simple assignment '=' is used to set the value on the produced object
 		//"import"
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
-		//importedNamespace=QualifiedNameWithWildcard
+		//importedNamespace=QualifiedName
 		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
 
-		//QualifiedNameWithWildcard
-		public RuleCall getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0; }
-	}
-
-	public class QualifiedNameWithWildcardElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithWildcard");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		/// **
-		// * This is a data type rule. It will not create a node in the produced model but 
-		// * will be parsed as a plain string.
-		// * / QualifiedNameWithWildcard: // the question mark <em>?</em> marks the keyword '.*' as optional.
-		//	QualifiedName ".*"?;
-		public ParserRule getRule() { return rule; }
-
-		//// the question mark <em>?</em> marks the keyword '.*' as optional.
-		//QualifiedName ".*"?
-		public Group getGroup() { return cGroup; }
-
-		//// the question mark <em>?</em> marks the keyword '.*' as optional.
 		//QualifiedName
-		public RuleCall getQualifiedNameParserRuleCall_0() { return cQualifiedNameParserRuleCall_0; }
-
-		//".*"?
-		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
-	}
-
-	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cDataTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEntityParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		/// **
-		// * This rule parses instances of Type which may either be DataTypes or Entities.
-		// * The behavior is similar to the rule AbstractElement.
-		// * / Type:
-		//	DataType | Entity;
-		public ParserRule getRule() { return rule; }
-
-		//DataType | Entity
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//DataType
-		public RuleCall getDataTypeParserRuleCall_0() { return cDataTypeParserRuleCall_0; }
-
-		//Entity
-		public RuleCall getEntityParserRuleCall_1() { return cEntityParserRuleCall_1; }
-	}
-
-	public class DataTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataType");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		
-		/// **
-		// * A DataType is a very simple representation of a type. The only property of a DataType
-		// * is its name.
-		// * / DataType:
-		//	"datatype" name=ValidID;
-		public ParserRule getRule() { return rule; }
-
-		//"datatype" name=ValidID
-		public Group getGroup() { return cGroup; }
-
-		//"datatype"
-		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
-
-		//name=ValidID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
 	}
 
 	public class EntityElements extends AbstractParserRuleElementFinder {
@@ -233,29 +107,19 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cSuperTypeEntityCrossReference_2_1_0 = (CrossReference)cSuperTypeAssignment_2_1.eContents().get(0);
-		private final RuleCall cSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1 = (RuleCall)cSuperTypeEntityCrossReference_2_1_0.eContents().get(1);
+		private final RuleCall cSuperTypeJvmTypeReferenceParserRuleCall_2_1_0 = (RuleCall)cSuperTypeAssignment_2_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cFeaturesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cFeaturesPropertyParserRuleCall_4_0 = (RuleCall)cFeaturesAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		/// **
-		// * An entity yields a more complex structure. Entities may have a super type and they may
-		// * define properties.
+		// * Entities may have a super type and they may define properties.
 		// * / Entity:
-		//	"entity" name=ValidID // the optional super type uses a so called cross reference. The squared
-		//	// brackets indicate that the super type itself refers to an instance of 
-		//	// entity that was defined somewhere else. A qualified name is used as the key
-		//	// to look that up.  
-		//	("extends" superType=[Entity|QualifiedName])? "{" features+=Property* "}";
+		//	"entity" name=ValidID ("extends" superType=JvmTypeReference)? "{" features+=Property* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"entity" name=ValidID // the optional super type uses a so called cross reference. The squared
-		//// brackets indicate that the super type itself refers to an instance of 
-		//// entity that was defined somewhere else. A qualified name is used as the key
-		//// to look that up.  
-		//("extends" superType=[Entity|QualifiedName])? "{" features+=Property* "}"
+		//"entity" name=ValidID ("extends" superType=JvmTypeReference)? "{" features+=Property* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"entity"
@@ -267,20 +131,17 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 
-		//("extends" superType=[Entity|QualifiedName])?
+		//("extends" superType=JvmTypeReference)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"extends"
 		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
 
-		//superType=[Entity|QualifiedName]
+		//superType=JvmTypeReference
 		public Assignment getSuperTypeAssignment_2_1() { return cSuperTypeAssignment_2_1; }
 
-		//[Entity|QualifiedName]
-		public CrossReference getSuperTypeEntityCrossReference_2_1_0() { return cSuperTypeEntityCrossReference_2_1_0; }
-
-		//QualifiedName
-		public RuleCall getSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1() { return cSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1; }
+		//JvmTypeReference
+		public RuleCall getSuperTypeJvmTypeReferenceParserRuleCall_2_1_0() { return cSuperTypeJvmTypeReferenceParserRuleCall_2_1_0; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
@@ -302,16 +163,15 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameValidIDParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cTypeTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
-		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cTypeTypeCrossReference_2_0.eContents().get(1);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		/// **
 		// * Properties are basically a pair of a name and a reference to a type.
 		// * / Property:
-		//	name=ValidID ":" type=[Type|QualifiedName];
+		//	name=ValidID ":" type=JvmTypeReference;
 		public ParserRule getRule() { return rule; }
 
-		//name=ValidID ":" type=[Type|QualifiedName]
+		//name=ValidID ":" type=JvmTypeReference
 		public Group getGroup() { return cGroup; }
 
 		//name=ValidID
@@ -323,24 +183,16 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//type=[Type|QualifiedName]
+		//type=JvmTypeReference
 		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 
-		//[Type|QualifiedName]
-		public CrossReference getTypeTypeCrossReference_2_0() { return cTypeTypeCrossReference_2_0; }
-
-		//QualifiedName
-		public RuleCall getTypeTypeQualifiedNameParserRuleCall_2_0_1() { return cTypeTypeQualifiedNameParserRuleCall_2_0_1; }
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_0() { return cTypeJvmTypeReferenceParserRuleCall_2_0; }
 	}
 	
 	
-	private DomainModelTutorialElements pDomainModelTutorial;
-	private PackageDeclarationElements pPackageDeclaration;
-	private AbstractElementElements pAbstractElement;
+	private DomainModelFileElements pDomainModelFile;
 	private ImportElements pImport;
-	private QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
-	private TypeElements pType;
-	private DataTypeElements pDataType;
 	private EntityElements pEntity;
 	private PropertyElements pProperty;
 	
@@ -366,57 +218,24 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	/// **
-	// * The first rule in an Xtext grammar serves as the entry point for the parser.
-	// * The framework will derive a statically types model from the grammar definition thus
-	// * all tutorial-files will yield an instanceof DomainModelTutorial
-	// * / // an assignment with the += operator will create a list
-	//DomainModelTutorial:
-	//	elements+=AbstractElement*;
-	public DomainModelTutorialElements getDomainModelTutorialAccess() {
-		return (pDomainModelTutorial != null) ? pDomainModelTutorial : (pDomainModelTutorial = new DomainModelTutorialElements());
+	// * Parsing always starts with the first rule in the grammar.
+	// * / DomainModelFile:
+	//	("package" name=QualifiedName)? // we start with an optional package declaration (? == optional)
+	//	// the import section is made up of zero or more import statements (* == 0..n) 
+	//	imports+=Import* // followed by any number of Entity declarations
+	//	entities+=Entity*;
+	public DomainModelFileElements getDomainModelFileAccess() {
+		return (pDomainModelFile != null) ? pDomainModelFile : (pDomainModelFile = new DomainModelFileElements());
 	}
 	
-	public ParserRule getDomainModelTutorialRule() {
-		return getDomainModelTutorialAccess().getRule();
+	public ParserRule getDomainModelFileRule() {
+		return getDomainModelFileAccess().getRule();
 	}
 
 	/// **
-	// * A package declaration may contain types, nested packages or package local imports.
-	// * Those elements have the common super type AbstractElement.
-	// * / PackageDeclaration: // keywords are written in "double" or 'single' quotes
-	//	"package" name=QualifiedName "{" // the trailing quantifier * means zero or more (any number of occurrences is valid)
-	//	elements+=AbstractElement* "}";
-	public PackageDeclarationElements getPackageDeclarationAccess() {
-		return (pPackageDeclaration != null) ? pPackageDeclaration : (pPackageDeclaration = new PackageDeclarationElements());
-	}
-	
-	public ParserRule getPackageDeclarationRule() {
-		return getPackageDeclarationAccess().getRule();
-	}
-
-	/// **
-	// * This is an abstract rule that delegates to the three subtypes of AbstractElement:
-	// * <ul>
-	// *   <li>PackageDeclaration to parse a new package</li>
-	// *   <li>Type which may either be an entity or a simple data type</li>
-	// *   <li>Import an import clause which is applied for the current namespace</li>
-	// * </ul>
-	// * / AbstractElement: // The bar is used to denote alternatives for the parser
-	//	PackageDeclaration | Type | Import;
-	public AbstractElementElements getAbstractElementAccess() {
-		return (pAbstractElement != null) ? pAbstractElement : (pAbstractElement = new AbstractElementElements());
-	}
-	
-	public ParserRule getAbstractElementRule() {
-		return getAbstractElementAccess().getRule();
-	}
-
-	/// **
-	// * This tutorial uses namespace imports. Xtext determines that from the assignment
-	// * <em>importedNamespace</em>. They work like Java imports, so wildcard imports or
-	// * single imports are valid.
-	// * / Import: // a simple assignment '=' is used to set the value on the produced object
-	//	"import" importedNamespace=QualifiedNameWithWildcard;
+	// * The framework automatically treats properties with the name 'importedNamespace' as imports. 
+	// * / Import:
+	//	"import" importedNamespace=QualifiedName;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -426,53 +245,9 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// **
-	// * This is a data type rule. It will not create a node in the produced model but 
-	// * will be parsed as a plain string.
-	// * / QualifiedNameWithWildcard: // the question mark <em>?</em> marks the keyword '.*' as optional.
-	//	QualifiedName ".*"?;
-	public QualifiedNameWithWildcardElements getQualifiedNameWithWildcardAccess() {
-		return (pQualifiedNameWithWildcard != null) ? pQualifiedNameWithWildcard : (pQualifiedNameWithWildcard = new QualifiedNameWithWildcardElements());
-	}
-	
-	public ParserRule getQualifiedNameWithWildcardRule() {
-		return getQualifiedNameWithWildcardAccess().getRule();
-	}
-
-	/// **
-	// * This rule parses instances of Type which may either be DataTypes or Entities.
-	// * The behavior is similar to the rule AbstractElement.
-	// * / Type:
-	//	DataType | Entity;
-	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
-	}
-	
-	public ParserRule getTypeRule() {
-		return getTypeAccess().getRule();
-	}
-
-	/// **
-	// * A DataType is a very simple representation of a type. The only property of a DataType
-	// * is its name.
-	// * / DataType:
-	//	"datatype" name=ValidID;
-	public DataTypeElements getDataTypeAccess() {
-		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
-	}
-	
-	public ParserRule getDataTypeRule() {
-		return getDataTypeAccess().getRule();
-	}
-
-	/// **
-	// * An entity yields a more complex structure. Entities may have a super type and they may
-	// * define properties.
+	// * Entities may have a super type and they may define properties.
 	// * / Entity:
-	//	"entity" name=ValidID // the optional super type uses a so called cross reference. The squared
-	//	// brackets indicate that the super type itself refers to an instance of 
-	//	// entity that was defined somewhere else. A qualified name is used as the key
-	//	// to look that up.  
-	//	("extends" superType=[Entity|QualifiedName])? "{" features+=Property* "}";
+	//	"entity" name=ValidID ("extends" superType=JvmTypeReference)? "{" features+=Property* "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}
@@ -484,7 +259,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 	/// **
 	// * Properties are basically a pair of a name and a reference to a type.
 	// * / Property:
-	//	name=ValidID ":" type=[Type|QualifiedName];
+	//	name=ValidID ":" type=JvmTypeReference;
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}

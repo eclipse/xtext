@@ -25,7 +25,7 @@ public class TutorialParser extends org.eclipse.xtext.parser.antlr.AbstractAntlr
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "DomainModelTutorial";
+		return "DomainModelFile";
 	}
 	
 	public TutorialGrammarAccess getGrammarAccess() {

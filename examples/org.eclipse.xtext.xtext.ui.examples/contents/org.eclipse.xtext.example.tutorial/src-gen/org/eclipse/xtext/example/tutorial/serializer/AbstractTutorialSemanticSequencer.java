@@ -12,11 +12,9 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.example.tutorial.services.TutorialGrammarAccess;
-import org.eclipse.xtext.example.tutorial.tutorial.DataType;
-import org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial;
+import org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile;
 import org.eclipse.xtext.example.tutorial.tutorial.Entity;
 import org.eclipse.xtext.example.tutorial.tutorial.Import;
-import org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration;
 import org.eclipse.xtext.example.tutorial.tutorial.Property;
 import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -94,39 +92,21 @@ public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TutorialPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case TutorialPackage.DATA_TYPE:
-				if(context == grammarAccess.getAbstractElementRule() ||
-				   context == grammarAccess.getDataTypeRule() ||
-				   context == grammarAccess.getTypeRule()) {
-					sequence_DataType(context, (DataType) semanticObject); 
-					return; 
-				}
-				else break;
-			case TutorialPackage.DOMAIN_MODEL_TUTORIAL:
-				if(context == grammarAccess.getDomainModelTutorialRule()) {
-					sequence_DomainModelTutorial(context, (DomainModelTutorial) semanticObject); 
+			case TutorialPackage.DOMAIN_MODEL_FILE:
+				if(context == grammarAccess.getDomainModelFileRule()) {
+					sequence_DomainModelFile(context, (DomainModelFile) semanticObject); 
 					return; 
 				}
 				else break;
 			case TutorialPackage.ENTITY:
-				if(context == grammarAccess.getAbstractElementRule() ||
-				   context == grammarAccess.getEntityRule() ||
-				   context == grammarAccess.getTypeRule()) {
+				if(context == grammarAccess.getEntityRule()) {
 					sequence_Entity(context, (Entity) semanticObject); 
 					return; 
 				}
 				else break;
 			case TutorialPackage.IMPORT:
-				if(context == grammarAccess.getAbstractElementRule() ||
-				   context == grammarAccess.getImportRule()) {
+				if(context == grammarAccess.getImportRule()) {
 					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
-			case TutorialPackage.PACKAGE_DECLARATION:
-				if(context == grammarAccess.getAbstractElementRule() ||
-				   context == grammarAccess.getPackageDeclarationRule()) {
-					sequence_PackageDeclaration(context, (PackageDeclaration) semanticObject); 
 					return; 
 				}
 				else break;
@@ -998,32 +978,16 @@ public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     name=ValidID
+	 *     (name=QualifiedName? imports+=Import* entities+=Entity*)
 	 */
-	protected void sequence_DataType(EObject context, DataType semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, TutorialPackage.Literals.TYPE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TutorialPackage.Literals.TYPE__NAME));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getDataTypeAccess().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     elements+=AbstractElement*
-	 */
-	protected void sequence_DomainModelTutorial(EObject context, DomainModelTutorial semanticObject) {
+	protected void sequence_DomainModelFile(EObject context, DomainModelFile semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (name=ValidID superType=[Entity|QualifiedName]? features+=Property*)
+	 *     (name=ValidID superType=JvmTypeReference? features+=Property*)
 	 */
 	protected void sequence_Entity(EObject context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1041,7 +1005,7 @@ public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     importedNamespace=QualifiedNameWithWildcard
+	 *     importedNamespace=QualifiedName
 	 */
 	protected void sequence_Import(EObject context, Import semanticObject) {
 		if(errorAcceptor != null) {
@@ -1050,7 +1014,7 @@ public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0(), semanticObject.getImportedNamespace());
+		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
@@ -1129,16 +1093,7 @@ public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (name=QualifiedName elements+=AbstractElement*)
-	 */
-	protected void sequence_PackageDeclaration(EObject context, PackageDeclaration semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (name=ValidID type=[Type|QualifiedName])
+	 *     (name=ValidID type=JvmTypeReference)
 	 */
 	protected void sequence_Property(EObject context, Property semanticObject) {
 		if(errorAcceptor != null) {
@@ -1150,7 +1105,7 @@ public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getPropertyAccess().getNameValidIDParserRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeQualifiedNameParserRuleCall_2_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getPropertyAccess().getTypeJvmTypeReferenceParserRuleCall_2_0(), semanticObject.getType());
 		feeder.finish();
 	}
 	

@@ -95,25 +95,10 @@ public class TutorialSwitch<T>
   {
     switch (classifierID)
     {
-      case TutorialPackage.DOMAIN_MODEL_TUTORIAL:
+      case TutorialPackage.DOMAIN_MODEL_FILE:
       {
-        DomainModelTutorial domainModelTutorial = (DomainModelTutorial)theEObject;
-        T result = caseDomainModelTutorial(domainModelTutorial);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TutorialPackage.PACKAGE_DECLARATION:
-      {
-        PackageDeclaration packageDeclaration = (PackageDeclaration)theEObject;
-        T result = casePackageDeclaration(packageDeclaration);
-        if (result == null) result = caseAbstractElement(packageDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TutorialPackage.ABSTRACT_ELEMENT:
-      {
-        AbstractElement abstractElement = (AbstractElement)theEObject;
-        T result = caseAbstractElement(abstractElement);
+        DomainModelFile domainModelFile = (DomainModelFile)theEObject;
+        T result = caseDomainModelFile(domainModelFile);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -121,24 +106,6 @@ public class TutorialSwitch<T>
       {
         Import import_ = (Import)theEObject;
         T result = caseImport(import_);
-        if (result == null) result = caseAbstractElement(import_);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TutorialPackage.TYPE:
-      {
-        Type type = (Type)theEObject;
-        T result = caseType(type);
-        if (result == null) result = caseAbstractElement(type);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case TutorialPackage.DATA_TYPE:
-      {
-        DataType dataType = (DataType)theEObject;
-        T result = caseDataType(dataType);
-        if (result == null) result = caseType(dataType);
-        if (result == null) result = caseAbstractElement(dataType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -146,8 +113,6 @@ public class TutorialSwitch<T>
       {
         Entity entity = (Entity)theEObject;
         T result = caseEntity(entity);
-        if (result == null) result = caseType(entity);
-        if (result == null) result = caseAbstractElement(entity);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -163,49 +128,17 @@ public class TutorialSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Domain Model Tutorial</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Domain Model File</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Domain Model Tutorial</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Domain Model File</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseDomainModelTutorial(DomainModelTutorial object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePackageDeclaration(PackageDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAbstractElement(AbstractElement object)
+  public T caseDomainModelFile(DomainModelFile object)
   {
     return null;
   }
@@ -222,38 +155,6 @@ public class TutorialSwitch<T>
    * @generated
    */
   public T caseImport(Import object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseType(Type object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDataType(DataType object)
   {
     return null;
   }

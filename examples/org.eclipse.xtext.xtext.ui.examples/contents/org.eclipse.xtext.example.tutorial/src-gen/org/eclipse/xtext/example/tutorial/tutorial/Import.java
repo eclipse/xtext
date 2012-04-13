@@ -5,6 +5,7 @@
  */
 package org.eclipse.xtext.example.tutorial.tutorial;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +23,7 @@ package org.eclipse.xtext.example.tutorial.tutorial;
  * @model
  * @generated
  */
-public interface Import extends AbstractElement
+public interface Import extends EObject
 {
   /**
    * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.

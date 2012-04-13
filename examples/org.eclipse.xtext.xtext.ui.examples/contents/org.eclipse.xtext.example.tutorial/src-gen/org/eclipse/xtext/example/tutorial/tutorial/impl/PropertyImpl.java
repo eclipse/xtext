@@ -6,6 +6,7 @@
 package org.eclipse.xtext.example.tutorial.tutorial.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -13,9 +14,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.example.tutorial.tutorial.Property;
 import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
-import org.eclipse.xtext.example.tutorial.tutorial.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,14 +56,14 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected JvmTypeReference type;
 
   /**
    * <!-- begin-user-doc -->
@@ -112,27 +114,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getType()
-  {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, TutorialPackage.PROPERTY__TYPE, oldType, type));
-      }
-    }
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Type basicGetType()
+  public JvmTypeReference getType()
   {
     return type;
   }
@@ -142,12 +124,53 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(Type newType)
+  public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
   {
-    Type oldType = type;
+    JvmTypeReference oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TutorialPackage.PROPERTY__TYPE, oldType, type));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TutorialPackage.PROPERTY__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(JvmTypeReference newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TutorialPackage.PROPERTY__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TutorialPackage.PROPERTY__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TutorialPackage.PROPERTY__TYPE, newType, newType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case TutorialPackage.PROPERTY__TYPE:
+        return basicSetType(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -163,8 +186,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
       case TutorialPackage.PROPERTY__NAME:
         return getName();
       case TutorialPackage.PROPERTY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -183,7 +205,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         setName((String)newValue);
         return;
       case TutorialPackage.PROPERTY__TYPE:
-        setType((Type)newValue);
+        setType((JvmTypeReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -203,7 +225,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         setName(NAME_EDEFAULT);
         return;
       case TutorialPackage.PROPERTY__TYPE:
-        setType((Type)null);
+        setType((JvmTypeReference)null);
         return;
     }
     super.eUnset(featureID);

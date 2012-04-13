@@ -16,29 +16,32 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.example.tutorial.tutorial.AbstractElement;
-import org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration;
+import org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile;
+import org.eclipse.xtext.example.tutorial.tutorial.Entity;
+import org.eclipse.xtext.example.tutorial.tutorial.Import;
 import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Package Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Domain Model File</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PackageDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PackageDeclarationImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl#getEntities <em>Entities</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PackageDeclarationImpl extends AbstractElementImpl implements PackageDeclaration
+public class DomainModelFileImpl extends MinimalEObjectImpl.Container implements DomainModelFile
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -61,21 +64,31 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElements()
+   * @see #getImports()
    * @generated
    * @ordered
    */
-  protected EList<AbstractElement> elements;
+  protected EList<Import> imports;
+
+  /**
+   * The cached value of the '{@link #getEntities() <em>Entities</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEntities()
+   * @generated
+   * @ordered
+   */
+  protected EList<Entity> entities;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PackageDeclarationImpl()
+  protected DomainModelFileImpl()
   {
     super();
   }
@@ -88,7 +101,7 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   @Override
   protected EClass eStaticClass()
   {
-    return TutorialPackage.Literals.PACKAGE_DECLARATION;
+    return TutorialPackage.Literals.DOMAIN_MODEL_FILE;
   }
 
   /**
@@ -111,7 +124,7 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TutorialPackage.PACKAGE_DECLARATION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, TutorialPackage.DOMAIN_MODEL_FILE__NAME, oldName, name));
   }
 
   /**
@@ -119,13 +132,27 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractElement> getElements()
+  public EList<Import> getImports()
   {
-    if (elements == null)
+    if (imports == null)
     {
-      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, TutorialPackage.PACKAGE_DECLARATION__ELEMENTS);
+      imports = new EObjectContainmentEList<Import>(Import.class, this, TutorialPackage.DOMAIN_MODEL_FILE__IMPORTS);
     }
-    return elements;
+    return imports;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Entity> getEntities()
+  {
+    if (entities == null)
+    {
+      entities = new EObjectContainmentEList<Entity>(Entity.class, this, TutorialPackage.DOMAIN_MODEL_FILE__ENTITIES);
+    }
+    return entities;
   }
 
   /**
@@ -138,8 +165,10 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   {
     switch (featureID)
     {
-      case TutorialPackage.PACKAGE_DECLARATION__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+      case TutorialPackage.DOMAIN_MODEL_FILE__IMPORTS:
+        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case TutorialPackage.DOMAIN_MODEL_FILE__ENTITIES:
+        return ((InternalEList<?>)getEntities()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -154,10 +183,12 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   {
     switch (featureID)
     {
-      case TutorialPackage.PACKAGE_DECLARATION__NAME:
+      case TutorialPackage.DOMAIN_MODEL_FILE__NAME:
         return getName();
-      case TutorialPackage.PACKAGE_DECLARATION__ELEMENTS:
-        return getElements();
+      case TutorialPackage.DOMAIN_MODEL_FILE__IMPORTS:
+        return getImports();
+      case TutorialPackage.DOMAIN_MODEL_FILE__ENTITIES:
+        return getEntities();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -173,12 +204,16 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   {
     switch (featureID)
     {
-      case TutorialPackage.PACKAGE_DECLARATION__NAME:
+      case TutorialPackage.DOMAIN_MODEL_FILE__NAME:
         setName((String)newValue);
         return;
-      case TutorialPackage.PACKAGE_DECLARATION__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends AbstractElement>)newValue);
+      case TutorialPackage.DOMAIN_MODEL_FILE__IMPORTS:
+        getImports().clear();
+        getImports().addAll((Collection<? extends Import>)newValue);
+        return;
+      case TutorialPackage.DOMAIN_MODEL_FILE__ENTITIES:
+        getEntities().clear();
+        getEntities().addAll((Collection<? extends Entity>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -194,11 +229,14 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   {
     switch (featureID)
     {
-      case TutorialPackage.PACKAGE_DECLARATION__NAME:
+      case TutorialPackage.DOMAIN_MODEL_FILE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case TutorialPackage.PACKAGE_DECLARATION__ELEMENTS:
-        getElements().clear();
+      case TutorialPackage.DOMAIN_MODEL_FILE__IMPORTS:
+        getImports().clear();
+        return;
+      case TutorialPackage.DOMAIN_MODEL_FILE__ENTITIES:
+        getEntities().clear();
         return;
     }
     super.eUnset(featureID);
@@ -214,10 +252,12 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   {
     switch (featureID)
     {
-      case TutorialPackage.PACKAGE_DECLARATION__NAME:
+      case TutorialPackage.DOMAIN_MODEL_FILE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case TutorialPackage.PACKAGE_DECLARATION__ELEMENTS:
-        return elements != null && !elements.isEmpty();
+      case TutorialPackage.DOMAIN_MODEL_FILE__IMPORTS:
+        return imports != null && !imports.isEmpty();
+      case TutorialPackage.DOMAIN_MODEL_FILE__ENTITIES:
+        return entities != null && !entities.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -239,4 +279,4 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
     return result.toString();
   }
 
-} //PackageDeclarationImpl
+} //DomainModelFileImpl

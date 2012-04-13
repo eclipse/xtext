@@ -60,61 +60,14 @@ public interface TutorialPackage extends EPackage
   TutorialPackage eINSTANCE = org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelTutorialImpl <em>Domain Model Tutorial</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl <em>Domain Model File</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelTutorialImpl
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getDomainModelTutorial()
+   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl
+   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getDomainModelFile()
    * @generated
    */
-  int DOMAIN_MODEL_TUTORIAL = 0;
-
-  /**
-   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOMAIN_MODEL_TUTORIAL__ELEMENTS = 0;
-
-  /**
-   * The number of structural features of the '<em>Domain Model Tutorial</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOMAIN_MODEL_TUTORIAL_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.AbstractElementImpl
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getAbstractElement()
-   * @generated
-   */
-  int ABSTRACT_ELEMENT = 2;
-
-  /**
-   * The number of structural features of the '<em>Abstract Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.PackageDeclarationImpl
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getPackageDeclaration()
-   * @generated
-   */
-  int PACKAGE_DECLARATION = 1;
+  int DOMAIN_MODEL_FILE = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -123,25 +76,34 @@ public interface TutorialPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int DOMAIN_MODEL_FILE__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int DOMAIN_MODEL_FILE__IMPORTS = 1;
 
   /**
-   * The number of structural features of the '<em>Package Declaration</em>' class.
+   * The feature id for the '<em><b>Entities</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+  int DOMAIN_MODEL_FILE__ENTITIES = 2;
+
+  /**
+   * The number of structural features of the '<em>Domain Model File</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DOMAIN_MODEL_FILE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.ImportImpl <em>Import</em>}' class.
@@ -151,7 +113,7 @@ public interface TutorialPackage extends EPackage
    * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 3;
+  int IMPORT = 1;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -160,7 +122,7 @@ public interface TutorialPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IMPORT__IMPORTED_NAMESPACE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int IMPORT__IMPORTED_NAMESPACE = 0;
 
   /**
    * The number of structural features of the '<em>Import</em>' class.
@@ -169,63 +131,7 @@ public interface TutorialPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IMPORT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.TypeImpl <em>Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TypeImpl
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getType()
-   * @generated
-   */
-  int TYPE = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DataTypeImpl <em>Data Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.DataTypeImpl
-   * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getDataType()
-   * @generated
-   */
-  int DATA_TYPE = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DATA_TYPE__NAME = TYPE__NAME;
-
-  /**
-   * The number of structural features of the '<em>Data Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+  int IMPORT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.EntityImpl <em>Entity</em>}' class.
@@ -235,7 +141,7 @@ public interface TutorialPackage extends EPackage
    * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 6;
+  int ENTITY = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -244,16 +150,16 @@ public interface TutorialPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__NAME = TYPE__NAME;
+  int ENTITY__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__SUPER_TYPE = TYPE_FEATURE_COUNT + 0;
+  int ENTITY__SUPER_TYPE = 1;
 
   /**
    * The feature id for the '<em><b>Features</b></em>' containment reference list.
@@ -262,7 +168,7 @@ public interface TutorialPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__FEATURES = TYPE_FEATURE_COUNT + 1;
+  int ENTITY__FEATURES = 2;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -271,7 +177,7 @@ public interface TutorialPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+  int ENTITY_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PropertyImpl <em>Property</em>}' class.
@@ -281,7 +187,7 @@ public interface TutorialPackage extends EPackage
    * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getProperty()
    * @generated
    */
-  int PROPERTY = 7;
+  int PROPERTY = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -293,7 +199,7 @@ public interface TutorialPackage extends EPackage
   int PROPERTY__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -312,67 +218,47 @@ public interface TutorialPackage extends EPackage
 
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial <em>Domain Model Tutorial</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile <em>Domain Model File</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Domain Model Tutorial</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial
+   * @return the meta object for class '<em>Domain Model File</em>'.
+   * @see org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile
    * @generated
    */
-  EClass getDomainModelTutorial();
+  EClass getDomainModelFile();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial#getElements <em>Elements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial#getElements()
-   * @see #getDomainModelTutorial()
-   * @generated
-   */
-  EReference getDomainModelTutorial_Elements();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration <em>Package Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Package Declaration</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration
-   * @generated
-   */
-  EClass getPackageDeclaration();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration#getName()
-   * @see #getPackageDeclaration()
+   * @see org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile#getName()
+   * @see #getDomainModelFile()
    * @generated
    */
-  EAttribute getPackageDeclaration_Name();
+  EAttribute getDomainModelFile_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration#getElements <em>Elements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile#getImports <em>Imports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration#getElements()
-   * @see #getPackageDeclaration()
+   * @return the meta object for the containment reference list '<em>Imports</em>'.
+   * @see org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile#getImports()
+   * @see #getDomainModelFile()
    * @generated
    */
-  EReference getPackageDeclaration_Elements();
+  EReference getDomainModelFile_Imports();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.AbstractElement <em>Abstract Element</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile#getEntities <em>Entities</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Abstract Element</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.AbstractElement
+   * @return the meta object for the containment reference list '<em>Entities</em>'.
+   * @see org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile#getEntities()
+   * @see #getDomainModelFile()
    * @generated
    */
-  EClass getAbstractElement();
+  EReference getDomainModelFile_Entities();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.Import <em>Import</em>}'.
@@ -396,37 +282,6 @@ public interface TutorialPackage extends EPackage
   EAttribute getImport_ImportedNamespace();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.Type
-   * @generated
-   */
-  EClass getType();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.tutorial.tutorial.Type#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.Type#getName()
-   * @see #getType()
-   * @generated
-   */
-  EAttribute getType_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.DataType <em>Data Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Data Type</em>'.
-   * @see org.eclipse.xtext.example.tutorial.tutorial.DataType
-   * @generated
-   */
-  EClass getDataType();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.tutorial.tutorial.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -437,10 +292,21 @@ public interface TutorialPackage extends EPackage
   EClass getEntity();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.tutorial.tutorial.Entity#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.tutorial.tutorial.Entity#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.example.tutorial.tutorial.Entity#getName()
+   * @see #getEntity()
+   * @generated
+   */
+  EAttribute getEntity_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.tutorial.tutorial.Entity#getSuperType <em>Super Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Super Type</em>'.
    * @see org.eclipse.xtext.example.tutorial.tutorial.Entity#getSuperType()
    * @see #getEntity()
    * @generated
@@ -480,10 +346,10 @@ public interface TutorialPackage extends EPackage
   EAttribute getProperty_Name();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.tutorial.tutorial.Property#getType <em>Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.tutorial.tutorial.Property#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
+   * @return the meta object for the containment reference '<em>Type</em>'.
    * @see org.eclipse.xtext.example.tutorial.tutorial.Property#getType()
    * @see #getProperty()
    * @generated
@@ -514,32 +380,14 @@ public interface TutorialPackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelTutorialImpl <em>Domain Model Tutorial</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl <em>Domain Model File</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelTutorialImpl
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getDomainModelTutorial()
+     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl
+     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getDomainModelFile()
      * @generated
      */
-    EClass DOMAIN_MODEL_TUTORIAL = eINSTANCE.getDomainModelTutorial();
-
-    /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference DOMAIN_MODEL_TUTORIAL__ELEMENTS = eINSTANCE.getDomainModelTutorial_Elements();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.PackageDeclarationImpl
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getPackageDeclaration()
-     * @generated
-     */
-    EClass PACKAGE_DECLARATION = eINSTANCE.getPackageDeclaration();
+    EClass DOMAIN_MODEL_FILE = eINSTANCE.getDomainModelFile();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -547,25 +395,23 @@ public interface TutorialPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute PACKAGE_DECLARATION__NAME = eINSTANCE.getPackageDeclaration_Name();
+    EAttribute DOMAIN_MODEL_FILE__NAME = eINSTANCE.getDomainModelFile_Name();
 
     /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PACKAGE_DECLARATION__ELEMENTS = eINSTANCE.getPackageDeclaration_Elements();
+    EReference DOMAIN_MODEL_FILE__IMPORTS = eINSTANCE.getDomainModelFile_Imports();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
+     * The meta object literal for the '<em><b>Entities</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.AbstractElementImpl
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getAbstractElement()
      * @generated
      */
-    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
+    EReference DOMAIN_MODEL_FILE__ENTITIES = eINSTANCE.getDomainModelFile_Entities();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.ImportImpl <em>Import</em>}' class.
@@ -586,34 +432,6 @@ public interface TutorialPackage extends EPackage
     EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.TypeImpl <em>Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TypeImpl
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getType()
-     * @generated
-     */
-    EClass TYPE = eINSTANCE.getType();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DataTypeImpl <em>Data Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.DataTypeImpl
-     * @see org.eclipse.xtext.example.tutorial.tutorial.impl.TutorialPackageImpl#getDataType()
-     * @generated
-     */
-    EClass DATA_TYPE = eINSTANCE.getDataType();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.tutorial.tutorial.impl.EntityImpl <em>Entity</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -624,7 +442,15 @@ public interface TutorialPackage extends EPackage
     EClass ENTITY = eINSTANCE.getEntity();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Super Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -658,7 +484,7 @@ public interface TutorialPackage extends EPackage
     EAttribute PROPERTY__NAME = eINSTANCE.getProperty_Name();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

@@ -12,16 +12,14 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.example.tutorial.tutorial.AbstractElement;
-import org.eclipse.xtext.example.tutorial.tutorial.DataType;
-import org.eclipse.xtext.example.tutorial.tutorial.DomainModelTutorial;
+import org.eclipse.xtext.common.types.TypesPackage;
+
+import org.eclipse.xtext.example.tutorial.tutorial.DomainModelFile;
 import org.eclipse.xtext.example.tutorial.tutorial.Entity;
 import org.eclipse.xtext.example.tutorial.tutorial.Import;
-import org.eclipse.xtext.example.tutorial.tutorial.PackageDeclaration;
 import org.eclipse.xtext.example.tutorial.tutorial.Property;
 import org.eclipse.xtext.example.tutorial.tutorial.TutorialFactory;
 import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
-import org.eclipse.xtext.example.tutorial.tutorial.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,21 +34,7 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass domainModelTutorialEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass packageDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass abstractElementEClass = null;
+  private EClass domainModelFileEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -58,20 +42,6 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * @generated
    */
   private EClass importEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass typeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass dataTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -135,6 +105,9 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
 
     isInited = true;
 
+    // Initialize simple dependencies
+    TypesPackage.eINSTANCE.eClass();
+
     // Create package meta-data objects
     theTutorialPackage.createPackageContents();
 
@@ -155,9 +128,9 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDomainModelTutorial()
+  public EClass getDomainModelFile()
   {
-    return domainModelTutorialEClass;
+    return domainModelFileEClass;
   }
 
   /**
@@ -165,9 +138,9 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDomainModelTutorial_Elements()
+  public EAttribute getDomainModelFile_Name()
   {
-    return (EReference)domainModelTutorialEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)domainModelFileEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -175,9 +148,9 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPackageDeclaration()
+  public EReference getDomainModelFile_Imports()
   {
-    return packageDeclarationEClass;
+    return (EReference)domainModelFileEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -185,29 +158,9 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPackageDeclaration_Name()
+  public EReference getDomainModelFile_Entities()
   {
-    return (EAttribute)packageDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getPackageDeclaration_Elements()
-  {
-    return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getAbstractElement()
-  {
-    return abstractElementEClass;
+    return (EReference)domainModelFileEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -235,36 +188,6 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getType()
-  {
-    return typeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getType_Name()
-  {
-    return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDataType()
-  {
-    return dataTypeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getEntity()
   {
     return entityEClass;
@@ -275,9 +198,19 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getEntity_Name()
+  {
+    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getEntity_SuperType()
   {
-    return (EReference)entityEClass.getEStructuralFeatures().get(0);
+    return (EReference)entityEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -287,7 +220,7 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
    */
   public EReference getEntity_Features()
   {
-    return (EReference)entityEClass.getEStructuralFeatures().get(1);
+    return (EReference)entityEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -350,24 +283,16 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
     isCreated = true;
 
     // Create classes and their features
-    domainModelTutorialEClass = createEClass(DOMAIN_MODEL_TUTORIAL);
-    createEReference(domainModelTutorialEClass, DOMAIN_MODEL_TUTORIAL__ELEMENTS);
-
-    packageDeclarationEClass = createEClass(PACKAGE_DECLARATION);
-    createEAttribute(packageDeclarationEClass, PACKAGE_DECLARATION__NAME);
-    createEReference(packageDeclarationEClass, PACKAGE_DECLARATION__ELEMENTS);
-
-    abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+    domainModelFileEClass = createEClass(DOMAIN_MODEL_FILE);
+    createEAttribute(domainModelFileEClass, DOMAIN_MODEL_FILE__NAME);
+    createEReference(domainModelFileEClass, DOMAIN_MODEL_FILE__IMPORTS);
+    createEReference(domainModelFileEClass, DOMAIN_MODEL_FILE__ENTITIES);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
-    typeEClass = createEClass(TYPE);
-    createEAttribute(typeEClass, TYPE__NAME);
-
-    dataTypeEClass = createEClass(DATA_TYPE);
-
     entityEClass = createEClass(ENTITY);
+    createEAttribute(entityEClass, ENTITY__NAME);
     createEReference(entityEClass, ENTITY__SUPER_TYPE);
     createEReference(entityEClass, ENTITY__FEATURES);
 
@@ -400,42 +325,32 @@ public class TutorialPackageImpl extends EPackageImpl implements TutorialPackage
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    packageDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
-    importEClass.getESuperTypes().add(this.getAbstractElement());
-    typeEClass.getESuperTypes().add(this.getAbstractElement());
-    dataTypeEClass.getESuperTypes().add(this.getType());
-    entityEClass.getESuperTypes().add(this.getType());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(domainModelTutorialEClass, DomainModelTutorial.class, "DomainModelTutorial", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDomainModelTutorial_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, DomainModelTutorial.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(packageDeclarationEClass, PackageDeclaration.class, "PackageDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPackageDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, PackageDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPackageDeclaration_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, PackageDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(domainModelFileEClass, DomainModelFile.class, "DomainModelFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDomainModelFile_Name(), ecorePackage.getEString(), "name", null, 0, 1, DomainModelFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDomainModelFile_Imports(), this.getImport(), null, "imports", null, 0, -1, DomainModelFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDomainModelFile_Entities(), this.getEntity(), null, "entities", null, 0, -1, DomainModelFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEntity_SuperType(), this.getEntity(), null, "superType", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEntity_SuperType(), theTypesPackage.getJvmTypeReference(), null, "superType", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEntity_Features(), this.getProperty(), null, "features", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getProperty_Type(), this.getType(), null, "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProperty_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
