@@ -35,13 +35,33 @@ Import:
  */
 Entity:
 	'entity' name=ValidID ('extends' superType=JvmTypeReference)? '{'
-		features+=Property*
+		features+=Feature*
 	'}'
 ;
+
+/**
+ * A feature is either a property or an operation
+ */
+Feature:
+	Property | Operation
+;
+
+/**
+ * an operation looks like this:
+ * 
+ * myOperation(String param) : ReturnType {
+ *   return 
+ * }
+ */
+Operation:
+	name=ValidID '(' (parameters+=FullJvmFormalParameter (',' parameters+=FullJvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
+		body=XBlockExpression
+;
+
 
 /**
  * Properties are basically a pair of a name and a reference to a type.
  */
 Property:
 	name=ValidID ':' type=JvmTypeReference
-; 
+;

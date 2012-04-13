@@ -8,7 +8,6 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.example.tutorial.tutorial.Operation
 
 /**
  * <p>Translates entities to Java classes.</p> 
@@ -26,14 +25,8 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 			// first we copy over the documentation
 			it.documentation = entity.documentation
 			// Iterate over all features and proper JavaBeans properties.
-			for(feature: entity.features) {
-				switch feature {
-					Property : 
-						it.addJavaBeansProperty(feature)
-					Operation : 
-						it.addJavaMethod(feature) 
-				}
-			}
+			for(feature: entity.features)
+				it.addJavaBeansProperty(feature)
 		]
 	}
 
@@ -48,15 +41,4 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 		javaClass.members += property.toSetter(property.name, property.type)
 	}
 	
-	/**
-	 * Adds a java method for the given operation
-	 */
-	def addJavaMethod(JvmDeclaredType javaClass, Operation operation) {
-		javaClass.members += operation.toMethod(operation.name, operation.type) [
-			for (param : operation.parameters) {
-				it.parameters += param.toParameter(param.name, param.parameterType)
-			}
-			it.body = operation.body
-		]
-	}
 }
