@@ -53,6 +53,7 @@ class TutorialJvmModelInferrer extends AbstractModelInferrer {
 	 */
 	def addJavaMethod(JvmDeclaredType javaClass, Operation operation) {
 		javaClass.members += operation.toMethod(operation.name, operation.type) [
+			it.documentation = operation.documentation
 			for (param : operation.parameters) {
 				it.parameters += param.toParameter(param.name, param.parameterType)
 			}
