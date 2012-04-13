@@ -8,7 +8,10 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(TutorialInjectorProvider))
+// You need to provide the injector that instantiates and initializes
+// the test class and its dependencies
+
+//@InjectWith(typeof(TutorialInjectorProvider))
 class TypesBuilderExercise {
 	
 	/**
