@@ -22,17 +22,19 @@ class TypesBuilderExercise {
 	@Test
 	def void testMe() { 
 		'''
-			package tutorial {
+			package tutorial
+			
 			import java.util.Date
-				/**
-			 	 * A simple entity to describe a Person
-			 	 */
-				entity Person {
-					firstName: String
-					lastName: String
-					birthday: Date
-			  }
+			
+			/**
+			 * A simple entity to describe a Person
+			 */
+			entity Person {
+				firstName: String
+				lastName: String
+				birthday: Date
 			}
+			
 		'''.assertCompilesTo('''
 			package tutorial;
 			
