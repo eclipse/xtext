@@ -27,7 +27,22 @@
 		<attribute name="target" default="${target_xtext}" />
 		<sequential>
 			<delete file="@{target}/@{name}.zip" />
-			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}/initial"/>
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}/initial" excludes="**/J*.pdf"/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="zip_conference_tutorial">
+		<attribute name="initial" default="initial" />
+		<attribute name="tutorial" default="org.eclipse.xtext.example.tutorial" />
+		<attribute name="conference" default="tutorial" />
+		<attribute name="target" default="${target_xtext}" />
+		<sequential>
+			<delete file="@{target}/../../@{conference}.zip" />
+			<zip destfile="@{target}/../../@{conference}.zip">
+				<zipfileset dir="${source}/@{tutorial}/@{initial}" prefix="@{tutorial}" excludes="**/Tutorial.pdf"/>
+				<zipfileset dir="${source}/@{tutorial}.tests/@{initial}" prefix="@{tutorial}.tests" excludes="**/*._trace"/>
+				<zipfileset dir="${source}/@{tutorial}.ui/@{initial}" prefix="@{tutorial}.ui"/>
+			</zip>
 		</sequential>
 	</macrodef>
 
@@ -35,6 +50,7 @@
 		<zip_tutorial name="org.eclipse.xtext.example.tutorial" />
 		<zip_tutorial name="org.eclipse.xtext.example.tutorial.tests" />
 		<zip_tutorial name="org.eclipse.xtext.example.tutorial.ui" />
+		<zip_conference_tutorial conference="jax2012-xtext-tutorial"/>
 		<!-- run task "generate_self" to compose the list below -->
 		<zip_example name="org.eclipse.xtext.example.arithmetics" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.tests" />
