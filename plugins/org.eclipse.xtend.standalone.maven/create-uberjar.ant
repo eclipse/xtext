@@ -6,7 +6,7 @@
 	 3. Where to put output = output.folder
 	-->
 	<property name="eclipsePluginFolder" value="/Users/dhuebner/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="xtextPluginFolder" value="/Users/dhuebner/Downloads/tmf-xtext-Update/plugins/" />
+	<property name="xtextPluginFolder" value="/Users/dhuebner/Downloads/tmf-xtext-Update-2.3.0M6/plugins/" />
 	<property name="maven.version" value="2.3.0" />
 	<property name="output.folder" value="output" />
 	<echo>${maven.version}</echo>
@@ -65,19 +65,19 @@
 		<!-- TP bundles -->
 		<fileset dir="${eclipsePluginFolder}" id="binEclipseJars">
 			<include name="org.antlr.runtime_3.2.0*.jar" />
-			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
-			<include name="org.eclipse.emf.ecore.xmi_2.5.0.*.jar" />
 			<include name="org.eclipse.emf.common_2.5.0.*.jar" />
+			<include name="org.eclipse.emf.ecore.xmi_2.5.0.*.jar" />
+			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
 		</fileset>
 
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="binXtextJars">
-			<include name="org.eclipse.xtext_2.3*.jar" />
+			<include name="org.eclipse.xtend.core_2.3*.jar" />
 			<include name="org.eclipse.xtext.common.types_2.3*.jar" />
 			<include name="org.eclipse.xtext.util_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase_2.3*.jar" />
 			<include name="org.eclipse.xtext.xbase.lib_2.3*.jar" />
-			<include name="org.eclipse.xtend.core_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase_2.3*.jar" />
+			<include name="org.eclipse.xtext_2.3*.jar" />
 		</fileset>
 
 
@@ -111,21 +111,21 @@
 		<fileset dir="${eclipsePluginFolder}" id="sourceEclipseJars">
 
 			<include name="org.antlr.runtime.source_3.2.0*.jar" />
-			<include name="org.eclipse.jdt.core.source_3.5.2*.jar" />
+			<include name="org.eclipse.emf.common.source_2.5.0.*.jar" />
 			<include name="org.eclipse.emf.ecore.source_2.5.0.*.jar" />
 			<include name="org.eclipse.emf.ecore.xmi.source_2.5.0.*.jar" />
-			<include name="org.eclipse.emf.common.source_2.5.0.*.jar" />
+			<include name="org.eclipse.jdt.core.source_3.5.2*.jar" />
 		</fileset>
 
 
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="sourceXtextJars">
-			<include name="org.eclipse.xtext.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.common.types.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.util.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase.source_2.3*.jar" />
-			<include name="org.eclipse.xtext.xbase.lib.source_2.3*.jar" />
 			<include name="org.eclipse.xtend.core.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.common.types.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.util.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase.lib.source_2.3*.jar" />
+			<include name="org.eclipse.xtext.xbase.source_2.3*.jar" />
 		</fileset>
 
 		<unzip dest="${sourceJarTemp}" overwrite="true">
