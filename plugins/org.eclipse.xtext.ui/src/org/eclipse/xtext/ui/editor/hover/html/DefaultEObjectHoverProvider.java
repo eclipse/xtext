@@ -43,7 +43,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -65,13 +64,13 @@ import com.ibm.icu.text.MessageFormat;
 public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	@Inject
-	private ILabelProvider labelProvider;
+	protected ILabelProvider labelProvider;
 
 	@Inject
-	private IEObjectDocumentationProvider decoratedProvider;
+	protected IEObjectHoverDocumentationProvider decoratedProvider;
 	
 	@Inject
-	private IQualifiedNameProvider nameProvider;
+	protected IQualifiedNameProvider nameProvider;
 
 	protected String getHoverInfoAsHtml(EObject o) {
 		if (!hasHover(o))
