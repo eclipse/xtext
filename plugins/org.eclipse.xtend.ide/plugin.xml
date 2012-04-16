@@ -120,6 +120,18 @@
             </visibleWhen>
          </command>  
          </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.ui.menus.showInMenu">
+            <command commandId="org.eclipse.ui.views.showView" style="push"
+                    icon="icons/generated_code_view.png" label="%DerivedSourceView">
+                <parameter name="org.eclipse.ui.views.showView.viewId"
+                        value="org.eclipse.xtend.ide.view.DerivedSourceView">
+                </parameter>
+                <visibleWhen checkEnabled="false">
+                        <reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+                        </reference>
+                    </visibleWhen>
+            </command>
+        </menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
