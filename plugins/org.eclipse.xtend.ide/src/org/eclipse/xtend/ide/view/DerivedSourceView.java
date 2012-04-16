@@ -81,7 +81,6 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class DerivedSourceView extends AbstractSourceView implements IResourceChangeListener {
-	private static final String XTEND_EDITOR_ID = "org.eclipse.xtend.core.Xtend";
 	protected static final int VERTICAL_RULER_WIDTH = 12;
 	protected static final int OVERVIEW_RULER_WIDTH = 12;
 	private static final String SEARCH_ANNOTATION_TYPE = "org.eclipse.search.results"; //$NON-NLS-1$
@@ -171,18 +170,6 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	}
 
 	@Override
-	public void partDeactivated(IWorkbenchPartReference workbenchPartReference) {
-		if (XTEND_EDITOR_ID.equals(workbenchPartReference.getId())) {
-			selectedSource = null;
-			openEditorAction.setInputFile(null);
-			openEditorAction.setSelectedRegion(null);
-			setWorkbenchPartSelection(null);
-			setContentDescription("");
-			setInput("");
-		}
-	}
-	
-	@Override
 	protected boolean isValidSelection(IWorkbenchPartSelection workbenchPartSelection) {
 		return super.isValidSelection(workbenchPartSelection)
 				&& traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection)) != null;
@@ -259,10 +246,18 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	}
 
 	@Override
-	public void partHidden(IWorkbenchPartReference ref) {
-		super.partHidden(ref);
-		if (ref.getId().equals(getSite().getId())) {
+	public void partHidden(IWorkbenchPartReference workbenchPartReference) {
+		super.partHidden(workbenchPartReference);
+		if (workbenchPartReference.getId().equals(getSite().getId())) {
 			workspace.removeResourceChangeListener(this);
+		}
+		if (getWorkbenchPartSelection() != null && workbenchPartReference.getPart(false) == getWorkbenchPartSelection().getWorkbenchPart()) {
+			selectedSource = null;
+			openEditorAction.setInputFile(null);
+			openEditorAction.setSelectedRegion(null);
+			setWorkbenchPartSelection(null);
+			setContentDescription("");
+			setInput("");
 		}
 	}
 
@@ -291,7 +286,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	@Override
 	protected String computeDescription(IWorkbenchPartSelection workbenchPartSelection) {
 		if (selectedSource == null) {
-			return null;
+			return super.computeDescription(workbenchPartSelection);
 		}
 		XtextEditor xtextEditor = (XtextEditor) workbenchPartSelection.getWorkbenchPart();
 		if (xtextEditor.isDirty()) {
@@ -368,5 +363,6 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 			schedule();
 		}
 	}
+
 
 }
