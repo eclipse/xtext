@@ -62,6 +62,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -79,7 +80,7 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
-public class XbaseHoverDocumentationProvider {
+public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentationProvider{
 	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
 	protected static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$
 	protected static final String BlOCK_TAG_ENTRY_START = "<dd>"; //$NON-NLS-1$
@@ -108,6 +109,10 @@ public class XbaseHoverDocumentationProvider {
 	private static final String LINEBREAK = "\n";
 
 	public String getDocumentation(EObject object) {
+		return computeDocumentation(object) + getDerivedOrOriginalDeclarationInformation(object);
+	}
+	
+	public String computeDocumentation(EObject object){
 		buffer = new StringBuffer();
 		context = object;
 		fLiteralContent = 0;

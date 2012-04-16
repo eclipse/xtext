@@ -44,6 +44,7 @@ import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
 import org.eclipse.xtext.ui.editor.hover.html.OpenBrowserUtil;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
@@ -115,14 +116,6 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 */
 	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IJavaElement javaElement,
 			IRegion hoverRegion) {
-		if (javaElement != null && associations.getSourceElements(objectToView).isEmpty()) {
-			// Let the java infrastructure do the job
-			String html = getHtmlFromIJavaElement(javaElement);
-			if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
-				return hoverGenericsResolver.resolveSignatureInHtml((XExpression) call, javaElement, html);
-			else
-				return html;
-		}
 		StringBuffer buffer = new StringBuffer();
 		String oldSignature = getFirstLine(objectToView);
 		if(oldSignature != null)
@@ -164,10 +157,9 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 */
 	@Override
 	protected String getDocumentation(EObject o) {
-		XbaseHoverDocumentationProvider documentationProvider = serviceProvider.findService(o, XbaseHoverDocumentationProvider.class);
+		IEObjectHoverDocumentationProvider documentationProvider = serviceProvider.findService(o, IEObjectHoverDocumentationProvider.class);
 		if(documentationProvider != null)
-			return documentationProvider.getDocumentation(o)
-				+ documentationProvider.getDerivedOrOriginalDeclarationInformation(o);
+			return documentationProvider.getDocumentation(o);
 		return "";
 	}
 

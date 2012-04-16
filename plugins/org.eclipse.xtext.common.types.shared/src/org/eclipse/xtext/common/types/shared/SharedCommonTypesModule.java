@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetPr
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameProcessor;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.JvmIdentifiableQualifiedNameProvider;
+import org.eclipse.xtext.common.types.xtext.ui.JdtHoverDocumentationProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
@@ -36,6 +38,7 @@ public class SharedCommonTypesModule implements Module {
 
 	public void configure(Binder binder) {
 		binder.bind(IEObjectHoverProvider.class).to(JdtHoverProvider.class);
+		binder.bind(IEObjectHoverDocumentationProvider.class).to(JdtHoverDocumentationProvider.class);
 		binder.bind(IResourceServiceProvider.class).to(SharedCommonTypesResourceServiceProvider.class);
 		binder.bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 		binder.bindConstant().annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).to("java");
