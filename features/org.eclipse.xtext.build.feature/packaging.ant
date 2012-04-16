@@ -44,8 +44,8 @@
 	<target name="package.site" depends="-define.package.qualifier">
 		<mkdir dir="${sp:output}" />
 		<!-- create the desired ZIP file -->
-		<zip basedir="${sp:repository}" destfile="${sp:output}/${package.name}${package.qualifier}.zip" />
 		<antcall target="-statistic.add" inheritall="true" />
+		<zip basedir="${sp:repository}" destfile="${sp:output}/${package.name}${package.qualifier}.zip" />
 	</target>
 
 
