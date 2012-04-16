@@ -64,13 +64,13 @@ import com.ibm.icu.text.MessageFormat;
 public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 	@Inject
-	protected ILabelProvider labelProvider;
+	private ILabelProvider labelProvider;
 
-	@Inject
-	protected IEObjectHoverDocumentationProvider decoratedProvider;
+	@Inject 
+	private IEObjectHoverDocumentationProvider decoratedProvider;
 	
 	@Inject
-	protected IQualifiedNameProvider nameProvider;
+	private IQualifiedNameProvider nameProvider;
 
 	protected String getHoverInfoAsHtml(EObject o) {
 		if (!hasHover(o))
