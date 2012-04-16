@@ -53,11 +53,24 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
      * @parameter expression="${encoding}" default-value="${project.build.sourceEncoding}"
      */
 	protected String encoding;
+    /**
+     * Set this to true to skip compiling Xtend sources.
+     *
+     * @parameter default-value="false" expression="${skipXtend}"
+     */
+	protected boolean skipXtend;
 
 	public void execute() throws MojoExecutionException {
+		if (isSkipped()) {
+			getLog().info("Xtend compiler skipped.");
+		}
 		configureLog4j();
 		XtendBatchCompiler xtendBatchCompiler = createXtendBatchCompiler();
 		internalExecute(xtendBatchCompiler);
+	}
+
+	protected boolean isSkipped() {
+		return skipXtend;
 	}
 
 	protected abstract void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException;
