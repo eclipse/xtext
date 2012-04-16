@@ -260,7 +260,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				 "org.junit.runner.manipulation;version=\"4.5.0\"",
 				 "org.junit.runner.notification;version=\"4.5.0\"",
 				 "org.junit.runners;version=\"4.5.0\"",
-				 "org.junit.runners.model;version=\"4.5.0\"");
+				 "org.junit.runners.model;version=\"4.5.0\"",
+				 "org.hamcrest",
+				 "org.hamcrest.core");
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
