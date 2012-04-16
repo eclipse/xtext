@@ -12,7 +12,7 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
  * @deprecated If your generated {@link org.eclipse.xtext.ui.refactoring.IRenameStrategy} inherits form this, it is no
  *             longer being used as soon as you regenerate. In most cases the bound {@link DefaultJvmModelRenameStrategy} 
  *             should work fine for you. If not, inherit from {@link DefaultJvmModelRenameStrategy} instead. 
- *             See {@linkplain https://bugs.eclipse.org/bugs/show_bug.cgi?id=363559} for details.
+ *             See <a>https://bugs.eclipse.org/bugs/show_bug.cgi?id=363559} for details.</a>
  */
 @Deprecated
 public abstract class AbstractJvmModelRenameStrategy extends DefaultJvmModelRenameStrategy {
