@@ -45,7 +45,7 @@ public class RelengProjectInfo extends DefaultProjectInfo {
 		this.buckyLocation = buckyLocation;
 	}
 
-	public String getNameSpaceAbbreviation() {
+	public String calculateNameSpaceAbbreviation() {
 		String[] packageNames = getProjectNameSpace().split("\\."); //$NON-NLS-1$
 		return Strings.toFirstUpper(packageNames[packageNames.length - 1]);
 	}
