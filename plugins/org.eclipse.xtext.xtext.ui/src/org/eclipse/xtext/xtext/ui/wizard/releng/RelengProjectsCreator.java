@@ -67,7 +67,8 @@ public class RelengProjectsCreator extends AbstractProjectCreator {
 	private IProject createSiteFeatureProject(SubMonitor monitor) {
 		FeatureProjectFactory factory = createFeatureFactory();
 		configureFeatureProjectBuilder(factory);
-		return factory.withCategoryFile(getProjectInfo().getNameSpaceAbbreviation()).createProject(monitor, null);
+		String nameSpaceAbbreviation = getProjectInfo().calculateNameSpaceAbbreviation();
+		return factory.withCategoryFile(nameSpaceAbbreviation).createProject(monitor, null);
 	}
 
 	private void configureFeatureProjectBuilder(FeatureProjectFactory factory) {
