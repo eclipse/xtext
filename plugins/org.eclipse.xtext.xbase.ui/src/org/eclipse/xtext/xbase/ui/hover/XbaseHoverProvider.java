@@ -116,6 +116,8 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 */
 	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IJavaElement javaElement,
 			IRegion hoverRegion) {
+		if(!hasHover(objectToView))
+			return null;
 		StringBuffer buffer = new StringBuffer();
 		String oldSignature = getFirstLine(objectToView);
 		if(oldSignature != null)
@@ -183,7 +185,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected boolean hasHover(EObject o) {
 		if (o instanceof XSwitchExpression)
 			return false;
-		return o instanceof JvmIdentifiableElement || o instanceof XAbstractFeatureCall || super.hasHover(o);
+		return o instanceof JvmIdentifiableElement || super.hasHover(o);
 	}
 
 	/**
