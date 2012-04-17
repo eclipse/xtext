@@ -100,7 +100,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		if (objectToView != element && objectToView instanceof JvmIdentifiableElement) {
 			javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
 		}
-		String html = getHoverInfoAsHtml(element, objectToView, javaElement, hoverRegion);
+		String html = getHoverInfoAsHtml(element, objectToView, hoverRegion);
 		if (html != null) {
 			StringBuffer buffer = new StringBuffer(html);
 			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
@@ -114,8 +114,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IJavaElement javaElement,
-			IRegion hoverRegion) {
+	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IRegion hoverRegion) {
 		if(!hasHover(objectToView))
 			return null;
 		StringBuffer buffer = new StringBuffer();
