@@ -841,6 +841,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertWarning(clazz.eContainer(), XTEND_IMPORT, IMPORT_WILDCARD_DEPRECATED);
 	}
 	
+	@Test public void testImportConflictWithTypeInSameFile() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class List {}");
+		helper.assertError(clazz.eContainer(), XTEND_IMPORT, IMPORT_CONFLICT);
+	}
+	
+	@Test public void testImportNoConflictWithTypeInSameFile() throws Exception {
+		XtendClass clazz = clazz("import java.util.List class List2 {}");
+		helper.assertNoErrors(clazz.eContainer());
+	}
+	
 	@Test public void testPrivateUnusedField() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
 		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
