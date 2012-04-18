@@ -1077,7 +1077,17 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
+
 		for (final XtendClass xtendClass : file.getXtendClasses()) {
+			String clazzName = xtendClass.getSimpleName();
+			if(importedNames.containsKey(clazzName)){
+				JvmType importedType = importedNames.get(clazzName);
+				if(importedType != null){
+					XtendImport xtendImport = imports.get(importedType);
+					if(xtendImport != null)
+						error("The import '" + importedType.getIdentifier() + "' conflicts with a type defined in the same file", xtendImport, null, IssueCodes.IMPORT_CONFLICT );
+				}
+			}
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendClass);
 			if (node != null) {
 				for (INode n : node.getAsTreeIterable()) {
