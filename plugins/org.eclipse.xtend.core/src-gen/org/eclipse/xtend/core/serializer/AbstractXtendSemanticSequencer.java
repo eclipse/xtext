@@ -73,7 +73,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractXtendSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject
