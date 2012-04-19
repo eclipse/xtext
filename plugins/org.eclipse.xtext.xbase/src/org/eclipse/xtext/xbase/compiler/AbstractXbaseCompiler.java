@@ -220,9 +220,10 @@ public abstract class AbstractXbaseCompiler {
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
-		
-		if (declaredExceptions == null)
+		if (declaredExceptions == null) {
 			declaredExceptions = newHashSet();
+			assert declaredExceptions != null;
+		}
 		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedReturnType, Void.TYPE); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
