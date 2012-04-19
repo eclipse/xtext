@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Iterator;
+
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -24,7 +26,10 @@ public class DispatchUtil {
 	private IJvmModelAssociations associations;
 
 	public boolean isDispatcherFunction(JvmOperation inferredOperation) {
-		XtendFunction xtendFunction = filter(associations.getSourceElements(inferredOperation), XtendFunction.class).iterator().next();
+		final Iterator<XtendFunction> filter = filter(associations.getSourceElements(inferredOperation), XtendFunction.class).iterator();
+		if (!filter.hasNext())
+			return false;
+		XtendFunction xtendFunction = filter.next();
 		return !inferredOperation.getSimpleName().startsWith("_") && xtendFunction.isDispatch();
 	}
 

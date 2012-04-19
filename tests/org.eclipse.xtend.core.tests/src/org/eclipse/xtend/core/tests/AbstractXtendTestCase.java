@@ -54,10 +54,10 @@ public abstract class AbstractXtendTestCase extends Assert {
 				@SuppressWarnings("unused")
 				public ClasspathBasedChecks bindClassPathBasedChecks() {
 					return new ClasspathBasedChecks() {
-//						@Override
-//						public void checkFileNamingConventions(XtendFile xtendFile) {
-//							// disabled
-//						}
+						@Override
+						public void checkFileNamingConventions(XtendFile xtendFile) {
+							// disabled
+						}
 					};
 				}
 

@@ -1345,6 +1345,28 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				  }
 				}
 			''')
+	}
+	
+	@Test
+	def testAnnotationSupport() {
+		assertCompilesTo(
+			'''
+				class X {
+					@Property val String x = 'hello'
+				}
+			''', '''
+				import org.eclipse.xtend.lib.Property;
+				
+				@SuppressWarnings("all")
+				public class X {
+				  @Property
+				  private final String _x = "hello";
+				  
+				  public String getX() {
+				    return this._x;
+				  }
+				}
+			''')
 		
 	}
 

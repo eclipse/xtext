@@ -58,12 +58,14 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtend.lib.Property;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -413,7 +415,50 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
+			
+			if (containsAnnotation(source.getAnnotations(), Property.class)) {
+				field.setSimpleName("_"+field.getSimpleName());
+				final JvmOperation getter = jvmTypesBuilder.toGetter(source, source.getName(), field.getSimpleName(), field.getType());
+				jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
+				if (getter != null && !hasMethod((XtendClass)source.eContainer(), getter.getSimpleName(), getter.getParameters()))
+						container.getMembers().add( getter);
+				if (!source.isFinal()) {
+					final JvmOperation setter = jvmTypesBuilder.toSetter(source, source.getName(), field.getSimpleName(), field.getType());
+					jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
+					if (setter != null && !hasMethod((XtendClass)source.eContainer(), setter.getSimpleName(), setter.getParameters()))
+						container.getMembers().add( setter);
+				}
+			}
 		}
+	}
+
+	protected boolean hasMethod(XtendClass xtendClass, String simpleName, EList<JvmFormalParameter> parameters) {
+		for (XtendMember member : xtendClass.getMembers()) {
+			if (member instanceof XtendFunction) {
+				XtendFunction function = (XtendFunction) member;
+				if (function.getName().equals(simpleName)) {
+					boolean allMatched = true;
+					if (function.getParameters().size() == parameters.size()) {
+						for (int i = 0; i < parameters.size() ; i++) {
+							XtendParameter p1 = function.getParameters().get(i);
+							JvmFormalParameter p2 = parameters.get(i);
+							allMatched = allMatched && p1.getParameterType().getType() == p2.getParameterType().getType(); 
+						}
+					}
+					if (allMatched)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	protected boolean containsAnnotation(EList<XAnnotation> annotations, Class<Property> class1) {
+		for (XAnnotation anno : annotations) {
+			if (anno != null && anno.getAnnotationType() != null && class1.getName().equals(anno.getAnnotationType().getIdentifier()))
+				return true;
+		}
+		return false;
 	}
 
 	@Nullable
