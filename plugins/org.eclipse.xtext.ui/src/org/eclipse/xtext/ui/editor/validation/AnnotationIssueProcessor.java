@@ -159,8 +159,9 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 				return IMarker.SEVERITY_WARNING;
 			case INFO:
 				return IMarker.SEVERITY_INFO;
+			default:
+				throw new IllegalArgumentException();
 		}
-		throw new IllegalArgumentException();
 	}
 
 	protected void updateMarkerAnnotations(IProgressMonitor monitor) {
