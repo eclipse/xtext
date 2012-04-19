@@ -46,7 +46,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		file.imported(typeof(GrammarAlias$AbstractElementAlias))
 		
 		file.body = '''
-			@SuppressWarnings("restriction")
+			@SuppressWarnings("all")
 			public class «simpleName» extends AbstractSyntacticSequencer {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
