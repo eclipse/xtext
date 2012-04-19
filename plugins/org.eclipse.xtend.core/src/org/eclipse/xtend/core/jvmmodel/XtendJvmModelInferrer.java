@@ -401,7 +401,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void transform(XtendField source, JvmGenericType container) {
 		if (source.isExtension() || source.getName() != null) {
 			JvmField field = typesFactory.createJvmField();
-			field.setSimpleName(computeFieldName(source, container));
+			final String computeFieldName = computeFieldName(source, container);
+			field.setSimpleName(computeFieldName);
 			container.getMembers().add(field);
 			associator.associatePrimary(source, field);
 			field.setVisibility(source.getVisibility());
@@ -412,42 +413,39 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			} else if (source.getInitialValue() != null) {
 				field.setType(getTypeProxy(source.getInitialValue()));
 			}
-			jvmTypesBuilder.translateAnnotationsTo(source.getAnnotationInfo().getAnnotations(), field);
+			
+			for (XAnnotation anno : source.getAnnotations()) {
+				if (anno == null || anno.getAnnotationType() == null || anno.getAnnotationType().getIdentifier() == null)
+					continue;
+				if (Property.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+					field.setSimpleName("_"+computeFieldName);
+					final JvmOperation getter = jvmTypesBuilder.toGetter(source, computeFieldName, field.getSimpleName(), field.getType());
+					jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
+					if (getter != null && !hasMethod(container, getter.getSimpleName(), getter.getParameters()))
+						container.getMembers().add( getter);
+					if (!source.isFinal()) {
+						final JvmOperation setter = jvmTypesBuilder.toSetter(source, computeFieldName, field.getSimpleName(), field.getType());
+						jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
+						if (setter != null && !hasMethod(container, setter.getSimpleName(), setter.getParameters()))
+							container.getMembers().add( setter);
+					}
+				} else {
+					JvmAnnotationReference annotationReference = jvmTypesBuilder.getJvmAnnotationReference(anno);
+					if(annotationReference != null)
+						field.getAnnotations().add(annotationReference);
+				}
+			}
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
 			
-			if (containsAnnotation(source.getAnnotations(), Property.class)) {
-				field.setSimpleName("_"+field.getSimpleName());
-				final JvmOperation getter = jvmTypesBuilder.toGetter(source, source.getName(), field.getSimpleName(), field.getType());
-				jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
-				if (getter != null && !hasMethod((XtendClass)source.eContainer(), getter.getSimpleName(), getter.getParameters()))
-						container.getMembers().add( getter);
-				if (!source.isFinal()) {
-					final JvmOperation setter = jvmTypesBuilder.toSetter(source, source.getName(), field.getSimpleName(), field.getType());
-					jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
-					if (setter != null && !hasMethod((XtendClass)source.eContainer(), setter.getSimpleName(), setter.getParameters()))
-						container.getMembers().add( setter);
-				}
-			}
 		}
 	}
 
-	protected boolean hasMethod(XtendClass xtendClass, String simpleName, EList<JvmFormalParameter> parameters) {
-		for (XtendMember member : xtendClass.getMembers()) {
-			if (member instanceof XtendFunction) {
-				XtendFunction function = (XtendFunction) member;
-				if (function.getName().equals(simpleName)) {
-					boolean allMatched = true;
-					if (function.getParameters().size() == parameters.size()) {
-						for (int i = 0; i < parameters.size() ; i++) {
-							XtendParameter p1 = function.getParameters().get(i);
-							JvmFormalParameter p2 = parameters.get(i);
-							allMatched = allMatched && p1.getParameterType().getType() == p2.getParameterType().getType(); 
-						}
-					}
-					if (allMatched)
-						return true;
-				}
+	protected boolean hasMethod(JvmGenericType clazz, String simpleName, EList<JvmFormalParameter> parameters) {
+		for (JvmOperation member : clazz.getDeclaredOperations()) {
+			if (member.getSimpleName().equals(simpleName)) {
+				// since we cannot resolve inferred type proxies here, we just check the number of arguments.
+				return member.getParameters().size() == parameters.size();
 			}
 		}
 		return false;
