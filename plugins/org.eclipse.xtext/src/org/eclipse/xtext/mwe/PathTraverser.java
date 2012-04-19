@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 
@@ -26,7 +27,8 @@ import com.google.common.collect.Sets;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class PathTraverser {
-
+	private final static Logger LOG = Logger.getLogger(PathTraverser.class);
+	
 	public Multimap<String, URI> resolvePathes(List<String> pathes, Predicate<URI> isValidPredicate) {
 		Multimap<String, URI> uris = HashMultimap.create();
 		for (String path : pathes) {
@@ -35,10 +37,13 @@ public class PathTraverser {
 		}
 		return uris;
 	}
-
+	
 	public Set<URI> findAllResourceUris(String path, Predicate<URI> isValidPredicate) {
 		File file = new File(path);
-		if (file.isDirectory()) {
+		if(!file.exists()) {
+			LOG.warn("File under : " + path + " doesn't exist.");
+			return Sets.newHashSet();
+		} else if (file.isDirectory()) {
 			return traverseDir(file, isValidPredicate);
 		} else if (file.isFile()) {
 			return traverseArchive(file, isValidPredicate);
@@ -66,13 +71,13 @@ public class PathTraverser {
 
 	protected URI getUri(File file, ZipEntry entry) {
 		URI fileToArchive = URI.createFileURI(file.getAbsolutePath());
-		return URI.createURI("archive:"+fileToArchive+"!/"+entry.getName());
+		return URI.createURI("archive:" + fileToArchive + "!/" + entry.getName());
 	}
 
 	protected Set<URI> traverseDir(File file, final Predicate<URI> isValidPredicate) {
 		Set<URI> result = Sets.newHashSet();
 		File[] files = file.listFiles();
-		if (files==null)
+		if (files == null)
 			return result;
 		for (File f : files) {
 			if (f.isDirectory()) {
