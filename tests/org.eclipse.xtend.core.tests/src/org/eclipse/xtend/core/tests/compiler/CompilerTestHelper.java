@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -58,6 +59,7 @@ public class CompilerTestHelper {
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
+		javaCompiler.addClassPathOfClass(Property.class);
 		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
 		javaCompiler.addClassPathOfClass(Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
