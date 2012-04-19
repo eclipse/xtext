@@ -306,7 +306,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       file.imported(Inject.class);
       file.imported(Provider.class);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@SuppressWarnings(\"restriction\")");
+      _builder.append("@SuppressWarnings(\"all\")");
       _builder.newLine();
       _builder.append("public class ");
       String _simpleName = this.getSimpleName();

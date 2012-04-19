@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

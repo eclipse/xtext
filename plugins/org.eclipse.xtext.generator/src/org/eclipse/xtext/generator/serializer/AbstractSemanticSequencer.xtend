@@ -104,7 +104,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		file.imported(typeof(Provider))
 		
 		file.body = '''
-			@SuppressWarnings("restriction")
+			@SuppressWarnings("all")
 			public class «simpleName» extends AbstractSemanticSequencer {
 			
 				@Inject
