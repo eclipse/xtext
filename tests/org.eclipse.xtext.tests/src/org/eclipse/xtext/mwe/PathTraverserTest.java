@@ -25,23 +25,37 @@ public class PathTraverserTest extends Assert {
 			return !input.fileExtension().equals("dummy");
 		}
 	};
-	
-	@Test public void testEmptyFolder() throws Exception {
+
+	/**
+	 * PathTraverser should not throw an exception but log a warning if a path doesn't exist.
+	 * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=376944">Bug 376944</a>
+	 */
+	@Test
+	public void testNoneExistingFile() throws Exception {
+		String path = "fileNotExists";
+		Set<URI> uris = new PathTraverser().findAllResourceUris(path, everythingButDummy);
+		assertTrue(uris.isEmpty());
+	}
+
+	@Test
+	public void testEmptyFolder() throws Exception {
 		String path = pathTo("emptyFolder");
 		Set<URI> uris = new PathTraverser().findAllResourceUris(path, everythingButDummy);
 		assertTrue(uris.isEmpty());
 	}
-	
-	@Test public void testNonEmptyFolder() throws Exception {
+
+	@Test
+	public void testNonEmptyFolder() throws Exception {
 		String path = pathTo("nonemptyFolder");
 		Set<URI> uris = new PathTraverser().findAllResourceUris(path, everythingButDummy);
-		assertEquals(2,uris.size());
+		assertEquals(2, uris.size());
 	}
-	
-	@Test public void testArchive() throws Exception {
+
+	@Test
+	public void testArchive() throws Exception {
 		String path = pathTo("nonemptyJar.jar");
 		Set<URI> uris = new PathTraverser().findAllResourceUris(path, everythingButDummy);
-		assertEquals(3,uris.size());
+		assertEquals(3, uris.size());
 	}
 
 	private String pathTo(String string) throws Exception {
