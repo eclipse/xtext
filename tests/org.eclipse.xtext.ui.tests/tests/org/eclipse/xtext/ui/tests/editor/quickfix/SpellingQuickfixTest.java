@@ -40,14 +40,12 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 
 	private XtextEditor xtextEditor;
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();

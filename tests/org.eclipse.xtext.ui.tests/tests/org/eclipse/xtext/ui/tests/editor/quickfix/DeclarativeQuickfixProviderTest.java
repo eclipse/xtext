@@ -33,7 +33,6 @@ public class DeclarativeQuickfixProviderTest extends Assert {
 	@Test public void testHasResolutions() throws Exception {
 		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
 			@Fix(DUMMY_CODE)
-			@SuppressWarnings("unused")
 			public void signature(Issue i, IssueResolutionAcceptor acceptor) {
 			}
 		};
@@ -45,13 +44,11 @@ public class DeclarativeQuickfixProviderTest extends Assert {
 	@Test public void testGetResolutions() throws Exception {
 		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
 			@Fix(DUMMY_CODE)
-			@SuppressWarnings("unused")
 			public void fixError1(Issue i, IssueResolutionAcceptor acceptor) {
 				acceptor.accept(i, "fixError1", "", "", IModification.NULL);
 			}
 
 			@Fix(DUMMY_CODE)
-			@SuppressWarnings("unused")
 			public void fixError2(Issue i, IssueResolutionAcceptor acceptor) {
 				acceptor.accept(i, "fixError2", "", "", IModification.NULL);
 			}

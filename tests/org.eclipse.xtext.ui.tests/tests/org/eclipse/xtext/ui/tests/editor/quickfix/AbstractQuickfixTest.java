@@ -42,7 +42,6 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 		file.create(new StringInputStream(model), true, null);
 		file.refreshLocal(IResource.DEPTH_ONE, null);
 		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
-		xtextEditor.getDocument().set(model);
 		return xtextEditor;
 	}
 

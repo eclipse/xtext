@@ -98,7 +98,7 @@ final class MockMarker implements IMarker {
 		return null;
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Map getAttributes() throws CoreException {
 		return attributes;
 	}

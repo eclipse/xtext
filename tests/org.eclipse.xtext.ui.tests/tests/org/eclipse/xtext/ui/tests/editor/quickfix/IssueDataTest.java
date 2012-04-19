@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
+import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -27,7 +31,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.Test;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
 /**
@@ -54,10 +57,13 @@ public class IssueDataTest extends AbstractQuickfixTest {
 		
 		IAnnotationModel annotationModel = xtextEditor.getDocumentProvider().getAnnotationModel(
 				xtextEditor.getEditorInput());
-		new AnnotationIssueProcessor(document, annotationModel, new IssueResolutionProvider.NullImpl());
+		AnnotationIssueProcessor annotationIssueProcessor = 
+				new AnnotationIssueProcessor(document, annotationModel, new IssueResolutionProvider.NullImpl());
+		annotationIssueProcessor.processIssues(issues, new NullProgressMonitor());
 		Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
 		// filter QuickDiffAnnotations
-		List<XtextAnnotation> annotations = Lists.newArrayList(Iterators.filter(annotationIterator, XtextAnnotation.class));
+		List<Object> allAnnotations = Lists.newArrayList(annotationIterator);
+		List<XtextAnnotation> annotations = newArrayList(filter(allAnnotations, XtextAnnotation.class));
 		assertEquals(annotations.toString(), 1, annotations.size());
 		XtextAnnotation annotation = annotations.get(0);
 		assertTrue(Arrays.equals(expectedIssueData, annotation.getIssueData()));
