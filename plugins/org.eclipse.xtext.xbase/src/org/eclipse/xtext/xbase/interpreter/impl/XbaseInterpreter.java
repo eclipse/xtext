@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
@@ -600,7 +601,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			initialValue = internalEvaluate(variableDecl.getRight(), context, indicator);
 		} else {
 			if (primitives.isPrimitive(variableDecl.getType())) {
-				switch(primitives.primitiveKind((JvmPrimitiveType) variableDecl.getType().getType())) {
+				Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) variableDecl.getType().getType());
+				switch(primitiveKind) {
 					case Boolean:
 						initialValue = Boolean.FALSE; break;
 					case Char:
@@ -619,6 +621,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 						initialValue = Short.valueOf((short) 0); break;
 					case Void:
 						throw new IllegalStateException("Void is not a valid variable type.");
+					default:
+						throw new IllegalStateException("Unknown primitive type " + primitiveKind);
 				}
 			}
 		}
