@@ -50,6 +50,7 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -1139,21 +1140,25 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredFields(XtendField field){
 		if(doCheckValidMemberName(field)) {
 			JvmField jvmField = associations.getJvmField(field);
-			if (jvmField != null && jvmField.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmField, field.eContainer())) {
-				String message;
-				if(field.isExtension()) {
-					if(field.getName() == null)
-						message = "The extension " + jvmField.getType().getIdentifier() 
-							+ " is not used in " + jvmField.getDeclaringType().getSimpleName();
-					else
-						message = "The extension " + jvmField.getDeclaringType().getSimpleName() + "."
-								+ jvmField.getSimpleName() + " is not used";
-				} else {
-					message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
-						+ jvmField.getSimpleName() + " is not used";
-				}
-				warning(message, XtendPackage.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
+			if (jvmField == null || jvmField.getVisibility() != JvmVisibility.PRIVATE)
+				return;
+			if (hasAnnotation(field.getAnnotations(), Property.class))
+				return;
+			if (isLocallyUsed(jvmField, field.eContainer())) 
+				return;
+			String message;
+			if(field.isExtension()) {
+				if(field.getName() == null)
+					message = "The extension " + jvmField.getType().getIdentifier() 
+						+ " is not used in " + jvmField.getDeclaringType().getSimpleName();
+				else
+					message = "The extension " + jvmField.getDeclaringType().getSimpleName() + "."
+							+ jvmField.getSimpleName() + " is not used";
+			} else {
+				message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
+					+ jvmField.getSimpleName() + " is not used";
 			}
+			warning(message, XtendPackage.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
 		}
 	}
 	
@@ -1250,4 +1255,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 	
+	protected boolean hasAnnotation(Iterable<? extends XAnnotation> annotations, Class<?> annotationType) {
+		for (XAnnotation anno : annotations) {
+			if (annotationType.getName().equals(anno.getAnnotationType().getIdentifier()))
+				return true;
+		}
+		return false;
+	}
 }

@@ -861,6 +861,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
+	@Test public void testUnusedFieldWithPropertyAnnotation() throws Exception {
+		XtendClass clazz = clazz("class X { @Property String foo }");
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
 	@Test public void testUnusedExtensionField() throws Exception {
 		XtendClass clazz = clazz("import com.google.inject.Inject class X { @Inject extension String }");
 		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "extension", "String", "not", "used", "in", "X");

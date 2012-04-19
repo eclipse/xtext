@@ -32,6 +32,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -2654,6 +2655,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		javaCompiler.addClassPathOfClass(Properties1.class);
 		javaCompiler.addClassPathOfClass(Function.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
+		javaCompiler.addClassPathOfClass(Property.class);
 	}
 	
 	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object... args)
@@ -2787,5 +2789,28 @@ public class CompilerTest extends AbstractXtendTestCase {
 		Method method = code.getDeclaredMethod("foo");
 		assertTrue(Modifier.isAbstract(method.getModifiers()));
 	}
+	
+	@Test public void testProperty() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo class Bar { @Property val String myField = 'hello'}");
+		final Method declaredMethod = code.getDeclaredMethod("getMyField");
+		assertNotNull(declaredMethod);
+		assertEquals("hello", declaredMethod.invoke(code.newInstance()));
+		try {
+			code.getDeclaredMethod("setMyField", new Class<?>[]{ String.class});
+		} catch (NoSuchMethodException e ) {
+			// expected
+		}
+	}
+	
+	@Test public void testProperty_01() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo class Bar { @Property var String myField = 'hello' def String getMyField() { _myField.toUpperCase } }");
+		Method getter = code.getDeclaredMethod("getMyField");
+		Object newInstance = code.newInstance();
+		assertEquals("HELLO", getter.invoke(newInstance));
+		Method setter = code.getDeclaredMethod("setMyField", new Class<?>[]{ String.class});
+		setter.invoke(newInstance, "setterCalled");
+		assertEquals("SETTERCALLED", getter.invoke(newInstance));
+	}
+	
 	
 }

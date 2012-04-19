@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.scoping;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.util.Collections;
@@ -96,8 +97,9 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 		return Collections.emptyList();
 	}
 	
-	protected List<ImportNormalizer> getJavaLangImport() {
-		return singletonList(new ImportNormalizer(QualifiedName.create("java","lang"), true, false));
+	protected List<ImportNormalizer> getDefaultImports() {
+		return newArrayList(new ImportNormalizer(QualifiedName.create("java","lang"), true, false),
+				new ImportNormalizer(QualifiedName.create("org","eclipse","xtend","lib"), true, false));
 	}
 
 	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard,
@@ -115,8 +117,8 @@ public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceS
 		boolean ignoreCase = isIgnoreCase(reference);
 		if (context instanceof XtendFile) {
 			// explicitly add java.lang imports with correct import-selectable
-			List<ImportNormalizer> javaLangImport = getJavaLangImport();
-			result = createImportScope(result, javaLangImport, parentSelectable, reference.getEReferenceType(), isIgnoreCase(reference));
+			List<ImportNormalizer> defaultImports = getDefaultImports();
+			result = createImportScope(result, defaultImports, parentSelectable, reference.getEReferenceType(), isIgnoreCase(reference));
 		}
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {

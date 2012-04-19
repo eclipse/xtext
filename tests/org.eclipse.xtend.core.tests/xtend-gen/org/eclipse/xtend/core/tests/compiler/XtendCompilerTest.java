@@ -2823,6 +2823,46 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testAnnotationSupport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class X {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property val String x = \'hello\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class X {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final String _x = \"hello\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String getX() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._x;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
