@@ -2645,6 +2645,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
+		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
 		javaCompiler.addClassPathOfClass(StringExtensions.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
