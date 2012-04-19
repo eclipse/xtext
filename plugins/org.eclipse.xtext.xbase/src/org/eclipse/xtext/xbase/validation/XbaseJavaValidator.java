@@ -9,6 +9,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -569,6 +570,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				return input.isFinal();
 			}
 		}));
+		if (finalFields.isEmpty())
+			return;
 		final Set<JvmField> initializedFields = newLinkedHashSet(filter(finalFields, new Predicate<JvmField>() {
 			public boolean apply(JvmField input) {
 				return isInitialized(input);
@@ -579,7 +582,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			final Set<JvmField> localInitializedFields = newLinkedHashSet(initializedFields);
 			XExpression expression = logicalContainerProvider.getAssociatedExpression(constr);
 			if (expression != null) {
-				checkInitializationRec(expression, finalFields, localInitializedFields, newLinkedHashSet(localInitializedFields));
+				checkInitializationRec(expression, finalFields, localInitializedFields, newLinkedHashSet(localInitializedFields), newHashSet(constr));
 			}
 			for (JvmField field : finalFields) {
 				if (!localInitializedFields.contains(field)) {
@@ -607,11 +610,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	
-	protected void checkInitializationRec(EObject expr, Set<JvmField> fields, Set<JvmField> initializedForSure, Set<JvmField> initializedMaybe) {
+	protected void checkInitializationRec(EObject expr, Set<JvmField> fields, Set<JvmField> initializedForSure, Set<JvmField> initializedMaybe, Set<JvmConstructor> visited) {
 		if (expr instanceof XAssignment) {
 			XAssignment assignment = (XAssignment) expr;
 			if (assignment.getAssignable() != null)
-				checkInitializationRec(assignment.getAssignable(), fields, initializedForSure, initializedMaybe);
+				checkInitializationRec(assignment.getAssignable(), fields, initializedForSure, initializedMaybe, visited);
 			if (fields.contains(assignment.getFeature())) {
 				JvmField field = (JvmField) assignment.getFeature();
 				if (fields.contains(field) && (initializedForSure.contains(field) || initializedMaybe.contains(field))) {
@@ -622,28 +625,28 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		} else if (expr instanceof XForLoopExpression) {
 			XForLoopExpression loopExpression = (XForLoopExpression) expr;
-			checkInitializationRec(loopExpression.getForExpression(), fields, initializedForSure, initializedMaybe);
-			checkInitializationRec(loopExpression.getEachExpression(), fields, initializedMaybe, newLinkedHashSet(fields));
+			checkInitializationRec(loopExpression.getForExpression(), fields, initializedForSure, initializedMaybe, visited);
+			checkInitializationRec(loopExpression.getEachExpression(), fields, initializedMaybe, newLinkedHashSet(fields), visited);
 		} else if (expr instanceof XAbstractWhileExpression) {
 			XAbstractWhileExpression loopExpression = (XAbstractWhileExpression) expr;
-			checkInitializationRec(loopExpression.getPredicate(), fields, initializedForSure, newLinkedHashSet(fields));
-			checkInitializationRec(loopExpression.getBody(), fields, initializedMaybe, newLinkedHashSet(fields));
+			checkInitializationRec(loopExpression.getPredicate(), fields, initializedForSure, newLinkedHashSet(fields), visited);
+			checkInitializationRec(loopExpression.getBody(), fields, initializedMaybe, newLinkedHashSet(fields), visited);
 		} else if (expr instanceof XTryCatchFinallyExpression) {
 			XTryCatchFinallyExpression tryExpr = (XTryCatchFinallyExpression) expr;
-			checkInitializationRec(tryExpr.getExpression(),fields,  initializedForSure, initializedMaybe);
-			checkInitializationRec(tryExpr.getFinallyExpression(), fields, initializedForSure, initializedMaybe);
+			checkInitializationRec(tryExpr.getExpression(),fields,  initializedForSure, initializedMaybe, visited);
+			checkInitializationRec(tryExpr.getFinallyExpression(), fields, initializedForSure, initializedMaybe, visited);
 		} else if (expr instanceof XIfExpression) {
 			XIfExpression ifExpr = (XIfExpression) expr;
-			checkInitializationRec(ifExpr.getIf(), fields, initializedForSure, initializedMaybe);
+			checkInitializationRec(ifExpr.getIf(), fields, initializedForSure, initializedMaybe, visited);
 			
 			Set<JvmField> initializedThenForSure = newLinkedHashSet(initializedForSure);
 			Set<JvmField> initializedThenMaybe = newLinkedHashSet(initializedMaybe);
-			checkInitializationRec(ifExpr.getThen(), fields, initializedThenForSure, initializedThenMaybe);
+			checkInitializationRec(ifExpr.getThen(), fields, initializedThenForSure, initializedThenMaybe, visited);
 			
 			if (ifExpr.getElse() != null) {
 				Set<JvmField> initializedElseForSure = newLinkedHashSet(initializedForSure);
 				Set<JvmField> initializedElseMaybe = newLinkedHashSet(initializedMaybe);
-				checkInitializationRec(ifExpr.getElse(), fields, initializedElseForSure, initializedElseMaybe);
+				checkInitializationRec(ifExpr.getElse(), fields, initializedElseForSure, initializedElseMaybe, visited);
 				
 				initializedThenForSure.retainAll(initializedElseForSure);
 				initializedForSure.addAll(initializedThenForSure);
@@ -652,15 +655,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		} else if (expr instanceof XSwitchExpression) {
 			XSwitchExpression switchExpr = (XSwitchExpression) expr;
-			checkInitializationRec(switchExpr.getSwitch(), fields, initializedForSure, initializedMaybe);
+			checkInitializationRec(switchExpr.getSwitch(), fields, initializedForSure, initializedMaybe, visited);
 			Set<JvmField> initializedAllCasesForSure = null;
 			Set<JvmField> initializedAllCasesMaybe = newLinkedHashSet(initializedMaybe);
 			for (XCasePart casepart : switchExpr.getCases()) {
 				if (casepart.getCase() != null) 
-					checkInitializationRec(casepart.getCase(), fields, initializedForSure, initializedMaybe);
+					checkInitializationRec(casepart.getCase(), fields, initializedForSure, initializedMaybe, visited);
 				Set<JvmField> initializedInCaseForSure = newLinkedHashSet(initializedForSure);
 				Set<JvmField> initializedInCaseMaybe = newLinkedHashSet(initializedMaybe);
-				checkInitializationRec(casepart.getThen(), fields, initializedInCaseForSure, initializedInCaseMaybe);
+				checkInitializationRec(casepart.getThen(), fields, initializedInCaseForSure, initializedInCaseMaybe, visited);
 				if (initializedAllCasesForSure == null)
 					initializedAllCasesForSure = initializedInCaseForSure;
 				else {
@@ -671,7 +674,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (switchExpr.getDefault() != null) {
 				Set<JvmField> initializedInCaseForSure = newLinkedHashSet(initializedForSure);
 				Set<JvmField> initializedInCaseMaybe = newLinkedHashSet(initializedMaybe);
-				checkInitializationRec(switchExpr.getDefault(), fields, initializedInCaseForSure, initializedInCaseMaybe);
+				checkInitializationRec(switchExpr.getDefault(), fields, initializedInCaseForSure, initializedInCaseMaybe, visited);
 				if (initializedAllCasesForSure == null)
 					initializedAllCasesForSure = initializedInCaseForSure;
 				else {
@@ -682,12 +685,31 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				initializedForSure.addAll(initializedAllCasesForSure);
 			}
 			initializedMaybe.addAll(initializedAllCasesMaybe);
+		} else if (expr instanceof XFeatureCall) {
+			XFeatureCall xFeatureCall = (XFeatureCall) expr;
+			if (xFeatureCall.getFeature() instanceof JvmConstructor) {
+				JvmConstructor constructor = (JvmConstructor) xFeatureCall.getFeature();
+				if (constructor.getDeclaringType() == fields.iterator().next().getDeclaringType()) {
+					XExpression expression = logicalContainerProvider.getAssociatedExpression(constructor);
+					if (expression != null) {
+						HashSet<JvmConstructor> visitedCopy = newHashSet(visited);
+						if (visitedCopy.add(constructor)) {
+							checkInitializationRec(expression, fields, initializedForSure, initializedMaybe, visitedCopy);
+						} else {
+							// recursive compiler invocation is checked elsewhere 
+						}
+					}
+				}
+			}
+			for (EObject child : expr.eContents()) {
+				checkInitializationRec(child, fields, initializedForSure, initializedMaybe, visited);
+			}
 		} else if (expr instanceof XClosure) {
 			// don't go into closures.
 			return;
 		} else {
 			for (EObject child : expr.eContents()) {
-				checkInitializationRec(child, fields, initializedForSure, initializedMaybe);
+				checkInitializationRec(child, fields, initializedForSure, initializedMaybe, visited);
 			}
 		}
 	}
