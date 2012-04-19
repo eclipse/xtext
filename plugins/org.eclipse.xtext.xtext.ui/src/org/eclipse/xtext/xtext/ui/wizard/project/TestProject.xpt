@@ -32,7 +32,7 @@ bin.includes = META-INF/,\
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=«projectName»"/>
+<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=«testProjectName»"/>
 <booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«testProjectName»"/>
