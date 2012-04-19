@@ -345,8 +345,7 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), getClass()
-				.getClassLoader());
+		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), null);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 	}
