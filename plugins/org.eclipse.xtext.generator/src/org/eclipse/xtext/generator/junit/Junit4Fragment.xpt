@@ -120,4 +120,6 @@ public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInje
 
 «DEFINE addToPluginXmlUi(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
 
+«DEFINE addToPluginXmlTests(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»
+
 «DEFINE addToStandaloneSetup(Junit4Fragment junit4Fragment) FOR Grammar»«ENDDEFINE»

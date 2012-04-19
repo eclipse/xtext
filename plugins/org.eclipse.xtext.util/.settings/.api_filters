@@ -8,6 +8,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/util/MergeableManifest.java" type="org.eclipse.xtext.util.MergeableManifest">
+        <filter comment="Protected inner class has become obsolete" id="338886760">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.util.MergeableManifest.ParameterizedElement"/>
+                <message_argument value="org.eclipse.xtext.util_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/util/Strings.java" type="org.eclipse.xtext.util.Strings">
         <filter comment="Fix: added final to public static constant in Strings" id="388100214">
             <message_arguments>

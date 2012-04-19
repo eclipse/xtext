@@ -19,15 +19,16 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
-
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - merging of parameterized entries
  * @since 2.2 moved to org.eclipse.xtext.util
  */
 public class MergeableManifest extends Manifest {
@@ -295,60 +296,57 @@ public class MergeableManifest extends Manifest {
 	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
 		String string = currentString == null ? "" : currentString;
 		String[] split = splitQuoteAware(string);
-		Set<ParameterizedElement> all = new LinkedHashSet<ParameterizedElement>();
+		Map<String, String> name2parameters = new LinkedHashMap<String, String>();
 		for (int i = 0; i < split.length; i++) {
-			String value = split[i];
-			if (!value.trim().equals(""))
-				all.add(new ParameterizedElement(value.trim()));
+			String value = split[i].trim();
+			if (!value.equals("")) {
+				Pair<String, String> nameParameter = getSplitEntry(value);
+				name2parameters.put(nameParameter.getFirst(), nameParameter.getSecond());
+			}
 		}
 
 		for (String value : toMergeIn) {
 			if (!value.trim().equals("")) {
-				if (value.indexOf(';') != -1)
-					throw new IllegalArgumentException("Element " + value
-							+ " contains a semicolon. Merging parameterized elements is not yet supported");
-				modified.set(all.add(new ParameterizedElement(value.trim())) || modified.get());
+				Pair<String, String> nameParameter = getSplitEntry(value.trim());
+				String existingParameter = name2parameters.get(nameParameter.getFirst());
+				if(existingParameter != null) {
+					continue;
+				}
+				boolean newModified = modified.get();
+				newModified |= name2parameters.put(nameParameter.getFirst(), nameParameter.getSecond()) != null;
+				modified.set(newModified);
 			}
 		}
 
 		StringBuffer buff = new StringBuffer(string.length());
-		Iterator<ParameterizedElement> iterator = all.iterator();
+		Iterator<Map.Entry<String, String>> iterator = name2parameters.entrySet().iterator();
 		while (iterator.hasNext()) {
-			String s = iterator.next().toString();
-			buff.append(s);
+			Entry<String, String> entry = iterator.next();
+			buff.append(entry.getKey());
+			if(entry.getValue() != null) {
+				buff.append(";").append(entry.getValue());
+			}
 			if (iterator.hasNext())
 				buff.append(",\r\n ");
 		}
 		String result = buff.toString();
 		return result;
 	}
-
-	public static class ParameterizedElement {
-		private final String name;
-		private final String value;
-
-		public ParameterizedElement(String value) {
-			this.value = value;
-			this.name = value.indexOf(';') == -1 ? value : value.substring(0, value.indexOf(';'));
+	
+	/**
+	 * @since 2.3
+	 */
+	protected static Pair<String,String> getSplitEntry(String entry) {
+		int semicolon = entry.indexOf(';');
+		String name;
+		String parameter;
+		if(semicolon == -1) {
+			name=entry;
+			parameter = null;
+		} else { 
+			name = entry.substring(0, semicolon);
+			parameter = entry.substring(semicolon + 1);
 		}
-
-		@Override
-		public String toString() {
-			return value;
-		}
-
-		@Override
-		public int hashCode() {
-			return name.hashCode();
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if(obj == null)
-				return false;
-			ParameterizedElement other = (ParameterizedElement) obj;
-			return name.equals(other.name);
-		}
+		return Tuples.create(name, parameter);
 	}
-
 }

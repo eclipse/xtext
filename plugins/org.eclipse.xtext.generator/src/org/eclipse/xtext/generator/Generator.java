@@ -138,6 +138,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 				generateManifestUi(languageConfigs, exeCtx);
 				generateActivator(languageConfigs, exeCtx);
 			}
+			if(isTest()) {
+				generateManifestTests(languageConfigs, exeCtx);
+			}
 		} catch (WorkflowInterruptedException e) {
 			throw e;
 		} catch (Exception e) {
@@ -347,6 +350,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private boolean isUi() {
 		return getPathUiProject() != null;
 	}
+	
+	private boolean isTest() {
+		return getPathTestProject() != null;
+	}
 
 	private void generate(LanguageConfig config, XpandExecutionContext ctx) {
 		config.generate(config.getGrammar(), ctx);
@@ -459,6 +466,36 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 	}
 
+	private void generateManifestTests(List<LanguageConfig> configs, XpandExecutionContext ctx) {
+		if (isTest()) {
+			String manifestPath = "META-INF/MANIFEST.MF";
+			Set<String> exported = new LinkedHashSet<String>();
+			Set<String> imported = new LinkedHashSet<String>();
+			Set<String> requiredBundles = new LinkedHashSet<String>();
+			for (LanguageConfig config : languageConfigs) {
+				exported.addAll(Arrays.asList(config.getExportedPackagesTests(config.getGrammar())));
+				imported.addAll(Arrays.asList(config.getImportedPackagesTests(config.getGrammar())));
+				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesTests(config.getGrammar())));
+			}
+
+			if (isMergeManifest()) {
+				String path = ctx.getOutput().getOutlet(PLUGIN_TEST).getPath() + "/" + manifestPath;
+				mergeManifest(getProjectNameTests(), path, exported, requiredBundles, imported, getActivator());
+			} else {
+				manifestPath = manifestPath + "_gen";
+				deleteFile(ctx, manifestPath, PLUGIN_TEST);
+				ctx.getOutput().openFile(manifestPath, PLUGIN_TEST);
+				try {
+					XpandFacade facade = XpandFacade.create(ctx);
+					generateManifest(facade, getProjectNameTests(), getProjectNameTests(), getBundleVersion(), exported, requiredBundles,
+							imported, getActivator());
+				} finally {
+					ctx.getOutput().closeFile();
+				}
+			}
+		}
+	}
+
 	private String activator;
 
 	private void deleteFile(XpandExecutionContext ctx, String filePath, String outlet) {
@@ -505,6 +542,13 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (projectNameUi == null)
 			return getProjectNameRt() + ".ui";
 		return projectNameUi;
+	}
+	
+	private String getProjectNameTests() {
+		if(pathTestProject != null) {
+			return pathTestProject.substring(pathTestProject.lastIndexOf('/') +1);
+		}
+		return getProjectNameRt() + ".tests";
 	}
 
 	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,
