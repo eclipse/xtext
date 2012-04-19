@@ -501,31 +501,38 @@ public class JvmTypesBuilder {
 	}
 
 	/**
-	 * Creates a getter method for the given properties name with a simple implementation returning the value of a
-	 * similarly named field.
-	 * 
-	 * Example: <code>
-	 * public String getFoo() {
-	 *   return this.foo;
-	 * }
-	 * </code>
-	 * 
-	 * @return a getter method for a JavaBeans property with the given name, <code>null</code> if sourceElement or name are <code>null</code>.
+	 * shorthand for <code>toGetter(sourceElement, name, name, typeRef)</code>.
 	 */
 	@Nullable
 	public JvmOperation toGetter(@Nullable final EObject sourceElement, @Nullable final String name, @Nullable JvmTypeReference typeRef) {
-		if(sourceElement == null || name == null) 
+		return toGetter(sourceElement, name, name, typeRef);
+	}
+	
+	/**
+	 * Creates a getter method for the given property name and the field name.
+	 * 
+	 * Example: <code>
+	 * public String getPropertyName() {
+	 *   return this.fieldName;
+	 * }
+	 * </code>
+	 * 
+	 * @return a getter method for a JavaBeans property, <code>null</code> if sourceElement or name are <code>null</code>.
+	 */
+	@Nullable
+	public JvmOperation toGetter(@Nullable final EObject sourceElement, @Nullable final String propertyName, @Nullable final String fieldName, @Nullable JvmTypeReference typeRef) {
+		if(sourceElement == null || propertyName == null || fieldName == null) 
 			return null;
 		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("get" + Strings.toFirstUpper(name));
+		result.setSimpleName("get" + Strings.toFirstUpper(propertyName));
 		result.setReturnType(cloneWithProxies(typeRef));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
 			public void apply(@Nullable ITreeAppendable p) {
 				if(p != null) {
 					p = p.trace(sourceElement);
 					p.append("return this.");
-					p.append(name);
+					p.append(fieldName);
 					p.append(";");
 				}
 			}
@@ -533,6 +540,14 @@ public class JvmTypesBuilder {
 		return associate(sourceElement, result);
 	}
 
+	/**
+	 * shorthand for <code>toSetter(sourceElement, name, name, typeRef)</code>
+	 */
+	@Nullable
+	public JvmOperation toSetter(@Nullable final EObject sourceElement, @Nullable final String name, @Nullable JvmTypeReference typeRef) {
+		return toSetter(sourceElement, name, name, typeRef);
+	}
+	
 	/**
 	 * Creates a setter method for the given properties name with the standard implementation assigning the passed
 	 * parameter to a similarly named field.
@@ -546,21 +561,22 @@ public class JvmTypesBuilder {
 	 * @return a setter method for a JavaBeans property with the given name, <code>null</code> if sourceElement or name are <code>null</code>.
 	 */
 	@Nullable 
-	public JvmOperation toSetter(@Nullable final EObject sourceElement, @Nullable final String name, @Nullable JvmTypeReference typeRef) {
-		if(sourceElement == null || name == null) 
+	public JvmOperation toSetter(@Nullable final EObject sourceElement, @Nullable final String propertyName, @Nullable final String fieldName, @Nullable JvmTypeReference typeRef) {
+		if(sourceElement == null || propertyName == null || fieldName == null) 
 			return null;
 		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("set" + Strings.toFirstUpper(name));
-		result.getParameters().add(toParameter(sourceElement, name, cloneWithProxies(typeRef)));
+		result.setReturnType(references.getTypeForName(Void.TYPE,sourceElement));
+		result.setSimpleName("set" + Strings.toFirstUpper(propertyName));
+		result.getParameters().add(toParameter(sourceElement, propertyName, cloneWithProxies(typeRef)));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
 			public void apply(@Nullable ITreeAppendable p) {
 				if(p != null) {
 					p = p.trace(sourceElement);
 					p.append("this.");
-					p.append(name);
+					p.append(fieldName);
 					p.append(" = ");
-					p.append(name);
+					p.append(propertyName);
 					p.append(";");
 				}
 			}
