@@ -25,11 +25,5 @@ public class MergeableManifest extends org.eclipse.xtext.util.MergeableManifest 
 		super(in, projectName);
 	}
 
-	public static class ParameterizedElement extends org.eclipse.xtext.util.MergeableManifest.ParameterizedElement {
-		public ParameterizedElement(String value) {
-			super(value);
-		}
-	}
-	
 	public class OrderAwareAttributes extends org.eclipse.xtext.util.MergeableManifest.OrderAwareAttributes {}
 }

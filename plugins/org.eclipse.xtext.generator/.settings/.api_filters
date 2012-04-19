@@ -46,6 +46,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/generator/MergeableManifest.java" type="org.eclipse.xtext.generator.MergeableManifest">
+        <filter comment="Protected inner class has become obsolete" id="338886760">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.MergeableManifest.ParameterizedElement"/>
+                <message_argument value="org.eclipse.xtext.generator_2.3.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/generator/grammarAccess/GrammarAccess.java" type="org.eclipse.xtext.generator.grammarAccess.GrammarAccess">
         <filter id="305324134">
             <message_arguments>

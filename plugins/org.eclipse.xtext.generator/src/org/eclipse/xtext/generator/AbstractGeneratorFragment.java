@@ -53,6 +53,13 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {
+		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlTests", grammar, getParameters(grammar));
+	}
+
 	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToStandaloneSetup", grammar, getParameters(grammar));
