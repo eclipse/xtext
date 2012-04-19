@@ -896,7 +896,7 @@ public class JvmTypesBuilder {
 	}
 
 	@Nullable 
-	protected JvmAnnotationReference getJvmAnnotationReference(@Nullable XAnnotation anno) {
+	public JvmAnnotationReference getJvmAnnotationReference(@Nullable XAnnotation anno) {
 		if(anno == null)
 			return null;
 		JvmAnnotationReference reference = typesFactory.createJvmAnnotationReference();
