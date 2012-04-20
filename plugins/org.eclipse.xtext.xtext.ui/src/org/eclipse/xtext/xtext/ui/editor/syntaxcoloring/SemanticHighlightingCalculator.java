@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.syntaxcoloring;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +41,8 @@ import com.google.common.collect.Sets;
  */
 public class SemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 
+	public static final Set<String> SPECIAL_ATTRIBUTES = newHashSet("name", "importedNamespace", "importURI"); 
+	
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null)
 			return;
@@ -74,6 +78,11 @@ public class SemanticHighlightingCalculator implements ISemanticHighlightingCalc
 						INode node = getFirstFeatureNode(call, XtextPackage.Literals.RULE_CALL__RULE);
 						highlightNode(node, SemanticHighlightingConfiguration.UNUSED_VALUE_ID, acceptor);
 					}
+				}
+			} else if(current instanceof Assignment) {
+				if(SPECIAL_ATTRIBUTES.contains(((Assignment) current).getFeature())) {
+					INode featureNode = getFirstFeatureNode(current, XtextPackage.Literals.ASSIGNMENT__FEATURE);
+					highlightNode(featureNode, SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID, acceptor);
 				}
 			}
 		}
