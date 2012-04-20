@@ -43,6 +43,7 @@ public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor 
 
 	private static final Logger logger = Logger.getLogger(XtendXtext2EcorePostProcessor.class);
 	private ExecutionContext executionContext;
+	private Resource xtendFile;
 
 	public void process(GeneratedMetamodel metamodel) {
 		Resource xtendFile = loadXtendFile(metamodel);
@@ -102,34 +103,48 @@ public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor 
 	 * @return the xtendFile to execute
 	 */
 	protected Resource loadXtendFile(GeneratedMetamodel metamodel) {
-		final String extension = getExtensionName(metamodel);
-		try {
-			URI uri = getXtendFileLocation(metamodel);
-			if (uri == null)
-				return null;
-			URIConverter uriConverter = metamodel.eResource().getResourceSet().getURIConverter();
-			if (!uriConverter.exists(uri, null))
-				return null;
-
-			InputStream in = uriConverter.createInputStream(uri);
+		if (xtendFile == null) {
+			final String extension = getExtensionName(metamodel);
 			try {
-				XtendResourceParser parser = new XtendResourceParser();
-				Resource xtendFile = parser.parse(new InputStreamReader(in), extension + '.' + XtendFile.FILE_EXTENSION);
-				return xtendFile;
-			} finally {
-				if (in != null)
-					in.close();
+				URI uri = getXtendFileLocation(metamodel);
+				if (uri != null) {
+					URIConverter uriConverter = metamodel.eResource().getResourceSet().getURIConverter();
+					if (uriConverter.exists(uri, null)) {
+						InputStream in = uriConverter.createInputStream(uri);
+						try {
+							XtendResourceParser parser = new XtendResourceParser();
+							xtendFile = parser.parse(new InputStreamReader(in), extension + '.'
+									+ XtendFile.FILE_EXTENSION);
+							fireXtendFileLoaded();
+						} finally {
+							if (in != null)
+								in.close();
+						}
+					}
+				}
+			} catch (ClasspathUriResolutionException ignored) {
+				// no xtend file found
+			} catch (Exception e) {
+				logger.error("Could not parse " + extension, e);
 			}
 		}
-		catch (ClasspathUriResolutionException ignored) {
-			// no xtend file found
-		}
-		catch (Exception e) {
-			logger.error("Could not parse " + extension, e);
-		}
-		return null;
+		return xtendFile;
 	}
 
+	/**
+	 * notify subclasses that the xtend file was successfully loaded
+	 */
+	protected void fireXtendFileLoaded() {
+		// Can't make it abstract - public API
+	}
+
+	/**
+	 * Sets cached Xtend file to null so it can be reloaded in {@link XtendXtext2EcorePostProcessor#loadXtendFile(GeneratedMetamodel)}
+	 */
+	protected final void clearCachedXtendFile() {
+		this.xtendFile = null;
+	}
+	
 	protected String getExtensionName(GeneratedMetamodel metamodel) {
 		final Grammar grammar = (Grammar) metamodel.eContainer();
 		final String extension = grammar.getName().replace(".", "::") + "PostProcessor";
