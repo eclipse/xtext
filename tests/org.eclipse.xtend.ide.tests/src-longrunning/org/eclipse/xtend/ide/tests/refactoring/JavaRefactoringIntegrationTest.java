@@ -141,7 +141,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	@Test public void testRenameJavaMethod() throws Exception {
 		try {
 			testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
-			String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() }";
+			String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() } }";
 			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 			IResourcesSetupUtil.waitForAutoBuild();
 			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
@@ -158,7 +158,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testDontRenameOperator() throws Exception {
-		String xtendModel = "class XtendClass { def bar() { 1 + 2 }";
+		String xtendModel = "class XtendClass { def bar() { 1 + 2 } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf('+');
@@ -174,6 +174,16 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertNull(renameElementContext);
 	}
 
+	@Test public void renameParameterReference() throws Exception {
+		String xtendModel = "class XtendClass { def bar(int foo) { foo } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.lastIndexOf("foo") + 1;
+		performRenameTest(editor, offset, "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());		
+	}
+	
 	protected IFile assertFileExists(String fileName) throws Exception {
 		IResource file = testHelper.getProject().findMember(fileName);
 		assertTrue(file instanceof IFile);
