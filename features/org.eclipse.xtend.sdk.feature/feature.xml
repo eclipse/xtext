@@ -3,7 +3,8 @@
       id="org.eclipse.xtend.sdk"
       label="%featureName"
       version="2.3.0.qualifier"
-      provider-name="%providerName">
+      provider-name="%providerName"
+      plugin="org.eclipse.xtend.core">
 
    <description>
       %description
@@ -39,7 +40,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtend.lib"
          download-size="0"
