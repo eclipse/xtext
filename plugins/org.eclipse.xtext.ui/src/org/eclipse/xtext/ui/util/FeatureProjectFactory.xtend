@@ -9,7 +9,6 @@ import static org.eclipse.xtext.ui.util.FeatureProjectFactory.*
 import java.util.List
 import java.util.ArrayList
 import org.eclipse.core.runtime.IProgressMonitor
-import org.eclipse.core.resources.IFile
 
 /**
  * Creates a simple feature project.<br>
@@ -26,7 +25,6 @@ class FeatureProjectFactory extends ProjectFactory {
 	static String BUILD_PROPS_FILE_NAME = "build.properties";
 	
 	List containedBundles = new ArrayList()
-	List<IProjectFactoryContributor> contributors = new ArrayList()
 	List includedFeatures = new ArrayList()
 	String mainCategoryName
 	
@@ -52,14 +50,7 @@ class FeatureProjectFactory extends ProjectFactory {
 		return this;
 	}
 	
-		
-	/**
-	 * Adds a new included feature entry
-	 */
-	def FeatureProjectFactory addContributor(IProjectFactoryContributor Contributor) {
-		contributors.add(Contributor);
-		return this;
-	}
+
 	
 	/**
 	 * @param mainCategoryName If not null or empty a category.xml will be created 
@@ -76,12 +67,6 @@ class FeatureProjectFactory extends ProjectFactory {
 		createBuildProperties(project, subMonitor.newChild(1));
 		if(!mainCategoryName.nullOrEmpty) {
 			createCategoryFile(project, mainCategoryName, subMonitor.newChild(1))
-		}
-		for (contributor: contributors) {
-			val IProjectFactoryContributor$IFileCreator fileWriter = [
-				content, name | content.writeToFile(name, project, subMonitor.newChild(1))
-			]
-			contributor.contributeFiles(project, fileWriter)
 		}
 	}
 
@@ -135,7 +120,4 @@ class FeatureProjectFactory extends ProjectFactory {
 		.writeToFile(CATEGORY_FILE_NAME, project, monitor);
 	}
 	
-	def private IFile writeToFile(CharSequence chrSeq, String fileName, IProject project, IProgressMonitor progrMonitor) {
-		return createFile(fileName, project, chrSeq.toString, progrMonitor);
-	}
 }

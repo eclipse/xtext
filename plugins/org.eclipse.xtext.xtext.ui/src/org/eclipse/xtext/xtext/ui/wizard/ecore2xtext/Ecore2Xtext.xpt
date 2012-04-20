@@ -14,7 +14,8 @@
 
 «EXTENSION org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext»
 
-«DEFINE grammar FOR Ecore2XtextProjectInfo-»«resetUniqueNames(defaultEPackageInfo)-»
+«DEFINE grammar FOR Ecore2XtextProjectInfo-»
+«resetUniqueNames(defaultEPackageInfo)-»
 «FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
 «EXPAND grammarDeclaration-»
 «EXPAND metamodelImport FOREACH allReferencedEPackages()-»

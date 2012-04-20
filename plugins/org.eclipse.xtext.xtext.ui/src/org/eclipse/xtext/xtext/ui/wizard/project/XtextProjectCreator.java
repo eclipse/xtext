@@ -17,23 +17,16 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
-import org.eclipse.xpand2.XpandExecutionContextImpl;
-import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.FeatureProjectFactory;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.AbstractProjectCreator;
@@ -104,9 +97,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 			createFeatureProject(subMonitor.newChild(1));
 		}
 
-		IFile dslGrammarFile = project.getFile(new Path(getModelFolderName()
-				+ "/" + getXtextProjectInfo().getLanguageName().replace('.', '/') //$NON-NLS-1$
-				+ ".xtext")); //$NON-NLS-1$
+		IFile dslGrammarFile = project.getFile(DslProjectContributor.grammarFilePath(getXtextProjectInfo()));
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
 	}
@@ -139,7 +130,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
 		PluginProjectFactory factory = createProjectFactory();
 		configureDslUiProjectFactory(factory);
-		return createProject(factory, getDslUiProjectTemplateName(), monitor);
+		return factory.createProject(monitor, null);
 	}
 
 	protected void configureDslUiProjectFactory(PluginProjectFactory factory) {
@@ -167,7 +158,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
 		PluginProjectFactory factory = createProjectFactory();
 		configureDslProjectFactory(factory);
-		return createProject(factory, getDslProjectTemplateName(), monitor);
+		return factory.createProject(monitor, null);
 	}
 
 	protected void configureDslProjectFactory(PluginProjectFactory factory) {
@@ -178,6 +169,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addProjectNatures(getDslProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
 		factory.setLocation(getXtextProjectInfo().getProjectLocation());
+		factory.addContributor(createDslProjectContributor());
 	}
 
 	protected List<String> getDslProjectRequiredBundles() {
@@ -224,7 +216,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected IProject createTestProject(final IProgressMonitor monitor) throws CoreException {
 		PluginProjectFactory factory = createProjectFactory();
 		configureTestProjectBuilder(factory);
-		return createProject(factory, getTestProjectTemplateName(), monitor);
+		factory.addContributor(new TestProjectContributor(getXtextProjectInfo()));
+		return factory.createProject(monitor, null);
 	}
 	
 	protected IProject createFeatureProject(SubMonitor monitor) throws CoreException {
@@ -276,52 +269,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return requiredBundles;
 	}
 
-	protected IProject createProject(ProjectFactory factory, String templateName,
-			final IProgressMonitor monitor) throws CoreException {
-		IProject result = factory.createProject(monitor, null);
-		if (result == null) {
-			return null;
-		}
-
-		IFolder srcFolder = (IFolder) result.findMember(getModelFolderName());
-
-		OutputImpl output = new OutputImpl();
-		output.addOutlet(new Outlet(false, getEncoding(), null, true, srcFolder.getLocation().makeAbsolute()
-				.toOSString()));
-
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
-		execCtx.getResourceManager().setFileEncoding("iso-8859-1"); //$NON-NLS-1$
-		execCtx.registerMetaModel(new JavaBeansMetaModel());
-
-		// generate generator and activator for dsl and dsl.ui project
-		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate(templateName, getXtextProjectInfo());
-
-		// refresh folder and select file to edit
-		result.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		return result;
-	}
-
-	protected String pathToTemplates() {
-		return "org::eclipse::xtext::xtext::ui::wizard::project::"; //$NON-NLS-1$
-	}
-
-	protected String getDslProjectTemplateName() {
-		return pathToTemplates() + "DslProject::main";
-	}
-
-	protected String getDslUiProjectTemplateName() {
-		return pathToTemplates() + "DslUiProject::main";
-	}
-
-	protected String getGeneratorProjectTemplateName() {
-		return pathToTemplates() + "GeneratorProject::main";
-	}
-	
-	protected String getTestProjectTemplateName() {
-		return pathToTemplates() + "TestProject::main";
-	}
-
 	protected List<String> getImportedPackages() {
 		return Lists.newArrayList("org.apache.log4j", "org.apache.commons.logging");
 	}
@@ -338,5 +285,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	@Override
 	protected List<String> getAllFolders() {
 		return SRC_FOLDER_LIST;
+	}
+
+	protected IProjectFactoryContributor createDslProjectContributor() {
+		return new DslProjectContributor(getXtextProjectInfo());
 	}
 }

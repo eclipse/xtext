@@ -374,8 +374,8 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 								final Shell shell = workbench.getActiveWorkbenchWindow().getShell();
 								shell.getDisplay().asyncExec(new Runnable() {
 									public void run() {
-										String title = "Please update the workflow that generates the language.";
-										String message = "Please make sure that the workflow that generates the language is up-to date.\n" +
+										String title = "Please update the Ecore2XtextDslProjectContributor that generates the language.";
+										String message = "Please make sure that the Ecore2XtextDslProjectContributor that generates the language is up-to date.\n" +
 												"Especially important is the registration of the referenced packages.\n" +
 												"Please refer to the reference documentation for details.";
 										

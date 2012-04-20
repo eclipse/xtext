@@ -31,6 +31,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -42,13 +43,13 @@ import com.google.inject.Inject;
 public class ProjectFactory {
 
 	private static final Logger logger = Logger.getLogger(ProjectFactory.class);
-	
-	@Inject(optional=true)
+
+	@Inject(optional = true)
 	protected IWorkbench workbench;
-	
+
 	@Inject
 	protected IWorkspace workspace;
-	
+
 	protected String projectName;
 	protected IPath location;
 	protected List<String> folders;
@@ -56,14 +57,16 @@ public class ProjectFactory {
 	protected List<String> projectNatures;
 	protected List<String> builderIds;
 	protected List<IWorkingSet> workingSets;
-	
+
+	private List<IProjectFactoryContributor> contributors;
+
 	public ProjectFactory addBuilderIds(String... builderIds) {
 		if (this.builderIds == null)
 			this.builderIds = Lists.newArrayList();
 		this.builderIds.addAll(Arrays.asList(builderIds));
 		return this;
 	}
-	
+
 	public ProjectFactory addProjectNatures(String... projectNatures) {
 		if (this.projectNatures == null)
 			this.projectNatures = Lists.newArrayList();
@@ -94,14 +97,24 @@ public class ProjectFactory {
 		this.referencedProjects.addAll(referencedProjects);
 		return this;
 	}
-	
+
 	public ProjectFactory addWorkingSets(List<IWorkingSet> workingSets) {
 		if (this.workingSets == null)
 			this.workingSets = Lists.newArrayList();
 		this.workingSets.addAll(workingSets);
 		return this;
 	}
-	
+
+	/**
+	 * @since 2.3
+	 */
+	public void addContributor(IProjectFactoryContributor projectFactoryContributor) {
+		if (this.contributors == null) {
+			contributors = Lists.newArrayList();
+		}
+		contributors.add(projectFactoryContributor);
+	}
+
 	public IProject createProject(IProgressMonitor monitor, Shell shell) {
 		IProject project = null;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 10);
@@ -112,7 +125,7 @@ public class ProjectFactory {
 			if (!deleteExistingProject(project, shell, subMonitor)) {
 				return null;
 			}
-			
+
 			project.create(description, subMonitor.newChild(1));
 			project.open(subMonitor.newChild(1));
 			project.setDescription(description, subMonitor.newChild(1));
@@ -137,24 +150,33 @@ public class ProjectFactory {
 		}
 	}
 
-	protected void enhanceProject(IProject project, SubMonitor subMonitor, Shell shell) throws CoreException {
-		if (workbench != null && workingSets != null)
+	protected void enhanceProject(final IProject project, final SubMonitor subMonitor, Shell shell)
+			throws CoreException {
+		if (workbench != null && workingSets != null) {
 			workbench.getWorkingSetManager().addToWorkingSets(project,
 					workingSets.toArray(new IWorkingSet[workingSets.size()]));
+		}
+		IFileCreator fileCreator = new IFileCreator() {
+
+			public IFile writeToFile(CharSequence chars, String fileName) {
+				return ProjectFactory.this.writeToFile(chars, fileName, project, subMonitor);
+			}
+		};
+		for (IProjectFactoryContributor contributor : contributors) {
+			contributor.contributeFiles(project, fileCreator);
+		}
 	}
 
-	protected boolean deleteExistingProject(IProject project, final Shell theShell, SubMonitor subMonitor) throws CoreException {
+	protected boolean deleteExistingProject(IProject project, final Shell theShell, SubMonitor subMonitor)
+			throws CoreException {
 		// Clean up any old project information.
 		if (project.exists()) {
 			final boolean[] result = new boolean[1];
-			if (workbench!=null && theShell != null) {
+			if (workbench != null && theShell != null) {
 				workbench.getDisplay().syncExec(new Runnable() {
 					public void run() {
-						result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1
-								+ projectName,
-								Messages.ProjectFactory_2
-										+ projectName
-										+ Messages.ProjectFactory_3);
+						result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1 + projectName,
+								Messages.ProjectFactory_2 + projectName + Messages.ProjectFactory_3);
 					}
 				});
 			} else {
@@ -176,8 +198,8 @@ public class ProjectFactory {
 		}
 
 		if (referencedProjects != null && referencedProjects.size() != 0) {
-			projectDescription.setReferencedProjects(
-					referencedProjects.toArray(new IProject[referencedProjects.size()]));
+			projectDescription
+					.setReferencedProjects(referencedProjects.toArray(new IProject[referencedProjects.size()]));
 		}
 		if (projectNatures != null)
 			projectDescription.setNatureIds(projectNatures.toArray(new String[projectNatures.size()]));
@@ -195,7 +217,7 @@ public class ProjectFactory {
 		}
 		projectDescription.setBuildSpec(commands.toArray(new ICommand[commands.size()]));
 	}
-	
+
 	protected IFile createFile(final String name, final IContainer container, final String content,
 			final IProgressMonitor progressMonitor) {
 		final IFile file = container.getFile(new Path(name));
@@ -216,7 +238,17 @@ public class ProjectFactory {
 		}
 		return file;
 	}
-	
+
+	/**
+	 * 
+	 * Shortcut method to be used with Xtend rich strings
+	 * 
+	 * @since 2.3
+	 */
+	protected IFile writeToFile(CharSequence chrSeq, String fileName, IProject project, IProgressMonitor progrMonitor) {
+		return createFile(fileName, project, chrSeq.toString(), progrMonitor);
+	}
+
 	protected void createRecursive(final IContainer resource) {
 		if (!resource.exists()) {
 			if (!resource.getParent().exists()) {
@@ -228,7 +260,7 @@ public class ProjectFactory {
 				} catch (CoreException e) {
 					logger.error(e.getMessage(), e);
 				}
-			} 
+			}
 		}
 	}
 }
