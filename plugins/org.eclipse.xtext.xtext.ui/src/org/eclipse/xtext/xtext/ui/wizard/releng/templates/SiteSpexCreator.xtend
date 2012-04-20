@@ -11,7 +11,7 @@ import org.eclipse.core.resources.IFile
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.3
  */
-class SiteSpexCreator implements IProjectFactoryContributor{
+class SiteSpexCreator implements IProjectFactoryContributor {
 	RelengProjectInfo projectInfo
 	
 	new(RelengProjectInfo projectInfo) {

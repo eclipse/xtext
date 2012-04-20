@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import java.util.Collection;
 
+import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 import com.google.common.base.Function;
@@ -21,8 +22,8 @@ import com.google.common.collect.Lists;
 public class Ecore2XtextProjectCreator extends XtextProjectCreator {
 
 	@Override
-	protected String getDslProjectTemplateName() {
-		return "org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2XtextDslProject::main";
+	protected IProjectFactoryContributor createDslProjectContributor() {
+		return null;
 	}
 	
 	@Override

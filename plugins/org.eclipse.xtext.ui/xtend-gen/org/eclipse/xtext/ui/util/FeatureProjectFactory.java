@@ -2,18 +2,14 @@ package org.eclipse.xtext.ui.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -35,13 +31,6 @@ public class FeatureProjectFactory extends ProjectFactory {
   private List containedBundles = new Function0<List>() {
     public List apply() {
       ArrayList<?> _arrayList = new ArrayList<Object>();
-      return _arrayList;
-    }
-  }.apply();
-  
-  private List<IProjectFactoryContributor> contributors = new Function0<List<IProjectFactoryContributor>>() {
-    public List<IProjectFactoryContributor> apply() {
-      ArrayList<IProjectFactoryContributor> _arrayList = new ArrayList<IProjectFactoryContributor>();
       return _arrayList;
     }
   }.apply();
@@ -78,14 +67,6 @@ public class FeatureProjectFactory extends ProjectFactory {
   }
   
   /**
-   * Adds a new included feature entry
-   */
-  public FeatureProjectFactory addContributor(final IProjectFactoryContributor Contributor) {
-    this.contributors.add(Contributor);
-    return this;
-  }
-  
-  /**
    * @param mainCategoryName If not null or empty a category.xml will be created
    */
   public FeatureProjectFactory withCategoryFile(final String mainCategoryName) {
@@ -105,23 +86,6 @@ public class FeatureProjectFactory extends ProjectFactory {
     if (_not) {
       SubMonitor _newChild_2 = subMonitor.newChild(1);
       this.createCategoryFile(project, this.mainCategoryName, _newChild_2);
-    }
-    for (final IProjectFactoryContributor contributor : this.contributors) {
-      {
-        final Function2<CharSequence,String,IFile> _function = new Function2<CharSequence,String,IFile>() {
-            public IFile apply(final CharSequence content, final String name) {
-              SubMonitor _newChild = subMonitor.newChild(1);
-              IFile _writeToFile = FeatureProjectFactory.this.writeToFile(content, name, project, _newChild);
-              return _writeToFile;
-            }
-          };
-        final IFileCreator fileWriter = new IFileCreator() {
-            public IFile writeToFile(CharSequence chars,String fileName) {
-              return _function.apply(chars,fileName);
-            }
-        };
-        contributor.contributeFiles(project, fileWriter);
-      }
     }
   }
   
@@ -256,10 +220,5 @@ public class FeatureProjectFactory extends ProjectFactory {
     _builder.append("</site>");
     _builder.newLine();
     this.writeToFile(_builder, FeatureProjectFactory.CATEGORY_FILE_NAME, project, monitor);
-  }
-  
-  private IFile writeToFile(final CharSequence chrSeq, final String fileName, final IProject project, final IProgressMonitor progrMonitor) {
-    String _string = chrSeq.toString();
-    return this.createFile(fileName, project, _string, progrMonitor);
   }
 }
