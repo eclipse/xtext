@@ -7,15 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Mark Christiaens - Serialization support
  * @noextend This class is not intended to be subclassed by clients.
  */
 public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
@@ -168,5 +174,61 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 		}
 		return result;
 	}
+	
+	@Override
+	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+		super.readData(in, context);
 
+		basicSetCompleteContent(context.getCompleteContent());
+
+		int totalLength = fixupOffsets(this, 0);
+
+		if (totalLength != getCompleteContent().length()) {
+			throw new IllegalStateException("The length of the resource's content was " + getCompleteContent().length()
+					+ " but the length calculated based upon the serialized form of the RootNode was " + totalLength);
+		}
+	}
+	
+	private int fixupOffsets(INode node, int nodeOffset) {
+		if (node instanceof LeafNode) {
+			LeafNode leafNode = (LeafNode) node;
+			leafNode.basicSetTotalOffset(nodeOffset);
+			return leafNode.getTotalLength() + nodeOffset;
+		}
+
+		if (node instanceof CompositeNode) {
+			CompositeNode compositeNode = (CompositeNode) node;
+
+			int currentOffset = nodeOffset;
+
+			AbstractNode firstChild = compositeNode.basicGetFirstChild();
+
+			if (firstChild != null) {
+				AbstractNode it = firstChild;
+
+				do {
+					currentOffset = fixupOffsets(it, currentOffset);
+					it = it.basicGetNextSibling();
+				} while (it != firstChild);
+			}
+
+			return currentOffset;
+		}
+
+		return 0;
+	}
+
+	@Override
+	NodeType getNodeId() {
+		return NodeType.RootNode;
+	}
+
+	/**
+	 * @since 2.3
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void fillGrammarElementToIdMap(Map<EObject, Integer> grammarElementToIdMap,
+			List<String> grammarIdToURIMap) {
+		fillGrammarElementToIdMap(0, grammarElementToIdMap, grammarIdToURIMap);
+	}
 }
