@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.ui.refactoring.JdtRefactoringContext;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler;
@@ -60,6 +61,11 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 		}
 		if(operatorMappingUtil.isMappedOperator(targetElement))
 			return null;
+		if(targetElement instanceof JvmFormalParameter) {
+			EObject sourceParameter = associations.getPrimarySourceElement(targetElement);
+			if(sourceParameter != null)
+				return super.createRenameElementContext(sourceParameter, editor, selection, resource);
+		}
 		return super.createRenameElementContext(targetElement, editor, selection, resource);
 	}
 
