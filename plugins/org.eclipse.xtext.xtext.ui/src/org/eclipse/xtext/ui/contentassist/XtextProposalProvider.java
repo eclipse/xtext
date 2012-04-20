@@ -286,19 +286,9 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		AbstractRule rule = EcoreUtil2.getContainerOfType(model, AbstractRule.class);
 		EClassifier type = rule.getType().getClassifier();
 		if (type instanceof EClass) {
-			final Set<String> skipFeatures = newHashSet();
-			for(Assignment existingAssignment: EcoreUtil2.eAllOfType(rule, Assignment.class)) {
-				EStructuralFeature assignedFeature = ((EClass) type).getEStructuralFeature(existingAssignment.getFeature());
-				if(assignedFeature != null && !assignedFeature.isMany())
-					skipFeatures.add(assignedFeature.getName());
-			}
-			Iterable<EStructuralFeature> features = filter(((EClass) type).getEAllStructuralFeatures(), new Predicate<EStructuralFeature>() {
-				public boolean apply(EStructuralFeature input) {
-					return !skipFeatures.contains(input.getName());
-				}
-			});
+			Iterable<EStructuralFeature> features = ((EClass) type).getEAllStructuralFeatures();
 			Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory("ID", context);
-			Iterable<String> processedFeatures = concat(skipFeatures, completeStructuralFeatures(context, factory, acceptor, features));
+			Iterable<String> processedFeatures = completeStructuralFeatures(context, factory, acceptor, features);
 			if(rule.getType().getMetamodel() instanceof GeneratedMetamodel) {
 				if(notNull(rule.getName()).toLowerCase().startsWith("import")) {
 					completeSpecialAttributeAssignment("importedNamespace", 2, processedFeatures, factory, context, acceptor); 
@@ -310,7 +300,6 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		}
 		super.completeAssignment_Feature(model, assignment, context, acceptor);
 	}
-
 
 	protected void completeSpecialAttributeAssignment(String specialAttribute, int priorityFactor, Iterable<String> processedFeatures,
 			Function<IEObjectDescription, ICompletionProposal> factory, ContentAssistContext context,
