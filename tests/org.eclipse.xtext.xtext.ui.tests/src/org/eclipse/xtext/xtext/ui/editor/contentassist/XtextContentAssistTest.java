@@ -338,6 +338,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID ")
 	        .assertText(
+	        		"name=",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -435,6 +436,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .append("RuleA: name=ID =>")
 	        .assertText(
+	        		"name=",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -455,6 +457,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID => ")
 	        .assertText(
+	        		"name=",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -532,6 +535,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID;")
 	        .append("RuleB returns RuleA: =>(name=ID);")
 	        .assertTextAtCursorPosition("(",
+	        		"name=",
 	        		"=>",
 	        		"Feature",
 	        		"\"Value\"",
@@ -554,6 +558,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID;")
 	        .append("RuleB returns RuleA: =>  name=ID;")
 	        .assertTextAtCursorPosition("  name",
+	        		"name=",
 	        		"=>",
 	        		"Feature",
 	        		"\"Value\"",
