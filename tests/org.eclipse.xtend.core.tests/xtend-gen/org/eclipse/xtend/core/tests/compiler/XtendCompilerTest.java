@@ -2834,15 +2834,9 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtend.lib.Property;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class X {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Property");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final String _x = \"hello\";");

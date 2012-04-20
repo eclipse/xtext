@@ -1355,11 +1355,8 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 					@Property val String x = 'hello'
 				}
 			''', '''
-				import org.eclipse.xtend.lib.Property;
-				
 				@SuppressWarnings("all")
 				public class X {
-				  @Property
 				  private final String _x = "hello";
 				  
 				  public String getX() {
