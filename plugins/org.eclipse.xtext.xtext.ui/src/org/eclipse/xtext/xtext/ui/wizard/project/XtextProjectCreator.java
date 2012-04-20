@@ -44,23 +44,18 @@ import com.google.inject.Provider;
  */
 public class XtextProjectCreator extends AbstractProjectCreator {
 
-	protected static final String[] DSL_PROJECT_NATURES = new String[] { 
-			JavaCore.NATURE_ID,
+	protected static final String[] DSL_PROJECT_NATURES = new String[] { JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
 			XtextProjectHelper.NATURE_ID //$NON-NLS-1$
 	};
 
-	protected static final String[] DSL_UI_PROJECT_NATURES = new String[] { 
-			JavaCore.NATURE_ID,
+	protected static final String[] DSL_UI_PROJECT_NATURES = new String[] { JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature" //$NON-NLS-1$
 	};
-	
-	protected static final String[] BUILDERS = new String[]{
-			JavaCore.BUILDER_ID, 
-			"org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
+
+	protected static final String[] BUILDERS = new String[] { JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
 			"org.eclipse.pde.SchemaBuilder", //$NON-NLS-1$
-			XtextProjectHelper.BUILDER_ID
-	};
+			XtextProjectHelper.BUILDER_ID };
 
 	protected static final String[] GENERATOR_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
 	protected static final String[] TEST_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
@@ -74,7 +69,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	private Provider<PluginProjectFactory> projectFactoryProvider;
 	@Inject
 	private Provider<FeatureProjectFactory> featureProjFactoryProvider;
-	
+
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
 	}
@@ -82,10 +77,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	@Override
 	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 			InterruptedException {
-		SubMonitor subMonitor = SubMonitor.convert(
-				monitor, 
-				getCreateModelProjectMessage(), 
-				getMonitorTicks());
+		SubMonitor subMonitor = SubMonitor.convert(monitor, getCreateModelProjectMessage(), getMonitorTicks());
 
 		IProject project = createDslProject(subMonitor.newChild(1));
 		createDslUiProject(subMonitor.newChild(1));
@@ -97,22 +89,20 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 			createFeatureProject(subMonitor.newChild(1));
 		}
 
-		IFile dslGrammarFile = project.getFile(DslProjectContributor.grammarFilePath(getXtextProjectInfo()));
+		IFile dslGrammarFile = project.getFile(SRC_ROOT + "/" + getXtextProjectInfo().getGrammarFilePath());
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
 	}
 
-	
-
 	protected int getMonitorTicks() {
 		int ticks = 2;
-		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks+1 : ticks;
+		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks + 1 : ticks;
 		if (getXtextProjectInfo().isCreateFeatureProject()) {
 			ticks++;
 		}
 		return ticks;
 	}
-	
+
 	@Override
 	protected PluginProjectFactory createProjectFactory() {
 		return projectFactoryProvider.get();
@@ -126,7 +116,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected String getCreateModelProjectMessage() {
 		return Messages.XtextProjectCreator_CreatingProjectsMessage2 + getXtextProjectInfo().getProjectName();
 	}
-	
+
 	protected IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
 		PluginProjectFactory factory = createProjectFactory();
 		configureDslUiProjectFactory(factory);
@@ -185,7 +175,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		for (String bundleId : bundles) {
 			requiredBundles.add(bundleId.trim() + ";resolution:=optional"); //$NON-NLS-1$
 		}
-		for(String bundleId: getAdditionalRequiredBundles()) {
+		for (String bundleId : getAdditionalRequiredBundles()) {
 			requiredBundles.add(bundleId.trim());
 		}
 		return requiredBundles;
@@ -194,7 +184,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected String[] getDslProjectNatures() {
 		return DSL_PROJECT_NATURES;
 	}
-	
+
 	@Override
 	protected PluginProjectFactory configureProjectFactory(ProjectFactory factory) {
 		PluginProjectFactory result = (PluginProjectFactory) factory;
@@ -216,16 +206,20 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected IProject createTestProject(final IProgressMonitor monitor) throws CoreException {
 		PluginProjectFactory factory = createProjectFactory();
 		configureTestProjectBuilder(factory);
-		factory.addContributor(new TestProjectContributor(getXtextProjectInfo()));
+		factory.addContributor(createTestProjectContributor());
 		return factory.createProject(monitor, null);
 	}
-	
+
+	private TestProjectContributor createTestProjectContributor() {
+		return new TestProjectContributor(getXtextProjectInfo());
+	}
+
 	protected IProject createFeatureProject(SubMonitor monitor) throws CoreException {
 		FeatureProjectFactory factory = createFeatureFactory();
 		configureFeatureProjectBuilder(factory);
-		return 	factory.createProject(monitor, null);
+		return factory.createProject(monitor, null);
 	}
-	
+
 	protected void configureFeatureProjectBuilder(FeatureProjectFactory factory) {
 		factory.setProjectName(getXtextProjectInfo().getFeatureProjectName());
 		factory.setLocation(getXtextProjectInfo().getFeatureProjectLocation());
@@ -248,31 +242,25 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected List<String> getTestProjectImportedPackages() {
-		return Lists.newArrayList("org.junit;version=\"4.5.0\"",
-				 "org.junit.runner;version=\"4.5.0\"",
-				 "org.junit.runner.manipulation;version=\"4.5.0\"",
-				 "org.junit.runner.notification;version=\"4.5.0\"",
-				 "org.junit.runners;version=\"4.5.0\"",
-				 "org.junit.runners.model;version=\"4.5.0\"",
-				 "org.hamcrest",
-				 "org.hamcrest.core");
+		return Lists.newArrayList("org.junit;version=\"4.5.0\"", "org.junit.runner;version=\"4.5.0\"",
+				"org.junit.runner.manipulation;version=\"4.5.0\"", "org.junit.runner.notification;version=\"4.5.0\"",
+				"org.junit.runners;version=\"4.5.0\"", "org.junit.runners.model;version=\"4.5.0\"", "org.hamcrest",
+				"org.hamcrest.core");
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList(
-				getXtextProjectInfo().getProjectName(),
-				getXtextProjectInfo().getUiProjectName(),
-				"org.eclipse.core.runtime", //$NON-NLS-1$
+		List<String> requiredBundles = Lists.newArrayList(getXtextProjectInfo().getProjectName(), getXtextProjectInfo()
+				.getUiProjectName(), "org.eclipse.core.runtime", //$NON-NLS-1$
 				"org.eclipse.xtext.junit4", //$NON-NLS-1$
 				"org.eclipse.ui.workbench;resolution:=optional" //$NON-NLS-1$
-				); //$NON-NLS-1$
+		); //$NON-NLS-1$
 		return requiredBundles;
 	}
 
 	protected List<String> getImportedPackages() {
 		return Lists.newArrayList("org.apache.log4j", "org.apache.commons.logging");
 	}
-	
+
 	protected Collection<String> getAdditionalRequiredBundles() {
 		return Collections.emptyList();
 	}
@@ -288,6 +276,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected IProjectFactoryContributor createDslProjectContributor() {
-		return new DslProjectContributor(getXtextProjectInfo());
+		DslProjectContributor dslProjectContributor = new DslProjectContributor(getXtextProjectInfo());
+		dslProjectContributor.setSourceRoot(SRC_ROOT);
+		return dslProjectContributor;
 	}
 }

@@ -29,16 +29,16 @@ class TestProjectContributor extends DefaultProjectFactoryContributor {
 		'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
-			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-				<listEntry value="/«projectInfo.testProjectName»"/>
-			</listAttribute>
-			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
-				<listEntry value="4"/>
-			</listAttribute>
-			<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=«projectInfo.testProjectName»"/>
-			<booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
-			<stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
-			<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«projectInfo.testProjectName»"/>
+		<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+		<listEntry value="/«projectInfo.testProjectName»"/>
+		</listAttribute>
+		<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+		<listEntry value="4"/>
+		</listAttribute>
+		<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=«projectInfo.testProjectName»"/>
+		<booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
+		<stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
+		<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«projectInfo.testProjectName»"/>
 		</launchConfiguration>
 		'''.writeToFile(fileWriter, projectInfo.testProjectName+".launch")
 	}
