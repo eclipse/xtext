@@ -81,6 +81,8 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		expect(testGrammar.indexOf("Zonk"), "Zonk".length(), SemanticHighlightingConfiguration.TYPE_REFERENCE_ID);
 		expect(testGrammar.indexOf("Model"), "Model".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		expect(testGrammar.indexOf("Greeting:"), "Greeting".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
+		expect(testGrammar.indexOf("name"), "name".length(), SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
+		expect(testGrammar.lastIndexOf("name"), "name".length(), SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
 		expect(testGrammar.indexOf("Identifier:"), "Identifier".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		expect(testGrammar.indexOf("Unused:"), "Unused".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		highlight(testGrammar);
