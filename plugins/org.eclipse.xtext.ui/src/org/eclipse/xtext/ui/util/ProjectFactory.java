@@ -156,14 +156,17 @@ public class ProjectFactory {
 			workbench.getWorkingSetManager().addToWorkingSets(project,
 					workingSets.toArray(new IWorkingSet[workingSets.size()]));
 		}
-		IFileCreator fileCreator = new IFileCreator() {
 
-			public IFile writeToFile(CharSequence chars, String fileName) {
-				return ProjectFactory.this.writeToFile(chars, fileName, project, subMonitor);
+		if (contributors != null) {
+			IFileCreator fileCreator = new IFileCreator() {
+				
+				public IFile writeToFile(CharSequence chars, String fileName) {
+					return ProjectFactory.this.writeToFile(chars, fileName, project, subMonitor);
+				}
+			};
+			for (IProjectFactoryContributor contributor : contributors) {
+				contributor.contributeFiles(project, fileCreator);
 			}
-		};
-		for (IProjectFactoryContributor contributor : contributors) {
-			contributor.contributeFiles(project, fileCreator);
 		}
 	}
 
