@@ -145,18 +145,25 @@ public class ManifestMergerTest extends Assert {
 				"bar;x-friends=\"xxx,foo,bar,zzz\"", toMerge, Wrapper.wrap(false))));
 	}
 
-	@Test public void testMergeIntoCommaSeparatedListInvalidParam() throws Exception {
+	@Test public void testMergeIntoCommaSeparatedListValidParam() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo;foo=version");
-		toMerge.add("bar");
-		toMerge.add("baz");
-		try {
-			assertEquals("bar;version=\"0.7.0\",foo,baz", MergeableManifest.mergeIntoCommaSeparatedList(
-					"bar;version=\"0.7.0\"", toMerge, Wrapper.wrap(false)));
-			fail("Exception expected");
-		} catch (IllegalArgumentException e) {
-			// expected
-		}
+		assertEquals("bar,foo;foo=version", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"bar", toMerge, Wrapper.wrap(false))));
+	}
+
+	@Test public void testMergeIntoCommaSeparatedListSkipWhenParamExists() throws Exception {
+		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
+		toMerge.add("foo;foo=other");
+		assertEquals("foo;version=\"0.7.0\"", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"foo;version=\"0.7.0\"", toMerge, Wrapper.wrap(false))));
+	}
+
+	@Test public void testMergeIntoCommaSeparatedListAddParam() throws Exception {
+		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
+		toMerge.add("foo;version=\"0.7.0\"");
+		assertEquals("foo;version=\"0.7.0\"", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"foo", toMerge, Wrapper.wrap(false))));
 	}
 
 }
