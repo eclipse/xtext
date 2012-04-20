@@ -194,8 +194,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"ANY_OTHER",
         		"(",
         		"{",
-        		"importURI=",
-        		"importedNamespace=",
         		"name=");
     }
     
@@ -220,8 +218,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"ML_COMMENT",
         		"ANY_OTHER",
         		"(",
-        		"importURI=",
-        		"importedNamespace=",
         		"name=");
     }
     
@@ -333,8 +329,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"=>",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -362,9 +356,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		";",
 	        		"?",
 	        		"|",
-	        		"&",
-	        		"importURI=",
-	        		"importedNamespace=");
+	        		"&");
     }
     
     @Test public void testCompleteFeatureName_03() throws Exception {
@@ -389,8 +381,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"=>",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -414,8 +404,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -438,8 +426,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -460,9 +446,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"=>",
-	        		"importURI=",
-	        		"importedNamespace=");
+	        		"=>");
     }
     
     @Test public void testCompleteFeatureName_07() throws Exception {
@@ -481,9 +465,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(",
-	        		"importURI=",
-	        		"importedNamespace=");
+	        		"(");
     }
     
     @Test public void testCompleteFeatureName_08() throws Exception {
@@ -507,8 +489,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"=>",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -532,8 +512,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -566,9 +544,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(",
-	        		"importURI=",
-	        		"importedNamespace=");
+	        		"(");
     }
     
     @Test public void testCompleteFeatureName_12() throws Exception {
@@ -590,9 +566,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(",
-	        		"importURI=",
-	        		"importedNamespace=");
+	        		"(");
     }
     
     @Test public void testCompleteFeatureName_13() throws Exception {
@@ -611,8 +585,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"feature+=",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -632,8 +604,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"feature+=",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
     }
     
@@ -653,9 +623,24 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"feature?=",
-	        		"importURI=",
-	        		"importedNamespace=",
 	        		"name=");
+    }
+    
+    @Test public void testCompleteFeatureName_16() throws Exception {
+    	newBuilder()
+	        .appendNl("grammar org.foo.bar")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("import 'http://www.eclipse.org/emf/2002/Ecore'")
+	        .append("Import:  ;")
+	        .assertTextAtCursorPosition(" ;",
+	        		"=>",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"(",
+	        		"{",
+	        		"Import",
+	        		"importedNamespace=",
+	        		"importURI=");
     }
     
     @Test public void testAliasCompletion_01() throws Exception {

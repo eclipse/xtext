@@ -5,6 +5,7 @@ package org.eclipse.xtext.ui.contentassist;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Map;
@@ -277,7 +278,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	/**
 	 * Not a full featured solution for the computation of available structural features, but it is sufficient for some
-	 * interesting 80%.
+	 * interesting 85%.
 	 */
 	@Override
 	public void completeAssignment_Feature(EObject model, Assignment assignment, ContentAssistContext context,
@@ -299,17 +300,27 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory("ID", context);
 			Iterable<String> processedFeatures = concat(skipFeatures, completeStructuralFeatures(context, factory, acceptor, features));
 			if(rule.getType().getMetamodel() instanceof GeneratedMetamodel) {
-				for(String specialAttribute : SemanticHighlightingCalculator.SPECIAL_ATTRIBUTES) {
-					if(!contains(processedFeatures, specialAttribute)) {
-						EAttribute dummyAttribute = EcoreFactory.eINSTANCE.createEAttribute();
-						dummyAttribute.setName(specialAttribute);
-						dummyAttribute.setEType(EcorePackage.Literals.ESTRING);
-						acceptor.accept(createFeatureProposal(dummyAttribute, false, factory, context));
-					}
+				if(notNull(rule.getName()).toLowerCase().startsWith("import")) {
+					completeSpecialAttributeAssignment("importedNamespace", 2, processedFeatures, factory, context, acceptor); 
+					completeSpecialAttributeAssignment("importURI", 1, processedFeatures, factory, context, acceptor); 
+				} else {
+					completeSpecialAttributeAssignment("name", 3, processedFeatures, factory, context, acceptor); 
 				}
 			}
 		}
 		super.completeAssignment_Feature(model, assignment, context, acceptor);
+	}
+
+
+	protected void completeSpecialAttributeAssignment(String specialAttribute, int priorityFactor, Iterable<String> processedFeatures,
+			Function<IEObjectDescription, ICompletionProposal> factory, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if(!contains(processedFeatures, specialAttribute)) {
+			EAttribute dummyAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+			dummyAttribute.setName(specialAttribute);
+			dummyAttribute.setEType(EcorePackage.Literals.ESTRING);
+			acceptor.accept(createFeatureProposal(dummyAttribute, priorityFactor, factory, context));
+		}
 	}
 
 	protected Set<String> completeStructuralFeatures(ContentAssistContext context, Function<IEObjectDescription, ICompletionProposal> factory,
@@ -318,7 +329,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		if (features != null) {
 			Set<String> processedFeatures = newHashSet();
 			for (EStructuralFeature feature : features) {
-				acceptor.accept(createFeatureProposal(feature, true, factory, context));
+				acceptor.accept(createFeatureProposal(feature, 4, factory, context));
 				processedFeatures.add(feature.getName());
 			}
 			return processedFeatures;
@@ -326,13 +337,13 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		return null;
 	}
 	
-	protected ICompletionProposal createFeatureProposal(EStructuralFeature feature, boolean isExists, Function<IEObjectDescription, ICompletionProposal> factory, 
+	protected ICompletionProposal createFeatureProposal(EStructuralFeature feature, int priorityFactor, Function<IEObjectDescription, ICompletionProposal> factory, 
 			ContentAssistContext context) {
 		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(feature.getName()),
 				feature);
 		ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
 		if (proposal != null) {
-			int priorityFactor = (isExists)  ? 3 : 2;
+			proposal.setPriority(proposal.getPriority() * priorityFactor);
 			if(SemanticHighlightingCalculator.SPECIAL_ATTRIBUTES.contains(feature.getName())) {
 				StyledString displayString = stylerFactory.createFromXtextStyle(feature.getName(),
 						semanticHighlightingConfiguration.specialAttribute())
@@ -340,11 +351,8 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 						.append(stylerFactory.createFromXtextStyle(feature.getName(), 
 								semanticHighlightingConfiguration.specialAttribute()));
 				proposal.setDisplayString(displayString);
-				if(!feature.getName().equals("importURI")) 
-					proposal.setPriority(proposal.getPriority() * priorityFactor + 1);
 			} else {
 				proposal.setDisplayString(new StyledString(feature.getName() + " - Assignment of feature " + feature.getName()));
-				proposal.setPriority(proposal.getPriority() * priorityFactor);
 			}
 			if(feature.isMany()) {
 				proposal.setReplacementString(feature.getName() + "+=");
