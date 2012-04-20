@@ -12,14 +12,19 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
-import org.eclipse.xtext.xtext.ui.wizard.project.DslProjectContributor;
 
 @SuppressWarnings("all")
 public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor {
   private Ecore2XtextProjectInfo projectInfo;
   
+  private String sourceRoot;
+  
   public Ecore2XtextDslProjectContributor(final Ecore2XtextProjectInfo projectInfo) {
     this.projectInfo = projectInfo;
+  }
+  
+  public void setSourceRoot(final String sourceRoot) {
+    this.sourceRoot = sourceRoot;
   }
   
   public void contributeFiles(final IProject project, final IFileCreator creator) {
@@ -31,7 +36,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     String _plus_2 = (_plus_1 + ".mwe2");
     creator.writeToFile(_workflow, _plus_2);
     CharSequence _grammar = this.grammar();
-    String _grammarFilePath = DslProjectContributor.grammarFilePath(this.projectInfo);
+    String _grammarFilePath = this.projectInfo.getGrammarFilePath();
     creator.writeToFile(_grammar, _grammarFilePath);
   }
   

@@ -12,26 +12,36 @@ import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 public class DslProjectContributor extends DefaultProjectFactoryContributor {
   private XtextProjectInfo projectInfo;
   
+  private String sourceRoot;
+  
   public DslProjectContributor(final XtextProjectInfo projectInfo) {
     this.projectInfo = projectInfo;
   }
   
+  public void setSourceRoot(final String sourceRoot) {
+    this.sourceRoot = sourceRoot;
+  }
+  
   public void contributeFiles(final IProject project, final IFileCreator creator) {
     CharSequence _workflow = this.workflow();
+    String _plus = (this.sourceRoot + "/");
     String _basePackagePath = this.projectInfo.getBasePackagePath();
-    String _plus = (_basePackagePath + "/Generate");
+    String _plus_1 = (_plus + _basePackagePath);
+    String _plus_2 = (_plus_1 + "/Generate");
     String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
-    String _plus_1 = (_plus + _languageNameAbbreviation);
-    String _plus_2 = (_plus_1 + ".mwe2");
-    creator.writeToFile(_workflow, _plus_2);
+    String _plus_3 = (_plus_2 + _languageNameAbbreviation);
+    String _plus_4 = (_plus_3 + ".mwe2");
+    creator.writeToFile(_workflow, _plus_4);
     CharSequence _grammar = this.grammar();
-    String _grammarFilePath = DslProjectContributor.grammarFilePath(this.projectInfo);
-    creator.writeToFile(_grammar, _grammarFilePath);
+    String _plus_5 = (this.sourceRoot + "/");
+    String _grammarFilePath = this.projectInfo.getGrammarFilePath();
+    String _plus_6 = (_plus_5 + _grammarFilePath);
+    creator.writeToFile(_grammar, _plus_6);
     CharSequence _launchConfig = this.launchConfig();
     String _projectName = this.projectInfo.getProjectName();
-    String _plus_3 = (".launch/Generate Language Infrastructure (" + _projectName);
-    String _plus_4 = (_plus_3 + ").launch");
-    creator.writeToFile(_launchConfig, _plus_4);
+    String _plus_7 = (".launch/Generate Language Infrastructure (" + _projectName);
+    String _plus_8 = (_plus_7 + ").launch");
+    creator.writeToFile(_launchConfig, _plus_8);
   }
   
   private CharSequence workflow() {
@@ -193,14 +203,5 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("</launchConfiguration>");
     _builder.newLine();
     return _builder;
-  }
-  
-  public static String grammarFilePath(final XtextProjectInfo prjInfo) {
-    String _basePackagePath = prjInfo.getBasePackagePath();
-    String _plus = (_basePackagePath + "/");
-    String _languageNameAbbreviation = prjInfo.getLanguageNameAbbreviation();
-    String _plus_1 = (_plus + _languageNameAbbreviation);
-    String _plus_2 = (_plus_1 + ".xtext");
-    return _plus_2;
   }
 }

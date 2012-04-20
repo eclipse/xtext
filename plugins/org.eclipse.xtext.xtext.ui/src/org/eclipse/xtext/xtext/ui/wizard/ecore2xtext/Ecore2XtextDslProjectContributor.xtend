@@ -3,19 +3,23 @@ package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext
 import org.eclipse.core.resources.IProject
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor$IFileCreator
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor
-import org.eclipse.xtext.xtext.ui.wizard.project.DslProjectContributor
 
 class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor {
 	
 	Ecore2XtextProjectInfo projectInfo
+	String sourceRoot
 	
 	new(Ecore2XtextProjectInfo projectInfo) {
 		this.projectInfo = projectInfo
 	}
-
+	
+	def void setSourceRoot(String sourceRoot) {
+		this.sourceRoot = sourceRoot	
+	}
+	
 	override contributeFiles(IProject project, IFileCreator creator) {
 		creator.writeToFile(workflow, projectInfo.basePackagePath+"/Generate"+projectInfo.languageNameAbbreviation+".mwe2")
-		creator.writeToFile(grammar, DslProjectContributor::grammarFilePath(projectInfo))
+		creator.writeToFile(grammar, projectInfo.grammarFilePath)
 	}
 	
 	def private workflow() {

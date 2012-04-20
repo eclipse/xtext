@@ -6,14 +6,19 @@ import org.eclipse.xtext.ui.util.IProjectFactoryContributor$IFileCreator
 class DslProjectContributor extends DefaultProjectFactoryContributor {
 	
 	XtextProjectInfo projectInfo
+	String sourceRoot
 	
 	new(XtextProjectInfo projectInfo) {
 		this.projectInfo = projectInfo
 	}
-
+	
+	def void setSourceRoot(String sourceRoot) {
+		this.sourceRoot = sourceRoot	
+	}
+	
 	override contributeFiles(IProject project, IFileCreator creator) {
-		creator.writeToFile(workflow, projectInfo.basePackagePath + "/Generate" + projectInfo.languageNameAbbreviation+".mwe2")
-		creator.writeToFile(grammar, grammarFilePath(projectInfo))
+		creator.writeToFile(workflow, sourceRoot+"/"+ projectInfo.basePackagePath + "/Generate" + projectInfo.languageNameAbbreviation+".mwe2")
+		creator.writeToFile(grammar, sourceRoot+"/"+ projectInfo.grammarFilePath)
 		creator.writeToFile(launchConfig,".launch/Generate Language Infrastructure (" + projectInfo.projectName + ").launch")
 	}
 	
@@ -90,7 +95,4 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 		'''
 	}
 	
-	def static grammarFilePath(XtextProjectInfo prjInfo) {
-		prjInfo.basePackagePath + "/" + prjInfo.languageNameAbbreviation+".xtext"
-	}
 }

@@ -34,11 +34,11 @@ public class XtextProjectInfo implements IProjectInfo {
 	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
 	private boolean createFeatureProject;
-	
+
 	public boolean isCreateEclipseRuntimeLaunchConfig() {
 		return createEclipseRuntimeLaunchConfig;
 	}
-	
+
 	public void setCreateEclipseRuntimeLaunchConfig(boolean createEclipseRuntimeLaunchConfig) {
 		this.createEclipseRuntimeLaunchConfig = createEclipseRuntimeLaunchConfig;
 	}
@@ -46,11 +46,11 @@ public class XtextProjectInfo implements IProjectInfo {
 	public void setWizardContribution(WizardContribution wizardContribution) {
 		this.wizardContribution = wizardContribution;
 	}
-	
+
 	public WizardContribution getWizardContribution() {
 		return wizardContribution;
 	}
-	
+
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
@@ -62,6 +62,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	public boolean isCreateTestProject() {
 		return createTestProject;
 	}
+
 	public void setCreateTestProject(boolean createTestProject) {
 		this.createTestProject = createTestProject;
 	}
@@ -69,11 +70,11 @@ public class XtextProjectInfo implements IProjectInfo {
 	public boolean isCreateFeatureProject() {
 		return createFeatureProject;
 	}
-	
+
 	public void setCreateFeatureProject(boolean createFeatureProject) {
 		this.createFeatureProject = createFeatureProject;
 	}
-	
+
 	public String getFileExtension() {
 		return fileExtension;
 	}
@@ -176,7 +177,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	public IPath getProjectLocation() {
 		return projectLocation;
 	}
-	
+
 	public IPath getUiProjectLocation() {
 		return projectLocation.removeLastSegments(1).append(getUiProjectName());
 	}
@@ -189,5 +190,11 @@ public class XtextProjectInfo implements IProjectInfo {
 		return projectLocation.removeLastSegments(1).append(getTestProjectName());
 	}
 
-	
+	/**
+	 * @return Source Folder relative path to the Grammar file
+	 */
+	public String getGrammarFilePath() {
+		return getBasePackagePath() + "/" + getLanguageNameAbbreviation() + ".xtext";
+	}
+
 }
