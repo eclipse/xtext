@@ -34,7 +34,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
  */
 public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
-	protected static final int ERROR_TIMEOUT = 2000;
+	protected static final int ERROR_TIMEOUT = 10000;
 	protected static final int EXPECTED_TIMEOUT = 500;
 
 	protected IOutlineNodeComparer nodeComparer = new IOutlineNodeComparer.Default();
