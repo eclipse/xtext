@@ -193,7 +193,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"ML_COMMENT",
         		"ANY_OTHER",
         		"(",
-        		"{");
+        		"{",
+        		"importURI=",
+        		"importedNamespace=",
+        		"name=");
     }
     
     @Test public void testCompleteCrossReference_05() throws Exception {
@@ -216,7 +219,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"WS",
         		"ML_COMMENT",
         		"ANY_OTHER",
-        		"(");
+        		"(",
+        		"importURI=",
+        		"importedNamespace=",
+        		"name=");
     }
     
     @Test public void testEnumCompletion_01() throws Exception {
@@ -313,7 +319,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID;")
 	        .append("RuleB returns RuleA: ")
 	        .assertText(
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -327,7 +332,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
-	        		"=>");
+	        		"=>",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testCompleteFeatureName_02() throws Exception {
@@ -336,7 +344,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID ")
 	        .assertText(
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -355,7 +362,9 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		";",
 	        		"?",
 	        		"|",
-	        		"&");
+	        		"&",
+	        		"importURI=",
+	        		"importedNamespace=");
     }
     
     @Test public void testCompleteFeatureName_03() throws Exception {
@@ -365,8 +374,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
 	        .append("RuleB returns RuleA: ")
 	        .assertText(
-	        		"name",
-	        		"somethingElse",
+	        		"somethingElse=",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -380,7 +388,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
-	        		"=>");
+	        		"=>",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testCompleteFeatureName_04() throws Exception {
@@ -391,7 +402,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("RuleB returns RuleA: =>")
 	        .assertText(
 	        		"=>",
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -403,7 +413,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(");
+	        		"(",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testCompleteFeatureName_05() throws Exception {
@@ -413,7 +426,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID;")
 	        .append("RuleB returns RuleA: => ")
 	        .assertText(
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -425,7 +437,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(");
+	        		"(",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testCompleteFeatureName_06() throws Exception {
@@ -434,7 +449,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .append("RuleA: name=ID =>")
 	        .assertText(
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -446,7 +460,9 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"=>");
+	        		"=>",
+	        		"importURI=",
+	        		"importedNamespace=");
     }
     
     @Test public void testCompleteFeatureName_07() throws Exception {
@@ -455,7 +471,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("generate metamodelA 'http://foo.bar/A'")
 	        .appendNl("RuleA: name=ID => ")
 	        .assertText(
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -466,7 +481,9 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(");
+	        		"(",
+	        		"importURI=",
+	        		"importedNamespace=");
     }
     
     @Test public void testCompleteFeatureName_08() throws Exception {
@@ -476,8 +493,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
 	        .append("RuleB returns RuleA: =>")
 	        .assertText(
-	        		"name",
-	        		"somethingElse",
+	        		"somethingElse=",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -490,7 +506,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
 	        		"(",
-	        		"=>");
+	        		"=>",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testCompleteFeatureName_09() throws Exception {
@@ -500,8 +519,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("RuleA: name=ID somethingElse=ID;")
 	        .append("RuleB returns RuleA: => ")
 	        .assertText(
-	        		"name",
-	        		"somethingElse",
+	        		"somethingElse=",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -513,7 +531,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(");
+	        		"(",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testCompleteFeatureName_10() throws Exception {
@@ -534,7 +555,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("RuleB returns RuleA: =>(name=ID);")
 	        .assertTextAtCursorPosition("(",
 	        		"=>",
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -546,7 +566,9 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(");
+	        		"(",
+	        		"importURI=",
+	        		"importedNamespace=");
     }
     
     @Test public void testCompleteFeatureName_12() throws Exception {
@@ -557,7 +579,6 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("RuleB returns RuleA: =>  name=ID;")
 	        .assertTextAtCursorPosition("  name",
 	        		"=>",
-	        		"name",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -569,7 +590,72 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"WS",
 	        		"ML_COMMENT",
 	        		"ANY_OTHER",
-	        		"(");
+	        		"(",
+	        		"importURI=",
+	        		"importedNamespace=");
+    }
+    
+    @Test public void testCompleteFeatureName_13() throws Exception {
+    	newBuilder()
+	        .appendNl("grammar org.foo.bar")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("import 'http://www.eclipse.org/emf/2002/Ecore'")
+	        .appendNl("RuleA: feature+='x';")
+	        .append("RuleB returns RuleA:  ;")
+	        .assertTextAtCursorPosition(" ;",
+	        		"=>",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"(",
+	        		"{",
+	        		"feature+=",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
+    }
+    
+    @Test public void testCompleteFeatureName_14() throws Exception {
+    	newBuilder()
+	        .appendNl("grammar org.foo.bar")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("import 'http://www.eclipse.org/emf/2002/Ecore'")
+	        .appendNl("RuleA: feature+='x';")
+	        .append("RuleB returns RuleA:   feature+='y' ;")
+	        .assertTextAtCursorPosition("  feat",
+	        		"=>",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"(",
+	        		"{",
+	        		"feature+=",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
+    }
+    
+    @Test public void testCompleteFeatureName_15() throws Exception {
+    	newBuilder()
+	        .appendNl("grammar org.foo.bar")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("import 'http://www.eclipse.org/emf/2002/Ecore'")
+	        .appendNl("RuleA: feature?='x';")
+	        .append("RuleB returns RuleA:  ;")
+	        .assertTextAtCursorPosition(" ;",
+	        		"=>",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"(",
+	        		"{",
+	        		"feature?=",
+	        		"importURI=",
+	        		"importedNamespace=",
+	        		"name=");
     }
     
     @Test public void testAliasCompletion_01() throws Exception {
