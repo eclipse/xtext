@@ -87,7 +87,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	}
 
 	protected String _signature(JvmGenericType clazz, boolean typeAtEnd) {
-		return clazz.getSimpleName();
+		return clazz.getSimpleName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
 	}
 
 	protected String _signature(JvmOperation jvmOperation, boolean typeAtEnd) {
