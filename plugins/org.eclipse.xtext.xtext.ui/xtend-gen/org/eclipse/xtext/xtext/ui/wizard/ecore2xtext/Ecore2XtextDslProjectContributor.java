@@ -10,6 +10,7 @@ import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
 
@@ -35,7 +36,8 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     String _plus_1 = (_plus + _languageNameAbbreviation);
     String _plus_2 = (_plus_1 + ".mwe2");
     creator.writeToFile(_workflow, _plus_2);
-    CharSequence _grammar = this.grammar();
+    Ecore2XtextGrammarCreator _ecore2XtextGrammarCreator = new Ecore2XtextGrammarCreator();
+    CharSequence _grammar = _ecore2XtextGrammarCreator.grammar(this.projectInfo);
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();
     creator.writeToFile(_grammar, _grammarFilePath);
   }
@@ -372,11 +374,6 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    return _builder;
-  }
-  
-  private CharSequence grammar() {
-    StringConcatenation _builder = new StringConcatenation();
     return _builder;
   }
 }
