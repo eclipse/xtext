@@ -127,7 +127,18 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		assertEquals("Foo()",signature)
 	}
 	
-		@Test
+	@Test
+	def testDeclarationOfClazzWithGenrics(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<T,Y> {}
+		''',resourceSet)
+		val clazz = xtendFile.xtendClasses.head
+		val signature = signatureProvider.getSignature(clazz)
+		assertEquals("Foo<T, Y>",signature)
+	}
+
+	@Test
 	def testSignatureForXtendDefaultConstructorWithGenerics(){
 		val xtendFile = parseHelper.parse('''
 		package testPackage

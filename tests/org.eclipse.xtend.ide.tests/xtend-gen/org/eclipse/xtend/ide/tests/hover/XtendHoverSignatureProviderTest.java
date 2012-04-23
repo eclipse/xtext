@@ -232,6 +232,25 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testDeclarationOfClazzWithGenrics() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<T,Y> {}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      final String signature = this.signatureProvider.getSignature(clazz);
+      Assert.assertEquals("Foo<T, Y>", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
   public void testSignatureForXtendDefaultConstructorWithGenerics() {
     try {
       StringConcatenation _builder = new StringConcatenation();
