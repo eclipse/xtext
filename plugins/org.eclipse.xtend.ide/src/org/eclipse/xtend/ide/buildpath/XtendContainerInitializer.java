@@ -40,10 +40,12 @@ import org.osgi.framework.Version;
 public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
 	private static final String XTEXT_XBASE_LIB_BUNDLE_ID = "org.eclipse.xtext.xbase.lib";
+	
+	private static final String XTEND_LIB_BUNDLE_ID = "org.eclipse.xtend.lib";
 
 	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER"); //$NON-NLS-1$
 
-	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.guava", XTEXT_XBASE_LIB_BUNDLE_ID };
+	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.guava", XTEXT_XBASE_LIB_BUNDLE_ID, XTEND_LIB_BUNDLE_ID };
 
 	private static final Logger LOG = Logger.getLogger(XtendContainerInitializer.class);
 
