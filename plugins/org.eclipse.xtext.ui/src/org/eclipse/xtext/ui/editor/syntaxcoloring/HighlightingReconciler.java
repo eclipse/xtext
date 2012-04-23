@@ -22,6 +22,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -150,9 +151,11 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	
 	private Display getDisplay() {
 		XtextEditor editor = this.editor;
-		if (editor == null)
+		if (editor == null){
+			if(sourceViewer != null)
+				return sourceViewer.getControl().getDisplay();
 			return null;
-
+		}
 		IWorkbenchPartSite site = editor.getSite();
 		if (site == null)
 			return null;
@@ -191,7 +194,9 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		this.editor = editor;
 		this.sourceViewer = sourceViewer;
 		if (calculator != null) {
-			if (editor.getDocument() != null)
+			if(editor == null){
+				((IXtextDocument) sourceViewer.getDocument()).addModelListener(this);
+			} else if (editor.getDocument() != null)
 				editor.getDocument().addModelListener(this);
 
 			sourceViewer.addTextInputListener(this);
@@ -206,15 +211,14 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		if (presenter != null)
 			presenter.setCanceled(true);
 
-		if (editor != null) {
+		if (sourceViewer.getDocument() != null) {
 			if (calculator != null) {
-				if (editor.getDocument() != null)
-					editor.getDocument().removeModelListener(this);
+				XtextDocument document = (XtextDocument) sourceViewer.getDocument();
+				document.removeModelListener(this);
 				sourceViewer.removeTextInputListener(this);
 			}
-			editor = null;
 		}
-
+		editor = null;
 		sourceViewer = null;
 		presenter = null;
 	}
@@ -242,7 +246,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 */
 	public void refresh() {
 		if (calculator != null) {
-			editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			((XtextDocument) sourceViewer.getDocument()).readOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource state) throws Exception {
 					modelChanged(state);

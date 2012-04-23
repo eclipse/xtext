@@ -39,10 +39,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.codetemplates.ui.internal.CodetemplatesActivator;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory.Builder;
-import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory.Builder;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.validation.Issue;
 
@@ -281,12 +281,6 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 		control.setLayoutData(data);
 		return viewer;
 	}
-
-	@Override
-	public boolean close() {
-		configuration.getHighlightingHelper().uninstall();
-		return super.close();
-	}
 	
 	protected SourceViewer createViewer(Composite parent) {
 		Builder editorBuilder = configuration.getEmbeddedEditorFactory().newEditor(resourceProvider);
@@ -314,7 +308,6 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 		});
 		EmbeddedEditor handle = editorBuilder.withParent(parent);
 		partialModelEditor = handle.createPartialEditor(getPrefix(), fTemplate.getPattern(), "", true);
-		configuration.getHighlightingHelper().install(handle.getConfiguration(), handle.getViewer());
 		return handle.getViewer();
 	}
 	
