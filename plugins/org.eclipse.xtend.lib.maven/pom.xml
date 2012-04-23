@@ -18,6 +18,12 @@
 			<version>10.0.1</version>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>local-repository</id>
+			<url>file:///shared/common/xtend/maven/</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<sourceDirectory>../org.eclipse.xtend.lib/src</sourceDirectory>
 		<plugins>

@@ -7,6 +7,12 @@
 	<version>2.3.0-SNAPSHOT</version>
 	<name>Xtend Maven Plugin</name>
 	<url>http://xtend-lang.org</url>
+	<distributionManagement>
+		<repository>
+			<id>local-repository</id>
+			<url>file:///shared/common/xtend/maven/</url>
+		</repository>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
@@ -170,7 +176,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!-- <distributionManagement> <repository> <id>xtend-releases</id> <name>Eclipse xtend Releases</name> <url>http://maven.eclipse.org/nexus/content/repositories/testing/</url> 
-		</repository> <snapshotRepository> <id>xtend-snapshot</id> <name>Eclipse xtend Snapshots</name> <url>http://maven.eclipse.org/nexus/content/repositories/snapshots/</url> 
-		</snapshotRepository> </distributionManagement> -->
 </project>
