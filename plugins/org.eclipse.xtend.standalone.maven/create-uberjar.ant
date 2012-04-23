@@ -6,8 +6,8 @@
 	 3. Where to put output = output.folder
 	-->
 	<property name="eclipsePluginFolder" value="/Users/dhuebner/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="xtextPluginFolder" value="/Users/dhuebner/Downloads/tmf-xtext-Update-2.3.0M6/plugins/" />
-	<property name="maven.version" value="2.3.0" />
+	<property name="xtextPluginFolder" value="/Users/dhuebner/Downloads/tmf-xtext-Update-2.3.0N/plugins/" />
+	<property name="maven.version" value="2.3.0-SNAPSHOT" />
 	<property name="output.folder" value="output" />
 	<echo>${maven.version}</echo>
 
@@ -73,6 +73,7 @@
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="binXtextJars">
 			<include name="org.eclipse.xtend.core_2.3*.jar" />
+			<include name="org.eclipse.xtend.lib_2.3*.jar" />
 			<include name="org.eclipse.xtext.common.types_2.3*.jar" />
 			<include name="org.eclipse.xtext.util_2.3*.jar" />
 			<include name="org.eclipse.xtext.xbase.lib_2.3*.jar" />
@@ -121,6 +122,7 @@
 		<!-- Xtext bundles -->
 		<fileset dir="${xtextPluginFolder}" id="sourceXtextJars">
 			<include name="org.eclipse.xtend.core.source_2.3*.jar" />
+			<include name="org.eclipse.xtend.lib.source_2.3*.jar" />
 			<include name="org.eclipse.xtext.common.types.source_2.3*.jar" />
 			<include name="org.eclipse.xtext.source_2.3*.jar" />
 			<include name="org.eclipse.xtext.util.source_2.3*.jar" />
