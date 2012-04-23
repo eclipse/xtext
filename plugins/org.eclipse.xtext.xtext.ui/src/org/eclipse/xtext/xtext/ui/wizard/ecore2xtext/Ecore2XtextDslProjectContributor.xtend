@@ -19,7 +19,7 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 	
 	override contributeFiles(IProject project, IFileCreator creator) {
 		creator.writeToFile(workflow, projectInfo.basePackagePath+"/Generate"+projectInfo.languageNameAbbreviation+".mwe2")
-		creator.writeToFile(grammar, projectInfo.grammarFilePath)
+		creator.writeToFile(new Ecore2XtextGrammarCreator().grammar(projectInfo), projectInfo.grammarFilePath)
 	}
 	
 	def private workflow() {
@@ -146,18 +146,6 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 			}
 		}
 		'''
-	}
-	
-	def private grammar() {
-		''''''
-/*TODO		«resetUniqueNames(defaultEPackageInfo)-»
-«FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
-«EXPAND grammarDeclaration-»
-«EXPAND metamodelImport FOREACH allReferencedEPackages()-»
-«EXPAND rules FOR rootElementClass-»
-«EXPAND subClassDispatcherRule FOREACH allDispatcherRuleClasses().remove(rootElementClass)-»
-«EXPAND rule FOREACH allConcreteRuleClassifiers().remove(rootElementClass)-»
-«ENDFILE»*/
 	}
 	
 }
