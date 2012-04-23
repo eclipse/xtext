@@ -242,8 +242,6 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 					return;
 				embeddedEditorAccess.updateModel("", "a", "");
 				embeddedEditorAccess.updateModel(castedInput.getPrefix() , unsugaredExpression ,castedInput.getSuffix());
-				//FIXME : Remove this one when https://bugs.eclipse.org/bugs/show_bug.cgi?id=368800 is solved
-				xbaseHoverConfiguration.getHighlightingHelper().install(embeddedEditor.getConfiguration(),embeddedEditor.getViewer());
 			}
 		}
 

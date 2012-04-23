@@ -18,8 +18,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage;
 
 import com.google.inject.Inject;
@@ -88,14 +88,6 @@ public class AdvancedTemplatesPreferencePage extends XtextTemplatePreferencePage
 	protected SourceViewer createViewer(Composite parent) {
 		EmbeddedEditor handle = configuration.getEmbeddedEditorFactory().newEditor(resourceProvider).readOnly().withParent(parent);
 		partialEditor = handle.createPartialEditor(true);
-		configuration.getHighlightingHelper().install(handle.getConfiguration(), handle.getViewer());
 		return handle.getViewer();
 	}
-	
-	@Override
-	public void dispose() {
-		configuration.getHighlightingHelper().uninstall();
-		super.dispose();
-	}
-
 }

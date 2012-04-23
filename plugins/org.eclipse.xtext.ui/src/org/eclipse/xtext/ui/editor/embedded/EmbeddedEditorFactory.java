@@ -58,6 +58,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
@@ -125,6 +126,9 @@ public class EmbeddedEditorFactory {
 		@Inject
 		protected EmbeddedEditorActions.Factory actionFactory;
 		
+		@Inject
+		protected HighlightingHelper highlightingHelper;
+
 		protected IEditedResourceProvider resourceProvider;
 		protected String[] annotationTypes;
 //		protected Boolean lineNumbers;
@@ -188,7 +192,7 @@ public class EmbeddedEditorFactory {
 					null, // overviewRuler
 					false, // showAnnotationOverview 
 					SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
-			XtextSourceViewerConfiguration viewerConfiguration = this.sourceViewerConfigurationProvider.get();
+			final XtextSourceViewerConfiguration viewerConfiguration = this.sourceViewerConfigurationProvider.get();
 			viewer.configure(viewerConfiguration);
 
 			// squiggles for markers and other decorations
@@ -221,17 +225,19 @@ public class EmbeddedEditorFactory {
 			IDocumentPartitioner partitioner = this.documentPartitionerProvider.get();
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
-			
+
 			final EmbeddedEditorActions actions = initializeActions(viewer);
 			parent.addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent e) {
 					viewerDecorationSupport.dispose();
+					highlightingHelper.uninstall();
 				}
 			});
 			final EmbeddedEditor result = new EmbeddedEditor(
 					document, viewer, viewerConfiguration, resourceProvider, new Runnable() {
 						public void run() {
 							afterCreatePartialEditor(viewer, document, annotationRuler, actions);
+							highlightingHelper.install(viewerConfiguration, viewer);
 						}
 					});
 			viewer.setEditable(!Boolean.TRUE.equals(readonly));
@@ -311,7 +317,6 @@ public class EmbeddedEditorFactory {
 			Control control = viewer.getControl();
 			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			control.setLayoutData(data);
-
 			return result;
 		}
 		
