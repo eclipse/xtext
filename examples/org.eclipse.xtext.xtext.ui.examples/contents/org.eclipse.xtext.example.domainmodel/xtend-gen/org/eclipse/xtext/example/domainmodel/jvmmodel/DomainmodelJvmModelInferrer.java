@@ -133,8 +133,8 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
             }
           }
           EList<JvmMember> _members_2 = it.getMembers();
-          JvmOperation _addToStringMethod = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.addToStringMethod(entity, it);
-          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _addToStringMethod);
+          JvmOperation _toStringMethod = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toToStringMethod(entity, it);
+          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _toStringMethod);
         }
       };
     _accept.initializeLater(_function);

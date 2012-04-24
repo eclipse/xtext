@@ -33,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -63,7 +62,6 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
@@ -74,6 +72,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
@@ -97,6 +96,9 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private TreeAppendableUtil _treeAppendableUtil;
+  
+  @Inject
+  private JvmTypeExtensions _jvmTypeExtensions;
   
   @Inject
   private XbaseCompiler compiler;
@@ -558,37 +560,9 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected boolean _generateMember(final JvmConstructor it, final ITreeAppendable appendable, final boolean first) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _or_2 = false;
-    EList<JvmFormalParameter> _parameters = it.getParameters();
-    boolean _isEmpty = _parameters.isEmpty();
-    boolean _not = (!_isEmpty);
+    boolean _isSingleSyntheticDefaultConstructor = this._jvmTypeExtensions.isSingleSyntheticDefaultConstructor(it);
+    boolean _not = (!_isSingleSyntheticDefaultConstructor);
     if (_not) {
-      _or_2 = true;
-    } else {
-      XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _notEquals = (!Objects.equal(_associatedExpression, null));
-      _or_2 = (_not || _notEquals);
-    }
-    if (_or_2) {
-      _or_1 = true;
-    } else {
-      Procedure1<ITreeAppendable> _compilationStrategy = this.compilationStrategy(it);
-      boolean _notEquals_1 = (!Objects.equal(_compilationStrategy, null));
-      _or_1 = (_or_2 || _notEquals_1);
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      JvmDeclaredType _declaringType = it.getDeclaringType();
-      EList<JvmMember> _members = _declaringType.getMembers();
-      Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
-      int _size = IterableExtensions.size(_filter);
-      boolean _notEquals_2 = (_size != 1);
-      _or = (_or_1 || _notEquals_2);
-    }
-    if (_or) {
       ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
       _increaseIndentation.newLine();
       boolean _not_1 = (!first);
@@ -616,12 +590,12 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateInitialization(final JvmField it, final ITreeAppendable appendable) {
-    Procedure1<ITreeAppendable> _compilationStrategy = this.compilationStrategy(it);
+    Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
     boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
     if (_notEquals) {
       appendable.append(" = ");
       appendable.increaseIndentation();
-      Procedure1<ITreeAppendable> _compilationStrategy_1 = this.compilationStrategy(it);
+      Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(it);
       _compilationStrategy_1.apply(appendable);
       appendable.decreaseIndentation();
     } else {
@@ -781,14 +755,14 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable) {
-    Procedure1<ITreeAppendable> _compilationStrategy = this.compilationStrategy(op);
+    Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
     boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
     if (_notEquals) {
       appendable.openScope();
       ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
       ITreeAppendable _append = _increaseIndentation.append("{");
       _append.newLine();
-      Procedure1<ITreeAppendable> _compilationStrategy_1 = this.compilationStrategy(op);
+      Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(op);
       _compilationStrategy_1.apply(appendable);
       ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
@@ -1401,25 +1375,6 @@ public class JvmModelGenerator implements IGenerator {
         appendable.append(" }");
       }
     }
-  }
-  
-  public Procedure1<ITreeAppendable> compilationStrategy(final JvmIdentifiableElement it) {
-    Procedure1<ITreeAppendable> _xblockexpression = null;
-    {
-      EList<Adapter> _eAdapters = it.eAdapters();
-      Iterable<CompilationStrategyAdapter> _filter = Iterables.<CompilationStrategyAdapter>filter(_eAdapters, CompilationStrategyAdapter.class);
-      final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
-      Procedure1<ITreeAppendable> _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(adapter, null));
-      if (_notEquals) {
-        Procedure1<ITreeAppendable> _compilationStrategy = adapter.getCompilationStrategy();
-        _xifexpression = _compilationStrategy;
-      } else {
-        _xifexpression = null;
-      }
-      _xblockexpression = (_xifexpression);
-    }
-    return _xblockexpression;
   }
   
   public String serialize(final JvmTypeReference it, final ITreeAppendable appendable) {

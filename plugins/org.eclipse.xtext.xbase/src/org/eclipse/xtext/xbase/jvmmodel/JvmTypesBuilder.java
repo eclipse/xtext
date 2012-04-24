@@ -525,7 +525,11 @@ public class JvmTypesBuilder {
 			return null;
 		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		result.setSimpleName("get" + Strings.toFirstUpper(propertyName));
+		String prefix = "get";
+		if (typeRef != null && !typeRef.eIsProxy() && !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier())) {
+			prefix = "is";
+		}
+		result.setSimpleName(prefix + Strings.toFirstUpper(propertyName));
 		result.setReturnType(cloneWithProxies(typeRef));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
 			public void apply(@Nullable ITreeAppendable p) {
@@ -627,28 +631,152 @@ public class JvmTypesBuilder {
 	 * @return a result representing a Java toString() method, <code>null</code> if sourceElement or declaredType are <code>null</code>.
 	 */
 	@Nullable 
-	public JvmOperation addToStringMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType) {
+	public JvmOperation toToStringMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType) {
+		if(sourceElement == null || declaredType == null)
+			return null;
+		return toToStringMethod(sourceElement, declaredType, toArray(filter(declaredType.getMembers(), JvmField.class), JvmField.class));
+	}
+	
+	@Nullable 
+	public JvmOperation toToStringMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType, final JvmField ...jvmFields) {
 		if(sourceElement == null || declaredType == null)
 			return null;
 		JvmOperation result = toMethod(sourceElement, "toString", newTypeRef(sourceElement, String.class), null);
+		if (result == null)
+			return null;
+		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
 		setBody(result, new Procedure1<ITreeAppendable>() {
 			public void apply(@Nullable ITreeAppendable p) {
-				if(p != null) {
-					String name = declaredType.getSimpleName();
-					p = p.trace(sourceElement);
-					p.append("StringBuilder result = new StringBuilder(\"\\n"+name+" {\");\n");
-					for (JvmField jvmField : filter(declaredType.getAllFeatures(), JvmField.class)) {
-						if(visibilityService.isVisible(jvmField, declaredType)) {
-							ITreeAppendable innerP = p.trace(jvmField);
-							innerP.append("result.append(\"\\n  "+jvmField.getSimpleName()+" = \").append(String.valueOf("+jvmField.getSimpleName()+").replace(\"\\n\",\"\\n  \"));\n");
-						}
+				if (p == null)
+					return;
+				p.append("String superToString = super.toString();");
+				p.newLine().append("if (superToString == null) superToString = \"\";");
+				p.newLine().append("int start = superToString.indexOf('[');");
+				p.newLine().append("int end = superToString.lastIndexOf(']');");
+				p.newLine().append("superToString = (start == -1 || end == -1) ? \"\" : (superToString.substring(start + 1,end) + \", \");");
+				p.newLine().append("return \""+declaredType.getSimpleName()+" [\" + superToString ").increaseIndentation().increaseIndentation();
+				for (int i = 0; i < jvmFields.length; i++) {
+					JvmField field = jvmFields[i];
+					p.newLine().append(" + \"" + field.getSimpleName() +" = \" + " + field.getSimpleName());
+					if (i +1 < jvmFields.length) {
+						p.append(" + \", \"");
 					}
-					p.append("result.append(\"\\n}\");\nreturn result.toString();\n");
 				}
+				p.append(" + \"]\";").decreaseIndentation().decreaseIndentation();
 			}
 		});
 		return result;
 	}
+	
+	public @Nullable JvmOperation toHashCodeMethod(@Nullable final EObject sourceElement, final boolean extendsSomethingWithProperHashCode, @Nullable final JvmDeclaredType declaredType) {
+		if (sourceElement == null || declaredType == null)
+			return null;
+		return toHashCodeMethod(sourceElement, extendsSomethingWithProperHashCode, toArray(filter(declaredType.getMembers(), JvmField.class), JvmField.class));
+	}
+	
+	public @Nullable JvmOperation toHashCodeMethod(@Nullable final EObject sourceElement, final boolean extendsSomethingWithProperHashCode, final JvmField ...jvmFields) {
+		if (sourceElement == null)
+			return null;
+		JvmOperation result = toMethod(sourceElement, "hashCode", this.references.getTypeForName(Integer.TYPE, sourceElement), null);
+		if (result == null)
+			return null;
+		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
+		setBody(result, new Procedure1<ITreeAppendable>() {
+			public void apply(@Nullable ITreeAppendable p) {
+				if (p == null)
+					return;
+				p.append("final int prime = 31;");
+				if (extendsSomethingWithProperHashCode) {
+					p.newLine().append("int result = super.hashCode();");
+				} else{
+					p.newLine().append("int result = 1;");
+				}
+				for (JvmField field : jvmFields) {
+					String typeName = field.getType().getIdentifier();
+					if (Boolean.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + (" + field.getSimpleName() +" ? 1231 : 1237);");
+					} else if (Integer.TYPE.getName().equals(typeName)
+							|| Character.TYPE.getName().equals(typeName)
+							|| Byte.TYPE.getName().equals(typeName)
+							|| Short.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + " + field.getSimpleName() +";");
+					} else if (Long.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + (int) (" + field.getSimpleName() +" ^ (" + field.getSimpleName() + " >>> 32));");
+					} else if (Float.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + Float.floatToIntBity(" + field.getSimpleName() +");");
+					} else if (Double.TYPE.getName().equals(typeName)) {
+						p.newLine().append("result = prime * result + (int) (Double.doubleToLongBits(" + field.getSimpleName() +") ^ (Double.doubleToLongBits(" + field.getSimpleName() + ") >>> 32));");
+					} else {
+						p.newLine().append("result = prime * result + ((" + field.getSimpleName() +"== null) ? 0 : "+field.getSimpleName()+".hashCode());");
+					}
+				}
+				p.newLine().append("return result;");
+			}
+		});
+		return result;
+	}
+	
+	public @Nullable JvmOperation toEqualsMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType, final boolean isDelegateToSuperEquals) {
+		if (sourceElement == null || declaredType == null)
+			return null;
+		return toEqualsMethod(sourceElement, declaredType, isDelegateToSuperEquals, toArray(filter(declaredType.getMembers(), JvmField.class), JvmField.class));
+	}
+	
+	public @Nullable JvmOperation toEqualsMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType, final boolean isDelegateToSuperEquals, final JvmField ...jvmFields) {
+		if (sourceElement == null || declaredType == null)
+			return null;
+		JvmOperation result = toMethod(sourceElement, "equals", references.getTypeForName(Boolean.TYPE, sourceElement), null);
+		if (result == null)
+			return null;
+		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
+		result.getParameters().add( toParameter(sourceElement, "obj", references.getTypeForName(Object.class, sourceElement)));
+		setBody(result, new Procedure1<ITreeAppendable>() {
+				public void apply(@Nullable ITreeAppendable p) {
+					if (p == null)
+						return;
+					p.append("if (this == obj)").increaseIndentation();
+						p.newLine().append("return true;").decreaseIndentation();
+					p.newLine().append("if (obj == null)").increaseIndentation();
+						p.newLine().append("return false;").decreaseIndentation();
+					p.newLine().append("if (getClass() != obj.getClass())").increaseIndentation();
+						p.newLine().append("return false;").decreaseIndentation();
+					if (isDelegateToSuperEquals) {
+						p.newLine().append("if (!super.equals(obj))").increaseIndentation();
+							p.newLine().append("return false;").decreaseIndentation();
+					}
+					p.newLine().append(declaredType.getSimpleName()+" other = (" + declaredType.getSimpleName() + ") obj;");
+					for (JvmField field : jvmFields) {
+						String typeName = field.getType().getIdentifier();
+						if (Boolean.TYPE.getName().equals(typeName) 
+								|| Integer.TYPE.getName().equals(typeName)
+								|| Long.TYPE.getName().equals(typeName)
+								|| Character.TYPE.getName().equals(typeName)
+								|| Byte.TYPE.getName().equals(typeName)
+								|| Short.TYPE.getName().equals(typeName)) {
+							p.newLine().append("if (other." + field.getSimpleName() +" != " + field.getSimpleName() + ")").increaseIndentation();
+								p.newLine().append("return false;").decreaseIndentation();
+							
+						} else if (Double.TYPE.getName().equals(typeName)) {
+							p.newLine().append("if (Double.doubleToLongBits(other." + field.getSimpleName() +") != Double.doubleToLongBits(" + field.getSimpleName() + "))").increaseIndentation();
+							p.newLine().append("return false;").decreaseIndentation();
+						} else if (Float.TYPE.getName().equals(typeName)) {
+							p.newLine().append("if (Float.floatToIntBits(other." + field.getSimpleName() +") != Float.floatToIntBits(" + field.getSimpleName() + "))").increaseIndentation();
+							p.newLine().append("return false;").decreaseIndentation();
+						} else {
+							p.newLine().append("if (" + field.getSimpleName() +" == null) {").increaseIndentation();
+								p.newLine().append("if (other." + field.getSimpleName() +" != null)").increaseIndentation();
+									p.newLine().append("return false;").decreaseIndentation();
+								p.decreaseIndentation();
+							p.newLine().append("} else if (!"+ field.getSimpleName() +".equals(other."+ field.getSimpleName() +"))").increaseIndentation();
+								p.newLine().append("return false;").decreaseIndentation();
+						}
+					}
+					p.newLine().append("return true;");
+				}
+			});
+		return result;
+	}
+	
 
 	/**
 	 * Creates and returns an annotation reference of the given annotation type.
@@ -1039,4 +1167,5 @@ public class JvmTypesBuilder {
 
 		void appendValue(JvmAnnotationValue value, XExpression expr);
 	}
+	
 }
