@@ -25,7 +25,6 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	public static final String FIELD = "xbase.field";
 	public static final String ANNOTATION = "xbase.annotation";
 	public static final String EXTENSION_METHOD_INVOCATION = "xbase.extension.method.invacation";
-	public static final String EXTENSION_METHOD_INVOCATION_WITH_IMPLICIT_ARGUMENT = "xbase.extension.method.invacation.with.implicit.argument";
 	public static final String DEPRECATED_MEMBERS = "xbase.deprecated.members";
 
 	@Override
@@ -35,7 +34,6 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(FIELD, "Field", field());
 		acceptor.acceptDefaultHighlighting(ANNOTATION, "Annotation", annotation());
 		acceptor.acceptDefaultHighlighting(EXTENSION_METHOD_INVOCATION, "Extension method invocation", extensionMethodInvocation());
-		acceptor.acceptDefaultHighlighting(EXTENSION_METHOD_INVOCATION_WITH_IMPLICIT_ARGUMENT, "Method invocation with implicit argument", extensionMethodInvocation());
 		acceptor.acceptDefaultHighlighting(DEPRECATED_MEMBERS, "Deprecated members", deprecatedMembers());
 	
 		super.configure(acceptor);

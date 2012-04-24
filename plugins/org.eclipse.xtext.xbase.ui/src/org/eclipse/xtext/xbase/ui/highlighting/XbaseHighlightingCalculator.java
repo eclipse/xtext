@@ -41,12 +41,14 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.collect.Maps;
@@ -166,17 +168,31 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 			}
-			if (featureCall instanceof XMemberFeatureCall || (featureCall instanceof XAssignment && ((XAssignment)featureCall).getValue() != null)){
+			XExpression implicitReceiver = featureCall.getImplicitReceiver();
+			if (featureCall instanceof  XMemberFeatureCall){
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(featureCall.getImplicitReceiver() != null || ((JvmOperation) feature).isStatic()){
-						highlightFeatureCall(featureCall, acceptor, 
+					if(((JvmOperation) feature).isStatic()){
+							highlightFeatureCall(featureCall, acceptor, 
 								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+					}
+					if(implicitReceiver != null){
+							highlightFeatureCall(featureCall, acceptor, 
+								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+					}
+				}
+			}
+			if((featureCall instanceof XAssignment && ((XAssignment)featureCall).getValue() != null)){
+				if(!feature.eIsProxy() && feature instanceof JvmOperation){
+					if(implicitReceiver instanceof XMemberFeatureCall){
+						if(((XMemberFeatureCall) implicitReceiver).getFeature() instanceof JvmField)
+							highlightFeatureCall(featureCall, acceptor, 
+									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 					}
 				}
 			}
 			if (featureCall instanceof XFeatureCall){
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if((featureCall.getImplicitReceiver() != null && ((JvmOperation) feature).isStatic()))
+					if((implicitReceiver != null && ((JvmOperation) feature).isStatic()))
 							highlightFeatureCall(featureCall, acceptor, 
 									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 				}
@@ -185,7 +201,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				if(!feature.eIsProxy() && feature instanceof JvmOperation){
 					if(featureCall.getImplicitFirstArgument() != null){
 						highlightFeatureCall(featureCall, acceptor, 
-								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION_WITH_IMPLICIT_ARGUMENT);
+								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 					}
 				}
 			}
