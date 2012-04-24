@@ -8,7 +8,6 @@
 	<modules>
 		<module>../org.eclipse.xtend.lib.maven</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
-		
 		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.maven</module>
 	</modules>
 	<distributionManagement>
@@ -18,6 +17,23 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<deployment.url>file:////Users/dhuebner/git/org.eclipse.xtend/plugins/org.eclipse.xtend.standalone.maven/</deployment.url>
+		<deployment.url>file:///shared/common/xtend/maven/</deployment.url>
 	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+		</plugins>
+	</build>
+	<name>Xtend Parent/Container</name>
+	<repositories>
+		<repository>
+			<id>build-eclipse-org-xtend</id>
+			<name>Xtext/Xtend provisional repository</name>
+			<url>http://build.eclipse.org/common/xtend/maven/</url>
+		</repository>
+	</repositories>
 </project>
