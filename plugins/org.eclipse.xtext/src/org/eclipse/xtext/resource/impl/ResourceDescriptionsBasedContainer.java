@@ -44,10 +44,6 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 
 	public ResourceDescriptionsBasedContainer(IResourceDescriptions descriptions) {
 		this.descriptions = descriptions;
-		if (descriptions instanceof IResourceDescription.Event.Source) {
-			IResourceDescription.Event.Source source = (IResourceDescription.Event.Source) descriptions;
-			source.addListener(this);
-		}
 	}
 	
 	@Override
