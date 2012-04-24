@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
+import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.resource.XtextResource;
@@ -25,8 +27,6 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
-import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
-import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.junit.Test;
 
 import com.google.common.collect.HashMultimap;
@@ -257,7 +257,6 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	@Test public void testStaticFieldAccess() throws Exception {
 		String model = "{ Integer::MAX_VALUE }";
 		expectAbsolute(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingConfiguration.STATIC_FIELD);
-		notExpectAbsolute(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingConfiguration.FIELD);
 		highlight(model);
 	}
 	
@@ -299,12 +298,22 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 		String model = "def toUpperCase(List<String> it) { map [ toUpperCase ]}";
 		expectAbsolute(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		expectAbsolute(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+		highlight(model);
 	}
 	
 	@Test public void testLocalExtensionOperation() throws Exception {
 		addImport("java.util.List");
 		String model = "def void zonk(List<String> it) { zonk }";
 		expectAbsolute(model.lastIndexOf("zonk"), 4, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
+
+	@Test public void testBug377413(){
+		addImport("java.util.List");
+		String model = "def void bar(Foo it){ zonk = '42' } def setZonk(String x){} def void fooBar(List<String> it) { fooBar }";
+		notExpectAbsolute(model.indexOf("zonk"),4,XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.lastIndexOf("fooBar"), 6, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
 	}
 	
 	@Test public void testAnnotaton() throws Exception {
@@ -336,7 +345,6 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 		String model = "{} @Inject StringBuilder bar";
 		expectAbsolute(model.lastIndexOf("@"), 1,XbaseHighlightingConfiguration.ANNOTATION);
 		expectAbsolute(model.lastIndexOf("Inject"), 6, XbaseHighlightingConfiguration.ANNOTATION);
-		expectAbsolute(model.lastIndexOf("bar"), 3, XbaseHighlightingConfiguration.FIELD);
 		notExpectAbsolute(model.lastIndexOf("bar"), 3, XbaseHighlightingConfiguration.STATIC_FIELD);
 		highlight(model);
 	}
@@ -447,9 +455,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	@Test public void testDeclaredStaticField() throws Exception {
 		String model = "{} private static String foo def bar() {foo}";
 		expectAbsolute(model.indexOf("foo"), 3,XbaseHighlightingConfiguration.STATIC_FIELD);
-		expectAbsolute(model.indexOf("foo"), 3,XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.lastIndexOf("foo"), 3,XbaseHighlightingConfiguration.STATIC_FIELD);
-		expectAbsolute(model.lastIndexOf("foo"), 3,XbaseHighlightingConfiguration.FIELD);
+		highlight(model);
 	}
 	
 	

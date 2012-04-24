@@ -149,6 +149,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		}
 	}
 
+	@SuppressWarnings("null")
 	protected RichStringHighlighter createRichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 		return new RichStringHighlighter(acceptor);
 	}
@@ -169,9 +170,10 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			List<INode> nodes = NodeModelUtils.findNodesForFeature(field, XtendPackage.Literals.XTEND_FIELD__NAME);
 			if(nodes.size() > 0){
 				INode node = nodes.get(0);
-				highlightNode(node, XbaseHighlightingConfiguration.FIELD, acceptor);
 				if(field.isStatic())
 					highlightNode(node, XbaseHighlightingConfiguration.STATIC_FIELD, acceptor);
+				else
+					highlightNode(node, XbaseHighlightingConfiguration.FIELD, acceptor);
 			}
 		}
 	}
