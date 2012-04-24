@@ -16,7 +16,7 @@ import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
-import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
+import org.eclipse.xtext.resource.containers.LiveStateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 
@@ -28,7 +28,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-		.addTypeToType(IContainer.Manager.class.getName(), StateBasedContainerManager.class.getName())
+		.addTypeToType(IContainer.Manager.class.getName(), LiveStateBasedContainerManager.class.getName())
 		.addTypeToType(IAllContainersState.Provider.class.getName(),
 				org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateProvider.class.getName())
 		.addConfiguredBinding(
