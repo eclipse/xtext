@@ -52,7 +52,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 					}
 				}
 			}
-			members += entity.addToStringMethod(it)
+			members += entity.toToStringMethod(it)
 		]
 	}
 	
