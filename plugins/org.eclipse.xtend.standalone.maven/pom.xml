@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.xtend</groupId>
+	<artifactId>org.eclipse.xtend.maven</artifactId>
+	<packaging>pom</packaging>
+	<version>2.3.0-SNAPSHOT</version>
+	<modules>
+		<module>../org.eclipse.xtend.lib.maven</module>
+		<module>../org.eclipse.xtend.maven.plugin</module>
+		
+		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.maven</module>
+	</modules>
+	<distributionManagement>
+		<repository>
+			<id>local-repository</id>
+			<url>${deployment.url}</url>
+		</repository>
+	</distributionManagement>
+	<properties>
+		<deployment.url>file:////Users/dhuebner/git/org.eclipse.xtend/plugins/org.eclipse.xtend.standalone.maven/</deployment.url>
+	</properties>
+</project>
