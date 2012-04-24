@@ -1,7 +1,0 @@
-grammar org.eclipse.xtext.resource.FlatResourceSetBasedAllContainersStateTestLanguage with org.eclipse.xtext.common.Terminals
-
-generate flatResourceSetBasedAllContainersStateTest "http://www.xtext.org/FlatResourceSetBasedAllContainersStateTestLanguage"
-
-Model:
-	name=ID
-;
