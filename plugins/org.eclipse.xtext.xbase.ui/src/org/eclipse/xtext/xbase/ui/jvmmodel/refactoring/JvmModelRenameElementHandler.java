@@ -50,7 +50,7 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 						transform(filter(jvmElements, JvmIdentifiableElement.class),
 								new Function<JvmIdentifiableElement, IJavaElement>() {
 									public IJavaElement apply(JvmIdentifiableElement from) {
-										return getJavaElementFinder().findElementFor(from);
+										return getJavaElementFinder().findExactElementFor(from);
 									}
 								}), Predicates.notNull()));
 				if (!javaElements.isEmpty()) {

@@ -26,9 +26,20 @@ public interface IJavaElementFinder {
 	 * tries to find the {@link IJavaElement} for the container of {@code element}. Returns 
 	 * <code>null</code> if no suitable result can be found. If the given {@code element} is <code>null</code>,
 	 * the result will be <code>null</code>.
+	 * 
 	 * @param element the identifiable. May be <code>null</code>.
 	 * @return the found {@link IJavaElement} or <code>null</code>.
 	 */
 	IJavaElement findElementFor(JvmIdentifiableElement element);
+	
+	/**
+	 * Find the {@link IJavaElement} for the {@code element}. 
+	 * Returns <code>null</code> if no suitable result can be found. If the given {@code element} is <code>null</code>,
+	 * the result will be <code>null</code>.
+	 * 
+	 * @param element the identifiable. May be <code>null</code>.
+	 * @return the found {@link IJavaElement} or <code>null</code>.
+	 */
+	IJavaElement findExactElementFor(JvmIdentifiableElement element);
 	
 }
