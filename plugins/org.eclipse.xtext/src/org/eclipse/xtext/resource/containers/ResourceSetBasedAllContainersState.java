@@ -19,6 +19,11 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 
 /**
+ * This implementation {@link IAllContainersState} associates resource (e.g. their URIs) to containers. It assumes that
+ * all URIs and their containers are known when {@link #configure(List, Multimap)} is called.
+ * 
+ * @see FlatResourceSetBasedAllContainersState
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ResourceSetBasedAllContainersState implements IAllContainersState {
