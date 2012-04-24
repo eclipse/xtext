@@ -24,7 +24,6 @@ import org.eclipse.xtext.common.types.JvmFloatAnnotationValue
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue
 import org.eclipse.xtext.common.types.JvmMember
@@ -56,6 +55,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 /**
  * A generator implementation that processes the 
@@ -67,6 +67,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
 	@Inject extension TreeAppendableUtil
+	@Inject extension JvmTypeExtensions
 	@Inject XbaseCompiler compiler
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject ILocationInFileProvider locationProvider
@@ -292,7 +293,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def dispatch boolean generateMember(JvmConstructor it, ITreeAppendable appendable, boolean first) {
-		if(!parameters.empty || associatedExpression != null || compilationStrategy != null || declaringType.members.filter(typeof(JvmConstructor)).size != 1) {
+		if(!isSingleSyntheticDefaultConstructor) {
 			appendable.increaseIndentation.newLine
 			if (!first)
 				appendable.newLine
@@ -662,14 +663,6 @@ class JvmModelGenerator implements IGenerator {
 				appendable.append(' }')
 			}
 		}			
-	}
-	
-	def compilationStrategy(JvmIdentifiableElement it) {
-		val adapter = eAdapters.filter(typeof(CompilationStrategyAdapter)).head
-		if (adapter != null) 
-			adapter.compilationStrategy
-		else 
-			null
 	}
 	
 	def String serialize(JvmTypeReference it, ITreeAppendable appendable) {
