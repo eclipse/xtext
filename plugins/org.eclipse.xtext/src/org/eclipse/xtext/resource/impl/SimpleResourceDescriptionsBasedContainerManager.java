@@ -19,12 +19,14 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
  */
 public class SimpleResourceDescriptionsBasedContainerManager implements IContainer.Manager {
 
-	public IContainer getContainer(IResourceDescription desc,IResourceDescriptions resourceDescriptions) {
-		return new ResourceDescriptionsBasedContainer(resourceDescriptions);
+	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		ResourceDescriptionsBasedContainer result = new ResourceDescriptionsBasedContainer(resourceDescriptions);
+		result.setUriToDescriptionCacheEnabled(false);
+		return result;
 	}
 
-	public List<IContainer> getVisibleContainers(IResourceDescription desc,IResourceDescriptions resourceDescriptions) {
-		return Collections.singletonList(getContainer(desc,resourceDescriptions));
+	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		return Collections.singletonList(getContainer(desc, resourceDescriptions));
 	}
 
 }
