@@ -39,9 +39,17 @@ public class JavaElementFinder implements IJavaElementFinder {
 	private IJavaProjectProvider projectProvider;
 	
 	public IJavaElement findElementFor(JvmIdentifiableElement element) {
+		return internalFindElementFor(element, false);
+	}
+
+	public IJavaElement findExactElementFor(JvmIdentifiableElement element) {
+		return internalFindElementFor(element, true);
+	}
+
+	protected IJavaElement internalFindElementFor(JvmIdentifiableElement element, boolean isExactMatchOnly) {
 		if (element == null || element.eResource() == null)
 			return null;
-		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()));
+		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()), isExactMatchOnly);
 		IJavaElement result = implementation.doSwitch(element);
 		return result;
 	}
@@ -56,9 +64,11 @@ public class JavaElementFinder implements IJavaElementFinder {
 
 	public static class Implementation extends TypesSwitch<IJavaElement> {
 		private final IJavaProject javaProject;
+		private final boolean isExactMatchOnly;
 
-		public Implementation(IJavaProject javaProject) {
+		public Implementation(IJavaProject javaProject, boolean isExactMatchOnly) {
 			this.javaProject = javaProject;
+			this.isExactMatchOnly = isExactMatchOnly;
 		}
 
 		@Override
@@ -89,7 +99,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 				if (result != null)
 					return result;
 			}
-			return parent;
+			return (isExactMatchOnly) ? null : parent;
 		}
 		
 		@Override
@@ -109,10 +119,10 @@ public class JavaElementFinder implements IJavaElementFinder {
 					}
 				}
 				catch (JavaModelException e) {
-					return parent;
+					return (isExactMatchOnly) ? null : parent;
 				}
 			}
-			return parent;
+			return (isExactMatchOnly) ? null : parent;
 		}
 
 		private boolean doParametersMatch(JvmExecutable object, IMethod method, IType declaringType)
@@ -182,10 +192,10 @@ public class JavaElementFinder implements IJavaElementFinder {
 					}
 				}
 				catch (JavaModelException e) {
-					return parent;
+					return (isExactMatchOnly) ? null : parent;
 				}
 			}
-			return parent;
+			return (isExactMatchOnly) ? null : parent;
 		}
 		
 		@Override

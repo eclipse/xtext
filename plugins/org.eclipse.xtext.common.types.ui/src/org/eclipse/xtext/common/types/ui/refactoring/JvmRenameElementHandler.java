@@ -36,7 +36,7 @@ public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
 		if (isRealJvmMember(targetElement)) {
-			IJavaElement javaElement = getJavaElementFinder().findElementFor((JvmMember) targetElement);
+			IJavaElement javaElement = getJavaElementFinder().findExactElementFor((JvmMember) targetElement);
 			if (javaElement != null)
 				return new JdtRefactoringContext(targetElement, singletonList(javaElement), editor,
 						selection, resource, true);
