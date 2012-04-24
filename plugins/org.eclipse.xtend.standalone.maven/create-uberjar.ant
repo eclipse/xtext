@@ -1,22 +1,19 @@
 <project default="run">
 	<!--
-	 1. Where to get eclipse bundles  = eclipsePluginFolder
-	 2. Where to get xtext bundles  = xtextPluginFolder
-	 3. standalone jar Version to use = maven.version
+	 1. Where to get bundles  = bundles.folder
+	 2. standalone jar Version to use = maven.version
 	 3. Where to put output = output.folder
 	-->
-	<property name="eclipsePluginFolder" value="/Users/dhuebner/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
-	<property name="xtextPluginFolder" value="/Users/dhuebner/Downloads/tmf-xtext-Update-2.3.0N/plugins/" />
+	<property name="bundles.folder" value="./dependencies/plugins/" />
 	<property name="maven.version" value="2.3.0-SNAPSHOT" />
 	<property name="output.folder" value="output" />
-	<echo>${maven.version}</echo>
-
+	
 	<property name="binJarTemp" value="binJarTemp" />
 	<property name="sourceJarTemp" value="sourceJarTemp" />
 	<property name="deploy.dir" value="${user.home}/.m2/repository/org/eclipse/xtend/org.eclipse.xtend.standalone/${maven.version}/" />
 
 	<target name="run" depends="clean,createSourcesUberjar">
-
+		<echo>${maven.version}</echo>
 		<loadfile property="modifiedPomXml" srcFile="pom-template.pom">
 			<filterchain>
 				<expandproperties />
@@ -63,15 +60,13 @@
          ================================= -->
 	<target name="createUberjar">
 		<!-- TP bundles -->
-		<fileset dir="${eclipsePluginFolder}" id="binEclipseJars">
-			<include name="org.antlr.runtime_3.2.0*.jar" />
+		<fileset dir="${bundles.folder}" id="binJars">
 			<include name="org.eclipse.emf.common_2.5.0.*.jar" />
 			<include name="org.eclipse.emf.ecore.xmi_2.5.0.*.jar" />
+			<include name="org.eclipse.emf.ecore_2.5.0.*.jar" />
 			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
-		</fileset>
-
-		<!-- Xtext bundles -->
-		<fileset dir="${xtextPluginFolder}" id="binXtextJars">
+			<!-- Xtext bundles -->
+			<include name="org.antlr.runtime_3.2.0*.jar" />
 			<include name="org.eclipse.xtend.core_2.3*.jar" />
 			<include name="org.eclipse.xtend.lib_2.3*.jar" />
 			<include name="org.eclipse.xtext.common.types_2.3*.jar" />
@@ -81,16 +76,8 @@
 			<include name="org.eclipse.xtext_2.3*.jar" />
 		</fileset>
 
-
 		<unzip dest="${binJarTemp}">
-			<fileset refid="binEclipseJars" />
-			<fileset refid="binXtextJars" />
-			<fileset dir="${xtextPluginFolder}">
-				<include name="org.eclipse.xtend.standalone_2.3.0*.jar" />
-			</fileset>
-			<fileset dir="${eclipsePluginFolder}">
-				<include name="org.eclipse.emf.ecore_2.5.0.*.jar" />
-			</fileset>
+			<fileset refid="binJars" />
 		</unzip>
 
 		<antcall target="cleanUpContent">
@@ -109,18 +96,13 @@
 	         ================================= -->
 	<target name="createSourcesUberjar" depends="createUberjar">
 		<!-- TP bundles -->
-		<fileset dir="${eclipsePluginFolder}" id="sourceEclipseJars">
-
-			<include name="org.antlr.runtime.source_3.2.0*.jar" />
+		<fileset dir="${bundles.folder}" id="sourceJars">
 			<include name="org.eclipse.emf.common.source_2.5.0.*.jar" />
 			<include name="org.eclipse.emf.ecore.source_2.5.0.*.jar" />
 			<include name="org.eclipse.emf.ecore.xmi.source_2.5.0.*.jar" />
 			<include name="org.eclipse.jdt.core.source_3.5.2*.jar" />
-		</fileset>
-
-
-		<!-- Xtext bundles -->
-		<fileset dir="${xtextPluginFolder}" id="sourceXtextJars">
+			<!-- Xtext bundles -->
+			<include name="org.antlr.runtime.source_3.2.0*.jar" />
 			<include name="org.eclipse.xtend.core.source_2.3*.jar" />
 			<include name="org.eclipse.xtend.lib.source_2.3*.jar" />
 			<include name="org.eclipse.xtext.common.types.source_2.3*.jar" />
@@ -131,11 +113,7 @@
 		</fileset>
 
 		<unzip dest="${sourceJarTemp}" overwrite="true">
-			<fileset refid="sourceEclipseJars" />
-			<fileset refid="sourceXtextJars" />
-			<fileset dir="${xtextPluginFolder}">
-				<include name="org.eclipse.xtend.standalone.source_2.3.0*.jar" />
-			</fileset>
+			<fileset refid="sourceJars" />
 		</unzip>
 
 		<antcall target="cleanUpContent">
@@ -155,7 +133,7 @@
 				<include name="about*" />
 				<include name=".*" />
 				<include name="plugin.*" />
-				<include name="modeling32.png" />
+				<include name="*.png" />
 				<include name="**/*.ecore" />
 				<include name="META-INF/**" />
 			</fileset>
