@@ -50,6 +50,7 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.CrossReference;
@@ -96,6 +97,8 @@ import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaVa
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -158,6 +161,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject 
 	private UIStrings uiStrings;
+	
+	@Inject
+	private ILogicalContainerProvider containerProvider;
+	
+	@Inject
+	private JvmTypeExtensions typeExtensions;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -652,8 +661,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkDefaultSuperConstructor(XtendClass xtendClass) {
-		Iterable<XtendConstructor> xtendConstructors = filter(xtendClass.getMembers(), XtendConstructor.class);
 		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		Iterable<JvmConstructor> constructors = filter(inferredType.getMembers(), JvmConstructor.class);
 		if(inferredType.getExtendedClass() != null) {
 			JvmType superType = inferredType.getExtendedClass().getType();
 			if(superType instanceof JvmGenericType) {
@@ -663,7 +672,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						// there is a default super constructor. nothing more to check
 						return;
 				}
-				if(isEmpty(xtendConstructors)) {
+				if(size(constructors) == 1 && typeExtensions.isSingleSyntheticDefaultConstructor(constructors.iterator().next())) {
 					List<String> issueData = newArrayList();
 					for(JvmConstructor superConstructor:superConstructors) {
 						issueData.add(EcoreUtil.getURI(superConstructor).toString());
@@ -673,13 +682,16 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 							xtendClass.getName() + " must define an explicit constructor.",
 							xtendClass, XTEND_CLASS__NAME, MISSING_CONSTRUCTOR, toArray(issueData, String.class));
 				} else {
-					for(XtendConstructor xtendConstructor: xtendConstructors) {
-						EList<XExpression> expressions = ((XBlockExpression) xtendConstructor.getExpression()).getExpressions();
-						if(expressions.isEmpty() || !isDelegatConstructorCall(expressions.get(0))) {
-							error("No default constructor in super type " + superType.getSimpleName() 
-									+ ". Another constructor must be invoked explicitly.",
-									xtendConstructor, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
-							
+					for(JvmConstructor constructor: constructors) {
+						XExpression expression = containerProvider.getAssociatedExpression(constructor);
+						if (expression instanceof XBlockExpression) {
+							EList<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
+							if(expressions.isEmpty() || !isDelegatConstructorCall(expressions.get(0))) {
+								XtendConstructor xtendConstructor = associations.getXtendConstructor(constructor);
+								error("No default constructor in super type " + superType.getSimpleName() 
+										+ ". Another constructor must be invoked explicitly.",
+										xtendConstructor, null, MUST_INVOKE_SUPER_CONSTRUCTOR);
+							}
 						}
 					}
 				}
@@ -1144,6 +1156,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return;
 			if (hasAnnotation(field.getAnnotations(), Property.class))
 				return;
+			if (hasAnnotation(((XtendClass)field.eContainer()).getAnnotations(), Data.class))
+				return;
 			if (isLocallyUsed(jvmField, field.eContainer())) 
 				return;
 			String message;
@@ -1243,6 +1257,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkFinalFieldInitialization(XtendClass clazz) {
 		JvmGenericType inferredType = associations.getInferredType(clazz);
+		for (XAnnotation anno : clazz.getAnnotations()) {
+			if (anno.getAnnotationType() != null && Data.class.getName().equals(anno.getAnnotationType().getIdentifier()))
+				return;
+		}
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	

@@ -12,6 +12,7 @@ import static java.util.Collections.*;
 
 import java.io.IOException;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -2811,6 +2812,25 @@ public class CompilerTest extends AbstractXtendTestCase {
 		Method setter = code.getDeclaredMethod("setMyField", new Class<?>[]{ String.class});
 		setter.invoke(newInstance, "setterCalled");
 		assertEquals("SETTERCALLED", getter.invoke(newInstance));
+	}
+	
+	@Test public void testData_01() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo @Data class Bar { val myField = 'hello' boolean myFlag }");
+		Method getter = code.getDeclaredMethod("getMyField");
+		Method isMyFlag = code.getDeclaredMethod("isMyFlag");
+		Constructor<?> constructor = code.getDeclaredConstructor(new Class[]{Boolean.TYPE});
+		Object newInstance = constructor.newInstance(true);
+		assertEquals("hello", getter.invoke(newInstance));
+		assertTrue( (Boolean) isMyFlag.invoke(newInstance));
+		
+		Object anotherInstance = constructor.newInstance(true);
+		Object thirdInstance = constructor.newInstance(false);
+		
+		assertEquals(newInstance, anotherInstance);
+		assertFalse(newInstance.equals(thirdInstance));
+		
+		assertTrue(newInstance.hashCode() == anotherInstance.hashCode());
+		assertFalse(newInstance.hashCode() == thirdInstance.hashCode());
 	}
 	
 	

@@ -14,6 +14,155 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject extension IXtendJvmAssociations 
 	
 	@Test
+	def testDataClasses_01() { 
+		assertCompilesTo('''
+			@Data class Foo {
+				String name
+				boolean myFlag
+				java.lang.Iterable<? extends Foo> references
+			}
+		''', '''
+			import org.eclipse.xtend.lib.Data;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String _name;
+			  
+			  public String getName() {
+			    return this._name;
+			  }
+			  
+			  private final boolean _myFlag;
+			  
+			  public boolean isMyFlag() {
+			    return this._myFlag;
+			  }
+			  
+			  private final Iterable<? extends Foo> _references;
+			  
+			  public Iterable<? extends Foo> getReferences() {
+			    return this._references;
+			  }
+			  
+			  public Foo(final String name, final boolean myFlag, final Iterable<? extends Foo> references) {
+			    super();
+			    this._name = name;
+			    this._myFlag = myFlag;
+			    this._references = references;
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
+			    result = prime * result + (_myFlag ? 1231 : 1237);
+			    result = prime * result + ((_references== null) ? 0 : _references.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Foo other = (Foo) obj;
+			    if (_name == null) {
+			      if (other._name != null)
+			        return false;
+			    } else if (!_name.equals(other._name))
+			      return false;
+			    if (other._myFlag != _myFlag)
+			      return false;
+			    if (_references == null) {
+			      if (other._references != null)
+			        return false;
+			    } else if (!_references.equals(other._references))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String superToString = super.toString();
+			    if (superToString == null) superToString = "";
+			    int start = superToString.indexOf('[');
+			    int end = superToString.lastIndexOf(']');
+			    superToString = (start == -1 || end == -1) ? "" : (superToString.substring(start + 1,end) + ", ");
+			    return "Foo [" + superToString 
+			         + "_name = " + _name + ", "
+			         + "_myFlag = " + _myFlag + ", "
+			         + "_references = " + _references + "]";
+			  }
+			}
+		''')
+	}
+	@Test
+	def testDataClasses_02() { 
+		assertCompilesTo('''
+			@Data class Foo {
+				String name = 'foo'
+			}
+		''', '''
+			import org.eclipse.xtend.lib.Data;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String _name = "foo";
+			  
+			  public String getName() {
+			    return this._name;
+			  }
+			  
+			  public Foo() {
+			    super();
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Foo other = (Foo) obj;
+			    if (_name == null) {
+			      if (other._name != null)
+			        return false;
+			    } else if (!_name.equals(other._name))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String superToString = super.toString();
+			    if (superToString == null) superToString = "";
+			    int start = superToString.indexOf('[');
+			    int end = superToString.lastIndexOf(']');
+			    superToString = (start == -1 || end == -1) ? "" : (superToString.substring(start + 1,end) + ", ");
+			    return "Foo [" + superToString 
+			         + "_name = " + _name + "]";
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug372864() { 
 		assertCompilesTo('''
 			class Foo {
