@@ -15,7 +15,7 @@ import org.eclipse.xtext.testlanguages.treeTestLanguage.Model;
 import org.eclipse.xtext.testlanguages.treeTestLanguage.Node;
 import org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractTreeTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

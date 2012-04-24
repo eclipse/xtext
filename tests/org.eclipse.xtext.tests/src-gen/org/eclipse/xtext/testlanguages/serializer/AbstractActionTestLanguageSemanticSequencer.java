@@ -18,7 +18,7 @@ import org.eclipse.xtext.testlanguages.actionLang.Child;
 import org.eclipse.xtext.testlanguages.actionLang.Parent;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractActionTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

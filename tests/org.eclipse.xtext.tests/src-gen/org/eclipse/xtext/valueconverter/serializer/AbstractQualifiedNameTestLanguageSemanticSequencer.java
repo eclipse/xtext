@@ -17,7 +17,7 @@ import org.eclipse.xtext.valueconverter.qualifiedName.Element;
 import org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNamePackage;
 import org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractQualifiedNameTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

@@ -11,7 +11,7 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractBug289515TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected Bug289515TestLanguageGrammarAccess grammarAccess;

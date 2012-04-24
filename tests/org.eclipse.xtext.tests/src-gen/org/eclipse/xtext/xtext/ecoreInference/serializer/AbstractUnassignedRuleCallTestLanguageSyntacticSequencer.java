@@ -13,7 +13,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractUnassignedRuleCallTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected UnassignedRuleCallTestLanguageGrammarAccess grammarAccess;

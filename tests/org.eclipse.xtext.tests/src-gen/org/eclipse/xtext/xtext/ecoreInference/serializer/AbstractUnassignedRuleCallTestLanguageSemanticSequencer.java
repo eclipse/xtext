@@ -18,7 +18,7 @@ import org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.Mod
 import org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.ModelFeatures;
 import org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.UnassignedRuleCallTestLanguagePackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractUnassignedRuleCallTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

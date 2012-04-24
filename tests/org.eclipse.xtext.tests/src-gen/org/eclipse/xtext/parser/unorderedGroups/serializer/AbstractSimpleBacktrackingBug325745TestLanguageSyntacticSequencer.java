@@ -13,7 +13,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractSimpleBacktrackingBug325745TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SimpleBacktrackingBug325745TestLanguageGrammarAccess grammarAccess;

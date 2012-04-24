@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtextTest.UntilToken;
 import org.eclipse.xtext.xtextTest.Wildcard;
 import org.eclipse.xtext.xtextTest.XtextTestPackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractXtextGrammarTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

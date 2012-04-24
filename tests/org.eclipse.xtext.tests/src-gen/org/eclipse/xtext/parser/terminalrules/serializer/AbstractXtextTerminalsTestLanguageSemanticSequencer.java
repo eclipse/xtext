@@ -32,7 +32,7 @@ import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractXtextTerminalsTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

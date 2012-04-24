@@ -14,7 +14,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractBug287988TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected Bug287988TestLanguageGrammarAccess grammarAccess;
@@ -47,12 +47,12 @@ public class AbstractBug287988TestLanguageSyntacticSequencer extends AbstractSyn
 	/**
 	 * Syntax:
 	 *     (
-	     'rulecall' | 
-	     'actions' | 
-	     'rulecall2' | 
 	     'rulecall3' | 
+	     'rulecall' | 
 	     'inlinedActions' | 
-	     'simple'
+	     'actions' | 
+	     'simple' | 
+	     'rulecall2'
 	 )
 	 */
 	protected void emit_Model_ActionsKeyword_0_0_or_InlinedActionsKeyword_5_0_or_Rulecall2Keyword_3_0_or_Rulecall3Keyword_4_0_or_RulecallKeyword_2_0_or_SimpleKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {

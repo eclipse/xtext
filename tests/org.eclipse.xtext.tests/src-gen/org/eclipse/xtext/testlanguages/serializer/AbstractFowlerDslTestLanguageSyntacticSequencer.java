@@ -11,7 +11,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractFowlerDslTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected FowlerDslTestLanguageGrammarAccess grammarAccess;

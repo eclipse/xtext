@@ -11,7 +11,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractQualifiedNameTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected QualifiedNameTestLanguageGrammarAccess grammarAccess;

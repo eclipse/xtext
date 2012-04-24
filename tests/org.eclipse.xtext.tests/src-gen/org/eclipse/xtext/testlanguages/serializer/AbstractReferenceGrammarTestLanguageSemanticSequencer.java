@@ -22,7 +22,7 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.Spielplatz;
 import org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractReferenceGrammarTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

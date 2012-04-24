@@ -18,7 +18,7 @@ import org.eclipse.xtext.testlanguages.optionalEmpty.Model;
 import org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractOptionalEmptyTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

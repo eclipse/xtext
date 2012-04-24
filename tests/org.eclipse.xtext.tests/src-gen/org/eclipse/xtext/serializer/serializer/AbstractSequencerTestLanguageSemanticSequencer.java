@@ -50,7 +50,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal;
 import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupVal2;
 import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

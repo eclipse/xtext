@@ -47,7 +47,7 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall1Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubAction;
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractConcreteSyntaxValidationTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

@@ -22,7 +22,7 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead4;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractLookaheadTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

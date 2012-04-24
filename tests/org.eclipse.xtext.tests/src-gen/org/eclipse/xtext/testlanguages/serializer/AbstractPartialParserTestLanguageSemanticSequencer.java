@@ -24,7 +24,7 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SecondConcrete;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractPartialParserTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

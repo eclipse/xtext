@@ -33,7 +33,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Val0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val2;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

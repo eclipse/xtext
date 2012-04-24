@@ -19,7 +19,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractUnicodeTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

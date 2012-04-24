@@ -11,7 +11,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractActionTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ActionTestLanguageGrammarAccess grammarAccess;

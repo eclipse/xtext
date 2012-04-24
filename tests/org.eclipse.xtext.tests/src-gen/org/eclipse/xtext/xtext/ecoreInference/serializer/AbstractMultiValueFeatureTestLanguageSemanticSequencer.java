@@ -14,7 +14,7 @@ import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.Mult
 import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.Start;
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractMultiValueFeatureTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

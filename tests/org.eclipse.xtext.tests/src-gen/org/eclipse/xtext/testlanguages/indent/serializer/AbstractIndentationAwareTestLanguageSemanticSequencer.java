@@ -15,7 +15,7 @@ import org.eclipse.xtext.testlanguages.indent.indentLang.Node;
 import org.eclipse.xtext.testlanguages.indent.indentLang.NodeList;
 import org.eclipse.xtext.testlanguages.indent.services.IndentationAwareTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractIndentationAwareTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

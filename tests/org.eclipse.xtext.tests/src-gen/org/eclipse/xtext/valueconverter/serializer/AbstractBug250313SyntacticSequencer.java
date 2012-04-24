@@ -13,7 +13,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractBug250313SyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected Bug250313GrammarAccess grammarAccess;

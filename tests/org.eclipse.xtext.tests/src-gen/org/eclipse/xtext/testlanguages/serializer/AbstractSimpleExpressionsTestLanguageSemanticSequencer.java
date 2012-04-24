@@ -16,7 +16,7 @@ import org.eclipse.xtext.testlanguages.simpleExpressions.Op;
 import org.eclipse.xtext.testlanguages.simpleExpressions.Sequence;
 import org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractSimpleExpressionsTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

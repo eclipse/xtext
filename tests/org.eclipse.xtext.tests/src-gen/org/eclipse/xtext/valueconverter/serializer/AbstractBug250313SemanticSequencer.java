@@ -19,7 +19,7 @@ import org.eclipse.xtext.valueconverter.bug250313.Child2;
 import org.eclipse.xtext.valueconverter.bug250313.Model;
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractBug250313SemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

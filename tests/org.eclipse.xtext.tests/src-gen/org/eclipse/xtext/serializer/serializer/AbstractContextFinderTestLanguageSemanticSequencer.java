@@ -29,7 +29,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.services.ContextFinderTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractContextFinderTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

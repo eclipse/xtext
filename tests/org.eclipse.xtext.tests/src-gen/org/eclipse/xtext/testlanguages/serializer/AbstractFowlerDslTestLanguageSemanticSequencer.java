@@ -21,7 +21,7 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.Statemachine;
 import org.eclipse.xtext.testlanguages.fowlerdsl.Transition;
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractFowlerDslTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

@@ -139,6 +139,7 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     AmetamodelPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects

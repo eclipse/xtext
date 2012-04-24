@@ -20,7 +20,7 @@ import org.eclipse.xtext.testlanguages.testLang.ReducibleComposite;
 import org.eclipse.xtext.testlanguages.testLang.TerminalElement;
 import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

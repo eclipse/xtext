@@ -11,7 +11,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.testlanguages.indent.services.IndentationAwareTestLanguageGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractIndentationAwareTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected IndentationAwareTestLanguageGrammarAccess grammarAccess;
