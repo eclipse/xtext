@@ -40,6 +40,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
@@ -75,6 +76,9 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
 	@Inject
 	private VisibilityService visibilityService;
+	
+	@Inject
+	private JvmTypeExtensions typeExtensions;
 
 	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
 		if (xtendFile.getPackage() != null)
@@ -122,7 +126,7 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 				remainingFeatures = filter(inferredType.getMembers(), JvmFeature.class);
 			}
 			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
-				if (associations.getXtendConstructor(constructor) == null)
+				if (typeExtensions.isSingleSyntheticDefaultConstructor(constructor))
 					processedFeatures.add(constructor);
 			}
 			for (JvmFeature feature : remainingFeatures) {
@@ -140,8 +144,8 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature) {
-		Object text = textDispatcher.invoke(semanticFeature);
-		Image image = imageDispatcher.invoke(semanticFeature);
+		Object text = textDispatcher.invoke(jvmFeature);
+		Image image = imageDispatcher.invoke(jvmFeature);
 		if (jvmFeature.getDeclaringType() != inferredType) {
 			if (getCurrentMode() == SHOW_INHERITED_MODE) {
 				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
