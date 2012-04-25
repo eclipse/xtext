@@ -63,6 +63,9 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return result;
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	protected IAllContainersState getState(IResourceDescriptions resourceDescriptions) {
 		return stateProvider.get(resourceDescriptions);
 	}
