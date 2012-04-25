@@ -39,6 +39,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
       this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY);
       this.batchCompiler.setDeleteTempDirectory(true);
+      this.batchCompiler.setUseCurrentClassLoaderAsParent(true);
       File _file = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
       _file.mkdir();
       File _file_1 = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
