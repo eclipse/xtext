@@ -9,6 +9,7 @@ import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.featurecalls.XtendIdentifiableSimpleNameProvider;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
+import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.resource.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
@@ -21,6 +22,7 @@ import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -116,5 +118,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtendLocationInFileProvider.class;
+	}
+
+	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
+		return XtendLinkingDiagnosticMessageProvider.class;
 	}
 }
