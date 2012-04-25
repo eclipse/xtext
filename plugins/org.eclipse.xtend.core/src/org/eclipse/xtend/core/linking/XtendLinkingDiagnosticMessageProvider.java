@@ -65,7 +65,7 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 				String fieldType = "Object";
 				if(explicitArguments.size() == 0){
 					firstPartOfMessage += "or field ";
-					JvmTypeReference expectedType = typeProvider.getExpectedType(featureCall);
+					JvmTypeReference expectedType = null;//FIXME typeProvider.getExpectedType(featureCall);
 					if(expectedType != null && expectedType.getType() != null)
 						fieldType = expectedType.getSimpleName();
 				}
@@ -84,10 +84,10 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 			builder.append("(");
 			while(iterator.hasNext()){
 				XExpression expr = iterator.next();
-				JvmTypeReference type = typeProvider.getType(expr);
-				if(type == null)
-					return null;
-				builder.append(type.getSimpleName());
+//				JvmTypeReference type = typeProvider.getType(expr);
+//				if(type == null)
+//					return null;
+//				builder.append(type.getSimpleName());
 				if(iterator.hasNext())
 					builder.append(", ");
 			}
