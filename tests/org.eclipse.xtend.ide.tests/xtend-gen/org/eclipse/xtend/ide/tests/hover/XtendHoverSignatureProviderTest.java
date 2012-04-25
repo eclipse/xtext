@@ -249,7 +249,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testSignatureForXtendDefaultConstructorWithGenerics() {
     try {

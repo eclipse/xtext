@@ -29,7 +29,7 @@ public class ShowSyntheticMembersContribution extends AbstractFilterOutlineContr
 	private IFilter filter;
 	
 	@Override
-	protected IFilter getFilter() {
+	public IFilter getFilter() {
 		if (filter == null) {
 			filter = new IFilter() {
 				public boolean apply(IOutlineNode node) {

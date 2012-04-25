@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.outline;
 
+import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -22,8 +23,12 @@ public class OutlineTests extends AbstractOutlineTests {
 	@Inject 
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	
-	@Inject
 	private OutlineFilterAndSorter sorter;
+	
+	@Inject void configure(ShowSyntheticMembersContribution filter, OutlineFilterAndSorter sorter) {
+		sorter.addFilter(filter.getFilter());
+		this.sorter = sorter;
+	}
 	
 	@Override
 	public void setUp() throws Exception {
@@ -45,12 +50,12 @@ public class OutlineTests extends AbstractOutlineTests {
 	@Test public void testImport() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("import java.lang.* class Foo {}");
 		assertBuilder.numChildren(2).child(0, "import declarations").numChildren(1).child(0, "java.lang.*").numChildren(0);
-		assertBuilder.child(1, "Foo").numChildren(1);
+		assertBuilder.child(1, "Foo").numChildren(0);
 	}
 	
 	@Test public void testDispatchMethod_1() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def dispatch foo(String x) {''} def dispatch foo(Object y) {''} }");
-		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2).child(0, "foo(Object) : String").numChildren(2);
+		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(Object) : String").numChildren(2);
 		dispatcher.child(0, "foo(String) : String").numChildren(0);
 		dispatcher.child(1, "foo(Object) : String").numChildren(0);
 	}
@@ -62,7 +67,7 @@ public class OutlineTests extends AbstractOutlineTests {
 				" def dispatch bar(String x) {''}" +
 				" def dispatch bar(Object y) {''}" +
 				"}");
-		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(3);
+		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
 		foo.child(0, "foo(Object) : String").numChildren(2);
 		foo.child(1, "bar(Object) : String").numChildren(2);
 	}

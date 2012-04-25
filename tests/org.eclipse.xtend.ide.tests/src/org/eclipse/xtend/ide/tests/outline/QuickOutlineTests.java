@@ -12,6 +12,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import java.util.List;
 
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtend.ide.tests.outline.AbstractOutlineTests.AssertBuilder;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
@@ -179,7 +180,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(13, "wait(long, int) : void - java.lang.Object").hasTextRegion(false);
 
 	}
-
+	
 	protected void setShowInherited(boolean isShowInherited) {
 		List<OutlineMode> modes = getTreeProvider().getOutlineModes();
 		getTreeProvider().setCurrentMode((isShowInherited) ? modes.get(1) : modes.get(0));
