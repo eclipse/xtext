@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
  * container. Resource that are loaded after this class has been created are also considered.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.3
  */
 public class FlatResourceSetBasedAllContainersState extends AdapterImpl implements IAllContainersState {
 

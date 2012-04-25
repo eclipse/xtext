@@ -80,10 +80,16 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 		return getUriToDescription().size();
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public void setUriToDescriptionCacheEnabled(boolean enabled) {
 		this.uriToDescriptionCacheEnabled = enabled;
 	}
 	
+	/**
+	 * @since 2.3
+	 */
 	public boolean isUriToDescriptionCacheEnabled() {
 		return this.uriToDescriptionCacheEnabled;
 	}
