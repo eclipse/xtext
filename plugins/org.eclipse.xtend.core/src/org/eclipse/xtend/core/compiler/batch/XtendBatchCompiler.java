@@ -104,6 +104,7 @@ public class XtendBatchCompiler {
 	protected Writer errorWriter;
 	protected String sourcePath;
 	protected String classPath;
+	protected boolean useCurrentClassLoaderAsParent;
 	protected String outputPath;
 	protected String fileEncoding;
 	protected String complianceLevel = "1.5";
@@ -112,6 +113,10 @@ public class XtendBatchCompiler {
 	protected boolean deleteTempDirectory = true;
 	protected List<File> tempFolders = Lists.newArrayList();
 
+	public void setUseCurrentClassLoaderAsParent(boolean useCurrentClassLoaderAsParent) {
+		this.useCurrentClassLoaderAsParent = useCurrentClassLoaderAsParent;
+	}
+	
 	public String getTempDirectory() {
 		return tempDirectory;
 	}
@@ -345,7 +350,7 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), null);
+		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 	}
