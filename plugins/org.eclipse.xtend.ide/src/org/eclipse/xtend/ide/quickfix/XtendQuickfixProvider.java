@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.quickfix;
 
+import static org.eclipse.xtext.util.Strings.*;
+
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -26,8 +30,11 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -39,19 +46,25 @@ import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
 import org.eclipse.xtend.ide.edit.OrganizeImportsHandler;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
@@ -61,25 +74,33 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
+import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
+import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Quickfixes for inconsistent indentation
  * @author Sebastian Zarnekow - Quickfixes for misspelled types and constructors
  */
 public class XtendQuickfixProvider extends DefaultQuickfixProvider {
+
+	private static final Logger logger = Logger.getLogger(XtendQuickfixProvider.class);
 	@Inject
 	private IJavaProjectProvider projectProvider;
 
@@ -99,7 +120,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	private ReplacingAppendable.Factory appendableFactory;
 
 	@Inject
-	private TypeReferenceSerializer typeRefSerializer;
+	private XtendTypeReferenceSerializer typeRefSerializer;
 
 	@Inject
 	private TypeReferences typeRefs;
@@ -113,6 +134,141 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject 
 	private VisibilityService visibilityService;
 	
+	@Inject
+	private Provider<IssueResolutionAcceptor> issueResolutionAcceptorProvider;
+
+	@Inject
+	private ITypeProvider typeProvider;
+
+	@Inject
+	private JdtVariableCompletions jdtVariableCompletions;
+
+	@Inject
+	private FileExtensionProvider fileExtensionProvider;
+
+	@Inject
+	private JdtTypeProviderFactory jdtTypeProviderFactory;
+
+	@Override
+	public boolean hasResolutionFor(String issueCode) {
+		if(XtendLinkingDiagnosticMessageProvider.FEATURECALL_LINKING_DIAGNOSTIC.equals(issueCode))
+			return true;
+		return super.hasResolutionFor(issueCode);
+	}
+
+	@Override
+	public List<IssueResolution> getResolutions(Issue issue) {
+		StopWatch stopWatch = new StopWatch(logger);
+		try {
+			if(XtendLinkingDiagnosticMessageProvider.FEATURECALL_LINKING_DIAGNOSTIC.equals(issue.getCode())){
+				final IssueResolutionAcceptor issueResolutionAcceptor = issueResolutionAcceptorProvider.get();
+				createXtendLinkingIssueResolutions(issue, issueResolutionAcceptor);
+				return issueResolutionAcceptor.getIssueResolutions();
+			}else
+				return super.getResolutions(issue);
+		} finally {
+			stopWatch.resetAndLog("#getResolutions");
+		}
+	}
+
+	@SuppressWarnings("null")
+	private void createXtendLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
+		final String elementName = issue.getData()[0];
+		String callText = issue.getData()[1];
+		// Create empty method in XtendClass
+		StringBuilderBasedAppendable methodDescriptionBuilder = new StringBuilderBasedAppendable();
+		methodDescriptionBuilder.append("...").newLine().append("def ").append(issue.getData()[1]).append(" {}").newLine().append("...");
+		IssueResolution issueResolutionMethodInType = new IssueResolution("create method " + callText, methodDescriptionBuilder.toString(), "fix_indent.gif", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
+
+			public void apply(final EObject element, final IModificationContext context) throws Exception {
+					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
+					XtendClass xtendClazz = EcoreUtil2.getContainerOfType(element, XtendClass.class);
+					IXtextDocument xtextDocument = context.getXtextDocument();
+					createNewFunctionInClazz(call, xtendClazz, xtextDocument, elementName);
+			}
+		}));
+		issueResolutionAcceptor.getIssueResolutions().add(issueResolutionMethodInType);
+
+		if(!callText.contains("(")){
+			// Create field in XtendClass
+			StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable();
+			String fieldType = issue.getData()[2];
+			fieldDescriptionBuilder.append("...").newLine().append(fieldType).append(" ").append(elementName);
+			IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_indent.gif", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
+
+				public void apply(EObject element, IModificationContext context) throws Exception {
+					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
+					XtendClass xtendClazz = EcoreUtil2.getContainerOfType(element, XtendClass.class);
+					IXtextDocument xtextDocument = context.getXtextDocument();
+					int offsetOfOpeningBrace = getOffsetOfOpeningBrace(xtendClazz);
+					int openingBraceOffset = offsetOfOpeningBrace;
+					if(openingBraceOffset != -1)
+						createNewFieldInClazz(elementName, call, xtextDocument, openingBraceOffset);
+				}
+
+				private int getOffsetOfOpeningBrace(XtendClass xtendClazz) {
+					int openingBraceOffset = -1;
+					for (ILeafNode leafNode : NodeModelUtils.getNode(xtendClazz).getLeafNodes()) {
+						if (leafNode.getGrammarElement() instanceof Keyword
+								&& equal("{", ((Keyword) leafNode.getGrammarElement()).getValue())) {
+							return leafNode.getOffset() + 1;
+						}
+					}
+					return openingBraceOffset;
+				}
+			}));
+			issueResolutionAcceptor.getIssueResolutions().add(issueResolutionField);
+		}
+	}
+
+
+	private void createNewFunctionInClazz(XAbstractFeatureCall call, XtendClass xtendClazz, IXtextDocument xtextDocument,
+			String functionName) throws BadLocationException {
+		final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, call, superMemberImplementor.getFunctionInsertOffset(xtendClazz), 0, 1, false);
+		appendable.newLine().increaseIndentation().append("def " + functionName );
+		Iterator<XExpression> iterator = call.getExplicitArguments().iterator();
+		final Set<String> notallowed = Sets.newHashSet();
+		appendable.append("(");
+		while(iterator.hasNext()){
+			XExpression expression = iterator.next();
+			JvmTypeReference typeRef = typeProvider.getType(expression);
+			if(typeRef != null){
+				typeRefSerializer.serialize(typeRef, call, appendable);
+				appendable.append(" ");
+				jdtVariableCompletions.getVariableProposals(typeRef.getIdentifier(), call, JdtVariableCompletions.VariableType.PARAMETER, notallowed, new JdtVariableCompletions.CompletionDataAcceptor(){
+					@SuppressWarnings("null")
+					public void accept(String replaceText, StyledString label, Image img) {
+						appendable.append(replaceText);
+						notallowed.add(replaceText);
+					}
+				});
+			}
+			if(iterator.hasNext())
+				appendable.append(", ");
+		}
+		appendable.append(")").append(" { }").decreaseIndentation().decreaseIndentation().newLine();
+		appendable.commitChanges();
+	}
+
+	@SuppressWarnings("null")
+	private void createNewFieldInClazz(final String elementName, XAbstractFeatureCall call,
+			IXtextDocument xtextDocument, int openingBraceOffset) throws BadLocationException {
+		final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, call, openingBraceOffset, 0, 1, false);
+		JvmTypeReference expectedType = typeProvider.getExpectedType(call);
+		if(expectedType == null){
+			JvmAnyTypeReference jvmAnyTypeReference = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
+			IJdtTypeProvider jdtTypeProvider = jdtTypeProviderFactory.createTypeProvider(EcoreUtil2.getResourceSet(call));
+			JvmType type = jdtTypeProvider.findTypeByName("java.lang.Object");
+			jvmAnyTypeReference.setType(type);
+			expectedType = jvmAnyTypeReference;
+		}
+		appendable.newLine();
+		typeRefSerializer.serialize(expectedType, call, appendable);
+		appendable.append(" ").append(elementName);
+		appendable.commitChanges();
+	}
+
 	/**
 	 * Filter quickfixes for types and constructors.
 	 */
@@ -333,6 +489,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 							}
 							label.append(")");
 							acceptor.accept(issue, label.toString(), label.toString(), "fix_indent.gif", new ISemanticModification() {
+								@SuppressWarnings("null")
 								public void apply(EObject element, IModificationContext context) throws Exception {
 									ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
 											element, 0, 0);
@@ -482,6 +639,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length > 0)
 			acceptor.accept(issue, "Add throws declaration", "Add throws declaration", "fix_indent.gif",
 					new ISemanticModification() {
+						@SuppressWarnings("null")
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							URI exceptionURI = URI.createURI(issue.getData()[0]);
 							XtendFunction xtendFunction = EcoreUtil2.getContainerOfType(element, XtendFunction.class);
@@ -525,6 +683,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length > 1)
 			acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
 					new ISemanticModification() {
+						@SuppressWarnings("null")
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							URI exceptionURI = URI.createURI(issue.getData()[0]);
 							URI childURI = URI.createURI(issue.getData()[1]);
