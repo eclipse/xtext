@@ -96,7 +96,7 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
-		return org.eclipse.xtext.resource.containers.LiveStateBasedContainerManager.class;
+		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
