@@ -2833,5 +2833,27 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertFalse(newInstance.hashCode() == thirdInstance.hashCode());
 	}
 	
+	@Test public void testData_02() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo @Data class Bar extends test.BasicDataClass { val myField = 'hello' boolean myFlag }");
+		Method getter = code.getDeclaredMethod("getMyField");
+		Method isMyFlag = code.getDeclaredMethod("isMyFlag");
+		Constructor<?> constructor = code.getDeclaredConstructor(new Class[]{String.class, Boolean.TYPE});
+		Object newInstance = constructor.newInstance("MOIN", true);
+		assertEquals("hello", getter.invoke(newInstance));
+		assertTrue( (Boolean) isMyFlag.invoke(newInstance));
+		
+		Object anotherInstance = constructor.newInstance("MOIN", true);
+		Object thirdInstance = constructor.newInstance("MOIN", false);
+		Object fourthInstance = constructor.newInstance("moin", true);
+		
+		assertEquals(newInstance, anotherInstance);
+		assertFalse(newInstance.equals(thirdInstance));
+		assertFalse(newInstance.equals(fourthInstance));
+		
+		assertTrue(newInstance.hashCode() == anotherInstance.hashCode());
+		assertFalse(newInstance.hashCode() == thirdInstance.hashCode());
+		assertFalse(newInstance.hashCode() == fourthInstance.hashCode());
+	}
+	
 	
 }
