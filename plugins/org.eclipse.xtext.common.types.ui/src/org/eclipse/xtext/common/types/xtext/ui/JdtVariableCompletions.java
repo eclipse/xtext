@@ -54,6 +54,13 @@ public class JdtVariableCompletions {
 		String typeName = getTextUnderReference(ctx, refToTypeRef);
 		internalGetVariableProposals(typeName, ctx, varType, notAllowedNames, acceptor);
 	}
+	/**
+	 * @since 2.3
+	 */
+	public void getVariableProposals(String typeName, EObject ctx, VariableType varType,
+			Set<String> notAllowedNames, CompletionDataAcceptor acceptor){
+		internalGetVariableProposals(typeName, ctx, varType, notAllowedNames, acceptor);
+	}
 
 	protected void internalGetVariableProposals(String typeName, EObject ctx, VariableType varType,
 			Set<String> notAllowedNames, CompletionDataAcceptor acceptor) {
