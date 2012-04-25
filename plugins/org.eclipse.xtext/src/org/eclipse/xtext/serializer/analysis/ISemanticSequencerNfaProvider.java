@@ -28,12 +28,14 @@ public interface ISemanticSequencerNfaProvider {
 		BitSet getAllFollowerFeatures();
 
 		AbstractElement getAssignedGrammarElement();
-		
+
 		EStructuralFeature getFeature();
 
 		int getFeatureID();
 
 		List<ISemState> getFollowers();
+
+		int getOrderID();
 
 		List<AbstractElement> getToBeValidatedAssignedElements();
 	}
