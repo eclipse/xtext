@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -60,5 +61,29 @@ public class JvmTypeExtensions {
       _and = (_and_1 && _equals_2);
     }
     return _and;
+  }
+  
+  public boolean isSynthetic(final JvmIdentifiableElement element) {
+    JvmIdentifiableMetaData _metaData = this.getMetaData(element);
+    return _metaData._synthetic;
+  }
+  
+  public void setSynthetic(final JvmIdentifiableElement element, final boolean isSynthetic) {
+    JvmIdentifiableMetaData _metaData = this.getMetaData(element);
+    _metaData._synthetic = isSynthetic;
+  }
+  
+  protected JvmIdentifiableMetaData getMetaData(final JvmIdentifiableElement element) {
+    EList<Adapter> _eAdapters = element.eAdapters();
+    Iterable<JvmIdentifiableMetaData> _filter = Iterables.<JvmIdentifiableMetaData>filter(_eAdapters, JvmIdentifiableMetaData.class);
+    JvmIdentifiableMetaData metaData = IterableExtensions.<JvmIdentifiableMetaData>head(_filter);
+    boolean _equals = Objects.equal(metaData, null);
+    if (_equals) {
+      JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
+      metaData = _jvmIdentifiableMetaData;
+      EList<Adapter> _eAdapters_1 = element.eAdapters();
+      _eAdapters_1.add(metaData);
+    }
+    return metaData;
   }
 }
