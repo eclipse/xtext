@@ -46,7 +46,7 @@
 			<arg value="-Dbuild.root=${build.root}" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-Dreleng.project.location=${releng.project.location}" />
-			<arg value="-Declipse.target.platform=${ECLIPSE.TARGET.ALIAS}" />
+			<arg value="-Doutput.folder=${releng.project.location}/output" />
 			<arg line="-data ${build.root}/buckminster.workspace" />
 			<arg line="-configuration ${build.root}/configuration" />
 			<arg line="--displaystacktrace" />
