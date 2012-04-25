@@ -31,7 +31,8 @@ public class ResourceSetBasedAllContainersStateProvider implements IAllContainer
 			}
 			return adapter;
 		}
-		throw new IllegalStateException("Passed " + IResourceDescriptions.class.getName() + " not of type "
+		String contextType = context == null ? "null" : context.getClass().getName();
+		throw new IllegalStateException("Passed " + contextType + " not of type "
 				+ ResourceSetBasedResourceDescriptions.class.getName());
 	}
 
