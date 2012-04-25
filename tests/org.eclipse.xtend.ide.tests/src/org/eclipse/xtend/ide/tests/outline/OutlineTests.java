@@ -45,12 +45,12 @@ public class OutlineTests extends AbstractOutlineTests {
 	@Test public void testImport() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("import java.lang.* class Foo {}");
 		assertBuilder.numChildren(2).child(0, "import declarations").numChildren(1).child(0, "java.lang.*").numChildren(0);
-		assertBuilder.child(1, "Foo").numChildren(0);
+		assertBuilder.child(1, "Foo").numChildren(1);
 	}
 	
 	@Test public void testDispatchMethod_1() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def dispatch foo(String x) {''} def dispatch foo(Object y) {''} }");
-		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(Object) : String").numChildren(2);
+		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2).child(0, "foo(Object) : String").numChildren(2);
 		dispatcher.child(0, "foo(String) : String").numChildren(0);
 		dispatcher.child(1, "foo(Object) : String").numChildren(0);
 	}
@@ -62,7 +62,7 @@ public class OutlineTests extends AbstractOutlineTests {
 				" def dispatch bar(String x) {''}" +
 				" def dispatch bar(Object y) {''}" +
 				"}");
-		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
+		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(3);
 		foo.child(0, "foo(Object) : String").numChildren(2);
 		foo.child(1, "bar(Object) : String").numChildren(2);
 	}

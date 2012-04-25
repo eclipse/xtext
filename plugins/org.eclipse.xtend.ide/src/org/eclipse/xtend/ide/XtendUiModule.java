@@ -36,6 +36,7 @@ import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
+import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
@@ -65,6 +66,7 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
@@ -272,4 +274,8 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends ITraceInformation> bindTraceInformation() {
 		return FileBasedTraceInformation.class;
 	}
+	
+	public void configureFilterSyntheticMembersContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("FilterSyntheticsContribution")).to(ShowSyntheticMembersContribution.class);
+	} 
 }

@@ -103,15 +103,15 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		IOutlineNode bazNode = outlineRoot.getChildren().get(1);
 		assertEquals("Baz", bazNode.getText().toString());
 		assertTrue(bazNode.getChildren().size() > 2);
-		IOutlineNode baz = bazNode.getChildren().get(0);
+		IOutlineNode baz = bazNode.getChildren().get(1);
 		assertEquals("baz : int", baz.getText().toString());
 		outlineNodeElementOpener.open(baz, bazXtendEditor.getInternalSourceViewer());
 		assertActiveEditor("org.eclipse.xtend.core.Xtend", "baz");
-		IOutlineNode foo = bazNode.getChildren().get(2);
+		IOutlineNode foo = bazNode.getChildren().get(3);
 		assertEquals("foo : int - test.Foo", foo.getText().toString());
 		outlineNodeElementOpener.open(foo, bazXtendEditor.getInternalSourceViewer());
 		assertActiveEditor("org.eclipse.xtend.core.Xtend", "foo");
-		IOutlineNode bar = bazNode.getChildren().get(4);
+		IOutlineNode bar = bazNode.getChildren().get(5);
 		assertEquals("bar : int - test.Bar", bar.getText().toString());
 		outlineNodeElementOpener.open(bar, bazXtendEditor.getInternalSourceViewer());
 		assertActiveEditor(JavaUI.ID_CU_EDITOR, "bar");
