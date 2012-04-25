@@ -21,6 +21,8 @@ public class XtendFeatureNode extends EObjectNode {
 	
 	private boolean isStatic;
 	
+	private boolean isSynthetic;
+	
 	public XtendFeatureNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		super(eObject, parent, image, text, isLeaf);
 	}
@@ -39,5 +41,13 @@ public class XtendFeatureNode extends EObjectNode {
 
 	public boolean isStatic() {
 		return isStatic;
+	}
+
+	public void setSynthetic(boolean isSynthetic) {
+		this.isSynthetic = isSynthetic;
+	}
+	
+	public boolean isSynthetic() {
+		return isSynthetic;
 	}
 }

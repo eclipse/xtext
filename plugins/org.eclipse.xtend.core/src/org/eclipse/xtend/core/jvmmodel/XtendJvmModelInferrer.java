@@ -72,6 +72,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -115,6 +116,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject
 	private SyntheticNameClashResolver nameClashResolver;
+	
+	@Inject
+	private JvmTypeExtensions typeExtensions;
 
 	public void infer(@Nullable EObject xtendFile, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(xtendFile instanceof XtendFile))
@@ -203,7 +207,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		final JvmConstructor superConstructor = getSuperConstructor(source);
 		// constructor
 		if ( isEmpty(filter(source.getMembers(), XtendConstructor.class)) ) {
-			inferredJvmType.getMembers().add(jvmTypesBuilder.toConstructor(source, new Procedure1<JvmConstructor>() {
+			final JvmConstructor constructor = jvmTypesBuilder.toConstructor(source, new Procedure1<JvmConstructor>() {
 				public void apply(final @Nullable JvmConstructor constructor) {
 					if (constructor == null)
 						return;
@@ -250,23 +254,28 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					});
 				}
 
-			}));
+			});
+			typeExtensions.setSynthetic(constructor, true);
+			inferredJvmType.getMembers().add(constructor);
 		}
 		
 		// hashcode
 		final JvmField[] dataFields = toArray(filter(jvmFields, Predicates.notNull()), JvmField.class);
 			
 		JvmOperation hashCode = jvmTypesBuilder.toHashCodeMethod(source, superConstructor != null, dataFields);
+		typeExtensions.setSynthetic(hashCode, true);
 		if (hashCode != null && !hasMethod(source, hashCode.getSimpleName(), hashCode.getParameters()))
 			inferredJvmType.getMembers().add(hashCode);
 		
 		// equals
 		JvmOperation equals = jvmTypesBuilder.toEqualsMethod(source, inferredJvmType, superConstructor != null, dataFields);
+		typeExtensions.setSynthetic(equals, true);
 		if (equals != null && !hasMethod(source, equals.getSimpleName(), equals.getParameters()))
 			inferredJvmType.getMembers().add(equals);
 		
 		// toString
 		JvmOperation toString = jvmTypesBuilder.toToStringMethod(source, inferredJvmType, dataFields);
+		typeExtensions.setSynthetic(toString, true);
 		if (toString != null && !hasMethod(source, toString.getSimpleName(), toString.getParameters()))
 			inferredJvmType.getMembers().add(toString);
 		
@@ -379,6 +388,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		associator.associate(source, constructor);
 		constructor.setSimpleName(source.getName());
 		constructor.setVisibility(JvmVisibility.PUBLIC);
+		typeExtensions.setSynthetic(constructor, true);
 	}
 
 	protected void transform(XtendMember sourceMember, JvmGenericType container) {
@@ -549,11 +559,13 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			if (isProperty) {
 				field.setSimpleName("_"+computeFieldName);
 				final JvmOperation getter = jvmTypesBuilder.toGetter(source, computeFieldName, field.getSimpleName(), field.getType());
+				typeExtensions.setSynthetic(getter, true);
 				jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
 				if (getter != null && !hasMethod((XtendClass)source.eContainer(), getter.getSimpleName(), getter.getParameters()))
 					container.getMembers().add( getter);
 				if (!source.isFinal() && ! isDataObject) {
 					final JvmOperation setter = jvmTypesBuilder.toSetter(source, computeFieldName, field.getSimpleName(), field.getType());
+					typeExtensions.setSynthetic(setter, true);
 					jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
 					if (setter != null && !hasMethod((XtendClass)source.eContainer(), setter.getSimpleName(), setter.getParameters()))
 						container.getMembers().add( setter);

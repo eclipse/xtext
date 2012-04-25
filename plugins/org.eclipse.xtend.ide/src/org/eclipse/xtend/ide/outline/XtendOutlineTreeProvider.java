@@ -23,7 +23,6 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.ide.labeling.XtendImages;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -101,16 +100,18 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 			Set<JvmFeature> processedFeatures = newHashSet();
 			for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
 				XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
-				dispatcherNode.setDispatch(true);
-				processedFeatures.add(dispatcher);
-				for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
-					XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
-					if (xtendFunction == null) {
-						createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
-					} else {
-						createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
+				if (dispatcherNode != null) {
+					dispatcherNode.setDispatch(true);
+					processedFeatures.add(dispatcher);
+					for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
+						XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
+						if (xtendFunction == null) {
+							createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
+						} else {
+							createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
+						}
+						processedFeatures.add(dispatchCase);
 					}
-					processedFeatures.add(dispatchCase);
 				}
 			}
 			Iterable<JvmFeature> remainingFeatures;
@@ -124,10 +125,6 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 						});
 			} else {
 				remainingFeatures = filter(inferredType.getMembers(), JvmFeature.class);
-			}
-			for (JvmConstructor constructor : inferredType.getDeclaredConstructors()) {
-				if (typeExtensions.isSingleSyntheticDefaultConstructor(constructor))
-					processedFeatures.add(constructor);
 			}
 			for (JvmFeature feature : remainingFeatures) {
 				if (!processedFeatures.contains(feature)) {
@@ -144,24 +141,29 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature) {
-		Object text = textDispatcher.invoke(jvmFeature);
-		Image image = imageDispatcher.invoke(jvmFeature);
+		Object text = textDispatcher.invoke(semanticFeature);
+		Image image = imageDispatcher.invoke(semanticFeature);
+		final boolean synthetic = typeExtensions.isSynthetic(jvmFeature);
+		if (synthetic) {
+			text = textDispatcher.invoke(jvmFeature);
+			image = imageDispatcher.invoke(jvmFeature);
+		}
 		if (jvmFeature.getDeclaringType() != inferredType) {
 			if (getCurrentMode() == SHOW_INHERITED_MODE) {
 				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
 						text.toString());
 				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
 						StyledString.COUNTER_STYLER));
-				return createXtendFeatureNode(parentNode, jvmFeature, image, label, true);
+				return createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic);
 			}
 			return null;
 		} else {
-			return createXtendFeatureNode(parentNode, semanticFeature, image, text, true);
+			return createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic);
 		}
 	}
 	
 	protected XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement, Image image, Object text,
-			boolean isLeaf) {
+			boolean isLeaf, boolean synthetic) {
 		XtendFeatureNode featureNode = new XtendFeatureNode(modelElement, parentNode, image, text, isLeaf);
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
@@ -169,6 +171,7 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		if(isLocalElement(parentNode, modelElement))
 			featureNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 		featureNode.setStatic(isStatic(modelElement));
+		featureNode.setSynthetic(synthetic);
 		return featureNode;
 	}
 
