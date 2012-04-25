@@ -22,7 +22,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
@@ -74,13 +77,14 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	protected static class SemState implements ISemState {
 
+		protected BitSet allFollowerFeatures;
 		protected AbstractElement assignedGrammarElement;
+		protected List<AbstractElement> contentValidationNeeded;
 		protected EStructuralFeature feature;
 		protected int featureID = -2;
 		protected List<ISemState> followers;
+		protected int orderID = 0;
 		protected EClass type;
-		protected List<AbstractElement> contentValidationNeeded;
-		protected BitSet allFollowerFeatures;
 
 		public SemState(EClass type, AbstractElement assignedGrammarElement) {
 			super();
@@ -114,6 +118,10 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			return followers == null ? Collections.<ISemState> emptyList() : followers;
 		}
 
+		public int getOrderID() {
+			return orderID;
+		}
+
 		public List<AbstractElement> getToBeValidatedAssignedElements() {
 			return contentValidationNeeded;
 		}
@@ -144,14 +152,40 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	}
 
+	protected Map<AbstractElement, Integer> elementIDCache;
+
+	@Inject
+	protected IGrammarAccess grammar;
+
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
-	protected Map<Pair<EObject, EClass>, Nfa<ISemState>> cache = Maps.newHashMap();
+	protected Map<Pair<EObject, EClass>, Nfa<ISemState>> resultCache = Maps.newHashMap();
+
+	protected boolean addAll(BitSet to, BitSet bits) {
+		BitSet cpy = new BitSet();
+		cpy.or(to);
+		cpy.or(bits);
+		if (cpy.equals(to))
+			return false;
+		to.or(bits);
+		return true;
+	}
+
+	protected int getElementID(AbstractElement ele) {
+		if (elementIDCache == null) {
+			elementIDCache = Maps.newHashMap();
+			int counter = 0;
+			for (ParserRule pr : GrammarUtil.allParserRules(grammar.getGrammar()))
+				for (AbstractElement e : EcoreUtil2.getAllContentsOfType(pr, AbstractElement.class))
+					elementIDCache.put(e, counter++);
+		}
+		return elementIDCache.get(ele);
+	}
 
 	public Nfa<ISemState> getNFA(EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
-		Nfa<ISemState> nfa = cache.get(key);
+		Nfa<ISemState> nfa = resultCache.get(key);
 		if (nfa != null)
 			return nfa;
 		NfaUtil util = new NfaUtil();
@@ -162,8 +196,9 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		//		util.sortInplace(nfa, distanceMap);
 		initContentValidationNeeded(type, nfa);
 		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState> newHashSet());
+		initOrderIDs(nfa);
 		//		System.out.println(new NfaFormatter().format(nfa));
-		cache.put(key, nfa);
+		resultCache.put(key, nfa);
 		return nfa;
 	}
 
@@ -183,6 +218,12 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 				((SemState) state).contentValidationNeeded = Collections.emptyList();
 	}
 
+	protected void initOrderIDs(Nfa<ISemState> nfa) {
+		for (ISemState state : new NfaUtil().collect(nfa))
+			if (state.getAssignedGrammarElement() != null)
+				((SemState) state).orderID = getElementID(state.getAssignedGrammarElement());
+	}
+
 	protected void initRemainingFeatures(ISemState state, Nfa<ISemState> inverseNfa, Set<ISemState> visited) {
 		BitSet features = state.getAllFollowerFeatures();
 		if (state.getFeature() != null) {
@@ -196,16 +237,6 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 				continue;
 			initRemainingFeatures(follower, inverseNfa, visited);
 		}
-	}
-
-	protected boolean addAll(BitSet to, BitSet bits) {
-		BitSet cpy = new BitSet();
-		cpy.or(to);
-		cpy.or(bits);
-		if (cpy.equals(to))
-			return false;
-		to.or(bits);
-		return true;
 	}
 
 	protected boolean isContentValidationNeeded(Collection<AbstractElement> ass) {

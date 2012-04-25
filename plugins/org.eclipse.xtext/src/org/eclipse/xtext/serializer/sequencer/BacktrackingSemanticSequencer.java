@@ -25,7 +25,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -85,7 +84,9 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				return 1;
 			if (o2Cnt == 0 && o1Cnt > 0)
 				return -1;
-			return 0;
+			int o1id = o1.getOrderID();
+			int o2id = o2.getOrderID();
+			return o1id < o2id ? -1 : o1id > o2id ? 1 : 0;
 		}
 
 	}
