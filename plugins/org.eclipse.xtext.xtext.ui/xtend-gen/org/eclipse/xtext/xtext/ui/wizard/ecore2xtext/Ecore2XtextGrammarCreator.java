@@ -1,12 +1,25 @@
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
@@ -30,6 +43,8 @@ public class Ecore2XtextGrammarCreator {
       {
         Collection<EPackage> _allReferencedEPackages = Ecore2XtextExtensions.allReferencedEPackages(it);
         for(final EPackage it_1 : _allReferencedEPackages) {
+          _builder.append(" ");
+          _builder.newLine();
           _builder.append("import \"");
           String _importURI = UniqueNameUtil.importURI(it_1);
           _builder.append(_importURI, "");
@@ -58,165 +73,398 @@ public class Ecore2XtextGrammarCreator {
       CharSequence _rules = this.rules(_rootElementClass);
       _builder.append(_rules, "");
       _builder.newLineIfNotEmpty();
+      {
+        Collection<EClass> _allDispatcherRuleClasses = Ecore2XtextExtensions.allDispatcherRuleClasses(it);
+        EClass _rootElementClass_1 = it.getRootElementClass();
+        List<EClass> _but = this.<EClass>but(_allDispatcherRuleClasses, _rootElementClass_1);
+        for(final EClass it_2 : _but) {
+          _builder.append(" ");
+          _builder.append("//dispatcher");
+          _builder.newLine();
+          CharSequence _subClassDispatcherRule = this.subClassDispatcherRule(it_2);
+          _builder.append(_subClassDispatcherRule, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      {
+        Iterable<EClassifier> _allConcreteRuleClassifiers = Ecore2XtextExtensions.allConcreteRuleClassifiers(it);
+        EClass _rootElementClass_2 = it.getRootElementClass();
+        List<EClassifier> _but_1 = this.<EClassifier>but(_allConcreteRuleClassifiers, _rootElementClass_2);
+        for(final EClassifier it_3 : _but_1) {
+          _builder.append("//concrete");
+          _builder.newLine();
+          CharSequence _rule = this.rule(it_3);
+          _builder.append(_rule, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
   }
   
-  /**
-   * «DEFINE rule FOR EClass»
-   * «concreteRuleName()» returns «fqn()»:
-   * «	IF onlyOptionalFeatures()
-   * »	{«fqn()»}
-   * «	ENDIF»«
-   * FOREACH prefixFeatures() AS prefixFeature
-   * »	«EXPAND assignment FOR prefixFeature»«
-   * ENDFOREACH
-   * »	'«name»'
-   * «	EXPAND idAssignment»«
-   * IF !inlinedFeatures().isEmpty
-   * »	'{'
-   * «
-   * FOREACH allAttributes() AS attribute
-   * »		«EXPAND assignment FOR attribute»«
-   * ENDFOREACH»«
-   * FOREACH allCrossReferences() AS crossReference
-   * »		«EXPAND assignment FOR crossReference»«
-   * ENDFOREACH»«
-   * FOREACH allContainmentReferences() AS containmentReference
-   * »		«EXPAND assignment FOR containmentReference»«
-   * ENDFOREACH
-   * »    '}'«
-   * ENDIF»;
-   * «ENDDEFINE»
-   */
-  public Object rule(final EClass eClazz) {
-    throw new UnsupportedOperationException("ruleis not implemented");
+  public <T extends EClassifier> List<T> but(final Iterable<T> classes, final EClassifier it) {
+    final List<T> retVal = IterableExtensions.<T>toList(classes);
+    retVal.remove(it);
+    return retVal;
   }
   
-  /**
-   * «DEFINE subClassDispatcherRule FOR EClass-»
-   * «	IF needsDispatcherRule()»
-   * «uniqueName()» returns «fqn()»:
-   * «	EXPAND subClassAlternatives»;
-   * «	ENDIF-»
-   * «ENDDEFINE»
-   * 
-   * «DEFINE subClassAlternatives FOR EClass»«
-   * FOREACH {this}.union(subClasses()).select(c|c.needsConcreteRule()) AS subClass SEPARATOR " | "»«
-   * subClass.concreteRuleName()»«
-   * ENDFOREACH»«
-   * ENDDEFINE»
-   * 
-   * «DEFINE idAssignment FOR EClass-»
-   * «IF idAttribute() != null»	«idAttribute().name»=«assignedRuleCall(idAttribute())»
-   * «ENDIF-»
-   * «ENDDEFINE»
-   * 
-   * «DEFINE assignment FOR EStructuralFeature»«
-   * IF !required
-   * »(«
-   * ENDIF»«
-   * assignmentKeyword()»«
-   * IF many»«
-   * IF isContainment()
-   * »'{' «
-   * ELSE
-   * »'(' «
-   * ENDIF»«
-   * ENDIF»«
-   * name.quoteIfNeccesary()»«
-   * EXPAND assignmentOperator»«
-   * EXPAND assignedTerminal»«
-   * IF many
-   * » ( "," «
-   * name.quoteIfNeccesary()»«
-   * EXPAND assignmentOperator»«
-   * EXPAND assignedTerminal
-   * »)* «
-   * IF isContainment()
-   * »'}' «
-   * ELSE
-   * »')' «
-   * ENDIF»«
-   * ENDIF»«
-   * IF !required
-   * »)?«
-   * ENDIF»
-   * «ENDDEFINE»
-   * 
-   * «DEFINE assignedTerminal FOR EAttribute»«
-   * assignedRuleCall()»«
-   * ENDDEFINE»
-   * 
-   * «DEFINE assignedTerminal FOR EReference»«
-   * IF containment»«
-   * EReferenceType.uniqueName()»«
-   * ELSE
-   * »[«EReferenceType.fqn()»|EString]«
-   * ENDIF»«
-   * ENDDEFINE»
-   * 
-   * «DEFINE assignedTerminal FOR EStructuralFeature»«ENDDEFINE»
-   * 
-   * «DEFINE assignmentOperator FOR EStructuralFeature-»
-   * «IF	many»+=«ELSEIF EType.isBoolean() && isPrefixBooleanFeature()»?=«ELSE»=«ENDIF-»
-   * «ENDDEFINE»
-   * 
-   * «DEFINE rule FOR EEnum»
-   * enum «name.quoteIfNeccesary()» returns «fqn()»:
-   * «EXPAND enumAssignment FOREACH ELiterals SEPARATOR " | "»;
-   * «ENDDEFINE»
-   * 
-   * «DEFINE enumAssignment FOR EEnumLiteral»«name» = '«name»'«ENDDEFINE»
-   */
-  public CharSequence rules(final EClassifier eClassifier) {
-    boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(eClassifier);
-    if (_needsConcreteRule) {
-      this.rule(eClassifier);
-    }
+  public CharSequence subClassDispatcherRule(final EClass it) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _needsDispatcherRule = Ecore2XtextExtensions.needsDispatcherRule(it);
+      if (_needsDispatcherRule) {
+        String _uniqueName = UniqueNameUtil.uniqueName(it);
+        _builder.append(_uniqueName, "");
+        _builder.append(" returns ");
+        String _fqn = Ecore2XtextExtensions.fqn(it);
+        _builder.append(_fqn, "");
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        CharSequence _subClassAlternatives = this.subClassAlternatives(it);
+        _builder.append(_subClassAlternatives, "	");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder;
   }
   
-  /**
-   * «DEFINE rule FOR EDataType»«
-   * IF serializable»
-   * «uniqueName()» returns «fqn()»:
-   * «dataTypeRuleBody()»;
-   * «	ENDIF»«
-   * ENDDEFINE»
-   * 
-   * «DEFINE rule FOR EClassifier»
-   * «ERROR "No rule template for " + this.metaType.name»
-   * «ENDDEFINE»
-   */
-  public CharSequence rule(final EDataType it) {
-    CharSequence _xifexpression = null;
-    boolean _isSerializable = it.isSerializable();
-    if (_isSerializable) {
+  public CharSequence subClassAlternatives(final EClass eClazz) {
+    CharSequence _xblockexpression = null;
+    {
+      ArrayList<EClass> _newArrayList = CollectionLiterals.<EClass>newArrayList(eClazz);
+      Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(eClazz);
+      Iterable<EClass> list = Iterables.<EClass>concat(_newArrayList, _subClasses);
+      final Function1<EClass,Boolean> _function = new Function1<EClass,Boolean>() {
+          public Boolean apply(final EClass c) {
+            boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(c);
+            return Boolean.valueOf(_needsConcreteRule);
+          }
+        };
+      Iterable<EClass> _filter = IterableExtensions.<EClass>filter(list, _function);
+      list = _filter;
       StringConcatenation _builder = new StringConcatenation();
-      String _uniqueName = UniqueNameUtil.uniqueName(it);
-      _builder.append(_uniqueName, "");
-      _builder.append(" returns ");
-      String _fqn = Ecore2XtextExtensions.fqn(it);
-      _builder.append(_fqn, "");
-      _builder.append(":");
+      final Function1<EClass,String> _function_1 = new Function1<EClass,String>() {
+          public String apply(final EClass it) {
+            String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(it);
+            return _concreteRuleName;
+          }
+        };
+      Iterable<String> _map = IterableExtensions.<EClass, String>map(list, _function_1);
+      String _join = IterableExtensions.join(_map, " | ");
+      _builder.append(_join, "");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(it);
-      _builder.append(_dataTypeRuleBody, "	");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
-      _xifexpression = _builder;
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public CharSequence idAssignment(final EClass it) {
+    CharSequence _xblockexpression = null;
+    {
+      final EAttribute idAttr = Ecore2XtextExtensions.idAttribute(it);
+      CharSequence _xifexpression = null;
+      boolean _notEquals = (!Objects.equal(idAttr, null));
+      if (_notEquals) {
+        StringConcatenation _builder = new StringConcatenation();
+        String _name = idAttr.getName();
+        _builder.append(_name, "");
+        _builder.append("=");
+        String _assignedRuleCall = Ecore2XtextExtensions.assignedRuleCall(idAttr);
+        _builder.append(_assignedRuleCall, "");
+        _xifexpression = _builder;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public CharSequence assigment(final EStructuralFeature it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isRequired = it.isRequired();
+      boolean _not = (!_isRequired);
+      if (_not) {
+        _builder.append("(");
+      }
+    }
+    String _assignmentKeyword = Ecore2XtextExtensions.assignmentKeyword(it);
+    _builder.append(_assignmentKeyword, "");
+    {
+      boolean _isMany = it.isMany();
+      if (_isMany) {
+        {
+          boolean _isContainment = Ecore2XtextExtensions.isContainment(it);
+          if (_isContainment) {
+            _builder.append("\'{\'");
+          } else {
+            _builder.append("\'(\'");
+          }
+        }
+      }
+    }
+    String _name = it.getName();
+    String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name);
+    _builder.append(_quoteIfNeccesary, "");
+    CharSequence _assignmentOperator = this.assignmentOperator(it);
+    _builder.append(_assignmentOperator, "");
+    CharSequence _assignedTerminal = this.assignedTerminal(it);
+    _builder.append(_assignedTerminal, "");
+    {
+      boolean _isMany_1 = it.isMany();
+      if (_isMany_1) {
+        _builder.append("( \",\" ");
+        String _name_1 = it.getName();
+        String _quoteIfNeccesary_1 = Ecore2XtextExtensions.quoteIfNeccesary(_name_1);
+        _builder.append(_quoteIfNeccesary_1, "");
+        CharSequence _assignmentOperator_1 = this.assignmentOperator(it);
+        _builder.append(_assignmentOperator_1, "");
+        CharSequence _assignedTerminal_1 = this.assignedTerminal(it);
+        _builder.append(_assignedTerminal_1, "");
+        _builder.append(")*");
+        {
+          boolean _isContainment_1 = Ecore2XtextExtensions.isContainment(it);
+          if (_isContainment_1) {
+            _builder.append("\'}\'");
+          } else {
+            _builder.append("\')\'");
+          }
+        }
+      }
+    }
+    {
+      boolean _isRequired_1 = it.isRequired();
+      boolean _not_1 = (!_isRequired_1);
+      if (_not_1) {
+        _builder.append(")?");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence assignedTerminal(final EStructuralFeature it) {
+    CharSequence _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof EAttribute) {
+        final EAttribute _eAttribute = (EAttribute)it;
+        _matched=true;
+        String _assignedRuleCall = Ecore2XtextExtensions.assignedRuleCall(_eAttribute);
+        _switchResult = _assignedRuleCall;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof EReference) {
+        final EReference _eReference = (EReference)it;
+        _matched=true;
+        CharSequence _xifexpression = null;
+        boolean _isContainment = Ecore2XtextExtensions.isContainment(_eReference);
+        if (_isContainment) {
+          EClass _eReferenceType = _eReference.getEReferenceType();
+          String _uniqueName = UniqueNameUtil.uniqueName(_eReferenceType);
+          _xifexpression = _uniqueName;
+        } else {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("[");
+          EClass _eReferenceType_1 = _eReference.getEReferenceType();
+          String _fqn = Ecore2XtextExtensions.fqn(_eReferenceType_1);
+          _builder.append(_fqn, "");
+          _builder.append("|EString]");
+          _xifexpression = _builder;
+        }
+        _switchResult = _xifexpression;
+      }
+    }
+    if (!_matched) {
+      StringConcatenation _builder = new StringConcatenation();
+      _switchResult = _builder;
+    }
+    return _switchResult;
+  }
+  
+  public CharSequence assignmentOperator(final EStructuralFeature it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isMany = it.isMany();
+      if (_isMany) {
+        _builder.append("+=");
+      } else {
+        boolean _and = false;
+        EClassifier _eType = it.getEType();
+        boolean _isBoolean = Ecore2XtextExtensions.isBoolean(_eType);
+        if (!_isBoolean) {
+          _and = false;
+        } else {
+          boolean _isPrefixBooleanFeature = Ecore2XtextExtensions.isPrefixBooleanFeature(it);
+          _and = (_isBoolean && _isPrefixBooleanFeature);
+        }
+        if (_and) {
+          _builder.append("?=");
+        } else {
+          _builder.append("=");
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence rules(final EClassifier it) {
+    CharSequence _xifexpression = null;
+    boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(it);
+    if (_needsConcreteRule) {
+      CharSequence _rule = this.rule(it);
+      _xifexpression = _rule;
     }
     return _xifexpression;
   }
   
-  public void rule(final EClassifier eClassifier) {
-    String _name = eClassifier.getName();
-    String _plus = ("No rule template for " + _name);
-    IllegalStateException _illegalStateException = new IllegalStateException(_plus);
-    throw _illegalStateException;
+  public CharSequence rule(final EClassifier it) {
+    CharSequence _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof EClass) {
+        final EClass _eClass = (EClass)it;
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(_eClass);
+        _builder.append(_concreteRuleName, "");
+        _builder.append(" returns ");
+        String _fqn = Ecore2XtextExtensions.fqn(_eClass);
+        _builder.append(_fqn, "");
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        {
+          boolean _onlyOptionalFeatures = Ecore2XtextExtensions.onlyOptionalFeatures(_eClass);
+          if (_onlyOptionalFeatures) {
+            _builder.append("{");
+            String _fqn_1 = Ecore2XtextExtensions.fqn(_eClass);
+            _builder.append(_fqn_1, "");
+            _builder.append("}");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          Iterable<EStructuralFeature> _prefixFeatures = Ecore2XtextExtensions.prefixFeatures(_eClass);
+          for(final EStructuralFeature strF : _prefixFeatures) {
+            CharSequence _assigment = this.assigment(strF);
+            _builder.append(_assigment, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("   \'");
+        String _name = _eClass.getName();
+        _builder.append(_name, "");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        CharSequence _idAssignment = this.idAssignment(_eClass);
+        _builder.append(_idAssignment, "");
+        _builder.newLineIfNotEmpty();
+        {
+          Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(_eClass);
+          boolean _isEmpty = IterableExtensions.isEmpty(_inlinedFeatures);
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            _builder.append("\t\'{\'");
+            _builder.newLineIfNotEmpty();
+            {
+              Iterable<EAttribute> _allAttributes = Ecore2XtextExtensions.allAttributes(_eClass);
+              for(final EAttribute attr : _allAttributes) {
+                CharSequence _assigment_1 = this.assigment(attr);
+                _builder.append(_assigment_1, "");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              Iterable<EReference> _allCrossReferences = Ecore2XtextExtensions.allCrossReferences(_eClass);
+              for(final EReference ref : _allCrossReferences) {
+                CharSequence _assigment_2 = this.assigment(ref);
+                _builder.append(_assigment_2, "");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            {
+              Iterable<EReference> _allContainmentReferences = Ecore2XtextExtensions.allContainmentReferences(_eClass);
+              for(final EReference conti : _allContainmentReferences) {
+                CharSequence _assigment_3 = this.assigment(conti);
+                _builder.append(_assigment_3, "");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\'}\'");
+          }
+        }
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _switchResult = _builder;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof EDataType) {
+        final EDataType _eDataType = (EDataType)it;
+        _matched=true;
+        CharSequence _xifexpression = null;
+        boolean _isSerializable = _eDataType.isSerializable();
+        if (_isSerializable) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _uniqueName = UniqueNameUtil.uniqueName(_eDataType);
+          _builder.append(_uniqueName, "");
+          _builder.append(" returns ");
+          String _fqn = Ecore2XtextExtensions.fqn(_eDataType);
+          _builder.append(_fqn, "");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(_eDataType);
+          _builder.append(_dataTypeRuleBody, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _xifexpression = _builder;
+        }
+        _switchResult = _xifexpression;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof EEnum) {
+        final EEnum _eEnum = (EEnum)it;
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("enum ");
+        String _name = _eEnum.getName();
+        String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name);
+        _builder.append(_quoteIfNeccesary, "");
+        _builder.append(" returns ");
+        String _fqn = Ecore2XtextExtensions.fqn(_eEnum);
+        _builder.append(_fqn, "");
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t");
+        EList<EEnumLiteral> _eLiterals = _eEnum.getELiterals();
+        final Function1<EEnumLiteral,String> _function = new Function1<EEnumLiteral,String>() {
+            public String apply(final EEnumLiteral it) {
+              String _name = it.getName();
+              String _plus = (_name + " = \'");
+              String _name_1 = it.getName();
+              String _plus_1 = (_plus + _name_1);
+              String _plus_2 = (_plus_1 + "\'");
+              return _plus_2;
+            }
+          };
+        List<String> _map = ListExtensions.<EEnumLiteral, String>map(_eLiterals, _function);
+        String _join = IterableExtensions.join(_map, " | ");
+        _builder.append(_join, "				");
+        _builder.append(";");
+        _switchResult = _builder;
+      }
+    }
+    if (!_matched) {
+      String _string = it.toString();
+      String _plus = ("No rule template for " + _string);
+      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
+      throw _illegalStateException;
+    }
+    return _switchResult;
   }
 }

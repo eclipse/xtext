@@ -3,6 +3,7 @@ package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.Set;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -29,17 +30,27 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
   }
   
   public void contributeFiles(final IProject project, final IFileCreator creator) {
+    this.createWorkflowFile(creator);
+    this.createGrammarFile(creator);
+  }
+  
+  public IFile createWorkflowFile(final IFileCreator creator) {
     CharSequence _workflow = this.workflow();
     String _basePackagePath = this.projectInfo.getBasePackagePath();
     String _plus = (_basePackagePath + "/Generate");
     String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
     String _plus_1 = (_plus + _languageNameAbbreviation);
     String _plus_2 = (_plus_1 + ".mwe2");
-    creator.writeToFile(_workflow, _plus_2);
+    IFile _writeToFile = creator.writeToFile(_workflow, _plus_2);
+    return _writeToFile;
+  }
+  
+  public IFile createGrammarFile(final IFileCreator creator) {
     Ecore2XtextGrammarCreator _ecore2XtextGrammarCreator = new Ecore2XtextGrammarCreator();
     CharSequence _grammar = _ecore2XtextGrammarCreator.grammar(this.projectInfo);
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();
-    creator.writeToFile(_grammar, _grammarFilePath);
+    IFile _writeToFile = creator.writeToFile(_grammar, _grammarFilePath);
+    return _writeToFile;
   }
   
   private CharSequence workflow() {

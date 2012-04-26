@@ -1,14 +1,17 @@
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext
 
+import java.util.Collection
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.emf.ecore.EDataType
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EStructuralFeature
+
+import static org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextExtensions.*
+
 import static extension org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.*
-import org.eclipse.emf.ecore.EClassifier
-import java.util.Collection
 
 class Ecore2XtextExtensions {
 	/** 
@@ -17,22 +20,28 @@ class Ecore2XtextExtensions {
 	 *	? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet().select(c|c.needsConcreteRule())
 	 *   : (let c = { rootElementClass } : rootElementClass.allAssignedClassifiers(c) -> c.select(c|c.needsConcreteRule()).toSet());
 	 */
-	def static Iterable<EClassifier> allConcreteRuleClassifiers(Ecore2XtextProjectInfo it) {
+	def static  allConcreteRuleClassifiers(Ecore2XtextProjectInfo it) {
 		if (rootElementClass == null) {
 			EPackageInfos.map([allReferencedClassifiers(EPackage,false)]).flatten.toSet.filter([needsConcreteRule(it)])
 		} else {
-			val cls = allAssignedClassifiers(rootElementClass,newArrayList(rootElementClass))
-			cls.filter([c|needsConcreteRule(c)]).toSet
+			val c = newArrayList(typeof(EClassifier).cast(rootElementClass))
+			allAssignedClassifiers(rootElementClass,c)
+			c.filter([cl|needsConcreteRule(cl)]).toSet
 		}
 	}
 	
-/*	 
-cached Collection[EClass] allDispatcherRuleClasses(Ecore2XtextProjectInfo this) :
-	rootElementClass == null
-		? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet().select(c|c.needsDispatcherRule())
-		: allConcreteRuleClassifiers().typeSelect(EClass).collect(c|c.EAllReferences.select(r|r.needsAssignment()).EType).flatten().toSet();
-*/
-
+	/*	 
+	cached Collection[EClass] allDispatcherRuleClasses(Ecore2XtextProjectInfo this) :
+		rootElementClass == null
+			? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet().select(c|c.needsDispatcherRule())
+			: allConcreteRuleClassifiers().typeSelect(EClass).collect(c|c.EAllReferences.select(r|r.needsAssignment()).EType).flatten().toSet();
+	*/
+	def static Collection<EClass> allDispatcherRuleClasses(Ecore2XtextProjectInfo it) {
+		if(rootElementClass == null)
+			EPackageInfos.map([allReferencedClassifiers(EPackage,false)]).flatten.toSet.filter([c|needsDispatcherRule(c)]).filter(typeof(EClass)).toSet
+		else
+			allConcreteRuleClassifiers(it).filter(typeof(EClass)).map([c|c.EAllReferences.filter([r|needsAssignment(r)]).map([EType])]).flatten.filter(typeof(EClass)).toSet
+	}
 	/**
 	 * cached Collection[EPackage] allReferencedEPackages(Ecore2XtextProjectInfo this) :
 	 *	EPackageInfos.EPackage.allReferencedEPackages(true).flatten().toSet();
@@ -70,14 +79,14 @@ cached Collection[EClass] allDispatcherRuleClasses(Ecore2XtextProjectInfo this) 
 			: (acceptor.addAll(classifiers) -> 
 			 classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
 	 */
-	def private static Iterable<EClassifier> allAssignedClassifiers(EClass it, Collection acceptor) {
-		val classifiers = EAllStructuralFeatures.filter([f|needsAssignment(f)]).map([EType]).toList
-		classifiers += subClasses(it)
+	def private static allAssignedClassifiers(EClass eClazz, Collection acceptor) {
+		val classifiers = eClazz.EAllStructuralFeatures.filter([f|needsAssignment(f)]).map([EType]).toList
+		classifiers += subClasses(eClazz)
 		classifiers.removeAll(acceptor)
 		if (classifiers.isEmpty)
 			return null
 		else {
-			acceptor += classifiers			
+			acceptor += classifiers
 			return classifiers.filter(typeof(EClass)).map([c|allAssignedClassifiers(c,acceptor)]).flatten
 		}
 	}
@@ -90,31 +99,40 @@ cached Collection[EClass] allDispatcherRuleClasses(Ecore2XtextProjectInfo this) 
 			EPackage.uniqueName + "::" + quoteIfNeccesary(name)
 	}
 	
+
+def static Iterable<EStructuralFeature> prefixFeatures(EClass it) {
+	EAllStructuralFeatures.filter([f|needsAssignment(f) && isPrefixBooleanFeature(f)]);
+}
+
+
+/*cached inlinedFeatures(EClass this) :
+	EAllStructuralFeatures.select(f|f.needsAssignment()).remove(idAttribute()).removeAll(prefixFeatures()); */
+def static Iterable<EStructuralFeature> inlinedFeatures(EClass it) {
+	val features = EAllStructuralFeatures.filter([f|needsAssignment(f)]).toList
+	features.remove(idAttribute(it))
+	features.removeAll(prefixFeatures(it).toList)
+	return features
+}
+
+def static onlyOptionalFeatures(EClass it) {
+	val features = prefixFeatures(it) + inlinedFeatures(it)
+	features.filter([f|f.required]).isEmpty;
+}
+
 /*
-Void resetUniqueNames(EPackageInfo defaultPackageInfo):
-	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo);
-
-String uniqueName(ENamedElement this):
-	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueName(org.eclipse.emf.ecore.ENamedElement);
-
-String uniqueImplName(ENamedElement this):
-	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueImplName(org.eclipse.emf.ecore.ENamedElement);
-
-cached prefixFeatures(EClass this) :
-	EAllStructuralFeatures.select(f|f.needsAssignment() && f.isPrefixBooleanFeature());
-	
-cached inlinedFeatures(EClass this) :
-	EAllStructuralFeatures.select(f|f.needsAssignment()).remove(idAttribute()).removeAll(prefixFeatures());
-
-cached onlyOptionalFeatures(EClass this) :
-	prefixFeatures().union(inlinedFeatures()).select(f|f.required).isEmpty;
-		
 assignedRuleCall(EAttribute this):
 	(isPrefixBooleanFeature()) ? "'"+name+"'" : EType.uniqueName();
-
-concreteRuleName(EClass this):
-	needsDispatcherRule()? uniqueImplName() : uniqueName();
 */
+def static assignedRuleCall(EAttribute it) {
+	if(isPrefixBooleanFeature(it)) "'"+name+"'" else EType.uniqueName(); 
+}
+
+def static concreteRuleName(EClass it) {
+	if (needsDispatcherRule(it))
+		it.uniqueImplName
+	else
+		it.uniqueName;
+}
 
 def static String dataTypeRuleBody(EDataType it) {
 	switch (name) {
@@ -138,7 +156,7 @@ def static String dataTypeRuleBody(EDataType it) {
 		case 'EShort': intRuleBody()
 		case 'EShortObject': intRuleBody()
 		case 'EString': 'STRING | ID'
-		default: "'" + name + "' // TODO: implement this rule and an appropriate IValueConverter "
+		default: "'" + name + "' /* TODO: implement this rule and an appropriate IValueConverter */"
 	};
 }
 	
@@ -154,11 +172,18 @@ def static decimalRuleBody() {
 def static booleanRuleBody() {
 	"'true' | 'false'";
 }
+
 /*
 assignmentKeyword(EStructuralFeature this) :
 	isPrefixBooleanFeature() ? "" : "'" + name + "' ";  
-
 */
+def static assignmentKeyword(EStructuralFeature it) {
+	if(isPrefixBooleanFeature(it))
+		 "" 
+	else
+		 "'" + name + "' "
+}
+
  /*quoteIfNeccesary(String this) :	
 	isXtextKeyword() ? '^' + this : this;
 	*/
@@ -173,31 +198,42 @@ def static isXtextKeyword(String str) {
 	).contains(str)	
 }
 
-	/*
-idAttribute(EClass this) :
-	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString" && !a.many);
 
-private idAttributeInternal(EClass this) :
-	EAllAttributes.selectFirst(a|a.needsAssignment() && a.ID);
+def static idAttribute(EClass it) {
+	val idAttr = idAttributeInternal(it)
+	if (idAttr != null)
+		idAttr
+	else 
+		 EAllAttributes.findFirst([a|needsAssignment(a) && a.name == 'name' && a.EType.name=="EString" && !a.many]);
+}
 
-isBoolean(EClassifier this) :	
-	EDataType.isInstance(this) && {'EBoolean', 'EBooleanObject'}.contains(name) && isEcoreType();
+def private static  idAttributeInternal(EClass it) {
+	EAllAttributes.findFirst([a|needsAssignment(a) && a.ID]);
+}
+def static boolean isBoolean(EClassifier it) {
+	 (it instanceof EDataType) && newArrayList('EBoolean', 'EBooleanObject').contains(name) && isEcoreType(it);
+}
 
-isPrefixBooleanFeature(EStructuralFeature this) :
-	EType.isBoolean() && !many && defaultValueLiteral != "true";
-	
-isString(EClassifier this) :	
-	EDataType.isInstance(this) && name == 'EString' && isEcoreType();
 
-isEcoreType(EClassifier this) :
+def static boolean isPrefixBooleanFeature(EStructuralFeature it) {
+	isBoolean(it.EType) && !many && defaultValueLiteral != "true";
+}
+
+
+def static isString(EClassifier it) {
+	 it instanceof EDataType  && name == 'EString' && isEcoreType(it);
+}
+
+def static isEcoreType(EClassifier it) {
 	EPackage.nsURI == "http://www.eclipse.org/emf/2002/Ecore";
+}
 
-isID(EStructuralFeature this) :
-	EAttribute.isInstance({this}) && ((EAttribute)this).ID;
-*/	
+def static boolean isID(EStructuralFeature it) {
+	 it instanceof EAttribute && typeof(EAttribute).cast(it).ID;
+}
 	def static boolean needsAssignment(EStructuralFeature it) {
 		//	!derived && !transient && !(EReference.isInstance(this) && ((EReference)this).container) && !(EDataType.isInstance(this.EType) && !((EDataType) this.EType).serializable);
-		!derived && !transient && !((it instanceof EReference) && typeof(EReference).cast(it).container) && !((it.EType instanceof EDataType) && !typeof(EDataType).cast(it).serializable);
+		!derived && !transient && !((it instanceof EReference) && typeof(EReference).cast(it).container) && !((it.EType instanceof EDataType) && !typeof(EDataType).cast(it.EType).serializable);
 	}
 
 	
@@ -205,44 +241,49 @@ isID(EStructuralFeature this) :
 	 *boolean needsConcreteRule(EClass this) :
 	 *	!abstract && !interface;
 	 */
-	def static boolean needsConcreteRule(EClassifier it) {
-		if(it instanceof EClass) {
-			val eClazz = typeof(EClass).cast(it)
-			!eClazz.abstract && !eClazz.interface;
+	def static boolean needsConcreteRule(EClassifier eClassifier) {
+		switch(eClassifier) {
+			EClass: 
+				!eClassifier.^abstract && !eClassifier.interface
+			EClassifier:
+				true
+			default:
+				true
 		}
-		true
 	}
 	
-/*
-boolean needsDispatcherRule(EClass this) :
-	!subClasses().select(c|c.needsConcreteRule()).isEmpty;
 
-boolean needsDispatcherRule(EClassifier this) :
-	false;
+	def static boolean needsDispatcherRule(EClassifier eClassifier)  {
+		switch(eClassifier) {
+			EClass:
+				!subClasses(eClassifier).filter([c|needsConcreteRule(c)]).isEmpty
+			EClassifier:
+				false
+		}
+	}
 
-*/
+
 
 	/**isContainment(EStructuralFeature this) : false;
 	 * isContainment(EAttribute this) : true;
 	 * isContainment(EReference this) : containment;
 	 */
 	def static boolean isContainment(EStructuralFeature eStrFeat) {
-		if (eStrFeat instanceof EAttribute) {
-			return true
-		} else if (eStrFeat instanceof EReference) {
-			return typeof(EReference).cast(eStrFeat).containment
-		} else {
-			return false
+		switch (eStrFeat) {
+			EAttribute:
+				 true
+		    EReference:
+				 eStrFeat.containment
+		 	default:
+				 false
 		}
 	}
 
 	def static subClasses(EClass it) {
 		EPackage.EClassifiers.filter(typeof(EClass)).filter(c|c.EAllSuperTypes.contains(it));
 	}
-/*	
 
-
-	
+	/*
 allAttributes(EClass this) :
 	inlinedFeatures().typeSelect(EAttribute);
 	
@@ -250,7 +291,16 @@ allCrossReferences(EClass this) :
 	inlinedFeatures().typeSelect(EReference).select(r|!r.isContainment());
 	
 allContainmentReferences(EClass this) :
-	inlinedFeatures().typeSelect(EReference).select(r|r.isContainment());
-	 * 
+	inlinedFeatures().typeSelect(EReference).select(r|r.isContainment()); 
 	 */
+	 def static allAttributes(EClass it) {
+	 	inlinedFeatures(it).filter(typeof(EAttribute))
+	 }
+	 def static allCrossReferences(EClass it) {
+	 	inlinedFeatures(it).filter(typeof(EReference)).filter([f|!f.containment])
+	 }
+	 def static allContainmentReferences(EClass it) {
+	 	inlinedFeatures(it).filter(typeof(EReference)).filter([f|f.containment])
+	 }
+	
 }

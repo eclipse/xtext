@@ -18,7 +18,15 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 	}
 	
 	override contributeFiles(IProject project, IFileCreator creator) {
+		createWorkflowFile(creator)
+		createGrammarFile(creator)
+	}
+	
+	def createWorkflowFile(IFileCreator creator) {
 		creator.writeToFile(workflow, projectInfo.basePackagePath+"/Generate"+projectInfo.languageNameAbbreviation+".mwe2")
+	}
+	
+	def createGrammarFile(IFileCreator creator) {
 		creator.writeToFile(new Ecore2XtextGrammarCreator().grammar(projectInfo), projectInfo.grammarFilePath)
 	}
 	
