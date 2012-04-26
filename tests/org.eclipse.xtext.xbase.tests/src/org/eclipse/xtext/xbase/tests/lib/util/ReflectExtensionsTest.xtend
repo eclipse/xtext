@@ -7,6 +7,7 @@ import org.junit.Test
 class ReflectExtensionsTest {
 	
 	public extension ReflectExtensions ext = new ReflectExtensions
+	extension ReflectExtensions privateExt = new ReflectExtensions
 	
 	@Test
 	def void testInvoke_01() {
@@ -77,6 +78,13 @@ class ReflectExtensionsTest {
 			// expected
 		}
 	}
+	
+	@Test
+	def void testGet_03() {
+		val x = new ReflectExtensionsTest
+		Assert::assertSame(x.privateExt, x.get('privateExt'))
+	}
+	
 	@Test
 	def void testSet_01() {
 		val x = new ReflectExtensionsTest
@@ -95,5 +103,11 @@ class ReflectExtensionsTest {
 		}
 	}
 	
+	@Test
+	def void testSet_03() {
+		val x = new ReflectExtensionsTest
+		x.set('privateExt', null)
+		Assert::assertNull(x.privateExt)
+	}
 
 }
