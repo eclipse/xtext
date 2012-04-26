@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext" version="2">
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/NodeModelBuilder.java" type="org.eclipse.xtext.nodemodel.impl.NodeModelBuilder">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.NodeModelBuilder"/>
+                <message_argument value="addNext(AbstractNode, AbstractNode)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.NodeModelBuilder"/>
+                <message_argument value="addPrevious(AbstractNode, AbstractNode)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
