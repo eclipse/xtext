@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.internal.Inline;
 
 import com.google.common.base.Objects;
@@ -75,6 +76,30 @@ public class ObjectExtensions {
 	@Inline(value="$3.$4of($1, $2)", imported=Pair.class, statementExpression=true)
 	public static <A, B> Pair<A, B> operator_mappedTo(A a, B b) {
 		return Pair.of(a, b);
+	}
+	
+	/**
+	 * The <code>doubleArrow</code> operator is used as a 'with'- or 'let'-operation.
+	 * It allows to bind an object to a local scope in order to do something on it.
+	 * 
+	 * Example:
+	 * <code>
+	 *   new Person => [
+	 *     firstName = 'Han'
+	 *     lastName = 'Solo'
+	 *   ]
+	 * </code>
+	 * 
+	 * @param object
+	 *            an object. Can be <code>null</code>.
+	 * @param block
+	 *            the block to execute with the given object. Must not be <code>null</code>.
+	 * @return the reference to object.
+	 * @since 2.3
+	 */
+	public static <T> T operator_doubleArrow(T object, Procedure1<? super T> block) {
+		block.apply(object);
+		return object;
 	}
 
 }
