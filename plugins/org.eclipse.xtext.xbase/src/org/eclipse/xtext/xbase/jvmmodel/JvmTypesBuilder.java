@@ -703,7 +703,7 @@ public class JvmTypesBuilder {
 					} else if (Long.TYPE.getName().equals(typeName)) {
 						p.newLine().append("result = prime * result + (int) (" + field.getSimpleName() +" ^ (" + field.getSimpleName() + " >>> 32));");
 					} else if (Float.TYPE.getName().equals(typeName)) {
-						p.newLine().append("result = prime * result + Float.floatToIntBity(" + field.getSimpleName() +");");
+						p.newLine().append("result = prime * result + Float.floatToIntBits(" + field.getSimpleName() +");");
 					} else if (Double.TYPE.getName().equals(typeName)) {
 						p.newLine().append("result = prime * result + (int) (Double.doubleToLongBits(" + field.getSimpleName() +") ^ (Double.doubleToLongBits(" + field.getSimpleName() + ") >>> 32));");
 					} else {
