@@ -80,4 +80,9 @@ class TypesBuilderExercise {
 		''')
 	}
 	
+	new() {
+		// workaround for bug on windows boxes
+		System::setProperty("line.separator", "\n")
+	}
+	
 }
