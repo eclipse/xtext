@@ -8,10 +8,9 @@
 package org.eclipse.xtext.xbase.lib.internal;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,8 +21,10 @@ import com.google.common.base.Strings;
  * for value objects.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * TODO prevent infinite recursion. The algorithm will fail e.g. for EObjects that
+ * have a pointer to their container which in turn holds a list of it's contents.
  */
-@SuppressWarnings("javadoc")
 public class ToStringHelper {
 	
 	private static class IndentationAwareStringBuilder {
@@ -64,6 +65,12 @@ public class ToStringHelper {
 		}
 	}
 	
+	/**
+	 * Creates a string representation of the given object by listing the internal
+	 * state of all fields.
+	 * @param obj the object that should be printed.
+	 * @return the string representation. Never <code>null</code>.
+	 */
 	public String toString(Object obj) {
 		if (obj == null)
 			return "null";
@@ -81,6 +88,12 @@ public class ToStringHelper {
 		return sb.toString();
 	}
 	
+	/**
+	 * Appends the fields and its value to the given string builder.
+	 * @param field the field. May be a private field.
+	 * @param obj the object that owns the field.
+	 * @param sb the accumulating result.
+	 */
 	protected void addField(Field field, Object obj, IndentationAwareStringBuilder sb) {
 		try {
 			field.setAccessible(true);
@@ -92,6 +105,11 @@ public class ToStringHelper {
 		}
 	}
 	
+	/**
+	 * Append the field value {@code object} the the given string builder.
+	 * @param object the value. May be <code>null</code>. 
+	 * @param sb the accumulating result. 
+	 */
 	protected void internalToString(Object object, IndentationAwareStringBuilder sb) {
 		if (object == null)
 			sb.append("null");
@@ -116,6 +134,8 @@ public class ToStringHelper {
 			sb.append(")");
 		} else if (object instanceof Object[]) {
 			sb.append(Arrays.toString((Object[])object));
+		} else if (object instanceof byte[]) {
+			sb.append(Arrays.toString((byte[])object));
 		} else if (object instanceof char[]) {
 			sb.append(Arrays.toString((char[])object));
 		} else if (object instanceof int[]) {
@@ -140,12 +160,19 @@ public class ToStringHelper {
 		}
 	}
 	
+	/**
+	 * Computes a list of all declared fields of the given class and
+	 * its super classes. Fields of super types are appended to the list.
+	 * @param clazz the clazz whose fields shall be collected.
+	 * @return the list of fields. Never <code>null</code>.
+	 */
 	protected List<Field> getAllDeclaredFields(Class<?> clazz) {
-		ArrayList<Field> fields = new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields()));
-		if (clazz.getSuperclass() != null && clazz.getSuperclass() != Object.class) {
-			fields.addAll(getAllDeclaredFields(clazz.getSuperclass()));
-		}
-		return fields;
+		List<Field> result = new ArrayList<Field>();
+		do {
+			Collections.addAll(result, clazz.getDeclaredFields());
+			clazz = clazz.getSuperclass();
+		} while(clazz != null);
+		return result;
 	}
 	
 }
