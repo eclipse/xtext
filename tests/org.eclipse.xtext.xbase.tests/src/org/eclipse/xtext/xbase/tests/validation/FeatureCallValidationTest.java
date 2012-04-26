@@ -44,8 +44,18 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	// TODO: constructor type arguments
 
 	@Test public void testBinaryOperation_0() throws Exception {
-		XExpression expression = expression("1 + 'foo'");
-		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+		XExpression expression = expression("1 + true");
+		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
+	@Test public void testBinaryOperation_1() throws Exception {
+		XExpression expression = expression("new Integer(1) + 2");
+		helper.assertNoErrors(expression);
+	}
+	
+	@Test public void testBinaryOperation_2() throws Exception {
+		XExpression expression = expression("1 + '2'");
+		helper.assertNoErrors(expression);
 	}
 
 	@Test public void testAssignment_0() throws Exception {

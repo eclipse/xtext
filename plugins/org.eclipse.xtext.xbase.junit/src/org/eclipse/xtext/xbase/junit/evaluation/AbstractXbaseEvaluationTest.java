@@ -515,6 +515,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("footrue", "'foo'+true");
 	}
 	
+	@Test public void testStringConcatenation_3() throws Exception {
+		assertEvaluatesTo("42footrue", "42 +'foo'+true");
+	}
+	
+	@Test public void testStringConcatenation_4() throws Exception {
+		assertEvaluatesTo("truefootrue", "true + 'foo'+true");
+	}
+	
 	@Test public void testAddOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(3), "1+2");
 	}
