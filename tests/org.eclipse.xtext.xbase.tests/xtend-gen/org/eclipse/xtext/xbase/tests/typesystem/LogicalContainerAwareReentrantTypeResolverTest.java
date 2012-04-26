@@ -19,7 +19,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class TypeResolutionStateTest extends AbstractXbaseTestCase {
+public class LogicalContainerAwareReentrantTypeResolverTest extends AbstractXbaseTestCase {
   @Inject
   private LogicalContainerAwareReentrantTypeResolver testMe;
   

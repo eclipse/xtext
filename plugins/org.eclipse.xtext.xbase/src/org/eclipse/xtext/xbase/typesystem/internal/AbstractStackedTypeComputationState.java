@@ -27,7 +27,6 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent) {
 		super(typeResolution, reentrantTypeResolver);
 		this.parent = parent;
-		parent.addForkedState(this);
 	}
 	
 	protected AbstractTypeComputationState getParent() {

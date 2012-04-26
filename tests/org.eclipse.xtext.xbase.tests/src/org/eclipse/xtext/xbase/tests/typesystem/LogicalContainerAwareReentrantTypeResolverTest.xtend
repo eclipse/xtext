@@ -22,7 +22,7 @@ import static org.junit.Assert.*
 /**
  * @author Sebastian Zarnekow
  */
-class TypeResolutionStateTest extends AbstractXbaseTestCase {
+class LogicalContainerAwareReentrantTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Inject LogicalContainerAwareReentrantTypeResolver testMe
 	@Inject TypeReferences typeReferences

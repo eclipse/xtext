@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class ExpressionTypeCheckpointComputationState extends ExpressionTypeComputationState {
 
 	protected ExpressionTypeCheckpointComputationState(TypeResolution typeResolution,

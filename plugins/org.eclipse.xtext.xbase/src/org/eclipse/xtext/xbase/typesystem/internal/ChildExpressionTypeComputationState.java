@@ -7,13 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-
-import com.google.common.collect.Lists;
+import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,22 +27,14 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	}
 	
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		List<ITypeExpectation> parents = getParent().getImmediateExpectations();
-		return wrapExpectations(parents, actualState, false);
-	}
-
-	@Override
-	public List<ITypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
-		List<ITypeExpectation> parents = getParent().getReturnExpectations();
-		return wrapExpectations(parents, actualState, true);
+	protected ExpressionTypeComputationState getParent() {
+		return (ExpressionTypeComputationState) super.getParent();
 	}
 	
-	protected List<ITypeExpectation> wrapExpectations(List<ITypeExpectation> parents, AbstractTypeComputationState actualState, boolean returnType) {
-		List<ITypeExpectation> result = Lists.newArrayListWithCapacity(parents.size());
-		for(ITypeExpectation delegate: parents) {
-			result.add(new DelegatingTypeExpectation((AbstractTypeExpectation) delegate, actualState, returnType));
-		}
-		return result;
+	@Override
+	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type,
+			ConformanceHint conformanceHint, boolean returnType) {
+		super.acceptType(expectation, type, conformanceHint, returnType);
+		getTypeResolution().acceptType(getParent().getExpression(), expectation, type, conformanceHint, returnType);
 	}
 }
