@@ -57,9 +57,9 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	@Test public void testConstructor() throws Exception {
 		newBuilder().append("class Foo extends Exception { new").assertText(
 				"\n" + indent + "\n" + indent + "new() {\n"+ indent + indent + "\n"  + indent + "}",
-				"\n" + indent + "\n" + indent + "new(String message_1) {\n"+ indent + indent + "super(message_1)\n" + indent + "}",
-				"\n" + indent + "\n" + indent + "new(String message_1, Throwable cause_1) {\n"+ indent + indent + "super(message_1, cause_1)\n" + indent + "}",
-				"\n" + indent + "\n" + indent + "new(Throwable cause_1) {\n"+ indent + indent + "super(cause_1)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(String message) {\n"+ indent + indent + "super(message)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(String message, Throwable cause) {\n"+ indent + indent + "super(message, cause)\n" + indent + "}",
+				"\n" + indent + "\n" + indent + "new(Throwable cause) {\n"+ indent + indent + "super(cause)\n" + indent + "}",
 				"new"
 				);
 	}

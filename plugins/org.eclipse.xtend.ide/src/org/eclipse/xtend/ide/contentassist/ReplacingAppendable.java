@@ -25,14 +25,10 @@ import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -83,13 +79,6 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 					whitespaceHelper.initialize(document, offset, length, ensureEmptyLinesAround);
 					ReplacingAppendable appendable = new ReplacingAppendable(importManager,
 							indentation.getIndentString(), document, xtendFile, whitespaceHelper);
-					IScope scope = scopeProvider.createSimpleFeatureCallScope(getLocalVariableScopeContext(context),
-							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context.eResource(), true, -1);
-					for (IEObjectDescription feature : scope.getAllElements()) {
-						if (feature instanceof IValidatedEObjectDescription
-								&& ((IValidatedEObjectDescription) feature).isVisible())
-							appendable.declareVariable(feature, converter.toString(feature.getName()));
-					}
 					for (int i = 0; i < indentationLevel; ++i)
 						appendable.increaseIndentation();
 					return appendable;
