@@ -11,7 +11,6 @@
 <listEntry value="pomFile=output/org.eclipse.xtend.standalone-2.3.0-SNAPSHOT.pom"/>
 <listEntry value="sources=output/org.eclipse.xtend.standalone-2.3.0-SNAPSHOT-sources.jar"/>
 <listEntry value="deployment.url=file:////shared/common/xtend/maven"/>
-<listEntry value="uniqueVersion=false"/>
 </listAttribute>
 <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
 <booleanAttribute key="M2_SKIP_TESTS" value="false"/>
