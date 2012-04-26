@@ -245,6 +245,13 @@ class JvmModelGenerator implements IGenerator {
 		throw new UnsupportedOperationException("generateMember not implemented for elements of type "+it)
 	}
 	
+	def dispatch boolean generateMember(JvmGenericType it, ITreeAppendable appendable, boolean first) {
+		appendable.increaseIndentation.newLine
+		generateBody(it, appendable)
+		appendable.decreaseIndentation
+		return false
+	}
+	
 	def dispatch boolean generateMember(JvmField it, ITreeAppendable appendable, boolean first) {
 		appendable.increaseIndentation.newLine
 		if (!first)
