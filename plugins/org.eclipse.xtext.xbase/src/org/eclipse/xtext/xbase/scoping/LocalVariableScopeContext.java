@@ -28,7 +28,7 @@ public class LocalVariableScopeContext {
 	private final boolean referredFromClosure;
 	private final ILogicalContainerProvider expressionContext;
 	
-	protected LocalVariableScopeContext(EObject context, EReference reference, boolean includeCurrentBlock, int idx, boolean referredFromClosure, ILogicalContainerProvider expressionContext) {
+	public LocalVariableScopeContext(EObject context, EReference reference, boolean includeCurrentBlock, int idx, boolean referredFromClosure, ILogicalContainerProvider expressionContext) {
 		this.context = context;
 		this.reference = reference;
 		this.includeCurrentBlock = includeCurrentBlock;
