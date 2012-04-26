@@ -9,9 +9,9 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(TutorialInjectorProvider.class)
+@SuppressWarnings("all")
 public class TypesBuilderExercise {
   /**
    * The test helper allows to compile DSL code on the fly to Java.

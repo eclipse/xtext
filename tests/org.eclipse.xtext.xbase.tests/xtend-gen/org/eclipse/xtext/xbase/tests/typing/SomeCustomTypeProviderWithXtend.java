@@ -45,8 +45,8 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueB
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypeProvider {
   protected JvmTypeReference _type(final XBinaryOperation binaryOperation, final JvmTypeReference rawExpectation, final boolean rawType) {
     JvmTypeReference _xifexpression = null;

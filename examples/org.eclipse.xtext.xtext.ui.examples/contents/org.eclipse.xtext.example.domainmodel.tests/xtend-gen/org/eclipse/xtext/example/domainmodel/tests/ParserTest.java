@@ -20,9 +20,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(InjectorProviderCustom.class)
+@SuppressWarnings("all")
 public class ParserTest {
   @Inject
   private ParseHelper<DomainModel> _parseHelper;
