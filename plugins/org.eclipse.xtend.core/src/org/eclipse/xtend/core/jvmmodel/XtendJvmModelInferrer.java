@@ -274,7 +274,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			inferredJvmType.getMembers().add(equals);
 		
 		// toString
-		JvmOperation toString = jvmTypesBuilder.toToStringMethod(source, inferredJvmType, dataFields);
+		JvmOperation toString = jvmTypesBuilder.toToStringMethod(source, inferredJvmType);
 		typeExtensions.setSynthetic(toString, true);
 		if (toString != null && !hasMethod(source, toString.getSimpleName(), toString.getParameters()))
 			inferredJvmType.getMembers().add(toString);

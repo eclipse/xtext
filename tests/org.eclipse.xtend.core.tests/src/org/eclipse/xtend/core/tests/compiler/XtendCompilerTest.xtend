@@ -23,6 +23,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
@@ -88,15 +89,8 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  
 			  @Override
 			  public String toString() {
-			    String superToString = super.toString();
-			    if (superToString == null) superToString = "";
-			    int start = superToString.indexOf('[');
-			    int end = superToString.lastIndexOf(']');
-			    superToString = (start == -1 || end == -1) ? "" : (superToString.substring(start + 1,end) + ", ");
-			    return "Foo [" + superToString 
-			         + "_name = " + _name + ", "
-			         + "_myFlag = " + _myFlag + ", "
-			         + "_references = " + _references + "]";
+			    String result = new ToStringHelper().toString(this);
+			    return result;
 			  }
 			}
 		''')
@@ -109,6 +103,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
@@ -150,13 +145,8 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			  
 			  @Override
 			  public String toString() {
-			    String superToString = super.toString();
-			    if (superToString == null) superToString = "";
-			    int start = superToString.indexOf('[');
-			    int end = superToString.lastIndexOf(']');
-			    superToString = (start == -1 || end == -1) ? "" : (superToString.substring(start + 1,end) + ", ");
-			    return "Foo [" + superToString 
-			         + "_name = " + _name + "]";
+			    String result = new ToStringHelper().toString(this);
+			    return result;
 			  }
 			}
 		''')
