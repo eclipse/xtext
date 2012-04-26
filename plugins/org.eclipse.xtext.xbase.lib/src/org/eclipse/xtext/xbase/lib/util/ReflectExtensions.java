@@ -37,7 +37,7 @@ public class ReflectExtensions {
 		Preconditions.checkNotNull(receiver,"receiver");
 		Preconditions.checkNotNull(fieldName,"fieldName");
 		Class<? extends Object> clazz = receiver.getClass();
-		Field f = clazz.getField(fieldName);
+		Field f = getDeclaredField(clazz, fieldName);
 		if (!f.isAccessible())
 			f.setAccessible(true);
 		f.set(receiver, value);
@@ -62,10 +62,25 @@ public class ReflectExtensions {
 		Preconditions.checkNotNull(fieldName,"fieldName");
 		
 		Class<? extends Object> clazz = receiver.getClass();
-		Field f = clazz.getField(fieldName);
+		Field f = getDeclaredField(clazz, fieldName);
 		if (!f.isAccessible())
 			f.setAccessible(true);
 		return (T) f.get(receiver);
+	}
+	
+	private Field getDeclaredField(Class<?> clazz, String name) throws NoSuchFieldException {
+		NoSuchFieldException initialException = null;
+		do {
+			try {
+				Field f = clazz.getDeclaredField(name);
+				return f;
+			} catch(NoSuchFieldException noSuchField) {
+				if (initialException == null) {
+					initialException = noSuchField;
+				}
+			}
+		} while((clazz = clazz.getSuperclass()) != null);
+		throw initialException;
 	}
 	
 	/**
@@ -91,13 +106,15 @@ public class ReflectExtensions {
 		
 		Class<? extends Object> clazz = receiver.getClass();
 		Method compatible = null;
-		for (Method candidate : clazz.getMethods()) {
-			if (candidate != null && !candidate.isBridge() && isCompatible(candidate, methodName, arguments) && candidate.equals(clazz.getMethod(candidate.getName(), candidate.getParameterTypes()))) {
-				if (compatible != null) 
-					throw new IllegalStateException("Ambiguous methods to invoke. Both "+compatible+" and  "+candidate+" would be compatible choices.");
-				compatible = candidate;
+		do {
+			for (Method candidate : clazz.getDeclaredMethods()) {
+				if (candidate != null && !candidate.isBridge() && isCompatible(candidate, methodName, arguments) && candidate.equals(clazz.getMethod(candidate.getName(), candidate.getParameterTypes()))) {
+					if (compatible != null) 
+						throw new IllegalStateException("Ambiguous methods to invoke. Both "+compatible+" and  "+candidate+" would be compatible choices.");
+					compatible = candidate;
+				}
 			}
-		}
+		} while(compatible == null && (clazz = clazz.getSuperclass()) != null);
 		if (compatible != null) {
 			if (!compatible.isAccessible())
 				compatible.setAccessible(true);
@@ -108,7 +125,7 @@ public class ReflectExtensions {
 		for (int i = 0; i< arguments.length ; i++) {
 			paramTypes[i] = arguments[i] == null ? Object.class : arguments[i].getClass();
 		}
-		Method method = clazz.getMethod(methodName, paramTypes);
+		Method method = receiver.getClass().getMethod(methodName, paramTypes);
 		return method.invoke(receiver, arguments);
 	}
 	
