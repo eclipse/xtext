@@ -21,21 +21,11 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
-
-import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
 public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider {
-
-	@Inject
-	private FeatureCallToJavaMapping featureCallToJavaMapping;
-
-	@Inject
-	private ITypeProvider typeProvider;
 
 	public static String FEATURECALL_LINKING_DIAGNOSTIC = "org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider.Linking";
 
