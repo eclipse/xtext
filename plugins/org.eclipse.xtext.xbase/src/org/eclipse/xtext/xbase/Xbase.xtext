@@ -52,14 +52,14 @@ XRelationalExpression returns XExpression:
 	 =>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
 
 OpCompare:
-	'>=' | '<=' | '>' | '<';
+	'>=' | '<=' | '>' | '<' ;
 
 XOtherOperatorExpression returns XExpression:
 	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
 	rightOperand=XAdditiveExpression)*;
 
 OpOther:
-	'->' | '..';
+	'->' | '..' | '=>';
 
 XAdditiveExpression returns XExpression:
 	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
