@@ -179,7 +179,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		// Create empty method in XtendClass
 		StringBuilderBasedAppendable methodDescriptionBuilder = new StringBuilderBasedAppendable();
 		methodDescriptionBuilder.append("...").newLine().append("def ").append(issue.getData()[1]).append(" {}").newLine().append("...");
-		IssueResolution issueResolutionMethodInType = new IssueResolution("create method " + callText, methodDescriptionBuilder.toString(), "fix_indent.gif", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
+		IssueResolution issueResolutionMethodInType = new IssueResolution("create method " + callText, methodDescriptionBuilder.toString(), "fix_public_function.png", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
 
 			public void apply(final EObject element, final IModificationContext context) throws Exception {
 					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
@@ -194,8 +194,8 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			// Create field in XtendClass
 			StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable();
 			String fieldType = issue.getData()[2];
-			fieldDescriptionBuilder.append("...").newLine().append(fieldType).append(" ").append(elementName);
-			IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_indent.gif", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
+			fieldDescriptionBuilder.append("...").newLine().append(fieldType).append(" ").append(elementName).newLine().append("...");
+			IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_private_field.png", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
 
 				public void apply(EObject element, IModificationContext context) throws Exception {
 					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
