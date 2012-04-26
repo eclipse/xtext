@@ -49,7 +49,7 @@ import com.google.inject.Provider;
 @NonNullByDefault
 public class FileBasedTraceInformation implements ITraceInformation {
 
-	public static final String TRACE_FILE_EXTENSION = "_trace";
+	public static final String TRACE_FILE_EXTENSION = "._trace";
 
 	private static final Logger log = Logger.getLogger(StorageAwareTrace.class);
 	
