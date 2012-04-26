@@ -101,5 +101,20 @@ public class ObjectExtensions {
 		block.apply(object);
 		return object;
 	}
-
+	
+	/**
+	 * The binary <code>+</code> operator that concatenates two strings.
+	 * 
+	 * @param a
+	 *            an {@link Object}.
+	 * @param b
+	 *            a {@link String}.
+	 * @return <code>a + b</code>
+	 * @since 2.3
+	 */
+	@Inline("($1 + $2)")
+	public static String operator_plus(Object a, String b) {
+		return a + b;
+	}
+	
 }
