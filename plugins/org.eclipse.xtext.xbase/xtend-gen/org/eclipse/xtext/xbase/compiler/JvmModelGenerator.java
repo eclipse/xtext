@@ -497,6 +497,14 @@ public class JvmModelGenerator implements IGenerator {
     throw _unsupportedOperationException;
   }
   
+  protected boolean _generateMember(final JvmGenericType it, final ITreeAppendable appendable, final boolean first) {
+    ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
+    _increaseIndentation.newLine();
+    this.generateBody(it, appendable);
+    appendable.decreaseIndentation();
+    return false;
+  }
+  
   protected boolean _generateMember(final JvmField it, final ITreeAppendable appendable, final boolean first) {
     ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
     _increaseIndentation.newLine();
@@ -1483,6 +1491,8 @@ public class JvmModelGenerator implements IGenerator {
   public boolean generateMember(final JvmMember it, final ITreeAppendable appendable, final boolean first) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable, first);
+    } else if (it instanceof JvmGenericType) {
+      return _generateMember((JvmGenericType)it, appendable, first);
     } else if (it instanceof JvmOperation) {
       return _generateMember((JvmOperation)it, appendable, first);
     } else if (it instanceof JvmField) {
