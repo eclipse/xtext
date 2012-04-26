@@ -15,6 +15,10 @@
 			<id>local-repository</id>
 			<url>${deployment.url}</url>
 		</repository>
+		<snapshotRepository>
+			<id>local-repository</id>
+			<url>${deployment.url}</url>
+		</snapshotRepository>
 	</distributionManagement>
 	<properties>
 		<deployment.url>file:///shared/common/xtend/maven/</deployment.url>
