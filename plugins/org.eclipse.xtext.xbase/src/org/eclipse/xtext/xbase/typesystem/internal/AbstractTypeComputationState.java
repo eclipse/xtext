@@ -39,7 +39,6 @@ import com.google.common.collect.Lists;
  */
 @NonNullByDefault
 public abstract class AbstractTypeComputationState implements ITypeComputationState, ITypeComputationState.Fork {
-	private List<AbstractStackedTypeComputationState> pendingForks = null;
 	private final TypeResolution typeResolution;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
 	
@@ -47,16 +46,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			DefaultReentrantTypeResolver reentrantTypeResolver) {
 		this.typeResolution = typeResolution;
 		this.reentrantTypeResolver = reentrantTypeResolver;
-	}
-	
-	protected void addForkedState(AbstractStackedTypeComputationState fork) {
-		ensurePendingForks().add(fork);
-	}
-	
-	protected List<AbstractStackedTypeComputationState> ensurePendingForks() {
-		if (pendingForks == null)
-			pendingForks = Lists.newArrayListWithCapacity(2);
-		return pendingForks;
 	}
 	
 	protected TypeResolution getTypeResolution() {

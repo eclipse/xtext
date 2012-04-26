@@ -91,6 +91,10 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	protected ITypeComputer getTypeComputer() {
 		return typeComputer;
 	}
+
+	protected void setTypeComputer(ITypeComputer typeComputer) {
+		this.typeComputer = typeComputer;
+	}
 	
 	protected TypeReferences getTypeReferences() {
 		return typeReferences;

@@ -14,8 +14,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 
-import com.google.common.collect.Lists;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
@@ -52,6 +50,10 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	@Override
 	public ITypeComputationState withTypeCheckpoint() {
 		return new ExpressionTypeCheckpointComputationState(getTypeResolution(), getResolver(), this, expression);
+	}
+	
+	protected XExpression getExpression() {
+		return expression;
 	}
 	
 }
