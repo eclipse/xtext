@@ -131,7 +131,7 @@ public class XbaseResource extends DerivedStateAwareResource {
 						"Please make sure that you don't use XAbstractFeatureCall#getFeature in the type inference or " +
 						"in your scoping implementation but AbstractTypeProvider#getFeature instead.\n" +
 						"You may want to look out for invocations of XAbstractFeatureCall#getFeature in the " +
-						"stack trace to spot to misbehaving implementation.");
+						"stack trace to spot the misbehaving implementation.");
 			if (featureCall != null) {
 				state.featureCallToReceiverAssumption.put(featureCall, implicitReceiver);
 				state.featureCallToFirstArgumentAssumption.put(featureCall, implicitFirstArgument);
