@@ -6,6 +6,7 @@ import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class JvmTypeExtensions {
 	
@@ -21,15 +22,15 @@ class JvmTypeExtensions {
 	}
 	
 	def isSynthetic(JvmIdentifiableElement element) {
-		element.metaData._synthetic
+		element.metaData.synthetic
 	}
 	
 	def void setSynthetic(JvmIdentifiableElement element, boolean isSynthetic) {
-		element.metaData._synthetic = isSynthetic
+		element.metaData.synthetic = isSynthetic
 	}
 	
 	def protected JvmIdentifiableMetaData getMetaData(JvmIdentifiableElement element) {
-		var metaData = element.eAdapters.filter(typeof(JvmIdentifiableMetaData)).head
+		var metaData = EcoreUtil::getAdapter(element.eAdapters, typeof(JvmIdentifiableMetaData)) as JvmIdentifiableMetaData
 		if (metaData == null) {
 			metaData = new JvmIdentifiableMetaData
 			element.eAdapters += metaData
@@ -40,5 +41,10 @@ class JvmTypeExtensions {
 }
 
 class JvmIdentifiableMetaData extends AdapterImpl {
-	public boolean _synthetic
+	@Property boolean synthetic
+	
+	override isAdapterForType(Object type) {
+		typeof(JvmIdentifiableMetaData) == type
+	}
+	
 }

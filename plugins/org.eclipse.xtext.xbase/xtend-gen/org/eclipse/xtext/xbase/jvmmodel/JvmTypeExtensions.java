@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -65,18 +66,19 @@ public class JvmTypeExtensions {
   
   public boolean isSynthetic(final JvmIdentifiableElement element) {
     JvmIdentifiableMetaData _metaData = this.getMetaData(element);
-    return _metaData._synthetic;
+    boolean _isSynthetic = _metaData.isSynthetic();
+    return _isSynthetic;
   }
   
   public void setSynthetic(final JvmIdentifiableElement element, final boolean isSynthetic) {
     JvmIdentifiableMetaData _metaData = this.getMetaData(element);
-    _metaData._synthetic = isSynthetic;
+    _metaData.setSynthetic(isSynthetic);
   }
   
   protected JvmIdentifiableMetaData getMetaData(final JvmIdentifiableElement element) {
     EList<Adapter> _eAdapters = element.eAdapters();
-    Iterable<JvmIdentifiableMetaData> _filter = Iterables.<JvmIdentifiableMetaData>filter(_eAdapters, JvmIdentifiableMetaData.class);
-    JvmIdentifiableMetaData metaData = IterableExtensions.<JvmIdentifiableMetaData>head(_filter);
+    Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, JvmIdentifiableMetaData.class);
+    JvmIdentifiableMetaData metaData = ((JvmIdentifiableMetaData) _adapter);
     boolean _equals = Objects.equal(metaData, null);
     if (_equals) {
       JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
