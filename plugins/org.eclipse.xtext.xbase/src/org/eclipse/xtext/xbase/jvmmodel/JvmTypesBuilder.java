@@ -73,6 +73,7 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 
 import com.google.inject.Inject;
@@ -634,13 +635,6 @@ public class JvmTypesBuilder {
 	public JvmOperation toToStringMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType) {
 		if(sourceElement == null || declaredType == null)
 			return null;
-		return toToStringMethod(sourceElement, declaredType, toArray(filter(declaredType.getMembers(), JvmField.class), JvmField.class));
-	}
-	
-	@Nullable 
-	public JvmOperation toToStringMethod(@Nullable final EObject sourceElement, @Nullable final JvmDeclaredType declaredType, final JvmField ...jvmFields) {
-		if(sourceElement == null || declaredType == null)
-			return null;
 		JvmOperation result = toMethod(sourceElement, "toString", newTypeRef(sourceElement, String.class), null);
 		if (result == null)
 			return null;
@@ -649,20 +643,15 @@ public class JvmTypesBuilder {
 			public void apply(@Nullable ITreeAppendable p) {
 				if (p == null)
 					return;
-				p.append("String superToString = super.toString();");
-				p.newLine().append("if (superToString == null) superToString = \"\";");
-				p.newLine().append("int start = superToString.indexOf('[');");
-				p.newLine().append("int end = superToString.lastIndexOf(']');");
-				p.newLine().append("superToString = (start == -1 || end == -1) ? \"\" : (superToString.substring(start + 1,end) + \", \");");
-				p.newLine().append("return \""+declaredType.getSimpleName()+" [\" + superToString ").increaseIndentation().increaseIndentation();
-				for (int i = 0; i < jvmFields.length; i++) {
-					JvmField field = jvmFields[i];
-					p.newLine().append(" + \"" + field.getSimpleName() +" = \" + " + field.getSimpleName());
-					if (i +1 < jvmFields.length) {
-						p.append(" + \", \"");
-					}
+				JvmTypeReference typeRef = JvmTypesBuilder.this.newTypeRef(sourceElement, ToStringHelper.class);
+				p.append("String result = new ");
+				if (typeRef != null) {
+					p.append(typeRef.getType());
+				} else {
+					p.append(ToStringHelper.class.getName());
 				}
-				p.append(" + \"]\";").decreaseIndentation().decreaseIndentation();
+				p.append("().toString(this);");
+				p.newLine().append("return result;");
 			}
 		});
 		return result;
