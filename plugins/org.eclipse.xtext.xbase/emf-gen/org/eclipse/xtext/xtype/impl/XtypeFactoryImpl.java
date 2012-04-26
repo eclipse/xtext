@@ -123,7 +123,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	 */
 	public XComputedTypeReference createXComputedTypeReference()
 	{
-		XComputedTypeReferenceImpl xComputedTypeReference = new XComputedTypeReferenceImpl();
+		XComputedTypeReferenceImplCustom xComputedTypeReference = new XComputedTypeReferenceImplCustom();
 		return xComputedTypeReference;
 	}
 

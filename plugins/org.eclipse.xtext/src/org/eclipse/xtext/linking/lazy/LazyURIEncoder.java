@@ -30,8 +30,14 @@ import com.google.inject.Singleton;
 @Singleton
 public class LazyURIEncoder {
 	
-	private static final String XTEXT_LINK = "xtextLink_";
-	private static final String SEP = "::";
+	/**
+	 * @since 2.3
+	 */
+	public static final String XTEXT_LINK = "xtextLink_";
+	/**
+	 * @since 2.3
+	 */
+	public static final String SEP = "::";
 
 	/**
 	 * encodes the given three parameters into a string, so that they can be

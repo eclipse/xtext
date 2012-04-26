@@ -24,11 +24,11 @@ public class DelegatingScope extends JvmFeatureScope {
 	
 	private IScope delegate = IScope.NULLSCOPE;
 
-	protected DelegatingScope(IScope parent) {
+	public DelegatingScope(IScope parent) {
 		this(parent, "DelegatingScope");
 	}
 	
-	protected DelegatingScope(IScope parent, String name) {
+	public DelegatingScope(IScope parent, String name) {
 		super(parent, name, Collections.<IValidatedEObjectDescription>emptyList());
 	}
 	
