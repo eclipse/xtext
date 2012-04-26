@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.linking;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -57,44 +54,15 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 			if(xtendClazz != null){
 				String clazzName = xtendClazz.getSimpleName();
 				EList<XExpression> explicitArguments = featureCall.getExplicitArguments();
-				String argumentString = computeArguments(explicitArguments);
-				if(argumentString == null)
-					return null;
-				String callText = linkText + argumentString;
 				String firstPartOfMessage = "The method ";
-				String fieldType = "Object";
-				if(explicitArguments.size() == 0){
+				if(explicitArguments.size() == 0)
 					firstPartOfMessage += "or field ";
-					JvmTypeReference expectedType = null;//FIXME typeProvider.getExpectedType(featureCall);
-					if(expectedType != null && expectedType.getType() != null)
-						fieldType = expectedType.getSimpleName();
-				}
-				return new DiagnosticMessage(firstPartOfMessage + callText + " is undefined for the type " + clazzName, Severity.ERROR,FEATURECALL_LINKING_DIAGNOSTIC, linkText, callText, fieldType);
+				return new DiagnosticMessage(firstPartOfMessage + linkText + " is undefined for the type " + clazzName, Severity.ERROR,FEATURECALL_LINKING_DIAGNOSTIC, linkText);
 			}
 		}
 		EClass referenceType = context.getReference().getEReferenceType();
 		String msg = "Couldn't resolve reference to " + referenceType.getName() + " '" + linkText + "'.";
 		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
-
-	private String computeArguments(EList<XExpression> arguments){
-		StringBuilder builder = new StringBuilder();
-		Iterator<XExpression> iterator = arguments.iterator();
-		if(arguments.size() > 0){
-			builder.append("(");
-			while(iterator.hasNext()){
-				XExpression expr = iterator.next();
-//				JvmTypeReference type = typeProvider.getType(expr);
-//				if(type == null)
-//					return null;
-//				builder.append(type.getSimpleName());
-				if(iterator.hasNext())
-					builder.append(", ");
-			}
-			builder.append(")");
-		}
-		return builder.toString();
-	}
-
 
 }
