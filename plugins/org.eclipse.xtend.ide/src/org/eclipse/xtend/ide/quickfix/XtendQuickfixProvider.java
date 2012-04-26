@@ -170,60 +170,101 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			stopWatch.resetAndLog("#getResolutions");
 		}
 	}
-
-	@SuppressWarnings("null")
+	
 	private void createXtendLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
 		final String elementName = issue.getData()[0];
-		String callText = issue.getData()[1];
+		modificationContext.getXtextDocument().modify(new IUnitOfWork.Void<XtextResource>(){
+
+			@Override
+			public void process(XtextResource state) throws Exception {
+				EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
+				if(eObject instanceof XAbstractFeatureCall){
+					XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
+					EList<XExpression> explicitArguments = call.getExplicitArguments();
+					String argumentString = computeArguments(explicitArguments);
+					String callText = elementName + argumentString;
+					createNewXtendFunction(elementName, callText, issue, issueResolutionAcceptor, modificationContext);
+					if (explicitArguments.size() == 0){
+						String fieldType = "Object";
+						JvmTypeReference expectedType = typeProvider.getExpectedType(call);
+						if(expectedType != null && expectedType.getType() != null)
+							fieldType = expectedType.getSimpleName();
+						createNewXtendField(elementName, fieldType, issue, issueResolutionAcceptor, modificationContext);
+					}
+				}
+			}
+			
+			private String computeArguments(EList<XExpression> arguments){
+				StringBuilder builder = new StringBuilder();
+				Iterator<XExpression> iterator = arguments.iterator();
+				if(arguments.size() > 0){
+					builder.append("(");
+					while(iterator.hasNext()){
+						XExpression expr = iterator.next();
+						JvmTypeReference type = typeProvider.getType(expr);
+						if(type == null)
+							return null;
+						builder.append(type.getSimpleName());
+						if(iterator.hasNext())
+							builder.append(", ");
+					}
+					builder.append(")");
+				}
+				return builder.toString();
+			}
+		});
+		
+		
+	}
+	
+	@SuppressWarnings("null")
+	private void createNewXtendFunction(final String elementName, String callText, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
 		// Create empty method in XtendClass
 		StringBuilderBasedAppendable methodDescriptionBuilder = new StringBuilderBasedAppendable();
-		methodDescriptionBuilder.append("...").newLine().append("def ").append(issue.getData()[1]).append(" {}").newLine().append("...");
+		methodDescriptionBuilder.append("...").newLine().append("def ").append(callText).append(" {}").newLine().append("...");
 		IssueResolution issueResolutionMethodInType = new IssueResolution("create method " + callText, methodDescriptionBuilder.toString(), "fix_public_function.png", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
 
 			public void apply(final EObject element, final IModificationContext context) throws Exception {
 					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
 					XtendClass xtendClazz = EcoreUtil2.getContainerOfType(element, XtendClass.class);
 					IXtextDocument xtextDocument = context.getXtextDocument();
-					createNewFunctionInClazz(call, xtendClazz, xtextDocument, elementName);
+					doCreateNewFunctionInClazz(call, xtendClazz, xtextDocument, elementName);
 			}
 		}));
 		issueResolutionAcceptor.getIssueResolutions().add(issueResolutionMethodInType);
+	}
+	@SuppressWarnings("null")
+	private void createNewXtendField(final String elementName, String fieldType, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
+		// Create field in XtendClass
+		StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable();
+		fieldDescriptionBuilder.append("...").newLine().append(fieldType).append(" ").append(elementName).newLine().append("...");
+		IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_private_field.png", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
 
-		if(!callText.contains("(")){
-			// Create field in XtendClass
-			StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable();
-			String fieldType = issue.getData()[2];
-			fieldDescriptionBuilder.append("...").newLine().append(fieldType).append(" ").append(elementName).newLine().append("...");
-			IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_private_field.png", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
-
-				public void apply(EObject element, IModificationContext context) throws Exception {
-					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
-					XtendClass xtendClazz = EcoreUtil2.getContainerOfType(element, XtendClass.class);
-					IXtextDocument xtextDocument = context.getXtextDocument();
-					int offsetOfOpeningBrace = getOffsetOfOpeningBrace(xtendClazz);
-					int openingBraceOffset = offsetOfOpeningBrace;
-					if(openingBraceOffset != -1)
-						createNewFieldInClazz(elementName, call, xtextDocument, openingBraceOffset);
-				}
-
-				private int getOffsetOfOpeningBrace(XtendClass xtendClazz) {
-					int openingBraceOffset = -1;
-					for (ILeafNode leafNode : NodeModelUtils.getNode(xtendClazz).getLeafNodes()) {
-						if (leafNode.getGrammarElement() instanceof Keyword
-								&& equal("{", ((Keyword) leafNode.getGrammarElement()).getValue())) {
-							return leafNode.getOffset() + 1;
-						}
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				XAbstractFeatureCall call = (XAbstractFeatureCall) element;
+				XtendClass xtendClazz = EcoreUtil2.getContainerOfType(element, XtendClass.class);
+				IXtextDocument xtextDocument = context.getXtextDocument();
+				int offsetOfOpeningBrace = getOffsetOfOpeningBrace(xtendClazz);
+				int openingBraceOffset = offsetOfOpeningBrace;
+				if(openingBraceOffset != -1)
+					doCreateNewFieldInClazz(elementName, call, xtextDocument, openingBraceOffset);
+			}
+			private int getOffsetOfOpeningBrace(XtendClass xtendClazz) {
+				int openingBraceOffset = -1;
+				for (ILeafNode leafNode : NodeModelUtils.getNode(xtendClazz).getLeafNodes()) {
+					if (leafNode.getGrammarElement() instanceof Keyword
+							&& equal("{", ((Keyword) leafNode.getGrammarElement()).getValue())) {
+						return leafNode.getOffset() + 1;
 					}
-					return openingBraceOffset;
 				}
-			}));
-			issueResolutionAcceptor.getIssueResolutions().add(issueResolutionField);
-		}
+				return openingBraceOffset;
+			}
+		}));
+		issueResolutionAcceptor.getIssueResolutions().add(issueResolutionField);
 	}
 
-
-	private void createNewFunctionInClazz(XAbstractFeatureCall call, XtendClass xtendClazz, IXtextDocument xtextDocument,
+	private void doCreateNewFunctionInClazz(XAbstractFeatureCall call, XtendClass xtendClazz, IXtextDocument xtextDocument,
 			String functionName) throws BadLocationException {
 		final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, call, superMemberImplementor.getFunctionInsertOffset(xtendClazz), 0, 1, false);
 		appendable.newLine().increaseIndentation().append("def " + functionName );
@@ -252,7 +293,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	}
 
 	@SuppressWarnings("null")
-	private void createNewFieldInClazz(final String elementName, XAbstractFeatureCall call,
+	private void doCreateNewFieldInClazz(final String elementName, XAbstractFeatureCall call,
 			IXtextDocument xtextDocument, int openingBraceOffset) throws BadLocationException {
 		final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, call, openingBraceOffset, 0, 1, false);
 		JvmTypeReference expectedType = typeProvider.getExpectedType(call);
