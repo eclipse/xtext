@@ -14,7 +14,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractXbaseWithAnnotationsSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XbaseWithAnnotationsGrammarAccess grammarAccess;

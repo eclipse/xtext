@@ -58,7 +58,7 @@ import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class AbstractTutorialSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject

@@ -153,7 +153,8 @@ ruleXOtherOperatorExpression :
 // Rule OpOther
 ruleOpOther :
 	'->' |
-	'..'
+	'..' |
+	'=>'
 ;
 
 // Rule XAdditiveExpression

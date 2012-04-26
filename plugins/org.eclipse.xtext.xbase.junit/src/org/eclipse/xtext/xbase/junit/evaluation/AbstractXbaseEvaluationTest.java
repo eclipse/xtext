@@ -24,8 +24,9 @@ import testdata.OuterClass;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Collections.emptyList;
+import static java.util.Collections.*;
+
+import static com.google.common.collect.Lists.*;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -2397,6 +2398,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		BigDecimal y = new BigDecimal("3");
 		assertEvaluatesTo(x.divide(y, MathContext.DECIMAL128), 
 				"1BD/3BD"); 
+	}
+	
+	@Test
+	public void testWithOperator() throws Exception {
+		assertEvaluatesTo("foobar", "(new StringBuilder => [ append('foo') it => [foo | foo.append('bar')] ]).toString");
 	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {

@@ -353,10 +353,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:23:7: ( '+' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:23:9: '+'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:23:7: ( '=>' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:23:9: '=>'
             {
-            match('+'); 
+            match("=>"); 
+
 
             }
 
@@ -373,10 +374,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:24:7: ( '-' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:24:9: '-'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:24:7: ( '+' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:24:9: '+'
             {
-            match('-'); 
+            match('+'); 
 
             }
 
@@ -393,10 +394,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:25:7: ( '*' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:25:9: '*'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:25:7: ( '-' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:25:9: '-'
             {
-            match('*'); 
+            match('-'); 
 
             }
 
@@ -413,11 +414,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:26:7: ( '**' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:26:9: '**'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:26:7: ( '*' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:26:9: '*'
             {
-            match("**"); 
-
+            match('*'); 
 
             }
 
@@ -434,10 +434,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:27:7: ( '/' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:27:9: '/'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:27:7: ( '**' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:27:9: '**'
             {
-            match('/'); 
+            match("**"); 
+
 
             }
 
@@ -454,10 +455,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:28:7: ( '%' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:28:9: '%'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:28:7: ( '/' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:28:9: '/'
             {
-            match('%'); 
+            match('/'); 
 
             }
 
@@ -474,10 +475,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:29:7: ( '!' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:29:9: '!'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:29:7: ( '%' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:29:9: '%'
             {
-            match('!'); 
+            match('%'); 
 
             }
 
@@ -494,10 +495,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:30:7: ( '.' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:30:9: '.'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:30:7: ( '!' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:30:9: '!'
             {
-            match('.'); 
+            match('!'); 
 
             }
 
@@ -514,11 +515,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:31:7: ( 'val' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:31:9: 'val'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:31:7: ( '.' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:31:9: '.'
             {
-            match("val"); 
-
+            match('.'); 
 
             }
 
@@ -535,10 +535,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:32:7: ( 'super' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:32:9: 'super'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:32:7: ( 'val' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:32:9: 'val'
             {
-            match("super"); 
+            match("val"); 
 
 
             }
@@ -556,10 +556,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:33:7: ( 'false' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:33:9: 'false'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:33:7: ( 'super' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:33:9: 'super'
             {
-            match("false"); 
+            match("super"); 
 
 
             }
@@ -577,10 +577,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:34:7: ( 'package' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:34:9: 'package'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:34:7: ( 'false' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:34:9: 'false'
             {
-            match("package"); 
+            match("false"); 
 
 
             }
@@ -598,10 +598,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:35:7: ( 'import' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:35:9: 'import'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:35:7: ( 'package' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:35:9: 'package'
             {
-            match("import"); 
+            match("package"); 
 
 
             }
@@ -619,10 +619,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:36:7: ( 'entity' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:36:9: 'entity'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:36:7: ( 'import' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:36:9: 'import'
             {
-            match("entity"); 
+            match("import"); 
 
 
             }
@@ -640,10 +640,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:37:7: ( '{' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:37:9: '{'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:37:7: ( 'entity' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:37:9: 'entity'
             {
-            match('{'); 
+            match("entity"); 
+
 
             }
 
@@ -660,10 +661,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:38:7: ( '}' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:38:9: '}'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:38:7: ( '{' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:38:9: '{'
             {
-            match('}'); 
+            match('{'); 
 
             }
 
@@ -680,11 +681,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:39:7: ( 'extends' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:39:9: 'extends'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:39:7: ( '}' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:39:9: '}'
             {
-            match("extends"); 
-
+            match('}'); 
 
             }
 
@@ -701,10 +701,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:40:7: ( ':' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:40:9: ':'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:40:7: ( 'extends' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:40:9: 'extends'
             {
-            match(':'); 
+            match("extends"); 
+
 
             }
 
@@ -721,11 +722,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:41:7: ( 'instanceof' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:41:9: 'instanceof'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:41:7: ( ':' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:41:9: ':'
             {
-            match("instanceof"); 
-
+            match(':'); 
 
             }
 
@@ -742,10 +742,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:42:7: ( 'as' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:42:9: 'as'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:42:7: ( 'instanceof' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:42:9: 'instanceof'
             {
-            match("as"); 
+            match("instanceof"); 
 
 
             }
@@ -763,10 +763,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:43:7: ( ',' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:43:9: ','
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:43:7: ( 'as' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:43:9: 'as'
             {
-            match(','); 
+            match("as"); 
+
 
             }
 
@@ -783,10 +784,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:44:7: ( ')' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:44:9: ')'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:44:7: ( ',' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:44:9: ','
             {
-            match(')'); 
+            match(','); 
 
             }
 
@@ -803,10 +804,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:45:7: ( '[' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:45:9: '['
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:45:7: ( ')' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:45:9: ')'
             {
-            match('['); 
+            match(')'); 
 
             }
 
@@ -823,10 +824,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:46:7: ( ']' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:46:9: ']'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:46:7: ( '[' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:46:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -843,10 +844,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:47:7: ( ';' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:47:9: ';'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:47:7: ( ']' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:47:9: ']'
             {
-            match(';'); 
+            match(']'); 
 
             }
 
@@ -863,10 +864,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:48:7: ( '(' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:48:9: '('
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:48:7: ( ';' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:48:9: ';'
             {
-            match('('); 
+            match(';'); 
 
             }
 
@@ -883,11 +884,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:49:7: ( 'if' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:49:9: 'if'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:49:7: ( '(' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:49:9: '('
             {
-            match("if"); 
-
+            match('('); 
 
             }
 
@@ -904,10 +904,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:50:7: ( 'else' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:50:9: 'else'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:50:7: ( 'if' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:50:9: 'if'
             {
-            match("else"); 
+            match("if"); 
 
 
             }
@@ -925,10 +925,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:51:7: ( 'switch' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:51:9: 'switch'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:51:7: ( 'else' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:51:9: 'else'
             {
-            match("switch"); 
+            match("else"); 
 
 
             }
@@ -946,10 +946,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:52:7: ( 'default' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:52:9: 'default'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:52:7: ( 'switch' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:52:9: 'switch'
             {
-            match("default"); 
+            match("switch"); 
 
 
             }
@@ -967,10 +967,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:53:7: ( 'case' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:53:9: 'case'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:53:7: ( 'default' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:53:9: 'default'
             {
-            match("case"); 
+            match("default"); 
 
 
             }
@@ -988,10 +988,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:54:7: ( 'for' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:54:9: 'for'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:54:7: ( 'case' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:54:9: 'case'
             {
-            match("for"); 
+            match("case"); 
 
 
             }
@@ -1009,10 +1009,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:55:7: ( 'while' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:55:9: 'while'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:55:7: ( 'for' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:55:9: 'for'
             {
-            match("while"); 
+            match("for"); 
 
 
             }
@@ -1030,10 +1030,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:56:7: ( 'do' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:56:9: 'do'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:56:7: ( 'while' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:56:9: 'while'
             {
-            match("do"); 
+            match("while"); 
 
 
             }
@@ -1051,10 +1051,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:57:7: ( '::' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:57:9: '::'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:57:7: ( 'do' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:57:9: 'do'
             {
-            match("::"); 
+            match("do"); 
 
 
             }
@@ -1072,10 +1072,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:58:7: ( 'new' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:58:9: 'new'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:58:7: ( '::' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:58:9: '::'
             {
-            match("new"); 
+            match("::"); 
 
 
             }
@@ -1093,10 +1093,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:59:7: ( 'null' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:59:9: 'null'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:59:7: ( 'new' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:59:9: 'new'
             {
-            match("null"); 
+            match("new"); 
 
 
             }
@@ -1114,10 +1114,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:60:7: ( 'typeof' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:60:9: 'typeof'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:60:7: ( 'null' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:60:9: 'null'
             {
-            match("typeof"); 
+            match("null"); 
 
 
             }
@@ -1135,10 +1135,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:61:7: ( 'throw' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:61:9: 'throw'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:61:7: ( 'typeof' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:61:9: 'typeof'
             {
-            match("throw"); 
+            match("typeof"); 
 
 
             }
@@ -1156,10 +1156,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:62:7: ( 'return' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:62:9: 'return'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:62:7: ( 'throw' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:62:9: 'throw'
             {
-            match("return"); 
+            match("throw"); 
 
 
             }
@@ -1177,10 +1177,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:63:7: ( 'try' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:63:9: 'try'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:63:7: ( 'return' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:63:9: 'return'
             {
-            match("try"); 
+            match("return"); 
 
 
             }
@@ -1198,10 +1198,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:64:7: ( 'finally' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:64:9: 'finally'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:64:7: ( 'try' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:64:9: 'try'
             {
-            match("finally"); 
+            match("try"); 
 
 
             }
@@ -1219,10 +1219,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:65:7: ( 'catch' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:65:9: 'catch'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:65:7: ( 'finally' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:65:9: 'finally'
             {
-            match("catch"); 
+            match("finally"); 
 
 
             }
@@ -1240,10 +1240,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:66:7: ( '=>' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:66:9: '=>'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:66:7: ( 'catch' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:66:9: 'catch'
             {
-            match("=>"); 
+            match("catch"); 
 
 
             }
@@ -1405,10 +1405,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:12: ( '0x' | '0X' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1436,7 +1436,7 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:13: '0x'
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:13: '0x'
                     {
                     match("0x"); 
 
@@ -1444,7 +1444,7 @@ public class InternalTutorialLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:18: '0X'
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:18: '0X'
                     {
                     match("0X"); 
 
@@ -1454,7 +1454,7 @@ public class InternalTutorialLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1492,7 +1492,7 @@ public class InternalTutorialLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1501,10 +1501,10 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1522,7 +1522,7 @@ public class InternalTutorialLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1546,7 +1546,7 @@ public class InternalTutorialLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15507:84: ( 'l' | 'L' )
+                            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1585,11 +1585,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15509:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15509:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15509:21: ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1638,11 +1638,11 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1651,7 +1651,7 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1662,7 +1662,7 @@ public class InternalTutorialLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:36: ( '+' | '-' )?
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1695,7 +1695,7 @@ public class InternalTutorialLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1707,7 +1707,7 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1731,7 +1731,7 @@ public class InternalTutorialLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15511:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -1764,10 +1764,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15513:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15513:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15513:11: ( '^' )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1776,7 +1776,7 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15513:11: '^'
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:11: '^'
                     {
                     match('^'); 
 
@@ -1794,7 +1794,7 @@ public class InternalTutorialLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15513:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -1843,10 +1843,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1864,10 +1864,10 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -1883,7 +1883,7 @@ public class InternalTutorialLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1899,7 +1899,7 @@ public class InternalTutorialLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1924,10 +1924,10 @@ public class InternalTutorialLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop12:
                     do {
                         int alt12=3;
@@ -1943,7 +1943,7 @@ public class InternalTutorialLexer extends Lexer {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1959,7 +1959,7 @@ public class InternalTutorialLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15515:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2002,12 +2002,12 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15525:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15525:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15525:24: ( options {greedy=false; } : . )*
             loop14:
             do {
                 int alt14=2;
@@ -2032,7 +2032,7 @@ public class InternalTutorialLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15517:52: .
+            	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15525:52: .
             	    {
             	    matchAny(); 
 
@@ -2062,12 +2062,12 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop15:
             do {
                 int alt15=2;
@@ -2080,7 +2080,7 @@ public class InternalTutorialLexer extends Lexer {
 
                 switch (alt15) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2100,7 +2100,7 @@ public class InternalTutorialLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:40: ( ( '\\r' )? '\\n' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -2109,9 +2109,9 @@ public class InternalTutorialLexer extends Lexer {
             }
             switch (alt17) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:41: ( '\\r' )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -2120,7 +2120,7 @@ public class InternalTutorialLexer extends Lexer {
                     }
                     switch (alt16) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15519:41: '\\r'
+                            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15527:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2152,10 +2152,10 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15529:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15529:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15521:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15529:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt18=0;
             loop18:
             do {
@@ -2209,8 +2209,8 @@ public class InternalTutorialLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:16: ( . )
-            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15523:18: .
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15531:16: ( . )
+            // ../org.eclipse.xtext.example.tutorial.ui/src-gen/org/eclipse/xtext/example/tutorial/ui/contentassist/antlr/internal/InternalTutorial.g:15531:18: .
             {
             matchAny(); 
 
@@ -2789,17 +2789,17 @@ public class InternalTutorialLexer extends Lexer {
         "\uffff\2\172\1\uffff\1\145\1\uffff\2\172\4\uffff\1\157\2\uffff\1"+
         "\146\1\172\1\uffff";
     static final String DFA19_acceptS =
-        "\14\uffff\1\22\6\uffff\1\33\1\34\2\uffff\1\41\1\42\1\43\1\44\1\45"+
-        "\1\46\12\uffff\1\103\2\uffff\1\107\1\110\1\5\1\70\1\1\1\2\1\15\1"+
-        "\3\1\75\1\4\1\72\1\6\1\23\1\7\1\11\1\10\1\12\1\13\1\16\1\14\1\24"+
-        "\1\20\1\74\1\17\1\105\1\106\1\21\1\22\1\uffff\1\103\14\uffff\1\33"+
-        "\1\34\1\57\1\36\1\uffff\1\41\1\42\1\43\1\44\1\45\1\46\12\uffff\1"+
-        "\73\1\71\1\100\1\uffff\1\101\1\102\1\104\1\107\12\uffff\1\47\3\uffff"+
-        "\1\40\1\uffff\1\56\12\uffff\1\25\1\76\3\uffff\1\54\13\uffff\1\60"+
-        "\3\uffff\1\65\13\uffff\1\50\1\uffff\1\53\2\uffff\1\61\2\uffff\1"+
-        "\77\1\uffff\1\26\1\uffff\1\27\7\uffff\1\67\1\55\1\uffff\1\63\1\uffff"+
-        "\1\51\2\uffff\1\31\1\uffff\1\32\2\uffff\1\62\1\64\1\66\1\30\1\uffff"+
-        "\1\35\1\52\2\uffff\1\37";
+        "\14\uffff\1\23\6\uffff\1\34\1\35\2\uffff\1\42\1\43\1\44\1\45\1\46"+
+        "\1\47\12\uffff\1\103\2\uffff\1\107\1\110\1\5\1\15\1\1\1\2\1\16\1"+
+        "\3\1\75\1\4\1\72\1\6\1\24\1\7\1\11\1\10\1\12\1\13\1\17\1\14\1\25"+
+        "\1\21\1\74\1\20\1\105\1\106\1\22\1\23\1\uffff\1\103\14\uffff\1\34"+
+        "\1\35\1\60\1\37\1\uffff\1\42\1\43\1\44\1\45\1\46\1\47\12\uffff\1"+
+        "\73\1\71\1\100\1\uffff\1\101\1\102\1\104\1\107\12\uffff\1\50\3\uffff"+
+        "\1\41\1\uffff\1\57\12\uffff\1\26\1\76\3\uffff\1\55\13\uffff\1\61"+
+        "\3\uffff\1\66\13\uffff\1\51\1\uffff\1\54\2\uffff\1\62\2\uffff\1"+
+        "\77\1\uffff\1\27\1\uffff\1\30\7\uffff\1\70\1\56\1\uffff\1\64\1\uffff"+
+        "\1\52\2\uffff\1\32\1\uffff\1\33\2\uffff\1\63\1\65\1\67\1\31\1\uffff"+
+        "\1\36\1\53\2\uffff\1\40";
     static final String DFA19_specialS =
         "\1\1\47\uffff\1\0\1\2\u00ae\uffff}>";
     static final String[] DFA19_transitionS = {

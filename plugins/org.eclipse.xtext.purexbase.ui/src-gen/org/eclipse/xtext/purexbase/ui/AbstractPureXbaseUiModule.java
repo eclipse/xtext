@@ -212,10 +212,15 @@ public abstract class AbstractPureXbaseUiModule extends DefaultUiModule {
 	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider> bindIEObjectHoverProvider() {
 		return org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider.class;
 	}
-	
+
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHover> bindIEObjectHover() {
 		return org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider> bindIEObjectHoverDocumentationProvider() {
+		return org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

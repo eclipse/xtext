@@ -131,7 +131,8 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	}
 
 	/**
-	 * @deprecated the package should not be accessed statically.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Deprecated

@@ -2282,6 +2282,14 @@ rule__OpOther__Alternatives
 { after(grammarAccess.getOpOtherAccess().getFullStopFullStopKeyword_1()); }
 )
 
+    |(
+{ before(grammarAccess.getOpOtherAccess().getEqualsSignGreaterThanSignKeyword_2()); }
+
+	'=>' 
+
+{ after(grammarAccess.getOpOtherAccess().getEqualsSignGreaterThanSignKeyword_2()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);

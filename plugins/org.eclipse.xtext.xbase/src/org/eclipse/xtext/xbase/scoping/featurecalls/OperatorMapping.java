@@ -39,6 +39,7 @@ public class OperatorMapping {
 	public static final QualifiedName MAPPED_TO = create("->");
 	public static final QualifiedName UP_TO = create("..");
 	public static final QualifiedName NOT = create("!");
+	public static final QualifiedName DOUBLE_ARROW = create("=>");
 	
 	protected BiMap<QualifiedName, QualifiedName> map = HashBiMap.create();
 	
@@ -67,6 +68,7 @@ public class OperatorMapping {
 		map.put(MAPPED_TO, create(OP_PREFIX+"mappedTo"));
 		map.put(UP_TO, create(OP_PREFIX+"upTo"));
 		map.put(NOT, create(OP_PREFIX+"not"));
+		map.put(DOUBLE_ARROW, create(OP_PREFIX+"doubleArrow"));
 	}
 	
 	public QualifiedName getMethodName(QualifiedName operator) {
