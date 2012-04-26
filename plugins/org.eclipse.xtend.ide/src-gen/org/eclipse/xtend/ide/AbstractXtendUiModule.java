@@ -5,8 +5,6 @@
 package org.eclipse.xtend.ide;
 
 import org.eclipse.xtext.ui.DefaultUiModule;
-import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
-import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
@@ -239,9 +237,9 @@ public abstract class AbstractXtendUiModule extends DefaultUiModule {
 	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHover> bindIEObjectHover() {
 		return org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover.class;
 	}
-	
+
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider> bindIEObjectHoverDocumentationProvider(){
+	public Class<? extends org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider> bindIEObjectHoverDocumentationProvider() {
 		return org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider.class;
 	}
 
