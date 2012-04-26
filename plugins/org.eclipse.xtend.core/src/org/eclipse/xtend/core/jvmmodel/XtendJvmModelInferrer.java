@@ -76,9 +76,6 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -196,14 +193,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	protected void addDataObjectMethods(final XtendClass source, final JvmGenericType inferredJvmType) {
 		final Iterable<XtendField> fields = filter(source.getMembers(), XtendField.class);
-		final Iterable<JvmField> jvmFields = Iterables.transform(fields, new Function<XtendField, JvmField>() {
-			public @Nullable JvmField apply(@Nullable XtendField input) {
-				for (EObject candidate : associations.getJvmElements(input))
-					if (candidate instanceof JvmField)
-						return (JvmField) candidate;
-				return null;
-			}
-		});
+		final Iterable<JvmField> jvmFields = inferredJvmType.getDeclaredFields();
 		final JvmConstructor superConstructor = getSuperConstructor(source);
 		// constructor
 		if ( isEmpty(filter(source.getMembers(), XtendConstructor.class)) ) {
@@ -260,7 +250,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		
 		// hashcode
-		final JvmField[] dataFields = toArray(filter(jvmFields, Predicates.notNull()), JvmField.class);
+		final JvmField[] dataFields = toArray(jvmFields, JvmField.class);
 			
 		JvmOperation hashCode = jvmTypesBuilder.toHashCodeMethod(source, superConstructor != null, dataFields);
 		typeExtensions.setSynthetic(hashCode, true);
