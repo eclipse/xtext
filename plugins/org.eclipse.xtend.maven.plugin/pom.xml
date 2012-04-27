@@ -4,7 +4,8 @@
 	<artifactId>xtend-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
 	<name>Xtend Maven Plugin</name>
-	<url>http://xtend-lang.org</url><parent>
+	<url>http://xtend-lang.org</url>
+	<parent>
 		<groupId>org.eclipse.xtend</groupId>
 		<artifactId>org.eclipse.xtend.maven</artifactId>
 		<version>2.3.0-SNAPSHOT</version>
@@ -203,5 +204,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
