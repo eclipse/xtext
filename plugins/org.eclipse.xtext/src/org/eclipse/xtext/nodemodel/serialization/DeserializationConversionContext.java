@@ -92,7 +92,7 @@ public class DeserializationConversionContext {
 		this.hasErrors = hasErrors;
 	}
 
-	boolean hasErrors() {
+	public boolean hasErrors() {
 		return hasErrors;
 	}
 
