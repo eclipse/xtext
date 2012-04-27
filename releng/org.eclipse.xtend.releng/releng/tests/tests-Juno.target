@@ -9,6 +9,7 @@
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
 <unit id="org.eclipse.ui.cheatsheets" version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
+<unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.2milestones"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
