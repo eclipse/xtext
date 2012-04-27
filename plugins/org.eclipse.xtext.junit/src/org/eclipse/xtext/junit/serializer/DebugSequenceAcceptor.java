@@ -50,6 +50,9 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		this(null, false);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate) {
 		this(delegate, false);
 	}
@@ -58,6 +61,9 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		this(null, printInstantly);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate, boolean printInstantly) {
 		super(delegate);
 		this.printInstantly = printInstantly;

@@ -27,6 +27,7 @@ import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.3
  */
 public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 

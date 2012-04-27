@@ -112,15 +112,15 @@ public class AssertableDiagnostics {
 		}
 	}
 
-	public static Pred diagnostic(int severity, String issueCode, String messageFragment) {
+	public static Pred diagnostic(Integer severity, String issueCode, String messageFragment) {
 		return new Pred(severity, null, issueCode, messageFragment);
 	}
 
-	public static Pred diagnostic(int severity, int code, String messageFragment) {
+	public static Pred diagnostic(Integer severity, Integer code, String messageFragment) {
 		return new Pred(severity, code, null, messageFragment);
 	}
 
-	public static Pred diagnostic(int severity, int code, String issueCode, String messageFragment) {
+	public static Pred diagnostic(Integer severity, Integer code, String issueCode, String messageFragment) {
 		return new Pred(severity, code, issueCode, messageFragment);
 	}
 
