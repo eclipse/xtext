@@ -60,21 +60,6 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {List<?> foo}", document.get());
 	}
 
-	@Test public void testVarName_0() throws Exception {
-		final XtextDocument document = insertField("package test import java.util.List class Foo {String foo |}", "foo", List.class);
-		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {String foo List<?> foo_1}", document.get());
-	}
-
-	@Test public void testVarName_1() throws Exception {
-		final XtextDocument document = insertField("package test import java.util.List class Foo {String foo_1 def bar(String foo) {|}}", "foo", List.class);
-		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {String foo_1 def bar(String foo) {List<?> foo_2}}", document.get());
-	}
-
-	@Test public void testVarName_2() throws Exception {
-		final XtextDocument document = insertField("package test import java.util.List class Foo {def bar(String foo) {} def baz() {|}}", "foo", List.class);
-		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {def bar(String foo) {} def baz() {List<?> foo}}", document.get());
-	}
-
 	protected XtextDocument insertField(final String model, final String fieldName, final Class<?> fieldType)
 			throws Exception {
 		final int cursorPosition = model.indexOf('|');
