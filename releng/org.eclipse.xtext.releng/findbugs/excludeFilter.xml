@@ -28,6 +28,10 @@
 	
 	<!-- Xtend generated: guava Objects.equal(x,null) should be a valid construct -->
 	<Match>
+		<Class name="org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions" />
+		<Bug pattern="EC_NULL_ARG" />
+	</Match>
+	<Match>
 		<Package name="org.eclipse.xtext.generator.serializer" />
 		<Bug pattern="EC_NULL_ARG" />
 	</Match>
