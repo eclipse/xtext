@@ -210,13 +210,15 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					}
 					final Map<String, JvmField> namesToField = newHashMap();
 					for (XtendField f : fields) {
-						if (f.getInitialValue() == null) {
+						if (f.getInitialValue() == null && f.getName() != null) {
 							String name = f.getName();
 							int tries = 1;
 							while (!names.add(name)) {
 								name = name + (tries++);
 							}
-							constructor.getParameters().add( jvmTypesBuilder.toParameter(f, name, f.getType()) );
+							final JvmFormalParameter parameter = jvmTypesBuilder.toParameter(f, name, f.getType());
+							if (parameter != null)
+								constructor.getParameters().add( parameter );
 							namesToField.put(name, associations.getJvmField(f));
 						}
 					}
