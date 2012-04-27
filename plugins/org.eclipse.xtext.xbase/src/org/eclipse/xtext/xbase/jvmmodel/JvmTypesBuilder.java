@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -1033,6 +1034,14 @@ public class JvmTypesBuilder {
 		if (anno.getValue() != null) {
 			JvmAnnotationValue value = getJvmAnnotationValue(anno.getValue());
 			if (value != null) {
+				Iterable<JvmFeature> allFeatures = anno.getAnnotationType().getAllFeatures();
+				for (JvmFeature jvmFeature : allFeatures) {
+					if (jvmFeature instanceof JvmOperation) {
+						JvmOperation operation = (JvmOperation) jvmFeature;
+						if (operation.getSimpleName().equals("value"))
+							value.setOperation(operation);
+					}
+				}
 				reference.getValues().add(value);
 			}
 		}

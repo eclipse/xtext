@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmEnumerationType
+import com.google.inject.name.Named
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -60,6 +61,22 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
+	}
+	
+	@Test
+	def void testAnnotationDefaultValue() {
+		val f = XAnnotationsFactory::eINSTANCE
+		val e = expression("'Foo'");
+		
+		val anno = f.createXAnnotation;
+		anno.annotationType = references.findDeclaredType(typeof(Named), e) as JvmAnnotationType
+		anno.value = e
+		val type = typesFactory.createJvmGenericType
+		newArrayList(anno).translateAnnotationsTo(type)
+		
+		assertEquals(anno.annotationType, type.annotations.head.annotation)
+		assertEquals("Foo", (type.annotations.head.values.head as JvmStringAnnotationValue).values.head)
+		assertEquals("value", type.annotations.head.values.head.operation.simpleName)
 	}
 	
 	@Test

@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
@@ -107,6 +108,42 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<String> _values_1 = ((JvmStringAnnotationValue) _head_2).getValues();
       String _head_3 = IterableExtensions.<String>head(_values_1);
       Assert.assertEquals("Foo", _head_3);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnnotationDefaultValue() {
+    try {
+      final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
+      final XExpression e = this.expression("\'Foo\'");
+      final XAnnotation anno = f.createXAnnotation();
+      JvmType _findDeclaredType = this.references.findDeclaredType(Named.class, e);
+      anno.setAnnotationType(((JvmAnnotationType) _findDeclaredType));
+      anno.setValue(e);
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
+      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
+      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      EList<JvmAnnotationReference> _annotations = type.getAnnotations();
+      JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
+      JvmAnnotationType _annotation = _head.getAnnotation();
+      Assert.assertEquals(_annotationType, _annotation);
+      EList<JvmAnnotationReference> _annotations_1 = type.getAnnotations();
+      JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
+      EList<JvmAnnotationValue> _values = _head_1.getValues();
+      JvmAnnotationValue _head_2 = IterableExtensions.<JvmAnnotationValue>head(_values);
+      EList<String> _values_1 = ((JvmStringAnnotationValue) _head_2).getValues();
+      String _head_3 = IterableExtensions.<String>head(_values_1);
+      Assert.assertEquals("Foo", _head_3);
+      EList<JvmAnnotationReference> _annotations_2 = type.getAnnotations();
+      JvmAnnotationReference _head_4 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
+      EList<JvmAnnotationValue> _values_2 = _head_4.getValues();
+      JvmAnnotationValue _head_5 = IterableExtensions.<JvmAnnotationValue>head(_values_2);
+      JvmOperation _operation = _head_5.getOperation();
+      String _simpleName = _operation.getSimpleName();
+      Assert.assertEquals("value", _simpleName);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
