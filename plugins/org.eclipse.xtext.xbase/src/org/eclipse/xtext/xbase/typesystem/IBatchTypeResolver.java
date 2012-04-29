@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 
 import com.google.inject.ImplementedBy;
@@ -22,6 +22,6 @@ import com.google.inject.ImplementedBy;
 public interface IBatchTypeResolver {
 
 	@NonNull
-	ITypeResolution resolveTypes(@Nullable XExpression expression);
+	IResolvedTypes resolveTypes(@Nullable EObject object);
 	
 }

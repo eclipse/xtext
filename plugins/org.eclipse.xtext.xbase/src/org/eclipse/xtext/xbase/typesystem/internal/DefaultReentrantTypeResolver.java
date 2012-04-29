@@ -7,14 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.ITypeResolution;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
-import org.eclipse.xtext.xtype.XtypeFactory;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.inject.Inject;
 
@@ -25,19 +30,16 @@ import com.google.inject.Inject;
 public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 
 	@Inject
-	private TypeReferences typeReferences;
+	private CommonTypeComputationServices services;
 	
 	@Inject
 	private ITypeComputer typeComputer;
 	
 	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
-	
-	@Inject(optional = true)
-	private XtypeFactory xtypeFactory = XtypeFactory.eINSTANCE;
+	private ScopeProviderAccess scopeProviderAccess;
 	
 	@Inject
-	private ScopeProviderAccess scopeProviderAccess;
+	private IBatchScopeProvider batchScopeProvider;
 	
 	private EObject root;
 	
@@ -52,7 +54,7 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	}
 	
 	@NonNull
-	public ITypeResolution reentrantResolve() {
+	public IResolvedTypes reentrantResolve() {
 		if (resolving) {
 			throw new UnsupportedOperationException("TODO: import a functional handle on the type resolution that delegates to the best available (current, but evolving) result");
 		}
@@ -64,27 +66,31 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		}
 	}
 	
-	protected ITypeResolution resolve() {
-		TypeResolution typeResolution = new TypeResolution(this);
-		computeTypes(typeResolution);
-		return typeResolution;
-	}
-
-	
-	protected void computeTypes(TypeResolution typeResolution) {
-		computeTypes(typeResolution, root);
+	protected IResolvedTypes resolve() {
+		ResolvedTypes result = new ResolvedTypes(this);
+		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
+		computeTypes(result, session);
+		return result;
 	}
 	
-	protected void computeTypes(TypeResolution typeResolution, EObject element) {
+	protected TypeParameterSubstitutor createTypeParameterSubstitutor() {
+		return new TypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services);
+	}
+	
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		computeTypes(resolvedTypes, session, root);
+	}
+	
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session, EObject element) {
 		if (element instanceof XExpression) {
-			_computeTypes(typeResolution, (XExpression) element);
+			_computeTypes(resolvedTypes, session, (XExpression) element);
 		} else {
 			throw new IllegalArgumentException("element: " + element);
 		}
 	}
 
-	protected void _computeTypes(TypeResolution typeResolution, XExpression expression) {
-		RootExpressionComputationState state = new RootExpressionComputationState(typeResolution, expression, this);
+	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session, XExpression expression) {
+		RootExpressionComputationState state = new RootExpressionComputationState(resolvedTypes, session, expression, this);
 		state.computeTypes();
 	}
 	
@@ -96,20 +102,15 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		this.typeComputer = typeComputer;
 	}
 	
-	protected TypeReferences getTypeReferences() {
-		return typeReferences;
-	}
-	
 	protected ScopeProviderAccess getScopeProviderAccess() {
 		return scopeProviderAccess;
 	}
 
-	protected TypeConformanceComputer getConformanceComputer() {
-		return typeConformanceComputer;
+	protected IBatchScopeProvider getBatchScopeProvider() {
+		return batchScopeProvider;
 	}
 
-	protected XtypeFactory getXtypeFactory() {
-		return xtypeFactory;
+	protected CommonTypeComputationServices getServices() {
+		return services;
 	}
-
 }

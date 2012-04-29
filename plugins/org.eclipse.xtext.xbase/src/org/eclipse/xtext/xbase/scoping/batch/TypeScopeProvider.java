@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -36,28 +35,28 @@ public class TypeScopeProvider {
 	public IScope createTypeScope(IScope parentScope, EObject context, EReference reference) {
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(context);
 		if (logicalContainer != null) {
-			 return createTypeScope(parentScope, logicalContainer, reference);
+			 return createTypeParameterScope(parentScope, logicalContainer, reference);
 		}
 		return parentScope;
 	}
 	
-	protected IScope createTypeScope(IScope parentScope, JvmIdentifiableElement context, EReference reference) {
+	protected IScope createTypeParameterScope(IScope parentScope, JvmIdentifiableElement context, EReference reference) {
 		if (context == null)
 			return parentScope;
 		if (context.eContainer() instanceof JvmIdentifiableElement) {
-			parentScope = createTypeScope(parentScope, (JvmIdentifiableElement) context.eContainer(), reference);
+			parentScope = createTypeParameterScope(parentScope, (JvmIdentifiableElement) context.eContainer(), reference);
 		}
 		if (context instanceof JvmTypeParameterDeclarator) {
 			List<IEObjectDescription> descriptions = Lists.newArrayList();
 			JvmTypeParameterDeclarator typeParamDeclarator = (JvmTypeParameterDeclarator) context;
-			if (typeParamDeclarator instanceof JvmDeclaredType) {
-				JvmDeclaredType declaredType = (JvmDeclaredType) typeParamDeclarator;
-				if (declaredType.getSimpleName() != null) {
-					QualifiedName inferredDeclaringTypeName = QualifiedName.create(declaredType.getSimpleName());
-					descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, declaredType));
-				}
+//			if (typeParamDeclarator instanceof JvmDeclaredType) {
+//				JvmDeclaredType declaredType = (JvmDeclaredType) typeParamDeclarator;
+//				if (declaredType.getSimpleName() != null) {
+//					QualifiedName inferredDeclaringTypeName = QualifiedName.create(declaredType.getSimpleName());
+//					descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, declaredType));
+//				}
 //				parentScope = createInnerTypeScopes(parentScope, declaredType, QualifiedName.EMPTY);
-			}
+//			}
 			for (JvmTypeParameter param : typeParamDeclarator.getTypeParameters()) {
 				if (param.getSimpleName() != null) {
 					QualifiedName paramName = QualifiedName.create(param.getSimpleName());

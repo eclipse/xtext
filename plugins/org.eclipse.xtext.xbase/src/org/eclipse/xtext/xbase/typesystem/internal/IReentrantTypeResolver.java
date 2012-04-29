@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.typesystem.ITypeResolution;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.ImplementedBy;
 
@@ -24,6 +24,6 @@ public interface IReentrantTypeResolver {
 
 	void initializeFrom(EObject root);
 
-	ITypeResolution reentrantResolve();
+	IResolvedTypes reentrantResolve();
 	
 }

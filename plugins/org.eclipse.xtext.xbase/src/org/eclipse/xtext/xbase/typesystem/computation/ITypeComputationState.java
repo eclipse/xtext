@@ -57,6 +57,7 @@ public interface ITypeComputationState {
 		ITypeComputationState withoutImmediateExpectation();
 	
 		ITypeComputationState withTypeCheckpoint();
+		
 	}
 	
 	Fork fork();
@@ -69,6 +70,8 @@ public interface ITypeComputationState {
 	ITypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type);
 	
 	ITypeAssigner assignTypes();
+	
+	void addLocalToCurrentScope(JvmIdentifiableElement element);
 	
 	/**
 	 * The result is never empty.

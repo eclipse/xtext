@@ -9,40 +9,69 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseScopeProvider extends XtypeScopeProvider {
+public class XbaseBatchScopeProvider extends XtypeScopeProvider implements IBatchScopeProvider {
 
+	@Inject
+	private XbaseScopeSessionProvider scopeSession;
+	
 	@Inject
 	private TypeScopeProvider typeScopeProvider;
 	
 	@Inject
-	private ConstructorScopeProvider constructorScopeProvider;
+	private FeatureScopeProvider featureScopeProvider;
 	
 	@Inject
-	private FeatureScopeProvider featureScopeProvider;
-
+	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
+	private IScopeProvider delegate;
+	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (isFeatureCallScope(reference)) {
-			IScope parent = IScope.NULLSCOPE;
-			return featureScopeProvider.createFeatureCallScope(parent, context, reference);
-		}
 		if (isConstructorCallScope(reference)) {
-			IScope scope = super.getScope(context, reference);
-			return constructorScopeProvider.createConstructorCallScope(scope /*, context, reference */);
+			return delegateGetScope(context, reference);
 		}
 		if (isTypeScope(reference)) {
-			IScope parent = super.getScope(context, reference);
+			IScope parent = delegateGetScope(context, reference);
 			return typeScopeProvider.createTypeScope(parent, context, reference);
 		}
-		return super.getScope(context, reference);
+		if (isFeatureCallScope(reference)) {
+			// TODO funnel through scope session
+			IFeatureScopeSession session = newSession(context.eResource());
+			session = session.recursiveInitialize(context);
+			return session.createFeatureCallScope(context, reference, IResolvedTypes.NULL);
+		}
+		return delegateGetScope(context, reference);
+	}
+	
+	public IFeatureScopeSession newSession(Resource context) {
+		return scopeSession.withContext(context);
+	}
+	
+	@Override
+	protected IScope delegateGetScope(EObject context, EReference reference) {
+		return getDelegate().getScope(context, reference);
+	}
+
+	@Override
+	public void setDelegate(IScopeProvider delegate) {
+		this.delegate = delegate;
+	}
+
+	@Override
+	public IScopeProvider getDelegate() {
+		return delegate;
 	}
 
 	protected boolean isTypeScope(EReference reference) {
@@ -56,5 +85,5 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	public boolean isFeatureCallScope(EReference reference) {
 		return featureScopeProvider.isFeatureCallScope(reference);
 	}
-	
+
 }

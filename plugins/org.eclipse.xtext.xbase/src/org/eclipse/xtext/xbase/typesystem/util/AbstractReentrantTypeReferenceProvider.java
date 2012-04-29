@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.internal;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
@@ -20,13 +20,17 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 
 	public final JvmTypeReference getTypeReference() {
 		if (computing)
-			return null;
+			return handleReentrantInvocation();
 		try {
 			computing = true;
 			return doGetTypeReference();
 		} finally {
 			computing = false;
 		}
+	}
+	
+	protected JvmTypeReference handleReentrantInvocation() {
+		return null;
 	}
 
 	protected abstract JvmTypeReference doGetTypeReference();

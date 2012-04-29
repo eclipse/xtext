@@ -27,6 +27,4 @@ public interface ITypeComputationResult {
 	
 	@Nullable JvmTypeReference getActualType(JvmIdentifiableElement element);
 	
-	@Nullable JvmTypeReference resolve(@Nullable JvmTypeReference unresolved);
-	
 }

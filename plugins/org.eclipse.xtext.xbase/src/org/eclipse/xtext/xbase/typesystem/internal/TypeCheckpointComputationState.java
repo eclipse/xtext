@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
 public class TypeCheckpointComputationState extends AbstractStackedTypeComputationState {
 
-	protected TypeCheckpointComputationState(TypeResolution typeResolution,
+	protected TypeCheckpointComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent) {
-		super(new DelegatingTypeResolution(typeResolution), reentrantTypeResolver, parent);
+		super(new DelegatingStackedResolvedTypes(resolvedTypes), featureScopeSession, reentrantTypeResolver, parent);
 	}
 
 }

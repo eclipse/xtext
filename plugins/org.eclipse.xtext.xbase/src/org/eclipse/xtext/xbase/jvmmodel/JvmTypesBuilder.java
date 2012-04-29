@@ -18,9 +18,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -47,11 +49,15 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -97,6 +103,9 @@ public class JvmTypesBuilder {
 
 	@Inject
 	private TypeReferences references;
+	
+	@Inject
+	private ClassURIHelper uriHelper;
 
 	@Inject
 	private IEObjectDocumentationProvider documentationProvider;
@@ -898,6 +907,62 @@ public class JvmTypesBuilder {
 		T copy = (T) copier.copy(original);
 		copier.copyReferences();
 		return copy;
+	}
+	
+	/**
+	 * Creates a deep copy of the given object and associates each copied instance with the
+	 * clone. Does not resolve any proxies.
+	 *	
+	 * @param original the root element to be cloned.
+	 * @return a clone of tree rooted in original associated with the original, <code>null</code> if original is <code>null</code>. 
+	 */
+	protected <T extends JvmTypeReference> T cloneAndAssociate(T original) {
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(false) {
+			private static final long serialVersionUID = 1L;
+
+			@Override@Nullable 
+			protected EObject createCopy(@Nullable EObject eObject) {
+				EObject result = super.createCopy(eObject);
+				if (result != null && eObject != null && !eObject.eIsProxy()) {
+					associator.associatePrimary(eObject, result);
+				}
+				return result;
+			}
+			@Override
+			public EObject copy(@Nullable EObject eObject) {
+				EObject result = super.copy(eObject);
+				if (result instanceof JvmWildcardTypeReference) {
+					boolean upperBoundSeen = false;
+					for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) result).getConstraints()) {
+						if (constraint instanceof JvmUpperBound) {
+							upperBoundSeen = true;
+							break;
+						}
+					}
+					if (!upperBoundSeen) {
+						// no upper bound found - seems to be an invalid - assume object as upper bound
+						JvmTypeReference object = newObjectReference();
+						JvmUpperBound upperBound = typesFactory.createJvmUpperBound();
+						upperBound.setTypeReference(object);
+						((JvmWildcardTypeReference) result).getConstraints().add(0, upperBound);
+					}
+				}
+				return result;
+			}
+		};
+		@SuppressWarnings("unchecked")
+		T copy = (T) copier.copy(original);
+		copier.copyReferences();
+		return copy;
+	}
+	
+	private JvmTypeReference newObjectReference() {
+		URI objectURI = new ClassURIHelper().getFullURI(Object.class);
+		JvmType objectType = typesFactory.createJvmGenericType();
+		((InternalEObject)objectType).eSetProxyURI(objectURI);
+		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
+		result.setType(objectType);
+		return result;
 	}
 	
 	/**

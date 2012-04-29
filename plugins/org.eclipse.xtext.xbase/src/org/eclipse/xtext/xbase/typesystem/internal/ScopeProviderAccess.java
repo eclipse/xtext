@@ -26,7 +26,10 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.scoping.batch.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.FeatureScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
 
@@ -43,12 +46,15 @@ public class ScopeProviderAccess {
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	@Inject
-	private XbaseScopeProvider scopeProvider;
+	private FeatureScopeProvider featureScopeProvider;
+	
+	@Inject
+	private IBatchScopeProvider constructorScopeProvider;
 	
 	@Inject
 	private LazyURIEncoder encoder;
 	
-	public Iterable<IEObjectDescription>  getCandidateDescriptions(XExpression expression, EReference reference) throws IllegalNodeException {
+	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
 		EObject toBeLinked = (EObject) expression.eGet(reference, false);
 		if (toBeLinked == null) {
 			return Collections.emptyList();
@@ -70,7 +76,7 @@ public class ScopeProviderAccess {
 		
 			final String crossRefString = linkingHelper.getCrossRefNodeAsString(node, true);
 			if (crossRefString != null && !crossRefString.equals("")) {
-				final IScope scope = scopeProvider.getScope(expression, reference);
+				final IScope scope = session.getScope(expression, reference, types);
 				QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
 				Iterable<IEObjectDescription> descriptions = scope.getElements(qualifiedLinkName);
 				return descriptions;

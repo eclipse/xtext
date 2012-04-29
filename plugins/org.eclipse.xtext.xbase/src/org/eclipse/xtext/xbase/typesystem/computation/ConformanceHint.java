@@ -22,5 +22,6 @@ public enum ConformanceHint {
 	DEMAND_CONVERSION,
 	INCOMPATIBLE,
 	UNCHECKED,
+	RAW,
 	MERGED
 }

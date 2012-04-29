@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
 /**
@@ -25,11 +26,12 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 	private final JvmTypeReference expectedType;
 
 	protected TypeComputationStateWithExpectation(
-			TypeResolution typeResolution,
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent,
 			@Nullable JvmTypeReference typeReference) {
-		super(typeResolution, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
 		this.expectedType = typeReference;
 	}
 

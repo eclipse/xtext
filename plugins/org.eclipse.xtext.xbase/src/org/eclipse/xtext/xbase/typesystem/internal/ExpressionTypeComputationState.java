@@ -10,9 +10,8 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,33 +22,35 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 
 	private final XExpression expression;
 
-	protected ExpressionTypeComputationState(TypeResolution typeResolution,	
+	protected ExpressionTypeComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent,
 			XExpression expression) {
-		super(typeResolution, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
 		this.expression = expression;
 	}
 
 	@Override
 	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		getTypeResolution().acceptType(expression, expectation, type, conformanceHint, returnType);
+		getResolvedTypes().acceptType(expression, expectation, type, conformanceHint, returnType);
 	}
 
 	@Override
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
-			StackedTypeResolution typeResolution) {
-		return new ChildExpressionTypeComputationState(typeResolution, getResolver(), this, expression);
+			StackedResolvedTypes typeResolution) {
+		return new ChildExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression);
 	}
 	
 	@Override
-	public ITypeAssigner assignTypes() {
-		final ExpressionTypeCheckpointComputationState state = new ExpressionTypeCheckpointComputationState(getTypeResolution(), getResolver(), this, expression);
+	public TypeAssigner assignTypes() {
+		final ExpressionTypeCheckpointComputationState state = new ExpressionTypeCheckpointComputationState(
+				getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
 		return createTypeAssigner(state);
 	}
 	
 	@Override
-	public ITypeComputationState withTypeCheckpoint() {
-		return new ExpressionTypeCheckpointComputationState(getTypeResolution(), getResolver(), this, expression);
+	public AbstractTypeComputationState withTypeCheckpoint() {
+		return new ExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
 	}
 	
 	protected XExpression getExpression() {

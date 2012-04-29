@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
@@ -23,9 +24,11 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 
 	private final AbstractTypeComputationState parent;
 
-	protected AbstractStackedTypeComputationState(TypeResolution typeResolution,
+	protected AbstractStackedTypeComputationState(
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent) {
-		super(typeResolution, reentrantTypeResolver);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
 		this.parent = parent;
 	}
 	

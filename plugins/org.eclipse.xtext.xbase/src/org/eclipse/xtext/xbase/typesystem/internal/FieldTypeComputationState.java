@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
 /**
@@ -22,8 +23,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 @NonNullByDefault
 public class FieldTypeComputationState extends AbstractLogicalContainerAwareRootComputationState {
 
-	public FieldTypeComputationState(TypeResolution typeResolution, JvmField field, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(typeResolution, field, reentrantTypeResolver);
+	public FieldTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
+		super(resolvedTypes, featureScopeSession, field, reentrantTypeResolver);
 	}
 
 	@Override

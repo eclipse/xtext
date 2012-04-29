@@ -15,9 +15,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.ITypeResolution;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -53,7 +52,7 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 			throw new IllegalStateException("Attempt to reinitialize the root resolver");
 		}
 
-		public ITypeResolution reentrantResolve() {
+		public IResolvedTypes reentrantResolve() {
 			return context.reentrantResolve();
 		}
 	}
@@ -61,15 +60,15 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 	@Inject
 	private Provider<IReentrantTypeResolver> typeResolverProvider;
 	
-	public ITypeResolution resolveTypes(@Nullable XExpression expression) {
-		if (expression == null || expression.eIsProxy())
-			return ITypeResolution.NULL;
-		IReentrantTypeResolver resolutionState = getTypeResolver(expression);
-		return resolutionState.reentrantResolve();
+	public IResolvedTypes resolveTypes(@Nullable EObject object) {
+		if (object == null || object.eIsProxy())
+			return IResolvedTypes.NULL;
+		IReentrantTypeResolver reentrantResolver = getTypeResolver(object);
+		return reentrantResolver.reentrantResolve();
 	}
 
-	protected IReentrantTypeResolver getTypeResolver(XExpression expression) {
-		EObject root = EcoreUtil.getRootContainer(expression);
+	protected IReentrantTypeResolver getTypeResolver(EObject object) {
+		EObject root = EcoreUtil.getRootContainer(object);
 		IReentrantTypeResolver result = getOrCreateResolver(root);
 		return result;
 	}
@@ -82,8 +81,8 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 			final TypeResolutionStateAdapter newAdapter = new TypeResolutionStateAdapter(root, newResolver);
 			adapters.add(newAdapter);
 			IReentrantTypeResolver result = new IReentrantTypeResolver() {
-				public ITypeResolution reentrantResolve() {
-					ITypeResolution result = newResolver.reentrantResolve();
+				public IResolvedTypes reentrantResolve() {
+					IResolvedTypes result = newResolver.reentrantResolve();
 					if (!adapters.remove(newAdapter)) {
 						throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving");
 					}

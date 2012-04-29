@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
 /**
@@ -26,14 +27,15 @@ public class RootExpressionComputationState extends AbstractRootTypeComputationS
 	private final XExpression expression;
 	private final JvmTypeReference expectedType;
 
-	public RootExpressionComputationState(TypeResolution typeResolution, XExpression expression,
+	public RootExpressionComputationState(ResolvedTypes resolvedTypes, 
+			IFeatureScopeSession featureScopeSession, XExpression expression,
 			DefaultReentrantTypeResolver defaultReentrantTypeResolver) {
-		this(typeResolution, expression, defaultReentrantTypeResolver, null);
+		this(resolvedTypes, featureScopeSession, expression, defaultReentrantTypeResolver, null);
 	}
 	
-	public RootExpressionComputationState(TypeResolution typeResolution, XExpression expression,
+	public RootExpressionComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, XExpression expression,
 			DefaultReentrantTypeResolver defaultReentrantTypeResolver, @Nullable JvmTypeReference expectedType) {
-		super(typeResolution, defaultReentrantTypeResolver);
+		super(resolvedTypes, featureScopeSession, defaultReentrantTypeResolver);
 		this.expression = expression;
 		this.expectedType = expectedType;
 	}

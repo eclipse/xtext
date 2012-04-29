@@ -24,6 +24,11 @@ import org.eclipse.xtext.xbase.XbasePackage;
 public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	
 	@Override
+	public boolean isExplicitOperationCallOrBuilderSyntax() {
+		return true;
+	}
+	
+	@Override
 	public String getConcreteSyntaxFeatureName() {
 		List<INode> list = NodeModelUtils.findNodesForFeature(this, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 		if (list.size()!=1) {

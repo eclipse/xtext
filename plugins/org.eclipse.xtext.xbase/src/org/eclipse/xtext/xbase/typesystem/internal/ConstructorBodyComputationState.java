@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
 /**
@@ -22,9 +23,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 @NonNullByDefault
 public class ConstructorBodyComputationState extends AbstractLogicalContainerAwareRootComputationState {
 
-	public ConstructorBodyComputationState(TypeResolution typeResolution, JvmConstructor constructor,
+	public ConstructorBodyComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor,
 			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(typeResolution, constructor, reentrantTypeResolver);
+		super(resolvedTypes, featureScopeSession, constructor, reentrantTypeResolver);
 	}
 
 	@Override
