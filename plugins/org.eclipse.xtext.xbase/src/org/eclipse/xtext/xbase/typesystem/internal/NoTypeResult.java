@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -32,10 +31,6 @@ public class NoTypeResult implements ITypeComputationResult {
 	}
 
 	public JvmTypeReference getActualType(JvmIdentifiableElement element) {
-		throw new UnsupportedOperationException("TODO implement me");
-	}
-
-	public JvmTypeReference resolve(@Nullable JvmTypeReference unresolved) {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,10 +18,11 @@ import org.eclipse.xtext.xbase.XExpression;
 @NonNullByDefault
 public class ExpressionTypeCheckpointComputationState extends ExpressionTypeComputationState {
 
-	protected ExpressionTypeCheckpointComputationState(TypeResolution typeResolution,
+	protected ExpressionTypeCheckpointComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, ExpressionTypeComputationState parent,
 			XExpression expression) {
-		super(new DelegatingTypeResolution(typeResolution), reentrantTypeResolver, parent, expression);
+		super(new DelegatingStackedResolvedTypes(resolvedTypes), featureScopeSession, reentrantTypeResolver, parent, expression);
 	}
 
 }

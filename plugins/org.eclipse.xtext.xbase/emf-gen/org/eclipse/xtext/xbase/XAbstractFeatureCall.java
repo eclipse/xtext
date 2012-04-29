@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature <em>Valid Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getActualTypeArguments <em>Actual Type Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -167,6 +168,22 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @generated
 	 */
 	void setImplicitFirstArgument(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Actual Type Arguments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Actual Type Arguments</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ActualTypeArguments()
+	 * @model containment="true" transient="true" derived="true"
+	 * @generated
+	 */
+	EList<JvmTypeReference> getActualTypeArguments();
 
 	/**
 	 * <!-- begin-user-doc -->

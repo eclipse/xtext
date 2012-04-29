@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 
 /**
@@ -19,11 +20,12 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 @NonNullByDefault
 public class ChildExpressionTypeComputationState extends ExpressionTypeComputationState {
 
-	protected ChildExpressionTypeComputationState(TypeResolution typeResolution,
+	protected ChildExpressionTypeComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, 
 			ExpressionTypeComputationState parent,
 			XExpression expression) {
-		super(typeResolution, reentrantTypeResolver, parent, expression);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, expression);
 	}
 	
 	@Override
@@ -35,6 +37,6 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type,
 			ConformanceHint conformanceHint, boolean returnType) {
 		super.acceptType(expectation, type, conformanceHint, returnType);
-		getTypeResolution().acceptType(getParent().getExpression(), expectation, type, conformanceHint, returnType);
+		getResolvedTypes().acceptType(getParent().getExpression(), expectation, type, conformanceHint, returnType);
 	}
 }

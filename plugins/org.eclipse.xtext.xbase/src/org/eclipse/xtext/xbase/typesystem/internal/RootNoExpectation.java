@@ -7,7 +7,12 @@ a * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
+
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,5 +35,16 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	@Override
 	public boolean isVoidTypeAllowed() {
 		return true;
+	}
+	
+	@Override
+	public void acceptActualType(JvmTypeReference type, ConformanceHint hint) {
+		AbstractTypeComputationState state = getState();
+//		if (hint contains RAW) {
+		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(
+				Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), state.getServices());
+		JvmTypeReference substitute = substitutor.substitute(type);
+//		}
+		super.acceptActualType(substitute, hint);
 	}
 }

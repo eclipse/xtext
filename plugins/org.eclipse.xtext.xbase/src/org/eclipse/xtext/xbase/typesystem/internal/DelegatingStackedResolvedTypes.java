@@ -21,8 +21,8 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class DelegatingTypeResolution extends StackedTypeResolution {
-	public DelegatingTypeResolution(TypeResolution parent) {
+public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
+	public DelegatingStackedResolvedTypes(ResolvedTypes parent) {
 		super(parent);
 	}
 

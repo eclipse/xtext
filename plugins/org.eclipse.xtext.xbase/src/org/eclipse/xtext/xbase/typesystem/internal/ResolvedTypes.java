@@ -24,11 +24,12 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.ITypeResolution;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -41,26 +42,18 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class TypeResolution implements ITypeResolution {
+public class ResolvedTypes implements IResolvedTypes {
 
-	protected Map<JvmIdentifiableElement, JvmTypeReference> types;
-	protected Map<JvmIdentifiableElement, JvmTypeReference> reassignedTypes;
-	protected Multimap<XExpression, TypeData> expressionTypes;
-	protected Map<XExpression, ILinkingCandidate> featureLinking;
+	private Map<JvmIdentifiableElement, JvmTypeReference> types;
+	private Map<JvmIdentifiableElement, JvmTypeReference> reassignedTypes;
+	private Multimap<XExpression, TypeData> expressionTypes;
+	private Map<XExpression, ILinkingCandidate> featureLinking;
 	private final DefaultReentrantTypeResolver resolver;
 	
-	protected TypeResolution(DefaultReentrantTypeResolver resolver) {
+	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
 	}
 
-	protected TypeConformanceComputer getTypeConformanceComputer() {
-		return resolver.getConformanceComputer();
-	}
-	
-	protected XtypeFactory getXtypeFactory() {
-		return resolver.getXtypeFactory();
-	}
-	
 	public List<Diagnostic> getQueuedDiagnostics() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
@@ -104,6 +97,10 @@ public class TypeResolution implements ITypeResolution {
 		return result;
 	}
 	
+	protected XtypeFactory getXtypeFactory() {
+		return getResolver().getServices().getXtypeFactory();
+	}
+
 	protected boolean isValidForMergedResult(JvmTypeReference reference, JvmTypeReference mayNotBe) {
 		if (reference == mayNotBe || reference == null)
 			return false;
@@ -141,11 +138,15 @@ public class TypeResolution implements ITypeResolution {
 		}
 		// common type of JvmAnyType and JvmVoid may be null ... use JvmAnyType in that case
 		for (JvmTypeReference type: types) {
-			if (!resolver.getTypeReferences().is(type, Void.TYPE)) {
+			if (!resolver.getServices().getTypeReferences().is(type, Void.TYPE)) {
 				return type;
 			}
 		}
 		return types.get(0);
+	}
+
+	protected TypeConformanceComputer getTypeConformanceComputer() {
+		return getResolver().getServices().getTypeConformanceComputer();
 	}
 
 	public JvmTypeReference getActualType(XExpression expression) {
@@ -188,7 +189,13 @@ public class TypeResolution implements ITypeResolution {
 		}
 	}
 	
-	public void acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	protected void acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+//		AbstractTypeComputationState state = expectation.getState();
+		// expectation is type parameter - type is actual - bind type
+		// no expectation, type wrap type and add pending type parameter data that should be resolved later on demand
+		// this will resolve them to their type parameter constraints if any and no other thing is available
+		// mind the conformance hint
+		
 		ensureExpressionTypesMapExists().put(expression, new TypeData(expression, expectation, type, conformanceHint, returnType));
 	}
 

@@ -11,6 +11,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
  */
 public interface FeatureNames {
 

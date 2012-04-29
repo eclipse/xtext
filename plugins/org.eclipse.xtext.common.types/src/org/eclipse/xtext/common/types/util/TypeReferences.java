@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import static com.google.common.collect.Lists.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +14,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -36,6 +33,7 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -102,10 +100,10 @@ public class TypeReferences {
 			throw new NullPointerException("type");
 		List<JvmTypeReference> typeReferences = Collections.emptyList();
 		if (typeArgs != null && typeArgs.length > 0) {
-			typeReferences = newArrayListWithCapacity(typeArgs.length);
+			typeReferences = Lists.newArrayListWithCapacity(typeArgs.length);
 			for (int i = 0; i < typeArgs.length; i++) {
 				JvmTypeReference jvmTypeReference = typeArgs[i];
-				typeReferences.add(EcoreUtil2.clone(jvmTypeReference));
+				typeReferences.add(EcoreUtil2.cloneIfContained(jvmTypeReference));
 			}
 		}
 		if (type instanceof JvmGenericType) {
@@ -117,7 +115,7 @@ public class TypeReferences {
 			}
 			// Raw type -> create type references to type param
 			if (typeReferences.isEmpty() && !list.isEmpty()) {
-				typeReferences = newArrayListWithCapacity(list.size());
+				typeReferences = Lists.newArrayListWithCapacity(list.size());
 				for (JvmTypeParameter typeParameter : list) {
 					typeReferences.add(createTypeRef(typeParameter));
 				}
@@ -173,7 +171,7 @@ public class TypeReferences {
 		return result;
 	}
 
-	public JvmTypeReference getTypeForName(Class<?> clazz, EObject context, JvmTypeReference... params) {
+	public JvmTypeReference getTypeForName(Class<?> clazz, Notifier context, JvmTypeReference... params) {
 		if (clazz == null)
 			throw new NullPointerException("clazz");
 		JvmType declaredType = findDeclaredType(clazz, context);

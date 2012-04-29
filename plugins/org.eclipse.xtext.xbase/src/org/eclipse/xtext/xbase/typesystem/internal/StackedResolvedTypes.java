@@ -24,29 +24,29 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class StackedTypeResolution extends TypeResolution {
+public class StackedResolvedTypes extends ResolvedTypes {
 
-	private final TypeResolution parent;
-//	private boolean merged = false;
+	private final ResolvedTypes parent;
 
-	public StackedTypeResolution(TypeResolution parent) {
+	public StackedResolvedTypes(ResolvedTypes parent) {
 		super(parent.getResolver());
 		this.parent = parent;
-//		this.merged = false;
 	}
 	
-	public TypeResolution getParent() {
+	public ResolvedTypes getParent() {
 		return parent;
 	}
 	
-	public TypeResolution mergeIntoParent() {
-		TypeResolution parent = getParent();
-//		if (!merged) {
-//			merged = true;
-			parent.ensureExpressionTypesMapExists().putAll(ensureExpressionTypesMapExists());
-			parent.ensureTypesMapExists().putAll(ensureTypesMapExists());
-//		}
+	public ResolvedTypes mergeIntoParent() {
+		ResolvedTypes parent = getParent();
+		mergeInto(parent);
 		return parent;
+	}
+
+	protected void mergeInto(ResolvedTypes parent) {
+		parent.ensureExpressionTypesMapExists().putAll(ensureExpressionTypesMapExists());
+		parent.ensureTypesMapExists().putAll(ensureTypesMapExists());
+		parent.ensureLinkingMapExists().putAll(ensureLinkingMapExists());
 	}
 	
 	@Override

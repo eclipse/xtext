@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.inject.Inject;
@@ -27,8 +27,8 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
-	protected IReentrantTypeResolver getTypeResolver(XExpression expression) {
-		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expression);
+	protected IReentrantTypeResolver getTypeResolver(EObject object) {
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(object);
 		if (logicalContainer == null) {
 			throw new IllegalStateException("expression is not contained in a logical container");
 		}

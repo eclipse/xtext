@@ -624,6 +624,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getXAbstractFeatureCall_ActualTypeArguments()
+	{
+		return (EReference)xAbstractFeatureCallEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXMemberFeatureCall()
 	{
 		return xMemberFeatureCallEClass;
@@ -1323,6 +1333,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEAttribute(xAbstractFeatureCallEClass, XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE);
 		createEAttribute(xAbstractFeatureCallEClass, XABSTRACT_FEATURE_CALL__VALID_FEATURE);
 		createEReference(xAbstractFeatureCallEClass, XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT);
+		createEReference(xAbstractFeatureCallEClass, XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS);
 
 		xMemberFeatureCallEClass = createEClass(XMEMBER_FEATURE_CALL);
 		createEReference(xMemberFeatureCallEClass, XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET);
@@ -1508,6 +1519,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEAttribute(getXAbstractFeatureCall_InvalidFeatureIssueCode(), ecorePackage.getEString(), "invalidFeatureIssueCode", null, 0, 1, XAbstractFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXAbstractFeatureCall_ValidFeature(), ecorePackage.getEBoolean(), "validFeature", null, 0, 1, XAbstractFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getXAbstractFeatureCall_ImplicitFirstArgument(), this.getXExpression(), null, "implicitFirstArgument", null, 0, 1, XAbstractFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getXAbstractFeatureCall_ActualTypeArguments(), theTypesPackage.getJvmTypeReference(), null, "actualTypeArguments", null, 0, -1, XAbstractFeatureCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xAbstractFeatureCallEClass, ecorePackage.getEString(), "getConcreteSyntaxFeatureName", 1, 1, IS_UNIQUE, IS_ORDERED);
 

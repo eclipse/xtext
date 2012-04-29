@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 
@@ -13,8 +13,8 @@ public class AccessibleReentrantTypeResolver extends DefaultReentrantTypeResolve
     super.setTypeComputer(typeComputer);
   }
   
-  public TypeReferences getTypeReferences() {
-    TypeReferences _typeReferences = super.getTypeReferences();
-    return _typeReferences;
+  public IBatchScopeProvider getBatchScopeProvider() {
+    IBatchScopeProvider _batchScopeProvider = super.getBatchScopeProvider();
+    return _batchScopeProvider;
   }
 }

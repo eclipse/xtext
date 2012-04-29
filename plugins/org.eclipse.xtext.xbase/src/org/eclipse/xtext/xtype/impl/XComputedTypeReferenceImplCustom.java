@@ -23,17 +23,19 @@ public class XComputedTypeReferenceImplCustom extends XComputedTypeReferenceImpl
 			IJvmTypeReferenceProvider provider = getTypeProvider();
 			if (provider != null) {
 				JvmTypeReference result = provider.getTypeReference();
-				if (result.eResource() != null) {
+				if (result != null && (result.eResource() != null || result.eContainer() != null)) {
 					JvmDelegateTypeReference delegate = TypesFactory.eINSTANCE.createJvmDelegateTypeReference();
 					delegate.setDelegate(result);
 					result = delegate;
 				}
-				boolean wasDeliver = eDeliver();
-				try {
-					eSetDeliver(false);
-					setEquivalent(result);
-				} finally {
-					eSetDeliver(wasDeliver);
+				if (result != null) {
+					boolean wasDeliver = eDeliver();
+					try {
+						eSetDeliver(false);
+						setEquivalent(result);
+					} finally {
+						eSetDeliver(wasDeliver);
+					}
 				}
 			} else {
 				equivalent = null;

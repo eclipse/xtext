@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 
 /**
@@ -20,10 +21,11 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 public class ReturnExpectationTypeComputationState extends AbstractStackedTypeComputationState {
 
 	protected ReturnExpectationTypeComputationState(
-			TypeResolution typeResolution,
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent) {
-		super(typeResolution, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
 	}
 
 	@Override

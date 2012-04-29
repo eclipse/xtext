@@ -11,6 +11,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,9 +21,11 @@ public abstract class AbstractLogicalContainerAwareRootComputationState extends 
 
 	private final JvmMember member;
 
-	protected AbstractLogicalContainerAwareRootComputationState(TypeResolution typeResolution, JvmMember member,
+	protected AbstractLogicalContainerAwareRootComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
+			JvmMember member,
 			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(typeResolution, reentrantTypeResolver);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
 		this.member = member;
 	}
 	

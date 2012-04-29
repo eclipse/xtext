@@ -1,16 +1,21 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.ITypeResolution;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -23,10 +28,17 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   public void resolvesTo(final String expression, final String type) throws Exception {
     final XExpression xExpression = this.expression(expression, false);
-    final ITypeResolution typeResolution = this.typeResolver.resolveTypes(xExpression);
-    final JvmTypeReference resolvedType = typeResolution.getActualType(xExpression);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(xExpression);
+    final JvmTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
     String _simpleName = resolvedType.getSimpleName();
     Assert.assertEquals(type, _simpleName);
+    TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
+    Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+    for (final EObject content : _iterable) {
+      if ((content instanceof XExpression)) {
+        resolvedTypes.getActualType(((XExpression) content));
+      }
+    }
   }
   
   public void resolvesTo(final String expression, final Class<?> type) throws Exception {
@@ -37,6 +49,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testNullLiteral() throws Exception {
     this.resolvesTo("null", "null");
+  }
+  
+  @Test
+  public void testTypeLiteral() throws Exception {
+    this.resolvesTo("typeof(String)", "Class<String>");
   }
   
   @Test
@@ -189,43 +206,53 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testThrowExpression() throws Exception {
-    this.resolvesTo("throw new java.lang.Exception()", "void");
+    this.resolvesTo("throw new Exception()", "void");
   }
   
   @Test
   public void testTryCatchFinallyExpression_0() throws Exception {
-    this.resolvesTo("try \'foo\' catch (java.lang.Exception e) \'bar\'", "String");
+    this.resolvesTo("try \'foo\' catch (Exception e) \'bar\'", "String");
   }
   
   @Test
   public void testTryCatchFinallyExpression_1() throws Exception {
-    this.resolvesTo("try \'foo\' catch (java.lang.Exception e) \'bar\' catch(java.lang.RuntimeException e) \'baz\'", "String");
+    this.resolvesTo("try \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) \'baz\'", "String");
   }
   
   @Test
   public void testTryCatchFinallyExpression_2() throws Exception {
-    this.resolvesTo("try \'foo\' catch (java.lang.Exception e) \'bar\' catch(java.lang.RuntimeException e) \'baz\' finally true", "String");
+    this.resolvesTo("try \'foo\' catch (Exception e) \'bar\' catch(RuntimeException e) \'baz\' finally true", "String");
   }
   
   @Test
   public void testForExpression_01() throws Exception {
-    this.resolvesTo("for(java.lang.String x : new java.util.ArrayList<String>()) x.length", "void");
-    this.resolvesTo("for(java.lang.String x : newArrayList(\'foo\')) x.length", "void");
-    this.resolvesTo("for(java.lang.String x : <String>newArrayList()) x.length", "void");
+    this.resolvesTo("for(String x : new java.util.ArrayList<String>()) x.length", "void");
+    this.resolvesTo("for(String x : newArrayList(\'foo\')) x.length", "void");
+    this.resolvesTo("for(String x : <String>newArrayList()) x.length", "void");
   }
   
   @Test
   public void testForExpression_02() throws Exception {
     this.resolvesTo("for(x : new java.util.ArrayList<String>()) x.length", "void");
-    this.resolvesTo("for(x : newArrayList(\'foo\')) x.length", "void");
     this.resolvesTo("for(x : <String>newArrayList()) x.length", "void");
+    this.resolvesTo("for(x : newArrayList(\'foo\')) x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_03() throws Exception {
+    this.resolvesTo("for(String x : null as String[]) x.length", "void");
+  }
+  
+  @Test
+  public void testForExpression_04() throws Exception {
+    this.resolvesTo("for(x : null as String[]) x.length", "void");
   }
   
   @Test
   public void testNull() throws Exception {
-    final ITypeResolution typeResolution = this.typeResolver.resolveTypes(null);
+    final IResolvedTypes typeResolution = this.typeResolver.resolveTypes(null);
     Assert.assertNotNull(typeResolution);
-    Assert.assertEquals(ITypeResolution.NULL, typeResolution);
+    Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
   }
   
   @Test
@@ -233,19 +260,85 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     final XFeatureCall proxy = XbaseFactory.eINSTANCE.createXFeatureCall();
     URI _createURI = URI.createURI("path#fragment");
     ((InternalEObject) proxy).eSetProxyURI(_createURI);
-    final ITypeResolution typeResolution = this.typeResolver.resolveTypes(proxy);
+    final IResolvedTypes typeResolution = this.typeResolver.resolveTypes(proxy);
     Assert.assertNotNull(typeResolution);
-    Assert.assertEquals(ITypeResolution.NULL, typeResolution);
+    Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
+  }
+  
+  @Test
+  public void testImplicitImportPrintln() throws Exception {
+    this.resolvesTo("<String>println(null)", "String");
+    this.resolvesTo("println(null)", "Object");
+  }
+  
+  @Test
+  public void testImplicitImportEmptyList() throws Exception {
+    this.resolvesTo("<String>emptyList", "List<String>");
+    this.resolvesTo("emptyList", "List<Object>");
+  }
+  
+  @Ignore
+  @Test
+  public void testMethodTypeParamInference_00() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<String>().findFirst(e | true)", "String");
+  }
+  
+  @Ignore
+  @Test
+  public void testMethodTypeParamInference_01() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<String>().findFirst(e|e == \'foo\')", "String");
   }
   
   @Test
   public void testInstanceof() throws Exception {
-    this.resolvesTo("null instanceof java.lang.String", "boolean");
+    this.resolvesTo("null instanceof String", "boolean");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion() throws Exception {
+    this.resolvesTo("\'foo\'.toCharArray.iterator", "Iterator<Character>");
   }
   
   @Test
   public void testReturnType() throws Exception {
     this.resolvesTo("return \'foo\'", "void");
+  }
+  
+  @Test
+  public void testClosure_00() throws Exception {
+    this.resolvesTo("[|\'literal\'].apply()", "String");
+  }
+  
+  @Test
+  public void testClosure_01() throws Exception {
+    this.resolvesTo("{ var closure = [|\'literal\']\n\t\t  new testdata.ClosureClient().invoke0(closure)\t}", "String");
+  }
+  
+  @Test
+  public void testClosure_02() throws Exception {
+    this.resolvesTo("[String x| true]", "(String)=>boolean");
+  }
+  
+  @Test
+  public void testClosure_05() throws Exception {
+    this.resolvesTo("[x| true]", "(Object)=>boolean");
+  }
+  
+  @Test
+  public void testClosure_06() throws Exception {
+    this.resolvesTo("[x| null]", "(Object)=>Object");
+  }
+  
+  @Ignore
+  @Test
+  public void testClosure_07() throws Exception {
+    this.resolvesTo("[String x, String y| x + y]", "(String, String)=>String");
+  }
+  
+  @Test
+  public void testClosure_08() throws Exception {
+    this.resolvesTo("[x| x]", "(Object)=>Object");
   }
   
   @Test
@@ -273,7 +366,7 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
-    this.resolvesTo("switch true { case true : \'s\' case false : new java.lang.Object() default: \'bar\'}", "Object");
+    this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");
   }
   
   @Test
@@ -288,7 +381,7 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testTypeGuardedCase_0() throws Exception {
-    this.resolvesTo("switch  s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
+    this.resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
   }
   
   @Test
@@ -298,14 +391,73 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testSwitchExpression_Bug343100() throws Exception {
-    this.resolvesTo("switch \'a\' {\n\t\t  case null: typeof(java.lang.String) \n\t\t  case \'a\': typeof(java.lang.Void)\n\t\t}", "Class<?>");
+    this.resolvesTo("switch \'a\' {\n\t\t  case null: typeof(String) \n\t\t  case \'a\': typeof(Void)\n\t\t}", "Class<?>");
   }
   
   @Test
-  public void testBlockExpression() throws Exception {
+  public void testBlockExpression_01() throws Exception {
     this.resolvesTo("{null}", "null");
     this.resolvesTo("{\'\'.toString 4}", "int");
     this.resolvesTo("{\'\'.toString true}", "boolean");
+  }
+  
+  @Test
+  public void testBlockExpression_02() throws Exception {
+    this.resolvesTo("{val s = \'\' s}", "String");
+  }
+  
+  @Test
+  public void testBlockExpression_03() throws Exception {
+    String input = "{ val s1 = \'\'\n";
+    final int max = 1000;
+    IntegerRange _upTo = new IntegerRange(1, max);
+    for (final Integer i : _upTo) {
+      String _plus = (input + " val s");
+      int _plus_1 = ((i).intValue() + 1);
+      String _plus_2 = (_plus + Integer.valueOf(_plus_1));
+      String _plus_3 = (_plus_2 + " = s");
+      String _plus_4 = (_plus_3 + i);
+      String _plus_5 = (_plus_4 + "\n");
+      input = _plus_5;
+    }
+    String _plus_6 = (input + " s");
+    int _plus_7 = (max + 1);
+    String _plus_8 = (_plus_6 + Integer.valueOf(_plus_7));
+    String _plus_9 = (_plus_8 + "}");
+    input = _plus_9;
+    this.resolvesTo(input, "String");
+  }
+  
+  @Test
+  public void testConstructorCall() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<String>()", "ArrayList<String>");
+    this.resolvesTo("new java.util.HashMap<String,Boolean>", "HashMap<String, Boolean>");
+    this.resolvesTo("new java.util.ArrayList()", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_01() throws Exception {
+    this.resolvesTo("new testdata.GenericType1(\'\')", "GenericType1<String>");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_02() throws Exception {
+    this.resolvesTo("<java.util.List<String>>newArrayList().add(new java.util.ArrayList())", "boolean");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_03() throws Exception {
+    this.resolvesTo("<java.util.List<String>>newArrayList().add(0, new java.util.ArrayList())", "void");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_04() throws Exception {
+    this.resolvesTo("newArrayList.add(new java.util.ArrayList())", "boolean");
+  }
+  
+  @Test
+  public void testClassNewInstance() throws Exception {
+    this.resolvesTo("typeof(String).newInstance", "String");
   }
   
   @Test
@@ -314,7 +466,366 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testFeatureCall_02() throws Exception {
+    this.resolvesTo("\'foo\'.getBytes()", "byte[]");
+    this.resolvesTo("new java.util.ArrayList<String>().get(23)", "String");
+  }
+  
+  @Test
+  public void testFeatureCall_03() throws Exception {
+    this.resolvesTo("new testdata.ClassWithVarArgs().toList()", "List<Object>");
+    this.resolvesTo("new testdata.ClassWithVarArgs().toList(\'\')", "List<String>");
+    this.resolvesTo("new testdata.ClassWithVarArgs().toList(\'\', \'\')", "List<String>");
+  }
+  
+  @Test
+  public void testMemberFeatureCall_01() throws Exception {
+    this.resolvesTo("newArrayList(\'\').get(0)", "String");
+    this.resolvesTo("<String>newArrayList().get(0)", "String");
+  }
+  
+  @Test
+  public void testFeatureCall_04() throws Exception {
+    this.resolvesTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "List<Comparable<?> & Serializable>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_05() throws Exception {
+    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList()", "List<Number>");
+    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0)", "List<Integer>");
+    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0, 1)", "List<Integer>");
+    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_06() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s)", "List<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_06_1() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|1)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_07() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_08() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s != null)", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_09() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length+1)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_10() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|1).map(i|i+1)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_11() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|1).toList()", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_12() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|1).toList().map(i|i)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_13() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|1).toList().map(i|i+1)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_13_2() throws Exception {
+    this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_13_3() throws Exception {
+    this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() map(i|i+1) }", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_14() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size())", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_a() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_b() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_c() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_d() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_e() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_f() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_g() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_h() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_i() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)).map(e|e).map(iterable|iterable.size())", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_i_2() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_j() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_k() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_l() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_m() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(String s|1).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t).map(iterable|iterable.size()).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)\n\t\t.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_15_n() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_16() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|1).map(i|1)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_17() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length).map(i|i)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_18() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b|b)", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_19() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { \'length\'.length b })", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_20() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(Boolean b|!b)", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_21() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| ! b )", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_22() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { !b } )", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_23() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 == 5).map(b| { b.operator_not } )", "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_24() throws Exception {
+    String _plus = ("newArrayList(\'\').map(s|" + 
+      "org::eclipse::xtext::xbase::lib::ObjectExtensions::operator_equals(");
+    String _plus_1 = (_plus + 
+      "\torg::eclipse::xtext::xbase::lib::IntegerExtensions::operator_plus(s.length,1), 5)");
+    String _plus_2 = (_plus_1 + 
+      ").map(b| org::eclipse::xtext::xbase::lib::BooleanExtensions::operator_not(b) )");
+    this.resolvesTo(_plus_2, "List<Boolean>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_25() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_Bug342134_01() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e)).flatten", "List<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_Bug342134_02() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e))", "List<ArrayList<String>>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_Bug342134_03() throws Exception {
+    this.resolvesTo("<String>newArrayList.map(e|newArrayList(e)).flatten", "Iterable<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_Bug342134_04() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(e|<String>newArrayList(e)).flatten", "Iterable<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_Bug342134_05() throws Exception {
+    this.resolvesTo("newArrayList.map(String e|<String>newArrayList(e)).flatten", "Iterable<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_Bug342134_06() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\')).flatten", "Iterable<String>");
+  }
+  
+  @Test
+  public void testFeatureCall_Bug342134_07() throws Exception {
+    this.resolvesTo("<java.util.List<String>>newArrayList().flatten", "Iterable<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCallWithOperatorOverloading_2() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes().iterator.next", "boolean");
+  }
+  
+  @Test
+  public void testFeatureCallWithOperatorOverloading_3() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<Byte>() += null", "boolean");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCallWithOperatorOverloading_4() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<Byte>() += newArrayList(\'x\'.getBytes().iterator.next)", "boolean");
+  }
+  
+  @Test
+  public void testFeatureCallWithOperatorOverloading_5() throws Exception {
+    this.resolvesTo("new java.util.ArrayList<Byte>() += \'x\'.getBytes()", "boolean");
+  }
+  
+  @Test
   public void testFeatureCallOnIt() throws Exception {
     this.resolvesTo("{ val it = \'foo\'; length == 3;}", "boolean");
+  }
+  
+  @Test
+  public void testStaticMethods_01() throws Exception {
+    this.resolvesTo("newArrayList(\'\')", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testStaticMethods_02() throws Exception {
+    this.resolvesTo("newArrayList(\'\', \'\')", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testStaticMethods_03() throws Exception {
+    this.resolvesTo("newArrayList(newHashSet(\'\'))", "ArrayList<HashSet<String>>");
+  }
+  
+  @Test
+  public void testStaticMethods_04() throws Exception {
+    this.resolvesTo("newArrayList()", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testStaticMethods_05() throws Exception {
+    this.resolvesTo("newHashMap()", "HashMap<Object, Object>");
+  }
+  
+  @Test
+  public void testStaticMethods_06() throws Exception {
+    this.resolvesTo("String::CASE_INSENSITIVE_ORDER", "Comparator<String>");
   }
 }

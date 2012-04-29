@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -20,9 +19,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 public class ResolutionBasedComputationResult implements ITypeComputationResult {
 
 	private final XExpression expression;
-	private final TypeResolution resolution;
+	private final ResolvedTypes resolution;
 
-	public ResolutionBasedComputationResult(XExpression expression, TypeResolution resolution) {
+	public ResolutionBasedComputationResult(XExpression expression, ResolvedTypes resolution) {
 		this.expression = expression;
 		this.resolution = resolution;
 	}
@@ -33,12 +32,6 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 
 	public JvmTypeReference getActualType(JvmIdentifiableElement element) {
 		return resolution.getActualType(element);
-	}
-
-	public JvmTypeReference resolve(@Nullable JvmTypeReference unresolved) {
-		// use the type data of the actual resolution to get grip on the
-		// parameter substitutions
-		throw new UnsupportedOperationException("TODO implement me");
 	}
 
 	public XExpression getExpression() {

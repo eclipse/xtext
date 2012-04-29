@@ -4,7 +4,9 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -15,16 +17,19 @@ import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.AccessibleReentrantTypeResolver;
-import org.eclipse.xtext.xbase.tests.typesystem.MyTypeResolution;
+import org.eclipse.xtext.xbase.tests.typesystem.MyResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState;
-import org.eclipse.xtext.xbase.typesystem.internal.TypeResolution;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,6 +42,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
   private AccessibleReentrantTypeResolver resolver;
   
   @Inject
+  private CommonTypeComputationServices services;
+  
+  @Inject
   private ReflectExtensions _reflectExtensions;
   
   @Test
@@ -44,23 +52,53 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
-      MyTypeResolution _myTypeResolution = new MyTypeResolution(this.resolver);
-      final MyTypeResolution resolution = _myTypeResolution;
-      TypeReferences _typeReferences = this.resolver.getTypeReferences();
+      MyResolvedTypes _myResolvedTypes = new MyResolvedTypes(this.resolver);
+      final MyResolvedTypes resolution = _myResolvedTypes;
+      TypeReferences _typeReferences = this.services.getTypeReferences();
       final JvmAnyTypeReference any = _typeReferences.createAnyTypeReference(expression);
-      RootExpressionComputationState _rootExpressionComputationState = new RootExpressionComputationState(resolution, expression, this.resolver, any);
+      IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
+      Resource _eResource = expression.eResource();
+      IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
+      RootExpressionComputationState _rootExpressionComputationState = new RootExpressionComputationState(resolution, _newSession, expression, this.resolver, any);
       _rootExpressionComputationState.computeTypes();
       JvmTypeReference _actualType = resolution.getActualType(expression);
-      JvmTypeReference _equivalent = ((JvmSpecializedTypeReference) _actualType).getEquivalent();
-      Assert.assertSame(any, _equivalent);
+      JvmTypeReference _unpack = this.unpack(_actualType);
+      Assert.assertSame(any, _unpack);
       EList<EObject> _eContents = expression.eContents();
       EObject _head = IterableExtensions.<EObject>head(_eContents);
       JvmTypeReference _actualType_1 = resolution.getActualType(((XNullLiteral) _head));
-      JvmTypeReference _equivalent_1 = ((JvmSpecializedTypeReference) _actualType_1).getEquivalent();
-      Assert.assertSame(any, _equivalent_1);
+      JvmTypeReference _unpack_1 = this.unpack(_actualType_1);
+      Assert.assertSame(any, _unpack_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public JvmTypeReference unpack(final JvmTypeReference reference) {
+    JvmTypeReference _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (reference instanceof JvmSpecializedTypeReference) {
+        final JvmSpecializedTypeReference _jvmSpecializedTypeReference = (JvmSpecializedTypeReference)reference;
+        _matched=true;
+        JvmTypeReference _equivalent = _jvmSpecializedTypeReference.getEquivalent();
+        JvmTypeReference _unpack = this.unpack(_equivalent);
+        _switchResult = _unpack;
+      }
+    }
+    if (!_matched) {
+      if (reference instanceof JvmDelegateTypeReference) {
+        final JvmDelegateTypeReference _jvmDelegateTypeReference = (JvmDelegateTypeReference)reference;
+        _matched=true;
+        JvmTypeReference _delegate = _jvmDelegateTypeReference.getDelegate();
+        JvmTypeReference _unpack = this.unpack(_delegate);
+        _switchResult = _unpack;
+      }
+    }
+    if (!_matched) {
+      _switchResult = reference;
+    }
+    return _switchResult;
   }
   
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
@@ -71,9 +109,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final JvmTypeReference expectedType = _head.getExpectedType();
       if ((state instanceof ChildExpressionTypeComputationState)) {
         final ChildExpressionTypeComputationState casted = ((ChildExpressionTypeComputationState) state);
-        final TypeResolution resolution = this._reflectExtensions.<TypeResolution>get(casted, "typeResolution");
+        final ResolvedTypes resolution = this._reflectExtensions.<ResolvedTypes>get(casted, "resolvedTypes");
         ExpressionTypeComputationState _get = this._reflectExtensions.<ExpressionTypeComputationState>get(casted, "parent");
-        final TypeResolution parentResolution = this._reflectExtensions.<TypeResolution>get(_get, "typeResolution");
+        final ResolvedTypes parentResolution = this._reflectExtensions.<ResolvedTypes>get(_get, "resolvedTypes");
         EObject _eContainer = expression.eContainer();
         JvmTypeReference _actualType = parentResolution.getActualType(((XExpression) _eContainer));
         Assert.assertNull(_actualType);
@@ -84,8 +122,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         JvmTypeReference _actualType_2 = parentResolution.getActualType(expression);
         Assert.assertNull(_actualType_2);
         JvmTypeReference _actualType_3 = resolution.getActualType(expression);
-        JvmTypeReference _equivalent = ((JvmSpecializedTypeReference) _actualType_3).getEquivalent();
-        Assert.assertSame(expectedType, _equivalent);
+        JvmTypeReference _unpack = this.unpack(_actualType_3);
+        Assert.assertSame(expectedType, _unpack);
         EObject _eContainer_2 = expression.eContainer();
         JvmTypeReference _actualType_4 = parentResolution.getActualType(((XExpression) _eContainer_2));
         Assert.assertNull(_actualType_4);
@@ -95,10 +133,10 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         EObject _head_1 = IterableExtensions.<EObject>head(_eContents);
         final XNullLiteral nullLiteral = ((XNullLiteral) _head_1);
         state.computeTypes(nullLiteral);
-        final TypeResolution resolution_1 = this._reflectExtensions.<TypeResolution>get(state, "typeResolution");
+        final ResolvedTypes resolution_1 = this._reflectExtensions.<ResolvedTypes>get(state, "resolvedTypes");
         JvmTypeReference _actualType_5 = resolution_1.getActualType(nullLiteral);
-        JvmTypeReference _equivalent_1 = ((JvmSpecializedTypeReference) _actualType_5).getEquivalent();
-        Assert.assertSame(expectedType, _equivalent_1);
+        JvmTypeReference _unpack_1 = this.unpack(_actualType_5);
+        Assert.assertSame(expectedType, _unpack_1);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

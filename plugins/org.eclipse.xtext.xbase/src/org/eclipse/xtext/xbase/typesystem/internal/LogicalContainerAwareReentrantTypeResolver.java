@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -16,20 +15,22 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.scoping.batch.FeatureNames;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
-import org.eclipse.xtext.xtype.XtypeFactory;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 
 /**
@@ -40,32 +41,28 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	public static class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmMember member;
-		private final TypeResolution typeResolution;
+		private final ResolvedTypes resolvedTypes;
 		private final LogicalContainerAwareReentrantTypeResolver resolver;
+		private final IFeatureScopeSession featureScopeSession;
 
-		public DemandTypeReferenceProvider(JvmMember member, TypeResolution typeResolution, LogicalContainerAwareReentrantTypeResolver resolver) {
+		public DemandTypeReferenceProvider(JvmMember member, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, LogicalContainerAwareReentrantTypeResolver resolver) {
 			this.member = member;
-			this.typeResolution = typeResolution;
+			this.resolvedTypes = resolvedTypes;
+			this.featureScopeSession = featureScopeSession;
 			this.resolver = resolver;
 		}
 
 		@Override
 		protected JvmTypeReference doGetTypeReference() {
-			resolver.computeTypes(typeResolution, member);
+			resolver.computeTypes(resolvedTypes, featureScopeSession, member);
 			return resolver.getComputedType(member);
 		}
 	}
 
-	private Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping;
-	
-	@Inject
-	private TypesFactory typesFactory = TypesFactory.eINSTANCE;
-	
-	@Inject
-	private XtypeFactory xtypeFactory = XtypeFactory.eINSTANCE;
-	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
+	
+//	private Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping;
 	
 	@Override
 	public void initializeFrom(@NonNull EObject root) {
@@ -73,15 +70,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			throw new IllegalArgumentException("only JvmTypes are supported as root by this resolver");
 		}
 		super.initializeFrom(root);
-		if (root instanceof JvmDeclaredType) {
-			DeclaratorTypeArgumentCollector visitor = new DeclaratorTypeArgumentCollector();
-			for(JvmTypeReference superType: ((JvmDeclaredType) root).getSuperTypes()) {
-				visitor.visit(superType);
-			}
-			typeParameterMapping = visitor.getTypeParameterMapping();
-		} else {
-			typeParameterMapping = Maps.newHashMap();			
-		}
 	}
 	
 	@Override
@@ -92,131 +80,186 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected JvmTypeReference getComputedType(JvmMember member) {
 		throw new UnsupportedOperationException("member: " + member);
 	}
+//	
+//	@Override
+//	protected TypeParameterSubstitutor createTypeParameterSubstitutor() {
+//		JvmType root = getRoot();
+//		if (root instanceof JvmDeclaredType) {
+//			DeclaratorTypeArgumentCollector visitor = new DeclaratorTypeArgumentCollector();
+//			// TODO merge bound parameter things
+//			Map<JvmTypeParameter, JvmTypeReference> mapping = Maps.newHashMap();
+//			for(JvmTypeReference superType: ((JvmDeclaredType) root).getSuperTypes()) {
+//				mapping.putAll(visitor.getTypeParameterMapping(superType));
+//			}
+//			if (root instanceof JvmTypeParameterDeclarator) {
+//				
+//			}
+//			typeParameterMapping = mapping;
+//		} else {
+//			typeParameterMapping = Maps.newHashMap();			
+//		}
+//	}
 	
-	public Map<JvmTypeParameter, JvmTypeReference> getTypeParameterMapping() {
-		return typeParameterMapping;
-	}
-
-	public JvmTypeReference resolve(JvmTypeReference original) {
-		JvmTypeReference result = new TypeParameterSubstitutor(typeParameterMapping, typesFactory).substitute(original);
-		return result;
-	}
-
 	/**
 	 * Assign computed type references to the identifiable structural elements in the processed type.
 	 */
-	protected void prepare(TypeResolution typeResolution) {
-		doPrepare(typeResolution, getRoot());
+	protected void prepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
+		doPrepare(resolvedTypes, featureScopeSession, getRoot());
 	}
 	
-	protected void doPrepare(TypeResolution typeResolution, JvmIdentifiableElement element) {
+	protected void doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmIdentifiableElement element) {
 		if (element instanceof JvmDeclaredType) {
-			_doPrepare(typeResolution, (JvmDeclaredType) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmDeclaredType) element);
 		} else if (element instanceof JvmConstructor) {
-			_doPrepare(typeResolution, (JvmConstructor) element);
+			_doPrepare(resolvedTypes, (JvmConstructor) element);
 		} else if (element instanceof JvmField) {
-			_doPrepare(typeResolution, (JvmField) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmField) element);
 		} else if (element instanceof JvmOperation) {
-			_doPrepare(typeResolution, (JvmOperation) element);
+			_doPrepare(resolvedTypes, featureScopeSession, (JvmOperation) element);
 		}
 	}
 	
-	protected void _doPrepare(TypeResolution typeResolution, JvmDeclaredType type) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
+		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type);
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
-			doPrepare(typeResolution, members.get(i));
+			doPrepare(resolvedTypes, childSession, members.get(i));
 		}
 	}
-	protected void _doPrepare(TypeResolution typeResolution, JvmField field) {
+
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		if (field.getType() != null) {
-			typeResolution.setType(field, field.getType());
+			resolvedTypes.setType(field, field.getType());
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(typeResolution, field);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, field);
 			field.setType(reference);
 		}
 	}
 	
-	protected void _doPrepare(TypeResolution typeResolution, JvmConstructor constructor) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, JvmConstructor constructor) {
 		JvmDeclaredType producedType = constructor.getDeclaringType();
-		JvmParameterizedTypeReference asReference = getTypeReferences().createTypeRef(producedType);
-		typeResolution.setType(constructor, asReference);
+		JvmParameterizedTypeReference asReference = getServices().getTypeReferences().createTypeRef(producedType);
+		resolvedTypes.setType(constructor, asReference);
 	}
 	
-	protected void _doPrepare(TypeResolution typeResolution, JvmOperation operation) {
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
 		if (operation.getReturnType() != null) {
-			typeResolution.setType(operation, operation.getReturnType());
+			resolvedTypes.setType(operation, operation.getReturnType());
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(typeResolution, operation);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypes, featureScopeSession, operation);
 			operation.setReturnType(reference);
 		}
 	}
 	
-	protected JvmTypeReference createComputedTypeReference(TypeResolution typeResolution, JvmMember member) {
-		XComputedTypeReference result = xtypeFactory.createXComputedTypeReference();
-		result.setTypeProvider(createTypeProvider(typeResolution, member));
-		typeResolution.setType(member, result);
+	protected JvmTypeReference createComputedTypeReference(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
+		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+		result.setTypeProvider(createTypeProvider(resolvedTypes, featureScopeSession, member));
+		resolvedTypes.setType(member, result);
 		return result;
 	}
 	
-	protected IJvmTypeReferenceProvider createTypeProvider(TypeResolution typeResolution, JvmMember member) {
-		return new DemandTypeReferenceProvider(member, typeResolution, this);
+	protected IJvmTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
+		return new DemandTypeReferenceProvider(member, resolvedTypes, featureScopeSession, this);
 	}
 	
 	@Override
-	protected void computeTypes(TypeResolution typeResolution) {
-		prepare(typeResolution);
-		super.computeTypes(typeResolution);
-		processResult(typeResolution);
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		prepare(resolvedTypes, session);
+		super.computeTypes(resolvedTypes, session);
+		processResult(resolvedTypes);
 	}
 	
 	@Override
-	protected void computeTypes(TypeResolution typeResolution, EObject element) {
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof JvmConstructor) {
-			_computeTypes(typeResolution, (JvmConstructor) element);
+			_computeTypes(resolvedTypes, featureScopeSession, (JvmConstructor) element);
 		} else if (element instanceof JvmField) {
-			_computeTypes(typeResolution, (JvmField) element);
+			_computeTypes(resolvedTypes, featureScopeSession, (JvmField) element);
 		} else if (element instanceof JvmOperation) {
-			_computeTypes(typeResolution, (JvmOperation) element);
+			_computeTypes(resolvedTypes, featureScopeSession, (JvmOperation) element);
 		} else if (element instanceof JvmDeclaredType) {
-			_computeTypes(typeResolution, (JvmDeclaredType) element);
+			_computeTypes(resolvedTypes, featureScopeSession, (JvmDeclaredType) element);
 		} else {
-			super.computeTypes(typeResolution, element);
+			super.computeTypes(resolvedTypes, featureScopeSession, element);
 		}
 	}
 
-	protected void _computeTypes(TypeResolution typeResolution, JvmField field) {
-		FieldTypeComputationState state = new FieldTypeComputationState(typeResolution, field, this);
+	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
+		FieldTypeComputationState state = new FieldTypeComputationState(resolvedTypes, featureScopeSession, field, this);
 		state.computeTypes();
-		computeAnnotationTypes(typeResolution, field);
+		computeAnnotationTypes(resolvedTypes, featureScopeSession, field);
 	}
 	
-	protected void _computeTypes(TypeResolution typeResolution, JvmConstructor constructor) {
-		ConstructorBodyComputationState state = new ConstructorBodyComputationState(typeResolution, constructor, this);
+	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
+		ConstructorBodyComputationState state = new ConstructorBodyComputationState(resolvedTypes, featureScopeSession, constructor, this);
 		state.computeTypes();
-		computeAnnotationTypes(typeResolution, constructor);
+		computeAnnotationTypes(resolvedTypes, featureScopeSession, constructor);
 	}
 	
-	protected void _computeTypes(TypeResolution typeResolution, JvmOperation operation) {
-		OperationBodyComputationState state = new OperationBodyComputationState(typeResolution, operation, this);
+	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
+		OperationBodyComputationState state = new OperationBodyComputationState(resolvedTypes, featureScopeSession, operation, this);
 		state.computeTypes();
-		computeAnnotationTypes(typeResolution, operation);
+		computeAnnotationTypes(resolvedTypes, featureScopeSession, operation);
 	}
 	
-	protected void computeAnnotationTypes(TypeResolution typeResolution, JvmAnnotationTarget annotable) {
+	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmAnnotationTarget annotable) {
 		if (!annotable.getAnnotations().isEmpty()) {
-			throw new UnsupportedOperationException(typeResolution + " " + annotable);
+			throw new UnsupportedOperationException(resolvedTypes + " " + annotable + " " + featureScopeSession);
 		}
 	}
 	
-	protected void _computeTypes(TypeResolution typeResolution, JvmDeclaredType type) {
+	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
+		StackedResolvedTypes childResolvedTypes = new StackedResolvedTypes(resolvedTypes);
+		JvmTypeReference superType = getExtendedClass(type);
+		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type, superType);
+		if (superType != null) {
+			childResolvedTypes.reassignType(superType.getType(), superType);
+			// We use reassignType to make sure that the following works
+			/*
+			 * StringList extends AbstractList<String> {
+			 *   NestedIntList extends AbstractList<Integer> {
+			 *   }
+			 *   SubType extends StringList {}
+			 * }
+			 */
+		}
+		childResolvedTypes.reassignType(type, superType);
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
-			computeTypes(typeResolution, members.get(i));
+			computeTypes(childResolvedTypes, childSession, members.get(i));
 		}
-		computeAnnotationTypes(typeResolution, type);
+		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
+		childResolvedTypes.mergeIntoParent();
+	}
+	
+	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType type) {
+		JvmTypeReference superType = getExtendedClass(type);
+		return addThisAndSuper(session, type, superType);
 	}
 
-	protected void processResult(@SuppressWarnings("unused") TypeResolution typeResolution) {
+	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType thisType,
+			JvmTypeReference superType) {
+		IFeatureScopeSession childSession = session;
+		if (superType != null) {
+			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
+			builder.put(FeatureNames.THIS, thisType);
+			builder.put(FeatureNames.SUPER, superType.getType());
+			childSession = session.addLocalElements(builder.build());
+		} else {
+			childSession = session.addLocalElement(FeatureNames.THIS, thisType);
+		}
+		return childSession;
+	}
+	
+	public JvmTypeReference getExtendedClass(JvmDeclaredType type) {
+		for(JvmTypeReference candidate: type.getSuperTypes()) {
+			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
+				return candidate;
+		}
+		return null;
+	}
+
+	protected void processResult(@SuppressWarnings("unused") ResolvedTypes resolvedTypes) {
 		// TODO keep the result available for subsequent linking requests et al
 	}
 	

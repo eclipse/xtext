@@ -155,7 +155,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 	}
 
 	/*
-	 * <T> foo(Iterable<IterableT>> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
+	 * <T> foo(Iterable<T> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
 	 */
 	@Test public void testParameterContext_SingleParamIterableExtends() {
 		JvmOperation operation = operation();
@@ -204,7 +204,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 	}
 
 	/*
-	 * <T> foo(Iterable<IterableT>> t) { foo(Iterable<Iterable<? extends CharSequence>>) }
+	 * <T> foo(Iterable<T> t) { foo(Iterable<Iterable<? super CharSequence>>) }
 	 */
 	@Test public void testParameterContext_SingleParamIterableSuper() {
 		JvmOperation operation = operation();

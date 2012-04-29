@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -24,11 +25,13 @@ import org.eclipse.xtext.xbase.XExpression;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ITypeResolution {
+public interface IResolvedTypes {
 
 	List<Diagnostic> getQueuedDiagnostics();
 	
 	JvmTypeReference getActualType(XExpression expression);
+	
+	JvmTypeReference getActualType(JvmIdentifiableElement identifiable);
 	
 	JvmTypeReference getExpectedType(XExpression expression);
 	
@@ -39,7 +42,7 @@ public interface ITypeResolution {
 
 	// TODO return types? are they necessary for clients if diagnostics were already produced?
 	
-	ITypeResolution NULL = new ITypeResolution() {
+	IResolvedTypes NULL = new IResolvedTypes() {
 		
 		public List<Diagnostic> getQueuedDiagnostics() {
 			return Collections.emptyList();
@@ -54,6 +57,10 @@ public interface ITypeResolution {
 		}
 		
 		public JvmTypeReference getActualType(XExpression expression) {
+			return null;
+		}
+
+		public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
 	};

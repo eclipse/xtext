@@ -375,13 +375,22 @@ public interface XbasePackage extends EPackage
 	int XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XEXPRESSION_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>XAbstract Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 6;
+	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -446,6 +455,15 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XMEMBER_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
+	 * The feature id for the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Member Call Target</b></em>' containment reference.
@@ -564,6 +582,15 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XFEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
+	 * The feature id for the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__ACTUAL_TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Feature Call Arguments</b></em>' containment reference list.
@@ -925,6 +952,15 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 
 	/**
+	 * The feature id for the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__ACTUAL_TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1014,6 +1050,15 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XUNARY_OPERATION__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
+	 * The feature id for the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__ACTUAL_TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1431,6 +1476,15 @@ public interface XbasePackage extends EPackage
 	int XASSIGNMENT__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 
 	/**
+	 * The feature id for the '<em><b>Actual Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__ACTUAL_TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Assignable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1786,6 +1840,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXAbstractFeatureCall_ImplicitFirstArgument();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getActualTypeArguments <em>Actual Type Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Actual Type Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getActualTypeArguments()
+	 * @see #getXAbstractFeatureCall()
+	 * @generated
+	 */
+	EReference getXAbstractFeatureCall_ActualTypeArguments();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XMemberFeatureCall <em>XMember Feature Call</em>}'.
@@ -2729,6 +2794,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT = eINSTANCE.getXAbstractFeatureCall_ImplicitFirstArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Actual Type Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XABSTRACT_FEATURE_CALL__ACTUAL_TYPE_ARGUMENTS = eINSTANCE.getXAbstractFeatureCall_ActualTypeArguments();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.

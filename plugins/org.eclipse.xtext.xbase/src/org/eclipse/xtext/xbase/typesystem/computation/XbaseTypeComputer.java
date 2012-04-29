@@ -10,18 +10,20 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -49,23 +51,25 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.typesystem.internal.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.internal.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typing.Closures;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
  */
 @Singleton
 public class XbaseTypeComputer extends AbstractTypeComputer {
-
-	@Inject
-	private TypesFactory typesFactory;
 
 	@Inject
 	private Closures closures;
@@ -77,10 +81,10 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	private Primitives primitives;
 	
 	@Inject 
-	private TypeReferences typeReferences;
+	private CommonTypeComputationServices services;
 	
 	protected TypeReferences getTypeReferences() {
-		return typeReferences;
+		return services.getTypeReferences();
 	}
 	
 	@Override
@@ -130,28 +134,6 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 	
-//	/**
-//	 * @param expr the casted expression that is the container of the child whose expected type should be computed. May not be <code>null</code>.
-//	 * @param reference the feature that describes the child whose type is expected
-//	 * @param index the feature index 
-//	 * @param rawType <code>true</code> if we are only interested in the raw type
-//	 */
-//	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
-//		// SE: This was previously explicitly set to null :
-//		// "return null; // no expectations!"
-//		// Unfortunately there was no comment explaining why this was the case also no test besides the one which explicitly tested this was failing so I changed it back.
-//		// return expr.getType();
-//		// SZ: reverted the change
-//		// the following xtend thing can be casted but will fail if the expected type is taken from the cast expression
-//		// def <T extends Integer> addFunction() {\n" + 
-//		//	    [T a,T b|a+b] as (T,T)=>T\n" + 
-//		// }
-//		// if the closure expects T to be the return type
-//		// the check for the implicit return of int (a + b) will fail
-//		// since T result =/= Integer
-//		return null;
-//	}
-
 	protected void _computeTypes(XIfExpression object, ITypeComputationState state) {
 		ITypeComputationState conditionExpectation = state.fork().withExpectation(getTypeReferences().getTypeForName(Boolean.TYPE, object));
 		conditionExpectation.computeTypes(object.getIf());
@@ -173,8 +155,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		if (object.getLocalVarName() != null) {
 			allCasePartsState = allCasePartsState.assignType(object, computedType.getActualExpressionType());
 		}
-		// assign the type for the switch expression if possible and use that one for the remaining things
 		for(XCasePart casePart: object.getCases()) {
+			// assign the type for the switch expression if possible and use that one for the remaining things
 			ITypeComputationState casePartState = allCasePartsState.fork().withTypeCheckpoint();
 			if (object.getLocalVarName() != null) {
 				casePartState.reassignType(object, casePart.getTypeGuard());
@@ -182,7 +164,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				casePartState.reassignType(object.getSwitch(), casePart.getTypeGuard());
 			}
 			if (casePart.getCase() != null) {
-				ITypeComputationState caseState = casePartState.fork().withNonVoidExpectation(); // object or boolean
+				// boolean or object / primitive
+				ITypeComputationState caseState = casePartState.fork().withNonVoidExpectation(); 
 				caseState.computeTypes(casePart.getCase());
 			}
 			casePartState.computeTypes(casePart.getThen());
@@ -196,28 +179,15 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		}
 	}
 	
-	public JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
-		if (object instanceof XSwitchExpression) {
-			return (XSwitchExpression) object;
-		}
-		if (object instanceof XFeatureCall) {
-			List<IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XFeatureCall)object);
-			if (candidates.size() == 1) {
-				JvmIdentifiableElement linkedFeature = candidates.get(0).getFeature();
-				if (linkedFeature instanceof XVariableDeclaration || linkedFeature instanceof JvmFormalParameter || linkedFeature instanceof JvmField) {
-					return linkedFeature;
-				}
-			}
-		}
-		return null;
-	}
-
 	protected void _computeTypes(XBlockExpression object, ITypeComputationState state) {
 		List<XExpression> expressions = object.getExpressions();
 		if (!expressions.isEmpty()) {
 			for(XExpression expression: expressions.subList(0, expressions.size() - 1)) {
 				ITypeComputationState expressionState = state.fork().withoutImmediateExpectation(); // no expectation
 				expressionState.computeTypes(expression);
+				if (expression instanceof XVariableDeclaration) {
+					state.addLocalToCurrentScope((XVariableDeclaration)expression);
+				}
 			}
 			state.computeTypes(IterableExtensions.last(expressions));
 		}
@@ -259,15 +229,18 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 	
 	protected int getArityMismatch(IConstructorLinkingCandidate candidate) {
-		JvmConstructor constructor = candidate.getConstructor();
-		int fixedArityParamCount = constructor.getParameters().size();
-		if (constructor.isVarArgs()) {
+		return getArityMismatch(candidate.getConstructor(), candidate.getArguments());
+	}
+
+	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {
+		int fixedArityParamCount = executable.getParameters().size();
+		if (executable.isVarArgs()) {
 			fixedArityParamCount--;
-			if (candidate.getArguments().size() >= fixedArityParamCount) {
+			if (arguments.size() >= fixedArityParamCount) {
 				return 0;
 			}
 		}
-		return fixedArityParamCount - candidate.getArguments().size();
+		return fixedArityParamCount - arguments.size();
 	}
 
 	protected void _computeTypes(XBooleanLiteral object, ITypeComputationState state) {
@@ -281,32 +254,38 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected void _computeTypes(XNumberLiteral object, ITypeComputationState state) {
-		// TODO evaluate expectation, inline from numberLiterals?
+		// TODO evaluate expectation if no specific suffix is given
 		JvmTypeReference result = getTypeReferences().getTypeForName(numberLiterals.getJavaType(object), object);
 		state.acceptActualType(result);
 	}
 
 	protected void _computeTypes(XStringLiteral object, ITypeComputationState state) {
-		// TODO evaluate expecation to allow string literals with length == 1 to appear like a char or a Character
+		// TODO evaluate expectation to allow string literals with length == 1 to appear like a char or a Character
 		JvmTypeReference result = getTypeReferences().getTypeForName(String.class, object);
 		state.acceptActualType(result);
 	}
 
-	protected void _computeTypes(final XClosure object, ITypeComputationState state) {
+	protected void _computeTypes(final XClosure object, final ITypeComputationState state) {
 		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
-			JvmTypeReference type = expectation.getExpectedType();
+			JvmTypeReference expectedType = expectation.getExpectedType();
 			// TODO - closure has no expected type - has to be function or procedure
-			ITypeComputationState forked = state.fork().withoutExpectation();
+			ITypeComputationState closureBodyState = state;
 			JvmOperation operation = null;
 			List<JvmFormalParameter> operationParameters = Collections.emptyList();
-			if (type != null) {
-				operation = closures.findImplementingOperation(type, object.eResource());
+			final JvmTypeReference operationReturnType;
+			if (expectedType != null) {
+				operation = closures.findImplementingOperation(expectedType, object.eResource());
 				if (operation != null) {
-					forked = forked.fork().withExpectation(operation.getReturnType());
+					closureBodyState = closureBodyState.fork().withExpectation(operation.getReturnType());
 					operationParameters = operation.getParameters();
+					operationReturnType = operation.getReturnType();
+				} else {
+					operationReturnType = null;
 				}
+			} else {
+				operationReturnType = null;
 			}
-			ITypeAssigner typeAssigner = forked.assignTypes();
+			ITypeAssigner typeAssigner = closureBodyState.assignTypes();
 			List<JvmFormalParameter> closureParameters = object.getFormalParameters();
 			int paramCount = Math.min(closureParameters.size(), operationParameters.size());
 			// TODO validate parameter count - check against operation if available
@@ -314,22 +293,80 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				JvmFormalParameter closureParameter = closureParameters.get(i);
 				typeAssigner.assignType(closureParameter, closureParameter.getParameterType(), operationParameters.get(i).getParameterType());
 			}
+			final JvmTypeReference[] closureType = new JvmTypeReference[1];
 			for(int i = paramCount; i < closureParameters.size(); i++) {
 				JvmFormalParameter closureParameter = closureParameters.get(i);
-				typeAssigner.assignType(closureParameter, closureParameter.getParameterType());
+				JvmTypeReference parameterType = closureParameter.getParameterType();
+				if (parameterType != null) {
+					typeAssigner.assignType(closureParameter, parameterType);
+				} else {
+					XComputedTypeReference computedParameterType = services.getXtypeFactory().createXComputedTypeReference();
+					final int parameterIndex = i;
+					computedParameterType.setTypeProvider(new AbstractReentrantTypeReferenceProvider() {
+						@Override
+						protected JvmTypeReference doGetTypeReference() {
+							JvmTypeReference computedClosureType = closureType[0];
+							if (computedClosureType == null) {
+								return null;
+							}
+							JvmOperation operation = closures.findImplementingOperation(computedClosureType, object.eResource());
+							if (operation == null) {
+								return null;
+							}
+							JvmFormalParameter operationParameter = operation.getParameters().get(parameterIndex);
+							Map<JvmTypeParameter, JvmTypeReference> parameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(computedClosureType);
+							JvmTypeReference result = new TypeParameterSubstitutor(parameterMapping, services).substitute(operationParameter.getParameterType());
+							return result;
+						}
+					});
+					typeAssigner.assignType(closureParameter, computedParameterType);
+				}
 			}
 			ITypeComputationResult expressionResult = typeAssigner.getForkedState().computeTypes(object.getExpression());
-			JvmTypeReference closureType = null;
-			if (type != null) {
-				closureType = expressionResult.resolve(type);
-			} else {
-				List<JvmTypeReference> closureParameterTypes = Lists.newArrayListWithCapacity(closureParameters.size());
+			if (expectedType == null || operationReturnType == null) {
+				final List<JvmTypeReference> closureParameterTypes = Lists.newArrayListWithCapacity(closureParameters.size());
 				for(JvmFormalParameter parameter: closureParameters) {
 					closureParameterTypes.add(expressionResult.getActualType(parameter));
 				}
-				closureType = closures.createFunctionTypeRef(object, closureParameterTypes, expressionResult.getActualExpressionType(), true);	
+				JvmTypeReference expressionResultType = expressionResult.getActualExpressionType();
+				expressionResultType = new TypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services) {
+					@Override
+					public JvmTypeReference doVisitAnyTypeReference(JvmAnyTypeReference reference, Set<JvmTypeParameter> visited) {
+						return operationReturnType;
+					}
+					@Override
+					protected JvmTypeReference handleNullReference(Set<JvmTypeParameter> visited) {
+						return operationReturnType;
+					}
+					@Override
+					public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference, Set<JvmTypeParameter> visited) {
+						if (reference instanceof XComputedTypeReference) {
+							if (closureParameterTypes.contains(reference)) {
+								return reference;
+							}
+						}
+						return super.doVisitSpecializedTypeReference(reference, visited);
+					}
+				}.visit(expressionResultType, Sets.<JvmTypeParameter>newHashSet());
+				if (expressionResultType == null) {
+					expressionResultType = services.getTypeReferences().getTypeForName(Object.class, object);
+				}
+				closureType[0] = closures.createFunctionTypeRef(object, closureParameterTypes, expressionResultType, true);	
+				expectation.acceptActualType(closureType[0], ConformanceHint.DEMAND_CONVERSION);
+			} else {
+				JvmTypeReference closureBodyType = expressionResult.getActualExpressionType();
+				JvmType rawReturnType = operationReturnType.getType();
+				Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(expectedType);
+				if (rawReturnType instanceof JvmTypeParameter) {
+					typeParameterMapping.putAll(Collections.singletonMap((JvmTypeParameter)rawReturnType, primitives.asWrapperTypeIfPrimitive(closureBodyType)));
+				} else {
+					typeParameterMapping.putAll(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureBodyType));
+				}
+				TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(typeParameterMapping, services);
+				JvmType expectedRawType = expectedType.getType();
+				closureType[0] = substitutor.substitute(services.getTypeReferences().createTypeRef(expectedRawType));
+				expectation.acceptActualType(closureType[0], ConformanceHint.DEMAND_CONVERSION);
 			}
-			expectation.acceptActualType(closureType, ConformanceHint.DEMAND_CONVERSION);
 		}
 	}
 
@@ -349,27 +386,29 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			} else {
 				iterable = getTypeReferences().getTypeForName(Iterable.class, object, parameterType);
 			}
-			ITypeComputationState iterableState = state.fork().withExpectation(iterable); // will add synonymes automatically
+			// TODO add synonymes automatically
+			ITypeComputationState iterableState = state.fork().withExpectation(iterable);
 			iterableState.computeTypes(object.getForExpression());
 			
 		} else {
 			JvmTypeReference iterable = getTypeReferences().getTypeForName(Iterable.class, object, getTypeReferences().wildCard());
-			ITypeComputationState iterableState = state.fork().withExpectation(iterable); // will add synonymes automatically
+			// TODO add synonymes automatically
+			ITypeComputationState iterableState = state.fork().withExpectation(iterable); 
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			JvmTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
 			parameterType = new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
 				@Override
 				public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 					DeclaratorTypeArgumentCollector typeArgumentCollector = new DeclaratorTypeArgumentCollector();
-					typeArgumentCollector.visit(reference);
-					Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping();
-					TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(typeParameterMapping, typesFactory);
+					Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
+					TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(typeParameterMapping, services);
 					JvmTypeReference iterableWithTypeParam = getTypeReferences().getTypeForName(Iterable.class, object);
 					JvmTypeReference substitutedIterable = substitutor.substitute(iterableWithTypeParam);
 					if (substitutedIterable instanceof JvmParameterizedTypeReference) {
 						return ((JvmParameterizedTypeReference) substitutedIterable).getArguments().get(0);
 					}
-					return typesFactory.createJvmUnknownTypeReference();
+					// TODO use error type instead of JvmUnknownTypeReference
+					return services.getTypesFactory().createJvmUnknownTypeReference();
 				}
 				@Override
 				public JvmTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
@@ -388,7 +427,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	protected void _computeTypes(XAbstractWhileExpression object, ITypeComputationState state) {
 		ITypeComputationState conditionExpectation = state.fork().withExpectation(getTypeReferences().getTypeForName(Boolean.TYPE, object));
 		conditionExpectation.computeTypes(object.getPredicate());
-		// TODO reassign type if instanceof clause is present and cannot be ignored
+		// TODO reassign type if instanceof clause is present and cannot be ignored due to binary boolean operations
 		state.fork().withoutImmediateExpectation().computeTypes(object.getBody());
 		
 		JvmTypeReference primitiveVoid = getPrimitiveVoid(object);
@@ -396,7 +435,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected void _computeTypes(XTypeLiteral object, ITypeComputationState state) {
-		JvmParameterizedTypeReference typeRef = typesFactory.createJvmParameterizedTypeReference();
+		JvmParameterizedTypeReference typeRef = services.getTypesFactory().createJvmParameterizedTypeReference();
 		typeRef.setType(object.getType());
 		state.acceptActualType(getTypeReferences().getTypeForName(Class.class, object, typeRef));
 	}
@@ -450,8 +489,41 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		return result;
 	}
 
-	protected IFeatureLinkingCandidate getBetterCandidate(IFeatureLinkingCandidate left, @SuppressWarnings("unused") IFeatureLinkingCandidate right) {
+	protected IFeatureLinkingCandidate getBetterCandidate(IFeatureLinkingCandidate left, IFeatureLinkingCandidate right) {
+		int leftArityMismatch = getArityMismatch(left);
+		int rightArityMismatch = getArityMismatch(right);
+		if (leftArityMismatch != rightArityMismatch) {
+			if (leftArityMismatch == 0)
+				return left;
+			if (rightArityMismatch == 0)
+				return right;
+		}
 		return left;
+	}
+	
+	protected int getArityMismatch(IFeatureLinkingCandidate candidate) {
+		JvmIdentifiableElement identifiable = candidate.getFeature();
+		if (identifiable instanceof JvmExecutable) {
+			return getArityMismatch((JvmExecutable) identifiable, candidate.getArguments());
+		} else {
+			return candidate.getArguments().size();
+		}
+	}
+	
+	public JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
+		if (object instanceof XSwitchExpression) {
+			return (XSwitchExpression) object;
+		}
+		if (object instanceof XFeatureCall) {
+			List<IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XFeatureCall)object);
+			if (candidates.size() == 1) {
+				JvmIdentifiableElement linkedFeature = candidates.get(0).getFeature();
+				if (linkedFeature instanceof XVariableDeclaration || linkedFeature instanceof JvmFormalParameter || linkedFeature instanceof JvmField) {
+					return linkedFeature;
+				}
+			}
+		}
+		return null;
 	}
 	
 	// TODO implement this thing
@@ -467,4 +539,25 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 //		state.discardReassignedTypes(context.getAssignable());
 //	}
 
+//	/**
+//	 * @param expr the casted expression that is the container of the child whose expected type should be computed. May not be <code>null</code>.
+//	 * @param reference the feature that describes the child whose type is expected
+//	 * @param index the feature index 
+//	 * @param rawType <code>true</code> if we are only interested in the raw type
+//	 */
+//	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
+//		// SE: This was previously explicitly set to null :
+//		// "return null; // no expectations!"
+//		// Unfortunately there was no comment explaining why this was the case also no test besides the one which explicitly tested this was failing so I changed it back.
+//		// return expr.getType();
+//		// SZ: reverted the change
+//		// the following xtend thing can be casted but will fail if the expected type is taken from the cast expression
+//		// def <T extends Integer> addFunction() {\n" + 
+//		//	    [T a,T b|a+b] as (T,T)=>T\n" + 
+//		// }
+//		// if the closure expects T to be the return type
+//		// the check for the implicit return of int (a + b) will fail
+//		// since T result =/= Integer
+//		return null;
+//	}
 }

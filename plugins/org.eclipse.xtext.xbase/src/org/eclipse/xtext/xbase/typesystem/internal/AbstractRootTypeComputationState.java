@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -24,9 +25,10 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 @NonNullByDefault
 public abstract class AbstractRootTypeComputationState extends AbstractTypeComputationState {
 	
-	protected AbstractRootTypeComputationState(TypeResolution typeResolution,
+	protected AbstractRootTypeComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver) {
-		super(typeResolution, reentrantTypeResolver);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
 	}
 	
 	public ITypeComputationResult computeTypes() {
@@ -39,7 +41,7 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	
 	@Override
 	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		getTypeResolution().acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
+		getResolvedTypes().acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
 	}
 	
 	@Override
