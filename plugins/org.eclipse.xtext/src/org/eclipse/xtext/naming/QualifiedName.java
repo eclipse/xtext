@@ -47,6 +47,20 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		return new QualifiedName(segments != null ? segments.clone() : Strings.EMPTY_ARRAY);
 	}
+	
+	/**
+	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
+	 * 
+	 * @exception IllegalArgumentException
+	 *                if any of the segments is null
+	 * @since 2.3
+	 */
+	public static QualifiedName create(String singleSegment) {
+		if (singleSegment == null) {
+			throw new IllegalArgumentException("Segment cannot be null");
+		}
+		return new QualifiedName(new String[] {singleSegment});
+	}
 
 	/**
 	 * Wrapps a name function to return a qualified name. Returns null if the name function returns null. 
