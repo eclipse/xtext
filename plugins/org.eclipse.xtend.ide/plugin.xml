@@ -747,23 +747,43 @@
    
    <extension point="org.eclipse.core.runtime.adapters">
      <factory 
-        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IFileEditorInput">
-        <adapter type="org.eclipse.xtend.ide.launching.JavaElementDelegate"/>
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
      </factory>
      <factory 
-        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IEditorPart">
-        <adapter type="org.eclipse.xtend.ide.launching.JavaElementDelegate"/>
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
      </factory>
      <factory 
-        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory" 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory" 
         adaptableType="org.eclipse.core.resources.IResource">
-        <adapter type="org.eclipse.xtend.ide.launching.JavaElementDelegate"/>
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
      </factory>
      <factory 
-        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.launching.JavaElementDelegateAdapterFactory"
-        adaptableType="org.eclipse.xtend.ide.launching.JavaElementDelegate">
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
+        <adapter type="org.eclipse.jdt.core.IJavaElement"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IFileEditorInput">
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.ui.IEditorPart">
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory" 
+        adaptableType="org.eclipse.core.resources.IResource">
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch">
         <adapter type="org.eclipse.jdt.core.IJavaElement"/>
      </factory>
   </extension>
@@ -774,7 +794,7 @@
             label="%JUnitShortcut.label"
             icon="$nl$/icons/julaunch.gif"
             helpContextId="org.eclipse.jdt.junit.launch_shortcut"
-            class="org.eclipse.xtend.ide.launching.JUnitLaunchShortcut"
+            class="org.eclipse.xtext.xbase.ui.launching.JUnitLaunchShortcut"
             modes="run, debug"
             id="org.eclipse.xtend.ide.launching.junitShortcut">
          <contextualLaunch>
@@ -784,7 +804,7 @@
                	  <iterate>
                	     <and>
                	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
-                       <adapt type="org.eclipse.xtend.ide.launching.JavaElementDelegate">
+                       <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
 	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
 			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
 			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
@@ -812,7 +832,7 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="org.eclipse.xtend.ide.launching.JUnitPDELaunchShortcut"
+            class="org.eclipse.xtext.xbase.ui.launching.JUnitPDELaunchShortcut"
             icon="$nl$/icons/julaunchpgn.gif"
             id="org.eclipse.xtend.ide.launching.junitPdeShortcut"
             label="%launcher.junit.name"
@@ -824,7 +844,7 @@
                	  <iterate>
                	     <and>
                	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
-                       <adapt type="org.eclipse.xtend.ide.launching.JavaElementDelegate">
+                       <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
                          <adapt type="org.eclipse.jdt.core.IJavaElement">
 		                   <test property="org.eclipse.jdt.core.isInJavaProjectWithNature" value="org.eclipse.pde.PluginNature"/>
 		                   <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
@@ -852,7 +872,7 @@
     <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="org.eclipse.xtend.ide.launching.JavaApplicationLaunchShortcut"
+            class="org.eclipse.xtext.xbase.ui.launching.JavaApplicationLaunchShortcut"
             description="%JavaLaunchShortcut.description"
             helpContextId="org.eclipse.jdt.debug.ui.shortcut_local_java_application"
             icon="$nl$/icons/full/etool16/java_app.gif"
@@ -866,7 +886,7 @@
                <iterate>
                  <and>
                    <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
-                   <adapt type="org.eclipse.xtend.ide.launching.JavaElementDelegate">
+                   <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch">
                      <and>
                        <adapt type="org.eclipse.jdt.core.IJavaElement">
                          <test property="org.eclipse.jdt.core.isInJavaProject"/>
