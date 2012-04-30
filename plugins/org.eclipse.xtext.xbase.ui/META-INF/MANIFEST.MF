@@ -18,7 +18,10 @@ Require-Bundle: org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.jdt.ui;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.ui.codetemplates.ui;bundle-version="2.3.0",
- org.eclipse.pde.ui;bundle-version="3.5.0"
+ org.eclipse.jdt.debug;bundle-version="3.7.100";resolution:=optional,
+ org.eclipse.jdt.debug.ui;bundle-version="3.6.100";resolution:=optional,
+ org.eclipse.pde.ui;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.jdt.junit;bundle-version="3.7.0";resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
 Import-Package: org.apache.log4j
@@ -45,6 +48,7 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;x-internal:=true,
  org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;x-internal:=true,
  org.eclipse.xtext.xbase.ui.labeling;x-internal:=true,
+ org.eclipse.xtext.xbase.ui.launching;x-internal:=true,
  org.eclipse.xtext.xbase.ui.outline;x-internal:=true,
  org.eclipse.xtext.xbase.ui.quickfix;x-internal:=true,
  org.eclipse.xtext.xbase.ui.syntaxcoloring;x-internal:=true
