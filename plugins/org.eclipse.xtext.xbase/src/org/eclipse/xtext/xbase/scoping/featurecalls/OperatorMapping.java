@@ -27,6 +27,13 @@ public class OperatorMapping {
 	public static final QualifiedName MULTIPLY = create("*");
 	public static final QualifiedName DIVIDE = create("/");
 	public static final QualifiedName MODULO = create("%");
+	public static final QualifiedName DOUBLE_LESS_THAN = create("<<");
+	public static final QualifiedName DOUBLE_GREATER_THAN = create(">>");
+	public static final QualifiedName TRIPLE_LESS_THAN = create("<<<");
+	public static final QualifiedName TRIPLE_GREATER_THAN = create(">>>");
+	public static final QualifiedName ELVIS = create("?:");
+	public static final QualifiedName DIAMOND = create("<>");
+	public static final QualifiedName SPACESHIP = create("<=>");
 	public static final QualifiedName OR = create("||");
 	public static final QualifiedName AND = create("&&");
 	public static final QualifiedName ADD = create("+=");
@@ -56,6 +63,13 @@ public class OperatorMapping {
 		map.put(MULTIPLY, create(OP_PREFIX+"multiply"));
 		map.put(DIVIDE, create(OP_PREFIX+"divide"));
 		map.put(MODULO, create(OP_PREFIX+"modulo"));
+		map.put(DOUBLE_LESS_THAN, create(OP_PREFIX + "doubleLessThan"));
+		map.put(DOUBLE_GREATER_THAN, create(OP_PREFIX + "doubleGreaterThan"));
+		map.put(TRIPLE_LESS_THAN, create(OP_PREFIX + "tripleLessThan"));
+		map.put(TRIPLE_GREATER_THAN, create(OP_PREFIX + "tripleGreaterThan"));
+		map.put(ELVIS, create(OP_PREFIX + "elvis"));
+		map.put(DIAMOND, create(OP_PREFIX + "diamond"));
+		map.put(SPACESHIP, create(OP_PREFIX + "spaceship"));
 		map.put(OR, create(OP_PREFIX+"or"));
 		map.put(AND, create(OP_PREFIX+"and"));
 		map.put(ADD, create(OP_PREFIX+"add"));

@@ -59,7 +59,14 @@ XOtherOperatorExpression returns XExpression:
 	rightOperand=XAdditiveExpression)*;
 
 OpOther:
-	'->' | '..' | '=>';
+	'->' 
+	| '..' 
+	| '=>' 
+	| '>' '>' (=>'>')? 
+	| '<' '<' (=>'<')?
+	| '<' '>'
+	| '?:' 
+	| '<=>';
 
 XAdditiveExpression returns XExpression:
 	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
