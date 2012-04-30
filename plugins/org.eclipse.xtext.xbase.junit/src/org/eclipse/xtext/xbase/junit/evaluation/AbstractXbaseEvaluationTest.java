@@ -513,8 +513,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("bar","'bar' ?: 'foo'");
 	}
 	
+	@Ignore
 	@Test public void testElvisOperator_02() throws Exception {
 		assertEvaluatesTo(null,"null ?: null");
+	}
+	
+	@Test public void testElvisOperator_03() throws Exception {
+		assertEvaluatesTo(null,"null as String ?: null as String");
 	}
 	
 	@Test public void testStringConcatenation_00() throws Exception {

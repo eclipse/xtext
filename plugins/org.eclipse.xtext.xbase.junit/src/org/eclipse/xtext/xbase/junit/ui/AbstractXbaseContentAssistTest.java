@@ -135,7 +135,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		"==", "!=",
 		"+",
 		"<=", ">=", "<", ">",
-		"->","=>"
+		"->","=>", "?:"
 	};
 	
 	protected static String[] CAST_INSTANCEOF = {
@@ -388,15 +388,15 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 
 	@Test public void testAfterBinaryOperation_08() throws Exception {
-		newBuilder().append("((''+(''.bytes)))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "->", "=>", "bytes");
+		newBuilder().append("((''+(''.bytes)))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "->", "=>", "?:", "bytes");
 	}
 	
 	@Test public void testAfterBinaryOperation_09() throws Exception {
-		newBuilder().append("((''+''.bytes))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "->", "=>", "bytes");
+		newBuilder().append("((''+''.bytes))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "->", "=>", "?:", "bytes");
 	}
 	
 	@Test public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==", "->", "=>", "+");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==", "->", "=>", "+", "?:");
 	}
 	
 	// TODO: limit to static features
@@ -405,7 +405,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "+", "==", "->", "=>");
+		newBuilder().append("null").assertText("null", "!=", "+", "==", "->", "?:", "=>");
 	}
 	
 	@Test public void testForLoop_01() throws Exception {
