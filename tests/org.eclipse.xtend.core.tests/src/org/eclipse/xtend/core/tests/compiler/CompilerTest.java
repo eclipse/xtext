@@ -2780,6 +2780,35 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}", "foo");
 	}
 	
+	@Test public void testSpaceShipOperator() throws Exception {
+		invokeAndExpect2("FOOBARBAZ", 
+				"def String foo() {" +
+				"  'foo' <=> 'bar' <=> 'baz'" +
+				"}" +
+				"def String operator_spaceship(String a, String b) { " +
+				"  a.toUpperCase + b.toUpperCase" +
+				"}", "foo");
+	}
+	@Test public void testDiamondOperator() throws Exception {
+		invokeAndExpect2("FOOBARBAZ", 
+				"def String foo() {" +
+						"  'foo' <> 'bar' <> 'baz'" +
+						"}" +
+						"def String operator_diamond(String a, String b) { " +
+						"  a.toUpperCase + b.toUpperCase" +
+						"}", "foo");
+	}
+	
+	@Test public void testTripleLessThanOperator() throws Exception {
+		invokeAndExpect2("FOOBARBAZ", 
+				"def String foo() {" +
+				"  'foo' <<< 'bar' <<< 'baz'" +
+				"}" +
+				"def String operator_tripleLessThan(String a, String b) { " +
+				"  a.toUpperCase + b.toUpperCase" +
+				"}", "foo");
+	}
+	
 	@Test public void testAbstractClasses_01() throws Exception {
 		Class<?> code = compileJavaCode("foo.Bar", "package foo abstract class Bar {}");
 		assertTrue(Modifier.isAbstract(code.getModifiers()));
