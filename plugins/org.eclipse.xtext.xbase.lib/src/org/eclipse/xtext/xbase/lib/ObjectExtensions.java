@@ -117,4 +117,26 @@ public class ObjectExtensions {
 		return a + b;
 	}
 	
+	/**
+	 * The elvis operator <code>?:</code> is a short hand notation for
+	 * providing default value in case an expression evaluates to <code>null</code>.
+	 * 
+	 * Example:
+	 * <code>person.name?:'Hans'</code>
+	 * 
+	 * @param first
+	 *            an {@link Object}. Might be <code>null</code>.
+	 * @param second
+	 *            an {@link Object}. Might be <code>null</code>.
+	 * 
+	 * @return a reference to <code>first</code> if <code>first != null </code>, <code>second<code> otherwise, 
+	 * @since 2.3
+	 */
+	public static <T> T operator_elvis(T first, T second) {
+		if (first != null)
+			return first;
+		return second;
+	}
+	
+	
 }

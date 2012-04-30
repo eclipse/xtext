@@ -505,6 +505,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
 	}
 	
+	@Test public void testElvisOperator() throws Exception {
+		assertEvaluatesTo("foo","null as String?:'foo'");
+	}
+	
+	@Test public void testElvisOperator_01() throws Exception {
+		assertEvaluatesTo("bar","'bar' ?: 'foo'");
+	}
+	
+	@Test public void testElvisOperator_02() throws Exception {
+		assertEvaluatesTo(null,"null ?: null");
+	}
+	
 	@Test public void testStringConcatenation_00() throws Exception {
 		assertEvaluatesTo("foobar", "'foo'+ ('bar' as Object)");
 	}
@@ -2378,6 +2390,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testIntegerBitOperations() throws Exception {
 		assertEvaluatesTo(~(1 | 2 & 3), "1.bitwiseOr(2).bitwiseAnd(3).bitwiseNot()");
+	}
+	
+	@Test public void testIntegerShiftOperations_01() throws Exception {
+		assertEvaluatesTo(2 >> 1, "2 >> 1");
+	}
+	@Test public void testIntegerShiftOperations_02() throws Exception {
+		assertEvaluatesTo(-2 >>> 1, " -2 >>> 1");
+	}
+	@Test public void testIntegerShiftOperations_03() throws Exception {
+		assertEvaluatesTo(2 << 1, "2 << 1");
 	}
 
 	@Test public void testBigIntegerBitOperations() throws Exception {

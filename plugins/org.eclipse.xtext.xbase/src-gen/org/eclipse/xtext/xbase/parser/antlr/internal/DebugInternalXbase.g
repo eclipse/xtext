@@ -104,7 +104,16 @@ ruleXOtherOperatorExpression :
 ruleOpOther :
 	'->' |
 	'..' |
-	'=>'
+	'=>' |
+	'>' '>' ( (
+	'>'
+	) => '>' )? |
+	'<' '<' ( (
+	'<'
+	) => '<' )? |
+	'<' '>' |
+	'?:' |
+	'<=>'
 ;
 
 // Rule XAdditiveExpression

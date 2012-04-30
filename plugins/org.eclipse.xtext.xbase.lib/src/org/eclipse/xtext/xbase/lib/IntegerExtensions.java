@@ -114,9 +114,27 @@ public class IntegerExtensions {
 	 * @param distance 
 	 *            the number of times to shift.
 	 * @return <code>a&lt;&lt;distance</code>
+	 * @deprecated use {@link #operator_doubleLessThan(int, int)} instead
 	 */
 	@Inline("($1 << $2)")
+	@Deprecated
 	public static int shiftLeft(int a, int distance) {
+		return a << distance;
+	}
+	
+	/**
+	 * The binary <code>signed left shift</code> operator. This is the equivalent to the java <code>&lt;&lt;</code> operator.
+	 * Fills in a zero as the least significant bit.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param distance 
+	 *            the number of times to shift.
+	 * @return <code>a&lt;&lt;distance</code>
+	 * @since 2.3
+	 */
+	@Inline("($1 << $2)")
+	public static int operator_doubleLessThan(int a, int distance) {
 		return a << distance;
 	}
 
@@ -129,9 +147,27 @@ public class IntegerExtensions {
 	 * @param distance 
 	 *            the number of times to shift.
 	 * @return <code>a&gt;&gt;distance</code>
+	 * @deprecated use {@link #operator_doubleGreaterThan(int, int)} instead
 	 */
 	@Inline("($1 >> $2)")
+	@Deprecated
 	public static int shiftRight(int a, int distance) {
+		return a >> distance;
+	}
+	
+	/**
+	 * The binary <code>signed right sift</code> operator. This is the equivalent to the java <code>&gt;&gt;</code> operator.
+	 * Shifts in the value of the sign bit as the leftmost bit, thus preserving the sign of the initial value.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param distance 
+	 *            the number of times to shift.
+	 * @return <code>a&gt;&gt;distance</code>
+	 * @since 2.3
+	 */
+	@Inline("($1 >> $2)")
+	public static int operator_doubleGreaterThan(int a, int distance) {
 		return a >> distance;
 	}
 
@@ -144,9 +180,27 @@ public class IntegerExtensions {
 	 * @param distance
 	 *            the number of times to shift.
 	 * @return <code>a&gt;&gt;&gt;distance</code>
+	 * @deprecated use {@link #operator_tripleGreaterThan(int, int)} instead
 	 */
 	@Inline("($1 >>> $2)")
+	@Deprecated
 	public static int shiftRightUnsigned(int a, int distance) {
+		return a >>> distance;
+	}
+	
+	/**
+	 * The binary <code>unsigned right shift</code> operator. This is the equivalent to the java <code>&gt;&gt;&gt;</code> operator.
+	 * Shifts in zeros into as leftmost bits, thus always yielding a positive integer.
+	 * 
+	 * @param a
+	 *            an integer.
+	 * @param distance
+	 *            the number of times to shift.
+	 * @return <code>a&gt;&gt;&gt;distance</code>
+	 * @since 2.3
+	 */
+	@Inline("($1 >>> $2)")
+	public static int operator_tripleGreaterThan(int a, int distance) {
 		return a >>> distance;
 	}
 
