@@ -7,6 +7,8 @@ package org.eclipse.xtext.xbase.annotations.services;
 import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
@@ -342,19 +344,36 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	private XAnnotationValueFieldReferenceElements pXAnnotationValueFieldReference;
 	private XAnnotationValueArrayElements pXAnnotationValueArray;
 	
-	private final GrammarProvider grammarProvider;
+	private final Grammar grammar;
 
 	private XbaseGrammarAccess gaXbase;
 
 	@Inject
 	public XbaseWithAnnotationsGrammarAccess(GrammarProvider grammarProvider,
 		XbaseGrammarAccess gaXbase) {
-		this.grammarProvider = grammarProvider;
+		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
 	}
 	
-	public Grammar getGrammar() {	
-		return grammarProvider.getGrammar(this);
+	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
+		Grammar grammar = grammarProvider.getGrammar(this);
+		while (grammar != null) {
+			if ("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations".equals(grammar.getName())) {
+				return grammar;
+			}
+			List<Grammar> grammars = grammar.getUsedGrammars();
+			if (!grammars.isEmpty()) {
+				grammar = grammars.iterator().next();
+			} else {
+				return null;
+			}
+		}
+		return grammar;
+	}
+	
+	
+	public Grammar getGrammar() {
+		return grammar;
 	}
 	
 

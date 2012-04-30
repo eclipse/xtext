@@ -7,6 +7,8 @@ package org.eclipse.xtext.xbase.services;
 import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
@@ -2737,19 +2739,36 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalRule tINT;
 	private TerminalRule tDECIMAL;
 	
-	private final GrammarProvider grammarProvider;
+	private final Grammar grammar;
 
 	private XtypeGrammarAccess gaXtype;
 
 	@Inject
 	public XbaseGrammarAccess(GrammarProvider grammarProvider,
 		XtypeGrammarAccess gaXtype) {
-		this.grammarProvider = grammarProvider;
+		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXtype = gaXtype;
 	}
 	
-	public Grammar getGrammar() {	
-		return grammarProvider.getGrammar(this);
+	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
+		Grammar grammar = grammarProvider.getGrammar(this);
+		while (grammar != null) {
+			if ("org.eclipse.xtext.xbase.Xbase".equals(grammar.getName())) {
+				return grammar;
+			}
+			List<Grammar> grammars = grammar.getUsedGrammars();
+			if (!grammars.isEmpty()) {
+				grammar = grammars.iterator().next();
+			} else {
+				return null;
+			}
+		}
+		return grammar;
+	}
+	
+	
+	public Grammar getGrammar() {
+		return grammar;
 	}
 	
 

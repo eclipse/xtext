@@ -7,6 +7,8 @@ package org.eclipse.xtext.generator.ecore.services;
 import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
@@ -81,19 +83,36 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private SubMainElements pSubMain;
 	private AnotherSuperMainElements pAnotherSuperMain;
 	
-	private final GrammarProvider grammarProvider;
+	private final Grammar grammar;
 
 	private SuperTestLanguageGrammarAccess gaSuperTestLanguage;
 
 	@Inject
 	public SubTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		SuperTestLanguageGrammarAccess gaSuperTestLanguage) {
-		this.grammarProvider = grammarProvider;
+		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaSuperTestLanguage = gaSuperTestLanguage;
 	}
 	
-	public Grammar getGrammar() {	
-		return grammarProvider.getGrammar(this);
+	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
+		Grammar grammar = grammarProvider.getGrammar(this);
+		while (grammar != null) {
+			if ("org.eclipse.xtext.generator.ecore.SubTestLanguage".equals(grammar.getName())) {
+				return grammar;
+			}
+			List<Grammar> grammars = grammar.getUsedGrammars();
+			if (!grammars.isEmpty()) {
+				grammar = grammars.iterator().next();
+			} else {
+				return null;
+			}
+		}
+		return grammar;
+	}
+	
+	
+	public Grammar getGrammar() {
+		return grammar;
 	}
 	
 
