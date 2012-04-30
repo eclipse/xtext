@@ -30,6 +30,9 @@ public class GrammarProvider {
 	private volatile Grammar grammar;
 
 	private final Provider<XtextResourceSet> resourceSetProvider;
+	
+	@Inject(optional=true)
+	private ClassLoader classLoader;
 
 	@Inject
 	public GrammarProvider(@Named(Constants.LANGUAGE_NAME) String languageName, Provider<XtextResourceSet> resourceSetProvider) {
@@ -45,7 +48,12 @@ public class GrammarProvider {
 			synchronized(this) {
 				if (grammar == null) {
 					XtextResourceSet resourceSet = resourceSetProvider.get();
-					resourceSet.setClasspathURIContext(requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader());
+					if (classLoader != null) {
+						resourceSet.setClasspathURIContext(classLoader);
+					} else {
+						final ClassLoader classLoaderToUse = requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader();
+						resourceSet.setClasspathURIContext(classLoaderToUse);
+					}
 					grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(
 							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/') + ".xmi",
 							resourceSet);
