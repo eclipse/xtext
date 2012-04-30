@@ -1034,12 +1034,11 @@ public class JvmTypesBuilder {
 		if (anno.getValue() != null) {
 			JvmAnnotationValue value = getJvmAnnotationValue(anno.getValue());
 			if (value != null) {
-				Iterable<JvmFeature> allFeatures = anno.getAnnotationType().getAllFeatures();
+				Iterable<JvmFeature> allFeatures = anno.getAnnotationType().findAllFeaturesByName("value");
 				for (JvmFeature jvmFeature : allFeatures) {
 					if (jvmFeature instanceof JvmOperation) {
 						JvmOperation operation = (JvmOperation) jvmFeature;
-						if (operation.getSimpleName().equals("value"))
-							value.setOperation(operation);
+						value.setOperation(operation);
 					}
 				}
 				reference.getValues().add(value);
