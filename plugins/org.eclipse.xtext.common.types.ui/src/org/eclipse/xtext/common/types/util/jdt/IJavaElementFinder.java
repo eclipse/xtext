@@ -39,6 +39,7 @@ public interface IJavaElementFinder {
 	 * 
 	 * @param element the identifiable. May be <code>null</code>.
 	 * @return the found {@link IJavaElement} or <code>null</code>.
+	 * @since 2.3
 	 */
 	IJavaElement findExactElementFor(JvmIdentifiableElement element);
 	
