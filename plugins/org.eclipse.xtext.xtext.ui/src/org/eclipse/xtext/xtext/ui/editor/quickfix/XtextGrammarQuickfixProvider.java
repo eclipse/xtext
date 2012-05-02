@@ -29,8 +29,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -48,11 +48,14 @@ import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -71,6 +74,8 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextValidator;
 
+import com.google.common.base.CaseFormat;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -392,4 +397,35 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					});
 	}
 
+	@SuppressWarnings("restriction")
+	@Fix(XtextValidator.INVALID_TERMINALRULE_NAME)
+	public void fixTerminalRuleName(final Issue issue, IssueResolutionAcceptor acceptor){
+		if(issue.getData().length == 1){
+			final String upperCase = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE,issue.getData()[0]).toString();
+			acceptor.accept(issue, "Change name to " + upperCase , "Change name to " + upperCase, "upcase.png", new IModification() {
+
+				public void apply(IModificationContext context) throws Exception {
+					final IXtextDocument xtextDocument = context.getXtextDocument();
+					xtextDocument.replace(issue.getOffset(), issue.getLength(), upperCase);
+					xtextDocument.modify(new IUnitOfWork.Void<XtextResource>() {
+						@Override
+						public void process(XtextResource state) throws Exception {
+							final EObject terminalRule = state.getEObject(issue.getUriToProblem().fragment());
+							Iterable<RuleCall> candidates = Iterables.filter(Iterables.filter(Lists.newArrayList(state.getAllContents()),RuleCall.class), new Predicate<RuleCall>() {
+								public boolean apply(RuleCall ruleCall) {
+									return ruleCall.getRule() == terminalRule;
+								}
+							});
+							for(RuleCall ruleCall: candidates){
+								List<INode> nodes = NodeModelUtils.findNodesForFeature(ruleCall, XtextPackage.eINSTANCE.getRuleCall_Rule());
+								for(INode node : nodes){
+									xtextDocument.replace(node.getOffset(), node.getLength(), upperCase);
+								}
+							}
+						}
+					});
+				}
+			});
+		}
+	}
 }
