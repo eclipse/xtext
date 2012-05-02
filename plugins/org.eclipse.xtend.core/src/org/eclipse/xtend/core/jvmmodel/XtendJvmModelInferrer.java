@@ -573,7 +573,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (XtendMember member : xtendClass.getMembers()) {
 			if (member instanceof XtendFunction) {
 				XtendFunction function = (XtendFunction) member;
-				if (function.getName().equals(simpleName)) {
+				String name = function.getName();
+				if (name != null && name.equals(simpleName)) {
 					boolean allMatched = true;
 					if (function.getParameters().size() == parameters.size()) {
 						for (int i = 0; i < parameters.size() ; i++) {

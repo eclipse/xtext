@@ -15,7 +15,9 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -25,6 +27,8 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.junit.Ignore;
@@ -1077,12 +1081,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     }
 
     @Test public void testBug378226_NoError() throws Exception {
-	XtendClass clazz = clazz("@Data class Foo { int id }");
-	helper.assertNoErrors(clazz);
+		XtendClass clazz = clazz("@Data class Foo { int id }");
+		helper.assertNoErrors(clazz);
     }
 
     @Test public void testBug378226_Error() throws Exception {
-	XtendClass clazz = clazz("@Data class Foo { int id  new(int a){} }");
-	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD , FIELD_NOT_INITIALIZED);
+		XtendClass clazz = clazz("@Data class Foo { int id  new(int a){} }");
+		helper.assertError(clazz.getMembers().get(0), XTEND_FIELD , FIELD_NOT_INITIALIZED);
+    }
+    @Test public void testBug378211_NoException() throws Exception{
+    	String model = "@Data class Foo { int id  def }";
+    	XtextResourceSet set = getResourceSet();
+		String fileName = getFileName(model);
+		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
+		resource.load(new StringInputStream(model), null);
+    	helper.validate(resource.getContents().get(0));
     }
 }
