@@ -21,7 +21,7 @@ Abstract returns Abstract:
 Concrete0 returns Concrete0:
 	Concrete0_Impl | DiamondInheritance;
 
-INT0 returns INT:
+INT0 returns ^INT:
 	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
 
 Concrete0_Impl returns Concrete0:
