@@ -25,8 +25,8 @@ Import-Package: com.google.common.annotations,
  org.junit.runners;version="4.5.0",
  org.junit.runners.model;version="4.5.0"
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
- org.eclipse.xtext.ui;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional
+ org.eclipse.xtext.ui;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy
