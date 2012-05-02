@@ -7,14 +7,14 @@ import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributo
 class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor {
 	
 	Ecore2XtextProjectInfo projectInfo
-	String sourceRoot
+	String modelFolder = ""
 	
 	new(Ecore2XtextProjectInfo projectInfo) {
 		this.projectInfo = projectInfo
 	}
 	
-	def void setSourceRoot(String sourceRoot) {
-		this.sourceRoot = sourceRoot	
+	def void setModelFolder(String modelFolder) {
+		this.modelFolder = modelFolder	
 	}
 	
 	override contributeFiles(IProject project, IFileCreator creator) {
@@ -23,11 +23,11 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 	}
 	
 	def createWorkflowFile(IFileCreator creator) {
-		creator.writeToFile(workflow, projectInfo.basePackagePath+"/Generate"+projectInfo.languageNameAbbreviation+".mwe2")
+		creator.writeToFile(workflow, modelFolder+"/"+projectInfo.basePackagePath+"/Generate"+projectInfo.languageNameAbbreviation+".mwe2")
 	}
 	
 	def createGrammarFile(IFileCreator creator) {
-		creator.writeToFile(new Ecore2XtextGrammarCreator().grammar(projectInfo), projectInfo.grammarFilePath)
+		creator.writeToFile(new Ecore2XtextGrammarCreator().grammar(projectInfo), modelFolder+"/"+ projectInfo.grammarFilePath)
 	}
 	
 	def private workflow() {

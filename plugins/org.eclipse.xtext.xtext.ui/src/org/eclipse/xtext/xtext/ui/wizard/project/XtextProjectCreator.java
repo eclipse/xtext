@@ -89,7 +89,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 			createFeatureProject(subMonitor.newChild(1));
 		}
 
-		IFile dslGrammarFile = project.getFile(SRC_ROOT + "/" + getXtextProjectInfo().getGrammarFilePath());
+		IFile dslGrammarFile = project.getFile(getModelFolderName() + "/" + getXtextProjectInfo().getGrammarFilePath());
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
 	}
