@@ -12,35 +12,21 @@ Root returns Root:
 	'{'
 		('classes' '{' classes+=Abstract ( "," classes+=Abstract)* '}' )?
 		('concrete0' concrete0=Concrete0)?
-    '}';
+	'}';
 
-
+//dispatcher
 Abstract returns Abstract:
 	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
-
+ //dispatcher
 Concrete0 returns Concrete0:
-	Concrete0_Impl | DiamondInheritance;
-
+	Concrete0_Impl | DiamondInheritance
+	;
+//concrete
 INT0 returns ^INT:
 	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
-
+//concrete
 Concrete0_Impl returns Concrete0:
-	{Concrete0}
-	'Concrete0'
-	name=EString
-;
-
-EString returns ecore::EString:
-	STRING | ID;
-
-Concrete1_Impl returns Concrete1:
-	{Concrete1}
-	'Concrete1'
-	name=EString
-;
-
-DiamondInheritance returns DiamondInheritance:
-	{DiamondInheritance}
-	'DiamondInheritance'
-	name=EString
+{Concrete0}
+   'Concrete0'
+name=EString
 ;
