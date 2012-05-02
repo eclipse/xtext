@@ -32,6 +32,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/shared/common/xtend/maven/nexus-indexer-3.0.4-cli.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
