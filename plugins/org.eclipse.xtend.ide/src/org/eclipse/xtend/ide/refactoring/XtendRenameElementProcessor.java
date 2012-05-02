@@ -52,9 +52,10 @@ public class XtendRenameElementProcessor extends RenameElementProcessor {
 	@Override
 	public RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws CoreException,
 			OperationCanceledException {
+		RefactoringStatus status = super.checkInitialConditions(pm);
 		if(hasUnsavedEditors()) {
-			getStatus().add(RefactoringStatus.WARNING, "Unsaved changes in Xtend editors could collide with this refactoring.");
+			status.addWarning("Unsaved changes in Xtend editors could collide with this refactoring.");
 		}
-		return super.checkInitialConditions(pm);
+		return status;
 	}
 }

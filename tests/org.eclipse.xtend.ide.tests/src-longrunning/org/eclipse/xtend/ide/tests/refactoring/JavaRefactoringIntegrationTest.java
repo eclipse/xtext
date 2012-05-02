@@ -7,15 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
 import org.eclipse.jdt.ui.refactoring.RenameSupport;
 import org.eclipse.jface.text.TextSelection;
@@ -36,6 +40,7 @@ import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRenameElementHandler;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -67,12 +72,28 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		super.tearDown();
 	}
 
-	@Test public void testRenameReferenceToJava() throws Exception {
+	@Test
+	public void testRenameJavaClass() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass { }");
+			String xtendModel = "class XtendClass extends JavaClass {  }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IType javaClass = findJavaType("JavaClass");
+			assertNotNull(javaClass);
+			renameJavaElement(javaClass, "NewJavaClass");
+			assertFileContains(xtendClass, "extends NewJavaClass");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameRefToJavaClass() throws Exception {
 		try {
 			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
 			String xtendModel = "class XtendClass extends JavaClass {}";
 			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
-			performRenameTest(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
+			renameXtendElement(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
 			assertFileExists("src/NewJavaClass.java");
 			IResourcesSetupUtil.waitForAutoBuild();
 			synchronize(editor);
@@ -82,7 +103,143 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		}
 	}
 
-	@Test public void testRenameOverriddenJavaMethod() throws Exception {
+	@Test
+	public void testRenameJavaConstructor() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass { public JavaClass() {} }");
+			String xtendModel = "class XtendClass extends JavaClass {  }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			// JDT automatically switches from the constructor to the type
+			IType javaType = findJavaType("JavaClass");
+			assertNotNull(javaType);
+			renameJavaElement(javaType, "NewJavaClass");
+			assertFileContains(xtendClass, "extends NewJavaClass");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameRefToJavaConstructor() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass { public JavaClass() {} }");
+			String xtendModel = "class XtendClass { JavaClass x = new JavaClass() }";
+			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+			assertFileExists("src/NewJavaClass.java");
+			IResourcesSetupUtil.waitForAutoBuild();
+			synchronize(editor);
+			assertTrue(editor.getDocument().get(),
+					editor.getDocument().get().contains("NewJavaClass x = new NewJavaClass()"));
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameJavaField() throws Exception {
+		testHelper.createFile("JavaClass.java", "public class JavaClass { protected int foo; }");
+		String xtendModel = "class XtendClass extends JavaClass { int bar = foo }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IResourcesSetupUtil.waitForAutoBuild();
+		IField javaField = findJavaType("JavaClass").getField("foo");
+		assertNotNull(javaField);
+		renameJavaElement(javaField, "baz");
+		assertFileContains(xtendClass, "int bar = baz");
+	}
+
+	@Test
+	public void testRenameRefToJavaField() throws Exception {
+		testHelper.createFile("JavaClass.java", "public class JavaClass { protected int foo; }");
+		String xtendModel = "class XtendClass extends JavaClass { int bar = foo }";
+		XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+		IResourcesSetupUtil.waitForAutoBuild();
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("bar = baz"));
+	}
+
+	@Test
+	public void testRenameJavaEnum() throws Exception {
+		try {
+			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+			String xtendModel = "class XtendClass { JavaEnum fooBar }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IResourcesSetupUtil.waitForAutoBuild();
+			IType javaEnum = findJavaType("JavaEnum");
+			assertNotNull(javaEnum);
+			renameJavaElement(javaEnum, "NewJavaEnum");
+			assertFileContains(xtendClass, "NewJavaEnum fooBar");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameRefToJavaEnum() throws Exception {
+		try {
+			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+			String xtendModel = "class XtendClass { JavaEnum fooBar }";
+			XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+			IResourcesSetupUtil.waitForAutoBuild();
+			renameXtendElement(editor, xtendModel.indexOf("JavaEnum"), "NewJavaEnum");
+			assertFileExists("src/NewJavaEnum.java");
+			synchronize(editor);
+			assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("NewJavaEnum fooBar"));
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameJavaEnumLiteral() throws Exception {
+		testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+		String xtendModel = "class XtendClass { JavaEnum fooBar = JavaEnum::BAR }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IResourcesSetupUtil.waitForAutoBuild();
+		IField javaEnumLiteral = findJavaType("JavaEnum").getField("BAR");
+		assertNotNull(javaEnumLiteral);
+		renameJavaElement(javaEnumLiteral, "BAZ");
+		assertFileContains(xtendClass, "JavaEnum fooBar = JavaEnum::BAZ");
+	}
+
+	@Test
+	public void testRenameRefToJavaEnumLiteral() throws Exception {
+		testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+		String xtendModel = "class XtendClass { JavaEnum fooBar = JavaEnum::BAR }";
+		XtextEditor editor = testHelper.openEditor("XtendClass.xtend", xtendModel);
+		IResourcesSetupUtil.waitForAutoBuild();
+		renameXtendElement(editor, xtendModel.indexOf("BAR"), "BAZ");
+		synchronize(editor);
+		assertTrue(editor.getDocument().get(), editor.getDocument().get().contains("JavaEnum fooBar = JavaEnum::BAZ"));
+	}
+
+	@Test
+	public void testRenameJavaMethod() throws Exception {
+		testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
+		String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IResourcesSetupUtil.waitForAutoBuild();
+		IMethod foo = findJavaType("JavaClass").getMethod("foo", new String[0]);
+		assertNotNull(foo);
+		renameJavaElement(foo, "baz");
+		assertFileContains(xtendClass, "new JavaClass().baz()");
+	}
+
+	@Test
+	public void testRenameJavaMethodCall() throws Exception {
+		IFile javaFile = testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
+		String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(javaFile, "public void baz()");
+	}
+
+	@Test
+	public void testRenameOverriddenJavaMethod() throws Exception {
 		IFile javaInterface = testHelper.createFile("JavaInterface.java",
 				"public interface JavaInterface { void foo(); }");
 		IFile javaClass = testHelper.createFile("JavaClass.java",
@@ -92,7 +249,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile referringJavaClass = testHelper.createFile("ReferringJavaClass.java",
 				"public class ReferringJavaClass { public void bar() { new XtendClass().foo(); } }");
 		XtextEditor editor = testHelper.openEditor(xtendClass);
-		performRenameTest(editor, xtendModel.indexOf("foo"), "foobar");
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "foobar");
 		assertFileContains(javaInterface, "void foobar()");
 		assertFileContains(javaClass, "void foobar()");
 		assertFileContains(referringJavaClass, "new XtendClass().foobar()");
@@ -100,64 +257,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertTrue(editor.getDocument().get().contains("foobar()"));
 	}
 
-	@Test public void testRenameJavaClass() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass { }");
-			String xtendModel = "class XtendClass extends JavaClass {  }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
-			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
-			IType javaClass = javaProject.findType("JavaClass");
-			assertNotNull(javaClass);
-			RenameSupport renameSupport = RenameSupport.create(javaClass, "NewJavaClass",
-					RenameSupport.UPDATE_REFERENCES);
-			renameSupport
-					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-			assertFileContains(xtendClass, "extends NewJavaClass");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
-	}
-
-	@Test public void testRenameJavaEnum() throws Exception {
-		try {
-			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
-			String xtendModel = "class XtendClass { JavaEnum fooBar }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
-			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
-			IType javaEnum = javaProject.findType("JavaEnum");
-			assertNotNull(javaEnum);
-			RenameSupport renameSupport = RenameSupport.create(javaEnum, "NewJavaEnum",
-					RenameSupport.UPDATE_REFERENCES);
-			renameSupport
-					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-			assertFileContains(xtendClass, "NewJavaEnum fooBar");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
-		}
-	}
-
-	@Test public void testRenameJavaMethod() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass { public void foo() {} }");
-			String xtendModel = "class XtendClass { def bar() { new JavaClass().foo() } }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IResourcesSetupUtil.waitForAutoBuild();
-			IJavaProject javaProject = JavaCore.create(testHelper.getProject());
-			IType javaClass = javaProject.findType("JavaClass");
-			IMethod foo = javaClass.getMethod("foo", new String[0]);
-			assertNotNull(foo);
-			RenameSupport renameSupport = RenameSupport.create(foo, "baz", RenameSupport.UPDATE_REFERENCES);
-			renameSupport
-					.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-			assertFileContains(xtendClass, "new JavaClass().baz()");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
-	}
-
-	@Test public void testDontRenameOperator() throws Exception {
+	@Test
+	public void testDontRenameOperator() throws Exception {
 		String xtendModel = "class XtendClass { def bar() { 1 + 2 } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
@@ -174,14 +275,122 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertNull(renameElementContext);
 	}
 
-	@Test public void renameParameterReference() throws Exception {
+	@Test
+	public void testRenameXtendParameter() throws Exception {
 		String xtendModel = "class XtendClass { def bar(int foo) { foo } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
-		final int offset = xtendModel.lastIndexOf("foo") + 1;
-		performRenameTest(editor, offset, "baz");
+		final int offset = xtendModel.indexOf("foo");
+		renameXtendElement(editor, offset, "baz");
 		synchronize(editor);
-		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());		
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+	}
+
+	@Test
+	public void testRenameRefToParameter() throws Exception {
+		String xtendModel = "class XtendClass { def bar(int foo) { foo } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.lastIndexOf("foo");
+		renameXtendElement(editor, offset, "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+	}
+
+	@Test
+	public void testCrissCrossReferences_0() throws Exception {
+		IFile javaBase = testHelper.createFile("JavaBase.java", "public interface JavaBase { public void foo(); }");
+		IFile javaSub = testHelper.createFile("JavaSub.java",
+				"public class JavaSub implements JavaBase { public void foo() {} }");
+		String xtendModel = "class XtendClass implements JavaBase { override foo() { new JavaSub().foo }}";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "bar");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertFileContains(javaBase, "public void bar()");
+		assertFileContains(javaSub, "public void bar()");
+	}
+
+	@Test
+	public void testCrissCrossReferences_1() throws Exception {
+		IFile javaBase = testHelper.createFile("JavaBase.java", "public interface JavaBase { public void foo(); }");
+		IFile javaSub = testHelper.createFile("JavaSub.java",
+				"public class JavaSub implements JavaBase { public void foo() {} }");
+		String xtendModel = "class XtendClass implements JavaBase { override foo() { new JavaSub().foo }}";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.lastIndexOf("foo"), "bar");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertFileContains(javaBase, "public void bar()");
+		assertFileContains(javaSub, "public void bar()");
+	}
+
+	@Test
+	public void testCrissCrossReferences_2() throws Exception {
+		IFile javaBase = testHelper.createFile("JavaBase.java", "public interface JavaBase { public void foo(); }");
+		IFile javaSub = testHelper.createFile("JavaSub.java",
+				"public class JavaSub implements JavaBase { public void foo() {} }");
+		String xtendModel = "class XtendClass implements JavaBase { override foo() { new JavaSub().foo }}";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		IResourcesSetupUtil.waitForAutoBuild();
+		IMethod fooMethod = findJavaType("JavaBase").getMethod("foo", new String[] {});
+		renameJavaElement(fooMethod, "bar");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertFileContains(javaBase, "public void bar()");
+		assertFileContains(javaSub, "public void bar()");
+	}
+
+	@Test@Ignore // TODO: find out why this test fails (interactive testing works)
+	public void testCrissCrossReferences_3() throws Exception {
+		IFile javaBase = testHelper.createFile("JavaBase.java", "public interface JavaBase { public void foo(); }");
+		IFile javaSub = testHelper.createFile("JavaSub.java",
+				"public class JavaSub implements JavaBase { public void foo() {} }");
+		String xtendModel = "class XtendClass implements JavaBase { override foo() { new JavaSub().foo }}";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		IMethod fooMethod = findJavaType("JavaSub").getMethod("foo", new String[] {});
+		renameJavaElement(fooMethod, "bar");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "bar"), editor.getDocument().get());
+		assertFileContains(javaBase, "public void bar()");
+		assertFileContains(javaSub, "public void bar()");
+	}
+
+	@Test public void testRenameXtendClass() throws Exception {
+		String xtendModel = "class XtendClass { }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
+		assertFileContains(javaClass, "JavaClass extends NewXtendClass");
+	}
+	
+	@Test public void testRenameXtendField() throws Exception {
+		String xtendModel = "class XtendClass { protected int foo }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { int bar = foo; }");
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(javaClass, "int bar = baz");
+	}
+	
+	@Test public void testRenameXtendMethod() throws Exception {
+		String xtendModel = "class XtendClass { def foo() {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { public void bar() { foo(); } }");
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(javaClass, "{ baz(); }");
 	}
 	
 	protected IFile assertFileExists(String fileName) throws Exception {
@@ -196,7 +405,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertTrue(fileContents, fileContents.contains(contents));
 	}
 
-	protected Change performRenameTest(final XtextEditor editor, final int offset, String newName) throws Exception {
+	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
 		IResourcesSetupUtil.waitForAutoBuild();
 		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
@@ -219,9 +428,34 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		Change undoChange = change.perform(new NullProgressMonitor());
 		return undoChange;
 	}
-	
+
 	protected void synchronize(XtextEditor editor) throws CoreException {
 		((IDocumentProviderExtension) editor.getDocumentProvider()).synchronize(editor.getEditorInput());
+	}
+
+	protected void renameJavaElement(IType javaElement, String newName) throws CoreException, InterruptedException,
+			InvocationTargetException {
+		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
+		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+	}
+
+	protected void renameJavaElement(IMethod javaElement, String newName) throws CoreException, InterruptedException,
+			InvocationTargetException {
+		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
+		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+	}
+
+	protected void renameJavaElement(IField javaElement, String newName) throws CoreException, InterruptedException,
+			InvocationTargetException {
+		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
+		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
+	}
+
+	protected IType findJavaType(String typeName) throws JavaModelException {
+		IResourcesSetupUtil.waitForAutoBuild();
+		IJavaProject javaProject = JavaCore.create(testHelper.getProject());
+		IType javaClass = javaProject.findType(typeName);
+		return javaClass;
 	}
 
 }
