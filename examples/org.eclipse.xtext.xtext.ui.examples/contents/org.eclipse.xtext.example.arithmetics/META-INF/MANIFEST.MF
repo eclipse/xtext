@@ -6,12 +6,12 @@ Bundle-Version: 2.3.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
- org.eclipse.xtext.generator;bundle-version="2.0.0";resolution:=optional,
- de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
- com.ibm.icu;resolution:=optional,
+ org.eclipse.xtext.generator;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
+ com.ibm.icu;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
