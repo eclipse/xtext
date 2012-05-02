@@ -102,6 +102,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public static final String INVALID_PACKAGE_REFERENCE_INHERITED = "org.eclipse.xtext.grammar.InvalidPackageReference.inherited";
 	public static final String INVALID_PACKAGE_REFERENCE_EXTERNAL = "org.eclipse.xtext.grammar.InvalidPackageReference.external";
 	public static final String INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH = "org.eclipse.xtext.grammar.InvalidPackageReference.notOnClasspath";
+	public static final String INVALID_TERMINALRULE_NAME = "org.eclipse.xtext.grammar.InvalidTerminalRuleName";
 
 	@Inject
 	private IValueConverterService valueConverter;
@@ -1094,4 +1095,10 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		inspector.inspect(grammar);
 	}
 	
+	@Check
+	public void checkTerminalRuleNamingConventions(TerminalRule terminalRule){
+		if(!terminalRule.getName().equals(terminalRule.getName().toUpperCase()))
+			error("TerminalRule must be written in uppercase.", terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(),INVALID_TERMINALRULE_NAME, terminalRule.getName());
+	}
+
 }

@@ -41,6 +41,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
@@ -210,7 +211,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 
@@ -1475,6 +1476,21 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	@Test public void testTerminalRuleNamingConventions() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A : someFeature=New_Line;\n" +
+				"terminal New_Line : '\n';";
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkTerminalRuleNamingConventions(rule);
+		messageAcceptor.validate();
+	}
+
 	@Test public void testPredicatedUnorderedGroup_03() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
