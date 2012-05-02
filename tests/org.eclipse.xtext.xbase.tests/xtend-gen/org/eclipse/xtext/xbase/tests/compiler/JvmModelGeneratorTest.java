@@ -216,6 +216,31 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
+  public void testBug377925No_Nullpointer() {
+    try {
+      final XExpression expression = this.expression("[Object o| null]");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+          }
+        };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      this.compile(_eResource, clazz);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz) {
     return this.references.getTypeForName(clazz, ctx);
   }

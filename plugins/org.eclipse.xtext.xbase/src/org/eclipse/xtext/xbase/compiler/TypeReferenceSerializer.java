@@ -154,7 +154,11 @@ public class TypeReferenceSerializer {
 		} else if (type instanceof JvmMultiTypeReference) {
 			serialize(resolveMultiType(type), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else if (type instanceof JvmDelegateTypeReference) {
-			serialize(((JvmDelegateTypeReference) type).getDelegate(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+			JvmTypeReference delegate = ((JvmDelegateTypeReference) type).getDelegate();
+			if(delegate != null)
+				serialize(delegate, context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+			else
+				tracedAppendable.append("Object");
 		} else if (type instanceof JvmSpecializedTypeReference) {
 			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else {
