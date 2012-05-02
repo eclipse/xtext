@@ -63,10 +63,10 @@
 	<target name="createUberjar">
 		<!-- TP bundles -->
 		<fileset dir="${bundles.folder}" id="binJars">
-			<include name="org.eclipse.emf.common_2.5.0.*.jar" />
-			<include name="org.eclipse.emf.ecore.xmi_2.5.0.*.jar" />
-			<include name="org.eclipse.emf.ecore_2.5.0.*.jar" />
-			<include name="org.eclipse.jdt.core_3.5.2*.jar" />
+			<include name="org.eclipse.emf.common_*.jar" />
+			<include name="org.eclipse.emf.ecore.xmi_*.jar" />
+			<include name="org.eclipse.emf.ecore_*.jar" />
+			<include name="org.eclipse.jdt.core_*.jar" />
 			<!-- Xtext bundles -->
 			<include name="org.antlr.runtime_3.2.0*.jar" />
 			<include name="org.eclipse.xtend.core_2.3*.jar" />
@@ -99,10 +99,10 @@
 	<target name="createSourcesUberjar" depends="createUberjar">
 		<!-- TP bundles -->
 		<fileset dir="${bundles.folder}" id="sourceJars">
-			<include name="org.eclipse.emf.common.source_2.5.0.*.jar" />
-			<include name="org.eclipse.emf.ecore.source_2.5.0.*.jar" />
-			<include name="org.eclipse.emf.ecore.xmi.source_2.5.0.*.jar" />
-			<include name="org.eclipse.jdt.core.source_3.5.2*.jar" />
+			<include name="org.eclipse.emf.common.source_*.jar" />
+			<include name="org.eclipse.emf.ecore.source_*.jar" />
+			<include name="org.eclipse.emf.ecore.xmi.source_*.jar" />
+			<include name="org.eclipse.jdt.core.source_*.jar" />
 			<!-- Xtext bundles -->
 			<include name="org.antlr.runtime.source_3.2.0*.jar" />
 			<include name="org.eclipse.xtend.core.source_2.3*.jar" />
