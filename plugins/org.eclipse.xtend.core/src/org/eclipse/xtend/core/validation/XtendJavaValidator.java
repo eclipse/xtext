@@ -1257,10 +1257,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkFinalFieldInitialization(XtendClass clazz) {
 		JvmGenericType inferredType = associations.getInferredType(clazz);
-		for (XAnnotation anno : clazz.getAnnotations()) {
-			if (anno.getAnnotationType() != null && Data.class.getName().equals(anno.getAnnotationType().getIdentifier()))
-				return;
-		}
+		JvmConstructor inferredConstructor = associations.getInferredConstructor(clazz);
+		if(inferredConstructor != null)
+			for (XAnnotation anno : clazz.getAnnotations()) {
+				if (anno.getAnnotationType() != null && Data.class.getName().equals(anno.getAnnotationType().getIdentifier()))
+					return;
+			}
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	
