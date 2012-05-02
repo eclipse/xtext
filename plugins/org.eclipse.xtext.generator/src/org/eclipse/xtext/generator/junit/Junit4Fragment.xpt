@@ -77,10 +77,14 @@ public class «qualifiedInjectorProviderName().toSimpleName()» implements IInject
 	{
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
-			this.injector = new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+			this.injector = internalCreateInjector();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
 		return injector;
+	}
+	
+	protected Injector internalCreateInjector() {
+	    return new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
 	}
 
 	public void restoreRegistry() {
