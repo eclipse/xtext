@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.core.runtime,
  org.eclipse.xtext,
  org.eclipse.xtext.junit4,
- org.eclipse.ui.workbench;resolution:=optional
+ org.eclipse.ui.workbench;resolution:=optional;x-installation:=greedy
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.junit;version="4.5.0",
