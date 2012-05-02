@@ -15,9 +15,9 @@
 		<cs:dependency name="org.eclipse.xtend.lib" componentType="osgi.bundle" />
 		
 		<!-- EMF -->
-		<cs:dependency name="org.eclipse.emf.ecore" componentType="osgi.bundle" versionDesignator="2.8.0"/>
-		<cs:dependency name="org.eclipse.emf.ecore.xmi" componentType="osgi.bundle" versionDesignator="2.8.0"/>
-		<cs:dependency name="org.eclipse.emf.common" componentType="osgi.bundle" versionDesignator="2.8.0"/>
+		<cs:dependency name="org.eclipse.emf.ecore" componentType="osgi.bundle" versionDesignator="[2.5.0,2.5.1)"/>
+		<cs:dependency name="org.eclipse.emf.ecore.xmi" componentType="osgi.bundle" versionDesignator="[2.5.0,2.5.1)"/>
+		<cs:dependency name="org.eclipse.emf.common" componentType="osgi.bundle" versionDesignator="[2.5.0,2.5.1)"/>
 
 		<!-- orbit -->
 		<cs:dependency name="org.antlr.runtime" componentType="osgi.bundle" versionDesignator="[3.2.0,3.2.1)"/>
