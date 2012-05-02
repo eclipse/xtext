@@ -15,8 +15,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(XtextRunner.class)
-@InjectWith(DomainmodelInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = DomainmodelInjectorProvider.class)
 @SuppressWarnings("all")
 public class CompilerTest {
   @Inject
