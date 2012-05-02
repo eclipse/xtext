@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -65,6 +69,8 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	private List<RenameProcessor> wrappedProcessors;
 
+	private Set<Object> disabledTargets = newHashSet();
+
 	@Override
 	protected boolean initialize(Object originalTargetElement) {
 		try {
@@ -81,15 +87,22 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		if (participantContexts != null) {
 			List<RenameProcessor> processors = newArrayList();
 			for (IRenameElementContext participantContext : participantContexts) {
-				IRenameRefactoringProvider renameRefactoringProvider = getRenameRefactoringProvider(participantContext);
-				if (renameRefactoringProvider != null) {
-					RenameProcessor processor = renameRefactoringProvider.getRenameProcessor(participantContext);
-					processors.add(processor);
+				RenameProcessor renameProcessor = getRenameProcessor(participantContext);
+				if (renameProcessor != null) {
+					processors.add(renameProcessor);
 				}
 			}
 			return processors;
 		}
 		return null;
+	}
+
+	protected RenameProcessor getRenameProcessor(IRenameElementContext participantContext) {
+		IRenameRefactoringProvider renameRefactoringProvider = getRenameRefactoringProvider(participantContext);
+		if (renameRefactoringProvider != null)
+			return renameRefactoringProvider.getRenameProcessor(participantContext);
+		else
+			return null;
 	}
 
 	protected IRenameRefactoringProvider getRenameRefactoringProvider(IRenameElementContext renameElementContext) {
@@ -102,15 +115,29 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return languageName;
 	}
 
+	public Object[] getElements() {
+		List<Object> elements = newArrayList();
+		for (RenameProcessor wrappedProcessor : wrappedProcessors) {
+			elements.addAll(Arrays.asList(wrappedProcessor.getElements()));
+		}
+		return toArray(elements, Object.class);
+	}
+
+	public void disableFor(Object... elements) {
+		disabledTargets.addAll(Arrays.asList(elements));
+	}
+
 	@Override
 	public RefactoringStatus checkConditions(IProgressMonitor pm, CheckConditionsContext context)
 			throws OperationCanceledException {
 		SubMonitor progress = SubMonitor.convert(pm).setWorkRemaining(100);
 		try {
 			for (RenameProcessor wrappedProcessor : wrappedProcessors) {
-				status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
-				setNewName(wrappedProcessor, getNewName());
-				status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
+				if (!disabledTargets.containsAll(Arrays.asList(wrappedProcessor.getElements()))) {
+					status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
+					setNewName(wrappedProcessor, getNewName());
+					status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
+				}
 			}
 		} catch (Exception ce) {
 			status.add(ERROR, "Error checking conditions in refactoring participant: {0}. See log for details", ce, LOG);
@@ -127,11 +154,13 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		CompositeChange compositeChange = null;
 		try {
 			for (RenameProcessor wrappedProcessor : wrappedProcessors) {
-				Change processorChange = wrappedProcessor.createChange(pm);
-				if (processorChange != null) {
-					if (compositeChange == null)
-						compositeChange = new CompositeChange("Changes form participant: " + getName());
-					compositeChange.add(processorChange);
+				if (!disabledTargets.containsAll(Arrays.asList(wrappedProcessor.getElements()))) {
+					Change processorChange = wrappedProcessor.createChange(pm);
+					if (processorChange != null) {
+						if (compositeChange == null)
+							compositeChange = new CompositeChange("Changes form participant: " + getName());
+						compositeChange.add(processorChange);
+					}
 				}
 			}
 		} catch (Exception e) {

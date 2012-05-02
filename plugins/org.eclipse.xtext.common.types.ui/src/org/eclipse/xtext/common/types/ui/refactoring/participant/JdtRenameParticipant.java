@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant;
@@ -34,6 +35,17 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 
 /**
+ * Participant for JDT refactorings.
+ * 
+ * Is based on refactoring processors which are created using an
+ * {@link org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider}. The participant is registered by the plug-in
+ * org.eclipse.xtext.common.types.shared, and delegates to the declaring language if the equivalent JVM target element
+ * is contained in the index.
+ * 
+ * Languages that do not define own JVM elements but refer to existing Java artifacts only don't have to implement
+ * anything additional to get their references updated. Languages that define own JvmElements should implement and bind
+ * a {@link ContextFactory}.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipant {
@@ -44,11 +56,14 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 	@Inject
 	private JvmElementFinder jvmElementFinder;
 
+	@Inject
+	private CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess;
+
 	@Override
 	public String getName() {
 		return "Xtext JdtRenameParticipant";
 	}
-	
+
 	@Override
 	protected List<? extends IRenameElementContext> createRenameElementContexts(Object element) {
 		if (element instanceof IJavaElement) {
@@ -64,7 +79,8 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 							project);
 					if (indexedJvmElement != null)
 						// jvmElement is indexed, thus contained in an XtextResurce and likely inferred from some Xtext-based elements
-						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContexts(indexedJvmElement);
+						return getContextFactory(indexedJvmElement).createJdtParticipantXtextSourceContexts(
+								indexedJvmElement);
 					else if (directJvmElement instanceof JvmMember)
 						// jvmElement could only be cross referenced by Xtext-based elements
 						return createJdtRenameParticipantContext((JvmMember) directJvmElement, javaElement);
@@ -72,6 +88,20 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 			}
 		}
 		return null;
+	}
+
+	@Override
+	protected RenameProcessor getRenameProcessor(IRenameElementContext participantContext) {
+		RenameProcessor renameProcessor = super.getRenameProcessor(participantContext);
+		// We need to do all changes for one language inside the same processor in order to be able to 
+		// restructure them to avoid collisions. That's why we add all processors to the same composite 
+		// which is only returned in the first context.
+		CompositeRefactoringProcessor current = compositeRefactoringProcessorAccess.getCurrent(getProcessor());
+		current.addProcessor(renameProcessor);
+		if (current.getNumProcessors() == 1)
+			return current;
+		else
+			return null;
 	}
 
 	protected List<? extends IRenameElementContext> createJdtRenameParticipantContext(JvmMember renamedJvmMember,
@@ -88,8 +118,8 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 	protected EClass getExpectedJvmType(IJavaElement javaElement) {
 		try {
 			switch (javaElement.getElementType()) {
-				case IJavaElement.TYPE: 
-					if(((IType) javaElement).isEnum()) 
+				case IJavaElement.TYPE:
+					if (((IType) javaElement).isEnum())
 						return TypesPackage.Literals.JVM_ENUMERATION_TYPE;
 					else
 						return TypesPackage.Literals.JVM_TYPE;
@@ -99,7 +129,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 					else
 						return TypesPackage.Literals.JVM_OPERATION;
 				case IJavaElement.FIELD:
-					if(((IField)javaElement).isEnumConstant())
+					if (((IField) javaElement).isEnumConstant())
 						return TypesPackage.Literals.JVM_ENUMERATION_LITERAL;
 					else
 						return TypesPackage.Literals.JVM_FIELD;
@@ -114,7 +144,7 @@ public class JdtRenameParticipant extends AbstractProcessorBasedRenameParticipan
 	protected ContextFactory getContextFactory(EObject jvmMember) {
 		return getGlobalServiceProvider().findService(getURI(jvmMember), ContextFactory.class);
 	}
-	
+
 	public static class ContextFactory {
 		protected List<? extends IRenameElementContext> createJdtParticipantXtextSourceContexts(
 				EObject indexedJvmElement) {

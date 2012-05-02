@@ -28,6 +28,8 @@ import com.google.inject.BindingAnnotation;
 import com.google.inject.Inject;
 
 /**
+ * Renames a JVM element in a {@link TypeResource} and updates all references to it.
+ *  
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JvmMemberRenameStrategy implements IRenameStrategy {
