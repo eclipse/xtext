@@ -19,14 +19,14 @@ import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributo
 public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor {
   private Ecore2XtextProjectInfo projectInfo;
   
-  private String sourceRoot;
+  private String modelFolder = "";
   
   public Ecore2XtextDslProjectContributor(final Ecore2XtextProjectInfo projectInfo) {
     this.projectInfo = projectInfo;
   }
   
-  public void setSourceRoot(final String sourceRoot) {
-    this.sourceRoot = sourceRoot;
+  public void setModelFolder(final String modelFolder) {
+    this.modelFolder = modelFolder;
   }
   
   public void contributeFiles(final IProject project, final IFileCreator creator) {
@@ -36,20 +36,24 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
   
   public IFile createWorkflowFile(final IFileCreator creator) {
     CharSequence _workflow = this.workflow();
+    String _plus = (this.modelFolder + "/");
     String _basePackagePath = this.projectInfo.getBasePackagePath();
-    String _plus = (_basePackagePath + "/Generate");
+    String _plus_1 = (_plus + _basePackagePath);
+    String _plus_2 = (_plus_1 + "/Generate");
     String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
-    String _plus_1 = (_plus + _languageNameAbbreviation);
-    String _plus_2 = (_plus_1 + ".mwe2");
-    IFile _writeToFile = creator.writeToFile(_workflow, _plus_2);
+    String _plus_3 = (_plus_2 + _languageNameAbbreviation);
+    String _plus_4 = (_plus_3 + ".mwe2");
+    IFile _writeToFile = creator.writeToFile(_workflow, _plus_4);
     return _writeToFile;
   }
   
   public IFile createGrammarFile(final IFileCreator creator) {
     Ecore2XtextGrammarCreator _ecore2XtextGrammarCreator = new Ecore2XtextGrammarCreator();
     CharSequence _grammar = _ecore2XtextGrammarCreator.grammar(this.projectInfo);
+    String _plus = (this.modelFolder + "/");
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();
-    IFile _writeToFile = creator.writeToFile(_grammar, _grammarFilePath);
+    String _plus_1 = (_plus + _grammarFilePath);
+    IFile _writeToFile = creator.writeToFile(_grammar, _plus_1);
     return _writeToFile;
   }
   

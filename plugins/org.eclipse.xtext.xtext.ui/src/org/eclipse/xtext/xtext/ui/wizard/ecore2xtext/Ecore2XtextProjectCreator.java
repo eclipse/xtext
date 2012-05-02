@@ -24,7 +24,7 @@ public class Ecore2XtextProjectCreator extends XtextProjectCreator {
 	@Override
 	protected IProjectFactoryContributor createDslProjectContributor() {
 		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(getXtextProjectInfo());
-		contributor.setSourceRoot(SRC_ROOT);
+		contributor.setModelFolder(getModelFolderName());
 		return contributor;
 	}
 
