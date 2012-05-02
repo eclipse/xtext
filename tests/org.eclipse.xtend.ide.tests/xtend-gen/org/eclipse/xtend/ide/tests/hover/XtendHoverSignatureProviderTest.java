@@ -433,7 +433,6 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.append("\t");
       _builder.append("int id");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch void a(int i){}");
@@ -459,7 +458,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   public ResourceSet getResourceSet() {
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
