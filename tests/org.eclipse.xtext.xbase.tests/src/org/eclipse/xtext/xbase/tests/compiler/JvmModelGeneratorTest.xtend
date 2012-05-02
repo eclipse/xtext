@@ -111,6 +111,17 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		assertEquals("BAZ", values.get(1).toString())
 	}
 	
+	@Test
+	def void testBug377925No_Nullpointer(){
+		val expression = expression("[Object o| null]")
+		val clazz = expression.toClass("my.test.Foo") [
+			members += expression.toMethod("doStuff", references.getTypeForName("java.lang.Object", expression)) [
+				setBody(expression)
+			]
+		]
+		compile(expression.eResource,clazz);
+	}
+
 	def JvmTypeReference typeRef(EObject ctx, Class<?> clazz) {
 		return references.getTypeForName(clazz, ctx)
 	}
