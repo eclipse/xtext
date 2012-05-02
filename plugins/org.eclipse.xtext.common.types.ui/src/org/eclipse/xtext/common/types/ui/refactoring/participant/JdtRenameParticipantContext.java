@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.refactoring.participant;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import static org.eclipse.emf.ecore.util.EcoreUtil.*;
+
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -29,14 +28,7 @@ public class JdtRenameParticipantContext extends IRenameElementContext.Impl {
 		this.renamedJavaElement = referencedJavaElement;
 	}
 
-	public JdtRenameParticipantContext(URI renamedJvmMemberURI, EClass renamedJvmMemberEClass,
-			IJavaElement referencedJavaElement) {
-		super(renamedJvmMemberURI, renamedJvmMemberEClass);
-		this.renamedJavaElement = referencedJavaElement;
-	}
-
 	public IJavaElement getRenamedJavaElement() {
 		return renamedJavaElement;
 	}
-
 }

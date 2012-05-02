@@ -11,33 +11,35 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 
 /**
- * The context information of a rename element refactoring.
- *  
+ * The context information of a rename element refactoring. Based on this information a
+ * {@link IRenameRefactoringProvider} chooses the implementation of the refactoring processor.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
 public interface IRenameElementContext {
-	
+
 	URI getTargetElementURI();
-	
+
 	URI getContextResourceURI();
-	
+
 	EClass getTargetElementEClass();
-	
+
 	IEditorPart getTriggeringEditor();
-	
+
 	ISelection getTriggeringEditorSelection();
-	
+
 	class Impl implements IRenameElementContext {
 
 		private URI targetElementURI;
-		
+
 		private URI contextResourceURI;
-		
+
 		private EClass targetElementEClass;
-		
+
 		private IEditorPart triggeringEditor;
 
 		private final ISelection triggeringEditorSelection;
@@ -45,8 +47,9 @@ public interface IRenameElementContext {
 		public Impl(URI targetElementURI, EClass targetElementEClass) {
 			this(targetElementURI, targetElementEClass, null, null, null);
 		}
-		
-		public Impl(URI targetElementURI, EClass targetElementEClass, IEditorPart triggeringEditor, ISelection triggeringEditorSelection, URI contextResourceURI) {
+
+		public Impl(URI targetElementURI, EClass targetElementEClass, IEditorPart triggeringEditor,
+				ISelection triggeringEditorSelection, URI contextResourceURI) {
 			this.targetElementURI = targetElementURI;
 			this.targetElementEClass = targetElementEClass;
 			this.triggeringEditor = triggeringEditor;
@@ -57,7 +60,7 @@ public interface IRenameElementContext {
 		public URI getContextResourceURI() {
 			return contextResourceURI;
 		}
-		
+
 		public URI getTargetElementURI() {
 			return targetElementURI;
 		}
@@ -69,10 +72,10 @@ public interface IRenameElementContext {
 		public IEditorPart getTriggeringEditor() {
 			return triggeringEditor;
 		}
-		
+
 		public ISelection getTriggeringEditorSelection() {
 			return triggeringEditorSelection;
 		}
-		
+
 	}
 }
