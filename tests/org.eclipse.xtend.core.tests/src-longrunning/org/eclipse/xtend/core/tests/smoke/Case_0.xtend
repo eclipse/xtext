@@ -1,6 +1,8 @@
 package org.eclipse.xtend.core.tests.smoke
 
+@Data
 class Case_0 {
+	int id
 
 	def String foo(String a, String b) {
 		var list = newArrayList()
