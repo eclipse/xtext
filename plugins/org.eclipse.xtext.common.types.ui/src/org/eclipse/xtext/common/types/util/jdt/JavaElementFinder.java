@@ -42,10 +42,16 @@ public class JavaElementFinder implements IJavaElementFinder {
 		return internalFindElementFor(element, false);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public IJavaElement findExactElementFor(JvmIdentifiableElement element) {
 		return internalFindElementFor(element, true);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	protected IJavaElement internalFindElementFor(JvmIdentifiableElement element, boolean isExactMatchOnly) {
 		if (element == null || element.eResource() == null)
 			return null;
@@ -66,6 +72,9 @@ public class JavaElementFinder implements IJavaElementFinder {
 		private final IJavaProject javaProject;
 		private final boolean isExactMatchOnly;
 
+		/**
+		 * @since 2.3
+		 */
 		public Implementation(IJavaProject javaProject, boolean isExactMatchOnly) {
 			this.javaProject = javaProject;
 			this.isExactMatchOnly = isExactMatchOnly;

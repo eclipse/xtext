@@ -240,7 +240,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz) {
     return this.references.getTypeForName(clazz, ctx);
   }
