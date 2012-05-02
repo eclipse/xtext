@@ -1075,4 +1075,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	XtendClass clazz = clazz("class Foo { var test = 'foo'}");
     	helper.assertNoErrors(clazz);
     }
+
+    @Test public void testBug378226_NoError() throws Exception {
+	XtendClass clazz = clazz("@Data class Foo { int id }");
+	helper.assertNoErrors(clazz);
+    }
+
+    @Test public void testBug378226_Error() throws Exception {
+	XtendClass clazz = clazz("@Data class Foo { int id  new(int a){} }");
+	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD , FIELD_NOT_INITIALIZED);
+    }
 }
