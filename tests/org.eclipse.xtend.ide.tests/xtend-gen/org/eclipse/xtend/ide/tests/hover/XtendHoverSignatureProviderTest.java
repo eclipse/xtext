@@ -90,7 +90,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendMember xtendFunction2 = _members_1.get(1);
       final String signature1 = this.signatureProvider.getSignature(xtendFunction1);
       final String signature2 = this.signatureProvider.getSignature(xtendFunction2);
-      Assert.assertEquals("Object bar(String a) throws NullPointerException", signature1);
+      Assert.assertEquals("void bar(String a) throws NullPointerException", signature1);
       Assert.assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException", signature2);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -420,6 +420,46 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testBug378082() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("@Data");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int id");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch void a(int i){}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch void a(int i){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendMember> _members = clazz.getMembers();
+      final XtendMember field = IterableExtensions.<XtendMember>head(_members);
+      EList<XtendMember> _members_1 = clazz.getMembers();
+      final XtendMember function = _members_1.get(1);
+      final String fieldSignature = this.signatureProvider.getSignature(field);
+      Assert.assertEquals("int id", fieldSignature);
+      final String functionSignature = this.signatureProvider.getSignature(function);
+      Assert.assertEquals("void a(int i)", functionSignature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   public ResourceSet getResourceSet() {
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);

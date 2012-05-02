@@ -56,7 +56,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction2 = clazz.members.get(1)
 		val signature1 = signatureProvider.getSignature(xtendFunction1)
 		val signature2 = signatureProvider.getSignature(xtendFunction2)
-		assertEquals("Object bar(String a) throws NullPointerException",signature1)
+		assertEquals("void bar(String a) throws NullPointerException",signature1)
 		assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException",signature2)
 	}
 	
@@ -213,6 +213,27 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		assertEquals("String a", signature)
 	}
 	
+	@Test
+	def testBug378082(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		@Data
+		class Foo {
+			int id
+
+			def dispatch void a(int i){}
+			def dispatch void a(int i){}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendClasses.head
+		val field = clazz.members.head
+		val function = clazz.members.get(1);
+		val fieldSignature = signatureProvider.getSignature(field)
+		assertEquals("int id", fieldSignature)
+		val  functionSignature = signatureProvider.getSignature(function);
+		assertEquals("void a(int i)", functionSignature)
+	}
+
 	def getResourceSet(){
 		getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project)
 	}
