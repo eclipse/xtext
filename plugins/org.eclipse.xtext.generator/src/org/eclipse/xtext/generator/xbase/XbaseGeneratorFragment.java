@@ -190,6 +190,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator")
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider", 
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameRefactoringProvider")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
 				.addfinalTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",

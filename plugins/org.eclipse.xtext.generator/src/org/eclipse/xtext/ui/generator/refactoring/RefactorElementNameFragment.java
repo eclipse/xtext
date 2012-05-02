@@ -54,30 +54,30 @@ public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 			return bindFactory
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
 							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler")
-							.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
-									"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider")
-									.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
-											"org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport.Factory")
-											.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
-													"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider")
-													.addConfiguredBinding(
-															"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate",
-															"binder.bind("
-																	+ "org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class"
-																	+ ").annotatedWith("
-																	+ "org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class"
-																	+ ").to(" 
-																	+ "org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider.class)")
-																	.getBindings();
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
+							"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
+							"org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport.Factory")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
+							"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider")
+					.addConfiguredBinding(
+							"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate",
+							"binder.bind("
+							+ "org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class"
+							+ ").annotatedWith("
+							+ "org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class"
+							+ ").to(" 
+							+ "org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider.class)")
+					.getBindings();
 		else
 			return bindFactory
 					.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider",
 							"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider")
-							.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
-									"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory")
-									.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
-											"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler")
-											.getBindings();
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory",
+							"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory")
+					.addTypeToType("org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler",
+							"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler")
+					.getBindings();
 	}
 
 }
