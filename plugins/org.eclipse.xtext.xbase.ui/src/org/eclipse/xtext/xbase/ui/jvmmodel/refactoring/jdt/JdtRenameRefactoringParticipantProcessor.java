@@ -46,7 +46,7 @@ public class JdtRenameRefactoringParticipantProcessor extends RenameElementProce
 		if (associations.getJvmElements(getTargetElement()).size() > 1) {
 			StatusWrapper statusWrapper = getStatusProvider().get();
 			statusWrapper.add(ERROR,
-					"Cannot refactor single inferred element. Please refactor source element {0} instead",
+					"Cannot rename single inferred element. Please rename source element '{0}' instead",
 					getTargetElement());
 			statusWrapper.merge(super.checkInitialConditions(pm));
 			return statusWrapper.getRefactoringStatus();
