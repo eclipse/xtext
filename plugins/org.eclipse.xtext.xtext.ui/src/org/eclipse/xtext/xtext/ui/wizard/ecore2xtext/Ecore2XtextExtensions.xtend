@@ -13,6 +13,12 @@ import static org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextExtension
 
 import static extension org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.*
 
+/**
+ * Originally written with M2T Xtend. (Ecore2Xtext.ext)<br>
+ * Translated to Tools Xtend mostly 1:1.<br>
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 class Ecore2XtextExtensions {
 	/** 
 	 * cached Collection[EClassifier] allConcreteRuleClassifiers(Ecore2XtextProjectInfo this) :
@@ -84,10 +90,10 @@ class Ecore2XtextExtensions {
 		classifiers += subClasses(eClazz)
 		classifiers.removeAll(acceptor)
 		if (classifiers.isEmpty)
-			return null
+			return
 		else {
 			acceptor += classifiers
-			return classifiers.filter(typeof(EClass)).map([c|allAssignedClassifiers(c,acceptor)]).flatten
+			classifiers.filter(typeof(EClass)).forEach([c|allAssignedClassifiers(c,acceptor)])
 		}
 	}
 
@@ -192,8 +198,7 @@ def static quoteIfNeccesary(String str) {
 }
 
 def static isXtextKeyword(String str) {
-	newArrayList( 'ML_COMMENT', 'ID', 'WS','INT', 'STRING', 'ANY_OTHER', 'SL_COMMENT', 
-	  'returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
+	newArrayList('returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
 	  'import', 'as', 'current', 'fragment', 'EOF'
 	).contains(str)	
 }
@@ -279,6 +284,9 @@ def static boolean isID(EStructuralFeature it) {
 		}
 	}
 
+	/*cached subClasses(EClass this):
+		EPackage.EClassifiers.typeSelect(EClass).select(c|c.EAllSuperTypes.contains(this));	
+ 	*/
 	def static subClasses(EClass it) {
 		EPackage.EClassifiers.filter(typeof(EClass)).filter(c|c.EAllSuperTypes.contains(it));
 	}

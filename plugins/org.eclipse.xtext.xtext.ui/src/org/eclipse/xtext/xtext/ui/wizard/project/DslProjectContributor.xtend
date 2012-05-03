@@ -3,6 +3,11 @@ package org.eclipse.xtext.xtext.ui.wizard.project
 import org.eclipse.core.resources.IProject
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor$IFileCreator
 
+/**
+ * Contributes a workflow file and the grammar to the new DSL project
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 class DslProjectContributor extends DefaultProjectFactoryContributor {
 	
 	XtextProjectInfo projectInfo
