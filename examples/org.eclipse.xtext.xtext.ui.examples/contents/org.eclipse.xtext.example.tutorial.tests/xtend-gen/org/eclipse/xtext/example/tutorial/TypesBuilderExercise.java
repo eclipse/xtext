@@ -9,8 +9,8 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(XtextRunner.class)
-@InjectWith(TutorialInjectorProvider.class)
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = TutorialInjectorProvider.class)
 @SuppressWarnings("all")
 public class TypesBuilderExercise {
   /**
