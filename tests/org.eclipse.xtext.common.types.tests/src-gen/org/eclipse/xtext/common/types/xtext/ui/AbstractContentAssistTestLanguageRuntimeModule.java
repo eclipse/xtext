@@ -124,9 +124,4 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-		return org.eclipse.xtext.common.types.xtext.ui.generator.ContentAssistTestLanguageGenerator.class;
-	}
-
 }

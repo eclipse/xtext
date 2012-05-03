@@ -674,8 +674,8 @@ public class InternalRefactoringTestLanguage2Lexer extends Lexer {
     static final String DFA12_maxS =
         "\1\uffff\2\uffff\1\172\2\uffff\2\uffff\1\57\12\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\1\2\1\uffff\1\3\1\4\3\uffff\1\10\1\11\1\1\1\2\1\3"+
-        "\1\4\1\5\1\6\1\7\1\10";
+        "\1\uffff\1\1\1\2\1\uffff\1\3\1\4\3\uffff\1\10\1\11\1\1\1\2\1\3\1"+
+        "\4\1\5\1\6\1\7\1\10";
     static final String DFA12_specialS =
         "\1\2\5\uffff\1\0\1\1\13\uffff}>";
     static final String[] DFA12_transitionS = {

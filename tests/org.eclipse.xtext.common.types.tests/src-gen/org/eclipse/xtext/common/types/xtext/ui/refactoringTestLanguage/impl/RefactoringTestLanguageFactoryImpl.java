@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.impl;
 

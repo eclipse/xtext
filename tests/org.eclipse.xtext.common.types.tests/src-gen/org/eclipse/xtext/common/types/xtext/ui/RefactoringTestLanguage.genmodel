@@ -6,7 +6,8 @@
     modelPluginID="org.eclipse.xtext.common.types.tests" forceOverwrite="true" modelName="RefactoringTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.tests.edit"
-    editorPluginID="org.eclipse.xtext.common.types.tests.editor" usedGenPackages="../../../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    editorPluginID="org.eclipse.xtext.common.types.tests.editor" runtimeVersion="2.5"
+    usedGenPackages="../../../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="RefactoringTestLanguage" basePackage="org.eclipse.xtext.common.types.xtext.ui"
       disposableProviderFactory="true" ecorePackage="RefactoringTestLanguage.ecore#/">
     <genClasses ecoreClass="RefactoringTestLanguage.ecore#//Model">
