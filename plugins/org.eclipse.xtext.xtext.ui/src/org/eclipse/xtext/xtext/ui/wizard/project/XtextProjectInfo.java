@@ -187,7 +187,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	}
 
 	public IPath getFeatureProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getTestProjectName());
+		return projectLocation.removeLastSegments(1).append(getFeatureProjectName());
 	}
 
 	/**
