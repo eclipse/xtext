@@ -24,17 +24,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xpand2.XpandExecutionContextImpl;
-import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xtext.ui.OutputStringImpl;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -62,12 +58,13 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup.class);
 	}
 
-	@Test public void testExampleEPackages() throws IOException {
+	@Test
+	public void testExampleEPackages() throws IOException {
 		checkGeneratedGrammarIsValid(EXAMPLE_EPACKAGE_NS_URIS);
 	}
 
-	@Ignore("Smoke test")
-	@Test public void testAllEPackagesFromRegistry() throws IOException {
+	@Test
+	public void testAllEPackagesFromRegistry() throws IOException {
 		checkGeneratedGrammarIsValid(Lists.newArrayList(EPackage.Registry.INSTANCE.keySet()));
 	}
 
@@ -80,7 +77,6 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 			if (!addImportedEPackages(ePackage, ePackages)) {
 				System.out.println("...skipping");
 			} else {
-				OutputStringImpl output = new OutputStringImpl();
 				List<EPackageInfo> ePackageInfos = Lists.newArrayList(Iterables.transform(ePackages,
 						new Function<EPackage, EPackageInfo>() {
 							public EPackageInfo apply(EPackage from) {
@@ -90,13 +86,9 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				xtextProjectInfo.setEPackageInfos(ePackageInfos);
 				String languageName = "org.eclipse.xtext.xtext.ui.tests." + ePackage.getName();
 				xtextProjectInfo.setLanguageName(languageName);
-				XpandExecutionContextImpl executionContext = new XpandExecutionContextImpl(output, null);
-				executionContext.registerMetaModel(new JavaBeansMetaModel());
-				XpandFacade xpandFacade = XpandFacade.create(executionContext);
-				xpandFacade.evaluate2("org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar",
-						xtextProjectInfo, null);
+
 				String grammarFileName = languageName.replaceAll("\\.", "/") + ".xtext";
-				String xtextGrammar = output.getContent(grammarFileName);
+				String xtextGrammar = createGrammar(xtextProjectInfo).toString();
 				ResourceSet resourceSet = new XtextResourceSet();
 				Resource xtextResource = resourceSet.createResource(URI.createFileURI(grammarFileName));
 				xtextResource.load(new StringInputStream(xtextGrammar), null);
@@ -107,6 +99,10 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				System.out.println(" ...OK");
 			}
 		}
+	}
+
+	private CharSequence createGrammar(Ecore2XtextProjectInfo xtextProjectInfo) {
+		return new Ecore2XtextGrammarCreator().grammar(xtextProjectInfo);
 	}
 
 	private void checkErrors(EPackage ePackage, Resource xtextResource, String xtextGrammar) {
