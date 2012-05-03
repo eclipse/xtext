@@ -87,7 +87,7 @@ public class TestBatchCompiler {
     File _file = new File(_plus);
     String[] _list = _file.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(4, _size);
   }
   
   @Test
@@ -97,7 +97,7 @@ public class TestBatchCompiler {
     File _file = new File(_plus);
     String[] _list = _file.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(4, _size);
   }
   
   @Test

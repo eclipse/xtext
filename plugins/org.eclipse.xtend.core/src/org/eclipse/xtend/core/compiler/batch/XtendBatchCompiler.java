@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -228,6 +229,7 @@ public class XtendBatchCompiler {
 				log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
 			}
 			installJvmTypeProvider(resourceSet, classDirectory);
+			EcoreUtil.resolveAll(resourceSet);
 			List<Issue> issues = validate(resourceSet);
 			Iterable<Issue> errors = Iterables.filter(issues, SeverityFilter.ERROR);
 			Iterable<Issue> warnings = Iterables.filter(issues, SeverityFilter.WARNING);
@@ -322,9 +324,11 @@ public class XtendBatchCompiler {
 		for (Resource resource : resources) {
 			IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE
 					.getResourceServiceProvider(resource.getURI());
-			IResourceValidator resourceValidator = resourceServiceProvider.getResourceValidator();
-			List<Issue> result = resourceValidator.validate(resource, CheckMode.ALL, null);
-			addAll(issues, result);
+			if(resourceServiceProvider != null){
+				IResourceValidator resourceValidator = resourceServiceProvider.getResourceValidator();
+				List<Issue> result = resourceValidator.validate(resource, CheckMode.ALL, null);
+				addAll(issues, result);
+			}
 		}
 		return issues;
 	}

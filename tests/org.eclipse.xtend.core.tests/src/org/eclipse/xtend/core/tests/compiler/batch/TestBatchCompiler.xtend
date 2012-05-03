@@ -56,13 +56,13 @@ class TestBatchCompiler {
     	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
         batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
         batchCompiler.compile
-        assertEquals(2, new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)
+        assertEquals(4, new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)
     }
 
 	@Test
 	def void testCompileTestData() {
 		batchCompiler.compile
-		assertEquals(2, new File(OUTPUT_DIRECTORY+"/test").list.size)
+		assertEquals(4, new File(OUTPUT_DIRECTORY+"/test").list.size)
 	}
 
 	@Test
