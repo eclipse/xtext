@@ -8,7 +8,6 @@
 	<modules>
 		<module>../org.eclipse.xtend.lib.maven</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
-		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.maven</module>
 	</modules>
 	<distributionManagement>
 		<repository>
