@@ -118,7 +118,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 			Resource packResource = pack.eResource();
 			if (!packResource.getURI().toString().equals(pack.getNsURI())) {
 				ResourceSet packResourceSet = packResource.getResourceSet();
-				if (packResourceSet != null && packResourceSet.equals(set)) {
+				if (packResourceSet != null) {
 					EPackage topMost = pack;
 					// we need to be aware of empty subpackages
 					while (topMost.getESuperPackage() != null
