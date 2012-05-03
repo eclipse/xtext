@@ -13,6 +13,7 @@ var backtrack = false
 var memoize = false
 var generateDotDiagram = false
 var graphvizCommand = ""
+var emfRuntimeVersion = "2.5"
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment {

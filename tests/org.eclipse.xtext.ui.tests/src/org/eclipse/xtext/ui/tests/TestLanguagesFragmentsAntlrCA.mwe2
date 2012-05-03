@@ -23,6 +23,7 @@ var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
+var emfRuntimeVersion = "2.5"
 
 CompositeGeneratorFragment {
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}

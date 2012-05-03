@@ -14,6 +14,7 @@ var memoize = false
 var generateDotDiagram = false
 var graphvizCommand = ""
 var srcGenOnly=true
+var emfRuntimeVersion = "2.5"
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment {
