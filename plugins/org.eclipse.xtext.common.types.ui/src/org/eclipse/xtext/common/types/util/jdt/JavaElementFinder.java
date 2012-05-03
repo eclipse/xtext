@@ -68,6 +68,11 @@ public class JavaElementFinder implements IJavaElementFinder {
 		return projectProvider;
 	}
 
+	/**
+	 * 
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 * @noextend This class is not intended to be subclassed by clients.
+	 */
 	public static class Implementation extends TypesSwitch<IJavaElement> {
 		private final IJavaProject javaProject;
 		private final boolean isExactMatchOnly;
@@ -78,6 +83,10 @@ public class JavaElementFinder implements IJavaElementFinder {
 		public Implementation(IJavaProject javaProject, boolean isExactMatchOnly) {
 			this.javaProject = javaProject;
 			this.isExactMatchOnly = isExactMatchOnly;
+		}
+		
+		public Implementation(IJavaProject javaProject) {
+			this(javaProject, false);
 		}
 
 		@Override

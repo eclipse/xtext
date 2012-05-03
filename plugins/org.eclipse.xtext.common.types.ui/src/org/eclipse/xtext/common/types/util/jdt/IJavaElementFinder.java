@@ -17,6 +17,8 @@ import com.google.inject.ImplementedBy;
  * given {@link JvmIdentifiableElement}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @ImplementedBy(JavaElementFinder.class)
 public interface IJavaElementFinder {
