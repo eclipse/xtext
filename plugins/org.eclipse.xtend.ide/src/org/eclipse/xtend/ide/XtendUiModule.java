@@ -40,6 +40,7 @@ import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
+import org.eclipse.xtend.ide.refactoring.XtendReferenceUpdater;
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -74,6 +75,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
@@ -243,6 +245,11 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendRenameStrategy.class;
 	}
 	
+	@Override
+	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
+		return XtendReferenceUpdater.class;
+	}
+
 	public Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider(){
 		return XtendHoverSignatureProvider.class;
 	}

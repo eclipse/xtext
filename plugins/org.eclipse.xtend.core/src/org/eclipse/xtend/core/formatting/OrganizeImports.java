@@ -87,23 +87,23 @@ public class OrganizeImports {
 		return acceptor;
 	}
 
-	public String serializeImports(ReferenceAcceptor acceptor, String lineSeparator) {
+	public String serializeImports(IImportCollection importCollection, String lineSeparator) {
 		StringBuilder importsSection = new StringBuilder();
-		List<String> listofImportedTypeNames = acceptor.getListofImportedTypeNames();
+		List<String> listofImportedTypeNames = importCollection.getListofImportedTypeNames();
 		if (!listofImportedTypeNames.isEmpty()) {
 			importsSection.append(lineSeparator);
 			for (String qn : listofImportedTypeNames) {
 				importsSection.append(lineSeparator).append("import ").append(qn);
 			}
 		}
-		final List<String> listofStaticImports = acceptor.getListofStaticImports();
+		final List<String> listofStaticImports = importCollection.getListofStaticImports();
 		if (!listofStaticImports.isEmpty()) {
 			importsSection.append(lineSeparator);
 			for (String qn : listofStaticImports) {
 				importsSection.append(lineSeparator).append("import static ").append(qn).append(".*");
 			}
 		}
-		final List<String> listofStaticExtensionImports = acceptor.getListofStaticExtensionImports();
+		final List<String> listofStaticExtensionImports = importCollection.getListofStaticExtensionImports();
 		if (!listofStaticExtensionImports.isEmpty()) {
 			importsSection.append(lineSeparator);
 			for (String qn : listofStaticExtensionImports) {
@@ -195,7 +195,7 @@ public class OrganizeImports {
 		}
 	}
 
-	public static class ReferenceAcceptor {
+	public static class ReferenceAcceptor implements IImportCollection {
 
 		public Set<JvmType> types = newLinkedHashSet();
 		public Set<JvmType> staticMembers = newLinkedHashSet();
