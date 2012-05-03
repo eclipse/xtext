@@ -21,6 +21,7 @@ var ignoreCase = false
 var backtrackLexer = false
 var generateDotDiagram = false
 var graphvizCommand = ""
+var emfRuntimeVersion = "2.5"
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
