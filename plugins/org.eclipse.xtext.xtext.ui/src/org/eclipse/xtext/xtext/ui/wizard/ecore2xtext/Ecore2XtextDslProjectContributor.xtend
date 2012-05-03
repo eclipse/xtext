@@ -4,6 +4,11 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor$IFileCreator
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor
 
+/**
+ * Contributes a workflow file and the grammar to the new Ecore2Xtext DSL project
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor {
 	
 	Ecore2XtextProjectInfo projectInfo

@@ -11,6 +11,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo;
 
 /**
+ * Creates some buckminster files. cquery, spec, rmap etc.
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.3
  */

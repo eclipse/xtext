@@ -17,10 +17,17 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil;
 
+/**
+ * Originally written with M2T Xtend. (Ecore2Xtext.ext)<br>
+ * Translated to Tools Xtend mostly 1:1.<br>
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 @SuppressWarnings("all")
 public class Ecore2XtextExtensions {
   /**
@@ -231,7 +238,7 @@ public class Ecore2XtextExtensions {
    * : (acceptor.addAll(classifiers) ->
    * classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
    */
-  private static Iterable<? extends Object> allAssignedClassifiers(final EClass eClazz, final Collection acceptor) {
+  private static void allAssignedClassifiers(final EClass eClazz, final Collection acceptor) {
     EList<EStructuralFeature> _eAllStructuralFeatures = eClazz.getEAllStructuralFeatures();
     final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
         public Boolean apply(final EStructuralFeature f) {
@@ -253,18 +260,16 @@ public class Ecore2XtextExtensions {
     classifiers.removeAll(acceptor);
     boolean _isEmpty = classifiers.isEmpty();
     if (_isEmpty) {
-      return null;
+      return;
     } else {
       Iterables.<EClassifier>addAll(acceptor, classifiers);
       Iterable<EClass> _filter_1 = Iterables.<EClass>filter(classifiers, EClass.class);
-      final Function1<EClass,Iterable<? extends Object>> _function_2 = new Function1<EClass,Iterable<? extends Object>>() {
-          public Iterable<? extends Object> apply(final EClass c) {
-            Iterable<? extends Object> _allAssignedClassifiers = Ecore2XtextExtensions.allAssignedClassifiers(c, acceptor);
-            return _allAssignedClassifiers;
+      final Procedure1<EClass> _function_2 = new Procedure1<EClass>() {
+          public void apply(final EClass c) {
+            Ecore2XtextExtensions.allAssignedClassifiers(c, acceptor);
           }
         };
-      Iterable<Iterable<? extends Object>> _map_1 = IterableExtensions.<EClass, Iterable<? extends Object>>map(_filter_1, _function_2);
-      return Iterables.concat(_map_1);
+      IterableExtensions.<EClass>forEach(_filter_1, _function_2);
     }
   }
   
@@ -574,8 +579,7 @@ public class Ecore2XtextExtensions {
   }
   
   public static boolean isXtextKeyword(final String str) {
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("ML_COMMENT", "ID", "WS", "INT", "STRING", "ANY_OTHER", "SL_COMMENT", 
-      "returns", "generate", "terminal", "with", "hidden", "enum", "grammar", 
+    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("returns", "generate", "terminal", "with", "hidden", "enum", "grammar", 
       "import", "as", "current", "fragment", "EOF");
     boolean _contains = _newArrayList.contains(str);
     return _contains;
@@ -872,6 +876,10 @@ public class Ecore2XtextExtensions {
     return _switchResult;
   }
   
+  /**
+   * cached subClasses(EClass this):
+   * EPackage.EClassifiers.typeSelect(EClass).select(c|c.EAllSuperTypes.contains(this));
+   */
   public static Iterable<EClass> subClasses(final EClass it) {
     EPackage _ePackage = it.getEPackage();
     EList<EClassifier> _eClassifiers = _ePackage.getEClassifiers();

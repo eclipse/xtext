@@ -3,6 +3,12 @@ package org.eclipse.xtext.xtext.ui.wizard.project
 import org.eclipse.core.resources.IProject
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor$IFileCreator
 
+
+/**
+ * Contributes build.properties file and the launch configuration file to a new dsl test project
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 class TestProjectContributor extends DefaultProjectFactoryContributor {
 	
 	XtextProjectInfo projectInfo

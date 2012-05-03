@@ -8,6 +8,7 @@ import static org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuckminsterFile
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor
 
 /**
+ * Creates some buckminster files. cquery, spec, rmap etc.
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.3
  */
