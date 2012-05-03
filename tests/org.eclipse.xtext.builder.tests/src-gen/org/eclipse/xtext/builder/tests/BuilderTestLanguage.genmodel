@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.builder.tests" forceOverwrite="true" modelName="BuilderTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.builder.tests.edit"
-    editorPluginID="org.eclipse.xtext.builder.tests.editor">
+    editorPluginID="org.eclipse.xtext.builder.tests.editor" runtimeVersion="2.5">
   <genPackages prefix="BuilderTestLanguage" basePackage="org.eclipse.xtext.builder.tests"
       disposableProviderFactory="true" ecorePackage="BuilderTestLanguage.ecore#/">
     <genClasses ecoreClass="BuilderTestLanguage.ecore#//NamedElement">
