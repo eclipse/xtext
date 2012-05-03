@@ -81,6 +81,19 @@
         </page>
     </extension>
     <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.builder.tests.BuilderTestLanguage"
+            name="BuilderTestLanguage">
+            <keywordReference id="org.eclipse.xtext.builder.tests.ui.keyword_BuilderTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.builder.tests.ui.keyword_BuilderTestLanguage"
@@ -148,5 +161,27 @@
     </extension>
 
 
+    <!-- marker definitions for org.eclipse.xtext.builder.tests.BuilderTestLanguage -->
+    <extension
+            id="buildertestlanguage.check.fast"
+            name="BuilderTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="buildertestlanguage.check.normal"
+            name="BuilderTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="buildertestlanguage.check.expensive"
+            name="BuilderTestLanguage Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
 </plugin>
