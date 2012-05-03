@@ -198,7 +198,8 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		}
 
 		public void addImportedNames(List<String> importedNames) {
-			plainImports.addAll(importedNames);
+			if(importedNames != null)
+				plainImports.addAll(importedNames);
 		}
 
 		public void remove(XtendImport xtendImport) {
