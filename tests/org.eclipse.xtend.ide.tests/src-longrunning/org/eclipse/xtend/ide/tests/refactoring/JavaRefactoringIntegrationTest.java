@@ -263,15 +263,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		final int offset = xtendModel.indexOf('+');
-		IResourcesSetupUtil.waitForAutoBuild();
-		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
-				new IUnitOfWork<IRenameElementContext, XtextResource>() {
-					public IRenameElementContext exec(XtextResource state) throws Exception {
-						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, offset);
-						return renameElementHandler.createRenameElementContext(element, editor, new TextSelection(
-								offset, 1), state);
-					}
-				});
+		IRenameElementContext renameElementContext = createRenameElementContext(editor, offset);
 		assertNull(renameElementContext);
 	}
 
@@ -344,7 +336,9 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertFileContains(javaSub, "public void bar()");
 	}
 
-	@Test@Ignore // TODO: find out why this test fails (interactive testing works)
+	@Test
+	@Ignore
+	// TODO: find out why this test fails (interactive testing works)
 	public void testCrissCrossReferences_3() throws Exception {
 		IFile javaBase = testHelper.createFile("JavaBase.java", "public interface JavaBase { public void foo(); }");
 		IFile javaSub = testHelper.createFile("JavaSub.java",
@@ -360,37 +354,72 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertFileContains(javaSub, "public void bar()");
 	}
 
-	@Test public void testRenameXtendClass() throws Exception {
-		String xtendModel = "class XtendClass { }";
-		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
-		final XtextEditor editor = testHelper.openEditor(xtendClass);
-		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-		synchronize(editor);
-		assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
-		assertFileContains(javaClass, "JavaClass extends NewXtendClass");
+	@Test
+	public void testRenameXtendClass() throws Exception {
+		try {
+			String xtendModel = "class XtendClass { }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
+			final XtextEditor editor = testHelper.openEditor(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+			synchronize(editor);
+			assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
+			assertFileContains(javaClass, "JavaClass extends NewXtendClass");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
+			IResourcesSetupUtil.waitForAutoBuild();
+		}
 	}
-	
-	@Test public void testRenameXtendField() throws Exception {
+
+	@Test
+	public void testRenameXtendField() throws Exception {
 		String xtendModel = "class XtendClass { protected int foo }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { int bar = foo; }");
+		IFile javaClass = testHelper.createFile("JavaClass.java",
+				"public class JavaClass extends XtendClass { int bar = foo; }");
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
 		synchronize(editor);
 		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
 		assertFileContains(javaClass, "int bar = baz");
 	}
-	
-	@Test public void testRenameXtendMethod() throws Exception {
+
+	@Test
+	public void testRenameXtendMethod() throws Exception {
 		String xtendModel = "class XtendClass { def foo() {} }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { public void bar() { foo(); } }");
+		IFile javaClass = testHelper.createFile("JavaClass.java",
+				"public class JavaClass extends XtendClass { public void bar() { foo(); } }");
 		final XtextEditor editor = testHelper.openEditor(xtendClass);
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
 		synchronize(editor);
 		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
 		assertFileContains(javaClass, "{ baz(); }");
+	}
+
+	@Test
+	public void testRenameXtendProperty() throws Exception {
+		String xtendModel = "import org.eclipse.xtend.lib.Property class XtendClass { @Property int foo }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java",
+				"public class JavaClass extends XtendClass { public void bar() { setFoo(getFoo()); } }");
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("foo", "baz"), editor.getDocument().get());
+		assertFileContains(javaClass, "{ setBaz(getBaz()); }");
+	}
+
+	@Test 
+	public void testDontRenameXtendDispatchMethod() throws Exception {
+		String xtendModel = "class XtendClass { def dispatch foo(Object x) {} def dispatch foo(String x) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, xtendModel.indexOf("foo"), "bar");
+		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
+		assertTrue(status.hasError());
+		assertEquals(1,status.getEntries().length);
+		assertTrue(status.getEntryAt(0).getMessage().contains("Cannot rename single inferred element"));
 	}
 	
 	protected IFile assertFileExists(String fileName) throws Exception {
@@ -406,6 +435,28 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	protected Change renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
+		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
+		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
+		assertTrue(status.toString(), status.isOK());
+		Change change = renameRefactoring.createChange(new NullProgressMonitor());
+		Change undoChange = change.perform(new NullProgressMonitor());
+		return undoChange;
+	}
+
+	protected ProcessorBasedRefactoring createXtendRenameRefactoring(final XtextEditor editor, final int offset,
+			String newName) {
+		IRenameElementContext renameElementContext = createRenameElementContext(editor, offset);
+		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider
+				.getRenameRefactoring(renameElementContext);
+		RefactoringProcessor processor = renameRefactoring.getProcessor();
+		if (processor instanceof AbstractRenameProcessor)
+			((AbstractRenameProcessor) processor).setNewName(newName);
+		else if (processor instanceof JavaRenameProcessor)
+			((JavaRenameProcessor) processor).setNewElementName(newName);
+		return renameRefactoring;
+	}
+
+	protected IRenameElementContext createRenameElementContext(final XtextEditor editor, final int offset) {
 		IResourcesSetupUtil.waitForAutoBuild();
 		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
@@ -415,18 +466,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 								offset, 1), state);
 					}
 				});
-		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider
-				.getRenameRefactoring(renameElementContext);
-		RefactoringProcessor processor = renameRefactoring.getProcessor();
-		if (processor instanceof AbstractRenameProcessor)
-			((AbstractRenameProcessor) processor).setNewName(newName);
-		else if (processor instanceof JavaRenameProcessor)
-			((JavaRenameProcessor) processor).setNewElementName(newName);
-		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
-		assertTrue(status.toString(), status.isOK());
-		Change change = renameRefactoring.createChange(new NullProgressMonitor());
-		Change undoChange = change.perform(new NullProgressMonitor());
-		return undoChange;
+		return renameElementContext;
 	}
 
 	protected void synchronize(XtextEditor editor) throws CoreException {
