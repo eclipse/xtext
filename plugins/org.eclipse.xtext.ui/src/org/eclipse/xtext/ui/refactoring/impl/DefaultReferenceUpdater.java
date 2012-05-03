@@ -65,13 +65,24 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 				updateAcceptor.getRefactoringStatus().add(ERROR, "Resource {0} is not an XtextResource.",
 						referringResource.getURI(), resourceSet);
 			} else {
-				((XtextResource) referringResource).getCache().clear(referringResource);
-				for (IReferenceDescription referenceDescription : resource2references.get(referringResourceURI)) {
-					createReferenceUpdate(referenceDescription, referringResourceURI, elementRenameArguments,
-							resourceSet, updateAcceptor);
-				}
+				Iterable<IReferenceDescription> referenceDescriptions = resource2references.get(referringResourceURI);
+				processReferringResource(referringResource, referenceDescriptions, elementRenameArguments,
+						updateAcceptor);
 			}
 			progress.worked(1);
+		}
+	}
+
+	/**
+	 * Override this method for pre- or post-processing hooks.
+	 */
+	protected void processReferringResource(Resource referringResource,
+			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
+			IRefactoringUpdateAcceptor updateAcceptor) {
+		((XtextResource) referringResource).getCache().clear(referringResource);
+		for (IReferenceDescription referenceDescription : referenceDescriptions) {
+			createReferenceUpdate(referenceDescription, referringResource.getURI(), elementRenameArguments,
+					referringResource.getResourceSet(), updateAcceptor);
 		}
 	}
 
@@ -97,13 +108,19 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 				String newReferenceText = crossReferenceSerializerFacade.serializeCrossRef(referringElement,
 						crossReference, newTargetElement, referenceTextRegion, updateAcceptor.getRefactoringStatus());
 				if (newReferenceText != null) {
-					// TODO: add import hook
-					TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
-							referenceTextRegion.getLength(), newReferenceText);
-					updateAcceptor.accept(referringResourceURI, referenceEdit);
+					createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
+							referringResourceURI, updateAcceptor);
 				}
 			}
 		}
+	}
+
+	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText,
+			EObject referringElement, EObject newTargetElement, EReference reference, 
+			URI referringResourceURI, IRefactoringUpdateAcceptor updateAcceptor) {
+		TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
+				referenceTextRegion.getLength(), newReferenceText);
+		updateAcceptor.accept(referringResourceURI, referenceEdit);
 	}
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {
@@ -119,4 +136,15 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		return null;
 	}
 
+	protected ILocationInFileProvider getLocationInFileProvider() {
+		return locationInFileProvider;
+	}
+
+	protected ITransientValueService getTransientValueService() {
+		return transientValueService;
+	}
+
+	protected CrossReferenceSerializerFacade getCrossReferenceSerializerFacade() {
+		return crossReferenceSerializerFacade;
+	}
 }
