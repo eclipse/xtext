@@ -171,9 +171,23 @@
         <page
             category="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage"
             class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.builder"
-            name="Building">
+            id="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.compiler.preferencePage"
+            name="Compiler">
             <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_ContentAssistTestLanguage"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage"
+            class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_ContentAssistTestLanguage"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
 
