@@ -94,8 +94,9 @@ import java.util.List
 	}
 
 	def rules(EClassifier it) {
-		if (needsConcreteRule)
-			it.rule
+		if (it != null && it.needsConcreteRule) {
+			rule(it)
+		}
 	}
 	
 	def rule(EClassifier it) {
@@ -135,7 +136,7 @@ import java.util.List
 				«it.ELiterals.map([name+" = '"+name+"'"]).join(' | ')»;'''
 			
 			default:	
-				throw new IllegalStateException("No rule template for "+it.toString)
+				throw new IllegalStateException("No rule template for "+it)
 		}
 	}
 }
