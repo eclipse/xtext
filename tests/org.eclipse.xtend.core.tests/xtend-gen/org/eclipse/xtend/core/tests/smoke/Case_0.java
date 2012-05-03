@@ -6,7 +6,6 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
@@ -95,7 +94,12 @@ public class Case_0 {
   
   @Override
   public String toString() {
-    String result = new ToStringHelper().toString(this);
-    return result;
+    String superToString = super.toString();
+    if (superToString == null) superToString = "";
+    int start = superToString.indexOf('[');
+    int end = superToString.lastIndexOf(']');
+    superToString = (start == -1 || end == -1) ? "" : (superToString.substring(start + 1,end) + ", ");
+    return "Case_0 [" + superToString 
+         + "_id = " + _id + "]";
   }
 }

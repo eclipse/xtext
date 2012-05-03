@@ -16,8 +16,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = XtendInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(XtendInjectorProvider.class)
 @SuppressWarnings("all")
 public class TestBatchCompiler {
   @Inject
