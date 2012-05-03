@@ -7,6 +7,11 @@ import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 
+/**
+ * Contributes build.properties file and the launch configuration file to a new dsl test project
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 @SuppressWarnings("all")
 public class TestProjectContributor extends DefaultProjectFactoryContributor {
   private XtextProjectInfo projectInfo;

@@ -25,6 +25,12 @@ import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil;
 
+/**
+ * Originally written with M2T Xpand. (Ecore2Xtext.xpt)<br>
+ * Translated to Tools Xtend 1:1 where possible.<br>
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 @SuppressWarnings("all")
 public class Ecore2XtextGrammarCreator {
   public CharSequence grammar(final Ecore2XtextProjectInfo it) {
@@ -38,16 +44,15 @@ public class Ecore2XtextGrammarCreator {
       _builder.append("grammar ");
       String _languageName = it.getLanguageName();
       _builder.append(_languageName, "");
-      _builder.append(" with org.eclipse.xtext.common.Terminals ");
+      _builder.append(" with org.eclipse.xtext.common.Terminals");
       _builder.newLineIfNotEmpty();
+      _builder.newLine();
       {
         Collection<EPackage> _allReferencedEPackages = Ecore2XtextExtensions.allReferencedEPackages(it);
         for(final EPackage it_1 : _allReferencedEPackages) {
-          _builder.append(" ");
-          _builder.newLine();
           _builder.append("import \"");
-          String _importURI = UniqueNameUtil.importURI(it_1);
-          _builder.append(_importURI, "");
+          String _nsURI = it_1.getNsURI();
+          _builder.append(_nsURI, "");
           _builder.append("\" ");
           {
             boolean _and = false;
@@ -69,6 +74,7 @@ public class Ecore2XtextGrammarCreator {
           _builder.newLineIfNotEmpty();
         }
       }
+      _builder.newLine();
       EClass _rootElementClass = it.getRootElementClass();
       CharSequence _rules = this.rules(_rootElementClass);
       _builder.append(_rules, "");
@@ -78,8 +84,6 @@ public class Ecore2XtextGrammarCreator {
         EClass _rootElementClass_1 = it.getRootElementClass();
         List<EClass> _but = this.<EClass>but(_allDispatcherRuleClasses, _rootElementClass_1);
         for(final EClass it_2 : _but) {
-          _builder.append(" ");
-          _builder.append("//dispatcher");
           _builder.newLine();
           CharSequence _subClassDispatcherRule = this.subClassDispatcherRule(it_2);
           _builder.append(_subClassDispatcherRule, "");
@@ -91,7 +95,6 @@ public class Ecore2XtextGrammarCreator {
         EClass _rootElementClass_2 = it.getRootElementClass();
         List<EClassifier> _but_1 = this.<EClassifier>but(_allConcreteRuleClassifiers, _rootElementClass_2);
         for(final EClassifier it_3 : _but_1) {
-          _builder.append("//concrete");
           _builder.newLine();
           CharSequence _rule = this.rule(it_3);
           _builder.append(_rule, "");
@@ -122,7 +125,7 @@ public class Ecore2XtextGrammarCreator {
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        CharSequence _subClassAlternatives = this.subClassAlternatives(it);
+        String _subClassAlternatives = this.subClassAlternatives(it);
         _builder.append(_subClassAlternatives, "	");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
@@ -131,8 +134,8 @@ public class Ecore2XtextGrammarCreator {
     return _builder;
   }
   
-  public CharSequence subClassAlternatives(final EClass eClazz) {
-    CharSequence _xblockexpression = null;
+  public String subClassAlternatives(final EClass eClazz) {
+    String _xblockexpression = null;
     {
       ArrayList<EClass> _newArrayList = CollectionLiterals.<EClass>newArrayList(eClazz);
       Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(eClazz);
@@ -145,7 +148,6 @@ public class Ecore2XtextGrammarCreator {
         };
       Iterable<EClass> _filter = IterableExtensions.<EClass>filter(list, _function);
       list = _filter;
-      StringConcatenation _builder = new StringConcatenation();
       final Function1<EClass,String> _function_1 = new Function1<EClass,String>() {
           public String apply(final EClass it) {
             String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(it);
@@ -154,9 +156,7 @@ public class Ecore2XtextGrammarCreator {
         };
       Iterable<String> _map = IterableExtensions.<EClass, String>map(list, _function_1);
       String _join = IterableExtensions.join(_map, " | ");
-      _builder.append(_join, "");
-      _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
+      _xblockexpression = (_join);
     }
     return _xblockexpression;
   }
@@ -198,9 +198,9 @@ public class Ecore2XtextGrammarCreator {
         {
           boolean _isContainment = Ecore2XtextExtensions.isContainment(it);
           if (_isContainment) {
-            _builder.append("\'{\'");
+            _builder.append("\'{\' ");
           } else {
-            _builder.append("\'(\'");
+            _builder.append("\'(\' ");
           }
         }
       }
@@ -215,7 +215,7 @@ public class Ecore2XtextGrammarCreator {
     {
       boolean _isMany_1 = it.isMany();
       if (_isMany_1) {
-        _builder.append("( \",\" ");
+        _builder.append(" ( \",\" ");
         String _name_1 = it.getName();
         String _quoteIfNeccesary_1 = Ecore2XtextExtensions.quoteIfNeccesary(_name_1);
         _builder.append(_quoteIfNeccesary_1, "");
@@ -223,13 +223,13 @@ public class Ecore2XtextGrammarCreator {
         _builder.append(_assignmentOperator_1, "");
         CharSequence _assignedTerminal_1 = this.assignedTerminal(it);
         _builder.append(_assignedTerminal_1, "");
-        _builder.append(")*");
+        _builder.append(")* ");
         {
           boolean _isContainment_1 = Ecore2XtextExtensions.isContainment(it);
           if (_isContainment_1) {
-            _builder.append("\'}\'");
+            _builder.append("\'}\' ");
           } else {
-            _builder.append("\')\'");
+            _builder.append("\')\' ");
           }
         }
       }
@@ -313,8 +313,15 @@ public class Ecore2XtextGrammarCreator {
   
   public CharSequence rules(final EClassifier it) {
     CharSequence _xifexpression = null;
-    boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(it);
-    if (_needsConcreteRule) {
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(it, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(it);
+      _and = (_notEquals && _needsConcreteRule);
+    }
+    if (_and) {
       CharSequence _rule = this.rule(it);
       _xifexpression = _rule;
     }
@@ -339,9 +346,10 @@ public class Ecore2XtextGrammarCreator {
         {
           boolean _onlyOptionalFeatures = Ecore2XtextExtensions.onlyOptionalFeatures(_eClass);
           if (_onlyOptionalFeatures) {
+            _builder.append("\t");
             _builder.append("{");
             String _fqn_1 = Ecore2XtextExtensions.fqn(_eClass);
-            _builder.append(_fqn_1, "");
+            _builder.append(_fqn_1, "	");
             _builder.append("}");
             _builder.newLineIfNotEmpty();
           }
@@ -349,50 +357,61 @@ public class Ecore2XtextGrammarCreator {
         {
           Iterable<EStructuralFeature> _prefixFeatures = Ecore2XtextExtensions.prefixFeatures(_eClass);
           for(final EStructuralFeature strF : _prefixFeatures) {
+            _builder.append("\t");
             CharSequence _assigment = this.assigment(strF);
-            _builder.append(_assigment, "");
+            _builder.append(_assigment, "	");
             _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append("   \'");
+        _builder.append("\t");
+        _builder.append("\'");
         String _name = _eClass.getName();
-        _builder.append(_name, "");
+        _builder.append(_name, "	");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         CharSequence _idAssignment = this.idAssignment(_eClass);
-        _builder.append(_idAssignment, "");
-        _builder.newLineIfNotEmpty();
+        _builder.append(_idAssignment, "	");
         {
           Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(_eClass);
           boolean _isEmpty = IterableExtensions.isEmpty(_inlinedFeatures);
           boolean _not = (!_isEmpty);
           if (_not) {
-            _builder.append("\t\'{\'");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\'{\'");
+            _builder.newLine();
             {
               Iterable<EAttribute> _allAttributes = Ecore2XtextExtensions.allAttributes(_eClass);
               for(final EAttribute attr : _allAttributes) {
+                _builder.append("\t");
+                _builder.append("\t");
                 CharSequence _assigment_1 = this.assigment(attr);
-                _builder.append(_assigment_1, "");
+                _builder.append(_assigment_1, "		");
                 _builder.newLineIfNotEmpty();
               }
             }
             {
               Iterable<EReference> _allCrossReferences = Ecore2XtextExtensions.allCrossReferences(_eClass);
               for(final EReference ref : _allCrossReferences) {
+                _builder.append("\t");
+                _builder.append("\t");
                 CharSequence _assigment_2 = this.assigment(ref);
-                _builder.append(_assigment_2, "");
+                _builder.append(_assigment_2, "		");
                 _builder.newLineIfNotEmpty();
               }
             }
             {
               Iterable<EReference> _allContainmentReferences = Ecore2XtextExtensions.allContainmentReferences(_eClass);
               for(final EReference conti : _allContainmentReferences) {
+                _builder.append("\t");
+                _builder.append("\t");
                 CharSequence _assigment_3 = this.assigment(conti);
-                _builder.append(_assigment_3, "");
+                _builder.append(_assigment_3, "		");
                 _builder.newLineIfNotEmpty();
               }
             }
+            _builder.append("\t");
             _builder.append("\'}\'");
           }
         }
@@ -460,8 +479,7 @@ public class Ecore2XtextGrammarCreator {
       }
     }
     if (!_matched) {
-      String _string = it.toString();
-      String _plus = ("No rule template for " + _string);
+      String _plus = ("No rule template for " + it);
       IllegalStateException _illegalStateException = new IllegalStateException(_plus);
       throw _illegalStateException;
     }

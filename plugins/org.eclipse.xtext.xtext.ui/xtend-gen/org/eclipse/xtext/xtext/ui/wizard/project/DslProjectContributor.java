@@ -8,6 +8,11 @@ import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributo
 import org.eclipse.xtext.xtext.ui.wizard.project.WizardContribution;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 
+/**
+ * Contributes a workflow file and the grammar to the new DSL project
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 @SuppressWarnings("all")
 public class DslProjectContributor extends DefaultProjectFactoryContributor {
   private XtextProjectInfo projectInfo;

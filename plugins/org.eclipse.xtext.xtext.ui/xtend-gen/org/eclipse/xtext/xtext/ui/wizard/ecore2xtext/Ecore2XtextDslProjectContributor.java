@@ -15,6 +15,11 @@ import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor;
 
+/**
+ * Contributes a workflow file and the grammar to the new Ecore2Xtext DSL project
+ * @author Dennis Huebner - Initial contribution and API
+ * @since 2.3
+ */
 @SuppressWarnings("all")
 public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor {
   private Ecore2XtextProjectInfo projectInfo;
