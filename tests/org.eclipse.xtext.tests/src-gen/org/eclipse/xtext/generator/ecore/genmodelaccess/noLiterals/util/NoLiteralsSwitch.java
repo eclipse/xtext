@@ -5,6 +5,8 @@
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.util;
 
+import java.util.List;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -25,7 +27,7 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.*;
  * @see org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage
  * @generated
  */
-public class NoLiteralsSwitch<T> extends Switch<T>
+public class NoLiteralsSwitch<T>
 {
 	/**
 	 * The cached model package
@@ -43,24 +45,40 @@ public class NoLiteralsSwitch<T> extends Switch<T>
 	 */
 	public NoLiteralsSwitch()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = NoLiteralsPackage.eINSTANCE;
 		}
 	}
 
 	/**
-	 * Checks whether this is a switch for the given package.
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
-	protected boolean isSwitchFor(EPackage ePackage)
-	{
-		return ePackage == modelPackage;
+	public T doSwitch(EObject theEObject) {
+		return doSwitch(theEObject.eClass(), theEObject);
+	}
+
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch(eSuperTypes.get(0), theEObject);
+		}
 	}
 
 	/**
@@ -73,10 +91,8 @@ public class NoLiteralsSwitch<T> extends Switch<T>
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID)
-		{
-			case NoLiteralsPackage.NO_LIT_CLASS:
-			{
+		switch (classifierID) {
+			case NoLiteralsPackage.NO_LIT_CLASS: {
 				NoLitClass noLitClass = (NoLitClass)theEObject;
 				T result = caseNoLitClass(noLitClass);
 				if (result == null) result = defaultCase(theEObject);

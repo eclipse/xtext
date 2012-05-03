@@ -32,16 +32,13 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	 */
 	public static RootFactory init()
 	{
-		try
-		{
+		try {
 			RootFactory theRootFactory = (RootFactory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/genmodeltest-v1.0"); 
-			if (theRootFactory != null)
-			{
+			if (theRootFactory != null) {
 				return theRootFactory;
 			}
 		}
-		catch (Exception exception)
-		{
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new RootFactoryImpl();
@@ -66,8 +63,7 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	@Override
 	public EObject create(EClass eClass)
 	{
-		switch (eClass.getClassifierID())
-		{
+		switch (eClass.getClassifierID()) {
 			case RootPackage.ROOT_CLASS: return createRootClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -82,8 +78,7 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue)
 	{
-		switch (eDataType.getClassifierID())
-		{
+		switch (eDataType.getClassifierID()) {
 			case RootPackage.ROOT_ENUM:
 				return createRootEnumFromString(eDataType, initialValue);
 			case RootPackage.ROOT_DATA_TYPE:
@@ -101,8 +96,7 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue)
 	{
-		switch (eDataType.getClassifierID())
-		{
+		switch (eDataType.getClassifierID()) {
 			case RootPackage.ROOT_ENUM:
 				return convertRootEnumToString(eDataType, instanceValue);
 			case RootPackage.ROOT_DATA_TYPE:

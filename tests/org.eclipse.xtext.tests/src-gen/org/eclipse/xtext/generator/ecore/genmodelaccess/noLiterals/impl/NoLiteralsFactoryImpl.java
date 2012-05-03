@@ -32,16 +32,13 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	 */
 	public static NoLiteralsFactory init()
 	{
-		try
-		{
+		try {
 			NoLiteralsFactory theNoLiteralsFactory = (NoLiteralsFactory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/genmodeltest-noliterals-v1.0"); 
-			if (theNoLiteralsFactory != null)
-			{
+			if (theNoLiteralsFactory != null) {
 				return theNoLiteralsFactory;
 			}
 		}
-		catch (Exception exception)
-		{
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new NoLiteralsFactoryImpl();
@@ -66,8 +63,7 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	@Override
 	public EObject create(EClass eClass)
 	{
-		switch (eClass.getClassifierID())
-		{
+		switch (eClass.getClassifierID()) {
 			case NoLiteralsPackage.NO_LIT_CLASS: return createNoLitClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -82,8 +78,7 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue)
 	{
-		switch (eDataType.getClassifierID())
-		{
+		switch (eDataType.getClassifierID()) {
 			case NoLiteralsPackage.NO_LIT_ENUM:
 				return createNoLitEnumFromString(eDataType, initialValue);
 			case NoLiteralsPackage.NO_LIT_DATA_TYPE:
@@ -101,8 +96,7 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue)
 	{
-		switch (eDataType.getClassifierID())
-		{
+		switch (eDataType.getClassifierID()) {
 			case NoLiteralsPackage.NO_LIT_ENUM:
 				return convertNoLitEnumToString(eDataType, instanceValue);
 			case NoLiteralsPackage.NO_LIT_DATA_TYPE:

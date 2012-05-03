@@ -40,8 +40,7 @@ public class RootAdapterFactory extends AdapterFactoryImpl
 	 */
 	public RootAdapterFactory()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = RootPackage.eINSTANCE;
 		}
 	}
@@ -57,12 +56,10 @@ public class RootAdapterFactory extends AdapterFactoryImpl
 	@Override
 	public boolean isFactoryForType(Object object)
 	{
-		if (object == modelPackage)
-		{
+		if (object == modelPackage) {
 			return true;
 		}
-		if (object instanceof EObject)
-		{
+		if (object instanceof EObject) {
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -75,16 +72,13 @@ public class RootAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected RootSwitch<Adapter> modelSwitch =
-		new RootSwitch<Adapter>()
-		{
+		new RootSwitch<Adapter>() {
 			@Override
-			public Adapter caseRootClass(RootClass object)
-			{
+			public Adapter caseRootClass(RootClass object) {
 				return createRootClassAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object)
-			{
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};

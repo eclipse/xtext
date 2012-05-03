@@ -31,16 +31,13 @@ public class NestedPackage1FactoryImpl extends EFactoryImpl implements NestedPac
 	 */
 	public static NestedPackage1Factory init()
 	{
-		try
-		{
+		try {
 			NestedPackage1Factory theNestedPackage1Factory = (NestedPackage1Factory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/genmodeltest-nested-v1.0"); 
-			if (theNestedPackage1Factory != null)
-			{
+			if (theNestedPackage1Factory != null) {
 				return theNestedPackage1Factory;
 			}
 		}
-		catch (Exception exception)
-		{
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new NestedPackage1FactoryImpl();
@@ -65,8 +62,7 @@ public class NestedPackage1FactoryImpl extends EFactoryImpl implements NestedPac
 	@Override
 	public EObject create(EClass eClass)
 	{
-		switch (eClass.getClassifierID())
-		{
+		switch (eClass.getClassifierID()) {
 			case NestedPackage1Package.NESTED_CLASS1: return createNestedClass1();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
