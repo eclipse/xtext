@@ -216,6 +216,7 @@ public class WorkbenchTestHelper extends Assert {
 				XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(newArrayList(
 				"com.google.inject",
+				"org.eclipse.xtend.lib", 
 				"org.eclipse.xtext.xbase.lib", 
 				"org.junit4"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
