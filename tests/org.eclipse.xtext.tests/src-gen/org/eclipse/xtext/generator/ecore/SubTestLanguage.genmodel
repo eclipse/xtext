@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="SubTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="SuperTestLanguage.genmodel#//superPackage">
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.5" usedGenPackages="SuperTestLanguage.genmodel#//superPackage">
   <genPackages prefix="SubPackage" basePackage="org.eclipse.xtext.generator.ecore"
       disposableProviderFactory="true" ecorePackage="SubTestLanguage.ecore#/">
     <genClasses ecoreClass="SubTestLanguage.ecore#//SubMain">

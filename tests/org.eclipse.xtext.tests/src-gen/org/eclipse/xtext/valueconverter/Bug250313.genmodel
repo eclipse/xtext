@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug250313"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug250313" basePackage="org.eclipse.xtext.valueconverter" disposableProviderFactory="true"
       ecorePackage="Bug250313.ecore#/">
     <genClasses ecoreClass="Bug250313.ecore#//Model">

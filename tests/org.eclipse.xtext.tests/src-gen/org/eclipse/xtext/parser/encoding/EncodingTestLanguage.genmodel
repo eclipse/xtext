@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="EncodingTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="EncodingTest" basePackage="org.eclipse.xtext.parser.encoding"
       disposableProviderFactory="true" ecorePackage="EncodingTestLanguage.ecore#/">
     <genClasses ecoreClass="EncodingTestLanguage.ecore#//Model">
