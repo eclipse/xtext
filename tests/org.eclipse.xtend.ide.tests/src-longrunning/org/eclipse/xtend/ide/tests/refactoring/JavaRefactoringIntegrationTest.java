@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
@@ -88,6 +90,23 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameJavaClassAndImport() throws Exception {
+		try {
+			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
+			String xtendModel = "import java.util.List import test.JavaClass class XtendClass { List<JavaClass> x }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IType javaClass = findJavaType("test.JavaClass");
+			assertNotNull(javaClass);
+			renameJavaElement(javaClass, "NewJavaClass");
+			IResourcesSetupUtil.waitForAutoBuild();
+			assertFileContains(xtendClass, "import test.NewJavaClass");
+			assertFileContains(xtendClass, "List<NewJavaClass> x");
+		} finally {
+			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
 	public void testRenameRefToJavaClass() throws Exception {
 		try {
 			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
@@ -102,7 +121,26 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
+	
+	@Test 
+	public void testRenameRefToJavaClassAndImport() throws Exception {
+		try {
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
+		String xtendModel = "import java.util.List import test.JavaClass class XtendClass { List<JavaClass> x }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+		assertFileExists("src/test/NewJavaClass.java");
+		IResourcesSetupUtil.waitForAutoBuild();
+		synchronize(editor);
+		assertTrue(editor.getDocument().get(), equalsIgnoreWhitespace(xtendModel.replace("JavaClass", "NewJavaClass"), 
+				editor.getDocument().get()));
+	} finally {
+		testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
+	}
 
+	}
+	
 	@Test
 	public void testRenameJavaConstructor() throws Exception {
 		try {
