@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -27,6 +28,7 @@ import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,6 +36,8 @@ import org.junit.Test;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class TextChangeCombinerTest {
+
+	private static final String PROJECT = "text.change.combiner.test";
 
 	private static final String MODEL = "0123456789";
 
@@ -43,13 +47,13 @@ public class TextChangeCombinerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		file0 = IResourcesSetupUtil.createFile("test/file0.txt", MODEL);
+		file0 = IResourcesSetupUtil.createFile(PROJECT+  "/file0.txt", MODEL);
 	}
 
-	@After
+	@AfterClass
 	public void tearDown() throws Exception {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		IResourcesSetupUtil.cleanWorkspace();
+		ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT).delete(true, new NullProgressMonitor());
 	}
 
 	@Test
@@ -122,7 +126,7 @@ public class TextChangeCombinerTest {
 
 	@Test
 	public void testMixedChanges() throws Exception {
-		IFile file1 = IResourcesSetupUtil.createFile("test/file1.txt", MODEL);
+		IFile file1 = IResourcesSetupUtil.createFile(PROJECT + "/file1.txt", MODEL);
 		IDocument document = openDocument(file1);
 		CompositeChange compositeChange = new CompositeChange("test");
 		compositeChange.add(createDocumentChange(document, 1, 1, "foo"));
