@@ -128,7 +128,7 @@ public class FeatureOverridesService {
 		if (overriding instanceof JvmOperation && overridden instanceof JvmOperation) {
 			JvmOperation overridingOp = (JvmOperation) overriding;
 			JvmOperation overriddenOp = (JvmOperation) overridden;
-			if(!isSameNumberOfTypeParameter(overridingOp, overriddenOp))
+			if(!hasSameTypeParameters(overridingOp, overriddenOp, context))
 				return false;
 			if (!isSameNumberOfArguments(overridingOp, overriddenOp))
 				return false;
@@ -161,8 +161,23 @@ public class FeatureOverridesService {
 		return overriding.getSimpleName().equals(overridden.getSimpleName());
 	}
 
-	protected boolean isSameNumberOfTypeParameter(JvmOperation overriding, JvmOperation overridden){
-		return overriding.getTypeParameters().size() == overridden.getTypeParameters().size();
+	protected boolean hasSameTypeParameters(JvmOperation overriding, JvmOperation overridden, final ITypeArgumentContext context){
+		if(!(overriding.getTypeParameters().size() == overridden.getTypeParameters().size()))
+			return false;
+		for(JvmTypeParameter overriddenTypParameter : overridden.getTypeParameters()){
+			boolean matches = false;
+			Iterator<JvmTypeParameter> iter = Sets.newHashSet(overriding.getTypeParameters()).iterator();
+			while (iter.hasNext() && !matches) {
+				JvmTypeParameter  overridingTypeParameter = iter.next();
+				if(isSameConstraints(overridingTypeParameter, overriddenTypParameter, context)){
+					matches = true;
+					iter.remove();
+				}
+			}
+			if(!matches)
+				return false;
+		}
+		return true;
 	}
 
 	protected boolean isSameNumberOfArguments(JvmOperation overriding, JvmOperation overridden) {
@@ -196,7 +211,6 @@ public class FeatureOverridesService {
 			Iterator<JvmTypeConstraint> iter = overriddenConstraints.iterator();
 			while (iter.hasNext() && !matches) {
 				JvmTypeConstraint overriddenConstraint = iter.next();
-				overriddenConstraint.getSimpleName();
 				JvmTypeReference overridingType = context.getLowerBound(overridingConstraint.getTypeReference());
 				JvmTypeReference overriddenType = context.getLowerBound(overriddenConstraint.getTypeReference());
 				if (EcoreUtil.equals(overridingType, overriddenType)) {
