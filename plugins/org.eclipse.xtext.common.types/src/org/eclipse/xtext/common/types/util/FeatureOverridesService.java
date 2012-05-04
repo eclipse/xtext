@@ -202,13 +202,14 @@ public class FeatureOverridesService {
 
 	protected boolean isSameConstraints(JvmConstraintOwner overridingConstraintOwner,
 			JvmConstraintOwner overriddenConstraintOwner, ITypeArgumentContext context) {
-		EList<JvmTypeConstraint> constraints = overriddenConstraintOwner.getConstraints();
-		Set<JvmLowerBound> lowerBoundConstraints = Sets.newHashSet(Iterables.filter(constraints, JvmLowerBound.class));
-		Set<JvmUpperBound> upperBoundConstraints = Sets.newHashSet(Iterables.filter(constraints, JvmUpperBound.class));
-		Set<JvmTypeConstraint> overriddenConstraints = Sets.newHashSet(lowerBoundConstraints.size()>0?lowerBoundConstraints:upperBoundConstraints);
-		for (JvmTypeConstraint overridingConstraint : overridingConstraintOwner.getConstraints()) {
+		EList<JvmTypeConstraint> overriddenConstraints = overriddenConstraintOwner.getConstraints();
+		Set<JvmLowerBound> overriddenLowerBoundConstraints = Sets.newHashSet(Iterables.filter(overriddenConstraints, JvmLowerBound.class));
+		Set<JvmUpperBound> overriddenUpperBoundConstraints = Sets.newHashSet(Iterables.filter(overriddenConstraints, JvmUpperBound.class));
+		Set<JvmTypeConstraint> filteredOverriddenConstraints = Sets.newHashSet(overriddenLowerBoundConstraints.size()>0?overriddenLowerBoundConstraints:overriddenUpperBoundConstraints);
+		EList<JvmTypeConstraint> overridingConstraints = overridingConstraintOwner.getConstraints();
+		for (JvmTypeConstraint overridingConstraint : overriddenLowerBoundConstraints.size()>0?Iterables.filter(overridingConstraints, JvmLowerBound.class):Iterables.filter(overridingConstraints, JvmUpperBound.class)) {
 			boolean matches = false;
-			Iterator<JvmTypeConstraint> iter = overriddenConstraints.iterator();
+			Iterator<JvmTypeConstraint> iter = filteredOverriddenConstraints.iterator();
 			while (iter.hasNext() && !matches) {
 				JvmTypeConstraint overriddenConstraint = iter.next();
 				JvmTypeReference overridingType = context.getLowerBound(overridingConstraint.getTypeReference());
@@ -227,7 +228,7 @@ public class FeatureOverridesService {
 			if (!matches)
 				return false;
 		}
-		if (overriddenConstraints.isEmpty())
+		if (filteredOverriddenConstraints.isEmpty())
 			return true;
 		return false;
 	}
