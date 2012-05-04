@@ -39,6 +39,10 @@
 		<Package name="org.eclipse.xtext.xbase.compiler" />
 		<Bug pattern="EC_NULL_ARG" />
 	</Match>
+	<Match>
+		<Package name="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext" />
+		<Bug pattern="EC_NULL_ARG" />
+	</Match>
 	
 	<!-- API base line, can't workaround -->
 	<Match>
