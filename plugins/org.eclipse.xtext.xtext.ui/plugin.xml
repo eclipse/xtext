@@ -182,7 +182,7 @@
          	</description>
 		</wizard>
 		<wizard
-			category="org.eclipse.xtext.projectwiz"
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.projectwiz.releng"
 			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.releng.NewRelengProjectWizard"
 			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.releng.NewRelengProjectWizard"
@@ -192,6 +192,11 @@
             	%NewXtext_Releng_Project.description
          	</description>
 		</wizard>
+  <category
+        id="org.eclipse.xtext.projectwiz.releng"
+        name="%Xtext_Wizard_Releng_Category"
+        parentCategory="org.eclipse.xtext.projectwiz">
+  </category>
 	</extension>
 	
 	<extension

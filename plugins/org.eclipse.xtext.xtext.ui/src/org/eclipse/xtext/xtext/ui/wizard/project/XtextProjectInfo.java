@@ -30,7 +30,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private boolean createTestProject = false;
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
-	private IPath projectLocation;
+	private IPath projectsRootLocation;
 	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
 	private boolean createFeatureProject;
@@ -170,24 +170,24 @@ public class XtextProjectInfo implements IProjectInfo {
 		return workbench;
 	}
 
-	public void setProjectLocation(IPath projectLocation) {
-		this.projectLocation = projectLocation;
+	public void setProjectsRootLocation(IPath projectsRootLocation) {
+		this.projectsRootLocation = projectsRootLocation;
 	}
 
-	public IPath getProjectLocation() {
-		return projectLocation;
+	public IPath getDslProjectLocation() {
+		return projectsRootLocation.append(getProjectName());
 	}
 
 	public IPath getUiProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getUiProjectName());
+		return projectsRootLocation.append(getUiProjectName());
 	}
 
 	public IPath getTestProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getTestProjectName());
+		return projectsRootLocation.append(getTestProjectName());
 	}
 
 	public IPath getFeatureProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getFeatureProjectName());
+		return projectsRootLocation.append(getFeatureProjectName());
 	}
 
 	/**

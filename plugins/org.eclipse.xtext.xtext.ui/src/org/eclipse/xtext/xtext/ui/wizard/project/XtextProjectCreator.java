@@ -158,14 +158,14 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.setProjectName(getXtextProjectInfo().getProjectName());
 		factory.addProjectNatures(getDslProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
-		factory.setLocation(getXtextProjectInfo().getProjectLocation());
+		factory.setLocation(getXtextProjectInfo().getDslProjectLocation());
 		factory.addContributor(createDslProjectContributor());
 	}
 
 	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList(
-				"org.eclipse.xtext;bundle-version=\"2.1.0\";visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.xtext.xbase;bundle-version=\"2.1.0\";resolution:=optional;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
