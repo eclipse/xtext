@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtext.ui.wizard.releng;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.xtext.ui.wizard.releng.messages"; //$NON-NLS-1$
