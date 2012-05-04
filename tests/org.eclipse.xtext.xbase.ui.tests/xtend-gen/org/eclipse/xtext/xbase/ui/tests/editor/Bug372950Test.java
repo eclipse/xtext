@@ -5,20 +5,24 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class Bug372950Test extends AbstractXbaseContentAssistBugTest {
+  @Ignore
   @Test
   public void testProposeStringBuffer_01() throws Exception {
     this.shouldPropose("if (true) {} else { if (o as String != 1 && o instanceof StringBuff", StringBuffer.class);
   }
   
+  @Ignore
   @Test
   public void testProposeStringBuffer_02() throws Exception {
     this.shouldPropose("if (true) {} else { if (o as String != 1d && o instanceof StringBuff", StringBuffer.class);
   }
   
+  @Ignore
   @Test
   public void testProposeStringBuffer_03() throws Exception {
     this.shouldPropose("if (true) {} else { if (o as String != 1.1e5 && o instanceof StringBuff", StringBuffer.class);
