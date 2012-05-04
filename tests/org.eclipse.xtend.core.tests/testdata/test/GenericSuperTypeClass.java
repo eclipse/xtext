@@ -2,6 +2,7 @@ package test;
 
 import java.io.Serializable;
 import java.util.List;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public abstract class GenericSuperTypeClass<T> {
 	public abstract <T1 extends Object> T1[] getValue1(final List<T1> t);
@@ -21,4 +22,8 @@ public abstract class GenericSuperTypeClass<T> {
 	public abstract <T1 extends Object, T2 extends T1> T1[] getValue8(final List<T1> t, final List<T2> t2);
 
 	public abstract <T2 extends Object, T1 extends Serializable & CharSequence> T1[] getValue9(final List<T1> t);
+
+	public abstract <T5 extends CharSequence> void foo1();
+
+	public abstract <T6> void foo2(T t, Procedure1<? super T> proc);
 }

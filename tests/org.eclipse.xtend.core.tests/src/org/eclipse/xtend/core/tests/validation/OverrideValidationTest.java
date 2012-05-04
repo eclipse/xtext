@@ -132,6 +132,27 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendClass);
 	}
 
+	@Test public void testOverrideGenericMethod_10() throws Exception {
+		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <T extends String> foo1() {}"+
+									"}");
+		helper.assertError(xtendClass, XTEND_FUNCTION, DUPLICATE_METHOD);
+	}
+
+	@Test public void testOverrideGenericMethod_11() throws Exception {
+		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <T extends CharSequence> foo1() {}"+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+
+	@Test public void testOverrideGenericMethod_12() throws Exception {
+		XtendClass xtendClass = clazz(" import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <T> void foo2(T t, (T)=>void proc){} "+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+
 	@Test public void testObsoleteOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { override bar() {true} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
