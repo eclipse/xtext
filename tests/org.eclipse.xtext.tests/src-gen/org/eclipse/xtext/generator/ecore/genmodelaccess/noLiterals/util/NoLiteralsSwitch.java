@@ -1,16 +1,11 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.util;
 
 import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.*;
 
@@ -27,8 +22,7 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.*;
  * @see org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage
  * @generated
  */
-public class NoLiteralsSwitch<T>
-{
+public class NoLiteralsSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -43,8 +37,7 @@ public class NoLiteralsSwitch<T>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NoLiteralsSwitch()
-	{
+	public NoLiteralsSwitch() {
 		if (modelPackage == null) {
 			modelPackage = NoLiteralsPackage.eINSTANCE;
 		}
@@ -88,9 +81,7 @@ public class NoLiteralsSwitch<T>
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
-	protected T doSwitch(int classifierID, EObject theEObject)
-	{
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case NoLiteralsPackage.NO_LIT_CLASS: {
 				NoLitClass noLitClass = (NoLitClass)theEObject;
@@ -113,8 +104,7 @@ public class NoLiteralsSwitch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNoLitClass(NoLitClass object)
-	{
+	public T caseNoLitClass(NoLitClass object) {
 		return null;
 	}
 
@@ -129,9 +119,7 @@ public class NoLiteralsSwitch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	@Override
-	public T defaultCase(EObject object)
-	{
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

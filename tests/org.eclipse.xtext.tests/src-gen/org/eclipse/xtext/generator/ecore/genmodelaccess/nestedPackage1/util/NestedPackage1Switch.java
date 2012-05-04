@@ -1,16 +1,11 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.util;
 
 import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.*;
 
@@ -27,8 +22,7 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.*;
  * @see org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedPackage1Package
  * @generated
  */
-public class NestedPackage1Switch<T>
-{
+public class NestedPackage1Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -43,8 +37,7 @@ public class NestedPackage1Switch<T>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NestedPackage1Switch()
-	{
+	public NestedPackage1Switch() {
 		if (modelPackage == null) {
 			modelPackage = NestedPackage1Package.eINSTANCE;
 		}
@@ -88,9 +81,7 @@ public class NestedPackage1Switch<T>
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
-	protected T doSwitch(int classifierID, EObject theEObject)
-	{
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case NestedPackage1Package.NESTED_CLASS1: {
 				NestedClass1 nestedClass1 = (NestedClass1)theEObject;
@@ -113,8 +104,7 @@ public class NestedPackage1Switch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNestedClass1(NestedClass1 object)
-	{
+	public T caseNestedClass1(NestedClass1 object) {
 		return null;
 	}
 
@@ -129,9 +119,7 @@ public class NestedPackage1Switch<T>
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	@Override
-	public T defaultCase(EObject object)
-	{
+	public T defaultCase(EObject object) {
 		return null;
 	}
 
