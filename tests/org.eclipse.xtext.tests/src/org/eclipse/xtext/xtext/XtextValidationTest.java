@@ -1485,7 +1485,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Grammar grammar = (Grammar) getModel(grammarAsText);
 		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
 		XtextValidator validator = get(XtextValidator.class);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, false, true);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkTerminalRuleNamingConventions(rule);
 		messageAcceptor.validate();
