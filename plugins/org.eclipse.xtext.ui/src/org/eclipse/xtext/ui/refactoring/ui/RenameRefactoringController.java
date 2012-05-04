@@ -55,6 +55,13 @@ public class RenameRefactoringController {
 	private String newName;
 	
 	public void initialize(IRenameElementContext renameElementContext) {
+		if (activeLinkedMode != null) {
+			if (activeLinkedMode.isSameRenameElementContext(renameElementContext)) {
+				return;
+			} else {
+				cancelLinkedMode();
+			}
+		}
 		this.renameElementContext = renameElementContext;
 		this.newName = null;
 	}
@@ -100,15 +107,8 @@ public class RenameRefactoringController {
 	}
 
 	protected void startLinkedEditing() {
-		if (activeLinkedMode != null) {
-			if (activeLinkedMode.isSameRenameElementContext(renameElementContext)) {
-				startRefactoring(RefactoringType.REFACTORING_DIALOG);
-				return;
-			} else {
-				cancelLinkedMode();
-			}
-		}
-
+		if (activeLinkedMode != null) 
+			startRefactoring(RefactoringType.REFACTORING_DIALOG);
 		try {
 			final XtextEditor xtextEditor = getXtextEditor();
 			if (xtextEditor != null) {
