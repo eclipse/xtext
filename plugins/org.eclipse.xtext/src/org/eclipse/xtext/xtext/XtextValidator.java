@@ -1098,7 +1098,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkTerminalRuleNamingConventions(TerminalRule terminalRule){
 		if(!terminalRule.getName().equals(terminalRule.getName().toUpperCase()))
-			error("TerminalRule must be written in uppercase.", terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(),INVALID_TERMINALRULE_NAME, terminalRule.getName());
+			warning("TerminalRule must be written in uppercase.", terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(),INVALID_TERMINALRULE_NAME, terminalRule.getName());
 	}
 
 }
