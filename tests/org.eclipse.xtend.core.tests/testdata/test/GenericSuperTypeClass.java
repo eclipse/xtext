@@ -5,6 +5,9 @@ import java.util.List;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public abstract class GenericSuperTypeClass<T> {
+
+	public abstract <T> T getSomething(T t);
+
 	public abstract <T1 extends Object> T1[] getValue1(final List<T1> t);
 
 	public abstract <T2 extends Object> T2[] getValue2(final T2[] t);

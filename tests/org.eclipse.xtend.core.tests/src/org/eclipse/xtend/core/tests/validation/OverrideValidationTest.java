@@ -11,9 +11,12 @@ import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.List;
+
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import test.GenericSuperTypeClass;
@@ -152,6 +155,31 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
+
+	@Test public void testOverrideReturnType() throws Exception {
+		XtendClass xtendClass = clazz("abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <T> T getSomething(T t){} "+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+
+	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
+	@Test public void testOverrideReturnType_1() throws Exception {
+		XtendClass xtendClass = clazz("import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"override <T1> T1[] getValue1(List<T1> t) {}" +
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+
+	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
+	@Test public void testOverrideReturnType_2() throws Exception {
+		XtendClass xtendClass = clazz("import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
+									"<T3> List<T3> List<T3> getValue3(final List<T3> t) {}" +
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+
+
 
 	@Test public void testObsoleteOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { override bar() {true} }");

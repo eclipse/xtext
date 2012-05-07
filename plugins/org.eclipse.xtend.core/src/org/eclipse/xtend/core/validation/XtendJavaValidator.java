@@ -66,6 +66,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -613,14 +614,23 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		for(JvmTypeReference unhandledException: findUnhandledExceptions(function, function.getExceptions(),overriddenOperation.getExceptions()))
 			error("Exception " + unhandledException.getSimpleName() + " is not compatible with throws clause in " +
 					overriddenOperation.getIdentifier(), XTEND_FUNCTION__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
-		if (function.getReturnType() == null)
+		JvmTypeReference returnType = function.getReturnType();
+		if (returnType == null)
 			return;
 		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
 				.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(getTypeRefs().createTypeRef(
 						inferredOperation.getDeclaringType())));
 		JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(overriddenOperation.getReturnType(),
 				function);
-		if (!isConformant(returnTypeUpperBound, function.getReturnType())) {
+		//TODO: Rethink about this 80% fix when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed
+		// T[] and List<T> will result in an error as before but T is fixed with this small workaround
+		// There are two failing ignored tests in org.eclipse.xtend.core.tests.validation.OverrideValidationTest that should be green after the fix
+		// org.eclipse.xtend.core.tests.validation.OverrideValidationTest.testOverrideReturnType_1()
+		// org.eclipse.xtend.core.tests.validation.OverrideValidationTest.testOverrideReturnType_2()
+		if(returnType.getType() instanceof JvmTypeParameter && returnTypeUpperBound.getType() instanceof JvmTypeParameter)
+			return;
+
+		if (!isConformant(returnTypeUpperBound, returnType)) {
 			error("The return type is incompatible with " + overriddenOperation.getIdentifier(), function,
 					XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
 		}
