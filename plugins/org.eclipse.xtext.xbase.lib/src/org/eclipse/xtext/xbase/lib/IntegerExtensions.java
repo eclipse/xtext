@@ -44,11 +44,7 @@ public class IntegerExtensions {
 	 * @since 2.3
 	 */
 	public static Iterable<Integer> upTo(final int a, final int b) {
-		return new Iterable<Integer>() {
-			public Iterator<Integer> iterator() {
-				return new IntIterator(a, b);
-			}
-		};
+		return new IntegerRange(a, b);
 	}
 
 	/**
@@ -206,7 +202,9 @@ public class IntegerExtensions {
 
 	/**
 	 * Implementation of an iterator for integers.
+	 * @deprecated use {@link IntegerRange} instead.
 	 */
+	@Deprecated
 	protected static class IntIterator implements Iterator<Integer> {
 		private int current;
 		private int upTo;
