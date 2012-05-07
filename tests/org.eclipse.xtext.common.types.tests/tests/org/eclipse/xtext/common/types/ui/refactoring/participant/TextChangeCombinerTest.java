@@ -144,6 +144,12 @@ public class TextChangeCombinerTest {
 		assertEquals(MODEL, getContents(file0));
 	}
 
+	@Test
+	public void testEmptyChange() throws Exception {
+		CompositeChange emptyChange = new CompositeChange("test");
+		assertNull(combiner.combineChanges(emptyChange));
+	}
+	
 	protected IDocument openDocument(IFile file) throws PartInitException {
 		FileEditorInput fileEditorInput = new FileEditorInput(file);
 		AbstractTextEditor editor = (AbstractTextEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow()
