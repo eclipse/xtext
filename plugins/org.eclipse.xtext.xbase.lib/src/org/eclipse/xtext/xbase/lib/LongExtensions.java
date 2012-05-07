@@ -80,10 +80,44 @@ public class LongExtensions {
 	 * @param distance 
 	 *            the number of times to shift.
 	 * @return <code>a&lt;&lt;distance</code>
+	 * @deprecated use {@link #operator_doubleLessThan(long, int)} instead.
 	 */
+	@Deprecated
 	@Inline("($1 << $2)")
 	public static long shiftLeft(long a, int distance) {
 		return a << distance;
+	}
+
+	/**
+	 * The binary <code>signed left shift</code> operator. This is the equivalent to the java <code>&lt;&lt;</code> operator.
+	 * Fills in a zero as the least significant bit.
+	 * 
+	 * @param a
+	 *            a long.
+	 * @param distance 
+	 *            the number of times to shift.
+	 * @return <code>a&lt;&lt;distance</code>
+	 */
+	@Inline("($1 << $2)")
+	public static long operator_doubleLessThan(long a, int distance) {
+		return a << distance;
+	}
+
+	/**
+	 * The binary <code>signed right sift</code> operator. This is the equivalent to the java <code>&gt;&gt;</code> operator.
+	 * Shifts in the value of the sign bit as the leftmost bit, thus preserving the sign of the initial value.
+	 * 
+	 * @param a
+	 *            a long.
+	 * @param distance 
+	 *            the number of times to shift.
+	 * @return <code>a&gt;&gt;distance</code>
+	 * @deprecated use {@link #operator_doubleGreaterThan(long, int)} instead.
+	 */
+	@Deprecated
+	@Inline("($1 >> $2)")
+	public static long shiftRight(long a, int distance) {
+		return a >> distance;
 	}
 
 	/**
@@ -97,8 +131,25 @@ public class LongExtensions {
 	 * @return <code>a&gt;&gt;distance</code>
 	 */
 	@Inline("($1 >> $2)")
-	public static long shiftRight(long a, int distance) {
+	public static long operator_doubleGreaterThan(long a, int distance) {
 		return a >> distance;
+	}
+
+	/**
+	 * The binary <code>unsigned right shift</code> operator. This is the equivalent to the java <code>&gt;&gt;&gt;</code> operator.
+	 * Shifts in zeros into as leftmost bits, thus always yielding a positive integer.
+	 * 
+	 * @param a
+	 *            a long.
+	 * @param distance
+	 *            the number of times to shift.
+	 * @return <code>a&gt;&gt;&gt;distance</code>
+	 * @deprecated use {@link #operator_tripleGreaterThan(long, int)} instead.
+	 */
+	@Deprecated
+	@Inline("($1 >>> $2)")
+	public static long shiftRightUnsigned(long a, int distance) {
+		return a >>> distance;
 	}
 
 	/**
@@ -112,7 +163,7 @@ public class LongExtensions {
 	 * @return <code>a&gt;&gt;&gt;distance</code>
 	 */
 	@Inline("($1 >>> $2)")
-	public static long shiftRightUnsigned(long a, int distance) {
+	public static long operator_tripleGreaterThan(long a, int distance) {
 		return a >>> distance;
 	}
 
