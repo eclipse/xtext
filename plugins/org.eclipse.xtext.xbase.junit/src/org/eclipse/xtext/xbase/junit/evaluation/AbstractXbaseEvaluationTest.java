@@ -2407,6 +2407,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(2 << 1, "2 << 1");
 	}
 
+	@Test public void testLongShiftOperations_01() throws Exception {
+		assertEvaluatesTo(2l >> 1, "2l >> 1");
+	}
+	@Test public void testLongShiftOperations_02() throws Exception {
+		assertEvaluatesTo(-2l >>> 1, " -2l >>> 1");
+	}
+	@Test public void testLongShiftOperations_03() throws Exception {
+		assertEvaluatesTo(2l << 1, "2l << 1");
+	}
+
 	@Test public void testBigIntegerBitOperations() throws Exception {
 		assertEvaluatesTo(new BigInteger("1").or(new BigInteger("2")).and(new BigInteger("3")).not(), 
 				"1BI.or(2BI).and(3BI).not()"); 
