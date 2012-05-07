@@ -17,6 +17,13 @@
 		<Method name="setToDefault" />
 		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
 	</Match>
+	<!-- "==" compare is desired -->
+	<Match>
+		<Class
+			name="org.eclipse.xtext.impl.EnumLiteralDeclarationImpl" />
+		<Method name="getEnumLiteral" />
+		<Bug pattern="EC_UNRELATED_TYPES_USING_POINTER_EQUALITY" />
+	</Match>
 	
 	<!-- Deprecated -->
 	<Match>
