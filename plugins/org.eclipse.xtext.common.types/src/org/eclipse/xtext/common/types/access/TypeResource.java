@@ -88,8 +88,12 @@ public class TypeResource extends ResourceImpl {
 	
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		if (getURI() != null && mirror != null) {
-			mirror.initialize(this);
+		try {
+			if (getURI() != null && mirror != null) {
+				mirror.initialize(this);
+			}
+		} catch(Exception e) {
+			throw new IOException(e);
 		}
 	}
 	
