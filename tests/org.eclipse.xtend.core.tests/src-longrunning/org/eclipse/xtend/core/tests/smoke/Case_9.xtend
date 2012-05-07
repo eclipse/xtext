@@ -5,8 +5,9 @@ package org.eclipse.xtend.core.tests.smoke
 
 import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EObject
+import java.util.List
 
-class Case_9 {
+class Case_9 extends Case_8 {
 	
 	def dispatch CharSequence generateTypeRef(ENamedElement c) {
 		  if (c.eContainer != null)
@@ -20,5 +21,10 @@ class Case_9 {
 	def dispatch CharSequence generateTypeRef(EObject o) {
 	  	o.eContainer.generateTypeRef
 	}  
+	
+	override <T1> /*List<List<T1>>*/ foo(T1 t) {
+        val List<List<T1>> x = super.foo(t)
+        return null
+    }
 		
 }
