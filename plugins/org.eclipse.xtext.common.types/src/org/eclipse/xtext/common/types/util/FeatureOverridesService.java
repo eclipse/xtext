@@ -244,6 +244,11 @@ public class FeatureOverridesService {
 		private DeepChecker(ITypeArgumentContext context) {
 			this.context = context;
 		}
+		
+		@Override
+		protected Boolean handleNullReference(JvmTypeReference parameter) {
+			return Boolean.FALSE;
+		}
 
 		@Override
 		public Boolean doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, JvmTypeReference param) {

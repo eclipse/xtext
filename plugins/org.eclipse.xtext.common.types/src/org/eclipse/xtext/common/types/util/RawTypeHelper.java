@@ -247,6 +247,9 @@ public class RawTypeHelper implements IRawTypeHelper {
 				JvmTypeReference result = null;
 				for(JvmTypeConstraint constraint: constraints) {
 					if (constraint instanceof JvmUpperBound) {
+						if (constraint.getTypeReference() == null || constraint.getTypeReference().getType() == null) {
+							return createObjectReference(resource);
+						}
 						JvmTypeReference rawType = visit(constraint.getTypeReference(), resource);
 						if (result == null) {
 							if (rawType.eContainer() != null) {

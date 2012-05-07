@@ -50,7 +50,9 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 	public void setTypeReference(JvmTypeReference newTypeReference) {
 		if (newTypeReference instanceof JvmWildcardTypeReference)
 			throw new IllegalArgumentException("wildcard type references are not supported as constraint bounds");
-		if (newTypeReference.getType() instanceof JvmPrimitiveType || (newTypeReference.getType() instanceof JvmVoid && !newTypeReference.getType().eIsProxy()))
+		if (newTypeReference != null
+				&& (newTypeReference.getType() instanceof JvmPrimitiveType 
+					|| (newTypeReference.getType() instanceof JvmVoid && !newTypeReference.getType().eIsProxy())))
 			throw new IllegalArgumentException("primitive type references are not supported as constraint bounds");
 		super.setTypeReference(newTypeReference);
 	}
