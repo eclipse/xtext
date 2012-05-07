@@ -7,6 +7,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import static org.junit.Assert.*
+import java.util.List
 
 //@org.junit.runner.RunWith(typeof(XtextRunner))
 //@InjectWith(typeof(ClasspathAwareInjectorProvider))
@@ -38,4 +39,7 @@ class Case_8 {
         assertEquals("FooBar", element.fullyQualifiedName.toString)
     }
 
+	def <T1  extends  Object> List<List<T1>> foo(T1 t) {
+        return null
+    }
 }

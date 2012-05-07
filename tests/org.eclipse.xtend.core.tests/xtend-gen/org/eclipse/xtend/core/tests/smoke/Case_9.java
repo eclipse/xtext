@@ -2,12 +2,14 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.tests.smoke.Case_8;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class Case_9 {
+public class Case_9 extends Case_8 {
   protected CharSequence _generateTypeRef(final ENamedElement c) {
     CharSequence _xifexpression = null;
     EObject _eContainer = c.eContainer();
@@ -37,6 +39,11 @@ public class Case_9 {
     EObject _eContainer = o.eContainer();
     CharSequence _generateTypeRef = this.generateTypeRef(_eContainer);
     return _generateTypeRef;
+  }
+  
+  public <T1 extends Object> List<List<T1>> foo(final T1 t) {
+    final List<List<T1>> x = super.<T1>foo(t);
+    return null;
   }
   
   public CharSequence generateTypeRef(final EObject c) {

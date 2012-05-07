@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.smoke;
 
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -53,5 +54,9 @@ public class Case_8 {
     QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(element);
     String _string = _fullyQualifiedName.toString();
     Assert.assertEquals("FooBar", _string);
+  }
+  
+  public <T1 extends Object> List<List<T1>> foo(final T1 t) {
+    return null;
   }
 }
