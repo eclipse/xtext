@@ -90,7 +90,7 @@ public class Junit4Fragment extends AbstractGeneratorFragment implements IGenera
 	 * @since 2.3
 	 */
 	public String[] getExportedPackagesTests(Grammar grammar) {
-		return null;
+		return new String[]{ getNaming().basePackageRuntime(grammar) };
 	}
 
 	/**
