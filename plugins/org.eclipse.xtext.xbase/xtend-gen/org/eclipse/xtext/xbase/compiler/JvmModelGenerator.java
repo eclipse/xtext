@@ -75,7 +75,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -715,7 +715,7 @@ public class JvmModelGenerator implements IGenerator {
       EList<JvmFormalParameter> _parameters_1 = it.getParameters();
       int _size = _parameters_1.size();
       int _minus = (_size - 1);
-      Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);
+      IntegerRange _upTo = new IntegerRange(0, _minus);
       for (final Integer i : _upTo) {
         {
           int _plus = ((i).intValue() + 1);

@@ -29,24 +29,11 @@ public class IntegerExtensions {
 	 * @return an iterable of integral numbers. Never <code>null</code>.
 	 * @since 2.3
 	 */
-	@Inline(value="$3.upTo($1, $2)", imported=IntegerExtensions.class, statementExpression=true)
-	public static Iterable<Integer> operator_upTo(final int a, final int b) {
-		return upTo(a, b);
-	}
-	
-	/**
-	 * The <code>upTo</code> operator yields an iterable of integral numbers from and including {@code a} up to and including {@code b} if {@code b}
-	 * is larger than {@code a} or otherwise from {@code a} down to {@code b}. If {@code a} == {@code b} the iterable returns just one element.
-	 * 
-	 * @param a the first value that the iterable will offer.
-	 * @param b the last value that the iterable will offer.
-	 * @return an iterable of integral numbers. Never <code>null</code>.
-	 * @since 2.3
-	 */
-	public static Iterable<Integer> upTo(final int a, final int b) {
+	@Inline(value="new $3($1, $2)", imported=IntegerRange.class, statementExpression=true)
+	public static IntegerRange operator_upTo(final int a, final int b) {
 		return new IntegerRange(a, b);
 	}
-
+	
 	/**
 	 * The bitwise inclusive <code>or</code> operation. This is the equivalent to the java <code>|</code> operator.
 	 * 
