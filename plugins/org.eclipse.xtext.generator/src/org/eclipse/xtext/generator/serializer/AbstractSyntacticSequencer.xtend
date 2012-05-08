@@ -28,12 +28,8 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	@Inject extension SyntacticSequencerUtil util
 	
-	override String getQualifiedName(Grammar grammar) {
-		grammar.getName("Abstract", "SyntacticSequencer");		
-	}
-	
-	override getFileContents() {
-		val file = new JavaFile(packageName);
+	override getFileContents(SerializerGenFileNames$GenFileName filename) {
+		val file = new JavaFile(filename.packageName);
 		
 		file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer))
 		file.imported(typeof(RuleCall))
@@ -47,7 +43,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		
 		file.body = '''
 			@SuppressWarnings("all")
-			public class «simpleName» extends AbstractSyntacticSequencer {
+			public class «filename.simpleName» extends AbstractSyntacticSequencer {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
 				«FOR group:util.allAmbiguousTransitionsBySyntax»

@@ -9,15 +9,7 @@ class GrammarConstraints extends GeneratedFile {
 	
 	@Inject extension SemanticSequencerUtil sequencerUtil
 	
-	override getFileExtension() {
-		"xtext"
-	}
-	 	
-	override getQualifiedName(Grammar grammar) {
-		grammar.getName("", "GrammarConstraints")
-	} 	
-	
-	override getFileContents() '''
+	override getFileContents(SerializerGenFileNames$GenFileName filename) '''
 		grammar «grammar.name»«FOR ug:grammar.usedGrammars BEFORE " with " SEPARATOR ", "»«ug.name»«ENDFOR»
 		
 		generate model "http://«grammar.name»"

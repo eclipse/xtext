@@ -29,14 +29,18 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	@Inject SyntacticSequencerPDA2ExtendedDot seq2dot
 	
-	def create result: new SerializerFragmentState() state() {}
+	@Inject SerializerGenFileNames names
+	
+	boolean generateDebugData = false;
+	
+	boolean srcGenOnly = false;
 	
 	def setGenerateDebugData(boolean doGenerate) {
-		state.generateDebugData = doGenerate
+		generateDebugData = doGenerate
 	}
 	
 	def setSrcGenOnly(boolean srcGen) {
-		state.srcGenOnly = srcGen;
+		srcGenOnly = srcGen;
 	}
 	
 	def setGenerateStub(boolean generateStub) {
@@ -45,26 +49,24 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		val bf = new BindFactory();
-		if(state.srcGenOnly) {
-			bf.addTypeToType(typeof(ISemanticSequencer).name, abstractSemanticSequencer.qualifiedName);
-			bf.addTypeToType(typeof(ISyntacticSequencer).name, abstractSyntacticSequencer.qualifiedName);
-		} else {
-			bf.addTypeToType(typeof(ISemanticSequencer).name, semanticSequencer.qualifiedName);
-			bf.addTypeToType(typeof(ISyntacticSequencer).name, syntacticSequencer.qualifiedName);
-		}
+		bf.addTypeToType(typeof(ISemanticSequencer).name, names.semanticSequencer.qualifiedName);
+		bf.addTypeToType(typeof(ISyntacticSequencer).name, names.syntacticSequencer.qualifiedName);
 		bf.addTypeToType(typeof(ISerializer).name, typeof(Serializer).name);
 		return bf.bindings;
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
-		if(!state.srcGenOnly) {
-			ctx.writeFile(Generator::SRC, semanticSequencer.fileName, semanticSequencer.fileContents);
-			ctx.writeFile(Generator::SRC, syntacticSequencer.fileName, syntacticSequencer.fileContents);
+		if(srcGenOnly) {
+			ctx.writeFile(Generator::SRC_GEN, names.semanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.semanticSequencer));
+			ctx.writeFile(Generator::SRC_GEN, names.syntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.syntacticSequencer));
+		} else {
+			ctx.writeFile(Generator::SRC, names.semanticSequencer.fileName, semanticSequencer.getFileContents(names.semanticSequencer));
+			ctx.writeFile(Generator::SRC, names.syntacticSequencer.fileName, syntacticSequencer.getFileContents(names.syntacticSequencer));
+			ctx.writeFile(Generator::SRC_GEN, names.abstractSemanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.abstractSemanticSequencer));
+			ctx.writeFile(Generator::SRC_GEN, names.abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.abstractSyntacticSequencer));
 		}
-		ctx.writeFile(Generator::SRC_GEN, abstractSemanticSequencer.fileName, abstractSemanticSequencer.fileContents);
-		ctx.writeFile(Generator::SRC_GEN, abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.fileContents);
-		if(state.generateDebugData) {
-			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);
+		if(generateDebugData) {
+			ctx.writeFile(Generator::SRC_GEN, names.grammarConstraints.fileName, grammarConstraints.getFileContents(names.grammarConstraints));
 //			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2SimpleDot(), "pda"))
 //				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
 			for(obj:dotRenderer.render2Dot(seq2dot, "pda"))
@@ -73,6 +75,6 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	}
 	
 	override getExportedPackagesRtList(Grammar grammar) {
-		return newArrayList(semanticSequencer.packageName)
+		return newArrayList(names.semanticSequencer.packageName)
 	}
 }
