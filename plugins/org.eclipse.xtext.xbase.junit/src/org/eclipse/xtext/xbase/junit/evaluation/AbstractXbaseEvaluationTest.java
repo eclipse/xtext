@@ -1094,6 +1094,28 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testForLoop_12() throws Exception {
+		assertEvaluatesTo("foobar", 
+				"{\n" +
+				" val java.util.List list = new java.util.ArrayList<String>" +
+				" list += 'bar'" +
+				" var result = 'foo'" +
+				" for( e : list) result = result + e" +
+				" result" +
+				"}");
+	}
+	
+	@Test public void testForLoop_13() throws Exception {
+		assertEvaluatesTo("foobar", 
+				"{\n" +
+				" val java.util.List list = new java.util.ArrayList<String>" +
+				" list += 'bar'" +
+				" var result = 'foo'" +
+				" for(Object e : list) result = result + e" +
+				" result" +
+				"}");
+	}
+	
 	@Test public void testFunctionConversion_00() throws Exception {
 		assertEvaluatesTo("foo",
 				"([|newArrayList('foo').iterator] as Iterable<String>).iterator.next");
