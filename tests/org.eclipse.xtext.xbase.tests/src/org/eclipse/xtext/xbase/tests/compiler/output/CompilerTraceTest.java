@@ -384,7 +384,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testForLoop_01() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"IntegerRange _upTo = new IntegerRange(1, 2);\n" + 
 				"for (final int lo#o#p : _upTo) {\n" + 
 				"  Integer.valueOf(loop).toString();\n" + 
 				"}", 
@@ -395,7 +395,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testForLoop_02() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"IntegerRange _upTo = new IntegerRange(1, 2);\n" + 
 				"for (final i#n#t loop : _upTo) {\n" + 
 				"  Integer.valueOf(loop).toString();\n" + 
 				"}", 
@@ -406,7 +406,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testForLoop_03() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"IntegerRange _upTo = new IntegerRange(1, 2);\n" + 
 				"for (fi#n#al int loop : _upTo) {\n" + 
 				"  Integer.valueOf(loop).toString();\n" + 
 				"}", 
@@ -417,7 +417,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testForLoop_04() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"Itera#ble<In#teger> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"Int#egerRa#nge _upTo = new IntegerRange(1, 2);\n" + 
 				"for (final Integer loop : _upTo) {\n" + 
 				"  loop.toString();\n" + 
 				"}", 
@@ -428,7 +428,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testForLoop_05() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 2);\n" + 
+				"IntegerRange _upTo = new IntegerRange(1, 2);\n" + 
 				"f#o#r (final Integer loop : _upTo) {\n" + 
 				"  loop.toString();\n" + 
 				"}", 
