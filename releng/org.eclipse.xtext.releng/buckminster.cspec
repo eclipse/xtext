@@ -17,6 +17,8 @@
 		<!-- Eclipse platform and projects -->
 		<cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature" />
 		<cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.emf.ecore" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.emf.common" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.emf.ecore.source" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.emf.common.source" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle" />
