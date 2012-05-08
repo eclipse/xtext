@@ -36,8 +36,8 @@ class BuildScriptCreator {
 			<property name="build.root" location="${WORKSPACE}/buildroot" />
 			<property name="buckminster.home" location="«if (!projectInfo.buckyLocation.nullOrEmpty) projectInfo.buckyLocation else "Add_buckminster_headless_location_here"»" />
 			<property name="projects.location" location="${WORKSPACE}" />
-			<property name="commands.file" value="${projects.location}/«projectInfo.projectName»/commands.txt" />
-			<property name="target.platform" value="target.platform" />
+			<property name="commands.file" location="${projects.location}/«projectInfo.projectName»/commands.txt" />
+			<property name="target.platform" location="target.platform" />
 			
 			<target name="buckminster" depends="cleanup" description="description">
 				<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes."/>
@@ -46,8 +46,8 @@ class BuildScriptCreator {
 					<arg value="-Dbuckminster.output.root=${build.root}/buckminster.output" />
 					<arg value="-Dbuckminster.temp.root=${build.root}/buckminster.temp" />
 					<arg value="-Dtarget.platform=${build.root}/${target.platform}" />
-					<arg line="-data ${build.root}/buckminster.workspace" />
-					<arg line="-configuration ${build.root}/configuration" />
+					<arg line="-data '${build.root}/buckminster.workspace'" />
+					<arg line="-configuration '${build.root}/configuration'" />
 					<arg line="-S '${commands.file}'" />
 				</exec>
 				<echo message=" "/>
