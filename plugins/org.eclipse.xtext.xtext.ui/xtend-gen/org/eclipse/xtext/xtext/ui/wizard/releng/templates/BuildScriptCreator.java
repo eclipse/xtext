@@ -85,13 +85,13 @@ public class BuildScriptCreator {
     _builder.append("<property name=\"projects.location\" location=\"${WORKSPACE}\" />");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<property name=\"commands.file\" value=\"${projects.location}/");
+    _builder.append("<property name=\"commands.file\" location=\"${projects.location}/");
     String _projectName_1 = projectInfo.getProjectName();
     _builder.append(_projectName_1, "	");
     _builder.append("/commands.txt\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("<property name=\"target.platform\" value=\"target.platform\" />");
+    _builder.append("<property name=\"target.platform\" location=\"target.platform\" />");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -117,10 +117,10 @@ public class BuildScriptCreator {
     _builder.append("<arg value=\"-Dtarget.platform=${build.root}/${target.platform}\" />");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<arg line=\"-data ${build.root}/buckminster.workspace\" />");
+    _builder.append("<arg line=\"-data \'${build.root}/buckminster.workspace\'\" />");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<arg line=\"-configuration ${build.root}/configuration\" />");
+    _builder.append("<arg line=\"-configuration \'${build.root}/configuration\'\" />");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<arg line=\"-S \'${commands.file}\'\" />");
