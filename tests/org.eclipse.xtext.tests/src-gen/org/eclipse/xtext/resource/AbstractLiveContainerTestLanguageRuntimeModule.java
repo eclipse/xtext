@@ -81,12 +81,12 @@ public abstract class AbstractLiveContainerTestLanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.resource.serializer.AbstractLiveContainerTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.resource.serializer.LiveContainerTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.resource.serializer.AbstractLiveContainerTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.resource.serializer.LiveContainerTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

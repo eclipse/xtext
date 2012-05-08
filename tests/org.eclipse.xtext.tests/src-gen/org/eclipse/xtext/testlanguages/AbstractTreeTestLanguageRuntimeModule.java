@@ -81,12 +81,12 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractTreeTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.TreeTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractTreeTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.TreeTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

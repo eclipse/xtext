@@ -81,12 +81,12 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.serializer.AbstractXtextGrammarTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.serializer.XtextGrammarTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.serializer.AbstractXtextGrammarTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.serializer.XtextGrammarTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

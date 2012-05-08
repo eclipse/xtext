@@ -81,12 +81,12 @@ public abstract class AbstractAssignmentsTestLanguageRuntimeModule extends Defau
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.assignments.serializer.AbstractAssignmentsTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.assignments.serializer.AssignmentsTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.assignments.serializer.AbstractAssignmentsTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.assignments.serializer.AssignmentsTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

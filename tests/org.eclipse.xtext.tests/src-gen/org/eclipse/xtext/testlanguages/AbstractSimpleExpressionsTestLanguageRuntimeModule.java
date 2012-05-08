@@ -81,12 +81,12 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractSimpleExpressionsTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractSimpleExpressionsTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

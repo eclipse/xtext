@@ -81,12 +81,12 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.terminalrules.serializer.AbstractHiddenTerminalsTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.terminalrules.serializer.HiddenTerminalsTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.terminalrules.serializer.AbstractHiddenTerminalsTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.terminalrules.serializer.HiddenTerminalsTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

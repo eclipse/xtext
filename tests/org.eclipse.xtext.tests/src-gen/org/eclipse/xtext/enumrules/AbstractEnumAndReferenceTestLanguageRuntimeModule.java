@@ -81,12 +81,12 @@ public abstract class AbstractEnumAndReferenceTestLanguageRuntimeModule extends 
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.enumrules.serializer.AbstractEnumAndReferenceTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.enumrules.serializer.EnumAndReferenceTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.enumrules.serializer.AbstractEnumAndReferenceTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.enumrules.serializer.EnumAndReferenceTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

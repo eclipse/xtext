@@ -81,12 +81,12 @@ public abstract class AbstractElementMatcherTestLanguageRuntimeModule extends De
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parsetree.formatter.serializer.AbstractElementMatcherTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parsetree.formatter.serializer.ElementMatcherTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parsetree.formatter.serializer.AbstractElementMatcherTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parsetree.formatter.serializer.ElementMatcherTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

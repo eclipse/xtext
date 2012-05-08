@@ -115,10 +115,12 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	 */
 	public NestedClass1 getReference1()
 	{
-		if (reference1 != null && reference1.eIsProxy()) {
+		if (reference1 != null && reference1.eIsProxy())
+		{
 			InternalEObject oldReference1 = (InternalEObject)reference1;
 			reference1 = (NestedClass1)eResolveProxy(oldReference1);
-			if (reference1 != oldReference1) {
+			if (reference1 != oldReference1)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RootPackage.ROOT_CLASS__REFERENCE1, oldReference1, reference1));
 			}
@@ -157,7 +159,8 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RootPackage.ROOT_CLASS__ATTRIBUTE1:
 				return getAttribute1();
 			case RootPackage.ROOT_CLASS__REFERENCE1:
@@ -175,7 +178,8 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RootPackage.ROOT_CLASS__ATTRIBUTE1:
 				setAttribute1((String)newValue);
 				return;
@@ -194,7 +198,8 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RootPackage.ROOT_CLASS__ATTRIBUTE1:
 				setAttribute1(ATTRIBUTE1_EDEFAULT);
 				return;
@@ -213,7 +218,8 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RootPackage.ROOT_CLASS__ATTRIBUTE1:
 				return ATTRIBUTE1_EDEFAULT == null ? attribute1 != null : !ATTRIBUTE1_EDEFAULT.equals(attribute1);
 			case RootPackage.ROOT_CLASS__REFERENCE1:

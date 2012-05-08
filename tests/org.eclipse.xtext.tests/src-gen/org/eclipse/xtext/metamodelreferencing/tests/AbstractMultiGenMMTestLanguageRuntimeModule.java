@@ -81,12 +81,12 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.metamodelreferencing.tests.serializer.AbstractMultiGenMMTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MultiGenMMTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.metamodelreferencing.tests.serializer.AbstractMultiGenMMTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MultiGenMMTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

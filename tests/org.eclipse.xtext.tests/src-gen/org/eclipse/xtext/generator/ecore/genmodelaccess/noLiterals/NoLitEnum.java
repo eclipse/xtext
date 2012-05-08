@@ -54,7 +54,8 @@ public enum NoLitEnum implements Enumerator
 	 * @generated
 	 */
 	private static final NoLitEnum[] VALUES_ARRAY =
-		new NoLitEnum[] {
+		new NoLitEnum[]
+		{
 			LITERAL,
 		};
 
@@ -74,9 +75,11 @@ public enum NoLitEnum implements Enumerator
 	 */
 	public static NoLitEnum get(String literal)
 	{
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			NoLitEnum result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -91,9 +94,11 @@ public enum NoLitEnum implements Enumerator
 	 */
 	public static NoLitEnum getByName(String name)
 	{
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			NoLitEnum result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -108,7 +113,8 @@ public enum NoLitEnum implements Enumerator
 	 */
 	public static NoLitEnum get(int value)
 	{
-		switch (value) {
+		switch (value)
+		{
 			case LITERAL_VALUE: return LITERAL;
 		}
 		return null;

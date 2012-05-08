@@ -91,12 +91,12 @@ public abstract class AbstractBug299237TestLanguageRuntimeModule extends Default
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.antlr.serializer.AbstractBug299237TestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.antlr.serializer.Bug299237TestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.antlr.serializer.AbstractBug299237TestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.antlr.serializer.Bug299237TestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

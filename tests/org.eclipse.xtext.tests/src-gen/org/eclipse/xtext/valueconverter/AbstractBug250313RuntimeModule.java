@@ -81,12 +81,12 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.valueconverter.serializer.AbstractBug250313SemanticSequencer.class;
+		return org.eclipse.xtext.valueconverter.serializer.Bug250313SemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.valueconverter.serializer.AbstractBug250313SyntacticSequencer.class;
+		return org.eclipse.xtext.valueconverter.serializer.Bug250313SyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

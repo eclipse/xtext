@@ -81,12 +81,12 @@ public abstract class AbstractIndentationAwareTestLanguageRuntimeModule extends 
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.indent.serializer.AbstractIndentationAwareTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.testlanguages.indent.serializer.IndentationAwareTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.indent.serializer.AbstractIndentationAwareTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.testlanguages.indent.serializer.IndentationAwareTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

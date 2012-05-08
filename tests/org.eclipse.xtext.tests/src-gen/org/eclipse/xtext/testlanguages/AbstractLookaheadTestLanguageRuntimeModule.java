@@ -81,12 +81,12 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends Default
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractLookaheadTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.LookaheadTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractLookaheadTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.LookaheadTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

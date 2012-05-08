@@ -86,12 +86,12 @@ public abstract class AbstractExBacktrackingBug325745TestLanguageRuntimeModule e
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.unorderedGroups.serializer.AbstractExBacktrackingBug325745TestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.unorderedGroups.serializer.ExBacktrackingBug325745TestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.unorderedGroups.serializer.AbstractExBacktrackingBug325745TestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.unorderedGroups.serializer.ExBacktrackingBug325745TestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

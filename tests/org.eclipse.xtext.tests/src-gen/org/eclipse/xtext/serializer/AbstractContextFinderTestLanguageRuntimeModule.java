@@ -81,12 +81,12 @@ public abstract class AbstractContextFinderTestLanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.serializer.serializer.AbstractContextFinderTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.serializer.serializer.ContextFinderTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.serializer.serializer.AbstractContextFinderTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.serializer.serializer.ContextFinderTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

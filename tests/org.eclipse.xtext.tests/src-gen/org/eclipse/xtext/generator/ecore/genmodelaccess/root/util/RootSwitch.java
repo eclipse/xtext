@@ -1,4 +1,7 @@
 /**
+ * <copyright>
+ * </copyright>
+ *
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.root.util;
 
@@ -22,7 +25,8 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.root.*;
  * @see org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootPackage
  * @generated
  */
-public class RootSwitch<T> {
+public class RootSwitch<T>
+{
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -37,8 +41,10 @@ public class RootSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RootSwitch() {
-		if (modelPackage == null) {
+	public RootSwitch()
+	{
+		if (modelPackage == null)
+		{
 			modelPackage = RootPackage.eINSTANCE;
 		}
 	}
@@ -50,7 +56,8 @@ public class RootSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject)
+	{
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -61,11 +68,14 @@ public class RootSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+	protected T doSwitch(EClass theEClass, EObject theEObject)
+	{
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -81,9 +91,12 @@ public class RootSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case RootPackage.ROOT_CLASS: {
+	protected T doSwitch(int classifierID, EObject theEObject)
+	{
+		switch (classifierID)
+		{
+			case RootPackage.ROOT_CLASS:
+			{
 				RootClass rootClass = (RootClass)theEObject;
 				T result = caseRootClass(rootClass);
 				if (result == null) result = defaultCase(theEObject);
@@ -104,7 +117,8 @@ public class RootSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRootClass(RootClass object) {
+	public T caseRootClass(RootClass object)
+	{
 		return null;
 	}
 
@@ -119,7 +133,8 @@ public class RootSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public T defaultCase(EObject object) {
+	public T defaultCase(EObject object)
+	{
 		return null;
 	}
 

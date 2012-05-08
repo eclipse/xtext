@@ -81,12 +81,12 @@ public abstract class AbstractOptionalEmptyTestLanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractOptionalEmptyTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.OptionalEmptyTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.AbstractOptionalEmptyTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.testlanguages.serializer.OptionalEmptyTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

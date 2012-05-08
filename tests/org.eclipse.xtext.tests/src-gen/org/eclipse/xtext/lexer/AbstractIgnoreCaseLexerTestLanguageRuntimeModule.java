@@ -91,12 +91,12 @@ public abstract class AbstractIgnoreCaseLexerTestLanguageRuntimeModule extends D
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.lexer.serializer.AbstractIgnoreCaseLexerTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.lexer.serializer.IgnoreCaseLexerTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.lexer.serializer.AbstractIgnoreCaseLexerTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.lexer.serializer.IgnoreCaseLexerTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

@@ -81,12 +81,12 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.keywords.serializer.AbstractKeywordsTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.keywords.serializer.KeywordsTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.keywords.serializer.AbstractKeywordsTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.keywords.serializer.KeywordsTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

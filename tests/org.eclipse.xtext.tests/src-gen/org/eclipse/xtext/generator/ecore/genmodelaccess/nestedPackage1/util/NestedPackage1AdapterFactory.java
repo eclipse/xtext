@@ -40,7 +40,8 @@ public class NestedPackage1AdapterFactory extends AdapterFactoryImpl
 	 */
 	public NestedPackage1AdapterFactory()
 	{
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = NestedPackage1Package.eINSTANCE;
 		}
 	}
@@ -56,10 +57,12 @@ public class NestedPackage1AdapterFactory extends AdapterFactoryImpl
 	@Override
 	public boolean isFactoryForType(Object object)
 	{
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -72,13 +75,16 @@ public class NestedPackage1AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected NestedPackage1Switch<Adapter> modelSwitch =
-		new NestedPackage1Switch<Adapter>() {
+		new NestedPackage1Switch<Adapter>()
+		{
 			@Override
-			public Adapter caseNestedClass1(NestedClass1 object) {
+			public Adapter caseNestedClass1(NestedClass1 object)
+			{
 				return createNestedClass1Adapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

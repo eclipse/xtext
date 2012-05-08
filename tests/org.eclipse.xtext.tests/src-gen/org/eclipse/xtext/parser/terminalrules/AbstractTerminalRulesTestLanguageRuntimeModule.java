@@ -81,12 +81,12 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.terminalrules.serializer.AbstractTerminalRulesTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.terminalrules.serializer.TerminalRulesTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.terminalrules.serializer.AbstractTerminalRulesTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.terminalrules.serializer.TerminalRulesTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

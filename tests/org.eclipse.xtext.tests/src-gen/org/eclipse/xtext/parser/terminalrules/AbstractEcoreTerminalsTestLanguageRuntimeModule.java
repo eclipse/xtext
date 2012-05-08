@@ -81,12 +81,12 @@ public abstract class AbstractEcoreTerminalsTestLanguageRuntimeModule extends De
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parser.terminalrules.serializer.AbstractEcoreTerminalsTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.parser.terminalrules.serializer.EcoreTerminalsTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parser.terminalrules.serializer.AbstractEcoreTerminalsTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.parser.terminalrules.serializer.EcoreTerminalsTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

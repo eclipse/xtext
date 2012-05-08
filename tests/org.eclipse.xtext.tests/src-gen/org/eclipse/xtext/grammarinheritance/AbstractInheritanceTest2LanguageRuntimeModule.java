@@ -81,12 +81,12 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.grammarinheritance.serializer.AbstractInheritanceTest2LanguageSemanticSequencer.class;
+		return org.eclipse.xtext.grammarinheritance.serializer.InheritanceTest2LanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.grammarinheritance.serializer.AbstractInheritanceTest2LanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.grammarinheritance.serializer.InheritanceTest2LanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

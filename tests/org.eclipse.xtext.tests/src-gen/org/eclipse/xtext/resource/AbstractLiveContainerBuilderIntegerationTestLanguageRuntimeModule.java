@@ -81,12 +81,12 @@ public abstract class AbstractLiveContainerBuilderIntegerationTestLanguageRuntim
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.resource.serializer.AbstractLiveContainerBuilderIntegerationTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.resource.serializer.LiveContainerBuilderIntegerationTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.resource.serializer.AbstractLiveContainerBuilderIntegerationTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.resource.serializer.LiveContainerBuilderIntegerationTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

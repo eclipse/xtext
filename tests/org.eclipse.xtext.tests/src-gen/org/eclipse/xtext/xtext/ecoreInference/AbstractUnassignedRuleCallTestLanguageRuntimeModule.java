@@ -81,12 +81,12 @@ public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extend
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.xtext.ecoreInference.serializer.AbstractUnassignedRuleCallTestLanguageSemanticSequencer.class;
+		return org.eclipse.xtext.xtext.ecoreInference.serializer.UnassignedRuleCallTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.xtext.ecoreInference.serializer.AbstractUnassignedRuleCallTestLanguageSyntacticSequencer.class;
+		return org.eclipse.xtext.xtext.ecoreInference.serializer.UnassignedRuleCallTestLanguageSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
