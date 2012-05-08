@@ -59,7 +59,7 @@ public class IntegerRange implements Iterable<Integer> {
 		if ((end - start) * step < 0)
 			throw new IllegalArgumentException("The step of an IntegerRange must have the correct sign.");
 		if (step == 0)
-			throw new IllegalArgumentException("The step of a IntegerRange must not be 0");
+			throw new IllegalArgumentException("The step of an IntegerRange must not be 0");
 		this.start = start;
 		this.end = end;
 		this.step = step;
@@ -100,7 +100,7 @@ public class IntegerRange implements Iterable<Integer> {
 	 *            the step of the new range.
 	 * @return a new IntegerRange with the given step.
 	 */
-	public IntegerRange by(int step) {
+	public IntegerRange withStep(int step) {
 		return new IntegerRange(start, end, step);
 	}
 
