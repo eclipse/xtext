@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -88,6 +89,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		return images.forLacalVariable();
 	}
 	
+	public Image image(JvmTypeParameter parameter){
+		return images.forTypeParameter();
+	}
+
 	public String text(XVariableDeclaration variableDeclaration){
 		JvmTypeReference type = typeProvider.getTypeForIdentifiable(variableDeclaration);
 		return type.getSimpleName() + " " + variableDeclaration.getName();

@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
@@ -143,6 +144,16 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			return type.getSimpleName() + " " + signature;
 		}
 		return parameter.getName();
+	}
+
+	protected String _signature(JvmTypeParameter parameter, boolean typeAtEnd){
+		EObject container = parameter.eContainer();
+		String signature = parameter.getName();
+		String signatureOfFather = getSimpleSignature(container);
+		if(signatureOfFather != null){
+			signature += JavaElementLabels.CONCAT_STRING + signatureOfFather;
+		}
+		return signature;
 	}
 
 	protected String getThrowsDeclaration(JvmExecutable executable) {

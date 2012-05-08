@@ -50,6 +50,10 @@ public class XbaseImages {
 		return getJdtImage(JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE);
 	}
 	
+	public Image forTypeParameter(){
+		return getJdtImage(JavaPluginImages.DESC_OBJS_TYPEVARIABLE);
+	}
+
 	protected Image getJdtImage(ImageDescriptor descriptor) {
 		return JavaPlugin.getImageDescriptorRegistry().get(descriptor);
 	}
