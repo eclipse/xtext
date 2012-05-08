@@ -28,7 +28,7 @@ public class IntegerExtensions {
 	 * @return an {@link IntegerRange}. Never <code>null</code>.
 	 * @since 2.3
 	 */
-	@Inline(value="new $3($1, $2)", imported=IntegerRange.class)
+	@Inline(value="new $3($1, $2)", imported=IntegerRange.class, statementExpression=true)
 	public static IntegerRange operator_upTo(final int a, final int b) {
 		return new IntegerRange(a, b);
 	}
