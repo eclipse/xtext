@@ -205,7 +205,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected IProject createTestProject(final IProgressMonitor monitor) throws CoreException {
 		PluginProjectFactory factory = createProjectFactory();
-		configureTestProjectBuilder(factory);
+		configureTestProjectFactory(factory);
 		factory.addContributor(createTestProjectContributor());
 		return factory.createProject(monitor, null);
 	}
@@ -216,11 +216,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected IProject createFeatureProject(SubMonitor monitor) throws CoreException {
 		FeatureProjectFactory factory = createFeatureFactory();
-		configureFeatureProjectBuilder(factory);
+		configureFeatureProjectFactory(factory);
 		return factory.createProject(monitor, null);
 	}
 
-	protected void configureFeatureProjectBuilder(FeatureProjectFactory factory) {
+	protected void configureFeatureProjectFactory(FeatureProjectFactory factory) {
 		factory.setProjectName(getXtextProjectInfo().getFeatureProjectName());
 		factory.setLocation(getXtextProjectInfo().getFeatureProjectLocation());
 		factory.setFeatureLabel(String.format(Messages.XtextProjectCreator_FeatureLabel, getXtextProjectInfo()
@@ -231,7 +231,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addBundle(getXtextProjectInfo().getUiProjectName());
 	}
 
-	protected void configureTestProjectBuilder(PluginProjectFactory factory) {
+	protected void configureTestProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
 		List<String> requiredBundles = getTestProjectRequiredBundles();
 		factory.setProjectName(getXtextProjectInfo().getTestProjectName());
