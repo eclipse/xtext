@@ -36,7 +36,7 @@ public @interface Inline {
 
 	/**
 	 * whether the inlined expression is a statement expression (see <a
-	 * href="http://java.sun.com/docs/books/jls/third_edition/html/statements.html#14.8">14.8 - Statement Expressions in
+	 * href="http://docs.oracle.com/javase/specs/jls/se5.0/html/statements.html#14.8">14.8 - Statement Expressions in
 	 * Java Language Specification, Third Edition</a> )
 	 */
 	boolean statementExpression() default false;
