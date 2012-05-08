@@ -26,7 +26,7 @@ public class IntegerRange implements Iterable<Integer> {
 	private final int step;
 
 	/**
-	 * @retrun a read-only {@link ListIterator} for this.
+	 * @return a read-only {@link ListIterator} for this.
 	 */
 	public ListIterator<Integer> iterator() {
 		return new RangeIterator();
@@ -122,7 +122,7 @@ public class IntegerRange implements Iterable<Integer> {
 	/**
 	 * @author Jan Koehnlein - Initial contribution and API
 	 */
-	protected class RangeIterator implements ListIterator<Integer> {
+	private class RangeIterator implements ListIterator<Integer> {
 
 		private int next = start;
 		private int nextIndex = 0;

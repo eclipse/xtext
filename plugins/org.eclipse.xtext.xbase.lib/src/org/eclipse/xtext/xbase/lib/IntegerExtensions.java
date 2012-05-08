@@ -21,12 +21,11 @@ import org.eclipse.xtext.xbase.lib.internal.Inline;
 public class IntegerExtensions {
 	
 	/**
-	 * The <code>upTo</code> operator yields an iterable of integral numbers from and including {@code a} up to and including {@code b} if {@code b}
-	 * is larger than {@code a} or otherwise from {@code a} down to {@code b}. If {@code a} == {@code b} the iterable returns just one element.
+	 * The <code>..</code> operator yields an {@link IntegerRange}.
 	 * 
-	 * @param a the first value that the iterable will offer.
-	 * @param b the last value that the iterable will offer.
-	 * @return an iterable of integral numbers. Never <code>null</code>.
+	 * @param a the start of the range.
+	 * @param b the end of the range.
+	 * @return an {@link IntegerRange}. Never <code>null</code>.
 	 * @since 2.3
 	 */
 	@Inline(value="new $3($1, $2)", imported=IntegerRange.class, statementExpression=true)
