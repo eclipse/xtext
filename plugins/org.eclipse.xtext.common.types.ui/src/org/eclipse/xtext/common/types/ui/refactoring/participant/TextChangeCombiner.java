@@ -57,6 +57,8 @@ public class TextChangeCombiner {
 				compositeChange.add(combinedTextChange);
 			}
 		}
+		for(Change otherChange: otherChanges) 
+			compositeChange.add(otherChange);
 		if(compositeChange.getChildren().length == 0)
 			return null;
 		return compositeChange;
