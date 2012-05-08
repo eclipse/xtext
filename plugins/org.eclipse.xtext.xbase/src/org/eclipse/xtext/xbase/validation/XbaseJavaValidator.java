@@ -43,8 +43,10 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -141,6 +143,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private SuperTypeCollector superTypeCollector;
+	
+	@Inject
+	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
@@ -506,9 +511,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						+ canonicalName(actualType), obj.getForExpression(), null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
 			else if (actualType instanceof JvmParameterizedTypeReference) {
-				// TODO create type argument context and check bound value of iterable's type parameter
 				// rawType - check expectation for Object
-				if (((JvmParameterizedTypeReference) actualType).getArguments().isEmpty()) {
+				ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(actualType));
+				if (typeArgumentContext.isRawTypeContext()) {
 					if (obj.getDeclaredParam().getParameterType() != null) {
 						if (!typeRefs.is(obj.getDeclaredParam().getParameterType(), Object.class)) {
 							error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
