@@ -26,6 +26,7 @@ import org.eclipse.jdt.internal.corext.util.MethodOverrideTester;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRenameElementHandler;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -68,7 +69,7 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 		}
 		if (operatorMappingUtil.isMappedOperator(targetElement))
 			return null;
-		if (targetElement instanceof JvmFormalParameter) {
+		if (targetElement instanceof JvmFormalParameter || targetElement instanceof JvmTypeParameter) {
 			EObject sourceParameter = associations.getPrimarySourceElement(targetElement);
 			if (sourceParameter != null)
 				return super.createRenameElementContext(sourceParameter, editor, selection, resource);
