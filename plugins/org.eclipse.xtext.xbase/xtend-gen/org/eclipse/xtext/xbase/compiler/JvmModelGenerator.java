@@ -1386,14 +1386,9 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public String serialize(final JvmTypeReference it, final ITreeAppendable appendable) {
-    String _xblockexpression = null;
-    {
-      EObject _eContainer = it.eContainer();
-      this.typeRefSerializer.serialize(it, _eContainer, appendable);
-      String _string = appendable.toString();
-      _xblockexpression = (_string);
-    }
-    return _xblockexpression;
+    EObject _eContainer = it.eContainer();
+    this.typeRefSerializer.serialize(it, _eContainer, appendable);
+    return appendable.toString();
   }
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager) {

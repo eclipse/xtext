@@ -674,7 +674,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	def String serialize(JvmTypeReference it, ITreeAppendable appendable) {
 		typeRefSerializer.serialize(it, it.eContainer, appendable)
-		appendable.toString
+		return appendable.toString
 	}
 	
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager) {
