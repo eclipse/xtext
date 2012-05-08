@@ -480,7 +480,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 			if (isMergeManifest()) {
 				String path = ctx.getOutput().getOutlet(PLUGIN_TEST).getPath() + "/" + manifestPath;
-				mergeManifest(getProjectNameTests(), path, exported, requiredBundles, imported, null);
+				mergeManifest(getProjectNameTests(), path, exported, requiredBundles, imported, getActivator());
 			} else {
 				manifestPath = manifestPath + "_gen";
 				deleteFile(ctx, manifestPath, PLUGIN_TEST);
