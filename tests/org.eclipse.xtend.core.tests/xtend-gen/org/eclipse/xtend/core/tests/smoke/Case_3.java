@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
@@ -16,7 +16,7 @@ public class Case_3 {
         }
       };
     final Function1<? super Integer,? extends Integer> closure = _function;
-    Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 100);
+    IntegerRange _upTo = new IntegerRange(1, 100);
     for (final Integer x : _upTo) {
       closure.apply(x);
     }
@@ -31,7 +31,7 @@ public class Case_3 {
           }
         };
       final Function1<? super Integer,? extends Integer> closure = _function;
-      Iterable<Integer> _upTo = IntegerExtensions.upTo(1, 100);
+      IntegerRange _upTo = new IntegerRange(1, 100);
       for (final Integer x : _upTo) {
         closure.apply(x);
       }

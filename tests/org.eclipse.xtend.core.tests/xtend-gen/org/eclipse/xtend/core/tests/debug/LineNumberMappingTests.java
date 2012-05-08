@@ -17,7 +17,7 @@ import org.eclipse.xtext.generator.trace.SmapSupport.LineMapping;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -290,7 +290,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     final String[] lines = _string.split("\n");
     int _size = ((List<String>)Conversions.doWrapArray(lines)).size();
     int _minus = (_size - 1);
-    Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);
+    IntegerRange _upTo = new IntegerRange(0, _minus);
     for (final Integer lineNumber : _upTo) {
       {
         final LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);

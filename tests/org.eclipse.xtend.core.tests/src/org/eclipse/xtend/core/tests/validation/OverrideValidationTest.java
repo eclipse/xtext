@@ -19,8 +19,6 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import test.GenericSuperTypeClass;
-
 import com.google.inject.Inject;
 
 /**

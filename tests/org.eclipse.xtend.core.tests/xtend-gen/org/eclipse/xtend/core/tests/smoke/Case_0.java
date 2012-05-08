@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
 
 @Data
@@ -23,7 +23,7 @@ public class Case_0 {
       ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
       int _size = list.size();
       int _minus = (_size - 1);
-      Iterable<Integer> _upTo = IntegerExtensions.upTo(0, _minus);
+      IntegerRange _upTo = new IntegerRange(0, _minus);
       for (final Integer i : _upTo) {
         String _string = i.toString();
         String _plus = (_string + " ");
