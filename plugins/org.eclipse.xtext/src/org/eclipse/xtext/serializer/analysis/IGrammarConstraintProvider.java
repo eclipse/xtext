@@ -98,6 +98,8 @@ public interface IGrammarConstraintProvider {
 		String getName();
 
 		String getSimpleName();
+		
+		Grammar getDeclaringGrammar();
 
 		/**
 		 * @return This constraint only applies to EObjects of this type.

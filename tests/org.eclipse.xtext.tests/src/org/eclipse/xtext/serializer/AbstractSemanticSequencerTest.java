@@ -13,7 +13,7 @@ import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
-import org.eclipse.xtext.serializer.serializer.AbstractSequencerTestLanguageSemanticSequencer;
+import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -48,7 +48,7 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		ISemanticSequencer generatedSequencer = generatedSequencerProvider.get();
 		ISemanticSequencer genericSequencer = getGenericSemanticSequencer();
 
-		assertTrue(generatedSequencer instanceof AbstractSequencerTestLanguageSemanticSequencer);
+		assertTrue(generatedSequencer instanceof SequencerTestLanguageSemanticSequencer);
 
 		generatedSequencer.init(generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		genericSequencer.init(genericActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
