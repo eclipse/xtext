@@ -101,6 +101,13 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmMember(JvmMember object) {
+			return isExactMatchOnly ? null : getDeclaringTypeElement(object);
+		}
+		
+		/**
+		 * @since 2.3
+		 */
+		public IJavaElement getDeclaringTypeElement(JvmMember object) {
 			if (object.getDeclaringType() != null) {
 				IJavaElement typeElement = doSwitch(object.getDeclaringType());
 				return typeElement;
@@ -110,7 +117,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmField(JvmField object) {
-			IJavaElement parent = caseJvmMember(object);
+			IJavaElement parent = getDeclaringTypeElement(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				IField result = type.getField(object.getSimpleName());
@@ -122,7 +129,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmOperation(JvmOperation object) {
-			IJavaElement parent = caseJvmMember(object);
+			IJavaElement parent = getDeclaringTypeElement(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				try {
@@ -197,7 +204,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmConstructor(JvmConstructor object) {
-			IJavaElement parent = caseJvmMember(object);
+			IJavaElement parent = getDeclaringTypeElement(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				try {
