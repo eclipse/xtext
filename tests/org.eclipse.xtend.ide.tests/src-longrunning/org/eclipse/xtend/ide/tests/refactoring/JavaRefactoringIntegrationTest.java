@@ -329,6 +329,28 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameXtendTypeParameter() throws Exception {
+		String xtendModel = "class XtendClass <T> { def bar(T foo) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.indexOf("T");
+		renameXtendElement(editor, offset, "U");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("T", "U"), editor.getDocument().get());
+	}
+	
+	@Test
+	public void testRenameRefToTypeParameter() throws Exception {
+		String xtendModel = "class XtendClass <T> { def bar(T foo) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		final int offset = xtendModel.lastIndexOf("T");
+		renameXtendElement(editor, offset, "U");
+		synchronize(editor);
+		assertEquals(xtendModel.replace("T", "U"), editor.getDocument().get());
+	}
+	
+	@Test
 	public void testCrissCrossReferences_0() throws Exception {
 		IFile javaBase = testHelper.createFile("JavaBase.java", "public interface JavaBase { public void foo(); }");
 		IFile javaSub = testHelper.createFile("JavaSub.java",
@@ -401,8 +423,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
 			final XtextEditor editor = testHelper.openEditor(xtendClass);
 			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			synchronize(editor);
-			assertEquals(xtendModel.replace("XtendClass", "NewXtendClass"), editor.getDocument().get());
+			assertFileExists("src/NewXtendClass.xtend");
 			assertFileContains(javaClass, "JavaClass extends NewXtendClass");
 		} finally {
 			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
