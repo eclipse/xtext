@@ -76,6 +76,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       <import feature="org.eclipse.xtend.sdk" version="2.3.0" match="equivalent"/>
       <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.source" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.source" version="2.5.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -143,13 +145,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.purexbase.ui.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.log4j.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
