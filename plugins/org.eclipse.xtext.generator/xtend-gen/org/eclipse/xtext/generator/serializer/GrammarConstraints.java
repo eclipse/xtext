@@ -10,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
+import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
@@ -22,16 +23,7 @@ public class GrammarConstraints extends GeneratedFile {
   @Inject
   private SemanticSequencerUtil sequencerUtil;
   
-  public String getFileExtension() {
-    return "xtext";
-  }
-  
-  public String getQualifiedName(final Grammar grammar) {
-    String _name = this.getName(grammar, "", "GrammarConstraints");
-    return _name;
-  }
-  
-  public CharSequence getFileContents() {
+  public CharSequence getFileContents(final GenFileName filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");
     String _name = this.grammar.getName();

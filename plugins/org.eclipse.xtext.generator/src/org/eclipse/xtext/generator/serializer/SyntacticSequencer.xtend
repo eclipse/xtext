@@ -1,20 +1,15 @@
 package org.eclipse.xtext.generator.serializer
 
 import com.google.inject.Inject
-import org.eclipse.xtext.Grammar
 
 class SyntacticSequencer extends GeneratedFile {
 	
-	@Inject AbstractSyntacticSequencer sequencer
+	@Inject SerializerGenFileNames names
 	
-	override String getQualifiedName(Grammar grammar) {
-		grammar.getName("", "SyntacticSequencer");		
-	}
-	
-	override getFileContents() '''
-		package «packageName»;
+	override getFileContents(SerializerGenFileNames$GenFileName filename) '''
+		package «filename.packageName»;
 		
-		public class «simpleName» extends «sequencer.simpleName» {
+		public class «filename.simpleName» extends «names.abstractSyntacticSequencer.simpleName» {
 		}
 	'''
 

@@ -21,6 +21,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
+import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
@@ -45,15 +46,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   @Inject
   private SyntacticSequencerUtil util;
   
-  public String getQualifiedName(final Grammar grammar) {
-    String _name = this.getName(grammar, "Abstract", "SyntacticSequencer");
-    return _name;
-  }
-  
-  public CharSequence getFileContents() {
+  public CharSequence getFileContents(final GenFileName filename) {
     String _xblockexpression = null;
     {
-      String _packageName = this.getPackageName();
+      String _packageName = filename.getPackageName();
       JavaFile _javaFile = new JavaFile(_packageName);
       final JavaFile file = _javaFile;
       file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer.class);
@@ -69,7 +65,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("@SuppressWarnings(\"all\")");
       _builder.newLine();
       _builder.append("public class ");
-      String _simpleName = this.getSimpleName();
+      String _simpleName = filename.getSimpleName();
       _builder.append(_simpleName, "");
       _builder.append(" extends AbstractSyntacticSequencer {");
       _builder.newLineIfNotEmpty();

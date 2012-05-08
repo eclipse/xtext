@@ -30,13 +30,9 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	
 	@Inject extension SemanticSequencerUtil sequencerUtil
 	
-	@Inject SemanticSequencer sequencer
+	@Inject SerializerGenFileNames names
 	
 	@Inject extension Context2NameFunction ctx2name
-	
-	override String getQualifiedName(Grammar grammar) {
-		grammar.getName("Abstract", "SemanticSequencer");		
-	}
 	
 	def <T extends ENamedElement> List<T> sort(Iterable<T> iterable) {
 		iterable.sort(p1, p2|p1.name.compareTo(p2.name))
@@ -50,47 +46,20 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet.sort
 	}
 	
-	def Iterable<EClass> getAccessedClasses() {
-		grammar.grammarConstraints.map(e|e.type).toSet.sort
-	}
-	
 	def getAccessedConstraints(EClass clazz) {
 		grammar.getGrammarConstraints(clazz)
-	}
-	
-	def getAccessedContexts(EClass clazz) {
-		grammar.getGrammarContexts(clazz)
-	}
-	
-	def getAccessedContexts() {
-		grammar.getGrammarContexts()
 	}
 	
 	def getAccessedConstraints() {
 		grammar.getGrammarConstraints()
 	}
 	
-	def getGrammars(IGrammarConstraintProvider$IConstraintElement ele) {
-		val result = <Grammar>newHashSet();
-		if(ele != null && ele.grammarElement != null) result.add(ele.grammarElement.grammar);
-		if(ele != null && ele.children != null) for(g:ele.children.map(c|c.grammars).flatten) result.add(g);
-		return result;
-	}
-	
-	def uses(Grammar g1, Grammar g2) {
-		g1 != null && g1.usedGrammars.exists(e|e == g2 || e.uses(g2))
-	}
-	
-	def getMostConcreteGrammar(IGrammarConstraintProvider$IConstraint constraint) {
-		constraint.body.grammars.reduce(x, y | if(x.uses(y)) x else y)
-	}
-	
 	def usesSuperGrammar() {
-		accessedConstraints.map(c|c.mostConcreteGrammar).exists(g| g != null && g != grammar)
+		accessedConstraints.exists(c | c.declaringGrammar != grammar)
 	}
 	
-	override getFileContents() {
-		val file = new JavaEMFFile(grammar.eResource.resourceSet, packageName);
+	override getFileContents(SerializerGenFileNames$GenFileName filename) {
+		val file = new JavaEMFFile(grammar.eResource.resourceSet, filename.packageName);
 		
 		file.imported(typeof(EObject))
 		file.imported(typeof(GenericSequencer))
@@ -99,13 +68,17 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		file.imported(typeof(ISemanticSequenceAcceptor))
 		file.imported(typeof(ISemanticSequencerDiagnosticProvider))
 		file.imported(typeof(ISerializationDiagnostic$Acceptor))
-		file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer))
 		file.imported(typeof(Inject))
 		file.imported(typeof(Provider))
 		
+		val superGrammar = if(usesSuperGrammar) 
+				file.imported(names.semanticSequencer.getQualifiedName(grammar.usedGrammars.head))
+			else
+				file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer)) 
+		
 		file.body = '''
 			@SuppressWarnings("all")
-			public class «simpleName» extends AbstractSemanticSequencer {
+			public class «filename.simpleName» extends «superGrammar» {
 			
 				@Inject
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
@@ -122,28 +95,17 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				
 				protected ISemanticSequencer genericSequencer;
 				
-				«IF usesSuperGrammar»
-					«val superGrammar = file.imported(sequencer.getQualifiedName(grammar.usedGrammars.head))»
-					@Inject
-					protected Provider<«superGrammar»> superSequencerProvider;
-					 
-					protected «superGrammar» superSequencer; 
-				«ENDIF»
 				
 				@Override
 				public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 					super.init(sequencer, sequenceAcceptor, errorAcceptor);
 					this.genericSequencer = genericSequencerProvider.get();
 					this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-					«IF usesSuperGrammar»
-						this.superSequencer = superSequencerProvider.get();
-						this.superSequencer.init(sequencer, sequenceAcceptor, errorAcceptor); 
-					«ENDIF»
 				}
 				
 				«file.genMethodCreateSequence()»
 				
-				«accessedConstraints.filter(e|e.type!=null).join("\n\n",[e|file.genMethodSequence(e)])»
+				«accessedConstraints.filter(e|e.type!=null && e.declaringGrammar == grammar).join("\n\n",[e|file.genMethodSequence(e)])»
 			}
 		'''.toString; 
 		file.toString 
@@ -178,9 +140,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		 */
 		protected void sequence_«c.simpleName»(EObject context, «file.importedGenTypeName(c.type)» semanticObject) {
 			«val cast = file.getEObjectCast(c.type)»
-			«IF !newHashSet(grammar, null).contains(c.mostConcreteGrammar)»
-				superSequencer.createSequence(context, «cast»semanticObject);
-			«ELSEIF c.canGenerate()»
+			«IF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
 						if(transientValues.isValueTransient(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)

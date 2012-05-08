@@ -229,6 +229,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		public IFeatureInfo[] getFeatures() {
 			return features;
 		}
+		
+		public Grammar getDeclaringGrammar() {
+			return GrammarUtil.getGrammar(getMostSpecificContext());
+		}
 
 		protected abstract EObject getMostSpecificContext();
 
@@ -1139,7 +1143,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 	}
 
-	protected void filterDuplicateConstraintsAndSetNames(List<IConstraintContext> contexts) {
+	protected void filterDuplicateConstraintsAndSetNames(Grammar grammar, List<IConstraintContext> contexts) {
 		Map<IConstraint, List<IConstraint>> equalConstraints = Maps.newHashMap();
 		for (IConstraintContext context : contexts)
 			for (IConstraint constraint : context.getConstraints()) {
@@ -1149,10 +1153,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				same.add(constraint);
 			}
 		Map<IConstraint, IConstraint> allConstraints = Maps.newIdentityHashMap();
-		for (Collection<IConstraint> equal : equalConstraints.values()) {
+		for (Collection<IConstraint> allEqual : equalConstraints.values()) {
+			Collection<IConstraint> equal = filterConstraintsFromSubGrammars(grammar, allEqual);
 			IConstraint representative = findRepresentativeConstraint(equal);
 			((Constraint) representative).setName(findBestConstraintName(equal));
-			for (IConstraint constraint : equal)
+			for (IConstraint constraint : allEqual)
 				allConstraints.put(constraint, representative);
 		}
 		for (IConstraintContext context : contexts) {
@@ -1178,7 +1183,35 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		return result;
 	}
+	
+	protected Map<Grammar, Integer> getInheritanceDistance(Grammar grammar) {
+		Map<Grammar, Integer> result = Maps.newHashMap();
+		Grammar current = grammar;
+		int distance = 0;
+		while (current != null) {
+			result.put(current, distance);
+			current = current.getUsedGrammars().isEmpty() ? null : current.getUsedGrammars().get(0);
+			distance++;
+		}
+		return result;
+	}
 
+	protected Collection<IConstraint> filterConstraintsFromSubGrammars(Grammar grammar,
+			Collection<IConstraint> constraints) {
+		if (constraints.size() <= 1)
+			return constraints;
+		Map<Grammar, Integer> inheritanceDistance = getInheritanceDistance(grammar);
+		int maxDistance = 0;
+		for (IConstraint c : constraints)
+			maxDistance = Math.max(maxDistance, inheritanceDistance.get(c.getDeclaringGrammar()));
+		Collection<IConstraint> filteredConstraints = Lists.newArrayList();
+		for (IConstraint c : constraints) {
+			if (inheritanceDistance.get(c.getDeclaringGrammar()) == maxDistance)
+				filteredConstraints.add(c);
+		}
+		return filteredConstraints;
+	}
+	
 	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
 		// strategy 1: if there is a parser rule context, use it for a name
 		for (IConstraint c : equalConstraints)
@@ -1197,9 +1230,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (visited.add(pr))
 				rules.add(pr.getName());
 		}
+		Collections.sort(rules);
+		Collections.sort(actions);
 		return Joiner.on("_").join(rules) + "_" + Joiner.on('_').join(actions);
 	}
-
+	
 	protected IConstraint findRepresentativeConstraint(Collection<IConstraint> equalConstraints) {
 		for (IConstraint c : equalConstraints)
 			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule)
@@ -1285,7 +1320,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 						if (action.getFeature() != null)
 							result.add(getConstraints(action));
 				}
-			filterDuplicateConstraintsAndSetNames(result);
+			filterDuplicateConstraintsAndSetNames(context, result);
 			cache.put(context, result);
 		}
 		return result;

@@ -50,22 +50,6 @@ public class SemanticSequencerUtil {
 		return result;
 	}
 
-	public Collection<EObject> getGrammarContexts(Grammar grammar, EClass clazz) {
-		Set<EObject> result = Sets.newLinkedHashSet();
-		for (IConstraintContext ctx : gcp.getConstraints(grammar))
-			for (IConstraint c : ctx.getConstraints())
-				if (c.getType() == clazz)
-					result.add(ctx.getContext());
-		return result;
-	}
-
-	public Collection<EObject> getGrammarContexts(Grammar grammar) {
-		Set<EObject> result = Sets.newLinkedHashSet();
-		for (IConstraintContext ctx : gcp.getConstraints(grammar))
-			result.add(ctx.getContext());
-		return result;
-	}
-
 	public List<IConstraintContext> getGrammarConstraintContexts(Grammar grammar) {
 		return gcp.getConstraints(grammar);
 	}
