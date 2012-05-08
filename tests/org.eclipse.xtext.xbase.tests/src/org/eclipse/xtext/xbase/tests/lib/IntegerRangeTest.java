@@ -77,12 +77,15 @@ public class IntegerRangeTest {
 
 	@Test
 	public void testSize() {
-		assertEquals(3, new IntegerRange(-1, 1).getSize());
-		assertEquals(2, new IntegerRange(-1, 1, 2).getSize());
-		assertEquals(1, new IntegerRange(-1, 1, 3).getSize());
-		assertEquals(3, new IntegerRange(1, -1).getSize());
-		assertEquals(2, new IntegerRange(1, -1, -2).getSize());
-		assertEquals(1, new IntegerRange(1, -1, -3).getSize());
+		final IntegerRange myRange = new IntegerRange(-1, 1);
+		assertEquals(3, myRange.getSize());
+		assertEquals(2, myRange.withStep(2).getSize());
+		assertEquals(1, myRange.withStep(3).getSize());
+		
+		final IntegerRange myRange2 = new IntegerRange(1, -1);
+		assertEquals(3, myRange2.getSize());
+		assertEquals(2, myRange2.withStep(-2).getSize());
+		assertEquals(1, myRange2.withStep(-3).getSize());
 	}
 
 	@Test
