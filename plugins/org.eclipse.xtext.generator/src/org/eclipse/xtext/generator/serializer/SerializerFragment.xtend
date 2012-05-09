@@ -25,9 +25,7 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	@Inject GrammarConstraints grammarConstraints
 	
-	@Inject Context2DotRenderer dotRenderer
-	
-	@Inject SyntacticSequencerPDA2ExtendedDot seq2dot
+	@Inject DebugGraphGenerator debugGraphGenerator
 	
 	@Inject SerializerGenFileNames names
 	
@@ -67,9 +65,7 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 		}
 		if(generateDebugData) {
 			ctx.writeFile(Generator::SRC_GEN, names.grammarConstraints.fileName, grammarConstraints.getFileContents(names.grammarConstraints));
-//			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2SimpleDot(), "pda"))
-//				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
-			for(obj:dotRenderer.render2Dot(seq2dot, "pda"))
+			for(obj:debugGraphGenerator.generateDebugGraphs) 
 				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
 		}
 	}
