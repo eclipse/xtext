@@ -23,7 +23,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
-			import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
@@ -103,7 +103,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
-			import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
