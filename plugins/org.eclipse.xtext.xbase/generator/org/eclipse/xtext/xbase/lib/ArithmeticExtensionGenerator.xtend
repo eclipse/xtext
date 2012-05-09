@@ -85,6 +85,7 @@ class ArithmeticExtensionGenerator {
 		 * @return   <code>-a</code>
 		 * @since «since»
 		 */
+		@Pure
 		@Inline("(-$1)")
 		public static «returnType(type, MINUS, type)» «MINUS.methodName»(«type» a) {
 			return -a;
@@ -106,6 +107,7 @@ class ArithmeticExtensionGenerator {
 			 * @return   <code>a«operator.toHtml»b</code>
 			 * @since «since»
 			 */
+			@Pure
 			@Inline("($1 «operator» $2)")
 			public static «returnType(op1, operator, op2)» «operator.methodName»(«op1» a, «op2» b) {
 				return a «operator» b;
@@ -120,7 +122,8 @@ class ArithmeticExtensionGenerator {
 		 * @return   <code>Math.pow(a, b)</code>
 		 * @since «since»
 		 */
-		@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+		@Pure
+		@Inline(value="$3.pow($1, $2)", imported=Math.class)
 		public static double «POWER.methodName»(«op1» a, «op2» b) {
 			return Math.pow(a, b);
 		}

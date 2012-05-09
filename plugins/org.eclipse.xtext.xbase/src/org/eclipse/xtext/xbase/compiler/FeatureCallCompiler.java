@@ -129,12 +129,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			if (!isReferenced) {
 				b.newLine();
-				if (!expressionHelper.isJavaStatementExpression(expr)) {
+				if (!expressionHelper.hasSideEffects(expr)) {
 					b.append("/*");
 				}
 				featureCalltoJavaExpression(expr, b, false);
 				b.append(";");
-				if (!expressionHelper.isJavaStatementExpression(expr)) {
+				if (!expressionHelper.hasSideEffects(expr)) {
 					b.append("*/");
 				}
 			} else if (isVariableDeclarationRequired(expr, b)) {

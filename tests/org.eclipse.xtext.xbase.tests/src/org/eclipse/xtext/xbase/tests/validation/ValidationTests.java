@@ -315,6 +315,10 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Test public void testLiteralInBlockInBlock() throws Exception {
 		checkInnerExpressionInBlock("{ {1} }", XBLOCK_EXPRESSION);
 	}
+	
+	@Test public void testPureCallInBlock() throws Exception {
+		checkInnerExpressionInBlock("newArrayList('foo')", XFEATURE_CALL);
+	}
 
 	@Test public void testThrowsInBlock_01() throws Exception {
 		XExpression block = expression("{ throw new Exception() }");
