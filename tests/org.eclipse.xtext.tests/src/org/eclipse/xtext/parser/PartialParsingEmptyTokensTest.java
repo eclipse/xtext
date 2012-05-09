@@ -36,4 +36,9 @@ public class PartialParsingEmptyTokensTest extends AbstractXtextTests {
 		resource.update(pos, 0, "1b");
 		assertTrue("Expected 0 errors, got " + resource.getErrors(), resource.getErrors().isEmpty());
 	}
+
+	@Override
+	protected void checkNodeModel(XtextResource resource) {
+		// No NodeModel check here.
+	}
 }

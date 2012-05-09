@@ -419,5 +419,9 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.linking.lazy.serializer,
  org.eclipse.xtext.linking.bug362902,
  org.eclipse.xtext.linking.bug362902.impl,
- org.eclipse.xtext.linking.bug362902.util
+ org.eclipse.xtext.linking.bug362902.util,
+ org.eclipse.xtext.parser.antlr.serializer,
+ org.eclipse.xtext.parser.antlr.bug378967Test,
+ org.eclipse.xtext.parser.antlr.bug378967Test.impl,
+ org.eclipse.xtext.parser.antlr.bug378967Test.util
 
