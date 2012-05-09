@@ -734,7 +734,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkInnerExpressions(XBlockExpression block) {
-		for (int i = 0; i < block.getExpressions().size() - 1; ++i) {
+		boolean checkLastExpression = typeRefs.is(typeProvider.getExpectedType(block), Void.TYPE);
+		for (int i = 0; i < block.getExpressions().size() - (checkLastExpression?0:1); ++i) {
 			XExpression expr = block.getExpressions().get(i);
 			mustBeJavaStatementExpression(expr);
 		}

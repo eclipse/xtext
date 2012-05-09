@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -109,16 +110,20 @@ public class XExpressionHelper {
 		}
 		if (element instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) element;
-			if (featureCall.getFeature() instanceof JvmOperation) {
-				JvmOperation jvmOperation = (JvmOperation) featureCall.getFeature();
+			final JvmIdentifiableElement feature = featureCall.getFeature();
+			if (feature instanceof JvmConstructor) { //super() and this()
+				return true;
+			}
+			if (feature instanceof JvmOperation) {
+				JvmOperation jvmOperation = (JvmOperation) feature;
 				if (findPureAnnotation(jvmOperation) == null)
 					return true;
 			}
+			return false;
 		}
 		if (element instanceof XConstructorCall) {
 			XConstructorCall constrCall = (XConstructorCall) element;
-			if (findPureAnnotation(constrCall.getConstructor()) == null)
-				return true;
+			return findPureAnnotation(constrCall.getConstructor()) == null;
 		}
 		for (EObject child : element.eContents()) {
 			if (internalHasSideEffectsRec(child))
