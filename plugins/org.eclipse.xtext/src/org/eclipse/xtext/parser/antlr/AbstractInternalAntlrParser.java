@@ -604,7 +604,11 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	// currentNode = currentNode.getParent();
     protected void afterParserOrEnumRuleCall() {
-    	currentNode = nodeBuilder.compressAndReturnParent(currentNode);
+	ICompositeNode newCurrent = nodeBuilder.compressAndReturnParent(currentNode);
+	if(currentNode == lastConsumedNode){
+		lastConsumedNode = newCurrent;
+	}
+		currentNode = newCurrent;
     }
 	
     // if (current==null) {
