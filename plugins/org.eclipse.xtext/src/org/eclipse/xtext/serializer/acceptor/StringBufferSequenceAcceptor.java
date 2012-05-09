@@ -48,11 +48,7 @@ public class StringBufferSequenceAcceptor implements ISequenceAcceptor {
 		buf.append(token);
 	}
 
-	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-		buf.append(token);
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		buf.append(token);
 	}
 

@@ -515,20 +515,10 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				return true;
 			case ASSIGNED_KEYWORD:
 				Keyword keyword = constr.getKeyword();
-				String value3 = (String) value;
 				ILeafNode node7 = (ILeafNode) node;
-				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value3, node7,
+				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value, node7,
 						errorAcceptor);
-				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value3, index, node7);
-				return true;
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				Keyword keyword1 = constr.getKeyword();
-				Boolean value4 = (Boolean) value;
-				ILeafNode node8 = (ILeafNode) node;
-				String token71 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword1, value4, node8,
-						errorAcceptor);
-				sequenceAcceptor
-						.acceptAssignedKeyword(keyword1, token71, value4 == null ? false : value4, index, node8);
+				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value, index, node7);
 				return true;
 			case ALTERNATIVE:
 			case GROUP:
@@ -579,7 +569,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[element.getAssignmentID()];
 				if (f2a == null)
 					return true;
@@ -677,7 +666,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_KEYWORD:
 			case ASSIGNED_PARSER_RULE_CALL:
 			case ASSIGNED_TERMINAL_RULE_CALL:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[constraint.getAssignmentID()];
 				if (f2a == null)
 					return Collections.emptyList();

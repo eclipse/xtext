@@ -77,13 +77,17 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
-	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
 		assertElement(keyword);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
-
+	
 	@Override
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
+		assertElement(keyword);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
 	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
 		assertElement(keyword);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);

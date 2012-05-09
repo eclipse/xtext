@@ -98,14 +98,8 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
-	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		add(titles.doSwitch(keyword), token, String.valueOf(value), index, node);
-		super.acceptAssignedKeyword(keyword, token, value, index, node);
-	}
-
-	@Override
-	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
-		add(titles.doSwitch(keyword), token, "'" + value + "'", index, node);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 

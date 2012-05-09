@@ -91,13 +91,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		delegate.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
-	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
-		lastNode = node;
-		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
 		lastNode = node;
 		delegate.acceptAssignedKeyword(keyword, token, value, index, node);

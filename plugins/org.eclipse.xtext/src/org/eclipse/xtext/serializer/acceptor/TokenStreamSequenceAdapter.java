@@ -61,11 +61,7 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		writeSemantic(enumRC, token);
 	}
 
-	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-		writeSemantic(keyword, token);
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		writeSemantic(keyword, token);
 	}
 

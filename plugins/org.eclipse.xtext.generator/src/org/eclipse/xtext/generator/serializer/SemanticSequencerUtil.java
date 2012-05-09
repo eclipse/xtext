@@ -92,13 +92,13 @@ public class SemanticSequencerUtil {
 				return "acceptAssignedCrossRefEnum";
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
 				return "acceptAssignedCrossRefTerminal";
+			case ASSIGNED_CROSSREF_KEYWORD:
+				return "acceptAssignedCrossRefKeyword";
 			case ASSIGNED_DATATYPE_RULE_CALL:
 				return "acceptAssignedDatatype";
 			case ASSIGNED_ENUM_RULE_CALL:
 				return "acceptAssignedEnum";
 			case ASSIGNED_KEYWORD:
-				return "acceptAssignedKeyword";
-			case ASSIGNED_BOOLEAN_KEYWORD:
 				return "acceptAssignedKeyword";
 			case ASSIGNED_PARSER_RULE_CALL:
 				return "acceptAssignedParserRuleCall";
@@ -114,13 +114,13 @@ public class SemanticSequencerUtil {
 			case ASSIGNED_ACTION_CALL:
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_PARSER_RULE_CALL:
 				return ICompositeNode.class.getSimpleName();
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
 			case ASSIGNED_KEYWORD:
-			case ASSIGNED_BOOLEAN_KEYWORD:
 			case ASSIGNED_TERMINAL_RULE_CALL:
 				return ILeafNode.class.getSimpleName();
 			default:
