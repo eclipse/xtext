@@ -14,7 +14,9 @@ import java.util.Stack;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -73,11 +75,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		public INode getLastNode() {
 			return lastNode;
 		}
-		
+
 		public RuleCallStack getStack() {
 			return stack;
 		}
-		
+
 		protected void setLastNode(INode lastNode) {
 			this.lastNode = lastNode;
 		}
@@ -179,6 +181,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
 		navigateToAbsorber(datatypeRC, node);
+		if (token == null)
+			token = getUnassignedRuleCallToken(datatypeRC, node);
 		delegate.acceptAssignedDatatype(datatypeRC, token, value, index, node);
 	}
 
@@ -199,6 +203,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
 		navigateToAbsorber(terminalRC, node);
+		if (token == null)
+			token = getUnassignedRuleCallToken(terminalRC, node);
 		delegate.acceptAssignedTerminal(terminalRC, token, value, index, node);
 	}
 
@@ -370,6 +376,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
+		Assignment ass = GrammarUtil.containingAssignment(ruleCall);
+		if (ass != null && !GrammarUtil.isBooleanAssignment(ass))
+			throw new IllegalStateException("RuleCall is invalid; Can not determine token.");
 		return getUnassignedRuleCallToken(contexts.peek().semanticObject, ruleCall, node);
 	}
 

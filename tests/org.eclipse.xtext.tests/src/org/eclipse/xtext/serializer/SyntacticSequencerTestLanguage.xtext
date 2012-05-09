@@ -13,7 +13,7 @@ generate syntacticsequencertest "http://www.eclipse.org/2009/tmf/xtext/syntactic
 Model:
 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative | 
 	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition | 
-	x11=AlternativeTransition;
+	x11=AlternativeTransition | x12=BooleanValues;
 
 MandatoryKeywords:
 	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
@@ -48,15 +48,15 @@ Multiplication2 returns Exp2:
 Prim2 returns Exp2:
 	{Val2} name=ID | '(' Addition2 ')';
 
-terminal TerminalID:
+terminal TERMINAL_ID:
 	'$1' ID;
 
 DatatypeID:
 	ID;
 
 SingleCrossReference:
-	"#5" name=(TerminalID | ID)
-	("kw1" ref1=[SingleCrossReference|TerminalID])?
+	"#5" name=(TERMINAL_ID | ID)
+	("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
 	("kw2" ref2=[SingleCrossReference|DatatypeID])?
 	("kw3" ref3=[SingleCrossReference|ID])?
 	("kw4" ref4=[SingleCrossReference])?;
@@ -84,3 +84,13 @@ MandatoryManyTransition:
 				
 AlternativeTransition:
 	"#11" (KW1 | "kw2") val=ID;			
+
+terminal BOOLEAN_TERMINAL_ID:
+	'%1' ID;
+
+BooleanDatatypeID:
+	ID;
+	
+BooleanValues:
+	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?
+;

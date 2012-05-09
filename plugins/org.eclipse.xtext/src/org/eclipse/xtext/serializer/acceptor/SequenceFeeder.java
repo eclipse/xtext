@@ -444,13 +444,15 @@ public class SequenceFeeder {
 
 	protected String getToken(RuleCall rc, Object value, INode node) {
 		CrossReference crossRef = GrammarUtil.containingCrossReference(rc);
+		Assignment assignment = GrammarUtil.containingAssignment(rc);
 		if (crossRef != null)
 			return provider.crossRefSerializer.serializeCrossRef(semanticObject, crossRef, (EObject) value, node,
 					errorAcceptor);
-		else if (GrammarUtil.isEObjectRuleCall(rc))
+		else if (GrammarUtil.isEObjectRuleCall(rc) || GrammarUtil.isBooleanAssignment(assignment))
 			return null;
 		else if (GrammarUtil.isEnumRuleCall(rc))
-			return provider.enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObject, rc, value, node, errorAcceptor);
+			return provider.enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObject, rc, value, node,
+					errorAcceptor);
 		else
 			return provider.valueSerializer.serializeAssignedValue(semanticObject, rc, value, node, errorAcceptor);
 	}
