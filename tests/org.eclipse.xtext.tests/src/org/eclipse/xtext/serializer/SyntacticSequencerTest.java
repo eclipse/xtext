@@ -118,11 +118,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 			add(enumRC, token);
 		}
 
-		public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-			add(keyword, token);
-		}
-
-		public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+		public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 			add(keyword, token);
 		}
 

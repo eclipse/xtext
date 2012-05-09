@@ -33,9 +33,7 @@ public interface ISemanticSequenceAcceptor {
 
 	void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node);
 
-	void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node);
-
-	void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node);
+	void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node);
 
 	void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node);
 

@@ -305,10 +305,8 @@ public class SequenceFeeder {
 		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
 		if (crossRef != null)
 			sequenceAcceptor.acceptAssignedCrossRefKeyword(keyword, token, (EObject) value, index, node);
-		else if (GrammarUtil.isBooleanAssignment(ass))
-			sequenceAcceptor.acceptAssignedKeyword(keyword, token, Boolean.TRUE.equals(value), index, node);
 		else
-			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value.toString(), index, node);
+			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
 	protected void acceptRuleCall(RuleCall rc, Object value, String token, int index, INode node) {

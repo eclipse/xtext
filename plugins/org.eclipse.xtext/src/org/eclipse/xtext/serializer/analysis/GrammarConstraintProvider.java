@@ -174,7 +174,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_DATATYPE_RULE_CALL:
 				case ASSIGNED_ENUM_RULE_CALL:
 				case ASSIGNED_KEYWORD:
-				case ASSIGNED_BOOLEAN_KEYWORD:
 				case ASSIGNED_PARSER_RULE_CALL:
 				case ASSIGNED_TERMINAL_RULE_CALL:
 					EClass type = ele.getContainingConstraint().getType();
@@ -1244,7 +1243,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	protected ConstraintElementType getConstraintElementType(AbstractElement ele) {
-		Assignment ass;
 		if (ele instanceof Action) {
 			if (((Action) ele).getFeature() != null)
 				return ConstraintElementType.ASSIGNED_ACTION_CALL;
@@ -1263,7 +1261,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_CROSSREF_ENUM_RULE_CALL;
 			} else if (ele instanceof Keyword)
 				return ConstraintElementType.ASSIGNED_CROSSREF_KEYWORD;
-		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
+		} else if (GrammarUtil.containingAssignment(ele) != null) {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
@@ -1277,10 +1275,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_ENUM_RULE_CALL;
 
 			} else if (ele instanceof Keyword) {
-				if (GrammarUtil.isBooleanAssignment(ass))
-					return ConstraintElementType.ASSIGNED_BOOLEAN_KEYWORD;
-				else
-					return ConstraintElementType.ASSIGNED_KEYWORD;
+				return ConstraintElementType.ASSIGNED_KEYWORD;
 			}
 		}
 		throw new RuntimeException("Unknown Grammar Element: " + EmfFormatter.objPath(ele));

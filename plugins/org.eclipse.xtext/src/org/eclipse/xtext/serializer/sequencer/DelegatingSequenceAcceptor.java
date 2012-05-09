@@ -57,12 +57,7 @@ public class DelegatingSequenceAcceptor implements ISequenceAcceptor {
 			delegate.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
-	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-		if (delegate != null)
-			delegate.acceptAssignedKeyword(keyword, token, value, index, node);
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		if (delegate != null)
 			delegate.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
