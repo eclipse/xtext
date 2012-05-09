@@ -206,5 +206,9 @@ Workflow {
 				fragment = refactoring.RefactorElementNameFragment {}
 			}
 		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug377311TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
 	}
 }

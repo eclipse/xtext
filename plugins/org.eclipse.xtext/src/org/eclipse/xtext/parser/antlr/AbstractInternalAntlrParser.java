@@ -37,6 +37,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -220,6 +221,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected void registerRules(Grammar grammar) {
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
+			if(rule instanceof TerminalRule && rule.getName() != null){
+				allRules.put(rule.getName().toUpperCase(), rule);
+			}
 			allRules.put(rule.getName(), rule);
 		}
 	}
