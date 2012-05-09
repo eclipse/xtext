@@ -221,10 +221,10 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	protected void registerRules(Grammar grammar) {
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
-			if(rule instanceof TerminalRule && rule.getName() != null){
+			if(rule instanceof TerminalRule)
 				allRules.put(rule.getName().toUpperCase(), rule);
-			}
-			allRules.put(rule.getName(), rule);
+			else
+				allRules.put(rule.getName(), rule);
 		}
 	}
 
