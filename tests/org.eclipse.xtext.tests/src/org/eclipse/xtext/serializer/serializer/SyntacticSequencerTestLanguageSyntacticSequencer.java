@@ -28,6 +28,22 @@ public class SyntacticSequencerTestLanguageSyntacticSequencer extends
 	}
 
 	/**
+	 * terminal BOOLEAN_TERMINAL_ID: '%1' ID;
+	 */
+	@Override
+	protected String getBOOLEAN_TERMINAL_IDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		return "%1matched";
+	}
+
+	/**
+	 * BooleanDatatypeID: ID;
+	 */
+	@Override
+	protected String getBooleanDatatypeIDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		return "foomatched";
+	}
+
+	/**
 	 * Syntax: 'kw2' | KW1
 	 */
 	@Override
