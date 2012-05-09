@@ -32,16 +32,27 @@ public class IndentationAwareTestLanguageSyntacticSequencer extends AbstractSynt
 		return "";
 	}
 	
+	/**
+	 * terminal BEGIN : '{';
+	 */
 	protected String getBEGINToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "{";
 	}
+	
+	/**
+	 * terminal END : '}';
+	 */
 	protected String getENDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "}";
 	}
+	
+	/**
+	 * terminal NL: ('\r'|'\n')+ '\t'*;
+	 */
 	protected String getNLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

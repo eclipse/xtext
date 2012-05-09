@@ -42,11 +42,39 @@ public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends Ab
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getKW1Rule())
+		if(ruleCall.getRule() == grammarAccess.getBOOLEAN_TERMINAL_IDRule())
+			return getBOOLEAN_TERMINAL_IDToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getBooleanDatatypeIDRule())
+			return getBooleanDatatypeIDToken(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getKW1Rule())
 			return getKW1Token(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * terminal BOOLEAN_TERMINAL_ID:
+	 * 	'%1' ID;
+	 */
+	protected String getBOOLEAN_TERMINAL_IDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "%1";
+	}
+	
+	/**
+	 * BooleanDatatypeID:
+	 * 	ID;
+	 */
+	protected String getBooleanDatatypeIDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
+	 * KW1:
+	 * 	"kw1" | "matched" INT?;
+	 */
 	protected String getKW1Token(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
@@ -81,7 +109,7 @@ public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends Ab
 
 	/**
 	 * Syntax:
-	 *     'kw2' | KW1
+	 *     KW1 | 'kw2'
 	 */
 	protected void emit_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

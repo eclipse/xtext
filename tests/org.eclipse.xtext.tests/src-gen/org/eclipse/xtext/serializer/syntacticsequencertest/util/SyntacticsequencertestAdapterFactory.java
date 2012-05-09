@@ -143,6 +143,11 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
         return createAlternativeTransitionAdapter();
       }
       @Override
+      public Adapter caseBooleanValues(BooleanValues object)
+      {
+        return createBooleanValuesAdapter();
+      }
+      @Override
       public Adapter caseAdd0(Add0 object)
       {
         return createAdd0Adapter();
@@ -390,6 +395,21 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAlternativeTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues <em>Boolean Values</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues
+   * @generated
+   */
+  public Adapter createBooleanValuesAdapter()
   {
     return null;
   }

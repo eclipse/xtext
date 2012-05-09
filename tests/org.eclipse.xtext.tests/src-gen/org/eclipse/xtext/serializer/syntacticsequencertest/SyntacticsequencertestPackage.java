@@ -169,13 +169,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X11 = 10;
 
   /**
+   * The feature id for the '<em><b>X12</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X12 = 11;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 11;
+  int MODEL_FEATURE_COUNT = 12;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -541,6 +550,52 @@ public interface SyntacticsequencertestPackage extends EPackage
   int ALTERNATIVE_TRANSITION_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl <em>Boolean Values</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanValues()
+   * @generated
+   */
+  int BOOLEAN_VALUES = 13;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES__VAL3 = 2;
+
+  /**
+   * The number of structural features of the '<em>Boolean Values</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_VALUES_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -548,7 +603,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 13;
+  int ADD0 = 14;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -585,7 +640,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 14;
+  int VAL0 = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -613,7 +668,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 15;
+  int ADD1 = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -650,7 +705,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 16;
+  int VAL1 = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -678,7 +733,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 17;
+  int ADD2 = 18;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -715,7 +770,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 18;
+  int MULT2 = 19;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -752,7 +807,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 19;
+  int VAL2 = 20;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -903,6 +958,17 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X11();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12 <em>X12</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X12</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X12();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -1188,6 +1254,49 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EAttribute getAlternativeTransition_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues <em>Boolean Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Values</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues
+   * @generated
+   */
+  EClass getBooleanValues();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal1()
+   * @see #getBooleanValues()
+   * @generated
+   */
+  EAttribute getBooleanValues_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal2()
+   * @see #getBooleanValues()
+   * @generated
+   */
+  EAttribute getBooleanValues_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal3()
+   * @see #getBooleanValues()
+   * @generated
+   */
+  EAttribute getBooleanValues_Val3();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
@@ -1502,6 +1611,14 @@ public interface SyntacticsequencertestPackage extends EPackage
     EReference MODEL__X11 = eINSTANCE.getModel_X11();
 
     /**
+     * The meta object literal for the '<em><b>X12</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X12 = eINSTANCE.getModel_X12();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1740,6 +1857,40 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EAttribute ALTERNATIVE_TRANSITION__VAL = eINSTANCE.getAlternativeTransition_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl <em>Boolean Values</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanValues()
+     * @generated
+     */
+    EClass BOOLEAN_VALUES = eINSTANCE.getBooleanValues();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_VALUES__VAL1 = eINSTANCE.getBooleanValues_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_VALUES__VAL2 = eINSTANCE.getBooleanValues_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_VALUES__VAL3 = eINSTANCE.getBooleanValues_Val3();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

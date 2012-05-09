@@ -30,11 +30,19 @@ public class AbstractBug301935TestLanguageSyntacticSequencer extends AbstractSyn
 		return "";
 	}
 	
+	/**
+	 * NL:
+	 * 	WS* ('\r'? '\n') WS*;
+	 */
 	protected String getNLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "\n";
 	}
+	
+	/**
+	 * terminal WS			: (' '|'\t')+;
+	 */
 	protected String getWSToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

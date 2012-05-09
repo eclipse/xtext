@@ -23,9 +23,52 @@ public class AssignmentFinderTestLanguageSyntacticSequencer extends AbstractSynt
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getEnum1Rule())
+			return getEnum1Token(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getEnum2Rule())
+			return getEnum2Token(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getTerminal1Rule())
+			return getTerminal1Token(semanticObject, ruleCall, node);
+		else if(ruleCall.getRule() == grammarAccess.getTerminal2Rule())
+			return getTerminal2Token(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * enum Enum1 returns TestEnum: lit1;
+	 */
+	protected String getEnum1Token(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
+	 * enum Enum2 returns TestEnum: lit2;
+	 */
+	protected String getEnum2Token(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
+	 * terminal Terminal1: '%' ('A'..'Z')*;
+	 */
+	protected String getTerminal1Token(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "%";
+	}
+	
+	/**
+	 * terminal Terminal2: '%' ('a'..'z')*;
+	 */
+	protected String getTerminal2Token(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "%";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {

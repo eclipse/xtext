@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX9 <em>X9</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX10 <em>X10</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX11 <em>X11</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12 <em>X12</em>}</li>
  * </ul>
  * </p>
  *
@@ -320,5 +321,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX11(AlternativeTransition value);
+
+  /**
+   * Returns the value of the '<em><b>X12</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X12</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X12</em>' containment reference.
+   * @see #setX12(BooleanValues)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel_X12()
+   * @model containment="true"
+   * @generated
+   */
+  BooleanValues getX12();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX12 <em>X12</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X12</em>' containment reference.
+   * @see #getX12()
+   * @generated
+   */
+  void setX12(BooleanValues value);
 
 } // Model

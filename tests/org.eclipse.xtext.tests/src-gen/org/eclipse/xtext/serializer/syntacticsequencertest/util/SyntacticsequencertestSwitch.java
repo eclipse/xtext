@@ -186,6 +186,13 @@ public class SyntacticsequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SyntacticsequencertestPackage.BOOLEAN_VALUES:
+      {
+        BooleanValues booleanValues = (BooleanValues)theEObject;
+        T result = caseBooleanValues(booleanValues);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SyntacticsequencertestPackage.ADD0:
       {
         Add0 add0 = (Add0)theEObject;
@@ -450,6 +457,22 @@ public class SyntacticsequencertestSwitch<T>
    * @generated
    */
   public T caseAlternativeTransition(AlternativeTransition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Boolean Values</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Boolean Values</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBooleanValues(BooleanValues object)
   {
     return null;
   }

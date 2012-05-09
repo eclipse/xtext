@@ -143,6 +143,15 @@ public interface SyntacticsequencertestFactory extends EFactory
   AlternativeTransition createAlternativeTransition();
 
   /**
+   * Returns a new object of class '<em>Boolean Values</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Boolean Values</em>'.
+   * @generated
+   */
+  BooleanValues createBooleanValues();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

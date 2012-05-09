@@ -23,6 +23,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x11" eType="#//AlternativeTransition"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x12" eType="#//BooleanValues"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MandatoryKeywords">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -60,6 +62,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AlternativeTransition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanValues">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add0" eSuperTypes="#//Exp0">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Exp0" containment="true"/>

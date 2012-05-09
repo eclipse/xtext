@@ -34,6 +34,9 @@ public class EObjectAtOffsetTestLanguageSyntacticSequencer extends AbstractSynta
 		return "";
 	}
 	
+	/**
+	 * terminal INT returns ecore::EInt: ('0'..'9')+;
+	 */
 	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

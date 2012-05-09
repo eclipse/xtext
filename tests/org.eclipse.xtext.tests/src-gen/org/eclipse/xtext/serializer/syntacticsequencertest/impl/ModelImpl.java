@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
+import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX9 <em>X9</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX10 <em>X10</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX11 <em>X11</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX12 <em>X12</em>}</li>
  * </ul>
  * </p>
  *
@@ -162,6 +164,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected AlternativeTransition x11;
+
+  /**
+   * The cached value of the '{@link #getX12() <em>X12</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX12()
+   * @generated
+   * @ordered
+   */
+  protected BooleanValues x12;
 
   /**
    * <!-- begin-user-doc -->
@@ -717,6 +729,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public BooleanValues getX12()
+  {
+    return x12;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX12(BooleanValues newX12, NotificationChain msgs)
+  {
+    BooleanValues oldX12 = x12;
+    x12 = newX12;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X12, oldX12, newX12);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX12(BooleanValues newX12)
+  {
+    if (newX12 != x12)
+    {
+      NotificationChain msgs = null;
+      if (x12 != null)
+        msgs = ((InternalEObject)x12).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X12, null, msgs);
+      if (newX12 != null)
+        msgs = ((InternalEObject)newX12).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X12, null, msgs);
+      msgs = basicSetX12(newX12, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X12, newX12, newX12));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -744,6 +804,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX10(null, msgs);
       case SyntacticsequencertestPackage.MODEL__X11:
         return basicSetX11(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X12:
+        return basicSetX12(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -780,6 +842,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX10();
       case SyntacticsequencertestPackage.MODEL__X11:
         return getX11();
+      case SyntacticsequencertestPackage.MODEL__X12:
+        return getX12();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -826,6 +890,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SyntacticsequencertestPackage.MODEL__X11:
         setX11((AlternativeTransition)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X12:
+        setX12((BooleanValues)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -874,6 +941,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SyntacticsequencertestPackage.MODEL__X11:
         setX11((AlternativeTransition)null);
         return;
+      case SyntacticsequencertestPackage.MODEL__X12:
+        setX12((BooleanValues)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -910,6 +980,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x10 != null;
       case SyntacticsequencertestPackage.MODEL__X11:
         return x11 != null;
+      case SyntacticsequencertestPackage.MODEL__X12:
+        return x12 != null;
     }
     return super.eIsSet(featureID);
   }

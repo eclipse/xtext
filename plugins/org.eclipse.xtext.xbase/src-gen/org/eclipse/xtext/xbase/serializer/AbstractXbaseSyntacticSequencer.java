@@ -43,6 +43,11 @@ public class AbstractXbaseSyntacticSequencer extends AbstractSyntacticSequencer 
 		return "";
 	}
 	
+	/**
+	 * OpSingleAssign:
+	 * 	'='
+	 * ;
+	 */
 	protected String getOpSingleAssignToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

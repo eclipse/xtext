@@ -23,9 +23,20 @@ public class HiddenTerminalsTestLanguageSyntacticSequencer extends AbstractSynta
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getDatatypeRuleRule())
+			return getDatatypeRuleToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * DatatypeRule returns ecore::EString hidden(WS):
+	 *   'rule' ';';
+	 */
+	protected String getDatatypeRuleToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "rule;";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {

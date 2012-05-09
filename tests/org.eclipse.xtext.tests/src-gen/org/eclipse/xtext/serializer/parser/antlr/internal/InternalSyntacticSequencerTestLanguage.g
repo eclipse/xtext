@@ -285,6 +285,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX12BooleanValuesParserRuleCall_11_0()); 
+	    }
+		lv_x12_11_0=ruleBooleanValues		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x12",
+        		lv_x12_11_0, 
+        		"BooleanValues");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -941,9 +960,9 @@ ruleSingleCrossReference returns [EObject current=null]
 (
 (
 (
-		lv_name_1_1=RULE_TERMINALID
+		lv_name_1_1=RULE_TERMINAL_ID
 		{
-			newLeafNode(lv_name_1_1, grammarAccess.getSingleCrossReferenceAccess().getNameTerminalIDTerminalRuleCall_1_0_0()); 
+			newLeafNode(lv_name_1_1, grammarAccess.getSingleCrossReferenceAccess().getNameTERMINAL_IDTerminalRuleCall_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -953,7 +972,7 @@ ruleSingleCrossReference returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_1, 
-        		"TerminalID");
+        		"TERMINAL_ID");
 	    }
 
     |		lv_name_1_2=RULE_ID
@@ -985,7 +1004,7 @@ ruleSingleCrossReference returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
 	        }
         }
-	otherlv_3=RULE_TERMINALID
+	otherlv_3=RULE_TERMINAL_ID
 	{
 		newLeafNode(otherlv_3, grammarAccess.getSingleCrossReferenceAccess().getRef1SingleCrossReferenceCrossReference_2_1_0()); 
 	}
@@ -1442,7 +1461,119 @@ ruleKW1
 
 
 
-RULE_TERMINALID : '$1' RULE_ID;
+// Entry rule entryRuleBooleanDatatypeID
+entryRuleBooleanDatatypeID returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBooleanDatatypeIDRule()); } 
+	 iv_ruleBooleanDatatypeID=ruleBooleanDatatypeID 
+	 { $current=$iv_ruleBooleanDatatypeID.current.getText(); }  
+	 EOF 
+;
+
+// Rule BooleanDatatypeID
+ruleBooleanDatatypeID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getBooleanDatatypeIDAccess().getIDTerminalRuleCall()); 
+    }
+
+    ;
+
+
+
+
+
+// Entry rule entryRuleBooleanValues
+entryRuleBooleanValues returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBooleanValuesRule()); }
+	 iv_ruleBooleanValues=ruleBooleanValues 
+	 { $current=$iv_ruleBooleanValues.current; } 
+	 EOF 
+;
+
+// Rule BooleanValues
+ruleBooleanValues returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getBooleanValuesAccess().getBooleanValuesAction_0(),
+            $current);
+    }
+)	otherlv_1='#12' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getBooleanValuesAccess().getNumberSignDigitOneDigitTwoKeyword_1());
+    }
+(
+(
+		lv_val1_2_0=	'kw1' 
+    {
+        newLeafNode(lv_val1_2_0, grammarAccess.getBooleanValuesAccess().getVal1Kw1Keyword_2_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getBooleanValuesRule());
+	        }
+       		setWithLastConsumed($current, "val1", true, "kw1");
+	    }
+
+)
+)?(
+(
+		lv_val2_3_0=RULE_BOOLEAN_TERMINAL_ID
+		{
+			newLeafNode(lv_val2_3_0, grammarAccess.getBooleanValuesAccess().getVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getBooleanValuesRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val2",
+        		true, 
+        		"BOOLEAN_TERMINAL_ID");
+	    }
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getBooleanValuesAccess().getVal3BooleanDatatypeIDParserRuleCall_4_0()); 
+	    }
+		lv_val3_4_0=ruleBooleanDatatypeID		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getBooleanValuesRule());
+	        }
+       		set(
+       			$current, 
+       			"val3",
+        		true, 
+        		"BooleanDatatypeID");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?)
+;
+
+
+
+
+
+RULE_TERMINAL_ID : '$1' RULE_ID;
+
+RULE_BOOLEAN_TERMINAL_ID : '%1' RULE_ID;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

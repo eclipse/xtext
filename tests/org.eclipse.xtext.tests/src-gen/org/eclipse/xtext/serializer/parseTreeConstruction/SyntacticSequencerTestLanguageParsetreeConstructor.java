@@ -51,6 +51,7 @@ protected class ThisRootNode extends RootToken {
 			case 17: return new OptionalManyTransition_Group(this, this, 17, inst);
 			case 18: return new MandatoryManyTransition_Group(this, this, 18, inst);
 			case 19: return new AlternativeTransition_Group(this, this, 19, inst);
+			case 20: return new BooleanValues_Group(this, this, 20, inst);
 			default: return null;
 		}	
 	}	
@@ -62,13 +63,13 @@ protected class ThisRootNode extends RootToken {
  * Model:
  * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
  * 	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
- * 	x11=AlternativeTransition;
+ * 	x11=AlternativeTransition | x12=BooleanValues;
  *
  **/
 
 // x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 // x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-// x11=AlternativeTransition
+// x11=AlternativeTransition | x12=BooleanValues
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -94,6 +95,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 8: return new Model_X9Assignment_8(lastRuleCallOrigin, this, 8, inst);
 			case 9: return new Model_X10Assignment_9(lastRuleCallOrigin, this, 9, inst);
 			case 10: return new Model_X11Assignment_10(lastRuleCallOrigin, this, 10, inst);
+			case 11: return new Model_X12Assignment_11(lastRuleCallOrigin, this, 11, inst);
 			default: return null;
 		}	
 	}
@@ -586,6 +588,51 @@ protected class Model_X11Assignment_10 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getAlternativeTransitionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX11AlternativeTransitionParserRuleCall_10_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x12=BooleanValues
+protected class Model_X12Assignment_11 extends AssignmentToken  {
+	
+	public Model_X12Assignment_11(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX12Assignment_11();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanValues_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x12",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x12");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getBooleanValuesRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX12BooleanValuesParserRuleCall_11_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2540,12 +2587,12 @@ protected class Prim2_RightParenthesisKeyword_1_2 extends KeywordToken  {
 /************ begin Rule SingleCrossReference ****************
  *
  * SingleCrossReference:
- * 	"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+ * 	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
  * 	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
  *
  **/
 
-// "#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+// "#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 // ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
 protected class SingleCrossReference_Group extends GroupToken {
 	
@@ -2600,7 +2647,7 @@ protected class SingleCrossReference_NumberSignDigitFiveKeyword_0 extends Keywor
 
 }
 
-// name=(TerminalID | ID)
+// name=(TERMINAL_ID | ID)
 protected class SingleCrossReference_NameAssignment_1 extends AssignmentToken  {
 	
 	public SingleCrossReference_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2624,9 +2671,9 @@ protected class SingleCrossReference_NameAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getSingleCrossReferenceAccess().getNameTerminalIDTerminalRuleCall_1_0_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getSingleCrossReferenceAccess().getNameTERMINAL_IDTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getSingleCrossReferenceAccess().getNameTerminalIDTerminalRuleCall_1_0_0();
+			element = grammarAccess.getSingleCrossReferenceAccess().getNameTERMINAL_IDTerminalRuleCall_1_0_0();
 			return obj;
 		}
 		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getSingleCrossReferenceAccess().getNameIDTerminalRuleCall_1_0_1(), value, null)) {
@@ -2639,7 +2686,7 @@ protected class SingleCrossReference_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("kw1" ref1=[SingleCrossReference|TerminalID])?
+// ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
 protected class SingleCrossReference_Group_2 extends GroupToken {
 	
 	public SingleCrossReference_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2683,7 +2730,7 @@ protected class SingleCrossReference_Kw1Keyword_2_0 extends KeywordToken  {
 
 }
 
-// ref1=[SingleCrossReference|TerminalID]
+// ref1=[SingleCrossReference|TERMINAL_ID]
 protected class SingleCrossReference_Ref1Assignment_2_1 extends AssignmentToken  {
 	
 	public SingleCrossReference_Ref1Assignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3793,5 +3840,202 @@ protected class AlternativeTransition_ValAssignment_2 extends AssignmentToken  {
 
 
 /************ end Rule AlternativeTransition ****************/
+
+
+
+/************ begin Rule BooleanValues ****************
+ *
+ * BooleanValues:
+ * 	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
+ *
+ **/
+
+// {BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?
+protected class BooleanValues_Group extends GroupToken {
+	
+	public BooleanValues_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBooleanValuesAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanValues_Val3Assignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new BooleanValues_Val2Assignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new BooleanValues_Val1Assignment_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new BooleanValues_NumberSignDigitOneDigitTwoKeyword_1(lastRuleCallOrigin, this, 3, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getBooleanValuesAccess().getBooleanValuesAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {BooleanValues}
+protected class BooleanValues_BooleanValuesAction_0 extends ActionToken  {
+
+	public BooleanValues_BooleanValuesAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getBooleanValuesAccess().getBooleanValuesAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "#12"
+protected class BooleanValues_NumberSignDigitOneDigitTwoKeyword_1 extends KeywordToken  {
+	
+	public BooleanValues_NumberSignDigitOneDigitTwoKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBooleanValuesAccess().getNumberSignDigitOneDigitTwoKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanValues_BooleanValuesAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// val1?="kw1"?
+protected class BooleanValues_Val1Assignment_2 extends AssignmentToken  {
+	
+	public BooleanValues_Val1Assignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBooleanValuesAccess().getVal1Assignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanValues_NumberSignDigitOneDigitTwoKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val1",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val1");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getBooleanValuesAccess().getVal1Kw1Keyword_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val2?=BOOLEAN_TERMINAL_ID?
+protected class BooleanValues_Val2Assignment_3 extends AssignmentToken  {
+	
+	public BooleanValues_Val2Assignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBooleanValuesAccess().getVal2Assignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanValues_Val1Assignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new BooleanValues_NumberSignDigitOneDigitTwoKeyword_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val2",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val2");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBooleanValuesAccess().getVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getBooleanValuesAccess().getVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val3?=BooleanDatatypeID?
+protected class BooleanValues_Val3Assignment_4 extends AssignmentToken  {
+	
+	public BooleanValues_Val3Assignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBooleanValuesAccess().getVal3Assignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanValues_Val2Assignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new BooleanValues_Val1Assignment_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new BooleanValues_NumberSignDigitOneDigitTwoKeyword_1(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val3",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val3");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBooleanValuesAccess().getVal3BooleanDatatypeIDParserRuleCall_4_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getBooleanValuesAccess().getVal3BooleanDatatypeIDParserRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule BooleanValues ****************/
 
 }

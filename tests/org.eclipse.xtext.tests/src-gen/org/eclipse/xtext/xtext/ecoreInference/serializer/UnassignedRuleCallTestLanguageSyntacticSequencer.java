@@ -34,11 +34,20 @@ public class UnassignedRuleCallTestLanguageSyntacticSequencer extends AbstractSy
 		return "";
 	}
 	
+	/**
+	 * DataTypeRule:
+	 *   INT 'keyword' INT STRING?
+	 * ;
+	 */
 	protected String getDataTypeRuleToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "keyword";
 	}
+	
+	/**
+	 * terminal INT returns ecore::EInt: ('0'..'9')+;
+	 */
 	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);

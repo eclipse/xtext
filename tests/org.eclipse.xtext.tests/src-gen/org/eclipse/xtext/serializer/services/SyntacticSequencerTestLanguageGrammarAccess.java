@@ -44,16 +44,18 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX10MandatoryManyTransitionParserRuleCall_9_0 = (RuleCall)cX10Assignment_9.eContents().get(0);
 		private final Assignment cX11Assignment_10 = (Assignment)cAlternatives.eContents().get(10);
 		private final RuleCall cX11AlternativeTransitionParserRuleCall_10_0 = (RuleCall)cX11Assignment_10.eContents().get(0);
+		private final Assignment cX12Assignment_11 = (Assignment)cAlternatives.eContents().get(11);
+		private final RuleCall cX12BooleanValuesParserRuleCall_11_0 = (RuleCall)cX12Assignment_11.eContents().get(0);
 		
 		//Model:
 		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//	x11=AlternativeTransition;
+		//	x11=AlternativeTransition | x12=BooleanValues;
 		public ParserRule getRule() { return rule; }
 
 		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//x11=AlternativeTransition
+		//x11=AlternativeTransition | x12=BooleanValues
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=MandatoryKeywords
@@ -121,6 +123,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//AlternativeTransition
 		public RuleCall getX11AlternativeTransitionParserRuleCall_10_0() { return cX11AlternativeTransitionParserRuleCall_10_0; }
+
+		//x12=BooleanValues
+		public Assignment getX12Assignment_11() { return cX12Assignment_11; }
+
+		//BooleanValues
+		public RuleCall getX12BooleanValuesParserRuleCall_11_0() { return cX12BooleanValuesParserRuleCall_11_0; }
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
@@ -513,13 +521,13 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Alternatives cNameAlternatives_1_0 = (Alternatives)cNameAssignment_1.eContents().get(0);
-		private final RuleCall cNameTerminalIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
+		private final RuleCall cNameTERMINAL_IDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_1_0_1 = (RuleCall)cNameAlternatives_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cKw1Keyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cRef1Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final CrossReference cRef1SingleCrossReferenceCrossReference_2_1_0 = (CrossReference)cRef1Assignment_2_1.eContents().get(0);
-		private final RuleCall cRef1SingleCrossReferenceTerminalIDTerminalRuleCall_2_1_0_1 = (RuleCall)cRef1SingleCrossReferenceCrossReference_2_1_0.eContents().get(1);
+		private final RuleCall cRef1SingleCrossReferenceTERMINAL_IDTerminalRuleCall_2_1_0_1 = (RuleCall)cRef1SingleCrossReferenceCrossReference_2_1_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cKw2Keyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cRef2Assignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
@@ -537,43 +545,43 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1 = (RuleCall)cRef4SingleCrossReferenceCrossReference_5_1_0.eContents().get(1);
 		
 		//SingleCrossReference:
-		//	"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+		//	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
 		public ParserRule getRule() { return rule; }
 
-		//"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+		//"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
 		public Group getGroup() { return cGroup; }
 
 		//"#5"
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 
-		//name=(TerminalID | ID)
+		//name=(TERMINAL_ID | ID)
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//TerminalID | ID
+		//TERMINAL_ID | ID
 		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
 
-		//TerminalID
-		public RuleCall getNameTerminalIDTerminalRuleCall_1_0_0() { return cNameTerminalIDTerminalRuleCall_1_0_0; }
+		//TERMINAL_ID
+		public RuleCall getNameTERMINAL_IDTerminalRuleCall_1_0_0() { return cNameTERMINAL_IDTerminalRuleCall_1_0_0; }
 
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0_1() { return cNameIDTerminalRuleCall_1_0_1; }
 
-		//("kw1" ref1=[SingleCrossReference|TerminalID])?
+		//("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"kw1"
 		public Keyword getKw1Keyword_2_0() { return cKw1Keyword_2_0; }
 
-		//ref1=[SingleCrossReference|TerminalID]
+		//ref1=[SingleCrossReference|TERMINAL_ID]
 		public Assignment getRef1Assignment_2_1() { return cRef1Assignment_2_1; }
 
-		//[SingleCrossReference|TerminalID]
+		//[SingleCrossReference|TERMINAL_ID]
 		public CrossReference getRef1SingleCrossReferenceCrossReference_2_1_0() { return cRef1SingleCrossReferenceCrossReference_2_1_0; }
 
-		//TerminalID
-		public RuleCall getRef1SingleCrossReferenceTerminalIDTerminalRuleCall_2_1_0_1() { return cRef1SingleCrossReferenceTerminalIDTerminalRuleCall_2_1_0_1; }
+		//TERMINAL_ID
+		public RuleCall getRef1SingleCrossReferenceTERMINAL_IDTerminalRuleCall_2_1_0_1() { return cRef1SingleCrossReferenceTERMINAL_IDTerminalRuleCall_2_1_0_1; }
 
 		//("kw2" ref2=[SingleCrossReference|DatatypeID])?
 		public Group getGroup_3() { return cGroup_3; }
@@ -852,6 +860,62 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getValIDTerminalRuleCall_2_0() { return cValIDTerminalRuleCall_2_0; }
 	}
+
+	public class BooleanDatatypeIDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanDatatypeID");
+		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//BooleanDatatypeID:
+		//	ID;
+		public ParserRule getRule() { return rule; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+	}
+
+	public class BooleanValuesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanValues");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBooleanValuesAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cNumberSignDigitOneDigitTwoKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cVal1Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cVal1Kw1Keyword_2_0 = (Keyword)cVal1Assignment_2.eContents().get(0);
+		private final Assignment cVal2Assignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
+		private final Assignment cVal3Assignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cVal3BooleanDatatypeIDParserRuleCall_4_0 = (RuleCall)cVal3Assignment_4.eContents().get(0);
+		
+		//BooleanValues:
+		//	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
+		public ParserRule getRule() { return rule; }
+
+		//{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?
+		public Group getGroup() { return cGroup; }
+
+		//{BooleanValues}
+		public Action getBooleanValuesAction_0() { return cBooleanValuesAction_0; }
+
+		//"#12"
+		public Keyword getNumberSignDigitOneDigitTwoKeyword_1() { return cNumberSignDigitOneDigitTwoKeyword_1; }
+
+		//val1?="kw1"?
+		public Assignment getVal1Assignment_2() { return cVal1Assignment_2; }
+
+		//"kw1"
+		public Keyword getVal1Kw1Keyword_2_0() { return cVal1Kw1Keyword_2_0; }
+
+		//val2?=BOOLEAN_TERMINAL_ID?
+		public Assignment getVal2Assignment_3() { return cVal2Assignment_3; }
+
+		//BOOLEAN_TERMINAL_ID
+		public RuleCall getVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0() { return cVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0; }
+
+		//val3?=BooleanDatatypeID?
+		public Assignment getVal3Assignment_4() { return cVal3Assignment_4; }
+
+		//BooleanDatatypeID
+		public RuleCall getVal3BooleanDatatypeIDParserRuleCall_4_0() { return cVal3BooleanDatatypeIDParserRuleCall_4_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -866,7 +930,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private Addition2Elements pAddition2;
 	private Multiplication2Elements pMultiplication2;
 	private Prim2Elements pPrim2;
-	private TerminalRule tTerminalID;
+	private TerminalRule tTERMINAL_ID;
 	private DatatypeIDElements pDatatypeID;
 	private SingleCrossReferenceElements pSingleCrossReference;
 	private BooleanAlternativeElements pBooleanAlternative;
@@ -877,6 +941,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private OptionalManyTransitionElements pOptionalManyTransition;
 	private MandatoryManyTransitionElements pMandatoryManyTransition;
 	private AlternativeTransitionElements pAlternativeTransition;
+	private TerminalRule tBOOLEAN_TERMINAL_ID;
+	private BooleanDatatypeIDElements pBooleanDatatypeID;
+	private BooleanValuesElements pBooleanValues;
 	
 	private final Grammar grammar;
 
@@ -919,7 +986,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 	//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-	//	x11=AlternativeTransition;
+	//	x11=AlternativeTransition | x12=BooleanValues;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1038,10 +1105,10 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getPrim2Access().getRule();
 	}
 
-	//terminal TerminalID:
+	//terminal TERMINAL_ID:
 	//	"$1" ID;
-	public TerminalRule getTerminalIDRule() {
-		return (tTerminalID != null) ? tTerminalID : (tTerminalID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "TerminalID"));
+	public TerminalRule getTERMINAL_IDRule() {
+		return (tTERMINAL_ID != null) ? tTERMINAL_ID : (tTERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "TERMINAL_ID"));
 	} 
 
 	//DatatypeID:
@@ -1055,7 +1122,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//SingleCrossReference:
-	//	"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+	//	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
 		return (pSingleCrossReference != null) ? pSingleCrossReference : (pSingleCrossReference = new SingleCrossReferenceElements());
@@ -1143,6 +1210,32 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getAlternativeTransitionRule() {
 		return getAlternativeTransitionAccess().getRule();
+	}
+
+	//terminal BOOLEAN_TERMINAL_ID:
+	//	"%1" ID;
+	public TerminalRule getBOOLEAN_TERMINAL_IDRule() {
+		return (tBOOLEAN_TERMINAL_ID != null) ? tBOOLEAN_TERMINAL_ID : (tBOOLEAN_TERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOLEAN_TERMINAL_ID"));
+	} 
+
+	//BooleanDatatypeID:
+	//	ID;
+	public BooleanDatatypeIDElements getBooleanDatatypeIDAccess() {
+		return (pBooleanDatatypeID != null) ? pBooleanDatatypeID : (pBooleanDatatypeID = new BooleanDatatypeIDElements());
+	}
+	
+	public ParserRule getBooleanDatatypeIDRule() {
+		return getBooleanDatatypeIDAccess().getRule();
+	}
+
+	//BooleanValues:
+	//	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
+	public BooleanValuesElements getBooleanValuesAccess() {
+		return (pBooleanValues != null) ? pBooleanValues : (pBooleanValues = new BooleanValuesElements());
+	}
+	
+	public ParserRule getBooleanValuesRule() {
+		return getBooleanValuesAccess().getRule();
 	}
 
 	//terminal ID:
