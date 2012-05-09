@@ -1300,6 +1300,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (loop instanceof RichStringForLoop) {
 			return;
 		}
-		mustBeJavaStatementExpression(loop.getEachExpression());
+		super.checkForExpression(loop);
 	}
 }
