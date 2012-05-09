@@ -19,12 +19,15 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
+import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.junit.Test;
 
 import testdata.FieldAccess;
 import testdata.FieldAccessSub;
+import testdata.SugarConflict;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,6 +35,9 @@ import com.google.common.collect.Sets;
  */
 public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 
+	@Inject 
+	private XFeatureCallSugarDescriptionProvider sugarDescriptionProvider;
+	
 	@Test public void testPublicFieldShadowed_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
@@ -112,4 +118,21 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertFalse(hierarchy.hasNext());
 	}
 	
+	@Test public void testSugarConflict() throws Exception {
+		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(sugarDescriptionProvider)));
+		assertSimpleNameFeatureSelected(scope, "foo");
+		assertSimpleNameFeatureSelected(scope, "bar");
+	}
+
+	protected void assertSimpleNameFeatureSelected(JvmFeatureScope scope, String feature) {
+		Iterator<IEObjectDescription> elements = scope.getElements(QualifiedName.create(feature)).iterator();
+		assertTrue(elements.hasNext());
+		IEObjectDescription element = elements.next();
+		assertTrue(element instanceof JvmFeatureDescription);
+		assertEquals(feature, ((JvmFeatureDescription)element).getJvmFeature().getSimpleName());
+		assertFalse(elements.hasNext());
+	}
 }

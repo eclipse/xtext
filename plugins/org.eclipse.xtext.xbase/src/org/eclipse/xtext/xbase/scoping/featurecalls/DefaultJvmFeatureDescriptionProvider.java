@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -46,7 +48,9 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 			String key = t.getKey();
 			IEObjectDescription old = descriptions.put(key, t);
 			// optimistic - conflicts are expected to be rare
-			if (old != null) {
+			if (old != null && 
+					(!(old instanceof JvmFeatureDescription) 
+							|| equal(key, ((JvmFeatureDescription)old).getJvmFeature().getSimpleName()))) {
 				descriptions.put(key, old);
 			} else {
 				t.setGenericTypeContext(genericContextFactory.apply(t));
