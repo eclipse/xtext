@@ -37,6 +37,11 @@ public class DelegatingSequenceAcceptor implements ISequenceAcceptor {
 			delegate.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		if (delegate != null)
+			delegate.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
+	}
+
 	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
 		if (delegate != null)
 			delegate.acceptAssignedCrossRefTerminal(rc, token, value, index, node);

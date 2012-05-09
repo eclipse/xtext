@@ -21,10 +21,8 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.util.EmfFormatter;
-import org.omg.PortableServer.portable.Delegate;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -50,15 +48,15 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		this(null, false);
 	}
 
+	public DebugSequenceAcceptor(boolean printInstantly) {
+		this(null, printInstantly);
+	}
+
 	/**
 	 * @since 2.3
 	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate) {
 		this(delegate, false);
-	}
-
-	public DebugSequenceAcceptor(boolean printInstantly) {
-		this(null, printInstantly);
 	}
 
 	/**
@@ -79,6 +77,15 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		add(titles.doSwitch(enumRC), token, EmfFormatter.objPath(value), index, node);
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	@Override
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		add(titles.doSwitch(kw), token, EmfFormatter.objPath(value), index, node);
+		super.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
 	}
 
 	@Override

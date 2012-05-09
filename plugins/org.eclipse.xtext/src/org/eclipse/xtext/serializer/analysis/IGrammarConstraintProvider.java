@@ -43,6 +43,7 @@ public interface IGrammarConstraintProvider {
 		ASSIGNED_CROSSREF_DATATYPE_RULE_CALL, //
 		ASSIGNED_CROSSREF_ENUM_RULE_CALL, //
 		ASSIGNED_CROSSREF_TERMINAL_RULE_CALL, //
+		ASSIGNED_CROSSREF_KEYWORD, //
 		ASSIGNED_DATATYPE_RULE_CALL, //
 		ASSIGNED_ENUM_RULE_CALL, //
 		ASSIGNED_KEYWORD, //
@@ -98,7 +99,7 @@ public interface IGrammarConstraintProvider {
 		String getName();
 
 		String getSimpleName();
-		
+
 		Grammar getDeclaringGrammar();
 
 		/**

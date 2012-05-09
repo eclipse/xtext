@@ -31,6 +31,10 @@ public class StringBufferSequenceAcceptor implements ISequenceAcceptor {
 		buf.append(token);
 	}
 
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		buf.append(token);
+	}
+
 	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
 			ILeafNode node) {
 		buf.append(token);

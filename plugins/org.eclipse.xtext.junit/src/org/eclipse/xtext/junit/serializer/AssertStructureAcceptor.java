@@ -21,8 +21,6 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 
 /**
@@ -52,6 +50,12 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		assertElement(enumRC);
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
+	}
+
+	@Override
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		assertElement(kw);
+		super.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
 	}
 
 	@Override

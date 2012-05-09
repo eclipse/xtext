@@ -301,9 +301,11 @@ public class SequenceFeeder {
 		}
 	}
 
-	// TODO: test boolean assignments with terminal- and datatype rules.
 	protected void acceptKeyword(Assignment ass, Keyword keyword, Object value, String token, int index, ILeafNode node) {
-		if (GrammarUtil.isBooleanAssignment(ass))
+		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
+		if (crossRef != null)
+			sequenceAcceptor.acceptAssignedCrossRefKeyword(keyword, token, (EObject) value, index, node);
+		else if (GrammarUtil.isBooleanAssignment(ass))
 			sequenceAcceptor.acceptAssignedKeyword(keyword, token, Boolean.TRUE.equals(value), index, node);
 		else
 			sequenceAcceptor.acceptAssignedKeyword(keyword, token, value.toString(), index, node);
@@ -439,6 +441,10 @@ public class SequenceFeeder {
 	}
 
 	protected String getToken(Keyword keyword, Object value, ILeafNode node) {
+		CrossReference crossRef = GrammarUtil.containingCrossReference(keyword);
+		if (crossRef != null)
+			return provider.crossRefSerializer.serializeCrossRef(semanticObject, crossRef, (EObject) value, node,
+					errorAcceptor);
 		return provider.keywordSerializer.serializeAssignedKeyword(semanticObject, keyword, value, node, errorAcceptor);
 	}
 
