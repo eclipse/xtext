@@ -104,6 +104,16 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expr, XNUMBER_LITERAL, INVALID_INNER_EXPRESSION);
 	}
 	
+	@Test public void testNonStatementExpression_03() throws Exception {
+		XExpression expr = expression("newArrayList('foo').forEach[ it ]");
+		helper.assertError(expr, XFEATURE_CALL, INVALID_INNER_EXPRESSION);
+	}
+	
+	@Test public void testNonStatementExpression_04() throws Exception {
+		XExpression expr = expression("newArrayList('foo').forEach[ it != 'foo' ]");
+		helper.assertError(expr, XBINARY_OPERATION, INVALID_INNER_EXPRESSION);
+	}
+	
 	@Test public void testLocalVarWithArguments() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x(42) }");
 		helper.assertError(expr, XFEATURE_CALL, LOCAL_VAR_ACCESS_WITH_PARENTHESES, "local", "variable");
