@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import org.eclipse.xtext.xbase.lib.internal.Inline;
 
 /**
  * This is an extension library for {@link Comparable comparables}.

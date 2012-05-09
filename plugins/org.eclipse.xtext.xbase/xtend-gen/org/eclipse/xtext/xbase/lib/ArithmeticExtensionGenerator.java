@@ -15,6 +15,8 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
@@ -63,8 +65,8 @@ public class ArithmeticExtensionGenerator {
       for (final String type : this.types) {
         {
           String _className = this.className(type);
-          String _plus = (path + _className);
-          String _plus_1 = (_plus + ".java");
+          String _plus = ObjectExtensions.operator_plus(path, _className);
+          String _plus_1 = ObjectExtensions.operator_plus(_plus, ".java");
           File _file_1 = new File(_plus_1);
           final File file = _file_1;
           CharSequence _xifexpression = null;
@@ -88,7 +90,7 @@ public class ArithmeticExtensionGenerator {
               int _indexOf_1 = content.indexOf(_endMarker);
               String _endMarker_1 = this.endMarker();
               int _length = _endMarker_1.length();
-              int _plus_2 = (_indexOf_1 + _length);
+              int _plus_2 = IntegerExtensions.operator_plus(_indexOf_1, _length);
               String _substring_1 = content.substring(_plus_2);
               _builder.append(_substring_1, "");
               _builder.newLineIfNotEmpty();
@@ -204,6 +206,8 @@ public class ArithmeticExtensionGenerator {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
+    _builder.append("@Pure");
+    _builder.newLine();
     _builder.append("@Inline(\"(-$1)\")");
     _builder.newLine();
     _builder.append("public static ");
@@ -288,6 +292,8 @@ public class ArithmeticExtensionGenerator {
         _builder.append(" ");
         _builder.append("*/");
         _builder.newLine();
+        _builder.append("@Pure");
+        _builder.newLine();
         _builder.append("@Inline(\"($1 ");
         _builder.append(operator, "");
         _builder.append(" $2)\")");
@@ -352,7 +358,9 @@ public class ArithmeticExtensionGenerator {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
-    _builder.append("@Inline(value=\"$3.pow($1, $2)\", imported=Math.class, statementExpression=true)");
+    _builder.append("@Pure");
+    _builder.newLine();
+    _builder.append("@Inline(value=\"$3.pow($1, $2)\", imported=Math.class)");
     _builder.newLine();
     _builder.append("public static double ");
     QualifiedName _methodName_2 = this._operatorMapping.getMethodName(OperatorMapping.POWER);
@@ -478,7 +486,7 @@ public class ArithmeticExtensionGenerator {
   
   public String className(final String it) {
     String _wrapperType = this.wrapperType(it);
-    String _plus = (_wrapperType + "Extensions");
+    String _plus = ObjectExtensions.operator_plus(_wrapperType, "Extensions");
     return _plus;
   }
   

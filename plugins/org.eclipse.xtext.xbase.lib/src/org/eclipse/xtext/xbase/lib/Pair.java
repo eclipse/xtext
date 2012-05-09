@@ -35,6 +35,7 @@ public final class Pair<K, V> {
 	 * @return a newly created pair. Never <code>null</code>.
 	 * @since 2.3
 	 */
+	@Pure
 	public static <K, V> Pair<K, V> of(K k, V v) {
 		return new Pair<K, V>(k, v);
 	}
@@ -48,6 +49,7 @@ public final class Pair<K, V> {
 	 *            the value. May be <code>null</code>.
 	 * 
 	 */
+	@Pure
 	public Pair(K k, V v) {
 		this.k = k;
 		this.v = v;
@@ -58,6 +60,7 @@ public final class Pair<K, V> {
 	 * 
 	 * @return the key.
 	 */
+	@Pure
 	public K getKey() {
 		return k;
 	}
@@ -67,6 +70,7 @@ public final class Pair<K, V> {
 	 * 
 	 * @return the value.
 	 */
+	@Pure
 	public V getValue() {
 		return v;
 	}

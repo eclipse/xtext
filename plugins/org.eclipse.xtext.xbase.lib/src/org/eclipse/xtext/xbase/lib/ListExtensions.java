@@ -96,6 +96,7 @@ public class ListExtensions {
 	 *            the list whose elements should be traversed in reverse. May not be <code>null</code>.
 	 * @return a list with the same elements as the given list, in reverse
 	 */
+	@Pure
 	public static <T> List<T> reverseView(List<T> list) {
 		return Lists.reverse(list);
 	}

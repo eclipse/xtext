@@ -5,12 +5,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.lib.internal;
+package org.eclipse.xtext.xbase.lib;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import com.google.common.annotations.Beta;
 
 /**
+ * Whether the constructor or method causes any side-effects to
+ * non-local state.
+ * 
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @since 2.3
  */
-@Deprecated
-public class ToStringHelper extends org.eclipse.xtext.xbase.lib.util.ToStringHelper {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({
+    ElementType.CONSTRUCTOR,
+    ElementType.METHOD})
+@Beta
+public @interface Pure {
 
 }

@@ -79,5 +79,11 @@
                 <message_argument value="operator_upTo(Integer, Number)"/>
             </message_arguments>
         </filter>
+        <filter id="338886760">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.lib.IntegerExtensions.IntIterator"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib_2.3.0"/>
+            </message_arguments>
+        </filter>
     </resource>
 </component>

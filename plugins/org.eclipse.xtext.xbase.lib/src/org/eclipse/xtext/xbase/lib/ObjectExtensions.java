@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib;
 
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.internal.Inline;
 
 import com.google.common.base.Objects;
 
@@ -42,7 +41,7 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
-	@Inline(value="$3.equal($1, $2)", imported=Objects.class, statementExpression=true)
+	@Inline(value="$3.equal($1, $2)", imported=Objects.class)
 	public static boolean operator_equals(Object a, Object b) {
 		return Objects.equal(a, b);
 	}
@@ -58,6 +57,7 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return Java's <code>a == b</code>
 	 */
+	@Pure
 	@Inline("$1 == $2")
 	public static boolean identityEquals(Object a, Object b) {
 		return a == b;
@@ -73,7 +73,8 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return a {@link Pair}. Never <code>null</code>.
 	 */
-	@Inline(value="$3.$4of($1, $2)", imported=Pair.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.$4of($1, $2)", imported=Pair.class)
 	public static <A, B> Pair<A, B> operator_mappedTo(A a, B b) {
 		return Pair.of(a, b);
 	}
@@ -112,6 +113,7 @@ public class ObjectExtensions {
 	 * @return <code>a + b</code>
 	 * @since 2.3
 	 */
+	@Pure /* not guaranteed pure , since toString() is invoked on the argument a*/
 	@Inline("($1 + $2)")
 	public static String operator_plus(Object a, String b) {
 		return a + b;
@@ -132,6 +134,7 @@ public class ObjectExtensions {
 	 * @return a reference to <code>first</code> if <code>first != null </code>, <code>second<code> otherwise, 
 	 * @since 2.3
 	 */
+	@Pure
 	public static <T> T operator_elvis(T first, T second) {
 		if (first != null)
 			return first;

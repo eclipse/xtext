@@ -5,18 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.lib.internal;
+package org.eclipse.xtext.xbase.lib;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Allows to describe how a certain static function should be inlined by the Xbase compiler.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.3
  */
+@Beta
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.METHOD })
 public @interface Inline {

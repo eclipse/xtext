@@ -272,7 +272,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"    if (o instanceof String) {\n" + 
 				"      final String _string = (String)o;\n" + 
 				"      _matched=true;\n" + 
-				"      /* \"\" */\n" + 
+				"      \"\".toString();\n" + 
 				"    }\n" + 
 				"  }\n" + 
 				"  String _switchResult_1 = null;\n" + 
@@ -290,7 +290,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"{" +
 				"  val Object o = 'foo'" +
 				"    switch(o) {\n" + 
-				"        String: \"\"\n" + 
+				"        String: \"\".toString\n" + 
 				"    }\n" + 
 				"    switch(o) {\n" + 
 				"        String: \"\"\n" + 

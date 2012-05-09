@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.tests.lib.internal
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.lib.internal.ToStringHelper
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 class ToStringHelperTest {
 	

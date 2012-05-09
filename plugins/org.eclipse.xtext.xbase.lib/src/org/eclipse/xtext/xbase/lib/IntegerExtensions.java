@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import java.util.Iterator;
 
-import org.eclipse.xtext.xbase.lib.internal.Inline;
 
 /**
  * This is an extension library for {@link Integer integral numbers}, e.g. <code>int</code> or <code>Integer</code>.
@@ -28,7 +26,8 @@ public class IntegerExtensions {
 	 * @return an {@link IntegerRange}. Never <code>null</code>.
 	 * @since 2.3
 	 */
-	@Inline(value="new $3($1, $2)", imported=IntegerRange.class, statementExpression=true)
+	@Pure
+	@Inline(value="new $3($1, $2)", imported=IntegerRange.class, statementExpression=false)
 	public static IntegerRange operator_upTo(final int a, final int b) {
 		return new IntegerRange(a, b);
 	}
@@ -42,6 +41,7 @@ public class IntegerExtensions {
 	 *            an integer.
 	 * @return <code>a|b</code>
 	 */
+	@Pure
 	@Inline("($1 | $2)")
 	public static int bitwiseOr(int a, int b) {
 		return a | b;
@@ -56,6 +56,7 @@ public class IntegerExtensions {
 	 *            an integer.
 	 * @return <code>a^b</code>
 	 */
+	@Pure
 	@Inline("($1 ^ $2)")
 	public static int bitwiseXor(int a, int b) {
 		return a ^ b;
@@ -70,6 +71,7 @@ public class IntegerExtensions {
 	 *            an integer.
 	 * @return <code>a&b</code>
 	 */
+	@Pure
 	@Inline("($1 & $2)")
 	public static int bitwiseAnd(int a, int b) {
 		return a & b;
@@ -82,6 +84,7 @@ public class IntegerExtensions {
 	 *            an integer.
 	 * @return the bitwise complement of <code>a</code>.
 	 */
+	@Pure
 	@Inline("(~$1)")
 	public static int bitwiseNot(int a) {
 		return ~a;
@@ -98,6 +101,7 @@ public class IntegerExtensions {
 	 * @return <code>a&lt;&lt;distance</code>
 	 * @deprecated use {@link #operator_doubleLessThan(int, int)} instead
 	 */
+	@Pure
 	@Inline("($1 << $2)")
 	@Deprecated
 	public static int shiftLeft(int a, int distance) {
@@ -115,6 +119,7 @@ public class IntegerExtensions {
 	 * @return <code>a&lt;&lt;distance</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 << $2)")
 	public static int operator_doubleLessThan(int a, int distance) {
 		return a << distance;
@@ -131,6 +136,7 @@ public class IntegerExtensions {
 	 * @return <code>a&gt;&gt;distance</code>
 	 * @deprecated use {@link #operator_doubleGreaterThan(int, int)} instead
 	 */
+	@Pure
 	@Inline("($1 >> $2)")
 	@Deprecated
 	public static int shiftRight(int a, int distance) {
@@ -148,6 +154,7 @@ public class IntegerExtensions {
 	 * @return <code>a&gt;&gt;distance</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >> $2)")
 	public static int operator_doubleGreaterThan(int a, int distance) {
 		return a >> distance;
@@ -164,6 +171,7 @@ public class IntegerExtensions {
 	 * @return <code>a&gt;&gt;&gt;distance</code>
 	 * @deprecated use {@link #operator_tripleGreaterThan(int, int)} instead
 	 */
+	@Pure
 	@Inline("($1 >>> $2)")
 	@Deprecated
 	public static int shiftRightUnsigned(int a, int distance) {
@@ -181,62 +189,10 @@ public class IntegerExtensions {
 	 * @return <code>a&gt;&gt;&gt;distance</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >>> $2)")
 	public static int operator_tripleGreaterThan(int a, int distance) {
 		return a >>> distance;
-	}
-
-	/**
-	 * Implementation of an iterator for integers.
-	 * @deprecated use {@link IntegerRange} instead.
-	 */
-	@Deprecated
-	protected static class IntIterator implements Iterator<Integer> {
-		private int current;
-		private int upTo;
-		private boolean increases;
-
-		/**
-		 * Creates a new {@link IntIterator} from {@code start} to {@code upTo}. The iterator will iterate backwards if
-		 * upTo is smaller than the start index.
-		 * 
-		 * @param start
-		 *            the start value (inclusive).
-		 * @param upTo
-		 *            the end value (inclusive).
-		 * 
-		 */
-		protected IntIterator(int start, int upTo) {
-			super();
-			this.current = start;
-			this.upTo = upTo;
-			this.increases = start < upTo;
-		}
-
-		public boolean hasNext() {
-			if (increases)
-				return current <= upTo;
-			else
-				return current >= upTo;
-		}
-
-		public Integer next() {
-			if (increases)
-				return current++;
-			else
-				return current--;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 * 
-		 * @throws UnsupportedOperationException
-		 *             Always throws an {@link UnsupportedOperationException} since this iterator does not support
-		 *             removal.
-		 */
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
 	}
 
 	// BEGIN generated code
@@ -247,6 +203,7 @@ public class IntegerExtensions {
 	 * @return   <code>-a</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("(-$1)")
 	public static int operator_minus(int a) {
 		return -a;
@@ -260,6 +217,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static double operator_plus(int a, double b) {
 		return a + b;
@@ -273,6 +231,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static double operator_minus(int a, double b) {
 		return a - b;
@@ -286,6 +245,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static double operator_multiply(int a, double b) {
 		return a * b;
@@ -299,6 +259,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static double operator_divide(int a, double b) {
 		return a / b;
@@ -312,6 +273,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static double operator_modulo(int a, double b) {
 		return a % b;
@@ -325,6 +287,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, double b) {
 		return a < b;
@@ -338,6 +301,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, double b) {
 		return a <= b;
@@ -351,6 +315,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, double b) {
 		return a > b;
@@ -364,6 +329,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, double b) {
 		return a >= b;
@@ -377,6 +343,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, double b) {
 		return a == b;
@@ -390,6 +357,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, double b) {
 		return a != b;
@@ -403,7 +371,8 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, double b) {
 		return Math.pow(a, b);
 	}
@@ -416,6 +385,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static float operator_plus(int a, float b) {
 		return a + b;
@@ -429,6 +399,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static float operator_minus(int a, float b) {
 		return a - b;
@@ -442,6 +413,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static float operator_multiply(int a, float b) {
 		return a * b;
@@ -455,6 +427,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static float operator_divide(int a, float b) {
 		return a / b;
@@ -468,6 +441,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static float operator_modulo(int a, float b) {
 		return a % b;
@@ -481,6 +455,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, float b) {
 		return a < b;
@@ -494,6 +469,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, float b) {
 		return a <= b;
@@ -507,6 +483,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, float b) {
 		return a > b;
@@ -520,6 +497,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, float b) {
 		return a >= b;
@@ -533,6 +511,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, float b) {
 		return a == b;
@@ -546,6 +525,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, float b) {
 		return a != b;
@@ -559,7 +539,8 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, float b) {
 		return Math.pow(a, b);
 	}
@@ -572,6 +553,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static long operator_plus(int a, long b) {
 		return a + b;
@@ -585,6 +567,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static long operator_minus(int a, long b) {
 		return a - b;
@@ -598,6 +581,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static long operator_multiply(int a, long b) {
 		return a * b;
@@ -611,6 +595,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static long operator_divide(int a, long b) {
 		return a / b;
@@ -624,6 +609,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static long operator_modulo(int a, long b) {
 		return a % b;
@@ -637,6 +623,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, long b) {
 		return a < b;
@@ -650,6 +637,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, long b) {
 		return a <= b;
@@ -663,6 +651,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, long b) {
 		return a > b;
@@ -676,6 +665,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, long b) {
 		return a >= b;
@@ -689,6 +679,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, long b) {
 		return a == b;
@@ -702,6 +693,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, long b) {
 		return a != b;
@@ -715,7 +707,8 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, long b) {
 		return Math.pow(a, b);
 	}
@@ -728,6 +721,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static int operator_plus(int a, int b) {
 		return a + b;
@@ -741,6 +735,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static int operator_minus(int a, int b) {
 		return a - b;
@@ -754,6 +749,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static int operator_multiply(int a, int b) {
 		return a * b;
@@ -767,6 +763,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static int operator_divide(int a, int b) {
 		return a / b;
@@ -780,6 +777,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static int operator_modulo(int a, int b) {
 		return a % b;
@@ -793,6 +791,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, int b) {
 		return a < b;
@@ -806,6 +805,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, int b) {
 		return a <= b;
@@ -819,6 +819,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, int b) {
 		return a > b;
@@ -832,6 +833,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, int b) {
 		return a >= b;
@@ -845,6 +847,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, int b) {
 		return a == b;
@@ -858,6 +861,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, int b) {
 		return a != b;
@@ -871,7 +875,8 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, int b) {
 		return Math.pow(a, b);
 	}
@@ -884,6 +889,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static int operator_plus(int a, char b) {
 		return a + b;
@@ -897,6 +903,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static int operator_minus(int a, char b) {
 		return a - b;
@@ -910,6 +917,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static int operator_multiply(int a, char b) {
 		return a * b;
@@ -923,6 +931,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static int operator_divide(int a, char b) {
 		return a / b;
@@ -936,6 +945,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static int operator_modulo(int a, char b) {
 		return a % b;
@@ -949,6 +959,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, char b) {
 		return a < b;
@@ -962,6 +973,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, char b) {
 		return a <= b;
@@ -975,6 +987,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, char b) {
 		return a > b;
@@ -988,6 +1001,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, char b) {
 		return a >= b;
@@ -1001,6 +1015,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, char b) {
 		return a == b;
@@ -1014,6 +1029,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, char b) {
 		return a != b;
@@ -1027,7 +1043,8 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, char b) {
 		return Math.pow(a, b);
 	}
@@ -1040,6 +1057,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static int operator_plus(int a, short b) {
 		return a + b;
@@ -1053,6 +1071,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static int operator_minus(int a, short b) {
 		return a - b;
@@ -1066,6 +1085,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static int operator_multiply(int a, short b) {
 		return a * b;
@@ -1079,6 +1099,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static int operator_divide(int a, short b) {
 		return a / b;
@@ -1092,6 +1113,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static int operator_modulo(int a, short b) {
 		return a % b;
@@ -1105,6 +1127,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, short b) {
 		return a < b;
@@ -1118,6 +1141,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, short b) {
 		return a <= b;
@@ -1131,6 +1155,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, short b) {
 		return a > b;
@@ -1144,6 +1169,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, short b) {
 		return a >= b;
@@ -1157,6 +1183,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, short b) {
 		return a == b;
@@ -1170,6 +1197,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, short b) {
 		return a != b;
@@ -1183,7 +1211,8 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, short b) {
 		return Math.pow(a, b);
 	}
@@ -1196,6 +1225,7 @@ public class IntegerExtensions {
 	 * @return   <code>a+b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 + $2)")
 	public static int operator_plus(int a, byte b) {
 		return a + b;
@@ -1209,6 +1239,7 @@ public class IntegerExtensions {
 	 * @return   <code>a-b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 - $2)")
 	public static int operator_minus(int a, byte b) {
 		return a - b;
@@ -1222,6 +1253,7 @@ public class IntegerExtensions {
 	 * @return   <code>a*b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 * $2)")
 	public static int operator_multiply(int a, byte b) {
 		return a * b;
@@ -1235,6 +1267,7 @@ public class IntegerExtensions {
 	 * @return   <code>a/b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 / $2)")
 	public static int operator_divide(int a, byte b) {
 		return a / b;
@@ -1248,6 +1281,7 @@ public class IntegerExtensions {
 	 * @return   <code>a%b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 % $2)")
 	public static int operator_modulo(int a, byte b) {
 		return a % b;
@@ -1261,6 +1295,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 < $2)")
 	public static boolean operator_lessThan(int a, byte b) {
 		return a < b;
@@ -1274,6 +1309,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&lt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 <= $2)")
 	public static boolean operator_lessEqualsThan(int a, byte b) {
 		return a <= b;
@@ -1287,6 +1323,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 > $2)")
 	public static boolean operator_greaterThan(int a, byte b) {
 		return a > b;
@@ -1300,6 +1337,7 @@ public class IntegerExtensions {
 	 * @return   <code>a&gt;=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 >= $2)")
 	public static boolean operator_greaterEqualsThan(int a, byte b) {
 		return a >= b;
@@ -1313,6 +1351,7 @@ public class IntegerExtensions {
 	 * @return   <code>a==b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 == $2)")
 	public static boolean operator_equals(int a, byte b) {
 		return a == b;
@@ -1326,6 +1365,7 @@ public class IntegerExtensions {
 	 * @return   <code>a!=b</code>
 	 * @since 2.3
 	 */
+	@Pure
 	@Inline("($1 != $2)")
 	public static boolean operator_notEquals(int a, byte b) {
 		return a != b;
@@ -1339,12 +1379,14 @@ public class IntegerExtensions {
 	 * @return   <code>Math.pow(a, b)</code>
 	 * @since 2.3
 	 */
-	@Inline(value="$3.pow($1, $2)", imported=Math.class, statementExpression=true)
+	@Pure
+	@Inline(value="$3.pow($1, $2)", imported=Math.class)
 	public static double operator_power(int a, byte b) {
 		return Math.pow(a, b);
 	}
 	
 	// END generated code
+
 
 
 
