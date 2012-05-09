@@ -32,6 +32,7 @@ public class ProcedureExtensions {
 	 *            the fixed argument.
 	 * @return a procedure that takes no arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1> Procedure0 curry(final Procedure1<? super P1> procedure, final P1 argument) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
@@ -51,6 +52,7 @@ public class ProcedureExtensions {
 	 *            the fixed first argument of {@code procedure}.
 	 * @return a procedure that takes one argument. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2> Procedure1<P2> curry(final Procedure2<? super P1, ? super P2> procedure, final P1 argument) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
@@ -70,6 +72,7 @@ public class ProcedureExtensions {
 	 *            the fixed first argument of {@code procedure}.
 	 * @return a procedure that takes two arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3> Procedure2<P2, P3> curry(final Procedure3<? super P1, ? super P2, ? super P3> procedure, final P1 argument) {
 		if (procedure == null)
 			throw new NullPointerException("procedure");
@@ -89,6 +92,7 @@ public class ProcedureExtensions {
 	 *            the fixed first argument of {@code procedure}.
 	 * @return a procedure that takes three arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, P4> Procedure3<P2, P3, P4> curry(final Procedure4<? super P1, ? super P2, ? super P3, ? super P4> procedure,
 			final P1 argument) {
 		if (procedure == null)
@@ -109,6 +113,7 @@ public class ProcedureExtensions {
 	 *            the fixed first argument of {@code procedure}.
 	 * @return a procedure that takes four arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, P4, P5> Procedure4<P2, P3, P4, P5> curry(final Procedure5<? super P1, ? super P2, ? super P3, ? super P4, ? super P5> procedure,
 			final P1 argument) {
 		if (procedure == null)
@@ -129,6 +134,7 @@ public class ProcedureExtensions {
 	 *            the fixed first argument of {@code procedure}.
 	 * @return a procedure that takes five arguments. Never <code>null</code>.
 	 */
+	@Pure
 	public static <P1, P2, P3, P4, P5, P6> Procedure5<P2, P3, P4, P5, P6> curry(
 			final Procedure6<? super P1, ? super P2, ? super P3, ? super P4, ? super P5, ? super P6> procedure, final P1 argument) {
 		if (procedure == null)

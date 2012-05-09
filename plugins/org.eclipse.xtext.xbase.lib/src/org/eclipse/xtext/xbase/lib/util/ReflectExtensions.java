@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Preconditions;
 
 /**
@@ -19,6 +20,7 @@ import com.google.common.base.Preconditions;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.3
  */
+@Beta
 public class ReflectExtensions {
 
 	/**

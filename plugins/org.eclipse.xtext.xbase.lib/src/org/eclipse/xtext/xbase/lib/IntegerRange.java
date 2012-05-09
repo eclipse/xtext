@@ -28,6 +28,7 @@ public class IntegerRange implements Iterable<Integer> {
 	/**
 	 * @return a read-only {@link ListIterator} for this.
 	 */
+	@Pure
 	public ListIterator<Integer> iterator() {
 		return new RangeIterator();
 	}
@@ -41,6 +42,7 @@ public class IntegerRange implements Iterable<Integer> {
 	 * @param end
 	 *            the end value (inclusive)
 	 */
+	@Pure
 	public IntegerRange(int start, int end) {
 		this(start, end, end >= start ? 1 : -1);
 	}
@@ -55,6 +57,7 @@ public class IntegerRange implements Iterable<Integer> {
 	 * @param step
 	 *            the increment
 	 */
+	@Pure
 	public IntegerRange(int start, int end, int step) {
 		if ((end - start) * step < 0)
 			throw new IllegalArgumentException("The step of an IntegerRange must have the correct sign.");
@@ -68,6 +71,7 @@ public class IntegerRange implements Iterable<Integer> {
 	/**
 	 * @return the start value
 	 */
+	@Pure
 	public int getStart() {
 		return start;
 	}
@@ -75,6 +79,7 @@ public class IntegerRange implements Iterable<Integer> {
 	/**
 	 * @return the step value
 	 */
+	@Pure
 	public int getStep() {
 		return step;
 	}
@@ -82,6 +87,7 @@ public class IntegerRange implements Iterable<Integer> {
 	/**
 	 * @return the end value
 	 */
+	@Pure
 	public int getEnd() {
 		return end;
 	}
@@ -91,6 +97,7 @@ public class IntegerRange implements Iterable<Integer> {
 	 * but <code>(end-start)/step + 1</code>.
 	 * @return the number of elements in this IntegerRange.
 	 */
+	@Pure
 	public int getSize() {
 		return (end - start) / step + 1;
 	}
@@ -100,6 +107,7 @@ public class IntegerRange implements Iterable<Integer> {
 	 *            the step of the new range.
 	 * @return a new IntegerRange with the given step.
 	 */
+	@Pure
 	public IntegerRange withStep(int step) {
 		return new IntegerRange(start, end, step);
 	}
@@ -112,6 +120,7 @@ public class IntegerRange implements Iterable<Integer> {
 	 *            the number to be checked for containment.
 	 * @return whether this sequence contains the given number or not.
 	 */
+	@Pure
 	public boolean contains(int number) {
 		if (step < 0)
 			return number <= start && number >= end && (number - start) % step == 0;

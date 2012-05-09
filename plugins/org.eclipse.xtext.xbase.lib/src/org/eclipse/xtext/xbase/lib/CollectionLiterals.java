@@ -49,6 +49,7 @@ public class CollectionLiterals {
 	 * @return an empty, immutable list.
 	 * @see Collections#emptyList()
 	 */
+	@Pure
 	public static <T> List<T> emptyList() {
 		return Collections.emptyList();
 	}
@@ -59,6 +60,7 @@ public class CollectionLiterals {
 	 * @return an empty, immutable set.
 	 * @see Collections#emptySet()
 	 */
+	@Pure
 	public static <T> Set<T> emptySet() {
 		return Collections.emptySet();
 	}
@@ -69,6 +71,7 @@ public class CollectionLiterals {
 	 * @return an empty, immutable map.
 	 * @see Collections#emptyMap()
 	 */
+	@Pure
 	public static <K, V> Map<K, V> emptyMap() {
 		return Collections.emptyMap();
 	}
@@ -83,6 +86,7 @@ public class CollectionLiterals {
 	 * @throws NullPointerException
 	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
 	 */
+	@Pure
 	public static <T> List<T> newImmutableList(T... elements) {
 		return ImmutableList.copyOf(elements);
 	}
@@ -98,6 +102,7 @@ public class CollectionLiterals {
 	 * @throws NullPointerException
 	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
 	 */
+	@Pure
 	public static <T> Set<T> newImmutableSet(T... elements) {
 		return ImmutableSet.copyOf(elements);
 	}
@@ -115,6 +120,7 @@ public class CollectionLiterals {
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained in {@code entries}.
 	 */
+	@Pure
 	public static <K, V> Map<K, V> newImmutableMap(Pair<K, V>... entries) {
 		if (entries.length == 0)
 			return emptyMap();
@@ -133,6 +139,7 @@ public class CollectionLiterals {
 	 *            contain <code>null</code> values.
 	 * @return a new {@link ArrayList} containing those elements
 	 */
+	@Pure
 	public static <T> ArrayList<T> newArrayList(T... initial) {
 		return Lists.newArrayList(initial);
 	}
@@ -145,6 +152,7 @@ public class CollectionLiterals {
 	 *            contain <code>null</code> values.
 	 * @return a new {@link LinkedList} containing those elements
 	 */
+	@Pure
 	public static <T> LinkedList<T> newLinkedList(T... initial) {
 		if (initial.length > 0)
 			return Lists.newLinkedList(Arrays.asList(initial));
@@ -159,6 +167,7 @@ public class CollectionLiterals {
 	 *            contain <code>null</code> values.
 	 * @return a new {@link HashSet} containing those elements
 	 */
+	@Pure
 	public static <T> HashSet<T> newHashSet(T... initial) {
 		return Sets.newHashSet(initial);
 	}
@@ -171,6 +180,7 @@ public class CollectionLiterals {
 	 *            contain <code>null</code> values.
 	 * @return a new {@link LinkedHashSet} containing those elements
 	 */
+	@Pure
 	public static <T> LinkedHashSet<T> newLinkedHashSet(T... initial) {
 		if (initial.length > 0)
 			return Sets.newLinkedHashSet(Arrays.asList(initial));
@@ -188,6 +198,7 @@ public class CollectionLiterals {
 	 *            of the items should be used.
 	 * @return a new {@link TreeSet} containing those elements
 	 */
+	@Pure
 	public static <T> TreeSet<T> newTreeSet(Comparator<? super T> comparator, T... initial) {
 		TreeSet<T> result = new TreeSet<T>(comparator);
 		if (initial.length > 0)
@@ -206,6 +217,7 @@ public class CollectionLiterals {
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
+	@Pure
 	public static <K, V> HashMap<K, V> newHashMap(Pair<K, V>... initial) {
 		HashMap<K, V> result = Maps.newHashMapWithExpectedSize(initial.length);
 		putAll(result, initial);
@@ -223,6 +235,7 @@ public class CollectionLiterals {
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
+	@Pure
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Pair<K, V>... initial) {
 		LinkedHashMap<K, V> result = new LinkedHashMap<K, V>(initial.length);
 		putAll(result, initial);
@@ -243,6 +256,7 @@ public class CollectionLiterals {
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
+	@Pure
 	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator, Pair<K, V>... initial) {
 		TreeMap<K, V> result = Maps.newTreeMap(comparator);
 		putAll(result, initial);
