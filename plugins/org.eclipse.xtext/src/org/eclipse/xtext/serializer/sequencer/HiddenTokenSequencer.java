@@ -67,6 +67,12 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		delegate.acceptAssignedCrossRefEnum(rc, token, value, index, node);
 	}
 
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
+	}
+
 	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
 		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
 		lastNode = node;

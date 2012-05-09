@@ -27,6 +27,8 @@ public interface ISemanticSequenceAcceptor {
 
 	void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index, ILeafNode node);
 
+	void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node);
+
 	void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node);
 
 	void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node);

@@ -45,6 +45,10 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		writeSemantic(GrammarUtil.containingCrossReference(enumRC), token);
 	}
 
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		writeSemantic(GrammarUtil.containingCrossReference(kw), token);
+	}
+
 	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
 		writeSemantic(GrammarUtil.containingCrossReference(rc), token);
 	}

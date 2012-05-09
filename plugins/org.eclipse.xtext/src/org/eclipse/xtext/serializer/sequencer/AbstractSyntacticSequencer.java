@@ -173,6 +173,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		navigateToAbsorber(kw, node);
+		delegate.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
+	}
+
 	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
 			ILeafNode node) {
 		navigateToAbsorber(terminalRC, node);
@@ -240,11 +245,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				acceptNode(next);
 			}
 		}
-	}
-
-	protected ISynNavigable getLastNavigableState() {
-		ISynFollowerOwner state = contexts.peek().lastState;
-		return state instanceof ISynNavigable ? (ISynNavigable) state : null;
 	}
 
 	protected void acceptNodes(ISynNavigable fromState, List<INode> nodes) {
@@ -359,6 +359,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return result != null ? result : node;
 	}
 
+	protected ISynNavigable getLastNavigableState() {
+		ISynFollowerOwner state = contexts.peek().lastState;
+		return state instanceof ISynNavigable ? (ISynNavigable) state : null;
+	}
+
 	protected List<INode> getNodesFor(List<INode> nodes, AbstractElementAlias ele) {
 		if (nodes == null)
 			return null;
@@ -375,15 +380,15 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return tokenUtil.serializeNode(node);
 	}
 
+	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		return "";
+	}
+
 	protected String getUnassignedRuleCallToken(RuleCall ruleCall, INode node) {
 		Assignment ass = GrammarUtil.containingAssignment(ruleCall);
 		if (ass != null && !GrammarUtil.isBooleanAssignment(ass))
 			throw new IllegalStateException("RuleCall is invalid; Can not determine token.");
 		return getUnassignedRuleCallToken(contexts.peek().semanticObject, ruleCall, node);
-	}
-
-	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		return "";
 	}
 
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,

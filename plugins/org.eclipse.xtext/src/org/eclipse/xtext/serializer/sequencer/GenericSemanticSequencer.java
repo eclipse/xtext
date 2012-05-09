@@ -484,6 +484,14 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 						GrammarUtil.containingCrossReference(enumRC), target3, node3, errorAcceptor);
 				sequenceAcceptor.acceptAssignedCrossRefEnum(enumRC, token3, target3, index, node3);
 				return true;
+			case ASSIGNED_CROSSREF_KEYWORD:
+				Keyword kw0 = constr.getKeyword();
+				ILeafNode node0 = (ILeafNode) node;
+				EObject target0 = (EObject) value;
+				String token0 = crossRefSerializer.serializeCrossRef(semanticObj,
+						GrammarUtil.containingCrossReference(kw0), target0, node0, errorAcceptor);
+				sequenceAcceptor.acceptAssignedCrossRefKeyword(kw0, token0, target0, index, node0);
+				return true;
 			case ASSIGNED_DATATYPE_RULE_CALL:
 				RuleCall datatypeRC1 = constr.getRuleCall();
 				ICompositeNode node4 = (ICompositeNode) node;
@@ -565,6 +573,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_KEYWORD:
@@ -594,7 +603,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 		Feature2Assignment[] values = createValues(semanticObject, constraint, nodes);
-//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
+		//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
 		//				System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
 		if (constraint.getBody() != null) {
 			Quantity quant = new Quantity(constraint.getBody(), createUnambiguousAllocation(constraint.getBody(),
@@ -662,6 +671,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+			case ASSIGNED_CROSSREF_KEYWORD:
 			case ASSIGNED_DATATYPE_RULE_CALL:
 			case ASSIGNED_ENUM_RULE_CALL:
 			case ASSIGNED_KEYWORD:

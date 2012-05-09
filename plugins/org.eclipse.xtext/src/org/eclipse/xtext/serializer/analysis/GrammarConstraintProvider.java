@@ -170,6 +170,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 				case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
 				case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+				case ASSIGNED_CROSSREF_KEYWORD:
 				case ASSIGNED_DATATYPE_RULE_CALL:
 				case ASSIGNED_ENUM_RULE_CALL:
 				case ASSIGNED_KEYWORD:
@@ -229,7 +230,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		public IFeatureInfo[] getFeatures() {
 			return features;
 		}
-		
+
 		public Grammar getDeclaringGrammar() {
 			return GrammarUtil.getGrammar(getMostSpecificContext());
 		}
@@ -1183,7 +1184,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		return result;
 	}
-	
+
 	protected Map<Grammar, Integer> getInheritanceDistance(Grammar grammar) {
 		Map<Grammar, Integer> result = Maps.newHashMap();
 		Grammar current = grammar;
@@ -1211,7 +1212,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		return filteredConstraints;
 	}
-	
+
 	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
 		// strategy 1: if there is a parser rule context, use it for a name
 		for (IConstraint c : equalConstraints)
@@ -1234,7 +1235,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		Collections.sort(actions);
 		return Joiner.on("_").join(rules) + "_" + Joiner.on('_').join(actions);
 	}
-	
+
 	protected IConstraint findRepresentativeConstraint(Collection<IConstraint> equalConstraints) {
 		for (IConstraint c : equalConstraints)
 			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule)
@@ -1260,7 +1261,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_CROSSREF_TERMINAL_RULE_CALL;
 				if (rc.getRule() instanceof EnumRule)
 					return ConstraintElementType.ASSIGNED_CROSSREF_ENUM_RULE_CALL;
-			}
+			} else if (ele instanceof Keyword)
+				return ConstraintElementType.ASSIGNED_CROSSREF_KEYWORD;
 		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
