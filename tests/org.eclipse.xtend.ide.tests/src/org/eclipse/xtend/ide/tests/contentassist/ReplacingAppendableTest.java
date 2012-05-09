@@ -52,10 +52,56 @@ public class ReplacingAppendableTest extends AbstractXtendUITestCase {
 	
 	@Test public void testImports_0() throws Exception {
 		final XtextDocument document = insertField("package test class Foo {|}", "foo", List.class);
-		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {List<?> foo}", document.get());
+		assertEqualsIgnoreWhitespace("package test\n" +
+				"\n" +
+				"import java.util.List\n" +
+				"\n" +
+				"class Foo {List<?> foo}", document.get());
 	}
 
 	@Test public void testImports_1() throws Exception {
+		final XtextDocument document = insertField(" \n" +
+				"\t class Foo {|}", "foo", List.class);
+		assertEqualsIgnoreWhitespace("import java.util.List\n" +
+				"\n" +
+				"class Foo {List<?> foo}", document.get());
+	}
+
+	@Test public void testImports_2() throws Exception {
+		final XtextDocument document = insertField("class Foo {|}", "foo", List.class);
+		assertEqualsIgnoreWhitespace("import java.util.List\n" +
+				"\n" +
+				"class Foo {List<?> foo}", document.get());
+	}
+
+	@Test public void testImports_3() throws Exception {
+		final XtextDocument document = insertField("package test\n" +
+				"import java.util.Date \n" +
+				"\tclass Foo {|}", "foo", List.class);
+		assertEqualsIgnoreWhitespace("package test\n" +
+				"import java.util.Date\n" +
+				"import java.util.List\n" +
+				"\n" +
+				"class Foo {List<?> foo}", document.get());
+	}
+
+	@Test public void testImports_4() throws Exception {
+		final XtextDocument document = insertField("package test\n" +
+				"/**\n" +
+				"*/\n" +
+				"\n" + 
+				"class Foo {|}", "foo", List.class);
+		assertEqualsIgnoreWhitespace("package test\n" +
+				"\n" +
+				"import java.util.List\n" +
+				"\n" +
+				"/**\n" +
+				"*/\n" +
+				"\n" +
+				"class Foo {List<?> foo}", document.get());
+	}
+
+	@Test public void testImports_10() throws Exception {
 		final XtextDocument document = insertField("package test import java.util.List class Foo {|}", "foo", List.class);
 		assertEqualsIgnoreWhitespace("package test import java.util.List class Foo {List<?> foo}", document.get());
 	}
