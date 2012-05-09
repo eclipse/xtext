@@ -124,7 +124,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	def textWithoutComments(INode node) {
 		switch node {
-			ILeafNode case !node.hidden || node.text.trim.empty: node.text
+			ILeafNode case !node.hidden || node.text.trim.length == 0: node.text
 			ICompositeNode: node.children.map[textWithoutComments].join
 			default: ""
 		}

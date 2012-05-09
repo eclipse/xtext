@@ -409,8 +409,9 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         } else {
           String _text = _iLeafNode.getText();
           String _trim = _text.trim();
-          boolean _isEmpty = _trim.isEmpty();
-          _or = (_not || _isEmpty);
+          int _length = _trim.length();
+          boolean _equals = (_length == 0);
+          _or = (_not || _equals);
         }
         if (_or) {
           _matched=true;
