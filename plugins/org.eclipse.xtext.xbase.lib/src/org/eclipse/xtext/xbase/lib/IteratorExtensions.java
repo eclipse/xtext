@@ -170,6 +170,7 @@ public class IteratorExtensions {
 	 * @throws IllegalArgumentException
 	 *             if <code>count</code> is negative.
 	 */
+	@Pure
 	public static <T> Iterator<T> take(final Iterator<T> iterator, final int count) {
 		if (iterator == null)
 			throw new NullPointerException("iterator");
@@ -282,6 +283,7 @@ public class IteratorExtensions {
 	 *            the predicate. May not be <code>null</code>.
 	 * @return an iterator that contains only the elements that fulfill the predicate. Never <code>null</code>.
 	 */
+	@Pure
 	public static <T> Iterator<T> filter(Iterator<T> unfiltered, Function1<? super T, Boolean> predicate) {
 		return Iterators.filter(unfiltered, new BooleanFunctionDelegate<T>(predicate));
 	}
@@ -299,6 +301,7 @@ public class IteratorExtensions {
 	 * @return an unmodifiable iterator containing all elements of the original iterator that were of the requested
 	 *         type. Never <code>null</code>.
 	 */
+	@Pure
 	@Inline(value="$3.$4filter($1, $2)", imported=Iterators.class)
 	public static <T> Iterator<T> filter(Iterator<?> unfiltered, Class<T> type) {
 		return Iterators.filter(unfiltered, type);
@@ -312,6 +315,7 @@ public class IteratorExtensions {
 	 * @return an unmodifiable iterator containing all elements of the original iterator without any <code>null</code>
 	 *         references. Never <code>null</code>.
 	 */
+	@Pure
 	public static <T> Iterator<T> filterNull(Iterator<T> unfiltered) {
 		return Iterators.filter(unfiltered, Predicates.notNull());
 	}
@@ -329,6 +333,7 @@ public class IteratorExtensions {
 	 *            the transformation. May not be <code>null</code>.
 	 * @return an iterator that provides the result of the transformation. Never <code>null</code>.
 	 */
+	@Pure
 	public static <T, R> Iterator<R> map(Iterator<T> original, Function1<? super T, ? extends R> transformation) {
 		return Iterators.transform(original, new FunctionDelegate<T, R>(transformation));
 	}

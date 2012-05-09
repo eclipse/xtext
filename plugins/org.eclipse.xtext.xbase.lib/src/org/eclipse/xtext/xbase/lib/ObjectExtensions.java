@@ -42,6 +42,7 @@ public class ObjectExtensions {
 	 *            another object.
 	 * @return <code>true</code> if {@code a} and {@code b} are equal.
 	 */
+	@Pure
 	@Inline(value="$3.equal($1, $2)", imported=Objects.class)
 	public static boolean operator_equals(Object a, Object b) {
 		return Objects.equal(a, b);

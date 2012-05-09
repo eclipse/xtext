@@ -128,6 +128,7 @@ public class ListExtensions {
 	 *            the transformation. May not be <code>null</code>.
 	 * @return a list that effectively contains the results of the transformation. Never <code>null</code>.
 	 */
+	@Pure
 	public static <T, R> List<R> map(List<T> original, Function1<? super T, ? extends R> transformation) {
 		return Lists.transform(original, new FunctionDelegate<T, R>(transformation));
 	}
