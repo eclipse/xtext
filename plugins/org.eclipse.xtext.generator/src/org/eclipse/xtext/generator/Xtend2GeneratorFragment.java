@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -22,6 +24,23 @@ import com.google.inject.Module;
  */
 public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
 
+	/**
+	 * @since 2.3
+	 */
+	public static class GenericGrammarAccess extends AbstractGrammarElementFinder {
+
+		public GenericGrammarAccess(Grammar grammar) {
+			super();
+			this.grammar = grammar;
+		}
+
+		private Grammar grammar;
+
+		public Grammar getGrammar() {
+			return grammar;
+		}
+	}
+
 	private Naming naming;
 
 	protected Module createModule(final Grammar grammar) {
@@ -29,6 +48,7 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 			public void configure(Binder binder) {
 				binder.bind(Grammar.class).toInstance(grammar);
 				binder.bind(Naming.class).toInstance(naming);
+				binder.bind(IGrammarAccess.class).toInstance(new GenericGrammarAccess(grammar));
 			}
 		};
 	}
@@ -38,8 +58,6 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 		Guice.createInjector(createModule(grammar)).injectMembers(this);
 		generate(grammar, new Xtend2ExecutionContext(ctx));
 	}
-	
-	
 
 	/**
 	 * @since 2.1
@@ -47,14 +65,14 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 	public void generate(Grammar grammar, Xtend2ExecutionContext ctx) {
 		generate(ctx);
 	}
-	
+
 	public void generate(Xtend2ExecutionContext ctx) {
 	}
 
 	public void registerNaming(Naming n) {
 		naming = n;
 	}
-	
+
 	/**
 	 * @since 2.1
 	 */

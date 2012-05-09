@@ -46,6 +46,8 @@ public class SyntacticSequencerPDA2ExtendedDot extends GraphvizDotBuilder {
 			@SuppressWarnings("unchecked")
 			Pair<EObject, EClass> ctx = (Pair<EObject, EClass>) obj;
 			return drawGrammar(pdaProvider.getPDA(ctx.getKey(), ctx.getValue()));
+		} else if (obj instanceof ISynState) {
+			return drawGrammar((ISynState) obj);
 		}
 		return null;
 	}

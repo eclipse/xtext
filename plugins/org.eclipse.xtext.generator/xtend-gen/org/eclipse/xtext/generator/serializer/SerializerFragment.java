@@ -11,13 +11,12 @@ import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
 import org.eclipse.xtext.generator.serializer.AbstractSyntacticSequencer;
-import org.eclipse.xtext.generator.serializer.Context2DotRenderer;
+import org.eclipse.xtext.generator.serializer.DebugGraphGenerator;
 import org.eclipse.xtext.generator.serializer.GrammarConstraints;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -43,10 +42,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   private GrammarConstraints grammarConstraints;
   
   @Inject
-  private Context2DotRenderer dotRenderer;
-  
-  @Inject
-  private SyntacticSequencerPDA2ExtendedDot seq2dot;
+  private DebugGraphGenerator debugGraphGenerator;
   
   @Inject
   private SerializerGenFileNames names;
@@ -128,8 +124,8 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       GenFileName _grammarConstraints_1 = this.names.getGrammarConstraints();
       CharSequence _fileContents_6 = this.grammarConstraints.getFileContents(_grammarConstraints_1);
       ctx.writeFile(Generator.SRC_GEN, _fileName_6, _fileContents_6);
-      Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(this.seq2dot, "pda");
-      for (final Pair<String,String> obj : _render2Dot) {
+      Iterable<Pair<String,String>> _generateDebugGraphs = this.debugGraphGenerator.generateDebugGraphs();
+      for (final Pair<String,String> obj : _generateDebugGraphs) {
         String _key = obj.getKey();
         String _value = obj.getValue();
         ctx.writeFile(Generator.SRC_GEN, _key, _value);
