@@ -239,8 +239,15 @@
 		</condition>
 
 		<antcall target="-publish.build.repository" inheritall="true" />
+		<!-- add mirrors url stable only -->
+		<antcall target="-addMirrorsURL" inheritall="true" />
 	</target>
 
+	<target name="-addMirrorsURL" if="build.stable">
+		<ant antfile="${ant.file}/../deployment/p2mirrorsAdd.ant" target="addMirrorsUrl" dir="S{composite.repository.base}">
+			<property name="deployment.repository_root" value="${composite.repository.base}" />
+		</ant>
+	</target>
 
 	<target name="-cleanup.nightly" if="working_dir">
 		<property name="delete_pattern" value="N*" />
