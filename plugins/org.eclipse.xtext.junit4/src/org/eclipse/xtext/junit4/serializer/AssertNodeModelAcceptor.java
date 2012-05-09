@@ -16,8 +16,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 
 /**
@@ -44,6 +42,12 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		assertNode(node);
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
+	}
+
+	@Override
+	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+		assertNode(node);
+		super.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
 	}
 
 	@Override

@@ -153,6 +153,10 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 		public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
 		}
+
+		public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
+			add(kw, token);
+		}
 	}
 
 	@Inject
