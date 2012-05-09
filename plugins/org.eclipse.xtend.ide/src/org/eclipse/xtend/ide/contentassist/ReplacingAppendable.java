@@ -20,10 +20,12 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendImport;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
@@ -182,27 +184,34 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 				importSection.append(newImport);
 				importSection.append(getLineSeparator());
 			}
+			importSection.append(getLineSeparator());
 			int offset;
 			if (xtendFile.getImports().isEmpty()) {
-				final XtendClass xtendClass = xtendFile.getXtendClasses().isEmpty() ? null : xtendFile.getXtendClasses().get(0);
-				ICompositeNode classNode = NodeModelUtils.findActualNodeFor(xtendClass);
-				if (classNode == null) {
-					throw new IllegalStateException("classNode may not be null");
+				if(xtendFile.getPackage() != null) {
+					List<INode> packageDeclarationNodes = NodeModelUtils.findNodesForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
+					if(packageDeclarationNodes.isEmpty())
+						throw new IllegalStateException("Package declaration nodes must not be null");
+					INode packageDeclNode = packageDeclarationNodes.get(packageDeclarationNodes.size()-1);
+					offset = packageDeclNode.getOffset() + packageDeclNode.getLength();
+					importSection.insert(0, getLineSeparator() + getLineSeparator());
+				} else {
+					offset = 0;
 				}
-				offset = classNode.getOffset();
-				importSection.append(getLineSeparator());
 			} else {
 				ICompositeNode lastImportNode = NodeModelUtils.findActualNodeFor(xtendFile.getImports().get(
 						xtendFile.getImports().size() - 1));
 				if (lastImportNode == null) {
-					throw new IllegalStateException("lastImportNode may not be null");
+					throw new IllegalStateException("Last XtendImport node may not be null");
 				}
 				importSection.insert(0, getLineSeparator());
-				importSection.replace(importSection.length() - 1, importSection.length(), "");
 				offset = lastImportNode.getOffset() + lastImportNode.getLength();
 			}
-			document.replace(offset, 0, importSection.toString());
-			return importSection.length();
+			int replaceLength = 0;
+			while(Character.isWhitespace(document.get(offset + replaceLength, 1).charAt(0))){
+				++replaceLength;
+			}
+			document.replace(offset, replaceLength, importSection.toString());
+			return importSection.length() - replaceLength;
 		}
 		return 0;
 	}
