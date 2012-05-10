@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.sequencer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
@@ -29,6 +30,12 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	protected ISemanticNodeProvider nodeProvider;
 
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
+	
+	@Inject
+	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
+	
+	@Inject
+	protected ITransientValueService transientValues;
 
 	@Inject
 	protected SequenceFeeder.Provider feederProvider;

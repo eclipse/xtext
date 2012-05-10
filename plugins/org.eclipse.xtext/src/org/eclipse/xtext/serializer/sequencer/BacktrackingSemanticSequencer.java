@@ -27,7 +27,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
@@ -109,7 +108,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			for (EStructuralFeature feature : eObject.eClass().getEAllStructuralFeatures()) {
 				int featureID = eObject.eClass().getFeatureID(feature);
 				if (feature.isMany())
-					switch (transientValueService.isListTransient(eObject, feature)) {
+					switch (transientValues.isListTransient(eObject, feature)) {
 						case NO:
 							List<INode> nodes1 = Lists.newArrayList();
 							List<?> values1 = (List<?>) eObject.eGet(feature);
@@ -123,7 +122,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 							List<?> values2 = (List<?>) eObject.eGet(feature);
 							List<Object> values3 = Lists.newArrayList();
 							for (int i = 0, j = 0; i < values2.size(); i++)
-								if (!transientValueService.isValueInListTransient(eObject, i, feature)) {
+								if (!transientValues.isValueInListTransient(eObject, i, feature)) {
 									Object value = values2.get(i);
 									INode node = nodeProvider.getNodeForMultiValue(feature, i, j++, value);
 									values3.add(value);
@@ -135,7 +134,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 						case YES:
 					}
 				else
-					switch (transientValueService.isValueTransient(eObject, feature)) {
+					switch (transientValues.isValueTransient(eObject, feature)) {
 						case PREFERABLY:
 							optional[featureID] = true;
 							Object value1 = eObject.eGet(feature);
@@ -383,13 +382,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	protected IAssignmentFinder assignmentFinder;
 
 	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-
-	@Inject
 	protected ISemanticSequencerNfaProvider nfaProvider;
-
-	@Inject
-	protected ITransientValueService transientValueService;
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
