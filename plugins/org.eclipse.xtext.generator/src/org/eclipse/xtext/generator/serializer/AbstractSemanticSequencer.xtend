@@ -12,15 +12,15 @@ import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider$IConstraint
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic$Acceptor
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider$INodesForEObjectProvider
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
-
-import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService$ValueTransient
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -74,34 +74,14 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		val superGrammar = if(usesSuperGrammar) 
 				file.imported(names.semanticSequencer.getQualifiedName(grammar.usedGrammars.head))
 			else
-				file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer)) 
+				file.imported(typeof(AbstractDelegatingSemanticSequencer)) 
 		
 		file.body = '''
 			@SuppressWarnings("all")
 			public class «filename.simpleName» extends «superGrammar» {
 			
 				@Inject
-				protected «file.imported(grammar.gaFQName)» grammarAccess;
-				
-				@Inject
-				protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-				
-				@Inject
-				protected ITransientValueService transientValues;
-				
-				@Inject
-				@GenericSequencer
-				protected Provider<ISemanticSequencer> genericSequencerProvider;
-				
-				protected ISemanticSequencer genericSequencer;
-				
-				
-				@Override
-				public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-					super.init(sequencer, sequenceAcceptor, errorAcceptor);
-					this.genericSequencer = genericSequencerProvider.get();
-					this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-				}
+				private «file.imported(grammar.gaFQName)» grammarAccess;
 				
 				«file.genMethodCreateSequence()»
 				

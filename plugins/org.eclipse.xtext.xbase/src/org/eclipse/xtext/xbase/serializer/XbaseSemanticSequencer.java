@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAdditiveExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAndExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAssignmentElements;
@@ -50,6 +51,9 @@ import com.google.inject.Inject;
 public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	
 	public static final String OPERATOR_NOT_SUPPORTED = "operation not supported";
+	
+	@Inject
+	private XbaseGrammarAccess grammarAccess;
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
