@@ -17,8 +17,8 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-
-
+	
+	
 	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -38,7 +38,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cDigitFourKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cElementAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cElementRule4ParserRuleCall_3_1_0 = (RuleCall)cElementAssignment_3_1.eContents().get(0);
-
+		
 		//Root:
 		//	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
 		public ParserRule getRule() { return rule; }
@@ -104,7 +104,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cUnitSecondEnumEnumRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
-
+		
 		//Rule1:
 		//	type=FirstEnum value=INT unit=SecondEnum;
 		public ParserRule getRule() { return rule; }
@@ -138,7 +138,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final Keyword cSKeyword_2 = (Keyword)cGroup.eContents().get(2);
-
+		
 		//Rule2:
 		//	"after" value=INT "s";
 		public ParserRule getRule() { return rule; }
@@ -166,7 +166,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final RuleCall cSParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-
+		
 		//Rule3:
 		//	After value=INT S;
 		public ParserRule getRule() { return rule; }
@@ -196,7 +196,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final Assignment cSAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cSSObjParserRuleCall_2_0 = (RuleCall)cSAssignment_2.eContents().get(0);
-
+		
 		//Rule4:
 		//	after=AfterObj value=INT s=SObj;
 		public ParserRule getRule() { return rule; }
@@ -227,7 +227,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AfterObj");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
-
+		
 		//AfterObj:
 		//	value="after";
 		public ParserRule getRule() { return rule; }
@@ -243,7 +243,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SObj");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
-
+		
 		//SObj:
 		//	value="s";
 		public ParserRule getRule() { return rule; }
@@ -258,7 +258,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public class AfterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "After");
 		private final Keyword cAfterKeyword = (Keyword)rule.eContents().get(1);
-
+		
 		//After:
 		//	"after";
 		public ParserRule getRule() { return rule; }
@@ -270,7 +270,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public class SElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "S");
 		private final Keyword cSKeyword = (Keyword)rule.eContents().get(1);
-
+		
 		//S:
 		//	"s";
 		public ParserRule getRule() { return rule; }
@@ -278,13 +278,13 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"s"
 		public Keyword getSKeyword() { return cSKeyword; }
 	}
-
-
+	
+	
 	public class FirstEnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "FirstEnum");
 		private final EnumLiteralDeclaration cValueEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
-
+		
 		//enum FirstEnum:
 		//	value="after";
 		public EnumRule getRule() { return rule; }
@@ -300,7 +300,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "SecondEnum");
 		private final EnumLiteralDeclaration cValueEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
-
+		
 		//enum SecondEnum:
 		//	value="s";
 		public EnumRule getRule() { return rule; }
@@ -311,7 +311,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"s"
 		public Keyword getValueSKeyword_0() { return cValueSKeyword_0; }
 	}
-
+	
 	private RootElements pRoot;
 	private Rule1Elements pRule1;
 	private Rule2Elements pRule2;
@@ -323,7 +323,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private SObjElements pSObj;
 	private AfterElements pAfter;
 	private SElements pS;
-
+	
 	private final Grammar grammar;
 
 	private TerminalsGrammarAccess gaTerminals;
@@ -334,7 +334,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 	}
-
+	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
 		Grammar grammar = grammarProvider.getGrammar(this);
 		while (grammar != null) {
@@ -350,24 +350,24 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		}
 		return grammar;
 	}
-
-
+	
+	
 	public Grammar getGrammar() {
 		return grammar;
 	}
-
+	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
 
-
+	
 	//Root:
 	//	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
-
+	
 	public ParserRule getRootRule() {
 		return getRootAccess().getRule();
 	}
@@ -377,7 +377,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public Rule1Elements getRule1Access() {
 		return (pRule1 != null) ? pRule1 : (pRule1 = new Rule1Elements());
 	}
-
+	
 	public ParserRule getRule1Rule() {
 		return getRule1Access().getRule();
 	}
@@ -387,7 +387,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public Rule2Elements getRule2Access() {
 		return (pRule2 != null) ? pRule2 : (pRule2 = new Rule2Elements());
 	}
-
+	
 	public ParserRule getRule2Rule() {
 		return getRule2Access().getRule();
 	}
@@ -397,7 +397,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public Rule3Elements getRule3Access() {
 		return (pRule3 != null) ? pRule3 : (pRule3 = new Rule3Elements());
 	}
-
+	
 	public ParserRule getRule3Rule() {
 		return getRule3Access().getRule();
 	}
@@ -407,7 +407,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public Rule4Elements getRule4Access() {
 		return (pRule4 != null) ? pRule4 : (pRule4 = new Rule4Elements());
 	}
-
+	
 	public ParserRule getRule4Rule() {
 		return getRule4Access().getRule();
 	}
@@ -417,7 +417,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public FirstEnumElements getFirstEnumAccess() {
 		return (unknownRuleFirstEnum != null) ? unknownRuleFirstEnum : (unknownRuleFirstEnum = new FirstEnumElements());
 	}
-
+	
 	public EnumRule getFirstEnumRule() {
 		return getFirstEnumAccess().getRule();
 	}
@@ -427,7 +427,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public SecondEnumElements getSecondEnumAccess() {
 		return (unknownRuleSecondEnum != null) ? unknownRuleSecondEnum : (unknownRuleSecondEnum = new SecondEnumElements());
 	}
-
+	
 	public EnumRule getSecondEnumRule() {
 		return getSecondEnumAccess().getRule();
 	}
@@ -437,7 +437,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public AfterObjElements getAfterObjAccess() {
 		return (pAfterObj != null) ? pAfterObj : (pAfterObj = new AfterObjElements());
 	}
-
+	
 	public ParserRule getAfterObjRule() {
 		return getAfterObjAccess().getRule();
 	}
@@ -447,7 +447,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public SObjElements getSObjAccess() {
 		return (pSObj != null) ? pSObj : (pSObj = new SObjElements());
 	}
-
+	
 	public ParserRule getSObjRule() {
 		return getSObjAccess().getRule();
 	}
@@ -457,7 +457,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public AfterElements getAfterAccess() {
 		return (pAfter != null) ? pAfter : (pAfter = new AfterElements());
 	}
-
+	
 	public ParserRule getAfterRule() {
 		return getAfterAccess().getRule();
 	}
@@ -467,7 +467,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public SElements getSAccess() {
 		return (pS != null) ? pS : (pS = new SElements());
 	}
-
+	
 	public ParserRule getSRule() {
 		return getSAccess().getRule();
 	}
@@ -476,42 +476,42 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	}
+	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	}
+	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	}
+	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	}
+	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	}
+	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	}
+	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	}
+	} 
 }

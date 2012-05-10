@@ -15,12 +15,12 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class Bug378967TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected Bug378967TestLanguageGrammarAccess grammarAccess;
-
+	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (Bug378967TestLanguageGrammarAccess) access;
 	}
-
+	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if(ruleCall.getRule() == grammarAccess.getAfterRule())
@@ -29,18 +29,29 @@ public class Bug378967TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 			return getSToken(semanticObject, ruleCall, node);
 		return "";
 	}
-
+	
+	/**
+	 * After:
+	 * 	'after'
+	 * ;
+	 */
 	protected String getAfterToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "after";
 	}
+	
+	/**
+	 * S:
+	 * 	's'
+	 * ;
+	 */
 	protected String getSToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "s";
 	}
-
+	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (transition.getAmbiguousSyntaxes().isEmpty()) return;

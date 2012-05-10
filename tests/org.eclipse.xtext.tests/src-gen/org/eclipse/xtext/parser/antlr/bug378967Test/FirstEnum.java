@@ -195,5 +195,5 @@ public enum FirstEnum implements Enumerator
   {
     return literal;
   }
-
+  
 } //FirstEnum

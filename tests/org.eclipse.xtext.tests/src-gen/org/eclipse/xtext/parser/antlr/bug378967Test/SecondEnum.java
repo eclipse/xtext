@@ -195,5 +195,5 @@ public enum SecondEnum implements Enumerator
   {
     return literal;
   }
-
+  
 } //SecondEnum

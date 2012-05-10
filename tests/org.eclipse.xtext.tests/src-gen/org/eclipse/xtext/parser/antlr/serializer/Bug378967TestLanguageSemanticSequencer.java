@@ -16,7 +16,7 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -24,79 +24,59 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequencer {
+public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	protected Bug378967TestLanguageGrammarAccess grammarAccess;
-
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-
-	@Inject
-	protected ITransientValueService transientValues;
-
-	@Inject
-	@GenericSequencer
-	protected Provider<ISemanticSequencer> genericSequencerProvider;
-
-	protected ISemanticSequencer genericSequencer;
-
-
-	@Override
-	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequencer, sequenceAcceptor, errorAcceptor);
-		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
-	}
-
+	private Bug378967TestLanguageGrammarAccess grammarAccess;
+	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug378967TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug378967TestPackage.AFTER_OBJ:
 				if(context == grammarAccess.getAfterObjRule()) {
-					sequence_AfterObj(context, (AfterObj) semanticObject);
-					return;
+					sequence_AfterObj(context, (AfterObj) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug378967TestPackage.ROOT:
 				if(context == grammarAccess.getRootRule()) {
-					sequence_Root(context, (Root) semanticObject);
-					return;
+					sequence_Root(context, (Root) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug378967TestPackage.RULE1:
 				if(context == grammarAccess.getRule1Rule()) {
-					sequence_Rule1(context, (Rule1) semanticObject);
-					return;
+					sequence_Rule1(context, (Rule1) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug378967TestPackage.RULE2:
 				if(context == grammarAccess.getRule2Rule()) {
-					sequence_Rule2(context, (Rule2) semanticObject);
-					return;
+					sequence_Rule2(context, (Rule2) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug378967TestPackage.RULE3:
 				if(context == grammarAccess.getRule3Rule()) {
-					sequence_Rule3(context, (Rule3) semanticObject);
-					return;
+					sequence_Rule3(context, (Rule3) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug378967TestPackage.RULE4:
 				if(context == grammarAccess.getRule4Rule()) {
-					sequence_Rule4(context, (Rule4) semanticObject);
-					return;
+					sequence_Rule4(context, (Rule4) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug378967TestPackage.SOBJ:
 				if(context == grammarAccess.getSObjRule()) {
-					sequence_SObj(context, (SObj) semanticObject);
-					return;
+					sequence_SObj(context, (SObj) semanticObject); 
+					return; 
 				}
 				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
-
+	
 	/**
 	 * Constraint:
 	 *     value='after'
@@ -111,8 +91,8 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequ
 		feeder.accept(grammarAccess.getAfterObjAccess().getValueAfterKeyword_0(), semanticObject.getValue());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (element=Rule1 | element=Rule2 | element=Rule3 | element=Rule4)
@@ -120,8 +100,8 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequ
 	protected void sequence_Root(EObject context, Root semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (type=FirstEnum value=INT unit=SecondEnum)
@@ -142,8 +122,8 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequ
 		feeder.accept(grammarAccess.getRule1Access().getUnitSecondEnumEnumRuleCall_2_0(), semanticObject.getUnit());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     value=INT
@@ -158,8 +138,8 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequ
 		feeder.accept(grammarAccess.getRule2Access().getValueINTTerminalRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     value=INT
@@ -174,8 +154,8 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequ
 		feeder.accept(grammarAccess.getRule3Access().getValueINTTerminalRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (after=AfterObj value=INT s=SObj)
@@ -196,8 +176,8 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractSemanticSequ
 		feeder.accept(grammarAccess.getRule4Access().getSSObjParserRuleCall_2_0(), semanticObject.getS());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     value='s'

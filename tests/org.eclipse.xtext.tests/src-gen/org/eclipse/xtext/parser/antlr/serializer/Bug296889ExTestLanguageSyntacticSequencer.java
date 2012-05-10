@@ -46,7 +46,7 @@ public class Bug296889ExTestLanguageSyntacticSequencer extends AbstractSyntactic
 
 	/**
 	 * Syntax:
-	 *     'Model' | 'DataType'
+	 *     'DataType' | 'Model'
 	 */
 	protected void emit_Model_DataTypeKeyword_1_0_or_ModelKeyword_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
