@@ -252,6 +252,10 @@ Workflow {
 				srcGenOnly = false
 			}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {
