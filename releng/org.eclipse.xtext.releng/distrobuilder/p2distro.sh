@@ -19,7 +19,7 @@ DIR_TARGETPLATFORMS="$DIR_ROOT/$ECLIPSE_CODENAME/targetplatforms"		# platform de
 DIR_OUTPUT="$DIR_ROOT/$ECLIPSE_CODENAME/output"							# produced distros folder
 DIR_TMP="$DIR_ROOT/$ECLIPSE_CODENAME/tmp"								# temp folder
 DIR_REPOSITORIES="$DIR_ROOT/$ECLIPSE_CODENAME/repositories"			 	# local zipped repositories to be used
-#DIR_ADDITIONAL_PLUGINS="$DIR_ROOT/$ECLIPSE_CODENAME/additionalplugins"	# additional plugins to be copied into the dropins folder
+DIR_LOCAL_REPO="$DIR_ROOT/$ECLIPSE_CODENAME/local-repo/final"           # local b3 aggregated repo
 
 IDEPREFIX="eclipse-SDK"
 ZIPSUFFIX=".zip"
@@ -40,19 +40,20 @@ eval $__propertyName="'$parsedValue'"
 parseProperty DISTRO_SUFFIX
 parseProperty REMOTE_REPOSITORIES
 parseProperty VERSION
+
+#Add local aggregator repo
+REMOTE_REPOSITORIES="$REMOTE_REPOSITORIES,file:///$DIR_LOCAL_REPO"
+
 echo "
 Building $ECLIPSE_CODENAME for $DISTRO_SUFFIX $VERSION
 "
 parseProperty ECLIPSE_DOWNLOAD
 parseProperty ADDITIONAL_IUS
-#echo "additional tools parsed: $ADDITIONAL_IUS"
-
-parseProperty DEPENDENCY_IUS
-#echo "dependencies parsed: $DEPENDENCY_IUS"
+echo "additional tools parsed: $ADDITIONAL_IUS"
 
 parseProperty INSTALL_IUS
 
-INSTALL_IUS="$INSTALL_IUS,$DEPENDENCY_IUS,$ADDITIONAL_IUS"
+INSTALL_IUS="$INSTALL_IUS,$ADDITIONAL_IUS"
 echo "IUs to install parsed:"
 echo "$INSTALL_IUS"|sed -e 's/\,/\
 /g'

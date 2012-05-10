@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Juno" buildRoot="./local-repo/" packedStrategy="SKIP">
+  <validationSets description="Juno Itemis Disro" label="Juno">
+    <contributions href="../aggregator/xtext.b3aggrcon#/"/>
+    <contributions href="../aggregator/common.b3aggrcon#/"/>
+    <contributions label="Juno dependent">
+      <repositories location="http://download.eclipse.org/tools/buckminster/updates-4.2/">
+        <features name="org.eclipse.buckminster.core.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.cvs.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.git.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.maven.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.pde.feature.feature.group"/>
+      </repositories>
+    </contributions>
+    <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.2milestones/"/>
+    <validationRepositories location="http://download.eclipse.org/releases/staging"/>
+  </validationSets>
+  <configurations/>
+</aggregator:Aggregation>

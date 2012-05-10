@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Contribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Distro Common">
+  <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones">
+    <features name="org.eclipse.emf.sdk.feature.group"/>
+    <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/modeling/emft/b3/updates-3.7">
+    <features name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
+    <features name="org.eclipse.b3.p2.maven.indexer.feature.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/egit/updates-1.3/" description="EGit Updates">
+    <features name="org.eclipse.egit.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/technology/m2e/milestones/1.1" description="m2e M build repo">
+    <features name="org.eclipse.m2e.feature.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/mpc/repo">
+    <features name="org.eclipse.epp.mpc.feature.group"/>
+  </repositories>
+</aggregator:Contribution>
