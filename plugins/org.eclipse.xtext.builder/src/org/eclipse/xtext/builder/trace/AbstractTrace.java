@@ -181,8 +181,9 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	/**
 	 * Creates a new location for a target resource that matches the given {@code location}.
 	 * @param location the location
-	 * @return the location in resource. Never <code>null</code>.
+	 * @return the location in resource, <code>null</code> detecting a path or a projectName fails.
 	 */
+	@Nullable
 	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
 		URI path = location.getPath();
 		if (path == null)
@@ -190,6 +191,8 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		String projectName = location.getProjectName();
 		if (projectName == null)
 			projectName = traceRegion.getAssociatedProjectName();
+		if(path == null || projectName == null)
+			return null;
 		return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, projectName, this);
 	}
 	
@@ -329,7 +332,9 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		List<ILocationInResource> result = Lists.newArrayList();
 		for(AbstractTraceRegion region: allTraceRegions) {
 			for(ILocationData locationData: region.getAssociatedLocations()) {
-				result.add(createLocationInResourceFor(locationData, region));
+				ILocationInResource locationInResource = createLocationInResourceFor(locationData, region);
+				if(locationInResource != null)
+					result.add(locationInResource);
 			}
 		}
 		return result;
