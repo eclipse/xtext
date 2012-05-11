@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Indigo" buildRoot="./local-repo/" packedStrategy="SKIP">
+  <validationSets description="Indigo Itemis Disro" label="Indigo">
+    <contributions href="../aggregator/xtext.b3aggrcon#/"/>
+    <contributions href="../aggregator/common.b3aggrcon#/"/>
+    <contributions label="Indigo dependent">
+      <repositories location="http://download.eclipse.org/tools/buckminster/updates-3.7/">
+        <features name="org.eclipse.buckminster.core.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.cvs.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.git.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.maven.feature.feature.group"/>
+        <features name="org.eclipse.buckminster.pde.feature.feature.group"/>
+      </repositories>
+    </contributions>
+    <validationRepositories location="http://download.eclipse.org/eclipse/updates/3.7/"/>
+    <validationRepositories location="http://download.eclipse.org/releases/indigo/"/>
+  </validationSets>
+  <configurations/>
+</aggregator:Aggregation>
