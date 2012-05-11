@@ -25,7 +25,6 @@ import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaToDot;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
@@ -73,7 +72,7 @@ public class DebugGraphGenerator {
           String _file = this.file("context", context);
           Pda<ISerState,RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(context);
           String _draw = this.pdaToDot.draw(_contextPDA);
-          Pair<String,String> _mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_file, _draw);
+          Pair<String,String> _mappedTo = Pair.<String, String>of(_file, _draw);
           result.add(_mappedTo);
           Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(context);
           for (final EClass type : _typesForContext) {
@@ -81,26 +80,26 @@ public class DebugGraphGenerator {
               String _file_1 = this.file("context_type", context, type);
               Pda<ISerState,RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(context, type);
               String _draw_1 = this.pdaToDot.draw(_contextTypePDA);
-              Pair<String,String> _mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo(_file_1, _draw_1);
+              Pair<String,String> _mappedTo_1 = Pair.<String, String>of(_file_1, _draw_1);
               result.add(_mappedTo_1);
               String _file_2 = this.file("syntactic_sequencer", context, type);
               ISynAbsorberState _pDA = this.syntacticSequencerPDAProvider.getPDA(context, type);
               String _draw_2 = this.syntacticSequencerPDA2Dot.draw(_pDA);
-              Pair<String,String> _mappedTo_2 = ObjectExtensions.<String, String>operator_mappedTo(_file_2, _draw_2);
+              Pair<String,String> _mappedTo_2 = Pair.<String, String>of(_file_2, _draw_2);
               result.add(_mappedTo_2);
               String _file_3 = this.file("semantic_sequencer", context, type);
               Nfa<ISemState> _nFA = this.semanticSequencerNFAProvider.getNFA(context, type);
               String _draw_3 = this.nfaToDot.draw(_nFA);
-              Pair<String,String> _mappedTo_3 = ObjectExtensions.<String, String>operator_mappedTo(_file_3, _draw_3);
+              Pair<String,String> _mappedTo_3 = Pair.<String, String>of(_file_3, _draw_3);
               result.add(_mappedTo_3);
             } catch (final Throwable _t) {
               if (_t instanceof Throwable) {
                 final Throwable t = (Throwable)_t;
                 String _contextName = this.nameFunction.getContextName(context);
-                String _plus = ObjectExtensions.operator_plus("Context: ", _contextName);
-                String _plus_1 = ObjectExtensions.operator_plus(_plus, " Type:");
+                String _plus = ("Context: " + _contextName);
+                String _plus_1 = (_plus + " Type:");
                 String _name = type==null?(String)null:type.getName();
-                String _plus_2 = ObjectExtensions.operator_plus(_plus_1, _name);
+                String _plus_2 = (_plus_1 + _name);
                 System.out.println(_plus_2);
                 t.printStackTrace();
               } else {
@@ -112,7 +111,7 @@ public class DebugGraphGenerator {
           if (_t_1 instanceof Throwable) {
             final Throwable t_1 = (Throwable)_t_1;
             String _contextName_1 = this.nameFunction.getContextName(context);
-            String _plus_3 = ObjectExtensions.operator_plus("Context: ", _contextName_1);
+            String _plus_3 = ("Context: " + _contextName_1);
             System.out.println(_plus_3);
             t_1.printStackTrace();
           } else {
@@ -128,33 +127,33 @@ public class DebugGraphGenerator {
   public String directory(final String name) {
     String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
     String _asPath = this.naming.asPath(_basePackageRuntime);
-    String _plus = ObjectExtensions.operator_plus(_asPath, "/serializer/");
+    String _plus = (_asPath + "/serializer/");
     String _name = this.grammar.getName();
     String _simpleName = this.naming.toSimpleName(_name);
     String _lowerCase = _simpleName.toLowerCase();
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, _lowerCase);
-    String _plus_2 = ObjectExtensions.operator_plus(_plus_1, "_");
-    String _plus_3 = ObjectExtensions.operator_plus(_plus_2, name);
-    String _plus_4 = ObjectExtensions.operator_plus(_plus_3, "/");
+    String _plus_1 = (_plus + _lowerCase);
+    String _plus_2 = (_plus_1 + "_");
+    String _plus_3 = (_plus_2 + name);
+    String _plus_4 = (_plus_3 + "/");
     return _plus_4;
   }
   
   public String file(final String name, final EObject ctx, final EClass type) {
     String _directory = this.directory(name);
     String _contextName = this.nameFunction.getContextName(ctx);
-    String _plus = ObjectExtensions.operator_plus(_directory, _contextName);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, "_");
+    String _plus = (_directory + _contextName);
+    String _plus_1 = (_plus + "_");
     String _name = type==null?(String)null:type.getName();
-    String _plus_2 = ObjectExtensions.operator_plus(_plus_1, _name);
-    String _plus_3 = ObjectExtensions.operator_plus(_plus_2, ".dot");
+    String _plus_2 = (_plus_1 + _name);
+    String _plus_3 = (_plus_2 + ".dot");
     return _plus_3;
   }
   
   public String file(final String name, final EObject ctx) {
     String _directory = this.directory(name);
     String _contextName = this.nameFunction.getContextName(ctx);
-    String _plus = ObjectExtensions.operator_plus(_directory, _contextName);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, ".dot");
+    String _plus = (_directory + _contextName);
+    String _plus_1 = (_plus + ".dot");
     return _plus_1;
   }
 }
