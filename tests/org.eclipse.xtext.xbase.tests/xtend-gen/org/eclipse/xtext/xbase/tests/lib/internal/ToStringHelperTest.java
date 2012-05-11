@@ -3,6 +3,7 @@ package org.eclipse.xtext.xbase.tests.lib.internal;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.tests.lib.internal.MyEntity;
+import org.eclipse.xtext.xbase.tests.lib.internal.OtherClass;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -53,6 +54,31 @@ public class ToStringHelperTest {
     MyEntity _myEntity = new MyEntity();
     MyEntity _myEntity_1 = new MyEntity(_myEntity);
     String _string_1 = helper.toString(_myEntity_1);
+    Assert.assertEquals(_string, _string_1);
+  }
+  
+  @Test
+  public void recursionHandling() {
+    ToStringHelper _toStringHelper = new ToStringHelper();
+    final ToStringHelper helper = _toStringHelper;
+    OtherClass _otherClass = new OtherClass();
+    final OtherClass obj = _otherClass;
+    obj.name = "foo";
+    obj.other = obj;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("OtherClass [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("other = OtherClass@");
+    int _identityHashCode = System.identityHashCode(obj);
+    _builder.append(_identityHashCode, "  ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("name = \"foo\"");
+    _builder.newLine();
+    _builder.append("]");
+    String _string = _builder.toString();
+    String _string_1 = helper.toString(obj);
     Assert.assertEquals(_string, _string_1);
   }
 }

@@ -24,6 +24,24 @@ class ToStringHelperTest {
 		  null
 		]'''.toString,helper.toString(new MyEntity(new MyEntity)))
 	}
+	
+	@Test def void recursionHandling() {
+		val helper = new ToStringHelper
+		val obj = new OtherClass
+		obj.name = 'foo'
+		obj.other = obj
+		
+		assertEquals('''
+		OtherClass [
+		  other = OtherClass@«System::identityHashCode(obj)»
+		  name = "foo"
+		]'''.toString,helper.toString(obj))
+	}
+}
+
+class OtherClass {
+	public OtherClass other
+	public String name
 }
 
 class MyEntity {
