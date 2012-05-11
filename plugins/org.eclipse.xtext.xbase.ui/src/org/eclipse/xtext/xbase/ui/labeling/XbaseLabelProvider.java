@@ -82,7 +82,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
 	public String text(JvmFormalParameter parameter){
 		JvmTypeReference parameterType = parameter.getParameterType();
-		return parameterType.getSimpleName() + " " + parameter.getName();
+		String result = parameter.getName();
+		if(parameterType != null)
+			result =  parameterType.getSimpleName() + " " + result;
+		return result;
 	}
 	
 	public Image image(XVariableDeclaration variableDeclaration){
@@ -95,7 +98,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	public String text(XVariableDeclaration variableDeclaration){
 		JvmTypeReference type = typeProvider.getTypeForIdentifiable(variableDeclaration);
-		return type.getSimpleName() + " " + variableDeclaration.getName();
+		String result = variableDeclaration.getName();
+		if(type != null)
+			result =  type.getSimpleName() + " " + result;
+		return result;
 	}
 	
 	public String text(XCasePart casePart){
