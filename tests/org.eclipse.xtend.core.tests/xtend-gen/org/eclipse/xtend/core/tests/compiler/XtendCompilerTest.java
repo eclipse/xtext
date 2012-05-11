@@ -41,7 +41,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import org.eclipse.xtend.lib.Data;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;");
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.util.ToStringHelper;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@Data");
@@ -251,7 +251,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import org.eclipse.xtend.lib.Data;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;");
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.util.ToStringHelper;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@Data");

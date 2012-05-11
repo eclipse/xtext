@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
-import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
