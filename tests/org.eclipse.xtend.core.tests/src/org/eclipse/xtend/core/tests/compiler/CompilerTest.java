@@ -415,7 +415,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code = 
 				"package x class Z {" +
 				"  def create result : <String>newArrayList() copyNet(String append) {\n" +
-				"    result.map( x | x.toUpperCase)\n" +	
 				"    result += append\n" + 
 				"  }" +
 				"  def ifExpression(String param) {\n" + 
