@@ -56,6 +56,7 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
+import org.apache.log4j.Logger
 
 /**
  * A generator implementation that processes the 
@@ -63,6 +64,8 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
+	
+	static val LOG = Logger::getLogger(typeof(JvmModelGenerator))
 	
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
@@ -672,15 +675,19 @@ class JvmModelGenerator implements IGenerator {
 		}			
 	}
 	
-	def String serialize(JvmTypeReference it, ITreeAppendable appendable) {
-		typeRefSerializer.serialize(it, it.eContainer, appendable)
-		return appendable.toString
+	def void serialize(JvmTypeReference it, ITreeAppendable appendable) {
+		if (it == null) {
+			LOG.warn("type was null", new NullPointerException)
+			appendable.append("Object /* problem during compilation, see error log*/")			
+		} else {
+			typeRefSerializer.serialize(it, it.eContainer, appendable)
+		}
 	}
 	
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager) {
 		val appendable = new TreeAppendable(importManager, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		val type = context.containerType
-		if(type != null) {
+		if( type != null) {
 			appendable.declareVariable(context.containerType, "this")
 			val superType = context.containerType.extendedClass
 			if (superType != null)

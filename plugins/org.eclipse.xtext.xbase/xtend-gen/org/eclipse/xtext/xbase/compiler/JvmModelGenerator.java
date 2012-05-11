@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -74,6 +75,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -88,6 +90,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
+  private final static Logger LOG = new Function0<Logger>() {
+    public Logger apply() {
+      Logger _logger = Logger.getLogger(JvmModelGenerator.class);
+      return _logger;
+    }
+  }.apply();
+  
   @Inject
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
@@ -1385,10 +1394,16 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  public String serialize(final JvmTypeReference it, final ITreeAppendable appendable) {
-    EObject _eContainer = it.eContainer();
-    this.typeRefSerializer.serialize(it, _eContainer, appendable);
-    return appendable.toString();
+  public void serialize(final JvmTypeReference it, final ITreeAppendable appendable) {
+    boolean _equals = Objects.equal(it, null);
+    if (_equals) {
+      NullPointerException _nullPointerException = new NullPointerException();
+      JvmModelGenerator.LOG.warn("type was null", _nullPointerException);
+      appendable.append("Object /* problem during compilation, see error log*/");
+    } else {
+      EObject _eContainer = it.eContainer();
+      this.typeRefSerializer.serialize(it, _eContainer, appendable);
+    }
   }
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager) {
