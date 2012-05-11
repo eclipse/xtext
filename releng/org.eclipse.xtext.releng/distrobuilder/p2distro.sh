@@ -47,7 +47,7 @@ REMOTE_REPOSITORIES="$REMOTE_REPOSITORIES,file:///$DIR_LOCAL_REPO"
 echo "
 Building $ECLIPSE_CODENAME for $DISTRO_SUFFIX $VERSION
 "
-parseProperty ECLIPSE_DOWNLOAD
+
 parseProperty ADDITIONAL_IUS
 echo "additional tools parsed: $ADDITIONAL_IUS"
 
@@ -123,6 +123,10 @@ fi
 cd $DIR_ROOT
 # we are in root now
 
+parseProperty DOWNLOAD_FTP_HOST
+parseProperty DOWNLOAD_FTP_PATH
+ECLIPSE_DOWNLOAD="ftp://$DOWNLOAD_FTP_HOST/$DOWNLOAD_FTP_PATH"
+
 # uncompress ides
 if [[ -d "$DIR_TARGETPLATFORMS" && "$(ls -A $DIR_TARGETPLATFORMS)" ]]
 then
@@ -134,9 +138,12 @@ target platforms will be downloaded from $ECLIPSE_DOWNLOAD"
    cd $DIR_TARGETPLATFORMS
     #FTP download
     echo "$ECLIPSE_DOWNLOAD"
-   ftp -n "$ECLIPSE_DOWNLOAD" <<ENDFTP
-   bin
+   ftp -n <<ENDFTP
    prompt off
+   open $DOWNLOAD_FTP_HOST
+   user anonymous anonymous
+   bin
+   cd $DOWNLOAD_FTP_PATH
    lcd $DIR_TARGETPLATFORMS
    mget eclipse-SDK-*-win*.zip
    mget eclipse-SDK-*-linux-gtk.tar.gz
