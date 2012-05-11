@@ -10,6 +10,11 @@
 		<Class name="~testdata\..*" />
 	</Match>
 
+	<!-- seems to be a common move classes to another package --> 
+	<Match>
+		<Bug pattern="NM_SAME_SIMPLE_NAME_AS_SUPERCLASS"/>
+	</Match>
+	
 	<!-- "==" compare is desired - See https://bugs.eclipse.org/bugs/show_bug.cgi?id=225331 -->
 	<Match>
 		<Class
@@ -55,10 +60,6 @@
 	<Match>
 		<Class name="org.eclipse.xtext.util.ITextRegion" />
 		<Bug pattern="IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION" />
-	</Match>
-	<Match>
-		<Class name="~.*Activator" />
-		<Bug pattern="NM_SAME_SIMPLE_NAME_AS_SUPERCLASS"/>
 	</Match>
 	
 	
