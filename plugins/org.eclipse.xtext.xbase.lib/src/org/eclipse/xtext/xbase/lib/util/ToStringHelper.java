@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,6 +30,8 @@ import com.google.common.base.Strings;
  */
 @Beta
 public class ToStringHelper {
+	
+
 	
 	private static class IndentationAwareStringBuilder {
 		private StringBuilder builder = new StringBuilder();
@@ -68,6 +71,26 @@ public class ToStringHelper {
 		}
 	}
 	
+	private final static ThreadLocal<IdentityHashMap<Object, Boolean>> currentlyProcessed = new ThreadLocal<IdentityHashMap<Object,Boolean>>() {
+		@Override
+		protected IdentityHashMap<Object, Boolean> initialValue() {
+			return new IdentityHashMap<Object, Boolean>();
+		}
+	};
+	
+	/**
+	 * @return false if the object is already beeing processed
+	 */
+	private static boolean startProcessing(Object x) {
+		final IdentityHashMap<Object, Boolean> identityHashMap = currentlyProcessed.get();
+		return identityHashMap.put(x, Boolean.TRUE) == null;
+	}
+	
+	private static void endProcessing(Object x) {
+		final IdentityHashMap<Object, Boolean> identityHashMap = currentlyProcessed.get();
+		identityHashMap.remove(x);
+	}
+	
 	/**
 	 * Creates a string representation of the given object by listing the internal
 	 * state of all fields.
@@ -78,19 +101,31 @@ public class ToStringHelper {
 		if (obj == null)
 			return "null";
 		final Class<? extends Object> clazz = obj.getClass();
-		List<Field> fields = getAllDeclaredFields(clazz);
-		IndentationAwareStringBuilder sb = new IndentationAwareStringBuilder();
-		sb.append(clazz.getSimpleName()).append(" [").increaseIndent();
-		for (Field f : fields) {
-			addField(f, obj, sb);
+		if (!startProcessing(obj)) {
+			return toSimpleReferenceString(obj);
 		}
-		sb.decreaseIndent();
-		if (!fields.isEmpty())
-			sb.newLine();
-		sb.append("]");
-		return sb.toString();
+		try {
+			List<Field> fields = getAllDeclaredFields(clazz);
+			IndentationAwareStringBuilder sb = new IndentationAwareStringBuilder();
+			sb.append(clazz.getSimpleName()).append(" [").increaseIndent();
+			for (Field f : fields) {
+				addField(f, obj, sb);
+			}
+			sb.decreaseIndent();
+			if (!fields.isEmpty())
+				sb.newLine();
+			sb.append("]");
+			return sb.toString();
+		} finally {
+			endProcessing(obj);
+		}
 	}
 	
+	private String toSimpleReferenceString(Object obj) {
+		//TODO we could try to guess a better short representation, i.e. by looking for fields named 'name' or 'id'.
+		return obj.getClass().getSimpleName()+"@"+System.identityHashCode(obj);
+	}
+
 	/**
 	 * Appends the fields and its value to the given string builder.
 	 * @param field the field. May be a private field.
