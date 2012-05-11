@@ -129,6 +129,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		"newTreeMap()",
 		// InputOutput,
 		"print()",
+		"println",
 		"println()",
 	};
 	
