@@ -177,37 +177,40 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	 */
 	protected void createXtendLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
-		final String elementName = issue.getData()[0];
-		modificationContext.getXtextDocument().modify(new IUnitOfWork.Void<XtextResource>(){
+		IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		if(issue.getData() != null && xtextDocument != null){
+			final String elementName = issue.getData()[0];
+			xtextDocument.modify(new IUnitOfWork.Void<XtextResource>(){
 
-			@SuppressWarnings("null")
-			@Override
-			public void process(XtextResource state) throws Exception {
-				EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
-				if(eObject instanceof XAbstractFeatureCall){
-					XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
-					EList<XExpression> explicitArguments = call.getExplicitArguments();
-					StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-					getTypeArgumentString(call, appendable);
-					JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-					if(expectedType != null && expectedType.getType() != null)
-						appendable.append(expectedType.getSimpleName()).append(" ");
-					appendable.append(elementName);
-					computeArgumentString(call, false, appendable);
-					boolean isExtension = false;
-					if(call instanceof XMemberFeatureCall)
-						isExtension = ((XMemberFeatureCall) call).getMemberCallTarget() != null;
-					boolean isSetter = false;
-					if(call instanceof XAssignment)
-						isSetter = true;
-					createNewXtendFunction(elementName, appendable.toString(), isExtension, isSetter,expectedType, issue, issueResolutionAcceptor, modificationContext);
-					if (expectedType != null && expectedType.getType() != null && explicitArguments.size() == 0){
-						createNewXtendField(elementName, expectedType, issue, issueResolutionAcceptor, modificationContext);
-						createNewLocalVariable(elementName, expectedType, issue, issueResolutionAcceptor, modificationContext);
+				@SuppressWarnings("null")
+				@Override
+				public void process(XtextResource state) throws Exception {
+					EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
+					if(eObject instanceof XAbstractFeatureCall){
+						XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
+						EList<XExpression> explicitArguments = call.getExplicitArguments();
+						StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
+						getTypeArgumentString(call, appendable);
+						JvmTypeReference expectedType = typeProvider.getExpectedType(call);
+						if(expectedType != null && expectedType.getType() != null)
+							appendable.append(expectedType.getSimpleName()).append(" ");
+						appendable.append(elementName);
+						computeArgumentString(call, false, appendable);
+						boolean isExtension = false;
+						if(call instanceof XMemberFeatureCall)
+							isExtension = ((XMemberFeatureCall) call).getMemberCallTarget() != null;
+						boolean isSetter = false;
+						if(call instanceof XAssignment)
+							isSetter = true;
+						createNewXtendFunction(elementName, appendable.toString(), isExtension, isSetter,expectedType, issue, issueResolutionAcceptor, modificationContext);
+						if (expectedType != null && expectedType.getType() != null && explicitArguments.size() == 0){
+							createNewXtendField(elementName, expectedType, issue, issueResolutionAcceptor, modificationContext);
+							createNewLocalVariable(elementName, expectedType, issue, issueResolutionAcceptor, modificationContext);
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 	
 	/**
