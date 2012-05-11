@@ -51,7 +51,7 @@ class DebugGraphGenerator {
 						result.add(file("syntactic_sequencer", context, type) -> syntacticSequencerPDA2Dot.draw(syntacticSequencerPDAProvider.getPDA(context, type)))
 						result.add(file("semantic_sequencer", context, type) -> nfaToDot.draw(semanticSequencerNFAProvider.getNFA(context, type)))
 					} catch(Throwable t) {
-						System::out.println("Context: " + context.contextName + " Type:" + type.name)
+						System::out.println("Context: " + context.contextName + " Type:" + type?.name)
 						t.printStackTrace
 					}
 				}
@@ -68,7 +68,7 @@ class DebugGraphGenerator {
 	}
 	
 	def String file(String name, EObject ctx, EClass type) {
-		directory(name) + ctx.contextName + "_" + type.name + ".dot";
+		directory(name) + ctx.contextName + "_" + type?.name + ".dot";
 	}
 	
 	def String file(String name, EObject ctx) {
