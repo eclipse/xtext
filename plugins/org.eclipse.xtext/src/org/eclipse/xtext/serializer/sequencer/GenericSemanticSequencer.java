@@ -31,7 +31,6 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.RelationalDependencyType;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
@@ -416,9 +415,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject
 	protected ICrossReferenceSerializer crossRefSerializer;
-
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
 
 	@Inject
 	protected IEnumLiteralSerializer enumLiteralSerializer;
