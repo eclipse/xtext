@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.tests.lib.internal;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.tests.lib.internal.MyEntity;
 import org.junit.Assert;
 import org.junit.Test;

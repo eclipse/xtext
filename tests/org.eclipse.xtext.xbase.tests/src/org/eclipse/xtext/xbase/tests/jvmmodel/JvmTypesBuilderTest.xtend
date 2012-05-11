@@ -173,8 +173,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testSetBody() {
 		val op = typesFactory.createJvmOperation
-		op.body = ['''foo''']
-		op.body = ['''bar''']
+		op.body = [append('''foo''')]
+		op.body = [append('''bar''')]
 		assertEquals(1, op.eAdapters.size)
 	}
 	
@@ -186,12 +186,12 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		val op = typesFactory.createJvmOperation
 		res.contents += op
 		res.contents += expr
-		op.body = ['''bar''']
+		op.body = [append('''bar''')]
 		assertEquals(1, op.eAdapters.size)
 		op.body = expr
 		assertEquals(op, containerProvider.getLogicalContainer(expr))
 		assertEquals(0, op.eAdapters.size)
-		op.body = ['''bar''']
+		op.body = [append('''bar''')]
 		assertEquals(1, op.eAdapters.size)
 		assertNull(containerProvider.getLogicalContainer(expr))
 	}

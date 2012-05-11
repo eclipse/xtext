@@ -339,6 +339,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         public void apply(final ITreeAppendable it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("foo");
+          it.append(_builder);
         }
       };
     this._jvmTypesBuilder.setBody(op, _function);
@@ -346,6 +347,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         public void apply(final ITreeAppendable it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("bar");
+          it.append(_builder);
         }
       };
     this._jvmTypesBuilder.setBody(op, _function_1);
@@ -369,6 +371,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         public void apply(final ITreeAppendable it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("bar");
+          it.append(_builder);
         }
       };
     this._jvmTypesBuilder.setBody(op, _function);
@@ -385,6 +388,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         public void apply(final ITreeAppendable it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("bar");
+          it.append(_builder);
         }
       };
     this._jvmTypesBuilder.setBody(op, _function_1);
