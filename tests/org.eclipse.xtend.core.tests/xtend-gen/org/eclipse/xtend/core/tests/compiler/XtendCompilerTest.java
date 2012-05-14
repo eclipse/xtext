@@ -2177,7 +2177,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final HashMap<ArrayList<?>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();");
+    _builder_1.append("private final HashMap<ArrayList<? extends Object>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
