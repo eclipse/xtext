@@ -14,9 +14,12 @@ import java.util.Map;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -235,8 +238,25 @@ public class ResolvedTypes implements IResolvedTypes {
 			}
 		}
 		if (types == null)
-			return null;
-		return ensureTypesMapExists().get(identifiable);
+			return getDeclaredType(identifiable);
+		JvmTypeReference result = ensureTypesMapExists().get(identifiable);
+		if (result == null) {
+			return getDeclaredType(identifiable);
+		}
+		return result;
+	}
+	
+	protected JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+		if (identifiable instanceof JvmOperation) {
+			return ((JvmOperation) identifiable).getReturnType();
+		}
+		if (identifiable instanceof JvmField) {
+			return ((JvmField) identifiable).getType();
+		}
+		if (identifiable instanceof JvmConstructor) {
+			return resolver.getServices().getTypeReferences().createTypeRef(((JvmConstructor) identifiable).getDeclaringType());
+		}
+		return null;
 	}
 	
 	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {

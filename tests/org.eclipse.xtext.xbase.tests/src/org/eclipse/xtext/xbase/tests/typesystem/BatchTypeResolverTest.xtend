@@ -247,14 +247,16 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"emptyList".resolvesTo("List<Object>")
 	}
 	
-	@Ignore
 	@Test def void testMethodTypeParamInference_00() throws Exception {
 		"new java.util.ArrayList<String>().findFirst(e | true)".resolvesTo("String")
 	}
 	
-	@Ignore
 	@Test def void testMethodTypeParamInference_01() throws Exception {
 		"new java.util.ArrayList<String>().findFirst(e|e == 'foo')".resolvesTo("String")
+	}
+	
+	@Test def void testMethodTypeParamInference_02() throws Exception {
+		"new java.util.ArrayList<String>().<String>findFirst(e|e == 'foo')".resolvesTo("String")
 	}
 	
 	@Test def void testInstanceof() throws Exception {
@@ -328,11 +330,15 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Ignore
 	@Test def void testClosure_07() throws Exception {
-		"[String x, String y| x + y]".resolvesTo("(String, String)=>String")
+		"[String x, String y| x + y ]".resolvesTo("(String, String)=>String")
 	}
 	
 	@Test def void testClosure_08() throws Exception {
 		"[x| x]".resolvesTo("(Object)=>Object")
+	}
+	
+	@Test def void testClosure_09() throws Exception {
+		"[String x, String y| x.substring(y.length)]".resolvesTo("(String, String)=>String")
 	}
 
 	@Test def void testTypeArgs() throws Exception {
@@ -455,6 +461,22 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList.add(new java.util.ArrayList())".resolvesTo("boolean")
 	}
 	
+	@Test def void testConstructorTypeInference_05() throws Exception {
+		"new testdata.GenericType2".resolvesTo("GenericType2<Number>")
+	}
+	
+	@Test def void testConstructorTypeInference_06() throws Exception {
+		"new testdata.GenericType2(0)".resolvesTo("GenericType2<Integer>")
+	}
+	
+	@Test def void testConstructorTypeInference_07() throws Exception {
+		"new testdata.GenericType2(0, 1)".resolvesTo("GenericType2<Integer>")
+	}
+	
+	@Test def void testConstructorTypeInference_08() throws Exception {
+		"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".resolvesTo("GenericType2<Number & Comparable<?>>")
+	}
+	
 	@Test def void testClassNewInstance() throws Exception {
 		"typeof(String).newInstance".resolvesTo("String")
 	}
@@ -483,7 +505,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"new testdata.ClassWithVarArgs().toList('', 1)".resolvesTo("List<Comparable<?> & Serializable>")
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_05() throws Exception {
 //		Lists.newArrayList(1l, 1);
 		"new testdata.ClassWithVarArgs().toNumberList()".resolvesTo("List<Number>")
@@ -494,15 +515,20 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Ignore
 	@Test def void testFeatureCall_06() throws Exception {
-//		List<String> list = null;
-//		Functions.Function1<String, String> fun = null;
-//		ListExtensions.map(list, fun);
 		"newArrayList('').map(s|s)".resolvesTo("List<String>")
+	}
+	
+	@Test def void testFeatureCall_06_head() throws Exception {
+		"newArrayList('').map(s|s).head".resolvesTo("String")
 	}
 	
 	@Ignore
 	@Test def void testFeatureCall_06_1() throws Exception {
 		"newArrayList('').map(s|1)".resolvesTo("List<Integer>")
+	}
+	
+	@Test def void testFeatureCall_06_1_head() throws Exception {
+		"newArrayList('').map(s|1).head".resolvesTo("Integer")
 	}
 	
 	@Ignore
@@ -525,7 +551,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|1).map(i|i+1)".resolvesTo("List<Integer>")
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_11() throws Exception {
 		"newArrayList('').map(s|1).toList()".resolvesTo("List<Integer>")
 	}
@@ -625,7 +650,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)".resolvesTo("List<Integer>")
 	}
 
-	@Ignore
 	@Test def void testFeatureCall_15_m() throws Exception {
 		("newArrayList(newArrayList('').map(String s|1).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
 		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
@@ -641,10 +665,9 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
 		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
 		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)
-		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e)").resolvesTo("List<Integer>");
+		.map(Integer e|e).map(Integer e|e).map(Integer e|e).map(Integer e|e).head").resolvesTo("Integer");
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_15_n() throws Exception {
 		("newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)
 		.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)
@@ -688,7 +711,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)
 		.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)
 		.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)
-		.map(e|e).map(e|e).map(e|e).map(e|e)").resolvesTo("List<Integer>");
+		.map(e|e).map(e|e).map(e|e).map(e|e).head").resolvesTo("Integer");
 	}
 	
 	@Ignore
@@ -765,17 +788,14 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(e|newArrayList(e))".resolvesTo("List<ArrayList<String>>")
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_Bug342134_03() throws Exception {
 		"<String>newArrayList.map(e|newArrayList(e)).flatten".resolvesTo("Iterable<String>")
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_Bug342134_04() throws Exception {
 		"newArrayList('').map(e|<String>newArrayList(e)).flatten".resolvesTo("Iterable<String>")
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_Bug342134_05() throws Exception {
 		"newArrayList.map(String e|<String>newArrayList(e)).flatten".resolvesTo("Iterable<String>")
 	}

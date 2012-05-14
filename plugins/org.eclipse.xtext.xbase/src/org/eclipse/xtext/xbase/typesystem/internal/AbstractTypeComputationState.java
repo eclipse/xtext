@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -33,6 +32,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.common.collect.Lists;
@@ -104,6 +104,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	protected DefaultReentrantTypeResolver getResolver() {
 		return reentrantTypeResolver;
+	}
+	
+	protected BoundTypeArgumentMerger getTypeArgumentMerger() {
+		return reentrantTypeResolver.getTypeArgumentMerger();
 	}
 	
 	public ITypeComputationResult computeTypes(@Nullable XExpression expression) {
@@ -303,7 +307,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
-		return new ConstructorLinkingCandidate(constructorCall, (JvmConstructor) description.getEObjectOrProxy(), this);
+		return new ConstructorLinkingCandidate(constructorCall, description, this);
 	}
 
 }

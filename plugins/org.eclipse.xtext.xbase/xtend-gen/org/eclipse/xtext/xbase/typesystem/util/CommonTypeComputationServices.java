@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import com.google.inject.Inject;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -32,6 +33,17 @@ public class CommonTypeComputationServices {
   
   public void setTypeConformanceComputer(final TypeConformanceComputer typeConformanceComputer) {
     this._typeConformanceComputer = typeConformanceComputer;
+  }
+  
+  @Inject
+  private Primitives _primitives;
+  
+  public Primitives getPrimitives() {
+    return this._primitives;
+  }
+  
+  public void setPrimitives(final Primitives primitives) {
+    this._primitives = primitives;
   }
   
   @Inject(optional = true)
