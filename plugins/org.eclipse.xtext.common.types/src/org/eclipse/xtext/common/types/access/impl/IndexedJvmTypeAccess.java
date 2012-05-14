@@ -112,7 +112,7 @@ public class IndexedJvmTypeAccess {
 			int dot = fragment.lastIndexOf('.', paren);
 			final int max = Math.max(dollar, dot);
 			if (max == -1) {
-				logger.warn("Couldn't resolve java object for root type "+rootType!=null?rootType.getQualifiedName():"null"+" and fragment '"+fragment);
+				logger.warn("Couldn't resolve java object for root type "+rootType!=null?rootType.getQualifiedName():"null"+" and fragment '"+fragment, new Exception());
 				return null;
 			}
 			String subFragment = fragment.substring(0, max);
