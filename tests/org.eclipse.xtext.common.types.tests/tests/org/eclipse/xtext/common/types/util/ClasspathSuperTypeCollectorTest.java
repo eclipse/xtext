@@ -17,6 +17,7 @@ import org.junit.Before;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,6 +26,7 @@ public class ClasspathSuperTypeCollectorTest extends AbstractSuperTypeCollectorT
 
 	private ResourceSet resourceSet;
 	private IJvmTypeProvider typeProvider;
+	private Provider<SuperTypeCollector> collectorProvider;
 
 	@Before
 	public void setUp() throws Exception {
@@ -32,6 +34,7 @@ public class ClasspathSuperTypeCollectorTest extends AbstractSuperTypeCollectorT
 		Injector injector = Guice.createInjector(new ClasspathBasedModule());
 		Factory instance = injector.getInstance(IJvmTypeProvider.Factory.class);
 		typeProvider = instance.findOrCreateTypeProvider(resourceSet);
+		collectorProvider = injector.getProvider(SuperTypeCollector.class);
 	}
 	
 	@After
@@ -43,5 +46,10 @@ public class ClasspathSuperTypeCollectorTest extends AbstractSuperTypeCollectorT
 	@Override
 	protected IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
+	}
+	
+	@Override
+	protected SuperTypeCollector getCollector() {
+		return collectorProvider.get();
 	}
 }
