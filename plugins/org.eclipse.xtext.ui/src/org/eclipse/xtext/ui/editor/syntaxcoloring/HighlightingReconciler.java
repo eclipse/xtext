@@ -123,7 +123,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			}
 		}
 
-		if (!isExisting) {
+		if (!isExisting && presenter != null) { // in case we have been uninstalled due to exceptions
 			AttributedPosition position= presenter.createHighlightedPosition(offset, length, highlighting);
 			addedPositions.add(position);
 		}
