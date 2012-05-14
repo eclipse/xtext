@@ -43,6 +43,7 @@ public class BoundTypeArgumentMerger {
 		List<JvmTypeReference> invariantTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> invariantVariances = Lists.newArrayListWithCapacity(3);
 		List<JvmTypeReference> outTypes = Lists.newArrayListWithCapacity(3);
+		List<JvmTypeReference> constraintOutTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> outVariances = Lists.newArrayListWithCapacity(3);
 		List<JvmTypeReference> inTypes = Lists.newArrayListWithCapacity(3);
 		List<VarianceInfo> inVariances = Lists.newArrayListWithCapacity(3);
@@ -57,7 +58,11 @@ public class BoundTypeArgumentMerger {
 					}
 					break;
 				case OUT:
-					outTypes.add(boundTypeArgument.getTypeReference());
+					if (boundTypeArgument.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+						constraintOutTypes.add(boundTypeArgument.getTypeReference());
+					} else {
+						outTypes.add(boundTypeArgument.getTypeReference());
+					}
 					if (seenOrigin.add(origin) || origin == null || boundTypeArgument.isValidVariancePair()) {
 						outVariances.add(boundTypeArgument.getActualVariance());
 					}
@@ -72,6 +77,9 @@ public class BoundTypeArgumentMerger {
 		}
 		JvmTypeReference type = null;
 		VarianceInfo variance = null;
+		if (outTypes.isEmpty()) {
+			outTypes.addAll(constraintOutTypes);
+		}
 		if (!invariantTypes.isEmpty()) {
 			type = invariantTypes.get(0);
 			variance = VarianceInfo.INVARIANT.mergeDeclaredWithActuals(invariantVariances);

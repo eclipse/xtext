@@ -23,9 +23,11 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.RawTypeHelper;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -52,14 +54,20 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typing.Closures;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -82,6 +90,12 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	
 	@Inject 
 	private CommonTypeComputationServices services;
+	
+	@Inject
+	private RawTypeHelper rawTypeHelper;
+	
+	@Inject
+	private BoundTypeArgumentMerger typeArgumentMerger;
 	
 	protected TypeReferences getTypeReferences() {
 		return services.getTypeReferences();
@@ -267,31 +281,60 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 
 	protected void _computeTypes(final XClosure object, final ITypeComputationState state) {
 		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
-			JvmTypeReference expectedType = expectation.getExpectedType();
+			JvmTypeReference expectedClosureType = expectation.getExpectedType();
+			Map<JvmTypeParameter, JvmTypeReference> expectedTypeParameterMapping = Collections.emptyMap();
 			// TODO - closure has no expected type - has to be function or procedure
 			ITypeComputationState closureBodyState = state;
 			JvmOperation operation = null;
 			List<JvmFormalParameter> operationParameters = Collections.emptyList();
 			final JvmTypeReference operationReturnType;
-			if (expectedType != null) {
-				operation = closures.findImplementingOperation(expectedType, object.eResource());
+			TypeParameterSubstitutor substitutor = null;
+			if (expectedClosureType != null) {
+				operation = closures.findImplementingOperation(expectedClosureType, object.eResource());
 				if (operation != null) {
-					closureBodyState = closureBodyState.fork().withExpectation(operation.getReturnType());
+					List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(expectedClosureType, object.eResource());
+					List<JvmTypeParameter> allTypeParameters = Lists.newArrayList();
+					for(JvmType rawType: rawTypes) {
+						if (rawType instanceof JvmTypeParameterDeclarator) {
+							allTypeParameters.addAll(((JvmTypeParameterDeclarator) rawType).getTypeParameters());
+						}
+					}
+					allTypeParameters.addAll(operation.getTypeParameters());
+					ActualTypeArgumentCollector typeArgumentCollector = new ActualTypeArgumentCollector(allTypeParameters, services);
+					JvmParameterizedTypeReference operationTypeDeclarator = services.getTypeReferences().createTypeRef(operation.getDeclaringType());
+					typeArgumentCollector.populateTypeParameterMapping(operationTypeDeclarator, expectedClosureType);
+					ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping();
+					expectedTypeParameterMapping = Maps.newHashMap();
+					for(JvmTypeParameter typeParamter: typeParameterMapping.keySet()) {
+						MergedBoundTypeArgument boundTypeArgument = typeArgumentMerger.merge(typeParameterMapping.get(typeParamter));
+						if (boundTypeArgument != null)
+							expectedTypeParameterMapping.put(typeParamter, boundTypeArgument.getTypeReference());
+					}
 					operationParameters = operation.getParameters();
-					operationReturnType = operation.getReturnType();
+					JvmTypeReference declaredReturnType = operation.getReturnType();
+					substitutor = new TypeParameterSubstitutor(expectedTypeParameterMapping, services);
+					operationReturnType = substitutor.substitute(declaredReturnType);
+					if (operationReturnType == null) {
+						throw new IllegalStateException();
+					}
+					closureBodyState = closureBodyState.fork().withExpectation(operationReturnType);
 				} else {
 					operationReturnType = null;
 				}
 			} else {
 				operationReturnType = null;
 			}
+			if (substitutor == null)
+				substitutor = new TypeParameterSubstitutor(expectedTypeParameterMapping, services);
 			ITypeAssigner typeAssigner = closureBodyState.assignTypes();
 			List<JvmFormalParameter> closureParameters = object.getFormalParameters();
 			int paramCount = Math.min(closureParameters.size(), operationParameters.size());
 			// TODO validate parameter count - check against operation if available
 			for(int i = 0; i < paramCount; i++) {
 				JvmFormalParameter closureParameter = closureParameters.get(i);
-				typeAssigner.assignType(closureParameter, closureParameter.getParameterType(), operationParameters.get(i).getParameterType());
+				JvmTypeReference declaredParameterType = operationParameters.get(i).getParameterType();
+				JvmTypeReference resolvedDeclaredType = substitutor.substitute(declaredParameterType);
+				typeAssigner.assignType(closureParameter, closureParameter.getParameterType(), resolvedDeclaredType);
 			}
 			final JvmTypeReference[] closureType = new JvmTypeReference[1];
 			for(int i = paramCount; i < closureParameters.size(); i++) {
@@ -323,7 +366,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				}
 			}
 			ITypeComputationResult expressionResult = typeAssigner.getForkedState().computeTypes(object.getExpression());
-			if (expectedType == null || operationReturnType == null) {
+			if (expectedClosureType == null || operationReturnType == null) {
 				final List<JvmTypeReference> closureParameterTypes = Lists.newArrayListWithCapacity(closureParameters.size());
 				for(JvmFormalParameter parameter: closureParameters) {
 					closureParameterTypes.add(expressionResult.getActualType(parameter));
@@ -356,14 +399,12 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			} else {
 				JvmTypeReference closureBodyType = expressionResult.getActualExpressionType();
 				JvmType rawReturnType = operationReturnType.getType();
-				Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(expectedType);
 				if (rawReturnType instanceof JvmTypeParameter) {
-					typeParameterMapping.putAll(Collections.singletonMap((JvmTypeParameter)rawReturnType, primitives.asWrapperTypeIfPrimitive(closureBodyType)));
+					substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, primitives.asWrapperTypeIfPrimitive(closureBodyType)));
 				} else {
-					typeParameterMapping.putAll(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureBodyType));
+					substitutor.enhanceMapping(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureBodyType));
 				}
-				TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(typeParameterMapping, services);
-				JvmType expectedRawType = expectedType.getType();
+				JvmType expectedRawType = expectedClosureType.getType();
 				closureType[0] = substitutor.substitute(services.getTypeReferences().createTypeRef(expectedRawType));
 				expectation.acceptActualType(closureType[0], ConformanceHint.DEMAND_CONVERSION);
 			}

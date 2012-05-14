@@ -18,6 +18,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer
 import org.eclipse.xtext.xtype.XtypeFactory
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.util.Primitives
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -68,6 +69,10 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	TypeConformanceComputer typeConformanceComputer;
+	
+	@Inject
+	@Property
+	Primitives primitives;
 
 	@Inject(optional = true)
 	@Property
