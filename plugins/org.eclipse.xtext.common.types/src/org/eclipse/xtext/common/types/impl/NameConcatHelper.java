@@ -96,7 +96,7 @@ class NameConcatHelper {
 		int wasLength = result.length();
 		for (JvmTypeReference argument : arguments) {
 			if (result.length() != wasLength)
-				result.append(",");
+				result.append(", ");
 			switch(nameType) {
 				case ID: result.append(argument.getIdentifier()); break;
 				case QUALIFIED: result.append(argument.getQualifiedName(innerClassDelimiter)); break;
