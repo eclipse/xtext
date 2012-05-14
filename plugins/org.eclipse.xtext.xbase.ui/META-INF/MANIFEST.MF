@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.jdt.junit;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.debug.ui;bundle-version="3.4.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.ui;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.pde.ui;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy
+ org.eclipse.pde.ui;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.search;bundle-version="3.5.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
 Import-Package: org.apache.log4j

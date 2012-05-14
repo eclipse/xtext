@@ -52,7 +52,7 @@ public class ReferenceQueryExecutor {
 		return singleton(EcoreUtil2.getNormalizedURI(primaryTarget));
 	}
 
-	protected String getLabel(EObject primaryTarget) {
+	public String getLabel(EObject primaryTarget) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getLabelPrefix());
 		builder.append(getElementName(primaryTarget));

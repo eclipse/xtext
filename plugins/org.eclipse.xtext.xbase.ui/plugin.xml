@@ -54,4 +54,13 @@
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 		</key>
 	</extension>
+	<extension point="org.eclipse.search.searchResultViewPages">
+    	<viewPage
+          class="org.eclipse.jdt.internal.ui.search.JavaSearchResultPage"
+          icon="icons/searchpage.gif"
+          id="org.eclipse.jdt.ui.java_search_result"
+          searchResultClass="org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.CompositeSearchResult">
+    	</viewPage>
+ 	</extension>
+	
 </plugin>

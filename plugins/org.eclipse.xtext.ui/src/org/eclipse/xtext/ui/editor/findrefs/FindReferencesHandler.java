@@ -45,22 +45,13 @@ public class FindReferencesHandler extends AbstractHandler {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				ReferenceQueryExecutor queryExecutor = editor.getDocument().readOnly(new IUnitOfWork<ReferenceQueryExecutor, XtextResource>() {
-					public ReferenceQueryExecutor exec(XtextResource state) throws Exception {
+				editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+					@Override
+					public void process(XtextResource state) throws Exception {
 						EObject target = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
-						URI targetURI = EcoreUtil2.getNormalizedURI(target);
-						if(targetURI != null) {
-							ReferenceQueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(), ReferenceQueryExecutor.class);
-							if (queryExecutor != null) {
-								queryExecutor.init(target);
-								return queryExecutor;
-							}
-						}
-						return null;
+						findReferences(target);
 					}
 				});
-				if(queryExecutor != null) 
-					queryExecutor.execute();
 			}
 		} catch (Exception e) {
 			LOG.error(Messages.FindReferencesHandler_3, e);
@@ -68,4 +59,21 @@ public class FindReferencesHandler extends AbstractHandler {
 		return null;
 	}
 
+	protected void findReferences(EObject target) {
+		ReferenceQueryExecutor queryExecutor = getQueryExecutor(target);
+		if(queryExecutor != null) 
+			queryExecutor.execute();
+	}
+
+	protected ReferenceQueryExecutor getQueryExecutor(EObject target) {
+		URI targetURI = EcoreUtil2.getNormalizedURI(target);
+		if(targetURI != null) {
+			ReferenceQueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(), ReferenceQueryExecutor.class);
+			if (queryExecutor != null) {
+				queryExecutor.init(target);
+				return queryExecutor;
+			}
+		}
+		return null;
+	}
 }
