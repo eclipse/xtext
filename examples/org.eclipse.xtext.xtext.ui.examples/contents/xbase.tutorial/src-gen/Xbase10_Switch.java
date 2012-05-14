@@ -71,7 +71,7 @@ public class Xbase10_Switch {
               return _switchResult;
             }
           };
-        ListExtensions.<Shape, String>map(list2, _function);
+        /*ListExtensions.<Shape, String>map(list2, _function);*/
     } catch (Throwable t) {}
   }
 }

@@ -23,7 +23,7 @@ public class Xbase05_Closures {
               return _upperCase;
             }
           };
-        ListExtensions.<String, String>map(list, _function_1);
+        /*ListExtensions.<String, String>map(list, _function_1);*/
         final Function1<String,String> _function_2 = new Function1<String,String>() {
             public String apply(final String e) {
               String _upperCase = e.toUpperCase();
