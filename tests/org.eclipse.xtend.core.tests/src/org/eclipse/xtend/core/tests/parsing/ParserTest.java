@@ -73,7 +73,7 @@ public class ParserTest extends AbstractXtendTestCase {
 		XtendField field = (XtendField) clazz.getMembers().get(0);
 		assertEquals("java.util.Map",field.getType().getType().getIdentifier());
 		assertEquals("map",field.getName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", field.getType().getIdentifier());
+		assertEquals("java.util.Map<java.lang.String, java.lang.String>", field.getType().getIdentifier());
 	}
 	
 	@Test public void testXtendField_01() throws Exception {
@@ -85,7 +85,7 @@ public class ParserTest extends AbstractXtendTestCase {
 		XtendField field = (XtendField) clazz.getMembers().get(0);
 		assertEquals("java.util.Map",field.getType().getType().getIdentifier());
 		assertEquals("map",field.getName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", field.getType().getIdentifier());
+		assertEquals("java.util.Map<java.lang.String, java.lang.String>", field.getType().getIdentifier());
 		assertTrue(clazz.getMembers().get(1) instanceof XtendFunction);
 	}
 	
@@ -99,7 +99,7 @@ public class ParserTest extends AbstractXtendTestCase {
 		XtendField field = (XtendField) clazz.getMembers().get(0);
 		assertEquals("java.util.Map",field.getType().getType().getIdentifier());
 		assertEquals("map",field.getName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", field.getType().getIdentifier());
+		assertEquals("java.util.Map<java.lang.String, java.lang.String>", field.getType().getIdentifier());
 		field = (XtendField) clazz.getMembers().get(1);
 		assertEquals("java.util.List",field.getType().getType().getIdentifier());
 		assertEquals("myList",field.getName());
