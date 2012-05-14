@@ -285,7 +285,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testConstructorCall() throws Exception {
 		assertResolvedType("java.util.ArrayList<E>", "new java.util.ArrayList()");
 		assertResolvedType("java.util.ArrayList<java.lang.String>", "new java.util.ArrayList<java.lang.String>()");
-		assertResolvedType("java.util.HashMap<java.lang.String,java.lang.Boolean>",
+		assertResolvedType("java.util.HashMap<java.lang.String, java.lang.Boolean>",
 				"new java.util.HashMap<java.lang.String, java.lang.Boolean>()");
 	}
 	
@@ -573,7 +573,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testStaticMethods_05() throws Exception {
-		assertResolvedType("java.util.HashMap<java.lang.Object,java.lang.Object>", "newHashMap()");
+		assertResolvedType("java.util.HashMap<java.lang.Object, java.lang.Object>", "newHashMap()");
 	}
 
 	@Test public void testThrowExpression() throws Exception {
