@@ -19,6 +19,7 @@ import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaFactory;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 public class SerializerPDA implements Pda<ISerState, RuleCall> {
@@ -72,6 +73,14 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
 			((SerializerPDA.SerializerPDAState) owner).followers = Lists.newArrayList(followers);
 		}
+	}
+
+	public static class SerializerPDAGetToken implements Function<ISerState, AbstractElement> {
+
+		public AbstractElement apply(ISerState input) {
+			return input.getGrammarElement();
+		}
+
 	}
 
 	protected static class SerializerPDAState implements ISerState {

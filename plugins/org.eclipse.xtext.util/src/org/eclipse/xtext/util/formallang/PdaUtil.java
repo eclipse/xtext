@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.NfaUtil.MappedComparator;
 
 import com.google.common.base.Function;
@@ -22,6 +25,7 @@ import com.google.common.base.Functions;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -82,6 +86,57 @@ public class PdaUtil {
 
 		public boolean apply(S input) {
 			return pda.getPop(input) != null;
+		}
+	}
+
+	public static class CyclicStackItem<T> {
+		protected CyclicStackItem<T> parent;
+		protected T item;
+
+		public CyclicStackItem() {
+			this.parent = null;
+		}
+
+		public CyclicStackItem(CyclicStackItem<T> parent, T item) {
+			super();
+			this.parent = parent;
+			this.item = item;
+		}
+
+		public CyclicStackItem<T> push(T item) {
+			int count = 0;
+			CyclicStackItem<T> current = this;
+			while (current != null) {
+				if (current.item == item)
+					count++;
+				current = current.parent;
+			}
+			if (count >= 2)
+				return null;
+			return new CyclicStackItem<T>(this, item);
+		}
+
+		public CyclicStackItem<T> pop(T item) {
+			if (parent == null || this.item != item)
+				return null;
+			return parent;
+		}
+	}
+
+	public static class CyclicStackTraverser<S, P> implements Traverser<Pda<S, P>, S, CyclicStackItem<P>> {
+		public CyclicStackItem<P> enter(Pda<S, P> pda, S state, CyclicStackItem<P> previous) {
+			P item;
+			if ((item = pda.getPush(state)) != null)
+				return previous.push(item);
+			if ((item = pda.getPop(state)) != null)
+				return previous.pop(item);
+			if (previous == null)
+				return new CyclicStackItem<P>();
+			return previous;
+		}
+
+		public boolean isSolution(CyclicStackItem<P> result) {
+			return result.parent == null;
 		}
 	}
 
@@ -198,12 +253,13 @@ public class PdaUtil {
 		public boolean equals(Object obj) {
 			if (obj == null || obj.getClass() != getClass())
 				return false;
-			return data.equals(((TraversalItem) obj).data);
+			TraversalItem other = (TraversalItem) obj;
+			return data.equals(other.data) && state.equals(other.state);
 		}
 
 		@Override
 		public int hashCode() {
-			return data.hashCode();
+			return data.hashCode() + (state.hashCode() * 7);
 		}
 
 		@Override
@@ -219,6 +275,74 @@ public class PdaUtil {
 
 	public <S, P> boolean canReach(Pda<S, P> pda, S state, Iterator<P> stack, Predicate<S> matches, Predicate<S> canPass) {
 		return distanceTo(pda, Collections.singleton(state), stack, matches, canPass) != UNREACHABLE;
+	}
+
+	protected static class Identity<T> {
+		protected Map<T, T> cache = Maps.newHashMap();
+
+		public T get(T t) {
+			T r = cache.get(t);
+			if (r != null)
+				return r;
+			cache.put(t, t);
+			return t;
+		}
+	}
+
+	public <S, P, T, D extends Pda<S, P>> D expand(Pda<S, P> pda, Function<S, Pda<S, P>> expand, Function<S, T> tokens,
+			PdaFactory<D, S, P, T> fact) {
+		D result = fact.create(tokens.apply(pda.getStart()), tokens.apply(pda.getStop()));
+		Identity<S> identity = new Identity<S>();
+		Map<S, S> idstates = Maps.newIdentityHashMap();
+		Multimap<S, S> followers = HashMultimap.create();
+		for (S s_old : nfaUtil.collect(pda)) {
+			S s_new = idstates.get(s_old);
+			if (s_new == null) {
+				Pda<S, P> sub = expand.apply(s_old);
+				if (sub != null) {
+					S s_start = identity.get(fact.createPush(result, tokens.apply(s_old)));
+					S s_stop = identity.get(fact.createPop(result, tokens.apply(s_old)));
+					idstates.put(s_old, s_start);
+					idstates.put(sub.getStart(), s_start);
+					idstates.put(sub.getStop(), s_stop);
+					followers.putAll(s_start, sub.getFollowers(sub.getStart()));
+					followers.putAll(s_stop, pda.getFollowers(s_old));
+					for (S f_old : nfaUtil.collect(sub))
+						if (f_old != sub.getStart() && f_old != sub.getStop()) {
+							S f_new = idstates.get(f_old);
+							if (f_new == null) {
+								idstates.put(f_old, f_new = clone(f_old, sub, result, tokens, fact, identity));
+								followers.putAll(f_new, pda.getFollowers(f_old));
+							}
+						}
+				} else {
+					idstates.put(s_old, s_new = clone(s_old, pda, result, tokens, fact, identity));
+					followers.putAll(s_new, pda.getFollowers(s_old));
+				}
+			}
+		}
+		for (Map.Entry<S, Collection<S>> entry : followers.asMap().entrySet()) {
+			Set<S> f = Sets.newHashSet();
+			for (S s : entry.getValue())
+				f.add(idstates.get(s));
+			fact.setFollowers(result, entry.getKey(), f);
+		}
+		return result;
+	}
+
+	protected <S, P, T, D extends Pda<S, P>> S clone(S state, Pda<S, P> src, D target, Function<S, T> tokens,
+			PdaFactory<D, S, P, T> fact, Identity<S> identity) {
+		if (state == src.getStart())
+			return target.getStart();
+		if (state == src.getStop())
+			return target.getStop();
+		P push = src.getPush(state);
+		if (push != null)
+			return identity.get(fact.createPush(target, tokens.apply(state)));
+		P pop = src.getPop(state);
+		if (pop != null)
+			return identity.get(fact.createPop(target, tokens.apply(state)));
+		return identity.get(fact.createState(target, tokens.apply(state)));
 	}
 
 	public <S, P, E, T, D extends Pda<S, P>> D create(Cfg<E, T> cfg, FollowerFunction<E> ff,
@@ -303,7 +427,7 @@ public class PdaUtil {
 		trace.push(newItem(pda, distanceComp, pda.getStart(), previous));
 		Multimap<S, S> edges = LinkedHashMultimap.create();
 		HashSet<S> states = Sets.newHashSet();
-		HashSet<R> success = Sets.newHashSet();
+		HashSet<Pair<S, R>> success = Sets.newHashSet();
 		states.add(pda.getStart());
 		states.add(pda.getStop());
 		ROOT: while (!trace.isEmpty()) {
@@ -312,13 +436,14 @@ public class PdaUtil {
 				S next = current.followers.next();
 				R item = traverser.enter(pda, next, current.data);
 				if (item != null) {
-					if (next == pda.getStop() || success.contains(item)) {
+					if ((next == pda.getStop() && traverser.isSolution(item))
+							|| success.contains(Tuples.create(next, item))) {
 						S s = null;
 						for (TraversalItem<S, R> i : trace) {
 							if (s != null)
 								edges.put(s, i.state);
 							states.add(i.state);
-							success.add(i.data);
+							success.add(Tuples.create(i.state, i.data));
 							s = i.state;
 						}
 						edges.put(s, next);
@@ -552,6 +677,11 @@ public class PdaUtil {
 			counter++;
 		}
 		return result;
+	}
+
+	public <S, P, D extends Pda<S, P>> D filterOrphans(Pda<S, P> pda, PdaFactory<D, S, P, S> factory) {
+		CyclicStackTraverser<S, P> traverser = new CyclicStackTraverser<S, P>();
+		return filterEdges(pda, traverser, factory);
 	}
 
 	//	public  IPdaAdapter<String, String, String> parse(String pda) {

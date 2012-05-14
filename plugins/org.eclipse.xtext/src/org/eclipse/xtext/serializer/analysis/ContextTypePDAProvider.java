@@ -156,6 +156,10 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 			return null;
 		}
 
+		public boolean isSolution(FilterState result) {
+			return true;
+		}
+
 	}
 
 	protected Map<Pair<EObject, EClass>, Pda<ISerState, RuleCall>> cache = Maps.newHashMap();
