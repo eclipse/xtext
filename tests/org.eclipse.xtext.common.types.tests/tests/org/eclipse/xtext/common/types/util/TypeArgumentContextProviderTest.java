@@ -525,7 +525,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
 		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
-		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String, ? extends java.lang.Object>", lowerBound.getIdentifier());
 	}
 	
 	/*
@@ -557,7 +557,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
 		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
-		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String, ? extends java.lang.Object>", lowerBound.getIdentifier());
 	}
 	
 	/*
@@ -591,7 +591,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 		JvmTypeReference boundArgument = context.getBoundArgument(typeParameter);
 		assertEquals("? extends java.lang.String", boundArgument.getIdentifier());
 		JvmTypeReference lowerBound = context.getLowerBound(functionReference);
-		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String,? extends java.lang.Object>", lowerBound.getIdentifier());
+		assertEquals("com.google.common.base.Function<? extends java.lang.Object & super java.lang.String, ? extends java.lang.Object>", lowerBound.getIdentifier());
 	}
 	
 	protected JvmTypeReference createTypeRef(JvmType type, JvmTypeReference... argumentTypes) {
@@ -921,8 +921,8 @@ public class TypeArgumentContextProviderTest extends Assert {
 //		ArrayList<? extends Map<? super String, ? extends Number>> list = Lists.newArrayList();
 //		Map<? super String, ? extends Number> map = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? extends java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
+		assertEquals("? extends java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
 	@Test public void testResolveDeeplyNested_ExtendsWithInvalidExpectation() throws Exception {
@@ -947,8 +947,8 @@ public class TypeArgumentContextProviderTest extends Assert {
 //		ArrayList<? extends Map<? super String, ? extends Number>> list = Lists.newArrayList();
 //		Map<? super String, ? extends Number> map = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? extends java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
+		assertEquals("? extends java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
 	@Test public void testResolveDeeplyNested_Super() throws Exception {
@@ -965,7 +965,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 //		Object object = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.lang.Object", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? super java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("? super java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
 	@Test public void testResolveDeeplyNested_SuperWithInvalidExpectation() throws Exception {
@@ -991,7 +991,7 @@ public class TypeArgumentContextProviderTest extends Assert {
 //		Object object = list.get(1);
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.lang.Object", context.getUpperBound(get.getReturnType(),resourceSet).getIdentifier());
-		assertEquals("? super java.util.Map<? super java.lang.String,? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
+		assertEquals("? super java.util.Map<? super java.lang.String, ? extends java.lang.Number>", context.resolve(get.getReturnType()).getIdentifier());
 	}
 	
 	@Test public void testIterableWildcard_01() throws Exception {
