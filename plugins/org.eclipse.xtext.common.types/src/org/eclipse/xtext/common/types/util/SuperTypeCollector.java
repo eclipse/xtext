@@ -55,9 +55,16 @@ public class SuperTypeCollector {
 	private TypeReferences typeReferences;
 	
 	protected JvmTypeReference newRef(JvmType type) {
-		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
-		reference.setType(type);
-		return reference;
+		if (type instanceof JvmArrayType) {
+			JvmTypeReference componentType = newRef(((JvmArrayType) type).getComponentType());
+			JvmGenericArrayTypeReference reference = factory.createJvmGenericArrayTypeReference();
+			reference.setComponentType(componentType);
+			return reference;
+		} else {
+			JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
+			reference.setType(type);
+			return reference;
+		}
 	}
 
 	public Set<JvmTypeReference> collectSuperTypes(JvmType type) {
@@ -164,29 +171,36 @@ public class SuperTypeCollector {
 						doSwitch(object.getType());
 				}
 			}
-			return null;
+			return Boolean.FALSE;
 		}
 		
 		@Override
 		public Boolean caseJvmGenericArrayTypeReference(JvmGenericArrayTypeReference object) {
 			if (!object.eIsProxy()) {
-				collecting = true;
 				level++;
 				final SuperTypeAcceptor original = acceptor;
 				try {
+					final boolean[] outerCollecting = { collecting };
 					acceptor = new SuperTypeAcceptor() {
 						public boolean accept(JvmTypeReference superType, int distance) {
 							JvmTypeReference arraySuperType = references.createArrayType(superType);
-							if (references.is(superType, Object.class)) {
-								original.accept(superType, distance + 1);
-								original.accept(references.getTypeForName(Serializable.class, superType.getType()), distance + 1);
-								original.accept(references.getTypeForName(Cloneable.class, superType.getType()), distance + 1);
+							boolean result = !outerCollecting[0];
+							if (!outerCollecting[0] || (result = original.accept(arraySuperType, distance))) {
+								outerCollecting[0] = true;
 							}
-							return original.accept(arraySuperType, distance);
+							if (references.is(superType, Object.class)) {
+								outerCollecting[0] = true;
+								result = original.accept(superType, distance + 1) || result;
+								result = original.accept(references.getTypeForName(Serializable.class, superType.getType()), distance + 1) || result;
+								result = original.accept(references.getTypeForName(Cloneable.class, superType.getType()), distance + 1) || result;
+							}
+							return result;
 						}
 					};
-					if (object.getComponentType() != null)
+					if (object.getComponentType() != null) {
+						collecting = true;
 						doSwitch(object.getComponentType());
+					}
 				} finally {
 					acceptor = original;
 				}
@@ -197,13 +211,14 @@ public class SuperTypeCollector {
 						rawType = ((JvmArrayType) rawType).getComponentType();
 					}
 					if (rawType instanceof JvmPrimitiveType) {
+						collecting = true;
 						doSwitch(references.getTypeForName(Serializable.class, rawType));
 						doSwitch(references.getTypeForName(Cloneable.class, rawType));
 					}
 				}
 				level--;
 			}
-			return null;
+			return Boolean.FALSE;
 		}
 		
 		@Override
@@ -255,14 +270,14 @@ public class SuperTypeCollector {
 				}
 				level--;
 			}
-			return null;
+			return Boolean.FALSE;
 		}
 		
 		@Override
 		public Boolean caseJvmTypeConstraint(JvmTypeConstraint object) {
 			if (object.getTypeReference() != null)
 				return doSwitch(object.getTypeReference());
-			return Boolean.TRUE;
+			return Boolean.FALSE;
 		}
 		
 		@Override
@@ -290,7 +305,7 @@ public class SuperTypeCollector {
 						doSwitch(references.createTypeRef(objectType));
 				}
 			}
-			return Boolean.TRUE;
+			return Boolean.FALSE;
 		}
 		
 	}
@@ -300,5 +315,5 @@ public class SuperTypeCollector {
 			return false;
 		return collectSuperTypesAsRawTypes(newRef(subType)).contains(superType);
 	}
-
+	
 }

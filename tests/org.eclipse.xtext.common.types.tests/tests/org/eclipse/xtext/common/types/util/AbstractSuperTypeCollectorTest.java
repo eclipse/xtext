@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.RandomAccess;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -40,9 +41,7 @@ public abstract class AbstractSuperTypeCollectorTest extends Assert {
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 	
-	protected SuperTypeCollector getCollector() {
-		return new SuperTypeCollector();
-	}
+	protected abstract SuperTypeCollector getCollector();
 	
 	@BeforeClass public static void createMockJavaProject() throws Exception {
 		MockJavaProjectProvider.setUp();
@@ -68,6 +67,43 @@ public abstract class AbstractSuperTypeCollectorTest extends Assert {
 				Comparable.class.getName(),
 				Serializable.class.getName(),
 				CharSequence.class.getName()), collected);
+	}
+	
+	@Test public void testStringArray() {
+		Collection<String> collected = getCollector().collectSuperTypeNames(getArrayType(String[].class));
+		assertNotNull(collected);
+		ImmutableSet<String> expectation = ImmutableSet.of(
+				"java.lang.Object[]",
+				"java.lang.Comparable<java.lang.String>[]",
+				"java.io.Serializable[]",
+				"java.lang.CharSequence[]",
+				Cloneable.class.getName(),
+				Object.class.getName(),
+				Serializable.class.getName());
+		assertEquals(collected.toString(), expectation.size(), collected.size());
+		assertEquals(collected.toString(), expectation, collected);
+	}
+	
+	@Test public void testObjectArray() {
+		Collection<String> collected = getCollector().collectSuperTypeNames(getArrayType(Object[].class));
+		assertNotNull(collected);
+		ImmutableSet<String> expectation = ImmutableSet.of(
+				Cloneable.class.getName(),
+				Object.class.getName(),
+				Serializable.class.getName());
+		assertEquals(collected.toString(), expectation.size(), collected.size());
+		assertEquals(collected.toString(), expectation, collected);
+	}
+	
+	@Test public void testPrimitiveArray() {
+		Collection<String> collected = getCollector().collectSuperTypeNames(getArrayType(int[].class));
+		assertNotNull(collected);
+		ImmutableSet<String> expectation = ImmutableSet.of(
+				Cloneable.class.getName(),
+				Object.class.getName(),
+				Serializable.class.getName());
+		assertEquals(collected.toString(), expectation.size(), collected.size());
+		assertEquals(collected.toString(), expectation, collected);
 	}
 	
 	@Test public void testCollections() {
@@ -150,5 +186,9 @@ public abstract class AbstractSuperTypeCollectorTest extends Assert {
 	
 	protected JvmDeclaredType getType(Class<?> clazz) {
 		return (JvmDeclaredType) getTypeProvider().findTypeByName(clazz.getCanonicalName());
+	}
+	
+	protected JvmArrayType getArrayType(Class<?> clazz) {
+		return (JvmArrayType) getTypeProvider().findTypeByName(clazz.getCanonicalName());
 	}
 }
