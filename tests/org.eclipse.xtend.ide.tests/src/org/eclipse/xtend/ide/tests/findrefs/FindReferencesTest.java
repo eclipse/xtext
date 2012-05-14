@@ -67,7 +67,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(classBar.getSuperTypes().get(0), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesThis() throws Exception {
@@ -79,7 +79,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(((XBlockExpression) functionFoo.getExpression()).getExpressions().get(0), inferredType,
 				XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(inferredType, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		checkFindReferences(inferredType, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesToConstructor() throws Exception {
@@ -92,7 +92,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(((XBlockExpression) functionBar.getExpression()).getExpressions().get(0),
 				inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
-		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesFromReturnType() throws Exception {
@@ -104,7 +104,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(functionBar.getReturnType(), inferredTypeFoo, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesFromParameter() throws Exception {
@@ -117,7 +117,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		final MockAcceptor mockAcceptor = new MockAcceptor();
 		mockAcceptor.expect(functionBar.getParameters().get(0).getParameterType(), inferredTypeFoo,
 				JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-		checkFindReferences(classFoo, "JVM References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		checkFindReferences(classFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	@Test public void testFindReferencesToFunction() throws Exception {
@@ -135,7 +135,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
 		mockAcceptor.expect(((XBlockExpression) functionBaz.getExpression()).getExpressions().get(0),
 				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
-		checkFindReferences(functionFoo, "JVM References to Foo.foo (/test.project/src/Foo.xtend)", mockAcceptor);
+		checkFindReferences(functionFoo, "Java References to Foo.foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 	protected void checkFindReferences(EObject target, String expectedLabel, final MockAcceptor mockAcceptor) {
