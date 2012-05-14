@@ -593,7 +593,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		JvmField cacheVar = (JvmField) jvmMembers.get(2);
 		assertEquals("_createCache_" + xtendFunction.getName(), cacheVar.getSimpleName());
 		assertEquals(JvmVisibility.PRIVATE, cacheVar.getVisibility());
-		assertEquals("java.util.HashMap<java.util.ArrayList<?>, java.util.ArrayList<java.lang.String>>", cacheVar.getType().getIdentifier());
+		assertEquals("java.util.HashMap<java.util.ArrayList<? extends java.lang.Object>, java.util.ArrayList<java.lang.String>>", cacheVar.getType().getIdentifier());
 		
 		JvmOperation privateInitializer = (JvmOperation) jvmMembers.get(3);
 		assertEquals("_init_"+xtendFunction.getName(), privateInitializer.getSimpleName());
