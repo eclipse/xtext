@@ -12,4 +12,6 @@ package org.eclipse.xtext.util.formallang;
  */
 public interface Traverser<G extends DirectedGraph<S>, S, R> {
 	public R enter(G graph, S state, R previous);
+
+	boolean isSolution(R result);
 }

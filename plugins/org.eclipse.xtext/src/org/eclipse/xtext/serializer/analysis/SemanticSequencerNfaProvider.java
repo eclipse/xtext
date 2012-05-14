@@ -194,7 +194,8 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		Map<ISynAbsorberState, Integer> distanceMap = util.distanceToFinalStateMap(synNfa);
 		nfa = util.create(util.sort(synNfa, distanceMap), new SemStateFactory());
 		//		util.sortInplace(nfa, distanceMap);
-		initContentValidationNeeded(type, nfa);
+		if (type != null)
+			initContentValidationNeeded(type, nfa);
 		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState> newHashSet());
 		initOrderIDs(nfa);
 		//		System.out.println(new NfaFormatter().format(nfa));

@@ -105,7 +105,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		//				drawGrammar("pdf/" + getName(), grammar);
+		//		StackTraceElement ele = Thread.currentThread().getStackTrace()[2];
+		//		drawGrammar("pdf/" + ele.getMethodName(), grammar);
 		List<String> result = Lists.newArrayList();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
@@ -137,7 +138,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup.class);
 	}
 
-	@Test public void testKeyword() throws Exception {
+	@Test
+	public void testKeyword() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' a2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -147,7 +149,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testKeywordOptional() throws Exception {
+	@Test
+	public void testKeywordOptional() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'? a2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -157,7 +160,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testKeywordMany() throws Exception {
+	@Test
+	public void testKeywordMany() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'+ a2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -167,7 +171,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testKeywordOptionalMany() throws Exception {
+	@Test
+	public void testKeywordOptionalMany() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'* a2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -177,7 +182,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testKeywordAlternative() throws Exception {
+	@Test
+	public void testKeywordAlternative() throws Exception {
 		String actual = getParserRule("Rule: a1=ID ('kw1' | 'kw2') a2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -187,7 +193,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testKeywordAllMandatory() throws Exception {
+	@Test
+	public void testKeywordAllMandatory() throws Exception {
 		String actual = getParserRule("Rule: a1=ID ('kw1' a2=ID | 'kw2' a3=ID 'kw3');");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule_Rule:\n");
@@ -199,7 +206,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testUnassignedRuleCall1() throws Exception {
+	@Test
+	public void testUnassignedRuleCall1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: Sub;\n");
 		grammar.append("Sub: val=ID;\n");
@@ -214,7 +222,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testUnassignedRuleCall2() throws Exception {
+	@Test
+	public void testUnassignedRuleCall2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: 'kw1' Sub 'kw4';\n");
 		grammar.append("Sub: 'kw2' val=ID 'kw3';\n");
@@ -229,7 +238,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testAssignedRuleCall2() throws Exception {
+	@Test
+	public void testAssignedRuleCall2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: 'kw1' sub=Sub 'kw4';\n");
 		grammar.append("Sub: 'kw2' val=ID 'kw3';\n");
@@ -244,7 +254,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testAssignedRuleCallNested1() throws Exception {
+	@Test
+	public void testAssignedRuleCallNested1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: start=ID sub1=Sub1 val1=ID;\n");
 		grammar.append("Sub1: 'sub1' sub2=Sub2 val2=ID;\n");
@@ -271,7 +282,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testAssignedElements() throws Exception {
+	@Test
+	public void testAssignedElements() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: t=MyTerminal 'kw1' d=MyDatatype 'kw2' e=MyEnum 'kw3' k='kw4' 'kw5' b='kw6'? \n");
 		grammar.append("       c1=[Model|MyTerminal] 'kw7' c2=[Model|MyDatatype] 'kw8' c3=[Model|'kw9'];\n");
@@ -294,7 +306,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testRecursion() throws Exception {
+	@Test
+	public void testRecursion() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Recursion: val=ID | '(' Recursion ')';");
 		String actual = getParserRule(grammar.toString());
@@ -305,7 +318,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testReturnChoices() throws Exception {
+	@Test
+	public void testReturnChoices() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: Sub1 | Sub2;\n");
 		grammar.append("Sub1: 'in1' Infix 'out1';\n");
@@ -332,7 +346,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testExpression0() throws Exception {
+	@Test
+	public void testExpression0() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*;\n");
 		grammar.append("Prim returns Expr: {Val} name=ID;\n");
@@ -358,7 +373,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testExpression1() throws Exception {
+	@Test
+	public void testExpression1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*;\n");
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
@@ -388,7 +404,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testOptionalEnd() throws Exception {
+	@Test
+	public void testOptionalEnd() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: 'model' foo=AbstractRule;\n");
 		grammar.append("AbstractRule: Rule1 | Rule2;\n");
@@ -470,7 +487,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testExpression5() throws Exception {
+	@Test
+	public void testExpression5() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Multiplication ({Add.left=current} '+' right=Multiplication)*;\n");
 		grammar.append("Multiplication returns Expr: Prim ({Mult.left=current} '*' right=Prim)*;\n");
@@ -535,7 +553,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testMultiOptional() throws Exception {
+	@Test
+	public void testMultiOptional() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Optional: val1=ID? val2=ID? val3=ID?;");
 		String actual = getParserRule(grammar.toString());
@@ -555,7 +574,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testActions1() throws Exception {
+	@Test
+	public void testActions1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: {Foo.left=current} (val=ID? | {Foo.left=current});");
 		String actual = getParserRule(grammar.toString());
@@ -575,7 +595,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testActions2() throws Exception {
+	@Test
+	public void testActions2() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: 'x' ('kw1' {Foo} | 'kw2' {Bar}) val1=ID;");
 		String actual = getParserRule(grammar.toString());
@@ -589,7 +610,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testActions3() throws Exception {
+	@Test
+	public void testActions3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: 'x' ('kw1' {Foo} | 'kw2' {Bar}) val1=ID;");
 		String actual = getParserRule(grammar.toString());
@@ -603,7 +625,8 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testAlternativeManyNested() throws Exception {
+	@Test
+	public void testAlternativeManyNested() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: (('x' x+=ID*) | ('y' y+=ID*))*;");
 		String actual = getParserRule(grammar.toString());
