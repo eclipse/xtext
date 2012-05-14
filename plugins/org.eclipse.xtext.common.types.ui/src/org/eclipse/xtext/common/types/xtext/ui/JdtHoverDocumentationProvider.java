@@ -33,7 +33,7 @@ public class JdtHoverDocumentationProvider implements IEObjectHoverDocumentation
 	public String getDocumentation(EObject object) {
 		if(object instanceof JvmIdentifiableElement){
 			IJavaElement element = javaElementFinder.findElementFor((JvmIdentifiableElement) object);
-			if(element instanceof IMember)
+			if(element instanceof IMember && element.exists())
 				try {
 					return JavadocContentAccess2.getHTMLContent((IMember) element, true);
 				} catch (JavaModelException e) {

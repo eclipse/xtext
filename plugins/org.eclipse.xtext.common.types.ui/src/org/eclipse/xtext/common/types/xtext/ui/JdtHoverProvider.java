@@ -37,7 +37,7 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 		if (eObject instanceof JvmIdentifiableElement) {
 			JvmIdentifiableElement jvmIdentifiableElement = (JvmIdentifiableElement) eObject;
 			IJavaElement javaElement = javaElementFinder.findElementFor(jvmIdentifiableElement);
-			if (javaElement!=null) {
+			if (javaElement!=null && javaElement.exists()) {
 				javadocHover.setJavaElement(javaElement);
 				final Object hoverInfo2 = javadocHover.getHoverInfo2(viewer, region);
 				return new IInformationControlCreatorProvider() {
