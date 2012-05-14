@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.findrefs;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IProject;
@@ -27,13 +28,10 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -119,8 +117,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IField) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "x");
-                    _and = BooleanExtensions.operator_and((it instanceof IField), _equals);
+                    boolean _equals = Objects.equal(_elementName, "x");
+                    _and = ((it instanceof IField) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -134,8 +132,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "foo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -149,8 +147,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "bar");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "bar");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -164,8 +162,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "baz");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "baz");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -228,8 +226,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IField) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "y");
-                    _and = BooleanExtensions.operator_and((it instanceof IField), _equals);
+                    boolean _equals = Objects.equal(_elementName, "y");
+                    _and = ((it instanceof IField) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -243,8 +241,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "bar");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "bar");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -325,8 +323,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IField) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "bar");
-                    _and = BooleanExtensions.operator_and((it instanceof IField), _equals);
+                    boolean _equals = Objects.equal(_elementName, "bar");
+                    _and = ((it instanceof IField) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -340,8 +338,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "baz");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "baz");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -355,8 +353,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "fooBar_0");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "fooBar_0");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -370,8 +368,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "fooBar_1");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "fooBar_1");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -450,8 +448,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IField) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "bar");
-                    _and = BooleanExtensions.operator_and((it instanceof IField), _equals);
+                    boolean _equals = Objects.equal(_elementName, "bar");
+                    _and = ((it instanceof IField) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -465,8 +463,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "baz");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "baz");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -480,8 +478,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "fooBar");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "fooBar");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -495,8 +493,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "getFoo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "getFoo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -510,8 +508,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "setFoo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "setFoo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -611,8 +609,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "foo_1");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "foo_1");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -626,8 +624,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "baz");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "baz");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -641,8 +639,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "foo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -682,8 +680,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IType) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "Xtend");
-                    _and = BooleanExtensions.operator_and((it instanceof IType), _equals);
+                    boolean _equals = Objects.equal(_elementName, "Xtend");
+                    _and = ((it instanceof IType) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -731,8 +729,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "foo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -777,8 +775,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IField) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IField), _equals);
+                    boolean _equals = Objects.equal(_elementName, "foo");
+                    _and = ((it instanceof IField) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -823,8 +821,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "getFoo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "getFoo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -838,8 +836,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "setFoo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "setFoo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -853,8 +851,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IField) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "_foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IField), _equals);
+                    boolean _equals = Objects.equal(_elementName, "_foo");
+                    _and = ((it instanceof IField) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -909,8 +907,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "_foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "_foo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -924,8 +922,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                     _and = false;
                   } else {
                     String _elementName = ((IMethod) it).getElementName();
-                    boolean _equals = ObjectExtensions.operator_equals(_elementName, "foo");
-                    _and = BooleanExtensions.operator_and((it instanceof IMethod), _equals);
+                    boolean _equals = Objects.equal(_elementName, "foo");
+                    _and = ((it instanceof IMethod) && _equals);
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -951,16 +949,16 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         ISearchResult _searchResult = query.getSearchResult();
         final Procedure1<SearchResultEvent> _function = new Procedure1<SearchResultEvent>() {
             public void apply(final SearchResultEvent it) {
-              CollectionExtensions.<SearchResultEvent>operator_add(events, it);
+              events.add(it);
               if ((it instanceof MatchEvent)) {
                 int _kind = ((MatchEvent) it).getKind();
-                boolean _equals = IntegerExtensions.operator_equals(_kind, MatchEvent.ADDED);
+                boolean _equals = (_kind == MatchEvent.ADDED);
                 if (_equals) {
                   Match[] _matches = ((MatchEvent) it).getMatches();
                   final Procedure1<Match> _function = new Procedure1<Match>() {
                       public void apply(final Match it) {
                         Object _element = it.getElement();
-                        CollectionExtensions.<Object>operator_add(elements, _element);
+                        elements.add(_element);
                       }
                     };
                   IterableExtensions.<Match>forEach(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function);
