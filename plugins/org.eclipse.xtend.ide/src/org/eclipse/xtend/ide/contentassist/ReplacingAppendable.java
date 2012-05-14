@@ -23,14 +23,12 @@ import org.eclipse.xtend.core.xtend.XtendImport;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -49,12 +47,6 @@ public class ReplacingAppendable extends StringBuilderBasedAppendable {
 
 		@Inject
 		private IIndentationInformation indentation;
-
-		@Inject
-		private XbaseScopeProvider scopeProvider;
-
-		@Inject
-		private IQualifiedNameConverter converter;
 
 		@Inject
 		private IXtendJvmAssociations associations;
