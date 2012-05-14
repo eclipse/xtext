@@ -9,6 +9,9 @@ package org.eclipse.xtend.ide.quickfix;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -57,9 +60,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
-import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -89,6 +92,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
@@ -189,7 +193,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 					if(eObject instanceof XAbstractFeatureCall){
 						XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
 						EList<XExpression> explicitArguments = call.getExplicitArguments();
-						StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
+						StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(new ImportManager(true));
 						getTypeArgumentString(call, appendable);
 						JvmTypeReference expectedType = typeProvider.getExpectedType(call);
 						if(expectedType != null && expectedType.getType() != null)
@@ -373,6 +377,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
+	@SuppressWarnings("null")
 	protected void computeArgumentString(XAbstractFeatureCall call, boolean paramNames, final IAppendable appendable) {
 		Iterator<XExpression> iterator = call.getExplicitArguments().iterator();
 		final Set<String> notallowed = Sets.newHashSet();
@@ -383,13 +388,9 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 			if(typeRef != null){
 				typeRefSerializer.serialize(typeRef, call, appendable);
 				appendable.append(" ");
-				jdtVariableCompletions.getVariableProposals(typeRef.getIdentifier(), call, JdtVariableCompletions.VariableType.PARAMETER, notallowed, new JdtVariableCompletions.CompletionDataAcceptor(){
-					@SuppressWarnings("null")
-					public void accept(String replaceText, StyledString label, Image img) {
-						appendable.append(replaceText);
-						notallowed.add(replaceText);
-					}
-				});
+				VariableNameAcceptor acceptor = new VariableNameAcceptor(notallowed);
+				jdtVariableCompletions.getVariableProposals(typeRef.getIdentifier(), call, JdtVariableCompletions.VariableType.PARAMETER, notallowed, acceptor);
+				appendable.append(acceptor.getVariableName());
 			}
 			if(iterator.hasNext())
 				appendable.append(", ");
@@ -397,6 +398,38 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		appendable.append(")");
 	}
 	
+	
+	private final class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAcceptor {
+		private final Set<String> notallowed;
+		Set<String> variableNames = Sets.newHashSet();
+
+		private VariableNameAcceptor(Set<String> notallowed) {
+			this.notallowed = notallowed;
+		}
+
+		public void accept(String replaceText, StyledString label, Image img) {
+			variableNames.add(replaceText);
+			notallowed.add(replaceText);
+		}
+
+		public String getVariableName(){
+			ArrayList<String> candidates = Lists.newArrayList(variableNames);
+			Collections.sort(candidates, new Comparator<String>(){
+				public int compare(String left, String right) {
+					if (left.length() < right.length()) {
+				        return -1;
+				      } else if (left.length() > right.length()) {
+				        return 1;
+				      } else {
+				        return 0;
+				      }
+				}
+			});
+			if(candidates.size() > 0)
+				return candidates.get(0);
+			return "";
+		}
+	}
 	/**
 	 * @since 2.3
 	 */
