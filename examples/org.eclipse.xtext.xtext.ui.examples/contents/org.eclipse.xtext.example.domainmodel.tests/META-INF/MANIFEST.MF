@@ -27,3 +27,4 @@ Import-Package: org.apache.commons.logging,
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator
+Export-Package: org.eclipse.xtext.example.domainmodel
