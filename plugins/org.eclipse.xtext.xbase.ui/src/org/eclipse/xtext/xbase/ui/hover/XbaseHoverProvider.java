@@ -94,7 +94,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
 			XtextBrowserInformationControlInput previous) {
 		EObject objectToView = getObjectToView(element);
-		if(objectToView.eIsProxy())
+		if(objectToView == null || objectToView.eIsProxy())
 			return null;
 		IJavaElement javaElement = null;
 		if (objectToView != element && objectToView instanceof JvmIdentifiableElement) {
