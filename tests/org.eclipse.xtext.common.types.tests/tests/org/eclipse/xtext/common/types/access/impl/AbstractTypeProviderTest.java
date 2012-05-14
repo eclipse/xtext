@@ -1045,7 +1045,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmType z = methodMap.getReturnType().getType();
 		assertSame(methodMap.getTypeParameters().get(0), z);
 		JvmTypeReference mapType = methodMap.getParameters().get(0).getParameterType();
-		assertEquals("java.util.Map<? extends java.lang.Object & super Z,? extends S>", mapType.getIdentifier());
+		assertEquals("java.util.Map<? extends java.lang.Object & super Z, ? extends S>", mapType.getIdentifier());
 		JvmParameterizedTypeReference parameterizedMapType = (JvmParameterizedTypeReference) mapType;
 		assertEquals(2, parameterizedMapType.getArguments().size());
 		JvmWildcardTypeReference extendsS = (JvmWildcardTypeReference) parameterizedMapType.getArguments().get(1);

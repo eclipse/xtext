@@ -54,7 +54,7 @@ public class JvmTypeReferencesTest extends Assert {
 	}
 	
 	@Test public void testReferenceConstruction_1() throws Exception {
-		assertEquals("java.util.Map<? super java.lang.String,? extends java.util.List<java.lang.Object>>",
+		assertEquals("java.util.Map<? super java.lang.String, ? extends java.util.List<java.lang.Object>>",
 				jvmTypes().typeReference("java.util.Map")
 						.wildCardSuper("java.lang.String").x()
 						.wildCardExtends("java.util.List").arg("java.lang.Object").create().getIdentifier());
