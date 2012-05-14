@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.lib.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,8 +31,6 @@ import com.google.common.base.Strings;
  */
 @Beta
 public class ToStringHelper {
-	
-
 	
 	private static class IndentationAwareStringBuilder {
 		private StringBuilder builder = new StringBuilder();
@@ -133,13 +132,15 @@ public class ToStringHelper {
 	 * @param sb the accumulating result.
 	 */
 	protected void addField(Field field, Object obj, IndentationAwareStringBuilder sb) {
-		try {
-			field.setAccessible(true);
-			Object value = field.get(obj);
-			sb.newLine().append(field.getName()).append(" = ");
-			internalToString(value, sb);
-		} catch (Exception e) {
-			sb.append(" // ERROR problems serializing field "+field.getName()+" : "+e.getClass().getSimpleName());
+		if (!Modifier.isStatic(field.getModifiers())) {
+			try {
+				field.setAccessible(true);
+				Object value = field.get(obj);
+				sb.newLine().append(field.getName()).append(" = ");
+				internalToString(value, sb);
+			} catch (Exception e) {
+				sb.append(" // ERROR problems serializing field "+field.getName()+" : "+e.getClass().getSimpleName());
+			}
 		}
 	}
 	
@@ -188,6 +189,8 @@ public class ToStringHelper {
 			sb.append(Arrays.toString((double[])object));
 		} else if (object instanceof CharSequence) {
 			sb.append("\"").append(object.toString().replace("\n", "\\n")).append("\"");
+		} else if (object instanceof Enum<?>) {
+			sb.append(((Enum<?>)object).name());
 		} else {
 			try {
 				object.getClass().getDeclaredMethod("toString");

@@ -4,6 +4,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
+import java.lang.annotation.RetentionPolicy
 
 class ToStringHelperTest {
 	
@@ -22,6 +23,8 @@ class ToStringHelperTest {
 		  42
 		  [foo, bar, baz]
 		  null
+		  CLASS
+		  policy = CLASS
 		]'''.toString,helper.toString(new MyEntity(new MyEntity)))
 	}
 	
@@ -49,6 +52,7 @@ class MyEntity {
 	val intProp = 42
 	val myList = newArrayList('foo','bar','baz')
 	val MyEntity friend
+	val RetentionPolicy policy = RetentionPolicy::CLASS
 	
 	new() {
 		this.friend = null
@@ -58,7 +62,7 @@ class MyEntity {
 	}
 	
 	override toString() {
-		return ''+boolProp+'\n'+intProp+'\n'+myList+'\n'+friend
+		return boolProp+'\n'+intProp+'\n'+myList+'\n'+friend+'\n'+policy
 	}
 }
 

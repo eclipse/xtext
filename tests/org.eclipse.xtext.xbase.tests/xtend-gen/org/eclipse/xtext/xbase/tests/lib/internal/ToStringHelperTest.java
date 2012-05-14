@@ -49,6 +49,12 @@ public class ToStringHelperTest {
     _builder.append("  ");
     _builder.append("null");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("CLASS");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("policy = CLASS");
+    _builder.newLine();
     _builder.append("]");
     String _string = _builder.toString();
     MyEntity _myEntity = new MyEntity();
