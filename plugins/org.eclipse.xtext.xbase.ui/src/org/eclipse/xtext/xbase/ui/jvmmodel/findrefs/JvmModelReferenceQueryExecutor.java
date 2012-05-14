@@ -31,7 +31,7 @@ public class JvmModelReferenceQueryExecutor extends ReferenceQueryExecutor {
 	
 	@Override
 	protected String getLabelPrefix() {
-		return "JVM References to ";
+		return "Java References to ";
 	}
 	
 	@Override
