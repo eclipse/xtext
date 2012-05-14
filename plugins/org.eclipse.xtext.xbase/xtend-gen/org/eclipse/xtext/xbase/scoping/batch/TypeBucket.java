@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.List;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.xbase.lib.internal.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
