@@ -38,8 +38,8 @@ public class ChangeCombiningRenameRefactoring extends ProcessorBasedRefactoring 
 	public void setProcessor(RefactoringProcessor processor) {
 		if(processor instanceof CombinedJvmJdtRenameProcessor) {
 			for(JavaRenameProcessor subProcessor: ((CombinedJvmJdtRenameProcessor) processor).getSubProcessors()) {
-				// JDT's nazi API made RefactoringProcessor.setRefactoring package private
-				// such that we cannot override it in CombinedJvmJdtRenameProcessor. So we have to set
+				// LTK's API made RefactoringProcessor.setRefactoring package private
+				// such that we cannot override it in CombinedJvmJdtRenameProcessor. We have to set
 				// the processors iteratively from the refactoring side !? 
 				super.setProcessor(subProcessor);
 			}
