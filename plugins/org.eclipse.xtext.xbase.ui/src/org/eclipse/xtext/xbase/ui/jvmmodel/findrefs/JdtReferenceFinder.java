@@ -27,6 +27,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Mostly copied and adapted from {@link FindReferencesAction}.
@@ -37,6 +38,9 @@ public class JdtReferenceFinder {
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
+	
+	@Inject
+	private Provider<CompositeSearchQuery> compositeSearchQueryProvider;
 
 	public void run(String label, Iterable<? extends IJavaElement> elements) {
 		for(IJavaElement element: elements)
@@ -80,7 +84,7 @@ public class JdtReferenceFinder {
 
 	public CompositeSearchQuery createCompositeQuery(String label, Iterable<? extends IJavaElement> elements)
 			throws JavaModelException, InterruptedException {
-		CompositeSearchQuery compositeSearchQuery = new CompositeSearchQuery();
+		CompositeSearchQuery compositeSearchQuery = compositeSearchQueryProvider.get();
 		compositeSearchQuery.setLabel(label);
 		for(IJavaElement element: elements) {
 			JavaSearchQuery query= new JavaSearchQuery(createQuery(element));

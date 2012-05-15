@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler;
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryExecutor;
@@ -52,7 +53,11 @@ public class JvmModelFindReferenceHandler extends FindReferencesHandler {
 	}
 
 	public Iterable<IJavaElement> getJavaElements(EObject target) {
-		Set<EObject> jvmElements = associations.getJvmElements(target);
+		Set<EObject> jvmElements;
+		if(isJvmElement(target))
+			jvmElements = singleton(target);
+		else 
+			jvmElements = associations.getJvmElements(target);
 		if (!jvmElements.isEmpty()) {
 			List<IJavaElement> javaElements = newArrayList();
 			for (EObject jvmElement : jvmElements) {
@@ -66,5 +71,9 @@ public class JvmModelFindReferenceHandler extends FindReferencesHandler {
 			return javaElements;
 		}
 		return emptyList();
+	}
+
+	protected boolean isJvmElement(EObject target) {
+		return target.eClass().getEPackage() == TypesPackage.eINSTANCE; 
 	}
 }
