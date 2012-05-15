@@ -484,6 +484,26 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			System.out.println(entry.getMessage());
 	}
 	
+	@Test
+	public void testRenameStaticImportStable() throws Exception {
+		String xtendModel = "import static java.util.Collections.* class XtendClass { def foo() { val bar = new Object() singleton(bar)}}";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
+		synchronize(editor);
+		assertTrue(equalsIgnoreWhitespace(xtendModel.replace("bar", "baz"), editor.getDocument().get()));
+	}
+
+	@Test
+	public void testRenameStaticExtensionImportStable() throws Exception {
+		String xtendModel = "import static extension java.util.Collections.* class XtendClass { def foo() { val bar = new Object() bar.singleton()}}";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = testHelper.openEditor(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
+		synchronize(editor);
+		assertTrue(equalsIgnoreWhitespace(xtendModel.replace("bar", "baz"), editor.getDocument().get()));
+	}
+
 	protected IFile assertFileExists(String fileName) throws Exception {
 		IResource file = testHelper.getProject().findMember(fileName);
 		assertTrue(file instanceof IFile);
