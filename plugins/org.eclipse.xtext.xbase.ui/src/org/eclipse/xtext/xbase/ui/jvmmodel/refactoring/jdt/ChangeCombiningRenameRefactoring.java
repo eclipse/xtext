@@ -15,15 +15,15 @@ import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.TextChangeCombiner;
 
 /**
- * A refactoring that combines its changes. 
+ * A refactoring that combines its changes.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ChangeCombiningRenameRefactoring extends ProcessorBasedRefactoring {
-	
+
 	private TextChangeCombiner textChangeCombiner;
 
-	public ChangeCombiningRenameRefactoring(RefactoringProcessor processor,TextChangeCombiner textChangeCombiner) {
+	public ChangeCombiningRenameRefactoring(RefactoringProcessor processor, TextChangeCombiner textChangeCombiner) {
 		super(processor);
 		this.textChangeCombiner = textChangeCombiner;
 	}
@@ -33,4 +33,11 @@ public class ChangeCombiningRenameRefactoring extends ProcessorBasedRefactoring 
 		return textChangeCombiner.combineChanges(super.createChange(pm));
 	}
 
+	@Override
+	public void setProcessor(RefactoringProcessor processor) {
+		if (processor instanceof CombinedJvmJdtRenameProcessor)
+			((CombinedJvmJdtRenameProcessor) processor).setRefactoring(this);
+		else
+			super.setProcessor(processor);
+	}
 }
