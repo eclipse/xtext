@@ -206,7 +206,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 							if (resolvedExpectedType != null && resolvedExpectedType.getType() != null && explicitArguments.size() == 0){
 								ICompositeNode callNode = NodeModelUtils.getNode(call);
 								if(callNode != null && !callNode.getText().endsWith(")")){
-									createNewXtendField(elementName, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
+									createNewXtendField(elementName, resolvedExpectedType, call, issue, issueResolutionAcceptor, modificationContext);
 									createNewLocalVariable(elementName, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
 								}
 							}
@@ -321,10 +321,11 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	 * @since 2.3
 	 */
 	@SuppressWarnings("null")
-	protected void createNewXtendField(@NonNull final String elementName,@NonNull final JvmTypeReference expectedType, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
-		StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable();
-		String expectedTypeName = expectedType.getSimpleName();
-		fieldDescriptionBuilder.append("...").newLine().append(expectedTypeName).append(" ").append(elementName).newLine().append("...");
+	protected void createNewXtendField(@NonNull final String elementName,@NonNull final JvmTypeReference expectedType, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
+		StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable(new ImportManager(true));
+		fieldDescriptionBuilder.append("...").newLine();
+		typeRefSerializer.serialize(expectedType, call, fieldDescriptionBuilder);
+		fieldDescriptionBuilder.append(" ").append(elementName).newLine().append("...");
 		IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_private_field.png", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
 
 			public void apply(EObject element, IModificationContext context) throws Exception {
