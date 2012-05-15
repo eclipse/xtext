@@ -105,10 +105,6 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		return "Rename element and inferred Java artifacts";
 	}
 
-	protected Iterable<JavaRenameProcessor> getSubProcessors() {
-		return jvmElements2jdtProcessors.values();
-	}
-	
 	@Override
 	public boolean isApplicable() throws CoreException {
 		if (!super.isApplicable())
