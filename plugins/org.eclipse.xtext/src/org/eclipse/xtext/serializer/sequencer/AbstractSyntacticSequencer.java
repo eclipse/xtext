@@ -398,10 +398,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 		contexts.pop();
+		delegate.leaveAssignedAction(action, semanticChild);
 	}
 
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 		contexts.pop();
+		delegate.leaveAssignedParserRuleCall(rc, semanticChild);
 	}
 
 	protected void navigateToAbsorber(AbstractElement ele, INode node) {
