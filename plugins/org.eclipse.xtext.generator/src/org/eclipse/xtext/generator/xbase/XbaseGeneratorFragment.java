@@ -186,6 +186,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory
+				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler", 
+							"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler")
 				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryExecutor", 
 						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
