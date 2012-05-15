@@ -71,7 +71,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 				thisIsTheOnlyOne = true;
 			}
 			if (thisIsTheOnlyOne) {
-				IEditorPart existingEditor = editorRef.getEditor(false);
+				IEditorPart existingEditor = editorRef.getEditor(true);
 				if (existingEditor instanceof XbaseEditor) {
 					((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newResource);
 					return true;
