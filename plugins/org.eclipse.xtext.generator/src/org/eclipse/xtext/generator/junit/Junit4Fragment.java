@@ -98,15 +98,11 @@ public class Junit4Fragment extends AbstractGeneratorFragment implements IGenera
 	 */
 	public String[] getImportedPackagesTests(Grammar grammar) {
 		return new String[] {
-				"org.apache.log4j",
-				"org.apache.commons.logging",
-				"org.junit;version=\"4.5.0\"",
 				"org.junit.runner;version=\"4.5.0\"",
 				"org.junit.runner.manipulation;version=\"4.5.0\"",
 				"org.junit.runner.notification;version=\"4.5.0\"",
 				"org.junit.runners;version=\"4.5.0\"",
 				"org.junit.runners.model;version=\"4.5.0\"",
-				"org.hamcrest",
 				"org.hamcrest.core"
 		};
 	}
