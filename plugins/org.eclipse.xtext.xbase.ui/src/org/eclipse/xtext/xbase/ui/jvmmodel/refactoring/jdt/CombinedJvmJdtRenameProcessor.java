@@ -28,7 +28,6 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -42,8 +41,10 @@ import com.google.inject.Inject;
 
 /**
  * Bundles multiple {@link JavaRenameProcessor}s and combines their results.
- * Due to API limitations of LTK you have to explicitly call {@link #setRefactoring(ProcessorBasedRefactoring)} 
- * (see JavaDoc there).
+ * Unfortunately {@link
+ * org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor.setRefactoring(ProcessorBasedRefactoring)} is
+ * package private. So we have to set the refactoring from the other side. Note that this requires a refactoring
+ * that is aware of that fact, e.g. {@link ChangeCombiningRenameRefactoring}.
  *  
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -75,21 +76,7 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		}
 		return true;
 	}
-	
-	/**
-	 * Unfortunately {@link
-	 * org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor.setRefactoring(ProcessorBasedRefactoring)} is
-	 * package private. So we have to set the refactoring from the other side. Note that this requires a refactoring
-	 * that is aware of that fact, e.g. {@link ChangeCombiningRenameRefactoring}.
-	 */
-	@SuppressWarnings("all")
-	public void setRefactoring(ProcessorBasedRefactoring refactoring) {
-		for(JavaRenameProcessor jdtProcessor: jvmElements2jdtProcessors.values()) {
-			refactoring.setProcessor(jdtProcessor);
-		}
-		refactoring.setProcessor(this);
-	}
-	
+		
 	@Override
 	public Object[] getElements() {
 		List<Object> elements = newArrayList(super.getElements());
@@ -105,6 +92,10 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		return "Rename element and inferred Java artifacts";
 	}
 
+	protected Iterable<JavaRenameProcessor> getSubProcessors() {
+		return jvmElements2jdtProcessors.values();
+	}
+	
 	@Override
 	public boolean isApplicable() throws CoreException {
 		if (!super.isApplicable())

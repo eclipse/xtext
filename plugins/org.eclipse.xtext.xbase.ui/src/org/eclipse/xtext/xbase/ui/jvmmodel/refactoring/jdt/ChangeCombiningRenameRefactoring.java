@@ -9,18 +9,19 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.TextChangeCombiner;
 
 /**
- * A refactoring that combines its changes.
+ * A refactoring that combines its changes. 
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ChangeCombiningRenameRefactoring extends ProcessorBasedRefactoring {
-
+	
 	private TextChangeCombiner textChangeCombiner;
 
 	public ChangeCombiningRenameRefactoring(RefactoringProcessor processor, TextChangeCombiner textChangeCombiner) {
@@ -35,9 +36,14 @@ public class ChangeCombiningRenameRefactoring extends ProcessorBasedRefactoring 
 
 	@Override
 	public void setProcessor(RefactoringProcessor processor) {
-		if (processor instanceof CombinedJvmJdtRenameProcessor)
-			((CombinedJvmJdtRenameProcessor) processor).setRefactoring(this);
-		else
-			super.setProcessor(processor);
+		if(processor instanceof CombinedJvmJdtRenameProcessor) {
+			for(JavaRenameProcessor subProcessor: ((CombinedJvmJdtRenameProcessor) processor).getSubProcessors()) {
+				// JDT's nazi API made RefactoringProcessor.setRefactoring package private
+				// such that we cannot override it in CombinedJvmJdtRenameProcessor. So we have to set
+				// the processors iteratively from the refactoring side !? 
+				super.setProcessor(subProcessor);
+			}
+		}
+		super.setProcessor(processor);
 	}
 }
