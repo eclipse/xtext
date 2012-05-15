@@ -27,6 +27,8 @@ import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
+import org.junit.AfterClass
+import org.eclipse.search.ui.text.AbstractTextSearchResult
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
@@ -37,6 +39,10 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	@Inject IWorkbench workbench 
 	
 	@Inject extension JvmModelFindReferenceHandler 
+	
+	@AfterClass def static cleanup() {
+		cleanWorkspace
+	}
 	
 	@Test def void testFindClassRef() {
 		createFile("Xtend.xtend", "class Xtend {}")
@@ -195,6 +201,35 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'foo'])
 		]
 	}
+	
+	@Test def void testJavaClassRef() {
+		createFile("Xtend.xtend", '''
+			class Xtend { 
+				Java foo
+				
+				def Java bar() { 
+					null
+				}
+
+				def void baz() { 
+					new Java()
+					null
+				}
+			}
+		'''.toString)
+		createFile("Java.java", '''
+			public class Java {
+			}
+		'''.toString)
+		waitForAutoBuild
+		val IType javaType = JavaCore::create(project).findType("Java")
+				findReferences(javaType) => [
+			assertEquals(3, size)
+			assertTrue(exists[it instanceof IField && (it as IField).elementName == 'foo'])
+			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'bar'])
+			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'baz'])
+		]
+	}
 
 	@Test def void testClassJavaElements() {
 		val clazz= xtendFile("Xtend.xtend", '''
@@ -273,13 +308,17 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 		val ISearchQuery query = createCompositeQuery("test", newArrayList(targets))
 		val events = <SearchResultEvent>newArrayList()
 		val elements = newArrayList()
-		query.searchResult.addListener[
+		val searchResult = query.searchResult
+		val filters = (searchResult as AbstractTextSearchResult).activeMatchFilters
+		searchResult.addListener[
 			events += it 
-			if(it instanceof MatchEvent)
+			if(it instanceof MatchEvent) {
+				val matches = (it as MatchEvent).matches.filter[m|filters.forall[!filters(m)]]
 				if((it as MatchEvent).kind == MatchEvent::ADDED)
-					(it as MatchEvent).matches.forEach[elements += element]
+					matches.forEach[elements += element]
 				else 
-				 	(it as MatchEvent).matches.forEach[elements.remove(element)]
+				 	matches.forEach[elements.remove(element)]
+			}
 		]
 		SearchUtil::runQueryInForeground(workbench.activeWorkbenchWindow, query)
 		assertTrue(events.head instanceof RemoveAllEvent)
