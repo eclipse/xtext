@@ -20,8 +20,8 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
@@ -35,6 +35,11 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 	protected final static int COLS = 5;
 
 	protected static final ICompositeNode NO_NODE = new CompositeNode();
+
+	/**
+	 * @since 2.3
+	 */
+	protected boolean hideHidden = false;
 
 	protected int indentation = 0;
 
@@ -110,7 +115,7 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		add(titles.doSwitch(keyword), token, String.valueOf(value), index, node);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
-	
+
 	/**
 	 * @since 2.3
 	 */
@@ -133,7 +138,8 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	@Override
 	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
-		add(titles.doSwitch(rule), token, "", -1, node);
+		if (!hideHidden)
+			add(titles.doSwitch(rule), token, "", -1, node);
 		super.acceptComment(rule, token, node);
 	}
 
@@ -169,7 +175,8 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	@Override
 	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
-		add(titles.doSwitch(rule), token, "", -1, node);
+		if (!hideHidden)
+			add(titles.doSwitch(rule), token, "", -1, node);
 		super.acceptWhitespace(rule, token, node);
 	}
 
@@ -241,6 +248,14 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	public List<List<String>> getTable() {
 		return table;
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public DebugSequenceAcceptor hideHiddenTokens() {
+		this.hideHidden = true;
+		return this;
 	}
 
 	@Override
