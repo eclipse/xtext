@@ -17,31 +17,33 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.jdt.internal.ui.search.JavaSearchQuery;
+import org.eclipse.jdt.internal.ui.search.SearchResultUpdater;
+import org.eclipse.jdt.ui.search.QuerySpecification;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
-import org.eclipse.search.ui.text.MatchFilter;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
-
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class CompositeSearchQuery implements ISearchQuery {
-
-	@Inject 
-	private DerivedJavaMatchFilter derivedJavaMatchFilter;
+public class CompositeSearchQuery extends JavaSearchQuery {
 
 	private List<ISearchQuery> children = newArrayList();
 	
 	private CompositeSearchResult searchResult;
 	
 	private String label;
+
+	public CompositeSearchQuery(QuerySpecification data) {
+		super(data);
+	}
 	
 	public void addChild(ISearchQuery child) {
 		children.add(child);
 	}
 	
+	@Override
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		SubMonitor progress = SubMonitor.convert(monitor, children.size());
 		MultiStatus multiStatus = new MultiStatus(getPluginId(), 
@@ -63,10 +65,12 @@ public class CompositeSearchQuery implements ISearchQuery {
 		this.label = label;
 	}
 	
+	@Override
 	public String getLabel() {
 		return label;
 	}
 
+	@Override
 	public boolean canRerun() {
 		for(ISearchQuery child: children) 
 			if(!child.canRerun())
@@ -74,6 +78,7 @@ public class CompositeSearchQuery implements ISearchQuery {
 		return true;
 	}
 
+	@Override
 	public boolean canRunInBackground() {
 		for(ISearchQuery child: children) 
 			if(!child.canRunInBackground())
@@ -81,10 +86,11 @@ public class CompositeSearchQuery implements ISearchQuery {
 		return true;
 	}
 
+	@Override
 	public ISearchResult getSearchResult() {
 		if(searchResult == null) {
 			searchResult = new CompositeSearchResult(this);
-			searchResult.setActiveMatchFilters(new MatchFilter[]{ derivedJavaMatchFilter });
+			new SearchResultUpdater(searchResult);
 		}
 		return searchResult;
 	}

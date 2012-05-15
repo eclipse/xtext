@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.jvmmodel.findrefs;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
@@ -27,7 +29,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * Mostly copied and adapted from {@link FindReferencesAction}.
@@ -39,9 +40,6 @@ public class JdtReferenceFinder {
 	@Inject(optional = true)
 	private IWorkbench workbench;
 	
-	@Inject
-	private Provider<CompositeSearchQuery> compositeSearchQueryProvider;
-
 	public void run(String label, Iterable<? extends IJavaElement> elements) {
 		for(IJavaElement element: elements)
 			if (!ActionUtil.isProcessable(getShell(), element))
@@ -84,7 +82,7 @@ public class JdtReferenceFinder {
 
 	public CompositeSearchQuery createCompositeQuery(String label, Iterable<? extends IJavaElement> elements)
 			throws JavaModelException, InterruptedException {
-		CompositeSearchQuery compositeSearchQuery = compositeSearchQueryProvider.get();
+		CompositeSearchQuery compositeSearchQuery = new CompositeSearchQuery(createQuery(getFirst(elements, null)));
 		compositeSearchQuery.setLabel(label);
 		for(IJavaElement element: elements) {
 			JavaSearchQuery query= new JavaSearchQuery(createQuery(element));
