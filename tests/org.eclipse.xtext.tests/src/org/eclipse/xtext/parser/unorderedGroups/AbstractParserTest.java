@@ -98,12 +98,14 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testParse_3_A() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("3 a");
 		assertTrue(model.isFirst());
 		assertFalse(model.isSecond());
 	}
 	
 	@Test public void testParse_3_B() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("3 b");
 		assertFalse(model.isFirst());
 		assertTrue(model.isSecond());
@@ -129,6 +131,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testParse_4_A() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("4 a");
 		assertTrue(model.isFirst());
 		assertFalse(model.isSecond());
@@ -159,6 +162,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testParse_5_B() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("5 b");
 		assertFalse(model.isFirst());
 		assertTrue(model.isSecond());
@@ -249,12 +253,14 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testParse_7_B() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("7 b");
 		assertEquals(0, model.getFirstAsList().size());
 		assertEquals(1, model.getSecondAsList().size());
 	}
 	
 	@Test public void testParse_7_B_B() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("7 b b");
 		assertEquals(0, model.getFirstAsList().size());
 		assertEquals(2, model.getSecondAsList().size());
@@ -649,6 +655,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testParse_14_A_B_C_D_D_C_B_A() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("14 a b c d d c b a");
 		assertEquals(2, model.getFirstAsList().size());
 		assertEquals(2, model.getSecondAsList().size());
@@ -657,6 +664,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testParse_14_A_B_C_D_D_C_B_A_B_A_C_D() throws Exception {
+		disableSerializerTest();
 		Model model = (Model) getModel("14 a b c d d c b a b a c d");
 		assertEquals(3, model.getFirstAsList().size());
 		assertEquals(3, model.getSecondAsList().size());
