@@ -162,11 +162,16 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addContributor(createDslProjectContributor());
 	}
 
+	/*
+	 * WARNING!!! Before changing here something, look at the commit history and read following bug reports.
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=339004
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=370411
+	 */
 	protected List<String> getDslProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList(
-				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
+		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
+				"org.apache.commons.logging;bundle-version=\"1.0.4\";resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe2.launch;resolution:=optional"); //$NON-NLS-1$
@@ -258,7 +263,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected List<String> getImportedPackages() {
-		return Lists.newArrayList("org.apache.log4j", "org.apache.commons.logging");
+		return Lists.newArrayList("org.apache.log4j");
 	}
 
 	protected Collection<String> getAdditionalRequiredBundles() {
