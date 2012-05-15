@@ -19,6 +19,7 @@ import org.junit.After
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -47,8 +48,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFile = parseHelper.parse('''
 		package testPackage
 		class Foo {
-			def bar(String a) throws NullPointerException
-			def void bar(String a, int b) throws NullPointerException, RuntimeException
+			def bar(String a) throws NullPointerException { }
+			def void bar(String a, int b) throws NullPointerException, RuntimeException {}
 		}
 		''', resourceSet)
 		val clazz = xtendFile.getXtendClasses.head
@@ -56,7 +57,7 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction2 = clazz.members.get(1)
 		val signature1 = signatureProvider.getSignature(xtendFunction1)
 		val signature2 = signatureProvider.getSignature(xtendFunction2)
-		assertEquals("void bar(String a) throws NullPointerException",signature1)
+		assertEquals("Object bar(String a) throws NullPointerException",signature1)
 		assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException",signature2)
 	}
 	
@@ -81,7 +82,6 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		package testPackage
 		import java.util.Collections
 		import com.google.inject.Inject
-		
 
 		class Foo {
 			@Inject
@@ -232,6 +232,25 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		assertEquals("int id", fieldSignature)
 		val  functionSignature = signatureProvider.getSignature(function);
 		assertEquals("void a(int i)", functionSignature)
+	}
+
+	@Test
+	def testBug379019(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo {
+			def error() {
+				val start = System::currentTimeMillis()
+				var time = System::currentTimeMillis() - start
+				time
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendClasses.head
+		val function = clazz.members.head
+		val signature = signatureProvider.getSignature(function)
+		EcoreUtil::resolveAll(xtendFile)
+		assertEquals("long error()", signature)
 	}
 
 	def getResourceSet(){

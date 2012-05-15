@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -73,10 +74,10 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def bar(String a) throws NullPointerException");
+      _builder.append("def bar(String a) throws NullPointerException { }");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def void bar(String a, int b) throws NullPointerException, RuntimeException");
+      _builder.append("def void bar(String a, int b) throws NullPointerException, RuntimeException {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -90,7 +91,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendMember xtendFunction2 = _members_1.get(1);
       final String signature1 = this.signatureProvider.getSignature(xtendFunction1);
       final String signature2 = this.signatureProvider.getSignature(xtendFunction2);
-      Assert.assertEquals("void bar(String a) throws NullPointerException", signature1);
+      Assert.assertEquals("Object bar(String a) throws NullPointerException", signature1);
       Assert.assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException", signature2);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -136,7 +137,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("import com.google.inject.Inject");
       _builder.newLine();
-      _builder.newLine();
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -459,6 +460,45 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testBug379019() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def error() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val start = System::currentTimeMillis()");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var time = System::currentTimeMillis() - start");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("time");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendMember> _members = clazz.getMembers();
+      final XtendMember function = IterableExtensions.<XtendMember>head(_members);
+      final String signature = this.signatureProvider.getSignature(function);
+      EcoreUtil.resolveAll(xtendFile);
+      Assert.assertEquals("long error()", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   public ResourceSet getResourceSet() {
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
