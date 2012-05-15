@@ -19,12 +19,18 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
+import org.eclipse.search.ui.text.MatchFilter;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class CompositeSearchQuery implements ISearchQuery {
+
+	@Inject 
+	private DerivedJavaMatchFilter derivedJavaMatchFilter;
 
 	private List<ISearchQuery> children = newArrayList();
 	
@@ -76,8 +82,10 @@ public class CompositeSearchQuery implements ISearchQuery {
 	}
 
 	public ISearchResult getSearchResult() {
-		if(searchResult == null)
+		if(searchResult == null) {
 			searchResult = new CompositeSearchResult(this);
+			searchResult.setActiveMatchFilters(new MatchFilter[]{ derivedJavaMatchFilter });
+		}
 		return searchResult;
 	}
 
