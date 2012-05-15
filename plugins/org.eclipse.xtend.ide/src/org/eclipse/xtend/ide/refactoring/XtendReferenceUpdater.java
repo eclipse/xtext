@@ -74,10 +74,10 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 						return !isImportTypeReference(input);
 					}
 				});
-		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = new ImportAwareUpdateAcceptor(updateAcceptor);
+		ImportAwareUpdateAcceptor importAwareUpdateAcceptor = createUpdateAcceptor(updateAcceptor);
 		super.processReferringResource(referringResource, nonImportReferences, elementRenameArguments,
 				importAwareUpdateAcceptor);
-		RefactoringImports importCollection = new RefactoringImports(referringResource);
+		RefactoringImports importCollection = createRefactoringImports(referringResource);
 		importCollection.addImportedNames(importAwareUpdateAcceptor.getAdditionalImportedNames());
 		TextRegion importRegion = organizeImports.computeRegion((XtextResource) referringResource);
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(referringResource.getURI())
@@ -87,13 +87,21 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		updateAcceptor.accept(referringResource.getURI(), importChange);
 	}
 
+	protected RefactoringImports createRefactoringImports(Resource referringResource) {
+		return new RefactoringImports(referringResource);
+	}
+
+	protected ImportAwareUpdateAcceptor createUpdateAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
+		return new ImportAwareUpdateAcceptor(updateAcceptor);
+	}
+
 	protected boolean isImportTypeReference(IReferenceDescription input) {
 		return input.getEReference() == XtendPackage.Literals.XTEND_IMPORT__IMPORTED_TYPE;
 	}
 
 	@Override
-	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText,
-			EObject referringElement, EObject newTargetElement, EReference reference, URI referringResourceURI,
+	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText, EObject referringElement,
+			EObject newTargetElement, EReference reference, URI referringResourceURI,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		if (newTargetElement instanceof JvmType && updateAcceptor instanceof ImportAwareUpdateAcceptor) {
 			if (newReferenceText.contains(".")) {
@@ -109,8 +117,8 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 				}
 			}
 		}
-		super.createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement,
-				reference, referringResourceURI, updateAcceptor);
+		super.createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference,
+				referringResourceURI, updateAcceptor);
 	}
 
 	public static class ImportAwareUpdateAcceptor implements IRefactoringUpdateAcceptor {
@@ -165,22 +173,15 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		public RefactoringImports(Resource xtendResource) {
 			XtendFile xtendFile = (XtendFile) xtendResource.getContents().get(0);
 			for (XtendImport xtendImport : xtendFile.getImports()) {
-				if (xtendImport.isStatic()) {
-					if (xtendImport.isExtension())
-						staticExtensionImports.add(xtendImport.getImportedNamespace());
-					else
-						staticImports.add(xtendImport.getImportedNamespace());
-				} else {
-					if (xtendImport.getImportedNamespace() == null) {
-						JvmType importedType = xtendImport.getImportedType();
-						if (importedType != null && !importedType.eIsProxy()) {
-							String importedTypeName = xtendImport.getImportedTypeName();
-							if (importedType.getIdentifier().equals(importedTypeName))
-								plainImports.add(importedTypeName);
-						}
-					} else {
-						plainImports.add(xtendImport.getImportedNamespace());
+				if (xtendImport.getImportedNamespace() == null) {
+					JvmType importedType = xtendImport.getImportedType();
+					if (importedType != null && !importedType.eIsProxy()) {
+						String importedTypeName = xtendImport.getImportedTypeName();
+						if (importedType.getIdentifier().equals(importedTypeName))
+							getSet(xtendImport).add(importedTypeName);
 					}
+				} else {
+					getSet(xtendImport).add(xtendImport.getImportedNamespace());
 				}
 			}
 		}
@@ -198,7 +199,7 @@ public class XtendReferenceUpdater extends JvmModelReferenceUpdater {
 		}
 
 		public void addImportedNames(List<String> importedNames) {
-			if(importedNames != null)
+			if (importedNames != null)
 				plainImports.addAll(importedNames);
 		}
 
