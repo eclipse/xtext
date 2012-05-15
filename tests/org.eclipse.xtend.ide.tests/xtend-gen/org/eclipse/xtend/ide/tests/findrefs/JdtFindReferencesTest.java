@@ -16,8 +16,10 @@ import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.ISearchResultListener;
 import org.eclipse.search.ui.SearchResultEvent;
+import org.eclipse.search.ui.text.AbstractTextSearchResult;
 import org.eclipse.search.ui.text.Match;
 import org.eclipse.search.ui.text.MatchEvent;
+import org.eclipse.search.ui.text.MatchFilter;
 import org.eclipse.search.ui.text.RemoveAllEvent;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -37,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JdtReferenceFinder;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -53,6 +56,15 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   
   @Inject
   private JvmModelFindReferenceHandler _jvmModelFindReferenceHandler;
+  
+  @AfterClass
+  public static void cleanup() {
+    try {
+      IResourcesSetupUtil.cleanWorkspace();
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   @Test
   public void testFindClassRef() {
@@ -656,6 +668,112 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testJavaClassRef() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Xtend { ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Java foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def Java bar() { ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void baz() { ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Java()");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      this._workbenchTestHelper.createFile("Xtend.xtend", _string);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("public class Java {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      String _string_1 = _builder_1.toString();
+      this._workbenchTestHelper.createFile("Java.java", _string_1);
+      IResourcesSetupUtil.waitForAutoBuild();
+      IProject _project = this._workbenchTestHelper.getProject();
+      IJavaProject _create = JavaCore.create(_project);
+      final IType javaType = _create.findType("Java");
+      ArrayList<Object> _findReferences = this.findReferences(javaType);
+      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
+          public void apply(final ArrayList<Object> it) {
+            int _size = it.size();
+            Assert.assertEquals(3, _size);
+            final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
+                public Boolean apply(final Object it) {
+                  boolean _and = false;
+                  if (!(it instanceof IField)) {
+                    _and = false;
+                  } else {
+                    String _elementName = ((IField) it).getElementName();
+                    boolean _equals = Objects.equal(_elementName, "foo");
+                    _and = ((it instanceof IField) && _equals);
+                  }
+                  return Boolean.valueOf(_and);
+                }
+              };
+            boolean _exists = IterableExtensions.<Object>exists(it, _function);
+            Assert.assertTrue(_exists);
+            final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
+                public Boolean apply(final Object it) {
+                  boolean _and = false;
+                  if (!(it instanceof IMethod)) {
+                    _and = false;
+                  } else {
+                    String _elementName = ((IMethod) it).getElementName();
+                    boolean _equals = Objects.equal(_elementName, "bar");
+                    _and = ((it instanceof IMethod) && _equals);
+                  }
+                  return Boolean.valueOf(_and);
+                }
+              };
+            boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
+            Assert.assertTrue(_exists_1);
+            final Function1<Object,Boolean> _function_2 = new Function1<Object,Boolean>() {
+                public Boolean apply(final Object it) {
+                  boolean _and = false;
+                  if (!(it instanceof IMethod)) {
+                    _and = false;
+                  } else {
+                    String _elementName = ((IMethod) it).getElementName();
+                    boolean _equals = Objects.equal(_elementName, "baz");
+                    _and = ((it instanceof IMethod) && _equals);
+                  }
+                  return Boolean.valueOf(_and);
+                }
+              };
+            boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
+            Assert.assertTrue(_exists_2);
+          }
+        };
+      ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testClassJavaElements() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -946,36 +1064,50 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         final ISearchQuery query = this._jdtReferenceFinder.createCompositeQuery("test", _newArrayList);
         final ArrayList<SearchResultEvent> events = CollectionLiterals.<SearchResultEvent>newArrayList();
         final ArrayList<Object> elements = CollectionLiterals.<Object>newArrayList();
-        ISearchResult _searchResult = query.getSearchResult();
+        final ISearchResult searchResult = query.getSearchResult();
+        final MatchFilter[] filters = ((AbstractTextSearchResult) searchResult).getActiveMatchFilters();
         final Procedure1<SearchResultEvent> _function = new Procedure1<SearchResultEvent>() {
             public void apply(final SearchResultEvent it) {
               events.add(it);
               if ((it instanceof MatchEvent)) {
+                Match[] _matches = ((MatchEvent) it).getMatches();
+                final Function1<Match,Boolean> _function = new Function1<Match,Boolean>() {
+                    public Boolean apply(final Match m) {
+                      final Function1<MatchFilter,Boolean> _function = new Function1<MatchFilter,Boolean>() {
+                          public Boolean apply(final MatchFilter it) {
+                            boolean _filters = it.filters(m);
+                            boolean _not = (!_filters);
+                            return Boolean.valueOf(_not);
+                          }
+                        };
+                      boolean _forall = IterableExtensions.<MatchFilter>forall(((Iterable<MatchFilter>)Conversions.doWrapArray(filters)), _function);
+                      return Boolean.valueOf(_forall);
+                    }
+                  };
+                final Iterable<Match> matches = IterableExtensions.<Match>filter(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function);
                 int _kind = ((MatchEvent) it).getKind();
                 boolean _equals = (_kind == MatchEvent.ADDED);
                 if (_equals) {
-                  Match[] _matches = ((MatchEvent) it).getMatches();
-                  final Procedure1<Match> _function = new Procedure1<Match>() {
+                  final Procedure1<Match> _function_1 = new Procedure1<Match>() {
                       public void apply(final Match it) {
                         Object _element = it.getElement();
                         elements.add(_element);
                       }
                     };
-                  IterableExtensions.<Match>forEach(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function);
+                  IterableExtensions.<Match>forEach(matches, _function_1);
                 } else {
-                  Match[] _matches_1 = ((MatchEvent) it).getMatches();
-                  final Procedure1<Match> _function_1 = new Procedure1<Match>() {
+                  final Procedure1<Match> _function_2 = new Procedure1<Match>() {
                       public void apply(final Match it) {
                         Object _element = it.getElement();
                         elements.remove(_element);
                       }
                     };
-                  IterableExtensions.<Match>forEach(((Iterable<Match>)Conversions.doWrapArray(_matches_1)), _function_1);
+                  IterableExtensions.<Match>forEach(matches, _function_2);
                 }
               }
             }
           };
-        _searchResult.addListener(new ISearchResultListener() {
+        searchResult.addListener(new ISearchResultListener() {
             public void searchResultChanged(SearchResultEvent e) {
               _function.apply(e);
             }
