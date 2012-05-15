@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 
 import com.google.common.collect.Lists;
@@ -37,6 +38,9 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	@Inject
 	protected IXtendJvmAssociations associations;
 
+	@Inject
+	protected ITypeProvider typeProvider;
+
 	protected String _signature(XtendClass clazz, boolean typeAtEnd) {
 		return clazz.getSimpleName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
 	}
@@ -44,7 +48,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	protected String _signature(XtendFunction function, boolean typeAtEnd) {
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
 		String returnTypeString = "void";
-		JvmTypeReference returnType = function.getReturnType();
+		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredOperation);
 		if (returnType != null) {
 			if (returnType instanceof JvmAnyTypeReference) {
 				returnTypeString = "Object";
