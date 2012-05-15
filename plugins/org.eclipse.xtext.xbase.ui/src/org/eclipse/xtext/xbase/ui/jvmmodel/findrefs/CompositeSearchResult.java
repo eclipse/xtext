@@ -13,8 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jdt.internal.ui.search.AbstractJavaSearchResult;
-import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jdt.internal.ui.search.JavaSearchResult;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.ISearchResultListener;
@@ -26,12 +25,13 @@ import org.eclipse.search.ui.text.RemoveAllEvent;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class CompositeSearchResult extends AbstractJavaSearchResult {
+public class CompositeSearchResult extends JavaSearchResult {
 	
 	private CompositeSearchQuery query;
 	private ISearchResultListener childListener;
 
 	public CompositeSearchResult(CompositeSearchQuery compositeSearchQuery) {
+		super(compositeSearchQuery);
 		this.query = compositeSearchQuery;
 		Assert.isLegal(!query.getChildren().isEmpty());
 		childListener = new ISearchResultListener() {
@@ -43,24 +43,6 @@ public class CompositeSearchResult extends AbstractJavaSearchResult {
 		};
 		for(ISearchQuery child: query.getChildren()) 
 			child.getSearchResult().addListener(childListener);
-	}
-
-	public String getLabel() {
-		return query.getLabel();
-	}
-
-	public String getTooltip() {
-		return query.getLabel();
-	}
-
-	public ImageDescriptor getImageDescriptor() {
-		if(!query.getChildren().isEmpty())
-			return query.getChildren().get(0).getSearchResult().getImageDescriptor();
-		return null;
-	}
-
-	public ISearchQuery getQuery() {
-		return query;
 	}
 
 	@Override

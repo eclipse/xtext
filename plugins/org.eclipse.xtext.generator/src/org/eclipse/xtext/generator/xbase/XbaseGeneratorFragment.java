@@ -207,7 +207,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 			    .addTypeToType("org.eclipse.xtext.ui.editor.GlobalURIEditorOpener", 
 						"org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener")
 			    .addTypeToType("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer", 
-						"org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer");
+						"org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer")
+				.addTypeToType("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation", 
+						"org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No");
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
