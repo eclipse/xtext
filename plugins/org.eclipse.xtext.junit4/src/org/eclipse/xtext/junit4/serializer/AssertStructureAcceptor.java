@@ -20,11 +20,12 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.3
  */
 public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 
@@ -76,8 +77,18 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
+	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
+		assertElement(keyword);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+	
 	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
+		assertElement(keyword);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
+	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
 		assertElement(keyword);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
@@ -138,8 +149,10 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 		if (expectedRule != actualRule) {
 			GrammarElementTitleSwitch formatter = new GrammarElementTitleSwitch().showQualified().showRule();
 			String elementName = formatter.apply(element);
-			String ruleName = expectedRule.getName();
-			throw new IllegalStateException("Element " + elementName + " is expected to be from rule " + ruleName);
+			String expName = expectedRule.getName();
+			String actualName = actualRule.getName();
+			String msg = "Element " + elementName + " should be in rule " + expName + " but it is in " + actualName;
+			throw new IllegalStateException(msg);
 		}
 	}
 

@@ -15,8 +15,8 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -44,6 +44,9 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		assertNode(node);
@@ -69,8 +72,21 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
+	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
+		assertNode(node);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+	
+	/**
+	 * @since 2.3
+	 */
 	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
+		assertNode(node);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
+	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
 		assertNode(node);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}

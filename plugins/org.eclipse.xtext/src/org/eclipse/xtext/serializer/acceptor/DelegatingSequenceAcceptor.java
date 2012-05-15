@@ -1,4 +1,4 @@
-package org.eclipse.xtext.serializer.sequencer;
+package org.eclipse.xtext.serializer.acceptor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
@@ -7,9 +7,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

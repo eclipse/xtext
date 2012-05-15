@@ -20,8 +20,8 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.sequencer.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
@@ -35,6 +35,8 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 	protected final static int COLS = 5;
 
 	protected static final ICompositeNode NO_NODE = new CompositeNode();
+
+	protected boolean hideHidden = false;
 
 	protected int indentation = 0;
 
@@ -52,10 +54,16 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		this(null, printInstantly);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate) {
 		this(delegate, false);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate, boolean printInstantly) {
 		super(delegate);
 		this.printInstantly = printInstantly;
@@ -73,6 +81,9 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
+	/**
+	 * @since 2.3
+	 */
 	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		add(titles.doSwitch(kw), token, EmfFormatter.objPath(value), index, node);
@@ -97,9 +108,22 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
+	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
+		add(titles.doSwitch(keyword), token, String.valueOf(value), index, node);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
+	/**
+	 * @since 2.3
+	 */
 	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		add(titles.doSwitch(keyword), token, String.valueOf(value), index, node);
+		super.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
+	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+		add(titles.doSwitch(keyword), token, "'" + value + "'", index, node);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
@@ -111,7 +135,8 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	@Override
 	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
-		add(titles.doSwitch(rule), token, "", -1, node);
+		if (!hideHidden)
+			add(titles.doSwitch(rule), token, "", -1, node);
 		super.acceptComment(rule, token, node);
 	}
 
@@ -147,7 +172,8 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	@Override
 	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
-		add(titles.doSwitch(rule), token, "", -1, node);
+		if (!hideHidden)
+			add(titles.doSwitch(rule), token, "", -1, node);
 		super.acceptWhitespace(rule, token, node);
 	}
 
@@ -219,6 +245,11 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	public List<List<String>> getTable() {
 		return table;
+	}
+
+	public DebugSequenceAcceptor hideHiddenTokens() {
+		this.hideHidden = true;
+		return this;
 	}
 
 	@Override
