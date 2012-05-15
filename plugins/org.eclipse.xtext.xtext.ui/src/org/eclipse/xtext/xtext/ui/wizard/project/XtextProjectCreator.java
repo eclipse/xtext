@@ -247,10 +247,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected List<String> getTestProjectImportedPackages() {
-		return Lists.newArrayList("org.junit;version=\"4.5.0\"", "org.junit.runner;version=\"4.5.0\"",
-				"org.junit.runner.manipulation;version=\"4.5.0\"", "org.junit.runner.notification;version=\"4.5.0\"",
-				"org.junit.runners;version=\"4.5.0\"", "org.junit.runners.model;version=\"4.5.0\"", "org.hamcrest",
-				"org.hamcrest.core");
+		return Lists
+				.newArrayList("org.junit;version=\"4.5.0\"", "org.junit.runner;version=\"4.5.0\"",
+						"org.junit.runner.manipulation;version=\"4.5.0\"",
+						"org.junit.runner.notification;version=\"4.5.0\"", "org.junit.runners;version=\"4.5.0\"",
+						"org.junit.runners.model;version=\"4.5.0\"", "org.hamcrest.core");
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
