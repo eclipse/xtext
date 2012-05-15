@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -46,7 +47,7 @@ public class JdtRenameRefactoringParticipantProcessor extends RenameElementProce
 		if (associations.getJvmElements(getTargetElement()).size() > 1) {
 			StatusWrapper statusWrapper = getStatusProvider().get();
 			statusWrapper.add(ERROR,
-					"Cannot rename single inferred element. Please rename source element '{0}' instead",
+					"Cannot rename single inferred element. Please rename source element {0} instead",
 					getTargetElement());
 			statusWrapper.merge(super.checkInitialConditions(pm));
 			return statusWrapper.getRefactoringStatus();
