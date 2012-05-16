@@ -87,46 +87,75 @@ public class SerializerTester {
 		Assert.assertEquals(expected, actual);
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	public void assertSerializable(EObject semanticObject) {
+		assertSerializeWithNodeModel(semanticObject);
+		assertSerializeWithoutNodeModel(semanticObject);
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	public void assertSerializable(String semanticObject) {
+		assertSerializeWithNodeModel(semanticObject);
+		assertSerializeWithoutNodeModel(semanticObject);
+	}
+
 	public void assertSerializeWithNodeModel(EObject semanticObject) {
 		String expected = getTextFromNodeModel(semanticObject);
 		String actual = serializeWithNodeModel(semanticObject);
 		Assert.assertEquals(expected, actual);
 	}
 
-	public void assertSerializeWithNodeModel(String semanticModel) throws Exception {
-		EObject semanticObject = parseHelper.parse(semanticModel);
-		validationHelper.assertNoErrors(semanticObject);
-		assertSerializeWithNodeModel(semanticObject);
-	}
-
-	public void assertSerializeWithoutNodeModel(EObject semanticObject) throws Exception {
-		EObject parsed;
-		if (semanticObject.eResource().getContents().contains(semanticObject)) {
-			List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
-			String serialized = serializeWithoutNodeModel(semanticObject);
-			parsed = parseHelper.parse(serialized, semanticObject.eResource().getResourceSet());
-			reattachNodes(nodes);
-		} else {
-			INode oldNode = NodeModelUtils.getNode(semanticObject);
-			String oldtext = oldNode.getRootNode().getText();
-			String oldURI = semanticObject.eResource().getURIFragment(semanticObject);
-			List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
-			String serialized = serializeWithoutNodeModel(semanticObject);
-			String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
-					+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
-			EObject newmodel = parseHelper.parse(newtext, semanticObject.eResource().getResourceSet());
-			parsed = newmodel.eResource().getEObject(oldURI);
-			reattachNodes(nodes);
+	public void assertSerializeWithNodeModel(String semanticModel) {
+		try {
+			EObject semanticObject = parseHelper.parse(semanticModel);
+			validationHelper.assertNoErrors(semanticObject);
+			assertSerializeWithNodeModel(semanticObject);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		EcoreUtil.resolveAll(parsed);
-		Assert.assertTrue(parsed.eResource().getErrors().toString(), parsed.eResource().getErrors().isEmpty());
-		assertEqualWithEmfFormatter(semanticObject, parsed);
 	}
 
-	public void assertSerializeWithoutNodeModel(String semanticModel) throws Exception {
-		EObject semanticObject = parseHelper.parse(semanticModel);
-		validationHelper.assertNoErrors(semanticObject);
-		assertSerializeWithoutNodeModel(semanticObject);
+	public void assertSerializeWithoutNodeModel(EObject semanticObject) {
+		try {
+			EObject parsed;
+			if (semanticObject.eResource().getContents().contains(semanticObject)) {
+				List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
+				String serialized = serializeWithoutNodeModel(semanticObject);
+				parsed = parseHelper.parse(serialized, semanticObject.eResource().getResourceSet());
+				reattachNodes(nodes);
+			} else {
+				INode oldNode = NodeModelUtils.getNode(semanticObject);
+				String oldtext = oldNode.getRootNode().getText();
+				String oldURI = semanticObject.eResource().getURIFragment(semanticObject);
+				List<Pair<EObject, ICompositeNode>> nodes = detachNodeModel(semanticObject);
+				String serialized = serializeWithoutNodeModel(semanticObject);
+				String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
+						+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
+				EObject newmodel = parseHelper.parse(newtext, semanticObject.eResource().getResourceSet());
+				parsed = newmodel.eResource().getEObject(oldURI);
+				reattachNodes(nodes);
+			}
+			EcoreUtil.resolveAll(parsed);
+			Assert.assertTrue(parsed.eResource().getErrors().toString(), parsed.eResource().getErrors().isEmpty());
+			assertEqualWithEmfFormatter(semanticObject, parsed);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void assertSerializeWithoutNodeModel(String semanticModel) {
+		EObject semanticObject;
+		try {
+			semanticObject = parseHelper.parse(semanticModel);
+			validationHelper.assertNoErrors(semanticObject);
+			assertSerializeWithoutNodeModel(semanticObject);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	protected List<Pair<EObject, ICompositeNode>> detachNodeModel(EObject eObject) {
@@ -178,22 +207,32 @@ public class SerializerTester {
 	 * @since 2.3
 	 */
 	protected String serialize(EObject semanticObject, DelegatingSequenceAcceptor... acceptors) {
-		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
-		ISemanticSequencer semantic = semanticSequencerProvider.get();
-		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
-		IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
-		ISequenceAcceptor result = new StringBufferSequenceAcceptor();
-		ISequenceAcceptor out = result;
-		for (DelegatingSequenceAcceptor delegate : acceptors) {
-			delegate.setDelegate(out);
-			out = delegate;
+		ISequenceAcceptor debug = null;
+		try {
+			ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
+			ISemanticSequencer semantic = semanticSequencerProvider.get();
+			ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
+			IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
+			ISequenceAcceptor result = new StringBufferSequenceAcceptor();
+			ISequenceAcceptor out = result;
+			for (DelegatingSequenceAcceptor delegate : acceptors) {
+				delegate.setDelegate(out);
+				out = delegate;
+			}
+			out = debug = new DebugSequenceAcceptor(out);
+			semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
+			EObject context = getContext(semanticObject);
+			syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
+			hidden.init(context, semanticObject, out, errors);
+			semantic.createSequence(context, semanticObject);
+			return result.toString();
+		} catch (Exception t) {
+			if (debug != null) {
+				System.out.println("Serializer debug output:");
+				System.out.println(debug.toString());
+			}
+			throw new RuntimeException(t);
 		}
-		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
-		EObject context = getContext(semanticObject);
-		syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
-		hidden.init(context, semanticObject, out, errors);
-		semantic.createSequence(context, semanticObject);
-		return result.toString();
 	}
 
 	/**
