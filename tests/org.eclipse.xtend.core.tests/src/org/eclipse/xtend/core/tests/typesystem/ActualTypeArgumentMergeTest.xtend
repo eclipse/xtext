@@ -386,7 +386,6 @@ class ActualTypeArgumentMergeTest  extends AbstractXtendTestCase {
 			.merge('T').to('String', INVARIANT)
 			.merge('T2').to('String', INVARIANT)
 			.merge('T3').to('Integer', INVARIANT)
-//			.assertMapping('T3', 'Integer'->INVARIANT->INVARIANT)
 	}
 	
 	@Test def void testCircularTypeParams_01() {
