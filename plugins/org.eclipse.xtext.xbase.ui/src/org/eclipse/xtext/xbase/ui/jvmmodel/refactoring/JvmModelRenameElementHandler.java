@@ -24,6 +24,7 @@ import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.corext.util.MethodOverrideTester;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -50,8 +51,9 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (!isRealJvmMember(targetElement)) {
-			Set<EObject> jvmElements = associations.getJvmElements(targetElement);
+		if (!isPlainJavaMember(targetElement)) {
+			EObject declarationTarget = getDeclarationTarget(targetElement);
+			Set<EObject> jvmElements = associations.getJvmElements(declarationTarget);
 			if (!jvmElements.isEmpty()) {
 				Map<URI, IJavaElement> jvm2javaElement = newLinkedHashMap();
 				for (JvmIdentifiableElement jvmElement : filter(jvmElements, JvmIdentifiableElement.class)) {
@@ -63,7 +65,7 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 							jvm2javaElement.put(EcoreUtil.getURI(jvmElement), javaElement);
 				}
 				if (!jvm2javaElement.isEmpty()) {
-					return new CombinedJvmJdtRenameContext(targetElement, jvm2javaElement, editor, selection, resource);
+					return new CombinedJvmJdtRenameContext(declarationTarget, jvm2javaElement, editor, selection, resource);
 				}
 			}
 		}
@@ -75,6 +77,16 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 				return super.createRenameElementContext(sourceParameter, editor, selection, resource);
 		}
 		return super.createRenameElementContext(targetElement, editor, selection, resource);
+	}
+
+	protected EObject getDeclarationTarget(EObject targetElement) {
+		EObject target;
+		if(targetElement instanceof JvmConstructor)
+			target = ((JvmConstructor) targetElement).getDeclaringType();
+		else 
+			target = targetElement;
+		EObject declarationTarget = associations.getPrimarySourceElement(target);
+		return (declarationTarget != null) ? declarationTarget : target;
 	}
 
 	protected void addDeclaringMethod(JvmIdentifiableElement jvmElement, IJavaElement javaElement,

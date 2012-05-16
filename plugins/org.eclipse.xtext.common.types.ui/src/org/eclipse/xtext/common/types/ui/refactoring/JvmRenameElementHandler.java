@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.refactoring;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
@@ -33,8 +36,12 @@ public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (isRealJvmMember(targetElement)) {
-			IJavaElement javaElement = getJavaElementFinder().findExactElementFor((JvmMember) targetElement);
+		if (isPlainJavaMember(targetElement)) {
+			IJavaElement javaElement;
+			if(targetElement instanceof JvmConstructor)
+				javaElement = getJavaElementFinder().findExactElementFor(((JvmConstructor) targetElement).getDeclaringType());
+			else 
+				javaElement = getJavaElementFinder().findExactElementFor((JvmMember) targetElement);
 			if (javaElement != null)
 				return new JdtRefactoringContext(targetElement, javaElement, editor,
 						selection, resource, true);
@@ -42,9 +49,12 @@ public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 		return super.createRenameElementContext(targetElement, editor, selection, resource);
 	}
 
-	protected boolean isRealJvmMember(EObject targetElement) {
+	/** 
+	 * @return true, iff the targetElement belongs to an IMember in a Java resource. 
+	 */
+	protected boolean isPlainJavaMember(EObject targetElement) {
 		return targetElement.eClass() != null && targetElement.eClass().getEPackage() == TypesPackage.eINSTANCE
-				&& targetElement instanceof JvmMember;
+				&& targetElement instanceof JvmMember && equal("java", targetElement.eResource().getURI().scheme());
 	}
 	
 	protected IJavaElementFinder getJavaElementFinder() {

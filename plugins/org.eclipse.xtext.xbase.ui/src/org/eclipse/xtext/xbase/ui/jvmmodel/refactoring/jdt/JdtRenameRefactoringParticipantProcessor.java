@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
