@@ -168,6 +168,7 @@ public class FeatureScopeProvider implements FeatureNames {
 			EObject featureCall,
 			IFeatureScopeSession session,
 			IScope parent) {
+		// TODO ReceiverFeatureScopes for synonyms
 		List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(featureDeclarator, featureCall.eResource());
 		TypeBucket typeBucket = new TypeBucket(-1, rawTypes);
 		IScope result = new ReceiverFeatureScope(parent, session, receiver, featureDeclarator, asAbstractFeatureCall(featureCall), typeBucket, operatorMapping);

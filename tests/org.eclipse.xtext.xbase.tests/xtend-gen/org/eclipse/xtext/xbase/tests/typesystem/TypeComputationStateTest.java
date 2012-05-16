@@ -6,9 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -61,44 +59,19 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
       RootExpressionComputationState _rootExpressionComputationState = new RootExpressionComputationState(resolution, _newSession, expression, this.resolver, any);
       _rootExpressionComputationState.computeTypes();
+      String _identifier = any.getIdentifier();
       JvmTypeReference _actualType = resolution.getActualType(expression);
-      JvmTypeReference _unpack = this.unpack(_actualType);
-      Assert.assertSame(any, _unpack);
+      String _identifier_1 = _actualType.getIdentifier();
+      Assert.assertEquals(_identifier, _identifier_1);
+      String _identifier_2 = any.getIdentifier();
       EList<EObject> _eContents = expression.eContents();
       EObject _head = IterableExtensions.<EObject>head(_eContents);
       JvmTypeReference _actualType_1 = resolution.getActualType(((XNullLiteral) _head));
-      JvmTypeReference _unpack_1 = this.unpack(_actualType_1);
-      Assert.assertSame(any, _unpack_1);
+      String _identifier_3 = _actualType_1.getIdentifier();
+      Assert.assertEquals(_identifier_2, _identifier_3);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public JvmTypeReference unpack(final JvmTypeReference reference) {
-    JvmTypeReference _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (reference instanceof JvmSpecializedTypeReference) {
-        final JvmSpecializedTypeReference _jvmSpecializedTypeReference = (JvmSpecializedTypeReference)reference;
-        _matched=true;
-        JvmTypeReference _equivalent = _jvmSpecializedTypeReference.getEquivalent();
-        JvmTypeReference _unpack = this.unpack(_equivalent);
-        _switchResult = _unpack;
-      }
-    }
-    if (!_matched) {
-      if (reference instanceof JvmDelegateTypeReference) {
-        final JvmDelegateTypeReference _jvmDelegateTypeReference = (JvmDelegateTypeReference)reference;
-        _matched=true;
-        JvmTypeReference _delegate = _jvmDelegateTypeReference.getDelegate();
-        JvmTypeReference _unpack = this.unpack(_delegate);
-        _switchResult = _unpack;
-      }
-    }
-    if (!_matched) {
-      _switchResult = reference;
-    }
-    return _switchResult;
   }
   
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
@@ -121,9 +94,10 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         state.acceptActualType(expectedType);
         JvmTypeReference _actualType_2 = parentResolution.getActualType(expression);
         Assert.assertNull(_actualType_2);
+        String _identifier = expectedType.getIdentifier();
         JvmTypeReference _actualType_3 = resolution.getActualType(expression);
-        JvmTypeReference _unpack = this.unpack(_actualType_3);
-        Assert.assertSame(expectedType, _unpack);
+        String _identifier_1 = _actualType_3.getIdentifier();
+        Assert.assertEquals(_identifier, _identifier_1);
         EObject _eContainer_2 = expression.eContainer();
         JvmTypeReference _actualType_4 = parentResolution.getActualType(((XExpression) _eContainer_2));
         Assert.assertNull(_actualType_4);
@@ -134,9 +108,10 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         final XNullLiteral nullLiteral = ((XNullLiteral) _head_1);
         state.computeTypes(nullLiteral);
         final ResolvedTypes resolution_1 = this._reflectExtensions.<ResolvedTypes>get(state, "resolvedTypes");
+        String _identifier_2 = expectedType.getIdentifier();
         JvmTypeReference _actualType_5 = resolution_1.getActualType(nullLiteral);
-        JvmTypeReference _unpack_1 = this.unpack(_actualType_5);
-        Assert.assertSame(expectedType, _unpack_1);
+        String _identifier_3 = _actualType_5.getIdentifier();
+        Assert.assertEquals(_identifier_2, _identifier_3);
       }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);

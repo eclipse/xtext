@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -23,8 +22,9 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitorWithParameter;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitorWithParameter;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -33,7 +33,7 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class TypeParameterSubstitutor extends AbstractTypeReferenceVisitorWithParameter.InheritanceAware<Set<JvmTypeParameter>, JvmTypeReference> {
+public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithParameter<Set<JvmTypeParameter>, JvmTypeReference> {
 		
 	private final Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping;
 	private final CommonTypeComputationServices services;
@@ -61,19 +61,18 @@ public class TypeParameterSubstitutor extends AbstractTypeReferenceVisitorWithPa
 	}
 	
 	@Override
-	public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference, Set<JvmTypeParameter> visiting) {
-		if (reference instanceof XFunctionTypeRef) {
-			XFunctionTypeRef casted = (XFunctionTypeRef) reference;
-			XFunctionTypeRef result = services.getXtypeFactory().createXFunctionTypeRef();
-			result.setEquivalent(visit(reference.getEquivalent(), visiting));
-			for(JvmTypeReference paramType: casted.getParamTypes()) {
-				result.getParamTypes().add(visit(paramType, visiting));
-			}
-			result.setReturnType(visit(casted.getReturnType(), visiting));
-			return result;
-		} else {
-			return super.doVisitSpecializedTypeReference(reference, visiting);
+	public JvmTypeReference doVisitFunctionTypeReference(XFunctionTypeRef reference, Set<JvmTypeParameter> visiting) {
+		XFunctionTypeRef result = services.getXtypeFactory().createXFunctionTypeRef();
+		JvmTypeReference equivalent = (JvmTypeReference) reference.eGet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, false);
+		if (equivalent != null)
+			result.setEquivalent(visit(equivalent, visiting));
+		result.setType(reference.getType());
+		result.setInstanceContext(reference.isInstanceContext());
+		for(JvmTypeReference paramType: reference.getParamTypes()) {
+			result.getParamTypes().add(visit(paramType, visiting));
 		}
+		result.setReturnType(visit(reference.getReturnType(), visiting));
+		return result;
 	}
 	
 	@Override

@@ -25,8 +25,12 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xtype.util.XtypeReferenceVisitor;
+import org.eclipse.xtext.xtype.util.XtypeReferenceVisitorWithParameter;
 
 import com.google.common.collect.Lists;
 
@@ -36,6 +40,23 @@ import com.google.common.collect.Lists;
  * 	{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference}
  */
 public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
+	
+	@Override
+	public <Result> Result accept(ITypeReferenceVisitor<Result> visitor) {
+		if (visitor instanceof XtypeReferenceVisitor) {
+			return ((XtypeReferenceVisitor<Result>) visitor).doVisitFunctionTypeReference(this);
+		}
+		return super.accept(visitor);
+	}
+	
+	@Override
+	public <Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter, Result> visitor,
+			Parameter parameter) {
+		if (visitor instanceof XtypeReferenceVisitorWithParameter) {
+			return ((XtypeReferenceVisitorWithParameter<Parameter, Result>) visitor).doVisitFunctionTypeReference(this, parameter);
+		}
+		return super.accept(visitor, parameter);
+	}
 	
 	// TODO should we update the type as soon as the number of argument types changes?  
 	@Override
@@ -294,8 +315,16 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
-		result.append(": ");
-		result.append(getIdentifier());
+		result.append(": (");
+		for (int i = 0;i< getParamTypes().size();i++) {
+			JvmTypeReference reference = getParamTypes().get(i);
+			result.append(reference.toString());
+			if (i<getParamTypes().size()-1)
+				result.append(", ");
+		}
+		result.append(")=>");
+		if (getReturnType()!=null)
+			result.append(getReturnType().toString());
 		return result.toString();
 	}
 }

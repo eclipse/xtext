@@ -532,18 +532,23 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testFeatureCall_06_head() throws Exception {
+  public void testFeatureCall_06_01() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s).head", "String");
+  }
+  
+  @Test
+  public void testFeatureCall_06_02() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.toString).head", "String");
   }
   
   @Ignore
   @Test
-  public void testFeatureCall_06_1() throws Exception {
+  public void testFeatureCall_06_03() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1)", "List<Integer>");
   }
   
   @Test
-  public void testFeatureCall_06_1_head() throws Exception {
+  public void testFeatureCall_06_04() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|1).head", "Integer");
   }
   
@@ -551,6 +556,22 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_07() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length)", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
+  public void testFeatureCall_07_01() throws Exception {
+    this.resolvesTo("<String>newArrayList.map(s|s.length)", "List<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_07_02() throws Exception {
+    this.resolvesTo("newArrayList(\'\').map(s|s.length).head", "Integer");
+  }
+  
+  @Test
+  public void testFeatureCall_07_03() throws Exception {
+    this.resolvesTo("<String>newArrayList.map(s|s.length).head", "Integer");
   }
   
   @Ignore
@@ -700,6 +721,16 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).map(e|e).map(e|e)\n\t\t.map(e|e).map(e|e).map(e|e).map(e|e).head", "Integer");
   }
   
+  @Test
+  public void testFeatureCall_15_o() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size())", "Iterable<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_15_p() throws Exception {
+    this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e)", "Iterable<Integer>");
+  }
+  
   @Ignore
   @Test
   public void testFeatureCall_16() throws Exception {
@@ -801,6 +832,89 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_Bug342134_07() throws Exception {
     this.resolvesTo("<java.util.List<String>>newArrayList().flatten", "Iterable<String>");
+  }
+  
+  @Test
+  public void testReceiverIsPartiallyResolved_01() throws Exception {
+    this.resolvesTo("newArrayList.get(0)", "Object");
+  }
+  
+  @Test
+  public void testReceiverIsPartiallyResolved_02() throws Exception {
+    this.resolvesTo("newArrayList.toString", "String");
+  }
+  
+  @Test
+  public void testTypeByTransitiveExpectation_01() throws Exception {
+    this.resolvesTo("newArrayList.flatten.toList.flatten.head", "Object");
+  }
+  
+  @Test
+  public void testTypeByTransitiveExpectation_02() throws Exception {
+    this.resolvesTo("newArrayList.subList(1,1).subList(1,1).head", "Object");
+  }
+  
+  @Test
+  public void testTypeByTransitiveExpectation_03() throws Exception {
+    this.resolvesTo("newArrayList.flatten.toList.<Number>flatten.head", "Number");
+  }
+  
+  @Ignore
+  @Test
+  public void testTypeByTransitiveExpectation_04() throws Exception {
+    this.resolvesTo("newArrayList.<Set<Number>>flatten.toList.flatten.head", "Number");
+  }
+  
+  @Ignore
+  @Test
+  public void testTypeByTransitiveExpectation_05() throws Exception {
+    this.resolvesTo("newArrayList.flatten.<Set<Number>>toList.flatten.head", "Number");
+  }
+  
+  @Test
+  public void testTypeByTransitiveExpectation_06() throws Exception {
+    this.resolvesTo("newArrayList.flatten.toList.flatten.<Number>head", "Number");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_01() throws Exception {
+    this.resolvesTo("newArrayList", "ArrayList<Object>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_02() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = list.get(0)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_03() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = list.head\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_04() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_05() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_06() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_07() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
   }
   
   @Ignore

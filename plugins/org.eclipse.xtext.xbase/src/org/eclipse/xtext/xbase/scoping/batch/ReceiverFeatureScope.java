@@ -10,12 +10,14 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -59,8 +62,9 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
+		Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
 		for(JvmIdentifiableElement feature: allFeatures) {
-			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, bucket.getId()));
+			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
 		}
 		return allDescriptions;
 	}
@@ -84,12 +88,13 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
+		Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
 		for(JvmIdentifiableElement feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, bucket.getId()));
+			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
 			QualifiedName operator = operatorMapping.getOperator(featureName);
 			if (operator != null) {
-				allDescriptions.add(new BucketedEObjectDescription(operator, feature, receiver, receiverType, bucket.getId()));
+				allDescriptions.add(new BucketedEObjectDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
 			}
 		}
 		return allDescriptions;
