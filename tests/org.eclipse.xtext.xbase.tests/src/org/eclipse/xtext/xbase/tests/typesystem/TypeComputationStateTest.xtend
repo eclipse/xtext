@@ -8,9 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import org.eclipse.xtext.common.types.JvmDelegateTypeReference
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference
-import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XNullLiteral
