@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
@@ -20,13 +21,14 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
-
+	
 	private final IJavaProject javaProject;
 
 	private final TypeURIHelper typeUriHelper;
@@ -71,11 +73,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
 		String resourcePath = resourceURI.path();
 		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
-			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+			TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
 			JvmType result = findTypeBySignature(signature, resource);
 			return result;
 		} else {
-			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, false);
+			TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
 			if (resource != null) {
 				JvmType result = findTypeBySignature(signature, resource);
 				return result;
@@ -98,7 +100,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					packageName = topLevelType.substring(0, lastDot);
 				}
 				if (javaProject.findType(packageName, typeName) != null) {
-					resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+					resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
 					JvmType result = findTypeBySignature(signature, resource);
 					return result;
 				} else {
@@ -110,6 +112,18 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 				return null;
 			}
 		}
+	}
+
+	/**
+	 * @since 2.3
+	 */
+	protected Resource getResourceForJavaURI(URI resourceURI, boolean loadOnDemand) {
+		ResourceSet rs = getResourceSet();
+		if (rs instanceof XtextResourceSet) {
+			XtextResourceSet xtextRs = (XtextResourceSet) rs;
+			return xtextRs.getResourceWithoutNormalization(resourceURI, loadOnDemand);
+		}
+		return rs.getResource(resourceURI, loadOnDemand);
 	}
 	
 	/**

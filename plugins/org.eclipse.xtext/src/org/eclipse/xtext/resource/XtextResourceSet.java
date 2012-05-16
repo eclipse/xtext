@@ -9,6 +9,7 @@
 package org.eclipse.xtext.resource;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,7 +23,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  * @author Jan Köhnlein
  */
 public class XtextResourceSet extends ResourceSetImpl {
-
+	
     private IClasspathUriResolver resolver;
 
     private Object classpathURIContext;
@@ -42,7 +43,62 @@ public class XtextResourceSet extends ResourceSetImpl {
     public void removeLoadOption(Object key) {
     	getLoadOptions().remove(key);
     }
+    
+    /**
+     * Retrieves the resource from the {@link #getURIResourceMap()}.
+     * If loadOnDemand is <code>true</code> the resource will be loaded and if not present
+     * in the {@link #getURIResourceMap()} it will be created and added.
+     * 
+     * This method assumes that the given {@link URI} is present in the same form than the one stored in the map.
+     * This method will not check against the normalized version of all the uris of the resource sin {@link #getResources()}
+     * 
+     * @param uri - the uri
+     * @param loadOnDemand - whether the resource should be loaded and created
+     * 
+	 * @since 2.3
+	 */
+    public Resource getResourceWithoutNormalization(URI uri, boolean loadOnDemand) {
+    	Map<URI, Resource> map = getURIResourceMap();
+        if (map != null)
+        {
+          Resource resource = map.get(uri);
+          if (resource != null)
+          {
+            if (loadOnDemand && !resource.isLoaded())
+            {
+              demandLoadHelper(resource);
+            }
+            return resource;
+          }
+        }
 
+        if (loadOnDemand)
+        {
+          Resource resource = demandCreateResource(uri);
+          if (resource == null)
+          {
+            throw new RuntimeException("Cannot create a resource for '" + uri + "'; a registered resource factory is needed");
+          }
+
+          demandLoadHelper(resource);
+
+          if (map != null)
+          {
+            map.put(uri, resource);
+          }
+          return resource;
+        }
+
+        return null;
+    }
+    
+    @Override
+    public Resource createResource(URI uri, String contentType) {
+    	final Resource resource = super.createResource(uri, contentType);
+    	getURIResourceMap().put(uri, resource);
+		return resource;
+    }
+    
     @Override
     public URIConverter getURIConverter() {
         if (uriConverter == null) {
