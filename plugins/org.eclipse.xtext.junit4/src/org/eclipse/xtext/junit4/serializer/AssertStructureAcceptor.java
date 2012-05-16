@@ -14,7 +14,6 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
@@ -81,7 +80,7 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 		assertElement(keyword);
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
-	
+
 	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		assertElement(keyword);
@@ -141,9 +140,11 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 
 	protected void assertElement(AbstractElement element) {
 		AbstractRule expectedRule = null;
-		if (stack.isEmpty())
-			expectedRule = EcoreUtil2.getContainerOfType(element, Grammar.class).getRules().get(0);
-		else
+		if (stack.isEmpty()) {
+			// FIXME: this doesn't work if the serialized EObject is not the model's root. 
+			// expectedRule = EcoreUtil2.getContainerOfType(element, Grammar.class).getRules().get(0);
+			return;
+		} else
 			expectedRule = stack.peek().getRule();
 		AbstractRule actualRule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
 		if (expectedRule != actualRule) {
