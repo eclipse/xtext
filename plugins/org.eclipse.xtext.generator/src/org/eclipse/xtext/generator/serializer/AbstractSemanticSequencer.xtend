@@ -74,11 +74,11 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		val superGrammar = if(usesSuperGrammar) 
 				file.imported(names.semanticSequencer.getQualifiedName(grammar.usedGrammars.head))
 			else
-				file.imported(typeof(AbstractDelegatingSemanticSequencer)) 
-		
+				file.imported(typeof(AbstractDelegatingSemanticSequencer))
+		val _abstract = if (filename.isAbstract) "abstract " else "" 
 		file.body = '''
 			@SuppressWarnings("all")
-			public class «filename.simpleName» extends «superGrammar» {
+			public «_abstract»class «filename.simpleName» extends «superGrammar» {
 			
 				@Inject
 				private «file.imported(grammar.gaFQName)» grammarAccess;

@@ -44,9 +44,10 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		file.imported(typeof(List))
 		file.imported(typeof(GrammarAlias$AbstractElementAlias))
 		
+		val _abstract = if (filename.isAbstract) "abstract " else ""
 		file.body = '''
 			@SuppressWarnings("all")
-			public class «filename.simpleName» extends AbstractSyntacticSequencer {
+			public «_abstract»class «filename.simpleName» extends AbstractSyntacticSequencer {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
 				«FOR group:util.allAmbiguousTransitionsBySyntax»

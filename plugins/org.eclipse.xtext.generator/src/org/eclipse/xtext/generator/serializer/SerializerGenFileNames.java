@@ -17,17 +17,17 @@ import com.google.inject.Inject;
  */
 public class SerializerGenFileNames {
 	public class GenFileName {
+		private boolean _abstract;
 		private String component;
 		private String fileext;
 		private Grammar grammar;
 		private Naming naming;
-		private String prefix;
 
-		public GenFileName(Grammar grammar, Naming naming, String prefix, String component, String fileext) {
+		public GenFileName(Grammar grammar, Naming naming, boolean _abstract, String component, String fileext) {
 			super();
 			this.grammar = grammar;
 			this.naming = naming;
-			this.prefix = prefix;
+			this._abstract = _abstract;
 			this.component = component;
 			this.fileext = fileext;
 		}
@@ -37,6 +37,7 @@ public class SerializerGenFileNames {
 		}
 
 		protected String getName(Grammar grammar, String component) {
+			String prefix = _abstract ? "Abstract" : "";
 			return naming.basePackageRuntime(grammar) + ".serializer." + prefix
 					+ naming.toSimpleName(grammar.getName()) + component;
 		}
@@ -60,6 +61,10 @@ public class SerializerGenFileNames {
 		public String getSimpleName(Grammar grammar) {
 			return naming.toSimpleName(getQualifiedName(grammar));
 		}
+
+		public boolean isAbstract() {
+			return _abstract;
+		}
 	}
 
 	private GenFileName abstractSemanticSequencer;
@@ -70,11 +75,11 @@ public class SerializerGenFileNames {
 
 	@Inject
 	public SerializerGenFileNames(Naming naming, Grammar grammar) {
-		semanticSequencer = new GenFileName(grammar, naming, "", "SemanticSequencer", "java");
-		syntacticSequencer = new GenFileName(grammar, naming, "", "SyntacticSequencer", "java");
-		abstractSemanticSequencer = new GenFileName(grammar, naming, "Abstract", "SemanticSequencer", "java");
-		abstractSyntacticSequencer = new GenFileName(grammar, naming, "Abstract", "SyntacticSequencer", "java");
-		grammarConstraints = new GenFileName(grammar, naming, "", "GrammarConstraints", "xtext");
+		semanticSequencer = new GenFileName(grammar, naming, false, "SemanticSequencer", "java");
+		syntacticSequencer = new GenFileName(grammar, naming, false, "SyntacticSequencer", "java");
+		abstractSemanticSequencer = new GenFileName(grammar, naming, true, "SemanticSequencer", "java");
+		abstractSyntacticSequencer = new GenFileName(grammar, naming, true, "SyntacticSequencer", "java");
+		grammarConstraints = new GenFileName(grammar, naming, false, "GrammarConstraints", "xtext");
 	}
 
 	public GenFileName getAbstractSemanticSequencer() {
