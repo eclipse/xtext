@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -26,7 +24,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 
 import com.google.common.collect.Maps;
 
@@ -48,7 +45,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 		}
 		return receiverType;
 	}
-
+	
 	@Override
 	protected List<XExpression> getSyntacticArguments() {
 		// TODO binary operation
@@ -81,18 +78,12 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 	
 	@Override
 	protected Map<JvmTypeParameter, JvmTypeReference> getDeclaratorParameterMapping() {
-		JvmIdentifiableElement feature = getFeature();
-		boolean staticFeature = false;
-		if (feature instanceof JvmOperation) {
-			staticFeature = ((JvmOperation) feature).isStatic();  
-		} else if (feature instanceof JvmField) {
-			staticFeature = ((JvmField) feature).isStatic();
+		if (getDescription() instanceof BucketedEObjectDescription) {
+			Map<JvmTypeParameter, JvmTypeReference> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
+			if (result != null)
+				return result;
 		}
-		// TODO cache the type parameters per receiver
-		Map<JvmTypeParameter, JvmTypeReference> declaratorParameterMapping = staticFeature 
-				? Collections.<JvmTypeParameter, JvmTypeReference>emptyMap() 
-				: new DeclaratorTypeArgumentCollector().getTypeParameterMapping(getReceiverType());
-		return declaratorParameterMapping;
+		return Collections.emptyMap();
 	}
 	
 	@Override

@@ -59,9 +59,9 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 	
 	@Override
 	public String toString() {
-		String result = getIdentifier();
-		if (result != null)
-			return result;
+		if (typeReference != null) {
+			return getTypeReference().toString();
+		}
 		return super.toString();
 	}
 

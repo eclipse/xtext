@@ -44,14 +44,9 @@ public class UnboundTypeParameterSubstitutor extends TypeParameterSubstitutor {
 				if (mappedReference != null && mappedReference != reference) {
 					return visit(mappedReference, visiting);
 				} else {
-					ConstraintAwareTypeArgumentCollector collector = new ConstraintAwareTypeArgumentCollector(getServices().getTypesFactory());
-					TraversalData data = new TraversalData();
-					data.getTypeParameterMapping().putAll(getTypeParameterMapping());
-					collector.visit(reference, data);
-					mappedReference = data.getTypeParameterMapping().get(type);
-					if (mappedReference != null && mappedReference != reference) {
-						return visit(mappedReference, visiting);
-					}
+					mappedReference = getUnmappedSubstitute(reference, (JvmTypeParameter) type, visiting);
+					if (mappedReference != null)
+						return mappedReference;
 				}
 			} finally {
 				visiting.remove(type);
@@ -68,6 +63,19 @@ public class UnboundTypeParameterSubstitutor extends TypeParameterSubstitutor {
 			result.getArguments().add(copiedArgument);
 		}
 		return result;
+	}
+
+	protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
+		JvmTypeReference mappedReference;
+		ConstraintAwareTypeArgumentCollector collector = new ConstraintAwareTypeArgumentCollector(getServices().getTypesFactory());
+		TraversalData data = new TraversalData();
+		data.getTypeParameterMapping().putAll(getTypeParameterMapping());
+		collector.visit(reference, data);
+		mappedReference = data.getTypeParameterMapping().get(type);
+		if (mappedReference != null && mappedReference != reference) {
+			return visit(mappedReference, visiting);
+		}
+		return mappedReference;
 	}
 	
 	protected JvmTypeReference getDeclaredUpperBound(JvmType type, int parameterIndex, Set<JvmTypeParameter> visiting) {

@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -27,12 +28,15 @@ import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -77,16 +81,18 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 	public void apply() {
 		JvmIdentifiableElement feature = getFeature();
 		JvmTypeReference featureType = getDeclaredType(feature);
-		state.getResolvedTypes().setLinkingInformation(getExpression(), this);
+		state.getResolvedTypes().acceptLinkingInformation(getExpression(), this);
 		computeArgumentTypes(feature, featureType);
 		List<ITypeExpectation> expectations = state.getImmediateExpectations();
 		for(ITypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
-			TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(getDeclaratorParameterMapping(), state.getServices());
+			TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(
+					getDeclaratorParameterMapping(), state.getServices());
 			substitutor.enhanceMapping(getFeatureTypeParameterMapping());
-			JvmTypeReference resolvedType = substitutor.substitute(featureType);
-			expectation.acceptActualType(resolvedType, ConformanceHint.UNCHECKED);
+			// TODO enhance with expectation
+			JvmTypeReference substitute = substitutor.substitute(featureType);
+			expectation.acceptActualType(substitute, ConformanceHint.UNCHECKED);
 		}
 	}
 	
@@ -99,6 +105,10 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 	}
 
 	protected void computeArgumentTypes(JvmIdentifiableElement feature, JvmTypeReference featureType) {
+		
+		
+		
+		
 		int declaredParameterCount = 0;
 		int fixedArityParameterCount = 0;
 		List<JvmFormalParameter> parameters = null;
@@ -117,9 +127,15 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 			for(int i = 0; i < fixedArityArgumentCount; i++) {
 				JvmFormalParameter parameter = parameters.get(i);
 				XExpression argument = arguments.get(i);
+				JvmTypeReference parameterType = parameter.getParameterType();
+				TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(
+						getDeclaratorParameterMapping(), state.getServices());
+				substitutor.enhanceMapping(getFeatureTypeParameterMapping());
+				// TODO enhance with expectation
+				JvmTypeReference substitute = substitutor.substitute(parameterType);
 				AbstractTypeComputationState argumentState = new ObservableTypeComputationStateWithExpectation(
-						state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, parameter.getParameterType(), this);
-				stackedResolvedTypes.add(resolveArgumentType(argument, parameter.getParameterType(), argumentState));
+						state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitute, this);
+				stackedResolvedTypes.add(resolveArgumentType(argument, parameterType, argumentState));
 			}
 			if (varArgs) {
 				int lastParamIndex = declaredParameterCount - 1;
@@ -127,15 +143,22 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 				if (!(lastParameterType instanceof JvmGenericArrayTypeReference))
 					throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
 				JvmTypeReference componentType = ((JvmGenericArrayTypeReference) lastParameterType).getComponentType();
+				
+				TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(
+						getDeclaratorParameterMapping(), state.getServices());
+				substitutor.enhanceMapping(getFeatureTypeParameterMapping());
+				// TODO enhance with expectation
+				JvmTypeReference substitute = substitutor.substitute(componentType);
+				
 				AbstractTypeComputationState argumentState = null;
 				if (arguments.size() == declaredParameterCount) {
 	//				XExpression lastArgument = arguments.get(lastParamIndex);
 					// TODO expect Array and componentType
 					argumentState = new ObservableTypeComputationStateWithExpectation(
-							state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, componentType, this);
+							state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitute, this);
 				} else {
 					argumentState = new ObservableTypeComputationStateWithExpectation(
-							state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, componentType, this);
+							state.getResolvedTypes(), state.getFeatureScopeSession(), state.getResolver(), state, substitute, this);
 				}
 				for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
 					XExpression argument = arguments.get(i);
@@ -165,7 +188,7 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 			ActualTypeArgumentCollector implementation = new ActualTypeArgumentCollector(
 					((JvmTypeParameterDeclarator) feature).getTypeParameters(), state.getServices());
 			implementation.populateTypeParameterMapping(declaredType, actualType);
-			typeParameterMapping.putAll(implementation.getTypeParameterMapping());
+			typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
 		}
 	}
 

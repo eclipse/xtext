@@ -309,6 +309,10 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferenceVisitorWit
 		return new BoundTypeArgument(reference, BoundTypeArgumentSource.INFERRED, origin, expectedVariance, actualVariance);
 	}
 	
+	public ListMultimap<JvmTypeParameter, BoundTypeArgument> rawGetTypeParameterMapping() {
+		return typeParameterMapping;
+	}
+	
 	public ListMultimap<JvmTypeParameter, BoundTypeArgument> getTypeParameterMapping() {
 		if (typeParameterMapping.keySet().containsAll(parametersToBeMapped)) {
 			return typeParameterMapping;

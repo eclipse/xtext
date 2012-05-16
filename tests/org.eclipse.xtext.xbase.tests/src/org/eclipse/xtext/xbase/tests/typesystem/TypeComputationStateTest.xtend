@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import org.eclipse.xtext.common.types.JvmDelegateTypeReference
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XNullLiteral
@@ -17,16 +19,13 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputationState
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState
-import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
+import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.common.types.JvmDelegateTypeReference
-import org.eclipse.xtext.common.types.JvmTypeReference
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,16 +45,8 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		val resolution = new MyResolvedTypes(resolver)
 		val any = services.typeReferences.createAnyTypeReference(expression)
 		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
-		assertSame(any, resolution.getActualType(expression).unpack)
-		assertSame(any, resolution.getActualType(expression.eContents.head as XNullLiteral).unpack)
-	}
-	
-	def JvmTypeReference unpack(JvmTypeReference reference) {
-		switch(reference) {
-			JvmSpecializedTypeReference: reference.equivalent.unpack
-			JvmDelegateTypeReference: reference.delegate.unpack
-			default: reference
-		}
+		assertEquals(any.identifier, resolution.getActualType(expression).identifier)
+		assertEquals(any.identifier, resolution.getActualType(expression.eContents.head as XNullLiteral).identifier)
 	}
 
 	override computeTypes(XExpression expression, ITypeComputationState state) {
@@ -69,43 +60,19 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
 			state.acceptActualType(expectedType)
 			assertNull(parentResolution.getActualType(expression))
-			assertSame(expectedType, resolution.getActualType(expression).unpack)
+			assertEquals(expectedType.identifier, resolution.getActualType(expression).identifier)
 			assertNull(parentResolution.getActualType(expression.eContainer as XExpression))
 		} else {
 			assertTrue(expression instanceof XBlockExpression)
 			val nullLiteral = expression.eContents.head as XNullLiteral
 			state.computeTypes(nullLiteral)
 			val resolution = state.<ResolvedTypes>get("resolvedTypes")
-			assertSame(expectedType, resolution.getActualType(nullLiteral).unpack)
+			assertEquals(expectedType.identifier, resolution.getActualType(nullLiteral).identifier)
 		}
 	}
 	
 	override getRefinableCandidate(XExpression expression, ITypeComputationState state) {
 		throw new UnsupportedOperationException("Unexpected!")
-	}
-	
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class MyResolvedTypes extends ResolvedTypes {
-	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
-	}
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class AccessibleReentrantTypeResolver extends DefaultReentrantTypeResolver {
-	
-	override public setTypeComputer(ITypeComputer typeComputer) {
-		super.setTypeComputer(typeComputer)
-	}
-	
-	override public getBatchScopeProvider() {
-		super.getBatchScopeProvider()
 	}
 	
 }

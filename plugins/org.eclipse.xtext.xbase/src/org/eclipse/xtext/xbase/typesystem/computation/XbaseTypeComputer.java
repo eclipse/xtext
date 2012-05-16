@@ -357,9 +357,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 								return null;
 							}
 							JvmFormalParameter operationParameter = operation.getParameters().get(parameterIndex);
-							Map<JvmTypeParameter, JvmTypeReference> parameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(computedClosureType);
-							JvmTypeReference result = new TypeParameterSubstitutor(parameterMapping, services).substitute(operationParameter.getParameterType());
-							return result;
+							JvmTypeReference operationParameterType = operationParameter.getParameterType();
+							return operationParameterType;
 						}
 					});
 					typeAssigner.assignType(closureParameter, computedParameterType);

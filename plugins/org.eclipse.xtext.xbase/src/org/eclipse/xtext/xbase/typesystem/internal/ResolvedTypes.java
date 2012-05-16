@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.xtext.EcoreUtil2;
@@ -20,11 +22,15 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -33,7 +39,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 import com.google.common.collect.HashMultimap;
@@ -192,14 +200,62 @@ public class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	protected void acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	protected void acceptType(final XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
 //		AbstractTypeComputationState state = expectation.getState();
 		// expectation is type parameter - type is actual - bind type
 		// no expectation, type wrap type and add pending type parameter data that should be resolved later on demand
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		ensureExpressionTypesMapExists().put(expression, new TypeData(expression, expectation, type, conformanceHint, returnType));
+		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), resolver.getServices()) {
+			@Override
+			protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference,
+					JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
+				// TODO extract method 'isExpressionWithTypeArguments'
+				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
+					XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+					result.setTypeProvider(new UnboundTypeParameter(expression, type, getServices()));
+					return result;
+				} else {
+					throw new IllegalStateException("expression was: " + expression);
+				}
+			}
+			
+			@Override
+			public JvmTypeReference doVisitComputedTypeReference(final XComputedTypeReference reference,
+					Set<JvmTypeParameter> visiting) {
+				JvmTypeReference equivalent = (JvmTypeReference) reference.eGet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, false);
+				if (equivalent != null)
+					return visit(equivalent, visiting);
+				XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+				result.setTypeProvider(new AbstractReentrantTypeReferenceProvider() {
+					@Override
+					protected JvmTypeReference doGetTypeReference() {
+						JvmTypeReference originalEquivalent = reference.getEquivalent();
+						JvmTypeReference result = substitute(originalEquivalent);
+						return result;
+					}
+				});
+				return result;
+			}
+			
+			@Override
+			public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference,
+					Set<JvmTypeParameter> visiting) {
+				if (reference instanceof XComputedTypeReference) {
+					XComputedTypeReference casted = (XComputedTypeReference) reference;
+					JvmTypeReference equivalent = (JvmTypeReference) casted.eGet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, false);
+					if (equivalent != null)
+						return visit(equivalent, visiting);
+					XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+					result.setTypeProvider(casted.getTypeProvider());
+					return result;
+				}
+				return super.doVisitSpecializedTypeReference(reference, visiting);
+			}
+		};
+		JvmTypeReference actualType = substitutor.substitute(type);
+		ensureExpressionTypesMapExists().put(expression, new TypeData(expression, expectation, actualType, conformanceHint, returnType));
 	}
 
 	protected Map<JvmIdentifiableElement, JvmTypeReference> ensureTypesMapExists() {
@@ -267,8 +323,8 @@ public class ResolvedTypes implements IResolvedTypes {
 		return (IConstructorLinkingCandidate) ensureLinkingMapExists().get(constructorCall);
 	}
 
-	public void setLinkingInformation(XExpression expression, ILinkingCandidate linkingCandidate) {
-		ensureLinkingMapExists().put(expression, linkingCandidate);
+	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
+		ensureLinkingMapExists().put(expression, candidate);
 	}
 
 	protected DefaultReentrantTypeResolver getResolver() {
