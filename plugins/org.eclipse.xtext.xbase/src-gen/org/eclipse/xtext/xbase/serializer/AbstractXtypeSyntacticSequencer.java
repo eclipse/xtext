@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
 @SuppressWarnings("all")
-public class AbstractXtypeSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractXtypeSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XtypeGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q;

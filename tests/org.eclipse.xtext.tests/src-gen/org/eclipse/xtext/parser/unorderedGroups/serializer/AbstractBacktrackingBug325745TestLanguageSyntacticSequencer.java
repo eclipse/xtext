@@ -14,7 +14,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
 @SuppressWarnings("all")
-public class AbstractBacktrackingBug325745TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected BacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_Expression_LeftSquareBracketKeyword_1_0_a;

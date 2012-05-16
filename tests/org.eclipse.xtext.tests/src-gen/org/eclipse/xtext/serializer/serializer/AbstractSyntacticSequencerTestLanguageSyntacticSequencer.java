@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGrammarAccess;
 
 @SuppressWarnings("all")
-public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SyntacticSequencerTestLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1;
@@ -109,7 +109,7 @@ public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends Ab
 
 	/**
 	 * Syntax:
-	 *     'kw2' | KW1
+	 *     KW1 | 'kw2'
 	 */
 	protected void emit_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

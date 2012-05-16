@@ -19,7 +19,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class AbstractInheritanceTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public abstract class AbstractInheritanceTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private InheritanceTestLanguageGrammarAccess grammarAccess;

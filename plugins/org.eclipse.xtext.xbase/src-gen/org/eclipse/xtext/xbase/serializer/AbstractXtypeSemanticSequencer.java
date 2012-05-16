@@ -25,7 +25,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class AbstractXtypeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private XtypeGrammarAccess grammarAccess;

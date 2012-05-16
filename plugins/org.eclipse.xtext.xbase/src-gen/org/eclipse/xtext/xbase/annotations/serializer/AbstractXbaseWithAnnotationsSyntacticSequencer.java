@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 
 @SuppressWarnings("all")
-public class AbstractXbaseWithAnnotationsSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractXbaseWithAnnotationsSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XbaseWithAnnotationsGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a;

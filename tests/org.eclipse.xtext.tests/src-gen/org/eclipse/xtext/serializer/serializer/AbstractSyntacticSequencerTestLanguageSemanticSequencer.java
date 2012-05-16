@@ -35,7 +35,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Val1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val2;
 
 @SuppressWarnings("all")
-public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private SyntacticSequencerTestLanguageGrammarAccess grammarAccess;

@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 @SuppressWarnings("all")
-public class AbstractXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XbaseGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_XBlockExpression_SemicolonKeyword_2_1_q;

@@ -53,7 +53,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class AbstractXbaseSemanticSequencer extends XtypeSemanticSequencer {
+public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequencer {
 
 	@Inject
 	private XbaseGrammarAccess grammarAccess;

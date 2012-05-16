@@ -12,7 +12,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
 @SuppressWarnings("all")
-public class AbstractInheritanceTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractInheritanceTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected InheritanceTestLanguageGrammarAccess grammarAccess;
 	

@@ -18,7 +18,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class AbstractBug301935TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public abstract class AbstractBug301935TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private Bug301935TestLanguageGrammarAccess grammarAccess;

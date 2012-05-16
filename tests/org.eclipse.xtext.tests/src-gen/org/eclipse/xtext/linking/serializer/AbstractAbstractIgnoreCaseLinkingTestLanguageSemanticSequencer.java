@@ -16,7 +16,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
-public class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;
