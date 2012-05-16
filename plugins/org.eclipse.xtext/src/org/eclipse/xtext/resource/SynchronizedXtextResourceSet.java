@@ -18,6 +18,13 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet {
 	private final Object lock = new Object();
 
 	@Override
+	public Resource getResourceWithoutNormalization(URI uri, boolean loadOnDemand) {
+		synchronized (lock) {
+			return super.getResourceWithoutNormalization(uri, loadOnDemand);
+		}
+	}
+	
+	@Override
 	public Resource getResource(URI uri, boolean loadOnDemand) {
 		synchronized (lock) {
 			return super.getResource(uri, loadOnDemand);
