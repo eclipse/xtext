@@ -593,6 +593,15 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	@Ignore
+	@Test def void testFeatureCall_13_4() throws Exception {
+		"{ var it = newArrayList('').map(s|1).toList() it.map(i|i+1) }".resolvesTo("List<Integer>")
+	}
+	
+	@Test def void testFeatureCall_13_5() throws Exception {
+		"{ var it = newArrayList('').map(s|1).toList() it }".resolvesTo("List<Integer>")
+	}
+	
+	@Ignore
 	@Test def void testFeatureCall_14() throws Exception {
 		"newArrayList(newArrayList('').map(s|1))".resolvesTo("ArrayList<List<Integer>>")
 	}
@@ -871,7 +880,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList".resolvesTo("ArrayList<Object>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_02() throws Exception {
 		"{
 			val list = newArrayList
@@ -889,7 +897,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_04() throws Exception {
 		"{
 			val list = newArrayList
@@ -927,6 +934,34 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 			list.addAll('')
 			secondList
 		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Ignore
+	@Test def void testDeferredTypeArgumentResolution_08() throws Exception {
+		"{
+			val list = newArrayList
+			val Iterable<String> sublist = list.subList(1, 1)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_09() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(new Integer(0))
+			list.add(new Integer(0).doubleValue)
+			list
+		}".resolvesTo("ArrayList<Number & Comparable<?>>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_10() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(new Integer(0))
+			list.get(0).toString
+			list.add(new Integer(0).doubleValue)
+			list
+		}".resolvesTo("ArrayList<Integer>")
 	}
 
 	@Ignore

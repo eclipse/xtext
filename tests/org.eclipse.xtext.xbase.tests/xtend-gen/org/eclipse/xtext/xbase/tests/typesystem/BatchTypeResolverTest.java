@@ -623,6 +623,17 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Ignore
   @Test
+  public void testFeatureCall_13_4() throws Exception {
+    this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it.map(i|i+1) }", "List<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_13_5() throws Exception {
+    this.resolvesTo("{ var it = newArrayList(\'\').map(s|1).toList() it }", "List<Integer>");
+  }
+  
+  @Ignore
+  @Test
   public void testFeatureCall_14() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
   }
@@ -881,7 +892,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList", "ArrayList<Object>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_02() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = list.get(0)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
@@ -893,7 +903,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = list.head\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_04() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
@@ -915,6 +924,22 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testDeferredTypeArgumentResolution_07() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore
+  @Test
+  public void testDeferredTypeArgumentResolution_08() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval Iterable<String> sublist = list.subList(1, 1)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_09() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_10() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.get(0).toString\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Integer>");
   }
   
   @Ignore

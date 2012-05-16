@@ -144,7 +144,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, reentrantTypeResolver, this, expression);
 	}
 	
-	protected abstract void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType);
+	protected abstract JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType);
 	
 	public AbstractTypeComputationState fork() {
 		return this;

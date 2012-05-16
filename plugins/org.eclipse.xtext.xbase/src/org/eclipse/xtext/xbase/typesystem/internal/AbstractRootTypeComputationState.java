@@ -40,8 +40,8 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	protected abstract XExpression getRootExpression();
 	
 	@Override
-	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		getResolvedTypes().acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
+	protected JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		return getResolvedTypes().acceptType(getRootExpression(), expectation, type, conformanceHint, returnType);
 	}
 	
 	@Override
