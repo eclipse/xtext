@@ -31,8 +31,8 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	}
 
 	@Override
-	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		getResolvedTypes().acceptType(expression, expectation, type, conformanceHint, returnType);
+	protected JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		return getResolvedTypes().acceptType(expression, expectation, type, conformanceHint, returnType);
 	}
 
 	@Override

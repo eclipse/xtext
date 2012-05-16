@@ -42,8 +42,8 @@ public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
 	}
 
 	@Override
-	public void acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type,
+	public JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type,
 			ConformanceHint conformanceHint, boolean returnType) {
-		getParent().acceptType(expression, expectation, type, conformanceHint, returnType);
+		return getParent().acceptType(expression, expectation, type, conformanceHint, returnType);
 	}
 }

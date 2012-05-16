@@ -47,9 +47,9 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	}
 	
 	@Override
-	protected void acceptType(AbstractTypeExpectation expectation, JvmTypeReference type,
+	protected JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type,
 			ConformanceHint conformanceHint, boolean returnType) {
-		getParent().acceptType(expectation, type, conformanceHint, returnType);
+		return getParent().acceptType(expectation, type, conformanceHint, returnType);
 	}
 
 }

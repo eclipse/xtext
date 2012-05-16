@@ -200,7 +200,7 @@ public class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	protected void acceptType(final XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+	protected JvmTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
 //		AbstractTypeComputationState state = expectation.getState();
 		// expectation is type parameter - type is actual - bind type
 		// no expectation, type wrap type and add pending type parameter data that should be resolved later on demand
@@ -228,34 +228,25 @@ public class ResolvedTypes implements IResolvedTypes {
 				if (equivalent != null)
 					return visit(equivalent, visiting);
 				XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-				result.setTypeProvider(new AbstractReentrantTypeReferenceProvider() {
-					@Override
-					protected JvmTypeReference doGetTypeReference() {
-						JvmTypeReference originalEquivalent = reference.getEquivalent();
-						JvmTypeReference result = substitute(originalEquivalent);
-						return result;
-					}
-				});
+				if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+					result.setTypeProvider(reference.getTypeProvider());
+				} else {
+					result.setTypeProvider(new AbstractReentrantTypeReferenceProvider() {
+						@Override
+						protected JvmTypeReference doGetTypeReference() {
+							JvmTypeReference originalEquivalent = reference.getEquivalent();
+							JvmTypeReference result = substitute(originalEquivalent);
+							return result;
+						}
+					});
+				}
 				return result;
 			}
 			
-			@Override
-			public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference,
-					Set<JvmTypeParameter> visiting) {
-				if (reference instanceof XComputedTypeReference) {
-					XComputedTypeReference casted = (XComputedTypeReference) reference;
-					JvmTypeReference equivalent = (JvmTypeReference) casted.eGet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, false);
-					if (equivalent != null)
-						return visit(equivalent, visiting);
-					XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-					result.setTypeProvider(casted.getTypeProvider());
-					return result;
-				}
-				return super.doVisitSpecializedTypeReference(reference, visiting);
-			}
 		};
 		JvmTypeReference actualType = substitutor.substitute(type);
 		ensureExpressionTypesMapExists().put(expression, new TypeData(expression, expectation, actualType, conformanceHint, returnType));
+		return actualType;
 	}
 
 	protected Map<JvmIdentifiableElement, JvmTypeReference> ensureTypesMapExists() {

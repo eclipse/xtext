@@ -8,15 +8,16 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,19 +27,37 @@ public class UnboundTypeParameter extends AbstractReentrantTypeReferenceProvider
 	private final XExpression expression;
 	private final JvmTypeParameter typeParameter;
 	private final CommonTypeComputationServices services;
+	private final List<JvmTypeReference> expectations;
+	private JvmTypeReference boundTo;
 	
 	public UnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter, CommonTypeComputationServices services) {
 		this.expression = expression;
 		this.typeParameter = typeParameter;
 		this.services = services;
+		this.expectations = Lists.newArrayList();
 	}
 	
 	@Override
 	protected JvmTypeReference doGetTypeReference() {
+		if (boundTo != null) {
+			return boundTo;
+		}
+		if (!expectations.isEmpty()) {
+			JvmTypeReference superType = services.getTypeConformanceComputer().getCommonSuperType(expectations);
+			if (superType != null) {
+				boundTo = superType;
+				return superType;
+			}
+		}
 		UnboundTypeParameterSubstitutor unboundSubstitutor = new UnboundTypeParameterSubstitutor(
 				Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services);
 		JvmTypeReference substitute = unboundSubstitutor.substitute(services.getTypeReferences().createTypeRef(typeParameter));
+		boundTo = substitute;
 		return substitute;
+	}
+	
+	public void acceptHint(JvmTypeReference expectedType) {
+		expectations.add(expectedType);
 	}
 	
 	public XExpression getExpression() {
