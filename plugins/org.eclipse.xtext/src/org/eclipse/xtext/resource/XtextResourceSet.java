@@ -57,47 +57,43 @@ public class XtextResourceSet extends ResourceSetImpl {
      * 
 	 * @since 2.3
 	 */
-    public Resource getResourceWithoutNormalization(URI uri, boolean loadOnDemand) {
-    	Map<URI, Resource> map = getURIResourceMap();
-        if (map != null)
-        {
-          Resource resource = map.get(uri);
-          if (resource != null)
-          {
-            if (loadOnDemand && !resource.isLoaded())
-            {
-              demandLoadHelper(resource);
-            }
-            return resource;
-          }
-        }
+	public Resource getResourceWithoutNormalization(URI uri, boolean loadOnDemand) {
+		Map<URI, Resource> map = getURIResourceMap();
+		if (map == null)
+			throw new IllegalStateException("A fully maintained uri resource map is required, but getURIResourceMap() was null.");
+		Resource resource = map.get(uri);
+		if (resource != null) {
+			if (loadOnDemand && !resource.isLoaded()) {
+				demandLoadHelper(resource);
+			}
+			return resource;
+		}
 
-        if (loadOnDemand)
-        {
-          Resource resource = demandCreateResource(uri);
-          if (resource == null)
-          {
-            throw new RuntimeException("Cannot create a resource for '" + uri + "'; a registered resource factory is needed");
-          }
+		if (loadOnDemand) {
+			resource = demandCreateResource(uri);
+			if (resource == null) {
+				throw new RuntimeException("Cannot create a resource for '" + uri
+						+ "'; a registered resource factory is needed");
+			}
 
-          demandLoadHelper(resource);
+			demandLoadHelper(resource);
 
-          if (map != null)
-          {
-            map.put(uri, resource);
-          }
-          return resource;
-        }
+			map.put(uri, resource);
+			return resource;
+		}
 
-        return null;
-    }
+		return null;
+	}
     
-    @Override
-    public Resource createResource(URI uri, String contentType) {
-    	final Resource resource = super.createResource(uri, contentType);
-    	getURIResourceMap().put(uri, resource);
+	@Override
+	public Resource createResource(URI uri, String contentType) {
+		final Resource resource = super.createResource(uri, contentType);
+		Map<URI, Resource> map = getURIResourceMap();
+		if (map != null) {
+			map.put(uri, resource);
+		}
 		return resource;
-    }
+	}
     
     @Override
     public URIConverter getURIConverter() {
