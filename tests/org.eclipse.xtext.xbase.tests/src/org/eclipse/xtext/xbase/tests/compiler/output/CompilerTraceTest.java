@@ -12,10 +12,14 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
+import org.eclipse.xtext.builder.trace.OffsetBasedLocationInResource;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -60,6 +64,20 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		@NonNull
 		public IStorage getLocalStorage() {
 			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		@Nullable
+		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion) {
+			URI path = location.getPath();
+			if (path == null)
+				path = traceRegion.getAssociatedPath();
+			String projectName = location.getProjectName();
+			if (projectName == null)
+				projectName = traceRegion.getAssociatedProjectName();
+			if(path == null /* || projectName == null */) // we don't use a real IProject in this test
+				return null;
+			return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, projectName, this);
 		}
 		
 	}
