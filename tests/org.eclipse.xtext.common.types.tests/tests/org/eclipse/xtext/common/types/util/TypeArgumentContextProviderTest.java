@@ -850,17 +850,17 @@ public class TypeArgumentContextProviderTest extends Assert {
 		JvmGenericType collection = (JvmGenericType) typeProvider.findTypeByName(Collection.class.getCanonicalName());
 		JvmTypeParameter collectionTypeParam = collection.getTypeParameters().get(0);
 		JvmTypeReference boundCollectionTypeArgument = stringListContext.getBoundArgument(collectionTypeParam);
-		assertEquals("JvmWildcardTypeReference: ? extends java.lang.String", boundCollectionTypeArgument.toString());
+		assertEquals("? extends java.lang.String", boundCollectionTypeArgument.getIdentifier());
 		
 		JvmGenericType iterable = (JvmGenericType) typeProvider.findTypeByName(Iterable.class.getCanonicalName());
 		JvmTypeParameter iterableTypeParam = iterable.getTypeParameters().get(0);
 		JvmTypeReference boundIterableTypeArgument = stringListContext.getBoundArgument(iterableTypeParam);
-		assertEquals("JvmWildcardTypeReference: ? extends java.lang.String", boundIterableTypeArgument.toString());
+		assertEquals("? extends java.lang.String", boundIterableTypeArgument.getIdentifier());
 		
 		JvmOperation iterator = (JvmOperation) iterable.getMembers().get(0);
 		JvmTypeReference iteratorReturnType = iterator.getReturnType();
 		JvmTypeReference boundIteratorTypeArgument = stringListContext.resolve(iteratorReturnType);
-		assertEquals("JvmParameterizedTypeReference: java.util.Iterator<? extends java.lang.String>", boundIteratorTypeArgument.toString());
+		assertEquals("java.util.Iterator<? extends java.lang.String>", boundIteratorTypeArgument.getIdentifier());
 	}
 	
 	@Test public void testResolve_0() throws Exception {
