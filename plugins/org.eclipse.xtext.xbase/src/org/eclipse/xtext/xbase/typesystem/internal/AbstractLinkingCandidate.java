@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,13 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
@@ -33,8 +36,10 @@ import org.eclipse.xtext.xbase.typesystem.util.AbstractTypeReferencePairWalker;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -49,6 +54,93 @@ import com.google.common.collect.Maps;
  */
 public abstract class AbstractLinkingCandidate implements ILinkingCandidate, ObservableTypeExpectation.Observer {
 	
+	protected static class UnboundTypeParametersAwareCollector extends ActualTypeArgumentCollector {
+		protected UnboundTypeParametersAwareCollector(List<JvmTypeParameter> parametersToBeMapped,
+				CommonTypeComputationServices services) {
+			super(parametersToBeMapped, services);
+		}
+
+		@Override
+		public Void doVisitComputedTypeReference(XComputedTypeReference reference,
+				JvmTypeReference param) {
+			// TODO Auto-generated method stub
+			return super.doVisitComputedTypeReference(reference, param);
+		}
+
+		@Override
+		protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> mapping) {
+			return new UnboundTypeParameterAwareSubstitutor(mapping, getServices());
+		}
+
+		@Override
+		protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+			return new ParameterizedTypeReferenceTraverser() {
+				@Override
+				public Void doVisitComputedTypeReference(XComputedTypeReference reference,
+						JvmParameterizedTypeReference declaration) {
+					if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+						UnboundTypeParameter unboundTypeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+						JvmType type = declaration.getType();
+						if (type instanceof JvmTypeParameter) {
+							if (type != unboundTypeParameter.getTypeParameter() && getParametersToProcess().contains(type)) {
+								JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+								processTypeParameter(typeParameter, reference);
+							} else {
+								// register synonym type param resolution et al for the actual type in the given UnboundTypeParameter
+							}
+						} else {
+							// TODO what kind of hint is that? upper / lower?
+							unboundTypeParameter.acceptHint(declaration);
+						}
+						return null;
+					}
+					return super.doVisitComputedTypeReference(reference, declaration);
+				}
+			};
+		}
+
+		@Override
+		protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
+				Map<JvmTypeParameter, JvmTypeReference> mapping, Collection<JvmTypeParameter> visited) {
+			for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: mapping.entrySet()) {
+				JvmTypeReference reference = entry.getValue();
+				JvmType type = null;
+				if (reference instanceof XComputedTypeReference) {
+					IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) reference).getTypeProvider();
+					if (typeProvider instanceof UnboundTypeParameter) {
+						type = ((UnboundTypeParameter) typeProvider).getTypeParameter();
+					}
+				} else {
+					type = reference.getType();
+				}
+				if (parameter == type) {
+					if (visited.add(entry.getKey()))
+						return entry.getKey();
+					return null;
+				}
+			}
+			return null;
+		}
+	}
+
+	protected static class UnboundTypeParameterAwareSubstitutor extends TypeParameterSubstitutor {
+		protected UnboundTypeParameterAwareSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping,
+				CommonTypeComputationServices services) {
+			super(typeParameterMapping, services);
+		}
+
+		@Override
+		public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
+				Set<JvmTypeParameter> param) {
+			if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+				XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+				result.setTypeProvider(reference.getTypeProvider());
+				return result;
+			}
+			return super.doVisitComputedTypeReference(reference, param);
+		}
+	}
+
 	private final IEObjectDescription description;
 	private final AbstractTypeComputationState state;
 	private final ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping;
@@ -72,14 +164,12 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 			XComputedTypeReference computedTypeReference = (XComputedTypeReference) expectedType;
 			if (computedTypeReference.getTypeProvider() instanceof UnboundTypeParameter) {
 				UnboundTypeParameter unboundTypeParameter = (UnboundTypeParameter) computedTypeReference.getTypeProvider();
-				Primitives primitives = state.getServices().getPrimitives();
-				JvmTypeReference wrappedActual = primitives.asWrapperTypeIfPrimitive(actual);
+				JvmTypeReference wrappedActual = asWrapperType(actual);
 				unboundTypeParameter.acceptHint(wrappedActual);
 			}
 		} else if (expectedType.getType() instanceof JvmTypeParameter) {
 			if (!(actual instanceof JvmAnyTypeReference)) {
-				Primitives primitives = state.getServices().getPrimitives();
-				JvmTypeReference wrappedActual = primitives.asWrapperTypeIfPrimitive(actual);
+				JvmTypeReference wrappedActual = asWrapperType(actual);
 				typeParameterMapping.put((JvmTypeParameter) expectedType.getType(), new BoundTypeArgument(wrappedActual, BoundTypeArgumentSource.INFERRED, new Object(), VarianceInfo.OUT, VarianceInfo.OUT));
 			}
 		} else {
@@ -96,8 +186,8 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 		for(ITypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
-			TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(
-					getDeclaratorParameterMapping(), state.getServices()) {
+			TypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(getDeclaratorParameterMapping(), state.getServices()) {
+				
 				@Override
 				public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
 						Set<JvmTypeParameter> param) {
@@ -108,6 +198,14 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 					}
 					return super.doVisitComputedTypeReference(reference, param);
 				}
+				
+				@Override
+				protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
+					XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+					result.setTypeProvider(new UnboundTypeParameter(getExpression(), type, getServices()));
+					return result;
+				}
+				
 			};
 			substitutor.enhanceMapping(getFeatureTypeParameterMapping());
 			// TODO enhance with expectation
@@ -117,24 +215,109 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 		}
 	}
 	
+	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
+		if (potentialPrimitive instanceof XComputedTypeReference) {
+			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter){
+				return potentialPrimitive;
+			}
+		}
+		Primitives primitives = state.getServices().getPrimitives();
+		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
+		return result;
+	}
+	
+	protected JvmTypeParameter getTypeParameter(JvmTypeReference referenceToTypeParameter) {
+		if (referenceToTypeParameter instanceof XComputedTypeReference) {
+			if (((XComputedTypeReference) referenceToTypeParameter).getTypeProvider() instanceof UnboundTypeParameter){
+				return null;
+			}
+			return getTypeParameter(((XComputedTypeReference) referenceToTypeParameter).getEquivalent());
+		}
+		JvmType result = referenceToTypeParameter.getType();
+		if (result instanceof JvmTypeParameter) {
+			return (JvmTypeParameter) result;
+		}
+		return null;
+	}
+	
 	protected void deferredBindTypeArguments(ITypeExpectation expectation, JvmTypeReference type) {
 		JvmTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) {
-			if (type instanceof XComputedTypeReference) {
-				IJvmTypeReferenceProvider typeReferenceProvider = ((XComputedTypeReference) type).getTypeProvider();
-				if (typeReferenceProvider instanceof UnboundTypeParameter) {
-					UnboundTypeParameter unbound = (UnboundTypeParameter) typeReferenceProvider;
-					unbound.acceptHint(expectedType);
+			new AbstractTypeReferencePairWalker(getState().getServices()) {
+				
+				@Override
+				protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> mapping) {
+					return new UnboundTypeParameterAwareSubstitutor(mapping, getServices());
 				}
-			}
-//			new AbstractTypeReferencePairWalker() {
-//				
-//				@Override
-//				protected void processTypeParameter(JvmTypeParameter typeParameter, JvmTypeReference reference) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//			};
+				
+				@Override
+				protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
+					return new WildcardTypeReferenceTraverser() {
+						@Override
+						public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmWildcardTypeReference declaration) {
+							if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+								return super.doVisitTypeReference(reference, declaration);
+							}
+							return super.doVisitComputedTypeReference(reference, declaration);
+						}
+					};
+				}
+				
+				@Override
+				public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmTypeReference param) {
+					if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+						UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+						JvmTypeReference wrapped =  asWrapperType(param);
+						typeParameter.acceptHint(wrapped);
+						return null;
+					}
+					return super.doVisitComputedTypeReference(reference, param);
+				}
+
+				@Override
+				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+					return new ParameterizedTypeReferenceTraverser() {
+						@Override
+						public Void doVisitComputedTypeReference(XComputedTypeReference reference,
+								JvmParameterizedTypeReference declaration) {
+							if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+								UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+								JvmTypeReference wrapped =  asWrapperType(declaration);
+								typeParameter.acceptHint(wrapped);
+								return null;
+							}
+							return super.doVisitComputedTypeReference(reference, declaration);
+						}
+						@Override
+						protected boolean allowToVisitTwice() {
+							return false;
+						}
+					};
+				}
+
+				@Override
+				protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
+						Map<JvmTypeParameter, JvmTypeReference> mapping, Collection<JvmTypeParameter> visited) {
+					for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: mapping.entrySet()) {
+						JvmTypeReference reference = entry.getValue();
+						JvmType type = null;
+						if (reference instanceof XComputedTypeReference) {
+							IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) reference).getTypeProvider();
+							if (typeProvider instanceof UnboundTypeParameter) {
+								type = ((UnboundTypeParameter) typeProvider).getTypeParameter();
+							}
+						} else {
+							type = reference.getType();
+						}
+						if (parameter == type) {
+							if (visited.add(entry.getKey()))
+								return entry.getKey();
+							return null;
+						}
+					}
+					return null;
+				}
+			}.processPairedReferences(expectedType, type);
 		}
 	}
 
@@ -166,19 +349,7 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 				JvmFormalParameter parameter = parameters.get(i);
 				XExpression argument = arguments.get(i);
 				JvmTypeReference parameterType = parameter.getParameterType();
-				TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(
-						getDeclaratorParameterMapping(), state.getServices()) {
-					@Override
-					public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
-							Set<JvmTypeParameter> param) {
-						if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
-							XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-							result.setTypeProvider(reference.getTypeProvider());
-							return result;
-						}
-						return super.doVisitComputedTypeReference(reference, param);
-					}
-				};
+				TypeParameterSubstitutor substitutor = new UnboundTypeParameterAwareSubstitutor(getDeclaratorParameterMapping(), state.getServices());
 				substitutor.enhanceMapping(getFeatureTypeParameterMapping());
 				// TODO enhance with expectation
 				JvmTypeReference substitute = substitutor.substitute(parameterType);
@@ -234,10 +405,12 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 		JvmIdentifiableElement feature = getFeature();
 		// TODO this(..) and super(..) for generic types
 		if (feature instanceof JvmTypeParameterDeclarator) {
-			ActualTypeArgumentCollector implementation = new ActualTypeArgumentCollector(
-					((JvmTypeParameterDeclarator) feature).getTypeParameters(), state.getServices());
-			implementation.populateTypeParameterMapping(declaredType, actualType);
-			typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
+			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
+			if (!typeParameters.isEmpty()) {
+				ActualTypeArgumentCollector implementation = new UnboundTypeParametersAwareCollector(typeParameters, state.getServices());
+				implementation.populateTypeParameterMapping(declaredType, actualType);
+				typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
+			}
 		}
 	}
 

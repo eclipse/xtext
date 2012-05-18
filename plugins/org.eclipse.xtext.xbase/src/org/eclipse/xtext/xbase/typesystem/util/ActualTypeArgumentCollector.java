@@ -27,9 +27,11 @@ import com.google.common.collect.Sets;
 public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker {
 
 	private final ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping;
+	private final List<JvmTypeParameter> parametersToBeMapped;
 
 	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, CommonTypeComputationServices services) {
-		super(parametersToBeMapped, services);
+		super(services);
+		this.parametersToBeMapped = parametersToBeMapped;
 		typeParameterMapping = ArrayListMultimap.create(parametersToBeMapped.size(), 3);
 	}
 
@@ -56,6 +58,22 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	
 	public ListMultimap<JvmTypeParameter, BoundTypeArgument> rawGetTypeParameterMapping() {
 		return typeParameterMapping;
+	}
+	
+	protected List<JvmTypeParameter> getParametersToProcess() {
+		return parametersToBeMapped;
+	}
+	
+	@Override
+	protected boolean shouldProcess(JvmTypeParameter type) {
+		return parametersToBeMapped.contains(type);
+	}
+	
+	@Override
+	public void processPairedReferences(JvmTypeReference declaredType, JvmTypeReference actualType) {
+		if (parametersToBeMapped.isEmpty())
+			return;
+		super.processPairedReferences(declaredType, actualType);
 	}
 	
 	public ListMultimap<JvmTypeParameter, BoundTypeArgument> getTypeParameterMapping() {

@@ -862,14 +862,12 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList.flatten.toList.<Number>flatten.head".resolvesTo("Number")
 	}
 	
-	@Ignore
 	@Test def void testTypeByTransitiveExpectation_04() throws Exception {
-		"newArrayList.<Set<Number>>flatten.toList.flatten.head".resolvesTo("Number")
+		"newArrayList.<java.util.Set<Number>>flatten.toList.flatten.head".resolvesTo("Number")
 	}
 	
-	@Ignore
 	@Test def void testTypeByTransitiveExpectation_05() throws Exception {
-		"newArrayList.flatten.<Set<Number>>toList.flatten.head".resolvesTo("Number")
+		"newArrayList.flatten.<java.util.Set<Number>>toList.flatten.head".resolvesTo("Number")
 	}
 	
 	@Test def void testTypeByTransitiveExpectation_06() throws Exception {
@@ -888,7 +886,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_03() throws Exception {
 		"{
 			val list = newArrayList
@@ -905,7 +902,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_05() throws Exception {
 		"{
 			val list = newArrayList
@@ -914,29 +910,26 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_06() throws Exception {
 		"{
 			val list = newArrayList
 			val secondList = newArrayList
-			list.addAll('')
+			list.add('')
 			list.addAll(secondList)
 			secondList
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_07() throws Exception {
 		"{
 			val list = newArrayList
 			val secondList = newArrayList
 			list.addAll(secondList)
-			list.addAll('')
+			list.add('')
 			secondList
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_08() throws Exception {
 		"{
 			val list = newArrayList
@@ -945,6 +938,7 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore("TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
 	@Test def void testDeferredTypeArgumentResolution_09() throws Exception {
 		"{
 			val list = newArrayList
@@ -963,7 +957,195 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 			list
 		}".resolvesTo("ArrayList<Integer>")
 	}
+	
+	@Test def void testDeferredTypeArgumentResolution_11() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.get(0))
+			list.add('')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_12() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.get(0))
+			list.add('')
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
 
+	@Test def void testDeferredTypeArgumentResolution_13() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.head)
+			list.add('')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_14() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.head)
+			list.add('')
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_15() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add('')
+			list.add(second.get(0))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_16() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add('')
+			list.add(second.get(0))
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+
+	@Test def void testDeferredTypeArgumentResolution_17() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add('')
+			list.add(second.head)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_18() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add('')
+			list.add(second.head)
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_19() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.get(0))
+			second.add('')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_20() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.get(0))
+			second.add('')
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+
+	@Test def void testDeferredTypeArgumentResolution_21() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.head)
+			second.add('')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_22() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			list.add(second.head)
+			second.add('')
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_23() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			second.add('')
+			list.add(second.get(0))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_24() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			second.add('')
+			list.add(second.get(0))
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+
+	@Test def void testDeferredTypeArgumentResolution_25() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			second.add('')
+			list.add(second.head)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_26() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList
+			second.add('')
+			list.add(second.head)
+			second
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_27() throws Exception {
+		"{
+			val list = newArrayList(newArrayList)
+			val Iterable<String> s = list.head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Ignore
+	@Test def void testDeferredTypeArgumentResolution_28() throws Exception {
+		"{
+			val list = newArrayList(newArrayList)
+			val String s = list.flatten.head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Ignore
+	@Test def void testDeferredTypeArgumentResolution_30() throws Exception {
+		"{
+			val list = newArrayList
+			val second = newArrayList(newArrayList)
+			val String s = second.flatten.head
+			list.add(second.head)
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
 	@Ignore
 	@Test def void testFeatureCallWithOperatorOverloading_2() throws Exception {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next".resolvesTo("boolean")
