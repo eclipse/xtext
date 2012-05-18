@@ -45,7 +45,7 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
 		result.append(": ");
-		result.append(getIdentifier());
+		result.append(NameConcatHelper.computeFor(this, '$', NameConcatHelper.NameType.TO_STRING));
 		return result.toString();
 	}
 	

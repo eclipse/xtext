@@ -24,6 +24,7 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 	
 	public boolean isVoidTypeAllowed() {
 		JvmTypeReference expectedType = getExpectedType();
+		// TODO avoid resolving the type ref
 		if (expectedType != null && Void.TYPE.getName().equals(expectedType.getSimpleName())) {
 			return true;
 		}
@@ -39,7 +40,7 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		JvmTypeReference expectedType = getExpectedType();
 		String expectedTypeString = "";
 		if (expectedType != null) {
-			expectedTypeString = expectedType.getSimpleName();
+			expectedTypeString = expectedType.toString();
 		} else if (isNoTypeExpectation()) {
 			expectedTypeString = "<no expectation>";
 		} else if (isVoidTypeAllowed()) {

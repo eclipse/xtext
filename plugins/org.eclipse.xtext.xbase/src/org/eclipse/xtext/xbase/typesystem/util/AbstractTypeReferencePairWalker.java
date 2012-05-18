@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitorWithParameter;
 import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitorWithParameter;
 
 import com.google.common.collect.Sets;
@@ -32,8 +30,8 @@ import com.google.common.collect.Sets;
  */
 public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeReferenceVisitorWithParameter<JvmTypeReference, Void> {
 
-	protected class ArrayTypeReferenceCollector extends
-			AbstractTypeReferenceVisitorWithParameter.InheritanceAware<JvmGenericArrayTypeReference, Void> {
+	protected class ArrayTypeReferenceTraverser extends
+			AbstractXtypeReferenceVisitorWithParameter<JvmGenericArrayTypeReference, Void> {
 		@Override
 		public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, JvmGenericArrayTypeReference declaration) {
 			for (JvmTypeReference component : reference.getReferences())
@@ -57,8 +55,8 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 		}
 	}
 
-	protected class WildcardTypeReferenceCollector extends
-			AbstractTypeReferenceVisitorWithParameter.InheritanceAware<JvmWildcardTypeReference, Void> {
+	protected class WildcardTypeReferenceTraverser extends
+			AbstractXtypeReferenceVisitorWithParameter<JvmWildcardTypeReference, Void> {
 		@Override
 		protected Void handleNullReference(JvmWildcardTypeReference declaration) {
 			return null;
@@ -120,8 +118,8 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 		}
 	}
 
-	protected class ParameterizedTypeReferenceCollector extends
-			AbstractTypeReferenceVisitorWithParameter.InheritanceAware<JvmParameterizedTypeReference, Void> {
+	protected class ParameterizedTypeReferenceTraverser extends
+			AbstractXtypeReferenceVisitorWithParameter<JvmParameterizedTypeReference, Void> {
 		@Override
 		public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, JvmParameterizedTypeReference declaration) {
 			for (JvmTypeReference component : reference.getReferences())
@@ -133,60 +131,59 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 		public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, JvmParameterizedTypeReference declaration) {
 			final JvmType type = declaration.getType();
 			if (type instanceof JvmTypeParameter) {
-				if (type != reference.getType() && parametersToProcess.contains(type)) {
+				if (type != reference.getType() && shouldProcess((JvmTypeParameter) type)) {
 					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 					processTypeParameter(typeParameter, reference);
 				}
 			} else if (type instanceof JvmTypeParameterDeclarator
 					&& !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
-				Map<JvmTypeParameter, JvmTypeReference> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
-				TypeParameterSubstitutor actualSubstitutor = new TypeParameterSubstitutor(actualMapping, services);
-				Map<JvmTypeParameter, JvmTypeReference> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
-				TypeParameterSubstitutor declaredSubstitutor = new TypeParameterSubstitutor(declaredMapping, services);
-				Collection<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
-				Collection<JvmTypeParameter> visited = Sets.newHashSet();
-				for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
-					if (visited.add(actualBoundParameter)) {
-						JvmTypeReference declared = declaredMapping.get(actualBoundParameter);
-						while(declared == null && actualBoundParameter != null) {
-							actualBoundParameter = findMappedParameter(actualBoundParameter, actualMapping, visited);
-							declared = declaredMapping.get(actualBoundParameter);
-						}
-						if (declared != null) {
-							if (declared.getType() instanceof JvmTypeParameter) {
-								JvmTypeParameter declaredType = (JvmTypeParameter) declared.getType();
-								if (!parametersToProcess.contains(declaredType)) {
-									if (actualBoundParameters.contains(declaredType) && !visited.add(declaredType))
-										continue;
-									declared = declaredSubstitutor.substitute(declared);
-								}
-							}
-							JvmTypeReference actual = actualSubstitutor.substitute(actualMapping.get(actualBoundParameter));
-							outerVisit(declared, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
-						}
-					}
-				}
+				doVisitSuperTypesWithMatchingParams(reference, declaration);
 			}
 			return null;
 		}
 
-		private JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
-				Map<JvmTypeParameter, JvmTypeReference> mapping, Collection<JvmTypeParameter> visited) {
-			for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: mapping.entrySet()) {
-				if (parameter == entry.getValue().getType()) {
-					if (visited.add(entry.getKey()))
-						return entry.getKey();
-					return null;
+		protected void doVisitSuperTypesWithMatchingParams(JvmParameterizedTypeReference reference,
+				JvmParameterizedTypeReference declaration) {
+			Map<JvmTypeParameter, JvmTypeReference> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
+			TypeParameterSubstitutor actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
+			Map<JvmTypeParameter, JvmTypeReference> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
+			TypeParameterSubstitutor declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
+			Collection<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
+			Collection<JvmTypeParameter> visited = Sets.newHashSet();
+			for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
+				if (visited.add(actualBoundParameter)) {
+					JvmTypeReference declared = declaredMapping.get(actualBoundParameter);
+					while(declared == null && actualBoundParameter != null) {
+						actualBoundParameter = findMappedParameter(actualBoundParameter, actualMapping, visited);
+						declared = declaredMapping.get(actualBoundParameter);
+					}
+					if (declared != null) {
+						if (declared.getType() instanceof JvmTypeParameter) {
+							JvmTypeParameter declaredType = (JvmTypeParameter) declared.getType();
+							if (!shouldProcess(declaredType)) {
+								if (actualBoundParameters.contains(declaredType) && !visited.add(declaredType))
+									continue;
+								declared = declaredSubstitutor.substitute(declared);
+							} else if (!allowToVisitTwice() && !visited.add(declaredType)) {
+								continue;
+							}
+						}
+						JvmTypeReference actual = actualSubstitutor.substitute(actualMapping.get(actualBoundParameter));
+						outerVisit(declared, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+					}
 				}
 			}
-			return null;
+		}
+		
+		protected boolean allowToVisitTwice() {
+			return true;
 		}
 
 		@Override
 		public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, JvmParameterizedTypeReference declaration) {
 			final JvmType type = declaration.getType();
 			if (type instanceof JvmTypeParameter) {
-				if (parametersToProcess.contains(type)) {
+				if (shouldProcess((JvmTypeParameter) type)) {
 					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 					processTypeParameter(typeParameter, reference);
 				}
@@ -219,38 +216,40 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 
 	private final CommonTypeComputationServices services;
 	
-	private final ParameterizedTypeReferenceCollector parameterizedTypeReferenceCollector;
-	private final WildcardTypeReferenceCollector wildcardTypeReferenceCollector;
-	private final ArrayTypeReferenceCollector arrayTypeReferenceCollector;
+	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;
+	private final WildcardTypeReferenceTraverser wildcardTypeReferenceTraverser;
+	private final ArrayTypeReferenceTraverser arrayTypeReferenceTraverser;
 	
-	private final List<JvmTypeParameter> parametersToProcess;
-
 	private VarianceInfo expectedVariance;
 
 	private VarianceInfo actualVariance;
 
 	private Object origin;
 	
-	protected AbstractTypeReferencePairWalker(List<JvmTypeParameter> parametersToProcess, CommonTypeComputationServices services) {
-		this.parametersToProcess = parametersToProcess;
+	protected AbstractTypeReferencePairWalker(CommonTypeComputationServices services) {
 		this.services = services;
-		parameterizedTypeReferenceCollector = createParameterizedTypeReferenceCollector();
-		wildcardTypeReferenceCollector = createWildcardTypeReferenceCollector();
-		arrayTypeReferenceCollector = createArrayTypeReferenceCollector();
+		parameterizedTypeReferenceTraverser = createParameterizedTypeReferenceTraverser();
+		wildcardTypeReferenceTraverser = createWildcardTypeReferenceTraverser();
+		arrayTypeReferenceTraverser = createArrayTypeReferenceTraverser();
 	}
 	
-	protected abstract void processTypeParameter(JvmTypeParameter typeParameter, JvmTypeReference reference);
-
-	protected ArrayTypeReferenceCollector createArrayTypeReferenceCollector() {
-		return new ArrayTypeReferenceCollector();
+	protected void processTypeParameter(JvmTypeParameter typeParameter, JvmTypeReference reference) {
+	}
+	
+	protected boolean shouldProcess(JvmTypeParameter type) {
+		return true;
 	}
 
-	protected WildcardTypeReferenceCollector createWildcardTypeReferenceCollector() {
-		return new WildcardTypeReferenceCollector();
+	protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
+		return new ArrayTypeReferenceTraverser();
 	}
 
-	protected ParameterizedTypeReferenceCollector createParameterizedTypeReferenceCollector() {
-		return new ParameterizedTypeReferenceCollector();
+	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
+		return new WildcardTypeReferenceTraverser();
+	}
+
+	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+		return new ParameterizedTypeReferenceTraverser();
 	}
 	
 	@Override
@@ -273,18 +272,18 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 	@Override
 	public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference declaredReference,
 			JvmTypeReference param) {
-		return parameterizedTypeReferenceCollector.visit(param, declaredReference);
+		return parameterizedTypeReferenceTraverser.visit(param, declaredReference);
 	}
 
 	@Override
 	public Void doVisitWildcardTypeReference(JvmWildcardTypeReference declaredReference, JvmTypeReference param) {
-		return wildcardTypeReferenceCollector.visit(param, declaredReference);
+		return wildcardTypeReferenceTraverser.visit(param, declaredReference);
 	}
 
 	@Override
 	public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference declaredReference,
 			JvmTypeReference param) {
-		return arrayTypeReferenceCollector.visit(param, declaredReference);
+		return arrayTypeReferenceTraverser.visit(param, declaredReference);
 	}
 
 	protected Void outerVisit(JvmTypeReference reference, JvmTypeReference parameter, Object origin, VarianceInfo expectedVariance, VarianceInfo actualVariance) {
@@ -308,13 +307,7 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 	}
 
 	public void processPairedReferences(JvmTypeReference declaredType, JvmTypeReference actualType) {
-		if (parametersToProcess.isEmpty())
-			return;
 		outerVisit(declaredType, actualType, declaredType, VarianceInfo.OUT, VarianceInfo.OUT);
-	}
-	
-	protected List<JvmTypeParameter> getParametersToProcess() {
-		return parametersToProcess;
 	}
 	
 	protected CommonTypeComputationServices getServices() {
@@ -329,5 +322,23 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 	
 	protected Object getOrigin() {
 		return origin;
+	}
+
+	protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> mapping) {
+		return new TypeParameterSubstitutor(mapping, services);
+	}
+	
+	protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
+			Map<JvmTypeParameter, JvmTypeReference> mapping, Collection<JvmTypeParameter> visited) {
+		for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: mapping.entrySet()) {
+			JvmTypeReference reference = entry.getValue();
+			JvmType type = reference.getType();
+			if (parameter == type) {
+				if (visited.add(entry.getKey()))
+					return entry.getKey();
+				return null;
+			}
+		}
+		return null;
 	}
 }
