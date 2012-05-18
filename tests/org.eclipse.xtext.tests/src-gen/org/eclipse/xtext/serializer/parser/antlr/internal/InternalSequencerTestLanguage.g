@@ -590,6 +590,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX28OptionalDoubleParserRuleCall_27_0()); 
+	    }
+		lv_x28_27_0=ruleOptionalDouble		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x28",
+        		lv_x28_27_0, 
+        		"OptionalDouble");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -3580,6 +3599,126 @@ ruleComplex1 returns [EObject current=null]
 )
 )))*)
 ;
+
+
+
+
+
+// Entry rule entryRuleOptionalDouble
+entryRuleOptionalDouble returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOptionalDoubleRule()); }
+	 iv_ruleOptionalDouble=ruleOptionalDouble 
+	 { $current=$iv_ruleOptionalDouble.current; } 
+	 EOF 
+;
+
+// Rule OptionalDouble
+ruleOptionalDouble returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#28' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getOptionalDoubleAccess().getNumberSignDigitTwoDigitEightKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOptionalDoubleAccess().getDouble0DOUBLEParserRuleCall_1_0()); 
+	    }
+		lv_double0_1_0=ruleDOUBLE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOptionalDoubleRule());
+	        }
+       		set(
+       			$current, 
+       			"double0",
+        		lv_double0_1_0, 
+        		"DOUBLE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOptionalDoubleAccess().getDouble1DOUBLEParserRuleCall_2_0_0()); 
+	    }
+		lv_double1_2_0=ruleDOUBLE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOptionalDoubleRule());
+	        }
+       		set(
+       			$current, 
+       			"double1",
+        		lv_double1_2_0, 
+        		"DOUBLE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOptionalDoubleAccess().getDouble2DOUBLEParserRuleCall_2_1_0()); 
+	    }
+		lv_double2_3_0=ruleDOUBLE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOptionalDoubleRule());
+	        }
+       		set(
+       			$current, 
+       			"double2",
+        		lv_double2_3_0, 
+        		"DOUBLE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?)
+;
+
+
+
+
+
+// Entry rule entryRuleDOUBLE
+entryRuleDOUBLE returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDOUBLERule()); } 
+	 iv_ruleDOUBLE=ruleDOUBLE 
+	 { $current=$iv_ruleDOUBLE.current.getText(); }  
+	 EOF 
+;
+
+// Rule DOUBLE
+ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(    this_INT_0=RULE_INT    {
+		$current.merge(this_INT_0);
+    }
+
+    { 
+    newLeafNode(this_INT_0, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_0()); 
+    }
+(
+	kw='.' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getDOUBLEAccess().getFullStopKeyword_1_0()); 
+    }
+    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
+    }
+
+    { 
+    newLeafNode(this_INT_2, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_1_1()); 
+    }
+)?)
+    ;
 
 
 

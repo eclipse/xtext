@@ -287,13 +287,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X27 = 23;
 
   /**
+   * The feature id for the '<em><b>X28</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X28 = 24;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 24;
+  int MODEL_FEATURE_COUNT = 25;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1646,6 +1655,52 @@ public interface SequencertestPackage extends EPackage
   int COMPLEX1_FEATURE_COUNT = 6;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl <em>Optional Double</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getOptionalDouble()
+   * @generated
+   */
+  int OPTIONAL_DOUBLE = 37;
+
+  /**
+   * The feature id for the '<em><b>Double0</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_DOUBLE__DOUBLE0 = 0;
+
+  /**
+   * The feature id for the '<em><b>Double1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_DOUBLE__DOUBLE1 = 1;
+
+  /**
+   * The feature id for the '<em><b>Double2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_DOUBLE__DOUBLE2 = 2;
+
+  /**
+   * The number of structural features of the '<em>Optional Double</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_DOUBLE_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1653,7 +1708,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 37;
+  int DEF_ENUM = 38;
 
 
   /**
@@ -1929,6 +1984,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X27();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX28 <em>X28</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X28</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX28()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X28();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -3105,6 +3171,49 @@ public interface SequencertestPackage extends EPackage
   EAttribute getComplex1_Val6();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble <em>Optional Double</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional Double</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.OptionalDouble
+   * @generated
+   */
+  EClass getOptionalDouble();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble0 <em>Double0</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Double0</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble0()
+   * @see #getOptionalDouble()
+   * @generated
+   */
+  EAttribute getOptionalDouble_Double0();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble1 <em>Double1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Double1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble1()
+   * @see #getOptionalDouble()
+   * @generated
+   */
+  EAttribute getOptionalDouble_Double1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble2 <em>Double2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Double2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble2()
+   * @see #getOptionalDouble()
+   * @generated
+   */
+  EAttribute getOptionalDouble_Double2();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3338,6 +3447,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X27 = eINSTANCE.getModel_X27();
+
+    /**
+     * The meta object literal for the '<em><b>X28</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X28 = eINSTANCE.getModel_X28();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4290,6 +4407,40 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute COMPLEX1__VAL6 = eINSTANCE.getComplex1_Val6();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl <em>Optional Double</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getOptionalDouble()
+     * @generated
+     */
+    EClass OPTIONAL_DOUBLE = eINSTANCE.getOptionalDouble();
+
+    /**
+     * The meta object literal for the '<em><b>Double0</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_DOUBLE__DOUBLE0 = eINSTANCE.getOptionalDouble_Double0();
+
+    /**
+     * The meta object literal for the '<em><b>Double1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_DOUBLE__DOUBLE1 = eINSTANCE.getOptionalDouble_Double1();
+
+    /**
+     * The meta object literal for the '<em><b>Double2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_DOUBLE__DOUBLE2 = eINSTANCE.getOptionalDouble_Double2();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

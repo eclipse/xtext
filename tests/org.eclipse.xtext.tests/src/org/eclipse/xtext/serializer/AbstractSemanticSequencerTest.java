@@ -518,16 +518,35 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 	public void testComplex1a() throws Exception {
 		testSequence("#27 kw1 v1 kw2 v2 kw3 v3 kw4 v4 kw5 v5 kw6 v6");
 	}
-	
+
 	@Test
 	public void testComplex1b() throws Exception {
 		testSequence("#27 kw6 v6");
 	}
-	
+
 	@Test
 	public void testComplex1c() throws Exception {
 		testSequence("#27 kw3 v3 kw4 v4 kw5 v5 kw6 v6");
 	}
 
+	@Test
+	public void testOptionalDouble1_a() throws Exception {
+		testSequence("#28 1 2 3");
+	}
+
+	@Test
+	public void testOptionalDouble1_b() throws Exception {
+		testSequence("#28 0 0 1");
+	}
+
+	@Test
+	public void testOptionalDouble1_c() throws Exception {
+		testSequence("#28 0 0 0");
+	}
+
+	@Test
+	public void testOptionalDouble1_d() throws Exception {
+		testSequence("#28 0");
+	}
 
 }

@@ -359,6 +359,15 @@ public interface SequencertestFactory extends EFactory
   Complex1 createComplex1();
 
   /**
+   * Returns a new object of class '<em>Optional Double</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Optional Double</em>'.
+   * @generated
+   */
+  OptionalDouble createOptionalDouble();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

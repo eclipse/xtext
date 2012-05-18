@@ -27,6 +27,7 @@ import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
 import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
@@ -145,6 +146,12 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 			case SequencertestPackage.OPTIONAL:
 				if(context == grammarAccess.getOptionalRule()) {
 					sequence_Optional(context, (Optional) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.OPTIONAL_DOUBLE:
+				if(context == grammarAccess.getOptionalDoubleRule()) {
+					sequence_OptionalDouble(context, (OptionalDouble) semanticObject); 
 					return; 
 				}
 				else break;
@@ -393,7 +400,8 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         x24=UnorderedGroup | 
 	 *         x25=UnorderedGroupOptional | 
 	 *         x26=UnorderedGroupBoolean | 
-	 *         x27=Complex1
+	 *         x27=Complex1 | 
+	 *         x28=OptionalDouble
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
@@ -424,6 +432,15 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     (val+=ID1 | val+=ID2)
 	 */
 	protected void sequence_MultiTerminals(EObject context, MultiTerminals semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?)
+	 */
+	protected void sequence_OptionalDouble(EObject context, OptionalDouble semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

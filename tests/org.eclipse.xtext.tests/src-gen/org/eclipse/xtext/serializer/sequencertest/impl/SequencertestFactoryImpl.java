@@ -29,6 +29,7 @@ import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
@@ -143,6 +144,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.UNORDERED_GROUP_OPTIONAL: return createUnorderedGroupOptional();
       case SequencertestPackage.UNORDERED_GROUP_BOOLEAN: return createUnorderedGroupBoolean();
       case SequencertestPackage.COMPLEX1: return createComplex1();
+      case SequencertestPackage.OPTIONAL_DOUBLE: return createOptionalDouble();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -587,6 +589,17 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     Complex1Impl complex1 = new Complex1Impl();
     return complex1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OptionalDouble createOptionalDouble()
+  {
+    OptionalDoubleImpl optionalDouble = new OptionalDoubleImpl();
+    return optionalDouble;
   }
 
   /**

@@ -76,6 +76,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX26UnorderedGroupBooleanParserRuleCall_25_0 = (RuleCall)cX26Assignment_25.eContents().get(0);
 		private final Assignment cX27Assignment_26 = (Assignment)cAlternatives.eContents().get(26);
 		private final RuleCall cX27Complex1ParserRuleCall_26_0 = (RuleCall)cX27Assignment_26.eContents().get(0);
+		private final Assignment cX28Assignment_27 = (Assignment)cAlternatives.eContents().get(27);
+		private final RuleCall cX28OptionalDoubleParserRuleCall_27_0 = (RuleCall)cX28Assignment_27.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
@@ -83,14 +85,15 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 		//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
-		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1;
+		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 		//x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
 		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
-		//x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1
+		//x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 |
+		//x28=OptionalDouble
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -254,6 +257,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//Complex1
 		public RuleCall getX27Complex1ParserRuleCall_26_0() { return cX27Complex1ParserRuleCall_26_0; }
+
+		//x28=OptionalDouble
+		public Assignment getX28Assignment_27() { return cX28Assignment_27; }
+
+		//OptionalDouble
+		public RuleCall getX28OptionalDoubleParserRuleCall_27_0() { return cX28OptionalDoubleParserRuleCall_27_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1920,6 +1929,78 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal6IDTerminalRuleCall_4_3_1_0() { return cVal6IDTerminalRuleCall_4_3_1_0; }
 	}
+
+	public class OptionalDoubleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalDouble");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDouble0Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDouble0DOUBLEParserRuleCall_1_0 = (RuleCall)cDouble0Assignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cDouble1Assignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cDouble1DOUBLEParserRuleCall_2_0_0 = (RuleCall)cDouble1Assignment_2_0.eContents().get(0);
+		private final Assignment cDouble2Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cDouble2DOUBLEParserRuleCall_2_1_0 = (RuleCall)cDouble2Assignment_2_1.eContents().get(0);
+		
+		//OptionalDouble:
+		//	"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?;
+		public ParserRule getRule() { return rule; }
+
+		//"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?
+		public Group getGroup() { return cGroup; }
+
+		//"#28"
+		public Keyword getNumberSignDigitTwoDigitEightKeyword_0() { return cNumberSignDigitTwoDigitEightKeyword_0; }
+
+		//double0=DOUBLE
+		public Assignment getDouble0Assignment_1() { return cDouble0Assignment_1; }
+
+		//DOUBLE
+		public RuleCall getDouble0DOUBLEParserRuleCall_1_0() { return cDouble0DOUBLEParserRuleCall_1_0; }
+
+		//(double1=DOUBLE double2=DOUBLE)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//double1=DOUBLE
+		public Assignment getDouble1Assignment_2_0() { return cDouble1Assignment_2_0; }
+
+		//DOUBLE
+		public RuleCall getDouble1DOUBLEParserRuleCall_2_0_0() { return cDouble1DOUBLEParserRuleCall_2_0_0; }
+
+		//double2=DOUBLE
+		public Assignment getDouble2Assignment_2_1() { return cDouble2Assignment_2_1; }
+
+		//DOUBLE
+		public RuleCall getDouble2DOUBLEParserRuleCall_2_1_0() { return cDouble2DOUBLEParserRuleCall_2_1_0; }
+	}
+
+	public class DOUBLEElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DOUBLE");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		
+		//DOUBLE returns ecore::EDouble:
+		//	INT ("." INT)?;
+		public ParserRule getRule() { return rule; }
+
+		//INT ("." INT)?
+		public Group getGroup() { return cGroup; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
+
+		//("." INT)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -2013,6 +2094,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private UnorderedGroupOptionalElements pUnorderedGroupOptional;
 	private UnorderedGroupBooleanElements pUnorderedGroupBoolean;
 	private Complex1Elements pComplex1;
+	private OptionalDoubleElements pOptionalDouble;
+	private DOUBLEElements pDOUBLE;
 	
 	private final Grammar grammar;
 
@@ -2058,7 +2141,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 	//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
-	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1;
+	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -2476,6 +2559,26 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getComplex1Rule() {
 		return getComplex1Access().getRule();
+	}
+
+	//OptionalDouble:
+	//	"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?;
+	public OptionalDoubleElements getOptionalDoubleAccess() {
+		return (pOptionalDouble != null) ? pOptionalDouble : (pOptionalDouble = new OptionalDoubleElements());
+	}
+	
+	public ParserRule getOptionalDoubleRule() {
+		return getOptionalDoubleAccess().getRule();
+	}
+
+	//DOUBLE returns ecore::EDouble:
+	//	INT ("." INT)?;
+	public DOUBLEElements getDOUBLEAccess() {
+		return (pDOUBLE != null) ? pDOUBLE : (pDOUBLE = new DOUBLEElements());
+	}
+	
+	public ParserRule getDOUBLERule() {
+		return getDOUBLEAccess().getRule();
 	}
 
 	//terminal ID:
