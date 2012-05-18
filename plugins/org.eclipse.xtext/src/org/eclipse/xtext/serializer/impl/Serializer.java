@@ -135,7 +135,7 @@ public class Serializer implements ISerializer {
 		if (node == null) {
 			throw new IllegalStateException("Cannot replace an obj that has no associated node");
 		}
-		String text = serialize(obj);
+		String text = serialize(obj, options);
 		return new ReplaceRegion(node.getTotalOffset(), node.getTotalLength(), text);
 	}
 
