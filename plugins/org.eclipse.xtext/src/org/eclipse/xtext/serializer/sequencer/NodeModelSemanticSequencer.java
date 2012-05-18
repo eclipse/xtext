@@ -103,12 +103,13 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
-					if (rc.getRule().getType().getClassifier() instanceof EClass)
+					if (rc.getRule().getType().getClassifier() instanceof EClass) {
 						if (sequenceAcceptor.enterAssignedParserRuleCall(rc, (EObject) value, (ICompositeNode) node)) {
 							createSequence(rc.getRule(), (EObject) value);
 							sequenceAcceptor.leaveAssignedParserRuleCall(rc, (EObject) value);
-						} else
-							sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
+						}
+					} else
+						sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof TerminalRule) {
