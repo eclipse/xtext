@@ -499,11 +499,11 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 
 	public void addPosition(int offset, int length, String... ids) {
-		System.out.print("acceptor.addPosition(" + offset + ", " + length);
-		for(String id: ids) {
-			System.out.print(", \"" + id + "\"");	
-		}
-		System.out.println(");");
+//		System.out.print("acceptor.addPosition(" + offset + ", " + length);
+//		for(String id: ids) {
+//			System.out.print(", \"" + id + "\"");	
+//		}
+//		System.out.println(");");
 		assertTrue("length = " + length, length >= 0);
 		TextRegion region = new TextRegion(offset, length);
 		assertEquals(1, ids.length);
