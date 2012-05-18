@@ -14,7 +14,6 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
-var generateDotDiagram = true
 //var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
 Workflow {
 	bean = StandaloneSetup {
