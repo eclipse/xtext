@@ -44,7 +44,6 @@ class ReflectExtensionsTest {
 			x.invoke('append', "foo")
 			Assert::fail
 		} catch (IllegalStateException e) {
-			println(e.message)
 			// expected
 		}
 	}
