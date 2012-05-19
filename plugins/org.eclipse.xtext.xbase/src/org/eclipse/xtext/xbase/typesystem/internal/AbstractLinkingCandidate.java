@@ -51,6 +51,7 @@ import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO Javadoc
  */
 public abstract class AbstractLinkingCandidate implements ILinkingCandidate, ObservableTypeExpectation.Observer {
 	
@@ -58,13 +59,6 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 		protected UnboundTypeParametersAwareCollector(List<JvmTypeParameter> parametersToBeMapped,
 				CommonTypeComputationServices services) {
 			super(parametersToBeMapped, services);
-		}
-
-		@Override
-		public Void doVisitComputedTypeReference(XComputedTypeReference reference,
-				JvmTypeReference param) {
-			// TODO Auto-generated method stub
-			return super.doVisitComputedTypeReference(reference, param);
 		}
 
 		@Override
@@ -95,6 +89,32 @@ public abstract class AbstractLinkingCandidate implements ILinkingCandidate, Obs
 						return null;
 					}
 					return super.doVisitComputedTypeReference(reference, declaration);
+				}
+			};
+		}
+		
+		@Override
+		protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
+			return new ArrayTypeReferenceTraverser() {
+				@Override
+				public Void doVisitComputedTypeReference(XComputedTypeReference reference,
+						JvmGenericArrayTypeReference param) {
+					// TODO Auto-generated method stub
+					return super.doVisitComputedTypeReference(reference, param);
+				}
+			};
+		}
+		
+		@Override
+		protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
+			return new WildcardTypeReferenceTraverser() {
+				@Override
+				public Void doVisitComputedTypeReference(XComputedTypeReference reference,
+						JvmWildcardTypeReference param) {
+					if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+						return super.doVisitTypeReference(reference, param);
+					}
+					return super.doVisitComputedTypeReference(reference, param);
 				}
 			};
 		}

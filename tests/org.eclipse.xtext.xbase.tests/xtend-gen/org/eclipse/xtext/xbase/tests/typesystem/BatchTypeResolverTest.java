@@ -1021,16 +1021,39 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_28() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval Iterable<String> s = list.flatten\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_29() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval String s = list.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore
   @Test
   public void testDeferredTypeArgumentResolution_30() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList(newArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testRecursiveTypeArgumentResolution_01() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(list)\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testRecursiveTypeArgumentResolution_02() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(list.head)\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testRecursiveTypeArgumentResolution_03() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(list)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testRecursiveTypeArgumentResolution_04() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(list.head)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Ignore
