@@ -17,4 +17,16 @@ public interface SugarConflict {
 	
 	void bar();
 	void getBar();
+	
+	Object getFooBar();
+	boolean isFooBar();
+	
+	boolean isZonk();
+	Object getZonk();
+	
+	boolean isBaz();
+	Object getBaz();
+	Object baz();
+	String baz = "baz";
+	
 }
