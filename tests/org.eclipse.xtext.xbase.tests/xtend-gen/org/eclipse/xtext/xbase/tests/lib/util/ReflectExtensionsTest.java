@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.tests.lib.util;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -84,8 +83,6 @@ public class ReflectExtensionsTest {
       } catch (final Throwable _t) {
         if (_t instanceof IllegalStateException) {
           final IllegalStateException e = (IllegalStateException)_t;
-          String _message = e.getMessage();
-          InputOutput.<String>println(_message);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
