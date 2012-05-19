@@ -48,18 +48,25 @@ public class INTValueConverterTest extends AbstractXtextTests {
 			valueConverter.toString(-42);
 			fail("Negative value not detected.");
 		} catch (ValueConverterException e) {
-			// normal operation
-//			System.out.println(e.getMessage());
+			// expected
 		}
 	}
 
-	@Test public void testNull() throws Exception {
+	@Test public void testNullString() throws Exception {
+		try {
+			valueConverter.toValue(null, null);
+			fail("Null string not detected.");
+		} catch (ValueConverterException e) {
+			// expected
+		}
+	}
+	
+	@Test public void testNullValue() throws Exception {
 		try {
 			valueConverter.toString(null);
-			fail("Negative value not detected.");
+			fail("Null value not detected.");
 		} catch (ValueConverterException e) {
-			// normal operation
-//			System.out.println(e.getMessage());
+			// expected
 		}
 	}
 	
