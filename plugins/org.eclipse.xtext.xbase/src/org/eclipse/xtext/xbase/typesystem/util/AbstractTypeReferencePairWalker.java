@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Collection;
 import java.util.Map;
 
-import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -21,52 +20,26 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitorWithParameter;
 
 import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc, toString implementation
  */
-public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeReferenceVisitorWithParameter<JvmTypeReference, Void> {
+public abstract class AbstractTypeReferencePairWalker extends AbstractTypeReferenceTraverser<JvmTypeReference> {
 
 	protected class ArrayTypeReferenceTraverser extends
-			AbstractXtypeReferenceVisitorWithParameter<JvmGenericArrayTypeReference, Void> {
-		@Override
-		public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, JvmGenericArrayTypeReference declaration) {
-			for (JvmTypeReference component : reference.getReferences())
-				visit(component, declaration);
-			return null;
-		}
-
+			AbstractTypeReferenceTraverser<JvmGenericArrayTypeReference> {
 		@Override
 		public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, JvmGenericArrayTypeReference declaration) {
 			return outerVisit(declaration.getComponentType(), reference.getComponentType());
 		}
-
-		@Override
-		public Void doVisitTypeReference(JvmTypeReference reference, JvmGenericArrayTypeReference declaration) {
-			return null;
-		}
-
-		@Override
-		protected Void handleNullReference(JvmGenericArrayTypeReference declaration) {
-			return null;
-		}
 	}
 
 	protected class WildcardTypeReferenceTraverser extends
-			AbstractXtypeReferenceVisitorWithParameter<JvmWildcardTypeReference, Void> {
-		@Override
-		protected Void handleNullReference(JvmWildcardTypeReference declaration) {
-			return null;
-		}
-
-		@Override
-		public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, JvmWildcardTypeReference declaration) {
-			return doVisitTypeReference(reference, declaration);
-		}
-
+			AbstractTypeReferenceTraverser<JvmWildcardTypeReference> {
+		
 		@Override
 		public Void doVisitWildcardTypeReference(JvmWildcardTypeReference reference, JvmWildcardTypeReference declaration) {
 			boolean lowerBoundFound = false;
@@ -119,14 +92,7 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 	}
 
 	protected class ParameterizedTypeReferenceTraverser extends
-			AbstractXtypeReferenceVisitorWithParameter<JvmParameterizedTypeReference, Void> {
-		@Override
-		public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, JvmParameterizedTypeReference declaration) {
-			for (JvmTypeReference component : reference.getReferences())
-				visit(component, declaration);
-			return null;
-		}
-
+			AbstractTypeReferenceTraverser<JvmParameterizedTypeReference> {
 		@Override
 		public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, JvmParameterizedTypeReference declaration) {
 			final JvmType type = declaration.getType();
@@ -208,10 +174,6 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 			return null;
 		}
 
-		@Override
-		public Void doVisitTypeReference(JvmTypeReference reference, JvmParameterizedTypeReference declaration) {
-			return null;
-		}
 	}
 
 	private final CommonTypeComputationServices services;
@@ -252,23 +214,6 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractXtypeRefer
 		return new ParameterizedTypeReferenceTraverser();
 	}
 	
-	@Override
-	public Void doVisitCompoundTypeReference(JvmCompoundTypeReference reference, JvmTypeReference param) {
-		for (JvmTypeReference component : reference.getReferences())
-			visit(component, param);
-		return null;
-	}
-
-	@Override
-	protected Void handleNullReference(JvmTypeReference parameter) {
-		return null;
-	}
-
-	@Override
-	public Void doVisitTypeReference(JvmTypeReference reference, JvmTypeReference param) {
-		return null;
-	}
-
 	@Override
 	public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference declaredReference,
 			JvmTypeReference param) {

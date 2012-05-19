@@ -1126,8 +1126,15 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_28() throws Exception {
+		"{
+			val list = newArrayList(newArrayList)
+			val Iterable<String> s = list.flatten
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_29() throws Exception {
 		"{
 			val list = newArrayList(newArrayList)
 			val String s = list.flatten.head
@@ -1135,7 +1142,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
-	@Ignore
 	@Test def void testDeferredTypeArgumentResolution_30() throws Exception {
 		"{
 			val list = newArrayList
@@ -1143,6 +1149,40 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 			val String s = second.flatten.head
 			list.add(second.head)
 			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(list)
+			list
+		}".resolvesTo("ArrayList<Object>")
+	}
+	
+	@Test def void testRecursiveTypeArgumentResolution_02() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(list.head)
+			list
+		}".resolvesTo("ArrayList<Object>")
+	}
+	
+	@Test def void testRecursiveTypeArgumentResolution_03() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(list)
+			list.add('')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testRecursiveTypeArgumentResolution_04() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(list.head)
+			list.add('')
+			list
 		}".resolvesTo("ArrayList<String>")
 	}
 	
