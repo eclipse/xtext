@@ -48,13 +48,31 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 			String key = t.getKey();
 			IEObjectDescription old = descriptions.put(key, t);
 			// optimistic - conflicts are expected to be rare
-			if (old != null && 
-					(!(old instanceof JvmFeatureDescription) 
-							|| equal(key, ((JvmFeatureDescription)old).getJvmFeature().getSimpleName()))) {
+			if (useOldDescription(key, old, t)) {
 				descriptions.put(key, old);
 			} else {
 				t.setGenericTypeContext(genericContextFactory.apply(t));
 			}
+		}
+
+		protected boolean useOldDescription(String key, IEObjectDescription oldDescription, IEObjectDescription newDescription) {
+			if (oldDescription == null)
+				return false;
+			if (!(oldDescription instanceof JvmFeatureDescription))
+				return true;
+			String oldFeatureName = ((JvmFeatureDescription)oldDescription).getJvmFeature().getSimpleName();
+			if (equal(key, oldFeatureName)) {
+				return true;
+			}
+			String newFeatureName = ((JvmFeatureDescription)newDescription).getJvmFeature().getSimpleName();
+			if (equal(key, newFeatureName)) {
+				return false;
+			}
+			if (oldFeatureName.startsWith("get") && (newFeatureName.startsWith("is")))
+				return true;
+			if (oldFeatureName.startsWith("is") && (newFeatureName.startsWith("old")))
+				return false;
+			return true;
 		}
 	}
 
