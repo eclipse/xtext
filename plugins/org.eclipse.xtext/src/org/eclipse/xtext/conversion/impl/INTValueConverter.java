@@ -29,17 +29,17 @@ public class INTValueConverter extends AbstractLexerBasedConverter<Integer> {
 	protected void assertValidValue(Integer value) {
 		super.assertValidValue(value);
 		if (value < 0)
-			throw new ValueConverterException(getRuleName() + "-value may not be negative (value:" + value + ").", null, null);
+			throw new ValueConverterException(getRuleName() + "-value may not be negative (value: " + value + ").", null, null);
 	}
 	
 	public Integer toValue(String string, INode node) {
 		if (Strings.isEmpty(string))
-			throw new ValueConverterException("Couldn't convert empty string to int.", node, null);
+			throw new ValueConverterException("Couldn't convert empty string to an int value.", node, null);
 		try {
 			int intValue = Integer.parseInt(string, 10);
 			return Integer.valueOf(intValue);
 		} catch (NumberFormatException e) {
-			throw new ValueConverterException("Couldn't convert '" + string + "' to int.", node, e);
+			throw new ValueConverterException("Couldn't convert '" + string + "' to an int value.", node, e);
 		}
 	}
 
