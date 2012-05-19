@@ -50,8 +50,9 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addTypeToType(IGrammarAccess.class.getName(),
-				GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming())).getBindings();
+		return new BindFactory()
+			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
+			.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming())).getBindings();
 	}
 
 	@Override
