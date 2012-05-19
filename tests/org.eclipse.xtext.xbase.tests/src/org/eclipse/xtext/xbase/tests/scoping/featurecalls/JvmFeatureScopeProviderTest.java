@@ -118,7 +118,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertFalse(hierarchy.hasNext());
 	}
 	
-	@Test public void testSugarConflict() throws Exception {
+	@Test public void testSugarConflict_01() throws Exception {
 		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
 				createScopeDescriptions(reference,
@@ -126,7 +126,37 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		assertSimpleNameFeatureSelected(scope, "foo");
 		assertSimpleNameFeatureSelected(scope, "bar");
 	}
+	
+	@Test public void testSugarConflict_02() throws Exception {
+		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(sugarDescriptionProvider)));
+		assertSelectedFeature(scope, "fooBar", "getFooBar");
+		assertSelectedFeature(scope, "zonk", "getZonk");
+	}
+	
+	@Test public void testSugarConflict_03() throws Exception {
+		JvmTypeReference reference = getTypeRef(SugarConflict.class.getCanonicalName());
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScope(IScope.NULLSCOPE, 
+				createScopeDescriptions(reference,
+						Collections.singletonList(sugarDescriptionProvider)));
+		assertSelectedFeature(scope, "baz", "baz");
+	}
 
+	protected void assertSelectedFeature(JvmFeatureScope scope, String lookup, String expectedSimpleName) {
+		Iterator<IEObjectDescription> elements = scope.getElements(QualifiedName.create(lookup)).iterator();
+		assertTrue(elements.hasNext());
+		while(elements.hasNext()) {
+			IEObjectDescription element = elements.next();
+			assertTrue(element instanceof JvmFeatureDescription);
+			JvmFeature feature = ((JvmFeatureDescription)element).getJvmFeature();
+			String featureName = feature.getSimpleName();
+			assertEquals(expectedSimpleName, featureName);
+			assertFalse(elements.hasNext());
+		}
+	}
+	
 	protected void assertSimpleNameFeatureSelected(JvmFeatureScope scope, String feature) {
 		Iterator<IEObjectDescription> elements = scope.getElements(QualifiedName.create(feature)).iterator();
 		assertTrue(elements.hasNext());
