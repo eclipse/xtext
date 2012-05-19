@@ -40,6 +40,8 @@ public class StacktraceBasedEditorDecider {
 				return Decision.FORCE_JAVA;
 			if (isOpenResource(element))
 				return Decision.FORCE_JAVA;
+			if (isFileSearch(element))
+				return Decision.FORCE_JAVA;
 		}
 		return Decision.FAVOR_XBASE;
 	}
@@ -136,6 +138,14 @@ public class StacktraceBasedEditorDecider {
 	 */
 	protected boolean isOpenResource(StackTraceElement element) {
 		return "org.eclipse.ui.internal.ide.handlers.OpenResourceHandler".equals(element.getClassName()) && "execute".equals(element.getMethodName());
+	}
+
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected boolean isFileSearch(StackTraceElement element) {
+		return "org.eclipse.search.internal.ui.text.FileSearchPage".equals(element.getClassName()) && "showMatch".equals(element.getMethodName());
 	}
 
 }
