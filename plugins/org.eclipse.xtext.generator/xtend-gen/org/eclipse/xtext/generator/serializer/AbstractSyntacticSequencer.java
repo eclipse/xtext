@@ -1,5 +1,7 @@
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.HashSet;
 import java.util.List;
@@ -32,13 +34,10 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class AbstractSyntacticSequencer extends GeneratedFile {
@@ -244,7 +243,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
-      final Iterable<RuleCall> calls = IterableExtensions.<RuleCall>flatten(_map);
+      final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
       final Function1<RuleCall,AbstractRule> _function_2 = new Function1<RuleCall,AbstractRule>() {
           public AbstractRule apply(final RuleCall it) {
             AbstractRule _rule = it.getRule();
@@ -274,12 +273,12 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       }
       final Assignment ass = GrammarUtil.containingAssignment(c);
       boolean _or = false;
-      boolean _equals = ObjectExtensions.operator_equals(ass, null);
+      boolean _equals = Objects.equal(ass, null);
       if (_equals) {
         _or = true;
       } else {
         boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(ass);
-        _or = BooleanExtensions.operator_or(_equals, _isBooleanAssignment);
+        _or = (_equals || _isBooleanAssignment);
       }
       _xblockexpression = (_or);
     }
@@ -300,7 +299,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     boolean _matched = false;
     if (!_matched) {
       boolean _add = visited.add(ele);
-      boolean _not = BooleanExtensions.operator_not(_add);
+      boolean _not = (!_add);
       if (_not) {
         _matched=true;
         _switchResult = "";
@@ -377,9 +376,9 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final AbstractRule rule : _unassignedCalledTokenRules) {
         _builder.append("\t");
         {
-          int _plus = IntegerExtensions.operator_plus(i, 1);
+          int _plus = (i + 1);
           int _i = i = _plus;
-          boolean _greaterThan = IntegerExtensions.operator_greaterThan(_i, 1);
+          boolean _greaterThan = (_i > 1);
           if (_greaterThan) {
             _builder.append("else ");
           }
@@ -414,15 +413,15 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         final ILeafNode _iLeafNode = (ILeafNode)node;
         boolean _or = false;
         boolean _isHidden = _iLeafNode.isHidden();
-        boolean _not = BooleanExtensions.operator_not(_isHidden);
+        boolean _not = (!_isHidden);
         if (_not) {
           _or = true;
         } else {
           String _text = _iLeafNode.getText();
           String _trim = _text.trim();
           int _length = _trim.length();
-          boolean _equals = IntegerExtensions.operator_equals(_length, 0);
-          _or = BooleanExtensions.operator_or(_not, _equals);
+          boolean _equals = (_length == 0);
+          _or = (_not || _equals);
         }
         if (_or) {
           _matched=true;
@@ -519,9 +518,9 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       for(final Pair<String,AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {
-          int _plus = IntegerExtensions.operator_plus(i, 1);
+          int _plus = (i + 1);
           int _i = i = _plus;
-          boolean _greaterThan = IntegerExtensions.operator_greaterThan(_i, 1);
+          boolean _greaterThan = (_i > 1);
           if (_greaterThan) {
             _builder.append("else ");
           }
@@ -542,7 +541,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     }
     _builder.append("\t\t");
     {
-      boolean _greaterThan_1 = IntegerExtensions.operator_greaterThan(i, 0);
+      boolean _greaterThan_1 = (i > 0);
       if (_greaterThan_1) {
         _builder.append("else ");
       }
