@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -118,12 +117,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @since 2.3
 	 */
 	protected Resource getResourceForJavaURI(URI resourceURI, boolean loadOnDemand) {
-		ResourceSet rs = getResourceSet();
-		if (rs instanceof XtextResourceSet) {
-			XtextResourceSet xtextRs = (XtextResourceSet) rs;
-			return xtextRs.getResourceWithoutNormalization(resourceURI, loadOnDemand);
-		}
-		return rs.getResource(resourceURI, loadOnDemand);
+		return getResourceSet().getResource(resourceURI, loadOnDemand);
 	}
 	
 	/**
