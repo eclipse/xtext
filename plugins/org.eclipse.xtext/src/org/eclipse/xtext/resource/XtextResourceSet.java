@@ -11,6 +11,7 @@ package org.eclipse.xtext.resource;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  */
 public class XtextResourceSet extends ResourceSetImpl {
 	
+	private final static Logger log = Logger.getLogger(XtextResourceSet.class);
 	/**
 	 * adds the added resource to the {@link ResourceSetImpl#getURIResourceMap()}.
 	 * 
@@ -42,9 +44,13 @@ public class XtextResourceSet extends ResourceSetImpl {
 			Map<URI, Resource> map = getURIResourceMap();
 			if (map != null) {
 				final URI uri = resource.getURI();
-				URI normalized = getURIConverter().normalize(uri);
+				if (uri != null) {
+					URI normalized = getURIConverter().normalize(uri);
+					map.put(normalized, resource);
+				} else {
+					log.error("The resource's URI was null!", new IllegalStateException("The resource's URI was null! (Just logged)"));
+				}
 				map.put(uri, resource);
-				map.put(normalized, resource);
 			}
 			return chain;
 		}
