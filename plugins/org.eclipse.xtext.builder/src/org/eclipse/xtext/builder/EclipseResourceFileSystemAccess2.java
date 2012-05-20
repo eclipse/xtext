@@ -160,7 +160,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				callBack.afterFileUpdate(file);
+				if (callBack != null)
+					callBack.afterFileUpdate(file);
 			}
 		} else {
 			try {
@@ -175,7 +176,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			callBack.afterFileCreation(file);
+			if (callBack != null)
+				callBack.afterFileCreation(file);
 		}
 	}
 
@@ -397,7 +399,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 	 * @since 2.3
 	 */
 	public void deleteFile(IFile file, IProgressMonitor monitor) throws CoreException {
-		if (getCallBack().beforeFileDeletion(file) && file.exists()) {
+		IFileCallback callBack = getCallBack();
+		if ((callBack == null || callBack.beforeFileDeletion(file)) && file.exists()) {
 			IFile traceFile = getTraceFile(file);
 			file.delete(IResource.KEEP_HISTORY, monitor);
 			if (traceFile.exists()) {
