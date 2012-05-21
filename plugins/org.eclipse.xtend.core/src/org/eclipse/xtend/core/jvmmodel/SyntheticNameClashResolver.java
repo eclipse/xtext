@@ -66,7 +66,7 @@ public class SyntheticNameClashResolver {
 	}
 
 	/*
-	 * @returns true or false ;-)
+	 * @return true or false ;-)
 	 */
 	protected boolean collides(JvmIdentifiableElement element, String currentName,
 			Multimap<String, JvmIdentifiableElement> scope) {
