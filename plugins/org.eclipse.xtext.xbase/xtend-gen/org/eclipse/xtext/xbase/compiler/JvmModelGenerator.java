@@ -790,11 +790,6 @@ public class JvmModelGenerator implements IGenerator {
       boolean _notEquals_1 = (!Objects.equal(expression, null));
       if (_notEquals_1) {
         appendable.openScope();
-        EList<JvmFormalParameter> _parameters = op.getParameters();
-        for (final JvmFormalParameter p : _parameters) {
-          String _simpleName = p.getSimpleName();
-          appendable.declareVariable(p, _simpleName);
-        }
         JvmTypeReference _switchResult = null;
         boolean _matched = false;
         if (!_matched) {
@@ -860,8 +855,8 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _append_2 = _increaseIndentation_1.append("{");
           _append_2.newLine();
           appendable.append("throw new UnsupportedOperationException(\"");
-          String _simpleName_1 = op.getSimpleName();
-          appendable.append(_simpleName_1);
+          String _simpleName = op.getSimpleName();
+          appendable.append(_simpleName);
           appendable.append("is not implemented\");");
           ITreeAppendable _decreaseIndentation_2 = appendable.decreaseIndentation();
           ITreeAppendable _newLine_2 = _decreaseIndentation_2.newLine();
