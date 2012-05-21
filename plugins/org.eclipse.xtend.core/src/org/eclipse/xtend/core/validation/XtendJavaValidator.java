@@ -78,7 +78,9 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -1120,7 +1122,14 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						if (classifier instanceof EClass
 								&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) || TypesPackage.Literals.JVM_CONSTRUCTOR
 										.isSuperTypeOf((EClass) classifier))) {
-							String simpleName = n.getText().trim();
+							// Filter out HiddenLeafNodes to avoid confusion by comments etc.
+							StringBuilder builder = new StringBuilder();
+							for(ILeafNode leafNode : n.getLeafNodes()){
+								if(!(leafNode instanceof HiddenLeafNode)){
+									builder.append(leafNode.getText());
+								}
+							}
+							String simpleName = builder.toString().trim();
 							// handle StaticQualifier Workaround (see Xbase grammar)
 							if (simpleName.endsWith("::"))
 								simpleName = simpleName.substring(0, simpleName.length() - 2);
