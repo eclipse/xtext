@@ -59,7 +59,9 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 			}
 			if (idx < current.getNestedRegions().size() - 1) {
 				AbstractTraceRegion next = current.getNestedRegions().get(idx + 1);
-				if (next.getMyOffset() == expectedOffset) {
+				if (next.getMyOffset() < expectedOffset) {
+					return endOfData();
+				} else if (next.getMyOffset() == expectedOffset) {
 					current = next;
 					traversalIndizes.add(idx + 1);
 					return firstLeafOfCurrent();
