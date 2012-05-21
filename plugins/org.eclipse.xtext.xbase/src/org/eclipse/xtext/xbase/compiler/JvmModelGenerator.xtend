@@ -425,8 +425,6 @@ class JvmModelGenerator implements IGenerator {
 			val expression = op.getAssociatedExpression
 			if (expression != null) {
 				appendable.openScope
-				for(p: op.parameters) 
-					appendable.declareVariable(p, p.simpleName)
 				val returnType = switch(op) { 
 					JvmOperation: op.returnType
 					JvmConstructor: Void::TYPE.getTypeForName(op) 
