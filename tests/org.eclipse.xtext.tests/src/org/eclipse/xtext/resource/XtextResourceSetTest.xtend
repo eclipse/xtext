@@ -18,7 +18,6 @@ class XtextResourceSetTest {
 		rs.resources += resource
 		
 		assertEquals(2, rs.URIResourceMap.size)
-		println(rs.URIResourceMap)
 		
 		rs.resources.remove(resource)
 		
@@ -37,7 +36,6 @@ class XtextResourceSetTest {
 		rs.resources += newArrayList(resource)
 		
 		assertEquals(2, rs.URIResourceMap.size)
-		println(rs.URIResourceMap)
 		
 		rs.resources.remove(resource)
 		
