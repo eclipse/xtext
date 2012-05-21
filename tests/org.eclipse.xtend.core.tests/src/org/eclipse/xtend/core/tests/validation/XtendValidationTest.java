@@ -1103,4 +1103,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		resource.load(new StringInputStream(model), null);
     	helper.validate(resource.getContents().get(0));
     }
+    
+    @Test public void testBug362458() throws Exception {
+    	XtendFile file  = file("import java.util.Collections class foo { \n" +
+    			"def foo() { \n" +
+    			"// somecomment\n" +
+    			"Collections::<String>emptyList\n" +
+    			"}}");
+    	helper.assertNoIssues(file);
+    }
 }
