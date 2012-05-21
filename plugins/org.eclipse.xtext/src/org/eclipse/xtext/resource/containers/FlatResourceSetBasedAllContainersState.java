@@ -3,13 +3,11 @@ package org.eclipse.xtext.resource.containers;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.google.common.collect.Lists;
 
@@ -46,9 +44,6 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		if (!HANDLE.equals(containerHandle))
 			return Collections.emptySet();
-		Map<URI, Resource> map = ((ResourceSetImpl) resourceSet).getURIResourceMap();
-		if (map != null && map.size() == resourceSet.getResources().size())
-			return map.keySet();
 		List<URI> uris = Lists.newArrayListWithCapacity(resourceSet.getResources().size());
 		for (Resource r : resourceSet.getResources())
 			uris.add(r.getURI());
