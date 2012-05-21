@@ -1543,7 +1543,60 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				  }
 				}
 			''')
-		
+	}
+
+		@Test
+	def testRichStringAutoConversionToString(){
+		assertCompilesTo(
+		"class Foo { def String test()'''SomeString''' }
+		",'''
+		import org.eclipse.xtend2.lib.StringConcatenation;
+
+		@SuppressWarnings("all")
+		public class Foo {
+		  public String test() {
+		    StringConcatenation _builder = new StringConcatenation();
+		    _builder.append("SomeString");
+		    return _builder.toString();
+		  }
+		}
+		''')
+	}
+
+	@Test
+	def testRichStringNoAutoConversionToString(){
+		assertCompilesTo(
+		"class Foo { def test()'''SomeString''' }
+		",'''
+		import org.eclipse.xtend2.lib.StringConcatenation;
+
+		@SuppressWarnings("all")
+		public class Foo {
+		  public CharSequence test() {
+		    StringConcatenation _builder = new StringConcatenation();
+		    _builder.append("SomeString");
+		    return _builder;
+		  }
+		}
+		''')
+	}
+
+	@Test
+	def testRichStringNoAutoConversionToString_1(){
+		assertCompilesTo(
+		"class Foo { def test(){System::out.println('''SomeString''')} }
+		",'''
+		import org.eclipse.xtend2.lib.StringConcatenation;
+
+		@SuppressWarnings("all")
+		public class Foo {
+		  public void test() {
+		    StringConcatenation _builder = new StringConcatenation();
+		    _builder.append("SomeString");
+		    System.out.println(_builder.toString());
+		  }
+		}
+		''')
 	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected) {

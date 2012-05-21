@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -86,9 +87,63 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		JvmTypeReference type = typeProvider.getType(call.getMemberCallTarget());
 		assertEquals("List<? extends T>", type.getSimpleName());
 		assertEquals("List<? extends T>", xtendParameter.getParameterType().getSimpleName());
-
-
-
 	}
+
+	@Test public void testTypeOfRichStringWithExpectedString() throws Exception {
+		XtendFunction function = function("def String foo() '''" +
+				"SomeString" +
+				"'''");
+		XExpression expression = function.getExpression();
+		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+	}
+
+	@Test public void testTypeOfRichStringWithExpectedString_1() throws Exception {
+		XtendFunction function = function("def String foo(String x) {" +
+				"foo('''someString''')" +
+				"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XAbstractFeatureCall call = (XAbstractFeatureCall) block.getExpressions().get(0);
+		XExpression expression = call.getExplicitArguments().get(0);
+		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+	}
+
+	@Test public void testTypeOfRichStringWithExpectedString_2() throws Exception {
+		XtendFunction function = function("def String foo(String x) {" +
+				"println('''someString''')" +
+				"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XAbstractFeatureCall call = (XAbstractFeatureCall) block.getExpressions().get(0);
+		XExpression expression = call.getExplicitArguments().get(0);
+		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+	}
+
+	@Test public void testTypeOfRichStringWithExpectedString_3() throws Exception {
+		XtendFunction function = function("def foo(String x) {" +
+				"System::out.println('''someString''')" +
+				"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall call = (XMemberFeatureCall) block.getExpressions().get(0);
+		XExpression expression = call.getMemberCallArguments().get(0);
+		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+	}
+
+	@Test public void testTypeOfRichStringWithNoExpectedString() throws Exception {
+		XtendFunction function = function("def foo() '''" +
+				"SomeString" +
+				"'''");
+		XExpression expression = function.getExpression();
+		assertEquals("java.lang.CharSequence", typeProvider.getType(expression).getIdentifier());
+	}
+
+	@Test public void testTypeOfRichStringWithNoExpectedString_1() throws Exception {
+		XtendFunction function = function("def foo(String x) {" +
+				"println('''someString''')" +
+				"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XAbstractFeatureCall call = (XAbstractFeatureCall) block.getExpressions().get(0);
+		XExpression expression = call.getExplicitArguments().get(0);
+		assertEquals("java.lang.CharSequence", typeProvider.getType(expression).getIdentifier());
+	}
+
 
 }

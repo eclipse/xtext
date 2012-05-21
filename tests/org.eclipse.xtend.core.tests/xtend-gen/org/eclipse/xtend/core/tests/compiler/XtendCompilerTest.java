@@ -3299,6 +3299,99 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testRichStringAutoConversionToString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public String test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"SomeString\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _builder.toString();");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def String test()\'\'\'SomeString\'\'\' }\n\t\t", _builder);
+  }
+
+  @Test
+  public void testRichStringNoAutoConversionToString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public CharSequence test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"SomeString\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _builder;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def test()\'\'\'SomeString\'\'\' }\n\t\t", _builder);
+  }
+
+  @Test
+  public void testRichStringNoAutoConversionToString_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public void test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"SomeString\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("System.out.println(_builder.toString());");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def test(){System::out.println(\'\'\'SomeString\'\'\')} }\n\t\t", _builder);
+  }
+
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
