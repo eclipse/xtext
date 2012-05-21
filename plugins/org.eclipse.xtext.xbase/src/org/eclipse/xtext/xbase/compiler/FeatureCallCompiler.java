@@ -189,7 +189,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	/**
-	 * @returns the variable name under which the result of the expression is stored. Returns <code>null</code> if the
+	 * @return the variable name under which the result of the expression is stored. Returns <code>null</code> if the
 	 *          expression hasn't been assigned to a local variable before.
 	 */
 	@Nullable
