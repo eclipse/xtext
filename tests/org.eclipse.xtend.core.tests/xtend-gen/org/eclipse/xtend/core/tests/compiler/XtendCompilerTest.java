@@ -22,6 +22,90 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
+  /**
+   * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380062
+   */
+  @Test
+  public void testBug380062_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def foo(Foo ^new) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("foo(^new)");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final Foo new_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _foo = this.foo(new_);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _foo;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug380062_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val String s");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("new(String ^new) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("s = ^new");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final String s;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Foo(final String new_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.s = new_;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testDataClasses_01() {
     StringConcatenation _builder = new StringConcatenation();

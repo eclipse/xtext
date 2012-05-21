@@ -13,6 +13,46 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject extension IXtendJvmAssociations 
 	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380062
+	 */
+	@Test def testBug380062_01() {
+		assertCompilesTo('''
+			class Foo<T> {
+			    def foo(Foo ^new) {
+			        foo(^new)
+			    }
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  public Object foo(final Foo new_) {
+			    Object _foo = this.foo(new_);
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	
+	@Test def testBug380062_02() {
+		assertCompilesTo('''
+			class Foo<T> {
+				val String s
+			    new(String ^new) {
+			        s = ^new
+			    }
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  private final String s;
+			  
+			  public Foo(final String new_) {
+			    this.s = new_;
+			  }
+			}
+		''')
+	}
 	@Test
 	def testDataClasses_01() { 
 		assertCompilesTo('''

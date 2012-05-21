@@ -1242,14 +1242,30 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkJavaKeywordConflict(XtendField member) {
 		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_FIELD__NAME);
 	}
+	
 	@Check
 	public void checkJavaKeywordConflict(XtendFunction member) {
 		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_FUNCTION__NAME);
+		for (JvmTypeParameter p : member.getTypeParameters()) {
+			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);
+		}
 	}
+	
+	@Check
+	public void checkJavaKeywordConflict(XtendConstructor member) {
+		for (JvmTypeParameter p : member.getTypeParameters()) {
+			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);
+		}
+	}
+	
 	@Check
 	public void checkJavaKeywordConflict(XtendClass member) {
 		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_CLASS__NAME);
+		for (JvmTypeParameter p : member.getTypeParameters()) {
+			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);
+		}
 	}
+	
 	protected void checkNoJavaKeyword(EObject obj, EAttribute attribute) {
 		Object name = obj.eGet(attribute);
 		if (name != null) {
