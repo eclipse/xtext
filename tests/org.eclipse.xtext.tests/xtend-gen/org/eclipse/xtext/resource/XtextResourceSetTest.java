@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,12 +30,10 @@ public class XtextResourceSetTest {
     Map<URI,Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
     int _size_1 = _uRIResourceMap_1.size();
     Assert.assertEquals(2, _size_1);
-    Map<URI,Resource> _uRIResourceMap_2 = rs.getURIResourceMap();
-    InputOutput.<Map<URI,Resource>>println(_uRIResourceMap_2);
     EList<Resource> _resources_1 = rs.getResources();
     _resources_1.remove(resource);
-    Map<URI,Resource> _uRIResourceMap_3 = rs.getURIResourceMap();
-    int _size_2 = _uRIResourceMap_3.size();
+    Map<URI,Resource> _uRIResourceMap_2 = rs.getURIResourceMap();
+    int _size_2 = _uRIResourceMap_2.size();
     Assert.assertEquals(0, _size_2);
   }
   
@@ -57,12 +54,10 @@ public class XtextResourceSetTest {
     Map<URI,Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
     int _size_1 = _uRIResourceMap_1.size();
     Assert.assertEquals(2, _size_1);
-    Map<URI,Resource> _uRIResourceMap_2 = rs.getURIResourceMap();
-    InputOutput.<Map<URI,Resource>>println(_uRIResourceMap_2);
     EList<Resource> _resources_1 = rs.getResources();
     _resources_1.remove(resource);
-    Map<URI,Resource> _uRIResourceMap_3 = rs.getURIResourceMap();
-    int _size_2 = _uRIResourceMap_3.size();
+    Map<URI,Resource> _uRIResourceMap_2 = rs.getURIResourceMap();
+    int _size_2 = _uRIResourceMap_2.size();
     Assert.assertEquals(0, _size_2);
   }
 }
