@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
@@ -157,7 +159,11 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 			for(JvmTypeConstraint constraint: reference.getConstraints()) {
 				JvmTypeReference bound = visit(constraint.getTypeReference(), replaceWildcards);
 				if (bound instanceof JvmWildcardTypeReference) {
-					result.getConstraints().addAll(((JvmWildcardTypeReference) bound).getConstraints());
+					 result.getConstraints().addAll(Lists.transform(((JvmWildcardTypeReference) bound).getConstraints(), new Function<JvmTypeConstraint, JvmTypeConstraint>() {
+						 public JvmTypeConstraint apply(JvmTypeConstraint input) {
+							 return EcoreUtil2.cloneIfContained(input);
+						 }
+					 }));
 				} else {
 					JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
 					copiedConstraint.setTypeReference(primitives.asWrapperTypeIfPrimitive(bound));
