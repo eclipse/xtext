@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import static java.util.Collections.*;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.impl.GeneratedMetamodelImpl;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -260,6 +263,9 @@ public class XtextLinkingService extends DefaultLinkingService {
 		final URI uri = URI.createURI(nsURI);
 		if (uri == null || isReferencedByUsedGrammar(generatedMetamodel, nsURI))
 			return Collections.emptyList();
+		EPackage pack = ((GeneratedMetamodelImpl)generatedMetamodel).basicGetEPackage();
+		if (pack != null && !pack.eIsProxy())
+			return singletonList((EObject)pack);
 		final EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		generatedEPackage.setName(generatedMetamodel.getName());
 		generatedEPackage.setNsPrefix(generatedMetamodel.getName());
