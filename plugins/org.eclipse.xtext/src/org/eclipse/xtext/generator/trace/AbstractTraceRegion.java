@@ -23,6 +23,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -490,11 +491,20 @@ public abstract class AbstractTraceRegion {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + ", associations="
-				+ getAssociatedLocations() + ", nestedRegions=" + getNestedRegions() + "]";
+		List<AbstractTraceRegion> nested = getNestedRegions();
+		String nestedText;
+		if (nested.isEmpty())
+			nestedText = "";
+		else
+			nestedText = " nestedRegions={\n  " + Joiner.on("\n").join(nested).replace("\n", "\n  ") + "\n}";
+		List<ILocationData> associated = getAssociatedLocations();
+		String associatedText;
+		if (associated.isEmpty())
+			associatedText = "";
+		else
+			associatedText = " associations={\n  " + Joiner.on("\n").join(associated).replace("\n", "\n  ") + "\n}";
+		return getClass().getSimpleName() + " [myOffset=" + getMyOffset() + ", myLength=" + getMyLength() + "]"
+				+ associatedText + nestedText;
 	}
-	
-	
-	
 
 }
