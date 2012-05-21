@@ -51,7 +51,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-
+@Ignore ("see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=380124")
 public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	@Inject
