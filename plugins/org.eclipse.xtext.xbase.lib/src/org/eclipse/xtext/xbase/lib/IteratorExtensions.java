@@ -565,7 +565,7 @@ public class IteratorExtensions {
 	 *            the combinator function. May not be <code>null</code>.
 	 * @return the last result of the applied combinator function or <code>null</code> for the empty input.
 	 */
-	public static <T> T reduce(Iterator<T> iterator, Function2<? super T, ? super T, ? extends T> function) {
+	public static <T> T reduce(Iterator<? extends T> iterator, Function2<? super T, ? super T, ? extends T> function) {
 		if (function == null)
 			throw new NullPointerException("function");
 		if (iterator.hasNext()) {
