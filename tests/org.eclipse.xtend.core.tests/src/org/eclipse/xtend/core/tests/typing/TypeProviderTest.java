@@ -8,9 +8,14 @@
 package org.eclipse.xtend.core.tests.typing;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -67,6 +72,23 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("void", typeProvider.getExpectedType(thisCall).getIdentifier());
 		assertEquals("void", typeProvider.getExpectedReturnType(thisCall, true).getIdentifier());
 		assertEquals("void", typeProvider.getType(thisCall).getIdentifier());
+	}
+
+	@Test public void testBug380063NoException() throws Exception {
+		XtendClass clazz = clazz("class Foo<T> { " +
+				"def foo(java.util.List<? extends T> l) { " +
+				"	l.add(null)" +
+				"}}");
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XtendParameter xtendParameter = function.getParameters().get(0);
+		XBlockExpression expr = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall call = (XMemberFeatureCall) expr.getExpressions().get(0);
+		JvmTypeReference type = typeProvider.getType(call.getMemberCallTarget());
+		assertEquals("List<? extends T>", type.getSimpleName());
+		assertEquals("List<? extends T>", xtendParameter.getParameterType().getSimpleName());
+
+
+
 	}
 
 }
