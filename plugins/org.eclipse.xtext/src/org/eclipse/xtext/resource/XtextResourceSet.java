@@ -46,11 +46,17 @@ public class XtextResourceSet extends ResourceSetImpl {
 				final URI uri = resource.getURI();
 				if (uri != null) {
 					URI normalized = getURIConverter().normalize(uri);
-					map.put(normalized, resource);
+					Resource previous = map.put(normalized, resource);
+					if (previous != null && previous != resource) {
+						log.error("A resource with the normalized URI '"+normalized+"' was already registered. The resource with the URI '"+previous+"' is no longer registered with the normalized form.");
+					}
 				} else {
-					log.error("The resource's URI was null!", new IllegalStateException("The resource's URI was null! (Just logged)"));
+					log.error("The resource's URI was null!");
 				}
-				map.put(uri, resource);
+				Resource previous = map.put(uri, resource);
+				if (previous != null && previous != resource) {
+					log.error("A different resource with the URI '"+uri+"' was already registered.");
+				}
 			}
 			return chain;
 		}
