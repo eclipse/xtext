@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -49,6 +51,9 @@ public class XtendCompiler extends XbaseCompiler {
 	@Inject	
 	private Provider<DefaultIndentationHandler> indentationHandler;
 	
+	@Inject
+	private ITypeProvider typeProvider;
+
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {
 		if (ex instanceof RichStringForLoop)
@@ -329,6 +334,9 @@ public class XtendCompiler extends XbaseCompiler {
 	
 	public void _toJavaExpression(RichString richString, ITreeAppendable b) {
 		b.append(getVarName(richString, b));
+		JvmTypeReference stringType = getTypeReferences().getTypeForName(String.class, richString);
+		if(EcoreUtil.equals(typeProvider.getExpectedType(richString), stringType))
+			b.append(".toString()");
 	}
 
 }
