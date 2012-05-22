@@ -6,7 +6,7 @@
 	<rm:locator pattern="org.eclipse.xtend.releng" searchPathRef="xtend.releng" />
 	<rm:locator pattern="org.eclipse.xtend.examples" searchPathRef="xtend.examples" />
 	<rm:locator pattern="^org\.eclipse\.xtend(?:\..+)\.tests$" searchPathRef="xtend.tests" />
-	<rm:locator pattern="^org\.eclipse\.xtend(?:\..+)?$" searchPathRef="xtend" />
+	<rm:locator pattern="^org\.eclipse\.(?:xtend|xtend2)(?:\..+)?$" searchPathRef="xtend" />
 	
 	<rm:searchPath name="xtend">
 		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
