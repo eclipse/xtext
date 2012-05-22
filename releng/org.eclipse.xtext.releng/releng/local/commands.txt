@@ -1,15 +1,17 @@
 setpref targetPlatformPath="${build.root}/target.platform"
-setpref org.eclipse.buckminster.core.maxParallelResolutions=1
-setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
+#setpref org.eclipse.buckminster.core.maxParallelResolutions=1
+#setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
 
-importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
-addbaseline -A "api-baseline"
+#importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
+#addbaseline -A "api-baseline"
 
 import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform-${ECLIPSE.TARGET.ALIAS}.mspec"
 resolve "${releng.project.location}/releng/xtext.cquery"
 
 build
+
+perform -DtargetPlatformPath="${build.root}/target.platform" --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#create.javadoc"
 #junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
 
-perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
-perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#setup.promoter"
+#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
+#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#setup.promoter"

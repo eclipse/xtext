@@ -6,9 +6,11 @@
 		<!-- workspace defaults -->
 		<property name="output" value="./javadoc" />
 		<property name="checkoutLocation" value="../.." />
+		<property name="xtend.checkoutLocation" value="../../../org.eclipse.xtend/" />
 		<property name="targetPlatform" value="${eclipse.home}" />
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
+		<property name="xtend.sourcesLocation" value="${xtend.checkoutLocation}/plugins/" />
 
 
 		<echo message="Source code location ${sourcesLocation}" />
@@ -21,13 +23,19 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</path>
-
+		
 		<!-- Prepare dirs -->
 		<delete dir="${output}" />
 		<mkdir dir="${output}" />
 
 		<javadoc destdir="${output}" use="false" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" Verbose="no" windowtitle="${projectName} Documentation">
 			<fileset dir="${sourcesLocation}" defaultexcludes="true">
+				<include name="**/org.eclipse.*/**/*.java" />
+				<exclude name="**/testdata/**" />
+				<exclude name="**/packrat/**" />
+				<exclude name="**/antlr/internal/**" />
+			</fileset>
+			<fileset dir="${xtend.sourcesLocation}" defaultexcludes="true">
 				<include name="**/org.eclipse.*/**/*.java" />
 				<exclude name="**/testdata/**" />
 				<exclude name="**/packrat/**" />
