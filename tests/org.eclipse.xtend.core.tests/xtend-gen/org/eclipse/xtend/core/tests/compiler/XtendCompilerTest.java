@@ -22,6 +22,137 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
+  @Test
+  public void testItShadowing_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def grammar(String it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (it : it.toCharArray) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("println(it)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void grammar(final String it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("char[] _charArray = it.toCharArray();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("for (final char it_1 : _charArray) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("InputOutput.<Character>println(Character.valueOf(it_1));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testItShadowing_02() {
+    final String tquotes = "\'\'\'";
+    final String lt = "\u00AB";
+    final String rt = "\u00BB";
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def grammar(String it) ");
+    _builder.append(tquotes, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append(lt, "		");
+    _builder.append("FOR it: it.toCharArray");
+    _builder.append(rt, "		");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append(lt, "			");
+    _builder.append("it");
+    _builder.append(rt, "			");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append(lt, "		");
+    _builder.append("ENDFOR");
+    _builder.append(rt, "		");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append(tquotes, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public CharSequence grammar(final String it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("{");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("char[] _charArray = it.toCharArray();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("for(final char it_1 : _charArray) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("_builder.append(it_1, \"\");");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("_builder.newLineIfNotEmpty();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _builder;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380062
    */
@@ -3329,7 +3460,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(
       "class Foo { def String test()\'\'\'SomeString\'\'\' }\n\t\t", _builder);
   }
-
+  
   @Test
   public void testRichStringNoAutoConversionToString() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3360,7 +3491,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(
       "class Foo { def test()\'\'\'SomeString\'\'\' }\n\t\t", _builder);
   }
-
+  
   @Test
   public void testRichStringNoAutoConversionToString_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3391,7 +3522,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(
       "class Foo { def test(){System::out.println(\'\'\'SomeString\'\'\')} }\n\t\t", _builder);
   }
-
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
