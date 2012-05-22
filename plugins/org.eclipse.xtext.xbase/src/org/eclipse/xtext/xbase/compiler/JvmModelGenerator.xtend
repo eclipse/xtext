@@ -276,6 +276,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.increaseIndentation.newLine
 		if (!first)
 			appendable.newLine
+		appendable.openScope
 		generateJavaDoc(appendable)
 		val tracedAppendable = appendable.trace(it)
 		generateAnnotations(tracedAppendable, true)
@@ -299,6 +300,7 @@ class JvmModelGenerator implements IGenerator {
 			generateExecutableBody(tracedAppendable)
 		}
 		appendable.decreaseIndentation
+		appendable.closeScope
 		return false
 	}
 	
@@ -307,6 +309,7 @@ class JvmModelGenerator implements IGenerator {
 			appendable.increaseIndentation.newLine
 			if (!first)
 				appendable.newLine
+			appendable.openScope
 			generateJavaDoc(appendable)
 			val tracedAppendable = appendable.trace(it)
 			generateAnnotations(tracedAppendable, true)
@@ -320,6 +323,7 @@ class JvmModelGenerator implements IGenerator {
 			tracedAppendable.append(" ")
 			generateExecutableBody(tracedAppendable)
 			appendable.decreaseIndentation
+			appendable.closeScope
 			return false
 		}
 		return first
@@ -416,15 +420,12 @@ class JvmModelGenerator implements IGenerator {
 		
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
 		if (op.compilationStrategy != null) {
-			appendable.openScope
 			appendable.increaseIndentation.append("{").newLine
 			op.compilationStrategy.apply(appendable)
 			appendable.decreaseIndentation.newLine.append("}")
-			appendable.closeScope			
 		} else {
 			val expression = op.getAssociatedExpression
 			if (expression != null) {
-				appendable.openScope
 				val returnType = switch(op) { 
 					JvmOperation: op.returnType
 					JvmConstructor: Void::TYPE.getTypeForName(op) 
@@ -442,7 +443,6 @@ class JvmModelGenerator implements IGenerator {
 					compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
 					appendable.decreaseIndentation.newLine.append("}")
 				}
-				appendable.closeScope
 			} else if(op instanceof JvmOperation) {
 				appendable.increaseIndentation.append("{").newLine
 				appendable.append('throw new UnsupportedOperationException("')
