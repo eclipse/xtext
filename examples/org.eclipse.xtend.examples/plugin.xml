@@ -38,4 +38,31 @@
 		 <projectDescriptor name="xtend-tutorial" contentURI="contents/xtend.tutorial.zip" description="A hands-on tutorial for Xtend."/>
 	  </example>
    </extension>
+
+   <!-- ========== org..eclipse.xtext.examples.NewXtendEuler ========== -->
+   <extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtend.examples.NewXtendEuler"
+			name="%XtendEuler_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendEuler_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtend.examples.NewXtendEuler"
+			name="%XtendEuler_name"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.xtend.wizards/org.eclipse.xtend.project.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%XtendEuler_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtend.examples.NewXtendEuler" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="xtend-euler" contentURI="contents/xtend-euler.zip" description="Solutions for http://projecteuler.net with Xtend."/>
+	  </example>
+   </extension>
 </plugin>
