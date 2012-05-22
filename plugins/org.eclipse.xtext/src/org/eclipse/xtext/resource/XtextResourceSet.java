@@ -45,9 +45,8 @@ public class XtextResourceSet extends ResourceSetImpl {
 					URI oldNormalized = getURIConverter().normalize(oldOne);
 					map.remove(oldNormalized);
 				}
-				URI uri = (URI) notification.getNewValue();
 				Resource resource = (Resource) notification.getNotifier();
-				registerURI(resource, uri);
+				registerURI(resource);
 			}
 			super.notifyChanged(notification);
 		}
@@ -65,7 +64,7 @@ public class XtextResourceSet extends ResourceSetImpl {
 	/**
 	 * @since 2.3
 	 */
-	protected void registerURI(Resource resource, URI uri2) {
+	protected void registerURI(Resource resource) {
 		Map<URI, Resource> map = getURIResourceMap();
 		if (map != null) {
 			final URI uri = resource.getURI();
@@ -93,7 +92,7 @@ public class XtextResourceSet extends ResourceSetImpl {
 		protected NotificationChain inverseAdd(Resource resource, NotificationChain notifications) {
 			NotificationChain chain = super.inverseAdd(resource, notifications);
 			resource.eAdapters().add(getUriChangeListener());
-			registerURI(resource, resource.getURI());
+			registerURI(resource);
 			return chain;
 		}
 		
