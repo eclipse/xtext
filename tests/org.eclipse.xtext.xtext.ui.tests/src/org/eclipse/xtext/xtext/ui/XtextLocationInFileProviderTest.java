@@ -25,7 +25,7 @@ public class XtextLocationInFileProviderTest extends AbstractXtextTests {
 
 	private static String grammarText = "grammar org.xtext.Sample\n" +
 			"generate first 'http://my.uri'\n" +
-			"generate second 'http://my.uri' as alias\n" +
+			"generate second 'http://mysecond.uri' as alias\n" +
 			"Root returns Root: 'keyword'*;";
 	
 	private Grammar grammar;
