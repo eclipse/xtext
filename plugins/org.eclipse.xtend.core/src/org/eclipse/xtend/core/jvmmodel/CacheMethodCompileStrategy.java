@@ -16,7 +16,6 @@ import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -96,18 +95,6 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		appendable.increaseIndentation();
 		appendable.newLine().append("return ").append(cacheVarName).append(".get(").append(cacheKeyVarName).append(");");
 		appendable.decreaseIndentation().newLine().append("}");
-		
-		// initialize the appendable
-		appendable.declareVariable(cacheMethod.getDeclaringType(), "this");
-		if (cacheMethod.getDeclaringType() instanceof JvmGenericType) {
-			JvmTypeReference superClass = ((JvmGenericType)cacheMethod.getDeclaringType()).getExtendedClass();
-			if (superClass != null) {
-				appendable.declareVariable(superClass.getType(), "super");
-			}
-		}
-		for (JvmFormalParameter p : cacheMethod.getParameters()) {
-			appendable.declareVariable(p, p.getName());
-		}
 		
 		// execute the creation
 		compiler.toJavaStatement(createExtensionInfo.getCreateExpression(), appendable, true);

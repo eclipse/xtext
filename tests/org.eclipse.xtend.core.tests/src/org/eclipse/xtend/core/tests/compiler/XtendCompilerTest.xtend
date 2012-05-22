@@ -13,6 +13,62 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject extension IXtendJvmAssociations 
 	
+	@Test def testItShadowing_01() {
+		assertCompilesTo('''
+			class Foo<T> {
+				def grammar(String it) {
+					for (it : it.toCharArray) {
+						println(it)
+					}
+				}
+			}
+		''','''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  public void grammar(final String it) {
+			    char[] _charArray = it.toCharArray();
+			    for (final char it_1 : _charArray) {
+			      InputOutput.<Character>println(Character.valueOf(it_1));
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def testItShadowing_02() {
+		val tquotes = "'''"
+		val lt = '«'
+		val rt = '»'
+		assertCompilesTo('''
+			class Foo<T> {
+				def grammar(String it) «tquotes»
+					«lt»FOR it: it.toCharArray«rt»
+						«lt»it«rt»
+					«lt»ENDFOR«rt»
+				«tquotes»
+			}
+		''','''
+			import org.eclipse.xtend2.lib.StringConcatenation;
+			
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  public CharSequence grammar(final String it) {
+			    StringConcatenation _builder = new StringConcatenation();
+			    {
+			      char[] _charArray = it.toCharArray();
+			      for(final char it_1 : _charArray) {
+			        _builder.append(it_1, "");
+			        _builder.newLineIfNotEmpty();
+			      }
+			    }
+			    return _builder;
+			  }
+			}
+		''')
+	}
+	
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380062
 	 */
