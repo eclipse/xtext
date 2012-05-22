@@ -75,4 +75,7 @@ public final class IssueCodes {
 
 	public static final String INVALID_MEMBER_NAME = ISSUE_CODE_PREFIX + "invalid_member_name";
 	public static final String LEFT_HAND_SIDE_MUST_BE_VARIABLE = "left_hand_side_must_be_variable";
+	
+	public static final String ABSTRACT_METHOD_MISSING_RETURN_TYPE = ISSUE_CODE_PREFIX + "abstract_method_missing_return_type";
+
 }

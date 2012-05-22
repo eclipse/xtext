@@ -800,6 +800,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				error("The abstract method " + function.getName() + " in type " + declarator.getName() + " can only be defined by an abstract class.", 
 						XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT);
 			}
+			if(function.getReturnType() == null) {
+				error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
+						XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
+			}
 		}
 	}
 	

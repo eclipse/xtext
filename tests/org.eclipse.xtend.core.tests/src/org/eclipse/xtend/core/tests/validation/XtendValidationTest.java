@@ -886,7 +886,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testUsedFunction() throws Exception {
-		XtendClass clazz = clazz("abstract class X { def private foo() def bar(){foo}}");
+		XtendClass clazz = clazz("abstract class X { def private String foo() def bar(){foo}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
@@ -996,6 +996,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     @Test public void testAbstractMethodsInNonAbstractClass() throws Exception {
     	XtendClass clazz = clazz("class Foo { def String test() }");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_ABSTRACT);
+    }
+    
+    @Test public void testAbstractMethodWithoutReturnType() throws Exception {
+    	XtendClass clazz = clazz("abstract class Foo { def test() }");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
+    }
+    
+    @Test public void testAbstractMethodWithReturnType() throws Exception {
+    	XtendClass clazz = clazz("abstract class Foo { def String test() }");
+    	helper.assertNoErrors(clazz);
     }
     
     @Test public void testFinalFieldInit_01() throws Exception {
