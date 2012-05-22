@@ -239,6 +239,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	@Test public void testInt() {
 		String model = "{ var int i = 1 }";
 		expectAbsolute(model.indexOf("int"), 3, DefaultHighlightingConfiguration.KEYWORD_ID);
+		expectAbsolute(model.lastIndexOf("1"), 1, DefaultHighlightingConfiguration.NUMBER_ID);
 		highlight(model);
 	}
 	
