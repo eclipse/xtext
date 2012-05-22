@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -45,6 +46,14 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		this(qualifiedName, element, null, null, null, bucketId);
 	}
 
+	public String getShadowingKey() {
+		EObject object = getEObjectOrProxy();
+		if (object instanceof JvmIdentifiableElement) {
+			return ((JvmIdentifiableElement) object).getIdentifier();
+		}
+		return getName().toString();
+	}
+	
 	public int getBucketId() {
 		return bucketId;
 	}
@@ -68,4 +77,5 @@ public class BucketedEObjectDescription extends EObjectDescription {
 	public boolean isStaticDescription() {
 		return receiverType == null;
 	}
+
 }

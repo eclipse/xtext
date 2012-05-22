@@ -33,12 +33,11 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 
 	@Override
 	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		ITypeExpectation result = createTypeExpectation(null, actualState, false);
+		ITypeExpectation result = createTypeExpectation(null, actualState);
 		return Collections.singletonList(result);
 	}
 	
-	@Override
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			throw new IllegalArgumentException("expectedType should be null");

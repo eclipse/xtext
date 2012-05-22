@@ -43,7 +43,6 @@ public class NoExpectationTypeComputationState extends AbstractStackedTypeComput
 		return Collections.singletonList(result);
 	}
 	
-	@Override
 	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 		if (expectedType != null)
 			throw new IllegalArgumentException("expectedType should be null");

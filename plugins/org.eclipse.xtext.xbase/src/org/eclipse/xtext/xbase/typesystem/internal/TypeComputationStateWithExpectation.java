@@ -40,5 +40,15 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 		ITypeExpectation result = createTypeExpectation(expectedType, actualState, false);
 		return Collections.singletonList(result);
 	}
+	
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
+		AbstractTypeExpectation result = null;
+		if (expectedType != null) {
+			result = new TypeExpectation(expectedType, actualState, returnType);
+		} else {
+			result = new NoExpectation(actualState, returnType);
+		}
+		return result;
+	}
 
 }

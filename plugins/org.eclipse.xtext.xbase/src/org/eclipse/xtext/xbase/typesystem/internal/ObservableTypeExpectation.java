@@ -9,20 +9,24 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ObservableTypeExpectation extends TypeExpectation {
+public class ObservableTypeExpectation  extends AbstractReturnAwareTypeExpectation {
 
 	interface Observer {
 		void accept(ObservableTypeExpectation expectation, JvmTypeReference actual, ConformanceHint conformanceHint);
 	}
 	
+	private JvmTypeReference computedReference;
+	private final IJvmTypeReferenceProvider expectedType;
 	private final Observer observer;
 	
-	public ObservableTypeExpectation(JvmTypeReference reference, AbstractTypeComputationState state, boolean returnType, Observer observer) {
-		super(reference, state, returnType);
+	public ObservableTypeExpectation(IJvmTypeReferenceProvider expectedType, AbstractTypeComputationState state, boolean returnType, Observer observer) {
+		super(state, returnType);
+		this.expectedType = expectedType;
 		this.observer = observer;
 	}
 	
@@ -30,6 +34,16 @@ public class ObservableTypeExpectation extends TypeExpectation {
 	public void acceptActualType(JvmTypeReference type, ConformanceHint conformanceHint) {
 		observer.accept(this, type, conformanceHint);
 		super.acceptActualType(type, conformanceHint);
+	}
+
+	public boolean isNoTypeExpectation() {
+		return false;
+	}
+	
+	public JvmTypeReference getExpectedType() {
+		if (computedReference == null)
+			computedReference = expectedType.getTypeReference();
+		return computedReference;
 	}
 
 }

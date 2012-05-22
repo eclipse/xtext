@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
  */
 public enum BoundTypeArgumentSource {
 	/**

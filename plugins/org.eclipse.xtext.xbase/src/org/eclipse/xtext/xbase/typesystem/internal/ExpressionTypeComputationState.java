@@ -32,7 +32,11 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 
 	@Override
 	protected JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		return getResolvedTypes().acceptType(expression, expectation, type, conformanceHint, returnType);
+		return acceptType(getResolvedTypes(), expectation, type, conformanceHint, returnType);
+	}
+	
+	protected JvmTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		return resolvedTypes.acceptType(expression, expectation, type, conformanceHint, returnType);
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	
 	@Override
 	public AbstractTypeComputationState withTypeCheckpoint() {
-		return new ExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
+		return new ChildExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expression);
 	}
 	
 	protected XExpression getExpression() {

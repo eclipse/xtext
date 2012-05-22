@@ -24,10 +24,11 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc, toString
  */
-public class UnboundTypeParameterSubstitutor extends TypeParameterSubstitutor {
+public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitutor {
 
-	public UnboundTypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping,
+	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping,
 			CommonTypeComputationServices services) {
 		super(typeParameterMapping, services);
 	}

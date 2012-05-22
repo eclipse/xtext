@@ -24,5 +24,11 @@ public class ExpressionTypeCheckpointComputationState extends ExpressionTypeComp
 			XExpression expression) {
 		super(new DelegatingStackedResolvedTypes(resolvedTypes), featureScopeSession, reentrantTypeResolver, parent, expression);
 	}
+	
+	@Override
+	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
+			StackedResolvedTypes typeResolution) {
+		return new ExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression);
+	}
 
 }

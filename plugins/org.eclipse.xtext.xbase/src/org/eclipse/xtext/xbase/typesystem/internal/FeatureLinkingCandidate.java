@@ -31,7 +31,7 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements IFeatureLinkingCandidate {
+public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
 			AbstractTypeComputationState state) {
@@ -60,6 +60,11 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate implements
 
 	public XAbstractFeatureCall getFeatureCall() {
 		return (XAbstractFeatureCall) getExpression();
+	}
+	
+	@Override
+	protected List<JvmTypeReference> getTypeArguments() {
+		return getFeatureCall().getTypeArguments();
 	}
 	
 	@Override
