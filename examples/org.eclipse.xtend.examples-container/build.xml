@@ -25,6 +25,7 @@
 	<target name="zip_all_examples">
 		<!-- run task "generate_self" to compose this list -->
 		<zip_example name="xtend.tutorial"/>
+		<zip_example name="xtend-euler"/>
 	</target>
 
 	<target name="generate_self">
