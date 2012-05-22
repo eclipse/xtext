@@ -40,11 +40,12 @@
           -data '\${build.root}/buckminster.workspace' 
           -S '${user.home}/git/org.eclipse.xcore.releng/org.eclipse.emf.xcore.releng/commands.txt'            
          ================================= -->
-	<target name="run.headless.buckminster" depends="cleanup" description="description">
+	<target name="run.headless.buckminster" description="description">
 		<exec executable="${buckminster.home}/buckminster">
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
 			<arg value="-Dcheckout.location=${checkout.location}" />
+			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${xtend.checkout.location}" />
 			<arg value="-Dreleng.project.location=${releng.project.location}" />
 			<arg value="-DECLIPSE.TARGET.ALIAS=${ECLIPSE.TARGET.ALIAS}" />
@@ -64,6 +65,7 @@
 		<delete failonerror="false" includeemptydirs="true" verbose="false">
 			<fileset dir="${build.root}" defaultexcludes="false">
 				<exclude name="**/target.platform/" />
+				<exclude name="configuration/**" />
 			</fileset>
 		</delete>
 	</target>
