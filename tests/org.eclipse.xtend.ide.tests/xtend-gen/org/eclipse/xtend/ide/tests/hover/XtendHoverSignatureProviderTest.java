@@ -137,7 +137,6 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("import com.google.inject.Inject");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -498,7 +497,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   public ResourceSet getResourceSet() {
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
