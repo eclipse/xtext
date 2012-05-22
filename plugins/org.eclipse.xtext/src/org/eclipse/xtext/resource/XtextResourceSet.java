@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -110,7 +110,7 @@ public class XtextResourceSet extends ResourceSetImpl {
     private Object classpathURIContext;
 
     public XtextResourceSet() {
-    	setURIResourceMap(new ConcurrentHashMap<URI,Resource>());
+    	setURIResourceMap(new HashMap<URI,Resource>());
     	resources = new ResourcesList();
     }
 
