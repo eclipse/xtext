@@ -2054,6 +2054,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{ val it = newLinkedHashMap('a'->'b', 'c'->'d') mapValues() [ toUpperCase ].get('a') }");
 	}
 	
+	@Ignore @Test public void testMapValuesExtension() throws Exception {
+		assertEvaluatesTo("D", 
+				"{ val it = newLinkedHashMap(1->'b', 2->'d') " +
+				"org::junit::Assert::assertEquals('D', it.mapValues[ toUpperCase ].get(2)) " +
+				"return 'D'}");
+	}
+	
+	@Ignore @Test public void testReduceWithPlusOperator() throws Exception {
+		assertEvaluatesTo( 55 , 
+				"(1..10).map[it].reduce[ a, b | a + b]");
+	}
+	
 	@Test public void testMapConstruction_00() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");
 	}
