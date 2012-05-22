@@ -41,7 +41,7 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     }
   }
   
-  public void resolvesTo(final String expression, final Class<?> type) throws Exception {
+  public void resolvesTo(final String expression, final Class<? extends Object> type) throws Exception {
     String _simpleName = type.getSimpleName();
     this.resolvesTo(expression, _simpleName);
   }
