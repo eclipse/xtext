@@ -544,6 +544,7 @@ public class JvmModelGenerator implements IGenerator {
     if (_not) {
       appendable.newLine();
     }
+    appendable.openScope();
     this.generateJavaDoc(it, appendable);
     final ITreeAppendable tracedAppendable = appendable.trace(it);
     this.generateAnnotations(it, tracedAppendable, true);
@@ -573,6 +574,7 @@ public class JvmModelGenerator implements IGenerator {
       this.generateExecutableBody(it, tracedAppendable);
     }
     appendable.decreaseIndentation();
+    appendable.closeScope();
     return false;
   }
   
@@ -586,6 +588,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_not_1) {
         appendable.newLine();
       }
+      appendable.openScope();
       this.generateJavaDoc(it, appendable);
       final ITreeAppendable tracedAppendable = appendable.trace(it);
       this.generateAnnotations(it, tracedAppendable, true);
@@ -601,6 +604,7 @@ public class JvmModelGenerator implements IGenerator {
       tracedAppendable.append(" ");
       this.generateExecutableBody(it, tracedAppendable);
       appendable.decreaseIndentation();
+      appendable.closeScope();
       return false;
     }
     return first;
@@ -775,7 +779,6 @@ public class JvmModelGenerator implements IGenerator {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
     boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
     if (_notEquals) {
-      appendable.openScope();
       ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
       ITreeAppendable _append = _increaseIndentation.append("{");
       _append.newLine();
@@ -784,12 +787,10 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
-      appendable.closeScope();
     } else {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
       boolean _notEquals_1 = (!Objects.equal(expression, null));
       if (_notEquals_1) {
-        appendable.openScope();
         JvmTypeReference _switchResult = null;
         boolean _matched = false;
         if (!_matched) {
@@ -848,7 +849,6 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
           _newLine_1.append("}");
         }
-        appendable.closeScope();
       } else {
         if ((op instanceof JvmOperation)) {
           ITreeAppendable _increaseIndentation_1 = appendable.increaseIndentation();
