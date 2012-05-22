@@ -209,7 +209,13 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 			    .addTypeToType("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer", 
 						"org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer")
 				.addTypeToType("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation", 
-						"org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No");
+						"org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No")
+				// DerivedMemberAwareEditorOpener
+				.addConfiguredBinding("LanguageSpecificURIEditorOpener", "if (org.eclipse.ui.PlatformUI.isWorkbenchRunning()) { \n"+
+						"\t\t\tbinder.bind(org.eclipse.xtext.ui.editor.IURIEditorOpener.class).annotatedWith(org.eclipse.xtext.ui.LanguageSpecific.class)" +
+						".to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n" +
+						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
+						"\t\t}");
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
