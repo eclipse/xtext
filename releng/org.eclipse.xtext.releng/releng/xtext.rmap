@@ -12,7 +12,7 @@
 	<locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
 	<locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />
 	
-	<redirect href="xtend.rmap" pattern="^org\.eclipse\.xtend(?:\..+)?$"/>
+	<redirect href="xtend.rmap" pattern="^org\.eclipse\.(?:xtend|xtend2)(?:\..+)?$"/>
 	
 	<searchPath name="xtext">
 		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
