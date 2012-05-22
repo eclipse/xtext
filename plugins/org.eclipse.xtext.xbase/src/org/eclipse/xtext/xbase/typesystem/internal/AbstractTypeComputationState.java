@@ -205,16 +205,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	protected abstract List<ITypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
-		AbstractTypeExpectation result = null;
-		if (expectedType != null) {
-			result = new TypeExpectation(expectedType, actualState, returnType);
-		} else {
-			result = new NoExpectation(actualState, returnType);
-		}
-		return result;
-	}
-	
 	public void acceptActualType(JvmTypeReference type) {
 		for(ITypeExpectation expectation: getImmediateExpectations()) {
 			expectation.acceptActualType(type, ConformanceHint.EXPECTATION_INDEPENDENT);

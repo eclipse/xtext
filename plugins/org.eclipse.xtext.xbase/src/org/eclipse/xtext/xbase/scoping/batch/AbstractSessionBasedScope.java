@@ -102,6 +102,9 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	protected String getShadowingKey(IEObjectDescription description) {
+		if (description instanceof BucketedEObjectDescription) {
+			return ((BucketedEObjectDescription) description).getShadowingKey();
+		}
 		return description.getName().toString();
 	}
 	

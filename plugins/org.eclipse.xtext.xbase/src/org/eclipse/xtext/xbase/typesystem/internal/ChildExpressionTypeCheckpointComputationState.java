@@ -12,20 +12,17 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState.TypeAssigner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
+ * TODO Javadoc, toString
  */
 @NonNullByDefault
-public class ChildExpressionTypeComputationState extends ExpressionTypeComputationState {
+public class ChildExpressionTypeCheckpointComputationState extends ExpressionTypeCheckpointComputationState {
 
-	protected ChildExpressionTypeComputationState(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver, 
-			ExpressionTypeComputationState parent,
-			XExpression expression) {
+	protected ChildExpressionTypeCheckpointComputationState(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession, DefaultReentrantTypeResolver reentrantTypeResolver,
+			ExpressionTypeComputationState parent, XExpression expression) {
 		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, expression);
 	}
 	
@@ -52,5 +49,11 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	@Override
 	public AbstractTypeComputationState withTypeCheckpoint() {
 		return new ChildExpressionTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, getExpression());
+	}
+
+	@Override
+	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
+			StackedResolvedTypes typeResolution) {
+		return new ChildExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression);
 	}
 }

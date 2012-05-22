@@ -39,7 +39,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -189,7 +190,13 @@ public class ResolvedTypes implements IResolvedTypes {
 					ensureReassignedTypesMapExists().put(identifiable, reference);
 				} else {
 					JvmMultiTypeReference multiTypeReference = TypesFactory.eINSTANCE.createJvmMultiTypeReference();
-					multiTypeReference.getReferences().add(EcoreUtil2.cloneIfContained(actualType));
+					if (actualType instanceof JvmMultiTypeReference) {
+						for(JvmTypeReference component: ((JvmMultiTypeReference) actualType).getReferences()) {
+							multiTypeReference.getReferences().add(EcoreUtil2.cloneIfContained(component));
+						}
+					} else {
+						multiTypeReference.getReferences().add(EcoreUtil2.cloneIfContained(actualType));
+					}
 					multiTypeReference.getReferences().add(EcoreUtil2.cloneIfContained(reference));
 					ensureReassignedTypesMapExists().put(identifiable, multiTypeReference);
 				}
@@ -206,7 +213,7 @@ public class ResolvedTypes implements IResolvedTypes {
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), resolver.getServices()) {
+		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), resolver.getServices()) {
 			@Override
 			protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference,
 					JvmTypeParameter type, Set<JvmTypeParameter> visiting) {

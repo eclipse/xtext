@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -26,7 +28,7 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implements IConstructorLinkingCandidate {
+public class ConstructorLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
 
 	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, AbstractTypeComputationState state) {
 		super(constructorCall, description, state);
@@ -43,6 +45,25 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate implem
 	@Override
 	protected List<XExpression> getSyntacticArguments() {
 		return getConstructorCall().getArguments();
+	}
+	
+	@Override
+	protected List<JvmTypeReference> getTypeArguments() {
+		return getConstructorCall().getTypeArguments();
+	}
+	
+	@Override
+	public List<JvmFormalParameter> getDeclaredParameters() {
+		return getConstructor().getParameters();
+	}
+	
+	@Override
+	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+		JvmDeclaredType createdType = getConstructor().getDeclaringType();
+		if (createdType instanceof JvmTypeParameterDeclarator) {
+			return ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
+		}
+		return Collections.emptyList();
 	}
 	
 	@Override

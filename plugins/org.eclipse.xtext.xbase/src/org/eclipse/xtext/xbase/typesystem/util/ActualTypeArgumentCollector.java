@@ -93,7 +93,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 						if (!result.containsKey(constraintType)) {
 							if (!getParametersToProcess().contains(constraintType)) {
 								Map<JvmTypeParameter, JvmTypeReference> constraintParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(constraintReference);
-								JvmTypeReference resolvedConstraint = new UnboundTypeParameterSubstitutor(constraintParameterMapping, getServices()).visit(constraintReference, Sets.newHashSet(pendingParameter));
+								JvmTypeReference resolvedConstraint = new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getServices()).visit(constraintReference, Sets.newHashSet(pendingParameter));
 								result.put(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter));
 							} else {
 								result.put(pendingParameter, boundByConstraint(getServices().getTypeReferences().getTypeForName(Object.class, pendingParameter), pendingParameter));

@@ -80,4 +80,23 @@ public class OverloadedMethods<V> {
 		return "overloaded(List,List)";
 	}
 	
+	/**
+	 * @since 2.3
+	 */
+	public static <T1> int overloadedTypeParameters(String s) { return 1; }
+	/**
+	 * @since 2.3
+	 */
+	public static <T1, T2> long overloadedTypeParameters(Object o) { return 1L; }
+	
+	/**
+	 * @since 2.3
+	 */
+	public static long overloadedVarArgs(Object o1, Object o2) { return 1L; }
+
+	/**
+	 * @since 2.3
+	 */
+	public static int overloadedVarArgs(String... s) { return s.length; }
+	
 }

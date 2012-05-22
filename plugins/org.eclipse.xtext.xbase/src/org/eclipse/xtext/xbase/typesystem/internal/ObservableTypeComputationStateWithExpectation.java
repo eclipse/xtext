@@ -7,18 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ObservableTypeExpectation.Observer;
+import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class ObservableTypeComputationStateWithExpectation extends TypeComputationStateWithExpectation {
+public class ObservableTypeComputationStateWithExpectation extends AbstractStackedTypeComputationState {
 
+	private final IJvmTypeReferenceProvider expectedType;
+	
 	private final Observer observer;
 
 	public ObservableTypeComputationStateWithExpectation(
@@ -26,14 +31,20 @@ public class ObservableTypeComputationStateWithExpectation extends TypeComputati
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent,
-			JvmTypeReference typeReference,
+			IJvmTypeReferenceProvider expectedType,
 			ObservableTypeExpectation.Observer observer) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, typeReference);
+		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+		this.expectedType = expectedType;
 		this.observer = observer;
 	}
 
 	@Override
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType,
+	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		ITypeExpectation result = createTypeExpectation(expectedType, actualState, false);
+		return Collections.singletonList(result);
+	}
+
+	protected AbstractTypeExpectation createTypeExpectation(IJvmTypeReferenceProvider expectedType,
 			AbstractTypeComputationState actualState, boolean returnType) {
 		return new ObservableTypeExpectation(expectedType, actualState, returnType, observer);
 	}

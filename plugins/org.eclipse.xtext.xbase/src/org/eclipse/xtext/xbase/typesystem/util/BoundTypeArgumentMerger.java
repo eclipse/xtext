@@ -24,6 +24,7 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc, toString
  */
 @Singleton
 public class BoundTypeArgumentMerger {

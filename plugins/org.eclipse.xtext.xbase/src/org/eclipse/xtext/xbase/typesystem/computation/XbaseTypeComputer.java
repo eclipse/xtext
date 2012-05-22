@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -208,55 +207,21 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
-		ITypeComputationState initializerState = state.fork().withExpectation(object.getType());
+		JvmTypeReference declaredType = object.getType();
+		ITypeComputationState initializerState = declaredType != null ? state.fork().withExpectation(declaredType) : state.fork().withNonVoidExpectation();
 		ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
-		state.assignType(object, computedType.getActualExpressionType());
+		// TODO keep information about the actual type 
+		state.assignType(object, declaredType != null ? declaredType : computedType.getActualExpressionType());
 		JvmTypeReference primitiveVoid = getPrimitiveVoid(object);
 		state.acceptActualType(primitiveVoid);
 	}
 
 	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {
 		List<IConstructorLinkingCandidate> candidates = state.getLinkingCandidates(constructorCall);
-		IConstructorLinkingCandidate best = getBestConstructorCandidate(candidates);
+		IConstructorLinkingCandidate best = getBestCandidate(candidates);
 		best.apply();
 	}
 	
-	protected IConstructorLinkingCandidate getBestConstructorCandidate(List<IConstructorLinkingCandidate> candidates) {
-		IConstructorLinkingCandidate result = candidates.get(0);
-		for(int i = 1; i < candidates.size(); i++) {
-			result = getBetterCandidate(result, candidates.get(i));
-		}
-		return result;
-	}
-
-	protected IConstructorLinkingCandidate getBetterCandidate(IConstructorLinkingCandidate left,
-			IConstructorLinkingCandidate right) {
-		int leftArityMismatch = getArityMismatch(left);
-		int rightArityMismatch = getArityMismatch(right);
-		if (leftArityMismatch != rightArityMismatch) {
-			if (leftArityMismatch == 0)
-				return left;
-			if (rightArityMismatch == 0)
-				return right;
-		}
-		return left;
-	}
-	
-	protected int getArityMismatch(IConstructorLinkingCandidate candidate) {
-		return getArityMismatch(candidate.getConstructor(), candidate.getArguments());
-	}
-
-	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {
-		int fixedArityParamCount = executable.getParameters().size();
-		if (executable.isVarArgs()) {
-			fixedArityParamCount--;
-			if (arguments.size() >= fixedArityParamCount) {
-				return 0;
-			}
-		}
-		return fixedArityParamCount - arguments.size();
-	}
-
 	protected void _computeTypes(XBooleanLiteral object, ITypeComputationState state) {
 		JvmTypeReference bool = getTypeReferences().getTypeForName(Boolean.TYPE, object);
 		state.acceptActualType(bool);
@@ -517,39 +482,20 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
-		IFeatureLinkingCandidate best = getBestFeatureCandidate(candidates);
+		IFeatureLinkingCandidate best = getBestCandidate(candidates);
 		best.apply();
 	}
 	
-	protected IFeatureLinkingCandidate getBestFeatureCandidate(List<IFeatureLinkingCandidate> candidates) {
-		IFeatureLinkingCandidate result = candidates.get(0);
+	protected <Candidate extends ILinkingCandidate<Candidate>> Candidate getBestCandidate(List<Candidate> candidates) {
+		Candidate result = candidates.get(0);
 		for(int i = 1; i < candidates.size(); i++) {
-			result = getBetterCandidate(result, candidates.get(i));
+			Candidate candidate = candidates.get(i);
+			if (result.compareTo(candidate) > 0)
+				result = candidate;
 		}
 		return result;
 	}
 
-	protected IFeatureLinkingCandidate getBetterCandidate(IFeatureLinkingCandidate left, IFeatureLinkingCandidate right) {
-		int leftArityMismatch = getArityMismatch(left);
-		int rightArityMismatch = getArityMismatch(right);
-		if (leftArityMismatch != rightArityMismatch) {
-			if (leftArityMismatch == 0)
-				return left;
-			if (rightArityMismatch == 0)
-				return right;
-		}
-		return left;
-	}
-	
-	protected int getArityMismatch(IFeatureLinkingCandidate candidate) {
-		JvmIdentifiableElement identifiable = candidate.getFeature();
-		if (identifiable instanceof JvmExecutable) {
-			return getArityMismatch((JvmExecutable) identifiable, candidate.getArguments());
-		} else {
-			return candidate.getArguments().size();
-		}
-	}
-	
 	public JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
 		if (object instanceof XSwitchExpression) {
 			return (XSwitchExpression) object;

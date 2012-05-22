@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.internal;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +14,7 @@ import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -25,6 +23,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
  */
 public class UnboundTypeParameter extends AbstractReentrantTypeReferenceProvider {
 
@@ -62,7 +61,7 @@ public class UnboundTypeParameter extends AbstractReentrantTypeReferenceProvider
 				}
 			}
 		}
-		UnboundTypeParameterSubstitutor unboundSubstitutor = new UnboundTypeParameterSubstitutor(
+		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
 				Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services);
 		JvmTypeReference substitute = unboundSubstitutor.substitute(services.getTypeReferences().createTypeRef(typeParameter));
 		boundTo = substitute;

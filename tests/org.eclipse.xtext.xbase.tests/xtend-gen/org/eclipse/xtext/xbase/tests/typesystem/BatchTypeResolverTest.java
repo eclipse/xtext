@@ -199,6 +199,66 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testOverloadedVarArgs_01() throws Exception {
+    this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs(null, null)", "long");
+  }
+  
+  @Test
+  public void testOverloadedVarArgs_02() throws Exception {
+    this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs()", "int");
+  }
+  
+  @Test
+  public void testOverloadedVarArgs_03() throws Exception {
+    this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs(\'\', \'\')", "long");
+  }
+  
+  @Test
+  public void testOverloadedVarArgs_04() throws Exception {
+    this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs(new Object, new Object, new Object)", "int");
+  }
+  
+  @Test
+  public void testOverloadedTypeParameters_01() throws Exception {
+    this.resolvesTo("testdata::OverloadedMethods::<String>overloadedTypeParameters(null)", "int");
+  }
+  
+  @Test
+  public void testOverloadedTypeParameters_02() throws Exception {
+    this.resolvesTo("testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)", "long");
+  }
+  
+  @Ignore
+  @Test
+  public void testOverloadedOperators_01() throws Exception {
+    this.resolvesTo("1 + 1", "int");
+  }
+  
+  @Ignore
+  @Test
+  public void testOverloadedOperators_02() throws Exception {
+    this.resolvesTo("1L + 1", "long");
+  }
+  
+  @Ignore
+  @Test
+  public void testOverloadedOperators_03() throws Exception {
+    this.resolvesTo("1 + 1L", "long");
+  }
+  
+  @Ignore
+  @Test
+  public void testOverloadedOperators_04() throws Exception {
+    this.resolvesTo("\'\' + \'\'", "String");
+  }
+  
+  @Ignore
+  @Test
+  public void testOverloadedOperators_05() throws Exception {
+    this.resolvesTo("\'\' + 1", "String");
+  }
+  
+  @Test
   public void testCastExpression() throws Exception {
     this.resolvesTo("null as String", "String");
     this.resolvesTo("null as Boolean", "Boolean");
@@ -388,6 +448,26 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testSwitchExpression_3() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Object c = null\n\t\t\tswitch c {\n\t            CharSequence: 1\n\t    \t}\n\t\t}", "Integer");
+  }
+  
+  @Test
+  public void testSwitchExpression_4() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.charAt(1)\n                    }\n                }\n        \t}\n\t\t}", "Character");
+  }
+  
+  @Test
+  public void testSwitchExpression_5() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.append(null)\n                    }\n                }\n        \t}\n\t\t}", "Appendable");
+  }
+  
+  @Test
+  public void testSwitchExpression_6() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> c = null\n\t\t\tswitch c {\n\t            CharSequence: switch(c) {\n                    Appendable: {\n                        c.compareTo(null)\n                    }\n                }\n        \t}\n\t\t}", "Integer");
+  }
+  
+  @Test
   public void testTypeGuardedCase_0() throws Exception {
     this.resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
   }
@@ -434,6 +514,31 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     String _plus_9 = (_plus_8 + "}");
     input = _plus_9;
     this.resolvesTo(input, "String");
+  }
+  
+  @Test
+  public void testBlockExpression_04() throws Exception {
+    this.resolvesTo("{val Object s = \'\' s}", "Object");
+  }
+  
+  @Test
+  public void testEMap_01() throws Exception {
+    this.resolvesTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ getKey ].head\n         }", "Integer");
+  }
+  
+  @Test
+  public void testEMap_02() throws Exception {
+    this.resolvesTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ getValue ].head\n         }", "String");
+  }
+  
+  @Test
+  public void testEMap_03() throws Exception {
+    this.resolvesTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ it ].head\n         }", "Entry<Integer, String>");
+  }
+  
+  @Test
+  public void testEMap_04() throws Exception {
+    this.resolvesTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map\n         }", "Map<Integer, String>");
   }
   
   @Test
@@ -510,6 +615,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   public void testMemberFeatureCall_01() throws Exception {
     this.resolvesTo("newArrayList(\'\').get(0)", "String");
     this.resolvesTo("<String>newArrayList().get(0)", "String");
+  }
+  
+  @Test
+  public void testMemberFeatureCall_02() throws Exception {
+    this.resolvesTo("(1..20).map[ toString.length ].reduce[ i1,  i2 | i1 + i2 ]", "Integer");
   }
   
   @Test

@@ -181,6 +181,56 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testNumberLiteral_24() throws Exception {
 		"1E10f".resolvesTo("float")
 	}
+	
+	@Test def void testOverloadedVarArgs_01() throws Exception {
+		"testdata::OverloadedMethods::overloadedVarArgs(null, null)".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedVarArgs_02() throws Exception {
+		"testdata::OverloadedMethods::overloadedVarArgs()".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedVarArgs_03() throws Exception {
+		"testdata::OverloadedMethods::overloadedVarArgs('', '')".resolvesTo("long")
+	}
+	
+	@Test def void testOverloadedVarArgs_04() throws Exception {
+		// TODO discuss: JDT binds to overloaded(Object, Object) thought the arity indicates overloaded(String...)
+		"testdata::OverloadedMethods::overloadedVarArgs(new Object, new Object, new Object)".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedTypeParameters_01() throws Exception {
+		"testdata::OverloadedMethods::<String>overloadedTypeParameters(null)".resolvesTo("int")
+	}
+	
+	@Test def void testOverloadedTypeParameters_02() throws Exception {
+		"testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)".resolvesTo("long")
+	}
+	
+	@Ignore
+	@Test def void testOverloadedOperators_01() throws Exception {
+		"1 + 1".resolvesTo("int")
+	}
+	
+	@Ignore
+	@Test def void testOverloadedOperators_02() throws Exception {
+		"1L + 1".resolvesTo("long")
+	}
+	
+	@Ignore
+	@Test def void testOverloadedOperators_03() throws Exception {
+		"1 + 1L".resolvesTo("long")
+	}
+	
+	@Ignore
+	@Test def void testOverloadedOperators_04() throws Exception {
+		"'' + ''".resolvesTo("String")
+	}
+	
+	@Ignore
+	@Test def void testOverloadedOperators_05() throws Exception {
+		"'' + 1".resolvesTo("String")
+	}
 
 	@Test def void testCastExpression() throws Exception {
 		"null as String".resolvesTo("String")
@@ -374,6 +424,54 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("null")
 	}
 	
+	@Test def void testSwitchExpression_3() throws Exception {
+		"{
+			val Object c = null
+			switch c {
+	            CharSequence: 1
+	    	}
+		}".resolvesTo("Integer")
+	}
+	
+	@Test def void testSwitchExpression_4() throws Exception {
+		"{
+			val Comparable<Object> c = null
+			switch c {
+	            CharSequence: switch(c) {
+                    Appendable: {
+                        c.charAt(1)
+                    }
+                }
+        	}
+		}".resolvesTo("Character")
+	}
+	
+	@Test def void testSwitchExpression_5() throws Exception {
+		"{
+			val Comparable<Object> c = null
+			switch c {
+	            CharSequence: switch(c) {
+                    Appendable: {
+                        c.append(null)
+                    }
+                }
+        	}
+		}".resolvesTo("Appendable")
+	}
+	
+	@Test def void testSwitchExpression_6() throws Exception {
+		"{
+			val Comparable<Object> c = null
+			switch c {
+	            CharSequence: switch(c) {
+                    Appendable: {
+                        c.compareTo(null)
+                    }
+                }
+        	}
+		}".resolvesTo("Integer")
+	}
+	
 	@Test def void testTypeGuardedCase_0() throws Exception {
 		"switch s: new Object() { String: s StringBuffer: s}".resolvesTo("Serializable & CharSequence")
 //		assertEquals("Object", toString(typeProvider.getType(expression.getSwitch())));
@@ -413,6 +511,38 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}
 		input = input + " s" + (max + 1) + "}"
 		input.resolvesTo("String")
+	}
+	
+	@Test def void testBlockExpression_04() throws Exception {
+		"{val Object s = '' s}".resolvesTo("Object")
+	}
+	
+	@Test def void testEMap_01() throws Exception {
+		"{ 
+          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()
+		  eMap.map[ getKey ].head
+         }".resolvesTo("Integer")
+	}
+	
+	@Test def void testEMap_02() throws Exception {
+		"{ 
+          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()
+		  eMap.map[ getValue ].head
+         }".resolvesTo("String")
+	}
+	
+	@Test def void testEMap_03() throws Exception {
+		"{ 
+          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()
+		  eMap.map[ it ].head
+         }".resolvesTo("Entry<Integer, String>")
+	}
+	
+	@Test def void testEMap_04() throws Exception {
+		"{ 
+          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()
+		  eMap.map
+         }".resolvesTo("Map<Integer, String>")
 	}
 	
 //	@Test def void testBlockExpression_04() throws Exception {
@@ -499,6 +629,10 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testMemberFeatureCall_01() throws Exception {
 		"newArrayList('').get(0)".resolvesTo("String")
 		"<String>newArrayList().get(0)".resolvesTo("String")
+	}
+	
+	@Test def void testMemberFeatureCall_02() throws Exception {
+		"(1..20).map[ toString.length ].reduce[ i1,  i2 | i1 + i2 ]".resolvesTo("Integer")
 	}
 	
 	@Test def void testFeatureCall_04() throws Exception {
