@@ -44,11 +44,11 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.collect.Maps;
@@ -123,7 +123,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
 			}
 			// Handle XAnnotation in a special way because we want the @ highlighted too
-			if (object instanceof XAnnotation) {
+			if (object instanceof XNumberLiteral) {
+				highlightNumberLiterals((XNumberLiteral) object, acceptor);
+			} if (object instanceof XAnnotation) {
 				highlightAnnotation((XAnnotation) object, acceptor);
 			} else {
 				computeReferencedJvmTypeHighlighting(acceptor, object);
@@ -227,6 +229,12 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XbaseHighlightingConfiguration.ANNOTATION);
 		}
 	}
+	
+	protected void highlightNumberLiterals(XNumberLiteral literal, IHighlightedPositionAcceptor acceptor) {
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(literal);
+		acceptor.addPosition(node.getOffset(), node.getLength(), DefaultHighlightingConfiguration.NUMBER_ID);
+	}
+	
 
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
 		TerminalRule idRule = grammarAccess.getIDRule();
