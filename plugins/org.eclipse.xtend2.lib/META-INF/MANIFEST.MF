@@ -6,5 +6,6 @@ Bundle-Version: 2.3.0.qualifier
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.3.0";visibility:=reexport,
  org.eclipse.xtend.lib;bundle-version="2.3.0";visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6
 Bundle-ActivationPolicy: lazy
