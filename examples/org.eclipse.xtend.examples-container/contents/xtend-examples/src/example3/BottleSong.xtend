@@ -1,6 +1,15 @@
-package lesson3
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Author - Sven Efftinge
+ *******************************************************************************/
+package example3
 
-import static extension lesson3.BottleSupport.*
+import static extension example3.BottleSupport.*
 import org.junit.Test
 
 /**

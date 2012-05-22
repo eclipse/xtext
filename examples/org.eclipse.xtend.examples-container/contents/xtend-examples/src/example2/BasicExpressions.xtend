@@ -1,4 +1,11 @@
-package lesson2
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package example2
 
 import org.junit.Test
 import static org.junit.Assert.*
@@ -36,9 +43,9 @@ class BasicExpressions {
 	}
 	
 	@Test def void controlStructures() {
-		// if looks like in Java
+		// 'if' looks like in Java
 		if ('text'.length == 4) {
-			// but is an expression!
+			// but it's an expression so it can be used in more flexible ways:
 			assertEquals( 42 , if ('foo' != 'bar') 42 else -24 )
 		} else {
 			fail('Never happens!')
@@ -56,7 +63,7 @@ class BasicExpressions {
 				fail('never happens!')
 		}
 		
-		// switch also supports type guards, which provides a safe 
+		// switch also supports type guards, which provide a safe 
 		// and convenient alternative to Java's 'instanceof'-cascades.
 		val Object someValue = 'a string typed to Object'
 		assertEquals('string', 

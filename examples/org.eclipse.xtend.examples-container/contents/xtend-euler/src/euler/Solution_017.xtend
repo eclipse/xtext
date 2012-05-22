@@ -1,4 +1,14 @@
-package euler
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Author - Sebastian Zarnekow
+ * See https://github.com/szarnekow/xtend-euler 
+ *******************************************************************************/
+ package euler
 
 /**
  * If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
@@ -23,11 +33,7 @@ class Solution_017 {
 	}
 
 	def solve() {
-		(1..upper).map[ word.replace(" ","").length ]
-		//TODO: uncomment me
-//		.reduce[ i1, i2 |
-//			i1 + i2
-//		]
+		(1..upper).map[ word.replace(" ","").length ].reduce[ int i1, int i2| i1 + i2 ]
 	}
 
 	def String word(int number) {
