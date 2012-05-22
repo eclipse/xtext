@@ -35,7 +35,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtend.examples.NewXtendTutorial" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="xtend-tutorial" contentURI="contents/xtend.tutorial.zip" description="A hands-on tutorial for Xtend."/>
+		 <projectDescriptor name="xtend-examples" contentURI="contents/xtend-examples.zip" description="%XtendTutorial_description"/>
 	  </example>
    </extension>
 
@@ -62,7 +62,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtend.examples.NewXtendEuler" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="xtend-euler" contentURI="contents/xtend-euler.zip" description="Solutions for http://projecteuler.net with Xtend."/>
+		 <projectDescriptor name="xtend-euler" contentURI="contents/xtend-euler.zip" description="%XtendEuler_description"/>
 	  </example>
    </extension>
 </plugin>

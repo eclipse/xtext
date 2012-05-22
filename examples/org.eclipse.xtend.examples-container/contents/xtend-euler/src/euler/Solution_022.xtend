@@ -1,4 +1,14 @@
-package euler
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Author - Sebastian Zarnekow
+ * See https://github.com/szarnekow/xtend-euler 
+ *******************************************************************************/
+ package euler
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -29,14 +39,13 @@ class Solution_022 {
 				names.add(matcher.group(1))
 			}
 			val result = new AtomicLong
-			//TODO: uncomment me
-//			names.sort.forEach [ name, i |
-//				result.addAndGet(name.toCharArray.map [
-//					Character::getNumericValue(it) - 9
-//				].reduce[ i1, i2 |
-//					i1 + i2
-//				] * (i + 1))
-//			]
+			names.sort.forEach [ name, i |
+				result.addAndGet(name.toCharArray.map [
+					Character::getNumericValue(it) - 9
+				].reduce[ int i1, int i2 |
+					i1 + i2
+				] * (i + 1))
+			]
 			println(result)
 		} finally {
 			reader.close
