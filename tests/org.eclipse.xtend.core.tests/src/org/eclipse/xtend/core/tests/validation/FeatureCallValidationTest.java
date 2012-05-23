@@ -212,4 +212,9 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
 	}
 
+	@Test public void testPrivateConstructorCalled() throws Exception {
+		XtendClass clazz = clazz("class X { def foo() { new test.Constructor() } }");
+		helper.assertError(clazz, XbasePackage.Literals.XCONSTRUCTOR_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.FEATURE_NOT_VISIBLE);
+	}
 }
