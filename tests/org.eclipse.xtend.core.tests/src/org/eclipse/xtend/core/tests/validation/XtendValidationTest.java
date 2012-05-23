@@ -44,6 +44,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	@Test public void testNoSideEffects() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { 'foo' } }");
+		helper.assertError(clazz, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	
 	@Test public void testFieldInitializerType_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = 1 }");
 		helper.assertError(clazz, XNUMBER_LITERAL, INCOMPATIBLE_RETURN_TYPE);
