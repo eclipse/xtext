@@ -80,7 +80,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -1128,7 +1127,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 							// Filter out HiddenLeafNodes to avoid confusion by comments etc.
 							StringBuilder builder = new StringBuilder();
 							for(ILeafNode leafNode : n.getLeafNodes()){
-								if(!(leafNode instanceof HiddenLeafNode)){
+								if(!leafNode.isHidden()){
 									builder.append(leafNode.getText());
 								}
 							}
