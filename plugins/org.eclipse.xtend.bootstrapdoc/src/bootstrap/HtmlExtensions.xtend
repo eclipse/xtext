@@ -102,7 +102,7 @@ class HtmlExtensions {
 	def dispatch toHtml(Link it) '''<a href="«url»">«text»</a>'''
 
 	def dispatch toHtml(Table it) '''
-		<table class="bordered-table zebra-striped">
+		<table class="table table-bordered table-condensed">
 		«FOR row:rows»
 			«row.toHtml»
 		«ENDFOR»
@@ -135,7 +135,7 @@ class HtmlExtensions {
 		if(code.contains('\n') || code.contains('\r')) '''
 			«IF isParagraph»</p>«ENDIF»<pre class="prettyprint lang-«languageName.toLowerCase»">«markCodeBegin»
 			«code.trimCode»«markCodeEnd»</pre>«IF isParagraph»<p>«ENDIF»
-		''' else '''<code class="prettyprint lang-«languageName.toLowerCase»">«code.trimCode»</code>'''
+		''' else '''<code>«code.trimCode»</code>'''
 	}
 	
 	def protected trimCode(String it) {

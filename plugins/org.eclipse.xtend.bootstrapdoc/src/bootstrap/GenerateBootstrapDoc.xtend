@@ -72,10 +72,10 @@ class GenerateBootstrapDoc {
 	
 	def main(Document document) {
 		'''
-			«mainSite.header('../')»
+			«mainSite.header('../bootstrap')»
 				«document.menu»
 				«document.body»
-			«mainSite.footer»
+			«mainSite.footer('../bootstrap')»
 		'''.postProcess
 	}
 		

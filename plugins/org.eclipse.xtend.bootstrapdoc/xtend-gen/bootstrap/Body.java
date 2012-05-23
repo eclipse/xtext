@@ -46,47 +46,43 @@ public class Body {
     _builder.append(_href, "");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.append("<div class=\"page-header\">");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.append("<h1>");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     TextOrMarkup _title = chapter.getTitle();
     CharSequence _html = this._htmlExtensions.toHtml(_title);
-    _builder.append(_html, "			");
+    _builder.append(_html, "		");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.append("</h1>");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("</div>");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("<div class=\"row\">");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<div class=\"span12 offset2\">");
+    _builder.append("\t");
+    _builder.append("<div class=\"span9 offset2\">");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t");
     EList<TextOrMarkup> _contents = chapter.getContents();
     CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(_contents);
-    _builder.append(_htmlParagraph, "			");
+    _builder.append(_htmlParagraph, "		");
     _builder.newLineIfNotEmpty();
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(chapter);
       for(final AbstractSection section : _sections) {
-        _builder.append("\t\t\t");
+        _builder.append("\t\t");
         CharSequence _h2 = this.h2(section);
-        _builder.append(_h2, "			");
+        _builder.append(_h2, "		");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.append("</div>");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("</div>");
     _builder.newLine();
     _builder.append("</section>");
@@ -158,8 +154,6 @@ public class Body {
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("</section>");
-    _builder.newLine();
     return _builder;
   }
 }

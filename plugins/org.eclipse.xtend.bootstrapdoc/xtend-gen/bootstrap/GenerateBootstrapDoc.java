@@ -134,7 +134,7 @@ public class GenerateBootstrapDoc {
   
   public String main(final Document document) {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _header = this.mainSite.header("../");
+    CharSequence _header = this.mainSite.header("../bootstrap");
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -145,7 +145,7 @@ public class GenerateBootstrapDoc {
     CharSequence _body = this._body.body(document);
     _builder.append(_body, "	");
     _builder.newLineIfNotEmpty();
-    CharSequence _footer = this.mainSite.footer();
+    CharSequence _footer = this.mainSite.footer("../bootstrap");
     _builder.append(_footer, "");
     _builder.newLineIfNotEmpty();
     String _postProcess = this._postProcessor.postProcess(_builder);

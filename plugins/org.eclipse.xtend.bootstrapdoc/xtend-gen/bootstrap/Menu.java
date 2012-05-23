@@ -19,16 +19,31 @@ public class Menu {
   
   public CharSequence menu(final Document document) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<div class=\"topbar\" data-dropdown=\"dropdown\">");
+    _builder.append("<div class=\"navbar navbar-fixed-top\">");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<div class=\"fill\">");
+    _builder.append("<div class=\"navbar-inner\">");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<div class=\"container\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<a class=\"brand\" href=\"http://xtend-lang.org\">Xtend</a>");
+    _builder.append("<a class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("<span class=\"icon-bar\"></span>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("<span class=\"icon-bar\"></span>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("<span class=\"icon-bar\"></span>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<a class=\"brand\" href=\"http://www.xtend-lang.org\">Xtend</a>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<ul class=\"nav\">");
@@ -57,14 +72,11 @@ public class Menu {
             _builder.newLine();
             _builder.append("\t\t\t\t");
             _builder.append("\t");
-            _builder.append("<a href=\"#");
-            String _href_1 = this._htmlExtensions.href(s);
-            _builder.append(_href_1, "					");
-            _builder.append("\" class=\"dropdown-toggle\">");
+            _builder.append("<a class=\"dropdown-toggle\" data-toggle=\"dropdown\">");
             TextOrMarkup _title_1 = s.getTitle();
             CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
             _builder.append(_html_1, "					");
-            _builder.append("</a>");
+            _builder.append(" <b class=\"caret\"></b></a>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t\t");
             _builder.append("\t");
@@ -76,8 +88,8 @@ public class Menu {
                 _builder.append("\t\t\t\t");
                 _builder.append("\t\t");
                 _builder.append("<li><a href=\"#");
-                String _href_2 = this._htmlExtensions.href(subSection);
-                _builder.append(_href_2, "						");
+                String _href_1 = this._htmlExtensions.href(subSection);
+                _builder.append(_href_1, "						");
                 _builder.append("\">");
                 TextOrMarkup _title_2 = subSection.getTitle();
                 CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
@@ -97,11 +109,17 @@ public class Menu {
         }
       }
     }
+    _builder.append("\t\t\t");
+    _builder.append("</ul>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<ul class=\"nav pull-right\">");
+    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("</ul>");
+    _builder.append("</ul>\t");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</div>");

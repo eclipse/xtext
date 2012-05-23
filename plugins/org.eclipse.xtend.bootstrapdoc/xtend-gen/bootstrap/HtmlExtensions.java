@@ -244,7 +244,7 @@ public class HtmlExtensions {
   
   protected CharSequence _toHtml(final Table it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<table class=\"bordered-table zebra-striped\">");
+    _builder.append("<table class=\"table table-bordered table-condensed\">");
     _builder.newLine();
     {
       EList<TableRow> _rows = it.getRows();
@@ -356,10 +356,7 @@ public class HtmlExtensions {
         _xifexpression_1 = _builder;
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<code class=\"prettyprint lang-");
-        String _lowerCase_1 = languageName.toLowerCase();
-        _builder_1.append(_lowerCase_1, "");
-        _builder_1.append("\">");
+        _builder_1.append("<code>");
         String _trimCode_1 = this.trimCode(code);
         _builder_1.append(_trimCode_1, "");
         _builder_1.append("</code>");

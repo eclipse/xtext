@@ -11,32 +11,30 @@ class Body {
 
 	@Inject extension HtmlExtensions
 	
-	def body(Document document) {
-		'''
+	def body(Document document) '''
 		<div id="maincontainer" class="container">
 			«FOR chapter: document.chapters»
 				«(chapter.resolve as Chapter).h1»
 			«ENDFOR»
 		</div>
-		'''
-	}
+	'''
 	
 	def h1(Chapter chapter) '''
 		<!-- chapter -->
 		<section id="«chapter.href»">
-			<div class="page-header">
-				<h1>
-					«chapter.title.toHtml»
-				</h1>
+		<div class="page-header">
+			<h1>
+				«chapter.title.toHtml»
+			</h1>
+		</div>
+		<div class="row">
+			<div class="span9 offset2">
+				«chapter.contents.toHtmlParagraph»
+				«FOR section: chapter.sections»
+					«section.h2»
+				«ENDFOR»
 			</div>
-			<div class="row">
-				<div class="span12 offset2">
-					«chapter.contents.toHtmlParagraph»
-					«FOR section: chapter.sections»
-						«section.h2»
-					«ENDFOR»
-				</div>
-			</div>
+		</div>
 		</section>
 	'''
 	
@@ -59,6 +57,5 @@ class Body {
 		«FOR subSection: section.sections»
 			«subSection.h3plus(hLevel + 1)»
 		«ENDFOR»
-		</section>
 	'''
 }
