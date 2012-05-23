@@ -242,7 +242,7 @@ public class BuckminsterFilesCreator {
     _builder.append("<rm:property key=\"xtext.p2.repository\" value=\"${eclipse.download}/modeling/tmf/xtext/updates/composite/milestones/\"/>");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("<rm:property key=\"eclipse.target.platform\" value=\"${eclipse.download}/releases/indigo\"/>");
+    _builder.append("<rm:property key=\"eclipse.target.platform\" value=\"${eclipse.download}/releases/juno\"/>");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("<rm:redirect pattern=\"");

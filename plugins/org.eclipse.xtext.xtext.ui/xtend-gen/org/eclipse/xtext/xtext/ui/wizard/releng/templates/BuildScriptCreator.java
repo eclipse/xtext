@@ -91,7 +91,7 @@ public class BuildScriptCreator {
     _builder.append("/commands.txt\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("<property name=\"target.platform\" location=\"target.platform\" />");
+    _builder.append("<property name=\"target.platform\" value=\"target.platform\" />");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
