@@ -7,88 +7,74 @@
 	content="Eclipse Xtend is a statically-typed programming language running on the JVM.">
 <meta name="author" content="Sven Efftinge">
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<!-- Le styles -->
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding-top: 40px;
+		}
+		
+		section {
+			padding-top: 40px;
+		}
+		
+		section#announcement {
+			padding-top: 0px !important;
+		}
+		
+		div#maincontainer>section {
+			padding-top: 90px;
+		}
+	</style>
+	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];	
+	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+		
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-<!-- Le styles -->
-<!-- <link href="bootstrap.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="bootstrap.min.css">
-<style type="text/css">
-body {
-	padding-top: 40px;
-}
-
-section#announcement {
-	padding-top: 0px !important;
-}
-
-section {
-	padding-top: 40px;
-}
-
-div#maincontainer>section {
-	padding-top: 90px;
-}
-
-</style>
-<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
-<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="bootstrap-dropdown.js"></script>
-
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
-	_gaq.push([ '_trackPageview' ]);
-
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-				: 'http://www')
-				+ '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-
-<!-- Place this render call where appropriate -->
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-
-<script type="text/javascript">
-	$('#topbar').dropdown();
-</script>
-
-<!-- Le fav and touch icons -->
-<link rel="shortcut icon" href="images/favicon.ico">
-<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72"
-	href="images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114"
-	href="images/apple-touch-icon-114x114.png">
+	<!-- Le fav and touch icons -->
+	<link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
 </head>
 
 <body onload="prettyPrint()">
 
-	<div class="topbar" data-dropdown="dropdown">
-		<div class="fill">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
 			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
 				<a class="brand" href="#">Xtend</a>
 				<ul class="nav">
 					<li><a href="#download">Download</a></li>
 					<li><a href="#documentation">Documentation</a></li>
 					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle">Features</a>
+		              <a class="dropdown-toggle" data-toggle="dropdown">Features <b class="caret"></b></a>
 		              <ul class="dropdown-menu">
 		                <li><a href="#extensionmethods">Extension Methods</a></li>
 						<li><a href="#multipledispatch">Multiple Dispatch</a></li>
@@ -105,7 +91,7 @@ div#maincontainer>section {
 		              </ul>
 		            </li>
 					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle">Community</a>
+		              <a class="dropdown-toggle" data-toggle="dropdown">Community <b class="caret"></b></a>
 		              <ul class="dropdown-menu">
 		                <li><a href="https://groups.google.com/group/xtend-lang">Google Group</a></li>
 		                <li><a href="https://bugs.eclipse.org/bugs/enter_bug.cgi?product=Xtend">bugs.eclipse.org</a></li>
@@ -115,7 +101,7 @@ div#maincontainer>section {
 		              </ul>
 		            </li>
 					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle">About</a>
+		              <a class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 		              <ul class="dropdown-menu">
 		                <li><a href="#intro">About</a></li>
 		                <li><a href="#history">History</a></li>
@@ -123,8 +109,10 @@ div#maincontainer>section {
 		                <li><a href="http://eclipse.org/projects/project.php?id=tools.xtend">Committers, Stats, etc.</a></li>
 		              </ul>
 		            </li>
-					<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 				</ul>
+				<ul class="nav pull-right">
+					<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+				</ul>	
 			</div>
 		</div>
 	</div>
@@ -133,10 +121,10 @@ div#maincontainer>section {
 			<img src="images/Xtend-logo.png" width="500px">
 			<p>A language made for Java developers.</p>
 			<p>
-				<a class="btn primary large" style="width: 150px;" href="#download">Download
+				<a class="btn btn-primary btn-large" style="width: 150px;" href="#download">Download
 					&raquo;</a>
 				&nbsp;&nbsp;&nbsp;
-				<a class="btn primary large" style="width: 150px;" href="#documentation">Documentation
+				<a class="btn btn-primary btn-large" style="width: 150px;" href="#documentation">Documentation
 					&raquo;</a>
 			</p>
 		</div>
@@ -147,7 +135,7 @@ div#maincontainer>section {
 		</div>
 		<section id="intro">
 			<div class="row">
-				<div class="span-one-third">
+				<div class="span4">
 					<h2>Embrace Java ...</h2>
 					<p>Java is a great platform and also the language has some nice
 						features. Xtend is not meant to replace Java all together but to
@@ -164,7 +152,7 @@ div#maincontainer>section {
 						<li><a href="#scopeofxtend">does classes only</a>
 					</ul>
 				</div>
-				<div class="span-one-third">
+				<div class="span4">
 					<h2>... but kill the noise ...</h2>
 					<p>In contrast to Java, Xtend removes unnecessary noise.
 						Reducing code to the minimum not only helps you type less, but
@@ -175,12 +163,12 @@ div#maincontainer>section {
 						<li><a href="#morenoisereduction">property access</a>
 						<li><a href="#morenoisereduction">better defaults</a>
 						<li><a href="#operatoroverloading">operator overloading</a> <span
-							class="label success">Updated !</span></li>
+							class="label label-success">UPDATED !</span></li>
 						<li><a href="#everythingisanexpression">everything is an
-								expression</a> <span class="label success">Updated !</span></li>
+								expression</a> <span class="label label-success">UPDATED !</span></li>
 					</ul>
 				</div>
-				<div class="span-one-third">
+				<div class="span4">
 					<h2>... and add some sugar!</h2>
 					<p>Simply improving on Java by removing the noise is already
 						very helpful, but Java also lacks some important language
@@ -194,22 +182,22 @@ div#maincontainer>section {
 								expression</a>
 						<li><a href="#templateexpression">template expressions</a>
 						<li><a href="#dslsupport">exceptional DSL support</a> <span
-							class="label success">Updated !</span>
+							class="label label-success">UPDATED !</span>
 					</ul>
 				</div>
 			</div>
 			<div class="row">
-				<div class="span-one-third">
+				<div class="span4">
 					<p>
 						<a class="btn" href="#embracejava">View details &raquo;</a>
 					</p>
 				</div>
-				<div class="span-one-third">
+				<div class="span4">
 					<p>
 						<a class="btn" href="#noisereduction">View details &raquo;</a>
 					</p>
 				</div>
-				<div class="span-one-third">
+				<div class="span4">
 					<p>
 						<a class="btn" href="#sugar">View details &raquo;</a>
 					</p>
@@ -232,23 +220,23 @@ div#maincontainer>section {
 				</h1>
 			</div>
 			<div class="row">
-				<div class="span8">
+				<div class="span6">
 					<h2>Option 1: Download Eclipse</h2>
 					<div class="row">
-					<div class="span5">
-						<table>
+					<div class="span3">
+						<table class="table">
 							<tr>
 	<td><strong>OS X</strong></td>
-	<td><a class="btn primary medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa-x86_64.tar.gz">64 Bit</a></td>
-	<td><a class="btn primary medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa.tar.gz">32 Bit</a></td>
+	<td><a class="btn btn-primary btn-medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa-x86_64.tar.gz">64 Bit</a></td>
+	<td><a class="btn btn-primary btn-medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-macosx-cocoa.tar.gz">32 Bit</a></td>
 	</tr><tr>
 	<td><strong>Windows</strong></td>
-	<td><a class="btn primary medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-win32-x86_64.zip">64 Bit</a></td>
-	<td><a class="btn primary medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-win32.zip">32 Bit</a></td>
+	<td><a class="btn btn-primary btn-medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-win32-x86_64.zip">64 Bit</a></td>
+	<td><a class="btn btn-primary btn-medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-win32.zip">32 Bit</a></td>
 	</tr><tr>
 	<td><strong>Linux</strong></td>
-	<td><a class="btn primary medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk-x86_64.tar.gz">64 Bit</a></td>
-	<td><a class="btn primary medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk.tar.gz">32 Bit</a></td>
+	<td><a class="btn btn-primary btn-medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk-x86_64.tar.gz">64 Bit</a></td>
+	<td><a class="btn btn-primary btn-medium" href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-3.7.1-Xtext-2.2.1-linux-gtk.tar.gz">32 Bit</a></td>
 	</tr>
 						</table>
 					</div>
@@ -259,7 +247,7 @@ div#maincontainer>section {
 					</div>
 					</div>
 				</div>
-				<div class="span8">
+				<div class="span6">
 					<h2>Option 2: Install the Xtend SDK</h2>
 					<p>
 						If you already have a running <a
@@ -270,7 +258,7 @@ div#maincontainer>section {
 						install the Xtend SDK.
 					</p>
 					<p>
-						<a class="btn primary large" style="width: 250px;"
+						<a class="btn btn-primary btn-large" style="width: 250px;"
 							href="http://marketplace.eclipse.org/content/eclipse-xtend">Install
 							from Eclipse Marketplace &raquo;</a>
 					</p>
@@ -285,55 +273,53 @@ div#maincontainer>section {
 				</h1>
 			</div>
 			<div class="row">
-				<div class="span8">
+				<div class="span6">
 					<div class="row">
-						<div class="span3">
+						<div class="span2">
 							<h2>User Guide</h2>
 						</div>
-						<div class="span2">
-						<a class="btn default medium" style="width: 80px;"
+						<div class="span4">
+						<a class="btn btn-default btn-medium" style="width: 80px;"
 								href="documentation/index.html"><strong>HTML &raquo;</strong></a>
-						</div>
-						<div class="span3">
-						<a class="btn default medium" style="width: 80px;"
+						&nbsp;
+						<a class="btn btn-default btn-medium" style="width: 80px;"
 								href="documentation/Xtend%20User%20Guide.pdf"><strong>PDF &raquo;</strong></a>
 						</div>
 					</div>
 					<div class="row">
-						<div class="span8">
+						<div class="span6">
 						<p>The user guide provides detailed information about the various language concepts.</p>
 						</div>
 					</div>
 						<br/>
 						<br/>
 					<div class="row">
-						<div class="span3">
+						<div class="span2">
 							<h2>Intro Article</h2>
 						</div>
-						<div class="span2">
-						<a class="btn default medium" style="width: 80px;"
+						<div class="span4">
+						<a class="btn btn-default btn-medium" style="width: 80px;"
 								href="http://pragprog.com/magazines/2011-12/extending-java"><strong>HTML &raquo;</strong></a>
-						</div>
-						<div class="span3">
-						<a class="btn default medium" style="width: 80px;"
+						&nbsp;
+						<a class="btn btn-default btn-medium" style="width: 80px;"
 								href="http://pragprog.com/magazines/download/30.PDF"><strong>PDF &raquo;</strong></a>
 						</div>
 					</div>
 					<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>An introductory article we wrote for the <a href="http://pragprog.com/magazines">PragPub Magazine</a> in December 2011.
 						It covers a walkthough of the language and outlines the motivations behind its design.</p>
 						</div>
 					</div>
 				</div>
-				<div class="span8">
+				<div class="span6">
 					<h2>Tutorial</h2>
 					<p>If you want to get your hands on it, we recommend to
 						materialize the tutorial example using Eclipse&apos;s example wizard.
 						To do so in the IDE click:</p>
 					<p>
-						<span class="label notice">File</span>-&gt;<span
-							class="label notice">New</span>-&gt;<span class="label notice">Example...</span>
+						<span class="label label-info">File</span>-&gt;<span
+							class="label label-info">New</span>-&gt;<span class="label label-info">Example...</span>
 					<p>The project consists of a bunch of Xtend files. Each of them
 						illustrates a certain language feature and they are named
 						accordingly. Those sample files contain a lot of working code
@@ -352,7 +338,7 @@ div#maincontainer>section {
 				<p align="center">Install from the updatesite: <strong>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/</strong></p>
 			</div>
 			<div class="row">
-				<div class="span8">
+				<div class="span6">
 					<p>
 					The M7 contains more than 150 bugfixes, performance improvements and numerous new features.
 					</p>
@@ -360,7 +346,7 @@ div#maincontainer>section {
 						<a href="new_and_noteworthy/index.html">Click here</a> for more information.
 					</p>
 				</div>
-				<div class="span8">
+				<div class="span6">
 					<ul>
 						<li><a href="new_and_noteworthy/index.html#properties">Properties</a></li>
 						<li><a href="new_and_noteworthy/index.html#data">Data Classes (aka Value Objects)</a></li>
@@ -387,17 +373,17 @@ div#maincontainer>section {
 			<!-- compiles to java code -->
 			<section id="compilestojava">
 				<div class="row">
-					<div class="span-two-third">
+					<div class="span8">
 						<h2>Xtend compiles to readable Java code</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Instead of generating bytecode directly, you get Java
 							source code you can actually look at and debug through if you
 							want.</p>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>Compilation is done incrementally whenever you save a file
 							in Eclipse just like with Java. The tooling makes sure you can
 							navigate between the generated code and the original Xtend code
@@ -405,19 +391,19 @@ div#maincontainer>section {
 					</div>
 				</div>
 				<div class="row">
-					<div class="span-two-thirds" align="center">
+					<div class="span8" align="center">
 						<img class="thumbnail" src="images/xtend-and-java.png" alt="">
 					</div>
 				</div>
 			</section>
 			<section id="eclipsetooling">
 				<div class="row">
-					<div class="span-two-third">
+					<div class="span6">
 						<h2>State of the art Eclipse tooling</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Xtend was designed and developed together with the IDE
 							support.</p>
 						<p>The Eclipse support is deeply integrated with Java&apos;s
@@ -425,7 +411,7 @@ div#maincontainer>section {
 							experience is as seamless as possible.</p>
 						<img class="thumbnail" src="images/built_on_eclipse.jpg" alt="">
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>The Eclipse plug-in comes with almost all the features you
 							are used to from the Java IDE :</p>
 						<ul>
@@ -448,14 +434,14 @@ div#maincontainer>section {
 			</section>
 			<section id="typesystem">
 				<div class="row">
-					<div class="span-two-third">
+					<div class="span8">
 						<h2>
 							Java type system <small>It&apos;s the one you know!</small>
 						</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Static typing is great! It allows for better static
 							analysis and much better tooling based on the available type
 							information.</p>
@@ -467,9 +453,8 @@ div#maincontainer>section {
 							Xtend&apos;s <a href="#typeinference">type inference</a>.
 						</p>
 					</div>
-					<div class="span8">
-						<pre class="prettyprint lang-xtend"> 
-// qualified names
+					<div class="span6">
+<pre class="prettyprint lang-xtend">// qualified names
 java.lang.Object
 // primitives
 boolean, int, long, char, ...
@@ -477,8 +462,7 @@ boolean, int, long, char, ...
 String[]
 // generics
 List&lt;? extends CharSequence&gt;
-java.util.Map&lt;String,String&gt;
-			      	</pre>
+java.util.Map&lt;String,String&gt;</pre>
 					</div>
 				</div>
 			</section>
@@ -491,7 +475,7 @@ java.util.Map&lt;String,String&gt;
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Interface definitions in Java are already nice and concise.
 							They have a decent default visibility and also in other areas
 							there is very little to improve. Given all the knowledge and the
@@ -499,7 +483,7 @@ java.util.Map&lt;String,String&gt;
 							to define them in a different way. The same applies for enums and
 							annotation types.</p>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>That&apos;s why Xtend can do classes only and relies on
 							interfaces, annotations and enums being defined in Java. Xtend is
 							really not meant to replace Java but to modernize it.</p>
@@ -525,7 +509,7 @@ java.util.Map&lt;String,String&gt;
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>A lot of the information written down in a Java file is
 							actually technically redundant. In the following Java example,
 							the type of the variable could already be determined from the
@@ -539,7 +523,7 @@ List&lt;String&gt; names = getTheListOfNames()</pre>
 						<p>Xtend doesn&apos;t force you to write the type everywhere, but
 							you still can, if you want.</p>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<ul>
 							<li>Variable Declarations <pre
 									class="prettyprint lang-xtend">val names = getTheListOfNames()
@@ -569,12 +553,12 @@ getTheListOfNames().map( String name | "Mr. "+name )
 			</section>
 			<section id="morenoisereduction">
 				<div class="row">
-					<div class="span-two-third">
+					<div class="span8">
 						<h2>More noise reduction</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<h3>Property access</h3>
 						<p>Getter methods can be called using the Java 
 						    property syntax. For example, you can write</p>
@@ -587,7 +571,7 @@ getTheListOfNames().map( String name | "Mr. "+name )
 						<p>is equivalent to</p>
 						<pre class="prettyprint lang-xtend">person.setName("Foo")</pre>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<h3>Optionality</h3>
 						<p>Parenthesis for method invocations are optional, if the
 							method does not take any arguments.</p>
@@ -603,13 +587,13 @@ getTheListOfNames().map( String name | "Mr. "+name )
 			</section>
 			<section id="operatoroverloading">
 				<div class="row">
-					<div class="span-two-third">
-						<span class="label success">New !</span>
+					<div class="span8">
+						<span class="label label-success">NEW !</span>
 						<h2>Operator Overloading</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>
 							Operators in Xtend are just a shortcut syntax for method
 							invocations. This means that you can for instance use <strong>arithmetic
@@ -623,7 +607,7 @@ val fruits = apples + oranges
 // fruits is now of type Iterable&lt;Fruit&gt;
 </pre>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>The user&apos;s guide contains a 
 						    <a href="./documentation/index.html#operators">list of all operators</a>, their
 							precedence, and associativity. Each operator is mapped to a
@@ -635,13 +619,13 @@ val fruits = apples + oranges
 			</section>
 			<section id="everythingisanexpression">
 				<div class="row">
-					<div class="span-two-third">
-						<span class="label success">New !</span>
+					<div class="span8">
+						<span class="label label-success">NEW !</span>
 						<h2>Everything is an expression</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>In Xtend everything that looks like a statement is actually
 							an expression. Even a block is just an expression. This allows
 							for using them in places where it would just not be allowed in
@@ -653,7 +637,7 @@ val data = try {
     &apos;data.txt&apos;
   }</pre>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>
 							In Java it wouldn&apos;t be possible to use a try-catch on the
 							righthand side of an assignment. Since it&apos;s a statement it
@@ -683,12 +667,12 @@ val data = try {
 
 			<section id="extensionmethods">
 				<div class="row">
-					<div class="span-two-third">
+					<div class="span8">
 						<h2>Extension methods</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Xtend got its name from the great support for extending
 							existing types using extension methods. Extension methods 
 							allow to add new methods to existing types without touching them. In
@@ -720,7 +704,7 @@ def getFullName(Person p) {
 						</p>
 						<pre class="prettyprint lang-xtend">import static extension java.util.Collections.*</pre>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<h3>Extension methods and injection</h3>
 						<p>
 							The real fun begins when you use the extension keyword on fields
@@ -751,14 +735,14 @@ def example(Person p) {
 
 			<section id="multipledispatch">
 				<div class="row">
-					<div class="span-two-third">
+					<div class="span8">
 						<h2>
 							Multiple dispatch <small>no more visitors!</small>
 						</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>
 							Everybody knows the <a
 								href="http://en.wikipedia.org/wiki/Visitor_pattern">visitor
@@ -794,7 +778,7 @@ def label(Rectangle r) {
 }
 </pre>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>However, Xtend also allows for a set of overloaded methods
 							to do the dispatching based on the actual runtime argument types.
 							All you need to do is add the dispatch keyword to the methods:</p>
@@ -826,14 +810,14 @@ def dispatch label(Rectangle r) {
 
 			<section id="lambdas">
 								<div class="row">
-					<div class="span-two-third">
+					<div class="span8">
 						<h2>
 							Lambda Expressions <small>also known as function literals</small>
 						</h2>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Lambda expressions are the single most demanded feature for Java. To
 							collect all the names from persons in a list in in Java, you
 							would typically write:</p>
@@ -863,7 +847,7 @@ for (String name : persons) {
 							=&gt; Boolean)</strong>:
 						<pre class="prettyprint lang-xtend">persons.filter(predicate)</pre>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>
 							Lambda expressions are helpful in many different scenarios. For instance,
 							in combination with <a href="#extensionmethods">extension
@@ -912,7 +896,7 @@ html [
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>The switch statement in Java is a relict from C and has
 							strange and errorprone semantics. At the same time it is almost
 							useless in today&apos;s programming. Xtend comes with a 
@@ -933,7 +917,7 @@ html [
 							useful as pattern matching but without introducing all the
 							additional complexity.</p>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>
 							In the following example we have a type hierarchy, consisting of
 							a type <strong>Shape</strong> which is extended by <strong>Rectangle</strong>
@@ -971,7 +955,7 @@ switch (shape) {
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>Java&apos;s support for string literals and string concatenation
 							is very limited. It lacks multi-line string literals and although
 							the string concatenation using the plus operator is better then
@@ -1008,7 +992,7 @@ val msg =  &apos;This is some multi-line
 							<a href="documentation/index.html#templates">Read more &raquo;</a>
 						</p>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<h3>
 							<strong>Hello World</strong> using JAX-RS and templates
 						</h3>
@@ -1022,7 +1006,7 @@ val msg =  &apos;This is some multi-line
 			<section id="dslsupport">
 				<div class="row">
 					<div class="span-two-third">
-						<span class="label success">New!</span>
+						<span class="label label-success">NEW !</span>
 						<h2>
 							Exceptional DSL support <small>When APIs are not
 								sufficient</small>
@@ -1030,7 +1014,7 @@ val msg =  &apos;This is some multi-line
 					</div>
 				</div>
 				<div class="row">
-					<div class="span8">
+					<div class="span6">
 						<p>A domain specific language (DSL) is a small executable
 							language solving a particular problem. Imagine you are working on
 							a web framework. A typical aspect is to map http requests to
@@ -1076,7 +1060,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 									Tutorial : Five simple steps to your own JVM-based DSL.</a></strong>
 						</p>
 					</div>
-					<div class="span8">
+					<div class="span6">
 						<p>Here&apos;s another example. A DSL for Behavior Driven Design :
 						</p>
 						<img src="images/jvm-dsl.png" />
@@ -1096,7 +1080,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 				</h1>
 			</div>
 			<div class="row">
-				<div class="span8">
+				<div class="span6">
 					<p>The first version of Xtend was developed in 2004. At that
 						time it acted as a small functional language used to add
 						functionality to existing class hierarchies through extension
@@ -1110,7 +1094,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 						of shortcuts taken which made the language not as widely
 						applicable as wished. This had to be fixed.</p>
 				</div>
-				<div class="span8">
+				<div class="span6">
 					<p>In 2008 the original designer of Xtend and Xpand formed a
 						team to work on Xtext. Xtext eases the development of
 						domain-specific languages but also of programming languages like
@@ -1123,7 +1107,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 		</section>
 		<section id="futureplans">
 			<div class="page-header">
-				<span class="label success">Updated!</span>
+				<span class="label label-success">UPDATED !</span>
 				<h1>
 					Future Plans <small>What&apos;s Next?</small>
 				</h1>
@@ -1139,7 +1123,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 				</div>
 			</div>
 			<div class="row">
-				<div class="span8">
+				<div class="span6">
 					<ul>
 						<li>
 							<h4>Even tighter integration with Eclipse&apos;s Java tooling.</h4>
@@ -1166,7 +1150,7 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 								support will be added.</p></li>
 					</ul>
 				</div>
-				<div class="span8">
+				<div class="span6">
 					<ul>
 						<li>
 							<h4>Nullsafety.</h4>
@@ -1188,6 +1172,12 @@ GET /edit/Person/{id} -&gt; PersonController.edit(id)
 		</section>
 	</div>
 	<!-- /container -->
+	<!-- Le javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script src="bootstrap/js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
