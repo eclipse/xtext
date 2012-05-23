@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -733,22 +734,20 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	@Check
-	public void checkInnerExpressions(XBlockExpression block) {
-		boolean checkLastExpression = typeRefs.is(typeProvider.getExpectedType(block), Void.TYPE);
-		for (int i = 0; i < block.getExpressions().size() - (checkLastExpression?0:1); ++i) {
-			XExpression expr = block.getExpressions().get(i);
+	public void checkInnerExpressions(XExpression expr) {
+		EStructuralFeature containingFeature = expr.eContainingFeature();
+		boolean checkWhole = containingFeature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__BODY
+			|| containingFeature == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION
+			|| containingFeature == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION;
+		if (expr instanceof XBlockExpression) {
+			XBlockExpression block = (XBlockExpression) expr;
+			boolean checkLastExpression = checkWhole || typeRefs.is(typeProvider.getExpectedReturnType(expr, true), Void.TYPE);
+			for (int i = 0; i < block.getExpressions().size() - (checkLastExpression?0:1); ++i) {
+				mustBeJavaStatementExpression(block.getExpressions().get(i));
+			}
+		} else if (checkWhole) {
 			mustBeJavaStatementExpression(expr);
 		}
-	}
-	
-	@Check
-	public void checkForExpression(XForLoopExpression loop) {
-		mustBeJavaStatementExpression(loop.getEachExpression());
-	}
-	
-	@Check
-	public void checkWhileExpression(XAbstractWhileExpression loop) {
-		mustBeJavaStatementExpression(loop.getBody());
 	}
 
 	protected void mustBeJavaStatementExpression(XExpression expr) {

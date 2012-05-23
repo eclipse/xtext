@@ -2054,6 +2054,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{ val it = newLinkedHashMap('a'->'b', 'c'->'d') mapValues() [ toUpperCase ].get('a') }");
 	}
 	
+	@Test public void testTypeInference() throws Exception {
+		assertEvaluatesTo(9, 
+				"newArrayList('foo','bar','baz','booze').sortBy[length].take(3).fold(0)[a, b| a + b.length]");
+	}
+	
 	@Ignore @Test public void testMapValuesExtension() throws Exception {
 		assertEvaluatesTo("D", 
 				"{ val it = newLinkedHashMap(1->'b', 2->'d') " +
