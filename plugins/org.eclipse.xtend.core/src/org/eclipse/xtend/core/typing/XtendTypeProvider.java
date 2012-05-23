@@ -168,8 +168,8 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 	}
 	
 	protected JvmTypeReference _type(RichString richString, JvmTypeReference rawExpectation, boolean rawType) {
-		JvmTypeReference stringType = getTypeReferences().getTypeForName(String.class,richString);
-		if(EcoreUtil.equals(getExpectedType(richString), stringType))
+		JvmTypeReference stringType = getTypeReferences().getTypeForName(String.class, richString);
+		if(getTypeReferences().is(getExpectedType(richString, rawType), String.class))
 			return stringType;
 		return getTypeReferences().getTypeForName(CharSequence.class, richString);
 	}
