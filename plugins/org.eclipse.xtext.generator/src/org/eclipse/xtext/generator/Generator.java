@@ -94,6 +94,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
+		naming.setProjectNameRt(getProjectNameRt());
+		naming.setProjectNameUi(getProjectNameUi());
 		naming.setUiBasePackage(getProjectNameUi());
 		naming.setActivatorName(getActivator());
 		naming.setPathTestProject(getPathTestProject());
