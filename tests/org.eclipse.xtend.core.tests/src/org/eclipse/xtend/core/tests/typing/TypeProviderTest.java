@@ -32,6 +32,9 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Inject
+	private MockedXtendTypeProvider mockedTypeProvider;
+
 	@Override
 	protected XtendFile file(String string) throws Exception {
 		return file(string, true);
@@ -145,5 +148,10 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.CharSequence", typeProvider.getType(expression).getIdentifier());
 	}
 
+	@Test public void testTypeOfRichStringDelegatingType() throws Exception {
+		XtendFunction function = function("def foo()'''someString'''");
+		XExpression expression = function.getExpression();
+		assertEquals("java.lang.String", mockedTypeProvider.getType(expression).getIdentifier());
+	}
 
 }
