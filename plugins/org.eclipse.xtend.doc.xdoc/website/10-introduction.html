@@ -55,6 +55,14 @@
 		<li id="30-expressions.html#templates.html" ><a href="30-expressions.php#templates.php" >Template Expressions</a></li>
 		</ul>
 		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="40-anntotations.php">Annotation Library</a></div>
+		<ul style="display: none;" id="subToc_40-anntotations.html">
+		<li id="40-anntotations.html#propertyAnnotation.html" ><a href="40-anntotations.php#propertyAnnotation.php" >@Property</a></li>
+		<li id="40-anntotations.html#dataAnnotation.html" ><a href="40-anntotations.php#dataAnnotation.php" >@Data</a></li>
+		</ul>
+		</li>
 		</ul>
 	</div>
 	<div id="midcolumn">
@@ -175,13 +183,7 @@
 			One example is the ubiquitous <span class="inlinecode">map</span> function:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;myList.map(&nbsp;e&nbsp;|&nbsp;myMap.get(e)&nbsp;)
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;myList.map(&nbsp;e&nbsp;|&nbsp;myMap.get(e)&nbsp;)</span>
 			</p>
 			<p>
 			Operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available. 
@@ -213,7 +215,7 @@
 						&lt;dependency&gt;<br/>
 						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
 						&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend2.lib&lt;/artifactId&gt;<br/>
-						&nbsp;&nbsp;&lt;version&gt;2.2.0&lt;/version&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
 						&lt;/dependency&gt;
 					</p>
 				</div>
@@ -229,7 +231,7 @@
 						&lt;plugin&gt;<br/>
 						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
 						&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
-						&nbsp;&nbsp;&lt;version&gt;2.2.0&lt;/version&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
 						&nbsp;&nbsp;&lt;executions&gt;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>

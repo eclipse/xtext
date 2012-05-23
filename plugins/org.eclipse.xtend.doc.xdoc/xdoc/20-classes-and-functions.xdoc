@@ -69,8 +69,11 @@ Java's default "package private" visibility does not exist in Xtend. As an Xtend
 a top-level Java class and Java does not allow code[Java][private] or code[Java][protected] top-level
 classes any Xtend class is code[Xtend][public]. It is possible to write this explicitly. 
 
-%% e[To be implemented: ]The code[Xtend][abstract] as well as the code[Xtend][final] modifiers are directly
-%% translated to Java and have the exact same meaning.
+Since version 2.3, Xtend supports multiple class declaration in a single file. Each of these classes
+is compiled to a separate top-level Java class.
+
+Abstract classes are defined using the code[Xtend][abstract] modifier as in Java. See also ref:abstractMethods 
+on abstract methods.
 
 Xtend's approach to inheritance is conceptionally the same as in Java. Single inheritance of Java 
 classes as well as implementing multiple Java interfaces is supported. Because Xtend classes are compiled 
@@ -123,8 +126,11 @@ or code[Xtend][private].
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:fields[Fields]
 
-An Xtend class can define fields, too. As for Java fields, you can optionally declare an initializer
-expression and use annotations on fields. Fields marked as code[Xtend][static] will be compiled to static Java fields.  
+An Xtend class can define fields, too. As for Java fields, you can use annotations on fields. 
+An initializer expression is optional. Final fields are declared using code[Xtend][val], while 
+code[Xtend][var] introduces a non-final field and can be ommitted. Yet, if an initializer expression
+is present, the type of a field can be skipped after code[Xtend][val] and code[Xtend][var].
+Fields marked as code[Xtend][static] will be compiled to static Java fields.  
 
 code[Xtend][
   class MyClass {
@@ -132,6 +138,9 @@ code[Xtend][
     int count = 1
     String string = new String()
     static boolean debug = false
+    
+    var name = 'Foo'          // type String is inferred 
+    val UNIVERSAL_ANSWER = 42 // final field with inferred type int
     ...
   }
 ]
@@ -139,16 +148,6 @@ code[Xtend][
 The default visibility is code[Xtend][private]. You can also declare it explicitly as 
 being code[Xtend][public], code[Xtend][protected], or code[Xtend][private]. 
 
-%% Fields in Xtend are commonly used together with an annotation for a dependency injection container. Example:
-%% code[Xtend][
-%%   @Inject MyService myService
-%% ]
-%% 
-%% This will translate to the following Java field: 
-%% code[Java][
-%%   @Inject  
-%%   private MyService myService;
-%% ]
 A specialty of Xtend are fields that provide e[extension methods] which are covered in 
 ref:extensionMethods[their own section].
 
@@ -176,6 +175,25 @@ code[Xtend][
   }
 ] 
 
+As in Java 5, Xtend allows vararg parameters:
+code[Xtend][
+  def printAll(String... x) {
+    x.forEach\[println\]
+  }
+] 
+
+
+section2:abstractMethods[Abstract Methods]
+
+There is no such thing as an code[Java][abstract] keyword for methods in Xtends. Instead, an abstract 
+method in Xtend just does not define a body. It must declare a return type. A class containing abstract 
+methods must be declared as code[Xtend][abstract]. 
+
+code[Xtend][
+	abstract class MyAbstractClass() {
+		def String abstractMethod() // no body
+	}
+]
 
 section2[Overriding Methods]
 
@@ -190,7 +208,6 @@ code[Xtend][
     elements.get(0);
   }
 ]
-
 
 section2:declaredExceptions[Declared Exceptions]
 
@@ -422,6 +439,8 @@ code[Xtend][
   }
 ]
 
+Xtend offers some pre-defined library annotations, which are described in 
+ref:annotationLibrary[their own chapter].
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

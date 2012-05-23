@@ -76,7 +76,7 @@ Let us start with a simple "Hello World" example. In Xtend, that reads as
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -97,7 +97,7 @@ The hello world example is translated to the following Java code:
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -119,7 +119,7 @@ It provides means to create collections in a readable way:
 <p class="code">
 <span class="keyword">val</span>&nbsp;myList&nbsp;=&nbsp;newArrayList(1,&nbsp;2,&nbsp;3)<br/>
 <span class="keyword">val</span>&nbsp;mySet&nbsp;=&nbsp;newHashSet(4,&nbsp;5,&nbsp;6)<br/>
-<span class="keyword">val</span>&nbsp;myMap&nbsp;=&nbsp;newHashMap(1&nbsp;-&gt;&nbsp;<span class="string">&apos;one&apos;</span>,&nbsp;2&nbsp;-&gt;&nbsp;<span class="string">&apos;two&apos;</span>,&nbsp;3&nbsp;-&gt;&nbsp;<span class="string">&apos;three&apos;</span>)<br/>
+<span class="keyword">val</span>&nbsp;myMap&nbsp;=&nbsp;newHashMap(1&nbsp;-&gt;&nbsp;<span class="string">&apos;one&apos;</span>,&nbsp;2&nbsp;-&gt;&nbsp;<span class="string">&apos;two&apos;</span>,&nbsp;3&nbsp;-&gt;&nbsp;<span class="string">&apos;three&apos;</span>)
 </p>
 </div>
 </div>
@@ -129,13 +129,7 @@ It also extends the collection types with a lot of very useful functions.
 One example is the ubiquitous <span class="inlinecode">map</span> function:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;myList.map(&nbsp;e&nbsp;|&nbsp;myMap.get(e)&nbsp;)<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;myList.map(&nbsp;e&nbsp;|&nbsp;myMap.get(e)&nbsp;)</span>
 </p>
 <p>
 Operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available. 
@@ -167,8 +161,8 @@ Here&apos;s the XML for the library dependency:
 &lt;dependency&gt;<br/>
 &nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
 &nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend2.lib&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&lt;version&gt;2.2.0&lt;/version&gt;<br/>
-&lt;/dependency&gt;<br/>
+&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
+&lt;/dependency&gt;
 </p>
 </div>
 </div>
@@ -183,7 +177,7 @@ And this is the XML for the plugin:
 &lt;plugin&gt;<br/>
 &nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
 &nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&lt;version&gt;2.2.0&lt;/version&gt;<br/>
+&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
 &nbsp;&nbsp;&lt;executions&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
@@ -192,7 +186,7 @@ And this is the XML for the plugin:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
 &nbsp;&nbsp;&lt;/executions&gt;<br/>
-&lt;/plugin&gt;<br/>
+&lt;/plugin&gt;
 </p>
 </div>
 </div>

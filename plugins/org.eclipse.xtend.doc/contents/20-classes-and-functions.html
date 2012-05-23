@@ -35,7 +35,7 @@ Here is an example:
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;elements.get(0)<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -54,13 +54,7 @@ Package declarations are mostly like in Java. There are two small differences:
 </ul>
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">package</span>&nbsp;com.acme<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
 </p>
 <a name="imports"></a>
 <h2>Imports</h2>
@@ -77,7 +71,7 @@ As in Java all classes from the <span class="inlinecode">java.lang</span> packag
 <div class="incode">
 <p class="code">
 <span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*
 </p>
 </div>
 </div>
@@ -95,7 +89,14 @@ a top-level Java class and Java does not allow <span class="inlinecode"><span cl
 classes any Xtend class is <span class="inlinecode"><span class="keyword">public</span></span>. It is possible to write this explicitly. 
 </p>
 <p>
-
+Since version 2.3, Xtend supports multiple class declaration in a single file. Each of these classes
+is compiled to a separate top-level Java class.
+</p>
+<p>
+Abstract classes are defined using the <span class="inlinecode"><span class="keyword">abstract</span></span> modifier as in Java. See also <a href="20-classes-and-functions.html#abstractMethods" title="Go to &quot;Abstract Methods&quot;" >section abstractMethods</a> 
+on abstract methods.
+</p>
+<p>
 Xtend&apos;s approach to inheritance is conceptionally the same as in Java. Single inheritance of Java 
 classes as well as implementing multiple Java interfaces is supported. Because Xtend classes are compiled 
 to Java, Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes. 
@@ -106,7 +107,7 @@ The most simple class looks like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -120,7 +121,7 @@ A more advanced class declaration in Xtend:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
 &nbsp;&nbsp;...<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -142,7 +143,7 @@ line.
 &nbsp;&nbsp;<span class="keyword">new</span>()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>(<span class="string">"default"</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -159,8 +160,11 @@ or <span class="inlinecode"><span class="keyword">private</span></span>.
 <a name="fields"></a>
 <h2>Fields</h2>
 <p>
-An Xtend class can define fields, too. As for Java fields, you can optionally declare an initializer
-expression and use annotations on fields. Fields marked as <span class="inlinecode"><span class="keyword">static</span></span> will be compiled to static Java fields.  
+An Xtend class can define fields, too. As for Java fields, you can use annotations on fields. 
+An initializer expression is optional. Final fields are declared using <span class="inlinecode"><span class="keyword">val</span></span>, while 
+<span class="inlinecode"><span class="keyword">var</span></span> introduces a non-final field and can be ommitted. Yet, if an initializer expression
+is present, the type of a field can be skipped after <span class="inlinecode"><span class="keyword">val</span></span> and <span class="inlinecode"><span class="keyword">var</span></span>.
+Fields marked as <span class="inlinecode"><span class="keyword">static</span></span> will be compiled to static Java fields.  
 </p>
 <p>
 <div class="literallayout">
@@ -171,8 +175,11 @@ expression and use annotations on fields. Fields marked as <span class="inlineco
 &nbsp;&nbsp;<span class="keyword">int</span>&nbsp;count&nbsp;=&nbsp;1<br/>
 &nbsp;&nbsp;String&nbsp;string&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;String()<br/>
 &nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">boolean</span>&nbsp;debug&nbsp;=&nbsp;<span class="keyword">false</span><br/>
-&nbsp;&nbsp;...<br/>
-}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;name&nbsp;=&nbsp;<span class="string">&apos;Foo&apos;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;type&nbsp;String&nbsp;is&nbsp;inferred&nbsp;<br/>
+</span>&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;UNIVERSAL_ANSWER&nbsp;=&nbsp;42&nbsp;<span class="comment">//&nbsp;final&nbsp;field&nbsp;with&nbsp;inferred&nbsp;type&nbsp;int<br/>
+</span>&nbsp;&nbsp;...<br/>
+}
 </p>
 </div>
 </div>
@@ -198,7 +205,7 @@ exactly the same signature. The only exceptions are dispatch methods, which are 
 <p class="code">
 <span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(0);<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -214,12 +221,42 @@ Xtend supports the <span class="inlinecode"><span class="keyword">static</span><
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;createInstance()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyClass(<span class="string">&apos;foo&apos;</span>)<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
 </p>
-<a name="methods_4"></a>
+<p>
+As in Java 5, Xtend allows vararg parameters:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;printAll(String...&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;x.forEach[println]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="abstractMethods"></a>
+<h3>Abstract Methods</h3>
+<p>
+There is no such thing as an <span class="inlinecode"><span class="keyword">abstract</span></span> keyword for methods in Xtends. Instead, an abstract 
+method in Xtend just does not define a body. It must declare a return type. A class containing abstract 
+methods must be declared as <span class="inlinecode"><span class="keyword">abstract</span></span>. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;MyAbstractClass()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;abstractMethod()&nbsp;<span class="comment">//&nbsp;no&nbsp;body<br/>
+</span>}
+</p>
+</div>
+</div>
+</p>
+<a name="methods_6"></a>
 <h3>Overriding Methods</h3>
 <p>
 Methods can override other methods from the super class or implemented interface methods using the
@@ -234,7 +271,7 @@ Example:
 <p class="code">
 <span class="keyword">override</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(0);<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -261,7 +298,7 @@ the exceptions thrown in a method&apos;s body using the same <span class="inline
 &nbsp;*/</span><br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sneakyThrowException()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;Exception()<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -276,7 +313,7 @@ That is the method
 <p class="code">
 <span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(0);<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -288,7 +325,7 @@ could be declared like this:
 <p class="code">
 <span class="keyword">def</span>&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(0);<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -321,7 +358,7 @@ A dispatch method is marked using the keyword <span class="inlinecode"><span cla
 <br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -351,7 +388,7 @@ For the two dispatch methods in the example above the following Java code would 
 &nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType(x);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -376,7 +413,7 @@ Example:
 <br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Integer&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -395,7 +432,7 @@ generates the following Java code :
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x,&nbsp;y).toString());<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -416,7 +453,7 @@ you can declare a parameter using the type <span class="inlinecode">java.lang.Vo
 <br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Void&nbsp;x)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;null"</span>&nbsp;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -437,7 +474,7 @@ Which compiles to the following Java code:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -458,7 +495,7 @@ For example, consider the following Java class :
 &nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
 </span>&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -480,7 +517,7 @@ and the following Xtend class which extends the Java class :
 &nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -500,7 +537,7 @@ The resulting dispatch method in the generated Java class <span class="inlinecod
 &nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label(it);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -531,10 +568,14 @@ Annotations are available on classes, fields, methods and parameters. Here is an
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
 </span>&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
+</p>
+<p>
+Xtend offers some pre-defined library annotations, which are described in 
+<a href="40-anntotations.html#annotationLibrary" title="Go to &quot;Annotation Library&quot;">their own chapter</a>.
 </p>
 <a name="extensionMethods"></a>
 <h2>Extension Methods</h2>
@@ -543,14 +584,7 @@ Extensions methods are a technique to add behavior to existing classes without m
 This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 method is called on the argument parameter as if it was one of its members.
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")<br/>
-</span>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span></span>   
 </p>
 <p>
 Method calls in extension syntax often result in much better readable code, as function calls are rather
@@ -571,7 +605,7 @@ All methods of the current Xtend class are automatically available in extension 
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Object&nbsp;obj)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;obj.doSomething()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.doSomething(obj)<br/>
 </span>&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -585,8 +619,7 @@ available as extensions, e.g.
 <div class="incode">
 <p class="code">
 newArrayList()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;CollectionLiterals.newArrayList()<br/>
-</span><span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;StringExtensions.toFirstUpper(String)<br/>
-</span>
+</span><span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;StringExtensions.toFirstUpper(String)</span>
 </p>
 </div>
 </div>
@@ -601,13 +634,7 @@ thus making all imported static functions available as extensions methods.
 </p>
 <p>
 The following import declaration 
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
 </p>
 <p>
 allows to use its methods like this:
@@ -615,8 +642,7 @@ allows to use its methods like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">new</span>&nbsp;MyClass().singletonList()&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())<br/>
-</span>
+&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())</span>
 </p>
 </div>
 </div>
@@ -641,7 +667,7 @@ declare the following class
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -654,7 +680,7 @@ And if you have an instance of this class injected as extension like this:
 <span class="keyword">class</span>&nbsp;PersonPrinter&nbsp;{<br/>
 &nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions<br/>
 &nbsp;&nbsp;...<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -667,7 +693,7 @@ field&apos;s name. You can now write the following
 <p class="code">
 <span class="keyword">def</span>&nbsp;print(Person&nbsp;myPerson)&nbsp;{<br/>
 &nbsp;&nbsp;myPerson.getFullName()<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -680,7 +706,7 @@ which is translated to the Java method
 <span class="keyword">public</span>&nbsp;String&nbsp;print(<span class="keyword">final</span>&nbsp;Person&nbsp;myPerson)&nbsp;{<br/>
 &nbsp;&nbsp;String&nbsp;_fullName&nbsp;=&nbsp;<span class="keyword">this</span>._personExtensions.getFullName(myPerson);<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_fullName;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -688,13 +714,7 @@ which is translated to the Java method
 <p>
 where <span class="inlinecode">_personExtensions</span> is the default name of the field. Of course the 
 property shorthand (see <a href="30-expressions.html#propertyAccess" title="Go to &quot;Property Access&quot;">section on property access</a>) is still available.
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myPerson.fullName<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">myPerson.fullName</span>
 </p>
 <p>
 Using dependency injection in combination with the extension modifier has a significant advantage over 
