@@ -174,4 +174,9 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 			}
 		});
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + getClass().getSimpleName() + " uri=" + getURI() + "]";
+	}
 }

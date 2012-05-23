@@ -9,14 +9,17 @@ package org.eclipse.xtext.resource.containers;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 
 /**
  * This implementation {@link IAllContainersState} associates resource (e.g. their URIs) to containers. It assumes that
@@ -57,4 +60,32 @@ public class ResourceSetBasedAllContainersState implements IAllContainersState {
 		return null;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append("[");
+		result.append(getClass().getSimpleName());
+		Set<String> invisibleContainers = Sets.newHashSet(container2URIs.keySet());
+		invisibleContainers.removeAll(containers);
+		if (!invisibleContainers.isEmpty()) {
+			result.append("\n  WARNING: invisible containers: ");
+			result.append(Joiner.on(", ").join(invisibleContainers));
+		}
+		for (String container : containers) {
+			Collection<URI> uris = container2URIs.get(container);
+			result.append("\n  container ");
+			result.append(container);
+			result.append(" = ");
+			if (uris.isEmpty())
+				result.append("(empty)");
+			else {
+				result.append("{\n    ");
+				result.append(Joiner.on("\n    ").join(uris));
+				result.append("\n  }");
+			}
+		}
+		result.append("\n]");
+		return result.toString();
+	}
+
 }
