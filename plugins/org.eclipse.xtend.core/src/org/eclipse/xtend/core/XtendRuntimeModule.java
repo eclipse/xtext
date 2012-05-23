@@ -11,7 +11,6 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
-import org.eclipse.xtend.core.resource.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
 import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -92,10 +90,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 
 	public Class<? extends EarlyExitValidator> bindEarlyExitValidator() {
 		return XtendEarlyExitValidator.class;
-	}
-	
-	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
-		return XtendEObjectAtOffsetHelper.class;
 	}
 	
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {

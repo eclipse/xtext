@@ -7,7 +7,6 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
@@ -47,11 +46,8 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
-import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
-import org.eclipse.xtext.ui.LanguageSpecific;
-import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -83,7 +79,6 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
-import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -264,15 +259,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	public Class<? extends IEObjectHoverDocumentationProvider> bindIEObjectHoverDocumentationProvider(){
 		return XtendHoverDocumentationProvider.class;
-	}
-
-	@Override
-	public void configureLanguageSpecificURIEditorOpener(Binder binder) {
-		if (PlatformUI.isWorkbenchRunning()) {
-			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class)
-					.to(DerivedMemberAwareEditorOpener.class);
-			binder.bind(IDerivedMemberAwareEditorOpener.class).to(DerivedMemberAwareEditorOpener.class);
-		}
 	}
 
 	@Override

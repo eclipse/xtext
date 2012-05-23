@@ -20,7 +20,6 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendClassSuperCallReferable;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -62,8 +61,6 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return _typeForIdentifiable((JvmGenericType)identifiable, rawType);
 		} else if (identifiable instanceof XtendClass) {
 			return _typeForIdentifiable((XtendClass)identifiable, rawType);
-		} else if (identifiable instanceof XtendClassSuperCallReferable) {
-			return _typeForIdentifiable((XtendClassSuperCallReferable)identifiable, rawType);
 		} else if (identifiable instanceof XtendParameter) {
 			return _typeForIdentifiable((XtendParameter)identifiable, rawType);
 		} else {
@@ -220,15 +217,6 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return typeReference;
 		}
 		return null;
-	}
-	
-	protected JvmTypeReference _typeForIdentifiable(XtendClassSuperCallReferable referable, boolean rawType) {
-		final XtendClass xtendClass = referable.getXtendClass();
-		JvmTypeReference superType = xtendClass.getExtends();
-		if (superType!=null) {
-			return superType;
-		}
-		return getTypeReferences().getTypeForName(Object.class, xtendClass);
 	}
 	
 }
