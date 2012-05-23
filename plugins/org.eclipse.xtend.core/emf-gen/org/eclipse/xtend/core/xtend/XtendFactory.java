@@ -50,15 +50,6 @@ public interface XtendFactory extends EFactory
 	XtendClass createXtendClass();
 
 	/**
-	 * Returns a new object of class '<em>Class Super Call Referable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Super Call Referable</em>'.
-	 * @generated
-	 */
-	XtendClassSuperCallReferable createXtendClassSuperCallReferable();
-
-	/**
 	 * Returns a new object of class '<em>Member</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

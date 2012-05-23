@@ -67,7 +67,6 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 			case XtendPackage.XTEND_FILE: return createXtendFile();
 			case XtendPackage.XTEND_IMPORT: return createXtendImport();
 			case XtendPackage.XTEND_CLASS: return createXtendClass();
-			case XtendPackage.XTEND_CLASS_SUPER_CALL_REFERABLE: return createXtendClassSuperCallReferable();
 			case XtendPackage.XTEND_MEMBER: return createXtendMember();
 			case XtendPackage.XTEND_FUNCTION: return createXtendFunction();
 			case XtendPackage.XTEND_FIELD: return createXtendField();
@@ -115,17 +114,6 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	{
 		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
 		return xtendClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XtendClassSuperCallReferable createXtendClassSuperCallReferable()
-	{
-		XtendClassSuperCallReferableImpl xtendClassSuperCallReferable = new XtendClassSuperCallReferableImpl();
-		return xtendClassSuperCallReferable;
 	}
 
 	/**

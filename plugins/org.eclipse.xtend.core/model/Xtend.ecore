@@ -31,9 +31,6 @@
         transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//XtendMember" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superCallReferable" lowerBound="1"
-        eType="#//XtendClassSuperCallReferable" transient="true" containment="true"
-        eOpposite="#//XtendClassSuperCallReferable/xtendClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeParameter"
         containment="true"/>
@@ -42,10 +39,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore#//XAnnotation"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XtendClassSuperCallReferable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="xtendClass" eType="#//XtendClass"
-        transient="true" eOpposite="#//XtendClass/superCallReferable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendMember" eSuperTypes="#//XtendAnnotationTarget">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotationInfo" eType="#//XtendAnnotationTarget"

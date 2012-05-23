@@ -9,20 +9,14 @@ package org.eclipse.xtend.core.xtend.impl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EObjectEList;
-import org.eclipse.xtend.core.xtend.XtendFactory;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.impl.XtendClassImpl;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtendClassImplCustom extends XtendClassImpl {
-	
-	{
-		setSuperCallReferable(XtendFactory.eINSTANCE.createXtendClassSuperCallReferable());
-	}
 	
 	@Override
 	public String getSimpleName() {
