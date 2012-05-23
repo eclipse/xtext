@@ -97,7 +97,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	@Test public void testNonStatementExpression_01() throws Exception {
 		XExpression expr = expression("for (x : newArrayList('x','y')) { 42 }");
-		helper.assertError(expr, XBLOCK_EXPRESSION, INVALID_INNER_EXPRESSION);
+		helper.assertError(expr, XNUMBER_LITERAL, INVALID_INNER_EXPRESSION);
 	}
 	@Test public void testNonStatementExpression_02() throws Exception {
 		XExpression expr = expression("while (23 > 45) 42");
