@@ -1,0 +1,54 @@
+chapter:annotationLibrary[Annotation Library]
+
+Xtend comes with some library annotations that help to steer the compilation process.
+These annotations reside in the code[org.eclipse.xtend.lib] plug-in/jar which must be on the classpath
+of the project containing the Xtend files. 
+
+section:propertyAnnotation[@Property]
+
+For fields that are annotated as code[Xtend][@Property], the Xtend compiler will generate a Java field, a
+getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
+an code[_] andhave the visibility of the Xtend field. The accessors methods are always code[Xtend][public]. 
+Thus, an Xtend field
+
+code[Xtend][
+  @Property String name
+] 
+
+will compile to the Java code
+
+code[Java][
+  private String _name;
+  
+  public String getName() {
+    return this._name;
+  }
+  
+  public void setName(final String name) {
+    this._name = name;
+  }
+] 
+
+section:dataAnnotation[@Data]
+
+The annotation code[Xtend][@Data], will turn an annotated class into a value object class. A class annotated with code[Xtend][@Data] 
+has the following effect:
+
+ul[
+	item[all fields are flagged final,]
+	item[getter methods will be generated (if not existent),]
+	item[a constructor will be generated (if not existent),]
+	item[equals(Object) / hashCode() methods will be generated (if not existent),]
+	item[a toString() method will be generated (if not existent).]
+]
+
+Example:
+
+code[Xtend][
+@Data class Person {
+  String firstName
+  String lastName
+}
+]
+
+
