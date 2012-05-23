@@ -86,6 +86,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 			message = "Invalid number of type arguments. Expected "
 					+ uiStrings.typeParameters(constructorCall.getConstructor()) + " but got "
 					+ uiStrings.typeArguments(constructorCall);
+		} else if (FEATURE_NOT_VISIBLE.equals(issueCode)) {
+			message = "Constructor " + constructorCall.getConstructor().getIdentifier() + " is not visible"; 
 		} else if (INVALID_ARGUMENT_TYPES.equals(issueCode)) {
 			// Type conformance errors are checked in XbaseJavaValidator.
 			// We cannot rely on the types used during linking because, they might have been incomplete
