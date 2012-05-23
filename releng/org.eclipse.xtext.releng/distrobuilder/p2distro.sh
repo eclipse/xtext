@@ -14,7 +14,7 @@ echo "Using eclipse from $DIR_SOURCE_ECLIPSE"
 set -u #unseted variables assertion
 ECLIPSE_CODENAME=$1            #i.e. indigo
 
-# Constatnts
+# Constants
 DIR_TARGETPLATFORMS="$DIR_ROOT/$ECLIPSE_CODENAME/targetplatforms"		# platform depended eclipses where feature should be installed
 DIR_OUTPUT="$DIR_ROOT/$ECLIPSE_CODENAME/output"							# produced distros folder
 DIR_TMP="$DIR_ROOT/$ECLIPSE_CODENAME/tmp"								# temp folder
