@@ -78,8 +78,8 @@ public class Junit4Fragment extends AbstractGeneratorFragment implements IGenera
 	 */
 	public String[] getRequiredBundlesTests(Grammar grammar) {
 		return new String[] {
-				getNaming().basePackageRuntime(grammar),
-				getNaming().basePackageUi(grammar),
+				getNaming().getProjectNameRt(),
+				getNaming().getProjectNameUi(),
 				"org.eclipse.core.runtime",
 				"org.eclipse.xtext.junit4",
 				"org.eclipse.ui.workbench;resolution:=optional"
