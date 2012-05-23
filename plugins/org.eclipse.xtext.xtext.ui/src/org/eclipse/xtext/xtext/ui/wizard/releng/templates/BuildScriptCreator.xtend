@@ -37,7 +37,7 @@ class BuildScriptCreator {
 			<property name="buckminster.home" location="«if (!projectInfo.buckyLocation.nullOrEmpty) projectInfo.buckyLocation else "Add_buckminster_headless_location_here"»" />
 			<property name="projects.location" location="${WORKSPACE}" />
 			<property name="commands.file" location="${projects.location}/«projectInfo.projectName»/commands.txt" />
-			<property name="target.platform" location="target.platform" />
+			<property name="target.platform" value="target.platform" />
 			
 			<target name="buckminster" depends="cleanup" description="description">
 				<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes."/>
