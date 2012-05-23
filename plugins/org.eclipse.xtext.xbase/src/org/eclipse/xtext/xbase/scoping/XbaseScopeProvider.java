@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -144,6 +146,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
+	@Inject
+	private VisibilityService visibilityService;
+	
 	public void setTypeProvider(ITypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
@@ -239,6 +244,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected boolean isTypeScope(EReference reference) {
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
+	
+	protected boolean isVisible(JvmFeature feature, JvmDeclaredType contextType) {
+		return visibilityService.isVisible(feature, contextType);
+	}
 
 	protected IScope createConstructorCallScope(final EObject context, EReference reference) {
 		final IScope scope = super.getScope(context, reference);
@@ -258,12 +267,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 								if (context instanceof XConstructorCall)
 									constructorCall = (XConstructorCall) context;
 								ITypeArgumentContext typeArgumentContext = typeProvider.getTypeArgumentContext(constructorCall, constructor);
+								JvmDeclaredType contextType = getContextType(constructorCall);
 								JvmFeatureDescription result = new JvmFeatureDescription(
 										from.getQualifiedName(), 
 										constructor,
 										typeArgumentContext,
 										constructor.getIdentifier(),
-										true,
+										isVisible(constructor, contextType),
 										true,
 										null,
 										null,
