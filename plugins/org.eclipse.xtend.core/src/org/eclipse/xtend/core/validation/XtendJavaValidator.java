@@ -92,7 +92,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -1041,8 +1040,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Override
-	public void checkInnerExpressions(XBlockExpression block) {
-		if (block instanceof RichString)
+	public void checkInnerExpressions(XExpression block) {
+		if (block instanceof RichString || block instanceof RichStringForLoop)
 			return;
 		super.checkInnerExpressions(block);
 	}
@@ -1323,12 +1322,4 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return false;
 	}
 	
-	@Override
-	@Check
-	public void checkForExpression(XForLoopExpression loop) {
-		if (loop instanceof RichStringForLoop) {
-			return;
-		}
-		super.checkForExpression(loop);
-	}
 }

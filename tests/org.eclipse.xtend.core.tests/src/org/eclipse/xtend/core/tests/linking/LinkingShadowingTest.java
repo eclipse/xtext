@@ -33,7 +33,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_noConflicts_local() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    aString\n" + 
 				"  }\n" + 
 				"  private String aString\n" + 
@@ -45,7 +45,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_noConflicts_inheritedProtected() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingType {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    protectedField\n" + 
 				"  }\n" + 
 				"}");
@@ -56,7 +56,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_noConflicts_publicOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"}");
@@ -67,7 +67,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_noConflicts_protectedOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    protectedField\n" + 
 				"  }\n" +
 				"}");
@@ -78,7 +78,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_noConflicts_publicOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }" +
 				"  extension testdata.LinkingType\n" +
@@ -90,7 +90,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_noConflicts_protectedOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    protectedField\n" + 
 				"  }" +
 				"  extension testdata.LinkingType\n" +
@@ -103,7 +103,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }" +
 				"}");
@@ -115,7 +115,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    protectedField\n" + 
 				"  }" +
 				"}");
@@ -127,7 +127,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }" +
 				"}");
@@ -139,7 +139,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    protectedField\n" + 
 				"  }" +
 				"}");
@@ -150,7 +150,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testParameter_noConflict() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(String aString) {\n" + 
+				"  def method(String aString) {\n" + 
 				"    aString\n" + 
 				"  }\n" +
 				"}");
@@ -161,7 +161,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testParameter_shadows_field() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(String aString) {\n" + 
+				"  def method(String aString) {\n" + 
 				"    aString\n" + 
 				"  }\n" +
 				"  String aString" +
@@ -173,7 +173,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testParameter_shadows_fieldOfIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(String publicField, testdata.LinkingType it) {\n" + 
+				"  def method(String publicField, testdata.LinkingType it) {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"}");
@@ -184,7 +184,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testLocalVariable_noConflict() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    val String aString = null\n" +
 				"    aString\n" + 
 				"  }\n" +
@@ -196,7 +196,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testLocalVariable_shadows_parameter() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(String aString) {\n" + 
+				"  def method(String aString) {\n" + 
 				"    val String aString = null\n" +
 				"    aString\n" + 
 				"  }\n" +
@@ -213,7 +213,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testLocalVariable_shadows_field() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    val String aString = null\n" +
 				"    aString\n" + 
 				"  }\n" +
@@ -226,7 +226,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testLocalVariable_shadows_fieldOfIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" +
+				"  def method(testdata.LinkingType it) {\n" +
 				"    val String publicField = null\n" +
 				"    publicField\n" + 
 				"  }\n" +
@@ -238,7 +238,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_onIt_shadows_local() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    publicField\n" + 
 				"  }\n" + 
 				"  public String publicField\n" + 
@@ -250,7 +250,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_onIt_shadows_injectedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    publicField\n" + 
 				"  }\n" + 
 				"  extension testdata.LinkingTypeEquallyNamed\n" + 
@@ -263,7 +263,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    publicField\n" + 
 				"  }\n" + 
 				"}");
@@ -275,7 +275,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    publicField\n" + 
 				"  }\n" + 
 				"}");
@@ -286,7 +286,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_local_shadows_injectedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"  String publicField\n" + 
@@ -300,7 +300,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"  String publicField\n" + 
@@ -313,7 +313,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"  String publicField\n" + 
@@ -325,7 +325,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_inherited_shadows_injectedExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingType {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"  extension testdata.LinkingTypeEquallyNamed\n" + 
@@ -338,7 +338,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*" +
 				"class SomeClass extends testdata.LinkingType {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"}");
@@ -350,7 +350,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*" +
 				"class SomeClass extends testdata.LinkingType {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"}");
@@ -362,7 +362,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"  extension testdata.LinkingType\n" + 
@@ -375,7 +375,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    publicField\n" + 
 				"  }\n" +
 				"  extension testdata.LinkingType\n" + 
@@ -387,7 +387,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_local_shadowsInvisibleOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    protectedField\n" + 
 				"  }\n" + 
 				"  String protectedField\n" + 
@@ -399,7 +399,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_inherited_shadowsInvisibleOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingType {\n" +
-				"  def void method(testdata.LinkingTypeEquallyNamed it) {\n" + 
+				"  def method(testdata.LinkingTypeEquallyNamed it) {\n" + 
 				"    protectedField\n" + 
 				"  }\n" + 
 				"}");
@@ -410,7 +410,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_local_shadows_sugarOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" + 
 				"  String fieldOverloadsMethod\n" + 
@@ -422,7 +422,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testField_inherited_shadows_sugarOnIt() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass extends testdata.LinkingTypeEquallyNamed {\n" +
-				"  def void method(testdata.LinkingTypeEquallyNamed it) {\n" + 
+				"  def method(testdata.LinkingTypeEquallyNamed it) {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" + 
 				"}");
@@ -434,7 +434,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" + 
 				"}");
@@ -446,7 +446,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static extension testdata.LinkingStaticType.*\n" +
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" + 
 				"}");
@@ -457,7 +457,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testOperation_sugarOnIt_shadows_sugarOnThis() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(testdata.LinkingType it) {\n" + 
+				"  def method(testdata.LinkingType it) {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" +
 				"  def fieldOverloadsMethod() {}" + 
@@ -469,7 +469,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testOperation_sugarOnThis_shadows_sugarOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" +
 				"  def fieldOverloadsMethod() {}" +
@@ -483,7 +483,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticTypeEquallyNamed.*\n" +
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
+				"  def method() {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" +
 				"  extension testdata.LinkingType" + 
@@ -496,7 +496,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz(
 				"import static testdata.LinkingStaticTypeEquallyNamed.*\n" +
 				"class SomeClass {\n" +
-				"  def void method(Object it) {\n" + 
+				"  def method(Object it) {\n" + 
 				"    fieldOverloadsMethod\n" + 
 				"  }\n" +
 				"  def fieldOverloadsMethod(Object o) {}" +
@@ -508,7 +508,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 	@Test public void testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method(Object it) {\n" + 
+				"  def method(Object it) {\n" + 
 				"    withArgument\n" + 
 				"  }\n" +
 				"  def withArgument(Object o) {}\n" +

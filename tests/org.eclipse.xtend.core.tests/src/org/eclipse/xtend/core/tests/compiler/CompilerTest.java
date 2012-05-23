@@ -997,9 +997,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String code =
 				"package x class Z {" +
 				"  def void forEachError(testdata.PropertiesHolder h) {\n" + 
-				"    h.properties.map(p|{\n" + 
+				"    h.properties.forEach(p|{\n" + 
 				"      p.prop1=p.prop1.toFirstLower()\n" + 
-				"      true\n" + 
 				"    })\n" + 
 				"  }\n" +
 				"}";
