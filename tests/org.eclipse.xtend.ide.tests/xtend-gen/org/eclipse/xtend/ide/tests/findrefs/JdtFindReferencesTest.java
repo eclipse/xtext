@@ -694,9 +694,6 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.append("\t\t");
       _builder.append("new Java()");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("null");
-      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();

@@ -213,7 +213,6 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 
 				def void baz() { 
 					new Java()
-					null
 				}
 			}
 		'''.toString)
