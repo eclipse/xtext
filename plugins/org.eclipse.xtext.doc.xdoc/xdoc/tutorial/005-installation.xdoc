@@ -49,6 +49,7 @@ ul[
 	]
 ]
 
-Note: Xtext relies on the Antlr generator library. Due to a legal issue, the official Eclipse release update
-sites cannot provide this library. Xtext will try to download it on demand. To avoid this, you can manually 
-install the feature e[Xtext Antlr-2.0.0] from the itemis update site (see 1 above).
+Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on 
+the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid 
+this, you can manually install the feature e[Xtext Antlr-2.0.0] from the itemis update site (see 1
+above). The installation procedures above are not touched by this issue.
