@@ -36,6 +36,11 @@ class XtextReconcilerUnitOfWork extends IUnitOfWork.Void<XtextResource> {
 
 	@Override
 	public void process(XtextResource resource) throws Exception {
+		if(resource == null) {
+			if (log.isDebugEnabled())
+				log.debug("Resource is null in XtextReconcilerUnitOfWork.");
+			return;
+		}
 		if (log.isDebugEnabled())
 			log.debug("Preparing reconciliation.");
 		try {
