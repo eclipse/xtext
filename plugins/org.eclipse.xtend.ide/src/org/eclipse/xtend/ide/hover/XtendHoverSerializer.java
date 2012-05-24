@@ -10,7 +10,10 @@ package org.eclipse.xtend.ide.hover;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -22,6 +25,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.util.XbaseSwitch;
 
 import com.google.common.collect.Lists;
@@ -35,7 +39,6 @@ import com.google.inject.Inject;
 public class XtendHoverSerializer {
 
 	private static final String STATICDELIMITER = "::";
-	private static final String IT = "it";
 	private static final String SEPERATOR = ", ";
 	private static final String DELIMITER = ".";
 	@Inject
@@ -47,32 +50,32 @@ public class XtendHoverSerializer {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) object;
 			JvmIdentifiableElement feature = featureCall.getFeature();
 			if (feature != null && !feature.eIsProxy()) {
-				if (featureCall instanceof XMemberFeatureCall) {
-					if (((JvmOperation) feature).isStatic()) {
-						stringBuilder.append(((JvmOperation) feature).getDeclaringType().getSimpleName());
-						stringBuilder.append(STATICDELIMITER);
-						stringBuilder.append(feature.getSimpleName());
-						stringBuilder.append(computeArguments(featureCall));
-						return stringBuilder.toString();
+				if (featureCall instanceof XMemberFeatureCall && feature instanceof JvmOperation) {
+					JvmOperation jvmOperation = (JvmOperation) feature;
+					if (jvmOperation.isStatic()) {
+						return stringBuilder.append(getStaticCallDesugaredVersion(featureCall, jvmOperation)).toString();
 					}
 				}
 				if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
+					if ((feature instanceof JvmField && ((JvmField) feature).isStatic())
+							|| (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic())) {
+						return stringBuilder.append(getStaticCallDesugaredVersion(featureCall, (JvmMember) feature)).toString();
+					}
 					XExpression receiver = featureCallToJavaMapping.getActualReceiver(featureCall);
 					if (receiver instanceof XMemberFeatureCall) {
-						stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName());
-						stringBuilder.append(DELIMITER);
-					} else {
-						if (receiver instanceof XAbstractFeatureCall) {
-							JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
-							if (receiverFeature.getSimpleName().equals(IT)) {
-								stringBuilder.append(IT);
-								stringBuilder.append(DELIMITER);
-							}
-
-						}
+						stringBuilder.append(XbaseScopeProvider.THIS).append(DELIMITER);
+						stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName()).append(
+								DELIMITER);
+					} else if (receiver instanceof XAbstractFeatureCall) {
+						JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
+						if (receiverFeature.getSimpleName().equals(XbaseScopeProvider.IT.toString()))
+							stringBuilder.append(XbaseScopeProvider.IT).append(DELIMITER);
+						if (receiverFeature == feature.eContainer())
+							stringBuilder.append(XbaseScopeProvider.THIS).append(DELIMITER);
 					}
 					stringBuilder.append(feature.getSimpleName());
-					stringBuilder.append(computeArguments(featureCall));
+					if (feature instanceof JvmExecutable)
+						stringBuilder.append(computeArguments(featureCall));
 					return stringBuilder.toString();
 				}
 			}
@@ -80,8 +83,17 @@ public class XtendHoverSerializer {
 		return "";
 	}
 
-	public String computeArguments(XAbstractFeatureCall featureCall) {
+	protected String getStaticCallDesugaredVersion(XAbstractFeatureCall featureCall,
+			JvmMember jvmMember) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(jvmMember.getDeclaringType().getSimpleName());
+		stringBuilder.append(STATICDELIMITER);
+		stringBuilder.append(jvmMember.getSimpleName());
+		stringBuilder.append(computeArguments(featureCall));
+		return stringBuilder.toString();
+	}
 
+	public String computeArguments(XAbstractFeatureCall featureCall) {
 		StringBuilder stringBuilder = new StringBuilder("(");
 		if (featureCall != null) {
 			XExpression implicitFirstArgument = null;
