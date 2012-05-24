@@ -97,6 +97,57 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def testSignatureForXtendFieldWithoutTypeDeclaration(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		import java.util.Collections
+		import com.google.inject.Inject
+
+		class Foo {
+			val collections = <String>newArrayList
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendClasses.head
+		val xtendField = clazz.members.get(0) as XtendField
+		val signature = signatureProvider.getSignature(xtendField)
+		assertEquals("ArrayList<String> collections",signature)
+	}
+	
+	@Test
+	def testSignatureForExtensionFieldWithoutName(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		import java.util.Collections
+		import com.google.inject.Inject
+
+		class Foo {
+			extension String
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendClasses.head
+		val xtendField = clazz.members.get(0) as XtendField
+		val signature = signatureProvider.getSignature(xtendField)
+		assertEquals("String",signature)
+	}
+	
+	@Test
+	def testSignatureForXtendFieldWithoutNameOrType(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		import java.util.Collections
+		import com.google.inject.Inject
+
+		class Foo {
+			val = ""
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendClasses.head
+		val xtendField = clazz.members.get(0) as XtendField
+		val signature = signatureProvider.getSignature(xtendField)
+		assertEquals("",signature)
+	}
+	
+	@Test
 	def testSignatureForXtendConstructor(){
 		val xtendFile = parseHelper.parse('''
 		package testPackage

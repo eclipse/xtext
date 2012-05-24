@@ -168,6 +168,102 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testSignatureForXtendFieldWithoutTypeDeclaration() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("import java.util.Collections");
+      _builder.newLine();
+      _builder.append("import com.google.inject.Inject");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val collections = <String>newArrayList");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendField xtendField = ((XtendField) _get);
+      final String signature = this.signatureProvider.getSignature(xtendField);
+      Assert.assertEquals("ArrayList<String> collections", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForExtensionFieldWithoutName() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("import java.util.Collections");
+      _builder.newLine();
+      _builder.append("import com.google.inject.Inject");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("extension String");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendField xtendField = ((XtendField) _get);
+      final String signature = this.signatureProvider.getSignature(xtendField);
+      Assert.assertEquals("String", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForXtendFieldWithoutNameOrType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("import java.util.Collections");
+      _builder.newLine();
+      _builder.append("import com.google.inject.Inject");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val = \"\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendField xtendField = ((XtendField) _get);
+      final String signature = this.signatureProvider.getSignature(xtendField);
+      Assert.assertEquals("", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSignatureForXtendConstructor() {
     try {
       StringConcatenation _builder = new StringConcatenation();
