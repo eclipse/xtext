@@ -41,6 +41,11 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertError(expression, XCONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
 	}
 
+	@Test public void testConstructorCall_3() throws Exception {
+		XExpression expression = expression("new testdata.Constructors2(42)");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
+	}
+
 	// TODO: constructor type arguments
 
 	@Test public void testBinaryOperation_0() throws Exception {
