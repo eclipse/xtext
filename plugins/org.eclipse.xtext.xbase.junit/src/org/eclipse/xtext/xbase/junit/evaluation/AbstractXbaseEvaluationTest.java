@@ -2424,6 +2424,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testBug370302() throws Exception {
+		assertEvaluatesTo(3,
+				"{\n" +
+				"  val strings = newHashSet('foobar', 'bar', 'longer')\n" +
+				"  val (String)=>int length = [s | s.length]\n" +
+				"  val (int,int)=>int min = [i,j | if (i < j) i else j]\n" +
+				"  strings.map(length).reduce(min)\n" +
+				"}");
+	}
+	
 	@Test public void testBooleanArithmetics() throws Exception {
 		assertEvaluatesTo(false ^ (false || true) && true, "false.xor(false || true) && true");
 	}
