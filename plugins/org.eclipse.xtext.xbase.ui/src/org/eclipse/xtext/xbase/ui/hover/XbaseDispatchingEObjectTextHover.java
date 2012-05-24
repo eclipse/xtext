@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.ui.hover;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
@@ -33,10 +35,12 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 	protected Pair<EObject, IRegion> getXtextElementAt(XtextResource resource, int offset) {
 		Pair<EObject, IRegion> original = super.getXtextElementAt(resource, offset);
 		EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
-		if (object != null)
-			if((object instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) object).getFeature() instanceof JvmExecutable) || object instanceof XConstructorCall)
+		if (object != null && object instanceof XAbstractFeatureCall){
+			JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
+			if(feature instanceof JvmExecutable || feature instanceof JvmField || object instanceof XConstructorCall)
 					if (original != null)
 						return Tuples.create(object, original.getSecond());
+		}
 		return original;
 	}
 }

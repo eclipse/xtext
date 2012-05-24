@@ -290,7 +290,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	/**
 	 * @since 2.3
 	 */
-	public final class XbasePresenterControlCreator extends PresenterControlCreator {
+	public class XbasePresenterControlCreator extends PresenterControlCreator {
 
 		@Override
 		public IInformationControl doCreateInformationControl(Shell parent) {
@@ -340,7 +340,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	/**
 	 * @since 2.3
 	 */
-	public final class XbaseHoverControlCreator extends HoverControlCreator {
+	public class XbaseHoverControlCreator extends HoverControlCreator {
 
 		protected final IInformationControlCreator fInformationPresenterControlCreator;
 
