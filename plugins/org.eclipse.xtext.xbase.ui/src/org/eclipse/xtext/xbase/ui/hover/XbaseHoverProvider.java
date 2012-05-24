@@ -169,13 +169,13 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 * @param call - FeatureCall may be null
 	 */
 	protected String computeSignature(EObject call, EObject o) {
-		String imageTag = "<div style='position: absolute; left: 0; top: 0;'>" + hoverSignatureProvider.getImageTag(o) + "</div>";
+		String imageTag =  hoverSignatureProvider.getImageTag(o);
 		String signature = hoverSignatureProvider.getSignature(o);
 		if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
 			signature = hoverGenericsResolver.replaceGenerics((XExpression) call,
 					hoverSignatureProvider.getSignature(o));
 		if (imageTag != null && signature != null) {
-			return imageTag + LEADING_PADDING +"<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;
+			return "<div style='position: absolute; left: 0; top: 0;'>" + imageTag + "</div>" + LEADING_PADDING +"<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;
 		}
 		return "";
 	}
