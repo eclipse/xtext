@@ -626,8 +626,6 @@ public class JvmModelGenerator implements IGenerator {
         appendable.append(" = ");
         JvmTypeReference _type = it.getType();
         this.compiler.compileAsJavaExpression(expression, appendable, _type);
-      } else {
-        /* "" */
       }
     }
   }
