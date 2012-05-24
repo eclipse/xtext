@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.refactoring;
 
-import static org.eclipse.xtext.util.Strings.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
@@ -36,7 +34,7 @@ public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (isPlainJavaMember(targetElement)) {
+		if (isJvmMember(targetElement)) {
 			IJavaElement javaElement;
 			if(targetElement instanceof JvmConstructor)
 				javaElement = getJavaElementFinder().findExactElementFor(((JvmConstructor) targetElement).getDeclaringType());
@@ -50,11 +48,11 @@ public class JvmRenameElementHandler extends DefaultRenameElementHandler {
 	}
 
 	/** 
-	 * @return true, iff the targetElement belongs to an IMember in a Java resource. 
+	 * @return true, iff the targetElement belongs to an IMember 
 	 */
-	protected boolean isPlainJavaMember(EObject targetElement) {
+	protected boolean isJvmMember(EObject targetElement) {
 		return targetElement.eClass() != null && targetElement.eClass().getEPackage() == TypesPackage.eINSTANCE
-				&& targetElement instanceof JvmMember && equal("java", targetElement.eResource().getURI().scheme());
+				&& targetElement instanceof JvmMember;
 	}
 	
 	protected IJavaElementFinder getJavaElementFinder() {
