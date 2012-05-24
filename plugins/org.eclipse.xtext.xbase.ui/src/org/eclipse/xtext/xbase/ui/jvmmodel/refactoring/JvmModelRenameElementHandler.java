@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
@@ -51,7 +53,7 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
-		if (!isPlainJavaMember(targetElement)) {
+		if (!isJvmMember(targetElement) || !isTypeResource(targetElement)) {
 			EObject declarationTarget = getDeclarationTarget(targetElement);
 			Set<EObject> jvmElements = associations.getJvmElements(declarationTarget);
 			if (!jvmElements.isEmpty()) {
@@ -79,6 +81,14 @@ public class JvmModelRenameElementHandler extends JvmRenameElementHandler {
 		return super.createRenameElementContext(targetElement, editor, selection, resource);
 	}
 
+	protected boolean isTypeResource(EObject jvmElement) {
+		Resource eResource = jvmElement.eResource();
+		if(eResource != null)
+			return equal("java", eResource.getURI().scheme());
+		else 
+			return false;
+	}
+	
 	protected EObject getDeclarationTarget(EObject targetElement) {
 		EObject target;
 		if(targetElement instanceof JvmConstructor)
