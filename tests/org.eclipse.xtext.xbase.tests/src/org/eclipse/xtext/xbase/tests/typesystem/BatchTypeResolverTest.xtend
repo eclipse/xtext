@@ -1286,6 +1286,65 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Ignore
+	@Test def void testDeferredTypeArgumentResolution_31() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll('')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Ignore
+	@Test def void testDeferredTypeArgumentResolution_32() throws Exception {
+		"{
+			val list = newArrayList
+			val secondList = newArrayList
+			list.addAll('')
+			list.addAll(secondList)
+			secondList
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Ignore
+	@Test def void testDeferredTypeArgumentResolution_33() throws Exception {
+		"{
+			val list = newArrayList
+			val secondList = newArrayList
+			list.addAll(secondList)
+			list.addAll('')
+			secondList
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_34() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll('', '', '')
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_35() throws Exception {
+		"{
+			val list = newArrayList
+			val secondList = newArrayList
+			list.addAll('', '', '')
+			list.addAll(secondList)
+			secondList
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_36() throws Exception {
+		"{
+			val list = newArrayList
+			val secondList = newArrayList
+			list.addAll(secondList)
+			list.addAll('', '', '')
+			secondList
+		}".resolvesTo("ArrayList<String>")
+	}
+	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
 		"{
 			val list = newArrayList
