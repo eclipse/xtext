@@ -96,7 +96,7 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
@@ -187,7 +187,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 							computeTypeArguments(call, call.getTypeArguments(), appendable);
 							// ------ExpectedType computation
 							JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-							UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), computationServices);
+							TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), computationServices);
 							JvmTypeReference resolvedExpectedType= substitutor.substitute(expectedType);
 							if(resolvedExpectedType != null && resolvedExpectedType.getType() != null){
 								typeRefSerializer.serialize(resolvedExpectedType, call, appendable);
