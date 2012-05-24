@@ -34,7 +34,7 @@ Alternatively, you can go to link[http://www.eclipse.org/downloads/][http://www.
 Eclipse IDE for Java Developers. Find the download link that matches your platform and follow the ref:unzip[instructions
 above] to extract and launch Eclipse.
 
-ol[
+ul[
 	item[
 		Choose e[Help -> Install New Software...] from the menu bar and
 		e[Add...] the following update site: link[http://download.itemis.de/updates/][http://download.itemis.de/updates/].
@@ -48,3 +48,7 @@ ol[
 		After a quick download and a restart of Eclipse, Xtext is ready to use.
 	]
 ]
+
+Note: Xtext relies on the Antlr generator library. Due to a legal issue, the official Eclipse release update
+sites cannot provide this library. Xtext will try to download it on demand. To avoid this, you can manually 
+install the feature e[Xtext Antlr-2.0.0] from the itemis update site (see 1 above).
