@@ -204,7 +204,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	protected String getImageTagLink(ImageDescriptor imageDescriptor) {
 		URL url = getURL(imageDescriptor);
 		if (url != null)
-			return "<div style='position: absolute; left: 0; top: 0;'><image src='" + url.toExternalForm() + "'/></div>";
+			return "<image src='" + url.toExternalForm() + "'/>";
 		return "";
 	}
 
