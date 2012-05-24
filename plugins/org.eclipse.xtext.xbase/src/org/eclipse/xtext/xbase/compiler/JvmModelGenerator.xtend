@@ -340,8 +340,6 @@ class JvmModelGenerator implements IGenerator {
 			if (expression != null) {
 				appendable.append(" = ")
 				compiler.compileAsJavaExpression(expression, appendable, type)
-			} else {
-				""
 			}
 		}
 	}
