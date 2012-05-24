@@ -101,7 +101,28 @@ public class StacktraceBasedEditorDecider {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 */
 	protected boolean isEditorUtilityIsOpenInEditor(StackTraceElement element) {
-		return "org.eclipse.jdt.internal.ui.javaeditor.EditorUtility".equals(element.getClassName()) && "isOpenInEditor".equals(element.getMethodName());
+		return "org.eclipse.jdt.internal.ui.javaeditor.EditorUtility".equals(element.getClassName()) && ("isOpenInEditor".equals(element.getMethodName()) );
+	}
+
+	// org.eclipse.jdt.internal.junit.ui.OpenEditorAction.run()
+	// invokes a selecAndReveal only for methods and no for a class
+	// So we do always expect an selecAndReveal but we do not throw an error
+	// if there is no invocation
+	public boolean isOpenEditorAction() {
+		StackTraceElement[] trace = new Exception().getStackTrace();
+		for(StackTraceElement element: trace) {
+			if (isOpenEditorAction(element))
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected boolean isOpenEditorAction(StackTraceElement element) {
+		return "org.eclipse.jdt.internal.junit.ui.OpenEditorAction".equals(element.getClassName()) && ("run".equals(element.getMethodName()) );
 	}
 	
 	// It is currently not possible to supersede an open editor
@@ -118,7 +139,7 @@ public class StacktraceBasedEditorDecider {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 */
 	protected boolean isFindReferences(StackTraceElement element) {
-		return "org.eclipse.jdt.internal.ui.search.JavaSearchEditorOpener".equals(element.getClassName()) && "openElement".equals(element.getMethodName());
+		return "org.eclipse.jdt.internal.ui.search.JavaSearchResultPage".equals(element.getClassName()) && "showMatch".equals(element.getMethodName());
 	}
 	
 	/**

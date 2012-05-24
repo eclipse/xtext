@@ -77,7 +77,7 @@ public class XbaseEditor extends XtextEditor {
 	
 	private int expectJavaSelection = 0;
 	private boolean expectLineSelection = false;
-	private boolean wasIsOpenInEditor = false;
+	private boolean isIgnoreCall = false;
 	
 	@Override
 	public void saveState(IMemento memento) {
@@ -151,7 +151,7 @@ public class XbaseEditor extends XtextEditor {
 
 	public void markNextSelectionAsJavaOffset(IResource javaResource) {
 		if (expectJavaSelection > 0) {
-			if (!wasIsOpenInEditor) {
+			if (!isIgnoreCall) {
 				if (lastCall!= null) {
 					log.warn("The editor is already awaiting a select and reveal call from : ", lastCall);
 					log.warn("Now called from : ", new Exception());
@@ -164,10 +164,10 @@ public class XbaseEditor extends XtextEditor {
 		
 		lastCall = new Exception();
 		this.expectJavaSelection++;
-		if (calleeAnalyzer.isEditorUtilityIsOpenInEditor())
-			wasIsOpenInEditor = true;
+		if (calleeAnalyzer.isEditorUtilityIsOpenInEditor() || calleeAnalyzer.isOpenEditorAction())
+			isIgnoreCall = true;
 		else
-			wasIsOpenInEditor = false;
+			isIgnoreCall = false;
 		if (calleeAnalyzer.isCalledFromFindReferences())
 			this.expectJavaSelection++;
 		this.javaResource = javaResource;
