@@ -154,7 +154,7 @@ codeRef[org.eclipse.emf.ecore.EAttribute][EAttributes] and codeRef[org.eclipse.e
 different parser
 rules in your grammar, as described in ref:metamodelInference[Ecore model inference]. 
 
-section3[EPackage Import]
+section3:ePackageImport[EPackage Import]
 
 If you already have an existing codeRef[org.eclipse.emf.ecore.EPackage], you can import it using its namespace URI or a resource URI. 
 An link[http://www.ietf.org/rfc/rfc2396.txt][URI] (Uniform Resource Identifier) provides a simple and extensible 
@@ -1154,6 +1154,9 @@ Xtext supports the reuse of existing grammars. Grammars that are created via the
 code[Xtext][org.eclipse.xtext.common.Terminals]
 by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 
+To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language.
+If it is in a different plug-in, make sure to add a plug-in dependency in the code[MANIFEST.MF]. 
+
 code[Xtext][grammar org.xtext.example.SecretCompartments 
    with org.eclipse.xtext.common.Terminals
 
@@ -1167,11 +1170,18 @@ Mixing another grammar into a language makes the rules defined in that grammar r
 Example :
 
 code[Xtext][grammar my.SuperGrammar
+
+generate super "http://my.org/super"
+
 ...
 RuleA : "a" stuff=RuleB;
 RuleB : "{" name=ID "}";
 
 grammar my.SubGrammar with my.SuperGrammar
+
+import "http://my.org/super"
+
+ ...
 
 Model : (ruleAs+=RuleA)*;
 
@@ -1180,6 +1190,24 @@ RuleB : '\[' name=ID '\]';
 ]
 
 e[Note that declared terminal rules always get a higher priority then imported terminal rules.]
+
+In addition, you have to register the Ecore models used in your super grammar and their corresponding generator
+models to the MWE2 workflow of the inheriting language, e.g.
+
+code[MWE2][
+Workflow {
+    bean = StandaloneSetup {
+        scanClassPath = true
+        platformUri = "${runtimeProject}/.."
+        ...
+        // add the FQN of the generated EPackage
+        registerGeneratedEPackage = "my.supergrammar.super.SuperPackage" 
+        // add the platfrom resource URI of the corresponding Ecore genmodel
+        registerGenModelFile = "platform:/resource/my/src-gen/my/supergrammar/super/Super.genmodel"
+    }
+//...]
+
+You might also want to read about ref:ePackageImport[EPackage imports] for the inheriting grammar.
 
 
 section[Common Terminals]

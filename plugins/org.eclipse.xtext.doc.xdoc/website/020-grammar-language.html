@@ -390,7 +390,7 @@
 			different parser
 			rules in your grammar, as described in <a href="020-grammar-language.php#metamodelInference.php" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>. 
 			</p>
-			<a name="package_declarations_3" ></a>
+			<a name="ePackageImport" ></a>
 			<h3>EPackage Import</h3>
 			<p>
 			If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>, you can import it using its namespace URI or a resource URI. 
@@ -402,7 +402,7 @@
 			and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
 			and is only supported for backwards compatibility reasons.
 			</p>
-			<a name="package_declarations_3_2" ></a>
+			<a name="ePackageImport_2" ></a>
 			<h4><p>
 			Using Namespace URIs to Import Existing EPackages
 			</p>
@@ -530,7 +530,7 @@
 				</div>
 			</div>
 			</p>
-			<a name="package_declarations_3_3" ></a>
+			<a name="ePackageImport_3" ></a>
 			<h4><p>
 			Using Resource URIs to Import Existing EPackages - Deprecated
 			</p>
@@ -574,7 +574,7 @@
 				</div>
 			</div>
 			</p>
-			<a name="package_declarations_3_4" ></a>
+			<a name="ePackageImport_4" ></a>
 			<h4><p>
 			Using Classpath URIs to Import Existing EPackages - Deprecated
 			</p>
@@ -1879,6 +1879,10 @@
 			by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 			</p>
 			<p>
+			To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language.
+			If it is in a different plug-in, make sure to add a plug-in dependency in the <span class="inlinecode">MANIFEST.MF</span>. 
+			</p>
+			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -1903,11 +1907,18 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">grammar</span>&nbsp;my.SuperGrammar<br/>
+						<br/>
+						<span class="keyword">generate</span>&nbsp;super&nbsp;<span class="string">"http://my.org/super"</span><br/>
+						<br/>
 						...<br/>
 						RuleA&nbsp;:&nbsp;<span class="string">"a"</span>&nbsp;stuff=RuleB;<br/>
 						RuleB&nbsp;:&nbsp;<span class="string">"{"</span>&nbsp;name=ID&nbsp;<span class="string">"}"</span>;<br/>
 						<br/>
 						<span class="keyword">grammar</span>&nbsp;my.SubGrammar&nbsp;<span class="keyword">with</span>&nbsp;my.SuperGrammar<br/>
+						<br/>
+						<span class="keyword">import</span>&nbsp;<span class="string">"http://my.org/super"</span><br/>
+						<br/>
+						&nbsp;...<br/>
 						<br/>
 						Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br/>
 						<br/>
@@ -1919,6 +1930,32 @@
 			</p>
 			<p>
 			<em>Note that declared terminal rules always get a higher priority then imported terminal rules.</em>
+			</p>
+			<p>
+			In addition, you have to register the Ecore models used in your super grammar and their corresponding generator
+			models to the MWE2 workflow of the inheriting language, e.g.
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						Workflow&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/.."</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;FQN&nbsp;of&nbsp;the&nbsp;generated&nbsp;EPackage<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<span class="string">"my.supergrammar.super.SuperPackage"</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;platfrom&nbsp;resource&nbsp;URI&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;Ecore&nbsp;genmodel<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<span class="string">"platform:/resource/my/src-gen/my/supergrammar/super/Super.genmodel"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						<span class="comment">//...</span>
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			You might also want to read about <a href="020-grammar-language.php#ePackageImport.php" title="Go to &quot;EPackage Import&quot;">EPackage imports</a> for the inheriting grammar.
 			</p>
 		<a name="grammarLanguage_6" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;

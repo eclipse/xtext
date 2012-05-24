@@ -195,7 +195,7 @@ Xtext will then add <a class="jdoc" href="http://download.eclipse.org/modeling/e
 different parser
 rules in your grammar, as described in <a href="020-grammar-language.html#metamodelInference" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>. 
 </p>
-<a name="package_declarations_3"></a>
+<a name="ePackageImport"></a>
 <h4>EPackage Import</h4>
 <p>
 If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, you can import it using its namespace URI or a resource URI. 
@@ -207,7 +207,7 @@ in the file system and much more portable across different machines, easier to c
 and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
 and is only supported for backwards compatibility reasons.
 </p>
-<a name="package_declarations_3_2"></a>
+<a name="ePackageImport_2"></a>
 <h5>Using Namespace URIs to Import Existing EPackages</h5>
 <p>
 You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. This is generally 
@@ -332,7 +332,7 @@ language&nbsp;=&nbsp;{<br/>
 </div>
 </div>
 </p>
-<a name="package_declarations_3_3"></a>
+<a name="ePackageImport_3"></a>
 <h5>Using Resource URIs to Import Existing EPackages - Deprecated</h5>
 <p>
 In order to import an existing Ecore model, you&apos;ll have to have the *.ecore file describing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
@@ -373,7 +373,7 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </div>
 </div>
 </p>
-<a name="package_declarations_3_4"></a>
+<a name="ePackageImport_4"></a>
 <h5>Using Classpath URIs to Import Existing EPackages - Deprecated</h5>
 <p>
 We usually like to leverage Java&apos;s classpath mechanism, because is is well understood and can be configured easily
@@ -1715,6 +1715,10 @@ Xtext supports the reuse of existing grammars. Grammars that are created via the
 by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 </p>
 <p>
+To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language.
+If it is in a different plug-in, make sure to add a plug-in dependency in the <span class="inlinecode">MANIFEST.MF</span>. 
+</p>
+<p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -1739,11 +1743,18 @@ Example :
 <div class="incode">
 <p class="code">
 <span class="keyword">grammar</span>&nbsp;my.SuperGrammar<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;super&nbsp;<span class="string">"http://my.org/super"</span><br/>
+<br/>
 ...<br/>
 RuleA&nbsp;:&nbsp;<span class="string">"a"</span>&nbsp;stuff=RuleB;<br/>
 RuleB&nbsp;:&nbsp;<span class="string">"{"</span>&nbsp;name=ID&nbsp;<span class="string">"}"</span>;<br/>
 <br/>
 <span class="keyword">grammar</span>&nbsp;my.SubGrammar&nbsp;<span class="keyword">with</span>&nbsp;my.SuperGrammar<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://my.org/super"</span><br/>
+<br/>
+&nbsp;...<br/>
 <br/>
 Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br/>
 <br/>
@@ -1755,6 +1766,32 @@ Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br/>
 </p>
 <p>
 <em>Note that declared terminal rules always get a higher priority then imported terminal rules.</em>
+</p>
+<p>
+In addition, you have to register the Ecore models used in your super grammar and their corresponding generator
+models to the MWE2 workflow of the inheriting language, e.g.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanClassPath&nbsp;=&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/.."</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;FQN&nbsp;of&nbsp;the&nbsp;generated&nbsp;EPackage<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<span class="string">"my.supergrammar.super.SuperPackage"</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;platfrom&nbsp;resource&nbsp;URI&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;Ecore&nbsp;genmodel<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<span class="string">"platform:/resource/my/src-gen/my/supergrammar/super/Super.genmodel"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<span class="comment">//...</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+You might also want to read about <a href="020-grammar-language.html#ePackageImport" title="Go to &quot;EPackage Import&quot;">EPackage imports</a> for the inheriting grammar.
 </p>
 <a name="grammarLanguage_6"></a>
 <h2>Common Terminals</h2>
