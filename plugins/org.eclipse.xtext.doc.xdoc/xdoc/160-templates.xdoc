@@ -29,6 +29,8 @@ It is best practice to edit the templates in the preferences page, export them i
 e[templates.xml]-file and put this one into the e[templates] folder of your UI-plug-in. However, these 
 templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
 an code[XML][id] attribute for each template element. Note that the attribute name is case sensitive.
+As always in eclipse plug-in development, if the folder e[templates] did not exist before, you have to
+add it to the e[bin.includes] in your e[build.properties]. 
 
 section2[Cross Reference Template Variable Resolver]
 
