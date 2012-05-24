@@ -293,11 +293,9 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	public int compareTo(LinkingCandidate right) {
-		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
+		int arityCompareResult = compareByArityWith(right);
 		if (arityCompareResult != 0)
 			return arityCompareResult;
-		if (right.getDeclaredParameters().size() > getDeclaredParameters().size())
-			return 1;
 		int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
 		if (typeArityCompareResult != 0)
 			return typeArityCompareResult;
@@ -305,6 +303,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			return 1;
 		}
 		return 0;
+	}
+	
+	protected int compareByArityWith(LinkingCandidate right) {
+		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
+		return arityCompareResult;
 	}
 
 	protected int compareByArity(int leftArityMismatch, int rightArityMismatch) {

@@ -16,5 +16,9 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 public interface IFeatureLinkingCandidate extends ILinkingCandidate<IFeatureLinkingCandidate> {
 
 	XAbstractFeatureCall getFeatureCall();
+
+	boolean isStatic();
+	
+	boolean isExtension();
 	
 }

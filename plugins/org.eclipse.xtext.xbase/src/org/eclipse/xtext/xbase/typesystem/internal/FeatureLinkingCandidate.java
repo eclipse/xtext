@@ -47,6 +47,57 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
+	public int compareTo(IFeatureLinkingCandidate right) {
+		int result = super.compareTo(right);
+		if (result == 0) {
+			return result;
+		}
+		return result;
+	}
+	
+	@Override
+	protected int compareByArityWith(IFeatureLinkingCandidate right) {
+		int result = super.compareByArityWith(right);
+		if (result == 0) {
+			// TODO sort according to type compatibility
+			result = favorInstanceOverExtensions(right);
+			if (result != 0)
+				return result;
+			if (right.getDeclaredParameters().size() > getDeclaredParameters().size())
+				return 1;
+		}
+		return result;
+	}
+	
+	private int favorInstanceOverExtensions(IFeatureLinkingCandidate right) {
+		if (!isStaticOrExtension(this) && isStaticOrExtension(right))
+			return -1;
+		if (isStaticOrExtension(this) == isStaticOrExtension(right))
+			return 0;
+		return 1;
+	}
+	
+	protected boolean isStaticOrExtension(IFeatureLinkingCandidate candidate) {
+		return candidate.isStatic() || candidate.isExtension();
+	}
+	
+	public boolean isExtension() {
+		IEObjectDescription description = getDescription();
+		if (description instanceof BucketedEObjectDescription) {
+			return ((BucketedEObjectDescription) description).isExtensionDescription();
+		}
+		return false;
+	}
+	
+	public boolean isStatic() {
+		IEObjectDescription description = getDescription();
+		if (description instanceof BucketedEObjectDescription) {
+			return ((BucketedEObjectDescription) description).isStaticDescription();
+		}
+		return false;
+	}
+
+	@Override
 	protected List<XExpression> getSyntacticArguments() {
 		// TODO binary operation
 		XAbstractFeatureCall featureCall = getFeatureCall();
