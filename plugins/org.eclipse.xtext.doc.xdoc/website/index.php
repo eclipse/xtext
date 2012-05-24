@@ -61,7 +61,7 @@
 	}
 	</script>');
 	
-	$pageTitle 		= "Xtext 2.1 Documentation";
+	$pageTitle 		= "Xtext 2.3 Documentation";
 	
 	$html .=  file_get_contents('_index.html');
 

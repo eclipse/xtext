@@ -242,31 +242,19 @@
 			<ol>
 			  <li>
 			  		First of all, you'll have to filter the contents of the resource down to the defined entities. Therefore
-			  		we need to iterate a resource with all it's deeply nested elements.
-			  		
-			  		Xtend ships with a utility that simplifies this greatly. The class ResourceExtensions   		provides the useful function <span class="inlinecode">allContentsIterable()</span> which we want to import as a static
-			  		extension.
+			  		we need to iterate a resource with all it's deeply nested elements. This can be achieved with the method
+			  		<span class="inlinecode">getAllContents()</span>. To use the resulting <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/TreeIterator.html" title="org.eclipse.emf.common.util.TreeIterator">TreeIterator</abbr></a> in
+			  		a for loop, we use the extension method <span class="inlinecode">toIterable()</span> from the built-in library class
+			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="org.eclipse.xtext.xbase.lib.IteratorExtensions">IteratorExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>.
 			  		
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*<br/>
-			  			<br/>
 			  			<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
-			  			..<br/>
-			  			}
-			  		</p>
-			  	</div>
-			  </div>
-			  
-			  		
-			  		Afterwards we can iterate all the objects and filter them by their type to find all <em>Entities</em>.
-			  		
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 			  			}
 			  		</p>
@@ -297,7 +285,7 @@
 			  	<div class="incode">
 			  		<p class="code">
 			  			<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
@@ -435,8 +423,6 @@
 						<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
 						<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess<br/>
 						<br/>
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*<br/>
-						<br/>
 						<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.*<br/>
 						<br/>
 						<span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
@@ -448,7 +434,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>

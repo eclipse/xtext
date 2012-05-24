@@ -48,25 +48,17 @@ all entities with a resource and trigger code generation for each one.
 ol[
 	item[
 		First of all, you'll have to filter the contents of the resource down to the defined entities. Therefore
-		we need to iterate a resource with all it's deeply nested elements.
-		
-		Xtend ships with a utility that simplifies this greatly. The class ResourceExtensions  %%FIXME codeRef[org.eclipse.xtext.xtend2.lib.ResourceExtensions]
-		provides the useful function code[Java][allContentsIterable()] which we want to import as a static
-		extension.
+		we need to iterate a resource with all it's deeply nested elements. This can be achieved with the method
+		code[getAllContents()]. To use the resulting codeRef[org.eclipse.emf.common.util.TreeIterator] in
+		a for loop, we use the extension method code[Java][toIterable()] from the built-in library class
+		codeRef[org.eclipse.xtext.xbase.lib.IteratorExtensions].
 		
 		code[Xtend2][
-		import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-		
 		class DomainmodelGenerator implements IGenerator {
-		..
-		}
-		]
-		
-		Afterwards we can iterate all the objects and filter them by their type to find all e[Entities].
-		
-		code[Xtend2][
-		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-			for(e: resource.allContentsIterable.filter(typeof(Entity))) {
+			override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+				for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
+					...
+				}
 			}
 		}
 		]
@@ -87,7 +79,7 @@ ol[
 		
 		code[Xtend2][
 		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-			for(e: resource.allContentsIterable.filter(typeof(Entity))) {
+			for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
 				fsa.generateFile(
 					e.fullyQualifiedName.toString.replace(".", "/") + ".java",
 					e.compile)
@@ -191,8 +183,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
 
-import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
-
 import org.eclipse.xtext.example.domainmodel.*
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider
@@ -204,7 +194,7 @@ class DomainmodelGenerator implements IGenerator {
 	@Inject extension IQualifiedNameProvider nameProvider
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		for(e: resource.allContentsIterable.filter(typeof(Entity))) {
+		for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
 			fsa.generateFile(
 				e.fullyQualifiedName.toString.replace(".", "/") + ".java",
 				e.compile)

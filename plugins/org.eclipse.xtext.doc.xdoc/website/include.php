@@ -12,7 +12,7 @@
 	# these are optional
 	# $Nav->setLinkList(array());
 
-	$pageTitle 		= "Xtext 2.1 Documentation";
+	$pageTitle 		= "Xtext 2.3 Documentation";
 
 	$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="code.css"/>' . "\n\t");
 	$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="book.css"/>' . "\n\t");
