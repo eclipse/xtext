@@ -42,6 +42,9 @@ fields and types that will reveal results in your language files. e[Go To Declar
 and content assist will propose the list of available types. Even the e[import] statements will also
 apply for Java types. 
 
+More sophisticated references to Java types, e.g. generics, array types etc., can be found in the  
+e[Xtype.xtext] grammar in the plug-in e[org.eclipse.xtext.xbase]. 
+
 section2[Customization Points]
 
 There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:
@@ -61,18 +64,3 @@ and uses the JDT Index directly to minimize the effort for object instantiation.
 codeRef[org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters]
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 to a smaller number of valid entries.
-
-%%code[Java][
-%%import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters; 
-%%
-%%  // ..
-%%  proposalProvider.createSubTypeProposals(
-%%    superType, factory, context,
-%%    MyDslPackage.Literals.TYPE__MAPPED_TO,
-%%    TypeMatchFilters.and(
-%%      TypeMatchFilters.not(
-%%        TypeMatchFilters.canInstantiate()
-%%      ),
-%%      TypeMatchFilters.isPublic()
-%%    ), acceptor);
-%%]

@@ -331,7 +331,7 @@
 			<topic href="contents/199-xtext-and-java.html#Xbase_3" label="Plug-in Setup" >
 			</topic>
 			<topic href="contents/199-xtext-and-java.html#jvmtypes" label="Referring to Java Elements using JVM Types" >
-				<topic href="contents/199-xtext-and-java.html#jvmtypes_10" label="Customization Points" >
+				<topic href="contents/199-xtext-and-java.html#jvmtypes_11" label="Customization Points" >
 				</topic>
 			</topic>
 			<topic href="contents/199-xtext-and-java.html#xbaseJavaReferences" label="Referring to Java Types Using Xbase" >
