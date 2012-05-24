@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -66,11 +67,20 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	}
 
 	protected String _signature(XtendField field, boolean typeAtEnd) {
-		JvmTypeReference type = field.getType();
-		if (type != null) {
-			return type.getSimpleName() + " " + field.getName();
+		if (field.getName() == null && field.isExtension())
+			return field.getType().getSimpleName();
+		JvmField jvmField = associations.getJvmField(field);
+		if (jvmField != null) {
+			JvmTypeReference type = jvmField.getType();
+			if (type != null) {
+				if (field.getName() == null)
+					return type.getSimpleName();
+				return type.getSimpleName() + " " + field.getName();
+			}
 		}
-		return "";
+		if (field.getName() == null)
+			return "";
+		return field.getName();
 	}
 
 	protected String _signature(XtendParameter parameter, boolean typeAtEnd) {

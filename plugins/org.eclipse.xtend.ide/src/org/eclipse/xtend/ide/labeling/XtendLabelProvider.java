@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
@@ -93,6 +94,13 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	public String text(XtendField element) {
 		if (element.getName() == null && element.isExtension())
 			return element.getType().getSimpleName();
-		return element.getName() +" : " +element.getType().getSimpleName();
+		JvmField jvmField = associations.getJvmField(element);
+		if (jvmField != null) {
+			JvmTypeReference type = jvmField.getType();
+			if (type != null) {
+				return element.getName() +" : " +type.getSimpleName();
+			}
+		}
+		return element.getName();
 	}
 }
