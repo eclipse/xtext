@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -262,7 +263,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				Iterable<IEObjectDescription> result = transform(original,
 						new Function<IEObjectDescription, IEObjectDescription>() {
 							public IEObjectDescription apply(IEObjectDescription from) {
-								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
+								JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
+								constructor = (JvmConstructor) EcoreUtil.resolve(constructor, context);
 								XConstructorCall constructorCall = null;
 								if (context instanceof XConstructorCall)
 									constructorCall = (XConstructorCall) context;
