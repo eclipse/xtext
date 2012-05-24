@@ -197,12 +197,12 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testBigIntegerAllOperationsBound() throws Exception {
-		XExpression expression = expression("{val a=new java.math.BigInteger(1); -a+a-a*a/a%a}", true);
+		XExpression expression = expression("{val a=1bi; -a+a-a*a/a%a}", true);
 		assertEquals("java.math.BigInteger", typeProvider.getType(expression).getIdentifier());
 	}
 
 	@Test public void testBigDecimalAllOperationsBound() throws Exception {
-		XExpression expression = expression("{val a=new java.math.BigDecimal(1); -a+a-a*a/a}", true);
+		XExpression expression = expression("{val a=1bd; -a+a-a*a/a}", true);
 		assertEquals("java.math.BigDecimal", typeProvider.getType(expression).getIdentifier());
 	}
 }
