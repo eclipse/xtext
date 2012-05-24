@@ -12,7 +12,7 @@
 <h1>Five simple steps to your JVM language</h1>
 <p>
 In this tutorial we will basically implement the domain model language again, but this time, we will make use of
-the special JVM support shipped with Xtext 2.1. This kind of language really is a sweet spot for DSLs,
+the special JVM support shipped with Xtext 2.x. This kind of language really is a sweet spot for DSLs,
 so feel free to use this as a blueprint and add your project specific features later on.
 </p>
 <p>
@@ -155,7 +155,6 @@ The Eclipse editor and all the other workbench related functionality.
 <a name="JvmDomainmodel_8"></a>
 <h2>Step Two: Write the Grammar</h2>
 <p>
-
 The wizard will automatically open the grammar file 
 <em>Domainmodel.xtext</em> in the editor. As you can see it already contains a simple <em>Hello World</em> grammar:
 </p>
@@ -458,14 +457,13 @@ in the src folder. Please replace its contents with the following :
 <span class="keyword">package</span>&nbsp;org.example.domainmodel.jvmmodel<br/>
 <br/>
 <span class="keyword">import</span>&nbsp;com.google.inject.Inject<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.common.types.JvmDeclaredType<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.util.IAcceptor<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer<br/>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder<br/>
 <span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Entity<br/>
 <span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Operation<br/>
 <span class="keyword">import</span>&nbsp;org.example.domainmodel.domainmodel.Property<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder<br/>
 <br/>
 <span class="keyword">class</span>&nbsp;DomainModelJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
 <br/>
@@ -478,30 +476,36 @@ in the src folder. Please replace its contents with the following :
 &nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;feature&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entity.toClass(&nbsp;element.fullyQualifiedName&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;).initializeLater&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(element.superType&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;element.superType.cloneWithProxies<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;feature&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;:&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
 }<br/>
 </p>
@@ -536,7 +540,7 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[&nbsp;<br/>
+		acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;&nbsp;<br/>
 		...<br/>
 		</p>
 		</div>
@@ -556,12 +560,26 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		  	<div class="literallayout">
 		<div class="incode">
 		<p class="code">
+		).initializeLater&nbsp;[<br/>
+		</p>
+		</div>
+		</div>
+		
+		    The type inferrence has two phases. The first phase happens before linking. Only the empty types have to be created
+		    and be passed to the <em>acceptor</em>.
+		    Types&apos; features are created in the second phase. The actions in this phase are specified in the closure
+		    passed to <span class="inlinecode">initializeLater</span>. 
+	</li>
+	<li>
+		
+		  	<div class="literallayout">
+		<div class="incode">
+		<p class="code">
 		documentation&nbsp;=&nbsp;element.documentation<br/>
 		</p>
 		</div>
 		</div>
 		
-		    
 		    Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
 		    to an invocation of the method 
 		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#setDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmIdentifiableElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmIdentifiableElement" >JvmIdentifiableElement</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmIdentifiableElement.java" title="View Source Code" >(src)</a> element,String documentation)</em>
@@ -569,6 +587,21 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a><em>#getDocumentation(<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> element)</em>
 		    
 		    Xtend&apos;s extension methods are explained in detail in the sections about <a href="http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf">extension methods</a> and <a href="http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf">imports</a>.
+	</li>
+	<li>
+		
+		  	<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		<span class="keyword">if</span>&nbsp;(element.superType&nbsp;!=&nbsp;null)<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;entity.superType.cloneWithProxies<br/>
+		</p>
+		</div>
+		</div>
+		
+		    Set the <em>superType</em> on the inferred element. Note that we have to clone the type reference from
+		    the <em>element.superType</em>. If we didn&apos;t do that, the type reference  would be automatically removed 
+		    from the <em>element</em>, as <em>superType</em> is a containment reference.   
 	</li>
 	<li>
 		
@@ -589,7 +622,6 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		</div>
 		</div>
 		
-		    
 		    When iterating over a list of heterogeneous types, the switch expression with its type guards comes in handy.
 		    If <em>feature</em> is of type <em>Property</em> the first block is executed. If it is an <em>Operation</em> the
 		    second block is executed. Note that the variable <em>feature</em> will be implicitly casted to the respective
@@ -609,7 +641,6 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		</div>
 		</div>
 		
-		    
 		    For each <em>Property</em> we create a field as well as a corresponding getter and setter.  
 	</li>
 	<li>
@@ -619,10 +650,10 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		<p class="code">
 		Operation&nbsp;:&nbsp;{<br/>
 		&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toMethod(feature.name,&nbsp;feature.type)&nbsp;[<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(p&nbsp;:&nbsp;feature.params)&nbsp;{<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;p.toParameter(p.name,&nbsp;p.parameterType)<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;feature.documentation<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;feature.body<br/>
 		&nbsp;&nbsp;]<br/>
 		}<br/>
@@ -656,10 +687,13 @@ bar.
 </div>
 </p>
 <p>
-In the new workbench, create a Java project (<em>File -&gt; New -&gt; Project...  -&gt; Java Project</em> and therein a new file 
-with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. 
-Try it and discover the rich functionality it provides. You should also have a look at the preferences
-of your language to find out what can be individually configured to your users needs.
+In the new workbench, create a Java project (<em>File -&gt; New -&gt; Project...  -&gt; Java Project</em>.
+Xbase relies on a small runtime library on the classpath. To add this, right-click on the project and
+go to <em>Java Build Path -&gt; Libraries -&gt; Add Library</em> and choose <em>Xtend Library</em>. The create a new file 
+with the file extension you chose in the beginning (<em>*.dmodel</em>) in the source folder of the Java project.
+This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
+should also have a look at the preferences of your language to find out what can be individually configured 
+to your users needs.
 </p>
 <p>
 Have fun!

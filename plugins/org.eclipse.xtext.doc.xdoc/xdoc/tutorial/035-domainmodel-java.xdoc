@@ -1,7 +1,7 @@
 chapter:JvmDomainmodel[Five simple steps to your JVM language]
 
 In this tutorial we will basically implement the domain model language again, but this time, we will make use of
-the special JVM support shipped with Xtext 2.1. This kind of language really is a sweet spot for DSLs,
+the special JVM support shipped with Xtext 2.x. This kind of language really is a sweet spot for DSLs,
 so feel free to use this as a blueprint and add your project specific features later on.
 
 The revised domain model language supports expressions and cross links to Java types. It is directly
@@ -78,12 +78,6 @@ table[
 img[../images/tutorial/30min_initialprojectlayout.png][ ][ ][ ]
 
 section[Step Two: Write the Grammar]
-
-%% e[Please note]: If you encounter strange errors while copying and pasting
-%% a snippet from this document to your Eclipse editor, your documentation
-%% viewer most likely has inserted characters different from {space} into your 
-%% clipboard. Reenter the "white space" or type the text by hand to be sure everything
-%% works fine. 
 
 The wizard will automatically open the grammar file 
 e[Domainmodel.xtext] in the editor. As you can see it already contains a simple e[Hello World] grammar:
@@ -301,14 +295,13 @@ code[Xtend2][
 package org.example.domainmodel.jvmmodel
 
 import com.google.inject.Inject
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.example.domainmodel.domainmodel.Entity
 import org.example.domainmodel.domainmodel.Operation
 import org.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 
 class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 
@@ -321,30 +314,36 @@ class DomainModelJvmModelInferrer extends AbstractModelInferrer {
   @Inject extension IQualifiedNameProvider
   
   def dispatch void infer(Entity element, 
-                IAcceptor<JvmDeclaredType> acceptor, 
+                IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
-    
-    acceptor.accept(element.toClass(element.fullyQualifiedName) \[
-      documentation = element.documentation
-      for (feature : element.features) {
-        switch feature {
-          Property : {
-            members += feature.toField(feature.name, feature.type)
-            members += feature.toSetter(feature.name, feature.type)
-            members += feature.toGetter(feature.name, feature.type)
-          }
-          Operation : {
-            members += feature.toMethod(feature.name, feature.type) \[
-              for (p : feature.params) {
-                parameters += p.toParameter(p.name, p.parameterType)
-              }
-              documentation = feature.documentation
-              body = feature.body
-            \]
-          }
-        }
-      }
-    \])
+    	acceptor.accept(
+			entity.toClass( element.fullyQualifiedName )
+		).initializeLater \[
+			documentation = element.documentation
+			if (element.superType != null)
+				superTypes += element.superType.cloneWithProxies
+			for (feature : element.features) {
+				switch feature {
+			
+					Property : {
+						members += feature.toField(feature.name, feature.type)
+						members += feature.toGetter(feature.name, feature.type)
+						members += feature.toSetter(feature.name, feature.type)
+					}
+			
+					Operation : {
+						members += feature.toMethod(feature.name, feature.type) \[
+							documentation = feature.documentation
+							for (p : feature.params) {
+								parameters += p.toParameter(p.name, p.parameterType)
+							}
+							body = feature.body
+						\]
+					}
+				}
+			}
+		\]
+	}
   }
 }
 ]
@@ -365,7 +364,7 @@ ol[
   ]
   item[
     code[Xtend2][
-        acceptor.accept(element.toClass(element.fullyQualifiedName) \[ 
+        acceptor.accept(element.toClass(element.fullyQualifiedName)  
         ...
     ]
 	Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
@@ -379,9 +378,17 @@ ol[
   ]
   item[
   	code[Xtend2][
+ 		).initializeLater \[
+    ]
+    The type inferrence has two phases. The first phase happens before linking. Only the empty types have to be created
+    and be passed to the e[acceptor].
+    Types' features are created in the second phase. The actions in this phase are specified in the closure
+    passed to code[initializeLater]. 
+  ]
+  item[
+  	code[Xtend2][
         documentation = element.documentation
     ]
-    
     Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
     to an invocation of the method 
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#setDocumentation(codeRef[org.eclipse.xtext.common.types.JvmIdentifiableElement] element,String documentation)]
@@ -389,6 +396,15 @@ ol[
     codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]e[#getDocumentation(codeRef[org.eclipse.emf.ecore.EObject] element)]
     
     Xtend's extension methods are explained in detail in the sections about link[http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf][extension methods] and link[http://www.eclipse.org/Xtext/xtend/Xtend%20Reference%20Documentation.pdf][imports].
+  ]
+  item[
+  	code[Xtend2][
+ 		if (element.superType != null)
+				superTypes += entity.superType.cloneWithProxies
+    ]
+    Set the e[superType] on the inferred element. Note that we have to clone the type reference from
+    the e[element.superType]. If we didn't do that, the type reference  would be automatically removed 
+    from the e[element], as e[superType] is a containment reference.   
   ]
   item[
   	code[Xtend2][
@@ -403,7 +419,6 @@ ol[
         }
       }
     ]
-    
     When iterating over a list of heterogeneous types, the switch expression with its type guards comes in handy.
     If e[feature] is of type e[Property] the first block is executed. If it is an e[Operation] the
     second block is executed. Note that the variable e[feature] will be implicitly casted to the respective
@@ -417,17 +432,16 @@ ol[
           members += feature.toGetter(feature.name, feature.type)
         }
     ]
-    
     For each e[Property] we create a field as well as a corresponding getter and setter.  
   ]
   item[
   	code[Xtend2][
         Operation : {
           members += feature.toMethod(feature.name, feature.type) \[
+            documentation = feature.documentation
             for (p : feature.params) {
               parameters += p.toParameter(p.name, p.parameterType)
             }
-            documentation = feature.documentation
             body = feature.body
           \]
         }
@@ -450,10 +464,13 @@ bar.
 
 img[../images/tutorial/JvmTutorial_LaunchEditor.png][ ][ ][ ]
 
-In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project] and therein a new file 
-with the file extension you chose in the beginning (e[*.dmodel]). This will open the generated entity editor. 
-Try it and discover the rich functionality it provides. You should also have a look at the preferences
-of your language to find out what can be individually configured to your users needs.
+In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project].
+Xbase relies on a small runtime library on the classpath. To add this, right-click on the project and
+go to e[Java Build Path -> Libraries -> Add Library] and choose e[Xtend Library]. The create a new file 
+with the file extension you chose in the beginning (e[*.dmodel]) in the source folder of the Java project.
+This will open the generated entity editor. Try it and discover the rich functionality it provides. You 
+should also have a look at the preferences of your language to find out what can be individually configured 
+to your users needs.
 
 Have fun!
 
