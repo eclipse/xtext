@@ -433,10 +433,12 @@
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_PropertyAccess" label="Property Access" >
 						</topic>
-					</topic>
-					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ImplicitThis" label="Implicit variables 'this' and 'it'" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_NullSafeFeatureCalls" label="Null-Safe Feature Call" >
 						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_staticFeatureCalls" label="Static Feature Calls" >
+						</topic>
+					</topic>
+					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ImplicitThis" label="Implicit variables 'this' and 'it'" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ConstructorCall" label="Constructor Call" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ConstructorCall_2" label="Examples" >

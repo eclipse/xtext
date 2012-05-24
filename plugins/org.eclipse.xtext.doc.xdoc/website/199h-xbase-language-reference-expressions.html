@@ -553,38 +553,6 @@
 		the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field exists it looks for a method called <span class="inlinecode">myProperty()</span> before it looks 
 		for the getter methods <span class="inlinecode">getMyProperty()</span>. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 		</p>
-		<a name="Xbase_Expressions_ImplicitThis" ></a>
-		<h3>Implicit variables 'this' and 'it'</h3>
-		<p>
-		If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span> or <span class="inlinecode"><span class="keyword">it</span></span>, the compiler will make all its members available to the scope. 
-		That is one of 
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					<span class="keyword">it</span>.myProperty<br/>
-					<span class="keyword">this</span>.myProperty
-				</p>
-			</div>
-		</div>
-		
-		is a valid expression
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					myProperty
-				</p>
-			</div>
-		</div>
-		
-		is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
-		which would have higher precedence. 
-		</p>
-		<p>
-		As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
-		in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
-		higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
-		<a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
-		</p>
 		<a name="Xbase_Expressions_NullSafeFeatureCalls" ></a>
 		<h4><p>
 		Null-Safe Feature Call
@@ -617,6 +585,56 @@
 				</p>
 			</div>
 		</div>
+		</p>
+		<a name="Xbase_Expressions_staticFeatureCalls" ></a>
+		<h4><p>
+		Static Feature Calls
+		</p>
+		</h4>
+		<p>
+		To access static members of a type use <span class="inlinecode">::</span>, e.g.
+		</p>
+		<p>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					java::util::Collections::singleton(<span class="string">"Lonesome&nbsp;Cowboy"</span>)<br/>
+					System::err.println(<span class="string">"An&nbsp;error&nbsp;occurred"</span>)
+				</p>
+			</div>
+		</div>
+		</p>
+		<a name="Xbase_Expressions_ImplicitThis" ></a>
+		<h3>Implicit variables 'this' and 'it'</h3>
+		<p>
+		If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span> or <span class="inlinecode"><span class="keyword">it</span></span>, the compiler will make all its members available to the scope. 
+		That is one of 
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">it</span>.myProperty<br/>
+					<span class="keyword">this</span>.myProperty
+				</p>
+			</div>
+		</div>
+		
+		is a valid expression
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					myProperty
+				</p>
+			</div>
+		</div>
+		
+		is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
+		which would have higher precedence. 
+		</p>
+		<p>
+		As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
+		in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
+		higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
+		<a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
 		</p>
 		<a name="Xbase_Expressions_ConstructorCall" ></a>
 		<h3>Constructor Call</h3>

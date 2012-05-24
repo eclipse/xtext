@@ -1589,6 +1589,51 @@ myObj.myProperty<br/>
 the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field exists it looks for a method called <span class="inlinecode">myProperty()</span> before it looks 
 for the getter methods <span class="inlinecode">getMyProperty()</span>. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 </p>
+<a name="Xbase_Expressions_NullSafeFeatureCalls"></a>
+<h5>Null-Safe Feature Call</h5>
+<p>
+Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
+Xbase supports the safe navigation operator <span class="inlinecode">?.</span> to make such code more readable.
+</p>
+<p>
+Instead of writing 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+one can write
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myRef?.doStuff()<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="Xbase_Expressions_staticFeatureCalls"></a>
+<h5>Static Feature Calls</h5>
+<p>
+To access static members of a type use <span class="inlinecode">::</span>, e.g.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+java::util::Collections::singleton(<span class="string">"Lonesome&nbsp;Cowboy"</span>)<br/>
+System::err.println(<span class="string">"An&nbsp;error&nbsp;occurred"</span>)<br/>
+</p>
+</div>
+</div>
+</p>
 <a name="Xbase_Expressions_ImplicitThis"></a>
 <h4>Implicit variables 'this' and 'it'</h4>
 <p>
@@ -1620,36 +1665,6 @@ As <span class="inlinecode"><span class="keyword">this</span></span> is bound to
 in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
 higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
 <a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
-</p>
-<a name="Xbase_Expressions_NullSafeFeatureCalls"></a>
-<h5>Null-Safe Feature Call</h5>
-<p>
-Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
-Xbase supports the safe navigation operator <span class="inlinecode">?.</span> to make such code more readable.
-</p>
-<p>
-Instead of writing 
-</p>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()<br/>
-</p>
-</div>
-</div>
-</p>
-<p>
-one can write
-</p>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myRef?.doStuff()<br/>
-</p>
-</div>
-</div>
 </p>
 <a name="Xbase_Expressions_ConstructorCall"></a>
 <h4>Constructor Call</h4>
