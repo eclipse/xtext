@@ -81,19 +81,29 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
 			return findTypeByClass(clazz, result);
 		} catch (ClassNotFoundException e) {
-			if (indexedJvmTypeAccess != null) {
-				int index = name.indexOf('$');
-				if (index < 0)
-					index = name.indexOf('[');
-				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-				List<String> nameSegments = Strings.split(qualifiedNameString, '.');
-				QualifiedName qualifiedName = QualifiedName.create(nameSegments.toArray(new String[nameSegments.size()]));
-				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
-				if (candidate instanceof JvmType)
-					return (JvmType) candidate;
-			}
-			return null;
+			return tryFindTypeInIndex(name, indexedJvmTypeAccess);
+		} catch (NoClassDefFoundError e) { 
+			/* 
+			 * Error will be thrown if the contents of the binary class file does not match the expectation (transitively).
+			 * See java.lang.ClassLoader.defineClass(String, byte[], int, int, ProtectionDomain)
+			 */
+			return tryFindTypeInIndex(name, indexedJvmTypeAccess);
 		}
+	}
+
+	protected JvmType tryFindTypeInIndex(String name, IndexedJvmTypeAccess indexAccess) {
+		if (indexAccess != null) {
+			int index = name.indexOf('$');
+			if (index < 0)
+				index = name.indexOf('[');
+			String qualifiedNameString = index < 0 ? name : name.substring(0, index);
+			List<String> nameSegments = Strings.split(qualifiedNameString, '.');
+			QualifiedName qualifiedName = QualifiedName.create(nameSegments);
+			EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
+			if (candidate instanceof JvmType)
+				return (JvmType) candidate;
+		}
+		return null;
 	}
 	
 	@Override
