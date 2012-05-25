@@ -17,7 +17,7 @@ person.forename +' '+ person.name
 
 // static features can be accessed using ::
 java::util::Collections::singleton("So lonely") 
-
+System::err.println()
 
 
 
