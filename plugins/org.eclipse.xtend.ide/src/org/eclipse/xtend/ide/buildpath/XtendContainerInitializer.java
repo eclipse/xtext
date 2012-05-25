@@ -25,14 +25,7 @@ import org.eclipse.xtend.ide.internal.XtendActivator;
  */
 public class XtendContainerInitializer extends ClasspathContainerInitializer {
 
-	static final String XTEXT_XBASE_LIB_BUNDLE_ID = "org.eclipse.xtext.xbase.lib";
-
-	static final String XTEND_LIB_BUNDLE_ID = "org.eclipse.xtend.lib";
-
 	public static final Path XTEND_LIBRARY_PATH = new Path("org.eclipse.xtend.XTEND_CONTAINER"); //$NON-NLS-1$
-
-	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.guava", XTEXT_XBASE_LIB_BUNDLE_ID,
-			XTEND_LIB_BUNDLE_ID };
 
 	/**
 	 * {@inheritDoc}
@@ -40,7 +33,7 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 	@Override
 	public void initialize(final IPath containerPath, final IJavaProject project) throws CoreException {
 		if (isXtendPath(containerPath)) {
-			IClasspathContainer container = createContainer(containerPath);
+			IClasspathContainer container = new XtendClasspathContainer(containerPath);
 			JavaCore.setClasspathContainer(containerPath, new IJavaProject[] { project },
 					new IClasspathContainer[] { container }, null);
 		}
@@ -71,10 +64,6 @@ public class XtendContainerInitializer extends ClasspathContainerInitializer {
 				return Status.OK_STATUS;
 			}
 		}.schedule();
-	}
-
-	private IClasspathContainer createContainer(final IPath containerPath) {
-		return new XtendClasspathContainer(containerPath);
 	}
 
 	private boolean isXtendPath(final IPath containerPath) {
