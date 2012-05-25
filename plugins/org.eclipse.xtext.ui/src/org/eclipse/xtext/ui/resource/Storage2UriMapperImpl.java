@@ -69,9 +69,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	}
 
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
-		synchronized (cache) {
-			return cache.get(uri);
-		}
+		return cache.get(uri);
 	}
 
 	protected IWorkspaceRoot getWorkspaceRoot() {
@@ -119,9 +117,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	}
 	
 	public void resourceChanged(IResourceChangeEvent event) {
-		synchronized (cache) {
-			cache.clear();
-		}
+		cache.clear();
 	}
 
 }
