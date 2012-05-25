@@ -39,7 +39,7 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 
 	@Override
 	protected void stateChanged(boolean newState) {
-		if(!treeViewer.getTree().isDisposed())
+		if(treeViewer != null && !treeViewer.getTree().isDisposed())
 			treeViewer.refresh();
 	}
 
@@ -79,5 +79,12 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 		outlineFilterAndSorter = outlinePage.getFilterAndSorter();
 		this.treeViewer = outlinePage.getTreeViewer();
 		outlineFilterAndSorter.setComparator(comparator);
+	}
+	
+	@Override
+	public void deregister(OutlinePage outlinePage) {
+		outlineFilterAndSorter = null;
+		treeViewer = null;
+		super.deregister(outlinePage);
 	}
 }

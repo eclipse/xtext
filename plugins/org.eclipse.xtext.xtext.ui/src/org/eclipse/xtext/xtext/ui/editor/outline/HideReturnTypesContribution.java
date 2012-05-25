@@ -51,7 +51,7 @@ public class HideReturnTypesContribution extends AbstractToggleOutlineContributi
 
 	@Override
 	protected void stateChanged(boolean newState) {
-		if(!treeViewer.getTree().isDisposed())
+		if(treeViewer != null && !treeViewer.getTree().isDisposed())
 			treeViewer.refresh(true);
 	}
 	
@@ -59,5 +59,11 @@ public class HideReturnTypesContribution extends AbstractToggleOutlineContributi
 	public void register(OutlinePage outlinePage) {
 		super.register(outlinePage);
 		this.treeViewer= outlinePage.getTreeViewer();
+	}
+	
+	@Override
+	public void deregister(OutlinePage outlinePage) {
+		this.treeViewer = null;
+		super.deregister(outlinePage);
 	}
 }
