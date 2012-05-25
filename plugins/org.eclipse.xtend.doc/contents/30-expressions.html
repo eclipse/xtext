@@ -21,7 +21,7 @@ allows to use every Xtend expression on the right hand side of an assignment. Fo
 &nbsp;&nbsp;fileContentsToString(<span class="string">&apos;data.txt&apos;</span>)<br/>
 }&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="string">&apos;dummy&nbsp;data&apos;</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -58,7 +58,8 @@ need to quote newline characters.
 &apos;\u00a1Hola&nbsp;el&nbsp;mundo!<span class="string">&apos;<br/>
 "Hello&nbsp;<br/>
 <br/>
-&nbsp;&nbsp;World&nbsp;!"</span>
+&nbsp;&nbsp;World&nbsp;!"<br/>
+</span>
 </p>
 </div>
 </div>
@@ -86,7 +87,8 @@ An integer literal creates an <span class="inlinecode"><span class="keyword">int
 </span>-1&nbsp;&nbsp;<span class="comment">//&nbsp;an&nbsp;expression&nbsp;consisting&nbsp;of&nbsp;the&nbsp;unary&nbsp;-&nbsp;operator&nbsp;and&nbsp;an&nbsp;integer&nbsp;literal&nbsp;&nbsp;<br/>
 </span>42L<br/>
 0xbeef#L&nbsp;<span class="comment">//&nbsp;hexadecimal,&nbsp;mind&nbsp;the&nbsp;&apos;#&apos;<br/>
-</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger</span>
+</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger<br/>
+</span>
 </p>
 </div>
 </div>
@@ -103,7 +105,8 @@ literals.
 </span>0.42e2&nbsp;&nbsp;<span class="comment">//&nbsp;implicit&nbsp;double<br/>
 </span>0.42e2f&nbsp;<span class="comment">//&nbsp;float<br/>
 </span>4.2f&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;float<br/>
-</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal</span>
+</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal<br/>
+</span>
 </p>
 </div>
 </div>
@@ -124,7 +127,14 @@ the only member of the type <span class="inlinecode">java.lang.Void</span>.
 <h3>Type Literals</h3>
 <p>
 Type literals are specified using the keyword <span class="inlinecode"><span class="keyword">typeof</span></span> :
-<span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)&nbsp;<span class="comment">//&nbsp;yields&nbsp;java.lang.String.class</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">typeof</span>(java.lang.String)&nbsp;<span class="comment">//&nbsp;yields&nbsp;java.lang.String.class<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="functionTypes"></a>
 <h3>Function Types</h3>
@@ -134,9 +144,22 @@ type signature. On the Java level a closure (or more generally any function obje
 instance of one of the types in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>, depending on the 
 number of arguments. However, as closures are a very important language feature, a special 
 syntax for function types has been introduced. So instead of writing 
-<span class="inlinecode">Function1&lt;String,Boolean&gt;</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Function1&lt;String,Boolean&gt;<br/>
+</p>
+</div>
+</div>
+ 
 one can write 
-<span class="inlinecode">(String)=&gt;<span class="keyword">boolean</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+(String)=&gt;<span class="keyword">boolean</span><br/>
+</p>
+</div>
+</div>
 </p>
 <a name="typeCasts"></a>
 <h2>Type Casts</h2>
@@ -152,7 +175,7 @@ Here are some examples:
 <div class="incode">
 <p class="code">
 something&nbsp;<span class="keyword">as</span>&nbsp;MyClass<br/>
-<span class="string">""</span>&nbsp;<span class="keyword">as</span>&nbsp;Object
+<span class="string">""</span>&nbsp;<span class="keyword">as</span>&nbsp;Object<br/>
 </p>
 </div>
 </div>
@@ -170,7 +193,8 @@ operators for any type just by implementing the corresponding method signature. 
 <p class="code">
 <span class="keyword">val</span>&nbsp;x=<span class="keyword">new</span>&nbsp;BigDecimal(<span class="string">&apos;2.71&apos;</span>)<br/>
 <span class="keyword">val</span>&nbsp;y=<span class="keyword">new</span>&nbsp;BigDecimal(<span class="string">&apos;3.14&apos;</span>)<br/>
-x+y&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;BigDecimalExtension.operator_plus(x,y)</span>
+x+y&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;BigDecimalExtension.operator_plus(x,y)<br/>
+</span>
 </p>
 </div>
 </div>
@@ -481,7 +505,7 @@ myList&nbsp;+=&nbsp;23<br/>
 x&nbsp;&gt;&nbsp;23&nbsp;&amp;&amp;&nbsp;y&nbsp;&lt;&nbsp;23<br/>
 x&nbsp;&amp;&amp;&nbsp;y&nbsp;||&nbsp;z<br/>
 1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23)<br/>
-!(x)
+!(x)<br/>
 </p>
 </div>
 </div>
@@ -491,12 +515,24 @@ x&nbsp;&amp;&amp;&nbsp;y&nbsp;||&nbsp;z<br/>
 <p>
 <a href="30-expressions.html#variableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also 
 properties can be set using this operator given the following expression: 
-<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span><br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The compiler first looks up whether there is an accessible Java Field called <span class="inlinecode">myProperty</span> on 
 the type of <span class="inlinecode">myObj</span>. If there exists such a field it translates to the following Java expression:
-<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Remember in Xtend everything is an expression and has to return something. In the case of simple 
@@ -508,7 +544,13 @@ If there is no accessible field on the left operand&apos;s type, a method called
 <span class="inlinecode">setMyProperty</span> (JavaBeans setter method) is looked up. It has to take one argument 
 of the type (or a super type) of the right hand operand. The return value will be whatever the 
 setter method returns (which usually is <span class="inlinecode"><span class="keyword">void</span></span>). As a result the compiler translates to:
-<span class="inlinecode">myObj.setMyProperty(<span class="string">"foo"</span>)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.setMyProperty(<span class="string">"foo"</span>)<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="variableDeclaration"></a>
 <h2>Variable Declarations</h2>
@@ -534,7 +576,7 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 &nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -554,7 +596,13 @@ closure.
 The return type of a variable declaration expression is always <span class="inlinecode"><span class="keyword">void</span></span>. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side
 expression. Here is an example for an explicitly declared type:
-<span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList();</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList();&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 In such cases, the type of the right hand expression must <a href="15-types.html#Xbase_Types_ConformanceRules" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type 
@@ -562,7 +610,14 @@ of the expression on the left side.
 </p>
 <p>
 Alternatively the type can be left out and will be inferred from the initialization expression:  
-<span class="inlinecode"><span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;&nbsp;&nbsp;<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="featureCalls"></a>
 <h2>Feature Calls</h2>
@@ -576,7 +631,13 @@ to local variables and parameters, which are made available for the current expr
 Feature calls are directly translated to their Java equivalent with the exception, that for calls 
 to properties an equivalent rule as described in <a href="30-expressions.html#propertyAssignment" title="Go to &quot;Assignments&quot;" >section propertyAssignment</a> applies. That is, for the 
 following expression
-<span class="inlinecode">myObj.myProperty</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObj.myProperty<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field 
@@ -594,14 +655,20 @@ That is one of
 <div class="incode">
 <p class="code">
 <span class="keyword">it</span>.myProperty<br/>
-<span class="keyword">this</span>.myProperty
+<span class="keyword">this</span>.myProperty<br/>
 </p>
 </div>
 </div>
 </p>
 <p>
 is a valid expression
-<span class="inlinecode">myProperty</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myProperty<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 is valid as well and is equivalent, as long as there is no local variable &apos;myProperty&apos; on the scope,
@@ -622,7 +689,7 @@ newArrayList&nbsp;=&gt;&nbsp;[&nbsp;<span class="comment">//&nbsp;bind&nbsp;&apo
 </span>&nbsp;&nbsp;&nbsp;&nbsp;add(<span class="string">"Apple"</span>)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;&apos;it.add("Apple")&apos;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;add(<span class="string">"Pear"</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;add(<span class="string">"Orange"</span>)<br/>
-]
+]<br/>
 </p>
 </div>
 </div>
@@ -636,11 +703,23 @@ operator <span class="inlinecode">?.</span> to make such code better readable.
 </p>
 <p>
 Instead of writing 
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(myRef&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;myRef.doStuff()</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(myRef&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;myRef.doStuff()<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 one can write
-<span class="inlinecode">myRef?.doStuff()</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myRef?.doStuff()<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="constructorCall"></a>
 <h2>Constructor Call</h2>
@@ -650,7 +729,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 <div class="incode">
 <p class="code">
 <span class="keyword">new</span>&nbsp;String()<br/>
-<span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;()
+<span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;()<br/>
 </p>
 </div>
 </div>
@@ -661,14 +740,33 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 A closure is a literal that defines an anonymous function. A closure also captures the current
 scope, so that any final variables and parameters visible at construction time can be referred to 
 in the closure&apos;s expression. 
-<span class="inlinecode"><span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.length&gt;3]</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.length&gt;3]<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The surrounding square brackets are optional if the closure is the single argument of a method 
 invocation. That is you can write
-<span class="inlinecode">myList.findFirst(e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst(e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>)<br/>
+</p>
+</div>
+</div>
+
 instead of
-<span class="inlinecode">myList.findFirst([e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>])</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myList.findFirst([e&nbsp;|&nbsp;e.name==<span class="keyword">null</span>])<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 But in all other cases the square brackets are mandatory.
@@ -682,15 +780,33 @@ The parameter types can be inferred if the closure is used in a context where th
 </p>
 <p>
 For instance, given the following Java method signature:
-<span class="inlinecode"><span class="keyword">public</span>&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(List&lt;T&gt;&nbsp;list,&nbsp;Function1&lt;T,Boolean&gt;&nbsp;predicate)</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(List&lt;T&gt;&nbsp;list,&nbsp;Function1&lt;T,Boolean&gt;&nbsp;predicate)&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 the type of the parameter can be inferred. Which allows users to write:
-<span class="inlinecode">newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>).find(e&nbsp;|&nbsp;e==<span class="string">"Bar"</span>)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>).find(e&nbsp;|&nbsp;e==<span class="string">"Bar"</span>)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 instead of 
-<span class="inlinecode">newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>).find(String&nbsp;e&nbsp;|&nbsp;e==<span class="string">"Bar"</span>)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+newArrayList(<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>).find(String&nbsp;e&nbsp;|&nbsp;e==<span class="string">"Bar"</span>)<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Here are some more examples:
@@ -699,7 +815,8 @@ Here are some more examples:
 <p class="code">
 [|&nbsp;<span class="string">"foo"</span>]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters<br/>
 </span>[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type<br/>
-</span>[a,b,c&nbsp;|&nbsp;a+b+c]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span>
+</span>[a,b,c&nbsp;|&nbsp;a+b+c]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types<br/>
+</span>
 </p>
 </div>
 </div>
@@ -768,7 +885,7 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br/>
 </p>
 </div>
 </div>
@@ -778,7 +895,14 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 <p>
 If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
 be ommitted. Use <span class="inlinecode"><span class="keyword">it</span></span> to refer to the parameter inside the closure&apos;s body.
-<span class="inlinecode"><span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;|&nbsp;it.toUpperCase]</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;function&nbsp;=&nbsp;[toUpperCase]&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;[it&nbsp;|&nbsp;it.toUpperCase]<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="closuresExceptions"></a>
 <h3>Exceptions in Closures</h3>
@@ -798,7 +922,8 @@ methods, this yields a very concise syntax.
 <div class="incode">
 <p class="code">
 <span class="keyword">val</span>&nbsp;fruit&nbsp;=&nbsp;newArrayList(<span class="string">&apos;apple&apos;</span>,&nbsp;<span class="string">&apos;pear&apos;</span>,&nbsp;<span class="string">&apos;lemon&apos;</span>)<br/>
-fruit.map[toUpperCase]&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;fruit.map([it&nbsp;|&nbsp;it.toUpperCase])</span>
+fruit.map[toUpperCase]&nbsp;&nbsp;<span class="comment">//&nbsp;same&nbsp;as&nbsp;fruit.map([it&nbsp;|&nbsp;it.toUpperCase])<br/>
+</span>
 </p>
 </div>
 </div>
@@ -833,7 +958,7 @@ Here is an example for creating a simple tree of <span class="inlinecode">Nodes<
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -848,19 +973,38 @@ Consequently, you can use if expressions deeply nested within expressions.
 </p>
 <p>
 An expression 
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2<br/>
+</p>
+</div>
+</div>
+ 
 results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> 
 depending on whether the predicate <span class="inlinecode">p</span> evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. 
 The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 is the a short hand for
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span><br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
@@ -883,7 +1027,7 @@ For a <span class="inlinecode"><span class="keyword">switch</span></span> expres
 &nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
 &nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -914,7 +1058,7 @@ Example:
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
 &nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -933,7 +1077,7 @@ for the switch expression in subsequent expressions. Example:
 &nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
 &nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
 &nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -968,7 +1112,7 @@ Here are two examples:
 {<br/>
 &nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
 &nbsp;&nbsp;result<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -983,7 +1127,7 @@ Here are two examples:
 &nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -992,7 +1136,14 @@ Here are two examples:
 <h2>For Loop</h2>
 <p>
 The for loop 
-<span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;arrayOrIterable)&nbsp;expression</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;arrayOrIterable)&nbsp;expression<br/>
+</p>
+</div>
+</div>
+ 
 is used to execute a certain expression for each element of an array of an instance of 
 <span class="inlinecode">java.lang.Iterable</span>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 </p>
@@ -1010,7 +1161,7 @@ iterable expression.
 }<br/>
 <br/>
 <span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
-&nbsp;&nbsp;doSideEffect(s)
+&nbsp;&nbsp;doSideEffect(s)<br/>
 </p>
 </div>
 </div>
@@ -1019,7 +1170,14 @@ iterable expression.
 <h2>While Loop</h2>
 <p>
 A while loop 
-<span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression<br/>
+</p>
+</div>
+</div>
+ 
 is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
 The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
@@ -1032,7 +1190,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 }<br/>
 <br/>
 <span class="keyword">while</span>&nbsp;((i=i+1)&nbsp;&lt;&nbsp;max)&nbsp;<br/>
-&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
 </p>
 </div>
 </div>
@@ -1041,7 +1199,14 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 <h2>Do-While Loop</h2>
 <p>
 A do-while loop 
-<span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)<br/>
+</p>
+</div>
+</div>
+ 
 is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
 The difference to the <a href="30-expressions.html#whileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing 
 the block once before evaluating the predicate for the first time. The return type of a do-while 
@@ -1056,7 +1221,7 @@ loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 }&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
 <br/>
 <br/>
-<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
+<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)<br/>
 </p>
 </div>
 </div>
@@ -1076,7 +1241,7 @@ listOfStrings.map(e|&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
 &nbsp;&nbsp;e.toUpperCase<br/>
-})
+})&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1096,7 +1261,7 @@ in Java.
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
 &nbsp;&nbsp;...<br/>
-}
+}&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1119,7 +1284,7 @@ from Java.
 &nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
 </span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -1149,7 +1314,7 @@ Let us have a look at an example of how a typical method with template expressio
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;member.toMember&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
 &nbsp;&nbsp;}<br/>
-&apos;</span><span class="string">&apos;&apos;</span>
+&apos;</span><span class="string">&apos;&apos;</span><br/>
 </p>
 </div>
 </div>
@@ -1166,7 +1331,7 @@ toMember(Member&nbsp;m)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;<span class="keyword">case</span>&nbsp;isAbstract&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;abstract&nbsp;&laquo;...&apos;</span><span class="string">&apos;&apos;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;.....&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1242,7 +1407,7 @@ of nested nodes.
 &nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
 &nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1250,7 +1415,14 @@ of nested nodes.
 </td>
 <td>
 
-      <span class="inlinecode">node&nbsp;NodeName&nbsp;{}</span>
+      <div class="literallayout">
+<div class="incode">
+<p class="code">
+node&nbsp;NodeName&nbsp;{}<br/>
+</p>
+</div>
+</div>
+
 </td>
 </tr>
 </table>
@@ -1276,7 +1448,7 @@ of the template itself.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1294,7 +1466,7 @@ node&nbsp;Parent{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
