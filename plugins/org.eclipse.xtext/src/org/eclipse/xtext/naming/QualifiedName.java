@@ -35,35 +35,72 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
 	 * 
+	 * @param segments the segments of the to-be-created qualified name. 
+	 * 	May be <code>null</code>, but may not contain <code>null</code> entries.
+	 * @return a {@link QualifiedName}. Never <code>null</code>.
 	 * @exception IllegalArgumentException
 	 *                if any of the segments is null
 	 */
 	public static QualifiedName create(String... segments) {
-		if (segments != null) {
-			for (String segment : segments)
-				if (segment == null) {
-					throw new IllegalArgumentException("Segment cannot be null");
-				}
+		if (segments == null || segments.length == 0) {
+			return EMPTY;
 		}
-		return new QualifiedName(segments != null ? segments.clone() : Strings.EMPTY_ARRAY);
+		if (segments.length == 1) {
+			return create(segments[0]);
+		}
+		for (int i = 0; i < segments.length; i++) {
+			if (segments[i] == null) {
+				throw new IllegalArgumentException("Segment cannot be null");
+			}
+		}
+		return new QualifiedName(segments.clone());
 	}
-	
+
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
 	 * 
+	 * @param segments
+	 *            the segments of the to-be-created qualified name. May be <code>null</code>, but may not contain
+	 *            <code>null</code> entries.
+	 * @return a {@link QualifiedName}. Never <code>null</code>.
 	 * @exception IllegalArgumentException
 	 *                if any of the segments is null
+	 * @since 2.3
+	 */
+	public static QualifiedName create(List<String> segments) {
+		if (segments == null || segments.isEmpty())
+			return QualifiedName.EMPTY;
+		if (segments.size() == 1) {
+			String singleSegment = segments.get(0);
+			return QualifiedName.create(singleSegment);
+		}
+		String[] segmentArray = segments.toArray(new String[segments.size()]);
+		for (int i = 0; i < segmentArray.length; i++) {
+			if (segmentArray[i] == null) {
+				throw new IllegalArgumentException("Segment cannot be null");
+			}
+		}
+		return new QualifiedName(segmentArray);
+	}
+
+	/**
+	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
+	 * 
+	 * @param singleSegment
+	 *            the single segment of the newly created qualified name
+	 * @exception IllegalArgumentException
+	 *                if the singleSegment is null
 	 * @since 2.3
 	 */
 	public static QualifiedName create(String singleSegment) {
 		if (singleSegment == null) {
 			throw new IllegalArgumentException("Segment cannot be null");
 		}
-		return new QualifiedName(new String[] {singleSegment});
+		return new QualifiedName(singleSegment);
 	}
 
 	/**
-	 * Wrapps a name function to return a qualified name. Returns null if the name function returns null. 
+	 * Wraps a name function to return a qualified name. Returns null if the name function returns null. 
 	 */
 	public static <F> Function<F, QualifiedName> wrapper(final Function<F, String> nameFunction) {
 		return new Function<F, QualifiedName>() {
@@ -241,18 +278,28 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	 */
 	@Override
 	public String toString() {
-		if (getSegmentCount() == 0)
-			return "";
-		if (getSegmentCount() == 1)
-			return getFirstSegment();
-		StringBuilder builder = new StringBuilder();
-		boolean isFirst = true;
-		for (String segment : getSegments()) {
-			if (!isFirst)
-				builder.append(".");
-			isFirst = false;
-			builder.append(segment);
+		return toString(".");
+	}
+	
+	/**
+	 * Returns a String representation of this using {@code delimiter} as namespace delimiter.
+	 * @param delimiter the delimiter to use. <code>null</code> will be represented as the String "<code>null</code>".
+	 * @return the concatenated segments joined with the given {@code delimiter}
+	 * @since 2.3
+	 */
+	public String toString(String delimiter) {
+		int segmentCount = getSegmentCount();
+		switch (segmentCount) {
+			case 0: return "";
+			case 1: return getFirstSegment();
+			default:
+				StringBuilder builder = new StringBuilder();
+				for (int i = 0; i < segmentCount; i++) {
+					if (i > 0)
+						builder.append(delimiter);
+					builder.append(segments[i]);
+				}
+				return builder.toString();
 		}
-		return builder.toString();
 	}
 }
