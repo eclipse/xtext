@@ -82,12 +82,12 @@ public class JavaSearchHelper {
 			for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
 				URI resourceURI = resourceDescription.getURI();
 				IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
-				if(resourceServiceProvider == null)
-					return;
-				IJavaSearchParticipation javaSearchParticipation = resourceServiceProvider
-						.get(IJavaSearchParticipation.class);
-				if(javaSearchParticipation == null || javaSearchParticipation.canContainJvmReferences(resourceURI))
-					searchIn(uri, resourceDescription);
+				if(resourceServiceProvider != null) {
+					IJavaSearchParticipation javaSearchParticipation = resourceServiceProvider
+							.get(IJavaSearchParticipation.class);
+					if(javaSearchParticipation == null || javaSearchParticipation.canContainJvmReferences(resourceURI))
+						searchIn(uri, resourceDescription);
+				}
 				if (subMonitor.isCanceled()) {
 					return;
 				}
