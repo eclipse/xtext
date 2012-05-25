@@ -14,6 +14,7 @@ public class Xbase02_PropertyAccess {
         String _name = person.getName();
         /*(_plus + _name);*/
         Collections.<String>singleton("So lonely");
+        System.err.println();
     } catch (Throwable t) {}
   }
 }

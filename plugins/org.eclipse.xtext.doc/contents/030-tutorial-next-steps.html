@@ -442,6 +442,9 @@ write the testcase.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
+		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.XtextRunner<br/>
+		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider<br/>
+		<br/>
 		@InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
 		@RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
 		<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
@@ -461,7 +464,11 @@ write the testcase.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject<br/>
+		<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.util.ParseHelper<br/>
+		<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;junit.framework.Assert.*<br/>
+		<br/>
+		...<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
 		ParseHelper&lt;Domainmodel&gt;&nbsp;parser<br/>
 		<br/>
 		@Test&nbsp;<br/>

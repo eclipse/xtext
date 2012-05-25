@@ -19,6 +19,9 @@ ol[
 		by means of class annotations:  
  
 		code[Xtend2][
+			import org.eclipse.xtext.junit4.XtextRunner
+			import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
+			
 			@InjectWith(typeof(DomainmodelInjectorProvider))
 			@RunWith(typeof(XtextRunner))
 			class ParserTest {
@@ -32,6 +35,11 @@ ol[
 		codeRef[junit.framework.Assert] leads to concise a readable test cases.
 		
 		code[Xtend2][
+			import org.eclipse.xtext.junit4.util.ParseHelper
+			import static junit.framework.Assert.*
+			
+			...
+		
 			@Inject
 			ParseHelper<Domainmodel> parser
 			

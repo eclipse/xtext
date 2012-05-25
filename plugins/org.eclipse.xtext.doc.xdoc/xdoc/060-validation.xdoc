@@ -19,8 +19,8 @@ codeRef[org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider]-API to custo
 Any syntax errors can be retrieved from the Resource using the common EMF API:
 
 ul[
-item[codeRef[org.eclipse.emf.ecore.resource.Resource][Resource.getErrors()]]
-item[codeRef[org.eclipse.emf.ecore.resource.Resource][Resource.getWarnings()]]
+item[codeRef[org.eclipse.emf.ecore.resource.Resource][code[Resource.getErrors()]]]
+item[codeRef[org.eclipse.emf.ecore.resource.Resource][code[Resource.getWarnings()]]]
 ]
 
 
@@ -34,8 +34,8 @@ get resolved. This is done automatically in the editor.
 Similar to syntax errors, any unresolvable crosslinks will be reported and can be obtained through:
 
 ul[
-item[codeRef[org.eclipse.emf.ecore.resource.Resource][Resource.getErrors()]]
-item[codeRef[org.eclipse.emf.ecore.resource.Resource][Resource.getWarnings()]]
+item[codeRef[org.eclipse.emf.ecore.resource.Resource][code[Resource.getErrors()]]]
+item[codeRef[org.eclipse.emf.ecore.resource.Resource][code[Resource.getWarnings()]]]
 ]
 
 
