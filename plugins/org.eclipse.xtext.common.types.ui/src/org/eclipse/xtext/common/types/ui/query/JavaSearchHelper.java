@@ -81,7 +81,10 @@ public class JavaSearchHelper {
 		try {
 			for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
 				URI resourceURI = resourceDescription.getURI();
-				IJavaSearchParticipation javaSearchParticipation = serviceProviderRegistry.getResourceServiceProvider(resourceURI)
+				IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
+				if(resourceServiceProvider == null)
+					return;
+				IJavaSearchParticipation javaSearchParticipation = resourceServiceProvider
 						.get(IJavaSearchParticipation.class);
 				if(javaSearchParticipation == null || javaSearchParticipation.canContainJvmReferences(resourceURI))
 					searchIn(uri, resourceDescription);
