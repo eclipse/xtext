@@ -74,7 +74,7 @@ public class XtendLibClasspathAdder {
 			InputStream input = null;
 			try {
 				MergeableManifest manifest = new MergeableManifest(((IFile) manifestFile).getContents());
-				manifest.addRequiredBundles(newHashSet(XtendContainerInitializer.BUNDLE_IDS_TO_INCLUDE));
+				manifest.addRequiredBundles(newHashSet(XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE));
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				output = new BufferedOutputStream(out);
 				manifest.write(output);

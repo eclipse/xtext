@@ -27,16 +27,23 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.Version;
 
 /**
+ * Holds some
+ * 
  * @author Dennis Huebner - Initial contribution and API
  */
 final public class XtendClasspathContainer implements IClasspathContainer {
 
+	private static final String XTEXT_XBASE_LIB_BUNDLE_ID = "org.eclipse.xtext.xbase.lib";
+	private static final String XTEND_LIB_BUNDLE_ID = "org.eclipse.xtend.lib";
+
+	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.guava", XTEXT_XBASE_LIB_BUNDLE_ID,
+			XTEND_LIB_BUNDLE_ID };
+
 	private static final String SOURCE_SUFIX = ".source"; //$NON-NLS-1$
+	private static final Logger LOG = Logger.getLogger(XtendClasspathContainer.class);
 
 	private final IPath containerPath;
-
 	private IClasspathEntry[] classPathEnries;
-	static final Logger LOG = Logger.getLogger(XtendClasspathContainer.class);
 
 	XtendClasspathContainer(IPath containerPath) {
 		this.containerPath = containerPath;
@@ -48,7 +55,7 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	public IClasspathEntry[] getClasspathEntries() {
 		if (classPathEnries == null) {
 			List<IClasspathEntry> cpEntries = new ArrayList<IClasspathEntry>();
-			for (String bundleId : XtendContainerInitializer.BUNDLE_IDS_TO_INCLUDE) {
+			for (String bundleId : XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE) {
 				addEntry(cpEntries, bundleId);
 			}
 			classPathEnries = cpEntries.toArray(new IClasspathEntry[] {});
@@ -62,8 +69,8 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 			IPath bundlePath = bundlePath(bundle);
 			IPath sourceBundlePath = calculateSourceBundlePath(bundle, bundlePath);
 			IClasspathAttribute[] extraAttributes = null;
-			if (XtendContainerInitializer.XTEXT_XBASE_LIB_BUNDLE_ID.equals(bundleId)
-					|| XtendContainerInitializer.XTEND_LIB_BUNDLE_ID.equals(bundleId)) {
+			if (XtendClasspathContainer.XTEXT_XBASE_LIB_BUNDLE_ID.equals(bundleId)
+					|| XtendClasspathContainer.XTEND_LIB_BUNDLE_ID.equals(bundleId)) {
 				extraAttributes = new IClasspathAttribute[] { JavaCore.newClasspathAttribute(
 						IClasspathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME, calculateJavadocURL()) };
 			}
@@ -72,38 +79,44 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 		}
 	}
 
+	private IPath bundlePath(Bundle bundle) {
+		IPath path = binFolderPath(bundle);
+		if (path == null) {
+			// common jar file case, no bin folder
+			try {
+				path = new Path(FileLocator.getBundleFile(bundle).getAbsolutePath());
+			} catch (IOException e) {
+				LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
+		return path;
+
+	}
+
+	private IPath binFolderPath(Bundle bundle) {
+		URL binFolderURL = FileLocator.find(bundle, new Path("bin"), null);
+		if (binFolderURL != null) {
+			try {
+				URL binFolderFileURL = FileLocator.toFileURL(binFolderURL);
+				return new Path(binFolderFileURL.getPath()).makeAbsolute();
+			} catch (IOException e) {
+				LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Builds the Javadoc online URL.<br>
 	 * For example javadoc for version 2.3.0 looks like this:<br>
 	 * http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/
 	 */
 	private String calculateJavadocURL() {
-		Version xtendVersion = XtendActivator.getInstance().getBundle().getVersion();
+		Version myVersion = XtendActivator.getInstance().getBundle().getVersion();
 		StringBuilder builder = new StringBuilder("http://download.eclipse.org/modeling/tmf/xtext/javadoc/");
-		builder.append(xtendVersion.getMajor()).append(".");
-		builder.append(xtendVersion.getMinor()).append("/");
+		builder.append(myVersion.getMajor()).append(".");
+		builder.append(myVersion.getMinor()).append("/");
 		return builder.toString();
-	}
-
-	private IPath bundlePath(Bundle bundle) {
-		IPath path = null;
-		try {
-			URL binFolderURL = binFolderURL(bundle);
-			if (binFolderURL != null) {
-				path = new Path(FileLocator.toFileURL(binFolderURL).getPath()).makeAbsolute();
-			} else {
-				path = new Path(FileLocator.getBundleFile(bundle).getAbsolutePath());
-			}
-		} catch (IOException e) {
-			LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		return path;
-
-	}
-
-	private URL binFolderURL(Bundle bundle) {
-		URL binFolderURL = FileLocator.find(bundle, new Path("bin"), null);
-		return binFolderURL;
 	}
 
 	/**
@@ -114,9 +127,10 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	 */
 	private IPath calculateSourceBundlePath(Bundle bundle, IPath bundleLocation) {
 		IPath sourcesPath = null;
+		// Not an essential functionality, make it robust
 		try {
-			URL binFolderURL = binFolderURL(bundle);
-			if (binFolderURL == null) {
+			IPath binFolderPath = binFolderPath(bundle);
+			if (binFolderPath == null) {
 				//common case, jar file.
 				IPath bundlesParentFolder = bundleLocation.removeLastSegments(1);
 				String binaryJarName = bundleLocation.lastSegment();
@@ -126,11 +140,10 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 				if (potentialSourceJar.toFile().exists())
 					sourcesPath = potentialSourceJar;
 			} else {
-				sourcesPath = new Path(FileLocator.toFileURL(binFolderURL).getPath()).removeLastSegments(1);
+				sourcesPath = binFolderPath.removeLastSegments(1);
 			}
 		} catch (Throwable t) {
-			//Not an essential functionality, make it robust
-			LOG.warn("Exception during source bundle inverstigation.", t);
+			LOG.debug("Exception during source bundle inverstigation.", t);
 		}
 		return sourcesPath;
 	}

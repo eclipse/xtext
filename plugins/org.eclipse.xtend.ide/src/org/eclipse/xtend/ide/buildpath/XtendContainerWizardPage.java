@@ -44,7 +44,7 @@ public class XtendContainerWizardPage extends NewElementWizardPage implements IC
 
 	private String containedBundles() {
 		StringBuilder builder = new StringBuilder();
-		for (String bundleId : XtendContainerInitializer.BUNDLE_IDS_TO_INCLUDE) {
+		for (String bundleId : XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE) {
 			builder.append("\t").append(bundleId).append("\n");
 		}
 		return builder.toString();
