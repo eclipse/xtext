@@ -52,9 +52,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 
 	public void elementChanged(ElementChangedEvent event) {
 		if (event.getType() == ElementChangedEvent.POST_CHANGE) {
-			synchronized (cache) {
-				cache.clear();
-			}
+			cache.clear();
 		}
 	}
 	
@@ -69,9 +67,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
 		Iterable<Pair<IStorage, IProject>> storages = super.getStorages(uri);
 		if (!storages.iterator().hasNext()) {
-			synchronized (cache) {
-				return cache.get(uri);
-			}
+			return cache.get(uri);
 		}
 		return storages;
 	}
