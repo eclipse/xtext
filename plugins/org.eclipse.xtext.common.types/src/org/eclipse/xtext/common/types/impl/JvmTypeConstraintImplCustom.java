@@ -58,7 +58,7 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 	}
 
 	/**
-	 * Constraint bounds are definitely invalid if they are <code>null</code> or point to a primitive type.
+	 * Constraint bounds are definitely invalid if they are <code>not null</code> and point to a primitive type.
 	 * {@link JvmSpecializedTypeReference} will not be resolved by this check thus they may lead to finally 
 	 * invalid constraint bounds.
 	 * 
@@ -67,7 +67,7 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 	 */
 	protected boolean isLikelyAValidConstraintBound(JvmTypeReference constraintBound) {
 		if (constraintBound == null)
-			return false;
+			return true;
 		if (constraintBound instanceof JvmSpecializedTypeReference) {
 			JvmTypeReference equivalent = (JvmTypeReference) constraintBound.eGet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, false);
 			if (equivalent != null) {

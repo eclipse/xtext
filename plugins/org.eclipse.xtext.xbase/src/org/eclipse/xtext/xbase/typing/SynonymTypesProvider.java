@@ -45,20 +45,20 @@ public class SynonymTypesProvider {
 		if (type == null || typeRefs.is(type, Void.class) || typeRefs.is(type,Void.TYPE)) {
 			return emptySet();
 		} else if (!ignoreBoxing && primitives.isPrimitive(type)) {
-			return singleton(primitives.asWrapperTypeIfPrimitive(type));
+			return singletonOrEmpty(primitives.asWrapperTypeIfPrimitive(type));
 		} else if (!ignoreBoxing && primitives.isWrapperType(type)) {
-			return singleton(primitives.asPrimitiveIfWrapperType(type));
+			return singletonOrEmpty(primitives.asPrimitiveIfWrapperType(type));
 		} else if (typeRefs.isArray(type)) {
 			if (type instanceof JvmGenericArrayTypeReference) {
 				JvmTypeReference componentType = ((JvmGenericArrayTypeReference) type).getComponentType();
 				JvmTypeReference typeArg = primitives.asWrapperTypeIfPrimitive(componentType);
 				JvmTypeReference iterable = typeRefs.getTypeForName(List.class, findContext(type.getType()), typeArg);
-				return singleton(iterable);
+				return singletonOrEmpty(iterable);
 			} else {
 				JvmArrayType array = (JvmArrayType) type.getType();
 				JvmTypeReference typeArg = primitives.asWrapperTypeIfPrimitive(typeRefs.createTypeRef(array.getComponentType()));
 				JvmTypeReference iterable = typeRefs.getTypeForName(List.class, findContext(array), typeArg);
-				return singleton(iterable);
+				return singletonOrEmpty(iterable);
 			}
 		} else if (isList(type)) {
 			JvmTypeReference componentType = null;
@@ -91,11 +91,17 @@ public class SynonymTypesProvider {
 					return ImmutableSet.of(wrapper, primitive);
 				} else {
 					JvmTypeReference result = typeRefs.createArrayType(componentType);
-					return singleton(result);
+					return singletonOrEmpty(result);
 				}
 			}
 		}
 		return emptySet();
+	}
+	
+	private Set<JvmTypeReference> singletonOrEmpty(JvmTypeReference reference) {
+		if (reference == null)
+			return emptySet();
+		return singleton(reference);
 	}
 
 	protected boolean isList(JvmTypeReference type) {

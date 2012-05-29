@@ -541,7 +541,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _expectedType(final XConstructorCall expr, EReference reference, int index, final boolean rawType) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			final JvmConstructor constructor = getConstructor(expr);
-			if (!constructor.eIsProxy()) {
+			if (constructor != null && !constructor.eIsProxy()) {
 				ITypeArgumentContext typeArgumentContext = getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
 					@Override
 					public List<JvmTypeReference> getExplicitTypeArgument() {
