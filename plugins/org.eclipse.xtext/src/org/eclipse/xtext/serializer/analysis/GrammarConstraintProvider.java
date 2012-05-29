@@ -1213,13 +1213,33 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
-		// strategy 1: if there is a parser rule context, use it for a name
+		Map<ParserRule, IConstraint> rule2constraint = Maps.newLinkedHashMap();
 		for (IConstraint c : equalConstraints)
-			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule) {
-				return context2Name.getContextName((ParserRule) ((Constraint) c).getMostSpecificContext());
-			}
+			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule)
+				rule2constraint.put((ParserRule) ((Constraint) c).getMostSpecificContext(), c);
+		if (!rule2constraint.isEmpty()) {
 
-		// strategy 2: use the names of all actions
+			// strategy 1: if there is just one parser rule context, use it for a name
+			if (rule2constraint.size() == 1)
+				return context2Name.getContextName(rule2constraint.keySet().iterator().next());
+			EClass type = equalConstraints.iterator().next().getType();
+
+			// strategy 2: if there is a parser rule context with correctly typed action, use it for a name
+			for (ParserRule pr : rule2constraint.keySet())
+				for (Action act : GrammarUtil.containedActions(pr))
+					if (act.getType().getClassifier() == type)
+						return context2Name.getContextName(pr);
+
+			// strategy 3: if there is a parser rule context with correct return type, use it for a name
+			for (ParserRule pr : rule2constraint.keySet())
+				if (pr.getType().getClassifier() == type)
+					return context2Name.getContextName(pr);
+
+			// strategy 4: if there is any parser rule context, use it for a name
+			return context2Name.getContextName(rule2constraint.keySet().iterator().next());
+		}
+
+		// strategy 4: use the names of all actions
 		List<String> actions = Lists.newArrayList();
 		for (IConstraint c : equalConstraints)
 			actions.add(context2Name.getUniqueActionName(((ActionConstraint) c).actionContext));
