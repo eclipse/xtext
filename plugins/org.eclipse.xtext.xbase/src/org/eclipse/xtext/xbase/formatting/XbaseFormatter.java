@@ -89,9 +89,9 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXClosure(FormattingConfig c, XClosureElements ele) {
-		c.setNoSpace().after(ele.getLeftSquareBracketKeyword_1());
-		c.setNoSpace().before(ele.getCommaKeyword_2_0_0_1_0());
-		c.setNoSpace().before(ele.getRightSquareBracketKeyword_4());
+		c.setNoSpace().after(ele.getLeftSquareBracketKeyword_0_0_1());
+		c.setNoSpace().before(ele.getCommaKeyword_1_0_0_1_0());
+		c.setNoSpace().before(ele.getRightSquareBracketKeyword_3());
 	}
 
 	public void configureXShortClosure(FormattingConfig c, XShortClosureElements ele) {
