@@ -59,12 +59,12 @@ XOtherOperatorExpression returns XExpression:
 	rightOperand=XAdditiveExpression)*;
 
 OpOther:
-	'->' 
+	  '->' 
 	| '..' 
 	| '=>' 
-	| '>' '>' (=>'>')? 
-	| '<' '<' (=>'<')?
-	| '<' '>'
+	| '>' (=>('>' '>') | '>') 
+	| '<' (=>('<' '<') | '<')
+	| '<>'
 	| '?:' 
 	| '<=>';
 
