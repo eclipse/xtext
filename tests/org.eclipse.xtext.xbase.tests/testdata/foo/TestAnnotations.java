@@ -2,5 +2,5 @@ package foo;
 
 
 public @interface TestAnnotations {
-	public TestAnnotation[] values();
+	public TestAnnotation[] value();
 }
