@@ -66,21 +66,21 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	private TokenRegionProvider tokenRegionProvider;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
+	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion changedRegion) {
 		if (parser == null)
 			throw new NullPointerException("parser may not be null");
 		if (previousParseResult == null) {
 			throw new NullPointerException("previousParseResult and previousParseResult.rootNode may not be null");
 		}
 		ICompositeNode oldRootNode = previousParseResult.getRootNode();
-		if (replaceRegion.getEndOffset() > oldRootNode.getTotalLength()) {
-			log.error("Invalid " + replaceRegion + " originalLength=" + oldRootNode.getTotalLength());
-			return fullyReparse(parser, previousParseResult, replaceRegion);
+		if (changedRegion.getEndOffset() > oldRootNode.getTotalLength()) {
+			log.error("Invalid " + changedRegion + " originalLength=" + oldRootNode.getTotalLength());
+			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
-		if (replaceRegion.getOffset() >= oldRootNode.getTotalLength() && replaceRegion.getText().trim().length() == 0) {
-			return fullyReparse(parser, previousParseResult, replaceRegion);
+		if (changedRegion.getOffset() >= oldRootNode.getTotalLength() && changedRegion.getText().trim().length() == 0) {
+			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
-		replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, replaceRegion), replaceRegion);
+		ReplaceRegion replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, changedRegion), changedRegion);
 		
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(previousParseResult, replaceRegion.getOffset(), replaceRegion.getLength());
 		List<ICompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
