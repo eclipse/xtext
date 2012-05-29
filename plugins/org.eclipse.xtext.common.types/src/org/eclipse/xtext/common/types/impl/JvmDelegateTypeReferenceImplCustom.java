@@ -67,7 +67,7 @@ public class JvmDelegateTypeReferenceImplCustom extends JvmDelegateTypeReference
 		StringBuilder result = new StringBuilder(eClass().getName());
 		result.append(": ");
 		if (delegate == null) {
-			result.append(" equivale is not yet computed");
+			result.append(" equivalent is not yet computed");
 		} else if (delegate.eIsProxy()) {
 			result.append(" (equivalent uri: ");
 			result.append(((InternalEObject) delegate).eProxyURI());
