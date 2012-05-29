@@ -23,20 +23,20 @@ public abstract class AbstractPartialParserReplaceTest extends AbstractPartialPa
 	protected void replaceAndReparse(String model, int offset, int length, String change, String expectedReparseRegion)
 			throws Exception {
 		IParseResult parseResult = getParseResult(model);
-		PartialParsingPointers parsingPointers = partialParser.calculatePartialParsingPointers(parseResult, offset,
+		PartialParsingPointers parsingPointers = getPartialParser().calculatePartialParsingPointers(parseResult, offset,
 				length);
-		String reparseRegion = partialParser.insertChangeIntoReplaceRegion(parsingPointers
+		String reparseRegion = getPartialParser().insertChangeIntoReplaceRegion(parsingPointers
 				.getDefaultReplaceRootNode(), new ReplaceRegion(offset, length, change));
 		assertEquals(expectedReparseRegion, reparseRegion);
 		final Wrapper<Boolean> unloaded = Wrapper.wrap(Boolean.FALSE);
-		partialParser.setUnloader(new IReferableElementsUnloader() {
+		getPartialParser().setUnloader(new IReferableElementsUnloader() {
 			public void unloadRoot(EObject root) {
 				unloaded.set(Boolean.TRUE);
 			}
 		});
 		IParseResult partiallyReparse = reparse(parseResult, offset, length, change);
 		assertTrue("unloaded", unloaded.get());
-		assertFalse(partiallyReparse.hasSyntaxErrors());
+		assertFalse(partiallyReparse.getRootNode().getText(), partiallyReparse.hasSyntaxErrors());
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);
 		assertEquals(expectedReparseModel, partiallyReparse.getRootNode().getText());
 	}

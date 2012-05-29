@@ -11,6 +11,11 @@ package org.eclipse.xtext.parser;
 import java.io.StringReader;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -18,10 +23,12 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.simpleExpressions.Op;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -322,4 +329,23 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(0, model.length(), "");
 		assertTrue(resource.getContents().isEmpty());
 	}
+	
+	@Test public void testBug370426() throws Exception {
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
+		String model = "a/b\n+c";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		// turn /b into a comment
+		resource.update(model.indexOf("/"), 0, "/");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		Serializer serializer = get(Serializer.class);
+		String newModel = serializer.serialize(EcoreUtil.copy(resource.getContents().get(0)));
+		assertEquals("a + c", newModel);
+		
+		// change comment back into /b 		
+		resource.update(model.indexOf("/"), 1, "");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertEquals(model, serialize(resource.getContents().get(0)));
+	}
+
 }
