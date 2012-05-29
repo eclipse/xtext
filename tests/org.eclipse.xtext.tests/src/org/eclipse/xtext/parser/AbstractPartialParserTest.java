@@ -23,19 +23,18 @@ import org.eclipse.xtext.util.ReplaceRegion;
 public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 
 	protected EmfStructureComparator comparator;
-	protected PartialParsingHelper partialParser;
+	
+	private PartialParsingHelper partialParser;
 
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		partialParser = new PartialParsingHelper();
 		comparator = new EmfStructureComparator();
 	}
 
 	@Override
 	public void tearDown() throws Exception {
 		comparator = null;
-		partialParser = null;
 		super.tearDown();
 	}
 	
@@ -45,7 +44,7 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 	}
 	
 	protected IParseResult reparse(IParseResult parseResult, int offset, int length, String text) {
-		return partialParser.reparse(getParser(), parseResult, new ReplaceRegion(offset, length, text));
+		return getPartialParser().reparse(getParser(), parseResult, new ReplaceRegion(offset, length, text));
 	}
 	
 	protected void assertSameStructure(ICompositeNode first, ICompositeNode second) {
@@ -62,5 +61,11 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 			
 		}
 		assertEquals(firstIter.hasNext(), secondIter.hasNext());
+	}
+
+	protected PartialParsingHelper getPartialParser() {
+		if(partialParser == null) 
+			partialParser = get(PartialParsingHelper.class);
+		return partialParser;
 	}
 }
