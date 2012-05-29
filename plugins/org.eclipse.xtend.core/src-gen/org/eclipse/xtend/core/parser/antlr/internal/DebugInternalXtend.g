@@ -458,7 +458,7 @@ ruleXMemberFeatureCall :
 				)*
 			)? ')'
 		)? ( (
-		ruleXClosure
+		'['
 		) => ruleXClosure )?
 	)*
 ;
@@ -482,7 +482,9 @@ ruleXPrimaryExpression :
 
 // Rule XLiteral
 ruleXLiteral :
-	ruleXClosure |
+	( (
+	'['
+	) => ruleXClosure ) |
 	ruleXBooleanLiteral |
 	ruleXNumberLiteral |
 	ruleXNullLiteral |
@@ -492,7 +494,9 @@ ruleXLiteral :
 
 // Rule XClosure
 ruleXClosure :
-	'[' ( (
+	( (
+	'['
+	) => '[' ) ( (
 	(
 		ruleJvmFormalParameter (
 			',' ruleJvmFormalParameter
@@ -647,7 +651,7 @@ ruleXFeatureCall :
 			)*
 		)? ')'
 	)? ( (
-	ruleXClosure
+	'['
 	) => ruleXClosure )?
 ;
 
@@ -688,7 +692,7 @@ ruleXConstructorCall :
 			)*
 		)? ')'
 	)? ( (
-	ruleXClosure
+	'['
 	) => ruleXClosure )?
 ;
 

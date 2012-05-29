@@ -4542,11 +4542,9 @@ ruleJvmFormalParameter
     {
     	newLeafNode(otherlv_21, grammarAccess.getXMemberFeatureCallAccess().getRightParenthesisKeyword_1_1_3_2());
     }
-)?((
-(
-ruleXClosure
-)
-)=>
+)?((((
+)	'[' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()); 
@@ -4735,7 +4733,9 @@ ruleXLiteral returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(
+(((((
+)	'[' 
+))=>
     { 
         newCompositeNode(grammarAccess.getXLiteralAccess().getXClosureParserRuleCall_0()); 
     }
@@ -4744,7 +4744,7 @@ ruleXLiteral returns [EObject current=null]
         $current = $this_XClosure_0.current; 
         afterParserOrEnumRuleCall();
     }
-
+)
     |
     { 
         newCompositeNode(grammarAccess.getXLiteralAccess().getXBooleanLiteralParserRuleCall_1()); 
@@ -4815,17 +4815,19 @@ ruleXClosure returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((((
+)	'[' 
+))=>((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getXClosureAccess().getXClosureAction_0(),
+            grammarAccess.getXClosureAccess().getXClosureAction_0_0_0(),
             $current);
     }
 )	otherlv_1='[' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getXClosureAccess().getLeftSquareBracketKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getXClosureAccess().getLeftSquareBracketKeyword_0_0_1());
     }
-(((((
+))(((((
 (
 ruleJvmFormalParameter
 )
@@ -4843,7 +4845,7 @@ ruleJvmFormalParameter
 )))=>(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_0_0()); 
+	        newCompositeNode(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0()); 
 	    }
 		lv_declaredFormalParameters_2_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
@@ -4860,12 +4862,12 @@ ruleJvmFormalParameter
 )
 )(	otherlv_3=',' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getXClosureAccess().getCommaKeyword_2_0_0_1_0());
+    	newLeafNode(otherlv_3, grammarAccess.getXClosureAccess().getCommaKeyword_1_0_0_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_2_0_0_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXClosureAccess().getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0()); 
 	    }
 		lv_declaredFormalParameters_4_0=ruleJvmFormalParameter		{
 	        if ($current==null) {
@@ -4884,7 +4886,7 @@ ruleJvmFormalParameter
 (
 		lv_explicitSyntax_5_0=	'|' 
     {
-        newLeafNode(lv_explicitSyntax_5_0, grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_2_0_1_0());
+        newLeafNode(lv_explicitSyntax_5_0, grammarAccess.getXClosureAccess().getExplicitSyntaxVerticalLineKeyword_1_0_1_0());
     }
  
 	    {
@@ -4898,7 +4900,7 @@ ruleJvmFormalParameter
 )))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXClosureAccess().getExpressionXExpressionInClosureParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getXClosureAccess().getExpressionXExpressionInClosureParserRuleCall_2_0()); 
 	    }
 		lv_expression_6_0=ruleXExpressionInClosure		{
 	        if ($current==null) {
@@ -4915,7 +4917,7 @@ ruleJvmFormalParameter
 )
 )	otherlv_7=']' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getXClosureAccess().getRightSquareBracketKeyword_4());
+    	newLeafNode(otherlv_7, grammarAccess.getXClosureAccess().getRightSquareBracketKeyword_3());
     }
 )
 ;
@@ -6283,11 +6285,9 @@ ruleJvmFormalParameter
     {
     	newLeafNode(otherlv_13, grammarAccess.getXFeatureCallAccess().getRightParenthesisKeyword_4_2());
     }
-)?((
-(
-ruleXClosure
-)
-)=>
+)?((((
+)	'[' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_5_0()); 
@@ -6561,11 +6561,9 @@ ruleJvmFormalParameter
     {
     	newLeafNode(otherlv_13, grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4_2());
     }
-)?((
-(
-ruleXClosure
-)
-)=>
+)?((((
+)	'[' 
+))=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()); 
