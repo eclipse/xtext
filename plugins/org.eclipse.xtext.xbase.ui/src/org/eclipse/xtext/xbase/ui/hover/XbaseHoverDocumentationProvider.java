@@ -811,7 +811,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	private String computeLinkToElement(EObject jvmElement) {
 		String imageURL = hoverSignatureProvider.getImageTag(jvmElement);
 		String signature = hoverSignatureProvider.getDerivedOrSourceSignature(jvmElement);
-		return createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(jvmElement),imageURL +  signature);
+		return imageURL + createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(jvmElement), signature);
 	}
 
 }
