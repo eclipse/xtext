@@ -759,12 +759,12 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		List<EObject> jvmElements = getFilteredDerivedElements(o, TypesPackage.Literals.JVM_MEMBER);
 		if(jvmElements.size() > 0){
 			buf.append("<dt>Derived element:</dt>");
-			buf.append("<dd>");
+
 			for(EObject jvmElement : jvmElements){
+					buf.append("<dd>");
 					buf.append(computeLinkToElement(jvmElement));	
-					buf.append("<br>");
+					buf.append("</dd>");
 			}
-			buf.append("</dd>");
 		}
 		return buf.toString();
 	}
@@ -774,12 +774,11 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		List<EObject> sourceElements = getFilteredSourceElements(o, null);
 		if(sourceElements.size() > 0){
 			buf.append("<dt>Original declaration:</dt>");
-			buf.append("<dd>");
 			for(EObject sourceElement: sourceElements){
+				buf.append("<dd>");
 				buf.append(computeLinkToElement(sourceElement));	
-				buf.append("<br>");
+				buf.append("</dd>");
 			} 
-			buf.append("</dd>");
 		}
 		return buf.toString();
 	}
