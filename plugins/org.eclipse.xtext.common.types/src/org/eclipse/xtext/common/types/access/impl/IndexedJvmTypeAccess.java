@@ -81,6 +81,10 @@ public class IndexedJvmTypeAccess {
 		return null;
 	}
 	
+	/**
+	 * Locate a locale type with the given fragment. Does not consider types that
+	 * are defined in operations or constructors as inner classes.
+	 */
 	public EObject resolveJavaObject(JvmType rootType, String fragment) {
 		if (fragment.endsWith("[]")) {
 			return resolveJavaArrayObject(rootType, fragment);
@@ -120,9 +124,11 @@ public class IndexedJvmTypeAccess {
 			if (container instanceof JvmDeclaredType) {
 				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
 				for(JvmMember member: members) {
-					String name = member.getIdentifier();
-					if (name.equals(fragment))
-						return member;
+					if (member instanceof JvmType) {
+						String name = member.getIdentifier();
+						if (name.equals(fragment))
+							return member;
+					}
 				}
 			}
 		}
