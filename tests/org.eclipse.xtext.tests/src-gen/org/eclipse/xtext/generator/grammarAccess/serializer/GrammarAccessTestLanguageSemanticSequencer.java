@@ -34,7 +34,7 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 			case AsubpackagePackage.ATYPE:
 				if(context == grammarAccess.getATypeRule() ||
 				   context == grammarAccess.getTypeRule()) {
-					sequence_Type(context, (AType) semanticObject); 
+					sequence_AType(context, (AType) semanticObject); 
 					return; 
 				}
 				else break;
@@ -43,7 +43,7 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 			case SubsubpackagePackage.ANOTHER_TYPE:
 				if(context == grammarAccess.getAnotherTypeRule() ||
 				   context == grammarAccess.getTypeRule()) {
-					sequence_Type(context, (AnotherType) semanticObject); 
+					sequence_AnotherType(context, (AnotherType) semanticObject); 
 					return; 
 				}
 				else break;
@@ -53,18 +53,9 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	/**
 	 * Constraint:
-	 *     elements+=Type*
-	 */
-	protected void sequence_Root(EObject context, AModel semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     {AType}
 	 */
-	protected void sequence_Type(EObject context, AType semanticObject) {
+	protected void sequence_AType(EObject context, AType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -73,7 +64,16 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	 * Constraint:
 	 *     {AnotherType}
 	 */
-	protected void sequence_Type(EObject context, AnotherType semanticObject) {
+	protected void sequence_AnotherType(EObject context, AnotherType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     elements+=Type*
+	 */
+	protected void sequence_Root(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

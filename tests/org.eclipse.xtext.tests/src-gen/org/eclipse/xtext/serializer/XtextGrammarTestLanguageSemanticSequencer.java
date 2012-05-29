@@ -338,18 +338,18 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 				}
 				else break;
 			case XtextTestPackage.WILDCARD:
-				if(context == grammarAccess.getTerminalTokenElementRule() ||
-				   context == grammarAccess.getWildcardRule()) {
-					sequence_TerminalTokenElement(context, (Wildcard) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
+				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||
 				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
 				   context == grammarAccess.getTerminalGroupRule() ||
 				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
 				   context == grammarAccess.getTerminalTokenRule()) {
 					sequence_TerminalToken(context, (Wildcard) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTerminalTokenElementRule() ||
+				   context == grammarAccess.getWildcardRule()) {
+					sequence_Wildcard(context, (Wildcard) semanticObject); 
 					return; 
 				}
 				else break;
@@ -613,15 +613,6 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     {Wildcard}
-	 */
-	protected void sequence_TerminalTokenElement(EObject context, Wildcard semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')?)
 	 */
 	protected void sequence_TerminalToken(EObject context, Alternatives semanticObject) {
@@ -706,6 +697,15 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     terminal=TerminalTokenElement
 	 */
 	protected void sequence_UntilToken(EObject context, UntilToken semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {Wildcard}
+	 */
+	protected void sequence_Wildcard(EObject context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }
