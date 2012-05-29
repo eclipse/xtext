@@ -362,9 +362,15 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 								EObject container = abstractElement.eContainer();
 								if (container instanceof Group) {
 									Group group = (Group) container;
-									if (group.getElements().get(group.getElements().size() - 1) == abstractElement) {
+									int idx = group.getElements().indexOf(abstractElement);
+									if (idx == group.getElements().size() - 1) {
 										if (!currentState.contains(group) && GrammarUtil.isMultipleCardinality(group)) {
 											calculator.doSwitch(group);
+										}
+									} else if (idx < group.getElements().size() - 1 && "?".equals(abstractElement.getCardinality())) { // loops are fine
+										AbstractElement nextElement = group.getElements().get(idx + 1);
+										if (!currentState.contains(nextElement)) {
+											calculator.doSwitch(nextElement);
 										}
 									}
 								}
