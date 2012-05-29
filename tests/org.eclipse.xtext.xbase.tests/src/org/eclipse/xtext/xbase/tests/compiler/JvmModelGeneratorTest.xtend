@@ -3,11 +3,13 @@ package org.eclipse.xtext.xbase.tests.compiler
 import com.google.common.base.Supplier
 import com.google.inject.Inject
 import com.google.inject.Provider
+import foo.TestAnnotations
 import java.util.AbstractList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess
@@ -21,6 +23,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
 import static org.junit.Assert.*
+import foo.TestAnnotation
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -29,6 +32,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Inject ValidationTestHelper helper
 	@Inject JvmModelGenerator generator
 	@Inject EclipseRuntimeDependentJavaCompiler javaCompiler
+	@Inject TypesFactory typesFactory;
 
 	override void setUp() {
 		super.setUp();
@@ -120,6 +124,26 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 			]
 		]
 		compile(expression.eResource,clazz);
+	}
+
+	@Test
+	def void testBug380754(){
+		val expression = expression("null")
+		val clazz = expression.toClass("my.test.Foo") [
+			members += expression.toMethod("doStuff",references.getTypeForName("java.lang.Object", expression)) [
+				setBody(expression)
+				val annotation = expression.toAnnotation(typeof(TestAnnotations))
+				val annotationAnnotationValue = typesFactory.createJvmAnnotationAnnotationValue
+
+				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
+				annotation.values += annotationAnnotationValue
+				annotations += annotation
+			]
+		]
+		compile(expression.eResource, clazz)
+
 	}
 
 	def JvmTypeReference typeRef(EObject ctx, Class<?> clazz) {

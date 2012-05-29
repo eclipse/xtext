@@ -4,6 +4,8 @@ import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import foo.TestAnnotation;
+import foo.TestAnnotations;
 import java.lang.reflect.Method;
 import java.util.AbstractList;
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -20,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
@@ -55,6 +61,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   @Inject
   private EclipseRuntimeDependentJavaCompiler javaCompiler;
   
+  @Inject
+  private TypesFactory typesFactory;
+
   public void setUp() {
     try {
       super.setUp();
@@ -241,6 +250,46 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
+  public void testBug380754() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                  final JvmAnnotationReference annotation = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotations.class);
+                  final JvmAnnotationAnnotationValue annotationAnnotationValue = JvmModelGeneratorTest.this.typesFactory.createJvmAnnotationAnnotationValue();
+                  EList<JvmAnnotationReference> _annotations = annotationAnnotationValue.getAnnotations();
+                  JvmAnnotationReference _annotation = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
+                  JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+                  EList<JvmAnnotationReference> _annotations_1 = annotationAnnotationValue.getAnnotations();
+                  JvmAnnotationReference _annotation_1 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
+                  JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations_1, _annotation_1);
+                  EList<JvmAnnotationReference> _annotations_2 = annotationAnnotationValue.getAnnotations();
+                  JvmAnnotationReference _annotation_2 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
+                  JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations_2, _annotation_2);
+                  EList<JvmAnnotationValue> _values = annotation.getValues();
+                  JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_values, annotationAnnotationValue);
+                  EList<JvmAnnotationReference> _annotations_3 = it.getAnnotations();
+                  JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations_3, annotation);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
+            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+          }
+        };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      this.compile(_eResource, clazz);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   public JvmTypeReference typeRef(final EObject ctx, final Class<? extends Object> clazz) {
     return this.references.getTypeForName(clazz, ctx);
   }

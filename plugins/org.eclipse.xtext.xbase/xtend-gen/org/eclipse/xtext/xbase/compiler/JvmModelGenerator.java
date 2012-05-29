@@ -941,7 +941,7 @@ public class JvmModelGenerator implements IGenerator {
             if (withLineBreak) {
               appendable.newLine();
             } else {
-              appendable.append(" ");
+              appendable.append(", ");
             }
             JvmModelGenerator.this.generateAnnotation(it, appendable);
           }
