@@ -87,7 +87,6 @@ public class SmokeTest extends AbstractSmokeTest {
 		}
 	}
 
-	@Ignore("See https://bugs.eclipse.org/bugs/show_bug.cgi?id=370426")
 	@Test public void testResourceUpdateSkipCharacterInBetween() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource(string.substring(1));
