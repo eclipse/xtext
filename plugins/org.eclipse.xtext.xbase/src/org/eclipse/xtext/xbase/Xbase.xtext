@@ -104,7 +104,7 @@ XMemberFeatureCall returns XExpression:
 				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
 				)? 
 			')')?
-			=>memberCallArguments+=XClosure?
+			memberCallArguments+=XClosure?
 		)*;
 
 XPrimaryExpression returns XExpression:
@@ -132,8 +132,8 @@ XLiteral returns XExpression:
 ;
 
 XClosure returns XExpression:
-	{XClosure} 
-	'[' 
+	=>({XClosure} 
+	'[') 
 		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
 		expression=XExpressionInClosure 
 	']';
@@ -213,7 +213,7 @@ XFeatureCall returns XExpression:
 		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
 		)? 
 	')')?
-	=>featureCallArguments+=XClosure?;
+	featureCallArguments+=XClosure?;
 	
 IdOrSuper :
 	ValidID | 'super'
@@ -236,7 +236,7 @@ XConstructorCall returns XExpression:
 		  |	arguments+=XExpression (',' arguments+=XExpression)*
 		)? 
 	')')?
-	=>arguments+=XClosure?;
+	arguments+=XClosure?;
 
 XBooleanLiteral returns XExpression :
 	{XBooleanLiteral} ('false' | isTrue?='true');
