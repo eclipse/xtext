@@ -410,6 +410,65 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, 51, 6, " ", "InferredModelRemoved.xtend");
 	}
 	
+	
+	@Test public void testBug380290_0() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" +
+						"\n" + 
+				"import com.google.inject.Inject\n" +
+				"import org.eclipse.xtext.common.types.util.TypeReferences\n" +
+				"import org.eclipse.xtext.naming.IQualifiedNameProvider\n" +
+				"import org.eclipse.xtext.xbase.XExpression\n" +
+				"import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor\n" +
+				"import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder\n" +
+				"\n" +
+				"class TestClass {\n" +
+				"    @Inject extension JvmTypesBuilder\n" +
+				"    @Inject extension IQualifiedNameProvider\n" +
+				"\n" +
+				"    def void infer(XExpression m, IJvmDeclaredTypeAcceptor acceptor) {\n" +
+				"        acceptor.accept(m.toClass(m.fullyQualifiedName)).initializeLater[\n" +
+				"            members += m.toMethod(\"m1\",m.newTypeRef(Void::TYPE),[\n" +
+				"                    body = []\n" +
+				"                ])\n" +
+				"            members+= m.toMethod(\"m2\",m.newTypeRef(Void::TYPE),[\n" +
+				"                body = [append(1'''stuff''')]\n" +
+				"            ])\n" +
+				"        ]\n" +
+				"    }\n" +
+				"}";
+		doTestUpdateAtOffset(model, model.indexOf("1'''stuff'''"), 1, "", "TestClass.xtend");
+	}
+	
+	@Test public void testBug380290_1() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" +
+						"\n" + 
+				"import com.google.inject.Inject\n" +
+				"import org.eclipse.xtext.common.types.util.TypeReferences\n" +
+				"import org.eclipse.xtext.naming.IQualifiedNameProvider\n" +
+				"import org.eclipse.xtext.xbase.XExpression\n" +
+				"import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor\n" +
+				"import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder\n" +
+				"\n" +
+				"class TestClass {\n" +
+				"    @Inject extension JvmTypesBuilder\n" +
+				"    @Inject extension IQualifiedNameProvider\n" +
+				"\n" +
+				"    def void infer(XExpression m, IJvmDeclaredTypeAcceptor acceptor) {\n" +
+				"        acceptor.accept(m.toClass(m.fullyQualifiedName)).initializeLater[\n" +
+				"            members += m.toMethod(\"m1\",m.newTypeRef(Void::TYPE),[\n" +
+				"                    body = []\n" +
+				"                ])\n" +
+				"            members+= m.toMethod(\"m2\",m.newTypeRef(Void::TYPE),[\n" +
+				"                body = [append('''stuff''')]\n" +
+				"            ])\n" +
+				"        ]\n" +
+				"    }\n" +
+				"}";
+		doTestUpdateAtOffset(model, model.indexOf("'''stuff'''"), 0, "1", "TestClass.xtend");
+	}
+	
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = new ResourceValidatorImpl();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
