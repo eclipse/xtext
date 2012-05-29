@@ -239,6 +239,8 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
 			if (!(rule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) rule))
 				return true;
+			else 
+				return isInvalidDueToPredicates((AbstractElement) candidate.getGrammarElement());
 		}
 		if (candidate.getGrammarElement() instanceof Action) {
 			return true;
@@ -258,6 +260,22 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		return false;
 	}
 
+	/**
+	 * @since 2.3
+	 */
+	protected boolean isInvalidDueToPredicates(AbstractElement element) {
+		if(element.isPredicated()) 
+			return true;
+		else if(element instanceof RuleCall) {
+			AbstractRule rule = ((RuleCall) element).getRule();
+			if(rule.getAlternatives() instanceof Group) {
+				boolean result = isInvalidDueToPredicates(((Group) rule.getAlternatives()).getElements().get(0));
+				return result;
+			}
+		}
+		return false;
+	}
+	
 	protected boolean isInvalidLastChildNode(ICompositeNode candidate, INode lastChild) {
 		if (lastChild != null && lastChild.getSyntaxErrorMessage() != null) {
 			EObject lastChildGrammarElement = lastChild.getGrammarElement();
@@ -458,7 +476,13 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		List<ICompositeNode> result = new ArrayList<ICompositeNode>();
 		boolean mustSkipNext = false;
 		ICompositeNode previous = null;
-		for (ICompositeNode node : nodesEnclosingRegion) {
+		/*
+		 * set to 'true' as soon as the lookahead of an enclosing
+		 * exceeds the given range
+		 */
+		boolean done = false;  
+		for (int i = 0; i < nodesEnclosingRegion.size() && !done; i++) {
+			ICompositeNode node = nodesEnclosingRegion.get(i);
 			if (node.getGrammarElement() != null) {
 				if (!mustSkipNext) {
 					boolean process = true;
@@ -490,6 +514,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 												mustSkipNext = true;
 											}
 											break;
+										} else {
+											// lookahead ends left of the range, don't dive into child nodes
+											done = true;
 										}
 									}
 								}
