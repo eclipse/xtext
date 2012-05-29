@@ -41,12 +41,12 @@ public abstract class AbstractTutorialRuntimeModule extends DefaultRuntimeModule
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.example.tutorial.serializer.AbstractTutorialSemanticSequencer.class;
+		return org.eclipse.xtext.example.tutorial.serializer.TutorialSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.example.tutorial.serializer.AbstractTutorialSyntacticSequencer.class;
+		return org.eclipse.xtext.example.tutorial.serializer.TutorialSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment

@@ -267,7 +267,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 			if (node.getGrammarElement() instanceof RuleCall)
 				return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXClosureRule();
 			if (node.getGrammarElement() instanceof Action) 
-				return node.getGrammarElement() == grammarAccess.getXClosureAccess().getXClosureAction_0();
+				return node.getGrammarElement() == grammarAccess.getXClosureAccess().getXClosureAction_0_0_0();
 			return false;
 		}
 		return true;

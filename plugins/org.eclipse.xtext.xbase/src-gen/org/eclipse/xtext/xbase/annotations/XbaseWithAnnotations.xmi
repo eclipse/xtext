@@ -701,7 +701,7 @@
               </elements>
               <elements xsi:type="xtext:Keyword" value=")"/>
             </elements>
-            <elements xsi:type="xtext:Assignment" cardinality="?" predicated="true" feature="memberCallArguments" operator="+=">
+            <elements xsi:type="xtext:Assignment" cardinality="?" feature="memberCallArguments" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.24"/>
             </elements>
           </elements>
@@ -746,12 +746,16 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Action">
-          <type metamodel="/1/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XClosure"/>
-          </type>
+        <elements xsi:type="xtext:Group" predicated="true">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Action">
+              <type metamodel="/1/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XClosure"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="["/>
+          </elements>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="["/>
         <elements xsi:type="xtext:Group" cardinality="?" predicated="true">
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Group" cardinality="?">
@@ -1162,7 +1166,7 @@
           </elements>
           <elements xsi:type="xtext:Keyword" value=")"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="?" predicated="true" feature="featureCallArguments" operator="+=">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="featureCallArguments" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.24"/>
         </elements>
       </alternatives>
@@ -1237,7 +1241,7 @@
           </elements>
           <elements xsi:type="xtext:Keyword" value=")"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="?" predicated="true" feature="arguments" operator="+=">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="arguments" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.24"/>
         </elements>
       </alternatives>

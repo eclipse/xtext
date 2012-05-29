@@ -6,7 +6,8 @@
     modelPluginID="org.eclipse.xtext.example.tutorial" forceOverwrite="true" modelName="Tutorial"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.tutorial.edit"
-    editorPluginID="org.eclipse.xtext.example.tutorial.editor" usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    editorPluginID="org.eclipse.xtext.example.tutorial.editor" runtimeVersion="2.5"
+    usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="Tutorial" basePackage="org.eclipse.xtext.example.tutorial"
       disposableProviderFactory="true" ecorePackage="Tutorial.ecore#/">
     <genClasses ecoreClass="Tutorial.ecore#//DomainModelFile">

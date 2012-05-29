@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
 @SuppressWarnings("all")
-public class AbstractDomainmodelSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractDomainmodelSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected DomainmodelGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_XBlockExpression_SemicolonKeyword_2_1_q;

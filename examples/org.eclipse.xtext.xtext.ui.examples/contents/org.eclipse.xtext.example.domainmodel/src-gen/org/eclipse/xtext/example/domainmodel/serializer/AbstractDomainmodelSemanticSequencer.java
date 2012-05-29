@@ -60,7 +60,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class AbstractDomainmodelSemanticSequencer extends XbaseSemanticSequencer {
+public abstract class AbstractDomainmodelSemanticSequencer extends XbaseSemanticSequencer {
 
 	@Inject
 	private DomainmodelGrammarAccess grammarAccess;
