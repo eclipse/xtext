@@ -61,6 +61,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	
 	@Inject
 	private NodeModelBuilder nodeModelBuilder = new NodeModelBuilder();
+	
+	@Inject(optional=true)
+	private TokenRegionProvider tokenRegionProvider;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
@@ -77,6 +80,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		if (replaceRegion.getOffset() >= oldRootNode.getTotalLength() && replaceRegion.getText().trim().length() == 0) {
 			return fullyReparse(parser, previousParseResult, replaceRegion);
 		}
+		replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, replaceRegion), replaceRegion);
 		
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(previousParseResult, replaceRegion.getOffset(), replaceRegion.getLength());
 		List<ICompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
@@ -516,6 +520,13 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
+	}
+	
+	/**
+	 * @since 2.3
+	 */
+	public void setTokenRegionProvider(TokenRegionProvider tokenRegionProvider) {
+		this.tokenRegionProvider = tokenRegionProvider;
 	}
 
 }

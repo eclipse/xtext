@@ -57,4 +57,11 @@ public class PartialParserReplaceExpressionTest extends AbstractPartialParserRep
 		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 3, 1, "x)+(b", "(a+x)+(b+c)");
 	}
+	
+	@Test public void testExpressionWithComment_0() throws Exception {
+		String model = "a//b\n+c";
+		replaceAndReparse(model, 1, 1, "", "a/b\n+c");
+	}
+
 }
+
