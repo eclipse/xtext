@@ -21,6 +21,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -154,6 +155,10 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			signature += JavaElementLabels.CONCAT_STRING + signatureOfFather;
 		}
 		return signature;
+	}
+	
+	protected String _signature(JvmEnumerationType jvmEnumerationType, boolean typeAtEnd) {
+		return jvmEnumerationType.getQualifiedName();
 	}
 
 	protected String getThrowsDeclaration(JvmExecutable executable) {
