@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAdditiveExpressionElements;
@@ -422,6 +423,14 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 			}
 		}
 		acceptor.finish();
+	}
+	
+	/**
+	 * This is for backwards compatibility < 2.3RC2 due to change in the naming strategy for sequencer methods
+	 */
+	@Deprecated
+	protected void sequence_XExpression(EObject context, XNullLiteral semanticObject) {
+		sequence_XNullLiteral(context, semanticObject);
 	}
 	
 }
