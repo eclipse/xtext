@@ -540,23 +540,29 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignGreaterThanSignKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
 		private final Keyword cGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Keyword cGreaterThanSignKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
-		private final Keyword cGreaterThanSignKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
+		private final Group cGroup_3_1_0 = (Group)cAlternatives_3_1.eContents().get(0);
+		private final Group cGroup_3_1_0_0 = (Group)cGroup_3_1_0.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_3_1_0_0_0 = (Keyword)cGroup_3_1_0_0.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_3_1_0_0_1 = (Keyword)cGroup_3_1_0_0.eContents().get(1);
+		private final Keyword cGreaterThanSignKeyword_3_1_1 = (Keyword)cAlternatives_3_1.eContents().get(1);
 		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
 		private final Keyword cLessThanSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cLessThanSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Keyword cLessThanSignKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Group cGroup_5 = (Group)cAlternatives.eContents().get(5);
-		private final Keyword cLessThanSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cGreaterThanSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
+		private final Group cGroup_4_1_0 = (Group)cAlternatives_4_1.eContents().get(0);
+		private final Group cGroup_4_1_0_0 = (Group)cGroup_4_1_0.eContents().get(0);
+		private final Keyword cLessThanSignKeyword_4_1_0_0_0 = (Keyword)cGroup_4_1_0_0.eContents().get(0);
+		private final Keyword cLessThanSignKeyword_4_1_0_0_1 = (Keyword)cGroup_4_1_0_0.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_4_1_1 = (Keyword)cAlternatives_4_1.eContents().get(1);
+		private final Keyword cLessThanSignGreaterThanSignKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cQuestionMarkColonKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		private final Keyword cLessThanSignEqualsSignGreaterThanSignKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		
 		//OpOther:
-		//	"->" | ".." | "=>" | ">" ">" => ">"? | "<" "<" => "<"? | "<" ">" | "?:" | "<=>";
+		//	"->" | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>";
 		public ParserRule getRule() { return rule; }
 
-		//"->" | ".." | "=>" | ">" ">" => ">"? | "<" "<" => "<"? | "<" ">" | "?:" | "<=>"
+		//"->" | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"->"
@@ -568,38 +574,56 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"=>"
 		public Keyword getEqualsSignGreaterThanSignKeyword_2() { return cEqualsSignGreaterThanSignKeyword_2; }
 
-		//">" ">" => ">"?
+		//">" (=> (">" ">") | ">")
 		public Group getGroup_3() { return cGroup_3; }
 
 		//">"
 		public Keyword getGreaterThanSignKeyword_3_0() { return cGreaterThanSignKeyword_3_0; }
 
+		//=> (">" ">") | ">"
+		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
+
+		//=> (">" ">")
+		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
+
+		//">" ">"
+		public Group getGroup_3_1_0_0() { return cGroup_3_1_0_0; }
+
 		//">"
-		public Keyword getGreaterThanSignKeyword_3_1() { return cGreaterThanSignKeyword_3_1; }
+		public Keyword getGreaterThanSignKeyword_3_1_0_0_0() { return cGreaterThanSignKeyword_3_1_0_0_0; }
 
-		//=> ">"?
-		public Keyword getGreaterThanSignKeyword_3_2() { return cGreaterThanSignKeyword_3_2; }
+		//">"
+		public Keyword getGreaterThanSignKeyword_3_1_0_0_1() { return cGreaterThanSignKeyword_3_1_0_0_1; }
 
-		//"<" "<" => "<"?
+		//">"
+		public Keyword getGreaterThanSignKeyword_3_1_1() { return cGreaterThanSignKeyword_3_1_1; }
+
+		//"<" (=> ("<" "<") | "<")
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"<"
 		public Keyword getLessThanSignKeyword_4_0() { return cLessThanSignKeyword_4_0; }
 
+		//=> ("<" "<") | "<"
+		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
+
+		//=> ("<" "<")
+		public Group getGroup_4_1_0() { return cGroup_4_1_0; }
+
+		//"<" "<"
+		public Group getGroup_4_1_0_0() { return cGroup_4_1_0_0; }
+
 		//"<"
-		public Keyword getLessThanSignKeyword_4_1() { return cLessThanSignKeyword_4_1; }
-
-		//=> "<"?
-		public Keyword getLessThanSignKeyword_4_2() { return cLessThanSignKeyword_4_2; }
-
-		//"<" ">"
-		public Group getGroup_5() { return cGroup_5; }
+		public Keyword getLessThanSignKeyword_4_1_0_0_0() { return cLessThanSignKeyword_4_1_0_0_0; }
 
 		//"<"
-		public Keyword getLessThanSignKeyword_5_0() { return cLessThanSignKeyword_5_0; }
+		public Keyword getLessThanSignKeyword_4_1_0_0_1() { return cLessThanSignKeyword_4_1_0_0_1; }
 
-		//">"
-		public Keyword getGreaterThanSignKeyword_5_1() { return cGreaterThanSignKeyword_5_1; }
+		//"<"
+		public Keyword getLessThanSignKeyword_4_1_1() { return cLessThanSignKeyword_4_1_1; }
+
+		//"<>"
+		public Keyword getLessThanSignGreaterThanSignKeyword_5() { return cLessThanSignGreaterThanSignKeyword_5; }
 
 		//"?:"
 		public Keyword getQuestionMarkColonKeyword_6() { return cQuestionMarkColonKeyword_6; }
@@ -2976,7 +3000,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpOther:
-	//	"->" | ".." | "=>" | ">" ">" => ">"? | "<" "<" => "<"? | "<" ">" | "?:" | "<=>";
+	//	"->" | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>";
 	public OpOtherElements getOpOtherAccess() {
 		return (pOpOther != null) ? pOpOther : (pOpOther = new OpOtherElements());
 	}

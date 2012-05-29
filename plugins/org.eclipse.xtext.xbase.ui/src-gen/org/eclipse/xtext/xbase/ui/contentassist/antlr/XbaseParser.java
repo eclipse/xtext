@@ -42,6 +42,8 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXRelationalExpressionAccess().getAlternatives_1(), "rule__XRelationalExpression__Alternatives_1");
 					put(grammarAccess.getOpCompareAccess().getAlternatives(), "rule__OpCompare__Alternatives");
 					put(grammarAccess.getOpOtherAccess().getAlternatives(), "rule__OpOther__Alternatives");
+					put(grammarAccess.getOpOtherAccess().getAlternatives_3_1(), "rule__OpOther__Alternatives_3_1");
+					put(grammarAccess.getOpOtherAccess().getAlternatives_4_1(), "rule__OpOther__Alternatives_4_1");
 					put(grammarAccess.getOpAddAccess().getAlternatives(), "rule__OpAdd__Alternatives");
 					put(grammarAccess.getOpMultiAccess().getAlternatives(), "rule__OpMulti__Alternatives");
 					put(grammarAccess.getXUnaryOperationAccess().getAlternatives(), "rule__XUnaryOperation__Alternatives");
@@ -96,8 +98,11 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXOtherOperatorExpressionAccess().getGroup_1_0(), "rule__XOtherOperatorExpression__Group_1_0__0");
 					put(grammarAccess.getXOtherOperatorExpressionAccess().getGroup_1_0_0(), "rule__XOtherOperatorExpression__Group_1_0_0__0");
 					put(grammarAccess.getOpOtherAccess().getGroup_3(), "rule__OpOther__Group_3__0");
+					put(grammarAccess.getOpOtherAccess().getGroup_3_1_0(), "rule__OpOther__Group_3_1_0__0");
+					put(grammarAccess.getOpOtherAccess().getGroup_3_1_0_0(), "rule__OpOther__Group_3_1_0_0__0");
 					put(grammarAccess.getOpOtherAccess().getGroup_4(), "rule__OpOther__Group_4__0");
-					put(grammarAccess.getOpOtherAccess().getGroup_5(), "rule__OpOther__Group_5__0");
+					put(grammarAccess.getOpOtherAccess().getGroup_4_1_0(), "rule__OpOther__Group_4_1_0__0");
+					put(grammarAccess.getOpOtherAccess().getGroup_4_1_0_0(), "rule__OpOther__Group_4_1_0_0__0");
 					put(grammarAccess.getXAdditiveExpressionAccess().getGroup(), "rule__XAdditiveExpression__Group__0");
 					put(grammarAccess.getXAdditiveExpressionAccess().getGroup_1(), "rule__XAdditiveExpression__Group_1__0");
 					put(grammarAccess.getXAdditiveExpressionAccess().getGroup_1_0(), "rule__XAdditiveExpression__Group_1_0__0");
