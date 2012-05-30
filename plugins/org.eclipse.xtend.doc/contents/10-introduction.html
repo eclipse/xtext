@@ -158,16 +158,37 @@ The runtime library as well as a plugin to run the compiler in a Maven build can
 the following maven repository: <span class="inlinecode">http:<span class="comment">//build.eclipse.org/common/xtend/maven/</span></span>. We are working on having these artifacts in Maven Central soon.
 </p>
 <p>
-Here&apos;s the XML for the library dependency:
+Here&apos;s the XML for the repository:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;repositories&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;repository&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/repository&gt;<br/>
+&lt;/repositories&gt;<br/>
+&lt;pluginRepositories&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pluginRepository&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/pluginRepository&gt;<br/>
+&lt;/pluginRepositories&gt;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Here&apos;s the XML for the standalone version of xtend including the library dependency:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 &lt;dependency&gt;<br/>
-&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
-&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend2.lib&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.standalone&lt;/artifactId&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.3.0-SNAPSHOT&lt;/version&gt;<br/>
 &lt;/dependency&gt;<br/>
 </p>
 </div>
@@ -181,17 +202,23 @@ And this is the XML for the plugin:
 <div class="incode">
 <p class="code">
 &lt;plugin&gt;<br/>
-&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;<br/>
-&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
-&nbsp;&nbsp;&lt;executions&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;compile&lt;/goal&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;testCompile&lt;/goal&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
-&nbsp;&nbsp;&lt;/executions&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.3.0-SNAPSHOT&lt;/version&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;executions&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;compile&lt;/goal&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;&lt;goal&gt;testCompile&lt;/goal&gt;&nbsp;--&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;optional&nbsp;you&nbsp;can&nbsp;configure&nbsp;a&nbsp;different&nbsp;target&nbsp;folder&nbsp;--&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configuration&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configuration&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/executions&gt;<br/>
 &lt;/plugin&gt;<br/>
 </p>
 </div>

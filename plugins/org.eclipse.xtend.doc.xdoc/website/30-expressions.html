@@ -1336,7 +1336,7 @@
 			<p>
 			Templates allow for readable string concatenation, which is the main thing you do when writing a 
 			code generator. Template are surrounded by triple single or double quotes. The text of a template 
-			can be interrupted by expressions in french quotes <span class="inlinecode">&laquo;&raquo;</span>. One way to type these 
+			can be interrupted by expressions in french quotes <span class="inlinecode">«»</span>. One way to type these 
 			<em>guillemets</em> is to use content assist inside the template. 
 			</p>
 			<p>
@@ -1347,14 +1347,14 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;toClass(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-						&nbsp;&nbsp;package&nbsp;&laquo;e.packageName&raquo;;<br/>
+						&nbsp;&nbsp;package&nbsp;«e.packageName»;<br/>
 						<br/>
-						&nbsp;&nbsp;&laquo;placeImports&raquo;<br/>
+						&nbsp;&nbsp;«placeImports»<br/>
 						<br/>
-						&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superClass!=null&raquo;extends&nbsp;&laquo;e.superClass&raquo;&laquo;ENDIF&raquo;&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;e.members&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;member.toMember&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+						&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superClass!=null»extends&nbsp;«e.superClass»«ENDIF»&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;e.members»<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»<br/>
 						&nbsp;&nbsp;}<br/>
 						&apos;</span><span class="string">&apos;&apos;</span>
 					</p>
@@ -1369,8 +1369,8 @@
 					<p class="code">
 						toMember(Member&nbsp;m)&nbsp;{<br/>
 						&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;m&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;private&nbsp;&laquo;m.type&raquo;&nbsp;&laquo;m.name&raquo;&nbsp;;&apos;</span><span class="string">&apos;&apos;</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;<span class="keyword">case</span>&nbsp;isAbstract&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;abstract&nbsp;&laquo;...&apos;</span><span class="string">&apos;&apos;</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;private&nbsp;«m.type»&nbsp;«m.name»&nbsp;;&apos;</span><span class="string">&apos;&apos;</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;<span class="keyword">case</span>&nbsp;isAbstract&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;abstract&nbsp;«...&apos;</span><span class="string">&apos;&apos;</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;.....&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 						&nbsp;&nbsp;}<br/>
 						}
@@ -1443,7 +1443,7 @@
 			    		<p class="code">
 			    			<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
 			    			&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-			    			&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«n.name»&nbsp;{}<br/>
 			    			&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 			    			}
 			    		</p>
@@ -1465,7 +1465,7 @@
 			</table>
 			</p>
 			<p>
-			The indentation before <span class="inlinecode">node&nbsp;&laquo;n.name&raquo;</span> will be skipped as it is relative to the opening mark of
+			The indentation before <span class="inlinecode">node&nbsp;«n.name»</span> will be skipped as it is relative to the opening mark of
 			the rich string and thereby not considered to be relevant for the output but only for readability 
 			of the template itself.
 			</p>
@@ -1478,10 +1478,10 @@
 			    		<p class="code">
 			    			<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
 			    			&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-			    			&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
-			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
-			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children.map[print]&raquo;<br/>
-			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«n.name»&nbsp;{<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;hasChildren»<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«n.children.map[print]»<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 			    			&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 			    			}
