@@ -11,10 +11,6 @@ package org.eclipse.xtext.parser;
 import java.io.StringReader;
 import java.util.Iterator;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -28,7 +24,6 @@ import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.simpleExpressions.Op;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -121,7 +116,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		return NodeModelUtils.findLeafNodeAtOffset(root, model.indexOf(text));
 	}
 
-	@Test public void testPartialParseConcreteRuleInnermostToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleInnermostToken_01() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = 
 				"container c1 {\n" +
@@ -138,9 +133,30 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(model.indexOf("ch1") + 1, 1, "h");
 		assertSame(root, resource.getParseResult().getRootNode());
 		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
-		assertNotSame(ch1Leaf, findLeafNodeByText(root, model, "ch1"));
+		assertSame(ch1Leaf, findLeafNodeByText(root, model, "ch1"));
 	}
 
+	@Test public void testPartialParseConcreteRuleInnermostToken_02() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = 
+				"container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		ICompositeNode root = resource.getParseResult().getRootNode();
+		ILeafNode childrenLeaf = findLeafNodeByText(root, model, "children");
+		ILeafNode ch1Leaf = findLeafNodeByText(root, model, "ch1");
+		// change the model and undo the change
+		resource.update(model.indexOf("ch1") + 1, 1, "x");
+		resource.update(model.indexOf("ch1") + 1, 1, "h");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
+		assertNotSame(ch1Leaf, findLeafNodeByText(root, model, "ch1"));
+	}
+	
 	@Test public void testPartialParseConcreteRuleInnerToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
@@ -160,7 +176,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertNotSame(cLeaf, findLeafNodeByText(root, model, "ch1"));
 	}
 
-	@Test public void testPartialParseConcreteRuleFirstInnerToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleFirstInnerToken_01() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
 				"  children {\n" +
@@ -176,10 +192,30 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(model.indexOf("->"), 2, "->");
 		assertSame(root, resource.getParseResult().getRootNode());
 		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
-		assertNotSame(arrowLeaf, findLeafNodeByText(root, model, "->"));
+		assertSame(arrowLeaf, findLeafNodeByText(root, model, "->"));
 	}
 
-	@Test public void testPartialParseConcreteRuleFirstToken() throws Exception {
+	@Test public void testPartialParseConcreteRuleFirstInnerToken_02() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = "container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		ICompositeNode root = resource.getParseResult().getRootNode();
+		ILeafNode childrenLeaf = findLeafNodeByText(root, model, "children");
+		ILeafNode arrowLeaf = findLeafNodeByText(root, model, "->");
+		// change the model and undo the change
+		resource.update(model.indexOf("->"), 2, "-> ");
+		resource.update(model.indexOf("->"), 3, "->");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertSame(childrenLeaf, findLeafNodeByText(root, model, "children"));
+		assertNotSame(arrowLeaf, findLeafNodeByText(root, model, "->"));
+	}
+	
+	@Test public void testPartialParseConcreteRuleFirstToken_01() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
 				"  children {\n" +
@@ -192,6 +228,24 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		ILeafNode children = findLeafNodeByText(root, model, "children");
 		resource.update(model.indexOf("n {") + 2, 1, "{");
 		resource.update(model.indexOf("n {") + 2, 1, "{");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertSame(children, findLeafNodeByText(root, model, "children"));
+	}
+	
+	@Test public void testPartialParseConcreteRuleFirstToken_02() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = "container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		ICompositeNode root = resource.getParseResult().getRootNode();
+		ILeafNode children = findLeafNodeByText(root, model, "children");
+		// change the model and undo the change
+		resource.update(model.indexOf("n {") + 2, 1, " {");
+		resource.update(model.indexOf("n {") + 2, 2, "{");
 		assertSame(root, resource.getParseResult().getRootNode());
 		assertNotSame(children, findLeafNodeByText(root, model, "children"));
 	}
