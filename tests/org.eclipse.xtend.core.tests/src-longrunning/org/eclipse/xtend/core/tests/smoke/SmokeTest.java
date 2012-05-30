@@ -41,7 +41,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
