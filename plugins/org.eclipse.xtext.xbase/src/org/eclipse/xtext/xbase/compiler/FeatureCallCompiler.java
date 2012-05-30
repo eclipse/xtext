@@ -188,22 +188,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		b.decreaseIndentation().newLine().append("}");
 	}
 
-	/**
-	 * @return the variable name under which the result of the expression is stored. Returns <code>null</code> if the
-	 *          expression hasn't been assigned to a local variable before.
-	 */
-	@Nullable
-	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
-		if (b.hasName(expr))
-			return b.getName(expr);
-		if (expr instanceof XFeatureCall) {
-			XFeatureCall featureCall = (XFeatureCall) expr;
-			if (b.hasName(featureCall.getFeature()))
-				return b.getName(featureCall.getFeature());
-		}
-		return null;
-	}
-
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XAssignment)
