@@ -33,6 +33,10 @@ import static com.google.common.collect.Lists.*;
  * @author Sven Efftinge
  */
 public abstract class AbstractXbaseEvaluationTest extends Assert {
+	
+	@Test public void testDoubleSwitch() throws Exception {
+		assertEvaluatesTo("foo","{ val x = 'foo' switch x.length { case 2 : 'bla'.toString } switch x.length { case 3 : 'foo'.toString } }");
+	}
 
 	@Test public void testIntLiteral_0() throws Exception {
 		assertEvaluatesTo(1, "1");
