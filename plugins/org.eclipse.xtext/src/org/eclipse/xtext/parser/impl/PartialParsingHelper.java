@@ -17,6 +17,7 @@ import java.util.ListIterator;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
@@ -34,6 +35,8 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -90,7 +93,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		String reparseRegion = "";
 		for (int i = validReplaceRootNodes.size() - 1; i >= 0; --i) {
 			oldCompositeNode = validReplaceRootNodes.get(i);
-			if (!(oldCompositeNode instanceof SyntheticCompositeNode)) {
+			if (!(oldCompositeNode instanceof SyntheticCompositeNode) && !isRangePartOfExceedingLookAhead((CompositeNode) oldCompositeNode, replaceRegion)) {
 				boolean replaceAtEnd = oldCompositeNode.getTotalEndOffset() == replaceRegion.getEndOffset();
 				reparseRegion = insertChangeIntoReplaceRegion(oldCompositeNode, replaceRegion);
 				if (!"".equals(reparseRegion)) {
@@ -169,6 +172,28 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			nodeModelBuilder.setCompleteContent(oldRootNode, builder.toString());
 		} 
 		return newParseResult;
+	}
+	
+	private boolean isRangePartOfExceedingLookAhead(CompositeNode node, ReplaceRegion replaceRegion) {
+		TreeIterator<AbstractNode> iterator = node.basicIterator();
+		int lookAhead = node.getLookAhead();
+		if (lookAhead == 0) {
+			return false;
+		}
+		while(iterator.hasNext()) {
+			AbstractNode child = iterator.next();
+			if (child instanceof CompositeNode) {
+				if (child.getTotalOffset() < replaceRegion.getEndOffset())
+					lookAhead = Math.max(((CompositeNode) child).getLookAhead(), lookAhead);
+			} else if (!((ILeafNode) child).isHidden()) {
+				lookAhead--;
+				if (lookAhead == 0) {
+					if (child.getTotalOffset() >= replaceRegion.getEndOffset())
+						return false;
+				}
+			}
+		}
+		return lookAhead > 0;
 	}
 	
 	private boolean isNullEdit(INode oldRootNode, ReplaceRegion replaceRegion) {
@@ -271,6 +296,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 		return false;
 	}
+
 
 	/**
 	 * @since 2.3
@@ -532,6 +558,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 										}
 									}
 								}
+							}
+							if (remainingLookAhead != 0) {
+								done = true;
 							}
 						} else {
 							result.add(node);
