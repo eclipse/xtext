@@ -487,6 +487,25 @@ class JvmModelGenerator implements IGenerator {
 				if (withLineBreak) {
 					appendable.newLine
 				} else {
+					appendable.append(" ")
+				}
+				generateAnnotation(appendable)
+			]
+			if (withLineBreak) {
+				appendable.newLine
+			} else {
+				appendable.append(" ")
+			}
+		}
+	}
+	
+	def void generateAnnotations(JvmAnnotationAnnotationValue it, ITreeAppendable appendable, boolean withLineBreak) {
+		if (!annotations.empty) {
+			annotations.head.generateAnnotation(appendable)
+			annotations.tail.forEach[
+				if (withLineBreak) {
+					appendable.newLine
+				} else {
 					appendable.append(", ")
 				}
 				generateAnnotation(appendable)

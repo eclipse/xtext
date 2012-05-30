@@ -24,6 +24,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import foo.TestAnnotation
+import foo.TestAnnotation2
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -140,6 +141,22 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 				annotationAnnotationValue.annotations += expression.toAnnotation(typeof(TestAnnotation))
 				annotation.values += annotationAnnotationValue
 				annotations += annotation
+			]
+		]
+		compile(expression.eResource, clazz)
+
+	}
+	
+	@Test
+	def void testBug380754_2(){
+		val expression = expression("null")
+		val clazz = expression.toClass("my.test.Foo") [
+			members += expression.toMethod("doStuff",references.getTypeForName("java.lang.Object", expression)) [
+				setBody(expression)
+				val parameter = expression.toParameter("s", references.getTypeForName(typeof(String), expression))
+				parameters += parameter
+				parameter.annotations += expression.toAnnotation(typeof(TestAnnotation))
+				parameter.annotations += expression.toAnnotation(typeof(TestAnnotation2))
 			]
 		]
 		compile(expression.eResource, clazz)
