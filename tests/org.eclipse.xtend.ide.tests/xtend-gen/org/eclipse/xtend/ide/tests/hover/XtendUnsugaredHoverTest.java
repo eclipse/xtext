@@ -48,12 +48,10 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("class Extension {");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public String fieldInExtension");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def bar(Integer p1, Integer p2)");
@@ -721,7 +719,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
     Assert.assertEquals("Extension::setZonk(it, s + s + s)", _computeUnsugaredExpression);
   }
-
+  
   @Test
   public void testBug380361() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -760,7 +758,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
     Assert.assertEquals("this.foo()", _computeUnsugaredExpression);
   }
-
+  
   @Test
   public void testBug380361_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -803,7 +801,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     String _computeUnsugaredExpression_1 = this.serializer.computeUnsugaredExpression(call2);
     Assert.assertEquals("", _computeUnsugaredExpression_1);
   }
-
+  
   @Test
   public void testBug380361_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
