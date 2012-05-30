@@ -77,7 +77,7 @@ public abstract class AbstractPartialParserCrossContainmentTest extends Abstract
 	
 	@Test public void testCrossResourceContainment_03() throws Exception {
 		String model = "(a+b+c)*(c/d)";
-		replaceAndReparse(model, 0, model.length(), model, false);
+		replaceAndReparse(model, 0, model.length(), model, true);
 	}
 
 	protected void replaceAndReparse(String model, int offset, int length, String inserted, boolean expectSameRoot) throws Exception {
