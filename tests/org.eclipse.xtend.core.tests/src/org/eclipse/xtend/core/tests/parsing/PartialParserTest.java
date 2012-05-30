@@ -469,6 +469,28 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, model.indexOf("'''stuff'''"), 0, "1", "TestClass.xtend");
 	}
 	
+	@Test public void testSmokeTestFailure() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"class Case_2 {\n" + 
+				"\n" + 
+				"	def aOrB(String a, String b) {\n" + 
+				"		if (a.isNullOrEmpty()) \n" + 
+				"			b\n" + 
+				"		else\n" + 
+				"			a \n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def returnInIf() {\n" + 
+				"		if ('x'!='x') return 'x' else return 'yy'\n" + 
+				"	}\n" + 
+				"\n" + 
+				"}";
+		System.out.println(model.substring(185));
+		doTestUpdateAtOffset(model, 185, 1, "x", "Case_2.xtend");
+	}
+	
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = new ResourceValidatorImpl();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
