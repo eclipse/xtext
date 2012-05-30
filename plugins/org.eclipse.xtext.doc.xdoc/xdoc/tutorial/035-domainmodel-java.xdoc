@@ -317,7 +317,7 @@ class DomainModelJvmModelInferrer extends AbstractModelInferrer {
                 IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
     	acceptor.accept(
-			entity.toClass( element.fullyQualifiedName )
+			element.toClass( element.fullyQualifiedName )
 		).initializeLater \[
 			documentation = element.documentation
 			if (element.superType != null)
@@ -344,7 +344,6 @@ class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 			}
 		\]
 	}
-  }
 }
 ]
 

@@ -182,9 +182,8 @@ package org.eclipse.xtext.example.generator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-
-import org.eclipse.xtext.example.domainmodel.*
-
+import org.eclipse.xtext.example.domainmodel.Entity
+import org.eclipse.xtext.example.domainmodel.Feature
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import com.google.inject.Inject
