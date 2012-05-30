@@ -17,34 +17,44 @@ import static extension com.google.common.io.CharStreams.*
 
 class Movies {
 	
-	@Test def void findBestMovie() {
-		assertEquals('"Planet Earth"', movies.sortBy[rating * -1].head.title )
+	/**
+	 * @return the total number of action movies
+	 */ 
+	@Test def void numberOfActionMovies() {
+		assertEquals(828, movies.filter[categories.contains('Action')].size)
 	}
 	
-	@Test def void numberOfMoviesBetterRatingThanFive() {
-		assertEquals(3139, movies.filter[ rating > 5.0 ].size )
+	/**
+	 * @return the year the best rated movie of 80ies (1980-1989) was released.
+	 */
+	@Test def void yearOfBestMovieFrom80ies() {
+		assertEquals(1989, movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)
 	}
 	
-	def getMovies() {
-		new FileReader('movies.csv').readLines.map[toMovie]	
+	/**
+	 * @return the sum of the number of votes of the two top rated movies.
+	 */
+	@Test def void sumOfVotesOfTop2() {
+		val long movies = movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a, b| a + b]
+		assertEquals(47_229, movies)
 	}
 	
-	def Movie toMovie(String line) {
+	val movies = new FileReader('data.csv').readLines.map[ line |
 		val segments = line.split('  ').iterator
 		return new Movie(
 			segments.next, 
-			segments.next, 
-			Double::parseDouble(segments.next), 
 			Integer::parseInt(segments.next), 
+			Double::parseDouble(segments.next), 
+			Long::parseLong(segments.next), 
 			segments.toSet
 		)
-	}
+	]
 }
 
 @Data class Movie {
 	String title
-	String year
+	int year
 	double rating
-	int numberOfVotes
+	long numberOfVotes
 	Set<String> categories 
 }
