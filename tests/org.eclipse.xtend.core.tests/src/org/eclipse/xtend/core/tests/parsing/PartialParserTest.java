@@ -32,6 +32,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -469,7 +470,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, model.indexOf("'''stuff'''"), 0, "1", "TestClass.xtend");
 	}
 	
-	@Test public void testSmokeTestFailure() throws Exception {
+	@Test public void testSmokeTestFailure_00() throws Exception {
 		String model = 
 				"package org.eclipse.xtend.core.tests.smoke\n" + 
 				"\n" + 
@@ -489,6 +490,73 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				"}";
 		System.out.println(model.substring(185));
 		doTestUpdateAtOffset(model, 185, 1, "x", "Case_2.xtend");
+	}
+	
+	@Ignore
+	@Test public void testSmokeTestFailure_01() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"import com.google.inject.Inject\n" + 
+				"import org.eclipse.emf.common.util.URI\n" + 
+				"import org.eclipse.emf.ecore.EcoreFactory\n" + 
+				"import org.eclipse.xtext.common.types.JvmConstructor\n" + 
+				"import org.eclipse.xtext.common.types.JvmDeclaredType\n" + 
+				"import org.eclipse.xtext.common.types.JvmGenericType\n" + 
+				"import org.eclipse.xtext.resource.DerivedStateAwareResource\n" + 
+				"import org.eclipse.xtext.resource.XtextResourceSet\n" + 
+				"import org.eclipse.xtext.xbase.XbaseStandaloneSetup\n" + 
+				"import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator\n" + 
+				"import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder\n" + 
+				"\n" + 
+				"import static org.junit.Assert.*\n" + 
+				"import org.eclipse.xtend.core.tests.AbstractXtendTestCase\n" + 
+				"\n" + 
+				"class Case_14 extends AbstractXtendTestCase {\n" + 
+				"	\n" + 
+				"	@Inject extension JvmTypesBuilder\n" + 
+				"	@Inject JvmModelAssociator assoc\n" + 
+				"	@Inject XtextResourceSet resourceSet\n" + 
+				"	@Inject DerivedStateAwareResource resource\n" + 
+				"	\n" + 
+				"	def void testInference() {\n" + 
+				"		assoc.inferrer = [obj, acceptor, preIndexing|\n" + 
+				"			val firstType = obj.toClass('foo.Bar')\n" + 
+				"			val secondType = obj.toClass('foo.Baz')\n" + 
+				"			assertNull(secondType.eResource)\n" + 
+				"			acceptor.accept(firstType).initializeLater[\n" + 
+				"				^abstract = true\n" + 
+				"				assertNotNull(firstType.eResource)\n" + 
+				"				assertNotNull(secondType.eResource)\n" + 
+				"			]\n" + 
+				"			acceptor.accept(secondType).initializeLater[\n" + 
+				"				^abstract = true\n" + 
+				"				assertNotNull(firstType.eResource)\n" + 
+				"			]\n" + 
+				"		]\n" + 
+				"		resource.setDerivedStateComputer(null)\n" + 
+				"		resource.URI = URI::createURI('foo.txt')\n" + 
+				"		resourceSet.classpathURIContext = getClass()\n" + 
+				"		resourceSet.resources += resource\n" + 
+				"		resource.contents += EcoreFactory::.createEClass\n" + 
+				"		assoc.installDerivedState(resource,true)\n" + 
+				"		assertFalse((resource.contents.get(1) as JvmDeclaredType).^abstract)\n" + 
+				"		\n" + 
+				"		resource.contents.clear\n" + 
+				"		resource.contents += EcoreFactory::eINSTANCE.createEClass\n" + 
+				"		assoc.installDerivedState(resource,false)\n" + 
+				"		val type = (resource.contents.get(1) as JvmGenericType)\n" + 
+				"		assertTrue(type.^abstract)\n" + 
+				"		\n" + 
+				"		// test extends object and default constructor\n" + 
+				"		assertEquals(1, type.members.filter(typeof(JvmConstructor)).size)\n" + 
+				"		assertEquals(\"java.lang.Object\", type.superTypes.head?.qualifiedName)\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	\n" + 
+				"}";
+		System.out.println(model.substring(1559));
+		doTestUpdateAtOffset(model, 1559, 1, "eINSTANCE", "Case_14.xtend");
 	}
 	
 	protected void validateWithoutException(XtextResource resource) {
