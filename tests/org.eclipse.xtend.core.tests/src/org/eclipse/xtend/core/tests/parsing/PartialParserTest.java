@@ -32,7 +32,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -488,11 +487,9 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				"	}\n" + 
 				"\n" + 
 				"}";
-		System.out.println(model.substring(185));
 		doTestUpdateAtOffset(model, 185, 1, "x", "Case_2.xtend");
 	}
 	
-	@Ignore
 	@Test public void testSmokeTestFailure_01() throws Exception {
 		String model = 
 				"package org.eclipse.xtend.core.tests.smoke\n" + 
@@ -555,8 +552,56 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				"	\n" + 
 				"	\n" + 
 				"}";
-		System.out.println(model.substring(1559));
 		doTestUpdateAtOffset(model, 1559, 1, "eINSTANCE", "Case_14.xtend");
+	}
+	
+	@Test public void testSmokeTestFailure_02() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"import com.google.inject.Inject\n" + 
+				"import org.eclipse.emf.ecore.EcoreFactory\n" + 
+				"import org.eclipse.xtend.core.tests.AbstractXtendTestCase\n" + 
+				"import org.eclipse.xtext.resource.DerivedStateAwareResource\n" + 
+				"import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator\n" + 
+				"\n" + 
+				"class Case_14 extends AbstractXtendTestCase {\n" + 
+				"\n" + 
+				"       @Inject JvmModelAssociator assoc\n" + 
+				"       @Inject DerivedStateAwareResource resource\n" + 
+				"\n" + 
+				"       def void testInference() {\n" + 
+				"               resource.contents += EcoreFactory::eINSTANC.createEClass\n" + 
+				"               assoc.installDerivedState(resource,true)\n" + 
+				"       }\n" + 
+				"\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 526, 1, "E", "Case_14.xtend");
+	}
+	
+	@Test public void testSmokeTestFailure_03() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"import com.google.inject.Inject\n" + 
+				"import org.eclipse.emf.ecore.EcoreFactory\n" + 
+				"import org.eclipse.xtend.core.tests.AbstractXtendTestCase\n" + 
+				"import org.eclipse.xtext.resource.DerivedStateAwareResource\n" + 
+				"import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator\n" + 
+				"\n" + 
+				"class Case_14 extends AbstractXtendTestCase {\n" + 
+				"\n" + 
+				"       @Inject JvmModelAssociator assoc\n" + 
+				"       @Inject DerivedStateAwareResource resource\n" + 
+				"\n" + 
+				"       def void testInference() {\n" + 
+				"               resource.contents += EcoreFactory::eINSTANCEcreateEClass\n" + 
+				"               assoc.installDerivedState(resource,true)\n" + 
+				"       }\n" + 
+				"\n" + 
+				"\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 527, 1, ".", "Case_14.xtend");
 	}
 	
 	protected void validateWithoutException(XtextResource resource) {
