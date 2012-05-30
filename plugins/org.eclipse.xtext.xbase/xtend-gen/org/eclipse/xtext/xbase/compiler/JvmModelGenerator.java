@@ -941,6 +941,35 @@ public class JvmModelGenerator implements IGenerator {
             if (withLineBreak) {
               appendable.newLine();
             } else {
+              appendable.append(" ");
+            }
+            JvmModelGenerator.this.generateAnnotation(it, appendable);
+          }
+        };
+      IterableExtensions.<JvmAnnotationReference>forEach(_tail, _function);
+      if (withLineBreak) {
+        appendable.newLine();
+      } else {
+        appendable.append(" ");
+      }
+    }
+  }
+  
+  public void generateAnnotations(final JvmAnnotationAnnotationValue it, final ITreeAppendable appendable, final boolean withLineBreak) {
+    EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+    boolean _isEmpty = _annotations.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      EList<JvmAnnotationReference> _annotations_1 = it.getAnnotations();
+      JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
+      this.generateAnnotation(_head, appendable);
+      EList<JvmAnnotationReference> _annotations_2 = it.getAnnotations();
+      Iterable<JvmAnnotationReference> _tail = IterableExtensions.<JvmAnnotationReference>tail(_annotations_2);
+      final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+          public void apply(final JvmAnnotationReference it) {
+            if (withLineBreak) {
+              appendable.newLine();
+            } else {
               appendable.append(", ");
             }
             JvmModelGenerator.this.generateAnnotation(it, appendable);
