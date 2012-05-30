@@ -29,11 +29,11 @@
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
-		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4.html" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4.php" >Create A New Xtext Project</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5.php" >Write Your Own Grammar</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_6.php" >Generate Language Artifacts</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_4.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_4.php" >Create A New Xtext Project</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -173,15 +173,15 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-		<a name="DomainmodelWalkThrough" ></a>
+		<a name="DomainModelWalkThrough" ></a>
 		<h1>15 Minutes Tutorial</h1>
 				<div class="toc">
 				  <ul>
-				    <li><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4.php" >Create A New Xtext Project</a></li>
-				    <li><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5.php" >Write Your Own Grammar</a></li>
-				    <li><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_6.php" >Generate Language Artifacts</a></li>
-				    <li><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-				    <li><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+				    <li><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_4.php" >Create A New Xtext Project</a></li>
+				    <li><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
+				    <li><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
+				    <li><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
+				    <li><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
 				  </ul>
 				</div>
 				
@@ -220,7 +220,7 @@
 		<p>
 		After you've <a href="005-installation.php" title="Go to &quot;Installation&quot;">installed</a> Xtext on your machine, start Eclipse and set up a fresh workspace.
 		</p>
-		<a name="DomainmodelWalkThrough_4" ></a>
+		<a name="DomainModelWalkThrough_4" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
@@ -243,7 +243,7 @@
 			  </tr>
 			  <tr>
 			    <td><em>Language name:</em></td>
-			    <td>org.example.domainmodel.Domainmodel</td>
+			    <td>org.example.domainmodel.DomainModel</td>
 			  </tr>
 			  <tr>
 			    <td><em>DSL-File extension:</em></td>
@@ -295,7 +295,7 @@
 			</div>
 			</div>
 			</p>
-		<a name="DomainmodelWalkThrough_5" ></a>
+		<a name="DomainModelWalkThrough_5" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
@@ -304,16 +304,16 @@
 			<p>
 			
 			The wizard will automatically open the grammar file 
-			<em>Domainmodel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
+			<em>DomainModel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+						<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 						<br/>
-						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 						<br/>
 						Model:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
@@ -334,9 +334,9 @@
 						<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 						<br/>
-						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 						<br/>
-						Domainmodel&nbsp;:<br/>
+						DomainModel&nbsp;:<br/>
 						&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
 						;<br/>
 						&nbsp;&nbsp;<br/>
@@ -371,7 +371,7 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			Domainmodel&nbsp;:<br/>
+			  			DomainModel&nbsp;:<br/>
 			  			&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
 			  			;
 			  		</p>
@@ -379,7 +379,7 @@
 			  </div>
 			  
 			  		
-			  		It says that a <em>Domainmodel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
+			  		It says that a <em>DomainModel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
 			  		to a feature called <span class="inlinecode">elements</span>.
 			  </li>
 			  <li>
@@ -465,7 +465,7 @@
 			least once).  Please consult the <a href="020-grammar-language.php" title="Go to &quot;The Grammar Language&quot;">Grammar Language Reference</a> for more details.
 			Let's now have a look what you can do with such a language description.
 			</p>
-		<a name="DomainmodelWalkThrough_6" ></a>
+		<a name="DomainModelWalkThrough_6" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
@@ -473,7 +473,7 @@
 			<h1>Generate Language Artifacts</h1>
 			<p>
 			Now that we have the grammar in place and defined we need to execute the code generator that will derive the
-			various language components. To do so locate the file <em>GenerateDomainmodel.mwe2</em> file next to the grammar 
+			various language components. To do so locate the file <em>GenerateDomainModel.mwe2</em> file next to the grammar 
 			file in the package explorer view. From its context menu, choose
 			</p>
 			<p>
@@ -495,7 +495,7 @@
 			</div>
 			</div>
 			</p>
-		<a name="DomainmodelWalkThrough_7" ></a>
+		<a name="DomainModelWalkThrough_7" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
@@ -546,7 +546,7 @@
 			</div>
 			</div>
 			</p>
-		<a name="DomainmodelWalkThrough_8" ></a>
+		<a name="DomainModelWalkThrough_8" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
@@ -623,14 +623,14 @@
 			<p>
 			<ol>
 			  <li>
-			  		Since a <em>Domainmodel</em> no longer contains types but packages, too,
+			  		Since a <em>DomainModel</em> no longer contains types but packages, too,
 			  		the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em>
 			  		should be introduced: the <em>AbstractElement</em>.
 			  				
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			Domainmodel:<br/>
+			  			DomainModel:<br/>
 			  			&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
 			  			;<br/>
 			  			<br/>
@@ -644,7 +644,7 @@
 			  </li>
 			  <li>
 			  		A <span class="inlinecode">PackageDeclaration</span> in turn looks pretty much as expected. It contains a number
-			  		of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel,
+			  		of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-DomainModel,
 			  		too, we add them as an alternative to the rule <span class="inlinecode">AbstractElement</span>.
 			  		
 			  		<div class="literallayout">
@@ -730,12 +730,12 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+						<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 						<br/>
-						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 						<br/>
-						Domainmodel:<br/>
+						DomainModel:<br/>
 						&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
 						;<br/>
 						<br/>
@@ -807,7 +807,7 @@
 		    var disqus_shortname = 'xtext'; // required: replace example with your forum shortname
 		
 		    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-		    var disqus_identifier = 'DomainmodelWalkThrough';
+		    var disqus_identifier = 'DomainModelWalkThrough';
 		    var disqus_url = documentationRoot+'020-domainmodel-step-by-step.php';
 		
 		    /* * * DON'T EDIT BELOW THIS LINE * * */

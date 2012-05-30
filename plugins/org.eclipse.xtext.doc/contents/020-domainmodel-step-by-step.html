@@ -8,7 +8,7 @@
 <link rel="home" href="xtext.html" title="">
 </head>
 <body>
-<a name="DomainmodelWalkThrough"></a>
+<a name="DomainModelWalkThrough"></a>
 <h1>15 Minutes Tutorial</h1>
 <p>
 In this tutorial we will implement a small domain-specific language to model entities and properties
@@ -45,7 +45,7 @@ similar to what you may know from Rails, Grails or Spring Roo. The syntax is ver
 <p>
 After you&apos;ve <a href="005-installation.html#Installation" title="Go to &quot;Installation&quot;">installed</a> Xtext on your machine, start Eclipse and set up a fresh workspace.
 </p>
-<a name="DomainmodelWalkThrough_4"></a>
+<a name="DomainModelWalkThrough_4"></a>
 <h2>Create A New Xtext Project</h2>
 <p>
 In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
@@ -71,7 +71,7 @@ org.example.domainmodel
 <em>Language name:</em>
 </td>
 <td>
-org.example.domainmodel.Domainmodel
+org.example.domainmodel.DomainModel
 </td>
 </tr>
 <tr>
@@ -134,21 +134,21 @@ The Eclipse editor and all the other workbench related functionality.
 </div>
 </div>
 </p>
-<a name="DomainmodelWalkThrough_5"></a>
+<a name="DomainModelWalkThrough_5"></a>
 <h2>Write Your Own Grammar</h2>
 <p>
 
 The wizard will automatically open the grammar file 
-<em>Domainmodel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
+<em>DomainModel.xtext</em> in the editor. As you can see that it already contains a simple <em>Hello World</em> grammar:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 <br/>
 Model:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
@@ -169,9 +169,9 @@ Let&apos;s now just replace that grammar definition with the one for our domain 
 <span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 <br/>
-Domainmodel&nbsp;:<br/>
+DomainModel&nbsp;:<br/>
 &nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
 ;<br/>
 &nbsp;&nbsp;<br/>
@@ -207,7 +207,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Domainmodel&nbsp;:<br/>
+		DomainModel&nbsp;:<br/>
 		&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
 		;<br/>
 		</p>
@@ -215,7 +215,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		</div>
 		
 				
-				It says that a <em>Domainmodel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
+				It says that a <em>DomainModel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
 				to a feature called <span class="inlinecode">elements</span>.
 	</li>
 	<li>
@@ -305,11 +305,11 @@ different cardinalities (<span class="inlinecode">?</span> = optional, <span cla
 least once).  Please consult the <a href="020-grammar-language.html#grammarLanguage" title="Go to &quot;The Grammar Language&quot;">Grammar Language Reference</a> for more details.
 Let&apos;s now have a look what you can do with such a language description.
 </p>
-<a name="DomainmodelWalkThrough_6"></a>
+<a name="DomainModelWalkThrough_6"></a>
 <h2>Generate Language Artifacts</h2>
 <p>
 Now that we have the grammar in place and defined we need to execute the code generator that will derive the
-various language components. To do so locate the file <em>GenerateDomainmodel.mwe2</em> file next to the grammar 
+various language components. To do so locate the file <em>GenerateDomainModel.mwe2</em> file next to the grammar 
 file in the package explorer view. From its context menu, choose
 </p>
 <p>
@@ -328,7 +328,7 @@ messages in the Console View.
 </div>
 </div>
 </p>
-<a name="DomainmodelWalkThrough_7"></a>
+<a name="DomainModelWalkThrough_7"></a>
 <h2>Run the Generated IDE Plug-in</h2>
 <p>
 We are now able to test the IDE integration. If you select <em>Run -&gt; Run Configurations...</em> from the Eclipse menu, you can
@@ -369,7 +369,7 @@ the outline view, find references etc.
 </div>
 </div>
 </p>
-<a name="DomainmodelWalkThrough_8"></a>
+<a name="DomainModelWalkThrough_8"></a>
 <h2>Second Iteration : Adding Packages and Imports</h2>
 <p>
 After you&apos;ve created the your first DSL and had a look at the editor, the language should be refined
@@ -443,14 +443,14 @@ Let&apos;s start enhancing the grammar.
 <ol>
 	<li>
 		
-				Since a <em>Domainmodel</em> no longer contains types but packages, too,
+				Since a <em>DomainModel</em> no longer contains types but packages, too,
 				the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em>
 				should be introduced: the <em>AbstractElement</em>.
 						
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Domainmodel:<br/>
+		DomainModel:<br/>
 		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
 		;<br/>
 		<br/>
@@ -465,7 +465,7 @@ Let&apos;s start enhancing the grammar.
 	<li>
 		
 				A <span class="inlinecode">PackageDeclaration</span> in turn looks pretty much as expected. It contains a number
-				of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel,
+				of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-DomainModel,
 				too, we add them as an alternative to the rule <span class="inlinecode">AbstractElement</span>.
 				
 				<div class="literallayout">
@@ -553,12 +553,12 @@ That&apos;s all for the grammar. It should now read as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
 <br/>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/DomainModel"</span><br/>
 <br/>
-Domainmodel:<br/>
+DomainModel:<br/>
 &nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
 ;<br/>
 <br/>

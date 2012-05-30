@@ -1,4 +1,4 @@
-chapter:DomainmodelWalkThrough[15 Minutes Tutorial]
+chapter:DomainModelWalkThrough[15 Minutes Tutorial]
 
 In this tutorial we will implement a small domain-specific language to model entities and properties
 similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
@@ -38,7 +38,7 @@ Choose a meaningful project name, language name and file extension, e.g.
 
 table[
 	tr[td[e[Main project name:]]td[org.example.domainmodel]]
-	tr[td[e[Language name:]]td[org.example.domainmodel.Domainmodel]]
+	tr[td[e[Language name:]]td[org.example.domainmodel.DomainModel]]
 	tr[td[e[DSL-File extension:]]td[dmodel]]
 ]
 
@@ -71,13 +71,13 @@ section[Write Your Own Grammar]
 %% works fine. 
 
 The wizard will automatically open the grammar file 
-e[Domainmodel.xtext] in the editor. As you can see that it already contains a simple e[Hello World] grammar:
+e[DomainModel.xtext] in the editor. As you can see that it already contains a simple e[Hello World] grammar:
 
 code[Xtext][
-grammar org.example.domainmodel.Domainmodel with
+grammar org.example.domainmodel.DomainModel with
                                       org.eclipse.xtext.common.Terminals
 
-generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+generate domainmodel "http://www.example.org/domainmodel/DomainModel"
 
 Model:
 	greetings+=Greeting*;
@@ -92,9 +92,9 @@ code[Xtext][
 grammar org.example.domainmodel.DomainModel with
                                       org.eclipse.xtext.common.Terminals
 
-generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+generate domainmodel "http://www.example.org/domainmodel/DomainModel"
 
-Domainmodel :
+DomainModel :
   elements += Type*
 ;
   
@@ -123,12 +123,12 @@ ol[
 	item[
 		The first rule in a grammar is always used as the entry or start rule.  
 		code[Xtext][
-		Domainmodel :
+		DomainModel :
 		  elements += Type*
 		;
 		]
 		
-		It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[Type]s which will be added (code[Xtext][+=])
+		It says that a e[DomainModel] contains an arbitrary number (code[Xtext][*]) of e[Type]s which will be added (code[Xtext][+=])
 		to a feature called code[Xtext][elements].
 	]
 	item[
@@ -197,7 +197,7 @@ Let's now have a look what you can do with such a language description.
 section[Generate Language Artifacts]
 
 Now that we have the grammar in place and defined we need to execute the code generator that will derive the
-various language components. To do so locate the file e[GenerateDomainmodel.mwe2] file next to the grammar 
+various language components. To do so locate the file e[GenerateDomainModel.mwe2] file next to the grammar 
 file in the package explorer view. From its context menu, choose
 
   e[Run As -> MWE2 Workflow].
@@ -282,12 +282,12 @@ Let's start enhancing the grammar.
 
 ol[
 	item[
-		Since a e[Domainmodel] no longer contains types but packages, too,
+		Since a e[DomainModel] no longer contains types but packages, too,
 		the entry rule has to be modified. Furthermore, a common super type for e[Packages] and e[Types]
 		should be introduced: the e[AbstractElement].
 				
 		code[Xtext][
-		Domainmodel:
+		DomainModel:
 		  (elements += AbstractElement)*
 		;
 		
@@ -298,7 +298,7 @@ ol[
 	]
 	item[
 		A code[Xtext][PackageDeclaration] in turn looks pretty much as expected. It contains a number
-		of e[Imports] and e[AbstractElements]. Since e[Imports] should be allowed for the root-Domainmodel,
+		of e[Imports] and e[AbstractElements]. Since e[Imports] should be allowed for the root-DomainModel,
 		too, we add them as an alternative to the rule code[Xtext][AbstractElement].
 		
 		code[Xtext][
@@ -365,12 +365,12 @@ ol[
 That's all for the grammar. It should now read as 
 
 code[Xtext][
-grammar org.example.domainmodel.Domainmodel with
+grammar org.example.domainmodel.DomainModel with
                                       org.eclipse.xtext.common.Terminals
 
-generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+generate domainmodel "http://www.example.org/domainmodel/DomainModel"
 
-Domainmodel:
+DomainModel:
   (elements += AbstractElement)*
 ;
 

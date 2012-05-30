@@ -67,6 +67,6 @@ In your first five minutes with Xtext, you've learned how to create a new set of
 Xtext's code generation in order to get a fully working language infrastructure, and finally learned
 how to test the generated editor.
 
-Next up you should go through the more comprehensive ref:DomainmodelWalkThrough[Domain
+Next up you should go through the more comprehensive ref:DomainModelWalkThrough[Domain
 Model Example]. It explains the different concepts of the Xtext grammar language and illustrates how
 to customize various aspects of the language.

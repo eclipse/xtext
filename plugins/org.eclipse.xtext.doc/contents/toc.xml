@@ -17,16 +17,16 @@
 			<topic href="contents/010-xtext-in-5-minutes.html#Conclusion" label="Conclusion" >
 			</topic>
 		</topic>
-		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough" label="15 Minutes Tutorial" >
-			<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" label="Create A New Xtext Project" >
+		<topic href="contents/020-domainmodel-step-by-step.html#DomainModelWalkThrough" label="15 Minutes Tutorial" >
+			<topic href="contents/020-domainmodel-step-by-step.html#DomainModelWalkThrough_4" label="Create A New Xtext Project" >
 			</topic>
-			<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" label="Write Your Own Grammar" >
+			<topic href="contents/020-domainmodel-step-by-step.html#DomainModelWalkThrough_5" label="Write Your Own Grammar" >
 			</topic>
-			<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" label="Generate Language Artifacts" >
+			<topic href="contents/020-domainmodel-step-by-step.html#DomainModelWalkThrough_6" label="Generate Language Artifacts" >
 			</topic>
-			<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" label="Run the Generated IDE Plug-in" >
+			<topic href="contents/020-domainmodel-step-by-step.html#DomainModelWalkThrough_7" label="Run the Generated IDE Plug-in" >
 			</topic>
-			<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" label="Second Iteration : Adding Packages and Imports" >
+			<topic href="contents/020-domainmodel-step-by-step.html#DomainModelWalkThrough_8" label="Second Iteration : Adding Packages and Imports" >
 			</topic>
 		</topic>
 		<topic href="contents/030-tutorial-next-steps.html#DomainmodelNextSteps" label="15 Minutes Tutorial - Extended" >
