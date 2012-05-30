@@ -81,7 +81,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
 		ReplaceRegion replaceRegion = tokenRegionProvider.getTokenReplaceRegion(insertChangeIntoReplaceRegion(oldRootNode, changedRegion), changedRegion);
-		
+		if (isNullEdit(oldRootNode, replaceRegion)) {
+			return previousParseResult;
+		}
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(previousParseResult, replaceRegion.getOffset(), replaceRegion.getLength());
 		List<ICompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
 		ICompositeNode oldCompositeNode = null;
@@ -168,6 +170,16 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		} 
 		return newParseResult;
 	}
+	
+	private boolean isNullEdit(INode oldRootNode, ReplaceRegion replaceRegion) {
+		if (replaceRegion.getLength() == replaceRegion.getText().length()) {
+			String replacedText = oldRootNode.getText().substring(replaceRegion.getOffset(), replaceRegion.getEndOffset());
+			if (replaceRegion.getText().equals(replacedText)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	protected IParseResult fullyReparse(IParser parser, IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 		unloadSemanticObject(previousParseResult.getRootASTElement());
@@ -239,8 +251,8 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
 			if (!(rule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) rule))
 				return true;
-			else 
-				return isInvalidDueToPredicates((AbstractElement) candidate.getGrammarElement());
+			else if (isInvalidDueToPredicates((AbstractElement) candidate.getGrammarElement()))
+				return true;
 		}
 		if (candidate.getGrammarElement() instanceof Action) {
 			return true;
@@ -264,15 +276,15 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	 * @since 2.3
 	 */
 	protected boolean isInvalidDueToPredicates(AbstractElement element) {
-		if(element.isPredicated()) 
-			return true;
-		else if(element instanceof RuleCall) {
-			AbstractRule rule = ((RuleCall) element).getRule();
-			if(rule.getAlternatives() instanceof Group) {
-				boolean result = isInvalidDueToPredicates(((Group) rule.getAlternatives()).getElements().get(0));
-				return result;
-			}
-		}
+//		if(element.isPredicated()) 
+//			return true;
+//		else if(element instanceof RuleCall) {
+//			AbstractRule rule = ((RuleCall) element).getRule();
+//			if(rule.getAlternatives() instanceof Group) {
+//				boolean result = isInvalidDueToPredicates(((Group) rule.getAlternatives()).getElements().get(0));
+//				return result;
+//			}
+//		}
 		return false;
 	}
 	
