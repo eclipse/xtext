@@ -22,12 +22,12 @@ import com.google.inject.name.Named;
 
 /**
  * Expands a region such that it contains only complete lexer tokens.
- *  
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
 public class TokenRegionProvider {
-	
+
 	@Inject
 	@Named(LexerBindings.RUNTIME)
 	private Provider<Lexer> lexerProvider;
@@ -40,49 +40,41 @@ public class TokenRegionProvider {
 		CommonToken currentToken = (CommonToken) lexer.nextToken();
 		int regionStartOffset = region.getOffset();
 		int regionEnd = regionStartOffset + region.getLength();
-		while(currentToken != Token.EOF_TOKEN) {
+		while (currentToken != Token.EOF_TOKEN) {
 			currentStart = currentToken.getStartIndex();
 			currentEnd = currentToken.getStopIndex() + 1;
-			if(currentToken.getStopIndex() >= regionStartOffset)
+			if (currentToken.getStopIndex() >= regionStartOffset) 
 				break;
 			currentToken = (CommonToken) lexer.nextToken();
 		}
-		// currentToken is first token overlapping with the region or EOF
-		while(currentToken != Token.EOF_TOKEN) {
-			currentEnd = currentToken.getStopIndex() + 1;
-			if(currentEnd >= regionEnd) {
-				break;
+		if (region.getLength() == 0 && regionStartOffset == currentToken.getStopIndex()) {
+			currentEnd = currentStart;
+		} else {
+			// currentToken is first token overlapping with the region or EOF
+			while (currentToken != Token.EOF_TOKEN) {
+				currentEnd = currentToken.getStopIndex() + 1;
+				if (currentEnd >= regionEnd) {
+					break;
+				}
+				currentToken = (CommonToken) lexer.nextToken();
 			}
-			currentToken = (CommonToken) lexer.nextToken();
 		}
-		if(currentStart != regionStartOffset || currentEnd != regionEnd) {
-			return new TextRegion(currentStart, currentEnd-currentStart);
-		} else { 
+		if (currentStart != regionStartOffset || currentEnd != regionEnd) 
+			return new TextRegion(currentStart, currentEnd - currentStart);
+		else 
 			return region;
-		}
 	}
-	
+
 	public ReplaceRegion getTokenReplaceRegion(String changedText, ReplaceRegion replaceRegion) {
-		int lengthDelta = replaceRegion.getText().length() - replaceRegion.getLength(); 
-		ITextRegion tokenRegion = getTokenRegion(changedText, new TextRegion(replaceRegion.getOffset(), replaceRegion.getText().length()));
-		if(tokenRegion.getOffset() == replaceRegion.getOffset() && tokenRegion.getLength() == replaceRegion.getText().length())
+		int lengthDelta = replaceRegion.getText().length() - replaceRegion.getLength();
+		ITextRegion tokenRegion = getTokenRegion(changedText, new TextRegion(replaceRegion.getOffset(), replaceRegion
+				.getText().length()));
+		if (tokenRegion.getOffset() == replaceRegion.getOffset()
+				&& tokenRegion.getLength() == replaceRegion.getText().length())
 			return replaceRegion;
-		else {
+		else 
 			return new ReplaceRegion(tokenRegion.getOffset(), tokenRegion.getLength() - lengthDelta,
 					changedText.substring(tokenRegion.getOffset(), tokenRegion.getOffset() + tokenRegion.getLength()));
-		}
 	}
-	
+
 }
-
-/*
-0 1 2 3 4 5 6 7 8 9 
-  T0 |   T1  | T2  |
-
-T0 0:2
-T1 3:6
-T2 7:9
-
-
-
-*/
