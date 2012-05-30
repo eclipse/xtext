@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.common.base.Objects;
@@ -520,7 +521,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeForVariableDeclaration(expr);
-		String switchResultName = b.declareSyntheticVariable(expr, "_switchResult");
+		String switchResultName = b.declareSyntheticVariable(getSwitchExpressionKey(expr), "_switchResult");
 		if (isReferenced) {
 			b.newLine();
 			serialize(type, expr, b);
@@ -534,9 +535,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		// declare the matched variable outside the pseudo scope
 		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "_matched");
 
-		// open a pseudo scope so we can re assign 'expr' to the switch over expression (switch is used as a JvmIdentifiable)
-		b.openPseudoScope();
-		
 		// declare local var for the switch expression
 		String variableName = null;
 		if(expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
@@ -650,9 +648,23 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			defaultAppendable.decreaseIndentation();
 			defaultAppendable.newLine().append("}");
 		}
-		b.closeScope(); // close the pseudo scope
 	}
 	
+	protected Object getSwitchExpressionKey(XSwitchExpression expr) {
+		return new Pair<XSwitchExpression, String>(expr, "key");
+	}
+	
+	@Override
+	@Nullable
+	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
+		if (expr instanceof XSwitchExpression) {
+			Object key = getSwitchExpressionKey((XSwitchExpression) expr);
+			if (b.hasName(key))
+				return b.getName(key);
+		}
+		return super.getReferenceName(expr, b);
+	}
+
 	@Nullable
 	protected ILocationData getLocationOfDefault(XSwitchExpression expression) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(expression);
@@ -676,7 +688,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XSwitchExpression expr, ITreeAppendable b) {
-		b.trace(expr, false).append(getVarName(expr, b));
+		final String referenceName = getReferenceName(expr, b);
+		if (referenceName != null)
+			b.trace(expr, false).append(referenceName);
+		else
+			throw new IllegalStateException("Switch expression wasn't translated to Java statements before.");
 	}
 
 	@Inject
@@ -752,6 +768,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaExpression(final XClosure call, final ITreeAppendable b) {
 		b.trace(call, false).append(getVarName(call, b));
 	}
+	
+	@Override
+	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
+		if (expression instanceof XSwitchExpression) {
+			XSwitchExpression switchExpression = (XSwitchExpression) expression;
+			return appendable.hasName(getSwitchExpressionKey(switchExpression)) || !isVariableDeclarationRequired(expression, appendable);
+		} else {
+			return super.internalCanCompileToJavaExpression(expression, appendable);
+		}
+	}
+	
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {

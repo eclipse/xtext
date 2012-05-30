@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
@@ -201,21 +202,18 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected boolean canCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
-		if (appendable.hasName(expression))
-			return true;
-		if (isVariableDeclarationRequired(expression, appendable)) {
-			return false;
-		}
 		TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (next instanceof XExpression) {
-				XExpression expr2 = (XExpression) next;
-				if (!appendable.hasName(expr2) && isVariableDeclarationRequired(expr2, appendable))
+				if (!internalCanCompileToJavaExpression((XExpression) next, appendable))
 					return false;
 			}
 		}
 		return true;
+	}
+	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
+		return getReferenceName(expression, appendable) != null || !isVariableDeclarationRequired(expression, appendable);
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
@@ -463,6 +461,22 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected TypeConformanceComputer getTypeConformanceComputer() {
 		return typeConformanceComputer;
+	}
+
+	/**
+	 * @return the variable name under which the result of the expression is stored. Returns <code>null</code> if the
+	 *          expression hasn't been assigned to a local variable before.
+	 */
+	@Nullable
+	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
+		if (b.hasName(expr))
+			return b.getName(expr);
+		if (expr instanceof XFeatureCall) {
+			XFeatureCall featureCall = (XFeatureCall) expr;
+			if (b.hasName(featureCall.getFeature()))
+				return b.getName(featureCall.getFeature());
+		}
+		return null;
 	}
 	
 }
