@@ -13,9 +13,9 @@ public class Movie {
     return this._title;
   }
   
-  private final String _year;
+  private final int _year;
   
-  public String getYear() {
+  public int getYear() {
     return this._year;
   }
   
@@ -25,9 +25,9 @@ public class Movie {
     return this._rating;
   }
   
-  private final int _numberOfVotes;
+  private final long _numberOfVotes;
   
-  public int getNumberOfVotes() {
+  public long getNumberOfVotes() {
     return this._numberOfVotes;
   }
   
@@ -37,7 +37,7 @@ public class Movie {
     return this._categories;
   }
   
-  public Movie(final String title, final String year, final double rating, final int numberOfVotes, final Set<String> categories) {
+  public Movie(final String title, final int year, final double rating, final long numberOfVotes, final Set<String> categories) {
     super();
     this._title = title;
     this._year = year;
@@ -51,9 +51,9 @@ public class Movie {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((_title== null) ? 0 : _title.hashCode());
-    result = prime * result + ((_year== null) ? 0 : _year.hashCode());
+    result = prime * result + _year;
     result = prime * result + (int) (Double.doubleToLongBits(_rating) ^ (Double.doubleToLongBits(_rating) >>> 32));
-    result = prime * result + _numberOfVotes;
+    result = prime * result + (int) (_numberOfVotes ^ (_numberOfVotes >>> 32));
     result = prime * result + ((_categories== null) ? 0 : _categories.hashCode());
     return result;
   }
@@ -72,10 +72,7 @@ public class Movie {
         return false;
     } else if (!_title.equals(other._title))
       return false;
-    if (_year == null) {
-      if (other._year != null)
-        return false;
-    } else if (!_year.equals(other._year))
+    if (other._year != _year)
       return false;
     if (Double.doubleToLongBits(other._rating) != Double.doubleToLongBits(_rating))
       return false;

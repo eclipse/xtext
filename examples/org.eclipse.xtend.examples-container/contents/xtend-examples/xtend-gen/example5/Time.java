@@ -1,80 +1,90 @@
 package example5;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
 public class Time {
-  private final double _ms;
+  private final BigDecimal _msec;
   
-  public double getMs() {
-    return this._ms;
+  public BigDecimal getMsec() {
+    return this._msec;
   }
   
   public Time operator_plus(final Time other) {
-    double _ms = this.getMs();
-    double _ms_1 = other.getMs();
-    double _plus = (_ms + _ms_1);
+    BigDecimal _msec = this.getMsec();
+    BigDecimal _msec_1 = other.getMsec();
+    BigDecimal _plus = _msec.add(_msec_1);
     Time _time = new Time(_plus);
     return _time;
   }
   
   public Time operator_minus(final Time other) {
-    double _ms = this.getMs();
-    double _ms_1 = other.getMs();
-    double _minus = (_ms - _ms_1);
+    BigDecimal _msec = this.getMsec();
+    BigDecimal _msec_1 = other.getMsec();
+    BigDecimal _minus = _msec.subtract(_msec_1);
     Time _time = new Time(_minus);
     return _time;
   }
   
   public Time operator_multiply(final int times) {
-    double _ms = this.getMs();
-    double _multiply = (_ms * times);
+    BigDecimal _msec = this.getMsec();
+    BigDecimal _bigDecimal = new BigDecimal(times);
+    BigDecimal _multiply = _msec.multiply(_bigDecimal);
     Time _time = new Time(_multiply);
     return _time;
   }
   
   public Time operator_divide(final int times) {
-    double _ms = this.getMs();
-    double _divide = (_ms / times);
+    BigDecimal _msec = this.getMsec();
+    BigDecimal _bigDecimal = new BigDecimal(times);
+    BigDecimal _divide = _msec.divide(_bigDecimal, MathContext.DECIMAL128);
     Time _time = new Time(_divide);
     return _time;
   }
   
-  public static Time msec(final int milliSeconds) {
-    Time _time = new Time(milliSeconds);
+  public static Time msec(final int msec) {
+    BigDecimal _bigDecimal = new BigDecimal(msec);
+    Time _time = new Time(_bigDecimal);
     return _time;
   }
   
-  public static Time sec(final int seconds) {
-    int _multiply = (seconds * 1000);
+  public static Time sec(final int sec) {
+    int _multiply = (sec * 1000);
     Time _msec = Time.msec(_multiply);
     return _msec;
   }
   
-  public static Time min(final int minutes) {
-    int _multiply = (minutes * 60);
+  public static Time min(final int min) {
+    int _multiply = (min * 60);
     Time _sec = Time.sec(_multiply);
     return _sec;
   }
   
-  public static Time h(final int hours) {
-    int _multiply = (hours * 60);
+  public static Time h(final int h) {
+    int _multiply = (h * 60);
     Time _min = Time.min(_multiply);
     return _min;
   }
   
-  public Time(final double ms) {
+  public static Time h() {
+    Time _h = Time.h(1);
+    return _h;
+  }
+  
+  public Time(final BigDecimal msec) {
     super();
-    this._ms = ms;
+    this._msec = msec;
   }
   
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + (int) (Double.doubleToLongBits(_ms) ^ (Double.doubleToLongBits(_ms) >>> 32));
+    result = prime * result + ((_msec== null) ? 0 : _msec.hashCode());
     return result;
   }
   
@@ -87,7 +97,10 @@ public class Time {
     if (getClass() != obj.getClass())
       return false;
     Time other = (Time) obj;
-    if (Double.doubleToLongBits(other._ms) != Double.doubleToLongBits(_ms))
+    if (_msec == null) {
+      if (other._msec != null)
+        return false;
+    } else if (!_msec.equals(other._msec))
       return false;
     return true;
   }
