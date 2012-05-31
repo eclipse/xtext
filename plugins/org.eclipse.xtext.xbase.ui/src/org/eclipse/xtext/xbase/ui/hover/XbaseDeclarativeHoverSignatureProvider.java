@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -113,17 +114,27 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		}
 		if (typeAtEnd)
 			return signature + " : " + returnTypeString;
-		return returnTypeString + " " + signature;
+		return returnTypeString + " " + enrichWithDeclarator(signature, jvmOperation);
 	}
 
 	protected String _signature(JvmField jvmField, boolean typeAtEnd) {
 		JvmTypeReference type = jvmField.getType();
 		if (type != null) {
+			String signature = jvmField.getSimpleName();
 			if (typeAtEnd)
-				return jvmField.getSimpleName() + " : " + type.getSimpleName();
-			return type.getSimpleName() + " " + jvmField.getSimpleName();
+				return signature + " : " + type.getSimpleName();
+			return type.getSimpleName() + " " + enrichWithDeclarator(signature, jvmField);
 		}
 		return "";
+	}
+
+	protected String enrichWithDeclarator(String signature, EObject o) {
+		EObject object = o.eContainer();
+		if(object instanceof JvmMember){
+			String parentsName = ((JvmMember) object).getSimpleName();
+			return parentsName + "." + signature;
+		}
+		return signature;
 	}
 
 	protected String _signature(JvmConstructor contructor, boolean typeAtEnd) {
