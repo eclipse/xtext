@@ -59,6 +59,38 @@ public class TokenRegionProviderTest extends AbstractXtextTests {
 		}
 	}
 	
+	@Test 
+	public void testTokenMerge() throws Exception {
+		String model = "  ";
+		ITextRegion tokenRegion = tokenRegionProvider.getTokenRegion(model, new TextRegion(1, 0));
+		assertEquals(0, tokenRegion.getOffset());
+		assertEquals(2, tokenRegion.getLength());
+	}
+	
+	@Test 
+	public void testTokenMerge_1() throws Exception {
+		String model = " ab ";
+		ITextRegion tokenRegion = tokenRegionProvider.getTokenRegion(model, new TextRegion(2, 0));
+		assertEquals(1, tokenRegion.getOffset());
+		assertEquals(2, tokenRegion.getLength());
+	}
+	
+	@Test 
+	public void testTokenSplit() throws Exception {
+		String model = " a b ";
+		ITextRegion tokenRegion = tokenRegionProvider.getTokenRegion(model, new TextRegion(2, 1));
+		assertEquals(2, tokenRegion.getOffset());
+		assertEquals(1, tokenRegion.getLength());
+	}
+	
+	@Test 
+	public void testTokenSplit_1() throws Exception {
+		String model = " axb ";
+		ITextRegion tokenRegion = tokenRegionProvider.getTokenRegion(model, new TextRegion(2, 1));
+		assertEquals(1, tokenRegion.getOffset());
+		assertEquals(3, tokenRegion.getLength());
+	}
+	
 	protected CommonToken findTokenStartingAt(final int offset, List<CommonToken> tokens) {
 		return find(tokens, new Predicate<CommonToken>() {
 			public boolean apply(CommonToken token) {

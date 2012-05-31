@@ -47,7 +47,7 @@ public class TokenRegionProvider {
 				break;
 			currentToken = (CommonToken) lexer.nextToken();
 		}
-		if (region.getLength() == 0 && regionStartOffset == currentToken.getStopIndex()) {
+		if (region.getLength() == 0 && regionStartOffset == currentToken.getStopIndex() + 1) {
 			currentEnd = currentStart;
 		} else {
 			// currentToken is first token overlapping with the region or EOF
