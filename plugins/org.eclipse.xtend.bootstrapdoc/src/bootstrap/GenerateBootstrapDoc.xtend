@@ -13,6 +13,13 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup
 import org.eclipse.xtext.xdoc.xdoc.Document
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.xdoc.xdoc.ImageRef
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import java.io.FileInputStream
+
+import static extension com.google.common.io.ByteStreams.*
+import java.io.FileOutputStream
 
 class GenerateBootstrapDoc {
 	
@@ -40,12 +47,28 @@ class GenerateBootstrapDoc {
 	
 	def void generate() {
 		val document = loadDocument
-		val file = new File("../../website/documentation/index.html")
+		val targetDir= new File('../../website/documentation')
+		val sourceDir = new File('../org.eclipse.xtend.doc.xdoc/xdoc')
+		val file = new File(targetDir, "index.html")
+		copyImages(document, sourceDir, targetDir)
+		println(file.absoluteFile)
 		file.parentFile.mkdirs
 		val writer = new FileWriter(file)
 		writer.append(main(document))
 		writer.close
 		println("Done.")
+	}
+	
+	def copyImages(Document doc, File sourceDir, File targetDir) {
+		val iter = EcoreUtil::getAllContents(doc.eResource.resourceSet, true)
+		iter.filter(typeof(ImageRef)).forEach[
+			val source = new File(sourceDir, path)
+			if (!source.exists)
+				throw new IllegalStateException("Referenced Image "+source.canonicalPath+" does not exist in "+eResource.URI.lastSegment+" line "+NodeModelUtils::getNode(it).startLine)
+			val target = new File(targetDir, path)
+			println(target.canonicalPath)
+			new FileInputStream(source).copy(new FileOutputStream(target))
+		]
 	}
 	
 	def loadDocument() {
@@ -60,11 +83,11 @@ class GenerateBootstrapDoc {
 			rs.getResource(uri, true)
 		}
 		EcoreUtil2::resolveAll(rs)
-		for(resource: rs.resources) {
-			val issues = validator.validate(resource, CheckMode::ALL, null)
-			if (issues.exists( i | i.severity == Severity::ERROR)) {
-				throw new IllegalStateException(issues.toString)
-			}
+		val issues = rs.resources.map[validator.validate(it, CheckMode::ALL, null)].flatten
+		if (issues.exists( i | i.severity == Severity::ERROR)) {
+			throw new IllegalStateException(issues.map['\n\t'+toString].join())
+		} else if (!issues.empty) {
+			println(issues.map[toString].join('\n'))
 		}
 		return rs.allContents.filter(typeof(Document)).head
 	}

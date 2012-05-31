@@ -23,6 +23,7 @@ import org.eclipse.xtext.xdoc.xdoc.CodeBlock;
 import org.eclipse.xtext.xdoc.xdoc.CodeRef;
 import org.eclipse.xtext.xdoc.xdoc.Emphasize;
 import org.eclipse.xtext.xdoc.xdoc.Identifiable;
+import org.eclipse.xtext.xdoc.xdoc.ImageRef;
 import org.eclipse.xtext.xdoc.xdoc.Item;
 import org.eclipse.xtext.xdoc.xdoc.LangDef;
 import org.eclipse.xtext.xdoc.xdoc.Link;
@@ -178,6 +179,24 @@ public class HtmlExtensions {
       }
     }
     _builder.append("</ul>");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  protected CharSequence _toHtml(final ImageRef it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<div class=\"thumbnail\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<img src=\"");
+    String _path = it.getPath();
+    _builder.append(_path, "	");
+    _builder.append("\" alt=\"");
+    String _name = it.getName();
+    _builder.append(_name, "	");
+    _builder.append("\">");
+    _builder.newLineIfNotEmpty();
+    _builder.append("</div>");
     _builder.newLine();
     return _builder;
   }
@@ -559,6 +578,8 @@ public class HtmlExtensions {
       return _toHtml((CodeRef)it);
     } else if (it instanceof Emphasize) {
       return _toHtml((Emphasize)it);
+    } else if (it instanceof ImageRef) {
+      return _toHtml((ImageRef)it);
     } else if (it instanceof Link) {
       return _toHtml((Link)it);
     } else if (it instanceof OrderedList) {

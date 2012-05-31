@@ -20,6 +20,7 @@ import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
 import org.eclipse.xtext.xdoc.xdoc.TableData
+import org.eclipse.xtext.xdoc.xdoc.ImageRef
 
 class HtmlExtensions {
 	
@@ -76,6 +77,12 @@ class HtmlExtensions {
 				«item.toHtml»
 			«ENDFOR»
 		</ul>
+	'''
+	
+	def dispatch toHtml(ImageRef it) '''
+		<div class="thumbnail">
+			<img src="«path»" alt="«name»">
+		</div>
 	'''
 	
 	def dispatch toHtml(Todo it) {
