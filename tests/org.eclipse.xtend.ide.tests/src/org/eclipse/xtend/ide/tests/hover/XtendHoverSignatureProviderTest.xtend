@@ -20,6 +20,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -302,6 +303,39 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val signature = signatureProvider.getSignature(function)
 		EcoreUtil::resolveAll(xtendFile)
 		assertEquals("long error()", signature)
+	}
+	
+	@Test
+	def test381185(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo{
+			Bar b
+			def bar(){ 
+				b.foo
+			}
+		}
+		class Bar {
+			Foo f
+			def foo() {
+				f.bar
+			}
+		}
+		
+		''',resourceSet)
+		val clazz = xtendFile.getXtendClasses.head
+		val clazz2 = xtendFile.xtendClasses.get(1)
+		val function1 = clazz.members.get(1) as XtendFunction
+		val function2 = clazz2.members.get(1) as XtendFunction
+		val expression1 = function1.expression as XBlockExpression
+		val expression2 = function2.expression as XBlockExpression
+		val call1 = expression1.expressions.get(0) as XMemberFeatureCall
+		val call2 = expression2.expressions.get(0) as XMemberFeatureCall
+		assertEquals("void Bar.foo()",signatureProvider.getSignature(call1.feature))
+		assertEquals("void Foo.bar()",signatureProvider.getSignature(call2.feature))
+		assertEquals("Bar Foo.b", signatureProvider.getSignature((call1.memberCallTarget as XFeatureCall).feature))
+		assertEquals("Foo Bar.f", signatureProvider.getSignature((call2.memberCallTarget as XFeatureCall).feature))
+		
 	}
 
 	def getResourceSet(){

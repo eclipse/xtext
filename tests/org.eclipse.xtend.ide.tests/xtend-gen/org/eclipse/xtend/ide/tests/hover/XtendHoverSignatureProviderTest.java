@@ -18,6 +18,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -589,6 +591,86 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final String signature = this.signatureProvider.getSignature(function);
       EcoreUtil.resolveAll(xtendFile);
       Assert.assertEquals("long error()", signature);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test381185() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Bar b");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(){ ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("b.foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Foo f");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("f.bar");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendClass> _xtendClasses = xtendFile.getXtendClasses();
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_xtendClasses);
+      EList<XtendClass> _xtendClasses_1 = xtendFile.getXtendClasses();
+      final XtendClass clazz2 = _xtendClasses_1.get(1);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(1);
+      final XtendFunction function1 = ((XtendFunction) _get);
+      EList<XtendMember> _members_1 = clazz2.getMembers();
+      XtendMember _get_1 = _members_1.get(1);
+      final XtendFunction function2 = ((XtendFunction) _get_1);
+      XExpression _expression = function1.getExpression();
+      final XBlockExpression expression1 = ((XBlockExpression) _expression);
+      XExpression _expression_1 = function2.getExpression();
+      final XBlockExpression expression2 = ((XBlockExpression) _expression_1);
+      EList<XExpression> _expressions = expression1.getExpressions();
+      XExpression _get_2 = _expressions.get(0);
+      final XMemberFeatureCall call1 = ((XMemberFeatureCall) _get_2);
+      EList<XExpression> _expressions_1 = expression2.getExpressions();
+      XExpression _get_3 = _expressions_1.get(0);
+      final XMemberFeatureCall call2 = ((XMemberFeatureCall) _get_3);
+      JvmIdentifiableElement _feature = call1.getFeature();
+      String _signature = this.signatureProvider.getSignature(_feature);
+      Assert.assertEquals("void Bar.foo()", _signature);
+      JvmIdentifiableElement _feature_1 = call2.getFeature();
+      String _signature_1 = this.signatureProvider.getSignature(_feature_1);
+      Assert.assertEquals("void Foo.bar()", _signature_1);
+      XExpression _memberCallTarget = call1.getMemberCallTarget();
+      JvmIdentifiableElement _feature_2 = ((XFeatureCall) _memberCallTarget).getFeature();
+      String _signature_2 = this.signatureProvider.getSignature(_feature_2);
+      Assert.assertEquals("Bar Foo.b", _signature_2);
+      XExpression _memberCallTarget_1 = call2.getMemberCallTarget();
+      JvmIdentifiableElement _feature_3 = ((XFeatureCall) _memberCallTarget_1).getFeature();
+      String _signature_3 = this.signatureProvider.getSignature(_feature_3);
+      Assert.assertEquals("Foo Bar.f", _signature_3);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
