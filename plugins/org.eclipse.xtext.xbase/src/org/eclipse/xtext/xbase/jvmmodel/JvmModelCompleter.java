@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 
@@ -75,6 +76,7 @@ public class JvmModelCompleter {
 			if (isEmpty(element.getDeclaredConstructors())) {
 				JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 				constructor.setSimpleName(element.getSimpleName());
+				constructor.setVisibility(JvmVisibility.PUBLIC);
 				element.getMembers().add(constructor);
 			}
 		}
