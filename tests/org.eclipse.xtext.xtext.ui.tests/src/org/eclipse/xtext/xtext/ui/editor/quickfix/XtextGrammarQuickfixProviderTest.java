@@ -57,51 +57,49 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	private static final String MODEL_FILE = "XtextGrammarQuickfixProviderTest.xtext";
 	private static final String GRAMMAR_WITH_MISSING_RULE = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
-			"Model: elements+=AbstractElement;"));
+			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: elements+=AbstractElement;"));
 	private static final String GRAMMAR_WITH_INVALID_MM_NAME = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", 
-			"Model: a=ID;"));
+			"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;"));
 	private static final String GRAMMAR_WITH_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
-			"Model: a=ID;",
-			"enum ABCD: A|B|C=''|D;"));
+			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;", "enum ABCD: A|B|C=''|D;"));
 	private static final String GRAMMAR_WITH_INVALID_ACTION_IN_UOG = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
-			"Model: a=ID;",
+			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;",
 			"Modifier: {Modifier} static?='static' & final?='final';"));
-	
-	@Test public void testFixMissingRule() throws Exception {
+
+	@Test
+	public void testFixMissingRule() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_MISSING_RULE);
 		assertAndApplySingleResolution(xtextEditor, XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE, 1,
 				"Create rule 'AbstractElement'", false);
 	}
-	
-	@Test public void testFixInvalidMetaModelName() throws Exception {
+
+	@Test
+	public void testFixInvalidMetaModelName() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_MM_NAME);
 		assertAndApplySingleResolution(xtextEditor, XtextValidator.INVALID_METAMODEL_NAME, 1,
 				"Fix metamodel name 'MYDSL'");
 	}
-	
-	@Test public void testFixEmptyEnumLiteral() throws Exception {
+
+	@Test
+	public void testFixEmptyEnumLiteral() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_EMPTY_ENUM_LITERAL);
-		assertAndApplySingleResolution(xtextEditor, XtextValidator.EMPTY_ENUM_LITERAL, 1,
-				"Fix empty enum literal");
+		assertAndApplySingleResolution(xtextEditor, XtextValidator.EMPTY_ENUM_LITERAL, 1, "Fix empty enum literal");
 	}
-	
-	@Test public void testFixInvalidAction() throws Exception {
+
+	@Test
+	public void testFixInvalidAction() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_ACTION_IN_UOG);
-		assertAndApplySingleResolution(xtextEditor, XtextValidator.INVALID_ACTION_USAGE, 0,
-				"Fix invalid action usage");
+		assertAndApplySingleResolution(xtextEditor, XtextValidator.INVALID_ACTION_USAGE, 0, "Fix invalid action usage");
 	}
-	
+
 	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount,
 			String resolutionLabel) {
 		assertAndApplySingleResolution(xtextEditor, issueCode, issueDataCount, resolutionLabel, true);
 	}
+
 	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount,
 			String resolutionLabel, boolean isCleanAfterApply) {
 		IssueResolutionProvider quickfixProvider = createInjector().getInstance(IssueResolutionProvider.class);
@@ -117,10 +115,14 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		assertEquals(1, resolutions.size());
 		IssueResolution resolution = resolutions.iterator().next();
 		assertEquals(resolutionLabel, resolution.getLabel());
-		resolution.apply();
-		assertEquals(getIssues(document).toString(), isCleanAfterApply, getIssues(document).isEmpty());
-		xtextEditor.doSave(new NullProgressMonitor());
-
+		try {
+			resolution.apply();
+			assertEquals(getIssues(document).toString(), isCleanAfterApply, getIssues(document).isEmpty());
+		} finally {
+			// Save xtextEditor in any case. Otherwise test will stuck,
+			// because the "save changed resource dialog" waits for user input.
+			xtextEditor.doSave(new NullProgressMonitor());
+		}
 	}
 
 	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException,
