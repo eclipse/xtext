@@ -76,6 +76,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -192,8 +193,17 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	protected void addDataObjectMethods(final XtendClass source, final JvmGenericType inferredJvmType) {
-		final Iterable<XtendField> fields = filter(source.getMembers(), XtendField.class);
-		final Iterable<JvmField> jvmFields = inferredJvmType.getDeclaredFields();
+		final Iterable<XtendField> allFields = filter(source.getMembers(), XtendField.class);
+		final Iterable<XtendField> fields = filter(allFields, new Predicate<XtendField>() {
+			public boolean apply(@Nullable XtendField theField) {
+				return theField != null && !theField.isStatic();
+			}
+		});
+		final Iterable<JvmField> jvmFields = filter(inferredJvmType.getDeclaredFields(),new Predicate<JvmField>() {
+			public boolean apply(@Nullable JvmField theField) {
+				return theField != null && !theField.isStatic();
+			}
+		});
 		final JvmConstructor superConstructor = getSuperConstructor(source);
 		// constructor
 		if ( isEmpty(filter(source.getMembers(), XtendConstructor.class)) ) {
@@ -270,7 +280,6 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		typeExtensions.setSynthetic(toString, true);
 		if (toString != null && !hasMethod(source, toString.getSimpleName(), toString.getParameters()))
 			inferredJvmType.getMembers().add(toString);
-		
 	}
 	
 	protected @Nullable JvmConstructor getSuperConstructor(final XtendClass source) {
@@ -548,7 +557,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 						field.getAnnotations().add(annotationReference);
 				}
 			}
-			if (isProperty) {
+			if (isProperty && !field.isStatic()) {
 				field.setSimpleName("_"+computeFieldName);
 				final JvmOperation getter = jvmTypesBuilder.toGetter(source, computeFieldName, field.getSimpleName(), field.getType());
 				typeExtensions.setSynthetic(getter, true);

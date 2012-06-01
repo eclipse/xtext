@@ -13,6 +13,136 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject extension IXtendJvmAssociations 
 	
+	@Test def testBug381201_01() {
+		'''
+			@Data class Foo {
+				static String staticField
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final static String staticField;
+			  
+			  public Foo() {
+			    super();
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Foo other = (Foo) obj;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String result = new ToStringHelper().toString(this);
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	@Test def testBug381201_02() {
+		'''
+			@Data class Foo {
+				static String staticField
+				String nonStaticField
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final static String staticField;
+			  
+			  private final String _nonStaticField;
+			  
+			  public String getNonStaticField() {
+			    return this._nonStaticField;
+			  }
+			  
+			  public Foo(final String nonStaticField) {
+			    super();
+			    this._nonStaticField = nonStaticField;
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((_nonStaticField== null) ? 0 : _nonStaticField.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Foo other = (Foo) obj;
+			    if (_nonStaticField == null) {
+			      if (other._nonStaticField != null)
+			        return false;
+			    } else if (!_nonStaticField.equals(other._nonStaticField))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String result = new ToStringHelper().toString(this);
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	@Test def testStaticProperty() {
+		'''
+			class Foo {
+				@Property static String staticField
+				@Property String nonStaticField
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private static String staticField;
+			  
+			  private String _nonStaticField;
+			  
+			  public String getNonStaticField() {
+			    return this._nonStaticField;
+			  }
+			  
+			  public void setNonStaticField(final String nonStaticField) {
+			    this._nonStaticField = nonStaticField;
+			  }
+			}
+		''')
+	}
+	
 	@Test def testItShadowing_01() {
 		assertCompilesTo('''
 			class Foo<T> {
