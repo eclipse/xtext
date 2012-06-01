@@ -41,6 +41,7 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -187,6 +188,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Override
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
+	}
+	
+	@Check
+	public void checkPropertyAnnotation(XtendField field) {
+		if (hasAnnotation(field, Property.class) && field.isStatic()) {
+			error("A property must not be static", XtendPackage.Literals.XTEND_FIELD__STATIC, STATIC_PROPERTY);
+		}
+	}
+	
+	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
+		for (XAnnotation anno : source.getAnnotations()) {
+			if (anno != null && anno.getAnnotationType() != null && class1.getName().equals(anno.getAnnotationType().getIdentifier()))
+				return true;
+ 		}
+		return false;
 	}
 
 	@Check
