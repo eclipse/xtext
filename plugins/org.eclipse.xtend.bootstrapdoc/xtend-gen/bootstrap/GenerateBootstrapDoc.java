@@ -9,13 +9,13 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Multimap;
-import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
+import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.Collection;
 import java.util.Collections;
@@ -133,9 +133,8 @@ public class GenerateBootstrapDoc {
             final File target = _file_1;
             String _canonicalPath_1 = target.getCanonicalPath();
             InputOutput.<String>println(_canonicalPath_1);
-            FileInputStream _fileInputStream = new FileInputStream(source);
-            FileOutputStream _fileOutputStream = new FileOutputStream(target);
-            ByteStreams.copy(_fileInputStream, _fileOutputStream);
+            InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);
+            Files.copy(_newInputStreamSupplier, target);
           } catch (Exception _e) {
             throw Exceptions.sneakyThrow(_e);
           }

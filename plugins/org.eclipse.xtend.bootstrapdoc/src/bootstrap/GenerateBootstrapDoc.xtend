@@ -6,20 +6,18 @@ import java.io.File
 import java.io.FileWriter
 import java.util.Collections
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.mwe.PathTraverser
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup
 import org.eclipse.xtext.xdoc.xdoc.Document
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.xdoc.xdoc.ImageRef
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import java.io.FileInputStream
 
-import static extension com.google.common.io.ByteStreams.*
-import java.io.FileOutputStream
+import static extension com.google.common.io.Files.*
 
 class GenerateBootstrapDoc {
 	
@@ -67,7 +65,7 @@ class GenerateBootstrapDoc {
 				throw new IllegalStateException("Referenced Image "+source.canonicalPath+" does not exist in "+eResource.URI.lastSegment+" line "+NodeModelUtils::getNode(it).startLine)
 			val target = new File(targetDir, path)
 			println(target.canonicalPath)
-			new FileInputStream(source).copy(new FileOutputStream(target))
+			source.newInputStreamSupplier.copy(target)
 		]
 	}
 	
