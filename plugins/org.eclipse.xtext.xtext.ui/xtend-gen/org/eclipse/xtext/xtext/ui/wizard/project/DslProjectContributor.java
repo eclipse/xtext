@@ -42,11 +42,16 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();
     String _plus_6 = (_plus_5 + _grammarFilePath);
     creator.writeToFile(_grammar, _plus_6);
-    CharSequence _launchConfig = this.launchConfig();
+    CharSequence _wfLaunchConfig = this.wfLaunchConfig();
     String _projectName = this.projectInfo.getProjectName();
     String _plus_7 = (".launch/Generate Language Infrastructure (" + _projectName);
     String _plus_8 = (_plus_7 + ").launch");
-    creator.writeToFile(_launchConfig, _plus_8);
+    creator.writeToFile(_wfLaunchConfig, _plus_8);
+    boolean _isCreateEclipseRuntimeLaunchConfig = this.projectInfo.isCreateEclipseRuntimeLaunchConfig();
+    if (_isCreateEclipseRuntimeLaunchConfig) {
+      CharSequence _launchConfig = this.launchConfig();
+      creator.writeToFile(_launchConfig, ".launch/Launch Runtime Eclipse.launch");
+    }
   }
   
   private CharSequence workflow() {
@@ -134,6 +139,71 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     return _builder;
   }
   
+  private CharSequence wfLaunchConfig() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+    _builder.newLine();
+    _builder.append("<launchConfiguration type=\"org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType\">");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;launchConfigurationWorkingSet factoryID=&quot;org.eclipse.ui.internal.WorkingSetFactory&quot; id=&quot;1299248699643_13&quot; label=&quot;working set&quot; name=&quot;working set&quot;&gt;&#10;&lt;item factoryID=&quot;org.eclipse.ui.internal.model.ResourceFactory&quot; path=&quot;/");
+    String _projectName = this.projectInfo.getProjectName();
+    _builder.append(_projectName, "");
+    _builder.append("&quot; type=&quot;4&quot;/&gt;&#10;&lt;item factoryID=&quot;org.eclipse.ui.internal.model.ResourceFactory&quot; path=&quot;/");
+    String _generatorProjectName = this.projectInfo.getGeneratorProjectName();
+    _builder.append(_generatorProjectName, "");
+    _builder.append("&quot; type=&quot;4&quot;/&gt;&#10;&lt;item factoryID=&quot;org.eclipse.ui.internal.model.ResourceFactory&quot; path=&quot;/");
+    String _testProjectName = this.projectInfo.getTestProjectName();
+    _builder.append(_testProjectName, "");
+    _builder.append("&quot; type=&quot;4&quot;/&gt;&#10;&lt;item factoryID=&quot;org.eclipse.ui.internal.model.ResourceFactory&quot; path=&quot;/");
+    String _uiProjectName = this.projectInfo.getUiProjectName();
+    _builder.append(_uiProjectName, "");
+    _builder.append("&quot; type=&quot;4&quot;/&gt;&#10;&lt;/launchConfigurationWorkingSet&gt;}\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
+    _builder.newLine();
+    _builder.append("<listEntry value=\"/");
+    String _projectName_1 = this.projectInfo.getProjectName();
+    _builder.append(_projectName_1, "");
+    _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("</listAttribute>");
+    _builder.newLine();
+    _builder.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
+    _builder.newLine();
+    _builder.append("<listEntry value=\"4\"/>");
+    _builder.newLine();
+    _builder.append("</listAttribute>");
+    _builder.newLine();
+    _builder.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
+    _builder.newLine();
+    _builder.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.debug\"/>");
+    _builder.newLine();
+    _builder.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
+    _builder.newLine();
+    _builder.append("</listAttribute>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"src/");
+    String _basePackagePath = this.projectInfo.getBasePackagePath();
+    _builder.append(_basePackagePath, "");
+    _builder.append("/Generate");
+    String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
+    _builder.append(_languageNameAbbreviation, "");
+    _builder.append(".mwe2\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
+    String _projectName_2 = this.projectInfo.getProjectName();
+    _builder.append(_projectName_2, "");
+    _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m\"/>");
+    _builder.newLine();
+    _builder.append("</launchConfiguration>");
+    _builder.newLine();
+    return _builder;
+  }
+  
   private CharSequence launchConfig() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
@@ -169,7 +239,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.newLine();
     _builder.append("<booleanAttribute key=\"includeOptional\" value=\"true\"/>");
     _builder.newLine();
-    _builder.append("<stringAttribute key=\"location\" value=\"${workspace_loc}/../runtime-New_configuration\"/>");
+    _builder.append("<stringAttribute key=\"location\" value=\"${workspace_loc}/../runtime-EclipseXtext\"/>");
     _builder.newLine();
     _builder.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
     _builder.newLine();
