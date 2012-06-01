@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+  <rm:property key="xtend.git.clone.dest" value="${user.home}/git/org.eclipse.xtend"/>
+  <rm:locator pattern="org.eclipse.xtend.releng" searchPathRef="xtend.releng"/>
+  <rm:locator pattern="org.eclipse.xtend.examples" searchPathRef="xtend.examples"/>
+  <rm:locator pattern="^org\.eclipse\.xtend(?:\..+)\.tests$" searchPathRef="xtend.tests"/>
+  <rm:locator pattern="^org\.eclipse\.(?:xtend|xtend2)(?:\..+)?$" searchPathRef="xtend"/>
+  <rm:searchPath name="xtend">
+    <rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:property key="xtend.git.remote.uri" value="git://git.eclipse.org/gitroot/xtend/org.eclipse.xtend.git"/>
+      <rm:uri format="{0},plugins/{1}">
+        <bc:propertyRef key="xtend.git.clone.dest"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="eclipse.feature" readerType="git" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:property key="xtend.git.remote.uri" value="git://git.eclipse.org/gitroot/xtend/org.eclipse.xtend.git"/>
+      <rm:uri format="{0},features/{1}.feature">
+        <bc:propertyRef key="xtend.git.clone.dest"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+    <rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:property key="xtend.git.remote.uri" value="git://git.eclipse.org/gitroot/xtend/org.eclipse.xtend.git"/>
+      <rm:uri format="{0},tests/{1}">
+        <bc:propertyRef key="xtend.git.clone.dest"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="xtend.examples">
+    <rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="xtend.git.remote.uri" value="git://git.eclipse.org/gitroot/xtend/org.eclipse.xtend.git"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:uri format="{0},examples/{1}">
+        <bc:propertyRef key="xtend.git.clone.dest"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+ 
+  <rm:searchPath name="xtend.tests">
+    <rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:property key="xtend.git.remote.uri" value="git://git.eclipse.org/gitroot/xtend/org.eclipse.xtend.git"/>
+      <rm:uri format="{0},tests/{1}">
+        <bc:propertyRef key="xtend.git.clone.dest"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="xtend.releng">
+    <rm:provider componentTypes="buckminster" readerType="git" mutable="false">
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:property key="xtend.git.remote.uri" value="git://git.eclipse.org/gitroot/xtend/org.eclipse.xtend.git"/>
+      <rm:uri format="{0},releng/{1}">
+        <bc:propertyRef key="xtend.git.clone.dest"/>
+        <bc:propertyRef key="buckminster.component"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+</rm:rmap>
