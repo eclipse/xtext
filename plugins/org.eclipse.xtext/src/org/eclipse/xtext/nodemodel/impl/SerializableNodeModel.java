@@ -14,6 +14,7 @@ import java.util.Date;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
 import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -29,12 +30,11 @@ public class SerializableNodeModel {
 	public RootNode root;
 
 	public SerializableNodeModel(XtextResource resource) {
-		ICompositeNode rootNode = resource.getParseResult().getRootNode();
-
-		if (rootNode != null) {
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult != null) {
+			ICompositeNode rootNode = parseResult.getRootNode();
 			root = (RootNode) rootNode;
 		}
-
 		formatVersion = 1;
 		date = new Date();
 	}

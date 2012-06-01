@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.impl.RootNode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -20,7 +21,6 @@ import org.eclipse.xtext.resource.XtextResource;
  * 
  * @since 2.3
  */
-
 public class SerializationConversionContext {
 	final private Map<EObject, Integer> grammarElementToIdMap;
 	final private ArrayList<String> grammarIdToURIMap;
@@ -57,8 +57,11 @@ public class SerializationConversionContext {
 	}
 
 	protected void fillGrammarElementToIdMap(XtextResource r) {
-		RootNode it = (RootNode) r.getParseResult().getRootNode();
-		it.fillGrammarElementToIdMap(grammarElementToIdMap, grammarIdToURIMap);
+		IParseResult parseResult = r.getParseResult();
+		if (parseResult != null) {
+			RootNode it = (RootNode) parseResult.getRootNode();
+			it.fillGrammarElementToIdMap(grammarElementToIdMap, grammarIdToURIMap);
+		}
 	}
 
 	public Integer getEObjectId(EObject eObject) {
