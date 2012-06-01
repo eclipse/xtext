@@ -128,11 +128,11 @@
 		<div class="row">
 			<div class="span9 offset2">
 				<p>
-				Xtend is a statically-typed programming language which is tightly integrated with and runs on the Java Virtual Machine. 
-				It has its roots in the Java programming language but improves on many concepts:   <ul>
+				Xtend is a statically-typed programming language which translates to comprehensible Java source code. 
+				Syntactically and semantically Xtend has its roots in the Java programming language but improves on many aspects:   <ul>
 					<li><strong>Extension methods</strong> - enhance closed types with new functionality</li>
-					<li><strong>Multiple dispatch</strong> a.k.a. polymorphic method invocation</li>
-					<li><strong>Closures</strong> - concise syntax for anonymous function literals</li>
+					<li><strong>Multiple dispatch</strong> - a.k.a. polymorphic method invocation</li>
+					<li><strong>Lambda Expressions</strong> - concise syntax for anonymous function literals</li>
 					<li><strong>Operator overloading</strong> - make your libraries even more expressive</li>
 					<li><strong>Powerful switch expressions</strong> - type based switching with implicit casts</li>
 					<li><strong>Template expressions</strong> - with intelligent white space handling</li>
@@ -143,18 +143,20 @@
 					<li><strong>Translates to Java</strong> not bytecode - understand what is going on and use your code for platforms 
 					    such as Android or GWT</li>
 				</ul>
-				It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
-				Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
-				Java can call Xtend methods, too, in a completely transparent way. And of course, Xtend provides a modern 
-				Eclipse-based IDE closely integrated with Eclipse&apos;s Java Development Tools (JDT).
+				The language is not aiming at replacing Java all together. Its library is just a thin layer on top of the 
+				Java Development Kit (JDK) and unlike with other JVM languages there are zero interoperability issues :
+				Everything you write in Xtend interacts with Java exactly as if it were written in Java in the first place.
+				It&apos;s just much more concise and readable! Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
+				Eclipse-based IDE closely integrated with Eclipse&apos;s Java Development Tools (JDT), including features like call-hierarchies, rename refactoring, 
+				debugging and many more.
 				</p>
 				<!--  section -->
 				<section id="Getting_Started">
 				<h2>Getting Started</h2>
 				<p>
-				Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. The easiest way to install the
-				SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend">Eclipse Marketplace</a>. There even
-				is a client integrated into Eclipse. You&apos;ll find it in the Help-menu.
+				Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
+				SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend">Eclipse Marketplace</a>. 
+				But there&apos;s also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download">available for download</a>.
 				</p>
 				<!-- subsection -->
 				<section id="Section2_0">
@@ -173,6 +175,7 @@ class HelloWorld {
 				translate it to Java code. You&apos;ll find it in a source folder <strong>xtend-gen</strong>.
 				The hello world example is translated to the following Java code:
 				</p><pre class="prettyprint lang-java">
+// Generated Java Source Code
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 public class HelloWorld {
@@ -187,50 +190,66 @@ public class HelloWorld {
 				<p>
 				The only surprising fact in the generated Java code may be the library class <code>InputOutput</code>. Many 
 				features of Xtend are not built into the language itself but provided via the library
-				<strong>org.eclipse.xtend2.lib</strong>. The library is available from a Maven repository (check the website for details) and 
-				provides a lot of useful functionality annotating existing types from Java&apos;s SDK.It provides means to create collections in a readable way:</p><pre class="prettyprint lang-xtend">
+				<strong>org.eclipse.xtend.lib</strong>. The library is available from a <a href="#MavenSupport">Maven repository</a> and via p2
+				update site (in case you do Eclipse Plug-In development).The library provides means to create collections in a readable way:</p><pre class="prettyprint lang-xtend">
 val myList = newArrayList(1, 2, 3)
 val mySet = newHashSet(4, 5, 6)
 val myMap = newHashMap(1 -&gt; &apos;one&apos;, 2 -&gt; &apos;two&apos;, 3 -&gt; &apos;three&apos;)</pre><p>
 				It also extends the collection types with a lot of very useful functions.
 				One example is the ubiquitous <code>map</code> function:</p><pre class="prettyprint lang-xtend">
-val listOfNames = myList.map( e | myMap.get(e) )</pre><p>
-				Operators to concat collections or to do arithmetics with types like <code>BigDecimal</code> are also available. 
-				</p>
-				<!-- subsection -->
-				<section id="Tutorial">
-				<h3>The Xtend Tutorial</h3>
-				<p>
-				The best way to get acquainted with the language is to materialize the <strong>Xtend Tutorial</strong> example project 
-				in your workspace. You will find it in the <strong>New &gt; Project..</strong> wizard dialog.The project contains a couple of sample Xtend files which show the different language concepts in 
-				action. Looking into the <strong>xtend-gen</strong> folder which holds the compiled Java code will help you understand 
-				the concepts better.
+val listOfNames = listOfPersons.map[ name ]</pre><p>
+				Many operators to concat collections or to do arithmetics with types like <code>BigDecimal</code> are also available.
 				</p>
 				<!-- subsection -->
 				<section id="MavenSupport">
 				<h3>Maven Support</h3>
 				<p>
-				The runtime library as well as a plugin to run the compiler in a Maven build can be be obtained from
-				the following maven repository: <code>http://build.eclipse.org/common/xtend/maven/</code>. We are working on having these artifacts in Maven Central soon.Here&apos;s the XML for the library dependency:</p><pre class="prettyprint lang-xtend">
+				The runtime library as well as a plug-in to run the compiler in a Maven build can be be obtained from
+				the following maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.Here&apos;s the XML for the repository:
+				</p><pre class="prettyprint lang-xtend">
+&lt;repositories&gt;
+  &lt;repository&gt;
+    &lt;id&gt;xtend&lt;/id&gt;
+    &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+  &lt;pluginRepository&gt;
+    &lt;id&gt;xtend&lt;/id&gt;
+    &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
+  &lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;</pre><p>
+				Here&apos;s the XML for the dependency to the library:</p><pre class="prettyprint lang-xtend">
 &lt;dependency&gt;
-  &lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;
-  &lt;artifactId&gt;org.eclipse.xtend2.lib&lt;/artifactId&gt;
+  &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
+  &lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;
   &lt;version&gt;2.3.0&lt;/version&gt;
 &lt;/dependency&gt;</pre><p>
-				And this is the XML for the plugin:</p><pre class="prettyprint lang-xtend">
+				And this is the XML for the plug-in:</p><pre class="prettyprint lang-xtend">
 &lt;plugin&gt;
-  &lt;groupId&gt;org.eclipse.xtend2&lt;/groupId&gt;
+  &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
   &lt;version&gt;2.3.0&lt;/version&gt;
   &lt;executions&gt;
     &lt;execution&gt;
       &lt;goals&gt;
         &lt;goal&gt;compile&lt;/goal&gt;
-        &lt;goal&gt;testCompile&lt;/goal&gt;
+        &lt;!-- &lt;goal&gt;testCompile&lt;/goal&gt; --&gt;
       &lt;/goals&gt;
+      &lt;!-- optionally you can configure a different target folder --&gt;
+      &lt;!--
+      &lt;configuration&gt;
+        &lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;
+      &lt;/configuration&gt;
+      --&gt;
     &lt;/execution&gt;
   &lt;/executions&gt;
 &lt;/plugin&gt;</pre><p>
+				As you see the outputDirectory can be specified to match the default of the Eclipse plug-in (xtend-gen). Of course you can also change the configuration
+				in Eclipse to match the Maven default (generated-sources). To do so right-click on the project and select &apos;Properties&apos; or if you prefer a global setting choose Eclipse-&gt;Preferences.
+				In the category &apos;Xtend/Compiler&apos; enter the directory name (see screenshot). It&apos;s interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.<div class="thumbnail">
+					<img src="images/configure-compiler-in-eclipse.png" alt="">
+				</div>
 				</p>
 				</section>
 			</div>
@@ -249,20 +268,10 @@ val listOfNames = myList.map( e | myMap.get(e) )</pre><p>
 				Xtend completely supports Java&apos;s type system: The primitive types as <code>int</code> or 
 				<code>boolean</code> are available as well as all classes and interfaces that reside on the 
 				classpath.  Java Generics are fully supported, such that you can define type parameters and type arguments 
-				in just the same way as in Java.As Xtend classes compile to Java classes, you can integrate both Java classes in Xtend and Xtend 
-				classes in Java. Note that Xtend does not have an own syntax for interfaces, as the Java syntax is 
-				already very concise.  
+				in just the same way as in Java. In the type system and its conformance and casting rules are implemented after 
+				<a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">the Java Language Specification</a>.In addition to the type system defined by the Java language specification, Xtend adds some conversion rules and a
+				readable syntax for function types.As Xtend classes compile to Java classes, you can seamlessly use Xtend classes from Java as well.
 				</p>
-				<!--  section -->
-				<section id="Xbase_Types_ConformanceRules">
-				<h2>Conformance and Conversion</h2>
-				<p>
-				Conformance is used in order to find out whether some expression can be used in a certain situation. 
-				For instance when assigning a value to a variable, the type of the right hand expression needs to 
-				conform to the type of the variable.As Xbase implements the unchanged type system of Java it also fully supports the conformance rules 
-				defined in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">The Java Language Specification</a>.
-				</p>
-				</section>
 			</div>
 		</div>
 		</section>
@@ -1095,7 +1104,7 @@ myObj.setMyProperty("foo")</pre><p>
 				expression. Here is an example for an explicitly declared type:
 				</p><pre class="prettyprint lang-xtend">
 var List&lt;String&gt; msg = new ArrayList();</pre><p>
-				In such cases, the type of the right hand expression must <a href="#Xbase_Types_ConformanceRules">conform</a> to the type 
+				In such cases, the type of the right hand expression must conform to the type 
 				of the expression on the left side. Alternatively the type can be left out and will be inferred from the initialization expression:  
 				</p><pre class="prettyprint lang-xtend">
 var msg = new ArrayList&lt;String&gt;(); // -&gt; type ArrayList&lt;String&gt;</pre><p>

@@ -292,7 +292,7 @@ code[Xtend][
   var List<String> msg = new ArrayList(); 
 ]
 
-In such cases, the type of the right hand expression must ref:Xbase_Types_ConformanceRules[conform] to the type 
+In such cases, the type of the right hand expression must conform to the type 
 of the expression on the left side. 
 
 Alternatively the type can be left out and will be inferred from the initialization expression:  
