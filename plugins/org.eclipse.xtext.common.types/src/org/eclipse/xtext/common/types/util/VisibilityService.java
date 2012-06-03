@@ -51,7 +51,10 @@ public class VisibilityService {
 			if (jvmMember instanceof JvmDeclaredType) {
 				return equal(((JvmDeclaredType) jvmMember).getPackageName(), contextType.getPackageName());
 			} else {
-				return equal(jvmMember.getDeclaringType().getPackageName(), contextType.getPackageName());
+				JvmDeclaredType declaringType = jvmMember.getDeclaringType();
+				if (declaringType != null)
+					return equal(declaringType.getPackageName(), contextType.getPackageName());
+				return true;
 			}
 		} else if (contextType.equals(jvmMember.getDeclaringType())) {
 			return true;
