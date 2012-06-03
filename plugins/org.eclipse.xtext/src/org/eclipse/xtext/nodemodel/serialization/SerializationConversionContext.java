@@ -76,7 +76,7 @@ public class SerializationConversionContext {
 	}
 
 	public String[] getGrammarIdToURIMap() {
-		String[] map = grammarIdToURIMap.toArray(new String[0]);
+		String[] map = grammarIdToURIMap.toArray(new String[grammarIdToURIMap.size()]);
 
 		return map;
 	}
