@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.tests.Activator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
- * introduced subclass.
+ * introduced subclass. 
  */
 public class Bug377311TestLanguageExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -20,10 +20,10 @@ public class Bug377311TestLanguageExecutableExtensionFactory extends AbstractGui
 	protected Bundle getBundle() {
 		return Activator.getInstance().getBundle();
 	}
-
+	
 	@Override
 	protected Injector getInjector() {
 		return Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG377311TESTLANGUAGE);
 	}
-
+	
 }

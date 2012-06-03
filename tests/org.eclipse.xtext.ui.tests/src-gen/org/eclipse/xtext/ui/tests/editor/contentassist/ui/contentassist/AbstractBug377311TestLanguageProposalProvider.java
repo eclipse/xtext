@@ -11,19 +11,19 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
- * Methods are dynamically dispatched on the first parameter, i.e., you can override them
- * with a more concrete subtype.
+ * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
+ * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
 public class AbstractBug377311TestLanguageProposalProvider extends TerminalsProposalProvider {
-
+		
 	public void completeRoot_Childs(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
 	public void completeChild_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-
+    
 	public void complete_Root(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}

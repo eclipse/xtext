@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="ImportUriUiTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" runtimeVersion="2.5">
   <genPackages prefix="ImportUriUi" basePackage="org.eclipse.xtext.ui.tests.linking"
       disposableProviderFactory="true" ecorePackage="ImportUriUiTestLanguage.ecore#/">
     <genClasses ecoreClass="ImportUriUiTestLanguage.ecore#//Main">

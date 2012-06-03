@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="CrossReferenceProposalTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" runtimeVersion="2.5">
   <genPackages prefix="CrossReferenceProposalTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" ecorePackage="CrossReferenceProposalTestLanguage.ecore#/">
     <genClasses ecoreClass="CrossReferenceProposalTestLanguage.ecore#//Model">

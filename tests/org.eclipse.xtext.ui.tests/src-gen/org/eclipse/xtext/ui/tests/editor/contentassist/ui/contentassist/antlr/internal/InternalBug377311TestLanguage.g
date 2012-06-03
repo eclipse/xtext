@@ -5,19 +5,19 @@ grammar InternalBug377311TestLanguage;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
-
+	
 }
 
 @lexer::header {
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal;
 
-// Hack: Use our own Lexer superclass by means of import.
+// Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal;
+package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -34,21 +34,21 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug377311TestLan
 }
 
 @parser::members {
-
-	private Bug377311TestLanguageGrammarAccess grammarAccess;
-
+ 
+ 	private Bug377311TestLanguageGrammarAccess grammarAccess;
+ 	
     public void setGrammarAccess(Bug377311TestLanguageGrammarAccess grammarAccess) {
-	this.grammarAccess = grammarAccess;
+    	this.grammarAccess = grammarAccess;
     }
-
+    
     @Override
     protected Grammar getGrammar() {
-	return grammarAccess.getGrammar();
+    	return grammarAccess.getGrammar();
     }
-
+    
     @Override
     protected String getValueForTokenName(String tokenName) {
-	return tokenName;
+    	return tokenName;
     }
 
 }
@@ -57,12 +57,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug377311TestLan
 
 
 // Entry rule entryRuleRoot
-entryRuleRoot
+entryRuleRoot 
 :
 { before(grammarAccess.getRootRule()); }
 	 ruleRoot
-{ after(grammarAccess.getRootRule()); }
-	 EOF
+{ after(grammarAccess.getRootRule()); } 
+	 EOF 
 ;
 
 // Rule Root
@@ -85,15 +85,15 @@ finally {
 
 
 // Entry rule entryRuleChild
-entryRuleChild
+entryRuleChild 
 @init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
 }
 :
 { before(grammarAccess.getChildRule()); }
 	 ruleChild
-{ after(grammarAccess.getChildRule()); }
-	 EOF
+{ after(grammarAccess.getChildRule()); } 
+	 EOF 
 ;
 finally {
 	myHiddenTokenState.restore();
@@ -143,7 +143,7 @@ rule__Child__Group__0__Impl
 (
 { before(grammarAccess.getChildAccess().getChildKeyword_0()); }
 
-	'child'
+	'child' 
 
 { after(grammarAccess.getChildAccess().getChildKeyword_0()); }
 )
@@ -233,3 +233,5 @@ RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_ANY_OTHER : .;
+
+

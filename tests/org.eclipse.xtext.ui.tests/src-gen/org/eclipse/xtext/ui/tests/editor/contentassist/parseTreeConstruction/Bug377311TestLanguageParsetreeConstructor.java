@@ -14,30 +14,30 @@ import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class Bug377311TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
-
+		
 	@Inject
 	private Bug377311TestLanguageGrammarAccess grammarAccess;
-
+	
 	@Override
 	protected AbstractToken getRootToken(IEObjectConsumer inst) {
-		return new ThisRootNode(inst);
+		return new ThisRootNode(inst);	
 	}
-
+	
 protected class ThisRootNode extends RootToken {
 	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
-
+	
 	@Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Root_ChildsAssignment(this, this, 0, inst);
 			case 1: return new Child_Group(this, this, 1, inst);
 			default: return null;
-		}
-	}
+		}	
+	}	
 }
-
+	
 
 /************ begin Rule Root ****************
  *
@@ -48,11 +48,11 @@ protected class ThisRootNode extends RootToken {
 
 // childs+=Child*
 protected class Root_ChildsAssignment extends AssignmentToken  {
-
+	
 	public Root_ChildsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
-
+	
 	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getRootAccess().getChildsAssignment();
@@ -63,10 +63,10 @@ protected class Root_ChildsAssignment extends AssignmentToken  {
 		switch(index) {
 			case 0: return new Child_Group(this, this, 0, inst);
 			default: return null;
-		}
+		}	
 	}
 
-    @Override
+    @Override	
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("childs",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("childs");
@@ -74,7 +74,7 @@ protected class Root_ChildsAssignment extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRootAccess().getChildsChildParserRuleCall_0();
+				element = grammarAccess.getRootAccess().getChildsChildParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -88,8 +88,8 @@ protected class Root_ChildsAssignment extends AssignmentToken  {
 		switch(index) {
 			case 0: return new Root_ChildsAssignment(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
-		}
-	}
+		}	
+	}	
 }
 
 /************ end Rule Root ****************/
@@ -104,11 +104,11 @@ protected class Root_ChildsAssignment extends AssignmentToken  {
 
 // "child" name=STRING
 protected class Child_Group extends GroupToken {
-
+	
 	public Child_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
-
+	
 	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getChildAccess().getGroup();
@@ -119,7 +119,7 @@ protected class Child_Group extends GroupToken {
 		switch(index) {
 			case 0: return new Child_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
-		}
+		}	
 	}
 
     @Override
@@ -133,11 +133,11 @@ protected class Child_Group extends GroupToken {
 
 // "child"
 protected class Child_ChildKeyword_0 extends KeywordToken  {
-
+	
 	public Child_ChildKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
-
+	
 	@Override
 	public Keyword getGrammarElement() {
 		return grammarAccess.getChildAccess().getChildKeyword_0();
@@ -147,18 +147,18 @@ protected class Child_ChildKeyword_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}
+		}	
 	}
 
 }
 
 // name=STRING
 protected class Child_NameAssignment_1 extends AssignmentToken  {
-
+	
 	public Child_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
-
+	
 	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getChildAccess().getNameAssignment_1();
@@ -169,10 +169,10 @@ protected class Child_NameAssignment_1 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new Child_ChildKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
-		}
+		}	
 	}
 
-    @Override
+    @Override	
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");

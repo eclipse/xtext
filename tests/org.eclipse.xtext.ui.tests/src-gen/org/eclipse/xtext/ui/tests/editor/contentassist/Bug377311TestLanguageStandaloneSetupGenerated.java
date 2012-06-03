@@ -21,11 +21,11 @@ public class Bug377311TestLanguageStandaloneSetupGenerated implements ISetup {
 		register(injector);
 		return injector;
 	}
-
+	
 	public Injector createInjector() {
 		return Guice.createInjector(new org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguageRuntimeModule());
 	}
-
+	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/ui/common/tests/2009/bug377311TestLanguage")) {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/ui/common/tests/2009/bug377311TestLanguage", org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Bug377311Package.eINSTANCE);
@@ -35,7 +35,7 @@ public class Bug377311TestLanguageStandaloneSetupGenerated implements ISetup {
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug377311testlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bug377311testlanguage", serviceProvider);
-
+		
 
 	}
 }

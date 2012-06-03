@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="Bug381381TestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" runtimeVersion="2.5">
+  <genPackages prefix="Bug381381TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="Bug381381TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug381381TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug381381TestLanguage.ecore#//Model/stmt"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug381381TestLanguage.ecore#//CopyFieldNameToVariableStmt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug381381TestLanguage.ecore#//CopyFieldNameToVariableStmt/line"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug381381TestLanguage.ecore#//CopyFieldNameToVariableStmt/column"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug381381TestLanguage.ecore#//CopyFieldNameToVariableStmt/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -41,6 +41,7 @@ public class Activator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG348199TESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG360834TESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG347012TESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG381381TESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BACKTRACKINGCONTENTASSISTTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTCONTEXTTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTCUSTOMIZINGTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage";
@@ -165,6 +166,9 @@ public class Activator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG347012TESTLANGUAGE.equals(grammar)) {
 			return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug347012TestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG381381TESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguageRuntimeModule();
+		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BACKTRACKINGCONTENTASSISTTESTLANGUAGE.equals(grammar)) {
 			return new org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguageRuntimeModule();
 		}
@@ -286,6 +290,9 @@ public class Activator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG347012TESTLANGUAGE.equals(grammar)) {
 			return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug347012TestLanguageUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG381381TESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BACKTRACKINGCONTENTASSISTTESTLANGUAGE.equals(grammar)) {
 			return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.BacktrackingContentAssistTestLanguageUiModule(this);

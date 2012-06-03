@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal;
+package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -44,29 +44,29 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         public InternalBug377311TestLanguageParser(TokenStream input, RecognizerSharedState state) {
             super(input, state);
-
+             
         }
-
+        
 
     public String[] getTokenNames() { return InternalBug377311TestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g"; }
 
 
-
-	private Bug377311TestLanguageGrammarAccess grammarAccess;
-
+     
+     	private Bug377311TestLanguageGrammarAccess grammarAccess;
+     	
         public void setGrammarAccess(Bug377311TestLanguageGrammarAccess grammarAccess) {
-		this.grammarAccess = grammarAccess;
+        	this.grammarAccess = grammarAccess;
         }
-
+        
         @Override
         protected Grammar getGrammar() {
-		return grammarAccess.getGrammar();
+        	return grammarAccess.getGrammar();
         }
-
+        
         @Override
         protected String getValueForTokenName(String tokenName) {
-		return tokenName;
+        	return tokenName;
         }
 
 
@@ -79,14 +79,14 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:61:1: ( ruleRoot EOF )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:62:1: ruleRoot EOF
             {
-             before(grammarAccess.getRootRule());
+             before(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleRoot_in_entryRuleRoot61);
             ruleRoot();
 
             state._fsp--;
 
-             after(grammarAccess.getRootRule());
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRoot68);
+             after(grammarAccess.getRootRule()); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRoot68); 
 
             }
 
@@ -106,8 +106,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:69:1: ruleRoot : ( ( rule__Root__ChildsAssignment )* ) ;
     public final void ruleRoot() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:73:2: ( ( ( rule__Root__ChildsAssignment )* ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:74:1: ( ( rule__Root__ChildsAssignment )* )
@@ -115,7 +115,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:74:1: ( ( rule__Root__ChildsAssignment )* )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:75:1: ( rule__Root__ChildsAssignment )*
             {
-             before(grammarAccess.getRootAccess().getChildsAssignment());
+             before(grammarAccess.getRootAccess().getChildsAssignment()); 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:76:1: ( rule__Root__ChildsAssignment )*
             loop1:
             do {
@@ -128,24 +128,24 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
 
 
                 switch (alt1) {
-		case 1 :
-		    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:76:2: rule__Root__ChildsAssignment
-		    {
-		    pushFollow(FollowSets000.FOLLOW_rule__Root__ChildsAssignment_in_ruleRoot94);
-		    rule__Root__ChildsAssignment();
+            	case 1 :
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:76:2: rule__Root__ChildsAssignment
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_rule__Root__ChildsAssignment_in_ruleRoot94);
+            	    rule__Root__ChildsAssignment();
 
-		    state._fsp--;
+            	    state._fsp--;
 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    break loop1;
+            	default :
+            	    break loop1;
                 }
             } while (true);
 
-             after(grammarAccess.getRootAccess().getChildsAssignment());
+             after(grammarAccess.getRootAccess().getChildsAssignment()); 
 
             }
 
@@ -159,7 +159,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -171,20 +171,20 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:88:1: entryRuleChild : ruleChild EOF ;
     public final void entryRuleChild() throws RecognitionException {
 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
 
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:92:1: ( ruleChild EOF )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:93:1: ruleChild EOF
             {
-             before(grammarAccess.getChildRule());
+             before(grammarAccess.getChildRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleChild_in_entryRuleChild127);
             ruleChild();
 
             state._fsp--;
 
-             after(grammarAccess.getChildRule());
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleChild134);
+             after(grammarAccess.getChildRule()); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleChild134); 
 
             }
 
@@ -195,7 +195,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		myHiddenTokenState.restore();
+            	myHiddenTokenState.restore();
 
         }
         return ;
@@ -207,9 +207,9 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:103:1: ruleChild : ( ( rule__Child__Group__0 ) ) ;
     public final void ruleChild() throws RecognitionException {
 
-			HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
-			int stackSize = keepStackSize();
-
+        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:108:2: ( ( ( rule__Child__Group__0 ) ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:109:1: ( ( rule__Child__Group__0 ) )
@@ -217,7 +217,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:109:1: ( ( rule__Child__Group__0 ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:110:1: ( rule__Child__Group__0 )
             {
-             before(grammarAccess.getChildAccess().getGroup());
+             before(grammarAccess.getChildAccess().getGroup()); 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:111:1: ( rule__Child__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:111:2: rule__Child__Group__0
             {
@@ -229,7 +229,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
 
             }
 
-             after(grammarAccess.getChildAccess().getGroup());
+             after(grammarAccess.getChildAccess().getGroup()); 
 
             }
 
@@ -243,8 +243,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
-		myHiddenTokenState.restore();
+            	restoreStackSize(stackSize);
+            	myHiddenTokenState.restore();
 
         }
         return ;
@@ -256,8 +256,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:126:1: rule__Child__Group__0 : rule__Child__Group__0__Impl rule__Child__Group__1 ;
     public final void rule__Child__Group__0() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:130:1: ( rule__Child__Group__0__Impl rule__Child__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:131:2: rule__Child__Group__0__Impl rule__Child__Group__1
@@ -282,7 +282,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -294,8 +294,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:138:1: rule__Child__Group__0__Impl : ( 'child' ) ;
     public final void rule__Child__Group__0__Impl() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:142:1: ( ( 'child' ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:143:1: ( 'child' )
@@ -303,9 +303,9 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:143:1: ( 'child' )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:144:1: 'child'
             {
-             before(grammarAccess.getChildAccess().getChildKeyword_0());
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Child__Group__0__Impl229);
-             after(grammarAccess.getChildAccess().getChildKeyword_0());
+             before(grammarAccess.getChildAccess().getChildKeyword_0()); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Child__Group__0__Impl229); 
+             after(grammarAccess.getChildAccess().getChildKeyword_0()); 
 
             }
 
@@ -319,7 +319,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -331,8 +331,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:157:1: rule__Child__Group__1 : rule__Child__Group__1__Impl ;
     public final void rule__Child__Group__1() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:161:1: ( rule__Child__Group__1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:162:2: rule__Child__Group__1__Impl
@@ -352,7 +352,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -364,8 +364,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:168:1: rule__Child__Group__1__Impl : ( ( rule__Child__NameAssignment_1 ) ) ;
     public final void rule__Child__Group__1__Impl() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:172:1: ( ( ( rule__Child__NameAssignment_1 ) ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:173:1: ( ( rule__Child__NameAssignment_1 ) )
@@ -373,7 +373,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:173:1: ( ( rule__Child__NameAssignment_1 ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:174:1: ( rule__Child__NameAssignment_1 )
             {
-             before(grammarAccess.getChildAccess().getNameAssignment_1());
+             before(grammarAccess.getChildAccess().getNameAssignment_1()); 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:175:1: ( rule__Child__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:175:2: rule__Child__NameAssignment_1
             {
@@ -385,7 +385,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
 
             }
 
-             after(grammarAccess.getChildAccess().getNameAssignment_1());
+             after(grammarAccess.getChildAccess().getNameAssignment_1()); 
 
             }
 
@@ -399,7 +399,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -411,8 +411,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:190:1: rule__Root__ChildsAssignment : ( ruleChild ) ;
     public final void rule__Root__ChildsAssignment() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:194:1: ( ( ruleChild ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:195:1: ( ruleChild )
@@ -420,13 +420,13 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:195:1: ( ruleChild )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:196:1: ruleChild
             {
-             before(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0());
+             before(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleChild_in_rule__Root__ChildsAssignment326);
             ruleChild();
 
             state._fsp--;
 
-             after(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0());
+             after(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0()); 
 
             }
 
@@ -440,7 +440,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -452,8 +452,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:205:1: rule__Child__NameAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Child__NameAssignment_1() throws RecognitionException {
 
-			int stackSize = keepStackSize();
-
+        		int stackSize = keepStackSize();
+            
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:209:1: ( ( RULE_STRING ) )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:210:1: ( RULE_STRING )
@@ -461,9 +461,9 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:210:1: ( RULE_STRING )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug377311TestLanguage.g:211:1: RULE_STRING
             {
-             before(grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0());
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Child__NameAssignment_1357);
-             after(grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0());
+             before(grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0()); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Child__NameAssignment_1357); 
+             after(grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0()); 
 
             }
 
@@ -477,7 +477,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
         }
         finally {
 
-		restoreStackSize(stackSize);
+            	restoreStackSize(stackSize);
 
         }
         return ;
@@ -487,9 +487,9 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalContent
     // Delegated rules
 
 
+ 
 
-
-
+    
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot61 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleRoot68 = new BitSet(new long[]{0x0000000000000002L});

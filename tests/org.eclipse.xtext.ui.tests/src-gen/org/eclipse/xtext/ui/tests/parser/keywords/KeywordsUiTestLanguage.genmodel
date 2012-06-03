@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="KeywordsUiTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" runtimeVersion="2.5">
   <genPackages prefix="KeywordsUiTestLanguage" basePackage="org.eclipse.xtext.ui.tests.parser.keywords"
       disposableProviderFactory="true" ecorePackage="KeywordsUiTestLanguage.ecore#/">
     <genClasses ecoreClass="KeywordsUiTestLanguage.ecore#//Model">

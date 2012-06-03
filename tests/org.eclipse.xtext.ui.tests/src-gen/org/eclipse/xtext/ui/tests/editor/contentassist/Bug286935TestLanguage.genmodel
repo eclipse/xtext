@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="Bug286935TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" runtimeVersion="2.5">
   <genPackages prefix="Bug286935TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" ecorePackage="Bug286935TestLanguage.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug286935TestLanguage.ecore#//StateType">

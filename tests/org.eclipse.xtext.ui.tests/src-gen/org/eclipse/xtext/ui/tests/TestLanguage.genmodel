@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="TestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
-    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+    editorPluginID="org.eclipse.xtext.ui.tests.editor" runtimeVersion="2.5">
   <genPackages prefix="Foo" basePackage="org.eclipse.xtext.ui.tests" disposableProviderFactory="true"
       ecorePackage="TestLanguage.ecore#/">
     <genClasses ecoreClass="TestLanguage.ecore#//File">

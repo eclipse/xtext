@@ -18,19 +18,19 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug377311TestLanguageGrammarAccess;
 
 public class Bug377311TestLanguageParser extends AbstractContentAssistParser {
-
+	
 	@Inject
 	private Bug377311TestLanguageGrammarAccess grammarAccess;
-
+	
 	private Map<AbstractElement, String> nameMappings;
-
+	
 	@Override
 	protected org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug377311TestLanguageParser createParser() {
 		org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug377311TestLanguageParser result = new org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug377311TestLanguageParser(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
-
+	
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
@@ -45,7 +45,7 @@ public class Bug377311TestLanguageParser extends AbstractContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-
+	
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
@@ -54,18 +54,18 @@ public class Bug377311TestLanguageParser extends AbstractContentAssistParser {
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
-		}
+		}		
 	}
-
+	
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_NEWLINE" };
 	}
-
+	
 	public Bug377311TestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-
+	
 	public void setGrammarAccess(Bug377311TestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
