@@ -918,6 +918,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
   }
   
+  @Test
+  public void testFeatureCall_26() throws Exception {
+    this.resolvesTo("{ val Iterable<? extends String> iter = null iter.toList }", "List<String>");
+  }
+  
   @Ignore
   @Test
   public void testFeatureCall_Bug342134_01() throws Exception {

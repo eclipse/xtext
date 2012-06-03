@@ -5,7 +5,6 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
@@ -946,6 +945,10 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 //	}
 //	
 
+	@Test def void testFeatureCall_26() throws Exception {
+		"{ val Iterable<? extends String> iter = null iter.toList }".resolvesTo("List<String>")
+	}
+	
 	@Ignore
 	@Test def void testFeatureCall_Bug342134_01() throws Exception {
 		"newArrayList('').map(e|newArrayList(e)).flatten".resolvesTo("List<String>")
