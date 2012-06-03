@@ -424,7 +424,7 @@ public class PdaUtil {
 			return factory.create(pda.getStart(), pda.getStop());
 		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
 		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
-		trace.push(newItem(pda, distanceComp, pda.getStart(), previous));
+		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous));
 		Multimap<S, S> edges = LinkedHashMultimap.create();
 		HashSet<S> states = Sets.newHashSet();
 		HashSet<Pair<S, R>> success = Sets.newHashSet();
@@ -448,7 +448,7 @@ public class PdaUtil {
 						}
 						edges.put(s, next);
 					} else {
-						if (trace.push(newItem(pda, distanceComp, next, item)))
+						if (trace.push(newItem(pda, distanceComp, distances, next, item)))
 							continue ROOT;
 					}
 				}
@@ -521,8 +521,12 @@ public class PdaUtil {
 			filterUnambiguousPaths(pda, follower, dist, followers);
 	}
 
-	protected <S, R, P> TraversalItem<S, R> newItem(Pda<S, P> pda, MappedComparator<S, Integer> comp, S next, R item) {
-		List<S> followers = Lists.newArrayList(pda.getFollowers(next));
+	protected <S, R, P> TraversalItem<S, R> newItem(Pda<S, P> pda, MappedComparator<S, Integer> comp,
+			Map<S, Integer> distances, S next, R item) {
+		List<S> followers = Lists.newArrayList();
+		for (S f : pda.getFollowers(next))
+			if (distances.containsKey(f))
+				followers.add(f);
 		Collections.sort(followers, comp);
 		return new TraversalItem<S, R>(next, followers, item);
 	}
