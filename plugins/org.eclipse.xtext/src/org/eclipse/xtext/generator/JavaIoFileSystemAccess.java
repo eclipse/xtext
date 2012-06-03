@@ -46,8 +46,11 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		try {
 			createFolder(file.getParentFile());
 			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), getEncoding(getURI(fileName, outputConfigName)));
-			writer.append(postProcess(fileName, outputConfigName, contents));
-			writer.close();
+			try {
+				writer.append(postProcess(fileName, outputConfigName, contents));
+			} finally {
+				writer.close();
+			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
