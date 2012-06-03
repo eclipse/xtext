@@ -279,8 +279,18 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	private Collection<AbstractElement> getElementsToParse(FollowElement element) {
 		AbstractElement root = element.getGrammarElement();
-		if (root instanceof UnorderedGroup && element.getHandledUnorderedGroupElements().isEmpty())
-			return ((CompoundElement) root).getElements();
+		if (root instanceof UnorderedGroup) {
+			List<AbstractElement> handled = element.getHandledUnorderedGroupElements();
+			if (handled.isEmpty())
+				return ((CompoundElement) root).getElements();
+			List<AbstractElement> result = Lists.newArrayList(root);
+			for(AbstractElement child: ((UnorderedGroup) root).getElements()) {
+				if (!handled.contains(child)) {
+					result.add(child);
+				}
+			}
+			return result;
+		}
 		return getElementsToParse(root);
 	}
 
