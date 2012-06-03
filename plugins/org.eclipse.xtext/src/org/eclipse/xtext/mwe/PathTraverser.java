@@ -55,15 +55,19 @@ public class PathTraverser {
 		try {
 			Set<URI> result = Sets.newHashSet();
 			ZipFile zipFile = new ZipFile(file);
-			Enumeration<? extends ZipEntry> entries = zipFile.entries();
-			while (entries.hasMoreElements()) {
-				ZipEntry entry = entries.nextElement();
-				URI uri = getUri(file, entry);
-				if (uri != null && isValidPredicate.apply(uri)) {
-					result.add(uri);
+			try {
+				Enumeration<? extends ZipEntry> entries = zipFile.entries();
+				while (entries.hasMoreElements()) {
+					ZipEntry entry = entries.nextElement();
+					URI uri = getUri(file, entry);
+					if (uri != null && isValidPredicate.apply(uri)) {
+						result.add(uri);
+					}
 				}
+				return result;
+			} finally {
+				zipFile.close();
 			}
-			return result;
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		}
