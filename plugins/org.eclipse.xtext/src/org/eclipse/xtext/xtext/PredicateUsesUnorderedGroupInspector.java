@@ -54,7 +54,6 @@ public class PredicateUsesUnorderedGroupInspector extends XtextSwitch<Boolean> i
 	}
 
 	public void inspect(Grammar grammar) {
-		inspectedGrammar = grammar;
 		this.inspectedGrammar = grammar;
 		for(AbstractRule rule: grammar.getRules()) {
 			if (!validatedRules.contains(rule)) {
