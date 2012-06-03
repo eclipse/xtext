@@ -47,7 +47,7 @@ public class TraceRegionSerializer {
 	 * @noextend This class is not intended to be subclassed by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
-	protected class IdentityStrategy implements Strategy<AbstractTraceRegion, ILocationData> {
+	protected static class IdentityStrategy implements Strategy<AbstractTraceRegion, ILocationData> {
 
 		public ILocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path, String projectName) {
 			return new LocationData(offset, length, lineNumber, endLineNumber, path, projectName);
