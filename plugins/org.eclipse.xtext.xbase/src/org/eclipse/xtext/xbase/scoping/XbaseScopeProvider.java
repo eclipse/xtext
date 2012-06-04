@@ -264,7 +264,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 						new Function<IEObjectDescription, IEObjectDescription>() {
 							public IEObjectDescription apply(IEObjectDescription from) {
 								JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
-								constructor = (JvmConstructor) EcoreUtil.resolve(constructor, context);
+								if (constructor.eIsProxy()) {
+									EObject resolved = EcoreUtil.resolve(constructor, context);
+									if (resolved instanceof JvmConstructor)
+										constructor = (JvmConstructor) resolved;
+								}
 								XConstructorCall constructorCall = null;
 								if (context instanceof XConstructorCall)
 									constructorCall = (XConstructorCall) context;
