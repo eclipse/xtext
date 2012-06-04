@@ -162,6 +162,8 @@ public class XtextPluginImages {
 		annotationImagesDeleted.put(XtextEditor.ERROR_ANNOTATION_TYPE, new Image(display, error, SWT.IMAGE_GRAY));
 		annotationImagesDeleted.put(XtextEditor.WARNING_ANNOTATION_TYPE, new Image(display, warning, SWT.IMAGE_GRAY));
 		annotationImagesDeleted.put(XtextEditor.INFO_ANNOTATION_TYPE, new Image(display, info, SWT.IMAGE_GRAY));
+		
+		imagesInitialized = true;
 	}	
 
 
