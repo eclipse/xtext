@@ -108,7 +108,6 @@ public class EmbeddedEditorActions {
 		new ActionDefinitionToStyledTextAction(ITextEditorActionDefinitionIds.TOGGLE_OVERWRITE, ST.TOGGLE_OVERWRITE)
 	};
 	
-	protected final List<String> selectionDependentActions = Lists.newArrayList();
 	protected final Map<String, IAction> allActions = Maps.newHashMap();
 	
 	protected final ISourceViewer viewer;
