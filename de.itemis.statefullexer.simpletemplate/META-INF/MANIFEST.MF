@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.itemis.statefullexer.simpletemplate
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.itemis.statefullexer.simpletemplate; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ de.itemis.statefullexer;bundle-version="1.0.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: de.itemis.statefullexer.simpletemplate,
+ de.itemis.statefullexer.simpletemplate.services,
+ de.itemis.statefullexer.simpletemplate.simpleTemplate,
+ de.itemis.statefullexer.simpletemplate.simpleTemplate.impl,
+ de.itemis.statefullexer.simpletemplate.simpleTemplate.util,
+ de.itemis.statefullexer.simpletemplate.serializer,
+ de.itemis.statefullexer.simpletemplate.parser.antlr,
+ de.itemis.statefullexer.simpletemplate.parser.antlr.internal,
+ de.itemis.statefullexer.simpletemplate.parser.antlr.lexer,
+ de.itemis.statefullexer.simpletemplate.validation,
+ de.itemis.statefullexer.simpletemplate.scoping,
+ de.itemis.statefullexer.simpletemplate.generator,
+ de.itemis.statefullexer.simpletemplate.formatting
+
