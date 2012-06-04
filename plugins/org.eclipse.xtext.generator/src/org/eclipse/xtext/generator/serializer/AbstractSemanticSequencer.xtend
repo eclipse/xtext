@@ -2,9 +2,8 @@ package org.eclipse.xtext.generator.serializer
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.util.List
+import java.util.Map
 import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.xtext.Grammar
@@ -21,6 +20,9 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider$INodesForEOb
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService$ValueTransient
+import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.emf.ecore.ENamedElement
+import java.util.List
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -34,29 +36,31 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	
 	@Inject extension Context2NameFunction ctx2name
 	
-	def <T extends ENamedElement> List<T> sort(Iterable<T> iterable) {
+	def <T extends ENamedElement> List<T> sortByName(Iterable<T> iterable) {
 		iterable.sort(p1, p2|p1.name.compareTo(p2.name))
 	}
 	
 	def Iterable<EPackage> getAccessedPackages() {
-		grammar.grammarConstraints.filter(e|e.type != null).map(e|e.type.EPackage).toSet.sort
+		grammar.grammarConstraints.filter(e|e.type != null).map(e|e.type.EPackage).toSet.sortByName
 	}
 	
 	def Iterable<EClass> getAccessedClasses(EPackage pkg) {
-		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet.sort
+		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet.sortByName
 	}
 	
 	def getAccessedConstraints(EClass clazz) {
 		grammar.getGrammarConstraints(clazz)
 	}
 	
-	def getAccessedConstraints() {
-		grammar.getGrammarConstraints()
-	}
+//	def getAccessedConstraints() {
+//		grammar.getGrammarConstraints()
+//	}
 	
-	def usesSuperGrammar() {
-		accessedConstraints.exists(c | c.declaringGrammar != grammar)
-	}
+//	def usesSuperGrammar() {
+//		val localConstraints = accessedConstraints
+//		val superConstraints = grammar.superGrammar.grammarConstraints
+//		localConstraints.exists[superConstraints.contains(it)]
+//	}
 	
 	override getFileContents(SerializerGenFileNames$GenFileName filename) {
 		val file = new JavaEMFFile(grammar.eResource.resourceSet, filename.packageName);
@@ -71,7 +75,10 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		file.imported(typeof(Inject))
 		file.imported(typeof(Provider))
 		
-		val superGrammar = if(usesSuperGrammar) 
+		val localConstraints = grammar.grammarConstraints
+		val superConstraints = grammar.superGrammar.grammarConstraints
+		
+		val superGrammar = if(localConstraints.exists[superConstraints.contains(it)]) 
 				file.imported(names.semanticSequencer.getQualifiedName(grammar.usedGrammars.head))
 			else
 				file.imported(typeof(AbstractDelegatingSemanticSequencer))
@@ -85,14 +92,22 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				
 				«file.genMethodCreateSequence()»
 				
-				«accessedConstraints.filter(e|e.type!=null && e.declaringGrammar == grammar).join("\n\n",[e|file.genMethodSequence(e)])»
+				«localConstraints.filter(e|e.type!=null && !superConstraints.contains(e)).sort.join("\n\n",[e|file.genMethodSequence(e)])»
 			}
 		'''.toString; 
 		file.toString 
 	}
 	
+	def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
+		val result = <K, V>newHashMap()
+		for(i:items) 
+			result.put(i.key, i.value)
+		result
+	}
+	
 	def genMethodCreateSequence(JavaEMFFile file) '''
 		public void createSequence(EObject context, EObject semanticObject) {
+			«val superConstraints = grammar.superGrammar.grammarConstraints.map[it->it].toMap»
 			«var pkgi = 0 »
 			«FOR pkg:accessedPackages /* ITERATOR i */»
 			«IF (pkgi = pkgi + 1) > 1 /*!i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «file.importedGenTypeLiteral(pkg)») switch(semanticObject.eClass().getClassifierID()) {
@@ -101,7 +116,9 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«var ctxi = 0»
 					«FOR ctx: type.accessedConstraints.entrySet.sortBy(e|e.key.name) /* ITERATOR j-  */»
 						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value.sortBy(e|e.contextName) SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
-							sequence_«ctx.key.simpleName»(context, («file.importedGenTypeName(type)») semanticObject); 
+							«val superConstraint = superConstraints.get(ctx.key)»
+							«val constraint = if(superConstraint == null) ctx.key else superConstraint»
+							sequence_«constraint.simpleName»(context, («file.importedGenTypeName(type)») semanticObject); 
 							return; 
 						}
 					«ENDFOR»
