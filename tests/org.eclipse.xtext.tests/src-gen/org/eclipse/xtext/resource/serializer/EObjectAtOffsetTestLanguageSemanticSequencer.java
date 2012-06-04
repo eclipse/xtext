@@ -29,12 +29,12 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EObjectAtOffsetTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EObjectAtOffsetTestLanguagePackage.BAR:
-				if(context == grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0() ||
-				   context == grammarAccess.getBarRule()) {
-					sequence_Bar(context, (Bar) semanticObject); 
+				if(context == grammarAccess.getAbstractBarRule()) {
+					sequence_AbstractBar_Bar(context, (Bar) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAbstractBarRule()) {
+				else if(context == grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0() ||
+				   context == grammarAccess.getBarRule()) {
 					sequence_Bar(context, (Bar) semanticObject); 
 					return; 
 				}
@@ -63,6 +63,15 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	/**
 	 * Constraint:
+	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]* foo+=[Foo|QualifiedNameWithOtherDelim]?)
+	 */
+	protected void sequence_AbstractBar_Bar(EObject context, Bar semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (bar=AbstractBar_FooBar_3_0 foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]?)
 	 */
 	protected void sequence_AbstractBar(EObject context, FooBar semanticObject) {
@@ -72,7 +81,7 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	/**
 	 * Constraint:
-	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]* foo+=[Foo|QualifiedNameWithOtherDelim]?)
+	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]*)
 	 */
 	protected void sequence_Bar(EObject context, Bar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

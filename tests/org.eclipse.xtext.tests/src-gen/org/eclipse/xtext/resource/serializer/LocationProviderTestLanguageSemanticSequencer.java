@@ -38,7 +38,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 					return; 
 				}
 				else if(context == grammarAccess.getComponentRule()) {
-					sequence_Component(context, (Bus) semanticObject); 
+					sequence_Bus_Component(context, (Bus) semanticObject); 
 					return; 
 				}
 				else break;
@@ -74,7 +74,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 				else break;
 			case LocationprovidertestPackage.PROCESSOR:
 				if(context == grammarAccess.getComponentRule()) {
-					sequence_Component(context, (Processor) semanticObject); 
+					sequence_Component_Processor(context, (Processor) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getProcessorRule()) {
@@ -105,7 +105,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID port+=Port* (mode+=Mode | transition+=Transition)*)
 	 */
-	protected void sequence_Component(EObject context, Bus semanticObject) {
+	protected void sequence_Bus_Component(EObject context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -114,7 +114,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID data+=Data* (mode+=Mode | transition+=Transition)*)
 	 */
-	protected void sequence_Component(EObject context, Processor semanticObject) {
+	protected void sequence_Component_Processor(EObject context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

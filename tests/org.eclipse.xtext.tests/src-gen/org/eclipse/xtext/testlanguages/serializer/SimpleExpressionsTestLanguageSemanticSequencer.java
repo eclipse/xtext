@@ -47,7 +47,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 				   context == grammarAccess.getSequenceRule() ||
 				   context == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0() ||
 				   context == grammarAccess.getTermRule()) {
-					sequence_Addition(context, (Op) semanticObject); 
+					sequence_Addition_Multiplication(context, (Op) semanticObject); 
 					return; 
 				}
 				else break;
@@ -69,7 +69,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	 *         (values+=Multiplication_Op_1_0 (operator='*' | operator='/') values+=Term)
 	 *     )
 	 */
-	protected void sequence_Addition(EObject context, Op semanticObject) {
+	protected void sequence_Addition_Multiplication(EObject context, Op semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

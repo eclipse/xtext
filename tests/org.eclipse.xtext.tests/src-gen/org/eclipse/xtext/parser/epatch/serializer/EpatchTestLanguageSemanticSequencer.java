@@ -97,7 +97,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				else break;
 			case EpatchTestLanguagePackage.LIST_ASSIGNMENT:
 				if(context == grammarAccess.getAssignmentRule()) {
-					sequence_Assignment(context, (ListAssignment) semanticObject); 
+					sequence_Assignment_BiListAssignment_MonoListAssignment(context, (ListAssignment) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getBiListAssignmentRule()) {
@@ -124,7 +124,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 			case EpatchTestLanguagePackage.OBJECT_COPY:
 				if(context == grammarAccess.getCreatedObjectRule() ||
 				   context == grammarAccess.getNamedObjectRule()) {
-					sequence_CreatedObject(context, (ObjectCopy) semanticObject); 
+					sequence_CreatedObject_ObjectCopy(context, (ObjectCopy) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getObjectCopyRule()) {
@@ -135,7 +135,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 			case EpatchTestLanguagePackage.OBJECT_NEW:
 				if(context == grammarAccess.getCreatedObjectRule() ||
 				   context == grammarAccess.getNamedObjectRule()) {
-					sequence_CreatedObject(context, (ObjectNew) semanticObject); 
+					sequence_CreatedObject_ObjectNew(context, (ObjectNew) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getObjectNewRule()) {
@@ -160,7 +160,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				else break;
 			case EpatchTestLanguagePackage.SINGLE_ASSIGNMENT:
 				if(context == grammarAccess.getAssignmentRule()) {
-					sequence_Assignment(context, (SingleAssignment) semanticObject); 
+					sequence_Assignment_BiSingleAssignment_MonoSingleAssignment(context, (SingleAssignment) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getBiSingleAssignmentRule()) {
@@ -196,7 +196,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
 	 *     )
 	 */
-	protected void sequence_Assignment(EObject context, ListAssignment semanticObject) {
+	protected void sequence_Assignment_BiListAssignment_MonoListAssignment(EObject context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -205,7 +205,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 * Constraint:
 	 *     ((feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue) | (feature=ID leftValue=SingleAssignmentValue))
 	 */
-	protected void sequence_Assignment(EObject context, SingleAssignment semanticObject) {
+	protected void sequence_Assignment_BiSingleAssignment_MonoSingleAssignment(EObject context, SingleAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -254,7 +254,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?
 	 *     )
 	 */
-	protected void sequence_CreatedObject(EObject context, ObjectCopy semanticObject) {
+	protected void sequence_CreatedObject_ObjectCopy(EObject context, ObjectCopy semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -263,7 +263,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT name=ID? ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?)
 	 */
-	protected void sequence_CreatedObject(EObject context, ObjectNew semanticObject) {
+	protected void sequence_CreatedObject_ObjectNew(EObject context, ObjectNew semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

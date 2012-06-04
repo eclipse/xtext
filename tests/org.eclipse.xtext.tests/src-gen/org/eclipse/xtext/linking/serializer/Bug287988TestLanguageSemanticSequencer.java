@@ -41,25 +41,25 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 					sequence_CallMe2(context, (Attribute) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getRuleCallAttribute2Rule()) {
+					sequence_CallMe2_RuleCallAttribute2(context, (Attribute) semanticObject); 
+					return; 
+				}
 				else if(context == grammarAccess.getCallMe3Rule() ||
 				   context == grammarAccess.getCallMe4Rule()) {
 					sequence_CallMe4(context, (Attribute) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRuleCallAttribute3Rule()) {
+					sequence_CallMe4_RuleCallAttribute3(context, (Attribute) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getCallMeRule()) {
 					sequence_CallMe(context, (Attribute) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRuleCallAttribute2Rule()) {
-					sequence_RuleCallAttribute2(context, (Attribute) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRuleCallAttribute3Rule()) {
-					sequence_RuleCallAttribute3(context, (Attribute) semanticObject); 
-					return; 
-				}
 				else if(context == grammarAccess.getRuleCallAttributeRule()) {
-					sequence_RuleCallAttribute(context, (Attribute) semanticObject); 
+					sequence_CallMe_RuleCallAttribute(context, (Attribute) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getSimpleAttributeRule()) {
@@ -147,6 +147,15 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
+	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
+	 */
+	protected void sequence_CallMe2_RuleCallAttribute2(EObject context, Attribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     name=ID
 	 */
 	protected void sequence_CallMe4(EObject context, Attribute semanticObject) {
@@ -156,9 +165,27 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
+	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
+	 */
+	protected void sequence_CallMe4_RuleCallAttribute3(EObject context, Attribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (typeRef=[BaseAttribute|ID] | type=ID)
 	 */
 	protected void sequence_CallMe(EObject context, Attribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
+	 */
+	protected void sequence_CallMe_RuleCallAttribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -184,33 +211,6 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
-	 */
-	protected void sequence_RuleCallAttribute2(EObject context, Attribute semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
-	 */
-	protected void sequence_RuleCallAttribute3(EObject context, Attribute semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
-	 */
-	protected void sequence_RuleCallAttribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
