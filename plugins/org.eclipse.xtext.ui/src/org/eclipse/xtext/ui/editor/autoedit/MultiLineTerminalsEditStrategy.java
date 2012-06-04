@@ -115,8 +115,6 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 			IRegion stopTerminal) throws BadLocationException {
 		CommandInfo newC = new CommandInfo();
 		newC.isChange = true;
-		int afterStartTerminal = startTerminal.getOffset() + startTerminal.getLength();
-		String string = document.get(afterStartTerminal, command.offset - afterStartTerminal);
 		newC.offset = command.offset;
 		newC.text += command.text + indentationString;
 		newC.cursorOffset = command.offset + newC.text.length();
@@ -124,7 +122,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 			newC.text += command.text + getRightTerminal();
 		}
 		if (stopTerminal != null && stopTerminal.getOffset() >= command.offset && util.isSameLine(document, stopTerminal.getOffset(), command.offset)) {
-			string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
+			String string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
 			if (string.trim().length() > 0)
 				newC.text += string.trim();
 			newC.text += command.text;

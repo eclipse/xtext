@@ -166,7 +166,7 @@ public class XtextElementLinks {
 
 					event.doit= true;
 				} catch (MalformedURLException e) {
-					log.warn("Could not handle location"+loc.toString(), e);
+					log.warn("Could not handle location"+loc, e);
 				}
 			}
 		}
@@ -198,11 +198,10 @@ public class XtextElementLinks {
 				// try it with a file (workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=237903 ):
 				File file= new File(loc);
 				if (! file.exists()) {
-					log.warn("Could not handle location"+loc.toString(), e);
+					log.warn("Could not handle location"+loc, e);
 					return null;
 				}
 				uri= file.toURI();
-				loc= uri.toASCIIString();
 			}
 			return uri;
 
