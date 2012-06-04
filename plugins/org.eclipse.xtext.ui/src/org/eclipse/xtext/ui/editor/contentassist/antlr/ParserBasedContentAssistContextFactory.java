@@ -306,7 +306,6 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			EObject currentGrammarElement = currentParserNode.getGrammarElement();
 			AbstractRule currentRule = getRule(currentGrammarElement);
 			for (AbstractElement grammarElement : followElements) {
-				EObject loopGrammarElement = currentGrammarElement;
 				AbstractRule rule = currentRule;
 				ICompositeNode loopParserNode = currentParserNode;
 				EObject loopLastGrammarElement = lastCompleteNode.getGrammarElement();
@@ -315,7 +314,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					loopParserNode = loopParserNode.getParent();
 					while (loopParserNode.getGrammarElement() == null && loopParserNode.getParent() != null)
 						loopParserNode = loopParserNode.getParent();
-					loopGrammarElement = loopParserNode.getGrammarElement();
+					EObject loopGrammarElement = loopParserNode.getGrammarElement();
 					rule = getRule(loopGrammarElement);
 				}
 				EObject context = loopParserNode.getSemanticElement();

@@ -545,6 +545,6 @@ public class ConfigurableCompletionProposal implements
 	
 	@Override
 	public String toString() {
-		return "Proposal: " + getDisplayString().toString();
+		return "Proposal: " + getDisplayString();
 	}
 }
