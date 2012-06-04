@@ -161,7 +161,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		if(event.getProperty() == LinkWithEditorOutlineContribution.PREFERENCE_KEY) {
+		if(LinkWithEditorOutlineContribution.PREFERENCE_KEY.equals(event.getProperty())) {
 			setLinkingEnabled(Boolean.parseBoolean(event.getNewValue().toString()));
 		}
 	}
