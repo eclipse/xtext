@@ -23,7 +23,7 @@ public class DefaultEditorImageUtil {
 	private IWorkbench workbench;
 	
 	public ImageDescriptor getDefaultEditorImageDescriptor(String fileName) {
-		if (fileName != null & workbench != null) {
+		if (fileName != null && workbench != null) {
 			IEditorDescriptor defaultEditor = workbench.getEditorRegistry().getDefaultEditor(fileName);
 			if (defaultEditor != null) {
 				return defaultEditor.getImageDescriptor();
