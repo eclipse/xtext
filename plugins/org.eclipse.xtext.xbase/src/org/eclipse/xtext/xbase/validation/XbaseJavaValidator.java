@@ -976,7 +976,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						XExpression firstInBody = ((XBlockExpression) constructorBody).getExpressions().get(0);
 						if (firstInBody instanceof XFeatureCall) {
 							JvmIdentifiableElement calledFeature = ((XFeatureCall) firstInBody).getFeature();
-							if (calledFeature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {
+							if (calledFeature != null && !calledFeature.eIsProxy() && calledFeature instanceof JvmConstructor) {
 								calledConstructor = (JvmConstructor) calledFeature;
 								continue;
 							} 
