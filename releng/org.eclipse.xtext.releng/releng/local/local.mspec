@@ -3,6 +3,6 @@
   <mspec:property key="target.os" value="*"/>
   <mspec:property key="target.ws" value="*"/>
   <mspec:property key="target.arch" value="*"/>
-  <mspec:property key="eclipse.downloads" value="http://download.eclipse.org"/>
+  <mspec:property key="eclipse.download" value="http://download.eclipse.org"/>
   <mspec:mspecNode materializer="workspace"/>
 </mspec:mspec>
