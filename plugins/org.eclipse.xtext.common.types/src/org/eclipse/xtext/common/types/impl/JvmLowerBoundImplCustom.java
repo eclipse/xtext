@@ -39,6 +39,6 @@ public class JvmLowerBoundImplCustom extends JvmLowerBoundImpl {
 	public String toString() {
 		if (typeReference != null)
 			return SUPER + super.toString();
-		return null;
+		return eClass().getName();
 	}
 }
