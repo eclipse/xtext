@@ -61,17 +61,19 @@ public class SmapSupport {
 		Map<String,SmapStratum> strata = newHashMap(); 
 		for (LineMapping lm : lineInfo) {
 			String stratumName = getStratumName(lm.source);
-			SmapStratum stratum = strata.get(stratumName);
-			if (stratum == null) {
-				stratum = new SmapStratum(stratumName);
-				strata.put(stratumName, stratum);
-				generator.addStratum(stratum, true);
-			}
-			final String path = getPath(lm.source);
-			if (path != null) {
-				final String fileName = lm.source.lastSegment();
-				stratum.addFile(fileName, path);
-				stratum.addLineData(lm.sourceStartLine, fileName, 1, lm.targetStartLine+1, lm.targetEndLine - lm.targetStartLine + 1);
+			if (!"Java".equals(stratumName)) {
+				final String path = getPath(lm.source);
+				if (path != null) {
+					SmapStratum stratum = strata.get(stratumName);
+					if (stratum == null) {
+						stratum = new SmapStratum(stratumName);
+						strata.put(stratumName, stratum);
+						generator.addStratum(stratum, true);
+					}
+					final String fileName = lm.source.lastSegment();
+					stratum.addFile(fileName, path);
+					stratum.addLineData(lm.sourceStartLine, fileName, 1, lm.targetStartLine+1, lm.targetEndLine - lm.targetStartLine + 1);
+				}
 			}
 		}
 		return generator.getString();
@@ -153,8 +155,9 @@ public class SmapSupport {
 	 */
 	public InputStream getModifiedByteCode(String smap, InputStream originalByteCode) throws CoreException, IOException {
 		byte[] byteCode = Files.readStreamIntoByteArray(originalByteCode);
+		byte[] updatedByteCode = new SDEInstaller(byteCode, smap.getBytes()).getUpdatedByteCode();
 		InputStream newByteCode = new ByteArrayInputStream(
-				new SDEInstaller(byteCode, smap.getBytes()).getUpdatedByteCode());
+				updatedByteCode);
 		return newByteCode;
 	}
 
