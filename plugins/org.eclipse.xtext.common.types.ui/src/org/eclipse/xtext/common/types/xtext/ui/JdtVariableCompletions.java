@@ -180,7 +180,7 @@ public class JdtVariableCompletions {
 			if (ctx != null && ctx.eResource() != null && ctx.eResource().getResourceSet() != null)
 				javaProject = javaProjectProvider.getJavaProject(ctx.eResource().getResourceSet());
 			return NamingConventions.suggestVariableNames(getVariableKind(varType),
-					NamingConventions.BK_TYPE_NAME, simpleTypeName, javaProject, isPlural?1:0, excludedNames.toArray(new String[0]), false);
+					NamingConventions.BK_TYPE_NAME, simpleTypeName, javaProject, isPlural?1:0, excludedNames.toArray(new String[excludedNames.size()]), false);
 		}
 		return new String[0];
 	}

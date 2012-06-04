@@ -86,7 +86,7 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 				else
 					names.add("<unnamed> (" + identifier(ttd) + ")");
 			}
-			masterList.setItems(names.toArray(new String[0]));
+			masterList.setItems(names.toArray(new String[names.size()]));
 			masterList.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
