@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
+Bundle-Localization: plugin
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtend2.lib
