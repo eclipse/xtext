@@ -48,10 +48,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class Z { @Property String x  @Property static String y}");
 		helper.assertError(clazz.getMembers().get(1), XTEND_FIELD, STATIC_PROPERTY);
 	}
+	
 	@Test public void testPropertyMustNotBeStatic_02() throws Exception {
 		XtendClass clazz = clazz("class Z { @Property String x  @Property String y}");
 		helper.assertNoErrors(clazz);
 	}
+	
 	@Test public void testPropertyMustNotBeStatic_03() throws Exception {
 		XtendClass clazz = clazz("class Z { @Property static String y}");
 		helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, STATIC_PROPERTY);

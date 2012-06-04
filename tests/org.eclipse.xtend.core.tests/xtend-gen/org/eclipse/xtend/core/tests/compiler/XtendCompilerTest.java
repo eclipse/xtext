@@ -289,59 +289,6 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testStaticProperty() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Property static String staticField");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Property String nonStaticField");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
-    _builder_1.append("public class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("private static String staticField;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("private String _nonStaticField;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public String getNonStaticField() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this._nonStaticField;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public void setNonStaticField(final String nonStaticField) {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("this._nonStaticField = nonStaticField;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1);
-  }
-  
-  @Test
   public void testItShadowing_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo<T> {");

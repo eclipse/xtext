@@ -119,30 +119,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	@Test def testStaticProperty() {
-		'''
-			class Foo {
-				@Property static String staticField
-				@Property String nonStaticField
-			}
-		'''.assertCompilesTo('''
-			@SuppressWarnings("all")
-			public class Foo {
-			  private static String staticField;
-			  
-			  private String _nonStaticField;
-			  
-			  public String getNonStaticField() {
-			    return this._nonStaticField;
-			  }
-			  
-			  public void setNonStaticField(final String nonStaticField) {
-			    this._nonStaticField = nonStaticField;
-			  }
-			}
-		''')
-	}
-	
 	@Test def testItShadowing_01() {
 		assertCompilesTo('''
 			class Foo<T> {
