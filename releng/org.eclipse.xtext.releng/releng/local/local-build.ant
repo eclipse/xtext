@@ -40,7 +40,7 @@
           -data '\${build.root}/buckminster.workspace' 
           -S '${user.home}/git/org.eclipse.xcore.releng/org.eclipse.emf.xcore.releng/commands.txt'            
          ================================= -->
-	<target name="run.headless.buckminster" description="description">
+	<target name="run.headless.buckminster" description="description" depends="cleanup">
 		<exec executable="${buckminster.home}/buckminster">
 			<arg value="-Declipse.p2.mirrors=false" />
 			<arg value="-Dbuild.root=${build.root}" />
