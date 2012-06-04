@@ -39,6 +39,6 @@ public class JvmUpperBoundImplCustom extends JvmUpperBoundImpl {
 	public String toString() {
 		if (typeReference != null)
 			return EXTENDS + super.toString();
-		return null;
+		return eClass().getName();
 	}
 }
