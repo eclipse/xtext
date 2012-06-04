@@ -702,8 +702,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 				getStorePreferences().putDouble(name, value);
 			}
 			dirty = true;
-			firePropertyChangeEvent(name, new Double(oldValue), new Double(
-					value));
+			firePropertyChangeEvent(name, Double.valueOf(oldValue), Double.valueOf(value));
 		} finally {
 			silentRunning = false;// Restart listening to preferences
 		}
@@ -728,7 +727,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 				getStorePreferences().putFloat(name, value);
 			}
 			dirty = true;
-			firePropertyChangeEvent(name, new Float(oldValue), new Float(value));
+			firePropertyChangeEvent(name, Float.valueOf(oldValue), Float.valueOf(value));
 		} finally {
 			silentRunning = false;// Restart listening to preferences
 		}
@@ -779,7 +778,7 @@ public class FixedScopedPreferenceStore extends EventManager implements IPersist
 				getStorePreferences().putLong(name, value);
 			}
 			dirty = true;
-			firePropertyChangeEvent(name, new Long(oldValue), new Long(value));
+			firePropertyChangeEvent(name, Long.valueOf(oldValue), Long.valueOf(value));
 		} finally {
 			silentRunning = false;// Restart listening to preferences
 		}
