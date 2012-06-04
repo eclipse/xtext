@@ -3,8 +3,6 @@ package de.itemis.statefullexer
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
 import com.google.common.collect.Multimaps
-import com.google.common.collect.Sets
-import java.util.Collection
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
@@ -98,25 +96,6 @@ class LexerStatesProvider implements ILexerStatesProvider {
 		new LexerStateNfa( /* owner2terminal, */start, start)
 	}
 	
-//	def private getFirstSolution(Grammar grammar, Multimap<AbstractElement, AbstractElement> followers) {
-//		val owner2terminal = grammar.terminalOwner
-//		val terminal2owner = Multimaps::invertFrom(owner2terminal, HashMultimap::create)
-//		
-//		val state2terminal = HashMultimap::<AbstractRule, AbstractElement>create
-//		val transitions = HashMultimap::<AbstractRule, Pair<AbstractElement, AbstractRule>>create
-//		for(t:owner2terminal.values) {
-//			val states = terminal2owner.get(t).toSet
-//			val followerstates = followers.get(t).map[terminal2owner.get(it)].flatten.toSet
-//			for(from:states)
-//				for(to:followerstates) 
-//					if(from == to)
-//						state2terminal.put(from, t)
-//					else 
-//						transitions.put(from, t -> to)
-//		}
-//		new Solution(state2terminal, transitions)
-//	}
-	
 	def private List<AbstractRule> getHidden(Grammar grammar) {
 		if(!grammar.hiddenTokens.empty)
 			grammar.hiddenTokens
@@ -206,87 +185,7 @@ class Util {
 	}
 }
 
-@Data
-class Solution {
-	Multimap<AbstractRule, AbstractElement> state2terminal
-	Multimap<AbstractRule, Pair<AbstractElement, AbstractRule>> transitions
-	
-	
-	
-	def getStateTokens(AbstractRule state) {
-		state2terminal.get(state).map[token].toSet
-	}
-	
-	def getTransitionTokens(AbstractRule state) {
-		transitions.get(state).map[key.token].toSet
-	}
-	
-	def getQuality() {
-		state2terminal.keySet.map[Sets::intersection(stateTokens, transitionTokens).size].reduce([Integer i, Integer j| i + j])
-	}
-	
-	def getAmbiguousTransitions() {
-		transitions.entries.filter[key.stateTokens.contains(value.key.token)]
-	}
-	
-	def mutateForward(AbstractRule sourceState, AbstractElement element, Collection<AbstractElement> followers){
-		println('''mutateForward(«sourceState.name», «element.tokenName», {«followers.map[tokenName].join(", ")»})''')
-		val newstate2terminal = LinkedHashMultimap::create(state2terminal)
-		val newtransitions = LinkedHashMultimap::create(transitions)
-//		val sourceStates = transitions.entries.filter([value.key == element]).map[key].toSet	
-		val targetStates = transitions.values.filter([key == element]).map[value].toSet	
-		for(e:newstate2terminal.entries.toList)
-			if(followers.contains(e.value))
-				newstate2terminal.remove(e.key, e.value) 
-		for(e:newtransitions.entries.toList)
-			if(e.key == sourceState && e.value.key == element)
-				newtransitions.remove(e.key, e.value)
-//		for(s:sourceStates) { 
-			newstate2terminal.put(sourceState, element)
-			for(f:followers)
-				for(t:targetStates) 
-					transitions.put(sourceState, f -> t)
-//		}
-		val result = new Solution(newstate2terminal, newtransitions)
-		println(result)
-		result 
-	}
-	
-//	def toNfa() {
-//		var i = 0
-//		val states = <AbstractRule, LexerState>newLinkedHashMap()
-//		for(e:state2terminal.asMap.entrySet) 
-//			states.put(e.key, new LexerState(i = i + 1, newArrayList(), e.value.map[token].toSet))
-//		for(t:transitions.entries) {
-//			var from = states.get(t.key) 
-//			var to = states.get(t.value.value)
-//			if(from == null)
-//				states.put(t.key, from = new LexerState(i = i + 1, newArrayList(), newHashSet()))
-//			if(to == null)
-//				states.put(t.value.value, to = new LexerState(i = i + 1, newArrayList(), newHashSet()))
-//			from.outgoingTransitions.add(new LexerStateTransition(t.value.key.token, to))
-//		}
-//		val start = states.values.iterator.next
-//		new LexerStateNfa(null, start, start)
-//	}
-	
-	override toString() '''
-		Solution {
-			«FOR t:ambiguousTransitions»
-				Ambiguous Transition: «t.key.name» ---«t.value.key.tokenName»---> «t.value.value.name»
-			«ENDFOR»
-			«FOR s:state2terminal.asMap.entrySet»
-				State «s.key.name»: «s.value.map[tokenName].join(", ")»
-			«ENDFOR»
-			«FOR t:transitions.entries»
-				Transition: «t.key.name» ---«t.value.key.tokenName»---> «t.value.value.name»
-			«ENDFOR»
-		}
-	'''
-}
-
 @Data class LexerStateNfa implements ILexerStatesProvider$ILexerStates {
-//	Multimap<AbstractRule, EObject> owner2terminal
 	ILexerStatesProvider$ILexerState start
 	ILexerStatesProvider$ILexerState stop
 	
