@@ -5,5 +5,4 @@ Bundle-SymbolicName: org.eclipse.xtend.m2e;singleton:=true
 Bundle-Version: 2.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Vendor: %providerName
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.m2e.core;bundle-version="1.0.0"
