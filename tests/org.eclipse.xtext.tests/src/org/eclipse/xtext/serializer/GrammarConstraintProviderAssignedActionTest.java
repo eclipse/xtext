@@ -243,13 +243,13 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Addition: Addition_Bin | Prim_Val;\n");
-		expected.append("  Addition_Bin returns Bin: ((left+=Addition_Bin_1_0 op='+' right=Multiplication) | (left+=Multiplication_Bin_1_0 op='*' right=Prim));\n");
+		expected.append("Addition: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("  Addition_Multiplication_Bin returns Bin: ((left+=Addition_Bin_1_0 op='+' right=Multiplication) | (left+=Multiplication_Bin_1_0 op='*' right=Prim));\n");
 		expected.append("  Prim_Val returns Val: name=ID;\n");
-		expected.append("Addition_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Prim: Addition_Bin | Prim_Val;");
+		expected.append("Addition_Bin_1_0: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication_Bin_1_0: Addition_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Prim: Addition_Multiplication_Bin | Prim_Val;");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -261,19 +261,19 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Assignment ')';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Assignment: Addition_Bin | Prim_Val;\n");
-		expected.append("  Addition_Bin returns Bin: (\n");
+		expected.append("Assignment: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("  Addition_Assignment_Multiplication_Bin returns Bin: (\n");
 		expected.append("    (left+=Addition_Bin_1_0 op='+' right=Multiplication) | \n");
 		expected.append("    (left+=Multiplication_Bin_1_0 op='*' right=Prim) | \n");
 		expected.append("    (left+=Assignment_Bin_1_0 op='=' right=Addition)\n");
 		expected.append(");\n");
 		expected.append("  Prim_Val returns Val: name=ID;\n");
-		expected.append("Assignment_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Addition: Addition_Bin | Prim_Val;\n");
-		expected.append("Addition_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication: Addition_Bin | Prim_Val;\n");
-		expected.append("Multiplication_Bin_1_0: Addition_Bin | Prim_Val;\n");
-		expected.append("Prim: Addition_Bin | Prim_Val;");
+		expected.append("Assignment_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Addition: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Addition_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Multiplication_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
+		expected.append("Prim: Addition_Assignment_Multiplication_Bin | Prim_Val;");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -414,8 +414,8 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		grammar.append("Foo: foo=ID {Act1.f1=current} act1=ID val=ID;\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model: Model_Act1 | Model_Act2;\n");
-		expected.append("  Model_Act1 returns Act1: (act1=ID | (f1=Foo_Act1_1 act1=ID val=ID));\n");
+		expected.append("Model: Foo_Model_Act1 | Model_Act2;\n");
+		expected.append("  Foo_Model_Act1 returns Act1: (act1=ID | (f1=Foo_Act1_1 act1=ID val=ID));\n");
 		expected.append("  Model_Act2 returns Act2: (left=Model_Act2_1_1_0 act2=ID);\n");
 		expected.append("Model_Act2_1_1_0: Foo_Act1;\n");
 		expected.append("  Foo_Act1 returns Act1: (f1=Foo_Act1_1 act1=ID val=ID);\n");
