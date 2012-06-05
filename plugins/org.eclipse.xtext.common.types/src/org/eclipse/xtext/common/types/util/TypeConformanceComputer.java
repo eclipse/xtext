@@ -220,6 +220,8 @@ public class TypeConformanceComputer {
 		// TODO handle arrays
 		if (containsPrimitiveOrAnyReferences(types)) {
 			List<JvmTypeReference> withoutPrimitives = replacePrimitivesAndRemoveAnyReferences(types);
+			if (withoutPrimitives.equals(types))
+				return null;
 			return getCommonSuperType(withoutPrimitives);
 		}
 		JvmTypeReference firstType = types.get(0);
