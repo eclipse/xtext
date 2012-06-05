@@ -35,8 +35,6 @@ class P2DirectorLaunch {
 		launchConfiguration.setAttribute("location", LOCATION)
 		launchConfiguration.setAttribute("product", PRODUCT)
 		launchConfiguration.setAttribute("useProduct", true)
-		launchConfiguration.setAttribute("org.eclipse.debug.core.capture_output", false)
-		launchConfiguration.setAttribute("org.eclipse.debug.ui.ATTR_CONSOLE_OUTPUT_ON", false)
-		launchConfiguration.setAttribute("org.eclipse.jdt.launching.PROGRAM_ARGUMENTS", args)
+		launchConfiguration.setAttribute("org.eclipse.jdt.launching.PROGRAM_ARGUMENTS", args(destinationPath))
 	}
 }
