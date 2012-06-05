@@ -25,6 +25,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -79,7 +80,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *     )
 	 */
 	@Override
-	protected void sequence_XAdditiveExpression(EObject context, XBinaryOperation operation) {
+	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(EObject context, XBinaryOperation operation) {
 		INodesForEObjectProvider nodes = createNodeProvider(operation);
 		SequenceFeeder acceptor = createSequencerFeeder(operation, nodes);
 		XAdditiveExpressionElements opAdd = grammarAccess.getXAdditiveExpressionAccess();
@@ -430,7 +431,23 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 */
 	@Deprecated
 	protected void sequence_XExpression(EObject context, XNullLiteral semanticObject) {
-		sequence_XNullLiteral(context, semanticObject);
+		super.sequence_XNullLiteral(context, semanticObject);
+	}
+	
+	/**
+	 * This is for backwards compatibility < 2.3RC3 due to change in the naming strategy for sequencer methods
+	 */
+	@Deprecated
+	protected void sequence_XAdditiveExpression(EObject context, XBinaryOperation operation) {
+		sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(context, operation);
+	}
+	
+	/**
+	 * This is for backwards compatibility < 2.3RC3 due to change in the naming strategy for sequencer methods
+	 */
+	@Deprecated
+	protected void sequence_XAssignment(EObject context, XAssignment semanticObject) {
+		super.sequence_XAssignment_XMemberFeatureCall(context, semanticObject);
 	}
 	
 }

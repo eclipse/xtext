@@ -8,16 +8,23 @@
 package org.eclipse.xtext.generator.serializer;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
@@ -54,8 +61,55 @@ public class SemanticSequencerUtil {
 		return gcp.getConstraints(grammar);
 	}
 
+	protected static class SuperGrammar extends AdapterImpl {
+		protected Grammar grammar;
+
+		public SuperGrammar(Grammar grammar) {
+			super();
+			this.grammar = grammar;
+		}
+
+		public Grammar getGrammar() {
+			return grammar;
+		}
+
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type == SuperGrammar.class;
+		}
+
+	}
+
+	protected ResourceSet cloneResourceSet(ResourceSet rs) {
+		XtextResourceSet result = new XtextResourceSet();
+		result.setPackageRegistry(rs.getPackageRegistry());
+		result.setResourceFactoryRegistry(rs.getResourceFactoryRegistry());
+		result.setURIConverter(rs.getURIConverter());
+		if (rs instanceof XtextResourceSet) {
+			XtextResourceSet xrs = (XtextResourceSet) rs;
+			result.setClasspathURIContext(xrs.getClasspathURIContext());
+			result.setClasspathUriResolver(xrs.getClasspathUriResolver());
+		}
+		return result;
+	}
+
+	public Grammar getSuperGrammar(Grammar grammar) {
+		if (grammar.getUsedGrammars().isEmpty())
+			return null;
+		SuperGrammar sg = (SuperGrammar) EcoreUtil.getExistingAdapter(grammar, SuperGrammar.class);
+		if (sg != null)
+			return sg.getGrammar();
+		URI uri = grammar.getUsedGrammars().get(0).eResource().getURI();
+		Resource resource = cloneResourceSet(grammar.eResource().getResourceSet()).getResource(uri, true);
+		Grammar result = (Grammar) resource.getContents().get(0);
+		grammar.eAdapters().add(new SuperGrammar(result));
+		return result;
+	}
+
 	public Collection<IConstraint> getGrammarConstraints(Grammar grammar) {
-		Set<IConstraint> result = Sets.newTreeSet();
+		if (grammar == null)
+			return Collections.emptySet();
+		Set<IConstraint> result = Sets.newLinkedHashSet();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
 			result.addAll(ctx.getConstraints());
 		return result;
