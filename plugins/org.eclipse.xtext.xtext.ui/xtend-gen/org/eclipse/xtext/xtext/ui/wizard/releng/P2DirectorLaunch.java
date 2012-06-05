@@ -50,9 +50,9 @@ public class P2DirectorLaunch {
   
   private static String args(final String destination) {
     String _plus = ("-repository  " + P2DirectorLaunch.REPOSITORY);
-    String _plus_1 = (_plus + " -destination ");
+    String _plus_1 = (_plus + " -destination \"");
     String _plus_2 = (_plus_1 + destination);
-    String _plus_3 = (_plus_2 + " -profile ");
+    String _plus_3 = (_plus_2 + "\" -profile ");
     String _plus_4 = (_plus_3 + P2DirectorLaunch.PROFILE);
     String _plus_5 = (_plus_4 + " -i ");
     String _join = IterableExtensions.join(P2DirectorLaunch.IUS, " -i ");
@@ -64,6 +64,8 @@ public class P2DirectorLaunch {
     launchConfiguration.setAttribute("location", P2DirectorLaunch.LOCATION);
     launchConfiguration.setAttribute("product", P2DirectorLaunch.PRODUCT);
     launchConfiguration.setAttribute("useProduct", true);
+    launchConfiguration.setAttribute("org.eclipse.debug.core.capture_output", false);
+    launchConfiguration.setAttribute("org.eclipse.debug.ui.ATTR_CONSOLE_OUTPUT_ON", false);
     String _args = P2DirectorLaunch.args(destinationPath);
     launchConfiguration.setAttribute("org.eclipse.jdt.launching.PROGRAM_ARGUMENTS", _args);
   }

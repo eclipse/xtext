@@ -28,13 +28,15 @@ class P2DirectorLaunch {
 	}
 	
 	def private static String args(String destination) {
-		"-repository  "+REPOSITORY+" -destination "+destination+" -profile "+ PROFILE + " -i " + IUS.join(" -i ")
+		"-repository  "+REPOSITORY+" -destination \""+destination+"\" -profile "+ PROFILE + " -i " + IUS.join(" -i ")
 	}
 	
 	def static setupLaunchConfiguration(ILaunchConfigurationWorkingCopy launchConfiguration, String destinationPath) {
 		launchConfiguration.setAttribute("location", LOCATION)
 		launchConfiguration.setAttribute("product", PRODUCT)
 		launchConfiguration.setAttribute("useProduct", true)
+		launchConfiguration.setAttribute("org.eclipse.debug.core.capture_output", false)
+		launchConfiguration.setAttribute("org.eclipse.debug.ui.ATTR_CONSOLE_OUTPUT_ON", false)
 		launchConfiguration.setAttribute("org.eclipse.jdt.launching.PROGRAM_ARGUMENTS", args(destinationPath))
 	}
 }
