@@ -6,6 +6,7 @@ import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class AbstractSemanticSequencer extends GeneratedFile {
@@ -64,7 +66,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   @Inject
   private Context2NameFunction ctx2name;
   
-  public <T extends ENamedElement> List<T> sort(final Iterable<T> iterable) {
+  public <T extends ENamedElement> List<T> sortByName(final Iterable<T> iterable) {
     final Function2<T,T,Integer> _function = new Function2<T,T,Integer>() {
         public Integer apply(final T p1, final T p2) {
           String _name = p1.getName();
@@ -100,8 +102,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       };
     Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(_filter, _function_1);
     Set<EPackage> _set = IterableExtensions.<EPackage>toSet(_map);
-    List<EPackage> _sort = this.<EPackage>sort(_set);
-    return _sort;
+    List<EPackage> _sortByName = this.<EPackage>sortByName(_set);
+    return _sortByName;
   }
   
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
@@ -129,31 +131,13 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
     Set<EClass> _set = IterableExtensions.<EClass>toSet(_filter);
-    List<EClass> _sort = this.<EClass>sort(_set);
-    return _sort;
+    List<EClass> _sortByName = this.<EClass>sortByName(_set);
+    return _sortByName;
   }
   
   public Map<IConstraint,List<EObject>> getAccessedConstraints(final EClass clazz) {
     Map<IConstraint,List<EObject>> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar, clazz);
     return _grammarConstraints;
-  }
-  
-  public Collection<IConstraint> getAccessedConstraints() {
-    Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
-    return _grammarConstraints;
-  }
-  
-  public boolean usesSuperGrammar() {
-    Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
-    final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
-        public Boolean apply(final IConstraint c) {
-          Grammar _declaringGrammar = c.getDeclaringGrammar();
-          boolean _notEquals = (!Objects.equal(_declaringGrammar, AbstractSemanticSequencer.this.grammar));
-          return Boolean.valueOf(_notEquals);
-        }
-      };
-    boolean _exists = IterableExtensions.<IConstraint>exists(_accessedConstraints, _function);
-    return _exists;
   }
   
   public CharSequence getFileContents(final GenFileName filename) {
@@ -173,9 +157,18 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       file.imported(Acceptor.class);
       file.imported(Inject.class);
       file.imported(Provider.class);
+      final Collection<IConstraint> localConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
+      Grammar _superGrammar = this.sequencerUtil.getSuperGrammar(this.grammar);
+      final Collection<IConstraint> superConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
       String _xifexpression = null;
-      boolean _usesSuperGrammar = this.usesSuperGrammar();
-      if (_usesSuperGrammar) {
+      final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
+          public Boolean apply(final IConstraint it) {
+            boolean _contains = superConstraints.contains(it);
+            return Boolean.valueOf(_contains);
+          }
+        };
+      boolean _exists = IterableExtensions.<IConstraint>exists(localConstraints, _function);
+      if (_exists) {
         GenFileName _semanticSequencer = this.names.getSemanticSequencer();
         EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
         Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
@@ -227,8 +220,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
-      final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
+      final Function1<IConstraint,Boolean> _function_1 = new Function1<IConstraint,Boolean>() {
           public Boolean apply(final IConstraint e) {
             boolean _and = false;
             EClass _type = e.getType();
@@ -236,21 +228,22 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             if (!_notEquals) {
               _and = false;
             } else {
-              Grammar _declaringGrammar = e.getDeclaringGrammar();
-              boolean _equals = Objects.equal(_declaringGrammar, AbstractSemanticSequencer.this.grammar);
-              _and = (_notEquals && _equals);
+              boolean _contains = superConstraints.contains(e);
+              boolean _not = (!_contains);
+              _and = (_notEquals && _not);
             }
             return Boolean.valueOf(_and);
           }
         };
-      Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function);
-      final Function1<IConstraint,CharSequence> _function_1 = new Function1<IConstraint,CharSequence>() {
+      Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(localConstraints, _function_1);
+      List<IConstraint> _sort = IterableExtensions.<IConstraint>sort(_filter);
+      final Function1<IConstraint,CharSequence> _function_2 = new Function1<IConstraint,CharSequence>() {
           public CharSequence apply(final IConstraint e) {
             CharSequence _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(file, e);
             return _genMethodSequence;
           }
         };
-      String _join = IterableExtensions.<IConstraint>join(_filter, "\n\n", _function_1);
+      String _join = IterableExtensions.<IConstraint>join(_sort, "\n\n", _function_2);
       _builder.append(_join, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("}");
@@ -263,10 +256,36 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _xblockexpression;
   }
   
+  public <K extends Object, V extends Object> Map<K,V> toMap(final Iterable<Pair<K,V>> items) {
+    HashMap<K,V> _xblockexpression = null;
+    {
+      final HashMap<K,V> result = CollectionLiterals.<K, V>newHashMap();
+      for (final Pair<K,V> i : items) {
+        K _key = i.getKey();
+        V _value = i.getValue();
+        result.put(_key, _value);
+      }
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
   public CharSequence genMethodCreateSequence(final JavaEMFFile file) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public void createSequence(EObject context, EObject semanticObject) {");
     _builder.newLine();
+    _builder.append("\t");
+    Grammar _superGrammar = this.sequencerUtil.getSuperGrammar(this.grammar);
+    Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
+    final Function1<IConstraint,Pair<IConstraint,IConstraint>> _function = new Function1<IConstraint,Pair<IConstraint,IConstraint>>() {
+        public Pair<IConstraint,IConstraint> apply(final IConstraint it) {
+          Pair<IConstraint,IConstraint> _mappedTo = Pair.<IConstraint, IConstraint>of(it, it);
+          return _mappedTo;
+        }
+      };
+    Iterable<Pair<IConstraint,IConstraint>> _map = IterableExtensions.<IConstraint, Pair<IConstraint,IConstraint>>map(_grammarConstraints, _function);
+    final Map<IConstraint,IConstraint> superConstraints = this.<IConstraint, IConstraint>toMap(_map);
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     int pkgi = 0;
     _builder.newLineIfNotEmpty();
@@ -305,14 +324,14 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             {
               Map<IConstraint,List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
               Set<Entry<IConstraint,List<EObject>>> _entrySet = _accessedConstraints.entrySet();
-              final Function1<Entry<IConstraint,List<EObject>>,String> _function = new Function1<Entry<IConstraint,List<EObject>>,String>() {
+              final Function1<Entry<IConstraint,List<EObject>>,String> _function_1 = new Function1<Entry<IConstraint,List<EObject>>,String>() {
                   public String apply(final Entry<IConstraint,List<EObject>> e) {
                     IConstraint _key = e.getKey();
                     String _name = _key.getName();
                     return _name;
                   }
                 };
-              List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function);
+              List<Entry<IConstraint,List<EObject>>> _sortBy = IterableExtensions.<Entry<IConstraint,List<EObject>>, String>sortBy(_entrySet, _function_1);
               for(final Entry<IConstraint,List<EObject>> ctx : _sortBy) {
                 _builder.append("\t");
                 _builder.append("\t");
@@ -328,13 +347,13 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("if(");
                 {
                   List<EObject> _value = ctx.getValue();
-                  final Function1<EObject,String> _function_1 = new Function1<EObject,String>() {
+                  final Function1<EObject,String> _function_2 = new Function1<EObject,String>() {
                       public String apply(final EObject e) {
                         String _contextName = AbstractSemanticSequencer.this.ctx2name.getContextName(e);
                         return _contextName;
                       }
                     };
-                  List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
+                  List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_2);
                   boolean _hasElements = false;
                   for(final EObject c : _sortBy_1) {
                     if (!_hasElements) {
@@ -353,9 +372,29 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("\t");
-                _builder.append("sequence_");
                 IConstraint _key = ctx.getKey();
-                String _simpleName = _key.getSimpleName();
+                final IConstraint superConstraint = superConstraints.get(_key);
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                IConstraint _xifexpression = null;
+                boolean _equals = Objects.equal(superConstraint, null);
+                if (_equals) {
+                  IConstraint _key_1 = ctx.getKey();
+                  _xifexpression = _key_1;
+                } else {
+                  _xifexpression = superConstraint;
+                }
+                final IConstraint constraint = _xifexpression;
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("sequence_");
+                String _simpleName = constraint.getSimpleName();
                 _builder.append(_simpleName, "				");
                 _builder.append("(context, (");
                 String _importedGenTypeName = file.importedGenTypeName(type);

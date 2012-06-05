@@ -181,7 +181,7 @@ public class ElementMatcherTestLanguageSemanticSequencer extends AbstractDelegat
 				}
 				else if(context == grammarAccess.getModelRule() ||
 				   context == grammarAccess.getRuleCallsRule()) {
-					sequence_RuleCalls(context, (RuleCallsSub) semanticObject); 
+					sequence_RuleCalls_RuleCallsSub(context, (RuleCallsSub) semanticObject); 
 					return; 
 				}
 				else break;
@@ -452,7 +452,7 @@ public class ElementMatcherTestLanguageSemanticSequencer extends AbstractDelegat
 	 * Constraint:
 	 *     (sub='sub' name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?)
 	 */
-	protected void sequence_RuleCalls(EObject context, RuleCallsSub semanticObject) {
+	protected void sequence_RuleCalls_RuleCallsSub(EObject context, RuleCallsSub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
