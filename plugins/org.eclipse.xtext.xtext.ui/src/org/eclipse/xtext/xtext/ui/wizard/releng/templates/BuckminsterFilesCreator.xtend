@@ -6,6 +6,7 @@ import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo
 
 import static org.eclipse.xtext.xtext.ui.wizard.releng.templates.BuckminsterFilesCreator.*
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor
+import org.eclipse.xtext.xtext.ui.wizard.releng.P2DirectorLaunch
 
 /**
  * Creates some buckminster files. cquery, spec, rmap etc.
@@ -20,6 +21,7 @@ class BuckminsterFilesCreator {
 	static String PROJECT_RMAP_NAME = PROJECT+".rmap"
 	static String PLATFORM_RMAP_NAME = PROJECT+"s-platform.rmap"
 	static String COMMANDS_FILE_NAME = "commands.txt"
+	static String INSTALL_BUCKY_LAUNCH = ".InstallHeadlessBuckminster.launch"
 	
 	IProjectFactoryContributor$IFileCreator fileCreator
 	
@@ -167,4 +169,42 @@ class BuckminsterFilesCreator {
 		</rm:rmap>
 		'''.writeToFile(PROJECT_RMAP_NAME)
 	}
+	
+	/**
+	 * Creates launch configuration file that installs headless buckminster<br>
+	 * @param projectInfo Project configuration to use
+	 */
+	def  createInstallBuckminsterLaunch(RelengProjectInfo projectInfo) {
+		'''
+		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+		<launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
+		<booleanAttribute key="append.args" value="true"/>
+		<booleanAttribute key="askclear" value="true"/>
+		<booleanAttribute key="automaticAdd" value="true"/>
+		<booleanAttribute key="automaticValidate" value="false"/>
+		<stringAttribute key="bootstrap" value=""/>
+		<stringAttribute key="checked" value="[NONE]"/>
+		<booleanAttribute key="clearConfig" value="false"/>
+		<booleanAttribute key="clearws" value="false"/>
+		<booleanAttribute key="clearwslog" value="false"/>
+		<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Install headless buckminster"/>
+		<booleanAttribute key="default" value="true"/>
+		<booleanAttribute key="includeOptional" value="true"/>
+		<stringAttribute key="location" value="«P2DirectorLaunch::LOCATION»"/>
+		<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog «P2DirectorLaunch::args»"/>
+		<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+		<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms40m -Xmx512m"/>
+		<stringAttribute key="pde.version" value="3.3"/>
+		<stringAttribute key="product" value="«P2DirectorLaunch::PRODUCT»"/>
+		<booleanAttribute key="show_selected_only" value="false"/>
+		<stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>
+		<booleanAttribute key="tracing" value="false"/>
+		<booleanAttribute key="useCustomFeatures" value="false"/>
+		<booleanAttribute key="useDefaultConfig" value="true"/>
+		<booleanAttribute key="useDefaultConfigArea" value="true"/>
+		<booleanAttribute key="useProduct" value="true"/>
+		</launchConfiguration>
+		'''.writeToFile(INSTALL_BUCKY_LAUNCH)
+	}
+	
 }

@@ -21,6 +21,7 @@ public class Messages extends NLS {
 	public static String WizardNewRelengProjectCreationPage_addTestButton;
 	public static String WizardNewRelengProjectCreationPage_browseButton;
 	public static String WizardNewRelengProjectCreationPage_buckyGroupLbl;
+	public static String WizardNewRelengProjectCreationPage_buckminsteInstallText;
 	public static String WizardNewRelengProjectCreationPage_buckyInstallFieldLbl;
 	public static String WizardNewRelengProjectCreationPage_buckyControlInfo;
 	public static String WizardNewRelengProjectCreationPage_featFieldLbl;

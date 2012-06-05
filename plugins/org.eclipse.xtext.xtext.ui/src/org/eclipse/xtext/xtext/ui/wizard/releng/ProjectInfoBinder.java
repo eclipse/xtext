@@ -144,10 +144,12 @@ public class ProjectInfoBinder {
 				File buckyHeadless = new File(value.toString());
 				File[] files = buckyHeadless.listFiles();
 				boolean buckminsterExecutableFound = false;
-				for (File file : files) {
-					if (file.isFile() && "buckminster".equals(file.getName())) { //$NON-NLS-1$
-						buckminsterExecutableFound = true;
-						break;
+				if (files != null) {
+					for (File file : files) {
+						if (file.isFile() && "buckminster".equals(file.getName())) { //$NON-NLS-1$
+							buckminsterExecutableFound = true;
+							break;
+						}
 					}
 				}
 				if (!buckminsterExecutableFound) {
