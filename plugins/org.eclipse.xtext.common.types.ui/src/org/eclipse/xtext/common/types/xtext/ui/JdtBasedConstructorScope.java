@@ -211,7 +211,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 		
 		protected URI computeURI() {
 			String typeURI = uriHelper.getFullURI(type).toString();
-			return URI.createURI(typeURI + type.getElementName() + "()");
+			return URI.createURI(typeURI + '.' + type.getElementName() + "()");
 		}
 		
 	}
