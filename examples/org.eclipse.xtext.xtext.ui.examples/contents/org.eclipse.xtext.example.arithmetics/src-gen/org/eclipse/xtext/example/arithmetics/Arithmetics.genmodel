@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.example.arithmetics" forceOverwrite="true" modelName="Arithmetics"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.arithmetics.edit"
-    editorPluginID="org.eclipse.xtext.example.arithmetics.editor">
+    editorPluginID="org.eclipse.xtext.example.arithmetics.editor" runtimeVersion="2.5">
   <genPackages prefix="Arithmetics" basePackage="org.eclipse.xtext.example.arithmetics"
       disposableProviderFactory="true" ecorePackage="Arithmetics.ecore#/">
     <genClasses ecoreClass="Arithmetics.ecore#//Module">
