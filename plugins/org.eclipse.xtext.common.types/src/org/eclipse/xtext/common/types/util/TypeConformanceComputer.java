@@ -149,6 +149,8 @@ public class TypeConformanceComputer {
 		}
 		
 		public boolean accept(JvmTypeReference superType, int distance) {
+			if (superType == null)
+				return false;
 			JvmType type = superType.getType();
 			rawTypeToReference.put(type, resolver.apply(superType));
 			if (distances.contains(type)) {
