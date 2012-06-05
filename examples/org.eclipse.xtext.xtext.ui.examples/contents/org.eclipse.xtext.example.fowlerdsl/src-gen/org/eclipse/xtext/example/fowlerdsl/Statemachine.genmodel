@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.example.fowlerdsl" forceOverwrite="true" modelName="Statemachine"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.fowlerdsl.edit"
-    editorPluginID="org.eclipse.xtext.example.fowlerdsl.editor">
+    editorPluginID="org.eclipse.xtext.example.fowlerdsl.editor" runtimeVersion="2.5">
   <genPackages prefix="Statemachine" basePackage="org.eclipse.xtext.example.fowlerdsl"
       disposableProviderFactory="true" ecorePackage="Statemachine.ecore#/">
     <genClasses ecoreClass="Statemachine.ecore#//Statemachine">
