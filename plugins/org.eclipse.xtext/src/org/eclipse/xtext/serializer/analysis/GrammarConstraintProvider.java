@@ -154,8 +154,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected EClass type;
 
-		protected URI typeURI;
-
 		public Constraint(EClass type, ConstraintElement body, GrammarConstraintProvider provider) {
 			super();
 			this.type = type;
@@ -205,18 +203,17 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return getName().compareTo(o.getName());
 		}
 
-		protected URI getTypeURI() {
-			if (typeURI == null)
-				typeURI = type == null ? URI.createURI("null") : EcoreUtil.getURI(type);
-			return typeURI;
-		}
-
 		@Override
 		public boolean equals(Object obj) {
 			if (!(obj instanceof Constraint))
 				return false;
 			Constraint c = (Constraint) obj;
-			if (!getTypeURI().equals(c.getTypeURI()))
+			if (type != null && c.type != null) {
+				if (!type.getName().equals(c.type.getName()))
+					return false;
+				if (!type.getEPackage().getNsURI().equals(c.type.getEPackage().getNsURI()))
+					return false;
+			} else if (type != null || c.type != null)
 				return false;
 			return (body == null && c.body == null) || (body != null && body.equals(c.body));
 		}
@@ -273,7 +270,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		@Override
 		public int hashCode() {
-			return getTypeURI().hashCode() + (body == null ? 0 : (7 * body.hashCode()));
+			int result = body == null ? 0 : body.hashCode();
+			if (type != null) {
+				result += 7 * type.getName().hashCode();
+				result += 13 * type.getEPackage().getNsURI().hashCode();
+			}
+			return result;
 		}
 
 		protected void initLists() {
