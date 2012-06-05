@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.releng;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
@@ -17,12 +18,22 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfigurationType;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ListViewer;
@@ -38,10 +49,13 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Strings;
 
 //import org.eclipse.jface.internal.databinding.provisional.fieldassist.ControlDecorationSupport;
 
@@ -54,6 +68,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 
 	private final IStructuredSelection selection;
 	private final RelengProjectInfo projectInfo;
+	private DataBindingContext dbc;
 
 	/**
 	 * Constructs a new WizardNewRelengXtextProjectCreationPage.
@@ -87,10 +102,11 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		Text sitePrjField = createSiteFeatureControl(prjGroup);
 		Group buckyGroup = createTreeRowGroup(pageMain, Messages.WizardNewRelengProjectCreationPage_buckyGroupLbl, 0);
 		Text buckyField = createBuckyControl(buckyGroup);
+		createInstallationText(buckyGroup, Messages.WizardNewRelengProjectCreationPage_buckminsteInstallText,
+				buckyField);
 		ListViewer testsList = createTestsControl(buckyGroup);
 
-		//Binding stuff
-		DataBindingContext dbc = new DataBindingContext();
+		dbc = new DataBindingContext();
 		WizardPageSupport.create(this, dbc);
 
 		ProjectInfoBinder binder = new ProjectInfoBinder(dbc, projectInfo);
@@ -105,7 +121,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		setControl(pageMain);
 		Dialog.applyDialogFont(getControl());
 
-		loadInitialValues(selection, featureProjectField);
+		loadInitialValues(selection, featureProjectField, buckyField);
 	}
 
 	private Group createTreeRowGroup(Composite pageMain, String name, int vertIdent) {
@@ -165,7 +181,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		Label projectLabel = new Label(parent, SWT.NONE);
 		projectLabel.setText(Messages.WizardNewRelengProjectCreationPage_sitePrjFieldLbl);
 		projectLabel.setFont(parent.getFont());
-
+		projectLabel.setLayoutData(new GridData());
 		// text field
 		Text text = new Text(parent, SWT.BORDER);
 		GridData grData = new GridData(GridData.FILL_HORIZONTAL);
@@ -176,10 +192,68 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return text;
 	}
 
+	private Link createInstallationText(final Composite parent, final String text, final Text buckyField) {
+		Link link = new Link(parent, SWT.NONE);
+		GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
+		layoutData.horizontalSpan = 3;
+		layoutData.horizontalIndent = 2;
+		link.setLayoutData(layoutData);
+		link.setText(text);
+		link.setToolTipText("Click here to install buckminster headless from "+P2DirectorLaunch.REPOSITORY);
+		link.setFont(parent.getFont());
+		link.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				super.widgetSelected(e);
+				final ILaunchConfigurationType configurationType = DebugPlugin.getDefault().getLaunchManager()
+						.getLaunchConfigurationType("org.eclipse.pde.ui.RuntimeWorkbench");
+
+				try {
+					IRunnableWithProgress runnable = new IRunnableWithProgress() {
+						public void run(IProgressMonitor monitor) throws InvocationTargetException,
+								InterruptedException {
+							SubMonitor localmonitor = SubMonitor.convert(monitor, "Installing Buckminster", 200);
+							ILaunchConfigurationWorkingCopy workingCopy;
+							try {
+								workingCopy = configurationType.newInstance(null, "Install buckminster headless");
+								String destinationPath = buckyField.getText();
+								if (Strings.isNullOrEmpty(destinationPath)) {
+									destinationPath = P2DirectorLaunch.DESTINATION_JAVA;
+								}
+								P2DirectorLaunch.setupLaunchConfiguration(workingCopy, destinationPath);
+								ILaunch launch = workingCopy.launch(ILaunchManager.RUN_MODE, localmonitor.newChild(20));
+								while (!localmonitor.isCanceled() && !launch.isTerminated()) {
+									localmonitor.worked(10);
+									localmonitor.setWorkRemaining(180);
+									Thread.sleep(200l);
+								}
+								buckyField.setText(destinationPath);
+								dbc.updateModels();
+							} catch (CoreException e) {
+								throw new InvocationTargetException(e);
+							}
+						}
+					};
+					new ProgressMonitorDialog(parent.getShell()).run(false, true, runnable);
+
+				} catch (InvocationTargetException e2) {
+					// handle exception
+					e2.printStackTrace();
+				} catch (InterruptedException e3) {
+					// handle cancelation
+					e3.printStackTrace();
+				}
+			}
+		});
+		return link;
+	}
+
 	private Text createBuckyControl(final Composite parent) {
 		Triple<Label, Text, Button> selectionControl = createSelectionControl(parent,
 				Messages.WizardNewRelengProjectCreationPage_buckyInstallFieldLbl);
 		final Text buckyField = selectionControl.getSecond();
+		buckyField.setEditable(true);
+
 		ControlDecoration dec = new ControlDecoration(buckyField, SWT.DOWN | SWT.LEFT, parent);
 		FieldDecoration infoIndication = FieldDecorationRegistry.getDefault().getFieldDecoration(
 				FieldDecorationRegistry.DEC_INFORMATION);
@@ -205,7 +279,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	private ListViewer createTestsControl(final Composite parent) {
 		// label
 		Label projectLabel = new Label(parent, SWT.NONE);
-		GridData gridData = new GridData(SWT.NONE);
+		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.BEGINNING;
 		projectLabel.setLayoutData(gridData);
 		projectLabel.setText(Messages.WizardNewRelengProjectCreationPage_testsListLbl);
@@ -285,11 +359,13 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		return initialSelection;
 	}
 
-	private void loadInitialValues(final IStructuredSelection structSelection, Text featureProjectField) {
+	private void loadInitialValues(final IStructuredSelection structSelection, Text featureProjectField, Text buckyField) {
 		String initialValue = calculateFeatureSelection(structSelection);
 		if (initialValue != null) {
 			featureProjectField.setText(initialValue);
 		}
+		buckyField.setText(P2DirectorLaunch.DESTINATION_JAVA);
+
 	}
 
 }

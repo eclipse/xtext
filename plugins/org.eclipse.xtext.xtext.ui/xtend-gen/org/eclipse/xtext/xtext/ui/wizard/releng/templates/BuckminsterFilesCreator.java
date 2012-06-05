@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xtext.ui.wizard.releng.P2DirectorLaunch;
 import org.eclipse.xtext.xtext.ui.wizard.releng.RelengProjectInfo;
 
 /**
@@ -50,6 +51,8 @@ public class BuckminsterFilesCreator {
   }.apply();
   
   private static String COMMANDS_FILE_NAME = "commands.txt";
+  
+  private static String INSTALL_BUCKY_LAUNCH = ".InstallHeadlessBuckminster.launch";
   
   private IFileCreator fileCreator;
   
@@ -374,6 +377,79 @@ public class BuckminsterFilesCreator {
     _builder.append("</rm:rmap>");
     _builder.newLine();
     IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.PROJECT_RMAP_NAME);
+    return _writeToFile;
+  }
+  
+  /**
+   * Creates launch configuration file that installs headless buckminster<br>
+   * @param projectInfo Project configuration to use
+   */
+  public IFile createInstallBuckminsterLaunch(final RelengProjectInfo projectInfo) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+    _builder.newLine();
+    _builder.append("<launchConfiguration type=\"org.eclipse.pde.ui.RuntimeWorkbench\">");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"append.args\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"askclear\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"automaticAdd\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"automaticValidate\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"bootstrap\" value=\"\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"checked\" value=\"[NONE]\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"clearConfig\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"clearws\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"clearwslog\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"configLocation\" value=\"${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Install headless buckminster\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"default\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"includeOptional\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"location\" value=\"");
+    _builder.append(P2DirectorLaunch.LOCATION, "");
+    _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog ");
+    String _args = P2DirectorLaunch.args();
+    _builder.append(_args, "");
+    _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER\" value=\"org.eclipse.pde.ui.workbenchClasspathProvider\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xms40m -Xmx512m\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"pde.version\" value=\"3.3\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"product\" value=\"");
+    _builder.append(P2DirectorLaunch.PRODUCT, "");
+    _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<booleanAttribute key=\"show_selected_only\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"templateConfig\" value=\"${target_home}/configuration/config.ini\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"tracing\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useCustomFeatures\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useDefaultConfig\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useDefaultConfigArea\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useProduct\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("</launchConfiguration>");
+    _builder.newLine();
+    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.INSTALL_BUCKY_LAUNCH);
     return _writeToFile;
   }
 }
