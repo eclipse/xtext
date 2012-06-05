@@ -179,8 +179,7 @@ public class MemberFromSuperImplementor {
 				lastClosingBraceOffset = leafNode.getOffset();
 			}
 		}
-		return (lastClosingBraceOffset == -1) ? lastClosingBraceOffset = clazzNode.getTotalEndOffset()
-				: lastClosingBraceOffset;
+		return (lastClosingBraceOffset == -1) ? clazzNode.getTotalEndOffset() : lastClosingBraceOffset;
 	}
 
 	public int getConstructorInsertOffset(XtendClass clazz) {
