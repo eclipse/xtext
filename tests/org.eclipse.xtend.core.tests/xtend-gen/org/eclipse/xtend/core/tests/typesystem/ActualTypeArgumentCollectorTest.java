@@ -121,7 +121,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractXtendTestCase {
         int _size = ((List<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mappedTypes)).size();
         int _size_1 = mappingData.size();
         Assert.assertEquals(_string, _size, _size_1);
-        List<Triple<String,VarianceInfo,VarianceInfo>> _list = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>toList(((Iterable<? extends Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
+        List<Triple<String,VarianceInfo,VarianceInfo>> _list = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>toList(((Iterable<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
         final Function1<BoundTypeArgument,Triple<String,VarianceInfo,VarianceInfo>> _function_1 = new Function1<BoundTypeArgument,Triple<String,VarianceInfo,VarianceInfo>>() {
             public Triple<String,VarianceInfo,VarianceInfo> apply(final BoundTypeArgument it) {
               JvmTypeReference _typeReference = it.getTypeReference();
