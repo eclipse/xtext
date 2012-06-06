@@ -11,8 +11,6 @@ import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
-import java.util.List;
-
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -23,6 +21,8 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
+ * @author Sebastian Zarnekow
  */
 public class OverrideValidationTest extends AbstractXtendTestCase {
 
@@ -153,6 +153,20 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
+	
+	@Test public void testOverrideGenericMethod_13() throws Exception {
+		XtendClass xtendClass = clazz("abstract class Foo extends test.GenericSuperTypeClass<String> {  " +
+									"override <C extends Comparable<C>> C getComparable(){ null } "+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test public void testOverrideGenericMethod_14() throws Exception {
+		XtendClass xtendClass = clazz("abstract class Foo extends test.GenericSuperTypeClass<String> {  " +
+									"override <X extends Comparable<X>> void useComparable(X x){} "+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
 
 	@Test public void testOverrideReturnType() throws Exception {
 		XtendClass xtendClass = clazz("abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
@@ -176,8 +190,21 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 									"}");
 		helper.assertNoErrors(xtendClass);
 	}
+	
+	@Test public void testOverrideReturnType_3() throws Exception {
+		XtendClass xtendClass = clazz("abstract class Foo extends test.GenericSuperTypeClass<Comparable<String>> {  " +
+									"override String getTypeParamValue(){ null } "+
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
 
-
+	@Ignore("This should issue a warning and not an error")
+	@Test public void testOverrideReturnType_4() throws Exception {
+		XtendClass xtendClass = clazz("abstract class Foo extends test.GenericSuperTypeClass<Integer> {  " +
+									"override String getComparable(){ null }" +
+									"}");
+		helper.assertNoErrors(xtendClass);
+	}
 
 	@Test public void testObsoleteOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { override bar() {true} }");
