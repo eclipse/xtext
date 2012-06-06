@@ -17,7 +17,7 @@ import org.junit.Test
  * This examples shows 
  *  - the usage and declaration of a builder API.
  *  - usage of @Data annotation
- *  - non-static extenions methods
+ *  - non-static extension methods
  */
 class DomExample {
 	
