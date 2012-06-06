@@ -93,7 +93,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	@Test public void testNonStatementExpressionInBlock_04() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x as String 42 }");
-		helper.assertError(expr, XCASTED_EXPRESSION, INVALID_INNER_EXPRESSION);
+		helper.assertError(expr, XFEATURE_CALL, INVALID_INNER_EXPRESSION);
 	}
 	@Test public void testNonStatementExpression_01() throws Exception {
 		XExpression expr = expression("for (x : newArrayList('x','y')) { 42 }");
@@ -112,6 +112,76 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Test public void testNonStatementExpression_04() throws Exception {
 		XExpression expr = expression("newArrayList('foo').forEach[ it != 'foo' ]");
 		helper.assertError(expr, XBINARY_OPERATION, INVALID_INNER_EXPRESSION);
+	}
+	
+	@Test public void testNonStatementExpression_05() throws Exception {
+		XExpression expr = expression("{ val blockElement =\n" + 
+				"		  if ('foo'.length > 42) {\n" + 
+				"		    'test'\n" + 
+				"		  } else {\n" + 
+				"		  	'bar'\n" + 
+				"		  }\n" + 
+				"		blockElement.toString }");
+		helper.assertNoErrors(expr);
+	}
+	
+	@Test public void testNonStatementExpression_06() throws Exception {
+		XExpression expr = expression("'foo' => [42]");
+		helper.assertError(expr, XNUMBER_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_07() throws Exception {
+		XExpression expr = expression("'foo' => [typeof(String)]");
+		helper.assertError(expr, XTYPE_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_08() throws Exception {
+		XExpression expr = expression("42 => ['x']");
+		helper.assertError(expr, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_09() throws Exception {
+		XExpression expr = expression("'foo' => [true]");
+		helper.assertError(expr, XBOOLEAN_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_10() throws Exception {
+		XExpression expr = expression("'foo' => [null]");
+		helper.assertError(expr, XNULL_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_11() throws Exception {
+		XExpression expr = expression("'foo' => []");
+		helper.assertNoErrors(expr);
+	}
+	
+	@Test public void testNonStatementExpression_12() throws Exception {
+		XExpression expr = expression("while (true) if (42 == 23) 'test'");
+		helper.assertError(expr, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_13() throws Exception {
+		XExpression expr = expression("while (true) switch 42 { case 23 : 'test'}");
+		helper.assertError(expr, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_14() throws Exception {
+		XExpression expr = expression("while (true) try { throw new Exception } catch (Exception e) 'test'");
+		helper.assertError(expr, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	@Test public void testNonStatementExpression_15() throws Exception {
+		XExpression expr = expression("while (true) try { 'foo' } finally { typeof(String).name }");
+		helper.assertError(expr, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
+	}
+	
+	@Test public void testNonStatementExpression_16() throws Exception {
+		XExpression expr = expression("{val x = if (42 == 23) 'test' x}");
+		helper.assertNoErrors(expr);
+	}
+	@Test public void testNonStatementExpression_17() throws Exception {
+		XExpression expr = expression("{val x = switch 42 { case 23 : 'test'} x}");
+		helper.assertNoErrors(expr);
+	}
+	@Test public void testNonStatementExpression_18() throws Exception {
+		XExpression expr = expression("{val x = try { throw new Exception } catch (Exception e) 'test' x}");
+		helper.assertNoErrors(expr);
+	}
+	@Test public void testNonStatementExpression_19() throws Exception {
+		XExpression expr = expression("{val x = try { 'foo' } finally { typeof(String).name } x}");
+		helper.assertNoErrors(expr);
 	}
 	
 	@Test public void testLocalVarWithArguments() throws Exception {
@@ -323,7 +393,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testLiteralInBlockInBlock() throws Exception {
-		checkInnerExpressionInBlock("{ {1} }", XBLOCK_EXPRESSION);
+		checkInnerExpressionInBlock("{ {1} }", XNUMBER_LITERAL);
 	}
 	
 	@Test public void testPureCallInBlock() throws Exception {

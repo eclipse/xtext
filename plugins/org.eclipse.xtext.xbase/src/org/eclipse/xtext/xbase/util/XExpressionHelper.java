@@ -11,7 +11,6 @@ import static org.eclipse.xtext.xbase.XbasePackage.*;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -26,12 +25,15 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.XThrowExpression;
+import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Inline;
@@ -85,31 +87,23 @@ public class XExpressionHelper {
 		return false;
 	}
 	
+	/**
+	 * @return whether the expression itself (not its children) possibly causes a side-effect
+	 */
 	public boolean hasSideEffects(XExpression expr) {
-		final boolean result = internalHasSideEffectsRec(expr);
-		return result;
-	}
-	
-	protected boolean internalHasSideEffectsRec(EObject element) {
-		if (element instanceof XClosure) {
+		if (expr instanceof XClosure
+			|| expr instanceof XStringLiteral
+			|| expr instanceof XTypeLiteral
+			|| expr instanceof XBooleanLiteral
+			|| expr instanceof XNumberLiteral
+			|| expr instanceof XNullLiteral
+			)
 			return false;
-		}
-		if (element instanceof XVariableDeclaration) {
+		if (expr instanceof XAssignment) {
 			return true;
 		}
-		if (element instanceof XAssignment) {
-			return true;
-		}
-		//TODO return and throw should not be treated as causing side-effects.
-		// rather clients of hasSideEffects should also test for 'hasEarlyExit'.
-		if (element instanceof XReturnExpression) {
-			return true;
-		}
-		if (element instanceof XThrowExpression) {
-			return true;
-		}
-		if (element instanceof XAbstractFeatureCall) {
-			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) element;
+		if (expr instanceof XAbstractFeatureCall) {
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expr;
 			final JvmIdentifiableElement feature = featureCall.getFeature();
 			if (feature instanceof JvmConstructor) { //super() and this()
 				return true;
@@ -121,17 +115,13 @@ public class XExpressionHelper {
 			}
 			return false;
 		}
-		if (element instanceof XConstructorCall) {
-			XConstructorCall constrCall = (XConstructorCall) element;
+		if (expr instanceof XConstructorCall) {
+			XConstructorCall constrCall = (XConstructorCall) expr;
 			return findPureAnnotation(constrCall.getConstructor()) == null;
 		}
-		for (EObject child : element.eContents()) {
-			if (internalHasSideEffectsRec(child))
-				return true;
-		}
-		return false;
+		return true;
 	}
-
+	
 	public JvmAnnotationReference findInlineAnnotation(XAbstractFeatureCall featureCall) {
 		final JvmIdentifiableElement feature = featureCall.getFeature();
 		if (feature instanceof JvmAnnotationTarget) {
