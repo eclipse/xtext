@@ -6,8 +6,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public abstract class GenericSuperTypeClass<T> {
 
-	public abstract <T> T getSomething(T t);
+	public abstract <V> V getSomething(V v);
+	
+	public abstract <C extends Comparable<C>> void useComparable(C c);
+	public abstract <C extends Comparable<C>> C getComparable();
 
+	public abstract T getTypeParamValue();
+	
 	public abstract <T1 extends Object> T1[] getValue1(final List<T1> t);
 
 	public abstract <T2 extends Object> T2[] getValue2(final T2[] t);
@@ -29,4 +34,5 @@ public abstract class GenericSuperTypeClass<T> {
 	public abstract <T5 extends CharSequence> void foo1();
 
 	public abstract <T6> void foo2(T t, Procedure1<? super T> proc);
+	
 }
