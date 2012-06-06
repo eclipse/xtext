@@ -20,6 +20,7 @@ import org.eclipse.xtext.formatting.IFormatterExtension;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
@@ -78,7 +79,7 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 		ITokenStream out = offset == 0 ? buf : new FilterFirstWhitespaceStream(buf);
 		ITokenStream fmt;
 		if (formatter instanceof IFormatterExtension) {
-			EObject semanticElement = root.getSemanticElement();
+			EObject semanticElement = NodeModelUtils.findActualSemanticObjectFor(root);
 			if (semanticElement != null)
 				fmt = ((IFormatterExtension) formatter).createFormatterStream(semanticElement, indent, out, false);
 			else
