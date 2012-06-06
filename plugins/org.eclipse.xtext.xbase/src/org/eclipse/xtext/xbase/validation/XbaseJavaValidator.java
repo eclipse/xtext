@@ -75,6 +75,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -735,23 +736,58 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkInnerExpressions(XExpression expr) {
-		EStructuralFeature containingFeature = expr.eContainingFeature();
-		boolean checkWhole = containingFeature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__BODY
-			|| containingFeature == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION
-			|| containingFeature == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION;
-		if (expr instanceof XBlockExpression) {
-			XBlockExpression block = (XBlockExpression) expr;
-			boolean checkLastExpression = checkWhole || typeRefs.is(typeProvider.getExpectedReturnType(expr, true), Void.TYPE);
-			for (int i = 0; i < block.getExpressions().size() - (checkLastExpression?0:1); ++i) {
-				mustBeJavaStatementExpression(block.getExpressions().get(i));
-			}
-		} else if (checkWhole) {
+		if (!expressionHelper.hasSideEffects(expr) && !isValueExpectedRecursive(expr)) {
 			mustBeJavaStatementExpression(expr);
 		}
 	}
+	
+	protected boolean isValueExpectedRecursive(XExpression expr) {
+		EStructuralFeature feature = expr.eContainingFeature();
+		EObject container = expr.eContainer();
+		
+		// is part of block
+		if (container instanceof XBlockExpression) {
+			XBlockExpression blockExpression = (XBlockExpression) container;
+			final EList<XExpression> expressions = blockExpression.getExpressions();
+			if (expressions.get(expressions.size()-1) != expr) {
+				return false;
+			}
+		}
+		// no expectation cases
+		if (feature == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION
+			|| feature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__BODY
+			|| feature == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION) {
+			return false;
+		}
+		// is value expected
+		if (container instanceof XAbstractFeatureCall 
+			|| container instanceof XConstructorCall
+			|| container instanceof XAssignment
+			|| container instanceof XVariableDeclaration
+			|| container instanceof XReturnExpression
+			|| container instanceof XThrowExpression
+			|| feature == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION
+			|| feature == XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH
+			|| feature == XbasePackage.Literals.XCASE_PART__CASE
+			|| feature == XbasePackage.Literals.XIF_EXPRESSION__IF
+			|| feature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) {
+			return true;
+		}
+		if (container instanceof XClosure || logicalContainerProvider.getLogicalContainer(expr) != null) {
+			JvmTypeReference expectedReturnType = typeProvider.getExpectedReturnType(expr, true);
+			return !typeRefs.is(expectedReturnType, Void.TYPE);
+		}
+		if (container instanceof XCasePart || container instanceof XCatchClause) {
+			container = container.eContainer();
+		}
+		if (container instanceof XExpression) {
+			return isValueExpectedRecursive((XExpression) container);
+		}
+		return true;
+	}
 
 	protected void mustBeJavaStatementExpression(XExpression expr) {
-		if (expr != null && !expressionHelper.hasSideEffects(expr)) {
+		if (expr != null) {
 			error("This expression is not allowed in this context, since it doesn't cause any side effects.", expr, null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INNER_EXPRESSION);
 		}

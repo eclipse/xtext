@@ -1409,7 +1409,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testTryFinally_02() throws Exception {
-		assertEvaluatesTo("finally", "{ var x = 'foo' try 'literal' finally x = 'finally' x }");
+		assertEvaluatesTo("finally", "{ var x = 'foo' try x = 'literal' finally x = 'finally' x }");
 	}
 	
 	@Test public void testConstructor_01() throws Exception {
