@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.AbstractIterator;
@@ -652,15 +653,18 @@ public class IterableExtensions {
 
 	/**
 	 * Returns a list that contains all the entries of the given iterable in the same order. If the iterable is of type
-	 * {@link List}, itself is returned. In all other cases, the result list is a copy of the iterable.
+	 * {@link List}, itself is returned. Therefore an unchecked cast is performed. 
+	 * In all other cases, the result list is a copy of the iterable.
 	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @return a list with the same entries as the given iterable. May be the same as the given iterable iff it
 	 *         implements {@link List}, otherwise a copy is returned. Never <code>null</code>.
 	 */
-	public static <T> List<T> toList(Iterable<T> iterable) {
+	@Beta
+	public static <T> List<T> toList(Iterable<? extends T> iterable) {
 		if (iterable instanceof List<?>) {
+			@SuppressWarnings("unchecked")
 			List<T> result = (List<T>) iterable;
 			return result;
 		}
@@ -669,17 +673,18 @@ public class IterableExtensions {
 
 	/**
 	 * Returns a set that contains all the unique entries of the given iterable in the order of their appearance. If the
-	 * iterable is of type {@link Set}, itself is returned. In all other cases, the result set is a copy of the iterable
-	 * with stable order.
-	 * 
+	 * iterable is of type {@link Set}, itself is returned. Therefore an unchecked cast is performed.
+	 * In all other cases, the result set is a copy of the iterable with stable order.
 	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @return a set with the unique entries of the given iterable. May be the same as the given iterable iff it
 	 *         implements {@link Set}, otherwise a copy is returned. Never <code>null</code>.
 	 */
-	public static <T> Set<T> toSet(Iterable<T> iterable) {
+	@Beta
+	public static <T> Set<T> toSet(Iterable<? extends T> iterable) {
 		if (iterable instanceof Set<?>) {
+			@SuppressWarnings("unchecked")
 			Set<T> result = (Set<T>) iterable;
 			return result;
 		}
