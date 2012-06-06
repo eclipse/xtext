@@ -77,9 +77,14 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 		TokenStringBuffer buf = new TokenStringBuffer();
 		ITokenStream out = offset == 0 ? buf : new FilterFirstWhitespaceStream(buf);
 		ITokenStream fmt;
-		if(formatter instanceof IFormatterExtension) 
-			fmt = ((IFormatterExtension) formatter).createFormatterStream(root.getSemanticElement(), indent, out, false);
-		else 
+		if (formatter instanceof IFormatterExtension) {
+			EObject semanticElement = root.getSemanticElement();
+			if (semanticElement != null)
+				fmt = ((IFormatterExtension) formatter).createFormatterStream(semanticElement, indent, out, false);
+			else
+				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380406
+				return new FormattedRegion(root.getOffset(), root.getLength(), root.getText());
+		} else
 			fmt = formatter.createFormatterStream(indent, out, false);
 		try {
 			ITextRegion range = nodeModelStreamer.feedTokenStream(fmt, root, offset, length);
