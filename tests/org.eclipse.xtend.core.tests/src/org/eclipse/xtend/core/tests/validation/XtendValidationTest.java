@@ -64,6 +64,51 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XSTRING_LITERAL, INVALID_INNER_EXPRESSION);
 	}
 	
+	@Test public void testNoSideEffects_02() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { " +
+				"		val blockElement =\n" + 
+				"		  if ('foo'.length > 42) {\n" + 
+				"		    'test'\n" + 
+				"		  } else {\n" + 
+				"		  	'bar'\n" + 
+				"		  }\n" + 
+				"		blockElement.toString " +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testNoSideEffects_03() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { " +
+				"		val blockElement =\n" + 
+				"		  switch switchOver : if ('x'.length>1) 'foo' {\n" + 
+				"		    case try { 'test' } finally { 'sideeffect'.length } : 52" +
+				"           default : switch switchOver {" +
+				"               case 'x' : 42" +
+				"             }\n" + 
+				"		  }\n" + 
+				"		('f' + blockElement).toString " +
+				"  }" +
+				"}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testNoSideEffects_04() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { " +
+				"		''' no side-effect '''" +
+				"  }" +
+				"}");
+		helper.assertError(clazz, RICH_STRING, INVALID_INNER_EXPRESSION);
+	}
+	
+	@Test public void testNoSideEffects_05() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { " +
+				"		''' no «'foo'.length» side-effect '''" +
+				"  }" +
+				"}");
+		helper.assertError(clazz, RICH_STRING, INVALID_INNER_EXPRESSION);
+	}
+	
 	@Test public void testFieldInitializerType_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = 1 }");
 		helper.assertError(clazz, XNUMBER_LITERAL, INCOMPATIBLE_RETURN_TYPE);

@@ -16,6 +16,7 @@ import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.scoping.XtendScopeProvider;
+import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.typing.XtendTypeProvider;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
 
 import com.google.inject.Binder;
@@ -43,6 +45,10 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModule {
+	
+	public Class<? extends XExpressionHelper> bindXExpressionHelper() {
+		return XtendExpressionHelper.class;
+	}
 	
 	@Override
 	public Class<? extends ITypeProvider> bindITypeProvider() {
@@ -58,7 +64,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return XtendValueConverterService.class;
 	}
-
+	
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))

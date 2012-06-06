@@ -1055,10 +1055,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Override
-	public void checkInnerExpressions(XExpression block) {
-		if (block instanceof RichString || block instanceof RichStringForLoop)
-			return;
-		super.checkInnerExpressions(block);
+	protected boolean isValueExpectedRecursive(XExpression expr) {
+		EObject container = expr.eContainer();
+		if (container instanceof RichString 
+			|| container instanceof RichStringForLoop) {
+			return true;
+		}
+		return super.isValueExpectedRecursive(expr);
 	}
 
 	protected void collectReturnExpressions(EObject expr, List<XReturnExpression> found) {
