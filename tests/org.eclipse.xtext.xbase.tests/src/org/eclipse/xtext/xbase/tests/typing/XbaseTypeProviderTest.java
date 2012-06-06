@@ -619,7 +619,19 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testInstanceof() throws Exception {
 		assertResolvedType("boolean", "null instanceof java.lang.String");
 	}
-
+	
+	@Test public void testToList_01() throws Exception {
+		assertResolvedType("java.util.List<? extends java.lang.String>", "{ val Iterable<? extends String> iter = null iter.toList }");
+	}
+	
+	@Test public void testToList_02() throws Exception {
+		assertResolvedType("java.util.List<? super java.lang.String>", "{ val Iterable<? super String> iter = null iter.toList }");
+	}
+	
+	@Test public void testToList_03() throws Exception {
+		assertResolvedType("java.util.List<java.lang.String>", "{ val Iterable<String> iter = null iter.toList }");
+	}
+	
 	@Inject
 	private ITypeProvider typeProvider;
 
