@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
  */
 public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider {
 
-	public static String FEATURECALL_LINKING_DIAGNOSTIC = "org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider.Linking";
+	public static final String FEATURECALL_LINKING_DIAGNOSTIC = "org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider.Linking";
 
 	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
