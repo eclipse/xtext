@@ -3343,7 +3343,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("switch final : volatile {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("case final.length > 2 : synchronized.forEach(break | break + final)");
+    _builder.append("case final.length > 2 : synchronized.forEach(break | (break + final).toString)");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
@@ -3410,7 +3410,10 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("public void apply(final String break_) {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("/*(break_ + final_);*/");
+    _builder_1.append("String _plus = (break_ + final_);");
+    _builder_1.newLine();
+    _builder_1.append("                ");
+    _builder_1.append("_plus.toString();");
     _builder_1.newLine();
     _builder_1.append("              ");
     _builder_1.append("}");
