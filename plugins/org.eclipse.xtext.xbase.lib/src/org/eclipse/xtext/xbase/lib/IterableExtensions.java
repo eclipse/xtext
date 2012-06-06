@@ -659,9 +659,8 @@ public class IterableExtensions {
 	 * @return a list with the same entries as the given iterable. May be the same as the given iterable iff it
 	 *         implements {@link List}, otherwise a copy is returned. Never <code>null</code>.
 	 */
-	public static <T> List<T> toList(Iterable<? extends T> iterable) {
+	public static <T> List<T> toList(Iterable<T> iterable) {
 		if (iterable instanceof List<?>) {
-			@SuppressWarnings("unchecked")
 			List<T> result = (List<T>) iterable;
 			return result;
 		}
@@ -679,9 +678,8 @@ public class IterableExtensions {
 	 * @return a set with the unique entries of the given iterable. May be the same as the given iterable iff it
 	 *         implements {@link Set}, otherwise a copy is returned. Never <code>null</code>.
 	 */
-	public static <T> Set<T> toSet(Iterable<? extends T> iterable) {
+	public static <T> Set<T> toSet(Iterable<T> iterable) {
 		if (iterable instanceof Set<?>) {
-			@SuppressWarnings("unchecked")
 			Set<T> result = (Set<T>) iterable;
 			return result;
 		}
