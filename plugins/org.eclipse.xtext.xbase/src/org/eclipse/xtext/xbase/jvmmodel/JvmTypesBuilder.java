@@ -1120,8 +1120,7 @@ public class JvmTypesBuilder {
 			for (XExpression expr : values) {
 				AnnotationValueTranslator translator = translator(expr);
 				if (translator == null)
-					throw new IllegalArgumentException("expression " + value
-							+ " is not supported in annotation literals");
+					return null;
 				if (result == null) {
 					result = translator.createValue(expr);
 				}
@@ -1131,7 +1130,7 @@ public class JvmTypesBuilder {
 		} else if (value != null) {
 			AnnotationValueTranslator translator = translator(value);
 			if (translator == null)
-				throw new IllegalArgumentException("expression " + value + " is not supported in annotation literals");
+				return null;
 			JvmAnnotationValue result = translator.createValue(value);
 			translator.appendValue(result, value);
 			return result;
