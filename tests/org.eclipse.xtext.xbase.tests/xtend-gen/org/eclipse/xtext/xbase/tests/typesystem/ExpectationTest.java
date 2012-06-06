@@ -65,7 +65,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
     int _size = ((List<String>)Conversions.doWrapArray(names)).size();
     int _size_1 = this.expectations.size();
     Assert.assertEquals(_string, _size, _size_1);
-    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
+    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<? extends String>)Conversions.doWrapArray(names)));
     final Function1<ITypeExpectation,String> _function_1 = new Function1<ITypeExpectation,String>() {
         public String apply(final ITypeExpectation it) {
           JvmTypeReference _expectedType = it.getExpectedType();
