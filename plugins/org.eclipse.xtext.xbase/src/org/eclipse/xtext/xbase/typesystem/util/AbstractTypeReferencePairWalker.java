@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -120,8 +121,8 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 			TypeParameterSubstitutor actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
 			Map<JvmTypeParameter, MergedBoundTypeArgument> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
 			TypeParameterSubstitutor declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
-			Collection<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
-			Collection<JvmTypeParameter> visited = Sets.newHashSet();
+			Set<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
+			Set<JvmTypeParameter> visited = Sets.newHashSet();
 			for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
 				if (visited.add(actualBoundParameter)) {
 					MergedBoundTypeArgument declaredBoundArgument = declaredMapping.get(actualBoundParameter);
@@ -134,11 +135,9 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 						JvmType declaredType = getTypeFromReference(declaredTypeReference);
 						if (declaredType instanceof JvmTypeParameter) {
 							JvmTypeParameter declaredTypeParameter = (JvmTypeParameter) declaredType;
-							if (!shouldProcess(declaredTypeParameter)) {
-								if (actualBoundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter))
-									continue;
-								declaredTypeReference = declaredSubstitutor.substitute(declaredTypeReference);
-							} 
+							if (!shouldProcessInContextOf(declaredTypeParameter, actualBoundParameters, visited))
+								continue;
+							declaredTypeReference = declaredSubstitutor.substitute(declaredTypeReference);
 						}
 						JvmTypeReference actual = actualSubstitutor.substitute(actualMapping.get(actualBoundParameter).getTypeReference());
 						outerVisit(declaredTypeReference, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
@@ -147,6 +146,10 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 			}
 		}
 		
+		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters, Set<JvmTypeParameter> visited) {
+			return true;
+		}
+
 		@Override
 		public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, JvmParameterizedTypeReference declaration) {
 			final JvmType type = getTypeFromReference(declaration);
@@ -177,7 +180,7 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 		}
 
 	}
-
+	
 	private final CommonTypeComputationServices services;
 	
 	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;

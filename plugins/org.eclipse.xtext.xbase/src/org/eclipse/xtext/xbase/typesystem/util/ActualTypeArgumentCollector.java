@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -24,6 +25,17 @@ import com.google.common.collect.Sets;
  * TODO JavaDoc, toString
  */
 public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker {
+
+	protected class ActualParameterizedTypeReferenceTraverser extends ParameterizedTypeReferenceTraverser {
+		@Override
+		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters, Set<JvmTypeParameter> visited) {
+			if (!shouldProcess(declaredTypeParameter)) {
+				if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter))
+					return false;
+			}
+			return true;
+		}
+	}
 
 	private final ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping;
 	private final List<JvmTypeParameter> parametersToBeMapped;
@@ -44,6 +56,11 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	
 	protected BoundTypeArgument boundByInferrence(JvmTypeReference reference) {
 		return new BoundTypeArgument(reference, BoundTypeArgumentSource.INFERRED, getOrigin(), getExpectedVariance(), getActualVariance());
+	}
+	
+	@Override
+	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
+		return new ActualParameterizedTypeReferenceTraverser();
 	}
 	
 	@Override

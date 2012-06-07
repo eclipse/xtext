@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
@@ -90,8 +89,10 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 			XComputedTypeReference computedTypeReference = (XComputedTypeReference) expectedType;
 			if (UnboundTypeParameters.isUnboundTypeParameter(computedTypeReference)) {
 				UnboundTypeParameter unboundTypeParameter = (UnboundTypeParameter) computedTypeReference.getTypeProvider();
-				JvmTypeReference wrappedActual = asWrapperType(actual);
-				unboundTypeParameter.acceptHint(wrappedActual, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+				if (!UnboundTypeParameters.isUnboundAndEqual(unboundTypeParameter, actual)) {
+					JvmTypeReference wrappedActual = asWrapperType(actual);
+					unboundTypeParameter.acceptHint(wrappedActual, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+				}
 			}
 		} else if (expectedType.getType() instanceof JvmTypeParameter) {
 			if (!(actual instanceof JvmAnyTypeReference)) {

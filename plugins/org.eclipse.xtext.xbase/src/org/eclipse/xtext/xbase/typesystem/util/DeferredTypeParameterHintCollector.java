@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -55,9 +56,18 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 				}
 				return super.doVisitComputedTypeReference(reference, declaration);
 			}
+			
+			@Override
+			protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+					Set<JvmTypeParameter> visited) {
+				if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+					return false;
+				}
+				return true;
+			}
 		};
 	}
-
+	
 	@Override
 	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
 		return new UnboundTypeParameterAwareWildcardTypeReferenceTraverser(this);
@@ -81,8 +91,10 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	}
 
 	protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
-		JvmTypeReference wrapped = asWrapperType(reference);
-		typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.INFERRED_LATER, getOrigin(), getExpectedVariance(), getActualVariance());
+		if (!UnboundTypeParameters.isUnboundAndEqual(typeParameter, reference)) {
+			JvmTypeReference wrapped = asWrapperType(reference);
+			typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.INFERRED_LATER, getOrigin(), getExpectedVariance(), getActualVariance());
+		}
 	}
 
 	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {

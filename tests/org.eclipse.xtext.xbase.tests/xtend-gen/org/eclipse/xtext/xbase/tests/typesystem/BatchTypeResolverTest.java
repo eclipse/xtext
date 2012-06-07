@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,9 +27,13 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Inject
   private IBatchTypeResolver typeResolver;
   
+  @Inject
+  private ITypeProvider typeProvider;
+  
   public void resolvesTo(final String expression, final String type) throws Exception {
     final XExpression xExpression = this.expression(expression, false);
-    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(xExpression);
+    IBatchTypeResolver _typeResolver = this.getTypeResolver();
+    final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
     final JvmTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
     String _simpleName = resolvedType.getSimpleName();
     Assert.assertEquals(type, _simpleName);
@@ -39,6 +44,17 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
         resolvedTypes.getActualType(((XExpression) content));
       }
     }
+  }
+  
+  public IBatchTypeResolver getTypeResolver() {
+    return this.typeResolver;
+  }
+  
+  public void resolvesTo2(final String expression, final String type) throws Exception {
+    final XExpression xExpression = this.expression(expression, false);
+    final JvmTypeReference resolvedType = this.typeProvider.getType(xExpression);
+    String _simpleName = resolvedType.getSimpleName();
+    Assert.assertEquals(type, _simpleName);
   }
   
   public void resolvesTo(final String expression, final Class<? extends Object> type) throws Exception {
@@ -228,31 +244,26 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("testdata::OverloadedMethods::<String, String>overloadedTypeParameters(null)", "long");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_01() throws Exception {
     this.resolvesTo("1 + 1", "int");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_02() throws Exception {
     this.resolvesTo("1L + 1", "long");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_03() throws Exception {
     this.resolvesTo("1 + 1L", "long");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_04() throws Exception {
     this.resolvesTo("\'\' + \'\'", "String");
   }
   
-  @Ignore
   @Test
   public void testOverloadedOperators_05() throws Exception {
     this.resolvesTo("\'\' + 1", "String");
@@ -748,25 +759,21 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1))", "ArrayList<List<Integer>>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size())", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_a() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_b() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)", "List<Integer>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_15_c() throws Exception {
     this.resolvesTo("newArrayList(newArrayList(\'\').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)", "List<Integer>");
@@ -844,12 +851,12 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_15_o() throws Exception {
-    this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size())", "Iterable<Integer>");
+    this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size())", "List<Integer>");
   }
   
   @Test
   public void testFeatureCall_15_p() throws Exception {
-    this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e)", "Iterable<Integer>");
+    this.resolvesTo("newArrayList(newArrayList(\'\')).map(iterable|iterable.size()).map(e|e)", "List<Integer>");
   }
   
   @Ignore
@@ -919,8 +926,48 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testFeatureCall_26() throws Exception {
-    this.resolvesTo("{ val Iterable<? extends String> iter = null iter.toList }", "List<String>");
+  public void testToList_01() throws Exception {
+    this.resolvesTo("{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }", "List<? extends String>");
+  }
+  
+  @Test
+  public void testToList_02() throws Exception {
+    this.resolvesTo("{ val Iterable<? super String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }", "List<? super String>");
+  }
+  
+  @Test
+  public void testToList_03() throws Exception {
+    this.resolvesTo("{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }", "List<String>");
+  }
+  
+  @Test
+  public void testToList_04() throws Exception {
+    this.resolvesTo("{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList(iter) }", "List<String>");
+  }
+  
+  @Test
+  public void testToList_05() throws Exception {
+    this.resolvesTo("{ val Iterable<? super String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList(iter) }", "List<String>");
+  }
+  
+  @Test
+  public void testToList_06() throws Exception {
+    this.resolvesTo("{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList(iter) }", "List<String>");
+  }
+  
+  @Test
+  public void testToList_07() throws Exception {
+    this.resolvesTo("{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }", "List<String>");
+  }
+  
+  @Test
+  public void testToList_08() throws Exception {
+    this.resolvesTo("{ val Iterable<? super String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }", "List<String>");
+  }
+  
+  @Test
+  public void testToList_09() throws Exception {
+    this.resolvesTo("{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }", "List<String>");
   }
   
   @Ignore
