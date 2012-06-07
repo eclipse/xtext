@@ -19,7 +19,7 @@ import com.google.common.collect.Multimap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
+ * TODO JavaDoc, toString - delegates to parent except for the reassigned types
  */
 public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
 	public DelegatingStackedResolvedTypes(ResolvedTypes parent) {
@@ -32,7 +32,7 @@ public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
 	}
 
 	@Override
-	protected Map<XExpression, ILinkingCandidate> ensureLinkingMapExists() {
+	protected Map<XExpression, ILinkingCandidate<?>> ensureLinkingMapExists() {
 		return getParent().ensureLinkingMapExists();
 	}
 
@@ -40,7 +40,7 @@ public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
 	protected Map<JvmIdentifiableElement, JvmTypeReference> ensureTypesMapExists() {
 		return getParent().ensureTypesMapExists();
 	}
-
+	
 	@Override
 	public JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type,
 			ConformanceHint conformanceHint, boolean returnType) {

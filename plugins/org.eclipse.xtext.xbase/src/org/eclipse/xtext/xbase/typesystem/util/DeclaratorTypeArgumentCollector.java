@@ -85,7 +85,7 @@ public class DeclaratorTypeArgumentCollector extends AbstractTypeReferenceVisito
 				JvmTypeParameter param = typeParameters.get(i);
 				JvmTypeReference argument = typeArguments.get(i);
 				if (param != null && argument != null) {
-					data.getTypeParameterMapping().put(param, argument);
+					data.getTypeParameterMapping().put(param, new MergedBoundTypeArgument(argument, VarianceInfo.INVARIANT));
 				}
 			}
 		}
@@ -100,7 +100,7 @@ public class DeclaratorTypeArgumentCollector extends AbstractTypeReferenceVisito
 		return Boolean.FALSE;
 	}
 	
-	public Map<JvmTypeParameter, JvmTypeReference> getTypeParameterMapping(JvmTypeReference reference) {
+	public Map<JvmTypeParameter, MergedBoundTypeArgument> getTypeParameterMapping(JvmTypeReference reference) {
 		TraversalData data = new TraversalData();
 		visit(reference, data);
 		return data.getTypeParameterMapping();

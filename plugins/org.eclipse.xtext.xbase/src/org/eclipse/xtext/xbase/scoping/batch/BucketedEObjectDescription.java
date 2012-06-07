@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,10 +26,10 @@ public class BucketedEObjectDescription extends EObjectDescription {
 	private final int bucketId;
 	private final JvmTypeReference receiverType;
 	private final XExpression receiver;
-	private final Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping;
+	private final Map<JvmTypeParameter, MergedBoundTypeArgument> receiverTypeParameterMapping;
 
 	public BucketedEObjectDescription(QualifiedName qualifiedName, EObject element, XExpression receiver,
-			JvmTypeReference receiverType, Map<JvmTypeParameter, JvmTypeReference> receiverTypeParameterMapping,
+			JvmTypeReference receiverType, Map<JvmTypeParameter, MergedBoundTypeArgument> receiverTypeParameterMapping,
 			int bucketId) {
 		super(qualifiedName, element, null);
 		this.receiver = receiver;
@@ -66,7 +67,7 @@ public class BucketedEObjectDescription extends EObjectDescription {
 		return receiver;
 	}
 
-	public Map<JvmTypeParameter, JvmTypeReference> getReceiverTypeParameterMapping() {
+	public Map<JvmTypeParameter, MergedBoundTypeArgument> getReceiverTypeParameterMapping() {
 		return receiverTypeParameterMapping;
 	}
 

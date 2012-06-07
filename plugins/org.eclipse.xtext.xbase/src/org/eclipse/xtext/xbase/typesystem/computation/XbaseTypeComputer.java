@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -60,6 +59,10 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.Closures;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -247,7 +250,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	protected void _computeTypes(final XClosure object, final ITypeComputationState state) {
 		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
 			JvmTypeReference expectedClosureType = expectation.getExpectedType();
-			Map<JvmTypeParameter, JvmTypeReference> expectedTypeParameterMapping = Collections.emptyMap();
+			Map<JvmTypeParameter, MergedBoundTypeArgument> expectedTypeParameterMapping = Collections.emptyMap();
 			// TODO - closure has no expected type - has to be function or procedure
 			ITypeComputationState closureBodyState = state;
 			JvmOperation operation = null;
@@ -265,19 +268,19 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 						}
 					}
 					allTypeParameters.addAll(operation.getTypeParameters());
-					ActualTypeArgumentCollector typeArgumentCollector = new ActualTypeArgumentCollector(allTypeParameters, services);
+					ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, services);
 					JvmParameterizedTypeReference operationTypeDeclarator = services.getTypeReferences().createTypeRef(operation.getDeclaringType());
 					typeArgumentCollector.populateTypeParameterMapping(operationTypeDeclarator, expectedClosureType);
 					ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping();
-					expectedTypeParameterMapping = Maps.newHashMap();
+					expectedTypeParameterMapping = Maps.newLinkedHashMap();
 					for(JvmTypeParameter typeParamter: typeParameterMapping.keySet()) {
 						MergedBoundTypeArgument boundTypeArgument = typeArgumentMerger.merge(typeParameterMapping.get(typeParamter));
 						if (boundTypeArgument != null)
-							expectedTypeParameterMapping.put(typeParamter, boundTypeArgument.getTypeReference());
+							expectedTypeParameterMapping.put(typeParamter, boundTypeArgument);
 					}
 					operationParameters = operation.getParameters();
 					JvmTypeReference declaredReturnType = operation.getReturnType();
-					substitutor = new TypeParameterSubstitutor(expectedTypeParameterMapping, services);
+					substitutor = new UnboundTypeParameterPreservingSubstitutor(expectedTypeParameterMapping, services);
 					operationReturnType = substitutor.substitute(declaredReturnType);
 					if (operationReturnType == null) {
 						throw new IllegalStateException();
@@ -336,7 +339,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 					closureParameterTypes.add(expressionResult.getActualType(parameter));
 				}
 				JvmTypeReference expressionResultType = expressionResult.getActualExpressionType();
-				expressionResultType = new TypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services) {
+				expressionResultType = new TypeParameterSubstitutor(Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), services) {
 					@Override
 					public JvmTypeReference doVisitAnyTypeReference(JvmAnyTypeReference reference, Set<JvmTypeParameter> visited) {
 						return operationReturnType;
@@ -346,13 +349,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 						return operationReturnType;
 					}
 					@Override
-					public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference, Set<JvmTypeParameter> visited) {
-						if (reference instanceof XComputedTypeReference) {
-							if (closureParameterTypes.contains(reference)) {
-								return reference;
-							}
+					public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference, Set<JvmTypeParameter> visited) {
+						if (closureParameterTypes.contains(reference)) {
+							return reference;
 						}
-						return super.doVisitSpecializedTypeReference(reference, visited);
+						return super.doVisitComputedTypeReference(reference, visited);
 					}
 				}.visit(expressionResultType, Sets.<JvmTypeParameter>newHashSet());
 				if (expressionResultType == null) {
@@ -364,7 +365,13 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				JvmTypeReference closureBodyType = expressionResult.getActualExpressionType();
 				JvmType rawReturnType = operationReturnType.getType();
 				if (rawReturnType instanceof JvmTypeParameter) {
-					substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, primitives.asWrapperTypeIfPrimitive(closureBodyType)));
+					if (closureBodyType instanceof XComputedTypeReference && UnboundTypeParameters.isUnboundTypeParameter((XComputedTypeReference) closureBodyType)) {
+						substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, 
+								new MergedBoundTypeArgument(closureBodyType, VarianceInfo.INVARIANT)));
+					} else {
+						substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, 
+								new MergedBoundTypeArgument(primitives.asWrapperTypeIfPrimitive(closureBodyType), VarianceInfo.INVARIANT)));
+					}
 				} else {
 					substitutor.enhanceMapping(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureBodyType));
 				}
@@ -405,7 +412,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				@Override
 				public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 					DeclaratorTypeArgumentCollector typeArgumentCollector = new DeclaratorTypeArgumentCollector();
-					Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
+					Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
 					TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(typeParameterMapping, services);
 					JvmTypeReference iterableWithTypeParam = getTypeReferences().getTypeForName(Iterable.class, object);
 					JvmTypeReference substitutedIterable = substitutor.substitute(iterableWithTypeParam);

@@ -16,5 +16,9 @@ import java.util.List;
 public class TypeResolutionTestData {
 
 	interface NestedList<T> extends List<List<T>> {}
+
+	static <T> List<T> fixedToList(Iterable<T> iter) { return null; }
+	static <T> List<T> brokenToList(Iterable<? extends T> iter) { return null; }
+	static <T> List<T> brokenToList2(Iterable<? super T> iter) { return null; }
 	
 }

@@ -7,12 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collections;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -20,7 +16,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.inject.Inject;
 
@@ -75,10 +70,6 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
 		computeTypes(result, session);
 		return result;
-	}
-	
-	protected TypeParameterSubstitutor createTypeParameterSubstitutor() {
-		return new TypeParameterSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), services);
 	}
 	
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {

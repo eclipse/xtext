@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -28,7 +29,7 @@ import com.google.common.collect.Sets;
  */
 public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitutor {
 
-	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping,
+	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping,
 			CommonTypeComputationServices services) {
 		super(typeParameterMapping, services);
 	}
@@ -41,13 +42,32 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 				return null;
 			}
 			try {
-				JvmTypeReference mappedReference = getTypeParameterMapping().get(type);
-				if (mappedReference != null && mappedReference != reference) {
-					return visit(mappedReference, visiting);
+				MergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
+				if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+					JvmTypeReference result = visit(boundTypeArgument.getTypeReference(), visiting);
+					if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
+						JvmWildcardTypeReference wildcardTypeReference = getServices().getTypesFactory().createJvmWildcardTypeReference();
+						JvmUpperBound upperBound = getServices().getTypesFactory().createJvmUpperBound();
+						upperBound.setTypeReference(result);
+						wildcardTypeReference.getConstraints().add(upperBound);
+						result = wildcardTypeReference;
+					} else if (boundTypeArgument.getVariance() == VarianceInfo.IN) {
+						JvmWildcardTypeReference wildcardTypeReference = getServices().getTypesFactory().createJvmWildcardTypeReference();
+						JvmUpperBound upperBound = getServices().getTypesFactory().createJvmUpperBound();
+						upperBound.setTypeReference(getServices().getTypeReferences().getTypeForName(Object.class, type));
+						wildcardTypeReference.getConstraints().add(upperBound);
+						JvmLowerBound lowerBound = getServices().getTypesFactory().createJvmLowerBound();
+						lowerBound.setTypeReference(result);
+						wildcardTypeReference.getConstraints().add(lowerBound);
+						result = wildcardTypeReference;
+					}
+					return result;
 				} else {
-					mappedReference = getUnmappedSubstitute(reference, (JvmTypeParameter) type, visiting);
-					if (mappedReference != null)
+					JvmTypeReference mappedReference = getUnmappedSubstitute(reference, (JvmTypeParameter) type, visiting);
+					if (mappedReference != null) {
+						getTypeParameterMapping().put((JvmTypeParameter)type, new MergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 						return mappedReference;
+					}
 				}
 			} finally {
 				visiting.remove(type);
@@ -67,16 +87,17 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	}
 
 	protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
-		JvmTypeReference mappedReference;
 		ConstraintAwareTypeArgumentCollector collector = new ConstraintAwareTypeArgumentCollector(getServices().getTypesFactory());
 		TraversalData data = new TraversalData();
 		data.getTypeParameterMapping().putAll(getTypeParameterMapping());
 		collector.visit(reference, data);
-		mappedReference = data.getTypeParameterMapping().get(type);
-		if (mappedReference != null && mappedReference != reference) {
-			return visit(mappedReference, visiting);
+		MergedBoundTypeArgument boundTypeArgument = data.getTypeParameterMapping().get(type);
+		if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+			return visit(boundTypeArgument.getTypeReference(), visiting);
 		}
-		return mappedReference;
+		if (boundTypeArgument != null)
+			return boundTypeArgument.getTypeReference();
+		return null;
 	}
 	
 	protected JvmTypeReference getDeclaredUpperBound(JvmType type, int parameterIndex, Set<JvmTypeParameter> visiting) {
