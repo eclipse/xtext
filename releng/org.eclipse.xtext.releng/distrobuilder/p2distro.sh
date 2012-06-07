@@ -25,15 +25,22 @@ IDEPREFIX="eclipse-SDK"
 ZIPSUFFIX=".zip"
 JARSUFFIX=".jar"
 
+function var.defined {
+	eval '[[ ${!'$1'[@]} ]]'
+}
 
 # reads property from $ECLIPSE_CODENAME.properties file and set it as global var. Exp.: parseProperty VERSION
 function parseProperty()
 {
-#echo "parse $1 in $ECLIPSE_CODENAME"
+if var.defined $1
+then
+	eval 'echo '$1 is already set to \$$1''
+else
 local __propertyName=$1
 local parsedValue=`sed '/^\#/d' $ECLIPSE_CODENAME/builder.properties | grep $__propertyName  | tail -n 1 | cut -d "=" -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
-#echo "parsed: $parsedValue"
+echo "setting parsed value: $__propertyName = $parsedValue"
 eval $__propertyName="'$parsedValue'"
+fi
 }
 
 #read properties
