@@ -102,7 +102,16 @@ public class BuildScriptCreator {
     _builder.append("<echo message=\"IMPORTANT: Populating an empty target platform may took over 10 minutes.\"/>");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<exec executable=\"${buckminster.home}/buckminster\">");
+    _builder.append("<condition property=\"executable.file\" value=\"bukminster.bat\" else=\"buckminster\">");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<os family=\"windows\"/>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("</condition>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<exec executable=\"${buckminster.home}/${executable.file}\">");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<arg value=\"-Dprojects.location=${projects.location}\" />");
