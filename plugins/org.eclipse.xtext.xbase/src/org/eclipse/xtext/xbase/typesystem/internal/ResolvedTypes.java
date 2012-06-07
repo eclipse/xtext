@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -39,12 +40,14 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -58,7 +61,8 @@ public class ResolvedTypes implements IResolvedTypes {
 	private Map<JvmIdentifiableElement, JvmTypeReference> types;
 	private Map<JvmIdentifiableElement, JvmTypeReference> reassignedTypes;
 	private Multimap<XExpression, TypeData> expressionTypes;
-	private Map<XExpression, ILinkingCandidate> featureLinking;
+	private Map<XExpression, ILinkingCandidate<?>> featureLinking;
+	private Map<Object, BaseUnboundTypeParameter> unboundTypeParameters;
 	private final DefaultReentrantTypeResolver resolver;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
@@ -70,11 +74,18 @@ public class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	protected TypeData getTypeData(XExpression expression, boolean returnType) {
-		Collection<TypeData> values = ensureExpressionTypesMapExists().get(expression);
-		if (values.isEmpty()) {
+		Collection<TypeData> values = doGetTypeData(expression);
+		if (values == null) {
 			return null;
 		}
 		TypeData result = mergeTypeData(expression, values, returnType);
+		return result;
+	}
+	
+	protected Collection<TypeData> doGetTypeData(XExpression expression) {
+		Collection<TypeData> result = ensureExpressionTypesMapExists().get(expression);
+		if (result.isEmpty())
+			return null;
 		return result;
 	}
 
@@ -86,7 +97,7 @@ public class ResolvedTypes implements IResolvedTypes {
 			}
 		}
 		if (values.size() == 1) {
-			TypeData typeData = values.iterator().next();
+			TypeData typeData = values.get(0);
 			return typeData;
 		}
 		final XComputedTypeReference mergedType = getXtypeFactory().createXComputedTypeReference();
@@ -101,10 +112,10 @@ public class ResolvedTypes implements IResolvedTypes {
 						references.add(reference);
 					}
 				}
-				return getCommonType(references);
+				return getMergedType(references);
 			}
 		});
-		TypeData result = new TypeData(expression, null, mergedType, ConformanceHint.MERGED, returnType);
+		TypeData result = new TypeData(expression, null /* TODO use all expectations? */, mergedType, ConformanceHint.MERGED /* TODO do we need that? */, returnType);
 		return result;
 	}
 	
@@ -135,7 +146,7 @@ public class ResolvedTypes implements IResolvedTypes {
 		return true;
 	}
 
-	protected JvmTypeReference getCommonType(List<JvmTypeReference> types) {
+	protected JvmTypeReference getMergedType(List<JvmTypeReference> types) {
 		if (types.isEmpty()) {
 			return null;
 		}
@@ -213,14 +224,15 @@ public class ResolvedTypes implements IResolvedTypes {
 		// this will resolve them to their type parameter constraints if any and no other thing is available
 		// mind the conformance hint
 		
-		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), resolver.getServices()) {
+		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), resolver.getServices()) {
 			@Override
 			protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference,
 					JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
 				// TODO extract method 'isExpressionWithTypeArguments'
 				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
 					XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-					result.setTypeProvider(new UnboundTypeParameter(expression, type, getServices()));
+					UnboundTypeParameter typeParameter = createUnboundTypeParameter(expression, type);
+					result.setTypeProvider(typeParameter);
 					return result;
 				} else {
 					throw new IllegalStateException("expression was: " + expression);
@@ -234,7 +246,11 @@ public class ResolvedTypes implements IResolvedTypes {
 				if (equivalent != null)
 					return visit(equivalent, visiting);
 				XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-				if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+				IJvmTypeReferenceProvider typeProvider = reference.getTypeProvider();
+				if (typeProvider instanceof UnboundTypeParameter) {
+					if (((UnboundTypeParameter) typeProvider).isComputed()) {
+						return visit(reference.getEquivalent(), visiting);
+					}
 					result.setTypeProvider(reference.getTypeProvider());
 				} else {
 					result.setTypeProvider(new AbstractReentrantTypeReferenceProvider() {
@@ -257,28 +273,28 @@ public class ResolvedTypes implements IResolvedTypes {
 
 	protected Map<JvmIdentifiableElement, JvmTypeReference> ensureTypesMapExists() {
 		if (types == null) {
-			types = Maps.newHashMap();
+			types = Maps.newLinkedHashMap();
 		}
 		return types;
 	}
 	
 	protected Map<JvmIdentifiableElement, JvmTypeReference> ensureReassignedTypesMapExists() {
 		if (reassignedTypes == null) {
-			reassignedTypes = Maps.newHashMap();
+			reassignedTypes = Maps.newLinkedHashMap();
 		}
 		return reassignedTypes;
 	}
 	
 	protected Multimap<XExpression, TypeData> ensureExpressionTypesMapExists() {
 		if (expressionTypes == null) {
-			expressionTypes = HashMultimap.create(2, 2);
+			expressionTypes = LinkedHashMultimap.create(2, 2);
 		}
 		return expressionTypes;
 	}
 	
-	protected Map<XExpression, ILinkingCandidate> ensureLinkingMapExists() {
+	protected Map<XExpression, ILinkingCandidate<?>> ensureLinkingMapExists() {
 		if (featureLinking == null) {
-			featureLinking = Maps.newHashMap();
+			featureLinking = Maps.newLinkedHashMap();
 		}
 		return featureLinking;
 	}
@@ -320,12 +336,35 @@ public class ResolvedTypes implements IResolvedTypes {
 		return (IConstructorLinkingCandidate) ensureLinkingMapExists().get(constructorCall);
 	}
 
-	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
+	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate<?> candidate) {
 		ensureLinkingMapExists().put(expression, candidate);
 	}
 
 	protected DefaultReentrantTypeResolver getResolver() {
 		return resolver;
+	}
+	
+	@NonNull
+	protected BaseUnboundTypeParameter getUnboundTypeParameter(@NonNull Object handle) {
+		BaseUnboundTypeParameter result = ensureTypeParameterMapExists().get(handle);
+		if (result == null) {
+			throw new IllegalStateException("Could not find type parameter");
+		}
+		return result;
+	}
+
+	@NonNull
+	protected RootUnboundTypeParameter createUnboundTypeParameter(@NonNull XExpression expression, @NonNull JvmTypeParameter type) {
+		RootUnboundTypeParameter result = new RootUnboundTypeParameter(expression, type, this, resolver.getServices());
+		ensureTypeParameterMapExists().put(result.getHandle(), result);
+		return result;
+	}
+	
+	protected Map<Object, BaseUnboundTypeParameter> ensureTypeParameterMapExists() {
+		if (unboundTypeParameters == null) {
+			unboundTypeParameters = Maps.newLinkedHashMap();
+		}
+		return unboundTypeParameters;
 	}
 	
 }

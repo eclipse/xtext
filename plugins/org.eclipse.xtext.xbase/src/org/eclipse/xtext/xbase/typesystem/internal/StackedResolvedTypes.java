@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -27,10 +29,12 @@ import com.google.common.collect.Lists;
 public class StackedResolvedTypes extends ResolvedTypes {
 
 	private final ResolvedTypes parent;
+	private final List<StackedUnboundParameter> stackedUnboundParameters;
 
 	public StackedResolvedTypes(ResolvedTypes parent) {
 		super(parent.getResolver());
 		this.parent = parent;
+		this.stackedUnboundParameters = Lists.newArrayListWithCapacity(2);
 	}
 	
 	public ResolvedTypes getParent() {
@@ -38,24 +42,30 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	public ResolvedTypes mergeIntoParent() {
+		for(StackedUnboundParameter unboundParameter: stackedUnboundParameters) {
+			unboundParameter.mergeIntoParent();
+		}
 		ResolvedTypes parent = getParent();
-		mergeInto(parent);
-		return parent;
-	}
-
-	protected void mergeInto(ResolvedTypes parent) {
 		parent.ensureExpressionTypesMapExists().putAll(ensureExpressionTypesMapExists());
 		parent.ensureTypesMapExists().putAll(ensureTypesMapExists());
 		parent.ensureLinkingMapExists().putAll(ensureLinkingMapExists());
+		parent.ensureTypeParameterMapExists().putAll(ensureTypeParameterMapExists());
+		return parent;
+	}
+
+	@Override
+	protected Collection<TypeData> doGetTypeData(XExpression expression) {
+		Collection<TypeData> result = super.doGetTypeData(expression);
+		if (result == null) {
+			return parent.doGetTypeData(expression);
+		}
+		return result;
 	}
 	
 	@Override
-	protected TypeData getTypeData(XExpression expression, boolean returnType) {
-		TypeData result = super.getTypeData(expression, returnType);
-		if (result == null) {
-			return parent.getTypeData(expression, returnType);
-		}
-		return result;
+	protected TypeData mergeTypeData(XExpression expression, Collection<TypeData> allValues, boolean returnType) {
+		// TODO copy the result and store it
+		return super.mergeTypeData(expression, allValues, returnType);
 	}
 	
 	@Override
@@ -63,15 +73,6 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		JvmTypeReference result = super.getActualType(identifiable);
 		if (result == null) {
 			result = parent.getActualType(identifiable);
-		}
-		return result;
-	}
-	
-	@Override
-	public JvmTypeReference getActualType(XExpression expression) {
-		JvmTypeReference result = super.getActualType(expression);
-		if (result == null) {
-			result = parent.getActualType(expression);
 		}
 		return result;
 	}
@@ -104,15 +105,6 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public JvmTypeReference getExpectedType(XExpression expression) {
-		JvmTypeReference result = super.getExpectedType(expression);
-		if (result == null) {
-			result = parent.getExpectedType(expression);
-		}
-		return result;
-	}
-	
-	@Override
 	public void reassignType(JvmIdentifiableElement identifiable, JvmTypeReference reference) {
 		super.reassignType(identifiable, reference);
 		if (reference == null) {
@@ -124,6 +116,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	public List<Diagnostic> getQueuedDiagnostics() {
 		List<Diagnostic> result = Lists.newArrayList(super.getQueuedDiagnostics());
 		result.addAll(parent.getQueuedDiagnostics());
+		return result;
+	}
+	
+	@Override
+	@NonNull
+	protected BaseUnboundTypeParameter getUnboundTypeParameter(@NonNull Object handle) {
+		BaseUnboundTypeParameter result = super.ensureTypeParameterMapExists().get(handle);
+		if (result == null) {
+			return parent.getUnboundTypeParameter(handle);
+		}
 		return result;
 	}
 
