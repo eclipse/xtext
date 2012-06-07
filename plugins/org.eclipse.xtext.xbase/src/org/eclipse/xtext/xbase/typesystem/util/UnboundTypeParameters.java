@@ -59,5 +59,18 @@ public final class UnboundTypeParameters {
 		}
 		return false;
 	}
+
+	public static boolean isUnboundAndEqual(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
+		if (reference instanceof XComputedTypeReference) {
+			XComputedTypeReference computed = (XComputedTypeReference) reference;
+			if (UnboundTypeParameters.isUnboundTypeParameter(computed)) {
+				UnboundTypeParameter unbound = (UnboundTypeParameter) computed.getTypeProvider();
+				if (unbound.equals(typeParameter)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 }

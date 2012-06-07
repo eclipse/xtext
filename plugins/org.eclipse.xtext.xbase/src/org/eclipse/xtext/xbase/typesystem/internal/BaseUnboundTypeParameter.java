@@ -86,6 +86,9 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 				if (other.getBoundTo() != null) {
 					throw new IllegalStateException();
 				} else {
+					if (other.getHandle().equals(getHandle())) {
+						throw new IllegalStateException("Cannot add recursive hint");
+					}
 					equallyBoundHandles.add(other.getHandle());
 					other.equallyBoundHandles.add(getHandle());
 					return;

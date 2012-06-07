@@ -45,7 +45,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 
 	@Override
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-		return new ParameterizedTypeReferenceTraverser() {
+		return new ActualParameterizedTypeReferenceTraverser() {
 			@Override
 			public Void doVisitComputedTypeReference(XComputedTypeReference reference,
 					JvmParameterizedTypeReference declaration) {
@@ -68,18 +68,6 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 			}
 		};
 	}
-
-	//	@Override
-	//	protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
-	//		return new ArrayTypeReferenceTraverser() {
-	//			@Override
-	//			public Void doVisitComputedTypeReference(XComputedTypeReference reference,
-	//					JvmGenericArrayTypeReference param) {
-	//				// TODO Auto-generated method stub
-	//				return super.doVisitComputedTypeReference(reference, param);
-	//			}
-	//		};
-	//	}
 
 	@Override
 	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
