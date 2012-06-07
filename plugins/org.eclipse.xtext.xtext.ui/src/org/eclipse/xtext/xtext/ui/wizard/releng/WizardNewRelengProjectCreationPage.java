@@ -47,6 +47,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
@@ -196,7 +197,6 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		Link link = new Link(parent, SWT.NONE);
 		GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
 		layoutData.horizontalSpan = 3;
-		layoutData.horizontalIndent = 2;
 		link.setLayoutData(layoutData);
 		link.setText(text);
 		link.setToolTipText("Click here to install buckminster headless from "+P2DirectorLaunch.REPOSITORY);
@@ -223,9 +223,10 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 								P2DirectorLaunch.setupLaunchConfiguration(workingCopy, destinationPath);
 								ILaunch launch = workingCopy.launch(ILaunchManager.RUN_MODE, localmonitor.newChild(20));
 								while (!localmonitor.isCanceled() && !launch.isTerminated()) {
-									localmonitor.worked(10);
+									localmonitor.worked(5);
 									localmonitor.setWorkRemaining(180);
 									Thread.sleep(200l);
+									Display.getCurrent().readAndDispatch();
 								}
 								buckyField.setText(destinationPath);
 								dbc.updateModels();
