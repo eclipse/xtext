@@ -41,7 +41,7 @@ class BuildScriptCreator {
 			
 			<target name="buckminster" depends="cleanup" description="description">
 				<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes."/>
-				<condition property="executable.file" value="bukminster.bat" else="buckminster">
+				<condition property="executable.file" value="buckminster.bat" else="buckminster">
 					<os family="windows"/>
 				</condition>
 				<exec executable="${buckminster.home}/${executable.file}">
