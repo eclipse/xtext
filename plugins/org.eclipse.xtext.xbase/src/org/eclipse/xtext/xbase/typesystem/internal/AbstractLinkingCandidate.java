@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +16,9 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,10 +26,9 @@ import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.util.AbstractTypeReferencePairWalker;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -40,13 +36,15 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO Javadoc
+ * TODO Javadoc, toString
  */
 public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinkingCandidate<LinkingCandidate>> implements ILinkingCandidate<LinkingCandidate> {
 	
 	private final IEObjectDescription description;
 	private final AbstractTypeComputationState state;
 	private final XExpression expression;
+	
+	private boolean typesComputed;
 	
 	protected AbstractLinkingCandidate(XExpression expression, IEObjectDescription description,
 			AbstractTypeComputationState state) {
@@ -71,7 +69,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		JvmIdentifiableElement feature = getFeature();
 		JvmTypeReference featureType = getDeclaredType(feature);
 		state.getResolvedTypes().acceptLinkingInformation(getExpression(), this);
-		computeArgumentTypes(feature, featureType);
+		computeArgumentTypes(feature);
 		List<ITypeExpectation> expectations = state.getImmediateExpectations();
 		for(ITypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
@@ -98,11 +96,14 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	protected JvmTypeParameter getTypeParameter(JvmTypeReference referenceToTypeParameter) {
 		if (referenceToTypeParameter instanceof XComputedTypeReference) {
-			if (((XComputedTypeReference) referenceToTypeParameter).getTypeProvider() instanceof UnboundTypeParameter){
-				return null;
+			XComputedTypeReference casted = ((XComputedTypeReference) referenceToTypeParameter);
+			IJvmTypeReferenceProvider typeProvider = casted.getTypeProvider();
+			if (typeProvider instanceof UnboundTypeParameter){
+				return ((UnboundTypeParameter) typeProvider).getTypeParameter();
 			}
-			return getTypeParameter(((XComputedTypeReference) referenceToTypeParameter).getEquivalent());
+			return getTypeParameter(casted.getEquivalent());
 		}
+		// TODO wildcards? <? extends T>, delegates
 		JvmType result = referenceToTypeParameter.getType();
 		if (result instanceof JvmTypeParameter) {
 			return (JvmTypeParameter) result;
@@ -112,82 +113,10 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	protected void deferredBindTypeArguments(ITypeExpectation expectation, JvmTypeReference type) {
 		JvmTypeReference expectedType = expectation.getExpectedType();
-		if (expectedType != null) { // TODO expectation#hasTypeParameters / isUnresolved
-			new AbstractTypeReferencePairWalker(getState().getServices()) {
-				
-				@Override
-				protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> mapping) {
-					return new UnboundTypeParameterPreservingSubstitutor(mapping, getServices());
-				}
-				
-				@Override
-				protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
-					return new WildcardTypeReferenceTraverser() {
-						@Override
-						public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmWildcardTypeReference declaration) {
-							if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
-								return super.doVisitTypeReference(reference, declaration);
-							}
-							return super.doVisitComputedTypeReference(reference, declaration);
-						}
-					};
-				}
-				
-				@Override
-				public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmTypeReference param) {
-					if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
-						UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
-						JvmTypeReference wrapped =  asWrapperType(param);
-						typeParameter.acceptHint(wrapped);
-						return null;
-					}
-					return super.doVisitComputedTypeReference(reference, param);
-				}
-
-				@Override
-				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-					return new ParameterizedTypeReferenceTraverser() {
-						@Override
-						public Void doVisitComputedTypeReference(XComputedTypeReference reference,
-								JvmParameterizedTypeReference declaration) {
-							if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
-								UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
-								JvmTypeReference wrapped =  asWrapperType(declaration);
-								typeParameter.acceptHint(wrapped);
-								return null;
-							}
-							return super.doVisitComputedTypeReference(reference, declaration);
-						}
-						@Override
-						protected boolean allowToVisitTwice() {
-							return false;
-						}
-					};
-				}
-
-				@Override
-				protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
-						Map<JvmTypeParameter, JvmTypeReference> mapping, Collection<JvmTypeParameter> visited) {
-					for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: mapping.entrySet()) {
-						JvmTypeReference reference = entry.getValue();
-						JvmType type = null;
-						if (reference instanceof XComputedTypeReference) {
-							IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) reference).getTypeProvider();
-							if (typeProvider instanceof UnboundTypeParameter) {
-								type = ((UnboundTypeParameter) typeProvider).getTypeParameter();
-							}
-						} else {
-							type = reference.getType();
-						}
-						if (parameter == type) {
-							if (visited.add(entry.getKey()))
-								return entry.getKey();
-							return null;
-						}
-					}
-					return null;
-				}
-			}.processPairedReferences(expectedType, type);
+		if (expectedType != null) { 
+			// TODO expectation#hasTypeParameters / isUnresolved
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
+			collector.processPairedReferences(expectedType, type);
 		}
 	}
 
@@ -195,11 +124,14 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return state.getType(feature);
 	}
 
-	protected Map<JvmTypeParameter, JvmTypeReference> getDeclaratorParameterMapping() {
-		return Collections.<JvmTypeParameter, JvmTypeReference>emptyMap();
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getDeclaratorParameterMapping() {
+		return Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap();
 	}
 
-	protected void computeArgumentTypes(JvmIdentifiableElement feature, JvmTypeReference featureType) {
+	public void computeArgumentTypes(JvmIdentifiableElement feature /*, JvmTypeReference featureType */) {
+		if (typesComputed)
+			return;
+		typesComputed = true;
 		int declaredParameterCount = 0;
 		int fixedArityParameterCount = 0;
 		List<JvmFormalParameter> parameters = null;
@@ -302,6 +234,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		if (getDeclaredTypeParameters().size() > right.getDeclaredTypeParameters().size()) {
 			return 1;
 		}
+//		computeArgumentTypes(getFeature());
+//		((AbstractLinkingCandidate<LinkingCandidate>)right).computeArgumentTypes(right.getFeature());
 		return 0;
 	}
 	

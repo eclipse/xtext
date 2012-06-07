@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Sets;
 
@@ -32,15 +31,11 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, CommonTypeComputationServices services) {
 		super(services);
 		this.parametersToBeMapped = parametersToBeMapped;
-		typeParameterMapping = ArrayListMultimap.create(parametersToBeMapped.size(), 3);
+		typeParameterMapping = Multimaps2.newLinkedHashListMultimap(parametersToBeMapped.size(), 3);
 	}
 
 	public void populateTypeParameterMapping(JvmTypeReference declaredType, JvmTypeReference actualType) {
 		processPairedReferences(declaredType, actualType);
-	}
-	
-	protected BoundTypeArgument createBoundTypeArgument(JvmTypeReference reference, BoundTypeArgumentSource source, Object origin, VarianceInfo declaredVariance, VarianceInfo actualVariance) {
-		return new BoundTypeArgument(reference, source, origin, declaredVariance, actualVariance);
 	}
 	
 	protected BoundTypeArgument boundByConstraint(JvmTypeReference reference, Object origin) {
@@ -80,7 +75,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 		if (typeParameterMapping.keySet().containsAll(getParametersToProcess())) {
 			return typeParameterMapping;
 		}
-		ListMultimap<JvmTypeParameter, BoundTypeArgument> result = ArrayListMultimap.create(typeParameterMapping);
+		ListMultimap<JvmTypeParameter, BoundTypeArgument> result = Multimaps2.newLinkedHashListMultimap(typeParameterMapping);
 		for(JvmTypeParameter pendingParameter: getParametersToProcess()) {
 			if (!result.containsKey(pendingParameter)) {
 				for(JvmTypeConstraint constraint: pendingParameter.getConstraints()) {
@@ -92,7 +87,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 						JvmType constraintType = constraintReference.getType();
 						if (!result.containsKey(constraintType)) {
 							if (!getParametersToProcess().contains(constraintType)) {
-								Map<JvmTypeParameter, JvmTypeReference> constraintParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(constraintReference);
+								Map<JvmTypeParameter, MergedBoundTypeArgument> constraintParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(constraintReference);
 								JvmTypeReference resolvedConstraint = new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getServices()).visit(constraintReference, Sets.newHashSet(pendingParameter));
 								result.put(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter));
 							} else {

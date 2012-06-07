@@ -12,7 +12,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState.TypeAssigner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

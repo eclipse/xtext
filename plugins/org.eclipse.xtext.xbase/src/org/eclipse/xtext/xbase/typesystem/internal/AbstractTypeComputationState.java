@@ -246,7 +246,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				JvmTypeReference type = super.getActualType(expression);
 				if (type == null && expression != null) {
 					if (demandComputedTypes == null) {
-						demandComputedTypes = Maps.newHashMapWithExpectedSize(2);
+						demandComputedTypes = Maps.newLinkedHashMap();
 					}
 					StackedResolvedTypes previouslyComputed = demandComputedTypes.get(expression);
 					if (previouslyComputed != null) {

@@ -80,25 +80,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected JvmTypeReference getComputedType(JvmMember member) {
 		throw new UnsupportedOperationException("member: " + member);
 	}
-//	
-//	@Override
-//	protected TypeParameterSubstitutor createTypeParameterSubstitutor() {
-//		JvmType root = getRoot();
-//		if (root instanceof JvmDeclaredType) {
-//			DeclaratorTypeArgumentCollector visitor = new DeclaratorTypeArgumentCollector();
-//			// TODO merge bound parameter things
-//			Map<JvmTypeParameter, JvmTypeReference> mapping = Maps.newHashMap();
-//			for(JvmTypeReference superType: ((JvmDeclaredType) root).getSuperTypes()) {
-//				mapping.putAll(visitor.getTypeParameterMapping(superType));
-//			}
-//			if (root instanceof JvmTypeParameterDeclarator) {
-//				
-//			}
-//			typeParameterMapping = mapping;
-//		} else {
-//			typeParameterMapping = Maps.newHashMap();			
-//		}
-//	}
 	
 	/**
 	 * Assign computed type references to the identifiable structural elements in the processed type.
@@ -239,7 +220,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, JvmDeclaredType thisType,
 			JvmTypeReference superType) {
-		IFeatureScopeSession childSession = session;
+		IFeatureScopeSession childSession;
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
 			builder.put(FeatureNames.THIS, thisType);

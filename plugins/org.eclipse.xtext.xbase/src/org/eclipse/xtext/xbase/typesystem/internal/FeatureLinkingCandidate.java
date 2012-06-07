@@ -24,6 +24,8 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Maps;
 
@@ -133,9 +135,9 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getDeclaratorParameterMapping() {
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getDeclaratorParameterMapping() {
 		if (getDescription() instanceof BucketedEObjectDescription) {
-			Map<JvmTypeParameter, JvmTypeReference> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
+			Map<JvmTypeParameter, MergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
 			if (result != null)
 				return result;
 		}
@@ -143,16 +145,16 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getFeatureTypeParameterMapping() {
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getFeatureTypeParameterMapping() {
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeReference> typeArguments = getFeatureCall().getTypeArguments();
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
 			if (!typeArguments.isEmpty()) {
+				Map<JvmTypeParameter, MergedBoundTypeArgument> result = Maps.newLinkedHashMap();
 				int max = Math.min(typeArguments.size(), typeParameters.size());
-				Map<JvmTypeParameter, JvmTypeReference> result = Maps.newHashMapWithExpectedSize(max);
 				for(int i = 0; i < max; i++) {
-					result.put(typeParameters.get(i), typeArguments.get(i));
+					result.put(typeParameters.get(i), new MergedBoundTypeArgument(typeArguments.get(i), VarianceInfo.INVARIANT));
 				}
 				// TODO computed type references for the remaining type parameters
 				return result;
