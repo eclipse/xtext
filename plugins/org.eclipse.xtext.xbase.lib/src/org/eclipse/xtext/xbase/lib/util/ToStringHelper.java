@@ -25,8 +25,6 @@ import com.google.common.base.Strings;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * 
- * TODO prevent infinite recursion. The algorithm will fail e.g. for EObjects that
- * have a pointer to their container which in turn holds a list of it's contents.
  * @since 2.3
  */
 @Beta
@@ -192,12 +190,7 @@ public class ToStringHelper {
 		} else if (object instanceof Enum<?>) {
 			sb.append(((Enum<?>)object).name());
 		} else {
-			try {
-				object.getClass().getDeclaredMethod("toString");
-				sb.append(object.toString());
-			} catch (NoSuchMethodException e) {
-				sb.append(toString(object));
-			}
+			sb.append(object.toString());
 		}
 	}
 	
