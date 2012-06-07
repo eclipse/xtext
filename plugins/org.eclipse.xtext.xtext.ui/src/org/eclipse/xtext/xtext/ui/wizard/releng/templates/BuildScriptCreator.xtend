@@ -41,7 +41,10 @@ class BuildScriptCreator {
 			
 			<target name="buckminster" depends="cleanup" description="description">
 				<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes."/>
-				<exec executable="${buckminster.home}/buckminster">
+				<condition property="executable.file" value="bukminster.bat" else="buckminster">
+					<os family="windows"/>
+				</condition>
+				<exec executable="${buckminster.home}/${executable.file}">
 					<arg value="-Dprojects.location=${projects.location}" />
 					<arg value="-Dbuckminster.output.root=${build.root}/buckminster.output" />
 					<arg value="-Dbuckminster.temp.root=${build.root}/buckminster.temp" />
