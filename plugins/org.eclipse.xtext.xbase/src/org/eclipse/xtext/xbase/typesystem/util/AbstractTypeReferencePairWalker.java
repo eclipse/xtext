@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -37,8 +38,14 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 		}
 	}
 
-	protected class WildcardTypeReferenceTraverser extends
+	protected static class WildcardTypeReferenceTraverser extends
 			AbstractTypeReferenceTraverser<JvmWildcardTypeReference> {
+		
+		private AbstractTypeReferencePairWalker delegate;
+
+		protected WildcardTypeReferenceTraverser(AbstractTypeReferencePairWalker delegate) {
+			this.delegate = delegate;
+		}
 		
 		@Override
 		public Void doVisitWildcardTypeReference(JvmWildcardTypeReference reference, JvmWildcardTypeReference declaration) {
@@ -50,12 +57,12 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 					for (JvmTypeConstraint actualConstraint : reference.getConstraints()) {
 						if (actualConstraint instanceof JvmLowerBound) {
 							actualHasLowerBound = true;
-							outerVisit(declaredConstraint.getTypeReference(), actualConstraint.getTypeReference(), declaration, VarianceInfo.IN, VarianceInfo.IN);
+							delegate.outerVisit(declaredConstraint.getTypeReference(), actualConstraint.getTypeReference(), declaration, VarianceInfo.IN, VarianceInfo.IN);
 						}
 					}
 					if (!actualHasLowerBound) {
 						for (JvmTypeConstraint actualConstraint : reference.getConstraints()) {
-							outerVisit(declaredConstraint.getTypeReference(), actualConstraint.getTypeReference(), declaration, VarianceInfo.IN, VarianceInfo.OUT);
+							delegate.outerVisit(declaredConstraint.getTypeReference(), actualConstraint.getTypeReference(), declaration, VarianceInfo.IN, VarianceInfo.OUT);
 						}
 					}
 				}
@@ -63,7 +70,7 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 			if (!lowerBoundFound) {
 				for (JvmTypeConstraint declaredConstraint : declaration.getConstraints()) {
 					for (JvmTypeConstraint actualConstraint : reference.getConstraints()) {
-						outerVisit(declaredConstraint.getTypeReference(), actualConstraint.getTypeReference(), declaration, VarianceInfo.OUT, 
+						delegate.outerVisit(declaredConstraint.getTypeReference(), actualConstraint.getTypeReference(), declaration, VarianceInfo.OUT, 
 								actualConstraint instanceof JvmUpperBound ? VarianceInfo.OUT : VarianceInfo.IN);
 					}	
 				}
@@ -77,13 +84,13 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 			for (JvmTypeConstraint declaredConstraint : declaration.getConstraints()) {
 				if (declaredConstraint instanceof JvmLowerBound) {
 					lowerBoundFound = true;
-					outerVisit(declaredConstraint.getTypeReference(), reference, declaration, VarianceInfo.IN, VarianceInfo.INVARIANT);
+					delegate.outerVisit(declaredConstraint.getTypeReference(), reference, declaration, VarianceInfo.IN, VarianceInfo.INVARIANT);
 				}
 			}
 			if (!lowerBoundFound) {
 				for (JvmTypeConstraint declaredConstraint : declaration.getConstraints()) {
 					if (declaredConstraint instanceof JvmUpperBound) {
-						outerVisit(declaredConstraint.getTypeReference(), reference, declaration, VarianceInfo.OUT, VarianceInfo.INVARIANT);
+						delegate.outerVisit(declaredConstraint.getTypeReference(), reference, declaration, VarianceInfo.OUT, VarianceInfo.INVARIANT);
 					}
 				}
 			}
@@ -95,9 +102,9 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 			AbstractTypeReferenceTraverser<JvmParameterizedTypeReference> {
 		@Override
 		public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, JvmParameterizedTypeReference declaration) {
-			final JvmType type = declaration.getType();
+			final JvmType type = getTypeFromReference(declaration);
 			if (type instanceof JvmTypeParameter) {
-				if (type != reference.getType() && shouldProcess((JvmTypeParameter) type)) {
+				if (type != getTypeFromReference(reference) && shouldProcess((JvmTypeParameter) type)) {
 					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 					processTypeParameter(typeParameter, reference);
 				}
@@ -110,44 +117,42 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 
 		protected void doVisitSuperTypesWithMatchingParams(JvmParameterizedTypeReference reference,
 				JvmParameterizedTypeReference declaration) {
-			Map<JvmTypeParameter, JvmTypeReference> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
+			Map<JvmTypeParameter, MergedBoundTypeArgument> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
 			TypeParameterSubstitutor actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
-			Map<JvmTypeParameter, JvmTypeReference> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
+			Map<JvmTypeParameter, MergedBoundTypeArgument> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
 			TypeParameterSubstitutor declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
-			Collection<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
-			Collection<JvmTypeParameter> visited = Sets.newHashSet();
+			Set<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
+			Set<JvmTypeParameter> visited = Sets.newHashSet();
 			for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
 				if (visited.add(actualBoundParameter)) {
-					JvmTypeReference declared = declaredMapping.get(actualBoundParameter);
-					while(declared == null && actualBoundParameter != null) {
+					MergedBoundTypeArgument declaredBoundArgument = declaredMapping.get(actualBoundParameter);
+					while(declaredBoundArgument == null && actualBoundParameter != null) {
 						actualBoundParameter = findMappedParameter(actualBoundParameter, actualMapping, visited);
-						declared = declaredMapping.get(actualBoundParameter);
+						declaredBoundArgument = declaredMapping.get(actualBoundParameter);
 					}
-					if (declared != null) {
-						if (declared.getType() instanceof JvmTypeParameter) {
-							JvmTypeParameter declaredType = (JvmTypeParameter) declared.getType();
-							if (!shouldProcess(declaredType)) {
-								if (actualBoundParameters.contains(declaredType) && !visited.add(declaredType))
-									continue;
-								declared = declaredSubstitutor.substitute(declared);
-							} else if (!allowToVisitTwice() && !visited.add(declaredType)) {
+					if (declaredBoundArgument != null) {
+						JvmTypeReference declaredTypeReference = declaredBoundArgument.getTypeReference();
+						JvmType declaredType = getTypeFromReference(declaredTypeReference);
+						if (declaredType instanceof JvmTypeParameter) {
+							JvmTypeParameter declaredTypeParameter = (JvmTypeParameter) declaredType;
+							if (!shouldProcessInContextOf(declaredTypeParameter, actualBoundParameters, visited))
 								continue;
-							}
+							declaredTypeReference = declaredSubstitutor.substitute(declaredTypeReference);
 						}
-						JvmTypeReference actual = actualSubstitutor.substitute(actualMapping.get(actualBoundParameter));
-						outerVisit(declared, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+						JvmTypeReference actual = actualSubstitutor.substitute(actualMapping.get(actualBoundParameter).getTypeReference());
+						outerVisit(declaredTypeReference, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 					}
 				}
 			}
 		}
 		
-		protected boolean allowToVisitTwice() {
+		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters, Set<JvmTypeParameter> visited) {
 			return true;
 		}
 
 		@Override
 		public Void doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, JvmParameterizedTypeReference declaration) {
-			final JvmType type = declaration.getType();
+			final JvmType type = getTypeFromReference(declaration);
 			if (type instanceof JvmTypeParameter) {
 				if (shouldProcess((JvmTypeParameter) type)) {
 					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
@@ -175,7 +180,7 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 		}
 
 	}
-
+	
 	private final CommonTypeComputationServices services;
 	
 	private final ParameterizedTypeReferenceTraverser parameterizedTypeReferenceTraverser;
@@ -207,11 +212,15 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 	}
 
 	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
-		return new WildcardTypeReferenceTraverser();
+		return new WildcardTypeReferenceTraverser(this);
 	}
 
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
 		return new ParameterizedTypeReferenceTraverser();
+	}
+	
+	protected JvmType getTypeFromReference(JvmTypeReference reference) {
+		return reference.getType();
 	}
 	
 	@Override
@@ -269,15 +278,15 @@ public abstract class AbstractTypeReferencePairWalker extends AbstractTypeRefere
 		return origin;
 	}
 
-	protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> mapping) {
+	protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
 		return new TypeParameterSubstitutor(mapping, services);
 	}
 	
 	protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
-			Map<JvmTypeParameter, JvmTypeReference> mapping, Collection<JvmTypeParameter> visited) {
-		for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: mapping.entrySet()) {
-			JvmTypeReference reference = entry.getValue();
-			JvmType type = reference.getType();
+			Map<JvmTypeParameter, MergedBoundTypeArgument> mapping, Collection<JvmTypeParameter> visited) {
+		for(Map.Entry<JvmTypeParameter, MergedBoundTypeArgument> entry: mapping.entrySet()) {
+			MergedBoundTypeArgument reference = entry.getValue();
+			JvmType type = getTypeFromReference(reference.getTypeReference());
 			if (parameter == type) {
 				if (visited.add(entry.getKey()))
 					return entry.getKey();

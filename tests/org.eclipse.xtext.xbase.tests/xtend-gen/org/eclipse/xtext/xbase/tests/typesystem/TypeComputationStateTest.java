@@ -18,8 +18,8 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.tests.typesystem.AccessibleReentrantTypeResolver;
-import org.eclipse.xtext.xbase.tests.typesystem.MyResolvedTypes;
+import org.eclipse.xtext.xbase.tests.typesystem.PublicReentrantTypeResolver;
+import org.eclipse.xtext.xbase.tests.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -37,7 +37,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeComputer {
   @Inject
-  private AccessibleReentrantTypeResolver resolver;
+  private PublicReentrantTypeResolver resolver;
   
   @Inject
   private CommonTypeComputationServices services;
@@ -50,8 +50,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
-      MyResolvedTypes _myResolvedTypes = new MyResolvedTypes(this.resolver);
-      final MyResolvedTypes resolution = _myResolvedTypes;
+      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+      final PublicResolvedTypes resolution = _publicResolvedTypes;
       TypeReferences _typeReferences = this.services.getTypeReferences();
       final JvmAnyTypeReference any = _typeReferences.createAnyTypeReference(expression);
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();

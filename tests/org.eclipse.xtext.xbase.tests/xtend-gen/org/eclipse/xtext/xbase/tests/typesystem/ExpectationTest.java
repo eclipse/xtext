@@ -14,8 +14,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.tests.typesystem.AccessibleReentrantTypeResolver;
 import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTestingTypeComputer;
+import org.eclipse.xtext.xbase.tests.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.junit.After;
@@ -29,7 +29,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ExpectationTest extends AbstractXbaseTestCase {
   @Inject
-  private AccessibleReentrantTypeResolver resolver;
+  private PublicReentrantTypeResolver resolver;
   
   @Inject
   private ExpectationTestingTypeComputer typeComputer;

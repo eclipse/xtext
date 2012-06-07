@@ -5,6 +5,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 /**
@@ -44,6 +45,17 @@ public class CommonTypeComputationServices {
   
   public void setPrimitives(final Primitives primitives) {
     this._primitives = primitives;
+  }
+  
+  @Inject
+  private BoundTypeArgumentMerger _boundTypeArgumentMerger;
+  
+  public BoundTypeArgumentMerger getBoundTypeArgumentMerger() {
+    return this._boundTypeArgumentMerger;
+  }
+  
+  public void setBoundTypeArgumentMerger(final BoundTypeArgumentMerger boundTypeArgumentMerger) {
+    this._boundTypeArgumentMerger = boundTypeArgumentMerger;
   }
   
   @Inject(optional = true)

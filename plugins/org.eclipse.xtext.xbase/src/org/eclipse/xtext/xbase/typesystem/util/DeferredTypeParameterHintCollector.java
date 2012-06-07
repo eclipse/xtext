@@ -8,26 +8,26 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API 
- * TODO JavaDoc, toString
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc, toString - focus on differences to ActualTypeArgumentCollector and UnboundTypeParameterAwareTypeArgumentCollector
  */
-public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeArgumentCollector {
+public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePairWalker {
 
-	public UnboundTypeParameterAwareTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped,
-			CommonTypeComputationServices services) {
-		super(parametersToBeMapped, services);
+	public DeferredTypeParameterHintCollector(CommonTypeComputationServices services) {
+		super(services);
 	}
-
+	
 	@Override
 	protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
 		return new UnboundTypeParameterPreservingSubstitutor(mapping, getServices());
@@ -37,15 +37,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 	public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmTypeReference param) {
 		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 			UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
-			if (param instanceof XComputedTypeReference) {
-				XComputedTypeReference castedParam = (XComputedTypeReference) param;
-				if (UnboundTypeParameters.isUnboundTypeParameter(castedParam)) {
-					if (typeParameter == castedParam.getTypeProvider()) {
-						return null;
-					}
-				}
-			}
-			typeParameter.acceptHint(boundByInferrence(param));
+			addHint(typeParameter, param);
 			return null;
 		}
 		return super.doVisitComputedTypeReference(reference, param);
@@ -53,41 +45,34 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 
 	@Override
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-		return new ActualParameterizedTypeReferenceTraverser() {
+		return new ParameterizedTypeReferenceTraverser() {
 			@Override
 			public Void doVisitComputedTypeReference(XComputedTypeReference reference,
 					JvmParameterizedTypeReference declaration) {
 				if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 					UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
-					JvmType type = declaration.getType();
-					if (type instanceof JvmTypeParameter) {
-						JvmTypeParameter unboundTypeParameter = (JvmTypeParameter) type;
-						if (unboundTypeParameter != typeParameter.getTypeParameter() && shouldProcess(unboundTypeParameter)) {
-							processTypeParameter(unboundTypeParameter, reference);
-						} else {
-							// register synonym type param resolution et al for the actual type in the given UnboundTypeParameter
-						}
-					} else {
-						typeParameter.acceptHint(boundByInferrence(declaration));
-					}
+					addHint(typeParameter, declaration);
 					return null;
 				}
 				return super.doVisitComputedTypeReference(reference, declaration);
 			}
+			
+			@Override
+			protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+					Set<JvmTypeParameter> visited) {
+				if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+					return false;
+				}
+				return true;
+			}
 		};
 	}
-
+	
 	@Override
 	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
 		return new UnboundTypeParameterAwareWildcardTypeReferenceTraverser(this);
 	}
 
-	@Override
-	protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
-			Map<JvmTypeParameter, MergedBoundTypeArgument> mapping, Collection<JvmTypeParameter> visited) {
-		return UnboundTypeParameters.findMappedParameter(parameter, mapping, visited);
-	}
-	
 	@Override
 	protected JvmType getTypeFromReference(JvmTypeReference reference) {
 		if (reference instanceof XComputedTypeReference) {
@@ -98,4 +83,30 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 		}
 		return super.getTypeFromReference(reference);
 	}
+	
+	@Override
+	protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
+			Map<JvmTypeParameter, MergedBoundTypeArgument> mapping, Collection<JvmTypeParameter> visited) {
+		return UnboundTypeParameters.findMappedParameter(parameter, mapping, visited);
+	}
+
+	protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
+		if (!UnboundTypeParameters.isUnboundAndEqual(typeParameter, reference)) {
+			JvmTypeReference wrapped = asWrapperType(reference);
+			typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.INFERRED_LATER, getOrigin(), getExpectedVariance(), getActualVariance());
+		}
+	}
+
+	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
+		if (potentialPrimitive instanceof XComputedTypeReference) {
+			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter) {
+				// since type parameters are never primitives, it's save to add them directly
+				return potentialPrimitive;
+			}
+		}
+		Primitives primitives = getServices().getPrimitives();
+		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
+		return result;
+	}
+
 }

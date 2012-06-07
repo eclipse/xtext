@@ -24,6 +24,9 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Maps;
 
@@ -34,7 +37,7 @@ import com.google.common.collect.Maps;
 public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
-			AbstractTypeComputationState state) {
+			ExpressionTypeComputationState state) {
 		super(featureCall, description, state);
 	}
 
@@ -42,6 +45,9 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 		JvmTypeReference receiverType = null;
 		if (getDescription() instanceof BucketedEObjectDescription) {
 			receiverType = ((BucketedEObjectDescription) getDescription()).getReceiverType();
+//			if (receiverType != null) {
+//				receiverType = getState().getResolvedTypes().referenceReplacer.apply(receiverType);
+//			}
 		}
 		return receiverType;
 	}
@@ -96,6 +102,15 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 		}
 		return false;
 	}
+	
+	@Override
+	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType) {
+		super.resolveAgainstActualType(declaredType, actualType);
+		if (!isStatic() && !isExtension()) {
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
+			collector.processPairedReferences(declaredType, actualType);
+		}
+	}
 
 	@Override
 	protected List<XExpression> getSyntacticArguments() {
@@ -122,7 +137,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
 			JvmTypeReference receiverType = getReceiverType();
-			StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(getState().getResolvedTypes());
+			StackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(getState().getResolvedTypes(), argument);
 			resolvedTypes.acceptType(argument, null, receiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
 				resolveAgainstActualType(declaredType, receiverType);
@@ -133,9 +148,9 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getDeclaratorParameterMapping() {
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getDeclaratorParameterMapping() {
 		if (getDescription() instanceof BucketedEObjectDescription) {
-			Map<JvmTypeParameter, JvmTypeReference> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
+			Map<JvmTypeParameter, MergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
 			if (result != null)
 				return result;
 		}
@@ -143,16 +158,16 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, JvmTypeReference> getFeatureTypeParameterMapping() {
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getFeatureTypeParameterMapping() {
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeReference> typeArguments = getFeatureCall().getTypeArguments();
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
 			if (!typeArguments.isEmpty()) {
+				Map<JvmTypeParameter, MergedBoundTypeArgument> result = Maps.newLinkedHashMap();
 				int max = Math.min(typeArguments.size(), typeParameters.size());
-				Map<JvmTypeParameter, JvmTypeReference> result = Maps.newHashMapWithExpectedSize(max);
 				for(int i = 0; i < max; i++) {
-					result.put(typeParameters.get(i), typeArguments.get(i));
+					result.put(typeParameters.get(i), new MergedBoundTypeArgument(typeArguments.get(i), VarianceInfo.INVARIANT));
 				}
 				// TODO computed type references for the remaining type parameters
 				return result;

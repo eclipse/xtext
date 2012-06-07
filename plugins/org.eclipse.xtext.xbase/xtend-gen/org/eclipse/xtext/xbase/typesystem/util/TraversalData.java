@@ -7,10 +7,10 @@ import java.util.Set;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,14 +30,14 @@ public class TraversalData {
     return this._visited;
   }
   
-  private final Map<JvmTypeParameter,JvmTypeReference> _typeParameterMapping = new Function0<Map<JvmTypeParameter,JvmTypeReference>>() {
-    public Map<JvmTypeParameter,JvmTypeReference> apply() {
-      LinkedHashMap<JvmTypeParameter,JvmTypeReference> _newLinkedHashMap = CollectionLiterals.<JvmTypeParameter, JvmTypeReference>newLinkedHashMap();
+  private final Map<JvmTypeParameter,MergedBoundTypeArgument> _typeParameterMapping = new Function0<Map<JvmTypeParameter,MergedBoundTypeArgument>>() {
+    public Map<JvmTypeParameter,MergedBoundTypeArgument> apply() {
+      LinkedHashMap<JvmTypeParameter,MergedBoundTypeArgument> _newLinkedHashMap = CollectionLiterals.<JvmTypeParameter, MergedBoundTypeArgument>newLinkedHashMap();
       return _newLinkedHashMap;
     }
   }.apply();
   
-  public Map<JvmTypeParameter,JvmTypeReference> getTypeParameterMapping() {
+  public Map<JvmTypeParameter,MergedBoundTypeArgument> getTypeParameterMapping() {
     return this._typeParameterMapping;
   }
   

@@ -51,9 +51,9 @@ public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgument
 					if (upperBounds.size() > 1) {
 						JvmMultiTypeReference boundReference = factory.createJvmMultiTypeReference();
 						boundReference.getReferences().addAll(upperBounds);
-						data.getTypeParameterMapping().put((JvmTypeParameter) type, boundReference);
+						data.getTypeParameterMapping().put((JvmTypeParameter) type, new MergedBoundTypeArgument(boundReference, VarianceInfo.INVARIANT));
 					} else if (upperBounds.size() == 1) {
-						data.getTypeParameterMapping().put((JvmTypeParameter) type, upperBounds.get(0));
+						data.getTypeParameterMapping().put((JvmTypeParameter) type, new MergedBoundTypeArgument(upperBounds.get(0), VarianceInfo.INVARIANT));
 					} else {
 						return Boolean.FALSE;
 					}

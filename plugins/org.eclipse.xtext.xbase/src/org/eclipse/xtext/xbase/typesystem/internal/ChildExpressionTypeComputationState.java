@@ -12,7 +12,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState.TypeAssigner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState.
 @NonNullByDefault
 public class ChildExpressionTypeComputationState extends ExpressionTypeComputationState {
 
-	protected ChildExpressionTypeComputationState(ResolvedTypes resolvedTypes,
+	protected ChildExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, 
 			ExpressionTypeComputationState parent,
@@ -37,9 +36,14 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	@Override
 	protected JvmTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
 			JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		JvmTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
-		getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
-		return actualType;
+		if (getParent().getExpression() != getExpression()) {
+			JvmTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
+			getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
+			return actualType;
+		} else {
+			JvmTypeReference actualType = getParent().acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
+			return actualType;
+		}
 	}
 	
 	@Override

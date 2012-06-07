@@ -27,7 +27,7 @@ import org.eclipse.xtext.common.types.util.Primitives
 @Data
 class TraversalData {
 	Set<JvmType> visited = newHashSet
-	Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping = newLinkedHashMap
+	Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping = newLinkedHashMap
 }
 
 /**
@@ -73,6 +73,10 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	Primitives primitives;
+	
+	@Inject
+	@Property
+	BoundTypeArgumentMerger boundTypeArgumentMerger
 
 	@Inject(optional = true)
 	@Property

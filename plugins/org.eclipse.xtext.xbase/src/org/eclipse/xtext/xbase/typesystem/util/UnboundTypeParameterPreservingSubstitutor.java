@@ -20,7 +20,8 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
  * TODO JavaDoc, toString
  */
 public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor {
-	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping,
+	
+	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping,
 			CommonTypeComputationServices services) {
 		super(typeParameterMapping, services);
 	}
@@ -28,7 +29,7 @@ public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubs
 	@Override
 	public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
 			Set<JvmTypeParameter> param) {
-		if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 			XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
 			result.setTypeProvider(reference.getTypeProvider());
 			return result;

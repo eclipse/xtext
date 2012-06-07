@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -123,12 +124,14 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	@Nullable
 	protected ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
 		if (expression != null) {
-			StackedResolvedTypes stackedResolvedTypes = new StackedResolvedTypes(resolvedTypes);
+			StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, expression);
 			ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
 			getResolver().getTypeComputer().computeTypes(expression, state);
-			// TODO selective merge
-			ResolvedTypes result = mergeAll ? stackedResolvedTypes.mergeIntoParent() : stackedResolvedTypes;
-			return result;
+			if (mergeAll) {
+				stackedResolvedTypes.mergeIntoParent();
+				return resolvedTypes;
+			}
+			return stackedResolvedTypes;
 		} else {
 			return null;
 		}
@@ -235,19 +238,15 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (result != null) {
 			return Collections.singletonList(result);
 		}
-		IResolvedTypes demandResolvedTypes = new DelegatingResolvedTypes(resolvedTypes) {
-			
-			// TODO reuse this information later on
-			private Map<XExpression, StackedResolvedTypes> demandComputedTypes;
+		// TODO reuse this information later on
+		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
+		DelegatingResolvedTypes demandResolvedTypes = new DelegatingResolvedTypes(resolvedTypes) {
 			
 			@Override
 			@Nullable
 			public JvmTypeReference getActualType(@Nullable XExpression expression) {
 				JvmTypeReference type = super.getActualType(expression);
 				if (type == null && expression != null) {
-					if (demandComputedTypes == null) {
-						demandComputedTypes = Maps.newHashMapWithExpectedSize(2);
-					}
 					StackedResolvedTypes previouslyComputed = demandComputedTypes.get(expression);
 					if (previouslyComputed != null) {
 						return previouslyComputed.getActualType(expression);
@@ -267,7 +266,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, featureScopeSession, demandResolvedTypes);
 		List<IFeatureLinkingCandidate> resultList = Lists.newArrayList();
 		for(IEObjectDescription description: descriptions) {
-			resultList.add(createCandidate(featureCall, description));
+			resultList.add(createCandidate(featureCall, demandComputedTypes.values(), description));
 		}
 		if (resultList.isEmpty()) {
 			throw new UnsupportedOperationException("TODO Add error candidate");
@@ -275,8 +274,18 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return resultList;
 	}
 	
-	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description) {
-		return new FeatureLinkingCandidate(featureCall, description, this);
+	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final Collection<StackedResolvedTypes> collection, IEObjectDescription description) {
+		StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, featureCall) {
+			@Override
+			protected void mergeIntoParent() {
+				super.mergeIntoParent();
+//				for(StackedResolvedTypes other: collection) {
+//					other.mergeIntoParent();
+//				}
+			}
+		};
+		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, stackedResolvedTypes);
+		return new FeatureLinkingCandidate(featureCall, description, state);
 	}
 	
 	public List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {
@@ -297,7 +306,9 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
-		return new ConstructorLinkingCandidate(constructorCall, description, this);
+		StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, constructorCall);
+		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
+		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
 
 }

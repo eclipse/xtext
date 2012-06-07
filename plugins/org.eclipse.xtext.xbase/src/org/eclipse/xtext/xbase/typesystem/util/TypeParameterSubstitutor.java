@@ -35,15 +35,15 @@ import com.google.common.collect.Sets;
  */
 public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithParameter<Set<JvmTypeParameter>, JvmTypeReference> {
 		
-	private final Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping;
+	private final Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping;
 	private final CommonTypeComputationServices services;
 
-	public TypeParameterSubstitutor(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping, CommonTypeComputationServices services) {
+	public TypeParameterSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping, CommonTypeComputationServices services) {
 		this.services = services;
-		this.typeParameterMapping = Maps.newHashMap(typeParameterMapping);
+		this.typeParameterMapping = Maps.newLinkedHashMap(typeParameterMapping);
 	}
 	
-	protected Map<JvmTypeParameter, JvmTypeReference> getTypeParameterMapping() {
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getTypeParameterMapping() {
 		return typeParameterMapping;
 	}
 	
@@ -56,7 +56,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 		return null;
 	}
 	
-	public void enhanceMapping(Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping) {
+	public void enhanceMapping(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping) {
 		this.typeParameterMapping.putAll(typeParameterMapping);
 	}
 	
@@ -79,85 +79,32 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
 		JvmType type = reference.getType();
 		if (type instanceof JvmTypeParameter) {
-			JvmTypeReference mappedReference = typeParameterMapping.get(type);
-			if (mappedReference != null && mappedReference != reference) {
-				JvmTypeReference result = visit(mappedReference, visiting);
+			MergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
+			if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+				JvmTypeReference result = visit(boundTypeArgument.getTypeReference(), visiting);
 				if (result != null) {
 					return result;
 				}
 			}
 		}
-//				
-//				if (isRawTypeContext() || boundParameters.containsKey(type)) {
-//					JvmTypeReference bound = getBoundArgument((JvmTypeParameter) type);
-//					if (isRecursive(type, bound)) {
-//						// TODO find the reason for this recursion
-////						System.out.println("Recursion2");
-//						return bound;
-//					}
-//					
-//					return visit(bound, replaceWildcards);
-//				}
 		JvmParameterizedTypeReference result = services.getTypesFactory().createJvmParameterizedTypeReference();
 		result.setType(type);
-//			if (!isRawTypeContext()) {
-			for(JvmTypeReference argument: reference.getArguments()) {
-				JvmTypeReference copiedArgument = visit(argument, visiting);
-//					if (copiedArgument == null) {
-//						copy = typeReferences.getTypeForName(Object.class, type);
-//					}
-				result.getArguments().add(copiedArgument);
-			}
-//			}
+		for(JvmTypeReference argument: reference.getArguments()) {
+			JvmTypeReference copiedArgument = visit(argument, visiting);
+			result.getArguments().add(copiedArgument);
+		}
 		return result;
 	}
 		
-//		protected boolean isRecursive(final JvmType type, JvmTypeReference reference) {
-//			boolean result = new AbstractTypeReferenceVisitor.InheritanceAware<Boolean>() {
-//				@Override
-//				protected Boolean handleNullReference() {
-//					return true;
-//				}
-//				@Override
-//				public Boolean doVisitTypeReference(JvmTypeReference reference) {
-//					return false;
-//				}
-//				@Override
-//				public Boolean doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
-//					for(JvmTypeConstraint constraint: reference.getConstraints()) {
-//						if (visit(constraint.getTypeReference()))
-//							return true;
-//					}
-//					return false;
-//				}
-//				@Override
-//				public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-//					if (type == reference.getType())
-//						return true;
-//					for(JvmTypeReference argument: reference.getArguments()) {
-//						if (visit(argument))
-//							return true;
-//					}
-//					return false;
-//				}
-//			}.visit(reference);
-//			return result;
-//		}
-	
 	@Override
 	public JvmTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference, Set<JvmTypeParameter> visiting) {
 		JvmWildcardTypeReference result = services.getTypesFactory().createJvmWildcardTypeReference();
-		for(JvmTypeConstraint constraint: reference.getConstraints()) {
+		for (JvmTypeConstraint constraint : reference.getConstraints()) {
 			JvmTypeReference copiedConstraintReference = visit(constraint.getTypeReference(), visiting);
-//			if (bound instanceof JvmWildcardTypeReference) {
-//				result.getConstraints().addAll(((JvmWildcardTypeReference) bound).getConstraints());
-//			} else {
-				JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
-//				copiedConstraint.setTypeReference(primitives.asWrapperTypeIfPrimitive(bound));
-				copiedConstraint.setTypeReference(copiedConstraintReference);
-				result.getConstraints().add(copiedConstraint);
-			}
-//			}
+			JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
+			copiedConstraint.setTypeReference(copiedConstraintReference);
+			result.getConstraints().add(copiedConstraint);
+		}
 		return result;
 	}
 	
