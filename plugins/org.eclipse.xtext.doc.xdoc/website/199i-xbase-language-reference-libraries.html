@@ -214,7 +214,7 @@
 		<a name="XbaseLanguageRef_builderSyntax" ></a>
 		<h3>Builder Syntax</h3>
 		<p>
-		If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+		If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 		</p>
 		<p>
 		<div class="literallayout">
@@ -238,7 +238,8 @@
 		</div>
 		</p>
 		<p>
-		Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
+		Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in lambda
+		expressions</a>
 		you can write <a href="199i-xbase-language-reference-libraries.php" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
 		objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
 		</p>
@@ -271,7 +272,7 @@
 		</div>
 		</p>
 		<p>
-		Appending the closure parameters and prepending the parent parameters using extension syntax yields
+		Appending the lambda expression parameters and prepending the parent parameters using extension syntax yields
 		<div class="literallayout">
 			<div class="incode">
 				<p class="code">
@@ -285,7 +286,7 @@
 		</div>
 		</p>
 		<p>
-		Using implicit parameter names and skipping empty parentheses you can simplify this to 
+		Using implicit parameter <span class="inlinecode">it</span> and skipping empty parentheses you can simplify this to 
 		<div class="literallayout">
 			<div class="incode">
 				<p class="code">

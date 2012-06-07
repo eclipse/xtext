@@ -23,46 +23,27 @@ Throughout this chapter, we will step by step improve the <a href="030-tutorial-
 <a name="Xbase_3"></a>
 <h2>Plug-in Setup</h2>
 <p>
-In the following, we are going to use the JVM types model and the Xbase language library. To make these
-available to your language, you have to add a couple of dependencies. In the runtime plug-in of your
-language, add dependencies to   
-</p>
-<p>
+In the following, we are going to use the JVM types model and the Xbase language library. Have a look at your 
+MWE2 workflow and make sure that 
 <ul>
 	<li>
-		<em>org.eclipse.xtext.common.types</em>
+		the Xbase models are registered in the standalone setup and
 	</li>
 	<li>
-		<em>org.eclipse.xtext.xbase</em> and
-	</li>
-	<li>
-		<em>org.eclipse.xtext.xtend2.lib</em> if you are using Xtend to implement components.
+		the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> and the 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment" >XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a> are enabled.
 	</li>
 </ul>
-</p>
-<p>
-Your UI plug-in needs dependencies to
-<ul>
-	<li>
-		<em>org.eclipse.xbase.ui</em>
-	</li>
-	<li>
-		<em>org.eclipse.xtext.common.types.ui</em>
-	</li>
-</ul>
-</p>
-<p>
-Additionally, you have to register the <em>genmodel</em> of Xbase to the standalone setup of your MWE2 workflow
-and make sure the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> and the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment" >XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a> are included:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
-&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<span class="string">"org.eclipse.xtext.xbase.XbasePackage"</span><br/>
+&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
 }<br/>
 ...<br/>
 fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
@@ -72,15 +53,15 @@ fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}<br/>
 </div>
 </p>
 <p>
-To avoid running out of memory when regenerating, you increase the maximum heap size and the permanent generation
-space in the run configuration of your workflow. We recommend at least 
+To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and
+perm gen space. We recommend at least 
 </p>
 <p>
 <span class="inlinecode">-Xmx512m&nbsp;-XX:MaxPermSize=128m</span> 
 </p>
 <p>
-in the <em>VM Arguments</em> section of the <em>Arguments</em> tab. If you are experiencing ambiguity warnings from Antlr,
-the <a href="020-grammar-language.html#antlr_errors" title="Go to &quot;Syntactic Predicates&quot;">usual countermeasures</a> apply.
+in the <em>VM Arguments</em> section of the <em>Arguments</em> tab of the run configuration. If you are experiencing ambiguity 
+warnings from Antlr, the <a href="020-grammar-language.html#antlr_errors" title="Go to &quot;Syntactic Predicates&quot;">usual countermeasures</a> apply.
 </p>
 <a name="jvmtypes"></a>
 <h2>Referring to Java Elements using JVM Types</h2>
@@ -164,15 +145,15 @@ the override semantics of the Java language. Of course it is possible to use thi
 create scopes for types as well.
 </p>
 <p>
-As the Java VM types expose a lot of information about visibility, parameter- and return types, generics,
+As the Java VM types expose a lot of information about visibility, parameter types and return types, generics,
 available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 </p>
 <p>
-The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider" >ITypesProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" title="View Source Code" >(src)</a> can be
+The <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@691365b1 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/xbase/199a-jvmtypes.xdoc#xtextLink_::0.0.3.0.2.3.0.1::0::/2)" title="View Source Code" >(src)</a> can be
 used to provide optimized proposals based on various filter criteria. 
 The most common selector can be used directly via <span class="inlinecode">createSubTypeProposals(..)</span>. The implementation is optimized
 and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters" >TypeMatchFilters</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" title="View Source Code" >(src)</a>
+<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7ab072ed (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/xbase/199a-jvmtypes.xdoc#xtextLink_::0.0.3.0.2.3.0.5::0::/2)" title="View Source Code" >(src)</a>
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 to a smaller number of valid entries.
 </p>
@@ -203,8 +184,8 @@ let us start by inheriting from Xbase
 As we can express all kinds of Java type references directly now, the indirection for <em>DataTypes</em> 
 is no longer necessary. To eliminate it, all cross-references to <em>Types</em> have to be replaced by calls to the <em>JvmTypeReferences</em>
 rule. The rules <em>DataType</em>, <em>Type</em>, and <em>QualifiedName</em> become obsolete (the latter is already defined
-in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. The whole grammar now reads
-as
+in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. As we now have all kinds of generic Java collections at hand,
+<em>Feature.many</em> is obsolete, too. The whole grammar now reads as
 </p>
 <p>
 <div class="literallayout">
@@ -214,7 +195,6 @@ as
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
 <br/>
 <span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span><br/>
-<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes<br/>
 <br/>
 Domainmodel:<br/>
 &nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
@@ -247,7 +227,7 @@ Entity:<br/>
 ;<br/>
 &nbsp;<br/>
 Feature:<br/>
-&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
+&nbsp;&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
 ;&nbsp;<br/>
 </p>
 </div>
@@ -280,9 +260,9 @@ and assemble the whole file&apos;s content in a second step.
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TypeReferenceSerializer&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
@@ -381,9 +361,15 @@ inherit from the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/
 input model and dispatches to its contents until you decide which elements to handle. 
 </p>
 <p>
+The inferrence runs in two phases: In the first phase all the naked types are created. This way you
+make sure all types exist and are referrable when you create their members in the second phase. 
+Use <span class="inlinecode">acceptor.accept(JvmDeclaredType)</span> for the first phase and provide the initialisation
+code for the second phase as a <a href="199-xtext-and-java.html#Xbase_Expressions_Lambda" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> handed to the method
+<span class="inlinecode">initializeLater()</span> on the return type of the <span class="inlinecode">acceptor.accept()</span> method.
+     
 For our domain model example, we implement a polymorphic dispatch function <em>infer</em> for
-<em>Entities</em> to transform them into a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. The produced
-type holds a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmOperation" >JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
+<em>Entities</em> to transform them into a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a> in the first phase. 
+In the second phase, we add a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmOperation" >JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmField.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmField" >JvmField</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus accessors for each <em>Property</em>. The resulting 
 <em>DomainmodelJvmModelInferrer</em> looks like this:
 </p>
@@ -393,26 +379,22 @@ type holds a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtex
 <p class="code">
 <span class="keyword">class</span>&nbsp;DomainModelJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
 <br/>
-&nbsp;&nbsp;<span class="comment">/**<br/>
-&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;builder&nbsp;API&nbsp;to&nbsp;programmatically&nbsp;create&nbsp;Jvm&nbsp;elements&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;readable&nbsp;way.<br/>
-&nbsp;&nbsp;&nbsp;*/</span><br/>
 &nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)).initializeLater&nbsp;[<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 &nbsp;&nbsp;}<br/>
 }<br/>
 </p>
@@ -441,17 +423,20 @@ models.
 <h2>Using Xbase Expressions</h2>
 <p>
 Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
-but it additionally offers type inferrence, closures, a powerful switch expression and a lot more. For details
-on this expression langugae, please consult the reference documentation and the Xbase tutorial. Xbase ships 
-with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable behavior to your DSLs.
-As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
-part of a Java application. 
+but it additionally offers type inferrence, lambda expressions, a powerful switch expression and a lot more. For details
+on this expression langugae, please consult the <a href="199-xtext-and-java.html#xbaseLanguageRef_Introduction" title="Go to &quot;Xbase Language Reference&quot;">reference documentation</a> and the 
+Xbase tutorial <em>(File &gt; New &gt; Example &gt; Xtext Examples &gt; Xbase Tutorial)</em>. 
 </p>
-<a name="xbaseExpressions_2"></a>
+<p>
+Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable 
+behavior to your DSLs. As Xbase integrates tightly with Java, there is usually no additional code needed to run 
+your DSL as part of a Java application. 
+</p>
+<a name="xbaseExpressions_3"></a>
 <h3>Making Your Grammar Refer To Xbase</h3>
 <p>
 If you want to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifiers</abbr></a> from the Xbase model, you need
-to import it first. The same holds for the common types model:
+to import Xbase first:
 </p>
 <p>
 <div class="literallayout">
@@ -465,7 +450,8 @@ to import it first. The same holds for the common types model:
 <p>
 Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
 and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An <em>Operation</em>&apos;s 
-parameters are <em>JvmFormalParamters</em>, its return type refers to a Java type and its <em>body</em> is
+parameters are <em>FullJvmFormalParamters</em>. <em>Full</em> means name and type here, as the type of method parameters
+cannot be inferred. An opertion&apos;s return type refers to a Java type and its <em>body</em> is
 an <em>XBlockExpression</em>, so its parser rule reads as
 </p>
 <p>
@@ -474,7 +460,7 @@ an <em>XBlockExpression</em>, so its parser rule reads as
 <p class="code">
 Operation:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(params+=JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=JvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
 </p>
@@ -522,7 +508,7 @@ were already derived from the model, a generator can be used to serialize that i
 There is no need to write a code generator on top of that. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.JvmModelGenerator" >JvmModelGenerator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.java" title="View Source Code" >(src)</a>
 knows how to generate operation bodies properly. 
 </p>
-<a name="xbaseExpressions_3"></a>
+<a name="xbaseExpressions_4"></a>
 <h3>Using the Xbase Interpreter</h3>
 <p>
 Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
@@ -578,30 +564,41 @@ elements of the original context. Here is an example code snippet how to call th
 <a name="xbaseLanguageRef_Introduction"></a>
 <h2>Xbase Language Reference</h2>
 <p>
-This document describes the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
-within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
-covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
+This document describes the expression language library Xbase. Xbase is a partial programming language
+implemented in Xtext and is meant to be embedded and extended within other programming languages and 
+domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development 
+framework covering all aspects of language infrastructure such as parsers, linkers, compilers, 
+interpreters and even full-blown IDE support based on Eclipse.  
 </p>
 <p>
-Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
-state-machines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to have some behavior, 
-which is usually specified using so called <em>expressions</em>. Expressions are the heart of every programming language and are not easy to get right.
-On the other hand, expressions are well understood and many programming languages share a common set
-and understanding of expressions.
-That is why most people do not add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to define only the structural information in the DSL 
-and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels 
-and languages. Also, modifying the generated source code comes with a lot of additional problems. But as of today this is the preferred solution since adding support for expressions (and
-a corresponding execution environment) for your language is hard - even with Xtext.
+Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new 
+coarse-grained concepts, such as services, entities, value objects or state-machines can be developed 
+in minutes. However, software systems do not consist of structures solely. At some point a system needs 
+to have some behavior, which is usually specified using so called <em>expressions</em>. Expressions are the 
+heart of every programming language and are not easy to get right. On the other hand, expressions are 
+well understood and many programming languages share a common setand understanding of expressions.
 </p>
 <p>
-Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It consists
-of an Xtext grammar, as well as 
-reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer.
-In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, 
-hovering, folding and navigation can be easily integrated and reused within any Xtext based language. 
+That is why most people do not add support for expressions in their DSL, but try to solve this 
+differently. The most often used workaround is to define only the structural information in the DSL 
+and add behavior by modifying or extending the generated code. It is not only unpleasant to write, 
+read and maintain information which closely belongs together in two different places, abstraction levels 
+and languages. Also, modifying the generated source code comes with a lot of additional problems. 
+But as of today this is the preferred solution since adding support for expressions (and a corresponding 
+execution environment) for your language is hard - even with Xtext.
 </p>
 <p>
-Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few differences:
+Xbase serves as a language library providing a common expression language bound to the Java platform 
+(i.e. Java Virtual Machine). It consists of an Xtext grammar, as well as reusable and adaptable 
+implementations for the different aspects of a language infrastructure such as an AST structure, a 
+compiler, an interpreter, a linker, and a static analyzer. In addition it comes with implementations to 
+integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects
+like content assistance, syntax coloring, hovering, folding and navigation can be easily integrated and 
+reused within any Xtext based language. 
+</p>
+<p>
+Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few 
+differences:
 <ul>
 	<li>
 		Runs on the JVM
@@ -616,7 +613,7 @@ Conceptually and syntactically, Xbase is very close to Java statements and expre
 		Everything is an expression, there are no statements
 	</li>
 	<li>
-		Closures
+		Lambda expressions
 	</li>
 	<li>
 		Type inference
@@ -635,8 +632,9 @@ Conceptually and syntactically, Xbase is very close to Java statements and expre
 <a name="xbaseLanguageRef_Syntax"></a>
 <h3>Lexical Syntax</h3>
 <p>
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
-chosen and it is recommended to stick with the lexical syntax described in the following.
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. 
+However the default implementation is carefully chosen and it is recommended to stick with the 
+lexical syntax described in the following.
 </p>
 <a name="Xbase_Syntax_Identifiers"></a>
 <h4>Identifiers</h4>
@@ -650,8 +648,9 @@ by more of these characters or a digit <em>0</em>-<em>9</em>.
 <h5>Escaped Identifiers</h5>
 <p>
 Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
+However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers 
+are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a 
+keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
 In such cases you use an escaped identifier <span class="inlinecode">^service</span> to reference the Java property.
 </p>
 <a name="Xbase_Syntax_Identifiers_3"></a>
@@ -694,29 +693,20 @@ In such cases you use an escaped identifier <span class="inlinecode">^service</s
 <a name="Xbase_Syntax_StringLiteral"></a>
 <h4>String Literals</h4>
 <p>
-String literals can either use single quotes (&apos;) or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
-supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
-is that single quotes within the literal have to be escaped and double quotes do not.
+String literals can either use single quotes (&apos;) or double quotes (") as their terminals. When using
+double quotes all literals allowed by Java string literals are supported. In addition new line 
+characters are allowed, that is in Xbase all string literals can span multiple lines. When using single 
+quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
+do not.
 </p>
 <p>
 See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5">§ 3.10.5 String Literals</a>
 </p>
 <p>
-In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
+In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
+instance at runtime.
 </p>
 <a name="Xbase_Syntax_StringLiteral_4"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="comment">//TODO<br/>
-</span>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Syntax_StringLiteral_5"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -797,22 +787,6 @@ literals.
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">§ 3.7 Comments</a>).
 </p>
-<a name="Xbase_Syntax_Comments_2"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span><br/>
-;<br/>
-<span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;//&apos;</span>&nbsp;!(<span class="string">&apos;\n&apos;</span>|<span class="string">&apos;\r&apos;</span>)*&nbsp;(<span class="string">&apos;\r&apos;</span>?&nbsp;<span class="string">&apos;\n&apos;</span>)?<br/>
-;<br/>
-</p>
-</div>
-</div>
-</p>
 <a name="Xbase_Syntax_Whitespace"></a>
 <h4>White Space</h4>
 <p>
@@ -824,46 +798,13 @@ The white space characters <span class="inlinecode"><span class="string">&apos;&
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 <ol>
 	<li>
-		<span class="inlinecode"><span class="keyword">extends</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">super</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">instanceof</span></span>
-	</li>
-	<li>
 		<span class="inlinecode"><span class="keyword">as</span></span>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="keyword">new</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">null</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">false</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">true</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">val</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">var</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">if</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">else</span></span>
-	</li>
-	<li>
-		<span class="inlinecode"><span class="keyword">switch</span></span>
-	</li>
-	<li>
 		<span class="inlinecode"><span class="keyword">case</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">catch</span></span>
 	</li>
 	<li>
 		<span class="inlinecode"><span class="keyword">default</span></span>
@@ -872,13 +813,43 @@ The following list of words are reserved keywords, thus reducing the set of poss
 		<span class="inlinecode"><span class="keyword">do</span></span>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="keyword">while</span></span>
+		<span class="inlinecode"><span class="keyword">else</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">extends</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">false</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">finally</span></span>
 	</li>
 	<li>
 		<span class="inlinecode"><span class="keyword">for</span></span>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="keyword">typeof</span></span>
+		<span class="inlinecode"><span class="keyword">if</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">instanceof</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">new</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">null</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">true</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">super</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">switch</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">this</span></span>
 	</li>
 	<li>
 		<span class="inlinecode"><span class="keyword">throw</span></span>
@@ -887,10 +858,16 @@ The following list of words are reserved keywords, thus reducing the set of poss
 		<span class="inlinecode"><span class="keyword">try</span></span>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="keyword">catch</span></span>
+		<span class="inlinecode"><span class="keyword">typeof</span></span>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="keyword">finally</span></span>
+		<span class="inlinecode"><span class="keyword">val</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">var</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">while</span></span>
 	</li>
 </ol>
 </p>
@@ -920,19 +897,6 @@ instead.
 A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot 
 (like in Java).
 </p>
-<a name="Xbase_Types_TypeReferences_2"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-QualifiedName:<br/>
-&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
-;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-</p>
-</div>
-</div>
-</p>
 <p>
 There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 </p>
@@ -951,32 +915,16 @@ There is no parser rule for a simple type reference, as it is expressed as a par
 <a name="Xbase_Types_FunctionTypes"></a>
 <h4>Function Types</h4>
 <p>
-Xbase introduces <em>closures</em>, and therefore an additional function type signature. On the JVM-Level a closure (or more
-generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
-depending on the number of arguments. However, as closures are a very important language feature, 
+Xbase introduces <em>lambda expressions</em>, and therefore an additional function type signature. On the JVM-Level a lambda
+expression (or more generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
+depending on the number of arguments. However, as lambda expressions are a very important language feature, 
 a special sugared syntax for function types has been introduced.  
 So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;Boolean</span>.
 </p>
 <p>
-Primitives cannot be used in function types.
+For more information on lambda expressions see <a href="199-xtext-and-java.html#Xbase_Expressions_Lambda" title="Go to &quot;Lambda Expressions&quot;" >section Xbase_Expressions_Lambda</a>.
 </p>
-<p>
-For more information on closures see <a href="199-xtext-and-java.html#Xbase_Expressions_Closures" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
-</p>
-<a name="Xbase_Types_FunctionTypes_4"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XFunctionTypeRef:<br/>
-&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Types_FunctionTypes_5"></a>
+<a name="Xbase_Types_FunctionTypes_3"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -987,7 +935,7 @@ XFunctionTypeRef:<br/>
 		<span class="inlinecode">(String)=&gt;Boolean&nbsp;<span class="comment">//&nbsp;One&nbsp;argument&nbsp;predicate</span></span>
 	</li>
 	<li>
-		<span class="inlinecode">(Mutable)=&gt;Void&nbsp;<span class="comment">//&nbsp;A&nbsp;method&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only&nbsp;-&nbsp;returns&nbsp;null</span></span>
+		<span class="inlinecode">(Mutable)=&gt;void&nbsp;<span class="comment">//&nbsp;A&nbsp;procedure&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only</span></span>
 	</li>
 	<li>
 		<span class="inlinecode">(List&lt;String&gt;,&nbsp;Integer)=&gt;String</span>
@@ -1005,43 +953,6 @@ The only difference is that in Xbase a type reference can also be a function typ
 type arguments.
 </p>
 <a name="Xbase_Types_ParameterizedTypeReference_3"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-JvmTypeReference:<br/>
-&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br/>
-&nbsp;&nbsp;XFunctionTypeRef;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-XFunctionTypeRef:<br/>
-&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*&nbsp;<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;<br/>
-<br/>
-JvmParameterizedTypeReference:<br/>
-&nbsp;&nbsp;type=QualifiedName&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?;<br/>
-<br/>
-JvmTypeArgument:<br/>
-&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br/>
-&nbsp;&nbsp;JvmWildcardTypeArgument;<br/>
-&nbsp;&nbsp;<br/>
-JvmReferenceTypeArgument&nbsp;:<br/>
-&nbsp;&nbsp;JvmTypeReference;<br/>
-<br/>
-JvmWildcardTypeArgument:<br/>
-&nbsp;&nbsp;<span class="string">&apos;?&apos;</span>&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br/>
-<br/>
-JvmLowerBound&nbsp;:<br/>
-&nbsp;<span class="string">&apos;super&apos;</span>&nbsp;JvmTypeReference;<br/>
-<br/>
-JvmUpperBound&nbsp;:&nbsp;<br/>
-&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;<br/>
-<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Types_ParameterizedTypeReference_4"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -1078,7 +989,7 @@ Conformance is used in order to find out whether some expression can be used in 
 the type of the right hand expression needs to conform to the type of the variable.
 </p>
 <p>
-As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules defined
+As Xbase implements the unchanged type system of Java it also fully supports the conformance rules defined
 in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">The Java Language Specification</a>.
 </p>
 <a name="Xbase_Types_CommonSuperType"></a>
@@ -1102,8 +1013,7 @@ the hierarchy, their qualified name is used as the compare-key to ensure determi
 <p>
 Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-be helpful, too. An 
-expression always results in a value (might be the value &apos;null&apos; though). In addition every resolved expressions is
+be helpful, too. An expression always results in a value (might be the value &apos;null&apos; though). In addition every resolved expressions is
 of a static type.
 </p>
 <a name="Xbase_Expressions_Literals"></a>
@@ -1130,7 +1040,8 @@ A string literal as syntactically defined in <a href="199-xtext-and-java.html#Xb
 		<div class="incode">
 		<p class="code">
 		<span class="string">"Hello&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span>&nbsp;&nbsp;<span class="comment">//&nbsp;Xbase&nbsp;strings&nbsp;can&nbsp;span&nbsp;multiple&nbsp;lines<br/>
+		</span>
 		</p>
 		</div>
 		</div>
@@ -1204,18 +1115,6 @@ Type casts bind stronger than any other operator but weaker than feature calls.
 The conformance rules for casts are defined in the <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5">Java Language Specification</a>.
 </p>
 <a name="Xbase_Expressions_TypeCasts_3"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XCastedExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;as&apos;</span>&nbsp;JvmTypeReference;<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Expressions_TypeCasts_4"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -1242,15 +1141,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;+=&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_add(e2)</span>
+<span class="inlinecode">e1.operator_add(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -1258,15 +1155,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;||&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_or(e2)</span>
+<span class="inlinecode">e1.operator_or(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -1274,15 +1169,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;&amp;&amp;&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_and(e2)</span>
+<span class="inlinecode">e1.operator_and(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -1290,7 +1183,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;==&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_equals(e2)</span>
+<span class="inlinecode">e1.operator_equals(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1298,7 +1191,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;!=&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_notEquals(e2)</span>
+<span class="inlinecode">e1.operator_notEquals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -1306,7 +1205,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;&lt;&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_lessThan(e2)</span>
+<span class="inlinecode">e1.operator_lessThan(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1314,7 +1213,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;&gt;&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_greaterThan(e2)</span>
+<span class="inlinecode">e1.operator_greaterThan(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1322,7 +1221,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;&lt;=&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_lessEqualsThan(e2)</span>
+<span class="inlinecode">e1.operator_lessEqualsThan(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1330,15 +1229,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;&gt;=&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_greaterEqualsThan(e2)</span>
+<span class="inlinecode">e1.operator_greaterEqualsThan(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -1346,7 +1243,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;-&gt;&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_mappedTo(e2)</span>
+<span class="inlinecode">e1.operator_mappedTo(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1354,15 +1251,77 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;..&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_upTo(e2)</span>
+<span class="inlinecode">e1.operator_upTo(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
+<span class="inlinecode">e1&nbsp;=&gt;&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
+<span class="inlinecode">e1.operator_doubleArrow(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleLessThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleGreaterThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&lt;&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleLessThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;&gt;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleGreaterThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_diamond(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;?:&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_elvis(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;=&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_spaceship(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
 </td>
 </tr>
 <tr>
@@ -1370,7 +1329,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;+&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_plus(e2)</span>
+<span class="inlinecode">e1.operator_plus(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1378,15 +1337,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;-&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_minus(e2)</span>
+<span class="inlinecode">e1.operator_minus(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -1394,7 +1351,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;*&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_multiply(e2)</span>
+<span class="inlinecode">e1.operator_multiply(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1402,7 +1359,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;/&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_divide(e2)</span>
+<span class="inlinecode">e1.operator_divide(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1410,7 +1367,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;%&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_modulo(e2)</span>
+<span class="inlinecode">e1.operator_modulo(e2)</span>
 </td>
 </tr>
 <tr>
@@ -1418,15 +1375,13 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">e1&nbsp;**&nbsp;e2</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_power(e2)</span>
+<span class="inlinecode">e1.operator_power(e2)</span>
 </td>
 </tr>
 <tr>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 <td>
-<span class="inlinecode">&nbsp;</span>
 </td>
 </tr>
 <tr>
@@ -1434,7 +1389,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">!&nbsp;e1</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_not()</span>
+<span class="inlinecode">e1.operator_not()</span>
 </td>
 </tr>
 <tr>
@@ -1442,15 +1397,7 @@ The following defines the operators and the corresponding Java method signatures
 <span class="inlinecode">-&nbsp;e1</span>
 </td>
 <td>
-<span class="inlinecode">e1._operator_minus()</span>
-</td>
-</tr>
-<tr>
-<td>
-<span class="inlinecode">&nbsp;</span>
-</td>
-<td>
-<span class="inlinecode">&nbsp;</span>
+<span class="inlinecode">e1.operator_minus()</span>
 </td>
 </tr>
 </table>
@@ -1559,20 +1506,6 @@ myObj.setMyProperty(<span class="string">"foo"</span>)<br/>
 A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
 which are made available for the current expression&apos;s scope. 
 </p>
-<a name="Xbase_Expressions_FeatureCalls_2"></a>
-<h5>Syntax</h5>
-<p>
-The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-FeatureCall&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;Expression)*&nbsp;<span class="string">&apos;)&apos;</span>)?)*<br/>
-</p>
-</div>
-</div>
-</p>
 <a name="Xbase_Expressions_PropertyAccess"></a>
 <h5>Property Access</h5>
 <p>
@@ -1668,7 +1601,7 @@ which would have higher precedence.
 As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
 in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
 higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
-<a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
+<a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in lambda expressions</a>. 
 </p>
 <a name="Xbase_Expressions_ConstructorCall"></a>
 <h4>Constructor Call</h4>
@@ -1703,41 +1636,14 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 	</li>
 </ul>
 </p>
-<a name="Xbase_Expressions_ConstructorCall_3"></a>
-<h5>Syntax</h5>
+<a name="Xbase_Expressions_Lambda"></a>
+<h4>Lambda Expressions</h4>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XConstructorCall:<br/>
-&nbsp;&nbsp;<span class="string">&apos;new&apos;</span>&nbsp;QualifiedName&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>(XExpression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;XExpression)*)?<span class="string">&apos;)&apos;</span>)?;<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Expressions_Closures"></a>
-<h4>Closures</h4>
-<p>
-A closure is a literal that defines an anonymous function. A closure also captures the current scope,
-so that any final variables and parameters visible at construction time can be referred to in the closure&apos;s expression. 
-</p>
-<a name="Xbase_Expressions_Closures_2"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XClosure:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;(&nbsp;JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmFormalParameter)*&nbsp;)?&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;|&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;]&apos;</span>;<br/>
-</p>
-</div>
-</div>
+A lambda expression, AKA closure, is a literal that defines an anonymous function. A lambda expression also captures the current scope,
+so that any final variables and parameters visible at construction time can be referred to in the lambda expression&apos;s body. 
 </p>
 <p>
-The surrounding square brackets are optional if the closure is the single argument of a method invocation.
+The surrounding square brackets are optional if the lambda expression is the single argument of a method invocation.
 That is you can write
 </p>
 <p>
@@ -1773,12 +1679,12 @@ But in all other cases the square brackets are mandatory:
 </div>
 </div>
 </p>
-<a name="Xbase_Expressions_ClosuresTypeInference"></a>
+<a name="Xbase_Expressions_LambdaTypeInference"></a>
 <h5>Typing</h5>
 <p>
-Closures are expressions which produce function objects. The type is a <a href="199-xtext-and-java.html#Xbase_Types_FunctionTypes" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
+Lambda expressios produce function objects. The type is a <a href="199-xtext-and-java.html#Xbase_Types_FunctionTypes" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
 parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
-The parameter types can be inferred if the closure is used in a context where this is possible.
+The parameter types can be inferred if the lambda expression is used in a context where this is possible.
 </p>
 <p>
 For instance, given the following Java method signature:
@@ -1812,7 +1718,7 @@ arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Ba
 <a name="Xbase_Expressions_FunctionMapping"></a>
 <h5>Function Mapping</h5>
 <p>
-An Xbase closure is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface 
+An Xbase lambda expression is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface 
 for each number of parameters (current maximum is six parameters). The names of the interfaces are 
 <ul>
 	<li>
@@ -1854,7 +1760,8 @@ or
 if the reutrn type is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <p>
-In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
+In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) lambda
+expressions
 are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
 don&apos;t count).
 </p>
@@ -1881,8 +1788,8 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 <a name="Xbase_Expressions_implicit_parameter"></a>
 <h5>Implicit Parameter <em>it</em></h5>
 <p>
-If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
-be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s body.
+If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can
+be ommitted. Use <em>it</em> to refer to the parameter inside the lambda expression&apos;s body.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -1893,12 +1800,12 @@ be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s
 </div>
 </div>
 </p>
-<a name="Xbase_Expressions_Closures_6"></a>
+<a name="Xbase_Expressions_Lambda_11"></a>
 <h5>Examples</h5>
 <p>
 <ul>
 	<li>
-		<span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters</span></span>
+		<span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;lambda&nbsp;expression&nbsp;without&nbsp;parameters</span></span>
 	</li>
 	<li>
 		<span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span>
@@ -1914,20 +1821,6 @@ be ommitted. Use <em>it</em> to refer to the parameter inside the closure&apos;s
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java&apos;s if statement it behaves  
 like Java&apos;s ternary operator (<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>), i.e. it is an expression that returns a value. Consequently, you can use 
 if expressions deeply nested within expressions.
-</p>
-<a name="Xbase_Expressions_IfExpression_2"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XIfExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;)&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;else&apos;</span>&nbsp;XExpression)?;<br/>
-</p>
-</div>
-</div>
 </p>
 <p>
 An expression <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> 
@@ -1961,7 +1854,7 @@ is the a short hand for
 The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
 It uses the rules defined in <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
 </p>
-<a name="Xbase_Expressions_IfExpression_4"></a>
+<a name="Xbase_Expressions_IfExpression_7"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -2094,25 +1987,6 @@ computed using the expected type from the context, it is sufficient to return th
 	</li>
 </ul>
 </p>
-<a name="Xbase_Expressions_SwitchExpression_10"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XSwitchExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;switch&apos;</span>&nbsp;(ID&nbsp;<span class="string">&apos;:&apos;</span>)?&nbsp;XExpression&nbsp;<span class="string">&apos;{&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;default&apos;</span>&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression))?<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
-<br/>
-XCasePart:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(<span class="string">&apos;case&apos;</span>&nbsp;XExpression)?&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;);<br/>
-}<br/>
-</p>
-</div>
-</div>
-</p>
 <a name="Xbase_Expressions_VariableDeclaration"></a>
 <h4>Variable Declarations</h4>
 <p>
@@ -2143,22 +2017,10 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 </div>
 </p>
 <p>
-Variables declared outside a closure using the <span class="inlinecode">var</span> keyword are not accessible from within a
-closure.
+Variables declared outside a lambda expression using the <span class="inlinecode">var</span> keyword are not accessible from within a
+the lambda expression.
 </p>
 <a name="Xbase_Expressions_VariableDeclaration_5"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XVariableDeclaration:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;val&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;var&apos;</span>)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;<span class="string">&apos;=&apos;</span>&nbsp;XExpression;<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Expressions_VariableDeclaration_6"></a>
 <h5>Typing</h5>
 <p>
 The return type of a variable declaration expression is always <span class="inlinecode">void</span>. 
@@ -2225,20 +2087,6 @@ It can optionally be terminated by a semicolon.
 </div>
 </div>
 </p>
-<a name="Xbase_Expressions_Blocks_4"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XBlockExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
-</p>
-</div>
-</div>
-</p>
 <a name="Xbase_Expressions_ForLoop"></a>
 <h4>For Loop</h4>
 <p>
@@ -2280,20 +2128,6 @@ or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable e
 	</li>
 </ul>
 </p>
-<a name="Xbase_Expressions_ForLoop_4"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XForExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;for&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;JvmFormalParameter&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;;<br/>
-</p>
-</div>
-</div>
-</p>
 <a name="Xbase_Expressions_WhileExpression"></a>
 <h4>While Loop</h4>
 <p>
@@ -2301,19 +2135,6 @@ A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(p
 The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_WhileExpression_2"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XWhileExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Expressions_WhileExpression_3"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -2348,20 +2169,6 @@ The difference to the <a href="199-xtext-and-java.html#Xbase_Expressions_WhileEx
 The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_DoWhileExpression_2"></a>
-<h5>Syntax</h5>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XDoWhileExpression:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;do&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span>;<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="Xbase_Expressions_DoWhileExpression_3"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -2391,7 +2198,7 @@ XDoWhileExpression:<br/>
 <h4>Return Expression</h4>
 <p>
 Although an explicit return is often not necessary, it is supported.
-In a closure for instance a return expression is always implied if the expression itself is not of type
+In a lambda expression for instance a return expression is always implied if the expression itself is not of type
 <span class="inlinecode"><span class="keyword">void</span></span>. Anyway you can make it explicit:
 </p>
 <p>
@@ -2499,7 +2306,7 @@ bind and invoke <span class="inlinecode">foo(Object)</span>.
 <a name="XbaseLanguageRef_builderSyntax"></a>
 <h4>Builder Syntax</h4>
 <p>
-If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 </p>
 <p>
 <div class="literallayout">
@@ -2523,7 +2330,8 @@ will call a Java method with the signature
 </div>
 </p>
 <p>
-Used in combination with the <a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in closures</a>
+Used in combination with the <a href="199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in lambda
+expressions</a>
 you can write <a href="199-xtext-and-java.html#xbaseLanguageRef_LibraryExtension" title="Go to &quot;Extension Methods&quot;">extension libraries</a> to create and initialize graphs of
 objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
 </p>
@@ -2556,7 +2364,7 @@ html(&nbsp;[&nbsp;html&nbsp;| <br/>
 </div>
 </p>
 <p>
-Appending the closure parameters and prepending the parent parameters using extension syntax yields
+Appending the lambda expression parameters and prepending the parent parameters using extension syntax yields
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -2570,7 +2378,7 @@ html()&nbsp;[&nbsp;html&nbsp;| <br/>
 </div>
 </p>
 <p>
-Using implicit parameter names and skipping empty parentheses you can simplify this to 
+Using implicit parameter <span class="inlinecode">it</span> and skipping empty parentheses you can simplify this to 
 <div class="literallayout">
 <div class="incode">
 <p class="code">

@@ -226,9 +226,15 @@
 			input model and dispatches to its contents until you decide which elements to handle. 
 			</p>
 			<p>
+			The inferrence runs in two phases: In the first phase all the naked types are created. This way you
+			make sure all types exist and are referrable when you create their members in the second phase. 
+			Use <span class="inlinecode">acceptor.accept(JvmDeclaredType)</span> for the first phase and provide the initialisation
+			code for the second phase as a <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_Lambda.php" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> handed to the method
+			<span class="inlinecode">initializeLater()</span> on the return type of the <span class="inlinecode">acceptor.accept()</span>&nbsp;method.
+			     
 			For our domain model example, we implement a polymorphic dispatch function <em>infer</em> for
-			<em>Entities</em> to transform them into a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. The produced
-			type holds a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
+			<em>Entities</em> to transform them into a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a> in the first phase. 
+			In the second phase, we add a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
 			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmField.html" title="org.eclipse.xtext.common.types.JvmField">JvmField</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus accessors for each <em>Property</em>. The resulting 
 			<em>DomainmodelJvmModelInferrer</em> looks like this:
 			</p>
@@ -238,26 +244,22 @@
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;DomainModelJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
 						<br/>
-						&nbsp;&nbsp;<span class="comment">/**<br/>
-						&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;builder&nbsp;API&nbsp;to&nbsp;programmatically&nbsp;create&nbsp;Jvm&nbsp;elements&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;readable&nbsp;way.<br/>
-						&nbsp;&nbsp;&nbsp;*/</span><br/>
 						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
 						&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 						&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Entity&nbsp;element,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IAcceptor&lt;JvmDeclaredType&gt;&nbsp;acceptor,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPrelinkingPhase)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)&nbsp;[<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(element.toClass(element.fullyQualifiedName)).initializeLater&nbsp;[<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;element.documentation<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(feature&nbsp;:&nbsp;element.features)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toField(feature.name,&nbsp;feature.type)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toSetter(feature.name,&nbsp;feature.type)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;feature.toGetter(feature.name,&nbsp;feature.type)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;])<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
 						&nbsp;&nbsp;}<br/>
 						}
 					</p>

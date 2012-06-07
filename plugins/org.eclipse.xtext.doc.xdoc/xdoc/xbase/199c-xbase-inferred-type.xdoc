@@ -33,35 +33,37 @@ codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] in Xtend. It becomes
 inherit from the codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] which traverses the
 input model and dispatches to its contents until you decide which elements to handle. 
 
+The inferrence runs in two phases: In the first phase all the naked types are created. This way you
+make sure all types exist and are referrable when you create their members in the second phase. 
+Use code[Xtend2][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialisation
+code for the second phase as a ref:Xbase_Expressions_Lambda[lambda expression] handed to the method
+code[Xtend][initializeLater()] on the return type of the code[Xtend2][acceptor.accept()] method.
+     
 For our domain model example, we implement a polymorphic dispatch function e[infer] for
-e[Entities] to transform them into a codeRef[org.eclipse.xtext.common.types.JvmGenericType]. The produced
-type holds a codeRef[org.eclipse.xtext.common.types.JvmOperation] for each e[Operation] and a 
+e[Entities] to transform them into a codeRef[org.eclipse.xtext.common.types.JvmGenericType] in the first phase. 
+In the second phase, we add a codeRef[org.eclipse.xtext.common.types.JvmOperation] for each e[Operation] and a 
 codeRef[org.eclipse.xtext.common.types.JvmField] plus accessors for each e[Property]. The resulting 
 e[DomainmodelJvmModelInferrer] looks like this:
 
 code[Xtend2][
 class DomainModelJvmModelInferrer extends AbstractModelInferrer {
 
-  /**
-   * a builder API to programmatically create Jvm elements 
-   * in readable way.
-   */
   @Inject extension JvmTypesBuilder
   
   @Inject extension IQualifiedNameProvider
   
   def dispatch void infer(Entity element, 
-                IAcceptor<JvmDeclaredType> acceptor, 
+                IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
     
-    acceptor.accept(element.toClass(element.fullyQualifiedName) \[
+    acceptor.accept(element.toClass(element.fullyQualifiedName)).initializeLater \[
       documentation = element.documentation
       for (feature : element.features) {
         members += feature.toField(feature.name, feature.type)
         members += feature.toSetter(feature.name, feature.type)
         members += feature.toGetter(feature.name, feature.type)
       }
-    \])
+    \]
   }
 }
 ]

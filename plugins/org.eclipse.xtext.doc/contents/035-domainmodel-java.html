@@ -53,7 +53,7 @@ translated to Java source code. The syntax should look very familiar. Here is an
 </p>
 <p>
 As you can see, it supports all kinds of advanced features such as Java generics and full expressions
-even including closures. Don&apos;t panic you&apos;ll not have to implement these concepts on your own but will
+even including lambda expressions. Don&apos;t panic you&apos;ll not have to implement these concepts on your own but will
 reuse a lot of helpful infrastructure to build the language.
 </p>
 <p>
@@ -566,8 +566,8 @@ the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc
 		
 		    The type inferrence has two phases. The first phase happens before linking. Only the empty types have to be created
 		    and be passed to the <em>acceptor</em>.
-		    Types&apos; features are created in the second phase. The actions in this phase are specified in the closure
-		    passed to <span class="inlinecode">initializeLater</span>. 
+		    Types&apos; features are created in the second phase. The actions in this phase are specified in the lambda
+		    expression passed to <span class="inlinecode">initializeLater</span>. Think of it as an anonymous class.
 	</li>
 	<li>
 		

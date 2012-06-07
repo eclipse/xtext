@@ -35,7 +35,7 @@ package my.model {
 ]
 
 As you can see, it supports all kinds of advanced features such as Java generics and full expressions
-even including closures. Don't panic you'll not have to implement these concepts on your own but will
+even including lambda expressions. Don't panic you'll not have to implement these concepts on your own but will
 reuse a lot of helpful infrastructure to build the language.
 
 We will now walk through the e[five!] little steps needed to get this language fully working including
@@ -381,8 +381,8 @@ ol[
     ]
     The type inferrence has two phases. The first phase happens before linking. Only the empty types have to be created
     and be passed to the e[acceptor].
-    Types' features are created in the second phase. The actions in this phase are specified in the closure
-    passed to code[initializeLater]. 
+    Types' features are created in the second phase. The actions in this phase are specified in the lambda
+    expression passed to code[initializeLater]. Think of it as an anonymous class.
   ]
   item[
   	code[Xtend2][

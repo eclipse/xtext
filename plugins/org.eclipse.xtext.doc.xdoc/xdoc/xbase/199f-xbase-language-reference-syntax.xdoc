@@ -1,7 +1,8 @@
 section2:xbaseLanguageRef_Syntax[Lexical Syntax]
 
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
-chosen and it is recommended to stick with the lexical syntax described in the following.
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. 
+However the default implementation is carefully chosen and it is recommended to stick with the 
+lexical syntax described in the following.
 
 section3:Xbase_Syntax_Identifiers[Identifiers]
 
@@ -13,8 +14,9 @@ by more of these characters or a digit e[0]-e[9].
 section4:Xbase_Syntax_EscapedIdentifiers[Escaped Identifiers]
 
 Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword code[service] in your language but want to call a Java property e[service] at some point. 
+However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers 
+are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a 
+keyword code[service] in your language but want to call a Java property e[service] at some point. 
 In such cases you use an escaped identifier code[^service] to reference the Java property.
 
 section4[Syntax]
@@ -38,19 +40,16 @@ ul[
 
 section3:Xbase_Syntax_StringLiteral[String Literals]
 
-String literals can either use single quotes (') or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
-supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
-is that single quotes within the literal have to be escaped and double quotes do not.
+String literals can either use single quotes (') or double quotes (") as their terminals. When using
+double quotes all literals allowed by Java string literals are supported. In addition new line 
+characters are allowed, that is in Xbase all string literals can span multiple lines. When using single 
+quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
+do not.
 
 See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
 
-In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
-
-section4[Syntax]
-
-code[
-//TODO
-]
+In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
+instance at runtime.
 
 section4[Examples]
 
@@ -102,16 +101,6 @@ section3:Xbase_Syntax_Comments[Comments]
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments]).
 
-section4[Syntax]
-
-code[Xtext][
-terminal ML_COMMENT	: 
-	'/*' -> '*/'
-;
-terminal SL_COMMENT : 
-	'//' !('\n'|'\r')* ('\r'? '\n')?
-;
-]
 
 section3:Xbase_Syntax_Whitespace[White Space]
 
@@ -121,29 +110,30 @@ section3:Xbase_Syntax_Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
-	item[code[Xbase][extends]]
-	item[code[Xbase][super]]
-	item[code[Xbase][instanceof]]
 	item[code[Xbase][as]]
-	item[code[Xbase][new]]
-	item[code[Xbase][null]]
-	item[code[Xbase][false]]
-	item[code[Xbase][true]]
-	item[code[Xbase][val]]
-	item[code[Xbase][var]]
-	item[code[Xbase][if]]
-	item[code[Xbase][else]]
-	item[code[Xbase][switch]]
 	item[code[Xbase][case]]
+	item[code[Xbase][catch]]
 	item[code[Xbase][default]]
 	item[code[Xbase][do]]
-	item[code[Xbase][while]]
+	item[code[Xbase][else]]
+	item[code[Xbase][extends]]
+	item[code[Xbase][false]]
+	item[code[Xbase][finally]]
 	item[code[Xbase][for]]
-	item[code[Xbase][typeof]]
+	item[code[Xbase][if]]
+	item[code[Xbase][instanceof]]
+	item[code[Xbase][new]]
+	item[code[Xbase][null]]
+	item[code[Xbase][true]]
+	item[code[Xbase][super]]
+	item[code[Xbase][switch]]
+	item[code[Xbase][this]]
 	item[code[Xbase][throw]]
 	item[code[Xbase][try]]
-	item[code[Xbase][catch]]
-	item[code[Xbase][finally]]
+	item[code[Xbase][typeof]]
+	item[code[Xbase][val]]
+	item[code[Xbase][var]]
+	item[code[Xbase][while]]
 ]
 
 However, in case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 

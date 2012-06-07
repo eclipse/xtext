@@ -17,15 +17,14 @@ grammar org.eclipse.xtext.example.Domainmodel
 As we can express all kinds of Java type references directly now, the indirection for e[DataTypes] 
 is no longer necessary. To eliminate it, all cross-references to e[Types] have to be replaced by calls to the e[JvmTypeReferences]
 rule. The rules e[DataType], e[Type], and e[QualifiedName] become obsolete (the latter is already defined
-in Xbase), and the e[Type] in e[AbstractEntity] must be changed to e[Entity]. The whole grammar now reads
-as
+in Xbase), and the e[Type] in e[AbstractEntity] must be changed to e[Entity]. As we now have all kinds of generic Java collections at hand,
+e[Feature.many] is obsolete, too. The whole grammar now reads as
 
 code[Xtext][
 grammar org.eclipse.xtext.example.Domainmodel with
                                       org.eclipse.xtext.xbase.Xbase
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
-import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
 
 Domainmodel:
   (elements += AbstractElement)*
@@ -58,7 +57,7 @@ Entity:
 ;
  
 Feature:
-  (many ?= 'many')? name = ID ':' type = JvmTypeReference
+  name = ID ':' type = JvmTypeReference
 ; 
 ]
 
@@ -83,9 +82,9 @@ class DomainmodelGenerator implements IGenerator {
 	
 	@Inject extension IQualifiedNameProvider
 	@Inject extension TypeReferenceSerializer 
-	
+
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		for(e: resource.allContentsIterable.filter(typeof(Entity))) {
+		for(e: resource.allContents.toIterable.filter(typeof(Entity))) {
 			fsa.generateFile(
 			  e.fullyQualifiedName.toString.replace(".", "/") + ".java",
 			  e.compile)

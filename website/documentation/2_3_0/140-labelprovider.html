@@ -189,13 +189,13 @@
 			There are various places in the UI in which model elements have to be presented to the user: In the 
 			<a href="170-outline.php" title="Go to &quot;Outline View&quot;">outline view</a>, in <a href="180-hyperlinking.php" title="Go to &quot;Hyperlinking&quot;">hyperlinks</a>, in <a href="150-contentassist.php" title="Go to &quot;Content Assist&quot;">content proposals</a>, 
 			find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of
-			the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="org.eclipse.jface.viewers.ILabelProvider">ILabelProvider</abbr></a> interface. 
+			the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@5d0971d8 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.0.0.7::0::/2)" title="View Source Code" >(src)</a> interface. 
 			</p>
 			<p>
-			An <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="org.eclipse.jface.viewers.ILabelProvider">ILabelProvider</abbr></a> has two methods: <span class="inlinecode">getText(Object)</span> returns
+			An <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@707c0134 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.1.0.1::0::/2)" title="View Source Code" >(src)</a> has two methods: <span class="inlinecode">getText(Object)</span> returns
 			the text in an object's label, while <span class="inlinecode">getImage(Object)</span> returns the icon. In addition, the 
-			Eclipse UI framework offers the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/DelegatingStyledCellLabelProvider.IStyledLabelProvider.html" title="org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider">DelegatingStyledCellLabelProvider.IStyledLabelProvider</abbr></a>, 
-			which returns a <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="org.eclipse.jface.viewers.StyledString">StyledString</abbr></a> (i.e. with custom fonts, colors etc.) in the 
+			Eclipse UI framework offers the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@4ef49d09 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.1.0.7::0::/2)" title="View Source Code" >(src)</a>, 
+			which returns a <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@1fc4986c (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.1.0.9::0::/2)" title="View Source Code" >(src)</a> (i.e. with custom fonts, colors etc.) in the 
 			<span class="inlinecode">getStyledText(Object)</span> method.
 			</p>
 			<p>
@@ -209,7 +209,7 @@
 			Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. 
 			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/AbstractLabelProvider.html" title="org.eclipse.xtext.ui.label.AbstractLabelProvider">AbstractLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java" title="View Source Code" >(src)</a> helps you managing 
 			the images: In your implementation of <span class="inlinecode">doGetImage(Object)</span> you can as well return an 
-			<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/graphics/Image.html" title="org.eclipse.swt.graphics.Image">Image</abbr></a>, an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/resource/ImageDescriptor.html" title="org.eclipse.jface.resource.ImageDescriptor">ImageDescriptor</abbr></a> or a string, 
+			<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@70b633c9 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.3.0.5::0::/2)" title="View Source Code" >(src)</a>, an <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@4c1bb537 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.3.0.7::0::/2)" title="View Source Code" >(src)</a> or a string, 
 			representing a path in the <em>icons/</em> folder of the containing plug-in. This path is actually 
 			configurable by Google Guice. Have a look at the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/PluginImageHelper.html" title="org.eclipse.xtext.ui.PluginImageHelper">PluginImageHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/PluginImageHelper.java" title="View Source Code" >(src)</a> to learn about the 
 			customizing possibilities.
@@ -268,7 +268,7 @@
 			<a name="DefaultEObjectLabelProvider" ></a>
 			<h3>DefaultEObjectLabelProvider</h3>
 			<p>
-			The default implementation of the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="org.eclipse.jface.viewers.ILabelProvider">ILabelProvider</abbr></a> interface utilizes 
+			The default implementation of the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@5d60494d (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.3.0.3.0.2.0.0.1::0::/2)" title="View Source Code" >(src)</a> interface utilizes 
 			the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider 
 			are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do 
 			is to implement a method that matches a specific signature. It either provides a image filename or the 

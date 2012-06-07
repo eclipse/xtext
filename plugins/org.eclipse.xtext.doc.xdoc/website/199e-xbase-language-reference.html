@@ -188,36 +188,47 @@
 			  </ul>
 			</div>
 			<p>
-			This document describes the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
-			within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
-			covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
+			This document describes the expression language library Xbase. Xbase is a partial programming language
+			implemented in Xtext and is meant to be embedded and extended within other programming languages and 
+			domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development 
+			framework covering all aspects of language infrastructure such as parsers, linkers, compilers, 
+			interpreters and even full-blown IDE support based on Eclipse.  
 			</p>
 			<p>
-			Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
-			state-machines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to have some behavior, 
-			which is usually specified using so called <em>expressions</em>. Expressions are the heart of every programming language and are not easy to get right.
-			On the other hand, expressions are well understood and many programming languages share a common set
-			and understanding of expressions.
-			That is why most people do not add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to define only the structural information in the DSL 
-			and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels 
-			and languages. Also, modifying the generated source code comes with a lot of additional problems. But as of today this is the preferred solution since adding support for expressions (and
-			a corresponding execution environment) for your language is hard - even with Xtext.
+			Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new 
+			coarse-grained concepts, such as services, entities, value objects or state-machines can be developed 
+			in minutes. However, software systems do not consist of structures solely. At some point a system needs 
+			to have some behavior, which is usually specified using so called <em>expressions</em>. Expressions are the 
+			heart of every programming language and are not easy to get right. On the other hand, expressions are 
+			well understood and many programming languages share a common setand understanding of expressions.
 			</p>
 			<p>
-			Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It consists
-			of an Xtext grammar, as well as 
-			reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer.
-			In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, 
-			hovering, folding and navigation can be easily integrated and reused within any Xtext based language. 
+			That is why most people do not add support for expressions in their DSL, but try to solve this 
+			differently. The most often used workaround is to define only the structural information in the DSL 
+			and add behavior by modifying or extending the generated code. It is not only unpleasant to write, 
+			read and maintain information which closely belongs together in two different places, abstraction levels 
+			and languages. Also, modifying the generated source code comes with a lot of additional problems. 
+			But as of today this is the preferred solution since adding support for expressions (and a corresponding 
+			execution environment) for your language is hard - even with Xtext.
 			</p>
 			<p>
-			Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few differences:
+			Xbase serves as a language library providing a common expression language bound to the Java platform 
+			(i.e. Java Virtual Machine). It consists of an Xtext grammar, as well as reusable and adaptable 
+			implementations for the different aspects of a language infrastructure such as an AST structure, a 
+			compiler, an interpreter, a linker, and a static analyzer. In addition it comes with implementations to 
+			integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects
+			like content assistance, syntax coloring, hovering, folding and navigation can be easily integrated and 
+			reused within any Xtext based language. 
+			</p>
+			<p>
+			Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few 
+			differences:
 			<ul>
 			  <li>Runs on the JVM</li>
 			  <li>No checked exceptions</li>
 			  <li>Object-oriented</li>
 			  <li>Everything is an expression, there are no statements</li>
-			  <li>Closures</li>
+			  <li>Lambda expressions</li>
 			  <li>Type inference</li>
 			  <li>Properties</li>
 			  <li>Simple operator overloading</li>

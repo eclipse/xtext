@@ -178,8 +178,7 @@
 		<p>
 		Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
 		statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-		be helpful, too. An 
-		expression always results in a value (might be the value 'null' though). In addition every resolved expressions is
+		be helpful, too. An expression always results in a value (might be the value 'null' though). In addition every resolved expressions is
 		of a static type.
 		</p>
 		<a name="Xbase_Expressions_Literals" ></a>
@@ -204,7 +203,7 @@
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="string">"Hello&nbsp;<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span>
+		  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span>&nbsp;&nbsp;<span class="comment">//&nbsp;Xbase&nbsp;strings&nbsp;can&nbsp;span&nbsp;multiple&nbsp;lines</span>
 		  		</p>
 		  	</div>
 		  </div>
@@ -279,21 +278,6 @@
 		</p>
 		<a name="Xbase_Expressions_TypeCasts_3" ></a>
 		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XCastedExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;as&apos;</span>&nbsp;JvmTypeReference;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Expressions_TypeCasts_4" ></a>
-		<h4><p>
 		Examples
 		</p>
 		</h4>
@@ -315,111 +299,143 @@
 		<table>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;+=&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_add(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_add(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;||&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_or(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_or(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;&amp;&amp;&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_and(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_and(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;==&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_equals(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_equals(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;!=&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_notEquals(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_notEquals(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;&lt;&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_lessThan(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_lessThan(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;&gt;&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_greaterThan(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_greaterThan(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;&lt;=&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_lessEqualsThan(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_lessEqualsThan(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;&gt;=&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_greaterEqualsThan(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_greaterEqualsThan(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;-&gt;&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_mappedTo(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_mappedTo(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;..&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_upTo(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_upTo(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td><span class="inlinecode">e1&nbsp;=&gt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_doubleArrow(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;&lt;&lt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_doubleLessThan(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;&gt;&gt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_doubleGreaterThan(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;&lt;&lt;&lt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_tripleLessThan(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;&gt;&gt;&gt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_tripleGreaterThan(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;&lt;&gt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_diamond(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;?:&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_elvis(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td><span class="inlinecode">e1&nbsp;&lt;=&gt;&nbsp;e2</span></td>
+		    <td><span class="inlinecode">e1.operator_spaceship(e2)</span></td>
+		  </tr>
+		  <tr>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;+&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_plus(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_plus(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;-&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_minus(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_minus(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;*&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_multiply(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_multiply(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;/&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_divide(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_divide(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;%&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_modulo(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_modulo(e2)</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">e1&nbsp;**&nbsp;e2</span></td>
-		    <td><span class="inlinecode">e1._operator_power(e2)</span></td>
+		    <td><span class="inlinecode">e1.operator_power(e2)</span></td>
 		  </tr>
 		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td></td>
+		    <td></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">!&nbsp;e1</span></td>
-		    <td><span class="inlinecode">e1._operator_not()</span></td>
+		    <td><span class="inlinecode">e1.operator_not()</span></td>
 		  </tr>
 		  <tr>
 		    <td><span class="inlinecode">-&nbsp;e1</span></td>
-		    <td><span class="inlinecode">e1._operator_minus()</span></td>
-		  </tr>
-		  <tr>
-		    <td><span class="inlinecode">&nbsp;</span></td>
-		    <td><span class="inlinecode">&nbsp;</span></td>
+		    <td><span class="inlinecode">e1.operator_minus()</span></td>
 		  </tr>
 		</table>
 		
@@ -512,23 +528,6 @@
 		<p>
 		A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
 		which are made available for the current expression's scope. 
-		</p>
-		<a name="Xbase_Expressions_FeatureCalls_2" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					FeatureCall&nbsp;:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;Expression)*&nbsp;<span class="string">&apos;)&apos;</span>)?)*
-				</p>
-			</div>
-		</div>
 		</p>
 		<a name="Xbase_Expressions_PropertyAccess" ></a>
 		<h4><p>
@@ -634,7 +633,7 @@
 		As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
 		in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
 		higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>. <span class="inlinecode"><span class="keyword">it</span></span> is also the 
-		<a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in closures</a>. 
+		<a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">default parameter name in lambda expressions</a>. 
 		</p>
 		<a name="Xbase_Expressions_ConstructorCall" ></a>
 		<h3>Constructor Call</h3>
@@ -670,47 +669,14 @@
 		  </li>
 		</ul>
 		</p>
-		<a name="Xbase_Expressions_ConstructorCall_3" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
+		<a name="Xbase_Expressions_Lambda" ></a>
+		<h3>Lambda Expressions</h3>
 		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XConstructorCall:<br/>
-					&nbsp;&nbsp;<span class="string">&apos;new&apos;</span>&nbsp;QualifiedName&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>(XExpression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;XExpression)*)?<span class="string">&apos;)&apos;</span>)?;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Expressions_Closures" ></a>
-		<h3>Closures</h3>
-		<p>
-		A closure is a literal that defines an anonymous function. A closure also captures the current scope,
-		so that any final variables and parameters visible at construction time can be referred to in the closure's expression. 
-		</p>
-		<a name="Xbase_Expressions_Closures_2" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XClosure:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;(&nbsp;JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmFormalParameter)*&nbsp;)?&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;|&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;]&apos;</span>;
-				</p>
-			</div>
-		</div>
+		A lambda expression, AKA closure, is a literal that defines an anonymous function. A lambda expression also captures the current scope,
+		so that any final variables and parameters visible at construction time can be referred to in the lambda expression's body. 
 		</p>
 		<p>
-		The surrounding square brackets are optional if the closure is the single argument of a method invocation.
+		The surrounding square brackets are optional if the lambda expression is the single argument of a method invocation.
 		That is you can write
 		</p>
 		<p>
@@ -746,15 +712,15 @@
 			</div>
 		</div>
 		</p>
-		<a name="Xbase_Expressions_ClosuresTypeInference" ></a>
+		<a name="Xbase_Expressions_LambdaTypeInference" ></a>
 		<h4><p>
 		Typing
 		</p>
 		</h4>
 		<p>
-		Closures are expressions which produce function objects. The type is a <a href="199g-xbase-language-reference-types.php#Xbase_Types_FunctionTypes.php" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
+		Lambda expressios produce function objects. The type is a <a href="199g-xbase-language-reference-types.php#Xbase_Types_FunctionTypes.php" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
 		parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
-		The parameter types can be inferred if the closure is used in a context where this is possible.
+		The parameter types can be inferred if the lambda expression is used in a context where this is possible.
 		</p>
 		<p>
 		For instance, given the following Java method signature:
@@ -791,7 +757,7 @@
 		</p>
 		</h4>
 		<p>
-		An Xbase closure is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface 
+		An Xbase lambda expression is a Java object of one of the <em>Function</em> interfaces shipped with the runtime library of Xbase. There is an interface 
 		for each number of parameters (current maximum is six parameters). The names of the interfaces are 
 		<ul>
 		  <li><em>Function0&lt;ReturnType&gt;</em> for zero parameters, </li>
@@ -813,7 +779,8 @@
 		if the reutrn type is <span class="inlinecode"><span class="keyword">void</span></span>.
 		</p>
 		<p>
-		In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
+		In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) lambda
+		expressions
 		are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
 		don't count).
 		</p>
@@ -843,8 +810,8 @@
 		</p>
 		</h4>
 		<p>
-		If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
-		be ommitted. Use <em>it</em> to refer to the parameter inside the closure's body.
+		If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can
+		be ommitted. Use <em>it</em> to refer to the parameter inside the lambda expression's body.
 		<div class="literallayout">
 			<div class="incode">
 				<p class="code">
@@ -854,14 +821,14 @@
 			</div>
 		</div>
 		</p>
-		<a name="Xbase_Expressions_Closures_6" ></a>
+		<a name="Xbase_Expressions_Lambda_11" ></a>
 		<h4><p>
 		Examples
 		</p>
 		</h4>
 		<p>
 		<ul>
-		  <li><span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters</span></span></li>
+		  <li><span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;lambda&nbsp;expression&nbsp;without&nbsp;parameters</span></span></li>
 		  <li><span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span></li>
 		  <li><span class="inlinecode">[&nbsp;a,b,c&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span></li>
 		</ul>
@@ -872,23 +839,6 @@
 		An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
 		like Java's ternary operator (<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>), i.e. it is an expression that returns a value. Consequently, you can use 
 		if expressions deeply nested within expressions.
-		</p>
-		<a name="Xbase_Expressions_IfExpression_2" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XIfExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;)&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;else&apos;</span>&nbsp;XExpression)?;
-				</p>
-			</div>
-		</div>
 		</p>
 		<p>
 		An expression <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> 
@@ -925,7 +875,7 @@
 		The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
 		It uses the rules defined in <a href="199g-xbase-language-reference-types.php#Xbase_Types_CommonSuperType.php" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
 		</p>
-		<a name="Xbase_Expressions_IfExpression_4" ></a>
+		<a name="Xbase_Expressions_IfExpression_7" ></a>
 		<h4><p>
 		Examples
 		</p>
@@ -1062,28 +1012,6 @@
 		  </li>
 		</ul>
 		</p>
-		<a name="Xbase_Expressions_SwitchExpression_10" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XSwitchExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;switch&apos;</span>&nbsp;(ID&nbsp;<span class="string">&apos;:&apos;</span>)?&nbsp;XExpression&nbsp;<span class="string">&apos;{&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;default&apos;</span>&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression))?<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;<br/>
-					<br/>
-					XCasePart:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(<span class="string">&apos;case&apos;</span>&nbsp;XExpression)?&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;);<br/>
-					}
-				</p>
-			</div>
-		</div>
-		</p>
 		<a name="Xbase_Expressions_VariableDeclaration" ></a>
 		<h3>Variable Declarations</h3>
 		<p>
@@ -1114,25 +1042,10 @@
 		</div>
 		</p>
 		<p>
-		Variables declared outside a closure using the <span class="inlinecode">var</span> keyword are not accessible from within a
-		closure.
+		Variables declared outside a lambda expression using the <span class="inlinecode">var</span> keyword are not accessible from within a
+		the lambda expression.
 		</p>
 		<a name="Xbase_Expressions_VariableDeclaration_5" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XVariableDeclaration:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;val&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;var&apos;</span>)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;<span class="string">&apos;=&apos;</span>&nbsp;XExpression;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Expressions_VariableDeclaration_6" ></a>
 		<h4><p>
 		Typing
 		</p>
@@ -1204,23 +1117,6 @@
 			</div>
 		</div>
 		</p>
-		<a name="Xbase_Expressions_Blocks_4" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XBlockExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
-				</p>
-			</div>
-		</div>
-		</p>
 		<a name="Xbase_Expressions_ForLoop" ></a>
 		<h3>For Loop</h3>
 		<p>
@@ -1260,23 +1156,6 @@
 		  </li>
 		</ul>
 		</p>
-		<a name="Xbase_Expressions_ForLoop_4" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XForExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;for&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;JvmFormalParameter&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;;
-				</p>
-			</div>
-		</div>
-		</p>
 		<a name="Xbase_Expressions_WhileExpression" ></a>
 		<h3>While Loop</h3>
 		<p>
@@ -1284,22 +1163,6 @@
 		The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 		</p>
 		<a name="Xbase_Expressions_WhileExpression_2" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XWhileExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Expressions_WhileExpression_3" ></a>
 		<h4><p>
 		Examples
 		</p>
@@ -1336,23 +1199,6 @@
 		</p>
 		<a name="Xbase_Expressions_DoWhileExpression_2" ></a>
 		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XDoWhileExpression:<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;do&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span>;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Expressions_DoWhileExpression_3" ></a>
-		<h4><p>
 		Examples
 		</p>
 		</h4>
@@ -1382,7 +1228,7 @@
 		<h3>Return Expression</h3>
 		<p>
 		Although an explicit return is often not necessary, it is supported.
-		In a closure for instance a return expression is always implied if the expression itself is not of type
+		In a lambda expression for instance a return expression is always implied if the expression itself is not of type
 		<span class="inlinecode"><span class="keyword">void</span></span>. Anyway you can make it explicit:
 		</p>
 		<p>

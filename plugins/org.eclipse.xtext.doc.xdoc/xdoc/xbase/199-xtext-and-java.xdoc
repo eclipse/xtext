@@ -10,43 +10,33 @@ Throughout this chapter, we will step by step improve the ref:DomainmodelNextSte
 
 section[Plug-in Setup]
 
-In the following, we are going to use the JVM types model and the Xbase language library. To make these
-available to your language, you have to add a couple of dependencies. In the runtime plug-in of your
-language, add dependencies to   
-
+In the following, we are going to use the JVM types model and the Xbase language library. Have a look at your 
+MWE2 workflow and make sure that 
 ul[
-item[e[org.eclipse.xtext.common.types]]
-item[e[org.eclipse.xtext.xbase] and]
-item[e[org.eclipse.xtext.xtend2.lib] if you are using Xtend to implement components.]
+  item[the Xbase models are registered in the standalone setup and]
+  item[the 
+    codeRef[org.eclipse.xtext.generator.types.TypesGeneratorFragment] and the 
+    codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment] are enabled.]
 ]
-
-Your UI plug-in needs dependencies to
-ul[
-item[e[org.eclipse.xbase.ui]]
-item[e[org.eclipse.xtext.common.types.ui]]
-]
-
-Additionally, you have to register the e[genmodel] of Xbase to the standalone setup of your MWE2 workflow
-and make sure the codeRef[org.eclipse.xtext.generator.types.TypesGeneratorFragment] and the 
-codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment] are included:
 
 code[MWE2][
 bean = StandaloneSetup {
-  registerGenModelFile = 
-     "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+  ...
+  registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+  registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 }
 ...
 fragment = types.TypesGeneratorFragment {}
 fragment = xbase.XbaseGeneratorFragment {}
 ]
 
-To avoid running out of memory when regenerating, you increase the maximum heap size and the permanent generation
-space in the run configuration of your workflow. We recommend at least 
+To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and
+perm gen space. We recommend at least 
 
 code[-Xmx512m -XX:MaxPermSize=128m] 
 
-in the e[VM Arguments] section of the e[Arguments] tab. If you are experiencing ambiguity warnings from Antlr,
-the ref:antlr_errors[usual countermeasures] apply.
+in the e[VM Arguments] section of the e[Arguments] tab of the run configuration. If you are experiencing ambiguity 
+warnings from Antlr, the ref:antlr_errors[usual countermeasures] apply.
 
 section-ref[jvmtypes]
 

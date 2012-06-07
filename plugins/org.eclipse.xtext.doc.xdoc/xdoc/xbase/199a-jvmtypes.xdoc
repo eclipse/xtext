@@ -54,7 +54,7 @@ can be used to create scopes for members with respect to
 the override semantics of the Java language. Of course it is possible to use this implementation to
 create scopes for types as well.
 
-As the Java VM types expose a lot of information about visibility, parameter- and return types, generics,
+As the Java VM types expose a lot of information about visibility, parameter types and return types, generics,
 available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 
 The codeRef[org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider] can be

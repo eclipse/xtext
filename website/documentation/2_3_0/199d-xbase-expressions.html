@@ -181,23 +181,26 @@
 			<h1>Using Xbase Expressions</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_2.php" >Making Your Grammar Refer To Xbase</a></li>
-			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_3.php" >Using the Xbase Interpreter</a></li>
+			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_3.php" >Making Your Grammar Refer To Xbase</a></li>
+			    <li><a href="199d-xbase-expressions.php#xbaseExpressions_4.php" >Using the Xbase Interpreter</a></li>
 			  </ul>
 			</div>
 			<p>
 			Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
-			but it additionally offers type inferrence, closures, a powerful switch expression and a lot more. For details
-			on this expression langugae, please consult the reference documentation and the Xbase tutorial. Xbase ships 
-			with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable behavior to your DSLs.
-			As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
-			part of a Java application. 
+			but it additionally offers type inferrence, lambda expressions, a powerful switch expression and a lot more. For details
+			on this expression langugae, please consult the <a href="199e-xbase-language-reference.php" title="Go to &quot;Xbase Language Reference&quot;">reference documentation</a> and the 
+			Xbase tutorial <em>(File &gt; New &gt; Example &gt; Xtext Examples &gt; Xbase Tutorial)</em>. 
 			</p>
-			<a name="xbaseExpressions_2" ></a>
+			<p>
+			Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable 
+			behavior to your DSLs. As Xbase integrates tightly with Java, there is usually no additional code needed to run 
+			your DSL as part of a Java application. 
+			</p>
+			<a name="xbaseExpressions_3" ></a>
 			<h2>Making Your Grammar Refer To Xbase</h2>
 			<p>
 			If you want to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifiers</abbr></a> from the Xbase model, you need
-			to import it first. The same holds for the common types model:
+			to import Xbase first:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -211,7 +214,8 @@
 			<p>
 			Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
 			and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An <em>Operation</em>'s 
-			parameters are <em>JvmFormalParamters</em>, its return type refers to a Java type and its <em>body</em> is
+			parameters are <em>FullJvmFormalParamters</em>. <em>Full</em> means name and type here, as the type of method parameters
+			cannot be inferred. An opertion's return type refers to a Java type and its <em>body</em> is
 			an <em>XBlockExpression</em>, so its parser rule reads as
 			</p>
 			<p>
@@ -220,7 +224,7 @@
 					<p class="code">
 						Operation:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;(params+=JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=JvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
 					</p>
@@ -268,7 +272,7 @@
 			There is no need to write a code generator on top of that. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.html" title="org.eclipse.xtext.xbase.compiler.JvmModelGenerator">JvmModelGenerator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.java" title="View Source Code" >(src)</a>
 			knows how to generate operation bodies properly. 
 			</p>
-			<a name="xbaseExpressions_3" ></a>
+			<a name="xbaseExpressions_4" ></a>
 			<h2>Using the Xbase Interpreter</h2>
 			<p>
 			Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  

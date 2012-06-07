@@ -204,8 +204,8 @@
 			As we can express all kinds of Java type references directly now, the indirection for <em>DataTypes</em> 
 			is no longer necessary. To eliminate it, all cross-references to <em>Types</em> have to be replaced by calls to the <em>JvmTypeReferences</em>
 			rule. The rules <em>DataType</em>, <em>Type</em>, and <em>QualifiedName</em> become obsolete (the latter is already defined
-			in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. The whole grammar now reads
-			as
+			in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. As we now have all kinds of generic Java collections at hand,
+			<em>Feature.many</em> is obsolete, too. The whole grammar now reads as
 			</p>
 			<p>
 			<div class="literallayout">
@@ -215,7 +215,6 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
 						<br/>
 						<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span><br/>
-						<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes<br/>
 						<br/>
 						Domainmodel:<br/>
 						&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
@@ -248,7 +247,7 @@
 						;<br/>
 						&nbsp;<br/>
 						Feature:<br/>
-						&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
+						&nbsp;&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
 						;
 					</p>
 				</div>
@@ -281,9 +280,9 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TypeReferenceSerializer&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>

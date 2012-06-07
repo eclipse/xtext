@@ -196,22 +196,6 @@
 		A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot 
 		(like in Java).
 		</p>
-		<a name="Xbase_Types_TypeReferences_2" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					QualifiedName:<br/>
-					&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
-					;
-				</p>
-			</div>
-		</div>
-		</p>
 		<p>
 		There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 		</p>
@@ -229,35 +213,16 @@
 		<a name="Xbase_Types_FunctionTypes" ></a>
 		<h3>Function Types</h3>
 		<p>
-		Xbase introduces <em>closures</em>, and therefore an additional function type signature. On the JVM-Level a closure (or more
-		generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
-		depending on the number of arguments. However, as closures are a very important language feature, 
+		Xbase introduces <em>lambda expressions</em>, and therefore an additional function type signature. On the JVM-Level a lambda
+		expression (or more generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
+		depending on the number of arguments. However, as lambda expressions are a very important language feature, 
 		a special sugared syntax for function types has been introduced.  
 		So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;Boolean</span>.
 		</p>
 		<p>
-		Primitives cannot be used in function types.
+		For more information on lambda expressions see <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_Lambda.php" title="Go to &quot;Lambda Expressions&quot;" >section Xbase_Expressions_Lambda</a>.
 		</p>
-		<p>
-		For more information on closures see <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_Closures.php" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
-		</p>
-		<a name="Xbase_Types_FunctionTypes_4" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					XFunctionTypeRef:<br/>
-					&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Types_FunctionTypes_5" ></a>
+		<a name="Xbase_Types_FunctionTypes_3" ></a>
 		<h4><p>
 		Examples
 		</p>
@@ -266,7 +231,7 @@
 		<ul>
 		  <li><span class="inlinecode">=&gt;Boolean&nbsp;<span class="comment">//&nbsp;predicate&nbsp;without&nbsp;parameters</span></span></li>
 		  <li><span class="inlinecode">(String)=&gt;Boolean&nbsp;<span class="comment">//&nbsp;One&nbsp;argument&nbsp;predicate</span></span></li>
-		  <li><span class="inlinecode">(Mutable)=&gt;Void&nbsp;<span class="comment">//&nbsp;A&nbsp;method&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only&nbsp;-&nbsp;returns&nbsp;null</span></span></li>
+		  <li><span class="inlinecode">(Mutable)=&gt;void&nbsp;<span class="comment">//&nbsp;A&nbsp;procedure&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only</span></span></li>
 		  <li><span class="inlinecode">(List&lt;String&gt;,&nbsp;Integer)=&gt;String</span></li>
 		</ul>
 		</p>
@@ -281,45 +246,6 @@
 		type arguments.
 		</p>
 		<a name="Xbase_Types_ParameterizedTypeReference_3" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					JvmTypeReference:<br/>
-					&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br/>
-					&nbsp;&nbsp;XFunctionTypeRef;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					XFunctionTypeRef:<br/>
-					&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*&nbsp;<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;<br/>
-					<br/>
-					JvmParameterizedTypeReference:<br/>
-					&nbsp;&nbsp;type=QualifiedName&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?;<br/>
-					<br/>
-					JvmTypeArgument:<br/>
-					&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br/>
-					&nbsp;&nbsp;JvmWildcardTypeArgument;<br/>
-					&nbsp;&nbsp;<br/>
-					JvmReferenceTypeArgument&nbsp;:<br/>
-					&nbsp;&nbsp;JvmTypeReference;<br/>
-					<br/>
-					JvmWildcardTypeArgument:<br/>
-					&nbsp;&nbsp;<span class="string">&apos;?&apos;</span>&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br/>
-					<br/>
-					JvmLowerBound&nbsp;:<br/>
-					&nbsp;<span class="string">&apos;super&apos;</span>&nbsp;JvmTypeReference;<br/>
-					<br/>
-					JvmUpperBound&nbsp;:&nbsp;<br/>
-					&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Types_ParameterizedTypeReference_4" ></a>
 		<h4><p>
 		Examples
 		</p>
@@ -347,7 +273,7 @@
 		the type of the right hand expression needs to conform to the type of the variable.
 		</p>
 		<p>
-		As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules defined
+		As Xbase implements the unchanged type system of Java it also fully supports the conformance rules defined
 		in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html" >The Java Language Specification</a>.
 		</p>
 		<a name="Xbase_Types_CommonSuperType" ></a>

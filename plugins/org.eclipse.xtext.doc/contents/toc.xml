@@ -341,9 +341,9 @@
 				</topic>
 			</topic>
 			<topic href="contents/199-xtext-and-java.html#xbaseExpressions" label="Using Xbase Expressions" >
-				<topic href="contents/199-xtext-and-java.html#xbaseExpressions_2" label="Making Your Grammar Refer To Xbase" >
+				<topic href="contents/199-xtext-and-java.html#xbaseExpressions_3" label="Making Your Grammar Refer To Xbase" >
 				</topic>
-				<topic href="contents/199-xtext-and-java.html#xbaseExpressions_3" label="Using the Xbase Interpreter" >
+				<topic href="contents/199-xtext-and-java.html#xbaseExpressions_4" label="Using the Xbase Interpreter" >
 				</topic>
 			</topic>
 			<topic href="contents/199-xtext-and-java.html#xbaseLanguageRef_Introduction" label="Xbase Language Reference" >
@@ -357,16 +357,12 @@
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral" label="String Literals" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral_4" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral_5" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral_4" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_NumberLiteral" label="Number Literals" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Comments" label="Comments" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Comments_2" label="Syntax" >
-						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Whitespace" label="White Space" >
 					</topic>
@@ -377,21 +373,15 @@
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_Arrays" label="Arrays" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_TypeReferences" label="Simple Type References" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Types_TypeReferences_2" label="Syntax" >
-						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Types_TypeReferences_3" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes" label="Function Types" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes_4" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes_5" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Types_FunctionTypes_3" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_ParameterizedTypeReference" label="Parameterized Type References" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Types_ParameterizedTypeReference_3" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Types_ParameterizedTypeReference_4" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Types_ParameterizedTypeReference_3" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Types_Primitives" label="Primitives" >
@@ -415,9 +405,7 @@
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_TypeCasts" label="Type Casts" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_TypeCasts_3" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_TypeCasts_4" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_TypeCasts_3" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators" label="Infix Operators / Operator Overloading" >
@@ -429,8 +417,6 @@
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_PropertyAssignment" label="Assignments" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_FeatureCalls" label="Feature Calls" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_FeatureCalls_2" label="Syntax" >
-						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_PropertyAccess" label="Property Access" >
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_NullSafeFeatureCalls" label="Null-Safe Feature Call" >
@@ -443,27 +429,21 @@
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ConstructorCall" label="Constructor Call" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ConstructorCall_2" label="Examples" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ConstructorCall_3" label="Syntax" >
-						</topic>
 					</topic>
-					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Closures" label="Closures" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Closures_2" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ClosuresTypeInference" label="Typing" >
+					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Lambda" label="Lambda Expressions" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_LambdaTypeInference" label="Typing" >
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_FunctionMapping" label="Function Mapping" >
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_implicit_parameter" label="Implicit Parameter it" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Closures_6" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Lambda_11" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IfExpression" label="If Expression" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IfExpression_2" label="Syntax" >
-						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IfTypeInference" label="Typing" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IfExpression_4" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IfExpression_7" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression" label="Switch Expression" >
@@ -473,35 +453,23 @@
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_9" label="Examples" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_10" label="Syntax" >
-						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration" label="Variable Declarations" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration_5" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration_6" label="Typing" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration_5" label="Typing" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Blocks" label="Blocks" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Blocks_3" label="Examples" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Blocks_4" label="Syntax" >
-						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ForLoop" label="For Loop" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ForLoop_4" label="Syntax" >
-						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_WhileExpression" label="While Loop" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_WhileExpression_2" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_WhileExpression_3" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_WhileExpression_2" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_DoWhileExpression" label="Do-While Loop" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_DoWhileExpression_2" label="Syntax" >
-						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_DoWhileExpression_3" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_DoWhileExpression_2" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Return" label="Return Expression" >

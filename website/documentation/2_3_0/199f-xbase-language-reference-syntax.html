@@ -176,8 +176,9 @@
 		<a name="xbaseLanguageRef_Syntax" ></a>
 		<h2>Lexical Syntax</h2>
 		<p>
-		Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
-		chosen and it is recommended to stick with the lexical syntax described in the following.
+		Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. 
+		However the default implementation is carefully chosen and it is recommended to stick with the 
+		lexical syntax described in the following.
 		</p>
 		<a name="Xbase_Syntax_Identifiers" ></a>
 		<h3>Identifiers</h3>
@@ -194,8 +195,9 @@
 		</h4>
 		<p>
 		Identifiers may not have the same spelling as any reserved keyword. 
-		However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-		conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
+		However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers 
+		are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a 
+		keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
 		In such cases you use an escaped identifier <span class="inlinecode">^service</span> to reference the Java property.
 		</p>
 		<a name="Xbase_Syntax_Identifiers_3" ></a>
@@ -232,31 +234,20 @@
 		<a name="Xbase_Syntax_StringLiteral" ></a>
 		<h3>String Literals</h3>
 		<p>
-		String literals can either use single quotes (') or double quotes (&quot;) as their terminals. When using double quotes all literals allowed by Java string literals are
-		supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
-		is that single quotes within the literal have to be escaped and double quotes do not.
+		String literals can either use single quotes (') or double quotes (&quot;) as their terminals. When using
+		double quotes all literals allowed by Java string literals are supported. In addition new line 
+		characters are allowed, that is in Xbase all string literals can span multiple lines. When using single 
+		quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
+		do not.
 		</p>
 		<p>
 		See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5" >§ 3.10.5 String Literals</a>
 		</p>
 		<p>
-		In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
+		In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
+		instance at runtime.
 		</p>
 		<a name="Xbase_Syntax_StringLiteral_4" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					<span class="comment">//TODO</span>
-				</p>
-			</div>
-		</div>
-		</p>
-		<a name="Xbase_Syntax_StringLiteral_5" ></a>
 		<h4><p>
 		Examples
 		</p>
@@ -329,25 +320,6 @@
 		Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 		The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7" >§ 3.7 Comments</a>).
 		</p>
-		<a name="Xbase_Syntax_Comments_2" ></a>
-		<h4><p>
-		Syntax
-		</p>
-		</h4>
-		<p>
-		<div class="literallayout">
-			<div class="incode">
-				<p class="code">
-					<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span><br/>
-					;<br/>
-					<span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;//&apos;</span>&nbsp;!(<span class="string">&apos;\n&apos;</span>|<span class="string">&apos;\r&apos;</span>)*&nbsp;(<span class="string">&apos;\r&apos;</span>?&nbsp;<span class="string">&apos;\n&apos;</span>)?<br/>
-					;
-				</p>
-			</div>
-		</div>
-		</p>
 		<a name="Xbase_Syntax_Whitespace" ></a>
 		<h3>White Space</h3>
 		<p>
@@ -358,29 +330,30 @@
 		<p>
 		The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 		<ol>
-		  <li><span class="inlinecode"><span class="keyword">extends</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">super</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">instanceof</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">as</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">new</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">null</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">false</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">true</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">val</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">var</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">if</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">else</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">switch</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">case</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">catch</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">default</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">do</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">while</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">else</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">extends</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">false</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">finally</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">for</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">typeof</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">if</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">instanceof</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">new</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">null</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">true</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">super</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">switch</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">this</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">throw</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">try</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">catch</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">finally</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">typeof</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">val</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">var</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">while</span></span></li>
 		</ol>
 		</p>
 		<p>

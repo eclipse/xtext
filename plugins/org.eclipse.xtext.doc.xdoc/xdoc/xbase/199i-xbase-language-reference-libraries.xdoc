@@ -32,7 +32,7 @@ ul[
 
 section3:XbaseLanguageRef_builderSyntax[Builder Syntax]
 
-If the last argument of a method call is a closure, it can be appended to the method call. Thus,
+If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 
 code[Xbase][
 foo(42) \[String s | s.toUpperCase\] 	
@@ -44,7 +44,8 @@ code[Java][
 void foo(int, Function1<String, String>)
 ] 
 
-Used in combination with the ref:Xbase_Expressions_implicit_parameter[implicit parameter name in closures]
+Used in combination with the ref:Xbase_Expressions_implicit_parameter[implicit parameter name in lambda
+expressions]
 you can write ref:xbaseLanguageRef_LibraryExtension[extension libraries] to create and initialize graphs of
 objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
 
@@ -65,7 +66,7 @@ html( \[ html | 
 \] )
 ]   
 
-Appending the closure parameters and prepending the parent parameters using extension syntax yields
+Appending the lambda expression parameters and prepending the parent parameters using extension syntax yields
 code[Xbase][
 html() \[ html | 
 	html.head() \[ 
@@ -74,7 +75,7 @@ html() \[ html | 
 \] 
 ]  
 
-Using implicit parameter names and skipping empty parentheses you can simplify this to 
+Using implicit parameter code[it] and skipping empty parentheses you can simplify this to 
 code[Xbase][
 html \[ 
 	head \[ 

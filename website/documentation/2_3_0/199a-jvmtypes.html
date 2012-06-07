@@ -264,15 +264,15 @@
 			create scopes for types as well.
 			</p>
 			<p>
-			As the Java VM types expose a lot of information about visibility, parameter- and return types, generics,
+			As the Java VM types expose a lot of information about visibility, parameter types and return types, generics,
 			available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 			</p>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider">ITypesProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" title="View Source Code" >(src)</a> can be
+			The <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@691365b1 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/xbase/199a-jvmtypes.xdoc#xtextLink_::0.0.3.0.2.3.0.1::0::/2)" title="View Source Code" >(src)</a> can be
 			used to provide optimized proposals based on various filter criteria. 
 			The most common selector can be used directly via <span class="inlinecode">createSubTypeProposals(..)</span>. The implementation is optimized
 			and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters">TypeMatchFilters</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" title="View Source Code" >(src)</a>
+			<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7ab072ed (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/xbase/199a-jvmtypes.xdoc#xtextLink_::0.0.3.0.2.3.0.5::0::/2)" title="View Source Code" >(src)</a>
 			provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 			to a smaller number of valid entries.
 			</p>

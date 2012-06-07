@@ -228,7 +228,7 @@
 		</p>
 		<p>
 		As you can see, it supports all kinds of advanced features such as Java generics and full expressions
-		even including closures. Don't panic you'll not have to implement these concepts on your own but will
+		even including lambda expressions. Don't panic you'll not have to implement these concepts on your own but will
 		reuse a lot of helpful infrastructure to build the language.
 		</p>
 		<p>
@@ -732,8 +732,8 @@
 			  
 			      The type inferrence has two phases. The first phase happens before linking. Only the empty types have to be created
 			      and be passed to the <em>acceptor</em>.
-			      Types' features are created in the second phase. The actions in this phase are specified in the closure
-			      passed to <span class="inlinecode">initializeLater</span>. 
+			      Types' features are created in the second phase. The actions in this phase are specified in the lambda
+			      expression passed to <span class="inlinecode">initializeLater</span>. Think of it as an anonymous class.
 			  </li>
 			  <li>
 			    	<div class="literallayout">

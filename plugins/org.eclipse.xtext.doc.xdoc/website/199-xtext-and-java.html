@@ -203,36 +203,23 @@
 			<br style="clear:both"></br>
 			<h1>Plug-in Setup</h1>
 			<p>
-			In the following, we are going to use the JVM types model and the Xbase language library. To make these
-			available to your language, you have to add a couple of dependencies. In the runtime plug-in of your
-			language, add dependencies to   
-			</p>
-			<p>
+			In the following, we are going to use the JVM types model and the Xbase language library. Have a look at your 
+			MWE2 workflow and make sure that 
 			<ul>
-			  <li><em>org.eclipse.xtext.common.types</em></li>
-			  <li><em>org.eclipse.xtext.xbase</em> and</li>
-			  <li><em>org.eclipse.xtext.xtend2.lib</em> if you are using Xtend to implement components.</li>
+			  <li>the Xbase models are registered in the standalone setup and</li>
+			  <li>the 
+			      <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="org.eclipse.xtext.generator.types.TypesGeneratorFragment">TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> and the 
+			      <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment">XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a> are enabled.</li>
 			</ul>
-			</p>
-			<p>
-			Your UI plug-in needs dependencies to
-			<ul>
-			  <li><em>org.eclipse.xbase.ui</em></li>
-			  <li><em>org.eclipse.xtext.common.types.ui</em></li>
-			</ul>
-			</p>
-			<p>
-			Additionally, you have to register the <em>genmodel</em> of Xbase to the standalone setup of your MWE2 workflow
-			and make sure the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="org.eclipse.xtext.generator.types.TypesGeneratorFragment">TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> and the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment">XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a> are included:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
-						&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
+						&nbsp;&nbsp;...<br/>
+						&nbsp;&nbsp;registerGeneratedEPackage&nbsp;=&nbsp;<span class="string">"org.eclipse.xtext.xbase.XbasePackage"</span><br/>
+						&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
 						}<br/>
 						...<br/>
 						fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
@@ -242,15 +229,15 @@
 			</div>
 			</p>
 			<p>
-			To avoid running out of memory when regenerating, you increase the maximum heap size and the permanent generation
-			space in the run configuration of your workflow. We recommend at least 
+			To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and
+			perm gen space. We recommend at least 
 			</p>
 			<p>
 			<span class="inlinecode">-Xmx512m&nbsp;-XX:MaxPermSize=128m</span> 
 			</p>
 			<p>
-			in the <em>VM Arguments</em> section of the <em>Arguments</em> tab. If you are experiencing ambiguity warnings from Antlr,
-			the <a href="020-grammar-language.php#antlr_errors.php" title="Go to &quot;Syntactic Predicates&quot;">usual countermeasures</a> apply.
+			in the <em>VM Arguments</em> section of the <em>Arguments</em> tab of the run configuration. If you are experiencing ambiguity 
+			warnings from Antlr, the <a href="020-grammar-language.php#antlr_errors.php" title="Go to &quot;Syntactic Predicates&quot;">usual countermeasures</a> apply.
 			</p>
 		<a href="199a-jvmtypes.html"><h1></h1></a>
 		<a href="199b-xbase-java-references.html"><h1></h1></a>

@@ -1,16 +1,18 @@
 section:xbaseExpressions[Using Xbase Expressions]
 
 Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
-but it additionally offers type inferrence, closures, a powerful switch expression and a lot more. For details
-on this expression langugae, please consult the reference documentation and the Xbase tutorial. Xbase ships 
-with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable behavior to your DSLs.
-As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
-part of a Java application. 
+but it additionally offers type inferrence, lambda expressions, a powerful switch expression and a lot more. For details
+on this expression langugae, please consult the ref:xbaseLanguageRef_Introduction[reference documentation] and the 
+Xbase tutorial e[(File > New > Example > Xtext Examples > Xbase Tutorial)]. 
+
+Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add executable 
+behavior to your DSLs. As Xbase integrates tightly with Java, there is usually no additional code needed to run 
+your DSL as part of a Java application. 
 
 section2[Making Your Grammar Refer To Xbase]
 
 If you want to refer to codeRef[org.eclipse.emf.ecore.EClassifier][EClassifiers] from the Xbase model, you need
-to import it first. The same holds for the common types model:
+to import Xbase first:
 
 code[Xtext][
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
@@ -18,13 +20,14 @@ import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
 and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An e[Operation]'s 
-parameters are e[JvmFormalParamters], its return type refers to a Java type and its e[body] is
+parameters are e[FullJvmFormalParamters]. e[Full] means name and type here, as the type of method parameters
+cannot be inferred. An opertion's return type refers to a Java type and its e[body] is
 an e[XBlockExpression], so its parser rule reads as
 
 code[Xtext][
 Operation:
 	'op' name=ValidID '(' 
-	(params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' 
+	(params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' 
 	':' type=JvmTypeReference 
 		body=XBlockExpression;
 ]
