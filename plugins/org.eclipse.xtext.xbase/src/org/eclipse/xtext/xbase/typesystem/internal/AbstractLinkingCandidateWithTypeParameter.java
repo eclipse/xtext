@@ -67,6 +67,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		protected JvmTypeReference doGetTypeReference() {
 			// TODO enhance with expectation
 			JvmTypeReference substitute = substitutor.substitute(declaredType);
+//			JvmTypeReference result = getState().getResolvedTypes().referenceReplacer.apply(substitute);
 			return substitute;
 		}
 	}

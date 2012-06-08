@@ -1083,7 +1083,31 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testDeferredTypeArgumentResolution_05() throws Exception {
 		"{
 			val list = newArrayList
+			org::eclipse::xtext::xbase::lib::CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_05b() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(null as java.util.ArrayList<String>)
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_05c() throws Exception {
+		"{
+			val list = newArrayList
 			list.addAll(newArrayList(''))
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_05d() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(newHashSet(''))
 			list
 		}".resolvesTo("ArrayList<String>")
 	}

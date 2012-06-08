@@ -68,7 +68,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		}
 	}
 	
-	protected Function<JvmTypeReference, JvmTypeReference> referenceReplacer = new Function<JvmTypeReference, JvmTypeReference>() {
+	private Function<JvmTypeReference, JvmTypeReference> referenceReplacer = new Function<JvmTypeReference, JvmTypeReference>() {
 		public JvmTypeReference apply(JvmTypeReference original) {
 			StackedUnboundArgumentSubstituter substituter = new StackedUnboundArgumentSubstituter(getResolver().getServices());
 			JvmTypeReference result = substituter.substitute(original);
@@ -76,7 +76,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		}
 	};
 	
-	protected Function<ITypeExpectation, ITypeExpectation> expectationReplacer = new Function<ITypeExpectation, ITypeExpectation>() {
+	private Function<ITypeExpectation, ITypeExpectation> expectationReplacer = new Function<ITypeExpectation, ITypeExpectation>() {
 		public ITypeExpectation apply(ITypeExpectation original) {
 			return original;
 		}
