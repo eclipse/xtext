@@ -1,6 +1,6 @@
-chapter:annotationLibrary[Annotation Library]
+chapter:processedAnnotations[Processed Annotations]
 
-Xtend comes with some library annotations that help to steer the compilation process.
+Xtend comes with annotations that help to steer the compilation process.
 These annotations reside in the code[org.eclipse.xtend.lib] plug-in/jar which must be on the classpath
 of the project containing the Xtend files. 
 
@@ -8,7 +8,7 @@ section:propertyAnnotation[@Property]
 
 For fields that are annotated as code[Xtend][@Property], the Xtend compiler will generate a Java field, a
 getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
-an code[_] andhave the visibility of the Xtend field. The accessors methods are always code[Xtend][public]. 
+an code[_] and have the visibility of the Xtend field. The accessors methods are always code[Xtend][public]. 
 Thus, an Xtend field
 
 code[Xtend][
@@ -37,7 +37,7 @@ has the following effect:
 ul[
 	item[all fields are flagged final,]
 	item[getter methods will be generated (if not existent),]
-	item[a constructor will be generated (if not existent),]
+	item[a constructor taking paramaters for all non-initialized fields will be generated (if not existent),]
 	item[equals(Object) / hashCode() methods will be generated (if not existent),]
 	item[a toString() method will be generated (if not existent).]
 ]

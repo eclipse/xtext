@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>Types</title>
+<title>Static Typing and Java Interoperability</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
@@ -9,31 +9,65 @@
 </head>
 <body>
 <a name="types"></a>
-<h1>Types</h1>
+<h1>Static Typing and Java Interoperability</h1>
 <p>
-Xtend completely supports Java&apos;s type system: The primitive types as <span class="inlinecode"><span class="keyword">int</span></span> or 
-<span class="inlinecode"><span class="keyword">boolean</span></span> are available as well as all classes and interfaces that reside on the 
+Xtend, like Java, is a statically typed language. In fact it completely supports Java&apos;s type system, including the primitive types 
+as <span class="inlinecode"><span class="keyword">int</span></span> or <span class="inlinecode"><span class="keyword">boolean</span></span>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
 classpath.  
 </p>
 <p>
-Java Generics are fully supported, such that you can define type parameters and type arguments 
-in just the same way as in Java.
+Java Generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
+generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented after 
+<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html">the Java Language Specification</a>.
+</p>
+<a name="localTypeInference"></a>
+<h2>Type Inference</h2>
+<p>
+One of the problems with Java is, that you are forced to write type signatures over
+and over again. That&apos;s why so many people don&apos;t like static typing. 
+This is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
+just like Java, you rarely have to write types down because they can be computed from the context.
+</p>
+<a name="conversionRules"></a>
+<h2>Conversion Rules</h2>
+<p>
+In addition to Java&apos;s autoboxing to convert primitives to their corresponding wrapper types (e.g. <span class="inlinecode">int</span>
+is automatically converted to <span class="inlinecode">Integer</span> when needed), there are additional conversion rules.
 </p>
 <p>
-As Xtend classes compile to Java classes, you can integrate both Java classes in Xtend and Xtend 
-classes in Java. Note that Xtend does not have an own syntax for interfaces, as the Java syntax is 
-already very concise.  
-</p>
-<a name="Xbase_Types_ConformanceRules"></a>
-<h2>Conformance and Conversion</h2>
-<p>
-Conformance is used in order to find out whether some expression can be used in a certain situation. 
-For instance when assigning a value to a variable, the type of the right hand expression needs to 
-conform to the type of the variable.
+Arrays are automatically converted to <span class="inlinecode">java.util.List&lt;ComponentType&gt;</span> and vice versa. That is you can
+write the following:
 </p>
 <p>
-As Xbase implements the unchanged type system of Java it also fully supports the conformance rules 
-defined in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">The Java Language Specification</a>.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;toList(String[]&nbsp;array)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;List&lt;String&gt;&nbsp;asList&nbsp;=&nbsp;array<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;asList<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Another very useful conversion applies to lambda expressions. As explained in the previous section, a lambda expression
+usually is of one of the types listed in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Functions</span>
+or <span class="inlinecode">org.eclipse.xtext.xbase.lib.Predicates</span>. However if the expected type is an interface which has just method
+declaration, a lambda expression is automatically converted to that
+type. This allows to use lambda expressions with many existing Java libraries. See section <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;" >section closureTypes</a>
+for more details.
+</p>
+<a name="javaInteroperability"></a>
+<h2>Interoperability with Java</h2>
+<p>
+Resembling and supporting every aspect of Java&apos;s type system, ensures that there is no impedeance mismatch between Java and Xtend.
+This means that Xtend and Java are 100% interoperable and that there are no special cases and no thinking
+in two worlds is neccessary. You can call Xtend code from Java and vice versa without any surprises or hassles.
+</p>
+<p>
+As a bonus if you know Java&apos;s type system (specifically generics), you already know the most complicated part
+of Xtend.
 </p>
 </body>
 </html>

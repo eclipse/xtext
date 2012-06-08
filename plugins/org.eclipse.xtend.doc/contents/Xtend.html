@@ -10,19 +10,29 @@
 <body>
 <h1>Xtend User Guide</h1>
 <ol><li><a href="10-introduction.html#Introduction">Introduction</a>
-<ol>	<li><a href="10-introduction.html#Getting_Started">Getting Started</a>
-	<ol>	<li><a href="10-introduction.html#Getting_Started_2">Hello World</a>
+<ol>	<li><a href="10-introduction.html#Installation">Installation</a>
+	<ol>	<li><a href="10-introduction.html#MavenSupport">Maven Support</a>
 		</li>
 		<li><a href="10-introduction.html#library">The Runtime Library</a>
 		</li>
-		<li><a href="10-introduction.html#Tutorial">The Xtend Tutorial</a>
-		</li>
-		<li><a href="10-introduction.html#MavenSupport">Maven Support</a>
-		</li>
+	</ol></li>
+	<li><a href="10-introduction.html#GettingStarted">Getting Started</a>
+	<ol>	<li><a href="10-introduction.html#moviesExample">The Movies Example (src/examples6/Movies.xtend)</a>
+		<ol>	<li><a href="10-introduction.html#moviesExample_2">The Data</a>
+			</li>
+			<li><a href="10-introduction.html#moviesExample_3">Parsing The Data</a>
+			</li>
+			<li><a href="10-introduction.html#moviesExample_4">AnalysingThe Data</a>
+			</li>
+		</ol></li>
 	</ol></li>
 </ol></li>
-<li><a href="15-types.html#types">Types</a>
-<ol>	<li><a href="15-types.html#Xbase_Types_ConformanceRules">Conformance and Conversion</a>
+<li><a href="15-types.html#types">Static Typing and Java Interoperability</a>
+<ol>	<li><a href="15-types.html#localTypeInference">Type Inference</a>
+	</li>
+	<li><a href="15-types.html#conversionRules">Conversion Rules</a>
+	</li>
+	<li><a href="15-types.html#javaInteroperability">Interoperability with Java</a>
 	</li>
 </ol></li>
 <li><a href="20-classes-and-functions.html#Xtend_Classes_Members">Classes and Members</a>
@@ -45,6 +55,8 @@
 		</li>
 		<li><a href="20-classes-and-functions.html#inferredReturnTypes">Inferred Return Types</a>
 		</li>
+		<li><a href="20-classes-and-functions.html#genericMethods">Generic Methods</a>
+		</li>
 		<li><a href="20-classes-and-functions.html#polymorphicDispatch">Dispatch Methods</a>
 		<ol>	<li><a href="20-classes-and-functions.html#polymorphicDispatch_11">Dispatch Methods and Inheritance</a>
 			</li>
@@ -55,9 +67,9 @@
 	<li><a href="20-classes-and-functions.html#Annotations">Annotations</a>
 	</li>
 	<li><a href="20-classes-and-functions.html#extensionMethods">Extension Methods</a>
-	<ol>	<li><a href="20-classes-and-functions.html#extensionMethods_3">Local Extension Methods</a>
+	<ol>	<li><a href="20-classes-and-functions.html#libraryExtensions">Extensions From The Library</a>
 		</li>
-		<li><a href="20-classes-and-functions.html#libraryExtensions">Library Extensions</a>
+		<li><a href="20-classes-and-functions.html#extensionMethods_8">Local Extension Methods</a>
 		</li>
 		<li><a href="20-classes-and-functions.html#extensionImports">Extension Imports</a>
 		</li>
@@ -77,8 +89,6 @@
 		</li>
 		<li><a href="30-expressions.html#typeLiteral">Type Literals</a>
 		</li>
-		<li><a href="30-expressions.html#functionTypes">Function Types</a>
-		</li>
 	</ol></li>
 	<li><a href="30-expressions.html#typeCasts">Type Casts</a>
 	</li>
@@ -87,43 +97,39 @@
 		</li>
 		<li><a href="30-expressions.html#operators_5">Examples</a>
 		</li>
-		<li><a href="30-expressions.html#propertyAssignment">Assignments</a>
-		</li>
+		<li><a href="30-expressions.html#assignments">Assignments</a>
+		<ol>	<li><a href="30-expressions.html#propertyAssignments">Setting Properties</a>
+			</li>
+		</ol></li>
 	</ol></li>
+	<li><a href="30-expressions.html#blocks">Blocks</a>
+	</li>
 	<li><a href="30-expressions.html#variableDeclaration">Variable Declarations</a>
 	<ol>	<li><a href="30-expressions.html#variableDeclaration_6">Typing</a>
 		</li>
 	</ol></li>
-	<li><a href="30-expressions.html#featureCalls">Feature Calls</a>
+	<li><a href="30-expressions.html#featureCalls">Field Access and Method Invocation</a>
 	<ol>	<li><a href="30-expressions.html#propertyAccess">Property Access</a>
 		</li>
 		<li><a href="30-expressions.html#implicitVariables">Implicit Variables this and it</a>
+		</li>
+		<li><a href="30-expressions.html#staticAccess">Static Access</a>
 		</li>
 		<li><a href="30-expressions.html#nullSafeFeatureCalls">Null-Safe Feature Call</a>
 		</li>
 	</ol></li>
 	<li><a href="30-expressions.html#constructorCall">Constructor Call</a>
 	</li>
-	<li><a href="30-expressions.html#closures">Closures</a>
-	<ol>	<li><a href="30-expressions.html#closuresTypeInference">Typing</a>
-		</li>
-		<li><a href="30-expressions.html#functionMapping">Function Mapping</a>
-		</li>
-		<li><a href="30-expressions.html#implicitParameter">Implicit Parameter it</a>
-		</li>
-		<li><a href="30-expressions.html#closuresExceptions">Exceptions in Closures</a>
-		</li>
-		<li><a href="30-expressions.html#builderSyntax">Builder Syntax</a>
+	<li><a href="30-expressions.html#lambdas">Lambda Expressions</a>
+	<ol>	<li><a href="30-expressions.html#closureTypes">Typing</a>
 		</li>
 	</ol></li>
 	<li><a href="30-expressions.html#ifExpression">If Expression</a>
 	</li>
 	<li><a href="30-expressions.html#switchExpression">Switch Expression</a>
-	<ol>	<li><a href="30-expressions.html#switchExpression_7">Type guards</a>
+	<ol>	<li><a href="30-expressions.html#switchExpression_6">Type guards</a>
 		</li>
 	</ol></li>
-	<li><a href="30-expressions.html#blocks">Blocks</a>
-	</li>
 	<li><a href="30-expressions.html#forLoop">For Loop</a>
 	</li>
 	<li><a href="30-expressions.html#whileExpression">While Loop</a>
@@ -147,7 +153,7 @@
 		</li>
 	</ol></li>
 </ol></li>
-<li><a href="40-anntotations.html#annotationLibrary">Annotation Library</a>
+<li><a href="40-anntotations.html#processedAnnotations">Processed Annotations</a>
 <ol>	<li><a href="40-anntotations.html#propertyAnnotation">@Property</a>
 	</li>
 	<li><a href="40-anntotations.html#dataAnnotation">@Data</a>

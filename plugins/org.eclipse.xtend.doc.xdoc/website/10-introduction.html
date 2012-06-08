@@ -8,14 +8,17 @@
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
 		<ul style="display: none;" id="subToc_10-introduction.html">
-		<li id="10-introduction.html#Getting_Started.html" ><a href="10-introduction.php#Getting_Started.php" >Getting Started</a></li>
+		<li id="10-introduction.html#Installation.html" ><a href="10-introduction.php#Installation.php" >Installation</a></li>
+		<li id="10-introduction.html#GettingStarted.html" ><a href="10-introduction.php#GettingStarted.php" >Getting Started</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="15-types.php">Types</a></div>
+		<a href="15-types.php">Static Typing and Java Interoperability</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
-		<li id="15-types.html#Xbase_Types_ConformanceRules.html" ><a href="15-types.php#Xbase_Types_ConformanceRules.php" >Conformance and Conversion</a></li>
+		<li id="15-types.html#localTypeInference.html" ><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
+		<li id="15-types.html#conversionRules.html" ><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
+		<li id="15-types.html#javaInteroperability.html" ><a href="15-types.php#javaInteroperability.php" >Interoperability with Java</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -39,13 +42,13 @@
 		<li id="30-expressions.html#Xtend_Expressions_Literals.html" ><a href="30-expressions.php#Xtend_Expressions_Literals.php" >Literals</a></li>
 		<li id="30-expressions.html#typeCasts.html" ><a href="30-expressions.php#typeCasts.php" >Type Casts</a></li>
 		<li id="30-expressions.html#operators.html" ><a href="30-expressions.php#operators.php" >Infix Operators and Operator Overloading</a></li>
+		<li id="30-expressions.html#blocks.html" ><a href="30-expressions.php#blocks.php" >Blocks</a></li>
 		<li id="30-expressions.html#variableDeclaration.html" ><a href="30-expressions.php#variableDeclaration.php" >Variable Declarations</a></li>
-		<li id="30-expressions.html#featureCalls.html" ><a href="30-expressions.php#featureCalls.php" >Feature Calls</a></li>
+		<li id="30-expressions.html#featureCalls.html" ><a href="30-expressions.php#featureCalls.php" >Field Access and Method Invocation</a></li>
 		<li id="30-expressions.html#constructorCall.html" ><a href="30-expressions.php#constructorCall.php" >Constructor Call</a></li>
-		<li id="30-expressions.html#closures.html" ><a href="30-expressions.php#closures.php" >Closures</a></li>
+		<li id="30-expressions.html#lambdas.html" ><a href="30-expressions.php#lambdas.php" >Lambda Expressions</a></li>
 		<li id="30-expressions.html#ifExpression.html" ><a href="30-expressions.php#ifExpression.php" >If Expression</a></li>
 		<li id="30-expressions.html#switchExpression.html" ><a href="30-expressions.php#switchExpression.php" >Switch Expression</a></li>
-		<li id="30-expressions.html#blocks.html" ><a href="30-expressions.php#blocks.php" >Blocks</a></li>
 		<li id="30-expressions.html#forLoop.html" ><a href="30-expressions.php#forLoop.php" >For Loop</a></li>
 		<li id="30-expressions.html#whileExpression.html" ><a href="30-expressions.php#whileExpression.php" >While Loop</a></li>
 		<li id="30-expressions.html#doWhileExpression.html" ><a href="30-expressions.php#doWhileExpression.php" >Do-While Loop</a></li>
@@ -57,7 +60,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="40-anntotations.php">Annotation Library</a></div>
+		<a href="40-anntotations.php">Processed Annotations</a></div>
 		<ul style="display: none;" id="subToc_40-anntotations.html">
 		<li id="40-anntotations.html#propertyAnnotation.html" ><a href="40-anntotations.php#propertyAnnotation.php" >@Property</a></li>
 		<li id="40-anntotations.html#dataAnnotation.html" ><a href="40-anntotations.php#dataAnnotation.php" >@Data</a></li>
@@ -70,102 +73,169 @@
 		<h1>Introduction</h1>
 				<div class="toc">
 				  <ul>
-				    <li><a href="10-introduction.php#Getting_Started.php" >Getting Started</a></li>
+				    <li><a href="10-introduction.php#Installation.php" >Installation</a></li>
+				    <li><a href="10-introduction.php#GettingStarted.php" >Getting Started</a></li>
 				  </ul>
 				</div>
 				
 		<p>
-		Xtend is a statically-typed programming language which is tightly integrated with and runs on the Java Virtual Machine. 
-		It has its roots in the Java programming language but improves on many concepts:   
+		Xtend is a statically-typed programming language which translates to comprehensible Java source code. 
+		Syntactically and semantically Xtend has its roots in the Java programming language but improves on many aspects:   
 		</p>
 		<p>
 		<ul>
-		  <li><em>Extension methods</em> - enhance closed types with new functionality</li>
-		  <li><em>Multiple dispatch</em> a.k.a. polymorphic method invocation</li>
-		  <li><em>Closures</em> - concise syntax for anonymous function literals</li>
-		  <li><em>Operator overloading</em> - make your libraries even more expressive</li>
-		  <li><em>Powerful switch expressions</em> - type based switching with implicit casts</li>
-		  <li><em>Template expressions</em> - with intelligent white space handling</li>
-		  <li><em>No statements</em> - everything is an expression</li>
-		  <li><em>Property access syntax</em> - shorthands for getter and setter access</li>
-		  <li><em>Advanced type inference</em> - you rarely need to write down type signatures</li>
+		  <li><em><a href="20-classes-and-functions.php#extensionMethods.php" title="Go to &quot;Extension Methods&quot;">Extension methods</a></em> - enhance closed types with new functionality</li>
+		  <li><em><a href="30-expressions.php#lambdas.php" title="Go to &quot;Lambda Expressions&quot;">Lambda Expressions</a></em> - concise syntax for anonymous function literals</li>
+		  <li><em><a href="30-expressions.php#operators.php" title="Go to &quot;Infix Operators and Operator Overloading&quot;">Operator overloading</a></em> - make your libraries even more expressive</li>
+		  <li><em><a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">Powerful switch expressions</a></em> - type based switching with implicit casts</li>
+		  <li><em><a href="20-classes-and-functions.php#polymorphicDispatch.php" title="Go to &quot;Dispatch Methods&quot;">Multiple dispatch</a></em> - a.k.a. polymorphic method invocation</li>
+		  <li><em><a href="30-expressions.php#templates.php" title="Go to &quot;Template Expressions&quot;">Template expressions</a></em> - with intelligent white space handling</li>
+		  <li><em><a href="30-expressions.php" title="Go to &quot;Expressions&quot;">No statements</a></em> - everything is an expression</li>
+		  <li><em><a href="30-expressions.php#propertyAccess.php" title="Go to &quot;Property Access&quot;">Properties</a></em> - shorthands for accessing and defining getters and setter</li>
+		  <li><em>Local type inference</em> - you rarely need to write down type signatures anymore</li>
 		  <li><em>Full support for Java Generics</em> - including all conformance and conversion rules</li>
 		  <li><em>Translates to Java</em> not bytecode - understand what is going on and use your code for platforms 
 		      such as Android or GWT</li>
 		</ul>
 		</p>
 		<p>
-		It is not aiming at replacing Java all together. Therefore its library is a thin layer on top of the 
-		Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. 
-		Java can call Xtend methods, too, in a completely transparent way. And of course, Xtend provides a modern 
-		Eclipse-based IDE closely integrated with Eclipse's Java Development Tools (JDT).
+		The language is not aiming at replacing Java all together. Its <a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">library</a> is just a thin layer on top of the 
+		Java Development Kit (JDK) and unlike with other JVM languages there are <a href="15-types.php#javaInteroperability.php" title="Go to &quot;Interoperability with Java&quot;">zero interoperability</a> issues :
+		Everything you write in Xtend interacts with Java exactly as if it were written in Java in the first place.
+		At the same time Xtend just much more concise, readable and expressive. 
 		</p>
-		<a name="Getting_Started" ></a>
+		<p>
+		Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
+		Eclipse-based IDE closely integrated with Eclipse's Java Development Tools (JDT), including features like call-hierarchies, rename refactoring, 
+		debugging and many more.
+		</p>
+		<a name="Installation" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Getting Started</h1>
+			<h1>Installation</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="10-introduction.php#Getting_Started_2.php" >Hello World</a></li>
-			    <li><a href="10-introduction.php#library.php" >The Runtime Library</a></li>
-			    <li><a href="10-introduction.php#Tutorial.php" >The Xtend Tutorial</a></li>
 			    <li><a href="10-introduction.php#MavenSupport.php" >Maven Support</a></li>
+			    <li><a href="10-introduction.php#library.php" >The Runtime Library</a></li>
 			  </ul>
 			</div>
 			<p>
-			Xtend requires Eclipse 3.5 or higher and a Java SDK version 5 or above. The easiest way to install the
-			SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend" >Eclipse Marketplace</a>. There even
-			is a client integrated into Eclipse. You'll find it in the Help-menu.
+			Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
+			SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend" >Eclipse Marketplace</a>. 
+			But there's also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download" >available for download
+			at http://xtend-lang.org</a>.
 			</p>
-			<a name="Getting_Started_2" ></a>
-			<h2>Hello World</h2>
 			<p>
-			Let us start with a simple &quot;Hello World&quot; example. In Xtend, that reads as
+			If you don't want to use the recommended Eclipse Plug-in, you can compile Xtend code using the 
+			<a href="10-introduction.php#MavenSupport.php" title="Go to &quot;Maven Support&quot;">Maven plug-in</a>.
+			</p>
+			<a name="MavenSupport" ></a>
+			<h2>Maven Support</h2>
+			<p>
+			The <a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from
+			the following maven repository: <a href="http://build.eclipse.org/common/xtend/maven/" >http://build.eclipse.org/common/xtend/maven/</a>.
+			</p>
+			<p>
+			Here's the XML for the repository:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
-						&nbsp;&nbsp;}<br/>
-						}
+						&lt;repositories&gt;<br/>
+						&nbsp;&nbsp;&lt;repository&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
+						</span>&nbsp;&nbsp;&lt;/repository&gt;<br/>
+						&lt;/repositories&gt;<br/>
+						&lt;pluginRepositories&gt;<br/>
+						&nbsp;&nbsp;&lt;pluginRepository&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
+						</span>&nbsp;&nbsp;&lt;/pluginRepository&gt;<br/>
+						&lt;/pluginRepositories&gt;
 					</p>
 				</div>
 			</div>
-			
-			The Xtend code resembles Java a lot. You can already see how the syntactic noise is reduced: No semicolons,
-			no return types etc. 
 			</p>
 			<p>
-			An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-			translate it to Java code. You'll find it in a source folder <em>xtend-gen</em>.
-			The hello world example is translated to the following Java code:
+			Here's the XML for the dependency to the library:
+			</p>
+			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.lib.InputOutput;<br/>
-						<br/>
-						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
-						&nbsp;&nbsp;}<br/>
-						}
+						&lt;dependency&gt;<br/>
+						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+						&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
+						&lt;/dependency&gt;
 					</p>
 				</div>
+			</div>
+			</p>
+			<p>
+			And this is the XML for the plug-in:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						&lt;plugin&gt;<br/>
+						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+						&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
+						&nbsp;&nbsp;&lt;executions&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;compile&lt;/goal&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;&lt;goal&gt;testCompile&lt;/goal&gt;&nbsp;--&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;optionally&nbsp;you&nbsp;can&nbsp;configure&nbsp;a&nbsp;different&nbsp;target&nbsp;folder&nbsp;--&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configuration&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configuration&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
+						&nbsp;&nbsp;&lt;/executions&gt;<br/>
+						&lt;/plugin&gt;
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			As you see the outputDirectory can be specified to match the default of the Eclipse plug-in (xtend-gen). Of course you can also change the configuration
+			in Eclipse to match the Maven default (generated-sources). To do so right-click on the project and select 'Properties' or if you prefer a global setting choose Eclipse-&gt;Preferences.
+			In the category 'Xtend/Compiler' enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+			</p>
+			<p>
+			<div class="image" >
+			<a class="gallery" rel="prettyPhoto[all]" title="Configuring the compiler in Eclipse" href="images/configure-compiler-in-eclipse.png">
+				<img src="images/configure-compiler-in-eclipse.png" 
+					width="600px"
+				/>
+			</a>
+			<div class="caption">
+				Configuring the compiler in Eclipse
+			</div>
 			</div>
 			</p>
 			<a name="library" ></a>
 			<h2>The Runtime Library</h2>
 			<p>
-			The only surprising fact in the generated Java code may be the library class <span class="inlinecode">InputOutput</span>. Many 
-			features of Xtend are not built into the language itself but provided via the library
-			<em>org.eclipse.xtend2.lib</em>. The library is available from a Maven repository (check the website for details) and 
-			provides a lot of useful functionality annotating existing types from Java's SDK.
+			The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
+			to existing classes and interfaces from the JDK. The class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/InputOutput.html" title="org.eclipse.xtext.xbase.lib.InputOutput">InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>
+			providing the method println() being one of them. 
 			</p>
 			<p>
-			It provides means to create collections in a readable way:
+			The only surprising fact in the generated Java code may be the library class . Many 
+			features of Xtend are not built into the language itself but provided via the library
+			<em>org.eclipse.xtend.lib</em>. The library is available from a <a href="10-introduction.php#MavenSupport.php" title="Go to &quot;Maven Support&quot;">Maven repository</a> and via p2
+			update site (in case you do Eclipse Plug-In development).
+			</p>
+			<p>
+			The library provides means to create collections in a readable way:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -186,98 +256,393 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;myList.map(&nbsp;e&nbsp;|&nbsp;myMap.get(e)&nbsp;)
+						<span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;listOfPersons.map[&nbsp;name&nbsp;]
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			Operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available. 
+			Many operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available.
 			</p>
-			<a name="Tutorial" ></a>
-			<h2>The Xtend Tutorial</h2>
+		<a name="GettingStarted" ></a>
+		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+			padding: 5px 0;
+			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+			<br style="clear:both"></br>
+			<h1>Getting Started</h1>
+			<div class="toc">
+			  <ul>
+			    <li><a href="10-introduction.php#moviesExample.php" >The Movies Example (src/examples6/Movies.xtend)</a></li>
+			  </ul>
+			</div>
 			<p>
-			The best way to get acquainted with the language is to materialize the <em>Xtend Tutorial</em> example project 
-			in your workspace. You will find it in the <em>New &gt; Project..</em> wizard dialog.
-			</p>
-			<p>
-			The project contains a couple of sample Xtend files which show the different language concepts in 
-			action. Looking into the <em>xtend-gen</em> folder which holds the compiled Java code will help you understand 
-			the concepts better.
-			</p>
-			<a name="MavenSupport" ></a>
-			<h2>Maven Support</h2>
-			<p>
-			The runtime library as well as a plugin to run the compiler in a Maven build can be be obtained from
-			the following maven repository: <span class="inlinecode">http:<span class="comment">//build.eclipse.org/common/xtend/maven/</span></span>. We are working on having these artifacts in Maven Central soon.
-			</p>
-			<p>
-			Here's the XML for the repository:
+			The first thing you want to see in any language is the ubiquitous &quot;Hello World&quot; example. 
+			In Xtend, that reads as
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						&lt;repositories&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;repository&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/repository&gt;<br/>
-						&lt;/repositories&gt;<br/>
-						&lt;pluginRepositories&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;pluginRepository&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/pluginRepository&gt;<br/>
-						&lt;/pluginRepositories&gt;
+						<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
+						&nbsp;&nbsp;}<br/>
+						}
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			Here's the XML for the standalone version of xtend including the library dependency:
+			You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the <span class="inlinecode"><span class="keyword">def</span></span>
+			keyword for declaring a method. Also as in Java it's mandatory to define a class and a main method as the entry point for an application. 
+			Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
+			as you will learn in a moment.
 			</p>
 			<p>
+			An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
+			translate it to Java code. You'll find it in a source folder <em>xtend-gen</em>, which is of course configurable.
+			The hello world example is translated to the following Java code:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						&lt;dependency&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.standalone&lt;/artifactId&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.3.0-SNAPSHOT&lt;/version&gt;<br/>
-						&lt;/dependency&gt;
+						<span class="comment">//&nbsp;Generated&nbsp;Java&nbsp;Source&nbsp;Code<br/>
+						</span><span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.lib.InputOutput;<br/>
+						<br/>
+						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
+						&nbsp;&nbsp;}<br/>
+						}
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			And this is the XML for the plugin:
+			You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
+			about the missing library if it's not on the classpath and provide a quick fix to add it.
+			</p>
+			<p>
+			The next thing you might want to do is to materialize one of the example projects.
+			To do so right click anywhere into the <em>Navigator</em> view in Eclipse and select <em>New -&gt; Example...</em>.
+			</p>
+			<p>
+			In the upcoming dialog you'll find two examples for Xtend:
+			</p>
+			<p>
+			<ul>
+			  <li><em>Xtend Introductory Examples</em> contains a couple of example code snippets ilustrating certain
+			    aspects and strength of Xtend. 
+			    It for instance shows how to build a builder API or an API which allows you to write the following:
+			    <div class="literallayout">
+			  	<div class="incode">
+			  		<p class="code">
+			  			assertEquals(42.km/h,&nbsp;(40_000.m&nbsp;+&nbsp;2.km)&nbsp;/&nbsp;60.min)
+			  		</p>
+			  	</div>
+			  </div>
+			  
+			    Also the <a href="10-introduction.php#moviesExample.php" title="Go to &quot;The Movies Example (src/examples6/Movies.xtend)&quot;">the movies example</a> explained in detail in <a href="10-introduction.php#moviesExample.php" title="Go to &quot;The Movies Example (src/examples6/Movies.xtend)&quot;">the next section</a>
+			    is included here.</li>
+			  <li><em>Xtend Solutions For Euler</em> contains solutions to a lot of the problems you'll find at <a href="http://projecteuler.net/" >Project Euler's website</a>.
+			     These examples are leveraging the whole expressive power of Xtend for instance Problem 1 can be solved
+			     with the expression
+			     <div class="literallayout">
+			  	<div class="incode">
+			  		<p class="code">
+			  			(1..999).filter[&nbsp;i&nbsp;|&nbsp;i&nbsp;%&nbsp;3&nbsp;==&nbsp;0&nbsp;||&nbsp;i&nbsp;%&nbsp;5&nbsp;==&nbsp;0].reduce[i1,&nbsp;i2&nbsp;|&nbsp;i1&nbsp;+&nbsp;i2]
+			  		</p>
+			  	</div>
+			  </div>
+			  
+			     which you might want to compare with <a href="http://v1.pradeepgowda.com/euler/euler001.html" >solutions in other languages</a>.
+			  </li>
+			</ul>
+			</p>
+			<p>
+			<div class="image" >
+			<a class="gallery" rel="prettyPhoto[all]" title="Installing The Example Project" href="images/materialize-example.png">
+				<img src="images/materialize-example.png" 
+					width="600px"
+				/>
+			</a>
+			<div class="caption">
+				Installing The Example Project
+			</div>
+			</div>
+			</p>
+			<a name="moviesExample" ></a>
+			<h2>The Movies Example (src/examples6/Movies.xtend)</h2>
+			<p>
+			The movies example is included in the example project <em>Xtend Introductory Examples</em> and is about reading
+			a file with data about movies in and doing some analysis on it.
+			</p>
+			<a name="moviesExample_2" ></a>
+			<h3>The Data</h3>
+			<p>
+			The movie database is a plain text file (data.csv) with data sets describing movies.
+			Here's an example data set:
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						Naked&nbsp;Lunch&nbsp;&nbsp;1991&nbsp;&nbsp;6.9&nbsp;&nbsp;16578&nbsp;&nbsp;Biography&nbsp;&nbsp;Comedy&nbsp;&nbsp;Drama&nbsp;&nbsp;Fantasy
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			The values are separated by two spaces. The columns are :
+			<ol>
+			  <li>title</li>
+			  <li>year</li>
+			  <li>rating</li>
+			  <li>numberOfVotes</li>
+			  <li>categories</li>
+			</ol>
+			
+			 
+			Because we want to work with this data in an object oriented and statically typed manner, we 
+			might want to start by declaring a datatype <span class="inlinecode">Movie</span>:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						&lt;plugin&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.3.0-SNAPSHOT&lt;/version&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;executions&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;compile&lt;/goal&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;&lt;goal&gt;testCompile&lt;/goal&gt;&nbsp;--&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;optional&nbsp;you&nbsp;can&nbsp;configure&nbsp;a&nbsp;different&nbsp;target&nbsp;folder&nbsp;--&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configuration&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configuration&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&lt;/executions&gt;<br/>
-						&lt;/plugin&gt;
+						@Data&nbsp;<span class="keyword">class</span>&nbsp;Movie&nbsp;{<br/>
+						&nbsp;&nbsp;String&nbsp;title<br/>
+						&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;year<br/>
+						&nbsp;&nbsp;<span class="keyword">double</span>&nbsp;rating<br/>
+						&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;numberOfVotes<br/>
+						&nbsp;&nbsp;Set&lt;String&gt;&nbsp;categories&nbsp;<br/>
+						}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			It's a plain class with a typed field for each column in the data sets. The <a href="40-anntotations.php#dataAnnotation.php" title="Go to &quot;@Data&quot;">@Data</a>
+			annotation will turn this class into a value object, that is it will get 
+			<ul>
+			  <li>a getter-method for each field,</li>
+			  <li>a <span class="inlinecode">hashCode()</span>/<span class="inlinecode">equals()</span> implementation,</li>
+			  <li>implementation of <span class="inlinecode">Object.toString(),</span></li>
+			  <li>a constructor accepting values for all fields in the declared order.</li>
+			</ul>
+			</p>
+			<a name="moviesExample_3" ></a>
+			<h3>Parsing The Data</h3>
+			<p>
+			Let's now add another class to the same file (any number of <a href="20-classes-and-functions.php" title="Go to &quot;Classes and Members&quot;">classes</a> per file is allowed) and initialize a field
+			called movies with a list of movies. For the initialization we read in the text file and turn the data sets into <span class="inlinecode">Movie</span>s:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">import</span>&nbsp;java.io.FileReader<br/>
+						<span class="keyword">import</span>&nbsp;java.util.Set<br/>
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*<br/>
+						<br/>
+						<span class="keyword">class</span>&nbsp;Movies&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;movies&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;FileReader(<span class="string">&apos;data.csv&apos;</span>).readLines.map[&nbsp;line&nbsp;|<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Movie(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.next,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double::parseDouble(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long::parseLong(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.toSet<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+						}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			A <a href="20-classes-and-functions.php#fields.php" title="Go to &quot;Fields&quot;">field's type</a> can be inferred from the expression on the right hand-side. 
+			That's called local type inference and is supported everyhwere in Xtend.
+			We want the field to be final, so we declare it as a value using the keyword <span class="inlinecode"><span class="keyword">val</span></span>.
+			</p>
+			<p>
+			The initialization on the right hand side first creates a fresh instance of <span class="inlinecode">java.io.FileReader</span>.
+			Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you won't find
+			such a method. It's a static method coming from Google Guava's <span class="inlinecode">CharStream</span> and its static methods
+			are imported as <a href="20-classes-and-functions.php#extensionImports.php" title="Go to &quot;Extension Imports&quot;">extension methods</a>, which allows us to use this readable syntax.
+			</p>
+			<p>
+			<span class="inlinecode">CharStream.readLines(Reader)</span> returns a <span class="inlinecode">List&lt;String&gt;</span> on which we call another extension method called <span class="inlinecode">map</span>.
+			That one is defined in the <a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">runtime library</a> (<span class="inlinecode">ListExtensions.map(...)</span> and is so useful that it is always imported and
+			therefore automatically available on all lists. The <span class="inlinecode">map</span> extension expects a function as a parameter.
+			Map basically invokes that function for each value in the list and returns a list containing the results of the function incovations.
+			</p>
+			<p>
+			Function objects are created using <a href="30-expressions.php#lambdas.php" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> (the code in squared brackets).
+			Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
+			separator and calling iterator on the result. As you might know <span class="inlinecode">java.lang.String.split(String)</span>
+			returns a string array (<span class="inlinecode">String[]</span>). Xtend <a href="15-types.php#conversionRules.php" title="Go to &quot;Conversion Rules&quot;">auto-convertes arrays to lists</a> when needed, which is the case when we 
+			call <span class="inlinecode">Iterable.iterator()</span> on it.
+			</p>
+			<p>
+			Now we use the iterator to create an instance of <span class="inlinecode">Movie</span>.
+			The data type conversion (e.g. <span class="inlinecode">String</span> to <span class="inlinecode"><span class="keyword">int</span></span>) is done by calling <a href="30-expressions.php#staticAccess.php" title="Go to &quot;Static Access&quot;">static methods</a> from the wrapper types. 
+			The rest of the iterable is turned into a set using the extension methods <span class="inlinecode">Iterators.toSet(Iterator&lt;T&gt;)</span>
+			and contains all the categories the movie is associated with.
+			</p>
+			<a name="moviesExample_4" ></a>
+			<h3>AnalysingThe Data</h3>
+			<p>
+			Now that we've the text file turned into a <span class="inlinecode">List&lt;Movie&gt;</span>, we are ready to do some analysis on it.
+			We use <em>Junit4</em> to make the individual analysis executable. 
+			The simplest example is counting the number of action movies:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						@Test&nbsp;<span class="keyword">def</span>&nbsp;numberOfActionMovies()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(828,&nbsp;movies.filter[categories.contains(<span class="string">&apos;Action&apos;</span>)].size)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			It's using the extension method <span class="inlinecode">IterableExtensions.filter</span> to filter the movies. The lambda expression
+			checks whether the current movie's categories contains the entry <span class="inlinecode"><span class="string">&apos;Action&apos;</span></span>. Note that unlike
+			the lambda we used to turn the lines in the file into movies, we haven't declared a parameter name this time. 
+			We could have written 
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[&nbsp;movie&nbsp;|&nbsp;movie.categories.contains(<span class="string">&apos;Action&apos;</span>)].size
 					</p>
 				</div>
 			</div>
 			
+			but since we left out the name and the vertical bar the variable is automatically named <span class="inlinecode">it</span> which
+			(like <span class="inlinecode">this</span>) is an <a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. That's why we can write either 
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)].size
+					</p>
+				</div>
+			</div>
+			
+			or 
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[categories.contains(<span class="string">&apos;Action&apos;</span>)].size
+					</p>
+				</div>
+			</div>
+			.
+			</p>
+			<p>
+			Lastly we call <span class="inlinecode">size()</span> on the resulting iterable, which again is an extension method, because <span class="inlinecode">java.lang.Iterable</span>
+			doesn't define such a method. It's defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
+			</p>
+			<p>
+			The second analysis is about finding the year the best movie from the 80ies was released.
+			Here's the code:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;yearOfBestMovieFrom80ies()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(1989,&nbsp;movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Here we <span class="inlinecode">filter</span> all movies where the year is not included in the range from 1980 to 1989 (the 80ies).
+			The <span class="inlinecode">..</span> operator again is an extension defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a> and returns an instanceof <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerRange.html" title="org.eclipse.xtext.xbase.lib.IntegerRange">IntegerRange</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java" title="View Source Code" >(src)</a>.
+			Operator overloading is explained in <a href="30-expressions.php#operators.php" title="Go to &quot;Infix Operators and Operator Overloading&quot;">section</a>.
+			</p>
+			<p>
+			The resulting iterable is sorted (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.sortBy</span>) by the <span class="inlinecode">rating</span> of the movies. 
+			Since it's sorted in ascending order, we take the last movie from the list and return its <span class="inlinecode">year</span>. 
+			</p>
+			<p>
+			We could have sorted descending and take the head of the list as well:
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[(1980..1989).contains(year)].sortBy[-rating].head.year
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Btw. the calls to <span class="inlinecode">movie.year</span> as well as <span class="inlinecode">movie.categories</span> in the previous example in fact access the corresponding 
+			<a href="30-expressions.php#propertyAccess.php" title="Go to &quot;Property Access&quot;">getter methods</a>.
+			</p>
+			<p>
+			The last analysis you'll find in the example is a bit trickier. It also uses a couple of additional extension methods such 
+			as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.&lt;T&gt;take(Iterable&lt;T&gt;,&nbsp;int)</span> and <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.reduce(...)</span>.
+			I'll leave it up to you to understand how it works, here's the full code:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">package</span>&nbsp;example6<br/>
+						<br/>
+						<span class="keyword">import</span>&nbsp;org.junit.Test<br/>
+						<span class="keyword">import</span>&nbsp;java.io.FileReader<br/>
+						<span class="keyword">import</span>&nbsp;java.util.Set<br/>
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.junit.Assert.*<br/>
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*<br/>
+						<br/>
+						<span class="keyword">class</span>&nbsp;Movies&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;action&nbsp;movies<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;numberOfActionMovies()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(828,&nbsp;movies.filte[categories.contains(<span class="string">&apos;Action&apos;</span>)].size)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;year&nbsp;the&nbsp;best&nbsp;rated&nbsp;movie&nbsp;of&nbsp;80ies&nbsp;(1980-1989)&nbsp;was&nbsp;released.<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;yearOfBestMovieFrom80ies()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(1989,&nbsp;movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;sum&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;votes&nbsp;of&nbsp;the&nbsp;two&nbsp;top&nbsp;rated&nbsp;movies.<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sumOfVotesOfTop2()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;<span class="keyword">long</span>&nbsp;movies&nbsp;=&nbsp;movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a,&nbsp;b|&nbsp;a&nbsp;+&nbsp;b]<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(47_229,&nbsp;movies)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;movies&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;FileReader(<span class="string">&apos;data.csv&apos;</span>).readLines.map[&nbsp;line&nbsp;|<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Movie(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.next,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double::parseDouble(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long::parseLong(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.toSet<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+						}<br/>
+						<br/>
+						@Data&nbsp;<span class="keyword">class</span>&nbsp;Movie&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;title<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;year<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">double</span>&nbsp;rating<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;numberOfVotes<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Set&lt;String&gt;&nbsp;categories&nbsp;<br/>
+						}
+					</p>
+				</div>
+			</div>
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
