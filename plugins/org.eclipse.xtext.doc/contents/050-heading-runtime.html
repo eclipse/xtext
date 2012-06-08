@@ -41,8 +41,8 @@ of your language.
 <h2>Setup within Eclipse-Equinox (OSGi)</h2>
 <p>
 Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a>
-using the <a href="030-generator.html#guicemodules" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@3bead432 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/050-heading-runtime.xdoc#xtextLink_::0.0.3.1.2.0.0.7::0::/2)" title="View Source Code" >(src)</a> 
-is generated for each language, which is used to create <abbr title="" >IExecutableExtensions</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@3f169969 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/050-heading-runtime.xdoc#xtextLink_::0.0.3.1.2.0.0.9::0::/2)" title="View Source Code" >(src)</a>.
+using the <a href="030-generator.html#guicemodules" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtensionFactory" >IExecutableExtensionFactory</abbr></a> 
+is generated for each language, which is used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtension" >IExecutableExtensions</abbr></a>.
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
 declare dependencies and get them injected upon creation. 
 </p>
@@ -831,7 +831,7 @@ model and interprets their values as URIs that point to imported resources. That
 resources to the current resource&apos;s resource set. In addition the scope provider uses the 
 <a href="050-heading-runtime.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
 imported resource to compute all the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> returned 
-by the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@19b463e1 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/080-scoping.xdoc#xtextLink_::0.0.3.0.3.1.2.2.0.13::0::/2)" title="View Source Code" >(src)</a>.  
+by the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/preferences/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.preferences.IScope" >IScope</abbr></a>.  
 </p>
 <p>
 Global scopes based on import URIs are available if you use the 
@@ -878,7 +878,7 @@ both situations the global index state is held by an implementation of <a class=
 (Note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, 
 such that all linking happens to the latest maybe unsaved version of the resources. You will find the 
 Guice configuration of the global index in the UI scenario in 
-<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@1537ad22 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/080-scoping.xdoc#xtextLink_::0.0.3.0.3.2.3.0.2.0.0.7::0::/2)" title="View Source Code" >(src)</a>.
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/shared/internal/SharedModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.shared.internal.SharedModule" >SharedModule</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java" title="View Source Code" >(src)</a>.
 </p>
 <p>
 The index is basically a flat list of instances of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
@@ -1872,7 +1872,7 @@ After having explained how rules can be activated, this is what they can do:
 		<span class="inlinecode">setIndentationIncrement()</span> increments indentation by one unit at this position. Whether 
 				one unit consists of one tab-character or spaces is defined by 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IIndentationInformation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IIndentationInformation" >IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
-				consults Eclipse&apos;s <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@6cea9fa4 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/105-formatting.xdoc#xtextLink_::0.0.3.1.2.4.0.1.0.0.0.0.0.4::0::/2)" title="View Source Code" >(src)</a>.
+				consults Eclipse&apos;s <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="View JavaDoc"><abbr title="org.eclipse.jface.preference.IPreferenceStore" >IPreferenceStore</abbr></a>.
 	</li>
 	<li>
 		<span class="inlinecode">setIndentationDecrement()</span> decrements indentation by one unit.

@@ -2,40 +2,75 @@ section2:xbaseLanguageRef_Expressions[Expressions]
 
 Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-be helpful, too. An expression always results in a value (might be the value 'null' though). In addition every resolved expressions is
+be helpful, too. An expression always results in a value (might be the value code[Xbase][null] though). In addition every resolved expressions is
 of a static type.
 
 section3:Xbase_Expressions_Literals[Literals]
 
-A literal denotes a fixed unchangeable value. Literals for string, integers, booleans,
-null and Java types are supported.
+A literal denotes a fixed unchangeable value. Literals for strings, integers, booleans,
+code[Xbase][null] and Java types are supported.
 
-section4:Xbase_Expressions_StringLiterals[String Literals]
+section4:Xbase_Expressions_StringLiteral[String Literals]
 
-A string literal as syntactically defined in ref:Xbase_Syntax_StringLiteral is a valid expression and returns an instance of code[java.lang.String] of the given value.
+String literals can either use single quotes (') or double quotes (") as their terminals. When using
+double quotes all literals allowed by Java string literals are supported. In addition new line 
+characters are allowed, that is in Xbase all string literals can span multiple lines. When using single 
+quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
+do not.
+
+See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
+
+In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
+instance at runtime.
+
+section4[Examples]
 
 ul[
-	item[code['Hello World !']]
-	item[code["Hello World !"]]
-	item[code["Hello 
-		World !"  // Xbase strings can span multiple lines
-	]]
+	item[code[Xbase]['Foo Bar Baz']]
+	item[code[Xbase]["Foo Bar Baz"]]
+	item[code[Xbase]["the quick brown fox
+   jumps over the lazy dog."]]
+	item[code[Xbase]['Escapes : \' ']]
+	item[code[Xbase]["Escapes : \" "]]
 ]
 
-section4:Xbase_Expressions_IntegerLiterals[Integer Literals]
+section4:Xbase_Expressions_NumberLiteral[Number Literals]
 
-An integer literal as defined in ref:Xbase_Syntax_NumberLiteral creates an code[int].
-There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
-with one argument (the positive int literal).
+Xbase supports roughly the same number literals as Java with a few differences.   
+First, there are no signed number literals. If you put a minus operator in front of an number 
+literal it is taken as a code[UnaryOperator] with one argument (the positive number 
+literal). Second, as in Java 7, you can separate digits using code[Xbase][_] for better readability
+of large numbers.
+ 
+An integer literal creates an code[Xbase][int], a code[Xbase][long] (suffix code[L]) or a
+codeRef[java.math.BigInteger] (suffix code[BI]). There are no octal numbers
 
-ul[
-	item[code[42]]
-	item[code[234254]]
+code[Xbase][
+  42
+  1_234_567_890 
+  0xbeef    // hexadecimal
+  077       // decimal 77 (*NOT* octal)
+  -1  // an expression consisting of the unary - operator and an integer literal  
+  42L
+  0xbeef#L // hexadecimal, mind the '#'
+  0xbeef_beef_beef_beef_beef#BI // BigInteger
+]
+
+An floating-point literal creates an code[Xbase][double] (suffix code[D] or none), a code[Xbase][float] 
+(suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] you have to 
+specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point 
+literals.  
+code[Xbase][
+  42d     // double
+  0.42e2  // implicit double
+  0.42e2f // float
+  4.2f    // float
+  0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
 ]
 
 section4:Xbase_Expressions_BooleanLiteral[Boolean Literals]
 
-There are two boolean literals, code[true] and code[false] which correspond to their Java counterpart of type e[boolean]. 
+There are two boolean literals, code[Xbase][true] and code[Xbase][false] which correspond to their Java counterpart of type e[boolean]. 
 
 ul[
 	item[code[Xbase][true]]
@@ -44,7 +79,7 @@ ul[
 
 section4:Xbase_Expressions_NullLiteral[Null Literal]
 
-The null pointer literal is, like in Java, code[null]. 
+The null pointer literal is, like in Java, code[Xbase][null]. 
 It is a member of any reference type.
 
 ul[
@@ -53,7 +88,7 @@ ul[
 
 section4:Xbase_Expressions_TypeLiteral[Type Literals]
 
-Type literals are specified using the keyword e[typeof] :
+Type literals are specified using the keyword code[Xbase][typeof] :
 
 ul[
   item[code[Xbase][typeof(java.lang.String)] which yields java.lang.String.class]
@@ -143,15 +178,35 @@ ol[
 section4[Examples]
 
 ul[
-	item[code[my.foo = 23]]
-	item[code[myList += 23]]
-	item[code[x > 23 && y < 23]]
-	item[code[x && y || z]]
-	item[code[1 + 3 * 5 * (- 23)]]
-	item[code[!(x)]]
-	item[code[my.foo = 23]]
-	item[code[my.foo = 23]]
+	item[code[Xbase][my.foo = 23]]
+	item[code[Xbase][myList += 23]]
+	item[code[Xbase][x > 23 && y < 23]]
+	item[code[Xbase][x && y || z]]
+	item[code[Xbase][1 + 3 * 5 * (- 23)]]
+	item[code[Xbase][!(x)]]
+	item[code[Xbase][my.foo = 23]]
+	item[code[Xbase][my.foo = 23]]
 ]
+
+section4[With Operator]
+
+The with operator code[=>] executes the ref:Xbase_Expressions_Lambda[lambda expression] with a single parameter on the right
+hand side on a given argument on its left hand side. The result is the left operand after applying the lambda expression. In 
+combination with the  ref:Xbase_Expressions_implicit_parameter[implicit parameter] code[Xbase][it] this allows very convenient
+initialization of newly created objects, e.g.
+
+code[Xbase][
+	val person = new Person => \[
+		firstName = 'John'
+		lastName = 'Coltrane'
+	\]
+	// equivalent to
+	val person = new Person
+	person.firstName = 'John'
+	person.firstName = 'Coltrane'
+]
+
+
 
 section3:Xbase_Expressions_PropertyAssignment[Assignments]
 
@@ -163,7 +218,7 @@ code[Xbase][
 	myObj.myProperty = "foo"
 ]
 
-The compiler first looks up whether there is an accessible Java Field called code[myProperty] on the type of code[myObj]. If there is one it translates to
+The compiler first looks for an accessible Java Field called code[myProperty] on the type of code[myObj]. If there is one it translates to
 the following Java expression :
 
 code[Java][
@@ -173,9 +228,9 @@ code[Java][
 Remember in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
 Java expression, which is the assigned value.
 
-If there is no accessible field on the left operand's type, a method called code[setMyProperty(OneArg)] (JavaBeans
+If there is no accessible field on the left operand's type, a method called code[Java][setMyProperty(OneArg)] (JavaBeans
 setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value will be whatever the 
-setter method returns (which usually is code[null]). 
+setter method returns (which usually is code[Xbase][null]). 
 As a result the compiler translates to :
 
 code[Java][
@@ -204,8 +259,8 @@ for the getter methods code[Java][getMyProperty()]. If none of these members can
 
 section4:Xbase_Expressions_NullSafeFeatureCalls[Null-Safe Feature Call]
 
-Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
-Xbase supports the safe navigation operator code[?.] to make such code more readable.
+Checking for null references can make code very unreadable. In many situations it is ok for an expression to return code[Xbase][null] if a receiver was code[Xbase][null].
+Xbase supports the safe navigation operator code[Xbase][?.] to make such code more readable.
 
 Instead of writing 
 
@@ -319,26 +374,25 @@ section4:Xbase_Expressions_FunctionMapping[Function Mapping]
 An Xbase lambda expression is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xbase. There is an interface 
 for each number of parameters (current maximum is six parameters). The names of the interfaces are 
 ul[
-	item[e[Function0<ReturnType>] for zero parameters, ]
-	item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
-	item[e[Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function0][Function0<ReturnType>] for zero parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function1][Function1<Param1Type, ReturnType>] for one parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function2][Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
 	item[... ]
-	item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Functions$Function6][Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
 ]
 or
 ul[
-	item[e[Procedure0] for zero parameters, ]
-	item[e[Procedure1<Param1Type>] for one parameters, ]
-	item[e[Procedure2<Param1Type, Param2Type>] for two parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure0][Procedure0] for zero parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure1][Procedure1<Param1Type>] for one parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure2][Procedure2<Param1Type, Param2Type>] for two parameters, ]
 	item[... ]
-	item[e[Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
+	item[codeRef[org.eclipse.xtext.xbase.lib.Procedures$Procedure6][Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
 ]
-if the reutrn type is code[Java][void].
+if the return type is code[Java][void].
 
-In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) lambda
-expressions
-are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
-don't count).
+In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava 
+(formerly known as Google Collect) lambda expressions are auto coerced to expected types if those 
+types declare only one abstract method (methods from code[Java][java.lang.Object] don't count).
 
 As a result given the method code[java.util.Collections.sort(List<T>, Comparator<? super T>)] is available
 as an extension method, it can be invoked like this
@@ -357,7 +411,7 @@ newArrayList( 'aaa', 'bb', 'c' ).sort(
 section4:Xbase_Expressions_implicit_parameter[Implicit Parameter e[it]]
 
 If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can
-be ommitted. Use e[it] to refer to the parameter inside the lambda expression's body.
+be omitted. Use code[Xbase][it] to refer to the parameter inside the lambda expression's body.
 code[Xbase][
 val (String s)=>String function = \[toUpperCase\] 
   // equivalent to \[it | it.toUpperCase\]
@@ -421,7 +475,7 @@ switch e {
 ]
 
 the main expression code[e] is evaluated first and then each case sequentially. If the switch expression
-contains a variable declaration using the syntax known from ref:Xbase_Expressions_ForLoop, the value is bound to the given name.
+contains a variable declaration using the syntax known from ref:Xbase_Expressions_ForLoop[for loops], the value is bound to the given name.
 Expressions of type code[java.lang.Boolean] or code[boolean] are not allowed in a switch expression.
 
 The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
@@ -454,16 +508,18 @@ switch x {
 }
 ]
 
-Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the case's guard expression is executed using the same semantics explained in
+Only if the switch value passes a type guard, i.e. an instanceof operation returns code[Xbase][true], the case's guard expression is executed using the same semantics explained in
 previously. 
 If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
 the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
 
 section4[Typing]
 
-The return type of a switch expression is computed using the rules defined in ref:Xbase_Types_CommonSuperType. The set of types from which the common super type is 
-computed corresponds to the types of each case's result expression. In case a switch expression's type is
-computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
+The return type of a switch expression is computed using the rules defined in the
+section on ref:Xbase_Types_CommonSuperType[common supertypes]. The set of types from which the common 
+super type is computed corresponds to the types of each case's result expression. If a switch expression's
+type is computed using the expected type from the context, it is sufficient to return the expected type if all 
+case branches types conform to the expected type.
 
 section4[Examples]
 
@@ -491,13 +547,14 @@ ul[
 
 section3:Xbase_Expressions_VariableDeclaration[Variable Declarations]
 
-Variable declarations are only allowed within ref:Xbase_Expressions_Blocks[blocks]. They are visible in any subsequent expressions in
-the block. Although overriding or shadowing variables from outer scopes is allowed, it is usually only
-used to overload the variable name 'this', in order to subsequently access an object's features in an
-unqualified manner.
+Variable declarations are only allowed within ref:Xbase_Expressions_Blocks[blocks]. They are visible in any
+subsequent expressions in the block. Although overriding or shadowing variables from outer scopes is allowed, 
+it is usually only used to overload the ref:Xbase_Expressions_ImplicitThis[implicit variables] code[Xbase][this] 
+and code[Xbase][it], in order to subsequently access an object's features in an unqualified manner.
 
-A variable declaration starting with the keyword code[Xbase][val] denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
-needs to update the value of a reference. In such situations the variable needs to be declared with the keyword code[Xbase][var], which stands for 'variable'.
+A variable declaration starting with the keyword code[Xbase][val] denotes a so called value, which is essentially 
+a final (i.e. unsettable) variable. In rare cases, one needs to update the value of a reference. In such situations
+the variable needs to be declared with the keyword code[Xbase][var], which stands for 'variable'.
 
 A typical example for using code[Xbase][var] is a counter in a loop. 
 code[Xbase][
@@ -511,13 +568,13 @@ code[Xbase][
 }
 ]
 
-Variables declared outside a lambda expression using the code[var] keyword are not accessible from within a
+Variables declared outside a lambda expression using the code[Xbase][var] keyword are not accessible from within a
 the lambda expression.
 
 
 section4[Typing]
 
-The return type of a variable declaration expression is always code[void]. 
+The return type of a variable declaration expression is always code[Xbase][void]. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
 code[Xbase][
@@ -533,7 +590,7 @@ code[Xbase][
 section3:Xbase_Expressions_Blocks[Blocks]
 
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-The return type of a block is also the type of the last expression. Empty blocks return code[null]. 
+The return type of a block is also the type of the last expression. Empty blocks return code[Xbase][null]. 
 ref:Xbase_Expressions_VariableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as a block's last expression.
 
 A block expression is surrounded by curly braces and contains at least one expression.

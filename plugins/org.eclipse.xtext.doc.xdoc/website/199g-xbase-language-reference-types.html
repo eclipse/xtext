@@ -185,10 +185,10 @@
 		but they can be passed around and if needed are transparently converted to a List of the compound type.
 		</p>
 		<p>
-		In other words, the return type of a Java method that returns an array of ints (<em>int[]</em>) can be directly assigned to 
-		a variable of type <em>java.util.List&lt;java.lang.Integer&gt;</em> (in short <em>List&lt;Integer&gt;</em>). Due to type inference
-		you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked with a <em>List</em>
-		instead.
+		In other words, the return type of a Java method that returns an array of ints (<span class="inlinecode"><span class="keyword">int</span>[]</span>) can be directly assigned to 
+		a variable of type <span class="inlinecode">java.util.List&lt;java.lang.Integer&gt;</span> (in short <span class="inlinecode">List&lt;Integer&gt;</span>). Due to type inference
+		you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked 
+		with a <span class="inlinecode">List</span> instead.
 		</p>
 		<a name="Xbase_Types_TypeReferences" ></a>
 		<h3>Simple Type References</h3>
@@ -214,7 +214,8 @@
 		<h3>Function Types</h3>
 		<p>
 		Xbase introduces <em>lambda expressions</em>, and therefore an additional function type signature. On the JVM-Level a lambda
-		expression (or more generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
+		expression (or more generally any function object) is just an instance of one of the types in 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>, 
 		depending on the number of arguments. However, as lambda expressions are a very important language feature, 
 		a special sugared syntax for function types has been introduced.  
 		So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;Boolean</span>.
@@ -231,7 +232,7 @@
 		<ul>
 		  <li><span class="inlinecode">=&gt;Boolean&nbsp;<span class="comment">//&nbsp;predicate&nbsp;without&nbsp;parameters</span></span></li>
 		  <li><span class="inlinecode">(String)=&gt;Boolean&nbsp;<span class="comment">//&nbsp;One&nbsp;argument&nbsp;predicate</span></span></li>
-		  <li><span class="inlinecode">(Mutable)=&gt;void&nbsp;<span class="comment">//&nbsp;A&nbsp;procedure&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only</span></span></li>
+		  <li><span class="inlinecode">(Mutable)=&gt;<span class="keyword">void</span>&nbsp;<span class="comment">//&nbsp;A&nbsp;procedure&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only</span></span></li>
 		  <li><span class="inlinecode">(List&lt;String&gt;,&nbsp;Integer)=&gt;String</span></li>
 		</ul>
 		</p>
@@ -255,9 +256,9 @@
 		  <li><span class="inlinecode">String</span></li>
 		  <li><span class="inlinecode">java.lang.String</span></li>
 		  <li><span class="inlinecode">List&lt;?&gt;</span></li>
-		  <li><span class="inlinecode">List&lt;?&nbsp;extends&nbsp;Comparable&lt;?&nbsp;extends&nbsp;FooBar&gt;</span></li>
-		  <li><span class="inlinecode">List&lt;?&nbsp;super&nbsp;MyLowerBound&gt;</span></li>
-		  <li><span class="inlinecode">List&lt;?&nbsp;extends&nbsp;=&gt;Boolean&gt;</span></li>
+		  <li><span class="inlinecode">List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Comparable&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;FooBar&gt;</span></li>
+		  <li><span class="inlinecode">List&lt;?&nbsp;<span class="keyword">super</span>&nbsp;MyLowerBound&gt;</span></li>
+		  <li><span class="inlinecode">List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;=&gt;Boolean&gt;</span></li>
 		</ul>
 		</p>
 		<a name="Xbase_Types_Primitives" ></a>

@@ -35,7 +35,7 @@ input model and dispatches to its contents until you decide which elements to ha
 
 The inferrence runs in two phases: In the first phase all the naked types are created. This way you
 make sure all types exist and are referrable when you create their members in the second phase. 
-Use code[Xtend2][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialisation
+Use code[Xtend2][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialization
 code for the second phase as a ref:Xbase_Expressions_Lambda[lambda expression] handed to the method
 code[Xtend][initializeLater()] on the return type of the code[Xtend2][acceptor.accept()] method.
      

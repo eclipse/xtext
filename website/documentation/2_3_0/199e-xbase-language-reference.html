@@ -200,16 +200,16 @@
 			in minutes. However, software systems do not consist of structures solely. At some point a system needs 
 			to have some behavior, which is usually specified using so called <em>expressions</em>. Expressions are the 
 			heart of every programming language and are not easy to get right. On the other hand, expressions are 
-			well understood and many programming languages share a common setand understanding of expressions.
+			well understood and many programming languages share a common set and understanding of expressions.
 			</p>
 			<p>
-			That is why most people do not add support for expressions in their DSL, but try to solve this 
+			That is why most people do not add support for expressions in their DSL but try to solve this 
 			differently. The most often used workaround is to define only the structural information in the DSL 
 			and add behavior by modifying or extending the generated code. It is not only unpleasant to write, 
 			read and maintain information which closely belongs together in two different places, abstraction levels 
 			and languages. Also, modifying the generated source code comes with a lot of additional problems. 
-			But as of today this is the preferred solution since adding support for expressions (and a corresponding 
-			execution environment) for your language is hard - even with Xtext.
+			This has long time been the preferred solution since adding support for expressions (and a corresponding 
+			execution environment) for your language has been hard - even with Xtext.
 			</p>
 			<p>
 			Xbase serves as a language library providing a common expression language bound to the Java platform 

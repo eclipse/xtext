@@ -356,12 +356,6 @@
 						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Identifiers_4" label="Examples" >
 						</topic>
 					</topic>
-					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral" label="String Literals" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_StringLiteral_4" label="Examples" >
-						</topic>
-					</topic>
-					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_NumberLiteral" label="Number Literals" >
-					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Comments" label="Comments" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Syntax_Whitespace" label="White Space" >
@@ -393,9 +387,11 @@
 				</topic>
 				<topic href="contents/199-xtext-and-java.html#xbaseLanguageRef_Expressions" label="Expressions" >
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Literals" label="Literals" >
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_StringLiterals" label="String Literals" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_StringLiteral" label="String Literals" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_IntegerLiterals" label="Integer Literals" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Literals_3" label="Examples" >
+						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_NumberLiteral" label="Number Literals" >
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_BooleanLiteral" label="Boolean Literals" >
 						</topic>
@@ -412,6 +408,8 @@
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_3" label="Short-Circuit Boolean Operators" >
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_4" label="Examples" >
+						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_5" label="With Operator" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_PropertyAssignment" label="Assignments" >

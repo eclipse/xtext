@@ -182,23 +182,23 @@
 		</p>
 		<p>
 		Xbase itself comes with a standard library of such extension methods adding support for various operators
-		for the common types, such as java.lang.String, java.util.List, etc.
+		for the common types, such as <span class="inlinecode">java.lang.String</span>, <span class="inlinecode">java.util.List</span>, etc.
 		</p>
 		<p>
 		These extension methods are declared in separate Java classes. There are various ways how extension methods
-		can be added. The simplest is, that the language designer predefines, which extension methods are available.
-		This means, that language users cannot add additional library functions using this mechanism.
+		can be added. In the simplest case the language designer predefines, which extension methods are available.
+		Language users cannot add additional library functions using this mechanism.
 		</p>
 		<p>
 		Another alternative is to have them looked up by a certain naming convention. Also for more general languages
 		it is possible to let users add extension methods using imports or the like. This approach can be seen in the
-		language Xtend2, where extension methods are lexically imported through static imports and/or dependency
-		injection.
+		language <a href="http://www.xtend-lang.org" >Xtend</a>, where extension methods are lexically imported through static
+		imports and/or dependency injection.
 		</p>
 		<p>
 		The precedence of extension methods is always lower than real member methods, that is you cannot override
-		member features. Also the extension members are not invoked polymorphic. If you have two extension methods
-		on the scope (<span class="inlinecode">foo(Object)</span> and <span class="inlinecode">foo(String)</span>) the expression <span class="inlinecode">(foo&nbsp;as&nbsp;Object).foo</span> would
+		member features. Also the extension members are not invoked polymorphicly. If you have two extension methods
+		on the scope (<span class="inlinecode">foo(Object)</span> and <span class="inlinecode">foo(String)</span>) the expression <span class="inlinecode">(foo&nbsp;<span class="keyword">as</span>&nbsp;Object).foo</span> would
 		bind and invoke <span class="inlinecode">foo(Object)</span>.
 		</p>
 		<a name="xbaseLanguageRef_LibraryExtension_6" ></a>
@@ -286,7 +286,7 @@
 		</div>
 		</p>
 		<p>
-		Using implicit parameter <span class="inlinecode">it</span> and skipping empty parentheses you can simplify this to 
+		Using implicit parameter <span class="inlinecode"><span class="keyword">it</span></span> and skipping empty parentheses you can simplify this to 
 		<div class="literallayout">
 			<div class="incode">
 				<p class="code">
