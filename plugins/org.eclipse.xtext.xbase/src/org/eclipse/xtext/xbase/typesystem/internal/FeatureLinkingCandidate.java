@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
@@ -100,6 +101,15 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 			return ((BucketedEObjectDescription) description).isStaticDescription();
 		}
 		return false;
+	}
+	
+	@Override
+	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType) {
+		super.resolveAgainstActualType(declaredType, actualType);
+		if (!isStatic() && !isExtension()) {
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
+			collector.processPairedReferences(declaredType, actualType);
+		}
 	}
 
 	@Override

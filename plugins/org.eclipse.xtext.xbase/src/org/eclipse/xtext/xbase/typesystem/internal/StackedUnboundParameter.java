@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -49,6 +51,17 @@ public class StackedUnboundParameter extends BaseUnboundTypeParameter {
 		}
 		parent.getHints().addAll(getHints());
 		parent.getEquallyBoundHandles().addAll(getEquallyBoundHandles());
+	}
+	
+	@Override
+	protected void setBoundTo(MergedBoundTypeArgument boundTo) {
+		JvmTypeReference substituted = getResolvedTypes().referenceReplacer.apply(boundTo.getTypeReference());
+		super.setBoundTo(new MergedBoundTypeArgument(substituted, boundTo.getVariance()));
+	}
+	
+	@Override
+	protected StackedResolvedTypes getResolvedTypes() {
+		return (StackedResolvedTypes) super.getResolvedTypes();
 	}
 	
 	@Override

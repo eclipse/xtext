@@ -68,7 +68,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		}
 	}
 	
-	private Function<JvmTypeReference, JvmTypeReference> referenceReplacer = new Function<JvmTypeReference, JvmTypeReference>() {
+	protected Function<JvmTypeReference, JvmTypeReference> referenceReplacer = new Function<JvmTypeReference, JvmTypeReference>() {
 		public JvmTypeReference apply(JvmTypeReference original) {
 			StackedUnboundArgumentSubstituter substituter = new StackedUnboundArgumentSubstituter(getResolver().getServices());
 			JvmTypeReference result = substituter.substitute(original);
