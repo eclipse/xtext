@@ -20,13 +20,13 @@ aspects of Xtext&apos;s UI features.
 There are various places in the UI in which model elements have to be presented to the user: In the 
 <a href="120-heading-UI.html#outline" title="Go to &quot;Outline View&quot;">outline view</a>, in <a href="120-heading-UI.html#hyperlinking" title="Go to &quot;Hyperlinking&quot;">hyperlinks</a>, in <a href="120-heading-UI.html#contentAssist" title="Go to &quot;Content Assist&quot;">content proposals</a>, 
 find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of
-the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> interface. 
+the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@5d0971d8 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.0.0.7::0::/2)" title="View Source Code" >(src)</a> interface. 
 </p>
 <p>
-An <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> has two methods: <span class="inlinecode">getText(Object)</span> returns
+An <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@707c0134 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.1.0.1::0::/2)" title="View Source Code" >(src)</a> has two methods: <span class="inlinecode">getText(Object)</span> returns
 the text in an object&apos;s label, while <span class="inlinecode">getImage(Object)</span> returns the icon. In addition, the 
-Eclipse UI framework offers the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/DelegatingStyledCellLabelProvider.IStyledLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider" >DelegatingStyledCellLabelProvider.IStyledLabelProvider</abbr></a>, 
-which returns a <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a> (i.e. with custom fonts, colors etc.) in the 
+Eclipse UI framework offers the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@4ef49d09 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.1.0.7::0::/2)" title="View Source Code" >(src)</a>, 
+which returns a <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@1fc4986c (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.1.0.9::0::/2)" title="View Source Code" >(src)</a> (i.e. with custom fonts, colors etc.) in the 
 <span class="inlinecode">getStyledText(Object)</span> method.
 </p>
 <p>
@@ -40,7 +40,7 @@ in the respective methods.
 Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. 
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/AbstractLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider" >AbstractLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java" title="View Source Code" >(src)</a> helps you managing 
 the images: In your implementation of <span class="inlinecode">doGetImage(Object)</span> you can as well return an 
-<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/graphics/Image.html" title="View JavaDoc"><abbr title="org.eclipse.swt.graphics.Image" >Image</abbr></a>, an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/resource/ImageDescriptor.html" title="View JavaDoc"><abbr title="org.eclipse.jface.resource.ImageDescriptor" >ImageDescriptor</abbr></a> or a string, 
+<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@70b633c9 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.3.0.5::0::/2)" title="View Source Code" >(src)</a>, an <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@4c1bb537 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.2.3.0.7::0::/2)" title="View Source Code" >(src)</a> or a string, 
 representing a path in the <em>icons/</em> folder of the containing plug-in. This path is actually 
 configurable by Google Guice. Have a look at the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/PluginImageHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.PluginImageHelper" >PluginImageHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/PluginImageHelper.java" title="View Source Code" >(src)</a> to learn about the 
 customizing possibilities.
@@ -99,7 +99,7 @@ delegate parameter and use dependency injection for its initialization, e.g.
 <a name="DefaultEObjectLabelProvider"></a>
 <h4>DefaultEObjectLabelProvider</h4>
 <p>
-The default implementation of the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> interface utilizes 
+The default implementation of the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@5d60494d (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/140-labelprovider.xdoc#xtextLink_::0.0.3.0.3.0.2.0.0.1::0::/2)" title="View Source Code" >(src)</a> interface utilizes 
 the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider 
 are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do 
 is to implement a method that matches a specific signature. It either provides a image filename or the 
@@ -342,7 +342,7 @@ are allowed.
 The actual model modification is implemented in the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/model/edit/IModification.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.edit.IModification" >IModification</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java" title="View Source Code" >(src)</a>. 
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.edit.IModificationContext" >IModificationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java" title="View Source Code" >(src)</a> provides 
-access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/IDocument.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.IDocument" >IDocument</abbr></a> API to replace a 
+access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@35509603 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/155-quickfix.xdoc#xtextLink_::0.0.2.8.0.5::0::/2)" title="View Source Code" >(src)</a> API to replace a 
 text region.    
 </p>
 <p>
@@ -422,10 +422,10 @@ and configure it via <a href="030-generator.html#guicemodules" title="Go to &quo
 </p>
 <p>
 In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set 
-of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.TemplateVariableResolver" >TemplateVariableResolvers</abbr></a> to resolve special variable types in templates. 
+of <abbr title="" >TemplateVariableResolvers</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7ab4245b (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/160-templates.xdoc#xtextLink_::0.0.2.3.0.1::0::/2)" title="View Source Code" >(src)</a> to resolve special variable types in templates. 
 Besides the standard template variables available in 
-<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/GlobalTemplateVariables.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.GlobalTemplateVariables" >GlobalTemplateVariables</abbr></a> like <span class="inlinecode">${user}</span>, <span class="inlinecode">${date}</span>, <span class="inlinecode">${time}</span>, 
-<span class="inlinecode">${cursor}</span>, etc., these <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.TemplateVariableResolver" >TemplateVariableResolvers</abbr></a> support the automatic resolving of 
+<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7808b9e3 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/160-templates.xdoc#xtextLink_::0.0.2.3.0.3::0::/2)" title="View Source Code" >(src)</a> like <span class="inlinecode">${user}</span>, <span class="inlinecode">${date}</span>, <span class="inlinecode">${time}</span>, 
+<span class="inlinecode">${cursor}</span>, etc., these <abbr title="" >TemplateVariableResolvers</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7eb6dd94 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/160-templates.xdoc#xtextLink_::0.0.2.3.0.13::0::/2)" title="View Source Code" >(src)</a> support the automatic resolving of 
 cross references enumeration values. Both resolvers are explained in the 
 following sections.
 </p>
@@ -648,8 +648,8 @@ provider</a> of your language. If you want the labels to be specific to the outl
 </p>
 <p>
 Note that the method <span class="inlinecode">_text(modelElement)</span> can return a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> or a 
-<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/StylerFactory.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.StylerFactory" >StylerFactory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/StylerFactory.java" title="View Source Code" >(src)</a>
-can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledStrings</abbr></a>, like in the following example: 
+<abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@58b4e130 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/170-outline.xdoc#xtextLink_::0.0.3.1.2.1.0.5::0::/2)" title="View Source Code" >(src)</a>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/StylerFactory.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.StylerFactory" >StylerFactory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/StylerFactory.java" title="View Source Code" >(src)</a>
+can be used to create <abbr title="" >StyledStrings</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7d6cf842 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/170-outline.xdoc#xtextLink_::0.0.3.1.2.1.0.9::0::/2)" title="View Source Code" >(src)</a>, like in the following example: 
 </p>
 <p>
 <div class="literallayout">
@@ -935,7 +935,7 @@ persisted and reloaded on startup.
 The lexical highlighting can be customized by providing implementations of the interface 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a> and 
 the abstract class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner" >AbstractTokenScanner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java" title="View Source Code" >(src)</a>. 
-The latter fulfills the interface <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/rules/ITokenScanner.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.rules.ITokenScanner" >ITokenScanner</abbr></a> 
+The latter fulfills the interface <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7629e924 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/195-highlighting.xdoc#xtextLink_::0.0.3.0.2.0.0.5::0::/2)" title="View Source Code" >(src)</a> 
 from the underlying JFace Framework, which may be implemented by clients directly.
 </p>
 <p>
@@ -975,7 +975,7 @@ and read like this:
 </div>
 </p>
 <p>
-Implementations of the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/rules/ITokenScanner.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.rules.ITokenScanner" >ITokenScanner</abbr></a> are responsible 
+Implementations of the <abbr title="" >@</abbr> <a class="srcLink" href="broken-link in org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl@7658eac7 (eProxyURI: platform:/resource/org.eclipse.xtext.doc.xdoc/xdoc/195-highlighting.xdoc#xtextLink_::0.0.3.0.2.3.0.1::0::/2)" title="View Source Code" >(src)</a> are responsible 
 for splitting the content of a document into 
 various parts, the so called tokens, and return the highlighting information for each identified range. 
 It is critical that this is done very fast because this component is used on each keystroke. Xtext 
