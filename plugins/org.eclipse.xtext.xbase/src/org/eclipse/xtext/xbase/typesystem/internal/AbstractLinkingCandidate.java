@@ -41,13 +41,13 @@ import com.google.common.collect.Lists;
 public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinkingCandidate<LinkingCandidate>> implements ILinkingCandidate<LinkingCandidate> {
 	
 	private final IEObjectDescription description;
-	private final AbstractTypeComputationState state;
+	private final ExpressionTypeComputationState state;
 	private final XExpression expression;
 	
-	private boolean typesComputed;
+	protected List<StackedResolvedTypes> stackedResolvedTypes;
 	
 	protected AbstractLinkingCandidate(XExpression expression, IEObjectDescription description,
-			AbstractTypeComputationState state) {
+			ExpressionTypeComputationState state) {
 		this.expression = expression;
 		this.description = description;
 		this.state = state;
@@ -68,14 +68,18 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	public void apply() {
 		JvmIdentifiableElement feature = getFeature();
 		JvmTypeReference featureType = getDeclaredType(feature);
-		state.getResolvedTypes().acceptLinkingInformation(getExpression(), this);
+		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 		computeArgumentTypes(feature);
+		for(StackedResolvedTypes pending: stackedResolvedTypes) {
+			pending.mergeIntoParent();
+		}
 		List<ITypeExpectation> expectations = state.getImmediateExpectations();
 		for(ITypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
 			acceptActualType(expectation, featureType);
 		}
+//		state.getResolvedTypes().mergeIntoParent();
 	}
 	
 	protected void acceptActualType(ITypeExpectation expectation, JvmTypeReference featureType) {
@@ -129,9 +133,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 
 	public void computeArgumentTypes(JvmIdentifiableElement feature /*, JvmTypeReference featureType */) {
-		if (typesComputed)
+		if (stackedResolvedTypes != null)
 			return;
-		typesComputed = true;
 		int declaredParameterCount = 0;
 		int fixedArityParameterCount = 0;
 		List<JvmFormalParameter> parameters = null;
@@ -145,7 +148,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		}
 		List<XExpression> arguments = getArguments();
 		int fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
-		List<StackedResolvedTypes> stackedResolvedTypes = Lists.newArrayListWithCapacity(arguments.size());
+		stackedResolvedTypes = Lists.newArrayListWithCapacity(arguments.size());
 		if (parameters != null) {
 			for(int i = 0; i < fixedArityArgumentCount; i++) {
 				final JvmFormalParameter parameter = parameters.get(i);
@@ -185,9 +188,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				XExpression argument = arguments.get(i);
 				stackedResolvedTypes.add(resolveArgumentType(argument, null, state.fork().withNonVoidExpectation()));
 			}
-		}
-		for(StackedResolvedTypes pending: stackedResolvedTypes) {
-			pending.mergeIntoParent();
 		}
 	}
 	
@@ -320,7 +320,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return expression;
 	}
 	
-	protected AbstractTypeComputationState getState() {
+	protected ExpressionTypeComputationState getState() {
 		return state;
 	}
 

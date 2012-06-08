@@ -22,7 +22,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 
 	private final XExpression expression;
 
-	protected ExpressionTypeComputationState(ResolvedTypes resolvedTypes,
+	protected ExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent,
 			XExpression expression) {
@@ -59,6 +59,11 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	
 	protected XExpression getExpression() {
 		return expression;
+	}
+	
+	@Override
+	protected StackedResolvedTypes getResolvedTypes() {
+		return (StackedResolvedTypes) super.getResolvedTypes();
 	}
 	
 }

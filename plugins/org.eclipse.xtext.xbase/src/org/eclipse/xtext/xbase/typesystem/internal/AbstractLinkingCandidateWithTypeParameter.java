@@ -74,7 +74,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	private final ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping;
 	
 	protected AbstractLinkingCandidateWithTypeParameter(XExpression expression, IEObjectDescription description,
-			AbstractTypeComputationState state) {
+			ExpressionTypeComputationState state) {
 		super(expression, description, state);
 		this.typeParameterMapping = Multimaps2.newLinkedHashListMultimap(2, 3);
 	}
@@ -119,6 +119,9 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		JvmTypeReference featureType = getDeclaredType(feature);
 		getState().getResolvedTypes().acceptLinkingInformation(getExpression(), this);
 		computeArgumentTypes(feature /*, featureType */);
+		for(StackedResolvedTypes pending: stackedResolvedTypes) {
+			pending.mergeIntoParent();
+		}
 		List<ITypeExpectation> expectations = getState().getImmediateExpectations();
 		for(ITypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
@@ -151,6 +154,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 			deferredBindTypeArguments(expectation, substitute);
 			expectation.acceptActualType(substitute, ConformanceHint.UNCHECKED);
 		}
+//		getState().getResolvedTypes().mergeIntoParent();
 	}
 	
 //	@Override
@@ -182,6 +186,8 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	
 	@Override
 	public void computeArgumentTypes(JvmIdentifiableElement feature /* JvmTypeReference featureType */) {
+		if (stackedResolvedTypes != null)
+			return;
 		int declaredParameterCount = 0;
 		int fixedArityParameterCount = 0;
 		List<JvmFormalParameter> parameters = null;
@@ -195,7 +201,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		}
 		List<XExpression> arguments = getArguments();
 		int fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
-		List<StackedResolvedTypes> stackedResolvedTypes = Lists.newArrayListWithCapacity(arguments.size());
+		stackedResolvedTypes = Lists.newArrayListWithCapacity(arguments.size());
 		if (parameters != null) {
 			for(int i = 0; i < fixedArityArgumentCount; i++) {
 				final JvmFormalParameter parameter = parameters.get(i);
@@ -235,9 +241,6 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 				XExpression argument = arguments.get(i);
 				stackedResolvedTypes.add(resolveArgumentType(argument, null, getState().fork().withNonVoidExpectation()));
 			}
-		}
-		for(StackedResolvedTypes pending: stackedResolvedTypes) {
-			pending.mergeIntoParent();
 		}
 	}
 

@@ -646,7 +646,6 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_06() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s)", "List<String>");

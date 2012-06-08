@@ -29,7 +29,7 @@ import static org.junit.Assert.*
  */
 class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeComputer {
 	
-	@Inject AccessibleReentrantTypeResolver resolver
+	@Inject PublicReentrantTypeResolver resolver
 	
 	@Inject CommonTypeComputationServices services
 	
@@ -39,7 +39,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 	def void testChildrenAddEntryForParent() {
 		resolver.typeComputer = this 
 		val expression = expression("{ null }")
-		val resolution = new MyResolvedTypes(resolver)
+		val resolution = new PublicResolvedTypes(resolver)
 		val any = services.typeReferences.createAnyTypeReference(expression)
 		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		assertEquals(any.identifier, resolution.getActualType(expression).identifier)

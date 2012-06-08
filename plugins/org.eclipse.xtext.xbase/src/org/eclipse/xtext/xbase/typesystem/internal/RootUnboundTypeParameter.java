@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,8 +21,8 @@ public class RootUnboundTypeParameter extends BaseUnboundTypeParameter {
 	private final Object handle;
 	
 	protected RootUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter, 
-			ResolvedTypes resolvedTypes, CommonTypeComputationServices services) {
-		super(resolvedTypes, services);
+			ResolvedTypes resolvedTypes) {
+		super(resolvedTypes);
 		this.expression = expression;
 		this.typeParameter = typeParameter;
 		this.handle = new Object();

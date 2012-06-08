@@ -36,7 +36,7 @@ import com.google.common.collect.Maps;
 public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description,
-			AbstractTypeComputationState state) {
+			ExpressionTypeComputationState state) {
 		super(featureCall, description, state);
 	}
 
@@ -124,7 +124,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		if (argument == getReceiver()) {
 			JvmTypeReference receiverType = getReceiverType();
-			StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(getState().getResolvedTypes());
+			StackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(getState().getResolvedTypes(), argument);
 			resolvedTypes.acceptType(argument, null, receiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
 				resolveAgainstActualType(declaredType, receiverType);

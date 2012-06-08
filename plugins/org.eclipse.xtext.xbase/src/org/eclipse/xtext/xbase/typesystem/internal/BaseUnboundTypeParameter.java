@@ -32,15 +32,13 @@ import com.google.common.collect.Sets;
  */
 public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 
-	private final CommonTypeComputationServices services;
 	private final List<BoundTypeArgument> hints;
 	private MergedBoundTypeArgument boundTo;
 	private Set<Object> equallyBoundHandles;
 	private ResolvedTypes resolvedTypes;
 	
-	public BaseUnboundTypeParameter(ResolvedTypes resolvedTypes, CommonTypeComputationServices services) {
+	public BaseUnboundTypeParameter(ResolvedTypes resolvedTypes) {
 		this.resolvedTypes = resolvedTypes;
-		this.services = services;
 		this.hints = Lists.newArrayList();
 		this.equallyBoundHandles = Sets.newHashSetWithExpectedSize(2);
 	}
@@ -52,17 +50,25 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		}
 		List<BoundTypeArgument> allHints = getAllHints();
 		if (!allHints.isEmpty()) {
-			MergedBoundTypeArgument typeArgument = services.getBoundTypeArgumentMerger().merge(allHints);
+			MergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(allHints);
 			if (typeArgument != null) {
 				boundTo = typeArgument;
 				return typeArgument.getTypeReference();
 			}
 		}
 		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
-				Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), services);
-		JvmTypeReference substitute = unboundSubstitutor.substitute(services.getTypeReferences().createTypeRef(getTypeParameter()));
+				Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), getServices());
+		JvmTypeReference substitute = unboundSubstitutor.substitute(getServices().getTypeReferences().createTypeRef(getTypeParameter()));
 		boundTo = new MergedBoundTypeArgument(substitute, VarianceInfo.INVARIANT /* TODO which variance info to use? */);
 		return substitute;
+	}
+	
+	protected CommonTypeComputationServices getServices() {
+		return resolvedTypes.getResolver().getServices();
+	}
+	
+	protected void setResolvedTypes(ResolvedTypes resolvedTypes) {
+		this.resolvedTypes = resolvedTypes;
 	}
 	
 	public MergedBoundTypeArgument getBoundTo() {
@@ -98,8 +104,12 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		hints.add(boundArgument);
 	}
 	
-	public List<BoundTypeArgument> getHints() {
+	protected List<BoundTypeArgument> getHints() {
 		return hints;
+	}
+	
+	protected Set<Object> getEquallyBoundHandles() {
+		return equallyBoundHandles;
 	}
 	
 	public List<BoundTypeArgument> getAllHints() {

@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,8 +21,8 @@ public class StackedUnboundParameter extends BaseUnboundTypeParameter {
 
 	private BaseUnboundTypeParameter parent;
 
-	public StackedUnboundParameter(BaseUnboundTypeParameter parent, StackedResolvedTypes resolvedTypes, CommonTypeComputationServices services) {
-		super(resolvedTypes, services);
+	public StackedUnboundParameter(BaseUnboundTypeParameter parent, StackedResolvedTypes resolvedTypes) {
+		super(resolvedTypes);
 		this.parent = parent;
 	}
 
@@ -45,8 +44,11 @@ public class StackedUnboundParameter extends BaseUnboundTypeParameter {
 	}
 	
 	public void mergeIntoParent() {
+		if (getBoundTo() != null) {
+			parent.setBoundTo(getBoundTo());
+		}
 		parent.getHints().addAll(getHints());
-		
+		parent.getEquallyBoundHandles().addAll(getEquallyBoundHandles());
 	}
 	
 	@Override
