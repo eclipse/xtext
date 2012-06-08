@@ -658,7 +658,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)".resolvesTo("List<Number & Comparable<?>>")
 	}
 	
-	@Ignore
 	@Test def void testFeatureCall_06() throws Exception {
 		"newArrayList('').map(s|s)".resolvesTo("List<String>")
 	}

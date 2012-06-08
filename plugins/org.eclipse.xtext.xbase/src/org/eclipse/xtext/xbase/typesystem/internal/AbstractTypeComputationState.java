@@ -123,12 +123,14 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	@Nullable
 	protected ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
 		if (expression != null) {
-			StackedResolvedTypes stackedResolvedTypes = new StackedResolvedTypes(resolvedTypes);
+			StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, expression);
 			ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
 			getResolver().getTypeComputer().computeTypes(expression, state);
-			// TODO selective merge
-			ResolvedTypes result = mergeAll ? stackedResolvedTypes.mergeIntoParent() : stackedResolvedTypes;
-			return result;
+			if (mergeAll) {
+				stackedResolvedTypes.mergeIntoParent();
+				return resolvedTypes;
+			}
+			return stackedResolvedTypes;
 		} else {
 			return null;
 		}
@@ -235,7 +237,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (result != null) {
 			return Collections.singletonList(result);
 		}
-		IResolvedTypes demandResolvedTypes = new DelegatingResolvedTypes(resolvedTypes) {
+		DelegatingResolvedTypes demandResolvedTypes = new DelegatingResolvedTypes(resolvedTypes) {
 			
 			// TODO reuse this information later on
 			private Map<XExpression, StackedResolvedTypes> demandComputedTypes;
@@ -276,7 +278,9 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, IEObjectDescription description) {
-		return new FeatureLinkingCandidate(featureCall, description, this);
+//		StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, featureCall);
+//		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, stackedResolvedTypes);
+		return new FeatureLinkingCandidate(featureCall, description, (ExpressionTypeComputationState) this);
 	}
 	
 	public List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {
@@ -297,7 +301,9 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	protected IConstructorLinkingCandidate createCandidate(XConstructorCall constructorCall, IEObjectDescription description) {
-		return new ConstructorLinkingCandidate(constructorCall, description, this);
+//		StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, constructorCall);
+//		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, (StackedResolvedTypes)resolvedTypes);
+		return new ConstructorLinkingCandidate(constructorCall, description, (ExpressionTypeComputationState) this);
 	}
 
 }

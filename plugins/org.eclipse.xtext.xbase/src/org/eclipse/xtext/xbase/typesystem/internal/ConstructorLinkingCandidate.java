@@ -32,7 +32,7 @@ import com.google.common.collect.Maps;
  */
 public class ConstructorLinkingCandidate extends AbstractLinkingCandidateWithTypeParameter<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
 
-	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, AbstractTypeComputationState state) {
+	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IEObjectDescription description, ExpressionTypeComputationState state) {
 		super(constructorCall, description, state);
 	}
 

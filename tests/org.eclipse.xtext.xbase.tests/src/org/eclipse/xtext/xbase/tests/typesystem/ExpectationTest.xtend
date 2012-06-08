@@ -27,7 +27,7 @@ import static org.junit.Assert.*
  */
 class ExpectationTest extends AbstractXbaseTestCase {
 	
-	@Inject AccessibleReentrantTypeResolver resolver
+	@Inject PublicReentrantTypeResolver resolver
 	
 	@Inject ExpectationTestingTypeComputer typeComputer
 	

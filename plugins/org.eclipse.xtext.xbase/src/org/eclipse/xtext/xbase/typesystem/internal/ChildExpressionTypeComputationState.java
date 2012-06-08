@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 @NonNullByDefault
 public class ChildExpressionTypeComputationState extends ExpressionTypeComputationState {
 
-	protected ChildExpressionTypeComputationState(ResolvedTypes resolvedTypes,
+	protected ChildExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, 
 			ExpressionTypeComputationState parent,

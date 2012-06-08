@@ -355,7 +355,7 @@ public class ResolvedTypes implements IResolvedTypes {
 
 	@NonNull
 	protected RootUnboundTypeParameter createUnboundTypeParameter(@NonNull XExpression expression, @NonNull JvmTypeParameter type) {
-		RootUnboundTypeParameter result = new RootUnboundTypeParameter(expression, type, this, resolver.getServices());
+		RootUnboundTypeParameter result = new RootUnboundTypeParameter(expression, type, this);
 		ensureTypeParameterMapExists().put(result.getHandle(), result);
 		return result;
 	}

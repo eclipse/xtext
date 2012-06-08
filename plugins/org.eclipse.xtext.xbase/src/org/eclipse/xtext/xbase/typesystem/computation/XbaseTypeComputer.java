@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -347,13 +346,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 						return operationReturnType;
 					}
 					@Override
-					public JvmTypeReference doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference, Set<JvmTypeParameter> visited) {
-						if (reference instanceof XComputedTypeReference) {
-							if (closureParameterTypes.contains(reference)) {
-								return reference;
-							}
+					public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference, Set<JvmTypeParameter> visited) {
+						if (closureParameterTypes.contains(reference)) {
+							return reference;
 						}
-						return super.doVisitSpecializedTypeReference(reference, visited);
+						return super.doVisitComputedTypeReference(reference, visited);
 					}
 				}.visit(expressionResultType, Sets.<JvmTypeParameter>newHashSet());
 				if (expressionResultType == null) {
