@@ -564,5 +564,5 @@ code[DomainExample][package bar {
 }
 ]
 
-See the JavaDocs and link[http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html][this blog post] 
+See the JavaDocs and link[http://blogs.itemis.de/stundzig/archives/773][this blog post] 
 for details.
