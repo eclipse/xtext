@@ -59,6 +59,8 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.Closures;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
@@ -277,7 +279,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 					}
 					operationParameters = operation.getParameters();
 					JvmTypeReference declaredReturnType = operation.getReturnType();
-					substitutor = new TypeParameterSubstitutor(expectedTypeParameterMapping, services);
+					substitutor = new UnboundTypeParameterPreservingSubstitutor(expectedTypeParameterMapping, services);
 					operationReturnType = substitutor.substitute(declaredReturnType);
 					if (operationReturnType == null) {
 						throw new IllegalStateException();
@@ -362,8 +364,13 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				JvmTypeReference closureBodyType = expressionResult.getActualExpressionType();
 				JvmType rawReturnType = operationReturnType.getType();
 				if (rawReturnType instanceof JvmTypeParameter) {
-					substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, 
-							new MergedBoundTypeArgument(primitives.asWrapperTypeIfPrimitive(closureBodyType), VarianceInfo.INVARIANT)));
+					if (closureBodyType instanceof XComputedTypeReference && UnboundTypeParameters.isUnboundTypeParameter((XComputedTypeReference) closureBodyType)) {
+						substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, 
+								new MergedBoundTypeArgument(closureBodyType, VarianceInfo.INVARIANT)));
+					} else {
+						substitutor.enhanceMapping(Collections.singletonMap((JvmTypeParameter)rawReturnType, 
+								new MergedBoundTypeArgument(primitives.asWrapperTypeIfPrimitive(closureBodyType), VarianceInfo.INVARIANT)));
+					}
 				} else {
 					substitutor.enhanceMapping(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureBodyType));
 				}
