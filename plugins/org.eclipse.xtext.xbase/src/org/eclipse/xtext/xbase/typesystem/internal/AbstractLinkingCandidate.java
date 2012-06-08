@@ -192,7 +192,9 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
-		return argumentState.computeTypesWithoutMerge(argument);
+		StackedResolvedTypes result = argumentState.computeTypesWithoutMerge(argument);
+		
+		return result;
 	}
 
 //	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType) {

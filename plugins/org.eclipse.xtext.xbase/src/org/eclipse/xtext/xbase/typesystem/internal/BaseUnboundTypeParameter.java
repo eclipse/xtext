@@ -52,15 +52,15 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		if (!allHints.isEmpty()) {
 			MergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(allHints);
 			if (typeArgument != null) {
-				boundTo = typeArgument;
-				return typeArgument.getTypeReference();
+				setBoundTo(typeArgument);
+				return getBoundTo().getTypeReference();
 			}
 		}
 		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
 				Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), getServices());
 		JvmTypeReference substitute = unboundSubstitutor.substitute(getServices().getTypeReferences().createTypeRef(getTypeParameter()));
-		boundTo = new MergedBoundTypeArgument(substitute, VarianceInfo.INVARIANT /* TODO which variance info to use? */);
-		return substitute;
+		setBoundTo(new MergedBoundTypeArgument(substitute, VarianceInfo.INVARIANT /* TODO which variance info to use? */));
+		return getBoundTo().getTypeReference();
 	}
 	
 	protected CommonTypeComputationServices getServices() {
@@ -69,6 +69,10 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	
 	protected void setResolvedTypes(ResolvedTypes resolvedTypes) {
 		this.resolvedTypes = resolvedTypes;
+	}
+	
+	protected ResolvedTypes getResolvedTypes() {
+		return resolvedTypes;
 	}
 	
 	public MergedBoundTypeArgument getBoundTo() {
