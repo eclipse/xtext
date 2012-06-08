@@ -11,7 +11,9 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 
 import com.google.common.collect.Multimap;
 
@@ -42,13 +44,22 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 			mergeTypeParametersIntoParent(parent);
 		}
 	}
+	
+	@Override
+	protected JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation,
+			JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		// TODO Auto-generated method stub
+		return super.acceptType(expression, expectation, type, conformanceHint, returnType);
+	}
 
 	protected void mergeExpressionTypes(ResolvedTypes parent, Collection<TypeData> result) {
 		Multimap<XExpression, TypeData> parentExpressionTypes = parent.ensureExpressionTypesMapExists();
-		TypeData returnTypeData = mergeTypeData(expression, result, true);
-		parentExpressionTypes.put(expression, returnTypeData);
-		TypeData actualTypeData = mergeTypeData(expression, result, false);
-		parentExpressionTypes.put(expression, actualTypeData);
+		TypeData returnTypeData = mergeTypeData(expression, result, true, true);
+		if (returnTypeData != null)
+			parentExpressionTypes.put(expression, returnTypeData);
+		TypeData actualTypeData = mergeTypeData(expression, result, false, true);
+		if (actualTypeData != null)
+			parentExpressionTypes.put(expression, actualTypeData);
 		for(Map.Entry<XExpression, Collection<TypeData>> entry: ensureExpressionTypesMapExists().asMap().entrySet()) {
 			if (!entry.getKey().equals(expression)) {
 				parentExpressionTypes.putAll(entry.getKey(), entry.getValue());

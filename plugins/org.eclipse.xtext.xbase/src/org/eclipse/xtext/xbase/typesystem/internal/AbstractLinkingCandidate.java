@@ -51,6 +51,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		this.expression = expression;
 		this.description = description;
 		this.state = state;
+		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 	}
 
 	public List<JvmFormalParameter> getDeclaredParameters() {
@@ -68,7 +69,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	public void apply() {
 		JvmIdentifiableElement feature = getFeature();
 		JvmTypeReference featureType = getDeclaredType(feature);
-		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 		computeArgumentTypes(feature);
 		for(StackedResolvedTypes pending: stackedResolvedTypes) {
 			pending.mergeIntoParent();
@@ -79,7 +79,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			// TODO consider expectation if any
 			acceptActualType(expectation, featureType);
 		}
-//		state.getResolvedTypes().mergeIntoParent();
+		getState().getResolvedTypes().mergeIntoParent();
 	}
 	
 	protected void acceptActualType(ITypeExpectation expectation, JvmTypeReference featureType) {

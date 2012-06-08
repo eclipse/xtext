@@ -78,7 +78,7 @@ public class ResolvedTypes implements IResolvedTypes {
 		if (values == null) {
 			return null;
 		}
-		TypeData result = mergeTypeData(expression, values, returnType);
+		TypeData result = mergeTypeData(expression, values, returnType, false);
 		return result;
 	}
 	
@@ -89,12 +89,15 @@ public class ResolvedTypes implements IResolvedTypes {
 		return result;
 	}
 
-	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, final boolean returnType) {
+	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, final boolean returnType, boolean nullIfEmpty) {
 		List<TypeData> values = Lists.newArrayListWithCapacity(allValues.size());
-		for(TypeData value: values) {
+		for(TypeData value: allValues) {
 			if (returnType == value.isReturnType()) {
 				values.add(value);
 			}
+		}
+		if (values.isEmpty() && nullIfEmpty) {
+			return null;
 		}
 		if (values.size() == 1) {
 			TypeData typeData = values.get(0);
