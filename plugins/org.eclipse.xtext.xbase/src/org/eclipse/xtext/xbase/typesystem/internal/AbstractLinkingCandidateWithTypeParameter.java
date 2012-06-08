@@ -117,7 +117,6 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	public void apply() {
 		JvmIdentifiableElement feature = getFeature();
 		JvmTypeReference featureType = getDeclaredType(feature);
-		getState().getResolvedTypes().acceptLinkingInformation(getExpression(), this);
 		computeArgumentTypes(feature /*, featureType */);
 		for(StackedResolvedTypes pending: stackedResolvedTypes) {
 			pending.mergeIntoParent();
@@ -154,7 +153,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 			deferredBindTypeArguments(expectation, substitute);
 			expectation.acceptActualType(substitute, ConformanceHint.UNCHECKED);
 		}
-//		getState().getResolvedTypes().mergeIntoParent();
+		getState().getResolvedTypes().mergeIntoParent();
 	}
 	
 //	@Override

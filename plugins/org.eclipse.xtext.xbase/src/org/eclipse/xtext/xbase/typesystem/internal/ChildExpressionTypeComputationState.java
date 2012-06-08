@@ -36,9 +36,14 @@ public class ChildExpressionTypeComputationState extends ExpressionTypeComputati
 	@Override
 	protected JvmTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
 			JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		JvmTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
-		getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
-		return actualType;
+		if (getParent().getExpression() != getExpression()) {
+			JvmTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
+			getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
+			return actualType;
+		} else {
+			JvmTypeReference actualType = getParent().acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
+			return actualType;
+		}
 	}
 	
 	@Override
