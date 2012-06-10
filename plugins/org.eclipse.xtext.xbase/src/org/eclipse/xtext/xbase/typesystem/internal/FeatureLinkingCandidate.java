@@ -158,22 +158,19 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getFeatureTypeParameterMapping() {
+	protected void initializeFeatureTypeParameterMapping(Map<JvmTypeParameter, MergedBoundTypeArgument> result) {
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeReference> typeArguments = getFeatureCall().getTypeArguments();
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
 			if (!typeArguments.isEmpty()) {
-				Map<JvmTypeParameter, MergedBoundTypeArgument> result = Maps.newLinkedHashMap();
 				int max = Math.min(typeArguments.size(), typeParameters.size());
 				for(int i = 0; i < max; i++) {
 					result.put(typeParameters.get(i), new MergedBoundTypeArgument(typeArguments.get(i), VarianceInfo.INVARIANT));
 				}
-				// TODO computed type references for the remaining type parameters
-				return result;
 			}
 		}
-		return super.getFeatureTypeParameterMapping();
+		super.initializeFeatureTypeParameterMapping(result);
 	}
 	
 	@Override

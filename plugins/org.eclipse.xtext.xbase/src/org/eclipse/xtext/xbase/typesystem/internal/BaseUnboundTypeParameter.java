@@ -112,6 +112,11 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		return hints;
 	}
 	
+	@Override
+	public boolean hasHints() {
+		return !getAllHints().isEmpty();
+	}
+	
 	protected Set<Object> getEquallyBoundHandles() {
 		return equallyBoundHandles;
 	}

@@ -33,6 +33,8 @@ public abstract class UnboundTypeParameter extends AbstractReentrantTypeReferenc
 	
 	public abstract Object getHandle();
 	
+	public abstract boolean hasHints();
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

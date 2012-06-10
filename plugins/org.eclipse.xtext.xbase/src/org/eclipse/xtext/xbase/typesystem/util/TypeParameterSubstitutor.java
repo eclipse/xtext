@@ -79,12 +79,9 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
 		JvmType type = reference.getType();
 		if (type instanceof JvmTypeParameter) {
-			MergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
-			if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
-				JvmTypeReference result = visit(boundTypeArgument.getTypeReference(), visiting);
-				if (result != null) {
-					return result;
-				}
+			JvmTypeReference result = getBoundTypeArgument(reference, (JvmTypeParameter) type, visiting);
+			if (result != null) {
+				return result;
 			}
 		}
 		JvmParameterizedTypeReference result = services.getTypesFactory().createJvmParameterizedTypeReference();
@@ -94,6 +91,18 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 			result.getArguments().add(copiedArgument);
 		}
 		return result;
+	}
+
+	protected JvmTypeReference getBoundTypeArgument(JvmParameterizedTypeReference reference, JvmTypeParameter type,
+			Set<JvmTypeParameter> visiting) {
+		MergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
+		if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+			JvmTypeReference result = visit(boundTypeArgument.getTypeReference(), visiting);
+			if (result != null) {
+				return result;
+			}
+		}
+		return null;
 	}
 		
 	@Override
