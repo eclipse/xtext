@@ -28,10 +28,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
@@ -42,7 +40,6 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -56,6 +53,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	protected class LazyExpectation extends AbstractReentrantTypeReferenceProvider {
 		private final JvmTypeReference declaredType;
 		private final UnboundTypeParameterPreservingSubstitutor substitutor;
+		private JvmTypeReference substitute;
 
 		protected LazyExpectation(JvmTypeReference declaredType) {
 			this.declaredType = declaredType;
@@ -65,27 +63,26 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 
 		@Override
 		protected JvmTypeReference doGetTypeReference() {
-			// TODO enhance with expectation
-			JvmTypeReference substitute = substitutor.substitute(declaredType);
-//			JvmTypeReference result = getState().getResolvedTypes().referenceReplacer.apply(substitute);
+			if (substitute != null)
+				return substitute;
+			substitute = substitutor.substitute(declaredType);
 			return substitute;
 		}
 	}
 
-	private final ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping;
+	private Map<JvmTypeParameter, MergedBoundTypeArgument> featureTypeParameterMapping;
 	
 	protected AbstractLinkingCandidateWithTypeParameter(XExpression expression, IEObjectDescription description,
 			ExpressionTypeComputationState state) {
 		super(expression, description, state);
-		this.typeParameterMapping = Multimaps2.newLinkedHashListMultimap(2, 3);
 	}
 
 	public void accept(ObservableTypeExpectation expectation, JvmTypeReference actual, ConformanceHint conformanceHint) {
 		// TODO traverse the expectation and read the actual parameter data from the actual mapping by means of a type parameter substitutor
-		JvmTypeReference expectedType = expectation.getExpectedType();
-		if (expectedType == null) {
+		if (expectation.isNoTypeExpectation() || actual instanceof JvmAnyTypeReference) {
 			return;
 		}
+		JvmTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType instanceof XComputedTypeReference) {
 			XComputedTypeReference computedTypeReference = (XComputedTypeReference) expectedType;
 			if (UnboundTypeParameters.isUnboundTypeParameter(computedTypeReference)) {
@@ -96,10 +93,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 				}
 			}
 		} else if (expectedType.getType() instanceof JvmTypeParameter) {
-			if (!(actual instanceof JvmAnyTypeReference)) {
-				JvmTypeReference wrappedActual = asWrapperType(actual);
-				typeParameterMapping.put((JvmTypeParameter) expectedType.getType(), new BoundTypeArgument(wrappedActual, BoundTypeArgumentSource.INFERRED, new Object(), VarianceInfo.OUT, VarianceInfo.OUT));
-			}
+			throw new IllegalStateException("Expectation may not be a type parameter since it should have been resolved.");
 		} else {
 			resolveAgainstActualType(expectedType, actual);
 		}
@@ -122,11 +116,21 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		for(StackedResolvedTypes pending: stackedResolvedTypes) {
 			pending.mergeIntoParent();
 		}
+		for(MergedBoundTypeArgument mergedBoundTypeArgument: getFeatureTypeParameterMapping().values()) {
+			JvmTypeReference reference = mergedBoundTypeArgument.getTypeReference();
+			if (reference instanceof XComputedTypeReference && UnboundTypeParameters.isUnboundTypeParameter((XComputedTypeReference) reference)) {
+				UnboundTypeParameter typeParameter = (UnboundTypeParameter) ((XComputedTypeReference) reference).getTypeProvider();
+				if(typeParameter.hasHints()) {
+					typeParameter.getTypeReference();
+				}
+			}
+		}
 		List<ITypeExpectation> expectations = getState().getImmediateExpectations();
 		for(ITypeExpectation expectation: expectations) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
-			TypeParameterSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getServices()) {
+			Map<JvmTypeParameter, MergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
+			TypeParameterSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(declaratorParameterMapping, getState().getServices()) {
 				
 				@Override
 				public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
@@ -148,42 +152,16 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 				}
 				
 			};
+			JvmTypeReference expectedType = expectation.getExpectedType();
 			substitutor.enhanceMapping(getFeatureTypeParameterMapping());
 			// TODO enhance with expectation
-			JvmTypeReference substitute = substitutor.substitute(featureType);
-			deferredBindTypeArguments(expectation, substitute);
-			expectation.acceptActualType(substitute, ConformanceHint.UNCHECKED);
+			JvmTypeReference substitutedFeatureType = substitutor.substitute(featureType);
+			deferredBindTypeArguments(expectedType, substitutedFeatureType);
+			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
 		}
 		getState().getResolvedTypes().mergeIntoParent();
 	}
-	
-//	@Override
-//	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
-//		if (potentialPrimitive instanceof XComputedTypeReference) {
-//			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter){
-//				return potentialPrimitive;
-//			}
-//		}
-//		Primitives primitives = getState().getServices().getPrimitives();
-//		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
-//		return result;
-//	}
-//	
-//	@Override
-//	protected JvmTypeParameter getTypeParameter(JvmTypeReference referenceToTypeParameter) {
-//		if (referenceToTypeParameter instanceof XComputedTypeReference) {
-//			if (((XComputedTypeReference) referenceToTypeParameter).getTypeProvider() instanceof UnboundTypeParameter){
-//				return null;
-//			}
-//			return getTypeParameter(((XComputedTypeReference) referenceToTypeParameter).getEquivalent());
-//		}
-//		JvmType result = referenceToTypeParameter.getType();
-//		if (result instanceof JvmTypeParameter) {
-//			return (JvmTypeParameter) result;
-//		}
-//		return null;
-//	}
-	
+
 	@Override
 	public void computeArgumentTypes(JvmIdentifiableElement feature /* JvmTypeReference featureType */) {
 		if (stackedResolvedTypes != null)
@@ -210,7 +188,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 				IJvmTypeReferenceProvider expectation = new LazyExpectation(parameterType);
 				AbstractTypeComputationState argumentState = new ObservableTypeComputationStateWithExpectation(
 						getState().getResolvedTypes(), getState().getFeatureScopeSession(), getState().getResolver(), getState(), expectation, this);
-				stackedResolvedTypes.add(resolveArgumentType(argument, parameterType, argumentState));
+				stackedResolvedTypes.add(resolveArgumentType(argument, expectation.getTypeReference(), argumentState));
 			}
 			if (varArgs) {
 				int lastParamIndex = declaredParameterCount - 1;
@@ -252,21 +230,30 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 			if (!typeParameters.isEmpty()) {
 				ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, getState().getServices());
 				implementation.populateTypeParameterMapping(declaredType, actualType);
-				typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
+//				typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
 			}
 		}
 	}
 
 	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getFeatureTypeParameterMapping() {
-		Map<JvmTypeParameter, MergedBoundTypeArgument> consolidatedMap = Maps.newLinkedHashMap();
-		for(JvmTypeParameter typeParameter: typeParameterMapping.keySet()) {
-			List<BoundTypeArgument> boundTypeArguments = typeParameterMapping.get(typeParameter);
-			MergedBoundTypeArgument mergedTypeArguments = getState().getTypeArgumentMerger().merge(boundTypeArguments);
-			if (mergedTypeArguments != null) {
-				consolidatedMap.put(typeParameter, mergedTypeArguments);
+		if (featureTypeParameterMapping == null) {
+			Map<JvmTypeParameter, MergedBoundTypeArgument> map = Maps.newLinkedHashMap();
+			initializeFeatureTypeParameterMapping(map);
+			featureTypeParameterMapping = map;
+		}
+		return featureTypeParameterMapping;
+	}
+	
+	protected void initializeFeatureTypeParameterMapping(Map<JvmTypeParameter, MergedBoundTypeArgument> result) {
+		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
+		for(JvmTypeParameter typeParameter: typeParameters) {
+			if (!result.containsKey(typeParameter)) {
+				XComputedTypeReference reference = getState().getServices().getXtypeFactory().createXComputedTypeReference();
+				RootUnboundTypeParameter unboundParameter = getState().getResolvedTypes().createUnboundTypeParameter(getExpression(), typeParameter);
+				reference.setTypeProvider(unboundParameter);
+				result.put(typeParameter, new MergedBoundTypeArgument(reference, VarianceInfo.INVARIANT));
 			}
 		}
-		return consolidatedMap;
 	}
 
 }

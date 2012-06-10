@@ -83,7 +83,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected void acceptActualType(ITypeExpectation expectation, JvmTypeReference featureType) {
-		deferredBindTypeArguments(expectation, featureType);
+		deferredBindTypeArguments(expectation.getExpectedType(), featureType);
 		expectation.acceptActualType(featureType, ConformanceHint.UNCHECKED); // TODO NATIVE, EXPECTATION_INDEPENDENT ?
 	}
 	
@@ -115,8 +115,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return null;
 	}
 	
-	protected void deferredBindTypeArguments(ITypeExpectation expectation, JvmTypeReference type) {
-		JvmTypeReference expectedType = expectation.getExpectedType();
+	protected void deferredBindTypeArguments(JvmTypeReference expectedType, JvmTypeReference type) {
 		if (expectedType != null) { 
 			// TODO expectation#hasTypeParameters / isUnresolved
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
@@ -193,7 +192,6 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		StackedResolvedTypes result = argumentState.computeTypesWithoutMerge(argument);
-		
 		return result;
 	}
 
