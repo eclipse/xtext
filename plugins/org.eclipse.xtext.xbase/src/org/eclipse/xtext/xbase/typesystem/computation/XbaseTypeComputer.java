@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -267,7 +268,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 						}
 					}
 					allTypeParameters.addAll(operation.getTypeParameters());
-					ActualTypeArgumentCollector typeArgumentCollector = new ActualTypeArgumentCollector(allTypeParameters, services);
+					ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, services);
 					JvmParameterizedTypeReference operationTypeDeclarator = services.getTypeReferences().createTypeRef(operation.getDeclaringType());
 					typeArgumentCollector.populateTypeParameterMapping(operationTypeDeclarator, expectedClosureType);
 					ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping();
