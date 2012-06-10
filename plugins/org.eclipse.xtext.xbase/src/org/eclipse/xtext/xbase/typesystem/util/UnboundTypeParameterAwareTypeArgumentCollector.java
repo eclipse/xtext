@@ -37,6 +37,14 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 	public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmTypeReference param) {
 		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 			UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+			if (param instanceof XComputedTypeReference) {
+				XComputedTypeReference castedParam = (XComputedTypeReference) param;
+				if (UnboundTypeParameters.isUnboundTypeParameter(castedParam)) {
+					if (typeParameter == castedParam.getTypeProvider()) {
+						return null;
+					}
+				}
+			}
 			typeParameter.acceptHint(boundByInferrence(param));
 			return null;
 		}
@@ -78,5 +86,16 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 	protected JvmTypeParameter findMappedParameter(JvmTypeParameter parameter,
 			Map<JvmTypeParameter, MergedBoundTypeArgument> mapping, Collection<JvmTypeParameter> visited) {
 		return UnboundTypeParameters.findMappedParameter(parameter, mapping, visited);
+	}
+	
+	@Override
+	protected JvmType getTypeFromReference(JvmTypeReference reference) {
+		if (reference instanceof XComputedTypeReference) {
+			XComputedTypeReference computed = (XComputedTypeReference) reference;
+			if (UnboundTypeParameters.isUnboundTypeParameter(computed)) {
+				return ((UnboundTypeParameter) computed.getTypeProvider()).getTypeParameter();
+			}
+		}
+		return super.getTypeFromReference(reference);
 	}
 }
