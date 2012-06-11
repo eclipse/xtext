@@ -118,8 +118,20 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	protected void deferredBindTypeArguments(ITypeExpectation expectation, JvmTypeReference type) {
 		JvmTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
-			// TODO expectation#hasTypeParameters / isUnresolved
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
+			// TODO expectation#hasTypeParameters / isUnresolved to improve the runtime performance
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices()) {
+				@Override
+				protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
+					JvmTypeParameter referencedTypeParameter = getTypeParameter(reference);
+					if (referencedTypeParameter != null) {
+						if (!getDeclaratorParameterMapping().containsKey(referencedTypeParameter)
+								&& !getDeclaredTypeParameters().contains(referencedTypeParameter)) {
+							return;
+						}
+					}
+					super.addHint(typeParameter, reference);
+				}
+			};
 			collector.processPairedReferences(expectedType, type);
 		}
 	}
