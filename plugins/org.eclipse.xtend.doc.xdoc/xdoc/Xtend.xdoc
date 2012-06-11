@@ -42,6 +42,10 @@ codelanguage-def[Xtext][
 
 chapter-ref[Introduction]
 
+chapter-ref[Installation]
+
+chapter-ref[GettingStarted]
+
 chapter-ref[types]
 
 chapter-ref[Xtend_Classes_Members]

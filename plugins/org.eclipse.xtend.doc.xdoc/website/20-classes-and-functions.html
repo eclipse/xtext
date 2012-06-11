@@ -5,11 +5,21 @@
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
-		<ul style="display: none;" id="subToc_10-introduction.html">
-		<li id="10-introduction.html#Installation.html" ><a href="10-introduction.php#Installation.php" >Installation</a></li>
-		<li id="10-introduction.html#GettingStarted.html" ><a href="10-introduction.php#GettingStarted.php" >Getting Started</a></li>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="12-Installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_12-Installation.html">
+		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="13-getting-started.php">Getting Started</a></div>
+		<ul style="display: none;" id="subToc_13-getting-started.html">
+		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -777,7 +787,7 @@
 			<a name="libraryExtensions" ></a>
 			<h2>Extensions From The Library</h2>
 			<p>
-			The <a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">library</a> puts a lot of very useful extension methods on existing types from the Java
+			The <a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">library</a> puts a lot of very useful extension methods on existing types from the Java
 			SDK without any further ado.
 			</p>
 			<p>
@@ -795,14 +805,14 @@
 			</p>
 			<p>
 			<ul>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="org.eclipse.xtext.xbase.lib.ObjectExtensions">ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="org.eclipse.xtext.xbase.lib.MapExtensions">MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="org.eclipse.xtext.xbase.lib.CollectionExtensions">CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions">BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="org.eclipse.xtext.xbase.lib.FunctionExtensions">FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="org.eclipse.xtext.xbase.lib.ObjectExtensions">ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="org.eclipse.xtext.xbase.lib.MapExtensions">MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="org.eclipse.xtext.xbase.lib.CollectionExtensions">CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions">BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="org.eclipse.xtext.xbase.lib.FunctionExtensions">FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a></li>
 			</ul>
 			</p>
 			<a name="extensionMethods_8" ></a>

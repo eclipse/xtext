@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/Xtend.html" label="Xtend User Guide" >
 	<topic href="contents/10-introduction.html#Introduction" label="Introduction" >
-		<topic href="contents/10-introduction.html#Installation" label="Installation" >
-			<topic href="contents/10-introduction.html#MavenSupport" label="Maven Support" >
-			</topic>
-			<topic href="contents/10-introduction.html#library" label="The Runtime Library" >
+	</topic>
+	<topic href="contents/12-Installation.html#Installation" label="Installation" >
+		<topic href="contents/12-Installation.html#MavenSupport" label="Maven Support" >
+			<topic href="contents/12-Installation.html#library" label="The Runtime Library" >
 			</topic>
 		</topic>
-		<topic href="contents/10-introduction.html#GettingStarted" label="Getting Started" >
-			<topic href="contents/10-introduction.html#moviesExample" label="The Movies Example (src/examples6/Movies.xtend)" >
-				<topic href="contents/10-introduction.html#moviesExample_2" label="The Data" >
+	</topic>
+	<topic href="contents/13-getting-started.html#GettingStarted" label="Getting Started" >
+		<topic href="contents/13-getting-started.html#moviesExample" label="The Movies Example" >
+			<topic href="contents/13-getting-started.html#moviesExample_2" label="The Data" >
+			</topic>
+			<topic href="contents/13-getting-started.html#moviesExample_3" label="Parsing The Data" >
+			</topic>
+			<topic href="contents/13-getting-started.html#moviesExample_4" label="Answering Some Questions" >
+				<topic href="contents/13-getting-started.html#moviesExample_4_2" label="Question 1 : What Is The Number Of Action Movies?" >
 				</topic>
-				<topic href="contents/10-introduction.html#moviesExample_3" label="Parsing The Data" >
+				<topic href="contents/13-getting-started.html#moviesExample_4_3" label="Question 2 : What Is The Year The Best Movie From The 80ies Was Released?" >
 				</topic>
-				<topic href="contents/10-introduction.html#moviesExample_4" label="Answering some Questions" >
-					<topic href="contents/10-introduction.html#moviesExample_4_2" label="What Is The Number Of Action Movies?" >
-					</topic>
-					<topic href="contents/10-introduction.html#moviesExample_4_3" label="Question 2: What Is The Year The Best Movie From The 80ies Was Released?" >
-					</topic>
-					<topic href="contents/10-introduction.html#moviesExample_4_4" label="Question 3: What Is The The Sum Of All Votes Of The Top Two Movies?" >
-					</topic>
+				<topic href="contents/13-getting-started.html#moviesExample_4_4" label="Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?" >
 				</topic>
 			</topic>
 		</topic>

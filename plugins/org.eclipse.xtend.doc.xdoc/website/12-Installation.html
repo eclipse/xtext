@@ -79,87 +79,169 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-		<a name="types" ></a>
-		<h1>Static Typing and Java Interoperability</h1>
+		<a name="Installation" ></a>
+		<h1>Installation</h1>
 				<div class="toc">
 				  <ul>
-				    <li><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
-				    <li><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
-				    <li><a href="15-types.php#javaInteroperability.php" >Interoperability with Java</a></li>
+				    <li><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
 				  </ul>
 				</div>
 				
 		<p>
-		Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types 
-		as <span class="inlinecode"><span class="keyword">int</span></span> or <span class="inlinecode"><span class="keyword">boolean</span></span>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
-		classpath.  
+		Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
+		SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend" >Eclipse Marketplace</a>. 
+		But there is also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download" >available for download
+		at http://xtend-lang.org</a>.
 		</p>
 		<p>
-		Java Generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
-		generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as
-		defined in  
-		<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html" >the Java Language Specification</a>.
+		If you do not want to use the recommended Eclipse plug-in, you can compile Xtend code using the 
+		Maven plug-in.
 		</p>
-		<a name="localTypeInference" ></a>
+		<a name="MavenSupport" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Type Inference</h1>
+			<h1>Maven Support</h1>
+			<div class="toc">
+			  <ul>
+			    <li><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
+			  </ul>
+			</div>
 			<p>
-			One of the problems with Java is that you are forced to write type signatures over
-			and over again. That is why so many people do not like static typing. 
-			But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
-			just like Java, you rarely have to write types down because they can be computed from the context.
-			</p>
-		<a name="conversionRules" ></a>
-		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
-			padding: 5px 0;
-			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
-			<br style="clear:both"></br>
-			<h1>Conversion Rules</h1>
-			<p>
-			In addition to Java's autoboxing to convert primitives to their corresponding wrapper types (e.g. <span class="inlinecode">int</span>
-			is automatically converted to <span class="inlinecode">Integer</span> when needed), there are additional conversion rules.
+			The <a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from
+			the following Maven repository: <a href="http://build.eclipse.org/common/xtend/maven/" >http://build.eclipse.org/common/xtend/maven/</a>.
 			</p>
 			<p>
-			Arrays are automatically converted to <span class="inlinecode">java.util.List&lt;ComponentType&gt;</span> and vice versa. That is you can
-			write the following:
-			</p>
-			<p>
+			Here is the XML for the repository:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;toList(String[]&nbsp;array)&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;List&lt;String&gt;&nbsp;asList&nbsp;=&nbsp;array<br/>
-						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;asList<br/>
-						}
+						&lt;repositories&gt;<br/>
+						&nbsp;&nbsp;&lt;repository&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
+						</span>&nbsp;&nbsp;&lt;/repository&gt;<br/>
+						&lt;/repositories&gt;<br/>
+						&lt;pluginRepositories&gt;<br/>
+						&nbsp;&nbsp;&lt;pluginRepository&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;xtend&lt;/id&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http:<span class="comment">//build.eclipse.org/common/xtend/maven/&lt;/url&gt;<br/>
+						</span>&nbsp;&nbsp;&lt;/pluginRepository&gt;<br/>
+						&lt;/pluginRepositories&gt;
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			Another very useful conversion applies to lambda expressions. A lambda expression
-			usually is of one of the types listed in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Functions</span>
-			or <span class="inlinecode">org.eclipse.xtext.xbase.lib.Predicates</span>. However if the expected type is an interface with a single method
-			declaration, a lambda expression is automatically converted to that
-			type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.php#closureTypes.php" title="Go to &quot;Typing&quot;" >section closureTypes</a>
-			for more details.
-			</p>
-		<a name="javaInteroperability" ></a>
-		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
-			padding: 5px 0;
-			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
-			<br style="clear:both"></br>
-			<h1>Interoperability with Java</h1>
-			<p>
-			Resembling and supporting every aspect of Java's type system ensures that there is no impedance mismatch between Java and Xtend.
-			This means that Xtend and Java are 100% interoperable. There are no exceptional cases. You do not have
-			to think in two worlds. You can call Xtend code from Java and vice versa without any surprises or hassles.
+			Here is the XML for the dependency to the library:
 			</p>
 			<p>
-			As a bonus if you know Java's type system (specifically generics), you already know the most complicated part
-			of Xtend.
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						&lt;dependency&gt;<br/>
+						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+						&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
+						&lt;/dependency&gt;
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			And this is the XML for the plug-in:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						&lt;plugin&gt;<br/>
+						&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+						&nbsp;&nbsp;&lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;<br/>
+						&nbsp;&nbsp;&lt;version&gt;2.3.0&lt;/version&gt;<br/>
+						&nbsp;&nbsp;&lt;executions&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goal&gt;compile&lt;/goal&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;&lt;goal&gt;testCompile&lt;/goal&gt;&nbsp;--&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/goals&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;optionally&nbsp;you&nbsp;can&nbsp;configure&nbsp;a&nbsp;different&nbsp;target&nbsp;folder&nbsp;--&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;configuration&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configuration&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&gt;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;/execution&gt;<br/>
+						&nbsp;&nbsp;&lt;/executions&gt;<br/>
+						&lt;/plugin&gt;
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			As you see the <em>outputDirectory</em> can be specified to match the default of the Eclipse plug-in (<em>xtend-gen</em>). Of course you can also change the configuration
+			in Eclipse to match the Maven default (<em>generated-sources</em>). To do so right-click on the project and select <em>Properties</em> or if you prefer a global setting choose <em>Eclipse-&gt;Preferences</em>.
+			In the category <em>Xtend/Compiler</em> enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+			</p>
+			<p>
+			<div class="image" >
+			<a class="gallery" rel="prettyPhoto[all]" title="Configuring the compiler in Eclipse" href="images/configure-compiler-in-eclipse.png">
+				<img src="images/configure-compiler-in-eclipse.png" 
+					width="600px"
+				/>
+			</a>
+			<div class="caption">
+				Configuring the compiler in Eclipse
+			</div>
+			</div>
+			</p>
+			<a name="library" ></a>
+			<h2>The Runtime Library</h2>
+			<p>
+			The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
+			to existing classes and interfaces from the JDK. The class <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/InputOutput.html" title="org.eclipse.xtext.xbase.lib.InputOutput">InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>
+			providing the method <span class="inlinecode">&lt;T&gt;&nbsp;T&nbsp;println(T&nbsp;obj)</span> being one of them. 
+			</p>
+			<p>
+			The only surprising fact in the generated Java code may be the library class. Many 
+			features of Xtend are not built into the language itself but provided via the library
+			<em>org.eclipse.xtend.lib</em>. The library is available from a <a href="12-Installation.php#MavenSupport.php" title="Go to &quot;Maven Support&quot;">Maven repository</a> and via p2
+			update site (in case you do Eclipse plug-in development).
+			</p>
+			<p>
+			The library provides means to create collections in a readable way:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">val</span>&nbsp;myList&nbsp;=&nbsp;newArrayList(1,&nbsp;2,&nbsp;3)<br/>
+						<span class="keyword">val</span>&nbsp;mySet&nbsp;=&nbsp;newHashSet(4,&nbsp;5,&nbsp;6)<br/>
+						<span class="keyword">val</span>&nbsp;myMap&nbsp;=&nbsp;newHashMap(1&nbsp;-&gt;&nbsp;<span class="string">&apos;one&apos;</span>,&nbsp;2&nbsp;-&gt;&nbsp;<span class="string">&apos;two&apos;</span>,&nbsp;3&nbsp;-&gt;&nbsp;<span class="string">&apos;three&apos;</span>)
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			It also extends the collection types with a lot of very useful functions.
+			One example is the ubiquitous <span class="inlinecode">map</span> function:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">val</span>&nbsp;listOfNames&nbsp;=&nbsp;listOfPersons.map[&nbsp;name&nbsp;]
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Many operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available.
+			</p>
+			<p>
+			You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html" >JavaDoc API</a> to see what is
+			available.
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
@@ -168,8 +250,8 @@
 		    var disqus_shortname = 'xtext'; // required: replace example with your forum shortname
 		
 		    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-		    var disqus_identifier = 'types';
-		    var disqus_url = documentationRoot+'15-types.php';
+		    var disqus_identifier = 'Installation';
+		    var disqus_url = documentationRoot+'12-Installation.php';
 		
 		    /* * * DON'T EDIT BELOW THIS LINE * * */
 		    (function() {

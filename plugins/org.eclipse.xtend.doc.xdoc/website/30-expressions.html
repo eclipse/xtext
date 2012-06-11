@@ -5,11 +5,21 @@
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
-		<ul style="display: none;" id="subToc_10-introduction.html">
-		<li id="10-introduction.html#Installation.html" ><a href="10-introduction.php#Installation.php" >Installation</a></li>
-		<li id="10-introduction.html#GettingStarted.html" ><a href="10-introduction.php#GettingStarted.php" >Getting Started</a></li>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="12-Installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_12-Installation.html">
+		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="13-getting-started.php">Getting Started</a></div>
+		<ul style="display: none;" id="subToc_13-getting-started.html">
+		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -272,7 +282,7 @@
 			There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 			to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 			operators for any type just by implementing the corresponding method signature. As an example, the 
-			<a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">Xtend runtime library</a> contains a class <span class="inlinecode">BigDecimalExtensions</span> that defines operators for 
+			<a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">Xtend runtime library</a> contains a class <span class="inlinecode">BigDecimalExtensions</span> that defines operators for 
 			<span class="inlinecode">BigDecimals</span> which allows the following code:
 			<div class="literallayout">
 				<div class="incode">
@@ -956,7 +966,7 @@
 			</div>
 			</p>
 			<p>
-			The type will be one of the types found in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
+			The type will be one of the types found in <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
 			It is a procedure if the return type is <span class="inlinecode"><span class="keyword">void</span></span>, otherwise it is a function.
 			</p>
 			<p>
