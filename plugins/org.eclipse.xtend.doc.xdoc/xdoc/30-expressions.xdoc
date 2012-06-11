@@ -118,7 +118,7 @@ There are a couple of common predefined infix operators. In contrast to Java, th
 to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 operators for any type just by implementing the corresponding method signature. As an example, the 
 ref:library[Xtend runtime library] contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
-codeRef[java.math.BigDecimal]s which allows the following code:
+codeRef[java.math.BigDecimal][BigDecimals] which allows the following code:
 code[Xtend][
   val x = 2.71BD
   val y = 3.14BD
@@ -182,8 +182,8 @@ precedence and associativity.
 section2[Short-Circuit Boolean Operators]
 
 If the operators code[||] and code[&&] are bound to the library methods 
-codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions]code[.operator_and(boolean l, boolean r)] resp. 
-codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions]code[.operator_or(boolean l, boolean r)] the operation is evaluated in short circuit mode.
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_and(boolean l, boolean r)]] resp. 
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_or(boolean l, boolean r)]] the operation is evaluated in short circuit mode.
 That means that the right hand operand might not be evaluated at all in the following cases: 
 ol[
   item[in the case of code[||] the operand on the right hand side is not evaluated if the left 

@@ -140,16 +140,16 @@ code[Xtend][
 import static extension com.google.common.io.CharStreams.*
 ]
 
-codeRef[com.google.common.io.CharStreams]code[.readLines(Reader)] returns a code[List<String>] on which we call another extension method called code[map].
-That one is defined in the ref:library[runtime library] (codeRef[org.eclipse.xtext.xbase.lib.ListExtensions]code[.map(...)]) and is always imported and
+codeRef[com.google.common.io.CharStreams][code[CharStreams.readLines(Reader)]] returns a codeRef[java.util.List][code[List<String>]] on which we call another extension method called code[map].
+That one is defined in the ref:library[runtime library] (codeRef[org.eclipse.xtext.xbase.lib.ListExtensions][ListExtensions.map(...)]) and is always imported and
 therefore automatically available on all lists. The code[map] extension expects a function as a parameter.
 It basically invokes that function for each value in the list and returns another list containing the results of the function invocations.
 
 Function objects are created using ref:lambdas[lambda expressions] (the code in squared brackets).
 Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
-separator (two whitespaces) and calling iterator on the result. As you might know code[java.lang.String.split(String)]
+separator (two whitespaces) and calling iterator on the result. As you might know codeRef[java.lang.String][String.split(String)]
 returns a string array (code[String\[\]]), which Xtend ref:conversionRules[auto-convertes to a list] when we 
-call codeRef[java.lang.Iterable]code[.iterator()] on it.
+call codeRef[java.lang.Iterable][code[Iterable.iterator()]] on it.
 
 code[Xtend][
 val segments = line.split('  ').iterator
@@ -157,7 +157,7 @@ val segments = line.split('  ').iterator
 
 Now we use the iterator to create an instance of code[Movie].
 The data type conversion (e.g. code[String] to code[Xtend][int]) is done by calling ref:staticAccess[static methods] from the wrapper types. 
-The rest of the iterable is turned into a set using the extension method codeRef[org.eclipse.xtext.xbase.lib.IteratorExtensions]code[.toSet(Iterator<T>)]
+The rest of the iterable is turned into a set using the extension method codeRef[org.eclipse.xtext.xbase.lib.IteratorExtensions][code[IteratorExtensions.toSet(Iterator<T>)]]
 and contains all the categories the movie is associated with.
 
 code[Xtend][
@@ -218,7 +218,7 @@ Here we code[filter] for all movies whose year is included in the range from 198
 The code[..] operator is again an extension defined in codeRef[org.eclipse.xtext.xbase.lib.IntegerExtensions] and returns an instance of codeRef[org.eclipse.xtext.xbase.lib.IntegerRange].
 Operator overloading is explained in ref:operators[section].
 
-The resulting iterable is sorted (codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions]code[.sortBy]) by the code[rating] of the movies. 
+The resulting iterable is sorted (codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions][code[IterableExtensions.sortBy]]) by the code[rating] of the movies. 
 Since it is sorted in ascending order, we take the last movie from the list and return its code[year]. 
 
 We could have sorted descending and take the head of the list as well:
@@ -243,7 +243,7 @@ code[Xtend][
 ]
 
 First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their code[numberOfVotes] using the code[map] function. 
-Now we have a codeRef[java.util.List]code[<Long>] which can be reduced to a single codeRef[java.lang.Integer] by adding the values.
+Now we have a codeRef[java.util.List][code[List<Long>]] which can be reduced to a single codeRef[java.lang.Integer] by adding the values.
 
 You could also use code[reduce] instead of code[map] and code[reduce]. Do you know how?
 

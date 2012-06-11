@@ -21,7 +21,7 @@ section:conversionRules[Conversion Rules]
 In addition to Java's autoboxing to convert primitives to their corresponding wrapper types (e.g. code[Xtend][int]
 is automatically converted to codeRef[java.lang.Integer] when needed), there are additional conversion rules.
 
-Arrays are automatically converted to codeRef[java.util.List]code[<ComponentType>] and vice versa. That is you can
+Arrays are automatically converted to codeRef[java.util.List][code[List<ComponentType>]] and vice versa. That is you can
 write the following:
 
 code[Xtend][
