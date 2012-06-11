@@ -218,9 +218,9 @@
     &lt;/execution&gt;
   &lt;/executions&gt;
 &lt;/plugin&gt;</pre><p>
-				As you see the outputDirectory can be specified to match the default of the Eclipse plug-in (xtend-gen). Of course you can also change the configuration
-				in Eclipse to match the Maven default (generated-sources). To do so right-click on the project and select &apos;Properties&apos; or if you prefer a global setting choose Eclipse-&gt;Preferences.
-				In the category &apos;Xtend/Compiler&apos; enter the directory name (see screenshot). It&apos;s interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.<div class="thumbnail">
+				As you see the <strong>outputDirectory</strong> can be specified to match the default of the Eclipse plug-in (<strong>xtend-gen</strong>). Of course you can also change the configuration
+				in Eclipse to match the Maven default (<strong>generated-sources</strong>). To do so right-click on the project and select <strong>Properties</strong> or if you prefer a global setting choose <strong>Eclipse-&gt;Preferences</strong>.
+				In the category <strong>Xtend/Compiler</strong> enter the directory name (see screenshot). It&apos;s interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.<div class="thumbnail">
 					<img src="images/configure-compiler-in-eclipse.png" alt="">
 				</div>
 				</p>
@@ -230,7 +230,7 @@
 				<p>
 				The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
 				to existing classes and interfaces from the JDK. The class <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.InputOutput</code>
-				providing the method println() being one of them. The only surprising fact in the generated Java code may be the library class . Many 
+				providing the method <code>&lt;T&gt; T println(T obj)</code> being one of them. The only surprising fact in the generated Java code may be the library class . Many 
 				features of Xtend are not built into the language itself but provided via the library
 				<strong>org.eclipse.xtend.lib</strong>. The library is available from a <a href="#MavenSupport">Maven repository</a> and via p2
 				update site (in case you do Eclipse Plug-In development).The library provides means to create collections in a readable way:</p><pre class="prettyprint lang-xtend">
@@ -240,7 +240,8 @@ val myMap = newHashMap(1 -&gt; &apos;one&apos;, 2 -&gt; &apos;two&apos;, 3 -&gt;
 				It also extends the collection types with a lot of very useful functions.
 				One example is the ubiquitous <code>map</code> function:</p><pre class="prettyprint lang-xtend">
 val listOfNames = listOfPersons.map[ name ]</pre><p>
-				Many operators to concat collections or to do arithmetics with types like <code>BigDecimal</code> are also available.
+				Many operators to concat collections or to do arithmetics with types like <code>BigDecimal</code> are also available.You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html">JavaDoc API</a> to see what&apos;s
+				available.
 				</p>
 				</section>
 				<!--  section -->
@@ -256,10 +257,10 @@ class HelloWorld {
   }
 }</pre><p>
 				You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the <code>def</code>
-				keyword for declaring a method. Also as in Java it&apos;s mandatory to define a class and a main method as the entry point for an application. 
+				keyword for declaring a method. Also like in Java it&apos;s mandatory to define a class and a main method as the entry point for an application. 
 				Admittedly &apos;hello world&apos; programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
 				as you will learn in a moment.An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-				translate it to Java code. You&apos;ll find it in a source folder <strong>xtend-gen</strong>, which is of course configurable.
+				translate it to Java code. By default you&apos;ll find it in a source folder <strong>xtend-gen</strong>, which is of course configurable.
 				The hello world example is translated to the following Java code:
 				</p><pre class="prettyprint lang-java">
 // Generated Java Source Code
@@ -271,28 +272,24 @@ public class HelloWorld {
   }
 }</pre><p>
 				You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
-				about the missing library if it&apos;s not on the classpath and provide a quick fix to add it.The next thing you might want to do is to materialize one of the example projects.
-				To do so right click anywhere into the <strong>Navigator</strong> view in Eclipse and select <strong>New -&gt; Example...</strong>.In the upcoming dialog you&apos;ll find two examples for Xtend:<ul>
-					<li><strong>Xtend Introductory Examples</strong> contains a couple of example code snippets ilustrating certain
-					  aspects and strength of Xtend. 
-					  It for instance shows how to build a builder API or an API which allows you to write the following:
+				about the missing library if it&apos;s not on the classpath and provide a quick fix to add it.The next thing you might want to do is materializing one of the example projects into your workspace.
+				To do so right click anywhere in the <strong>Navigator</strong> view in Eclipse and select <strong>New -&gt; Example...</strong>.In the upcoming dialog you&apos;ll find two examples for Xtend:<ul>
+					<li><strong>Xtend Introductory Examples</strong> contains a couple of example code snippets illustrating certain
+					  aspects and strengths of Xtend. 
+					  It for instance shows how to build a builder API or an API which allows for writing code like this:
 					  <pre class="prettyprint lang-xtend">
 assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)</pre>
 					
 					  Also the <a href="#moviesExample">the movies example</a> explained in detail in <a href="#moviesExample">the next section</a>
 					  is included here.</li>
 					<li><strong>Xtend Solutions For Euler</strong> contains solutions to a lot of the problems you&apos;ll find at <a href="http://projecteuler.net/">Project Euler's website</a>.
-					   These examples are leveraging the whole expressive power of Xtend for instance Problem 1 can be solved
-					   with the expression
+					   These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved
+					   with the following expression :
 					   <pre class="prettyprint lang-xtend">
 (1..999).filter[ i | i % 3 == 0 || i % 5 == 0].reduce[i1, i2 | i1 + i2]</pre>
 					
-					   which you might want to compare with <a href="http://v1.pradeepgowda.com/euler/euler001.html">solutions in other languages</a>.
 					   </li>
 				</ul>
-				<div class="thumbnail">
-					<img src="images/materialize-example.png" alt="">
-				</div>
 				</p>
 				<!-- subsection -->
 				<section id="moviesExample">
@@ -319,8 +316,7 @@ Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy</pre><p>
 				</ol>
 				
 				 
-				Because we want to work with this data in an object oriented and statically typed manner, we 
-				might want to start by declaring a datatype <code>Movie</code>:</p><pre class="prettyprint lang-xtend">
+				Let&apos;s define a data type <code>Movie</code> representing a data set:</p><pre class="prettyprint lang-xtend">
 @Data class Movie {
   String title
   int year
@@ -348,127 +344,110 @@ import java.util.Set
 import static extension com.google.common.io.CharStreams.*
 
 class Movies {
-	
-	val movies = new FileReader(&apos;data.csv&apos;).readLines.map[ line |
-		val segments = line.split(&apos;  &apos;).iterator
-		return new Movie(
-			segments.next, 
-			Integer::parseInt(segments.next), 
-			Double::parseDouble(segments.next), 
-			Long::parseLong(segments.next), 
-			segments.toSet
-		)
-	]
+  
+  val movies = new FileReader(&apos;data.csv&apos;).readLines.map[ line |
+    val segments = line.split(&apos;  &apos;).iterator
+    return new Movie(
+      segments.next, 
+      Integer::parseInt(segments.next), 
+      Double::parseDouble(segments.next), 
+      Long::parseLong(segments.next), 
+      segments.toSet
+    )
+  ]
 }</pre><p>
 				A <a href="#fields">field&apos;s type</a> can be inferred from the expression on the right hand-side. 
 				That&apos;s called local type inference and is supported everyhwere in Xtend.
 				We want the field to be final, so we declare it as a value using the keyword <code>val</code>.The initialization on the right hand side first creates a fresh instance of <code>java.io.FileReader</code>.
 				Then the method <code>readLines()</code> is invoked on that instance. But if you have a look at <code>FileReader</code> you won&apos;t find
-				such a method. It&apos;s a static method coming from Google Guava&apos;s <code>CharStream</code> and its static methods
-				are imported as <a href="#extensionImports">extension methods</a>, which allows us to use this readable syntax.<code>CharStream.readLines(Reader)</code> returns a <code>List&lt;String&gt;</code> on which we call another extension method called <code>map</code>.
-				That one is defined in the <a href="#library">runtime library</a> (<code>ListExtensions.map(...)</code> and is so useful that it is always imported and
+				such a method, because <code>readLines()</code> is in fact a static method from Google Guava&apos;s <code>CharStream</code> which was imported 
+				as an <a href="#extensionImports">extension</a>, which allows us to use this readable syntax.</p><pre class="prettyprint lang-xtend">
+import static extension com.google.common.io.CharStreams.*</pre><p>
+				<code>CharStream.readLines(Reader)</code> returns a <code>List&lt;String&gt;</code> on which we call another extension method called <code>map</code>.
+				That one is defined in the <a href="#library">runtime library</a> (<code>ListExtensions.map(...)</code> and is always imported and
 				therefore automatically available on all lists. The <code>map</code> extension expects a function as a parameter.
-				Map basically invokes that function for each value in the list and returns a list containing the results of the function incovations.Function objects are created using <a href="#lambdas">lambda expression</a> (the code in squared brackets).
+				Map basically invokes that function for each value in the list and returns another list containing the results of the function incovations.Function objects are created using <a href="#lambdas">lambda expression</a> (the code in squared brackets).
 				Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
-				separator and calling iterator on the result. As you might know <code>java.lang.String.split(String)</code>
-				returns a string array (<code>String[]</code>). Xtend <a href="#conversionRules">auto-convertes arrays to lists</a> when needed, which is the case when we 
-				call <code>Iterable.iterator()</code> on it.Now we use the iterator to create an instance of <code>Movie</code>.
+				separator (two whitespaces) and calling iterator on the result. As you might know <code>java.lang.String.split(String)</code>
+				returns a string array (<code>String[]</code>), which Xtend <a href="#conversionRules">auto-convertes to a list</a> when we 
+				call <code>Iterable.iterator()</code> on it.</p><pre class="prettyprint lang-xtend">
+val segments = line.split(&apos;  &apos;).iterator</pre><p>
+				Now we use the iterator to create an instance of <code>Movie</code>.
 				The data type conversion (e.g. <code>String</code> to <code>int</code>) is done by calling <a href="#staticAccess">static methods</a> from the wrapper types. 
-				The rest of the iterable is turned into a set using the extension methods <code>Iterators.toSet(Iterator&lt;T&gt;)</code>
-				and contains all the categories the movie is associated with.
+				The rest of the iterable is turned into a set using the extension method <code>Iterators.toSet(Iterator&lt;T&gt;)</code>
+				and contains all the categories the movie is associated with.</p><pre class="prettyprint lang-xtend">
+return new Movie (
+  segments.next, 
+  Integer::parseInt(segments.next), 
+  Double::parseDouble(segments.next), 
+  Long::parseLong(segments.next), 
+  segments.toSet
+)</pre><p>
 				</p>
 				<!-- subsection -->
 				<section id="Section3_2">
-				<h4>AnalysingThe Data</h4>
+				<h4>Answering som Questions</h4>
 				<p>
-				Now that we&apos;ve the text file turned into a <code>List&lt;Movie&gt;</code>, we are ready to do some analysis on it.
-				We use <strong>Junit4</strong> to make the individual analysis executable. 
-				The simplest example is counting the number of action movies:</p><pre class="prettyprint lang-xtend">
+				Now that we&apos;ve the text file turned into a <code>List&lt;Movie&gt;</code>, we are ready to execute some queries against it.
+				We use <strong>Junit</strong> to make the individual analysis executable.
+				</p>
+				<!-- subsection -->
+				<section id="Section4_3">
+				<h5>What&apos;s The Number Of Action Movies?</h5>
+				<p>
+				</p><pre class="prettyprint lang-xtend">
 @Test def numberOfActionMovies() {
-						assertEquals(828, movies.filter[categories.contains(&apos;Action&apos;)].size)
-					}</pre><p>
-				It&apos;s using the extension method <code>IterableExtensions.filter</code> to filter the movies. The lambda expression
-				checks whether the current movie&apos;s categories contains the entry <code>&apos;Action&apos;</code>. Note that unlike
-				the lambda we used to turn the lines in the file into movies, we haven&apos;t declared a parameter name this time. 
+  assertEquals(828, 
+    movies.filter[categories.contains(&apos;Action&apos;)].size)
+}</pre><p>
+				First the movies are <code>filter</code>ed. The lambda expression checks whether the current movie&apos;s categories contains 
+				the entry <code>&apos;Action&apos;</code>. Note that unlike the lambda we used to turn the lines in the file into movies, we 
+				haven&apos;t declared a parameter name this time. 
 				We could have written 
 				</p><pre class="prettyprint lang-xtend">
 movies.filter[ movie | movie.categories.contains(&apos;Action&apos;)].size</pre><p>
 				
 				but since we left out the name and the vertical bar the variable is automatically named <code>it</code> which
-				(like <code>this</code>) is an <a href="#implicitVariables">implicit variable</a>. That&apos;s why we can write either 
-				</p><pre class="prettyprint lang-xtend">
-movies.filter[it.categories.contains(&apos;Action&apos;)].size</pre><p>
+				(like <code>this</code>) is an <a href="#implicitVariables">implicit variable</a>. That&apos;s why we can write either</p><pre class="prettyprint lang-xtend">
+movies.filter[ it.categories.contains(&apos;Action&apos;)].size</pre><p>
 				
 				or 
 				</p><pre class="prettyprint lang-xtend">
 movies.filter[categories.contains(&apos;Action&apos;)].size</pre><p>
-				.Lastly we call <code>size()</code> on the resulting iterable, which again is an extension method, because <code>java.lang.Iterable</code>
-				doesn&apos;t define such a method. It&apos;s defined in <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code>.The second analysis is about finding the year the best movie from the 80ies was released.
-				Here&apos;s the code:</p><pre class="prettyprint lang-xtend">
+				.Lastly we call <code>size</code> on the resulting iterable, which also is an extension method defined in 
+				<code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code>.
+				</p>
+				<!-- subsection -->
+				<section id="Section4_4">
+				<h5>Question 2: What&apos;s The Year The Best Movie From The 80ies Was Released?</h5>
+				<p>
+				</p><pre class="prettyprint lang-xtend">
 @Test def void yearOfBestMovieFrom80ies() {
-						assertEquals(1989, movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)
-					}</pre><p>
+  assertEquals(1989, 
+    movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)
+}</pre><p>
 				Here we <code>filter</code> all movies where the year is not included in the range from 1980 to 1989 (the 80ies).
 				The <code>..</code> operator again is an extension defined in <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IntegerExtensions</code> and returns an instanceof <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IntegerRange</code>.
 				Operator overloading is explained in <a href="#operators">section</a>.The resulting iterable is sorted (<code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code><code>.sortBy</code>) by the <code>rating</code> of the movies. 
 				Since it&apos;s sorted in ascending order, we take the last movie from the list and return its <code>year</code>. We could have sorted descending and take the head of the list as well:
 				</p><pre class="prettyprint lang-xtend">
 movies.filter[(1980..1989).contains(year)].sortBy[-rating].head.year</pre><p>
-				Btw. the calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding 
-				<a href="#propertyAccess">getter methods</a>.The last analysis you&apos;ll find in the example is a bit trickier. It also uses a couple of additional extension methods such 
-				as <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code><code>.&lt;T&gt;take(Iterable&lt;T&gt;, int)</code> and <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code><code>.reduce(...)</code>.
-				I&apos;ll leave it up to you to understand how it works, here&apos;s the full code:</p><pre class="prettyprint lang-xtend">
-package example6
-
-import org.junit.Test
-import java.io.FileReader
-import java.util.Set
-import static org.junit.Assert.*
-import static extension com.google.common.io.CharStreams.*
-
-class Movies {
-	
-	/**
-	 * @return the total number of action movies
-	 */ 
-	@Test def void numberOfActionMovies() {
-		assertEquals(828, movies.filte[categories.contains(&apos;Action&apos;)].size)
-	}
-	
-	/**
-	 * @return the year the best rated movie of 80ies (1980-1989) was released.
-	 */
-	@Test def void yearOfBestMovieFrom80ies() {
-		assertEquals(1989, movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)
-	}
-	
-	/**
-	 * @return the sum of the number of votes of the two top rated movies.
-	 */
-	@Test def void sumOfVotesOfTop2() {
-		val long movies = movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a, b| a + b]
-		assertEquals(47_229, movies)
-	}
-	
-	val movies = new FileReader(&apos;data.csv&apos;).readLines.map[ line |
-		val segments = line.split(&apos;  &apos;).iterator
-		return new Movie(
-			segments.next, 
-			Integer::parseInt(segments.next), 
-			Double::parseDouble(segments.next), 
-			Long::parseLong(segments.next), 
-			segments.toSet
-		)
-	]
-}
-
-@Data class Movie {
-	String title
-	int year
-	double rating
-	long numberOfVotes
-	Set&lt;String&gt; categories 
+				Note that first sorting and then taking the last or first is slightly more expnsive than needed. We could
+				have used the method <code>reduce</code> instead to find the best movie, which would be more efficient. Maybe
+				you want to try it on your own?The calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding 
+				<a href="#propertyAccess">getter methods</a>.
+				</p>
+				<!-- subsection -->
+				<section id="Section4_5">
+				<h5>Question 3: What&apos;s The The Sum Of All Votes Of The Top Two Movies?</h5>
+				<p>
+				</p><pre class="prettyprint lang-xtend">
+@Test def void sumOfVotesOfTop2() {
+  val long sum = movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a, b| a + b]
+  assertEquals(47_229L, sum)
 }</pre><p>
+				First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their <code>numberOfVotes</code> using the <code>map</code> function. 
+				Now we have a <code>List&lt;Long&gt;</code> which can be reduced to a single <code>Integer</code> by adding the values.You could also use <code>reduce</code> instead of <code>map</code> and <code>reduce</code>. Do you know how?
 				</p>
 				</section>
 			</div>
@@ -694,7 +673,7 @@ abstract class MyAbstractClass() {
 }</pre><p>
 				</p>
 				<!-- subsection -->
-				<section id="Section2_3">
+				<section id="Section2_6">
 				<h3>Overriding Methods</h3>
 				<p>
 				Methods can override other methods from the super class or implemented interface methods using the
@@ -854,7 +833,7 @@ public String printType(final Number x) {
 }</pre><p>
 				</p>
 				<!-- subsection -->
-				<section id="Section3_4">
+				<section id="Section3_7">
 				<h4>Dispatch Methods and Inheritance</h4>
 				<p>
 				Any visible Java methods from super types conforming to the compiled form of a dispatch method are
@@ -899,7 +878,7 @@ public String label(final Object it) {
 }</pre><p>
 				</p>
 				<!-- subsection -->
-				<section id="Section3_5">
+				<section id="Section3_8">
 				<h4>Static Dispatch Methods</h4>
 				<p>
 				Also static dispatch methods are supported. But you cannot mix static and non-static
@@ -968,7 +947,7 @@ listOfStrings.map[toUpperCase] // calls ListExtensions.&lt;T, R&gt;map(List&lt;T
 				</ul>
 				</p>
 				<!-- subsection -->
-				<section id="Section2_6">
+				<section id="Section2_9">
 				<h3>Local Extension Methods</h3>
 				<p>
 				All visible non-static methods of the current class and its super types are automatically available as extensions. For example
@@ -1047,7 +1026,7 @@ person.delete  // calls ep.delete(person)</pre><p>
 		<div class="row">
 			<div class="span9 offset2">
 				<p>
-				Unlike Java in Xtend there are no statements. Instead, everything is an expression and has a return value. That
+				Xtend there are no statements. Instead, everything is an expression and has a return value. That
 				allows to compose your code in intersting ways. For example, you can have a
 				<code>try catch</code> expression on the right hand side of an assignment: 
 				</p><pre class="prettyprint lang-xtend">
@@ -1075,8 +1054,8 @@ val data = try {
 				<p>
 				A string literal is of type <code>java.lang.String</code> (just like in Java).
 				String literals are enclosed by a pair of single quotes or double quotes. We mostly use single quotes
-				because the signal-tonoise ration is a bit better, but generally you should use the terminals which are
-				least likely occure uin the actual string. Special characters can be quoted with a backslash or defined using
+				because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
+				least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 				Java&apos;s unicode notation. Contrary to Java, strings can span multiple lines.</p><pre class="prettyprint lang-xtend">
 &apos;Hello World !&apos;
 "Hello World !"
@@ -1129,8 +1108,7 @@ val data = try {
 				<section id="nullLiteral">
 				<h3>Null Literal</h3>
 				<p>
-				The null pointer literal is <code>null</code>. It is a member of any reference type and
-				the only member of the type <code>java.lang.Void</code>, i.e. has the same semantics as in Java.
+				The null pointer literal is <code>null</code> has exactly the same semantics as in Java.
 				</p>
 				<!-- subsection -->
 				<section id="typeLiteral">
@@ -1145,7 +1123,7 @@ typeof(java.lang.String) // yields java.lang.String.class</pre><p>
 				<section id="typeCasts">
 				<h2>Type Casts</h2>
 				<p>
-				A type cast behaves exactly like casts in Java, but have a slightly more readable syntax.
+				A type cast behaves exactly like casts in Java, but has a slightly more readable syntax.
 				Type casts bind stronger than any other operator but weaker than feature calls.The conformance rules for casts are defined in the 
 				<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html#5.5">Java Language Specification</a>.
 				Here are some examples:
@@ -1168,7 +1146,7 @@ something as MyClass
 val x = 2.71BD
 val y = 3.14BD
 val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
-				The following defines the operators and the corresponding method signatures / expressions.<table class="table table-bordered table-condensed">
+				This is the complete list of all available operators and their corresponding method signatures.<table class="table table-bordered table-condensed">
 				<tr><td><code>e1 += e2</code></td>
 				<td><code>e1.operator_add(e2)</code></td>
 				</tr>
@@ -1284,7 +1262,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 				precedence and associativity. 
 				</p>
 				<!-- subsection -->
-				<section id="Section2_7">
+				<section id="Section2_10">
 				<h3>Short-Circuit Boolean Operators</h3>
 				<p>
 				If the operators <code>||</code> and <code>&&</code> are bound to the library methods 
@@ -1298,10 +1276,10 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
 					    operand evaluates to <code>false</code>.</li>
 				</ol>
 				Still you can overload these operators for your types or even override it for booleans, in which case
-				both operands are always evaluated and the defined method is invoked.
+				both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 				</p>
 				<!-- subsection -->
-				<section id="Section2_8">
+				<section id="Section2_11">
 				<h3>Examples</h3>
 				<p>
 				</p><pre class="prettyprint lang-xtend">
@@ -1333,9 +1311,8 @@ myObj.myField = &apos;foo&apos;</pre><p>
 				hence you can call a setter using an assignment:</p><pre class="prettyprint lang-java">
 myObj.myProperty = &apos;foo&apos; // calls myObj.setMyProperty("foo")</pre><p>
 				The setter is only used if the field is not accessible from the given context. That&apos;s why the 
-				<a href="#propertyAnnotation">@Property annotation</a> would rename the local field to <code>_myProperty</code>.In return type of an assignment corresponds to the return type of the mapped expression, i.e. if it&apos;s
-				translated to a simple Java assignment it yields the value of the right hand side, if it&apos;s translated
-				to a setter method it yields whatever the setter method returns.
+				<a href="#propertyAnnotation">@Property annotation</a> would rename the local field to <code>_myProperty</code>.The return type of an assignment is the type of the right hand side, in case it&apos;s a simple assignment.
+				If it&apos;s translated to a setter method it yields whatever the setter method returns.
 				</p>
 				</section>
 				<!--  section -->
@@ -1354,11 +1331,11 @@ myObj.myProperty = &apos;foo&apos; // calls myObj.setMyProperty("foo")</pre><p>
 }</pre><p>
 				</p><pre class="prettyprint lang-xtend">
 {
-  var x = greeting();
+  var x = greeting
   if (x.equals("Hello ")) {
-    x+"World!"; 
+    x + "World!" 
   } else {
-    x;
+    x
   }
 }</pre><p>
 				</p>
@@ -1381,12 +1358,12 @@ myObj.myProperty = &apos;foo&apos; // calls myObj.setMyProperty("foo")</pre><p>
     i = i + 1
   }
 }</pre><p>
-				Shadowing variables from outer scopes is not allowed, the only exception being the 
+				Shadowing variables from outer scopes is not allowed, the only exception is the 
 				<a href="#implicitVariables">implicit variable <code>it</code></a>.Variables declared outside a lambda expression using the <code>var</code> keyword are not accessible from within a
 				lambda expressions.
 				</p>
 				<!-- subsection -->
-				<section id="Section2_9">
+				<section id="Section2_12">
 				<h3>Typing</h3>
 				<p>
 				The type of the variable itself can either be explicitly declared or be inferred from the right hand side
@@ -1403,16 +1380,15 @@ var msg = new ArrayList&lt;String&gt; // -&gt; msg is of type ArrayList&lt;Strin
 				<section id="featureCalls">
 				<h2>Field Access and Method Invocation</h2>
 				<p>
-				As in Java, a simple name can refer to a local field, variable or parameter. In addition
-				it can point to a method with zero arguments, since the parenthesis are optional if no arguments are
-				passed. 
+				A simple name can refer to a local field, variable or parameter. In addition
+				it can point to a method with zero arguments, since empty parenthesis are optional. 
 				</p>
 				<!-- subsection -->
 				<section id="propertyAccess">
 				<h3>Property Access</h3>
 				<p>
-				In addition if there is no field with the given name accessible and also no method with name and zero parameters
-				accessible, it binds to a corresponding Java-Bean getter method if available :</p><pre class="prettyprint lang-xtend">
+				If there is no field with the given name and also no method with the name and zero parameters
+				accessible, a simple name binds to a corresponding Java-Bean getter method if available :</p><pre class="prettyprint lang-xtend">
 myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)</pre><p>
 				</p>
 				<!-- subsection -->
@@ -1429,7 +1405,7 @@ val it = new Person
 name = &apos;Horst&apos; // translates to &apos;it.setName("Horst");&apos;</pre><p>
 				Another speciality of the variable <code>it</code> is that it can be shadowed. This is especially useful
 				when used together with <a href="#lambdas">lambda expressions</a>.As <code>this</code> is bound to the surrounding object in Java, <code>it</code> can be used
-				in finer-grained constructs such as function parameters. That is why <code>it.myProperty</code> has 
+				in finer-grained constructs such as <a href="#lambdas">lambda expressions</a>. That is why <code>it.myProperty</code> has 
 				higher precedence than <code>this.myProperty</code>.
 				</p>
 				<!-- subsection -->
@@ -1439,6 +1415,7 @@ name = &apos;Horst&apos; // translates to &apos;it.setName("Horst");&apos;</pre>
 				For accessing a static field or method you have to use the double colon <code>::</code> like in this example:</p><pre class="prettyprint lang-xtend">
 MyClass::myField
 MyClass::myMethod(&apos;foo&apos;)</pre><p>
+				Alternatively you could import the method using a <a href="#imports">static import</a>.
 				</p>
 				<!-- subsection -->
 				<section id="nullSafeFeatureCalls">
@@ -1451,7 +1428,7 @@ MyClass::myMethod(&apos;foo&apos;)</pre><p>
 if (myRef != null) myRef.doStuff()</pre><p>
 				one can write
 				</p><pre class="prettyprint lang-xtend">
-myRef?.doStuff()</pre><p>
+myRef?.doStuff</pre><p>
 				</p>
 				</section>
 				<!--  section -->
@@ -1471,7 +1448,7 @@ new ArrayList&lt;BigDecimal&gt;() == new ArrayList&lt;BigDecimal&gt;</pre><p>
 				<p>
 				A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
 				a Java developer it&apos;s best to think of a lambda expression as an anonymous class, i.e. 
-				when you write the following Java :</p><pre class="prettyprint lang-java">
+				like in the following Java code :</p><pre class="prettyprint lang-java">
 // Java Code!
 final JTextField textField = new JTextField();
 textField.addActionListener(new ActionListener() {
@@ -1480,14 +1457,14 @@ textField.addActionListener(new ActionListener() {
     textField.setText("Something happened!");
   }
 });</pre><p>
-				This kind of anonymous classes can be found in many libraries and have always been the poor-man&apos;s replacement
+				This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man&apos;s replacement
 				for lambda expressions in Java. Xtend not only supports lambda expressions, but offers an extremely dense syntax for it. That is the
 				code above can be written in Xtend like this:</p><pre class="prettyprint lang-xtend">
 val textField = new JTextField
 textField.addActionListener([ ActionEvent e |
   textField.text = "Something happened!"
 ])</pre><p>
-				As you might have guessed, a lambda expression is surrounded by square brackets (borrowed from Smalltalk).
+				As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
 				Also a lambda expression like a method declares parameters. The lambda above has one parameter called <code>e</code> which is of
 				type <code>ActionEvent</code>. You don&apos;t have to specify the type explicitly because it can be inferred from
 				the context:</p><pre class="prettyprint lang-xtend">
@@ -1514,7 +1491,7 @@ Collections::sort(someStrings, [ a, b |
   a.length - b.length
 ])</pre><p>
 				Since you can leave out empty parenthesis methods wich get a lambda as the single argument you can reduce
-				the code to write:</p><pre class="prettyprint lang-xtend">
+				the code above further more:</p><pre class="prettyprint lang-xtend">
 textField.addActionListener[
   textField.text = "Something happened!"
 ]</pre><p>
@@ -1553,14 +1530,13 @@ val stringToStringFunction2 = [String s | s.toUpperCase] // inferred type is (St
 				</p><pre class="prettyprint lang-xtend">
 if (p) e1 else e2</pre><p>
 				 
-				results in either the value <code>e1</code> or <code>e2</code> 
-				depending on whether the predicate <code>p</code> evaluates to <code>true</code> or <code>false</code>. 
-				The else part is optional which is a shorthand for <code>else null</code>. That means </p><pre class="prettyprint lang-xtend">
+				results in either the value <code>e1</code> or <code>e2</code> depending on whether the predicate <code>p</code> evaluates 
+				to <code>true</code> or <code>false</code>. The else part is optional which is a shorthand for <code>else null</code>. That means </p><pre class="prettyprint lang-xtend">
 if (foo) x</pre><p>
-				is the a short hand for</p><pre class="prettyprint lang-xtend">
+				is a short hand for</p><pre class="prettyprint lang-xtend">
 if (foo) x else null</pre><p>
 				The type of an if expression is the common super type of the return types <code>T1</code> and <code>T2</code> 
-				of the two expression <code>e1</code> and <code>e2</code>. While the <code>if</code>-expression has the syntax of Java&apos;s if statement it behaves more like Java&apos;s ternary operator 
+				of the two expression <code>e1</code> and <code>e2</code>.While the <code>if</code>-expression has the syntax of Java&apos;s if statement it behaves more like Java&apos;s ternary operator 
 				(<code>predicate ? thenPart : elsePart</code>), because it is an expression and returns a value.
 				Consequently, you can use if expressions deeply nested within expressions:</p><pre class="prettyprint lang-xtend">
 val name = if (firstName != null) firstName + &apos; &apos; + lastName else lastName</pre><p>
@@ -1578,30 +1554,22 @@ val name = if (firstName != null) firstName + &apos; &apos; + lastName else last
 				Given the following example:
 				 
 				</p><pre class="prettyprint lang-xtend">
-switch numberAsText {
-  case &apos;zero&apos; : 1
-  case &apos;one&apos; : 1
-  case &apos;two&apos; : 2
-  ...
-  case &apos;nine&apos; : 9
-  default : er
-}</pre><p>
-				the main expression <code>numberAsText</code> is evaluated first and then compared to each case sequentially.
-				If the case expression is of type <code>boolean</code>, the case matches if the expression evaluates
-				to true. If it&apos;s not of type <code>boolean</code> it&apos;s compared to the value from the main expression using <code>Object.equals(Object)</code>.If a case is a match, that is it evaluates to <code>true</code> or the result equals the one we are switching
-				over, the case expression after the colon is evaluated and is the result of the whole expression.Another Example, with mixed <code>boolean</code> and <code>Object.equals(Object)</code> cases:</p><pre class="prettyprint lang-xtend">
 switch myString {
   case myString.length&gt;5 : "a long string."
   case &apos;some&apos; : "It&apos;s some string."
   default : "It&apos;s another short string."
 }</pre><p>
+				the main expression <code>numberAsText</code> is evaluated first and then compared to each case sequentially.
+				If the case expression is of type <code>boolean</code>, the case matches if the expression evaluates
+				to true. If it&apos;s not of type <code>boolean</code> it&apos;s compared to the value from the main expression using <code>Object.equals(Object)</code>.If a case is a match, that is it evaluates to <code>true</code> or the result equals the one we are switching
+				over, the case expression after the colon is evaluated and is the result of the whole expression.
 				</p>
 				<!-- subsection -->
-				<section id="Section2_10">
+				<section id="Section2_13">
 				<h3>Type guards</h3>
 				<p>
-				In addition to the case guards one can add a so called <strong>Type Guard</strong> which is syntactically just a
-				<a href="#types">type reference</a> preceding an optional case keyword. The cool thing is that the value is automatically down casted
+				Instead if or in addition to the case guard you can have a so called <strong>Type Guard</strong>. That is syntactically just a
+				<a href="#types">type reference</a>. The cool thing is that the value is automatically down casted
 				in subsequent expressions. Example:</p><pre class="prettyprint lang-xtend">
 def length(Object x) {
   switch x {
@@ -1610,11 +1578,10 @@ def length(Object x) {
     default : -1
   }
 }</pre><p>
-				Only if the switch value passes a type guard, i.e. an instanceof operation returns <code>true</code>, the 
-				case&apos;s guard expression is executed using the same semantics explained previously. If the switch 
-				expression contains an explicit declaration of a local variable or the expression references a local 
-				variable, the type guard acts like a cast, that is all references to the switch value will be of the 
-				type specified in the type guard.Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java
+				Only if the switch value is an instance of the specified type, the case&apos;s guard expression is executed using the same 
+				semantics explained previously. If the switch expression contains an explicit declaration of a local variable or the expression 
+				references a local variable, the type guard acts like a cast, that is all references to the switch value will be of the 
+				type specified in the type guard.Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java.
 				</p>
 				</section>
 				<!--  section -->
@@ -1625,7 +1592,7 @@ def length(Object x) {
 				</p><pre class="prettyprint lang-xtend">
 for (T1 variable : arrayOrIterable) expression</pre><p>
 				 
-				is used to execute a certain expression for each element of an array of an instance of 
+				is used to execute a certain expression for each element of an array or an instance of 
 				<code>java.lang.Iterable</code>. The local <code>variable</code> is final, hence canot be updated. The return type of a for loop is <code>void</code>. The type of the local variable can be left out. 
 				In that case it is inferred from the type of the array or <code>java.lang.Iterable</code> returned by the 
 				iterable expression.</p><pre class="prettyprint lang-xtend">
@@ -1680,9 +1647,8 @@ do doSideEffect("foo") while ((i=i+1)&lt;max)</pre><p>
 				<h2>Return Expression</h2>
 				<p>
 				A method or lambda expression automatically returns the value of it&apos;s expression.
-				If it&apos;s a block expression that is the value of the last expression in it.
-				However, sometimes you want to return early or make it explicit, because you feel it 
-				improves readability.The syntax is just like in Java:</p><pre class="prettyprint lang-xtend">
+				If it&apos;s a <a href="#blocks">block expression</a> this is the value of the last expression in it.
+				However, sometimes you want to return early or make it explicit.The syntax is just like in Java:</p><pre class="prettyprint lang-xtend">
 listOfStrings.map(e| {
   if (e==null) 
     return "NULL"
@@ -1694,8 +1660,8 @@ listOfStrings.map(e| {
 				<section id="Xtend_Expressions_Throw">
 				<h2>Throwing Exceptions</h2>
 				<p>
-				Like in Java it is possible to throw <code>java.lang.Throwable</code>. The syntax is exactly the same as 
-				in Java.</p><pre class="prettyprint lang-xtend">
+				Throwing <code>java.lang.Throwable</code>s up the call stack has the same semantics and syntax 
+				as in Java.</p><pre class="prettyprint lang-xtend">
 {
   ...
   if (myList.isEmpty)
@@ -1720,7 +1686,7 @@ try {
   // do stuff
 }</pre><p>
 				For try-catch it&apos;s again beneficial that it is an expression, because you can write code like the following
-				and don&apos;t have to ely on non-final variables:</p><pre class="prettyprint lang-xtend">
+				and don&apos;t have to rely on non-final variables:</p><pre class="prettyprint lang-xtend">
 val name = try {
     person.name
   } catch (NullPointerException e) {
@@ -1733,11 +1699,13 @@ val name = try {
 				<h2>Template Expressions</h2>
 				<p>
 				Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<code>&apos;&apos;&apos;</code>). 
-				A template expression can span multiple lines and expressions can be nested which are evaluated and their toString() representation is automatcially inserted at that opsition.The terminals for interpolated expression are so called guillemets <code>&laquo;expression&raquo;</code>. They read nicely and are not often used
-				the text itself so you seldomly need to escape them. These conflicts are the reason why
-				template languages often use longer character sequences like e.g. <code>&lt;%= expression %&gt;</code> in JSP. The downside is
-				that you&apos;ll use a proper encoding (Always use UTF-8 and you are good).If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
-				content assist. They are also bound to <strong>CTRL+SHIFT+&lt;</strong> and <strong>CTRL+SHIFT+</strong> for <code>&laquo;</code> and <code>&raquo;</code> respectively.On a mac they are bound to <strong>alt+q</strong> (<code>&laquo;</code>) and <strong>alt+Q</strong> (<code>&raquo;</code>).Let us have a look at an example of how a typical method with template expressions looks like:</p><pre class="prettyprint lang-xtend">
+				A template expression can span multiple lines and expressions can be nested which are evaluated and their <code>toString()</code> 
+				representation is automatcially inserted at that position.The terminals for interpolated expression are so called guillemets <code>&laquo;expression&raquo;</code>. They read nicely and are not often used
+				in text so you seldomly need to escape them. These escaping conflicts are the reason why
+				template languages often use longer character sequences like e.g. <code>&lt;%= expression %&gt;</code> in JSP, for the price of worst readability. 
+				The downside with the guillemets in Xtend is that you&apos;ll have to use a proper encoding (Always use UTF-8 and you are good).If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
+				content assist. They are also bound to <strong>CTRL+SHIFT+&lt;</strong> and <strong>CTRL+SHIFT+</strong> for <code>&laquo;</code> and <code>&raquo;</code> respectively.
+				On a mac they are bound to <strong>alt+q</strong> (<code>&laquo;</code>) and <strong>alt+Q</strong> (<code>&raquo;</code>).Let us have a look at an example of how a typical method with template expressions looks like:</p><pre class="prettyprint lang-xtend">
 def someHTML(String content) &apos;&apos;&apos;
   &lt;html&gt;
     &lt;body&gt;
@@ -1747,7 +1715,7 @@ def someHTML(String content) &apos;&apos;&apos;
 &apos;&apos;&apos;</pre><p>
 				As you can see, template expressions can be used as the direct body of a method.
 				If an interpolation expression evaluates to <code>null</code> an empty string is added.Template expressions can occur everywhere. 
-				Here&apos;s an example showing it in conjunction the powerful <a href="#switchExpression">switch expression</a>:</p><pre class="prettyprint lang-xtend">
+				Here&apos;s an example showing it in conjunction with the powerful <a href="#switchExpression">switch expression</a>:</p><pre class="prettyprint lang-xtend">
 def toText(Node n) {
   switch n {
     Contents : n.text
@@ -1799,10 +1767,10 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
     &lt;/body&gt;
   &lt;/html&gt;
 &apos;&apos;&apos;</pre><p>
-				The for statement also allows to specify what to prepend (<code>BEFORE</code>), put in-between (<code>SEPARATOR</code>), and what to
+				The for statement optionally allows to specify what to prepend (<code>BEFORE</code>), put in-between (<code>SEPARATOR</code>), and what to
 				put at the end (<code>AFTER</code>) of all iterations. <code>BEFORE</code> and <code>AFTER</code>
 				are only executed if there is at least one iteration. (<code>SEPARATOR</code>) is only added between
-				iterations, that it is executed if there are more than one iterations.Here&apos;s an example:</p><pre class="prettyprint lang-xtend">
+				iterations, that it is executed if there are at least two iterations.Here&apos;s an example:</p><pre class="prettyprint lang-xtend">
 def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
   &lt;html&gt;
     &lt;body&gt;
@@ -1822,7 +1790,7 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
 				<section id="templateType">
 				<h3>Typing</h3>
 				<p>
-				The template expression is of type <code class="prettyprint lang-java">java.lang.CharSequence</code> but autocoerces to <code class="prettyprint lang-java">java.lang.String</code>
+				The template expression is of type <code class="prettyprint lang-java">java.lang.CharSequence</code> but auto-convertes to <code class="prettyprint lang-java">java.lang.String</code>
 				if that is the expected target type.
 				</p>
 				<!-- subsection -->
@@ -1861,7 +1829,7 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
 				<tr><td>
 				      <pre class="prettyprint lang-xtend">
 class Template {
-  print(Node n) &apos;&apos;&apos;
+  def print(Node n) &apos;&apos;&apos;
     node &laquo;n.name&raquo; {}
   &apos;&apos;&apos;
 }</pre>
@@ -1880,7 +1848,7 @@ node NodeName {}</pre>
 				<tr><td>
 				      <pre class="prettyprint lang-xtend">
 class Template {
-  print(Node n) &apos;&apos;&apos;
+  def print(Node n) &apos;&apos;&apos;
     node &laquo;n.name&raquo; {
       &laquo;IF hasChildren&raquo;
         &laquo;n.children.map[print]&raquo;
