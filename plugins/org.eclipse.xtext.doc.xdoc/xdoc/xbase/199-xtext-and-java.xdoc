@@ -31,12 +31,13 @@ fragment = xbase.XbaseGeneratorFragment {}
 ]
 
 To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and
-perm gen space. We recommend at least 
+PermGen space. We recommend at least 
 
 code[-Xmx512m -XX:MaxPermSize=128m] 
 
 in the e[VM Arguments] section of the e[Arguments] tab of the run configuration. If you are experiencing ambiguity 
-warnings from Antlr, the ref:antlr_errors[usual countermeasures] apply.
+warnings from Antlr, the ref:antlr_errors[usual countermeasures] apply. The launch configuration that
+you get with a new Xtext project is already configured properly.
 
 section-ref[jvmtypes]
 

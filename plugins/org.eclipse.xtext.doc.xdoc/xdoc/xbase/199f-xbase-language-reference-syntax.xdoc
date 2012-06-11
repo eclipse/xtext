@@ -7,9 +7,9 @@ lexical syntax described in the following.
 section3:Xbase_Syntax_Identifiers[Identifiers]
 
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
-Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
+identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
 while having less ambiguities. They start with a letter e[a]-e[z], e[A]-e[Z] or an underscore followed
-by more of these characters or any of the digits e[0]-e[9]. 
+by more of these characters or any digit e[0]-e[9]. 
 
 section4:Xbase_Syntax_EscapedIdentifiers[Escaped Identifiers]
 
@@ -41,7 +41,7 @@ ul[
 section3:Xbase_Syntax_Comments[Comments]
 
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments]).
+The syntax is the same as the one known from Java (see link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.7][§ 3.7 Comments]).
 
 
 section3:Xbase_Syntax_Whitespace[White Space]

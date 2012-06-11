@@ -1,12 +1,12 @@
 section:jvmtypes[Referring to Java Elements using JVM Types]
 
-A common use case when developing languages is the requirement to refer to existing concepts of other 
+A common case when developing languages is the requirement to refer to existing concepts of other 
 languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful
-to have access to the available types of the Java Virtual Machine. The JVM types Ecore model enables
+to have access to the available types of the Java Virtual Machine as well. The JVM types Ecore model enables
 clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their 
 fields and methods. Basically every information about the structural concepts of the Java type system
 is available via the JVM types. This includes annotations and their specific values and enumeration 
-literals as well.
+literals, too.
 
 The implementation will be selected transparently depending on how the client code is 
 executed. If the environment is a plain stand-alone Java or OSGi environment, the e[java.lang.reflect] 
@@ -42,9 +42,8 @@ fields and types that will reveal results in your language files. e[Go To Declar
 and content assist will propose the list of available types. Even the e[import] statements will also
 apply for Java types. 
 
-More sophisticated references to Java types, e.g. generics, array types etc., can be found in the  
-e[Xtype.xtext] grammar in the plug-in e[org.eclipse.xtext.xbase]. 
-
+%%More sophisticated references to Java types, e.g. generics, array types etc., can be found in the  
+%%e[Xtype.xtext] grammar in the plug-in e[org.eclipse.xtext.xbase]. 
 section2[Customization Points]
 
 There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:
