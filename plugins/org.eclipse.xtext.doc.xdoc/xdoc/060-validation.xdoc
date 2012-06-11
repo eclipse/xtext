@@ -193,7 +193,7 @@ While the first option has the advantages that you can edit your models in your 
 the second option has the advantage that you can create partial models.
 
 To run the codeRef[org.eclipse.xtext.validation.Check][@Check-methods] and ensure they raise the intended errors and warnings, you can utilize 
-codeRef[org.eclipse.xtext.junit.validation.ValidatorTester] as shown by the following example:
+codeRef[org.eclipse.xtext.junit4.validation.ValidatorTester] as shown by the following example:
 
 Validator:
 
@@ -240,9 +240,9 @@ code[Java][public class MyLanguageValidatorTest extends AbstractXtextTests {
 This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit 
 whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the code[Java][setUp()]-method 
 before each test case and thereby helps to create some common state. In this example, the validator 
-is instantiated by means of Google Guice. As we inherit from the codeRef[org.eclipse.xtext.junit.AbstractXtextTests]
+is instantiated by means of Google Guice. As we inherit from the codeRef[org.eclipse.xtext.junit4.AbstractXtextTests]
 there are a plenty of useful methods available and the state of the global EMF singletons will be restored in the
-method code[Java][tearDown()]. Afterwards, the codeRef[org.eclipse.xtext.junit.validation.ValidatorTester] 
+method code[Java][tearDown()]. Afterwards, the codeRef[org.eclipse.xtext.junit4.validation.ValidatorTester] 
 is created and parameterized with the actual validator. It acts as a wrapper for the validator, 
 ensures that the validator has a valid state and provides convenient access to the validator itself 
 (code[Java][tester.validator()]) as well as to the utility classes which assert diagnostics created by the validator 
@@ -254,7 +254,7 @@ code[Java][validate(model)] leaves it to the framework to call the applicable co
 side-effects between tests, it is recommended to call the codeRef[org.eclipse.xtext.validation.Check][@Check-methods] directly.
 
 code[Java][diagnose()] and code[Java][validate(model)] return an object of type 
-codeRef[org.eclipse.xtext.junit.validation.AssertableDiagnostics] which provides 
+codeRef[org.eclipse.xtext.junit4.validation.AssertableDiagnostics] which provides 
 several e[assert]-methods to verify whether the expected diagnostics are present:
 
 ul[
@@ -268,9 +268,9 @@ ul[
 		error code and messageFragment.]
 	item[code[Java][assertAll(DiagnosticPredicate... predicates)]: Allows to describe multiple diagnostics at the 
 		same time and verifies that all of them are present. Class 
-		codeRef[org.eclipse.xtext.junit.validation.AssertableDiagnostics] contains static code[Java][error()] and 
+		codeRef[org.eclipse.xtext.junit4.validation.AssertableDiagnostics] contains static code[Java][error()] and 
 		code[Java][warning()] methods which help to create the needed 
-		codeRef[org.eclipse.xtext.junit.validation.AssertableDiagnostics$DiagnosticPredicate]. Example: 
+		codeRef[org.eclipse.xtext.junit4.validation.AssertableDiagnostics$DiagnosticPredicate]. Example: 
 		code[Java][assertAll(error(123), warning("some part of the message"))]. ]
 	item[code[Java][assertAny(DiagnosticPredicate predicate)]: Asserts that a diagnostic exists which matches the predicate.]
 ]
