@@ -32,11 +32,11 @@ ol[
 		The actual test case is pretty straight forward with Xtend. The utility class 
 		e[org.eclipse.xtext.junit4.util.ParseHelper] allows to parse an arbitrary string into a
 		e[Domainmodel]. The model itself can be traversed and checked afterwards. A static import of
-		codeRef[junit.framework.Assert] leads to concise and readable test cases.
+		codeRef[org.junit.Assert] leads to concise and readable test cases.
 		
 		code[Xtend2][
 			import org.eclipse.xtext.junit4.util.ParseHelper
-			import static junit.framework.Assert.*
+			import static org.junit.Assert.*
 			
 			...
 		
