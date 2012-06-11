@@ -93,9 +93,9 @@ code[
 </plugin>
 ]
 
-As you see the outputDirectory can be specified to match the default of the Eclipse plug-in (xtend-gen). Of course you can also change the configuration
-in Eclipse to match the Maven default (generated-sources). To do so right-click on the project and select 'Properties' or if you prefer a global setting choose Eclipse->Preferences.
-In the category 'Xtend/Compiler' enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+As you see the e[outputDirectory] can be specified to match the default of the Eclipse plug-in (e[xtend-gen]). Of course you can also change the configuration
+in Eclipse to match the Maven default (e[generated-sources]). To do so right-click on the project and select e[Properties] or if you prefer a global setting choose e[Eclipse->Preferences].
+In the category e[Xtend/Compiler] enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
 
 img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclipse][][]
 
@@ -103,7 +103,7 @@ section2:library[The Runtime Library]
 
 The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
 to existing classes and interfaces from the JDK. The class codeRef[org.eclipse.xtext.xbase.lib.InputOutput]
-providing the method println() being one of them. 
+providing the method code[<T> T println(T obj)] being one of them. 
 
 The only surprising fact in the generated Java code may be the library class . Many 
 features of Xtend are not built into the language itself but provided via the library
@@ -127,6 +127,9 @@ code[Xtend][
 
 Many operators to concat collections or to do arithmetics with types like code[BigDecimal] are also available.
 
+You might want to have a look at the link[http://xtend-lang.org/api/2.3.0/index.html][JavaDoc API] to see what's
+available.
+
 section:GettingStarted[Getting Started]
 
 The first thing you want to see in any language is the ubiquitous "Hello World" example. 
@@ -140,12 +143,12 @@ code[Xtend][
 ]
 
 You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the code[Xtend][def]
-keyword for declaring a method. Also as in Java it's mandatory to define a class and a main method as the entry point for an application. 
+keyword for declaring a method. Also like in Java it's mandatory to define a class and a main method as the entry point for an application. 
 Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
 as you will learn in a moment.
 
 An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-translate it to Java code. You'll find it in a source folder e[xtend-gen], which is of course configurable.
+translate it to Java code. By default you'll find it in a source folder e[xtend-gen], which is of course configurable.
 The hello world example is translated to the following Java code:
 code[Java][
   // Generated Java Source Code
@@ -161,31 +164,28 @@ code[Java][
 You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
 about the missing library if it's not on the classpath and provide a quick fix to add it.
 
-The next thing you might want to do is to materialize one of the example projects.
-To do so right click anywhere into the e[Navigator] view in Eclipse and select e[New -> Example...].
+The next thing you might want to do is materializing one of the example projects into your workspace.
+To do so right click anywhere in the e[Navigator] view in Eclipse and select e[New -> Example...].
 
 In the upcoming dialog you'll find two examples for Xtend:
 
 ul[
-  item[e[Xtend Introductory Examples] contains a couple of example code snippets ilustrating certain
-  aspects and strength of Xtend. 
-  It for instance shows how to build a builder API or an API which allows you to write the following:
+  item[e[Xtend Introductory Examples] contains a couple of example code snippets illustrating certain
+  aspects and strengths of Xtend. 
+  It for instance shows how to build a builder API or an API which allows for writing code like this:
   code[Xtend][
     assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)
   ]
   Also the ref:moviesExample[the movies example] explained in detail in ref:moviesExample[the next section]
   is included here.]
   item[e[Xtend Solutions For Euler] contains solutions to a lot of the problems you'll find at link[http://projecteuler.net/][Project Euler's website].
-   These examples are leveraging the whole expressive power of Xtend for instance Problem 1 can be solved
-   with the expression
+   These examples are leveraging the whole expressive power of Xtend. For instance link[http://projecteuler.net/problem=1][Euler Problem 1] can be solved
+   with the following expression :
    code[Xtend][
      (1..999).filter\[ i | i % 3 == 0 || i % 5 == 0\].reduce\[i1, i2 | i1 + i2\]
    ]
-   which you might want to compare with link[http://v1.pradeepgowda.com/euler/euler001.html][solutions in other languages].
    ]
 ]
-
-img[images/materialize-example.png][Installing The Example Project][][]
 
 section2:moviesExample[The Movies Example (src/examples6/Movies.xtend)]
 
@@ -209,8 +209,7 @@ ol[
   item[categories]
 ]
  
-Because we want to work with this data in an object oriented and statically typed manner, we 
-might want to start by declaring a datatype code[Movie]:
+Let's define a data type code[Movie] representing a data set:
 
 code[Xtend][
 @Data class Movie {
@@ -242,17 +241,17 @@ import java.util.Set
 import static extension com.google.common.io.CharStreams.*
 
 class Movies {
-	
-	val movies = new FileReader('data.csv').readLines.map\[ line |
-		val segments = line.split('  ').iterator
-		return new Movie(
-			segments.next, 
-			Integer::parseInt(segments.next), 
-			Double::parseDouble(segments.next), 
-			Long::parseLong(segments.next), 
-			segments.toSet
-		)
-	\]
+  
+  val movies = new FileReader('data.csv').readLines.map\[ line |
+    val segments = line.split('  ').iterator
+    return new Movie(
+      segments.next, 
+      Integer::parseInt(segments.next), 
+      Double::parseDouble(segments.next), 
+      Long::parseLong(segments.next), 
+      segments.toSet
+    )
+  \]
 }
 ]
 
@@ -262,64 +261,85 @@ We want the field to be final, so we declare it as a value using the keyword cod
 
 The initialization on the right hand side first creates a fresh instance of code[java.io.FileReader].
 Then the method code[readLines()] is invoked on that instance. But if you have a look at code[FileReader] you won't find
-such a method. It's a static method coming from Google Guava's code[CharStream] and its static methods
-are imported as ref:extensionImports[extension methods], which allows us to use this readable syntax.
+such a method, because code[readLines()] is in fact a static method from Google Guava's code[CharStream] which was imported 
+as an ref:extensionImports[extension], which allows us to use this readable syntax.
+
+code[Xtend][
+import static extension com.google.common.io.CharStreams.*
+]
 
 code[CharStream.readLines(Reader)] returns a code[List<String>] on which we call another extension method called code[map].
-That one is defined in the ref:library[runtime library] (code[ListExtensions.map(...)] and is so useful that it is always imported and
+That one is defined in the ref:library[runtime library] (code[ListExtensions.map(...)] and is always imported and
 therefore automatically available on all lists. The code[map] extension expects a function as a parameter.
-Map basically invokes that function for each value in the list and returns a list containing the results of the function incovations.
+Map basically invokes that function for each value in the list and returns another list containing the results of the function incovations.
 
 Function objects are created using ref:lambdas[lambda expression] (the code in squared brackets).
 Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
-separator and calling iterator on the result. As you might know code[java.lang.String.split(String)]
-returns a string array (code[String\[\]]). Xtend ref:conversionRules[auto-convertes arrays to lists] when needed, which is the case when we 
+separator (two whitespaces) and calling iterator on the result. As you might know code[java.lang.String.split(String)]
+returns a string array (code[String\[\]]), which Xtend ref:conversionRules[auto-convertes to a list] when we 
 call code[Iterable.iterator()] on it.
+
+code[Xtend][
+val segments = line.split('  ').iterator
+]
 
 Now we use the iterator to create an instance of code[Movie].
 The data type conversion (e.g. code[String] to code[Xtend][int]) is done by calling ref:staticAccess[static methods] from the wrapper types. 
-The rest of the iterable is turned into a set using the extension methods code[Iterators.toSet(Iterator<T>)]
+The rest of the iterable is turned into a set using the extension method code[Iterators.toSet(Iterator<T>)]
 and contains all the categories the movie is associated with.
 
-section3[AnalysingThe Data]
-
-Now that we've the text file turned into a code[List<Movie>], we are ready to do some analysis on it.
-We use e[Junit4] to make the individual analysis executable. 
-The simplest example is counting the number of action movies:
-
 code[Xtend][
-  	@Test def numberOfActionMovies() {
-		assertEquals(828, movies.filter\[categories.contains('Action')\].size)
-	}
+return new Movie (
+  segments.next, 
+  Integer::parseInt(segments.next), 
+  Double::parseDouble(segments.next), 
+  Long::parseLong(segments.next), 
+  segments.toSet
+)
 ]
 
-It's using the extension method code[IterableExtensions.filter] to filter the movies. The lambda expression
-checks whether the current movie's categories contains the entry code[Xtend]['Action']. Note that unlike
-the lambda we used to turn the lines in the file into movies, we haven't declared a parameter name this time. 
+section3[Answering som Questions]
+
+Now that we've the text file turned into a code[List<Movie>], we are ready to execute some queries against it.
+We use e[Junit] to make the individual analysis executable.
+
+section4[What's The Number Of Action Movies?]
+
+code[Xtend][
+  @Test def numberOfActionMovies() {
+    assertEquals(828, 
+      movies.filter\[categories.contains('Action')\].size)
+  }
+]
+
+First the movies are code[filter]ed. The lambda expression checks whether the current movie's categories contains 
+the entry code[Xtend]['Action']. Note that unlike the lambda we used to turn the lines in the file into movies, we 
+haven't declared a parameter name this time. 
 We could have written 
 code[Xtend][
   movies.filter\[ movie | movie.categories.contains('Action')\].size
 ]
-but since we left out the name and the vertical bar the variable is automatically named code[it] which
-(like code[this]) is an ref:implicitVariables[implicit variable]. That's why we can write either 
+but since we left out the name and the vertical bar the variable is automatically named code[Xtend][it] which
+(like code[Xtend][this]) is an ref:implicitVariables[implicit variable]. That's why we can write either
+
 code[Xtend][
-  movies.filter\[it.categories.contains('Action')\].size
+  movies.filter\[ it.categories.contains('Action')\].size
 ]
 or 
 code[Xtend][
   movies.filter\[categories.contains('Action')\].size
 ].
 
-Lastly we call code[size()] on the resulting iterable, which again is an extension method, because code[java.lang.Iterable]
-doesn't define such a method. It's defined in codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions].
+Lastly we call code[size] on the resulting iterable, which also is an extension method defined in 
+codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions].
 
-The second analysis is about finding the year the best movie from the 80ies was released.
-Here's the code:
+section4[Question 2: What's The Year The Best Movie From The 80ies Was Released?]
 
 code[Xtend][
-  	@Test def void yearOfBestMovieFrom80ies() {
-		assertEquals(1989, movies.filter\[(1980..1989).contains(year)\].sortBy\[rating\].last.year)
-	}
+  @Test def void yearOfBestMovieFrom80ies() {
+    assertEquals(1989, 
+      movies.filter\[(1980..1989).contains(year)\].sortBy\[rating\].last.year)
+  }
 ]
 
 Here we code[filter] all movies where the year is not included in the range from 1980 to 1989 (the 80ies).
@@ -334,63 +354,24 @@ code[Xtend][
   movies.filter\[(1980..1989).contains(year)\].sortBy\[-rating\].head.year
 ]
 
-Btw. the calls to code[movie.year] as well as code[movie.categories] in the previous example in fact access the corresponding 
+Note that first sorting and then taking the last or first is slightly more expnsive than needed. We could
+have used the method code[reduce] instead to find the best movie, which would be more efficient. Maybe
+you want to try it on your own?
+
+The calls to code[movie.year] as well as code[movie.categories] in the previous example in fact access the corresponding 
 ref:propertyAccess[getter methods].
 
-The last analysis you'll find in the example is a bit trickier. It also uses a couple of additional extension methods such 
-as codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions]code[.<T>take(Iterable<T>, int)] and codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions]code[.reduce(...)].
-I'll leave it up to you to understand how it works, here's the full code:
+section4[Question 3: What's The The Sum Of All Votes Of The Top Two Movies?]
 
 code[Xtend][
-package example6
+  @Test def void sumOfVotesOfTop2() {
+    val long sum = movies.sortBy\[-rating\].take(2).map\[numberOfVotes\].reduce\[a, b| a + b\]
+    assertEquals(47_229L, sum)
+  }
+]
 
-import org.junit.Test
-import java.io.FileReader
-import java.util.Set
-import static org.junit.Assert.*
-import static extension com.google.common.io.CharStreams.*
+First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their code[numberOfVotes] using the code[map] function. 
+Now we have a code[List<Long>] which can be reduced to a single code[Integer] by adding the values.
 
-class Movies {
-	
-	/**
-	 * @return the total number of action movies
-	 */ 
-	@Test def void numberOfActionMovies() {
-		assertEquals(828, movies.filte\[categories.contains('Action')\].size)
-	}
-	
-	/**
-	 * @return the year the best rated movie of 80ies (1980-1989) was released.
-	 */
-	@Test def void yearOfBestMovieFrom80ies() {
-		assertEquals(1989, movies.filter\[(1980..1989).contains(year)\].sortBy\[rating\].last.year)
-	}
-	
-	/**
-	 * @return the sum of the number of votes of the two top rated movies.
-	 */
-	@Test def void sumOfVotesOfTop2() {
-		val long movies = movies.sortBy\[-rating\].take(2).map\[numberOfVotes\].reduce\[a, b| a + b\]
-		assertEquals(47_229, movies)
-	}
-	
-	val movies = new FileReader('data.csv').readLines.map\[ line |
-		val segments = line.split('  ').iterator
-		return new Movie(
-			segments.next, 
-			Integer::parseInt(segments.next), 
-			Double::parseDouble(segments.next), 
-			Long::parseLong(segments.next), 
-			segments.toSet
-		)
-	\]
-}
-
-@Data class Movie {
-	String title
-	int year
-	double rating
-	long numberOfVotes
-	Set<String> categories 
-}]
+You could also use code[reduce] instead of code[map] and code[reduce]. Do you know how?
 

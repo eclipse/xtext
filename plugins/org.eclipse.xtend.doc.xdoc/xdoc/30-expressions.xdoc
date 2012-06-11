@@ -1,6 +1,6 @@
 chapter:Xtend_Expressions[Expressions]
 
-Unlike Java in Xtend there are no statements. Instead, everything is an expression and has a return value. That
+Xtend there are no statements. Instead, everything is an expression and has a return value. That
 allows to compose your code in intersting ways. For example, you can have a
 code[Xtend][try catch] expression on the right hand side of an assignment: 
 code[Xtend][
@@ -27,8 +27,8 @@ section2:stringLiterals[String Literals]
 
 A string literal is of type code[java.lang.String] (just like in Java).
 String literals are enclosed by a pair of single quotes or double quotes. We mostly use single quotes
-because the signal-tonoise ration is a bit better, but generally you should use the terminals which are
-least likely occure uin the actual string. Special characters can be quoted with a backslash or defined using
+because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
+least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 Java's unicode notation. Contrary to Java, strings can span multiple lines.
 
 code[Xtend][
@@ -76,7 +76,6 @@ code[Xtend][
   0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
 ]
 
-
 section2:booleanLiteral[Boolean Literals]
 
 There are two boolean literals, code[Xtend][true] and code[Xtend][false] which correspond to their 
@@ -85,8 +84,7 @@ Java counterpart of type code[Xtend][boolean].
 
 section2:nullLiteral[Null Literal]
 
-The null pointer literal is code[Xtend][null]. It is a member of any reference type and
-the only member of the type code[java.lang.Void], i.e. has the same semantics as in Java.
+The null pointer literal is code[Xtend][null] has exactly the same semantics as in Java.
 
 
 section2:typeLiteral[Type Literals]
@@ -99,7 +97,7 @@ code[Xtend][
 
 section:typeCasts[Type Casts]
 
-A type cast behaves exactly like casts in Java, but have a slightly more readable syntax.
+A type cast behaves exactly like casts in Java, but has a slightly more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
 
 The conformance rules for casts are defined in the 
@@ -126,7 +124,7 @@ code[Xtend][
   val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 ]
 
-The following defines the operators and the corresponding method signatures / expressions.
+This is the complete list of all available operators and their corresponding method signatures.
 
 table[
   tr[td[code[e1 += e2]]       td[code[e1.operator_add(e2)]]]
@@ -194,7 +192,7 @@ ol[
 ]
 
 Still you can overload these operators for your types or even override it for booleans, in which case
-both operands are always evaluated and the defined method is invoked.
+both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 
 section2[Examples]
 
@@ -236,9 +234,8 @@ code[Java][
 The setter is only used if the field is not accessible from the given context. That's why the 
 ref:propertyAnnotation[@Property annotation] would rename the local field to code[_myProperty].
 
-In return type of an assignment corresponds to the return type of the mapped expression, i.e. if it's
-translated to a simple Java assignment it yields the value of the right hand side, if it's translated
-to a setter method it yields whatever the setter method returns.
+The return type of an assignment is the type of the right hand side, in case it's a simple assignment.
+If it's translated to a setter method it yields whatever the setter method returns.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -263,11 +260,11 @@ code[Xtend][
 ]
 code[Xtend][
   {
-    var x = greeting();
+    var x = greeting
     if (x.equals("Hello ")) {
-      x+"World!"; 
+      x + "World!" 
     } else {
-      x;
+      x
     }
   }
 ]
@@ -295,7 +292,7 @@ code[Xtend][
 }
 ]
 
-Shadowing variables from outer scopes is not allowed, the only exception being the 
+Shadowing variables from outer scopes is not allowed, the only exception is the 
 ref:implicitVariables[implicit variable code[Xtend][it]].
 
 Variables declared outside a lambda expression using the code[Xtend][var] keyword are not accessible from within a
@@ -320,14 +317,13 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:featureCalls[Field Access and Method Invocation]
 
-As in Java, a simple name can refer to a local field, variable or parameter. In addition
-it can point to a method with zero arguments, since the parenthesis are optional if no arguments are
-passed. 
+A simple name can refer to a local field, variable or parameter. In addition
+it can point to a method with zero arguments, since empty parenthesis are optional. 
 
 section2:propertyAccess[Property Access]
 
-In addition if there is no field with the given name accessible and also no method with name and zero parameters
-accessible, it binds to a corresponding Java-Bean getter method if available :
+If there is no field with the given name and also no method with the name and zero parameters
+accessible, a simple name binds to a corresponding Java-Bean getter method if available :
 
 code[Xtend][
   myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)
@@ -359,7 +355,7 @@ Another speciality of the variable code[Xtend][it] is that it can be shadowed. T
 when used together with ref:lambdas[lambda expressions].
 
 As code[Xtend][this] is bound to the surrounding object in Java, code[Xtend][it] can be used
-in finer-grained constructs such as function parameters. That is why code[Xtend][it.myProperty] has 
+in finer-grained constructs such as ref:lambdas[lambda expressions]. That is why code[Xtend][it.myProperty] has 
 higher precedence than code[Xtend][this.myProperty].
 
 section2:staticAccess[Static Access]
@@ -370,6 +366,8 @@ code[Xtend][
    MyClass::myField
    MyClass::myMethod('foo')
 ]
+
+Alternatively you could import the method using a ref:imports[static import].
 
 section2:nullSafeFeatureCalls[Null-Safe Feature Call]
 
@@ -384,7 +382,7 @@ code[Java][
 
 one can write
 code[Xtend][
-  myRef?.doStuff()
+  myRef?.doStuff
 ]
 
 
@@ -405,7 +403,7 @@ section:lambdas[Lambda Expressions]
 
 A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
 a Java developer it's best to think of a lambda expression as an anonymous class, i.e. 
-when you write the following Java :
+like in the following Java code :
 
 code[Java][
   // Java Code!
@@ -418,7 +416,7 @@ code[Java][
   });
 ]
 
-This kind of anonymous classes can be found in many libraries and have always been the poor-man's replacement
+This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man's replacement
 for lambda expressions in Java. 
 
 Xtend not only supports lambda expressions, but offers an extremely dense syntax for it. That is the
@@ -431,7 +429,7 @@ code[Xtend][
   \])
 ]
 
-As you might have guessed, a lambda expression is surrounded by square brackets (borrowed from Smalltalk).
+As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
 Also a lambda expression like a method declares parameters. The lambda above has one parameter called code[e] which is of
 type code[ActionEvent]. You don't have to specify the type explicitly because it can be inferred from
 the context:
@@ -478,7 +476,7 @@ code[Xtend][
 ]
 
 Since you can leave out empty parenthesis methods wich get a lambda as the single argument you can reduce
-the code to write:
+the code above further more:
 
 code[Xtend][
   textField.addActionListener\[
@@ -532,22 +530,21 @@ An expression
 code[Xtend][
   if (p) e1 else e2
 ] 
-results in either the value code[e1] or code[e2] 
-depending on whether the predicate code[p] evaluates to code[Xtend][true] or code[Xtend][false]. 
-The else part is optional which is a shorthand for code[Xtend][else null]. That means 
+results in either the value code[e1] or code[e2] depending on whether the predicate code[p] evaluates 
+to code[Xtend][true] or code[Xtend][false]. The else part is optional which is a shorthand for code[Xtend][else null]. That means 
 
 code[Xtend][
   if (foo) x 
 ]
 
-is the a short hand for
+is a short hand for
 
 code[Xtend][
   if (foo) x else null
 ]
 
 The type of an if expression is the common super type of the return types code[T1] and code[T2] 
-of the two expression code[e1] and code[e2]. 
+of the two expression code[e1] and code[e2].
 
 While the code[Xtend][if]-expression has the syntax of Java's if statement it behaves more like Java's ternary operator 
 (code[Java][predicate ? thenPart : elsePart]), because it is an expression and returns a value.
@@ -568,14 +565,11 @@ compare the value in the case with the one you are switching over.
 Given the following example:
  
 code[Xtend][
-switch numberAsText {
-  case 'zero' : 1
-  case 'one' : 1
-  case 'two' : 2
-  ...
-  case 'nine' : 9
-  default : er
-}
+  switch myString {
+    case myString.length>5 : "a long string."
+    case 'some' : "It's some string."
+    default : "It's another short string."
+  }
 ]
 
 the main expression code[numberAsText] is evaluated first and then compared to each case sequentially.
@@ -585,20 +579,10 @@ to true. If it's not of type code[Xtend][boolean] it's compared to the value fro
 If a case is a match, that is it evaluates to code[Xtend][true] or the result equals the one we are switching
 over, the case expression after the colon is evaluated and is the result of the whole expression.
 
-Another Example, with mixed code[Xtend][boolean] and code[Object.equals(Object)] cases:
-
-code[Xtend][
-  switch myString {
-    case myString.length>5 : "a long string."
-    case 'some' : "It's some string."
-    default : "It's another short string."
-  }
-]
-
 section2[Type guards]
 
-In addition to the case guards one can add a so called e[Type Guard] which is syntactically just a
-ref:types[type reference] preceding an optional case keyword. The cool thing is that the value is automatically down casted
+Instead if or in addition to the case guard you can have a so called e[Type Guard]. That is syntactically just a
+ref:types[type reference]. The cool thing is that the value is automatically down casted
 in subsequent expressions. Example:
 
 code[Xtend][
@@ -611,13 +595,12 @@ code[Xtend][
   }
 ]
 
-Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the 
-case's guard expression is executed using the same semantics explained previously. If the switch 
-expression contains an explicit declaration of a local variable or the expression references a local 
-variable, the type guard acts like a cast, that is all references to the switch value will be of the 
+Only if the switch value is an instance of the specified type, the case's guard expression is executed using the same 
+semantics explained previously. If the switch expression contains an explicit declaration of a local variable or the expression 
+references a local variable, the type guard acts like a cast, that is all references to the switch value will be of the 
 type specified in the type guard.
 
-Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java
+Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -627,7 +610,7 @@ The for loop
 code[Xtend][
   for (T1 variable : arrayOrIterable) expression
 ] 
-is used to execute a certain expression for each element of an array of an instance of 
+is used to execute a certain expression for each element of an array or an instance of 
 code[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
 
 The return type of a for loop is code[Xtend][void]. The type of the local variable can be left out. 
@@ -693,9 +676,8 @@ code[Xtend][
 section:Xtend_Expressions_Return[Return Expression]
 
 A method or lambda expression automatically returns the value of it's expression.
-If it's a block expression that is the value of the last expression in it.
-However, sometimes you want to return early or make it explicit, because you feel it 
-improves readability.
+If it's a ref:blocks[block expression] this is the value of the last expression in it.
+However, sometimes you want to return early or make it explicit.
 
 The syntax is just like in Java:
 
@@ -712,8 +694,8 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_Throw[Throwing Exceptions]
 
-Like in Java it is possible to throw code[java.lang.Throwable]. The syntax is exactly the same as 
-in Java.
+Throwing code[java.lang.Throwable]s up the call stack has the same semantics and syntax 
+as in Java.
 
 code[Xtend][
 {
@@ -721,9 +703,8 @@ code[Xtend][
   if (myList.isEmpty)
     throw new IllegalArgumentException("the list must not be empty")
   ...
-}   
+}
 ]
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -745,7 +726,7 @@ code[Xtend][
 ]
 
 For try-catch it's again beneficial that it is an expression, because you can write code like the following
-and don't have to ely on non-final variables:
+and don't have to rely on non-final variables:
 
 code[Xtend][
   val name = try {
@@ -760,16 +741,16 @@ code[Xtend][
 section:templates[Template Expressions]
 
 Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (code[''']). 
-A template expression can span multiple lines and expressions can be nested which are evaluated and their toString() representation is automatcially inserted at that opsition.
+A template expression can span multiple lines and expressions can be nested which are evaluated and their code[toString()] 
+representation is automatcially inserted at that position.
 
 The terminals for interpolated expression are so called guillemets code[Xtend][«expression»]. They read nicely and are not often used
-the text itself so you seldomly need to escape them. These conflicts are the reason why
-template languages often use longer character sequences like e.g. code[<%= expression %>] in JSP. The downside is
-that you'll use a proper encoding (Always use UTF-8 and you are good).
+in text so you seldomly need to escape them. These escaping conflicts are the reason why
+template languages often use longer character sequences like e.g. code[<%= expression %>] in JSP, for the price of worst readability. 
+The downside with the guillemets in Xtend is that you'll have to use a proper encoding (Always use UTF-8 and you are good).
 
 If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
 content assist. They are also bound to e[CTRL+SHIFT+<] and e[CTRL+SHIFT+] for code[«] and code[»] respectively.
-
 On a mac they are bound to e[alt+q] (code[«]) and e[alt+Q] (code[»]).
 
 Let us have a look at an example of how a typical method with template expressions looks like:
@@ -788,7 +769,7 @@ As you can see, template expressions can be used as the direct body of a method.
 If an interpolation expression evaluates to code[Xtend][null] an empty string is added.
 
 Template expressions can occur everywhere. 
-Here's an example showing it in conjunction the powerful ref:switchExpression[switch expression]:
+Here's an example showing it in conjunction with the powerful ref:switchExpression[switch expression]:
 
 code[Xtend][
 def toText(Node n) {
@@ -848,10 +829,10 @@ def someHTML(List<Paragraph> paragraphs) '''
 '''
 ]
 
-The for statement also allows to specify what to prepend (code[Xtend][BEFORE]), put in-between (code[Xtend][SEPARATOR]), and what to
+The for statement optionally allows to specify what to prepend (code[Xtend][BEFORE]), put in-between (code[Xtend][SEPARATOR]), and what to
 put at the end (code[Xtend][AFTER]) of all iterations. code[Xtend][BEFORE] and code[Xtend][AFTER]
 are only executed if there is at least one iteration. (code[Xtend][SEPARATOR]) is only added between
-iterations, that it is executed if there are more than one iterations.
+iterations, that it is executed if there are at least two iterations.
 
 Here's an example:
 
@@ -874,7 +855,7 @@ def someHTML(List<Paragraph> paragraphs) '''
 
 section2:templateType[Typing]
 
-The template expression is of type codeRef[java.lang.CharSequence] but autocoerces to codeRef[java.lang.String]
+The template expression is of type codeRef[java.lang.CharSequence] but auto-convertes to codeRef[java.lang.String]
 if that is the expected target type.
 
 
@@ -919,7 +900,7 @@ table[
     td[
       code[Xtend][
 class Template {
-  print(Node n) '''
+  def print(Node n) '''
     node «n.name» {}
   '''
 }
@@ -942,7 +923,7 @@ table[
     td[
       code[Xtend][
 class Template {
-  print(Node n) '''
+  def print(Node n) '''
     node «n.name» {
       «IF hasChildren»
         «n.children.map\[print\]»

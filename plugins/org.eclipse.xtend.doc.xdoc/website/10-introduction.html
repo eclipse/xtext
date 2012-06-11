@@ -205,9 +205,9 @@
 			</div>
 			</p>
 			<p>
-			As you see the outputDirectory can be specified to match the default of the Eclipse plug-in (xtend-gen). Of course you can also change the configuration
-			in Eclipse to match the Maven default (generated-sources). To do so right-click on the project and select 'Properties' or if you prefer a global setting choose Eclipse-&gt;Preferences.
-			In the category 'Xtend/Compiler' enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+			As you see the <em>outputDirectory</em> can be specified to match the default of the Eclipse plug-in (<em>xtend-gen</em>). Of course you can also change the configuration
+			in Eclipse to match the Maven default (<em>generated-sources</em>). To do so right-click on the project and select <em>Properties</em> or if you prefer a global setting choose <em>Eclipse-&gt;Preferences</em>.
+			In the category <em>Xtend/Compiler</em> enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
 			</p>
 			<p>
 			<div class="image" >
@@ -226,7 +226,7 @@
 			<p>
 			The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
 			to existing classes and interfaces from the JDK. The class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/InputOutput.html" title="org.eclipse.xtext.xbase.lib.InputOutput">InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>
-			providing the method println() being one of them. 
+			providing the method <span class="inlinecode">&lt;T&gt;&nbsp;T&nbsp;println(T&nbsp;obj)</span> being one of them. 
 			</p>
 			<p>
 			The only surprising fact in the generated Java code may be the library class . Many 
@@ -264,6 +264,10 @@
 			<p>
 			Many operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available.
 			</p>
+			<p>
+			You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html" >JavaDoc API</a> to see what's
+			available.
+			</p>
 		<a name="GettingStarted" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
@@ -292,13 +296,13 @@
 			</p>
 			<p>
 			You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the <span class="inlinecode"><span class="keyword">def</span></span>
-			keyword for declaring a method. Also as in Java it's mandatory to define a class and a main method as the entry point for an application. 
+			keyword for declaring a method. Also like in Java it's mandatory to define a class and a main method as the entry point for an application. 
 			Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
 			as you will learn in a moment.
 			</p>
 			<p>
 			An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-			translate it to Java code. You'll find it in a source folder <em>xtend-gen</em>, which is of course configurable.
+			translate it to Java code. By default you'll find it in a source folder <em>xtend-gen</em>, which is of course configurable.
 			The hello world example is translated to the following Java code:
 			<div class="literallayout">
 				<div class="incode">
@@ -320,17 +324,17 @@
 			about the missing library if it's not on the classpath and provide a quick fix to add it.
 			</p>
 			<p>
-			The next thing you might want to do is to materialize one of the example projects.
-			To do so right click anywhere into the <em>Navigator</em> view in Eclipse and select <em>New -&gt; Example...</em>.
+			The next thing you might want to do is materializing one of the example projects into your workspace.
+			To do so right click anywhere in the <em>Navigator</em> view in Eclipse and select <em>New -&gt; Example...</em>.
 			</p>
 			<p>
 			In the upcoming dialog you'll find two examples for Xtend:
 			</p>
 			<p>
 			<ul>
-			  <li><em>Xtend Introductory Examples</em> contains a couple of example code snippets ilustrating certain
-			    aspects and strength of Xtend. 
-			    It for instance shows how to build a builder API or an API which allows you to write the following:
+			  <li><em>Xtend Introductory Examples</em> contains a couple of example code snippets illustrating certain
+			    aspects and strengths of Xtend. 
+			    It for instance shows how to build a builder API or an API which allows for writing code like this:
 			    <div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
@@ -342,8 +346,8 @@
 			    Also the <a href="10-introduction.php#moviesExample.php" title="Go to &quot;The Movies Example (src/examples6/Movies.xtend)&quot;">the movies example</a> explained in detail in <a href="10-introduction.php#moviesExample.php" title="Go to &quot;The Movies Example (src/examples6/Movies.xtend)&quot;">the next section</a>
 			    is included here.</li>
 			  <li><em>Xtend Solutions For Euler</em> contains solutions to a lot of the problems you'll find at <a href="http://projecteuler.net/" >Project Euler's website</a>.
-			     These examples are leveraging the whole expressive power of Xtend for instance Problem 1 can be solved
-			     with the expression
+			     These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1" >Euler Problem 1</a> can be solved
+			     with the following expression :
 			     <div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
@@ -352,21 +356,8 @@
 			  	</div>
 			  </div>
 			  
-			     which you might want to compare with <a href="http://v1.pradeepgowda.com/euler/euler001.html" >solutions in other languages</a>.
 			  </li>
 			</ul>
-			</p>
-			<p>
-			<div class="image" >
-			<a class="gallery" rel="prettyPhoto[all]" title="Installing The Example Project" href="images/materialize-example.png">
-				<img src="images/materialize-example.png" 
-					width="600px"
-				/>
-			</a>
-			<div class="caption">
-				Installing The Example Project
-			</div>
-			</div>
 			</p>
 			<a name="moviesExample" ></a>
 			<h2>The Movies Example (src/examples6/Movies.xtend)</h2>
@@ -398,8 +389,7 @@
 			</ol>
 			
 			 
-			Because we want to work with this data in an object oriented and statically typed manner, we 
-			might want to start by declaring a datatype <span class="inlinecode">Movie</span>:
+			Let's define a data type <span class="inlinecode">Movie</span> representing a data set:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -441,17 +431,17 @@
 						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*<br/>
 						<br/>
 						<span class="keyword">class</span>&nbsp;Movies&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;movies&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;FileReader(<span class="string">&apos;data.csv&apos;</span>).readLines.map[&nbsp;line&nbsp;|<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Movie(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.next,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(segments.next),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double::parseDouble(segments.next),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long::parseLong(segments.next),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.toSet<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;movies&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;FileReader(<span class="string">&apos;data.csv&apos;</span>).readLines.map[&nbsp;line&nbsp;|<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Movie(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.next,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double::parseDouble(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long::parseLong(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.toSet<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+						&nbsp;&nbsp;]<br/>
 						}
 					</p>
 				</div>
@@ -465,50 +455,88 @@
 			<p>
 			The initialization on the right hand side first creates a fresh instance of <span class="inlinecode">java.io.FileReader</span>.
 			Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you won't find
-			such a method. It's a static method coming from Google Guava's <span class="inlinecode">CharStream</span> and its static methods
-			are imported as <a href="20-classes-and-functions.php#extensionImports.php" title="Go to &quot;Extension Imports&quot;">extension methods</a>, which allows us to use this readable syntax.
-			</p>
-			<p>
-			<span class="inlinecode">CharStream.readLines(Reader)</span> returns a <span class="inlinecode">List&lt;String&gt;</span> on which we call another extension method called <span class="inlinecode">map</span>.
-			That one is defined in the <a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">runtime library</a> (<span class="inlinecode">ListExtensions.map(...)</span> and is so useful that it is always imported and
-			therefore automatically available on all lists. The <span class="inlinecode">map</span> extension expects a function as a parameter.
-			Map basically invokes that function for each value in the list and returns a list containing the results of the function incovations.
-			</p>
-			<p>
-			Function objects are created using <a href="30-expressions.php#lambdas.php" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> (the code in squared brackets).
-			Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
-			separator and calling iterator on the result. As you might know <span class="inlinecode">java.lang.String.split(String)</span>
-			returns a string array (<span class="inlinecode">String[]</span>). Xtend <a href="15-types.php#conversionRules.php" title="Go to &quot;Conversion Rules&quot;">auto-convertes arrays to lists</a> when needed, which is the case when we 
-			call <span class="inlinecode">Iterable.iterator()</span> on it.
-			</p>
-			<p>
-			Now we use the iterator to create an instance of <span class="inlinecode">Movie</span>.
-			The data type conversion (e.g. <span class="inlinecode">String</span> to <span class="inlinecode"><span class="keyword">int</span></span>) is done by calling <a href="30-expressions.php#staticAccess.php" title="Go to &quot;Static Access&quot;">static methods</a> from the wrapper types. 
-			The rest of the iterable is turned into a set using the extension methods <span class="inlinecode">Iterators.toSet(Iterator&lt;T&gt;)</span>
-			and contains all the categories the movie is associated with.
-			</p>
-			<a name="moviesExample_4" ></a>
-			<h3>AnalysingThe Data</h3>
-			<p>
-			Now that we've the text file turned into a <span class="inlinecode">List&lt;Movie&gt;</span>, we are ready to do some analysis on it.
-			We use <em>Junit4</em> to make the individual analysis executable. 
-			The simplest example is counting the number of action movies:
+			such a method, because <span class="inlinecode">readLines()</span> is in fact a static method from Google Guava's <span class="inlinecode">CharStream</span> which was imported 
+			as an <a href="20-classes-and-functions.php#extensionImports.php" title="Go to &quot;Extension Imports&quot;">extension</a>, which allows us to use this readable syntax.
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						@Test&nbsp;<span class="keyword">def</span>&nbsp;numberOfActionMovies()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(828,&nbsp;movies.filter[categories.contains(<span class="string">&apos;Action&apos;</span>)].size)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			It's using the extension method <span class="inlinecode">IterableExtensions.filter</span> to filter the movies. The lambda expression
-			checks whether the current movie's categories contains the entry <span class="inlinecode"><span class="string">&apos;Action&apos;</span></span>. Note that unlike
-			the lambda we used to turn the lines in the file into movies, we haven't declared a parameter name this time. 
+			<span class="inlinecode">CharStream.readLines(Reader)</span> returns a <span class="inlinecode">List&lt;String&gt;</span> on which we call another extension method called <span class="inlinecode">map</span>.
+			That one is defined in the <a href="10-introduction.php#library.php" title="Go to &quot;The Runtime Library&quot;">runtime library</a> (<span class="inlinecode">ListExtensions.map(...)</span> and is always imported and
+			therefore automatically available on all lists. The <span class="inlinecode">map</span> extension expects a function as a parameter.
+			Map basically invokes that function for each value in the list and returns another list containing the results of the function incovations.
+			</p>
+			<p>
+			Function objects are created using <a href="30-expressions.php#lambdas.php" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> (the code in squared brackets).
+			Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
+			separator (two whitespaces) and calling iterator on the result. As you might know <span class="inlinecode">java.lang.String.split(String)</span>
+			returns a string array (<span class="inlinecode">String[]</span>), which Xtend <a href="15-types.php#conversionRules.php" title="Go to &quot;Conversion Rules&quot;">auto-convertes to a list</a> when we 
+			call <span class="inlinecode">Iterable.iterator()</span> on it.
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Now we use the iterator to create an instance of <span class="inlinecode">Movie</span>.
+			The data type conversion (e.g. <span class="inlinecode">String</span> to <span class="inlinecode"><span class="keyword">int</span></span>) is done by calling <a href="30-expressions.php#staticAccess.php" title="Go to &quot;Static Access&quot;">static methods</a> from the wrapper types. 
+			The rest of the iterable is turned into a set using the extension method <span class="inlinecode">Iterators.toSet(Iterator&lt;T&gt;)</span>
+			and contains all the categories the movie is associated with.
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Movie&nbsp;(<br/>
+						&nbsp;&nbsp;segments.next,&nbsp;<br/>
+						&nbsp;&nbsp;Integer::parseInt(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;Double::parseDouble(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;Long::parseLong(segments.next),&nbsp;<br/>
+						&nbsp;&nbsp;segments.toSet<br/>
+						)
+					</p>
+				</div>
+			</div>
+			</p>
+			<a name="moviesExample_4" ></a>
+			<h3>Answering som Questions</h3>
+			<p>
+			Now that we've the text file turned into a <span class="inlinecode">List&lt;Movie&gt;</span>, we are ready to execute some queries against it.
+			We use <em>Junit</em> to make the individual analysis executable.
+			</p>
+			<a name="moviesExample_4_2" ></a>
+			<h4><p>
+			What's The Number Of Action Movies?
+			</p>
+			</h4>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						@Test&nbsp;<span class="keyword">def</span>&nbsp;numberOfActionMovies()&nbsp;{<br/>
+						&nbsp;&nbsp;assertEquals(828,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;movies.filter[categories.contains(<span class="string">&apos;Action&apos;</span>)].size)<br/>
+						}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			First the movies are <span class="inlinecode">filter</span>ed. The lambda expression checks whether the current movie's categories contains 
+			the entry <span class="inlinecode"><span class="string">&apos;Action&apos;</span></span>. Note that unlike the lambda we used to turn the lines in the file into movies, we 
+			haven't declared a parameter name this time. 
 			We could have written 
 			<div class="literallayout">
 				<div class="incode">
@@ -518,12 +546,14 @@
 				</div>
 			</div>
 			
-			but since we left out the name and the vertical bar the variable is automatically named <span class="inlinecode">it</span> which
-			(like <span class="inlinecode">this</span>) is an <a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. That's why we can write either 
+			but since we left out the name and the vertical bar the variable is automatically named <span class="inlinecode"><span class="keyword">it</span></span> which
+			(like <span class="inlinecode"><span class="keyword">this</span></span>) is an <a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. That's why we can write either
+			</p>
+			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						movies.filter[<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)].size
+						movies.filter[&nbsp;<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)].size
 					</p>
 				</div>
 			</div>
@@ -539,20 +569,22 @@
 			.
 			</p>
 			<p>
-			Lastly we call <span class="inlinecode">size()</span> on the resulting iterable, which again is an extension method, because <span class="inlinecode">java.lang.Iterable</span>
-			doesn't define such a method. It's defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
+			Lastly we call <span class="inlinecode">size</span> on the resulting iterable, which also is an extension method defined in 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
 			</p>
-			<p>
-			The second analysis is about finding the year the best movie from the 80ies was released.
-			Here's the code:
+			<a name="moviesExample_4_3" ></a>
+			<h4><p>
+			Question 2: What's The Year The Best Movie From The 80ies Was Released?
 			</p>
+			</h4>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;yearOfBestMovieFrom80ies()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(1989,&nbsp;movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}
+						&nbsp;&nbsp;assertEquals(1989,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)<br/>
+						}
 					</p>
 				</div>
 			</div>
@@ -577,72 +609,37 @@
 			</div>
 			</p>
 			<p>
-			Btw. the calls to <span class="inlinecode">movie.year</span> as well as <span class="inlinecode">movie.categories</span> in the previous example in fact access the corresponding 
-			<a href="30-expressions.php#propertyAccess.php" title="Go to &quot;Property Access&quot;">getter methods</a>.
+			Note that first sorting and then taking the last or first is slightly more expnsive than needed. We could
+			have used the method <span class="inlinecode">reduce</span> instead to find the best movie, which would be more efficient. Maybe
+			you want to try it on your own?
 			</p>
 			<p>
-			The last analysis you'll find in the example is a bit trickier. It also uses a couple of additional extension methods such 
-			as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.&lt;T&gt;take(Iterable&lt;T&gt;,&nbsp;int)</span> and <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.reduce(...)</span>.
-			I'll leave it up to you to understand how it works, here's the full code:
+			The calls to <span class="inlinecode">movie.year</span> as well as <span class="inlinecode">movie.categories</span> in the previous example in fact access the corresponding 
+			<a href="30-expressions.php#propertyAccess.php" title="Go to &quot;Property Access&quot;">getter methods</a>.
 			</p>
+			<a name="moviesExample_4_4" ></a>
+			<h4><p>
+			Question 3: What's The The Sum Of All Votes Of The Top Two Movies?
+			</p>
+			</h4>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">package</span>&nbsp;example6<br/>
-						<br/>
-						<span class="keyword">import</span>&nbsp;org.junit.Test<br/>
-						<span class="keyword">import</span>&nbsp;java.io.FileReader<br/>
-						<span class="keyword">import</span>&nbsp;java.util.Set<br/>
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.junit.Assert.*<br/>
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*<br/>
-						<br/>
-						<span class="keyword">class</span>&nbsp;Movies&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;action&nbsp;movies<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;numberOfActionMovies()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(828,&nbsp;movies.filte[categories.contains(<span class="string">&apos;Action&apos;</span>)].size)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;year&nbsp;the&nbsp;best&nbsp;rated&nbsp;movie&nbsp;of&nbsp;80ies&nbsp;(1980-1989)&nbsp;was&nbsp;released.<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;yearOfBestMovieFrom80ies()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(1989,&nbsp;movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;sum&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;votes&nbsp;of&nbsp;the&nbsp;two&nbsp;top&nbsp;rated&nbsp;movies.<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sumOfVotesOfTop2()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;<span class="keyword">long</span>&nbsp;movies&nbsp;=&nbsp;movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a,&nbsp;b|&nbsp;a&nbsp;+&nbsp;b]<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(47_229,&nbsp;movies)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;movies&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;FileReader(<span class="string">&apos;data.csv&apos;</span>).readLines.map[&nbsp;line&nbsp;|<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;Movie(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.next,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer::parseInt(segments.next),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double::parseDouble(segments.next),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long::parseLong(segments.next),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;segments.toSet<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-						}<br/>
-						<br/>
-						@Data&nbsp;<span class="keyword">class</span>&nbsp;Movie&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;title<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;year<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">double</span>&nbsp;rating<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;numberOfVotes<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Set&lt;String&gt;&nbsp;categories&nbsp;<br/>
+						@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sumOfVotesOfTop2()&nbsp;{<br/>
+						&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;<span class="keyword">long</span>&nbsp;sum&nbsp;=&nbsp;movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a,&nbsp;b|&nbsp;a&nbsp;+&nbsp;b]<br/>
+						&nbsp;&nbsp;assertEquals(47_229L,&nbsp;sum)<br/>
 						}
 					</p>
 				</div>
 			</div>
+			</p>
+			<p>
+			First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their <span class="inlinecode">numberOfVotes</span> using the <span class="inlinecode">map</span> function. 
+			Now we have a <span class="inlinecode">List&lt;Long&gt;</span> which can be reduced to a single <span class="inlinecode">Integer</span> by adding the values.
+			</p>
+			<p>
+			You could also use <span class="inlinecode">reduce</span> instead of <span class="inlinecode">map</span> and <span class="inlinecode">reduce</span>. Do you know how?
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>

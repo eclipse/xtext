@@ -11,7 +11,7 @@
 <a name="Xtend_Expressions"></a>
 <h1>Expressions</h1>
 <p>
-Unlike Java in Xtend there are no statements. Instead, everything is an expression and has a return value. That
+Xtend there are no statements. Instead, everything is an expression and has a return value. That
 allows to compose your code in intersting ways. For example, you can have a
 <span class="inlinecode"><span class="keyword">try</span>&nbsp;<span class="keyword">catch</span></span> expression on the right hand side of an assignment: 
 <div class="literallayout">
@@ -44,8 +44,8 @@ A literal denotes a fixed unchangeable value. Literals for <a href="30-expressio
 <p>
 A string literal is of type <span class="inlinecode">java.lang.String</span> (just like in Java).
 String literals are enclosed by a pair of single quotes or double quotes. We mostly use single quotes
-because the signal-tonoise ration is a bit better, but generally you should use the terminals which are
-least likely occure uin the actual string. Special characters can be quoted with a backslash or defined using
+because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
+least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 Java&apos;s unicode notation. Contrary to Java, strings can span multiple lines.
 </p>
 <p>
@@ -121,8 +121,7 @@ Java counterpart of type <span class="inlinecode"><span class="keyword">boolean<
 <a name="nullLiteral"></a>
 <h3>Null Literal</h3>
 <p>
-The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span>. It is a member of any reference type and
-the only member of the type <span class="inlinecode">java.lang.Void</span>, i.e. has the same semantics as in Java.
+The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span> has exactly the same semantics as in Java.
 </p>
 <a name="typeLiteral"></a>
 <h3>Type Literals</h3>
@@ -140,7 +139,7 @@ Type literals are specified using the keyword <span class="inlinecode"><span cla
 <a name="typeCasts"></a>
 <h2>Type Casts</h2>
 <p>
-A type cast behaves exactly like casts in Java, but have a slightly more readable syntax.
+A type cast behaves exactly like casts in Java, but has a slightly more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
 </p>
 <p>
@@ -179,7 +178,7 @@ operators for any type just by implementing the corresponding method signature. 
 </div>
 </p>
 <p>
-The following defines the operators and the corresponding method signatures / expressions.
+This is the complete list of all available operators and their corresponding method signatures.
 </p>
 <p>
 <table>
@@ -476,7 +475,7 @@ That means that the right hand operand might not be evaluated at all in the foll
 </p>
 <p>
 Still you can overload these operators for your types or even override it for booleans, in which case
-both operands are always evaluated and the defined method is invoked.
+both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 </p>
 <a name="operators_5"></a>
 <h3>Examples</h3>
@@ -542,9 +541,8 @@ The setter is only used if the field is not accessible from the given context. T
 <a href="40-anntotations.html#propertyAnnotation" title="Go to &quot;@Property&quot;">@Property annotation</a> would rename the local field to <span class="inlinecode">_myProperty</span>.
 </p>
 <p>
-In return type of an assignment corresponds to the return type of the mapped expression, i.e. if it&apos;s
-translated to a simple Java assignment it yields the value of the right hand side, if it&apos;s translated
-to a setter method it yields whatever the setter method returns.
+The return type of an assignment is the type of the right hand side, in case it&apos;s a simple assignment.
+If it&apos;s translated to a setter method it yields whatever the setter method returns.
 </p>
 <a name="blocks"></a>
 <h2>Blocks</h2>
@@ -578,11 +576,11 @@ Here are two examples:
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting<br/>
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;+&nbsp;<span class="string">"World!"</span>&nbsp;<br/>
 &nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x<br/>
 &nbsp;&nbsp;}<br/>
 }<br/>
 </p>
@@ -619,7 +617,7 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 </div>
 </p>
 <p>
-Shadowing variables from outer scopes is not allowed, the only exception being the 
+Shadowing variables from outer scopes is not allowed, the only exception is the 
 <a href="30-expressions.html#implicitVariables" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable <span class="inlinecode"><span class="keyword">it</span></span></a>.
 </p>
 <p>
@@ -657,15 +655,14 @@ Alternatively the type can be left out and will be inferred from the initializat
 <a name="featureCalls"></a>
 <h2>Field Access and Method Invocation</h2>
 <p>
-As in Java, a simple name can refer to a local field, variable or parameter. In addition
-it can point to a method with zero arguments, since the parenthesis are optional if no arguments are
-passed. 
+A simple name can refer to a local field, variable or parameter. In addition
+it can point to a method with zero arguments, since empty parenthesis are optional. 
 </p>
 <a name="propertyAccess"></a>
 <h3>Property Access</h3>
 <p>
-In addition if there is no field with the given name accessible and also no method with name and zero parameters
-accessible, it binds to a corresponding Java-Bean getter method if available :
+If there is no field with the given name and also no method with the name and zero parameters
+accessible, a simple name binds to a corresponding Java-Bean getter method if available :
 </p>
 <p>
 <div class="literallayout">
@@ -724,7 +721,7 @@ when used together with <a href="30-expressions.html#lambdas" title="Go to &quot
 </p>
 <p>
 As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
-in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
+in finer-grained constructs such as <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a>. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
 higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>.
 </p>
 <a name="staticAccess"></a>
@@ -741,6 +738,9 @@ MyClass::myMethod(<span class="string">&apos;foo&apos;</span>)<br/>
 </p>
 </div>
 </div>
+</p>
+<p>
+Alternatively you could import the method using a <a href="20-classes-and-functions.html#imports" title="Go to &quot;Imports&quot;">static import</a>.
 </p>
 <a name="nullSafeFeatureCalls"></a>
 <h3>Null-Safe Feature Call</h3>
@@ -764,7 +764,7 @@ one can write
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myRef?.doStuff()<br/>
+myRef?.doStuff<br/>
 </p>
 </div>
 </div>
@@ -788,7 +788,7 @@ are optional:
 <p>
 A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
 a Java developer it&apos;s best to think of a lambda expression as an anonymous class, i.e. 
-when you write the following Java :
+like in the following Java code :
 </p>
 <p>
 <div class="literallayout">
@@ -807,7 +807,7 @@ textField.addActionListener(<span class="keyword">new</span>&nbsp;ActionListener
 </div>
 </p>
 <p>
-This kind of anonymous classes can be found in many libraries and have always been the poor-man&apos;s replacement
+This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man&apos;s replacement
 for lambda expressions in Java. 
 </p>
 <p>
@@ -827,7 +827,7 @@ textField.addActionListener([&nbsp;ActionEvent&nbsp;e&nbsp;|<br/>
 </div>
 </p>
 <p>
-As you might have guessed, a lambda expression is surrounded by square brackets (borrowed from Smalltalk).
+As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
 Also a lambda expression like a method declares parameters. The lambda above has one parameter called <span class="inlinecode">e</span> which is of
 type <span class="inlinecode">ActionEvent</span>. You don&apos;t have to specify the type explicitly because it can be inferred from
 the context:
@@ -904,7 +904,7 @@ Collections::sort(someStrings,&nbsp;[&nbsp;a,&nbsp;b&nbsp;|<br/>
 </p>
 <p>
 Since you can leave out empty parenthesis methods wich get a lambda as the single argument you can reduce
-the code to write:
+the code above further more:
 </p>
 <p>
 <div class="literallayout">
@@ -986,9 +986,8 @@ An expression
 </div>
 </div>
  
-results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> 
-depending on whether the predicate <span class="inlinecode">p</span> evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. 
-The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
+results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> evaluates 
+to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
 </p>
 <p>
 <div class="literallayout">
@@ -1000,7 +999,7 @@ The else part is optional which is a shorthand for <span class="inlinecode"><spa
 </div>
 </p>
 <p>
-is the a short hand for
+is a short hand for
 </p>
 <p>
 <div class="literallayout">
@@ -1013,7 +1012,7 @@ is the a short hand for
 </p>
 <p>
 The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
-of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>. 
+of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
 </p>
 <p>
 While the <span class="inlinecode"><span class="keyword">if</span></span>-expression has the syntax of Java&apos;s if statement it behaves more like Java&apos;s ternary operator 
@@ -1042,13 +1041,10 @@ Given the following example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">switch</span>&nbsp;numberAsText&nbsp;{<br/>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;zero&apos;</span>&nbsp;:&nbsp;1<br/>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;one&apos;</span>&nbsp;:&nbsp;1<br/>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;two&apos;</span>&nbsp;:&nbsp;2<br/>
-&nbsp;&nbsp;...<br/>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;nine&apos;</span>&nbsp;:&nbsp;9<br/>
-&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
+<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
 }<br/>
 </p>
 </div>
@@ -1063,27 +1059,11 @@ to true. If it&apos;s not of type <span class="inlinecode"><span class="keyword"
 If a case is a match, that is it evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or the result equals the one we are switching
 over, the case expression after the colon is evaluated and is the result of the whole expression.
 </p>
-<p>
-Another Example, with mixed <span class="inlinecode"><span class="keyword">boolean</span></span> and <span class="inlinecode">Object.equals(Object)</span> cases:
-</p>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
-&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
-}<br/>
-</p>
-</div>
-</div>
-</p>
-<a name="switchExpression_6"></a>
+<a name="switchExpression_4"></a>
 <h3>Type guards</h3>
 <p>
-In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a
-<a href="15-types.html#types" title="Go to &quot;Static Typing and Java Interoperability&quot;">type reference</a> preceding an optional case keyword. The cool thing is that the value is automatically down casted
+Instead if or in addition to the case guard you can have a so called <em>Type Guard</em>. That is syntactically just a
+<a href="15-types.html#types" title="Go to &quot;Static Typing and Java Interoperability&quot;">type reference</a>. The cool thing is that the value is automatically down casted
 in subsequent expressions. Example:
 </p>
 <p>
@@ -1102,14 +1082,13 @@ in subsequent expressions. Example:
 </div>
 </p>
 <p>
-Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode">true</span>, the 
-case&apos;s guard expression is executed using the same semantics explained previously. If the switch 
-expression contains an explicit declaration of a local variable or the expression references a local 
-variable, the type guard acts like a cast, that is all references to the switch value will be of the 
+Only if the switch value is an instance of the specified type, the case&apos;s guard expression is executed using the same 
+semantics explained previously. If the switch expression contains an explicit declaration of a local variable or the expression 
+references a local variable, the type guard acts like a cast, that is all references to the switch value will be of the 
 type specified in the type guard.
 </p>
 <p>
-Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java
+Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java.
 </p>
 <a name="forLoop"></a>
 <h2>For Loop</h2>
@@ -1123,7 +1102,7 @@ The for loop
 </div>
 </div>
  
-is used to execute a certain expression for each element of an array of an instance of 
+is used to execute a certain expression for each element of an array or an instance of 
 <span class="inlinecode">java.lang.Iterable</span>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 </p>
 <p>
@@ -1209,9 +1188,8 @@ loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 <h2>Return Expression</h2>
 <p>
 A method or lambda expression automatically returns the value of it&apos;s expression.
-If it&apos;s a block expression that is the value of the last expression in it.
-However, sometimes you want to return early or make it explicit, because you feel it 
-improves readability.
+If it&apos;s a <a href="30-expressions.html#blocks" title="Go to &quot;Blocks&quot;">block expression</a> this is the value of the last expression in it.
+However, sometimes you want to return early or make it explicit.
 </p>
 <p>
 The syntax is just like in Java:
@@ -1232,8 +1210,8 @@ listOfStrings.map(e|&nbsp;{<br/>
 <a name="Xtend_Expressions_Throw"></a>
 <h2>Throwing Exceptions</h2>
 <p>
-Like in Java it is possible to throw <span class="inlinecode">java.lang.Throwable</span>. The syntax is exactly the same as 
-in Java.
+Throwing <span class="inlinecode">java.lang.Throwable</span>s up the call stack has the same semantics and syntax 
+as in Java.
 </p>
 <p>
 <div class="literallayout">
@@ -1244,7 +1222,7 @@ in Java.
 &nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
 &nbsp;&nbsp;...<br/>
-}&nbsp;&nbsp;&nbsp;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1274,7 +1252,7 @@ Other than that the syntax again is like the one known from Java.
 </p>
 <p>
 For try-catch it&apos;s again beneficial that it is an expression, because you can write code like the following
-and don&apos;t have to ely on non-final variables:
+and don&apos;t have to rely on non-final variables:
 </p>
 <p>
 <div class="literallayout">
@@ -1293,19 +1271,18 @@ and don&apos;t have to ely on non-final variables:
 <h2>Template Expressions</h2>
 <p>
 Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<span class="inlinecode"><span class="string">&apos;&apos;</span><span class="string">&apos;</span></span>). 
-A template expression can span multiple lines and expressions can be nested which are evaluated and their toString() representation is automatcially inserted at that opsition.
+A template expression can span multiple lines and expressions can be nested which are evaluated and their <span class="inlinecode">toString()</span> 
+representation is automatcially inserted at that position.
 </p>
 <p>
 The terminals for interpolated expression are so called guillemets <span class="inlinecode">&laquo;expression&raquo;</span>. They read nicely and are not often used
-the text itself so you seldomly need to escape them. These conflicts are the reason why
-template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP. The downside is
-that you&apos;ll use a proper encoding (Always use UTF-8 and you are good).
+in text so you seldomly need to escape them. These escaping conflicts are the reason why
+template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worst readability. 
+The downside with the guillemets in Xtend is that you&apos;ll have to use a proper encoding (Always use UTF-8 and you are good).
 </p>
 <p>
 If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
 content assist. They are also bound to <em>CTRL+SHIFT+&lt;</em> and <em>CTRL+SHIFT+</em> for <span class="inlinecode">&laquo;</span> and <span class="inlinecode">&raquo;</span> respectively.
-</p>
-<p>
 On a mac they are bound to <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode">&raquo;</span>).
 </p>
 <p>
@@ -1332,7 +1309,7 @@ If an interpolation expression evaluates to <span class="inlinecode"><span class
 </p>
 <p>
 Template expressions can occur everywhere. 
-Here&apos;s an example showing it in conjunction the powerful <a href="30-expressions.html#switchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
+Here&apos;s an example showing it in conjunction with the powerful <a href="30-expressions.html#switchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
 </p>
 <p>
 <div class="literallayout">
@@ -1408,10 +1385,10 @@ Also a <span class="inlinecode"><span class="keyword">FOR</span></span> statemen
 </div>
 </p>
 <p>
-The for statement also allows to specify what to prepend (<span class="inlinecode"><span class="keyword">BEFORE</span></span>), put in-between (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>), and what to
+The for statement optionally allows to specify what to prepend (<span class="inlinecode"><span class="keyword">BEFORE</span></span>), put in-between (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>), and what to
 put at the end (<span class="inlinecode"><span class="keyword">AFTER</span></span>) of all iterations. <span class="inlinecode"><span class="keyword">BEFORE</span></span> and <span class="inlinecode"><span class="keyword">AFTER</span></span>
 are only executed if there is at least one iteration. (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>) is only added between
-iterations, that it is executed if there are more than one iterations.
+iterations, that it is executed if there are at least two iterations.
 </p>
 <p>
 Here&apos;s an example:
@@ -1441,7 +1418,7 @@ Here&apos;s an example:
 <a name="templateType"></a>
 <h3>Typing</h3>
 <p>
-The template expression is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="View JavaDoc"><abbr title="java.lang.CharSequence" >CharSequence</abbr></a> but autocoerces to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>
+The template expression is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="View JavaDoc"><abbr title="java.lang.CharSequence" >CharSequence</abbr></a> but auto-convertes to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>
 if that is the expected target type.
 </p>
 <a name="WhitespaceHandling"></a>
@@ -1503,7 +1480,7 @@ of nested nodes.
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
-&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
 &nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 }<br/>
@@ -1540,7 +1517,7 @@ of the template itself.
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
-&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children.map[print]&raquo;<br/>

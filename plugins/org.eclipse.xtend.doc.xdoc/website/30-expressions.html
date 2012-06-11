@@ -94,7 +94,7 @@
 				</div>
 				
 		<p>
-		Unlike Java in Xtend there are no statements. Instead, everything is an expression and has a return value. That
+		Xtend there are no statements. Instead, everything is an expression and has a return value. That
 		allows to compose your code in intersting ways. For example, you can have a
 		<span class="inlinecode"><span class="keyword">try</span>&nbsp;<span class="keyword">catch</span></span> expression on the right hand side of an assignment: 
 		<div class="literallayout">
@@ -140,8 +140,8 @@
 			<p>
 			A string literal is of type <span class="inlinecode">java.lang.String</span> (just like in Java).
 			String literals are enclosed by a pair of single quotes or double quotes. We mostly use single quotes
-			because the signal-tonoise ration is a bit better, but generally you should use the terminals which are
-			least likely occure uin the actual string. Special characters can be quoted with a backslash or defined using
+			because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
+			least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 			Java's unicode notation. Contrary to Java, strings can span multiple lines.
 			</p>
 			<p>
@@ -214,8 +214,7 @@
 			<a name="nullLiteral" ></a>
 			<h2>Null Literal</h2>
 			<p>
-			The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span>. It is a member of any reference type and
-			the only member of the type <span class="inlinecode">java.lang.Void</span>, i.e. has the same semantics as in Java.
+			The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span> has exactly the same semantics as in Java.
 			</p>
 			<a name="typeLiteral" ></a>
 			<h2>Type Literals</h2>
@@ -236,7 +235,7 @@
 			<br style="clear:both"></br>
 			<h1>Type Casts</h1>
 			<p>
-			A type cast behaves exactly like casts in Java, but have a slightly more readable syntax.
+			A type cast behaves exactly like casts in Java, but has a slightly more readable syntax.
 			Type casts bind stronger than any other operator but weaker than feature calls.
 			</p>
 			<p>
@@ -285,7 +284,7 @@
 			</div>
 			</p>
 			<p>
-			The following defines the operators and the corresponding method signatures / expressions.
+			This is the complete list of all available operators and their corresponding method signatures.
 			</p>
 			<p>
 			<table>
@@ -454,7 +453,7 @@
 			</p>
 			<p>
 			Still you can overload these operators for your types or even override it for booleans, in which case
-			both operands are always evaluated and the defined method is invoked.
+			both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 			</p>
 			<a name="operators_5" ></a>
 			<h2>Examples</h2>
@@ -519,9 +518,8 @@
 			<a href="40-anntotations.php#propertyAnnotation.php" title="Go to &quot;@Property&quot;">@Property annotation</a> would rename the local field to <span class="inlinecode">_myProperty</span>.
 			</p>
 			<p>
-			In return type of an assignment corresponds to the return type of the mapped expression, i.e. if it's
-			translated to a simple Java assignment it yields the value of the right hand side, if it's translated
-			to a setter method it yields whatever the setter method returns.
+			The return type of an assignment is the type of the right hand side, in case it's a simple assignment.
+			If it's translated to a setter method it yields whatever the setter method returns.
 			</p>
 		<a name="blocks" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -559,11 +557,11 @@
 				<div class="incode">
 					<p class="code">
 						{<br/>
-						&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
+						&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting<br/>
 						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;+&nbsp;<span class="string">"World!"</span>&nbsp;<br/>
 						&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;x<br/>
 						&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -609,7 +607,7 @@
 			</div>
 			</p>
 			<p>
-			Shadowing variables from outer scopes is not allowed, the only exception being the 
+			Shadowing variables from outer scopes is not allowed, the only exception is the 
 			<a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable <span class="inlinecode"><span class="keyword">it</span></span></a>.
 			</p>
 			<p>
@@ -658,15 +656,14 @@
 			  </ul>
 			</div>
 			<p>
-			As in Java, a simple name can refer to a local field, variable or parameter. In addition
-			it can point to a method with zero arguments, since the parenthesis are optional if no arguments are
-			passed. 
+			A simple name can refer to a local field, variable or parameter. In addition
+			it can point to a method with zero arguments, since empty parenthesis are optional. 
 			</p>
 			<a name="propertyAccess" ></a>
 			<h2>Property Access</h2>
 			<p>
-			In addition if there is no field with the given name accessible and also no method with name and zero parameters
-			accessible, it binds to a corresponding Java-Bean getter method if available :
+			If there is no field with the given name and also no method with the name and zero parameters
+			accessible, a simple name binds to a corresponding Java-Bean getter method if available :
 			</p>
 			<p>
 			<div class="literallayout">
@@ -723,7 +720,7 @@
 			</p>
 			<p>
 			As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
-			in finer-grained constructs such as function parameters. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
+			in finer-grained constructs such as <a href="30-expressions.php#lambdas.php" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a>. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
 			higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>.
 			</p>
 			<a name="staticAccess" ></a>
@@ -740,6 +737,9 @@
 					</p>
 				</div>
 			</div>
+			</p>
+			<p>
+			Alternatively you could import the method using a <a href="20-classes-and-functions.php#imports.php" title="Go to &quot;Imports&quot;">static import</a>.
 			</p>
 			<a name="nullSafeFeatureCalls" ></a>
 			<h2>Null-Safe Feature Call</h2>
@@ -763,7 +763,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						myRef?.doStuff()
+						myRef?.doStuff
 					</p>
 				</div>
 			</div>
@@ -800,7 +800,7 @@
 			<p>
 			A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
 			a Java developer it's best to think of a lambda expression as an anonymous class, i.e. 
-			when you write the following Java :
+			like in the following Java code :
 			</p>
 			<p>
 			<div class="literallayout">
@@ -819,7 +819,7 @@
 			</div>
 			</p>
 			<p>
-			This kind of anonymous classes can be found in many libraries and have always been the poor-man's replacement
+			This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man's replacement
 			for lambda expressions in Java. 
 			</p>
 			<p>
@@ -839,7 +839,7 @@
 			</div>
 			</p>
 			<p>
-			As you might have guessed, a lambda expression is surrounded by square brackets (borrowed from Smalltalk).
+			As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
 			Also a lambda expression like a method declares parameters. The lambda above has one parameter called <span class="inlinecode">e</span> which is of
 			type <span class="inlinecode">ActionEvent</span>. You don't have to specify the type explicitly because it can be inferred from
 			the context:
@@ -916,7 +916,7 @@
 			</p>
 			<p>
 			Since you can leave out empty parenthesis methods wich get a lambda as the single argument you can reduce
-			the code to write:
+			the code above further more:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1000,9 +1000,8 @@
 				</div>
 			</div>
 			 
-			results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> 
-			depending on whether the predicate <span class="inlinecode">p</span> evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. 
-			The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
+			results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> evaluates 
+			to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>. That means 
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1014,7 +1013,7 @@
 			</div>
 			</p>
 			<p>
-			is the a short hand for
+			is a short hand for
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1027,7 +1026,7 @@
 			</p>
 			<p>
 			The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
-			of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>. 
+			of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
 			</p>
 			<p>
 			While the <span class="inlinecode"><span class="keyword">if</span></span>-expression has the syntax of Java's if statement it behaves more like Java's ternary operator 
@@ -1051,7 +1050,7 @@
 			<h1>Switch Expression</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="30-expressions.php#switchExpression_6.php" >Type guards</a></li>
+			    <li><a href="30-expressions.php#switchExpression_4.php" >Type guards</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -1065,13 +1064,10 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">switch</span>&nbsp;numberAsText&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;zero&apos;</span>&nbsp;:&nbsp;1<br/>
-						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;one&apos;</span>&nbsp;:&nbsp;1<br/>
-						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;two&apos;</span>&nbsp;:&nbsp;2<br/>
-						&nbsp;&nbsp;...<br/>
-						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;nine&apos;</span>&nbsp;:&nbsp;9<br/>
-						&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
+						<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
+						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
+						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
+						&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
 						}
 					</p>
 				</div>
@@ -1086,27 +1082,11 @@
 			If a case is a match, that is it evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or the result equals the one we are switching
 			over, the case expression after the colon is evaluated and is the result of the whole expression.
 			</p>
-			<p>
-			Another Example, with mixed <span class="inlinecode"><span class="keyword">boolean</span></span> and <span class="inlinecode">Object.equals(Object)</span> cases:
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
-						&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
-						&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
-						}
-					</p>
-				</div>
-			</div>
-			</p>
-			<a name="switchExpression_6" ></a>
+			<a name="switchExpression_4" ></a>
 			<h2>Type guards</h2>
 			<p>
-			In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a
-			<a href="15-types.php" title="Go to &quot;Static Typing and Java Interoperability&quot;">type reference</a> preceding an optional case keyword. The cool thing is that the value is automatically down casted
+			Instead if or in addition to the case guard you can have a so called <em>Type Guard</em>. That is syntactically just a
+			<a href="15-types.php" title="Go to &quot;Static Typing and Java Interoperability&quot;">type reference</a>. The cool thing is that the value is automatically down casted
 			in subsequent expressions. Example:
 			</p>
 			<p>
@@ -1125,14 +1105,13 @@
 			</div>
 			</p>
 			<p>
-			Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode">true</span>, the 
-			case's guard expression is executed using the same semantics explained previously. If the switch 
-			expression contains an explicit declaration of a local variable or the expression references a local 
-			variable, the type guard acts like a cast, that is all references to the switch value will be of the 
+			Only if the switch value is an instance of the specified type, the case's guard expression is executed using the same 
+			semantics explained previously. If the switch expression contains an explicit declaration of a local variable or the expression 
+			references a local variable, the type guard acts like a cast, that is all references to the switch value will be of the 
 			type specified in the type guard.
 			</p>
 			<p>
-			Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java
+			Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java.
 			</p>
 		<a name="forLoop" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -1150,7 +1129,7 @@
 				</div>
 			</div>
 			 
-			is used to execute a certain expression for each element of an array of an instance of 
+			is used to execute a certain expression for each element of an array or an instance of 
 			<span class="inlinecode">java.lang.Iterable</span>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 			</p>
 			<p>
@@ -1248,9 +1227,8 @@
 			<h1>Return Expression</h1>
 			<p>
 			A method or lambda expression automatically returns the value of it's expression.
-			If it's a block expression that is the value of the last expression in it.
-			However, sometimes you want to return early or make it explicit, because you feel it 
-			improves readability.
+			If it's a <a href="30-expressions.php#blocks.php" title="Go to &quot;Blocks&quot;">block expression</a> this is the value of the last expression in it.
+			However, sometimes you want to return early or make it explicit.
 			</p>
 			<p>
 			The syntax is just like in Java:
@@ -1275,8 +1253,8 @@
 			<br style="clear:both"></br>
 			<h1>Throwing Exceptions</h1>
 			<p>
-			Like in Java it is possible to throw <span class="inlinecode">java.lang.Throwable</span>. The syntax is exactly the same as 
-			in Java.
+			Throwing <span class="inlinecode">java.lang.Throwable</span>s up the call stack has the same semantics and syntax 
+			as in Java.
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1321,7 +1299,7 @@
 			</p>
 			<p>
 			For try-catch it's again beneficial that it is an expression, because you can write code like the following
-			and don't have to ely on non-final variables:
+			and don't have to rely on non-final variables:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1352,19 +1330,18 @@
 			</div>
 			<p>
 			Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<span class="inlinecode"><span class="string">&apos;&apos;</span><span class="string">&apos;</span></span>). 
-			A template expression can span multiple lines and expressions can be nested which are evaluated and their toString() representation is automatcially inserted at that opsition.
+			A template expression can span multiple lines and expressions can be nested which are evaluated and their <span class="inlinecode">toString()</span> 
+			representation is automatcially inserted at that position.
 			</p>
 			<p>
 			The terminals for interpolated expression are so called guillemets <span class="inlinecode">&laquo;expression&raquo;</span>. They read nicely and are not often used
-			the text itself so you seldomly need to escape them. These conflicts are the reason why
-			template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP. The downside is
-			that you'll use a proper encoding (Always use UTF-8 and you are good).
+			in text so you seldomly need to escape them. These escaping conflicts are the reason why
+			template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worst readability. 
+			The downside with the guillemets in Xtend is that you'll have to use a proper encoding (Always use UTF-8 and you are good).
 			</p>
 			<p>
 			If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
 			content assist. They are also bound to <em>CTRL+SHIFT+&lt;</em> and <em>CTRL+SHIFT+</em> for <span class="inlinecode">&laquo;</span> and <span class="inlinecode">&raquo;</span> respectively.
-			</p>
-			<p>
 			On a mac they are bound to <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode">&raquo;</span>).
 			</p>
 			<p>
@@ -1391,7 +1368,7 @@
 			</p>
 			<p>
 			Template expressions can occur everywhere. 
-			Here's an example showing it in conjunction the powerful <a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
+			Here's an example showing it in conjunction with the powerful <a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1467,10 +1444,10 @@
 			</div>
 			</p>
 			<p>
-			The for statement also allows to specify what to prepend (<span class="inlinecode"><span class="keyword">BEFORE</span></span>), put in-between (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>), and what to
+			The for statement optionally allows to specify what to prepend (<span class="inlinecode"><span class="keyword">BEFORE</span></span>), put in-between (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>), and what to
 			put at the end (<span class="inlinecode"><span class="keyword">AFTER</span></span>) of all iterations. <span class="inlinecode"><span class="keyword">BEFORE</span></span> and <span class="inlinecode"><span class="keyword">AFTER</span></span>
 			are only executed if there is at least one iteration. (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>) is only added between
-			iterations, that it is executed if there are more than one iterations.
+			iterations, that it is executed if there are at least two iterations.
 			</p>
 			<p>
 			Here's an example:
@@ -1500,7 +1477,7 @@
 			<a name="templateType" ></a>
 			<h2>Typing</h2>
 			<p>
-			The template expression is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="java.lang.CharSequence">CharSequence</abbr></a> but autocoerces to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a>
+			The template expression is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="java.lang.CharSequence">CharSequence</abbr></a> but auto-convertes to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a>
 			if that is the expected target type.
 			</p>
 			<a name="WhitespaceHandling" ></a>
@@ -1561,7 +1538,7 @@
 			    	<div class="incode">
 			    		<p class="code">
 			    			<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
-			    			&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+			    			&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{}<br/>
 			    			&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
 			    			}
@@ -1596,7 +1573,7 @@
 			    	<div class="incode">
 			    		<p class="code">
 			    			<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
-			    			&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+			    			&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;n.name&raquo;&nbsp;{<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;hasChildren&raquo;<br/>
 			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;n.children.map[print]&raquo;<br/>
