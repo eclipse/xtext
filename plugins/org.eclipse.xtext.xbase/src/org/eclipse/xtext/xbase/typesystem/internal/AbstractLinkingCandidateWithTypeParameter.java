@@ -83,7 +83,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	public void accept(ObservableTypeExpectation expectation, JvmTypeReference actual, ConformanceHint conformanceHint) {
 		// TODO traverse the expectation and read the actual parameter data from the actual mapping by means of a type parameter substitutor
 		JvmTypeReference expectedType = expectation.getExpectedType();
-		if (expectedType == null) {
+		if (expectedType == null || actual instanceof JvmAnyTypeReference) {
 			return;
 		}
 		if (expectedType instanceof XComputedTypeReference) {
@@ -96,10 +96,8 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 				}
 			}
 		} else if (expectedType.getType() instanceof JvmTypeParameter) {
-			if (!(actual instanceof JvmAnyTypeReference)) {
-				JvmTypeReference wrappedActual = asWrapperType(actual);
-				typeParameterMapping.put((JvmTypeParameter) expectedType.getType(), new BoundTypeArgument(wrappedActual, BoundTypeArgumentSource.INFERRED, new Object(), VarianceInfo.OUT, VarianceInfo.OUT));
-			}
+			JvmTypeReference wrappedActual = asWrapperType(actual);
+			typeParameterMapping.put((JvmTypeParameter) expectedType.getType(), new BoundTypeArgument(wrappedActual, BoundTypeArgumentSource.INFERRED, new Object(), VarianceInfo.OUT, VarianceInfo.OUT));
 		} else {
 			resolveAgainstActualType(expectedType, actual);
 		}

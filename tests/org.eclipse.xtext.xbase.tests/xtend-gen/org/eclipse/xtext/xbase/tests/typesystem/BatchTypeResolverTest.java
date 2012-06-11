@@ -5,7 +5,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
@@ -31,7 +33,8 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   private ITypeProvider typeProvider;
   
   public void resolvesTo(final String expression, final String type) throws Exception {
-    final XExpression xExpression = this.expression(expression, false);
+    String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
+    final XExpression xExpression = this.expression(_replace, false);
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
     final JvmTypeReference resolvedType = resolvedTypes.getActualType(xExpression);
@@ -40,8 +43,34 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
     for (final EObject content : _iterable) {
-      if ((content instanceof XExpression)) {
-        resolvedTypes.getActualType(((XExpression) content));
+      {
+        if ((content instanceof XExpression)) {
+          final JvmTypeReference childType = resolvedTypes.getActualType(((XExpression) content));
+          String _string = content.toString();
+          Assert.assertNotNull(_string, childType);
+          String _string_1 = content.toString();
+          String _plus = (_string_1 + " / ");
+          String _plus_1 = (_plus + childType);
+          String _identifier = childType.getIdentifier();
+          Assert.assertNotNull(_plus_1, _identifier);
+        }
+        boolean _and = false;
+        if (!(content instanceof JvmIdentifiableElement)) {
+          _and = false;
+        } else {
+          boolean _not = (!(content instanceof XCasePart));
+          _and = ((content instanceof JvmIdentifiableElement) && _not);
+        }
+        if (_and) {
+          final JvmTypeReference identifiableType = resolvedTypes.getActualType(((JvmIdentifiableElement) content));
+          String _string_2 = content.toString();
+          Assert.assertNotNull(_string_2, identifiableType);
+          String _string_3 = content.toString();
+          String _plus_2 = (_string_3 + " / ");
+          String _plus_3 = (_plus_2 + identifiableType);
+          String _identifier_1 = identifiableType.getIdentifier();
+          Assert.assertNotNull(_plus_3, _identifier_1);
+        }
       }
     }
   }
@@ -364,6 +393,21 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testMethodTypeParamInference_03() throws Exception {
+    this.resolvesTo("$$IterableExtensions::findFirst(new java.util.ArrayList<String>) [e | true]", "String");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_04() throws Exception {
+    this.resolvesTo("$$IterableExtensions::findFirst(new java.util.ArrayList<String>) [e|e == \'foo\']", "String");
+  }
+  
+  @Test
+  public void testMethodTypeParamInference_05() throws Exception {
+    this.resolvesTo("$$IterableExtensions::<String>findFirst(new java.util.ArrayList<String>) [e|e == \'foo\']", "String");
+  }
+  
+  @Test
   public void testInstanceof() throws Exception {
     this.resolvesTo("null instanceof String", "boolean");
   }
@@ -652,6 +696,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testFeatureCall_06_00() throws Exception {
+    this.resolvesTo("$$ListExtensions::map(newArrayList(\'\')) [s|s]", "List<String>");
+  }
+  
+  @Test
   public void testFeatureCall_06_01() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s).head", "String");
   }
@@ -910,11 +959,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_24() throws Exception {
     String _plus = ("newArrayList(\'\').map(s|" + 
-      "org::eclipse::xtext::xbase::lib::ObjectExtensions::operator_equals(");
+      "$$ObjectExtensions::operator_equals(");
     String _plus_1 = (_plus + 
-      "\torg::eclipse::xtext::xbase::lib::IntegerExtensions::operator_plus(s.length,1), 5)");
+      "\t$$IntegerExtensions::operator_plus(s.length,1), 5)");
     String _plus_2 = (_plus_1 + 
-      ").map(b| org::eclipse::xtext::xbase::lib::BooleanExtensions::operator_not(b) )");
+      ").map(b| $$BooleanExtensions::operator_not(b) )");
     this.resolvesTo(_plus_2, "List<Boolean>");
   }
   
@@ -969,13 +1018,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList2(iter) }", "List<String>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_Bug342134_01() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e)).flatten", "List<String>");
   }
   
-  @Ignore
   @Test
   public void testFeatureCall_Bug342134_02() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(e|newArrayList(e))", "List<ArrayList<String>>");
@@ -1068,186 +1115,314 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_05() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\torg::eclipse::xtext::xbase::lib::CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05b() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05c() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05d() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newHashSet(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_05e() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.Collection<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_06() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(list, \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_07() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.add(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_08() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval Iterable<String> sublist = list.subList(1, 1)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newArrayList(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
-  @Ignore(value = "TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
   @Test
   public void testDeferredTypeArgumentResolution_09() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(newHashSet(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_10() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.get(0).toString\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Integer>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(null as java.util.Collection<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_11() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_12() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tlist.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_13() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_14() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tlist.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_15() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_16() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_17() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_18() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_19() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_20() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_21() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tsecond.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_22() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tsecond.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_23() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_24() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_25() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_26() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_27() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_28() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval Iterable<String> s = list.flatten\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_29() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval String s = list.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_30() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList(newArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Ignore
-  @Test
-  public void testDeferredTypeArgumentResolution_31() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Ignore
-  @Test
-  public void testDeferredTypeArgumentResolution_32() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Ignore
-  @Test
-  public void testDeferredTypeArgumentResolution_33() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
-  }
-  
-  @Test
-  public void testDeferredTypeArgumentResolution_34() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
+  public void testDeferredTypeArgumentResolution_12() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_13() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.add(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_14() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval Iterable<String> sublist = list.subList(1, 1)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_15() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval java.util.Set<String> sublist = list.subList(1, 1)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_16() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval java.util.Iterator<String> sublist = list.subList(1, 1).iterator\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_17() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tfor(String s: list.subList(1, 1)) {}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore(value = "TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
+  @Test
+  public void testDeferredTypeArgumentResolution_18() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_19() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.get(0).toString\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Integer>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_20() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_21() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tlist.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_22() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tlist.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_23() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tlist.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_24() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_25() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_26() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_27() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_28() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_29() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_30() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tsecond.add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_31() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tlist.add(second.head)\n\t\t\tsecond.add(\'\')\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_32() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_33() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.get(0))\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_34() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
   public void testDeferredTypeArgumentResolution_35() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tsecond.add(\'\')\n\t\t\tlist.add(second.head)\n\t\t\tsecond\n\t\t}", "ArrayList<String>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_36() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_37() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval Iterable<String> s = list.flatten\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_38() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList(newHashSet)\n\t\t\tval String s = list.flatten.head\n\t\t\tlist.head\n\t\t}", "HashSet<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_39() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList(newArrayList)\n\t\t\tval String s = list.flatten.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_40() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList(newArrayList)\n\t\t\tval String s = second.flatten.head\n\t\t\tlist.add(second.head)\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_41() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_42() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_43() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_44() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_45() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tlist.addAll(secondList)\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_46() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval secondList = newArrayList\n\t\t\tlist.addAll(secondList)\n\t\t\tlist.addAll(\'\', \'\', \'\')\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_47() throws Exception {
+    this.resolvesTo("println(newArrayList)", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_48() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = println(list.get(0))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_49() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval String s = println(println(list).head)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_50() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tprintln(list).add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_51() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_52() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\t$$CollectionExtensions::addAll(println(list), println(\'\'), println(\'\'))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_53() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tprintln(list).addAll(null as java.util.ArrayList<String>)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_54() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tprintln(list).addAll(println(newArrayList(\'\')))\n\t\t\tprintln(list)\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_55() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = println(newArrayList)\n\t\t\tprintln(list).addAll(println(newHashSet(\'\')))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_56() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = println(newArrayList)\n\t\t\tprintln(list).addAll(null as java.util.Collection<String>)\n\t\t\tprintln(list)\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_57() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tprintln(list).addAll(\'\', \'\', \'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_58() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = println(newArrayList)\n\t\t\tval secondList = println(newArrayList)\n\t\t\tprintln(list).add(\'\')\n\t\t\tprintln(list).addAll(println(secondList))\n\t\t\tsecondList\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_59() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = println(newArrayList)\n\t\t\tval secondList = println(newArrayList)\n\t\t\tprintln(list).addAll(println(secondList))\n\t\t\tprintln(list).add(\'\')\n\t\t\tprintln(secondList)\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_60() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval Iterable<String> sublist = println(println(list).subList(1, 1))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_61() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval java.util.Set<String> sublist = println(println(list).subList(1, 1))\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_62() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval java.util.Iterator<String> sublist = println(println(println(list).subList(1, 1)).iterator)\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_63() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = println(newArrayList)\n\t\t\tfor(String s: println(list.subList(1, 1))) {}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Ignore(value = "TODO: figure out why the common super type is something like Number & Comparable<? extends Number & Comparable<?>>")
+  @Test
+  public void testDeferredTypeArgumentResolution_64() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_65() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tprintln(list.get(0)).toString\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Integer>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_66() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval second = newArrayList\n\t\t\tprintln(list).add(println(second.get(0)))\n\t\t\tprintln(list).add(\'\')\n\t\t\tlist\n\t\t}", "ArrayList<String>");
   }
   
   @Test
