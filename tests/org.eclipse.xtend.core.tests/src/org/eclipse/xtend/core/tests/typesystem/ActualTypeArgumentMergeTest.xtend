@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.Pair
 /**
  * @author Sebastian Zarnekow
  */
-class ActualTypeArgumentMergeTest  extends AbstractXtendTestCase {
+class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
 
 	@Inject
 	extension IXtendJvmAssociations
