@@ -71,15 +71,12 @@ img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclips
 
 section2:library[The Runtime Library]
 
-The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
-to existing classes and interfaces from the JDK. The class codeRef[org.eclipse.xtext.xbase.lib.InputOutput]
-providing the method code[<T> T println(T obj)] being one of them. 
-
-The only surprising fact in the generated Java code may be the library class. Many 
-features of Xtend are not built into the language itself but provided via the library
-e[org.eclipse.xtend.lib]. The library is available from a ref:MavenSupport[Maven repository] and via p2
+The compiler requires a small runtime library e[org.eclipse.xtend.lib] on the classpath, which provides useful extensions
+to existing classes and interfaces from the JDK. Many 
+features of Xtend are not built into the language itself but provided via this library. 
+It is available from a ref:MavenSupport[Maven repository] and via p2
 update site (in case you do Eclipse plug-in development).
-
+ 
 The library provides means to create collections in a readable way:
 
 code[Xtend][

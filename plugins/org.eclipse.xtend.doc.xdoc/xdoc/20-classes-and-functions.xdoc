@@ -56,7 +56,7 @@ code[Xtend][
   import static java.util.Collections.*
 ]
 
-Static methods of helper classes can also be imported as e[extensions]. See the section on 
+Static methods of helper classes can also be imported as code[Xtend][extension]s. See the section on 
 ref:extensionMethods[extension methods] for details.
 
 
@@ -100,7 +100,7 @@ code[Xtend][
 section:constructors[Constructors]
 
 An Xtend class can define one or more constructors. Unlike Java you do not have to repeat the name of the class over and over again,
-but use keyword e[new] to declare a constructor.
+but use keyword code[Xtend][new] to declare a constructor.
 Constructors can also delegate to other constructors using code[Xtend][this(args...)] in their first
 line. 
 code[Xtend][
@@ -151,7 +151,7 @@ section:methods[Methods]
 
 Xtend methods are declared within a class and are translated to a corresponding Java method with 
 exactly the same signature. The only exceptions are dispatch methods, which are explained 
-ref:polymorphicDispatch[in section]. 
+ref:polymorphicDispatch[later]. 
 code[Xtend][
   def String first(List<String> elements) {
     elements.get(0)
@@ -189,15 +189,15 @@ code[Xtend][
 
 section2[Overriding Methods]
 
-Methods can override other methods from the super class or implemented interface methods using the
+Methods can override other methods from the super class or implement interface methods using the
 keyword code[Xtend][override]. If a method overrides a method from a super type, the 
 code[Xtend][override] keyword is mandatory and replaces the keyword code[Xtend][def]. As in Java 
-code[Xtend][final] methods cannot be overridden by subclasses.
+code[Java][final] methods cannot be overridden by subclasses.
 
 Example:
 code[Xtend][
-  override String first(List<String> elements) {
-    elements.get(0)
+  override String second(List<String> elements) {
+    elements.get(1)
   }
 ]
 
@@ -233,15 +233,15 @@ If the return type of a method can be inferred from its body it does not have to
 
 That is the method
 code[Xtend][
-  def String first(List<String> elements) {
-    elements.get(0)
+  def String second(List<String> elements) {
+    elements.get(1)
   }
 ]
 
 could be declared like this:
 code[Xtend][
-  def first(List<String> elements) {
-    elements.get(0)
+  def second(List<String> elements) {
+    elements.get(1)
   }
 ]
 
@@ -254,8 +254,8 @@ You can specify type parameters just like in Java. To generalize the method from
 you would declare it like this:
 
 code[Xtend][
-  def <T> first(List<T> elements) {
-    elements.get(0)
+  def <T> second(List<T> elements) {
+    elements.get(1)
   }
 ]
 
@@ -342,7 +342,7 @@ code[Java][
 ]
 
 As you can see a code[Xtend][null] reference is never a match. If you want to fetch code[Xtend][null] 
-you can declare a dispatch case using the type code[java.lang.Void].
+you can declare a dispatch case using the type codeRef[java.lang.Void].
 code[Xtend][
   def dispatch printType(Number x) { 
     "it's some number" 
@@ -468,16 +468,16 @@ code[Xtend][
 
 Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
 Another benefit of extensions is that you can add methods which are specific to a certain context
-(read layer) only. You might for instance not want to put UI-specific methods and dependencies to your
+or layer of your application. You might for instance not want to put UI-specific methods and dependencies to your
 domain model classes. Therefore such functionality is often defined in static methods or methods in
-some "service class". That works, but the code is less readable and object-oriented if you call methods
+some "service class". That works, but the code is less readable and less object-oriented if you call methods
 like this. In Java for instance you often see code like this:
 
 code[Java][
   persistenceManager.save(myObject);
 ]
 
-With extension methods you can write
+Without tying your entities to the persistenceManager, extension methods allow you to write
 
 code[Xtend][
   myObject.save
@@ -485,8 +485,6 @@ code[Xtend][
 
 There are different ways to make methods available as extensions, which are described in the following.
 
-%% To be callable in the extension syntax, a method has to be on the extension scope of the callers context.
-%% Xtend supports a variety of ways to put methods on this scope. 
 section2:libraryExtensions[Extensions From The Library]
 
 The ref:library[library] puts a lot of very useful extension methods on existing types from the Java
@@ -494,7 +492,7 @@ SDK without any further ado.
 
 code[Xtend][
   "hello".toFirstUpper // calls StringExtensions.toFirstUpper(String)
-  listOfStrings.map\[toUpperCase\] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
+  listOfStrings.map \[ toUpperCase \] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
 ]
 
 Have a look at the JavaDoc to see what is there:
@@ -565,7 +563,7 @@ code[Java][
 And if you have obtained an instance of that type (through a factory or dependency injection or what ever) like this:
 code[Xtend][
   class MyServlet {
-    extension EntityPersitence ep = Factory.get(typeof(EntityPersistence))
+    extension EntityPersistence ep = Factory.get(typeof(EntityPersistence))
     ...
     
   }
@@ -584,5 +582,5 @@ code[Xtend][
 Using the code[Xtend][extension] modifier on fields has a significant advantage over 
 static ref:extensionImports[extension imports]: Your code is not bound to the actual implementation of the extension method.
 You can simply exchange the component that provides the referenced extension with another implementation from outside,
-by providing a different instance. No matter whether you do so via a factory, dependency injection or simply
-using a setter.
+by providing a different instance. No matter whether you do so via a factory, a dependency injection
+container or simply using a setter.

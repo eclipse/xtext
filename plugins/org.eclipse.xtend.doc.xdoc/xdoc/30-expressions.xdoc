@@ -308,7 +308,7 @@ code[Xtend][
 ]
 
 In such cases, the type of the right hand expression must conform to the type 
-of the expression on the left side. 
+of the expression on the left side.
 
 Alternatively the type can be left out and will be inferred from the initialization expression:  
 code[Xtend][
@@ -442,8 +442,8 @@ code[Xtend][
 ]
 
 Also as lambdas with one parameter are a common case, there is a special short hand for them,
-which is to leave the declaration including the vertical bar out. The name of the single variable will be ref:implicitVariables[it]
-in that case:
+which is to leave the declaration including the vertical bar out. The name of the ref:implicitVariables[single variable]
+will be code[Xtend][it] in that case:
 
 code[Xtend][
   textField.addActionListener(\[
@@ -454,12 +454,12 @@ code[Xtend][
 A lambda expression with zero arguments is written like this (note the bar after the opening bracket):
 
 code[Xtend][
-  val Runnable runnable = \[|
+  val Runnable runnable = \[ |
     println("Hello I'm executed!")
   \]
 ]
 
-When a method call's last parameter is a lambda it can be passed right after the parameters.
+When a method call's last parameter is a lambda it can be passed right after the parameter list.
 For instance if you want to sort some strings by their length, you could write :
 
 code[Xtend][
@@ -476,11 +476,11 @@ code[Xtend][
   \])
 ]
 
-Since you can leave out empty parenthesis methods wich get a lambda as the single argument you can reduce
-the code above further more:
+Since you can leave out empty parenthesis for methods which get a lambda as their only argument, you can reduce
+the code above further:
 
 code[Xtend][
-  textField.addActionListener\[
+  textField.addActionListener \[
     textField.text = "Something happened!"
   \]
 ]
@@ -490,7 +490,7 @@ in the closure's expression. That is exactly what we did with the variable code[
 
 section2:closureTypes[Typing]
 
-Closures are expressions which produce e[Function] objects. The type of a lambda expression generally depends on the target
+Lambdas are expressions which produce e[Function] objects. The type of a lambda expression generally depends on the target
 type, as seen in the previous examples. That is, the lambda expression can coerce to any interface which has declared only 
 one method (in addition to the ones inherited from code[java.lang.Object]). This allows for using lambda expressions in many existing Java
 APIs directly.
@@ -499,7 +499,7 @@ However, if you write a lambda expression without having any target type expecta
 assignment:
 
 code[Xtend][
-  val toUpperCaseFunction = \[String s | s.toUpperCase\] // inferred type is (String)=>String
+  val toUpperCaseFunction = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
 ]
 
 The type will be one of the types found in codeRef[org.eclipse.xtext.xbase.lib.Functions] or codeRef[org.eclipse.xtext.xbase.lib.Procedures].
@@ -510,11 +510,11 @@ which is what you will find in the generated Java code, you can simply write cod
 
 Example:
 code[Xtend][
-  val (String)=>String stringToStringFunction = \[toUpperCase\]
+  val (String)=>String stringToStringFunction = \[ toUpperCase \]
   // or
-  val Function1<? super String,? extends String> same = \[toUpperCase\]
+  val Function1<? super String,? extends String> same = \[ toUpperCase \]
   // or
-  val stringToStringFunction2 = \[String s | s.toUpperCase\] // inferred type is (String)=>String
+  val stringToStringFunction2 = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
 ]
 
 Checked exceptions that are thrown in the body of a closure but not declared in the implemented method of the target type are rethrown using the 
@@ -525,7 +525,7 @@ Of course you can always ref:Xtend_Expressions_TryCatch[catch and handle] them.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:ifExpression[If Expression]
 
-An if expression is used to choose two different values based on a predicate.
+An if expression is used to choose between two different values based on a predicate.
 
 An expression 
 code[Xtend][
@@ -560,7 +560,7 @@ section:switchExpression[Switch Expression]
 
 The switch expression is very different from Java's switch statement. First, there is no fall through which means 
 only one code[Xtend][case] is evaluated at most. Second, the use of code[Xtend][switch] is not limited 
-to certain values but can be used for any object reference instead. code[Object.equals()] is used to
+to certain values but can be used for any object reference instead. code[Object.equals(Object)] is used to
 compare the value in the case with the one you are switching over.
  
 Given the following example:
@@ -585,7 +585,7 @@ section2[Type guards]
 
 Instead of or in addition to the case guard you can specify a e[type guard]. The case only matches if the 
 switch value conforms to this type. A case with both a type guard and a predicate only matches if both match.
-If the switch value is a variable, this variable is automatically casted to the given type withnin the
+If the switch value is a variable, this variable is automatically casted to the given type within the
 predicate and the case's body.
 
 code[Xtend][
@@ -655,7 +655,7 @@ A do-while loop
 code[Xtend][
   do expression while (predicate)
 ] 
-is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false]. 
+is used to execute a certain expression until the predicate is evaluated to code[Xtend][false]. 
 The difference to the ref:whileExpression[while loop] is that the execution starts by executing 
 the block once before evaluating the predicate for the first time. The return type of a do-while 
 loop is code[Xtend][void].
@@ -693,7 +693,7 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_Throw[Throwing Exceptions]
 
-Throwing code[java.lang.Throwable]s up the call stack has the same semantics and syntax 
+Throwing codeRef[java.lang.Throwable]s up the call stack has the same semantics and syntax 
 as in Java.
 
 code[Xtend][
@@ -745,12 +745,12 @@ representation is automatcially inserted at that position.
 
 The terminals for interpolated expression are so called guillemets code[Xtend][«expression»]. They read nicely and are not often used
 in text so you seldomly need to escape them. These escaping conflicts are the reason why
-template languages often use longer character sequences like e.g. code[<%= expression %>] in JSP, for the price of worst readability. 
+template languages often use longer character sequences like e.g. code[<%= expression %>] in JSP, for the price of worse readability. 
 The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 
 If you use the Eclipse plug-in - which is recommended - the guillemets will be inserted on content assist
 within a template. They are additionally bound to e[CTRL+SHIFT+<] and e[CTRL+SHIFT+] for code[«] and code[»] respectively.
-On a Mac they are bound to e[alt+q] (code[«]) and e[alt+Q] (code[»]).
+On a Mac they are as well bound to e[alt+q] (code[«]) and e[alt+Q] (code[»]).
 
 Let us have a look at an example of how a typical method with a template expressions looks like:
 
@@ -869,7 +869,7 @@ ol[
   item[
     Indentation in the template that is relative to a control structure will not be propagated 
     to the output string. A control structure is a code[Xtend][FOR]-loop or a condition 
-    (code[Xtend][IF]) as well as the opening and closing marks of the rich string itself.
+    (code[Xtend][IF]) as well as the opening and closing marks of the template string itself.
     
     The indentation is considered to be relative to such a control structure if the previous 
     line ends with a control structure followed by optional white space. The amount of white 
@@ -913,8 +913,8 @@ class Template {
   ]
 ]
 
-The indentation before code[node «n.name»] will be skipped as it is relative to the opening mark of
-the rich string and thereby not considered to be relevant for the output but only for readability 
+The indentation before code[Xtend][node «n.name»] will be skipped as it is relative to the opening mark of
+the template string and thereby not considered to be relevant for the output but only for readability 
 of the template itself.
 
 table[

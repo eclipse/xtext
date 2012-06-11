@@ -11,9 +11,9 @@ code[Xtend][
 ]
 
 You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the code[Xtend][def]
-keyword for declaring a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
+keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
 Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real stuff
-as you will learn in a moment.
+as you will learn in a second.
 
 An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
 translate it to Java code. By default you will find it in a source folder e[xtend-gen], which is of course configurable.
@@ -27,9 +27,13 @@ code[Java][
       InputOutput.<String>println("Hello World");
     }
   }
-] 
+]
 
-You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
+The only surprising fact in the generated Java code may be the referenced library class codeRef[org.eclipse.xtext.xbase.lib.InputOutput]. 
+It is provided by the ref:library[runtime library] and only one nice utility that is handy when using
+expressions.
+
+You can put an Xtend class into a source folder of any Java project within Eclipse (or any Maven project). Eclipse will complain
 about the missing library if it is not on the classpath and provide a quick fix to add it.
 
 The next thing you might want to do is materializing one of the example projects into your workspace.
@@ -58,7 +62,7 @@ ul[
 section:moviesExample[The Movies Example]
 
 The movies example is included in the example project e[Xtend Introductory Examples] (src/examples6/Movies.xtend) and is about reading
-a file with data about movies in and doing some analysis on it.
+a file with data about movies and doing some analysis on it.
 
 section2[The Data]
 
@@ -129,19 +133,19 @@ We want the field to be final, so we declare it as a value using the keyword cod
 
 The initialization on the right hand side first creates a fresh instance of code[java.io.FileReader].
 Then the method code[readLines()] is invoked on that instance. But if you have a look at code[FileReader] you will not find
-such a method, because code[readLines()] is in fact a static method from Google Guava's code[CharStream] which was imported 
+such a method, because code[readLines()] is in fact a static method from Google Guava's code[CharStreams] which was imported 
 as an ref:extensionImports[extension] which allows us to use this readable syntax.
 
 code[Xtend][
 import static extension com.google.common.io.CharStreams.*
 ]
 
-code[CharStream.readLines(Reader)] returns a code[List<String>] on which we call another extension method called code[map].
-That one is defined in the ref:library[runtime library] (code[ListExtensions.map(...)] and is always imported and
+codeRef[com.google.common.io.CharStreams]code[.readLines(Reader)] returns a code[List<String>] on which we call another extension method called code[map].
+That one is defined in the ref:library[runtime library] (codeRef[org.eclipse.xtext.xbase.lib.ListExtensions]code[.map(...)]) and is always imported and
 therefore automatically available on all lists. The code[map] extension expects a function as a parameter.
-Map basically invokes that function for each value in the list and returns another list containing the results of the function incovations.
+It basically invokes that function for each value in the list and returns another list containing the results of the function invocations.
 
-Function objects are created using ref:lambdas[lambda expression] (the code in squared brackets).
+Function objects are created using ref:lambdas[lambda expressions] (the code in squared brackets).
 Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
 separator (two whitespaces) and calling iterator on the result. As you might know code[java.lang.String.split(String)]
 returns a string array (code[String\[\]]), which Xtend ref:conversionRules[auto-convertes to a list] when we 
@@ -153,7 +157,7 @@ val segments = line.split('  ').iterator
 
 Now we use the iterator to create an instance of code[Movie].
 The data type conversion (e.g. code[String] to code[Xtend][int]) is done by calling ref:staticAccess[static methods] from the wrapper types. 
-The rest of the iterable is turned into a set using the extension method code[Iterators.toSet(Iterator<T>)]
+The rest of the iterable is turned into a set using the extension method codeRef[org.eclipse.xtext.xbase.lib.IteratorExtensions]code[.toSet(Iterator<T>)]
 and contains all the categories the movie is associated with.
 
 code[Xtend][
