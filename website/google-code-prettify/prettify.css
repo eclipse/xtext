@@ -1,10 +1,17 @@
-.com { color: #93a1a1; }
+.com { color: green; }
 .lit { color: #195f91; }
-.pun, .opn, .clo { color: #93a1a1; }
+.pun { color: #555; }
+.opn { color: black; } 
+.clo { color: blue; }
 .fun { color: #dc322f; }
-.str, .atv { color: #D14; }
-.kwd, .linenums .tag { color: #1e347b; }
-.typ, .atn, .dec, .var { color: teal; }
+.str { color: #4200bf; } 
+.atv { color: #D14; }
+.kwd { color: #7f0085; font-weight:bold;}
+.linenums .tag { color: #1e347b; }
+.typ { color: #777; }
+.atn { color: teal; } 
+.dec { color: teal; } 
+.var { color: teal; }
 .pln { color: #48484c; }
 
 .prettyprint {
