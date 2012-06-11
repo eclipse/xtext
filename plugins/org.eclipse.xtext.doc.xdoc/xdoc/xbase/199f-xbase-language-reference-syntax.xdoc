@@ -1,6 +1,6 @@
 section2:xbaseLanguageRef_Syntax[Lexical Syntax]
 
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. 
+Xbase comes with a small set of terminal rules, which can be overridden and hence changed by users. 
 However the default implementation is carefully chosen and it is recommended to stick with the 
 lexical syntax described in the following.
 
@@ -9,15 +9,15 @@ section3:Xbase_Syntax_Identifiers[Identifiers]
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
 Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
 while having less ambiguities. They start with a letter e[a]-e[z], e[A]-e[Z] or an underscore followed
-by more of these characters or a digit e[0]-e[9]. 
+by more of these characters or any of the digits e[0]-e[9]. 
 
 section4:Xbase_Syntax_EscapedIdentifiers[Escaped Identifiers]
 
-Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers 
+Identifiers must not have the same spelling as any reserved keyword. 
+However, this limitation can be avoided by escaping identifiers with the prefix code[^]. Escaped identifiers 
 are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a 
-keyword code[service] in your language but want to call a Java property e[service] at some point. 
-In such cases you use an escaped identifier code[^service] to reference the Java property.
+keyword code[service] in your language but want to call a Java property e[service]. 
+In such cases you can use the escaped identifier code[^service] to reference the Java property.
 
 section4[Syntax]
 
@@ -53,28 +53,29 @@ section3:Xbase_Syntax_Keywords[Reserved Keywords]
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
 	item[code[Xbase][as]]
-	item[code[Xbase][case]]
-	item[code[Xbase][catch]]
-	item[code[Xbase][default]]
-	item[code[Xbase][do]]
-	item[code[Xbase][else]]
-	item[code[Xbase][extends]]
-	item[code[Xbase][false]]
-	item[code[Xbase][finally]]
-	item[code[Xbase][for]]
-	item[code[Xbase][if]]
-	item[code[Xbase][instanceof]]
-	item[code[Xbase][new]]
-	item[code[Xbase][null]]
-	item[code[Xbase][true]]
-	item[code[Xbase][super]]
-	item[code[Xbase][switch]]
-	item[code[Xbase][throw]]
-	item[code[Xbase][try]]
-	item[code[Xbase][typeof]]
-	item[code[Xbase][val]]
-	item[code[Xbase][var]]
-	item[code[Xbase][while]]
+    item[code[Xbase][case]]
+    item[code[Xbase][catch]]
+    item[code[Xbase][default]]
+    item[code[Xbase][do]]
+    item[code[Xbase][else]]
+    item[code[Xbase][extends]]
+    item[code[Xbase][false]]
+    item[code[Xbase][finally]]
+    item[code[Xbase][for]]
+    item[code[Xbase][if]]
+    item[code[Xbase][instanceof]]
+    item[code[Xbase][new]]
+    item[code[Xbase][null]]
+    item[code[Xbase][return]]
+    item[code[Xbase][super]]
+    item[code[Xbase][switch]]
+    item[code[Xbase][throw]]
+    item[code[Xbase][true]]
+    item[code[Xbase][try]]
+    item[code[Xbase][typeof]]
+    item[code[Xbase][val]]
+    item[code[Xbase][var]]
+    item[code[Xbase][while]]
 ]
 
-However, in case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 
+In case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 

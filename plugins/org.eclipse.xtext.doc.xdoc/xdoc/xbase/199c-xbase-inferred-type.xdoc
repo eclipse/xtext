@@ -33,7 +33,7 @@ codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] in Xtend. It becomes
 inherit from the codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] which traverses the
 input model and dispatches to its contents until you decide which elements to handle. 
 
-The inferrence runs in two phases: In the first phase all the naked types are created. This way you
+The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you
 make sure all types exist and are referrable when you create their members in the second phase. 
 Use code[Xtend2][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialization
 code for the second phase as a ref:Xbase_Expressions_Lambda[lambda expression] handed to the method

@@ -5,11 +5,11 @@ Basically all kinds of JVM types are available and referable.
 section3:Xbase_Types_Arrays[Arrays]
 
 Arrays cannot be declared explicitly,
-but they can be passed around and if needed are transparently converted to a List of the compound type.
+but they can be passed around and they are (if needed) transparently converted to a List of the compound type.
 
 In other words, the return type of a Java method that returns an array of ints (code[Java][int\[\]]) can be directly assigned to 
 a variable of type code[Xbase][java.util.List<java.lang.Integer>] (in short code[Xbase][List<Integer>]). Due to type inference
-you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked 
+this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked 
 with a code[List] instead.
 
 section3:Xbase_Types_TypeReferences[Simple Type References]
@@ -68,16 +68,20 @@ ul[
 
 section3:Xbase_Types_Primitives[Primitives]
 
-Xbase supports all Java primitives. The conformance rules (e.g. boxing unboxing) are also exactly like defined
+Xbase supports all Java primitives. The conformance rules (e.g. boxing and unboxing) are also exactly like defined
 in the Java Language Specification.
 
 section3:Xbase_Types_ConformanceRules[Conformance and Conversion]
 
-Conformance is used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
+The concept of type conformance is used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
 the type of the right hand expression needs to conform to the type of the variable.
 
 As Xbase implements the unchanged type system of Java it also fully supports the conformance rules defined
 in link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html][The Java Language Specification].
+
+Some types in Xbase can be used synonymously which don't conform to each other in Java. An example for this are arrays/lists 
+and function types with compatible function parameters.  
+Objects of these types are implicitly converted by Xbase, if needed.   
 
 section3:Xbase_Types_CommonSuperType[Common Super Type]
 

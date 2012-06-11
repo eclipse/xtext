@@ -2,23 +2,23 @@ section2:xbaseLanguageRef_Expressions[Expressions]
 
 Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
-be helpful, too. An expression always results in a value (might be the value code[Xbase][null] though). In addition every resolved expressions is
+be helpful. An expression always results in a value (it might be the value code[Xbase][null] though). In addition, every resolved expressions is
 of a static type.
 
 section3:Xbase_Expressions_Literals[Literals]
 
-A literal denotes a fixed unchangeable value. Literals for strings, integers, booleans,
+A literal denotes a fixed unchangeable value. Literals for strings, numbers, booleans,
 code[Xbase][null] and Java types are supported.
 
 section4:Xbase_Expressions_StringLiteral[String Literals]
 
 String literals can either use single quotes (') or double quotes (") as their terminals. When using
 double quotes all literals allowed by Java string literals are supported. In addition new line 
-characters are allowed, that is in Xbase all string literals can span multiple lines. When using single 
+characters are allowed, i.e. in Xbase string literals can span multiple lines. When using single 
 quotes the only difference is that single quotes within the literal have to be escaped and double quotes 
 do not.
 
-See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
+See link[http://docs.oracle.com/javase/specs/jls/se5.0/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
 
 In contrast to Java, equal string literals within the same class do not neccessarily refer to the same
 instance at runtime.
@@ -56,7 +56,7 @@ code[Xbase][
   0xbeef_beef_beef_beef_beef#BI // BigInteger
 ]
 
-An floating-point literal creates an code[Xbase][double] (suffix code[D] or none), a code[Xbase][float] 
+A floating-point literal creates an code[Xbase][double] (suffix code[D] or none), a code[Xbase][float] 
 (suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] you have to 
 specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point 
 literals.  
@@ -79,8 +79,8 @@ ul[
 
 section4:Xbase_Expressions_NullLiteral[Null Literal]
 
-The null pointer literal is, like in Java, code[Xbase][null]. 
-It is a member of any reference type.
+The null pointer literal is, as in Java, code[Xbase][null]. 
+It is compatible to any reference type.
 
 ul[
 	item[code[Xbase][null]]
@@ -91,12 +91,12 @@ section4:Xbase_Expressions_TypeLiteral[Type Literals]
 Type literals are specified using the keyword code[Xbase][typeof] :
 
 ul[
-  item[code[Xbase][typeof(java.lang.String)] which yields java.lang.String.class]
+  item[code[Xbase][typeof(java.lang.String)] which yields code[Java][java.lang.String.class]]
 ]
 
 section3:Xbase_Expressions_TypeCasts[Type Casts]
 
-Type cast behave like casts in Java, but have a slightly more readable syntax.
+Type cast behave the same as in Java, but have a slightly more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
 
 The conformance rules for casts are defined in the link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5][Java Language Specification].
@@ -163,13 +163,13 @@ table[
 		
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
 The assignment operator code[+=] is right-to-left associative in the same way as the plain assignment
-operator code[=] is. That is a = b = c is executed as a = (b = c), all other
+operator code[=] is. Consequently, code[a = b = c] is executed as code[a = (b = c)]. All other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 
 section4[Short-Circuit Boolean Operators]
 
 If the operators code[||] and code[&&] are used in a context where the left hand operand is of type boolean, the operation is evaluated
-in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
+in short circuit mode, which means that the right hand operand is not be evaluated at all in the following cases: 
 ol[
 	item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xbase][true].]
 	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xbase][false].]
@@ -190,10 +190,10 @@ ul[
 
 section4[With Operator]
 
-The with operator code[=>] executes the ref:Xbase_Expressions_Lambda[lambda expression] with a single parameter on the right
+The e[with] operator code[=>] executes the ref:Xbase_Expressions_Lambda[lambda expression] with a single parameter on the right
 hand side on a given argument on its left hand side. The result is the left operand after applying the lambda expression. In 
 combination with the  ref:Xbase_Expressions_implicit_parameter[implicit parameter] code[Xbase][it] this allows very convenient
-initialization of newly created objects, e.g.
+initialization of newly created objects. Example:
 
 code[Xbase][
 	val person = new Person => \[
@@ -229,8 +229,8 @@ Remember in Xbase everything is an expression and has to return something. In th
 Java expression, which is the assigned value.
 
 If there is no accessible field on the left operand's type, a method called code[Java][setMyProperty(OneArg)] (JavaBeans
-setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value will be whatever the 
-setter method returns (which usually is code[Xbase][null]). 
+setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value of the assignment will be the 
+return value of the setter method (which is usually code[Xbase][null]). 
 As a result the compiler translates to :
 
 code[Java][
@@ -240,8 +240,8 @@ code[Java][
 
 section3:Xbase_Expressions_FeatureCalls[Feature Calls]
 
-A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
-which are made available for the current expression's scope. 
+A feature call is used to invoke members of objects, such as fields and methods, but it can also refer to local variables and parameters, 
+which are made available by the current expression's scope. 
 
 
 section4:Xbase_Expressions_PropertyAccess[Property Access]
@@ -326,23 +326,42 @@ ul[
 
 section3:Xbase_Expressions_Lambda[Lambda Expressions]
 
-A lambda expression, AKA closure, is a literal that defines an anonymous function. A lambda expression also captures the current scope,
-so that any final variables and parameters visible at construction time can be referred to in the lambda expression's body. 
+A lambda expression, similar to a closure, is a literal that defines an anonymous function. In contrast to closures, lambda expressions 
+also captures the current scope, so that any final variables and parameters visible at construction 
+time can be referred to in the lambda expression's body. 
 
-The surrounding square brackets are optional if the lambda expression is the single argument of a method invocation.
-That is you can write
-
-code[Xbase][
-	myList.find(e|e.name==null)
-]
-
-instead of
+Lambda expressions are surrounded by square brackets (\code[\[\]]):
 
 code[Xbase][
-	myList.find(\[e|e.name==null\])
+	myList.findFirst(\[e|e.name==null\])
 ]
 
-But in all other cases the square brackets are mandatory:
+When a function object is expected to be the last parameter of a feature call, you may declare the lambda expression after the parenthesis: 
+
+code[Xbase][
+	myList.findFirst()\[e|e.name==null\]
+]
+
+Since in Xbase parenthesis are optional for method calls, the same can be written as:
+
+code[Xbase][
+	myList.findFirst\[e|e.name==null\]
+]
+
+This example can be further simplified since the lambda's parameter is available as the implicit variable code[Xbase][it], 
+if the parameter is not declared explicitly: 
+
+code[Xbase][
+	myList.findFirst\[it.name==null\]
+]
+
+Since code[Xbase][it] is implcicit, this is the same as:
+
+code[Xbase][
+	myList.findFirst\[name==null\]
+]
+
+Another usecase for lambda expressions is to store function objects in variables:
 
 code[Xbase][
 	val func = \[String s| s.length>3\]
@@ -361,11 +380,11 @@ code[Java][
 
 the type of the parameter can be inferred. Which allows users to write:
 code[Xbase][
-	arrayList( "Foo", "Bar" ).findFirst( e | e == "Bar" )
+	arrayList( "Foo", "Bar" ).findFirst\[ e | e == "Bar" \]
 ]
 instead of 
 code[Xbase][
-	arrayList( "Foo", "Bar" ).findFirst( String e | e == "Bar" )
+	arrayList( "Foo", "Bar" ).findFirst\[ String e | e == "Bar" \]
 ]
 
 
@@ -481,7 +500,7 @@ Expressions of type code[java.lang.Boolean] or code[boolean] are not allowed in 
 The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
 Then the right hand expression of the case evaluated and the result is returned.
 
-If none of the guards matches the default expression is evaluated an returned. If no default expression
+If none of the guards matches the default expression is evaluated and returned. If no default expression
 is specified the expression evaluates to code[Xbase][null].
 
 Example:
@@ -548,12 +567,12 @@ ul[
 section3:Xbase_Expressions_VariableDeclaration[Variable Declarations]
 
 Variable declarations are only allowed within ref:Xbase_Expressions_Blocks[blocks]. They are visible in any
-subsequent expressions in the block. Although overriding or shadowing variables from outer scopes is allowed, 
-it is usually only used to overload the ref:Xbase_Expressions_ImplicitThis[implicit variables] code[Xbase][this] 
-and code[Xbase][it], in order to subsequently access an object's features in an unqualified manner.
+subsequent expressions in the block. Generally, overriding or shadowing variables from outer scopes is not allowed,
+however, it can be used to overload the ref:Xbase_Expressions_ImplicitThis[implicit variable] 
+code[Xbase][it], in order to subsequently access an object's features in an unqualified manner.
 
 A variable declaration starting with the keyword code[Xbase][val] denotes a so called value, which is essentially 
-a final (i.e. unsettable) variable. In rare cases, one needs to update the value of a reference. In such situations
+a final (i.e. unmodifyable) variable. In rare cases, one needs to update the value of a reference. In such situations
 the variable needs to be declared with the keyword code[Xbase][var], which stands for 'variable'.
 
 A typical example for using code[Xbase][var] is a counter in a loop. 
@@ -687,11 +706,11 @@ In a lambda expression for instance a return expression is always implied if the
 code[Xbase][void]. Anyway you can make it explicit:
 
 code[Xbase][
-	listOfStrings.map(e| {
+	listOfStrings.map\[e| {
 		if (e==null) 
 			return "NULL"
 		e.toUpperCase
-	}) 
+	}\]
 ]
 
 section3:Xbase_Expressions_Throw[Throwing Exceptions]
@@ -710,9 +729,10 @@ code[Xbase][
 section3:Xbase_Expressions_TryCatch[Try, Catch, Finally]
 
 The try-catch-finally expression is used to handle exceptional situations.
-You are not forced to declare checked exceptions, if you don't catch checked exceptions they are rethrown
-in a wrapping runtime exception. 
-Other than that the syntax again is like the one known from Java.
+You are not forced to declare checked exceptions. If you don't catch checked exceptions, they are rethrown in a way the compiler
+does not complain about a missing throws clause, using the sneaky-throw technique introduced by 
+link[http://projectlombok.org/features/SneakyThrows.html][Lombok].
+The syntax again is the same known from Java.
 
 code[Xbase][
 	try {

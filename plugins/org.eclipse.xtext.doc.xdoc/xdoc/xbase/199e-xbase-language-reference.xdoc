@@ -32,9 +32,7 @@ reused within any Xtext based language.
 Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few 
 differences:
 ul[
-	item[Runs on the JVM]
 	item[No checked exceptions]
-	item[Object-oriented]
 	item[Everything is an expression, there are no statements]
 	item[Lambda expressions]
 	item[Type inference]

@@ -64,8 +64,8 @@ Feature:
 As we changed the grammar, we have to regenerate the language now.
 
 Being able to parse a Java type reference is already nice, but we also have to write them back to their string
-representation when we generate Java code. Into the bargain, a generic type reference with fully qualified
-class names can become a bit bulky. The codeRef[org.eclipse.xtext.xbase.compiler.ImportManager] shortens
+representation when we generate Java code. Unfortunately, a generic type reference with fully qualified
+class names can become a bit bulky. Therefore, the codeRef[org.eclipse.xtext.xbase.compiler.ImportManager] shortens
 fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize
 codeRef[org.eclipse.xtext.common.types.JvmTypeReference][JvmTypeReferences] by means of the 
 codeRef[org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer]. This utility encapsulates how type
