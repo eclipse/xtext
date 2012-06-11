@@ -131,9 +131,9 @@ A ref:fields[field's type] can be inferred from the expression on the right hand
 That is called local type inference and is supported everyhwere in Xtend.
 We want the field to be final, so we declare it as a value using the keyword code[Xtend][val].
 
-The initialization on the right hand side first creates a fresh instance of code[java.io.FileReader].
+The initialization on the right hand side first creates a fresh instance of codeRef[java.io.FileReader].
 Then the method code[readLines()] is invoked on that instance. But if you have a look at code[FileReader] you will not find
-such a method, because code[readLines()] is in fact a static method from Google Guava's code[CharStreams] which was imported 
+such a method, because code[readLines()] is in fact a static method from Google Guava's codeRef[com.google.common.io.CharStreams] which was imported 
 as an ref:extensionImports[extension] which allows us to use this readable syntax.
 
 code[Xtend][
@@ -149,7 +149,7 @@ Function objects are created using ref:lambdas[lambda expressions] (the code in 
 Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
 separator (two whitespaces) and calling iterator on the result. As you might know code[java.lang.String.split(String)]
 returns a string array (code[String\[\]]), which Xtend ref:conversionRules[auto-convertes to a list] when we 
-call code[Iterable.iterator()] on it.
+call codeRef[java.lang.Iterable]code[.iterator()] on it.
 
 code[Xtend][
 val segments = line.split('  ').iterator
@@ -243,7 +243,7 @@ code[Xtend][
 ]
 
 First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their code[numberOfVotes] using the code[map] function. 
-Now we have a code[List<Long>] which can be reduced to a single code[Integer] by adding the values.
+Now we have a codeRef[java.util.List]code[<Long>] which can be reduced to a single codeRef[java.lang.Integer] by adding the values.
 
 You could also use code[reduce] instead of code[map] and code[reduce]. Do you know how?
 

@@ -11,7 +11,7 @@ code[Xtend][
     }
 ] 
 
-If code[fileContentsToString()] throws an code[IOException], it is caught and the string code['dummy data'] is assigned to the value code[data].
+If code[fileContentsToString()] throws an codeRef[java.io.IOException], it is caught and the string code['dummy data'] is assigned to the value code[data].
  
 Expressions can appear as ref:fields[initializers of fields], the body of constructors
 or methods and as values in annotations. A method body can either be a ref:blocks[block expression] 
@@ -25,7 +25,7 @@ code[Xtend][null] and ref:typeLiteral[Java types] are supported.
 
 section2:stringLiterals[String Literals]
 
-A string literal is of type code[java.lang.String] (just like in Java).
+A string literal is of type codeRef[java.lang.String] (just like in Java).
 String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
 least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
@@ -117,8 +117,8 @@ section:operators[Infix Operators and Operator Overloading]
 There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 operators for any type just by implementing the corresponding method signature. As an example, the 
-ref:library[Xtend runtime library] contains a class code[BigDecimalExtensions] that defines operators for 
-code[BigDecimals] which allows the following code:
+ref:library[Xtend runtime library] contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
+codeRef[java.math.BigDecimal]s which allows the following code:
 code[Xtend][
   val x = 2.71BD
   val y = 3.14BD
@@ -182,8 +182,8 @@ precedence and associativity.
 section2[Short-Circuit Boolean Operators]
 
 If the operators code[||] and code[&&] are bound to the library methods 
-code[BooleanExtensions.operator_and(boolean l, boolean r)] resp. 
-code[BooleanExtensions.operator_or(boolean l, boolean r)] the operation is evaluated in short circuit mode.
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions]code[.operator_and(boolean l, boolean r)] resp. 
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions]code[.operator_or(boolean l, boolean r)] the operation is evaluated in short circuit mode.
 That means that the right hand operand might not be evaluated at all in the following cases: 
 ol[
   item[in the case of code[||] the operand on the right hand side is not evaluated if the left 
@@ -492,7 +492,7 @@ section2:closureTypes[Typing]
 
 Lambdas are expressions which produce e[Function] objects. The type of a lambda expression generally depends on the target
 type, as seen in the previous examples. That is, the lambda expression can coerce to any interface which has declared only 
-one method (in addition to the ones inherited from code[java.lang.Object]). This allows for using lambda expressions in many existing Java
+one method (in addition to the ones inherited from codeRef[java.lang.Object]). This allows for using lambda expressions in many existing Java
 APIs directly.
 
 However, if you write a lambda expression without having any target type expectation, like in the following
@@ -610,7 +610,7 @@ code[Xtend][
   for (T1 variable : arrayOrIterable) expression
 ] 
 is used to execute a certain expression for each element of an array or an instance of 
-code[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
+codeRef[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
 
 The return type of a for loop is code[Xtend][void]. The type of the local variable can be left out. 
 In that case it is inferred from the type of the array or code[java.lang.Iterable] returned by the 

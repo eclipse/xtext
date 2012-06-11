@@ -92,7 +92,7 @@ code[Xtend][
   val listOfNames = listOfPersons.map\[ name \]
 ]
 
-Many operators to concat collections or to do arithmetics with types like code[BigDecimal] are also available.
+Many operators to concat collections or to do arithmetics with types like codeRef[java.math.BigDecimal] are also available.
 
 You might want to have a look at the link[http://xtend-lang.org/api/2.3.0/index.html][JavaDoc API] to see what is
 available.
