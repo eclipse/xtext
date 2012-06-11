@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xdoc.xdoc.Anchor;
 import org.eclipse.xtext.xdoc.xdoc.Code;
 import org.eclipse.xtext.xdoc.xdoc.CodeBlock;
@@ -243,14 +244,10 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final Todo it) {
-    String _xblockexpression = null;
-    {
-      String _text = it.getText();
-      String _plus = ("TODO: " + _text);
-      InputOutput.<String>println(_plus);
-      _xblockexpression = ("");
-    }
-    return _xblockexpression;
+    String _text = it.getText();
+    String _plus = ("TODO: " + _text);
+    InputOutput.<String>println(_plus);
+    return "";
   }
   
   protected CharSequence _toHtml(final CodeRef it) {
@@ -298,52 +295,50 @@ public class HtmlExtensions {
       EList<EObject> _contents = it.getContents();
       CharSequence _html = this.toHtml(_contents);
       final String code = _html.toString();
-      String _xifexpression = null;
-      LangDef _language = it.getLanguage();
-      String _name = _language==null?(String)null:_language.getName();
-      boolean _equals = Objects.equal(_name, null);
-      if (_equals) {
-        _xifexpression = "xtend";
-      } else {
-        LangDef _language_1 = it.getLanguage();
-        String _name_1 = _language_1.getName();
-        _xifexpression = _name_1;
-      }
-      final String languageName = _xifexpression;
-      CharSequence _xifexpression_1 = null;
-      boolean _or = false;
+      CharSequence _xifexpression = null;
+      boolean _and = false;
       boolean _contains = code.contains("\n");
-      if (_contains) {
-        _or = true;
+      if (!_contains) {
+        _and = false;
       } else {
         boolean _contains_1 = code.contains("\r");
-        _or = (_contains || _contains_1);
+        boolean _not = (!_contains_1);
+        _and = (_contains && _not);
       }
-      if (_or) {
+      if (_and) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<pre class=\"prettyprint lang-");
-        String _lowerCase = languageName.toLowerCase();
-        _builder.append(_lowerCase, "");
+        LangDef _language = it.getLanguage();
+        String _name = _language==null?(String)null:_language.getName();
+        String _lowerCase = _name==null?(String)null:_name.toLowerCase();
+        String _elvis = ObjectExtensions.<String>operator_elvis(_lowerCase, "xtend");
+        _builder.append(_elvis, "");
         _builder.append(" linenums\">");
         String _markCodeBegin = this.markCodeBegin();
         _builder.append(_markCodeBegin, "");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
         String _trimCode = this.trimCode(code);
-        _builder.append(_trimCode, "");
+        _builder.append(_trimCode, "			");
         String _markCodeEnd = this.markCodeEnd();
-        _builder.append(_markCodeEnd, "");
+        _builder.append(_markCodeEnd, "			");
         _builder.append("</pre>");
-        _builder.newLineIfNotEmpty();
-        _xifexpression_1 = _builder;
+        _xifexpression = _builder;
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<code>");
+        _builder_1.append("<code class=\"prettyprint lang-");
+        LangDef _language_1 = it.getLanguage();
+        String _name_1 = _language_1==null?(String)null:_language_1.getName();
+        String _lowerCase_1 = _name_1==null?(String)null:_name_1.toLowerCase();
+        String _elvis_1 = ObjectExtensions.<String>operator_elvis(_lowerCase_1, "xtend");
+        _builder_1.append(_elvis_1, "");
+        _builder_1.append("\">");
         String _trimCode_1 = this.trimCode(code);
         _builder_1.append(_trimCode_1, "");
         _builder_1.append("</code>");
-        _xifexpression_1 = _builder_1;
+        _xifexpression = _builder_1;
       }
-      _xblockexpression = (_xifexpression_1);
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -431,12 +426,14 @@ public class HtmlExtensions {
         _and = false;
       } else {
         boolean _or = false;
-        String _substring = it.substring(start, 1);
+        int _plus = (start + 1);
+        String _substring = it.substring(start, _plus);
         boolean _equals = Objects.equal(_substring, " ");
         if (_equals) {
           _or = true;
         } else {
-          String _substring_1 = it.substring(start, 1);
+          int _plus_1 = (start + 1);
+          String _substring_1 = it.substring(start, _plus_1);
           boolean _equals_1 = Objects.equal(_substring_1, "\t");
           _or = (_equals || _equals_1);
         }
@@ -444,8 +441,8 @@ public class HtmlExtensions {
       }
       boolean _while = _and;
       while (_while) {
-        int _plus = (start + 1);
-        start = _plus;
+        int _plus_2 = (start + 1);
+        start = _plus_2;
         boolean _and_1 = false;
         int _length_1 = it.length();
         int _minus_1 = (_length_1 - 1);
@@ -454,12 +451,14 @@ public class HtmlExtensions {
           _and_1 = false;
         } else {
           boolean _or_1 = false;
-          String _substring_2 = it.substring(start, 1);
+          int _plus_3 = (start + 1);
+          String _substring_2 = it.substring(start, _plus_3);
           boolean _equals_2 = Objects.equal(_substring_2, " ");
           if (_equals_2) {
             _or_1 = true;
           } else {
-            String _substring_3 = it.substring(start, 1);
+            int _plus_4 = (start + 1);
+            String _substring_3 = it.substring(start, _plus_4);
             boolean _equals_3 = Objects.equal(_substring_3, "\t");
             _or_1 = (_equals_2 || _equals_3);
           }
@@ -467,11 +466,12 @@ public class HtmlExtensions {
         }
         _while = _and_1;
       }
-      String _substring_2 = it.substring(start, 1);
+      int _plus_2 = (start + 1);
+      String _substring_2 = it.substring(start, _plus_2);
       boolean _equals_2 = Objects.equal(_substring_2, "\n");
       if (_equals_2) {
-        int _plus = (start + 1);
-        start = _plus;
+        int _plus_3 = (start + 1);
+        start = _plus_3;
       }
       int _length_1 = it.length();
       int end = (_length_1 - 1);
@@ -499,8 +499,8 @@ public class HtmlExtensions {
         }
         _while_1 = _and_2;
       }
-      int _plus_1 = (end + 1);
-      String _substring_3 = it.substring(start, _plus_1);
+      int _plus_4 = (end + 1);
+      String _substring_3 = it.substring(start, _plus_4);
       _xblockexpression = (_substring_3);
     }
     return _xblockexpression;

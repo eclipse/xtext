@@ -105,7 +105,7 @@ class HtmlExtensions {
 	
 	def dispatch toHtml(Todo it) {
 		println("TODO: " + text)
-		""
+		return ""
 	}
 	
 	def dispatch CharSequence toHtml(CodeRef it) '''
@@ -121,11 +121,12 @@ class HtmlExtensions {
 	
 	def dispatch toHtml(CodeBlock it) {
 		val code = contents.toHtml.toString
-		val languageName = if (language?.name==null) "xtend" else language.name
-		if(code.contains('\n') || code.contains('\r')) '''
-			<pre class="prettyprint lang-«languageName.toLowerCase» linenums">«markCodeBegin»
-			«code.trimCode»«markCodeEnd»</pre>
-		''' else '''<code>«code.trimCode»</code>'''
+		if (code.contains('\n') && !code.contains('\r')) {
+			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
+			«code.trimCode»«markCodeEnd»</pre>'''
+		} else {
+			'''<code class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'»">«code.trimCode»</code>'''
+		}
 	}
 	
 	def dispatch toHtml(Link it) '''<a href="«url»">«text»</a>'''
@@ -160,9 +161,9 @@ class HtmlExtensions {
 	
 	def protected trimCode(String it) {
 		var start = 0
-		while(start < length()-1 && (substring(start, 1) == ' ' || substring(start,1)=='\t'))
+		while(start < length()-1 && (substring(start, start+1) == ' ' || substring(start,start+1) == '\t'))
 			start = start + 1;
-		if(substring(start,1) =='\n')
+		if(substring(start,start+1) =='\n')
 			start = start + 1;
 		var end = length()-1
 		while(end >0 && Character::isWhitespace(charAt(end)))
