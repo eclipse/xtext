@@ -262,32 +262,27 @@ public class HtmlExtensions {
     String _replace = _qualifiedName.replace(".", "/");
     _builder.append(_replace, "");
     _builder.append(".html\">");
-    _builder.newLineIfNotEmpty();
     {
       TextOrMarkup _altText = it.getAltText();
       boolean _notEquals = (!Objects.equal(_altText, null));
       if (_notEquals) {
-        _builder.append("\t");
         TextOrMarkup _altText_1 = it.getAltText();
-        _builder.append(_altText_1, "	");
-        _builder.newLineIfNotEmpty();
+        _builder.append(_altText_1, "");
       } else {
-        _builder.append("\t");
         _builder.append("<abbr title=\"");
         JvmDeclaredType _element_1 = it.getElement();
         String _qualifiedName_1 = _element_1.getQualifiedName();
-        _builder.append(_qualifiedName_1, "	");
+        _builder.append(_qualifiedName_1, "");
         _builder.append("\">");
         JvmDeclaredType _element_2 = it.getElement();
         String _simpleName = _element_2.getSimpleName();
         String _trim = _simpleName.trim();
-        _builder.append(_trim, "	");
+        _builder.append(_trim, "");
         _builder.append("</abbr>");
-        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("</a>");
-    _builder.newLine();
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   

@@ -10,6 +10,11 @@
 	<!-- Le styles -->
 	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
+	    code.prettyprint {
+	        padding: 0px;
+	        background-color: white;
+			border: none;
+	    }
 		body {
 			padding-top: 20px;
 		}
@@ -354,9 +359,7 @@
 				<p>
 					The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
 					to existing classes and interfaces from the JDK. The class 
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/InputOutput.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.InputOutput">InputOutput</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/InputOutput.html"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput">InputOutput</abbr></a>
 					
 					providing the method 
 					<code>&lt;T&gt; T println(T obj)</code> being one of them. 
@@ -712,9 +715,7 @@ movies.filter[categories.contains(&apos;Action&apos;)].size</pre>
 				<p>
 					Eventually we call 
 					<code>size</code> on the resulting iterable which also is an extension method defined in 
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a>
 					.
 				</p>
 				<!-- subsection -->
@@ -733,13 +734,9 @@ movies.filter[categories.contains(&apos;Action&apos;)].size</pre>
 					<code>filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80ies).
 					The 
 					<code>..</code> operator is again an extension defined in 
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerExtensions.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a>
 					 and returns an instance of 
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerRange.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.IntegerRange">IntegerRange</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerRange.html"><abbr title="org.eclipse.xtext.xbase.lib.IntegerRange">IntegerRange</abbr></a>
 					.
 					Operator overloading is explained in 
 					<a href="#operators">	section
@@ -747,9 +744,7 @@ movies.filter[categories.contains(&apos;Action&apos;)].size</pre>
 				</p>
 				<p>
 					The resulting iterable is sorted (
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a>
 					<code>.sortBy</code>) by the 
 					<code>rating</code> of the movies. 
 					Since it is sorted in ascending order, we take the last movie from the list and return its 
@@ -1504,37 +1499,21 @@ listOfStrings.map[toUpperCase] // calls ListExtensions.&lt;T, R&gt;map(List&lt;T
 				</p>
 				<p>
 					<ul>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ObjectExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.ObjectExtensions">ObjectExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ObjectExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.ObjectExtensions">ObjectExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions">IterableExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/MapExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.MapExtensions">MapExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/MapExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.MapExtensions">MapExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ListExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ListExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/CollectionExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.CollectionExtensions">CollectionExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/CollectionExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.CollectionExtensions">CollectionExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions">BooleanExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions">BooleanExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IntegerExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions">IntegerExtensions</abbr></a>
 						</li>
-						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/FunctionExtensions.html">
-								<abbr title="org.eclipse.xtext.xbase.lib.FunctionExtensions">FunctionExtensions</abbr>
-							</a>
+						<li>	<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/FunctionExtensions.html"><abbr title="org.eclipse.xtext.xbase.lib.FunctionExtensions">FunctionExtensions</abbr></a>
 						</li>
 					</ul>
 				</p>
@@ -1736,9 +1715,7 @@ val data = try {
 					<code>int</code>, a 
 					<code>long</code> (suffix 
 					<code>L</code>) or a
-					<a href="http://xtend-lang.org/api/2.3.0/java/math/BigInteger.html">
-						<abbr title="java.math.BigInteger">BigInteger</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/java/math/BigInteger.html"><abbr title="java.math.BigInteger">BigInteger</abbr></a>
 					 (suffix 
 					<code>BI</code>). There are no octal numbers
 				</p>
@@ -1760,9 +1737,7 @@ val data = try {
 					<code>float</code> 
 					(suffix 
 					<code>F</code>) or a 
-					<a href="http://xtend-lang.org/api/2.3.0/java/math/BigDecimal.html">
-						<abbr title="java.math.BigDecimal">BigDecimal</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/java/math/BigDecimal.html"><abbr title="java.math.BigDecimal">BigDecimal</abbr></a>
 					 (suffix 
 					<code>BD</code>). If you use a 
 					<code>.</code> you have to 
@@ -2458,13 +2433,9 @@ val toUpperCaseFunction = [String s | s.toUpperCase] // inferred type is (String
 				</p>
 				<p>
 					The type will be one of the types found in 
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html"><abbr title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a>
 					 or 
-					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html">
-						<abbr title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html"><abbr title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a>
 					.
 					It is a procedure if the return type is 
 					<code>void</code>, otherwise it is a function.
@@ -2930,14 +2901,10 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
 				</h3>
 				<p>
 					The template expression is of type 
-					<a href="http://xtend-lang.org/api/2.3.0/java/lang/CharSequence.html">
-						<abbr title="java.lang.CharSequence">CharSequence</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/java/lang/CharSequence.html"><abbr title="java.lang.CharSequence">CharSequence</abbr></a>
 					. It is automatically converted
 					to 
-					<a href="http://xtend-lang.org/api/2.3.0/java/lang/String.html">
-						<abbr title="java.lang.String">String</abbr>
-					</a>
+					<a href="http://xtend-lang.org/api/2.3.0/java/lang/String.html"><abbr title="java.lang.String">String</abbr></a>
 					 if that is the expected target type.
 				</p>
 				<!-- subsection -->

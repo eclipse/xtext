@@ -109,13 +109,10 @@ class HtmlExtensions {
 	}
 	
 	def dispatch CharSequence toHtml(CodeRef it) '''
-		<a href="«JAVADOC_ROOT»«element.qualifiedName.replace('.','/')».html">
-			«IF altText != null»
-				«altText»
-			«ELSE»
-				<abbr title="«element.qualifiedName»">«element.simpleName.trim»</abbr>
-			«ENDIF»
-		</a>
+		<a href="«JAVADOC_ROOT»«element.qualifiedName.replace('.','/')».html">«
+		IF altText != null»«altText»«
+		ELSE»<abbr title="«element.qualifiedName»">«element.simpleName.trim»</abbr>«
+		ENDIF»</a>
 	'''
 	
 	def dispatch toHtml(Code it) {
