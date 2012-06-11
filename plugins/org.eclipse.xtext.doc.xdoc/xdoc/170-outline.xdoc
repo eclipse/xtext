@@ -32,11 +32,11 @@ delegates to code[Java][createEObjectNode(..)] if not specified differently.
 
 To change the children of specific nodes, you have to implement the method code[Java][_createChildren(parentNode,
 parentModelElement)] with the appropriate types. The following snippet shows you how to skip the root model element
-of type code[Java][DomainModel] in the outline of our domain model example:
+of type code[Java][Domainmodel] in the outline of our domain model example:
 
 code[Java][
 protected void _createChildren(DocumentRootNode parentNode, 
-                               DomainModel domainModel) {
+                               Domainmodel domainModel) {
 	for (AbstractElement element : domainModel.getElements()) {
 		createNode(parentNode, element);
 	}

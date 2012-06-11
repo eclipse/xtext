@@ -14,24 +14,23 @@ ol[
 		Go to link[http://xtext.itemis.com/xtext/language=en/36553/downloads][http://xtext.itemis.com]
 		and select the distribution that matches your OS. 
 	]
-	item[a[unzip]
-		Unzip the archive into the directory of your choice. 
+	item[a[unzip] Unzip the archive into the directory of your choice. 
 		
 		e[Windows Users should choose a directory
 		close to the root since the zip contains a deeply nested folder structure. The maximum path length
 		on windows may not exceed roughly 256 characters.]
 	]
 	item[
-		Launch Eclipse and select the workspace location. It's basically the location for your user data
+		Launch Eclipse and select the workspace location. It is basically the location for your user data
 		and project files and may be an empty directory.
 	]
 ]
 
 section:InstallXtext[Install Xtext From Update Site]
 
-If you have no existing Eclipse installed, it's probably easier to choose a ref:InstallDistro[pre-configured Eclipse].
+If you have no existing Eclipse installed, it is probably easier to choose a ref:InstallDistro[pre-configured Eclipse].
 Alternatively, you can go to link[http://www.eclipse.org/downloads/][http://www.eclipse.org] and choose the
-Eclipse IDE for Java Developers. Find the download link that matches your platform and follow the ref:unzip[instructions
+Eclipse IDE for Java Developers. Find the download link that matches your platform and follow the ref:unzip[installation instructions
 above] to extract and launch Eclipse.
 
 ul[
@@ -51,5 +50,6 @@ ul[
 
 Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on 
 the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid 
-this, you can manually install the feature e[Xtext Antlr-2.0.0] from the itemis update site (see 1
-above). The installation procedures above are not touched by this issue.
+this, you can manually install the feature e[Xtext Antlr-2.0.0] from the itemis update site
+(link[http://download.itemis.de/updates/][http://download.itemis.de/updates/]). 
+The general installation procedures are not affected by this issue.

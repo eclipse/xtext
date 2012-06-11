@@ -46,7 +46,7 @@ codeRef[org.eclipse.xtext.common.types.JvmField] plus accessors for each e[Prope
 e[DomainmodelJvmModelInferrer] looks like this:
 
 code[Xtend2][
-class DomainModelJvmModelInferrer extends AbstractModelInferrer {
+class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 
   @Inject extension JvmTypesBuilder
   
