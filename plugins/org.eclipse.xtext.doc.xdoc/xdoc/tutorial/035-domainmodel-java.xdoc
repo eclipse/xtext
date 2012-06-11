@@ -379,7 +379,7 @@ ol[
   	code[Xtend2][
  		).initializeLater \[
     ]
-    The type inferrence has two phases. The first phase happens before linking. Only the empty types have to be created
+    The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
     and be passed to the e[acceptor].
     The types' features are created in the second phase. The actions in this phase are specified in the lambda
     expression passed to code[initializeLater]. Think of it as an anonymous class.
