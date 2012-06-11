@@ -9,20 +9,25 @@ import org.eclipse.xtext.xdoc.xdoc.CodeBlock
 import org.eclipse.xtext.xdoc.xdoc.CodeRef
 import org.eclipse.xtext.xdoc.xdoc.Emphasize
 import org.eclipse.xtext.xdoc.xdoc.Identifiable
+import org.eclipse.xtext.xdoc.xdoc.ImageRef
 import org.eclipse.xtext.xdoc.xdoc.Item
 import org.eclipse.xtext.xdoc.xdoc.Link
 import org.eclipse.xtext.xdoc.xdoc.OrderedList
 import org.eclipse.xtext.xdoc.xdoc.Ref
 import org.eclipse.xtext.xdoc.xdoc.Table
+import org.eclipse.xtext.xdoc.xdoc.TableData
 import org.eclipse.xtext.xdoc.xdoc.TableRow
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
 import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
-import org.eclipse.xtext.xdoc.xdoc.TableData
-import org.eclipse.xtext.xdoc.xdoc.ImageRef
+
+import static bootstrap.HtmlExtensions.*
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage
 
 class HtmlExtensions {
+	
+	static val JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/"
 	
 	Map<Identifiable, String> artificialHrefs = newHashMap()
 
@@ -39,22 +44,35 @@ class HtmlExtensions {
 	}
 	
 	
-	def dispatch CharSequence toHtml(TextOrMarkup it) {
-		it.contents.toHtml
-	} 
+	def dispatch CharSequence toHtml(TextOrMarkup it) '''
+		«IF isParagraph»
+			<p>
+		«ENDIF»
+			«contents.toHtml»
+		«IF isParagraph»
+			</p>
+		«ENDIF»
+	'''
 	
+	def private isParagraph(TextOrMarkup it) {
+		switch eContainingFeature {
+			case XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS : true
+			default : false
+		}
+	}
+
 	def dispatch CharSequence toHtml(List<EObject> it) {
 		map[toHtml].join
 	}
-	
-	def dispatch toHtml(TextPart it) {
-		text.quote
-	}
+
+	def dispatch toHtml(TextPart it) '''
+		«text.quote»
+	'''
 	
 	def dispatch toHtml(Emphasize it) '''<strong>«contents.toHtml»</strong>'''
 
 	def dispatch toHtml(Anchor it) '''
-		<a name="«name.quote»"/>	
+		<a name="«name.quote»"/>
 	'''
 	
 	def dispatch toHtml(Ref it) '''<a href="#«ref.href»">«contents.toHtml»</a>'''
@@ -90,20 +108,27 @@ class HtmlExtensions {
 		""
 	}
 	
-	def dispatch CharSequence toHtml(CodeRef it) {
-		println("TODO CodeRef to: " + element.identifier)
-		if(altText!=null) 
-			altText.toHtml
-		else 
-			'<code class="prettyprint lang-java">' + element.identifier + '</code>'
-	}
+	def dispatch CharSequence toHtml(CodeRef it) '''
+		<a href="«JAVADOC_ROOT»«element.qualifiedName.replace('.','/')».html">
+			«IF altText != null»
+				«altText»
+			«ELSE»
+				<abbr title="«element.qualifiedName»">«element.simpleName.trim»</abbr>
+			«ENDIF»
+		</a>
+	'''
 	
 	def dispatch toHtml(Code it) {
 		contents.quote
 	}
 	
 	def dispatch toHtml(CodeBlock it) {
-		internalToHtml(false)
+		val code = contents.toHtml.toString
+		val languageName = if (language?.name==null) "xtend" else language.name
+		if(code.contains('\n') || code.contains('\r')) '''
+			<pre class="prettyprint lang-«languageName.toLowerCase» linenums">«markCodeBegin»
+			«code.trimCode»«markCodeEnd»</pre>
+		''' else '''<code>«code.trimCode»</code>'''
 	}
 	
 	def dispatch toHtml(Link it) '''<a href="«url»">«text»</a>'''
@@ -136,15 +161,6 @@ class HtmlExtensions {
 		'###xdoc code end###'
 	}	
 	
-	def protected internalToHtml(CodeBlock it, boolean isParagraph) {
-		val code = contents.toHtml.toString
-		val languageName = if (language?.name==null) "xtend" else language.name
-		if(code.contains('\n') || code.contains('\r')) '''
-			«IF isParagraph»</p>«ENDIF»<pre class="prettyprint lang-«languageName.toLowerCase»">«markCodeBegin»
-			«code.trimCode»«markCodeEnd»</pre>«IF isParagraph»<p>«ENDIF»
-		''' else '''<code>«code.trimCode»</code>'''
-	}
-	
 	def protected trimCode(String it) {
 		var start = 0
 		while(start < length()-1 && (substring(start, 1) == ' ' || substring(start,1)=='\t'))
@@ -164,26 +180,4 @@ class HtmlExtensions {
 			.replace("'", '&apos;').replace('´','&apos;').replace('`','&apos;')
 	}
 
-	def toHtmlParagraph(List<? extends EObject> it) '''
-		<p>
-		«internalToHtmlParagraph»
-		</p>
-	'''
-	
-	def protected internalToHtmlParagraph(Object it) {
-		switch(it) {
-			TextOrMarkup:	it.contents.internalToHtmlParagraph
-			List<EObject>:	it.map[internalToHtmlParagraph].join
-			TextPart: {
-							val paragraphs = it.text.quote.split('^\\s*$')
-							paragraphs.filter([!isEmpty]).join('''
-								</p>
-								<p>
-							''')
-			}
-			CodeBlock:		internalToHtml(true)
-			default: 		toHtml
-		} 
-	}
-	
 }

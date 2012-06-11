@@ -8,10 +8,10 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -36,9 +36,12 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 import org.eclipse.xtext.xdoc.xdoc.TextPart;
 import org.eclipse.xtext.xdoc.xdoc.Todo;
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList;
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 
 @SuppressWarnings("all")
 public class HtmlExtensions {
+  private final static String JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/";
+  
   private Map<Identifiable,String> artificialHrefs = new Function0<Map<Identifiable,String>>() {
     public Map<Identifiable,String> apply() {
       HashMap<Identifiable,String> _newHashMap = CollectionLiterals.<Identifiable, String>newHashMap();
@@ -78,9 +81,44 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final TextOrMarkup it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isParagraph = this.isParagraph(it);
+      if (_isParagraph) {
+        _builder.append("<p>");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
     EList<EObject> _contents = it.getContents();
     CharSequence _html = this.toHtml(_contents);
-    return _html;
+    _builder.append(_html, "	");
+    _builder.newLineIfNotEmpty();
+    {
+      boolean _isParagraph_1 = this.isParagraph(it);
+      if (_isParagraph_1) {
+        _builder.append("</p>");
+        _builder.newLine();
+      }
+    }
+    return _builder;
+  }
+  
+  private boolean isParagraph(final TextOrMarkup it) {
+    boolean _switchResult = false;
+    EStructuralFeature _eContainingFeature = it.eContainingFeature();
+    final EStructuralFeature eContainingFeature = _eContainingFeature;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(eContainingFeature,Literals.ABSTRACT_SECTION__CONTENTS)) {
+        _matched=true;
+        _switchResult = true;
+      }
+    }
+    if (!_matched) {
+      _switchResult = false;
+    }
+    return _switchResult;
   }
   
   protected CharSequence _toHtml(final List<EObject> it) {
@@ -96,9 +134,12 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final TextPart it) {
+    StringConcatenation _builder = new StringConcatenation();
     String _text = it.getText();
     String _quote = this.quote(_text);
-    return _quote;
+    _builder.append(_quote, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
   protected CharSequence _toHtml(final Emphasize it) {
@@ -117,7 +158,7 @@ public class HtmlExtensions {
     String _name = it.getName();
     String _quote = this.quote(_name);
     _builder.append(_quote, "");
-    _builder.append("\"/>\t");
+    _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -213,29 +254,41 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final CodeRef it) {
-    CharSequence _xblockexpression = null;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<a href=\"");
+    _builder.append(HtmlExtensions.JAVADOC_ROOT, "");
+    JvmDeclaredType _element = it.getElement();
+    String _qualifiedName = _element.getQualifiedName();
+    String _replace = _qualifiedName.replace(".", "/");
+    _builder.append(_replace, "");
+    _builder.append(".html\">");
+    _builder.newLineIfNotEmpty();
     {
-      JvmDeclaredType _element = it.getElement();
-      String _identifier = _element.getIdentifier();
-      String _plus = ("TODO CodeRef to: " + _identifier);
-      InputOutput.<String>println(_plus);
-      CharSequence _xifexpression = null;
       TextOrMarkup _altText = it.getAltText();
       boolean _notEquals = (!Objects.equal(_altText, null));
       if (_notEquals) {
+        _builder.append("\t");
         TextOrMarkup _altText_1 = it.getAltText();
-        CharSequence _html = this.toHtml(_altText_1);
-        _xifexpression = _html;
+        _builder.append(_altText_1, "	");
+        _builder.newLineIfNotEmpty();
       } else {
+        _builder.append("\t");
+        _builder.append("<abbr title=\"");
         JvmDeclaredType _element_1 = it.getElement();
-        String _identifier_1 = _element_1.getIdentifier();
-        String _plus_1 = ("<code class=\"prettyprint lang-java\">" + _identifier_1);
-        String _plus_2 = (_plus_1 + "</code>");
-        _xifexpression = _plus_2;
+        String _qualifiedName_1 = _element_1.getQualifiedName();
+        _builder.append(_qualifiedName_1, "	");
+        _builder.append("\">");
+        JvmDeclaredType _element_2 = it.getElement();
+        String _simpleName = _element_2.getSimpleName();
+        String _trim = _simpleName.trim();
+        _builder.append(_trim, "	");
+        _builder.append("</abbr>");
+        _builder.newLineIfNotEmpty();
       }
-      _xblockexpression = (_xifexpression);
     }
-    return _xblockexpression;
+    _builder.append("</a>");
+    _builder.newLine();
+    return _builder;
   }
   
   protected CharSequence _toHtml(final Code it) {
@@ -245,8 +298,59 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final CodeBlock it) {
-    CharSequence _internalToHtml = this.internalToHtml(it, false);
-    return _internalToHtml;
+    CharSequence _xblockexpression = null;
+    {
+      EList<EObject> _contents = it.getContents();
+      CharSequence _html = this.toHtml(_contents);
+      final String code = _html.toString();
+      String _xifexpression = null;
+      LangDef _language = it.getLanguage();
+      String _name = _language==null?(String)null:_language.getName();
+      boolean _equals = Objects.equal(_name, null);
+      if (_equals) {
+        _xifexpression = "xtend";
+      } else {
+        LangDef _language_1 = it.getLanguage();
+        String _name_1 = _language_1.getName();
+        _xifexpression = _name_1;
+      }
+      final String languageName = _xifexpression;
+      CharSequence _xifexpression_1 = null;
+      boolean _or = false;
+      boolean _contains = code.contains("\n");
+      if (_contains) {
+        _or = true;
+      } else {
+        boolean _contains_1 = code.contains("\r");
+        _or = (_contains || _contains_1);
+      }
+      if (_or) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("<pre class=\"prettyprint lang-");
+        String _lowerCase = languageName.toLowerCase();
+        _builder.append(_lowerCase, "");
+        _builder.append(" linenums\">");
+        String _markCodeBegin = this.markCodeBegin();
+        _builder.append(_markCodeBegin, "");
+        _builder.newLineIfNotEmpty();
+        String _trimCode = this.trimCode(code);
+        _builder.append(_trimCode, "");
+        String _markCodeEnd = this.markCodeEnd();
+        _builder.append(_markCodeEnd, "");
+        _builder.append("</pre>");
+        _builder.newLineIfNotEmpty();
+        _xifexpression_1 = _builder;
+      } else {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("<code>");
+        String _trimCode_1 = this.trimCode(code);
+        _builder_1.append(_trimCode_1, "");
+        _builder_1.append("</code>");
+        _xifexpression_1 = _builder_1;
+      }
+      _xblockexpression = (_xifexpression_1);
+    }
+    return _xblockexpression;
   }
   
   protected CharSequence _toHtml(final Link it) {
@@ -318,72 +422,6 @@ public class HtmlExtensions {
   
   public String markCodeEnd() {
     return "###xdoc code end###";
-  }
-  
-  protected CharSequence internalToHtml(final CodeBlock it, final boolean isParagraph) {
-    CharSequence _xblockexpression = null;
-    {
-      EList<EObject> _contents = it.getContents();
-      CharSequence _html = this.toHtml(_contents);
-      final String code = _html.toString();
-      String _xifexpression = null;
-      LangDef _language = it.getLanguage();
-      String _name = _language==null?(String)null:_language.getName();
-      boolean _equals = Objects.equal(_name, null);
-      if (_equals) {
-        _xifexpression = "xtend";
-      } else {
-        LangDef _language_1 = it.getLanguage();
-        String _name_1 = _language_1.getName();
-        _xifexpression = _name_1;
-      }
-      final String languageName = _xifexpression;
-      CharSequence _xifexpression_1 = null;
-      boolean _or = false;
-      boolean _contains = code.contains("\n");
-      if (_contains) {
-        _or = true;
-      } else {
-        boolean _contains_1 = code.contains("\r");
-        _or = (_contains || _contains_1);
-      }
-      if (_or) {
-        StringConcatenation _builder = new StringConcatenation();
-        {
-          if (isParagraph) {
-            _builder.append("</p>");
-          }
-        }
-        _builder.append("<pre class=\"prettyprint lang-");
-        String _lowerCase = languageName.toLowerCase();
-        _builder.append(_lowerCase, "");
-        _builder.append("\">");
-        String _markCodeBegin = this.markCodeBegin();
-        _builder.append(_markCodeBegin, "");
-        _builder.newLineIfNotEmpty();
-        String _trimCode = this.trimCode(code);
-        _builder.append(_trimCode, "");
-        String _markCodeEnd = this.markCodeEnd();
-        _builder.append(_markCodeEnd, "");
-        _builder.append("</pre>");
-        {
-          if (isParagraph) {
-            _builder.append("<p>");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _xifexpression_1 = _builder;
-      } else {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("<code>");
-        String _trimCode_1 = this.trimCode(code);
-        _builder_1.append(_trimCode_1, "");
-        _builder_1.append("</code>");
-        _xifexpression_1 = _builder_1;
-      }
-      _xblockexpression = (_xifexpression_1);
-    }
-    return _xblockexpression;
   }
   
   protected String trimCode(final String it) {
@@ -485,88 +523,6 @@ public class HtmlExtensions {
     String _replace_7 = _replace_6.replace("\u00B4", "&apos;");
     String _replace_8 = _replace_7.replace("`", "&apos;");
     return _replace_8;
-  }
-  
-  public CharSequence toHtmlParagraph(final List<? extends EObject> it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<p>");
-    _builder.newLine();
-    CharSequence _internalToHtmlParagraph = this.internalToHtmlParagraph(it);
-    _builder.append(_internalToHtmlParagraph, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</p>");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  protected CharSequence internalToHtmlParagraph(final Object it) {
-    CharSequence _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof TextOrMarkup) {
-        final TextOrMarkup _textOrMarkup = (TextOrMarkup)it;
-        _matched=true;
-        EList<EObject> _contents = _textOrMarkup.getContents();
-        CharSequence _internalToHtmlParagraph = this.internalToHtmlParagraph(_contents);
-        _switchResult = _internalToHtmlParagraph;
-      }
-    }
-    if (!_matched) {
-      if (it instanceof List) {
-        final List<EObject> _list = (List<EObject>)it;
-        _matched=true;
-        final Function1<EObject,CharSequence> _function = new Function1<EObject,CharSequence>() {
-            public CharSequence apply(final EObject it) {
-              CharSequence _internalToHtmlParagraph = HtmlExtensions.this.internalToHtmlParagraph(it);
-              return _internalToHtmlParagraph;
-            }
-          };
-        List<CharSequence> _map = ListExtensions.<EObject, CharSequence>map(_list, _function);
-        String _join = IterableExtensions.join(_map);
-        _switchResult = _join;
-      }
-    }
-    if (!_matched) {
-      if (it instanceof TextPart) {
-        final TextPart _textPart = (TextPart)it;
-        _matched=true;
-        String _xblockexpression = null;
-        {
-          String _text = _textPart.getText();
-          String _quote = this.quote(_text);
-          final String[] paragraphs = _quote.split("^\\s*$");
-          final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
-              public Boolean apply(final String it) {
-                boolean _isEmpty = it.isEmpty();
-                boolean _not = (!_isEmpty);
-                return Boolean.valueOf(_not);
-              }
-            };
-          Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(paragraphs)), _function);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("</p>");
-          _builder.newLine();
-          _builder.append("<p>");
-          _builder.newLine();
-          String _join = IterableExtensions.join(_filter, _builder);
-          _xblockexpression = (_join);
-        }
-        _switchResult = _xblockexpression;
-      }
-    }
-    if (!_matched) {
-      if (it instanceof CodeBlock) {
-        final CodeBlock _codeBlock = (CodeBlock)it;
-        _matched=true;
-        CharSequence _internalToHtml = this.internalToHtml(_codeBlock, true);
-        _switchResult = _internalToHtml;
-      }
-    }
-    if (!_matched) {
-      CharSequence _html = this.toHtml(it);
-      _switchResult = _html;
-    }
-    return _switchResult;
   }
   
   public CharSequence toHtml(final Object it) {
