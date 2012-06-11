@@ -99,7 +99,7 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:constructors[Constructors]
 
-An Xtend class can define one or more constructors. Unlike Java you don't have to repeat the name of the class over and over again,
+An Xtend class can define one or more constructors. Unlike Java you do not have to repeat the name of the class over and over again,
 but use keyword e[new] to declare a constructor.
 Constructors can also delegate to other constructors using code[Xtend][this(args...)] in their first
 line. 
@@ -206,7 +206,7 @@ section2:declaredExceptions[Declared Exceptions]
 Xtend does not force you to catch or redeclare checked exceptions. Nevertheless, you can still declare 
 the exceptions thrown in a method's body using the same code[Xtend][throws] clause as in Java.
 
-If you don't declare checked exceptions in your method but they are possibly thrown in your code, the
+If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
 compiler will rethrow the checked exception silently (using the sneaky-throw technique introduced by 
 link[http://projectlombok.org/features/SneakyThrows.html][Lombok]). 
   
@@ -279,7 +279,7 @@ code[Xtend][
   }
 ] 
 
-For a set of visible dispatch methods in the current type hierarchy charing the same name and the same
+For a set of visible dispatch methods in the current type hierarchy sharing the same name and the same
 number of arguments, the compiler infers a synthetic method (the dispatcher) using the common super type of all declared arguments.
 The actual dispatch methods are reduced in visibility and renamed (prepending an underscore) so that client code always binds to
 the dispatcher method.
@@ -312,7 +312,7 @@ The default visibility of the underscore methods is code[Xtend][protected]. If a
 explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
 Otherwise it is code[Xtend][public].
  
-The comparism of the type parameters goes from left to right. That is in the following example, the second
+The comparison of the type parameters goes from left to right. That is in the following example, the second
 method declaration is considered more specific since its first parameter type is the most specific:
 
 code[Xtend][
@@ -466,7 +466,7 @@ code[Xtend][
   "hello".toFirstUpper() // calls toFirstUper("hello")
 ]   
 
-Method calls in extension syntax often result in more readable code, as method calls are chained rather than nested. 
+Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
 Another benefit of extensions is that you can add methods which are specific to a certain context
 (read layer) only. You might for instance not want to put UI-specific methods and dependencies to your
 domain model classes. Therefore such functionality is often defined in static methods or methods in
@@ -477,7 +477,7 @@ code[Java][
   persistenceManager.save(myObject);
 ]
 
-With extension methods you can write it like so:
+With extension methods you can write
 
 code[Xtend][
   myObject.save
@@ -497,7 +497,7 @@ code[Xtend][
   listOfStrings.map\[toUpperCase\] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
 ]
 
-Have a look at the Java doc to see what's there:
+Have a look at the JavaDoc to see what is there:
 
 ul[
   item[codeRef[org.eclipse.xtext.xbase.lib.ObjectExtensions]]
@@ -549,8 +549,8 @@ section2:Extension_Fields[Extension Fields]
 
 By adding the code[Xtend][extension] keyword to a field declaration, its instance methods become extension methods.
 
-Imagine you want to have some layer specific functionality on a class code[Person]. Let's say you are in a servlet-like class
-and want to persist a code[Person] using some persistence mechanism. Let's assume code[Person] implements
+Imagine you want to have some layer specific functionality on a class code[Person]. Let us say you are in a servlet-like class
+and want to persist a code[Person] using some persistence mechanism. Let us assume code[Person] implements
 a common interface code[Entity].
  
 You could have the following interface
@@ -584,5 +584,5 @@ code[Xtend][
 Using the code[Xtend][extension] modifier on fields has a significant advantage over 
 static ref:extensionImports[extension imports]: Your code is not bound to the actual implementation of the extension method.
 You can simply exchange the component that provides the referenced extension with another implementation from outside,
-by providing a different instance. No matter you do so via a factory, dependency injection or simply
+by providing a different instance. No matter whether you do so via a factory, dependency injection or simply
 using a setter.

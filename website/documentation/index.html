@@ -157,9 +157,9 @@
 					    such as Android or GWT</li>
 				</ul>
 				The language is not aiming at replacing Java all together. Its <a href="#library">library</a> is just a thin layer on top of the 
-				Java Development Kit (JDK) and unlike with other JVM languages there are <a href="#javaInteroperability">zero interoperability</a> issues :
+				Java Development Kit (JDK) and unlike other JVM languages there are <a href="#javaInteroperability">zero interoperability</a> issues:
 				Everything you write in Xtend interacts with Java exactly as if it were written in Java in the first place.
-				At the same time Xtend just much more concise, readable and expressive. Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
+				At the same time Xtend is just much more concise, readable and expressive. Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
 				Eclipse-based IDE closely integrated with Eclipse&apos;s Java Development Tools (JDT), including features like call-hierarchies, rename refactoring, 
 				debugging and many more.
 				</p>
@@ -169,8 +169,8 @@
 				<p>
 				Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
 				SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend">Eclipse Marketplace</a>. 
-				But there&apos;s also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download">available for download
-				at http://xtend-lang.org</a>.If you don&apos;t want to use the recommended Eclipse Plug-in, you can compile Xtend code using the 
+				But there is also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download">available for download
+				at http://xtend-lang.org</a>.If you do not want to use the recommended Eclipse plug-in, you can compile Xtend code using the 
 				<a href="#MavenSupport">Maven plug-in</a>.
 				</p>
 				<!-- subsection -->
@@ -178,7 +178,7 @@
 				<h3>Maven Support</h3>
 				<p>
 				The <a href="#library">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from
-				the following maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.Here&apos;s the XML for the repository:
+				the following Maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.Here is the XML for the repository:
 				</p><pre class="prettyprint lang-xtend">
 &lt;repositories&gt;
   &lt;repository&gt;
@@ -192,7 +192,7 @@
     &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
   &lt;/pluginRepository&gt;
 &lt;/pluginRepositories&gt;</pre><p>
-				Here&apos;s the XML for the dependency to the library:</p><pre class="prettyprint lang-xtend">
+				Here is the XML for the dependency to the library:</p><pre class="prettyprint lang-xtend">
 &lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;
@@ -220,7 +220,7 @@
 &lt;/plugin&gt;</pre><p>
 				As you see the <strong>outputDirectory</strong> can be specified to match the default of the Eclipse plug-in (<strong>xtend-gen</strong>). Of course you can also change the configuration
 				in Eclipse to match the Maven default (<strong>generated-sources</strong>). To do so right-click on the project and select <strong>Properties</strong> or if you prefer a global setting choose <strong>Eclipse-&gt;Preferences</strong>.
-				In the category <strong>Xtend/Compiler</strong> enter the directory name (see screenshot). It&apos;s interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.<div class="thumbnail">
+				In the category <strong>Xtend/Compiler</strong> enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.<div class="thumbnail">
 					<img src="images/configure-compiler-in-eclipse.png" alt="">
 				</div>
 				</p>
@@ -230,17 +230,17 @@
 				<p>
 				The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
 				to existing classes and interfaces from the JDK. The class <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.InputOutput</code>
-				providing the method <code>&lt;T&gt; T println(T obj)</code> being one of them. The only surprising fact in the generated Java code may be the library class . Many 
+				providing the method <code>&lt;T&gt; T println(T obj)</code> being one of them. The only surprising fact in the generated Java code may be the library class. Many 
 				features of Xtend are not built into the language itself but provided via the library
 				<strong>org.eclipse.xtend.lib</strong>. The library is available from a <a href="#MavenSupport">Maven repository</a> and via p2
-				update site (in case you do Eclipse Plug-In development).The library provides means to create collections in a readable way:</p><pre class="prettyprint lang-xtend">
+				update site (in case you do Eclipse plug-in development).The library provides means to create collections in a readable way:</p><pre class="prettyprint lang-xtend">
 val myList = newArrayList(1, 2, 3)
 val mySet = newHashSet(4, 5, 6)
 val myMap = newHashMap(1 -&gt; &apos;one&apos;, 2 -&gt; &apos;two&apos;, 3 -&gt; &apos;three&apos;)</pre><p>
 				It also extends the collection types with a lot of very useful functions.
 				One example is the ubiquitous <code>map</code> function:</p><pre class="prettyprint lang-xtend">
 val listOfNames = listOfPersons.map[ name ]</pre><p>
-				Many operators to concat collections or to do arithmetics with types like <code>BigDecimal</code> are also available.You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html">JavaDoc API</a> to see what&apos;s
+				Many operators to concat collections or to do arithmetics with types like <code>BigDecimal</code> are also available.You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html">JavaDoc API</a> to see what is
 				available.
 				</p>
 				</section>
@@ -248,7 +248,7 @@ val listOfNames = listOfPersons.map[ name ]</pre><p>
 				<section id="GettingStarted">
 				<h2>Getting Started</h2>
 				<p>
-				The first thing you want to see in any language is the ubiquitous "Hello World" example. 
+				The first thing you want to see in any language is a "Hello World" example. 
 				In Xtend, that reads as
 				</p><pre class="prettyprint lang-xtend">
 class HelloWorld {
@@ -257,10 +257,10 @@ class HelloWorld {
   }
 }</pre><p>
 				You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the <code>def</code>
-				keyword for declaring a method. Also like in Java it&apos;s mandatory to define a class and a main method as the entry point for an application. 
-				Admittedly &apos;hello world&apos; programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
+				keyword for declaring a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
+				Admittedly &apos;hello world&apos; programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real stuff
 				as you will learn in a moment.An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-				translate it to Java code. By default you&apos;ll find it in a source folder <strong>xtend-gen</strong>, which is of course configurable.
+				translate it to Java code. By default you will find it in a source folder <strong>xtend-gen</strong>, which is of course configurable.
 				The hello world example is translated to the following Java code:
 				</p><pre class="prettyprint lang-java">
 // Generated Java Source Code
@@ -272,17 +272,17 @@ public class HelloWorld {
   }
 }</pre><p>
 				You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
-				about the missing library if it&apos;s not on the classpath and provide a quick fix to add it.The next thing you might want to do is materializing one of the example projects into your workspace.
-				To do so right click anywhere in the <strong>Navigator</strong> view in Eclipse and select <strong>New -&gt; Example...</strong>.In the upcoming dialog you&apos;ll find two examples for Xtend:<ul>
+				about the missing library if it is not on the classpath and provide a quick fix to add it.The next thing you might want to do is materializing one of the example projects into your workspace.
+				To do so right click anywhere in the <strong>Navigator</strong> view in Eclipse and select <strong>New -&gt; Example...</strong>.In the upcoming dialog you will find two examples for Xtend:<ul>
 					<li><strong>Xtend Introductory Examples</strong> contains a couple of example code snippets illustrating certain
 					  aspects and strengths of Xtend. 
-					  It for instance shows how to build a builder API or an API which allows for writing code like this:
+					  It for instance shows how to build an API which allows for writing code like this:
 					  <pre class="prettyprint lang-xtend">
 assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)</pre>
 					
 					  Also the <a href="#moviesExample">the movies example</a> explained in detail in <a href="#moviesExample">the next section</a>
-					  is included here.</li>
-					<li><strong>Xtend Solutions For Euler</strong> contains solutions to a lot of the problems you&apos;ll find at <a href="http://projecteuler.net/">Project Euler's website</a>.
+					  is included there.</li>
+					<li><strong>Xtend Solutions For Euler</strong> contains solutions to a lot of the problems you will find at <a href="http://projecteuler.net/">Project Euler's website</a>.
 					   These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved
 					   with the following expression :
 					   <pre class="prettyprint lang-xtend">
@@ -303,7 +303,7 @@ assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)</pre>
 				<h4>The Data</h4>
 				<p>
 				The movie database is a plain text file (data.csv) with data sets describing movies.
-				Here&apos;s an example data set:
+				Here is an example data set:
 				</p><pre class="prettyprint lang-xtend">
 Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy</pre><p>
 				The values are separated by two spaces. The columns are :
@@ -316,7 +316,7 @@ Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy</pre><p>
 				</ol>
 				
 				 
-				Let&apos;s define a data type <code>Movie</code> representing a data set:</p><pre class="prettyprint lang-xtend">
+				Let us define a data type <code>Movie</code> representing a data set:</p><pre class="prettyprint lang-xtend">
 @Data class Movie {
   String title
   int year
@@ -324,7 +324,7 @@ Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy</pre><p>
   long numberOfVotes
   Set&lt;String&gt; categories 
 }</pre><p>
-				It&apos;s a plain class with a typed field for each column in the data sets. The <a href="#dataAnnotation">@Data</a>
+				It is a plain class with a typed field for each column in the data sets. The <a href="#dataAnnotation">@Data</a>
 				annotation will turn this class into a value object, that is it will get 
 				<ul>
 					<li>a getter-method for each field,</li>
@@ -337,7 +337,7 @@ Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy</pre><p>
 				<section id="Section3_1">
 				<h4>Parsing The Data</h4>
 				<p>
-				Let&apos;s now add another class to the same file (any number of <a href="#Xtend_Classes_Members">classes</a> per file is allowed) and initialize a field
+				Let us now add another class to the same file (any number of <a href="#Xtend_Classes_Members">classes</a> per file is allowed) and initialize a field
 				called movies with a list of movies. For the initialization we read in the text file and turn the data sets into <code>Movie</code>s:</p><pre class="prettyprint lang-xtend">
 import java.io.FileReader
 import java.util.Set
@@ -357,11 +357,11 @@ class Movies {
   ]
 }</pre><p>
 				A <a href="#fields">field&apos;s type</a> can be inferred from the expression on the right hand-side. 
-				That&apos;s called local type inference and is supported everyhwere in Xtend.
+				That is called local type inference and is supported everyhwere in Xtend.
 				We want the field to be final, so we declare it as a value using the keyword <code>val</code>.The initialization on the right hand side first creates a fresh instance of <code>java.io.FileReader</code>.
-				Then the method <code>readLines()</code> is invoked on that instance. But if you have a look at <code>FileReader</code> you won&apos;t find
+				Then the method <code>readLines()</code> is invoked on that instance. But if you have a look at <code>FileReader</code> you will not find
 				such a method, because <code>readLines()</code> is in fact a static method from Google Guava&apos;s <code>CharStream</code> which was imported 
-				as an <a href="#extensionImports">extension</a>, which allows us to use this readable syntax.</p><pre class="prettyprint lang-xtend">
+				as an <a href="#extensionImports">extension</a> which allows us to use this readable syntax.</p><pre class="prettyprint lang-xtend">
 import static extension com.google.common.io.CharStreams.*</pre><p>
 				<code>CharStream.readLines(Reader)</code> returns a <code>List&lt;String&gt;</code> on which we call another extension method called <code>map</code>.
 				That one is defined in the <a href="#library">runtime library</a> (<code>ListExtensions.map(...)</code> and is always imported and
@@ -386,60 +386,60 @@ return new Movie (
 				</p>
 				<!-- subsection -->
 				<section id="Section3_2">
-				<h4>Answering som Questions</h4>
+				<h4>Answering some Questions</h4>
 				<p>
-				Now that we&apos;ve the text file turned into a <code>List&lt;Movie&gt;</code>, we are ready to execute some queries against it.
-				We use <strong>Junit</strong> to make the individual analysis executable.
+				Now that we have turned the text file into a <code>List&lt;Movie&gt;</code>, we are ready to execute some queries against it.
+				We use <strong>JUnit</strong> to make the individual analysis executable.
 				</p>
 				<!-- subsection -->
 				<section id="Section4_3">
-				<h5>What&apos;s The Number Of Action Movies?</h5>
+				<h5>What Is The Number Of Action Movies?</h5>
 				<p>
 				</p><pre class="prettyprint lang-xtend">
 @Test def numberOfActionMovies() {
   assertEquals(828, 
     movies.filter[categories.contains(&apos;Action&apos;)].size)
 }</pre><p>
-				First the movies are <code>filter</code>ed. The lambda expression checks whether the current movie&apos;s categories contains 
+				First the movies are <code>filter</code>ed. The lambda expression checks whether the current movie&apos;s categories contain 
 				the entry <code>&apos;Action&apos;</code>. Note that unlike the lambda we used to turn the lines in the file into movies, we 
-				haven&apos;t declared a parameter name this time. 
+				have not declared a parameter name this time. 
 				We could have written 
 				</p><pre class="prettyprint lang-xtend">
 movies.filter[ movie | movie.categories.contains(&apos;Action&apos;)].size</pre><p>
 				
 				but since we left out the name and the vertical bar the variable is automatically named <code>it</code> which
-				(like <code>this</code>) is an <a href="#implicitVariables">implicit variable</a>. That&apos;s why we can write either</p><pre class="prettyprint lang-xtend">
+				(like <code>this</code>) is an <a href="#implicitVariables">implicit variable</a>. That is why we can write either</p><pre class="prettyprint lang-xtend">
 movies.filter[ it.categories.contains(&apos;Action&apos;)].size</pre><p>
 				
 				or 
 				</p><pre class="prettyprint lang-xtend">
 movies.filter[categories.contains(&apos;Action&apos;)].size</pre><p>
-				.Lastly we call <code>size</code> on the resulting iterable, which also is an extension method defined in 
+				Eventually we call <code>size</code> on the resulting iterable which also is an extension method defined in 
 				<code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code>.
 				</p>
 				<!-- subsection -->
 				<section id="Section4_4">
-				<h5>Question 2: What&apos;s The Year The Best Movie From The 80ies Was Released?</h5>
+				<h5>Question 2: What Is The Year The Best Movie From The 80ies Was Released?</h5>
 				<p>
 				</p><pre class="prettyprint lang-xtend">
 @Test def void yearOfBestMovieFrom80ies() {
   assertEquals(1989, 
     movies.filter[(1980..1989).contains(year)].sortBy[rating].last.year)
 }</pre><p>
-				Here we <code>filter</code> all movies where the year is not included in the range from 1980 to 1989 (the 80ies).
-				The <code>..</code> operator again is an extension defined in <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IntegerExtensions</code> and returns an instanceof <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IntegerRange</code>.
+				Here we <code>filter</code> for all movies whose year is included in the range from 1980 to 1989 (the 80ies).
+				The <code>..</code> operator is again an extension defined in <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IntegerExtensions</code> and returns an instance of <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IntegerRange</code>.
 				Operator overloading is explained in <a href="#operators">section</a>.The resulting iterable is sorted (<code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code><code>.sortBy</code>) by the <code>rating</code> of the movies. 
-				Since it&apos;s sorted in ascending order, we take the last movie from the list and return its <code>year</code>. We could have sorted descending and take the head of the list as well:
+				Since it is sorted in ascending order, we take the last movie from the list and return its <code>year</code>. We could have sorted descending and take the head of the list as well:
 				</p><pre class="prettyprint lang-xtend">
 movies.filter[(1980..1989).contains(year)].sortBy[-rating].head.year</pre><p>
-				Note that first sorting and then taking the last or first is slightly more expnsive than needed. We could
-				have used the method <code>reduce</code> instead to find the best movie, which would be more efficient. Maybe
+				Note that first sorting and then taking the last or first is slightly more expensive than needed. We could
+				have used the method <code>reduce</code> instead to find the best movie which would be more efficient. Maybe
 				you want to try it on your own?The calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding 
 				<a href="#propertyAccess">getter methods</a>.
 				</p>
 				<!-- subsection -->
 				<section id="Section4_5">
-				<h5>Question 3: What&apos;s The The Sum Of All Votes Of The Top Two Movies?</h5>
+				<h5>Question 3: What Is The The Sum Of All Votes Of The Top Two Movies?</h5>
 				<p>
 				</p><pre class="prettyprint lang-xtend">
 @Test def void sumOfVotesOfTop2() {
@@ -466,16 +466,17 @@ movies.filter[(1980..1989).contains(year)].sortBy[-rating].head.year</pre><p>
 				Xtend, like Java, is a statically typed language. In fact it completely supports Java&apos;s type system, including the primitive types 
 				as <code>int</code> or <code>boolean</code>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
 				classpath.  Java Generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
-				generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented after 
+				generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as
+				defined in  
 				<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html">the Java Language Specification</a>.
 				</p>
 				<!--  section -->
 				<section id="localTypeInference">
 				<h2>Type Inference</h2>
 				<p>
-				One of the problems with Java is, that you are forced to write type signatures over
-				and over again. That&apos;s why so many people don&apos;t like static typing. 
-				This is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
+				One of the problems with Java is that you are forced to write type signatures over
+				and over again. That is why so many people do not like static typing. 
+				But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
 				just like Java, you rarely have to write types down because they can be computed from the context.
 				</p>
 				</section>
@@ -490,11 +491,11 @@ def toList(String[] array) {
   val List&lt;String&gt; asList = array
   return asList
 }</pre><p>
-				Another very useful conversion applies to lambda expressions. As explained in the previous section, a lambda expression
+				Another very useful conversion applies to lambda expressions. A lambda expression
 				usually is of one of the types listed in <code>org.eclipse.xtext.xbase.lib.Functions</code>
-				or <code>org.eclipse.xtext.xbase.lib.Predicates</code>. However if the expected type is an interface which has just method
+				or <code>org.eclipse.xtext.xbase.lib.Predicates</code>. However if the expected type is an interface with a single method
 				declaration, a lambda expression is automatically converted to that
-				type. This allows to use lambda expressions with many existing Java libraries. See section <a href="#closureTypes"></a>
+				type. This allows to use lambda expressions with many existing Java libraries. See <a href="#closureTypes"></a>
 				for more details.
 				</p>
 				</section>
@@ -502,9 +503,9 @@ def toList(String[] array) {
 				<section id="javaInteroperability">
 				<h2>Interoperability with Java</h2>
 				<p>
-				Resembling and supporting every aspect of Java&apos;s type system, ensures that there is no impedeance mismatch between Java and Xtend.
-				This means that Xtend and Java are 100% interoperable and that there are no special cases and no thinking
-				in two worlds is neccessary. You can call Xtend code from Java and vice versa without any surprises or hassles.As a bonus if you know Java&apos;s type system (specifically generics), you already know the most complicated part
+				Resembling and supporting every aspect of Java&apos;s type system ensures that there is no impedance mismatch between Java and Xtend.
+				This means that Xtend and Java are 100% interoperable. There are no exceptional cases. You do not have
+				to think in two worlds. You can call Xtend code from Java and vice versa without any surprises or hassles.As a bonus if you know Java&apos;s type system (specifically generics), you already know the most complicated part
 				of Xtend.
 				</p>
 				</section>
@@ -599,7 +600,7 @@ class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
 				<section id="constructors">
 				<h2>Constructors</h2>
 				<p>
-				An Xtend class can define one or more constructors. Unlike Java you don&apos;t have to repeat the name of the class over and over again,
+				An Xtend class can define one or more constructors. Unlike Java you do not have to repeat the name of the class over and over again,
 				but use keyword <strong>new</strong> to declare a constructor.
 				Constructors can also delegate to other constructors using <code>this(args...)</code> in their first
 				line. 
@@ -690,7 +691,7 @@ override String first(List&lt;String&gt; elements) {
 				<h3>Declared Exceptions</h3>
 				<p>
 				Xtend does not force you to catch or redeclare checked exceptions. Nevertheless, you can still declare 
-				the exceptions thrown in a method&apos;s body using the same <code>throws</code> clause as in Java.If you don&apos;t declare checked exceptions in your method but they are possibly thrown in your code, the
+				the exceptions thrown in a method&apos;s body using the same <code>throws</code> clause as in Java.If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
 				compiler will rethrow the checked exception silently (using the sneaky-throw technique introduced by 
 				<a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>). 
 				  
@@ -753,7 +754,7 @@ def dispatch printType(Number x) {
 def dispatch printType(Integer x) { 
   "it&apos;s an int" 
 }</pre><p>
-				For a set of visible dispatch methods in the current type hierarchy charing the same name and the same
+				For a set of visible dispatch methods in the current type hierarchy sharing the same name and the same
 				number of arguments, the compiler infers a synthetic method (the dispatcher) using the common super type of all declared arguments.
 				The actual dispatch methods are reduced in visibility and renamed (prepending an underscore) so that client code always binds to
 				the dispatcher method.For the two dispatch methods in the example above the following Java code would be generated:
@@ -780,7 +781,7 @@ public String printType(final Number x) {
 				explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
 				Otherwise it is <code>public</code>.
 				 
-				The comparism of the type parameters goes from left to right. That is in the following example, the second
+				The comparison of the type parameters goes from left to right. That is in the following example, the second
 				method declaration is considered more specific since its first parameter type is the most specific:</p><pre class="prettyprint lang-xtend">
 def dispatch printTypes(Number x, Integer y) { 
   "it&apos;s some number and an int" 
@@ -916,14 +917,14 @@ class MyClass {
 				method is called on the argument parameter as if it was one of its members.
 				</p><pre class="prettyprint lang-xtend">
 "hello".toFirstUpper() // calls toFirstUper("hello")</pre><p>
-				Method calls in extension syntax often result in more readable code, as method calls are chained rather than nested. 
+				Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
 				Another benefit of extensions is that you can add methods which are specific to a certain context
 				(read layer) only. You might for instance not want to put UI-specific methods and dependencies to your
 				domain model classes. Therefore such functionality is often defined in static methods or methods in
 				some "service class". That works, but the code is less readable and object-oriented if you call methods
 				like this. In Java for instance you often see code like this:</p><pre class="prettyprint lang-java">
 persistenceManager.save(myObject);</pre><p>
-				With extension methods you can write it like so:</p><pre class="prettyprint lang-xtend">
+				With extension methods you can write</p><pre class="prettyprint lang-xtend">
 myObject.save</pre><p>
 				There are different ways to make methods available as extensions, which are described in the following.
 				</p>
@@ -935,7 +936,7 @@ myObject.save</pre><p>
 				SDK without any further ado.</p><pre class="prettyprint lang-xtend">
 "hello".toFirstUpper // calls StringExtensions.toFirstUpper(String)
 listOfStrings.map[toUpperCase] // calls ListExtensions.&lt;T, R&gt;map(List&lt;T&gt; list, Function&lt;? super T, ? extends R&gt; mapFunction)</pre><p>
-				Have a look at the Java doc to see what&apos;s there:<ul>
+				Have a look at the JavaDoc to see what is there:<ul>
 					<li><code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.ObjectExtensions</code></li>
 					<li><code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.IterableExtensions</code></li>
 					<li><code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.MapExtensions</code></li>
@@ -982,8 +983,8 @@ new MyClass().singletonList()
 				<section id="Extension_Fields">
 				<h3>Extension Fields</h3>
 				<p>
-				By adding the <code>extension</code> keyword to a field declaration, its instance methods become extension methods.Imagine you want to have some layer specific functionality on a class <code>Person</code>. Let&apos;s say you are in a servlet-like class
-				and want to persist a <code>Person</code> using some persistence mechanism. Let&apos;s assume <code>Person</code> implements
+				By adding the <code>extension</code> keyword to a field declaration, its instance methods become extension methods.Imagine you want to have some layer specific functionality on a class <code>Person</code>. Let us say you are in a servlet-like class
+				and want to persist a <code>Person</code> using some persistence mechanism. Let us assume <code>Person</code> implements
 				a common interface <code>Entity</code>.
 				 
 				You could have the following interface
@@ -1009,7 +1010,7 @@ person.delete  // calls ep.delete(person)</pre><p>
 				Using the <code>extension</code> modifier on fields has a significant advantage over 
 				static <a href="#extensionImports">extension imports</a>: Your code is not bound to the actual implementation of the extension method.
 				You can simply exchange the component that provides the referenced extension with another implementation from outside,
-				by providing a different instance. No matter you do so via a factory, dependency injection or simply
+				by providing a different instance. No matter whether you do so via a factory, dependency injection or simply
 				using a setter.
 				</p>
 				</section>
@@ -1026,8 +1027,8 @@ person.delete  // calls ep.delete(person)</pre><p>
 		<div class="row">
 			<div class="span9 offset2">
 				<p>
-				Xtend there are no statements. Instead, everything is an expression and has a return value. That
-				allows to compose your code in intersting ways. For example, you can have a
+				Xtend does not have statements. Instead, everything is an expression and has a return value. That
+				allows to compose your code in interesting ways. For example, you can have a
 				<code>try catch</code> expression on the right hand side of an assignment: 
 				</p><pre class="prettyprint lang-xtend">
 val data = try {
@@ -1053,7 +1054,7 @@ val data = try {
 				<h3>String Literals</h3>
 				<p>
 				A string literal is of type <code>java.lang.String</code> (just like in Java).
-				String literals are enclosed by a pair of single quotes or double quotes. We mostly use single quotes
+				String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 				because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
 				least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 				Java&apos;s unicode notation. Contrary to Java, strings can span multiple lines.</p><pre class="prettyprint lang-xtend">
@@ -1072,7 +1073,7 @@ val data = try {
 				<p>
 				Xtend supports roughly the same number literals as Java with a few differences.   
 				First, there are no signed number literals. If you put a minus operator in front of an number 
-				literal it is taken as a <a href="#operators">UnaryOperator</a> with one argument (the positive number 
+				literal it is taken as a <a href="#operators">unary operator</a> with one argument (the positive number 
 				literal). Second, as in Java 7, you can separate digits using <code>_</code> for better readability
 				of large numbers.
 				 
@@ -1108,7 +1109,7 @@ val data = try {
 				<section id="nullLiteral">
 				<h3>Null Literal</h3>
 				<p>
-				The null pointer literal is <code>null</code> has exactly the same semantics as in Java.
+				The null pointer literal <code>null</code> has exactly the same semantics as in Java.
 				</p>
 				<!-- subsection -->
 				<section id="typeLiteral">
@@ -1130,7 +1131,8 @@ typeof(java.lang.String) // yields java.lang.String.class</pre><p>
 				</p><pre class="prettyprint lang-xtend">
 something as MyClass
 42 as Integer</pre><p>
-				Although casts are supported you might want to use a <a href="#switchExpression">switch with a type guard</a> as a better and safer alternative.
+				Although casts are supported you might want to use a <a href="#switchExpression">switch with a type guard</a> or a 
+				<a href="#polymorphicDispatch">dispatch method</a> as a better and safer alternative.
 				</p>
 				</section>
 				<!--  section -->
@@ -1146,7 +1148,7 @@ something as MyClass
 val x = 2.71BD
 val y = 3.14BD
 val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre><p>
-				This is the complete list of all available operators and their corresponding method signatures.<table class="table table-bordered table-condensed">
+				This is the complete list of all available operators and their corresponding method signatures:<table class="table table-bordered table-condensed">
 				<tr><td><code>e1 += e2</code></td>
 				<td><code>e1.operator_add(e2)</code></td>
 				</tr>
@@ -1310,9 +1312,9 @@ myObj.myField = &apos;foo&apos;</pre><p>
 				As Xtend is designed to integrate with existing Java APIs it respects the Java Beans convention,
 				hence you can call a setter using an assignment:</p><pre class="prettyprint lang-java">
 myObj.myProperty = &apos;foo&apos; // calls myObj.setMyProperty("foo")</pre><p>
-				The setter is only used if the field is not accessible from the given context. That&apos;s why the 
-				<a href="#propertyAnnotation">@Property annotation</a> would rename the local field to <code>_myProperty</code>.The return type of an assignment is the type of the right hand side, in case it&apos;s a simple assignment.
-				If it&apos;s translated to a setter method it yields whatever the setter method returns.
+				The setter is only used if the field is not accessible from the given context. That is why the 
+				<a href="#propertyAnnotation">@Property annotation</a> would rename the local field to <code>_myProperty</code>.The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
+				If it is translated to a setter method it yields whatever the setter method returns.
 				</p>
 				</section>
 				<!--  section -->
@@ -1345,7 +1347,7 @@ myObj.myProperty = &apos;foo&apos; // calls myObj.setMyProperty("foo")</pre><p>
 				<h2>Variable Declarations</h2>
 				<p>
 				Variable declarations are only allowed within <a href="#blocks">blocks</a>. They are visible in any 
-				subsequent expressions in the block. A variable declaration starting with the keyword <code>val</code> denotes a so called value, which
+				subsequent expressions in the block. A variable declaration starting with the keyword <code>val</code> denotes a value, which
 				is essentially a final (i.e. unsettable) variable. In some cases, one needs to update the value of 
 				a reference. In such situations the variable needs to be declared with the keyword <code>var</code>, 
 				which stands for &apos;variable&apos;.A typical example for using <code>var</code> is a counter in a loop:
@@ -1359,7 +1361,7 @@ myObj.myProperty = &apos;foo&apos; // calls myObj.setMyProperty("foo")</pre><p>
   }
 }</pre><p>
 				Shadowing variables from outer scopes is not allowed, the only exception is the 
-				<a href="#implicitVariables">implicit variable <code>it</code></a>.Variables declared outside a lambda expression using the <code>var</code> keyword are not accessible from within a
+				<a href="#implicitVariables">implicit variable</a><code>it</code>.Variables declared outside a lambda expression using the <code>var</code> keyword are not accessible from within a
 				lambda expressions.
 				</p>
 				<!-- subsection -->
@@ -1396,7 +1398,7 @@ myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not v
 				<h3>Implicit Variables <strong>this</strong> and <strong>it</strong></h3>
 				<p>
 				Like in Java an instance of the class is bound to <code>this</code>. Which allows for either qualifying
-				field access or method invocations like in :</p><pre class="prettyprint lang-xtend">
+				field access or method invocations like in:</p><pre class="prettyprint lang-xtend">
 this.myField</pre><p>
 				or omit the receiver:</p><pre class="prettyprint lang-xtend">
 myField</pre><p>
@@ -1435,7 +1437,7 @@ myRef?.doStuff</pre><p>
 				<section id="constructorCall">
 				<h2>Constructor Call</h2>
 				<p>
-				ConstructorCalls have the same syntax as in Java. The only difference is that empty parenthesis
+				Constructor calls have the same syntax as in Java. The only difference is that empty parenthesis
 				are optional:
 				</p><pre class="prettyprint lang-xtend">
 new String() == new String
@@ -1447,7 +1449,7 @@ new ArrayList&lt;BigDecimal&gt;() == new ArrayList&lt;BigDecimal&gt;</pre><p>
 				<h2>Lambda Expressions</h2>
 				<p>
 				A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
-				a Java developer it&apos;s best to think of a lambda expression as an anonymous class, i.e. 
+				a Java developer it is best to think of a lambda expression as an anonymous class, i.e. 
 				like in the following Java code :</p><pre class="prettyprint lang-java">
 // Java Code!
 final JTextField textField = new JTextField();
@@ -1466,7 +1468,7 @@ textField.addActionListener([ ActionEvent e |
 ])</pre><p>
 				As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
 				Also a lambda expression like a method declares parameters. The lambda above has one parameter called <code>e</code> which is of
-				type <code>ActionEvent</code>. You don&apos;t have to specify the type explicitly because it can be inferred from
+				type <code>ActionEvent</code>. You do not have to specify the type explicitly because it can be inferred from
 				the context:</p><pre class="prettyprint lang-xtend">
 textField.addActionListener([ e |
   textField.text = "Something happened!"
@@ -1496,7 +1498,7 @@ textField.addActionListener[
   textField.text = "Something happened!"
 ]</pre><p>
 				A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to 
-				in the closure&apos;s expression. That&apos;s exactly what we did with the variable <code>textField</code>.
+				in the closure&apos;s expression. That is exactly what we did with the variable <code>textField</code>.
 				</p>
 				<!-- subsection -->
 				<section id="closureTypes">
@@ -1508,9 +1510,9 @@ textField.addActionListener[
 				APIs directly.However, if you write a lambda expression without having any target type expectation, like in the following
 				assignment:</p><pre class="prettyprint lang-xtend">
 val toUpperCaseFunction = [String s | s.toUpperCase] // inferred type is (String)=&gt;String</pre><p>
-				The type will be one of the types found in <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.Functions</code>) or (<code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.Procedures</code>.
-				It&apos;s a procedure if the return type is <code>void</code>, otherwise it&apos;s a function.Xtend supports a shorthand syntax for function types. Instead of writing <code>Function1&lt;? super String,? extends String&gt;</code>
-				which is what you&apos;ll find in the generated Java code, you can simply write <code>(String)=&gt;String</code>.Example:
+				The type will be one of the types found in <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.Functions</code> or <code class="prettyprint lang-java">org.eclipse.xtext.xbase.lib.Procedures</code>.
+				It is a procedure if the return type is <code>void</code>, otherwise it is a function.Xtend supports a shorthand syntax for function types. Instead of writing <code>Function1&lt;? super String,? extends String&gt;</code>
+				which is what you will find in the generated Java code, you can simply write <code>(String)=&gt;String</code>.Example:
 				</p><pre class="prettyprint lang-xtend">
 val (String)=&gt;String stringToStringFunction = [toUpperCase]
 // or
@@ -1536,7 +1538,7 @@ if (foo) x</pre><p>
 				is a short hand for</p><pre class="prettyprint lang-xtend">
 if (foo) x else null</pre><p>
 				The type of an if expression is the common super type of the return types <code>T1</code> and <code>T2</code> 
-				of the two expression <code>e1</code> and <code>e2</code>.While the <code>if</code>-expression has the syntax of Java&apos;s if statement it behaves more like Java&apos;s ternary operator 
+				of the two expression <code>e1</code> and <code>e2</code>.While the if expression has the syntax of Java&apos;s if statement it behaves more like Java&apos;s ternary operator 
 				(<code>predicate ? thenPart : elsePart</code>), because it is an expression and returns a value.
 				Consequently, you can use if expressions deeply nested within expressions:</p><pre class="prettyprint lang-xtend">
 val name = if (firstName != null) firstName + &apos; &apos; + lastName else lastName</pre><p>
@@ -1546,7 +1548,7 @@ val name = if (firstName != null) firstName + &apos; &apos; + lastName else last
 				<section id="switchExpression">
 				<h2>Switch Expression</h2>
 				<p>
-				The <code>switch</code> expression is very different from Java&apos;s switch statement. First, there is no fall through which means 
+				The switch expression is very different from Java&apos;s switch statement. First, there is no fall through which means 
 				only one <code>case</code> is evaluated at most. Second, the use of <code>switch</code> is not limited 
 				to certain values but can be used for any object reference instead. <code>Object.equals()</code> is used to
 				compare the value in the case with the one you are switching over.
@@ -1561,27 +1563,27 @@ switch myString {
 }</pre><p>
 				the main expression <code>numberAsText</code> is evaluated first and then compared to each case sequentially.
 				If the case expression is of type <code>boolean</code>, the case matches if the expression evaluates
-				to true. If it&apos;s not of type <code>boolean</code> it&apos;s compared to the value from the main expression using <code>Object.equals(Object)</code>.If a case is a match, that is it evaluates to <code>true</code> or the result equals the one we are switching
+				to <code>true</code>. If it is not of type <code>boolean</code> it is compared to the value from the main
+				expression using <code>Object.equals(Object)</code>.If a case is a match, that is it evaluates to <code>true</code> or the result equals the one we are switching
 				over, the case expression after the colon is evaluated and is the result of the whole expression.
 				</p>
 				<!-- subsection -->
 				<section id="Section2_13">
 				<h3>Type guards</h3>
 				<p>
-				Instead if or in addition to the case guard you can have a so called <strong>Type Guard</strong>. That is syntactically just a
-				<a href="#types">type reference</a>. The cool thing is that the value is automatically down casted
-				in subsequent expressions. Example:</p><pre class="prettyprint lang-xtend">
+				Instead of or in addition to the case guard you can specify a <strong>type guard</strong>. The case only matches if the 
+				switch value conforms to this type. A case with both a type guard and a predicate only matches if both match.
+				If the switch value is a variable, this variable is automatically casted to the given type withnin the
+				predicate and the case&apos;s body.</p><pre class="prettyprint lang-xtend">
 def length(Object x) {
   switch x {
-    String case x.length &gt; 0 : x.length
-    List&lt;?&gt; : x.size
+    String case x.length &gt; 0 : x.length // length is defined for String 
+    List&lt;?&gt; : x.size    // size is defined for List
     default : -1
   }
 }</pre><p>
-				Only if the switch value is an instance of the specified type, the case&apos;s guard expression is executed using the same 
-				semantics explained previously. If the switch expression contains an explicit declaration of a local variable or the expression 
-				references a local variable, the type guard acts like a cast, that is all references to the switch value will be of the 
-				type specified in the type guard.Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java.
+				Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you 
+				might know from Java.
 				</p>
 				</section>
 				<!--  section -->
@@ -1646,8 +1648,8 @@ do doSideEffect("foo") while ((i=i+1)&lt;max)</pre><p>
 				<section id="Xtend_Expressions_Return">
 				<h2>Return Expression</h2>
 				<p>
-				A method or lambda expression automatically returns the value of it&apos;s expression.
-				If it&apos;s a <a href="#blocks">block expression</a> this is the value of the last expression in it.
+				A method or lambda expression automatically returns the value of its expression.
+				If it is a <a href="#blocks">block expression</a> this is the value of the last expression in it.
 				However, sometimes you want to return early or make it explicit.The syntax is just like in Java:</p><pre class="prettyprint lang-xtend">
 listOfStrings.map(e| {
   if (e==null) 
@@ -1675,9 +1677,9 @@ listOfStrings.map(e| {
 				<h2>Try, Catch, Finally</h2>
 				<p>
 				The try-catch-finally expression is used to handle exceptional situations.
-				You are not forced to catch checked exceptions, if you do not catch checked exceptions they are 
-				rethrown in a wrapping runtime exception if not declared in the method&apos;s signature. 
-				Other than that the syntax again is like the one known from Java.</p><pre class="prettyprint lang-xtend">
+				Checked exceptions are treated like runtime exceptions. You can but do not have to catch them as they
+				will be silently rethrown (see the <a href="#declaredExceptions">section on declared exceptions</a>). The syntax 
+				again is like Java.</p><pre class="prettyprint lang-xtend">
 try {
   throw new RuntimeException()
 } catch (NullPointerException e) {
@@ -1685,8 +1687,8 @@ try {
 } finally {
   // do stuff
 }</pre><p>
-				For try-catch it&apos;s again beneficial that it is an expression, because you can write code like the following
-				and don&apos;t have to rely on non-final variables:</p><pre class="prettyprint lang-xtend">
+				For try-catch it is again beneficial that it is an expression, because you can write code like the following
+				and do not have to rely on non-final variables:</p><pre class="prettyprint lang-xtend">
 val name = try {
     person.name
   } catch (NullPointerException e) {
@@ -1703,9 +1705,9 @@ val name = try {
 				representation is automatcially inserted at that position.The terminals for interpolated expression are so called guillemets <code>&laquo;expression&raquo;</code>. They read nicely and are not often used
 				in text so you seldomly need to escape them. These escaping conflicts are the reason why
 				template languages often use longer character sequences like e.g. <code>&lt;%= expression %&gt;</code> in JSP, for the price of worst readability. 
-				The downside with the guillemets in Xtend is that you&apos;ll have to use a proper encoding (Always use UTF-8 and you are good).If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
-				content assist. They are also bound to <strong>CTRL+SHIFT+&lt;</strong> and <strong>CTRL+SHIFT+</strong> for <code>&laquo;</code> and <code>&raquo;</code> respectively.
-				On a mac they are bound to <strong>alt+q</strong> (<code>&laquo;</code>) and <strong>alt+Q</strong> (<code>&raquo;</code>).Let us have a look at an example of how a typical method with template expressions looks like:</p><pre class="prettyprint lang-xtend">
+				The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.If you use the Eclipse plug-in - which is recommended - the guillemets will be inserted on content assist
+				within a template. They are additionally bound to <strong>CTRL+SHIFT+&lt;</strong> and <strong>CTRL+SHIFT+</strong> for <code>&laquo;</code> and <code>&raquo;</code> respectively.
+				On a Mac they are bound to <strong>alt+q</strong> (<code>&laquo;</code>) and <strong>alt+Q</strong> (<code>&raquo;</code>).Let us have a look at an example of how a typical method with a template expressions looks like:</p><pre class="prettyprint lang-xtend">
 def someHTML(String content) &apos;&apos;&apos;
   &lt;html&gt;
     &lt;body&gt;
@@ -1715,7 +1717,7 @@ def someHTML(String content) &apos;&apos;&apos;
 &apos;&apos;&apos;</pre><p>
 				As you can see, template expressions can be used as the direct body of a method.
 				If an interpolation expression evaluates to <code>null</code> an empty string is added.Template expressions can occur everywhere. 
-				Here&apos;s an example showing it in conjunction with the powerful <a href="#switchExpression">switch expression</a>:</p><pre class="prettyprint lang-xtend">
+				Here is an example showing it in conjunction with the powerful <a href="#switchExpression">switch expression</a>:</p><pre class="prettyprint lang-xtend">
 def toText(Node n) {
   switch n {
     Contents : n.text
@@ -1770,7 +1772,7 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
 				The for statement optionally allows to specify what to prepend (<code>BEFORE</code>), put in-between (<code>SEPARATOR</code>), and what to
 				put at the end (<code>AFTER</code>) of all iterations. <code>BEFORE</code> and <code>AFTER</code>
 				are only executed if there is at least one iteration. (<code>SEPARATOR</code>) is only added between
-				iterations, that it is executed if there are at least two iterations.Here&apos;s an example:</p><pre class="prettyprint lang-xtend">
+				iterations, that it is executed if there are at least two iterations.Here is an example:</p><pre class="prettyprint lang-xtend">
 def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
   &lt;html&gt;
     &lt;body&gt;
@@ -1790,8 +1792,8 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
 				<section id="templateType">
 				<h3>Typing</h3>
 				<p>
-				The template expression is of type <code class="prettyprint lang-java">java.lang.CharSequence</code> but auto-convertes to <code class="prettyprint lang-java">java.lang.String</code>
-				if that is the expected target type.
+				The template expression is of type <code class="prettyprint lang-java">java.lang.CharSequence</code>. It is automatically converted
+				to <code class="prettyprint lang-java">java.lang.String</code> if that is the expected target type.
 				</p>
 				<!-- subsection -->
 				<section id="WhitespaceHandling">
@@ -1799,8 +1801,8 @@ def someHTML(List&lt;Paragraph&gt; paragraphs) &apos;&apos;&apos;
 				<p>
 				One of the key features of templates is the smart handling of white space in the template output. 
 				The white space is not written into the output data structure as is but preprocessed. This allows 
-				for readable templates as well as nicely formatted output. This can be achieved by applying three 
-				simple rules when the template is evaluated.<ol>
+				for readable templates as well as nicely formatted output. The following three rules are applied 
+				when the template is evaluated:<ol>
 					<li>
 					    Indentation in the template that is relative to a control structure will not be propagated 
 					    to the output string. A control structure is a <code>FOR</code>-loop or a condition 

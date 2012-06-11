@@ -135,7 +135,7 @@ A more advanced generic class declaration in Xtend:
 <a name="constructors"></a>
 <h2>Constructors</h2>
 <p>
-An Xtend class can define one or more constructors. Unlike Java you don&apos;t have to repeat the name of the class over and over again,
+An Xtend class can define one or more constructors. Unlike Java you do not have to repeat the name of the class over and over again,
 but use keyword <em>new</em> to declare a constructor.
 Constructors can also delegate to other constructors using <span class="inlinecode"><span class="keyword">this</span>(args...)</span> in their first
 line. 
@@ -283,7 +283,7 @@ Xtend does not force you to catch or redeclare checked exceptions. Nevertheless,
 the exceptions thrown in a method&apos;s body using the same <span class="inlinecode"><span class="keyword">throws</span></span> clause as in Java.
 </p>
 <p>
-If you don&apos;t declare checked exceptions in your method but they are possibly thrown in your code, the
+If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
 compiler will rethrow the checked exception silently (using the sneaky-throw technique introduced by 
 <a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>). 
   
@@ -385,7 +385,7 @@ A dispatch method is marked using the keyword <span class="inlinecode"><span cla
 </div>
 </p>
 <p>
-For a set of visible dispatch methods in the current type hierarchy charing the same name and the same
+For a set of visible dispatch methods in the current type hierarchy sharing the same name and the same
 number of arguments, the compiler infers a synthetic method (the dispatcher) using the common super type of all declared arguments.
 The actual dispatch methods are reduced in visibility and renamed (prepending an underscore) so that client code always binds to
 the dispatcher method.
@@ -425,7 +425,7 @@ The default visibility of the underscore methods is <span class="inlinecode"><sp
 explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
 Otherwise it is <span class="inlinecode"><span class="keyword">public</span></span>.
  
-The comparism of the type parameters goes from left to right. That is in the following example, the second
+The comparison of the type parameters goes from left to right. That is in the following example, the second
 method declaration is considered more specific since its first parameter type is the most specific:
 </p>
 <p>
@@ -624,7 +624,7 @@ method is called on the argument parameter as if it was one of its members.
 </div>
 </p>
 <p>
-Method calls in extension syntax often result in more readable code, as method calls are chained rather than nested. 
+Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
 Another benefit of extensions is that you can add methods which are specific to a certain context
 (read layer) only. You might for instance not want to put UI-specific methods and dependencies to your
 domain model classes. Therefore such functionality is often defined in static methods or methods in
@@ -641,7 +641,7 @@ persistenceManager.save(myObject);<br/>
 </div>
 </p>
 <p>
-With extension methods you can write it like so:
+With extension methods you can write
 </p>
 <p>
 <div class="literallayout">
@@ -673,33 +673,33 @@ SDK without any further ado.
 </div>
 </p>
 <p>
-Have a look at the Java doc to see what&apos;s there:
+Have a look at the JavaDoc to see what is there:
 </p>
 <p>
 <ul>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ObjectExtensions" >ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ObjectExtensions" >ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.MapExtensions" >MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.MapExtensions" >MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions" >ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions" >ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.CollectionExtensions" >CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.CollectionExtensions" >CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions" >BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions" >BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.FunctionExtensions" >FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.FunctionExtensions" >FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a>
 	</li>
 </ul>
 </p>
@@ -762,8 +762,8 @@ allows to use its methods like this:
 By adding the <span class="inlinecode"><span class="keyword">extension</span></span> keyword to a field declaration, its instance methods become extension methods.
 </p>
 <p>
-Imagine you want to have some layer specific functionality on a class <span class="inlinecode">Person</span>. Let&apos;s say you are in a servlet-like class
-and want to persist a <span class="inlinecode">Person</span> using some persistence mechanism. Let&apos;s assume <span class="inlinecode">Person</span> implements
+Imagine you want to have some layer specific functionality on a class <span class="inlinecode">Person</span>. Let us say you are in a servlet-like class
+and want to persist a <span class="inlinecode">Person</span> using some persistence mechanism. Let us assume <span class="inlinecode">Person</span> implements
 a common interface <span class="inlinecode">Entity</span>.
  
 You could have the following interface
@@ -814,7 +814,7 @@ person.update&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.update(pers
 Using the <span class="inlinecode"><span class="keyword">extension</span></span> modifier on fields has a significant advantage over 
 static <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension imports</a>: Your code is not bound to the actual implementation of the extension method.
 You can simply exchange the component that provides the referenced extension with another implementation from outside,
-by providing a different instance. No matter you do so via a factory, dependency injection or simply
+by providing a different instance. No matter whether you do so via a factory, dependency injection or simply
 using a setter.
 </p>
 </body>

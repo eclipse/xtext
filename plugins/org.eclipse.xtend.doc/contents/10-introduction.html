@@ -54,9 +54,9 @@ Syntactically and semantically Xtend has its roots in the Java programming langu
 </p>
 <p>
 The language is not aiming at replacing Java all together. Its <a href="10-introduction.html#library" title="Go to &quot;The Runtime Library&quot;">library</a> is just a thin layer on top of the 
-Java Development Kit (JDK) and unlike with other JVM languages there are <a href="15-types.html#javaInteroperability" title="Go to &quot;Interoperability with Java&quot;">zero interoperability</a> issues :
+Java Development Kit (JDK) and unlike other JVM languages there are <a href="15-types.html#javaInteroperability" title="Go to &quot;Interoperability with Java&quot;">zero interoperability</a> issues:
 Everything you write in Xtend interacts with Java exactly as if it were written in Java in the first place.
-At the same time Xtend just much more concise, readable and expressive. 
+At the same time Xtend is just much more concise, readable and expressive. 
 </p>
 <p>
 Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
@@ -68,21 +68,21 @@ debugging and many more.
 <p>
 Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
 SDK is via <a href="http://marketplace.eclipse.org/content/eclipse-xtend">Eclipse Marketplace</a>. 
-But there&apos;s also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download">available for download
+But there is also a complete Eclipse distribution <a href="http://www.eclipse.org/xtend/index.html#download">available for download
 at http://xtend-lang.org</a>.
 </p>
 <p>
-If you don&apos;t want to use the recommended Eclipse Plug-in, you can compile Xtend code using the 
+If you do not want to use the recommended Eclipse plug-in, you can compile Xtend code using the 
 <a href="10-introduction.html#MavenSupport" title="Go to &quot;Maven Support&quot;">Maven plug-in</a>.
 </p>
 <a name="MavenSupport"></a>
 <h3>Maven Support</h3>
 <p>
 The <a href="10-introduction.html#library" title="Go to &quot;The Runtime Library&quot;">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from
-the following maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
+the following Maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
 </p>
 <p>
-Here&apos;s the XML for the repository:
+Here is the XML for the repository:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -103,7 +103,7 @@ Here&apos;s the XML for the repository:
 </div>
 </p>
 <p>
-Here&apos;s the XML for the dependency to the library:
+Here is the XML for the dependency to the library:
 </p>
 <p>
 <div class="literallayout">
@@ -151,7 +151,7 @@ And this is the XML for the plug-in:
 <p>
 As you see the <em>outputDirectory</em> can be specified to match the default of the Eclipse plug-in (<em>xtend-gen</em>). Of course you can also change the configuration
 in Eclipse to match the Maven default (<em>generated-sources</em>). To do so right-click on the project and select <em>Properties</em> or if you prefer a global setting choose <em>Eclipse-&gt;Preferences</em>.
-In the category <em>Xtend/Compiler</em> enter the directory name (see screenshot). It&apos;s interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+In the category <em>Xtend/Compiler</em> enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
 </p>
 <p>
 <div class="image" >
@@ -166,14 +166,14 @@ Configuring the compiler in Eclipse
 <h3>The Runtime Library</h3>
 <p>
 The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
-to existing classes and interfaces from the JDK. The class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/InputOutput.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput" >InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>
+to existing classes and interfaces from the JDK. The class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/InputOutput.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput" >InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>
 providing the method <span class="inlinecode">&lt;T&gt;&nbsp;T&nbsp;println(T&nbsp;obj)</span> being one of them. 
 </p>
 <p>
-The only surprising fact in the generated Java code may be the library class . Many 
+The only surprising fact in the generated Java code may be the library class. Many 
 features of Xtend are not built into the language itself but provided via the library
 <em>org.eclipse.xtend.lib</em>. The library is available from a <a href="10-introduction.html#MavenSupport" title="Go to &quot;Maven Support&quot;">Maven repository</a> and via p2
-update site (in case you do Eclipse Plug-In development).
+update site (in case you do Eclipse plug-in development).
 </p>
 <p>
 The library provides means to create collections in a readable way:
@@ -206,13 +206,13 @@ One example is the ubiquitous <span class="inlinecode">map</span> function:
 Many operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available.
 </p>
 <p>
-You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html">JavaDoc API</a> to see what&apos;s
+You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html">JavaDoc API</a> to see what is
 available.
 </p>
 <a name="GettingStarted"></a>
 <h2>Getting Started</h2>
 <p>
-The first thing you want to see in any language is the ubiquitous "Hello World" example. 
+The first thing you want to see in any language is a "Hello World" example. 
 In Xtend, that reads as
 <div class="literallayout">
 <div class="incode">
@@ -228,13 +228,13 @@ In Xtend, that reads as
 </p>
 <p>
 You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the <span class="inlinecode"><span class="keyword">def</span></span>
-keyword for declaring a method. Also like in Java it&apos;s mandatory to define a class and a main method as the entry point for an application. 
-Admittedly &apos;hello world&apos; programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
+keyword for declaring a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
+Admittedly &apos;hello world&apos; programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real stuff
 as you will learn in a moment.
 </p>
 <p>
 An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-translate it to Java code. By default you&apos;ll find it in a source folder <em>xtend-gen</em>, which is of course configurable.
+translate it to Java code. By default you will find it in a source folder <em>xtend-gen</em>, which is of course configurable.
 The hello world example is translated to the following Java code:
 <div class="literallayout">
 <div class="incode">
@@ -253,21 +253,21 @@ The hello world example is translated to the following Java code:
 </p>
 <p>
 You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
-about the missing library if it&apos;s not on the classpath and provide a quick fix to add it.
+about the missing library if it is not on the classpath and provide a quick fix to add it.
 </p>
 <p>
 The next thing you might want to do is materializing one of the example projects into your workspace.
 To do so right click anywhere in the <em>Navigator</em> view in Eclipse and select <em>New -&gt; Example...</em>.
 </p>
 <p>
-In the upcoming dialog you&apos;ll find two examples for Xtend:
+In the upcoming dialog you will find two examples for Xtend:
 </p>
 <p>
 <ul>
 	<li>
 		<em>Xtend Introductory Examples</em> contains a couple of example code snippets illustrating certain
 		  aspects and strengths of Xtend. 
-		  It for instance shows how to build a builder API or an API which allows for writing code like this:
+		  It for instance shows how to build an API which allows for writing code like this:
 		  <div class="literallayout">
 		<div class="incode">
 		<p class="code">
@@ -277,10 +277,10 @@ In the upcoming dialog you&apos;ll find two examples for Xtend:
 		</div>
 		
 		  Also the <a href="10-introduction.html#moviesExample" title="Go to &quot;The Movies Example (src/examples6/Movies.xtend)&quot;">the movies example</a> explained in detail in <a href="10-introduction.html#moviesExample" title="Go to &quot;The Movies Example (src/examples6/Movies.xtend)&quot;">the next section</a>
-		  is included here.
+		  is included there.
 	</li>
 	<li>
-		<em>Xtend Solutions For Euler</em> contains solutions to a lot of the problems you&apos;ll find at <a href="http://projecteuler.net/">Project Euler&apos;s website</a>.
+		<em>Xtend Solutions For Euler</em> contains solutions to a lot of the problems you will find at <a href="http://projecteuler.net/">Project Euler&apos;s website</a>.
 		   These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved
 		   with the following expression :
 		   <div class="literallayout">
@@ -304,7 +304,7 @@ a file with data about movies in and doing some analysis on it.
 <h4>The Data</h4>
 <p>
 The movie database is a plain text file (data.csv) with data sets describing movies.
-Here&apos;s an example data set:
+Here is an example data set:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -334,7 +334,7 @@ The values are separated by two spaces. The columns are :
 </ol>
 
  
-Let&apos;s define a data type <span class="inlinecode">Movie</span> representing a data set:
+Let us define a data type <span class="inlinecode">Movie</span> representing a data set:
 </p>
 <p>
 <div class="literallayout">
@@ -352,7 +352,7 @@ Let&apos;s define a data type <span class="inlinecode">Movie</span> representing
 </div>
 </p>
 <p>
-It&apos;s a plain class with a typed field for each column in the data sets. The <a href="40-anntotations.html#dataAnnotation" title="Go to &quot;@Data&quot;">@Data</a>
+It is a plain class with a typed field for each column in the data sets. The <a href="40-anntotations.html#dataAnnotation" title="Go to &quot;@Data&quot;">@Data</a>
 annotation will turn this class into a value object, that is it will get 
 <ul>
 	<li>
@@ -372,7 +372,7 @@ annotation will turn this class into a value object, that is it will get
 <a name="moviesExample_3"></a>
 <h4>Parsing The Data</h4>
 <p>
-Let&apos;s now add another class to the same file (any number of <a href="20-classes-and-functions.html#Xtend_Classes_Members" title="Go to &quot;Classes and Members&quot;">classes</a> per file is allowed) and initialize a field
+Let us now add another class to the same file (any number of <a href="20-classes-and-functions.html#Xtend_Classes_Members" title="Go to &quot;Classes and Members&quot;">classes</a> per file is allowed) and initialize a field
 called movies with a list of movies. For the initialization we read in the text file and turn the data sets into <span class="inlinecode">Movie</span>s:
 </p>
 <p>
@@ -402,14 +402,14 @@ called movies with a list of movies. For the initialization we read in the text 
 </p>
 <p>
 A <a href="20-classes-and-functions.html#fields" title="Go to &quot;Fields&quot;">field&apos;s type</a> can be inferred from the expression on the right hand-side. 
-That&apos;s called local type inference and is supported everyhwere in Xtend.
+That is called local type inference and is supported everyhwere in Xtend.
 We want the field to be final, so we declare it as a value using the keyword <span class="inlinecode"><span class="keyword">val</span></span>.
 </p>
 <p>
 The initialization on the right hand side first creates a fresh instance of <span class="inlinecode">java.io.FileReader</span>.
-Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you won&apos;t find
+Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you will not find
 such a method, because <span class="inlinecode">readLines()</span> is in fact a static method from Google Guava&apos;s <span class="inlinecode">CharStream</span> which was imported 
-as an <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension</a>, which allows us to use this readable syntax.
+as an <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension</a> which allows us to use this readable syntax.
 </p>
 <p>
 <div class="literallayout">
@@ -464,13 +464,13 @@ and contains all the categories the movie is associated with.
 </div>
 </p>
 <a name="moviesExample_4"></a>
-<h4>Answering som Questions</h4>
+<h4>Answering some Questions</h4>
 <p>
-Now that we&apos;ve the text file turned into a <span class="inlinecode">List&lt;Movie&gt;</span>, we are ready to execute some queries against it.
-We use <em>Junit</em> to make the individual analysis executable.
+Now that we have turned the text file into a <span class="inlinecode">List&lt;Movie&gt;</span>, we are ready to execute some queries against it.
+We use <em>JUnit</em> to make the individual analysis executable.
 </p>
 <a name="moviesExample_4_2"></a>
-<h5>What&apos;s The Number Of Action Movies?</h5>
+<h5>What Is The Number Of Action Movies?</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -484,9 +484,9 @@ We use <em>Junit</em> to make the individual analysis executable.
 </div>
 </p>
 <p>
-First the movies are <span class="inlinecode">filter</span>ed. The lambda expression checks whether the current movie&apos;s categories contains 
+First the movies are <span class="inlinecode">filter</span>ed. The lambda expression checks whether the current movie&apos;s categories contain 
 the entry <span class="inlinecode"><span class="string">&apos;Action&apos;</span></span>. Note that unlike the lambda we used to turn the lines in the file into movies, we 
-haven&apos;t declared a parameter name this time. 
+have not declared a parameter name this time. 
 We could have written 
 <div class="literallayout">
 <div class="incode">
@@ -497,7 +497,7 @@ movies.filter[&nbsp;movie&nbsp;|&nbsp;movie.categories.contains(<span class="str
 </div>
 
 but since we left out the name and the vertical bar the variable is automatically named <span class="inlinecode"><span class="keyword">it</span></span> which
-(like <span class="inlinecode"><span class="keyword">this</span></span>) is an <a href="30-expressions.html#implicitVariables" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. That&apos;s why we can write either
+(like <span class="inlinecode"><span class="keyword">this</span></span>) is an <a href="30-expressions.html#implicitVariables" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. That is why we can write either
 </p>
 <p>
 <div class="literallayout">
@@ -516,14 +516,13 @@ movies.filter[categories.contains(<span class="string">&apos;Action&apos;</span>
 </p>
 </div>
 </div>
-.
 </p>
 <p>
-Lastly we call <span class="inlinecode">size</span> on the resulting iterable, which also is an extension method defined in 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
+Eventually we call <span class="inlinecode">size</span> on the resulting iterable which also is an extension method defined in 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>.
 </p>
 <a name="moviesExample_4_3"></a>
-<h5>Question 2: What&apos;s The Year The Best Movie From The 80ies Was Released?</h5>
+<h5>Question 2: What Is The Year The Best Movie From The 80ies Was Released?</h5>
 <p>
 <div class="literallayout">
 <div class="incode">
@@ -537,13 +536,13 @@ Lastly we call <span class="inlinecode">size</span> on the resulting iterable, w
 </div>
 </p>
 <p>
-Here we <span class="inlinecode">filter</span> all movies where the year is not included in the range from 1980 to 1989 (the 80ies).
-The <span class="inlinecode">..</span> operator again is an extension defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a> and returns an instanceof <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerRange.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerRange" >IntegerRange</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java" title="View Source Code" >(src)</a>.
+Here we <span class="inlinecode">filter</span> for all movies whose year is included in the range from 1980 to 1989 (the 80ies).
+The <span class="inlinecode">..</span> operator is again an extension defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a> and returns an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IntegerRange.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerRange" >IntegerRange</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerRange.java" title="View Source Code" >(src)</a>.
 Operator overloading is explained in <a href="30-expressions.html#operators" title="Go to &quot;Infix Operators and Operator Overloading&quot;">section</a>.
 </p>
 <p>
-The resulting iterable is sorted (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.sortBy</span>) by the <span class="inlinecode">rating</span> of the movies. 
-Since it&apos;s sorted in ascending order, we take the last movie from the list and return its <span class="inlinecode">year</span>. 
+The resulting iterable is sorted (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.sortBy</span>) by the <span class="inlinecode">rating</span> of the movies. 
+Since it is sorted in ascending order, we take the last movie from the list and return its <span class="inlinecode">year</span>. 
 </p>
 <p>
 We could have sorted descending and take the head of the list as well:
@@ -556,8 +555,8 @@ movies.filter[(1980..1989).contains(year)].sortBy[-rating].head.year<br/>
 </div>
 </p>
 <p>
-Note that first sorting and then taking the last or first is slightly more expnsive than needed. We could
-have used the method <span class="inlinecode">reduce</span> instead to find the best movie, which would be more efficient. Maybe
+Note that first sorting and then taking the last or first is slightly more expensive than needed. We could
+have used the method <span class="inlinecode">reduce</span> instead to find the best movie which would be more efficient. Maybe
 you want to try it on your own?
 </p>
 <p>
@@ -565,7 +564,7 @@ The calls to <span class="inlinecode">movie.year</span> as well as <span class="
 <a href="30-expressions.html#propertyAccess" title="Go to &quot;Property Access&quot;">getter methods</a>.
 </p>
 <a name="moviesExample_4_4"></a>
-<h5>Question 3: What&apos;s The The Sum Of All Votes Of The Top Two Movies?</h5>
+<h5>Question 3: What Is The The Sum Of All Votes Of The Top Two Movies?</h5>
 <p>
 <div class="literallayout">
 <div class="incode">

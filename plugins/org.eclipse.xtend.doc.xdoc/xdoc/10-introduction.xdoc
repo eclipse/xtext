@@ -19,9 +19,9 @@ ul[
 ] 
 
 The language is not aiming at replacing Java all together. Its ref:library[library] is just a thin layer on top of the 
-Java Development Kit (JDK) and unlike with other JVM languages there are ref:javaInteroperability[zero interoperability] issues :
+Java Development Kit (JDK) and unlike other JVM languages there are ref:javaInteroperability[zero interoperability] issues:
 Everything you write in Xtend interacts with Java exactly as if it were written in Java in the first place.
-At the same time Xtend just much more concise, readable and expressive. 
+At the same time Xtend is just much more concise, readable and expressive. 
 
 Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
 Eclipse-based IDE closely integrated with Eclipse's Java Development Tools (JDT), including features like call-hierarchies, rename refactoring, 
@@ -32,18 +32,18 @@ section:Installation[Installation]
 
 Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
 SDK is via link[http://marketplace.eclipse.org/content/eclipse-xtend][Eclipse Marketplace]. 
-But there's also a complete Eclipse distribution link[http://www.eclipse.org/xtend/index.html#download][available for download
+But there is also a complete Eclipse distribution link[http://www.eclipse.org/xtend/index.html#download][available for download
 at http://xtend-lang.org].
 
-If you don't want to use the recommended Eclipse Plug-in, you can compile Xtend code using the 
+If you do not want to use the recommended Eclipse plug-in, you can compile Xtend code using the 
 ref:MavenSupport[Maven plug-in].
 
 section2:MavenSupport[Maven Support]
 
 The ref:library[runtime library] as well as a plug-in to run the compiler in a Maven build can be be obtained from
-the following maven repository: link[http://build.eclipse.org/common/xtend/maven/][http://build.eclipse.org/common/xtend/maven/].
+the following Maven repository: link[http://build.eclipse.org/common/xtend/maven/][http://build.eclipse.org/common/xtend/maven/].
 
-Here's the XML for the repository:
+Here is the XML for the repository:
 code[
 <repositories>
   <repository>
@@ -59,7 +59,7 @@ code[
 </pluginRepositories>
 ]
 
-Here's the XML for the dependency to the library:
+Here is the XML for the dependency to the library:
 
 code[
 <dependency>
@@ -95,7 +95,7 @@ code[
 
 As you see the e[outputDirectory] can be specified to match the default of the Eclipse plug-in (e[xtend-gen]). Of course you can also change the configuration
 in Eclipse to match the Maven default (e[generated-sources]). To do so right-click on the project and select e[Properties] or if you prefer a global setting choose e[Eclipse->Preferences].
-In the category e[Xtend/Compiler] enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+In the category e[Xtend/Compiler] enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
 
 img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclipse][][]
 
@@ -105,10 +105,10 @@ The compiler requires a small runtime library on the classpath, which mainly pro
 to existing classes and interfaces from the JDK. The class codeRef[org.eclipse.xtext.xbase.lib.InputOutput]
 providing the method code[<T> T println(T obj)] being one of them. 
 
-The only surprising fact in the generated Java code may be the library class . Many 
+The only surprising fact in the generated Java code may be the library class. Many 
 features of Xtend are not built into the language itself but provided via the library
 e[org.eclipse.xtend.lib]. The library is available from a ref:MavenSupport[Maven repository] and via p2
-update site (in case you do Eclipse Plug-In development).
+update site (in case you do Eclipse plug-in development).
 
 The library provides means to create collections in a readable way:
 
@@ -127,12 +127,12 @@ code[Xtend][
 
 Many operators to concat collections or to do arithmetics with types like code[BigDecimal] are also available.
 
-You might want to have a look at the link[http://xtend-lang.org/api/2.3.0/index.html][JavaDoc API] to see what's
+You might want to have a look at the link[http://xtend-lang.org/api/2.3.0/index.html][JavaDoc API] to see what is
 available.
 
 section:GettingStarted[Getting Started]
 
-The first thing you want to see in any language is the ubiquitous "Hello World" example. 
+The first thing you want to see in any language is a "Hello World" example. 
 In Xtend, that reads as
 code[Xtend][
   class HelloWorld {
@@ -143,12 +143,12 @@ code[Xtend][
 ]
 
 You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the code[Xtend][def]
-keyword for declaring a method. Also like in Java it's mandatory to define a class and a main method as the entry point for an application. 
-Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness unleashes as soon as you do real stuff
+keyword for declaring a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
+Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real stuff
 as you will learn in a moment.
 
 An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-translate it to Java code. By default you'll find it in a source folder e[xtend-gen], which is of course configurable.
+translate it to Java code. By default you will find it in a source folder e[xtend-gen], which is of course configurable.
 The hello world example is translated to the following Java code:
 code[Java][
   // Generated Java Source Code
@@ -162,23 +162,23 @@ code[Java][
 ] 
 
 You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
-about the missing library if it's not on the classpath and provide a quick fix to add it.
+about the missing library if it is not on the classpath and provide a quick fix to add it.
 
 The next thing you might want to do is materializing one of the example projects into your workspace.
 To do so right click anywhere in the e[Navigator] view in Eclipse and select e[New -> Example...].
 
-In the upcoming dialog you'll find two examples for Xtend:
+In the upcoming dialog you will find two examples for Xtend:
 
 ul[
   item[e[Xtend Introductory Examples] contains a couple of example code snippets illustrating certain
   aspects and strengths of Xtend. 
-  It for instance shows how to build a builder API or an API which allows for writing code like this:
+  It for instance shows how to build an API which allows for writing code like this:
   code[Xtend][
     assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)
   ]
   Also the ref:moviesExample[the movies example] explained in detail in ref:moviesExample[the next section]
-  is included here.]
-  item[e[Xtend Solutions For Euler] contains solutions to a lot of the problems you'll find at link[http://projecteuler.net/][Project Euler's website].
+  is included there.]
+  item[e[Xtend Solutions For Euler] contains solutions to a lot of the problems you will find at link[http://projecteuler.net/][Project Euler's website].
    These examples are leveraging the whole expressive power of Xtend. For instance link[http://projecteuler.net/problem=1][Euler Problem 1] can be solved
    with the following expression :
    code[Xtend][
@@ -195,7 +195,7 @@ a file with data about movies in and doing some analysis on it.
 section3[The Data]
 
 The movie database is a plain text file (data.csv) with data sets describing movies.
-Here's an example data set:
+Here is an example data set:
 code[
 Naked Lunch  1991  6.9  16578  Biography  Comedy  Drama  Fantasy
 ]
@@ -209,7 +209,7 @@ ol[
   item[categories]
 ]
  
-Let's define a data type code[Movie] representing a data set:
+Let us define a data type code[Movie] representing a data set:
 
 code[Xtend][
 @Data class Movie {
@@ -221,7 +221,7 @@ code[Xtend][
 }
 ]
 
-It's a plain class with a typed field for each column in the data sets. The ref:dataAnnotation[@Data]
+It is a plain class with a typed field for each column in the data sets. The ref:dataAnnotation[@Data]
 annotation will turn this class into a value object, that is it will get 
 ul[
   item[a getter-method for each field,]
@@ -232,7 +232,7 @@ ul[
 
 section3[Parsing The Data]
 
-Let's now add another class to the same file (any number of ref:Xtend_Classes_Members[classes] per file is allowed) and initialize a field
+Let us now add another class to the same file (any number of ref:Xtend_Classes_Members[classes] per file is allowed) and initialize a field
 called movies with a list of movies. For the initialization we read in the text file and turn the data sets into code[Movie]s:
 
 code[Xtend][
@@ -256,13 +256,13 @@ class Movies {
 ]
 
 A ref:fields[field's type] can be inferred from the expression on the right hand-side. 
-That's called local type inference and is supported everyhwere in Xtend.
+That is called local type inference and is supported everyhwere in Xtend.
 We want the field to be final, so we declare it as a value using the keyword code[Xtend][val].
 
 The initialization on the right hand side first creates a fresh instance of code[java.io.FileReader].
-Then the method code[readLines()] is invoked on that instance. But if you have a look at code[FileReader] you won't find
+Then the method code[readLines()] is invoked on that instance. But if you have a look at code[FileReader] you will not find
 such a method, because code[readLines()] is in fact a static method from Google Guava's code[CharStream] which was imported 
-as an ref:extensionImports[extension], which allows us to use this readable syntax.
+as an ref:extensionImports[extension] which allows us to use this readable syntax.
 
 code[Xtend][
 import static extension com.google.common.io.CharStreams.*
@@ -298,12 +298,12 @@ return new Movie (
 )
 ]
 
-section3[Answering som Questions]
+section3[Answering some Questions]
 
-Now that we've the text file turned into a code[List<Movie>], we are ready to execute some queries against it.
-We use e[Junit] to make the individual analysis executable.
+Now that we have turned the text file into a code[List<Movie>], we are ready to execute some queries against it.
+We use e[JUnit] to make the individual analysis executable.
 
-section4[What's The Number Of Action Movies?]
+section4[What Is The Number Of Action Movies?]
 
 code[Xtend][
   @Test def numberOfActionMovies() {
@@ -312,15 +312,15 @@ code[Xtend][
   }
 ]
 
-First the movies are code[filter]ed. The lambda expression checks whether the current movie's categories contains 
+First the movies are code[filter]ed. The lambda expression checks whether the current movie's categories contain 
 the entry code[Xtend]['Action']. Note that unlike the lambda we used to turn the lines in the file into movies, we 
-haven't declared a parameter name this time. 
+have not declared a parameter name this time. 
 We could have written 
 code[Xtend][
   movies.filter\[ movie | movie.categories.contains('Action')\].size
 ]
 but since we left out the name and the vertical bar the variable is automatically named code[Xtend][it] which
-(like code[Xtend][this]) is an ref:implicitVariables[implicit variable]. That's why we can write either
+(like code[Xtend][this]) is an ref:implicitVariables[implicit variable]. That is why we can write either
 
 code[Xtend][
   movies.filter\[ it.categories.contains('Action')\].size
@@ -328,12 +328,12 @@ code[Xtend][
 or 
 code[Xtend][
   movies.filter\[categories.contains('Action')\].size
-].
+]
 
-Lastly we call code[size] on the resulting iterable, which also is an extension method defined in 
+Eventually we call code[size] on the resulting iterable which also is an extension method defined in 
 codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions].
 
-section4[Question 2: What's The Year The Best Movie From The 80ies Was Released?]
+section4[Question 2: What Is The Year The Best Movie From The 80ies Was Released?]
 
 code[Xtend][
   @Test def void yearOfBestMovieFrom80ies() {
@@ -342,26 +342,26 @@ code[Xtend][
   }
 ]
 
-Here we code[filter] all movies where the year is not included in the range from 1980 to 1989 (the 80ies).
-The code[..] operator again is an extension defined in codeRef[org.eclipse.xtext.xbase.lib.IntegerExtensions] and returns an instanceof codeRef[org.eclipse.xtext.xbase.lib.IntegerRange].
+Here we code[filter] for all movies whose year is included in the range from 1980 to 1989 (the 80ies).
+The code[..] operator is again an extension defined in codeRef[org.eclipse.xtext.xbase.lib.IntegerExtensions] and returns an instance of codeRef[org.eclipse.xtext.xbase.lib.IntegerRange].
 Operator overloading is explained in ref:operators[section].
 
 The resulting iterable is sorted (codeRef[org.eclipse.xtext.xbase.lib.IterableExtensions]code[.sortBy]) by the code[rating] of the movies. 
-Since it's sorted in ascending order, we take the last movie from the list and return its code[year]. 
+Since it is sorted in ascending order, we take the last movie from the list and return its code[year]. 
 
 We could have sorted descending and take the head of the list as well:
 code[Xtend][
   movies.filter\[(1980..1989).contains(year)\].sortBy\[-rating\].head.year
 ]
 
-Note that first sorting and then taking the last or first is slightly more expnsive than needed. We could
-have used the method code[reduce] instead to find the best movie, which would be more efficient. Maybe
+Note that first sorting and then taking the last or first is slightly more expensive than needed. We could
+have used the method code[reduce] instead to find the best movie which would be more efficient. Maybe
 you want to try it on your own?
 
 The calls to code[movie.year] as well as code[movie.categories] in the previous example in fact access the corresponding 
 ref:propertyAccess[getter methods].
 
-section4[Question 3: What's The The Sum Of All Votes Of The Top Two Movies?]
+section4[Question 3: What Is The The Sum Of All Votes Of The Top Two Movies?]
 
 code[Xtend][
   @Test def void sumOfVotesOfTop2() {

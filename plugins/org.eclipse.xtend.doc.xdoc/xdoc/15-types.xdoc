@@ -5,14 +5,15 @@ as code[Xtend][int] or code[Xtend][boolean], arrays and of course all classes, i
 classpath.  
 
 Java Generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
-generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented after 
+generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as
+defined in  
 link[http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html][the Java Language Specification].
 
 section:localTypeInference[Type Inference]
 
-One of the problems with Java is, that you are forced to write type signatures over
-and over again. That's why so many people don't like static typing. 
-This is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
+One of the problems with Java is that you are forced to write type signatures over
+and over again. That is why so many people do not like static typing. 
+But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
 just like Java, you rarely have to write types down because they can be computed from the context.
 
 section:conversionRules[Conversion Rules]
@@ -30,18 +31,18 @@ code[Xtend][
   }
 ]
 
-Another very useful conversion applies to lambda expressions. As explained in the previous section, a lambda expression
+Another very useful conversion applies to lambda expressions. A lambda expression
 usually is of one of the types listed in code[org.eclipse.xtext.xbase.lib.Functions]
-or code[org.eclipse.xtext.xbase.lib.Predicates]. However if the expected type is an interface which has just method
+or code[org.eclipse.xtext.xbase.lib.Predicates]. However if the expected type is an interface with a single method
 declaration, a lambda expression is automatically converted to that
-type. This allows to use lambda expressions with many existing Java libraries. See section ref:closureTypes
+type. This allows to use lambda expressions with many existing Java libraries. See ref:closureTypes
 for more details.
 
 section:javaInteroperability[Interoperability with Java]
 
-Resembling and supporting every aspect of Java's type system, ensures that there is no impedeance mismatch between Java and Xtend.
-This means that Xtend and Java are 100% interoperable and that there are no special cases and no thinking
-in two worlds is neccessary. You can call Xtend code from Java and vice versa without any surprises or hassles.
+Resembling and supporting every aspect of Java's type system ensures that there is no impedance mismatch between Java and Xtend.
+This means that Xtend and Java are 100% interoperable. There are no exceptional cases. You do not have
+to think in two worlds. You can call Xtend code from Java and vice versa without any surprises or hassles.
 
 As a bonus if you know Java's type system (specifically generics), you already know the most complicated part
 of Xtend.

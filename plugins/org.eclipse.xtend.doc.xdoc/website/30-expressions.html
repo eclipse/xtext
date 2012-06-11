@@ -94,8 +94,8 @@
 				</div>
 				
 		<p>
-		Xtend there are no statements. Instead, everything is an expression and has a return value. That
-		allows to compose your code in intersting ways. For example, you can have a
+		Xtend does not have statements. Instead, everything is an expression and has a return value. That
+		allows to compose your code in interesting ways. For example, you can have a
 		<span class="inlinecode"><span class="keyword">try</span>&nbsp;<span class="keyword">catch</span></span> expression on the right hand side of an assignment: 
 		<div class="literallayout">
 			<div class="incode">
@@ -139,7 +139,7 @@
 			<h2>String Literals</h2>
 			<p>
 			A string literal is of type <span class="inlinecode">java.lang.String</span> (just like in Java).
-			String literals are enclosed by a pair of single quotes or double quotes. We mostly use single quotes
+			String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 			because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
 			least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 			Java's unicode notation. Contrary to Java, strings can span multiple lines.
@@ -165,7 +165,7 @@
 			<p>
 			Xtend supports roughly the same number literals as Java with a few differences.   
 			First, there are no signed number literals. If you put a minus operator in front of an number 
-			literal it is taken as a <a href="30-expressions.php#operators.php" title="Go to &quot;Infix Operators and Operator Overloading&quot;">UnaryOperator</a> with one argument (the positive number 
+			literal it is taken as a <a href="30-expressions.php#operators.php" title="Go to &quot;Infix Operators and Operator Overloading&quot;">unary operator</a> with one argument (the positive number 
 			literal). Second, as in Java 7, you can separate digits using <span class="inlinecode">_</span> for better readability
 			of large numbers.
 			 
@@ -214,7 +214,7 @@
 			<a name="nullLiteral" ></a>
 			<h2>Null Literal</h2>
 			<p>
-			The null pointer literal is <span class="inlinecode"><span class="keyword">null</span></span> has exactly the same semantics as in Java.
+			The null pointer literal <span class="inlinecode"><span class="keyword">null</span></span> has exactly the same semantics as in Java.
 			</p>
 			<a name="typeLiteral" ></a>
 			<h2>Type Literals</h2>
@@ -252,7 +252,8 @@
 			</div>
 			</p>
 			<p>
-			Although casts are supported you might want to use a <a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">switch with a type guard</a> as a better and safer alternative.
+			Although casts are supported you might want to use a <a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">switch with a type guard</a> or a 
+			<a href="20-classes-and-functions.php#polymorphicDispatch.php" title="Go to &quot;Dispatch Methods&quot;">dispatch method</a> as a better and safer alternative.
 			</p>
 		<a name="operators" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -284,7 +285,7 @@
 			</div>
 			</p>
 			<p>
-			This is the complete list of all available operators and their corresponding method signatures.
+			This is the complete list of all available operators and their corresponding method signatures:
 			</p>
 			<p>
 			<table>
@@ -514,12 +515,12 @@
 			</div>
 			</p>
 			<p>
-			The setter is only used if the field is not accessible from the given context. That's why the 
+			The setter is only used if the field is not accessible from the given context. That is why the 
 			<a href="40-anntotations.php#propertyAnnotation.php" title="Go to &quot;@Property&quot;">@Property annotation</a> would rename the local field to <span class="inlinecode">_myProperty</span>.
 			</p>
 			<p>
-			The return type of an assignment is the type of the right hand side, in case it's a simple assignment.
-			If it's translated to a setter method it yields whatever the setter method returns.
+			The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
+			If it is translated to a setter method it yields whatever the setter method returns.
 			</p>
 		<a name="blocks" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -530,7 +531,7 @@
 			<p>
 			The block expression allows to have imperative code sequences. It consists of a sequence of 
 			expressions, and returns the value of the last expression. The return type of a block is also the 
-			type of the last expression. Empty blocks return <span class="inlinecode">null</span>. 
+			type of the last expression. Empty blocks return <span class="inlinecode"><span class="keyword">null</span></span>. 
 			<a href="30-expressions.php#variableDeclaration.php" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as 
 			a block's last expression.
 			</p>
@@ -584,7 +585,7 @@
 			subsequent expressions in the block. 
 			</p>
 			<p>
-			A variable declaration starting with the keyword <span class="inlinecode"><span class="keyword">val</span></span> denotes a so called value, which
+			A variable declaration starting with the keyword <span class="inlinecode"><span class="keyword">val</span></span> denotes a value, which
 			is essentially a final (i.e. unsettable) variable. In some cases, one needs to update the value of 
 			a reference. In such situations the variable needs to be declared with the keyword <span class="inlinecode"><span class="keyword">var</span></span>, 
 			which stands for 'variable'.
@@ -608,7 +609,7 @@
 			</p>
 			<p>
 			Shadowing variables from outer scopes is not allowed, the only exception is the 
-			<a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable <span class="inlinecode"><span class="keyword">it</span></span></a>.
+			<a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a> <span class="inlinecode"><span class="keyword">it</span></span>.
 			</p>
 			<p>
 			Variables declared outside a lambda expression using the <span class="inlinecode"><span class="keyword">var</span></span> keyword are not accessible from within a
@@ -678,7 +679,7 @@
 			<h2>Implicit Variables <em>this</em> and <em>it</em></h2>
 			<p>
 			Like in Java an instance of the class is bound to <span class="inlinecode"><span class="keyword">this</span></span>. Which allows for either qualifying
-			field access or method invocations like in :
+			field access or method invocations like in:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -775,7 +776,7 @@
 			<br style="clear:both"></br>
 			<h1>Constructor Call</h1>
 			<p>
-			ConstructorCalls have the same syntax as in Java. The only difference is that empty parenthesis
+			Constructor calls have the same syntax as in Java. The only difference is that empty parenthesis
 			are optional:
 			<div class="literallayout">
 				<div class="incode">
@@ -799,7 +800,7 @@
 			</div>
 			<p>
 			A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
-			a Java developer it's best to think of a lambda expression as an anonymous class, i.e. 
+			a Java developer it is best to think of a lambda expression as an anonymous class, i.e. 
 			like in the following Java code :
 			</p>
 			<p>
@@ -841,7 +842,7 @@
 			<p>
 			As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
 			Also a lambda expression like a method declares parameters. The lambda above has one parameter called <span class="inlinecode">e</span> which is of
-			type <span class="inlinecode">ActionEvent</span>. You don't have to specify the type explicitly because it can be inferred from
+			type <span class="inlinecode">ActionEvent</span>. You do not have to specify the type explicitly because it can be inferred from
 			the context:
 			</p>
 			<p>
@@ -931,7 +932,7 @@
 			</p>
 			<p>
 			A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to 
-			in the closure's expression. That's exactly what we did with the variable <span class="inlinecode">textField</span>.
+			in the closure's expression. That is exactly what we did with the variable <span class="inlinecode">textField</span>.
 			</p>
 			<a name="closureTypes" ></a>
 			<h2>Typing</h2>
@@ -955,12 +956,12 @@
 			</div>
 			</p>
 			<p>
-			The type will be one of the types found in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>) or (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
-			It's a procedure if the return type is <span class="inlinecode">void</span>, otherwise it's a function.
+			The type will be one of the types found in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0M6/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
+			It is a procedure if the return type is <span class="inlinecode"><span class="keyword">void</span></span>, otherwise it is a function.
 			</p>
 			<p>
 			Xtend supports a shorthand syntax for function types. Instead of writing <span class="inlinecode">Function1&lt;?&nbsp;<span class="keyword">super</span>&nbsp;String,?&nbsp;<span class="keyword">extends</span>&nbsp;String&gt;</span>
-			which is what you'll find in the generated Java code, you can simply write <span class="inlinecode">(String)=&gt;String</span>.
+			which is what you will find in the generated Java code, you can simply write <span class="inlinecode">(String)=&gt;String</span>.
 			</p>
 			<p>
 			Example:
@@ -1029,7 +1030,7 @@
 			of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
 			</p>
 			<p>
-			While the <span class="inlinecode"><span class="keyword">if</span></span>-expression has the syntax of Java's if statement it behaves more like Java's ternary operator 
+			While the if expression has the syntax of Java's if statement it behaves more like Java's ternary operator 
 			(<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>), because it is an expression and returns a value.
 			Consequently, you can use if expressions deeply nested within expressions:
 			</p>
@@ -1054,7 +1055,7 @@
 			  </ul>
 			</div>
 			<p>
-			The <span class="inlinecode"><span class="keyword">switch</span></span> expression is very different from Java's switch statement. First, there is no fall through which means 
+			The switch expression is very different from Java's switch statement. First, there is no fall through which means 
 			only one <span class="inlinecode"><span class="keyword">case</span></span> is evaluated at most. Second, the use of <span class="inlinecode"><span class="keyword">switch</span></span> is not limited 
 			to certain values but can be used for any object reference instead. <span class="inlinecode">Object.equals()</span> is used to
 			compare the value in the case with the one you are switching over.
@@ -1076,7 +1077,8 @@
 			<p>
 			the main expression <span class="inlinecode">numberAsText</span> is evaluated first and then compared to each case sequentially.
 			If the case expression is of type <span class="inlinecode"><span class="keyword">boolean</span></span>, the case matches if the expression evaluates
-			to true. If it's not of type <span class="inlinecode"><span class="keyword">boolean</span></span> it's compared to the value from the main expression using <span class="inlinecode">Object.equals(Object)</span>.
+			to <span class="inlinecode"><span class="keyword">true</span></span>. If it is not of type <span class="inlinecode"><span class="keyword">boolean</span></span> it is compared to the value from the main
+			expression using <span class="inlinecode">Object.equals(Object)</span>.
 			</p>
 			<p>
 			If a case is a match, that is it evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or the result equals the one we are switching
@@ -1085,9 +1087,10 @@
 			<a name="switchExpression_4" ></a>
 			<h2>Type guards</h2>
 			<p>
-			Instead if or in addition to the case guard you can have a so called <em>Type Guard</em>. That is syntactically just a
-			<a href="15-types.php" title="Go to &quot;Static Typing and Java Interoperability&quot;">type reference</a>. The cool thing is that the value is automatically down casted
-			in subsequent expressions. Example:
+			Instead of or in addition to the case guard you can specify a <em>type guard</em>. The case only matches if the 
+			switch value conforms to this type. A case with both a type guard and a predicate only matches if both match.
+			If the switch value is a variable, this variable is automatically casted to the given type withnin the
+			predicate and the case's body.
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1095,9 +1098,9 @@
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;length(Object&nbsp;x)&nbsp;{<br/>
 						&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;x&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length&nbsp;&gt;&nbsp;0&nbsp;:&nbsp;x.length<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length&nbsp;&gt;&nbsp;0&nbsp;:&nbsp;x.length&nbsp;<span class="comment">//&nbsp;length&nbsp;is&nbsp;defined&nbsp;for&nbsp;String&nbsp;<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;size&nbsp;is&nbsp;defined&nbsp;for&nbsp;List<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
 						&nbsp;&nbsp;}<br/>
 						}
 					</p>
@@ -1105,13 +1108,8 @@
 			</div>
 			</p>
 			<p>
-			Only if the switch value is an instance of the specified type, the case's guard expression is executed using the same 
-			semantics explained previously. If the switch expression contains an explicit declaration of a local variable or the expression 
-			references a local variable, the type guard acts like a cast, that is all references to the switch value will be of the 
-			type specified in the type guard.
-			</p>
-			<p>
-			Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you might know from Java.
+			Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you 
+			might know from Java.
 			</p>
 		<a name="forLoop" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -1226,8 +1224,8 @@
 			<br style="clear:both"></br>
 			<h1>Return Expression</h1>
 			<p>
-			A method or lambda expression automatically returns the value of it's expression.
-			If it's a <a href="30-expressions.php#blocks.php" title="Go to &quot;Blocks&quot;">block expression</a> this is the value of the last expression in it.
+			A method or lambda expression automatically returns the value of its expression.
+			If it is a <a href="30-expressions.php#blocks.php" title="Go to &quot;Blocks&quot;">block expression</a> this is the value of the last expression in it.
 			However, sometimes you want to return early or make it explicit.
 			</p>
 			<p>
@@ -1278,9 +1276,9 @@
 			<h1>Try, Catch, Finally</h1>
 			<p>
 			The try-catch-finally expression is used to handle exceptional situations.
-			You are not forced to catch checked exceptions, if you do not catch checked exceptions they are 
-			rethrown in a wrapping runtime exception if not declared in the method's signature. 
-			Other than that the syntax again is like the one known from Java.
+			Checked exceptions are treated like runtime exceptions. You can but do not have to catch them as they
+			will be silently rethrown (see the <a href="20-classes-and-functions.php#declaredExceptions.php" title="Go to &quot;Declared Exceptions&quot;">section on declared exceptions</a>). The syntax 
+			again is like Java.
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1298,8 +1296,8 @@
 			</div>
 			</p>
 			<p>
-			For try-catch it's again beneficial that it is an expression, because you can write code like the following
-			and don't have to rely on non-final variables:
+			For try-catch it is again beneficial that it is an expression, because you can write code like the following
+			and do not have to rely on non-final variables:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1337,15 +1335,15 @@
 			The terminals for interpolated expression are so called guillemets <span class="inlinecode">&laquo;expression&raquo;</span>. They read nicely and are not often used
 			in text so you seldomly need to escape them. These escaping conflicts are the reason why
 			template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worst readability. 
-			The downside with the guillemets in Xtend is that you'll have to use a proper encoding (Always use UTF-8 and you are good).
+			The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 			</p>
 			<p>
-			If you use the Eclipse plug-in which is recommended, the guillemets will be inserted automatically using
-			content assist. They are also bound to <em>CTRL+SHIFT+&lt;</em> and <em>CTRL+SHIFT+</em> for <span class="inlinecode">&laquo;</span> and <span class="inlinecode">&raquo;</span> respectively.
-			On a mac they are bound to <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode">&raquo;</span>).
+			If you use the Eclipse plug-in - which is recommended - the guillemets will be inserted on content assist
+			within a template. They are additionally bound to <em>CTRL+SHIFT+&lt;</em> and <em>CTRL+SHIFT+</em> for <span class="inlinecode">&laquo;</span> and <span class="inlinecode">&raquo;</span> respectively.
+			On a Mac they are bound to <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode">&raquo;</span>).
 			</p>
 			<p>
-			Let us have a look at an example of how a typical method with template expressions looks like:
+			Let us have a look at an example of how a typical method with a template expressions looks like:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1368,7 +1366,7 @@
 			</p>
 			<p>
 			Template expressions can occur everywhere. 
-			Here's an example showing it in conjunction with the powerful <a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
+			Here is an example showing it in conjunction with the powerful <a href="30-expressions.php#switchExpression.php" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1450,7 +1448,7 @@
 			iterations, that it is executed if there are at least two iterations.
 			</p>
 			<p>
-			Here's an example:
+			Here is an example:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -1477,16 +1475,16 @@
 			<a name="templateType" ></a>
 			<h2>Typing</h2>
 			<p>
-			The template expression is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="java.lang.CharSequence">CharSequence</abbr></a> but auto-convertes to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a>
-			if that is the expected target type.
+			The template expression is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="java.lang.CharSequence">CharSequence</abbr></a>. It is automatically converted
+			to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a> if that is the expected target type.
 			</p>
 			<a name="WhitespaceHandling" ></a>
 			<h2>White Space Handling</h2>
 			<p>
 			One of the key features of templates is the smart handling of white space in the template output. 
 			The white space is not written into the output data structure as is but preprocessed. This allows 
-			for readable templates as well as nicely formatted output. This can be achieved by applying three 
-			simple rules when the template is evaluated.
+			for readable templates as well as nicely formatted output. The following three rules are applied 
+			when the template is evaluated:
 			</p>
 			<p>
 			<ol>
