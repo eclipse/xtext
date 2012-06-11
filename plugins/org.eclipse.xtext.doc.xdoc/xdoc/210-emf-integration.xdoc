@@ -242,7 +242,7 @@ Voilà, we now have a diagram editor that reads/writes its semantic model as text
 validator from Xtext is already integrated in the diagram editor via the menu bar. 
 
 
-section3[Stage 2: Calling the Xtext Parser to Parse GMF Labels]
+section2[Stage 2: Calling the Xtext Parser to Parse GMF Labels]
 
 GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
 cross-references, e.g. an attribute's type. So why not use the Xtext parser to process the user's input? 
@@ -283,7 +283,7 @@ code[Java][Required Plugins -> "org.eclipse.xtext.gmf.glue"
 in the e[GenPlugin] element of the gmfgen before generating the diagram editor anew.
 
 
-section3[Stage 3: A Popup Xtext Editor (experimental)]
+section2[Stage 3: A Popup Xtext Editor (experimental)]
 
 e[SimplePropertyPopupXtextEditorEditPartOverride] demonstrates how to spawn an Xtext editor to edit a model 
 element. The editor pops up in its control and shows only the section of the selected element. It is a fully 

@@ -1075,5 +1075,93 @@ update the ranges that actually have been altered, for example. This speeds up t
 will even move, shrink or enlarge previously announced regions based on a best guess before the next 
 semantic highlighting pass has been triggered after the user has changed the document.
 </p>
+<a name="refactoring"></a>
+<h2>Rename Refactoring</h2>
+<p>
+Xtext provides rename refactoring of the elements in your langauge. That includes
+</p>
+<p>
+<ul>
+	<li>
+		a command, handlers and keybindings on both declarations and references,
+	</li>
+	<li>
+		inplace linked editing for the new name,
+	</li>
+	<li>
+		validation and preview,
+	</li>
+	<li>
+		renaming of declaration and all references even across language boundaries.
+	</li>
+</ul>
+</p>
+<p>
+To enable refactoring support make sure the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment" >RefactorElementNameFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.java" title="View Source Code" >(src)</a>
+is enabled in the fragment section of the MWE workflow of your language, e.g.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;rename&nbsp;refactoring<br/>
+</span>fragment&nbsp;=&nbsp;refactoring.RefactorElementNameFragment&nbsp;{}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The fragment has an additional flag <span class="inlinecode">useJdtRefactoring</span> which can be used to delegate to JDT&apos;s
+refactoring infrastructure for languages using <a href="199-xtext-and-java.html#Xbase" title="Go to &quot;Xtext and Java&quot;">Xbase</a> and an 
+<a href="199-xtext-and-java.html#xbaseInferredType" title="Go to &quot;Inferring a JVM Model&quot;">inferred JVM model</a> (i.e. the domain model example or Xtend). 
+</p>
+<p>
+If you have stuck to the defaults with regard to naming, cross-referencing, and indexing rename refactoring
+should not need any customization. Give it a try. 
+</p>
+<a name="refactoring_7"></a>
+<h3>Customizing</h3>
+<p>
+The most likely component you want to customize is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IRenameStrategy.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.IRenameStrategy" >IRenameStrategy</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java" title="View Source Code" >(src)</a>. 
+This component defines how the declaration of the target element is performed. It has two major responsibilities:
+</p>
+<p>
+<ul>
+	<li>
+		Apply and revert the declaration change on the semantic model (methods <span class="inlinecode">applyDeclarationChange</span> 
+		and <span class="inlinecode">revertDeclarationChange</span>). The default is to look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> 
+		<span class="inlinecode">name</span> on the target object and set its value using EMFs reflective API.
+	</li>
+	<li>
+		Create the LTK <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ltk/core/refactoring/Change.html" title="View JavaDoc"><abbr title="org.eclipse.ltk.core.refactoring.Change" >Change</abbr></a> objects of the declaration change. These 
+		changes will be aggregated, checked for overlaps, presented to you in the preview and finally executed if you 
+		apply the refactoring. The default is to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a>
+		to locate the text range representing the name and create a <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/text/edits/ReplaceEdit.html" title="View JavaDoc"><abbr title="org.eclipse.text.edits.ReplaceEdit" >ReplaceEdit</abbr></a> for it. 
+	</li>
+</ul>
+</p>
+<p>
+As the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IRenameStrategy.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.IRenameStrategy" >IRenameStrategy</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java" title="View Source Code" >(src)</a> is a stateful object, you have to bind a 
+custom <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IRenameStrategy.Provider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider" >IRenameStrategy.Provider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java" title="View Source Code" >(src)</a> to create it.
+</p>
+<p>
+The second component you might want to customize is the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator" >IDependentElementsCalculator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java" title="View Source Code" >(src)</a>. Dependent elements are those elements 
+whose name change when the target element is renamed. For example, when you rename a Java class the qualified 
+names of its inner classes change, too, thus references to these have to be updated as well. This calculation 
+is performed by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator" >IDependentElementsCalculator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java" title="View Source Code" >(src)</a>. By default, all 
+elements contained in the target element are added. This matches Xtext&apos;s default strategy of qualified name 
+computation.
+</p>
+<a name="refactoring_8"></a>
+<h3>Rename Participants</h3>
+<p>
+One refactoring can trigger another: When renaming a rule in an Xtext grammar, the returned
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> should be renamed, too. For these cases, you can register a 
+<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ltk/core/refactoring/participants/RenameParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.ltk.core.refactoring.participants.RenameParticipant" >RenameParticipant</abbr></a> by the common means of LTK. If the 
+target of the participant is Xtext based, you can use a 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant" >AbstractProcessorBasedRenameParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.java" title="View Source Code" >(src)</a>.
+</p>
 </body>
 </html>

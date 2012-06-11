@@ -118,6 +118,7 @@
 		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
 		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
 		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		<li id="197-refactoring.html" ><a href="197-refactoring.php" >Rename Refactoring</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -421,6 +422,8 @@
 			<div class="toc">
 			  <ul>
 			    <li><a href="210-emf-integration.php#gmf_integration_stage_1.php" >Stage 1: Make GMF Read and Write the Semantic Model As Text</a></li>
+			    <li><a href="210-emf-integration.php#gmf_integration_7.php" >Stage 2: Calling the Xtext Parser to Parse GMF Labels</a></li>
+			    <li><a href="210-emf-integration.php#gmf_integration_8.php" >Stage 3: A Popup Xtext Editor (experimental)</a></li>
 			  </ul>
 			</div>
 			<p>
@@ -551,8 +554,8 @@
 			Voil&agrave;, we now have a diagram editor that reads/writes its semantic model as text. Also note that the 
 			validator from Xtext is already integrated in the diagram editor via the menu bar. 
 			</p>
-			<a name="gmf_integration_stage_1_9" ></a>
-			<h3>Stage 2: Calling the Xtext Parser to Parse GMF Labels</h3>
+			<a name="gmf_integration_7" ></a>
+			<h2>Stage 2: Calling the Xtext Parser to Parse GMF Labels</h2>
 			<p>
 			GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
 			cross-references, e.g. an attribute's type. So why not use the Xtext parser to process the user's input? 
@@ -616,8 +619,8 @@
 			<p>
 			in the <em>GenPlugin</em> element of the gmfgen before generating the diagram editor anew.
 			</p>
-			<a name="gmf_integration_stage_1_10" ></a>
-			<h3>Stage 3: A Popup Xtext Editor (experimental)</h3>
+			<a name="gmf_integration_8" ></a>
+			<h2>Stage 3: A Popup Xtext Editor (experimental)</h2>
 			<p>
 			<em>SimplePropertyPopupXtextEditorEditPartOverride</em> demonstrates how to spawn an Xtext editor to edit a model 
 			element. The editor pops up in its control and shows only the section of the selected element. It is a fully 

@@ -174,83 +174,92 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-		<a name="TutorialUnitTests" ></a>
+		<a name="refactoring" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Unit Testing the Language</h1>
+			<h1>Rename Refactoring</h1>
+			<div class="toc">
+			  <ul>
+			    <li><a href="197-refactoring.php#refactoring_7.php" >Customizing</a></li>
+			    <li><a href="197-refactoring.php#refactoring_8.php" >Rename Participants</a></li>
+			  </ul>
+			</div>
 			<p>
-			Automated tests are crucial for the maintainability and the quality of a software product. That's why
-			it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
-			a test project for that purpose. It simplifies the setup procedure both for the eclipse agnostic tests and the ui
-			tests for Junit4.
+			Xtext provides rename refactoring of the elements in your langauge. That includes
 			</p>
 			<p>
-			This tutorial is about testing the parser and the linker for the <em>Domainmodel</em>. It leverages Xtend to
-			write the testcase.
+			<ul>
+			  <li>a command, handlers and keybindings on both declarations and references,</li>
+			  <li>inplace linked editing for the new name,</li>
+			  <li>validation and preview,</li>
+			  <li>renaming of declaration and all references even across language boundaries.</li>
+			</ul>
 			</p>
 			<p>
-			<ol>
-			  <li>
-			  		First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
-			  		plugin, and select <em>New -&gt; Xtend Class</em> from the context menu. Provide a meaningful name and
-			  		enter the package before you hit finish.
-			  		
-			  		The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/XtextRunner.html" title="org.eclipse.xtext.junit4.XtextRunner">XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
-			  		the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/IInjectorProvider.html" title="org.eclipse.xtext.junit4.IInjectorProvider">IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
-			  		by means of class annotations:  
-			   
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.XtextRunner<br/>
-			  			<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider<br/>
-			  			<br/>
-			  			@InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
-			  			@RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
-			  			<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
-			  			}
-			  		</p>
-			  	</div>
-			  </div>
-			  
+			To enable refactoring support make sure the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.html" title="org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment">RefactorElementNameFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.java" title="View Source Code" >(src)</a>
+			is enabled in the fragment section of the MWE workflow of your language, e.g.
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="comment">//&nbsp;rename&nbsp;refactoring<br/>
+						</span>fragment&nbsp;=&nbsp;refactoring.RefactorElementNameFragment&nbsp;{}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			The fragment has an additional flag <span class="inlinecode">useJdtRefactoring</span> which can be used to delegate to JDT's
+			refactoring infrastructure for languages using <a href="199-xtext-and-java.php" title="Go to &quot;Xtext and Java&quot;">Xbase</a> and an 
+			<a href="199c-xbase-inferred-type.php" title="Go to &quot;Inferring a JVM Model&quot;">inferred JVM model</a> (i.e. the domain model example or Xtend). 
+			</p>
+			<p>
+			If you have stuck to the defaults with regard to naming, cross-referencing, and indexing rename refactoring
+			should not need any customization. Give it a try. 
+			</p>
+			<a name="refactoring_7" ></a>
+			<h2>Customizing</h2>
+			<p>
+			The most likely component you want to customize is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IRenameStrategy.html" title="org.eclipse.xtext.ui.refactoring.IRenameStrategy">IRenameStrategy</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java" title="View Source Code" >(src)</a>. 
+			This component defines how the declaration of the target element is performed. It has two major responsibilities:
+			</p>
+			<p>
+			<ul>
+			  <li>Apply and revert the declaration change on the semantic model (methods <span class="inlinecode">applyDeclarationChange</span> 
+			  and <span class="inlinecode">revertDeclarationChange</span>). The default is to look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> 
+			  <span class="inlinecode">name</span> on the target object and set its value using EMFs reflective API.</li>
+			  <li>Create the LTK <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ltk/core/refactoring/Change.html" title="org.eclipse.ltk.core.refactoring.Change">Change</abbr></a> objects of the declaration change. These 
+			  changes will be aggregated, checked for overlaps, presented to you in the preview and finally executed if you 
+			  apply the refactoring. The default is to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a>
+			  to locate the text range representing the name and create a <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/text/edits/ReplaceEdit.html" title="org.eclipse.text.edits.ReplaceEdit">ReplaceEdit</abbr></a> for it. 
 			  </li>
-			  <li>
-			  		The actual test case is pretty straight forward with Xtend. The utility class 
-			  		<em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into a
-			  		<em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
-			  		<abbr title="junit.framework.Assert" >Assert</abbr> leads to concise a readable test cases.
-			  		
-			  		<div class="literallayout">
-			  	<div class="incode">
-			  		<p class="code">
-			  			<span class="keyword">import</span>&nbsp;org.eclipse.xtext.junit4.util.ParseHelper<br/>
-			  			<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;junit.framework.Assert.*<br/>
-			  			<br/>
-			  			...<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-			  			ParseHelper&lt;Domainmodel&gt;&nbsp;parser<br/>
-			  			<br/>
-			  			@Test&nbsp;<br/>
-			  			<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;parseDomainmodel()&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;model&nbsp;=&nbsp;parser.parse(<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"entity&nbsp;MyEntity&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;MyEntity<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
-			  			}
-			  		</p>
-			  	</div>
-			  </div>
-			  
-			  </li>
-			  <li>
-			  		After saving the Xtend file, it is time to run the test. Please locate the generated java class
-			  		in the <em>xtend-gen</em> folder and select <em>Run As -&gt; JUnit Test</em> from the context menu.
-			  </li>
-			</ol>
+			</ul>
+			</p>
+			<p>
+			As the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IRenameStrategy.html" title="org.eclipse.xtext.ui.refactoring.IRenameStrategy">IRenameStrategy</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java" title="View Source Code" >(src)</a> is a stateful object, you have to bind a 
+			custom <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IRenameStrategy.Provider.html" title="org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider">IRenameStrategy.Provider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java" title="View Source Code" >(src)</a> to create it.
+			</p>
+			<p>
+			The second component you might want to customize is the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.html" title="org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator">IDependentElementsCalculator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java" title="View Source Code" >(src)</a>. Dependent elements are those elements 
+			whose name change when the target element is renamed. For example, when you rename a Java class the qualified 
+			names of its inner classes change, too, thus references to these have to be updated as well. This calculation 
+			is performed by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.html" title="org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator">IDependentElementsCalculator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IDependentElementsCalculator.java" title="View Source Code" >(src)</a>. By default, all 
+			elements contained in the target element are added. This matches Xtext's default strategy of qualified name 
+			computation.
+			</p>
+			<a name="refactoring_8" ></a>
+			<h2>Rename Participants</h2>
+			<p>
+			One refactoring can trigger another: When renaming a rule in an Xtext grammar, the returned
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> should be renamed, too. For these cases, you can register a 
+			<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ltk/core/refactoring/participants/RenameParticipant.html" title="org.eclipse.ltk.core.refactoring.participants.RenameParticipant">RenameParticipant</abbr></a> by the common means of LTK. If the 
+			target of the participant is Xtext based, you can use a 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.html" title="org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant">AbstractProcessorBasedRenameParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.java" title="View Source Code" >(src)</a>.
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
@@ -259,8 +268,8 @@
 		    var disqus_shortname = 'xtext'; // required: replace example with your forum shortname
 		
 		    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-		    var disqus_identifier = 'TutorialUnitTests';
-		    var disqus_url = documentationRoot+'060-unit-tests.php';
+		    var disqus_identifier = 'refactoring';
+		    var disqus_url = documentationRoot+'197-refactoring.php';
 		
 		    /* * * DON'T EDIT BELOW THIS LINE * * */
 		    (function() {

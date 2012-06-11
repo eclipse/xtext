@@ -326,6 +326,12 @@
 				<topic href="contents/120-heading-UI.html#highlighting_7" label="Semantic Highlighting" >
 				</topic>
 			</topic>
+			<topic href="contents/120-heading-UI.html#refactoring" label="Rename Refactoring" >
+				<topic href="contents/120-heading-UI.html#refactoring_7" label="Customizing" >
+				</topic>
+				<topic href="contents/120-heading-UI.html#refactoring_8" label="Rename Participants" >
+				</topic>
+			</topic>
 		</topic>
 		<topic href="contents/199-xtext-and-java.html#Xbase" label="Xtext and Java" >
 			<topic href="contents/199-xtext-and-java.html#Xbase_3" label="Plug-in Setup" >
@@ -532,10 +538,10 @@
 			</topic>
 			<topic href="contents/210-emf-integration.html#gmf_integration" label="Integration with GMF Editors" >
 				<topic href="contents/210-emf-integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text" >
-					<topic href="contents/210-emf-integration.html#gmf_integration_stage_1_9" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels" >
-					</topic>
-					<topic href="contents/210-emf-integration.html#gmf_integration_stage_1_10" label="Stage 3: A Popup Xtext Editor (experimental)" >
-					</topic>
+				</topic>
+				<topic href="contents/210-emf-integration.html#gmf_integration_7" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels" >
+				</topic>
+				<topic href="contents/210-emf-integration.html#gmf_integration_8" label="Stage 3: A Popup Xtext Editor (experimental)" >
 				</topic>
 			</topic>
 		</topic>
