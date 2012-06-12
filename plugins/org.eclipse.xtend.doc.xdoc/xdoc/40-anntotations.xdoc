@@ -35,11 +35,11 @@ The annotation code[Xtend][@Data], will turn an annotated class into a value obj
 has the following effect:
 
 ul[
-	item[all fields are flagged final,]
-	item[getter methods will be generated (if not existent),]
-	item[a constructor taking paramaters for all non-initialized fields will be generated (if not existent),]
-	item[equals(Object) / hashCode() methods will be generated (if not existent),]
-	item[a toString() method will be generated (if not existent).]
+  item[all fields are flagged final,]
+  item[getter methods will be generated (if not existent),]
+  item[a constructor taking paramaters for all non-initialized fields will be generated (if not existent),]
+  item[equals(Object) / hashCode() methods will be generated (if not existent),]
+  item[a toString() method will be generated (if not existent).]
 ]
 
 Example:

@@ -796,7 +796,7 @@ def someHTML(Paragraph p) '''
   <html>
     <body>
       «IF p.headLine != null»
-      	<h1>«p.headline»</h1>
+        <h1>«p.headline»</h1>
       «ENDIF»
       <p>
         «p.text»
@@ -817,7 +817,7 @@ def someHTML(List<Paragraph> paragraphs) '''
     <body>
       «FOR p : paragraphs»
         «IF p.headLine != null»
-      	  <h1>«p.headline»</h1>
+          <h1>«p.headline»</h1>
         «ENDIF»
         <p>
           «p.text»
@@ -839,9 +839,9 @@ code[Xtend][
 def someHTML(List<Paragraph> paragraphs) '''
   <html>
     <body>
-      «FOR p : paragraphs BEFORE '<div>' SEPARATOR '</div><div' AFTER '</div>'»
+      «FOR p : paragraphs BEFORE '<div>' SEPARATOR '</div><div>' AFTER '</div>'»
         «IF p.headLine != null»
-      	  <h1>«p.headline»</h1>
+          <h1>«p.headline»</h1>
         «ENDIF»
         <p>
           «p.text»
@@ -882,7 +882,7 @@ ol[
   ]    
   item[
     Any newlines in appended strings (no matter they are created with template expressions or not) will
-	be prepended with the current indentation when inserted.
+    be prepended with the current indentation when inserted.
   ]
 ]
 

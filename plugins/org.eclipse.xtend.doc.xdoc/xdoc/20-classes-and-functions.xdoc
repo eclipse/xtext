@@ -182,9 +182,9 @@ An abstract method in Xtend just does not define a body and must be declared wit
 class. Also specifying the return type is mandatory since it cannot be inferred. 
 
 code[Xtend][
-	abstract class MyAbstractClass() {
-		def String abstractMethod() // no body
-	}
+  abstract class MyAbstractClass() {
+    def String abstractMethod() // no body
+  }
 ]
 
 section2[Overriding Methods]
