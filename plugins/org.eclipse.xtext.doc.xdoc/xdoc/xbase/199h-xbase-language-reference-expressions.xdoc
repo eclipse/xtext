@@ -332,7 +332,7 @@ time can be referred to in the lambda expression's body. These expressions are a
 Lambda expressions are surrounded by square brackets (\code[\[\]]):
 
 code[Xbase][
-	myList.findFirst( \[ e | e.name==null \] )
+	myList.findFirst(\[ e | e.name==null \])
 ]
 
 When a function object is expected to be the last parameter of a feature call, you may declare the lambda expression after the parentheses: 
@@ -344,20 +344,20 @@ code[Xbase][
 Since in Xbase parentheses are optional for method calls, the same can be written as:
 
 code[Xbase][
-	myList.findFirst \[ e | e.name==null \]
+	myList.findFirst\[ e | e.name==null \]
 ]
 
 This example can be further simplified since the lambda's parameter is available as the implicit variable code[Xbase][it], 
 if the parameter is not declared explicitly: 
 
 code[Xbase][
-	myList.findFirst \[ it.name==null \]
+	myList.findFirst\[ it.name==null \]
 ]
 
 Since code[Xbase][it] is implicit, this is the same as:
 
 code[Xbase][
-	myList.findFirst \[ name==null \]
+	myList.findFirst\[ name==null \]
 ]
 
 Another usecase for lambda expressions is to store function objects in variables:
@@ -379,11 +379,11 @@ code[Java][
 
 the type of the parameter can be inferred. Which allows users to write:
 code[Xbase][
-	newArrayList( "Foo", "Bar" ).findFirst \[ e | e == "Bar" \]
+	newArrayList( "Foo", "Bar" ).findFirst\[ e | e == "Bar" \]
 ]
 instead of 
 code[Xbase][
-	newArrayList( "Foo", "Bar" ).findFirst \[ String e | e == "Bar" \]
+	newArrayList( "Foo", "Bar" ).findFirst\[ String e | e == "Bar" \]
 ]
 
 

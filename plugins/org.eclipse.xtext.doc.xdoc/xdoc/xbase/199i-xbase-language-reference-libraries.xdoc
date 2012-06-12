@@ -59,10 +59,10 @@ that create DOM elements for HTML pages inside their respective parent elements.
 using the following Xbase code:
 
 code[Xbase][
-html( \[ html | 
+html(\[ html | 
 	head(html, \[ 
 		// initialize head
-	\] ) 
+	\]) 
 \] )
 ]   
 

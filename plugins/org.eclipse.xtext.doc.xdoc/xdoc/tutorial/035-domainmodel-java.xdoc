@@ -22,7 +22,7 @@ package my.model {
 		}
 		
 		op getFriendsSortedByFullName() : List<Person> {
-			return friends.sortBy \[ f | f.fullName \];
+			return friends.sortBy\[ f | f.fullName \]
 		}
 	}
 	

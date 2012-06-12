@@ -226,7 +226,7 @@ the outline view, find references etc.
 
 img[../images/tutorial/30min_editor.png][][][]
 
-section[Second Iteration : Adding Packages and Imports]
+section[Second Iteration: Adding Packages and Imports]
 
 After you have created the your first DSL and had a look at the editor, the language should be refined
 and incrementally enhanced. The Domain Model language should support the notion of e[Package]s in order to avoid name
