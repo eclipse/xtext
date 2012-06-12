@@ -4,8 +4,8 @@
 	</topic>
 	<topic href="contents/12-Installation.html#Installation" label="Installation" >
 		<topic href="contents/12-Installation.html#MavenSupport" label="Maven Support" >
-			<topic href="contents/12-Installation.html#library" label="The Runtime Library" >
-			</topic>
+		</topic>
+		<topic href="contents/12-Installation.html#library" label="The Runtime Library" >
 		</topic>
 	</topic>
 	<topic href="contents/13-getting-started.html#GettingStarted" label="Getting Started" >

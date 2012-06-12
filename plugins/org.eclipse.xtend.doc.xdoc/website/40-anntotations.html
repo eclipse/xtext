@@ -13,6 +13,7 @@
 		<a href="12-Installation.php">Installation</a></div>
 		<ul style="display: none;" id="subToc_12-Installation.html">
 		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
+		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -100,19 +101,13 @@
 			<br style="clear:both"></br>
 			<h1>@Property</h1>
 			<p>
-			For fields that are annotated as <span class="inlinecode">@Property</span>, the Xtend compiler will generate a Java field, a
+			For fields that are annotated as <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Property.html" title="org.eclipse.xtend.lib.Property"><span class="inlinecode">@Property</span></abbr></a>, the Xtend compiler will generate a Java field, a
 			getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
 			an <span class="inlinecode">_</span> and have the visibility of the Xtend field. The accessors methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
 			Thus, an Xtend field
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						@Property&nbsp;String&nbsp;name
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">@Property&nbsp;String&nbsp;name</span> 
 			</p>
 			<p>
 			will compile to the Java code
@@ -141,7 +136,7 @@
 			<br style="clear:both"></br>
 			<h1>@Data</h1>
 			<p>
-			The annotation <span class="inlinecode">@Data</span>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
+			The annotation <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Data.html" title="org.eclipse.xtend.lib.Data"><span class="inlinecode">@Data</span></abbr></a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
 			has the following effect:
 			</p>
 			<p>

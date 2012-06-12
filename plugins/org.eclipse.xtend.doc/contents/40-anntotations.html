@@ -18,19 +18,13 @@ of the project containing the Xtend files.
 <a name="propertyAnnotation"></a>
 <h2>@Property</h2>
 <p>
-For fields that are annotated as <span class="inlinecode">@Property</span>, the Xtend compiler will generate a Java field, a
+For fields that are annotated as <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Property.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Property" ><span class="inlinecode">@Property</span></abbr></a>, the Xtend compiler will generate a Java field, a
 getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
 an <span class="inlinecode">_</span> and have the visibility of the Xtend field. The accessors methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
 Thus, an Xtend field
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@Property&nbsp;String&nbsp;name<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">@Property&nbsp;String&nbsp;name</span> 
 </p>
 <p>
 will compile to the Java code
@@ -47,7 +41,7 @@ will compile to the Java code
 <br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(<span class="keyword">final</span>&nbsp;String&nbsp;name)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">this</span>._name&nbsp;=&nbsp;name;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -55,7 +49,7 @@ will compile to the Java code
 <a name="dataAnnotation"></a>
 <h2>@Data</h2>
 <p>
-The annotation <span class="inlinecode">@Data</span>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
+The annotation <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Data.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Data" ><span class="inlinecode">@Data</span></abbr></a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
 has the following effect:
 </p>
 <p>
@@ -87,7 +81,7 @@ Example:
 @Data&nbsp;<span class="keyword">class</span>&nbsp;Person&nbsp;{<br/>
 &nbsp;&nbsp;String&nbsp;firstName<br/>
 &nbsp;&nbsp;String&nbsp;lastName<br/>
-}<br/>
+}
 </p>
 </div>
 </div>

@@ -13,6 +13,7 @@
 		<a href="12-Installation.php">Installation</a></div>
 		<ul style="display: none;" id="subToc_12-Installation.html">
 		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
+		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -138,13 +139,7 @@
 			</ul>
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">package</span>&nbsp;com.acme
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
 			</p>
 		<a name="imports" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -347,7 +342,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">def</span>&nbsp;printAll(String...&nbsp;strings)&nbsp;{<br/>
-						&nbsp;&nbsp;strings.forEach[s&nbsp;|&nbsp;println(s)]<br/>
+						&nbsp;&nbsp;strings.forEach[&nbsp;s&nbsp;|&nbsp;println(s)&nbsp;]<br/>
 						}
 					</p>
 				</div>
@@ -364,7 +359,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;MyAbstractClass()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;abstractMethod()&nbsp;<span class="comment">//&nbsp;no&nbsp;body<br/>
+						&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;abstractMethod()&nbsp;<span class="comment">//&nbsp;no&nbsp;body<br/>
 						</span>}
 					</p>
 				</div>
@@ -744,13 +739,7 @@
 			This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 			Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 			method is called on the argument parameter as if it was one of its members.
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span>
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span></span>   
 			</p>
 			<p>
 			Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
@@ -761,25 +750,13 @@
 			like this. In Java for instance you often see code like this:
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						persistenceManager.save(myObject);
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">persistenceManager.save(myObject);</span>
 			</p>
 			<p>
 			Without tying your entities to the persistenceManager, extension methods allow you to write
 			</p>
 			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						myObject.save
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode">myObject.save</span>
 			</p>
 			<p>
 			There are different ways to make methods available as extensions, which are described in the following.
@@ -795,7 +772,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;calls&nbsp;StringExtensions.toFirstUpper(String)<br/>
-						</span>listOfStrings.map&nbsp;[&nbsp;toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)</span>
+						</span>listOfStrings.map[&nbsp;toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)</span>
 					</p>
 				</div>
 			</div>
@@ -848,13 +825,7 @@
 			</p>
 			<p>
 			The following import declaration 
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
-					</p>
-				</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
 			</p>
 			<p>
 			allows to use its methods like this:
