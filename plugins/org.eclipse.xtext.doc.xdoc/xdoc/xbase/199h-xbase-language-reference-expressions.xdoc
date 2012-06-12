@@ -327,7 +327,7 @@ section3:Xbase_Expressions_Lambda[Lambda Expressions]
 
 A lambda expression is a literal that defines an anonymous function. Xbase' lambda expressions are allowed
 to access variables of the declarator. Any final variables and parameters visible at construction 
-time can be referred to in the lambda expression's body. These expressions are are also known as closures.
+time can be referred to in the lambda expression's body. These expressions are also known as closures.
 
 Lambda expressions are surrounded by square brackets (\code[\[\]]):
 
