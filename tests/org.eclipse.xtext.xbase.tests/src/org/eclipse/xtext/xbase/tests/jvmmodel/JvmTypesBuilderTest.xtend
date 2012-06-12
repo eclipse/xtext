@@ -24,6 +24,8 @@ import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import com.google.inject.name.Named
+import foo.TestAnnotation3
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -95,6 +97,27 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertTrue(type.annotations.head.values.empty)
 	}
 	
+	@Test
+	def void testIntegerAnnotation(){
+		val f = XAnnotationsFactory::eINSTANCE
+		val e = expression("'Foo'")
+
+		val anno = f.createXAnnotation;
+		val annotatiomType = references.findDeclaredType(typeof(TestAnnotation3), e)  as JvmAnnotationType
+		anno.annotationType = annotatiomType
+		val pair = f.createXAnnotationElementValuePair
+		pair.element = annotatiomType.declaredOperations.head
+		pair.value = expression("10")
+		anno.elementValuePairs += pair
+		val type = typesFactory.createJvmGenericType
+		newArrayList(anno).translateAnnotationsTo(type)
+
+		assertEquals(anno.annotationType, type.annotations.head.annotation)
+		assertEquals(1,type.annotations.head.values.size)
+		val value = type.annotations.head.values.head as JvmIntAnnotationValue
+		assertEquals(10, value.values.head)
+	}
+
 	@Test
 	def void testStringArrayAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
