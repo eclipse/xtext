@@ -120,7 +120,7 @@
 		</div>
 		</p>
 		<p>
-		If <span class="inlinecode">fileContentsToString()</span> throws an <span class="inlinecode">IOException</span>, it is caught and the string <span class="inlinecode"><span class="string">&apos;dummy&nbsp;data&apos;</span></span> is assigned to the value <span class="inlinecode">data</span>.
+		If <span class="inlinecode">fileContentsToString()</span> throws an <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/IOException.html" title="java.io.IOException">IOException</abbr></a>, it is caught and the string <span class="inlinecode"><span class="string">&apos;dummy&nbsp;data&apos;</span></span> is assigned to the value <span class="inlinecode">data</span>.
 		 
 		Expressions can appear as <a href="20-classes-and-functions.php#fields.php" title="Go to &quot;Fields&quot;">initializers of fields</a>, the body of constructors
 		or methods and as values in annotations. A method body can either be a <a href="30-expressions.php#blocks.php" title="Go to &quot;Blocks&quot;">block expression</a> 
@@ -148,7 +148,7 @@
 			<a name="stringLiterals" ></a>
 			<h2>String Literals</h2>
 			<p>
-			A string literal is of type <span class="inlinecode">java.lang.String</span> (just like in Java).
+			A string literal is of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a> (just like in Java).
 			String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
 			because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
 			least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
@@ -282,8 +282,8 @@
 			There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 			to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 			operators for any type just by implementing the corresponding method signature. As an example, the 
-			<a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">Xtend runtime library</a> contains a class <span class="inlinecode">BigDecimalExtensions</span> that defines operators for 
-			<span class="inlinecode">BigDecimals</span> which allows the following code:
+			<a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">Xtend runtime library</a> contains a class <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.html" title="org.eclipse.xtext.xbase.lib.BigDecimalExtensions">BigDecimalExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java" title="View Source Code" >(src)</a> that defines operators for 
+			<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigDecimal.html" title="java.math.BigDecimal">BigDecimals</abbr></a> which allows the following code:
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -452,8 +452,8 @@
 			<h2>Short-Circuit Boolean Operators</h2>
 			<p>
 			If the operators <span class="inlinecode">||</span> and <span class="inlinecode">&amp;&amp;</span> are bound to the library methods 
-			<span class="inlinecode">BooleanExtensions.operator_and(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span> resp. 
-			<span class="inlinecode">BooleanExtensions.operator_or(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span> the operation is evaluated in short circuit mode.
+			<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions"><span class="inlinecode">BooleanExtensions.operator_and(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a> resp. 
+			<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="org.eclipse.xtext.xbase.lib.BooleanExtensions"><span class="inlinecode">BooleanExtensions.operator_or(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a> the operation is evaluated in short circuit mode.
 			That means that the right hand operand might not be evaluated at all in the following cases: 
 			<ol>
 			  <li>in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left 
@@ -640,7 +640,7 @@
 			</p>
 			<p>
 			In such cases, the type of the right hand expression must conform to the type 
-			of the expression on the left side. 
+			of the expression on the left side.
 			</p>
 			<p>
 			Alternatively the type can be left out and will be inferred from the initialization expression:  
@@ -868,8 +868,8 @@
 			</p>
 			<p>
 			Also as lambdas with one parameter are a common case, there is a special short hand for them,
-			which is to leave the declaration including the vertical bar out. The name of the single variable will be <a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">it</a>
-			in that case:
+			which is to leave the declaration including the vertical bar out. The name of the <a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">single variable</a>
+			will be <span class="inlinecode"><span class="keyword">it</span></span> in that case:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -889,7 +889,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">val</span>&nbsp;Runnable&nbsp;runnable&nbsp;=&nbsp;[|<br/>
+						<span class="keyword">val</span>&nbsp;Runnable&nbsp;runnable&nbsp;=&nbsp;[&nbsp;|<br/>
 						&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;I&apos;m&nbsp;executed!"</span>)<br/>
 						]
 					</p>
@@ -897,7 +897,7 @@
 			</div>
 			</p>
 			<p>
-			When a method call's last parameter is a lambda it can be passed right after the parameters.
+			When a method call's last parameter is a lambda it can be passed right after the parameter list.
 			For instance if you want to sort some strings by their length, you could write :
 			</p>
 			<p>
@@ -926,14 +926,14 @@
 			</div>
 			</p>
 			<p>
-			Since you can leave out empty parenthesis methods wich get a lambda as the single argument you can reduce
-			the code above further more:
+			Since you can leave out empty parenthesis for methods which get a lambda as their only argument, you can reduce
+			the code above further:
 			</p>
 			<p>
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						textField.addActionListener[<br/>
+						textField.addActionListener&nbsp;[<br/>
 						&nbsp;&nbsp;textField.text&nbsp;=&nbsp;<span class="string">"Something&nbsp;happened!"</span><br/>
 						]
 					</p>
@@ -947,9 +947,9 @@
 			<a name="closureTypes" ></a>
 			<h2>Typing</h2>
 			<p>
-			Closures are expressions which produce <em>Function</em> objects. The type of a lambda expression generally depends on the target
+			Lambdas are expressions which produce <em>Function</em> objects. The type of a lambda expression generally depends on the target
 			type, as seen in the previous examples. That is, the lambda expression can coerce to any interface which has declared only 
-			one method (in addition to the ones inherited from <span class="inlinecode">java.lang.Object</span>). This allows for using lambda expressions in many existing Java
+			one method (in addition to the ones inherited from <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html" title="java.lang.Object">Object</abbr></a>). This allows for using lambda expressions in many existing Java
 			APIs directly.
 			</p>
 			<p>
@@ -960,7 +960,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">val</span>&nbsp;toUpperCaseFunction&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span>
+						<span class="keyword">val</span>&nbsp;toUpperCaseFunction&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span>
 					</p>
 				</div>
 			</div>
@@ -978,11 +978,11 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;stringToStringFunction&nbsp;=&nbsp;[toUpperCase]<br/>
+						<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;stringToStringFunction&nbsp;=&nbsp;[&nbsp;toUpperCase&nbsp;]<br/>
 						<span class="comment">//&nbsp;or<br/>
-						</span><span class="keyword">val</span>&nbsp;Function1&lt;?&nbsp;<span class="keyword">super</span>&nbsp;String,?&nbsp;<span class="keyword">extends</span>&nbsp;String&gt;&nbsp;same&nbsp;=&nbsp;[toUpperCase]<br/>
+						</span><span class="keyword">val</span>&nbsp;Function1&lt;?&nbsp;<span class="keyword">super</span>&nbsp;String,?&nbsp;<span class="keyword">extends</span>&nbsp;String&gt;&nbsp;same&nbsp;=&nbsp;[&nbsp;toUpperCase&nbsp;]<br/>
 						<span class="comment">//&nbsp;or<br/>
-						</span><span class="keyword">val</span>&nbsp;stringToStringFunction2&nbsp;=&nbsp;[String&nbsp;s&nbsp;|&nbsp;s.toUpperCase]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span>
+						</span><span class="keyword">val</span>&nbsp;stringToStringFunction2&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span>
 					</p>
 				</div>
 			</div>
@@ -999,7 +999,7 @@
 			<br style="clear:both"></br>
 			<h1>If Expression</h1>
 			<p>
-			An if expression is used to choose two different values based on a predicate.
+			An if expression is used to choose between two different values based on a predicate.
 			</p>
 			<p>
 			An expression 
@@ -1067,7 +1067,7 @@
 			<p>
 			The switch expression is very different from Java's switch statement. First, there is no fall through which means 
 			only one <span class="inlinecode"><span class="keyword">case</span></span> is evaluated at most. Second, the use of <span class="inlinecode"><span class="keyword">switch</span></span> is not limited 
-			to certain values but can be used for any object reference instead. <span class="inlinecode">Object.equals()</span> is used to
+			to certain values but can be used for any object reference instead. <span class="inlinecode">Object.equals(Object)</span> is used to
 			compare the value in the case with the one you are switching over.
 			 
 			Given the following example:
@@ -1099,7 +1099,7 @@
 			<p>
 			Instead of or in addition to the case guard you can specify a <em>type guard</em>. The case only matches if the 
 			switch value conforms to this type. A case with both a type guard and a predicate only matches if both match.
-			If the switch value is a variable, this variable is automatically casted to the given type withnin the
+			If the switch value is a variable, this variable is automatically casted to the given type within the
 			predicate and the case's body.
 			</p>
 			<p>
@@ -1138,7 +1138,7 @@
 			</div>
 			 
 			is used to execute a certain expression for each element of an array or an instance of 
-			<span class="inlinecode">java.lang.Iterable</span>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
+			<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="java.lang.Iterable">Iterable</abbr></a>. The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 			</p>
 			<p>
 			The return type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>. The type of the local variable can be left out. 
@@ -1208,7 +1208,7 @@
 				</div>
 			</div>
 			 
-			is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
+			is used to execute a certain expression until the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
 			The difference to the <a href="30-expressions.php#whileExpression.php" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing 
 			the block once before evaluating the predicate for the first time. The return type of a do-while 
 			loop is <span class="inlinecode"><span class="keyword">void</span></span>.
@@ -1261,7 +1261,7 @@
 			<br style="clear:both"></br>
 			<h1>Throwing Exceptions</h1>
 			<p>
-			Throwing <span class="inlinecode">java.lang.Throwable</span>s up the call stack has the same semantics and syntax 
+			Throwing <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Throwable.html" title="java.lang.Throwable">Throwable</abbr></a>s up the call stack has the same semantics and syntax 
 			as in Java.
 			</p>
 			<p>
@@ -1344,13 +1344,13 @@
 			<p>
 			The terminals for interpolated expression are so called guillemets <span class="inlinecode">&laquo;expression&raquo;</span>. They read nicely and are not often used
 			in text so you seldomly need to escape them. These escaping conflicts are the reason why
-			template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worst readability. 
+			template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worse readability. 
 			The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
 			</p>
 			<p>
 			If you use the Eclipse plug-in - which is recommended - the guillemets will be inserted on content assist
 			within a template. They are additionally bound to <em>CTRL+SHIFT+&lt;</em> and <em>CTRL+SHIFT+</em> for <span class="inlinecode">&laquo;</span> and <span class="inlinecode">&raquo;</span> respectively.
-			On a Mac they are bound to <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode">&raquo;</span>).
+			On a Mac they are as well bound to <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode">&raquo;</span>).
 			</p>
 			<p>
 			Let us have a look at an example of how a typical method with a template expressions looks like:
@@ -1501,7 +1501,7 @@
 			  <li>
 			      Indentation in the template that is relative to a control structure will not be propagated 
 			      to the output string. A control structure is a <span class="inlinecode"><span class="keyword">FOR</span></span>-loop or a condition 
-			      (<span class="inlinecode"><span class="keyword">IF</span></span>) as well as the opening and closing marks of the rich string itself.
+			      (<span class="inlinecode"><span class="keyword">IF</span></span>) as well as the opening and closing marks of the template string itself.
 			      
 			      The indentation is considered to be relative to such a control structure if the previous 
 			      line ends with a control structure followed by optional white space. The amount of white 
@@ -1570,7 +1570,7 @@
 			</p>
 			<p>
 			The indentation before <span class="inlinecode">node&nbsp;&laquo;n.name&raquo;</span> will be skipped as it is relative to the opening mark of
-			the rich string and thereby not considered to be relevant for the output but only for readability 
+			the template string and thereby not considered to be relevant for the output but only for readability 
 			of the template itself.
 			</p>
 			<p>

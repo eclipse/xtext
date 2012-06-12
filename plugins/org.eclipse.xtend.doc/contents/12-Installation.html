@@ -110,17 +110,12 @@ Configuring the compiler in Eclipse
 <a name="library"></a>
 <h3>The Runtime Library</h3>
 <p>
-The compiler requires a small runtime library on the classpath, which mainly provides useful extensions
-to existing classes and interfaces from the JDK. The class <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/InputOutput.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput" >InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>
-providing the method <span class="inlinecode">&lt;T&gt;&nbsp;T&nbsp;println(T&nbsp;obj)</span> being one of them. 
-</p>
-<p>
-The only surprising fact in the generated Java code may be the library class. Many 
-features of Xtend are not built into the language itself but provided via the library
-<em>org.eclipse.xtend.lib</em>. The library is available from a <a href="12-Installation.html#MavenSupport" title="Go to &quot;Maven Support&quot;">Maven repository</a> and via p2
+The compiler requires a small runtime library <em>org.eclipse.xtend.lib</em> on the classpath, which provides useful extensions
+to existing classes and interfaces from the JDK. Many 
+features of Xtend are not built into the language itself but provided via this library. 
+It is available from a <a href="12-Installation.html#MavenSupport" title="Go to &quot;Maven Support&quot;">Maven repository</a> and via p2
 update site (in case you do Eclipse plug-in development).
-</p>
-<p>
+ 
 The library provides means to create collections in a readable way:
 </p>
 <p>
@@ -148,7 +143,7 @@ One example is the ubiquitous <span class="inlinecode">map</span> function:
 </div>
 </p>
 <p>
-Many operators to concat collections or to do arithmetics with types like <span class="inlinecode">BigDecimal</span> are also available.
+Many operators to concat collections or to do arithmetics with types like <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/math/BigDecimal.html" title="View JavaDoc"><abbr title="java.math.BigDecimal" >BigDecimal</abbr></a> are also available.
 </p>
 <p>
 You might want to have a look at the <a href="http://xtend-lang.org/api/2.3.0/index.html">JavaDoc API</a> to see what is

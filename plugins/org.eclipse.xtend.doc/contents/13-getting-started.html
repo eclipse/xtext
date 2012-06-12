@@ -27,9 +27,9 @@ In Xtend, that reads as
 </p>
 <p>
 You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the <span class="inlinecode"><span class="keyword">def</span></span>
-keyword for declaring a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
+keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
 Admittedly &apos;hello world&apos; programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real stuff
-as you will learn in a moment.
+as you will learn in a second.
 </p>
 <p>
 An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
@@ -51,7 +51,12 @@ The hello world example is translated to the following Java code:
 </div>
 </p>
 <p>
-You can put an Xtend class in source folders of any Java project within Eclipse (or any Maven project). Eclipse will complain
+The only surprising fact in the generated Java code may be the referenced library class <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/InputOutput.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput" >InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>. 
+It is provided by the <a href="12-Installation.html#library" title="Go to &quot;The Runtime Library&quot;">runtime library</a> and only one nice utility that is handy when using
+expressions.
+</p>
+<p>
+You can put an Xtend class into a source folder of any Java project within Eclipse (or any Maven project). Eclipse will complain
 about the missing library if it is not on the classpath and provide a quick fix to add it.
 </p>
 <p>
@@ -97,7 +102,7 @@ In the upcoming dialog you will find two examples for Xtend:
 <h2>The Movies Example</h2>
 <p>
 The movies example is included in the example project <em>Xtend Introductory Examples</em> (src/examples6/Movies.xtend) and is about reading
-a file with data about movies in and doing some analysis on it.
+a file with data about movies and doing some analysis on it.
 </p>
 <a name="moviesExample_2"></a>
 <h3>The Data</h3>
@@ -205,9 +210,9 @@ That is called local type inference and is supported everyhwere in Xtend.
 We want the field to be final, so we declare it as a value using the keyword <span class="inlinecode"><span class="keyword">val</span></span>.
 </p>
 <p>
-The initialization on the right hand side first creates a fresh instance of <span class="inlinecode">java.io.FileReader</span>.
+The initialization on the right hand side first creates a fresh instance of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/FileReader.html" title="View JavaDoc"><abbr title="java.io.FileReader" >FileReader</abbr></a>.
 Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you will not find
-such a method, because <span class="inlinecode">readLines()</span> is in fact a static method from Google Guava&apos;s <span class="inlinecode">CharStream</span> which was imported 
+such a method, because <span class="inlinecode">readLines()</span> is in fact a static method from Google Guava&apos;s <abbr title="com.google.common.io.CharStreams" >CharStreams</abbr> which was imported 
 as an <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension</a> which allows us to use this readable syntax.
 </p>
 <p>
@@ -220,17 +225,17 @@ as an <a href="20-classes-and-functions.html#extensionImports" title="Go to &quo
 </div>
 </p>
 <p>
-<span class="inlinecode">CharStream.readLines(Reader)</span> returns a <span class="inlinecode">List&lt;String&gt;</span> on which we call another extension method called <span class="inlinecode">map</span>.
-That one is defined in the <a href="12-Installation.html#library" title="Go to &quot;The Runtime Library&quot;">runtime library</a> (<span class="inlinecode">ListExtensions.map(...)</span> and is always imported and
+<abbr title="com.google.common.io.CharStreams" ><span class="inlinecode">CharStreams.readLines(Reader)</span></abbr> returns a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;String&gt;</span></abbr></a> on which we call another extension method called <span class="inlinecode">map</span>.
+That one is defined in the <a href="12-Installation.html#library" title="Go to &quot;The Runtime Library&quot;">runtime library</a> (<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions" >ListExtensions.map(...)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>) and is always imported and
 therefore automatically available on all lists. The <span class="inlinecode">map</span> extension expects a function as a parameter.
-Map basically invokes that function for each value in the list and returns another list containing the results of the function incovations.
+It basically invokes that function for each value in the list and returns another list containing the results of the function invocations.
 </p>
 <p>
-Function objects are created using <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> (the code in squared brackets).
+Function objects are created using <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a> (the code in squared brackets).
 Within the lambda we process a single line from the text file and turn it into a movie by splitting the string using the
-separator (two whitespaces) and calling iterator on the result. As you might know <span class="inlinecode">java.lang.String.split(String)</span>
+separator (two whitespaces) and calling iterator on the result. As you might know <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String.split(String)</abbr></a>
 returns a string array (<span class="inlinecode">String[]</span>), which Xtend <a href="15-types.html#conversionRules" title="Go to &quot;Conversion Rules&quot;">auto-convertes to a list</a> when we 
-call <span class="inlinecode">Iterable.iterator()</span> on it.
+call <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" ><span class="inlinecode">Iterable.iterator()</span></abbr></a> on it.
 </p>
 <p>
 <div class="literallayout">
@@ -244,7 +249,7 @@ call <span class="inlinecode">Iterable.iterator()</span> on it.
 <p>
 Now we use the iterator to create an instance of <span class="inlinecode">Movie</span>.
 The data type conversion (e.g. <span class="inlinecode">String</span> to <span class="inlinecode"><span class="keyword">int</span></span>) is done by calling <a href="30-expressions.html#staticAccess" title="Go to &quot;Static Access&quot;">static methods</a> from the wrapper types. 
-The rest of the iterable is turned into a set using the extension method <span class="inlinecode">Iterators.toSet(Iterator&lt;T&gt;)</span>
+The rest of the iterable is turned into a set using the extension method <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" ><span class="inlinecode">IteratorExtensions.toSet(Iterator&lt;T&gt;)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>
 and contains all the categories the movie is associated with.
 </p>
 <p>
@@ -340,7 +345,7 @@ The <span class="inlinecode">..</span> operator is again an extension defined in
 Operator overloading is explained in <a href="30-expressions.html#operators" title="Go to &quot;Infix Operators and Operator Overloading&quot;">section</a>.
 </p>
 <p>
-The resulting iterable is sorted (<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a><span class="inlinecode">.sortBy</span>) by the <span class="inlinecode">rating</span> of the movies. 
+The resulting iterable is sorted (<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" ><span class="inlinecode">IterableExtensions.sortBy</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>) by the <span class="inlinecode">rating</span> of the movies. 
 Since it is sorted in ascending order, we take the last movie from the list and return its <span class="inlinecode">year</span>. 
 </p>
 <p>
@@ -378,7 +383,7 @@ The calls to <span class="inlinecode">movie.year</span> as well as <span class="
 </p>
 <p>
 First the movies are sorted by rating, then we take the best two. Next the list of movies is turned into a list of their <span class="inlinecode">numberOfVotes</span> using the <span class="inlinecode">map</span> function. 
-Now we have a <span class="inlinecode">List&lt;Long&gt;</span> which can be reduced to a single <span class="inlinecode">Integer</span> by adding the values.
+Now we have a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;Long&gt;</span></abbr></a> which can be reduced to a single <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Integer.html" title="View JavaDoc"><abbr title="java.lang.Integer" >Integer</abbr></a> by adding the values.
 </p>
 <p>
 You could also use <span class="inlinecode">reduce</span> instead of <span class="inlinecode">map</span> and <span class="inlinecode">reduce</span>. Do you know how?

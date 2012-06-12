@@ -171,7 +171,7 @@
 			</div>
 			</p>
 			<p>
-			Static methods of helper classes can also be imported as <em>extensions</em>. See the section on 
+			Static methods of helper classes can also be imported as <span class="inlinecode"><span class="keyword">extension</span></span>s. See the section on 
 			<a href="20-classes-and-functions.php#extensionMethods.php" title="Go to &quot;Extension Methods&quot;">extension methods</a> for details.
 			</p>
 		<a name="Xtend_ClassDeclaration" ></a>
@@ -232,7 +232,7 @@
 			<h1>Constructors</h1>
 			<p>
 			An Xtend class can define one or more constructors. Unlike Java you do not have to repeat the name of the class over and over again,
-			but use keyword <em>new</em> to declare a constructor.
+			but use keyword <span class="inlinecode"><span class="keyword">new</span></span> to declare a constructor.
 			Constructors can also delegate to other constructors using <span class="inlinecode"><span class="keyword">this</span>(args...)</span> in their first
 			line. 
 			<div class="literallayout">
@@ -314,7 +314,7 @@
 			<p>
 			Xtend methods are declared within a class and are translated to a corresponding Java method with 
 			exactly the same signature. The only exceptions are dispatch methods, which are explained 
-			<a href="20-classes-and-functions.php#polymorphicDispatch.php" title="Go to &quot;Dispatch Methods&quot;">in section</a>. 
+			<a href="20-classes-and-functions.php#polymorphicDispatch.php" title="Go to &quot;Dispatch Methods&quot;">later</a>. 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -373,7 +373,7 @@
 			<a name="methods_6" ></a>
 			<h2>Overriding Methods</h2>
 			<p>
-			Methods can override other methods from the super class or implemented interface methods using the
+			Methods can override other methods from the super class or implement interface methods using the
 			keyword <span class="inlinecode"><span class="keyword">override</span></span>. If a method overrides a method from a super type, the 
 			<span class="inlinecode"><span class="keyword">override</span></span> keyword is mandatory and replaces the keyword <span class="inlinecode"><span class="keyword">def</span></span>. As in Java 
 			<span class="inlinecode"><span class="keyword">final</span></span> methods cannot be overridden by subclasses.
@@ -383,8 +383,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">override</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;elements.get(0)<br/>
+						<span class="keyword">override</span>&nbsp;String&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;elements.get(1)<br/>
 						}
 					</p>
 				</div>
@@ -431,8 +431,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;elements.get(0)<br/>
+						<span class="keyword">def</span>&nbsp;String&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;elements.get(1)<br/>
 						}
 					</p>
 				</div>
@@ -443,8 +443,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;elements.get(0)<br/>
+						<span class="keyword">def</span>&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;elements.get(1)<br/>
 						}
 					</p>
 				</div>
@@ -464,8 +464,8 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">def</span>&nbsp;&lt;T&gt;&nbsp;first(List&lt;T&gt;&nbsp;elements)&nbsp;{<br/>
-						&nbsp;&nbsp;elements.get(0)<br/>
+						<span class="keyword">def</span>&nbsp;&lt;T&gt;&nbsp;second(List&lt;T&gt;&nbsp;elements)&nbsp;{<br/>
+						&nbsp;&nbsp;elements.get(1)<br/>
 						}
 					</p>
 				</div>
@@ -580,7 +580,7 @@
 			</p>
 			<p>
 			As you can see a <span class="inlinecode"><span class="keyword">null</span></span> reference is never a match. If you want to fetch <span class="inlinecode"><span class="keyword">null</span></span> 
-			you can declare a dispatch case using the type <span class="inlinecode">java.lang.Void</span>.
+			you can declare a dispatch case using the type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Void.html" title="java.lang.Void">Void</abbr></a>.
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
@@ -755,9 +755,9 @@
 			<p>
 			Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
 			Another benefit of extensions is that you can add methods which are specific to a certain context
-			(read layer) only. You might for instance not want to put UI-specific methods and dependencies to your
+			or layer of your application. You might for instance not want to put UI-specific methods and dependencies to your
 			domain model classes. Therefore such functionality is often defined in static methods or methods in
-			some &quot;service class&quot;. That works, but the code is less readable and object-oriented if you call methods
+			some &quot;service class&quot;. That works, but the code is less readable and less object-oriented if you call methods
 			like this. In Java for instance you often see code like this:
 			</p>
 			<p>
@@ -770,7 +770,7 @@
 			</div>
 			</p>
 			<p>
-			With extension methods you can write
+			Without tying your entities to the persistenceManager, extension methods allow you to write
 			</p>
 			<p>
 			<div class="literallayout">
@@ -795,7 +795,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;calls&nbsp;StringExtensions.toFirstUpper(String)<br/>
-						</span>listOfStrings.map[toUpperCase]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)</span>
+						</span>listOfStrings.map&nbsp;[&nbsp;toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)</span>
 					</p>
 				</div>
 			</div>
@@ -896,7 +896,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">class</span>&nbsp;MyServlet&nbsp;{<br/>
-						&nbsp;&nbsp;<span class="keyword">extension</span>&nbsp;EntityPersitence&nbsp;ep&nbsp;=&nbsp;Factory.get(<span class="keyword">typeof</span>(EntityPersistence))<br/>
+						&nbsp;&nbsp;<span class="keyword">extension</span>&nbsp;EntityPersistence&nbsp;ep&nbsp;=&nbsp;Factory.get(<span class="keyword">typeof</span>(EntityPersistence))<br/>
 						&nbsp;&nbsp;...<br/>
 						&nbsp;&nbsp;<br/>
 						}
@@ -924,8 +924,8 @@
 			Using the <span class="inlinecode"><span class="keyword">extension</span></span> modifier on fields has a significant advantage over 
 			static <a href="20-classes-and-functions.php#extensionImports.php" title="Go to &quot;Extension Imports&quot;">extension imports</a>: Your code is not bound to the actual implementation of the extension method.
 			You can simply exchange the component that provides the referenced extension with another implementation from outside,
-			by providing a different instance. No matter whether you do so via a factory, dependency injection or simply
-			using a setter.
+			by providing a different instance. No matter whether you do so via a factory, a dependency injection
+			container or simply using a setter.
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
