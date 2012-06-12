@@ -33,22 +33,22 @@ contain all target candidates for the given object and cross-reference.
 
 code[Java][public interface IScopeProvider {
 
-	/**
-	 * Returns a scope for the given context. The scope 
-	 * provides access to the compatible visible EObjects 
-	 * for a given reference.
-	 *
-	 * @param context the element from which an element shall be 
-	 *        referenced
-	 * @param reference the reference to be used to filter the 
-	 *        elements.
-	 * @return {@link IScope} representing the inner most 
-	 *         {@link IScope} for the passed context and reference. 
-	 *         Note for implementors: The result may not be 
-	 *         <code>null</code>. Return 
-	 *         <code>IScope.NULLSCOPE</code> instead.
-	 */
-	IScope getScope(EObject context, EReference reference);
+  /**
+   * Returns a scope for the given context. The scope 
+   * provides access to the compatible visible EObjects 
+   * for a given reference.
+   *
+   * @param context the element from which an element shall be 
+   *        referenced
+   * @param reference the reference to be used to filter the 
+   *        elements.
+   * @return {@link IScope} representing the inner most 
+   *         {@link IScope} for the passed context and reference. 
+   *         Note for implementors: The result may not be 
+   *         <code>null</code>. Return 
+   *         <code>IScope.NULLSCOPE</code> instead.
+   */
+  IScope getScope(EObject context, EReference reference);
 
 }
 ]
@@ -126,7 +126,7 @@ code[Java][
 
 Manager manager = // obtain an instance of IResourceDescription.Manager
 IResourceDescription description =
-	manager.getResourceDescription(resource);
+  manager.getResourceDescription(resource);
 for (IEObjectDescription eod : description.getExportedObjects()) {
   System.out.println(converter.toString(eod.getQualifiedName()));
 } 
@@ -145,7 +145,7 @@ If you are running in a Guice enabled scenario, the code looks like this:
 code[Java][
 @Inject 
 private IResourceServiceProvider.Registry rspr;
-	
+  
 private IResourceDescription.Manager getManager(Resource res) {
   IResourceServiceProvider resourceServiceProvider = 
     rspr.getResourceServiceProvider(res.getURI());
@@ -273,7 +273,7 @@ public void listVisibleResources(
   IResourceDescription descr = 
         index.getResourceDescription(myResource.getURI());
   for(IContainer visibleContainer: 
-  	    manager.getVisibleContainers(descr, index)) { 
+        manager.getVisibleContainers(descr, index)) { 
     for(IResourceDescription visibleResourceDesc:
             visibleContainer.getResourceDescriptions()) { 
       System.out.println(visibleResourceDesc.getURI());
@@ -307,10 +307,10 @@ It assumes so called codeRef[org.eclipse.jdt.core.IPackageFragmentRoot][IPackage
 codeRef[org.eclipse.jdt.core.IPackageFragmentRoot] in JDT is the root of a tree of Java model elements. 
 It usually refers to 
 ul[
-	item[a source folder of a Java project,]
-	item[a referenced jar, ]
-	item[a classpath entry of a referenced Java project, or]
-	item[the exported packages of a required PDE plug-in.]
+  item[a source folder of a Java project,]
+  item[a referenced jar, ]
+  item[a classpath entry of a referenced Java project, or]
+  item[the exported packages of a required PDE plug-in.]
 ]
 
 So for an element to be referable, its resource must be on the classpath of the caller's Java project 
@@ -376,7 +376,7 @@ codeRef[org.eclipse.xtext.resource.IContainer] of its own. In the following snip
 code[Java][component = org.eclipse.xtext.mwe.Reader {
   // lookup all resources on the classpath
   // useJavaClassPath = true
-	
+  
   // or define search scope explicitly
   path = "src/models"
   path = "src/further-models"
@@ -518,7 +518,7 @@ code[Java][FowlerDslQualifiedNameProvider
       return null;
     else 
       return QualifiedName.create((State)t.eContainer()).getName(), 
-      	t.getEvent().getName());
+        t.getEvent().getName());
   }
 }
 ]

@@ -56,10 +56,10 @@ delegate parameter and use dependency injection for its initialization, e.g.
 
 code[Java][
 public class MyLabelProvider {
-	@Inject	
-	public MyLabelProvider(AdapterFactoryLabelProvider delegate) {
-		super(delegate);
-	}
+  @Inject  
+  public MyLabelProvider(AdapterFactoryLabelProvider delegate) {
+    super(delegate);
+  }
 }
 ]
 

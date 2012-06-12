@@ -10,8 +10,8 @@ For case insensitive keywords, open your MWE workflow and replace the ANTLR rela
 code[MWE2][// The antlr parser generator fragment.
 fragment = parser.antlr.XtextAntlrGeneratorFragment {
 //  options = {
-//		backtrack = true
-//	}
+//    backtrack = true
+//  }
 }
 ...
 

@@ -10,8 +10,8 @@ img[images/preferences_templates.png][ ][ ][ ]
 
 By default Xtext registers e[context types] that follow certain patterns. A context type will be created
 ol[
-	item[for each rule (code[XML][{languageName}.{RuleName}]) and]
-	item[for each keyword (code[XML][{languageName}.kw_{keyword}]).]
+  item[for each rule (code[XML][{languageName}.{RuleName}]) and]
+  item[for each keyword (code[XML][{languageName}.kw_{keyword}]).]
 ]
 If you don't like these defaults you'll have to subclass 
 codeRef[org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry] 
@@ -45,11 +45,11 @@ This small example yields the text e[event => state] and allows selecting any ev
 
 code[XML][
 <template 
-	name="transition" 
-	description="event transition" 
-	id="transition"
-  	context="org.xtext.example.SecretCompartments.Transition" 
-  	enabled="true">
+  name="transition" 
+  description="event transition" 
+  id="transition"
+    context="org.xtext.example.SecretCompartments.Transition" 
+    enabled="true">
 ${event:CrossReference('Transition.event')} =>
   ${state:CrossReference('Transition.state')
 </template>
@@ -72,11 +72,11 @@ For example the following template (taken from another example):
 
 code[DomainExample][
 <template 
-	name="Entity" 
-	description="template for an Entity"
-	id="entity"
-	context="org.eclipse.xtext.example.Domainmodel.Entity"
-	enabled="true">
+  name="Entity" 
+  description="template for an Entity"
+  id="entity"
+  context="org.eclipse.xtext.example.Domainmodel.Entity"
+  enabled="true">
 ${public:Enum('Visibility')} entity ${Name} {
   ${cursor}
 }

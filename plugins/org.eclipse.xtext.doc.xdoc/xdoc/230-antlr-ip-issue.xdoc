@@ -22,8 +22,8 @@ when you run your language generator for the first time. You can even download i
 an additional plug-in into Eclipse: 
 
 ul[
-	item[link[http://download.itemis.com/antlr-generator-3.0.1.jar][http://download.itemis.com/antlr-generator-3.0.1.jar]]
-	item[or use the update site at link[http://download.itemis.com/updates/][http://download.itemis.com/updates/]]
+  item[link[http://download.itemis.com/antlr-generator-3.0.1.jar][http://download.itemis.com/antlr-generator-3.0.1.jar]]
+  item[or use the update site at link[http://download.itemis.com/updates/][http://download.itemis.com/updates/]]
 ]
 
 The workflow will not bother you with this issue on subsequent executions as the archive will be stored

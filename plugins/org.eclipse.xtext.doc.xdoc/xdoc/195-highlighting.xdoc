@@ -48,7 +48,7 @@ public class DefaultHighlightingConfiguration
 
   public void configure(IHighlightingConfigurationAcceptor acceptor) {
     acceptor.acceptDefaultHighlighting(
-    	KEYWORD_ID, "Keyword", keywordTextStyle());
+      KEYWORD_ID, "Keyword", keywordTextStyle());
     acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", // ...
   }
   
