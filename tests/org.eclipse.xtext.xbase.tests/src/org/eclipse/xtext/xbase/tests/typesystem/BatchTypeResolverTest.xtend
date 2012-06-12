@@ -15,8 +15,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.junit.Test
-
-import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.XExpression
 import org.junit.Ignore
 import org.eclipse.xtext.xbase.typing.ITypeProvider
@@ -32,6 +30,9 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import com.google.inject.Singleton
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XCasePart
+import org.eclipse.xtext.xbase.XSwitchExpression
+
+import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -49,17 +50,34 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		val resolvedType = resolvedTypes.getActualType(xExpression)
 		assertEquals(type, resolvedType.simpleName);
 		for(content: xExpression.eAllContents.toIterable) {
-			if (content instanceof XExpression) {
-				val childType = resolvedTypes.getActualType(content as XExpression)
-				assertNotNull(content.toString, childType)
-				assertNotNull(content.toString + " / " + childType, childType.identifier)
-			}
-			if (content instanceof JvmIdentifiableElement && !(content instanceof XCasePart)) {
-				val identifiableType = resolvedTypes.getActualType(content as JvmIdentifiableElement)
-				assertNotNull(content.toString, identifiableType)
-				assertNotNull(content.toString + " / " + identifiableType, identifiableType.identifier)
+			switch(content) {
+				XSwitchExpression: {
+					assertExpressionTypeIsResolved(content, resolvedTypes)
+					if (content.localVarName != null) {
+						assertIdentifiableTypeIsResolved(content, resolvedTypes)
+					}
+				}
+				XExpression: {
+					assertExpressionTypeIsResolved(content, resolvedTypes)
+				}
+				XCasePart : { /* skip */}
+				JvmIdentifiableElement: {
+					assertIdentifiableTypeIsResolved(content, resolvedTypes)
+				}
 			}
 		}
+	}
+	
+	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
+		val type = types.getActualType(expression)
+		assertNotNull(expression.toString, type)
+		assertNotNull(expression.toString + " / " + type, type.identifier)	
+	}
+	
+	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
+		val type = types.getActualType(identifiable)
+		assertNotNull(identifiable.toString, type)
+		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
 	
 	def getTypeResolver() {
@@ -302,9 +320,12 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		assertEquals(IResolvedTypes::NULL, typeResolution)
 	}
 	
-	@Test def void testImplicitImportPrintln() throws Exception {
-		"<String>println(null)".resolvesTo("String")
+	@Test def void testImplicitImportPrintln_01() throws Exception {
 		"println(null)".resolvesTo("Object")
+	}
+	
+	@Test def void testImplicitImportPrintln_02() throws Exception {
+		"<String>println(null)".resolvesTo("String")
 	}
 	
 	@Test def void testImplicitImportEmptyList() throws Exception {
@@ -340,20 +361,21 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"null instanceof String".resolvesTo("boolean")
 	}
 	
-//	@Test def void testTypeForVoidClosure() throws Exception {
-//		XExpression expression = expression("newArrayList('foo','bar').forEach [] ", true);
-//		XExpression closure = ((XMemberFeatureCall)expression).getMemberCallArguments().get(0);
-//		JvmTypeReference type = typeProvider.getType(closure);
-//		assertEquals("(String)=>void", type.getSimpleName());
-//	}
+	@Test def void testTypeForVoidClosure() throws Exception {
+		"newArrayList('foo','bar').forEach []".resolvesTo("void")
+	}
 
 	@Ignore
 	@Test def void testFeatureCallWithArrayToIterableConversion() throws Exception {
 		"'foo'.toCharArray.iterator".resolvesTo("Iterator<Character>")
 	}
 	
-	@Test def void testReturnType() throws Exception {
+	@Test def void testReturnType_01() throws Exception {
 		"return 'foo'".resolvesTo("void")
+	}
+	
+	@Test def void testReturnType_02() throws Exception {
+		"return try { if (true) 'foo' else 'bar' } finally { String::valueOf('zonk') }".resolvesTo("void")
 	}
 	
 	@Test def void testClosure_00() throws Exception {
@@ -369,33 +391,21 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"[String x| true]".resolvesTo("(String)=>boolean")
 	}
 	
-//	@Test
-//	@Ignore("TODO Fix these cases")
-//	public void testClosure_03() throws Exception {
-//		XBlockExpression block = (XBlockExpression) expression(
-//				"{\n" + 
-//				"  var java.util.List<? super String> list = null;\n" + 
-//				"  list.map(e|e)\n" +
-//				"}");
-//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
-//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-//		JvmTypeReference typeRef = typeProvider.getType(closure);
-//		assertEquals("(Object)=>Object", toString(typeRef));
-//	}
-//	
-//	@Test
-//	@Ignore("TODO Fix these cases")
-//	public void testClosure_04() throws Exception {
-//		XBlockExpression block = (XBlockExpression) expression(
-//				"{\n" + 
-//				"  var java.util.List<? super String> list = null;\n" + 
-//				"  list.map(e|e == null)\n" +
-//				"}");
-//		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
-//		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-//		JvmTypeReference typeRef = typeProvider.getType(closure);
-//		assertEquals("(Object)=>boolean", toString(typeRef));
-//	}
+	@Test
+	def void testClosure_03() throws Exception {
+		("{\n" + 
+		"  var java.util.List<? super String> list = null;\n" + 
+		"  list.map(e|e)\n" +
+		"}").resolvesTo("List<Object>")
+	}
+
+	@Test
+	def void testClosure_04() throws Exception {
+		("{\n" + 
+		"  var java.util.List<? super String> list = null;\n" + 
+		"  list.map(e|e == null)\n" +
+		"}").resolvesTo("List<Boolean>")
+	}
 
 	@Test def void testClosure_05() throws Exception {
 		"[x| true]".resolvesTo("(Object)=>boolean")
@@ -416,6 +426,18 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Test def void testClosure_09() throws Exception {
 		"[String x, String y| x.substring(y.length)]".resolvesTo("(String, String)=>String")
+	}
+	
+	@Test def void testClosure_10() throws Exception {
+		"[ x | x.toString x ]".resolvesTo("(Object)=>Object")
+	}
+	
+	@Test def void testClosure_11() throws Exception {
+		"[Object x| x]".resolvesTo("(Object)=>Object")
+	}
+	
+	@Test def void testClosure_12() throws Exception {
+		"[Object x| x.toString x ]".resolvesTo("(Object)=>Object")
 	}
 
 	@Test def void testTypeArgs() throws Exception {
@@ -654,12 +676,16 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testMemberFeatureCall_01() throws Exception {
-		"newArrayList('').get(0)".resolvesTo("String")
-		"<String>newArrayList().get(0)".resolvesTo("String")
+		"'x'.length".resolvesTo("int")
 	}
 	
 	@Test def void testMemberFeatureCall_02() throws Exception {
 		"(1..20).map[ toString.length ].reduce[ i1,  i2 | i1 + i2 ]".resolvesTo("Integer")
+	}
+	
+	@Test def void testMemberFeatureCall_03() throws Exception {
+		"newArrayList('').get(0)".resolvesTo("String")
+		"<String>newArrayList().get(0)".resolvesTo("String")
 	}
 	
 	@Test def void testFeatureCall_04() throws Exception {
@@ -961,16 +987,12 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 		"newArrayList('').map(s|s.length + 1 * 5).map(b| b / 5 )".resolvesTo("List<Integer>")
 	}
 	
-//	@Test def void testFeatureCall_26() throws Exception {
-//		XBlockExpression block = (XBlockExpression) expression(
-//				"{ val Object o = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head }", true);
-//		XVariableDeclaration variableDeclaration = (XVariableDeclaration) block.getExpressions().get(0);
-//		XExpression memberCallTarget = ((XMemberFeatureCall) variableDeclaration.getRight()).getMemberCallTarget();
-//		JvmTypeReference typeRef = typeProvider.getType(memberCallTarget);
-//		assertNotNull("type ref was null for " + memberCallTarget, typeRef);
-//		assertEquals("java.util.List<Integer>", toString(typeRef));
-//	}
-//	
+	@Test def void testFeatureCall_26() throws Exception {
+		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+           val Object o = list.head 
+           list
+        }".resolvesTo("List<Integer>");
+	}
 
 	@Test def void testToList_01() throws Exception {
 		"{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }".resolvesTo("List<? extends String>")
@@ -983,7 +1005,6 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testToList_03() throws Exception {
 		"{ val Iterable<String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }".resolvesTo("List<String>")
 	}
-	
 
 	@Test def void testToList_04() throws Exception {
 		"{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::brokenToList(iter) }".resolvesTo("List<String>")

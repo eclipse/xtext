@@ -206,6 +206,10 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				}
 			}
 			state.computeTypes(IterableExtensions.last(expressions));
+		} else {
+			// TODO is that actually 'any' if non void expectation?
+			JvmTypeReference primitiveVoid = getPrimitiveVoid(object);
+			state.acceptActualType(primitiveVoid);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -10,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -43,36 +45,62 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
     for (final EObject content : _iterable) {
-      {
-        if ((content instanceof XExpression)) {
-          final JvmTypeReference childType = resolvedTypes.getActualType(((XExpression) content));
-          String _string = content.toString();
-          Assert.assertNotNull(_string, childType);
-          String _string_1 = content.toString();
-          String _plus = (_string_1 + " / ");
-          String _plus_1 = (_plus + childType);
-          String _identifier = childType.getIdentifier();
-          Assert.assertNotNull(_plus_1, _identifier);
+      boolean _matched = false;
+      if (!_matched) {
+        if (content instanceof XSwitchExpression) {
+          final XSwitchExpression _xSwitchExpression = (XSwitchExpression)content;
+          _matched=true;
+          this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
+          String _localVarName = _xSwitchExpression.getLocalVarName();
+          boolean _notEquals = (!Objects.equal(_localVarName, null));
+          if (_notEquals) {
+            this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
+          }
         }
-        boolean _and = false;
-        if (!(content instanceof JvmIdentifiableElement)) {
-          _and = false;
-        } else {
-          boolean _not = (!(content instanceof XCasePart));
-          _and = ((content instanceof JvmIdentifiableElement) && _not);
+      }
+      if (!_matched) {
+        if (content instanceof XExpression) {
+          final XExpression _xExpression = (XExpression)content;
+          _matched=true;
+          this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
         }
-        if (_and) {
-          final JvmTypeReference identifiableType = resolvedTypes.getActualType(((JvmIdentifiableElement) content));
-          String _string_2 = content.toString();
-          Assert.assertNotNull(_string_2, identifiableType);
-          String _string_3 = content.toString();
-          String _plus_2 = (_string_3 + " / ");
-          String _plus_3 = (_plus_2 + identifiableType);
-          String _identifier_1 = identifiableType.getIdentifier();
-          Assert.assertNotNull(_plus_3, _identifier_1);
+      }
+      if (!_matched) {
+        if (content instanceof XCasePart) {
+          final XCasePart _xCasePart = (XCasePart)content;
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        if (content instanceof JvmIdentifiableElement) {
+          final JvmIdentifiableElement _jvmIdentifiableElement = (JvmIdentifiableElement)content;
+          _matched=true;
+          this.assertIdentifiableTypeIsResolved(_jvmIdentifiableElement, resolvedTypes);
         }
       }
     }
+  }
+  
+  public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {
+    final JvmTypeReference type = types.getActualType(expression);
+    String _string = expression.toString();
+    Assert.assertNotNull(_string, type);
+    String _string_1 = expression.toString();
+    String _plus = (_string_1 + " / ");
+    String _plus_1 = (_plus + type);
+    String _identifier = type.getIdentifier();
+    Assert.assertNotNull(_plus_1, _identifier);
+  }
+  
+  public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
+    final JvmTypeReference type = types.getActualType(identifiable);
+    String _string = identifiable.toString();
+    Assert.assertNotNull(_string, type);
+    String _string_1 = identifiable.toString();
+    String _plus = (_string_1 + " / ");
+    String _plus_1 = (_plus + type);
+    String _identifier = type.getIdentifier();
+    Assert.assertNotNull(_plus_1, _identifier);
   }
   
   public IBatchTypeResolver getTypeResolver() {
@@ -366,9 +394,13 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testImplicitImportPrintln() throws Exception {
-    this.resolvesTo("<String>println(null)", "String");
+  public void testImplicitImportPrintln_01() throws Exception {
     this.resolvesTo("println(null)", "Object");
+  }
+  
+  @Test
+  public void testImplicitImportPrintln_02() throws Exception {
+    this.resolvesTo("<String>println(null)", "String");
   }
   
   @Test
@@ -412,6 +444,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
     this.resolvesTo("null instanceof String", "boolean");
   }
   
+  @Test
+  public void testTypeForVoidClosure() throws Exception {
+    this.resolvesTo("newArrayList(\'foo\',\'bar\').forEach []", "void");
+  }
+  
   @Ignore
   @Test
   public void testFeatureCallWithArrayToIterableConversion() throws Exception {
@@ -419,8 +456,13 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testReturnType() throws Exception {
+  public void testReturnType_01() throws Exception {
     this.resolvesTo("return \'foo\'", "void");
+  }
+  
+  @Test
+  public void testReturnType_02() throws Exception {
+    this.resolvesTo("return try { if (true) \'foo\' else \'bar\' } finally { String::valueOf(\'zonk\') }", "void");
   }
   
   @Test
@@ -436,6 +478,28 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testClosure_02() throws Exception {
     this.resolvesTo("[String x| true]", "(String)=>boolean");
+  }
+  
+  @Test
+  public void testClosure_03() throws Exception {
+    String _plus = ("{\n" + 
+      "  var java.util.List<? super String> list = null;\n");
+    String _plus_1 = (_plus + 
+      "  list.map(e|e)\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    this.resolvesTo(_plus_2, "List<Object>");
+  }
+  
+  @Test
+  public void testClosure_04() throws Exception {
+    String _plus = ("{\n" + 
+      "  var java.util.List<? super String> list = null;\n");
+    String _plus_1 = (_plus + 
+      "  list.map(e|e == null)\n");
+    String _plus_2 = (_plus_1 + 
+      "}");
+    this.resolvesTo(_plus_2, "List<Boolean>");
   }
   
   @Test
@@ -462,6 +526,21 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testClosure_09() throws Exception {
     this.resolvesTo("[String x, String y| x.substring(y.length)]", "(String, String)=>String");
+  }
+  
+  @Test
+  public void testClosure_10() throws Exception {
+    this.resolvesTo("[ x | x.toString x ]", "(Object)=>Object");
+  }
+  
+  @Test
+  public void testClosure_11() throws Exception {
+    this.resolvesTo("[Object x| x]", "(Object)=>Object");
+  }
+  
+  @Test
+  public void testClosure_12() throws Exception {
+    this.resolvesTo("[Object x| x.toString x ]", "(Object)=>Object");
   }
   
   @Test
@@ -668,13 +747,18 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testMemberFeatureCall_01() throws Exception {
-    this.resolvesTo("newArrayList(\'\').get(0)", "String");
-    this.resolvesTo("<String>newArrayList().get(0)", "String");
+    this.resolvesTo("\'x\'.length", "int");
   }
   
   @Test
   public void testMemberFeatureCall_02() throws Exception {
     this.resolvesTo("(1..20).map[ toString.length ].reduce[ i1,  i2 | i1 + i2 ]", "Integer");
+  }
+  
+  @Test
+  public void testMemberFeatureCall_03() throws Exception {
+    this.resolvesTo("newArrayList(\'\').get(0)", "String");
+    this.resolvesTo("<String>newArrayList().get(0)", "String");
   }
   
   @Test
@@ -971,6 +1055,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_25() throws Exception {
     this.resolvesTo("newArrayList(\'\').map(s|s.length + 1 * 5).map(b| b / 5 )", "List<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_26() throws Exception {
+    this.resolvesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "List<Integer>");
   }
   
   @Test
