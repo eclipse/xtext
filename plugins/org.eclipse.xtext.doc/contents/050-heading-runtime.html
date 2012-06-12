@@ -65,7 +65,7 @@ The only thing you have to do in order to use this factory is to prefix the clas
 &nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.MyDsl"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"MyDsl&nbsp;Editor"</span>&gt;<br/>
 &nbsp;&nbsp;&lt;/editor&gt;<br/>
-&lt;/extension&gt;
+&lt;/extension&gt;<br/>
 </p>
 </div>
 </div>
@@ -148,7 +148,7 @@ Example:
 <div class="incode">
 <p class="code">
 MyRule:<br/>
-&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;
+&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;<br/>
 </p>
 </div>
 </div>
@@ -158,19 +158,19 @@ This implies several constraints:
 <ol>
 	<li>
 		Types: only instances of <em>MyRule</em> and <em>MySubRule</em> are allowed for this rule. Subtypes are 
-				prohibited, since the parser never instantiates unknown subtypes.
+		    prohibited, since the parser never instantiates unknown subtypes.
 	</li>
 	<li>
 		Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeatures</abbr></a> 
-				besides <em>strVal</em> and <em>intVal</em>, only <em>strVal</em> and <em>intVal</em> may have 
-				<a href="050-heading-runtime.html#transientvalues" title="Go to &quot;Transient Values&quot;">non-transient values</a>.
+		    besides <em>strVal</em> and <em>intVal</em>, only <em>strVal</em> and <em>intVal</em> may have 
+		    <a href="050-heading-runtime.html#transientvalues" title="Go to &quot;Transient Values&quot;">non-transient values</a>.
 	</li>
 	<li>
 		Quantities: The following condition must be true: <span class="inlinecode">strVal.size()&nbsp;==&nbsp;intVal.size()</span>.
 	</li>
 	<li>
 		Values: It must be possible to <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">convert all values</a> to valid tokens for 
-				terminal rule <em>STRING</em>.  The same is true for <em>intVal</em> and <em>INT</em>.
+		    terminal rule <em>STRING</em>.  The same is true for <em>intVal</em> and <em>INT</em>.
 	</li>
 </ol>
 </p>
@@ -192,15 +192,15 @@ the grammar as declarative, which is something the parser doesn&apos;t always do
 <ul>
 	<li>
 		Grammar rules containing assigned actions (e.g. <span class="inlinecode">{MyType.myFeature=<span class="keyword">current</span>}</span> are ignored. 
-			Unassigned actions (e.g. <span class="inlinecode">{MyType}</span>), however, are supported. 
+		  Unassigned actions (e.g. <span class="inlinecode">{MyType}</span>), however, are supported. 
 	</li>
 	<li>
 		Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule 
-			calls are ignored.
+		  calls are ignored.
 	</li>
 	<li>
 		Orders within list-features can not be validated. e.g. <span class="inlinecode">Rule:&nbsp;(foo+=R1&nbsp;foo+=R2)*</span> implies 
-			that <em>foo</em> is expected to contain instances of <em>R1</em> and <em>R2</em> in an alternating order.
+		  that <em>foo</em> is expected to contain instances of <em>R1</em> and <em>R2</em> in an alternating order.
 	</li>
 </ul>
 </p>
@@ -252,7 +252,7 @@ configuration and you are good to go:
 <div class="incode">
 <p class="code">
 fragment&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}
+&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -290,7 +290,7 @@ All in all this is very similar to how JUnit 4 works. Here is an example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -318,7 +318,7 @@ Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br/>
 &nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.WARNING:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<span class="string">"Model&nbsp;has&nbsp;warnings:&nbsp;"</span>,diagnostic);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -369,7 +369,7 @@ Validator:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Only&nbsp;Foos&nbsp;allowed"</span>,&nbsp;element,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -406,7 +406,7 @@ JUnit-Test:
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -441,7 +441,7 @@ several <em>assert</em>-methods to verify whether the expected diagnostics are p
 	</li>
 	<li>
 		<span class="inlinecode">assertErrorContains(String&nbsp;messageFragment)</span>: There must be one diagnostic with severity ERROR and 
-				its message must contain <em>messageFragment</em>.
+		    its message must contain <em>messageFragment</em>.
 	</li>
 	<li>
 		<span class="inlinecode">assertError(<span class="keyword">int</span>&nbsp;code,&nbsp;String&nbsp;messageFragment)</span>: Verifies severity, error code and messageFragment.
@@ -454,15 +454,15 @@ several <em>assert</em>-methods to verify whether the expected diagnostics are p
 	</li>
 	<li>
 		<span class="inlinecode">assertDiagnostics(<span class="keyword">int</span>&nbsp;severity,&nbsp;<span class="keyword">int</span>&nbsp;code,&nbsp;String&nbsp;messageFragment)</span>: Verifies severity, 
-				error code and messageFragment.
+		    error code and messageFragment.
 	</li>
 	<li>
 		<span class="inlinecode">assertAll(DiagnosticPredicate...&nbsp;predicates)</span>: Allows to describe multiple diagnostics at the 
-				same time and verifies that all of them are present. Class 
-				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.validation.AssertableDiagnostics" >AssertableDiagnostics</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a> contains static <span class="inlinecode">error()</span> and 
-				<span class="inlinecode">warning()</span> methods which help to create the needed 
-				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.DiagnosticPredicate.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate" >AssertableDiagnostics.DiagnosticPredicate</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a>. Example: 
-				<span class="inlinecode">assertAll(error(123),&nbsp;warning(<span class="string">"some&nbsp;part&nbsp;of&nbsp;the&nbsp;message"</span>))</span>. 
+		    same time and verifies that all of them are present. Class 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.validation.AssertableDiagnostics" >AssertableDiagnostics</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a> contains static <span class="inlinecode">error()</span> and 
+		    <span class="inlinecode">warning()</span> methods which help to create the needed 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.DiagnosticPredicate.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.validation.AssertableDiagnostics.DiagnosticPredicate" >AssertableDiagnostics.DiagnosticPredicate</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a>. Example: 
+		    <span class="inlinecode">assertAll(error(123),&nbsp;warning(<span class="string">"some&nbsp;part&nbsp;of&nbsp;the&nbsp;message"</span>))</span>. 
 	</li>
 	<li>
 		<span class="inlinecode">assertAny(DiagnosticPredicate&nbsp;predicate)</span>: Asserts that a diagnostic exists which matches the predicate.
@@ -496,7 +496,7 @@ In the grammar a cross-reference is specified using square brackets.
 <p class="code">
 CrossReference&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;type=ReferencedEClass&nbsp;(<span class="string">&apos;|&apos;</span>&nbsp;<span class="keyword">terminal</span>=CrossReferenceTerminal)?&nbsp;<span class="string">&apos;]&apos;</span><br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -510,7 +510,7 @@ Example:
 <p class="code">
 ReferringType&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;ref&apos;</span>&nbsp;referencedObject=[Entity|STRING]<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -583,7 +583,7 @@ Example:
 &nbsp;<br/>
 <span class="keyword">state</span>&nbsp;idle<br/>
 &nbsp;&nbsp;nothingImportant&nbsp;=&gt;&nbsp;idle<br/>
-<span class="keyword">end</span>
+<span class="keyword">end</span><br/>
 </p>
 </div>
 </div>
@@ -596,7 +596,7 @@ The grammar rule for transitions looks like this:
 <div class="incode">
 <p class="code">
 Transition&nbsp;:<br/>
-&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];
+&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];<br/>
 </p>
 </div>
 </div>
@@ -618,24 +618,24 @@ contain all target candidates for the given object and cross-reference.
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
+&nbsp;&nbsp;<span class="comment">/**<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br/>
+&nbsp;&nbsp;&nbsp;*<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br/>
+&nbsp;&nbsp;&nbsp;*/</span><br/>
+&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
 <br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -730,10 +730,10 @@ that:
 <br/>
 Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager<br/>
 </span>IResourceDescription&nbsp;description&nbsp;=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
+&nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
 <span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{<br/>
 &nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));<br/>
-}
+}&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -756,12 +756,12 @@ If you are running in a Guice enabled scenario, the code looks like this:
 <p class="code">
 @Inject&nbsp;<br/>
 <span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<br/>
 <span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{<br/>
 &nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -774,7 +774,7 @@ If you don&apos;t run in a Guice enabled context you will likely have to directl
 <div class="incode">
 <p class="code">
 <span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;
+&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;<br/>
 </p>
 </div>
 </div>
@@ -815,7 +815,8 @@ Statemachine&nbsp;:<br/>
 &nbsp;&nbsp;(states+=State)+;<br/>
 <br/>
 Import&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI</span>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI<br/>
+</span>
 </p>
 </div>
 </div>
@@ -910,13 +911,13 @@ IContainer.Manager&nbsp;manager;<br/>
 &nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br/>
 &nbsp;&nbsp;<span class="keyword">for</span>(IContainer&nbsp;visibleContainer:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(IResourceDescription&nbsp;visibleResourceDesc:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescriptions())&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -984,7 +985,7 @@ something up, make sure you bind
 <p class="code">
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;StateBasedContainerManager.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -998,7 +999,7 @@ in the runtime module and
 <p class="code">
 <span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1026,7 +1027,7 @@ In this case, your runtime module should define
 <p class="code">
 public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
 &nbsp;&nbsp;return&nbsp;StateBasedContainerManager.class;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1039,7 +1040,7 @@ and the UI module should bind
 <p class="code">
 <span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1066,13 +1067,13 @@ for all models therein. When paths are given, each path entry becomes an
 component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br/>
 </span>&nbsp;&nbsp;<span class="comment">//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+</span>&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br/>
 </span>&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/models"</span><br/>
 &nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span><br/>
 <br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1118,7 +1119,7 @@ following example:
 </span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1135,7 +1136,7 @@ classpathScope{stuff&nbsp;from&nbsp;bin/}<br/>
 -&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}<br/>
 -&gt;&nbsp;...<br/>
 -&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}<br/>
--&gt;&nbsp;NULLSCOPE{}
+-&gt;&nbsp;NULLSCOPE{}<br/>
 </p>
 </div>
 </div>
@@ -1158,7 +1159,7 @@ that in a declarative way. It looks up methods which have either of the followin
 IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
 <br/>
-IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)
+IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
 </p>
 </div>
 </div>
@@ -1248,9 +1249,9 @@ FowlerDslQualifiedNameProvider&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1284,7 +1285,7 @@ in and its child namespaces. That is why you can write the following in the exam
 <br/>
 <span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1299,7 +1300,7 @@ Of course the declared elements within a package are as well referable by their 
 <span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1314,7 +1315,7 @@ The following would as well be ok:
 <span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;bar.Foo&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1337,9 +1338,9 @@ Simply override the corresponding binding in your runtime module like shown in t
 <p class="code">
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IValueConverterService&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIValueConverterService()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;<br/>
-}
+&nbsp;&nbsp;&nbsp;&nbsp;bindIValueConverterService()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1356,8 +1357,8 @@ by means of an annotated method.
 <p class="code">
 @ValueConverter(rule&nbsp;=&nbsp;<span class="string">"MyRuleName"</span>)<br/>
 <span class="keyword">public</span>&nbsp;IValueConverter&lt;MyDataType&gt;&nbsp;getMyRuleNameConverter()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyValueConverterImplementation();<br/>
-}
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyValueConverterImplementation();<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1400,16 +1401,16 @@ In Xtext, the process of serialization is split into the following steps:
 <ol>
 	<li>
 		Validating the semantic model. This is optional, enabled by default, done by the 
-				 <a href="050-heading-runtime.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> and can be turned off in 
-				 the <a href="050-heading-runtime.html#saveoptions" title="Go to &quot;Options&quot;">save options</a>.
+		     <a href="050-heading-runtime.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> and can be turned off in 
+		     the <a href="050-heading-runtime.html#saveoptions" title="Go to &quot;Options&quot;">save options</a>.
 	</li>
 	<li>
 		Matching the model elements with the grammar rules and creating a stream of tokens. 
-				 This is done by the <a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a>.
+		     This is done by the <a href="050-heading-runtime.html#parsetreeconstructor" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a>.
 	</li>
 	<li>
 		Associating comments with semantic objects. This is done by the
-				 <a href="050-heading-runtime.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">comment associator</a>.
+		     <a href="050-heading-runtime.html#commentassociater" title="Go to &quot;Preserving Comments from the Node Model&quot;">comment associator</a>.
 	</li>
 	<li>
 		Associating existing nodes from the node model with tokens from the token stream.
@@ -1419,7 +1420,7 @@ In Xtext, the process of serialization is split into the following steps:
 	</li>
 	<li>
 		Adding further needed white space or replacing all white space using a 
-				<a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a>.
+		    <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatter</a>.
 	</li>
 </ol>
 </p>
@@ -1446,7 +1447,7 @@ case where is is hardly possible, is shown in the following example:
 <div class="incode">
 <p class="code">
 MyRule:<br/>
-&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;
+&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;<br/>
 </p>
 </div>
 </div>
@@ -1471,15 +1472,15 @@ available (i.e. the semantic model has been created by the parser), the serializ
 	</li>
 	<li>
 		preserves the representation of cross-references: If a cross-referenced object can be 
-				 identified by multiple names (i.e. scoping returns multiple 
-				 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> for the 
-				 same object), the serializer tries to keep the name that was used in the input file.
+		     identified by multiple names (i.e. scoping returns multiple 
+		     <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> for the 
+		     same object), the serializer tries to keep the name that was used in the input file.
 	</li>
 	<li>
 		preserves the representation of values: For values handled by the 
-				<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">value converter</a>, the serializer checks whether the textual representation 
-				converted to a value equals the value from the semantic model. If that is true, the textual 
-				representation is kept.
+		    <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">value converter</a>, the serializer checks whether the textual representation 
+		    converted to a value equals the value from the semantic model. If that is true, the textual 
+		    representation is kept.
 	</li>
 </ul>
 </p>
@@ -1506,7 +1507,7 @@ Possible reasons are listed below:
 <ul>
 	<li>
 		A model element can not be consumed. This can have the following reasons/solutions:
-				<ul>
+		    <ul>
 			<li>
 				The model element should not be stored in the model.
 			</li>
@@ -1515,18 +1516,18 @@ Possible reasons are listed below:
 			</li>
 			<li>
 				The <a href="050-heading-runtime.html#transientvalues" title="Go to &quot;Transient Values&quot;">transient value service</a> can be used to indicate that this model 
-							element should not be consumed.
+				      element should not be consumed.
 			</li>
 		</ul>
 		
 	</li>
 	<li>
 		An assignment in the grammar has no corresponding model element. The default transient 
-				value service considers a model element to be transient if it is <em>unset</em> or <em>equals</em> its 
-				default value. However, the parse tree constructor may serialize default values if 
-				this is required by a grammar constraint to be able to serialize another model element.
-				The following solution may help to solve such a scenario:
-				<ul>
+		    value service considers a model element to be transient if it is <em>unset</em> or <em>equals</em> its 
+		    default value. However, the parse tree constructor may serialize default values if 
+		    this is required by a grammar constraint to be able to serialize another model element.
+		    The following solution may help to solve such a scenario:
+		    <ul>
 			<li>
 				A model element should be added to the model.
 			</li>
@@ -1538,16 +1539,16 @@ Possible reasons are listed below:
 	</li>
 	<li>
 		The type of the model element differs from the type in the grammar. The type of the model 
-				element must be identical to the return type of the grammar rule or the action&apos;s type. 
-				Subtypes are not allowed.
+		    element must be identical to the return type of the grammar rule or the action&apos;s type. 
+		    Subtypes are not allowed.
 	</li>
 	<li>
 		<a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">Value conversion</a> fails. The value converter can indicate that a value 
-				is not serializeable by throwing a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/conversion/ValueConverterException.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.ValueConverterException" >ValueConverterException</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java" title="View Source Code" >(src)</a>.
+		    is not serializeable by throwing a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/conversion/ValueConverterException.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.ValueConverterException" >ValueConverterException</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java" title="View Source Code" >(src)</a>.
 	</li>
 	<li>
 		An enum literal is not allowed at this position. This can happen if the referenced enum 
-				rule only lists a subset of the literals of the actual enumeration.
+		    rule only lists a subset of the literals of the actual enumeration.
 	</li>
 </ul>
 </p>
@@ -1564,14 +1565,14 @@ taken. This behavior has two consequences:
 <ul>
 	<li>
 		In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot
-				tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the 
-				longest paths, a fragment of their serialization and the reason why the path could not be continued 
-				at this point. The developer has to judge on his own which reason is the actual error.
+		    tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the 
+		    longest paths, a fragment of their serialization and the reason why the path could not be continued 
+		    at this point. The developer has to judge on his own which reason is the actual error.
 	</li>
 	<li>
 		For reasons of performance, it is critical that the parse tree constructor takes the most promising
-				branch first and detects wrong branches early. One way to achieve this is to avoid having many rules 
-				which return the same type and which are called from within the same alternative in the grammar.
+		    branch first and detects wrong branches early. One way to achieve this is to avoid having many rules 
+		    which return the same type and which are called from within the same alternative in the grammar.
 	</li>
 </ul>
 </p>
@@ -1585,14 +1586,14 @@ Available options are:
 <ul>
 	<li>
 		<em>Formatting</em>. Default: <span class="inlinecode"><span class="keyword">false</span></span>. If enabled, it is the <a href="050-heading-runtime.html#formatting" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatters</a> job to determine
-		 		all white space information during serialization. If disabled, the formatter only defines white
-		 		space 
-		 		information for the places in which no white space information can be preserved from the node model. 
-		 		E.g. When new model elements are inserted or there is no node model.
+		     all white space information during serialization. If disabled, the formatter only defines white
+		     space 
+		     information for the places in which no white space information can be preserved from the node model. 
+		     E.g. When new model elements are inserted or there is no node model.
 	</li>
 	<li>
 		<em>Validating</em>. Default: <span class="inlinecode"><span class="keyword">true</span></span>: Run the <a href="050-heading-runtime.html#concrete_syntax_validation" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> 
-				before serializing the model.
+		    before serializing the model.
 	</li>
 </ul>
 </p>
@@ -1612,11 +1613,11 @@ behaves as follows, but can be customized:
 <ul>
 	<li>
 		If there is a semantic token before a comment and in the same line, the comment is associated 
-				with this token&apos;s semantic object.
+		    with this token&apos;s semantic object.
 	</li>
 	<li>
 		In all other cases, the comment is associated with the semantic object of the next following 
-				object.
+		    object.
 	</li>
 </ul>
 </p>
@@ -1648,7 +1649,7 @@ PluralRule:<br/>
 &nbsp;&nbsp;<span class="string">&apos;contents:&apos;</span>&nbsp;count=INT&nbsp;Plural;<br/>
 &nbsp;&nbsp;<br/>
 <span class="keyword">terminal</span>&nbsp;Plural:&nbsp;<br/>
-&nbsp;&nbsp;<span class="string">&apos;item&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;items&apos;</span>;
+&nbsp;&nbsp;<span class="string">&apos;item&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;items&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -1699,7 +1700,7 @@ a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io
 &nbsp;&nbsp;<span class="keyword">void</span>&nbsp;flush()&nbsp;<span class="keyword">throws</span>&nbsp;IOException;<br/>
 &nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeHidden(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);<br/>
 &nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeSemantic(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1720,12 +1721,12 @@ Xtext ships with two formatters:
 <ul>
 	<li>
 		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter" >OneWhitespaceFormatter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java" title="View Source Code" >(src)</a> simply writes one 
-				white space between all tokens.
+		    white space between all tokens.
 	</li>
 	<li>
 		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter" >AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a> allows advanced 
-				configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.FormattingConfig" >FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
-				below.
+		    configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.FormattingConfig" >FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
+		    below.
 	</li>
 </ul>
 </p>
@@ -1778,7 +1779,7 @@ the following example:
 &nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1813,28 +1814,28 @@ elements. The following matching criteria exist:
 <ul>
 	<li>
 		<span class="inlinecode">after(element)</span>: The instruction is applied after the grammar element has been matched. 
-				For example, if your grammar uses the keyword <span class="inlinecode"><span class="string">";"</span></span> to end lines, this can instruct the formatter 
-				to insert a line break after the semicolon.
+		    For example, if your grammar uses the keyword <span class="inlinecode"><span class="string">";"</span></span> to end lines, this can instruct the formatter 
+		    to insert a line break after the semicolon.
 	</li>
 	<li>
 		<span class="inlinecode">before(element)</span>: The instruction is executed before the matched element. For example, if your 
-				grammar contains lists which separate their values with the keyword <span class="inlinecode"><span class="string">","</span></span>, you can instruct the 
-				formatter to suppress the white space before the comma.
+		    grammar contains lists which separate their values with the keyword <span class="inlinecode"><span class="string">","</span></span>, you can instruct the 
+		    formatter to suppress the white space before the comma.
 	</li>
 	<li>
 		<span class="inlinecode">around(element)</span>: This is the same as <span class="inlinecode">before(element)</span> combined with <span class="inlinecode">after(element)</span>.
 	</li>
 	<li>
 		<span class="inlinecode">between(left,&nbsp;right)</span>: This matches if <em>left</em> directly follows <em>right</em> in the document. 
-				There may be no other tokens in between <em>left</em> and <em>right</em>.
+		    There may be no other tokens in between <em>left</em> and <em>right</em>.
 	</li>
 	<li>
 		<span class="inlinecode">bounds(left,&nbsp;right)</span>: This is the same as <span class="inlinecode">after(left)</span> combined with  <span class="inlinecode">before(right)</span>.
 	</li>
 	<li>
 		<span class="inlinecode">range(start,&nbsp;end)</span>: The rule is enabled when <em>start</em> is matched, and disabled when <em>end</em> 
-				is matched. Thereby, the rule is active for the complete region which is surrounded by <em>start</em> 
-				and <em>end</em>.
+		    is matched. Thereby, the rule is active for the complete region which is surrounded by <em>start</em> 
+		    and <em>end</em>.
 	</li>
 </ul>
 </p>
@@ -1856,8 +1857,8 @@ into account. The following abstract elements can <em>not</em> have assigned for
 	</li>
 	<li>
 		Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
-				by a data type rule are treated as atomic by the serializer. To format these tokens, please 
-				implement a <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
+		    by a data type rule are treated as atomic by the serializer. To format these tokens, please 
+		    implement a <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
 	</li>
 	<li>
 		Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/CrossReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.CrossReference" >CrossReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.
@@ -1869,9 +1870,9 @@ After having explained how rules can be activated, this is what they can do:
 <ul>
 	<li>
 		<span class="inlinecode">setIndentationIncrement()</span> increments indentation by one unit at this position. Whether 
-				one unit consists of one tab-character or spaces is defined by 
-				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IIndentationInformation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IIndentationInformation" >IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
-				consults Eclipse&apos;s <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="View JavaDoc"><abbr title="org.eclipse.jface.preference.IPreferenceStore" >IPreferenceStore</abbr></a>.
+		    one unit consists of one tab-character or spaces is defined by 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IIndentationInformation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IIndentationInformation" >IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
+		    consults Eclipse&apos;s <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="View JavaDoc"><abbr title="org.eclipse.jface.preference.IPreferenceStore" >IPreferenceStore</abbr></a>.
 	</li>
 	<li>
 		<span class="inlinecode">setIndentationDecrement()</span> decrements indentation by one unit.
@@ -1884,24 +1885,24 @@ After having explained how rules can be activated, this is what they can do:
 	</li>
 	<li>
 		<span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;min,&nbsp;<span class="keyword">int</span>&nbsp;def,&nbsp;<span class="keyword">int</span>&nbsp;max)</span>: If the amount of line-wraps that have been 
-				at this position before formatting can be determined (i.e. when a node model is present), 
-				then the amount of of line-wraps is adjusted to be within the interval <em>min</em>, <em>max</em> 
-				and is then reused. In all other cases <em>def</em> line-wraps are inserted. Example: 
-				<span class="inlinecode">setLinewrap(0,&nbsp;0,&nbsp;1)</span> will preserve existing line-wraps, but won&apos;t allow more than one 
-				line-wrap between two tokens.
+		    at this position before formatting can be determined (i.e. when a node model is present), 
+		    then the amount of of line-wraps is adjusted to be within the interval <em>min</em>, <em>max</em> 
+		    and is then reused. In all other cases <em>def</em> line-wraps are inserted. Example: 
+		    <span class="inlinecode">setLinewrap(0,&nbsp;0,&nbsp;1)</span> will preserve existing line-wraps, but won&apos;t allow more than one 
+		    line-wrap between two tokens.
 	</li>
 	<li>
 		<span class="inlinecode">setNoLinewrap()</span>: Suppresses automatic line wrap, which may occur when the line&apos;s length 
-				exceeds the defined limit.
+		    exceeds the defined limit.
 	</li>
 	<li>
 		<span class="inlinecode">setSpace(String&nbsp;space)</span>: Inserts the string <em>space</em> at this position. If you use this 
-				to insert something else than white space, tabs or newlines, a small puppy will die somewhere 
-				in this world.
+		    to insert something else than white space, tabs or newlines, a small puppy will die somewhere 
+		    in this world.
 	</li>
 	<li>
 		<span class="inlinecode">setNoSpace()</span>: Suppresses the white space between tokens at this position. Be aware that 
-				between some tokens a white space is required to maintain a valid concrete syntax.
+		    between some tokens a white space is required to maintain a valid concrete syntax.
 	</li>
 </ul>
 </p>
@@ -1920,8 +1921,8 @@ find methods are available for the grammar and for each parser rule.
 	</li>
 	<li>
 		<span class="inlinecode">findKeywordPairs(String&nbsp;leftKw,&nbsp;String&nbsp;rightKw)</span>: returns tuples of keywords from the same 
-				grammar rule. Pairs are matched nested and sequentially.  Example: for <span class="inlinecode">Rule:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;foo=ID&nbsp;<span class="string">&apos;)&apos;</span>)&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;bar=ID&nbsp;<span class="string">&apos;)&apos;</span></span> 
-				<span class="inlinecode">findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>)</span> returns three pairs.
+		    grammar rule. Pairs are matched nested and sequentially.  Example: for <span class="inlinecode">Rule:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;foo=ID&nbsp;<span class="string">&apos;)&apos;</span>)&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;bar=ID&nbsp;<span class="string">&apos;)&apos;</span></span> 
+		    <span class="inlinecode">findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>)</span> returns three pairs.
 	</li>
 </ul>
 </p>
@@ -1990,7 +1991,7 @@ The following snippet shows how to use qualified names as fragments:
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2054,8 +2055,8 @@ property in the workflow next to your grammar, e.g.
 <div class="incode">
 <p class="code">
 Generator&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span><br/>
+&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -2094,7 +2095,7 @@ override the runtime service only. It is bound in the runtime module using the b
 &nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2110,7 +2111,7 @@ implementation in both modules:
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyEncodingProvider.<span class="keyword">class</span>;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -2130,7 +2131,7 @@ options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"UTF-8"</sp
 myXtextResource.load(options);<br/>
 <br/>
 options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"ISO-8859-1"</span>);<br/>
-myXtextResource.save(options);
+myXtextResource.save(options);<br/>
 </p>
 </div>
 </div>

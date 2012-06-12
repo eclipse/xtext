@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -206,7 +206,13 @@
 			Thanks to content assist this is easy to spot in the list of proposals.  
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			The next step is to actually refer to an imported concept. Let's define a mapping to available
@@ -229,7 +235,13 @@
 			like this:
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">datatype</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">datatype</span>&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References</em> on Java methods, 

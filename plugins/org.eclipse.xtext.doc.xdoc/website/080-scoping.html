@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -240,22 +240,22 @@
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
+						&nbsp;&nbsp;<span class="comment">/**<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br/>
+						&nbsp;&nbsp;&nbsp;*<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br/>
+						&nbsp;&nbsp;&nbsp;*/</span><br/>
+						&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
 						<br/>
 						}
 					</p>
@@ -355,7 +355,7 @@
 						<br/>
 						Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager<br/>
 						</span>IResourceDescription&nbsp;description&nbsp;=<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
+						&nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
 						<span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{<br/>
 						&nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));<br/>
 						}
@@ -381,7 +381,7 @@
 					<p class="code">
 						@Inject&nbsp;<br/>
 						<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<br/>
 						<span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{<br/>
 						&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());<br/>
@@ -538,7 +538,7 @@
 						&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br/>
 						&nbsp;&nbsp;<span class="keyword">for</span>(IContainer&nbsp;visibleContainer:&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(IResourceDescription&nbsp;visibleResourceDesc:<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescriptions())&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br/>
@@ -698,7 +698,7 @@
 						component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br/>
 						&nbsp;&nbsp;<span class="comment">//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br/>
 						</span>&nbsp;&nbsp;<span class="comment">//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						</span>&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;<span class="comment">//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br/>
 						</span>&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/models"</span><br/>
 						&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span><br/>
@@ -880,7 +880,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
 						&nbsp;&nbsp;}<br/>
 						}
 					</p>

@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -300,9 +300,9 @@
 						<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
 						<br/>
 						Workflow&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -363,7 +363,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br/>
 						&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
 						&nbsp;&nbsp;}<br/>
@@ -460,7 +460,7 @@
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;<br/>
 						&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
 						}
@@ -554,7 +554,7 @@
 			  <li>A MWE2 file defines a <span class="inlinecode"><span class="keyword">module</span></span> which exposes its root <span class="inlinecode">component</span> as reusable artifact.</li>
 			  <li><span class="inlinecode">Properties</span> can be used to extract reusable, configurable parts of the workflow.</li>
 			  <li>Components are mapped to plain vanilla <em>Java objects</em>. Arbitrary <span class="inlinecode">setABC(..)</span> and <span class="inlinecode">addXYZ(..)</span> methods 
-			  		are used to configure them.</li>
+			      are used to configure them.</li>
 			</ul>
 			</p>
 			<p>
@@ -840,7 +840,7 @@
 			yet another name for the very same concept which leads to the situation
 			where the properties itself have the very same name as the component's
 			feature. To avoid the overall repetition of assignments, MWE2 offers
-			the possibility to use the <span class="inlinecode"><span class="keyword">auto-inject</span></span> modifier on the component 
+			the possibility to use the <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span> modifier on the component 
 			literal:
 			</p>
 			<p>
@@ -851,7 +851,7 @@
 						<br/>
 						<span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}<br/>
 						<br/>
-						SampleClass&nbsp;<span class="keyword">auto-inject</span>&nbsp;{<br/>
+						SampleClass&nbsp;<span class="keyword">auto</span>-<span class="keyword">inject</span>&nbsp;{<br/>
 						}
 					</p>
 				</div>
@@ -864,7 +864,7 @@
 			parameters each of which can be assigned to one or more components.
 			</p>
 			<p>
-			The <span class="inlinecode"><span class="keyword">auto-inject</span></span> modifier can be used for a subset of the available
+			The <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span> modifier can be used for a subset of the available
 			features as well. It will suppressed for the explicitly set values
 			of a component.        
 			</p>
@@ -955,7 +955,13 @@
 			wildcard notation:
 			</p>
 			<p>
-			<span class="inlinecode"><span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?
+					</p>
+				</div>
+			</div>
 			</p>
 			<a name="MWE2PropertySyntax" ></a>
 			<h2>Property</h2>
@@ -1021,7 +1027,7 @@
 			to this identifier and thereby exactly point to the instantiated object.
 			</p>
 			<p>
-			The next option for a component is <span class="inlinecode"><span class="keyword">auto-inject</span></span>. If this modifier
+			The next option for a component is <span class="inlinecode"><span class="keyword">auto</span>-<span class="keyword">inject</span></span>. If this modifier
 			is set on a component, any available feature of the component that has
 			the same name as a property or previously created named component will
 			be automatically assigned.

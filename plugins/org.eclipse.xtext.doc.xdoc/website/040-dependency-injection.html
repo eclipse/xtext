@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -227,15 +227,15 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslRuntimeModule&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;@Override<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;binder<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -265,7 +265,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;<br/>
 						}
 					</p>
 				</div>
@@ -312,8 +312,8 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;provideIScopeProvider()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;<br/>
+						&nbsp;&nbsp;provideIScopeProvider()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;<br/>
 						}
 					</p>
 				</div>
@@ -334,7 +334,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();<br/>
 						}
 					</p>
 				</div>
@@ -348,7 +348,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();<br/>
 						}
 					</p>
 				</div>
@@ -367,7 +367,7 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
+						&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
 						}
 					</p>
 				</div>
@@ -386,11 +386,11 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;application.run();<br/>
+						&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());<br/>
+						&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);<br/>
+						&nbsp;&nbsp;application.run();<br/>
 						}
 					</p>
 				</div>

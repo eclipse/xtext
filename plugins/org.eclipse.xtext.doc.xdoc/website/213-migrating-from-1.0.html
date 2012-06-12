@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -337,7 +337,13 @@
 			</div>
 			
 			and add 
-			<span class="inlinecode">fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			After generating a new class named <em>MyDslOutlineTreeProvider</em> is generated. The API changed completely.
@@ -366,9 +372,9 @@
 					<p class="code">
 						@Override<br/>
 						<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IEditStrategyAcceptor&nbsp;acceptor)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(acceptor);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;YourAutoEditStrategy(),<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDocument.DEFAULT_CONTENT_TYPE);<br/>
+						&nbsp;&nbsp;<span class="keyword">super</span>.configure(acceptor);<br/>
+						&nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;YourAutoEditStrategy(),<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDocument.DEFAULT_CONTENT_TYPE);<br/>
 						}
 					</p>
 				</div>
@@ -378,13 +384,20 @@
 			in the <em>MyDslUIModule</em> from
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()</span> 
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()
+					</p>
+				</div>
+			</div>
+			 
 			to 
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;AbstractEditStrategyProvider&gt;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;bindAbstractEditStrategyProvider()&nbsp;{&nbsp;..&nbsp;}
+						&nbsp;&nbsp;bindAbstractEditStrategyProvider()&nbsp;{&nbsp;..&nbsp;}
 					</p>
 				</div>
 			</div>
@@ -399,33 +412,40 @@
 			changes. It is usually only necessary to change your code, if you face any compilation problems.
 			<ul>
 			  <li>In the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> the method <span class="inlinecode">getScope(EObject,EReference)</span> 
-			  		has been removed. Use <span class="inlinecode">getScope(Resource,&nbsp;EReference,&nbsp;Predicate&lt;IEObjectDescription&gt;)</span> instead.
+			      has been removed. Use <span class="inlinecode">getScope(Resource,&nbsp;EReference,&nbsp;Predicate&lt;IEObjectDescription&gt;)</span> instead.
 			  </li>
 			  <li>The interface <em>IAntlrParser</em> has been removed. Use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/parser/IParser.html" title="org.eclipse.xtext.parser.IParser">IParser</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java" title="View Source Code" >(src)</a> instead.</li>
 			  <li>The methods <span class="inlinecode">error(..)</span> and <span class="inlinecode">warning(..)</span> in the 
-			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="org.eclipse.xtext.validation.AbstractDeclarativeValidator">AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a> used to accept 
-			  		integer constants representing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeature</abbr></a> which caused
-			  		the issues. These integer parameters were replaced
-			  		by the feature itself, e.g. from <span class="inlinecode">error(String,&nbsp;Integer)</span> to <span class="inlinecode">error(String,&nbsp;EStructuralFeature)</span>. 
-			  		Use the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage.Literals</abbr></a> to access 
-			  		the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeatures</abbr></a>.
+			      <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="org.eclipse.xtext.validation.AbstractDeclarativeValidator">AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a> used to accept 
+			      integer constants representing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeature</abbr></a> which caused
+			      the issues. These integer parameters were replaced
+			      by the feature itself, e.g. from <span class="inlinecode">error(String,&nbsp;Integer)</span> to <span class="inlinecode">error(String,&nbsp;EStructuralFeature)</span>. 
+			      Use the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage.Literals</abbr></a> to access 
+			      the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeatures</abbr></a>.
 			  </li>
 			  <li>The enum <em>DiagnosticSeverity</em> has been renamed to <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/diagnostics/Severity.html" title="org.eclipse.xtext.diagnostics.Severity">Severity</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/diagnostics/Severity.java" title="View Source Code" >(src)</a>.</li>
 			  <li>The class <em>TextLocation</em> has been replaced by the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/ITextRegion.html" title="org.eclipse.xtext.util.ITextRegion">ITextRegion</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/ITextRegion.java" title="View Source Code" >(src)</a>
-			  		with an immutable implementation <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/TextRegion.html" title="org.eclipse.xtext.util.TextRegion">TextRegion</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java" title="View Source Code" >(src)</a>.</li>
+			      with an immutable implementation <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/TextRegion.html" title="org.eclipse.xtext.util.TextRegion">TextRegion</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java" title="View Source Code" >(src)</a>.</li>
 			  <li>In Xtext 1.0.x the class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/EObjectAtOffsetHelper.html" title="org.eclipse.xtext.resource.EObjectAtOffsetHelper">EObjectAtOffsetHelper</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java" title="View Source Code" >(src)</a> provided several static
-			  	    methods to resolve elements. In
-			  		Xtext 2.0 these methods aren't static anymore. For that reason you could create an instance of this class or let 
-			  		Guice do the job for you: 
-			  		<span class="inlinecode">@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;</span>
+			        methods to resolve elements. In
+			      Xtext 2.0 these methods aren't static anymore. For that reason you could create an instance of this class or let 
+			      Guice do the job for you: 
+			      <div class="literallayout">
+			  	<div class="incode">
+			  		<p class="code">
+			  			@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;
+			  		</p>
+			  	</div>
+			  </div>
+			  
 			  </li>
 			  <li>The method <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/EObjectAtOffsetHelper.html" title="org.eclipse.xtext.resource.EObjectAtOffsetHelper">EObjectAtOffsetHelper.resolveElementAt(XtextResource, int, TextLocation)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/EObjectAtOffsetHelper.java" title="View Source Code" >(src)</a> 
-			  		changed to <span class="inlinecode">resolveElementAt(XtextResource,&nbsp;<span class="keyword">int</span>)</span>.
-			  		You have to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> to compute the 
-			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/TextRegion.html" title="org.eclipse.xtext.util.TextRegion">TextRegion</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java" title="View Source Code" >(src)</a>.</li>
+			      changed to <span class="inlinecode">resolveElementAt(XtextResource,&nbsp;<span class="keyword">int</span>)</span>.
+			      You have to use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> to compute the 
+			      <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/util/TextRegion.html" title="org.eclipse.xtext.util.TextRegion">TextRegion</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/TextRegion.java" title="View Source Code" >(src)</a>.</li>
 			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> now offers methods <span class="inlinecode">getSignificantTextRegion()</span>
-			  		and <span class="inlinecode">getFullTextRegion()</span> to make the distinction between the name and the full region of an element.
-			  		The old <span class="inlinecode">getLocation()</span> method was removed.
+			      and <span class="inlinecode">getFullTextRegion()</span> to make the distinction between the name and the full region of an element.
+			      The old <span class="inlinecode">getLocation()</span> method was removed.
 			  </li>
 			</ul>
 			</p>

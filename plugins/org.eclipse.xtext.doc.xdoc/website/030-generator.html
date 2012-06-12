@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -225,17 +225,17 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
-						&nbsp;&nbsp;<br/>
+						<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;Person&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;name;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name;<br/>
 						&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">final</span>&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;Person&gt;();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(Person&nbsp;child)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.children.add(child);<br/>
 						&nbsp;&nbsp;}<br/>
@@ -255,13 +255,13 @@
 						<span class="keyword">module</span>&nbsp;com.mycompany.CreatePersons<br/>
 						<br/>
 						Person&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Grandpa"</span><br/>
+						&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Grandpa"</span><br/>
+						&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -279,16 +279,16 @@
 						<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
 						<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;CreatePersons&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;grandpa&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.setName(<span class="string">"Grandpa"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;father&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.setName(<span class="string">"Father"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.addChild(father);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;son&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;son.setName(<span class="string">"Son"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;grandpa&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;grandpa.setName(<span class="string">"Grandpa"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;father&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;father.setName(<span class="string">"Father"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;grandpa.addChild(father);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;son&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;son.setName(<span class="string">"Son"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -322,13 +322,13 @@
 				<div class="incode">
 					<p class="code">
 						child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Daughter"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
+						&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
+						&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Daughter"</span><br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -407,35 +407,35 @@
 						<span class="keyword">var</span>&nbsp;runtimeProject&nbsp;=&nbsp;<span class="string">"../${projectName}"</span><br/>
 						<br/>
 						Workflow&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/.."</span><br/>
+						&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/.."</span><br/>
+						&nbsp;&nbsp;}<br/>
+						<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}/src-gen"</span><br/>
+						&nbsp;&nbsp;}<br/>
+						<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui/src-gen"</span><br/>
+						&nbsp;&nbsp;}<br/>
+						<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;Generator&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;pathRtProject&nbsp;=&nbsp;runtimeProject<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;pathUiProject&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;projectNameRt&nbsp;=&nbsp;projectName<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;projectNameUi&nbsp;=&nbsp;<span class="string">"${projectName}.ui"</span><br/>
+						<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileExtensions&nbsp;=&nbsp;file.extensions<br/>
+						<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br/>
+						<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}/src-gen"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui/src-gen"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;Generator&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathRtProject&nbsp;=&nbsp;runtimeProject<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathUiProject&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameRt&nbsp;=&nbsp;projectName<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameUi&nbsp;=&nbsp;<span class="string">"${projectName}.ui"</span><br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileExtensions&nbsp;=&nbsp;file.extensions<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>

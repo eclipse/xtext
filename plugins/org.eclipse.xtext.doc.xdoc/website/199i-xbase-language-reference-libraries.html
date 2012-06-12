@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -218,13 +218,25 @@
 		If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 		</p>
 		<p>
-		<span class="inlinecode">foo(42)&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]</span>
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					foo(42)&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		will call a Java method with the signature
 		</p>
 		<p>
-		<span class="inlinecode"><span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)</span> 
+		<div class="literallayout">
+			<div class="incode">
+				<p class="code">
+					<span class="keyword">void</span>&nbsp;foo(<span class="keyword">int</span>,&nbsp;Function1&lt;String,&nbsp;String&gt;)
+				</p>
+			</div>
+		</div>
 		</p>
 		<p>
 		Used in combination with the <a href="199h-xbase-language-reference-expressions.php#Xbase_Expressions_implicit_parameter.php" title="Go to &quot;Implicit Parameter it&quot;">implicit parameter name in lambda
@@ -251,10 +263,10 @@
 		<div class="literallayout">
 			<div class="incode">
 				<p class="code">
-					html(&nbsp;[&nbsp;html&nbsp;| <br/>
+					html([&nbsp;html&nbsp;| <br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-					</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;)&nbsp;<br/>
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;])&nbsp;<br/>
 					]&nbsp;)
 				</p>
 			</div>

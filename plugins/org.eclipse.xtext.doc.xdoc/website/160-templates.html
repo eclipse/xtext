@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -251,11 +251,11 @@
 				<div class="incode">
 					<p class="code">
 						&lt;template&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+						&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
+						&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
+						&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 						${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)}&nbsp;=&gt;<br/>
 						&nbsp;&nbsp;${state:CrossReference(<span class="string">&apos;Transition.state&apos;</span>)<br/>
 						&lt;/template&gt;
@@ -296,11 +296,11 @@
 				<div class="incode">
 					<p class="code">
 						&lt;template&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+						&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
+						&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
+						&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
+						&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
+						&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 						${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;<span class="keyword">entity</span>&nbsp;${Name}&nbsp;{<br/>
 						&nbsp;&nbsp;${cursor}<br/>
 						}<br/>

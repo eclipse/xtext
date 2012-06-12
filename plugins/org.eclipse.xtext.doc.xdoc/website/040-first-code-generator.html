@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -270,7 +270,14 @@
 			  		that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
 			  		inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
 			  		
-			  		<span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider</span>
+			  		<div class="literallayout">
+			  	<div class="incode">
+			  		<p class="code">
+			  			@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider
+			  		</p>
+			  	</div>
+			  </div>
+			  
 			  		
 			  		This allows to ask for the name of an entity. It is straightforward to convert the name into
 			  		a file name:
@@ -297,12 +304,12 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&apos;</span><span class="string">&apos;&apos;</span>
+			  			&apos;&apos;&apos;</span>
 			  		</p>
 			  	</div>
 			  </div>
@@ -317,14 +324,14 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&apos;</span><span class="string">&apos;&apos;</span>
+			  			&apos;&apos;&apos;</span>
 			  		</p>
 			  	</div>
 			  </div>
@@ -335,15 +342,15 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&apos;</span><span class="string">&apos;&apos;</span>
+			  			&apos;&apos;&apos;</span>
 			  		</p>
 			  	</div>
 			  </div>
@@ -360,17 +367,17 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
+			  			<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;get&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&apos;</span><span class="string">&apos;&apos;</span>
+			  			&apos;&apos;&apos;</span>
 			  		</p>
 			  	</div>
 			  </div>
@@ -382,18 +389,18 @@
 			  		<div class="literallayout">
 			  	<div class="incode">
 			  		<p class="code">
-			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+			  			<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile&raquo;<br/>
-			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f:e.features<span class="string">&raquo;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
+			  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
 			  			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-			  			&apos;</span><span class="string">&apos;&apos;</span>
+			  			&apos;&apos;&apos;</span>
 			  		</p>
 			  	</div>
 			  </div>
@@ -434,30 +441,30 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;&apos;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>e.eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile&raquo;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f:e.features<span class="string">&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;get&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
 						}
 					</p>
 				</div>

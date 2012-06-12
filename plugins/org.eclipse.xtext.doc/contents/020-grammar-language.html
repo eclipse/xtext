@@ -69,7 +69,7 @@ could look like this:
 <span class="keyword">state</span>&nbsp;unlockedPanel<br/>
 &nbsp;&nbsp;<span class="keyword">actions</span>&nbsp;{unlockPanel&nbsp;lockDoor}<br/>
 &nbsp;&nbsp;panelClosed&nbsp;=&gt;&nbsp;idle<br/>
-<span class="keyword">end</span>
+<span class="keyword">end</span><br/>
 </p>
 </div>
 </div>
@@ -118,7 +118,7 @@ State&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;end&apos;</span>;<br/>
 &nbsp;<br/>
 Transition&nbsp;:<br/>
-&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];
+&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];<br/>
 </p>
 </div>
 </div>
@@ -145,7 +145,7 @@ Each Xtext grammar starts with a header that defines some properties of the gram
 <div class="incode">
 <p class="code">
 <span class="keyword">grammar</span>&nbsp;org.xtext.example.SecretCompartments<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals
+&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals
 </p>
 </div>
 </div>
@@ -241,7 +241,7 @@ bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"</span><br/>
 &nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.genmodel"</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -267,7 +267,7 @@ language&nbsp;=&nbsp;{<br/>
 &nbsp;&nbsp;loadedResource&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.ecore"</span><br/>
 &nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -307,7 +307,7 @@ bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.ecore"</span><br/>
 &nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/.../path/to/Domainmodel.genmodel"</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -327,7 +327,7 @@ language&nbsp;=&nbsp;{<br/>
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"classpath:/.../path/to/Domainmodel.xtext"</span><br/>
 &nbsp;&nbsp;..<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -368,7 +368,7 @@ Example:
 fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br/>
 &nbsp;&nbsp;referencedGenModels&nbsp;=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/my.project/model/SecretCompartments.genmodel"</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -398,7 +398,7 @@ As with platform resource URIs you&apos;ll also have to tell the generator where
 fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br/>
 &nbsp;&nbsp;referencedGenModels&nbsp;=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"classpath:/model/JvmTypes.genmodel"</span><br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -416,7 +416,7 @@ If you want to use multiple <a class="jdoc" href="http://download.eclipse.org/mo
 <div class="incode">
 <p class="code">
 <span class="keyword">generate</span>&nbsp;secrets&nbsp;<span class="string">&apos;http://www.eclipse.org/secretcompartment&apos;</span><br/>
-<span class="keyword">import</span>&nbsp;<span class="string">&apos;http://www.eclipse.org/anotherPackage&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;another
+<span class="keyword">import</span>&nbsp;<span class="string">&apos;http://www.eclipse.org/anotherPackage&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;another<br/>
 </p>
 </div>
 </div>
@@ -478,7 +478,7 @@ Therein the <em>ID</em> rule is defined as follows:
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;(<span class="string">&apos;^&apos;</span>)?(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;
+&nbsp;&nbsp;(<span class="string">&apos;^&apos;</span>)?(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -501,7 +501,7 @@ This is the simplified formal definition of terminal rules:
 TerminalRule&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;terminal&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;returns&apos;</span>&nbsp;type=TypeRef)?&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;alternatives=TerminalAlternatives&nbsp;<span class="string">&apos;;&apos;</span><br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -528,7 +528,7 @@ However, if you want to provide a different type you can specify it. For instanc
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;
+&nbsp;&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;<br/>
 </p>
 </div>
 </div>
@@ -618,7 +618,7 @@ With the until token it is possible to state that everything should be consumed 
 The multi-line comment is implemented this way:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span>;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;:&nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span>;</span>
 </p>
 <p>
 This is the rule for Java-style comments that begin with <span class="inlinecode">/*</span> and end with <span class="inlinecode">*/</span>.
@@ -629,7 +629,7 @@ This is the rule for Java-style comments that begin with <span class="inlinecode
 All the tokens explained above can be inverted using a preceding exclamation mark:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;BETWEEN_HASHES&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span class="string">&apos;#&apos;</span>&nbsp;(!<span class="string">&apos;#&apos;</span>)*&nbsp;<span class="string">&apos;#&apos;</span>;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;BETWEEN_HASHES&nbsp;&nbsp;:&nbsp;<span class="string">&apos;#&apos;</span>&nbsp;(!<span class="string">&apos;#&apos;</span>)*&nbsp;<span class="string">&apos;#&apos;</span>;</span>
 </p>
 <a name="rule_calls"></a>
 <h5>Rule Calls</h5>
@@ -684,10 +684,10 @@ to extract repeating parts of a definition:
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;<span class="keyword">fragment</span>&nbsp;ESCAPED_CHAR&nbsp;:&nbsp;<span class="string">&apos;\\&apos;</span>&nbsp;(<span class="string">&apos;n&apos;</span>|<span class="string">&apos;t&apos;</span>|<span class="string">&apos;r&apos;</span>|<span class="string">&apos;\\&apos;</span>);<br/>
-<span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">&apos;"&apos;</span>)&nbsp;)*&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&apos;"</span>&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">"&apos;"</span>)&nbsp;)*&nbsp;<span class="string">"&apos;"</span><br/>
-;
+<span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;:&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">&apos;"&apos;</span>)&nbsp;)*&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&apos;"</span>&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">"&apos;"</span>)&nbsp;)*&nbsp;<span class="string">"&apos;"</span><br/>
+;<br/>
 </p>
 </div>
 </div>
@@ -763,7 +763,7 @@ State&nbsp;:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;actions&apos;</span>&nbsp;<span class="string">&apos;{&apos;</span>&nbsp;(actions+=[Command])+&nbsp;<span class="string">&apos;}&apos;</span>)?<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br/>
 &nbsp;&nbsp;<span class="string">&apos;end&apos;</span><br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -818,7 +818,7 @@ The syntax for crosslinks is:
 <p class="code">
 CrossReference&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;type=TypeRef&nbsp;(<span class="string">&apos;|&apos;</span>&nbsp;^terminal=CrossReferenceableTerminal&nbsp;)?&nbsp;<span class="string">&apos;]&apos;</span><br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -832,7 +832,7 @@ For example, the transition is made up of two cross-references, pointing to an e
 <p class="code">
 Transition&nbsp;:<br/>
 &nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State]<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -852,7 +852,7 @@ Transition&nbsp;:<br/>
 &nbsp;&nbsp;event=[MyEvent]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State]<br/>
 ;<br/>
 &nbsp;<br/>
-Event&nbsp;<span class="keyword">returns</span>&nbsp;MyEvent&nbsp;:&nbsp;....;
+Event&nbsp;<span class="keyword">returns</span>&nbsp;MyEvent&nbsp;:&nbsp;....;<br/>
 </p>
 </div>
 </div>
@@ -878,10 +878,10 @@ modifiers of the Java language:
 <div class="incode">
 <p class="code">
 Modifier:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;static?=<span class="string">&apos;static&apos;</span>?&nbsp;&amp;&nbsp;final?=<span class="string">&apos;final&apos;</span>?&nbsp;&amp;&nbsp;visibility=Visibility;<br/>
+&nbsp;&nbsp;static?=<span class="string">&apos;static&apos;</span>?&nbsp;&amp;&nbsp;final?=<span class="string">&apos;final&apos;</span>?&nbsp;&amp;&nbsp;visibility=Visibility;<br/>
 <br/>
 <span class="keyword">enum</span>&nbsp;Visibility:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;PUBLIC=<span class="string">&apos;public&apos;</span>&nbsp;|&nbsp;PRIVATE=<span class="string">&apos;private&apos;</span>&nbsp;|&nbsp;PROTECTED=<span class="string">&apos;protected&apos;</span>;
+&nbsp;&nbsp;PUBLIC=<span class="string">&apos;public&apos;</span>&nbsp;|&nbsp;PRIVATE=<span class="string">&apos;private&apos;</span>&nbsp;|&nbsp;PROTECTED=<span class="string">&apos;protected&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -896,7 +896,7 @@ Therefore, the following sequences of tokens are valid:
 <span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span><br/>
 <span class="keyword">static</span>&nbsp;<span class="keyword">protected</span>&nbsp;<br/>
 <span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span><br/>
-<span class="keyword">public</span>
+<span class="keyword">public</span><br/>
 </p>
 </div>
 </div>
@@ -911,7 +911,8 @@ this input lines:
 <p class="code">
 <span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;static&nbsp;appears&nbsp;twice<br/>
 </span><span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;visibility&nbsp;appears&nbsp;twice<br/>
-</span><span class="keyword">final</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing</span>
+</span><span class="keyword">final</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing<br/>
+</span>
 </p>
 </div>
 </div>
@@ -927,7 +928,7 @@ have to appear continuously without interruption, i.e.
 <div class="incode">
 <p class="code">
 Rule:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;values+=INT*&nbsp;&amp;&nbsp;name=ID;
+&nbsp;&nbsp;values+=INT*&nbsp;&amp;&nbsp;name=ID;<br/>
 </p>
 </div>
 </div>
@@ -940,7 +941,7 @@ will parse these lines
 <div class="incode">
 <p class="code">
 0&nbsp;8&nbsp;15&nbsp;x<br/>
-x&nbsp;0&nbsp;8&nbsp;15
+x&nbsp;0&nbsp;8&nbsp;15&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -949,7 +950,14 @@ x&nbsp;0&nbsp;8&nbsp;15
 but not does not consume the following sequence without raising an error
 </p>
 <p>
-<span class="inlinecode">0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment">//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;may&nbsp;be&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;name&nbsp;(ID)</span></span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment">//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;may&nbsp;be&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;name&nbsp;(ID)<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <a name="parser_rules_2_8"></a>
 <h5>Simple Actions</h5>
@@ -990,7 +998,7 @@ MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br/>
 &nbsp;<br/>
 MyOtherRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeB&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">"B"</span>&nbsp;name&nbsp;=&nbsp;ID<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1005,7 +1013,7 @@ Actions however allow to make this explicit. Thereby they can improve the readab
 MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">"A"</span>&nbsp;name=ID&nbsp;|<br/>
 &nbsp;&nbsp;<span class="string">"B"</span>&nbsp;{TypeB}&nbsp;name=ID<br/>
-;
+;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1044,7 +1052,7 @@ AbstractToken&nbsp;:<br/>
 &nbsp;&nbsp;TokenA&nbsp;|<br/>
 &nbsp;&nbsp;TokenB&nbsp;|<br/>
 &nbsp;&nbsp;TokenC<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1066,7 +1074,7 @@ AbstractToken&nbsp;:<br/>
 &nbsp;&nbsp;(&nbsp;TokenA&nbsp;|<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;TokenB&nbsp;|<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;TokenC&nbsp;)&nbsp;(cardinality=(<span class="string">&apos;?&apos;</span>|<span class="string">&apos;+&apos;</span>|<span class="string">&apos;*&apos;</span>))?<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1095,7 +1103,7 @@ Expression&nbsp;:<br/>
 &nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression&nbsp;|<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
 &nbsp;&nbsp;INT<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1114,7 +1122,7 @@ Expression&nbsp;:<br/>
 TerminalExpression&nbsp;:<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
 &nbsp;&nbsp;INT<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1134,7 +1142,7 @@ Expression&nbsp;:<br/>
 TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
 &nbsp;&nbsp;{IntLiteral}&nbsp;value=INT<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1153,7 +1161,7 @@ Operation&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value=42<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1176,7 +1184,7 @@ Expression&nbsp;:<br/>
 TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br/>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|<br/>
 &nbsp;&nbsp;{IntLiteral}&nbsp;value=INT<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1194,7 +1202,7 @@ In Java these semantics could be expressed as:
 <p class="code">
 Operation&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Operation();<br/>
 temp.setLeft(current);<br/>
-current&nbsp;=&nbsp;temp;
+current&nbsp;=&nbsp;temp;<br/>
 </p>
 </div>
 </div>
@@ -1228,7 +1236,7 @@ Person&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COM
 <br/>
 Fullname:&nbsp;<br/>
 &nbsp;&nbsp;(firstname=ID)?&nbsp;lastname=ID<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1245,7 +1253,8 @@ space (<span class="inlinecode">WS</span>) to be allowed between
 <p class="code">
 John&nbsp;<span class="comment">/*&nbsp;comment&nbsp;*/</span>&nbsp;Smith&nbsp;<span class="comment">//&nbsp;line&nbsp;comment<br/>
 </span><span class="comment">/*&nbsp;comment&nbsp;*/</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;<span class="comment">//&nbsp;line&nbsp;comment</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;<span class="comment">//&nbsp;line&nbsp;comment<br/>
+</span>
 </p>
 </div>
 </div>
@@ -1280,7 +1289,7 @@ you could write:
 <p class="code">
 QualifiedName&nbsp;:<br/>
 &nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1302,7 +1311,7 @@ Return types can be specified in the same way as for terminal rules:
 <p class="code">
 QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp;:&nbsp;<br/>
 &nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1331,7 +1340,7 @@ If you want to define a <span class="inlinecode">ChangeKind</span> from <a href=
 <p class="code">
 <span class="keyword">enum</span>&nbsp;ChangeKind&nbsp;:<br/>
 &nbsp;&nbsp;ADD&nbsp;|&nbsp;MOVE&nbsp;|&nbsp;REMOVE<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1347,7 +1356,7 @@ It is even possible to use alternative literals for your enums or reference an e
 &nbsp;&nbsp;ADD&nbsp;=&nbsp;<span class="string">&apos;add&apos;</span>&nbsp;|&nbsp;ADD&nbsp;=&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;|&nbsp;<br/>
 &nbsp;&nbsp;MOVE&nbsp;=&nbsp;<span class="string">&apos;move&apos;</span>&nbsp;|&nbsp;MOVE&nbsp;=&nbsp;<span class="string">&apos;-&gt;&apos;</span>&nbsp;|&nbsp;<br/>
 &nbsp;&nbsp;REMOVE&nbsp;=&nbsp;<span class="string">&apos;remove&apos;</span>&nbsp;|&nbsp;REMOVE&nbsp;=&nbsp;<span class="string">&apos;-&apos;</span><br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1376,7 +1385,7 @@ an enum literal with an empty textual representation.
 <p class="code">
 <span class="keyword">enum</span>&nbsp;Visibility:&nbsp;<br/>
 &nbsp;&nbsp;package&nbsp;|&nbsp;private&nbsp;|&nbsp;protected&nbsp;|&nbsp;public<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1397,14 +1406,14 @@ that allow to deal with this problem:
 <ul>
 	<li>
 		Enable Backtracking: Xtext allows to enable backtracking for the ANTLR parser generator. This
-			is usually not recommended since it influences error message strategies at runtime and shadows actually
-			existing problems in the grammar.
+		  is usually not recommended since it influences error message strategies at runtime and shadows actually
+		  existing problems in the grammar.
 	</li>
 	<li>
 		Syntactic Predicates: The grammar language enables users to guide the parser in case of ambiguities.
-			This mechanism is achieved by syntactic predicates. Since they affect only a very small part of the
-			grammar, syntactic predicates are the recommended approach to handle ANTLR error messages during
-			the parser generation.
+		  This mechanism is achieved by syntactic predicates. Since they affect only a very small part of the
+		  grammar, syntactic predicates are the recommended approach to handle ANTLR error messages during
+		  the parser generation.
 	</li>
 </ul>
 </p>
@@ -1417,9 +1426,9 @@ a programming language usually looks like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">if</span>&nbsp;(isTrue())&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doStuff();&nbsp;<br/>
+&nbsp;&nbsp;doStuff();&nbsp;<br/>
 <span class="keyword">else</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();
+&nbsp;&nbsp;dontDoStuff();&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1432,10 +1441,10 @@ The problems becomes more obvious as soon as nested conditions are used:
 <div class="incode">
 <p class="code">
 <span class="keyword">if</span>&nbsp;(isTrue())<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(isTrueAsWell())&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;doStuff();&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(isTrueAsWell())&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;doStuff();&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -1451,9 +1460,9 @@ predicates which are expressed by a leading <span class="inlinecode">=&gt;</span
 <div class="incode">
 <p class="code">
 Condition:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;condition=BooleanExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then=Expression&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(=&gt;<span class="string">&apos;else&apos;</span>&nbsp;else=Expression)?
+&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;condition=BooleanExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;then=Expression&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(=&gt;<span class="string">&apos;else&apos;</span>&nbsp;else=Expression)?<br/>
 </p>
 </div>
 </div>
@@ -1487,9 +1496,9 @@ Xtext creates
 		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> <ul>
 			<li>
 				for each generate-package declaration. After the directive <span class="inlinecode"><span class="keyword">generate</span></span> a list of parameters follows. The <em>name</em> of the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
-					will be set to the first parameter, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows 
-					to distinguish generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> later. Only one generated package declaration 
-					per alias is allowed.
+				  will be set to the first parameter, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows 
+				  to distinguish generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> later. Only one generated package declaration 
+				  per alias is allowed.
 			</li>
 		</ul>
 	</li>
@@ -1497,8 +1506,8 @@ Xtext creates
 		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> <ul>
 			<li>
 				for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same 
-					name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> 
-					will be generated.
+				  name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> 
+				  will be generated.
 			</li>
 			<li>
 				for each type defined in an action or a cross-reference.
@@ -1563,7 +1572,7 @@ While iterating the parser rules Xtext creates
 		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> in each current return type <ul>
 			<li>
 				of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Boolean.html" title="View JavaDoc"><abbr title="java.lang.Boolean" >EBoolean</abbr></a> for each feature assignment using the <span class="inlinecode">?=</span> operator. 
-					No further <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReferences</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> will be generated from this assignment.
+				  No further <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReferences</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> will be generated from this assignment.
 			</li>
 			<li>
 				for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator calling a terminal rule. Its type will be the return type of the called rule.
@@ -1574,7 +1583,7 @@ While iterating the parser rules Xtext creates
 		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> in each current return type <ul>
 			<li>
 				for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator in a parser rule calling a parser rule. 
-					The <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference&apos;s</abbr></a> type will be the return type of the called parser rule.
+				  The <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference&apos;s</abbr></a> type will be the return type of the called parser rule.
 			</li>
 			<li>
 				for each assigned action. The reference&apos;s type will be set to the return type of the current calling rule. 
@@ -1597,7 +1606,7 @@ of the parser rule. You can specify additional common super types by means of "a
 <div class="incode">
 <p class="code">
 CommonSuperType:<br/>
-&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;
+&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;<br/>
 </p>
 </div>
 </div>
@@ -1614,7 +1623,7 @@ it is omitted, an enum literal with equal <em>name</em> and <em>literal</em> att
 <div class="incode">
 <p class="code">
 <span class="keyword">enum</span>&nbsp;MyGeneratedEnum:<br/>
-&nbsp;&nbsp;NAME&nbsp;=&nbsp;<span class="string">&apos;literal&apos;</span>&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;
+&nbsp;&nbsp;NAME&nbsp;=&nbsp;<span class="string">&apos;literal&apos;</span>&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;<br/>
 </p>
 </div>
 </div>
@@ -1643,7 +1652,7 @@ process(xtext::GeneratedMetamodel&nbsp;<span class="keyword">this</span>)&nbsp;:
 &nbsp;<br/>
 process(ecore::EPackage&nbsp;<span class="keyword">this</span>)&nbsp;:<br/>
 &nbsp;&nbsp;...&nbsp;do&nbsp;something<br/>
-;
+;<br/>
 </p>
 </div>
 </div>
@@ -1718,7 +1727,7 @@ If it is in a different plug-in, make sure to add a plug-in dependency in the <s
 <br/>
 <span class="keyword">generate</span>&nbsp;secrets&nbsp;<span class="string">"http://www.eclipse.org/secretcompartment"</span><br/>
 &nbsp;<br/>
-Statemachine:&nbsp;..
+Statemachine:&nbsp;..<br/>
 </p>
 </div>
 </div>
@@ -1750,7 +1759,7 @@ RuleB&nbsp;:&nbsp;<span class="string">"{"</span>&nbsp;name=ID&nbsp;<span class=
 Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br/>
 <br/>
 <span class="comment">//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br/>
-</span>RuleB&nbsp;:&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;]&apos;</span>;
+</span>RuleB&nbsp;:&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;]&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -1794,24 +1803,24 @@ for these common terminal rules is defined as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br/>
+&nbsp;<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br/>
 &nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br/>
 <span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore<br/>
 <span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br/>
 &nbsp;<span class="string">&apos;^&apos;</span>?(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;<br/>
 <span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;<br/>
 &nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;<br/>
-<span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br/>
+<span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;:&nbsp;<br/>
 &nbsp;<span class="string">&apos;"&apos;</span>&nbsp;(&nbsp;<span class="string">&apos;\\&apos;</span>(<span class="string">&apos;b&apos;</span>|<span class="string">&apos;t&apos;</span>|<span class="string">&apos;n&apos;</span>|<span class="string">&apos;f&apos;</span>|<span class="string">&apos;r&apos;</span>|<span class="string">&apos;u&apos;</span>|<span class="string">&apos;"&apos;</span>|<span class="string">"&apos;"</span>|<span class="string">&apos;\\&apos;</span>)&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">&apos;"&apos;</span>)&nbsp;)*&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;|<br/>
 &nbsp;<span class="string">"&apos;"</span>&nbsp;(&nbsp;<span class="string">&apos;\\&apos;</span>(<span class="string">&apos;b&apos;</span>|<span class="string">&apos;t&apos;</span>|<span class="string">&apos;n&apos;</span>|<span class="string">&apos;f&apos;</span>|<span class="string">&apos;r&apos;</span>|<span class="string">&apos;u&apos;</span>|<span class="string">&apos;"&apos;</span>|<span class="string">"&apos;"</span>|<span class="string">&apos;\\&apos;</span>)&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">"&apos;"</span>)&nbsp;)*&nbsp;<span class="string">"&apos;"</span>;&nbsp;<br/>
-<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br/>
+<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;:&nbsp;<br/>
 &nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span>;<br/>
 <span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;<br/>
 &nbsp;<span class="string">&apos;//&apos;</span>&nbsp;!(<span class="string">&apos;\n&apos;</span>|<span class="string">&apos;\r&apos;</span>)*&nbsp;(<span class="string">&apos;\r&apos;</span>?&nbsp;<span class="string">&apos;\n&apos;</span>)?;<br/>
-<span class="keyword">terminal</span>&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br/>
+<span class="keyword">terminal</span>&nbsp;WS&nbsp;&nbsp;:&nbsp;<br/>
 &nbsp;(<span class="string">&apos;&nbsp;&apos;</span>|<span class="string">&apos;\t&apos;</span>|<span class="string">&apos;\r&apos;</span>|<span class="string">&apos;\n&apos;</span>)+;<br/>
 <span class="keyword">terminal</span>&nbsp;ANY_OTHER:&nbsp;<br/>
-&nbsp;.;
+&nbsp;.;<br/>
 </p>
 </div>
 </div>

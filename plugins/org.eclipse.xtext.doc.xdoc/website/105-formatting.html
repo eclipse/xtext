@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -200,10 +200,10 @@
 			Xtext ships with two formatters:
 			<ul>
 			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.html" title="org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter">OneWhitespaceFormatter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java" title="View Source Code" >(src)</a> simply writes one 
-			  		white space between all tokens.</li>
+			      white space between all tokens.</li>
 			  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a> allows advanced 
-			  		configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
-			  		below.</li>
+			      configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
+			      below.</li>
 			</ul>
 			</p>
 			<p>
@@ -289,18 +289,18 @@
 			elements. The following matching criteria exist:
 			<ul>
 			  <li><span class="inlinecode">after(element)</span>: The instruction is applied after the grammar element has been matched. 
-			  		For example, if your grammar uses the keyword <span class="inlinecode"><span class="string">";"</span></span> to end lines, this can instruct the formatter 
-			  		to insert a line break after the semicolon.</li>
+			      For example, if your grammar uses the keyword <span class="inlinecode"><span class="string">";"</span></span> to end lines, this can instruct the formatter 
+			      to insert a line break after the semicolon.</li>
 			  <li><span class="inlinecode">before(element)</span>: The instruction is executed before the matched element. For example, if your 
-			  		grammar contains lists which separate their values with the keyword <span class="inlinecode"><span class="string">","</span></span>, you can instruct the 
-			  		formatter to suppress the white space before the comma.</li>
+			      grammar contains lists which separate their values with the keyword <span class="inlinecode"><span class="string">","</span></span>, you can instruct the 
+			      formatter to suppress the white space before the comma.</li>
 			  <li><span class="inlinecode">around(element)</span>: This is the same as <span class="inlinecode">before(element)</span> combined with <span class="inlinecode">after(element)</span>.</li>
 			  <li><span class="inlinecode">between(left,&nbsp;right)</span>: This matches if <em>left</em> directly follows <em>right</em> in the document. 
-			  		There may be no other tokens in between <em>left</em> and <em>right</em>.</li>
+			      There may be no other tokens in between <em>left</em> and <em>right</em>.</li>
 			  <li><span class="inlinecode">bounds(left,&nbsp;right)</span>: This is the same as <span class="inlinecode">after(left)</span> combined with  <span class="inlinecode">before(right)</span>.</li>
 			  <li><span class="inlinecode">range(start,&nbsp;end)</span>: The rule is enabled when <em>start</em> is matched, and disabled when <em>end</em> 
-			  		is matched. Thereby, the rule is active for the complete region which is surrounded by <em>start</em> 
-			  		and <em>end</em>.</li>
+			      is matched. Thereby, the rule is active for the complete region which is surrounded by <em>start</em> 
+			      and <em>end</em>.</li>
 			</ul>
 			</p>
 			<p>
@@ -318,8 +318,8 @@
 			<ul>
 			  <li>Actions. E.g. <span class="inlinecode">{MyAction}</span> or <span class="inlinecode">{MyAction.myFeature=<span class="keyword">current</span>}</span>.</li>
 			  <li>Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
-			  		by a data type rule are treated as atomic by the serializer. To format these tokens, please 
-			  		implement a <a href="090-valueconverter.php" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. </li>
+			      by a data type rule are treated as atomic by the serializer. To format these tokens, please 
+			      implement a <a href="090-valueconverter.php" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. </li>
 			  <li>Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/CrossReference.html" title="org.eclipse.xtext.CrossReference">CrossReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.</li>
 			</ul>
 			</p>
@@ -327,25 +327,25 @@
 			After having explained how rules can be activated, this is what they can do:
 			<ul>
 			  <li><span class="inlinecode">setIndentationIncrement()</span> increments indentation by one unit at this position. Whether 
-			  		one unit consists of one tab-character or spaces is defined by 
-			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IIndentationInformation.html" title="org.eclipse.xtext.formatting.IIndentationInformation">IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
-			  		consults Eclipse's <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="org.eclipse.jface.preference.IPreferenceStore">IPreferenceStore</abbr></a>.</li>
+			      one unit consists of one tab-character or spaces is defined by 
+			      <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IIndentationInformation.html" title="org.eclipse.xtext.formatting.IIndentationInformation">IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
+			      consults Eclipse's <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="org.eclipse.jface.preference.IPreferenceStore">IPreferenceStore</abbr></a>.</li>
 			  <li><span class="inlinecode">setIndentationDecrement()</span> decrements indentation by one unit.</li>
 			  <li><span class="inlinecode">setLinewrap()</span>: Inserts a line-wrap at this position.</li>
 			  <li><span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;count)</span>: Inserts <em>count</em> numbers of line-wrap at this position.</li>
 			  <li><span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;min,&nbsp;<span class="keyword">int</span>&nbsp;def,&nbsp;<span class="keyword">int</span>&nbsp;max)</span>: If the amount of line-wraps that have been 
-			  		at this position before formatting can be determined (i.e. when a node model is present), 
-			  		then the amount of of line-wraps is adjusted to be within the interval <em>min</em>, <em>max</em> 
-			  		and is then reused. In all other cases <em>def</em> line-wraps are inserted. Example: 
-			  		<span class="inlinecode">setLinewrap(0,&nbsp;0,&nbsp;1)</span> will preserve existing line-wraps, but won't allow more than one 
-			  		line-wrap between two tokens.</li>
+			      at this position before formatting can be determined (i.e. when a node model is present), 
+			      then the amount of of line-wraps is adjusted to be within the interval <em>min</em>, <em>max</em> 
+			      and is then reused. In all other cases <em>def</em> line-wraps are inserted. Example: 
+			      <span class="inlinecode">setLinewrap(0,&nbsp;0,&nbsp;1)</span> will preserve existing line-wraps, but won't allow more than one 
+			      line-wrap between two tokens.</li>
 			  <li><span class="inlinecode">setNoLinewrap()</span>: Suppresses automatic line wrap, which may occur when the line's length 
-			  		exceeds the defined limit.</li>
+			      exceeds the defined limit.</li>
 			  <li><span class="inlinecode">setSpace(String&nbsp;space)</span>: Inserts the string <em>space</em> at this position. If you use this 
-			  		to insert something else than white space, tabs or newlines, a small puppy will die somewhere 
-			  		in this world.</li>
+			      to insert something else than white space, tabs or newlines, a small puppy will die somewhere 
+			      in this world.</li>
 			  <li><span class="inlinecode">setNoSpace()</span>: Suppresses the white space between tokens at this position. Be aware that 
-			  		between some tokens a white space is required to maintain a valid concrete syntax.</li>
+			      between some tokens a white space is required to maintain a valid concrete syntax.</li>
 			</ul>
 			</p>
 			<a name="formatting_10" ></a>
@@ -360,8 +360,8 @@
 			<ul>
 			  <li><span class="inlinecode">findKeywords(String...&nbsp;keywords)</span> returns all keywords that equal one of the parameters.</li>
 			  <li><span class="inlinecode">findKeywordPairs(String&nbsp;leftKw,&nbsp;String&nbsp;rightKw)</span>: returns tuples of keywords from the same 
-			  		grammar rule. Pairs are matched nested and sequentially.  Example: for <span class="inlinecode">Rule:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;foo=ID&nbsp;<span class="string">&apos;)&apos;</span>)&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;bar=ID&nbsp;<span class="string">&apos;)&apos;</span></span> 
-			  		<span class="inlinecode">findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>)</span> returns three pairs.</li>
+			      grammar rule. Pairs are matched nested and sequentially.  Example: for <span class="inlinecode">Rule:&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;foo=ID&nbsp;<span class="string">&apos;)&apos;</span>)&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;bar=ID&nbsp;<span class="string">&apos;)&apos;</span></span> 
+			      <span class="inlinecode">findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>)</span> returns three pairs.</li>
 			</ul>
 			</p>
 		<div id="disqus_thread"></div>

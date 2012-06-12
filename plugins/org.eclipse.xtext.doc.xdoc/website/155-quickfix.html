@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -224,7 +224,7 @@
 					<p class="code">
 						@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br/>
+						&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br/>
 						&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name"</span>,&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;label<br/>
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string">"&apos;"</span>,&nbsp;<br/>
@@ -232,7 +232,7 @@
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;icon<br/>
 						</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;<br/>

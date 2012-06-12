@@ -71,7 +71,7 @@ there is a so called <em>binding annotation</em> for each use case. For example,
 &nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ContentProposalLabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.to(MyContentAssistLabelProvider.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -87,11 +87,11 @@ delegate parameter and use dependency injection for its initialization, e.g.
 <div class="incode">
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;MyLabelProvider(AdapterFactoryLabelProvider&nbsp;delegate)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(delegate);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+&nbsp;&nbsp;@Inject&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;MyLabelProvider(AdapterFactoryLabelProvider&nbsp;delegate)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(delegate);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -124,7 +124,7 @@ idea about the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xt
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;image(State&nbsp;state)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"state.gif"</span>;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -171,7 +171,7 @@ To have a custom description label provider, make sure it is bound in your UI mo
 &nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ResourceServiceDescriptionLabelProvider.<span class="keyword">class</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;.to(MyCustomDefaultDescriptionLabelProvider.<span class="keyword">class</span>);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -185,11 +185,11 @@ The Xtext generator, amongst other things, generates the following two content a
 <ul>
 	<li>
 		An abstract proposal provider class named <span class="inlinecode">Abstract{MyLang}ProposalProvider</span> generated 
-				into the <em>src-gen</em> folder within the <em>ui</em> project, and
+		    into the <em>src-gen</em> folder within the <em>ui</em> project, and
 	</li>
 	<li>
 		a concrete subclass in the <em>src</em>-folder of the <em>ui</em> project called 
-				<span class="inlinecode">{MyLang}ProposalProvider</span>
+		    <span class="inlinecode">{MyLang}ProposalProvider</span>
 	</li>
 </ul>
 </p>
@@ -210,7 +210,7 @@ First we will investigate the generated <span class="inlinecode">Abstract{MyLang
 &nbsp;&nbsp;EObject&nbsp;model,&nbsp;RuleCall&nbsp;ruleCall,&nbsp;<br/>
 &nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;clients&nbsp;may&nbsp;override<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -256,7 +256,7 @@ event with the name <span class="inlinecode">Zonk</span>.
 </span>&nbsp;&nbsp;<span class="comment">//&nbsp;methods&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts.<br/>
 </span>&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully.<br/>
 </span>&nbsp;&nbsp;acceptor.accept(createCompletionProposal(proposal,&nbsp;context));<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -281,7 +281,7 @@ to the static <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs
 <div class="incode">
 <p class="code">
 warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());
+&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br/>
 </p>
 </div>
 </div>
@@ -302,7 +302,7 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 <p class="code">
 @Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br/>
+&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br/>
 &nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name"</span>,&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;label<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string">"&apos;"</span>,&nbsp;<br/>
@@ -310,7 +310,7 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;icon<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;<br/>
@@ -318,7 +318,7 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -372,7 +372,7 @@ The following snippet shows a semantic quick fix for a similar problem.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -456,14 +456,14 @@ This small example yields the text <em>event =&gt; state</em> and allows selecti
 <div class="incode">
 <p class="code">
 &lt;template&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
+&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
+&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 ${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)}&nbsp;=&gt;<br/>
 &nbsp;&nbsp;${state:CrossReference(<span class="string">&apos;Transition.state&apos;</span>)<br/>
-&lt;/template&gt;
+&lt;/template&gt;<br/>
 </p>
 </div>
 </div>
@@ -498,15 +498,15 @@ For example the following template (taken from another example):
 <div class="incode">
 <p class="code">
 &lt;template&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
+&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
+&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
+&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
+&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 ${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;<span class="keyword">entity</span>&nbsp;${Name}&nbsp;{<br/>
 &nbsp;&nbsp;${cursor}<br/>
 }<br/>
-&lt;/template&gt;
+&lt;/template&gt;<br/>
 </p>
 </div>
 </div>
@@ -575,10 +575,10 @@ of type <span class="inlinecode">Domainmodel</span> in the outline of our domain
 <p class="code">
 <span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;_createChildren(DocumentRootNode&nbsp;parentNode,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domainmodel&nbsp;domainModel)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;element&nbsp;:&nbsp;domainModel.getElements())&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createNode(parentNode,&nbsp;element);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;element&nbsp;:&nbsp;domainModel.getElements())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;createNode(parentNode,&nbsp;element);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -595,8 +595,8 @@ This might be confuse your users a bit. To overcome this shortcoming, you have t
 <p class="code">
 <span class="comment">//&nbsp;feature&nbsp;nodes&nbsp;are&nbsp;leafs&nbsp;and&nbsp;not&nbsp;expandable<br/>
 </span><span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;_isLeaf(Feature&nbsp;feature)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">true</span>;<br/>
-}
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">true</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -612,23 +612,23 @@ snippet from Xtend2 illustrates how to use it:
 <p class="code">
 <span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;_createChildren(DocumentRootNode&nbsp;parentNode,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XtendFile&nbsp;xtendFile)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;node&nbsp;for&nbsp;the&nbsp;attribute&nbsp;XtendFile.package<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__PACKAGE,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForPackage(),&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile.getPackage(),&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">true</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;container&nbsp;node&nbsp;for&nbsp;the&nbsp;list&nbsp;reference&nbsp;XtendFile.imports<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;imports&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;individual&nbsp;child&nbsp;nodes&nbsp;automatically&nbsp;<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__IMPORTS,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForImportContainer(),&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">false</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());<br/>
-}
+&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;node&nbsp;for&nbsp;the&nbsp;attribute&nbsp;XtendFile.package<br/>
+</span>&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__PACKAGE,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;getImageForPackage(),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;xtendFile.getPackage(),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">true</span>);<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;container&nbsp;node&nbsp;for&nbsp;the&nbsp;list&nbsp;reference&nbsp;XtendFile.imports<br/>
+</span>&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;imports&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;individual&nbsp;child&nbsp;nodes&nbsp;automatically&nbsp;<br/>
+</span>&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__IMPORTS,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;getImageForImportContainer(),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">false</span>);<br/>
+&nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -659,20 +659,20 @@ can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic
 <span class="keyword">private</span>&nbsp;StylerFactory&nbsp;stylerFactory;<br/>
 <br/>
 <span class="keyword">public</span>&nbsp;Object&nbsp;_text(Entity&nbsp;entity)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(entity.isAbstract())&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;StyledString(entity.getName(),&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stylerFactory<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.createXtextStyleAdapterStyler(getTypeTextStyle())));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;entity.getName();<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>(entity.isAbstract())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;StyledString(entity.getName(),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stylerFactory<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.createXtextStyleAdapterStyler(getTypeTextStyle())));<br/>
+&nbsp;&nbsp;<span class="keyword">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;entity.getName();<br/>
 }<br/>
 <br/>
 <span class="keyword">protected</span>&nbsp;TextStyle&nbsp;getTypeTextStyle()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(149,&nbsp;125,&nbsp;71));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
-}
+&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br/>
+&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(149,&nbsp;125,&nbsp;71));<br/>
+&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -695,41 +695,41 @@ example:
 <div class="incode">
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FilterOperationsContribution&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterOutlineContribution&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterOutlineContribution&nbsp;{<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;PREFERENCE_KEY&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ui.outline.filterOperations"</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;PREFERENCE_KEY&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ui.outline.filterOperations"</span>;<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;PluginImageHelper&nbsp;imageHelper;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;apply(IOutlineNode&nbsp;node)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;!(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;!((EObjectNode)&nbsp;node).getEClass()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.equals(DomainmodelPackage.Literals.OPERATION);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;PluginImageHelper&nbsp;imageHelper;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;apply(IOutlineNode&nbsp;node)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;!(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;!((EObjectNode)&nbsp;node).getEClass()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.equals(DomainmodelPackage.Literals.OPERATION);<br/>
+&nbsp;&nbsp;}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getPreferenceKey()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;PREFERENCE_KEY;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getPreferenceKey()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;PREFERENCE_KEY;<br/>
+&nbsp;&nbsp;}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureAction(Action&nbsp;action)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setDescription(<span class="string">"Hide&nbsp;operations"</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setToolTipText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setImageDescriptor(getImageDescriptor());<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureAction(Action&nbsp;action)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;action.setText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;action.setDescription(<span class="string">"Hide&nbsp;operations"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;action.setToolTipText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;action.setImageDescriptor(getImageDescriptor());<br/>
+&nbsp;&nbsp;}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ImageDescriptor&nbsp;getImageDescriptor(String&nbsp;imagePath)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ImageDescriptor.createFromImage(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageHelper.getImage(<span class="string">"Operation.gif"</span>));<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ImageDescriptor&nbsp;getImageDescriptor(String&nbsp;imagePath)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ImageDescriptor.createFromImage(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageHelper.getImage(<span class="string">"Operation.gif"</span>));<br/>
+&nbsp;&nbsp;}<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-}
+&nbsp;&nbsp;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -742,11 +742,11 @@ The contribution must be bound in the <em>MyDslUiModule</em> like this
 <div class="incode">
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFilterOperationsContribution(Binder&nbsp;binder)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;binder<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IOutlineContribution.<span class="keyword">class</span>).annotatedWith(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names.named(<span class="string">"FilterOperationsContribution"</span>))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(FilterOperationsContribution.<span class="keyword">class</span>);<br/>
-}
+&nbsp;&nbsp;binder<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;.bind(IOutlineContribution.<span class="keyword">class</span>).annotatedWith(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names.named(<span class="string">"FilterOperationsContribution"</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;.to(FilterOperationsContribution.<span class="keyword">class</span>);<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -770,18 +770,18 @@ use such categories:
 <div class="incode">
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MydslOutlineNodeComparator&nbsp;<span class="keyword">extends</span>&nbsp;DefaultComparator&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">int</span>&nbsp;getCategory(IOutlineNode&nbsp;node)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>((EObjectNode)&nbsp;node).getEClass().getClassifierID()))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE0:&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-10;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE1:&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-20;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Integer.MIN_VALUE;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">int</span>&nbsp;getCategory(IOutlineNode&nbsp;node)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>((EObjectNode)&nbsp;node).getEClass().getClassifierID()))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE0:&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-10;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE1:&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-20;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Integer.MIN_VALUE;<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -795,9 +795,9 @@ As always, you have to declare a binding for your custom implementation in your 
 <p class="code">
 @Override<br/>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IComparator&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;bindOutlineFilterAndSorter$IComparator()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MydslOutlineNodeComparator.<span class="keyword">class</span>;<br/>
-}
+&nbsp;&nbsp;bindOutlineFilterAndSorter$IComparator()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MydslOutlineNodeComparator.<span class="keyword">class</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -833,18 +833,18 @@ effort strategy which can be summarized as:
 <ol>
 	<li>
 		
-				If the model element&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >type</abbr></a> declares a feature <em>name</em> then return the 
-				region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
+		    If the model element&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >type</abbr></a> declares a feature <em>name</em> then return the 
+		    region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
 	</li>
 	<li>
 		
-				If the model element&apos;s node model contains any top-level tokens corresponding to invocations
-				of the rule <em>ID</em> in the grammar then return a region spanning all those tokens.
+		    If the model element&apos;s node model contains any top-level tokens corresponding to invocations
+		    of the rule <em>ID</em> in the grammar then return a region spanning all those tokens.
 	</li>
 	<li>
 		
-				As a last resort return the region corresponding to the first keyword token of the referenced
-				model element.
+		    As a last resort return the region corresponding to the first keyword token of the referenced
+		    model element.
 	</li>
 </ol>
 </p>
@@ -867,10 +867,10 @@ the UI module as in the following example:
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{<br/>
 &nbsp;&nbsp;@Override<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ILocationInFileProvider&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslLocationInFileProvider.<span class="keyword">class</span>;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -959,7 +959,7 @@ and read like this:
 <br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYWORD_ID,&nbsp;<span class="string">"Keyword"</span>,&nbsp;keywordTextStyle());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYWORD_ID,&nbsp;<span class="string">"Keyword"</span>,&nbsp;keywordTextStyle());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;<span class="string">"Comment"</span>,&nbsp;<span class="comment">//&nbsp;...<br/>
 </span>&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;<br/>
@@ -969,7 +969,7 @@ and read like this:
 &nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1026,7 +1026,7 @@ associate styles with them. This may read similar to the following snippet:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1059,7 +1059,7 @@ mentioned sample of a lexical <a class="jdoc" href="http://download.eclipse.org/
 &nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -1106,7 +1106,7 @@ is enabled in the fragment section of the MWE workflow of your language, e.g.
 <div class="incode">
 <p class="code">
 <span class="comment">//&nbsp;rename&nbsp;refactoring<br/>
-</span>fragment&nbsp;=&nbsp;refactoring.RefactorElementNameFragment&nbsp;{}
+</span>fragment&nbsp;=&nbsp;refactoring.RefactorElementNameFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>

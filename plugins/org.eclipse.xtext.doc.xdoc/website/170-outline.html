@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -250,9 +250,9 @@
 					<p class="code">
 						<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;_createChildren(DocumentRootNode&nbsp;parentNode,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Domainmodel&nbsp;domainModel)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;element&nbsp;:&nbsp;domainModel.getElements())&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createNode(parentNode,&nbsp;element);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;element&nbsp;:&nbsp;domainModel.getElements())&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;createNode(parentNode,&nbsp;element);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -270,7 +270,7 @@
 					<p class="code">
 						<span class="comment">//&nbsp;feature&nbsp;nodes&nbsp;are&nbsp;leafs&nbsp;and&nbsp;not&nbsp;expandable<br/>
 						</span><span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;_isLeaf(Feature&nbsp;feature)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">true</span>;<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">true</span>;<br/>
 						}
 					</p>
 				</div>
@@ -287,22 +287,22 @@
 					<p class="code">
 						<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;_createChildren(DocumentRootNode&nbsp;parentNode,&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XtendFile&nbsp;xtendFile)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;node&nbsp;for&nbsp;the&nbsp;attribute&nbsp;XtendFile.package<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__PACKAGE,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForPackage(),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile.getPackage(),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">true</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;container&nbsp;node&nbsp;for&nbsp;the&nbsp;list&nbsp;reference&nbsp;XtendFile.imports<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;imports&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;individual&nbsp;child&nbsp;nodes&nbsp;automatically&nbsp;<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__IMPORTS,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForImportContainer(),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">false</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());<br/>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;node&nbsp;for&nbsp;the&nbsp;attribute&nbsp;XtendFile.package<br/>
+						</span>&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__PACKAGE,<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;getImageForPackage(),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;xtendFile.getPackage(),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">true</span>);<br/>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;container&nbsp;node&nbsp;for&nbsp;the&nbsp;list&nbsp;reference&nbsp;XtendFile.imports<br/>
+						</span>&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;imports&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;individual&nbsp;child&nbsp;nodes&nbsp;automatically&nbsp;<br/>
+						</span>&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__IMPORTS,<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;getImageForImportContainer(),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">false</span>);<br/>
+						&nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());<br/>
 						}
 					</p>
 				</div>
@@ -334,19 +334,19 @@
 						<span class="keyword">private</span>&nbsp;StylerFactory&nbsp;stylerFactory;<br/>
 						<br/>
 						<span class="keyword">public</span>&nbsp;Object&nbsp;_text(Entity&nbsp;entity)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(entity.isAbstract())&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;StyledString(entity.getName(),&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stylerFactory<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.createXtextStyleAdapterStyler(getTypeTextStyle())));<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;entity.getName();<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>(entity.isAbstract())&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;StyledString(entity.getName(),&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stylerFactory<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.createXtextStyleAdapterStyler(getTypeTextStyle())));<br/>
+						&nbsp;&nbsp;<span class="keyword">else</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;entity.getName();<br/>
 						}<br/>
 						<br/>
 						<span class="keyword">protected</span>&nbsp;TextStyle&nbsp;getTypeTextStyle()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(149,&nbsp;125,&nbsp;71));<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
+						&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br/>
+						&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(149,&nbsp;125,&nbsp;71));<br/>
+						&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
 						}
 					</p>
 				</div>
@@ -370,40 +370,40 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FilterOperationsContribution&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterOutlineContribution&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterOutlineContribution&nbsp;{<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;PREFERENCE_KEY&nbsp;=&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ui.outline.filterOperations"</span>;<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;PREFERENCE_KEY&nbsp;=&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ui.outline.filterOperations"</span>;<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;PluginImageHelper&nbsp;imageHelper;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;apply(IOutlineNode&nbsp;node)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;!(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;!((EObjectNode)&nbsp;node).getEClass()<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.equals(DomainmodelPackage.Literals.OPERATION);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;@Inject<br/>
+						&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;PluginImageHelper&nbsp;imageHelper;<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;@Override<br/>
+						&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;apply(IOutlineNode&nbsp;node)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;!(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;!((EObjectNode)&nbsp;node).getEClass()<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.equals(DomainmodelPackage.Literals.OPERATION);<br/>
+						&nbsp;&nbsp;}<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getPreferenceKey()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;PREFERENCE_KEY;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;@Override<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getPreferenceKey()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;PREFERENCE_KEY;<br/>
+						&nbsp;&nbsp;}<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureAction(Action&nbsp;action)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setDescription(<span class="string">"Hide&nbsp;operations"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setToolTipText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setImageDescriptor(getImageDescriptor());<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;@Override<br/>
+						&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureAction(Action&nbsp;action)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;action.setText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;action.setDescription(<span class="string">"Hide&nbsp;operations"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;action.setToolTipText(<span class="string">"Hide&nbsp;operations"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;action.setImageDescriptor(getImageDescriptor());<br/>
+						&nbsp;&nbsp;}<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ImageDescriptor&nbsp;getImageDescriptor(String&nbsp;imagePath)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ImageDescriptor.createFromImage(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageHelper.getImage(<span class="string">"Operation.gif"</span>));<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ImageDescriptor&nbsp;getImageDescriptor(String&nbsp;imagePath)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ImageDescriptor.createFromImage(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageHelper.getImage(<span class="string">"Operation.gif"</span>));<br/>
+						&nbsp;&nbsp;}<br/>
 						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;<br/>
 						}
 					</p>
 				</div>
@@ -417,10 +417,10 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFilterOperationsContribution(Binder&nbsp;binder)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;binder<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IOutlineContribution.<span class="keyword">class</span>).annotatedWith(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names.named(<span class="string">"FilterOperationsContribution"</span>))<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(FilterOperationsContribution.<span class="keyword">class</span>);<br/>
+						&nbsp;&nbsp;binder<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;.bind(IOutlineContribution.<span class="keyword">class</span>).annotatedWith(<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names.named(<span class="string">"FilterOperationsContribution"</span>))<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;.to(FilterOperationsContribution.<span class="keyword">class</span>);<br/>
 						}
 					</p>
 				</div>
@@ -445,17 +445,17 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MydslOutlineNodeComparator&nbsp;<span class="keyword">extends</span>&nbsp;DefaultComparator&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">int</span>&nbsp;getCategory(IOutlineNode&nbsp;node)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>((EObjectNode)&nbsp;node).getEClass().getClassifierID()))&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE0:&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-10;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE1:&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-20;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Integer.MIN_VALUE;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;@Override<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">int</span>&nbsp;getCategory(IOutlineNode&nbsp;node)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>((EObjectNode)&nbsp;node).getEClass().getClassifierID()))&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE0:&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-10;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE1:&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-20;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Integer.MIN_VALUE;<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -470,8 +470,8 @@
 					<p class="code">
 						@Override<br/>
 						<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IComparator&gt;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;bindOutlineFilterAndSorter$IComparator()&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MydslOutlineNodeComparator.<span class="keyword">class</span>;<br/>
+						&nbsp;&nbsp;bindOutlineFilterAndSorter$IComparator()&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MydslOutlineNodeComparator.<span class="keyword">class</span>;<br/>
 						}
 					</p>
 				</div>
