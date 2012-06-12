@@ -171,7 +171,7 @@ code[Xtend][
 As in Java 5, Xtend allows vararg parameters:
 code[Xtend][
   def printAll(String... strings) {
-    strings.forEach\[s | println(s)\]
+    strings.forEach\[ s | println(s) \]
   }
 ] 
 
@@ -492,7 +492,7 @@ SDK without any further ado.
 
 code[Xtend][
   "hello".toFirstUpper // calls StringExtensions.toFirstUpper(String)
-  listOfStrings.map \[ toUpperCase \] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
+  listOfStrings.map\[ toUpperCase \] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
 ]
 
 Have a look at the JavaDoc to see what is there:

@@ -69,7 +69,7 @@ In the category e[Xtend/Compiler] enter the directory name (see screenshot). It 
 
 img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclipse][][]
 
-section2:library[The Runtime Library]
+section:library[The Runtime Library]
 
 The compiler requires a small runtime library e[org.eclipse.xtend.lib] on the classpath, which provides useful extensions
 to existing classes and interfaces from the JDK. Many 

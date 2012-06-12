@@ -6,7 +6,7 @@ of the project containing the Xtend files.
 
 section:propertyAnnotation[@Property]
 
-For fields that are annotated as code[Xtend][@Property], the Xtend compiler will generate a Java field, a
+For fields that are annotated as codeRef[org.eclipse.xtend.lib.Property][code[Xtend][@Property]], the Xtend compiler will generate a Java field, a
 getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
 an code[_] and have the visibility of the Xtend field. The accessors methods are always code[Xtend][public]. 
 Thus, an Xtend field
@@ -27,11 +27,11 @@ code[Java][
   public void setName(final String name) {
     this._name = name;
   }
-] 
+]
 
 section:dataAnnotation[@Data]
 
-The annotation code[Xtend][@Data], will turn an annotated class into a value object class. A class annotated with code[Xtend][@Data] 
+The annotation codeRef[org.eclipse.xtend.lib.Data][code[Xtend][@Data]], will turn an annotated class into a value object class. A class annotated with code[Xtend][@Data] 
 has the following effect:
 
 ul[

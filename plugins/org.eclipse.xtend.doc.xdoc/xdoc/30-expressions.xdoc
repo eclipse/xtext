@@ -31,12 +31,13 @@ because the signal-to-noise ration is a bit better, but generally you should use
 least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
 Java's unicode notation. Contrary to Java, strings can span multiple lines.
 
+%% TODO '\u00a1Hola el mundo!' Highlighting for unicode escape sequences
+
 code[Xtend][
   'Hello World !'
   "Hello World !"
   'Hello "World" !'
   "Hello \"World\" !"
-  '\u00a1Hola el mundo!'
   "Hello 
   
     World !"
