@@ -35,7 +35,7 @@ Here is an example:
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;elements.get(0)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -54,7 +54,13 @@ Package declarations look like in Java. There are two small differences:
 </ul>
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;com.acme<br/>
+</p>
+</div>
+</div>
 </p>
 <a name="imports"></a>
 <h2>Imports</h2>
@@ -71,7 +77,7 @@ As in Java all classes from the <span class="inlinecode">java.lang</span> packag
 <div class="incode">
 <p class="code">
 <span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*<br/>
 </p>
 </div>
 </div>
@@ -107,7 +113,7 @@ The most simple class looks like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -121,7 +127,7 @@ A more advanced generic class declaration in Xtend:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
 &nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -144,7 +150,7 @@ line.
 &nbsp;&nbsp;<span class="keyword">new</span>()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>(<span class="string">"default"</span>)<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -176,7 +182,7 @@ Fields marked as <span class="inlinecode"><span class="keyword">static</span></s
 &nbsp;&nbsp;<span class="keyword">var</span>&nbsp;name&nbsp;=&nbsp;<span class="string">&apos;Foo&apos;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;type&nbsp;String&nbsp;is&nbsp;inferred&nbsp;<br/>
 </span>&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;UNIVERSAL_ANSWER&nbsp;=&nbsp;42&nbsp;<span class="comment">//&nbsp;final&nbsp;field&nbsp;with&nbsp;inferred&nbsp;type&nbsp;int<br/>
 </span>&nbsp;&nbsp;...<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -200,7 +206,7 @@ exactly the same signature. The only exceptions are dispatch methods, which are 
 <p class="code">
 <span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(0)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -216,7 +222,7 @@ Xtend supports the <span class="inlinecode"><span class="keyword">static</span><
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;createInstance()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyClass(<span class="string">&apos;foo&apos;</span>)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -228,7 +234,7 @@ As in Java 5, Xtend allows vararg parameters:
 <p class="code">
 <span class="keyword">def</span>&nbsp;printAll(String...&nbsp;strings)&nbsp;{<br/>
 &nbsp;&nbsp;strings.forEach[&nbsp;s&nbsp;|&nbsp;println(s)&nbsp;]<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -245,7 +251,7 @@ class. Also specifying the return type is mandatory since it cannot be inferred.
 <p class="code">
 <span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;MyAbstractClass()&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;abstractMethod()&nbsp;<span class="comment">//&nbsp;no&nbsp;body<br/>
-</span>}
+</span>}<br/>
 </p>
 </div>
 </div>
@@ -265,7 +271,7 @@ Example:
 <p class="code">
 <span class="keyword">override</span>&nbsp;String&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(1)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -296,7 +302,7 @@ compiler will rethrow the checked exception silently (using the sneaky-throw tec
 &nbsp;*/</span><br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sneakyThrowException()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;Exception<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -313,7 +319,7 @@ That is the method
 <p class="code">
 <span class="keyword">def</span>&nbsp;String&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(1)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -325,7 +331,7 @@ could be declared like this:
 <p class="code">
 <span class="keyword">def</span>&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(1)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -346,7 +352,7 @@ you would declare it like this:
 <p class="code">
 <span class="keyword">def</span>&nbsp;&lt;T&gt;&nbsp;second(List&lt;T&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;elements.get(1)<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -373,7 +379,7 @@ A dispatch method is marked using the keyword <span class="inlinecode"><span cla
 <br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -406,7 +412,7 @@ For the two dispatch methods in the example above the following Java code would 
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -432,7 +438,7 @@ method declaration is considered more specific since its first parameter type is
 <br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Integer&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -453,7 +459,7 @@ generates the following Java code :
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x,&nbsp;y).toString());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -474,7 +480,7 @@ you can declare a dispatch case using the type <a class="jdoc" href="http://down
 <br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Void&nbsp;x)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;null"</span>&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -495,7 +501,7 @@ This compiles to the following Java code:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -516,7 +522,7 @@ For example, consider the following Java class :
 &nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
 </span>&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -538,7 +544,7 @@ and the following Xtend class which extends the Java class :
 &nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -561,7 +567,7 @@ The resulting dispatch method in the generated Java class <span class="inlinecod
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(it).toString());<br/>
 &nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -592,7 +598,7 @@ Annotations are available on classes, fields, methods and parameters. Here is an
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
 </span>&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -608,7 +614,14 @@ Extension methods allow to add new methods to existing types without modifying t
 This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 method is called on the argument parameter as if it was one of its members.
-<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span></span>   
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")<br/>
+</span>
+</p>
+</div>
+</div>
 </p>
 <p>
 Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
@@ -619,13 +632,25 @@ some "service class". That works, but the code is less readable and less object-
 like this. In Java for instance you often see code like this:
 </p>
 <p>
-<span class="inlinecode">persistenceManager.save(myObject);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+persistenceManager.save(myObject);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Without tying your entities to the persistenceManager, extension methods allow you to write
 </p>
 <p>
-<span class="inlinecode">myObject.save</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myObject.save<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 There are different ways to make methods available as extensions, which are described in the following.
@@ -641,7 +666,8 @@ SDK without any further ado.
 <div class="incode">
 <p class="code">
 <span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;calls&nbsp;StringExtensions.toFirstUpper(String)<br/>
-</span>listOfStrings.map[&nbsp;toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)</span>
+</span>listOfStrings.map[&nbsp;toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)<br/>
+</span>
 </p>
 </div>
 </div>
@@ -692,7 +718,7 @@ All visible non-static methods of the current class and its super types are auto
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Object&nbsp;obj)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;obj.doSomething()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.doSomething(obj)<br/>
 </span>&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -710,7 +736,13 @@ thus making all imported static functions available as extensions methods.
 </p>
 <p>
 The following import declaration 
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 allows to use its methods like this:
@@ -718,7 +750,8 @@ allows to use its methods like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">new</span>&nbsp;MyClass().singletonList()&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())</span>
+&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())<br/>
+</span>
 </p>
 </div>
 </div>
@@ -741,7 +774,7 @@ You could have the following interface
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;save(Entity&nbsp;e);<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;update(Entity&nbsp;e);<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;delete(Entity&nbsp;e);<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -755,7 +788,7 @@ And if you have obtained an instance of that type (through a factory or dependen
 &nbsp;&nbsp;<span class="keyword">extension</span>&nbsp;EntityPersistence&nbsp;ep&nbsp;=&nbsp;Factory.get(<span class="keyword">typeof</span>(EntityPersistence))<br/>
 &nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -771,7 +804,8 @@ You are able to save, update and delete any entity like this:
 person.save&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.save(person)<br/>
 </span>person.name&nbsp;=&nbsp;<span class="string">&apos;Horst&apos;</span><br/>
 person.update&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.update(person)<br/>
-</span>person.delete&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.delete(person)</span>
+</span>person.delete&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.delete(person)<br/>
+</span>
 </p>
 </div>
 </div>

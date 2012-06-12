@@ -149,13 +149,27 @@
 		  <li><em>Xtend Introductory Examples</em> contains a couple of example code snippets illustrating certain
 		    aspects and strengths of Xtend. 
 		    It for instance shows how to build an API which allows for writing code like this:
-		    <span class="inlinecode">assertEquals(42.km/h,&nbsp;(40_000.m&nbsp;+&nbsp;2.km)&nbsp;/&nbsp;60.min)</span>
+		    <div class="literallayout">
+		  	<div class="incode">
+		  		<p class="code">
+		  			assertEquals(42.km/h,&nbsp;(40_000.m&nbsp;+&nbsp;2.km)&nbsp;/&nbsp;60.min)
+		  		</p>
+		  	</div>
+		  </div>
+		  
 		    Also the <a href="13-getting-started.php#moviesExample.php" title="Go to &quot;The Movies Example&quot;">the movies example</a> explained in detail in <a href="13-getting-started.php#moviesExample.php" title="Go to &quot;The Movies Example&quot;">the next section</a>
 		    is included there.</li>
 		  <li><em>Xtend Solutions For Euler</em> contains solutions to a lot of the problems you will find at <a href="http://projecteuler.net/" >Project Euler's website</a>.
 		     These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1" >Euler Problem 1</a> can be solved
 		     with the following expression :
-		     <span class="inlinecode">(1..999).filter[&nbsp;i&nbsp;|&nbsp;i&nbsp;%&nbsp;3&nbsp;==&nbsp;0&nbsp;||&nbsp;i&nbsp;%&nbsp;5&nbsp;==&nbsp;0&nbsp;].reduce[&nbsp;i1,&nbsp;i2&nbsp;|&nbsp;i1&nbsp;+&nbsp;i2&nbsp;]</span>
+		     <div class="literallayout">
+		  	<div class="incode">
+		  		<p class="code">
+		  			(1..999).filter[&nbsp;i&nbsp;|&nbsp;i&nbsp;%&nbsp;3&nbsp;==&nbsp;0&nbsp;||&nbsp;i&nbsp;%&nbsp;5&nbsp;==&nbsp;0&nbsp;].reduce[&nbsp;i1,&nbsp;i2&nbsp;|&nbsp;i1&nbsp;+&nbsp;i2&nbsp;]
+		  		</p>
+		  	</div>
+		  </div>
+		  
 		  </li>
 		</ul>
 		</p>
@@ -181,7 +195,13 @@
 			<p>
 			The movie database is a plain text file (data.csv) with data sets describing movies.
 			Here is an example data set:
-			<span class="inlinecode">Naked&nbsp;Lunch&nbsp;&nbsp;1991&nbsp;&nbsp;6.9&nbsp;&nbsp;16578&nbsp;&nbsp;Biography&nbsp;&nbsp;Comedy&nbsp;&nbsp;Drama&nbsp;&nbsp;Fantasy</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						Naked&nbsp;Lunch&nbsp;&nbsp;1991&nbsp;&nbsp;6.9&nbsp;&nbsp;16578&nbsp;&nbsp;Biography&nbsp;&nbsp;Comedy&nbsp;&nbsp;Drama&nbsp;&nbsp;Fantasy
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			The values are separated by two spaces. The columns are :
@@ -260,14 +280,20 @@
 			<p>
 			The initialization on the right hand side first creates a fresh instance of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/FileReader.html" title="java.io.FileReader">FileReader</abbr></a>.
 			Then the method <span class="inlinecode">readLines()</span> is invoked on that instance. But if you have a look at <span class="inlinecode">FileReader</span> you will not find
-			such a method, because <span class="inlinecode">readLines()</span> is in fact a static method from Google Guava's <abbr title="com.google.common.io.CharStreams" >CharStreams</abbr> which was imported 
+			such a method, because <span class="inlinecode">readLines()</span> is in fact a static method from Google Guava's <a class="jdoc" href="http://guava-libraries.googlecode.com/svn/tags/release09/javadoc/com/google/common/io/CharStreams.html" title="com.google.common.io.CharStreams">CharStreams</abbr></a> which was imported 
 			as an <a href="20-classes-and-functions.php#extensionImports.php" title="Go to &quot;Extension Imports&quot;">extension</a> which allows us to use this readable syntax.
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;com.google.common.io.CharStreams.*
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
-			<abbr title="com.google.common.io.CharStreams" ><span class="inlinecode">CharStreams.readLines(Reader)</span></abbr> returns a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="java.util.List"><span class="inlinecode">List&lt;String&gt;</span></abbr></a> on which we call another extension method called <span class="inlinecode">map</span>.
+			<a class="jdoc" href="http://guava-libraries.googlecode.com/svn/tags/release09/javadoc/com/google/common/io/CharStreams.html" title="com.google.common.io.CharStreams"><span class="inlinecode">CharStreams.readLines(Reader)</span></abbr></a> returns a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="java.util.List"><span class="inlinecode">List&lt;String&gt;</span></abbr></a> on which we call another extension method called <span class="inlinecode">map</span>.
 			That one is defined in the <a href="12-Installation.php#library.php" title="Go to &quot;The Runtime Library&quot;">runtime library</a> (<a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="org.eclipse.xtext.xbase.lib.ListExtensions">ListExtensions.map(...)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>) and is always imported and
 			therefore automatically available on all lists. The <span class="inlinecode">map</span> extension expects a function as a parameter.
 			It basically invokes that function for each value in the list and returns another list containing the results of the function invocations.
@@ -280,7 +306,13 @@
 			call <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Iterable.html" title="java.lang.Iterable"><span class="inlinecode">Iterable.iterator()</span></abbr></a> on it.
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">val</span>&nbsp;segments&nbsp;=&nbsp;line.split(<span class="string">&apos;&nbsp;&nbsp;&apos;</span>).iterator
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			Now we use the iterator to create an instance of <span class="inlinecode">Movie</span>.
@@ -328,14 +360,34 @@
 			the entry <span class="inlinecode"><span class="string">&apos;Action&apos;</span></span>. Note that unlike the lambda we used to turn the lines in the file into movies, we 
 			have not declared a parameter name this time. 
 			We could have written 
-			<span class="inlinecode">movies.filter[&nbsp;movie&nbsp;|&nbsp;movie.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[&nbsp;movie&nbsp;|&nbsp;movie.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size
+					</p>
+				</div>
+			</div>
+			
 			but since we left out the name and the vertical bar the variable is automatically named <span class="inlinecode"><span class="keyword">it</span></span> which
 			(like <span class="inlinecode"><span class="keyword">this</span></span>) is an <a href="30-expressions.php#implicitVariables.php" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a>. That is why we can write either
 			</p>
 			<p>
-			<span class="inlinecode">movies.filter[&nbsp;<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[&nbsp;<span class="keyword">it</span>.categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size
+					</p>
+				</div>
+			</div>
+			
 			or 
-			<span class="inlinecode">movies.filter[&nbsp;categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[&nbsp;categories.contains(<span class="string">&apos;Action&apos;</span>)&nbsp;].size
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			Eventually we call <span class="inlinecode">size</span> on the resulting iterable which also is an extension method defined in 
@@ -366,7 +418,13 @@
 			</p>
 			<p>
 			We could have sorted descending and take the head of the list as well:
-			<span class="inlinecode">movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;-rating&nbsp;].head.year</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						movies.filter[&nbsp;(1980..1989).contains(year)&nbsp;].sortBy[&nbsp;-rating&nbsp;].head.year
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			Note that first sorting and then taking the last or first is slightly more expensive than needed. We could

@@ -13,7 +13,7 @@ Thus, an Xtend field
 
 code[Xtend][
   @Property String name
-] 
+]
 
 will compile to the Java code
 

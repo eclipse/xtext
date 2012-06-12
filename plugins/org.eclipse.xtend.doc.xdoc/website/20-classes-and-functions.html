@@ -139,7 +139,13 @@
 			</ul>
 			</p>
 			<p>
-			<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">package</span>&nbsp;com.acme
+					</p>
+				</div>
+			</div>
 			</p>
 		<a name="imports" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
@@ -739,7 +745,13 @@
 			This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 			Instead of passing the first argument of an extension method inside the parentheses of a call, the 
 			method is called on the argument parameter as if it was one of its members.
-			<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span></span>   
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;toFirstUper("hello")</span>
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
@@ -750,13 +762,25 @@
 			like this. In Java for instance you often see code like this:
 			</p>
 			<p>
-			<span class="inlinecode">persistenceManager.save(myObject);</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						persistenceManager.save(myObject);
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			Without tying your entities to the persistenceManager, extension methods allow you to write
 			</p>
 			<p>
-			<span class="inlinecode">myObject.save</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						myObject.save
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			There are different ways to make methods available as extensions, which are described in the following.
@@ -825,7 +849,13 @@
 			</p>
 			<p>
 			The following import declaration 
-			<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
+					</p>
+				</div>
+			</div>
 			</p>
 			<p>
 			allows to use its methods like this:
