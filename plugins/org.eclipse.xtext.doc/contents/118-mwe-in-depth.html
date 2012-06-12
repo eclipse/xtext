@@ -35,7 +35,7 @@ module that does nothing but print a message to standard out. The
 second module is assembled of three components that read an Ecore 
 file, transform the contained classifier-names to upper-case and 
 serialize the resource back to a new file. The last example uses 
-the life-cycle methods of the <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr> 
+the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> 
 to print the execution time of the workflow.
 </p>
 <a name="MWE2HelloWorld"></a>
@@ -104,7 +104,7 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 It looks like a simple POJO and that&apos;s the philosophy behind MWE2. 
 It is easily possible to assemble completely independent objects in 
 a declarative manner. To make the workflow executable with the 
-<abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr>, the component 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a>, the component 
 <span class="inlinecode">SayHello</span> must be nested in a root 
 workflow:
 </p>
@@ -124,7 +124,7 @@ Workflow&nbsp;{<br/>
 </div>
 </p>
 <p>
-The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr> 
+The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> 
 is implicitly imported in MWE2 modules to make the the modules more 
 concise. The execution result of this workflow will be revealed 
 after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as 
@@ -603,8 +603,8 @@ without a default value.
 <p>
 It is not only possible to define mandatory properties for MWE2 
 modules but for classes as well. Therefore MWE2 ships with the 
-<abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
-<abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr>, the module validation will fail if no value was assigned
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a>, the module validation will fail if no value was assigned
 to that feature.
 </p>
 <a name="MWE2NamedComponents"></a>

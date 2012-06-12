@@ -250,22 +250,22 @@ Workflow&nbsp;{<br/>
 </div>
 </p>
 <p>
-Here the root element is <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr> and is part of the very slim runtime 
+Here the root element is <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> and is part of the very slim runtime 
 model shipped with MWE2. It accepts 
 <span class="inlinecode">bean</span>s and <span class="inlinecode">component</span>s. A <span class="inlinecode"><span class="keyword">var</span></span> declaration is a first class concept of MWE2&apos;s configuration language 
 and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
 Note that you can refer to the variables using the <span class="inlinecode">${variable-name}</span> notation. 
 </p>
 <p>
-The method <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr> does nothing but provides a means to apply global side-effects, which 
+The method <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr></a> does nothing but provides a means to apply global side-effects, which 
 unfortunately is required sometimes. In this example we do a so called <em>EMF stand-alone setup</em>. This class 
 initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
 e.g. it allows to populate EMF&apos;s singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a>.
 </p>
 <p>
-Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr> method 
-accepts instances of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr>, which is the primary concept of MWE2&apos;s workflow model. The
-language generator component itself is an instance of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr> and can therefore be used within MWE2 workflows. 
+Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr></a> method 
+accepts instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a>, which is the primary concept of MWE2&apos;s workflow model. The
+language generator component itself is an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> and can therefore be used within MWE2 workflows. 
 </p>
 <a name="generator_6"></a>
 <h3>Standard Generator Fragments</h3>
