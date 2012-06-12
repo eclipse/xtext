@@ -188,8 +188,8 @@
 			</p>
 			<p>
 			Xbase offers a parser rule <em>JvmTypeReference</em> which supports the full syntax of a Java type reference
-			and instantiates a JVM element of type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>. So
-			let us start by inheriting from Xbase
+			and instantiates a JVM element of type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>. So
+			let us start by inheriting from Xbase:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -203,10 +203,10 @@
 			</p>
 			<p>
 			As we can express all kinds of Java type references directly now, the indirection for <em>DataTypes</em> 
-			is no longer necessary. To eliminate it, all cross-references to <em>Types</em> have to be replaced by calls to the <em>JvmTypeReferences</em>
-			rule. The rules <em>DataType</em>, <em>Type</em>, and <em>QualifiedName</em> become obsolete (the latter is already defined
+			is no longer necessary. To eliminate it, all cross-references to <em>Types</em> have to be replaced by calls to the production rule <em>JvmTypeReference</em>.
+			The rules <em>DataType</em>, <em>Type</em>, and <em>QualifiedName</em> become obsolete (the latter is already defined
 			in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. As we now have all kinds of generic Java collections at hand,
-			<em>Feature.many</em> is obsolete, too. The whole grammar now reads as
+			<em>Feature.many</em> is obsolete, too. The whole grammar now reads:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -259,16 +259,16 @@
 			</p>
 			<p>
 			Being able to parse a Java type reference is already nice, but we also have to write them back to their string
-			representation when we generate Java code. Into the bargain, a generic type reference with fully qualified
-			class names can become a bit bulky. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a> shortens
+			representation when we generate Java code. Unfortunately, a generic type reference with fully qualified
+			class names can become a bit bulky. Therefore, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a> shortens
 			fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReferences</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a> by means of the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.html" title="org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer">TypeReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java" title="View Source Code" >(src)</a>. This utility encapsulates how type
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReferences</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a> by means of the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.html" title="org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer">TypeReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java" title="View Source Code" >(src)</a>. This utility encapsulates how type
 			references may be serialized depending on the concrete context in the output.
 			</p>
 			<p>
-			The following snippet shows our code generator using an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a>
-			in conjunction with as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.html" title="org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer">TypeReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java" title="View Source Code" >(src)</a>.
+			The following snippet shows our code generator using an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a>
+			in conjunction with as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.html" title="org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer">TypeReferenceSerializer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java" title="View Source Code" >(src)</a>.
 			We create a new instance and pass it through the generation functions, collecting types on the way. As
 			the import section in a Java file precedes the class body, we create the body into a String variable
 			and assemble the whole file's content in a second step.
@@ -285,7 +285,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>

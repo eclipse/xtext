@@ -177,7 +177,7 @@
 		<a name="xbaseLanguageRef_Syntax" ></a>
 		<h2>Lexical Syntax</h2>
 		<p>
-		Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. 
+		Xbase comes with a small set of terminal rules, which can be overridden and hence changed by users. 
 		However the default implementation is carefully chosen and it is recommended to stick with the 
 		lexical syntax described in the following.
 		</p>
@@ -185,9 +185,9 @@
 		<h3>Identifiers</h3>
 		<p>
 		Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
-		Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
+		identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
 		while having less ambiguities. They start with a letter <em>a</em>-<em>z</em>, <em>A</em>-<em>Z</em> or an underscore followed
-		by more of these characters or a digit <em>0</em>-<em>9</em>. 
+		by more of these characters or any digit <em>0</em>-<em>9</em>. 
 		</p>
 		<a name="Xbase_Syntax_EscapedIdentifiers" ></a>
 		<h4><p>
@@ -195,11 +195,11 @@
 		</p>
 		</h4>
 		<p>
-		Identifiers may not have the same spelling as any reserved keyword. 
-		However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers 
+		Identifiers must not have the same spelling as any reserved keyword. 
+		However, this limitation can be avoided by escaping identifiers with the prefix <span class="inlinecode">^</span>. Escaped identifiers 
 		are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a 
-		keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
-		In such cases you use an escaped identifier <span class="inlinecode">^service</span> to reference the Java property.
+		keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em>. 
+		In such cases you can use the escaped identifier <span class="inlinecode">^service</span> to reference the Java property.
 		</p>
 		<a name="Xbase_Syntax_Identifiers_3" ></a>
 		<h4><p>
@@ -236,7 +236,7 @@
 		<h3>Comments</h3>
 		<p>
 		Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-		The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7" >§ 3.7 Comments</a>).
+		The syntax is the same as the one known from Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.7" >§ 3.7 Comments</a>).
 		</p>
 		<a name="Xbase_Syntax_Whitespace" ></a>
 		<h3>White Space</h3>
@@ -262,10 +262,11 @@
 		  <li><span class="inlinecode"><span class="keyword">instanceof</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">new</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">null</span></span></li>
-		  <li><span class="inlinecode"><span class="keyword">true</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">return</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">super</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">switch</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">throw</span></span></li>
+		  <li><span class="inlinecode"><span class="keyword">true</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">try</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">typeof</span></span></li>
 		  <li><span class="inlinecode"><span class="keyword">val</span></span></li>
@@ -274,7 +275,7 @@
 		</ol>
 		</p>
 		<p>
-		However, in case some of the keywords have to be used as identifiers, the escape character for <a href="199f-xbase-language-reference-syntax.php#Xbase_Syntax_EscapedIdentifiers.php" title="Go to &quot;Escaped Identifiers&quot;">identifiers</a> comes in handy. 
+		In case some of the keywords have to be used as identifiers, the escape character for <a href="199f-xbase-language-reference-syntax.php#Xbase_Syntax_EscapedIdentifiers.php" title="Go to &quot;Escaped Identifiers&quot;">identifiers</a> comes in handy. 
 		</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>
