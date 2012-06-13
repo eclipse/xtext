@@ -98,15 +98,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	}
 
 	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
-		if (potentialPrimitive instanceof XComputedTypeReference) {
-			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter) {
-				// since type parameters are never primitives, it's save to add them directly
-				return potentialPrimitive;
-			}
-		}
-		Primitives primitives = getServices().getPrimitives();
-		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
-		return result;
+		return UnboundTypeParameters.asWrapperType(potentialPrimitive, getServices().getPrimitives());
 	}
 
 }

@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -88,14 +89,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
-		if (potentialPrimitive instanceof XComputedTypeReference) {
-			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter){
-				return potentialPrimitive;
-			}
-		}
-		Primitives primitives = state.getServices().getPrimitives();
-		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
-		return result;
+		return UnboundTypeParameters.asWrapperType(potentialPrimitive, getState().getServices().getPrimitives());
 	}
 	
 	protected JvmTypeParameter getTypeParameter(JvmTypeReference referenceToTypeParameter) {
