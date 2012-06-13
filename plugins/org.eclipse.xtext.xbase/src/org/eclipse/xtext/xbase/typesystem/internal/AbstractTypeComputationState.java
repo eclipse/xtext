@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -315,4 +317,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
 
+	public UnboundTypeParameter createUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter) {
+		return resolvedTypes.createUnboundTypeParameter(expression, typeParameter);
+	}
 }
