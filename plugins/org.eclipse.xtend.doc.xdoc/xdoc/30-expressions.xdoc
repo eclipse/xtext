@@ -1,55 +1,53 @@
 chapter:Xtend_Expressions[Expressions]
 
-There are no statements in Xtend. Instead, everything is an expression and has a return value. That
-allows to use every Xtend expression on the right hand side of an assignment. For example, as a 
-code[Xtend][try catch] is an expression the following code is legal in Xtend: 
+Xtend does not have statements. Instead, everything is an expression and has a return value. That
+allows to compose your code in interesting ways. For example, you can have a
+code[Xtend][try catch] expression on the right hand side of an assignment: 
 code[Xtend][
   val data = try {
-    fileContentsToString('data.txt')
-  } catch (IOException e) {
+      fileContentsToString('data.txt')
+    } catch (IOException e) {
     'dummy data'
-  }
+    }
 ] 
 
-If code[fileContentsToString()] throws an code[IOException], it is caught and a default value is returned 
-and assigned to the variable code[data].
+If code[fileContentsToString()] throws an codeRef[java.io.IOException], it is caught and the string code['dummy data'] is assigned to the value code[data].
  
-In Xtend, expressions appear as ref:fields[initializers of fields] or as the bodies of constructors
-or methods. A method body in Xtend can either be a single ref:blocks[block expression] 
-or a ref:templates[template expression]. 
-
+Expressions can appear as ref:fields[initializers of fields], the body of constructors
+or methods and as values in annotations. A method body can either be a ref:blocks[block expression] 
+or a ref:templates[template expression].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_Literals[Literals]
 
-A literal denotes a fixed unchangeable value. Literals for strings, integers, boolean values,
-code[Xtend][null] and Java types are supported.
-
+A literal denotes a fixed unchangeable value. Literals for ref:stringLiterals[strings], ref:numberLiterals[numbers], ref:booleanLiteral[booleans],
+code[Xtend][null] and ref:typeLiteral[Java types] are supported.
 
 section2:stringLiterals[String Literals]
 
-A string literal is a valid expression and returns an instance of code[java.lang.String] of the given value.
-String literals are enclosed by a pair of single quotes or double quotes allowing to use the respective
-other unquoted inside the string. Special characters can be quoted with a backslash or defined using
-Java's unicode notation. On the contrary to Java, Xtend's strings can span multiple lines without the
-need to quote newline characters.
+A string literal is of type codeRef[java.lang.String] (just like in Java).
+String literals are enclosed in a pair of single quotes or double quotes. We mostly use single quotes
+because the signal-to-noise ration is a bit better, but generally you should use the terminals which are
+least likely occure in the actual string. Special characters can be quoted with a backslash or defined using
+Java's unicode notation. Contrary to Java, strings can span multiple lines.
+
+%% TODO '\u00a1Hola el mundo!' Highlighting for unicode escape sequences
+
 code[Xtend][
   'Hello World !'
   "Hello World !"
   'Hello "World" !'
   "Hello \"World\" !"
-  '\u00a1Hola el mundo!'
   "Hello 
   
     World !"
 ]
 
-
 section2:numberLiterals[Number Literals]
 
 Xtend supports roughly the same number literals as Java with a few differences.   
 First, there are no signed number literals. If you put a minus operator in front of an number 
-literal it is taken as a code[UnaryOperator] with one argument (the positive number 
+literal it is taken as a ref:operators[unary operator] with one argument (the positive number 
 literal). Second, as in Java 7, you can separate digits using code[_] for better readability
 of large numbers.
  
@@ -67,7 +65,7 @@ code[Xtend][
   0xbeef_beef_beef_beef_beef#BI // BigInteger
 ]
 
-An floating-point literal creates an code[Xtend][double] (suffix code[D] or none), a code[Xtend][float] 
+A floating-point literal creates a code[Xtend][double] (suffix code[D] or none), a code[Xtend][float] 
 (suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] you have to 
 specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point 
 literals.  
@@ -79,7 +77,6 @@ code[Xtend][
   0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
 ]
 
-
 section2:booleanLiteral[Boolean Literals]
 
 There are two boolean literals, code[Xtend][true] and code[Xtend][false] which correspond to their 
@@ -88,8 +85,7 @@ Java counterpart of type code[Xtend][boolean].
 
 section2:nullLiteral[Null Literal]
 
-The null pointer literal is code[Xtend][null]. It is a member of any reference type and
-the only member of the type code[java.lang.Void].
+The null pointer literal code[Xtend][null] has exactly the same semantics as in Java.
 
 
 section2:typeLiteral[Type Literals]
@@ -100,37 +96,21 @@ code[Xtend][
 ]
 
 
-section2:functionTypes[Function Types]
-
-Xbase introduces ref:closures[closures], and therefore an additional function 
-type signature. On the Java level a closure (or more generally any function object) is just an 
-instance of one of the types in codeRef[org.eclipse.xtext.xbase.lib.Functions], depending on the 
-number of arguments. However, as closures are a very important language feature, a special 
-syntax for function types has been introduced. So instead of writing 
-code[Xtend][
-  Function1<String,Boolean>
-] 
-one can write 
-code[Xtend][
-  (String)=>boolean
-]
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:typeCasts[Type Casts]
 
-Type cast behave like casts in Java, but have a slightly better readable syntax.
+A type cast behaves exactly like casts in Java, but has a slightly more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
 
 The conformance rules for casts are defined in the 
-link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5][Java Language Specification].
+link[http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html#5.5][Java Language Specification].
 Here are some examples:
 code[Xtend][
   something as MyClass
-  "" as Object
+  42 as Integer
 ]
 
-
+Although casts are supported you might want to use a ref:switchExpression[switch with a type guard] or a 
+ref:polymorphicDispatch[dispatch method] as a better and safer alternative.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:operators[Infix Operators and Operator Overloading]
@@ -138,15 +118,15 @@ section:operators[Infix Operators and Operator Overloading]
 There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
 to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 operators for any type just by implementing the corresponding method signature. As an example, the 
-ref:library[Xtend runtime library] contains a class code[BigDecimalExtensions] that defines operators for 
-code[BigDecimals] which allows the following code:
+ref:library[Xtend runtime library] contains a class codeRef[org.eclipse.xtext.xbase.lib.BigDecimalExtensions] that defines operators for 
+codeRef[java.math.BigDecimal][BigDecimals] which allows the following code:
 code[Xtend][
-  val x=new BigDecimal('2.71')
-  val y=new BigDecimal('3.14')
-  x+y    // calls BigDecimalExtension.operator_plus(x,y)
+  val x = 2.71BD
+  val y = 3.14BD
+  val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
 ]
 
-The following defines the operators and the corresponding Java method signatures / expressions.
+This is the complete list of all available operators and their corresponding method signatures:
 
 table[
   tr[td[code[e1 += e2]]       td[code[e1.operator_add(e2)]]]
@@ -200,18 +180,21 @@ as the plain assignment operator code[=] is. That is a = b = c is executed as a 
 other operators are left-to-right associative. Parenthesis can be used to adjust the default 
 precedence and associativity. 
 
-
 section2[Short-Circuit Boolean Operators]
 
-If the operators code[||] and code[&&] are used in a context where the left hand operand is of 
-type code[boolean], the operation is evaluated in short circuit mode, which means that the right 
-hand operand might not be evaluated at all in the following cases: 
+If the operators code[||] and code[&&] are bound to the library methods 
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_and(boolean l, boolean r)]] resp. 
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_or(boolean l, boolean r)]] the operation is evaluated in short circuit mode.
+That means that the right hand operand might not be evaluated at all in the following cases: 
 ol[
   item[in the case of code[||] the operand on the right hand side is not evaluated if the left 
     operand evaluates to code[Xtend][true].]
   item[in the case of code[&&] the operand on the right hand side is not evaluated if the left 
     operand evaluates to code[Xtend][false].]
-] 
+]
+
+Still you can overload these operators for your types or even override it for booleans, in which case
+both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 
 section2[Examples]
 
@@ -225,441 +208,44 @@ x && y || z
 ]
 
 
-section2:propertyAssignment[Assignments]
+section2:assignments[Assignments]
 
-ref:variableDeclaration[Local variables] can be reassigned using the code[=] operator. Also 
-properties can be set using this operator given the following expression: 
+ref:variableDeclaration[Local variables] can be reassigned using the code[=] operator. 
+
 code[Xtend][
-  myObj.myProperty = "foo"
+  var greeting = 'Hello'
+  if (isInformal)
+    greeting = 'Hi'
 ]
 
-The compiler first looks up whether there is an accessible Java Field called code[myProperty] on 
-the type of code[myObj]. If there exists such a field it translates to the following Java expression:
+Of course, also non-final fields can be set using an assignment: 
+code[Xtend][
+  myObj.myField = 'foo'
+]
+
+section3:propertyAssignments[Setting Properties]
+
+The lack of properties in Java leads to a lot of syntactic noise when working with data objects.
+As Xtend is designed to integrate with existing Java APIs it respects the Java Beans convention,
+hence you can call a setter using an assignment:
+
 code[Java][
-  myObj.myProperty = "foo";
+  myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")
 ]
 
-Remember in Xtend everything is an expression and has to return something. In the case of simple 
-assignments the return value is the value returned from the corresponding Java expression, which 
-is the assigned value.
+The setter is only used if the field is not accessible from the given context. That is why the 
+ref:propertyAnnotation[@Property annotation] would rename the local field to code[_myProperty].
 
-If there is no accessible field on the left operand's type, a method called 
-code[setMyProperty] (JavaBeans setter method) is looked up. It has to take one argument 
-of the type (or a super type) of the right hand operand. The return value will be whatever the 
-setter method returns (which usually is code[Xtend][void]). As a result the compiler translates to:
-code[Java][
-  myObj.setMyProperty("foo")
-]
+The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
+If it is translated to a setter method it yields whatever the setter method returns.
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:variableDeclaration[Variable Declarations]
-
-Variable declarations are only allowed within ref:blocks[blocks]. They are visible in any 
-subsequent expressions in the block. 
-
-A variable declaration starting with the keyword code[Xtend][val] denotes a so called value, which
-is essentially a final (i.e. unsettable) variable. In some cases, one needs to update the value of 
-a reference. In such situations the variable needs to be declared with the keyword code[Xtend][var], 
-which stands for 'variable'.
-
-A typical example for using code[Xtend][var] is a counter in a loop:
-code[Xtend][
-{
-  val max = 100
-  var i = 0
-  while (i < max) {
-    println("Hi there!")
-    i = i + 1
-  }
-}
-]
-
-Although overriding or shadowing variables from outer scopes is allowed, it is usually only used 
-to overload the ref:implicitVariables[implicit variable code[Xtend][it]], in order to subsequently access 
-an object's features in an unqualified manner.
-
-Variables declared outside a closure using the code[Xtend][var] keyword are not accessible from within a
-closure.
-
-section2[Typing]
-
-The return type of a variable declaration expression is always code[Xtend][void]. 
-The type of the variable itself can either be explicitly declared or be inferred from the right hand side
-expression. Here is an example for an explicitly declared type:
-code[Xtend][
-  var List<String> msg = new ArrayList(); 
-]
-
-In such cases, the type of the right hand expression must conform to the type 
-of the expression on the left side. 
-
-Alternatively the type can be left out and will be inferred from the initialization expression:  
-code[Xtend][
-  var msg = new ArrayList<String>(); // -> type ArrayList<String>  
-]
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:featureCalls[Feature Calls]
-
-A feature call is used to invoke members of objects, such as fields and methods, but also can refer 
-to local variables and parameters, which are made available for the current expression's scope. 
-
-section2:propertyAccess[Property Access]
-
-Feature calls are directly translated to their Java equivalent with the exception, that for calls 
-to properties an equivalent rule as described in ref:propertyAssignment applies. That is, for the 
-following expression
-code[Xtend][
-  myObj.myProperty
-]
-
-the compiler first looks for an accessible field in the type of code[Xtend][myObj]. If no such field 
-exists it looks for a method called code[Java][myProperty()] before it looks for the getter methods 
-code[Java][getMyProperty()]. If none of these members can be found the expression is unbound and a 
-compiliation error is indicated.
-
-
-section2:implicitVariables[Implicit Variables e[this] and e[it]]
-
-If the current scope contains a variable named code[Xtend][this] or code[Xtend][it], the compiler 
-will make all its members available to the scope. 
-That is one of 
-code[Xtend][
-  it.myProperty
-  this.myProperty
-]
-
-is a valid expression
-code[Xtend][
-  myProperty
-]
-
-is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
-which would have higher precedence. 
-
-As code[Xtend][this] is bound to the surrounding object in Java, code[Xtend][it] can be used
-in finer-grained constructs such as function parameters. That is why code[Xtend][it.myProperty] has 
-higher precedence than code[Xtend][this.myProperty]. code[Xtend][it] is also the 
-ref:implicitParameter[default parameter name in closures]. 
-
-You can explicitely bind code[Xtend][it] for the context of a closure using the e[with-Operator] code[=>] 
-code[Xtend][
-  newArrayList => \[ // bind 'it' to the result of the preceeding expression
-  	add("Apple")     // same as 'it.add("Apple")'
-  	add("Pear")
-  	add("Orange")
-  \]
-]
-
-
-section2:nullSafeFeatureCalls[Null-Safe Feature Call]
-
-Checking for code[Xtend][null] references can make code very unreadable. In many situations it is ok for an 
-expression to return code[Xtend][null] if a receiver was code[Xtend][null]. Xtend supports the safe navigation 
-operator code[?.] to make such code better readable.
-
-Instead of writing 
-code[Java][
-  if (myRef != null) myRef.doStuff()
-]
-
-one can write
-code[Xtend][
-  myRef?.doStuff()
-]
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:constructorCall[Constructor Call]
-
-Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java, e.g.
-code[Xtend][
-  new String()
-  new ArrayList<BigDecimal>()
-]
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:closures[Closures]
-
-A closure is a literal that defines an anonymous function. A closure also captures the current
-scope, so that any final variables and parameters visible at construction time can be referred to 
-in the closure's expression. 
-code[Xtend][
-  val func = \[String s | s.length>3\]
-]
-
-The surrounding square brackets are optional if the closure is the single argument of a method 
-invocation. That is you can write
-code[Xtend][
-  myList.findFirst(e | e.name==null)
-]
-instead of
-code[Xtend][
-  myList.findFirst(\[e | e.name==null\])
-]
-
-But in all other cases the square brackets are mandatory.
-
-
-section2:closuresTypeInference[Typing]
-
-Closures are expressions which produce e[Function] objects. The type is a ref:functionTypes[function type], consisting of the types of the 
-parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
-The parameter types can be inferred if the closure is used in a context where this is possible.
-
-For instance, given the following Java method signature:
-code[Java][
-  public <T> T find(List<T> list, Function1<T,Boolean> predicate) 
-] 
-
-the type of the parameter can be inferred. Which allows users to write:
-code[Xtend][
-  newArrayList("Foo", "Bar").find(e | e=="Bar")
-]
-
-instead of 
-code[Xtend][
-  newArrayList("Foo", "Bar").find(String e | e=="Bar")
-]
-
-Here are some more examples:
-code[Xtend][
-  \[| "foo"\]   // closure without parameters
-  \[String s | s.toUpperCase()\] // explicit argument type
-  \[a,b,c | a+b+c\] // inferred argument types
-]
-
-
-section2:functionMapping[Function Mapping]
-
-An Xtend closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xtend. There is an interface 
-for each number of parameters (current maximum is six parameters). The names of the interfaces are 
-ul[
-  item[e[Function0<ReturnType>] for zero parameters, ]
-  item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
-  item[e[Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
-  item[... ]
-  item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
-]
-or
-ul[
-  item[e[Procedure0] for zero parameters, ]
-  item[e[Procedure1<Param1Type>] for one parameters, ]
-  item[e[Procedure2<Param1Type, Param2Type>] for two parameters, ]
-  item[... ]
-  item[e[Procedure6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type>] for six parameters, ]
-]
-if the return type is code[Java][void].
-
-In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
-are automatically coerced to expected types if those types declare only one method (methods from code[java.lang.Object]
-do not count).
-
-As a result given the method code[IterableExtensions.sort(Iterable<T>, Comparator<? super T>)] is available
-as an extension method, it can be invoked like this
-
-code[Xtend][
-  newArrayList( 'aaa', 'bb', 'c' ).sort(
-    e1, e2 | if ( e1.length > e2.length ) {
-          -1 
-         } else if ( e1.length < e2.length ) { 
-          1
-         } else { 
-          0
-         })
-]
-
-
-section2:implicitParameter[Implicit Parameter e[it]]
-
-If a closure has a single parameter whose type can be inferred, the declaration of the parameter can
-be ommitted. Use code[Xtend][it] to refer to the parameter inside the closure's body.
-code[Xtend][
-  val (String)=>String function = \[toUpperCase\]  // equivalent to \[it | it.toUpperCase\]
-]
-
-
-section2:closuresExceptions[Exceptions in Closures]
-
-Checked exceptions that are thrown in the body of a closure are rethrown using the 
-ref:declaredExceptions[sneaky-throw technique], i.e. you do not have to declare them explicitly.
-
-
-section2:builderSyntax[Builder Syntax]
-
-If the last argument of a function call is a closure, it can be appended after the parenthesized parameter
-list. In combination with the implicit code[Xtend][it] parameter, skipping empty parentheses, and extension
-methods, this yields a very concise syntax. 
-
-code[Xtend][
-  val fruit = newArrayList('apple', 'pear', 'lemon')
-  fruit.map\[toUpperCase\]  // same as fruit.map(\[it | it.toUpperCase\])
-]
-
-This feature is especially useful when you are building object trees. A common pattern is to provide a set 
-of extension functions taking two parameters: the parent object and a closure to initialize the new child. 
-Here is an example for creating a simple tree of code[Nodes]:
-
-code[Xtend][
-class Node {
-  String label
-  List<Node> children
-  
-  def createNode(Node parent, (Node)=>void initializer) {
-    val child=new Node()
-    initializer.apply(child)
-    child
-  }
-
-  def tree() {
-    createNode(null) \[
-      label="root"
-      children += createNode \[
-        label="child0"
-      \]
-      children += createNode \[
-        label="child1"
-      \]
-    \]
-  }
-}
-]
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:ifExpression[If Expression]
-
-An if expression is used to choose two different values based on a predicate. While it has the 
-syntax of Java's if statement it behaves like Java's ternary operator 
-(code[Java][predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value.
-Consequently, you can use if expressions deeply nested within expressions.
-
-An expression 
-code[Xtend][
-  if (p) e1 else e2
-] 
-results in either the value code[e1] or code[e2] 
-depending on whether the predicate code[p] evaluates to code[Xtend][true] or code[Xtend][false]. 
-The else part is optional which is a shorthand for code[Xtend][else null]. That means 
-
-code[Xtend][
-  if (foo) x 
-]
-
-is the a short hand for
-
-code[Xtend][
-  if (foo) x else null
-]
-
-The type of an if expression is the common super type of the return types code[T1] and code[T2] 
-of the two expression code[e1] and code[e2]. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:switchExpression[Switch Expression]
-
-The code[Xtend][switch] expression is different from Java's. First, there is no fall through which means 
-only one code[Xtend][case] is evaluated at most. Second, the use of code[Xtend][switch] is not limited 
-to certain values but can be used for any object reference instead.
- 
-For a code[Xtend][switch] expression 
-code[Xtend][
-switch e {
-  case e1 : er1
-  case e2 : er2
-  ...
-  case en : ern
-  default : er
-}
-]
-
-the main expression code[e] is evaluated first and then each case sequentially. If the switch 
-expression contains a variable declaration using the syntax known from ref:forLoop, 
-the value is bound to the given name. Expressions of type code[java.lang.Boolean] or code[boolean] 
-are not allowed in a switch expression.
-
-The guard of each code[Xtend][case] clause is evaluated until the switch value equals the result of the 
-case's guard expression or if the case's guard expression evaluates to code[true]. Then the right hand 
-expression of the case evaluated and the result is returned.
-
-If none of the guards matches the default expression is evaluated an returned. If no default expression
-is specified the expression evaluates to code[Xtend][null].
-
-Example:
-
-code[Xtend][
-  switch myString {
-    case myString.length>5 : "a long string."
-    case 'some' : "It's some string."
-    default : "It's another short string."
-  }
-]
-
-section2[Type guards]
-
-In addition to the case guards one can add a so called e[Type Guard] which is syntactically just a
-ref:types[type reference] preceding an optional case keyword. The compiler will use that type
-for the switch expression in subsequent expressions. Example:
-code[Xtend][
-  var Object x = ...;
-  switch x {
-    String case x.length()>0 : x.length()
-    List<?> : x.size()
-    default : -1
-}
-]
-
-Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the 
-case's guard expression is executed using the same semantics explained previously. If the switch 
-expression contains an explicit declaration of a local variable or the expression references a local 
-variable, the type guard acts like a cast, that is all references to the switch value will be of the 
-type specified in the type guard.
-
-%% section2[Typing]
-%% 
-%% The return type of a switch expression is computed using the rules defined in ref:commonSuperType. 
-%% The set of types from which the common super type is computed corresponds to the types of each case's 
-%% result expression. In case a switch expression's type is computed using the expected type from the 
-%% context, it is sufficient to return the expected type if all case branches types conform to the 
-%% expected type.
-%% 
-%% section2[Examples]
-%% 
-%% ul[
-%%   item[
-%%     code[Xtend][
-%%       switch foo {
-%%         Entity : foo.superType.name
-%%         Datatype : foo.name
-%%         default : throw new IllegalStateException
-%%       }
-%%     ]
-%%   ]
-%%   item[
-%%     code[Xtend][
-%%       switch x : foo.bar.complicated('hello',42) {
-%%         case "hello42" : ...
-%%         case x.length<2 : ...
-%%         default : ....
-%%       }
-%%     ]
-%%   ]
-%% ]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:blocks[Blocks]
 
 The block expression allows to have imperative code sequences. It consists of a sequence of 
 expressions, and returns the value of the last expression. The return type of a block is also the 
-type of the last expression. Empty blocks return code[null]. 
+type of the last expression. Empty blocks return code[Xtend][null]. 
 ref:variableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as 
 a block's last expression.
 
@@ -676,15 +262,345 @@ code[Xtend][
 ]
 code[Xtend][
   {
-    var x = greeting();
+    var x = greeting
     if (x.equals("Hello ")) {
-      x+"World!"; 
+      x + "World!" 
     } else {
-      x;
+      x
     }
   }
 ]
 
+
+section:variableDeclaration[Variable Declarations]
+
+Variable declarations are only allowed within ref:blocks[blocks]. They are visible in any 
+subsequent expressions in the block. 
+
+A variable declaration starting with the keyword code[Xtend][val] denotes a value, which
+is essentially a final (i.e. unsettable) variable. In some cases, one needs to update the value of 
+a reference. In such situations the variable needs to be declared with the keyword code[Xtend][var], 
+which stands for 'variable'.
+
+A typical example for using code[Xtend][var] is a counter in a loop:
+code[Xtend][
+{
+  val max = 100
+  var i = 0
+  while (i < max) {
+    println("Hi there!")
+    i = i + 1
+  }
+}
+]
+
+Shadowing variables from outer scopes is not allowed, the only exception is the 
+ref:implicitVariables[implicit variable] code[Xtend][it].
+
+Variables declared outside a lambda expression using the code[Xtend][var] keyword are not accessible from within a
+lambda expressions.
+
+section2[Typing]
+
+The type of the variable itself can either be explicitly declared or be inferred from the right hand side
+expression. Here is an example for an explicitly declared type:
+code[Xtend][
+  var List<String> msg = new ArrayList
+]
+
+In such cases, the type of the right hand expression must conform to the type 
+of the expression on the left side.
+
+Alternatively the type can be left out and will be inferred from the initialization expression:  
+code[Xtend][
+  var msg = new ArrayList<String> // -> msg is of type ArrayList<String>  
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:featureCalls[Field Access and Method Invocation]
+
+A simple name can refer to a local field, variable or parameter. In addition
+it can point to a method with zero arguments, since empty parenthesis are optional. 
+
+section2:propertyAccess[Property Access]
+
+If there is no field with the given name and also no method with the name and zero parameters
+accessible, a simple name binds to a corresponding Java-Bean getter method if available :
+
+code[Xtend][
+  myObj.myProperty // myObj.getMyProperty()  (.. in case myObj.myProperty is not visible.)
+]
+
+section2:implicitVariables[Implicit Variables e[this] and e[it]]
+
+Like in Java an instance of the class is bound to code[Xtend][this]. Which allows for either qualifying
+field access or method invocations like in:
+
+code[Xtend][
+  this.myField
+]
+
+or omit the receiver:
+
+code[Xtend][
+  myField
+]
+
+You can use the variable name code[Xtend][it] to get the same behavior for any variable or parameter:
+
+code[Xtend][
+  val it = new Person
+  name = 'Horst' // translates to 'it.setName("Horst");'
+]
+
+Another speciality of the variable code[Xtend][it] is that it can be shadowed. This is especially useful
+when used together with ref:lambdas[lambda expressions].
+
+As code[Xtend][this] is bound to the surrounding object in Java, code[Xtend][it] can be used
+in finer-grained constructs such as ref:lambdas[lambda expressions]. That is why code[Xtend][it.myProperty] has 
+higher precedence than code[Xtend][this.myProperty].
+
+section2:staticAccess[Static Access]
+
+For accessing a static field or method you have to use the double colon code[::] like in this example:
+
+code[Xtend][
+   MyClass::myField
+   MyClass::myMethod('foo')
+]
+
+Alternatively you could import the method using a ref:imports[static import].
+
+section2:nullSafeFeatureCalls[Null-Safe Feature Call]
+
+Checking for code[Xtend][null] references can make code very unreadable. In many situations it is ok for an 
+expression to return code[Xtend][null] if a receiver was code[Xtend][null]. Xtend supports the safe navigation 
+operator code[?.] to make such code better readable.
+
+Instead of writing 
+code[Java][
+  if (myRef != null) myRef.doStuff()
+]
+
+one can write
+code[Xtend][
+  myRef?.doStuff
+]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:constructorCall[Constructor Call]
+
+Constructor calls have the same syntax as in Java. The only difference is that empty parenthesis
+are optional:
+code[Xtend][
+  new String() == new String
+  new ArrayList<BigDecimal>() == new ArrayList<BigDecimal>
+]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:lambdas[Lambda Expressions]
+
+A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
+a Java developer it is best to think of a lambda expression as an anonymous class, i.e. 
+like in the following Java code :
+
+code[Java][
+  // Java Code!
+  final JTextField textField = new JTextField();
+  textField.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      textField.setText("Something happened!");
+    }
+  });
+]
+
+This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man's replacement
+for lambda expressions in Java. 
+
+Xtend not only supports lambda expressions, but offers an extremely dense syntax for it. That is the
+code above can be written in Xtend like this:
+
+code[Xtend][
+  val textField = new JTextField
+  textField.addActionListener(\[ ActionEvent e |
+    textField.text = "Something happened!"
+  \])
+]
+
+As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
+Also a lambda expression like a method declares parameters. The lambda above has one parameter called code[e] which is of
+type code[ActionEvent]. You do not have to specify the type explicitly because it can be inferred from
+the context:
+
+code[Xtend][
+  textField.addActionListener(\[ e |
+    textField.text = "Something happened!"
+  \])
+]
+
+Also as lambdas with one parameter are a common case, there is a special short hand for them,
+which is to leave the declaration including the vertical bar out. The name of the ref:implicitVariables[single variable]
+will be code[Xtend][it] in that case:
+
+code[Xtend][
+  textField.addActionListener(\[
+    textField.text = "Something happened!"
+  \])
+]
+
+A lambda expression with zero arguments is written like this (note the bar after the opening bracket):
+
+code[Xtend][
+  val Runnable runnable = \[ |
+    println("Hello I'm executed!")
+  \]
+]
+
+When a method call's last parameter is a lambda it can be passed right after the parameter list.
+For instance if you want to sort some strings by their length, you could write :
+
+code[Xtend][
+  Collections::sort(someStrings) \[ a, b |
+    a.length - b.length
+  \]
+]
+
+which is just the same as writing
+
+code[Xtend][
+  Collections::sort(someStrings, \[ a, b |
+    a.length - b.length
+  \])
+]
+
+Since you can leave out empty parenthesis for methods which get a lambda as their only argument, you can reduce
+the code above further:
+
+code[Xtend][
+  textField.addActionListener \[
+    textField.text = "Something happened!"
+  \]
+]
+
+A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to 
+in the closure's expression. That is exactly what we did with the variable code[textField].
+
+section2:closureTypes[Typing]
+
+Lambdas are expressions which produce e[Function] objects. The type of a lambda expression generally depends on the target
+type, as seen in the previous examples. That is, the lambda expression can coerce to any interface which has declared only 
+one method (in addition to the ones inherited from codeRef[java.lang.Object]). This allows for using lambda expressions in many existing Java
+APIs directly.
+
+However, if you write a lambda expression without having any target type expectation, like in the following
+assignment:
+
+code[Xtend][
+  val toUpperCaseFunction = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
+]
+
+The type will be one of the types found in codeRef[org.eclipse.xtext.xbase.lib.Functions] or codeRef[org.eclipse.xtext.xbase.lib.Procedures].
+It is a procedure if the return type is code[Xtend][void], otherwise it is a function.
+
+Xtend supports a shorthand syntax for function types. Instead of writing code[Xtend][Function1<? super String,? extends String>]
+which is what you will find in the generated Java code, you can simply write code[(String)=>String].
+
+Example:
+code[Xtend][
+  val (String)=>String stringToStringFunction = \[ toUpperCase \]
+  // or
+  val Function1<? super String,? extends String> same = \[ toUpperCase \]
+  // or
+  val stringToStringFunction2 = \[ String s | s.toUpperCase \] // inferred type is (String)=>String
+]
+
+Checked exceptions that are thrown in the body of a closure but not declared in the implemented method of the target type are rethrown using the 
+ref:declaredExceptions[sneaky-throw technique].
+Of course you can always ref:Xtend_Expressions_TryCatch[catch and handle] them.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:ifExpression[If Expression]
+
+An if expression is used to choose between two different values based on a predicate.
+
+An expression 
+code[Xtend][
+  if (p) e1 else e2
+] 
+results in either the value code[e1] or code[e2] depending on whether the predicate code[p] evaluates 
+to code[Xtend][true] or code[Xtend][false]. The else part is optional which is a shorthand for code[Xtend][else null]. That means 
+
+code[Xtend][
+  if (foo) x 
+]
+
+is a short hand for
+
+code[Xtend][
+  if (foo) x else null
+]
+
+The type of an if expression is the common super type of the return types code[T1] and code[T2] 
+of the two expression code[e1] and code[e2].
+
+While the if expression has the syntax of Java's if statement it behaves more like Java's ternary operator 
+(code[Java][predicate ? thenPart : elsePart]), because it is an expression and returns a value.
+Consequently, you can use if expressions deeply nested within expressions:
+
+code[Xtend][
+  val name = if (firstName != null) firstName + ' ' + lastName else lastName
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:switchExpression[Switch Expression]
+
+The switch expression is very different from Java's switch statement. First, there is no fall through which means 
+only one code[Xtend][case] is evaluated at most. Second, the use of code[Xtend][switch] is not limited 
+to certain values but can be used for any object reference instead. code[Object.equals(Object)] is used to
+compare the value in the case with the one you are switching over.
+ 
+Given the following example:
+ 
+code[Xtend][
+  switch myString {
+    case myString.length>5 : "a long string."
+    case 'some' : "It's some string."
+    default : "It's another short string."
+  }
+]
+
+the main expression code[numberAsText] is evaluated first and then compared to each case sequentially.
+If the case expression is of type code[Xtend][boolean], the case matches if the expression evaluates
+to code[Xtend][true]. If it is not of type code[Xtend][boolean] it is compared to the value from the main
+expression using code[Object.equals(Object)].
+
+If a case is a match, that is it evaluates to code[Xtend][true] or the result equals the one we are switching
+over, the case expression after the colon is evaluated and is the result of the whole expression.
+
+section2[Type guards]
+
+Instead of or in addition to the case guard you can specify a e[type guard]. The case only matches if the 
+switch value conforms to this type. A case with both a type guard and a predicate only matches if both match.
+If the switch value is a variable, this variable is automatically casted to the given type within the
+predicate and the case's body.
+
+code[Xtend][
+  def length(Object x) {
+    switch x {
+      String case x.length > 0 : x.length // length is defined for String 
+      List<?> : x.size    // size is defined for List
+      default : -1
+    }
+  }
+]
+
+Switches with type guards are a safe and much more readable alternative to instance of / casting orgies you 
+might know from Java.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -694,8 +610,8 @@ The for loop
 code[Xtend][
   for (T1 variable : arrayOrIterable) expression
 ] 
-is used to execute a certain expression for each element of an array of an instance of 
-code[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
+is used to execute a certain expression for each element of an array or an instance of 
+codeRef[java.lang.Iterable]. The local code[variable] is final, hence canot be updated. 
 
 The return type of a for loop is code[Xtend][void]. The type of the local variable can be left out. 
 In that case it is inferred from the type of the array or code[java.lang.Iterable] returned by the 
@@ -740,7 +656,7 @@ A do-while loop
 code[Xtend][
   do expression while (predicate)
 ] 
-is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false]. 
+is used to execute a certain expression until the predicate is evaluated to code[Xtend][false]. 
 The difference to the ref:whileExpression[while loop] is that the execution starts by executing 
 the block once before evaluating the predicate for the first time. The return type of a do-while 
 loop is code[Xtend][void].
@@ -759,9 +675,11 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_Return[Return Expression]
 
-Although an explicit return is often not necessary, it is supported.
-In a closure for instance a return expression is always implied if the expression itself is not of 
-type code[Xtend][void]. Anyway you can make it explicit:
+A method or lambda expression automatically returns the value of its expression.
+If it is a ref:blocks[block expression] this is the value of the last expression in it.
+However, sometimes you want to return early or make it explicit.
+
+The syntax is just like in Java:
 
 code[Xtend][
   listOfStrings.map(e| {
@@ -776,8 +694,8 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_Throw[Throwing Exceptions]
 
-Like in Java it is possible to throw code[java.lang.Throwable]. The syntax is exactly the same as 
-in Java.
+Throwing codeRef[java.lang.Throwable]s up the call stack has the same semantics and syntax 
+as in Java.
 
 code[Xtend][
 {
@@ -785,18 +703,17 @@ code[Xtend][
   if (myList.isEmpty)
     throw new IllegalArgumentException("the list must not be empty")
   ...
-}   
+}
 ]
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_Expressions_TryCatch[Try, Catch, Finally]
 
 The try-catch-finally expression is used to handle exceptional situations.
-You are not forced to declare checked exceptions, if you do not catch checked exceptions they are 
-rethrown in a wrapping runtime exception. Other than that the syntax again is like the one known 
-from Java.
+Checked exceptions are treated like runtime exceptions. You can but do not have to catch them as they
+will be silently rethrown (see the ref:declaredExceptions[section on declared exceptions]). The syntax 
+again is like Java.
 
 code[Xtend][
   try {
@@ -808,40 +725,64 @@ code[Xtend][
   }
 ]
 
+For try-catch it is again beneficial that it is an expression, because you can write code like the following
+and do not have to rely on non-final variables:
+
+code[Xtend][
+  val name = try {
+      person.name
+    } catch (NullPointerException e) {
+      "no name"
+    }
+]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:templates[Template Expressions]
 
-Templates allow for readable string concatenation, which is the main thing you do when writing a 
-code generator. Template are surrounded by triple single or double quotes. The text of a template 
-can be interrupted by expressions in french quotes code[Xtend][«»]. One way to type these 
-e[guillemets] is to use content assist inside the template. 
+Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (code[''']). 
+A template expression can span multiple lines and expressions can be nested which are evaluated and their code[toString()] 
+representation is automatcially inserted at that position.
 
-Let us have a look at an example of how a typical method with template expressions looks like:
+The terminals for interpolated expression are so called guillemets code[Xtend][«expression»]. They read nicely and are not often used
+in text so you seldomly need to escape them. These escaping conflicts are the reason why
+template languages often use longer character sequences like e.g. code[<%= expression %>] in JSP, for the price of worse readability. 
+The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
+
+If you use the Eclipse plug-in - which is recommended - the guillemets will be inserted on content assist
+within a template. They are additionally bound to e[CTRL+SHIFT+<] and e[CTRL+SHIFT+] for code[«] and code[»] respectively.
+On a Mac they are as well bound to e[alt+q] (code[«]) and e[alt+Q] (code[»]).
+
+Let us have a look at an example of how a typical method with a template expressions looks like:
 
 code[Xtend][
-def toClass(Entity e) '''
-  package «e.packageName»;
-
-  «placeImports»
-
-  public class «e.name» «IF e.superClass!=null»extends «e.superClass»«ENDIF» {
-    «FOR e.members»
-      «member.toMember»
-    «ENDFOR»
-  }
+def someHTML(String content) '''
+  <html>
+    <body>
+      «content»
+    </body>
+  </html>
 '''
 ]
 
-A template is actually an expression, which means it can occur everywhere where an expression is
-expected. For instance in conjunction the powerful ref:switchExpression[switch expression]:
+As you can see, template expressions can be used as the direct body of a method.
+If an interpolation expression evaluates to code[Xtend][null] an empty string is added.
+
+Template expressions can occur everywhere. 
+Here is an example showing it in conjunction with the powerful ref:switchExpression[switch expression]:
+
 code[Xtend][
-toMember(Member m) {
-  switch m {
-    Field : '''private «m.type» «m.name» ;'''
-    Method case isAbstract : ''' abstract «...'''
-    Method : ''' ..... '''
+def toText(Node n) {
+  switch n {
+    Contents : n.text
+
+    A : '''<a href="«n.href»">«n.applyContents»</a>'''
+
+    default : '''
+        <«n.tagName»>
+          «n.applyContents»
+        </«n.tagName»>
+    '''
   }
 }
 ]
@@ -849,42 +790,87 @@ toMember(Member m) {
 
 section2:templateIF[Conditions in Templates]
 
-There is a special code[Xtend][IF] to be used within templates which is identical in syntax and 
-meaning to the old code[Xtend][IF] from Xpand. Note that you could also use the if expression, but 
-since it has not an explicit terminal token, it is not as readable in that context.
+There is a special code[Xtend][IF] to be used within templates:
+
+code[Xtend][
+def someHTML(Paragraph p) '''
+  <html>
+    <body>
+      «IF p.headLine != null»
+        <h1>«p.headline»</h1>
+      «ENDIF»
+      <p>
+        «p.text»
+      </p>
+    </body>
+  </html>
+'''
+]
 
 
 section2:templateFOREACH[Loops in Templates]
 
-Also the code[Xtend][FOR] statement is available and can only be used in the context of a template.
-It also supports the code[Xtend][SEPARATOR] from Xpand. In addition, a code[Xtend][BEFORE] 
-expression can be defined that is only evaluated if the loop is at least evaluated once before the 
-very first iteration. Consequently code[Xtend][AFTER] is evaluated after the last iteration if there 
-is any element.
+Also a code[Xtend][FOR] statement is available:
 
+code[Xtend][
+def someHTML(List<Paragraph> paragraphs) '''
+  <html>
+    <body>
+      «FOR p : paragraphs»
+        «IF p.headLine != null»
+          <h1>«p.headline»</h1>
+        «ENDIF»
+        <p>
+          «p.text»
+        </p>
+      «ENDFOR»
+    </body>
+  </html>
+'''
+]
+
+The for statement optionally allows to specify what to prepend (code[Xtend][BEFORE]), put in-between (code[Xtend][SEPARATOR]), and what to
+put at the end (code[Xtend][AFTER]) of all iterations. code[Xtend][BEFORE] and code[Xtend][AFTER]
+are only executed if there is at least one iteration. (code[Xtend][SEPARATOR]) is only added between
+iterations, that it is executed if there are at least two iterations.
+
+Here is an example:
+
+code[Xtend][
+def someHTML(List<Paragraph> paragraphs) '''
+  <html>
+    <body>
+      «FOR p : paragraphs BEFORE '<div>' SEPARATOR '</div><div>' AFTER '</div>'»
+        «IF p.headLine != null»
+          <h1>«p.headline»</h1>
+        «ENDIF»
+        <p>
+          «p.text»
+        </p>
+      «ENDFOR»
+    </body>
+  </html>
+'''
+]
 
 section2:templateType[Typing]
 
-The rich string is translated to an efficient string concatenation and the return type of a rich 
-string is codeRef[java.lang.CharSequence] which allows room for efficient implementation.
+The template expression is of type codeRef[java.lang.CharSequence]. It is automatically converted
+to codeRef[java.lang.String] if that is the expected target type.
 
 
 section2:WhitespaceHandling[White Space Handling]
 
 One of the key features of templates is the smart handling of white space in the template output. 
 The white space is not written into the output data structure as is but preprocessed. This allows 
-for readable templates as well as nicely formatted output. This can be achieved by applying three 
-simple rules when the rich string is evaluated.
+for readable templates as well as nicely formatted output. The following three rules are applied 
+when the template is evaluated:
 
 ol[
   item[
-    An evaluated rich string as part of another string will be prefixed with the current 
-    indentation of the caller before it is inserted into the result.
-  ]
-  item[
     Indentation in the template that is relative to a control structure will not be propagated 
     to the output string. A control structure is a code[Xtend][FOR]-loop or a condition 
-    (code[Xtend][IF]) as well as the opening and closing marks of the rich string itself.
+    (code[Xtend][IF]) as well as the opening and closing marks of the template string itself.
     
     The indentation is considered to be relative to such a control structure if the previous 
     line ends with a control structure followed by optional white space. The amount of white 
@@ -895,7 +881,16 @@ ol[
     structures or invocations of other templates which evaluate to an empty string, will not 
     appear in the output.
   ]    
+  item[
+    Any newlines in appended strings (no matter they are created with template expressions or not) will
+    be prepended with the current indentation when inserted.
+  ]
 ]
+
+Although this algorithm sounds a bit complicated at first it behaves very intuitively. In addition the
+syntax coloring in Eclipse communicates this behavior.
+
+img[images/Xtend_template_coloring.png][Syntax Coloring For Templates In Eclipse][][]
 
 The behavior is best described with a set of examples. The following table assumes a data structure 
 of nested nodes.
@@ -905,7 +900,7 @@ table[
     td[
       code[Xtend][
 class Template {
-  print(Node n) '''
+  def print(Node n) '''
     node «n.name» {}
   '''
 }
@@ -919,8 +914,8 @@ class Template {
   ]
 ]
 
-The indentation before code[node «n.name»] will be skipped as it is relative to the opening mark of
-the rich string and thereby not considered to be relevant for the output but only for readability 
+The indentation before code[Xtend][node «n.name»] will be skipped as it is relative to the opening mark of
+the template string and thereby not considered to be relevant for the output but only for readability 
 of the template itself.
 
 table[
@@ -928,7 +923,7 @@ table[
     td[
       code[Xtend][
 class Template {
-  print(Node n) '''
+  def print(Node n) '''
     node «n.name» {
       «IF hasChildren»
         «n.children.map\[print\]»

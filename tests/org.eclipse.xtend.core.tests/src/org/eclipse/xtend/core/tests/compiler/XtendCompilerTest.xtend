@@ -1555,7 +1555,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 					val synchronized = newArrayList('foo')
 					for (volatile : synchronized) {
 						switch final : volatile {
-							case final.length > 2 : synchronized.forEach(break | break + final)
+							case final.length > 2 : synchronized.forEach(break | (break + final).toString)
 						}
 					}
 				}
@@ -1582,7 +1582,8 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			          _matched=true;
 			          final Procedure1<String> _function = new Procedure1<String>() {
 			              public void apply(final String break_) {
-			                /*(break_ + final_);*/
+			                String _plus = (break_ + final_);
+			                _plus.toString();
 			              }
 			            };
 			          IterableExtensions.<String>forEach(synchronized_, _function);

@@ -4,145 +4,26 @@ Xtend is a statically-typed programming language which translates to comprehensi
 Syntactically and semantically Xtend has its roots in the Java programming language but improves on many aspects:   
 
 ul[
-  item[e[Extension methods] - enhance closed types with new functionality]
-  item[e[Multiple dispatch] - a.k.a. polymorphic method invocation]
-  item[e[Lambda Expressions] - concise syntax for anonymous function literals]
-  item[e[Operator overloading] - make your libraries even more expressive]
-  item[e[Powerful switch expressions] - type based switching with implicit casts]
-  item[e[Template expressions] - with intelligent white space handling]
-  item[e[No statements] - everything is an expression]
-  item[e[Property access syntax] - shorthands for getter and setter access]
-  item[e[Advanced type inference] - you rarely need to write down type signatures]
+  item[e[ref:extensionMethods[Extension methods]] - enhance closed types with new functionality]
+  item[e[ref:lambdas[Lambda Expressions]] - concise syntax for anonymous function literals]
+  item[e[ref:operators[Operator overloading]] - make your libraries even more expressive]
+  item[e[ref:switchExpression[Powerful switch expressions]] - type based switching with implicit casts]
+  item[e[ref:polymorphicDispatch[Multiple dispatch]] - a.k.a. polymorphic method invocation]
+  item[e[ref:templates[Template expressions]] - with intelligent white space handling]
+  item[e[ref:Xtend_Expressions[No statements]] - everything is an expression]
+  item[e[ref:propertyAccess[Properties]] - shorthands for accessing and defining getters and setter]
+  item[e[Local type inference] - you rarely need to write down type signatures anymore]
   item[e[Full support for Java Generics] - including all conformance and conversion rules]
   item[e[Translates to Java] not bytecode - understand what is going on and use your code for platforms 
     such as Android or GWT]
 ] 
 
-The language is not aiming at replacing Java all together. Its library is just a thin layer on top of the 
-Java Development Kit (JDK) and unlike with other JVM languages there are zero interoperability issues :
-Everything you write in Xtend interacts with Java exactly as if it were written in Java in the first place.
-It's just much more concise and readable! 
+Unlike other JVM languages Xtend has ref:javaInteroperability[zero interoperability issues] with Java:
+Everything you write interacts with Java exactly as expected. At the same time Xtend is much more concise, 
+readable and expressive. Xtend's small ref:library[library] is just a thin layer that provides useful 
+utilities and extensions on top of the Java Development Kit (JDK). 
 
 Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
 Eclipse-based IDE closely integrated with Eclipse's Java Development Tools (JDT), including features like call-hierarchies, rename refactoring, 
 debugging and many more.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section:Getting_Started[Getting Started]
-
-Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
-SDK is via link[http://marketplace.eclipse.org/content/eclipse-xtend][Eclipse Marketplace]. 
-But there's also a complete Eclipse distribution link[http://www.eclipse.org/xtend/index.html#download][available for download].
-
-section2[Hello World]
-
-Let us start with a simple "Hello World" example. In Xtend, that reads as
-code[Xtend][
-  class HelloWorld {
-    def static void main(String\[\] args) {
-      println("Hello World")
-    }
-  }
-]
-The Xtend code resembles Java a lot. You can already see how the syntactic noise is reduced: No semicolons,
-no return types etc. 
-
-An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-translate it to Java code. You'll find it in a source folder e[xtend-gen].
-The hello world example is translated to the following Java code:
-code[Java][
-  // Generated Java Source Code
-  import org.eclipse.xtext.xbase.lib.InputOutput;
-  
-  public class HelloWorld {
-    public static void main(final String\[\] args) {
-      InputOutput.<String>println("Hello World");
-    }
-  }
-] 
-
-
-section2:library[The Runtime Library]
-
-The only surprising fact in the generated Java code may be the library class code[InputOutput]. Many 
-features of Xtend are not built into the language itself but provided via the library
-e[org.eclipse.xtend.lib]. The library is available from a ref:MavenSupport[Maven repository] and via p2
-update site (in case you do Eclipse Plug-In development).
-
-The library provides means to create collections in a readable way:
-
-code[Xtend][
-  val myList = newArrayList(1, 2, 3)
-  val mySet = newHashSet(4, 5, 6)
-  val myMap = newHashMap(1 -> 'one', 2 -> 'two', 3 -> 'three')
-] 
-
-It also extends the collection types with a lot of very useful functions.
-One example is the ubiquitous code[map] function:
-
-code[Xtend][
-  val listOfNames = listOfPersons.map\[ name \]
-]
-
-Many operators to concat collections or to do arithmetics with types like code[BigDecimal] are also available.
-
-section2:MavenSupport[Maven Support]
-
-The runtime library as well as a plug-in to run the compiler in a Maven build can be be obtained from
-the following maven repository: link[http://build.eclipse.org/common/xtend/maven/][http://build.eclipse.org/common/xtend/maven/].
-
-Here's the XML for the repository:
-code[
-<repositories>
-  <repository>
-    <id>xtend</id>
-    <url>http://build.eclipse.org/common/xtend/maven/</url>
-  </repository>
-</repositories>
-<pluginRepositories>
-  <pluginRepository>
-    <id>xtend</id>
-    <url>http://build.eclipse.org/common/xtend/maven/</url>
-  </pluginRepository>
-</pluginRepositories>
-]
-
-Here's the XML for the dependency to the library:
-
-code[
-<dependency>
-  <groupId>org.eclipse.xtend</groupId>
-  <artifactId>org.eclipse.xtend.lib</artifactId>
-  <version>2.3.0</version>
-</dependency>
-]
-
-And this is the XML for the plug-in:
-
-code[
-<plugin>
-  <groupId>org.eclipse.xtend</groupId>
-  <artifactId>xtend-maven-plugin</artifactId>
-  <version>2.3.0</version>
-  <executions>
-    <execution>
-      <goals>
-        <goal>compile</goal>
-        <!-- <goal>testCompile</goal> -->
-      </goals>
-      <!-- optionally you can configure a different target folder -->
-      <!--
-      <configuration>
-        <outputDirectory>xtend-gen</outputDirectory>
-      </configuration>
-      -->
-    </execution>
-  </executions>
-</plugin>
-]
-
-As you see the outputDirectory can be specified to match the default of the Eclipse plug-in (xtend-gen). Of course you can also change the configuration
-in Eclipse to match the Maven default (generated-sources). To do so right-click on the project and select 'Properties' or if you prefer a global setting choose Eclipse->Preferences.
-In the category 'Xtend/Compiler' enter the directory name (see screenshot). It's interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
-
-img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclipse][][]

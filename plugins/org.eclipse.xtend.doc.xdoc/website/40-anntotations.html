@@ -5,17 +5,31 @@
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
-		<ul style="display: none;" id="subToc_10-introduction.html">
-		<li id="10-introduction.html#Getting_Started.html" ><a href="10-introduction.php#Getting_Started.php" >Getting Started</a></li>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="12-Installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_12-Installation.html">
+		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
+		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="15-types.php">Types</a></div>
+		<a href="13-getting-started.php">Getting Started</a></div>
+		<ul style="display: none;" id="subToc_13-getting-started.html">
+		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="15-types.php">Static Typing and Java Interoperability</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
-		<li id="15-types.html#Xbase_Types_ConformanceRules.html" ><a href="15-types.php#Xbase_Types_ConformanceRules.php" >Conformance and Conversion</a></li>
+		<li id="15-types.html#localTypeInference.html" ><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
+		<li id="15-types.html#conversionRules.html" ><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
+		<li id="15-types.html#javaInteroperability.html" ><a href="15-types.php#javaInteroperability.php" >Interoperability with Java</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -39,13 +53,13 @@
 		<li id="30-expressions.html#Xtend_Expressions_Literals.html" ><a href="30-expressions.php#Xtend_Expressions_Literals.php" >Literals</a></li>
 		<li id="30-expressions.html#typeCasts.html" ><a href="30-expressions.php#typeCasts.php" >Type Casts</a></li>
 		<li id="30-expressions.html#operators.html" ><a href="30-expressions.php#operators.php" >Infix Operators and Operator Overloading</a></li>
+		<li id="30-expressions.html#blocks.html" ><a href="30-expressions.php#blocks.php" >Blocks</a></li>
 		<li id="30-expressions.html#variableDeclaration.html" ><a href="30-expressions.php#variableDeclaration.php" >Variable Declarations</a></li>
-		<li id="30-expressions.html#featureCalls.html" ><a href="30-expressions.php#featureCalls.php" >Feature Calls</a></li>
+		<li id="30-expressions.html#featureCalls.html" ><a href="30-expressions.php#featureCalls.php" >Field Access and Method Invocation</a></li>
 		<li id="30-expressions.html#constructorCall.html" ><a href="30-expressions.php#constructorCall.php" >Constructor Call</a></li>
-		<li id="30-expressions.html#closures.html" ><a href="30-expressions.php#closures.php" >Closures</a></li>
+		<li id="30-expressions.html#lambdas.html" ><a href="30-expressions.php#lambdas.php" >Lambda Expressions</a></li>
 		<li id="30-expressions.html#ifExpression.html" ><a href="30-expressions.php#ifExpression.php" >If Expression</a></li>
 		<li id="30-expressions.html#switchExpression.html" ><a href="30-expressions.php#switchExpression.php" >Switch Expression</a></li>
-		<li id="30-expressions.html#blocks.html" ><a href="30-expressions.php#blocks.php" >Blocks</a></li>
 		<li id="30-expressions.html#forLoop.html" ><a href="30-expressions.php#forLoop.php" >For Loop</a></li>
 		<li id="30-expressions.html#whileExpression.html" ><a href="30-expressions.php#whileExpression.php" >While Loop</a></li>
 		<li id="30-expressions.html#doWhileExpression.html" ><a href="30-expressions.php#doWhileExpression.php" >Do-While Loop</a></li>
@@ -57,7 +71,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="40-anntotations.php">Annotation Library</a></div>
+		<a href="40-anntotations.php">Processed Annotations</a></div>
 		<ul style="display: none;" id="subToc_40-anntotations.html">
 		<li id="40-anntotations.html#propertyAnnotation.html" ><a href="40-anntotations.php#propertyAnnotation.php" >@Property</a></li>
 		<li id="40-anntotations.html#dataAnnotation.html" ><a href="40-anntotations.php#dataAnnotation.php" >@Data</a></li>
@@ -66,8 +80,8 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-		<a name="annotationLibrary" ></a>
-		<h1>Annotation Library</h1>
+		<a name="processedAnnotations" ></a>
+		<h1>Processed Annotations</h1>
 				<div class="toc">
 				  <ul>
 				    <li><a href="40-anntotations.php#propertyAnnotation.php" >@Property</a></li>
@@ -76,7 +90,7 @@
 				</div>
 				
 		<p>
-		Xtend comes with some library annotations that help to steer the compilation process.
+		Xtend comes with annotations that help to steer the compilation process.
 		These annotations reside in the <span class="inlinecode">org.eclipse.xtend.lib</span> plug-in/jar which must be on the classpath
 		of the project containing the Xtend files. 
 		</p>
@@ -87,9 +101,9 @@
 			<br style="clear:both"></br>
 			<h1>@Property</h1>
 			<p>
-			For fields that are annotated as <span class="inlinecode">@Property</span>, the Xtend compiler will generate a Java field, a
+			For fields that are annotated as <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Property.html" title="org.eclipse.xtend.lib.Property"><span class="inlinecode">@Property</span></abbr></a>, the Xtend compiler will generate a Java field, a
 			getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
-			an <span class="inlinecode">_</span> andhave the visibility of the Xtend field. The accessors methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
+			an <span class="inlinecode">_</span> and have the visibility of the Xtend field. The accessors methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
 			Thus, an Xtend field
 			</p>
 			<p>
@@ -128,14 +142,14 @@
 			<br style="clear:both"></br>
 			<h1>@Data</h1>
 			<p>
-			The annotation <span class="inlinecode">@Data</span>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
+			The annotation <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtend/lib/Data.html" title="org.eclipse.xtend.lib.Data"><span class="inlinecode">@Data</span></abbr></a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
 			has the following effect:
 			</p>
 			<p>
 			<ul>
 			  <li>all fields are flagged final,</li>
 			  <li>getter methods will be generated (if not existent),</li>
-			  <li>a constructor will be generated (if not existent),</li>
+			  <li>a constructor taking paramaters for all non-initialized fields will be generated (if not existent),</li>
 			  <li>equals(Object) / hashCode() methods will be generated (if not existent),</li>
 			  <li>a toString() method will be generated (if not existent).</li>
 			</ul>
@@ -162,7 +176,7 @@
 		    var disqus_shortname = 'xtext'; // required: replace example with your forum shortname
 		
 		    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-		    var disqus_identifier = 'annotationLibrary';
+		    var disqus_identifier = 'processedAnnotations';
 		    var disqus_url = documentationRoot+'40-anntotations.php';
 		
 		    /* * * DON'T EDIT BELOW THIS LINE * * */

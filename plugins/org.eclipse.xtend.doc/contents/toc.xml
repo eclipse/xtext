@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/Xtend.html" label="Xtend User Guide" >
 	<topic href="contents/10-introduction.html#Introduction" label="Introduction" >
-		<topic href="contents/10-introduction.html#Getting_Started" label="Getting Started" >
-			<topic href="contents/10-introduction.html#Getting_Started_2" label="Hello World" >
+	</topic>
+	<topic href="contents/12-Installation.html#Installation" label="Installation" >
+		<topic href="contents/12-Installation.html#MavenSupport" label="Maven Support" >
+		</topic>
+		<topic href="contents/12-Installation.html#library" label="The Runtime Library" >
+		</topic>
+	</topic>
+	<topic href="contents/13-getting-started.html#GettingStarted" label="Getting Started" >
+		<topic href="contents/13-getting-started.html#moviesExample" label="The Movies Example" >
+			<topic href="contents/13-getting-started.html#moviesExample_2" label="The Data" >
 			</topic>
-			<topic href="contents/10-introduction.html#library" label="The Runtime Library" >
+			<topic href="contents/13-getting-started.html#moviesExample_3" label="Parsing The Data" >
 			</topic>
-			<topic href="contents/10-introduction.html#Tutorial" label="The Xtend Tutorial" >
-			</topic>
-			<topic href="contents/10-introduction.html#MavenSupport" label="Maven Support" >
+			<topic href="contents/13-getting-started.html#moviesExample_4" label="Answering Some Questions" >
+				<topic href="contents/13-getting-started.html#moviesExample_4_2" label="Question 1 : What Is The Number Of Action Movies?" >
+				</topic>
+				<topic href="contents/13-getting-started.html#moviesExample_4_3" label="Question 2 : What Is The Year The Best Movie From The 80ies Was Released?" >
+				</topic>
+				<topic href="contents/13-getting-started.html#moviesExample_4_4" label="Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?" >
+				</topic>
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/15-types.html#types" label="Types" >
-		<topic href="contents/15-types.html#Xbase_Types_ConformanceRules" label="Conformance and Conversion" >
+	<topic href="contents/15-types.html#types" label="Static Typing and Java Interoperability" >
+		<topic href="contents/15-types.html#localTypeInference" label="Type Inference" >
+		</topic>
+		<topic href="contents/15-types.html#conversionRules" label="Conversion Rules" >
+		</topic>
+		<topic href="contents/15-types.html#javaInteroperability" label="Interoperability with Java" >
 		</topic>
 	</topic>
 	<topic href="contents/20-classes-and-functions.html#Xtend_Classes_Members" label="Classes and Members" >
@@ -36,6 +52,8 @@
 			</topic>
 			<topic href="contents/20-classes-and-functions.html#inferredReturnTypes" label="Inferred Return Types" >
 			</topic>
+			<topic href="contents/20-classes-and-functions.html#genericMethods" label="Generic Methods" >
+			</topic>
 			<topic href="contents/20-classes-and-functions.html#polymorphicDispatch" label="Dispatch Methods" >
 				<topic href="contents/20-classes-and-functions.html#polymorphicDispatch_11" label="Dispatch Methods and Inheritance" >
 				</topic>
@@ -46,9 +64,9 @@
 		<topic href="contents/20-classes-and-functions.html#Annotations" label="Annotations" >
 		</topic>
 		<topic href="contents/20-classes-and-functions.html#extensionMethods" label="Extension Methods" >
-			<topic href="contents/20-classes-and-functions.html#extensionMethods_3" label="Local Extension Methods" >
+			<topic href="contents/20-classes-and-functions.html#libraryExtensions" label="Extensions From The Library" >
 			</topic>
-			<topic href="contents/20-classes-and-functions.html#libraryExtensions" label="Library Extensions" >
+			<topic href="contents/20-classes-and-functions.html#extensionMethods_8" label="Local Extension Methods" >
 			</topic>
 			<topic href="contents/20-classes-and-functions.html#extensionImports" label="Extension Imports" >
 			</topic>
@@ -68,8 +86,6 @@
 			</topic>
 			<topic href="contents/30-expressions.html#typeLiteral" label="Type Literals" >
 			</topic>
-			<topic href="contents/30-expressions.html#functionTypes" label="Function Types" >
-			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#typeCasts" label="Type Casts" >
 		</topic>
@@ -78,42 +94,38 @@
 			</topic>
 			<topic href="contents/30-expressions.html#operators_5" label="Examples" >
 			</topic>
-			<topic href="contents/30-expressions.html#propertyAssignment" label="Assignments" >
+			<topic href="contents/30-expressions.html#assignments" label="Assignments" >
+				<topic href="contents/30-expressions.html#propertyAssignments" label="Setting Properties" >
+				</topic>
 			</topic>
+		</topic>
+		<topic href="contents/30-expressions.html#blocks" label="Blocks" >
 		</topic>
 		<topic href="contents/30-expressions.html#variableDeclaration" label="Variable Declarations" >
 			<topic href="contents/30-expressions.html#variableDeclaration_6" label="Typing" >
 			</topic>
 		</topic>
-		<topic href="contents/30-expressions.html#featureCalls" label="Feature Calls" >
+		<topic href="contents/30-expressions.html#featureCalls" label="Field Access and Method Invocation" >
 			<topic href="contents/30-expressions.html#propertyAccess" label="Property Access" >
 			</topic>
 			<topic href="contents/30-expressions.html#implicitVariables" label="Implicit Variables this and it" >
+			</topic>
+			<topic href="contents/30-expressions.html#staticAccess" label="Static Access" >
 			</topic>
 			<topic href="contents/30-expressions.html#nullSafeFeatureCalls" label="Null-Safe Feature Call" >
 			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#constructorCall" label="Constructor Call" >
 		</topic>
-		<topic href="contents/30-expressions.html#closures" label="Closures" >
-			<topic href="contents/30-expressions.html#closuresTypeInference" label="Typing" >
-			</topic>
-			<topic href="contents/30-expressions.html#functionMapping" label="Function Mapping" >
-			</topic>
-			<topic href="contents/30-expressions.html#implicitParameter" label="Implicit Parameter it" >
-			</topic>
-			<topic href="contents/30-expressions.html#closuresExceptions" label="Exceptions in Closures" >
-			</topic>
-			<topic href="contents/30-expressions.html#builderSyntax" label="Builder Syntax" >
+		<topic href="contents/30-expressions.html#lambdas" label="Lambda Expressions" >
+			<topic href="contents/30-expressions.html#closureTypes" label="Typing" >
 			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#ifExpression" label="If Expression" >
 		</topic>
 		<topic href="contents/30-expressions.html#switchExpression" label="Switch Expression" >
-			<topic href="contents/30-expressions.html#switchExpression_7" label="Type guards" >
+			<topic href="contents/30-expressions.html#switchExpression_4" label="Type guards" >
 			</topic>
-		</topic>
-		<topic href="contents/30-expressions.html#blocks" label="Blocks" >
 		</topic>
 		<topic href="contents/30-expressions.html#forLoop" label="For Loop" >
 		</topic>
@@ -138,7 +150,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/40-anntotations.html#annotationLibrary" label="Annotation Library" >
+	<topic href="contents/40-anntotations.html#processedAnnotations" label="Processed Annotations" >
 		<topic href="contents/40-anntotations.html#propertyAnnotation" label="@Property" >
 		</topic>
 		<topic href="contents/40-anntotations.html#dataAnnotation" label="@Data" >

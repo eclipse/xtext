@@ -5,17 +5,31 @@
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
-		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
 		<a href="10-introduction.php">Introduction</a></div>
-		<ul style="display: none;" id="subToc_10-introduction.html">
-		<li id="10-introduction.html#Getting_Started.html" ><a href="10-introduction.php#Getting_Started.php" >Getting Started</a></li>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="12-Installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_12-Installation.html">
+		<li id="12-Installation.html#MavenSupport.html" ><a href="12-Installation.php#MavenSupport.php" >Maven Support</a></li>
+		<li id="12-Installation.html#library.html" ><a href="12-Installation.php#library.php" >The Runtime Library</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="15-types.php">Types</a></div>
+		<a href="13-getting-started.php">Getting Started</a></div>
+		<ul style="display: none;" id="subToc_13-getting-started.html">
+		<li id="13-getting-started.html#moviesExample.html" ><a href="13-getting-started.php#moviesExample.php" >The Movies Example</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="15-types.php">Static Typing and Java Interoperability</a></div>
 		<ul style="display: none;" id="subToc_15-types.html">
-		<li id="15-types.html#Xbase_Types_ConformanceRules.html" ><a href="15-types.php#Xbase_Types_ConformanceRules.php" >Conformance and Conversion</a></li>
+		<li id="15-types.html#localTypeInference.html" ><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
+		<li id="15-types.html#conversionRules.html" ><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
+		<li id="15-types.html#javaInteroperability.html" ><a href="15-types.php#javaInteroperability.php" >Interoperability with Java</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -39,13 +53,13 @@
 		<li id="30-expressions.html#Xtend_Expressions_Literals.html" ><a href="30-expressions.php#Xtend_Expressions_Literals.php" >Literals</a></li>
 		<li id="30-expressions.html#typeCasts.html" ><a href="30-expressions.php#typeCasts.php" >Type Casts</a></li>
 		<li id="30-expressions.html#operators.html" ><a href="30-expressions.php#operators.php" >Infix Operators and Operator Overloading</a></li>
+		<li id="30-expressions.html#blocks.html" ><a href="30-expressions.php#blocks.php" >Blocks</a></li>
 		<li id="30-expressions.html#variableDeclaration.html" ><a href="30-expressions.php#variableDeclaration.php" >Variable Declarations</a></li>
-		<li id="30-expressions.html#featureCalls.html" ><a href="30-expressions.php#featureCalls.php" >Feature Calls</a></li>
+		<li id="30-expressions.html#featureCalls.html" ><a href="30-expressions.php#featureCalls.php" >Field Access and Method Invocation</a></li>
 		<li id="30-expressions.html#constructorCall.html" ><a href="30-expressions.php#constructorCall.php" >Constructor Call</a></li>
-		<li id="30-expressions.html#closures.html" ><a href="30-expressions.php#closures.php" >Closures</a></li>
+		<li id="30-expressions.html#lambdas.html" ><a href="30-expressions.php#lambdas.php" >Lambda Expressions</a></li>
 		<li id="30-expressions.html#ifExpression.html" ><a href="30-expressions.php#ifExpression.php" >If Expression</a></li>
 		<li id="30-expressions.html#switchExpression.html" ><a href="30-expressions.php#switchExpression.php" >Switch Expression</a></li>
-		<li id="30-expressions.html#blocks.html" ><a href="30-expressions.php#blocks.php" >Blocks</a></li>
 		<li id="30-expressions.html#forLoop.html" ><a href="30-expressions.php#forLoop.php" >For Loop</a></li>
 		<li id="30-expressions.html#whileExpression.html" ><a href="30-expressions.php#whileExpression.php" >While Loop</a></li>
 		<li id="30-expressions.html#doWhileExpression.html" ><a href="30-expressions.php#doWhileExpression.php" >Do-While Loop</a></li>
@@ -57,7 +71,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="40-anntotations.php">Annotation Library</a></div>
+		<a href="40-anntotations.php">Processed Annotations</a></div>
 		<ul style="display: none;" id="subToc_40-anntotations.html">
 		<li id="40-anntotations.html#propertyAnnotation.html" ><a href="40-anntotations.php#propertyAnnotation.php" >@Property</a></li>
 		<li id="40-anntotations.html#dataAnnotation.html" ><a href="40-anntotations.php#dataAnnotation.php" >@Data</a></li>
@@ -67,41 +81,86 @@
 	</div>
 	<div id="midcolumn">
 		<a name="types" ></a>
-		<h1>Types</h1>
+		<h1>Static Typing and Java Interoperability</h1>
 				<div class="toc">
 				  <ul>
-				    <li><a href="15-types.php#Xbase_Types_ConformanceRules.php" >Conformance and Conversion</a></li>
+				    <li><a href="15-types.php#localTypeInference.php" >Type Inference</a></li>
+				    <li><a href="15-types.php#conversionRules.php" >Conversion Rules</a></li>
+				    <li><a href="15-types.php#javaInteroperability.php" >Interoperability with Java</a></li>
 				  </ul>
 				</div>
 				
 		<p>
-		Xtend completely supports Java's type system: The primitive types as <span class="inlinecode"><span class="keyword">int</span></span> or 
-		<span class="inlinecode"><span class="keyword">boolean</span></span> are available as well as all classes and interfaces that reside on the 
+		Xtend, like Java, is a statically typed language. In fact it completely supports Java's type system, including the primitive types 
+		as <span class="inlinecode"><span class="keyword">int</span></span> or <span class="inlinecode"><span class="keyword">boolean</span></span>, arrays and of course all classes, interfaces, enums and annotations that reside on the 
 		classpath.  
 		</p>
 		<p>
-		Java Generics are fully supported, such that you can define type parameters and type arguments 
-		in just the same way as in Java.
+		Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
+		generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as
+		defined in  
+		<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html" >the Java Language Specification</a>.
 		</p>
-		<p>
-		As Xtend classes compile to Java classes, you can integrate both Java classes in Xtend and Xtend 
-		classes in Java. Note that Xtend does not have an own syntax for interfaces, as the Java syntax is 
-		already very concise.  
-		</p>
-		<a name="Xbase_Types_ConformanceRules" ></a>
+		<a name="localTypeInference" ></a>
 		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 			padding: 5px 0;
 			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 			<br style="clear:both"></br>
-			<h1>Conformance and Conversion</h1>
+			<h1>Type Inference</h1>
 			<p>
-			Conformance is used in order to find out whether some expression can be used in a certain situation. 
-			For instance when assigning a value to a variable, the type of the right hand expression needs to 
-			conform to the type of the variable.
+			One of the problems with Java is that you are forced to write type signatures over
+			and over again. That is why so many people do not like static typing. 
+			But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is typed
+			just like Java, you rarely have to write types down because they can be computed from the context.
+			</p>
+		<a name="conversionRules" ></a>
+		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+			padding: 5px 0;
+			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+			<br style="clear:both"></br>
+			<h1>Conversion Rules</h1>
+			<p>
+			In addition to Java's autoboxing to convert primitives to their corresponding wrapper types (e.g. <span class="inlinecode"><span class="keyword">int</span></span>
+			is automatically converted to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Integer.html" title="java.lang.Integer">Integer</abbr></a> when needed), there are additional conversion rules.
 			</p>
 			<p>
-			As Xbase implements the unchanged type system of Java it also fully supports the conformance rules 
-			defined in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html" >The Java Language Specification</a>.
+			Arrays are automatically converted to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="java.util.List"><span class="inlinecode">List&lt;ComponentType&gt;</span></abbr></a> and vice versa. That is you can
+			write the following:
+			</p>
+			<p>
+			<div class="literallayout">
+				<div class="incode">
+					<p class="code">
+						<span class="keyword">def</span>&nbsp;toList(String[]&nbsp;array)&nbsp;{<br/>
+						&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;List&lt;String&gt;&nbsp;asList&nbsp;=&nbsp;array<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;asList<br/>
+						}
+					</p>
+				</div>
+			</div>
+			</p>
+			<p>
+			Another very useful conversion applies to lambda expressions. A lambda expression
+			usually is of one of the types listed in <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Functions.html" title="org.eclipse.xtext.xbase.lib.Functions">Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
+			or <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/Procedures.html" title="org.eclipse.xtext.xbase.lib.Procedures">Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However if the expected type is an interface with a single method
+			declaration, a lambda expression is automatically converted to that
+			type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.php#closureTypes.php" title="Go to &quot;Typing&quot;" >section closureTypes</a>
+			for more details.
+			</p>
+		<a name="javaInteroperability" ></a>
+		<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+			padding: 5px 0;
+			padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+			<br style="clear:both"></br>
+			<h1>Interoperability with Java</h1>
+			<p>
+			Resembling and supporting every aspect of Java's type system ensures that there is no impedance mismatch between Java and Xtend.
+			This means that Xtend and Java are 100% interoperable. There are no exceptional cases. You do not have
+			to think in two worlds. You can call Xtend code from Java and vice versa without any surprises or hassles.
+			</p>
+			<p>
+			As a bonus if you know Java's type system (specifically generics), you already know the most complicated part
+			of Xtend.
 			</p>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript" src="documentationRoot.js"></script>

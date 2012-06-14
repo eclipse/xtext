@@ -29,7 +29,9 @@ class Body {
 		</div>
 		<div class="row">
 			<div class="span9 offset2">
-				«chapter.contents.toHtmlParagraph»
+				«FOR content : chapter.contents»
+					«content.toHtml»
+				«ENDFOR»
 				«FOR section: chapter.sections»
 					«section.h2»
 				«ENDFOR»
@@ -42,7 +44,9 @@ class Body {
 		<!--  section -->
 		<section id="«section.href»">
 		<h2>«section.title.toHtml»</h2>
-		«section.contents.toHtmlParagraph»
+		«FOR content : section.contents»
+			«content.toHtml»
+		«ENDFOR»
 		«FOR subsection: section.sections»
 			«subsection.h3plus(3)»
 		«ENDFOR»
@@ -53,7 +57,9 @@ class Body {
 		<!-- subsection -->
 		<section id="«section.href»">
 		<h«hLevel»>«section.title.toHtml»</h«hLevel»>
-		«section.contents.toHtmlParagraph»
+		«FOR content : section.contents»
+			«content.toHtml»
+		«ENDFOR»
 		«FOR subSection: section.sections»
 			«subSection.h3plus(hLevel + 1)»
 		«ENDFOR»

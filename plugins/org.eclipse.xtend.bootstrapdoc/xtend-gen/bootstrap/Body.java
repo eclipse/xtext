@@ -66,11 +66,15 @@ public class Body {
     _builder.append("\t");
     _builder.append("<div class=\"span9 offset2\">");
     _builder.newLine();
-    _builder.append("\t\t");
-    EList<TextOrMarkup> _contents = chapter.getContents();
-    CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(_contents);
-    _builder.append(_htmlParagraph, "		");
-    _builder.newLineIfNotEmpty();
+    {
+      EList<TextOrMarkup> _contents = chapter.getContents();
+      for(final TextOrMarkup content : _contents) {
+        _builder.append("\t\t");
+        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
+        _builder.append(_html_1, "		");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(chapter);
       for(final AbstractSection section : _sections) {
@@ -105,10 +109,14 @@ public class Body {
     _builder.append(_html, "");
     _builder.append("</h2>");
     _builder.newLineIfNotEmpty();
-    EList<TextOrMarkup> _contents = section.getContents();
-    CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(_contents);
-    _builder.append(_htmlParagraph, "");
-    _builder.newLineIfNotEmpty();
+    {
+      EList<TextOrMarkup> _contents = section.getContents();
+      for(final TextOrMarkup content : _contents) {
+        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
+        _builder.append(_html_1, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
       for(final AbstractSection subsection : _sections) {
@@ -141,10 +149,14 @@ public class Body {
     _builder.append(hLevel, "");
     _builder.append(">");
     _builder.newLineIfNotEmpty();
-    EList<TextOrMarkup> _contents = section.getContents();
-    CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(_contents);
-    _builder.append(_htmlParagraph, "");
-    _builder.newLineIfNotEmpty();
+    {
+      EList<TextOrMarkup> _contents = section.getContents();
+      for(final TextOrMarkup content : _contents) {
+        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
+        _builder.append(_html_1, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
       for(final AbstractSection subSection : _sections) {
