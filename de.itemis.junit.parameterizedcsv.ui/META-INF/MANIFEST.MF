@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui
+Bundle-SymbolicName: de.itemis.junit.parameterizedcsv.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.itemis.junit.parameterizedcsv.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.junit;bundle-version="3.7.100",
+ de.itemis.junit.parameterizedcsv;bundle-version="1.0.0",
+ org.eclipse.jdt.junit.runners;bundle-version="1.0.0",
+ org.eclipse.compare;bundle-version="3.5.300"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

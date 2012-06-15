@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="junitRunnerUI" name="JUnit Runner UI" schema="schema/junitRunnerUI.exsd"/>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.eclipse.jdt.junit.runners.PatchSetup">
+      </startup>
+   </extension>
+
+</plugin>
