@@ -585,6 +585,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testClosure_21() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = newArrayList.map(fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
   public void testTypeArgs() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>() += \'foo\'", "boolean");
   }
@@ -1733,7 +1738,7 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_102() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.HashSet)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "HashSet<String>");
   }
   
   @Test
@@ -1895,6 +1900,16 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testDeferredTypeArgumentResolution_134() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.map[String s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_135() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(newArrayList)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_136() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new java.util.ArrayList)\n\t\t\tval Iterable<String> s = list.head\n\t\t\tlist.head\n\t\t}", "ArrayList<String>");
   }
   
   @Test

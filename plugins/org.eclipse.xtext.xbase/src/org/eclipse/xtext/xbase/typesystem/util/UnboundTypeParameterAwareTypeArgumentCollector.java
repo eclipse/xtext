@@ -19,13 +19,13 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API 
- * TODO JavaDoc, toString
+ * TODO JavaDoc, toString, inline into super type if only subtype and super type not used besides in tests
  */
 public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeArgumentCollector {
 
 	public UnboundTypeParameterAwareTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped,
-			CommonTypeComputationServices services) {
-		super(parametersToBeMapped, services);
+			BoundTypeArgumentSource defaultSource, CommonTypeComputationServices services) {
+		super(parametersToBeMapped, defaultSource, services);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 					}
 				}
 			}
-			typeParameter.acceptHint(boundByInferrence(param));
+			typeParameter.acceptHint(boundByDefaultSource(param));
 			return null;
 		}
 		return super.doVisitComputedTypeReference(reference, param);
@@ -68,7 +68,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 							// register synonym type param resolution et al for the actual type in the given UnboundTypeParameter
 						}
 					} else {
-						typeParameter.acceptHint(boundByInferrence(declaration));
+						typeParameter.acceptHint(boundByDefaultSource(declaration));
 					}
 					return null;
 				}

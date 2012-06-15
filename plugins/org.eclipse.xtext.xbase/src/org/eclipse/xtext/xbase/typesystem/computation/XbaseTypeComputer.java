@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
@@ -399,7 +400,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 
 	protected ListMultimap<JvmTypeParameter, BoundTypeArgument> getClosureTypeParameterMapping(
 			JvmTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters) {
-		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, services);
+		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED, services);
 		JvmParameterizedTypeReference operationTypeDeclarator = services.getTypeReferences().createTypeRef(operation.getDeclaringType());
 		typeArgumentCollector.populateTypeParameterMapping(operationTypeDeclarator, closureType);
 		ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping = typeArgumentCollector.rawGetTypeParameterMapping();

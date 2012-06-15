@@ -502,6 +502,15 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 			fun
 		}".resolvesTo("(String)=>String")
 	}
+	
+	@Test def void testClosure_21() throws Exception {
+		"{ 
+			val fun = [ x | x ]
+			val list = newArrayList.map(fun)
+			val Iterable<String> iter = list
+			fun
+		}".resolvesTo("(String)=>String")
+	}
 
 	@Test def void testTypeArgs() throws Exception {
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
@@ -2052,10 +2061,10 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 	@Test def void testDeferredTypeArgumentResolution_102() throws Exception {
 		"{
 			val list = new java.util.ArrayList
-			list.add(new java.util.ArrayList)
+			list.add(new java.util.HashSet)
 			val Iterable<String> s = list.head
 			list.head
-		}".resolvesTo("ArrayList<String>")
+		}".resolvesTo("HashSet<String>")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_103() throws Exception {
@@ -2331,6 +2340,24 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 			val list = new java.util.ArrayList
 			list.map[String s| s]
 			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_135() throws Exception {
+		"{
+			val list = newArrayList
+			list.add(newArrayList)
+			val Iterable<String> s = list.head
+			list.head
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_136() throws Exception {
+		"{
+			val list = new java.util.ArrayList
+			list.add(new java.util.ArrayList)
+			val Iterable<String> s = list.head
+			list.head
 		}".resolvesTo("ArrayList<String>")
 	}
 	
