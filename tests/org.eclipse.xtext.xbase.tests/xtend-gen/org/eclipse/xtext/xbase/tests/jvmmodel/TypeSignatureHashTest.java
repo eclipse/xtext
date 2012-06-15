@@ -9,6 +9,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -69,6 +71,24 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     final JvmGenericType bar = this._jvmTypesBuilder.toClass(eObject, "Bar");
     String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(bar);
     boolean _equal = Strings.equal("Bar", _hash);
+    Assert.assertFalse(_equal);
+  }
+  
+  @Ignore
+  @Test
+  public void testRecursiveInheritance() {
+    final EObject eObject = EcoreFactory.eINSTANCE.createEObject();
+    final JvmGenericType bar = this._jvmTypesBuilder.toClass(eObject, "Bar");
+    final JvmGenericType foo = this._jvmTypesBuilder.toClass(eObject, "Foo");
+    EList<JvmTypeReference> _superTypes = bar.getSuperTypes();
+    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(foo);
+    this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+    EList<JvmTypeReference> _superTypes_1 = foo.getSuperTypes();
+    JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(bar);
+    this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _newTypeRef_1);
+    String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
+    String _hash_1 = this._jvmDeclaredTypeSignatureHashProvider.getHash(bar);
+    boolean _equal = Strings.equal(_hash, _hash_1);
     Assert.assertFalse(_equal);
   }
   
