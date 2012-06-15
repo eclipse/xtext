@@ -10,11 +10,13 @@ package org.eclipse.xtext.xbase.compiler;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -56,6 +58,10 @@ public class TypeReferenceSerializer {
 	public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
 		if (context == parameter.getDeclarator()) 
 			return true;
+		if (context instanceof JvmOperation && ((JvmOperation) context).isStatic())
+			return false;
+		if (context instanceof JvmDeclaredType && ((JvmDeclaredType) context).isStatic())
+			return false;
 		JvmIdentifiableElement jvmElement = contextProvider.getLogicalContainer(context);
 		if (jvmElement != null) {
 			return isLocalTypeParameter(jvmElement, parameter);
