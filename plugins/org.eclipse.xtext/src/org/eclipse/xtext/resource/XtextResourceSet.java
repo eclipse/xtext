@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  * A resource set that is capable of resolving classpath URIs.
  * 
  * It maintains a {@link #getURIResourceMap()} containing the resource's URI as well as the normalized version of it as a key.
- * It assumes that the {@link URI} of a resource never changes while contained in the {@link #getResources()} list. 
+ * The superset of actual and normalized resource URIs must be unique within the same resource set. 
  * 
  * @author Jan Köhnlein
  * @author Sven Efftinge
