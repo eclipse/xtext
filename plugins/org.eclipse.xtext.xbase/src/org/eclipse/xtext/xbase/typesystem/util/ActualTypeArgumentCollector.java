@@ -39,10 +39,12 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 
 	private final ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping;
 	private final List<JvmTypeParameter> parametersToBeMapped;
+	private final BoundTypeArgumentSource defaultSource;
 
-	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, CommonTypeComputationServices services) {
+	public ActualTypeArgumentCollector(List<JvmTypeParameter> parametersToBeMapped, BoundTypeArgumentSource defaultSource, CommonTypeComputationServices services) {
 		super(services);
 		this.parametersToBeMapped = parametersToBeMapped;
+		this.defaultSource = defaultSource;
 		typeParameterMapping = Multimaps2.newLinkedHashListMultimap(parametersToBeMapped.size(), 3);
 	}
 
@@ -54,8 +56,8 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 		return new BoundTypeArgument(reference, BoundTypeArgumentSource.CONSTRAINT, origin, VarianceInfo.OUT, VarianceInfo.OUT);
 	}
 	
-	protected BoundTypeArgument boundByInferrence(JvmTypeReference reference) {
-		return new BoundTypeArgument(reference, BoundTypeArgumentSource.INFERRED, getOrigin(), getExpectedVariance(), getActualVariance());
+	protected BoundTypeArgument boundByDefaultSource(JvmTypeReference reference) {
+		return new BoundTypeArgument(reference, defaultSource, getOrigin(), getExpectedVariance(), getActualVariance());
 	}
 	
 	@Override
@@ -65,7 +67,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	
 	@Override
 	protected void processTypeParameter(JvmTypeParameter typeParameter, JvmTypeReference reference) {
-		typeParameterMapping.put(typeParameter, boundByInferrence(reference));
+		typeParameterMapping.put(typeParameter, boundByDefaultSource(reference));
 	}
 	
 	public ListMultimap<JvmTypeParameter, BoundTypeArgument> rawGetTypeParameterMapping() {

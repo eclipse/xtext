@@ -247,7 +247,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		if (feature instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
 			if (!typeParameters.isEmpty()) {
-				ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, getState().getServices());
+				ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, getState().getServices());
 				implementation.populateTypeParameterMapping(declaredType, actualType);
 				typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
 			}

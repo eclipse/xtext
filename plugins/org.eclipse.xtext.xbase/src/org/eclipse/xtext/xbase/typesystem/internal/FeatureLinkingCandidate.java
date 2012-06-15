@@ -45,9 +45,6 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 		JvmTypeReference receiverType = null;
 		if (getDescription() instanceof BucketedEObjectDescription) {
 			receiverType = ((BucketedEObjectDescription) getDescription()).getReceiverType();
-//			if (receiverType != null) {
-//				receiverType = getState().getResolvedTypes().referenceReplacer.apply(receiverType);
-//			}
 		}
 		return receiverType;
 	}
