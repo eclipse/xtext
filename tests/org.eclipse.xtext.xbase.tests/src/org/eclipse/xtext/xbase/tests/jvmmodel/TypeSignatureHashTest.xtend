@@ -18,6 +18,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import static extension org.eclipse.xtext.util.Strings.*;
+import org.junit.Ignore
 
 /**
  * The remaining tests are in xtend.core.tests, as it is a lot easier to specify JvmModels in Xtend ;-)
@@ -51,6 +52,17 @@ class TypeSignatureHashTest extends AbstractXbaseTestCase {
 		val eObject = EcoreFactory::eINSTANCE.createEObject
 		val bar = eObject.toClass('Bar')
 		assertFalse('Bar'.equal(bar.hash))
+	}
+	
+	@Ignore
+	@Test
+	def void testRecursiveInheritance() {
+		val eObject = EcoreFactory::eINSTANCE.createEObject
+		val bar = eObject.toClass('Bar')
+		val foo = eObject.toClass('Foo')
+		bar.superTypes += newTypeRef(foo);
+		foo.superTypes += newTypeRef(bar);
+		assertFalse(foo.hash.equal(bar.hash))
 	}
 
 	@Test
