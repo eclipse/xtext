@@ -66,11 +66,6 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	}
 	
 	@Override
-	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-		return new ActualParameterizedTypeReferenceTraverser();
-	}
-	
-	@Override
 	protected void processTypeParameter(JvmTypeParameter typeParameter, JvmTypeReference reference) {
 		typeParameterMapping.put(typeParameter, boundByDefaultSource(reference));
 	}

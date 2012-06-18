@@ -45,10 +45,14 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 					}
 				}
 			}
-			typeParameter.acceptHint(boundByDefaultSource(param));
+			acceptHint(typeParameter, param);
 			return null;
 		}
 		return super.doVisitComputedTypeReference(reference, param);
+	}
+
+	protected void acceptHint(UnboundTypeParameter typeParameter, JvmTypeReference param) {
+		typeParameter.acceptHint(boundByDefaultSource(param));
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 							// register synonym type param resolution et al for the actual type in the given UnboundTypeParameter
 						}
 					} else {
-						typeParameter.acceptHint(boundByDefaultSource(declaration));
+						acceptHint(typeParameter, declaration);
 					}
 					return null;
 				}

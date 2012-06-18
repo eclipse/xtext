@@ -123,24 +123,29 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		if (boundTo != null) {
 			throw new IllegalStateException("Type parameter was already bound. No more hints may be accepted.");
 		}
-		JvmTypeReference hint = boundArgument.getTypeReference();
-		if (hint instanceof XComputedTypeReference) {
-			IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) hint).getTypeProvider();
-			if (typeProvider instanceof BaseUnboundTypeParameter) {
-				BaseUnboundTypeParameter other = (BaseUnboundTypeParameter) typeProvider;
-				if (other.getBoundTo() != null) {
-					throw new IllegalStateException();
-				} else {
-					if (other.getHandle().equals(getHandle())) {
-						throw new IllegalStateException("Cannot add recursive hint");
+		if (boundArgument.getSource() == BoundTypeArgumentSource.EXPLICIT) {
+			boundTo = new MergedBoundTypeArgument(boundArgument.getTypeReference(), boundArgument.getActualVariance());
+		} else {
+			JvmTypeReference hint = boundArgument.getTypeReference();
+			if (hint instanceof XComputedTypeReference) {
+				IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) hint).getTypeProvider();
+				if (typeProvider instanceof BaseUnboundTypeParameter) {
+					BaseUnboundTypeParameter other = (BaseUnboundTypeParameter) typeProvider;
+//					other = resolvedTypes.getUnboundTypeParameter(other.getHandle());
+					if (other.getBoundTo() != null) {
+						throw new IllegalStateException();
+					} else {
+						if (other.getHandle().equals(getHandle())) {
+							throw new IllegalStateException("Cannot add recursive hint");
+						}
+						equallyBoundHandles.add(other.getHandle());
+						other.equallyBoundHandles.add(getHandle());
+						return;
 					}
-					equallyBoundHandles.add(other.getHandle());
-					other.equallyBoundHandles.add(getHandle());
-					return;
 				}
 			}
+			hints.add(boundArgument);
 		}
-		hints.add(boundArgument);
 	}
 	
 	protected List<BoundTypeArgument> getHints() {
@@ -153,15 +158,20 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	
 	public List<BoundTypeArgument> getAllHints() {
 		if (!hints.isEmpty() || !equallyBoundHandles.isEmpty()) {
-			List<BoundTypeArgument> allHints = Lists.newArrayList(hints);
-			for(Object handle: equallyBoundHandles) {
-				// TODO transitivity ?
-				BaseUnboundTypeParameter similar = resolvedTypes.getUnboundTypeParameter(handle);
-				allHints.addAll(similar.hints);
-			}
+			List<BoundTypeArgument> allHints = Lists.newArrayList();
+			collectHints(this, allHints, Sets.newHashSet());
 			return allHints;
 		}
 		return Collections.emptyList();
+	}
+	
+	private void collectHints(BaseUnboundTypeParameter parameter, List<BoundTypeArgument> result, Set<Object> visited) {
+		if (visited.add(parameter.getHandle())) {
+			result.addAll(parameter.hints);
+			for(Object handle: parameter.equallyBoundHandles) {
+				collectHints(resolvedTypes.getUnboundTypeParameter(handle), result, visited);
+			}
+		}
 	}
 	
 	@Override
