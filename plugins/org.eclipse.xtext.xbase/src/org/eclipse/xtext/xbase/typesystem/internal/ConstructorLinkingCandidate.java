@@ -69,12 +69,13 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidateWithTyp
 	}
 	
 	@Override
-	protected void initializeFeatureTypeParameterMapping(Map<JvmTypeParameter, MergedBoundTypeArgument> result) {
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getFeatureTypeParameterMapping() {
 		JvmDeclaredType createdType = getConstructor().getDeclaringType();
 		if (createdType instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeReference> typeArguments = getConstructorCall().getTypeArguments();
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
 			if (!typeArguments.isEmpty()) {
+				Map<JvmTypeParameter, MergedBoundTypeArgument> result = Maps.newLinkedHashMap();
 				int max = Math.min(typeArguments.size(), typeParameters.size());
 				for(int i = 0; i < max; i++) {
 					result.put(typeParameters.get(i), new MergedBoundTypeArgument(typeArguments.get(i), VarianceInfo.INVARIANT));

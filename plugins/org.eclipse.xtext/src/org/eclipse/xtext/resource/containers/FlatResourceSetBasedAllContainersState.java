@@ -8,6 +8,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 
 import com.google.common.collect.Lists;
 
@@ -45,8 +46,9 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 		if (!HANDLE.equals(containerHandle))
 			return Collections.emptySet();
 		List<URI> uris = Lists.newArrayListWithCapacity(resourceSet.getResources().size());
+		URIConverter uriConverter = resourceSet.getURIConverter();
 		for (Resource r : resourceSet.getResources())
-			uris.add(r.getURI());
+			uris.add(uriConverter.normalize(r.getURI()));
 		return uris;
 	}
 

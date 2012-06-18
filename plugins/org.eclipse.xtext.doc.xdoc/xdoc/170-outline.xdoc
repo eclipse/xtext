@@ -32,14 +32,14 @@ delegates to code[Java][createEObjectNode(..)] if not specified differently.
 
 To change the children of specific nodes, you have to implement the method code[Java][_createChildren(parentNode,
 parentModelElement)] with the appropriate types. The following snippet shows you how to skip the root model element
-of type code[Java][DomainModel] in the outline of our domain model example:
+of type code[Java][Domainmodel] in the outline of our domain model example:
 
 code[Java][
 protected void _createChildren(DocumentRootNode parentNode, 
-                               DomainModel domainModel) {
-	for (AbstractElement element : domainModel.getElements()) {
-		createNode(parentNode, element);
-	}
+                               Domainmodel domainModel) {
+  for (AbstractElement element : domainModel.getElements()) {
+    createNode(parentNode, element);
+  }
 }
 ]
 
@@ -51,7 +51,7 @@ code[Java][_isLeaf(modelElement)] with the appropriate argument type, e.g.
 code[Java][
 // feature nodes are leafs and not expandable
 protected boolean _isLeaf(Feature feature) {
-	return true;
+  return true;
 }
 ]
 
@@ -62,22 +62,22 @@ snippet from Xtend2 illustrates how to use it:
 code[Java][
 protected void _createChildren(DocumentRootNode parentNode, 
                                XtendFile xtendFile) {
-	// show a node for the attribute XtendFile.package
-	createEStructuralFeatureNode(parentNode, 
-		xtendFile, 
-		Xtend2Package.Literals.XTEND_FILE__PACKAGE,
-		getImageForPackage(), 
-		xtendFile.getPackage(), 
-		true);
-	// show a container node for the list reference XtendFile.imports
-	// the imports will be shown as individual child nodes automatically 
-	createEStructuralFeatureNode(parentNode, 
-		xtendFile, 
-		Xtend2Package.Literals.XTEND_FILE__IMPORTS,
-		getImageForImportContainer(), 
-		"import declarations", 
-		false);
-	createEObjectNode(parentNode, xtendFile.getXtendClass());
+  // show a node for the attribute XtendFile.package
+  createEStructuralFeatureNode(parentNode, 
+    xtendFile, 
+    Xtend2Package.Literals.XTEND_FILE__PACKAGE,
+    getImageForPackage(), 
+    xtendFile.getPackage(), 
+    true);
+  // show a container node for the list reference XtendFile.imports
+  // the imports will be shown as individual child nodes automatically 
+  createEStructuralFeatureNode(parentNode, 
+    xtendFile, 
+    Xtend2Package.Literals.XTEND_FILE__IMPORTS,
+    getImageForImportContainer(), 
+    "import declarations", 
+    false);
+  createEObjectNode(parentNode, xtendFile.getXtendClass());
 }
 ]
 
@@ -102,19 +102,19 @@ code[Java][
 private StylerFactory stylerFactory;
 
 public Object _text(Entity entity) {
-	if(entity.isAbstract()) {
-		return new StyledString(entity.getName(), 
-			stylerFactory
-				.createXtextStyleAdapterStyler(getTypeTextStyle())));
-	else
-		return entity.getName();
+  if(entity.isAbstract()) {
+    return new StyledString(entity.getName(), 
+      stylerFactory
+        .createXtextStyleAdapterStyler(getTypeTextStyle())));
+  else
+    return entity.getName();
 }
 
 protected TextStyle getTypeTextStyle() {
-	TextStyle textStyle = new TextStyle();
-	textStyle.setColor(new RGB(149, 125, 71));
-	textStyle.setStyle(SWT.ITALIC);
-	return textStyle;
+  TextStyle textStyle = new TextStyle();
+  textStyle.setColor(new RGB(149, 125, 71));
+  textStyle.setStyle(SWT.ITALIC);
+  return textStyle;
 }
 ] 
 
@@ -131,40 +131,40 @@ example:
 
 code[Java][
 public class FilterOperationsContribution 
-		extends AbstractFilterOutlineContribution {
+    extends AbstractFilterOutlineContribution {
 
-	public static final String PREFERENCE_KEY = 
-		"ui.outline.filterOperations";
+  public static final String PREFERENCE_KEY = 
+    "ui.outline.filterOperations";
 
-	@Inject
-	private PluginImageHelper imageHelper;
-	
-	@Override
-	protected boolean apply(IOutlineNode node) {
-		return !(node instanceof EObjectNode)
-				|| !((EObjectNode) node).getEClass()
-					.equals(DomainmodelPackage.Literals.OPERATION);
-	}
+  @Inject
+  private PluginImageHelper imageHelper;
+  
+  @Override
+  protected boolean apply(IOutlineNode node) {
+    return !(node instanceof EObjectNode)
+        || !((EObjectNode) node).getEClass()
+          .equals(DomainmodelPackage.Literals.OPERATION);
+  }
 
-	@Override
-	public String getPreferenceKey() {
-		return PREFERENCE_KEY;
-	}
+  @Override
+  public String getPreferenceKey() {
+    return PREFERENCE_KEY;
+  }
 
-	@Override
-	protected void configureAction(Action action) {
-		action.setText("Hide operations");
-		action.setDescription("Hide operations");
-		action.setToolTipText("Hide operations");
-		action.setImageDescriptor(getImageDescriptor());
-	}
+  @Override
+  protected void configureAction(Action action) {
+    action.setText("Hide operations");
+    action.setDescription("Hide operations");
+    action.setToolTipText("Hide operations");
+    action.setImageDescriptor(getImageDescriptor());
+  }
 
-	protected ImageDescriptor getImageDescriptor(String imagePath) {
-		return ImageDescriptor.createFromImage(
-			imageHelper.getImage("Operation.gif"));
-	}
+  protected ImageDescriptor getImageDescriptor(String imagePath) {
+    return ImageDescriptor.createFromImage(
+      imageHelper.getImage("Operation.gif"));
+  }
 
-	
+  
 }
 ]
 
@@ -172,10 +172,10 @@ The contribution must be bound in the e[MyDslUiModule] like this
 
 code[Java][
 public void configureFilterOperationsContribution(Binder binder) {
-	binder
-		.bind(IOutlineContribution.class).annotatedWith(
-			Names.named("FilterOperationsContribution"))
-		.to(FilterOperationsContribution.class);
+  binder
+    .bind(IOutlineContribution.class).annotatedWith(
+      Names.named("FilterOperationsContribution"))
+    .to(FilterOperationsContribution.class);
 }
 ]
 
@@ -193,17 +193,17 @@ use such categories:
 
 code[Java][
 public class MydslOutlineNodeComparator extends DefaultComparator {
-	@Override
-	public int getCategory(IOutlineNode node) {
-		if (node instanceof EObjectNode) 
-			switch((EObjectNode) node).getEClass().getClassifierID())) {
-			case MydslPackage.TYPE0:	
-				return -10;
-			case MydslPackage.TYPE1:	
-				return -20;
-			}
-		return Integer.MIN_VALUE;
-	}
+  @Override
+  public int getCategory(IOutlineNode node) {
+    if (node instanceof EObjectNode) 
+      switch((EObjectNode) node).getEClass().getClassifierID())) {
+      case MydslPackage.TYPE0:  
+        return -10;
+      case MydslPackage.TYPE1:  
+        return -20;
+      }
+    return Integer.MIN_VALUE;
+  }
 }
 ]
 
@@ -212,8 +212,8 @@ As always, you have to declare a binding for your custom implementation in your 
 code[Java][
 @Override
 public Class<? extends IComparator> 
-	bindOutlineFilterAndSorter$IComparator() {
-		return MydslOutlineNodeComparator.class;
+  bindOutlineFilterAndSorter$IComparator() {
+    return MydslOutlineNodeComparator.class;
 }
 ]
 

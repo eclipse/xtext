@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -88,14 +89,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
-		if (potentialPrimitive instanceof XComputedTypeReference) {
-			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter){
-				return potentialPrimitive;
-			}
-		}
-		Primitives primitives = state.getServices().getPrimitives();
-		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
-		return result;
+		return UnboundTypeParameters.asWrapperType(potentialPrimitive, getState().getServices().getPrimitives());
 	}
 	
 	protected JvmTypeParameter getTypeParameter(JvmTypeReference referenceToTypeParameter) {
@@ -115,10 +109,23 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		return null;
 	}
 	
-	protected void deferredBindTypeArguments(JvmTypeReference expectedType, JvmTypeReference type) {
+	protected void deferredBindTypeArguments(ITypeExpectation expectation, JvmTypeReference type) {
+		JvmTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
-			// TODO expectation#hasTypeParameters / isUnresolved
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
+			// TODO expectation#hasTypeParameters / isUnresolved to improve the runtime performance
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices()) {
+				@Override
+				protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
+					JvmTypeParameter referencedTypeParameter = getTypeParameter(reference);
+					if (referencedTypeParameter != null) {
+						if (!getDeclaratorParameterMapping().containsKey(referencedTypeParameter)
+								&& !getDeclaredTypeParameters().contains(referencedTypeParameter)) {
+							return;
+						}
+					}
+					super.addHint(typeParameter, reference);
+				}
+			};
 			collector.processPairedReferences(expectedType, type);
 		}
 	}
@@ -192,6 +199,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		StackedResolvedTypes result = argumentState.computeTypesWithoutMerge(argument);
+		
 		return result;
 	}
 

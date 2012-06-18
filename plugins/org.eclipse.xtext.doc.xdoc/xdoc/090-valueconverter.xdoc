@@ -7,8 +7,8 @@ Simply override the corresponding binding in your runtime module like shown in t
 
 code[Java][@Override
 public Class<? extends IValueConverterService> 
-		bindIValueConverterService() {
-  	return MySpecialValueConverterService.class;
+    bindIValueConverterService() {
+    return MySpecialValueConverterService.class;
 }
 ]
 
@@ -20,7 +20,7 @@ by means of an annotated method.
 code[Java][
 @ValueConverter(rule = "MyRuleName")
 public IValueConverter<MyDataType> getMyRuleNameConverter() {
-	return new MyValueConverterImplementation();
+  return new MyValueConverterImplementation();
 }
 ]
 

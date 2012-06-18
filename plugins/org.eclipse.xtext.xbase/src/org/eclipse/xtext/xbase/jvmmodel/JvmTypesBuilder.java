@@ -1201,7 +1201,7 @@ public class JvmTypesBuilder {
 
 					@SuppressWarnings("unchecked")
 					public void appendValue(JvmAnnotationValue value, XExpression expr) {
-						EStructuralFeature valueFeature = value.eClass().getEStructuralFeature("value");
+						EStructuralFeature valueFeature = value.eClass().getEStructuralFeature("values");
 						List<? super Number> values = (List<? super Number>) value.eGet(valueFeature);
 						XNumberLiteral literal = (XNumberLiteral) expr;
 						Number number = numberLiterals.numberValue(literal, numberLiterals.getJavaType(literal));

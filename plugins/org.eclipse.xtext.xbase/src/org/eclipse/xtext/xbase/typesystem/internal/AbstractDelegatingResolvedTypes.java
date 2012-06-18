@@ -18,36 +18,28 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DelegatingResolvedTypes implements IResolvedTypes {
+public abstract class AbstractDelegatingResolvedTypes implements IResolvedTypes {
 
-	private final IResolvedTypes delegate;
-
-	public DelegatingResolvedTypes(IResolvedTypes delegate) {
-		this.delegate = delegate;
-	}
-	
-	protected IResolvedTypes getDelegate() {
-		return delegate;
-	}
+	protected abstract IResolvedTypes getDelegate();
 
 	public List<Diagnostic> getQueuedDiagnostics() {
-		return delegate.getQueuedDiagnostics();
+		return getDelegate().getQueuedDiagnostics();
 	}
 
 	public JvmTypeReference getActualType(XExpression expression) {
-		return delegate.getActualType(expression);
+		return getDelegate().getActualType(expression);
 	}
 
 	public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
-		return delegate.getActualType(identifiable);
+		return getDelegate().getActualType(identifiable);
 	}
 
 	public JvmTypeReference getExpectedType(XExpression expression) {
-		return delegate.getExpectedType(expression);
+		return getDelegate().getExpectedType(expression);
 	}
 
 	public List<JvmTypeReference> getActualTypeArguments(XExpression expression) {
-		return delegate.getActualTypeArguments(expression);
+		return getDelegate().getActualTypeArguments(expression);
 	}
 	
 }

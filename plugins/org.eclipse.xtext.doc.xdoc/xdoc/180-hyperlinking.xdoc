@@ -16,18 +16,18 @@ codeRef[org.eclipse.xtext.resource.DefaultLocationInFileProvider][default implem
 effort strategy which can be summarized as:
 
 ol[
-	item[
-		If the model element's codeRef[org.eclipse.emf.ecore.EClass][type] declares a feature e[name] then return the 
-		region of the corresponding token(s). As a fallback also check for a feature e[id].
-	]
-	item[
-		If the model element's node model contains any top-level tokens corresponding to invocations
-		of the rule e[ID] in the grammar then return a region spanning all those tokens.
-	]
-	item[
-		As a last resort return the region corresponding to the first keyword token of the referenced
-		model element.
-	]
+  item[
+    If the model element's codeRef[org.eclipse.emf.ecore.EClass][type] declares a feature e[name] then return the 
+    region of the corresponding token(s). As a fallback also check for a feature e[id].
+  ]
+  item[
+    If the model element's node model contains any top-level tokens corresponding to invocations
+    of the rule e[ID] in the grammar then return a region spanning all those tokens.
+  ]
+  item[
+    As a last resort return the region corresponding to the first keyword token of the referenced
+    model element.
+  ]
 ]
 
 The location service offers different methods to obtain the region of interest for special use cases.
@@ -44,7 +44,7 @@ code[Java][
 public class MyDslUiModule extends AbstractMyDslUiModule {
   @Override
   public Class<? extends ILocationInFileProvider> 
-  		bindILocationInFileProvider() {
+      bindILocationInFileProvider() {
     return MyDslLocationInFileProvider.class;
   }
 }

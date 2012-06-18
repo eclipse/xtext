@@ -12,10 +12,12 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -102,5 +104,7 @@ public interface ITypeComputationState {
 	void reassignType(XExpression object, JvmTypeReference type);
 	
 	void discardReassignedTypes(XExpression object);
+	
+	UnboundTypeParameter createUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter);
 
 }

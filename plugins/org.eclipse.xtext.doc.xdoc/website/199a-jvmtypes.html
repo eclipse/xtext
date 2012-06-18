@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -118,6 +118,7 @@
 		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
 		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
 		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		<li id="197-refactoring.html" ><a href="197-refactoring.php" >Rename Refactoring</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -181,17 +182,17 @@
 			<h1>Referring to Java Elements using JVM Types</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="199a-jvmtypes.php#jvmtypes_11.php" >Customization Points</a></li>
+			    <li><a href="199a-jvmtypes.php#jvmtypes_10.php" >Customization Points</a></li>
 			  </ul>
 			</div>
 			<p>
-			A common use case when developing languages is the requirement to refer to existing concepts of other 
+			A common case when developing languages is the requirement to refer to existing concepts of other 
 			languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful
-			to have access to the available types of the Java Virtual Machine. The JVM types Ecore model enables
+			to have access to the available types of the Java Virtual Machine as well. The JVM types Ecore model enables
 			clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their 
 			fields and methods. Basically every information about the structural concepts of the Java type system
 			is available via the JVM types. This includes annotations and their specific values and enumeration 
-			literals as well.
+			literals, too.
 			</p>
 			<p>
 			The implementation will be selected transparently depending on how the client code is 
@@ -237,7 +238,7 @@
 			<div class="literallayout">
 				<div class="incode">
 					<p class="code">
-						<span class="keyword">datatype</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date
+						<span class="keyword">datatype</span>&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date
 					</p>
 				</div>
 			</div>
@@ -248,31 +249,27 @@
 			and content assist will propose the list of available types. Even the <em>import</em>&nbsp;statements will also
 			apply for Java types. 
 			</p>
-			<p>
-			More sophisticated references to Java types, e.g. generics, array types etc., can be found in the  
-			<em>Xtype.xtext</em> grammar in the plug-in <em>org.eclipse.xtext.xbase</em>. 
-			</p>
-			<a name="jvmtypes_11" ></a>
+			<a name="jvmtypes_10" ></a>
 			<h2>Customization Points</h2>
 			<p>
 			There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:
 			</p>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider">AbstractTypeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java" title="View Source Code" >(src)</a> 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider">AbstractTypeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java" title="View Source Code" >(src)</a> 
 			can be used to create scopes for members with respect to
 			the override semantics of the Java language. Of course it is possible to use this implementation to
 			create scopes for types as well.
 			</p>
 			<p>
-			As the Java VM types expose a lot of information about visibility, parameter- and return types, generics,
+			As the Java VM types expose a lot of information about visibility, parameter types and return types, generics,
 			available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 			</p>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider">ITypesProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" title="View Source Code" >(src)</a> can be
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider">ITypesProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" title="View Source Code" >(src)</a> can be
 			used to provide optimized proposals based on various filter criteria. 
 			The most common selector can be used directly via <span class="inlinecode">createSubTypeProposals(..)</span>. The implementation is optimized
 			and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters">TypeMatchFilters</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" title="View Source Code" >(src)</a>
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters">TypeMatchFilters</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" title="View Source Code" >(src)</a>
 			provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 			to a smaller number of valid entries.
 			</p>

@@ -88,9 +88,9 @@ code[MWE2][
 module HelloWorld 
 
 Workflow {
-	component = SayHello {
-		message = "Hello World!"
-	}
+  component = SayHello {
+    message = "Hello World!"
+  }
 }
 ]
 
@@ -134,7 +134,7 @@ public class ResourceReader extends WorkflowComponentWithSlot {
     Resource resource = resourceSet.getResource(fileURI, true);
     ctx.put(getSlot(), resource);
   }
-	
+  
   public void setUri(String uri) {
     this.uri = uri;
   }
@@ -213,7 +213,7 @@ public abstract class WorkflowComponentWithSlot
   public String getSlot() {
     return slot;
   }
-	
+  
   public void postInvoke() {}
   public void preInvoke() {}
 }
@@ -270,10 +270,10 @@ assemble arbitrary object graphs in a compact and declarative
 manner.
 
 ul[
-	item[A MWE2 file defines a code[MWE2][module] which exposes its root code[MWE2][component] as reusable artifact.]
-	item[code[MWE2][Properties] can be used to extract reusable, configurable parts of the workflow.]
-	item[Components are mapped to plain vanilla e[Java objects]. Arbitrary code[Java][setABC(..)] and code[Java][addXYZ(..)] methods 
-		are used to configure them.]
+  item[A MWE2 file defines a code[MWE2][module] which exposes its root code[MWE2][component] as reusable artifact.]
+  item[code[MWE2][Properties] can be used to extract reusable, configurable parts of the workflow.]
+  item[Components are mapped to plain vanilla e[Java objects]. Arbitrary code[Java][setABC(..)] and code[Java][addXYZ(..)] methods 
+    are used to configure them.]
 ]
 
 Let's consider the follow short example module and code[Java][SampleClass] to 
@@ -640,13 +640,13 @@ the beginning of substitution variables code[MWE2][${] and the quotes itself. Al
 escape sequences are:
 
 table[
-	tr[td[\n] td[..]td[line break]]
-	tr[td[\r] td[..]td[carriage return]]
-	tr[td[\t] td[..]td[tabular character]]
-	tr[td[\'] td[..]td[single-quote (can be omitted in double-quoted strings)]]
-	tr[td[\"] td[..]td[double-quote (can be omitted in single-quoted strings)]]
-	tr[td[\${]td[..]td[escape the substitution variable start ${]]
-	tr[td[\\ ]td[..]td[the back-slash itself]]
+  tr[td[\n] td[..]td[line break]]
+  tr[td[\r] td[..]td[carriage return]]
+  tr[td[\t] td[..]td[tabular character]]
+  tr[td[\'] td[..]td[single-quote (can be omitted in double-quoted strings)]]
+  tr[td[\"] td[..]td[double-quote (can be omitted in single-quoted strings)]]
+  tr[td[\${]td[..]td[escape the substitution variable start ${]]
+  tr[td[\\ ]td[..]td[the back-slash itself]]
 ]
 
 Other escape sequence are illegal in MWE2 strings.
