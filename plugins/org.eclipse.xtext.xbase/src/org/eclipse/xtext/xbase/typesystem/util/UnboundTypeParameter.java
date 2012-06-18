@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.XExpression;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
- * TODO JavaDoc
+ * TODO JavaDoc, is this an interface?
  */
 public abstract class UnboundTypeParameter extends AbstractReentrantTypeReferenceProvider {
 
@@ -32,8 +32,6 @@ public abstract class UnboundTypeParameter extends AbstractReentrantTypeReferenc
 	public abstract boolean isComputed();
 	
 	public abstract Object getHandle();
-	
-	public abstract boolean hasHints();
 	
 	@Override
 	public String toString() {

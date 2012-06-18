@@ -1230,10 +1230,11 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	 * @param rawType <code>true</code> if we are only interested in the raw type
 	 */
 	protected JvmTypeReference _typeForIdentifiable(XCasePart object, boolean rawType) {
-		if (object.getTypeGuard() != null) {
-			return object.getTypeGuard();
-		}
-		return null;
+		throw new IllegalStateException();
+//		if (object.getTypeGuard() != null) {
+//			return object.getTypeGuard();
+//		}
+//		return null;
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(XVariableDeclaration object, boolean rawType) {

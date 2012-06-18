@@ -5,6 +5,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 import java.lang.annotation.RetentionPolicy
+import org.eclipse.xtext.util.Wrapper
 
 class ToStringHelperTest {
 	
@@ -36,14 +37,31 @@ class ToStringHelperTest {
 		
 		assertEquals('''
 		OtherClass [
-		  other = OtherClass@«System::identityHashCode(obj)»
+		  other = «obj.toString»
 		  name = "foo"
 		]'''.toString,helper.toString(obj))
+	}
+	
+	@Test def void recursionHandling_02() {
+		val helper = new ToStringHelper
+		val ref = new Wrapper<DataClass>
+		val obj = new DataClass(ref, "test")
+		ref.set(obj)
+		assertEquals('''
+			DataClass [
+			  _other = Wrapper of (DataClass@«System::identityHashCode(obj)»)
+			  _name = "test"
+			]'''.toString,helper.toString(obj))
 	}
 }
 
 class OtherClass {
 	public OtherClass other
+	public String name
+}
+
+@Data class DataClass {
+	public Wrapper<DataClass> other
 	public String name
 }
 

@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -58,6 +59,16 @@ public final class UnboundTypeParameters {
 			return result;
 		}
 		return false;
+	}
+	
+	public static  JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive, Primitives primitives) {
+		if (potentialPrimitive instanceof XComputedTypeReference) {
+			if (isUnboundTypeParameter((XComputedTypeReference) potentialPrimitive)){
+				return potentialPrimitive;
+			}
+		}
+		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
+		return result;
 	}
 
 	public static boolean isUnboundAndEqual(UnboundTypeParameter typeParameter, JvmTypeReference reference) {

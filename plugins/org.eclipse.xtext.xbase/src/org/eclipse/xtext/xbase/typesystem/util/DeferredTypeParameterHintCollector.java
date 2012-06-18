@@ -11,11 +11,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**
@@ -24,8 +26,55 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
  */
 public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePairWalker {
 
+	protected class ComputedTypeReferenceTraverser extends
+		AbstractTypeReferenceTraverser<XComputedTypeReference> {
+		
+		@Override
+		public Void doVisitTypeReference(JvmTypeReference reference, XComputedTypeReference declaration) {
+			if (UnboundTypeParameters.isUnboundTypeParameter(declaration)) {
+				UnboundTypeParameter typeParameter = (UnboundTypeParameter) declaration.getTypeProvider();
+				addHint(typeParameter, reference);
+				return null;
+			}
+			return DeferredTypeParameterHintCollector.super.doVisitComputedTypeReference(declaration, reference);
+		}
+		
+		@Override
+		public Void doVisitComputedTypeReference(XComputedTypeReference reference, XComputedTypeReference param) {
+			return doVisitTypeReference(reference, param);
+		}
+		
+		@Override
+		public Void doVisitWildcardTypeReference(JvmWildcardTypeReference reference, XComputedTypeReference declaration) {
+			if (UnboundTypeParameters.isUnboundTypeParameter(declaration)) {
+				boolean lowerBoundFound = false;
+				for (JvmTypeConstraint actualConstraint : reference.getConstraints()) {
+					if (actualConstraint instanceof JvmLowerBound) {
+						lowerBoundFound = true;
+						outerVisit(declaration, actualConstraint.getTypeReference(), declaration, getExpectedVariance(), VarianceInfo.IN);
+					}
+				}
+				if (!lowerBoundFound) {
+					for (JvmTypeConstraint actualConstraint : reference.getConstraints()) {
+						outerVisit(declaration, actualConstraint.getTypeReference(), declaration, getExpectedVariance(), VarianceInfo.OUT);
+					}
+				}
+				return null;
+			}
+			return DeferredTypeParameterHintCollector.super.doVisitComputedTypeReference(declaration, reference);
+		}
+		
+	}
+	
+	private ComputedTypeReferenceTraverser computedTypeReferenceTraverser;
+	
 	public DeferredTypeParameterHintCollector(CommonTypeComputationServices services) {
 		super(services);
+		computedTypeReferenceTraverser = createComputedTypeReferenceTraverser();
+	}
+	
+	protected ComputedTypeReferenceTraverser createComputedTypeReferenceTraverser() {
+		return new ComputedTypeReferenceTraverser();
 	}
 	
 	@Override
@@ -35,12 +84,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 
 	@Override
 	public Void doVisitComputedTypeReference(XComputedTypeReference reference, JvmTypeReference param) {
-		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
-			UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
-			addHint(typeParameter, param);
-			return null;
-		}
-		return super.doVisitComputedTypeReference(reference, param);
+		return computedTypeReferenceTraverser.visit(param, reference);
 	}
 
 	@Override
@@ -98,15 +142,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	}
 
 	protected JvmTypeReference asWrapperType(JvmTypeReference potentialPrimitive) {
-		if (potentialPrimitive instanceof XComputedTypeReference) {
-			if (((XComputedTypeReference) potentialPrimitive).getTypeProvider() instanceof UnboundTypeParameter) {
-				// since type parameters are never primitives, it's save to add them directly
-				return potentialPrimitive;
-			}
-		}
-		Primitives primitives = getServices().getPrimitives();
-		JvmTypeReference result = primitives.asWrapperTypeIfPrimitive(potentialPrimitive);
-		return result;
+		return UnboundTypeParameters.asWrapperType(potentialPrimitive, getServices().getPrimitives());
 	}
 
 }

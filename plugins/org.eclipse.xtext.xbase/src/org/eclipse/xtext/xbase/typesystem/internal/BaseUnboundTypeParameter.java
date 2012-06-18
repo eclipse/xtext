@@ -11,14 +11,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -50,8 +54,37 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		}
 		List<BoundTypeArgument> allHints = getAllHints();
 		if (!allHints.isEmpty()) {
-			MergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(allHints);
+			List<BoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
+			for(BoundTypeArgument hint: allHints) {
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+					inferredHints.add(hint);
+				}
+			}
+			MergedBoundTypeArgument typeArgument = getServices().getBoundTypeArgumentMerger().merge(!inferredHints.isEmpty() ? inferredHints : allHints);
 			if (typeArgument != null) {
+				if (!inferredHints.isEmpty() && inferredHints.size() != allHints.size()) {
+					DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getServices()) {
+						@Override
+						protected ComputedTypeReferenceTraverser createComputedTypeReferenceTraverser() {
+							return new ComputedTypeReferenceTraverser() {
+								@Override
+								public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, XComputedTypeReference param) {
+									if (UnboundTypeParameters.isUnboundTypeParameter(param)) {
+										if (reference.getType() instanceof JvmTypeParameter) {
+											return null;
+										}
+									}
+									return super.doVisitParameterizedTypeReference(reference, param);
+								}
+							};
+						}
+					};
+					for(BoundTypeArgument hint: allHints) {
+						if (hint.getSource() != BoundTypeArgumentSource.INFERRED) {
+							collector.processPairedReferences(typeArgument.getTypeReference(), hint.getTypeReference());
+						}
+					}
+				}
 				setBoundTo(typeArgument);
 				return getBoundTo().getTypeReference();
 			}
@@ -80,6 +113,8 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	}
 	
 	protected void setBoundTo(MergedBoundTypeArgument boundTo) {
+		if (this.boundTo != null)
+			throw new IllegalStateException("Cannot resolve twice");
 		this.boundTo = boundTo;
 	}
 	
@@ -110,11 +145,6 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	
 	protected List<BoundTypeArgument> getHints() {
 		return hints;
-	}
-	
-	@Override
-	public boolean hasHints() {
-		return !getAllHints().isEmpty();
 	}
 	
 	protected Set<Object> getEquallyBoundHandles() {

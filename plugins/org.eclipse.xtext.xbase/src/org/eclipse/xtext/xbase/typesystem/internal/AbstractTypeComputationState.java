@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -122,7 +125,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	@Nullable
-	protected ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
+	protected final ResolvedTypes computeTypes(@Nullable XExpression expression, boolean mergeAll) {
 		if (expression != null) {
 			StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, expression);
 			ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
@@ -158,6 +161,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	public AbstractTypeComputationState withNonVoidExpectation() {
+		return withNonVoidExpectation(resolvedTypes);
+	}
+	
+	protected AbstractTypeComputationState withNonVoidExpectation(ResolvedTypes resolvedTypes) {
 		return new TypeComputationStateWithNonVoidExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 	}
 
@@ -239,25 +246,24 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			return Collections.singletonList(result);
 		}
 		// TODO reuse this information later on
-		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
-		DelegatingResolvedTypes demandResolvedTypes = new DelegatingResolvedTypes(resolvedTypes) {
+//		final Map<XExpression, StackedResolvedTypes> demandComputedTypes = Maps.newLinkedHashMap();
+		
+		StackedResolvedTypes demandComputedTypes = new StackedResolvedTypes(resolvedTypes);
+		final AbstractTypeComputationState forked = fork().withNonVoidExpectation(demandComputedTypes);
+		AbstractDelegatingResolvedTypes demandResolvedTypes = new AbstractDelegatingResolvedTypes() {
+			
+			@Override
+			protected IResolvedTypes getDelegate() {
+				return forked.getResolvedTypes();
+			}
 			
 			@Override
 			@Nullable
 			public JvmTypeReference getActualType(@Nullable XExpression expression) {
 				JvmTypeReference type = super.getActualType(expression);
 				if (type == null && expression != null) {
-					StackedResolvedTypes previouslyComputed = demandComputedTypes.get(expression);
-					if (previouslyComputed != null) {
-						return previouslyComputed.getActualType(expression);
-					}
-					AbstractTypeComputationState expressionState = fork().withNonVoidExpectation();
-					StackedResolvedTypes result = expressionState.computeTypesWithoutMerge(expression);
-					if (result != null) {
-						demandComputedTypes.put(expression, result);
-						return result.getActualType(expression);
-					}
-					return null;
+					ITypeComputationResult result = forked.computeTypes(expression);
+					return result.getActualExpressionType();
 				}
 				return type;
 			}
@@ -266,7 +272,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 				featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, featureScopeSession, demandResolvedTypes);
 		List<IFeatureLinkingCandidate> resultList = Lists.newArrayList();
 		for(IEObjectDescription description: descriptions) {
-			resultList.add(createCandidate(featureCall, demandComputedTypes.values(), description));
+			resultList.add(createCandidate(featureCall, demandComputedTypes, description));
 		}
 		if (resultList.isEmpty()) {
 			throw new UnsupportedOperationException("TODO Add error candidate");
@@ -274,17 +280,17 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return resultList;
 	}
 	
-	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final Collection<StackedResolvedTypes> collection, IEObjectDescription description) {
-		StackedResolvedTypes stackedResolvedTypes = new ExpressionAwareStackedResolvedTypes(resolvedTypes, featureCall) {
-			@Override
-			protected void mergeIntoParent() {
-				super.mergeIntoParent();
-//				for(StackedResolvedTypes other: collection) {
-//					other.mergeIntoParent();
-//				}
+	protected IFeatureLinkingCandidate createCandidate(XAbstractFeatureCall featureCall, final StackedResolvedTypes demandComputedTypes, IEObjectDescription description) {
+		if (description instanceof BucketedEObjectDescription) {
+			BucketedEObjectDescription casted = (BucketedEObjectDescription) description;
+			if (casted.getReceiverType() != null) {
+//				final StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(demandComputedTypes);
+				ExpressionTypeComputationState state = createExpressionComputationState(featureCall, demandComputedTypes);
+				return new FeatureLinkingCandidate(featureCall, description, state);
 			}
-		};
-		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, stackedResolvedTypes);
+		}
+		final StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(this.resolvedTypes);
+		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		return new FeatureLinkingCandidate(featureCall, description, state);
 	}
 	
@@ -311,4 +317,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
 
+	public UnboundTypeParameter createUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter) {
+		return resolvedTypes.createUnboundTypeParameter(expression, typeParameter);
+	}
 }
