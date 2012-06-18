@@ -23,6 +23,7 @@ import org.junit.Test
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 
 /**
  * @author Sebastian Zarnekow
@@ -43,7 +44,7 @@ class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
 		val signature = '''def «IF !typeParameters.nullOrEmpty»<«typeParameters»>«ENDIF» void method(«alternatingTypeReferences.join(null, ' p, ', ' p') [it]») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val collector = new ActualTypeArgumentCollector(operation.typeParameters, services)
+		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, services)
 		for(i: (0..alternatingTypeReferences.size-1).withStep(2)) {
 			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType, operation.parameters.get(i+1).parameterType)
 		}
