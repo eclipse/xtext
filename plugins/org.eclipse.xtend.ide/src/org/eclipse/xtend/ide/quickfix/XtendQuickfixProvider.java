@@ -46,6 +46,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendImport;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.contentassist.ReplacingAppendable;
 import org.eclipse.xtend.ide.edit.OrganizeImportsHandler;
@@ -95,6 +96,8 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -118,8 +121,6 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	private MemberFromSuperImplementor superMemberImplementor;
 	@Inject
 	private XtendGrammarAccess grammarAccess;
-	@Inject
-	private TypeReferences typeReferences;
 	@Inject
 	private OrganizeImportsHandler organizeImportsHandler;
 	@Inject
@@ -180,12 +181,31 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 					@Override
 					public void process(XtextResource state) throws Exception {
 						EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
+						// For now we do not provide quickfixes for super as target
+						if(eObject instanceof XMemberFeatureCall){
+							XExpression target = ((XMemberFeatureCall) eObject).getMemberCallTarget();
+							if(target != null && isExpressionWithName(target, XbaseScopeProvider.SUPER))
+								return;
+						}
 						if(eObject instanceof XAbstractFeatureCall){
 							XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
-							EList<XExpression> explicitArguments = call.getExplicitArguments();
 							StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(new ImportManager(true));
 							computeTypeArguments(call, call.getTypeArguments(), appendable);
-							// ------ExpectedType computation
+							JvmTypeReference expectedFieldType =  null;
+							boolean isExtension = false;
+							List<XExpression> arguments = computeArguments(call, isExtension);							
+							if(call instanceof XMemberFeatureCall) {
+								XExpression memberCallTarget = ((XMemberFeatureCall) call).getMemberCallTarget();
+								isExtension = memberCallTarget != null && !isExpressionWithName(memberCallTarget, XbaseScopeProvider.THIS);
+							} else if(call instanceof XAssignment){
+								if(isExpressionWithName(call.getExplicitArguments().get(0), XbaseScopeProvider.IT))
+									isExtension = true;
+							}
+								
+							if(call instanceof XAssignment){
+								XExpression xExpression = arguments.get(0);
+								expectedFieldType = typeProvider.getType(xExpression);
+							}
 							JvmTypeReference expectedType = typeProvider.getExpectedType(call);
 							TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), computationServices);
 							JvmTypeReference resolvedExpectedType= substitutor.substitute(expectedType);
@@ -193,25 +213,25 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								typeRefSerializer.serialize(resolvedExpectedType, call, appendable);
 								appendable.append(" ");
 							}
-							// ------ END
-							appendable.append(elementName);
-							computeArgumentString(call, false, appendable);
-							boolean isExtension = false;
-							if(call instanceof XMemberFeatureCall)
-								isExtension = ((XMemberFeatureCall) call).getMemberCallTarget() != null;
+							if(expectedFieldType == null)
+								expectedFieldType = resolvedExpectedType;
 							boolean isSetter = false;
-							if(call instanceof XAssignment)
+							if(call instanceof XAssignment){
 								isSetter = true;
-							createNewXtendFunction(elementName, appendable.toString(), isExtension, isSetter, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
-							if (resolvedExpectedType != null && resolvedExpectedType.getType() != null && explicitArguments.size() == 0){
-								ICompositeNode callNode = NodeModelUtils.getNode(call);
-								if(callNode != null && !callNode.getText().endsWith(")")){
-									createNewXtendField(elementName, resolvedExpectedType, call, issue, issueResolutionAcceptor, modificationContext);
+								appendable.append("set" + StringExtensions.toFirstUpper(elementName));
+							} else
+								appendable.append(elementName);
+							computeArgumentString(call, false, appendable, isExtension);
+							createNewXtendFunction(isSetter?"set" + StringExtensions.toFirstUpper(elementName): elementName, appendable.toString(), isExtension, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
+							if (!isExtension && (arguments.size() == 0 || call instanceof XAssignment)){
+								createNewXtendField(elementName, expectedFieldType, call, issue, issueResolutionAcceptor, modificationContext);
+								if(!(call instanceof XAssignment))
 									createNewLocalVariable(elementName, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
-								}
 							}
 						}
 					}
+
+					
 				});
 		}
 	}
@@ -220,7 +240,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	 * @since 2.3
 	 */
 	@SuppressWarnings("null")
-	protected void createNewLocalVariable(@NonNull final String elementName,@NonNull JvmTypeReference expectedType,
+	protected void createNewLocalVariable(final String elementName, JvmTypeReference expectedType,
 			Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext) {
 		final StringBuilderBasedAppendable localVarDescriptionBuilder = new StringBuilderBasedAppendable();
 		localVarDescriptionBuilder.append("...").newLine();
@@ -230,9 +250,9 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		IssueResolution issueResolutionlocalVarInType = new IssueResolution("create local variable " + elementName, localVarDescriptionBuilder.toString(), "fix_local_var.png", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
 			public void apply(final EObject element, final IModificationContext context) throws Exception {
 				if(element != null){
-					XtendFunction xtendFunction = EcoreUtil2.getContainerOfType(element, XtendFunction.class);
-					if(xtendFunction != null){
-					int offset = getFirstOffsetOfKeyword(xtendFunction, "{");
+					XtendMember xtendMember = EcoreUtil2.getContainerOfType(element, XtendMember.class);
+					if(xtendMember != null){
+					int offset = getFirstOffsetOfKeyword(xtendMember, "{");
 					IXtextDocument xtextDocument = context.getXtextDocument();
 						if(offset != -1 && xtextDocument != null){
 							final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, element, offset, 0, 1, false);
@@ -245,25 +265,12 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		}));
 		issueResolutionAcceptor.getIssueResolutions().add(issueResolutionlocalVarInType);
 	}
+
 	
 	/**
 	 * @since 2.3
 	 */
-	protected String getDefaultValueLiteral(JvmTypeReference type){
-		if (primitives.isPrimitive(type)) {
-			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
-			if (primitiveKind == Primitive.Boolean) 
-				return "false";
-			else 
-				return "0 as " + type.getSimpleName();
-		}
-		return "null";
-	}
-	
-	/**
-	 * @since 2.3
-	 */
-	protected void createNewXtendFunction(@NonNull final String elementName, @NonNull String callText,final  boolean isExtension, final boolean isSetter, final JvmTypeReference expectedType, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
+	protected void createNewXtendFunction(@NonNull final String elementName, final @NonNull String callText,final  boolean isExtension, final JvmTypeReference expectedType, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
 		StringBuilderBasedAppendable methodDescriptionBuilder = new StringBuilderBasedAppendable();
 		StringBuilderBasedAppendable methodLabelBuilder = new StringBuilderBasedAppendable();
 		methodDescriptionBuilder.append("...").newLine().append("def ");
@@ -271,10 +278,6 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		if(isExtension)
 			methodLabelBuilder.append("extension ");
 		methodLabelBuilder.append("method ");
-		if(isSetter){
-			methodLabelBuilder.append("set");
-			methodDescriptionBuilder.append("set");
-		}
 		methodLabelBuilder.append(elementName);
 		methodDescriptionBuilder.append(callText).append(" {}").newLine().append("...");
 		IssueResolution issueResolutionMethodInType = new IssueResolution(methodLabelBuilder.toString(), methodDescriptionBuilder.toString(), "fix_public_function.png", modificationContext,  new SemanticModificationWrapper(issue.getUriToProblem(),new ISemanticModification(){
@@ -283,7 +286,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 					XAbstractFeatureCall call = (XAbstractFeatureCall) element;
 					XtendClass xtendClazz = EcoreUtil2.getContainerOfType(element, XtendClass.class);
 					IXtextDocument xtextDocument = context.getXtextDocument();
-					doCreateNewFunctionInClazz(call, xtendClazz, expectedType,isSetter, xtextDocument, elementName);
+					doCreateNewFunctionInClazz(call, xtendClazz, expectedType, xtextDocument, callText);
 				}
 			}
 		}));
@@ -293,8 +296,8 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected void doCreateNewFunctionInClazz(@NonNull XAbstractFeatureCall call, XtendClass xtendClazz,@Nullable JvmTypeReference expectedType, boolean isSetter, IXtextDocument xtextDocument,
-			@NonNull String functionName) throws BadLocationException {
+	protected void doCreateNewFunctionInClazz(@NonNull XAbstractFeatureCall call, XtendClass xtendClazz,@Nullable JvmTypeReference expectedType, IXtextDocument xtextDocument,
+			@NonNull String callText) throws BadLocationException {
 		XtendFunction function = EcoreUtil2.getContainerOfType(call, XtendFunction.class);
 		int offset = superMemberImplementor.getFunctionInsertOffset(xtendClazz);
 		if(function != null){
@@ -304,15 +307,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		}
 		final ReplacingAppendable appendable = appendableFactory.get(xtextDocument, call, offset, 0, 1, false);
 		appendable.newLine().increaseIndentation().append("def ");
-		computeTypeArguments(call, call.getTypeArguments(), appendable);
-		if(expectedType != null && expectedType.getType() != null){
-			typeRefSerializer.serialize(expectedType, call, appendable);
-			appendable.append(" ");
-		}
-		if(isSetter)
-			appendable.append("set");
-		appendable.append(functionName);
-		computeArgumentString(call,true, appendable);
+		appendable.append(callText);
 		appendable.append(" { }").decreaseIndentation().decreaseIndentation().newLine();
 		appendable.commitChanges();
 	}
@@ -321,10 +316,11 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	 * @since 2.3
 	 */
 	@SuppressWarnings("null")
-	protected void createNewXtendField(@NonNull final String elementName,@NonNull final JvmTypeReference expectedType, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
+	protected void createNewXtendField(final String elementName, final JvmTypeReference expectedType, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
 		StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable(new ImportManager(true));
+		final JvmTypeReference type = (expectedType == null || expectedType.getType() == null)?typeRefs.createTypeRef(typeRefs.findDeclaredType(Object.class, call)):expectedType;
 		fieldDescriptionBuilder.append("...").newLine();
-		typeRefSerializer.serialize(expectedType, call, fieldDescriptionBuilder);
+		typeRefSerializer.serialize(type, call, fieldDescriptionBuilder);
 		fieldDescriptionBuilder.append(" ").append(elementName).newLine().append("...");
 		IssueResolution issueResolutionField = new IssueResolution("create field " + elementName, fieldDescriptionBuilder.toString(), "fix_private_field.png", modificationContext, new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
 
@@ -334,7 +330,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 				IXtextDocument xtextDocument = context.getXtextDocument();
 				int openingBraceOffset = getFirstOffsetOfKeyword(xtendClazz, "{");
 				if(openingBraceOffset != -1 && xtextDocument != null && call != null)
-					doCreateNewFieldInClazz(elementName, call, expectedType, xtextDocument, openingBraceOffset);
+					doCreateNewFieldInClazz(elementName, call, type, xtextDocument, openingBraceOffset);
 			}
 			
 		}));
@@ -375,13 +371,27 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
+	protected String getDefaultValueLiteral(JvmTypeReference type){
+		if (primitives.isPrimitive(type)) {
+			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
+			if (primitiveKind == Primitive.Boolean) 
+				return "false";
+			else 
+				return "0 as " + type.getSimpleName();
+		}
+		return "null";
+	}
+	
+	/**
+	 * @since 2.3
+	 */
 	@SuppressWarnings("null")
-	protected void computeArgumentString(XAbstractFeatureCall call, boolean paramNames, final IAppendable appendable) {
-		Iterator<XExpression> iterator = call.getExplicitArguments().iterator();
+	protected void computeArgumentString(XAbstractFeatureCall call, boolean paramNames, final IAppendable appendable, boolean isExtension) {
+		Iterator<XExpression> iterator = computeArguments(call, isExtension).iterator();
 		final Set<String> notallowed = Sets.newHashSet();
 		appendable.append("(");
 		while(iterator.hasNext()){
-			XExpression expression = iterator.next();
+			XExpression expression = iterator.next();	
 			JvmTypeReference typeRef = typeProvider.getType(expression);
 			if(typeRef != null){
 				typeRefSerializer.serialize(typeRef, call, appendable);
@@ -395,8 +405,30 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 		}
 		appendable.append(")");
 	}
+
+	private List<XExpression> computeArguments(XAbstractFeatureCall call, boolean isExtension) {
+		List<XExpression> arguments = Lists.newArrayList(call.getExplicitArguments());
+		if(call instanceof XMemberFeatureCall && !isExtension)
+			arguments.remove(((XMemberFeatureCall) call).getMemberCallTarget());
+		else if(call instanceof XAssignment){
+			XExpression firstArgument = arguments.get(0);
+			if(isExpressionWithName(firstArgument, XbaseScopeProvider.THIS))
+				arguments.remove(firstArgument);
+			
+		}
+		return arguments;
+	}
 	
-	
+	private boolean isExpressionWithName(XExpression expression, QualifiedName fqn) {
+		ICompositeNode node = NodeModelUtils.getNode(expression);
+		if(node != null){
+			String string = node.getText().trim();
+			if(string.equals(fqn.toString()))
+					return true;
+		}
+		return false;
+	}
+
 	private final class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAcceptor {
 		private final Set<String> notallowed;
 		Set<String> variableNames = Sets.newHashSet();
@@ -646,7 +678,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 							char[][] enclosingTypeNames, String path) {
 						final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 								simpleTypeName);
-						JvmType importType = typeReferences.findDeclaredType(qualifiedTypeName, contextType);
+						JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType);
 						if(importType instanceof JvmDeclaredType
 								&& visibilityService.isVisible((JvmDeclaredType)importType, contextType)) {
 							StringBuilder label = new StringBuilder("Import '");
@@ -670,7 +702,7 @@ public class XtendQuickfixProvider extends DefaultQuickfixProvider {
 								public void apply(EObject element, IModificationContext context) throws Exception {
 									ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(),
 											element, 0, 0);
-									appendable.append(typeReferences.findDeclaredType(qualifiedTypeName, element));
+									appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
 									appendable.insertNewImports();
 								}
 							});
