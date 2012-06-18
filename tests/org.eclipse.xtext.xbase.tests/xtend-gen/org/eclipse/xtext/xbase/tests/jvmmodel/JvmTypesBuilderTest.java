@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import foo.TestAnnotation3;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
@@ -178,6 +180,49 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
+  public void testIntegerAnnotation() {
+    try {
+      final XAnnotationsFactory f = XAnnotationsFactory.eINSTANCE;
+      final XExpression e = this.expression("\'Foo\'");
+      final XAnnotation anno = f.createXAnnotation();
+      JvmType _findDeclaredType = this.references.findDeclaredType(TestAnnotation3.class, e);
+      final JvmAnnotationType annotatiomType = ((JvmAnnotationType) _findDeclaredType);
+      anno.setAnnotationType(annotatiomType);
+      final XAnnotationElementValuePair pair = f.createXAnnotationElementValuePair();
+      Iterable<JvmOperation> _declaredOperations = annotatiomType.getDeclaredOperations();
+      JvmOperation _head = IterableExtensions.<JvmOperation>head(_declaredOperations);
+      pair.setElement(_head);
+      XExpression _expression = this.expression("10");
+      pair.setValue(_expression);
+      EList<XAnnotationElementValuePair> _elementValuePairs = anno.getElementValuePairs();
+      this._jvmTypesBuilder.<XAnnotationElementValuePair>operator_add(_elementValuePairs, pair);
+      final JvmGenericType type = this.typesFactory.createJvmGenericType();
+      ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
+      this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
+      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      EList<JvmAnnotationReference> _annotations = type.getAnnotations();
+      JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations);
+      JvmAnnotationType _annotation = _head_1.getAnnotation();
+      Assert.assertEquals(_annotationType, _annotation);
+      EList<JvmAnnotationReference> _annotations_1 = type.getAnnotations();
+      JvmAnnotationReference _head_2 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
+      EList<JvmAnnotationValue> _values = _head_2.getValues();
+      int _size = _values.size();
+      Assert.assertEquals(1, _size);
+      EList<JvmAnnotationReference> _annotations_2 = type.getAnnotations();
+      JvmAnnotationReference _head_3 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
+      EList<JvmAnnotationValue> _values_1 = _head_3.getValues();
+      JvmAnnotationValue _head_4 = IterableExtensions.<JvmAnnotationValue>head(_values_1);
+      final JvmIntAnnotationValue value = ((JvmIntAnnotationValue) _head_4);
+      EList<Integer> _values_2 = value.getValues();
+      Integer _head_5 = IterableExtensions.<Integer>head(_values_2);
+      Assert.assertEquals(10, (_head_5).intValue());
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   @Test
   public void testStringArrayAnnotation() {
     try {

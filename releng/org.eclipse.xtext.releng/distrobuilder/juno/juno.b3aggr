@@ -12,8 +12,8 @@
         <features name="org.eclipse.buckminster.pde.feature.feature.group"/>
       </repositories>
     </contributions>
-    <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.2milestones/"/>
-    <validationRepositories location="http://download.eclipse.org/releases/staging"/>
+    <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.2/"/>
+    <validationRepositories location="http://download.eclipse.org/releases/juno"/>
   </validationSets>
   <configurations/>
 </aggregator:Aggregation>

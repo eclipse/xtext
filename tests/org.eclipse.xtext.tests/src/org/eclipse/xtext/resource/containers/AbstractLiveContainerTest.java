@@ -19,8 +19,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -33,6 +35,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -56,6 +59,9 @@ public abstract class AbstractLiveContainerTest {
 
 	@Inject
 	private DefaultGlobalScopeProvider scopeProvider;
+
+	@Inject
+	private IGrammarAccess grammarAccess;
 
 	// we need a normalized URI
 	protected URI computeUnusedUri(ResourceSet resourceSet) {
@@ -144,6 +150,22 @@ public abstract class AbstractLiveContainerTest {
 
 		resourceSet.getResources().remove(foo);
 		assertEquals("other", format(scopeProvider.getScope(res, ref).getAllElements()));
+	}
+
+	@Test
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=382555
+	public void testNonNormalizedURIs() throws Exception {
+		ResourceSet resourceSet = new XtextResourceSet();
+		parser.parse("B", URI.createURI("a." + parser.fileExtension), resourceSet);
+		parser.parse("B", URI.createURI("b." + parser.fileExtension), resourceSet);
+		IResourceDescriptions index = descriptionsProvider.getResourceDescriptions(resourceSet);
+		IResourceDescription rd = index.getResourceDescription(URI.createURI("a." + parser.fileExtension));
+		List<IContainer> containers = containerManager.getVisibleContainers(rd, index);
+		List<IEObjectDescription> objects = Lists.newArrayList();
+		EClass type = (EClass) grammarAccess.getGrammar().getRules().get(0).getType().getClassifier();
+		for (IContainer container : containers)
+			Iterables.addAll(objects, container.getExportedObjects(type, QualifiedName.create("B"), false));
+		assertEquals(2, objects.size());
 	}
 
 }

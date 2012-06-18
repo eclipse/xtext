@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -118,6 +118,7 @@
 		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
 		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
 		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		<li id="197-refactoring.html" ><a href="197-refactoring.php" >Rename Refactoring</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -251,7 +252,7 @@
 			<span class="inlinecode"><span class="keyword">ref</span>&nbsp;Entity01</span>
 			</p>
 			<p>
-			the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/lazy/LazyLinker.html" title="org.eclipse.xtext.linking.lazy.LazyLinker">LazyLinker</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java" title="View Source Code" >(src)</a> first creates an EMF proxy and 
+			the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/lazy/LazyLinker.html" title="org.eclipse.xtext.linking.lazy.LazyLinker">LazyLinker</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java" title="View Source Code" >(src)</a> first creates an EMF proxy and 
 			assigns it to the corresponding <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a>. In EMF a proxy is described by a 
 			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URI</abbr></a>, which points to the real <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>. 
 			In the case of lazy linking the stored <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URI</abbr></a> comprises of the context 
@@ -264,12 +265,12 @@
 			EMF proxy is resolved, the current <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/ResourceSet.html" title="org.eclipse.emf.ecore.resource.ResourceSet">ResourceSet</abbr></a> is asked. The resource set 
 			uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to 
 			return the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> based on the fragment in the URI. The actual cross-reference resolution 
-			is done by <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/lazy/LazyLinkingResource.html" title="org.eclipse.xtext.linking.lazy.LazyLinkingResource">LazyLinkingResource.getEObject(String)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinkingResource.java" title="View Source Code" >(src)</a> which receives the 
-			fragment and delegates to the implementation of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/ILinkingService.html" title="org.eclipse.xtext.linking.ILinkingService">ILinkingService</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java" title="View Source Code" >(src)</a>. The default 
+			is done by <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/lazy/LazyLinkingResource.html" title="org.eclipse.xtext.linking.lazy.LazyLinkingResource">LazyLinkingResource.getEObject(String)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinkingResource.java" title="View Source Code" >(src)</a> which receives the 
+			fragment and delegates to the implementation of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/ILinkingService.html" title="org.eclipse.xtext.linking.ILinkingService">ILinkingService</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java" title="View Source Code" >(src)</a>. The default 
 			implementation in turn delegates to the <a href="080-scoping.php" title="Go to &quot;Scoping&quot;">scoping API</a>.
 			</p>
 			<p>
-			A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/impl/DefaultLinkingService.html" title="org.eclipse.xtext.linking.impl.DefaultLinkingService">simple implementation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java" title="View Source Code" >(src)</a> of the linking service is shipped with Xtext 
+			A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/linking/impl/DefaultLinkingService.html" title="org.eclipse.xtext.linking.impl.DefaultLinkingService">simple implementation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java" title="View Source Code" >(src)</a> of the linking service is shipped with Xtext 
 			and used for any grammar per default. Usually any necessary customization of the linking behavior 
 			can best be described using the <a href="080-scoping.php" title="Go to &quot;Scoping&quot;">scoping API</a>.
 			</p>

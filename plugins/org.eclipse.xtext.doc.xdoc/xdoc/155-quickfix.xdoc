@@ -25,7 +25,7 @@ the problem can be fixed (have a look at the e[DomainmodelQuickfixProvider] for 
 
 code[Java][@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
 public void fixName(final Issue issue, 
-	IssueResolutionAcceptor acceptor) {
+  IssueResolutionAcceptor acceptor) {
   acceptor.accept(issue, 
     "Capitalize name", // quick fix label
     "Capitalize name  of '" + issue.getData()\[0\] + "'", 
@@ -33,7 +33,7 @@ public void fixName(final Issue issue,
     "upcase.png",      // quick fix icon
     new IModification() {
       public void apply(IModificationContext context) 
-		throws BadLocationException {
+    throws BadLocationException {
         IXtextDocument xtextDocument = context.getXtextDocument();
         String firstLetter = xtextDocument.get(issue.getOffset(), 1);
         xtextDocument.replace(issue.getOffset(), 1, 

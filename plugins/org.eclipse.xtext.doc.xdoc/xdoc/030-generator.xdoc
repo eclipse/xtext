@@ -22,22 +22,22 @@ from Java Beans encapsulation principles. An in-depth documentation can be found
 Given the following simple Java class (POJO):
 
 code[Java][package com.mycompany;
-  
+
 public class Person {
-     
+
   private String name;
-     
+
   public void setName(String name) { 
     this.name = name;
   }
-     
+
   private final List<Person> children = new ArrayList<Person>();
-     
+
   public void addChild(Person child) {
     this.children.add(child);
   }
 }
-  ]
+]
 
 One can create a family tree with MWE2 easily by describing it in a declarative manner 
 without writing a single line of Java code and without the need to compile classes:
@@ -45,13 +45,13 @@ without writing a single line of Java code and without the need to compile class
 code[MWE2][module com.mycompany.CreatePersons
 
 Person {
-	name = "Grandpa"
-	child = {
-		name = "Father"
-		child = {
-			name = "Son"
-		}
-	}
+  name = "Grandpa"
+  child = {
+    name = "Father"
+    child = {
+      name = "Son"
+    }
+  }
 }
 ]
 
@@ -62,16 +62,16 @@ The interpreter will basically do the same as the following e[main] method:
 code[Java][package com.mycompany;
 
 public class CreatePersons {
-	public static void main(String\[\] args) {
-		Person grandpa = new Person();
-		grandpa.setName("Grandpa");
-		Person father = new Person();
-		father.setName("Father");
-		grandpa.addChild(father);
-		Person son = new Person();
-		son.setName("Son");
-		father.addChild(son);
-	}
+  public static void main(String\[\] args) {
+    Person grandpa = new Person();
+    grandpa.setName("Grandpa");
+    Person father = new Person();
+    father.setName("Father");
+    grandpa.addChild(father);
+    Person son = new Person();
+    son.setName("Son");
+    father.addChild(son);
+  }
 }
 ]
 
@@ -88,13 +88,13 @@ their respective e[name] assigned via a reflective invocation of the e[setName] 
 can simply repeat the child assignment:
 
 code[MWE2][child = com.mycompany.Person {
-	name = "Father"
-	child = {
-		name = "Son"
-	}
-	child = {
-		name = "Daughter"
-	}
+  name = "Father"
+  child = {
+    name = "Son"
+  }
+  child = {
+    name = "Daughter"
+  }
 }
 ]
 
@@ -151,35 +151,35 @@ var projectName = "org.xtext.example.mydsl"
 var runtimeProject = "../${projectName}"
 
 Workflow {
-	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
-	}
+  bean = StandaloneSetup {
+    platformUri = "${runtimeProject}/.."
+  }
 
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen"
-	}
+  component = DirectoryCleaner {
+    directory = "${runtimeProject}/src-gen"
+  }
 
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}.ui/src-gen"
-	}
+  component = DirectoryCleaner {
+    directory = "${runtimeProject}.ui/src-gen"
+  }
 
-	component = Generator {
-		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		projectNameRt = projectName
-		projectNameUi = "${projectName}.ui"
+  component = Generator {
+    pathRtProject = runtimeProject
+    pathUiProject = "${runtimeProject}.ui"
+    projectNameRt = projectName
+    projectNameUi = "${projectName}.ui"
 
-		language = {
-			uri = grammarURI
-			fileExtensions = file.extensions
+    language = {
+      uri = grammarURI
+      fileExtensions = file.extensions
 
-			// Java API to access grammar elements
-			fragment = grammarAccess.GrammarAccessFragment {}
+      // Java API to access grammar elements
+      fragment = grammarAccess.GrammarAccessFragment {}
 
-			/* more fragments to configure the language */
-			...
-		}
-	}
+      /* more fragments to configure the language */
+      ...
+    }
+  }
 }
 ]
 

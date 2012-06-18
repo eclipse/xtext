@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -118,6 +118,7 @@
 		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
 		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
 		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		<li id="197-refactoring.html" ><a href="197-refactoring.php" >Rename Refactoring</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -185,9 +186,9 @@
 			<p>
 			<ul>
 			  <li>An abstract proposal provider class named <span class="inlinecode">Abstract{MyLang}ProposalProvider</span> generated 
-			  		into the <em>src-gen</em> folder within the <em>ui</em> project, and</li>
+			      into the <em>src-gen</em> folder within the <em>ui</em> project, and</li>
 			  <li>a concrete subclass in the <em>src</em>-folder of the <em>ui</em> project called 
-			  		<span class="inlinecode">{MyLang}ProposalProvider</span></li>
+			      <span class="inlinecode">{MyLang}ProposalProvider</span></li>
 			</ul>
 			</p>
 			<p>
@@ -221,7 +222,7 @@
 			</p>
 			<p>
 			Clients who want to customize the behavior may override the methods from the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.html" title="org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider">AbstractJavaBasedContentProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.java" title="View Source Code" >(src)</a> or introduce new
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.html" title="org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider">AbstractJavaBasedContentProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.java" title="View Source Code" >(src)</a> or introduce new
 			 methods with a specialized first parameter. The framework inspects the type of the model object and 
 			dispatches method calls to the most concrete implementation, that can be found.
 			</p>

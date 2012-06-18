@@ -48,18 +48,18 @@ Example:
 
 code[Xtext][MyRule:
   ({MySubRule} "sub")? (strVal+=ID intVal+=INT)*;
-	]
+  ]
 
 This implies several constraints:
 ol[
-	item[Types: only instances of e[MyRule] and e[MySubRule] are allowed for this rule. Subtypes are 
-		prohibited, since the parser never instantiates unknown subtypes.]
-	item[Features: In case the e[MyRule] and e[MySubRule] have codeRef[org.eclipse.emf.ecore.EStructuralFeature][EStructuralFeatures] 
-		besides e[strVal] and e[intVal], only e[strVal] and e[intVal] may have 
-		ref:transientvalues[non-transient values].]
-	item[Quantities: The following condition must be true: code[Java][strVal.size() == intVal.size()].]
-	item[Values: It must be possible to ref:valueconverter[convert all values] to valid tokens for 
-		terminal rule e[STRING].  The same is true for e[intVal] and e[INT].]
+  item[Types: only instances of e[MyRule] and e[MySubRule] are allowed for this rule. Subtypes are 
+    prohibited, since the parser never instantiates unknown subtypes.]
+  item[Features: In case the e[MyRule] and e[MySubRule] have codeRef[org.eclipse.emf.ecore.EStructuralFeature][EStructuralFeatures] 
+    besides e[strVal] and e[intVal], only e[strVal] and e[intVal] may have 
+    ref:transientvalues[non-transient values].]
+  item[Quantities: The following condition must be true: code[Java][strVal.size() == intVal.size()].]
+  item[Values: It must be possible to ref:valueconverter[convert all values] to valid tokens for 
+    terminal rule e[STRING].  The same is true for e[intVal] and e[INT].]
 ]
 
 The typical use case for the concrete syntax validator is validation in non-Xtext-editors that, 
@@ -76,11 +76,11 @@ the grammar as declarative, which is something the parser doesn't always do.
 
 ul[
 item[Grammar rules containing assigned actions (e.g. code[Xtext][{MyType.myFeature=current}] are ignored. 
-	Unassigned actions (e.g. code[Xtext][{MyType}]), however, are supported. ]
+  Unassigned actions (e.g. code[Xtext][{MyType}]), however, are supported. ]
 item[Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule 
-	calls are ignored.]
+  calls are ignored.]
 item[Orders within list-features can not be validated. e.g. code[Xtext][Rule: (foo+=R1 foo+=R2)*] implies 
-	that e[foo] is expected to contain instances of e[R1] and e[R2] in an alternating order.]
+  that e[foo] is expected to contain instances of e[R1] and e[R2] in an alternating order.]
 ]
 
 To use concrete syntax validation you can let Guice inject an instance of 
@@ -118,7 +118,7 @@ configuration and you are good to go:
 
 code[MWE2][
 fragment = 
-	org.eclipse.xtext.generator.validation.JavaValidatorFragment {}
+  org.eclipse.xtext.generator.validation.JavaValidatorFragment {}
 ]
 
 The generator will provide you with two Java classes. An abstract class generated to e[src-gen/] which 
@@ -181,9 +181,9 @@ assist you when testing your validators.
 
 Testing validators typically works as follows: 
 ol[
-	item[The test creates some models which intentionally violate some constraints.]
-	item[The test runs some chosen codeRef[org.eclipse.xtext.validation.Check][@Check-methods] from the validator.]
-	item[The test asserts whether the codeRef[org.eclipse.xtext.validation.Check][@Check-methods] have raised the expected warnings and errors.]
+  item[The test creates some models which intentionally violate some constraints.]
+  item[The test runs some chosen codeRef[org.eclipse.xtext.validation.Check][@Check-methods] from the validator.]
+  item[The test asserts whether the codeRef[org.eclipse.xtext.validation.Check][@Check-methods] have raised the expected warnings and errors.]
 ]
 
 To create models, you can either use EMF's codeRef[org.eclipse.emf.ecore.resource.ResourceSet] to 
@@ -193,7 +193,7 @@ While the first option has the advantages that you can edit your models in your 
 the second option has the advantage that you can create partial models.
 
 To run the codeRef[org.eclipse.xtext.validation.Check][@Check-methods] and ensure they raise the intended errors and warnings, you can utilize 
-codeRef[org.eclipse.xtext.junit.validation.ValidatorTester] as shown by the following example:
+codeRef[org.eclipse.xtext.junit4.validation.ValidatorTester] as shown by the following example:
 
 Validator:
 
@@ -240,9 +240,9 @@ code[Java][public class MyLanguageValidatorTest extends AbstractXtextTests {
 This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit 
 whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the code[Java][setUp()]-method 
 before each test case and thereby helps to create some common state. In this example, the validator 
-is instantiated by means of Google Guice. As we inherit from the codeRef[org.eclipse.xtext.junit.AbstractXtextTests]
+is instantiated by means of Google Guice. As we inherit from the codeRef[org.eclipse.xtext.junit4.AbstractXtextTests]
 there are a plenty of useful methods available and the state of the global EMF singletons will be restored in the
-method code[Java][tearDown()]. Afterwards, the codeRef[org.eclipse.xtext.junit.validation.ValidatorTester] 
+method code[Java][tearDown()]. Afterwards, the codeRef[org.eclipse.xtext.junit4.validation.ValidatorTester] 
 is created and parameterized with the actual validator. It acts as a wrapper for the validator, 
 ensures that the validator has a valid state and provides convenient access to the validator itself 
 (code[Java][tester.validator()]) as well as to the utility classes which assert diagnostics created by the validator 
@@ -254,23 +254,23 @@ code[Java][validate(model)] leaves it to the framework to call the applicable co
 side-effects between tests, it is recommended to call the codeRef[org.eclipse.xtext.validation.Check][@Check-methods] directly.
 
 code[Java][diagnose()] and code[Java][validate(model)] return an object of type 
-codeRef[org.eclipse.xtext.junit.validation.AssertableDiagnostics] which provides 
+codeRef[org.eclipse.xtext.junit4.validation.AssertableDiagnostics] which provides 
 several e[assert]-methods to verify whether the expected diagnostics are present:
 
 ul[
-	item[code[Java][assertError(int code)]: There must be one diagnostic with severity ERROR and the supplied error code.]
-	item[code[Java][assertErrorContains(String messageFragment)]: There must be one diagnostic with severity ERROR and 
-		its message must contain e[messageFragment].]
-	item[code[Java][assertError(int code, String messageFragment)]: Verifies severity, error code and messageFragment.]
-	item[code[Java][assertWarning(...)]: This method is available for the same combination of parameters as code[Java][assertError()].]
-	item[code[Java][assertOK()]: Expects that no diagnostics (errors, warnings etc.) have been raised.   ]
-	item[code[Java][assertDiagnostics(int severity, int code, String messageFragment)]: Verifies severity, 
-		error code and messageFragment.]
-	item[code[Java][assertAll(DiagnosticPredicate... predicates)]: Allows to describe multiple diagnostics at the 
-		same time and verifies that all of them are present. Class 
-		codeRef[org.eclipse.xtext.junit.validation.AssertableDiagnostics] contains static code[Java][error()] and 
-		code[Java][warning()] methods which help to create the needed 
-		codeRef[org.eclipse.xtext.junit.validation.AssertableDiagnostics$DiagnosticPredicate]. Example: 
-		code[Java][assertAll(error(123), warning("some part of the message"))]. ]
-	item[code[Java][assertAny(DiagnosticPredicate predicate)]: Asserts that a diagnostic exists which matches the predicate.]
+  item[code[Java][assertError(int code)]: There must be one diagnostic with severity ERROR and the supplied error code.]
+  item[code[Java][assertErrorContains(String messageFragment)]: There must be one diagnostic with severity ERROR and 
+    its message must contain e[messageFragment].]
+  item[code[Java][assertError(int code, String messageFragment)]: Verifies severity, error code and messageFragment.]
+  item[code[Java][assertWarning(...)]: This method is available for the same combination of parameters as code[Java][assertError()].]
+  item[code[Java][assertOK()]: Expects that no diagnostics (errors, warnings etc.) have been raised.   ]
+  item[code[Java][assertDiagnostics(int severity, int code, String messageFragment)]: Verifies severity, 
+    error code and messageFragment.]
+  item[code[Java][assertAll(DiagnosticPredicate... predicates)]: Allows to describe multiple diagnostics at the 
+    same time and verifies that all of them are present. Class 
+    codeRef[org.eclipse.xtext.junit4.validation.AssertableDiagnostics] contains static code[Java][error()] and 
+    code[Java][warning()] methods which help to create the needed 
+    codeRef[org.eclipse.xtext.junit4.validation.AssertableDiagnostics$DiagnosticPredicate]. Example: 
+    code[Java][assertAll(error(123), warning("some part of the message"))]. ]
+  item[code[Java][assertAny(DiagnosticPredicate predicate)]: Asserts that a diagnostic exists which matches the predicate.]
 ]

@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -118,6 +118,7 @@
 		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
 		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
 		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		<li id="197-refactoring.html" ><a href="197-refactoring.php" >Rename Refactoring</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -211,7 +212,7 @@
 			</ol>
 			
 			If you don't like these defaults you'll have to subclass 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.html" title="org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry">XtextTemplateContextTypeRegistry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java" title="View Source Code" >(src)</a> 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.html" title="org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry">XtextTemplateContextTypeRegistry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java" title="View Source Code" >(src)</a> 
 			and configure it via <a href="040-dependency-injection.php#guicemodules.php" title="Go to &quot;The Module API&quot;">Guice</a>. 
 			</p>
 			<p>
@@ -235,7 +236,7 @@
 			<h2>Cross Reference Template Variable Resolver</h2>
 			<p>
 			Xtext comes with a specific template variable resolver called 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.html" title="org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver">CrossReferenceTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.java" title="View Source Code" >(src)</a>, 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.html" title="org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver">CrossReferenceTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.java" title="View Source Code" >(src)</a>, 
 			which can be used to pre-populate placeholders for cross-references within a template. The respective
 			template variable is called <em>CrossReference</em> and its syntax is as follows:
 			</p>
@@ -250,11 +251,11 @@
 				<div class="incode">
 					<p class="code">
 						&lt;template&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+						&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
+						&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
+						&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 						${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)}&nbsp;=&gt;<br/>
 						&nbsp;&nbsp;${state:CrossReference(<span class="string">&apos;Transition.state&apos;</span>)<br/>
 						&lt;/template&gt;
@@ -276,7 +277,7 @@
 			<a name="templates_7" ></a>
 			<h2>Enumeration Template Variable Resolver</h2>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html" title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver">EnumTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java" title="View Source Code" >(src)</a> 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html" title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver">EnumTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java" title="View Source Code" >(src)</a> 
 			resolves a template variable to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnumLiteral.html" title="org.eclipse.emf.ecore.EEnumLiteral">EEnumLiterals</abbr></a>
 			which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em>
 			template variable. 
@@ -295,11 +296,11 @@
 				<div class="incode">
 					<p class="code">
 						&lt;template&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+						&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
+						&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
+						&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
+						&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
+						&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
 						${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;<span class="keyword">entity</span>&nbsp;${Name}&nbsp;{<br/>
 						&nbsp;&nbsp;${cursor}<br/>
 						}<br/>

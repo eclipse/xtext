@@ -28,15 +28,15 @@ implemented in Java. Here's an example:
 
 code[Java][
 public class MyDslRuntimeModule 
-	extends AbstractMyDslRuntimeModule {
-	
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder
-			.bind(IScopeProvider.class)
-			.to(MyConcreteScopeProvider.class);
-	}
+  extends AbstractMyDslRuntimeModule {
+  
+  @Override
+  public void configure(Binder binder) {
+    super.configure(binder);
+    binder
+      .bind(IScopeProvider.class)
+      .to(MyConcreteScopeProvider.class);
+  }
 }
 ]
 
@@ -58,7 +58,7 @@ reflectively looks for certain methods in order to find declared bindings. The m
 method is :
 
 code[Java][public Class<? extends IScopeProvider> bindIScopeProvider() {
-	return MyConcreteScopeProvider.class;
+  return MyConcreteScopeProvider.class;
 }
 ]
 
@@ -90,8 +90,8 @@ is created (i.e. factory). If you want to point to a provider rather than to a c
 the following binding method.
 
 code[Java][public Class<? extends Provider<IScopeProvider>> 
-	provideIScopeProvider() {
-		return MyConcreteScopeProviderFactory.class;
+  provideIScopeProvider() {
+    return MyConcreteScopeProviderFactory.class;
 }
 ]
 
@@ -105,7 +105,7 @@ if some global state should be shared in the application:
 
 code[Java][
 public Provider<IScopeProvider> provideIScopeProvider() {
-	return new MyConcreteScopeProviderFactory();
+  return new MyConcreteScopeProviderFactory();
 }
 ]
 
@@ -113,7 +113,7 @@ or
 
 code[Java][
 public IScopeProvider bindIScopeProvider() {
-	return new MyConcreteScopeProvider();
+  return new MyConcreteScopeProvider();
 }
 ]
 
@@ -125,7 +125,7 @@ name 'configure', has a return type code[Java][void] and accepts one argument of
 
 code[Java][
 public void configureIScopeProvider(Binder binder) {
-	binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);
+  binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);
 } 
 ]
 
@@ -138,11 +138,11 @@ method. It could look like this:
 
 code[Java][
 public static void main(String\[\] args) {
-	Injector injector = Guice.createInjector(
-		new MyDslRuntimeModule());
-	MyApplication application = injector.getInstance(
-		MyApplication.class);
-	application.run();
+  Injector injector = Guice.createInjector(
+    new MyDslRuntimeModule());
+  MyApplication application = injector.getInstance(
+    MyApplication.class);
+  application.run();
 }
 ]
 

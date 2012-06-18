@@ -1,8 +1,8 @@
 section:TutorialUnitTests[Unit Testing the Language]
 
-Automated tests are crucial for the maintainability and the quality of a software product. That's why
+Automated tests are crucial for the maintainability and the quality of a software product. That is why
 it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
-a test project for that purpose. It simplifies the setup procedure both for the eclipse agnostic tests and the ui
+a test project for that purpose. It simplifies the setup procedure both for the Eclipse agnostic tests and the UI
 tests for Junit4.
 
 This tutorial is about testing the parser and the linker for the e[Domainmodel]. It leverages Xtend to
@@ -32,11 +32,11 @@ ol[
 		The actual test case is pretty straight forward with Xtend. The utility class 
 		e[org.eclipse.xtext.junit4.util.ParseHelper] allows to parse an arbitrary string into a
 		e[Domainmodel]. The model itself can be traversed and checked afterwards. A static import of
-		codeRef[junit.framework.Assert] leads to concise a readable test cases.
+		codeRef[org.junit.Assert] leads to concise and readable test cases.
 		
 		code[Xtend2][
 			import org.eclipse.xtext.junit4.util.ParseHelper
-			import static junit.framework.Assert.*
+			import static org.junit.Assert.*
 			
 			...
 		

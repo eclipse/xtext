@@ -47,6 +47,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
@@ -196,10 +197,9 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 		Link link = new Link(parent, SWT.NONE);
 		GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
 		layoutData.horizontalSpan = 3;
-		layoutData.horizontalIndent = 2;
 		link.setLayoutData(layoutData);
 		link.setText(text);
-		link.setToolTipText("Click here to install buckminster headless from "+P2DirectorLaunch.REPOSITORY);
+		link.setToolTipText("Click here to install buckminster headless from " + P2DirectorLaunch.REPOSITORY);
 		link.setFont(parent.getFont());
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -207,6 +207,15 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 				super.widgetSelected(e);
 				final ILaunchConfigurationType configurationType = DebugPlugin.getDefault().getLaunchManager()
 						.getLaunchConfigurationType("org.eclipse.pde.ui.RuntimeWorkbench");
+
+				final String destinationPath;
+
+				if (!Strings.isNullOrEmpty(buckyField.getText())) {
+					destinationPath = buckyField.getText();
+				} else {
+					destinationPath = P2DirectorLaunch.DESTINATION_JAVA;
+					buckyField.setText(destinationPath);
+				}
 
 				try {
 					IRunnableWithProgress runnable = new IRunnableWithProgress() {
@@ -216,25 +225,24 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 							ILaunchConfigurationWorkingCopy workingCopy;
 							try {
 								workingCopy = configurationType.newInstance(null, "Install buckminster headless");
-								String destinationPath = buckyField.getText();
-								if (Strings.isNullOrEmpty(destinationPath)) {
-									destinationPath = P2DirectorLaunch.DESTINATION_JAVA;
-								}
 								P2DirectorLaunch.setupLaunchConfiguration(workingCopy, destinationPath);
 								ILaunch launch = workingCopy.launch(ILaunchManager.RUN_MODE, localmonitor.newChild(20));
 								while (!localmonitor.isCanceled() && !launch.isTerminated()) {
-									localmonitor.worked(10);
+									localmonitor.worked(5);
 									localmonitor.setWorkRemaining(180);
 									Thread.sleep(200l);
 								}
-								buckyField.setText(destinationPath);
-								dbc.updateModels();
+								Display.getDefault().syncExec(new Runnable() {
+									public void run() {
+										dbc.updateModels();
+									}
+								});
 							} catch (CoreException e) {
 								throw new InvocationTargetException(e);
 							}
 						}
 					};
-					new ProgressMonitorDialog(parent.getShell()).run(false, true, runnable);
+					new ProgressMonitorDialog(parent.getShell()).run(true, true, runnable);
 
 				} catch (InvocationTargetException e2) {
 					// handle exception

@@ -1,21 +1,23 @@
 section2:xbaseLanguageRef_Syntax[Lexical Syntax]
 
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
-chosen and it is recommended to stick with the lexical syntax described in the following.
+Xbase comes with a small set of terminal rules, which can be overridden and hence changed by users. 
+However the default implementation is carefully chosen and it is recommended to stick with the 
+lexical syntax described in the following.
 
 section3:Xbase_Syntax_Identifiers[Identifiers]
 
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
-Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
+identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
 while having less ambiguities. They start with a letter e[a]-e[z], e[A]-e[Z] or an underscore followed
-by more of these characters or a digit e[0]-e[9]. 
+by more of these characters or any digit e[0]-e[9]. 
 
 section4:Xbase_Syntax_EscapedIdentifiers[Escaped Identifiers]
 
-Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword code[service] in your language but want to call a Java property e[service] at some point. 
-In such cases you use an escaped identifier code[^service] to reference the Java property.
+Identifiers must not have the same spelling as any reserved keyword. 
+However, this limitation can be avoided by escaping identifiers with the prefix code[^]. Escaped identifiers 
+are used in cases when there is a conflict with a reserved keyword. Imagine you have introduced a 
+keyword code[service] in your language but want to call a Java property e[service]. 
+In such cases you can use the escaped identifier code[^service] to reference the Java property.
 
 section4[Syntax]
 
@@ -36,82 +38,11 @@ ul[
 	item[code[^extends]]
 ]
 
-section3:Xbase_Syntax_StringLiteral[String Literals]
-
-String literals can either use single quotes (') or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
-supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
-is that single quotes within the literal have to be escaped and double quotes do not.
-
-See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
-
-In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
-
-section4[Syntax]
-
-code[
-//TODO
-]
-
-section4[Examples]
-
-ul[
-	item[code['Foo Bar Baz']]
-	item[code["Foo Bar Baz"]]
-	item[code[" the quick brown fox 
-		   jumps over the lazy dog."]]
-	item[code['Escapes : \' ']]
-	item[code["Escapes : \" "]]
-]
-
-section3:Xbase_Syntax_NumberLiteral[Number Literals]
-
-Xbase supports roughly the same number literals as Java with a few differences.   
-First, there are no signed number literals. If you put a minus operator in front of an number 
-literal it is taken as a code[UnaryOperator] with one argument (the positive number 
-literal). Second, as in Java 7, you can separate digits using code[_] for better readability
-of large numbers.
- 
-An integer literal creates an code[Xtend][int], a code[Xtend][long] (suffix code[L]) or a
-codeRef[java.math.BigInteger] (suffix code[BI]). There are no octal numbers
-
-code[Xtend][
-  42
-  1_234_567_890 
-  0xbeef    // hexadecimal
-  077       // decimal 77 (*NOT* octal)
-  -1  // an expression consisting of the unary - operator and an integer literal  
-  42L
-  0xbeef#L // hexadecimal, mind the '#'
-  0xbeef_beef_beef_beef_beef#BI // BigInteger
-]
-
-An floating-point literal creates an code[Xtend][double] (suffix code[D] or none), a code[Xtend][float] 
-(suffix code[F]) or a codeRef[java.math.BigDecimal] (suffix code[BD]). If you use a code[.] you have to 
-specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point 
-literals.  
-code[Xtend][
-  42d     // double
-  0.42e2  // implicit double
-  0.42e2f // float
-  4.2f    // float
-  0.123_456_789_123_456_789_123_456_789e2000bd // BigDecimal
-]
-
 section3:Xbase_Syntax_Comments[Comments]
 
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments]).
+The syntax is the same as the one known from Java (see link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.7][§ 3.7 Comments]).
 
-section4[Syntax]
-
-code[Xtext][
-terminal ML_COMMENT	: 
-	'/*' -> '*/'
-;
-terminal SL_COMMENT : 
-	'//' !('\n'|'\r')* ('\r'? '\n')?
-;
-]
 
 section3:Xbase_Syntax_Whitespace[White Space]
 
@@ -121,29 +52,30 @@ section3:Xbase_Syntax_Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
-	item[code[Xbase][extends]]
-	item[code[Xbase][super]]
-	item[code[Xbase][instanceof]]
 	item[code[Xbase][as]]
-	item[code[Xbase][new]]
-	item[code[Xbase][null]]
-	item[code[Xbase][false]]
-	item[code[Xbase][true]]
-	item[code[Xbase][val]]
-	item[code[Xbase][var]]
-	item[code[Xbase][if]]
-	item[code[Xbase][else]]
-	item[code[Xbase][switch]]
-	item[code[Xbase][case]]
-	item[code[Xbase][default]]
-	item[code[Xbase][do]]
-	item[code[Xbase][while]]
-	item[code[Xbase][for]]
-	item[code[Xbase][typeof]]
-	item[code[Xbase][throw]]
-	item[code[Xbase][try]]
-	item[code[Xbase][catch]]
-	item[code[Xbase][finally]]
+    item[code[Xbase][case]]
+    item[code[Xbase][catch]]
+    item[code[Xbase][default]]
+    item[code[Xbase][do]]
+    item[code[Xbase][else]]
+    item[code[Xbase][extends]]
+    item[code[Xbase][false]]
+    item[code[Xbase][finally]]
+    item[code[Xbase][for]]
+    item[code[Xbase][if]]
+    item[code[Xbase][instanceof]]
+    item[code[Xbase][new]]
+    item[code[Xbase][null]]
+    item[code[Xbase][return]]
+    item[code[Xbase][super]]
+    item[code[Xbase][switch]]
+    item[code[Xbase][throw]]
+    item[code[Xbase][true]]
+    item[code[Xbase][try]]
+    item[code[Xbase][typeof]]
+    item[code[Xbase][val]]
+    item[code[Xbase][var]]
+    item[code[Xbase][while]]
 ]
 
-However, in case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 
+In case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 

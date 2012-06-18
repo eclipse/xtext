@@ -33,7 +33,7 @@
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_5.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_5.php" >Write Your Own Grammar</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_6.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_6.php" >Generate Language Artifacts</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_7.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_7.php" >Run the Generated IDE Plug-in</a></li>
-		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration : Adding Packages and Imports</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainModelWalkThrough_8.html" ><a href="020-domainmodel-step-by-step.php#DomainModelWalkThrough_8.php" >Second Iteration: Adding Packages and Imports</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -118,6 +118,7 @@
 		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
 		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
 		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		<li id="197-refactoring.html" ><a href="197-refactoring.php" >Rename Refactoring</a></li>
 		</ul>
 		</li>
 		<li class="separator"><div class="separator">
@@ -224,17 +225,17 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
-						&nbsp;&nbsp;<br/>
+						<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;Person&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;name;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name;<br/>
 						&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">final</span>&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;Person&gt;();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+						<br/>
 						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(Person&nbsp;child)&nbsp;{<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.children.add(child);<br/>
 						&nbsp;&nbsp;}<br/>
@@ -254,13 +255,13 @@
 						<span class="keyword">module</span>&nbsp;com.mycompany.CreatePersons<br/>
 						<br/>
 						Person&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Grandpa"</span><br/>
+						&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Grandpa"</span><br/>
+						&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -278,16 +279,16 @@
 						<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
 						<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;CreatePersons&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;grandpa&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.setName(<span class="string">"Grandpa"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;father&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.setName(<span class="string">"Father"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.addChild(father);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;son&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;son.setName(<span class="string">"Son"</span>);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;grandpa&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;grandpa.setName(<span class="string">"Grandpa"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;father&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;father.setName(<span class="string">"Father"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;grandpa.addChild(father);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;son&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;son.setName(<span class="string">"Son"</span>);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -321,13 +322,13 @@
 				<div class="incode">
 					<p class="code">
 						child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Daughter"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Father"</span><br/>
+						&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Son"</span><br/>
+						&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;<span class="string">"Daughter"</span><br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -355,7 +356,7 @@
 			A language generator is composed of so called language configurations. 
 			For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 			In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">generator
-			fragments</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
+			fragments</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 			The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 			the outline view, etc.
 			</p>
@@ -378,7 +379,7 @@
 			to the generation of language infrastructure components and are called in the declared order.
 			Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one 
 			of the configured locations and contribute to several shared artifacts. A generator fragment must implement
-			the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
+			the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/IGeneratorFragment.html" title="org.eclipse.xtext.generator.IGeneratorFragment">IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 			</p>
 			<p>
 			There is usually no need to write your own generator fragments and only rarely you might want to extend an
@@ -406,57 +407,57 @@
 						<span class="keyword">var</span>&nbsp;runtimeProject&nbsp;=&nbsp;<span class="string">"../${projectName}"</span><br/>
 						<br/>
 						Workflow&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/.."</span><br/>
+						&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;<span class="string">"${runtimeProject}/.."</span><br/>
+						&nbsp;&nbsp;}<br/>
+						<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}/src-gen"</span><br/>
+						&nbsp;&nbsp;}<br/>
+						<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui/src-gen"</span><br/>
+						&nbsp;&nbsp;}<br/>
+						<br/>
+						&nbsp;&nbsp;component&nbsp;=&nbsp;Generator&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;pathRtProject&nbsp;=&nbsp;runtimeProject<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;pathUiProject&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui"</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;projectNameRt&nbsp;=&nbsp;projectName<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;projectNameUi&nbsp;=&nbsp;<span class="string">"${projectName}.ui"</span><br/>
+						<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;=&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileExtensions&nbsp;=&nbsp;file.extensions<br/>
+						<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br/>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br/>
+						<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/</span><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}/src-gen"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui/src-gen"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;Generator&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathRtProject&nbsp;=&nbsp;runtimeProject<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathUiProject&nbsp;=&nbsp;<span class="string">"${runtimeProject}.ui"</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameRt&nbsp;=&nbsp;projectName<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameUi&nbsp;=&nbsp;<span class="string">"${projectName}.ui"</span><br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;=&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileExtensions&nbsp;=&nbsp;file.extensions<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br/>
-						<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/</span><br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
 			</div>
 			</p>
 			<p>
-			Here the root element is <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr> and is part of the very slim runtime 
+			Here the root element is <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow</abbr></a> and is part of the very slim runtime 
 			model shipped with MWE2. It accepts 
 			<span class="inlinecode">bean</span>s and <span class="inlinecode">component</span>s. A <span class="inlinecode"><span class="keyword">var</span></span> declaration is a first class concept of MWE2's configuration language 
 			and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
 			Note that you can refer to the variables using the <span class="inlinecode">${variable-name}</span> notation. 
 			</p>
 			<p>
-			The method <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr> does nothing but provides a means to apply global side-effects, which 
+			The method <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow.addBean(Object)</abbr></a> does nothing but provides a means to apply global side-effects, which 
 			unfortunately is required sometimes. In this example we do a so called <em>EMF stand-alone setup</em>. This class 
 			initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
 			e.g. it allows to populate EMF's singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="org.eclipse.emf.ecore.EPackage.Registry">EPackage.Registry</abbr></a>.
 			</p>
 			<p>
-			Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr> method 
-			accepts instances of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr>, which is the primary concept of MWE2's workflow model. The
-			language generator component itself is an instance of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr> and can therefore be used within MWE2 workflows. 
+			Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="org.eclipse.emf.mwe2.runtime.workflow.Workflow">Workflow.addComponent()</abbr></a> method 
+			accepts instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a>, which is the primary concept of MWE2's workflow model. The
+			language generator component itself is an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent">IWorkflowComponent</abbr></a> and can therefore be used within MWE2 workflows. 
 			</p>
 			<a name="generator_6" ></a>
 			<h2>Standard Generator Fragments</h2>
@@ -473,62 +474,62 @@
 			    <td><em>Related Documentation</em></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>EMF code for generated models</td>
 			    <td><a href="020-grammar-language.php#metamodelInference.php" title="Go to &quot;Ecore Model Inference&quot;">Model inference</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment">XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment">XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>ANTLR grammar, parser, lexer and related services</td>
 			    <td> </td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment">GrammarAccessFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment">GrammarAccessFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Access to the grammar</td>
 			    <td> </td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment">ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment">ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>EMF resource factory</td>
 			    <td><a href="210-emf-integration.php#xtext_resource.php" title="Go to &quot;XtextResource Implementation&quot;">Xtext Resource</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment">ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment">ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Model-to-text serialization</td>
 			    <td><a href="100-serialization.php" title="Go to &quot;Serialization&quot;">Serialization</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment">ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment">ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Index-based scoping</td>
 			    <td><a href="080-scoping.php#index_based.php" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">Index-based namespace scoping</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" title="org.eclipse.xtext.generator.validation.JavaValidatorFragment">JavaValidatorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" title="org.eclipse.xtext.generator.validation.JavaValidatorFragment">JavaValidatorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Model validation</td>
 			    <td><a href="060-validation.php#custom_validation.php" title="Go to &quot;Custom Validation&quot;">Model validation</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/formatting/FormatterFragment.html" title="org.eclipse.xtext.generator.formatting.FormatterFragment">FormatterFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/formatting/FormatterFragment.html" title="org.eclipse.xtext.generator.formatting.FormatterFragment">FormatterFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Code formatter</td>
 			    <td><a href="105-formatting.php" title="Go to &quot;Formatting (Pretty Printing)&quot;">Code formatter</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment">LabelProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment">LabelProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Label provider</td>
 			    <td><a href="140-labelprovider.php" title="Go to &quot;Label Provider&quot;">Label provider</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment">OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment">OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Outline view configuration</td>
 			    <td><a href="170-outline.php" title="Go to &quot;Outline View&quot;">Outline</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment">JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment">JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Java-based content assist</td>
 			    <td><a href="150-contentassist.php" title="Go to &quot;Content Assist&quot;">Content assist</a></td>
 			  </tr>
 			  <tr>
-			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment">XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.2.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="View Source Code" >(src)</a></td>
+			    <td><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment">XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="View Source Code" >(src)</a></td>
 			    <td>Content assist helper based on ANTLR</td>
 			    <td><a href="150-contentassist.php" title="Go to &quot;Content Assist&quot;">Content assist</a></td>
 			  </tr>

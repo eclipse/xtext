@@ -1,7 +1,9 @@
 package org.eclipse.xtext.xbase.tests.lib.internal;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.tests.lib.internal.DataClass;
 import org.eclipse.xtext.xbase.tests.lib.internal.MyEntity;
 import org.eclipse.xtext.xbase.tests.lib.internal.OtherClass;
 import org.junit.Assert;
@@ -75,12 +77,39 @@ public class ToStringHelperTest {
     _builder.append("OtherClass [");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("other = OtherClass@");
-    int _identityHashCode = System.identityHashCode(obj);
-    _builder.append(_identityHashCode, "  ");
+    _builder.append("other = ");
+    String _string = obj.toString();
+    _builder.append(_string, "  ");
     _builder.newLineIfNotEmpty();
     _builder.append("  ");
     _builder.append("name = \"foo\"");
+    _builder.newLine();
+    _builder.append("]");
+    String _string_1 = _builder.toString();
+    String _string_2 = helper.toString(obj);
+    Assert.assertEquals(_string_1, _string_2);
+  }
+  
+  @Test
+  public void recursionHandling_02() {
+    ToStringHelper _toStringHelper = new ToStringHelper();
+    final ToStringHelper helper = _toStringHelper;
+    Wrapper<DataClass> _wrapper = new Wrapper<DataClass>();
+    final Wrapper<DataClass> ref = _wrapper;
+    DataClass _dataClass = new DataClass(ref, "test");
+    final DataClass obj = _dataClass;
+    ref.set(obj);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("DataClass [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("_other = Wrapper of (DataClass@");
+    int _identityHashCode = System.identityHashCode(obj);
+    _builder.append(_identityHashCode, "  ");
+    _builder.append(")");
+    _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("_name = \"test\"");
     _builder.newLine();
     _builder.append("]");
     String _string = _builder.toString();
