@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -71,7 +72,7 @@ public class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmTypeParameter> _typeParameters = operation.getTypeParameters();
-      ActualTypeArgumentCollector _actualTypeArgumentCollector = new ActualTypeArgumentCollector(_typeParameters, this.services);
+      ActualTypeArgumentCollector _actualTypeArgumentCollector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this.services);
       final ActualTypeArgumentCollector collector = _actualTypeArgumentCollector;
       int _size = ((List<String>)Conversions.doWrapArray(alternatingTypeReferences)).size();
       int _minus = (_size - 1);
