@@ -18,6 +18,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
@@ -45,7 +46,7 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 				String clazzName = xtendClazz.getSimpleName();
 				EList<XExpression> explicitArguments = featureCall.getExplicitArguments();
 				String firstPartOfMessage = "The method ";
-				if(explicitArguments.size() == 0)
+				if(explicitArguments.size() == 0 || featureCall instanceof XAssignment)
 					firstPartOfMessage += "or field ";
 				return new DiagnosticMessage(firstPartOfMessage + linkText + " is undefined for the type " + clazzName, Severity.ERROR,FEATURECALL_LINKING_DIAGNOSTIC, linkText);
 			}
