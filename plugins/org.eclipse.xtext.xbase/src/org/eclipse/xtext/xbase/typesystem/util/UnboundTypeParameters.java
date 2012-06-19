@@ -76,7 +76,7 @@ public final class UnboundTypeParameters {
 			XComputedTypeReference computed = (XComputedTypeReference) reference;
 			if (UnboundTypeParameters.isUnboundTypeParameter(computed)) {
 				UnboundTypeParameter unbound = (UnboundTypeParameter) computed.getTypeProvider();
-				if (unbound.equals(typeParameter)) {
+				if (unbound.getHandle().equals(typeParameter.getHandle())) {
 					return true;
 				}
 			}
