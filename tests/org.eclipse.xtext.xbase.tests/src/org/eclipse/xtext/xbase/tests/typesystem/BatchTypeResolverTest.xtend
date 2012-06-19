@@ -8,29 +8,29 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import com.google.inject.Provider
+import com.google.inject.Singleton
+import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.xbase.XCasePart
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XbaseFactory
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
-import org.junit.Test
-import org.eclipse.xtext.xbase.XExpression
-import org.junit.Ignore
-import org.eclipse.xtext.xbase.typing.ITypeProvider
-import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
-import java.util.List
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
+import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate
-import org.junit.Before
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.IReentrantTypeResolver
-import com.google.inject.Provider
-import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
-import com.google.inject.Singleton
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.xbase.XCasePart
-import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.xtext.xbase.typing.ITypeProvider
+import org.junit.Before
+import org.junit.Ignore
+import org.junit.Test
 
 import static org.junit.Assert.*
 
