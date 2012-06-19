@@ -8,34 +8,21 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,45 +30,6 @@ import com.google.common.collect.Sets;
  */
 public class StackedResolvedTypes extends ResolvedTypes {
 
-	class StackedUnboundArgumentSubstituter extends UnboundTypeParameterPreservingSubstitutor {
-		
-		public StackedUnboundArgumentSubstituter(CommonTypeComputationServices services) {
-			super(Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), services);
-		}
-
-		@Override
-		public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
-				Set<JvmTypeParameter> param) {
-			if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
-				XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-				UnboundTypeParameter original = (UnboundTypeParameter) reference.getTypeProvider();
-				result.setTypeProvider(getUnboundTypeParameter(original.getHandle()));
-				return result;
-			}
-			return super.doVisitComputedTypeReference(reference, param);
-		}
-		
-		@Override
-		public JvmTypeReference substitute(JvmTypeReference original) {
-			JvmTypeReference result = visit(original, Sets.<JvmTypeParameter>newHashSet());
-			return result;
-		}
-	}
-	
-	protected Function<JvmTypeReference, JvmTypeReference> referenceReplacer = new Function<JvmTypeReference, JvmTypeReference>() {
-		public JvmTypeReference apply(JvmTypeReference original) {
-			StackedUnboundArgumentSubstituter substituter = new StackedUnboundArgumentSubstituter(getResolver().getServices());
-			JvmTypeReference result = substituter.substitute(original);
-			return result;
-		}
-	};
-	
-	private Function<ITypeExpectation, ITypeExpectation> expectationReplacer = new Function<ITypeExpectation, ITypeExpectation>() {
-		public ITypeExpectation apply(ITypeExpectation original) {
-			return original;
-		}
-	};
-	
 	private final ResolvedTypes parent;
 	private final Map<Object, StackedUnboundParameter> stackedUnboundParameters;
 
@@ -126,23 +74,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		Collection<TypeData> result = super.doGetTypeData(expression);
 		if (result == null) {
 			result = parent.doGetTypeData(expression);
-			if (result != null)
-				result = replaceUnboundParameters(result);
 		}
 		return result;
-	}
-	
-	protected Collection<TypeData> replaceUnboundParameters(Collection<TypeData> original) {
-		return Collections2.transform(original, new Function<TypeData, TypeData>() {
-			public TypeData apply(TypeData original) {
-				return new TypeData(
-						original.getExpression(), 
-						expectationReplacer.apply(original.getExpectation()), 
-						referenceReplacer.apply(original.getActualType()), 
-						original.getConformanceHint(), 
-						original.isReturnType());
-			}
-		});
 	}
 	
 	@Override

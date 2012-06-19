@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -183,15 +182,6 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 			}
 		}
 	}
-	
-	@Override
-	public abstract XExpression getExpression();
-	
-	@Override
-	public abstract JvmTypeParameter getTypeParameter();
-	
-	@Override
-	public abstract Object getHandle();
 	
 	@Override
 	public boolean isComputed() {
