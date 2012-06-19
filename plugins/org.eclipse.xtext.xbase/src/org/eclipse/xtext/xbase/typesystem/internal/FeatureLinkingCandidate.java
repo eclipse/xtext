@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -26,7 +27,12 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.Maps;
 
@@ -101,10 +107,21 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 	}
 	
 	@Override
-	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType) {
-		super.resolveAgainstActualType(declaredType, actualType);
+	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType, final AbstractTypeComputationState state) {
+		super.resolveAgainstActualType(declaredType, actualType, state);
 		if (!isStatic() && !isExtension()) {
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices());
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices()) {
+				@Override
+				protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
+					// TODO Auto-generated method stub
+					super.addHint(typeParameter, reference);
+				}
+				@Override
+				protected TypeParameterSubstitutor createTypeParameterSubstitutor(
+						Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+					return state.createSubstitutor(mapping);
+				}
+			};
 			collector.processPairedReferences(declaredType, actualType);
 		}
 	}
@@ -137,7 +154,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 			StackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(getState().getResolvedTypes(), argument);
 			resolvedTypes.acceptType(argument, null, receiverType, ConformanceHint.UNCHECKED, false);
 			if (declaredType != null)
-				resolveAgainstActualType(declaredType, receiverType);
+				resolveAgainstActualType(declaredType, receiverType, argumentState);
 			return resolvedTypes;
 		} else {
 			return super.resolveArgumentType(argument, declaredType, argumentState);

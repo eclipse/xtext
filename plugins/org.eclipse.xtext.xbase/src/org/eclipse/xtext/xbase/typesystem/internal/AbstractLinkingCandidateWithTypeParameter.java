@@ -59,7 +59,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 
 		protected LazyExpectation(JvmTypeReference declaredType) {
 			this.declaredType = declaredType;
-			substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), getState().getServices());
+			substitutor = getState().createSubstitutor(getDeclaratorParameterMapping());
 			substitutor.enhanceMapping(getFeatureTypeParameterMapping());
 		}
 
@@ -98,7 +98,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 			JvmTypeReference wrappedActual = asWrapperType(actual);
 			typeParameterMapping.put((JvmTypeParameter) expectedType.getType(), new BoundTypeArgument(wrappedActual, BoundTypeArgumentSource.INFERRED, new Object(), VarianceInfo.OUT, VarianceInfo.OUT));
 		} else {
-			resolveAgainstActualType(expectedType, actual);
+			resolveAgainstActualType(expectedType, actual, expectation.getState());
 		}
 	}
 	
@@ -130,7 +130,9 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 						Set<JvmTypeParameter> param) {
 					if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 						XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-						result.setTypeProvider(reference.getTypeProvider());
+						UnboundTypeParameter unboundTypeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+						BaseUnboundTypeParameter stacked = getState().getResolvedTypes().getUnboundTypeParameter(unboundTypeParameter.getHandle());
+						result.setTypeProvider(stacked);
 						return result;
 					}
 					return super.doVisitComputedTypeReference(reference, param);
@@ -241,13 +243,13 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		}
 	}
 
-	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType) {
+	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType, AbstractTypeComputationState state) {
 		JvmIdentifiableElement feature = getFeature();
 		// TODO this(..) and super(..) for generic types
 		if (feature instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
 			if (!typeParameters.isEmpty()) {
-				ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, getState().getServices());
+				ActualTypeArgumentCollector implementation = getState().createTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION);
 				implementation.populateTypeParameterMapping(declaredType, actualType);
 				typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
 			}

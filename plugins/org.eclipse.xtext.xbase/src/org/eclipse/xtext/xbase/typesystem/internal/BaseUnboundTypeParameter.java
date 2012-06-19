@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -21,7 +22,9 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
@@ -78,6 +81,11 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 								}
 							};
 						}
+						@Override
+						protected TypeParameterSubstitutor createTypeParameterSubstitutor(
+								Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+							return resolvedTypes.createSubstitutor(mapping);
+						}
 					};
 					for(BoundTypeArgument hint: allHints) {
 						if (hint.getSource() != BoundTypeArgumentSource.INFERRED) {
@@ -128,8 +136,11 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 			IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) hint).getTypeProvider();
 			if (typeProvider instanceof BaseUnboundTypeParameter) {
 				BaseUnboundTypeParameter other = (BaseUnboundTypeParameter) typeProvider;
+				if (other.getResolvedTypes() != getResolvedTypes()) {
+					throw new IllegalStateException("Other unbound parameter was not substituted properly");
+				}
 				if (other.getBoundTo() != null) {
-					throw new IllegalStateException();
+					throw new IllegalStateException("Other parameter was already bound");
 				} else {
 					if (other.getHandle().equals(getHandle())) {
 						throw new IllegalStateException("Cannot add recursive hint");

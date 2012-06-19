@@ -41,6 +41,8 @@ public class StackedUnboundParameter extends BaseUnboundTypeParameter {
 	@Override
 	public List<BoundTypeArgument> getAllHints() {
 		List<BoundTypeArgument> result = parent.getAllHints();
+		if (result.isEmpty())
+			return super.getAllHints();
 		result.addAll(super.getAllHints());
 		return result;
 	}

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
@@ -50,6 +51,8 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.internal.BaseUnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
@@ -266,7 +269,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 		return allTypeParameters;
 	}
 	
-	protected void _computeTypes(final XClosure object, final ITypeComputationState state) {
+	protected void _computeTypes(XClosure object, ITypeComputationState state) {
 		for(ITypeExpectation expectation: state.getImmediateExpectations()) {
 			List<JvmFormalParameter> closureParameters = object.getFormalParameters();
 			JvmTypeReference closureType = expectation.getExpectedType();
@@ -288,7 +291,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			
 			Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping = getTypeParameterMapping(
 					object, closureType, operation, state);
-			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, services);
+			UnboundTypeParameterPreservingSubstitutor substitutor = state.createSubstitutor(typeParameterMapping);
 			JvmTypeReference declaredReturnType = getSubstitutedClosureReturnType(operation, substitutor);
 			ITypeAssigner typeAssigner = state.fork().withExpectation(declaredReturnType).assignTypes();
 			ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(
@@ -378,7 +381,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 			JvmTypeReference closureType, JvmOperation operation, ITypeComputationState state) {
 		List<JvmTypeParameter> allTypeParameters = collectAllTypeParameters(closureType, operation);
 		ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping = getClosureTypeParameterMapping(
-				closureType, operation, allTypeParameters);
+				closureType, operation, allTypeParameters, state);
 		
 		Map<JvmTypeParameter, MergedBoundTypeArgument> expectedTypeParameterMapping = Maps.newLinkedHashMap();
 		for(JvmTypeParameter typeParameter: allTypeParameters) {
@@ -399,8 +402,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 	}
 
 	protected ListMultimap<JvmTypeParameter, BoundTypeArgument> getClosureTypeParameterMapping(
-			JvmTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters) {
-		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED, services);
+			JvmTypeReference closureType, JvmOperation operation, List<JvmTypeParameter> allTypeParameters, ITypeComputationState state) {
+		ActualTypeArgumentCollector typeArgumentCollector = state.createTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.INFERRED);
 		JvmParameterizedTypeReference operationTypeDeclarator = services.getTypeReferences().createTypeRef(operation.getDeclaringType());
 		typeArgumentCollector.populateTypeParameterMapping(operationTypeDeclarator, closureType);
 		ListMultimap<JvmTypeParameter, BoundTypeArgument> typeParameterMapping = typeArgumentCollector.rawGetTypeParameterMapping();
