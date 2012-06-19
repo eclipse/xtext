@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 
 import com.google.common.collect.Multimap;
 

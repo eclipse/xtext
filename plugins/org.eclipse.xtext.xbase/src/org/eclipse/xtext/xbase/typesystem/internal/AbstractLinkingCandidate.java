@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
@@ -28,7 +28,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -125,6 +127,11 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 					}
 					super.addHint(typeParameter, reference);
 				}
+				@Override
+				protected TypeParameterSubstitutor createTypeParameterSubstitutor(
+						Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+					return getState().createSubstitutor(mapping);
+				}
 			};
 			collector.processPairedReferences(expectedType, type);
 		}
@@ -199,22 +206,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	
 	protected StackedResolvedTypes resolveArgumentType(XExpression argument, JvmTypeReference declaredType, AbstractTypeComputationState argumentState) {
 		StackedResolvedTypes result = argumentState.computeTypesWithoutMerge(argument);
-		
 		return result;
 	}
-
-//	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType) {
-//		JvmIdentifiableElement feature = getFeature();
-//		// TODO this(..) and super(..) for generic types
-//		if (feature instanceof JvmTypeParameterDeclarator) {
-//			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
-//			if (!typeParameters.isEmpty()) {
-//				ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, state.getServices());
-//				implementation.populateTypeParameterMapping(declaredType, actualType);
-//				typeParameterMapping.putAll(implementation.rawGetTypeParameterMapping());
-//			}
-//		}
-//	}
 
 	public List<XExpression> getArguments() {
 		List<XExpression> arguments = getSyntacticArguments();

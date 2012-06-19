@@ -590,6 +590,31 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testClosure_22() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
+  public void testClosure_23() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.Set<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
+  public void testClosure_24() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.ArrayList<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
+  public void testClosure_25() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval Iterable<String> list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tfun\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
+  public void testClosure_26() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval list = $$ListExtensions::map(newArrayList, fun)\n\t\t\tval Iterable<String> iter = list\n\t\t\tfun\n\t\t}", "(String)=>String");
+  }
+  
+  @Test
   public void testTypeArgs() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>() += \'foo\'", "boolean");
   }
@@ -766,6 +791,21 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testConstructorTypeInference_08() throws Exception {
     this.resolvesTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_09() throws Exception {
+    this.resolvesTo("<Iterable<String>>newArrayList().add(new java.util.LinkedList)", "boolean");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_10() throws Exception {
+    this.resolvesTo("<Iterable<String>>newArrayList().add(null)", "boolean");
+  }
+  
+  @Test
+  public void testConstructorTypeInference_11() throws Exception {
+    this.resolvesTo("<java.util.Map<Iterable<String>, Iterable<Integer>>>newArrayList().head", "Map<Iterable<String>, Iterable<Integer>>");
   }
   
   @Test
@@ -1106,6 +1146,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_26() throws Exception {
     this.resolvesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "List<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_27() throws Exception {
+    this.resolvesTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>");
   }
   
   @Test

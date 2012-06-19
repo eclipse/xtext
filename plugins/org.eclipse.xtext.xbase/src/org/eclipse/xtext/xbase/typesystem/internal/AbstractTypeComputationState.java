@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -35,12 +35,19 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -319,5 +326,20 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 
 	public UnboundTypeParameter createUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter) {
 		return resolvedTypes.createUnboundTypeParameter(expression, typeParameter);
+	}
+	
+	public ActualTypeArgumentCollector createTypeArgumentCollector(List<JvmTypeParameter> typeParameters, BoundTypeArgumentSource source) {
+		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, source, getServices()) {
+			@Override
+			protected TypeParameterSubstitutor createTypeParameterSubstitutor(
+					@Nullable Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+				return createSubstitutor(mapping);
+			}
+		};
+		return typeArgumentCollector;
+	}
+	
+	public UnboundTypeParameterPreservingSubstitutor createSubstitutor(@Nullable Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping) {
+		return getResolvedTypes().createSubstitutor(typeParameterMapping);
 	}
 }

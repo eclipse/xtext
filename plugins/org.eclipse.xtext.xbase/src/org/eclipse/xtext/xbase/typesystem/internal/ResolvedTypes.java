@@ -20,15 +20,19 @@ import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
@@ -41,11 +45,15 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
+import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitor;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -221,6 +229,69 @@ public class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	protected JvmTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		// TODO guard asserter - should only be active in tests
+		ITypeReferenceVisitor<Boolean> asserter = new AbstractXtypeReferenceVisitor<Boolean>() {
+			@Override
+			public Boolean doVisitTypeReference(JvmTypeReference reference) {
+				return Boolean.FALSE;
+			}
+			@Override
+			protected Boolean handleNullReference() {
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitFunctionTypeReference(XFunctionTypeRef reference) {
+				for(JvmTypeReference paramType: reference.getParamTypes()) {
+					if (visit(paramType))
+						return Boolean.TRUE;
+				}
+				if (visit(reference.getReturnType()))
+					return Boolean.TRUE;
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
+				for(JvmTypeReference component: reference.getReferences()) {
+					if (visit(component))
+						return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitComputedTypeReference(XComputedTypeReference reference) {
+				if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
+					BaseUnboundTypeParameter unboundTypeParameter = (BaseUnboundTypeParameter) reference.getTypeProvider();
+					getUnboundTypeParameter(unboundTypeParameter.getHandle());
+					for(Object other: unboundTypeParameter.getEquallyBoundHandles())
+						getUnboundTypeParameter(other);
+				}
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
+				if (visit(reference.getComponentType()))
+					return Boolean.TRUE;
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
+				for(JvmTypeConstraint constraint: reference.getConstraints()) {
+					if (visit(constraint.getTypeReference()))
+						return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+			@Override
+			public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+				for(JvmTypeReference argument: reference.getArguments()) {
+					if (visit(argument))
+						return Boolean.TRUE;
+				}
+				return Boolean.FALSE;
+			}
+		};
+		asserter.visit(type);
+		
 //		AbstractTypeComputationState state = expectation.getState();
 		// expectation is type parameter - type is actual - bind type
 		// no expectation, type wrap type and add pending type parameter data that should be resolved later on demand
@@ -368,6 +439,23 @@ public class ResolvedTypes implements IResolvedTypes {
 			unboundTypeParameters = Maps.newLinkedHashMap();
 		}
 		return unboundTypeParameters;
+	}
+
+	protected UnboundTypeParameterPreservingSubstitutor createSubstitutor(
+			Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping) {
+		return new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, resolver.getServices()) {
+			@Override
+			public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference, Set<JvmTypeParameter> param) {
+				if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
+					XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
+					UnboundTypeParameter unboundTypeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+					BaseUnboundTypeParameter stacked = getUnboundTypeParameter(unboundTypeParameter.getHandle());
+					result.setTypeProvider(stacked);
+					return result;
+				}
+				return super.doVisitComputedTypeReference(reference, param);
+			}
+		};
 	}
 	
 }
