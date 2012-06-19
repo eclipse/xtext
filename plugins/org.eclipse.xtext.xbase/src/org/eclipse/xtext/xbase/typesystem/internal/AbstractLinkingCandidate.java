@@ -118,13 +118,10 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices()) {
 				@Override
 				protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
-					JvmTypeParameter referencedTypeParameter = getTypeParameter(reference);
-					if (referencedTypeParameter != null) {
-						if (!getDeclaratorParameterMapping().containsKey(referencedTypeParameter)
-								&& !getDeclaredTypeParameters().contains(referencedTypeParameter)) {
-							super.addHint(typeParameter, reference);
-						}
-					}
+//					if (!getDeclaredTypeParameters().contains(typeParameter.getTypeParameter()) && typeParameter.getExpression() != getExpression()) {
+						BaseUnboundTypeParameter replaced = getState().getResolvedTypes().getUnboundTypeParameter(typeParameter.getHandle());
+						super.addHint(replaced, reference);
+//					}
 				}
 				@Override
 				protected TypeParameterSubstitutor createTypeParameterSubstitutor(

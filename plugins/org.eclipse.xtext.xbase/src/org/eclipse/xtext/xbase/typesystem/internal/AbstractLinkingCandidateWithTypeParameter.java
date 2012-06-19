@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
-import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -34,7 +33,6 @@ import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -51,24 +49,6 @@ import com.google.common.collect.Maps;
 public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate extends ILinkingCandidate<LinkingCandidate>> 
 		extends AbstractLinkingCandidate<LinkingCandidate> implements ObservableTypeExpectation.Observer { 
 	
-	protected class LazyExpectation extends AbstractReentrantTypeReferenceProvider {
-		private final JvmTypeReference declaredType;
-		private final UnboundTypeParameterPreservingSubstitutor substitutor;
-		private ResolvedTypes types;
-
-		protected LazyExpectation(JvmTypeReference declaredType) {
-			this.declaredType = declaredType;
-			substitutor = getState().createSubstitutor(getDeclaratorParameterMapping());
-			substitutor.enhanceMapping(typeParameterMapping);
-		}
-
-		@Override
-		protected JvmTypeReference doGetTypeReference() {
-			JvmTypeReference substitute = substitutor.substitute(declaredType);
-			return substitute;
-		}
-	}
-
 	private final Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping;
 	
 	protected AbstractLinkingCandidateWithTypeParameter(XExpression expression, IEObjectDescription description,
@@ -101,27 +81,11 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	}
 
 	public void accept(ObservableTypeExpectation expectation, JvmTypeReference actual, ConformanceHint conformanceHint) {
-		// TODO traverse the expectation and read the actual parameter data from the actual mapping by means of a type parameter substitutor
 		JvmTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType == null || actual instanceof JvmAnyTypeReference) {
 			return;
 		}
-		if (expectedType instanceof XComputedTypeReference) {
-			XComputedTypeReference computedTypeReference = (XComputedTypeReference) expectedType;
-			if (UnboundTypeParameters.isUnboundTypeParameter(computedTypeReference)) {
-				UnboundTypeParameter unboundTypeParameter = (UnboundTypeParameter) computedTypeReference.getTypeProvider();
-				if (!UnboundTypeParameters.isUnboundAndEqual(unboundTypeParameter, actual)) {
-					JvmTypeReference wrappedActual = asWrapperType(actual);
-					unboundTypeParameter.acceptHint(wrappedActual, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
-				}
-			}
-		} else if (expectedType.getType() instanceof JvmTypeParameter) {
-//			JvmTypeReference wrappedActual = asWrapperType(actual);
-//			typeParameterMapping.put((JvmTypeParameter) expectedType.getType(), new BoundTypeArgument(wrappedActual, BoundTypeArgumentSource.INFERRED, new Object(), VarianceInfo.OUT, VarianceInfo.OUT));
-			throw new IllegalStateException("TODO: type parameters may be declared on the receiver itself thus T is a valid expectation");
-		} else {
-			resolveAgainstActualType(expectedType, actual, expectation.getState());
-		}
+		resolveAgainstActualType(expectedType, actual, expectation.getState());
 	}
 	
 	@Override
@@ -198,15 +162,15 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 		int fixedArityArgumentCount = Math.min(fixedArityParameterCount, arguments.size());
 		stackedResolvedTypes = Lists.newArrayListWithCapacity(arguments.size());
 		if (parameters != null) {
+			UnboundTypeParameterPreservingSubstitutor substitutor = getState().createSubstitutor(getDeclaratorParameterMapping());
+			substitutor.enhanceMapping(typeParameterMapping);
 			for(int i = 0; i < fixedArityArgumentCount; i++) {
 				final JvmFormalParameter parameter = parameters.get(i);
 				final JvmTypeReference parameterType = parameter.getParameterType();
 				XExpression argument = arguments.get(i);
-				// TODO inline into ObservableTypeCOmputationSTate
-				LazyExpectation expectation = new LazyExpectation(parameterType);
 				AbstractTypeComputationState argumentState = new ObservableTypeComputationStateWithExpectation(
-						getState().getResolvedTypes(), getState().getFeatureScopeSession(), getState().getResolver(), getState(), expectation, this);
-//				expectation.setTypes(argumentState.getResolvedTypes());
+						getState(), 
+						substitutor.substitute(parameterType), this);
 				stackedResolvedTypes.add(resolveArgumentType(argument, parameterType, argumentState));
 			}
 			if (varArgs) {
@@ -216,18 +180,16 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 					throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
 				final JvmTypeReference componentType = ((JvmGenericArrayTypeReference) lastParameterType).getComponentType();
 				
-				LazyExpectation expectation = new LazyExpectation(componentType);
 				AbstractTypeComputationState argumentState = null;
 				if (arguments.size() == declaredParameterCount) {
 //					XExpression lastArgument = arguments.get(lastParamIndex);
 					// TODO expect Array and componentType
 					argumentState = new ObservableTypeComputationStateWithExpectation(
-							getState().getResolvedTypes(), getState().getFeatureScopeSession(), getState().getResolver(), getState(), expectation, this);
+							getState(), substitutor.substitute(componentType), this);
 				} else {
 					argumentState = new ObservableTypeComputationStateWithExpectation(
-							getState().getResolvedTypes(), getState().getFeatureScopeSession(), getState().getResolver(), getState(), expectation, this);
+							getState(), substitutor.substitute(componentType), this);
 				}
-//				expectation.setTypes(argumentState.getResolvedTypes());
 				for(int i = fixedArityArgumentCount; i < arguments.size(); i++) {
 					XExpression argument = arguments.get(i);
 					stackedResolvedTypes.add(resolveArgumentType(argument, null, argumentState));
@@ -245,10 +207,10 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType, AbstractTypeComputationState state) {
 		JvmIdentifiableElement feature = getFeature();
 		// TODO this(..) and super(..) for generic types
-		if (feature instanceof JvmTypeParameterDeclarator) {
-			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) feature).getTypeParameters();
+//		if (feature instanceof JvmTypeParameterDeclarator) {
+			List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 			if (!typeParameters.isEmpty()) {
-				ActualTypeArgumentCollector implementation = getState().createTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION);
+				ActualTypeArgumentCollector implementation = state.createTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.INFERRED);
 //				ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, getState().getServices()) {
 //					@Override
 //					protected void acceptHint(UnboundTypeParameter typeParameter, JvmTypeReference param) {
@@ -269,7 +231,7 @@ public abstract class AbstractLinkingCandidateWithTypeParameter<LinkingCandidate
 					}
 				}
 			}
-		}
+//		}
 	}
 
 }

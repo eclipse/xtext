@@ -11,10 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ObservableTypeExpectation.Observer;
-import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,18 +21,15 @@ import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 @NonNullByDefault
 public class ObservableTypeComputationStateWithExpectation extends AbstractStackedTypeComputationState {
 
-	private final IJvmTypeReferenceProvider expectedType;
+	private final JvmTypeReference expectedType;
 	
 	private final Observer observer;
 
 	public ObservableTypeComputationStateWithExpectation(
-			ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent,
-			IJvmTypeReferenceProvider expectedType,
+			JvmTypeReference expectedType,
 			ObservableTypeExpectation.Observer observer) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+		super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent.getResolver(), parent);
 		this.expectedType = expectedType;
 		this.observer = observer;
 	}
@@ -44,7 +40,7 @@ public class ObservableTypeComputationStateWithExpectation extends AbstractStack
 		return Collections.singletonList(result);
 	}
 
-	protected AbstractTypeExpectation createTypeExpectation(IJvmTypeReferenceProvider expectedType,
+	protected AbstractTypeExpectation createTypeExpectation(JvmTypeReference expectedType,
 			AbstractTypeComputationState actualState, boolean returnType) {
 		return new ObservableTypeExpectation(expectedType, actualState, returnType, observer);
 	}

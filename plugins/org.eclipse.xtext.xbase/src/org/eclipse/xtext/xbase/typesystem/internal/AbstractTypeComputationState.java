@@ -335,6 +335,23 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 					@Nullable Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
 				return createSubstitutor(mapping);
 			}
+			@Override
+			@Nullable
+			public Void doVisitComputedTypeReference(@Nullable XComputedTypeReference reference, @Nullable JvmTypeReference param) {
+				if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
+					UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
+					if (UnboundTypeParameters.isUnboundAndEqual(typeParameter, param)) {
+						return null;
+					}
+					BaseUnboundTypeParameter stacked = getResolvedTypes().getUnboundTypeParameter(typeParameter.getHandle());
+					if (!stacked.isComputed()) {
+						JvmTypeReference potentiallyWrapped = UnboundTypeParameters.asWrapperType(param, getServices().getPrimitives());
+						acceptHint(stacked, potentiallyWrapped);
+						return null;
+					}
+				}
+				return super.doVisitComputedTypeReference(reference, param);
+			}
 		};
 		return typeArgumentCollector;
 	}
