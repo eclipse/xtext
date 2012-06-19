@@ -95,6 +95,18 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 		}
 		return result;
 	}
+
+	protected JvmTypeReference getBoundTypeArgument(JvmParameterizedTypeReference reference, JvmTypeParameter type,
+			Set<JvmTypeParameter> visiting) {
+		MergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
+		if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
+			JvmTypeReference result = visit(boundTypeArgument.getTypeReference(), visiting);
+			if (result != null) {
+				return result;
+			}
+		}
+		return null;
+	}
 		
 	@Override
 	public JvmTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference, Set<JvmTypeParameter> visiting) {

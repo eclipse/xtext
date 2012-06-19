@@ -122,10 +122,9 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 					if (referencedTypeParameter != null) {
 						if (!getDeclaratorParameterMapping().containsKey(referencedTypeParameter)
 								&& !getDeclaredTypeParameters().contains(referencedTypeParameter)) {
-							return;
+							super.addHint(typeParameter, reference);
 						}
 					}
-					super.addHint(typeParameter, reference);
 				}
 				@Override
 				protected TypeParameterSubstitutor createTypeParameterSubstitutor(
@@ -281,13 +280,13 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 	}
 	
 	public int getTypeArityMismatch() {
-		List<JvmTypeReference> explicitTypeArguments = getTypeArguments();
+		List<JvmTypeReference> explicitTypeArguments = getExplicitTypeArguments();
 		if (explicitTypeArguments.size() == 0)
 			return 0;
 		return getDeclaredTypeParameters().size() - explicitTypeArguments.size();
 	}
 	
-	protected abstract List<JvmTypeReference> getTypeArguments();
+	protected abstract List<JvmTypeReference> getExplicitTypeArguments();
 
 	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {
 		int fixedArityParamCount = executable.getParameters().size();
