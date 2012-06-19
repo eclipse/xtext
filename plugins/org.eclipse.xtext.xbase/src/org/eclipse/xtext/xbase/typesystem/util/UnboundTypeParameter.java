@@ -31,6 +31,10 @@ public abstract class UnboundTypeParameter extends AbstractReentrantTypeReferenc
 	
 	public abstract boolean isComputed();
 	
+	/*
+	 * TODO should be internal
+	 * @see UnboundTypeParameters#isUnboundAndEqual(UnboundTypeParameter, JvmTypeReference)
+	 */
 	public abstract Object getHandle();
 	
 	@Override

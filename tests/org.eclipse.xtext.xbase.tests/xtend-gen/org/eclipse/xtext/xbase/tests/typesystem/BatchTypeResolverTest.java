@@ -615,6 +615,11 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testClosure_27() throws Exception {
+    this.resolvesTo("{ \n\t\t\tval mapper = [ x | x ]\n\t\t\t$$ListExtensions::map(newArrayList(1), mapper)\n\t\t}", "List<Integer>");
+  }
+  
+  @Test
   public void testTypeArgs() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>() += \'foo\'", "boolean");
   }
@@ -1151,6 +1156,16 @@ public class BatchTypeResolverTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_27() throws Exception {
     this.resolvesTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_28() throws Exception {
+    this.resolvesTo("{ val list = $$ListExtensions::map(newArrayList(null as Integer)) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>");
+  }
+  
+  @Test
+  public void testFeatureCall_30() throws Exception {
+    this.resolvesTo("{ val list = newArrayList(null as Integer).map [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>");
   }
   
   @Test

@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareRawTypeHelper;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

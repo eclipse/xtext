@@ -10,12 +10,10 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -28,13 +26,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
-import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
-
-import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -51,9 +42,6 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 		JvmTypeReference receiverType = null;
 		if (getDescription() instanceof BucketedEObjectDescription) {
 			receiverType = ((BucketedEObjectDescription) getDescription()).getReceiverType();
-//			if (receiverType != null) {
-//				receiverType = getState().getResolvedTypes().referenceReplacer.apply(receiverType);
-//			}
 		}
 		return receiverType;
 	}
@@ -114,11 +102,6 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidateWithTypePar
 		super.resolveAgainstActualType(declaredType, actualType, state);
 		if (!isStatic() && !isExtension()) {
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices()) {
-				@Override
-				protected void addHint(UnboundTypeParameter typeParameter, JvmTypeReference reference) {
-					// TODO Auto-generated method stub
-					super.addHint(typeParameter, reference);
-				}
 				@Override
 				protected TypeParameterSubstitutor createTypeParameterSubstitutor(
 						Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {

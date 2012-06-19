@@ -552,7 +552,14 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
 			fun
 		}".resolvesTo("(String)=>String")
 	}
-
+	
+	@Test def void testClosure_27() throws Exception {
+		"{ 
+			val mapper = [ x | x ]
+			$$ListExtensions::map(newArrayList(1), mapper)
+		}".resolvesTo("List<Integer>")
+	}
+	
 	@Test def void testTypeArgs() throws Exception {
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
 	}
@@ -1125,7 +1132,21 @@ class BatchTypeResolverTest extends AbstractXbaseTestCase {
            list
         }".resolvesTo("List<Integer>");
 	}
+	
+	@Test def void testFeatureCall_28() throws Exception {
+		"{ val list = $$ListExtensions::map(newArrayList(null as Integer)) [ v|v.intValue ]
+           val Object o = list.head 
+           list
+        }".resolvesTo("List<Integer>");
+	}
 
+	@Test def void testFeatureCall_30() throws Exception {
+		"{ val list = newArrayList(null as Integer).map [ v|v.intValue ]
+           val Object o = list.head 
+           list
+        }".resolvesTo("List<Integer>");
+	}
+	
 	@Test def void testToList_01() throws Exception {
 		"{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }".resolvesTo("List<? extends String>")
 	}
