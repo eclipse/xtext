@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xbase.tests.typesystem;
+package org.eclipse.xtext.xbase.junit.typesystem;
 
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;

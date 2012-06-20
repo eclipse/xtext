@@ -23,6 +23,8 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
+import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

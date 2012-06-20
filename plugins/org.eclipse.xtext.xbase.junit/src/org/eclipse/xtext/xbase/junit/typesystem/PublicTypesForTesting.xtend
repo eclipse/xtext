@@ -5,18 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.typesystem
+package org.eclipse.xtext.xbase.junit.typesystem
 
+import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
-import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.jdt.annotation.NonNullByDefault
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 class PublicResolvedTypes extends ResolvedTypes {
 	new(DefaultReentrantTypeResolver resolver) {
 		super(resolver)
@@ -32,6 +34,10 @@ class PublicResolvedTypes extends ResolvedTypes {
 	
 }
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@NonNullByDefault
 class PublicStackedResolvedTypes extends StackedResolvedTypes {
 	new(ResolvedTypes parent) {
 		super(parent)

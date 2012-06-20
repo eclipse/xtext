@@ -1,5 +1,6 @@
-package org.eclipse.xtext.xbase.tests.typesystem;
+package org.eclipse.xtext.xbase.junit.typesystem;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.BaseUnboundTypeParameter;
@@ -10,6 +11,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 @SuppressWarnings("all")
 public class PublicResolvedTypes extends ResolvedTypes {
   public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {
