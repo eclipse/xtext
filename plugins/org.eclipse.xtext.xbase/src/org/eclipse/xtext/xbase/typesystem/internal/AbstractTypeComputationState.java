@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
@@ -54,32 +53,6 @@ import com.google.common.collect.Lists;
  */
 @NonNullByDefault
 public abstract class AbstractTypeComputationState implements ITypeComputationState, ITypeComputationState.Fork {
-	protected static class TypeAssigner implements ITypeAssigner {
-		private final AbstractTypeComputationState state;
-
-		protected TypeAssigner(AbstractTypeComputationState state) {
-			this.state = state;
-		}
-
-		public AbstractTypeComputationState getForkedState() {
-			return state;
-		}
-
-		public void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType, @Nullable JvmTypeReference expectedType) {
-			// TODO validation messages
-			if (declaredType != null)
-				state.getResolvedTypes().setType(element, declaredType);
-			else
-				state.getResolvedTypes().setType(element, expectedType);
-			state.addLocalToCurrentScope(element);
-		}
-
-		public void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType) {
-			state.getResolvedTypes().setType(element, declaredType);
-			state.addLocalToCurrentScope(element);
-		}
-	}
-
 	private final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
