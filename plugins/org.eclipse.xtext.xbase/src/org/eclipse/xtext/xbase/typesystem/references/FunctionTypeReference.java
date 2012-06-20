@@ -74,7 +74,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		resolved &= parameterType.isResolved();
 	}
 	
-	protected void setLowerBound(LightweightTypeReference returnType) {
+	protected void setReturnType(LightweightTypeReference returnType) {
 		if (returnType == null) {
 			throw new NullPointerException("returnType may not be null");
 		}

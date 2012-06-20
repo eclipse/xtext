@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitorWithParameter;
 
 import com.google.common.base.Preconditions;
@@ -99,6 +100,24 @@ public class Converter extends AbstractXtypeReferenceVisitorWithParameter<TypeRe
 			return new UnboundReference(owner, unbound.getTypeParameter(), unbound.getHandle());
 		}
 		return super.doVisitComputedTypeReference(reference, owner);
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitFunctionTypeReference(XFunctionTypeRef reference, TypeReferenceOwner owner) {
+		FunctionTypeReference result = new FunctionTypeReference(owner, reference.getType());
+		JvmTypeReference equivalent = reference.getEquivalent();
+		if (equivalent instanceof JvmParameterizedTypeReference) {
+			for(JvmTypeReference argument: ((JvmParameterizedTypeReference)equivalent).getArguments()) {
+				result.addTypeArgument(visit(argument, owner));
+			}
+		}
+		for(JvmTypeReference parameter: reference.getParamTypes()) {
+			result.addParameterType(visit(parameter, owner));
+		}
+		if (reference.getReturnType() != null) {
+			result.setReturnType(visit(reference.getReturnType(), owner));
+		}
+		return result;
 	}
 	
 	@Override
