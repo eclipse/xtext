@@ -203,7 +203,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			 * }
 			 */
 		}
-		childResolvedTypes.reassignType(type, superType);
+		childResolvedTypes.reassignType(type, getServices().getTypeReferences().createTypeRef(type));
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
 			computeTypes(childResolvedTypes, childSession, members.get(i));
