@@ -24,6 +24,7 @@ public class StackedUnboundParameter extends BaseUnboundTypeParameter {
 	public StackedUnboundParameter(BaseUnboundTypeParameter parent, StackedResolvedTypes resolvedTypes) {
 		super(resolvedTypes);
 		this.parent = parent;
+		this.setBoundTo(parent.getBoundTo());
 	}
 
 	@Override
