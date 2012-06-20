@@ -1,0 +1,78 @@
+chapter:runtime_concepts[Runtime Concepts]
+
+Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
+ref:dependencyInjection[dependency injection]. Xtext may be used in different environments which introduce 
+different constraints. Especially important is the difference between OSGi managed containers and plain 
+vanilla Java programs. To honor these differences Xtext uses the concept of 
+codeRef[org.eclipse.xtext.ISetup]-implementations in normal mode and uses Eclipse's 
+extension mechanism when it should be configured in an OSGi environment.   
+
+
+section:runtimeSetup[Runtime Setup (ISetup)]
+
+For each language there is an implementation of codeRef[org.eclipse.xtext.ISetup] 
+generated. It implements a method called code[Java][createInjectorAndDoEMFRegistration()], which can be called 
+to do the initialization of the language infrastructure. 
+
+e[Caveat]: The codeRef[org.eclipse.xtext.ISetup] class is intended to be used for runtime and for unit 
+testing, only. if you use it in a Equinox scenario, you will very likely break the running application 
+because entries to the global registries will be overwritten.
+
+The setup method returns an codeRef[com.google.inject.Injector], which can further be used to obtain a 
+parser, etc. It also registers the codeRef[org.eclipse.emf.ecore.resource.Resource$Factory] and generated 
+codeRef[org.eclipse.emf.ecore.EPackage][EPackages] to the respective global registries provided 
+by EMF. So basically after having run the setup and you can start using EMF API to load and store models
+of your language.
+
+
+section:equinoxSetup[Setup within Eclipse-Equinox (OSGi)]
+
+Within Eclipse we have a generated e[Activator], which creates a Guice codeRef[com.google.inject.Injector]
+using the ref:guicemodules[modules]. In addition an codeRef[org.eclipse.core.runtime.IExecutableExtensionFactory] 
+is generated for each language, which is used to create codeRef[org.eclipse.core.runtime.IExecutableExtension][IExecutableExtensions].
+This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
+declare dependencies and get them injected upon creation. 
+
+The only thing you have to do in order to use this factory is to prefix the class with the factory 
+e[MyDslExecutableExtensionFactory] name followed by a colon.
+
+code[XML][
+<extension point="org.eclipse.ui.editors">
+  <editor
+    class="<MyDsl>ExecutableExtensionFactory:
+      org.eclipse.xtext.ui.editor.XtextEditor"
+    contributorClass=
+      "org.eclipse.ui.editors.text.TextEditorActionContributor"
+    default="true"
+    extensions="mydsl"
+    id="org.eclipse.xtext.example.MyDsl"
+    name="MyDsl Editor">
+  </editor>
+</extension>
+]
+
+section[Logging]
+
+Xtext uses Apache's log4j for logging. It is configured using files named e[log4j.properties], which are looked up 
+in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGi), all 
+you have to do is putting such a e[log4j.properties] in place and make sure that it is not overridden by other 
+e[log4j.properties] in previous classpath entries.
+
+In OSGi you provide configuration by creating a fragment for e[org.apache.log4j]. In this case you need to make 
+sure that there is not any second fragment contributing a e[log4j.properties] file.
+
+section-ref[validation]
+
+section-ref[linking]
+
+section-ref[scoping]
+
+section-ref[valueconverter]
+
+section-ref[serialization]
+
+section-ref[formatting]
+
+section-ref[fragmentProvider]
+
+section-ref[encoding]

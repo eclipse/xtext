@@ -1,0 +1,42 @@
+!! The following files haven't been reviewed and updated to be correct with Xtext 2.0 !!
+(Please remove the entries you have reviewed, please add your initials to an entry you are working on)
+
+# temporarily removed from the document
+000-introduction.xdoc
+# 010-concepts.xdoc
+# 015-getting-started.xdoc
+# 016-working-with-Xtext-models.xdoc
+# 017-getting-started-xpand.xdoc
+DONE SZ 020-grammar-language.xdoc
+DONE SE 030-generator.xdoc
+DONE JK 040-dependency-injection.xdoc
+DONE JK 050-heading-runtime.xdoc
+DONE JK 060-validation.xdoc
+DONE JK 070-linking.xdoc
+DONE JK 080-scoping.xdoc
+DONE SZ 090-valueconverter.xdoc
+DONE SZ 100-serialization.xdoc
+DONE SZ 105-formatting.xdoc
+DONE SZ 110-fragmentprovider.xdoc
+DONE SZ 115-encoding.xdoc
+DONE SZ 118-mwe-in-depth.xdoc
+DONE SZ 120-heading-UI.xdoc
+# 130-managing-concurrency.xdoc <- is empty
+DONE SZ 140-labelprovider.xdoc
+DONE SZ 150-contentassist.xdoc
+DONE JK 155-quickfix.xdoc
+DONE SZ 160-templates.xdoc
+DONE JK 170-outline.xdoc
+DONE SZ 180-hyperlinking.xdoc
+DONE SZ 195-highlighting.xdoc
+# 198-wizards.xdoc
+DONE SZ 199-jvmtypes.xdoc
+200-Appendix.xdoc
+205-typical-language-configs.xdoc
+206-expressions-in-xtext.xdoc
+DONE JK 210-emf-integration.xdoc
+215-migrating-from-0.7.xdoc
+220-deploying-dsls.xdoc
+230-antlr-ip-issue.xdoc
+
+

@@ -1,0 +1,17 @@
+chapter:deploying_dsls[Deploying DSLs]
+
+Deploying a DSL is a straightforward process - all you need to know is how to build Eclipse Feature 
+Projects. For convenience, here is a short overview to get you started:
+
+
+section[Prepare Your DSL Projects]
+
+If you use custom icons in your DSL, please make sure to include the e[/icons] folder (or whatever 
+you called the folder with your custom icons) in the binary build of the UI bundle of your DSL. 
+Otherwise, your icons will not show up in the deployed DSL editor.
+
+
+section[Creating a Feature For Your DSL]
+
+
+section[Creating an Update Site For Your DSL]

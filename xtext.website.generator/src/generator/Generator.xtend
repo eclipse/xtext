@@ -10,11 +10,11 @@ class Generator {
 		// clean dir
 		val out = new File("website")
 		out.generateFiles(
-			new Index,
-			new Download, 
-			new Examples, 
-			new Documentation, 
-			new Community 
+			//new Index,
+			//new Download, 
+			new Examples//, 
+//			new Documentation, 
+	//		new Community 
 		)
 	}
 	

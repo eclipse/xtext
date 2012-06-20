@@ -279,4 +279,8 @@ public class Documentation extends AbstractWebsite {
     _builder.newLine();
     return _builder;
   }
+  
+  protected Document getDocument() {
+    return this.doc;
+  }
 }

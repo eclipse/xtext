@@ -1,0 +1,69 @@
+section:linking[Linking]
+
+The linking feature allows for specification of cross-references within an Xtext grammar.
+The following things are needed for the linking:
+
+ol[
+item[declaration of a crosslink in the grammar (at least in the Ecore model)]
+item[specification of linking semantics (usually provided via the ref:scoping[scoping API])]
+]
+
+
+section2[Declaration of Crosslinks]
+
+In the grammar a cross-reference is specified using square brackets.
+
+code[Xtext][CrossReference :
+  '\[' type=ReferencedEClass ('|' terminal=CrossReferenceTerminal)? '\]'
+;
+]
+
+Example:
+
+code[Xtext][ReferringType :
+  'ref' referencedObject=\[Entity|STRING\]
+;
+]
+
+The ref:metamodelInference[Ecore model inference] would create an codeRef[org.eclipse.emf.ecore.EClass] 
+e[ReferringType] with an codeRef[org.eclipse.emf.ecore.EReference] e[referencedObject] of type e[Entity]
+with its containment property set to code[Java][false]. The referenced object would be identified 
+either by a e[STRING] and the surrounding
+information in the current context (see ref:scoping[scoping]). If you do not use code[Xtext][generate] but code[Xtext][import] 
+an existing Ecore model, the class e[ReferringType] (or one of its super types) would need to have an 
+codeRef[org.eclipse.emf.ecore.EReference] of type e[Entity] (or one of its super types) declared. Also the 
+codeRef[org.eclipse.emf.ecore.EReference][EReference's] containment and container properties needs to be set to code[Java][false]. 
+
+
+section2[Default Runtime Behavior (Lazy Linking)]
+
+Xtext uses lazy linking by default and we encourage users to stick to this because it provides  
+many advantages. One of which is improved performance in all scenarios where you don't have to load 
+the whole closure of all transitively referenced resources. Furthermore it automatically solves 
+situations where one link relies on other links. Though cyclic linking dependencies are not 
+supported by Xtext at all. 
+
+When parsing a given input string, say
+
+code[LinkingExample][ref Entity01]
+
+the codeRef[org.eclipse.xtext.linking.lazy.LazyLinker] first creates an EMF proxy and 
+assigns it to the corresponding codeRef[org.eclipse.emf.ecore.EReference]. In EMF a proxy is described by a 
+codeRef[org.eclipse.emf.common.util.URI], which points to the real codeRef[org.eclipse.emf.ecore.EObject]. 
+In the case of lazy linking the stored codeRef[org.eclipse.emf.common.util.URI] comprises of the context 
+information given at parse time, which is the codeRef[org.eclipse.emf.ecore.EObject] containing the cross-reference, 
+the actual codeRef[org.eclipse.emf.ecore.EReference], the index (in case it's a multi-valued cross-reference) 
+and the string which represented the crosslink in the concrete syntax. The latter usually corresponds to 
+the name of the referenced codeRef[org.eclipse.emf.ecore.EObject]. In EMF a codeRef[org.eclipse.emf.common.util.URI]
+consists of information about the resource the codeRef[org.eclipse.emf.ecore.EObject] is contained in as well as a so 
+called fragment part, which is used to find the codeRef[org.eclipse.emf.ecore.EObject] within that resource. When an  
+EMF proxy is resolved, the current codeRef[org.eclipse.emf.ecore.resource.ResourceSet] is asked. The resource set 
+uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to 
+return the codeRef[org.eclipse.emf.ecore.EObject] based on the fragment in the URI. The actual cross-reference resolution 
+is done by codeRef[org.eclipse.xtext.linking.lazy.LazyLinkingResource][LazyLinkingResource.getEObject(String)] which receives the 
+fragment and delegates to the implementation of the codeRef[org.eclipse.xtext.linking.ILinkingService]. The default 
+implementation in turn delegates to the ref:scoping[scoping API].
+
+A codeRef[org.eclipse.xtext.linking.impl.DefaultLinkingService][simple implementation] of the linking service is shipped with Xtext 
+and used for any grammar per default. Usually any necessary customization of the linking behavior 
+can best be described using the ref:scoping[scoping API].

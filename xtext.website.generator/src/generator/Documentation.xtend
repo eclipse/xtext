@@ -104,6 +104,9 @@ class Documentation extends AbstractWebsite {
 		</div>
 	'''
 	
+	def protected getDocument() {
+		doc
+	}
 }
 
 class DocumentationSetup extends XdocStandaloneSetup implements Module {
