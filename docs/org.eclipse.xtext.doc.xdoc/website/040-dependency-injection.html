@@ -185,7 +185,7 @@
 			</p>
 			<p>
 			For instance when some code wants to use a scope provider, it just declares a field (or method or 
-			constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html" title="com.google.inject.Inject">@Inject</abbr></a> annotation: 
+			constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html" title="com.google.inject.Inject">@Inject</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Inject.java" title="View Source Code" >(src)</a> annotation: 
 			</p>
 			<p>
 			<div class="literallayout">
@@ -210,7 +210,7 @@
 			</p>
 			<p>
 			Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
-			in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="com.google.inject.Module">Modules</abbr></a>. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="com.google.inject.Module">Module</abbr></a> defines a set of 
+			in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="com.google.inject.Module">Modules</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Module.java" title="View Source Code" >(src)</a>. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="com.google.inject.Module">Module</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Module.java" title="View Source Code" >(src)</a> defines a set of 
 			mappings from types to either existing instances, instance providers or concrete classes. Modules are
 			implemented in Java. Here's an example:
 			</p>
@@ -234,7 +234,7 @@
 			</div>
 			</p>
 			<p>
-			With plain Guice modules one implements a method called configure and gets a <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> 
+			With plain Guice modules one implements a method called configure and gets a <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Binder.java" title="View Source Code" >(src)</a> 
 			passed in. That binder provides a fluent API to define the mentioned mappings. This was just a very 
 			brief and simplified description. We highly recommend to have a look at 
 			<a href="http://code.google.com/p/google-guice/" >the website Google Guice</a> to learn more.  
@@ -276,7 +276,7 @@
 			</p>
 			<p>
 			There are two additional kinds of binding-methods supported. The first one allows to configure a provider. 
-			A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="com.google.inject.Provider">Provider</abbr></a> is an interface with just one method : 
+			A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="com.google.inject.Provider">Provider</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Provider.java" title="View Source Code" >(src)</a> is an interface with just one method : 
 			</p>
 			<p>
 			<div class="literallayout">
@@ -313,7 +313,7 @@
 			</p>
 			<p>
 			Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
-			is not a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="com.google.inject.Provider">Provider</abbr></a>.
+			is not a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="com.google.inject.Provider">Provider</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Provider.java" title="View Source Code" >(src)</a>.
 			</p>
 			<p>
 			That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to 
@@ -351,8 +351,8 @@
 			</p>
 			<p>
 			The last binding method provided by Xtext allows to do anything you can do with Guice's binding API, since
-			it allows you to use the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> directly. If your method's name starts with the
-			name 'configure', has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a>:
+			it allows you to use the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Binder.java" title="View Source Code" >(src)</a> directly. If your method's name starts with the
+			name 'configure', has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Binder.java" title="View Source Code" >(src)</a>:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -369,7 +369,7 @@
 			<h2>Obtaining an Injector</h2>
 			<p>
 			In every application wired up with Guice there is usually one point where you initialize an 
-			<a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a> using the modules declared. That injector is used to create the root 
+			<a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Injector.java" title="View Source Code" >(src)</a> using the modules declared. That injector is used to create the root 
 			instance of the whole application. In plain Java environments this is something that's done in the main 
 			method. It could look like this:
 			</p>

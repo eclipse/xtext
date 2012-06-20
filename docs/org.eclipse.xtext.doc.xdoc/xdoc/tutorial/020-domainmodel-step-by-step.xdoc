@@ -26,7 +26,7 @@ entity Comment extends HasAuthor {
 }
 ]
 
-After you have ref:Installation[installed] Xtext on your machine, start Eclipse and set up a fresh workspace.
+After you have installed Xtext on your machine, start Eclipse and set up a fresh workspace.
 
 section[Create A New Xtext Project]
 

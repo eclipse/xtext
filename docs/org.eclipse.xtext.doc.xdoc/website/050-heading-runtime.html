@@ -209,9 +209,9 @@
 			because entries to the global registries will be overwritten.
 			</p>
 			<p>
-			The setup method returns an <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a>, which can further be used to obtain a 
-			parser, etc. It also registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.html" title="org.eclipse.emf.ecore.resource.Resource.Factory">Resource.Factory</abbr></a> and generated 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> to the respective global registries provided 
+			The setup method returns an <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Injector.java" title="View Source Code" >(src)</a>, which can further be used to obtain a 
+			parser, etc. It also registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.html" title="org.eclipse.emf.ecore.resource.Resource.Factory">Resource.Factory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java" title="View Source Code" >(src)</a> and generated 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> to the respective global registries provided 
 			by EMF. So basically after having run the setup and you can start using EMF API to load and store models
 			of your language.
 			</p>
@@ -222,7 +222,7 @@
 			<br style="clear:both"></br>
 			<h1>Setup within Eclipse-Equinox (OSGi)</h1>
 			<p>
-			Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a>
+			Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a> <a class="srcLink" href="http://code.google.com/p/google-guice/source/browse/core/srccom/google/inject/Injector.java" title="View Source Code" >(src)</a>
 			using the <a href="040-dependency-injection.php#guicemodules.php" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html" title="org.eclipse.core.runtime.IExecutableExtensionFactory">IExecutableExtensionFactory</abbr></a> 
 			is generated for each language, which is used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html" title="org.eclipse.core.runtime.IExecutableExtension">IExecutableExtensions</abbr></a>.
 			This means that everything which is created via extension points is managed by Guice as well, i.e. you can 

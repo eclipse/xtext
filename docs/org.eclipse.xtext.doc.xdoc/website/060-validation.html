@@ -201,8 +201,8 @@
 			</p>
 			<p>
 			<ul>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getErrors()</span></abbr></a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getWarnings()</span></abbr></a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getErrors()</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getWarnings()</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java" title="View Source Code" >(src)</a></li>
 			</ul>
 			</p>
 			<a name="linking_validation" ></a>
@@ -218,8 +218,8 @@
 			</p>
 			<p>
 			<ul>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getErrors()</span></abbr></a></li>
-			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getWarnings()</span></abbr></a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getErrors()</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java" title="View Source Code" >(src)</a></li>
+			  <li><a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource"><span class="inlinecode">Resource.getWarnings()</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java" title="View Source Code" >(src)</a></li>
 			</ul>
 			</p>
 			<a name="concrete_syntax_validation" ></a>
@@ -246,7 +246,7 @@
 			<ol>
 			  <li>Types: only instances of <em>MyRule</em> and <em>MySubRule</em> are allowed for this rule. Subtypes are 
 			      prohibited, since the parser never instantiates unknown subtypes.</li>
-			  <li>Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeatures</abbr></a> 
+			  <li>Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeatures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java" title="View Source Code" >(src)</a> 
 			      besides <em>strVal</em> and <em>intVal</em>, only <em>strVal</em> and <em>intVal</em> may have 
 			      <a href="100-serialization.php#transientvalues.php" title="Go to &quot;Transient Values&quot;">non-transient values</a>.</li>
 			  <li>Quantities: The following condition must be true: <span class="inlinecode">strVal.size()&nbsp;==&nbsp;intVal.size()</span>.</li>
@@ -282,7 +282,7 @@
 			To use concrete syntax validation you can let Guice inject an instance of 
 			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/IConcreteSyntaxValidator.html" title="org.eclipse.xtext.validation.IConcreteSyntaxValidator">IConcreteSyntaxValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java" title="View Source Code" >(src)</a> and use it directly. 
 			Furthermore, there is an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.html" title="org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator">adapter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java" title="View Source Code" >(src)</a> which
-			allows to use the concrete syntax validator as an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a>. 
+			allows to use the concrete syntax validator as an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java" title="View Source Code" >(src)</a>. 
 			You can, for example, enable it in your runtime module, by adding:
 			</p>
 			<p>
@@ -308,17 +308,17 @@
 			<p>
 			In addition to the afore mentioned kinds of validation, which are more or less done automatically, 
 			you can specify additional constraints specific for your Ecore model. We leverage existing 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EMF API</abbr></a> and have put some convenience stuff on top. 
-			Basically all you need to do is to make sure that an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> is 
-			registered for your <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>. The  
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.Registry.html" title="org.eclipse.emf.ecore.EValidator.Registry">EValidator.Registry</abbr></a> can only be filled 
-			programmatically. That means contrary to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="org.eclipse.emf.ecore.EPackage.Registry">EPackage.Registry</abbr></a> and the 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.Registry.html" title="org.eclipse.emf.ecore.resource.Resource.Factory.Registry">Resource.Factory.Registry</abbr></a> there is no Equinox extension 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EMF API</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java" title="View Source Code" >(src)</a> and have put some convenience stuff on top. 
+			Basically all you need to do is to make sure that an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java" title="View Source Code" >(src)</a> is 
+			registered for your <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>. The  
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.Registry.html" title="org.eclipse.emf.ecore.EValidator.Registry">EValidator.Registry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java" title="View Source Code" >(src)</a> can only be filled 
+			programmatically. That means contrary to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="org.eclipse.emf.ecore.EPackage.Registry">EPackage.Registry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> and the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.Registry.html" title="org.eclipse.emf.ecore.resource.Resource.Factory.Registry">Resource.Factory.Registry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java" title="View Source Code" >(src)</a> there is no Equinox extension 
 			point to populate the validator registry.
 			</p>
 			<p>
 			For Xtext we provide a <a href="030-generator.php#generator_fragment.php" title="Go to &quot;Generator Fragments&quot;">generator fragment</a> for the convenient Java-based 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> API. Just add the following fragment to your generator 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java" title="View Source Code" >(src)</a> API. Just add the following fragment to your generator 
 			configuration and you are good to go:
 			</p>
 			<p>
@@ -334,7 +334,7 @@
 			<p>
 			The generator will provide you with two Java classes. An abstract class generated to <em>src-gen/</em> which 
 			extends the library class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="org.eclipse.xtext.validation.AbstractDeclarativeValidator">AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>. This 
-			one just registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> for which this validator introduces constraints.
+			one just registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> for which this validator introduces constraints.
 			The other class is a subclass of that abstract class and is generated to the <em>src/</em> folder in order 
 			to be edited by you. That is where you put the constraints in.
 			</p>
@@ -376,9 +376,9 @@
 			<a name="validation_4" ></a>
 			<h2>Validating Manually</h2>
 			<p>
-			As noted above, Xtext uses EMF's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> API to register validators. 
+			As noted above, Xtext uses EMF's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="org.eclipse.emf.ecore.EValidator">EValidator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java" title="View Source Code" >(src)</a> API to register validators. 
 			You can run the validators on your model programmatically using EMF's 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/util/Diagnostician.html" title="org.eclipse.emf.ecore.util.Diagnostician">Diagnostician</abbr></a>, e.g.
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/util/Diagnostician.html" title="org.eclipse.emf.ecore.util.Diagnostician">Diagnostician</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/util/Diagnostician.java" title="View Source Code" >(src)</a>, e.g.
 			</p>
 			<p>
 			<div class="literallayout">
@@ -413,9 +413,9 @@
 			</ol>
 			</p>
 			<p>
-			To create models, you can either use EMF's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/ResourceSet.html" title="org.eclipse.emf.ecore.resource.ResourceSet">ResourceSet</abbr></a> to 
+			To create models, you can either use EMF's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/ResourceSet.html" title="org.eclipse.emf.ecore.resource.ResourceSet">ResourceSet</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/ResourceSet.java" title="View Source Code" >(src)</a> to 
 			load models from your hard disk or you can utilize the <em>MyDslFactory</em> that EMF generates 
-			for each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>, to construct the tested model elements manually. 
+			for each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>, to construct the tested model elements manually. 
 			While the first option has the advantages that you can edit your models in your textual concrete syntax, 
 			the second option has the advantage that you can create partial models.
 			</p>

@@ -211,11 +211,11 @@
 							<p>
 								OTOH, the standard mongoDB Java driver reflects mongoDB's schema freeness by providing mongo documents as 
 								raw Java maps. This results in some major annoyances: First, you loose the benefit from Java's static typing. 
-								You can ask a <a href=""><abbr title="com.mongodb.DBObject">DBObject</abbr></a> <a href="">(src)</a>
+								You can ask a <abbr title="com.mongodb.DBObject">DBObject</abbr>
 								 for the value of a specific field, but you cannot be sure 
-								that the returned <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html"><abbr title="java.lang.Object">Object</abbr></a> <a href="">(src)</a>
+								that the returned <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html">»<abbr title="java.lang.Object">Object</abbr></a>
 								 is of some expected type. As database entities are likely to 
-								play a major role in your application, having them implemented as a generic <a href=""><abbr title="com.mongodb.DBObject">DBObject</abbr></a> <a href="">(src)</a>
+								play a major role in your application, having them implemented as a generic <abbr title="com.mongodb.DBObject">DBObject</abbr>
 								
 								will likely result poorly readable and unsafe code. Second, additional behavior that would usually go into 
 								methods of your entity classes has to be defined by external helper classes. Third, constructing a graph of 
@@ -261,10 +261,10 @@ package org.musicdb {
 							</p>
 							<p>
 								From each <strong>MongoBean</strong> definition in a <strong>MongoFile</strong> file, we generate a Java class that wraps a 
-								<a href=""><abbr title="com.mongodb.DBObject">DBObject</abbr></a> <a href="">(src)</a>
+								<abbr title="com.mongodb.DBObject">DBObject</abbr>
 								. The class provides statically typed getter and setter methods for all 
 								defined <strong>MongoProperties</strong>. In the implementation of these accessor methods we delegate to the wrapped
-								<a href=""><abbr title="com.mongodb.DBObject">DBObject</abbr></a> <a href="">(src)</a>
+								<abbr title="com.mongodb.DBObject">DBObject</abbr>
 								 and do all the casting and conversion work. For the <code class="prettyprint lang-xtend">Artist</code> in the 
 								above example, this would look like
 							</p>
@@ -416,16 +416,16 @@ QualifiedNameWithWildcard:
 								operation bodies.
 							</p>
 							<p>
-								The transformation is implemented in the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>
+								The transformation is implemented in the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html">»<abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>
 								.
 								It is written in the programming language <a href="http://www.xtend-lang.org">Xtend</a>, which is Java-like
 								but has a far more convenient syntax. As the generated code is quite rich, this is the most complex component
 								of mongoBeans.
 							</p>
 							<p>
-								In the following, we describe what happens in the <a href=""><abbr title="org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="">(src)</a>
+								In the following, we describe what happens in the <abbr title="org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.jvmmodel/src/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>
 								.
-								For each <strong>MongoBean</strong>, we create a Java class implementing the interface <a href=""><abbr title="org.xtext.mongobeans.IMongoBean">IMongoBean</abbr></a> <a href="">(src)</a>
+								For each <strong>MongoBean</strong>, we create a Java class implementing the interface <abbr title="org.xtext.mongobeans.runtime.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/IMongoBean.java">(src)</a>
 								.
 								This interface is the first type of our small runtime library. The generated Java classes rely on this
 								library to work, so it has to be on the classpath.
@@ -469,7 +469,7 @@ def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boole
 								<code class="prettyprint lang-xtend">extension</code>, all its methods can be called on the first argument, in this case the <code class="prettyprint lang-xtend">bean</code>. 
 								So <code class="prettyprint lang-xtend">bean.toClass(...)</code> is nothing else but <code class="prettyprint lang-xtend">_jvmtypesBuilder.toClass(bean, ...)</code>. Analogously, the 
 								method <code class="prettyprint lang-xtend">fullyQualifiedName</code> comes actually from the injected 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html">»<abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
 								. Please consult the 
 								<a href="http://www.xtend-lang.org/documentation">Xtend</a> documentation for more information on extension methods.
 							</p>
@@ -485,14 +485,14 @@ def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boole
 superTypes +=
 ...</pre> calls <code class="prettyprint lang-xtend">it.getSuperTypes().add(...)</code>. By using <pre class="prettyprint lang-xtend linenums">
 _jvmTypesBuilder.newTypeRef(bean,
-String)</pre> we create a reference to the existing interface <a href=""><abbr title="org.xtext.mongobeans.IMongoBean">IMongoBean</abbr></a> <a href="">(src)</a>
+String)</pre> we create a reference to the existing interface <abbr title="org.xtext.mongobeans.runtime.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/IMongoBean.java">(src)</a>
 								. This
 								will also insert a Java import at the appropriate location. 
 							</p>
 							<p>
-								Each <strong>MongoBean</strong> wraps a <a href=""><abbr title="com.mongodb.DBObject">DBObject</abbr></a> <a href="">(src)</a>
+								Each <strong>MongoBean</strong> wraps a <abbr title="com.mongodb.DBObject">DBObject</abbr>
 								 which is represented as a Java field with a 
-								getter. There are two constructors, one for a given <a href=""><abbr title="com.mongodb.DBObject">DBObject</abbr></a> <a href="">(src)</a>
+								getter. There are two constructors, one for a given <abbr title="com.mongodb.DBObject">DBObject</abbr>
 								 and one that 
 								creates a new one. We have to store the class name in the DB object, if we want to be able to restore
 								JavaBeans from query results.
@@ -596,9 +596,9 @@ def protected addConstructors(JvmDeclaredType inferredType, MongoBean bean) {
 								As a Java client would expect the result of <code class="prettyprint lang-xtend">getFriend()</code> should be a <code class="prettyprint lang-xtend">Artist</code>, we have to handle
 								<strong>MongoProperties</strong> whose type is a <strong>MongoBean</strong> differently. Note that the generated Java code uses 
 								static helper methods to do the wrapping / unwrapping. They are defined in the second runtime class 
-								<a href=""><abbr title="org.xtext.mongobeans.WrappingUtil">WrappingUtil</abbr></a> <a href="">(src)</a>
+								<abbr title="org.xtext.mongobeans.runtime.WrappingUtil">WrappingUtil</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/WrappingUtil.java">(src)</a>
 								. To detect whether a type is actually a <strong>MongoBean</strong> or not, we 
-								use the helper class <a href=""><abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr></a> <a href="">(src)</a>
+								use the helper class <abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.jvmmodel/src/org/xtext/mongobeans/jvmmodel/MongoTypes.java">(src)</a>
 								 that is also injected as an extension.
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
@@ -630,11 +630,11 @@ def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty p
   }</pre>
 							<p>
 								Multi-valued <strong>MongoProperties</strong> with a <strong>MongoBean</strong> type require a special implementation of 
-								<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html"><abbr title="java.util.List">List</abbr></a> <a href="">(src)</a>
+								<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html">»<abbr title="java.util.List">List</abbr></a>
 								 to automatically wrap/unwrap the elements. That's the third runtime library 
-								class <a href=""><abbr title="org.xtext.mongobeans.MongoBeanList">MongoBeanList</abbr></a> <a href="">(src)</a>
+								class <abbr title="org.xtext.mongobeans.runtime.MongoBeanList">MongoBeanList</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/MongoBeanList.java">(src)</a>
 								. Note that we need a getter only. For multi-valued
-								primitive properties, the Java driver already delivers a <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html"><abbr title="java.util.List">List</abbr></a> <a href="">(src)</a>
+								primitive properties, the Java driver already delivers a <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html">»<abbr title="java.util.List">List</abbr></a>
 								:
 							</p>
 							<p>
@@ -734,28 +734,28 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							<h3>Additional Aspects</h3>
 							<p>
 								We have tweaked the language's infrastructure a bit more. First, we have adapted the 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html">»<abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
 								. By default, the
 								qualified name of an element is calculated by concatening all the simple names of its containers with
 								a dot. In our example, the <strong>MongoBean</strong> <code class="prettyprint lang-xtend">Track</code> would consequently be named 
 								<code class="prettyprint lang-xtend">org.musicdb.Album.track.Track</code>. To ignore properties and beans on the path, we implemented our own
-								<a href=""><abbr title="org.xtext.mongobeans.scoping.MongoQualifiedNameProvider">MongoQualifiedNameProvider</abbr></a> <a href="">(src)</a>
+								<abbr title="org.xtext.mongobeans.scoping.MongoQualifiedNameProvider">MongoQualifiedNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.scoping/src/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.java">(src)</a>
 								. Note that we have to add a binding
-								in the respective <a href="">Guice module</a> <a href="">(src)</a>
+								in the respective Guice module <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.MongoBeansRuntimeModule/src/org/xtext/mongobeans/MongoBeansRuntimeModule.java">(src)</a>
 								 to make the framework 
 								pick up our customization. See the <a href="http://www.xtext.org/documentation">Xtext documentation</a> for details 
 								on dependency injection.
 							</p>
 							<p>
 								Second, the Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, 
-								we have added the <a href=""><abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr></a> <a href="">(src)</a>
+								we have added the <abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.validation/src/org/xtext/mongobeans/validation/MongoBeansValidator.java">(src)</a>
 								. 
 							</p>
 							<p>
 								To improve the language visually, we have tuned the 
-								<a href="">outline</a> <a href="">(src)</a>
+								outline <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.ui/src/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.java">(src)</a>
 								 and the 
-								<a href="">label providers</a> <a href="">(src)</a>
+								label providers <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.ui/src/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.java">(src)</a>
 								 as well. 
 							</p>
 							</section>
@@ -765,10 +765,10 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							<h2 style="font-weight: normal;">Beyond This Example</h2>
 							<p>
 								Of course there could be further concepts in the DSL, e.g. transient properties, indices or refeerences. 
-								Furthermore, the <a href="">example</a> <a href="">(src)</a>
+								Furthermore, the example <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.example/src/org/xtext/mongobeans/example/MusicDBXtendTest.java">(src)</a>
 								 shows how to use Xtend to 
 								build a very compact API to create trees of <strong>MongoBean</strong> instances. 
-								<a href="">Extension methods</a> <a href="">(src)</a>
+								Extension methods <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/MongoExtensions.java">(src)</a>
 								 can also be used to wrap other
 								classes of the mongoDB driver.   
 							</p>
@@ -916,7 +916,7 @@ Key:
 							<section id="routing_inferrer" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Translation to Java</h3>
 							<p>
-								For each <strong>RouteFile</strong>, we create a Java class extending the class <a href=""><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a> <a href="">(src)</a>
+								For each <strong>RouteFile</strong>, we create a Java class extending the class <abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr>
 								.
 								The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
 							</p>
@@ -1029,7 +1029,7 @@ public boolean doGet0Condition(final HttpServletRequest request, final String id
 							</p>
 							<p>
 								For each Route a condition should end in a method with a boolean return type. Each variable value should
-								be handled in as a parameter. Same is true for the <a href=""><abbr title="javax.servlet.http.HttpServletRequest">HttpServletRequest</abbr></a> <a href="">(src)</a>
+								be handled in as a parameter. Same is true for the <abbr title="javax.servlet.http.HttpServletRequest">HttpServletRequest</abbr>
 								.
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
@@ -1222,7 +1222,7 @@ public void doGet(final HttpServletRequest request, final HttpServletResponse re
 								</table>
 							</p>
 							<p>
-								Now we have to put our logic in the global methods of <a href=""><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a> <a href="">(src)</a>
+								Now we have to put our logic in the global methods of <abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr>
 								. First
 								of all we have to establish several methods for the corresponding request types. As an example for GET
 								the method <code class="prettyprint lang-java">public void doGet(final HttpServletRequest request, final HttpServletResponse response)</code>
@@ -1305,25 +1305,25 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 								
 								So lets concentrate on the things in the contentassist. The inferred methods and fields have syntetic names
 								and from the context of a condition or an action call we do not want to see the inferred things at all.
-								So for that reason we have to customize the code and tweak the <a href=""><abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer">RouteJvmModelInferrer</abbr></a> <a href="">(src)</a>
+								So for that reason we have to customize the code and tweak the <abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer">RouteJvmModelInferrer</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/httprouting/org.xtext.httprouting.jvmmodel/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.java">(src)</a>
 								. All inferred fields and methods
 								that we don't wanna see in the contentassist are prefixed with an underscore. Now we have the possibility
-								to filter out proposals with this prefix in <a href=""><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a> <a href="">(src)</a>
+								to filter out proposals with this prefix in <abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/httprouting/org.xtext.httprouting.ui/src/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.java">(src)</a>
 								.
 								The other thing is that in case of a guice-Key we introduce a parameter with the name 'it'. This means that
 								all features of the type behind it are visible without writing it in front of the call. Good thing but
-								we do not want 'it' as itself in the contentassist. Let's just filter that one out in <a href=""><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a> <a href="">(src)</a>
+								we do not want 'it' as itself in the contentassist. Let's just filter that one out in <abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/httprouting/org.xtext.httprouting.ui/src/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.java">(src)</a>
 								.
 							</p>
 							<p>
-								To tweak the outline for the routes you'll some customized labels in <a href=""><abbr title="org.xtext.httprouting.ui.labeling.RouteLabelProvider">RouteLabelProvider</abbr></a> <a href="">(src)</a>
+								To tweak the outline for the routes you'll some customized labels in <abbr title="org.xtext.httprouting.ui.labeling.RouteLabelProvider">RouteLabelProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/httprouting/org.xtext.httprouting.ui/src/org/xtext/httprouting/ui/labeling/RouteLabelProvider.java">(src)</a>
 								.
-								For some objects we do not wanna see a node in the outline at all so there is a need fo a custom <a href=""><abbr title="org.xtext.httprouting.ui.outline.RouteOutlineTreeProvider">RouteOutlineTreeProvider</abbr></a> <a href="">(src)</a>
+								For some objects we do not wanna see a node in the outline at all so there is a need fo a custom <abbr title="org.xtext.httprouting.ui.outline.RouteOutlineTreeProvider">RouteOutlineTreeProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/httprouting/org.xtext.httprouting.ui/src/org/xtext/httprouting/ui/outline/RouteOutlineTreeProvider.java">(src)</a>
 								.
 							</p>
 							<p>
 								To give the user feedback while the routes are defined we can establish validation. You'll find a validation
-								in <a href=""><abbr title="org.xtext.httprouting.validation.RouteJavaValidator">RouteJavaValidator</abbr></a> <a href="">(src)</a>
+								in <abbr title="org.xtext.httprouting.validation.RouteJavaValidator">RouteJavaValidator</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/httprouting/org.xtext.httprouting.validation/src/org/xtext/httprouting/validation/RouteJavaValidator.java">(src)</a>
 								 where we raise an error when a placeholder
 								is defined after a wildcard in the URL.
 							</p>
@@ -1334,10 +1334,10 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 							<h2 style="font-weight: normal;">Beyond This Example</h2>
 							<p>
 								Of course the DSL is not complete and there are several types of URL-pattern variables missing but it
-								should not be a hard thing to extend this example. To enable DI in the context of a <a href=""><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a> <a href="">(src)</a>
+								should not be a hard thing to extend this example. To enable DI in the context of a <abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr>
 								
 								there has to be a wrapper or something like that to create an injector. One really cool thing would be
-								to establish and <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XExpression.html"><abbr title="org.eclipse.xtext.xbase.XExpression">XExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XExpression.java">(src)</a>
+								to establish and <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XExpression.html">»<abbr title="org.eclipse.xtext.xbase.XExpression">XExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XExpression.java">(src)</a>
 								 that handles the complete guice-key and action call stuff with a corresponding
 								compiler but this is fare beyond the scope of this example. ;-)
 							</p>
@@ -1573,7 +1573,7 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 								The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
 								I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
 								interpreter. But technically, this example will teach you how to use and adapt the 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">»<abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
 								 for your own language.  
 							</p>
 							</section>
@@ -1636,7 +1636,7 @@ end</pre></td>
 								added without the need to regenerate the whole language infrastructure.
 							</p>
 							<p>
-								The core of the runtime library is the class <a href=""><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a> <a href="">(src)</a>
+								The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>
 								. You can
 								think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
 								modify it using methods. Here is an excerpt of its code:
@@ -1657,7 +1657,7 @@ class Tortoise {
 							<p>
 								We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
 								EClass. When a method that changes the state is called, an event is thrown. These events are consumed
-								by a GEF based view and turned into animations of a <a href=""><abbr title="org.xtext.tortoiseshell.runtime.view.TortoiseFigure">TortoiseFigure</abbr></a> <a href="">(src)</a>
+								by a GEF based view and turned into animations of a <abbr title="org.xtext.tortoiseshell.runtime.view.TortoiseFigure">TortoiseFigure</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/view/TortoiseFigure.java">(src)</a>
 								.  
 							</p>
 							<!-- subsection -->
@@ -1750,7 +1750,7 @@ Executable:
 							<section id="tortoise_inferrer" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Translation to Java</h3>
 							<p>
-								With the tortoise commands in the runtime library class <a href=""><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a> <a href="">(src)</a>
+								With the tortoise commands in the runtime library class <abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>
 								, we 
 								have to make sure to infer a Java class that inherits from this. Within this class, we create a method
 								for each <strong>Program</strong> and <strong>SubProgram</strong>. The resulting code looks like this:
@@ -1783,7 +1783,7 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 							<h3>Interpreter</h3>
 							<p>
 								The Xbase languge library does not only provide a compiler that generates Java code, but also an 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">»interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
 								. This has been adapted to
 								to execute our <strong>Programs</strong>. 
 							</p>
@@ -1794,10 +1794,10 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 							</p>
 							<p>
 								The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
-								<a href=""><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a> <a href="">(src)</a>
+								<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>
 								) and inferred ones. While the former are evaluated
 								via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-								<a href=""><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a> <a href="">(src)</a>
+								<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>
 								 to this and intercept calls to the inferred methods to 
 								execute them directly. This is accomplished by overriding the method 
 							</p>
@@ -1824,12 +1824,12 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 }</pre>
 							<p>
 								One thing you have to know about the Java inferrence is that when creating Java elements using the
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html">»<abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>
 								, the infrastructure stores the information which 
 								elements have been inferred from which source elements. To navigate these traces, we use the the Xbase service
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html">»<abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>
 								. So to detect wheter a 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html">»<abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a>
 								 is inferred, we check whether it has a source element.
 								If so, we have to setup an exection context binding <code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
 								execute the method's body using the interpreter. 
@@ -1852,7 +1852,7 @@ override run(Tortoise tortoise, EObject program, int stopAtLine) {
   }
 }</pre>
 							<p>
-								The <a href=""><abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException">StopLineReachedException</abbr></a> <a href="">(src)</a>
+								The <abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException">StopLineReachedException</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.interpreter/src/org/xtext/tortoiseshell/interpreter/StopLineReachedException.java">(src)</a>
 								 is part of the <strong>Step Mode</strong>.
 								It is thrown when the execution reaches the line <code class="prettyprint lang-xtend">stopAtLine</code>, thus terminating the current execution.
 								The throwing code is
@@ -1869,15 +1869,15 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							<section id="tortoise_additons" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Additional Aspects</h3>
 							<p>
-								To make the static methods and fields of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Math.html"><abbr title="java.lang.Math">Math</abbr></a> <a href="">(src)</a>
-								 and <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html"><abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a> <a href="">(src)</a>
+								To make the static methods and fields of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Math.html">»<abbr title="java.lang.Math">Math</abbr></a>
+								 and <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html">»<abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
 								
-								callable directly, we provided the <a href=""><abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider">TortoiseShellExtensionClassNameProvider</abbr></a> <a href="">(src)</a>
+								callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider">TortoiseShellExtensionClassNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.scoping/src/org/xtext/tortoiseshell/scoping/TortoiseShellExtensionClassNameProvider.java">(src)</a>
 								.
 							</p>
 							<p>
 								To overcome a small issue in the interpreter we also had to implement the 
-								<a href=""><abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider">TortoiseShellIdentifiableSimpleNameProvider</abbr></a> <a href="">(src)</a>
+								<abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider">TortoiseShellIdentifiableSimpleNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.scoping/src/org/xtext/tortoiseshell/scoping/TortoiseShellIdentifiableSimpleNameProvider.java">(src)</a>
 								. 
 							</p>
 							</section>

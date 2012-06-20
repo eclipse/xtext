@@ -77,7 +77,7 @@ there is a so called <em>binding annotation</em> for each use case. For example,
 </div>
 </p>
 <p>
-If your grammar uses an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, there may be an existing <em>edit</em>-plug-in generated 
+If your grammar uses an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>, there may be an existing <em>edit</em>-plug-in generated 
 by EMF that also provides label providers for model elements. To use this as a fallback, your label 
 provider should call the constructor with the 
 delegate parameter and use dependency injection for its initialization, e.g.
@@ -132,7 +132,7 @@ idea about the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xt
 <p>
 What is especially nice about the default implementation is the actual reason for its class 
 name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
-at first have a look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> <em>name</em> and try to use this one.
+at first have a look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> <em>name</em> and try to use this one.
 If it cannot find such a feature, it will try to use the first feature, that can be used best as a label. 
 At worst it will return the class name of the model element, which is kind of unlikely to happen.
 </p>
@@ -156,7 +156,7 @@ The default implementation of this service is the
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider" >DefaultDescriptionLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java" title="View Source Code" >(src)</a>. It employs the 
 same polymorphic dispatch mechanism as the <a href="120-heading-UI.html#DefaultEObjectLabelProvider" title="Go to &quot;DefaultEObjectLabelProvider&quot;">DefaultEObjectLabelProvider</a>. 
 The default text of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> is its indexed name. 
-The image is resolved by dispatching to <span class="inlinecode">image(EClass)</span> with the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> of the described object. 
+The image is resolved by dispatching to <span class="inlinecode">image(EClass)</span> with the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> of the described object. 
 This is likely the only method you want to override. Instances of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> 
 will be represented with their path and the icon registered for your language&apos;s editor. 
 </p>
@@ -480,7 +480,7 @@ ${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)
 <h3>Enumeration Template Variable Resolver</h3>
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver" >EnumTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java" title="View Source Code" >(src)</a> 
-resolves a template variable to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnumLiteral.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnumLiteral" >EEnumLiterals</abbr></a>
+resolves a template variable to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnumLiteral.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnumLiteral" >EEnumLiterals</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java" title="View Source Code" >(src)</a>
 which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em>
 template variable. 
 </p>
@@ -513,7 +513,7 @@ ${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility
 </p>
 <p>
 yields the text <span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">entity</span>&nbsp;Name&nbsp;{}</span> where the text <span class="inlinecode"><span class="keyword">public</span></span> is the default value of the <span class="inlinecode">Visibility</span>.
-The editor provides a drop down that is populated with the other literal values as defined in the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnum" >EEnum</abbr></a>. 
+The editor provides a drop down that is populated with the other literal values as defined in the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnum" >EEnum</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java" title="View Source Code" >(src)</a>. 
 </p>
 <a name="outline"></a>
 <h2>Outline View</h2>
@@ -833,7 +833,7 @@ effort strategy which can be summarized as:
 <ol>
 	<li>
 		
-		    If the model element&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >type</abbr></a> declares a feature <em>name</em> then return the 
+		    If the model element&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >type</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> declares a feature <em>name</em> then return the 
 		    region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
 	</li>
 	<li>
@@ -852,7 +852,7 @@ effort strategy which can be summarized as:
 The location service offers different methods to obtain the region of interest for special use cases.
 You can either obtain the complete region for an object or only the identifying string which is usually
 the name of the instance (see <span class="inlinecode">getSignificantTextRegion(EObject)</span>). You can also query for
-the text region of a specific <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeature</abbr></a> by means of 
+the text region of a specific <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeature</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java" title="View Source Code" >(src)</a> by means of 
 <span class="inlinecode">getFullTextRegion(EObject,&nbsp;EStructuralFeature,&nbsp;<span class="keyword">int</span>)</span>.
 </p>
 <p>
@@ -1130,7 +1130,7 @@ This component defines how the declaration of the target element is performed. I
 <ul>
 	<li>
 		Apply and revert the declaration change on the semantic model (methods <span class="inlinecode">applyDeclarationChange</span> 
-		and <span class="inlinecode">revertDeclarationChange</span>). The default is to look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> 
+		and <span class="inlinecode">revertDeclarationChange</span>). The default is to look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> 
 		<span class="inlinecode">name</span> on the target object and set its value using EMFs reflective API.
 	</li>
 	<li>
@@ -1158,7 +1158,7 @@ computation.
 <h3>Rename Participants</h3>
 <p>
 One refactoring can trigger another: When renaming a rule in an Xtext grammar, the returned
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> should be renamed, too. For these cases, you can register a 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> should be renamed, too. For these cases, you can register a 
 <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ltk/core/refactoring/participants/RenameParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.ltk.core.refactoring.participants.RenameParticipant" >RenameParticipant</abbr></a> by the common means of LTK. If the 
 target of the participant is Xtext based, you can use a 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant" >AbstractProcessorBasedRenameParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.java" title="View Source Code" >(src)</a>.

@@ -353,9 +353,9 @@
 			<h2>EPackage Declarations</h2>
 			<p>
 			Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are 
-			instances of EMF Ecore models. An Ecore model basically consists of an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> containing 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a>, 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataTypes</abbr></a> and <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnums</abbr></a> 
+			instances of EMF Ecore models. An Ecore model basically consists of an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> containing 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>, 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataTypes</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java" title="View Source Code" >(src)</a> and <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnums</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java" title="View Source Code" >(src)</a> 
 			(see the <a href="210-emf-integration.php#model_metamodel.php" title="Go to &quot;Model, Ecore Model, and Ecore&quot;">section on EMF</a> for more details) and describes
 			the structure of the instantiated objects. Xtext can infer Ecore models from a grammar 
 			(see <a href="020-grammar-language.php#metamodelInference.php" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>) but it is also 
@@ -374,22 +374,22 @@
 			<span class="inlinecode"><span class="keyword">generate</span>&nbsp;secrets&nbsp;<span class="string">&apos;http://www.eclipse.org/secretcompartment&apos;</span></span>
 			</p>
 			<p>
-			That statement could actually be read as: generate an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> with the 
+			That statement could actually be read as: generate an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> with the 
 			<em>name</em> <span class="inlinecode">secrets</span> and the <em>nsURI</em> 
 			<span class="inlinecode"><span class="string">"http://www.eclipse.org/secretcompartment"</span></span>. 
-			Actually these are the mandatory properties that are necessary to create an empty <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>.
-			Xtext will then add <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a> with 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttributes</abbr></a> and <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReferences</abbr></a> for the 
+			Actually these are the mandatory properties that are necessary to create an empty <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>.
+			Xtext will then add <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> with 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttributes</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> and <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReferences</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> for the 
 			different parser
 			rules in your grammar, as described in <a href="020-grammar-language.php#metamodelInference.php" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>. 
 			</p>
 			<a name="ePackageImport" ></a>
 			<h3>EPackage Import</h3>
 			<p>
-			If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>, you can import it using its namespace URI or a resource URI. 
+			If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>, you can import it using its namespace URI or a resource URI. 
 			An <a href="http://www.ietf.org/rfc/rfc2396.txt" >URI</a> (Uniform Resource Identifier) provides a simple and extensible 
 			means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
-			please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">documentation</abbr></a>. It is strongly recommended
+			please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">documentation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java" title="View Source Code" >(src)</a>. It is strongly recommended
 			to use the namespace URI instead of the resource uri because it is independent from the concrete location
 			in the file system and much more portable across different machines, easier to configure in the workflow
 			and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated
@@ -401,7 +401,7 @@
 			</p>
 			</h4>
 			<p>
-			You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>. This is generally 
+			You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>. This is generally 
 			preferrable. The package will be read from the Xtext index and therefore your grammar is independent
 			from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
 			in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
@@ -416,9 +416,9 @@
 			</p>
 			<p>
 			In order to be able to find the referenced package in the language generator, some configuration values
-			have to be set. It is usually the easiest way to register the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> 
+			have to be set. It is usually the easiest way to register the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> 
 			interface in the workflow.
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe/utils/StandaloneSetup.html" title="org.eclipse.emf.mwe.utils.StandaloneSetup">StandaloneSetup</abbr></a> offers the respective methods to achieve this.
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe/utils/StandaloneSetup.html" title="org.eclipse.emf.mwe.utils.StandaloneSetup">StandaloneSetup</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java" title="View Source Code" >(src)</a> offers the respective methods to achieve this.
 			Simply state something like this in the workflow:
 			</p>
 			<p>
@@ -471,14 +471,14 @@
 			Important note: EPackages have to refer to each other by means of platform-resource or platform-plugin
 			URIs. Otherwise you'll get validation errors in the grammar editor. However, it'll provide quick fixes
 			to update the ecore files accordingly. There is only one exception to the rule: If you refer to data
-			types from the ecore package or directly to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>, the namespace URI
+			types from the ecore package or directly to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a>, the namespace URI
 			is valid, too. This is due to special assignability rules for these types. If you craft the EPackage
 			manually, you'll usually face no problems due to these constraints since the reflective Ecore editor
 			inserts platform URIs by default. The other cases and legacy packages (those that were tailored to match
 			the restrictions of older Xtext versions) can be converted with the quick fixes in the grammar editor.
 			</p>
 			<p>
-			If you used platform-plugin URIs in the ecore files and cannot use the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>
+			If you used platform-plugin URIs in the ecore files and cannot use the generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>
 			in the workflow, you'll have to register URI mappings from platform-plugin to platform-resource.
 			</p>
 			<p>
@@ -529,7 +529,7 @@
 			</p>
 			</h4>
 			<p>
-			In order to import an existing Ecore model, you'll have to have the *.ecore file describing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> 
+			In order to import an existing Ecore model, you'll have to have the *.ecore file describing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> 
 			you want to 
 			use somewhere in your workspace. To refer to that file you make use of the <em>platform:/resource</em> scheme.
 			Platform URIs are a special EMF concept which allow to reference elements in the workspace 
@@ -544,12 +544,12 @@
 			</p>
 			<p>
 			If you want to mix generated and imported Ecore models you'll have to configure the generator fragment 
-			in your MWE file responsible for <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">generating the Ecore classes</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a> 
+			in your MWE file responsible for <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">generating the Ecore classes</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a> 
 			with resource URIs that point to the <a href="210-emf-integration.php#emf_codegen.php" title="Go to &quot;EMF Code Generation&quot;">generator models</a> of the referenced Ecore models.
 			</p>
 			<p>
 			The <em>*.genmodel</em> provides all kind of generator configuration used by EMF's code generator. Xtext will automatically create
-			a generator model for derived <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a>, but if it references an existing, imported Ecore
+			a generator model for derived <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>, but if it references an existing, imported Ecore
 			model, the code generator needs to know how that code was generated in order to generate valid Java code. 
 			</p>
 			<p>
@@ -606,7 +606,7 @@
 			<a name="package_declarations_4" ></a>
 			<h3>Ecore Model Aliases for EPackages</h3>
 			<p>
-			If you want to use multiple <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> you need to specify aliases in the following way:
+			If you want to use multiple <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> you need to specify aliases in the following way:
 			</p>
 			<p>
 			<div class="literallayout">
@@ -623,16 +623,16 @@
 			alias (example <span class="inlinecode">another::SomeType</span>). We'll see later where such type references occur.
 			</p>
 			<p>
-			It is also supported to put multiple <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> imports into one alias. This is no problem as 
-			long as there are not any two <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifiers</abbr></a> with the same name. 
+			It is also supported to put multiple <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> imports into one alias. This is no problem as 
+			long as there are not any two <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifiers</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> with the same name. 
 			In that case none of them can be referenced. 
 			It is even possible to <span class="inlinecode"><span class="keyword">import</span></span> multiple and <span class="inlinecode"><span class="keyword">generate</span></span> one Ecore model and declare all of them with 
-			same alias. If you do so, for a reference to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifier</abbr></a> first the imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> are 
+			same alias. If you do so, for a reference to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifier</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java" title="View Source Code" >(src)</a> first the imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> are 
 			scanned before it is assumed that a type needs to be generated into the inferred package. 
 			</p>
 			<p>
 			Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
-			For instance, a reference to <em>classA</em> would as well be linked to a newly created <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a>, because the 
+			For instance, a reference to <em>classA</em> would as well be linked to a newly created <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>, because the 
 			corresponding type in <em>http://www.eclipse.org/packContainingClassA</em> is spelled with a capital letter.
 			</p>
 			<a name="syntax_4" ></a>
@@ -918,7 +918,7 @@
 			and terminal tokens. They lead to a so called 
 			 parse tree (in Xtext it is also referred 
 			as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
-			the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
+			the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 			fact, parser rules are even called production or EObject rules. Different constructs like actions and 
 			assignments are used to derive types and initialize the semantic objects accordingly. 
 			</p>
@@ -950,7 +950,7 @@
 			</h4>
 			<p>
 			Assignments are used to assign the consumed information to a feature of the currently produced object. 
-			The type of the current object, its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a>, is specified by the return type of the parser 
+			The type of the current object, its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>, is specified by the return type of the parser 
 			rule. If it is not explicitly stated it is implied that the type's name equals the rule's name. 
 			The type of the assigned feature is inferred from the right hand side of the assignment.
 			</p>
@@ -978,7 +978,7 @@
 			<span class="inlinecode">name=ID</span>
 			</p>
 			<p>
-			The left hand side refers to a feature <em>name</em> of the current object (which has the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <em>State</em> in this case). 
+			The left hand side refers to a feature <em>name</em> of the current object (which has the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> <em>State</em> in this case). 
 			The right hand side can be a rule call, a keyword, a <a href="020-grammar-language.php#cross_reference.php" title="Go to &quot;Cross-References&quot;">cross-reference</a> or an alternative
 			comprised by the former. The type of the feature 
 			needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, 
@@ -1039,7 +1039,7 @@
 			</p>
 			<p>
 			It is important to understand that the text between the square brackets does not refer to another rule, but to an
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> - which is a type and not a parser rule!
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> - which is a type and not a parser rule!
 			This is sometimes confusing, because one usually uses the same name for the rules and the returned types.
 			That is if we had named the type for events differently like in the following the cross-reference needs 
 			to be adapted as well:
@@ -1170,7 +1170,7 @@
 			of the rule which may have been inferred from the rule's name if no explicit return type is specified.
 			</p>
 			<p>
-			With Actions however, the creation of returned <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> can be made explicit. Xtext supports two kinds of Actions:
+			With Actions however, the creation of returned <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> can be made explicit. Xtext supports two kinds of Actions:
 			</p>
 			<p>
 			<ol>
@@ -1220,7 +1220,7 @@
 			</p>
 			<p>
 			Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions 
-			allow to explicitly instantiate any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>. The notation <em>{TypeB}</em> will create an instance of TypeB and assign 
+			allow to explicitly instantiate any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a>. The notation <em>{TypeB}</em> will create an instance of TypeB and assign 
 			it to the result of the parser rule. This allows to define parser rules without any assignment and to
 			create objects without the need to introduce unnecessary delegate rules.
 			</p>
@@ -1235,8 +1235,8 @@
 			</p>
 			</h4>
 			<p>
-			We previously explained, that the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> to be returned is created lazily when the first assignment occurs or 
-			as soon as a simple action is evaluated. There is another to <em>find</em> the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> to be returned. The
+			We previously explained, that the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> to be returned is created lazily when the first assignment occurs or 
+			as soon as a simple action is evaluated. There is another to <em>find</em> the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> to be returned. The
 			concept is called <em>Unassigned Rule Call</em>.
 			</p>
 			<p>
@@ -1397,7 +1397,7 @@
 			</p>
 			<p>
 			In the example above <span class="inlinecode">{Operation.left=<span class="keyword">current</span>}</span> is a so called tree rewrite action, which creates a new instance of the stated 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a>
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>
 			<em>Operation</em> and assigns the element currently to-be-returned (the <span class="inlinecode"><span class="keyword">current</span></span> variable) to a feature of the newly created object.
 			The example uses the feature <em>left</em> of the <em>Operation</em> instance to store the previously returned <em>Expression</em>.
 			In Java these semantics could be expressed as:
@@ -1470,7 +1470,7 @@
 			<a name="datatypeRules" ></a>
 			<h2>Data Type Rules</h2>
 			<p>
-			Data type rules are parsing-phase rules, which create instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataType</abbr></a> instead of <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a>. Thinking about it, one may discover 
+			Data type rules are parsing-phase rules, which create instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java" title="View Source Code" >(src)</a> instead of <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>. Thinking about it, one may discover 
 			that they are quite similar to terminal rules.
 			However, the nice thing about data type rules is that they are actually parser rules and are therefore 
 			</p>
@@ -1576,7 +1576,7 @@
 			</p>
 			<p>
 			the resulting value of the element <em>Foo</em> will hold the enum value with the internal representation of <span class="inlinecode">0</span> (zero). 
-			When generating the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> from your grammar this will be the first literal you define. As a workaround 
+			When generating the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> from your grammar this will be the first literal you define. As a workaround 
 			you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define 
 			an enum literal with an empty textual representation.
 			</p>
@@ -1592,8 +1592,7 @@
 			</div>
 			</p>
 			<p>
-			You can overcome this by modifying the infered Ecore model through a <a href="020-grammar-language.php#customPostProcessing.php" title="Go to &quot;Customized Post Processing&quot;">model to model transformation</a>.
-			However, instead of post processing, an explicitly imported metamodel is recommend.
+			You can overcome this by using an explicitly imported metamodel.
 			</p>
 			<a name="antlr_errors" ></a>
 			<h2>Syntactic Predicates</h2>
@@ -1684,17 +1683,16 @@
 			    <li><a href="020-grammar-language.php#metamodelInference_4.php" >Feature and Type Hierarchy Generation</a></li>
 			    <li><a href="020-grammar-language.php#metamodelInference_5.php" >Enum Literal Generation</a></li>
 			    <li><a href="020-grammar-language.php#metamodelInference_6.php" >Feature Normalization</a></li>
-			    <li><a href="020-grammar-language.php#customPostProcessing.php" >Customized Post Processing</a></li>
-			    <li><a href="020-grammar-language.php#metamodelInference_8.php" >Error Conditions</a></li>
+			    <li><a href="020-grammar-language.php#metamodelInference_7.php" >Error Conditions</a></li>
 			  </ul>
 			</div>
 			<p>
 			The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). 
 			</p>
 			<p>
-			Xtext uses Ecore's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> to define Ecore models. Ecore models are declared to be either inferred (generated) 
+			Xtext uses Ecore's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> to define Ecore models. Ecore models are declared to be either inferred (generated) 
 			from the grammar or imported. 
-			By using the <span class="inlinecode"><span class="keyword">generate</span></span> directive, one tells Xtext to derive an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> from the grammar. 
+			By using the <span class="inlinecode"><span class="keyword">generate</span></span> directive, one tells Xtext to derive an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> from the grammar. 
 			</p>
 			<a name="metamodelInference_3" ></a>
 			<h2>Type and Package Generation</h2>
@@ -1703,33 +1701,33 @@
 			</p>
 			<p>
 			<ul>
-			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <ul>
-			    <li>for each generate-package declaration. After the directive <span class="inlinecode"><span class="keyword">generate</span></span> a list of parameters follows. The <em>name</em> of the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> 
+			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> <ul>
+			    <li>for each generate-package declaration. After the directive <span class="inlinecode"><span class="keyword">generate</span></span> a list of parameters follows. The <em>name</em> of the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> 
 			      will be set to the first parameter, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows 
-			      to distinguish generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> later. Only one generated package declaration 
+			      to distinguish generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> later. Only one generated package declaration 
 			      per alias is allowed.</li>
 			  </ul>
 			  </li>
-			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <ul>
+			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> <ul>
 			    <li>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same 
-			      name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> 
+			      name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> 
 			      will be generated.</li>
 			    <li>for each type defined in an action or a cross-reference.</li>
 			  </ul>
 			  </li>
-			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnum</abbr></a> <ul>
+			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnum</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java" title="View Source Code" >(src)</a> <ul>
 			    <li>for each return type of an enum rule.</li>
 			  </ul>
 			  </li>
-			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataType</abbr></a> <ul>
+			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataType</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java" title="View Source Code" >(src)</a> <ul>
 			    <li>for each return type of a terminal rule or a data type rule.</li>
 			  </ul>
 			  </li>
 			</ul>
 			</p>
 			<p>
-			All <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a>, <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnums</abbr></a>, and 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataTypes</abbr></a> are added to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> referred to 
+			All <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>, <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnums</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java" title="View Source Code" >(src)</a>, and 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="org.eclipse.emf.ecore.EDataType">EDataTypes</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java" title="View Source Code" >(src)</a> are added to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a> referred to 
 			by the alias provided in the type reference they were created from.
 			</p>
 			<a name="metamodelInference_4" ></a>
@@ -1751,22 +1749,22 @@
 			<p>
 			While iterating the parser rules Xtext creates
 			<ul>
-			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> in each current return type <ul>
+			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> in each current return type <ul>
 			    <li>of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Boolean.html" title="java.lang.Boolean">EBoolean</abbr></a> for each feature assignment using the <span class="inlinecode">?=</span> operator. 
-			      No further <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReferences</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttributes</abbr></a> will be generated from this assignment.</li>
+			      No further <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReferences</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttributes</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> will be generated from this assignment.</li>
 			    <li>for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator calling a terminal rule. Its type will be the return type of the called rule.</li>
 			  </ul>
 			  </li>
-			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> in each current return type <ul>
+			  <li>an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> in each current return type <ul>
 			    <li>for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator in a parser rule calling a parser rule. 
-			      The <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference's</abbr></a> type will be the return type of the called parser rule.</li>
+			      The <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference's</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> type will be the return type of the called parser rule.</li>
 			    <li>for each assigned action. The reference's type will be set to the return type of the current calling rule. </li>
 			  </ul>
 			  </li>
 			</ul>
 			</p>
 			<p>
-			Each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> takes its name from the assignment 
+			Each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> takes its name from the assignment 
 			or action that caused it. Multiplicities will be <em>0..1</em> for assignments with the <span class="inlinecode">=</span> operator and <span class="inlinecode">0..*</span> for assignments 
 			with the <span class="inlinecode">+=</span> operator. 
 			</p>
@@ -1804,58 +1802,19 @@
 			<a name="metamodelInference_6" ></a>
 			<h2>Feature Normalization</h2>
 			<p>
-			In the next step the generator examines all generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a> and lifts up similar features to super types
+			In the next step the generator examines all generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClasses</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> and lifts up similar features to super types
 			 if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
 			</p>
-			<a name="customPostProcessing" ></a>
-			<h2>Customized Post Processing</h2>
-			<p>
-			As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an 
-			Xtend1 file with name <em>MyDslPostProcessor.ext</em> (if the name of the grammar file is <em>MyDsl.xtext</em>) in the same 
-			folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension 
-			with signature <span class="inlinecode">process(xtext::GeneratedMetamodel)</span>. E.g.
-			</p>
-			<p>
-			<div class="literallayout">
-				<div class="incode">
-					<p class="code">
-						process(xtext::GeneratedMetamodel&nbsp;<span class="keyword">this</span>)&nbsp;:<br/>
-						&nbsp;&nbsp;process(ePackage)<br/>
-						;<br/>
-						&nbsp;<br/>
-						process(ecore::EPackage&nbsp;<span class="keyword">this</span>)&nbsp;:<br/>
-						&nbsp;&nbsp;...&nbsp;do&nbsp;something<br/>
-						;
-					</p>
-				</div>
-			</div>
-			</p>
-			<p>
-			The invoked extension can then augment the generated Ecore model in place. Some typical use cases are to:
-			<ul>
-			  <li>set default values for attributes,</li>
-			  <li>add container references as opposites of existing containment references, or</li>
-			  <li>add operations with implementation using a body annotation.</li>
-			</ul>
-			</p>
-			<p>
-			Great care must be taken to not modify the Ecore model in a way preventing the Xtext parser from working correctly
-			 (e.g. removing or renaming model elements).
-			</p>
-			<p>
-			<em>Note: If you face the situation where you think that post processing may help, you should strongly
-			consider to use imported packages instead of generated packages.</em>
-			</p>
-			<a name="metamodelInference_8" ></a>
+			<a name="metamodelInference_7" ></a>
 			<h2>Error Conditions</h2>
 			<p>
 			The following conditions cause an error
 			<ul>
-			  <li>An <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> has two different types or different cardinality.</li>
-			  <li>There is an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> and an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> with the same name in the same <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a>.</li>
+			  <li>An <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> has two different types or different cardinality.</li>
+			  <li>There is an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> and an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> with the same name in the same <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>.</li>
 			  <li>There is a cycle in the type hierarchy.</li>
-			  <li>An new <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a>, <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> or super type is added to an imported type.</li>
-			  <li>An <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> is added to an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>.</li>
+			  <li>An new <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a>, <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java" title="View Source Code" >(src)</a> or super type is added to an imported type.</li>
+			  <li>An <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> is added to an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>.</li>
 			  <li>An undeclared alias is used. </li>
 			  <li>An imported Ecore model cannot be loaded.</li>
 			</ul>

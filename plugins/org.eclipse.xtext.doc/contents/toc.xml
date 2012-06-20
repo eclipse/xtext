@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/xtext.html" label="Xtext 2.3 Documentation" >
-	<topic href="contents/xtext_15.html#Xtext%202.3%20Documentation_15" label="Getting Started" >
+	<topic href="contents/xtext_14.html#Xtext%202.3%20Documentation_14" label="Getting Started" >
 		<topic href="contents/010-xtext-in-5-minutes.html#FirstFiveMinutes" label="5 Minutes Tutorial" >
 			<topic href="contents/010-xtext-in-5-minutes.html#NewProject" label="Creating A New Xtext Project" >
 			</topic>
@@ -44,7 +44,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_16.html#Xtext%202.3%20Documentation_16" label="Reference Documentation" >
+	<topic href="contents/xtext_15.html#Xtext%202.3%20Documentation_15" label="Reference Documentation" >
 		<topic href="contents/000-introduction.html#Overview" label="Overview" >
 			<topic href="contents/000-introduction.html#Overview_1" label="What is Xtext?" >
 			</topic>
@@ -141,9 +141,7 @@
 				</topic>
 				<topic href="contents/020-grammar-language.html#metamodelInference_6" label="Feature Normalization" >
 				</topic>
-				<topic href="contents/020-grammar-language.html#customPostProcessing" label="Customized Post Processing" >
-				</topic>
-				<topic href="contents/020-grammar-language.html#metamodelInference_8" label="Error Conditions" >
+				<topic href="contents/020-grammar-language.html#metamodelInference_7" label="Error Conditions" >
 				</topic>
 			</topic>
 			<topic href="contents/020-grammar-language.html#grammarMixins" label="Grammar Mixins" >
@@ -540,7 +538,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_17.html#Xtext%202.3%20Documentation_17" label="Appendix" >
+	<topic href="contents/xtext_16.html#Xtext%202.3%20Documentation_16" label="Appendix" >
 		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x" label="Migrating from Xtext 1.0.x to 2.0" >
 			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_4" label="Take the Shortcut" >
 			</topic>

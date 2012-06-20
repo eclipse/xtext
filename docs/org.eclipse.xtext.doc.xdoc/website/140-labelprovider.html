@@ -239,7 +239,7 @@
 			</div>
 			</p>
 			<p>
-			If your grammar uses an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a>, there may be an existing <em>edit</em>-plug-in generated 
+			If your grammar uses an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>, there may be an existing <em>edit</em>-plug-in generated 
 			by EMF that also provides label providers for model elements. To use this as a fallback, your label 
 			provider should call the constructor with the 
 			delegate parameter and use dependency injection for its initialization, e.g.
@@ -294,7 +294,7 @@
 			<p>
 			What is especially nice about the default implementation is the actual reason for its class 
 			name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
-			at first have a look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <em>name</em> and try to use this one.
+			at first have a look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> <em>name</em> and try to use this one.
 			If it cannot find such a feature, it will try to use the first feature, that can be used best as a label. 
 			At worst it will return the class name of the model element, which is kind of unlikely to happen.
 			</p>
@@ -318,7 +318,7 @@
 			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.html" title="org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider">DefaultDescriptionLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java" title="View Source Code" >(src)</a>. It employs the 
 			same polymorphic dispatch mechanism as the <a href="140-labelprovider.php#DefaultEObjectLabelProvider.php" title="Go to &quot;DefaultEObjectLabelProvider&quot;">DefaultEObjectLabelProvider</a>. 
 			The default text of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> is its indexed name. 
-			The image is resolved by dispatching to <span class="inlinecode">image(EClass)</span> with the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> of the described object. 
+			The image is resolved by dispatching to <span class="inlinecode">image(EClass)</span> with the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a> of the described object. 
 			This is likely the only method you want to override. Instances of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> 
 			will be represented with their path and the icon registered for your language's editor. 
 			</p>

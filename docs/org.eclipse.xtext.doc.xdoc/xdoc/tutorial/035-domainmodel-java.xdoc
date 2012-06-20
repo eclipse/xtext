@@ -41,7 +41,7 @@ reuse a lot of helpful infrastructure to build the language.
 We will now walk through the e[five!] little steps needed to get this language fully working including
 its compiler.
 
-After you have ref:Installation[installed] Xtext on your machine, start Eclipse and set up a fresh workspace.
+After you have installed Xtext on your machine, start Eclipse and set up a fresh workspace.
 
 section[Step One: Create A New Xtext Project]
 
