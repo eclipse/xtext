@@ -77,7 +77,7 @@ We create a new instance and pass it through the generation functions, collectin
 the import section in a Java file precedes the class body, we create the body into a String variable
 and assemble the whole file's content in a second step.
 
-code[Xtend2][
+code[Xtend][
 class DomainmodelGenerator implements IGenerator {
   
   @Inject extension IQualifiedNameProvider

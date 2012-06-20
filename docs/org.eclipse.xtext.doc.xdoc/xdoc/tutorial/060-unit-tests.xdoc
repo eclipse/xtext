@@ -18,7 +18,7 @@ ol[
     the language specific codeRef[org.eclipse.xtext.junit4.IInjectorProvider]. Both have to be provided
     by means of class annotations:  
  
-    code[Xtend2][
+    code[Xtend][
       import org.eclipse.xtext.junit4.XtextRunner
       import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
       
@@ -34,7 +34,7 @@ ol[
     e[Domainmodel]. The model itself can be traversed and checked afterwards. A static import of
     codeRef[org.junit.Assert] leads to concise and readable test cases.
     
-    code[Xtend2][
+    code[Xtend][
       import org.eclipse.xtext.junit4.util.ParseHelper
       import static org.junit.Assert.*
       

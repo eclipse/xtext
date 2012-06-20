@@ -66,7 +66,7 @@ codelanguage-def[Xbase][
 
 codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
 
-codelanguage-def[Xtend2][
+codelanguage-def[Xtend][
   abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
   boolean,do,if,private,this,it,break,double,implements,protected,throw,
   byte,else,import,public,throws,
@@ -83,11 +83,6 @@ codelanguage-def[Xpand][
   IMPORT, EXTENSION, FILE, ENDFILE, DEFINE, ENDDEFINE, FOR, ENDFOR,
   FOREACH, ENDFOREACH, AS, SEPARATOR, ITERATOR, EXPAND, REM, ENDREM, PROTECT, ENDPROTECT, this,
   IF, ENDIF, ELSE, null
-]
-
-codelanguage-def[Xtend][
-  import, extension, this, create, cached, this, true, false, let, switch,
-  case, if, then, else, public, protected, private
 ]
 
 codelanguage-def[Check][import, extension, this, create, cached, this, true, false, let, switch,

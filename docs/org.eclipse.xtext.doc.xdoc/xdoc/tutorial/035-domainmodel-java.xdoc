@@ -291,7 +291,7 @@ If you have already triggered the 'Generate Xtext Artifacts' action, you should 
 e[org/example/domainmodel/jvmmodel/DomainmodelJvmModelInferrer.xtend]
 in the src folder. Please replace its contents with the following :
 
-code[Xtend2][
+code[Xtend][
 package org.example.domainmodel.jvmmodel
 
 import com.google.inject.Inject
@@ -352,7 +352,7 @@ for details, especially the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBui
 
 ol[
   item[
-    code[Xtend2][
+    code[Xtend][
       def dispatch void infer(Entity element, 
                 IAcceptor<JvmDeclaredType> acceptor, 
                 boolean isPrelinkingPhase) {
@@ -362,7 +362,7 @@ ol[
     codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] makes sure we don't have to walk the syntax model on our own.
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
         acceptor.accept(element.toClass(element.fullyQualifiedName)  
         ...
     ]
@@ -373,10 +373,10 @@ ol[
   That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
   
   Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
-  to the implicit variable code[Xtend2][it]. Therein you can further initialize the created Java element. 
+  to the implicit variable code[Xtend][it]. Therein you can further initialize the created Java element. 
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
      ).initializeLater \[
     ]
     The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
@@ -385,7 +385,7 @@ ol[
     expression passed to code[initializeLater]. Think of it as an anonymous class.
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
         documentation = element.documentation
     ]
     Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
@@ -397,7 +397,7 @@ ol[
     Xtend's extension methods are explained in detail in the sections about link[../../org.eclipse.xtend.doc/contents/20-classes-and-functions.html?cp=4_2_7#extensionMethods][extension methods] and link[../../org.eclipse.xtend.doc/contents/20-classes-and-functions.html?cp=4_2_1#imports][imports].
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
      if (element.superType != null)
         superTypes += entity.superType.cloneWithProxies
     ]
@@ -406,7 +406,7 @@ ol[
     from the e[element], as e[superType] is an EMF containment reference.   
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
       for (feature : element.features) {
         switch feature {
           Property : {
@@ -424,7 +424,7 @@ ol[
     type within the blocks.
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
         Property : {
           members += feature.toField(feature.name, feature.type)
           members += feature.toSetter(feature.name, feature.type)
@@ -434,7 +434,7 @@ ol[
     For each e[Property] we create a field as well as a corresponding getter and setter.  
   ]
   item[
-    code[Xtend2][
+    code[Xtend][
         Operation : {
           members += feature.toMethod(feature.name, feature.type) \[
             documentation = feature.documentation
@@ -449,7 +449,7 @@ ol[
     e[Operations] are being mapped to a corresponding Java method. The documentation is translated and
     the parameters are added within the initializer.
     
-    The line code[Xtend2][body = feature.body] registers the e[Operation]'s expression as the body of
+    The line code[Xtend][body = feature.body] registers the e[Operation]'s expression as the body of
     the newly created Java method. This defines the scope of the expression. The frameworks deduces the
     visible fields and parameters as well as the expected return type from that information.
   ]

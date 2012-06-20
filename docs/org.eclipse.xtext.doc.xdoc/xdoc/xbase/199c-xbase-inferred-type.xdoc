@@ -35,9 +35,9 @@ input model and dispatches to its contents until you decide which elements to ha
 
 The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you
 make sure all types exist and are referrable when you create their members in the second phase. 
-Use code[Xtend2][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialization
+Use code[Xtend][acceptor.accept(JvmDeclaredType)] for the first phase and provide the initialization
 code for the second phase. You have to pass a ref:Xbase_Expressions_Lambda[lambda expression] to the method
-code[Xtend][initializeLater()] on the return type of the code[Xtend2][acceptor.accept()] method.
+code[Xtend][initializeLater()] on the return type of the code[Xtend][acceptor.accept()] method.
      
 For our domain model example, we implement a polymorphic dispatch function e[infer] for
 e[Entities] to transform them into a codeRef[org.eclipse.xtext.common.types.JvmGenericType] in the first phase. 
@@ -45,7 +45,7 @@ In the second phase, we add a
 codeRef[org.eclipse.xtext.common.types.JvmField] and corresponding accessors for each e[Property]. The final 
 e[DomainmodelJvmModelInferrer] looks like this:
 
-code[Xtend2][
+code[Xtend][
 class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 
   @Inject extension JvmTypesBuilder

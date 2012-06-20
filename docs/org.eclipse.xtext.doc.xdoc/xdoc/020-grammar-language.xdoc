@@ -954,8 +954,7 @@ code[Xtext][enum Visibility:
 ;
  ]
 
-You can overcome this by modifying the infered Ecore model through a ref:customPostProcessing[model to model transformation].
-However, instead of post processing, an explicitly imported metamodel is recommend.
+You can overcome this by using an explicitly imported metamodel.
 
 section2:antlr_errors[Syntactic Predicates]
 
@@ -1103,36 +1102,6 @@ section2[Feature Normalization]
 
 In the next step the generator examines all generated codeRef[org.eclipse.emf.ecore.EClass][EClasses] and lifts up similar features to super types
  if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
-
-
-section2:customPostProcessing[Customized Post Processing]
-
-As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an 
-Xtend1 file with name e[MyDslPostProcessor.ext] (if the name of the grammar file is e[MyDsl.xtext]) in the same 
-folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension 
-with signature code[Xtend][process(xtext::GeneratedMetamodel)]. E.g.
-
-code[Xtend][process(xtext::GeneratedMetamodel this) :
-  process(ePackage)
-;
- 
-process(ecore::EPackage this) :
-  ... do something
-;
-]
-
-The invoked extension can then augment the generated Ecore model in place. Some typical use cases are to:
-ul[
-item[set default values for attributes,]
-item[add container references as opposites of existing containment references, or]
-item[add operations with implementation using a body annotation.]
-]
-
-Great care must be taken to not modify the Ecore model in a way preventing the Xtext parser from working correctly
- (e.g. removing or renaming model elements).
-
-e[Note: If you face the situation where you think that post processing may help, you should strongly
-consider to use imported packages instead of generated packages.]
 
 section2[Error Conditions]
 
