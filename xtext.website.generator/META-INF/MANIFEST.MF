@@ -9,5 +9,6 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.3.0",
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.bootstrapdoc;bundle-version="1.0.0",
  org.eclipse.xtext.xdoc;bundle-version="0.1.0",
- org.eclipse.xtext.doc.xdoc;bundle-version="2.3.0"
+ org.eclipse.xtext.doc.xdoc;bundle-version="2.3.0",
+ org.xtext.sevenlanguages.doc.xdoc;bundle-version="1.0.0"
 

@@ -1,6 +1,6 @@
 package generator
 
-class Examples extends AbstractWebsite {
+class Examples extends Documentation {
 
   override path() {
     'examples.html'

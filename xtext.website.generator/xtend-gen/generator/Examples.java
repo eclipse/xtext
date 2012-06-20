@@ -1,10 +1,10 @@
 package generator;
 
-import generator.AbstractWebsite;
+import generator.Documentation;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class Examples extends AbstractWebsite {
+public class Examples extends Documentation {
   public String path() {
     return "examples.html";
   }
