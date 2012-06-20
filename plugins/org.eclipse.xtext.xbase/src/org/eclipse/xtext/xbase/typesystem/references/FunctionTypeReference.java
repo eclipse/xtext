@@ -9,8 +9,10 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -18,26 +20,43 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class FunctionTypeReference extends ParameterizedTypeReference {
 
 	private List<LightweightTypeReference> parameterTypes;
 	private LightweightTypeReference returnType;
 	
-	protected FunctionTypeReference(ResolvedTypes types, JvmType type) {
-		super(types, type);
+	protected FunctionTypeReference(TypeReferenceOwner owner, JvmType type) {
+		super(owner, type);
 	}
 	
 	@Override
-	protected FunctionTypeReference doCopyInto(ResolvedTypes types) {
-		FunctionTypeReference result = new FunctionTypeReference(types, getType());
-		copyTypeArguments(result, types);
+	protected FunctionTypeReference doCopyInto(TypeReferenceOwner owner) {
+		FunctionTypeReference result = new FunctionTypeReference(owner, getType());
+		copyTypeArguments(result, owner);
 		if (parameterTypes != null && !parameterTypes.isEmpty()) {
 			for(LightweightTypeReference typeArgument: parameterTypes) {
-				result.addParameterType(typeArgument.copyInto(types));
+				result.addParameterType(typeArgument.copyInto(owner));
 			}
 			if (returnType != null) {
-				result.returnType = returnType.copyInto(types);
+				result.returnType = returnType.copyInto(owner);
 			}
+		}
+		return result;
+	}
+	
+	@Override
+	protected JvmTypeReference toTypeReference() {
+		XFunctionTypeRef result = getOwner().getServices().getXtypeFactory().createXFunctionTypeRef();
+		result.setType(getType());
+		result.setEquivalent(super.toTypeReference());
+		if (parameterTypes != null) {
+			for(LightweightTypeReference parameterType: parameterTypes) {
+				result.getParamTypes().add(parameterType.toTypeReference());
+			}
+		}
+		if (returnType != null) {
+			result.setReturnType(returnType.toTypeReference());
 		}
 		return result;
 	}
@@ -46,7 +65,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (parameterType == null) {
 			throw new NullPointerException("parameterType may not be null");
 		}
-		if (!parameterType.isValidInContext(getContext())) {
+		if (!parameterType.isValidInContext(getOwner())) {
 			throw new NullPointerException("parameterType is not valid in current context");
 		}
 		if (parameterTypes == null)
@@ -59,7 +78,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (returnType == null) {
 			throw new NullPointerException("returnType may not be null");
 		}
-		if (!returnType.isValidInContext(getContext())) {
+		if (!returnType.isValidInContext(getOwner())) {
 			throw new NullPointerException("returnType is not valid in current context");
 		}
 		this.returnType = returnType;
