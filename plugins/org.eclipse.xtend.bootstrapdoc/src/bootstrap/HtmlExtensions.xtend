@@ -28,6 +28,7 @@ import org.eclipse.xtext.xdoc.xdoc.UnorderedList
 import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
 
 import static bootstrap.HtmlExtensions.*
+import com.google.inject.Inject
 
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
@@ -35,7 +36,7 @@ class ArtificialIds extends AdapterImpl {
 
 class HtmlExtensions {
 	
-	static val JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/"
+	@Inject extension CodeRefs
 	
 	def href(Identifiable id) {
 		val it = switch id {
@@ -84,7 +85,7 @@ class HtmlExtensions {
 	}
 
 	def dispatch CharSequence toHtml(List<EObject> it) {
-		map[toHtml].join 
+		map[toHtml].join
 	}
 
 	def dispatch toHtml(TextPart it) '''«text.quote»'''
@@ -128,12 +129,30 @@ class HtmlExtensions {
 		return ""
 	}
 	
-	def dispatch CharSequence toHtml(CodeRef it) '''
-		<a href="«JAVADOC_ROOT»«element.qualifiedName.replace('.','/')».html">«
-		IF altText != null»«altText.toHtml»«
-		ELSE»<abbr title="«element.qualifiedName»">«element.simpleName.trim»</abbr>«
-		ENDIF»</a>
+	def dispatch CharSequence toHtml(CodeRef it) {
+		try {
+		val sourceCodeURI = element?.sourceCodeURI
+		val javaDocURI = element?.javaDocURI
+		'''
+		«IF javaDocURI != null
+			»<a href="«javaDocURI»">»«
+		ENDIF»«
+		IF altText != null
+			»«altText.toHtml»«
+		ELSE
+			»<abbr title="«element?.identifier»">«element?.simpleName?.trim»</abbr>«
+		ENDIF»«
+		IF javaDocURI != null 
+			»</a>«
+		ENDIF»«
+		IF sourceCodeURI!=null
+			» <a href="«sourceCodeURI»">(src)</a>«
+		ENDIF»
 	'''
+	} catch (Exception e) {
+		e.printStackTrace
+	}
+	}
 	
 	def dispatch toHtml(Code it) {
 		contents.quote

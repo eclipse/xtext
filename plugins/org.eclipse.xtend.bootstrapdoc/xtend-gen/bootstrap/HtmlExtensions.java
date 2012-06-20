@@ -1,8 +1,10 @@
 package bootstrap;
 
 import bootstrap.ArtificialIds;
+import bootstrap.CodeRefs;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -51,7 +54,8 @@ import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 
 @SuppressWarnings("all")
 public class HtmlExtensions {
-  private final static String JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/";
+  @Inject
+  private CodeRefs _codeRefs;
   
   public String href(final Identifiable id) {
     String _xblockexpression = null;
@@ -341,37 +345,70 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final CodeRef it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<a href=\"");
-    _builder.append(HtmlExtensions.JAVADOC_ROOT, "");
-    JvmDeclaredType _element = it.getElement();
-    String _qualifiedName = _element.getQualifiedName();
-    String _replace = _qualifiedName.replace(".", "/");
-    _builder.append(_replace, "");
-    _builder.append(".html\">");
-    {
-      TextOrMarkup _altText = it.getAltText();
-      boolean _notEquals = (!Objects.equal(_altText, null));
-      if (_notEquals) {
-        TextOrMarkup _altText_1 = it.getAltText();
-        CharSequence _html = this.toHtml(_altText_1);
-        _builder.append(_html, "");
-      } else {
-        _builder.append("<abbr title=\"");
+    CharSequence _xtrycatchfinallyexpression = null;
+    try {
+      CharSequence _xblockexpression = null;
+      {
+        JvmDeclaredType _element = it.getElement();
+        final String sourceCodeURI = _element==null?(String)null:this._codeRefs.getSourceCodeURI(_element);
         JvmDeclaredType _element_1 = it.getElement();
-        String _qualifiedName_1 = _element_1.getQualifiedName();
-        _builder.append(_qualifiedName_1, "");
-        _builder.append("\">");
-        JvmDeclaredType _element_2 = it.getElement();
-        String _simpleName = _element_2.getSimpleName();
-        String _trim = _simpleName.trim();
-        _builder.append(_trim, "");
-        _builder.append("</abbr>");
+        final String javaDocURI = _element_1==null?(String)null:this._codeRefs.getJavaDocURI(_element_1);
+        StringConcatenation _builder = new StringConcatenation();
+        {
+          boolean _notEquals = (!Objects.equal(javaDocURI, null));
+          if (_notEquals) {
+            _builder.append("<a href=\"");
+            _builder.append(javaDocURI, "");
+            _builder.append("\">\u00BB");
+          }
+        }
+        {
+          TextOrMarkup _altText = it.getAltText();
+          boolean _notEquals_1 = (!Objects.equal(_altText, null));
+          if (_notEquals_1) {
+            TextOrMarkup _altText_1 = it.getAltText();
+            CharSequence _html = this.toHtml(_altText_1);
+            _builder.append(_html, "");
+          } else {
+            _builder.append("<abbr title=\"");
+            JvmDeclaredType _element_2 = it.getElement();
+            String _identifier = _element_2==null?(String)null:_element_2.getIdentifier();
+            _builder.append(_identifier, "");
+            _builder.append("\">");
+            JvmDeclaredType _element_3 = it.getElement();
+            String _simpleName = _element_3==null?(String)null:_element_3.getSimpleName();
+            String _trim = _simpleName==null?(String)null:_simpleName.trim();
+            _builder.append(_trim, "");
+            _builder.append("</abbr>");
+          }
+        }
+        {
+          boolean _notEquals_2 = (!Objects.equal(javaDocURI, null));
+          if (_notEquals_2) {
+            _builder.append("</a>");
+          }
+        }
+        {
+          boolean _notEquals_3 = (!Objects.equal(sourceCodeURI, null));
+          if (_notEquals_3) {
+            _builder.append(" <a href=\"");
+            _builder.append(sourceCodeURI, "");
+            _builder.append("\">(src)</a>");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        _xblockexpression = (_builder);
+      }
+      _xtrycatchfinallyexpression = _xblockexpression;
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+        e.printStackTrace();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
     }
-    _builder.append("</a>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+    return _xtrycatchfinallyexpression;
   }
   
   protected CharSequence _toHtml(final Code it) {
