@@ -14,6 +14,8 @@ import org.junit.Before
 import org.junit.Test
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.XbaseFactory
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
+import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
