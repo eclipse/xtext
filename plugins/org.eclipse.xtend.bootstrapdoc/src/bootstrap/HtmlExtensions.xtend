@@ -65,15 +65,12 @@ class HtmlExtensions {
 	}
 	
 	
-	def dispatch CharSequence toHtml(TextOrMarkup it) '''
-		«IF isParagraph»
+	def dispatch CharSequence toHtml(TextOrMarkup it) 
+		'''«IF isParagraph»
 			<p>
-		«ENDIF»
-			«contents.toHtml»
-		«IF isParagraph»
+				«contents.toHtml»
 			</p>
-		«ENDIF»
-	'''
+		«ELSE»«contents.toHtml.toString.trim»«ENDIF»'''
 	
 	def private isParagraph(TextOrMarkup it) {
 		switch eContainingFeature {
@@ -90,9 +87,7 @@ class HtmlExtensions {
 		map[toHtml].join
 	}
 
-	def dispatch toHtml(TextPart it) '''
-		«text.quote»
-	'''
+	def dispatch toHtml(TextPart it) '''«text.quote»'''
 	
 	def dispatch toHtml(Emphasize it) '''<strong>«contents.toHtml»</strong>'''
 

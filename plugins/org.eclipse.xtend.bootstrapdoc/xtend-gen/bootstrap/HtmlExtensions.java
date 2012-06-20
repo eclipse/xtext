@@ -140,20 +140,23 @@ public class HtmlExtensions {
     {
       boolean _isParagraph = this.isParagraph(it);
       if (_isParagraph) {
+        _builder.newLineIfNotEmpty();
         _builder.append("<p>");
         _builder.newLine();
-      }
-    }
-    _builder.append("\t");
-    EList<EObject> _contents = it.getContents();
-    CharSequence _html = this.toHtml(_contents);
-    _builder.append(_html, "	");
-    _builder.newLineIfNotEmpty();
-    {
-      boolean _isParagraph_1 = this.isParagraph(it);
-      if (_isParagraph_1) {
+        _builder.append("\t");
+        EList<EObject> _contents = it.getContents();
+        CharSequence _html = this.toHtml(_contents);
+        _builder.append(_html, "	");
+        _builder.newLineIfNotEmpty();
         _builder.append("</p>");
         _builder.newLine();
+        _builder.append("\t\t");
+      } else {
+        EList<EObject> _contents_1 = it.getContents();
+        CharSequence _html_1 = this.toHtml(_contents_1);
+        String _string = _html_1.toString();
+        String _trim = _string.trim();
+        _builder.append(_trim, "");
       }
     }
     return _builder;
@@ -226,7 +229,6 @@ public class HtmlExtensions {
     String _text = it.getText();
     String _quote = this.quote(_text);
     _builder.append(_quote, "");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
