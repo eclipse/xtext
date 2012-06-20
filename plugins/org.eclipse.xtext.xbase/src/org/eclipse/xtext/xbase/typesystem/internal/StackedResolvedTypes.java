@@ -67,10 +67,10 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 
 	protected void mergeInto(ResolvedTypes parent) {
+		mergeTypeParametersIntoParent(parent);
 		parent.ensureExpressionTypesMapExists().putAll(ensureExpressionTypesMapExists());
 		parent.ensureTypesMapExists().putAll(ensureTypesMapExists());
 		parent.ensureLinkingMapExists().putAll(ensureLinkingMapExists());
-		mergeTypeParametersIntoParent(parent);
 	}
 
 	protected void mergeTypeParametersIntoParent(ResolvedTypes parent) {
