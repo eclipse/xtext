@@ -12,7 +12,6 @@ import java.util.Map;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
 import com.google.common.collect.Multimap;
@@ -21,14 +20,19 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString - delegates to parent except for the reassigned types
  */
-public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
-	public DelegatingStackedResolvedTypes(ResolvedTypes parent) {
+public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
+	public ReassigningStackedResolvedTypes(ResolvedTypes parent) {
 		super(parent);
 	}
 
 	@Override
 	protected Multimap<XExpression, TypeData> ensureExpressionTypesMapExists() {
 		return getParent().ensureExpressionTypesMapExists();
+	}
+	
+	@Override
+	protected Multimap<XExpression, TypeData> createExpressionTypesMap() {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -41,9 +45,9 @@ public class DelegatingStackedResolvedTypes extends StackedResolvedTypes {
 		return getParent().ensureTypesMapExists();
 	}
 	
-	@Override
-	public JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type,
-			ConformanceHint conformanceHint, boolean returnType) {
-		return getParent().acceptType(expression, expectation, type, conformanceHint, returnType);
-	}
+//	@Override
+//	public JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type,
+//			ConformanceHint conformanceHint, boolean returnType) {
+//		return getParent().acceptType(expression, expectation, type, conformanceHint, returnType);
+//	}
 }

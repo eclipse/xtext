@@ -22,7 +22,7 @@ public class ExpressionTypeCheckpointComputationState extends ExpressionTypeComp
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver, ExpressionTypeComputationState parent,
 			XExpression expression) {
-		super(new DelegatingStackedResolvedTypes(resolvedTypes), featureScopeSession, reentrantTypeResolver, parent, expression);
+		super(new ReassigningStackedResolvedTypes(resolvedTypes), featureScopeSession, reentrantTypeResolver, parent, expression);
 	}
 	
 	@Override
