@@ -14,7 +14,7 @@ section:routing_solution[A Solution With Xtext]
 
 In this project, we have created a small DSL base on link[http://www.xtext.org][Xtext] that allows to create routing with full support of expressions and access to the URL while the routing is done.
 The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and link[http://code.google.com/p/google-guice][Guice] bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
-Eventually, we do only have a single javax.servlet.http.HttpServlet containing the logic for routing implemented in Java. 
+Eventually, we do only have a single codeRef[javax.servlet.http.HttpServlet] containing the logic for routing implemented in Java. 
 To define routes you'll have to create a file with the extension '.route'. The first part of a route defines the type (GET, POST, PUT, DELETE or HEAD) of the route and the pattern.
 code[GET /client/foo/:id/bar/:rest* ...]
 ul[
@@ -31,16 +31,14 @@ If you want to call static methods there is no need for a Guice-key.
 code[GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass::doSomethingStatic(id)]
 In both cases you have the possibility to feed the methods with an expression.
 
-If you have ever seen a HttpServlet you might know that there is exactly one method for each type (GET,
-POST, ...). Within these methods we'll have to call our routing logic with access to the request and response. 
-A route describes a pattern, a condition, a Guice-key and a call of an action. So a pattern should be translated to a field as regular expression. This helps to match the URL and extract the values out of
-the given URL from the request. 
-A condition should be a method with a boolean returntype where the request and the values of the variables from
-the URL-pattern are handled in as parameters. 
+To map that to Java we have to clarify what concepts we have and where we should hook in.
+First of all a codeRef[javax.servlet.http.HttpServlet] has exactly one method for each request type (GET,
+POST, ...). Within these methods we'll have to call our routing logic. A route describes a pattern, a condition, a guice-key and a call of an action. So a pattern should be translated to a field as regular expression. This helps to match the URL and extract the values out of
+the given URL from the request. A condition should be a method with a boolean returntype where the request and the values of the variables from the URL-pattern are handled in as parameters. 
 The guice-key should be a field annotated with whatever is specified by
 the user and @Inject to tell Guice to inject an implementation here. 
 There is one more need for a method to wrap the action call with same parameters as the condition.
-Now we have all stuff to fill in our logic inside of the global method of the HttpServelet. First of
+Now we have everything to fill in our logic inside of the global method of the HttpServelet. First of
 all we have to match the URL, extract the values for the variables and establish local variables for
 that. If there is a condition we have to establish a guard for the action call. Only when the pattern
 matches the URL and the condition is true the call should be triggered. Otherwise a following route should
