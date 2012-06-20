@@ -10,20 +10,20 @@ existing Eclipse by means of the Eclipse update mechanism.
 section:InstallDistro[Install Pre-Configured Eclipse With Xtext]
 
 ol[
-	item[
-		Go to link[http://xtext.itemis.com/xtext/language=en/36553/downloads][http://xtext.itemis.com]
-		and select the distribution that matches your OS. 
-	]
-	item[a[unzip] Unzip the archive into the directory of your choice. 
-		
-		e[Windows Users should choose a directory
-		close to the root since the zip contains a deeply nested folder structure. The maximum path length
-		on windows may not exceed roughly 256 characters.]
-	]
-	item[
-		Launch Eclipse and select the workspace location. It is basically the location for your user data
-		and project files and may be an empty directory.
-	]
+  item[
+    Go to link[http://xtext.itemis.com/xtext/language=en/36553/downloads][http://xtext.itemis.com]
+    and select the distribution that matches your OS. 
+  ]
+  item[a[unzip] Unzip the archive into the directory of your choice. 
+    
+    e[Windows Users should choose a directory
+    close to the root since the zip contains a deeply nested folder structure. The maximum path length
+    on windows may not exceed roughly 256 characters.]
+  ]
+  item[
+    Launch Eclipse and select the workspace location. It is basically the location for your user data
+    and project files and may be an empty directory.
+  ]
 ]
 
 section:InstallXtext[Install Xtext From Update Site]
@@ -34,18 +34,18 @@ Eclipse IDE for Java Developers. Find the download link that matches your platfo
 above] to extract and launch Eclipse.
 
 ul[
-	item[
-		Choose e[Help -> Install New Software...] from the menu bar and
-		e[Add...] the following update site: link[http://download.itemis.de/updates/][http://download.itemis.de/updates/].
-		This site aggregates all the necessary and optional components of Xtext.
-	]
-	item[
-		Select the e[Xtext SDK] from the e[TMF Xtext] category and hit e[Next] until you can e[Finish] the
-		wizard.
-	]
-	item[
-		After a quick download and a restart of Eclipse, Xtext is ready to use.
-	]
+  item[
+    Choose e[Help -> Install New Software...] from the menu bar and
+    e[Add...] the following update site: link[http://download.itemis.de/updates/][http://download.itemis.de/updates/].
+    This site aggregates all the necessary and optional components of Xtext.
+  ]
+  item[
+    Select the e[Xtext SDK] from the e[TMF Xtext] category and hit e[Next] until you can e[Finish] the
+    wizard.
+  ]
+  item[
+    After a quick download and a restart of Eclipse, Xtext is ready to use.
+  ]
 ]
 
 Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on 

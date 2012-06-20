@@ -12,25 +12,25 @@ import java.util.List
 
 package my.model {
 
-	entity Person {
-		name: String
-		firstName: String
-		friends: List<Person>
-		address : Address
-		op getFullName() : String {
-			return firstName + " " + name;
-		}
-		
-		op getFriendsSortedByFullName() : List<Person> {
-			return friends.sortBy\[ f | f.fullName \]
-		}
-	}
-	
-	entity Address {
-		street: String
-		zip: String
-		city: String
-	}
+  entity Person {
+    name: String
+    firstName: String
+    friends: List<Person>
+    address : Address
+    op getFullName() : String {
+      return firstName + " " + name;
+    }
+    
+    op getFriendsSortedByFullName() : List<Person> {
+      return friends.sortBy\[ f | f.fullName \]
+    }
+  }
+  
+  entity Address {
+    street: String
+    zip: String
+    city: String
+  }
 }
 ]
 
@@ -52,30 +52,30 @@ In order to get started we first need to create some Eclipse projects. Use the E
 Choose a meaningful project name, language name and file extension, e.g.
 
 table[
-	tr[td[e[Main project name:]]td[org.example.domainmodel]]
-	tr[td[e[Language name:]]td[org.example.domainmodel.Domainmodel]]
-	tr[td[e[DSL-File extension:]]td[dmodel]]
+  tr[td[e[Main project name:]]td[org.example.domainmodel]]
+  tr[td[e[Language name:]]td[org.example.domainmodel.Domainmodel]]
+  tr[td[e[DSL-File extension:]]td[dmodel]]
 ]
 
 Click on e[Finish] to create the projects. 
 
-img[../images/tutorial/30min_wizard.png][ ][ ][ ]
+img[images/30min_wizard.png][ ][ ][ ]
 
 After you have successfully finished the wizard, you will find three new projects in your workspace.
 
 table[
-	tr[
-		td[org.example.domainmodel]td[Contains the grammar definition and all runtime components (parser, lexer, linker, validation, etc.)]
-	]
-	tr[
-		td[org.example.domainmodel.tests]td[Unit tests go here.]
-	]
-	tr[
-		td[org.example.domainmodel.ui]td[The Eclipse editor and all the other workbench related functionality.]
-	]
+  tr[
+    td[org.example.domainmodel]td[Contains the grammar definition and all runtime components (parser, lexer, linker, validation, etc.)]
+  ]
+  tr[
+    td[org.example.domainmodel.tests]td[Unit tests go here.]
+  ]
+  tr[
+    td[org.example.domainmodel.ui]td[The Eclipse editor and all the other workbench related functionality.]
+  ]
 ]
 
-img[../images/tutorial/30min_initialprojectlayout.png][ ][ ][ ]
+img[images/30min_initialprojectlayout.png][ ][ ][ ]
 
 section[Step Two: Write the Grammar]
 
@@ -89,10 +89,10 @@ grammar org.example.domainmodel.Domainmodel with
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Model:
-	greetings+=Greeting*;
-	
+  greetings+=Greeting*;
+  
 Greeting:
-	'Hello' name=ID '!';
+  'Hello' name=ID '!';
 ]
 
 Please replace that grammar definition with the one for our language:
@@ -104,158 +104,158 @@ grammar org.example.domainmodel.Domainmodel with
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Domainmodel:
-	elements+=AbstractElement*;
+  elements+=AbstractElement*;
 
 AbstractElement:
-	PackageDeclaration | Entity | Import;
+  PackageDeclaration | Entity | Import;
 
 PackageDeclaration:
-	'package' name=QualifiedName '{'
-		elements+=AbstractElement*
-	'}';
+  'package' name=QualifiedName '{'
+    elements+=AbstractElement*
+  '}';
 
 Import:
-	'import' importedNamespace=QualifiedNameWithWildCard;
+  'import' importedNamespace=QualifiedNameWithWildCard;
 
 QualifiedNameWithWildCard :
-	QualifiedName  ('.' '*')?;
+  QualifiedName  ('.' '*')?;
 
 Entity:
-	'entity' name=ValidID 
-		('extends' superType=JvmTypeReference)? '{'
-		features+=Feature*
-	'}';
+  'entity' name=ValidID 
+    ('extends' superType=JvmTypeReference)? '{'
+    features+=Feature*
+  '}';
 
 Feature:
-	Property | Operation;
+  Property | Operation;
 
 Property:
-	name=ValidID ':' type=JvmTypeReference;
+  name=ValidID ':' type=JvmTypeReference;
 
 Operation:
-	'op' name=ValidID 
-		'('(params+=FullJvmFormalParameter 
-			(',' params+=FullJvmFormalParameter)*)?')'
-		':' type=JvmTypeReference 
-		body=XBlockExpression;
+  'op' name=ValidID 
+    '('(params+=FullJvmFormalParameter 
+      (',' params+=FullJvmFormalParameter)*)?')'
+    ':' type=JvmTypeReference 
+    body=XBlockExpression;
 
 ]
 
 Let's have a look at what the different grammar constructs mean:
 
 ol[
-	item[
-		code[Xtext][
-		grammar org.example.domainmodel.Domainmodel with
-									org.eclipse.xtext.xbase.Xbase
-		]
-		The first thing to note is that instead of inheriting from the usual e[org.eclipse.xtext.common.Terminals]
-		grammar, we make use of e[org.eclipse.xtext.xbase.Xbase]. 
-		
-		Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
+  item[
+    code[Xtext][
+    grammar org.example.domainmodel.Domainmodel with
+                  org.eclipse.xtext.xbase.Xbase
+    ]
+    The first thing to note is that instead of inheriting from the usual e[org.eclipse.xtext.common.Terminals]
+    grammar, we make use of e[org.eclipse.xtext.xbase.Xbase]. 
+    
+    Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
 
-		%%In case you also want to use Java annotations, you can extend e[org.eclipse.xtext.xbase.XbaseWithAnnotations]
-		%%instead.
-	]
-	item[
-		code[Xtext][
-		Domainmodel:
-			elements+=AbstractElement*;
-		]
-		
-		The first rule in a grammar is always used as the entry or start rule.  
-		
-		It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
-		to a feature called code[Xtext][elements].
-	]
-	item[
-		code[Xtext][
-		AbstractElement:
-			PackageDeclaration | Entity | Import;
-		]
-		The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration], the rule e[Entity] or the rule e[Import].
-	]
-	item[
-		code[Xtext][
-		PackageDeclaration:
-			'package' name=QualifiedName '{'
-				elements+=AbstractElement*
-			'}';
-		]
-		A e[PackageDeclaration] is used to declare a name space which can again contain any number
-		of e[AbstractElement]s.  
-		
-		Xtext has built-in support for qualified names and scoping based on the hierarchy
-		of the produced model. The default
-		implementation will add the package names as the prefix to contained entities and nested packages.
-		The qualified name of an e[Entity] 'Baz' which is contained in a e[PackageDeclaration] 'foo.bar'
-		will be 'foo.bar.Baz'. In case you do not like the default behavior you will need
-		to use a different implementation of codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider].
-	]
-	item[
-		code[Xtext][
-		Import:
-			'import' importedNamespace=QualifiedNameWithWildCard;
-		
-		QualifiedNameWithWildCard :
-			QualifiedName  ('.' '*')?;
-		]
-		The rule e[Import] makes use of the ref:namespaceImports[namespace support], too. It basically allows you to get full-blown
-		import functionality as you are used to from Java, just by having these two rules in place.
-	]
-	item[
-		code[Xtext][
-		Entity:
-			'entity' name=ValidID 
-				('extends' superType=JvmTypeReference)? '{'
-				features+=Feature*
-			'}';
-		]
-		The rule e[Entity] starts with the definition of a keyword followed by a name.
-		
-		The e[extends] clause which is parenthesized and optional (note the trailing code[Xtext][?]) makes use of the rule
-		e[JvmTypeReference] which is defined in a super grammar. e[JvmTypeReference] defines the
-		syntax for full Java-like type names. That is everything from simple names, over fully qualified
-		names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
-		
-		Finally between curly braces there can be any number of e[Features], which leads us to the next rule.
-	]
-	item[
-		code[Xtext][
-		Feature:
-			Property | Operation;
-		]
-		
-		The rule e[Feature] delegates to either a e[Property] or an e[Operation].
-	]
-	item[
-		code[Xtext][
-		Property:
-			name=ValidID ':' type=JvmTypeReference;
-		]
-		A e[Property] has a name and makes again use of the inherited rule e[JvmTypeReference].
-	]
-	item[
-		code[Xtext][
-		Operation:
-			'op' name=ValidID 
-			'('(params+=FullJvmFormalParameter 
-				(',' params+=FullJvmFormalParameter)*)?')'
-			':' type=JvmTypeReference 
-			body=XBlockExpression;
-		]
-		e[Operation]s also have a signature as expected. Note that also for formal parameters we can
-		reuse a rule from the super grammar.
+    %%In case you also want to use Java annotations, you can extend e[org.eclipse.xtext.xbase.XbaseWithAnnotations]
+    %%instead.
+  ]
+  item[
+    code[Xtext][
+    Domainmodel:
+      elements+=AbstractElement*;
+    ]
+    
+    The first rule in a grammar is always used as the entry or start rule.  
+    
+    It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
+    to a feature called code[Xtext][elements].
+  ]
+  item[
+    code[Xtext][
+    AbstractElement:
+      PackageDeclaration | Entity | Import;
+    ]
+    The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration], the rule e[Entity] or the rule e[Import].
+  ]
+  item[
+    code[Xtext][
+    PackageDeclaration:
+      'package' name=QualifiedName '{'
+        elements+=AbstractElement*
+      '}';
+    ]
+    A e[PackageDeclaration] is used to declare a name space which can again contain any number
+    of e[AbstractElement]s.  
+    
+    Xtext has built-in support for qualified names and scoping based on the hierarchy
+    of the produced model. The default
+    implementation will add the package names as the prefix to contained entities and nested packages.
+    The qualified name of an e[Entity] 'Baz' which is contained in a e[PackageDeclaration] 'foo.bar'
+    will be 'foo.bar.Baz'. In case you do not like the default behavior you will need
+    to use a different implementation of codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider].
+  ]
+  item[
+    code[Xtext][
+    Import:
+      'import' importedNamespace=QualifiedNameWithWildCard;
+    
+    QualifiedNameWithWildCard :
+      QualifiedName  ('.' '*')?;
+    ]
+    The rule e[Import] makes use of the ref:namespaceImports[namespace support], too. It basically allows you to get full-blown
+    import functionality as you are used to from Java, just by having these two rules in place.
+  ]
+  item[
+    code[Xtext][
+    Entity:
+      'entity' name=ValidID 
+        ('extends' superType=JvmTypeReference)? '{'
+        features+=Feature*
+      '}';
+    ]
+    The rule e[Entity] starts with the definition of a keyword followed by a name.
+    
+    The e[extends] clause which is parenthesized and optional (note the trailing code[Xtext][?]) makes use of the rule
+    e[JvmTypeReference] which is defined in a super grammar. e[JvmTypeReference] defines the
+    syntax for full Java-like type names. That is everything from simple names, over fully qualified
+    names to fully-fledged generics, including wildcards, lower bounds and upper bounds.
+    
+    Finally between curly braces there can be any number of e[Features], which leads us to the next rule.
+  ]
+  item[
+    code[Xtext][
+    Feature:
+      Property | Operation;
+    ]
+    
+    The rule e[Feature] delegates to either a e[Property] or an e[Operation].
+  ]
+  item[
+    code[Xtext][
+    Property:
+      name=ValidID ':' type=JvmTypeReference;
+    ]
+    A e[Property] has a name and makes again use of the inherited rule e[JvmTypeReference].
+  ]
+  item[
+    code[Xtext][
+    Operation:
+      'op' name=ValidID 
+      '('(params+=FullJvmFormalParameter 
+        (',' params+=FullJvmFormalParameter)*)?')'
+      ':' type=JvmTypeReference 
+      body=XBlockExpression;
+    ]
+    e[Operation]s also have a signature as expected. Note that also for formal parameters we can
+    reuse a rule from the super grammar.
 
-		The e[Operation]'s body, that is the actual implementation is defined by the rule e[XBlockExpression]
-		which is one of the most often used entry rules from Xbase. A block consist of any
-		number of expressions between curly braces such as:
-		code[Xbase][
-		{
-		  return "Hello World" + "!"
-		}
-		]
-	]
+    The e[Operation]'s body, that is the actual implementation is defined by the rule e[XBlockExpression]
+    which is one of the most often used entry rules from Xbase. A block consist of any
+    number of expressions between curly braces such as:
+    code[Xbase][
+    {
+      return "Hello World" + "!"
+    }
+    ]
+  ]
 
 ]
 
@@ -270,7 +270,7 @@ This will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 
-img[../images/tutorial/JvmTutorial_RunGenerator.png][ ][ ][ ]
+img[images/JvmTutorial_RunGenerator.png][ ][ ][ ]
 
 section[Step Four: Define the Mapping to JVM Concepts]
 
@@ -316,34 +316,34 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   def dispatch void infer(Entity element, 
                 IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
-    	acceptor.accept(
-			element.toClass( element.fullyQualifiedName )
-		).initializeLater \[
-			documentation = element.documentation
-			if (element.superType != null)
-				superTypes += element.superType.cloneWithProxies
-			for (feature : element.features) {
-				switch feature {
-			
-					Property : {
-						members += feature.toField(feature.name, feature.type)
-						members += feature.toGetter(feature.name, feature.type)
-						members += feature.toSetter(feature.name, feature.type)
-					}
-			
-					Operation : {
-						members += feature.toMethod(feature.name, feature.type) \[
-							documentation = feature.documentation
-							for (p : feature.params) {
-								parameters += p.toParameter(p.name, p.parameterType)
-							}
-							body = feature.body
-						\]
-					}
-				}
-			}
-		\]
-	}
+      acceptor.accept(
+      element.toClass( element.fullyQualifiedName )
+    ).initializeLater \[
+      documentation = element.documentation
+      if (element.superType != null)
+        superTypes += element.superType.cloneWithProxies
+      for (feature : element.features) {
+        switch feature {
+      
+          Property : {
+            members += feature.toField(feature.name, feature.type)
+            members += feature.toGetter(feature.name, feature.type)
+            members += feature.toSetter(feature.name, feature.type)
+          }
+      
+          Operation : {
+            members += feature.toMethod(feature.name, feature.type) \[
+              documentation = feature.documentation
+              for (p : feature.params) {
+                parameters += p.toParameter(p.name, p.parameterType)
+              }
+              body = feature.body
+            \]
+          }
+        }
+      }
+    \]
+  }
 }
 ]
 
@@ -357,27 +357,27 @@ ol[
                 IAcceptor<JvmDeclaredType> acceptor, 
                 boolean isPrelinkingPhase) {
     ]
-	  Using the dispatch keyword makes sure that the method is called for instances of type e[Entity]
-	  only. Have a look at link[../../org.eclipse.xtend.doc/contents/20-classes-and-functions.html?cp=4_2_5_4#polymorphicDispatch][polymorphic dispatch] to understand Xtend's dispatch functions. Extending 
-	  codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] makes sure we don't have to walk the syntax model on our own.
+    Using the dispatch keyword makes sure that the method is called for instances of type e[Entity]
+    only. Have a look at link[../../org.eclipse.xtend.doc/contents/20-classes-and-functions.html?cp=4_2_5_4#polymorphicDispatch][polymorphic dispatch] to understand Xtend's dispatch functions. Extending 
+    codeRef[org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer] makes sure we don't have to walk the syntax model on our own.
   ]
   item[
     code[Xtend2][
         acceptor.accept(element.toClass(element.fullyQualifiedName)  
         ...
     ]
-	Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
-	to be passed to the e[acceptor] in order to get recognized.
-	
-	The extension method e[toClass] comes from codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
-	That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
-	
-	Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
-	to the implicit variable code[Xtend2][it]. Therein you can further initialize the created Java element. 
+  Every codeRef[org.eclipse.xtext.common.types.JvmDeclaredType] you create in the model inference needs
+  to be passed to the e[acceptor] in order to get recognized.
+  
+  The extension method e[toClass] comes from codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder].
+  That class provides a lot of convenient extension methods, which help making the code extremely readable and concise.
+  
+  Most of the methods accept initializer blocks as the last argument, in which the currently created model element is bound
+  to the implicit variable code[Xtend2][it]. Therein you can further initialize the created Java element. 
   ]
   item[
-  	code[Xtend2][
- 		).initializeLater \[
+    code[Xtend2][
+     ).initializeLater \[
     ]
     The type inference has two phases. The first phase happens before linking. Only the empty types have to be created
     and be passed to the e[acceptor].
@@ -385,7 +385,7 @@ ol[
     expression passed to code[initializeLater]. Think of it as an anonymous class.
   ]
   item[
-  	code[Xtend2][
+    code[Xtend2][
         documentation = element.documentation
     ]
     Here for instance we assign some JavaDoc to the newly created element. The assignment is translated
@@ -397,16 +397,16 @@ ol[
     Xtend's extension methods are explained in detail in the sections about link[../../org.eclipse.xtend.doc/contents/20-classes-and-functions.html?cp=4_2_7#extensionMethods][extension methods] and link[../../org.eclipse.xtend.doc/contents/20-classes-and-functions.html?cp=4_2_1#imports][imports].
   ]
   item[
-  	code[Xtend2][
- 		if (element.superType != null)
-				superTypes += entity.superType.cloneWithProxies
+    code[Xtend2][
+     if (element.superType != null)
+        superTypes += entity.superType.cloneWithProxies
     ]
     Set the e[superType] on the inferred element. Note that we have to clone the type reference from
     the e[element.superType]. If we did not do that, the type reference would be automatically removed 
     from the e[element], as e[superType] is an EMF containment reference.   
   ]
   item[
-  	code[Xtend2][
+    code[Xtend2][
       for (feature : element.features) {
         switch feature {
           Property : {
@@ -424,7 +424,7 @@ ol[
     type within the blocks.
   ]
   item[
-  	code[Xtend2][
+    code[Xtend2][
         Property : {
           members += feature.toField(feature.name, feature.type)
           members += feature.toSetter(feature.name, feature.type)
@@ -434,7 +434,7 @@ ol[
     For each e[Property] we create a field as well as a corresponding getter and setter.  
   ]
   item[
-  	code[Xtend2][
+    code[Xtend2][
         Operation : {
           members += feature.toMethod(feature.name, feature.type) \[
             documentation = feature.documentation
@@ -461,7 +461,7 @@ We are now able to test the IDE integration, by spawning a new Eclipse using our
 use the launch shortcut called "Launch Runtime Eclipse", clicking on the green play button in the tool
 bar.
 
-img[../images/tutorial/JvmTutorial_LaunchEditor.png][ ][ ][ ]
+img[images/JvmTutorial_LaunchEditor.png][ ][ ][ ]
 
 In the new workbench, create a Java project (e[File -> New -> Project...  -> Java Project].
 Xbase relies on a small runtime library on the classpath. To add this, right-click on the project and
@@ -473,4 +473,4 @@ to your users needs.
 
 Have fun!
 
-img[../images/tutorial/JvmTutorial_Editor.png][][][]
+img[images/JvmTutorial_Editor.png][][][]

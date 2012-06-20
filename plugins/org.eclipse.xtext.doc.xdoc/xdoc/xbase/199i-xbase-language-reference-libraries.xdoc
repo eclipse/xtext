@@ -24,10 +24,10 @@ bind and invoke code[foo(Object)].
 section3[Examples]
 
 ul[
-	item[code[foo]]
-	item[code[my.foo]]
-	item[code[my.foo(x)]]
-	item[code[oh.my.foo(bar)]]
+  item[code[foo]]
+  item[code[my.foo]]
+  item[code[my.foo(x)]]
+  item[code[oh.my.foo(bar)]]
 ]
 
 section3:XbaseLanguageRef_builderSyntax[Builder Syntax]
@@ -35,7 +35,7 @@ section3:XbaseLanguageRef_builderSyntax[Builder Syntax]
 If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 
 code[Xbase][
-foo(42) \[ String s | s.toUpperCase \] 	
+foo(42) \[ String s | s.toUpperCase \]   
 ]
 
 will call a Java method with the signature
@@ -60,26 +60,26 @@ using the following Xbase code:
 
 code[Xbase][
 html(\[ html | 
-	head(html, \[ 
-		// initialize head
-	\]) 
+  head(html, \[ 
+    // initialize head
+  \]) 
 \] )
 ]   
 
 Appending the lambda expression parameters and prepending the parent parameters using extension syntax yields
 code[Xbase][
 html() \[ html | 
-	html.head() \[ 
-		// initialize head
-	\]  
+  html.head() \[ 
+    // initialize head
+  \]  
 \] 
 ]  
 
 Using implicit parameter code[Xbase][it] and skipping empty parentheses you can simplify this to 
 code[Xbase][
 html \[ 
-	head \[ 
-		// initialize head
-	\]  
+  head \[ 
+    // initialize head
+  \]  
 \] 
 ]

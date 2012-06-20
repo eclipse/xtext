@@ -13,10 +13,10 @@ of code:
 code[Java][
 @Check
 public void checkNameStartsWithCapital(Entity entity) {
-	if (!Character.isUpperCase(entity.getName().charAt(0))) {
-		warning("Name should start with a capital", 
-			DomainmodelPackage.Literals.TYPE__NAME);
-	}
+  if (!Character.isUpperCase(entity.getName().charAt(0))) {
+    warning("Name should start with a capital", 
+      DomainmodelPackage.Literals.TYPE__NAME);
+  }
 }
 ]
 
@@ -30,17 +30,17 @@ and look for features with equal names.
 code[Java][
 @Check
 public void checkFeatureNameIsUnique(Feature f) {
-	Entity superEntity = ((Entity) f.eContainer()).getSuperType();
-	while(superEntity != null) {
-		for(Feature other: superEntity.getFeatures()) {
-			if (f.getName().equals(other.getName())) {
-				error("Feature names have to be unique",
-						DomainmodelPackage.Literals.FEATURE__NAME);
-				return;
-			}
-		}
-		superEntity = superEntity.getSuperType();
-	}
+  Entity superEntity = ((Entity) f.eContainer()).getSuperType();
+  while(superEntity != null) {
+    for(Feature other: superEntity.getFeatures()) {
+      if (f.getName().equals(other.getName())) {
+        error("Feature names have to be unique",
+            DomainmodelPackage.Literals.FEATURE__NAME);
+        return;
+      }
+    }
+    superEntity = superEntity.getSuperType();
+  }
 }
 ]
 

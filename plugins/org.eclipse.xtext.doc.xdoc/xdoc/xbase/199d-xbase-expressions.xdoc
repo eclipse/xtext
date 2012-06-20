@@ -28,10 +28,10 @@ an e[XBlockExpression]. The final parser rule reads as:
 
 code[Xtext][
 Operation:
-	'op' name=ValidID '(' 
-	(params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' 
-	':' type=JvmTypeReference 
-		body=XBlockExpression;
+  'op' name=ValidID '(' 
+  (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' 
+  ':' type=JvmTypeReference 
+    body=XBlockExpression;
 ]
 
 If you are unsure which entry point to choose for your expressions, consider the e[XBlockExpression].
@@ -41,7 +41,7 @@ to a new rule e[Property] and let e[Feature] become the supertype of e[Property]
 
 code[Xtext][
 Feature:
-	Property | Operation
+  Property | Operation
 ;
  
 Property:
@@ -78,8 +78,8 @@ is called e[_evaluate<SomeDescription>] and takes three parameters, e.g.
 
 code[Java][
 protected Object _evaluateBlockExpression(XBlockExpression literal, 
-										  IEvaluationContext context, 
-										  CancelIndicator indicator)
+                      IEvaluationContext context, 
+                      CancelIndicator indicator)
 ]
 
 The codeRef[org.eclipse.core.expressions.IEvaluationContext] keeps the state of the running application,
@@ -94,16 +94,16 @@ code[Java][
 
 ...
 public Object evaluate(XExpression expression, Object thisElement) {
-	IEvaluationContext evaluationContext = contextProvider.get();
-	// provide initial context and implicit variables
-	evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
-	
-	IEvaluationResult result = xbaseInterpreter.evaluate(expression, 	
-		evaluationContext, CancelIndicator.NullImpl);
-	if (result.getException() != null) {
-		// handle exception
-	} 
-	return result.getResult();
+  IEvaluationContext evaluationContext = contextProvider.get();
+  // provide initial context and implicit variables
+  evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
+  
+  IEvaluationResult result = xbaseInterpreter.evaluate(expression,   
+    evaluationContext, CancelIndicator.NullImpl);
+  if (result.getException() != null) {
+    // handle exception
+  } 
+  return result.getResult();
 }
 ]
 

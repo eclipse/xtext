@@ -23,19 +23,19 @@ section4[Syntax]
 
 code[Xtext][
 terminal ID: 
-	'^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+  '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
 ;
 ]
 
 section4[Examples]
 
 ul[
-	item[code[Foo]]
-	item[code[Foo42]]
-	item[code[FOO]]
-	item[code[_42]]
-	item[code[_foo]]
-	item[code[^extends]]
+  item[code[Foo]]
+  item[code[Foo42]]
+  item[code[FOO]]
+  item[code[_42]]
+  item[code[_foo]]
+  item[code[^extends]]
 ]
 
 section3:Xbase_Syntax_Comments[Comments]
@@ -52,7 +52,7 @@ section3:Xbase_Syntax_Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
-	item[code[Xbase][as]]
+  item[code[Xbase][as]]
     item[code[Xbase][case]]
     item[code[Xbase][catch]]
     item[code[Xbase][default]]

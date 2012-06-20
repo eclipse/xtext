@@ -34,7 +34,7 @@ After regenerating your language, it will be allowed to define a type code[Domai
 like this:
 
 code[JavaTypesExample][
-	datatype Date mapped-to java.util.Date
+  datatype Date mapped-to java.util.Date
 ]
 
 These two steps will provide a nice integration into the Eclipse JDT. There is e[Find References] on Java methods, 

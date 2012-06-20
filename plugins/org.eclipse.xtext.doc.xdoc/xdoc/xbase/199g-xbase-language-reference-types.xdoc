@@ -22,8 +22,8 @@ There is no parser rule for a simple type reference, as it is expressed as a par
 section4[Examples]
 
 ul[
-	item[code[java.lang.String]]
-	item[code[String]]
+  item[code[java.lang.String]]
+  item[code[String]]
 ]
 
 section3:Xbase_Types_FunctionTypes[Function Types]
@@ -41,11 +41,11 @@ For more information on lambda expressions see ref:Xbase_Expressions_Lambda.
 section4[Examples]
 
 ul[
-	item[code[Xbase][=>Boolean // predicate without parameters]]
-	item[code[Xbase][()=>String // provider of string]]
-	item[code[Xbase][(String)=>Boolean // One argument predicate]]
-	item[code[Xbase][(Mutable)=>void // A procedure doing side effects only]]
-	item[code[Xbase][(List<String>, Integer)=>String]]
+  item[code[Xbase][=>Boolean // predicate without parameters]]
+  item[code[Xbase][()=>String // provider of string]]
+  item[code[Xbase][(String)=>Boolean // One argument predicate]]
+  item[code[Xbase][(Mutable)=>void // A procedure doing side effects only]]
+  item[code[Xbase][(List<String>, Integer)=>String]]
 ]
 
 section3:Xbase_Types_ParameterizedTypeReference[Parameterized Type References]
@@ -59,12 +59,12 @@ type arguments.
 section4[Examples]
 
 ul[
-	item[code[Xbase][String]]
-	item[code[Xbase][java.lang.String]]
-	item[code[Xbase][List<?>]]
-	item[code[Xbase][List<? extends Comparable<? extends FooBar>]]
-	item[code[Xbase][List<? super MyLowerBound>]]
-	item[code[Xbase][List<? extends =>Boolean>]]
+  item[code[Xbase][String]]
+  item[code[Xbase][java.lang.String]]
+  item[code[Xbase][List<?>]]
+  item[code[Xbase][List<? extends Comparable<? extends FooBar>]]
+  item[code[Xbase][List<? super MyLowerBound>]]
+  item[code[Xbase][List<? extends =>Boolean>]]
 ]
 
 section3:Xbase_Types_Primitives[Primitives]

@@ -5,11 +5,11 @@ become a Java class and should be usable as such. In the domain model example, y
 
 code[DomainExample][
 entity Employee extends Person {
-	boss: Person
+  boss: Person
 ...
 
 entity Person {
-	friends: List<Person>
+  friends: List<Person>
 ...
 ]
 

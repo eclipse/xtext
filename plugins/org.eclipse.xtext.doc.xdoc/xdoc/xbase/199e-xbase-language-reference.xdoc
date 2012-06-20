@@ -32,13 +32,13 @@ reused within any Xtext based language.
 Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few 
 differences:
 ul[
-	item[No checked exceptions]
-	item[Everything is an expression, there are no statements]
-	item[Lambda expressions]
-	item[Type inference]
-	item[Properties]
-	item[Simple operator overloading]
-	item[Powerful switch expressions]
+  item[No checked exceptions]
+  item[Everything is an expression, there are no statements]
+  item[Lambda expressions]
+  item[Type inference]
+  item[Properties]
+  item[Simple operator overloading]
+  item[Powerful switch expressions]
 ]
 
 section2-ref[xbaseLanguageRef_Syntax]
