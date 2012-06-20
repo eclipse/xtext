@@ -25,7 +25,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected JvmTypeReference toTypeReference() {
+	public JvmTypeReference toTypeReference() {
 		JvmGenericArrayTypeReference result = getTypesFactory().createJvmGenericArrayTypeReference();
 		result.setComponentType(component.toTypeReference());
 		return result;
@@ -45,6 +45,14 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	@Override
 	public String toString() {
 		return component + "[]";
+	}
+	
+	@Override
+	public boolean isType(Class<?> clazz) {
+		if (clazz.isArray()) {
+			return component.isType(clazz.getComponentType());
+		}
+		return false;
 	}
 
 }

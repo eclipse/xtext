@@ -30,7 +30,7 @@ public class UnboundReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected JvmTypeReference toTypeReference() {
+	public JvmTypeReference toTypeReference() {
 		if (resolvedTo != null) {
 			return resolvedTo.toTypeReference();
 		}

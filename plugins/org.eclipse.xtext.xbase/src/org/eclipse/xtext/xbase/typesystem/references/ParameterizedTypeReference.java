@@ -34,7 +34,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected JvmTypeReference toTypeReference() {
+	public JvmTypeReference toTypeReference() {
 		JvmParameterizedTypeReference result = getTypesFactory().createJvmParameterizedTypeReference();
 		result.setType(type);
 		if (typeArguments != null) {
@@ -87,4 +87,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return type.getSimpleName() + "<" + Joiner.on(", ").join(typeArguments) + ">";
 	}
 
+	@Override
+	public boolean isType(Class<?> clazz) {
+		if (type != null) {
+			return clazz.getCanonicalName().equals(type.getIdentifier());
+		}
+		return false;
+	}
 }

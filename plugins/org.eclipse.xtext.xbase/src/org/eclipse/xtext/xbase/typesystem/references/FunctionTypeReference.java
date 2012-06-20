@@ -46,7 +46,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	}
 	
 	@Override
-	protected JvmTypeReference toTypeReference() {
+	public JvmTypeReference toTypeReference() {
 		XFunctionTypeRef result = getOwner().getServices().getXtypeFactory().createXFunctionTypeRef();
 		result.setType(getType());
 		result.setEquivalent(super.toTypeReference());

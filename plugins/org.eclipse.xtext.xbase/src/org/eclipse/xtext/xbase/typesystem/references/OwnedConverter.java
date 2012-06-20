@@ -7,31 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
-public class AnyTypeReference extends LightweightTypeReference {
+public class OwnedConverter {
 
-	protected AnyTypeReference(TypeReferenceOwner owner) {
-		super(owner);
-	}
+	private final Converter converter;
+	private final TypeReferenceOwner owner;
 
-	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
-		throw new UnsupportedOperationException();
+	public OwnedConverter(TypeReferenceOwner owner) {
+		this.converter = new Converter();
+		this.owner = owner;
 	}
-
-	@Override
-	public JvmTypeReference toTypeReference() {
-		return getTypesFactory().createJvmAnyTypeReference();
+	
+	public LightweightTypeReference toLightweightReference(JvmTypeReference reference) {
+		return converter.toLightweightReference(reference, owner);
 	}
-
-	@Override
-	public String toString() {
-		return "<null>";
-	}
+	
 }

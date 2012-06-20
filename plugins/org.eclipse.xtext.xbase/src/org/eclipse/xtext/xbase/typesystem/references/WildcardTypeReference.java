@@ -54,7 +54,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected JvmTypeReference toTypeReference() {
+	public JvmTypeReference toTypeReference() {
 		TypesFactory typesFactory = getTypesFactory();
 		JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
 		if (upperBounds != null && !upperBounds.isEmpty()) {
