@@ -7,31 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
-public class AnyTypeReference extends LightweightTypeReference {
+public interface LightweightTypeComputer extends ITypeComputer {
 
-	protected AnyTypeReference(TypeReferenceOwner owner) {
-		super(owner);
-	}
+	void computeTypes(XExpression expression, LightweightTypeComputationState state);
 
-	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public JvmTypeReference toTypeReference() {
-		return getTypesFactory().createJvmAnyTypeReference();
-	}
-
-	@Override
-	public String toString() {
-		return "<null>";
-	}
+	JvmIdentifiableElement getRefinableCandidate(XExpression object, LightweightTypeComputationState state);
+	
 }

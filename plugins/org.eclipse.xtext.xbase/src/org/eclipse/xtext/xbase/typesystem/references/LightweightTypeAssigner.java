@@ -8,30 +8,20 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class AnyTypeReference extends LightweightTypeReference {
+public interface LightweightTypeAssigner extends ITypeAssigner {
 
-	protected AnyTypeReference(TypeReferenceOwner owner) {
-		super(owner);
-	}
-
-	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public JvmTypeReference toTypeReference() {
-		return getTypesFactory().createJvmAnyTypeReference();
-	}
-
-	@Override
-	public String toString() {
-		return "<null>";
-	}
+	void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType);
+	
+	void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType, @Nullable LightweightTypeReference expectedType);
+	
+	LightweightTypeComputationState getForkedState();
+	
 }

@@ -33,7 +33,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	protected JvmTypeReference toTypeReference() {
+	public JvmTypeReference toTypeReference() {
 		JvmCompoundTypeReference result = synonym ? getTypesFactory().createJvmSynonymTypeReference() : getTypesFactory().createJvmMultiTypeReference();
 		if (components != null) {
 			for(LightweightTypeReference component: components) {

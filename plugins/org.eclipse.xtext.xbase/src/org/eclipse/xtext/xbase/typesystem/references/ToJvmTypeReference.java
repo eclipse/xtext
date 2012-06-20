@@ -7,31 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
-public class AnyTypeReference extends LightweightTypeReference {
+public class ToJvmTypeReference implements Function<LightweightTypeReference, JvmTypeReference>{
 
-	protected AnyTypeReference(TypeReferenceOwner owner) {
-		super(owner);
+	public static final ToJvmTypeReference INSTANCE = new ToJvmTypeReference();
+	
+	public JvmTypeReference apply(LightweightTypeReference input) {
+		if (input != null) {
+			return input.toTypeReference();
+		}
+		return null;
 	}
-
-	@Override
-	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public JvmTypeReference toTypeReference() {
-		return getTypesFactory().createJvmAnyTypeReference();
-	}
-
-	@Override
-	public String toString() {
-		return "<null>";
-	}
+	
 }

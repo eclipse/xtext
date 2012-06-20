@@ -52,7 +52,7 @@ public abstract class LightweightTypeReference {
 		return owner == getOwner();
 	}
 	
-	protected abstract JvmTypeReference toTypeReference();
+	public abstract JvmTypeReference toTypeReference();
 	
 	protected LightweightTypeReference copyInto(TypeReferenceOwner owner) {
 		if (isResolved()) {
@@ -65,5 +65,9 @@ public abstract class LightweightTypeReference {
 	
 	@Override
 	public abstract String toString();
+
+	public boolean isType(Class<?> clazz) {
+		return false;
+	}
 	
 }
