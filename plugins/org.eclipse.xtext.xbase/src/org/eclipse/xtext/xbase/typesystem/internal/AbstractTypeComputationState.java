@@ -49,7 +49,7 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
+ * TODO JavaDoc
  */
 @NonNullByDefault
 public abstract class AbstractTypeComputationState implements ITypeComputationState, ITypeComputationState.Fork {
@@ -330,5 +330,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public UnboundTypeParameterPreservingSubstitutor createSubstitutor(@Nullable Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping) {
 		return getResolvedTypes().createSubstitutor(typeParameterMapping);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s: %s", getClass().getSimpleName(), resolvedTypes);
 	}
 }

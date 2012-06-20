@@ -45,6 +45,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -55,6 +56,8 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
 import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitor;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Joiner.MapJoiner;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -62,16 +65,17 @@ import com.google.common.collect.Multimap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
+ * TODO JavaDoc
  */
 public class ResolvedTypes implements IResolvedTypes {
 
+	private final DefaultReentrantTypeResolver resolver;
+	
 	private Map<JvmIdentifiableElement, JvmTypeReference> types;
 	private Map<JvmIdentifiableElement, JvmTypeReference> reassignedTypes;
 	private Multimap<XExpression, TypeData> expressionTypes;
 	private Map<XExpression, ILinkingCandidate<?>> featureLinking;
 	private Map<Object, BaseUnboundTypeParameter> unboundTypeParameters;
-	private final DefaultReentrantTypeResolver resolver;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
@@ -456,6 +460,45 @@ public class ResolvedTypes implements IResolvedTypes {
 				return super.doVisitComputedTypeReference(reference, param);
 			}
 		};
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(getClass().getSimpleName()).append(": [");
+		appendContent(result, "  ");
+		closeBracket(result);
+		return result.toString();
+	}
+
+	protected void closeBracket(StringBuilder result) {
+		if (result.charAt(result.length() - 1) != '[')
+			result.append("\n]");
+		else
+			result.append("]");
+	}
+
+	protected void appendContent(StringBuilder result, String indentation) {
+		appendContent(types, "types", result, indentation);
+		appendContent(reassignedTypes, "reassignedTypes", result, indentation);
+		appendContent(expressionTypes, "expressionTypes", result, indentation);
+		appendContent(featureLinking, "featureLinking", result, indentation);
+		appendContent(unboundTypeParameters, "unboundTypeParameters", result, indentation);
+	}
+
+	protected void appendContent(Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
+		if (map != null) {
+			MapJoiner joiner = Joiner.on("\n" + indentation).withKeyValueSeparator(" -> ");
+			result.append("\n" + indentation).append(prefix).append(": ");
+			joiner.appendTo(result, map);
+		}
+	}
+	
+	protected void appendContent(Multimap<?, ?> map, String prefix, StringBuilder result, String indentation) {
+		if (map != null) {
+			MultimapJoiner joiner = new MultimapJoiner(Joiner.on("\n  " + indentation), "\n" + indentation, " -> ");
+			result.append("\n" + indentation).append(prefix).append(": ");
+			joiner.appendTo(result, map);
+		}
 	}
 	
 }
