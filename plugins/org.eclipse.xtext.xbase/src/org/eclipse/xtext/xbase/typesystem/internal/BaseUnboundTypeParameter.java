@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
-import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.Lists;
@@ -49,14 +48,14 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	}
 	
 	@Override
-	protected JvmTypeReference doGetTypeReference() {
+	protected LightweightTypeReference doGetTypeReference() {
 		bindIfPossible();
 		if (boundTo != null) {
 			return boundTo.getTypeReference();
 		}
 		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
 				Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), getServices());
-		JvmTypeReference substitute = unboundSubstitutor.substitute(getServices().getTypeReferences().createTypeRef(getTypeParameter()));
+		LightweightTypeReference substitute = unboundSubstitutor.substitute(getServices().getTypeReferences().createTypeRef(getTypeParameter()));
 		setBoundTo(new MergedBoundTypeArgument(substitute, VarianceInfo.INVARIANT /* TODO which variance info to use? */));
 		return getBoundTo().getTypeReference();
 	}
@@ -137,9 +136,9 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		if (boundArgument.getSource() == BoundTypeArgumentSource.EXPLICIT) {
 			boundTo = new MergedBoundTypeArgument(boundArgument.getTypeReference(), boundArgument.getActualVariance());
 		} else {
-			JvmTypeReference hint = boundArgument.getTypeReference();
+			LightweightTypeReference hint = boundArgument.getTypeReference();
 			if (hint instanceof XComputedTypeReference) {
-				IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) hint).getTypeProvider();
+				ILightweightTypeReferenceProvider typeProvider = ((XComputedTypeReference) hint).getTypeProvider();
 				if (typeProvider instanceof BaseUnboundTypeParameter) {
 					BaseUnboundTypeParameter other = (BaseUnboundTypeParameter) typeProvider;
 					if (other.getResolvedTypes() != getResolvedTypes()) {

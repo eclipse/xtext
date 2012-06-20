@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -25,14 +24,16 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -52,7 +53,7 @@ import com.google.common.collect.Lists;
  * TODO JavaDoc
  */
 @NonNullByDefault
-public abstract class AbstractTypeComputationState implements ITypeComputationState, ITypeComputationState.Fork {
+public abstract class AbstractTypeComputationState extends BaseTypeComputationState {
 	private final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
@@ -65,6 +66,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		this.reentrantTypeResolver = reentrantTypeResolver;
 	}
 	
+	@Override
 	protected ResolvedTypes getResolvedTypes() {
 		return resolvedTypes;
 	}
@@ -93,7 +95,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return reentrantTypeResolver.getTypeArgumentMerger();
 	}
 	
-	public ITypeComputationResult computeTypes(@Nullable XExpression expression) {
+	public LightweightTypeComputationResult computeTypes(@Nullable XExpression expression) {
 		 ResolvedTypes types = computeTypes(expression, true);
 		 if (types != null) {
 			return new ResolutionBasedComputationResult(expression, types); 
@@ -129,13 +131,13 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, reentrantTypeResolver, this, expression);
 	}
 	
-	protected abstract JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType);
+	protected abstract LightweightTypeReference acceptType(AbstractTypeExpectation expectation, LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType);
 	
 	public AbstractTypeComputationState fork() {
 		return this;
 	}
 	
-	public AbstractTypeComputationState withExpectation(JvmTypeReference expectation) {
+	public AbstractTypeComputationState withExpectation(@Nullable LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
 	}
 
@@ -163,7 +165,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 	}
 	
-	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, JvmTypeReference type) {
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type) {
 		TypeAssigner assigner = assignTypes();
 		assigner.assignType(element, type);
 		return assigner.getForkedState();
@@ -182,30 +184,30 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeAssigner(state);
 	}
 
-	public final List<ITypeExpectation> getImmediateExpectations() {
+	public final List<LightweightTypeExpectation> getImmediateExpectations() {
 		return getImmediateExpectations(this);
 	}
 	
-	public final List<ITypeExpectation> getReturnExpectations() {
+	public final List<LightweightTypeExpectation> getReturnExpectations() {
 		return getReturnExpectations(this);
 	}
 	
-	protected abstract List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState);
 	
-	protected abstract List<ITypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
+	protected abstract List<LightweightTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState);
 	
-	public void acceptActualType(JvmTypeReference type) {
-		for(ITypeExpectation expectation: getImmediateExpectations()) {
+	public void acceptActualType(LightweightTypeReference type) {
+		for(LightweightTypeExpectation expectation: getImmediateExpectations()) {
 			expectation.acceptActualType(type, ConformanceHint.EXPECTATION_INDEPENDENT);
 		}
 	}
 
 	@Nullable
-	public JvmTypeReference getType(JvmIdentifiableElement element) {
+	public LightweightTypeReference internalGetType(JvmIdentifiableElement element) {
 		return resolvedTypes.getActualType(element);
 	}
 
-	public void reassignType(XExpression object, JvmTypeReference type) {
+	public void reassignType(XExpression object, LightweightTypeReference type) {
 		JvmIdentifiableElement refinable = getTypeComputer().getRefinableCandidate(object, this);
 		if (refinable != null) {
 			resolvedTypes.reassignType(refinable, type);
@@ -229,20 +231,20 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		
 		StackedResolvedTypes demandComputedTypes = new StackedResolvedTypes(resolvedTypes);
 		final AbstractTypeComputationState forked = fork().withNonVoidExpectation(demandComputedTypes);
-		AbstractDelegatingResolvedTypes demandResolvedTypes = new AbstractDelegatingResolvedTypes() {
+		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {
 			
 			@Override
-			protected IResolvedTypes getDelegate() {
+			protected LightweightResolvedTypes delegate() {
 				return forked.getResolvedTypes();
 			}
 			
 			@Override
 			@Nullable
-			public JvmTypeReference getActualType(@Nullable XExpression expression) {
-				JvmTypeReference type = super.getActualType(expression);
+			public LightweightTypeReference internalGetActualType(@Nullable XExpression expression) {
+				LightweightTypeReference type = super.internalGetActualType(expression);
 				if (type == null && expression != null) {
-					ITypeComputationResult result = forked.computeTypes(expression);
-					return result.getActualExpressionType();
+					LightweightTypeComputationResult result = forked.computeTypes(expression);
+					return result.internalGetActualExpressionType();
 				}
 				return type;
 			}
@@ -309,7 +311,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			}
 			@Override
 			@Nullable
-			public Void doVisitComputedTypeReference(@Nullable XComputedTypeReference reference, @Nullable JvmTypeReference param) {
+			public Void doVisitComputedTypeReference(@Nullable XComputedTypeReference reference, @Nullable LightweightTypeReference param) {
 				if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 					UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
 					if (UnboundTypeParameters.isUnboundAndEqual(typeParameter, param)) {
@@ -317,7 +319,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 					}
 					BaseUnboundTypeParameter stacked = getResolvedTypes().getUnboundTypeParameter(typeParameter.getHandle());
 					if (!stacked.isComputed()) {
-						JvmTypeReference potentiallyWrapped = UnboundTypeParameters.asWrapperType(param, getServices().getPrimitives());
+						LightweightTypeReference potentiallyWrapped = UnboundTypeParameters.asWrapperType(param, getServices().getPrimitives());
 						acceptHint(stacked, potentiallyWrapped);
 						return null;
 					}

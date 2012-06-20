@@ -12,12 +12,13 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class BaseTypeComputationState implements LightweightTypeComputationState {
+public abstract class BaseTypeComputationState implements LightweightTypeComputationState, LightweightTypeComputationState.LightweightFork {
 
 	protected abstract BaseResolvedTypes getResolvedTypes();
 	
@@ -43,6 +44,10 @@ public abstract class BaseTypeComputationState implements LightweightTypeComputa
 
 	public final void reassignType(XExpression object, JvmTypeReference type) {
 		reassignType(object, toLightweightReference(type));
+	}
+
+	public final LightweightTypeComputationState withExpectation(JvmTypeReference expectation) {
+		return withExpectation(toLightweightReference(expectation));
 	}
 	
 }

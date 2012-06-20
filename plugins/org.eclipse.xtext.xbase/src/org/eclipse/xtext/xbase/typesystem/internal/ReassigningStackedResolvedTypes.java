@@ -10,9 +10,9 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Multimap;
 
@@ -41,12 +41,12 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	}
 
 	@Override
-	protected Map<JvmIdentifiableElement, JvmTypeReference> ensureTypesMapExists() {
+	protected Map<JvmIdentifiableElement, LightweightTypeReference> ensureTypesMapExists() {
 		return getParent().ensureTypesMapExists();
 	}
 	
 //	@Override
-//	public JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation, JvmTypeReference type,
+//	public LightweightTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type,
 //			ConformanceHint conformanceHint, boolean returnType) {
 //		return getParent().acceptType(expression, expectation, type, conformanceHint, returnType);
 //	}

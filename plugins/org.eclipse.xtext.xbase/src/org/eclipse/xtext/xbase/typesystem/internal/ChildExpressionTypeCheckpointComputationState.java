@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,9 +32,9 @@ public class ChildExpressionTypeCheckpointComputationState extends ExpressionTyp
 	}
 	
 	@Override
-	protected JvmTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
-			JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		JvmTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
+	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation,
+			LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		LightweightTypeReference actualType = super.acceptType(resolvedTypes, expectation, type, conformanceHint, returnType);
 		getParent().acceptType(resolvedTypes, expectation, actualType, conformanceHint, returnType);
 		return actualType;
 	}

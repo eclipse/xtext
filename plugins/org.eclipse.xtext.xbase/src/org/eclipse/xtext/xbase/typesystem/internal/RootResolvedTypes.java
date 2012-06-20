@@ -12,10 +12,10 @@ import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -42,7 +42,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 			// TODO guard asserter - should only be active in tests
 			ITypeReferenceVisitor<Boolean> asserter = new AbstractXtypeReferenceVisitor<Boolean>() {
 				@Override
-				public Boolean doVisitTypeReference(JvmTypeReference reference) {
+				public Boolean doVisitTypeReference(LightweightTypeReference reference) {
 					return Boolean.FALSE;
 				}
 				@Override
@@ -51,7 +51,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 				}
 				@Override
 				public Boolean doVisitFunctionTypeReference(XFunctionTypeRef reference) {
-					for(JvmTypeReference paramType: reference.getParamTypes()) {
+					for(LightweightTypeReference paramType: reference.getParamTypes()) {
 						if (visit(paramType))
 							return Boolean.TRUE;
 					}
@@ -61,7 +61,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 				}
 				@Override
 				public Boolean doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
-					for(JvmTypeReference component: reference.getReferences()) {
+					for(LightweightTypeReference component: reference.getReferences()) {
 						if (visit(component))
 							return Boolean.TRUE;
 					}
@@ -96,7 +96,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 				}
 				@Override
 				public Boolean doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-					for(JvmTypeReference argument: reference.getArguments()) {
+					for(LightweightTypeReference argument: reference.getArguments()) {
 						if (visit(argument))
 							return Boolean.TRUE;
 					}

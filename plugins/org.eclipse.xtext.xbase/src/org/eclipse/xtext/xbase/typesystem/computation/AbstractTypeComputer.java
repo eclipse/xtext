@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputer;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 
 import com.google.inject.Singleton;
 
@@ -15,7 +17,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public abstract class AbstractTypeComputer implements ITypeComputer {
+public abstract class AbstractTypeComputer extends BaseTypeComputer {
 
 	{
 		checkIsSingelton();
@@ -28,7 +30,7 @@ public abstract class AbstractTypeComputer implements ITypeComputer {
 		}
 	}
 	
-	public void computeTypes(XExpression expression, ITypeComputationState state) {
+	public void computeTypes(XExpression expression, LightweightTypeComputationState state) {
 		_computeTypes(expression, state);
 	}
 	

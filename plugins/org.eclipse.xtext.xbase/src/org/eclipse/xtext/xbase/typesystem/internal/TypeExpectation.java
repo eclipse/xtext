@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,9 +15,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  */
 public class TypeExpectation extends AbstractReturnAwareTypeExpectation {
 
-	private final JvmTypeReference reference;
+	private final LightweightTypeReference reference;
 
-	public TypeExpectation(JvmTypeReference reference, AbstractTypeComputationState state, boolean returnType) {
+	public TypeExpectation(LightweightTypeReference reference, AbstractTypeComputationState state, boolean returnType) {
 		super(state, returnType);
 		this.reference = reference;
 	}
@@ -26,7 +26,7 @@ public class TypeExpectation extends AbstractReturnAwareTypeExpectation {
 		return false;
 	}
 	
-	public JvmTypeReference getExpectedType() {
+	public LightweightTypeReference internalGetExpectedType() {
 		return reference;
 	}
 

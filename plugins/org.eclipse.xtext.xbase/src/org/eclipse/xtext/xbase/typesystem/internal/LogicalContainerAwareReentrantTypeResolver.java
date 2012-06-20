@@ -26,8 +26,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
-import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.ImmutableMap;
@@ -55,7 +55,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		@Override
 		protected JvmTypeReference doGetTypeReference() {
 			resolver.computeTypes(resolvedTypes, featureScopeSession, member);
-			return resolver.getComputedType(member);
+			return resolver.getComputedType(member).toTypeReference();
 		}
 	}
 
@@ -75,7 +75,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return (JvmType) super.getRoot();
 	}
 	
-	protected JvmTypeReference getComputedType(JvmMember member) {
+	protected LightweightTypeReference getComputedType(JvmMember member) {
 		throw new UnsupportedOperationException("member: " + member);
 	}
 	
@@ -137,7 +137,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return result;
 	}
 	
-	protected IJvmTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
+	protected DemandTypeReferenceProvider createTypeProvider(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member) {
 		return new DemandTypeReferenceProvider(member, resolvedTypes, featureScopeSession, this);
 	}
 	

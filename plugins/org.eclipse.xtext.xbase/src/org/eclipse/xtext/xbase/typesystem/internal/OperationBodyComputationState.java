@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -36,9 +36,9 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 	}
 
 	@Override
-	protected List<ITypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		JvmTypeReference type = getMember().getReturnType();
-		ITypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
+	protected List<LightweightTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
+		LightweightTypeReference type = getResolvedTypes().getConverter().toLightweightReference(getMember().getReturnType());
+		LightweightTypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
 		return Collections.singletonList(result);
 	}
 }

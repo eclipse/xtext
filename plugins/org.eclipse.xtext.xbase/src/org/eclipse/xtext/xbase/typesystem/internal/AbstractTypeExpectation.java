@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public abstract class AbstractTypeExpectation implements ITypeExpectation {
+public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 
 	private final AbstractTypeComputationState state;
 
@@ -23,21 +24,26 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 	}
 	
 	public boolean isVoidTypeAllowed() {
-		JvmTypeReference expectedType = getExpectedType();
+		LightweightTypeReference expectedType = internalGetExpectedType();
 		// TODO avoid resolving the type ref
-		if (expectedType != null && Void.TYPE.getName().equals(expectedType.getSimpleName())) {
+		if (expectedType != null && expectedType.isType(Void.TYPE)) {
 			return true;
 		}
 		return false;
 	}
 	
+	@Override
+	protected OwnedConverter getConverter() {
+		return state.getResolvedTypes().getConverter();
+	}
+	
 	protected AbstractTypeComputationState getState() {
 		return state;
 	}
-
+	
 	@Override
 	public String toString() {
-		JvmTypeReference expectedType = getExpectedType();
+		LightweightTypeReference expectedType = internalGetExpectedType();
 		String expectedTypeString = "";
 		if (expectedType != null) {
 			expectedTypeString = expectedType.toString();
@@ -50,7 +56,5 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		}
 		return getClass().getSimpleName() + " [expectation=" + expectedTypeString + "]";
 	}
-	
-	
 	
 }

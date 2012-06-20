@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,7 +29,7 @@ public class ReturnExpectationTypeComputationState extends AbstractStackedTypeCo
 	}
 
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
 		return getReturnExpectations(actualState);
 	}
 

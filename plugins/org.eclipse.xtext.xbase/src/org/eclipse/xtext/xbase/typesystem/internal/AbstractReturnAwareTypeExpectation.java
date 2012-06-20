@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,7 +22,7 @@ public abstract class AbstractReturnAwareTypeExpectation extends AbstractTypeExp
 		this.returnType = returnType;
 	}
 
-	public void acceptActualType(JvmTypeReference type, ConformanceHint conformanceHint) {
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint conformanceHint) {
 		getState().acceptType(this, type, conformanceHint, returnType);
 	}
 

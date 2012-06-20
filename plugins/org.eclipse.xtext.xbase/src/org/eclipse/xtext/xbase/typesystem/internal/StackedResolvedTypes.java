@@ -16,12 +16,12 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -96,19 +96,19 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public JvmTypeReference getActualType(JvmIdentifiableElement identifiable) {
-		JvmTypeReference result = super.getActualType(identifiable);
+	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement identifiable) {
+		LightweightTypeReference result = super.internalGetActualType(identifiable);
 		if (result == null) {
-			result = parent.getActualType(identifiable);
+			result = parent.internalGetActualType(identifiable);
 		}
 		return result;
 	}
 	
 	@Override
-	public List<JvmTypeReference> getActualTypeArguments(XExpression expression) {
-		List<JvmTypeReference> result = super.getActualTypeArguments(expression);
+	public List<LightweightTypeReference> internalGetActualTypeArguments(XExpression expression) {
+		List<LightweightTypeReference> result = super.internalGetActualTypeArguments(expression);
 		if (result == null) {
-			result = parent.getActualTypeArguments(expression);
+			result = parent.internalGetActualTypeArguments(expression);
 		}
 		return result;
 	}
@@ -132,7 +132,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public void reassignType(JvmIdentifiableElement identifiable, JvmTypeReference reference) {
+	public void reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
 		super.reassignType(identifiable, reference);
 		if (reference == null) {
 			getParent().reassignType(identifiable, reference);

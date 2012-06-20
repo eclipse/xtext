@@ -7,8 +7,8 @@ a * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,7 +20,7 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 		super(state);
 	}
 
-	public JvmTypeReference getExpectedType() {
+	public LightweightTypeReference internalGetExpectedType() {
 		return null;
 	}
 
@@ -34,13 +34,13 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	}
 	
 	@Override
-	public void acceptActualType(JvmTypeReference type, ConformanceHint hint) {
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint hint) {
 		// TODO resolve all unbound type parameters
 //		AbstractTypeComputationState state = getState();
 //		if (hint contains RAW) {
 //		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(
-//				Collections.<JvmTypeParameter, JvmTypeReference>emptyMap(), state.getServices());
-//		JvmTypeReference substitute = substitutor.substitute(type);
+//				Collections.<JvmTypeParameter, LightweightTypeReference>emptyMap(), state.getServices());
+//		LightweightTypeReference substitute = substitutor.substitute(type);
 //		}
 		super.acceptActualType(type, hint);
 	}
