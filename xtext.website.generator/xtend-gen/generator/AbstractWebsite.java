@@ -631,4 +631,30 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     return _builder;
   }
+  
+  public CharSequence headline(final String title) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<div id=\"header_wrapper\" class=\"container\" >");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<div class=\"inner\">");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<div class=\"container\">");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<div class=\"page-heading\"><h1>");
+    _builder.append(title, "			");
+    _builder.append("</h1></div>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("</div>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</div>");
+    _builder.newLine();
+    _builder.append("</div>");
+    _builder.newLine();
+    return _builder;
+  }
 }

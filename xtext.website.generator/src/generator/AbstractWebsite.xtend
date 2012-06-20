@@ -260,4 +260,13 @@ abstract class AbstractWebsite implements Resource {
 			rel='stylesheet' type='text/css'>
 	'''
 
+	def headline(String title) '''
+		<div id="header_wrapper" class="container" >
+			<div class="inner">
+				<div class="container">
+					<div class="page-heading"><h1>«title»</h1></div>
+				</div>
+			</div>
+		</div>
+	'''
 }
