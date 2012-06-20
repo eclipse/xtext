@@ -127,11 +127,11 @@ abstract class AbstractWebsite implements Resource {
 		
 					<div class="nav-collapse collapse" style="height: 0px;">
 						<ul class="nav">
-							<li class="active"><a href="download.html">Download</a></li>
-							<li><a href="examples.html">Examples</a></li>
-							<li><a href="documentation.html">Documentation</a></li>
-							<li><a href="community.html">Community</a></li>
-							<li><a href="www.eclispe.org">Eclipse.org</a></li>
+							<li «IF path == 'download.html'»class="active"«ENDIF»><a href="download.html">Download</a></li>
+							<li «IF path == 'examples.html'»class="active"«ENDIF»><a href="examples.html">Examples</a></li>
+							<li «IF path == 'documentation.html'»class="active"«ENDIF»><a href="documentation.html">Documentation</a></li>
+							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
+							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
 						</ul>
 		
 					</div>

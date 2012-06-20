@@ -3,7 +3,6 @@ package generator;
 import bootstrap.Body;
 import bootstrap.HtmlExtensions;
 import bootstrap.PostProcessor;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
@@ -13,7 +12,6 @@ import generator.AbstractWebsite;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Iterator;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -24,10 +22,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 import org.eclipse.xtext.xdoc.xdoc.Chapter;
@@ -44,8 +40,13 @@ public class Documentation extends AbstractWebsite {
     XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
     final Injector injector = _xdocStandaloneSetup.createInjectorAndDoEMFRegistration();
     injector.injectMembers(this);
-    Document _loadDocument = this.docLoader.loadDocument("/Users/efftinge/Workspaces/ws-xtext/org.eclipse.xtext/plugins/org.eclipse.xtext.doc.xdoc/xdoc");
+    String _xdocDocumentRootFolder = this.getXdocDocumentRootFolder();
+    Document _loadDocument = this.docLoader.loadDocument(_xdocDocumentRootFolder);
     this.doc = _loadDocument;
+  }
+  
+  public String getXdocDocumentRootFolder() {
+    return "/Users/efftinge/Workspaces/ws-xtext/org.eclipse.xtext/plugins/org.eclipse.xtext.doc.xdoc/xdoc";
   }
   
   public String path() {
@@ -74,6 +75,7 @@ public class Documentation extends AbstractWebsite {
   
   public void generateTo(final File targetDir) {
     super.generateTo(targetDir);
+    this.copyImages(this.doc, targetDir);
   }
   
   public void copyImages(final Document doc, final File targetDir) {
@@ -86,7 +88,8 @@ public class Documentation extends AbstractWebsite {
           try {
             Resource _eResource = it.eResource();
             URI _uRI = _eResource.getURI();
-            String _fileString = _uRI.toFileString();
+            URI _trimSegments = _uRI.trimSegments(1);
+            String _fileString = _trimSegments.toFileString();
             String _path = it.getPath();
             File _file = new File(_fileString, _path);
             final File source = _file;
@@ -174,17 +177,7 @@ public class Documentation extends AbstractWebsite {
     _builder.newLine();
     {
       EList<Chapter> _chapters = doc.getChapters();
-      EList<Part> _parts = doc.getParts();
-      final Function1<Part,EList<Chapter>> _function = new Function1<Part,EList<Chapter>>() {
-          public EList<Chapter> apply(final Part it) {
-            EList<Chapter> _chapters = it.getChapters();
-            return _chapters;
-          }
-        };
-      List<EList<Chapter>> _map = ListExtensions.<Part, EList<Chapter>>map(_parts, _function);
-      Iterable<Chapter> _flatten = Iterables.<Chapter>concat(_map);
-      Iterable<Chapter> _plus = Iterables.<Chapter>concat(_chapters, _flatten);
-      for(final Chapter chapter : _plus) {
+      for(final Chapter chapter : _chapters) {
         _builder.append("\t\t");
         _builder.append("<li><a href=\"#");
         String _href = this._htmlExtensions.href(chapter);
@@ -221,6 +214,62 @@ public class Documentation extends AbstractWebsite {
         _builder.append("\t\t");
         _builder.append("</li>");
         _builder.newLine();
+      }
+    }
+    {
+      EList<Part> _parts = doc.getParts();
+      for(final Part part : _parts) {
+        _builder.append("\t\t");
+        _builder.append("<li>&nbsp;</li>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<li>");
+        TextOrMarkup _title_2 = part.getTitle();
+        CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
+        _builder.append(_html_2, "		");
+        _builder.append("</li>");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<Chapter> _chapters_1 = part.getChapters();
+          for(final Chapter chapter_1 : _chapters_1) {
+            _builder.append("\t\t");
+            _builder.append("<li><a href=\"#");
+            String _href_2 = this._htmlExtensions.href(chapter_1);
+            _builder.append(_href_2, "		");
+            _builder.append("\">");
+            TextOrMarkup _title_3 = chapter_1.getTitle();
+            CharSequence _html_3 = this._htmlExtensions.toHtml(_title_3);
+            _builder.append(_html_3, "		");
+            _builder.append("</a>");
+            _builder.newLineIfNotEmpty();
+            {
+              EList<Section> _subSections_1 = chapter_1.getSubSections();
+              boolean _hasElements_1 = false;
+              for(final Section section_1 : _subSections_1) {
+                if (!_hasElements_1) {
+                  _hasElements_1 = true;
+                  _builder.append("<ul>", "		");
+                }
+                _builder.append("\t\t");
+                _builder.append("<li><a href=\"#");
+                String _href_3 = this._htmlExtensions.href(section_1);
+                _builder.append(_href_3, "		");
+                _builder.append("\">");
+                TextOrMarkup _title_4 = section_1.getTitle();
+                CharSequence _html_4 = this._htmlExtensions.toHtml(_title_4);
+                _builder.append(_html_4, "		");
+                _builder.append("</a></li>");
+                _builder.newLineIfNotEmpty();
+              }
+              if (_hasElements_1) {
+                _builder.append("</ul>", "		");
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("</li>");
+            _builder.newLine();
+          }
+        }
       }
     }
     _builder.append("\t");

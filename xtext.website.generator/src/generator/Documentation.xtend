@@ -22,7 +22,11 @@ class Documentation extends AbstractWebsite {
 	new() {
 		val injector = new XdocStandaloneSetup().createInjectorAndDoEMFRegistration
 		injector.injectMembers(this)
-		doc = docLoader.loadDocument('/Users/efftinge/Workspaces/ws-xtext/org.eclipse.xtext/plugins/org.eclipse.xtext.doc.xdoc/xdoc')
+		doc = docLoader.loadDocument(xdocDocumentRootFolder)
+	}
+	
+	def getXdocDocumentRootFolder() {
+		'/Users/efftinge/Workspaces/ws-xtext/org.eclipse.xtext/plugins/org.eclipse.xtext.doc.xdoc/xdoc'
 	}
 
 	override path() {
@@ -42,48 +46,59 @@ class Documentation extends AbstractWebsite {
 	
 	override generateTo(File targetDir) {
 		super.generateTo(targetDir)
+		copyImages(doc, targetDir)
 	}
 	
 	def copyImages(Document doc, File targetDir) {
 		val iter = EcoreUtil::getAllContents(doc.eResource.resourceSet, true)
 		iter.filter(typeof(ImageRef)).forEach[
-			val source = new File(eResource.URI.toFileString, path)
+			val source = new File(eResource.URI.trimSegments(1).toFileString, path)
 			if (!source.exists)
 				throw new IllegalStateException("Referenced Image "+source.canonicalPath+" does not exist in "+eResource.URI.lastSegment+" line "+NodeModelUtils::getNode(it).startLine)
 			val target = new File(targetDir, path)
 			println(target.canonicalPath)
+			
 			source.newInputStreamSupplier.copy(target)
 		]
 	}
 	
-	override contents() {
-		return '''
-			<!--Container-->
-			<div id="header_wrapper" class="container" >
-				<div class="inner">
-					<div class="container">
-						<div class="page-heading"><h1>Documentation</h1></div>
-					</div> <!-- /.container -->
-				</div> <!-- /inner -->
+	override contents() '''
+		<!--Container-->
+		<div id="header_wrapper" class="container" >
+			<div class="inner">
+				<div class="container">
+					<div class="page-heading"><h1>Documentation</h1></div>
+				</div> <!-- /.container -->
+			</div> <!-- /inner -->
+		</div>
+		«doc.menu»
+		<div id="page">  
+			<div class="inner">
+				«doc.body»
 			</div>
-			«doc.menu»
-			<div id="page">  
-				<div class="inner">
-					«doc.body»
-				</div>
-			</div>
-		'''
-	}
+		</div>
+	'''
 	
 	def menu(Document doc) '''
 		<div id="outline-container">
 			<ul id="outline">
-				«FOR chapter : doc.chapters + doc.parts.map[chapters].flatten »
+				«FOR chapter : doc.chapters»
 					<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
 					«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
 						<li><a href="#«section.href»">«section.title.toHtml»</a></li>
 					«ENDFOR»
 					</li>
+				«ENDFOR»
+				«FOR part : doc.parts»
+					<li>&nbsp;</li>
+					<li>«part.title.toHtml»</li>
+					«FOR chapter : part.chapters»
+						<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
+						«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
+							<li><a href="#«section.href»">«section.title.toHtml»</a></li>
+						«ENDFOR»
+						</li>
+					«ENDFOR»
 				«ENDFOR»
 			</ul>
 		</div>

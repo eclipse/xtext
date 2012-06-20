@@ -1,6 +1,7 @@
 package generator;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.io.OutputSupplier;
@@ -314,19 +315,51 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<ul class=\"nav\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<li class=\"active\"><a href=\"download.html\">Download</a></li>");
-    _builder.newLine();
+    _builder.append("<li ");
+    {
+      String _path = this.path();
+      boolean _equals = Objects.equal(_path, "download.html");
+      if (_equals) {
+        _builder.append("class=\"active\"");
+      }
+    }
+    _builder.append("><a href=\"download.html\">Download</a></li>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<li><a href=\"examples.html\">Examples</a></li>");
-    _builder.newLine();
+    _builder.append("<li ");
+    {
+      String _path_1 = this.path();
+      boolean _equals_1 = Objects.equal(_path_1, "examples.html");
+      if (_equals_1) {
+        _builder.append("class=\"active\"");
+      }
+    }
+    _builder.append("><a href=\"examples.html\">Examples</a></li>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<li><a href=\"documentation.html\">Documentation</a></li>");
-    _builder.newLine();
+    _builder.append("<li ");
+    {
+      String _path_2 = this.path();
+      boolean _equals_2 = Objects.equal(_path_2, "documentation.html");
+      if (_equals_2) {
+        _builder.append("class=\"active\"");
+      }
+    }
+    _builder.append("><a href=\"documentation.html\">Documentation</a></li>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<li><a href=\"community.html\">Community</a></li>");
-    _builder.newLine();
+    _builder.append("<li ");
+    {
+      String _path_3 = this.path();
+      boolean _equals_3 = Objects.equal(_path_3, "community.html");
+      if (_equals_3) {
+        _builder.append("class=\"active\"");
+      }
+    }
+    _builder.append("><a href=\"community.html\">Community</a></li>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<li><a href=\"www.eclispe.org\">Eclipse.org</a></li>");
+    _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</ul>");

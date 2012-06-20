@@ -3,7 +3,8 @@ Shield Website Tempalte
 Author - hunzaboy
 URL : http://uexel.com
 
-
+ #A00
+ -> 
 */
 body { /*	background: url(../images/pattern1.jpg) repeat #ffffff;*/
 	font-family: 'Lato', sans-serif;
@@ -380,7 +381,7 @@ tfoot td {
 }
 
 .pricing td.focus-best {
-	background: #a00;
+	background: #A00;
 	width: 84.3%;
 	padding: 25px 8%;
 	font-family: 'Lato', sans-serif;
@@ -498,7 +499,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #extra {
 	border-top: 1px solid #fff;
-	background: url('../images/noise.png') #a00;
+	background: url('../images/noise.png') #A00;
 }
 
 #extra .inner {
@@ -555,15 +556,34 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 #outline {
 	position: relative;
 	left: 50%;
-	margin-left: -435pt;
+	margin-left: -345pt;
 	max-width: 200px;
 	list-style: none;
 }
-
+@media (min-width: 1200px) {
+	#outline {
+		margin-left: -435pt;
+		max-width: 200px;
+	}	
+}
+@media (max-width: 979px) {
+	#outline {
+		position: fixed;
+		left: 10px;
+		margin-left:0;
+		max-width: 200px;
+	}
+}
+@media (max-width: 767px) {
+	#outline {
+		visibility: hidden;
+	}
+}
 #outline ul {
 	display : none;
 	list-style: none;
 }
+
 
 .navbar-inner {
 	border-radius: 0px;
@@ -632,7 +652,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #page h1 {
 	font-family: 'Vollkorn', serif;
-	color: #a00;
+	color: #A00;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
