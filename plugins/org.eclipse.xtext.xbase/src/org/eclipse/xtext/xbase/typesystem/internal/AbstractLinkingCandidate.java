@@ -66,12 +66,17 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		this.expression = expression;
 		this.description = description;
 		this.state = state;
+		this.typeParameterMapping = initializeTypeParameterMapping();
+	}
+
+	protected Map<JvmTypeParameter, MergedBoundTypeArgument> initializeTypeParameterMapping() {
+		Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping;
 		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 		List<JvmTypeParameter> declaredTypeParameters = getDeclaredTypeParameters();
 		if (declaredTypeParameters.isEmpty()) {
-			this.typeParameterMapping = Collections.emptyMap();
+			typeParameterMapping = Collections.emptyMap();
 		} else {
-			this.typeParameterMapping = Maps.newLinkedHashMap();
+			typeParameterMapping = Maps.newLinkedHashMap();
 			List<JvmTypeReference> explicitTypeArguments = getExplicitTypeArguments();
 			int size = Math.min(declaredTypeParameters.size(), explicitTypeArguments.size());
 			for(int i = 0; i < size; i++) {
@@ -91,6 +96,7 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 				typeParameterMapping.put(declaredTypeParameter, new MergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
 			}
 		}
+		return typeParameterMapping;
 	}
 
 	public void accept(ObservableTypeExpectation expectation, JvmTypeReference actual, ConformanceHint conformanceHint) {
