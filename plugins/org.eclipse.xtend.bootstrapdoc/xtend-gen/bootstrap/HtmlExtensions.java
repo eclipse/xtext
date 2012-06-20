@@ -1,24 +1,29 @@
 package bootstrap;
 
+import bootstrap.ArtificialIds;
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xdoc.xdoc.Anchor;
+import org.eclipse.xtext.xdoc.xdoc.Chapter;
+import org.eclipse.xtext.xdoc.xdoc.ChapterRef;
 import org.eclipse.xtext.xdoc.xdoc.Code;
 import org.eclipse.xtext.xdoc.xdoc.CodeBlock;
 import org.eclipse.xtext.xdoc.xdoc.CodeRef;
@@ -30,6 +35,10 @@ import org.eclipse.xtext.xdoc.xdoc.LangDef;
 import org.eclipse.xtext.xdoc.xdoc.Link;
 import org.eclipse.xtext.xdoc.xdoc.OrderedList;
 import org.eclipse.xtext.xdoc.xdoc.Ref;
+import org.eclipse.xtext.xdoc.xdoc.Section;
+import org.eclipse.xtext.xdoc.xdoc.Section2;
+import org.eclipse.xtext.xdoc.xdoc.Section2Ref;
+import org.eclipse.xtext.xdoc.xdoc.SectionRef;
 import org.eclipse.xtext.xdoc.xdoc.Table;
 import org.eclipse.xtext.xdoc.xdoc.TableData;
 import org.eclipse.xtext.xdoc.xdoc.TableRow;
@@ -43,42 +52,87 @@ import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 public class HtmlExtensions {
   private final static String JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/";
   
-  private Map<Identifiable,String> artificialHrefs = new Function0<Map<Identifiable,String>>() {
-    public Map<Identifiable,String> apply() {
-      HashMap<Identifiable,String> _newHashMap = CollectionLiterals.<Identifiable, String>newHashMap();
-      return _newHashMap;
-    }
-  }.apply();
-  
-  public String href(final Identifiable it) {
-    String _xifexpression = null;
-    String _name = it.getName();
-    boolean _notEquals = (!Objects.equal(_name, null));
-    if (_notEquals) {
-      String _name_1 = it.getName();
-      _xifexpression = _name_1;
-    } else {
-      String _xifexpression_1 = null;
-      boolean _containsKey = this.artificialHrefs.containsKey(it);
-      if (_containsKey) {
-        String _get = this.artificialHrefs.get(it);
-        _xifexpression_1 = _get;
-      } else {
-        String _xblockexpression = null;
-        {
-          EClass _eClass = it.eClass();
-          String _name_2 = _eClass.getName();
-          String _plus = (_name_2 + "_");
-          int _size = this.artificialHrefs.size();
-          final String newHref = (_plus + Integer.valueOf(_size));
-          this.artificialHrefs.put(it, newHref);
-          _xblockexpression = (newHref);
+  public String href(final Identifiable id) {
+    String _xblockexpression = null;
+    {
+      Identifiable _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (id instanceof ChapterRef) {
+          final ChapterRef _chapterRef = (ChapterRef)id;
+          _matched=true;
+          Chapter _chapter = _chapterRef.getChapter();
+          _switchResult = _chapter;
         }
-        _xifexpression_1 = _xblockexpression;
       }
-      _xifexpression = _xifexpression_1;
+      if (!_matched) {
+        if (id instanceof SectionRef) {
+          final SectionRef _sectionRef = (SectionRef)id;
+          _matched=true;
+          Section _section = _sectionRef.getSection();
+          _switchResult = _section;
+        }
+      }
+      if (!_matched) {
+        if (id instanceof Section2Ref) {
+          final Section2Ref _section2Ref = (Section2Ref)id;
+          _matched=true;
+          Section2 _section2 = _section2Ref.getSection2();
+          _switchResult = _section2;
+        }
+      }
+      if (!_matched) {
+        _switchResult = id;
+      }
+      final Identifiable it = _switchResult;
+      String _xifexpression = null;
+      String _name = it.getName();
+      boolean _notEquals = (!Objects.equal(_name, null));
+      if (_notEquals) {
+        String _name_1 = it.getName();
+        _xifexpression = _name_1;
+      } else {
+        String _xifexpression_1 = null;
+        Map<Identifiable,String> _artificialHrefs = this.artificialHrefs(it);
+        boolean _containsKey = _artificialHrefs.containsKey(it);
+        if (_containsKey) {
+          Map<Identifiable,String> _artificialHrefs_1 = this.artificialHrefs(it);
+          String _get = _artificialHrefs_1.get(it);
+          _xifexpression_1 = _get;
+        } else {
+          String _xblockexpression_1 = null;
+          {
+            Map<Identifiable,String> _artificialHrefs_2 = this.artificialHrefs(it);
+            int _size = _artificialHrefs_2.size();
+            final String newHref = ("_" + Integer.valueOf(_size));
+            Map<Identifiable,String> _artificialHrefs_3 = this.artificialHrefs(it);
+            _artificialHrefs_3.put(it, newHref);
+            _xblockexpression_1 = (newHref);
+          }
+          _xifexpression_1 = _xblockexpression_1;
+        }
+        _xifexpression = _xifexpression_1;
+      }
+      _xblockexpression = (_xifexpression);
     }
-    return _xifexpression;
+    return _xblockexpression;
+  }
+  
+  private Map<Identifiable,String> artificialHrefs(final Identifiable id) {
+    Resource _eResource = id.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    final EList<Adapter> adapters = _resourceSet.eAdapters();
+    Iterable<ArtificialIds> _filter = Iterables.<ArtificialIds>filter(adapters, ArtificialIds.class);
+    ArtificialIds _head = IterableExtensions.<ArtificialIds>head(_filter);
+    ArtificialIds _artificialIds = new ArtificialIds();
+    final Procedure1<ArtificialIds> _function = new Procedure1<ArtificialIds>() {
+        public void apply(final ArtificialIds it) {
+          adapters.add(it);
+        }
+      };
+    ArtificialIds _doubleArrow = ObjectExtensions.<ArtificialIds>operator_doubleArrow(_artificialIds, _function);
+    final ArtificialIds adapter = ObjectExtensions.<ArtificialIds>operator_elvis(_head, _doubleArrow);
+    return adapter.artificialHrefs;
   }
   
   protected CharSequence _toHtml(final TextOrMarkup it) {
@@ -110,6 +164,39 @@ public class HtmlExtensions {
     EStructuralFeature _eContainingFeature = it.eContainingFeature();
     final EStructuralFeature eContainingFeature = _eContainingFeature;
     boolean _matched = false;
+    if (!_matched) {
+      boolean _and = false;
+      EList<EObject> _contents = it.getContents();
+      int _size = _contents.size();
+      boolean _equals = (_size == 1);
+      if (!_equals) {
+        _and = false;
+      } else {
+        boolean _or = false;
+        boolean _or_1 = false;
+        EList<EObject> _contents_1 = it.getContents();
+        EObject _head = IterableExtensions.<EObject>head(_contents_1);
+        if ((_head instanceof CodeBlock)) {
+          _or_1 = true;
+        } else {
+          EList<EObject> _contents_2 = it.getContents();
+          EObject _head_1 = IterableExtensions.<EObject>head(_contents_2);
+          _or_1 = ((_head instanceof CodeBlock) || (_head_1 instanceof OrderedList));
+        }
+        if (_or_1) {
+          _or = true;
+        } else {
+          EList<EObject> _contents_3 = it.getContents();
+          EObject _head_2 = IterableExtensions.<EObject>head(_contents_3);
+          _or = (_or_1 || (_head_2 instanceof UnorderedList));
+        }
+        _and = (_equals && _or);
+      }
+      if (_and) {
+        _matched=true;
+        _switchResult = false;
+      }
+    }
     if (!_matched) {
       if (Objects.equal(eContainingFeature,Literals.ABSTRACT_SECTION__CONTENTS)) {
         _matched=true;
@@ -514,10 +601,9 @@ public class HtmlExtensions {
     String _replace_3 = _replace_2.replace("\u00BB", "&raquo;");
     String _replace_4 = _replace_3.replace("\\[", "[");
     String _replace_5 = _replace_4.replace("\\]", "]");
-    String _replace_6 = _replace_5.replace("\'", "&apos;");
-    String _replace_7 = _replace_6.replace("\u00B4", "&apos;");
-    String _replace_8 = _replace_7.replace("`", "&apos;");
-    return _replace_8;
+    String _replace_6 = _replace_5.replace("\u00B4", "\'");
+    String _replace_7 = _replace_6.replace("`", "\'");
+    return _replace_7;
   }
   
   public CharSequence toHtml(final Object it) {

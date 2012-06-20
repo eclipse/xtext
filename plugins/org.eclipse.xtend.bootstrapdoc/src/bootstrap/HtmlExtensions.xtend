@@ -2,8 +2,10 @@ package bootstrap
 
 import java.util.List
 import java.util.Map
+import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.xdoc.xdoc.Anchor
+import org.eclipse.xtext.xdoc.xdoc.ChapterRef
 import org.eclipse.xtext.xdoc.xdoc.Code
 import org.eclipse.xtext.xdoc.xdoc.CodeBlock
 import org.eclipse.xtext.xdoc.xdoc.CodeRef
@@ -14,6 +16,8 @@ import org.eclipse.xtext.xdoc.xdoc.Item
 import org.eclipse.xtext.xdoc.xdoc.Link
 import org.eclipse.xtext.xdoc.xdoc.OrderedList
 import org.eclipse.xtext.xdoc.xdoc.Ref
+import org.eclipse.xtext.xdoc.xdoc.Section2Ref
+import org.eclipse.xtext.xdoc.xdoc.SectionRef
 import org.eclipse.xtext.xdoc.xdoc.Table
 import org.eclipse.xtext.xdoc.xdoc.TableData
 import org.eclipse.xtext.xdoc.xdoc.TableRow
@@ -21,26 +25,43 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
 import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
+import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
 
 import static bootstrap.HtmlExtensions.*
-import org.eclipse.xtext.xdoc.xdoc.XdocPackage
+
+class ArtificialIds extends AdapterImpl {
+	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
+}
 
 class HtmlExtensions {
 	
 	static val JAVADOC_ROOT = "http://xtend-lang.org/api/2.3.0/"
 	
-	Map<Identifiable, String> artificialHrefs = newHashMap()
-
-	def href(Identifiable it) {
+	def href(Identifiable id) {
+		val it = switch id {
+			ChapterRef : id.chapter
+			SectionRef : id.section
+			Section2Ref : id.section2
+			default : id
+		}
 		if(name != null) { 
 			name 
 		} else if(artificialHrefs.containsKey(it)) {
 			artificialHrefs.get(it)
 		} else {
-			val newHref = it.eClass.name + '_' + artificialHrefs.size()
+			val newHref = '_'+artificialHrefs.size()
 			artificialHrefs.put(it, newHref)
 			newHref
 		}  
+	}
+	
+	def private artificialHrefs(Identifiable id) {
+		val adapters = id.eResource.resourceSet.eAdapters
+		val adapter = adapters.filter(typeof(ArtificialIds)).head 
+						?: (new ArtificialIds => [
+							adapters.add(it)
+						])
+		return adapter.artificialHrefs
 	}
 	
 	
@@ -56,6 +77,10 @@ class HtmlExtensions {
 	
 	def private isParagraph(TextOrMarkup it) {
 		switch eContainingFeature {
+			case contents.size==1 
+			&& (contents.head instanceof CodeBlock 
+				|| contents.head instanceof OrderedList
+				|| contents.head instanceof UnorderedList): false
 			case XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS : true
 			default : false
 		}
@@ -175,7 +200,7 @@ class HtmlExtensions {
 		toString.replace('<', '&lt;').replace('>', '&gt;')
 			.replace('«', '&laquo;').replace('»', '&raquo;')
 			.replace('\\[', '[').replace('\\]',']')
-			.replace("'", '&apos;').replace('´','&apos;').replace('`','&apos;')
+			.replace('´',"'").replace('`',"'")
 	}
 
 }

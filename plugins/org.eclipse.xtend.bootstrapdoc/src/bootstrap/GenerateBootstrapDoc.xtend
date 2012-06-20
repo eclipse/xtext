@@ -13,16 +13,16 @@ import org.eclipse.xtext.mwe.PathTraverser
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.xdoc.XdocStandaloneSetup
 import org.eclipse.xtext.xdoc.xdoc.Document
 import org.eclipse.xtext.xdoc.xdoc.ImageRef
 
 import static extension com.google.common.io.Files.*
+import com.google.inject.name.Named
 
 class GenerateBootstrapDoc {
 	
 	def static void main(String[] args) {
-		val injector = new XdocStandaloneSetup().createInjectorAndDoEMFRegistration
+		val injector = new Config().createInjectorAndDoEMFRegistration
 		injector.getInstance(typeof(GenerateBootstrapDoc)).generate
 	}
 	
@@ -43,10 +43,18 @@ class GenerateBootstrapDoc {
 	
 	@Inject IResourceValidator validator
 	
+	@Inject(optional=true) 
+	@Named("documentRoot")
+	String documentRoot = "../org.eclipse.xtend.doc.xdoc/xdoc"
+	
+	@Inject(optional=true) 
+	@Named("targetDirectory")
+	String targetDirectory = '../../website/documentation'
+	
 	def void generate() {
 		val document = loadDocument
-		val targetDir= new File('../../website/documentation')
-		val sourceDir = new File('../org.eclipse.xtend.doc.xdoc/xdoc')
+		val targetDir= new File(targetDirectory)
+		val sourceDir = new File(documentRoot)
 		val file = new File(targetDir, "index.html")
 		copyImages(document, sourceDir, targetDir)
 		println(file.absoluteFile)
