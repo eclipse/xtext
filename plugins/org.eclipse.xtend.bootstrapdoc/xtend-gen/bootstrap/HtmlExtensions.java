@@ -321,8 +321,8 @@ public class HtmlExtensions {
     String _path = it.getPath();
     _builder.append(_path, "	");
     _builder.append("\" alt=\"");
-    String _name = it.getName();
-    _builder.append(_name, "	");
+    String _caption = it.getCaption();
+    _builder.append(_caption, "	");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
     _builder.append("</div>");
@@ -351,7 +351,8 @@ public class HtmlExtensions {
       boolean _notEquals = (!Objects.equal(_altText, null));
       if (_notEquals) {
         TextOrMarkup _altText_1 = it.getAltText();
-        _builder.append(_altText_1, "");
+        CharSequence _html = this.toHtml(_altText_1);
+        _builder.append(_html, "");
       } else {
         _builder.append("<abbr title=\"");
         JvmDeclaredType _element_1 = it.getElement();

@@ -124,7 +124,7 @@ class HtmlExtensions {
 	
 	def dispatch toHtml(ImageRef it) '''
 		<div class="thumbnail">
-			<img src="«path»" alt="«name»">
+			<img src="«path»" alt="«caption»">
 		</div>
 	'''
 	
@@ -135,7 +135,7 @@ class HtmlExtensions {
 	
 	def dispatch CharSequence toHtml(CodeRef it) '''
 		<a href="«JAVADOC_ROOT»«element.qualifiedName.replace('.','/')».html">«
-		IF altText != null»«altText»«
+		IF altText != null»«altText.toHtml»«
 		ELSE»<abbr title="«element.qualifiedName»">«element.simpleName.trim»</abbr>«
 		ENDIF»</a>
 	'''
