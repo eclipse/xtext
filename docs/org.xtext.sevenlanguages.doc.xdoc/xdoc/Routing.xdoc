@@ -57,6 +57,9 @@ tr[td[Hardest Part]td[Handle regular expressions :-)]]
 section:routing_running[Running the Example]
 
 You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servelet-API on the class path of your project.
+Import the projects into an Eclipse workspace and run the launch config
+e[Run (org.eclipse.xtext.httprouting)]. Now you may start with a new JavaProject or just import the project
+org.eclipse.httprouting.example.
 
 section:routing_details[The Solution in Detail]
 
@@ -64,8 +67,7 @@ section2:routing_grammar[Grammar]
 
 The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
-code[grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
-]
+code[grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations]
 code[
 Import:
 	'import' importedType=\[types::JvmType|QualifiedName\];
