@@ -47,6 +47,10 @@ codelanguage-def[tortoise][
 	sub, begin, end
 ]
 
+codelanguage-def[routing][
+	GET, POST, PUT, DELETE, HEAD, import, when 
+]
+
 chapter-ref[intro]
 
 chapter-ref[mongo]
