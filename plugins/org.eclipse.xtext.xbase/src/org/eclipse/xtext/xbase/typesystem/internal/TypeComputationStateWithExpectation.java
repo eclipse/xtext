@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,25 +23,25 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 @NonNullByDefault
 public class TypeComputationStateWithExpectation extends AbstractStackedTypeComputationState {
 
-	private final JvmTypeReference expectedType;
+	private final LightweightTypeReference expectedType;
 
 	protected TypeComputationStateWithExpectation(
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent,
-			@Nullable JvmTypeReference typeReference) {
+			@Nullable LightweightTypeReference typeReference) {
 		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
 		this.expectedType = typeReference;
 	}
 
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		ITypeExpectation result = createTypeExpectation(expectedType, actualState, false);
+	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		LightweightTypeExpectation result = createTypeExpectation(expectedType, actualState, false);
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			result = new TypeExpectation(expectedType, actualState, returnType);

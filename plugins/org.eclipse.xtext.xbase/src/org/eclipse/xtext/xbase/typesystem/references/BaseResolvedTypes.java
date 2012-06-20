@@ -26,7 +26,7 @@ public abstract class BaseResolvedTypes implements LightweightResolvedTypes, Typ
 		this.converter = new OwnedConverter(this);
 	}
 	
-	public OwnedConverter getConverter() {
+	protected OwnedConverter getConverter() {
 		return converter;
 	}
 	

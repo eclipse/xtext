@@ -10,10 +10,10 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,17 +37,17 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	}
 	
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
 		return getParent().getImmediateExpectations(actualState);
 	}
 	
 	@Override
-	public List<ITypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
+	public List<LightweightTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState) {
 		return getParent().getReturnExpectations(actualState);
 	}
 	
 	@Override
-	protected JvmTypeReference acceptType(AbstractTypeExpectation expectation, JvmTypeReference type,
+	protected LightweightTypeReference acceptType(AbstractTypeExpectation expectation, LightweightTypeReference type,
 			ConformanceHint conformanceHint, boolean returnType) {
 		return getParent().acceptType(expectation, type, conformanceHint, returnType);
 	}

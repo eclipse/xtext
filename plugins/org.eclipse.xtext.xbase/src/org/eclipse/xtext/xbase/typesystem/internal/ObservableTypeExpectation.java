@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,18 +16,18 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 public class ObservableTypeExpectation extends TypeExpectation {
 
 	interface Observer {
-		void accept(ObservableTypeExpectation expectation, JvmTypeReference actual, ConformanceHint conformanceHint);
+		void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual, ConformanceHint conformanceHint);
 	}
 	
 	private final Observer observer;
 	
-	public ObservableTypeExpectation(JvmTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, Observer observer) {
+	public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, Observer observer) {
 		super(expectedType, state, returnType);
 		this.observer = observer;
 	}
 	
 	@Override
-	public void acceptActualType(JvmTypeReference type, ConformanceHint conformanceHint) {
+	public void acceptActualType(LightweightTypeReference type, ConformanceHint conformanceHint) {
 		observer.accept(this, type, conformanceHint);
 		super.acceptActualType(type, conformanceHint);
 	}

@@ -11,9 +11,9 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Multimap;
 
@@ -46,9 +46,9 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	@Override
-	protected JvmTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation,
-			JvmTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
-		JvmTypeReference result = super.acceptType(expression, expectation, type, conformanceHint, returnType);
+	protected LightweightTypeReference acceptType(XExpression expression, AbstractTypeExpectation expectation,
+			LightweightTypeReference type, ConformanceHint conformanceHint, boolean returnType) {
+		LightweightTypeReference result = super.acceptType(expression, expectation, type, conformanceHint, returnType);
 		if (returnType) {
 			ensureExpressionTypesMapExists().put(expression, new TypeData(expression, expectation, result, conformanceHint, false));
 		}

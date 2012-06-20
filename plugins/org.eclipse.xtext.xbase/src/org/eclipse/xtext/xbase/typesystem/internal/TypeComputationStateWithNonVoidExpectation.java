@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,12 +32,12 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 	}
 
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		ITypeExpectation result = createTypeExpectation(null, actualState);
+	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		LightweightTypeExpectation result = createTypeExpectation(null, actualState);
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable JvmTypeReference expectedType, AbstractTypeComputationState actualState) {
+	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			throw new IllegalArgumentException("expectedType should be null");

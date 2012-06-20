@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitorWithParameter;
-import org.eclipse.xtext.xbase.typesystem.util.TraversalData;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

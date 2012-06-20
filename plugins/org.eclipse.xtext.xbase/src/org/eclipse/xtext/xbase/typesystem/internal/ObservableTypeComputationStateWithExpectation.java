@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ObservableTypeExpectation.Observer;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,13 +21,13 @@ import org.eclipse.xtext.xbase.typesystem.internal.ObservableTypeExpectation.Obs
 @NonNullByDefault
 public class ObservableTypeComputationStateWithExpectation extends AbstractStackedTypeComputationState {
 
-	private final JvmTypeReference expectedType;
+	private final LightweightTypeReference expectedType;
 	
 	private final Observer observer;
 
 	public ObservableTypeComputationStateWithExpectation(
 			AbstractTypeComputationState parent,
-			JvmTypeReference expectedType,
+			LightweightTypeReference expectedType,
 			ObservableTypeExpectation.Observer observer) {
 		super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent.getResolver(), parent);
 		this.expectedType = expectedType;
@@ -35,12 +35,12 @@ public class ObservableTypeComputationStateWithExpectation extends AbstractStack
 	}
 
 	@Override
-	public List<ITypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
-		ITypeExpectation result = createTypeExpectation(expectedType, actualState, false);
+	public List<LightweightTypeExpectation> getImmediateExpectations(AbstractTypeComputationState actualState) {
+		LightweightTypeExpectation result = createTypeExpectation(expectedType, actualState, false);
 		return Collections.singletonList(result);
 	}
 
-	protected AbstractTypeExpectation createTypeExpectation(JvmTypeReference expectedType,
+	protected AbstractTypeExpectation createTypeExpectation(LightweightTypeReference expectedType,
 			AbstractTypeComputationState actualState, boolean returnType) {
 		return new ObservableTypeExpectation(expectedType, actualState, returnType, observer);
 	}

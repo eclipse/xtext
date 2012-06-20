@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.xbase.typesystem.util.TraversalData;
 
 import com.google.common.collect.Lists;
 

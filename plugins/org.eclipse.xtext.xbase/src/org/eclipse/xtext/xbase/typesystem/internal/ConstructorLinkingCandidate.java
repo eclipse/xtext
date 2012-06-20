@@ -15,11 +15,13 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,8 +47,8 @@ public class ConstructorLinkingCandidate extends AbstractLinkingCandidate<IConst
 	}
 	
 	@Override
-	protected List<JvmTypeReference> getExplicitTypeArguments() {
-		return getConstructorCall().getTypeArguments();
+	protected List<LightweightTypeReference> getExplicitTypeArguments() {
+		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
 	@Override

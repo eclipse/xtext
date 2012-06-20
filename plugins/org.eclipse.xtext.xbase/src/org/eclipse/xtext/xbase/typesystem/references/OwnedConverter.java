@@ -9,10 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import com.google.common.base.Function;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OwnedConverter {
+public class OwnedConverter implements Function<JvmTypeReference, LightweightTypeReference>{
 
 	private final Converter converter;
 	private final TypeReferenceOwner owner;
@@ -25,5 +27,9 @@ public class OwnedConverter {
 	public LightweightTypeReference toLightweightReference(JvmTypeReference reference) {
 		return converter.toLightweightReference(reference, owner);
 	}
-	
+
+	public LightweightTypeReference apply(JvmTypeReference reference) {
+		return toLightweightReference(reference);
+	}
 }
+

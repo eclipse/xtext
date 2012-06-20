@@ -12,7 +12,6 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**

@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,9 +34,9 @@ public class ConstructorBodyComputationState extends AbstractLogicalContainerAwa
 	}
 	
 	@Override
-	protected List<ITypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
-		JvmTypeReference voidType = getTypeReferences().getTypeForName(Void.TYPE, getMember());
-		ITypeExpectation result = returnType ? new TypeExpectation(voidType, actualState, returnType) : new RootTypeExpectation(voidType, actualState);
+	protected List<LightweightTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
+		LightweightTypeReference voidType = getResolvedTypes().getConverter().toLightweightReference(getTypeReferences().getTypeForName(Void.TYPE, getMember()));
+		LightweightTypeExpectation result = returnType ? new TypeExpectation(voidType, actualState, returnType) : new RootTypeExpectation(voidType, actualState);
 		return Collections.singletonList(result);
 	}
 

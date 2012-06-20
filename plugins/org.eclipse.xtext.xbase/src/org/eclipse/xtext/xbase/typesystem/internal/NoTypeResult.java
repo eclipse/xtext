@@ -8,29 +8,29 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class NoTypeResult implements ITypeComputationResult {
+public class NoTypeResult extends BaseTypeComputationResult {
 
 	public XExpression getExpression() {
 		return null;
 	}
 	
-	public JvmTypeReference getActualExpressionType() {
+	public LightweightTypeReference internalGetActualExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
-	public JvmTypeReference getExpectedExpressionType() {
+	public LightweightTypeReference internalGetExpectedExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 
-	public JvmTypeReference getActualType(JvmIdentifiableElement element) {
+	public LightweightTypeReference internalGetActualType(JvmIdentifiableElement element) {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 

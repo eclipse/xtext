@@ -7,7 +7,7 @@ a * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,7 +19,7 @@ public class NoExpectation extends AbstractReturnAwareTypeExpectation {
 		super(state, returnType);
 	}
 
-	public JvmTypeReference getExpectedType() {
+	public LightweightTypeReference internalGetExpectedType() {
 		return null;
 	}
 

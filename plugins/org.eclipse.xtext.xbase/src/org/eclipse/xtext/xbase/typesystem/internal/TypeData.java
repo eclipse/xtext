@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,15 +18,15 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
  */
 public class TypeData {
 	private final XExpression expression;
-	private final ITypeExpectation expectation;
-	private final JvmTypeReference type;
+	private final LightweightTypeExpectation expectation;
+	private final LightweightTypeReference type;
 	private final ConformanceHint conformanceHint;
 	private final boolean returnType;
 
 	public TypeData(
 			XExpression expression, 
-			ITypeExpectation expectation, 
-			JvmTypeReference type,
+			LightweightTypeExpectation expectation, 
+			LightweightTypeReference type,
 			ConformanceHint conformanceHint,
 			boolean returnType) {
 		this.expression = expression;
@@ -42,7 +42,7 @@ public class TypeData {
 				+ ", conformanceHint=" + conformanceHint + ", returnType=" + returnType + "]";
 	}
 	
-	public ITypeExpectation getExpectation() {
+	public LightweightTypeExpectation getExpectation() {
 		return expectation;
 	}
 	
@@ -54,7 +54,7 @@ public class TypeData {
 		return expression;
 	}
 	
-	public JvmTypeReference getActualType() {
+	public LightweightTypeReference getActualType() {
 		return type;
 	}
 	

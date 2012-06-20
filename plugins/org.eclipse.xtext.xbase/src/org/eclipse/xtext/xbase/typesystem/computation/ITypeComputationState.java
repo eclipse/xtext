@@ -83,12 +83,12 @@ public interface ITypeComputationState {
 	/**
 	 * The result is never empty.
 	 */
-	List<ITypeExpectation> getImmediateExpectations();
+	List<? extends ITypeExpectation> getImmediateExpectations();
 	
 	/**
 	 * The result is never empty.
 	 */
-	List<ITypeExpectation> getReturnExpectations();
+	List<? extends ITypeExpectation> getReturnExpectations();
 	
 	/**
 	 * The result is never empty.

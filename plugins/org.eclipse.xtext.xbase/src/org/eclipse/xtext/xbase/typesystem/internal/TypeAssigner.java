@@ -10,8 +10,9 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
+import org.eclipse.xtext.xbase.typesystem.references.BaseTypeAssigner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class TypeAssigner implements ITypeAssigner {
+public class TypeAssigner extends BaseTypeAssigner {
 	private final AbstractTypeComputationState state;
 
 	protected TypeAssigner(AbstractTypeComputationState state) {
@@ -31,7 +32,7 @@ public class TypeAssigner implements ITypeAssigner {
 		return state;
 	}
 
-	public void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType, @Nullable JvmTypeReference expectedType) {
+	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType, @Nullable LightweightTypeReference expectedType) {
 		// TODO validation messages
 		if (declaredType != null)
 			state.getResolvedTypes().setType(element, declaredType);
@@ -40,8 +41,13 @@ public class TypeAssigner implements ITypeAssigner {
 		state.addLocalToCurrentScope(element);
 	}
 
-	public void assignType(JvmIdentifiableElement element, @Nullable JvmTypeReference declaredType) {
+	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType) {
 		state.getResolvedTypes().setType(element, declaredType);
 		state.addLocalToCurrentScope(element);
+	}
+
+	@Override
+	protected OwnedConverter getConverter() {
+		return state.getResolvedTypes().getConverter();
 	}
 }

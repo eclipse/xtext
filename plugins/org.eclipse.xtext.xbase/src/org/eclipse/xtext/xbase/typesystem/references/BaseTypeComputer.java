@@ -7,9 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-/**
- * @author zarnekow - Initial contribution and API
- */
-public class BaseTypeComputer {
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public abstract class BaseTypeComputer implements LightweightTypeComputer {
+
+	public final void computeTypes(XExpression expression, ITypeComputationState state) {
+		computeTypes(expression, castToLightweightState(state));
+	}
+
+	public final JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
+		return getRefinableCandidate(object, castToLightweightState(state));
+	}
+
+	protected LightweightTypeComputationState castToLightweightState(ITypeComputationState state) {
+		if (state instanceof LightweightTypeComputationState) {
+			return (LightweightTypeComputationState) state;
+		}
+		throw new IllegalStateException("state is not a LightweightTypeComputationState");
+	}
+	
 }
