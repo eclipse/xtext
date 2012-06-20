@@ -201,31 +201,31 @@
 			<div class="incode">
 				<p class="code">
 					<span class="keyword">package</span>&nbsp;java.lang&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String<br/>
+					&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String<br/>
 					}<br/>
 					<br/>
 					<span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;java.lang.*<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;java.lang.*<br/>
+					&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+					&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+					&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+					&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+					&nbsp;&nbsp;}<br/>
 					}
 				</p>
 			</div>

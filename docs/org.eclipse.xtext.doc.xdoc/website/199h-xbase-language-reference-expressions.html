@@ -487,7 +487,7 @@
 		  </tr>
 		</table>
 		
-				
+		    
 		The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
 		The assignment operator <span class="inlinecode">+=</span> is right-to-left associative in the same way as the plain assignment
 		operator <span class="inlinecode">=</span> is. Consequently, <span class="inlinecode">a&nbsp;=&nbsp;b&nbsp;=&nbsp;c</span> is executed as <span class="inlinecode">a&nbsp;=&nbsp;(b&nbsp;=&nbsp;c)</span>. All other
@@ -539,8 +539,8 @@
 			<div class="incode">
 				<p class="code">
 					<span class="keyword">val</span>&nbsp;person&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person&nbsp;=&gt;&nbsp;[<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;firstName&nbsp;=&nbsp;<span class="string">&apos;John&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;lastName&nbsp;=&nbsp;<span class="string">&apos;Coltrane&apos;</span><br/>
+					&nbsp;&nbsp;firstName&nbsp;=&nbsp;<span class="string">&apos;John&apos;</span><br/>
+					&nbsp;&nbsp;lastName&nbsp;=&nbsp;<span class="string">&apos;Coltrane&apos;</span><br/>
 					]<br/>
 					<span class="comment">//&nbsp;equivalent&nbsp;to<br/>
 					</span><span class="keyword">val</span>&nbsp;person&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person<br/>
@@ -725,7 +725,7 @@
 		<p>
 		<ul>
 		  <li>
-		  		<div class="literallayout">
+		      <div class="literallayout">
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">new</span>&nbsp;String()
@@ -735,7 +735,7 @@
 		  
 		  </li>
 		  <li>
-		  		<div class="literallayout">
+		      <div class="literallayout">
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
@@ -906,13 +906,13 @@
 			<div class="incode">
 				<p class="code">
 					newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class="string">&apos;bb&apos;</span>,&nbsp;<span class="string">&apos;c&apos;</span>&nbsp;).sort&nbsp;[<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 					]
 				</p>
 			</div>
@@ -1012,11 +1012,11 @@
 			<div class="incode">
 				<p class="code">
 					<span class="keyword">switch</span>&nbsp;e&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
+					&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br/>
+					&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
+					&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
+					&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
 					}
 				</p>
 			</div>
@@ -1043,9 +1043,9 @@
 			<div class="incode">
 				<p class="code">
 					<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;foo."</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string."</span><br/>
+					&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span><br/>
+					&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;foo."</span><br/>
+					&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string."</span><br/>
 					}
 				</p>
 			</div>
@@ -1065,9 +1065,9 @@
 				<p class="code">
 					<span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br/>
 					<span class="keyword">switch</span>&nbsp;x&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
+					&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
+					&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
+					&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
 					}
 				</p>
 			</div>
@@ -1098,13 +1098,13 @@
 		<p>
 		<ul>
 		  <li>
-		  		<div class="literallayout">
+		      <div class="literallayout">
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">switch</span>&nbsp;foo&nbsp;{<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
+		  			&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
+		  			&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
+		  			&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
 		  			}
 		  		</p>
 		  	</div>
@@ -1112,13 +1112,13 @@
 		  
 		  </li>
 		  <li>
-		  		<div class="literallayout">
+		      <div class="literallayout">
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string">&apos;hello&apos;</span>,42)&nbsp;{<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br/>
+		  			&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
+		  			&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
+		  			&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br/>
 		  			}
 		  		</p>
 		  	</div>
@@ -1146,12 +1146,12 @@
 			<div class="incode">
 				<p class="code">
 					{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
+					&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
+					&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
+					&nbsp;&nbsp;}<br/>
 					}
 				</p>
 			</div>
@@ -1211,8 +1211,8 @@
 			<div class="incode">
 				<p class="code">
 					{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;result<br/>
+					&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+					&nbsp;&nbsp;result<br/>
 					}
 				</p>
 			</div>
@@ -1222,12 +1222,12 @@
 			<div class="incode">
 				<p class="code">
 					{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
+					&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
+					&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
+					&nbsp;&nbsp;}<br/>
 					}
 				</p>
 			</div>
@@ -1248,11 +1248,11 @@
 		<p>
 		<ul>
 		  <li>
-		  		<div class="literallayout">
+		      <div class="literallayout">
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br/>
+		  			&nbsp;&nbsp;doSideEffect(s);<br/>
 		  			}
 		  		</p>
 		  	</div>
@@ -1260,11 +1260,11 @@
 		  
 		  </li>
 		  <li>
-		  		<div class="literallayout">
+		      <div class="literallayout">
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)
+		  			&nbsp;&nbsp;doSideEffect(s)
 		  		</p>
 		  	</div>
 		  </div>
@@ -1289,7 +1289,7 @@
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+		  			&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
 		  			}
 		  		</p>
 		  	</div>
@@ -1299,7 +1299,7 @@
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
+		  			&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
 		  		</p>
 		  	</div>
 		  </div>
@@ -1324,7 +1324,7 @@
 		  	<div class="incode">
 		  		<p class="code">
 		  			<span class="keyword">do</span>&nbsp;{<br/>
-		  			&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+		  			&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
 		  			}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)
 		  		</p>
 		  	</div>
@@ -1352,9 +1352,9 @@
 			<div class="incode">
 				<p class="code">
 					listOfStrings.map&nbsp;[&nbsp;e&nbsp;|<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase<br/>
+					&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
+					&nbsp;&nbsp;e.toUpperCase<br/>
 					]
 				</p>
 			</div>
@@ -1370,10 +1370,10 @@
 			<div class="incode">
 				<p class="code">
 					{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;...<br/>
+					&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
+					&nbsp;&nbsp;...<br/>
 					}
 				</p>
 			</div>
@@ -1393,11 +1393,11 @@
 			<div class="incode">
 				<p class="code">
 					<span class="keyword">try</span>&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
+					&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
 					}&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
+					&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
 					</span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
+					&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
 					</span>}
 				</p>
 			</div>

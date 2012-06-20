@@ -226,10 +226,10 @@
 				<div class="incode">
 					<p class="code">
 						Operation:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
+						&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
+						&nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+						&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
 					</p>
 				</div>
 			</div>
@@ -246,7 +246,7 @@
 				<div class="incode">
 					<p class="code">
 						Feature:<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation<br/>
+						&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation<br/>
 						;<br/>
 						&nbsp;<br/>
 						Property:<br/>
@@ -293,8 +293,8 @@
 				<div class="incode">
 					<p class="code">
 						<span class="keyword">protected</span>&nbsp;Object&nbsp;_evaluateBlockExpression(XBlockExpression&nbsp;literal,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)
 					</p>
 				</div>
 			</div>
@@ -315,16 +315,16 @@
 						<br/>
 						...<br/>
 						<span class="keyword">public</span>&nbsp;Object&nbsp;evaluate(XExpression&nbsp;expression,&nbsp;Object&nbsp;thisElement)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;evaluationContext&nbsp;=&nbsp;contextProvider.get();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;provide&nbsp;initial&nbsp;context&nbsp;and&nbsp;implicit&nbsp;variables<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext.newValue(XbaseScopeProvider.THIS,&nbsp;thisElement);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationResult&nbsp;result&nbsp;=&nbsp;xbaseInterpreter.evaluate(expression,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext,&nbsp;CancelIndicator.NullImpl);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getException()&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
-						</span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
+						&nbsp;&nbsp;IEvaluationContext&nbsp;evaluationContext&nbsp;=&nbsp;contextProvider.get();<br/>
+						&nbsp;&nbsp;<span class="comment">//&nbsp;provide&nbsp;initial&nbsp;context&nbsp;and&nbsp;implicit&nbsp;variables<br/>
+						</span>&nbsp;&nbsp;evaluationContext.newValue(XbaseScopeProvider.THIS,&nbsp;thisElement);<br/>
+						&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;IEvaluationResult&nbsp;result&nbsp;=&nbsp;xbaseInterpreter.evaluate(expression,&nbsp;&nbsp;&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext,&nbsp;CancelIndicator.NullImpl);<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getException()&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
+						</span>&nbsp;&nbsp;}&nbsp;<br/>
+						&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
 						}
 					</p>
 				</div>

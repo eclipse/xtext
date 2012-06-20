@@ -21,22 +21,22 @@ similar to what you may know from Rails, Grails or Spring Roo. The syntax is ver
 <span class="keyword">datatype</span>&nbsp;String<br/>
 <br/>
 <span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
 }<br/>
 <br/>
 <span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+&nbsp;&nbsp;author:&nbsp;String<br/>
 }<br/>
 <br/>
 <span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
 }<br/>
 <br/>
 <span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;content:&nbsp;String<br/>
 }<br/>
 </p>
 </div>
@@ -89,7 +89,7 @@ Click on <em>Finish</em> to create the projects.
 </p>
 <p>
 <div class="image" >
-<img src="images/tutorial/30min_wizard.png" class=" " 
+<img src="tutorial/images/30min_wizard.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -128,7 +128,7 @@ The Eclipse editor and all the other workbench related functionality.
 </p>
 <p>
 <div class="image" >
-<img src="images/tutorial/30min_initialprojectlayout.png" class=" " 
+<img src="tutorial/images/30min_initialprojectlayout.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -151,10 +151,10 @@ The wizard will automatically open the grammar file
 <span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
 <br/>
 Model:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;greetings+=Greeting*;<br/>
+&nbsp;&nbsp;<br/>
 Greeting:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
+&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -203,8 +203,8 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 <ol>
 	<li>
 		
-				The first rule in a grammar is always used as the entry or start rule.  
-				<div class="literallayout">
+		    The first rule in a grammar is always used as the entry or start rule.  
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Domainmodel&nbsp;:<br/>
@@ -214,15 +214,15 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		</div>
 		</div>
 		
-				
-				It says that a <em>Domainmodel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
-				to a feature called <span class="inlinecode">elements</span>.
+		    
+		    It says that a <em>Domainmodel</em> contains an arbitrary number (<span class="inlinecode">*</span>) of <em>Type</em>s which will be added (<span class="inlinecode">+=</span>)
+		    to a feature called <span class="inlinecode">elements</span>.
 	</li>
 	<li>
 		
-				The rule <em>Type</em> delegates to either the rule <em>DataType</em> or (<span class="inlinecode">|</span>) the rule <em>Entity</em>.
-				  
-				<div class="literallayout">
+		    The rule <em>Type</em> delegates to either the rule <em>DataType</em> or (<span class="inlinecode">|</span>) the rule <em>Entity</em>.
+		      
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Type:<br/>
@@ -235,13 +235,13 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 	</li>
 	<li>
 		
-				The rule <em>DataType</em> starts with a keyword <span class="inlinecode"><span class="string">&apos;datatype&apos;</span></span>, followed by an identifier
-				which is parsed by a rule called <em>ID</em>. The rule <em>ID</em> is defined in the super grammar
-				<em>org.eclipse.xtext.common.Terminals</em> and parses a single word, a.k.a identifier. You can navigate
-				to the declaration by using <em>F3</em> on the rule call.
-				The value returned by the call to <em>ID</em> is assigned (<span class="inlinecode">=</span>) to the feature <em>name</em>.
-				  
-				<div class="literallayout">
+		    The rule <em>DataType</em> starts with a keyword <span class="inlinecode"><span class="string">&apos;datatype&apos;</span></span>, followed by an identifier
+		    which is parsed by a rule called <em>ID</em>. The rule <em>ID</em> is defined in the super grammar
+		    <em>org.eclipse.xtext.common.Terminals</em> and parses a single word, a.k.a identifier. You can navigate
+		    to the declaration by using <em>F3</em> on the rule call.
+		    The value returned by the call to <em>ID</em> is assigned (<span class="inlinecode">=</span>) to the feature <em>name</em>.
+		      
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		DataType:<br/>
@@ -254,9 +254,9 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 	</li>
 	<li>
 		
-				The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
-				
-				<div class="literallayout">
+		    The rule <em>Entity</em> again starts with the definition of a keyword followed by a name.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Entity&nbsp;:<br/>
@@ -268,18 +268,18 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		</div>
 		</div>
 		
-				
-				Next up there is the extends clause which is parenthesized and optional (<span class="inlinecode">?</span>). 
-				Since the feature named <em>superType</em> is a cross reference (note the square brackets),
-				the parser rule <em>Entity</em> is not called here, but only a single identifier (the <em>ID</em>-rule) is parsed.
-				The actual <em>Entity</em> will be resolved during the linking phase.
-				Finally between curly braces there can be any number of <em>Features</em>, which invokes the next rule.
+		    
+		    Next up there is the extends clause which is parenthesized and optional (<span class="inlinecode">?</span>). 
+		    Since the feature named <em>superType</em> is a cross reference (note the square brackets),
+		    the parser rule <em>Entity</em> is not called here, but only a single identifier (the <em>ID</em>-rule) is parsed.
+		    The actual <em>Entity</em> will be resolved during the linking phase.
+		    Finally between curly braces there can be any number of <em>Features</em>, which invokes the next rule.
 	</li>
 	<li>
 		
-				Last but not least, the rule <em>Feature</em> is defined as follows:
-				
-				<div class="literallayout">
+		    Last but not least, the rule <em>Feature</em> is defined as follows:
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Feature:<br/>
@@ -289,10 +289,10 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		</div>
 		</div>
 		
-				
-				The keyword <span class="inlinecode"><span class="keyword">many</span></span> is used to model a multi valued feature in the domain model
-				DSL. The assignment operator (<span class="inlinecode">?=</span>) implies that the feature <em>many</em> is of type <em>boolean</em>. You are already familiar with
-				the other syntax elements in this parser rule. 
+		    
+		    The keyword <span class="inlinecode"><span class="keyword">many</span></span> is used to model a multi valued feature in the domain model
+		    DSL. The assignment operator (<span class="inlinecode">?=</span>) implies that the feature <em>many</em> is of type <em>boolean</em>. You are already familiar with
+		    the other syntax elements in this parser rule. 
 	</li>
 </ol>
 </p>
@@ -322,7 +322,7 @@ messages in the Console View.
 </p>
 <p>
 <div class="image" >
-<img src="images/tutorial/30min_rungenerator.png" class=" " 
+<img src="tutorial/images/30min_rungenerator.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -337,7 +337,7 @@ memory settings and parameters set. Now you can hit <em>Run</em> to start a new 
 </p>
 <p>
 <div class="image" >
-<img src="images/tutorial/30min_launchconfiguration.png" class=" " 
+<img src="tutorial/images/30min_launchconfiguration.png" class=" " 
  style=" " />
 <div class="caption">
 </div>
@@ -354,7 +354,7 @@ the outline view, find references etc.
 </p>
 <p>
 <div class="image" >
-<img src="images/tutorial/30min_editor.png" 
+<img src="tutorial/images/30min_editor.png" 
 />
 <div class="caption">
 </div>
@@ -389,10 +389,10 @@ In the end we want to be able to split the previously used model into to distinc
 <span class="comment">//&nbsp;commons.dmodel<br/>
 </span><br/>
 <span class="keyword">package</span>&nbsp;my.company.common&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -406,22 +406,22 @@ In the end we want to be able to split the previously used model into to distinc
 </span><br/>
 <span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{<br/>
 &nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -434,11 +434,11 @@ Let&apos;s start enhancing the grammar.
 <ol>
 	<li>
 		
-				Since a <em>Domainmodel</em> no longer contains types but packages, too,
-				the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em>
-				should be introduced: the <em>AbstractElement</em>.
-						
-				<div class="literallayout">
+		    Since a <em>Domainmodel</em> no longer contains types but packages, too,
+		    the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em>
+		    should be introduced: the <em>AbstractElement</em>.
+		        
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Domainmodel:<br/>
@@ -455,11 +455,11 @@ Let&apos;s start enhancing the grammar.
 	</li>
 	<li>
 		
-				A <span class="inlinecode">PackageDeclaration</span> in turn looks pretty much as expected. It contains a number
-				of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel,
-				too, we add them as an alternative to the rule <span class="inlinecode">AbstractElement</span>.
-				
-				<div class="literallayout">
+		    A <span class="inlinecode">PackageDeclaration</span> in turn looks pretty much as expected. It contains a number
+		    of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel,
+		    too, we add them as an alternative to the rule <span class="inlinecode">AbstractElement</span>.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		PackageDeclaration:<br/>
@@ -479,41 +479,40 @@ Let&apos;s start enhancing the grammar.
 		</div>
 		</div>
 		
-				
-				The <span class="inlinecode">QualifiedName</span> is a little special. It does not contain any assignments. Therefore,
-				it serves as a data type rule, which returns a String. So the feature <em>name</em> of a <em>Package</em> is still of
-				type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
+		    
+		    The <span class="inlinecode">QualifiedName</span> is a little special. It does not contain any assignments. Therefore,
+		    it serves as a data type rule, which returns a String. So the feature <em>name</em> of a <em>Package</em> is still of
+		    type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
 	</li>
 	<li>
 		
-				Imports can be defined in a very convenient way with Xtext. If you use the name <em>importedNamespace</em>
-				in a parser rule, the framework will treat the value as an import. It even supports wildcard
-				and handles them as expected:
-				
-				<div class="literallayout">
+		    Imports can be defined in a very convenient way with Xtext. If you use the name <em>importedNamespace</em>
+		    in a parser rule, the framework will treat the value as an import. It even supports wildcard
+		    and handles them as expected:
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Import:<br/>
 		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
 		;<br/>
-		<br/>
-		QualifiedNameWithWildcard:<br/>
+		&nbsp;&nbsp;&nbsp;QualifiedNameWithWildcard:<br/>
 		&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
 		;<br/>
 		</p>
 		</div>
 		</div>
 		
-				
-				Similar to the rule <span class="inlinecode">QualifiedName</span>, <span class="inlinecode">QualifiedNameWithWildcard</span> returns
-				a plain string. 
+		    
+		    Similar to the rule <span class="inlinecode">QualifiedName</span>, <span class="inlinecode">QualifiedNameWithWildcard</span> returns
+		    a plain string. 
 	</li>
 	<li>
 		
-				The last step is to allow fully qualified names in cross references, too. Otherwise one could
-				not refer to an entity without adding an import statement.
-				
-				<div class="literallayout">
+		    The last step is to allow fully qualified names in cross references, too. Otherwise one could
+		    not refer to an entity without adding an import statement.
+		    
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		Entity:<br/>
@@ -531,9 +530,9 @@ Let&apos;s start enhancing the grammar.
 		</div>
 		</div>
 		
-				
-				<em>Please note that the bar (<span class="inlinecode">|</span>) is not an alternative in the context of a cross reference,
-				but used to specify the syntax of the parsed string.</em> 
+		    
+		    <em>Please note that the bar (<span class="inlinecode">|</span>) is not an alternative in the context of a cross reference,
+		    but used to specify the syntax of the parsed string.</em> 
 	</li>
 </ol>
 </p>
@@ -605,7 +604,7 @@ into smaller parts and have cross-references across file boundaries.
 </p>
 <p>
 <div class="image" >
-<img src="images/tutorial/30min_multipleeditors.png" 
+<img src="tutorial/images/30min_multipleeditors.png" 
 />
 <div class="caption">
 </div>

@@ -198,10 +198,10 @@
 					<p class="code">
 						@Check<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkNameStartsWithCapital(Entity&nbsp;entity)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(entity.getName().charAt(0)))&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(entity.getName().charAt(0)))&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>
@@ -222,17 +222,17 @@
 					<p class="code">
 						@Check<br/>
 						<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFeatureNameIsUnique(Feature&nbsp;f)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;superEntity&nbsp;=&nbsp;((Entity)&nbsp;f.eContainer()).getSuperType();<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(superEntity&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.FEATURE__NAME);<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
+						&nbsp;&nbsp;Entity&nbsp;superEntity&nbsp;=&nbsp;((Entity)&nbsp;f.eContainer()).getSuperType();<br/>
+						&nbsp;&nbsp;<span class="keyword">while</span>(superEntity&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.FEATURE__NAME);<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 						&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
+						&nbsp;&nbsp;}<br/>
 						}
 					</p>
 				</div>

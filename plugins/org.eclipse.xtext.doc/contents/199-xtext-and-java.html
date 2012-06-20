@@ -254,61 +254,61 @@ and assemble the whole file&apos;s content in a second step.
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TypeReferenceSerializer&nbsp;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;TypeReferenceSerializer&nbsp;<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContents.toIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;<span class="keyword">it</span>)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">val</span>&nbsp;importManager&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ImportManager(true)<span class="string">&raquo;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">val</span>&nbsp;body&nbsp;=&nbsp;body(importManager)<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;i:importManager.imports<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;&laquo;</span>i<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>body<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;body(Entity&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;superType&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;&laquo;</span>superType.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f&nbsp;:&nbsp;features<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile(importManager)<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get&laquo;</span>name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;<span class="keyword">it</span>)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">val</span>&nbsp;importManager&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ImportManager(true)<span class="string">&raquo;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">val</span>&nbsp;body&nbsp;=&nbsp;body(importManager)<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;eContainer&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;</span>eContainer.fullyQualifiedName<span class="string">&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;i:importManager.imports<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;&laquo;</span>i<span class="string">&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>body<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;body(Entity&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;superType&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;&laquo;</span>superType.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;f&nbsp;:&nbsp;features<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile(importManager)<span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;<span class="keyword">it</span>,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get&laquo;</span>name.toFirstUpper<span class="string">&raquo;()&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>name.toFirstUpper<span class="string">&raquo;(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span>name<span class="string">&raquo;)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;shortName(JvmTypeReference&nbsp;ref,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuilderBasedAppendable(importManager)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref.serialize(ref.eContainer,&nbsp;result);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.toString<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>name.toFirstUpper<span class="string">&raquo;(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>type.shortName(importManager)<span class="string">&raquo;&nbsp;&laquo;</span>name<span class="string">&raquo;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;shortName(JvmTypeReference&nbsp;ref,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuilderBasedAppendable(importManager)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ref.serialize(ref.eContainer,&nbsp;result);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.toString<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -325,11 +325,11 @@ become a Java class and should be usable as such. In the domain model example, y
 <div class="incode">
 <p class="code">
 <span class="keyword">entity</span>&nbsp;Employee&nbsp;<span class="keyword">extends</span>&nbsp;Person&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;boss:&nbsp;Person<br/>
+&nbsp;&nbsp;boss:&nbsp;Person<br/>
 ...<br/>
 <br/>
 <span class="keyword">entity</span>&nbsp;Person&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
+&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
 ...<br/>
 </p>
 </div>
@@ -458,10 +458,10 @@ an <em>XBlockExpression</em>. The final parser rule reads as:
 <div class="incode">
 <p class="code">
 Operation:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
+&nbsp;&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;(params+=FullJvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=FullJvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
 </p>
 </div>
 </div>
@@ -478,7 +478,7 @@ to a new rule <em>Property</em> and let <em>Feature</em> become the supertype of
 <div class="incode">
 <p class="code">
 Feature:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation<br/>
+&nbsp;&nbsp;Property&nbsp;|&nbsp;Operation<br/>
 ;<br/>
 &nbsp;<br/>
 Property:<br/>
@@ -525,8 +525,8 @@ is called <em>_evaluate&lt;SomeDescription&gt;</em> and takes three parameters, 
 <div class="incode">
 <p class="code">
 <span class="keyword">protected</span>&nbsp;Object&nbsp;_evaluateBlockExpression(XBlockExpression&nbsp;literal,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)<br/>
 </p>
 </div>
 </div>
@@ -547,16 +547,16 @@ elements of the original context. Here is an example code snippet how to call th
 <br/>
 ...<br/>
 <span class="keyword">public</span>&nbsp;Object&nbsp;evaluate(XExpression&nbsp;expression,&nbsp;Object&nbsp;thisElement)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;evaluationContext&nbsp;=&nbsp;contextProvider.get();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;provide&nbsp;initial&nbsp;context&nbsp;and&nbsp;implicit&nbsp;variables<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext.newValue(XbaseScopeProvider.THIS,&nbsp;thisElement);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationResult&nbsp;result&nbsp;=&nbsp;xbaseInterpreter.evaluate(expression,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext,&nbsp;CancelIndicator.NullImpl);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getException()&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
+&nbsp;&nbsp;IEvaluationContext&nbsp;evaluationContext&nbsp;=&nbsp;contextProvider.get();<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;provide&nbsp;initial&nbsp;context&nbsp;and&nbsp;implicit&nbsp;variables<br/>
+</span>&nbsp;&nbsp;evaluationContext.newValue(XbaseScopeProvider.THIS,&nbsp;thisElement);<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;IEvaluationResult&nbsp;result&nbsp;=&nbsp;xbaseInterpreter.evaluate(expression,&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext,&nbsp;CancelIndicator.NullImpl);<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getException()&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
+</span>&nbsp;&nbsp;}&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
 }<br/>
 </p>
 </div>
@@ -655,7 +655,7 @@ In such cases you can use the escaped identifier <span class="inlinecode">^servi
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;ID:&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*<br/>
 ;<br/>
 </p>
 </div>
@@ -1359,7 +1359,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 </table>
 
-		
+    
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
 The assignment operator <span class="inlinecode">+=</span> is right-to-left associative in the same way as the plain assignment
 operator <span class="inlinecode">=</span> is. Consequently, <span class="inlinecode">a&nbsp;=&nbsp;b&nbsp;=&nbsp;c</span> is executed as <span class="inlinecode">a&nbsp;=&nbsp;(b&nbsp;=&nbsp;c)</span>. All other
@@ -1422,8 +1422,8 @@ initialization of newly created objects. Example:
 <div class="incode">
 <p class="code">
 <span class="keyword">val</span>&nbsp;person&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person&nbsp;=&gt;&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;firstName&nbsp;=&nbsp;<span class="string">&apos;John&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;lastName&nbsp;=&nbsp;<span class="string">&apos;Coltrane&apos;</span><br/>
+&nbsp;&nbsp;firstName&nbsp;=&nbsp;<span class="string">&apos;John&apos;</span><br/>
+&nbsp;&nbsp;lastName&nbsp;=&nbsp;<span class="string">&apos;Coltrane&apos;</span><br/>
 ]<br/>
 <span class="comment">//&nbsp;equivalent&nbsp;to<br/>
 </span><span class="keyword">val</span>&nbsp;person&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person<br/>
@@ -1597,7 +1597,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 <ul>
 	<li>
 		
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">new</span>&nbsp;String()<br/>
@@ -1608,7 +1608,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 	</li>
 	<li>
 		
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()<br/>
@@ -1793,13 +1793,13 @@ as an extension method, it can be invoked like this
 <div class="incode">
 <p class="code">
 newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class="string">&apos;bb&apos;</span>,&nbsp;<span class="string">&apos;c&apos;</span>&nbsp;).sort&nbsp;[<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 ]<br/>
 </p>
 </div>
@@ -1900,11 +1900,11 @@ For a switch expression
 <div class="incode">
 <p class="code">
 <span class="keyword">switch</span>&nbsp;e&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br/>
 }<br/>
 </p>
 </div>
@@ -1931,9 +1931,9 @@ Example:
 <div class="incode">
 <p class="code">
 <span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;foo."</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span><br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;foo."</span><br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string."</span><br/>
 }<br/>
 </p>
 </div>
@@ -1950,9 +1950,9 @@ Example:
 <p class="code">
 <span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br/>
 <span class="keyword">switch</span>&nbsp;x&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
+&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br/>
+&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
 }<br/>
 </p>
 </div>
@@ -1978,13 +1978,13 @@ case branches types conform to the expected type.
 <ul>
 	<li>
 		
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">switch</span>&nbsp;foo&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
+		&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br/>
+		&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br/>
+		&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br/>
 		}<br/>
 		</p>
 		</div>
@@ -1993,13 +1993,13 @@ case branches types conform to the expected type.
 	</li>
 	<li>
 		
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string">&apos;hello&apos;</span>,42)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br/>
+		&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...<br/>
+		&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br/>
+		&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br/>
 		}<br/>
 		</p>
 		</div>
@@ -2027,12 +2027,12 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
+&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -2087,8 +2087,8 @@ It can optionally be terminated by a semicolon.
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;result<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+&nbsp;&nbsp;result<br/>
 }<br/>
 </p>
 </div>
@@ -2098,12 +2098,12 @@ It can optionally be terminated by a semicolon.
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x;<br/>
+&nbsp;&nbsp;}<br/>
 }<br/>
 </p>
 </div>
@@ -2125,11 +2125,11 @@ or <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/l
 <ul>
 	<li>
 		
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br/>
+		&nbsp;&nbsp;doSideEffect(s);<br/>
 		}<br/>
 		</p>
 		</div>
@@ -2138,11 +2138,11 @@ or <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/l
 	</li>
 	<li>
 		
-				<div class="literallayout">
+		    <div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)<br/>
+		&nbsp;&nbsp;doSideEffect(s)<br/>
 		</p>
 		</div>
 		</div>
@@ -2165,7 +2165,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+		&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
 		}<br/>
 		</p>
 		</div>
@@ -2176,7 +2176,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)<br/>
+		&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)<br/>
 		</p>
 		</div>
 		</div>
@@ -2199,7 +2199,7 @@ The return type of a do-while loop is <span class="inlinecode"><span class="keyw
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">do</span>&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+		&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
 		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
 		</p>
 		</div>
@@ -2228,9 +2228,9 @@ In a lambda expression for instance a return expression is always implied if the
 <div class="incode">
 <p class="code">
 listOfStrings.map&nbsp;[&nbsp;e&nbsp;|<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
+&nbsp;&nbsp;e.toUpperCase<br/>
 ]<br/>
 </p>
 </div>
@@ -2246,11 +2246,11 @@ Like in Java it is possible to throw <a class="jdoc" href="http://download.oracl
 <div class="incode">
 <p class="code">
 {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
-}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
+&nbsp;&nbsp;...<br/>
+}&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -2269,11 +2269,11 @@ The syntax again is the same known from Java.
 <div class="incode">
 <p class="code">
 <span class="keyword">try</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
+&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
 }&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
 </span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
 </span>}<br/>
 </p>
 </div>
@@ -2335,7 +2335,7 @@ If the last argument of a method call is a lambda expression, it can be appended
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(42)&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+foo(42)&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -2378,9 +2378,9 @@ using the following Xbase code:
 <div class="incode">
 <p class="code">
 html([&nbsp;html&nbsp;| <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;])&nbsp;<br/>
+&nbsp;&nbsp;head(html,&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+</span>&nbsp;&nbsp;])&nbsp;<br/>
 ]&nbsp;)<br/>
 </p>
 </div>
@@ -2392,9 +2392,9 @@ Appending the lambda expression parameters and prepending the parent parameters 
 <div class="incode">
 <p class="code">
 html()&nbsp;[&nbsp;html&nbsp;| <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;html.head()&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+</span>&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
 ]&nbsp;<br/>
 </p>
 </div>
@@ -2406,9 +2406,9 @@ Using implicit parameter <span class="inlinecode"><span class="keyword">it</span
 <div class="incode">
 <p class="code">
 html&nbsp;[&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;head&nbsp;[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;initialize&nbsp;head<br/>
+</span>&nbsp;&nbsp;]&nbsp;&nbsp;<br/>
 ]&nbsp;<br/>
 </p>
 </div>

@@ -145,9 +145,9 @@
 		<div class="inner">
 			<div id="maincontainer" class="container">
 				<!-- chapter -->
-				<section id="intro" style="padding-top: 68px; margin-top: -68px;">
+				<section id="introduction" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									Seven Languages by Seven Weaklings
 							</h1>
@@ -208,7 +208,7 @@
 				<!-- chapter -->
 				<section id="mongo" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									MongoBeans
 							</h1>
@@ -907,7 +907,8 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.html"><abbr title="org.xtext.mongobeans.scoping.MongoQualifiedNameProvider">MongoQualifiedNameProvider</abbr></a>
 								. Note that we have to add a binding
 								in the respective 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoBeansRuntimeModule.html">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@6d289e48</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoBeansRuntimeModule.html">	Guice module
+								</a>
 								 to make the framework 
 								pick up our customization. See the 
 								<a href="http://www.xtext.org/documentation">Xtext documentation</a> for details 
@@ -921,9 +922,11 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</p>
 							<p>
 								To improve the language visually, we have tuned the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.html">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@37285252</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.html">	outline
+								</a>
 								 and the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.html">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@51bfa303</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.html">	label providers
+								</a>
 								 as well. 
 							</p>
 							</section>
@@ -935,12 +938,14 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							<p>
 								Of course there could be further concepts in the DSL, e.g. transient properties, indices or refeerences. 
 								Furthermore, the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/example/MusicDBXtendTest.html">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@976484e</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/example/MusicDBXtendTest.html">	example
+								</a>
 								 shows how to use Xtend to 
 								build a very compact API to create trees of 
 								<strong>	MongoBean
 								</strong> instances. 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoExtensions.html">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@7418e252</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoExtensions.html">	Extension methods
+								</a>
 								 can also be used to wrap other
 								classes of the mongoDB driver.   
 							</p>
@@ -951,7 +956,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 				<!-- chapter -->
 				<section id="routing" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									Http Routing
 							</h1>
@@ -979,9 +984,10 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 								<a href="http://www.xtext.org">Xtext</a> that allows to create routing with full support of expressions and access to the URL while the routing is done.
 								The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and 
 								<a href="http://code.google.com/p/google-guice">Guice</a> bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
-								Eventually, we do only have a single javax.servlet.http.HttpServlet containing the logic for routing implemented in Java. 
+								Eventually, we do only have a single 
+								<code class="prettyprint lang-xtend">javax.servlet.http.HttpServlet</code> containing the logic for routing implemented in Java. 
 								To define routes you'll have to create a file with the extension '.route'. The first part of a route defines the type (GET, POST, PUT, DELETE or HEAD) of the route and the pattern.
-								<code class="prettyprint lang-xtend">GET /client/foo/:id/bar/:rest* ...</code>
+								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* ...</code>
 								<ul>
 									<li>	<code class="prettyprint lang-xtend">:id</code> means a placeholder for a word
 									</li>
@@ -990,26 +996,25 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 								</ul>
 								
 								Then you have the possibility to define a condition like:
-								<code class="prettyprint lang-xtend">GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ...</code>
+								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ...</code>
 								Here you have access to id and rest statically typed to String. The servlet will provide the value of the placeholder or wildcard when the mapping takes place. 
 								An optional annotated Guice-key could be used after the condition or pattern to get an instance of that type/interface and trigger an operation. 
-								<code class="prettyprint lang-xtend">GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass-&gt;doSomething(Integer::parseInt(id))</code>
+								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass-&gt;doSomething(Integer::parseInt(id))</code>
 								You'll see that there is access to all features of the bound type/interface with access to the placeholders or wildcard values from the URL.
 								If you want to call static methods there is no need for a Guice-key. 
-								<code class="prettyprint lang-xtend">GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass::doSomethingStatic(id)</code>
+								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* when id == "42" and rest == "xtext/rocks" ActionClass::doSomethingStatic(id)</code>
 								In both cases you have the possibility to feed the methods with an expression.
 							</p>
 							<p>
-								If you have ever seen a HttpServlet you might know that there is exactly one method for each type (GET,
-								POST, ...). Within these methods we'll have to call our routing logic with access to the request and response. 
-								A route describes a pattern, a condition, a Guice-key and a call of an action. So a pattern should be translated to a field as regular expression. This helps to match the URL and extract the values out of
-								the given URL from the request. 
-								A condition should be a method with a boolean returntype where the request and the values of the variables from
-								the URL-pattern are handled in as parameters. 
+								To map that to Java we have to clarify what concepts we have and where we should hook in.
+								First of all a 
+								<code class="prettyprint lang-xtend">javax.servlet.http.HttpServlet</code> has exactly one method for each request type (GET,
+								POST, ...). Within these methods we'll have to call our routing logic. A route describes a pattern, a condition, a guice-key and a call of an action. So a pattern should be translated to a field as regular expression. This helps to match the URL and extract the values out of
+								the given URL from the request. A condition should be a method with a boolean returntype where the request and the values of the variables from the URL-pattern are handled in as parameters. 
 								The guice-key should be a field annotated with whatever is specified by
 								the user and @Inject to tell Guice to inject an implementation here. 
 								There is one more need for a method to wrap the action call with same parameters as the condition.
-								Now we have all stuff to fill in our logic inside of the global method of the HttpServelet. First of
+								Now we have everything to fill in our logic inside of the global method of the HttpServelet. First of
 								all we have to match the URL, extract the values for the variables and establish local variables for
 								that. If there is a condition we have to establish a guard for the action call. Only when the pattern
 								matches the URL and the condition is true the call should be triggered. Otherwise a following route should
@@ -1056,6 +1061,10 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</h2>
 							<p>
 								You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servelet-API on the class path of your project.
+								Import the projects into an Eclipse workspace and run the launch config
+								<strong>	Run (org.eclipse.xtext.httprouting)
+								</strong>. Now you may start with a new JavaProject or just import the project
+								org.eclipse.httprouting.example. You'll see that the Servelet-API ist already included in the example.
 							</p>
 							</section>
 							<!--  section -->
@@ -1070,14 +1079,13 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 								The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
 								predefined by 
 								<a href="http://www.eclipse.org/Xtext/#xbase">Xbase</a> plus support for Annotations.
-								<pre class="prettyprint lang-xtend linenums">
-grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</pre>
-								<pre class="prettyprint lang-xtend linenums">
+								<code class="prettyprint lang-xtext">grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</code>
+								<pre class="prettyprint lang-xtext linenums">
 Import:
 	'import' importedType=[types::JvmType|QualifiedName];</pre>
 								The Route DSL defines imports by using crossreferences. This makes it possible to use contentassist here
 								and it is clear that the imported type exist.
-								<pre class="prettyprint lang-xtend linenums">
+								<pre class="prettyprint lang-xtext linenums">
 Route:
 	type=Type url=URL condition=Condition? (key=Key call=RouteFeatureCall | call=XFeatureCall);
 	
@@ -1128,39 +1136,33 @@ Key:
 								
 								So lets concentrate on the things in the contentassist. The inferred methods and fields have syntetic names
 								and from the context of a condition or an action call we do not want to see the inferred things at all.
-								The other thing is in case of a Guice-Key we introduce a parameter with the name 'it'. This means that
+								So for that reason we have to customize the code and tweak the 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.html"><abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer">RouteJvmModelInferrer</abbr></a>
+								. All inferred fields and methods
+								that we don't wanna see in the contentassist are prefixed with an underscore. Now we have the possibility
+								to filter out proposals with this prefix in 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.html"><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a>
+								.
+								The other thing is that in case of a guice-Key we introduce a parameter with the name 'it'. This means that
 								all features of the type behind it are visible without writing it in front of the call. Good thing but
-								we do not want it as itself in the contentassist.
-								So for that reason we have to customize the code and tweak the inferrer. All inferred fields and methods
-								are prefixed with an underscore so that we can filter out proposals with this prefix in org.xtext.httprouting.ui.contentassist.RouteProposalProvider.
-								<pre class="prettyprint lang-xtend linenums">
-@Override
-protected Predicate&lt;IEObjectDescription&gt; getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
-	if (contentAssistContext.getPrefix().startsWith("_"))
-		return super.getFeatureDescriptionPredicate(contentAssistContext);
-	final Predicate&lt;IEObjectDescription&gt; delegate = super.getFeatureDescriptionPredicate(contentAssistContext);
-	return new Predicate&lt;IEObjectDescription&gt;() {
-		public boolean apply(IEObjectDescription input) {
-			return !input.getName().getFirstSegment().startsWith("_") && delegate.apply(input);
-		}
-	};
-}</pre>
+								we do not want 'it' as itself in the contentassist. Let's just filter that one out in 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.html"><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a>
+								.
 							</p>
 							<p>
-								To filter out 'it':
-								<pre class="prettyprint lang-xtend linenums">
-public void completeRouteFeatureCall_Feature(EObject model,
-		Assignment assignment, ContentAssistContext context,
-		ICompletionProposalAcceptor acceptor) {
-	
-	Function&lt;IEObjectDescription, ICompletionProposal&gt; proposalFactory = getProposalFactory(getFeatureCallRuleName(), context);
-	IScope scope = new FilteringScope(getScopeProvider().createSimpleFeatureCallScope(model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context.getResource(), false, -1), new Predicate&lt;IEObjectDescription&gt;() {
-		public boolean apply(IEObjectDescription input) {
-			return !input.getQualifiedName().equals(XbaseScopeProvider.IT);
-		}
-	});
-	getCrossReferenceProposalCreator().lookupCrossReference(scope, model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(context), proposalFactory);
-}</pre>
+								To tweak the outline for the routes you'll some customized labels in 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/labeling/RouteLabelProvider.html"><abbr title="org.xtext.httprouting.ui.labeling.RouteLabelProvider">RouteLabelProvider</abbr></a>
+								.
+								For some objects we do not wanna see a node in the outline at all so there is a need fo a custom 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/outline/RouteOutlineTreeProvider.html"><abbr title="org.xtext.httprouting.ui.outline.RouteOutlineTreeProvider">RouteOutlineTreeProvider</abbr></a>
+								.
+							</p>
+							<p>
+								To give the user feedback while the routes are defined we can establish validation. You'll find a validation
+								in 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/validation/RouteJavaValidator.html"><abbr title="org.xtext.httprouting.validation.RouteJavaValidator">RouteJavaValidator</abbr></a>
+								 where we raise an error when a placeholder
+								is defined after a wildcard in the URL.
 							</p>
 							</section>
 							</section>
@@ -1175,7 +1177,7 @@ public void completeRouteFeatureCall_Feature(EObject model,
 				<!-- chapter -->
 				<section id="templates" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									Templates
 							</h1>
@@ -1252,7 +1254,7 @@ public void completeRouteFeatureCall_Feature(EObject model,
 				<!-- chapter -->
 				<section id="guice" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									Guice Modules
 							</h1>
@@ -1329,7 +1331,7 @@ public void completeRouteFeatureCall_Feature(EObject model,
 				<!-- chapter -->
 				<section id="cradle" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									Cradle
 							</h1>
@@ -1406,7 +1408,7 @@ public void completeRouteFeatureCall_Feature(EObject model,
 				<!-- chapter -->
 				<section id="tortoise" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									Tortoise Shell
 							</h1>
@@ -1506,16 +1508,16 @@ end</pre>
 							</p>
 								<pre class="prettyprint lang-xtend linenums">
 class Tortoise {
-	double angle
-	double x
-	double y
-	@Property int delay = 200
+  double angle
+  double x
+  double y
+  @Property int delay = 200
 
-	boolean isPaint = true
-	@Property int lineWidth
-	@Property Color lineColor
+  boolean isPaint = true
+  @Property int lineWidth
+  @Property Color lineColor
 
-	List&lt;ITortoiseEvent$Listener&gt; listeners = newArrayList()
+  List&lt;ITortoiseEvent$Listener&gt; listeners = newArrayList()
 ...</pre>
 							<p>
 								We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
@@ -1599,7 +1601,7 @@ class Tortoise {
 							</p>
 							<p>
 								<div class="thumbnail">
-									<img src="images/Pythagoras.png" alt="">
+									<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example">
 								</div>
 							</p>
 							</section>
@@ -1641,22 +1643,22 @@ import "http://www.eclipse.org/xtext/xbase/Xbase"
 generate tortoiseShell "http://www.xtext.org/tortoiseshell/TortoiseShell"
 
 Program :
-	body=Body
-	subPrograms+=SubProgram*;
-	
+  body=Body
+  subPrograms+=SubProgram*;
+  
 SubProgram:
-	'sub' name=ValidID
-	(parameters += FullJvmFormalParameter)*
-	body=Body;
+  'sub' name=ValidID
+  (parameters += FullJvmFormalParameter)*
+  body=Body;
 
 Body returns XBlockExpression:
-	{XBlockExpression}
-	'begin'
-	(expressions+=XExpressionInsideBlock ';'?)*
-	'end';
-	
+  {XBlockExpression}
+  'begin'
+  (expressions+=XExpressionInsideBlock ';'?)*
+  'end';
+  
 Executable:
-	Program | SubProgram;</pre>
+  Program | SubProgram;</pre>
 							</section>
 							<!-- subsection -->
 							<section id="tortoise_inferrer" style="padding-top: 68px; margin-top: -68px;">
@@ -1676,23 +1678,23 @@ Executable:
 							<p>
 								<pre class="prettyprint lang-xtend linenums">
 class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
-	public static val INFERRED_CLASS_NAME = 'MyTortoiseProgram'
-	@Inject extension JvmTypesBuilder
-   	def dispatch void infer(Program program, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater[
-   			superTypes += program.newTypeRef(typeof(Tortoise))
-   			if(program.body != null)
-   				members += program.toMethod("main", program.newTypeRef(Void::TYPE)) [
-   					body = program.body
-   				]
-   			for(subProgram: program.subPrograms)
-   				members += subProgram.toMethod(subProgram.name, program.newTypeRef(Void::TYPE)) [
-		   			for(functionParameter: subProgram.parameters)
-		   				parameters += functionParameter.toParameter(functionParameter.name, functionParameter.parameterType)
-   					body = subProgram.body
-   				]
-   		]
-   	}
+  public static val INFERRED_CLASS_NAME = 'MyTortoiseProgram'
+  @Inject extension JvmTypesBuilder
+     def dispatch void infer(Program program, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+       acceptor.accept(program.toClass(INFERRED_CLASS_NAME)).initializeLater[
+         superTypes += program.newTypeRef(typeof(Tortoise))
+         if(program.body != null)
+           members += program.toMethod("main", program.newTypeRef(Void::TYPE)) [
+             body = program.body
+           ]
+         for(subProgram: program.subPrograms)
+           members += subProgram.toMethod(subProgram.name, program.newTypeRef(Void::TYPE)) [
+             for(functionParameter: subProgram.parameters)
+               parameters += functionParameter.toParameter(functionParameter.name, functionParameter.parameterType)
+             body = subProgram.body
+           ]
+       ]
+     }
 }</pre>
 							</p>
 							</section>
@@ -1702,7 +1704,8 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 							</h3>
 							<p>
 								The Xbase languge library does not only provide a compiler that generates Java code, but also an 
-								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">org.eclipse.xtext.xdoc.xdoc.impl.TextOrMarkupImpl@563b100c</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">	interpreter
+								</a>
 								. This has been adapted to
 								to execute our 
 								<strong>	Programs
@@ -1729,25 +1732,25 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 @Inject extension IJvmModelAssociations
  
 override protected invokeOperation(JvmOperation operation, Object receiver, List&lt;Object&gt; argumentValues) {
-	val executable = operation.sourceElements.head
-	if(executable instanceof Executable) {
-		val context = createContext
-		context.newValue(XbaseScopeProvider::THIS, tortoise)
-		var index = 0
-		for(param: operation.parameters) {
-			context.newValue(QualifiedName::create(param.name), argumentValues.get(index))
-			index = index + 1	
-		}
-		evaluate((executable as Executable).body, context, CancelIndicator::NullImpl)
-	} else {
-		super.invokeOperation(operation, receiver, argumentValues)
-	}
+  val executable = operation.sourceElements.head
+  if(executable instanceof Executable) {
+    val context = createContext
+    context.newValue(XbaseScopeProvider::THIS, tortoise)
+    var index = 0
+    for(param: operation.parameters) {
+      context.newValue(QualifiedName::create(param.name), argumentValues.get(index))
+      index = index + 1  
+    }
+    evaluate((executable as Executable).body, context, CancelIndicator::NullImpl)
+  } else {
+    super.invokeOperation(operation, receiver, argumentValues)
+  }
 }</pre>
 							<p>
 								One thing you have to know about the Java inferrence is that when creating Java elements using the
 								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a>
 								, the infrastructure stores the information which 
-								elements have been inferred from wich source elements. To navigate these traces, we use the the Xbase service 
+								elements have been inferred from which source elements. To navigate these traces, we use the the Xbase service
 								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a>
 								. So to detect wheter a 
 								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a>
@@ -1764,16 +1767,16 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 							</p>
 								<pre class="prettyprint lang-xtend linenums">
 override run(Tortoise tortoise, EObject program, int stopAtLine) {
-	if(tortoise != null && program != null) {
-		this.tortoise = tortoise
-		this.stopAtLine = stopAtLine
-		try {
-			program.jvmElements.filter(typeof(JvmOperation)).head
-				?.invokeOperation(null, Collections::emptyList)
-		} catch (StopLineReachedException exc) {
-			// ignore
-		}
-	}
+  if(tortoise != null && program != null) {
+    this.tortoise = tortoise
+    this.stopAtLine = stopAtLine
+    try {
+      program.jvmElements.filter(typeof(JvmOperation)).head
+        ?.invokeOperation(null, Collections::emptyList)
+    } catch (StopLineReachedException exc) {
+      // ignore
+    }
+  }
 }</pre>
 							<p>
 								The 
@@ -1787,10 +1790,10 @@ override run(Tortoise tortoise, EObject program, int stopAtLine) {
 							</p>
 								<pre class="prettyprint lang-xtend linenums">
 override protected internalEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) {
-	val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
-	if(line-1 == stopAtLine)
-		throw new StopLineReachedException
-	super.internalEvaluate(expression, context, indicator)
+  val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
+  if(line-1 == stopAtLine)
+    throw new StopLineReachedException
+  super.internalEvaluate(expression, context, indicator)
 }</pre>
 							</section>
 							<!-- subsection -->
@@ -1832,7 +1835,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 				<!-- chapter -->
 				<section id="tba" style="padding-top: 68px; margin-top: -68px;">
 					<div class="row">
-						<div class="span8 offset3">
+						<div class="span10 offset1">
 							<h1>
 									T.B.A.
 							</h1>
