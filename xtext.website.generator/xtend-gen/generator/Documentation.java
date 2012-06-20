@@ -148,11 +148,12 @@ public class Documentation extends AbstractWebsite {
     _builder.append("\t");
     _builder.append("</div> <!-- /inner -->");
     _builder.newLine();
+    _builder.append("\t");
+    CharSequence _menu = this.menu(this.doc);
+    _builder.append(_menu, "	");
+    _builder.newLineIfNotEmpty();
     _builder.append("</div>");
     _builder.newLine();
-    CharSequence _menu = this.menu(this.doc);
-    _builder.append(_menu, "");
-    _builder.newLineIfNotEmpty();
     _builder.append("<div id=\"page\">  ");
     _builder.newLine();
     _builder.append("\t");
@@ -172,22 +173,19 @@ public class Documentation extends AbstractWebsite {
   
   public CharSequence menu(final Document doc) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<div id=\"outline-container\">");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<ul id=\"outline\">");
+    _builder.append("<ul id=\"nav-outline\">");
     _builder.newLine();
     {
       EList<Chapter> _chapters = doc.getChapters();
       for(final Chapter chapter : _chapters) {
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("<li><a href=\"#");
         String _href = this._htmlExtensions.href(chapter);
-        _builder.append(_href, "		");
+        _builder.append(_href, "	");
         _builder.append("\">");
         TextOrMarkup _title = chapter.getTitle();
         CharSequence _html = this._htmlExtensions.toHtml(_title);
-        _builder.append(_html, "		");
+        _builder.append(_html, "	");
         _builder.append("</a>");
         _builder.newLineIfNotEmpty();
         {
@@ -196,24 +194,24 @@ public class Documentation extends AbstractWebsite {
           for(final Section section : _subSections) {
             if (!_hasElements) {
               _hasElements = true;
-              _builder.append("<ul>", "		");
+              _builder.append("<ul>", "	");
             }
-            _builder.append("\t\t");
+            _builder.append("\t");
             _builder.append("<li><a href=\"#");
             String _href_1 = this._htmlExtensions.href(section);
-            _builder.append(_href_1, "		");
+            _builder.append(_href_1, "	");
             _builder.append("\">");
             TextOrMarkup _title_1 = section.getTitle();
             CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
-            _builder.append(_html_1, "		");
+            _builder.append(_html_1, "	");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
           }
           if (_hasElements) {
-            _builder.append("</ul>", "		");
+            _builder.append("</ul>", "	");
           }
         }
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("</li>");
         _builder.newLine();
       }
@@ -221,27 +219,27 @@ public class Documentation extends AbstractWebsite {
     {
       EList<Part> _parts = doc.getParts();
       for(final Part part : _parts) {
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("<li>&nbsp;</li>");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("<li>");
+        _builder.append("\t");
+        _builder.append("<li style=\"color : #333;\">");
         TextOrMarkup _title_2 = part.getTitle();
         CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
-        _builder.append(_html_2, "		");
+        _builder.append(_html_2, "	");
         _builder.append("</li>");
         _builder.newLineIfNotEmpty();
         {
           EList<Chapter> _chapters_1 = part.getChapters();
           for(final Chapter chapter_1 : _chapters_1) {
-            _builder.append("\t\t");
+            _builder.append("\t");
             _builder.append("<li><a href=\"#");
             String _href_2 = this._htmlExtensions.href(chapter_1);
-            _builder.append(_href_2, "		");
+            _builder.append(_href_2, "	");
             _builder.append("\">");
             TextOrMarkup _title_3 = chapter_1.getTitle();
             CharSequence _html_3 = this._htmlExtensions.toHtml(_title_3);
-            _builder.append(_html_3, "		");
+            _builder.append(_html_3, "	");
             _builder.append("</a>");
             _builder.newLineIfNotEmpty();
             {
@@ -250,34 +248,31 @@ public class Documentation extends AbstractWebsite {
               for(final Section section_1 : _subSections_1) {
                 if (!_hasElements_1) {
                   _hasElements_1 = true;
-                  _builder.append("<ul>", "		");
+                  _builder.append("<ul>", "	");
                 }
-                _builder.append("\t\t");
+                _builder.append("\t");
                 _builder.append("<li><a href=\"#");
                 String _href_3 = this._htmlExtensions.href(section_1);
-                _builder.append(_href_3, "		");
+                _builder.append(_href_3, "	");
                 _builder.append("\">");
                 TextOrMarkup _title_4 = section_1.getTitle();
                 CharSequence _html_4 = this._htmlExtensions.toHtml(_title_4);
-                _builder.append(_html_4, "		");
+                _builder.append(_html_4, "	");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();
               }
               if (_hasElements_1) {
-                _builder.append("</ul>", "		");
+                _builder.append("</ul>", "	");
               }
             }
-            _builder.append("\t\t");
+            _builder.append("\t");
             _builder.append("</li>");
             _builder.newLine();
           }
         }
       }
     }
-    _builder.append("\t");
     _builder.append("</ul>");
-    _builder.newLine();
-    _builder.append("</div>");
     _builder.newLine();
     return _builder;
   }

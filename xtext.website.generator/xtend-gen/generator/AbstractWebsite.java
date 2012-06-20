@@ -224,7 +224,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("$(function() {      ");
     _builder.newLine();
     _builder.append("    \t");
-    _builder.append("$(\'#outline > li > a\').live(\'click\', function() {        ");
+    _builder.append("$(\'#nav-outline > li > a\').live(\'click\', function() {        ");
     _builder.newLine();
     _builder.append("    \t\t");
     _builder.append("$(this).parent().find(\'ul\').slideToggle();      ");

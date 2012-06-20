@@ -75,8 +75,8 @@ class Documentation extends AbstractWebsite {
 					<div class="page-heading"><h1>Documentation</h1></div>
 				</div> <!-- /.container -->
 			</div> <!-- /inner -->
+			«doc.menu»
 		</div>
-		«doc.menu»
 		<div id="page">  
 			<div class="inner">
 				«doc.body»
@@ -85,28 +85,26 @@ class Documentation extends AbstractWebsite {
 	'''
 	
 	def menu(Document doc) '''
-		<div id="outline-container">
-			<ul id="outline">
-				«FOR chapter : doc.chapters»
+		<ul id="nav-outline">
+			«FOR chapter : doc.chapters»
+				<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
+				«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
+					<li><a href="#«section.href»">«section.title.toHtml»</a></li>
+				«ENDFOR»
+				</li>
+			«ENDFOR»
+			«FOR part : doc.parts»
+				<li>&nbsp;</li>
+				<li style="color : #333;">«part.title.toHtml»</li>
+				«FOR chapter : part.chapters»
 					<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
 					«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
 						<li><a href="#«section.href»">«section.title.toHtml»</a></li>
 					«ENDFOR»
 					</li>
 				«ENDFOR»
-				«FOR part : doc.parts»
-					<li>&nbsp;</li>
-					<li>«part.title.toHtml»</li>
-					«FOR chapter : part.chapters»
-						<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
-						«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-							<li><a href="#«section.href»">«section.title.toHtml»</a></li>
-						«ENDFOR»
-						</li>
-					«ENDFOR»
-				«ENDFOR»
-			</ul>
-		</div>
+			«ENDFOR»
+		</ul>
 	'''
 	
 	def protected getDocument() {

@@ -97,7 +97,7 @@ abstract class AbstractWebsite implements Resource {
 		            });
 		            
 		        $(function() {      
-		    	$('#outline > li > a').live('click', function() {        
+		    	$('#nav-outline > li > a').live('click', function() {        
 		    		$(this).parent().find('ul').slideToggle();      
 		    	});    
 		        });
