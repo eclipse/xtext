@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 
 /**
@@ -38,6 +39,10 @@ public abstract class LightweightTypeReference {
 	
 	protected TypesFactory getTypesFactory() {
 		return getOwner().getServices().getTypesFactory();
+	}
+	
+	protected CommonTypeComputationServices getServices() {
+		return getOwner().getServices();
 	}
 	
 	protected boolean isValidInContext(TypeReferenceOwner owner) {
