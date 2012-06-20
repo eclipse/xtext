@@ -3,9 +3,8 @@ package org.eclipse.xtext.xbase.junit.typesystem;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.internal.BaseUnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
 
 /**
@@ -13,7 +12,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
  */
 @NonNullByDefault
 @SuppressWarnings("all")
-public class PublicResolvedTypes extends ResolvedTypes {
+public class PublicResolvedTypes extends RootResolvedTypes {
   public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {
     super(resolver);
   }
@@ -23,8 +22,8 @@ public class PublicResolvedTypes extends ResolvedTypes {
     return _createUnboundTypeParameter;
   }
   
-  public BaseUnboundTypeParameter getUnboundTypeParameter(final Object handle) {
-    BaseUnboundTypeParameter _unboundTypeParameter = super.getUnboundTypeParameter(handle);
+  public RootUnboundTypeParameter getUnboundTypeParameter(final Object handle) {
+    RootUnboundTypeParameter _unboundTypeParameter = super.getUnboundTypeParameter(handle);
     return _unboundTypeParameter;
   }
 }

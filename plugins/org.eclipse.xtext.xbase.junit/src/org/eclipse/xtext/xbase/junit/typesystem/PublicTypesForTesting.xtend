@@ -14,12 +14,13 @@ import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
 import org.eclipse.jdt.annotation.NonNullByDefault
+import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-class PublicResolvedTypes extends ResolvedTypes {
+class PublicResolvedTypes extends RootResolvedTypes {
 	new(DefaultReentrantTypeResolver resolver) {
 		super(resolver)
 	}

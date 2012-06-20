@@ -263,12 +263,12 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		if (description instanceof BucketedEObjectDescription) {
 			BucketedEObjectDescription casted = (BucketedEObjectDescription) description;
 			if (casted.getReceiverType() != null) {
-//				final StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(demandComputedTypes);
+//				final ExpressionAwareStackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(demandComputedTypes, featureCall);
 				ExpressionTypeComputationState state = createExpressionComputationState(featureCall, demandComputedTypes);
 				return new FeatureLinkingCandidate(featureCall, description, state);
 			}
 		}
-		final StackedResolvedTypes resolvedTypes = new StackedResolvedTypes(this.resolvedTypes);
+		final ExpressionAwareStackedResolvedTypes resolvedTypes = new ExpressionAwareStackedResolvedTypes(this.resolvedTypes, featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		return new FeatureLinkingCandidate(featureCall, description, state);
 	}

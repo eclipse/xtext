@@ -38,10 +38,10 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 			// TODO add error information because we could not compute a type for 'current'
 			super.mergeInto(parent);
 		} else {
+			mergeTypeParametersIntoParent(parent);
 			mergeExpressionTypes(parent, result);
 			parent.ensureTypesMapExists().putAll(ensureTypesMapExists());
 			parent.ensureLinkingMapExists().putAll(ensureLinkingMapExists());
-			mergeTypeParametersIntoParent(parent);
 		}
 	}
 	

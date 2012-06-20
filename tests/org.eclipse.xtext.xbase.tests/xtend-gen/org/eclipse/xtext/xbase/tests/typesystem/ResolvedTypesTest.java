@@ -8,7 +8,6 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typesystem.internal.BaseUnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
 import org.junit.Assert;
 import org.junit.Before;
@@ -71,7 +70,7 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
     final RootUnboundTypeParameter unbound = _testMe.createUnboundTypeParameter(_createXFeatureCall, _createJvmTypeParameter);
     PublicResolvedTypes _testMe_1 = this.getTestMe();
     Object _handle = unbound.getHandle();
-    BaseUnboundTypeParameter _unboundTypeParameter = _testMe_1.getUnboundTypeParameter(_handle);
+    RootUnboundTypeParameter _unboundTypeParameter = _testMe_1.getUnboundTypeParameter(_handle);
     Assert.assertSame(unbound, _unboundTypeParameter);
   }
   

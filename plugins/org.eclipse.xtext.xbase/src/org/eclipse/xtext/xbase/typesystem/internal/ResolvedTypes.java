@@ -67,7 +67,7 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc
  */
-public class ResolvedTypes implements IResolvedTypes {
+public abstract class ResolvedTypes implements IResolvedTypes {
 
 	private final DefaultReentrantTypeResolver resolver;
 	
@@ -265,6 +265,13 @@ public class ResolvedTypes implements IResolvedTypes {
 			public Boolean doVisitComputedTypeReference(XComputedTypeReference reference) {
 				if (reference.getTypeProvider() instanceof UnboundTypeParameter) {
 					BaseUnboundTypeParameter unboundTypeParameter = (BaseUnboundTypeParameter) reference.getTypeProvider();
+					if (unboundTypeParameters != null) {
+						if (unboundTypeParameters.containsKey(unboundTypeParameter.getHandle())) {
+							if (!(unboundTypeParameter instanceof RootUnboundTypeParameter)) {
+								throw new IllegalStateException("unboundTypeParameter must be a RootUnboundTypeParameter");
+							}
+						}
+					}
 					getUnboundTypeParameter(unboundTypeParameter.getHandle());
 					for(Object other: unboundTypeParameter.getEquallyBoundHandles())
 						getUnboundTypeParameter(other);
@@ -295,6 +302,8 @@ public class ResolvedTypes implements IResolvedTypes {
 			}
 		};
 		asserter.visit(type);
+		if (expectation != null)
+			asserter.visit(expectation.getExpectedType());
 		
 //		AbstractTypeComputationState state = expectation.getState();
 		// expectation is type parameter - type is actual - bind type
@@ -365,9 +374,13 @@ public class ResolvedTypes implements IResolvedTypes {
 	
 	protected Multimap<XExpression, TypeData> ensureExpressionTypesMapExists() {
 		if (expressionTypes == null) {
-			expressionTypes = LinkedHashMultimap.create(2, 2);
+			expressionTypes = createExpressionTypesMap();
 		}
 		return expressionTypes;
+	}
+
+	protected Multimap<XExpression, TypeData> createExpressionTypesMap() {
+		return LinkedHashMultimap.create(2, 2);
 	}
 	
 	protected Map<XExpression, ILinkingCandidate<?>> ensureLinkingMapExists() {

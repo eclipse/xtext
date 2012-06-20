@@ -134,7 +134,6 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		if (boundTo != null) {
 			throw new IllegalStateException("Type parameter was already bound. No more hints may be accepted.");
 		}
-		
 		if (boundArgument.getSource() == BoundTypeArgumentSource.EXPLICIT) {
 			boundTo = new MergedBoundTypeArgument(boundArgument.getTypeReference(), boundArgument.getActualVariance());
 		} else {
