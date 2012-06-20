@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Seven Languages Xdoc
+Bundle-SymbolicName: org.xtext.sevenlanguages.doc.xdoc
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Eclipse Modeing Project
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.orbit.mongodb;bundle-version="2.6.3",
+ org.xtext.mongobeans;bundle-version="1.0.0",
+ org.xtext.mongobeans.runtime;bundle-version="1.0.0",
+ org.xtext.mongobeans.ui;bundle-version="1.0.0",
+ org.xtext.mongobeans.example;bundle-version="1.0.0",
+ org.xtext.tortoiseshell.runtime;bundle-version="1.0.0",
+ org.xtext.tortoiseshell;bundle-version="1.0.0"
+
+
