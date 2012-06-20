@@ -62,8 +62,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
-//	private Map<JvmTypeParameter, JvmTypeReference> typeParameterMapping;
-	
 	@Override
 	public void initializeFrom(@NonNull EObject root) {
 		if (!(root instanceof JvmType)) {
@@ -195,8 +193,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, type, superType);
 		if (superType != null) {
 			childResolvedTypes.reassignType(superType.getType(), superType);
-			// We use reassignType to make sure that the following works
-			/*
+			/* 
+			 * We use reassignType to make sure that the following works:
+			 *
 			 * StringList extends AbstractList<String> {
 			 *   NestedIntList extends AbstractList<Integer> {
 			 *   }
