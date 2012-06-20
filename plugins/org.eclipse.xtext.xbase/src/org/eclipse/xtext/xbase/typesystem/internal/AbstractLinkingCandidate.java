@@ -280,6 +280,8 @@ public abstract class AbstractLinkingCandidate<LinkingCandidate extends ILinking
 		// TODO this(..) and super(..) for generic types
 		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 		if (!typeParameters.isEmpty()) {
+			// TODO actualType -(hint for)-> declared type == inferred
+			// declared type -(hint for)-> actual type == expected
 			ActualTypeArgumentCollector implementation = state.createTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.INFERRED);
 //			ActualTypeArgumentCollector implementation = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, BoundTypeArgumentSource.EXPECTATION, getState().getServices()) {
 //				@Override

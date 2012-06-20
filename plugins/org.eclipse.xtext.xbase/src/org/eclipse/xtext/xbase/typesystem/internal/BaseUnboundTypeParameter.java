@@ -50,9 +50,20 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	
 	@Override
 	protected JvmTypeReference doGetTypeReference() {
+		bindIfPossible();
 		if (boundTo != null) {
 			return boundTo.getTypeReference();
 		}
+		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
+				Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), getServices());
+		JvmTypeReference substitute = unboundSubstitutor.substitute(getServices().getTypeReferences().createTypeRef(getTypeParameter()));
+		setBoundTo(new MergedBoundTypeArgument(substitute, VarianceInfo.INVARIANT /* TODO which variance info to use? */));
+		return getBoundTo().getTypeReference();
+	}
+
+	protected void bindIfPossible() {
+		if (boundTo != null)
+			return;
 		List<BoundTypeArgument> allHints = getAllHints();
 		if (!allHints.isEmpty()) {
 			List<BoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
@@ -92,14 +103,8 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 					}
 				}
 				setBoundTo(typeArgument);
-				return getBoundTo().getTypeReference();
 			}
 		}
-		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
-				Collections.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), getServices());
-		JvmTypeReference substitute = unboundSubstitutor.substitute(getServices().getTypeReferences().createTypeRef(getTypeParameter()));
-		setBoundTo(new MergedBoundTypeArgument(substitute, VarianceInfo.INVARIANT /* TODO which variance info to use? */));
-		return getBoundTo().getTypeReference();
 	}
 	
 	protected CommonTypeComputationServices getServices() {
@@ -119,7 +124,7 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 	}
 	
 	protected void setBoundTo(MergedBoundTypeArgument boundTo) {
-		if (this.boundTo != null)
+		if (this.boundTo != null && this.boundTo != boundTo)
 			throw new IllegalStateException("Cannot resolve twice");
 		this.boundTo = boundTo;
 	}
@@ -198,5 +203,4 @@ public abstract class BaseUnboundTypeParameter extends UnboundTypeParameter {
 		return builder.toString();
 	}
 
-	
 }
