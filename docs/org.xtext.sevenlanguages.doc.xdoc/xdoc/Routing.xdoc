@@ -38,7 +38,7 @@ the given URL from the request. A condition should be a method with a boolean re
 The guice-key should be a field annotated with whatever is specified by
 the user and @Inject to tell Guice to inject an implementation here. 
 There is one more need for a method to wrap the action call with same parameters as the condition.
-Now we have everything to fill in our logic inside of the global method of the HttpServelet. First of
+Now we have everything to fill in our logic inside of the global method of the HttpServlet. First of
 all we have to match the URL, extract the values for the variables and establish local variables for
 that. If there is a condition we have to establish a guard for the action call. Only when the pattern
 matches the URL and the condition is true the call should be triggered. Otherwise a following route should
@@ -56,10 +56,10 @@ tr[td[Hardest Part]td[Handle regular expressions :-)]]
 
 section:routing_running[Running the Example]
 
-You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servelet-API on the class path of your project.
+You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servlet-API on the class path of your project.
 Import the projects into an Eclipse workspace and run the launch config
 e[Run (org.eclipse.xtext.httprouting)]. Now you may start with a new JavaProject or just import the project
-org.eclipse.httprouting.example. You'll see that the Servelet-API ist already included in the example.
+org.eclipse.httprouting.example. You'll see that the Servlet-API ist already included in the example.
 
 section:routing_details[The Solution in Detail]
 
@@ -103,7 +103,378 @@ compare XFeatureCall and RouteFeatureCall with each other.
 
 section2:routing_inferrer[Translation to Java]
 
+For each e[RouteFile], we create a Java class extending the class codeRef[javax.servlet.http.HttpServlet].
+The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
 
+table[
+  tr[
+    td[DSL]
+    td[code[routing][]]]
+  tr[
+    td[Java]
+    td[code[Java][
+package org.xtext.httpRouting;
+...
+public class HttpMapperServlet extends HttpServlet {
+  private final static long serialVersionUID = 1L; ...]]]
+]
+
+The inferrer code responsible for this section looks like this:
+
+code[Xtend][
+@Inject extension JvmTypesBuilder
+...
+def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
+			.initializeLater(\[
+				superTypes+= model.newTypeRef("javax.servlet.http.HttpServlet")
+				//private static final long serialVersionUID = 1L;
+				members+= model.toField("serialVersionUID", model.newTypeRef("long"))\[
+					setStatic(true)
+					final = true
+					setInitializer(\[
+						append('''1L''')
+					\])
+				\]
+... // calling various methods to create Java members with from the Routes
+         \])
+}
+]
+
+For each Route a URL-pattern should end in a compiled regular expression pattern stored in a field.
+
+table[
+  tr[
+    td[DSL]
+    td[code[routing][GET /client/foo/:id]]]
+  tr[
+    td[Java]
+    td[code[Java][
+private static Pattern pattern0 = Pattern.compile("/client/foo/(\\w+)");
+]]]
+]
+
+The inferrer code responsible for this section looks like this:
+
+code[Xtend][
+@Inject extension JvmTypesBuilder
+...
+def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
+			.initializeLater(\[
+			...
+		var i = 0
+		val routes = model.routes
+		for(route : routes){
+			if(route.url != null){
+				...
+				// Field for pattern
+				val patternField = route.url.toField("_pattern" + i , model.newTypeRef(typeof(Pattern)))\[
+					setStatic(true)
+					setInitializer(\[append('''Pattern.compile("«getRegExPattern(NodeModelUtils::getNode(route.url).text.trim,route.url.variables)»")''')\])
+				\]
+				members+= patternField
+			}
+			i = i + 1;
+		}
+		... //
+         \])
+}
+...
+def getRegExPattern(String originalPattern, List<Variable> variables) {
+	var pattern = originalPattern
+	for(variable : variables){
+		if(variable.wildcard)
+			pattern = pattern.replaceAll("(:" + variable.name + "\\*)", "(.+)")
+		else
+			pattern = originalPattern.replaceAll("(:" + variable.name + ")", "(\\\\\\\\w+)")
+	}
+	pattern
+}
+...
+]
+
+As we know the name of each variable we can replace the variable from the URL with a regualr expression
+with the same meaning to match the URL that has be routed. As we do not have a element in our model where
+the complete URL-pattern is stored we have to use the NodeModel to get the text behind the URL-pattern.
+
+table[
+  tr[
+    td[DSL]
+    td[code[routing][GET /client/foo/:id when id=='42']]]
+  tr[
+    td[Java]
+    td[code[Java][
+ public boolean doGet0Condition(final HttpServletRequest request, final String id) {
+    boolean _equals = Objects.equal(id, "42");
+    return _equals;
+  }
+]]]
+]
+
+For each Route a condition should end in a method with a boolean return type. Each variable value should
+be handled in as a parameter. Same is true for the codeRef[javax.servlet.http.HttpServletRequest].
+
+code[Xtend][
+@Inject extension JvmTypesBuilder
+...
+private static String REQUEST = "javax.servlet.http.HttpServletRequest"
+...
+
+def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
+			.initializeLater(\[
+			...
+		var i = 0
+		val routes = model.routes
+		for(route : routes){
+			if(route.url != null){
+				...
+				val name = route.nameOfRouteMethod(i)
+				...
+				// Method for condition
+				if(route.condition != null && route.condition.expression != null){
+					members+= route.toMethod(name + "Condition",model.newTypeRef(Boolean::TYPE))\[
+						parameters += model.toParameter("request",model.newTypeRef(REQUEST))
+						for(variable : route.url.variables){
+							parameters += variable.toParameter(variable.name, model.newTypeRef(typeof(String)))
+						}
+						body = route.condition.expression
+					\]
+				}
+				...
+			}
+			i = i + 1;
+		}
+		... //
+         \])
+}
+
+def nameOfRouteMethod(Route route, int i) {
+		"_do" + route.type.literal.toLowerCase.toFirstUpper + i
+	}
+]
+
+The expression defined in the condition ends up in the body of the new create method. That implies that
+all things sourrounding the method (fields, methods and parameters) are accessable within the expression.
+Isn't that cool. ;-)
+
+table[
+  tr[
+    td[DSL]
+    td[code[routing][
+import com.google.inject.name.Named
+import org.xtext.example.actionclasses.ActionClass
+
+GET /client/foo/:id  when id=="42" @Named("ActionClassName") ActionClass]]]
+  tr[
+    td[Java]
+    td[code[Java][
+@Inject
+@Named(value = "ActionClassName")
+private ActionClass key0;
+]]]
+]
+
+For each Route a guice-key should end in a field with the defined annotations on it plus @Inject. As a guice-key is optional we have to make sure that route has a key. Now we create a field and add the
+annotations to it.
+
+code[Xtend][
+@Inject extension JvmTypesBuilder
+...
+private static String REQUEST = "javax.servlet.http.HttpServletRequest"
+...
+def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
+			.initializeLater(\[
+			...
+		var i = 0
+		val routes = model.routes
+		for(route : routes){
+			if(route.url != null){
+				...
+				// Field for guice-key
+				if(route.hasValidKey){
+					val keyField = route.key.toField("_key" + i, route.key.type)
+					keyField.addInjectAnnotation(model)
+					route.key.annotations.translateAnnotationsTo(keyField)
+					members+= keyField
+				}
+				...
+			}
+			i = i + 1;
+		}
+		...
+         \])
+}
+...
+def hasValidKey(Route route){
+	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
+}
+
+def addInjectAnnotation(JvmAnnotationTarget target, EObject context){
+	val injectAnnotation = context.newTypeRef(typeof(Inject))
+	if(injectAnnotation != null && !(injectAnnotation.type instanceof JvmVoid)){
+		val inject = typesFactory.createJvmAnnotationReference();
+		inject.setAnnotation(injectAnnotation.type as JvmAnnotationType)
+		target.annotations += inject
+	}
+}
+]
+
+table[
+  tr[
+    td[DSL]
+    td[code[routing][
+import com.google.inject.name.Named
+import org.xtext.example.actionclasses.ActionClass
+
+GET /client/foo/:id  when id=="42" @Named("ActionClassName") ActionClass->doSomething(Integer::parseInt(id))]]]
+  tr[
+    td[Java]
+    td[code[Java][
+public boolean doGet0Condition(final HttpServletRequest request, final String id) {
+    boolean _equals = Objects.equal(id, "42");
+    return _equals;
+}
+]]]
+]
+
+For each Route an action call should end in a method where the guice-key (if there is one) and the variables
+should be handle in as parameters. The only special thing here is that the parameter that represents
+the guice-key is named 'it'. That implies that 'it' becomes the implicite reciever and the features of
+the type behind the guice-key are accessable without pointing out that 'it' is the reciever. Wow that's
+so easy...
+code[Xtend][
+@Inject extension JvmTypesBuilder
+...
+private static String REQUEST = "javax.servlet.http.HttpServletRequest"
+...
+def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
+			.initializeLater(\[
+			...
+		var i = 0
+		val routes = model.routes
+		for(route : routes){
+			if(route.url != null){
+				// Method for action call
+				val name = route.nameOfRouteMethod(i)
+				members += route.toMethod(name, model.newTypeRef(Void::TYPE))\[
+				documentation = route.documentation
+					if(route.hasValidKey)
+						parameters+=route.key.toParameter("it", route.key.type)
+					parameters += model.toParameter("request",model.newTypeRef(REQUEST))
+					for(variable : route.url.variables){
+							parameters += variable.toParameter(variable.name, model.newTypeRef(typeof(String)))
+					}
+					body = route.call
+				\]
+				...
+			}
+			i = i + 1;
+		}
+		... //
+         \])
+  }
+...
+def hasValidKey(Route route){
+	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
+}
+]
+
+
+table[
+  tr[
+    td[DSL]
+    td[code[routing][
+import com.google.inject.name.Named
+import org.xtext.example.actionclasses.ActionClass
+
+GET /client/foo/:id  when id=="42" @Named("ActionClassName") ActionClass->doSomething(Integer::parseInt(id))]]]
+  tr[
+    td[Java]
+    td[code[Java][
+public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+	String url =  request.getRequestURI();
+	Matcher matcher0 = pattern0.matcher(url);
+	if(matcher0.find()){
+			String id =matcher0.group(1);
+			if(doGet0Condition(request, id))
+			doGet0(key0,request, id);
+    }
+}
+]]]
+]
+
+Now we have to put our logic in the global methods of codeRef[javax.servlet.http.HttpServlet]. First
+of all we have to establish several methods for the corresponding request types. As an example for GET
+the method code[Java][public void doGet(final HttpServletRequest request, final HttpServletResponse response)]
+is responsible to handle such requests. So we have two challanges: estalish a method for each request
+type and put the logic in there for the routes that fits for that type.
+Inside of the method we'll have to match the URL from the request to the pattern and extract the values
+for the variables from the URL-pattern. Then we'll have to establish a guard to respect the condition.
+After that we'll finally call the action with the given values of the variables.
+
+code[Xtend][
+@Inject extension JvmTypesBuilder
+...
+private static String REQUEST = "javax.servlet.http.HttpServletRequest"
+...
+def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
+		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
+			.initializeLater(\[
+			...
+				members+= createMethod("doGet", model, routes,Type::GET)
+				members+= createMethod("doPost", model, routes,Type::POST)
+				members+= createMethod("doPut", model, routes,Type::PUT)
+				members+= createMethod("doDelete", model, routes,Type::DELETE)
+				members+= createMethod("doHead", model, routes,Type::HEAD)
+			\])
+}
+	def createMethod(String name, EObject element, Iterable<Route> routes, Type filterType){
+		element.toMethod(name,element.newTypeRef(Void::TYPE))\[
+			parameters += element.toParameter("request",element.newTypeRef(REQUEST))
+			parameters += element.toParameter("response",element.newTypeRef("javax.servlet.http.HttpServletResponse"))
+			body = \[
+				var x = 0
+				if(routes.exists(e | e.type== filterType))
+					append('''String url =  request.getRequestURI();
+					''')
+				for(route : routes){
+					if(route.type == filterType)
+						if(route.url != null){
+							append(element.newTypeRef(typeof(Matcher)).type).append(''' _matcher«x» = _pattern«x».matcher(url);
+							''')
+							val variables = route.url.variables
+							    append('''if(_matcher«x».find()){
+								''')
+							for( variable : variables){
+									append('''		String «variable.name» = _matcher«x».group(«variables.indexOf(variable) + 1»);
+									''')
+								}
+								if(route.condition != null){
+									append('''		if(«route.nameOfRouteMethod(x)»Condition(request''')
+									append('''«FOR v : route.url.variables BEFORE ", " SEPARATOR ", "»«v.name»«ENDFOR »''')
+									append('''))
+									''');
+								}
+								append('''			«route.nameOfRouteMethod(x)»(''')
+								if(route.hasValidKey)
+									append('''_key«x»,''')
+								append('''request''')
+								append('''«FOR v : route.url.variables BEFORE ", " SEPARATOR ", " »«v.name»«ENDFOR»''')
+								append(''');
+								''')
+								append('''}''');
+						}
+						x = x + 1
+				}
+
+			\]
+		\]
+	}
+]
 
 section2:routing_additons[Additional Aspects]
 
@@ -132,3 +503,8 @@ is defined after a wildcard in the URL.
 
 section:routing_beyond[Beyond This Example]
 
+Of course the DSL is not complete and there are several types of URL-pattern variables missing but it
+should not be a hard thing to extend this example. To enable DI in the context of a codeRef[javax.servlet.http.HttpServlet]
+there has to be a wrapper or something like that to create an injector. One really cool thing would be
+to establish and codeRef[org.eclipse.xtext.xbase.XExpression] that handles the complete guice-key and action call stuff with a corresponding
+compiler but this is fare beyond the scope of this example. ;-)
