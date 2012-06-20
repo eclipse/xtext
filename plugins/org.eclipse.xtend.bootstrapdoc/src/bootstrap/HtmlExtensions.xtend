@@ -84,7 +84,7 @@ class HtmlExtensions {
 	}
 
 	def dispatch CharSequence toHtml(List<EObject> it) {
-		map[toHtml].join
+		map[toHtml].join 
 	}
 
 	def dispatch toHtml(TextPart it) '''«text.quote»'''
@@ -180,6 +180,8 @@ class HtmlExtensions {
 	}	
 	
 	def protected trimCode(String it) {
+		if(nullOrEmpty) 
+			return ''
 		var start = 0
 		while(start < length()-1 && (substring(start, start+1) == ' ' || substring(start,start+1) == '\t'))
 			start = start + 1;

@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.xdoc.Anchor;
 import org.eclipse.xtext.xdoc.xdoc.Chapter;
 import org.eclipse.xtext.xdoc.xdoc.ChapterRef;
@@ -507,6 +508,10 @@ public class HtmlExtensions {
   protected String trimCode(final String it) {
     String _xblockexpression = null;
     {
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
+      if (_isNullOrEmpty) {
+        return "";
+      }
       int start = 0;
       boolean _and = false;
       int _length = it.length();
