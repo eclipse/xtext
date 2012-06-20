@@ -9,7 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -17,14 +22,15 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class WildcardTypeReference extends LightweightTypeReference {
 
 	private List<LightweightTypeReference> upperBounds;
 	private LightweightTypeReference lowerBound;
 	private boolean resolved;
 	
-	protected WildcardTypeReference(ResolvedTypes types) {
-		super(types);
+	protected WildcardTypeReference(TypeReferenceOwner owner) {
+		super(owner);
 		resolved = true;
 	}
 	
@@ -34,24 +40,43 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected WildcardTypeReference doCopyInto(ResolvedTypes types) {
-		WildcardTypeReference result = new WildcardTypeReference(types);
+	protected WildcardTypeReference doCopyInto(TypeReferenceOwner owner) {
+		WildcardTypeReference result = new WildcardTypeReference(owner);
 		if (upperBounds != null && !upperBounds.isEmpty()) {
-			for(LightweightTypeReference typeArgument: upperBounds) {
-				result.addUpperBound(typeArgument.copyInto(types));
+			for(LightweightTypeReference upperBound: upperBounds) {
+				result.addUpperBound(upperBound.copyInto(owner));
 			}
 		}
 		if (lowerBound != null) {
-			result.lowerBound = lowerBound.copyInto(types);
+			result.lowerBound = lowerBound.copyInto(owner);
 		}
-		return null;
+		return result;
+	}
+	
+	@Override
+	protected JvmTypeReference toTypeReference() {
+		TypesFactory typesFactory = getTypesFactory();
+		JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
+		if (upperBounds != null && !upperBounds.isEmpty()) {
+			for(LightweightTypeReference typeArgument: upperBounds) {
+				JvmUpperBound constraint = typesFactory.createJvmUpperBound();
+				constraint.setTypeReference(typeArgument.toTypeReference());
+				result.getConstraints().add(constraint);
+			}
+		}
+		if (lowerBound != null) {
+			JvmLowerBound constraint = typesFactory.createJvmLowerBound();
+			constraint.setTypeReference(lowerBound.toTypeReference());
+			result.getConstraints().add(constraint);
+		}
+		return result;
 	}
 	
 	protected void addUpperBound(LightweightTypeReference upperBound) {
 		if (upperBound == null) {
 			throw new NullPointerException("upperBound may not be null");
 		}
-		if (!upperBound.isValidInContext(getContext())) {
+		if (!upperBound.isValidInContext(getOwner())) {
 			throw new NullPointerException("upperBound is not valid in current context");
 		}
 		if (upperBounds == null)
@@ -64,8 +89,11 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (lowerBound == null) {
 			throw new NullPointerException("lowerBound may not be null");
 		}
-		if (!lowerBound.isValidInContext(getContext())) {
+		if (!lowerBound.isValidInContext(getOwner())) {
 			throw new NullPointerException("lowerBound is not valid in current context");
+		}
+		if (this.lowerBound != null && this.lowerBound != lowerBound) {
+			throw new IllegalStateException("only one lower bound is supported");
 		}
 		this.lowerBound = lowerBound;
 		resolved &= lowerBound.isResolved();

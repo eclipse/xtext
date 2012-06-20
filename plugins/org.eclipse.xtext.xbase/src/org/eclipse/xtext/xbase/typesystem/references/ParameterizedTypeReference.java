@@ -9,8 +9,10 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -18,16 +20,29 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ParameterizedTypeReference extends LightweightTypeReference {
 
 	private List<LightweightTypeReference> typeArguments;
 	private JvmType type;
 	protected boolean resolved;
 	
-	protected ParameterizedTypeReference(ResolvedTypes types, JvmType type) {
-		super(types);
+	protected ParameterizedTypeReference(TypeReferenceOwner owner, JvmType type) {
+		super(owner);
 		this.type = type;
 		this.resolved = true;
+	}
+	
+	@Override
+	protected JvmTypeReference toTypeReference() {
+		JvmParameterizedTypeReference result = getTypesFactory().createJvmParameterizedTypeReference();
+		result.setType(type);
+		if (typeArguments != null) {
+			for(LightweightTypeReference typeArgument: typeArguments) {
+				result.getArguments().add(typeArgument.toTypeReference());
+			}
+		}
+		return result;
 	}
 	
 	protected JvmType getType() {
@@ -35,16 +50,16 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected ParameterizedTypeReference doCopyInto(ResolvedTypes types) {
-		ParameterizedTypeReference result = new ParameterizedTypeReference(types, type);
-		copyTypeArguments(result, types);
+	protected ParameterizedTypeReference doCopyInto(TypeReferenceOwner owner) {
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
+		copyTypeArguments(result, owner);
 		return result;
 	}
 
-	protected void copyTypeArguments(ParameterizedTypeReference result, ResolvedTypes types) {
+	protected void copyTypeArguments(ParameterizedTypeReference result, TypeReferenceOwner owner) {
 		if (typeArguments != null && !typeArguments.isEmpty()) {
 			for(LightweightTypeReference typeArgument: typeArguments) {
-				result.addTypeArgument(typeArgument.copyInto(types));
+				result.addTypeArgument(typeArgument.copyInto(owner));
 			}
 		}
 	}
@@ -58,7 +73,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (argument == null) {
 			throw new NullPointerException("argument may not be null");
 		}
-		if (!argument.isValidInContext(getContext())) {
+		if (!argument.isValidInContext(getOwner())) {
 			throw new NullPointerException("argument is not valid in current context");
 		}
 		if (typeArguments == null)

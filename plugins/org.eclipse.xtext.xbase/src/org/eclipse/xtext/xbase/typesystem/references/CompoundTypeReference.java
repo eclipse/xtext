@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -17,24 +19,36 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class CompoundTypeReference extends LightweightTypeReference {
 
 	private boolean synonym;
 	private List<LightweightTypeReference> components;
 	private boolean resolved;
 
-	protected CompoundTypeReference(ResolvedTypes types, boolean synonym) {
-		super(types);
+	protected CompoundTypeReference(TypeReferenceOwner owner, boolean synonym) {
+		super(owner);
 		this.synonym = synonym;
 		this.resolved = true;
 	}
+	
+	@Override
+	protected JvmTypeReference toTypeReference() {
+		JvmCompoundTypeReference result = synonym ? getTypesFactory().createJvmSynonymTypeReference() : getTypesFactory().createJvmMultiTypeReference();
+		if (components != null) {
+			for(LightweightTypeReference component: components) {
+				result.getReferences().add(component.toTypeReference());
+			}
+		}
+		return result;
+	}
 
 	@Override
-	protected LightweightTypeReference doCopyInto(ResolvedTypes types) {
-		CompoundTypeReference result = new CompoundTypeReference(types, synonym);
+	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
+		CompoundTypeReference result = new CompoundTypeReference(owner, synonym);
 		if (components != null && !components.isEmpty()) {
 			for(LightweightTypeReference typeArgument: components) {
-				result.addComponent(typeArgument.copyInto(types));
+				result.addComponent(typeArgument.copyInto(owner));
 			}
 		}
 		return result;
@@ -49,7 +63,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		if (component == null) {
 			throw new NullPointerException("component may not be null");
 		}
-		if (!component.isValidInContext(getContext())) {
+		if (!component.isValidInContext(getOwner())) {
 			throw new NullPointerException("component is not valid in current context");
 		}
 		if (components == null)

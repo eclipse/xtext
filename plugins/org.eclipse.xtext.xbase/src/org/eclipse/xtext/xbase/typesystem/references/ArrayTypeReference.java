@@ -7,18 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class ArrayTypeReference extends LightweightTypeReference {
 
 	private LightweightTypeReference component;
 
-	protected ArrayTypeReference(ResolvedTypes types, LightweightTypeReference component) {
-		super(types);
+	protected ArrayTypeReference(TypeReferenceOwner owner, LightweightTypeReference component) {
+		super(owner);
 		this.component = component;
+	}
+	
+	@Override
+	protected JvmTypeReference toTypeReference() {
+		JvmGenericArrayTypeReference result = getTypesFactory().createJvmGenericArrayTypeReference();
+		result.setComponentType(component.toTypeReference());
+		return result;
 	}
 	
 	@Override
@@ -27,9 +37,9 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	protected LightweightTypeReference doCopyInto(ResolvedTypes types) {
-		LightweightTypeReference copiedComponent = component.copyInto(types);
-		return new ArrayTypeReference(types, copiedComponent);
+	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
+		LightweightTypeReference copiedComponent = component.copyInto(owner);
+		return new ArrayTypeReference(owner, copiedComponent);
 	}
 	
 	@Override

@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,37 +19,44 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
  *  - easier copying
  *  - isResolved
  */
+@NonNullByDefault
 public abstract class LightweightTypeReference {
 	
-	private ResolvedTypes resolvedTypes;
+	private TypeReferenceOwner owner;
 	
-	protected LightweightTypeReference(ResolvedTypes types) {
-		this.resolvedTypes = types;
+	protected LightweightTypeReference(TypeReferenceOwner owner) {
+		this.owner = owner;
 	}
 
 	public boolean isResolved() {
 		return true;
 	}
 	
-	protected ResolvedTypes getContext() {
-		return resolvedTypes;
+	protected TypeReferenceOwner getOwner() {
+		return owner;
 	}
 	
-	protected boolean isValidInContext(ResolvedTypes types) {
+	protected TypesFactory getTypesFactory() {
+		return getOwner().getServices().getTypesFactory();
+	}
+	
+	protected boolean isValidInContext(TypeReferenceOwner owner) {
 		if (isResolved()) {
 			return true;
 		}
-		return types == getContext();
+		return owner == getOwner();
 	}
 	
-	protected LightweightTypeReference copyInto(ResolvedTypes types) {
+	protected abstract JvmTypeReference toTypeReference();
+	
+	protected LightweightTypeReference copyInto(TypeReferenceOwner owner) {
 		if (isResolved()) {
 			return this;
 		}
-		return doCopyInto(types);
+		return doCopyInto(owner);
 	}
 
-	protected abstract LightweightTypeReference doCopyInto(ResolvedTypes types);
+	protected abstract LightweightTypeReference doCopyInto(TypeReferenceOwner owner);
 	
 	@Override
 	public abstract String toString();
