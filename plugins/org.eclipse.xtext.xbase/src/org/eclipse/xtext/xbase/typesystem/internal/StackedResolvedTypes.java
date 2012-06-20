@@ -145,4 +145,12 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		return result;
 	}
 
+	@Override
+	protected void appendContent(StringBuilder result, String indentation) {
+		super.appendContent(result, indentation);
+		appendContent(stackedUnboundParameters, "stackedUnboundParameters", result, indentation);
+		result.append("\n" + indentation + "parent: [");
+		parent.appendContent(result, indentation + "  ");
+		closeBracket(result);
+	}
 }
