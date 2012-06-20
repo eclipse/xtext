@@ -2,10 +2,22 @@ package generator
 
 import com.google.inject.Inject
 import bootstrap.Body
+import org.eclipse.xtext.xdoc.XdocStandaloneSetup
+import com.google.inject.Module
+import com.google.inject.Binder
+import org.eclipse.xtext.xdoc.XdocRuntimeModule
+import com.google.inject.Guice
+import org.eclipse.xtext.xdoc.xdoc.Chapter
+import bootstrap.XdocExtensions
+import bootstrap.HtmlExtensions
 
 class Examples extends Documentation {
 	
 	@Inject extension Body
+
+	override getStandaloneSetup() {
+		new ExampleSetup
+	}	
 
 	override getXdocDocumentRootFolder() {
 		'../docs/org.xtext.sevenlanguages.doc.xdoc/xdoc'
@@ -31,5 +43,40 @@ class Examples extends Documentation {
 		</div>
 	'''
 	
+}
+
+class ExampleSetup extends XdocStandaloneSetup implements Module {
 	
+	override createInjector() {
+		val module = new XdocRuntimeModule
+		Guice::createInjector(module, this)
+	}
+	
+	override configure(Binder binder) {
+		binder.bind(typeof(Body)).to(typeof(ExamplesBody))
+	}
+}
+
+class ExamplesBody extends Body {
+	@Inject extension XdocExtensions
+	@Inject extension HtmlExtensions
+	
+	override h1(Chapter chapter) '''
+		<!-- chapter -->
+		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
+			<div class="row">
+				<div class="span10 offset1">
+					<h1>
+						«chapter.title.toHtml»
+					</h1>
+					«FOR content : chapter.contents»
+						«content.toHtml»
+					«ENDFOR»
+					«FOR section: chapter.sections»
+						«section.h2»
+					«ENDFOR»
+				</div>
+			</div>
+		</section>
+	'''
 }

@@ -5,15 +5,28 @@ import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.io.OutputSupplier;
+import com.google.inject.Injector;
 import generator.Resource;
 import java.io.File;
 import java.io.OutputStreamWriter;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
 @SuppressWarnings("all")
 public abstract class AbstractWebsite implements Resource {
+  protected AbstractWebsite() {
+    XdocStandaloneSetup _standaloneSetup = this.getStandaloneSetup();
+    final Injector injector = _standaloneSetup.createInjectorAndDoEMFRegistration();
+    injector.injectMembers(this);
+  }
+  
+  public XdocStandaloneSetup getStandaloneSetup() {
+    XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
+    return _xdocStandaloneSetup;
+  }
+  
   public void generateTo(final File targetDir) {
     try {
       String _path = this.path();

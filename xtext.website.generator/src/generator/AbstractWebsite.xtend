@@ -5,8 +5,18 @@ import com.google.common.base.Charsets
 
 import static extension com.google.common.io.CharStreams.*
 import static extension com.google.common.io.Files.*
+import org.eclipse.xtext.xdoc.XdocStandaloneSetup
 
 abstract class AbstractWebsite implements Resource {
+	
+	protected new() {
+		val injector = standaloneSetup.createInjectorAndDoEMFRegistration
+		injector.injectMembers(this)
+	}
+	
+	def XdocStandaloneSetup getStandaloneSetup() {
+		new XdocStandaloneSetup()
+	}
 	
 	override generateTo(File targetDir) {
 		val file = new File(targetDir, path)

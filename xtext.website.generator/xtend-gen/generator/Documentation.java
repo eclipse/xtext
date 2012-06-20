@@ -7,8 +7,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import generator.AbstractWebsite;
+import generator.DocumentationSetup;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Iterator;
@@ -37,16 +37,18 @@ import xdocgen.DocumentLoad;
 @SuppressWarnings("all")
 public class Documentation extends AbstractWebsite {
   public Documentation() {
-    XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
-    final Injector injector = _xdocStandaloneSetup.createInjectorAndDoEMFRegistration();
-    injector.injectMembers(this);
     String _xdocDocumentRootFolder = this.getXdocDocumentRootFolder();
     Document _loadDocument = this.docLoader.loadDocument(_xdocDocumentRootFolder);
     this.doc = _loadDocument;
   }
   
+  public XdocStandaloneSetup getStandaloneSetup() {
+    DocumentationSetup _documentationSetup = new DocumentationSetup();
+    return _documentationSetup;
+  }
+  
   public String getXdocDocumentRootFolder() {
-    return "/Users/efftinge/Workspaces/ws-xtext/org.eclipse.xtext/plugins/org.eclipse.xtext.doc.xdoc/xdoc";
+    return "../docs/org.eclipse.xtext.doc.xdoc/xdoc";
   }
   
   public String path() {

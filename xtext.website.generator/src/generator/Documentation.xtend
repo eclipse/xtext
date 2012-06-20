@@ -20,13 +20,15 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 class Documentation extends AbstractWebsite {
 	
 	new() {
-		val injector = new XdocStandaloneSetup().createInjectorAndDoEMFRegistration
-		injector.injectMembers(this)
 		doc = docLoader.loadDocument(xdocDocumentRootFolder)
 	}
 	
+	override getStandaloneSetup() {
+		new DocumentationSetup
+	}
+	
 	def getXdocDocumentRootFolder() {
-		'/Users/efftinge/Workspaces/ws-xtext/org.eclipse.xtext/plugins/org.eclipse.xtext.doc.xdoc/xdoc'
+		'../docs/org.eclipse.xtext.doc.xdoc/xdoc'
 	}
 
 	override path() {
@@ -116,7 +118,6 @@ class DocumentationSetup extends XdocStandaloneSetup implements Module {
 		Guice::createInjector(module, this)
 	}
 	
-
 	override configure(Binder binder) {
 		
 	}

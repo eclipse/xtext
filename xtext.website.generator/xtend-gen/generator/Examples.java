@@ -3,13 +3,20 @@ package generator;
 import bootstrap.Body;
 import com.google.inject.Inject;
 import generator.Documentation;
+import generator.ExampleSetup;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 
 @SuppressWarnings("all")
 public class Examples extends Documentation {
   @Inject
   private Body _body;
+  
+  public XdocStandaloneSetup getStandaloneSetup() {
+    ExampleSetup _exampleSetup = new ExampleSetup();
+    return _exampleSetup;
+  }
   
   public String getXdocDocumentRootFolder() {
     return "../docs/org.xtext.sevenlanguages.doc.xdoc/xdoc";
