@@ -16,6 +16,9 @@ import org.eclipse.xtext.xdoc.xdoc.ImageRef
 import org.eclipse.emf.ecore.util.EcoreUtil
 import static extension com.google.common.io.Files.*
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import bootstrap.XdocExtensions
+import org.eclipse.xtext.xdoc.xdoc.Chapter
+import org.eclipse.xtext.xdoc.xdoc.AbstractSection
 
 class Documentation extends AbstractWebsite {
 	
@@ -119,7 +122,45 @@ class DocumentationSetup extends XdocStandaloneSetup implements Module {
 	}
 	
 	override configure(Binder binder) {
-		
+		binder.bind(typeof(Body)).to(typeof(DocumentationBody))
 	}
+}
+
+class DocumentationBody extends Body {
+	@Inject extension XdocExtensions
+	@Inject extension HtmlExtensions
+	
+	override h1(Chapter chapter) '''
+		<!-- chapter -->
+		<section id="«chapter.href»" style="margin-bottom: 50px">
+			<div class="row">
+				<div class="span8 offset3">
+					<h1>
+						«chapter.title.toHtml»
+					</h1>
+					<hr style="margin-top: 5px; margin-bottom: 5px;">
+					«FOR content : chapter.contents»
+						«content.toHtml»
+					«ENDFOR»
+					«FOR section: chapter.sections»
+						«section.h2»
+					«ENDFOR»
+				</div>
+			</div>
+		</section>
+	'''
+	
+	override h2(AbstractSection section) '''
+		<!--  section -->
+		<section id="«section.href»" style="margin-top: 20px; padding-top: 0;">
+		<h2 style="font-weight: normal;">«section.title.toHtml»</h2>
+		«FOR content : section.contents»
+			«content.toHtml»
+		«ENDFOR»
+		«FOR subsection: section.sections»
+			«subsection.h3plus(3)»
+		«ENDFOR»
+		</section>
+	'''
 	
 }

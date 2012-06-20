@@ -107,8 +107,8 @@ codelanguage-def[LinkingExample][ref]
 
 part[Getting Started]
 
-chapter-ref[Installation]
-
+%%chapter-ref[Installation]
+%%
 chapter-ref[FirstFiveMinutes]
 
 chapter-ref[DomainModelWalkThrough]

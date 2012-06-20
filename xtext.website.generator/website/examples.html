@@ -149,7 +149,7 @@
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									Seven Languages by Seven Weaklings
+								Seven Languages by Seven Weaklings
 							</h1>
 							<p>
 								Why?
@@ -157,49 +157,30 @@
 							<p>
 								The seven languages are
 								<ul>
-									<li>	<a href="#mongo">	mongoBeans
-										</a>: JavaBeans-like statically typed access to mongoDB documents
-									</li>
-									<li>	<a href="#routing">	HttpRouting
-										</a>: HttpRoutes with full support of expressions
-									</li>
-									<li>	<a href="#templates">	Templates
-										</a>: 
-									</li>
-									<li>	<a href="#guice">	GuiceModules
-										</a>: 
-									</li>
-									<li>	<a href="#cradle">	Cradle
-										</a>: 
-									</li>
-									<li>	<a href="#tortoise">	TortoiseShell
-										</a>: A logo like programming environment for educational purposes
-									</li>
-									<li>	<a href="#tba">	T.B.A.
-										</a>: A language that is yet to be invented.
-									</li>
+									<li><a href="#mongo">mongoBeans</a>: JavaBeans-like statically typed access to mongoDB documents</li>
+									<li><a href="#routing">HttpRouting</a>: HttpRoutes with full support of expressions</li>
+									<li><a href="#templates">Templates</a>:</li>
+									<li><a href="#guice">GuiceModules</a>:</li>
+									<li><a href="#cradle">Cradle</a>:</li>
+									<li><a href="#tortoise">TortoiseShell</a>: A logo like programming environment for educational purposes</li>
+									<li><a href="#tba">T.B.A.</a>: A language that is yet to be invented.</li>
 								</ul>
 							</p>
 							<!--  section -->
 							<section id="common_requirements" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Common Requirements
-							</h2>
+							<h2>Common Requirements</h2>
 							<p>
-								To run any of the examples, you will need 
-								<a href="http://www.eclipse.org/download">Eclipse 3.6 or higher</a>
-								for your platform. In addition, you have to install 
-								<a href="http://www.xtext.org">Xtext 2.3</a> and 
+								To run any of the examples, you will need <a href="http://www.eclipse.org/download">Eclipse 3.6 or higher</a>
+								for your platform. In addition, you have to install <a href="http://www.xtext.org">Xtext 2.3</a> and 
 								<a href="http://www.xtend-lang.org">Xtend 2.3</a>. Both of these are also available on the official 
-								<a href="">Eclipse Juno Update Site</a>
+								<a href="">Eclipse Juno Update Site</a> 
 							</p>
 							<p>
 								If you prefer a simple all-inclusive installation, consider downloading the latest
 								<a href="http://download.itemis.com/distros">itemis distribution</a>.
 							</p>
 							<p>
-								Additional requirements are mentioned in the 
-								<strong>	Running the Example
-								</strong> section of each chapter.
+								Additional requirements are mentioned in the <strong>Running the Example</strong> section of each chapter.
 							</p>
 							</section>
 						</div>
@@ -210,22 +191,17 @@
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									MongoBeans
+								MongoBeans
 							</h1>
 							<p>
 								<a href="http://www.mongodb.org">MongoDB</a> is a very popular document-based database management system. 
-								In mongoDB, database entries (AKA 
-								<strong>	documents
-								</strong>) have fields, which are essentially 
-								<strong>	(key, value)
-								</strong> pairs.
+								In mongoDB, database entries (AKA <strong>documents</strong>) have fields, which are essentially <strong>(key, value)</strong> pairs.
 								MongoDB is schema free, i.e. there are no rules which fields have to be defined and of what type they are.
 								This allows for very flexible and heterogenous data structures and maps perfectly with JSON. 
 							</p>
 							<!--  section -->
 							<section id="mongo_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
 								Java is statically typed: The available types, their field names and field types, are known and validated 
 								at compile time. The JavaBeans convention defines how instances can be manipulated. 
@@ -233,14 +209,11 @@
 							<p>
 								OTOH, the standard mongoDB Java driver reflects mongoDB's schema freeness by providing mongo documents as 
 								raw Java maps. This results in some major annoyances: First, you loose the benefit from Java's static typing. 
-								You can ask a 
-								<a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
+								You can ask a <a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 for the value of a specific field, but you cannot be sure 
-								that the returned 
-								<a href="http://xtend-lang.org/api/2.3.0/java/lang/Object.html"><abbr title="java.lang.Object">Object</abbr></a>
+								that the returned <a href="http://xtend-lang.org/api/2.3.0/java/lang/Object.html"><abbr title="java.lang.Object">Object</abbr></a>
 								 is of some expected type. As database entities are likely to 
-								play a major role in your application, having them implemented as a generic 
-								<a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
+								play a major role in your application, having them implemented as a generic <a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								
 								will likely result poorly readable and unsafe code. Second, additional behavior that would usually go into 
 								methods of your entity classes has to be defined by external helper classes. Third, constructing a graph of 
@@ -249,12 +222,9 @@
 							</section>
 							<!--  section -->
 							<section id="mongo_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
-								In this project, we have created a small DSL 
-								<strong>	mongoBeans
-								</strong> based on Xtext that allows to create basic 
+								In this project, we have created a small DSL <strong>mongoBeans</strong> based on Xtext that allows to create basic 
 								entity classes that are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of 
 								the language as a description how to map mongoDB documents to JavaBeans, in analogy to well known object 
 								relational mappers.
@@ -288,22 +258,15 @@ package org.musicdb {
 }</pre>
 							</p>
 							<p>
-								From each 
-								<strong>	MongoBean
-								</strong> definition in a 
-								<strong>	MongoFile
-								</strong> file, we generate a Java class that wraps a 
+								From each <strong>MongoBean</strong> definition in a <strong>MongoFile</strong> file, we generate a Java class that wraps a 
 								<a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								. The class provides statically typed getter and setter methods for all 
-								defined 
-								<strong>	MongoProperties
-								</strong>. In the implementation of these accessor methods we delegate to the wrapped
+								defined <strong>MongoProperties</strong>. In the implementation of these accessor methods we delegate to the wrapped
 								<a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
-								 and do all the casting and conversion work. For the 
-								<code class="prettyprint lang-xtend">Artist</code> in the 
+								 and do all the casting and conversion work. For the <code class="prettyprint lang-xtend">Artist</code> in the 
 								above example, this would look like
 							</p>
-								<pre class="prettyprint lang-java linenums">
+							<pre class="prettyprint lang-java linenums">
 public class Artist implements IMongoBean {
 
   private DBObject _dbObject;  
@@ -319,14 +282,9 @@ public class Artist implements IMongoBean {
 }</pre>
 							<p>
 								By generating Java code, the rest of the application can use a safe, statically typed and JavaBeans 
-								conformant API to access the datamodel. In addition, 
-								<strong>	MongoBeans
-								</strong> can define 
-								<strong>	MongoOperations
-								</strong> 
+								conformant API to access the datamodel. In addition, <strong>MongoBeans</strong> can define <strong>MongoOperations</strong> 
 								which are translated to Java methods. By using the expression library Xbase, we can use 
-								<strong>	MongoProperties
-								</strong> as well as Java types inside the operations' bodies. 
+								<strong>MongoProperties</strong> as well as Java types inside the operations' bodies. 
 							</p>
 							<p>
 								Client code could then look like this:
@@ -345,44 +303,29 @@ dbCollection.save(john.getDBObject())</pre>
 							</p>
 							<!-- subsection -->
 							<section id="mongo_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	Language name
-								</td>
-								<td>	mongoBeans
-								</td>
+								<tr><td>Language name</td>
+								<td>mongoBeans</td>
 								</tr>
-								<tr><td>	Author
-								</td>
-								<td>	Jan Koehnlein
-								</td>
+								<tr><td>Author</td>
+								<td>Jan Koehnlein</td>
 								</tr>
-								<tr><td>	Xtext Grammar
-								</td>
-								<td>	27 LOC, 9 rules
-								</td>
+								<tr><td>Xtext Grammar</td>
+								<td>27 LOC, 9 rules</td>
 								</tr>
-								<tr><td>	Xtext extensions
-								</td>
-								<td>	6 classes
-								</td>
+								<tr><td>Xtext extensions</td>
+								<td>6 classes</td>
 								</tr>
-								<tr><td>	Execution
-								</td>
-								<td>	Java code generator
-								</td>
+								<tr><td>Execution</td>
+								<td>Java code generator</td>
 								</tr>
-								<tr><td>	Runtime library
-								</td>
-								<td>	4 classes
-								</td>
+								<tr><td>Runtime library</td>
+								<td>4 classes</td>
 								</tr>
-								<tr><td>	Hardest part
-								</td>
-								<td>	Finding a project name w/o politically incorrect connotation
-								</td>
+								<tr><td>Hardest part</td>
+								<td>Finding a project name w/o politically incorrect connotation</td>
 								</tr>
 								</table>
 							</p>
@@ -390,36 +333,29 @@ dbCollection.save(john.getDBObject())</pre>
 							</section>
 							<!--  section -->
 							<section id="mongo_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
-								In addtion to the 
-								<a href="#common_requirements">	common requirements
-								</a>, you need the 
+								In addtion to the <a href="#common_requirements">common requirements</a>, you need the 
 								<a href="http://www.mongodb.org/downloads">mongoDB implementation</a> for your platform. We have included 
-								the mongoDB Java driver from 
-								<a href="http://download.eclipse.org/tools/orbit/downloads/">Eclipse Orbit</a> 
+								the mongoDB Java driver from <a href="http://download.eclipse.org/tools/orbit/downloads/">Eclipse Orbit</a> 
 								in the code base. 
 							</p>
 							<p>
 								Import the projects into an Eclipse workspace and run the launch config 
-								<strong>	Run (org.eclipse.xtext.mongobeans)
-								</strong>. Import the example plug-in into the new workspace and run 
+								<strong>Run (org.eclipse.xtext.mongobeans)</strong>. Import the example plug-in into the new workspace and run 
 								<code class="prettyprint lang-xtend">MusicDBXtendTest</code> as a JUnit test.
 							</p>
 							</section>
 							<!--  section -->
 							<section id="mongo_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="mongo_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							<p>
 								The complete mongoBenas grammar looks like this: 
 							</p>
-								<pre class="prettyprint lang-xtext linenums">
+							<pre class="prettyprint lang-xtext linenums">
 grammar org.xtext.mongobeans.MongoBeans with org.eclipse.xtext.xbase.Xbase
 
 generate mongoBeans "http://www.eclipse.org/xtext/mongobeans/MongoBeans"
@@ -458,42 +394,19 @@ MongoOperation:
 QualifiedNameWithWildcard:
   QualifiedName (".*")?;</pre>
 							<p>
-								The grammar inherits from the grammar of 
-								<code class="prettyprint lang-xtend">Xbase</code> in order to allow references to Java elements and Xbase 
-								expressions. A 
-								<strong>	MongoFile
-								</strong> contains any number of 
-								<strong>	AbstractElements
-								</strong>, which can be 
-								<strong>	PackageDeclarations
-								</strong>,
-								<strong>	Imports
-								</strong> or 
-								<strong>	MongoBeans
-								</strong>. 
-								<strong>	Imports
-								</strong> use Xtext's naming convention 
-								<code class="prettyprint lang-xtend">importedNamespace</code> to automatically 
-								shorten qualified names of matching elements. Note that as opposed to Java, 
-								<strong>	PackageDeclarations
-								</strong> can be nested.     
-								<strong>	MongoBeans
-								</strong> define statically typed MongoProperties, which can be single-valued or array-valued denoted by an 
-								<code class="prettyprint lang-xtend">*</code> following the type name. The type of a 
-								<strong>	MongoProperty
-								</strong> can also be defined inline. 
-								<strong>	MongoBeans
-								</strong> can 
-								also define 
-								<strong>	MongoOperations
-								</strong>. Instead of defining all possible expressions for the body of an operation, we 
+								The grammar inherits from the grammar of <code class="prettyprint lang-xtend">Xbase</code> in order to allow references to Java elements and Xbase 
+								expressions. A <strong>MongoFile</strong> contains any number of <strong>AbstractElements</strong>, which can be <strong>PackageDeclarations</strong>,
+								<strong>Imports</strong> or <strong>MongoBeans</strong>. <strong>Imports</strong> use Xtext's naming convention <code class="prettyprint lang-xtend">importedNamespace</code> to automatically 
+								shorten qualified names of matching elements. Note that as opposed to Java, <strong>PackageDeclarations</strong> can be nested.     
+								<strong>MongoBeans</strong> define statically typed MongoProperties, which can be single-valued or array-valued denoted by an 
+								<code class="prettyprint lang-xtend">*</code> following the type name. The type of a <strong>MongoProperty</strong> can also be defined inline. <strong>MongoBeans</strong> can 
+								also define <strong>MongoOperations</strong>. Instead of defining all possible expressions for the body of an operation, we 
 								leverage Xtext's expression language library Xbase. 
 							</p>
 							</section>
 							<!-- subsection -->
 							<section id="mongo_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							<p>
 								In the end, we want to generate Java code from our mongoBeans files. With Xbase, that means to map our
 								DSL concepts to Java concepts. This approach provides very detailed information and allows for better tooling
@@ -501,42 +414,32 @@ QualifiedNameWithWildcard:
 								operation bodies.
 							</p>
 							<p>
-								The transformation is implemented in the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a>
+								The transformation is implemented in the <a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a>
 								.
-								It is written in the programming language 
-								<a href="http://www.xtend-lang.org">Xtend</a>, which is Java-like
+								It is written in the programming language <a href="http://www.xtend-lang.org">Xtend</a>, which is Java-like
 								but has a far more convenient syntax. As the generated code is quite rich, this is the most complex component
 								of mongoBeans.
 							</p>
 							<p>
-								In the following, we describe what happens in the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a>
+								In the following, we describe what happens in the <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a>
 								.
-								For each 
-								<strong>	MongoBean
-								</strong>, we create a Java class implementing the interface 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/IMongoBean.html"><abbr title="org.xtext.mongobeans.IMongoBean">IMongoBean</abbr></a>
+								For each <strong>MongoBean</strong>, we create a Java class implementing the interface <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/IMongoBean.html"><abbr title="org.xtext.mongobeans.IMongoBean">IMongoBean</abbr></a>
 								.
 								This interface is the first type of our small runtime library. The generated Java classes rely on this
 								library to work, so it has to be on the classpath.
 							</p>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	DSL
-								</td>
-								<td>	<pre class="prettyprint lang-mongobeans linenums">
+								<tr><td>DSL</td>
+								<td><pre class="prettyprint lang-mongobeans linenums">
 package org.musicdb {
-  Artist { ...</pre>
-								</td>
+  Artist { ...</pre></td>
 								</tr>
-								<tr><td>	Java
-								</td>
-								<td>	<pre class="prettyprint lang-java linenums">
+								<tr><td>Java</td>
+								<td><pre class="prettyprint lang-java linenums">
 package org.musicdb;
 ...
-public class Artist implements IMongoBean {  ...</pre>
-								</td>
+public class Artist implements IMongoBean {  ...</pre></td>
 								</tr>
 								</table>
 							</p>
@@ -558,79 +461,48 @@ def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boole
 }</pre>
 							</p>
 							<p>
-								First, finds all elements of type 
-								<strong>	MongoBean
-								</strong> in the given 
-								<strong>	MongoFile
-								</strong>. For each of these, create a new 
-								Java class using the method 
-								<code class="prettyprint lang-xtend">toClass</code>. A speciality of Xtend is that this method comes from another 
-								object, in this case of type 
-								<code class="prettyprint lang-xtend">JvmTypesBuilder</code>. By having this injected as an 
-								<code class="prettyprint lang-xtend">extension</code>, all its methods can be called on the first argument, in this case the 
-								<code class="prettyprint lang-xtend">bean</code>. 
-								So 
-								<code class="prettyprint lang-xtend">bean.toClass(...)</code> is nothing else but 
-								<code class="prettyprint lang-xtend">_jvmtypesBuilder.toClass(bean, ...)</code>. Analogously, the 
-								method 
-								<code class="prettyprint lang-xtend">fullyQualifiedName</code> comes actually from the injected 
+								First, finds all elements of type <strong>MongoBean</strong> in the given <strong>MongoFile</strong>. For each of these, create a new 
+								Java class using the method <code class="prettyprint lang-xtend">toClass</code>. A speciality of Xtend is that this method comes from another 
+								object, in this case of type <code class="prettyprint lang-xtend">JvmTypesBuilder</code>. By having this injected as an 
+								<code class="prettyprint lang-xtend">extension</code>, all its methods can be called on the first argument, in this case the <code class="prettyprint lang-xtend">bean</code>. 
+								So <code class="prettyprint lang-xtend">bean.toClass(...)</code> is nothing else but <code class="prettyprint lang-xtend">_jvmtypesBuilder.toClass(bean, ...)</code>. Analogously, the 
+								method <code class="prettyprint lang-xtend">fullyQualifiedName</code> comes actually from the injected 
 								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a>
 								. Please consult the 
 								<a href="http://www.xtend-lang.org/documentation">Xtend</a> documentation for more information on extension methods.
 							</p>
 							<p>
-								The so created Java class is passed to the 
-								<code class="prettyprint lang-xtend">acceptor</code> as one of the results of the method. In a second
-								phase it is filled with members, which is implemented in a lambda expression passed to 
-								<code class="prettyprint lang-xtend">initializeLater</code>.
-								This lambda spans the content of the square brackets. It has a single implicit parameter 
-								<code class="prettyprint lang-xtend">it</code>,
-								that is the freshly created Java class from the first phase. As 
-								<code class="prettyprint lang-java">this</code> in Java, 
-								<code class="prettyprint lang-xtend">it</code>
-								must not be specified as the receiver of a feature call. So the following 
-								<code class="prettyprint lang-xtend">documentation</code> actually
-								refers to 
-								<code class="prettyprint lang-xtend">it.documentation</code>. In Xtend, you can use assignments instead of calling setters, so after
-								all 
-								<code class="prettyprint lang-xtend">documentation = bean.documentation</code> is equivalent to 
-								<code class="prettyprint lang-xtend">it.setDocumentation(bean.documentation)</code>
-								or even 
-								<code class="prettyprint lang-xtend">it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))</code>. Analogously, 
-								<pre class="prettyprint lang-xtend linenums">
+								The so created Java class is passed to the <code class="prettyprint lang-xtend">acceptor</code> as one of the results of the method. In a second
+								phase it is filled with members, which is implemented in a lambda expression passed to <code class="prettyprint lang-xtend">initializeLater</code>.
+								This lambda spans the content of the square brackets. It has a single implicit parameter <code class="prettyprint lang-xtend">it</code>,
+								that is the freshly created Java class from the first phase. As <code class="prettyprint lang-java">this</code> in Java, <code class="prettyprint lang-xtend">it</code>
+								must not be specified as the receiver of a feature call. So the following <code class="prettyprint lang-xtend">documentation</code> actually
+								refers to <code class="prettyprint lang-xtend">it.documentation</code>. In Xtend, you can use assignments instead of calling setters, so after
+								all <code class="prettyprint lang-xtend">documentation = bean.documentation</code> is equivalent to <code class="prettyprint lang-xtend">it.setDocumentation(bean.documentation)</code>
+								or even <code class="prettyprint lang-xtend">it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))</code>. Analogously, <pre class="prettyprint lang-xtend linenums">
 superTypes +=
-...</pre> calls 
-								<code class="prettyprint lang-xtend">it.getSuperTypes().add(...)</code>. By using 
-								<pre class="prettyprint lang-xtend linenums">
+...</pre> calls <code class="prettyprint lang-xtend">it.getSuperTypes().add(...)</code>. By using <pre class="prettyprint lang-xtend linenums">
 _jvmTypesBuilder.newTypeRef(bean,
-String)</pre> we create a reference to the existing interface 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/IMongoBean.html"><abbr title="org.xtext.mongobeans.IMongoBean">IMongoBean</abbr></a>
+String)</pre> we create a reference to the existing interface <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/IMongoBean.html"><abbr title="org.xtext.mongobeans.IMongoBean">IMongoBean</abbr></a>
 								. This
 								will also insert a Java import at the appropriate location. 
 							</p>
 							<p>
-								Each 
-								<strong>	MongoBean
-								</strong> wraps a 
-								<a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
+								Each <strong>MongoBean</strong> wraps a <a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 which is represented as a Java field with a 
-								getter. There are two constructors, one for a given 
-								<a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
+								getter. There are two constructors, one for a given <a href="http://xtend-lang.org/api/2.3.0/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 and one that 
 								creates a new one. We have to store the class name in the DB object, if we want to be able to restore
 								JavaBeans from query results.
 							</p>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	DSL
-								</td>
-								<td>	<pre class="prettyprint lang-mongobeans linenums">
-Artist { ...</pre>
-								</td>
+								<tr><td>DSL</td>
+								<td><pre class="prettyprint lang-mongobeans linenums">
+Artist { ...</pre></td>
 								</tr>
-								<tr><td>	Java
-								</td>
-								<td>	<pre class="prettyprint lang-java linenums">
+								<tr><td>Java</td>
+								<td><pre class="prettyprint lang-java linenums">
 public class Artist implements IMongoBean { 
   private DBObject _dbObject;
   
@@ -646,26 +518,23 @@ public class Artist implements IMongoBean {
     _dbObject = new BasicDBObject();
     _dbObject.put(JAVA_CLASS_KEY, "org.musicdb.Artist");
   }
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
 								</table>
 							</p>
 							<p>
-								The inferrer code does this in two separate methods: One for the property 
-								<code class="prettyprint lang-xtend">_dbObject</code> and another
+								The inferrer code does this in two separate methods: One for the property <code class="prettyprint lang-xtend">_dbObject</code> and another
 								for the constructors. Once again, we are using extension methods from the 
 								<code class="prettyprint lang-xtend">JvmTypesBuilder</code> and the shortcut syntax to access setters. Also note the closures to
 								initialize the bodies of the constructors. We could just have appended a multi-line string, but in order
-								to get the imports in the generated code right we are using the helper method 
-								<code class="prettyprint lang-xtend">appendTypeRef()</code>.
+								to get the imports in the generated code right we are using the helper method <code class="prettyprint lang-xtend">appendTypeRef()</code>.
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 def protected addDbObjectProperty(JvmDeclaredType inferredType, MongoBean bean) {
   inferredType.members += bean.toField('_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
   inferredType.members += bean.toGetter('dbObject', '_dbObject', newTypeRef(bean, 'com.mongodb.DBObject'))
 }
-											
+										
 def protected addConstructors(JvmDeclaredType inferredType, MongoBean bean) {
   inferredType.members += bean.toConstructor [
     documentation = '''Creates a new &laquo;bean.name&raquo; wrapping the given {@link DBObject}.'''
@@ -687,26 +556,20 @@ def protected addConstructors(JvmDeclaredType inferredType, MongoBean bean) {
   ]
 }</pre>
 							<p>
-								Next on our list are the getters and setters delegating to the 
-								<code class="prettyprint lang-xtend">_dbObject</code>. Let us start with single
-								valued 
-								<strong>	MongoProperties
-								</strong>:
+								Next on our list are the getters and setters delegating to the <code class="prettyprint lang-xtend">_dbObject</code>. Let us start with single
+								valued <strong>MongoProperties</strong>:
 							</p>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	DSL
-								</td>
-								<td>	<pre class="prettyprint lang-mongobeans linenums">
+								<tr><td>DSL</td>
+								<td><pre class="prettyprint lang-mongobeans linenums">
 ...
     String name
     Artist friend
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
-								<tr><td>	Java
-								</td>
-								<td>	<pre class="prettyprint lang-java linenums">
+								<tr><td>Java</td>
+								<td><pre class="prettyprint lang-java linenums">
 ...
   public String getName() {
     return (String) _dbObject.get("name");
@@ -723,29 +586,20 @@ def protected addConstructors(JvmDeclaredType inferredType, MongoBean bean) {
   public void setFriend(final Artist friend) {
      _dbObject.put("friend", WrappingUtil.unwrap(friend));
   }
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
 								</table>
 							</p>
 							<p>
-								As a Java client would expect the result of 
-								<code class="prettyprint lang-xtend">getFriend()</code> should be a 
-								<code class="prettyprint lang-xtend">Artist</code>, we have to handle
-								<strong>	MongoProperties
-								</strong> whose type is a 
-								<strong>	MongoBean
-								</strong> differently. Note that the generated Java code uses 
+								As a Java client would expect the result of <code class="prettyprint lang-xtend">getFriend()</code> should be a <code class="prettyprint lang-xtend">Artist</code>, we have to handle
+								<strong>MongoProperties</strong> whose type is a <strong>MongoBean</strong> differently. Note that the generated Java code uses 
 								static helper methods to do the wrapping / unwrapping. They are defined in the second runtime class 
 								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/WrappingUtil.html"><abbr title="org.xtext.mongobeans.WrappingUtil">WrappingUtil</abbr></a>
-								. To detect whether a type is actually a 
-								<strong>	MongoBean
-								</strong> or not, we 
-								use the helper class 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/jvmmodel/MongoTypes.html"><abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr></a>
+								. To detect whether a type is actually a <strong>MongoBean</strong> or not, we 
+								use the helper class <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/jvmmodel/MongoTypes.html"><abbr title="org.xtext.mongobeans.jvmmodel.MongoTypes">MongoTypes</abbr></a>
 								 that is also injected as an extension.
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty property) {
     inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.jvmType) [
       documentation = property.documentation
@@ -773,34 +627,25 @@ def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty p
     ]
   }</pre>
 							<p>
-								Multi-valued 
-								<strong>	MongoProperties
-								</strong> with a 
-								<strong>	MongoBean
-								</strong> type require a special implementation of 
+								Multi-valued <strong>MongoProperties</strong> with a <strong>MongoBean</strong> type require a special implementation of 
 								<a href="http://xtend-lang.org/api/2.3.0/java/util/List.html"><abbr title="java.util.List">List</abbr></a>
 								 to automatically wrap/unwrap the elements. That's the third runtime library 
-								class 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoBeanList.html"><abbr title="org.xtext.mongobeans.MongoBeanList">MongoBeanList</abbr></a>
+								class <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoBeanList.html"><abbr title="org.xtext.mongobeans.MongoBeanList">MongoBeanList</abbr></a>
 								. Note that we need a getter only. For multi-valued
-								primitive properties, the Java driver already delivers a 
-								<a href="http://xtend-lang.org/api/2.3.0/java/util/List.html"><abbr title="java.util.List">List</abbr></a>
+								primitive properties, the Java driver already delivers a <a href="http://xtend-lang.org/api/2.3.0/java/util/List.html"><abbr title="java.util.List">List</abbr></a>
 								:
 							</p>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	DSL
-								</td>
-								<td>	<pre class="prettyprint lang-mongobeans linenums">
+								<tr><td>DSL</td>
+								<td><pre class="prettyprint lang-mongobeans linenums">
 ...
   String* aliases
     Album* albums
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
-								<tr><td>	Java
-								</td>
-								<td>	<pre class="prettyprint lang-java linenums">
+								<tr><td>Java</td>
+								<td><pre class="prettyprint lang-java linenums">
 ...
   public List&lt;String&gt; getAliases() {
     return (List&lt;String&gt;) _dbObject.get("aliases");
@@ -813,8 +658,7 @@ def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty p
       _albums = new MongoBeanList&lt;Album&gt;(_dbObject, "albums");
     return _albums;
   }
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
 								</table>
 							</p>
@@ -844,41 +688,33 @@ def protected addListAccessor(JvmDeclaredType inferredType, MongoProperty proper
 }</pre>
 							</p>
 							<p>
-								Last but not least, we want to create methods for 
-								<strong>	MongoOperations
-								</strong>. 
+								Last but not least, we want to create methods for <strong>MongoOperations</strong>. 
 							</p>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	DSL
-								</td>
-								<td>	<pre class="prettyprint lang-mongobeans linenums">
+								<tr><td>DSL</td>
+								<td><pre class="prettyprint lang-mongobeans linenums">
 ...
   Iterable&lt;Track&gt; getOevre() {
       albums.map[tracks].flatten
   }
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
-								<tr><td>	Java
-								</td>
-								<td>	<pre class="prettyprint lang-java linenums">
+								<tr><td>Java</td>
+								<td><pre class="prettyprint lang-java linenums">
 ...
   public Iterable&lt;Track&gt; getOevre() {
     // some java code you really don't care about but it should just do the right thing
   }
-...</pre>
-								</td>
+...</pre></td>
 								</tr>
 								</table>
 							</p>
 							<p>
-								The inferrer code is surprisingly simple, as we can directly associate the body of the 
-								<strong>	MongoOperation
-								</strong> 
+								The inferrer code is surprisingly simple, as we can directly associate the body of the <strong>MongoOperation</strong> 
 								to the generated Java method. The Xbase compiler will automatically transform that to Java. 
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) {
     inferredType.members += operation.toMethod(operation.name, operation.returnType) [
       documentation = operation.documentation
@@ -893,59 +729,44 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!-- subsection -->
 							<section id="mongo_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
 								We have tweaked the language's infrastructure a bit more. First, we have adapted the 
 								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a>
 								. By default, the
 								qualified name of an element is calculated by concatening all the simple names of its containers with
-								a dot. In our example, the 
-								<strong>	MongoBean
-								</strong><code class="prettyprint lang-xtend">Track</code> would consequently be named 
+								a dot. In our example, the <strong>MongoBean</strong> <code class="prettyprint lang-xtend">Track</code> would consequently be named 
 								<code class="prettyprint lang-xtend">org.musicdb.Album.track.Track</code>. To ignore properties and beans on the path, we implemented our own
 								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/scoping/MongoQualifiedNameProvider.html"><abbr title="org.xtext.mongobeans.scoping.MongoQualifiedNameProvider">MongoQualifiedNameProvider</abbr></a>
 								. Note that we have to add a binding
-								in the respective 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoBeansRuntimeModule.html">	Guice module
-								</a>
+								in the respective <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoBeansRuntimeModule.html">Guice module</a>
 								 to make the framework 
-								pick up our customization. See the 
-								<a href="http://www.xtext.org/documentation">Xtext documentation</a> for details 
+								pick up our customization. See the <a href="http://www.xtext.org/documentation">Xtext documentation</a> for details 
 								on dependency injection.
 							</p>
 							<p>
 								Second, the Java driver for mongoDB cannot map all Java types to mongoDB types. To enforce that constraint, 
-								we have added the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/validation/MongoBeansValidator.html"><abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr></a>
+								we have added the <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/validation/MongoBeansValidator.html"><abbr title="org.xtext.mongobeans.validation.MongoBeansValidator">MongoBeansValidator</abbr></a>
 								. 
 							</p>
 							<p>
 								To improve the language visually, we have tuned the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.html">	outline
-								</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/outline/MongoBeansOutlineTreeProvider.html">outline</a>
 								 and the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.html">	label providers
-								</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/ui/labeling/MongoBeansLabelProvider.html">label providers</a>
 								 as well. 
 							</p>
 							</section>
 							</section>
 							<!--  section -->
 							<section id="mongo_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							<p>
 								Of course there could be further concepts in the DSL, e.g. transient properties, indices or refeerences. 
-								Furthermore, the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/example/MusicDBXtendTest.html">	example
-								</a>
+								Furthermore, the <a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/example/MusicDBXtendTest.html">example</a>
 								 shows how to use Xtend to 
-								build a very compact API to create trees of 
-								<strong>	MongoBean
-								</strong> instances. 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoExtensions.html">	Extension methods
-								</a>
+								build a very compact API to create trees of <strong>MongoBean</strong> instances. 
+								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/mongobeans/MongoExtensions.html">Extension methods</a>
 								 can also be used to wrap other
 								classes of the mongoDB driver.   
 							</p>
@@ -958,15 +779,13 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									Http Routing
+								Http Routing
 							</h1>
 							<!--  section -->
 							<section id="routing_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
-								There are several different frameworks out there like 
-								<a href="https://github.com/playframework/Play20/wiki/ScalaRouting">Play</a>
+								There are several different frameworks out there like <a href="https://github.com/playframework/Play20/wiki/ScalaRouting">Play</a>
 								to support HttpRoutes.
 								Normally they are defined in a special format in a separated central file. In most of the cases there is no tooling except a normal text/XML editor. 
 								The only way to decide which route matches is the URL with different wildcards and placeholders. 
@@ -977,22 +796,16 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!--  section -->
 							<section id="routing_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
-								In this project, we have created a small DSL base on 
-								<a href="http://www.xtext.org">Xtext</a> that allows to create routing with full support of expressions and access to the URL while the routing is done.
-								The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and 
-								<a href="http://code.google.com/p/google-guice">Guice</a> bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
-								Eventually, we do only have a single 
-								<code class="prettyprint lang-xtend">javax.servlet.http.HttpServlet</code> containing the logic for routing implemented in Java. 
+								In this project, we have created a small DSL base on <a href="http://www.xtext.org">Xtext</a> that allows to create routing with full support of expressions and access to the URL while the routing is done.
+								The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and <a href="http://code.google.com/p/google-guice">Guice</a> bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
+								Eventually, we do only have a single <code class="prettyprint lang-xtend">javax.servlet.http.HttpServlet</code> containing the logic for routing implemented in Java. 
 								To define routes you'll have to create a file with the extension '.route'. The first part of a route defines the type (GET, POST, PUT, DELETE or HEAD) of the route and the pattern.
 								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* ...</code>
 								<ul>
-									<li>	<code class="prettyprint lang-xtend">:id</code> means a placeholder for a word
-									</li>
-									<li>	<code class="prettyprint lang-xtend">:rest*</code> means match everything to the rest of the url
-									</li>
+									<li><code class="prettyprint lang-xtend">:id</code> means a placeholder for a word</li>
+									<li><code class="prettyprint lang-xtend">:rest*</code> means match everything to the rest of the url</li>
 								</ul>
 								
 								Then you have the possibility to define a condition like:
@@ -1007,8 +820,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</p>
 							<p>
 								To map that to Java we have to clarify what concepts we have and where we should hook in.
-								First of all a 
-								<code class="prettyprint lang-xtend">javax.servlet.http.HttpServlet</code> has exactly one method for each request type (GET,
+								First of all a <code class="prettyprint lang-xtend">javax.servlet.http.HttpServlet</code> has exactly one method for each request type (GET,
 								POST, ...). Within these methods we'll have to call our routing logic. A route describes a pattern, a condition, a guice-key and a call of an action. So a pattern should be translated to a field as regular expression. This helps to match the URL and extract the values out of
 								the given URL from the request. A condition should be a method with a boolean returntype where the request and the values of the variables from the URL-pattern are handled in as parameters. 
 								The guice-key should be a field annotated with whatever is specified by
@@ -1022,34 +834,23 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</p>
 							<!-- subsection -->
 							<section id="routing_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	Language name
-								</td>
-								<td>	HttpRouting
-								</td>
+								<tr><td>Language name</td>
+								<td>HttpRouting</td>
 								</tr>
-								<tr><td>	Xtext Grammar
-								</td>
-								<td>	39 LOC, 8 rules, 1 Enum
-								</td>
+								<tr><td>Xtext Grammar</td>
+								<td>39 LOC, 8 rules, 1 Enum</td>
 								</tr>
-								<tr><td>	Xtext extensions
-								</td>
-								<td>	6 classes
-								</td>
+								<tr><td>Xtext extensions</td>
+								<td>6 classes</td>
 								</tr>
-								<tr><td>	Execution
-								</td>
-								<td>	Java code generator
-								</td>
+								<tr><td>Execution</td>
+								<td>Java code generator</td>
 								</tr>
-								<tr><td>	Hardest Part
-								</td>
-								<td>	Handle regular expressions :-)
-								</td>
+								<tr><td>Hardest Part</td>
+								<td>Handle regular expressions :-)</td>
 								</tr>
 								</table>
 							</p>
@@ -1057,28 +858,23 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!--  section -->
 							<section id="routing_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
 								You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servelet-API on the class path of your project.
 								Import the projects into an Eclipse workspace and run the launch config
-								<strong>	Run (org.eclipse.xtext.httprouting)
-								</strong>. Now you may start with a new JavaProject or just import the project
+								<strong>Run (org.eclipse.xtext.httprouting)</strong>. Now you may start with a new JavaProject or just import the project
 								org.eclipse.httprouting.example. You'll see that the Servelet-API ist already included in the example.
 							</p>
 							</section>
 							<!--  section -->
 							<section id="routing_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="routing_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							<p>
 								The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
-								predefined by 
-								<a href="http://www.eclipse.org/Xtext/#xbase">Xbase</a> plus support for Annotations.
+								predefined by <a href="http://www.eclipse.org/Xtext/#xbase">Xbase</a> plus support for Annotations.
 								<code class="prettyprint lang-xtext">grammar org.xtext.httprouting.Route with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</code>
 								<pre class="prettyprint lang-xtext linenums">
 Import:
@@ -1115,52 +911,41 @@ Key:
 							</section>
 							<!-- subsection -->
 							<section id="routing_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							</section>
 							<!-- subsection -->
 							<section id="routing_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
 								With the Grammar and the inferrer mentioned in the sections above the DSL is funtional and does excatly
 								what we want but there are several things we should customize to have a nice tool-support.
 								<ul>
-									<li>	First of all there are several things we do not want to have in the contentassist
-									</li>
-									<li>	The outline is really ugly when the elements do not have a name
-									</li>
-									<li>	There is a need for validation in the URL-pattern defintion
-									</li>
+									<li>First of all there are several things we do not want to have in the contentassist</li>
+									<li>The outline is really ugly when the elements do not have a name</li>
+									<li>There is a need for validation in the URL-pattern defintion</li>
 								</ul>
 								
 								So lets concentrate on the things in the contentassist. The inferred methods and fields have syntetic names
 								and from the context of a condition or an action call we do not want to see the inferred things at all.
-								So for that reason we have to customize the code and tweak the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.html"><abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer">RouteJvmModelInferrer</abbr></a>
+								So for that reason we have to customize the code and tweak the <a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.html"><abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer">RouteJvmModelInferrer</abbr></a>
 								. All inferred fields and methods
 								that we don't wanna see in the contentassist are prefixed with an underscore. Now we have the possibility
-								to filter out proposals with this prefix in 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.html"><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a>
+								to filter out proposals with this prefix in <a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.html"><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a>
 								.
 								The other thing is that in case of a guice-Key we introduce a parameter with the name 'it'. This means that
 								all features of the type behind it are visible without writing it in front of the call. Good thing but
-								we do not want 'it' as itself in the contentassist. Let's just filter that one out in 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.html"><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a>
+								we do not want 'it' as itself in the contentassist. Let's just filter that one out in <a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/contentassist/RouteProposalProvider.html"><abbr title="org.xtext.httprouting.ui.contentassist.RouteProposalProvider">RouteProposalProvider</abbr></a>
 								.
 							</p>
 							<p>
-								To tweak the outline for the routes you'll some customized labels in 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/labeling/RouteLabelProvider.html"><abbr title="org.xtext.httprouting.ui.labeling.RouteLabelProvider">RouteLabelProvider</abbr></a>
+								To tweak the outline for the routes you'll some customized labels in <a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/labeling/RouteLabelProvider.html"><abbr title="org.xtext.httprouting.ui.labeling.RouteLabelProvider">RouteLabelProvider</abbr></a>
 								.
-								For some objects we do not wanna see a node in the outline at all so there is a need fo a custom 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/outline/RouteOutlineTreeProvider.html"><abbr title="org.xtext.httprouting.ui.outline.RouteOutlineTreeProvider">RouteOutlineTreeProvider</abbr></a>
+								For some objects we do not wanna see a node in the outline at all so there is a need fo a custom <a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/ui/outline/RouteOutlineTreeProvider.html"><abbr title="org.xtext.httprouting.ui.outline.RouteOutlineTreeProvider">RouteOutlineTreeProvider</abbr></a>
 								.
 							</p>
 							<p>
 								To give the user feedback while the routes are defined we can establish validation. You'll find a validation
-								in 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/validation/RouteJavaValidator.html"><abbr title="org.xtext.httprouting.validation.RouteJavaValidator">RouteJavaValidator</abbr></a>
+								in <a href="http://xtend-lang.org/api/2.3.0/org/xtext/httprouting/validation/RouteJavaValidator.html"><abbr title="org.xtext.httprouting.validation.RouteJavaValidator">RouteJavaValidator</abbr></a>
 								 where we raise an error when a placeholder
 								is defined after a wildcard in the URL.
 							</p>
@@ -1168,8 +953,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="routing_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -1179,12 +963,11 @@ Key:
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									Templates
+								Templates
 							</h1>
 							<!--  section -->
 							<section id="templates_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -1192,8 +975,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="templates_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -1204,8 +986,7 @@ Key:
 							</p>
 							<!-- subsection -->
 							<section id="templates_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								files touched, LOC, animals harmed, etc 
 								can also be funny
@@ -1214,30 +995,25 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="templates_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins... 
 							</p>
 							</section>
 							<!--  section -->
 							<section id="templates_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="templates_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							</section>
 							<!-- subsection -->
 							<section id="templates_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							</section>
 							<!-- subsection -->
 							<section id="templates_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
 								Addtionally customized things: validation, scoping, code completion ...
 							</p>
@@ -1245,8 +1021,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="templates_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -1256,12 +1031,11 @@ Key:
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									Guice Modules
+								Guice Modules
 							</h1>
 							<!--  section -->
 							<section id="guice_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -1269,8 +1043,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="guice_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -1281,8 +1054,7 @@ Key:
 							</p>
 							<!-- subsection -->
 							<section id="guice_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								files touched, LOC, animals harmed, etc 
 								can also be funny
@@ -1291,30 +1063,25 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="guice_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins... 
 							</p>
 							</section>
 							<!--  section -->
 							<section id="guice_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="guice_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							</section>
 							<!-- subsection -->
 							<section id="guice_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							</section>
 							<!-- subsection -->
 							<section id="guice_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
 								Addtionally customized things: validation, scoping, code completion ...
 							</p>
@@ -1322,8 +1089,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="guice_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -1333,12 +1099,11 @@ Key:
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									Cradle
+								Cradle
 							</h1>
 							<!--  section -->
 							<section id="cradle_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -1346,8 +1111,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="cradle_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -1358,8 +1122,7 @@ Key:
 							</p>
 							<!-- subsection -->
 							<section id="cradle_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								files touched, LOC, animals harmed, etc 
 								can also be funny
@@ -1368,30 +1131,25 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="cradle_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins... 
 							</p>
 							</section>
 							<!--  section -->
 							<section id="cradle_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="cradle_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							</section>
 							<!-- subsection -->
 							<section id="cradle_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							</section>
 							<!-- subsection -->
 							<section id="cradle_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
 								Addtionally customized things: validation, scoping, code completion ...
 							</p>
@@ -1399,8 +1157,7 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="cradle_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -1410,21 +1167,17 @@ Key:
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									Tortoise Shell
+								Tortoise Shell
 							</h1>
 							<p>
-								Do you remember the programming language 
-								<a href="http://en.wikipedia.org/wiki/Logo_%28programming_language%29">Logo</a>? 
+								Do you remember the programming language <a href="http://en.wikipedia.org/wiki/Logo_%28programming_language%29">Logo</a>? 
 								Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
-								But the remarkable part was the so called 
-								<strong>	turtle
-								</strong>, a graphical cursor that can be given commands to move and turn, 
+								But the remarkable part was the so called <strong>turtle</strong>, a graphical cursor that can be given commands to move and turn, 
 								thereby drawing lines.
 							</p>
 							<!--  section -->
 							<section id="tortoise_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
 								The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
 								I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
@@ -1435,20 +1188,14 @@ Key:
 							</section>
 							<!--  section -->
 							<section id="tortoise_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
-								We have build a language that allows to define 
-								<strong>	Programs
-								</strong> and 
-								<strong>	SubPrograms
-								</strong>. Each of these has a body
+								We have build a language that allows to define <strong>Programs</strong> and <strong>SubPrograms</strong>. Each of these has a body
 								which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
 								to issue commands to the turtle. Here is an example explaining the concepts in comments:
 								 
 								<table class="table table-bordered table-condensed">
-								<tr><td>	
-									<pre class="prettyprint lang-tortoise linenums">
+								<tr><td><pre class="prettyprint lang-tortoise linenums">
 // Program: Haus vom Nikolaus
 begin
   // local variable
@@ -1485,12 +1232,10 @@ begin
   forward(length)
   turnRight(90)
   forward(length)
-end</pre>
-								</td>
-								<td>	<div class="thumbnail">
-										<img src="images/Nikolaus.png" alt="">
-									</div>
-								</td>
+end</pre></td>
+								<td><div class="thumbnail">
+									<img src="images/Nikolaus.png" alt="">
+								</div></td>
 								</tr>
 								</table>
 							</p>
@@ -1500,13 +1245,12 @@ end</pre>
 								added without the need to regenerate the whole language infrastructure.
 							</p>
 							<p>
-								The core of the runtime library is the class 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/runtime/Tortoise.html"><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a>
+								The core of the runtime library is the class <a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/runtime/Tortoise.html"><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a>
 								. You can
 								think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows to
 								modify it using methods. Here is an excerpt of its code:
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 class Tortoise {
   double angle
   double x
@@ -1522,55 +1266,37 @@ class Tortoise {
 							<p>
 								We could have used EMF to model the tortoise, but that would have been kind of of overkill for a single
 								EClass. When a method that changes the state is called, an event is thrown. These events are consumed
-								by a GEF based view and turned into animations of a 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/runtime/view/TortoiseFigure.html"><abbr title="org.xtext.tortoiseshell.runtime.view.TortoiseFigure">TortoiseFigure</abbr></a>
+								by a GEF based view and turned into animations of a <a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/runtime/view/TortoiseFigure.html"><abbr title="org.xtext.tortoiseshell.runtime.view.TortoiseFigure">TortoiseFigure</abbr></a>
 								.  
 							</p>
 							<!-- subsection -->
 							<section id="tortoise_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								<table class="table table-bordered table-condensed">
-								<tr><td>	Language name
-								</td>
-								<td>	TortoiseShell
-								</td>
+								<tr><td>Language name</td>
+								<td>TortoiseShell</td>
 								</tr>
-								<tr><td>	Author
-								</td>
-								<td>	Jan Koehnlein
-								</td>
+								<tr><td>Author</td>
+								<td>Jan Koehnlein</td>
 								</tr>
-								<tr><td>	Xtext Grammar
-								</td>
-								<td>	ridiculously tiny (17 LOC, 3 parser rules (+1 for a nicer Ecore model))
-								</td>
+								<tr><td>Xtext Grammar</td>
+								<td>ridiculously tiny (17 LOC, 3 parser rules (+1 for a nicer Ecore model))</td>
 								</tr>
-								<tr><td>	Xtext extensions
-								</td>
-								<td>	4 classes
-								</td>
+								<tr><td>Xtext extensions</td>
+								<td>4 classes</td>
 								</tr>
-								<tr><td>	Execution
-								</td>
-								<td>	interpreter
-								</td>
+								<tr><td>Execution</td>
+								<td>interpreter</td>
 								</tr>
-								<tr><td>	Runtime library
-								</td>
-								<td>	huge, a lot of fun!
-								</td>
+								<tr><td>Runtime library</td>
+								<td>huge, a lot of fun!</td>
 								</tr>
-								<tr><td>	Hardest part
-								</td>
-								<td>	Teaching GEF to center a figure
-								</td>
+								<tr><td>Hardest part</td>
+								<td>Teaching GEF to center a figure</td>
 								</tr>
-								<tr><td>	Animals harmed
-								</td>
-								<td>	0 (except virtual turtles)
-								</td>
+								<tr><td>Animals harmed</td>
+								<td>0 (except virtual turtles)</td>
 								</tr>
 								</table>
 							</p>
@@ -1578,26 +1304,13 @@ class Tortoise {
 							</section>
 							<!--  section -->
 							<section id="tortoise_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
-								You should have installed the 
-								<a href="http://www.eclipse.org/gef">Graphical Editing Framework (GEF)</a>. Import the projects 
-								into an Eclipse workspace and run the launch config 
-								<strong>	Run (org.eclipse.xtext.tortoiseshell)
-								</strong>. Import the example plug-in 
-								into the new workspace and open one of the example files. Also open the 
-								<strong>	Tortoise View
-								</strong><strong>	(Window &gt;
-									Show View &gt; Other &gt; Xtext &gt; TortoiseView)
-								</strong>. The 
-								<strong>	Program
-								</strong> is interpreted on save. An additional toggle button 
-								<strong>	Step Mode
-								</strong> 
-								in the 
-								<strong>	Tortoise View
-								</strong> allows to execute the code live from the editor upto the carret's current line.
+								You should have installed the <a href="http://www.eclipse.org/gef">Graphical Editing Framework (GEF)</a>. Import the projects 
+								into an Eclipse workspace and run the launch config <strong>Run (org.eclipse.xtext.tortoiseshell)</strong>. Import the example plug-in 
+								into the new workspace and open one of the example files. Also open the <strong>Tortoise View</strong> <strong>(Window &gt;
+								Show View &gt; Other &gt; Xtext &gt; TortoiseView)</strong>. The <strong>Program</strong> is interpreted on save. An additional toggle button <strong>Step Mode</strong> 
+								in the <strong>Tortoise View</strong> allows to execute the code live from the editor upto the carret's current line.
 							</p>
 							<p>
 								<div class="thumbnail">
@@ -1607,36 +1320,18 @@ class Tortoise {
 							</section>
 							<!--  section -->
 							<section id="tortoise_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="tortoise_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							<p>
 								The grammar is almost a joke. Once again, we inherit from the Xbase language to have nice Java integration
-								and rich expressions. A user can define a 
-								<strong>	Program
-								</strong> which can have 
-								<strong>	SubPrograms
-								</strong> with parameters. The 
-								<strong>	Executable
-								</strong>
-								rule is never called, but defines a common supertype for 
-								<strong>	Program
-								</strong> and 
-								<strong>	SubProgram
-								</strong> which will define
-								their common member 
-								<code class="prettyprint lang-xtend">body</code>. A 
-								<strong>	Body
-								</strong> is an 
-								<strong>	XBlockExpression
-								</strong> from Xbase, but with the keywords
-								<code class="prettyprint lang-xtend">begin</code> and 
-								<code class="prettyprint lang-xtend">end</code> instead of the curly braces.
+								and rich expressions. A user can define a <strong>Program</strong> which can have <strong>SubPrograms</strong> with parameters. The <strong>Executable</strong>
+								rule is never called, but defines a common supertype for <strong>Program</strong> and <strong>SubProgram</strong> which will define
+								their common member <code class="prettyprint lang-xtend">body</code>. A <strong>Body</strong> is an <strong>XBlockExpression</strong> from Xbase, but with the keywords
+								<code class="prettyprint lang-xtend">begin</code> and <code class="prettyprint lang-xtend">end</code> instead of the curly braces.
 							</p>
-								<pre class="prettyprint lang-xtext linenums">
+							<pre class="prettyprint lang-xtext linenums">
 grammar org.xtext.tortoiseshell.TortoiseShell with org.eclipse.xtext.xbase.Xbase
 
 import "http://www.eclipse.org/xtext/xbase/Xbase"
@@ -1662,18 +1357,12 @@ Executable:
 							</section>
 							<!-- subsection -->
 							<section id="tortoise_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							<p>
-								With the tortoise commands in the runtime library class 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/runtime/Tortoise.html"><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a>
+								With the tortoise commands in the runtime library class <a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/runtime/Tortoise.html"><abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr></a>
 								, we 
 								have to make sure to infer a Java class that inherits from this. Within this class, we create a method
-								for each 
-								<strong>	Program
-								</strong> and 
-								<strong>	SubProgram
-								</strong>. The resulting code looks like this:
+								for each <strong>Program</strong> and <strong>SubProgram</strong>. The resulting code looks like this:
 							</p>
 							<p>
 								<pre class="prettyprint lang-xtend linenums">
@@ -1695,21 +1384,17 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
            ]
        ]
      }
-}</pre>
+}</pre> 
 							</p>
 							</section>
 							<!-- subsection -->
 							<section id="tortoise_interpreter" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Interpreter
-							</h3>
+							<h3>Interpreter</h3>
 							<p>
 								The Xbase languge library does not only provide a compiler that generates Java code, but also an 
-								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">	interpreter
-								</a>
+								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a>
 								. This has been adapted to
-								to execute our 
-								<strong>	Programs
-								</strong>. 
+								to execute our <strong>Programs</strong>. 
 							</p>
 							<p>
 								In fact, an interpreter is just a big visitor. For each expression type, it has an evaluation method,
@@ -1728,7 +1413,7 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 							<p>
 								<code class="prettyprint lang-xtend">invokeOperation</code>:
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 @Inject extension IJvmModelAssociations
  
 override protected invokeOperation(JvmOperation operation, Object receiver, List&lt;Object&gt; argumentValues) {
@@ -1755,17 +1440,14 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 								. So to detect wheter a 
 								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a>
 								 is inferred, we check whether it has a source element.
-								If so, we have to setup an exection context binding 
-								<code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
+								If so, we have to setup an exection context binding <code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
 								execute the method's body using the interpreter. 
 							</p>
 							<p>
 								To start the interpretation we need to do almost the same: Setup the execution context and then evaluate
-								the 
-								<strong>	Program's
-								</strong> body. The respective code is 
+								the <strong>Program's</strong> body. The respective code is 
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 override run(Tortoise tortoise, EObject program, int stopAtLine) {
   if(tortoise != null && program != null) {
     this.tortoise = tortoise
@@ -1779,16 +1461,12 @@ override run(Tortoise tortoise, EObject program, int stopAtLine) {
   }
 }</pre>
 							<p>
-								The 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/interpreter/StopLineReachedException.html"><abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException">StopLineReachedException</abbr></a>
-								 is part of the 
-								<strong>	Step Mode
-								</strong>.
-								It is thrown when the execution reaches the line 
-								<code class="prettyprint lang-xtend">stopAtLine</code>, thus terminating the current execution.
+								The <a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/interpreter/StopLineReachedException.html"><abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException">StopLineReachedException</abbr></a>
+								 is part of the <strong>Step Mode</strong>.
+								It is thrown when the execution reaches the line <code class="prettyprint lang-xtend">stopAtLine</code>, thus terminating the current execution.
 								The throwing code is
 							</p>
-								<pre class="prettyprint lang-xtend linenums">
+							<pre class="prettyprint lang-xtend linenums">
 override protected internalEvaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) {
   val line = NodeModelUtils::findActualNodeFor(expression)?.startLine
   if(line-1 == stopAtLine)
@@ -1798,16 +1476,12 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</section>
 							<!-- subsection -->
 							<section id="tortoise_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
-								To make the static methods and fields of 
-								<a href="http://xtend-lang.org/api/2.3.0/java/lang/Math.html"><abbr title="java.lang.Math">Math</abbr></a>
-								 and 
-								<a href="http://xtend-lang.org/api/2.3.0/org/eclipse/draw2d/ColorConstants.html"><abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
+								To make the static methods and fields of <a href="http://xtend-lang.org/api/2.3.0/java/lang/Math.html"><abbr title="java.lang.Math">Math</abbr></a>
+								 and <a href="http://xtend-lang.org/api/2.3.0/org/eclipse/draw2d/ColorConstants.html"><abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
 								
-								callable directly, we provided the 
-								<a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/scoping/TortoiseShellExtensionClassNameProvider.html"><abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider">TortoiseShellExtensionClassNameProvider</abbr></a>
+								callable directly, we provided the <a href="http://xtend-lang.org/api/2.3.0/org/xtext/tortoiseshell/scoping/TortoiseShellExtensionClassNameProvider.html"><abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider">TortoiseShellExtensionClassNameProvider</abbr></a>
 								.
 							</p>
 							<p>
@@ -1819,8 +1493,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</section>
 							<!--  section -->
 							<section id="tortoise_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							<p>
 								You could at a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
 								etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 
@@ -1837,12 +1510,11 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-									T.B.A.
+								T.B.A.
 							</h1>
 							<!--  section -->
 							<section id="tba_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Problem
-							</h2>
+							<h2>The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -1850,8 +1522,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</section>
 							<!--  section -->
 							<section id="tba_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	A Solution With Xtext
-							</h2>
+							<h2>A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -1862,8 +1533,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</p>
 							<!-- subsection -->
 							<section id="tba_statistics" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Some Stats
-							</h3>
+							<h3>Some Stats</h3>
 							<p>
 								files touched, LOC, animals harmed, etc 
 								can also be funny
@@ -1872,30 +1542,25 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</section>
 							<!--  section -->
 							<section id="tba_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Running the Example
-							</h2>
+							<h2>Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins... 
 							</p>
 							</section>
 							<!--  section -->
 							<section id="tba_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	The Solution in Detail
-							</h2>
+							<h2>The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="tba_grammar" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Grammar
-							</h3>
+							<h3>Grammar</h3>
 							</section>
 							<!-- subsection -->
 							<section id="tba_inferrer" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Translation to Java
-							</h3>
+							<h3>Translation to Java</h3>
 							</section>
 							<!-- subsection -->
 							<section id="tba_additons" style="padding-top: 68px; margin-top: -68px;">
-							<h3>	Additional Aspects
-							</h3>
+							<h3>Additional Aspects</h3>
 							<p>
 								Addtionally customized things: validation, scoping, code completion ...
 							</p>
@@ -1903,8 +1568,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</section>
 							<!--  section -->
 							<section id="_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>	Beyond This Example
-							</h2>
+							<h2>Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
