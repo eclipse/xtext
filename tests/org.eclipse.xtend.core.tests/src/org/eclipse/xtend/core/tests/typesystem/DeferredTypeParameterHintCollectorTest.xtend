@@ -18,12 +18,11 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XbaseFactory
+import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.internal.BaseUnboundTypeParameter
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
@@ -58,7 +57,7 @@ class DeferredTypeParameterHintCollectorTest extends AbstractXtendTestCase {
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
 		val collector = new DeferredTypeParameterHintCollector(services)
-		val substitutor = new MockTypeParameterSubstitutor(services, new MockResolvedTypes(resolver))
+		val substitutor = new MockTypeParameterSubstitutor(services, new PublicResolvedTypes(resolver))
 		val hasUnbounds = substitutor.substitute(operation.parameters.head.parameterType)
 		val isActual = operation.parameters.last.parameterType
 		collector.processPairedReferences(hasUnbounds, isActual)
@@ -146,26 +145,11 @@ class DeferredTypeParameterHintCollectorTest extends AbstractXtendTestCase {
 /**
  * @author Sebastian Zarnekow
  */
-class MockResolvedTypes extends ResolvedTypes {
-	
-	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
-	}
-
-	override public createUnboundTypeParameter(XExpression expression, JvmTypeParameter type) {
-		super.createUnboundTypeParameter(expression, type)
-	}
-
-}
-
-/**
- * @author Sebastian Zarnekow
- */
 class MockTypeParameterSubstitutor extends TypeParameterSubstitutor {
 	
-	val MockResolvedTypes resolvedTypes
+	val PublicResolvedTypes resolvedTypes
 	
-	new(CommonTypeComputationServices services, MockResolvedTypes resolvedTypes) {
+	new(CommonTypeComputationServices services, PublicResolvedTypes resolvedTypes) {
 		super(<JvmTypeParameter, MergedBoundTypeArgument>emptyMap(), services)
 		this.resolvedTypes = resolvedTypes
 	}

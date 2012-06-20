@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.tests.typesystem.MockResolvedTypes;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -13,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
@@ -30,9 +30,9 @@ import org.eclipse.xtext.xtype.XtypeFactory;
  */
 @SuppressWarnings("all")
 public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor {
-  private final MockResolvedTypes resolvedTypes;
+  private final PublicResolvedTypes resolvedTypes;
   
-  public MockTypeParameterSubstitutor(final CommonTypeComputationServices services, final MockResolvedTypes resolvedTypes) {
+  public MockTypeParameterSubstitutor(final CommonTypeComputationServices services, final PublicResolvedTypes resolvedTypes) {
     super(new Function0<Map<JvmTypeParameter,MergedBoundTypeArgument>>() {
       public Map<JvmTypeParameter,MergedBoundTypeArgument> apply() {
         Map<JvmTypeParameter,MergedBoundTypeArgument> _emptyMap = CollectionLiterals.<JvmTypeParameter, MergedBoundTypeArgument>emptyMap();
