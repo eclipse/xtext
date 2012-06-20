@@ -1,9 +1,9 @@
 package generator;
 
-import bootstrap.Body;
 import bootstrap.HtmlExtensions;
 import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
+import generator.DocumentationBody;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
@@ -11,7 +11,7 @@ import org.eclipse.xtext.xdoc.xdoc.Chapter;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 
 @SuppressWarnings("all")
-public class ExamplesBody extends Body {
+public class ExamplesBody extends DocumentationBody {
   @Inject
   private XdocExtensions _xdocExtensions;
   
@@ -25,7 +25,7 @@ public class ExamplesBody extends Body {
     _builder.append("<section id=\"");
     String _href = this._htmlExtensions.href(chapter);
     _builder.append(_href, "");
-    _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
+    _builder.append("\" style=\"margin-bottom: 50px\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<div class=\"row\">");
@@ -44,11 +44,14 @@ public class ExamplesBody extends Body {
     _builder.append("\t\t\t");
     _builder.append("</h1>");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<hr style=\"margin-top: 5px; margin-bottom: 5px;\">");
+    _builder.newLine();
     {
       EList<TextOrMarkup> _contents = chapter.getContents();
       for(final TextOrMarkup content : _contents) {
         _builder.append("\t\t\t");
-        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
+        CharSequence _html_1 = content==null?(CharSequence)null:this._htmlExtensions.toHtml(content);
         _builder.append(_html_1, "			");
         _builder.newLineIfNotEmpty();
       }

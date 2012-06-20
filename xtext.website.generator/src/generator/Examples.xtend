@@ -57,20 +57,21 @@ class ExampleSetup extends XdocStandaloneSetup implements Module {
 	}
 }
 
-class ExamplesBody extends Body {
+class ExamplesBody extends DocumentationBody {
 	@Inject extension XdocExtensions
 	@Inject extension HtmlExtensions
 	
 	override h1(Chapter chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
+		<section id="«chapter.href»" style="margin-bottom: 50px">
 			<div class="row">
 				<div class="span10 offset1">
 					<h1>
 						«chapter.title.toHtml»
 					</h1>
+					<hr style="margin-top: 5px; margin-bottom: 5px;">
 					«FOR content : chapter.contents»
-						«content.toHtml»
+						«content?.toHtml»
 					«ENDFOR»
 					«FOR section: chapter.sections»
 						«section.h2»
@@ -79,4 +80,5 @@ class ExamplesBody extends Body {
 			</div>
 		</section>
 	'''
+	
 }
