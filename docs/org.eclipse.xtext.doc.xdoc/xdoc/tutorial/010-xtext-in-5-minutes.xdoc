@@ -2,8 +2,7 @@ chapter:FirstFiveMinutes[5 Minutes Tutorial]
 
 In this chapter you will learn how to create a new Xtext project, generate a fully working language infrastructure
 and how to start a new Eclipse instance in order to test the editor. But before we get started, make sure you have 
-Eclipse Xtext properly installed. If you are not sure about that, you should follow the 
-ref:Installation[installation instructions].
+Eclipse Xtext properly installed. 
 
 section:NewProject[Creating A New Xtext Project]
 
