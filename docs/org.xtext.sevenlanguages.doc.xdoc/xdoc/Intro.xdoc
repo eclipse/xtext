@@ -4,19 +4,19 @@ Why?
 
 The seven languages are
 ul[
+item[A simple expression language generating a Java application]
 item[ref:mongo[mongoBeans]: JavaBeans-like statically typed access to mongoDB documents]
 item[ref:routing[HttpRouting]: HttpRoutes with full support of expressions]
 item[ref:templates[Templates]: ]
 item[ref:guice[GuiceModules]: ]
 item[ref:cradle[Cradle]: ]
 item[ref:tortoise[TortoiseShell]: A logo like programming environment for educational purposes]
-item[ref:tba[T.B.A.]: A language that is yet to be invented.]
 ]
 
 
 section:common_requirements[Common Requirements]
 
-To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 3.6 or higher]
+To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 3.8 or higher]
 for your platform. In addition, you have to install link[http://www.xtext.org][Xtext 2.3] and 
 link[http://www.xtend-lang.org][Xtend 2.3]. Both of these are also available on the official 
 link[][Eclipse Juno Update Site] todo[link!]
@@ -25,3 +25,10 @@ If you prefer a simple all-inclusive installation, consider downloading the late
 link[http://download.itemis.com/distros][itemis distribution].
 
 Additional requirements are mentioned in the e[Running the Example] section of each chapter.
+
+section:xbase[Xbase]
+
+
+section:xtend[Xtend]
+
+

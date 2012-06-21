@@ -53,6 +53,8 @@ codelanguage-def[routing][
 
 chapter-ref[introduction]
 
+chapter-ref[simple]
+
 chapter-ref[mongo]
 
 chapter-ref[routing]
@@ -65,5 +67,4 @@ chapter-ref[cradle]
 
 chapter-ref[tortoise]
 
-chapter-ref[tba]
 
