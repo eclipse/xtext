@@ -19,7 +19,7 @@ class CodeRefs {
 			println("Missing JavaDoc link for " + element.identifier)
 			return null
 		}
-		uri	
+		uri
 	}
 
 	def getSourceCodeURI(JvmIdentifiableElement element) {

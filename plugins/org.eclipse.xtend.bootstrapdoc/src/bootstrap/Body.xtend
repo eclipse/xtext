@@ -13,8 +13,8 @@ class Body {
 	
 	def body(Document document) '''
 		<div id="maincontainer" class="container">
-			«FOR chapter: document.chapters + document.parts.map[chapters].flatten»
-				«(chapter.resolve as Chapter).h1»
+			«FOR chapter: document.allChapters»
+				«chapter.h1»
 			«ENDFOR»
 		</div>
 	'''

@@ -2,17 +2,12 @@ package bootstrap;
 
 import bootstrap.HtmlExtensions;
 import bootstrap.XdocExtensions;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Chapter;
 import org.eclipse.xtext.xdoc.xdoc.Document;
-import org.eclipse.xtext.xdoc.xdoc.Part;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 
 @SuppressWarnings("all")
@@ -28,21 +23,10 @@ public class Body {
     _builder.append("<div id=\"maincontainer\" class=\"container\">");
     _builder.newLine();
     {
-      EList<Chapter> _chapters = document.getChapters();
-      EList<Part> _parts = document.getParts();
-      final Function1<Part,EList<Chapter>> _function = new Function1<Part,EList<Chapter>>() {
-          public EList<Chapter> apply(final Part it) {
-            EList<Chapter> _chapters = it.getChapters();
-            return _chapters;
-          }
-        };
-      List<EList<Chapter>> _map = ListExtensions.<Part, EList<Chapter>>map(_parts, _function);
-      Iterable<Chapter> _flatten = Iterables.<Chapter>concat(_map);
-      Iterable<Chapter> _plus = Iterables.<Chapter>concat(_chapters, _flatten);
-      for(final Chapter chapter : _plus) {
+      Iterable<Chapter> _allChapters = this._xdocExtensions.getAllChapters(document);
+      for(final Chapter chapter : _allChapters) {
         _builder.append("\t");
-        AbstractSection _resolve = this._xdocExtensions.resolve(chapter);
-        CharSequence _h1 = this.h1(((Chapter) _resolve));
+        CharSequence _h1 = this.h1(chapter);
         _builder.append(_h1, "	");
         _builder.newLineIfNotEmpty();
       }

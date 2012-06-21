@@ -13,6 +13,10 @@ import org.eclipse.xtext.xdoc.xdoc.SectionRef
 
 class XdocExtensions {
 	
+	def getAllChapters(Document document) {
+		(document.chapters + document.parts.map[chapters].flatten).map[resolve as Chapter]
+	}
+	
 	def Iterable<? extends AbstractSection> getSections(AbstractSection section) {
 		switch it : section.resolve {
 			Document : it.chapters.map[resolve]
