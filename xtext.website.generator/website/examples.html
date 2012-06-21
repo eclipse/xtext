@@ -307,11 +307,11 @@
 							<p>
 								OTOH, the standard mongoDB Java driver reflects mongoDB's schema freeness by providing mongo documents as 
 								raw Java maps. This results in some major annoyances: First, you loose the benefit from Java's static typing. 
-								You can ask a <abbr title="com.mongodb.DBObject">DBObject</abbr>
+								You can ask a <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 for the value of a specific field, but you cannot be sure 
-								that the returned <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html">»<abbr title="java.lang.Object">Object</abbr></a>
+								that the returned <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html"><abbr title="java.lang.Object">Object</abbr></a>
 								 is of some expected type. As database entities are likely to 
-								play a major role in your application, having them implemented as a generic <abbr title="com.mongodb.DBObject">DBObject</abbr>
+								play a major role in your application, having them implemented as a generic <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								
 								will likely result poorly readable and unsafe code. Second, additional behavior that would usually go into 
 								methods of your entity classes has to be defined by external helper classes. Third, constructing a graph of 
@@ -357,10 +357,10 @@ package org.musicdb {
 							</p>
 							<p>
 								From each <strong>MongoBean</strong> definition in a <strong>MongoFile</strong> file, we generate a Java class that wraps a 
-								<abbr title="com.mongodb.DBObject">DBObject</abbr>
+								<a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								. The class provides statically typed getter and setter methods for all 
 								defined <strong>MongoProperties</strong>. In the implementation of these accessor methods we delegate to the wrapped
-								<abbr title="com.mongodb.DBObject">DBObject</abbr>
+								<a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 and do all the casting and conversion work. For the <code class="prettyprint lang-xtend">Artist</code> in the 
 								above example, this would look like
 							</p>
@@ -512,7 +512,7 @@ QualifiedNameWithWildcard:
 								operation bodies.
 							</p>
 							<p>
-								The transformation is implemented in the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html">»<abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>
+								The transformation is implemented in the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>
 								.
 								It is written in the programming language <a href="http://www.xtend-lang.org">Xtend</a>, which is Java-like
 								but has a far more convenient syntax. As the generated code is quite rich, this is the most complex component
@@ -565,7 +565,7 @@ def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boole
 								<code class="prettyprint lang-xtend">extension</code>, all its methods can be called on the first argument, in this case the <code class="prettyprint lang-xtend">bean</code>. 
 								So <code class="prettyprint lang-xtend">bean.toClass(...)</code> is nothing else but <code class="prettyprint lang-xtend">_jvmtypesBuilder.toClass(bean, ...)</code>. Analogously, the 
 								method <code class="prettyprint lang-xtend">fullyQualifiedName</code> comes actually from the injected 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html">»<abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
 								. Please consult the 
 								<a href="http://www.xtend-lang.org/documentation">Xtend</a> documentation for more information on extension methods.
 							</p>
@@ -586,9 +586,9 @@ String)</pre> we create a reference to the existing interface <abbr title="org.x
 								will also insert a Java import at the appropriate location. 
 							</p>
 							<p>
-								Each <strong>MongoBean</strong> wraps a <abbr title="com.mongodb.DBObject">DBObject</abbr>
+								Each <strong>MongoBean</strong> wraps a <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 which is represented as a Java field with a 
-								getter. There are two constructors, one for a given <abbr title="com.mongodb.DBObject">DBObject</abbr>
+								getter. There are two constructors, one for a given <a href="http://api.mongodb.org/java/2.6/com/mongodb/DBObject.html"><abbr title="com.mongodb.DBObject">DBObject</abbr></a>
 								 and one that 
 								creates a new one. We have to store the class name in the DB object, if we want to be able to restore
 								JavaBeans from query results.
@@ -726,11 +726,11 @@ def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty p
   }</pre>
 							<p>
 								Multi-valued <strong>MongoProperties</strong> with a <strong>MongoBean</strong> type require a special implementation of 
-								<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html">»<abbr title="java.util.List">List</abbr></a>
+								<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html"><abbr title="java.util.List">List</abbr></a>
 								 to automatically wrap/unwrap the elements. That's the third runtime library 
 								class <abbr title="org.xtext.mongobeans.runtime.MongoBeanList">MongoBeanList</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/MongoBeanList.java">(src)</a>
 								. Note that we need a getter only. For multi-valued
-								primitive properties, the Java driver already delivers a <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html">»<abbr title="java.util.List">List</abbr></a>
+								primitive properties, the Java driver already delivers a <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html"><abbr title="java.util.List">List</abbr></a>
 								:
 							</p>
 							<p>
@@ -830,7 +830,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							<h3>Additional Aspects</h3>
 							<p>
 								We have tweaked the language's infrastructure a bit more. First, we have adapted the 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html">»<abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>
 								. By default, the
 								qualified name of an element is calculated by concatening all the simple names of its containers with
 								a dot. In our example, the <strong>MongoBean</strong> <code class="prettyprint lang-xtend">Track</code> would consequently be named 
@@ -1012,7 +1012,7 @@ Key:
 							<section id="routing_inferrer" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Translation to Java</h3>
 							<p>
-								For each <strong>RouteFile</strong>, we create a Java class extending the class <abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr>
+								For each <strong>RouteFile</strong>, we create a Java class extending the class <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html"><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a>
 								.
 								The generated Java classes rely on the Servelet-API to work, so it has to be on the classpath.
 							</p>
@@ -1125,7 +1125,7 @@ public boolean doGet0Condition(final HttpServletRequest request, final String id
 							</p>
 							<p>
 								For each Route a condition should end in a method with a boolean return type. Each variable value should
-								be handled in as a parameter. Same is true for the <abbr title="javax.servlet.http.HttpServletRequest">HttpServletRequest</abbr>
+								be handled in as a parameter. Same is true for the <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServletRequest.html"><abbr title="javax.servlet.http.HttpServletRequest">HttpServletRequest</abbr></a>
 								.
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
@@ -1318,7 +1318,7 @@ public void doGet(final HttpServletRequest request, final HttpServletResponse re
 								</table>
 							</p>
 							<p>
-								Now we have to put our logic in the global methods of <abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr>
+								Now we have to put our logic in the global methods of <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html"><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a>
 								. First
 								of all we have to establish several methods for the corresponding request types. As an example for GET
 								the method <code class="prettyprint lang-java">public void doGet(final HttpServletRequest request, final HttpServletResponse response)</code>
@@ -1430,10 +1430,10 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 							<h2 style="font-weight: normal;">Beyond This Example</h2>
 							<p>
 								Of course the DSL is not complete and there are several types of URL-pattern variables missing but it
-								should not be a hard thing to extend this example. To enable DI in the context of a <abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr>
+								should not be a hard thing to extend this example. To enable DI in the context of a <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html"><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a>
 								
 								there has to be a wrapper or something like that to create an injector. One really cool thing would be
-								to establish and <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XExpression.html">»<abbr title="org.eclipse.xtext.xbase.XExpression">XExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XExpression.java">(src)</a>
+								to establish and <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XExpression.html"><abbr title="org.eclipse.xtext.xbase.XExpression">XExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XExpression.java">(src)</a>
 								 that handles the complete guice-key and action call stuff with a corresponding
 								compiler but this is fare beyond the scope of this example. ;-)
 							</p>
@@ -1669,7 +1669,7 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 								The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
 								I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
 								interpreter. But technically, this example will teach you how to use and adapt the 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">»<abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
 								 for your own language.  
 							</p>
 							</section>
@@ -1721,7 +1721,7 @@ begin
   forward(length)
 end</pre></td>
 								<td><div class="thumbnail">
-									<img src="images/Nikolaus.png" alt="">
+									<img src="images/Nikolaus.png" alt="" width="261" height="263">
 								</div></td>
 								</tr>
 								</table>
@@ -1801,7 +1801,7 @@ class Tortoise {
 							</p>
 							<p>
 								<div class="thumbnail">
-									<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example">
+									<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example" width="651" height="546">
 								</div>
 							</p>
 							</section>
@@ -1879,7 +1879,7 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 							<h3>Interpreter</h3>
 							<p>
 								The Xbase languge library does not only provide a compiler that generates Java code, but also an 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">»interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html">interpreter</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>
 								. This has been adapted to
 								to execute our <strong>Programs</strong>. 
 							</p>
@@ -1920,12 +1920,12 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 }</pre>
 							<p>
 								One thing you have to know about the Java inferrence is that when creating Java elements using the
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html">»<abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>
 								, the infrastructure stores the information which 
 								elements have been inferred from which source elements. To navigate these traces, we use the the Xbase service
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html">»<abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations">IJvmModelAssociations</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">(src)</a>
 								. So to detect wheter a 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html">»<abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a>
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmOperation.html"><abbr title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">(src)</a>
 								 is inferred, we check whether it has a source element.
 								If so, we have to setup an exection context binding <code class="prettyprint lang-xtend">this</code> and the parameters as local variables and then 
 								execute the method's body using the interpreter. 
@@ -1965,8 +1965,8 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							<section id="tortoise_additons" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Additional Aspects</h3>
 							<p>
-								To make the static methods and fields of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Math.html">»<abbr title="java.lang.Math">Math</abbr></a>
-								 and <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html">»<abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
+								To make the static methods and fields of <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Math.html"><abbr title="java.lang.Math">Math</abbr></a>
+								 and <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html"><abbr title="org.eclipse.draw2d.ColorConstants">ColorConstants</abbr></a>
 								
 								callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider">TortoiseShellExtensionClassNameProvider</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.scoping/src/org/xtext/tortoiseshell/scoping/TortoiseShellExtensionClassNameProvider.java">(src)</a>
 								.
