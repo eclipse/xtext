@@ -14,6 +14,8 @@ import bootstrap.HtmlExtensions
 class Examples extends Documentation {
 	
 	@Inject extension Body
+	@Inject extension XdocExtensions
+	@Inject extension HtmlExtensions
 
 	override getStandaloneSetup() {
 		new ExampleSetup
@@ -26,9 +28,50 @@ class Examples extends Documentation {
  	override path() {
     	'examples.html'
   	}
+  	
+  	override navBar() '''
+		<!-- Navbar -->
+		<div class="navbar navbar-fixed-top"
+			style="border-bottom: 1px solid #000;">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse"
+						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+					</a> <a class="brand" href="index.html"></a>
+		
+		
+					<div class="nav-collapse collapse" style="height: 0px;">
+						<ul class="nav">
+							<li «IF path == 'download.html'»class="active"«ENDIF»><a href="download.html">Download</a></li>
+							«navbarDropdown»
+							<li «IF path == 'documentation.html'»class="active"«ENDIF»><a href="documentation.html">Documentation</a></li>
+							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
+							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
+						</ul>
+		
+					</div>
+					<!--/.nav-collapse -->
+		
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+	'''
+  	
+  	def navbarDropdown() '''
+		<li class="dropdown" «IF path == 'examples.html'»class="active"«ENDIF»>
+			<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				«FOR chapter: document.allChapters»
+					<li><a href="#«chapter.href»">«chapter.title.toHtml»</a></li>
+				«ENDFOR»
+			</ul>
+		</li>
+  	'''
   
 	override contents() '''
-			<!--Container-->
+		<!--Container-->
 		<div id="header_wrapper" class="container" >
 			<div class="inner">
 				<div class="container">
