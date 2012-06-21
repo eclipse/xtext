@@ -66,12 +66,17 @@ strong {
 }
 
 .image_left {
-	margin: 0px 10px 10px 0px;
 	border-radius: 98px;
 	-moz-border-radius: 98px;
 	-webkit-border-radius: 98px;
-	max-width: 70px;
 	float: left;
+}
+
+@media (max-width: 767px) {
+  .image_left {
+    height: 80px;
+    margin-right: 10px;
+  }
 }
 
 .image_left_reviews {
@@ -503,23 +508,59 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 .team {
 /* 	background: #f4f4f4; */
-background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, 1)), color-stop(100%,rgba(235, 235, 235, 1)));
-background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-background: linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='white', endColorstr='#EBEBEB',GradientType=0 );
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
--webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1);
--moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1);
-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1);
-	border-radius: 8px;
-	padding: 5px;
-	margin-bottom: 5px;
-	height: 70px;
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, 1)), color-stop(100%,rgba(235, 235, 235, 1)));
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	background: linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='white', endColorstr='#EBEBEB',GradientType=0 );
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
+	padding: 10px;
+	margin-bottom: 15px;
+	height: 60px;
+	position: relative;
+}
+
+@media (min-width: 1200px) {
+  .team {
+    height: 70px;
+  } 
+}
+@media (max-width: 979px) {
+  .team {
+    height: 70px;
+  }
+}
+@media (max-width: 767px) {
+  .team {
+    height: 110px;
+  }
+}
+
+.anchor-in-div {
+	position: absolute; 
+	display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-indent: -9999px;
+  z-index: 1000;
+}
+
+.team :hover {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 5px #A00;
+  -moz-box-shadow: 0 0 5px #A00;
+  box-shadow: 0 0 5px #A00;
 }
 
 #extra {
@@ -767,10 +808,4 @@ ul.list3 li {
 section {
 	padding-top: 100px;
 	margin-top: -100px;
-}
-
-.resourcelink {
-	font-size: 24px;
-	margin-top: 7%;
-	margin-left: 25%;
 }

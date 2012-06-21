@@ -91,6 +91,76 @@ class Download extends AbstractWebsite {
 				    </div>
 					<div class="span1">&nbsp;</div>
 				</div>
+				    <div class="container">
+								<div class="container">
+				<h2>Installation Instructions</h2>
+				<hr>
+				<div class="span1">&nbsp;</div>
+				  <div class="span9">
+				    <p>
+				      <strong>  Eclipse Xtext is implemented in Java, so you must have a 
+				        <a href="http://www.oracle.com/technetwork/java/index.html">Java
+				        Runtime Environment</a> installed in order to proceed.
+				      </strong>
+				    </p>
+				    <p>
+				      There are two easy ways to get Xtext up and running. A pre-configured Eclipse distribution is available
+				      which has already all the necessary plug-ins installed. Alternatively, you can install Xtext into your
+				      existing Eclipse by means of the Eclipse update mechanism.
+				    </p>
+				    <!--  section -->
+				    <section id="InstallDistro" style="padding-top: 68px; margin-top: -68px;">
+				    <h2>  Install Pre-Configured Eclipse With Xtext
+				    </h2>
+				      <ol>
+				        <li>Download the distribution from above that matches your OS.</li>
+				        <li>Unzip the archive into the directory of your choice. 
+								<strong>  Windows Users should choose a directory close to the root since the zip contains a 
+								deeply nested folder structure. The maximum path length on windows may not exceed 256 characters.
+								</strong>
+				        </li>
+				        <li>Launch Eclipse and select the workspace location. A workspace location is the directory for your user data
+								    and project files.
+				        </li>
+				      </ol>
+				    </section>
+				    <!--  section -->
+				    <section style="padding-top: 68px; margin-top: -68px;">
+				    <h2>  Install Xtext From Update Site
+				    </h2>
+				    <p>
+				      If you have an Eclipse running : 
+				    </p>
+				      <ul>
+				        <li>  
+								    Choose 
+								<strong>  Help -&gt; Install New Software...
+								</strong> from the menu bar and
+								<strong>  Add...
+								</strong> Insert one of the update site URLs from above.
+								    This site aggregates all the necessary and optional components and dependencies of Xtext.
+				        </li>
+				        <li>Select the <i>Xtext SDK</i> from the category <i>Xtext {version}</i> and 
+				        complete the wizard by clicking the <i>Next</i> button until you can click <i>Finish</i>.
+				        </li>
+				        <li>  
+								    After a quick download and a restart of Eclipse, Xtext is ready to use.
+				        </li>
+				      </ul>
+				    <p>
+				      Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on 
+				      the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid 
+				      this, you can manually install the feature 
+				      <strong>  Xtext Antlr-2.0.0
+				      </strong> from the itemis update site
+				      (
+				      <a href="http://download.itemis.de/updates/">http://download.itemis.de/updates/</a>). 
+				      The general installation procedures are not affected by this issue.
+				    </p>
+				    </section>
+				  </div>
+				<div class="span1">&nbsp;</div>
+				</div>
 				<div class="container">
 					<h2>FAQs</h2>
 					<hr />
