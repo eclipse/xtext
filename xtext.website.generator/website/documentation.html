@@ -90,6 +90,13 @@
 	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
 	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
 	<script type="text/javascript">
+	  (function() {
+	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	    po.src = 'https://apis.google.com/js/plusone.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	  })();
+	</script>
+	<script type="text/javascript">
 		var _gaq = _gaq || [];	
 	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
 		_gaq.push([ '_trackPageview' ]);
@@ -116,11 +123,13 @@
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a> <a class="brand" href="index.html"></a>
 	
+	      <div class="btn-group pull-right">
+	        <g:plusone href="http://www.xtext.org"></g:plusone>
+	      </div>
 	
 				<div class="nav-collapse collapse" style="height: 0px;">
 					<ul class="nav">
 						<li ><a href="download.html">Download</a></li>
-						<li ><a href="examples.html">Examples</a></li>
 						<li class="active"><a href="documentation.html">Documentation</a></li>
 						<li ><a href="community.html">Community</a></li>
 						<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
@@ -257,8 +266,7 @@
 							<p>
 								In this chapter you will learn how to create a new Xtext project, generate a fully working language infrastructure
 								and how to start a new Eclipse instance in order to test the editor. But before we get started, make sure you have 
-								Eclipse Xtext properly installed. If you are not sure about that, you should follow the 
-								<a href="#Installation">installation instructions</a>.
+								Eclipse Xtext properly installed. 
 							</p>
 							<!--  section -->
 							<section id="NewProject" style="margin-top: 20px; padding-top: 0;">
@@ -10400,14 +10408,14 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 	
 	
 						<ul class="footer-links clearfix">
-							<li><a href="#">Support</a></li>
-							<li><a href="#">License</a></li>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-						</ul>
+	<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+	<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+	<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+	<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+	</ul>
 						<ul class="footer-links clearfix">
-							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
-							<li><a href="http://marketplace.eclipse.org/">Eclipse Market Place</a></li>
+	            <li><a href="/">Home</a></li>
+							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
 							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
 							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
 						</ul>

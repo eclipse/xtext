@@ -248,6 +248,25 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("(function() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("po.src = \'https://apis.google.com/js/plusone.js\';");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("})();");
+    _builder.newLine();
+    _builder.append("</script>");
+    _builder.newLine();
+    _builder.append("<script type=\"text/javascript\">");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("var _gaq = _gaq || [];\t");
     _builder.newLine();
@@ -320,6 +339,15 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("</a> <a class=\"brand\" href=\"index.html\"></a>");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("<div class=\"btn-group pull-right\">");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("<g:plusone href=\"http://www.xtext.org\"></g:plusone>");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("</div>");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<div class=\"nav-collapse collapse\" style=\"height: 0px;\">");
@@ -342,19 +370,8 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<li ");
     {
       String _path_1 = this.path();
-      boolean _equals_1 = Objects.equal(_path_1, "examples.html");
+      boolean _equals_1 = Objects.equal(_path_1, "documentation.html");
       if (_equals_1) {
-        _builder.append("class=\"active\"");
-      }
-    }
-    _builder.append("><a href=\"examples.html\">Examples</a></li>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("<li ");
-    {
-      String _path_2 = this.path();
-      boolean _equals_2 = Objects.equal(_path_2, "documentation.html");
-      if (_equals_2) {
         _builder.append("class=\"active\"");
       }
     }
@@ -363,9 +380,9 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<li ");
     {
-      String _path_3 = this.path();
-      boolean _equals_3 = Objects.equal(_path_3, "community.html");
-      if (_equals_3) {
+      String _path_2 = this.path();
+      boolean _equals_2 = Objects.equal(_path_2, "community.html");
+      if (_equals_2) {
         _builder.append("class=\"active\"");
       }
     }
@@ -427,29 +444,24 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"#\">Support</a></li>");
+    _builder.append("<li><a href=\"http://www.eclipse.org/legal/privacy.php\">Privacy Policy</a></li>");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"#\">License</a></li>");
+    _builder.append("<li><a href=\"http://www.eclipse.org/legal/termsofuse.php\">Terms of Use</a></li>");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"#\">Terms of Use</a></li>");
+    _builder.append("<li><a href=\"http://www.eclipse.org/legal/copyright.php\">Copyright Agent</a></li>");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"#\">Privacy Policy</a></li>");
+    _builder.append("<li><a href=\"http://www.eclipse.org/legal/\">Legal</a></li>");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
     _builder.append("</ul>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse.org</a></li>");
+    _builder.append("            ");
+    _builder.append("<li><a href=\"/\">Home</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://marketplace.eclipse.org/\">Eclipse Market Place</a></li>");
+    _builder.append("<li><a href=\"http://marketplace.eclipse.org/\">Market Place</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("<li><a href=\"http://live.eclipse.org/\">Eclipse Live</a></li>");

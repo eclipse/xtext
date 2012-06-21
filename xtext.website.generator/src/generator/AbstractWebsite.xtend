@@ -107,6 +107,13 @@ abstract class AbstractWebsite implements Resource {
 		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
 		<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
 		<script type="text/javascript">
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+		<script type="text/javascript">
 			var _gaq = _gaq || [];	
 		  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
 			_gaq.push([ '_trackPageview' ]);
@@ -134,11 +141,14 @@ abstract class AbstractWebsite implements Resource {
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a> <a class="brand" href="index.html"></a>
 		
+		      <div class="btn-group pull-right">
+		        <g:plusone href="http://www.xtext.org"></g:plusone>
+		      </div>
 		
 					<div class="nav-collapse collapse" style="height: 0px;">
 						<ul class="nav">
 							<li «IF path == 'download.html'»class="active"«ENDIF»><a href="download.html">Download</a></li>
-							<li «IF path == 'examples.html'»class="active"«ENDIF»><a href="examples.html">Examples</a></li>
+«««							<li «IF path == 'examples.html'»class="active"«ENDIF»><a href="examples.html">Examples</a></li>
 							<li «IF path == 'documentation.html'»class="active"«ENDIF»><a href="documentation.html">Documentation</a></li>
 							<li «IF path == 'community.html'»class="active"«ENDIF»><a href="community.html">Community</a></li>
 							<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
@@ -169,14 +179,14 @@ abstract class AbstractWebsite implements Resource {
 		
 		
 							<ul class="footer-links clearfix">
-								<li><a href="#">Support</a></li>
-								<li><a href="#">License</a></li>
-								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-							</ul>
+		<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+		<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+		<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+		</ul>
 							<ul class="footer-links clearfix">
-								<li><a href="http://www.eclipse.org">Eclipse.org</a></li>
-								<li><a href="http://marketplace.eclipse.org/">Eclipse Market Place</a></li>
+		            <li><a href="/">Home</a></li>
+								<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
 								<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
 								<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
 							</ul>
