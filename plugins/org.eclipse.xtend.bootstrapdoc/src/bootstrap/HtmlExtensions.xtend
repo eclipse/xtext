@@ -1,5 +1,6 @@
 package bootstrap
 
+import com.google.inject.Inject
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.notify.impl.AdapterImpl
@@ -27,9 +28,6 @@ import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
 import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
 
-import static bootstrap.HtmlExtensions.*
-import com.google.inject.Inject
-
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
 }
@@ -37,6 +35,7 @@ class ArtificialIds extends AdapterImpl {
 class HtmlExtensions {
 	
 	@Inject extension CodeRefs
+	@Inject extension ImageExtensions
 	
 	def href(Identifiable id) {
 		val it = switch id {
@@ -118,11 +117,15 @@ class HtmlExtensions {
 		</ul>
 	'''
 	
-	def dispatch toHtml(ImageRef it) '''
-		<div class="thumbnail">
-			<img src="«path»" alt="«caption»">
-		</div>
-	'''
+	def dispatch toHtml(ImageRef it) {
+		val dimension = it.dimension
+		val caption = it.caption?.trim
+		'''
+			<div class="thumbnail">
+				<img src="«path»" alt="«caption»" «IF dimension!=null»width="«dimension.width»" height="«dimension.height»"«ENDIF»>
+			</div>
+		'''
+	}
 	
 	def dispatch toHtml(Todo it) {
 		println("TODO: " + text)
@@ -130,12 +133,11 @@ class HtmlExtensions {
 	}
 	
 	def dispatch CharSequence toHtml(CodeRef it) {
-		try {
 		val sourceCodeURI = element?.sourceCodeURI
 		val javaDocURI = element?.javaDocURI
 		'''
 		«IF javaDocURI != null
-			»<a href="«javaDocURI»">»«
+			»<a href="«javaDocURI»">«
 		ENDIF»«
 		IF altText != null
 			»«altText.toHtml»«
@@ -149,9 +151,6 @@ class HtmlExtensions {
 			» <a href="«sourceCodeURI»">(src)</a>«
 		ENDIF»
 	'''
-	} catch (Exception e) {
-		e.printStackTrace
-	}
 	}
 	
 	def dispatch toHtml(Code it) {
