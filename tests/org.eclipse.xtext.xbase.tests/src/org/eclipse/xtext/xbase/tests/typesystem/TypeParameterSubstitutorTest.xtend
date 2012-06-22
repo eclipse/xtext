@@ -8,78 +8,43 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import java.lang.annotation.RetentionPolicy
-import java.util.List
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor
-import org.junit.After
-import org.junit.Test
-
-import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 
 /**
  * @author Sebastian Zarnekow
  */
-class TypeParameterSubstitutorTest extends AbstractXbaseTestCase {
+class TypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest {
 	
 	@Inject CommonTypeComputationServices services
 	
-	@Inject TypeReferences typeReferences
-	
-	XtextResourceSet resourceSet
-	
-	override setUp() {
-		super.setUp
-		resourceSet = get(typeof(XtextResourceSet));
-	}
-	
-	@After def void tearDown() {
-		resourceSet = null
-	}
-	
-	def resolve(JvmTypeReference declaration, JvmTypeReference reference) {
+	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
 		val mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration)
-		return new TypeParameterSubstitutor(mapping, services).substitute(reference)
+		return new TypeParameterSubstitutor(mapping, services).substitute(reference).simpleName
 	}
 	
-	@Test def void testResolve_01() {
-		val declaration = typeReferences.getTypeForName(typeof(TypeResolutionTestData$NestedList), resourceSet)
-		val resolveMe = declaration
-		val resolved = declaration.resolve(resolveMe)
-		assertEquals("NestedList<T>", resolved.simpleName)
-	}
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest implements TypeReferenceOwner {
 	
-	@Test def void testResolve_02() {
-		val declaration = typeReferences.getTypeForName(typeof(TypeResolutionTestData$NestedList), resourceSet)
-		val resolveMe = typeReferences.getTypeForName(typeof(List), resourceSet)
-		val resolved = declaration.resolve(resolveMe)
-		assertEquals("List<List<T>>", resolved.simpleName)
-	}
+	@Inject CommonTypeComputationServices services
 	
-	@Test def void testResolve_03() {
-		val declaration = typeReferences.getTypeForName(typeof(TypeResolutionTestData$NestedList), resourceSet)
-		val resolveMe = typeReferences.getTypeForName(typeof(Iterable), resourceSet)
-		val resolved = declaration.resolve(resolveMe)
-		assertEquals("Iterable<List<T>>", resolved.simpleName)
-	}
+	extension OwnedConverter = new OwnedConverter(this)
 	
-	@Test def void testResolve_04() {
-		val declaration = typeReferences.getTypeForName(typeof(TypeResolutionTestData$NestedList), resourceSet)
-		val resolveMe = typeReferences.getTypeForName(typeof(Iterable), resourceSet)
-		val resolved = declaration.resolve(resolveMe)
-		assertEquals("Iterable<List<T>>", resolved.simpleName)
+	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
+		val mapping = new org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration.toLightweightReference)
+		return new org.eclipse.xtext.xbase.typesystem.references.TypeParameterSubstitutor(mapping, this).substitute(reference.toLightweightReference).toString
 	}
-	
-	@Test def void testResolve_05() {
-		val declaration = typeReferences.getTypeForName(typeof(RetentionPolicy), resourceSet)
-		val resolveMe = typeReferences.getTypeForName(typeof(Enum), resourceSet)
-		val resolved = declaration.resolve(resolveMe)
-		assertEquals("Enum<RetentionPolicy>", resolved.simpleName)
+
+	override getServices() {
+		return services
 	}
 	
 }
