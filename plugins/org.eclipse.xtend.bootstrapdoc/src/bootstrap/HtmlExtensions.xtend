@@ -26,16 +26,19 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup
 import org.eclipse.xtext.xdoc.xdoc.TextPart
 import org.eclipse.xtext.xdoc.xdoc.Todo
 import org.eclipse.xtext.xdoc.xdoc.UnorderedList
-import org.eclipse.xtext.xdoc.xdoc.XdocPackage$Literals
+import com.google.inject.Singleton
 
 class ArtificialIds extends AdapterImpl {
 	public Map<Identifiable, String> artificialHrefs = newHashMap() 	
 }
 
+@Singleton
 class HtmlExtensions {
 	
 	@Inject extension CodeRefs
 	@Inject extension ImageExtensions
+
+	boolean inParagraph = false
 	
 	def href(Identifiable id) {
 		val it = switch id {
@@ -55,7 +58,7 @@ class HtmlExtensions {
 		}  
 	}
 	
-	def private artificialHrefs(Identifiable id) {
+	def protected artificialHrefs(Identifiable id) {
 		val adapters = id.eResource.resourceSet.eAdapters
 		val adapter = adapters.filter(typeof(ArtificialIds)).head 
 						?: (new ArtificialIds => [
@@ -65,59 +68,78 @@ class HtmlExtensions {
 	}
 	
 	
-	def dispatch CharSequence toHtml(TextOrMarkup it) 
-		'''«IF isParagraph»
-			<p>
-				«contents.toHtml»
-			</p>
-		«ELSE»«contents.toHtml.toString.trim»«ENDIF»'''
+	def protected dispatch CharSequence toHtml(TextOrMarkup it) {
+		if(!inParagraph) {
+			inParagraph = true
+			val result = '''
+				<p>
+					«contents.toHtml.toString.trim»
+				</p>
+			'''
+			inParagraph = false
+			result
+		} else contents.toHtml.toString.trim
+		
+	}
 	
-	def private isParagraph(TextOrMarkup it) {
-		switch eContainingFeature {
-			case contents.size==1 
-			&& (contents.head instanceof CodeBlock 
-				|| contents.head instanceof OrderedList
-				|| contents.head instanceof UnorderedList): false
-			case XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS : true
-			default : false
-		}
+//	def protected isParagraph(TextOrMarkup it) {
+//		switch eContainingFeature {
+//			case contents.size==1 
+//			&& (contents.head instanceof CodeBlock 
+//				|| contents.head instanceof OrderedList
+//				|| contents.head instanceof UnorderedList): false
+//			case XdocPackage$Literals::ABSTRACT_SECTION__CONTENTS : true
+//			default : false
+//		}
+//	}
+
+	def toHtmlText(Object element) {
+		this.inParagraph = true 
+		toHtml(element)
 	}
 
-	def dispatch CharSequence toHtml(List<EObject> it) {
+	def toHtmlParagraph(Object element) {
+		this.inParagraph = false 
+		toHtml(element)
+	}
+
+	def protected dispatch CharSequence toHtml(List<EObject> it) {
 		map[toHtml].join
 	}
 
-	def dispatch toHtml(TextPart it) '''«text.quote»'''
+	def protected dispatch CharSequence toHtml(TextPart it) '''«text.quote»'''
 	
-	def dispatch toHtml(Emphasize it) '''<strong>«contents.toHtml»</strong>'''
+	def protected dispatch CharSequence toHtml(Emphasize it) '''<strong>«contents.toHtml»</strong>'''
 
-	def dispatch toHtml(Anchor it) '''
-		<a name="«name.quote»"/>
+	def protected dispatch CharSequence toHtml(Anchor it) '''
+		<a name="«name.quote»"></a>
 	'''
 	
-	def dispatch toHtml(Ref it) '''<a href="#«ref.href»">«contents.toHtml»</a>'''
+	def protected dispatch CharSequence toHtml(Ref it) '''<a href="#«ref.href»">«contents.toHtml»</a>'''
 	
-	def dispatch toHtml(OrderedList it) '''
-		<ol>
-			«FOR item:items»
-				«item.toHtml»
-			«ENDFOR»
-		</ol>
-	'''
+	def protected dispatch CharSequence toHtml(OrderedList it) { '''
+			<ol>
+				«FOR item:items»
+					«item.toHtml»
+				«ENDFOR»
+			</ol>
+		'''.insert
+	}
 	
-	def dispatch toHtml(Item it) '''
+	def protected dispatch CharSequence toHtml(Item it) '''
 		<li>«contents.toHtml»</li>
 	'''
 	
-	def dispatch toHtml(UnorderedList it) '''
-		<ul>
-			«FOR item:items»
-				«item.toHtml»
-			«ENDFOR»
-		</ul>
-	'''
+	def protected dispatch CharSequence toHtml(UnorderedList it) { '''
+			<ul>
+				«FOR item:items»
+					«item.toHtml»
+				«ENDFOR»
+			</ul>
+		'''.insert
+	}
 	
-	def dispatch toHtml(ImageRef it) {
+	def protected dispatch CharSequence toHtml(ImageRef it) {
 		val dimension = it.dimension
 		val caption = it.caption?.trim
 		'''
@@ -127,12 +149,12 @@ class HtmlExtensions {
 		'''
 	}
 	
-	def dispatch toHtml(Todo it) {
+	def protected dispatch CharSequence toHtml(Todo it) {
 		println("TODO: " + text)
 		return ""
 	}
 	
-	def dispatch CharSequence toHtml(CodeRef it) {
+	def protected dispatch CharSequence toHtml(CodeRef it) {
 		val sourceCodeURI = element?.sourceCodeURI
 		val javaDocURI = element?.javaDocURI
 		'''
@@ -149,43 +171,43 @@ class HtmlExtensions {
 		ENDIF»«
 		IF sourceCodeURI!=null
 			» <a href="«sourceCodeURI»">(src)</a>«
-		ENDIF»
-	'''
+		ENDIF»'''
 	}
 	
-	def dispatch toHtml(Code it) {
+	def protected dispatch CharSequence toHtml(Code it) {
 		contents.quote
 	}
 	
-	def dispatch toHtml(CodeBlock it) {
+	def protected dispatch CharSequence toHtml(CodeBlock it) {
 		val code = contents.toHtml.toString
 		if (code.contains('\n') && !code.contains('\r')) {
 			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
-			«code.trimCode»«markCodeEnd»</pre>'''
+			«code.trimCode»«markCodeEnd»</pre>'''.insert
 		} else {
 			'''<code class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'»">«code.trimCode»</code>'''
 		}
 	}
 	
-	def dispatch toHtml(Link it) '''<a href="«url»">«text»</a>'''
+	def protected dispatch CharSequence toHtml(Link it) '''<a href="«url»">«text»</a>'''
 
-	def dispatch toHtml(Table it) '''
-		<table class="table table-bordered table-condensed">
-		«FOR row:rows»
-			«row.toHtml»
-		«ENDFOR»
-		</table>
-	'''
+	def protected dispatch CharSequence toHtml(Table it) { '''
+			<table class="table table-bordered table-condensed">
+			«FOR row:rows»
+				«row.toHtml»
+			«ENDFOR»
+			</table>
+		'''.insert
+	}
 	
-	def dispatch toHtml(TableRow it) '''
+	def protected dispatch CharSequence toHtml(TableRow it) '''
 		<tr>«data.toHtml»</tr>
 	'''
 	
-	def dispatch toHtml(TableData it) '''
+	def protected dispatch CharSequence toHtml(TableData it) '''
 		<td>«contents.toHtml»</td>
 	'''
 	
-	def dispatch toHtml(EObject it) {
+	def protected dispatch CharSequence toHtml(EObject it) {
 		println("Missing toHtml for " + eClass.name)
 		""
 	}
@@ -196,6 +218,14 @@ class HtmlExtensions {
 	def markCodeEnd() {
 		'###xdoc code end###'
 	}	
+	
+	def protected insert(CharSequence content) {
+		if(inParagraph) '''
+			</p>
+			«content»
+			<p>
+		''' else content
+	}
 	
 	def protected trimCode(String it) {
 		if(nullOrEmpty) 
