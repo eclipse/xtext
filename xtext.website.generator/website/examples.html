@@ -130,7 +130,7 @@
 						<li class="dropdown active">
 							<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#introduction">Seven Languages by Seven Weaklings</a></li>
+								<li><a href="#introduction">Seven Languages by Seven Geeks</a></li>
 								<li><a href="#simple">A Simple Language</a></li>
 								<li><a href="#mongo">MongoBeans</a></li>
 								<li><a href="#routing">Http Routing</a></li>
@@ -168,30 +168,50 @@
 					<div class="row">
 						<div class="span10 offset1">
 							<h1>
-								Seven Languages by Seven Weaklings
+								Seven Languages by Seven Geeks
 							</h1>
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<p>
+								Building domain-specific languages (DSLs) for the structural parts of an application has always been rather 
+								simple with Xtext. Nevertheless, when it came to the behavioral parts, users often fell back to implementing 
+								them in the target language, e.g. Java. The reason is that expressions, which are usually the part of a language 
+								that describe behavior, are hard to get right and very costly to implement. There are two major drawbacks with
+								this apporach: First, information that belongs to a single concept is spread across multiple artifacts in several 
+								languages on different layers of abstraction. Second, you need rather complex and error prone patterns such 
+								as protected  regions or generation gap to integrate the manually written code with the generated one.
 							</p>
 							<p>
-								The seven languages are
+								The main goal of Xtext 2.0 was to make it as easy as possible to write DSLs that directly integrate with 
+								Java. In these JVM languages, you can directly refer to Java artifacts, and your own DSLs artifacts are mapped 
+								back to Java. By leveraging Xbase, an expression library shipped with Xtext 2, you can even add behavior right 
+								into your language using powerful expressions beyond the capabilities of plain Java.
+							</p>
+							<p>
+								In this document we describe seven languages created with Xtext 2 that run on the Java Virtual Machine.
+								The languages address typical use cases encountered in Java application development. The seven languages cover
+							</p>
+							<p>
 								</p>
 								<ul>
-									<li>A simple expression language generating a Java application</li>
-									<li><a href="#mongo">mongoBeans</a>: JavaBeans-like statically typed access to mongoDB documents</li>
-									<li><a href="#routing">HttpRouting</a>: HttpRoutes with full support of expressions</li>
-									<li><a href="#templates">Templates</a>:</li>
-									<li><a href="#guice">GuiceModules</a>:</li>
-									<li><a href="#cradle">Cradle</a>:</li>
-									<li><a href="#tortoise">TortoiseShell</a>: A logo like programming environment for educational purposes</li>
+									<li><a href="#simple">Simple Java applications</a></li>
+									<li><a href="#mongo">JavaBeans-like statically typed access to mongoDB documents</a></li>
+									<li><a href="#routing">An HTTP routing servlet with full support of expressions</a></li>
+									<li><a href="#templates">Templates with embedded expressions</a></li>
+									<li><a href="#guice">Configuration of modules for Google Guice</a></li>
+									<li><a href="#cradle">Dependency management</a></li>
+									<li><a href="#tortoise">A Logo like programming environment for educational purposes</a></li>
 								</ul>
 								<p>
+							</p>
+							<p>
+								We tried to keep each language as simple as possible, focussing on the value a DSL can add to the respective 
+								scenario. We also covered different aspects of customization to the language infrastructure when appropriate.
 							</p>
 							<!--  section -->
 							<section id="common_requirements" style="margin-top: 20px; padding-top: 0;">
 							<h2 style="font-weight: normal;">Common Requirements</h2>
 							<p>
-								To run any of the examples, you will need <a href="http://www.eclipse.org/download">Eclipse 3.8 or higher</a>
+								To run any of the examples, you will need <a href="http://www.eclipse.org/download">Eclipse 4.2 or higher</a>
 								for your platform. In addition, you have to install <a href="http://www.xtext.org">Xtext 2.3</a> and 
 								<a href="http://www.xtend-lang.org">Xtend 2.3</a>. Both of these are also available on the official 
 								<a href="">Eclipse Juno Update Site</a>
@@ -203,6 +223,43 @@
 							<p>
 								Additional requirements are mentioned in the <strong>Running the Example</strong> section of each chapter.
 							</p>
+							<!-- subsection -->
+							<section id="installation" style="padding-top: 68px; margin-top: -68px;">
+							<h3>Getting the Code</h3>
+							<p>
+								You can get the source code for all languages from the github repository at
+								<a href="https://github.com/xtext-dev/seven-languages-xtext.git">https://github.com/xtext-dev/seven-languages-xtext</a>.
+								Each language is contained in their own subdirectory. There are multiple Eclipse projects per langauge
+								</p>
+								<table class="table table-bordered table-condensed">
+								<tr><td><strong>org.xtext.&lt;language&gt;</strong></td>
+								<td>The base infrastructure</td>
+								</tr>
+								<tr><td><strong>org.xtext.&lt;language&gt;.ui</strong></td>
+								<td>The editor based on Eclipse</td>
+								</tr>
+								<tr><td><strong>org.xtext.&lt;language&gt;.sdk</strong></td>
+								<td>An Eclipse feature for the language</td>
+								</tr>
+								<tr><td><strong>org.xtext.&lt;language&gt;.tests</strong></td>
+								<td>Tests for the language</td>
+								</tr>
+								<tr><td><strong>org.xtext.&lt;language&gt;.runtime</strong></td>
+								<td>Runtime library</td>
+								</tr>
+								<tr><td><strong>org.xtext.&lt;language&gt;.example</strong></td>
+								<td>Examples for using the language</td>
+								</tr>
+								</table>
+								<p>
+								 
+								We do not provide all plug-ins for all languages. Note that the first four have to reside in the workspace
+								you start from, while the last one goes into the runtime workspace spawned from the initial one using
+								<strong>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (&lt;language&gt;)</strong>.
+							</p>
+							<p>
+							</p>
+							</section>
 							</section>
 							<!--  section -->
 							<section id="xtend_primer" style="margin-top: 20px; padding-top: 0;">
@@ -211,18 +268,19 @@
 								We are going to use the language <a href="http://www.xtend-lang.org">Xtend</a> as much as possible. Xtend is 
 								designed as a powerful and less verbose alternative to Java. It can refer to any Java artifact and 
 								compiles to Java code and is therefore fully interoperable with Java. In addition, it uses the same
-								expression langugae Xbase that we use in our example languages, so this will give you a taste of how 
-								powerful these languages will acutally be.
+								expressions that we use in our example languages, so this will give you a taste of how powerful these 
+								languages will actually be.
 							</p>
 							<p>
 								Xtend should be rather easy to learn for Java developers. In this section we will shortly describe
 								the most important language features needed in our examples. For a full description of the Xtend language, 
-								please consult the <a href="http://www.xtend-lang.org/documentation">Xtend documentation</a>. 
-								 
-								Just like a Java file, an Xtend file starts with a package statement and an import section followed by
-								one or more classes. Semicolons are optional and classes are <code class="prettyprint lang-xtend">public</code> by default. Xtend classes 
-								can extend super classes and implement interfaces just like Java. It does not make any difference whether 
-								they were originally declared in Xtend or in Java.
+								please consult the <a href="http://www.xtend-lang.org/documentation">Xtend documentation</a>.
+							</p>
+							<p>
+								Just like a Java file, an Xtend file starts with a <code class="prettyprint lang-xtend">package</code> declaration and an <code class="prettyprint lang-xtend">import</code>
+								section followed by one or more classes. Semicolons are optional and classes are <code class="prettyprint lang-xtend">public</code> by default.
+								Xtend classes can extend super classes and implement interfaces just like Java. It does not make any difference 
+								whether they were originally declared in Xtend or in Java.
 							</p>
 							<p>
 								<a name="xtend_property"></a>
@@ -231,7 +289,7 @@
 								the appropriate accessor method. That means you can write
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
-println(foo.bar)      // instead of foo.getBar()
+println(foo.bar)      // instead of println(foo.getBar())
 foo.bar = baz         // instead of foo.setBar(baz)
 foo.fooBars += foobar // instead of foo.getFooBars().add(foobar)</pre>
 								<p>
@@ -285,8 +343,8 @@ def bar(Baz baz) {
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 import static extension java.util.Collections.*
-class Foo {
-  val foo = singleton('foo') // calls Collections.singleton('foo')</pre>
+...
+val foo = singleton('foo') // calls Collections.&lt;String&gt;singleton('foo')</pre>
 								<p>
 							</p>
 							<p>
@@ -314,7 +372,7 @@ class Foo {
 								
 								<a name="xtend_lambda_coercion"></a>
 								
-								As this is a bit bulky, there are more rules to make working with closures more attractive:
+								As this is a bit bulky, there are more rules to make working with lambdas more attractive:
 								</p>
 								<ol>
 									<li>When a lambda expression is the last argument in a method call, it can be put behind the closing parenthesis.</li>
@@ -329,7 +387,7 @@ class Foo {
 new Thread [ println("Hello concurrent world") ] // lambda will be coerced to a Runnable
 val list = newArrayList('fooooo', 'fo', 'foo')
 list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Comparable
-                          // equivalent to list.sortBy[Comparable it | it.length]</pre>
+                        // equivalent to list.sortBy[Comparable it | it.length]</pre>
 								<p>
 							</p>
 							</section>
@@ -345,25 +403,52 @@ list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Compar
 							</h1>
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<p>
-								This example languages demonstrates the basics of an Xtext language using the language library Xbase.
+								This example languages demonstrates the basics of a JVM language build with Xtext. It will introduce
+								you to the Xbase expression language and the DSL to Java transformation, a.k.a. JVM model inferrence.
+								It is a good starting point to read for all other languages.
 							</p>
 							<!--  section -->
 							<section id="simple_motivation" style="margin-top: 20px; padding-top: 0;">
 							<h2 style="font-weight: normal;">The Problem</h2>
 							<p>
-								When building DSLs with Xtext
+								We are going to build a language to define an application with a method body. A file in this language
+								should look like this
+								</p>
+								<pre class="prettyprint lang-simple linenums">
+// declaration of the application's name
+application my.first.Application
+
+// some expressions making up the application's body
+val names = newArrayList('Holger', 'Jan', 'Moritz', 'Sebastian', 'Sven')
+for(name: names) {
+  println('Hello ' + name + '!')
+}</pre>
+								<p>
+							</p>
+							<p>
+								The expressions are written in Xbase, the expression library we are going to use. For a Java developer,
+								the code should be self-explanatory. The Xbase language is more exhaustively covered in the 
+								<a href="http://www.xtext.org/documentation">Xtext documentation</a>.
 							</p>
 							</section>
 							<!--  section -->
 							<section id="simple_solution" style="margin-top: 20px; padding-top: 0;">
 							<h2 style="font-weight: normal;">A Solution With Xtext</h2>
 							<p>
-								Why a DSL
-								How about expressions
-								DSL example, Java example, Client code example (if appropriate)
+								The idea is to parse the language and automatically generate a Java class from it. The generated Java class 
+								should have the following structure
 							</p>
 							<p>
-								Approx 2 pages upto here
+								</p>
+								<pre class="prettyprint lang-java linenums">
+package my.first;
+
+public class Application {
+  public static void main(String[] args) {
+    ... // the body transformed into Java code
+  }
+}</pre>
+								<p>
 							</p>
 							<!-- subsection -->
 							<section id="simple_statistics" style="padding-top: 68px; margin-top: -68px;">
@@ -401,18 +486,33 @@ list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Compar
 							<section id="simple_running" style="margin-top: 20px; padding-top: 0;">
 							<h2 style="font-weight: normal;">Running the Example</h2>
 							<p>
-								Details on how to run it: Prerequisites, additional plugins...
+								Make sure you have the projects <strong>org.xtext.simple</strong> and <strong>org.xtext.simple.ui</strong> in your workspace.
+								Then start a new Eclipse by choosing <strong>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (org.xtext.simple)</strong>.
+								Create a new Java project and a new file with the file extension <strong>.simple</strong> in the source folder. Try the above example. 
+								As soon as you save, a new folder <strong>src-gen</strong> will appear in the project. It will contain the Java code for
+								your application. Make <strong>src-gen</strong> a source folder <strong>(Right-click &gt; Build path &gt; Use as Source Folder)</strong> and execute
+								it.
 							</p>
 							</section>
 							<!--  section -->
 							<section id="simple_details" style="margin-top: 20px; padding-top: 0;">
 							<h2 style="font-weight: normal;">The Solution in Detail</h2>
+							<p>
+								All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
+								is what we will be describing in the folloging section.
+							</p>
 							<!-- subsection -->
 							<section id="simple_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
 							<p>
-								The grammar is as simple as possible. We inherit from <code class="prettyprint lang-xtend">org.eclipse.xtext.xbase.Xbase</code> to get the
-								syntactic part of the expressions. As we want to refer to the type 
+								To build language with Xtext, you first have to define a grammar. As opposed to other parser generators,
+								an Xtext grammar defines both, the lexical structure of the langauge and the structure of the abstract
+								syntax tree, the object model that is build from the text by the parser. For more detailed description
+								of the Xtext grammar language, please see the <a href="http://www.xtext.org/documentation">Xtext documentation</a>.
+							</p>
+							<p>
+								The grammar for our DSL is rather simple. We inherit from <code class="prettyprint lang-xtend">org.eclipse.xtext.xbase.Xbase</code> to get the
+								syntax of the expressions. As we want to refer to the type 
 								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a>, we have to import Xbase's Ecore model. The single type 
 								inferred from this grammar goes into the Ecore model <code class="prettyprint lang-xtend">simpleExpressions</code>.
 							</p>
@@ -436,28 +536,37 @@ Main returns XBlockExpression:
 								The grammar has two rules: An <strong>Application</strong> is marked with the keyword <code class="prettyprint lang-simple">application</code> followed
 								by a qualified name - as defined in the supergrammar separated with dots. The <code class="prettyprint lang-xtend">main</code> of an <strong>Application</strong>
 								is a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> from Xbase. Note that we reuse the semantic type 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> but use a different syntax - without curly braces - to
-								set its children.
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> but use a different syntax - without the curly braces
+								as defined in the original rule <code class="prettyprint lang-xtend">XBlockExpression</code> - to set its <code class="prettyprint lang-xtend">expressions</code>.
 							</p>
 							<p>
 								Even though this is a small grammar, the actual language is already pretty powerful because we include
 								to Xbase's <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/XBlockExpression.html"><abbr title="org.eclipse.xtext.xbase.XBlockExpression">XBlockExpression</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/XBlockExpression.java">(src)</a> which allows any sequence of expressions,
-								including variable declarations, control structures, closures, etc.
+								including variable declarations, control structures, closures, etc. Our little languague is already 
+								Turing-complete!
 							</p>
 							</section>
 							<!-- subsection -->
 							<section id="simple_inferrer" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Translation to Java</h3>
 							<p>
-								To make our language executable, we have to define how its concepts map to Java concepts. In Xtext, this
+								To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this
 								is defined in the so called <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">(src)</a>. The language
-								generator has already generated an Xtend stub for it. Nevertheless, it is up to the language developer to 
+								generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to 
 								implement the <code class="prettyprint lang-xtend">infer()</code> method.
 							</p>
 							<p>
+								What you actually do in the <code class="prettyprint lang-xtend">infer()</code> method is build a model of the Java class to be created. The
+								model contains all information needed to generate the Java code from it. So instead of writing a traditional
+								model-to-text code generator, you rather provide a transformation. The advantage of this approach is
+								that you can use your inferred classes immediately and interchangeably with Java. In addition, Xtext
+								can provide a lot better tooling, like debugging, find references, rename refactoring etc. based on that
+								rich information.
+							</p>
+							<p>
 								It is very convenient to write the inferrer in the programming language Xtend, as it offers a far less 
-								verbose syntax. If you are not yet familiar with Xtend, it would be a good idea to read the 
-								<a href="#xtend_primer">Xtend Primer</a> now.
+								verbose syntax. If you are not yet familiar with Xtend, it would be a good idea to read at least the 
+								<a href="#xtend_primer">Xtend Primer</a> first.
 							</p>
 							<p>
 								An <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer">IJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">(src)</a> usually looks like this:
@@ -466,7 +575,6 @@ Main returns XBlockExpression:
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 class SampleJvmModelInferrer extends AbstractModelInferrer {
-
      def dispatch void infer(ElementType element, IJvmDeclaredTypeAcceptor acceptor, 
          boolean isPreIndexingPhase) {
        acceptor.accept('&lt;create some class&gt;').initializeLater [
@@ -481,12 +589,11 @@ class SampleJvmModelInferrer extends AbstractModelInferrer {
 								As you see, the JVM model inferrence works in two phases: In the first phase, you create the empty types only. 
 								This is necessary to be able to refer to these types the same as to other Java types form within the later 
 								initialized members of the class. The created types are returned via the method <code class="prettyprint lang-xtend">acceptor.accept()</code>. 
-								In the second phase, you create the superclass references, fields, methods etc. You specify what happens
-								to the type in the second phase by handling a <a href="#xtend_lambda">lambda expression</a> to the method 
-								<code class="prettyprint lang-xtend">initializeLater</code>  of the result from the call to <code class="prettyprint lang-xtend">acceptor.accept()</code>. As we do not provide a
-								parameter declaration for the lambda, the parameter is called <code class="prettyprint lang-xtend">it</code> and the type is inferred
-								as <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html"><abbr title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">(src)</a> (see section on <a href="#xtend_lambda_coercion">lambda
-								coercion</a>).
+								In the second phase, you create the superclass references, fields, methods etc. You do that by handling a 
+								<a href="#xtend_lambda">lambda expression</a> to the method <code class="prettyprint lang-xtend">initializeLater</code>  of the result from the call to 
+								<code class="prettyprint lang-xtend">acceptor.accept()</code>. As we do not provide a parameter declaration for the lambda, the parameter is called 
+								<code class="prettyprint lang-xtend">it</code> and the type is inferred as <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/common/types/JvmGenericType.html"><abbr title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">(src)</a> (see 
+								section on <a href="#xtend_lambda_coercion">lambda coercion</a>).
 							</p>
 							<p>
 								The JVM model inferrer code for our DSL looks like this:
@@ -498,18 +605,18 @@ class SimpleExpressionsJvmModelInferrer extends AbstractModelInferrer {
 
   @Inject extension JvmTypesBuilder
 
-     def dispatch void infer(Application application, IJvmDeclaredTypeAcceptor acceptor, 
-         boolean isPreIndexingPhase) {
-       acceptor.accept(application.toClass(application.name)).initializeLater [
-         members += application.toMethod('main', application.newTypeRef(Void::TYPE)) [
-           // add parameter
-           parameters += application.toParameter("args", 
-             application.newTypeRef(typeof(String)).addArrayTypeDimension)
-           setStatic(true)
-           body = application.main
-         ]  
-       ]
-    }
+  def dispatch void infer(Application application, IJvmDeclaredTypeAcceptor acceptor, 
+      boolean isPreIndexingPhase) {
+    acceptor.accept(application.toClass(application.name)).initializeLater [
+      members += application.toMethod('main', application.newTypeRef(Void::TYPE)) [
+        // add parameter
+        parameters += application.toParameter("args", 
+            application.newTypeRef(typeof(String)).addArrayTypeDimension)
+        setStatic(true)
+        body = application.main
+      ]  
+    ]
+  }
 }</pre>
 								<p>
 							</p>
@@ -520,13 +627,13 @@ class SimpleExpressionsJvmModelInferrer extends AbstractModelInferrer {
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 application.toClass(application.name)
-//   _jvmTypesBuilder.toClass(application, application.getName())</pre>
+// same as: _jvmTypesBuilder.toClass(application, application.getName())</pre>
 								<p>
 								
 								The class we create in the first phase has the same name as the <strong>Application</strong>.
 							</p>
 							<p>
-								In the second phase, i.e. inside the lambda, we add a method to the new class. Note that 
+								In the second phase, i.e. inside the lambda expression, we add a method to the new class. Note that 
 								<code class="prettyprint lang-xtend">members += ...</code> is a shorthand notation for <code class="prettyprint lang-xtend">it.getMembers().add(...)</code>, where 
 								<code class="prettyprint lang-xtend">it</code> is the lambda's implicit parameter, thus the created class.
 								 
@@ -535,12 +642,12 @@ application.toClass(application.name)
 							</p>
 							<p>
 								To create references to Java types, you have to use one of the  
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>s <code class="prettyprint lang-xtend">newTypeRef()</code> methods. In order to get
-								the classpath right, they need a context object, which is our application.
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html">JvmTypeBuilder's</a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a> <code class="prettyprint lang-xtend">newTypeRef()</code> methods. In to 
+								find it on the classpath, they need a context object which is our application.
 							</p>
 							<p>
-								In the following closure the implicit parameter <a href="#xtend_it">it</a> is bound to the new method. First we create 
-								a parameter <code class="prettyprint lang-java">String[] args</code> and add it to the method's parameters. Same as above 
+								In the following closure the <a href="#xtend_it">implicit parameter</a> <code class="prettyprint lang-xtend">it</code> is bound to the new method. 
+								First we create a parameter <code class="prettyprint lang-java">String[] args</code> and add it to the method's parameters. Same as above 
 								<code class="prettyprint lang-xtend">parameters += ...</code> is short for <code class="prettyprint lang-xtend">it.getParameters().add(...)</code>.
 							</p>
 							<p>
@@ -552,6 +659,14 @@ application.toClass(application.name)
 								about.
 							</p>
 							</section>
+							</section>
+							<!--  section -->
+							<section id="mongo_beyond" style="margin-top: 20px; padding-top: 0;">
+							<h2 style="font-weight: normal;">Beyond This Example</h2>
+							<p>
+								Well, that has only been the start, but you should now be familiar with the basic concepts of creating
+								a JVM language with Xtext. No go for the real applications in the other languages!
+							</p>
 							</section>
 						</div>
 					</div>
@@ -655,8 +770,8 @@ public class Artist implements IMongoBean {
 							<p>
 								By generating Java code, the rest of the application can use a safe, statically typed and JavaBeans 
 								conformant API to access the datamodel. In addition, <strong>MongoBeans</strong> can define <strong>MongoOperations</strong> 
-								which are translated to Java methods. By using the expression library Xbase, we can use 
-								<strong>MongoProperties</strong> as well as Java types inside the operations' bodies.
+								which are translated to Java methods. We can use <strong>MongoProperties</strong> as well as Java types inside the 
+								operations' bodies.
 							</p>
 							<p>
 								Client code could then look like this:
@@ -667,10 +782,12 @@ john.setName("John Coltrane");
 Album album = new Album();
 album.setTitle("A Love Supreme");
 john.getAlbums().add(album);
-Track...  // create some tracks and add them to the album 
+Track...  // create some tracks and add them to the album
+ 
 System.out.println(john.getName() + "'s Oevre");
 for(Track track: john.getOevre()) 
-	System.out.println(track.getTitle());
+  System.out.println(track.getTitle());
+
 DBCollection dbCollection = ... // standard mongoDB driver code
 dbCollection.save(john.getDBObject())</pre>
 								<p>
@@ -788,22 +905,13 @@ QualifiedNameWithWildcard:
 							<section id="mongo_inferrer" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Translation to Java</h3>
 							<p>
-								In the end, we want to generate Java code from our mongoBeans files. With Xbase, that means to map our
-								DSL concepts to Java concepts. This approach provides very detailed information and allows for better tooling
-								than traditional model-to-text code generation. It also enables mixing Java and DSL concepts, e.g. in
-								operation bodies.
+								The JVM model inferrencnce is implemented in the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>.
+								As the generated code is quite rich, this is the most complex component of this language.
 							</p>
 							<p>
-								The transformation is implemented in the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.html"><abbr title="org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>.
-								It is written in the programming language <a href="http://www.xtend-lang.org">Xtend</a>, which is Java-like
-								but has a far more convenient syntax. As the generated code is quite rich, this is the most complex component
-								of mongoBeans.
-							</p>
-							<p>
-								In the following, we describe what happens in the <abbr title="org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer">MongoBeansJvmModelInferrer</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.jvmmodel/src/org/xtext/mongobeans/jvmmodel/MongoBeansJvmModelInferrer.java">(src)</a>.
 								For each <strong>MongoBean</strong>, we create a Java class implementing the interface <abbr title="org.xtext.mongobeans.runtime.IMongoBean">IMongoBean</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.runtime/src/org/xtext/mongobeans/runtime/IMongoBean.java">(src)</a>.
 								This interface is the first type of our small runtime library. The generated Java classes rely on this
-								library to work, so it has to be on the classpath.
+								library to work, so it has to be on the classpath at runtime.
 							</p>
 							<p>
 								</p>
@@ -847,28 +955,21 @@ def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boole
 							</p>
 							<p>
 								First, finds all elements of type <strong>MongoBean</strong> in the given <strong>MongoFile</strong>. For each of these, create a new 
-								Java class using the method <code class="prettyprint lang-xtend">toClass</code>. A speciality of Xtend is that this method comes from another 
-								object, in this case of type <code class="prettyprint lang-xtend">JvmTypesBuilder</code>. By having this injected as an 
-								<code class="prettyprint lang-xtend">extension</code>, all its methods can be called on the first argument, in this case the <code class="prettyprint lang-xtend">bean</code>. 
-								So <code class="prettyprint lang-xtend">bean.toClass(...)</code> is nothing else but <code class="prettyprint lang-xtend">_jvmtypesBuilder.toClass(bean, ...)</code>. Analogously, the 
-								method <code class="prettyprint lang-xtend">fullyQualifiedName</code> comes actually from the injected 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>. Please consult the 
-								<a href="http://www.xtend-lang.org/documentation">Xtend</a> documentation for more information on extension methods.
+								Java class using the extension method <code class="prettyprint lang-xtend">toClass</code> from the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder">JvmTypesBuilder</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">(src)</a>. Analogously, the 
+								The method <code class="prettyprint lang-xtend">fullyQualifiedName</code> comes actually from the secend injected extension 
+								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>. Confused yet? Then better read the <a href="#xtend_primer">Xtend
+								Primer</a> and the <a href="#simple">simple example</a> first:
 							</p>
 							<p>
-								The so created Java class is passed to the <code class="prettyprint lang-xtend">acceptor</code> as one of the results of the method. In a second
-								phase it is filled with members, which is implemented in a lambda expression passed to <code class="prettyprint lang-xtend">initializeLater</code>.
-								This lambda spans the content of the square brackets. It has a single implicit parameter <code class="prettyprint lang-xtend">it</code>,
-								that is the freshly created Java class from the first phase. As <code class="prettyprint lang-java">this</code> in Java, <code class="prettyprint lang-xtend">it</code>
-								must not be specified as the receiver of a feature call. So the following <code class="prettyprint lang-xtend">documentation</code> actually
-								refers to <code class="prettyprint lang-xtend">it.documentation</code>. In Xtend, you can use assignments instead of calling setters, so after
-								all <code class="prettyprint lang-xtend">documentation = bean.documentation</code> is equivalent to <code class="prettyprint lang-xtend">it.setDocumentation(bean.documentation)</code>
-								or even <code class="prettyprint lang-xtend">it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))</code>. Analogously, </p>
-								<pre class="prettyprint lang-xtend linenums">
-superTypes +=
-...</pre>
-								<p>
-								 calls <code class="prettyprint lang-xtend">it.getSuperTypes().add(...)</code>. By using </p>
+								The so created Java class is passed to the <code class="prettyprint lang-xtend">acceptor</code> as one of the results of the method. 
+								The lambda expression passed to <code class="prettyprint lang-xtend">initializeLater</code> describes what happens to this class in the second
+								phase. First the documentation is copied. Note that <code class="prettyprint lang-xtend">documentation = bean.documentation</code> is equivalent to 
+								<code class="prettyprint lang-xtend">it.setDocumentation(bean.documentation)</code> or even 
+								<code class="prettyprint lang-xtend">it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))</code>. This is the moment where you
+								should be really flashed by the awesome syntax of Xtend.
+							</p>
+							<p>
+								The we set the supertype. By using </p>
 								<pre class="prettyprint lang-xtend linenums">
 _jvmTypesBuilder.newTypeRef(bean,
 String)</pre>
@@ -1004,31 +1105,31 @@ def protected addConstructors(JvmDeclaredType inferredType, MongoBean bean) {
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty property) {
-    inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.jvmType) [
-      documentation = property.documentation
-      body = [
-        append('return ')
-        if(property.jvmType.mongoBean) {
-          ...
-        } else {
-          ...
-        } 
-      ]
+  inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.jvmType) [
+    documentation = property.documentation
+    body = [
+      append('return ')
+      if(property.jvmType.mongoBean) {
+        ...
+      } else {
+        ...
+      } 
     ]
-    inferredType.members += property.toMethod('set' + property.name.toFirstUpper, null) [
-      documentation = property.documentation
-      parameters += toParameter(property.name, property.jvmType)
-      body = [
-        append(''' _dbObject.put("&laquo;property.name&raquo;", ''')
-        if(property.jvmType.mongoBean) {
-          ...
-        } else {
-          ...
-        }
-        append(');')
-      ]
+  ]
+  inferredType.members += property.toMethod('set' + property.name.toFirstUpper, null) [
+    documentation = property.documentation
+    parameters += toParameter(property.name, property.jvmType)
+    body = [
+      append(''' _dbObject.put("&laquo;property.name&raquo;", ''')
+      if(property.jvmType.mongoBean) {
+        ...
+      } else {
+        ...
+      }
+      append(');')
     ]
-  }</pre>
+  ]
+}</pre>
 								<p>
 							</p>
 							<p>
@@ -1127,8 +1228,9 @@ def protected addListAccessor(JvmDeclaredType inferredType, MongoProperty proper
 								<p>
 							</p>
 							<p>
-								The inferrer code is surprisingly simple, as we can directly associate the body of the <strong>MongoOperation</strong> 
-								to the generated Java method. The Xbase compiler will automatically transform that to Java.
+								The inferrer code for this particular task is surprisingly simple, as we can directly associate the
+								body of the <strong>MongoOperation</strong>  to the generated Java method. The Xbase compiler will automatically 
+								transform that to Java.
 							</p>
 							<p>
 								</p>
@@ -1151,8 +1253,10 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							<section id="mongo_additons" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Additional Aspects</h3>
 							<p>
-								We have tweaked the language's infrastructure a bit more. First, we have adapted the 
-								<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>. By default, the
+								We have tweaked the language's infrastructure a bit more.
+							</p>
+							<p>
+								First, we have adapted the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>. By default, the
 								qualified name of an element is calculated by concatening all the simple names of its containers with
 								a dot. In our example, the <strong>MongoBean</strong> <code class="prettyprint lang-xtend">Track</code> would consequently be named 
 								<code class="prettyprint lang-xtend">org.musicdb.Album.track.Track</code>. To ignore properties and beans on the path, we implemented our own

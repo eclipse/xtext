@@ -78,8 +78,8 @@ public class Artist implements IMongoBean {
 
 By generating Java code, the rest of the application can use a safe, statically typed and JavaBeans 
 conformant API to access the datamodel. In addition, e[MongoBeans] can define e[MongoOperations] 
-which are translated to Java methods. By using the expression library Xbase, we can use 
-e[MongoProperties] as well as Java types inside the operations' bodies. 
+which are translated to Java methods. We can use e[MongoProperties] as well as Java types inside the 
+operations' bodies. 
 
 Client code could then look like this:
 code[Java][
@@ -88,10 +88,12 @@ john.setName("John Coltrane");
 Album album = new Album();
 album.setTitle("A Love Supreme");
 john.getAlbums().add(album);
-Track...  // create some tracks and add them to the album 
+Track...  // create some tracks and add them to the album
+ 
 System.out.println(john.getName() + "'s Oevre");
 for(Track track: john.getOevre()) 
-	System.out.println(track.getTitle());
+  System.out.println(track.getTitle());
+
 DBCollection dbCollection = ... // standard mongoDB driver code
 dbCollection.save(john.getDBObject())
 ]
@@ -176,20 +178,12 @@ leverage Xtext's expression language library Xbase.
 
 section2:mongo_inferrer[Translation to Java]
 
-In the end, we want to generate Java code from our mongoBeans files. With Xbase, that means to map our
-DSL concepts to Java concepts. This approach provides very detailed information and allows for better tooling
-than traditional model-to-text code generation. It also enables mixing Java and DSL concepts, e.g. in
-operation bodies.
+The JVM model inferrencnce is implemented in the codeRef[org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
+As the generated code is quite rich, this is the most complex component of this language.
 
-The transformation is implemented in the codeRef[org.eclipse.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
-It is written in the programming language link[http://www.xtend-lang.org][Xtend], which is Java-like
-but has a far more convenient syntax. As the generated code is quite rich, this is the most complex component
-of mongoBeans.
-
-In the following, we describe what happens in the codeRef[org.xtext.mongobeans.jvmmodel.MongoBeansJvmModelInferrer].
 For each e[MongoBean], we create a Java class implementing the interface codeRef[org.xtext.mongobeans.runtime.IMongoBean].
 This interface is the first type of our small runtime library. The generated Java classes rely on this
-library to work, so it has to be on the classpath.
+library to work, so it has to be on the classpath at runtime.
 
 table[
   tr[
@@ -223,23 +217,19 @@ def dispatch void infer(MongoFile file, IJvmDeclaredTypeAcceptor acceptor, boole
 ]
 
 First, finds all elements of type e[MongoBean] in the given e[MongoFile]. For each of these, create a new 
-Java class using the method code[toClass]. A speciality of Xtend is that this method comes from another 
-object, in this case of type code[JvmTypesBuilder]todo[make ref]. By having this injected as an 
-code[Xtend][extension], all its methods can be called on the first argument, in this case the code[bean]. 
-So code[bean.toClass(...)] is nothing else but code[_jvmtypesBuilder.toClass(bean, ...)]. Analogously, the 
-method code[fullyQualifiedName] comes actually from the injected 
-codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. Please consult the 
-link[http://www.xtend-lang.org/documentation][Xtend] documentation for more information on extension methods.
+Java class using the extension method code[toClass] from the codeRef[org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder]. Analogously, the 
+The method code[fullyQualifiedName] comes actually from the secend injected extension 
+codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. Confused yet? Then better read the ref:xtend_primer[Xtend
+Primer] and the ref:simple[simple example] first: 
 
-The so created Java class is passed to the code[acceptor] as one of the results of the method. In a second
-phase it is filled with members, which is implemented in a lambda expression passed to code[initializeLater].
-This lambda spans the content of the square brackets. It has a single implicit parameter code[Xtend][it],
-that is the freshly created Java class from the first phase. As code[Java][this] in Java, code[Xtend][it]
-must not be specified as the receiver of a feature call. So the following code[documentation] actually
-refers to code[it.documentation]. In Xtend, you can use assignments instead of calling setters, so after
-all code[documentation = bean.documentation] is equivalent to code[Xtend][it.setDocumentation(bean.documentation)]
-or even code[Xtend][it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))]. Analogously, code[superTypes +=
-...] calls code[Xtend][it.getSuperTypes().add(...)]. By using code[Xtend][_jvmTypesBuilder.newTypeRef(bean,
+The so created Java class is passed to the code[acceptor] as one of the results of the method. 
+The lambda expression passed to code[initializeLater] describes what happens to this class in the second
+phase. First the documentation is copied. Note that code[documentation = bean.documentation] is equivalent to 
+code[Xtend][it.setDocumentation(bean.documentation)] or even 
+code[Xtend][it.setDocumentation(_jvmTypesBuilder.getDocumention(bean))]. This is the moment where you
+should be really flashed by the awesome syntax of Xtend.
+
+The we set the supertype. By using code[Xtend][_jvmTypesBuilder.newTypeRef(bean,
 String)] we create a reference to the existing interface codeRef[org.xtext.mongobeans.runtime.IMongoBean]. This
 will also insert a Java import at the appropriate location. 
 
@@ -350,31 +340,31 @@ use the helper class codeRef[org.xtext.mongobeans.jvmmodel.MongoTypes] that is a
 
 code[Xtend][
 def protected addDelegateAccessors(JvmDeclaredType inferredType, MongoProperty property) {
-    inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.jvmType) \[
-      documentation = property.documentation
-      body = \[
-        append('return ')
-        if(property.jvmType.mongoBean) {
-          ...
-        } else {
-          ...
-        } 
-      \]
+  inferredType.members += property.toMethod('get' + property.name.toFirstUpper, property.jvmType) \[
+    documentation = property.documentation
+    body = \[
+      append('return ')
+      if(property.jvmType.mongoBean) {
+        ...
+      } else {
+        ...
+      } 
     \]
-    inferredType.members += property.toMethod('set' + property.name.toFirstUpper, null) \[
-      documentation = property.documentation
-      parameters += toParameter(property.name, property.jvmType)
-      body = \[
-        append(''' _dbObject.put("«property.name»", ''')
-        if(property.jvmType.mongoBean) {
-          ...
-        } else {
-          ...
-        }
-        append(');')
-      \]
+  \]
+  inferredType.members += property.toMethod('set' + property.name.toFirstUpper, null) \[
+    documentation = property.documentation
+    parameters += toParameter(property.name, property.jvmType)
+    body = \[
+      append(''' _dbObject.put("«property.name»", ''')
+      if(property.jvmType.mongoBean) {
+        ...
+      } else {
+        ...
+      }
+      append(');')
     \]
-  }
+  \]
+}
 ]
 
 Multi-valued e[MongoProperties] with a e[MongoBean] type require a special implementation of 
@@ -456,8 +446,9 @@ table[
   ]]]
 ]
 
-The inferrer code is surprisingly simple, as we can directly associate the body of the e[MongoOperation] 
-to the generated Java method. The Xbase compiler will automatically transform that to Java. 
+The inferrer code for this particular task is surprisingly simple, as we can directly associate the
+body of the e[MongoOperation]  to the generated Java method. The Xbase compiler will automatically 
+transform that to Java. 
 
 code[Xtend][
 def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) {
@@ -474,8 +465,9 @@ Puh, that was a lot of code, but because it is the essence of this language we h
 
 section2:mongo_additons[Additional Aspects]
 
-We have tweaked the language's infrastructure a bit more. First, we have adapted the 
-codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. By default, the
+We have tweaked the language's infrastructure a bit more. 
+
+First, we have adapted the codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]. By default, the
 qualified name of an element is calculated by concatening all the simple names of its containers with
 a dot. In our example, the e[MongoBean] code[Track] would consequently be named 
 code[org.musicdb.Album.track.Track]. To ignore properties and beans on the path, we implemented our own
