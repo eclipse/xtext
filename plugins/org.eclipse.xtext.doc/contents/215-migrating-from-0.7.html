@@ -58,8 +58,8 @@ references in your manually written code are properly updated.
 <h3>Update the Workflow</h3>
 <p>
 The <em>JavaScopingFragment</em> does no longer exist. It has been superseded by the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment" >ImportURIScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java" title="View Source Code" >(src)</a> 
-in combination with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.SimpleNamesFragment" >SimpleNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.java" title="View Source Code" >(src)</a>.
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment" >ImportURIScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java" title="View Source Code" >(src)</a> 
+in combination with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.SimpleNamesFragment" >SimpleNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/SimpleNamesFragment.java" title="View Source Code" >(src)</a>.
 Please replace  
 </p>
 <p>
@@ -67,7 +67,7 @@ Please replace
 <div class="incode">
 <p class="code">
 &lt;fragment&nbsp;class=<br/>
-&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.scoping.JavaScopingFragment"</span>/&gt;<br/>
+&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.scoping.JavaScopingFragment"</span>/&gt;
 </p>
 </div>
 </div>
@@ -82,7 +82,7 @@ with
 &lt;fragment&nbsp;class=<br/>
 &nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"</span>/&gt;<br/>
 &lt;fragment&nbsp;class=<br/>
-&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.exporting.SimpleNamesFragment"</span>/&gt;<br/>
+&nbsp;&nbsp;<span class="string">"org.eclipse.xtext.generator.exporting.SimpleNamesFragment"</span>/&gt;
 </p>
 </div>
 </div>
@@ -253,7 +253,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 	<li>
 		
 		    The implementation-classes from <em>org.eclipse.xtext.index</em> were superseded by the builder infrastructure. Use the 
-		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment" >QualifiedNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java" title="View Source Code" >(src)</a> and the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a> 
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment" >QualifiedNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java" title="View Source Code" >(src)</a> and the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a> 
 		    instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="050-heading-runtime.html#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">section about the builder infrastructure</a> for details.
 	</li>
 	<li>

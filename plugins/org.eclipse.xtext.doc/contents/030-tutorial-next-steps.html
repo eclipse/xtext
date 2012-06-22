@@ -52,7 +52,7 @@ That is, the syntax and the grammar for the language look like this:
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -110,7 +110,7 @@ Entity:<br/>
 &nbsp;<br/>
 Feature:<br/>
 &nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
-;<br/>
+;
 </p>
 </div>
 </div>
@@ -144,7 +144,7 @@ the generated code.
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setAuthor(java.lang.String&nbsp;author)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.author&nbsp;=&nbsp;author;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -167,7 +167,7 @@ Eclipse environment.
 <span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -184,7 +184,7 @@ all entities within a resource and trigger code generation for each one.
 		    we need to iterate a resource with all its deeply nested elements. This can be achieved with the method
 		    <span class="inlinecode">getAllContents()</span>. To use the resulting <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/TreeIterator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.TreeIterator" >TreeIterator</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java" title="View Source Code" >(src)</a> in
 		    a for loop, we use the extension method <span class="inlinecode">toIterable()</span> from the built-in library class
-		    <a class="jdoc" href="http://xtend-lang.org/api/2.3.0/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" >IteratorExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>.
+		    <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/lib/IteratorExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IteratorExtensions" >IteratorExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java" title="View Source Code" >(src)</a>.
 		    
 		    <div class="literallayout">
 		<div class="incode">
@@ -195,7 +195,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		&nbsp;&nbsp;}<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -209,14 +209,7 @@ all entities within a resource and trigger code generation for each one.
 		    that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
 		    inject the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> into the generator.
 		    
-		    <div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider<br/>
-		</p>
-		</div>
-		</div>
-		
+		    <span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider</span>
 		    
 		    This allows to ask for the name of an entity. It is straightforward to convert the name into
 		    a file name:
@@ -230,7 +223,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString(<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
 		&nbsp;&nbsp;}<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -249,7 +242,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;<br/>
 		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -271,7 +264,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;<br/>
 		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;{<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -288,7 +281,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;</span>e.name<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&raquo;extends&nbsp;&laquo;</span>e.superType.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;{<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -315,7 +308,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;</span>f.name.toFirstUpper<span class="string">&raquo;(&laquo;</span>f.type.fullyQualifiedName<span class="string">&raquo;&nbsp;&laquo;</span>f.name<span class="string">&raquo;)&nbsp;{<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -338,7 +331,7 @@ all entities within a resource and trigger code generation for each one.
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>f.compile<span class="string">&raquo;<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
 		&nbsp;&nbsp;}<br/>
-		&apos;&apos;&apos;</span><br/>
+		&apos;&apos;&apos;</span>
 		</p>
 		</div>
 		</div>
@@ -403,7 +396,7 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;</span>f.name<span class="string">&raquo;&nbsp;=&nbsp;&laquo;</span>f.name<span class="string">&raquo;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -448,7 +441,7 @@ write the testcase.
 		@InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
 		@RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
 		<span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -459,7 +452,7 @@ write the testcase.
 		    The actual test case is pretty straight forward with Xtend. The utility class 
 		    <em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into a
 		    <em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
-		    <abbr title="org.junit.Assert" >Assert</abbr> leads to concise and readable test cases.
+		    <a class="jdoc" href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html" title="View JavaDoc"><abbr title="org.junit.Assert" >Assert</abbr></a> leads to concise and readable test cases.
 		    
 		    <div class="literallayout">
 		<div class="incode">
@@ -479,7 +472,7 @@ write the testcase.
 		&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
 		&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
 		&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
-		}<br/>
+		}
 		</p>
 		</div>
 		</div>
@@ -516,7 +509,7 @@ of code:
 &nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -547,7 +540,7 @@ and look for features with equal names.
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>

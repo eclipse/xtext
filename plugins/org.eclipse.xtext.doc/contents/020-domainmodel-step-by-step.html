@@ -37,7 +37,7 @@ similar to what you may know from Rails, Grails or Spring Roo. The syntax is ver
 <br/>
 <span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
 &nbsp;&nbsp;content:&nbsp;String<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -154,7 +154,7 @@ Model:<br/>
 &nbsp;&nbsp;greetings+=Greeting*;<br/>
 &nbsp;&nbsp;<br/>
 Greeting:<br/>
-&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
+&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;
 </p>
 </div>
 </div>
@@ -191,7 +191,7 @@ Entity:<br/>
 &nbsp;<br/>
 Feature:<br/>
 &nbsp;&nbsp;many?=<span class="string">&apos;many&apos;</span>?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]<br/>
-;<br/>
+;
 </p>
 </div>
 </div>
@@ -209,7 +209,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		<p class="code">
 		Domainmodel&nbsp;:<br/>
 		&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -227,7 +227,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		<p class="code">
 		Type:<br/>
 		&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -246,7 +246,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		<p class="code">
 		DataType:<br/>
 		&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -263,7 +263,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*<br/>
 		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -284,7 +284,7 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 		<p class="code">
 		Feature:<br/>
 		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]&nbsp;<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -377,7 +377,7 @@ In the end we want to be able to split the previously used model into to distinc
 <p class="code">
 <span class="comment">//&nbsp;datatypes.dmodel<br/>
 </span><br/>
-<span class="keyword">datatype</span>&nbsp;String<br/>
+<span class="keyword">datatype</span>&nbsp;String
 </p>
 </div>
 </div>
@@ -393,7 +393,7 @@ In the end we want to be able to split the previously used model into to distinc
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -422,7 +422,7 @@ In the end we want to be able to split the previously used model into to distinc
 &nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -447,7 +447,7 @@ Let&apos;s start enhancing the grammar.
 		<br/>
 		AbstractElement:<br/>
 		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -474,7 +474,7 @@ Let&apos;s start enhancing the grammar.
 		<br/>
 		QualifiedName:<br/>
 		&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -498,7 +498,7 @@ Let&apos;s start enhancing the grammar.
 		;<br/>
 		&nbsp;&nbsp;&nbsp;QualifiedNameWithWildcard:<br/>
 		&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -525,7 +525,7 @@ Let&apos;s start enhancing the grammar.
 		&nbsp;<br/>
 		Feature:<br/>
 		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
-		;<br/>
+		;
 		</p>
 		</div>
 		</div>
@@ -592,7 +592,7 @@ Entity:<br/>
 &nbsp;<br/>
 Feature:<br/>
 &nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
-;<br/>
+;
 </p>
 </div>
 </div>

@@ -167,7 +167,7 @@ self-defined DSL by just replacing the resource implementation used by your othe
 </div>
 </p>
 <p>
-The generator fragment <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a> 
+The generator fragment <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a> 
 registers a factory for the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> to EMF&apos;s resource factory 
 registry, such that all tools using the default mechanism to resolve a resource implementation will 
 automatically get that resource implementation.   
@@ -467,13 +467,7 @@ classes in the package <em>org.eclipse.xtext.gmf.glue.editingdomain</em>. To act
 have to add a line 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XtextNodeModelReconciler.adapt(editingDomain);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">XtextNodeModelReconciler.adapt(editingDomain);</span>
 </p>
 <p>
 in the method <span class="inlinecode">createEditingDomain()</span> of the generated <em>EntitiesDocumentProvider</em>. To avoid changing the 
@@ -484,7 +478,7 @@ generated code, you can modify the code generation template for that class by se
 <div class="incode">
 <p class="code">
 Dynamic&nbsp;Templates&nbsp;-&gt;&nbsp;<span class="keyword">true</span><br/>
-&nbsp;&nbsp;Template&nbsp;Directory&nbsp;=&nbsp;<span class="string">"org.eclipse.xtext.example.gmf.models/templates"</span><br/>
+&nbsp;&nbsp;Template&nbsp;Directory&nbsp;=&nbsp;<span class="string">"org.eclipse.xtext.example.gmf.models/templates"</span>
 </p>
 </div>
 </div>
@@ -493,13 +487,7 @@ Dynamic&nbsp;Templates&nbsp;-&gt;&nbsp;<span class="keyword">true</span><br/>
 in the <em>GenEditorGenerator</em> and 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-Required&nbsp;Plugins&nbsp;-&gt;&nbsp;<span class="string">"org.eclipse.xtext.gmf.glue"</span>&nbsp;<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">Required&nbsp;Plugins&nbsp;-&gt;&nbsp;<span class="string">"org.eclipse.xtext.gmf.glue"</span></span>
 </p>
 <p>
 in the <em>GenPlugin</em> element of the gmfgen before generating the diagram editor anew.
