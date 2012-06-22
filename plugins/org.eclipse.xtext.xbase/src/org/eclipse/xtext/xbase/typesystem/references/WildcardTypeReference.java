@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -37,6 +38,15 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	@Override
 	public boolean isResolved() {
 		return resolved;
+	}
+	
+	public List<LightweightTypeReference> getUpperBounds() {
+		return expose(upperBounds);
+	}
+	
+	@Nullable
+	public LightweightTypeReference getLowerBound() {
+		return lowerBound;
 	}
 
 	@Override
@@ -76,7 +86,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (upperBound == null) {
 			throw new NullPointerException("upperBound may not be null");
 		}
-		if (!upperBound.isValidInContext(getOwner())) {
+		if (!upperBound.isOwnedBy(getOwner())) {
 			throw new NullPointerException("upperBound is not valid in current context");
 		}
 		if (upperBounds == null)
@@ -89,7 +99,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (lowerBound == null) {
 			throw new NullPointerException("lowerBound may not be null");
 		}
-		if (!lowerBound.isValidInContext(getOwner())) {
+		if (!lowerBound.isOwnedBy(getOwner())) {
 			throw new NullPointerException("lowerBound is not valid in current context");
 		}
 		if (this.lowerBound != null && this.lowerBound != lowerBound) {
@@ -101,6 +111,31 @@ public class WildcardTypeReference extends LightweightTypeReference {
 
 	@Override
 	public String toString() {
-		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(upperBounds) : "") + (lowerBound != null ? " super " + lowerBound : "");
+		if (lowerBound != null) {
+			return "? super " + lowerBound;
+		}
+		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(upperBounds) : "");
+	}
+	
+	@Override
+	public void accept(TypeReferenceVisitor visitor) {
+		visitor.doVisitWildcardTypeReference(this);
+	}
+	
+	@Override
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		visitor.doVisitWildcardTypeReference(this, param);
+	}
+	
+	@Override
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		return visitor.doVisitWildcardTypeReference(this);
+	}
+	
+	@Override
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		return visitor.doVisitWildcardTypeReference(this, param);
 	}
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
@@ -42,6 +43,10 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		}
 		return result;
 	}
+	
+	public List<LightweightTypeReference> getComponents() {
+		return expose(components);
+	}
 
 	@Override
 	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
@@ -58,12 +63,16 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	public boolean isResolved() {
 		return resolved;
 	}
+	
+	public boolean isSynonym() {
+		return synonym;
+	}
 
 	protected void addComponent(LightweightTypeReference component) {
 		if (component == null) {
 			throw new NullPointerException("component may not be null");
 		}
-		if (!component.isValidInContext(getOwner())) {
+		if (!component.isOwnedBy(getOwner())) {
 			throw new NullPointerException("component is not valid in current context");
 		}
 		if (components == null)
@@ -75,5 +84,39 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	@Override
 	public String toString() {
 		return Joiner.on(synonym ? " | " : " & ").join(components);
+	}
+	
+	@Override
+	public void accept(TypeReferenceVisitor visitor) {
+		if (isSynonym())
+			visitor.doVisitSynonymTypeReference(this);
+		else
+			visitor.doVisitMultiTypeReference(this);
+	}
+	
+	@Override
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		if (isSynonym())
+			visitor.doVisitSynonymTypeReference(this, param);
+		else
+			visitor.doVisitMultiTypeReference(this, param);
+	}
+	
+	@Override
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		if (isSynonym())
+			return visitor.doVisitSynonymTypeReference(this);
+		else
+			return visitor.doVisitMultiTypeReference(this);
+	}
+	
+	@Override
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		if (isSynonym())
+			return visitor.doVisitSynonymTypeReference(this, param);
+		else
+			return visitor.doVisitMultiTypeReference(this, param);
 	}
 }

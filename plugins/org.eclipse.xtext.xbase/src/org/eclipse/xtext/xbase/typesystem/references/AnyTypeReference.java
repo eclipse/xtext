@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -33,5 +34,27 @@ public class AnyTypeReference extends LightweightTypeReference {
 	@Override
 	public String toString() {
 		return "<null>";
+	}
+	
+	@Override
+	public void accept(TypeReferenceVisitor visitor) {
+		visitor.doVisitAnyTypeReference(this);
+	}
+	
+	@Override
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		visitor.doVisitAnyTypeReference(this, param);
+	}
+	
+	@Override
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		return visitor.doVisitAnyTypeReference(this);
+	}
+	
+	@Override
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		return visitor.doVisitAnyTypeReference(this, param);
 	}
 }

@@ -7,7 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -45,14 +51,51 @@ public abstract class LightweightTypeReference {
 		return getOwner().getServices();
 	}
 	
-	protected boolean isValidInContext(TypeReferenceOwner owner) {
+	public boolean isOwnedBy(TypeReferenceOwner owner) {
 		if (isResolved()) {
 			return true;
 		}
 		return owner == getOwner();
 	}
 	
+	protected <T> List<T> expose(@Nullable List<T> list) {
+		if (list == null) {
+			return Collections.emptyList();
+		}
+		return Collections.unmodifiableList(list);
+	}
+	
 	public abstract JvmTypeReference toTypeReference();
+	
+	@Nullable
+	public JvmType getType() {
+		return null;
+	}
+	
+	/*
+	 * Does pretty much the same as the RawTypeHelper
+	 * TODO implement me
+	 */
+	public List<JvmType> getRawTypes() {
+		throw new UnsupportedOperationException();
+	}
+	
+	/*
+	 * Replaced wildcards and type parameters by their respective
+	 * constraints. Returns the JvmTypes without arguments.
+	 * TODO implement me
+	 */
+	public LightweightTypeReference getRawTypeReference() {
+		throw new UnsupportedOperationException();
+	}
+	
+	/*
+	 * Returns true if the associated type expects arguments but none are given
+	 * TODO implement me
+	 */
+	public boolean isRawType() {
+		throw new UnsupportedOperationException();
+	}
 	
 	protected LightweightTypeReference copyInto(TypeReferenceOwner owner) {
 		if (isResolved()) {
@@ -70,4 +113,39 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	public boolean isType(Type type) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void accept(TypeReferenceVisitor visitor) {
+		visitor.doVisitTypeReference(this);
+	}
+	
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		visitor.doVisitTypeReference(this, param);
+	}
+	
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		return visitor.doVisitTypeReference(this);
+	}
+	
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		return visitor.doVisitTypeReference(this, param);
+	}
+	
+	public <Result> Result accept(TypeReferenceVisitorWithNonNullResult<Result> visitor) {
+		Result result = accept((TypeReferenceVisitorWithResult<Result>)visitor);
+		if (result == null)
+			throw new IllegalStateException("result may not be null");
+		return result;
+	}
+	
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndNonNullResult<Param, Result> visitor, Param param) {
+		Result result = accept((TypeReferenceVisitorWithParameterAndResult<Param, Result>)visitor, param);
+		if (result == null)
+			throw new IllegalStateException("result may not be null");
+		return result;
+	}
 }
