@@ -97,7 +97,7 @@ public class Converter extends AbstractXtypeReferenceVisitorWithParameter<TypeRe
 			TypeReferenceOwner owner) {
 		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
 			UnboundTypeParameter unbound = (UnboundTypeParameter) reference.getTypeProvider();
-			return new UnboundReference(owner, unbound.getTypeParameter(), unbound.getHandle());
+			return new UnboundTypeReference(owner, unbound.getTypeParameter(), unbound.getHandle());
 		}
 		return super.doVisitComputedTypeReference(reference, owner);
 	}

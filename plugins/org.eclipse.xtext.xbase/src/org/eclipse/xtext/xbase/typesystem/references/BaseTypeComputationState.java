@@ -12,7 +12,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

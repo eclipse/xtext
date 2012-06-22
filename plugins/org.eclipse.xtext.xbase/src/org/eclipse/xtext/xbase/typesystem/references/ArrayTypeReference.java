@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
@@ -53,6 +54,32 @@ public class ArrayTypeReference extends LightweightTypeReference {
 			return component.isType(clazz.getComponentType());
 		}
 		return false;
+	}
+	
+	public LightweightTypeReference getComponentType() {
+		return component;
+	}
+	
+	@Override
+	public void accept(TypeReferenceVisitor visitor) {
+		visitor.doVisitArrayTypeReference(this);
+	}
+	
+	@Override
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		visitor.doVisitArrayTypeReference(this, param);
+	}
+	
+	@Override
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		return visitor.doVisitArrayTypeReference(this);
+	}
+	
+	@Override
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		return visitor.doVisitArrayTypeReference(this, param);
 	}
 
 }

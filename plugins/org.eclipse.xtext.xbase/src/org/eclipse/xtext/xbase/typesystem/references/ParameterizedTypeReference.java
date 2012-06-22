@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.base.Joiner;
@@ -30,7 +32,8 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	protected ParameterizedTypeReference(TypeReferenceOwner owner, JvmType type) {
 		super(owner);
 		this.type = type;
-		this.resolved = true;
+		// TODO check against owner
+		this.resolved = !(type instanceof JvmTypeParameter);
 	}
 	
 	@Override
@@ -45,8 +48,13 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return result;
 	}
 	
-	protected JvmType getType() {
+	@Override
+	public JvmType getType() {
 		return type;
+	}
+	
+	public List<LightweightTypeReference> getTypeArguments() {
+		return expose(typeArguments);
 	}
 
 	@Override
@@ -73,7 +81,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		if (argument == null) {
 			throw new NullPointerException("argument may not be null");
 		}
-		if (!argument.isValidInContext(getOwner())) {
+		if (!argument.isOwnedBy(getOwner())) {
 			throw new NullPointerException("argument is not valid in current context");
 		}
 		if (typeArguments == null)
@@ -84,7 +92,9 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public String toString() {
-		return type.getSimpleName() + "<" + Joiner.on(", ").join(typeArguments) + ">";
+		if (typeArguments != null)
+			return type.getSimpleName() + "<" + Joiner.on(", ").join(getTypeArguments()) + ">";
+		return type.getSimpleName();
 	}
 
 	@Override
@@ -93,5 +103,27 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			return clazz.getCanonicalName().equals(type.getIdentifier());
 		}
 		return false;
+	}
+	
+	@Override
+	public void accept(TypeReferenceVisitor visitor) {
+		visitor.doVisitParameterizedTypeReference(this);
+	}
+	
+	@Override
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		visitor.doVisitParameterizedTypeReference(this, param);
+	}
+	
+	@Override
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		return visitor.doVisitParameterizedTypeReference(this);
+	}
+	
+	@Override
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		return visitor.doVisitParameterizedTypeReference(this, param);
 	}
 }

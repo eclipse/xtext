@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -45,6 +46,15 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		return result;
 	}
 	
+	public List<LightweightTypeReference> getParameterTypes() {
+		return expose(parameterTypes);
+	}
+	
+	@Nullable
+	public LightweightTypeReference getReturnType() {
+		return returnType;
+	}
+	
 	@Override
 	public JvmTypeReference toTypeReference() {
 		XFunctionTypeRef result = getOwner().getServices().getXtypeFactory().createXFunctionTypeRef();
@@ -65,7 +75,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (parameterType == null) {
 			throw new NullPointerException("parameterType may not be null");
 		}
-		if (!parameterType.isValidInContext(getOwner())) {
+		if (!parameterType.isOwnedBy(getOwner())) {
 			throw new NullPointerException("parameterType is not valid in current context");
 		}
 		if (parameterTypes == null)
@@ -78,7 +88,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		if (returnType == null) {
 			throw new NullPointerException("returnType may not be null");
 		}
-		if (!returnType.isValidInContext(getOwner())) {
+		if (!returnType.isOwnedBy(getOwner())) {
 			throw new NullPointerException("returnType is not valid in current context");
 		}
 		this.returnType = returnType;
@@ -90,5 +100,26 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		return "(" + Joiner.on(", ").join(parameterTypes) + ")=>" + returnType + " // " + super.toString();
 	}
 	
+	@Override
+	public void accept(TypeReferenceVisitor visitor) {
+		visitor.doVisitFunctionTypeReference(this);
+	}
+	
+	@Override
+	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
+		visitor.doVisitFunctionTypeReference(this, param);
+	}
+	
+	@Override
+	@Nullable
+	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
+		return visitor.doVisitFunctionTypeReference(this);
+	}
+	
+	@Override
+	@Nullable
+	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
+		return visitor.doVisitFunctionTypeReference(this, param);
+	}
 
 }
