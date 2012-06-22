@@ -51,6 +51,10 @@ codelanguage-def[routing][
 	GET, POST, PUT, DELETE, HEAD, import, when 
 ]
 
+codelanguage-def[simple][
+	application 
+]
+
 chapter-ref[introduction]
 
 chapter-ref[simple]

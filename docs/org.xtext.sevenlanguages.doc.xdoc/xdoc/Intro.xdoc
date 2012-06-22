@@ -1,6 +1,6 @@
 chapter:introduction[Seven Languages by Seven Weaklings]
 
-Why?
+todo[Write an introdcution]
 
 The seven languages are
 ul[
@@ -13,10 +13,9 @@ item[ref:cradle[Cradle]: ]
 item[ref:tortoise[TortoiseShell]: A logo like programming environment for educational purposes]
 ]
 
-
 section:common_requirements[Common Requirements]
 
-To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 3.8 or higher]
+To run any of the examples, you will need link[http://www.eclipse.org/download][Eclipse 4.2 or higher]
 for your platform. In addition, you have to install link[http://www.xtext.org][Xtext 2.3] and 
 link[http://www.xtend-lang.org][Xtend 2.3]. Both of these are also available on the official 
 link[][Eclipse Juno Update Site] todo[link!]
@@ -26,9 +25,99 @@ link[http://download.itemis.com/distros][itemis distribution].
 
 Additional requirements are mentioned in the e[Running the Example] section of each chapter.
 
-section:xbase[Xbase]
+section:xtend_primer[A Short Xtend Primer]
 
+We are going to use the language link[http://www.xtend-lang.org][Xtend] as much as possible. Xtend is 
+designed as a powerful and less verbose alternative to Java. It can refer to any Java artifact and 
+compiles to Java code and is therefore fully interoperable with Java. In addition, it uses the same
+expression langugae Xbase that we use in our example languages, so this will give you a taste of how 
+powerful these languages will acutally be. 
 
-section:xtend[Xtend]
+Xtend should be rather easy to learn for Java developers. In this section we will shortly describe
+the most important language features needed in our examples. For a full description of the Xtend language, 
+please consult the link[http://www.xtend-lang.org/documentation][Xtend documentation]. 
+ 
+Just like a Java file, an Xtend file starts with a package statement and an import section followed by
+one or more classes. Semicolons are optional and classes are code[Xtend][public] by default. Xtend classes 
+can extend super classes and implement interfaces just like Java. It does not make any difference whether 
+they were originally declared in Xtend or in Java.
 
+a[xtend_property] 
+JavaBean properties can be accessed directly by their name. The access will be automatically mapped to 
+the appropriate accessor method. That means you can write
+code[Xtend][
+println(foo.bar)      // instead of println(foo.getBar())
+foo.bar = baz         // instead of foo.setBar(baz)
+foo.fooBars += foobar // instead of foo.getFooBars().add(foobar)
+]
+Empty parentheses on method calls can be skipped.
 
+a[xtend_methods] 
+
+Methods are introduced with the keyword code[Xtend][def] or code[Xtend][override] if they override/implement
+a super type's method. They are public by default. The value of the last expression is returned.
+
+a[xtend_variables]
+
+Variables are declared with the keywords code[Xtend][val] (final) or code[Xtend][var] (non-final).
+Field declarations can use the same syntax or the same as in Java.
+
+a[xtend_typeinferrence]
+
+Xtend is statically typed, but you do not have to specify the type in a declaration if it can be inferred
+from the context:
+code[Xtend][
+val x = newArrayList('foo', 'bar', 'baz') // x is of type List<String>
+def foo() {  // equivalent to  def int foo()...
+  1
+}
+]
+
+a[xtend_extension]
+The methods of fields marked as code[Xtend][extension] are callable in extension syntax. That means,
+you can put the first argument in front as if it were the receiver of the call, e.g.
+code[Xtend][
+// assume the class Foo defines a method foo(Baz)
+extension Foo
+
+def bar(Baz baz) {
+  baz.foo  // calls _foo.foo(baz)
+}
+]
+Static methods can be put on the extension scope with a static extension import, e.g.
+code[Xtend][
+import static extension java.util.Collections.*
+...
+val foo = singleton('foo') // calls Collections.singleton('foo')
+]
+
+a[xtend_it]
+In addition to Java's code[Xtend][this], you can define another implicit receiver variable named code[Xtend][it].
+As with code[Xtend][this], you can skip code[Xtend][it] in feature calls, i.e.
+code[Xtend][
+class Foo {
+  def foo(Bar it) {
+    foo // will call it.foo() or if it doesn't exist this.foo()
+  }
+}
+]
+
+a[xtend_lambda]
+Xtend provides lambda expressions. These are anonymous functions in square brackets. 
+code[Xtend][
+\[String foo, String bar | foo + bar\]  // a function (String foo, String bar) { foo + bar }
+]
+a[xtend_lambda_coercion]
+As this is a bit bulky, there are more rules to make working with closures more attractive:
+ol[
+item[When a lambda expression is the last argument in a method call, it can be put behind the closing parenthesis.]
+item[Lambdas are automatically coerced to interfaces with a single function. Parameter types will be
+inferred.]
+item[If you skip the declaration of the only parameter, it will be implicitly called code[Xtend][it].]
+]
+code[Xtend][
+new Thread \[ println("Hello concurrent world") \] // lambda will be coerced to a Runnable
+val list = newArrayList('fooooo', 'fo', 'foo')
+list.sortBy\[ length \]   // lambda is coerced into a function (String)=>Comparable
+                        // equivalent to list.sortBy\[Comparable it | it.length\]
+]
