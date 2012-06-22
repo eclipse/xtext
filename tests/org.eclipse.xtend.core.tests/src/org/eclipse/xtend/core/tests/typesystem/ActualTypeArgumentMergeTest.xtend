@@ -12,23 +12,28 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.junit.After
 
 /**
  * @author Sebastian Zarnekow
  */
-class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
+class ActualTypeArgumentMergeTest extends AbstractXtendTestCase implements TypeReferenceOwner {
 
 	@Inject
 	extension IXtendJvmAssociations
@@ -38,38 +43,69 @@ class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
 
 	@Inject
 	CommonTypeComputationServices services
+	
+	extension OwnedConverter = new OwnedConverter(this)
+	
+	ResourceSet contextResourceSet
 
 	def mappedBy(String typeParameters, String... alternatingTypeReferences) {
 		// TODO synthesize unique variable names as soon as the function should be validated
 		val signature = '''def «IF !typeParameters.nullOrEmpty»<«typeParameters»>«ENDIF» void method(«alternatingTypeReferences.join(null, ' p, ', ' p') [it]») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, services)
+		val collector = new ActualTypeArgumentCollector(operation.typeParameters, BoundTypeArgumentSource::INFERRED, this)
 		for(i: (0..alternatingTypeReferences.size-1).withStep(2)) {
-			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType, operation.parameters.get(i+1).parameterType)
+			collector.populateTypeParameterMapping(operation.parameters.get(i).parameterType.toLightweightReference, operation.parameters.get(i+1).parameterType.toLightweightReference)
 		}
 		return collector.typeParameterMapping
 	}
 	
-	def merge(ListMultimap<JvmTypeParameter, BoundTypeArgument> mapping, String typeParamName) {
+	override protected function(String string) throws Exception {
+		val result = super.function(string)
+		contextResourceSet = result.eResource.resourceSet
+		return result
+	}
+	
+	@After
+	def void tearDown() {
+		contextResourceSet = null
+	}
+	
+	def merge(ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName) {
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
 				val mappingData = mapping.get(key)
-				return mapping->merger.merge(mappingData)
+				return mapping->merger.merge(mappingData, this)
 			}
 		}
 		fail('''No mapping for «typeParamName» in «mapping.keySet.map[simpleName]»'''.toString)
 	}
 	
-	def to(Pair<ListMultimap<JvmTypeParameter, BoundTypeArgument>, MergedBoundTypeArgument> merged, String type, VarianceInfo variance) {
+	def to(Pair<ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument>, LightweightMergedBoundTypeArgument> merged, String type, VarianceInfo variance) {
 		if (type == null) {
 			assertNull(merged.value)
 		} else {
-			assertEquals(type, merged.value.typeReference.simpleName)
+			assertEquals(type, merged.value.typeReference.toString)
 			assertEquals(variance, merged.value.variance)
 		}
 		merged.key
+	}
+	
+	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+	
+	override getAllHints(Object handle) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+	
+	override getServices() {
+		return services
+	}
+	
+	override getContextResourceSet() {
+		return contextResourceSet
 	}
 	
 	@Test def void testUnusedParam() {
@@ -411,7 +447,7 @@ class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
 	
 	@Test def void testCircularTypeParams_05() {
 		'T extends Iterable<? extends T>'.mappedBy('CharSequence', 'String')
-			.merge('T').to('Iterable<Object>', INVARIANT)
+			.merge('T').to('Iterable<?>', INVARIANT)
 	}
 	
 	@Test def void testCircularTypeParams_06() {
@@ -421,7 +457,7 @@ class ActualTypeArgumentMergeTest extends AbstractXtendTestCase {
 	
 	@Test def void testCircularTypeParams_07() {
 		'T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends T>'.mappedBy('CharSequence', 'String')
-			.merge('T').to('CharIterable<CharSequence>', INVARIANT)
+			.merge('T').to('CharIterable<? extends CharSequence>', INVARIANT)
 	}
 	
 	@Test def void testCircularTypeParams_08() {

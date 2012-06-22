@@ -5,6 +5,8 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -17,15 +19,21 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,19 +41,31 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
+public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase implements TypeReferenceOwner {
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private BoundTypeArgumentMerger merger;
   
-  public MergedBoundTypeArgument merge(final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
-    MergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(null, mergeUs);
+  @Inject
+  private CommonTypeComputationServices services;
+  
+  private ResourceSet contextResourceSet;
+  
+  private OwnedConverter _ownedConverter = new Function0<OwnedConverter>() {
+    public OwnedConverter apply() {
+      OwnedConverter _ownedConverter = new OwnedConverter(BoundTypeArgumentMergerTest.this);
+      return _ownedConverter;
+    }
+  }.apply();
+  
+  public LightweightMergedBoundTypeArgument merge(final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
+    LightweightMergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(null, mergeUs);
     return _mergeWithSource;
   }
   
-  public MergedBoundTypeArgument mergeWithSource(final Object source, final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
+  public LightweightMergedBoundTypeArgument mergeWithSource(final Object source, final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
@@ -62,33 +82,34 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
       String _string = signature.toString();
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-      final ArrayList<BoundTypeArgument> mergable = CollectionLiterals.<BoundTypeArgument>newArrayList();
+      final ArrayList<LightweightBoundTypeArgument> mergable = CollectionLiterals.<LightweightBoundTypeArgument>newArrayList();
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Procedure2<JvmFormalParameter,Integer> _function_1 = new Procedure2<JvmFormalParameter,Integer>() {
           public void apply(final JvmFormalParameter p, final Integer i) {
             final Triple<String,VarianceInfo,VarianceInfo> input = ((List<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)).get((i).intValue());
             JvmTypeReference _parameterType = p.getParameterType();
+            LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this._ownedConverter.toLightweightReference(_parameterType);
             Object _object = new Object();
             Object _elvis = ObjectExtensions.<Object>operator_elvis(source, _object);
             VarianceInfo _second = input.getSecond();
             VarianceInfo _third = input.getThird();
-            BoundTypeArgument _boundTypeArgument = new BoundTypeArgument(_parameterType, null, _elvis, _second, _third);
-            mergable.add(_boundTypeArgument);
+            LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _elvis, _second, _third);
+            mergable.add(_lightweightBoundTypeArgument);
           }
         };
       IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
-      return this.merger.merge(mergable);
+      return this.merger.merge(mergable, this);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public void to(final MergedBoundTypeArgument merged, final String type, final VarianceInfo variance) {
+  public void to(final LightweightMergedBoundTypeArgument merged, final String type, final VarianceInfo variance) {
     boolean _equals = Objects.equal(type, null);
     if (_equals) {
       Assert.assertNull(merged);
     } else {
-      JvmTypeReference _typeReference = merged.getTypeReference();
+      LightweightTypeReference _typeReference = merged.getTypeReference();
       String _simpleName = _typeReference.getSimpleName();
       Assert.assertEquals(type, _simpleName);
       VarianceInfo _variance = merged.getVariance();
@@ -103,9 +124,40 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     return _create;
   }
   
+  protected XtendFunction function(final String string) throws Exception {
+    final XtendFunction result = super.function(string);
+    Resource _eResource = result.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    this.contextResourceSet = _resourceSet;
+    return result;
+  }
+  
+  @After
+  public void tearDown() {
+    this.contextResourceSet = null;
+  }
+  
+  public ResourceSet getContextResourceSet() {
+    return this.contextResourceSet;
+  }
+  
+  public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
+  }
+  
+  public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
+  }
+  
+  public CommonTypeComputationServices getServices() {
+    return this.services;
+  }
+  
   @Test
   public void testNothingToMerge_01() {
-    MergedBoundTypeArgument _merge = this.merge();
+    LightweightMergedBoundTypeArgument _merge = this.merge();
     this.to(_merge, null, null);
   }
   
@@ -113,15 +165,15 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
   public void testNothingToMerge_02() {
     Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_3);
     this.to(_merge_1, "String", VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge_2 = this.merge(_mappedTo_5);
+    LightweightMergedBoundTypeArgument _merge_2 = this.merge(_mappedTo_5);
     this.to(_merge_2, "String", VarianceInfo.IN);
   }
   
@@ -129,15 +181,15 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
   public void testNothingToMerge_03() {
     Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_3);
     this.to(_merge_1, "String", VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge_2 = this.merge(_mappedTo_5);
+    LightweightMergedBoundTypeArgument _merge_2 = this.merge(_mappedTo_5);
     this.to(_merge_2, "String", null);
   }
   
@@ -145,15 +197,15 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
   public void testNothingToMerge_04() {
     Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_3);
     this.to(_merge_1, "String", null);
     Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge_2 = this.merge(_mappedTo_5);
+    LightweightMergedBoundTypeArgument _merge_2 = this.merge(_mappedTo_5);
     this.to(_merge_2, "String", VarianceInfo.INVARIANT);
   }
   
@@ -163,13 +215,13 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_6 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_7 = this.operator_mappedTo(_mappedTo_6, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_5, _mappedTo_7);
+    LightweightMergedBoundTypeArgument _merge_1 = this.merge(_mappedTo_5, _mappedTo_7);
     this.to(_merge_1, "Integer", VarianceInfo.INVARIANT);
   }
   
@@ -179,7 +231,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -189,7 +241,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -199,7 +251,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -209,7 +261,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -219,7 +271,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -229,7 +281,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -239,7 +291,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -249,7 +301,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -259,7 +311,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -269,7 +321,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -279,7 +331,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -289,7 +341,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.IN);
   }
   
@@ -299,7 +351,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -309,7 +361,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -319,7 +371,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.IN);
   }
   
@@ -329,7 +381,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -339,7 +391,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -349,7 +401,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -359,7 +411,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -369,7 +421,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.OUT);
   }
   
@@ -379,7 +431,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -389,7 +441,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -399,7 +451,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -409,7 +461,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -419,7 +471,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -429,7 +481,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.OUT);
   }
   
@@ -439,7 +491,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -449,7 +501,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -459,7 +511,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -469,7 +521,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -479,7 +531,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -489,7 +541,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -499,7 +551,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -509,7 +561,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.IN);
   }
   
@@ -519,7 +571,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.IN);
   }
   
@@ -529,7 +581,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -539,7 +591,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -549,7 +601,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -559,7 +611,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -569,7 +621,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.OUT);
   }
   
@@ -579,7 +631,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -589,7 +641,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.OUT);
   }
   
@@ -599,7 +651,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -609,7 +661,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -619,7 +671,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.INVARIANT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -629,7 +681,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -639,7 +691,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -649,7 +701,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -659,7 +711,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -669,7 +721,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -679,7 +731,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -689,7 +741,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -699,7 +751,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -709,7 +761,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -719,7 +771,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -729,7 +781,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -739,7 +791,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -749,7 +801,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -759,7 +811,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -769,7 +821,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -779,7 +831,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -789,7 +841,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -799,7 +851,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -809,7 +861,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -819,7 +871,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -829,7 +881,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -839,7 +891,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -849,7 +901,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -859,7 +911,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -869,7 +921,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -879,7 +931,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -889,7 +941,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -899,7 +951,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -909,7 +961,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -919,7 +971,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -929,7 +981,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -939,7 +991,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -949,7 +1001,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -959,7 +1011,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -969,7 +1021,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", null);
   }
   
@@ -979,7 +1031,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.IN);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.IN);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
     this.to(_merge, "String", VarianceInfo.INVARIANT);
   }
   
@@ -990,7 +1042,7 @@ public class BoundTypeArgumentMergerTest extends AbstractXtendTestCase {
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
-    MergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(_object, _mappedTo_1, _mappedTo_3);
+    LightweightMergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(_object, _mappedTo_1, _mappedTo_3);
     this.to(_mergeWithSource, "Object", VarianceInfo.INVARIANT);
   }
 }
