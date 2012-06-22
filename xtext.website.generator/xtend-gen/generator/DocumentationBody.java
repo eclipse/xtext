@@ -38,8 +38,8 @@ public class DocumentationBody extends Body {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     TextOrMarkup _title = chapter.getTitle();
-    CharSequence _html = this._htmlExtensions.toHtml(_title);
-    _builder.append(_html, "				");
+    CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+    _builder.append(_htmlText, "				");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("</h1>");
@@ -51,8 +51,8 @@ public class DocumentationBody extends Body {
       EList<TextOrMarkup> _contents = chapter.getContents();
       for(final TextOrMarkup content : _contents) {
         _builder.append("\t\t\t");
-        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
-        _builder.append(_html_1, "			");
+        CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(content);
+        _builder.append(_htmlParagraph, "			");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -87,15 +87,15 @@ public class DocumentationBody extends Body {
     _builder.newLineIfNotEmpty();
     _builder.append("<h2 style=\"font-weight: normal;\">");
     TextOrMarkup _title = section.getTitle();
-    CharSequence _html = this._htmlExtensions.toHtml(_title);
-    _builder.append(_html, "");
+    CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+    _builder.append(_htmlText, "");
     _builder.append("</h2>");
     _builder.newLineIfNotEmpty();
     {
       EList<TextOrMarkup> _contents = section.getContents();
       for(final TextOrMarkup content : _contents) {
-        CharSequence _html_1 = this._htmlExtensions.toHtml(content);
-        _builder.append(_html_1, "");
+        CharSequence _htmlParagraph = this._htmlExtensions.toHtmlParagraph(content);
+        _builder.append(_htmlParagraph, "");
         _builder.newLineIfNotEmpty();
       }
     }

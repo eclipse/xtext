@@ -87,19 +87,19 @@ class Documentation extends AbstractWebsite {
 	def menu(Document doc) '''
 		<ul id="nav-outline">
 			«FOR chapter : doc.chapters»
-				<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
+				<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a>
 				«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-					<li><a href="#«section.href»">«section.title.toHtml»</a></li>
+					<li><a href="#«section.href»">«section.title.toHtmlText»</a></li>
 				«ENDFOR»
 				</li>
 			«ENDFOR»
 			«FOR part : doc.parts»
 				<li>&nbsp;</li>
-				<li style="color : #333;">«part.title.toHtml»</li>
+				<li style="color : #333;">«part.title.toHtmlText»</li>
 				«FOR chapter : part.chapters»
-					<li><a href="#«chapter.href»">«chapter.title.toHtml»</a>
+					<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a>
 					«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
-						<li><a href="#«section.href»">«section.title.toHtml»</a></li>
+						<li><a href="#«section.href»">«section.title.toHtmlText»</a></li>
 					«ENDFOR»
 					</li>
 				«ENDFOR»
@@ -134,11 +134,11 @@ class DocumentationBody extends Body {
 			<div class="row">
 				<div class="span8 offset3">
 					<h1>
-						«chapter.title.toHtml»
+						«chapter.title.toHtmlText»
 					</h1>
 					<hr style="margin-top: 5px; margin-bottom: 5px;">
 					«FOR content : chapter.contents»
-						«content.toHtml»
+						«content.toHtmlParagraph»
 					«ENDFOR»
 					«FOR section: chapter.sections»
 						«section.h2»
@@ -151,9 +151,9 @@ class DocumentationBody extends Body {
 	override h2(AbstractSection section) '''
 		<!--  section -->
 		<section id="«section.href»" style="margin-top: 20px; padding-top: 0;">
-		<h2 style="font-weight: normal;">«section.title.toHtml»</h2>
+		<h2 style="font-weight: normal;">«section.title.toHtmlText»</h2>
 		«FOR content : section.contents»
-			«content.toHtml»
+			«content.toHtmlParagraph»
 		«ENDFOR»
 		«FOR subsection: section.sections»
 			«subsection.h3plus(3)»

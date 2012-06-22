@@ -60,11 +60,11 @@ class Examples extends Documentation {
 	'''
   	
   	def navbarDropdown() '''
-		<li class="dropdown" «IF path == 'examples.html'»class="active"«ENDIF»>
+		<li class="dropdown«IF path == 'examples.html'» active«ENDIF»">
 			<a href="examples.html" class="dropdown-toggle" data-toggle="dropdown">Examples<b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				«FOR chapter: document.allChapters»
-					<li><a href="#«chapter.href»">«chapter.title.toHtml»</a></li>
+					<li><a href="#«chapter.href»">«chapter.title.toHtmlText»</a></li>
 				«ENDFOR»
 			</ul>
 		</li>
@@ -110,11 +110,11 @@ class ExamplesBody extends DocumentationBody {
 			<div class="row">
 				<div class="span10 offset1">
 					<h1>
-						«chapter.title.toHtml»
+						«chapter.title.toHtmlText»
 					</h1>
 					<hr style="margin-top: 5px; margin-bottom: 5px;">
 					«FOR content : chapter.contents»
-						«content?.toHtml»
+						«content?.toHtmlParagraph»
 					«ENDFOR»
 					«FOR section: chapter.sections»
 						«section.h2»

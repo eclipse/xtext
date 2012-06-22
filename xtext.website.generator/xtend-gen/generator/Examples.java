@@ -138,15 +138,15 @@ public class Examples extends Documentation {
   
   public CharSequence navbarDropdown() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<li class=\"dropdown\" ");
+    _builder.append("<li class=\"dropdown");
     {
       String _path = this.path();
       boolean _equals = Objects.equal(_path, "examples.html");
       if (_equals) {
-        _builder.append("class=\"active\"");
+        _builder.append(" active");
       }
     }
-    _builder.append(">");
+    _builder.append("\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<a href=\"examples.html\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Examples<b class=\"caret\"></b></a>");
@@ -164,8 +164,8 @@ public class Examples extends Documentation {
         _builder.append(_href, "		");
         _builder.append("\">");
         TextOrMarkup _title = chapter.getTitle();
-        CharSequence _html = this._htmlExtensions.toHtml(_title);
-        _builder.append(_html, "		");
+        CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+        _builder.append(_htmlText, "		");
         _builder.append("</a></li>");
         _builder.newLineIfNotEmpty();
       }

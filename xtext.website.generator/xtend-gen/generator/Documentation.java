@@ -184,8 +184,8 @@ public class Documentation extends AbstractWebsite {
         _builder.append(_href, "	");
         _builder.append("\">");
         TextOrMarkup _title = chapter.getTitle();
-        CharSequence _html = this._htmlExtensions.toHtml(_title);
-        _builder.append(_html, "	");
+        CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
+        _builder.append(_htmlText, "	");
         _builder.append("</a>");
         _builder.newLineIfNotEmpty();
         {
@@ -202,8 +202,8 @@ public class Documentation extends AbstractWebsite {
             _builder.append(_href_1, "	");
             _builder.append("\">");
             TextOrMarkup _title_1 = section.getTitle();
-            CharSequence _html_1 = this._htmlExtensions.toHtml(_title_1);
-            _builder.append(_html_1, "	");
+            CharSequence _htmlText_1 = this._htmlExtensions.toHtmlText(_title_1);
+            _builder.append(_htmlText_1, "	");
             _builder.append("</a></li>");
             _builder.newLineIfNotEmpty();
           }
@@ -225,8 +225,8 @@ public class Documentation extends AbstractWebsite {
         _builder.append("\t");
         _builder.append("<li style=\"color : #333;\">");
         TextOrMarkup _title_2 = part.getTitle();
-        CharSequence _html_2 = this._htmlExtensions.toHtml(_title_2);
-        _builder.append(_html_2, "	");
+        CharSequence _htmlText_2 = this._htmlExtensions.toHtmlText(_title_2);
+        _builder.append(_htmlText_2, "	");
         _builder.append("</li>");
         _builder.newLineIfNotEmpty();
         {
@@ -238,8 +238,8 @@ public class Documentation extends AbstractWebsite {
             _builder.append(_href_2, "	");
             _builder.append("\">");
             TextOrMarkup _title_3 = chapter_1.getTitle();
-            CharSequence _html_3 = this._htmlExtensions.toHtml(_title_3);
-            _builder.append(_html_3, "	");
+            CharSequence _htmlText_3 = this._htmlExtensions.toHtmlText(_title_3);
+            _builder.append(_htmlText_3, "	");
             _builder.append("</a>");
             _builder.newLineIfNotEmpty();
             {
@@ -256,8 +256,8 @@ public class Documentation extends AbstractWebsite {
                 _builder.append(_href_3, "	");
                 _builder.append("\">");
                 TextOrMarkup _title_4 = section_1.getTitle();
-                CharSequence _html_4 = this._htmlExtensions.toHtml(_title_4);
-                _builder.append(_html_4, "	");
+                CharSequence _htmlText_4 = this._htmlExtensions.toHtmlText(_title_4);
+                _builder.append(_htmlText_4, "	");
                 _builder.append("</a></li>");
                 _builder.newLineIfNotEmpty();
               }
