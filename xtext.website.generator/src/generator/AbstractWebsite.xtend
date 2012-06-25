@@ -230,7 +230,11 @@ abstract class AbstractWebsite implements Resource {
 		<script src="js/bootstrap-collapse.js"></script>
 		<script src="js/bootstrap-carousel.js"></script>
 		<script src="js/bootstrap-typeahead.js"></script>
-		
+		<script type="text/javascript">
+			$(function () { 
+				$(".has-popover").popover();  
+			});  
+		</script>
 		<!-- Include the plug-in -->
 		<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
 		

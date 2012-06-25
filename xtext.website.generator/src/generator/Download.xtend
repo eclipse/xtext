@@ -24,28 +24,40 @@ class Download extends AbstractWebsite {
 								    </tr>
 								</tfoot>
 								<tbody>
-								    <tr>
-										<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
-								    </tr>
-								    <tr>
-								    	<td style="text-align: center;">
-								    	<a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" 
-								    	class="btn btn-primary btn-large"
-								    	style="width: 70%;">Latest Release</a></td>
-								    </tr>
-								    <tr>
-										<td style="text-align: center;">
-										<a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" 
-								    	class="btn btn-primary btn-large"
-								    	style="width: 70%;">Latest Milestone</a></td>
-								    </tr>
-								    <tr>
-										<td style="text-align: center;">
-										<a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/stable/" 
-								    	class="btn btn-primary btn-large"
-								    	style="width: 70%;">Bleeding Edge!</a></td>
-								    </tr>
-								</tbody>
+							    <tr>
+									<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
+							    </tr>
+							    <tr>
+							    	<td style="text-align: center;">
+							    	<a  
+							    	rel="popover" 
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	data-original-title="Right-click and 'Copy Link'"
+							    	href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" 
+							    	class="has-popover btn btn-primary btn-large"
+							    	style="width: 70%;">Latest Release</a></td>
+							    </tr>
+							    <tr>
+									<td style="text-align: center;">
+									<a
+									  rel="popover" 
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	data-original-title="Right-click and 'Copy Link'" 
+									  href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" 
+							    	class="has-popover btn btn-primary btn-large"
+							    	style="width: 70%;">Latest Milestone</a></td>
+							    </tr>
+							    <tr>
+									<td style="text-align: center;">
+									<a
+										rel="popover" 
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	data-original-title="Right-click and 'Copy Link'" 
+										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/stable/" 
+							    	class="has-popover btn btn-primary btn-large"
+							    	style="width: 70%;">Bleeding Edge!</a></td>
+							    </tr>
+							</tbody>
 						    </table>
 						</div>
 				    </div>

@@ -557,6 +557,18 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<script src=\"js/bootstrap-typeahead.js\"></script>");
     _builder.newLine();
+    _builder.append("<script type=\"text/javascript\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("$(function () { ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$(\".has-popover\").popover();  ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("});  ");
+    _builder.newLine();
+    _builder.append("</script>");
     _builder.newLine();
     _builder.append("<!-- Include the plug-in -->");
     _builder.newLine();
