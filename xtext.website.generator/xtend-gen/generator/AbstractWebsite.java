@@ -90,7 +90,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLineIfNotEmpty();
     _builder.append("</head>");
     _builder.newLine();
-    _builder.append("<body onload=\"prettyPrint()\">");
+    _builder.append("<body>");
     _builder.newLine();
     _builder.append("\t");
     CharSequence _navBar = this.navBar();
@@ -131,28 +131,6 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
     _builder.append("            ");
-    _builder.append("getTwitters(\'tweet\', { ");
-    _builder.newLine();
-    _builder.append("                ");
-    _builder.append("id: \'xtext\', ");
-    _builder.newLine();
-    _builder.append("                ");
-    _builder.append("count: 5,");
-    _builder.newLine();
-    _builder.append("                ");
-    _builder.append("includeRT: true,");
-    _builder.newLine();
-    _builder.append("                ");
-    _builder.append("enableLinks: true, ");
-    _builder.newLine();
-    _builder.append("                ");
-    _builder.append("clearContents: true,");
-    _builder.newLine();
-    _builder.append("                ");
-    _builder.append("template: \'\"%text%\" <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">%time%</a><br/><br/>\'");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("});");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("</script>");
@@ -161,100 +139,136 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<script src=\"js/jquery-1.7.1.min.js\"></script>");
     _builder.newLine();
-    _builder.append("<link rel=\"stylesheet\" media=\"screen\" href=\"css/prettyPhoto.css\" />");
-    _builder.newLine();
     _builder.append("<script src=\"js/jquery.prettyPhoto.js\" type=\"text/javascript\"></script>");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
-    _builder.append("            ");
+    _builder.append("     ");
     _builder.append("$(document).ready(function() {");
     _builder.newLine();
-    _builder.append("           ");
     _builder.newLine();
-    _builder.append("                ");
+    {
+      boolean _isPrettyPrint = this.isPrettyPrint();
+      if (_isPrettyPrint) {
+        _builder.append("\t\t\t\t");
+        _builder.append("prettyPrint();");
+        _builder.newLine();
+      }
+    }
+    _builder.append("         ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t ");
     _builder.append("$(\'a[data-rel]\').each(function() {");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("$(this).attr(\'rel\', $(this).data(\'rel\'));");
     _builder.newLine();
-    _builder.append("                ");
+    _builder.append("         ");
     _builder.append("});");
     _builder.newLine();
-    _builder.append("                ");
+    _builder.append("        ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t ");
     _builder.append("$(\"a[rel^=\'prettyPhoto\']\").prettyPhoto({");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("animation_speed: \'fast\',");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("slideshow: 5000,");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("autoplay_slideshow: false,");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("opacity: 0.80,");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("show_title: true,");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("theme: \'ligh_square\',");
     _builder.newLine();
-    _builder.append("//                     \'pp_default\', /* light_rounded / dark_rounded / light_square / dark_square / facebook */");
-    _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("overlay_gallery: false,");
     _builder.newLine();
-    _builder.append("                    ");
+    _builder.append("             ");
     _builder.append("social_tools: false");
     _builder.newLine();
-    _builder.append("              ");
+    _builder.append("       ");
     _builder.newLine();
-    _builder.append("                ");
+    _builder.append("         ");
     _builder.append("});");
     _builder.newLine();
-    _builder.append("            ");
+    _builder.append("         ");
+    _builder.newLine();
+    {
+      boolean _isOutline = this.isOutline();
+      if (_isOutline) {
+        _builder.append("\t\t\t\t");
+        _builder.append("$(\'#nav-outline > li > a\').live(\'click\', function() {        ");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("$(this).parent().find(\'ul\').slideToggle();      ");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("});");
+        _builder.newLine();
+      }
+    }
+    _builder.append("         ");
+    _builder.newLine();
+    {
+      boolean _isPopover = this.isPopover();
+      if (_isPopover) {
+        _builder.append("\t\t\t\t");
+        _builder.append("$(\'.has-popover\').popover();");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t \t     ");
+    _builder.newLine();
+    _builder.append("\t \t     ");
+    _builder.append("getTwitters(\'tweet\', { ");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("id: \'xtext\', ");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("count: 5,");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("includeRT: true,");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("enableLinks: true, ");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("clearContents: true,");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("template: \'\"%text%\" <a href=\"http://twitter.com/%user_screen_name%/statuses/%id_str%/\">%time%</a><br/><br/>\'");
+    _builder.newLine();
+    _builder.append("\t\t     ");
     _builder.append("});");
     _builder.newLine();
-    _builder.append("            ");
+    _builder.append("         ");
     _builder.newLine();
-    _builder.append("        ");
-    _builder.append("$(function() {      ");
-    _builder.newLine();
-    _builder.append("    \t");
-    _builder.append("$(\'#nav-outline > li > a\').live(\'click\', function() {        ");
-    _builder.newLine();
-    _builder.append("    \t\t");
-    _builder.append("$(this).parent().find(\'ul\').slideToggle();      ");
-    _builder.newLine();
-    _builder.append("    \t");
-    _builder.append("});    ");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("});");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("</script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\">");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("(function() {");
-    _builder.newLine();
-    _builder.append("    ");
+    _builder.append("         ");
     _builder.append("var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t \t     ");
     _builder.append("po.src = \'https://apis.google.com/js/plusone.js\';");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t \t     ");
     _builder.append("var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);");
     _builder.newLine();
-    _builder.append("  ");
-    _builder.append("})();");
+    _builder.append("     ");
+    _builder.append("});");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("</script>");
     _builder.newLine();
     _builder.append("<script type=\"text/javascript\">");
@@ -301,6 +315,18 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("</script>");
     _builder.newLine();
     return _builder;
+  }
+  
+  protected boolean isPrettyPrint() {
+    return false;
+  }
+  
+  protected boolean isOutline() {
+    return true;
+  }
+  
+  protected boolean isPopover() {
+    return true;
   }
   
   public CharSequence navBar() {
@@ -643,6 +669,9 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.newLine();
     _builder.append("<link href=\'css/fonts.css\' rel=\'stylesheet\' type=\'text/css\'>");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("<link rel=\"stylesheet\" media=\"screen\" href=\"css/prettyPhoto.css\" />");
     _builder.newLine();
     return _builder;
   }

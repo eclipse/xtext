@@ -22,6 +22,10 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
     return _builder;
   }
   
+  protected boolean isPrettyPrint() {
+    return true;
+  }
+  
   public CharSequence prettify() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<link href=\"google-code-prettify/prettify.css\" type=\"text/css\" rel=\"stylesheet\" />");

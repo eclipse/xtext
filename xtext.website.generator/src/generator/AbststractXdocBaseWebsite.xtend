@@ -6,11 +6,14 @@ abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
 	
 	def protected Document getDocument()
 	
-	override javaScriptDocumentStart()
-	'''
+	override javaScriptDocumentStart() '''
 		«super.javaScriptDocumentStart()»
 		«prettify»
 	'''
+	
+	override protected isPrettyPrint() {
+		true
+	}
 	
 	def prettify() { 
 		var result = '''

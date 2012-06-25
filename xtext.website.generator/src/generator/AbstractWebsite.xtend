@@ -47,7 +47,7 @@ abstract class AbstractWebsite implements Resource {
 			«stylesheets»
 			«javaScriptDocumentStart»
 		</head>
-		<body onload="prettyPrint()">
+		<body>
 			«navBar»
 			«contents»
 			«quickLinksAndTweets»
@@ -62,53 +62,59 @@ abstract class AbstractWebsite implements Resource {
 			type="text/javascript">
 		        </script>
 		<script type="text/javascript">
-		            getTwitters('tweet', { 
-		                id: 'xtext', 
-		                count: 5,
-		                includeRT: true,
-		                enableLinks: true, 
-		                clearContents: true,
-		                template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">%time%</a><br/><br/>'
-		            });
+		            
 		        </script>
 		
 		
 		<script src="js/jquery-1.7.1.min.js"></script>
-		<link rel="stylesheet" media="screen" href="css/prettyPhoto.css" />
 		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
-		<script type="text/javascript">
-		            $(document).ready(function() {
-		           
-		                $('a[data-rel]').each(function() {
-		                    $(this).attr('rel', $(this).data('rel'));
-		                });
-		                $("a[rel^='prettyPhoto']").prettyPhoto({
-		                    animation_speed: 'fast',
-		                    slideshow: 5000,
-		                    autoplay_slideshow: false,
-		                    opacity: 0.80,
-		                    show_title: true,
-		                    theme: 'ligh_square',
-		//                     'pp_default', /* light_rounded / dark_rounded / light_square / dark_square / facebook */
-		                    overlay_gallery: false,
-		                    social_tools: false
-		              
-		                });
-		            });
-		            
-		        $(function() {      
-		    	$('#nav-outline > li > a').live('click', function() {        
-		    		$(this).parent().find('ul').slideToggle();      
-		    	});    
-		        });
-		        </script>
-		<script type="text/javascript">
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
+			<script type="text/javascript">
+		     $(document).ready(function() {
+
+						«IF isPrettyPrint»
+										 prettyPrint();
+						«ENDIF»
+		         
+						 $('a[data-rel]').each(function() {
+		             $(this).attr('rel', $(this).data('rel'));
+		         });
+		        
+						 $("a[rel^='prettyPhoto']").prettyPhoto({
+		             animation_speed: 'fast',
+		             slideshow: 5000,
+		             autoplay_slideshow: false,
+		             opacity: 0.80,
+		             show_title: true,
+		             theme: 'ligh_square',
+		             overlay_gallery: false,
+		             social_tools: false
+		       
+		         });
+		         
+						«IF isOutline»
+											$('#nav-outline > li > a').live('click', function() {        
+												$(this).parent().find('ul').slideToggle();      
+											});
+						«ENDIF»
+		         
+						«IF isPopover()»
+											$('.has-popover').popover();
+						«ENDIF»
+			 	     
+			 	     getTwitters('tweet', { 
+				        id: 'xtext', 
+				        count: 5,
+				        includeRT: true,
+				        enableLinks: true, 
+				        clearContents: true,
+				        template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">%time%</a><br/><br/>'
+				     });
+		         
+		         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			 	     po.src = 'https://apis.google.com/js/plusone.js';
+			 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		     });
+			</script>
 		<script type="text/javascript">
 			var _gaq = _gaq || [];	
 		  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
@@ -125,6 +131,9 @@ abstract class AbstractWebsite implements Resource {
 			})();
 		</script>
 	'''
+	def protected boolean isPrettyPrint() { false }
+	def protected boolean isOutline() { true }
+	def protected boolean isPopover() { true }
 
 	def navBar() '''
 		<!-- Navbar -->
@@ -273,6 +282,8 @@ abstract class AbstractWebsite implements Resource {
 		<link rel="stylesheet" href="css/shield-responsive.css">
 		
 		<link href='css/fonts.css' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" media="screen" href="css/prettyPhoto.css" />
 	'''
 
 	def headline(String title) '''

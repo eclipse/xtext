@@ -35,58 +35,60 @@
 	<link rel="stylesheet" href="css/shield-responsive.css">
 	
 	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	
+	<link rel="stylesheet" media="screen" href="css/prettyPhoto.css" />
 	<script
 		src="js/twitter.js"
 		type="text/javascript">
 	        </script>
 	<script type="text/javascript">
-	            getTwitters('tweet', { 
-	                id: 'xtext', 
-	                count: 5,
-	                includeRT: true,
-	                enableLinks: true, 
-	                clearContents: true,
-	                template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">%time%</a><br/><br/>'
-	            });
+	            
 	        </script>
 	
 	
 	<script src="js/jquery-1.7.1.min.js"></script>
-	<link rel="stylesheet" media="screen" href="css/prettyPhoto.css" />
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	            $(document).ready(function() {
-	           
-	                $('a[data-rel]').each(function() {
-	                    $(this).attr('rel', $(this).data('rel'));
-	                });
-	                $("a[rel^='prettyPhoto']").prettyPhoto({
-	                    animation_speed: 'fast',
-	                    slideshow: 5000,
-	                    autoplay_slideshow: false,
-	                    opacity: 0.80,
-	                    show_title: true,
-	                    theme: 'ligh_square',
-	//                     'pp_default', /* light_rounded / dark_rounded / light_square / dark_square / facebook */
-	                    overlay_gallery: false,
-	                    social_tools: false
-	              
-	                });
-	            });
-	            
-	        $(function() {      
-	    	$('#nav-outline > li > a').live('click', function() {        
-	    		$(this).parent().find('ul').slideToggle();      
-	    	});    
-	        });
-	        </script>
-	<script type="text/javascript">
-	  (function() {
-	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-	    po.src = 'https://apis.google.com/js/plusone.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-	  })();
-	</script>
+		<script type="text/javascript">
+	     $(document).ready(function() {
+	
+					prettyPrint();
+	         
+					 $('a[data-rel]').each(function() {
+	             $(this).attr('rel', $(this).data('rel'));
+	         });
+	        
+					 $("a[rel^='prettyPhoto']").prettyPhoto({
+	             animation_speed: 'fast',
+	             slideshow: 5000,
+	             autoplay_slideshow: false,
+	             opacity: 0.80,
+	             show_title: true,
+	             theme: 'ligh_square',
+	             overlay_gallery: false,
+	             social_tools: false
+	       
+	         });
+	         
+					$('#nav-outline > li > a').live('click', function() {        
+						$(this).parent().find('ul').slideToggle();      
+					});
+	         
+					$('.has-popover').popover();
+		 	     
+		 	     getTwitters('tweet', { 
+			        id: 'xtext', 
+			        count: 5,
+			        includeRT: true,
+			        enableLinks: true, 
+			        clearContents: true,
+			        template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">%time%</a><br/><br/>'
+			     });
+	         
+	         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		 	     po.src = 'https://apis.google.com/js/plusone.js';
+		 	     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	     });
+		</script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];	
 	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
@@ -115,7 +117,7 @@
 		registerLanguage('application', 'simple');
 	</script>
 </head>
-<body onload="prettyPrint()">
+<body>
 	<!-- Navbar -->
 	<div class="navbar navbar-fixed-top"
 		style="border-bottom: 1px solid #000;">
@@ -196,34 +198,13 @@
 							<p>
 								</p>
 								<ul>
-									<li><p>
-										<a href="#simple">Simple Java applications</a>
-									</p>
-									</li>
-									<li><p>
-										<a href="#mongo">JavaBeans-like statically typed access to mongoDB documents</a>
-									</p>
-									</li>
-									<li><p>
-										<a href="#routing">An HTTP routing servlet with full support of expressions</a>
-									</p>
-									</li>
-									<li><p>
-										<a href="#templates">Templates with embedded expressions</a>
-									</p>
-									</li>
-									<li><p>
-										<a href="#guice">Configuration of modules for Google Guice</a>
-									</p>
-									</li>
-									<li><p>
-										<a href="#cradle">Dependency management</a>
-									</p>
-									</li>
-									<li><p>
-										<a href="#tortoise">A Logo like programming environment for educational purposes</a>
-									</p>
-									</li>
+									<li><a href="#simple">Simple Java applications</a></li>
+									<li><a href="#mongo">JavaBeans-like statically typed access to mongoDB documents</a></li>
+									<li><a href="#routing">An HTTP routing servlet with full support of expressions</a></li>
+									<li><a href="#templates">Templates with embedded expressions</a></li>
+									<li><a href="#guice">Configuration of modules for Google Guice</a></li>
+									<li><a href="#cradle">Dependency management</a></li>
+									<li><a href="#tortoise">A Logo like programming environment for educational purposes</a></li>
 								</ul>
 								<p>
 							</p>
@@ -280,6 +261,8 @@
 								We do not provide all plug-ins for all languages. Note that the first four have to reside in the workspace
 								you start from, while the last one goes into the runtime workspace spawned from the initial one using
 								<strong>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (&lt;language&gt;)</strong>.
+							</p>
+							<p>
 							</p>
 							</section>
 							</section>
@@ -397,19 +380,10 @@ class Foo {
 								As this is a bit bulky, there are more rules to make working with lambdas more attractive:
 								</p>
 								<ol>
-									<li><p>
-										When a lambda expression is the last argument in a method call, it can be put behind the closing parenthesis.
-									</p>
-									</li>
-									<li><p>
-										Lambdas are automatically coerced to interfaces with a single function. Parameter types will be
-										inferred.
-									</p>
-									</li>
-									<li><p>
-										If you skip the declaration of the only parameter, it will be implicitly called <code class="prettyprint lang-xtend">it</code>.
-									</p>
-									</li>
+									<li>When a lambda expression is the last argument in a method call, it can be put behind the closing parenthesis.</li>
+									<li>Lambdas are automatically coerced to interfaces with a single function. Parameter types will be
+									inferred.</li>
+									<li>If you skip the declaration of the only parameter, it will be implicitly called <code class="prettyprint lang-xtend">it</code>.</li>
 								</ol>
 								<p>
 								
@@ -1353,14 +1327,8 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* ...</code>
 								</p>
 								<ul>
-									<li><p>
-										<code class="prettyprint lang-xtend">:id</code> means a placeholder for a word
-									</p>
-									</li>
-									<li><p>
-										<code class="prettyprint lang-xtend">:rest*</code> means match everything to the rest of the url
-									</p>
-									</li>
+									<li><code class="prettyprint lang-xtend">:id</code> means a placeholder for a word</li>
+									<li><code class="prettyprint lang-xtend">:rest*</code> means match everything to the rest of the url</li>
 								</ul>
 								<p>
 								
@@ -1639,7 +1607,7 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 }
 
 def protected addRouteConditionMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
-	if (route.condition != null &amp;&amp; route.condition.expression != null) {
+	if (route.condition != null && route.condition.expression != null) {
 	   	val name = route.nameOfRouteMethod(routeCounter)
 		servlet.members += route.toMethod(name + "Condition", route.newTypeRef(Boolean::TYPE)) [
 			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
@@ -1723,7 +1691,7 @@ def protected addRouteKeyField(JvmDeclaredType servlet, Route route, int routeCo
    	}
 ...
 def hasValidKey(Route route){
-	route.key != null &amp;&amp; route.key.type != null &amp;&amp; !(route.key.type instanceof JvmVoid)
+	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
 }</pre>
 								<p>
 							</p>
@@ -1795,7 +1763,7 @@ def protected addRouteMethod(JvmDeclaredType servlet, Route route, int routeCoun
    	}
 ...
 def hasValidKey(Route route){
-	route.key != null &amp;&amp; route.key.type != null &amp;&amp; !(route.key.type instanceof JvmVoid)
+	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
 }</pre>
 								<p>
 							</p>
@@ -1909,18 +1877,9 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 								what we want but there are several things we should customize to have a nice tool-support.
 								</p>
 								<ul>
-									<li><p>
-										First of all there are several things we do not want to have in the contentassist
-									</p>
-									</li>
-									<li><p>
-										The outline is really ugly when the elements do not have a name
-									</p>
-									</li>
-									<li><p>
-										There is a need for validation in the URL-pattern defintion
-									</p>
-									</li>
+									<li>First of all there are several things we do not want to have in the contentassist</li>
+									<li>The outline is really ugly when the elements do not have a name</li>
+									<li>There is a need for validation in the URL-pattern defintion</li>
 								</ul>
 								<p>
 								
@@ -2239,11 +2198,9 @@ begin
   forward(length)
 end</pre>
 								<p></td>
-								<td></p>
-								<div class="thumbnail">
+								<td><div class="thumbnail">
 									<img src="images/Nikolaus.png" alt="" width="261" height="263">
-								</div>
-								<p></td>
+								</div></td>
 								</tr>
 								</table>
 								<p>
@@ -2326,11 +2283,9 @@ class Tortoise {
 								in the <strong>Tortoise View</strong> allows to execute the code live from the editor upto the carret's current line.
 							</p>
 							<p>
-								</p>
 								<div class="thumbnail">
 									<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example" width="651" height="546">
 								</div>
-								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -2469,7 +2424,7 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 override run(Tortoise tortoise, EObject program, int stopAtLine) {
-  if(tortoise != null &amp;&amp; program != null) {
+  if(tortoise != null && program != null) {
     this.tortoise = tortoise
     this.stopAtLine = stopAtLine
     try {
