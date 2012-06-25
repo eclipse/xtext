@@ -38,8 +38,6 @@ class HtmlExtensions {
 	@Inject extension CodeRefs
 	@Inject extension ImageExtensions
 
-	boolean inParagraph = false
-	
 	def href(Identifiable id) {
 		val it = switch id {
 			ChapterRef : id.chapter
@@ -68,17 +66,22 @@ class HtmlExtensions {
 	}
 	
 	
-	def protected dispatch CharSequence toHtml(TextOrMarkup it) {
-		if(!inParagraph) {
-			inParagraph = true
-			val result = '''
-				<p>
-					«contents.toHtml.toString.trim»
-				</p>
-			'''
-			inParagraph = false
-			result
-		} else contents.toHtml.toString.trim
+	def protected dispatch CharSequence toHtml(TextOrMarkup it, boolean inParagraph) {
+		val contentsToHtml = contents.toHtml(true).toString.trim
+		if(!contentsToHtml.nullOrEmpty) {
+			if(!inParagraph) {
+				val result = '''
+					<p>
+						«contentsToHtml»
+					</p>
+				'''
+				result
+			} else {
+				contentsToHtml
+			}
+		} else {
+			''
+		}
 		
 	}
 	
@@ -94,67 +97,65 @@ class HtmlExtensions {
 //	}
 
 	def toHtmlText(Object element) {
-		this.inParagraph = true 
-		toHtml(element)
+		toHtml(element, true)
 	}
 
 	def toHtmlParagraph(Object element) {
-		this.inParagraph = false 
-		toHtml(element)
+		toHtml(element, false)
 	}
 
-	def protected dispatch CharSequence toHtml(List<EObject> it) {
-		map[toHtml].join
+	def protected dispatch CharSequence toHtml(List<EObject> it, boolean inParagraph) {
+		map[toHtml(inParagraph)].join
 	}
 
-	def protected dispatch CharSequence toHtml(TextPart it) '''«text.quote»'''
+	def protected dispatch CharSequence toHtml(TextPart it, boolean inParagraph) '''«text.quote»'''
 	
-	def protected dispatch CharSequence toHtml(Emphasize it) '''<strong>«contents.toHtml»</strong>'''
+	def protected dispatch CharSequence toHtml(Emphasize it, boolean inParagraph) '''<strong>«contents.toHtml(inParagraph)»</strong>'''
 
-	def protected dispatch CharSequence toHtml(Anchor it) '''
+	def protected dispatch CharSequence toHtml(Anchor it, boolean inParagraph) '''
 		<a name="«name.quote»"></a>
 	'''
 	
-	def protected dispatch CharSequence toHtml(Ref it) '''<a href="#«ref.href»">«contents.toHtml»</a>'''
+	def protected dispatch CharSequence toHtml(Ref it, boolean inParagraph) '''<a href="#«ref.href»">«contents.toHtml(inParagraph)»</a>'''
 	
-	def protected dispatch CharSequence toHtml(OrderedList it) { '''
+	def protected dispatch CharSequence toHtml(OrderedList it, boolean inParagraph) { '''
 			<ol>
 				«FOR item:items»
-					«item.toHtml»
+					«item.toHtml(inParagraph)»
 				«ENDFOR»
 			</ol>
-		'''.insert
+		'''.insert(inParagraph)
 	}
 	
-	def protected dispatch CharSequence toHtml(Item it) '''
-		<li>«contents.toHtml»</li>
+	def protected dispatch CharSequence toHtml(Item it, boolean inParagraph) '''
+		<li>«contents.toHtml(false)»</li>
 	'''
 	
-	def protected dispatch CharSequence toHtml(UnorderedList it) { '''
+	def protected dispatch CharSequence toHtml(UnorderedList it, boolean inParagraph) { '''
 			<ul>
 				«FOR item:items»
-					«item.toHtml»
+					«item.toHtml(inParagraph)»
 				«ENDFOR»
 			</ul>
-		'''.insert
+		'''.insert(inParagraph)
 	}
 	
-	def protected dispatch CharSequence toHtml(ImageRef it) {
+	def protected dispatch CharSequence toHtml(ImageRef it, boolean inParagraph) {
 		val dimension = it.dimension
 		val caption = it.caption?.trim
 		'''
 			<div class="thumbnail">
 				<img src="«path»" alt="«caption»" «IF dimension!=null»width="«dimension.width»" height="«dimension.height»"«ENDIF»>
 			</div>
-		'''
+		'''.insert(inParagraph)
 	}
 	
-	def protected dispatch CharSequence toHtml(Todo it) {
+	def protected dispatch CharSequence toHtml(Todo it, boolean inParagraph) {
 		println("TODO: " + text)
 		return ""
 	}
 	
-	def protected dispatch CharSequence toHtml(CodeRef it) {
+	def protected dispatch CharSequence toHtml(CodeRef it, boolean inParagraph) {
 		val sourceCodeURI = element?.sourceCodeURI
 		val javaDocURI = element?.javaDocURI
 		'''
@@ -162,7 +163,7 @@ class HtmlExtensions {
 			»<a href="«javaDocURI»">«
 		ENDIF»«
 		IF altText != null
-			»«altText.toHtml»«
+			»«altText.toHtml(inParagraph)»«
 		ELSE
 			»<abbr title="«element?.identifier»">«element?.simpleName?.trim»</abbr>«
 		ENDIF»«
@@ -174,40 +175,40 @@ class HtmlExtensions {
 		ENDIF»'''
 	}
 	
-	def protected dispatch CharSequence toHtml(Code it) {
+	def protected dispatch CharSequence toHtml(Code it, boolean inParagraph) {
 		contents.quote
 	}
 	
-	def protected dispatch CharSequence toHtml(CodeBlock it) {
-		val code = contents.toHtml.toString
+	def protected dispatch CharSequence toHtml(CodeBlock it, boolean inParagraph) {
+		val code = contents.toHtml(inParagraph).toString
 		if (code.contains('\n') && !code.contains('\r')) {
 			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
-			«code.trimCode»«markCodeEnd»</pre>'''.insert
+			«code.trimCode»«markCodeEnd»</pre>'''.insert(inParagraph)
 		} else {
 			'''<code class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'»">«code.trimCode»</code>'''
 		}
 	}
 	
-	def protected dispatch CharSequence toHtml(Link it) '''<a href="«url»">«text»</a>'''
+	def protected dispatch CharSequence toHtml(Link it, boolean inParagraph) '''<a href="«url»">«text»</a>'''
 
-	def protected dispatch CharSequence toHtml(Table it) { '''
+	def protected dispatch CharSequence toHtml(Table it, boolean inParagraph) { '''
 			<table class="table table-bordered table-condensed">
 			«FOR row:rows»
-				«row.toHtml»
+				«row.toHtml(inParagraph)»
 			«ENDFOR»
 			</table>
-		'''.insert
+		'''.insert(inParagraph)
 	}
 	
-	def protected dispatch CharSequence toHtml(TableRow it) '''
-		<tr>«data.toHtml»</tr>
+	def protected dispatch CharSequence toHtml(TableRow it, boolean inParagraph) '''
+		<tr>«data.toHtml(inParagraph)»</tr>
 	'''
 	
-	def protected dispatch CharSequence toHtml(TableData it) '''
-		<td>«contents.toHtml»</td>
+	def protected dispatch CharSequence toHtml(TableData it, boolean inParagraph) '''
+		<td>«contents.toHtml(inParagraph)»</td>
 	'''
 	
-	def protected dispatch CharSequence toHtml(EObject it) {
+	def protected dispatch CharSequence toHtml(EObject it, boolean inParagraph) {
 		println("Missing toHtml for " + eClass.name)
 		""
 	}
@@ -219,7 +220,7 @@ class HtmlExtensions {
 		'###xdoc code end###'
 	}	
 	
-	def protected insert(CharSequence content) {
+	def protected insert(CharSequence content, boolean inParagraph) {
 		if(inParagraph) '''
 			</p>
 			«content»
@@ -242,7 +243,8 @@ class HtmlExtensions {
 	}
 	
 	def protected quote(CharSequence it) {
-		toString.replace('<', '&lt;').replace('>', '&gt;')
+		toString.replace('&', '&amp;')
+			.replace('<', '&lt;').replace('>', '&gt;')
 			.replace('«', '&laquo;').replace('»', '&raquo;')
 			.replace('\\[', '[').replace('\\]',']')
 			.replace('´',"'").replace('`',"'")

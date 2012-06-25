@@ -61,8 +61,6 @@ public class HtmlExtensions {
   @Inject
   private ImageExtensions _imageExtensions;
   
-  private boolean inParagraph = false;
-  
   public String href(final Identifiable id) {
     String _xblockexpression = null;
     {
@@ -146,64 +144,60 @@ public class HtmlExtensions {
     return adapter.artificialHrefs;
   }
   
-  protected CharSequence _toHtml(final TextOrMarkup it) {
-    CharSequence _xifexpression = null;
-    boolean _not = (!this.inParagraph);
-    if (_not) {
-      CharSequence _xblockexpression = null;
-      {
-        this.inParagraph = true;
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("<p>");
-        _builder.newLine();
-        _builder.append("\t");
-        EList<EObject> _contents = it.getContents();
-        CharSequence _html = this.toHtml(_contents);
-        String _string = _html.toString();
-        String _trim = _string.trim();
-        _builder.append(_trim, "	");
-        _builder.newLineIfNotEmpty();
-        _builder.append("</p>");
-        _builder.newLine();
-        final CharSequence result = _builder;
-        this.inParagraph = false;
-        _xblockexpression = (result);
-      }
-      _xifexpression = _xblockexpression;
-    } else {
+  protected CharSequence _toHtml(final TextOrMarkup it, final boolean inParagraph) {
+    CharSequence _xblockexpression = null;
+    {
       EList<EObject> _contents = it.getContents();
-      CharSequence _html = this.toHtml(_contents);
+      CharSequence _html = this.toHtml(_contents, true);
       String _string = _html.toString();
-      String _trim = _string.trim();
-      _xifexpression = _trim;
+      final String contentsToHtml = _string.trim();
+      CharSequence _xifexpression = null;
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(contentsToHtml);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        CharSequence _xifexpression_1 = null;
+        boolean _not_1 = (!inParagraph);
+        if (_not_1) {
+          CharSequence _xblockexpression_1 = null;
+          {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("<p>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(contentsToHtml, "	");
+            _builder.newLineIfNotEmpty();
+            _builder.append("</p>");
+            _builder.newLine();
+            final CharSequence result = _builder;
+            _xblockexpression_1 = (result);
+          }
+          _xifexpression_1 = _xblockexpression_1;
+        } else {
+          _xifexpression_1 = contentsToHtml;
+        }
+        _xifexpression = _xifexpression_1;
+      } else {
+        _xifexpression = "";
+      }
+      _xblockexpression = (_xifexpression);
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   public CharSequence toHtmlText(final Object element) {
-    CharSequence _xblockexpression = null;
-    {
-      this.inParagraph = true;
-      CharSequence _html = this.toHtml(element);
-      _xblockexpression = (_html);
-    }
-    return _xblockexpression;
+    CharSequence _html = this.toHtml(element, true);
+    return _html;
   }
   
   public CharSequence toHtmlParagraph(final Object element) {
-    CharSequence _xblockexpression = null;
-    {
-      this.inParagraph = false;
-      CharSequence _html = this.toHtml(element);
-      _xblockexpression = (_html);
-    }
-    return _xblockexpression;
+    CharSequence _html = this.toHtml(element, false);
+    return _html;
   }
   
-  protected CharSequence _toHtml(final List<EObject> it) {
+  protected CharSequence _toHtml(final List<EObject> it, final boolean inParagraph) {
     final Function1<EObject,CharSequence> _function = new Function1<EObject,CharSequence>() {
         public CharSequence apply(final EObject it) {
-          CharSequence _html = HtmlExtensions.this.toHtml(it);
+          CharSequence _html = HtmlExtensions.this.toHtml(it, inParagraph);
           return _html;
         }
       };
@@ -212,7 +206,7 @@ public class HtmlExtensions {
     return _join;
   }
   
-  protected CharSequence _toHtml(final TextPart it) {
+  protected CharSequence _toHtml(final TextPart it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     String _text = it.getText();
     String _quote = this.quote(_text);
@@ -220,17 +214,17 @@ public class HtmlExtensions {
     return _builder;
   }
   
-  protected CharSequence _toHtml(final Emphasize it) {
+  protected CharSequence _toHtml(final Emphasize it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<strong>");
     EList<TextOrMarkup> _contents = it.getContents();
-    CharSequence _html = this.toHtml(_contents);
+    CharSequence _html = this.toHtml(_contents, inParagraph);
     _builder.append(_html, "");
     _builder.append("</strong>");
     return _builder;
   }
   
-  protected CharSequence _toHtml(final Anchor it) {
+  protected CharSequence _toHtml(final Anchor it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a name=\"");
     String _name = it.getName();
@@ -241,7 +235,7 @@ public class HtmlExtensions {
     return _builder;
   }
   
-  protected CharSequence _toHtml(final Ref it) {
+  protected CharSequence _toHtml(final Ref it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a href=\"#");
     Identifiable _ref = it.getRef();
@@ -249,13 +243,13 @@ public class HtmlExtensions {
     _builder.append(_href, "");
     _builder.append("\">");
     EList<TextOrMarkup> _contents = it.getContents();
-    CharSequence _html = this.toHtml(_contents);
+    CharSequence _html = this.toHtml(_contents, inParagraph);
     _builder.append(_html, "");
     _builder.append("</a>");
     return _builder;
   }
   
-  protected CharSequence _toHtml(final OrderedList it) {
+  protected CharSequence _toHtml(final OrderedList it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<ol>");
     _builder.newLine();
@@ -263,29 +257,29 @@ public class HtmlExtensions {
       EList<Item> _items = it.getItems();
       for(final Item item : _items) {
         _builder.append("\t");
-        CharSequence _html = this.toHtml(item);
+        CharSequence _html = this.toHtml(item, inParagraph);
         _builder.append(_html, "	");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("</ol>");
     _builder.newLine();
-    CharSequence _insert = this.insert(_builder);
+    CharSequence _insert = this.insert(_builder, inParagraph);
     return _insert;
   }
   
-  protected CharSequence _toHtml(final Item it) {
+  protected CharSequence _toHtml(final Item it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<li>");
     EList<TextOrMarkup> _contents = it.getContents();
-    CharSequence _html = this.toHtml(_contents);
+    CharSequence _html = this.toHtml(_contents, false);
     _builder.append(_html, "");
     _builder.append("</li>");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  protected CharSequence _toHtml(final UnorderedList it) {
+  protected CharSequence _toHtml(final UnorderedList it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<ul>");
     _builder.newLine();
@@ -293,18 +287,18 @@ public class HtmlExtensions {
       EList<Item> _items = it.getItems();
       for(final Item item : _items) {
         _builder.append("\t");
-        CharSequence _html = this.toHtml(item);
+        CharSequence _html = this.toHtml(item, inParagraph);
         _builder.append(_html, "	");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("</ul>");
     _builder.newLine();
-    CharSequence _insert = this.insert(_builder);
+    CharSequence _insert = this.insert(_builder, inParagraph);
     return _insert;
   }
   
-  protected CharSequence _toHtml(final ImageRef it) {
+  protected CharSequence _toHtml(final ImageRef it, final boolean inParagraph) {
     CharSequence _xblockexpression = null;
     {
       final ImageDimension dimension = this._imageExtensions.getDimension(it);
@@ -336,19 +330,20 @@ public class HtmlExtensions {
       _builder.newLineIfNotEmpty();
       _builder.append("</div>");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      CharSequence _insert = this.insert(_builder, inParagraph);
+      _xblockexpression = (_insert);
     }
     return _xblockexpression;
   }
   
-  protected CharSequence _toHtml(final Todo it) {
+  protected CharSequence _toHtml(final Todo it, final boolean inParagraph) {
     String _text = it.getText();
     String _plus = ("TODO: " + _text);
     InputOutput.<String>println(_plus);
     return "";
   }
   
-  protected CharSequence _toHtml(final CodeRef it) {
+  protected CharSequence _toHtml(final CodeRef it, final boolean inParagraph) {
     CharSequence _xblockexpression = null;
     {
       JvmDeclaredType _element = it.getElement();
@@ -369,7 +364,7 @@ public class HtmlExtensions {
         boolean _notEquals_1 = (!Objects.equal(_altText, null));
         if (_notEquals_1) {
           TextOrMarkup _altText_1 = it.getAltText();
-          CharSequence _html = this.toHtml(_altText_1);
+          CharSequence _html = this.toHtml(_altText_1, inParagraph);
           _builder.append(_html, "");
         } else {
           _builder.append("<abbr title=\"");
@@ -403,17 +398,17 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  protected CharSequence _toHtml(final Code it) {
+  protected CharSequence _toHtml(final Code it, final boolean inParagraph) {
     String _contents = it.getContents();
     String _quote = this.quote(_contents);
     return _quote;
   }
   
-  protected CharSequence _toHtml(final CodeBlock it) {
+  protected CharSequence _toHtml(final CodeBlock it, final boolean inParagraph) {
     CharSequence _xblockexpression = null;
     {
       EList<EObject> _contents = it.getContents();
-      CharSequence _html = this.toHtml(_contents);
+      CharSequence _html = this.toHtml(_contents, inParagraph);
       final String code = _html.toString();
       CharSequence _xifexpression = null;
       boolean _and = false;
@@ -443,7 +438,7 @@ public class HtmlExtensions {
         String _markCodeEnd = this.markCodeEnd();
         _builder.append(_markCodeEnd, "			");
         _builder.append("</pre>");
-        CharSequence _insert = this.insert(_builder);
+        CharSequence _insert = this.insert(_builder, inParagraph);
         _xifexpression = _insert;
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
@@ -464,7 +459,7 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  protected CharSequence _toHtml(final Link it) {
+  protected CharSequence _toHtml(final Link it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a href=\"");
     String _url = it.getUrl();
@@ -476,47 +471,47 @@ public class HtmlExtensions {
     return _builder;
   }
   
-  protected CharSequence _toHtml(final Table it) {
+  protected CharSequence _toHtml(final Table it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<table class=\"table table-bordered table-condensed\">");
     _builder.newLine();
     {
       EList<TableRow> _rows = it.getRows();
       for(final TableRow row : _rows) {
-        CharSequence _html = this.toHtml(row);
+        CharSequence _html = this.toHtml(row, inParagraph);
         _builder.append(_html, "");
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("</table>");
     _builder.newLine();
-    CharSequence _insert = this.insert(_builder);
+    CharSequence _insert = this.insert(_builder, inParagraph);
     return _insert;
   }
   
-  protected CharSequence _toHtml(final TableRow it) {
+  protected CharSequence _toHtml(final TableRow it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<tr>");
     EList<TableData> _data = it.getData();
-    CharSequence _html = this.toHtml(_data);
+    CharSequence _html = this.toHtml(_data, inParagraph);
     _builder.append(_html, "");
     _builder.append("</tr>");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  protected CharSequence _toHtml(final TableData it) {
+  protected CharSequence _toHtml(final TableData it, final boolean inParagraph) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<td>");
     EList<TextOrMarkup> _contents = it.getContents();
-    CharSequence _html = this.toHtml(_contents);
+    CharSequence _html = this.toHtml(_contents, inParagraph);
     _builder.append(_html, "");
     _builder.append("</td>");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  protected CharSequence _toHtml(final EObject it) {
+  protected CharSequence _toHtml(final EObject it, final boolean inParagraph) {
     String _xblockexpression = null;
     {
       EClass _eClass = it.eClass();
@@ -536,9 +531,9 @@ public class HtmlExtensions {
     return "###xdoc code end###";
   }
   
-  protected CharSequence insert(final CharSequence content) {
+  protected CharSequence insert(final CharSequence content, final boolean inParagraph) {
     CharSequence _xifexpression = null;
-    if (this.inParagraph) {
+    if (inParagraph) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("</p>");
       _builder.newLine();
@@ -651,59 +646,60 @@ public class HtmlExtensions {
   
   protected String quote(final CharSequence it) {
     String _string = it.toString();
-    String _replace = _string.replace("<", "&lt;");
-    String _replace_1 = _replace.replace(">", "&gt;");
-    String _replace_2 = _replace_1.replace("\u00AB", "&laquo;");
-    String _replace_3 = _replace_2.replace("\u00BB", "&raquo;");
-    String _replace_4 = _replace_3.replace("\\[", "[");
-    String _replace_5 = _replace_4.replace("\\]", "]");
-    String _replace_6 = _replace_5.replace("\u00B4", "\'");
-    String _replace_7 = _replace_6.replace("`", "\'");
-    return _replace_7;
+    String _replace = _string.replace("&", "&amp;");
+    String _replace_1 = _replace.replace("<", "&lt;");
+    String _replace_2 = _replace_1.replace(">", "&gt;");
+    String _replace_3 = _replace_2.replace("\u00AB", "&laquo;");
+    String _replace_4 = _replace_3.replace("\u00BB", "&raquo;");
+    String _replace_5 = _replace_4.replace("\\[", "[");
+    String _replace_6 = _replace_5.replace("\\]", "]");
+    String _replace_7 = _replace_6.replace("\u00B4", "\'");
+    String _replace_8 = _replace_7.replace("`", "\'");
+    return _replace_8;
   }
   
-  protected CharSequence toHtml(final Object it) {
+  protected CharSequence toHtml(final Object it, final boolean inParagraph) {
     if (it instanceof Anchor) {
-      return _toHtml((Anchor)it);
+      return _toHtml((Anchor)it, inParagraph);
     } else if (it instanceof CodeBlock) {
-      return _toHtml((CodeBlock)it);
+      return _toHtml((CodeBlock)it, inParagraph);
     } else if (it instanceof CodeRef) {
-      return _toHtml((CodeRef)it);
+      return _toHtml((CodeRef)it, inParagraph);
     } else if (it instanceof Emphasize) {
-      return _toHtml((Emphasize)it);
+      return _toHtml((Emphasize)it, inParagraph);
     } else if (it instanceof ImageRef) {
-      return _toHtml((ImageRef)it);
+      return _toHtml((ImageRef)it, inParagraph);
     } else if (it instanceof Link) {
-      return _toHtml((Link)it);
+      return _toHtml((Link)it, inParagraph);
     } else if (it instanceof OrderedList) {
-      return _toHtml((OrderedList)it);
+      return _toHtml((OrderedList)it, inParagraph);
     } else if (it instanceof Ref) {
-      return _toHtml((Ref)it);
+      return _toHtml((Ref)it, inParagraph);
     } else if (it instanceof Table) {
-      return _toHtml((Table)it);
+      return _toHtml((Table)it, inParagraph);
     } else if (it instanceof Todo) {
-      return _toHtml((Todo)it);
+      return _toHtml((Todo)it, inParagraph);
     } else if (it instanceof UnorderedList) {
-      return _toHtml((UnorderedList)it);
+      return _toHtml((UnorderedList)it, inParagraph);
     } else if (it instanceof List) {
-      return _toHtml((List<EObject>)it);
+      return _toHtml((List<EObject>)it, inParagraph);
     } else if (it instanceof Code) {
-      return _toHtml((Code)it);
+      return _toHtml((Code)it, inParagraph);
     } else if (it instanceof Item) {
-      return _toHtml((Item)it);
+      return _toHtml((Item)it, inParagraph);
     } else if (it instanceof TableData) {
-      return _toHtml((TableData)it);
+      return _toHtml((TableData)it, inParagraph);
     } else if (it instanceof TableRow) {
-      return _toHtml((TableRow)it);
+      return _toHtml((TableRow)it, inParagraph);
     } else if (it instanceof TextOrMarkup) {
-      return _toHtml((TextOrMarkup)it);
+      return _toHtml((TextOrMarkup)it, inParagraph);
     } else if (it instanceof TextPart) {
-      return _toHtml((TextPart)it);
+      return _toHtml((TextPart)it, inParagraph);
     } else if (it instanceof EObject) {
-      return _toHtml((EObject)it);
+      return _toHtml((EObject)it, inParagraph);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
+        Arrays.<Object>asList(it, inParagraph).toString());
     }
   }
 }
