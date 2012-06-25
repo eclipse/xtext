@@ -24,7 +24,7 @@ class Index  extends AbstractWebsite {
 			<div class="span6">
 				<div class="introduction">
 					<a href="#"><img src="images/slides/introduction.png"
-						alt="image" style="min-height: 452px; min-width: 570px;"/></a> 
+						alt="image" style="min-height: 460px; min-width: 580px;"/></a> 
 					<a href="http://vimeo.com/8260921"
 						data-rel="prettyPhoto" title="Introduction" class="zoom zoom_icon"></a>
 				</div>

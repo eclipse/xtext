@@ -236,12 +236,35 @@ img.screenshot {
 	background: url(../images/videoOverlayBig.png) 0 0 no-repeat transparent;
 	width: 140px;
 	height: 140px;
+	opacity: 0.4;
+	outline: none;
 	position: absolute;
 	left: 220px;
 	top: 140px;
-	opacity: 0.4;
-	outline: none;
 }
+
+@media (min-width: 1200px) {
+  .introduction .zoom {
+	position: absolute;
+	left: 220px;
+	top: 140px;
+  }
+}
+@media (max-width: 979px) {
+  .introduction .zoom {
+	position: absolute;
+	left: 140px;
+	top: 140px;
+  }
+}
+@media (max-width: 767px) {
+  .introduction .zoom {
+	position: absolute;
+	left: 220px;
+	top: 220px;
+  }
+}
+
 /* .thumb .zoom:hover { */
 /* 	background: url(../images/videoOverlay.png) 0 -80px no-repeat transparent; */
 /* } */

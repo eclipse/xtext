@@ -1408,7 +1408,7 @@ Import:
 								</p>
 								<pre class="prettyprint lang-xtext linenums">
 Route:
-	type=Type url=URL condition=Condition? (key=Key call=RouteFeatureCall | call=XFeatureCall);
+	requestType=RequestType url=URL condition=Condition? (key=Key call=RouteFeatureCall | call=XFeatureCall);
 	
 URL:
 	{URL} "/" (ID ("." ID)? | variables+=Variable) ("/" (ID ("." ID)? | variables+=Variable))*;
@@ -1454,8 +1454,9 @@ Key:
 								<pre class="prettyprint lang-java linenums">
 package org.xtext.httpRouting;
 ...
+@SuppressWarnings("serial")
 public class HttpMapperServlet extends HttpServlet {
-  private final static long serialVersionUID = 1L; ...</pre>
+ ...</pre>
 								<p></td>
 								</tr>
 								</table>
@@ -1472,16 +1473,9 @@ public class HttpMapperServlet extends HttpServlet {
 def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
 		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
 			.initializeLater([
-				superTypes+= model.newTypeRef("javax.servlet.http.HttpServlet")
-				//private static final long serialVersionUID = 1L;
-				members+= model.toField("serialVersionUID", model.newTypeRef("long"))[
-					setStatic(true)
-					final = true
-					setInitializer([
-						append('''1L''')
-					])
-				]
-... // calling various methods to create Java members with from the Routes
+				superTypes += model.newTypeRef("javax.servlet.http.HttpServlet")
+   				annotations += model.toAnnotation(typeof(SuppressWarnings), "serial")
+		... // calling various methods to create Java members with from the Routes
          ])
 }</pre>
 								<p>
@@ -1516,23 +1510,30 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
 			.initializeLater([
 			...
-		var i = 0
 		val routes = model.routes
-		for(route : routes){
-			if(route.url != null){
-				...
-				// Field for pattern
-				val patternField = route.url.toField("_pattern" + i , model.newTypeRef(typeof(Pattern)))[
-					setStatic(true)
-					setInitializer([append('''Pattern.compile("&laquo;getRegExPattern(NodeModelUtils::getNode(route.url).text.trim,route.url.variables)&raquo;")''')])
-				]
-				members+= patternField
-			}
-			i = i + 1;
-		}
+   				var routeCounter = 0
+   				for (route : routes) {
+   					if (route.url != null) {
+		   				addRoutePatternField(route, routeCounter)
+		   				...
+	   				}
+					routeCounter = routeCounter + 1
+   				}
 		... //
          ])
 }
+
+def protected addRoutePatternField(JvmDeclaredType servlet, Route route, int routeCounter) {
+		val patternField = route.url.toField("_pattern" + routeCounter , route.newTypeRef(typeof(Pattern))) [
+			setStatic(true)
+			setInitializer [
+				append('Pattern.compile("')
+				append(getRegExPattern(NodeModelUtils::getNode(route.url).text.trim, route.url.variables))
+				append('")')
+			]
+		]
+		servlet.members += patternField
+   	}
 ...
 def getRegExPattern(String originalPattern, List&lt;Variable&gt; variables) {
 	var pattern = originalPattern
@@ -1586,29 +1587,31 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
 			.initializeLater([
 			...
-		var i = 0
 		val routes = model.routes
-		for(route : routes){
-			if(route.url != null){
-				...
-				val name = route.nameOfRouteMethod(i)
-				...
-				// Method for condition
-				if(route.condition != null && route.condition.expression != null){
-					members+= route.toMethod(name + "Condition",model.newTypeRef(Boolean::TYPE))[
-						parameters += model.toParameter("request",model.newTypeRef(REQUEST))
-						for(variable : route.url.variables){
-							parameters += variable.toParameter(variable.name, model.newTypeRef(typeof(String)))
-						}
-						body = route.condition.expression
-					]
-				}
-				...
-			}
-			i = i + 1;
-		}
+   				var routeCounter = 0
+   				for (route : routes) {
+   					if (route.url != null) {
+   						...
+		   				addRouteConditionMethod(route, routeCounter)
+		   				...
+	   				}
+					routeCounter = routeCounter + 1
+   				}
 		... //
          ])
+}
+
+def protected addRouteConditionMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
+	if (route.condition != null && route.condition.expression != null) {
+	   	val name = route.nameOfRouteMethod(routeCounter)
+		servlet.members += route.toMethod(name + "Condition", route.newTypeRef(Boolean::TYPE)) [
+			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
+			for (variable : route.url.variables){
+				parameters += variable.toParameter(variable.name, route.newTypeRef(typeof(String)))
+			}
+			body = route.condition.expression
+		]
+	}
 }
 
 def nameOfRouteMethod(Route route, int i) {
@@ -1659,37 +1662,31 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
 			.initializeLater([
 			...
-		var i = 0
-		val routes = model.routes
-		for(route : routes){
-			if(route.url != null){
-				...
-				// Field for guice-key
-				if(route.hasValidKey){
-					val keyField = route.key.toField("_key" + i, route.key.type)
-					keyField.addInjectAnnotation(model)
-					route.key.annotations.translateAnnotationsTo(keyField)
-					members+= keyField
-				}
-				...
+			val routes = model.routes
+			var routeCounter = 0
+			for (route : routes) {
+				if (route.url != null) {
+	   				...
+   					addRouteKeyField(route, routeCounter)
+	   				...
+   				}
+				routeCounter = routeCounter + 1
 			}
-			i = i + 1;
-		}
 		...
          ])
 }
 ...
+def protected addRouteKeyField(JvmDeclaredType servlet, Route route, int routeCounter) {
+		if (route.hasValidKey){
+			servlet.members += route.key.toField("_key" + routeCounter, route.key.type) =&gt; [
+				annotations += route.toAnnotation(typeof(Inject))
+				route.key.annotations.translateAnnotationsTo(it)
+			]
+		}
+   	}
+...
 def hasValidKey(Route route){
 	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
-}
-
-def addInjectAnnotation(JvmAnnotationTarget target, EObject context){
-	val injectAnnotation = context.newTypeRef(typeof(Inject))
-	if(injectAnnotation != null && !(injectAnnotation.type instanceof JvmVoid)){
-		val inject = typesFactory.createJvmAnnotationReference();
-		inject.setAnnotation(injectAnnotation.type as JvmAnnotationType)
-		target.annotations += inject
-	}
 }</pre>
 								<p>
 							</p>
@@ -1733,29 +1730,32 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
 			.initializeLater([
 			...
-		var i = 0
 		val routes = model.routes
-		for(route : routes){
-			if(route.url != null){
-				// Method for action call
-				val name = route.nameOfRouteMethod(i)
-				members += route.toMethod(name, model.newTypeRef(Void::TYPE))[
-				documentation = route.documentation
-					if(route.hasValidKey)
-						parameters+=route.key.toParameter("it", route.key.type)
-					parameters += model.toParameter("request",model.newTypeRef(REQUEST))
-					for(variable : route.url.variables){
-							parameters += variable.toParameter(variable.name, model.newTypeRef(typeof(String)))
-					}
-					body = route.call
-				]
-				...
+		var routeCounter = 0
+		for (route : routes) {
+			if (route.url != null) {
+   				...
+   				addRouteMethod(route, routeCounter)
 			}
-			i = i + 1;
-		}
+			routeCounter = routeCounter + 1
+   		}
 		... //
          ])
-  }
+}
+...
+def protected addRouteMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
+   		val name = route.nameOfRouteMethod(routeCounter)
+		servlet.members += route.toMethod(name, route.newTypeRef(Void::TYPE)) [
+			documentation = route.documentation
+			if (route.hasValidKey)
+				parameters += route.key.toParameter("it", route.key.type)
+			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
+			for (variable : route.url.variables) {
+				parameters += variable.toParameter(variable.name, route.newTypeRef(typeof(String)))
+			}
+			body = route.call
+		]
+   	}
 ...
 def hasValidKey(Route route){
 	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
@@ -1811,56 +1811,56 @@ private static String REQUEST = "javax.servlet.http.HttpServletRequest"
 def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
 		acceptor.accept(model.toClass("org.xtext.httpRouting.HttpMapperServlet"))
 			.initializeLater([
-			...
-				members+= createMethod("doGet", model, routes,Type::GET)
-				members+= createMethod("doPost", model, routes,Type::POST)
-				members+= createMethod("doPut", model, routes,Type::PUT)
-				members+= createMethod("doDelete", model, routes,Type::DELETE)
-				members+= createMethod("doHead", model, routes,Type::HEAD)
+			...	
+			addMethod("doGet", model, routes,RequestType::GET)
+			addMethod("doPost", model, routes,RequestType::POST)
+			addMethod("doPut", model, routes,RequestType::PUT)
+			addMethod("doDelete", model, routes,RequestType::DELETE)
+			addMethod("doHead", model, routes,RequestType::HEAD)
 			])
 }
-	def createMethod(String name, EObject element, Iterable&lt;Route&gt; routes, Type filterType){
-		element.toMethod(name,element.newTypeRef(Void::TYPE))[
-			parameters += element.toParameter("request",element.newTypeRef(REQUEST))
-			parameters += element.toParameter("response",element.newTypeRef("javax.servlet.http.HttpServletResponse"))
+def protected addMethod(JvmDeclaredType servlet, String name, EObject element, Iterable&lt;Route&gt; routes, RequestType filterType) {
+   		servlet.members += element.toMethod(name,element.newTypeRef(Void::TYPE)) [
+			parameters += element.toParameter("request", element.newTypeRef(HTTP_REQUEST))
+			parameters += element.toParameter("response", element.newTypeRef("javax.servlet.http.HttpServletResponse"))
 			body = [
 				var x = 0
-				if(routes.exists(e | e.type== filterType))
-					append('''String url =  request.getRequestURI();
-					''')
-				for(route : routes){
-					if(route.type == filterType)
-						if(route.url != null){
-							append(element.newTypeRef(typeof(Matcher)).type).append(''' _matcher&laquo;x&raquo; = _pattern&laquo;x&raquo;.matcher(url);
-							''')
+				if (routes.exists[e | e.requestType == filterType])
+					append('String url =  request.getRequestURL().toString();').newLine
+				for (route : routes) {
+					if (route.requestType == filterType) {
+						if (route.url != null) {
+							append(element.newTypeRef(typeof(Matcher)).type)
+							append(''' _matcher&laquo;x&raquo; = _pattern&laquo;x&raquo;.matcher(url);''')
+							newLine
 							val variables = route.url.variables
-							    append('''if(_matcher&laquo;x&raquo;.find()){
-								''')
-							for( variable : variables){
-									append('''		String &laquo;variable.name&raquo; = _matcher&laquo;x&raquo;.group(&laquo;variables.indexOf(variable) + 1&raquo;);
-									''')
-								}
-								if(route.condition != null){
-									append('''		if(&laquo;route.nameOfRouteMethod(x)&raquo;Condition(request''')
-									append('''&laquo;FOR v : route.url.variables BEFORE ", " SEPARATOR ", "&raquo;&laquo;v.name&raquo;&laquo;ENDFOR &raquo;''')
-									append('''))
-									''');
-								}
-								append('''			&laquo;route.nameOfRouteMethod(x)&raquo;(''')
-								if(route.hasValidKey)
-									append('''_key&laquo;x&raquo;,''')
-								append('''request''')
-								append('''&laquo;FOR v : route.url.variables BEFORE ", " SEPARATOR ", " &raquo;&laquo;v.name&raquo;&laquo;ENDFOR&raquo;''')
-								append(''');
-								''')
-								append('''}''');
+						    append('''if (_matcher&laquo;x&raquo;.find()) {''').newLine
+					    	for (variable : variables) {
+								append('''		String &laquo;variable.name&raquo; = _matcher&laquo;x&raquo;.group(&laquo;variables.indexOf(variable) + 1&raquo;);''')
+								newLine
+							}
+							if (route.condition != null) {
+								append('''		if (&laquo;route.nameOfRouteMethod(x)&raquo;Condition(request''')
+				   				append('''&laquo;FOR v : route.url.variables BEFORE ", " SEPARATOR ", "&raquo;&laquo;v.name&raquo;&laquo;ENDFOR&raquo;''')
+				   				append('''))''')
+				   				newLine
+				   			}
+							append('''			&laquo;route.nameOfRouteMethod(x)&raquo;(''')
+							if(route.hasValidKey)
+								append('''_key&laquo;x&raquo;,''')
+							append('''request''')
+			   				append('''&laquo;FOR v : route.url.variables BEFORE ", " SEPARATOR ", " &raquo;&laquo;v.name&raquo;&laquo;ENDFOR&raquo;''')
+			   				append(''');''')
+			   				newLine
+							append('''}''')
+							newLine
 						}
-						x = x + 1
+					}
+					x = x + 1
 				}
-
 			]
 		]
-	}</pre>
+   	}</pre>
 								<p>
 							</p>
 							</section>
@@ -2374,8 +2374,8 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
 								The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
 								<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a>) and inferred ones. While the former are evaluated
 								via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-								<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a> to this and intercept calls to the inferred methods to 
-								execute them directly. This is accomplished by overriding the method
+								<abbr title="org.xtext.tortoiseshell.runtime.Tortoise">Tortoise</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/tortoiseshell/org.xtext.tortoiseshell.runtime/src/org/xtext/tortoiseshell/runtime/Tortoise.java">(src)</a> to <code class="prettyprint lang-xtend">this</code> and intercept calls to the inferred 
+								methods to execute them directly. This is accomplished by overriding the method
 							</p>
 							<p>
 								<code class="prettyprint lang-xtend">invokeOperation</code>:
@@ -2412,7 +2412,7 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 								execute the method's body using the interpreter.
 							</p>
 							<p>
-								To start the interpretation we need to do almost the same: Setup the execution context and then evaluate
+								To start the interpretation we have to do almost the same: Setup the execution context and then evaluate
 								the <strong>Program's</strong> body. The respective code is
 							</p>
 							<p>
@@ -2466,7 +2466,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							<section id="tortoise_beyond" style="margin-top: 20px; padding-top: 0;">
 							<h2 style="font-weight: normal;">Beyond This Example</h2>
 							<p>
-								You could at a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
+								You could add a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
 								etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 
 								<a href="http://en.wikipedia.org/wiki/Tron_%28video_game%29">Tron</a>. Of course, there could also be more UI, 
 								like for exporting figures. The lesson to learn is that even a language with just a few concepts can become
