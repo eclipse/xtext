@@ -119,4 +119,20 @@ public class CompoundTypeReference extends LightweightTypeReference {
 		else
 			return visitor.doVisitMultiTypeReference(this, param);
 	}
+	
+	@Override
+	public CompoundTypeReference toMultiType(LightweightTypeReference reference) {
+		if (!isSynonym()) {
+			if (reference == null) {
+				throw new NullPointerException("reference may not be null");
+			}
+			CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
+			for(LightweightTypeReference component: getComponents()) {
+				result.addComponent(component);
+			}
+			result.addComponent(reference);
+			return result;
+		}
+		return super.toMultiType(reference);
+	}
 }

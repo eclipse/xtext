@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -28,23 +29,22 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+import org.eclipse.xtext.xbase.typesystem.references.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationResult;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeParameterAwareTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterAwareTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.Lists;
 
@@ -204,7 +204,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 
 	@Nullable
 	public LightweightTypeReference internalGetType(JvmIdentifiableElement element) {
-		return resolvedTypes.getActualType(element);
+		return resolvedTypes.internalGetActualType(element);
 	}
 
 	public void reassignType(XExpression object, LightweightTypeReference type) {
@@ -217,7 +217,7 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 	public void discardReassignedTypes(XExpression object) {
 		JvmIdentifiableElement refinable = getTypeComputer().getRefinableCandidate(object, this);
 		if (refinable != null) {
-			resolvedTypes.reassignType(refinable, null);
+			resolvedTypes.reassignType(refinable, (LightweightTypeReference) null);
 		}
 	}
 
@@ -298,44 +298,44 @@ public abstract class AbstractTypeComputationState extends BaseTypeComputationSt
 		return new ConstructorLinkingCandidate(constructorCall, description, state);
 	}
 
-	public UnboundTypeParameter createUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter) {
-		return resolvedTypes.createUnboundTypeParameter(expression, typeParameter);
+	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
+		return resolvedTypes.createUnboundTypeReference(expression, typeParameter);
 	}
 	
 	public ActualTypeArgumentCollector createTypeArgumentCollector(List<JvmTypeParameter> typeParameters, BoundTypeArgumentSource source) {
-		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, source, getServices()) {
+		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(typeParameters, source, getReferenceOwner()) {
 			@Override
-			protected TypeParameterSubstitutor createTypeParameterSubstitutor(
-					@Nullable Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+			protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+					@Nullable Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
 				return createSubstitutor(mapping);
 			}
-			@Override
-			@Nullable
-			public Void doVisitComputedTypeReference(@Nullable XComputedTypeReference reference, @Nullable LightweightTypeReference param) {
-				if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
-					UnboundTypeParameter typeParameter = (UnboundTypeParameter) reference.getTypeProvider();
-					if (UnboundTypeParameters.isUnboundAndEqual(typeParameter, param)) {
-						return null;
-					}
-					BaseUnboundTypeParameter stacked = getResolvedTypes().getUnboundTypeParameter(typeParameter.getHandle());
-					if (!stacked.isComputed()) {
-						LightweightTypeReference potentiallyWrapped = UnboundTypeParameters.asWrapperType(param, getServices().getPrimitives());
-						acceptHint(stacked, potentiallyWrapped);
-						return null;
-					}
-				}
-				return super.doVisitComputedTypeReference(reference, param);
-			}
+//			@Override
+//			public void doVisitUnboundTypeReference(UnboundTypeReference reference, LightweightTypeReference param) {
+//				BaseUnboundTypeParameter stacked = getResolvedTypes().getUnboundTypeReference(reference.getHandle());
+//				if (!stacked.isComputed()) {
+//					LightweightTypeReference potentiallyWrapped = UnboundTypeParameters.asWrapperType(param, getServices().getPrimitives());
+//					acceptHint(stacked, potentiallyWrapped);
+//					return null;
+//				}
+//			}
 		};
 		return typeArgumentCollector;
 	}
 	
-	public UnboundTypeParameterPreservingSubstitutor createSubstitutor(@Nullable Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping) {
+	public UnboundTypeParameterPreservingSubstitutor createSubstitutor(@Nullable Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
 		return getResolvedTypes().createSubstitutor(typeParameterMapping);
 	}
 	
 	@Override
 	public String toString() {
 		return String.format("%s: %s", getClass().getSimpleName(), resolvedTypes);
+	}
+
+	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
+		return new OwnedConverter(getReferenceOwner()).toLightweightReference(reference);
+	}
+
+	public TypeReferenceOwner getReferenceOwner() {
+		return getResolvedTypes();
 	}
 }

@@ -5,38 +5,34 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typesystem.util;
+package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
+@NonNullByDefault
 public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor<Object> {
 	
-	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping,
-			CommonTypeComputationServices services) {
-		super(typeParameterMapping, services);
+	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			TypeReferenceOwner owner) {
+		super(typeParameterMapping, owner);
 	}
 
 	@Override
-	public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
+	public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
 			Object param) {
-		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
-			XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-			result.setTypeProvider(reference.getTypeProvider());
-			return result;
-		}
-		return super.doVisitComputedTypeReference(reference, param);
+		return reference.copyInto(getOwner());
 	}
 
 	@Override
 	protected Object createVisiting() {
 		return new Object();
 	}
+	
 }

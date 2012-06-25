@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmLowerBound;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -31,7 +30,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	private LightweightTypeReference lowerBound;
 	private boolean resolved;
 	
-	protected WildcardTypeReference(TypeReferenceOwner owner) {
+	public WildcardTypeReference(TypeReferenceOwner owner) {
 		super(owner);
 		resolved = true;
 	}
@@ -83,7 +82,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		return result;
 	}
 	
-	protected void addUpperBound(LightweightTypeReference upperBound) {
+	public void addUpperBound(LightweightTypeReference upperBound) {
 		if (upperBound == null) {
 			throw new NullPointerException("upperBound may not be null");
 		}
@@ -96,7 +95,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		resolved &= upperBound.isResolved();
 	}
 	
-	protected void setLowerBound(LightweightTypeReference lowerBound) {
+	public void setLowerBound(LightweightTypeReference lowerBound) {
 		if (lowerBound == null) {
 			throw new NullPointerException("lowerBound may not be null");
 		}

@@ -8,56 +8,16 @@
 package org.eclipse.xtext.xbase.typesystem.util
 
 import com.google.inject.Inject
-import java.util.Map
 import java.util.Set
-import org.eclipse.xtend.lib.Data
 import org.eclipse.xtend.lib.Property
-import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
-import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.Primitives
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger
 import org.eclipse.xtext.xtype.XtypeFactory
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
- */
-@Data
-class TraversalData {
-	Set<JvmType> visited = newHashSet
-	Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping = newLinkedHashMap
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
- */
-@Data
-class BoundTypeArgument {
-	JvmTypeReference typeReference
-	BoundTypeArgumentSource source
-	Object origin
-	VarianceInfo declaredVariance
-	VarianceInfo actualVariance
-	
-	def isValidVariancePair() {
-		declaredVariance.mergeDeclaredWithActual(actualVariance) != null
-	}
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
- */
-@Data
-class MergedBoundTypeArgument {
-	JvmTypeReference typeReference
-	VarianceInfo variance
-}
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

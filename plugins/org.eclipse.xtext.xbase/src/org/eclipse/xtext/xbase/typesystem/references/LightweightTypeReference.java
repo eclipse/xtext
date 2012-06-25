@@ -72,6 +72,10 @@ public abstract class LightweightTypeReference {
 		return null;
 	}
 	
+	public LightweightTypeReference getWrapperTypeIfPrimitive() {
+		return this;
+	}
+	
 	/*
 	 * Does pretty much the same as the RawTypeHelper
 	 * TODO implement me
@@ -97,7 +101,7 @@ public abstract class LightweightTypeReference {
 		throw new UnsupportedOperationException();
 	}
 	
-	protected LightweightTypeReference copyInto(TypeReferenceOwner owner) {
+	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
 		if (isResolved()) {
 			return this;
 		}
@@ -148,4 +152,19 @@ public abstract class LightweightTypeReference {
 			throw new IllegalStateException("result may not be null");
 		return result;
 	}
+
+	public CompoundTypeReference toMultiType(LightweightTypeReference reference) {
+		if (reference == null) {
+			throw new NullPointerException("reference may not be null");
+		}
+		CompoundTypeReference result = new CompoundTypeReference(getOwner(), false);
+		result.addComponent(this);
+		result.addComponent(reference);
+		return result;
+	}
+
+	public boolean isPrimitive() {
+		return false;
+	}
+	
 }

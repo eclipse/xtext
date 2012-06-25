@@ -10,13 +10,13 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,9 +25,9 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 
 	private final OperatorMapping operatorMapping;
 	private final XExpression receiver;
-	private final JvmTypeReference receiverType;
+	private final LightweightTypeReference receiverType;
 
-	public StaticExtensionImportsScope(IScope parent, IFeatureScopeSession session, XExpression receiver, JvmTypeReference receiverType, XAbstractFeatureCall context, OperatorMapping operatorMapping) {
+	public StaticExtensionImportsScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, XAbstractFeatureCall context, OperatorMapping operatorMapping) {
 		super(parent, session, context);
 		this.receiver = receiver;
 		this.receiverType = receiverType;

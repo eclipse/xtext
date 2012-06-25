@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -22,10 +23,10 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.references.TypeParameterSubstitutor;
 
 import com.google.common.collect.Lists;
 
@@ -43,7 +44,7 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	protected LightweightTypeReference getReceiverType() {
 		LightweightTypeReference receiverType = null;
 		if (getDescription() instanceof BucketedEObjectDescription) {
-			receiverType = getState().getResolvedTypes().getConverter().toLightweightReference(((BucketedEObjectDescription) getDescription()).getReceiverType());
+			receiverType = ((BucketedEObjectDescription) getDescription()).getReceiverType();
 		}
 		return receiverType;
 	}
@@ -103,10 +104,11 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		super.resolveAgainstActualType(declaredType, actualType, state);
 		if (!isStatic() && !isExtension()) {
-			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getServices()) {
+			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getState().getReferenceOwner()) {
 				@Override
-				protected TypeParameterSubstitutor createTypeParameterSubstitutor(
-						Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+				@NonNull
+				protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(
+						@NonNull Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
 					return state.createSubstitutor(mapping);
 				}
 			};
@@ -150,9 +152,9 @@ public class FeatureLinkingCandidate extends AbstractLinkingCandidate<IFeatureLi
 	}
 	
 	@Override
-	protected Map<JvmTypeParameter, MergedBoundTypeArgument> getDeclaratorParameterMapping() {
+	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
 		if (getDescription() instanceof BucketedEObjectDescription) {
-			Map<JvmTypeParameter, MergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result = ((BucketedEObjectDescription) getDescription()).getReceiverTypeParameterMapping();
 			if (result != null)
 				return result;
 		}

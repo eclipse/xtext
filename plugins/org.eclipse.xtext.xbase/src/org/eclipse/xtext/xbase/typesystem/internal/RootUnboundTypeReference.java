@@ -7,40 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
-public class RootUnboundTypeParameter extends BaseUnboundTypeParameter {
+@NonNullByDefault
+public class RootUnboundTypeReference extends UnboundTypeReference {
 
-	private final XExpression expression;
-	private final JvmTypeParameter typeParameter;
-	private final Object handle;
-	
-	protected RootUnboundTypeParameter(XExpression expression, JvmTypeParameter typeParameter, 
-			ResolvedTypes resolvedTypes) {
-		super(resolvedTypes);
+	private XExpression expression;
+
+	protected RootUnboundTypeReference(TypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
+		super(owner, typeParameter, new Object());
 		this.expression = expression;
-		this.typeParameter = typeParameter;
-		this.handle = new Object();
 	}
-
-	@Override
+	
 	public XExpression getExpression() {
 		return expression;
 	}
 	
 	@Override
-	public JvmTypeParameter getTypeParameter() {
-		return typeParameter;
-	}
-
-	@Override
 	public Object getHandle() {
-		return handle;
+		return super.getHandle();
 	}
-
+	
 }

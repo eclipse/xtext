@@ -18,15 +18,15 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -39,10 +39,10 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 
 	private final TypeBucket bucket;
 	private final OperatorMapping operatorMapping;
-	private final JvmTypeReference receiverType;
+	private final LightweightTypeReference receiverType;
 	private final XExpression receiver;
 
-	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, JvmTypeReference receiverType, XAbstractFeatureCall featureCall, TypeBucket bucket, OperatorMapping operatorMapping) {
+	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, XAbstractFeatureCall featureCall, TypeBucket bucket, OperatorMapping operatorMapping) {
 		super(parent, session, featureCall);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
@@ -63,7 +63,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
-		Map<JvmTypeParameter, MergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
 		for(JvmIdentifiableElement feature: allFeatures) {
 			allDescriptions.add(new BucketedEObjectDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));
 		}
@@ -89,7 +89,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
-		Map<JvmTypeParameter, MergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiverType);
 		for(JvmIdentifiableElement feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
 			allDescriptions.add(new BucketedEObjectDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket.getId()));

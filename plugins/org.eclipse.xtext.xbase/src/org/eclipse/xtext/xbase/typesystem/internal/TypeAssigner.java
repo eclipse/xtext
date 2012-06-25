@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -49,5 +50,9 @@ public class TypeAssigner extends BaseTypeAssigner {
 	@Override
 	protected OwnedConverter getConverter() {
 		return state.getResolvedTypes().getConverter();
+	}
+
+	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
+		return getConverter().toLightweightReference(reference);
 	}
 }

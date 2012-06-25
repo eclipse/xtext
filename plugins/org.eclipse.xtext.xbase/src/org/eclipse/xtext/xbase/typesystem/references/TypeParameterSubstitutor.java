@@ -36,7 +36,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		return typeParameterMapping;
 	}
 	
-	protected void enhanceMapping(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
+	public void enhanceMapping(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping) {
 		this.typeParameterMapping.putAll(typeParameterMapping);
 	}
 	
@@ -135,4 +135,8 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	}
 	
 	protected abstract Visiting createVisiting();
+	
+	protected LightweightTypeReference copy(LightweightTypeReference reference) {
+		return reference.copyInto(getOwner());
+	}
 }

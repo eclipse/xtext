@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.xbase.typesystem.references.BaseTypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,6 +19,7 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 	private final AbstractTypeComputationState state;
 
 	protected AbstractTypeExpectation(AbstractTypeComputationState state) {
+		super(state.getReferenceOwner());
 		this.state = state;
 	}
 	
@@ -30,11 +30,6 @@ public abstract class AbstractTypeExpectation extends BaseTypeExpectation {
 			return true;
 		}
 		return false;
-	}
-	
-	@Override
-	protected OwnedConverter getConverter() {
-		return state.getResolvedTypes().getConverter();
 	}
 	
 	protected AbstractTypeComputationState getState() {

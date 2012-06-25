@@ -79,6 +79,8 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	
 	LightweightTypeAssigner assignTypes();
 	
+	LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference);
+	
 	void addLocalToCurrentScope(JvmIdentifiableElement element);
 	
 	/**
@@ -110,5 +112,7 @@ public interface LightweightTypeComputationState extends ITypeComputationState {
 	void reassignType(XExpression object, LightweightTypeReference type);
 	
 	void discardReassignedTypes(XExpression object);
+
+	TypeReferenceOwner getReferenceOwner();
 	
 }

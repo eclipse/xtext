@@ -21,7 +21,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 
 import com.google.inject.ImplementedBy;
 
@@ -70,7 +70,7 @@ public interface IFeatureScopeSession {
 	
 	IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements);
 	
-	IScope createFeatureCallScope(EObject context, EReference reference, IResolvedTypes resolvedTypes);
+	IScope createFeatureCallScope(EObject context, EReference reference, LightweightResolvedTypes resolvedTypes);
 	
 	@Nullable IEObjectDescription getLocalElement(QualifiedName name);
 	Collection<IEObjectDescription> getLocalElements();
@@ -80,6 +80,6 @@ public interface IFeatureScopeSession {
 
 	IFeatureScopeSession recursiveInitialize(EObject context);
 
-	IScope getScope(XExpression expression, EReference reference, IResolvedTypes types);
+	IScope getScope(XExpression expression, EReference reference, LightweightResolvedTypes types);
 
 }

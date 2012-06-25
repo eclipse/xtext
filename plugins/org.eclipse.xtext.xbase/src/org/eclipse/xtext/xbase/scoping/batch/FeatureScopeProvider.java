@@ -16,9 +16,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.IRawTypeHelper;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -39,7 +36,8 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeature
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -65,12 +63,6 @@ public class FeatureScopeProvider implements FeatureNames {
 	private Provider<XAssignmentSugarDescriptionProvider> assignmentSugarFeatureDescProvider;
 
 	@Inject
-	private TypeReferences typeReferences;
-	
-	@Inject
-	private IRawTypeHelper rawTypeHelper;
-	
-	@Inject
 	private OperatorMapping operatorMapping;
 	
 	protected static final int DEFAULT_MEMBER_CALL_PRIORITY = 0;
@@ -86,7 +78,7 @@ public class FeatureScopeProvider implements FeatureNames {
 	 * call without receiver (XFeatureCall).
 	 * @param session the currently available session data
 	 */
-	public IScope createFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+	public IScope createFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
 		if (!(context instanceof XAbstractFeatureCall)) {
 			return IScope.NULLSCOPE;
 		}
@@ -109,7 +101,7 @@ public class FeatureScopeProvider implements FeatureNames {
 	 * @param context the context e.g. a for loop expression, a block or a catch clause
 	 * @param reference the reference who's value shall be scoped. Not necessarily a feature of the context.
 	 */
-	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			if (featureCall.getDeclaringType() != null) {
@@ -164,12 +156,12 @@ public class FeatureScopeProvider implements FeatureNames {
 	
 	protected IScope createFeatureScopeForTypeRef(
 			XExpression receiver,
-			JvmTypeReference featureDeclarator, 
+			LightweightTypeReference featureDeclarator, 
 			EObject featureCall,
 			IFeatureScopeSession session,
 			IScope parent) {
 		// TODO ReceiverFeatureScopes for synonyms
-		List<JvmType> rawTypes = rawTypeHelper.getAllRawTypes(featureDeclarator, featureCall.eResource());
+		List<JvmType> rawTypes = featureDeclarator.getRawTypes();
 		TypeBucket typeBucket = new TypeBucket(-1, rawTypes);
 		IScope result = new ReceiverFeatureScope(parent, session, receiver, featureDeclarator, asAbstractFeatureCall(featureCall), typeBucket, operatorMapping);
 		return result;
@@ -188,12 +180,12 @@ public class FeatureScopeProvider implements FeatureNames {
 	 * @param resolvedTypes TODO
 	 * @param session TODO
 	 */
-	public IScope createFeatureCallScopeForReceiver(final XExpression featureCall, final XExpression receiver, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+	public IScope createFeatureCallScopeForReceiver(final XExpression featureCall, final XExpression receiver, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
 		if (!isFeatureCallScope(reference))
 			return IScope.NULLSCOPE;
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
-		JvmTypeReference receiverType = resolvedTypes.getActualType(receiver);
+		LightweightTypeReference receiverType = resolvedTypes.internalGetActualType(receiver);
 		if (receiverType != null) {
 			IScope result = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session);
 			return createFeatureScopeForTypeRef(receiver, receiverType, featureCall, session, result);
@@ -202,7 +194,7 @@ public class FeatureScopeProvider implements FeatureNames {
 		}
 	}
 
-	protected StaticExtensionImportsScope createStaticExtensionsScope(XExpression receiver, JvmTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session) {
+	protected StaticExtensionImportsScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session) {
 		return new StaticExtensionImportsScope(parent, session, receiver, receiverType, asAbstractFeatureCall(featureCall), operatorMapping);
 	}
 
@@ -226,7 +218,7 @@ public class FeatureScopeProvider implements FeatureNames {
 		return new StaticImportsScope(parent, session, asAbstractFeatureCall(featureCall));
 	}
 	
-	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes) {
 		IScope result = parent;
 		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result);
 		result = createImplicitFeatureCallScope(IT, featureCall, session, resolvedTypes, result);
@@ -234,11 +226,11 @@ public class FeatureScopeProvider implements FeatureNames {
 	}
 
 	protected IScope createImplicitFeatureCallScope(QualifiedName implicitName, EObject featureCall,
-			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
+			IFeatureScopeSession session, LightweightResolvedTypes resolvedTypes, IScope parent) {
 		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
-			JvmTypeReference type = resolvedTypes.getActualType(thisElement);
+			LightweightTypeReference type = resolvedTypes.internalGetActualType(thisElement);
 			// TODO create feature call to this and add it as receiver
 			return createFeatureScopeForTypeRef(null, type, featureCall, session, parent);
 		}

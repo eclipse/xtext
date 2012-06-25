@@ -17,7 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 @NonNullByDefault
 public class AnyTypeReference extends LightweightTypeReference {
 
-	protected AnyTypeReference(TypeReferenceOwner owner) {
+	public AnyTypeReference(TypeReferenceOwner owner) {
 		super(owner);
 	}
 

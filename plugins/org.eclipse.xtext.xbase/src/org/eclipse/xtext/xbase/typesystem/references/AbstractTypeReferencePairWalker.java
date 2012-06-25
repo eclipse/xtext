@@ -34,14 +34,8 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		}
 	}
 
-	protected static class WildcardTypeReferenceTraverser extends
+	protected class WildcardTypeReferenceTraverser extends
 			TypeReferenceVisitorWithParameter<WildcardTypeReference> {
-		
-		private AbstractTypeReferencePairWalker delegate;
-
-		protected WildcardTypeReferenceTraverser(AbstractTypeReferencePairWalker delegate) {
-			this.delegate = delegate;
-		}
 		
 		@Override
 		protected void doVisitWildcardTypeReference(WildcardTypeReference reference, WildcardTypeReference declaration) {
@@ -49,20 +43,20 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 			if (declaredLowerBound != null) {
 				LightweightTypeReference actualLowerBound = reference.getLowerBound();
 				if (actualLowerBound != null) {
-					delegate.outerVisit(declaredLowerBound, actualLowerBound, declaration, VarianceInfo.IN, VarianceInfo.IN);
+					outerVisit(declaredLowerBound, actualLowerBound, declaration, VarianceInfo.IN, VarianceInfo.IN);
 				} else {
 					for (LightweightTypeReference actualUpperBound : reference.getUpperBounds()) {
-						delegate.outerVisit(declaredLowerBound, actualUpperBound, declaration, VarianceInfo.IN, VarianceInfo.OUT);
+						outerVisit(declaredLowerBound, actualUpperBound, declaration, VarianceInfo.IN, VarianceInfo.OUT);
 					}
 				}
 			} else {
 				LightweightTypeReference actualLowerBound = reference.getLowerBound();
 				for (LightweightTypeReference declaredUpperBound : declaration.getUpperBounds()) {
 					for (LightweightTypeReference actualUpperBound : reference.getUpperBounds()) {
-						delegate.outerVisit(declaredUpperBound, actualUpperBound, declaration, VarianceInfo.OUT, VarianceInfo.OUT);
+						outerVisit(declaredUpperBound, actualUpperBound, declaration, VarianceInfo.OUT, VarianceInfo.OUT);
 					}
 					if (actualLowerBound != null) {
-						delegate.outerVisit(declaredUpperBound, actualLowerBound, declaration, VarianceInfo.OUT, VarianceInfo.IN);
+						outerVisit(declaredUpperBound, actualLowerBound, declaration, VarianceInfo.OUT, VarianceInfo.IN);
 					}
 				}
 			}
@@ -72,10 +66,10 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		public void doVisitTypeReference(LightweightTypeReference reference, WildcardTypeReference declaration) {
 			LightweightTypeReference declaredLowerBound = declaration.getLowerBound();
 			if (declaredLowerBound != null) {
-				delegate.outerVisit(declaredLowerBound, reference, declaration, VarianceInfo.IN, VarianceInfo.INVARIANT);
+				outerVisit(declaredLowerBound, reference, declaration, VarianceInfo.IN, VarianceInfo.INVARIANT);
 			} else {
 				for (LightweightTypeReference declaredUpperBound : declaration.getUpperBounds()) {
-					delegate.outerVisit(declaredUpperBound, reference, declaration, VarianceInfo.OUT, VarianceInfo.INVARIANT);
+					outerVisit(declaredUpperBound, reference, declaration, VarianceInfo.OUT, VarianceInfo.INVARIANT);
 				}
 			}
 		}
@@ -188,7 +182,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	}
 
 	protected WildcardTypeReferenceTraverser createWildcardTypeReferenceTraverser() {
-		return new WildcardTypeReferenceTraverser(this);
+		return new WildcardTypeReferenceTraverser();
 	}
 
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
