@@ -5,7 +5,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,13 +17,13 @@ public class PublicResolvedTypes extends RootResolvedTypes {
     super(resolver);
   }
   
-  public RootUnboundTypeParameter createUnboundTypeParameter(final XExpression expression, final JvmTypeParameter type) {
-    RootUnboundTypeParameter _createUnboundTypeParameter = super.createUnboundTypeParameter(expression, type);
-    return _createUnboundTypeParameter;
+  public RootUnboundTypeReference createUnboundTypeReference(final XExpression expression, final JvmTypeParameter type) {
+    RootUnboundTypeReference _createUnboundTypeReference = super.createUnboundTypeReference(expression, type);
+    return _createUnboundTypeReference;
   }
   
-  public RootUnboundTypeParameter getUnboundTypeParameter(final Object handle) {
-    RootUnboundTypeParameter _unboundTypeParameter = super.getUnboundTypeParameter(handle);
-    return _unboundTypeParameter;
+  public RootUnboundTypeReference getUnboundTypeReference(final Object handle) {
+    RootUnboundTypeReference _unboundTypeReference = super.getUnboundTypeReference(handle);
+    return _unboundTypeReference;
   }
 }

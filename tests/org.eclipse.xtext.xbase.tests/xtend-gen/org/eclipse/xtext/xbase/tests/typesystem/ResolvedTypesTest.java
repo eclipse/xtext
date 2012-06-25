@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeReference;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,16 +67,16 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
     PublicResolvedTypes _testMe = this.getTestMe();
     XFeatureCall _createXFeatureCall = this.xbaseFactory.createXFeatureCall();
     JvmTypeParameter _createJvmTypeParameter = this.typesFactory.createJvmTypeParameter();
-    final RootUnboundTypeParameter unbound = _testMe.createUnboundTypeParameter(_createXFeatureCall, _createJvmTypeParameter);
+    final RootUnboundTypeReference unbound = _testMe.createUnboundTypeReference(_createXFeatureCall, _createJvmTypeParameter);
     PublicResolvedTypes _testMe_1 = this.getTestMe();
     Object _handle = unbound.getHandle();
-    RootUnboundTypeParameter _unboundTypeParameter = _testMe_1.getUnboundTypeParameter(_handle);
-    Assert.assertSame(unbound, _unboundTypeParameter);
+    RootUnboundTypeReference _unboundTypeReference = _testMe_1.getUnboundTypeReference(_handle);
+    Assert.assertSame(unbound, _unboundTypeReference);
   }
   
   @Test(expected = IllegalStateException.class)
   public void testTryGetUnknownUnboundTypeParameter() {
     PublicResolvedTypes _testMe = this.getTestMe();
-    _testMe.getUnboundTypeParameter("unknown handle");
+    _testMe.getUnboundTypeReference("unknown handle");
   }
 }

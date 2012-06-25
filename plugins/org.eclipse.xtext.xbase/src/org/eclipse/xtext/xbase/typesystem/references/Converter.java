@@ -17,9 +17,6 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameters;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitorWithParameter;
 
@@ -90,16 +87,6 @@ public class Converter extends AbstractXtypeReferenceVisitorWithParameter<TypeRe
 			}
 		}
 		return result;
-	}
-	
-	@Override
-	public LightweightTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
-			TypeReferenceOwner owner) {
-		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
-			UnboundTypeParameter unbound = (UnboundTypeParameter) reference.getTypeProvider();
-			return new UnboundTypeReference(owner, unbound.getTypeParameter(), unbound.getHandle());
-		}
-		return super.doVisitComputedTypeReference(reference, owner);
 	}
 	
 	@Override

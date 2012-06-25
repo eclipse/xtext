@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightResolvedTypes;
 
 import com.google.inject.Inject;
 
@@ -54,7 +54,7 @@ public class ScopeProviderAccess {
 	@Inject
 	private LazyURIEncoder encoder;
 	
-	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
+	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, IFeatureScopeSession session, LightweightResolvedTypes types) throws IllegalNodeException {
 		EObject toBeLinked = (EObject) expression.eGet(reference, false);
 		if (toBeLinked == null) {
 			return Collections.emptyList();

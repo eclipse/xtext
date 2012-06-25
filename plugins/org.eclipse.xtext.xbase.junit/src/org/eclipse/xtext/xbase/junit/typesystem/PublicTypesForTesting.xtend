@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.typesystem
 
+import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
-import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.internal.RootUnboundTypeReference
+import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,12 +26,12 @@ class PublicResolvedTypes extends RootResolvedTypes {
 		super(resolver)
 	}
 	
-	override public createUnboundTypeParameter(XExpression expression, JvmTypeParameter type) {
-		super.createUnboundTypeParameter(expression, type)
+	override public RootUnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
+		super.createUnboundTypeReference(expression, type)
 	}
 	
-	override public getUnboundTypeParameter(Object handle) {
-		super.getUnboundTypeParameter(handle)
+	override public getUnboundTypeReference(Object handle) {
+		super.getUnboundTypeReference(handle)
 	}
 	
 }
@@ -60,13 +59,4 @@ class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
 		super.getBatchScopeProvider()
 	}
 	
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class PublicAnyTypeReference extends AnyTypeReference {
-	new(TypeReferenceOwner owner) {
-		super(owner)
-	}
 }

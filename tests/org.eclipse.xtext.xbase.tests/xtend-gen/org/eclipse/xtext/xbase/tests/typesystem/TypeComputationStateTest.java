@@ -10,7 +10,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
-import org.eclipse.xtext.xbase.junit.typesystem.PublicAnyTypeReference;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -26,8 +25,8 @@ import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputatio
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,9 +39,6 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
   private PublicReentrantTypeResolver resolver;
   
   @Inject
-  private CommonTypeComputationServices services;
-  
-  @Inject
   private ReflectExtensions _reflectExtensions;
   
   @Test
@@ -52,8 +48,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final XExpression expression = this.expression("{ null }");
       PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
       final PublicResolvedTypes resolution = _publicResolvedTypes;
-      PublicAnyTypeReference _publicAnyTypeReference = new PublicAnyTypeReference(resolution);
-      final PublicAnyTypeReference any = _publicAnyTypeReference;
+      AnyTypeReference _anyTypeReference = new AnyTypeReference(resolution);
+      final AnyTypeReference any = _anyTypeReference;
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);

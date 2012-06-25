@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -34,13 +35,11 @@ import com.google.common.collect.Sets;
 public class StackedResolvedTypes extends ResolvedTypes {
 
 	private final ResolvedTypes parent;
-	private final Map<Object, StackedUnboundParameter> stackedUnboundParameters;
 	private final Set<Object> createdParameters;
 
 	protected StackedResolvedTypes(ResolvedTypes parent) {
 		super(parent.getResolver());
 		this.parent = parent;
-		this.stackedUnboundParameters = Maps.newHashMap();
 		this.createdParameters = Sets.newHashSet();
 	}
 	
@@ -50,17 +49,17 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@NonNull
-	protected RootUnboundTypeParameter createUnboundTypeParameter(@NonNull XExpression expression,
+	protected RootUnboundTypeReference createUnboundTypeReference(@NonNull XExpression expression,
 			@NonNull JvmTypeParameter type) {
-		RootUnboundTypeParameter result = super.createUnboundTypeParameter(expression, type);
+		RootUnboundTypeReference result = super.createUnboundTypeReference(expression, type);
 		createdParameters.add(result.getHandle());
 		return result;
 	}
 	
 	protected void mergeIntoParent() {
-		for(StackedUnboundParameter unboundParameter: stackedUnboundParameters.values()) {
-			unboundParameter.mergeIntoParent();
-		}
+//		for(UnboundTypeReference unboundParameter: stackedUnboundParameters.values()) {
+//			unboundParameter.mergeIntoParent();
+//		}
 		ResolvedTypes parent = getParent();
 		mergeInto(parent);
 	}
@@ -74,15 +73,11 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 
 	protected void mergeTypeParametersIntoParent(ResolvedTypes parent) {
-		Map<Object, BaseUnboundTypeParameter> parentMap = parent.ensureTypeParameterMapExists();
-		for (Object handle: createdParameters) {
-			getUnboundTypeParameter(handle).bindIfPossible();
-		}
-		for(BaseUnboundTypeParameter unbound: ensureTypeParameterMapExists().values()) {
-			unbound.setResolvedTypes(parent);
-			if (parentMap.put(unbound.getHandle(), unbound) != null) {
-				throw new IllegalStateException("Parent had already a type parameter with key: " + unbound.getHandle());
-			}
+//		for (Object handle: createdParameters) {
+//			getUnboundTypeParameter(handle).bindIfPossible();
+//		}
+		for(UnboundTypeReference unbound: ensureTypeParameterMapExists().values()) {
+			unbound.copyInto(parent);
 		}
 	}
 
@@ -148,16 +143,18 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@NonNull
-	protected BaseUnboundTypeParameter getUnboundTypeParameter(@NonNull Object handle) {
-		BaseUnboundTypeParameter result = super.ensureTypeParameterMapExists().get(handle);
+	protected UnboundTypeReference getUnboundTypeReference(@NonNull Object handle) {
+		UnboundTypeReference result = ensureTypeParameterMapExists().get(handle);
 		if (result == null) {
-			result = stackedUnboundParameters.get(handle);
-			if (result == null) {
-				result = parent.getUnboundTypeParameter(handle);
-				StackedUnboundParameter stackedResult = new StackedUnboundParameter(result, this);
-				stackedUnboundParameters.put(result.getHandle(), stackedResult);
-				result = stackedResult;
-			}
+			return parent.getUnboundTypeReference(handle);
+//			if (result != null) {
+//				result = result.copyInto(this);
+//				
+//			}
+//			StackedUnboundParameter stackedResult = new StackedUnboundParameter(result, this);
+//			stackedUnboundParameters.put(result.getHandle(), stackedResult);
+//			result = stackedResult;
+//			}
 		}
 		return result;
 	}
@@ -165,7 +162,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Override
 	protected void appendContent(StringBuilder result, String indentation) {
 		super.appendContent(result, indentation);
-		appendContent(stackedUnboundParameters, "stackedUnboundParameters", result, indentation);
+//		appendContent(stackedUnboundParameters, "stackedUnboundParameters", result, indentation);
 		result.append("\n" + indentation + "parent: [");
 		parent.appendContent(result, indentation + "  ");
 		closeBracket(result);

@@ -49,12 +49,12 @@ class ResolvedTypesTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testCreateAndGetUnboundTypeParameter() {
-		val unbound = testMe.createUnboundTypeParameter(xbaseFactory.createXFeatureCall, typesFactory.createJvmTypeParameter)
-		assertSame(unbound, testMe.getUnboundTypeParameter(unbound.handle))
+		val unbound = testMe.createUnboundTypeReference(xbaseFactory.createXFeatureCall, typesFactory.createJvmTypeParameter)
+		assertSame(unbound, testMe.getUnboundTypeReference(unbound.handle))
 	}
 	
 	@Test(expected=typeof(IllegalStateException))
 	def void testTryGetUnknownUnboundTypeParameter() {
-		testMe.getUnboundTypeParameter('unknown handle')
+		testMe.getUnboundTypeReference('unknown handle')
 	}
 }

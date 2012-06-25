@@ -14,13 +14,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor
 import org.junit.After
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 /**
  * @author Sebastian Zarnekow

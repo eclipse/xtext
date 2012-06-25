@@ -15,9 +15,19 @@ import org.eclipse.xtext.xbase.typesystem.computation.ConformanceHint;
  */
 public abstract class BaseTypeExpectation implements LightweightTypeExpectation {
 
-	protected abstract OwnedConverter getConverter();
+	private final TypeReferenceOwner owner;
+	private final OwnedConverter converter;
+
+	protected BaseTypeExpectation(TypeReferenceOwner owner) {
+		this.owner = owner;
+		this.converter = new OwnedConverter(owner);
+	}
 	
-	public final void acceptActualType(JvmTypeReference type, ConformanceHint hint) {
+	public OwnedConverter getConverter() {
+		return converter;
+	}
+	
+	public void acceptActualType(JvmTypeReference type, ConformanceHint hint) {
 		acceptActualType(getConverter().toLightweightReference(type), hint);
 	}
 
@@ -27,6 +37,10 @@ public abstract class BaseTypeExpectation implements LightweightTypeExpectation 
 			return result.toTypeReference();
 		}
 		return null;
+	}
+	
+	public TypeReferenceOwner getReferenceOwner() {
+		return owner;
 	}
 	
 }

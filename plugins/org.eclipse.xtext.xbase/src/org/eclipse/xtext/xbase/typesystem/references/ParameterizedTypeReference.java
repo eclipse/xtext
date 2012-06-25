@@ -12,9 +12,11 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -29,7 +31,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	private JvmType type;
 	protected boolean resolved;
 	
-	protected ParameterizedTypeReference(TypeReferenceOwner owner, JvmType type) {
+	public ParameterizedTypeReference(TypeReferenceOwner owner, JvmType type) {
 		super(owner);
 		if (type == null) {
 			throw new NullPointerException("type may not be null");
@@ -56,6 +58,21 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return type;
 	}
 	
+	@Override
+	public LightweightTypeReference getWrapperTypeIfPrimitive() {
+		if (type instanceof JvmPrimitiveType) {
+			Primitives primitives = getOwner().getServices().getPrimitives();
+			JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) type);
+			return new ParameterizedTypeReference(getOwner(), wrapperType);
+		}
+		return this;
+	}
+	
+	@Override
+	public boolean isPrimitive() {
+		return type instanceof JvmPrimitiveType;
+	}
+	
 	public List<LightweightTypeReference> getTypeArguments() {
 		return expose(typeArguments);
 	}
@@ -80,7 +97,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return resolved;
 	}
 
-	protected void addTypeArgument(LightweightTypeReference argument) {
+	public void addTypeArgument(LightweightTypeReference argument) {
 		if (argument == null) {
 			throw new NullPointerException("argument may not be null");
 		}
@@ -129,4 +146,5 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitParameterizedTypeReference(this, param);
 	}
+	
 }

@@ -7,11 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**
@@ -24,7 +29,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	private final JvmTypeParameter typeParameter;
 	private final Object handle;
 	
-	protected UnboundTypeReference(TypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
+	public UnboundTypeReference(TypeReferenceOwner owner, JvmTypeParameter typeParameter, Object handle) {
 		super(owner);
 		this.typeParameter = typeParameter;
 		this.handle = handle;
@@ -52,6 +57,10 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return typeParameter;
 	}
 	
+	protected Object getHandle() {
+		return handle;
+	}
+	
 	@Nullable
 	public LightweightTypeReference getResolvedTo() {
 		return resolvedTo;
@@ -67,7 +76,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 * yet resolved.
 	 */
 	@Override
-	protected LightweightTypeReference copyInto(TypeReferenceOwner owner) {
+	public LightweightTypeReference copyInto(TypeReferenceOwner owner) {
 		return doCopyInto(owner);
 	}
 	
@@ -78,14 +87,33 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		}
 		return false;
 	}
+	
+	@Override
+	@Nullable
+	public JvmType getType() {
+		if (resolvedTo != null)
+			return resolvedTo.getType();
+		return getTypeParameter();
+	}
+	
+	@Override
+	public LightweightTypeReference getWrapperTypeIfPrimitive() {
+		if (resolvedTo != null)
+			return resolvedTo.getWrapperTypeIfPrimitive();
+		return super.getWrapperTypeIfPrimitive();
+	}
 
 	@Override
 	protected LightweightTypeReference doCopyInto(TypeReferenceOwner owner) {
 		if (resolvedTo != null) {
 			return resolvedTo.copyInto(owner);
 		}
-		UnboundTypeReference result = new UnboundTypeReference(owner, typeParameter, handle);
+		UnboundTypeReference result = createCopy(owner);
 		return result;
+	}
+
+	protected UnboundTypeReference createCopy(TypeReferenceOwner owner) {
+		return new UnboundTypeReference(owner, typeParameter, handle);
 	}
 
 	@Override
@@ -134,4 +162,23 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		}
 	}
 
+	public void acceptHint(
+			LightweightTypeReference hint, BoundTypeArgumentSource source, Object origin,
+			VarianceInfo expectedVariance, VarianceInfo actualVariance) {
+		acceptHint(new LightweightBoundTypeArgument(hint, source, origin, expectedVariance, actualVariance));
+	}
+	
+	public void acceptHint(LightweightBoundTypeArgument hint) {
+		if (resolvedTo != null) {
+			throw new IllegalStateException("Cannot add hints to a resolved reference");
+		}
+		getOwner().acceptHint(this.getHandle(), hint);
+	}
+
+	public List<LightweightBoundTypeArgument> getAllHints() {
+		if (resolvedTo != null) {
+			throw new IllegalStateException("Cannot query hints for a resolved reference");
+		}
+		return getOwner().getAllHints(getHandle());
+	}
 }

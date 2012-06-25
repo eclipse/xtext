@@ -8,26 +8,16 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument
+import org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentCollector
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeParameterSubstitutor
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
-import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
-
-/**
- * @author Sebastian Zarnekow
- */
-class TypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest {
-	
-	@Inject CommonTypeComputationServices services
-	
-	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
-		val mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration)
-		return new StandardTypeParameterSubstitutor(mapping, services).substitute(reference).simpleName
-	}
-	
-}
 
 /**
  * @author Sebastian Zarnekow
@@ -39,12 +29,32 @@ class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubst
 	extension OwnedConverter = new OwnedConverter(this)
 	
 	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
-		val mapping = new org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration.toLightweightReference)
-		return new org.eclipse.xtext.xbase.typesystem.references.StandardTypeParameterSubstitutor(mapping, this).substitute(reference.toLightweightReference).toString
+		val mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration.toLightweightReference)
+		return new StandardTypeParameterSubstitutor(mapping, this).substitute(reference.toLightweightReference).toString
 	}
 
 	override getServices() {
 		return services
+	}
+	
+	override acceptHint(Object reference, LightweightBoundTypeArgument boundTypeArgument) {
+		throw new UnsupportedOperationException("Should not be invoked")
+	}
+	
+	override getAllHints(Object reference) {
+		throw new UnsupportedOperationException("Should not be invoked")
+	}
+	
+	override getCommonSuperType(List<LightweightTypeReference> subTypes) {
+		throw new UnsupportedOperationException("Should not be invoked")
+	}
+
+	override isConformant(LightweightTypeReference declaredType, LightweightTypeReference actualType) {
+		throw new UnsupportedOperationException("Should not be invoked")
+	}
+	
+	override isConformant(LightweightTypeReference type, LightweightTypeReference inType, TypeConformanceComputationArgument argument) {
+		throw new UnsupportedOperationException("Should not be invoked")
 	}
 	
 }

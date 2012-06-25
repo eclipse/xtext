@@ -18,5 +18,9 @@ public interface LightweightTypeExpectation extends ITypeExpectation {
 	LightweightTypeReference internalGetExpectedType();
 
 	void acceptActualType(LightweightTypeReference type, ConformanceHint hint);
+
+	OwnedConverter getConverter();
+	
+	TypeReferenceOwner getReferenceOwner();
 	
 }

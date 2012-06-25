@@ -20,7 +20,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 
 	private LightweightTypeReference component;
 
-	protected ArrayTypeReference(TypeReferenceOwner owner, LightweightTypeReference component) {
+	public ArrayTypeReference(TypeReferenceOwner owner, LightweightTypeReference component) {
 		super(owner);
 		this.component = component;
 	}

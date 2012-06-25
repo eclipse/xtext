@@ -11,6 +11,8 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XNullLiteral
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
+import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
@@ -19,13 +21,10 @@ import org.eclipse.xtext.xbase.typesystem.internal.ChildExpressionTypeComputatio
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
-import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
-import org.eclipse.xtext.xbase.junit.typesystem.PublicAnyTypeReference
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,8 +33,6 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 	
 	@Inject PublicReentrantTypeResolver resolver
 	
-	@Inject CommonTypeComputationServices services
-	
 	@Inject extension ReflectExtensions
 	
 	@Test
@@ -43,7 +40,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		resolver.typeComputer = this 
 		val expression = expression("{ null }")
 		val resolution = new PublicResolvedTypes(resolver)
-		val any = new PublicAnyTypeReference(resolution)
+		val any = new AnyTypeReference(resolution)
 		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		assertEquals(any.toString, resolution.getActualType(expression).identifier)
 		assertEquals(any.toString, resolution.internalGetActualType(expression).toString)

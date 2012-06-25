@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 
 /**
@@ -23,5 +24,7 @@ public interface LightweightTypeAssigner extends ITypeAssigner {
 	void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference declaredType, @Nullable LightweightTypeReference expectedType);
 	
 	LightweightTypeComputationState getForkedState();
+	
+	LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference);
 	
 }

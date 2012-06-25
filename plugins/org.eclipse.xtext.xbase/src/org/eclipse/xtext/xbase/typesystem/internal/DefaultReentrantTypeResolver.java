@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
-import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
+import org.eclipse.xtext.xbase.typesystem.references.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
@@ -36,9 +36,6 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	
 	@Inject
 	private IBatchScopeProvider batchScopeProvider;
-	
-	@Inject
-	private BoundTypeArgumentMerger typeArgumentMerger;
 	
 	private EObject root;
 	
@@ -110,6 +107,6 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	}
 	
 	protected BoundTypeArgumentMerger getTypeArgumentMerger() {
-		return typeArgumentMerger;
+		return services.getBoundTypeArgumentMerger();
 	}
 }
