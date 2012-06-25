@@ -14,6 +14,7 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
 import static extension org.eclipse.xtext.util.Strings.*
+import static de.itemis.statefullexer.TokenNFA$NFAStateType.*
 
 class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	
@@ -26,9 +27,18 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		val grammarFile = lexerGrammar.replace('.', '/') + ".g";
 		println("writing " + grammarFile)
 
+		val nfa2dot = new NfaToDot2()
+		nfa2dot.stateFormatter.add[TokenNFA$TokenNfaState<AbstractElement> s | 
+			switch(s.type) { 
+				case(START): "start"
+				case(ELEMENT): new GrammarElementTitleSwitch().doSwitch(s.token)
+				case(STOP): "stop"
+			}
+		]
+		nfa2dot.groupFormatter.add[AbstractRule r | r.name]
 		val nfa1 = new LexerStatesProvider().getNfa(grammar)
 		ctx.output.openFile(lexerGrammar.replace('.', '/') + "GrammarNfa.dot", srcGen)
-		ctx.output.write(new NfaToDot2<NfaUtil2$TokenNfaState<AbstractElement>, Object>().setStateFormatter[new GrammarElementTitleSwitch().doSwitch(token)].draw(nfa1))
+		ctx.output.write(nfa2dot.draw(nfa1))
 		ctx.output.closeFile()
 
 		val nfa = new LexerStatesProvider().getStates(grammar)

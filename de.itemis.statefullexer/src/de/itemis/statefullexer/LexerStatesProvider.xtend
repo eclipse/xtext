@@ -16,7 +16,6 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.grammaranalysis.impl.CfgAdapter
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl
-import org.eclipse.xtext.util.formallang.Nfa
 import org.eclipse.xtext.util.formallang.NfaFactory
 import org.eclipse.xtext.util.formallang.NfaUtil
 import org.eclipse.xtext.xbase.lib.Pair
@@ -113,8 +112,12 @@ class LexerStatesProvider implements ILexerStatesProvider {
 		result
 	}
 	
+	def private isSpace(AbstractRule rule) {
+		rule.name.toLowerCase.startsWith("lexicalspace")
+	}
+	
 	def private void collectTerminalOwner(AbstractRule rule, AbstractRule owner, Multimap<AbstractRule, EObject> owner2terminal, List<AbstractRule> hidden, Set<Pair<AbstractRule, AbstractRule>> visited) {
-		val matches = rule.name.toLowerCase.startsWith("lexicalspace")
+		val matches = rule.space
 		val newOwner = if(matches) rule else owner
 		if(!visited.add(rule -> owner)) 
 			return;
@@ -140,13 +143,14 @@ class LexerStatesProvider implements ILexerStatesProvider {
 		result
 	}
 	
-	def Nfa<NfaUtil2$TokenNfaState<AbstractElement>> getNfa(Grammar grammar) {
+	def NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>> getNfa(Grammar grammar) {
 		val cfg = new StatesCfgAdapter(grammar)
 		val ff = new FollowerFunctionImpl(cfg).setFilter[it instanceof Keyword || it instanceof RuleCall]
-		val fact =  new NfaUtil2$TokenNFAFactory<AbstractElement>() as NfaFactory<Nfa<NfaUtil2$TokenNfaState<AbstractElement>>, NfaUtil2$TokenNfaState<AbstractElement>, AbstractElement>
-		val nfa = new NfaUtil2().create(cfg, ff, fact)
+		val fact =  new TokenGroupNFA$TokenGroupNfaFactory<AbstractRule, AbstractElement>() as NfaFactory<NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>>, TokenNFA$TokenNfaState<AbstractElement>, AbstractElement>
+		val ele2group = [AbstractElement e | switch(e) { RuleCall case(e.rule.space): e.rule case(null): cfg.root.containingRule default:null } ] 
+		val nfa = new NfaUtil2().create(cfg, ff, ele2group, fact)
 		nfa
-	} 
+	}
 }
 
 class StatesCfgAdapter extends CfgAdapter {
