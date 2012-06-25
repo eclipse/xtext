@@ -106,7 +106,7 @@ class ExamplesBody extends DocumentationBody {
 	
 	override h1(Chapter chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.href»" style="margin-bottom: 50px">
+		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span10 offset1">
 					<h1>

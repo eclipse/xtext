@@ -131,7 +131,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!--Container-->");
     _builder.newLine();
-    _builder.append("<div id=\"header_wrapper\" class=\"container\" >");
+    _builder.append("<div id=\"header_wrapper\" class=\"container\">");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<div class=\"inner\">");

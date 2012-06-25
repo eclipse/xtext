@@ -25,7 +25,7 @@ public class ExamplesBody extends DocumentationBody {
     _builder.append("<section id=\"");
     String _href = this._htmlExtensions.href(chapter);
     _builder.append(_href, "");
-    _builder.append("\" style=\"margin-bottom: 50px\">");
+    _builder.append("\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<div class=\"row\">");

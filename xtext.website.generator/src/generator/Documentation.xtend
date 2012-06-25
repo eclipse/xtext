@@ -1,24 +1,24 @@
 package generator
 
+import bootstrap.Body
+import bootstrap.HtmlExtensions
+import bootstrap.PostProcessor
+import bootstrap.XdocExtensions
 import com.google.inject.Binder
 import com.google.inject.Guice
+import com.google.inject.Inject
 import com.google.inject.Module
+import java.io.File
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xdoc.XdocRuntimeModule
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup
-import xdocgen.DocumentLoad
-import com.google.inject.Inject
-import bootstrap.Body
-import bootstrap.PostProcessor
-import java.io.File
-import org.eclipse.xtext.xdoc.xdoc.Document
-import bootstrap.HtmlExtensions
-import org.eclipse.xtext.xdoc.xdoc.ImageRef
-import org.eclipse.emf.ecore.util.EcoreUtil
-import static extension com.google.common.io.Files.*
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import bootstrap.XdocExtensions
 import org.eclipse.xtext.xdoc.xdoc.Chapter
-import org.eclipse.xtext.xdoc.xdoc.AbstractSection
+import org.eclipse.xtext.xdoc.xdoc.Document
+import org.eclipse.xtext.xdoc.xdoc.ImageRef
+import xdocgen.DocumentLoad
+
+import static extension com.google.common.io.Files.*
 
 class Documentation extends AbstractXdocBaseWebsite {
 	
@@ -69,7 +69,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 	
 	override contents() '''
 		<!--Container-->
-		<div id="header_wrapper" class="container" >
+		<div id="header_wrapper" class="container">
 			<div class="inner">
 				<div class="container">
 					<div class="page-heading"><h1>Documentation</h1></div>
@@ -130,34 +130,21 @@ class DocumentationBody extends Body {
 	
 	override h1(Chapter chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.href»" style="margin-bottom: 50px">
+		<section id="«chapter.href»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span8 offset3">
-					<h1>
+					<h1 style="padding-top: 20px;">
 						«chapter.title.toHtmlText»
 					</h1>
 					<hr style="margin-top: 5px; margin-bottom: 5px;">
 					«FOR content : chapter.contents»
-						«content.toHtmlParagraph»
+						«content?.toHtmlParagraph»
 					«ENDFOR»
 					«FOR section: chapter.sections»
 						«section.h2»
 					«ENDFOR»
 				</div>
 			</div>
-		</section>
-	'''
-	
-	override h2(AbstractSection section) '''
-		<!--  section -->
-		<section id="«section.href»" style="margin-top: 20px; padding-top: 0;">
-		<h2>«section.title.toHtmlText»</h2>
-		«FOR content : section.contents»
-			«content.toHtmlParagraph»
-		«ENDFOR»
-		«FOR subsection: section.sections»
-			«subsection.h3plus(3)»
-		«ENDFOR»
 		</section>
 	'''
 	
