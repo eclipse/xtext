@@ -15,6 +15,8 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
 import static extension org.eclipse.xtext.util.Strings.*
 import static de.itemis.statefullexer.TokenNFA$NFAStateType.*
+import org.eclipse.xtext.util.formallang.PdaToDot
+import org.eclipse.xtext.RuleCall
 
 class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 	
@@ -30,11 +32,28 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		val nfa2dot = new NfaToDot2()
 		nfa2dot.stateFormatter.add[TokenNFA$TokenNfaState<AbstractElement> s | 
 			switch(s.type) { 
-				case(START): "start"
-				case(ELEMENT): new GrammarElementTitleSwitch().doSwitch(s.token)
-				case(STOP): "stop"
+				case(TokenNFA$NFAStateType::START): "start"
+				case(TokenNFA$NFAStateType::ELEMENT): new GrammarElementTitleSwitch().doSwitch(s.token)
+				case(TokenNFA$NFAStateType::STOP): "stop"
 			}
 		]
+		nfa2dot.groupFormatter.add[AbstractRule r | r.name]
+		
+		val pda2dot = new PdaToDot<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>()
+		pda2dot.setStateFormatter[
+			switch(type) { 
+				case(TokenPDA$PDAStateType::START): "start"
+				case(TokenPDA$PDAStateType::ELEMENT): new GrammarElementTitleSwitch().doSwitch(token)
+				case(TokenPDA$PDAStateType::PUSH): new GrammarElementTitleSwitch().doSwitch(token)
+				case(TokenPDA$PDAStateType::POP): new GrammarElementTitleSwitch().doSwitch(token)
+				case(TokenPDA$PDAStateType::STOP): "stop"
+			}
+		]
+		val pda = new LexerStatesProvider().getPda(grammar)
+		ctx.output.openFile(lexerGrammar.replace('.', '/') + "GrammarPda.dot", srcGen)
+		ctx.output.write(pda2dot.draw(pda))
+		ctx.output.closeFile()
+		
 		nfa2dot.groupFormatter.add[AbstractRule r | r.name]
 		val nfa1 = new LexerStatesProvider().getNfa(grammar)
 		ctx.output.openFile(lexerGrammar.replace('.', '/') + "GrammarNfa.dot", srcGen)

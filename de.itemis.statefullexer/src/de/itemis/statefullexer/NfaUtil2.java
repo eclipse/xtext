@@ -1,22 +1,33 @@
 package de.itemis.statefullexer;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Cfg;
 import org.eclipse.xtext.util.formallang.CfgUtil;
 import org.eclipse.xtext.util.formallang.FollowerFunction;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaFactory;
+import org.eclipse.xtext.util.formallang.NfaUtil;
+import org.eclipse.xtext.util.formallang.NfaUtil.MappedComparator;
+import org.eclipse.xtext.util.formallang.Pda;
+import org.eclipse.xtext.util.formallang.PdaUtil.HashStack;
 import org.eclipse.xtext.util.formallang.ProductionUtil;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
+import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -26,6 +37,134 @@ import de.itemis.statefullexer.NfaWithGroups.NfaWithGroupsFactory;
 
 @SuppressWarnings("restriction")
 public class NfaUtil2 {
+
+	protected static class GroupingTraversalItem<S, R, G> {
+		protected R data;
+		protected Iterator<S> followers;
+		protected S state;
+		protected G group;
+
+		public GroupingTraversalItem(S state, Iterable<S> followers, R previous, G group) {
+			super();
+			this.state = state;
+			this.followers = followers.iterator();
+			this.data = previous;
+			this.group = group;
+		}
+
+		@Override
+		@SuppressWarnings("rawtypes")
+		public boolean equals(Object obj) {
+			if (obj == null || obj.getClass() != getClass())
+				return false;
+			GroupingTraversalItem other = (GroupingTraversalItem) obj;
+			return data.equals(other.data) && state.equals(other.state) && Objects.equal(group, other.group);
+		}
+
+		@Override
+		public int hashCode() {
+			return data.hashCode() + (state.hashCode() * 7) + (group == null ? 0 : group.hashCode() * 13);
+		}
+
+		@Override
+		public String toString() {
+			return "[" + group + "]" + state;
+		}
+	}
+
+	protected <S, R, P, G> GroupingTraversalItem<S, R, G> newItem(Pda<S, P> pda, MappedComparator<S, Integer> comp, Map<S, Integer> distances, S next, R item,
+			G group) {
+		List<S> followers = Lists.newArrayList();
+		for (S f : pda.getFollowers(next))
+			if (distances.containsKey(f))
+				followers.add(f);
+		Collections.sort(followers, comp);
+		return new GroupingTraversalItem<S, R, G>(next, followers, item, group);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <S, P, R, G, T, X, D extends Nfa<X>> D create(Pda<S, P> pda, GroupingTraverser<? super Pda<S, P>, S, R, G> traverser, Predicate<S> filter,
+			Function<S, T> tokens, NfaFactory<D, X, T> factory) {
+		HashStack<GroupingTraversalItem<S, R, G>> trace = new HashStack<GroupingTraversalItem<S, R, G>>();
+		R previous = traverser.enter(pda, pda.getStart(), null);
+		G previousGroup = traverser.getGroup(previous);
+		if (previous == null)
+			return factory.create(tokens.apply(pda.getStart()), tokens.apply(pda.getStop()));
+		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
+		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
+		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous, previousGroup));
+		Multimap<Pair<G, S>, Pair<G, S>> edges = LinkedHashMultimap.create();
+		HashSet<Pair<G, S>> states = Sets.newHashSet();
+		HashSet<Triple<S, R, G>> success = Sets.newHashSet();
+		states.add(Tuples.create(previousGroup, pda.getStart()));
+		states.add(Tuples.create(previousGroup, pda.getStop()));
+		ROOT: while (!trace.isEmpty()) {
+			GroupingTraversalItem<S, R, G> current = trace.peek();
+			while (current.followers.hasNext()) {
+				S next = current.followers.next();
+				R item = traverser.enter(pda, next, current.data);
+				if (item != null) {
+					G group = traverser.getGroup(item);
+					if ((next == pda.getStop() && traverser.isSolution(item)) || success.contains(Tuples.create(next, item, group))) {
+						S s = null;
+						G g = null;
+						for (GroupingTraversalItem<S, R, G> i : trace) {
+							if (s != null)
+								edges.put(Tuples.create(g, s), Tuples.create(i.group, i.state));
+							states.add(Tuples.create(i.group, i.state));
+							success.add(Tuples.create(i.state, i.data, i.group));
+							s = i.state;
+							g = i.group;
+						}
+						edges.put(Tuples.create(g, s), Tuples.create(group, next));
+					} else {
+						if (trace.push(newItem(pda, distanceComp, distances, next, item, group)))
+							continue ROOT;
+					}
+				}
+			}
+			trace.pop();
+		}
+		D result = factory.create(tokens.apply(pda.getStart()), tokens.apply(pda.getStop()));
+		Map<Pair<G, S>, Pair<G, X>> old2new = Maps.newHashMap();
+		old2new.put(Tuples.create(previousGroup, pda.getStart()), Tuples.create(previousGroup, result.getStart()));
+		old2new.put(Tuples.create(previousGroup, pda.getStop()), Tuples.create(previousGroup, result.getStop()));
+		for (Pair<G, S> old : states) {
+			X state = null;
+			if (old.getSecond() == pda.getStart())
+				state = result.getStart();
+			else if (old.getSecond() == pda.getStop())
+				state = result.getStop();
+			else if (filter.apply(old.getSecond()))
+				state = factory.createState(result, tokens.apply(old.getSecond()));
+			if (state != null) {
+				old2new.put(old, Tuples.create(old.getFirst(), state));
+				if (factory instanceof NfaWithGroupsFactory<?, ?, ?, ?>) {
+					NfaWithGroupsFactory<D, G, X, S> f = (NfaWithGroupsFactory<D, G, X, S>) factory;
+					f.setGroup(result, old.getFirst(), state);
+				}
+			}
+		}
+		for (Pair<G, S> old : old2new.keySet()) {
+			List<X> followers = Lists.newArrayList();
+			collectFollowers(old, edges, old2new, followers, Sets.<Pair<G, S>> newHashSet());
+			factory.setFollowers(result, old2new.get(old).getSecond(), followers);
+		}
+		return result;
+	}
+
+	protected <S, G, X> void collectFollowers(Pair<G, S> state, Multimap<Pair<G, S>, Pair<G, S>> edges, Map<Pair<G, S>, Pair<G, X>> old2new, List<X> result,
+			Set<Pair<G, S>> visited) {
+		for (Pair<G, S> f : edges.get(state)) {
+			if (visited.add(f)) {
+				Pair<G, X> n = old2new.get(f);
+				if (n != null)
+					result.add(n.getSecond());
+				else
+					collectFollowers(f, edges, old2new, result, visited);
+			}
+		}
+	}
 
 	protected <S, T> void getAllTransitions(NfaWithTransitions<S, T> nfa, S state, List<T> result, Set<S> visited) {
 		if (!visited.add(state))

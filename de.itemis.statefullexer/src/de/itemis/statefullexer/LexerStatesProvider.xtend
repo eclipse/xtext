@@ -7,6 +7,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.Data
+import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Grammar
@@ -18,6 +19,9 @@ import org.eclipse.xtext.grammaranalysis.impl.CfgAdapter
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl
 import org.eclipse.xtext.util.formallang.NfaFactory
 import org.eclipse.xtext.util.formallang.NfaUtil
+import org.eclipse.xtext.util.formallang.Pda
+import org.eclipse.xtext.util.formallang.PdaFactory
+import org.eclipse.xtext.util.formallang.PdaUtil
 import org.eclipse.xtext.xbase.lib.Pair
 
 import static extension de.itemis.statefullexer.Util.*
@@ -112,10 +116,6 @@ class LexerStatesProvider implements ILexerStatesProvider {
 		result
 	}
 	
-	def private isSpace(AbstractRule rule) {
-		rule.name.toLowerCase.startsWith("lexicalspace")
-	}
-	
 	def private void collectTerminalOwner(AbstractRule rule, AbstractRule owner, Multimap<AbstractRule, EObject> owner2terminal, List<AbstractRule> hidden, Set<Pair<AbstractRule, AbstractRule>> visited) {
 		val matches = rule.space
 		val newOwner = if(matches) rule else owner
@@ -143,12 +143,21 @@ class LexerStatesProvider implements ILexerStatesProvider {
 		result
 	}
 	
-	def NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>> getNfa(Grammar grammar) {
+	def Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall> getPda(Grammar grammar) {
 		val cfg = new StatesCfgAdapter(grammar)
 		val ff = new FollowerFunctionImpl(cfg).setFilter[it instanceof Keyword || it instanceof RuleCall]
+		val pdaFact = new TokenPDA$TokenPDAFactory<AbstractElement, RuleCall>() as PdaFactory<Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>, TokenPDA$TokenPDAState<AbstractElement>, RuleCall, AbstractElement>
+		val pda = new PdaUtil2().create(cfg, ff, pdaFact)
+		pda
+	}
+	
+	def NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>> getNfa(Grammar grammar) {
+		val pda = getPda(grammar)
 		val fact =  new TokenGroupNFA$TokenGroupNfaFactory<AbstractRule, AbstractElement>() as NfaFactory<NfaWithGroups<AbstractRule, TokenNFA$TokenNfaState<AbstractElement>>, TokenNFA$TokenNfaState<AbstractElement>, AbstractElement>
-		val ele2group = [AbstractElement e | switch(e) { RuleCall case(e.rule.space): e.rule case(null): cfg.root.containingRule default:null } ] 
-		val nfa = new NfaUtil2().create(cfg, ff, ele2group, fact)
+		val traverser = new LaxicalGroupsTraverser(grammar.rules.get(0))
+		val filter = [TokenPDA$TokenPDAState<AbstractElement> s | !s.token.parserRuleCall ]
+		val token = [TokenPDA$TokenPDAState<AbstractElement> s | s.token ] 
+		val nfa = new NfaUtil2().create(pda, traverser, filter, token, fact)
 		nfa
 	}
 }
@@ -170,6 +179,68 @@ class StatesCfgAdapter extends CfgAdapter {
 	}
 }
 
+class LaxicalGroupsTraverserItem  {
+	@Property val LaxicalGroupsTraverserItem parent
+	@Property val RuleCall item
+	@Property val AbstractRule group
+
+	new(AbstractRule group) {
+		this._parent = null
+		this._item = null
+		this._group = group
+	}
+
+	new(LaxicalGroupsTraverserItem parent, RuleCall item, AbstractRule group) {
+		super();
+		this._parent = parent;
+		this._item = item;
+		this._group = group
+	}
+
+	def LaxicalGroupsTraverserItem push(RuleCall item) {
+		var count = 0;
+		var current = this;
+		while (current != null) {
+			if (current.item == item)
+				count = count + 1
+			current = current.parent;
+		}
+		if (count >= 2)
+			return null;
+		val g = if(item.rule.isSpace) item.rule else group 
+		return new LaxicalGroupsTraverserItem(this, item, g);
+	}
+
+	def LaxicalGroupsTraverserItem pop(RuleCall item) {
+		if (parent == null || this.item != item)
+			return null;
+		return parent;
+	}
+}
+
+@Data class LaxicalGroupsTraverser implements GroupingTraverser<Pda<TokenPDA$TokenPDAState<AbstractElement>, RuleCall>, TokenPDA$TokenPDAState<AbstractElement>, LaxicalGroupsTraverserItem, AbstractRule> {
+	val AbstractRule group
+	
+	override getGroup(LaxicalGroupsTraverserItem result) {
+		result.group
+	}
+			
+	override enter(Pda<TokenPDA$TokenPDAState<AbstractElement>,RuleCall> pda, TokenPDA$TokenPDAState<AbstractElement> state, LaxicalGroupsTraverserItem previous) {
+		var RuleCall item;
+		if ((item = pda.getPush(state)) != null)
+			return previous.push(item)
+		if ((item = pda.getPop(state)) != null)
+			return previous.pop(item)
+		if (previous == null)
+			return new LaxicalGroupsTraverserItem(_group) 
+		return previous;
+	}
+			
+	override isSolution(LaxicalGroupsTraverserItem result) {
+		return result.parent == null;
+	}
+}
+
 class Util {
 	def static getToken(EObject ele) {
 		switch(ele) { 
@@ -186,6 +257,10 @@ class Util {
 			TerminalRule: ele.name
 			String: ele
 		}
+	}
+	
+	def static isSpace(AbstractRule rule) {
+		rule.name.toLowerCase.startsWith("lexicalspace")
 	}
 }
 
