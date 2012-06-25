@@ -262,8 +262,6 @@
 								you start from, while the last one goes into the runtime workspace spawned from the initial one using
 								<strong>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (&lt;language&gt;)</strong>.
 							</p>
-							<p>
-							</p>
 							</section>
 							</section>
 							<!--  section -->
@@ -1607,7 +1605,7 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 }
 
 def protected addRouteConditionMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
-	if (route.condition != null && route.condition.expression != null) {
+	if (route.condition != null &amp;&amp; route.condition.expression != null) {
 	   	val name = route.nameOfRouteMethod(routeCounter)
 		servlet.members += route.toMethod(name + "Condition", route.newTypeRef(Boolean::TYPE)) [
 			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
@@ -1691,7 +1689,7 @@ def protected addRouteKeyField(JvmDeclaredType servlet, Route route, int routeCo
    	}
 ...
 def hasValidKey(Route route){
-	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
+	route.key != null &amp;&amp; route.key.type != null &amp;&amp; !(route.key.type instanceof JvmVoid)
 }</pre>
 								<p>
 							</p>
@@ -1763,7 +1761,7 @@ def protected addRouteMethod(JvmDeclaredType servlet, Route route, int routeCoun
    	}
 ...
 def hasValidKey(Route route){
-	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
+	route.key != null &amp;&amp; route.key.type != null &amp;&amp; !(route.key.type instanceof JvmVoid)
 }</pre>
 								<p>
 							</p>
@@ -2198,9 +2196,11 @@ begin
   forward(length)
 end</pre>
 								<p></td>
-								<td><div class="thumbnail">
+								<td></p>
+								<div class="thumbnail">
 									<img src="images/Nikolaus.png" alt="" width="261" height="263">
-								</div></td>
+								</div>
+								<p></td>
 								</tr>
 								</table>
 								<p>
@@ -2283,9 +2283,11 @@ class Tortoise {
 								in the <strong>Tortoise View</strong> allows to execute the code live from the editor upto the carret's current line.
 							</p>
 							<p>
+								</p>
 								<div class="thumbnail">
 									<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example" width="651" height="546">
 								</div>
+								<p>
 							</p>
 							</section>
 							<!--  section -->
@@ -2424,7 +2426,7 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 override run(Tortoise tortoise, EObject program, int stopAtLine) {
-  if(tortoise != null && program != null) {
+  if(tortoise != null &amp;&amp; program != null) {
     this.tortoise = tortoise
     this.stopAtLine = stopAtLine
     try {
@@ -2504,7 +2506,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 	<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
 	</ul>
 						<ul class="footer-links clearfix">
-	            <li><a href="/">Home</a></li>
+	            			<li><a href="/index.html">Home</a></li>
 							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
 							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
 							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>

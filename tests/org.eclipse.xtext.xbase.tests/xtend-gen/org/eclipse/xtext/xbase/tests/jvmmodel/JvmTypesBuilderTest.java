@@ -222,7 +222,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testStringArrayAnnotation() {
     try {

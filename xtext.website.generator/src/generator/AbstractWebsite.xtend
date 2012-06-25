@@ -190,7 +190,7 @@ abstract class AbstractWebsite implements Resource {
 		<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
 		</ul>
 							<ul class="footer-links clearfix">
-		            <li><a href="/">Home</a></li>
+		            			<li><a href="/index.html">Home</a></li>
 								<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
 								<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
 								<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
