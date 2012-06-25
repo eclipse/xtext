@@ -238,14 +238,6 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("        ");
     _builder.append("</script>");
     _builder.newLine();
-    _builder.append("        ");
-    _builder.newLine();
-    _builder.append("<link href=\"google-code-prettify/prettify.css\" type=\"text/css\" rel=\"stylesheet\" />");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/prettify.js\"></script>");
-    _builder.newLine();
-    _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-xtend.js\"></script>");
-    _builder.newLine();
     _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
     _builder.append("  ");

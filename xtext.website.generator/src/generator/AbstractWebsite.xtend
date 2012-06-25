@@ -102,10 +102,6 @@ abstract class AbstractWebsite implements Resource {
 		    	});    
 		        });
 		        </script>
-		        
-		<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
-		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-		<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
 		<script type="text/javascript">
 		  (function() {
 		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

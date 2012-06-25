@@ -7,7 +7,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
 import com.google.inject.Inject;
-import generator.AbstractWebsite;
+import generator.AbstractXdocBaseWebsite;
 import generator.DocumentationSetup;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 import xdocgen.DocumentLoad;
 
 @SuppressWarnings("all")
-public class Documentation extends AbstractWebsite {
+public class Documentation extends AbstractXdocBaseWebsite {
   public Documentation() {
     String _xdocDocumentRootFolder = this.getXdocDocumentRootFolder();
     Document _loadDocument = this.docLoader.loadDocument(_xdocDocumentRootFolder);

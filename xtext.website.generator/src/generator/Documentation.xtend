@@ -20,7 +20,7 @@ import bootstrap.XdocExtensions
 import org.eclipse.xtext.xdoc.xdoc.Chapter
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
 
-class Documentation extends AbstractWebsite {
+class Documentation extends AbstractXdocBaseWebsite {
 	
 	new() {
 		doc = docLoader.loadDocument(xdocDocumentRootFolder)
@@ -107,7 +107,7 @@ class Documentation extends AbstractWebsite {
 		</ul>
 	'''
 	
-	def protected getDocument() {
+	override protected getDocument() {
 		doc
 	}
 }

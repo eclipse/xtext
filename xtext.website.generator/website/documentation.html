@@ -80,10 +80,6 @@
 	    	});    
 	        });
 	        </script>
-	        
-	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
 	<script type="text/javascript">
 	  (function() {
 	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -105,6 +101,21 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
+	</script>
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-common.js"></script><script type="text/javascript">
+		registerLanguage('grammar|import|generate|terminal|enum|returns|with|hidden|as|current|fragment|EOF', 'xtext');
+		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'xbase');
+		registerLanguage('module|var|auto-inject|auto|inject|import|true|false', 'mwe2');
+		registerLanguage('abstract|continue|def|override|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|it|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|catch|extends|int|short|try|char|final|static|void|class|finally|long|float|super|while|create|dispatch|extension|typeof|as|val|var|IF|ELSE|ELSEIF|ENDIF|FOR|ENDFOR|BEFORE|AFTER|SEPARATOR', 'xtend');
+		registerLanguage('IMPORT|EXTENSION|FILE|ENDFILE|DEFINE|ENDDEFINE|FOR|ENDFOR|FOREACH|ENDFOREACH|AS|SEPARATOR|ITERATOR|EXPAND|REM|ENDREM|PROTECT|ENDPROTECT|this|IF|ENDIF|ELSE|null', 'xpand');
+		registerLanguage('import|extension|this|create|cached|true|false|let|switch|case|if|then|else|context|WARNING|ERROR', 'check');
+		registerLanguage('Hello', 'mydsl');
+		registerLanguage('package|entity|datatype|many|import|extends|public|op|return|mapped-to', 'domainexample');
+		registerLanguage('datatype|mapped-to', 'javatypesexample');
+		registerLanguage('events|commands|state|actions|end|resetEvents', 'fowlerexample');
+		registerLanguage('ref', 'linkingexample');
 	</script>
 </head>
 <body onload="prettyPrint()">
