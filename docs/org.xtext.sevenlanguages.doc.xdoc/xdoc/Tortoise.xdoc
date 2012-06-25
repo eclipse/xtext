@@ -187,8 +187,8 @@ also pass an execution context storing all temporary state such as local variabl
 The first thing we have to cope with is the strange mixture of existing Java methods (from the super class
 codeRef[org.xtext.tortoiseshell.runtime.Tortoise]) and inferred ones. While the former are evaluated
 via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
-codeRef[org.xtext.tortoiseshell.runtime.Tortoise] to this and intercept calls to the inferred methods to 
-execute them directly. This is accomplished by overriding the method 
+codeRef[org.xtext.tortoiseshell.runtime.Tortoise] to code[Xtend][this] and intercept calls to the inferred 
+methods to execute them directly. This is accomplished by overriding the method 
 
 code[invokeOperation]:
 
@@ -220,7 +220,7 @@ codeRef[org.eclipse.xtext.common.types.JvmOperation] is inferred, we check wheth
 If so, we have to setup an exection context binding code[this] and the parameters as local variables and then 
 execute the method's body using the interpreter. 
 
-To start the interpretation we need to do almost the same: Setup the execution context and then evaluate
+To start the interpretation we have to do almost the same: Setup the execution context and then evaluate
 the e[Program's] body. The respective code is 
 
 code[Xtend][
@@ -261,7 +261,7 @@ codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvi
 
 section:tortoise_beyond[Beyond This Example]
 
-You could at a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
+You could add a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
 etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 
 link[http://en.wikipedia.org/wiki/Tron_%28video_game%29][Tron]. Of course, there could also be more UI, 
 like for exporting figures. The lesson to learn is that even a language with just a few concepts can become
