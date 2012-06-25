@@ -80,10 +80,6 @@
 	    	});    
 	        });
 	        </script>
-	        
-	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
 	<script type="text/javascript">
 	  (function() {
 	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -105,6 +101,18 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
+	</script>
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-common.js"></script><script type="text/javascript">
+		registerLanguage('grammar|import|generate|terminal|enum|returns|with|hidden|as|current|fragment|EOF', 'xtext');
+		registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'xbase');
+		registerLanguage('module|var|auto-inject|auto|inject|import|true|false', 'mwe2');
+		registerLanguage('abstract|continue|def|override|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|it|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|catch|extends|int|short|try|char|final|static|void|class|finally|long|float|super|while|create|dispatch|extension|typeof|as|val|var|IF|ELSE|ELSEIF|ENDIF|FOR|ENDFOR|BEFORE|AFTER|SEPARATOR', 'xtend');
+		registerLanguage('package|import', 'mongobeans');
+		registerLanguage('sub|begin|end', 'tortoise');
+		registerLanguage('GET|POST|PUT|DELETE|HEAD|import|when', 'routing');
+		registerLanguage('application', 'simple');
 	</script>
 </head>
 <body onload="prettyPrint()">
@@ -188,13 +196,34 @@
 							<p>
 								</p>
 								<ul>
-									<li><a href="#simple">Simple Java applications</a></li>
-									<li><a href="#mongo">JavaBeans-like statically typed access to mongoDB documents</a></li>
-									<li><a href="#routing">An HTTP routing servlet with full support of expressions</a></li>
-									<li><a href="#templates">Templates with embedded expressions</a></li>
-									<li><a href="#guice">Configuration of modules for Google Guice</a></li>
-									<li><a href="#cradle">Dependency management</a></li>
-									<li><a href="#tortoise">A Logo like programming environment for educational purposes</a></li>
+									<li><p>
+										<a href="#simple">Simple Java applications</a>
+									</p>
+									</li>
+									<li><p>
+										<a href="#mongo">JavaBeans-like statically typed access to mongoDB documents</a>
+									</p>
+									</li>
+									<li><p>
+										<a href="#routing">An HTTP routing servlet with full support of expressions</a>
+									</p>
+									</li>
+									<li><p>
+										<a href="#templates">Templates with embedded expressions</a>
+									</p>
+									</li>
+									<li><p>
+										<a href="#guice">Configuration of modules for Google Guice</a>
+									</p>
+									</li>
+									<li><p>
+										<a href="#cradle">Dependency management</a>
+									</p>
+									</li>
+									<li><p>
+										<a href="#tortoise">A Logo like programming environment for educational purposes</a>
+									</p>
+									</li>
 								</ul>
 								<p>
 							</p>
@@ -204,7 +233,7 @@
 							</p>
 							<!--  section -->
 							<section id="common_requirements" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Common Requirements</h2>
+							<h2 style="padding-top: 15px;">Common Requirements</h2>
 							<p>
 								To run any of the examples, you will need <a href="http://www.eclipse.org/download">Eclipse 4.2 or higher</a>
 								for your platform. In addition, you have to install <a href="http://www.xtext.org">Xtext 2.3</a> and 
@@ -252,13 +281,11 @@
 								you start from, while the last one goes into the runtime workspace spawned from the initial one using
 								<strong>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (&lt;language&gt;)</strong>.
 							</p>
-							<p>
-							</p>
 							</section>
 							</section>
 							<!--  section -->
 							<section id="xtend_primer" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Short Xtend Primer</h2>
+							<h2 style="padding-top: 15px;">A Short Xtend Primer</h2>
 							<p>
 								We are going to use the language <a href="http://www.xtend-lang.org">Xtend</a> as much as possible. Xtend is 
 								designed as a powerful and less verbose alternative to Java. It can refer to any Java artifact and 
@@ -370,10 +397,19 @@ class Foo {
 								As this is a bit bulky, there are more rules to make working with lambdas more attractive:
 								</p>
 								<ol>
-									<li>When a lambda expression is the last argument in a method call, it can be put behind the closing parenthesis.</li>
-									<li>Lambdas are automatically coerced to interfaces with a single function. Parameter types will be
-									inferred.</li>
-									<li>If you skip the declaration of the only parameter, it will be implicitly called <code class="prettyprint lang-xtend">it</code>.</li>
+									<li><p>
+										When a lambda expression is the last argument in a method call, it can be put behind the closing parenthesis.
+									</p>
+									</li>
+									<li><p>
+										Lambdas are automatically coerced to interfaces with a single function. Parameter types will be
+										inferred.
+									</p>
+									</li>
+									<li><p>
+										If you skip the declaration of the only parameter, it will be implicitly called <code class="prettyprint lang-xtend">it</code>.
+									</p>
+									</li>
 								</ol>
 								<p>
 								
@@ -404,7 +440,7 @@ list.sortBy[ length ]   // lambda is coerced into a function (String)=&gt;Compar
 							</p>
 							<!--  section -->
 							<section id="simple_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								We are going to build a language to define an application with a method body. A file in this language
 								should look like this
@@ -428,7 +464,7 @@ for(name: names) {
 							</section>
 							<!--  section -->
 							<section id="simple_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								The idea is to parse the language and automatically generate a Java class from it. The generated Java class 
 								should have the following structure
@@ -479,7 +515,7 @@ public class Application {
 							</section>
 							<!--  section -->
 							<section id="simple_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								Make sure you have the projects <strong>org.xtext.simple</strong> and <strong>org.xtext.simple.ui</strong> in your workspace.
 								Then start a new Eclipse by choosing <strong>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (org.xtext.simple)</strong>.
@@ -491,7 +527,7 @@ public class Application {
 							</section>
 							<!--  section -->
 							<section id="simple_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<p>
 								All we need to build such a language is a grammar and a transformation mapping our DSL to Java. This
 								is what we will be describing in the folloging section.
@@ -657,7 +693,7 @@ application.toClass(application.name)
 							</section>
 							<!--  section -->
 							<section id="mongo_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							<p>
 								Well, that has only been the start, but you should now be familiar with the basic concepts of creating
 								a JVM language with Xtext. No go for the real applications in the other languages!
@@ -682,7 +718,7 @@ application.toClass(application.name)
 							</p>
 							<!--  section -->
 							<section id="mongo_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								Java is statically typed: The available types, their field names and field types, are known and validated 
 								at compile time. The JavaBeans convention defines how instances can be manipulated.
@@ -700,7 +736,7 @@ application.toClass(application.name)
 							</section>
 							<!--  section -->
 							<section id="mongo_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								In this project, we have created a small DSL <strong>mongoBeans</strong> based on Xtext that allows to create basic 
 								entity classes that are backed by mongoDB objects but provide a statically typed JavaBeans API. Think of 
@@ -821,7 +857,7 @@ dbCollection.save(john.getDBObject())</pre>
 							</section>
 							<!--  section -->
 							<section id="mongo_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								In addtion to the <a href="#common_requirements">common requirements</a>, you need the 
 								<a href="http://www.mongodb.org/downloads">mongoDB implementation</a> for your platform. We have included 
@@ -836,7 +872,7 @@ dbCollection.save(john.getDBObject())</pre>
 							</section>
 							<!--  section -->
 							<section id="mongo_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="mongo_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
@@ -1273,7 +1309,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!--  section -->
 							<section id="mongo_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							<p>
 								Of course there could be further concepts in the DSL, e.g. transient properties, indices or refeerences. 
 								Furthermore, the example <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/mongobeans/org.xtext.mongobeans.example/src/org/xtext/mongobeans/example/MusicDBXtendTest.java">(src)</a> shows how to use Xtend to 
@@ -1295,7 +1331,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<!--  section -->
 							<section id="routing_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								There are several different frameworks out there like <a href="https://github.com/playframework/Play20/wiki/ScalaRouting">Play</a>
 								to support HttpRoutes.
@@ -1308,7 +1344,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!--  section -->
 							<section id="routing_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								In this project, we have created a small DSL base on <a href="http://www.xtext.org">Xtext</a> that allows to create routing with full support of expressions and access to the URL while the routing is done.
 								The result is a javax.servlet.http.HttpServlet that has methods for the different routes with optional conditions and <a href="http://code.google.com/p/google-guice">Guice</a> bindings. Depending on the order in the file, the pattern and the conditions the respective method is called. 
@@ -1317,8 +1353,14 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 								<code class="prettyprint lang-routing">GET /client/foo/:id/bar/:rest* ...</code>
 								</p>
 								<ul>
-									<li><code class="prettyprint lang-xtend">:id</code> means a placeholder for a word</li>
-									<li><code class="prettyprint lang-xtend">:rest*</code> means match everything to the rest of the url</li>
+									<li><p>
+										<code class="prettyprint lang-xtend">:id</code> means a placeholder for a word
+									</p>
+									</li>
+									<li><p>
+										<code class="prettyprint lang-xtend">:rest*</code> means match everything to the rest of the url
+									</p>
+									</li>
 								</ul>
 								<p>
 								
@@ -1374,7 +1416,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!--  section -->
 							<section id="routing_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								You'll need Eclipse 3.5 or higher, Xtext 2.3 and Xtend 2.3. The Servlet-API on the class path of your project.
 								Import the projects into an Eclipse workspace and run the launch config
@@ -1384,7 +1426,7 @@ def protected addMethod(JvmDeclaredType inferredType, MongoOperation operation) 
 							</section>
 							<!--  section -->
 							<section id="routing_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="routing_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
@@ -1597,7 +1639,7 @@ def dispatch void infer(Model model, IJvmDeclaredTypeAcceptor acceptor, boolean 
 }
 
 def protected addRouteConditionMethod(JvmDeclaredType servlet, Route route, int routeCounter) {
-	if (route.condition != null && route.condition.expression != null) {
+	if (route.condition != null &amp;&amp; route.condition.expression != null) {
 	   	val name = route.nameOfRouteMethod(routeCounter)
 		servlet.members += route.toMethod(name + "Condition", route.newTypeRef(Boolean::TYPE)) [
 			parameters += route.toParameter("request", route.newTypeRef(HTTP_REQUEST))
@@ -1681,7 +1723,7 @@ def protected addRouteKeyField(JvmDeclaredType servlet, Route route, int routeCo
    	}
 ...
 def hasValidKey(Route route){
-	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
+	route.key != null &amp;&amp; route.key.type != null &amp;&amp; !(route.key.type instanceof JvmVoid)
 }</pre>
 								<p>
 							</p>
@@ -1753,7 +1795,7 @@ def protected addRouteMethod(JvmDeclaredType servlet, Route route, int routeCoun
    	}
 ...
 def hasValidKey(Route route){
-	route.key != null && route.key.type != null && !(route.key.type instanceof JvmVoid)
+	route.key != null &amp;&amp; route.key.type != null &amp;&amp; !(route.key.type instanceof JvmVoid)
 }</pre>
 								<p>
 							</p>
@@ -1867,9 +1909,18 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 								what we want but there are several things we should customize to have a nice tool-support.
 								</p>
 								<ul>
-									<li>First of all there are several things we do not want to have in the contentassist</li>
-									<li>The outline is really ugly when the elements do not have a name</li>
-									<li>There is a need for validation in the URL-pattern defintion</li>
+									<li><p>
+										First of all there are several things we do not want to have in the contentassist
+									</p>
+									</li>
+									<li><p>
+										The outline is really ugly when the elements do not have a name
+									</p>
+									</li>
+									<li><p>
+										There is a need for validation in the URL-pattern defintion
+									</p>
+									</li>
 								</ul>
 								<p>
 								
@@ -1895,7 +1946,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="routing_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							<p>
 								Of course the DSL is not complete and there are several types of URL-pattern variables missing but it
 								should not be a hard thing to extend this example. To enable DI in the context of a <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html"><abbr title="javax.servlet.http.HttpServlet">HttpServlet</abbr></a>
@@ -1917,7 +1968,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<!--  section -->
 							<section id="templates_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -1925,7 +1976,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="templates_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -1945,14 +1996,14 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="templates_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins...
 							</p>
 							</section>
 							<!--  section -->
 							<section id="templates_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="templates_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
@@ -1971,7 +2022,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="templates_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -1986,7 +2037,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<!--  section -->
 							<section id="guice_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -1994,7 +2045,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="guice_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -2014,14 +2065,14 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="guice_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins...
 							</p>
 							</section>
 							<!--  section -->
 							<section id="guice_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="guice_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
@@ -2040,7 +2091,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="guice_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -2055,7 +2106,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<!--  section -->
 							<section id="cradle_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								Motivation
 								Why
@@ -2063,7 +2114,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="cradle_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								Why a DSL
 								How about expressions
@@ -2083,14 +2134,14 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="cradle_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								Details on how to run it: Prerequisites, additional plugins...
 							</p>
 							</section>
 							<!--  section -->
 							<section id="cradle_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="cradle_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
@@ -2109,7 +2160,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="cradle_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							</section>
 						</div>
 					</div>
@@ -2130,7 +2181,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</p>
 							<!--  section -->
 							<section id="tortoise_motivation" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Problem</h2>
+							<h2 style="padding-top: 15px;">The Problem</h2>
 							<p>
 								The goal is to provide a runtime environment for a langauge that allows to command a turtle to draw an image.
 								I admit that there is no real world problem to be solved, apart from the fact that I cannot find my good old logo 
@@ -2140,7 +2191,7 @@ def protected addMethod(JvmDeclaredType servlet, String name, EObject element, I
 							</section>
 							<!--  section -->
 							<section id="tortoise_solution" style="padding-top: 68px; margin-top: -68px;">
-							<h2>A Solution With Xtext</h2>
+							<h2 style="padding-top: 15px;">A Solution With Xtext</h2>
 							<p>
 								We have build a language that allows to define <strong>Programs</strong> and <strong>SubPrograms</strong>. Each of these has a body
 								which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
@@ -2188,9 +2239,11 @@ begin
   forward(length)
 end</pre>
 								<p></td>
-								<td><div class="thumbnail">
+								<td></p>
+								<div class="thumbnail">
 									<img src="images/Nikolaus.png" alt="" width="261" height="263">
-								</div></td>
+								</div>
+								<p></td>
 								</tr>
 								</table>
 								<p>
@@ -2264,7 +2317,7 @@ class Tortoise {
 							</section>
 							<!--  section -->
 							<section id="tortoise_running" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Running the Example</h2>
+							<h2 style="padding-top: 15px;">Running the Example</h2>
 							<p>
 								You should have installed the <a href="http://www.eclipse.org/gef">Graphical Editing Framework (GEF)</a>. Import the projects 
 								into an Eclipse workspace and run the launch config <strong>Run (org.eclipse.xtext.tortoiseshell)</strong>. Import the example plug-in 
@@ -2273,14 +2326,16 @@ class Tortoise {
 								in the <strong>Tortoise View</strong> allows to execute the code live from the editor upto the carret's current line.
 							</p>
 							<p>
+								</p>
 								<div class="thumbnail">
 									<img src="images/Pythagoras.png" alt="Tortoise takes a rest after running the Pythagoras example" width="651" height="546">
 								</div>
+								<p>
 							</p>
 							</section>
 							<!--  section -->
 							<section id="tortoise_details" style="padding-top: 68px; margin-top: -68px;">
-							<h2>The Solution in Detail</h2>
+							<h2 style="padding-top: 15px;">The Solution in Detail</h2>
 							<!-- subsection -->
 							<section id="tortoise_grammar" style="padding-top: 68px; margin-top: -68px;">
 							<h3>Grammar</h3>
@@ -2414,7 +2469,7 @@ override protected invokeOperation(JvmOperation operation, Object receiver, List
 								</p>
 								<pre class="prettyprint lang-xtend linenums">
 override run(Tortoise tortoise, EObject program, int stopAtLine) {
-  if(tortoise != null && program != null) {
+  if(tortoise != null &amp;&amp; program != null) {
     this.tortoise = tortoise
     this.stopAtLine = stopAtLine
     try {
@@ -2459,7 +2514,7 @@ override protected internalEvaluate(XExpression expression, IEvaluationContext c
 							</section>
 							<!--  section -->
 							<section id="tortoise_beyond" style="padding-top: 68px; margin-top: -68px;">
-							<h2>Beyond This Example</h2>
+							<h2 style="padding-top: 15px;">Beyond This Example</h2>
 							<p>
 								You could add a lot of library stuff, such as methods for drawing primitves like cricles, filled polygons
 								etc. It may also be interesting to experiment with multiple turtles and try to programme some game like 

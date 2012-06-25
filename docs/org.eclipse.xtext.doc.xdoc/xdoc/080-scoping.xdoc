@@ -201,7 +201,7 @@ codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] by the means of ref:depe
 That implementation looks up any codeRef[org.eclipse.emf.ecore.EAttribute][EAttributes] named 'importURI' in your
 model and interprets their values as URIs that point to imported resources. That is it adds the corresponding 
 resources to the current resource's resource set. In addition the scope provider uses the 
-ref:resourcedescriptions[codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager]] of that 
+codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager] of that 
 imported resource to compute all the codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] returned 
 by the codeRef[org.eclipse.core.runtime.preferences.IScope].  
 
@@ -233,7 +233,7 @@ codeRef[org.eclipse.emf.ecore.EReference]. If you don't want to force users to h
 structure reflecting the actual qualified names of the referenceable codeRef[org.eclipse.emf.ecore.EObject][EObjects], 
 you'll have to load all resources up front and either keep holding them in memory or remembering all information 
 which is needed for the resolution of cross-references. In Xtext that information is provided by a so called 
-ref:resourcedescriptions[codeRef[org.eclipse.xtext.resource.IEObjectDescription]]. 
+codeRef[org.eclipse.xtext.resource.IEObjectDescription]. 
 
 
 section4:containers[About the Index, Containers and Their Manager]

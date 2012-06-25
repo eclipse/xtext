@@ -142,14 +142,14 @@ ul[
     elements will become stale. As the Xtext editor continuously re-parses the model on changes, 
     this will happen rather often. It is safer to synchronize editors more loosely, e.g. on 
     file changes.]
-  item[Implement an ref:fragmentProvider[codeRef[org.eclipse.xtext.resource.IFragmentProvider]] to make 
+  item[Implement an codeRef[org.eclipse.xtext.resource.IFragmentProvider] (ref:fragmentProvider[howto]) to make 
     the XtextResource return stable fragments for its contained
     elements, e.g. based on composite names rather than order of 
     appearance.]
   item[Implement an codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] and an 
-    ref:scoping[codeRef[org.eclipse.xtext.scoping.IScopeProvider]] to make the 
+    codeRef[org.eclipse.xtext.scoping.IScopeProvider] (ref:scoping[howto]) to make the 
     names of all linkable elements in cross-references unique.]
-  item[Provide an ref:formatting[codeRef[org.eclipse.xtext.formatting.IFormatter]] to improve the readability 
+  item[Provide an codeRef[org.eclipse.xtext.formatting.IFormatter] (ref:formatting[howto]) to improve the readability 
     of the generated textual models.]
   item[Register an codeRef[org.eclipse.xtext.parser.antlr.IReferableElementsUnloader] to turn 
     deleted/replaced model elements into EMF proxies. Design the rest 
