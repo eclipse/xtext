@@ -638,21 +638,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<link rel=\"stylesheet\" href=\"css/shield-responsive.css\">");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("<link");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("href=\'http://fonts.googleapis.com/css?family=Vollkorn:400italic,400\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("rel=\'stylesheet\' type=\'text/css\'>");
-    _builder.newLine();
-    _builder.append("<link");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("href=\'http://fonts.googleapis.com/css?family=Lato:400,400italic,900italic\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("rel=\'stylesheet\' type=\'text/css\'>");
+    _builder.append("<link href=\'css/fonts.css\' rel=\'stylesheet\' type=\'text/css\'>");
     _builder.newLine();
     return _builder;
   }

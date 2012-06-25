@@ -272,12 +272,7 @@ abstract class AbstractWebsite implements Resource {
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/shield-responsive.css">
 		
-		<link
-			href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400'
-			rel='stylesheet' type='text/css'>
-		<link
-			href='http://fonts.googleapis.com/css?family=Lato:400,400italic,900italic'
-			rel='stylesheet' type='text/css'>
+		<link href='css/fonts.css' rel='stylesheet' type='text/css'>
 	'''
 
 	def headline(String title) '''

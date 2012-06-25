@@ -34,12 +34,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/shield-responsive.css">
 	
-	<link
-		href='http://fonts.googleapis.com/css?family=Vollkorn:400italic,400'
-		rel='stylesheet' type='text/css'>
-	<link
-		href='http://fonts.googleapis.com/css?family=Lato:400,400italic,900italic'
-		rel='stylesheet' type='text/css'>
+	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
 	<script
 		src="js/twitter.js"
 		type="text/javascript">
@@ -270,7 +265,7 @@
 							</p>
 							<!--  section -->
 							<section id="NewProject" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Creating A New Xtext Project</h2>
+							<h2>Creating A New Xtext Project</h2>
 							<p>
 								The first step is to create a new Xtext project by choosing <strong>File -&gt; New -&gt; Project...</strong>. The dialog
 								offers a couple of different project types. Select <strong>New Xtext Project</strong> from the category <strong>Xtext</strong> and
@@ -309,7 +304,7 @@ Hello World!</pre>
 							</section>
 							<!--  section -->
 							<section id="RunWorkflow" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Generating The Language Infrastructure</h2>
+							<h2>Generating The Language Infrastructure</h2>
 							<p>
 								In order to test drive this language, you will have to generate the respective language infrastructure.
 								Therefore, choose <strong>Run As -&gt; Generate Xtext Artifacts</strong> from the context menu of the grammar editor.
@@ -320,7 +315,7 @@ Hello World!</pre>
 							</section>
 							<!--  section -->
 							<section id="TestingTheEditor" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Try The Editor</h2>
+							<h2>Try The Editor</h2>
 							<p>
 								Let's give the editor a try. If you select <strong>Run As -&gt; Eclipse Application</strong> from the project's context menu, you can
 								create a new Eclipse Application. A new Eclipse instance will be launched and allows to test drive the
@@ -349,7 +344,7 @@ Hello World!</pre>
 							</section>
 							<!--  section -->
 							<section id="Conclusion" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Conclusion</h2>
+							<h2>Conclusion</h2>
 							<p>
 								In your first five minutes with Xtext, you have learned how to create a new set of projects. You have run
 								Xtext's code generation in order to get a fully working language infrastructure, and finally learned
@@ -406,7 +401,7 @@ entity Comment extends HasAuthor {
 							</p>
 							<!--  section -->
 							<section id="_0" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Create A New Xtext Project</h2>
+							<h2>Create A New Xtext Project</h2>
 							<p>
 								In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
 							</p>
@@ -465,7 +460,7 @@ entity Comment extends HasAuthor {
 							</section>
 							<!--  section -->
 							<section id="_1" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Write Your Own Grammar</h2>
+							<h2>Write Your Own Grammar</h2>
 							<p>
 								The wizard will automatically open the grammar file 
 								<strong>Domainmodel.xtext</strong> in the editor. As you can see that it already contains a simple <strong>Hello World</strong> grammar:
@@ -601,7 +596,7 @@ Feature:
 							</section>
 							<!--  section -->
 							<section id="_2" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Generate Language Artifacts</h2>
+							<h2>Generate Language Artifacts</h2>
 							<p>
 								Now that we have the grammar in place and defined we need to execute the code generator that will derive the
 								various language components. To do so, locate the file <strong>GenerateDomainmodel.mwe2</strong> file next to the grammar 
@@ -623,7 +618,7 @@ Feature:
 							</section>
 							<!--  section -->
 							<section id="_3" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Run the Generated IDE Plug-in</h2>
+							<h2>Run the Generated IDE Plug-in</h2>
 							<p>
 								We are now able to test the IDE integration. If you select <strong>Run -&gt; Run Configurations...</strong> from the Eclipse menu, you can
 								choose <strong>Eclipse Application -&gt; Launch Runtime Eclipse</strong>. This preconfigured launch shortcut already has appropriate
@@ -651,7 +646,7 @@ Feature:
 							</section>
 							<!--  section -->
 							<section id="_4" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Second Iteration: Adding Packages and Imports</h2>
+							<h2>Second Iteration: Adding Packages and Imports</h2>
 							<p>
 								After you have created the your first DSL and had a look at the editor, the language should be refined
 								and incrementally enhanced. The Domain Model language should support the notion of <strong>Package</strong>s in order to avoid name
@@ -976,7 +971,7 @@ Feature:
 							</p>
 							<!--  section -->
 							<section id="TutorialCodeGeneration" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Writing a Code Generator With Xtend</h2>
+							<h2>Writing a Code Generator With Xtend</h2>
 							<p>
 								As soon as you generate the Xtext artifacts for a grammar, a code generator stub will be put into the
 								runtime project of your language. Let's dive into Xtend and see how you can integrate your own code generator
@@ -1226,7 +1221,7 @@ class DomainmodelGenerator implements IGenerator {
 							</section>
 							<!--  section -->
 							<section id="TutorialUnitTests" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Unit Testing the Language</h2>
+							<h2>Unit Testing the Language</h2>
 							<p>
 								Automated tests are crucial for the maintainability and the quality of a software product. That is why
 								it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
@@ -1291,7 +1286,7 @@ def void parseDomainmodel() {
 							</section>
 							<!--  section -->
 							<section id="TutorialValidation" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Creating Custom Validation Rules</h2>
+							<h2>Creating Custom Validation Rules</h2>
 							<p>
 								One of the main advantages of DSLs is the possibility to statically validate domain specific constraints.
 								This can be achieved by means of static analysis. Because this is a common use case,
@@ -1412,7 +1407,7 @@ package my.model {
 							</p>
 							<!--  section -->
 							<section id="_5" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Step One: Create A New Xtext Project</h2>
+							<h2>Step One: Create A New Xtext Project</h2>
 							<p>
 								In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
 							</p>
@@ -1471,7 +1466,7 @@ package my.model {
 							</section>
 							<!--  section -->
 							<section id="_6" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Step Two: Write the Grammar</h2>
+							<h2>Step Two: Write the Grammar</h2>
 							<p>
 								The wizard will automatically open the grammar file 
 								<strong>Domainmodel.xtext</strong> in the editor. As you can see it already contains a simple <strong>Hello World</strong> grammar:
@@ -1659,7 +1654,7 @@ Operation:
 							</section>
 							<!--  section -->
 							<section id="_7" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Step Three: Generate Language Artifacts</h2>
+							<h2>Step Three: Generate Language Artifacts</h2>
 							<p>
 								Now that we have the grammar in place and defined we need to execute the code generator that will derive the
 								various language components. To do so right click in the grammar editor. From the opened context menu, choose
@@ -1680,7 +1675,7 @@ Operation:
 							</section>
 							<!--  section -->
 							<section id="_8" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Step Four: Define the Mapping to JVM Concepts</h2>
+							<h2>Step Four: Define the Mapping to JVM Concepts</h2>
 							<p>
 								The syntax alone is not enough to make the language work. We need to map the domain specific concepts to some other language
 								in order to tell Xtext how it is executed. Usually you define a code generator or an interpreter for that matter,
@@ -1875,7 +1870,7 @@ Operation : {
 							</section>
 							<!--  section -->
 							<section id="_9" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Step Five : Try the Editor!</h2>
+							<h2>Step Five : Try the Editor!</h2>
 							<p>
 								We are now able to test the IDE integration, by spawning a new Eclipse using our plug-ins. To do so just
 								use the launch shortcut called "Launch Runtime Eclipse", clicking on the green play button in the tool
@@ -1917,7 +1912,7 @@ Operation : {
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<!--  section -->
 							<section id="_10" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">What is Xtext?</h2>
+							<h2>What is Xtext?</h2>
 							<p>
 								No matter if you want to create a small textual domain-specific language (DSL) or you want to implement 
 								a full-blown general purpose programming language. 
@@ -1929,7 +1924,7 @@ Operation : {
 							</section>
 							<!--  section -->
 							<section id="_11" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">How Does It Work?</h2>
+							<h2>How Does It Work?</h2>
 							<p>
 								Xtext provides you with a set of domain-specific languages and modern APIs to describe the different 
 								aspects of your programming language. 
@@ -1951,7 +1946,7 @@ Operation : {
 							</section>
 							<!--  section -->
 							<section id="_12" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Xtext is Highly Configurable</h2>
+							<h2>Xtext is Highly Configurable</h2>
 							<p>
 								Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language 
 								as well as the IDE infrastructure. A central, external module is used to configure the DI container. 
@@ -1962,7 +1957,7 @@ Operation : {
 							</section>
 							<!--  section -->
 							<section id="_13" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Who Uses Xtext?</h2>
+							<h2>Who Uses Xtext?</h2>
 							<p>
 								Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, 
 								embedded systems or Java enterprise software projects and game development. 
@@ -1975,7 +1970,7 @@ Operation : {
 							</section>
 							<!--  section -->
 							<section id="_14" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Who is Behind Xtext?</h2>
+							<h2>Who is Behind Xtext?</h2>
 							<p>
 								Xtext is a professional Open-Source project. We, the main developers and the project lead, work for 
 								itemis, 
@@ -1994,7 +1989,7 @@ Operation : {
 							</section>
 							<!--  section -->
 							<section id="DSL" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">What is a Domain-Specific Language</h2>
+							<h2>What is a Domain-Specific Language</h2>
 							<p>
 								A <strong>Domain-Specific Language (DSL)</strong> is a small programming language, which focuses on a particular domain.
 								Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
@@ -2043,7 +2038,7 @@ Operation : {
 							</p>
 							<!--  section -->
 							<section id="statemachine" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">A First Example</h2>
+							<h2>A First Example</h2>
 							<p>
 								To get an idea of how it works we'll start by implementing a <a href="http://martinfowler.com/bliki/SyntacticNoise.html">simple example</a> 
 								introduced by Martin Fowler. It's mainly about describing state machines that are used as the (un)lock mechanism of secret compartments.
@@ -2153,7 +2148,7 @@ Transition :
 							</section>
 							<!--  section -->
 							<section id="syntax" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">The Syntax</h2>
+							<h2>The Syntax</h2>
 							<p>
 								In the following the different concepts and syntactical constructs of the grammar language are explained.
 							</p>
@@ -3409,7 +3404,7 @@ Condition:
 							</section>
 							<!--  section -->
 							<section id="metamodelInference" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Ecore Model Inference</h2>
+							<h2>Ecore Model Inference</h2>
 							<p>
 								The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST).
 							</p>
@@ -3564,7 +3559,7 @@ enum MyGeneratedEnum:
 							</section>
 							<!--  section -->
 							<section id="grammarMixins" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Grammar Mixins</h2>
+							<h2>Grammar Mixins</h2>
 							<p>
 								Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use 
 								<code class="prettyprint lang-xtext">org.eclipse.xtext.common.Terminals</code>
@@ -3643,7 +3638,7 @@ Workflow {
 							</section>
 							<!--  section -->
 							<section id="_15" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Common Terminals</h2>
+							<h2>Common Terminals</h2>
 							<p>
 								Xtext ships with a default set of predefined, reasonable and often required terminal rules. The grammar
 								for these common terminal rules is defined as follows:
@@ -3689,7 +3684,7 @@ terminal ANY_OTHER:
 							<hr style="margin-top: 5px; margin-bottom: 5px;">
 							<!--  section -->
 							<section id="generator" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">The Language Generator</h2>
+							<h2>The Language Generator</h2>
 							<p>
 								Xtext provides a lot of generic implementations for your language's
 								infrastructure but also uses code generation to generate some of the 
@@ -4002,7 +3997,7 @@ Workflow {
 							</section>
 							<!--  section -->
 							<section id="dependencyInjection" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Dependency Injection in Xtext with Google Guice</h2>
+							<h2>Dependency Injection in Xtext with Google Guice</h2>
 							<p>
 								All Xtext components are assembled by means of Dependency Injection (DI). This means basically that
 								whenever some code is in need for functionality (or state) from another component, one just declares
@@ -4222,7 +4217,7 @@ public static void main(String[] args) {
 							</p>
 							<!--  section -->
 							<section id="runtimeSetup" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Runtime Setup (ISetup)</h2>
+							<h2>Runtime Setup (ISetup)</h2>
 							<p>
 								For each language there is an implementation of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/ISetup.html"><abbr title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java">(src)</a> 
 								generated. It implements a method called <code class="prettyprint lang-java">createInjectorAndDoEMFRegistration()</code>, which can be called 
@@ -4243,7 +4238,7 @@ public static void main(String[] args) {
 							</section>
 							<!--  section -->
 							<section id="equinoxSetup" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Setup within Eclipse-Equinox (OSGi)</h2>
+							<h2>Setup within Eclipse-Equinox (OSGi)</h2>
 							<p>
 								Within Eclipse we have a generated <strong>Activator</strong>, which creates a Guice <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html"><abbr title="com.google.inject.Injector">Injector</abbr></a>
 								using the <a href="#guicemodules">modules</a>. In addition an <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html"><abbr title="org.eclipse.core.runtime.IExecutableExtensionFactory">IExecutableExtensionFactory</abbr></a> 
@@ -4275,7 +4270,7 @@ public static void main(String[] args) {
 							</section>
 							<!--  section -->
 							<section id="_16" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Logging</h2>
+							<h2>Logging</h2>
 							<p>
 								Xtext uses Apache's log4j for logging. It is configured using files named <strong>log4j.properties</strong>, which are looked up 
 								in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGi), all 
@@ -4289,7 +4284,7 @@ public static void main(String[] args) {
 							</section>
 							<!--  section -->
 							<section id="validation" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Validation</h2>
+							<h2>Validation</h2>
 							<p>
 								Static analysis or validation is one of the most interesting aspects when developing a programming
 								language. The users of your languages will be grateful if they get informative feedback as they type. 
@@ -4639,7 +4634,7 @@ public class MyLanguageValidatorTest extends AbstractXtextTests {
 							</section>
 							<!--  section -->
 							<section id="linking" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Linking</h2>
+							<h2>Linking</h2>
 							<p>
 								The linking feature allows for specification of cross-references within an Xtext grammar.
 								The following things are needed for the linking:
@@ -4731,7 +4726,7 @@ ReferringType :
 							</section>
 							<!--  section -->
 							<section id="scoping" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Scoping</h2>
+							<h2>Scoping</h2>
 							<p>
 								Using the scoping API one defines which elements are referable by a certain reference. For instance, 
 								using the introductory example (Fowler's state machine language)
@@ -5445,7 +5440,7 @@ package bar {
 							</section>
 							<!--  section -->
 							<section id="valueconverter" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Value Converter</h2>
+							<h2>Value Converter</h2>
 							<p>
 								Value converters are registered to convert the parsed text into a data type instance and vice versa.
 								The primary hook is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/conversion/IValueConverterService.html"><abbr title="org.eclipse.xtext.conversion.IValueConverterService">IValueConverterService</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java">(src)</a> 
@@ -5505,7 +5500,7 @@ public IValueConverter&lt;MyDataType&gt; getMyRuleNameConverter() {
 							</section>
 							<!--  section -->
 							<section id="serialization" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Serialization</h2>
+							<h2>Serialization</h2>
 							<p>
 								Serialization is the process of transforming an EMF model into its textual representation. Thereby, 
 								serialization complements parsing and lexing.
@@ -5797,7 +5792,7 @@ public interface ITokenStream {
 							</section>
 							<!--  section -->
 							<section id="formatting" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Formatting (Pretty Printing)</h2>
+							<h2>Formatting (Pretty Printing)</h2>
 							<p>
 								A formatter can be implemented via the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/formatting/IFormatter.html"><abbr title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">(src)</a> 
 								service. Technically speaking, a formatter is a <a href="#tokenstream">Token Stream</a> which 
@@ -5991,7 +5986,7 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
 							</section>
 							<!--  section -->
 							<section id="fragmentProvider" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</h2>
+							<h2>Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</h2>
 							<p>
 								Although inter-Xtext linking is not done by URIs, you may want to be able to reference your <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_8_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> 
 								from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource 
@@ -6071,7 +6066,7 @@ public QualifiedNameFragmentProvider implements IFragmentProvider {
 							</section>
 							<!--  section -->
 							<section id="encoding" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Encoding in Xtext</h2>
+							<h2>Encoding in Xtext</h2>
 							<p>
 								Encoding, aka <strong>character set</strong>, describes the way characters are encoded into bytes and vice versa. 
 								Famous standard encodings are <strong>UTF-8</strong> or <strong>ISO-8859-1</strong>. The list of available encodings can be determined
@@ -6232,7 +6227,7 @@ myXtextResource.save(options);</pre>
 							</p>
 							<!--  section -->
 							<section id="labelProvider" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Label Provider</h2>
+							<h2>Label Provider</h2>
 							<p>
 								There are various places in the UI in which model elements have to be presented to the user: In the 
 								<a href="#outline">outline view</a>, in <a href="#hyperlinking">hyperlinks</a>, in <a href="#contentAssist">content proposals</a>, 
@@ -6390,7 +6385,7 @@ public void configureResourceUIServiceLabelProvider(Binder binder) {
 							</section>
 							<!--  section -->
 							<section id="contentAssist" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Content Assist</h2>
+							<h2>Content Assist</h2>
 							<p>
 								The Xtext generator, amongst other things, generates the following two content assist related artifacts:
 							</p>
@@ -6469,7 +6464,7 @@ public void completeEvent_Code(
 							</section>
 							<!--  section -->
 							<section id="quickfixes" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Quick Fixes</h2>
+							<h2>Quick Fixes</h2>
 							<p>
 								For validations written using the <a href="#custom_validation">AbstractDeclarativeValidator</a> 
 								it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix 
@@ -6591,7 +6586,7 @@ public void fixFeatureName(final Issue issue,
 							</section>
 							<!--  section -->
 							<section id="templates" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Template Proposals</h2>
+							<h2>Template Proposals</h2>
 							<p>
 								Xtext-based editors automatically support code templates. That means that you get the corresponding 
 								preference page where users can add and change template proposals. If you want to ship a couple of 
@@ -6710,7 +6705,7 @@ ${public:Enum('Visibility')} entity ${Name} {
 							</section>
 							<!--  section -->
 							<section id="outline" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Outline View</h2>
+							<h2>Outline View</h2>
 							<p>
 								Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
 								view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
@@ -6987,7 +6982,7 @@ public Class&lt;? extends IComparator&gt;
 							</section>
 							<!--  section -->
 							<section id="hyperlinking" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Hyperlinking</h2>
+							<h2>Hyperlinking</h2>
 							<p>
 								The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your 
 								grammar definition. You can either <strong>CTRL-click</strong> on any of these tokens or hit <strong>F3</strong> 
@@ -7063,7 +7058,7 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 							</section>
 							<!--  section -->
 							<section id="highlighting" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Syntax Coloring</h2>
+							<h2>Syntax Coloring</h2>
 							<p>
 								Besides the already mentioned advanced features like <a href="#contentAssist">content assist</a>  and 
 								<a href="#formatting">code formatting</a> the powerful 
@@ -7239,7 +7234,7 @@ public class HighlightingConfiguration
 							</section>
 							<!--  section -->
 							<section id="refactoring" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Rename Refactoring</h2>
+							<h2>Rename Refactoring</h2>
 							<p>
 								Xtext provides rename refactoring of the elements in your langauge. That includes
 							</p>
@@ -7343,7 +7338,7 @@ fragment = refactoring.RefactorElementNameFragment {}</pre>
 							</p>
 							<!--  section -->
 							<section id="_17" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Plug-in Setup</h2>
+							<h2>Plug-in Setup</h2>
 							<p>
 								In the following, we are going to use the JVM types model and the Xbase language library. Have a look at your 
 								MWE2 workflow and make sure that 
@@ -7384,7 +7379,7 @@ fragment = xbase.XbaseGeneratorFragment {}</pre>
 							</section>
 							<!--  section -->
 							<section id="jvmtypes" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Referring to Java Elements using JVM Types</h2>
+							<h2>Referring to Java Elements using JVM Types</h2>
 							<p>
 								A common case when developing languages is the requirement to refer to existing concepts of other 
 								languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful
@@ -7469,7 +7464,7 @@ datatype Date mapped-to java.util.Date</pre>
 							</section>
 							<!--  section -->
 							<section id="xbaseJavaReferences" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Referring to Java Types Using Xbase</h2>
+							<h2>Referring to Java Types Using Xbase</h2>
 							<p>
 								While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite
 								limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
@@ -7622,7 +7617,7 @@ class DomainmodelGenerator implements IGenerator {
 							</section>
 							<!--  section -->
 							<section id="xbaseInferredType" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Inferring a JVM Model</h2>
+							<h2>Inferring a JVM Model</h2>
 							<p>
 								In many cases, you will want your DSLs concepts to be usable as Java elements. E.g. an <strong>Entity</strong> will
 								become a Java class and should be usable as such. In the domain model example, you can write
@@ -7722,7 +7717,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 							</section>
 							<!--  section -->
 							<section id="xbaseExpressions" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Using Xbase Expressions</h2>
+							<h2>Using Xbase Expressions</h2>
 							<p>
 								Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java,
 								but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details
@@ -7859,7 +7854,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
 							</section>
 							<!--  section -->
 							<section id="xbaseLanguageRef_Introduction" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Xbase Language Reference</h2>
+							<h2>Xbase Language Reference</h2>
 							<p>
 								This document describes the expression language library Xbase. Xbase is a partial programming language
 								implemented in Xtext and is meant to be embedded and extended within other programming languages and 
@@ -9384,7 +9379,7 @@ html [
 							</p>
 							<!--  section -->
 							<section id="MWE2Exampe" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Examples</h2>
+							<h2>Examples</h2>
 							<p>
 								Let's start with a couple of examples to demonstrate some usage 
 								scenarios for MWE2. The first example is a simple <code class="prettyprint lang-mwe2">HelloWorld</code> 
@@ -9679,7 +9674,7 @@ Workflow {
 							</section>
 							<!--  section -->
 							<section id="MWE2LanguageReference" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Language Reference</h2>
+							<h2>Language Reference</h2>
 							<p>
 								MWE2 has a few well defined concepts which can be combined to 
 								assemble arbitrary object graphs in a compact and declarative 
@@ -9991,7 +9986,7 @@ SampleClass auto-inject {
 							</section>
 							<!--  section -->
 							<section id="MWE2SyntaxReference" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Syntax Reference</h2>
+							<h2>Syntax Reference</h2>
 							<p>
 								The following chapter serves as a reference for the concrete syntax of 
 								MWE2. The building blocks of a module will be described in a few words.
@@ -10243,7 +10238,7 @@ var anotherString = 'It is possible to embed ${aString} into
 							</p>
 							<!--  section -->
 							<section id="model_metamodel" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Model, Ecore Model, and Ecore</h2>
+							<h2>Model, Ecore Model, and Ecore</h2>
 							<p>
 								Xtext uses EMF models as the in-memory representation of any parsed text files. This in-memory 
 								object graph is called the <strong>Abstract Syntax Tree</strong> (AST). Depending on the community this concepts is 
@@ -10325,7 +10320,7 @@ var anotherString = 'It is possible to embed ${aString} into
 							</section>
 							<!--  section -->
 							<section id="emf_codegen" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">EMF Code Generation</h2>
+							<h2>EMF Code Generation</h2>
 							<p>
 								EMF also ships with a code generator that generates Java classes from your Ecore model. The code 
 								generators input is the so called <strong>EMF generator model</strong>. It decorates (references) the Ecore model 
@@ -10357,7 +10352,7 @@ var anotherString = 'It is possible to embed ${aString} into
 							</section>
 							<!--  section -->
 							<section id="xtext_resource" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">XtextResource Implementation</h2>
+							<h2>XtextResource Implementation</h2>
 							<p>
 								Xtext provides an implementation of EMF's resource, the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/resource/XtextResource.html"><abbr title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a>. 
 								This does not only encapsulate the parser that converts text to an EMF model but also the 
@@ -10437,7 +10432,7 @@ var anotherString = 'It is possible to embed ${aString} into
 							</section>
 							<!--  section -->
 							<section id="gmf_integration" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Integration with GMF Editors</h2>
+							<h2>Integration with GMF Editors</h2>
 							<p>
 								We do no longer maintain the GMF example code and have removed it from our installation. You can still 
 								access the last version of the source code form our  
@@ -10662,7 +10657,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 							</p>
 							<!--  section -->
 							<section id="_18" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Take the Shortcut</h2>
+							<h2>Take the Shortcut</h2>
 							<p>
 								If you haven't made too many customizations to the generated defaults and if you're not referencing many 
 								classes of your Xtext language from the outside, you might consider starting with a new Xtext project, 
@@ -10672,7 +10667,7 @@ Required Plugins -&gt; "org.eclipse.xtext.gmf.glue"</pre>
 							</section>
 							<!--  section -->
 							<section id="_19" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Migrating Step By Step</h2>
+							<h2>Migrating Step By Step</h2>
 							<p>
 								Before you start the migration to Xtext 2.0, you should make sure that no old plug-ins are in your target platform.
 							</p>
@@ -10893,7 +10888,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 							</section>
 							<!--  section -->
 							<section id="_20" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Now go for then new features</h2>
+							<h2>Now go for then new features</h2>
 							<p>
 								After migrating, some of the new features in Xtext 2.0 will be automatically available. Others require further configuration.
 								We recommend exploring
@@ -10936,7 +10931,7 @@ public Class&lt;? extends AbstractEditStrategyProvider&gt;
 							</p>
 							<!--  section -->
 							<section id="_21" style="margin-top: 20px; padding-top: 0;">
-							<h2 style="font-weight: normal;">Migrating Step By Step</h2>
+							<h2>Migrating Step By Step</h2>
 							<p>
 								Once again, you should make sure that no old plug-ins are in your target platform. Some plug-ins from 
 								Xtext 0.7.x have been merged and do no longer exist.

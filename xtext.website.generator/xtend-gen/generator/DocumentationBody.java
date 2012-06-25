@@ -85,7 +85,7 @@ public class DocumentationBody extends Body {
     _builder.append(_href, "");
     _builder.append("\" style=\"margin-top: 20px; padding-top: 0;\">");
     _builder.newLineIfNotEmpty();
-    _builder.append("<h2 style=\"font-weight: normal;\">");
+    _builder.append("<h2>");
     TextOrMarkup _title = section.getTitle();
     CharSequence _htmlText = this._htmlExtensions.toHtmlText(_title);
     _builder.append(_htmlText, "");
