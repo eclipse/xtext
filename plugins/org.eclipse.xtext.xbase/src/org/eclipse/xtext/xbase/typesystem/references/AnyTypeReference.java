@@ -33,7 +33,7 @@ public class AnyTypeReference extends LightweightTypeReference {
 
 	@Override
 	public String toString() {
-		return "<null>";
+		return "null";
 	}
 	
 	@Override

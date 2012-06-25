@@ -8,9 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
-import java.util.Set;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -21,13 +19,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 
-import com.google.common.collect.Sets;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitutor {
+public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitutor<ConstraintVisitingInfo> {
 
 	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping,
 			CommonTypeComputationServices services) {
@@ -35,11 +31,13 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	}
 	
 	@Override
-	public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, ConstraintVisitingInfo visiting) {
 		JvmType type = reference.getType();
 		if (type instanceof JvmTypeParameter) {
-			if (!visiting.add((JvmTypeParameter) type)) {
-				return null;
+			if (!visiting.tryVisit((JvmTypeParameter) type)) {
+				JvmTypeReference mappedReference = getDeclaredUpperBound((JvmType) visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+				getTypeParameterMapping().put((JvmTypeParameter)type, new MergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+				return mappedReference;
 			}
 			try {
 				MergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
@@ -70,23 +68,21 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 					}
 				}
 			} finally {
-				visiting.remove(type);
+				visiting.didVisit((JvmTypeParameter) type);
 			}
 		}
 		JvmParameterizedTypeReference result = getServices().getTypesFactory().createJvmParameterizedTypeReference();
 		result.setType(type);
 		for(int i = 0; i < reference.getArguments().size(); i++) {
 			JvmTypeReference argument = reference.getArguments().get(i);
+			visiting.pushInfo((JvmTypeParameterDeclarator) type, i);
 			JvmTypeReference copiedArgument = visit(argument, visiting);
-			if (copiedArgument == null) {
-				copiedArgument = getDeclaredUpperBound(type, i, visiting);
-			}
 			result.getArguments().add(copiedArgument);
 		}
 		return result;
 	}
 
-	protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
+	protected JvmTypeReference getUnmappedSubstitute(JvmParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
 		ConstraintAwareTypeArgumentCollector collector = new ConstraintAwareTypeArgumentCollector(getServices().getTypesFactory());
 		TraversalData data = new TraversalData();
 		data.getTypeParameterMapping().putAll(getTypeParameterMapping());
@@ -100,7 +96,7 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 		return null;
 	}
 	
-	protected JvmTypeReference getDeclaredUpperBound(JvmType type, int parameterIndex, Set<JvmTypeParameter> visiting) {
+	protected JvmTypeReference getDeclaredUpperBound(JvmType type, int parameterIndex, ConstraintVisitingInfo visiting) {
 		JvmTypeReference result = null;
 		if (type instanceof JvmTypeParameterDeclarator) {
 			JvmTypeParameterDeclarator typeParameterDeclarator = (JvmTypeParameterDeclarator) type;
@@ -121,23 +117,13 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	}
 	
 	@Override
-	public JvmTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference,
-			Set<JvmTypeParameter> visiting) {
-		JvmWildcardTypeReference result = getServices().getTypesFactory().createJvmWildcardTypeReference();
-		for(JvmTypeConstraint constraint: reference.getConstraints()) {
-			JvmTypeReference copiedConstraintReference = visit(constraint.getTypeReference(), visiting);
-			if (copiedConstraintReference == null)
-				return null;
-			JvmTypeConstraint copiedConstraint = (JvmTypeConstraint) EcoreUtil.create(constraint.eClass());
-			copiedConstraint.setTypeReference(copiedConstraintReference);
-			result.getConstraints().add(copiedConstraint);
-		}
+	public JvmTypeReference substitute(JvmTypeReference original) {
+		JvmTypeReference result = visit(original, createVisiting());
 		return result;
 	}
 
 	@Override
-	public JvmTypeReference substitute(JvmTypeReference original) {
-		JvmTypeReference result = visit(original, Sets.<JvmTypeParameter>newHashSet());
-		return result;
+	protected ConstraintVisitingInfo createVisiting() {
+		return new ConstraintVisitingInfo();
 	}
 }

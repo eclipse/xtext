@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -460,7 +461,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer {
 				public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 					DeclaratorTypeArgumentCollector typeArgumentCollector = new DeclaratorTypeArgumentCollector();
 					Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
-					TypeParameterSubstitutor substitutor = new TypeParameterSubstitutor(typeParameterMapping, services);
+					TypeParameterSubstitutor<?> substitutor = new StandardTypeParameterSubstitutor(typeParameterMapping, services);
 					JvmTypeReference iterableWithTypeParam = getTypeReferences().getTypeForName(Iterable.class, object);
 					JvmTypeReference substitutedIterable = substitutor.substitute(iterableWithTypeParam);
 					if (substitutedIterable instanceof JvmParameterizedTypeReference) {

@@ -7,18 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util
 
+import com.google.inject.Inject
 import java.util.Map
 import java.util.Set
 import org.eclipse.xtend.lib.Data
+import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.util.TypeReferences
-import com.google.inject.Inject
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer
-import org.eclipse.xtext.xtype.XtypeFactory
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.Primitives
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xtype.XtypeFactory
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -85,4 +87,37 @@ class CommonTypeComputationServices {
 	@Inject(optional = true)
 	@Property
 	TypesFactory typesFactory = TypesFactory::eINSTANCE;
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO JavaDoc
+ */
+class ConstraintVisitingInfo {
+	Set<JvmTypeParameter> visiting
+	JvmTypeParameterDeclarator declarator
+	int idx
+	
+	new() {
+		visiting = newHashSet
+	}
+	new(JvmTypeParameter initial) {
+		visiting = newHashSet(initial)
+	}
+	def boolean tryVisit(JvmTypeParameter parameter) {
+		return visiting.add(parameter);
+	}
+	def void didVisit(JvmTypeParameter parameter) {
+		visiting.remove(parameter);
+	}
+	def void pushInfo(JvmTypeParameterDeclarator declarator, int idx) {
+		this.declarator = declarator;
+		this.idx = idx;
+	}
+	def getCurrentDeclarator() {
+		return declarator
+	}
+	def getCurrentIndex() {
+		return idx
+	}
 }

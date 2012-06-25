@@ -10,33 +10,20 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
-public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor<Object> {
-	
-	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping,
+public class StandardTypeParameterSubstitutor extends TypeParameterSubstitutor<Object> {
+
+	public StandardTypeParameterSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping,
 			CommonTypeComputationServices services) {
 		super(typeParameterMapping, services);
-	}
-
-	@Override
-	public JvmTypeReference doVisitComputedTypeReference(XComputedTypeReference reference,
-			Object param) {
-		if (UnboundTypeParameters.isUnboundTypeParameter(reference)) {
-			XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-			result.setTypeProvider(reference.getTypeProvider());
-			return result;
-		}
-		return super.doVisitComputedTypeReference(reference, param);
 	}
 
 	@Override
 	protected Object createVisiting() {
 		return new Object();
 	}
+
 }

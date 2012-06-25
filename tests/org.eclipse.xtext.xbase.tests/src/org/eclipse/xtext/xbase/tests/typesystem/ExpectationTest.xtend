@@ -22,6 +22,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeComputationState
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -182,7 +183,7 @@ class ExpectationTestingTypeComputer extends XbaseTypeComputer {
 	@Property
 	ExpectationTest test
 	
-	override protected _computeTypes(XNullLiteral object, ITypeComputationState state) {
+	override protected _computeTypes(XNullLiteral object, LightweightTypeComputationState state) {
 		test.recordExpectation(state)
 		super._computeTypes(object, state)
 	}

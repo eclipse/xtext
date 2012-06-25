@@ -62,7 +62,7 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 		 * e.g. MyList extends AbstractList implements List<String> {}
 		 * the implements clause seems to be redundant but provides more reliable information
 		 */
-		if (type != null && !type.eIsProxy() && data.getVisited().add(type)) {
+		if (!type.eIsProxy() && data.getVisited().add(type)) {
 			return doVisitParameterizedTypeReference(reference, type, data);
 		}
 		return Boolean.FALSE;
