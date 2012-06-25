@@ -100,9 +100,9 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		protected void doVisitSuperTypesWithMatchingParams(ParameterizedTypeReference reference,
 				ParameterizedTypeReference declaration) {
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> actualMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(reference);
-			TypeParameterSubstitutor actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
+			TypeParameterSubstitutor<?> actualSubstitutor = createTypeParameterSubstitutor(actualMapping);
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaredMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration);
-			TypeParameterSubstitutor declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
+			TypeParameterSubstitutor<?> declaredSubstitutor = createTypeParameterSubstitutor(declaredMapping);
 			Set<JvmTypeParameter> actualBoundParameters = actualMapping.keySet();
 			Set<JvmTypeParameter> visited = Sets.newHashSet();
 			for (JvmTypeParameter actualBoundParameter : actualBoundParameters) {
@@ -259,8 +259,8 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		return owner;
 	}
 
-	protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
-		return new TypeParameterSubstitutor(mapping, owner);
+	protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping) {
+		return new StandardTypeParameterSubstitutor(mapping, owner);
 	}
 	
 	@Nullable

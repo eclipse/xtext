@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeParameterSubstitutor
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 
 /**
  * @author Sebastian Zarnekow
@@ -21,8 +21,8 @@ public class TypeParameterSubstitutorTest extends AbstractTypeParameterSubstitut
   public String resolve(final JvmTypeReference declaration, final JvmTypeReference reference) {
     DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
     final Map<JvmTypeParameter,MergedBoundTypeArgument> mapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(declaration);
-    TypeParameterSubstitutor _typeParameterSubstitutor = new TypeParameterSubstitutor(mapping, this.services);
-    JvmTypeReference _substitute = _typeParameterSubstitutor.substitute(reference);
+    StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, this.services);
+    JvmTypeReference _substitute = _standardTypeParameterSubstitutor.substitute(reference);
     return _substitute.getSimpleName();
   }
 }

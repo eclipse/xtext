@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -16,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,7 +22,7 @@ import com.google.common.collect.Sets;
  * TODO implement as member function on LightweightTypeReference
  */
 @NonNullByDefault
-public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterAndNonNullResult<Set<JvmTypeParameter>, LightweightTypeReference> {
+public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVisitorWithParameterAndNonNullResult<Visiting, LightweightTypeReference> {
 		
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	private final TypeReferenceOwner owner;
@@ -47,7 +45,7 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 	}
 	
 	@Override
-	protected LightweightTypeReference doVisitFunctionTypeReference(FunctionTypeReference reference, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference doVisitFunctionTypeReference(FunctionTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		FunctionTypeReference result = new FunctionTypeReference(getOwner(), reference.getType());
@@ -65,7 +63,7 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 	}
 	
 	@Override
-	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		JvmType type = reference.getType();
@@ -83,7 +81,7 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 
 	@Nullable
 	protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
-			Set<JvmTypeParameter> visiting) {
+			Visiting visiting) {
 		LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
 		if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
 			return boundTypeArgument.getTypeReference().accept(this, visiting);
@@ -92,7 +90,7 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 	}
 		
 	@Override
-	protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		WildcardTypeReference result = new WildcardTypeReference(getOwner());
@@ -107,7 +105,7 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 	}
 	
 	@Override
-	protected LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		LightweightTypeReference component = reference.getComponentType().accept(this, visiting);
@@ -115,12 +113,12 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 	}
 	
 	@Override
-	protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference, Visiting visiting) {
 		return reference;
 	}
 	
 	@Override
-	protected LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		CompoundTypeReference result = new CompoundTypeReference(getOwner(), reference.isSynonym());
@@ -133,6 +131,8 @@ public class TypeParameterSubstitutor extends TypeReferenceVisitorWithParameterA
 	public LightweightTypeReference substitute(LightweightTypeReference original) {
 		if (typeParameterMapping.isEmpty())
 			return original;
-		return original.accept(this, Sets.<JvmTypeParameter>newHashSet());
+		return original.accept(this, createVisiting());
 	}
+	
+	protected abstract Visiting createVisiting();
 }

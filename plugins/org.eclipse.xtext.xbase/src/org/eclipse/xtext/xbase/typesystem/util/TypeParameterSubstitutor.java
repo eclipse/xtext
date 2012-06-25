@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -27,13 +26,12 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitorWithParameter;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithParameter<Set<JvmTypeParameter>, JvmTypeReference> {
+public abstract class TypeParameterSubstitutor<Visiting> extends AbstractXtypeReferenceVisitorWithParameter<Visiting, JvmTypeReference> {
 		
 	private final Map<JvmTypeParameter, MergedBoundTypeArgument> typeParameterMapping;
 	private final CommonTypeComputationServices services;
@@ -52,7 +50,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 	
 	@Override
-	protected JvmTypeReference handleNullReference(Set<JvmTypeParameter> visiting) {
+	protected JvmTypeReference handleNullReference(Visiting visiting) {
 		return null;
 	}
 	
@@ -61,7 +59,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 	
 	@Override
-	public JvmTypeReference doVisitFunctionTypeReference(XFunctionTypeRef reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitFunctionTypeReference(XFunctionTypeRef reference, Visiting visiting) {
 		XFunctionTypeRef result = services.getXtypeFactory().createXFunctionTypeRef();
 		JvmTypeReference equivalent = (JvmTypeReference) reference.eGet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, false);
 		if (equivalent != null)
@@ -76,7 +74,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 	
 	@Override
-	public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, Visiting visiting) {
 		JvmType type = reference.getType();
 		if (type instanceof JvmTypeParameter) {
 			MergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
@@ -97,7 +95,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 
 	protected JvmTypeReference getBoundTypeArgument(JvmParameterizedTypeReference reference, JvmTypeParameter type,
-			Set<JvmTypeParameter> visiting) {
+			Visiting visiting) {
 		MergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
 		if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
 			JvmTypeReference result = visit(boundTypeArgument.getTypeReference(), visiting);
@@ -109,7 +107,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 		
 	@Override
-	public JvmTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitWildcardTypeReference(JvmWildcardTypeReference reference, Visiting visiting) {
 		JvmWildcardTypeReference result = services.getTypesFactory().createJvmWildcardTypeReference();
 		for (JvmTypeConstraint constraint : reference.getConstraints()) {
 			JvmTypeReference copiedConstraintReference = visit(constraint.getTypeReference(), visiting);
@@ -121,19 +119,19 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 	
 	@Override
-	public JvmTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, Visiting visiting) {
 		JvmTypeReference copiedComponent = visit(reference.getComponentType(), visiting);
 		JvmGenericArrayTypeReference result = services.getTypesFactory().createJvmGenericArrayTypeReference();
 		result.setComponentType(copiedComponent);
 		return result;
 	}
 	@Override
-	public JvmTypeReference doVisitAnyTypeReference(JvmAnyTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitAnyTypeReference(JvmAnyTypeReference reference, Visiting visiting) {
 		return services.getTypesFactory().createJvmAnyTypeReference();
 	}
 	
 	@Override
-	public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference reference, Visiting visiting) {
 		JvmMultiTypeReference result = services.getTypesFactory().createJvmMultiTypeReference();
 		for(JvmTypeReference component: reference.getReferences()) {
 			result.getReferences().add(visit(component, visiting));
@@ -142,7 +140,7 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 
 	@Override
-	public JvmTypeReference doVisitSynonymTypeReference(JvmSynonymTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitSynonymTypeReference(JvmSynonymTypeReference reference, Visiting visiting) {
 		JvmSynonymTypeReference result = services.getTypesFactory().createJvmSynonymTypeReference();
 		for(JvmTypeReference component: reference.getReferences()) {
 			result.getReferences().add(visit(component, visiting));
@@ -151,14 +149,16 @@ public class TypeParameterSubstitutor extends AbstractXtypeReferenceVisitorWithP
 	}
 
 	@Override
-	public JvmTypeReference doVisitUnknownTypeReference(JvmUnknownTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public JvmTypeReference doVisitUnknownTypeReference(JvmUnknownTypeReference reference, Visiting visiting) {
 		return services.getTypesFactory().createJvmUnknownTypeReference();
 	}
 	
 	public JvmTypeReference substitute(JvmTypeReference original) {
 		if (typeParameterMapping.isEmpty())
 			return original;
-		JvmTypeReference result = visit(original, Sets.<JvmTypeParameter>newHashSet());
+		JvmTypeReference result = visit(original, createVisiting());
 		return result;
 	}
+
+	protected abstract Visiting createVisiting();
 }

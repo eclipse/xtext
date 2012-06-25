@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API 
@@ -107,7 +106,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 						if (!result.containsKey(constraintType)) {
 							if (!getParametersToProcess().contains(constraintType)) {
 								Map<JvmTypeParameter, MergedBoundTypeArgument> constraintParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(constraintReference);
-								JvmTypeReference resolvedConstraint = new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getServices()).visit(constraintReference, Sets.newHashSet(pendingParameter));
+								JvmTypeReference resolvedConstraint = new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getServices()).visit(constraintReference, new ConstraintVisitingInfo(pendingParameter));
 								result.put(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter));
 							} else {
 								result.put(pendingParameter, boundByConstraint(getServices().getTypeReferences().getTypeForName(Object.class, pendingParameter), pendingParameter));

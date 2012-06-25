@@ -9,11 +9,11 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor
 
 /**
  * @author Sebastian Zarnekow
@@ -24,7 +24,7 @@ class TypeParameterSubstitutorTest extends AbstractTypeParameterSubstitutorTest 
 	
 	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
 		val mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration)
-		return new TypeParameterSubstitutor(mapping, services).substitute(reference).simpleName
+		return new StandardTypeParameterSubstitutor(mapping, services).substitute(reference).simpleName
 	}
 	
 }
@@ -40,7 +40,7 @@ class LightweightTypeParameterSubstitutorTest extends AbstractTypeParameterSubst
 	
 	override resolve(JvmTypeReference declaration, JvmTypeReference reference) {
 		val mapping = new org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentCollector().getTypeParameterMapping(declaration.toLightweightReference)
-		return new org.eclipse.xtext.xbase.typesystem.references.TypeParameterSubstitutor(mapping, this).substitute(reference.toLightweightReference).toString
+		return new org.eclipse.xtext.xbase.typesystem.references.StandardTypeParameterSubstitutor(mapping, this).substitute(reference.toLightweightReference).toString
 	}
 
 	override getServices() {

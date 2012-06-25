@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -17,16 +16,15 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
-
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitutor {
+public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitutor<ConstraintVisitingInfo> {
 
 	public TypeParameterByConstraintSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			TypeReferenceOwner owner) {
@@ -34,13 +32,16 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 	}
 	
 	@Override
-	public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, Set<JvmTypeParameter> visiting) {
+	public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ConstraintVisitingInfo visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		JvmType type = reference.getType();
 		if (type instanceof JvmTypeParameter) {
-			if (!visiting.add((JvmTypeParameter) type)) {
-				return reference;
+			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+			if (!visiting.tryVisit(typeParameter)) {
+				LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+				getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
+				return mappedReference;
 			}
 			try {
 				LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
@@ -66,25 +67,21 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 					}
 				}
 			} finally {
-				visiting.remove(type);
+				visiting.didVisit(typeParameter);
 			}
 		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
 		for(int i = 0; i < reference.getTypeArguments().size(); i++) {
 			LightweightTypeReference argument = reference.getTypeArguments().get(i);
+			visiting.pushInfo(type instanceof JvmTypeParameterDeclarator ? (JvmTypeParameterDeclarator) type : null, i);
 			LightweightTypeReference visitedArgument = argument.accept(this, visiting);
-			if (visitedArgument.getType() instanceof JvmTypeParameter && type instanceof JvmTypeParameterDeclarator) {
-				visitedArgument = getDeclaredUpperBound((JvmTypeParameterDeclarator) type, i, visiting);
-			} else if (visitedArgument instanceof WildcardTypeReference && !visitedArgument.isResolved()) {
-				visitedArgument = getDeclaredUpperBound((JvmTypeParameterDeclarator) type, i, visiting);
-			}
 			result.addTypeArgument(visitedArgument);
 		}
 		return result;
 	}
 	
 	@Nullable
-	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
 		ConstraintAwareTypeArgumentCollector collector = new ConstraintAwareTypeArgumentCollector(getOwner());
 		LightweightTraversalData data = new LightweightTraversalData();
 		data.getTypeParameterMapping().putAll(getTypeParameterMapping());
@@ -98,7 +95,7 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 		return null;
 	}
 	
-	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameterDeclarator type, int parameterIndex, Set<JvmTypeParameter> visiting) {
+	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameterDeclarator type, int parameterIndex, ConstraintVisitingInfo visiting) {
 		if (type.getTypeParameters().size() > parameterIndex) {
 			JvmTypeParameter typeParameter = type.getTypeParameters().get(parameterIndex);
 			if (!typeParameter.getConstraints().isEmpty()) {
@@ -109,14 +106,18 @@ public class TypeParameterByConstraintSubstitutor extends TypeParameterSubstitut
 				}
 			}
 		}
-		
 		JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, type);
 		return new ParameterizedTypeReference(getOwner(), objectType);
 	}
 	
 	@Override
 	public LightweightTypeReference substitute(LightweightTypeReference original) {
-		LightweightTypeReference result = original.accept(this, Sets.<JvmTypeParameter>newHashSet());
+		LightweightTypeReference result = original.accept(this, createVisiting());
 		return result;
+	}
+	
+	@Override
+	protected ConstraintVisitingInfo createVisiting() {
+		return new ConstraintVisitingInfo();
 	}
 }

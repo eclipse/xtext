@@ -78,7 +78,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	}
 	
 	@Override
-	protected TypeParameterSubstitutor createTypeParameterSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
+	protected TypeParameterSubstitutor<?> createTypeParameterSubstitutor(Map<JvmTypeParameter, MergedBoundTypeArgument> mapping) {
 		return new UnboundTypeParameterPreservingSubstitutor(mapping, getServices());
 	}
 

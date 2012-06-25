@@ -31,6 +31,9 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	
 	protected ParameterizedTypeReference(TypeReferenceOwner owner, JvmType type) {
 		super(owner);
+		if (type == null) {
+			throw new NullPointerException("type may not be null");
+		}
 		this.type = type;
 		// TODO check against owner
 		this.resolved = !(type instanceof JvmTypeParameter);

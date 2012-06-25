@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -113,6 +114,9 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	public String toString() {
 		if (lowerBound != null) {
 			return "? super " + lowerBound;
+		}
+		if (upperBounds != null && upperBounds.size() == 1 && upperBounds.get(0).isType(Object.class)) {
+			return "?";
 		}
 		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(upperBounds) : "");
 	}

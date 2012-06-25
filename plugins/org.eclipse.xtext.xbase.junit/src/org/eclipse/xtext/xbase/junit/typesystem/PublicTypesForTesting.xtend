@@ -15,6 +15,8 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
 import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -58,4 +60,13 @@ class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
 		super.getBatchScopeProvider()
 	}
 	
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class PublicAnyTypeReference extends AnyTypeReference {
+	new(TypeReferenceOwner owner) {
+		super(owner)
+	}
 }

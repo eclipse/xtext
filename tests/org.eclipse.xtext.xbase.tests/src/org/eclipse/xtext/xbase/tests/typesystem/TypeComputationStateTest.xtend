@@ -25,6 +25,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
+import org.eclipse.xtext.xbase.junit.typesystem.PublicAnyTypeReference
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,10 +43,12 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		resolver.typeComputer = this 
 		val expression = expression("{ null }")
 		val resolution = new PublicResolvedTypes(resolver)
-		val any = services.typeReferences.createAnyTypeReference(expression)
+		val any = new PublicAnyTypeReference(resolution)
 		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
-		assertEquals(any.identifier, resolution.getActualType(expression).identifier)
-		assertEquals(any.identifier, resolution.getActualType(expression.eContents.head as XNullLiteral).identifier)
+		assertEquals(any.toString, resolution.getActualType(expression).identifier)
+		assertEquals(any.toString, resolution.internalGetActualType(expression).toString)
+		assertEquals(any.toString, resolution.getActualType(expression.eContents.head as XNullLiteral).identifier)
+		assertEquals(any.toString, resolution.internalGetActualType(expression.eContents.head as XNullLiteral).toString)
 	}
 
 	override computeTypes(XExpression expression, ITypeComputationState state) {

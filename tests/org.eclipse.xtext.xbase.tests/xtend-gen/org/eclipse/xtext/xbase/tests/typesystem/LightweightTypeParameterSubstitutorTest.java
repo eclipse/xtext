@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.typesystem.references.DeclaratorTypeArgumentColle
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
@@ -33,9 +33,9 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
     DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
     LightweightTypeReference _lightweightReference = this._ownedConverter.toLightweightReference(declaration);
     final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> mapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(_lightweightReference);
-    TypeParameterSubstitutor _typeParameterSubstitutor = new TypeParameterSubstitutor(mapping, this);
+    StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, this);
     LightweightTypeReference _lightweightReference_1 = this._ownedConverter.toLightweightReference(reference);
-    LightweightTypeReference _substitute = _typeParameterSubstitutor.substitute(_lightweightReference_1);
+    LightweightTypeReference _substitute = _standardTypeParameterSubstitutor.substitute(_lightweightReference_1);
     return _substitute.toString();
   }
   

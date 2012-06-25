@@ -18,11 +18,11 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API 
@@ -114,7 +114,9 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 							if (!getParametersToProcess().contains(constraintType)) {
 								LightweightTypeReference lightweightReference = converter.toLightweightReference(constraintReference);
 								Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> constraintParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightReference);
-								LightweightTypeReference resolvedConstraint = lightweightReference.accept(new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getOwner()), Sets.newHashSet(pendingParameter));
+								LightweightTypeReference resolvedConstraint = lightweightReference.accept(
+										new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getOwner()), 
+										new ConstraintVisitingInfo(pendingParameter));
 								result.put(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter));
 							} else {
 								ParameterizedTypeReference lightweightReference = new ParameterizedTypeReference(getOwner(), getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, constraintType));
