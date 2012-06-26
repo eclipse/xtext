@@ -889,14 +889,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object getReceiver(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
-		Object receiver = null;
 		if (assignment.getAssignable() == null) {
-			// TODO don't imply 'this', but get the information from the AST 
-			receiver = context.getValue(XbaseScopeProvider.THIS);
-		} else {
-			receiver = internalEvaluate(assignment.getAssignable(), context, indicator);
+			XExpression implicitReceiver = assignment.getImplicitReceiver();
+			if(implicitReceiver instanceof XFeatureCall) {
+			    JvmIdentifiableElement feature = ((XFeatureCall) implicitReceiver).getFeature();
+			    if(feature!= null && feature.getIdentifier() != null) 
+			      return context.getValue(QualifiedName.create(feature.getIdentifier()));
+			}
 		}
-		return receiver;
+		return internalEvaluate(assignment.getAssignable(), context, indicator);
 	}
 
 	protected Object _assignValueByOperation(JvmOperation jvmOperation, XAssignment assignment, Object value,
