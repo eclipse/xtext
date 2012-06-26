@@ -19,13 +19,28 @@ import org.eclipse.xtext.xbase.lib.Pair
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
 import static extension org.eclipse.xtext.util.Strings.*
+import org.eclipse.xtext.generator.BindFactory
+import org.eclipse.xtext.parser.antlr.Lexer
 
 class StatefulLexerFragment extends ExternalAntlrLexerFragment {
+	
+//	override getGuiceBindingsRt(Grammar grammar) {
+//		if (runtime)
+//			return new BindFactory()
+//				.addConfiguredBinding("RuntimeLexer",
+//						"binder.bind(" + typeof(Lexer).getName() + ".class)"+
+//						".annotatedWith(com.google.inject.name.Names.named(" +
+//						"org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME" +
+//						")).to(" + lexerGrammar +".class)")
+//					.addTypeToType(typeof(Lexer).getName(), lexerGrammar)
+//			.addTypeToProviderInstance(lexerGrammar, "org.eclipse.xtext.parser.antlr.LexerProvider.create(" + lexerGrammar + ".class)")
+//				.getBindings();
+//	}
 	
 	override generate(Grammar grammar, XpandExecutionContext ctx) {
 //		println("begin")
 		new KeywordHelper(grammar, false);
-		lexerGrammar = grammar.namespace + ".lexer." + grammar.name.lastToken(".") + "Lexer"
+		lexerGrammar = grammar.namespace + ".lexer." + grammar.name.lastToken(".") + (if(runtime) "RT" else if(contentAssist) "CA" else "HI")
 		val srcGen = if (contentAssist || highlighting) Generator::SRC_GEN_UI else Generator::SRC_GEN;
 		val srcGenPath = ctx.output.getOutlet(srcGen).getPath();
 		val grammarFile = lexerGrammar.replace('.', '/') + ".g";
@@ -118,14 +133,18 @@ class StatefulLexerFragment extends ExternalAntlrLexerFragment {
 		lexer grammar «lexerGrammar.lastToken(".")»;
 		
 		options {
-			tokenVocab=Internal«lexerGrammar.lastToken(".")»;
+			tokenVocab=Internal«grammar.name.lastToken(".") + "Lexer"»;
 		}
 		
 		@header {
 		package «lexerGrammar.skipLastToken(".")»;
 		
-		// Use our own Lexer superclass by means of import. 
-		import org.eclipse.xtext.parser.antlr.Lexer;
+		// Use our own Lexer superclass by means of import.
+		«IF contentAssist»
+			import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+		«ELSE» 
+			import org.eclipse.xtext.parser.antlr.Lexer;
+		«ENDIF»
 		}
 		
 		@members{
