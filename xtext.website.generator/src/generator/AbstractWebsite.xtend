@@ -49,7 +49,7 @@ abstract class AbstractWebsite implements Resource {
 		</head>
 		<body>
 			«navBar»
-			«contents»
+		«contents»
 			«quickLinksAndTweets»
 			«javaScriptAtTheEnd»
 		</body>

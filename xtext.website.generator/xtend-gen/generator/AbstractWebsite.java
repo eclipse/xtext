@@ -103,9 +103,8 @@ public abstract class AbstractWebsite implements Resource {
     CharSequence _navBar = this.navBar();
     _builder.append(_navBar, "	");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     CharSequence _contents = this.contents();
-    _builder.append(_contents, "	");
+    _builder.append(_contents, "");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     CharSequence _quickLinksAndTweets = this.quickLinksAndTweets();
